@@ -51,15 +51,15 @@ type TargetInstancesAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
          "targetInstances" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "filter" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] TargetInstanceAggregatedList
 
@@ -202,15 +202,15 @@ instance GoogleRequest TargetInstancesAggregatedList'
         request = requestWithRoute defReq computeURL
         requestWithRoute r u
           TargetInstancesAggregatedList'{..}
-          = go _tialQuotaUser (Just _tialPrettyPrint)
-              _tialProject
-              _tialUserIP
-              _tialKey
-              _tialFilter
+          = go _tialFilter (Just _tialMaxResults)
               _tialPageToken
-              _tialOAuthToken
-              (Just _tialMaxResults)
+              _tialProject
+              _tialQuotaUser
+              (Just _tialPrettyPrint)
+              _tialUserIP
               _tialFields
+              _tialKey
+              _tialOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

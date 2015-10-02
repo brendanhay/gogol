@@ -56,9 +56,9 @@ type DatasetsUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Dataset :> Put '[JSON] Dataset
 
@@ -174,12 +174,12 @@ instance GoogleRequest DatasetsUpdate' where
         type Rs DatasetsUpdate' = Dataset
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u DatasetsUpdate'{..}
-          = go _duQuotaUser (Just _duPrettyPrint) _duUserIP
-              _duKey
-              _duDatasetId
-              _duProjectId
-              _duOAuthToken
+          = go _duProjectId _duDatasetId _duQuotaUser
+              (Just _duPrettyPrint)
+              _duUserIP
               _duFields
+              _duKey
+              _duOAuthToken
               (Just AltJSON)
               _duDataset
           where go

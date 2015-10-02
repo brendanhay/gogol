@@ -50,9 +50,9 @@ type StatesListResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] ListResponse
 
 -- | Lists all the states keys, and optionally the state data.
@@ -148,9 +148,9 @@ instance GoogleRequest StatesList' where
           = go (Just _slIncludeData) _slQuotaUser
               (Just _slPrettyPrint)
               _slUserIP
+              _slFields
               _slKey
               _slOAuthToken
-              _slFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy StatesListResource)

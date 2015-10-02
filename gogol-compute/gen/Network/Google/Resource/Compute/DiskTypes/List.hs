@@ -54,15 +54,15 @@ type DiskTypesListResource =
        "zones" :>
          Capture "zone" Text :>
            "diskTypes" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "filter" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
+             QueryParam "filter" Text :>
+               QueryParam "maxResults" Word32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] DiskTypeList
 
@@ -209,15 +209,15 @@ instance GoogleRequest DiskTypesList' where
         type Rs DiskTypesList' = DiskTypeList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u DiskTypesList'{..}
-          = go _dtlQuotaUser (Just _dtlPrettyPrint) _dtlProject
-              _dtlUserIP
+          = go _dtlFilter (Just _dtlMaxResults) _dtlPageToken
+              _dtlProject
               _dtlZone
-              _dtlKey
-              _dtlFilter
-              _dtlPageToken
-              _dtlOAuthToken
-              (Just _dtlMaxResults)
+              _dtlQuotaUser
+              (Just _dtlPrettyPrint)
+              _dtlUserIP
               _dtlFields
+              _dtlKey
+              _dtlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

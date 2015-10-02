@@ -48,15 +48,15 @@ import           Network.Google.YouTube.Types
 -- 'LiveStreamsDelete'' request conforms to.
 type LiveStreamsDeleteResource =
      "liveStreams" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "onBehalfOfContentOwner" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                   QueryParam "id" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+       QueryParam "onBehalfOfContentOwner" Text :>
+         QueryParam "onBehalfOfContentOwnerChannel" Text :>
+           QueryParam "id" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a video stream.
@@ -196,13 +196,15 @@ instance GoogleRequest LiveStreamsDelete' where
         type Rs LiveStreamsDelete' = ()
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u LiveStreamsDelete'{..}
-          = go _lsdQuotaUser (Just _lsdPrettyPrint) _lsdUserIP
-              _lsdOnBehalfOfContentOwner
-              _lsdKey
+          = go _lsdOnBehalfOfContentOwner
               _lsdOnBehalfOfContentOwnerChannel
               (Just _lsdId)
-              _lsdOAuthToken
+              _lsdQuotaUser
+              (Just _lsdPrettyPrint)
+              _lsdUserIP
               _lsdFields
+              _lsdKey
+              _lsdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

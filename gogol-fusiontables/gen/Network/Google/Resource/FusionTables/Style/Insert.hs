@@ -52,9 +52,9 @@ type StyleInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] StyleSetting :>
                            Post '[JSON] StyleSetting
@@ -160,11 +160,11 @@ instance GoogleRequest StyleInsert' where
         type Rs StyleInsert' = StyleSetting
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u StyleInsert'{..}
-          = go _siQuotaUser (Just _siPrettyPrint) _siUserIP
+          = go _siTableId _siQuotaUser (Just _siPrettyPrint)
+              _siUserIP
+              _siFields
               _siKey
               _siOAuthToken
-              _siTableId
-              _siFields
               (Just AltJSON)
               _siStyleSetting
           where go

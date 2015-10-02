@@ -49,9 +49,9 @@ type TripsSearchResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] TripsSearchRequest :>
                        Post '[JSON] TripsSearchResponse
@@ -148,9 +148,9 @@ instance GoogleRequest TripsSearch' where
         request = requestWithRoute defReq qPXExpressURL
         requestWithRoute r u TripsSearch'{..}
           = go _tsQuotaUser (Just _tsPrettyPrint) _tsUserIP
+              _tsFields
               _tsKey
               _tsOAuthToken
-              _tsFields
               (Just AltJSON)
               _tsTripsSearchRequest
           where go

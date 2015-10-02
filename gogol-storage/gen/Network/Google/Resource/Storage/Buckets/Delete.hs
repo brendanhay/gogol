@@ -49,14 +49,14 @@ import           Network.Google.Storage.Types
 type BucketsDeleteResource =
      "b" :>
        Capture "bucket" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "ifMetagenerationMatch" Word64 :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "ifMetagenerationNotMatch" Word64 :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+         QueryParam "ifMetagenerationMatch" Word64 :>
+           QueryParam "ifMetagenerationNotMatch" Word64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Permanently deletes an empty bucket.
@@ -170,14 +170,15 @@ instance GoogleRequest BucketsDelete' where
         type Rs BucketsDelete' = ()
         request = requestWithRoute defReq storageURL
         requestWithRoute r u BucketsDelete'{..}
-          = go _bdQuotaUser _bdIfMetagenerationMatch
+          = go _bdIfMetagenerationMatch
+              _bdIfMetagenerationNotMatch
+              _bdBucket
+              _bdQuotaUser
               (Just _bdPrettyPrint)
               _bdUserIP
-              _bdBucket
-              _bdKey
-              _bdIfMetagenerationNotMatch
-              _bdOAuthToken
               _bdFields
+              _bdKey
+              _bdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

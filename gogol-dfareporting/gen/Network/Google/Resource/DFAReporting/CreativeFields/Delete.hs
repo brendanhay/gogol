@@ -53,9 +53,9 @@ type CreativeFieldsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing creative field.
@@ -160,12 +160,12 @@ instance GoogleRequest CreativeFieldsDelete' where
         type Rs CreativeFieldsDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeFieldsDelete'{..}
-          = go _cfdQuotaUser (Just _cfdPrettyPrint) _cfdUserIP
-              _cfdProfileId
-              _cfdKey
-              _cfdId
-              _cfdOAuthToken
+          = go _cfdProfileId _cfdId _cfdQuotaUser
+              (Just _cfdPrettyPrint)
+              _cfdUserIP
               _cfdFields
+              _cfdKey
+              _cfdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

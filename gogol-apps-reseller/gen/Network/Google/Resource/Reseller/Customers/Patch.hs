@@ -52,9 +52,9 @@ type CustomersPatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Customer :> Patch '[JSON] Customer
 
@@ -159,11 +159,11 @@ instance GoogleRequest CustomersPatch' where
         type Rs CustomersPatch' = Customer
         request = requestWithRoute defReq appsResellerURL
         requestWithRoute r u CustomersPatch'{..}
-          = go _cpQuotaUser (Just _cpPrettyPrint) _cpUserIP
-              _cpCustomerId
+          = go _cpCustomerId _cpQuotaUser (Just _cpPrettyPrint)
+              _cpUserIP
+              _cpFields
               _cpKey
               _cpOAuthToken
-              _cpFields
               (Just AltJSON)
               _cpCustomer
           where go

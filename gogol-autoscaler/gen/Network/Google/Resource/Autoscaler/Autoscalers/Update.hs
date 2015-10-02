@@ -57,9 +57,9 @@ type AutoscalersUpdateResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Autoscaler :>
                                  Put '[JSON] Operation
@@ -183,13 +183,12 @@ instance GoogleRequest AutoscalersUpdate' where
         type Rs AutoscalersUpdate' = Operation
         request = requestWithRoute defReq autoscalerURL
         requestWithRoute r u AutoscalersUpdate'{..}
-          = go _auQuotaUser (Just _auPrettyPrint) _auProject
+          = go _auProject _auZone _auAutoscaler _auQuotaUser
+              (Just _auPrettyPrint)
               _auUserIP
-              _auZone
-              _auKey
-              _auAutoscaler
-              _auOAuthToken
               _auFields
+              _auKey
+              _auOAuthToken
               (Just AltJSON)
               _auAutoscaler
           where go

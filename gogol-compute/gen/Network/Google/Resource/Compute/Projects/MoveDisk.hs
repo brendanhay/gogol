@@ -51,9 +51,9 @@ type ProjectsMoveDiskResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] DiskMoveRequest :>
                          Post '[JSON] Operation
@@ -162,11 +162,11 @@ instance GoogleRequest ProjectsMoveDisk' where
         type Rs ProjectsMoveDisk' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u ProjectsMoveDisk'{..}
-          = go _pmdQuotaUser (Just _pmdPrettyPrint) _pmdProject
+          = go _pmdProject _pmdQuotaUser (Just _pmdPrettyPrint)
               _pmdUserIP
+              _pmdFields
               _pmdKey
               _pmdOAuthToken
-              _pmdFields
               (Just AltJSON)
               _pmdDiskMoveRequest
           where go

@@ -58,9 +58,9 @@ type UsersDataSourcesCreateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] DataSource :> Post '[JSON] DataSource
 
@@ -177,12 +177,12 @@ instance GoogleRequest UsersDataSourcesCreate' where
         type Rs UsersDataSourcesCreate' = DataSource
         request = requestWithRoute defReq fitnessURL
         requestWithRoute r u UsersDataSourcesCreate'{..}
-          = go _udscQuotaUser (Just _udscPrettyPrint)
+          = go _udscUserId _udscQuotaUser
+              (Just _udscPrettyPrint)
               _udscUserIP
-              _udscUserId
+              _udscFields
               _udscKey
               _udscOAuthToken
-              _udscFields
               (Just AltJSON)
               _udscDataSource
           where go

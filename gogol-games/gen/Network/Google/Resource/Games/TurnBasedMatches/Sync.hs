@@ -54,17 +54,17 @@ import           Network.Google.Prelude
 type TurnBasedMatchesSyncResource =
      "turnbasedmatches" :>
        "sync" :>
-         QueryParam "maxCompletedMatches" Int32 :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "includeMatchData" Bool :>
-                     QueryParam "language" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Int32 :>
-                             QueryParam "fields" Text :>
+         QueryParam "includeMatchData" Bool :>
+           QueryParam "language" Text :>
+             QueryParam "maxCompletedMatches" Int32 :>
+               QueryParam "maxResults" Int32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] TurnBasedMatchSync
 
@@ -212,16 +212,16 @@ instance GoogleRequest TurnBasedMatchesSync' where
         type Rs TurnBasedMatchesSync' = TurnBasedMatchSync
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u TurnBasedMatchesSync'{..}
-          = go _tbmsMaxCompletedMatches _tbmsQuotaUser
+          = go _tbmsIncludeMatchData _tbmsLanguage
+              _tbmsMaxCompletedMatches
+              _tbmsMaxResults
+              _tbmsPageToken
+              _tbmsQuotaUser
               (Just _tbmsPrettyPrint)
               _tbmsUserIP
-              _tbmsKey
-              _tbmsIncludeMatchData
-              _tbmsLanguage
-              _tbmsPageToken
-              _tbmsOAuthToken
-              _tbmsMaxResults
               _tbmsFields
+              _tbmsKey
+              _tbmsOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

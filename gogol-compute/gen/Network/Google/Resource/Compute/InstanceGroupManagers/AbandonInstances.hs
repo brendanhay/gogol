@@ -60,9 +60,9 @@ type InstanceGroupManagersAbandonInstancesResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON]
                                  InstanceGroupManagersAbandonInstancesRequest
@@ -204,14 +204,14 @@ instance GoogleRequest
         request = requestWithRoute defReq computeURL
         requestWithRoute r u
           InstanceGroupManagersAbandonInstances'{..}
-          = go _igmaiQuotaUser (Just _igmaiPrettyPrint)
-              _igmaiProject
+          = go _igmaiProject _igmaiZone
               _igmaiInstanceGroupManager
+              _igmaiQuotaUser
+              (Just _igmaiPrettyPrint)
               _igmaiUserIP
-              _igmaiZone
+              _igmaiFields
               _igmaiKey
               _igmaiOAuthToken
-              _igmaiFields
               (Just AltJSON)
               _igmaiInstanceGroupManagersAbandonInstancesRequest
           where go

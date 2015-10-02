@@ -49,13 +49,13 @@ type TableCopyResource =
      "tables" :>
        Capture "tableId" Text :>
          "copy" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "copyPresentation" Bool :>
-                       QueryParam "fields" Text :>
+           QueryParam "copyPresentation" Bool :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Post '[JSON] Table
 
 -- | Copies a table.
@@ -158,12 +158,12 @@ instance GoogleRequest TableCopy' where
         type Rs TableCopy' = Table
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TableCopy'{..}
-          = go _tcQuotaUser (Just _tcPrettyPrint) _tcUserIP
+          = go _tcCopyPresentation _tcTableId _tcQuotaUser
+              (Just _tcPrettyPrint)
+              _tcUserIP
+              _tcFields
               _tcKey
               _tcOAuthToken
-              _tcTableId
-              _tcCopyPresentation
-              _tcFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TableCopyResource)

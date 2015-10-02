@@ -53,9 +53,9 @@ type EnterprisesSetAccountResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] EnterpriseAccount :>
                            Put '[JSON] EnterpriseAccount
@@ -167,12 +167,12 @@ instance GoogleRequest EnterprisesSetAccount' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u EnterprisesSetAccount'{..}
-          = go _esaQuotaUser (Just _esaPrettyPrint)
-              _esaEnterpriseId
+          = go _esaEnterpriseId _esaQuotaUser
+              (Just _esaPrettyPrint)
               _esaUserIP
+              _esaFields
               _esaKey
               _esaOAuthToken
-              _esaFields
               (Just AltJSON)
               _esaEnterpriseAccount
           where go

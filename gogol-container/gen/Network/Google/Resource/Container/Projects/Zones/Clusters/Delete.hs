@@ -57,9 +57,9 @@ type ProjectsZonesClustersDeleteResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the cluster, including the Kubernetes master and all worker
@@ -182,14 +182,13 @@ instance GoogleRequest ProjectsZonesClustersDelete'
         type Rs ProjectsZonesClustersDelete' = Operation
         request = requestWithRoute defReq containerURL
         requestWithRoute r u ProjectsZonesClustersDelete'{..}
-          = go _pzcdQuotaUser (Just _pzcdPrettyPrint)
+          = go _pzcdProjectId _pzcdZoneId _pzcdClusterId
+              _pzcdQuotaUser
+              (Just _pzcdPrettyPrint)
               _pzcdUserIP
-              _pzcdZoneId
-              _pzcdKey
-              _pzcdClusterId
-              _pzcdProjectId
-              _pzcdOAuthToken
               _pzcdFields
+              _pzcdKey
+              _pzcdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

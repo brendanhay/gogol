@@ -51,16 +51,16 @@ import           Network.Google.Prelude
 type ApplicationsGetResource =
      "applications" :>
        Capture "applicationId" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "platformType"
-                   GamesApplicationsGetPlatformType
-                   :>
-                   QueryParam "language" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+         QueryParam "language" Text :>
+           QueryParam "platformType"
+             GamesApplicationsGetPlatformType
+             :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Application
 
 -- | Retrieves the metadata of the application with the given ID. If the
@@ -175,13 +175,13 @@ instance GoogleRequest ApplicationsGet' where
         type Rs ApplicationsGet' = Application
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u ApplicationsGet'{..}
-          = go _agQuotaUser (Just _agPrettyPrint) _agUserIP
-              _agApplicationId
-              _agKey
-              _agPlatformType
-              _agLanguage
-              _agOAuthToken
+          = go _agLanguage _agPlatformType _agApplicationId
+              _agQuotaUser
+              (Just _agPrettyPrint)
+              _agUserIP
               _agFields
+              _agKey
+              _agOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

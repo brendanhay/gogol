@@ -49,9 +49,9 @@ type MyConfigGetUserSettingsResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Usersettings
 
 -- | Gets the current settings for the user.
@@ -140,9 +140,9 @@ instance GoogleRequest MyConfigGetUserSettings' where
         requestWithRoute r u MyConfigGetUserSettings'{..}
           = go _mcgusQuotaUser (Just _mcgusPrettyPrint)
               _mcgusUserIP
+              _mcgusFields
               _mcgusKey
               _mcgusOAuthToken
-              _mcgusFields
               (Just AltJSON)
           where go
                   = clientWithRoute

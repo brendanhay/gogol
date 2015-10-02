@@ -50,10 +50,10 @@ type GetCertForOpenIdConnectMethod =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] Jwk
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] JWK
 
 --
 -- /See:/ 'getCertForOpenIdConnect'' smart constructor.
@@ -136,14 +136,14 @@ instance GoogleAuth GetCertForOpenIdConnect' where
         authToken = gcfoicOAuthToken . _Just
 
 instance GoogleRequest GetCertForOpenIdConnect' where
-        type Rs GetCertForOpenIdConnect' = Jwk
+        type Rs GetCertForOpenIdConnect' = JWK
         request = requestWithRoute defReq oAuth2URL
         requestWithRoute r u GetCertForOpenIdConnect'{..}
           = go _gcfoicQuotaUser (Just _gcfoicPrettyPrint)
               _gcfoicUserIP
+              _gcfoicFields
               _gcfoicKey
               _gcfoicOAuthToken
-              _gcfoicFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -56,9 +56,9 @@ type AccountsContainersMacrosGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Macro
 
 -- | Gets a GTM Macro.
@@ -179,14 +179,13 @@ instance GoogleRequest AccountsContainersMacrosGet'
         type Rs AccountsContainersMacrosGet' = Macro
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u AccountsContainersMacrosGet'{..}
-          = go _acmgQuotaUser (Just _acmgPrettyPrint)
-              _acmgContainerId
+          = go _acmgAccountId _acmgContainerId _acmgMacroId
+              _acmgQuotaUser
+              (Just _acmgPrettyPrint)
               _acmgUserIP
-              _acmgAccountId
-              _acmgKey
-              _acmgMacroId
-              _acmgOAuthToken
               _acmgFields
+              _acmgKey
+              _acmgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

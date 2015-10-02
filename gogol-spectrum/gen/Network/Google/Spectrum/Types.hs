@@ -65,7 +65,7 @@ module Network.Google.Spectrum.Types
 
     -- * DBUpdateSpec
     , DBUpdateSpec
-    , dBUpdateSpec
+    , dbUpdateSpec
     , dusDatabases
 
     -- * PawsGetSpectrumBatchRequest

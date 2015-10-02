@@ -54,13 +54,13 @@ type InstancesDetachDiskResource =
            "instances" :>
              Capture "instance" Text :>
                "detachDisk" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "deviceName" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                 QueryParam "deviceName" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Post '[JSON] Operation
 
@@ -187,14 +187,14 @@ instance GoogleRequest InstancesDetachDisk' where
         type Rs InstancesDetachDisk' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstancesDetachDisk'{..}
-          = go _iddQuotaUser (Just _iddPrettyPrint) _iddProject
-              _iddUserIP
-              _iddZone
+          = go _iddProject _iddZone _iddInstance
               (Just _iddDeviceName)
+              _iddQuotaUser
+              (Just _iddPrettyPrint)
+              _iddUserIP
+              _iddFields
               _iddKey
               _iddOAuthToken
-              _iddFields
-              _iddInstance
               (Just AltJSON)
           where go
                   = clientWithRoute

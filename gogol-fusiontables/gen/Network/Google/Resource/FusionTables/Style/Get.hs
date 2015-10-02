@@ -53,9 +53,9 @@ type StyleGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] StyleSetting
 
 -- | Gets a specific style.
@@ -158,12 +158,12 @@ instance GoogleRequest StyleGet' where
         type Rs StyleGet' = StyleSetting
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u StyleGet'{..}
-          = go _sgQuotaUser (Just _sgPrettyPrint) _sgUserIP
-              _sgKey
-              _sgStyleId
-              _sgOAuthToken
-              _sgTableId
+          = go _sgTableId _sgStyleId _sgQuotaUser
+              (Just _sgPrettyPrint)
+              _sgUserIP
               _sgFields
+              _sgKey
+              _sgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy StyleGetResource) r

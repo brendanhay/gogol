@@ -52,9 +52,9 @@ type ZonesGetResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Zone
 
 -- | Returns the specified zone resource.
@@ -156,12 +156,12 @@ instance GoogleRequest ZonesGet' where
         type Rs ZonesGet' = Zone
         request = requestWithRoute defReq computeURL
         requestWithRoute r u ZonesGet'{..}
-          = go _zgQuotaUser (Just _zgPrettyPrint) _zgProject
+          = go _zgProject _zgZone _zgQuotaUser
+              (Just _zgPrettyPrint)
               _zgUserIP
-              _zgZone
+              _zgFields
               _zgKey
               _zgOAuthToken
-              _zgFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy ZonesGetResource) r

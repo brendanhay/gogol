@@ -62,18 +62,18 @@ type CoursesPatchResource =
        "courses" :>
          Capture "id" Text :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
-                   QueryParam "updateMask" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "access_token" Text :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "callback" Text :>
+             QueryParam "access_token" Text :>
+               QueryParam "bearer_token" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "updateMask" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        ReqBody '[JSON] Course :>
                                          Patch '[JSON] Course
@@ -252,18 +252,18 @@ instance GoogleRequest CoursesPatch' where
         type Rs CoursesPatch' = Course
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u CoursesPatch'{..}
-          = go _cpXgafv _cpQuotaUser (Just _cpPrettyPrint)
-              _cpUploadProtocol
-              _cpUpdateMask
-              (Just _cpPp)
-              _cpAccessToken
-              _cpUploadType
-              _cpBearerToken
-              _cpKey
-              _cpId
-              _cpOAuthToken
-              _cpFields
+          = go _cpXgafv _cpAccessToken _cpBearerToken
               _cpCallback
+              (Just _cpPp)
+              _cpUpdateMask
+              _cpUploadType
+              _cpUploadProtocol
+              _cpId
+              _cpQuotaUser
+              (Just _cpPrettyPrint)
+              _cpFields
+              _cpKey
+              _cpOAuthToken
               (Just AltJSON)
               _cpCourse
           where go

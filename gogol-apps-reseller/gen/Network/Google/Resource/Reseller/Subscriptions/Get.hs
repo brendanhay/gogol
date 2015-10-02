@@ -53,9 +53,9 @@ type SubscriptionsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Subscription
 
 -- | Gets a subscription of the customer.
@@ -159,12 +159,12 @@ instance GoogleRequest SubscriptionsGet' where
         type Rs SubscriptionsGet' = Subscription
         request = requestWithRoute defReq appsResellerURL
         requestWithRoute r u SubscriptionsGet'{..}
-          = go _sgQuotaUser (Just _sgPrettyPrint) _sgUserIP
-              _sgCustomerId
+          = go _sgCustomerId _sgSubscriptionId _sgQuotaUser
+              (Just _sgPrettyPrint)
+              _sgUserIP
+              _sgFields
               _sgKey
               _sgOAuthToken
-              _sgSubscriptionId
-              _sgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

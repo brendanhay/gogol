@@ -54,13 +54,13 @@ type ProductsGetAppRestrictionsSchemaResource =
          "products" :>
            Capture "productId" Text :>
              "appRestrictionsSchema" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "language" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+               QueryParam "language" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] AppRestrictionsSchema
 
@@ -188,14 +188,14 @@ instance GoogleRequest
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u
           ProductsGetAppRestrictionsSchema'{..}
-          = go _pgarsQuotaUser (Just _pgarsPrettyPrint)
-              _pgarsEnterpriseId
-              _pgarsUserIP
-              _pgarsKey
-              _pgarsLanguage
-              _pgarsOAuthToken
+          = go _pgarsLanguage _pgarsEnterpriseId
               _pgarsProductId
+              _pgarsQuotaUser
+              (Just _pgarsPrettyPrint)
+              _pgarsUserIP
               _pgarsFields
+              _pgarsKey
+              _pgarsOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

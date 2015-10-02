@@ -55,9 +55,9 @@ type RasterCollectionsRastersBatchDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON]
                              RasterCollectionsRasterBatchDeleteRequest
@@ -178,12 +178,12 @@ instance GoogleRequest
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u
           RasterCollectionsRastersBatchDelete'{..}
-          = go _rcrbdQuotaUser (Just _rcrbdPrettyPrint)
+          = go _rcrbdId _rcrbdQuotaUser
+              (Just _rcrbdPrettyPrint)
               _rcrbdUserIP
-              _rcrbdKey
-              _rcrbdId
-              _rcrbdOAuthToken
               _rcrbdFields
+              _rcrbdKey
+              _rcrbdOAuthToken
               (Just AltJSON)
               _rcrbdRasterCollectionsRasterBatchDeleteRequest
           where go

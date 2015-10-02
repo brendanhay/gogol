@@ -63,17 +63,17 @@ type CoursesTeachersCreateResource =
          Capture "courseId" Text :>
            "teachers" :>
              QueryParam "$.xgafv" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "upload_protocol" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "bearer_token" Text :>
+                   QueryParam "callback" Text :>
                      QueryParam "pp" Bool :>
-                       QueryParam "access_token" Text :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "callback" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        ReqBody '[JSON] Teacher :>
                                          Post '[JSON] Teacher
@@ -244,17 +244,17 @@ instance GoogleRequest CoursesTeachersCreate' where
         type Rs CoursesTeachersCreate' = Teacher
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u CoursesTeachersCreate'{..}
-          = go _ctcXgafv _ctcQuotaUser (Just _ctcPrettyPrint)
-              _ctcUploadProtocol
+          = go _ctcXgafv _ctcAccessToken _ctcBearerToken
+              _ctcCallback
               (Just _ctcPp)
-              _ctcCourseId
-              _ctcAccessToken
               _ctcUploadType
-              _ctcBearerToken
+              _ctcUploadProtocol
+              _ctcCourseId
+              _ctcQuotaUser
+              (Just _ctcPrettyPrint)
+              _ctcFields
               _ctcKey
               _ctcOAuthToken
-              _ctcFields
-              _ctcCallback
               (Just AltJSON)
               _ctcTeacher
           where go

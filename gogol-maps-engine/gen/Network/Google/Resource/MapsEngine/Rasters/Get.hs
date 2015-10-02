@@ -50,9 +50,9 @@ type RastersGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Raster
 
 -- | Return metadata for a single raster.
@@ -144,11 +144,11 @@ instance GoogleRequest RastersGet' where
         type Rs RastersGet' = Raster
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u RastersGet'{..}
-          = go _rgQuotaUser (Just _rgPrettyPrint) _rgUserIP
-              _rgKey
-              _rgId
-              _rgOAuthToken
+          = go _rgId _rgQuotaUser (Just _rgPrettyPrint)
+              _rgUserIP
               _rgFields
+              _rgKey
+              _rgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy RastersGetResource)

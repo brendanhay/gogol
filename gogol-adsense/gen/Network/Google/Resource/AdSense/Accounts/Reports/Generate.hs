@@ -61,23 +61,24 @@ type AccountsReportsGenerateResource =
      "accounts" :>
        Capture "accountId" Text :>
          "reports" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParams "dimension" Text :>
-                   QueryParam "locale" Text :>
-                     QueryParam "endDate" Text :>
-                       QueryParam "startDate" Text :>
-                         QueryParams "metric" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "currency" Text :>
-                               QueryParams "sort" Text :>
-                                 QueryParams "filter" Text :>
-                                   QueryParam "oauth_token" OAuthToken :>
-                                     QueryParam "startIndex" Int32 :>
-                                       QueryParam "useTimezoneReporting" Bool :>
-                                         QueryParam "maxResults" Int32 :>
-                                           QueryParam "fields" Text :>
+           QueryParam "currency" Text :>
+             QueryParams "dimension" Text :>
+               QueryParams "filter" Text :>
+                 QueryParam "locale" Text :>
+                   QueryParam "maxResults" Int32 :>
+                     QueryParams "metric" Text :>
+                       QueryParams "sort" Text :>
+                         QueryParam "startIndex" Int32 :>
+                           QueryParam "useTimezoneReporting" Bool :>
+                             QueryParam "startDate" Text :>
+                               QueryParam "endDate" Text :>
+                                 QueryParam "quotaUser" Text :>
+                                   QueryParam "prettyPrint" Bool :>
+                                     QueryParam "userIp" Text :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "key" Key :>
+                                           QueryParam "oauth_token" OAuthToken
+                                             :>
                                              QueryParam "alt" AltJSON :>
                                                Get '[JSON]
                                                  AdsenseReportsGenerateResponse
@@ -85,24 +86,24 @@ type AccountsReportsGenerateResource =
        "accounts" :>
          Capture "accountId" Text :>
            "reports" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParams "dimension" Text :>
-                     QueryParam "locale" Text :>
-                       QueryParam "endDate" Text :>
-                         QueryParam "startDate" Text :>
-                           QueryParams "metric" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "currency" Text :>
-                                 QueryParams "sort" Text :>
-                                   QueryParams "filter" Text :>
-                                     QueryParam "oauth_token" OAuthToken :>
-                                       QueryParam "startIndex" Int32 :>
-                                         QueryParam "useTimezoneReporting" Bool
-                                           :>
-                                           QueryParam "maxResults" Int32 :>
-                                             QueryParam "fields" Text :>
+             QueryParam "currency" Text :>
+               QueryParams "dimension" Text :>
+                 QueryParams "filter" Text :>
+                   QueryParam "locale" Text :>
+                     QueryParam "maxResults" Int32 :>
+                       QueryParams "metric" Text :>
+                         QueryParams "sort" Text :>
+                           QueryParam "startIndex" Int32 :>
+                             QueryParam "useTimezoneReporting" Bool :>
+                               QueryParam "startDate" Text :>
+                                 QueryParam "endDate" Text :>
+                                   QueryParam "quotaUser" Text :>
+                                     QueryParam "prettyPrint" Bool :>
+                                       QueryParam "userIp" Text :>
+                                         QueryParam "fields" Text :>
+                                           QueryParam "key" Key :>
+                                             QueryParam "oauth_token" OAuthToken
+                                               :>
                                                QueryParam "alt" Media :>
                                                  Get '[OctetStream] Stream
 
@@ -311,22 +312,21 @@ instance GoogleRequest AccountsReportsGenerate' where
              AdsenseReportsGenerateResponse
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u AccountsReportsGenerate'{..}
-          = go _argQuotaUser (Just _argPrettyPrint) _argUserIP
-              _argDimension
-              _argLocale
-              (Just _argEndDate)
-              (Just _argStartDate)
-              _argAccountId
+          = go _argCurrency _argDimension _argFilter _argLocale
+              _argMaxResults
               _argMetric
-              _argKey
-              _argCurrency
               _argSort
-              _argFilter
-              _argOAuthToken
               _argStartIndex
               _argUseTimezoneReporting
-              _argMaxResults
+              _argAccountId
+              (Just _argStartDate)
+              (Just _argEndDate)
+              _argQuotaUser
+              (Just _argPrettyPrint)
+              _argUserIP
               _argFields
+              _argKey
+              _argOAuthToken
               (Just AltJSON)
           where go :<|> _
                   = clientWithRoute
@@ -338,22 +338,21 @@ instance GoogleRequest AccountsReportsGenerate' where
         type Rs (Download AccountsReportsGenerate') = Stream
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u AccountsReportsGenerate'{..}
-          = go _argQuotaUser (Just _argPrettyPrint) _argUserIP
-              _argDimension
-              _argLocale
-              (Just _argEndDate)
-              (Just _argStartDate)
-              _argAccountId
+          = go _argCurrency _argDimension _argFilter _argLocale
+              _argMaxResults
               _argMetric
-              _argKey
-              _argCurrency
               _argSort
-              _argFilter
-              _argOAuthToken
               _argStartIndex
               _argUseTimezoneReporting
-              _argMaxResults
+              _argAccountId
+              (Just _argStartDate)
+              (Just _argEndDate)
+              _argQuotaUser
+              (Just _argPrettyPrint)
+              _argUserIP
               _argFields
+              _argKey
+              _argOAuthToken
               (Just Media)
           where go :<|> _
                   = clientWithRoute

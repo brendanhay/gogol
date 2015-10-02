@@ -53,9 +53,9 @@ type UsersListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] UsersListResponse
 
@@ -160,13 +160,12 @@ instance GoogleRequest UsersList' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u UsersList'{..}
-          = go (Just _ulEmail) _ulQuotaUser
+          = go _ulEnterpriseId (Just _ulEmail) _ulQuotaUser
               (Just _ulPrettyPrint)
-              _ulEnterpriseId
               _ulUserIP
+              _ulFields
               _ulKey
               _ulOAuthToken
-              _ulFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy UsersListResource)

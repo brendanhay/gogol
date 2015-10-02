@@ -53,9 +53,9 @@ type GroupsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Group
 
 -- | Returns the specified Group resource.
@@ -158,12 +158,12 @@ instance GoogleRequest GroupsGet' where
         type Rs GroupsGet' = Group
         request = requestWithRoute defReq userAccountsURL
         requestWithRoute r u GroupsGet'{..}
-          = go _ggQuotaUser (Just _ggPrettyPrint) _ggProject
+          = go _ggProject _ggGroupName _ggQuotaUser
+              (Just _ggPrettyPrint)
               _ggUserIP
-              _ggKey
-              _ggGroupName
-              _ggOAuthToken
               _ggFields
+              _ggKey
+              _ggOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy GroupsGetResource)

@@ -50,9 +50,9 @@ type CirclesRemoveResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete a circle.
@@ -145,11 +145,11 @@ instance GoogleRequest CirclesRemove' where
         type Rs CirclesRemove' = ()
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u CirclesRemove'{..}
-          = go _crQuotaUser (Just _crPrettyPrint) _crUserIP
-              _crKey
-              _crCircleId
-              _crOAuthToken
+          = go _crCircleId _crQuotaUser (Just _crPrettyPrint)
+              _crUserIP
               _crFields
+              _crKey
+              _crOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

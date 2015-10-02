@@ -49,16 +49,16 @@ import           Network.Google.Prelude
 -- 'PeopleSearch'' request conforms to.
 type PeopleSearchResource =
      "people" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "query" Text :>
-                 QueryParam "language" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "maxResults" Word32 :>
-                         QueryParam "fields" Text :>
+       QueryParam "language" Text :>
+         QueryParam "maxResults" Word32 :>
+           QueryParam "pageToken" Text :>
+             QueryParam "query" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] PeopleFeed
 
 -- | Search all public profiles.
@@ -184,14 +184,15 @@ instance GoogleRequest PeopleSearch' where
         type Rs PeopleSearch' = PeopleFeed
         request = requestWithRoute defReq plusURL
         requestWithRoute r u PeopleSearch'{..}
-          = go _psQuotaUser (Just _psPrettyPrint) _psUserIP
-              _psKey
-              (Just _psQuery)
-              (Just _psLanguage)
+          = go (Just _psLanguage) (Just _psMaxResults)
               _psPageToken
-              _psOAuthToken
-              (Just _psMaxResults)
+              (Just _psQuery)
+              _psQuotaUser
+              (Just _psPrettyPrint)
+              _psUserIP
               _psFields
+              _psKey
+              _psOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

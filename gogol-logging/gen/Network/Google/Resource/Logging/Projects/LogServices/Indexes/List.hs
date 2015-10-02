@@ -63,23 +63,25 @@ type ProjectsLogServicesIndexesListResource =
            "logServices" :>
              Capture "logServicesId" Text :>
                "indexes" :>
-                 QueryParam "log" Text :>
-                   QueryParam "$.xgafv" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "upload_protocol" Text :>
-                           QueryParam "pp" Bool :>
-                             QueryParam "access_token" Text :>
-                               QueryParam "uploadType" Text :>
-                                 QueryParam "bearer_token" Text :>
-                                   QueryParam "key" Key :>
-                                     QueryParam "depth" Int32 :>
-                                       QueryParam "pageToken" Text :>
-                                         QueryParam "oauth_token" OAuthToken :>
-                                           QueryParam "pageSize" Int32 :>
-                                             QueryParam "indexPrefix" Text :>
-                                               QueryParam "fields" Text :>
-                                                 QueryParam "callback" Text :>
+                 QueryParam "$.xgafv" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "depth" Int32 :>
+                           QueryParam "indexPrefix" Text :>
+                             QueryParam "log" Text :>
+                               QueryParam "pageSize" Int32 :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "pp" Bool :>
+                                     QueryParam "uploadType" Text :>
+                                       QueryParam "upload_protocol" Text :>
+                                         QueryParam "quotaUser" Text :>
+                                           QueryParam "prettyPrint" Bool :>
+                                             QueryParam "fields" Text :>
+                                               QueryParam "key" Key :>
+                                                 QueryParam "oauth_token"
+                                                   OAuthToken
+                                                   :>
                                                    QueryParam "alt" AltJSON :>
                                                      Get '[JSON]
                                                        ListLogServiceIndexesResponse
@@ -326,23 +328,23 @@ instance GoogleRequest
         request = requestWithRoute defReq loggingURL
         requestWithRoute r u
           ProjectsLogServicesIndexesList'{..}
-          = go _plsilLog _plsilXgafv _plsilQuotaUser
-              (Just _plsilPrettyPrint)
-              _plsilUploadProtocol
-              (Just _plsilPp)
-              _plsilAccessToken
-              _plsilUploadType
-              _plsilBearerToken
-              _plsilKey
-              _plsilLogServicesId
-              _plsilDepth
-              _plsilPageToken
-              _plsilOAuthToken
-              _plsilProjectsId
-              _plsilPageSize
-              _plsilIndexPrefix
-              _plsilFields
+          = go _plsilXgafv _plsilAccessToken _plsilBearerToken
               _plsilCallback
+              _plsilDepth
+              _plsilIndexPrefix
+              _plsilLog
+              _plsilPageSize
+              _plsilPageToken
+              (Just _plsilPp)
+              _plsilUploadType
+              _plsilUploadProtocol
+              _plsilProjectsId
+              _plsilLogServicesId
+              _plsilQuotaUser
+              (Just _plsilPrettyPrint)
+              _plsilFields
+              _plsilKey
+              _plsilOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

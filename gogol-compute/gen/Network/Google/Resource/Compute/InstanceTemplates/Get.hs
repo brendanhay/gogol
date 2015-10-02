@@ -53,9 +53,9 @@ type InstanceTemplatesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] InstanceTemplate
 
@@ -163,12 +163,12 @@ instance GoogleRequest InstanceTemplatesGet' where
         type Rs InstanceTemplatesGet' = InstanceTemplate
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstanceTemplatesGet'{..}
-          = go _itgQuotaUser (Just _itgPrettyPrint) _itgProject
+          = go _itgProject _itgInstanceTemplate _itgQuotaUser
+              (Just _itgPrettyPrint)
               _itgUserIP
-              _itgInstanceTemplate
+              _itgFields
               _itgKey
               _itgOAuthToken
-              _itgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

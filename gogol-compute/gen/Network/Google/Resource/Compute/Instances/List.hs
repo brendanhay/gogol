@@ -54,15 +54,15 @@ type InstancesListResource =
        "zones" :>
          Capture "zone" Text :>
            "instances" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "filter" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
+             QueryParam "filter" Text :>
+               QueryParam "maxResults" Word32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] InstanceList
 
@@ -209,15 +209,15 @@ instance GoogleRequest InstancesList' where
         type Rs InstancesList' = InstanceList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstancesList'{..}
-          = go _insQuotaUser (Just _insPrettyPrint) _insProject
-              _insUserIP
+          = go _insFilter (Just _insMaxResults) _insPageToken
+              _insProject
               _insZone
-              _insKey
-              _insFilter
-              _insPageToken
-              _insOAuthToken
-              (Just _insMaxResults)
+              _insQuotaUser
+              (Just _insPrettyPrint)
+              _insUserIP
               _insFields
+              _insKey
+              _insOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

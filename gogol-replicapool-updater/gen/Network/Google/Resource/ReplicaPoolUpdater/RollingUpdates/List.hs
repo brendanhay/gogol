@@ -54,15 +54,15 @@ type RollingUpdatesListResource =
        "zones" :>
          Capture "zone" Text :>
            "rollingUpdates" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "filter" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
+             QueryParam "filter" Text :>
+               QueryParam "maxResults" Word32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] RollingUpdateList
 
@@ -200,15 +200,15 @@ instance GoogleRequest RollingUpdatesList' where
         request
           = requestWithRoute defReq replicaPoolUpdaterURL
         requestWithRoute r u RollingUpdatesList'{..}
-          = go _rulQuotaUser (Just _rulPrettyPrint) _rulProject
-              _rulUserIP
+          = go _rulFilter (Just _rulMaxResults) _rulPageToken
+              _rulProject
               _rulZone
-              _rulKey
-              _rulFilter
-              _rulPageToken
-              _rulOAuthToken
-              (Just _rulMaxResults)
+              _rulQuotaUser
+              (Just _rulPrettyPrint)
+              _rulUserIP
               _rulFields
+              _rulKey
+              _rulOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

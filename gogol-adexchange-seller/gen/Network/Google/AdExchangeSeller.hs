@@ -128,7 +128,7 @@ module Network.Google.AdExchangeSeller
 
     -- ** URLChannels
     , URLChannels
-    , uRLChannels
+    , urlChannels
     , ucEtag
     , ucNextPageToken
     , ucKind
@@ -209,7 +209,7 @@ module Network.Google.AdExchangeSeller
 
     -- ** URLChannel
     , URLChannel
-    , uRLChannel
+    , urlChannel
     , urlcKind
     , urlcId
     , urlcURLPattern

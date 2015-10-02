@@ -52,9 +52,9 @@ type CreativesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Creative :> Post '[JSON] Creative
 
@@ -161,11 +161,12 @@ instance GoogleRequest CreativesInsert' where
         type Rs CreativesInsert' = Creative
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativesInsert'{..}
-          = go _creQuotaUser (Just _crePrettyPrint) _creUserIP
-              _creProfileId
+          = go _creProfileId _creQuotaUser
+              (Just _crePrettyPrint)
+              _creUserIP
+              _creFields
               _creKey
               _creOAuthToken
-              _creFields
               (Just AltJSON)
               _creCreative
           where go

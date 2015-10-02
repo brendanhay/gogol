@@ -59,17 +59,17 @@ type CoursesDeleteResource =
        "courses" :>
          Capture "id" Text :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
+             QueryParam "access_token" Text :>
+               QueryParam "bearer_token" Text :>
+                 QueryParam "callback" Text :>
                    QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Delete '[JSON] Empty
 
@@ -223,17 +223,17 @@ instance GoogleRequest CoursesDelete' where
         type Rs CoursesDelete' = Empty
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u CoursesDelete'{..}
-          = go _cdXgafv _cdQuotaUser (Just _cdPrettyPrint)
-              _cdUploadProtocol
-              (Just _cdPp)
-              _cdAccessToken
-              _cdUploadType
-              _cdBearerToken
-              _cdKey
-              _cdId
-              _cdOAuthToken
-              _cdFields
+          = go _cdXgafv _cdAccessToken _cdBearerToken
               _cdCallback
+              (Just _cdPp)
+              _cdUploadType
+              _cdUploadProtocol
+              _cdId
+              _cdQuotaUser
+              (Just _cdPrettyPrint)
+              _cdFields
+              _cdKey
+              _cdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

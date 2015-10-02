@@ -51,9 +51,9 @@ type StatesGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] GetResponse
 
 -- | Retrieves the data corresponding to the passed key. If the key does not
@@ -147,11 +147,11 @@ instance GoogleRequest StatesGet' where
         type Rs StatesGet' = GetResponse
         request = requestWithRoute defReq appStateURL
         requestWithRoute r u StatesGet'{..}
-          = go _sgQuotaUser (Just _sgPrettyPrint) _sgUserIP
-              _sgStateKey
+          = go _sgStateKey _sgQuotaUser (Just _sgPrettyPrint)
+              _sgUserIP
+              _sgFields
               _sgKey
               _sgOAuthToken
-              _sgFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy StatesGetResource)

@@ -57,9 +57,9 @@ type RollingUpdatesRollbackResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Rolls back the update in state from ROLLING_FORWARD or PAUSED. Has no
@@ -177,14 +177,13 @@ instance GoogleRequest RollingUpdatesRollback' where
         request
           = requestWithRoute defReq replicaPoolUpdaterURL
         requestWithRoute r u RollingUpdatesRollback'{..}
-          = go _rurRollingUpdate _rurQuotaUser
+          = go _rurProject _rurZone _rurRollingUpdate
+              _rurQuotaUser
               (Just _rurPrettyPrint)
-              _rurProject
               _rurUserIP
-              _rurZone
+              _rurFields
               _rurKey
               _rurOAuthToken
-              _rurFields
               (Just AltJSON)
           where go
                   = clientWithRoute

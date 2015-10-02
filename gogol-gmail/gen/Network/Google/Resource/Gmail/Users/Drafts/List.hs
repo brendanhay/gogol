@@ -49,14 +49,14 @@ import           Network.Google.Prelude
 type UsersDraftsListResource =
      Capture "userId" Text :>
        "drafts" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "maxResults" Word32 :>
-                       QueryParam "fields" Text :>
+         QueryParam "maxResults" Word32 :>
+           QueryParam "pageToken" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] ListDraftsResponse
 
@@ -173,13 +173,13 @@ instance GoogleRequest UsersDraftsList' where
         type Rs UsersDraftsList' = ListDraftsResponse
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersDraftsList'{..}
-          = go _udlQuotaUser (Just _udlPrettyPrint) _udlUserIP
-              _udlUserId
-              _udlKey
-              _udlPageToken
-              _udlOAuthToken
-              (Just _udlMaxResults)
+          = go (Just _udlMaxResults) _udlPageToken _udlUserId
+              _udlQuotaUser
+              (Just _udlPrettyPrint)
+              _udlUserIP
               _udlFields
+              _udlKey
+              _udlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

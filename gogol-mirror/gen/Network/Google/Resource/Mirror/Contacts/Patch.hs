@@ -51,9 +51,9 @@ type ContactsPatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Contact :> Patch '[JSON] Contact
 
@@ -156,11 +156,11 @@ instance GoogleRequest ContactsPatch' where
         type Rs ContactsPatch' = Contact
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u ContactsPatch'{..}
-          = go _cpQuotaUser (Just _cpPrettyPrint) _cpUserIP
-              _cpKey
-              _cpId
-              _cpOAuthToken
+          = go _cpId _cpQuotaUser (Just _cpPrettyPrint)
+              _cpUserIP
               _cpFields
+              _cpKey
+              _cpOAuthToken
               (Just AltJSON)
               _cpContact
           where go

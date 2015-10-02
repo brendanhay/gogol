@@ -53,9 +53,9 @@ type AdsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Ad
 
 -- | Gets one ad by ID.
@@ -162,13 +162,12 @@ instance GoogleRequest AdsGet' where
         type Rs AdsGet' = Ad
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdsGet'{..}
-          = go _adsdQuotaUser (Just _adsdPrettyPrint)
+          = go _adsdProfileId _adsdId _adsdQuotaUser
+              (Just _adsdPrettyPrint)
               _adsdUserIP
-              _adsdProfileId
-              _adsdKey
-              _adsdId
-              _adsdOAuthToken
               _adsdFields
+              _adsdKey
+              _adsdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy AdsGetResource) r u

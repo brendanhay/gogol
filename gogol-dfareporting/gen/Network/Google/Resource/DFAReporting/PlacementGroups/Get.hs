@@ -53,9 +53,9 @@ type PlacementGroupsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] PlacementGroup
 
@@ -161,12 +161,12 @@ instance GoogleRequest PlacementGroupsGet' where
         type Rs PlacementGroupsGet' = PlacementGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementGroupsGet'{..}
-          = go _pggQuotaUser (Just _pggPrettyPrint) _pggUserIP
-              _pggProfileId
-              _pggKey
-              _pggId
-              _pggOAuthToken
+          = go _pggProfileId _pggId _pggQuotaUser
+              (Just _pggPrettyPrint)
+              _pggUserIP
               _pggFields
+              _pggKey
+              _pggOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

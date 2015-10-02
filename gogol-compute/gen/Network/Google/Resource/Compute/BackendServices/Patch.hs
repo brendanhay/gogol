@@ -55,9 +55,9 @@ type BackendServicesPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] BackendService :>
                              Patch '[JSON] Operation
@@ -178,12 +178,12 @@ instance GoogleRequest BackendServicesPatch' where
         type Rs BackendServicesPatch' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u BackendServicesPatch'{..}
-          = go _bspQuotaUser (Just _bspPrettyPrint) _bspProject
+          = go _bspProject _bspBackendService _bspQuotaUser
+              (Just _bspPrettyPrint)
               _bspUserIP
+              _bspFields
               _bspKey
               _bspOAuthToken
-              _bspFields
-              _bspBackendService
               (Just AltJSON)
               _bspBackendService
           where go

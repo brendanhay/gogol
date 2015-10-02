@@ -53,15 +53,15 @@ type LicenseAssignmentsListForProductAndSkuResource =
        "sku" :>
          Capture "skuId" Text :>
            "users" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "customerId" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "customerId" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] LicenseAssignmentList
 
@@ -211,16 +211,17 @@ instance GoogleRequest
         request = requestWithRoute defReq appsLicensingURL
         requestWithRoute r u
           LicenseAssignmentsListForProductAndSku'{..}
-          = go _lalfpasQuotaUser (Just _lalfpasPrettyPrint)
-              _lalfpasUserIP
+          = go (Just _lalfpasMaxResults)
+              (Just _lalfpasPageToken)
+              _lalfpasProductId
               _lalfpasSkuId
               (Just _lalfpasCustomerId)
-              _lalfpasKey
-              (Just _lalfpasPageToken)
-              _lalfpasOAuthToken
-              _lalfpasProductId
-              (Just _lalfpasMaxResults)
+              _lalfpasQuotaUser
+              (Just _lalfpasPrettyPrint)
+              _lalfpasUserIP
               _lalfpasFields
+              _lalfpasKey
+              _lalfpasOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

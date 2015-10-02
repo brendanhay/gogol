@@ -61,18 +61,18 @@ type BeaconsAttachmentsBatchDeleteResource =
        "{+beaconName}" :>
          "attachments:batchDelete" :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
+             QueryParam "access_token" Text :>
+               QueryParam "bearer_token" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "namespacedType" Text :>
+                     QueryParam "pp" Bool :>
                        QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "namespacedType" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "callback" Text :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Post '[JSON] DeleteAttachmentsResponse
 
@@ -248,19 +248,18 @@ instance GoogleRequest BeaconsAttachmentsBatchDelete'
         request = requestWithRoute defReq proximityBeaconURL
         requestWithRoute r u
           BeaconsAttachmentsBatchDelete'{..}
-          = go _babdXgafv _babdQuotaUser
-              (Just _babdPrettyPrint)
-              _babdUploadProtocol
-              (Just _babdPp)
-              _babdAccessToken
-              _babdBeaconName
-              _babdUploadType
-              _babdBearerToken
+          = go _babdXgafv _babdAccessToken _babdBearerToken
+              _babdCallback
               _babdNamespacedType
+              (Just _babdPp)
+              _babdUploadType
+              _babdUploadProtocol
+              _babdBeaconName
+              _babdQuotaUser
+              (Just _babdPrettyPrint)
+              _babdFields
               _babdKey
               _babdOAuthToken
-              _babdFields
-              _babdCallback
               (Just AltJSON)
           where go
                   = clientWithRoute

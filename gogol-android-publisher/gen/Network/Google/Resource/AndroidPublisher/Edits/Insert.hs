@@ -51,9 +51,9 @@ type EditsInsertResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] AppEdit :> Post '[JSON] AppEdit
 
@@ -159,12 +159,12 @@ instance GoogleRequest EditsInsert' where
         type Rs EditsInsert' = AppEdit
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u EditsInsert'{..}
-          = go _eiQuotaUser (Just _eiPrettyPrint)
-              _eiPackageName
+          = go _eiPackageName _eiQuotaUser
+              (Just _eiPrettyPrint)
               _eiUserIP
+              _eiFields
               _eiKey
               _eiOAuthToken
-              _eiFields
               (Just AltJSON)
               _eiAppEdit
           where go

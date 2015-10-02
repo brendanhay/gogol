@@ -53,9 +53,9 @@ type MarketplaceNotesInsertResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] AddOrderNotesRequest :>
                              Post '[JSON] AddOrderNotesResponse
@@ -165,11 +165,11 @@ instance GoogleRequest MarketplaceNotesInsert' where
              AddOrderNotesResponse
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u MarketplaceNotesInsert'{..}
-          = go _mniQuotaUser (Just _mniPrettyPrint) _mniUserIP
+          = go _mniOrderId _mniQuotaUser (Just _mniPrettyPrint)
+              _mniUserIP
+              _mniFields
               _mniKey
               _mniOAuthToken
-              _mniOrderId
-              _mniFields
               (Just AltJSON)
               _mniAddOrderNotesRequest
           where go

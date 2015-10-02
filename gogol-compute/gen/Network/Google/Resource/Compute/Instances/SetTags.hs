@@ -58,9 +58,9 @@ type InstancesSetTagsResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Tags :> Post '[JSON] Operation
 
@@ -186,13 +186,12 @@ instance GoogleRequest InstancesSetTags' where
         type Rs InstancesSetTags' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstancesSetTags'{..}
-          = go _istQuotaUser (Just _istPrettyPrint) _istProject
+          = go _istProject _istZone _istInstance _istQuotaUser
+              (Just _istPrettyPrint)
               _istUserIP
-              _istZone
+              _istFields
               _istKey
               _istOAuthToken
-              _istFields
-              _istInstance
               (Just AltJSON)
               _istTags
           where go

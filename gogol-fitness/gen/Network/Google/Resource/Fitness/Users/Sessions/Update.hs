@@ -51,13 +51,13 @@ type UsersSessionsUpdateResource =
      Capture "userId" Text :>
        "sessions" :>
          Capture "sessionId" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "currentTimeMillis" Int64 :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "currentTimeMillis" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Session :> Put '[JSON] Session
 
@@ -185,13 +185,13 @@ instance GoogleRequest UsersSessionsUpdate' where
         type Rs UsersSessionsUpdate' = Session
         request = requestWithRoute defReq fitnessURL
         requestWithRoute r u UsersSessionsUpdate'{..}
-          = go _usuQuotaUser (Just _usuPrettyPrint) _usuUserIP
-              _usuUserId
-              _usuKey
-              _usuCurrentTimeMillis
-              _usuOAuthToken
-              _usuSessionId
+          = go _usuCurrentTimeMillis _usuUserId _usuSessionId
+              _usuQuotaUser
+              (Just _usuPrettyPrint)
+              _usuUserIP
               _usuFields
+              _usuKey
+              _usuOAuthToken
               (Just AltJSON)
               _usuSession
           where go

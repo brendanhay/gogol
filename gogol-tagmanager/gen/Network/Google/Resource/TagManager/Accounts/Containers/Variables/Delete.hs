@@ -56,9 +56,9 @@ type AccountsContainersVariablesDeleteResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a GTM Variable.
@@ -181,14 +181,13 @@ instance GoogleRequest
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersVariablesDelete'{..}
-          = go _acvdQuotaUser (Just _acvdPrettyPrint)
-              _acvdContainerId
+          = go _acvdAccountId _acvdContainerId _acvdVariableId
+              _acvdQuotaUser
+              (Just _acvdPrettyPrint)
               _acvdUserIP
-              _acvdVariableId
-              _acvdAccountId
+              _acvdFields
               _acvdKey
               _acvdOAuthToken
-              _acvdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

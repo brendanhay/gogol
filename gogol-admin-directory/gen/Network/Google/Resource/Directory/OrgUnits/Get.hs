@@ -53,9 +53,9 @@ type OrgUnitsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] OrgUnit
 
 -- | Retrieve Organization Unit
@@ -163,12 +163,12 @@ instance GoogleRequest OrgUnitsGet' where
         type Rs OrgUnitsGet' = OrgUnit
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u OrgUnitsGet'{..}
-          = go _ougQuotaUser (Just _ougPrettyPrint) _ougUserIP
-              _ougOrgUnitPath
-              _ougCustomerId
+          = go _ougCustomerId _ougOrgUnitPath _ougQuotaUser
+              (Just _ougPrettyPrint)
+              _ougUserIP
+              _ougFields
               _ougKey
               _ougOAuthToken
-              _ougFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -51,9 +51,9 @@ type ArchiveInsertResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Post '[JSON] Groups
 
 -- | Inserts a new mail into the archive of the Google group.
@@ -154,12 +154,12 @@ instance GoogleRequest ArchiveInsert' where
         type Rs ArchiveInsert' = Groups
         request = requestWithRoute defReq groupsMigrationURL
         requestWithRoute r u ArchiveInsert'{..}
-          = go _aiQuotaUser (Just _aiPrettyPrint) _aiUserIP
-              _aiMedia
-              _aiKey
-              _aiGroupId
-              _aiOAuthToken
+          = go _aiMedia _aiGroupId _aiQuotaUser
+              (Just _aiPrettyPrint)
+              _aiUserIP
               _aiFields
+              _aiKey
+              _aiOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

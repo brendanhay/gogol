@@ -514,10 +514,10 @@ module Network.Google.Plus
 
     -- ** ACL
     , ACL
-    , aCL
-    , aclKind
-    , aclItems
-    , aclDescription
+    , acl
+    , aKind
+    , aItems
+    , aDescription
 
     -- ** MomentsFeed
     , MomentsFeed

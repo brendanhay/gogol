@@ -51,9 +51,9 @@ type PawsVerifyDeviceResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] PawsVerifyDeviceRequest :>
                        Post '[JSON] PawsVerifyDeviceResponse
@@ -155,9 +155,9 @@ instance GoogleRequest PawsVerifyDevice' where
         request = requestWithRoute defReq spectrumURL
         requestWithRoute r u PawsVerifyDevice'{..}
           = go _pvdQuotaUser (Just _pvdPrettyPrint) _pvdUserIP
+              _pvdFields
               _pvdKey
               _pvdOAuthToken
-              _pvdFields
               (Just AltJSON)
               _pvdPawsVerifyDeviceRequest
           where go

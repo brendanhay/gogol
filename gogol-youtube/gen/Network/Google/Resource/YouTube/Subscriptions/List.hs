@@ -56,25 +56,23 @@ import           Network.Google.YouTube.Types
 -- 'SubscriptionsList'' request conforms to.
 type SubscriptionsListResource =
      "subscriptions" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "part" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "mine" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "channelId" Text :>
+       QueryParam "channelId" Text :>
+         QueryParam "forChannelId" Text :>
+           QueryParam "id" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "mine" Bool :>
+                 QueryParam "mySubscribers" Bool :>
                    QueryParam "onBehalfOfContentOwner" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                         QueryParam "id" Text :>
-                           QueryParam "mySubscribers" Bool :>
-                             QueryParam "forChannelId" Text :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "order"
-                                     YouTubeSubscriptionsListOrder
-                                     :>
-                                     QueryParam "maxResults" Word32 :>
-                                       QueryParam "fields" Text :>
+                     QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                       QueryParam "order" YouTubeSubscriptionsListOrder :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "part" Text :>
+                             QueryParam "quotaUser" Text :>
+                               QueryParam "prettyPrint" Bool :>
+                                 QueryParam "userIp" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "key" Key :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] SubscriptionListResponse
 
@@ -299,21 +297,21 @@ instance GoogleRequest SubscriptionsList' where
         type Rs SubscriptionsList' = SubscriptionListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u SubscriptionsList'{..}
-          = go _sQuotaUser (Just _sPart) (Just _sPrettyPrint)
-              _sMine
-              _sUserIP
-              _sChannelId
-              _sOnBehalfOfContentOwner
-              _sKey
-              _sOnBehalfOfContentOwnerChannel
-              _sId
-              _sMySubscribers
-              _sForChannelId
-              _sPageToken
-              _sOAuthToken
-              (Just _sOrder)
+          = go _sChannelId _sForChannelId _sId
               (Just _sMaxResults)
+              _sMine
+              _sMySubscribers
+              _sOnBehalfOfContentOwner
+              _sOnBehalfOfContentOwnerChannel
+              (Just _sOrder)
+              _sPageToken
+              (Just _sPart)
+              _sQuotaUser
+              (Just _sPrettyPrint)
+              _sUserIP
               _sFields
+              _sKey
+              _sOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

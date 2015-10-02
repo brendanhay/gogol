@@ -62,23 +62,24 @@ type DebuggerDebuggeesBreakpointsListResource =
            Capture "debuggeeId" Text :>
              "breakpoints" :>
                QueryParam "$.xgafv" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "includeInactive" Bool :>
-                       QueryParam "upload_protocol" Text :>
-                         QueryParam "pp" Bool :>
-                           QueryParam "access_token" Text :>
-                             QueryParam "action.value" Text :>
-                               QueryParam "uploadType" Text :>
-                                 QueryParam "stripResults" Bool :>
-                                   QueryParam "bearer_token" Text :>
-                                     QueryParam "key" Key :>
-                                       QueryParam "includeAllUsers" Bool :>
-                                         QueryParam "waitToken" Text :>
-                                           QueryParam "oauth_token" OAuthToken
-                                             :>
-                                             QueryParam "fields" Text :>
-                                               QueryParam "callback" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "action.value" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "includeAllUsers" Bool :>
+                           QueryParam "includeInactive" Bool :>
+                             QueryParam "pp" Bool :>
+                               QueryParam "stripResults" Bool :>
+                                 QueryParam "uploadType" Text :>
+                                   QueryParam "upload_protocol" Text :>
+                                     QueryParam "waitToken" Text :>
+                                       QueryParam "quotaUser" Text :>
+                                         QueryParam "prettyPrint" Bool :>
+                                           QueryParam "fields" Text :>
+                                             QueryParam "key" Key :>
+                                               QueryParam "oauth_token"
+                                                 OAuthToken
+                                                 :>
                                                  QueryParam "alt" AltJSON :>
                                                    Get '[JSON]
                                                      ListBreakpointsResponse
@@ -295,23 +296,22 @@ instance GoogleRequest
         request = requestWithRoute defReq debuggerURL
         requestWithRoute r u
           DebuggerDebuggeesBreakpointsList'{..}
-          = go _ddblXgafv _ddblQuotaUser
-              (Just _ddblPrettyPrint)
-              _ddblIncludeInactive
-              _ddblUploadProtocol
-              (Just _ddblPp)
-              _ddblAccessToken
-              _ddblActionValue
-              _ddblUploadType
-              _ddblStripResults
+          = go _ddblXgafv _ddblAccessToken _ddblActionValue
               _ddblBearerToken
-              _ddblKey
+              _ddblCallback
               _ddblIncludeAllUsers
+              _ddblIncludeInactive
+              (Just _ddblPp)
+              _ddblStripResults
+              _ddblUploadType
+              _ddblUploadProtocol
               _ddblWaitToken
               _ddblDebuggeeId
-              _ddblOAuthToken
+              _ddblQuotaUser
+              (Just _ddblPrettyPrint)
               _ddblFields
-              _ddblCallback
+              _ddblKey
+              _ddblOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

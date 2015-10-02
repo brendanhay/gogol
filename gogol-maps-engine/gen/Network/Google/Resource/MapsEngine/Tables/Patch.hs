@@ -51,9 +51,9 @@ type TablesPatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Table :> Patch '[JSON] ()
 
@@ -155,11 +155,11 @@ instance GoogleRequest TablesPatch' where
         type Rs TablesPatch' = ()
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u TablesPatch'{..}
-          = go _tpQuotaUser (Just _tpPrettyPrint) _tpUserIP
-              _tpKey
-              _tpId
-              _tpOAuthToken
+          = go _tpId _tpQuotaUser (Just _tpPrettyPrint)
+              _tpUserIP
               _tpFields
+              _tpKey
+              _tpOAuthToken
               (Just AltJSON)
               _tpTable
           where go

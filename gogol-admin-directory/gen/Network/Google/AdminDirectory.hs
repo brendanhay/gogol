@@ -323,13 +323,13 @@ module Network.Google.AdminDirectory
     -- ** Asp
     , Asp
     , asp
-    , aspCreationTime
-    , aspEtag
-    , aspCodeId
-    , aspKind
-    , aspName
-    , aspLastTimeUsed
-    , aspUserKey
+    , aCreationTime
+    , aEtag
+    , aCodeId
+    , aKind
+    , aName
+    , aLastTimeUsed
+    , aUserKey
 
     -- ** Schemas
     , Schemas
@@ -417,9 +417,9 @@ module Network.Google.AdminDirectory
     -- ** Aliases
     , Aliases
     , aliases
-    , aEtag
-    , aKind
-    , aAliases
+    , aliEtag
+    , aliKind
+    , aliAliases
 
     -- ** Tokens
     , Tokens
@@ -484,11 +484,11 @@ module Network.Google.AdminDirectory
     -- ** Alias
     , Alias
     , alias
-    , aliEtag
-    , aliKind
-    , aliAlias
-    , aliId
-    , aliPrimaryEmail
+    , aaEtag
+    , aaKind
+    , aaAlias
+    , aaId
+    , aaPrimaryEmail
 
     -- ** DirectoryUsersAliasesWatchEvent
     , DirectoryUsersAliasesWatchEvent (..)
@@ -773,9 +773,9 @@ module Network.Google.AdminDirectory
     -- ** Asps
     , Asps
     , asps
-    , aaEtag
-    , aaKind
-    , aaItems
+    , aspEtag
+    , aspKind
+    , aspItems
 
     -- ** ChromeOSDevices
     , ChromeOSDevices

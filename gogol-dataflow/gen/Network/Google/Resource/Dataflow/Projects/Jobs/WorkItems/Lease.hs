@@ -60,17 +60,17 @@ type ProjectsJobsWorkItemsLeaseResource =
              Capture "jobId" Text :>
                "workItems:lease" :>
                  QueryParam "$.xgafv" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
                          QueryParam "pp" Bool :>
-                           QueryParam "access_token" Text :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "bearer_token" Text :>
-                                 QueryParam "key" Key :>
-                                   QueryParam "oauth_token" OAuthToken :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "callback" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "upload_protocol" Text :>
+                               QueryParam "quotaUser" Text :>
+                                 QueryParam "prettyPrint" Bool :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "key" Key :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            ReqBody '[JSON] LeaseWorkItemRequest
                                              :>
@@ -251,19 +251,18 @@ instance GoogleRequest ProjectsJobsWorkItemsLease'
              LeaseWorkItemResponse
         request = requestWithRoute defReq dataflowURL
         requestWithRoute r u ProjectsJobsWorkItemsLease'{..}
-          = go _pjwilXgafv _pjwilQuotaUser
-              (Just _pjwilPrettyPrint)
-              _pjwilJobId
-              _pjwilUploadProtocol
-              (Just _pjwilPp)
-              _pjwilAccessToken
-              _pjwilUploadType
-              _pjwilBearerToken
-              _pjwilKey
-              _pjwilProjectId
-              _pjwilOAuthToken
-              _pjwilFields
+          = go _pjwilXgafv _pjwilAccessToken _pjwilBearerToken
               _pjwilCallback
+              (Just _pjwilPp)
+              _pjwilUploadType
+              _pjwilUploadProtocol
+              _pjwilProjectId
+              _pjwilJobId
+              _pjwilQuotaUser
+              (Just _pjwilPrettyPrint)
+              _pjwilFields
+              _pjwilKey
+              _pjwilOAuthToken
               (Just AltJSON)
               _pjwilLeaseWorkItemRequest
           where go

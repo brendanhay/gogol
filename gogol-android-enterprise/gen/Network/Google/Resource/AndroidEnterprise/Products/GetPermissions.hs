@@ -54,9 +54,9 @@ type ProductsGetPermissionsResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ProductPermissions
 
@@ -165,13 +165,12 @@ instance GoogleRequest ProductsGetPermissions' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u ProductsGetPermissions'{..}
-          = go _pgpQuotaUser (Just _pgpPrettyPrint)
-              _pgpEnterpriseId
+          = go _pgpEnterpriseId _pgpProductId _pgpQuotaUser
+              (Just _pgpPrettyPrint)
               _pgpUserIP
+              _pgpFields
               _pgpKey
               _pgpOAuthToken
-              _pgpProductId
-              _pgpFields
               (Just AltJSON)
           where go
                   = clientWithRoute

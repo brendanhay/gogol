@@ -53,9 +53,9 @@ type RoutesDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified route resource.
@@ -157,12 +157,12 @@ instance GoogleRequest RoutesDelete' where
         type Rs RoutesDelete' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u RoutesDelete'{..}
-          = go _rdQuotaUser (Just _rdPrettyPrint) _rdProject
+          = go _rdProject _rdRoute _rdQuotaUser
+              (Just _rdPrettyPrint)
               _rdUserIP
-              _rdRoute
+              _rdFields
               _rdKey
               _rdOAuthToken
-              _rdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

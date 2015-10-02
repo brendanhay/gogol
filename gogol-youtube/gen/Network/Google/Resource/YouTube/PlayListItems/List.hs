@@ -54,19 +54,19 @@ import           Network.Google.YouTube.Types
 -- 'PlayListItemsList'' request conforms to.
 type PlayListItemsListResource =
      "playlistItems" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "part" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "onBehalfOfContentOwner" Text :>
+       QueryParam "id" Text :>
+         QueryParam "maxResults" Word32 :>
+           QueryParam "onBehalfOfContentOwner" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "playlistId" Text :>
                  QueryParam "videoId" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "id" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "playlistId" Text :>
-                             QueryParam "maxResults" Word32 :>
-                               QueryParam "fields" Text :>
+                   QueryParam "part" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] PlayListItemListResponse
 
@@ -246,18 +246,18 @@ instance GoogleRequest PlayListItemsList' where
         type Rs PlayListItemsList' = PlayListItemListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u PlayListItemsList'{..}
-          = go _plilQuotaUser (Just _plilPart)
+          = go _plilId (Just _plilMaxResults)
+              _plilOnBehalfOfContentOwner
+              _plilPageToken
+              _plilPlayListId
+              _plilVideoId
+              (Just _plilPart)
+              _plilQuotaUser
               (Just _plilPrettyPrint)
               _plilUserIP
-              _plilOnBehalfOfContentOwner
-              _plilVideoId
-              _plilKey
-              _plilId
-              _plilPageToken
-              _plilOAuthToken
-              _plilPlayListId
-              (Just _plilMaxResults)
               _plilFields
+              _plilKey
+              _plilOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

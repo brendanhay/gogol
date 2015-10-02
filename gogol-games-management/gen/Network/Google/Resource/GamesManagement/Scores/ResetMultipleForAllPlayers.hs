@@ -52,9 +52,9 @@ type ScoresResetMultipleForAllPlayersResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] ScoresResetMultipleForAllRequest :>
                          Post '[JSON] ()
@@ -163,9 +163,9 @@ instance GoogleRequest
           ScoresResetMultipleForAllPlayers'{..}
           = go _srmfapQuotaUser (Just _srmfapPrettyPrint)
               _srmfapUserIP
+              _srmfapFields
               _srmfapKey
               _srmfapOAuthToken
-              _srmfapFields
               (Just AltJSON)
               _srmfapScoresResetMultipleForAllRequest
           where go

@@ -68,49 +68,50 @@ import           Network.Google.Prelude
 -- 'Search'' request conforms to.
 type SearchMethod =
      "search" :>
-       QueryParams "without" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "cursor" Int32 :>
-               QueryParams "with" Text :>
-                 QueryParam "userIp" Text :>
-                   QueryParams "domain" Text :>
+       QueryParam "as_of_time" Text :>
+         QueryParam "callback" Text :>
+           QueryParam "cursor" Int32 :>
+             QueryParams "domain" Text :>
+               QueryParam "encode" FreebaseSearchEncode :>
+                 QueryParam "exact" Bool :>
+                   QueryParams "filter" Text :>
                      QueryParam "format" FreebaseSearchFormat :>
                        QueryParam "help" FreebaseSearchHelp :>
-                         QueryParams "lang" Text :>
-                           QueryParam "indent" Bool :>
-                             QueryParam "key" Key :>
-                               QueryParam "output" Text :>
-                                 QueryParam "query" Text :>
-                                   QueryParam "scoring" FreebaseSearchScoring :>
-                                     QueryParam "limit" Int32 :>
-                                       QueryParams "filter" Text :>
-                                         QueryParam "mql_output" Text :>
-                                           QueryParams "mid" Text :>
-                                             QueryParams "type" Text :>
-                                               QueryParam "stemmed" Bool :>
-                                                 QueryParam "oauth_token"
-                                                   OAuthToken
-                                                   :>
-                                                   QueryParam "exact" Bool :>
-                                                     QueryParam "spell"
-                                                       FreebaseSearchSpell
+                         QueryParam "indent" Bool :>
+                           QueryParams "lang" Text :>
+                             QueryParam "limit" Int32 :>
+                               QueryParams "mid" Text :>
+                                 QueryParam "mql_output" Text :>
+                                   QueryParam "output" Text :>
+                                     QueryParam "prefixed" Bool :>
+                                       QueryParam "query" Text :>
+                                         QueryParam "scoring"
+                                           FreebaseSearchScoring
+                                           :>
+                                           QueryParam "spell"
+                                             FreebaseSearchSpell
+                                             :>
+                                             QueryParam "stemmed" Bool :>
+                                               QueryParams "type" Text :>
+                                                 QueryParams "with" Text :>
+                                                   QueryParams "without" Text :>
+                                                     QueryParam "quotaUser" Text
                                                        :>
-                                                       QueryParam "as_of_time"
-                                                         Text
+                                                       QueryParam "prettyPrint"
+                                                         Bool
                                                          :>
-                                                         QueryParam "encode"
-                                                           FreebaseSearchEncode
+                                                         QueryParam "userIp"
+                                                           Text
                                                            :>
-                                                           QueryParam "prefixed"
-                                                             Bool
+                                                           QueryParam "fields"
+                                                             Text
                                                              :>
-                                                             QueryParam "fields"
-                                                               Text
+                                                             QueryParam "key"
+                                                               Key
                                                                :>
                                                                QueryParam
-                                                                 "callback"
-                                                                 Text
+                                                                 "oauth_token"
+                                                                 OAuthToken
                                                                  :>
                                                                  QueryParam
                                                                    "alt"
@@ -120,52 +121,53 @@ type SearchMethod =
                                                                      ()
        :<|>
        "search" :>
-         QueryParams "without" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "cursor" Int32 :>
-                 QueryParams "with" Text :>
-                   QueryParam "userIp" Text :>
-                     QueryParams "domain" Text :>
+         QueryParam "as_of_time" Text :>
+           QueryParam "callback" Text :>
+             QueryParam "cursor" Int32 :>
+               QueryParams "domain" Text :>
+                 QueryParam "encode" FreebaseSearchEncode :>
+                   QueryParam "exact" Bool :>
+                     QueryParams "filter" Text :>
                        QueryParam "format" FreebaseSearchFormat :>
                          QueryParam "help" FreebaseSearchHelp :>
-                           QueryParams "lang" Text :>
-                             QueryParam "indent" Bool :>
-                               QueryParam "key" Key :>
-                                 QueryParam "output" Text :>
-                                   QueryParam "query" Text :>
-                                     QueryParam "scoring" FreebaseSearchScoring
-                                       :>
-                                       QueryParam "limit" Int32 :>
-                                         QueryParams "filter" Text :>
-                                           QueryParam "mql_output" Text :>
-                                             QueryParams "mid" Text :>
-                                               QueryParams "type" Text :>
-                                                 QueryParam "stemmed" Bool :>
-                                                   QueryParam "oauth_token"
-                                                     OAuthToken
-                                                     :>
-                                                     QueryParam "exact" Bool :>
-                                                       QueryParam "spell"
-                                                         FreebaseSearchSpell
+                           QueryParam "indent" Bool :>
+                             QueryParams "lang" Text :>
+                               QueryParam "limit" Int32 :>
+                                 QueryParams "mid" Text :>
+                                   QueryParam "mql_output" Text :>
+                                     QueryParam "output" Text :>
+                                       QueryParam "prefixed" Bool :>
+                                         QueryParam "query" Text :>
+                                           QueryParam "scoring"
+                                             FreebaseSearchScoring
+                                             :>
+                                             QueryParam "spell"
+                                               FreebaseSearchSpell
+                                               :>
+                                               QueryParam "stemmed" Bool :>
+                                                 QueryParams "type" Text :>
+                                                   QueryParams "with" Text :>
+                                                     QueryParams "without" Text
+                                                       :>
+                                                       QueryParam "quotaUser"
+                                                         Text
                                                          :>
-                                                         QueryParam "as_of_time"
-                                                           Text
+                                                         QueryParam
+                                                           "prettyPrint"
+                                                           Bool
                                                            :>
-                                                           QueryParam "encode"
-                                                             FreebaseSearchEncode
+                                                           QueryParam "userIp"
+                                                             Text
                                                              :>
-                                                             QueryParam
-                                                               "prefixed"
-                                                               Bool
+                                                             QueryParam "fields"
+                                                               Text
                                                                :>
-                                                               QueryParam
-                                                                 "fields"
-                                                                 Text
+                                                               QueryParam "key"
+                                                                 Key
                                                                  :>
                                                                  QueryParam
-                                                                   "callback"
-                                                                   Text
+                                                                   "oauth_token"
+                                                                   OAuthToken
                                                                    :>
                                                                    QueryParam
                                                                      "alt"
@@ -443,33 +445,32 @@ instance GoogleRequest Search' where
         type Rs Search' = ()
         request = requestWithRoute defReq freebaseSearchURL
         requestWithRoute r u Search'{..}
-          = go _sWithout _sQuotaUser (Just _sPrettyPrint)
-              _sCursor
-              _sWith
-              _sUserIP
-              _sDomain
+          = go _sAsOfTime _sCallback _sCursor _sDomain
+              (Just _sEncode)
+              _sExact
+              _sFilter
               (Just _sFormat)
               _sHelp
-              _sLang
               _sIndent
-              _sKey
+              _sLang
+              (Just _sLimit)
+              _sMid
+              _sMqlOutput
               _sOutput
+              _sPrefixed
               _sQuery
               (Just _sScoring)
-              (Just _sLimit)
-              _sFilter
-              _sMqlOutput
-              _sMid
-              _sType
-              _sStemmed
-              _sOAuthToken
-              _sExact
               (Just _sSpell)
-              _sAsOfTime
-              (Just _sEncode)
-              _sPrefixed
+              _sStemmed
+              _sType
+              _sWith
+              _sWithout
+              _sQuotaUser
+              (Just _sPrettyPrint)
+              _sUserIP
               _sFields
-              _sCallback
+              _sKey
+              _sOAuthToken
               (Just AltJSON)
           where go :<|> _
                   = clientWithRoute (Proxy :: Proxy SearchMethod) r u
@@ -478,33 +479,32 @@ instance GoogleRequest Search' where
         type Rs (Download Search') = Stream
         request = requestWithRoute defReq freebaseSearchURL
         requestWithRoute r u Search'{..}
-          = go _sWithout _sQuotaUser (Just _sPrettyPrint)
-              _sCursor
-              _sWith
-              _sUserIP
-              _sDomain
+          = go _sAsOfTime _sCallback _sCursor _sDomain
+              (Just _sEncode)
+              _sExact
+              _sFilter
               (Just _sFormat)
               _sHelp
-              _sLang
               _sIndent
-              _sKey
+              _sLang
+              (Just _sLimit)
+              _sMid
+              _sMqlOutput
               _sOutput
+              _sPrefixed
               _sQuery
               (Just _sScoring)
-              (Just _sLimit)
-              _sFilter
-              _sMqlOutput
-              _sMid
-              _sType
-              _sStemmed
-              _sOAuthToken
-              _sExact
               (Just _sSpell)
-              _sAsOfTime
-              (Just _sEncode)
-              _sPrefixed
+              _sStemmed
+              _sType
+              _sWith
+              _sWithout
+              _sQuotaUser
+              (Just _sPrettyPrint)
+              _sUserIP
               _sFields
-              _sCallback
+              _sKey
+              _sOAuthToken
               (Just Media)
           where go :<|> _
                   = clientWithRoute (Proxy :: Proxy SearchMethod) r u

@@ -2269,99 +2269,97 @@ instance ToJSON Streamingbuffer where
 --
 -- /See:/ 'job' smart constructor.
 data Job = Job
-    { _jobJobReference  :: !(Maybe JobReference)
-    , _jobStatus        :: !(Maybe JobStatus)
-    , _jobEtag          :: !(Maybe Text)
-    , _jobUserEmail     :: !(Maybe Text)
-    , _jobKind          :: !Text
-    , _jobSelfLink      :: !(Maybe Text)
-    , _jobId            :: !(Maybe Text)
-    , _jobStatistics    :: !(Maybe JobStatistics)
-    , _jobConfiguration :: !(Maybe JobConfiguration)
+    { _jJobReference  :: !(Maybe JobReference)
+    , _jStatus        :: !(Maybe JobStatus)
+    , _jEtag          :: !(Maybe Text)
+    , _jUserEmail     :: !(Maybe Text)
+    , _jKind          :: !Text
+    , _jSelfLink      :: !(Maybe Text)
+    , _jId            :: !(Maybe Text)
+    , _jStatistics    :: !(Maybe JobStatistics)
+    , _jConfiguration :: !(Maybe JobConfiguration)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Job' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'jobJobReference'
+-- * 'jJobReference'
 --
--- * 'jobStatus'
+-- * 'jStatus'
 --
--- * 'jobEtag'
+-- * 'jEtag'
 --
--- * 'jobUserEmail'
+-- * 'jUserEmail'
 --
--- * 'jobKind'
+-- * 'jKind'
 --
--- * 'jobSelfLink'
+-- * 'jSelfLink'
 --
--- * 'jobId'
+-- * 'jId'
 --
--- * 'jobStatistics'
+-- * 'jStatistics'
 --
--- * 'jobConfiguration'
+-- * 'jConfiguration'
 job
     :: Job
 job =
     Job
-    { _jobJobReference = Nothing
-    , _jobStatus = Nothing
-    , _jobEtag = Nothing
-    , _jobUserEmail = Nothing
-    , _jobKind = "bigquery#job"
-    , _jobSelfLink = Nothing
-    , _jobId = Nothing
-    , _jobStatistics = Nothing
-    , _jobConfiguration = Nothing
+    { _jJobReference = Nothing
+    , _jStatus = Nothing
+    , _jEtag = Nothing
+    , _jUserEmail = Nothing
+    , _jKind = "bigquery#job"
+    , _jSelfLink = Nothing
+    , _jId = Nothing
+    , _jStatistics = Nothing
+    , _jConfiguration = Nothing
     }
 
 -- | [Optional] Reference describing the unique-per-user name of the job.
-jobJobReference :: Lens' Job (Maybe JobReference)
-jobJobReference
-  = lens _jobJobReference
-      (\ s a -> s{_jobJobReference = a})
+jJobReference :: Lens' Job (Maybe JobReference)
+jJobReference
+  = lens _jJobReference
+      (\ s a -> s{_jJobReference = a})
 
 -- | [Output-only] The status of this job. Examine this value when polling an
 -- asynchronous job to see if the job is complete.
-jobStatus :: Lens' Job (Maybe JobStatus)
-jobStatus
-  = lens _jobStatus (\ s a -> s{_jobStatus = a})
+jStatus :: Lens' Job (Maybe JobStatus)
+jStatus = lens _jStatus (\ s a -> s{_jStatus = a})
 
 -- | [Output-only] A hash of this resource.
-jobEtag :: Lens' Job (Maybe Text)
-jobEtag = lens _jobEtag (\ s a -> s{_jobEtag = a})
+jEtag :: Lens' Job (Maybe Text)
+jEtag = lens _jEtag (\ s a -> s{_jEtag = a})
 
 -- | [Output-only] Email address of the user who ran the job.
-jobUserEmail :: Lens' Job (Maybe Text)
-jobUserEmail
-  = lens _jobUserEmail (\ s a -> s{_jobUserEmail = a})
+jUserEmail :: Lens' Job (Maybe Text)
+jUserEmail
+  = lens _jUserEmail (\ s a -> s{_jUserEmail = a})
 
 -- | [Output-only] The type of the resource.
-jobKind :: Lens' Job Text
-jobKind = lens _jobKind (\ s a -> s{_jobKind = a})
+jKind :: Lens' Job Text
+jKind = lens _jKind (\ s a -> s{_jKind = a})
 
 -- | [Output-only] A URL that can be used to access this resource again.
-jobSelfLink :: Lens' Job (Maybe Text)
-jobSelfLink
-  = lens _jobSelfLink (\ s a -> s{_jobSelfLink = a})
+jSelfLink :: Lens' Job (Maybe Text)
+jSelfLink
+  = lens _jSelfLink (\ s a -> s{_jSelfLink = a})
 
 -- | [Output-only] Opaque ID field of the job
-jobId :: Lens' Job (Maybe Text)
-jobId = lens _jobId (\ s a -> s{_jobId = a})
+jId :: Lens' Job (Maybe Text)
+jId = lens _jId (\ s a -> s{_jId = a})
 
 -- | [Output-only] Information about the job, including starting time and
 -- ending time of the job.
-jobStatistics :: Lens' Job (Maybe JobStatistics)
-jobStatistics
-  = lens _jobStatistics
-      (\ s a -> s{_jobStatistics = a})
+jStatistics :: Lens' Job (Maybe JobStatistics)
+jStatistics
+  = lens _jStatistics (\ s a -> s{_jStatistics = a})
 
 -- | [Required] Describes the job configuration.
-jobConfiguration :: Lens' Job (Maybe JobConfiguration)
-jobConfiguration
-  = lens _jobConfiguration
-      (\ s a -> s{_jobConfiguration = a})
+jConfiguration :: Lens' Job (Maybe JobConfiguration)
+jConfiguration
+  = lens _jConfiguration
+      (\ s a -> s{_jConfiguration = a})
 
 instance FromJSON Job where
         parseJSON
@@ -2381,15 +2379,13 @@ instance ToJSON Job where
         toJSON Job{..}
           = object
               (catMaybes
-                 [("jobReference" .=) <$> _jobJobReference,
-                  ("status" .=) <$> _jobStatus,
-                  ("etag" .=) <$> _jobEtag,
-                  ("user_email" .=) <$> _jobUserEmail,
-                  Just ("kind" .= _jobKind),
-                  ("selfLink" .=) <$> _jobSelfLink,
-                  ("id" .=) <$> _jobId,
-                  ("statistics" .=) <$> _jobStatistics,
-                  ("configuration" .=) <$> _jobConfiguration])
+                 [("jobReference" .=) <$> _jJobReference,
+                  ("status" .=) <$> _jStatus, ("etag" .=) <$> _jEtag,
+                  ("user_email" .=) <$> _jUserEmail,
+                  Just ("kind" .= _jKind),
+                  ("selfLink" .=) <$> _jSelfLink, ("id" .=) <$> _jId,
+                  ("statistics" .=) <$> _jStatistics,
+                  ("configuration" .=) <$> _jConfiguration])
 
 --
 -- /See:/ 'jobConfigurationLink' smart constructor.
@@ -2727,16 +2723,16 @@ instance ToJSON JobConfigurationExtract where
 
 -- | Represents a single JSON object.
 --
--- /See:/ 'jSONObject' smart constructor.
+-- /See:/ 'jsonObject' smart constructor.
 data JSONObject =
     JSONObject
     deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JSONObject' with the minimum fields required to make a request.
 --
-jSONObject
+jsonObject
     :: JSONObject
-jSONObject = JSONObject
+jsonObject = JSONObject
 
 instance FromJSON JSONObject where
         parseJSON
@@ -3738,7 +3734,7 @@ instance ToJSON ErrorProto where
                   ("message" .=) <$> _epMessage])
 
 --
--- /See:/ 'cSVOptions' smart constructor.
+-- /See:/ 'csvOptions' smart constructor.
 data CSVOptions = CSVOptions
     { _coSkipLeadingRows     :: !(Maybe Int32)
     , _coAllowJaggedRows     :: !(Maybe Bool)
@@ -3763,9 +3759,9 @@ data CSVOptions = CSVOptions
 -- * 'coEncoding'
 --
 -- * 'coFieldDelimiter'
-cSVOptions
+csvOptions
     :: CSVOptions
-cSVOptions =
+csvOptions =
     CSVOptions
     { _coSkipLeadingRows = Nothing
     , _coAllowJaggedRows = Nothing

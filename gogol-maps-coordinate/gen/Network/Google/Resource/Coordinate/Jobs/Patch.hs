@@ -62,22 +62,24 @@ type JobsPatchResource =
        Capture "teamId" Text :>
          "jobs" :>
            Capture "jobId" Word64 :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "progress" CoordinateJobsPatchProgress :>
-                   QueryParam "note" Text :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "customerPhoneNumber" Text :>
-                         QueryParam "customerName" Text :>
-                           QueryParam "address" Text :>
-                             QueryParam "assignee" Text :>
-                               QueryParam "lat" Double :>
-                                 QueryParam "key" Key :>
-                                   QueryParam "lng" Double :>
-                                     QueryParam "title" Text :>
-                                       QueryParam "oauth_token" OAuthToken :>
-                                         QueryParam "fields" Text :>
-                                           QueryParams "customField" Text :>
+             QueryParam "address" Text :>
+               QueryParam "assignee" Text :>
+                 QueryParams "customField" Text :>
+                   QueryParam "customerName" Text :>
+                     QueryParam "customerPhoneNumber" Text :>
+                       QueryParam "lat" Double :>
+                         QueryParam "lng" Double :>
+                           QueryParam "note" Text :>
+                             QueryParam "progress" CoordinateJobsPatchProgress
+                               :>
+                               QueryParam "title" Text :>
+                                 QueryParam "quotaUser" Text :>
+                                   QueryParam "prettyPrint" Bool :>
+                                     QueryParam "userIp" Text :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "key" Key :>
+                                           QueryParam "oauth_token" OAuthToken
+                                             :>
                                              QueryParam "alt" AltJSON :>
                                                ReqBody '[JSON] Job :>
                                                  Patch '[JSON] Job
@@ -284,22 +286,22 @@ instance GoogleRequest JobsPatch' where
         type Rs JobsPatch' = Job
         request = requestWithRoute defReq mapsCoordinateURL
         requestWithRoute r u JobsPatch'{..}
-          = go _jpQuotaUser (Just _jpPrettyPrint) _jpJobId
-              _jpProgress
-              _jpNote
-              _jpUserIP
-              _jpTeamId
-              _jpCustomerPhoneNumber
+          = go _jpAddress _jpAssignee _jpCustomField
               _jpCustomerName
-              _jpAddress
-              _jpAssignee
+              _jpCustomerPhoneNumber
               _jpLat
-              _jpKey
               _jpLng
+              _jpNote
+              _jpProgress
               _jpTitle
-              _jpOAuthToken
+              _jpTeamId
+              _jpJobId
+              _jpQuotaUser
+              (Just _jpPrettyPrint)
+              _jpUserIP
               _jpFields
-              _jpCustomField
+              _jpKey
+              _jpOAuthToken
               (Just AltJSON)
               _jpJob
           where go

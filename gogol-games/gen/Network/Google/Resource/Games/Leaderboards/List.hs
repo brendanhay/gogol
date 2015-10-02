@@ -48,15 +48,15 @@ import           Network.Google.Prelude
 -- 'LeaderboardsList'' request conforms to.
 type LeaderboardsListResource =
      "leaderboards" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "language" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "maxResults" Int32 :>
-                       QueryParam "fields" Text :>
+       QueryParam "language" Text :>
+         QueryParam "maxResults" Int32 :>
+           QueryParam "pageToken" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] LeaderboardListResponse
 
@@ -169,13 +169,13 @@ instance GoogleRequest LeaderboardsList' where
         type Rs LeaderboardsList' = LeaderboardListResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u LeaderboardsList'{..}
-          = go _llQuotaUser (Just _llPrettyPrint) _llUserIP
-              _llKey
-              _llLanguage
-              _llPageToken
-              _llOAuthToken
-              _llMaxResults
+          = go _llLanguage _llMaxResults _llPageToken
+              _llQuotaUser
+              (Just _llPrettyPrint)
+              _llUserIP
               _llFields
+              _llKey
+              _llOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

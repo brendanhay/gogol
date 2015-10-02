@@ -59,17 +59,17 @@ type ProjectsLogsDeleteResource =
            "logs" :>
              Capture "logsId" Text :>
                QueryParam "$.xgafv" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "key" Key :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "callback" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "quotaUser" Text :>
+                               QueryParam "prettyPrint" Bool :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Delete '[JSON] Empty
 
@@ -233,18 +233,18 @@ instance GoogleRequest ProjectsLogsDelete' where
         type Rs ProjectsLogsDelete' = Empty
         request = requestWithRoute defReq loggingURL
         requestWithRoute r u ProjectsLogsDelete'{..}
-          = go _pldXgafv _pldQuotaUser (Just _pldPrettyPrint)
-              _pldUploadProtocol
-              _pldLogsId
+          = go _pldXgafv _pldAccessToken _pldBearerToken
+              _pldCallback
               (Just _pldPp)
-              _pldAccessToken
               _pldUploadType
-              _pldBearerToken
+              _pldUploadProtocol
+              _pldProjectsId
+              _pldLogsId
+              _pldQuotaUser
+              (Just _pldPrettyPrint)
+              _pldFields
               _pldKey
               _pldOAuthToken
-              _pldProjectsId
-              _pldFields
-              _pldCallback
               (Just AltJSON)
           where go
                   = clientWithRoute

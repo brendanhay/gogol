@@ -53,9 +53,9 @@ type PretargetingConfigUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] PretargetingConfig :>
                            Put '[JSON] PretargetingConfig
@@ -176,12 +176,12 @@ instance GoogleRequest PretargetingConfigUpdate'
              PretargetingConfig
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u PretargetingConfigUpdate'{..}
-          = go _pcuQuotaUser (Just _pcuPrettyPrint) _pcuUserIP
-              _pcuAccountId
-              _pcuKey
-              _pcuConfigId
-              _pcuOAuthToken
+          = go _pcuAccountId _pcuConfigId _pcuQuotaUser
+              (Just _pcuPrettyPrint)
+              _pcuUserIP
               _pcuFields
+              _pcuKey
+              _pcuOAuthToken
               (Just AltJSON)
               _pcuPretargetingConfig
           where go

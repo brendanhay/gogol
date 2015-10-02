@@ -54,9 +54,9 @@ type BackendServicesUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] BackendService :>
                              Put '[JSON] Operation
@@ -176,12 +176,12 @@ instance GoogleRequest BackendServicesUpdate' where
         type Rs BackendServicesUpdate' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u BackendServicesUpdate'{..}
-          = go _bsuQuotaUser (Just _bsuPrettyPrint) _bsuProject
+          = go _bsuProject _bsuBackendService _bsuQuotaUser
+              (Just _bsuPrettyPrint)
               _bsuUserIP
+              _bsuFields
               _bsuKey
               _bsuOAuthToken
-              _bsuFields
-              _bsuBackendService
               (Just AltJSON)
               _bsuBackendService
           where go

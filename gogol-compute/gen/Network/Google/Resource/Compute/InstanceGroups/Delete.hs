@@ -55,9 +55,9 @@ type InstanceGroupsDeleteResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified instance group.
@@ -173,13 +173,13 @@ instance GoogleRequest InstanceGroupsDelete' where
         type Rs InstanceGroupsDelete' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstanceGroupsDelete'{..}
-          = go _igdQuotaUser (Just _igdPrettyPrint) _igdProject
+          = go _igdProject _igdZone _igdInstanceGroup
+              _igdQuotaUser
+              (Just _igdPrettyPrint)
               _igdUserIP
-              _igdZone
+              _igdFields
               _igdKey
               _igdOAuthToken
-              _igdInstanceGroup
-              _igdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -62,17 +62,17 @@ type ProjectsLogsSinksDeleteResource =
                "sinks" :>
                  Capture "sinksId" Text :>
                    QueryParam "$.xgafv" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "callback" Text :>
                            QueryParam "pp" Bool :>
-                             QueryParam "access_token" Text :>
-                               QueryParam "uploadType" Text :>
-                                 QueryParam "bearer_token" Text :>
-                                   QueryParam "key" Key :>
-                                     QueryParam "oauth_token" OAuthToken :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "callback" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "upload_protocol" Text :>
+                                 QueryParam "quotaUser" Text :>
+                                   QueryParam "prettyPrint" Bool :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "key" Key :>
+                                         QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
                                              Delete '[JSON] Empty
 
@@ -248,20 +248,19 @@ instance GoogleRequest ProjectsLogsSinksDelete' where
         type Rs ProjectsLogsSinksDelete' = Empty
         request = requestWithRoute defReq loggingURL
         requestWithRoute r u ProjectsLogsSinksDelete'{..}
-          = go _plsdXgafv _plsdQuotaUser
-              (Just _plsdPrettyPrint)
-              _plsdUploadProtocol
-              _plsdLogsId
+          = go _plsdXgafv _plsdAccessToken _plsdBearerToken
+              _plsdCallback
               (Just _plsdPp)
-              _plsdAccessToken
               _plsdUploadType
-              _plsdBearerToken
+              _plsdUploadProtocol
+              _plsdProjectsId
+              _plsdLogsId
+              _plsdSinksId
+              _plsdQuotaUser
+              (Just _plsdPrettyPrint)
+              _plsdFields
               _plsdKey
               _plsdOAuthToken
-              _plsdProjectsId
-              _plsdSinksId
-              _plsdFields
-              _plsdCallback
               (Just AltJSON)
           where go
                   = clientWithRoute

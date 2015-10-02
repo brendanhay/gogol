@@ -50,9 +50,9 @@ type AccountsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Account
 
 -- | Gets one account by ID.
@@ -144,11 +144,11 @@ instance GoogleRequest AccountsGet' where
         type Rs AccountsGet' = Account
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u AccountsGet'{..}
-          = go _agQuotaUser (Just _agPrettyPrint) _agUserIP
-              _agKey
-              _agId
-              _agOAuthToken
+          = go _agId _agQuotaUser (Just _agPrettyPrint)
+              _agUserIP
               _agFields
+              _agKey
+              _agOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

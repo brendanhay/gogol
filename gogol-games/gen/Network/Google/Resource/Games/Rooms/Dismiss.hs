@@ -52,9 +52,9 @@ type RoomsDismissResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Dismiss an invitation to join a room. For internal use by the Games SDK
@@ -151,11 +151,11 @@ instance GoogleRequest RoomsDismiss' where
         type Rs RoomsDismiss' = ()
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u RoomsDismiss'{..}
-          = go _rddQuotaUser (Just _rddPrettyPrint) _rddUserIP
-              _rddKey
-              _rddRoomId
-              _rddOAuthToken
+          = go _rddRoomId _rddQuotaUser (Just _rddPrettyPrint)
+              _rddUserIP
               _rddFields
+              _rddKey
+              _rddOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

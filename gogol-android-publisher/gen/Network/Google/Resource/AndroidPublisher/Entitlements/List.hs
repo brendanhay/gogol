@@ -51,16 +51,16 @@ import           Network.Google.Prelude
 type EntitlementsListResource =
      Capture "packageName" Text :>
        "entitlements" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
+         QueryParam "maxResults" Word32 :>
+           QueryParam "productId" Text :>
+             QueryParam "startIndex" Word32 :>
                QueryParam "token" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "startIndex" Word32 :>
-                       QueryParam "productId" Text :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] EntitlementsListResponse
 
@@ -189,16 +189,15 @@ instance GoogleRequest EntitlementsList' where
         type Rs EntitlementsList' = EntitlementsListResponse
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u EntitlementsList'{..}
-          = go _elQuotaUser (Just _elPrettyPrint)
-              _elPackageName
-              _elUserIP
+          = go _elMaxResults _elProductId _elStartIndex
               _elToken
+              _elPackageName
+              _elQuotaUser
+              (Just _elPrettyPrint)
+              _elUserIP
+              _elFields
               _elKey
               _elOAuthToken
-              _elStartIndex
-              _elProductId
-              _elMaxResults
-              _elFields
               (Just AltJSON)
           where go
                   = clientWithRoute

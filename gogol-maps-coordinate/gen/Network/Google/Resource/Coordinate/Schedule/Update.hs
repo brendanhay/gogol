@@ -56,16 +56,16 @@ type ScheduleUpdateResource =
          "jobs" :>
            Capture "jobId" Word64 :>
              "schedule" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "allDay" Bool :>
+               QueryParam "allDay" Bool :>
+                 QueryParam "duration" Word64 :>
+                   QueryParam "endTime" Word64 :>
                      QueryParam "startTime" Word64 :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "endTime" Word64 :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "duration" Word64 :>
-                                 QueryParam "fields" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] Schedule :>
                                        Put '[JSON] Schedule
@@ -214,16 +214,15 @@ instance GoogleRequest ScheduleUpdate' where
         type Rs ScheduleUpdate' = Schedule
         request = requestWithRoute defReq mapsCoordinateURL
         requestWithRoute r u ScheduleUpdate'{..}
-          = go _suQuotaUser (Just _suPrettyPrint) _suJobId
-              _suAllDay
-              _suStartTime
-              _suUserIP
+          = go _suAllDay _suDuration _suEndTime _suStartTime
               _suTeamId
-              _suKey
-              _suEndTime
-              _suOAuthToken
-              _suDuration
+              _suJobId
+              _suQuotaUser
+              (Just _suPrettyPrint)
+              _suUserIP
               _suFields
+              _suKey
+              _suOAuthToken
               (Just AltJSON)
               _suSchedule
           where go

@@ -51,9 +51,9 @@ type UserRolePermissionGroupsListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] UserRolePermissionGroupsListResponse
 
@@ -156,12 +156,12 @@ instance GoogleRequest UserRolePermissionGroupsList'
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           UserRolePermissionGroupsList'{..}
-          = go _urpglQuotaUser (Just _urpglPrettyPrint)
+          = go _urpglProfileId _urpglQuotaUser
+              (Just _urpglPrettyPrint)
               _urpglUserIP
-              _urpglProfileId
+              _urpglFields
               _urpglKey
               _urpglOAuthToken
-              _urpglFields
               (Just AltJSON)
           where go
                   = clientWithRoute

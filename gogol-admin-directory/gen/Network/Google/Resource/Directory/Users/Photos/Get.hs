@@ -52,9 +52,9 @@ type UsersPhotosGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] UserPhoto
 
 -- | Retrieve photo of a user
@@ -150,11 +150,11 @@ instance GoogleRequest UsersPhotosGet' where
         type Rs UsersPhotosGet' = UserPhoto
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u UsersPhotosGet'{..}
-          = go _upgQuotaUser (Just _upgPrettyPrint) _upgUserIP
+          = go _upgUserKey _upgQuotaUser (Just _upgPrettyPrint)
+              _upgUserIP
+              _upgFields
               _upgKey
               _upgOAuthToken
-              _upgUserKey
-              _upgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

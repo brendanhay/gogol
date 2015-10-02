@@ -56,9 +56,9 @@ type AccountsContainersFoldersGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Folder
 
 -- | Gets a GTM Folder.
@@ -180,14 +180,13 @@ instance GoogleRequest AccountsContainersFoldersGet'
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersFoldersGet'{..}
-          = go _acfgQuotaUser (Just _acfgPrettyPrint)
-              _acfgContainerId
+          = go _acfgAccountId _acfgContainerId _acfgFolderId
+              _acfgQuotaUser
+              (Just _acfgPrettyPrint)
               _acfgUserIP
-              _acfgFolderId
-              _acfgAccountId
+              _acfgFields
               _acfgKey
               _acfgOAuthToken
-              _acfgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

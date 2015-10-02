@@ -52,9 +52,9 @@ type DatasetsCommitResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltPROTO :>
                        ReqBody '[JSON] CommitRequest :>
                          Post '[JSON] CommitResponse
@@ -161,11 +161,11 @@ instance GoogleRequest DatasetsCommit' where
         type Rs DatasetsCommit' = CommitResponse
         request = requestWithRoute defReq datastoreURL
         requestWithRoute r u DatasetsCommit'{..}
-          = go _dcQuotaUser (Just _dcPrettyPrint) _dcUserIP
-              _dcKey
-              _dcDatasetId
-              _dcOAuthToken
+          = go _dcDatasetId _dcQuotaUser (Just _dcPrettyPrint)
+              _dcUserIP
               _dcFields
+              _dcKey
+              _dcOAuthToken
               (Just AltPROTO)
               _dcCommitRequest
           where go

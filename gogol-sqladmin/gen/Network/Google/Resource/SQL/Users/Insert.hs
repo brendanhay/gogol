@@ -55,9 +55,9 @@ type UsersInsertResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] User :> Post '[JSON] Operation
 
@@ -170,12 +170,12 @@ instance GoogleRequest UsersInsert' where
         type Rs UsersInsert' = Operation
         request = requestWithRoute defReq sQLAdminURL
         requestWithRoute r u UsersInsert'{..}
-          = go _uiQuotaUser (Just _uiPrettyPrint) _uiProject
+          = go _uiProject _uiInstance _uiQuotaUser
+              (Just _uiPrettyPrint)
               _uiUserIP
+              _uiFields
               _uiKey
               _uiOAuthToken
-              _uiFields
-              _uiInstance
               (Just AltJSON)
               _uiUser
           where go

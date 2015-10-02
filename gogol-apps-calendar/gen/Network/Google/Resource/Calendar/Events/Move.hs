@@ -53,14 +53,14 @@ type EventsMoveResource =
          "events" :>
            Capture "eventId" Text :>
              "move" :>
-               QueryParam "destination" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "sendNotifications" Bool :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+               QueryParam "sendNotifications" Bool :>
+                 QueryParam "destination" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Post '[JSON] Event
 
 -- | Moves an event to another calendar, i.e. changes an event\'s organizer.
@@ -187,14 +187,14 @@ instance GoogleRequest EventsMove' where
         type Rs EventsMove' = Event
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u EventsMove'{..}
-          = go (Just _emDestination) _emQuotaUser _emCalendarId
+          = go _emSendNotifications _emCalendarId _emEventId
+              (Just _emDestination)
+              _emQuotaUser
               (Just _emPrettyPrint)
               _emUserIP
-              _emKey
-              _emSendNotifications
-              _emOAuthToken
-              _emEventId
               _emFields
+              _emKey
+              _emOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy EventsMoveResource)

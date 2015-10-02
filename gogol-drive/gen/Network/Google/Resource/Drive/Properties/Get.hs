@@ -51,13 +51,13 @@ type PropertiesGetResource =
        Capture "fileId" Text :>
          "properties" :>
            Capture "propertyKey" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "visibility" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+             QueryParam "visibility" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Property
 
 -- | Gets a property by its key.
@@ -169,14 +169,13 @@ instance GoogleRequest PropertiesGet' where
         type Rs PropertiesGet' = Property
         request = requestWithRoute defReq driveURL
         requestWithRoute r u PropertiesGet'{..}
-          = go _pgQuotaUser (Just _pgPrettyPrint)
-              _pgPropertyKey
+          = go (Just _pgVisibility) _pgFileId _pgPropertyKey
+              _pgQuotaUser
+              (Just _pgPrettyPrint)
               _pgUserIP
-              (Just _pgVisibility)
-              _pgKey
-              _pgFileId
-              _pgOAuthToken
               _pgFields
+              _pgKey
+              _pgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

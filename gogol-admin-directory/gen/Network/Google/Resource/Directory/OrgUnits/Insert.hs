@@ -52,9 +52,9 @@ type OrgUnitsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] OrgUnit :> Post '[JSON] OrgUnit
 
@@ -162,11 +162,12 @@ instance GoogleRequest OrgUnitsInsert' where
         type Rs OrgUnitsInsert' = OrgUnit
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u OrgUnitsInsert'{..}
-          = go _ouiQuotaUser (Just _ouiPrettyPrint) _ouiUserIP
-              _ouiCustomerId
+          = go _ouiCustomerId _ouiQuotaUser
+              (Just _ouiPrettyPrint)
+              _ouiUserIP
+              _ouiFields
               _ouiKey
               _ouiOAuthToken
-              _ouiFields
               (Just AltJSON)
               _ouiOrgUnit
           where go

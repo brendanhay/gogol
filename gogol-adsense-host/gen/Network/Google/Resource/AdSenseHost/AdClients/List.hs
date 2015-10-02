@@ -47,14 +47,14 @@ import           Network.Google.Prelude
 -- 'AdClientsList'' request conforms to.
 type AdClientsListResource =
      "adclients" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "maxResults" Word32 :>
-                     QueryParam "fields" Text :>
+       QueryParam "maxResults" Word32 :>
+         QueryParam "pageToken" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] AdClients
 
 -- | List all host ad clients in this AdSense account.
@@ -162,12 +162,12 @@ instance GoogleRequest AdClientsList' where
         type Rs AdClientsList' = AdClients
         request = requestWithRoute defReq adSenseHostURL
         requestWithRoute r u AdClientsList'{..}
-          = go _aclQuotaUser (Just _aclPrettyPrint) _aclUserIP
-              _aclKey
-              _aclPageToken
-              _aclOAuthToken
-              _aclMaxResults
+          = go _aclMaxResults _aclPageToken _aclQuotaUser
+              (Just _aclPrettyPrint)
+              _aclUserIP
               _aclFields
+              _aclKey
+              _aclOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

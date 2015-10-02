@@ -61,34 +61,33 @@ type FloodlightActivitiesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "floodlightActivities" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "tagString" Text :>
-               QueryParam "prettyPrint" Bool :>
+           QueryParam "advertiserId" Int64 :>
+             QueryParams "floodlightActivityGroupIds" Int64 :>
+               QueryParam "floodlightActivityGroupName" Text :>
                  QueryParam "floodlightActivityGroupTagString" Text :>
-                   QueryParam "floodlightConfigurationId" Int64 :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "advertiserId" Int64 :>
-                         QueryParam "searchString" Text :>
-                           QueryParams "ids" Int64 :>
-                             QueryParams "floodlightActivityGroupIds" Int64 :>
-                               QueryParam "sortOrder"
-                                 DfareportingFloodlightActivitiesListSortOrder
+                   QueryParam "floodlightActivityGroupType"
+                     DfareportingFloodlightActivitiesListFloodlightActivityGroupType
+                     :>
+                     QueryParam "floodlightConfigurationId" Int64 :>
+                       QueryParams "ids" Int64 :>
+                         QueryParam "maxResults" Int32 :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "searchString" Text :>
+                               QueryParam "sortField"
+                                 DfareportingFloodlightActivitiesListSortField
                                  :>
-                                 QueryParam "key" Key :>
-                                   QueryParam "floodlightActivityGroupType"
-                                     DfareportingFloodlightActivitiesListFloodlightActivityGroupType
-                                     :>
-                                     QueryParam "floodlightActivityGroupName"
-                                       Text
-                                       :>
-                                       QueryParam "pageToken" Text :>
-                                         QueryParam "sortField"
-                                           DfareportingFloodlightActivitiesListSortField
-                                           :>
-                                           QueryParam "oauth_token" OAuthToken
-                                             :>
-                                             QueryParam "maxResults" Int32 :>
-                                               QueryParam "fields" Text :>
+                                 QueryParam "sortOrder"
+                                   DfareportingFloodlightActivitiesListSortOrder
+                                   :>
+                                   QueryParam "tagString" Text :>
+                                     QueryParam "quotaUser" Text :>
+                                       QueryParam "prettyPrint" Bool :>
+                                         QueryParam "userIp" Text :>
+                                           QueryParam "fields" Text :>
+                                             QueryParam "key" Key :>
+                                               QueryParam "oauth_token"
+                                                 OAuthToken
+                                                 :>
                                                  QueryParam "alt" AltJSON :>
                                                    Get '[JSON]
                                                      FloodlightActivitiesListResponse
@@ -330,25 +329,25 @@ instance GoogleRequest FloodlightActivitiesList'
              FloodlightActivitiesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u FloodlightActivitiesList'{..}
-          = go _falQuotaUser _falTagString
-              (Just _falPrettyPrint)
-              _falFloodlightActivityGroupTagString
-              _falFloodlightConfigurationId
-              _falUserIP
-              _falAdvertiserId
-              _falSearchString
-              _falIds
-              _falProfileId
-              _falFloodlightActivityGroupIds
-              _falSortOrder
-              _falKey
-              _falFloodlightActivityGroupType
+          = go _falAdvertiserId _falFloodlightActivityGroupIds
               _falFloodlightActivityGroupName
-              _falPageToken
-              _falSortField
-              _falOAuthToken
+              _falFloodlightActivityGroupTagString
+              _falFloodlightActivityGroupType
+              _falFloodlightConfigurationId
+              _falIds
               _falMaxResults
+              _falPageToken
+              _falSearchString
+              _falSortField
+              _falSortOrder
+              _falTagString
+              _falProfileId
+              _falQuotaUser
+              (Just _falPrettyPrint)
+              _falUserIP
               _falFields
+              _falKey
+              _falOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

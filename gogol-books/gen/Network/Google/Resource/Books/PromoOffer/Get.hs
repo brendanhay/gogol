@@ -52,18 +52,18 @@ import           Network.Google.Prelude
 type PromoOfferGetResource =
      "promooffer" :>
        "get" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
+         QueryParam "androidId" Text :>
+           QueryParam "device" Text :>
              QueryParam "manufacturer" Text :>
-               QueryParam "userIp" Text :>
-                 QueryParam "serial" Text :>
-                   QueryParam "device" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "model" Text :>
-                         QueryParam "product" Text :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "androidId" Text :>
-                               QueryParam "fields" Text :>
+               QueryParam "model" Text :>
+                 QueryParam "product" Text :>
+                   QueryParam "serial" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :> Get '[JSON] Offers
 
 -- | Returns a list of promo offers available to the user
@@ -203,17 +203,16 @@ instance GoogleRequest PromoOfferGet' where
         type Rs PromoOfferGet' = Offers
         request = requestWithRoute defReq booksURL
         requestWithRoute r u PromoOfferGet'{..}
-          = go _pogQuotaUser (Just _pogPrettyPrint)
-              _pogManufacturer
-              _pogUserIP
-              _pogSerial
-              _pogDevice
-              _pogKey
+          = go _pogAndroidId _pogDevice _pogManufacturer
               _pogModel
               _pogProduct
-              _pogOAuthToken
-              _pogAndroidId
+              _pogSerial
+              _pogQuotaUser
+              (Just _pogPrettyPrint)
+              _pogUserIP
               _pogFields
+              _pogKey
+              _pogOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

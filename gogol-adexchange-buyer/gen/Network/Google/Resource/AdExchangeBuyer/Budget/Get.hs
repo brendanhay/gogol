@@ -53,9 +53,9 @@ type BudgetGetResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Budget
 
 -- | Returns the budget information for the adgroup specified by the
@@ -159,12 +159,12 @@ instance GoogleRequest BudgetGet' where
         type Rs BudgetGet' = Budget
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u BudgetGet'{..}
-          = go _bgQuotaUser (Just _bgPrettyPrint) _bgUserIP
-              _bgAccountId
+          = go _bgAccountId _bgBillingId _bgQuotaUser
+              (Just _bgPrettyPrint)
+              _bgUserIP
+              _bgFields
               _bgKey
               _bgOAuthToken
-              _bgBillingId
-              _bgFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy BudgetGetResource)

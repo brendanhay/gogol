@@ -50,9 +50,9 @@ type ScoresResetAllForAllPlayersResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Resets scores for all draft leaderboards for all players. This method is
@@ -145,9 +145,9 @@ instance GoogleRequest ScoresResetAllForAllPlayers'
         requestWithRoute r u ScoresResetAllForAllPlayers'{..}
           = go _srafapQuotaUser (Just _srafapPrettyPrint)
               _srafapUserIP
+              _srafapFields
               _srafapKey
               _srafapOAuthToken
-              _srafapFields
               (Just AltJSON)
           where go
                   = clientWithRoute

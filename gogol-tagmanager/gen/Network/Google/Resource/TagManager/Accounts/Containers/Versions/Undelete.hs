@@ -57,9 +57,9 @@ type AccountsContainersVersionsUndeleteResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Post '[JSON] ContainerVersion
 
@@ -184,14 +184,14 @@ instance GoogleRequest
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersVersionsUndelete'{..}
-          = go _acvuQuotaUser (Just _acvuPrettyPrint)
-              _acvuContainerId
-              _acvuUserIP
+          = go _acvuAccountId _acvuContainerId
               _acvuContainerVersionId
-              _acvuAccountId
+              _acvuQuotaUser
+              (Just _acvuPrettyPrint)
+              _acvuUserIP
+              _acvuFields
               _acvuKey
               _acvuOAuthToken
-              _acvuFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -57,9 +57,9 @@ type LinksGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Link
 
 -- | Retrieves data about a single link if the requesting
@@ -173,13 +173,12 @@ instance GoogleRequest LinksGet' where
         type Rs LinksGet' = Link
         request = requestWithRoute defReq affiliatesURL
         requestWithRoute r u LinksGet'{..}
-          = go _lgQuotaUser (Just _lgPrettyPrint) _lgUserIP
-              _lgRoleId
-              _lgRole
-              _lgKey
-              _lgLinkId
-              _lgOAuthToken
+          = go _lgRole _lgRoleId _lgLinkId _lgQuotaUser
+              (Just _lgPrettyPrint)
+              _lgUserIP
               _lgFields
+              _lgKey
+              _lgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy LinksGetResource) r

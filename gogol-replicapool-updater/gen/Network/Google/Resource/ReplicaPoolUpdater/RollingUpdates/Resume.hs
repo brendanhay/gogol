@@ -57,9 +57,9 @@ type RollingUpdatesResumeResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Continues an update in PAUSED state. Has no effect if invoked when the
@@ -172,13 +172,12 @@ instance GoogleRequest RollingUpdatesResume' where
         request
           = requestWithRoute defReq replicaPoolUpdaterURL
         requestWithRoute r u RollingUpdatesResume'{..}
-          = go _rRollingUpdate _rQuotaUser (Just _rPrettyPrint)
-              _rProject
+          = go _rProject _rZone _rRollingUpdate _rQuotaUser
+              (Just _rPrettyPrint)
               _rUserIP
-              _rZone
+              _rFields
               _rKey
               _rOAuthToken
-              _rFields
               (Just AltJSON)
           where go
                   = clientWithRoute

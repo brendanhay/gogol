@@ -50,9 +50,9 @@ type OrdersCustombatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] OrdersCustomBatchRequest :>
                          Post '[JSON] OrdersCustomBatchResponse
@@ -153,9 +153,9 @@ instance GoogleRequest OrdersCustombatch' where
         request = requestWithRoute defReq shoppingContentURL
         requestWithRoute r u OrdersCustombatch'{..}
           = go _ordQuotaUser (Just _ordPrettyPrint) _ordUserIP
+              _ordFields
               _ordKey
               _ordOAuthToken
-              _ordFields
               (Just AltJSON)
               _ordOrdersCustomBatchRequest
           where go

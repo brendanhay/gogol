@@ -55,14 +55,14 @@ type LayersVolumeAnnotationsGetResource =
            Capture "layerId" Text :>
              "annotations" :>
                Capture "annotationId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "locale" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "source" Text :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
+                 QueryParam "locale" Text :>
+                   QueryParam "source" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] Volumeannotation
 
@@ -202,16 +202,15 @@ instance GoogleRequest LayersVolumeAnnotationsGet'
              Volumeannotation
         request = requestWithRoute defReq booksURL
         requestWithRoute r u LayersVolumeAnnotationsGet'{..}
-          = go _lvagQuotaUser (Just _lvagPrettyPrint)
-              _lvagUserIP
-              _lvagLocale
-              _lvagKey
-              _lvagAnnotationId
-              _lvagVolumeId
-              _lvagSource
-              _lvagOAuthToken
+          = go _lvagLocale _lvagSource _lvagVolumeId
               _lvagLayerId
+              _lvagAnnotationId
+              _lvagQuotaUser
+              (Just _lvagPrettyPrint)
+              _lvagUserIP
               _lvagFields
+              _lvagKey
+              _lvagOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

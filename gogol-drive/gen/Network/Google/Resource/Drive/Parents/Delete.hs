@@ -53,9 +53,9 @@ type ParentsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Removes a parent from a file.
@@ -161,12 +161,12 @@ instance GoogleRequest ParentsDelete' where
         type Rs ParentsDelete' = ()
         request = requestWithRoute defReq driveURL
         requestWithRoute r u ParentsDelete'{..}
-          = go _pddQuotaUser (Just _pddPrettyPrint) _pddUserIP
-              _pddKey
-              _pddFileId
-              _pddOAuthToken
-              _pddParentId
+          = go _pddFileId _pddParentId _pddQuotaUser
+              (Just _pddPrettyPrint)
+              _pddUserIP
               _pddFields
+              _pddKey
+              _pddOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

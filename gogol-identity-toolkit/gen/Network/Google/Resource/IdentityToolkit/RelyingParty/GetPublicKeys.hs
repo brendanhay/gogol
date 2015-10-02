@@ -48,9 +48,9 @@ type RelyingPartyGetPublicKeysResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON]
                        IdentitytoolkitRelyingPartyGetPublicKeysResponse
@@ -143,9 +143,9 @@ instance GoogleRequest RelyingPartyGetPublicKeys'
         requestWithRoute r u RelyingPartyGetPublicKeys'{..}
           = go _rpgpkQuotaUser (Just _rpgpkPrettyPrint)
               _rpgpkUserIP
+              _rpgpkFields
               _rpgpkKey
               _rpgpkOAuthToken
-              _rpgpkFields
               (Just AltJSON)
           where go
                   = clientWithRoute

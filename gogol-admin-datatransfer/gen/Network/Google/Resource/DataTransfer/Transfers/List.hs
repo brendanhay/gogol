@@ -52,18 +52,18 @@ import           Network.Google.Prelude
 -- 'TransfersList'' request conforms to.
 type TransfersListResource =
      "transfers" :>
-       QueryParam "status" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
+       QueryParam "customerId" Text :>
+         QueryParam "maxResults" Int32 :>
+           QueryParam "newOwnerUserId" Text :>
              QueryParam "oldOwnerUserId" Text :>
-               QueryParam "userIp" Text :>
-                 QueryParam "newOwnerUserId" Text :>
-                   QueryParam "customerId" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Int32 :>
-                             QueryParam "fields" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "status" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] DataTransfersListResponse
 
@@ -204,16 +204,16 @@ instance GoogleRequest TransfersList' where
         request
           = requestWithRoute defReq adminDataTransferURL
         requestWithRoute r u TransfersList'{..}
-          = go _tlStatus _tlQuotaUser (Just _tlPrettyPrint)
+          = go _tlCustomerId _tlMaxResults _tlNewOwnerUserId
               _tlOldOwnerUserId
-              _tlUserIP
-              _tlNewOwnerUserId
-              _tlCustomerId
-              _tlKey
               _tlPageToken
-              _tlOAuthToken
-              _tlMaxResults
+              _tlStatus
+              _tlQuotaUser
+              (Just _tlPrettyPrint)
+              _tlUserIP
               _tlFields
+              _tlKey
+              _tlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

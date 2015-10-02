@@ -57,9 +57,9 @@ type ZoneViewsSetServiceResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] ZoneViewsSetServiceRequest :>
                                  Post '[JSON] Operation
@@ -189,14 +189,13 @@ instance GoogleRequest ZoneViewsSetService' where
         type Rs ZoneViewsSetService' = Operation
         request = requestWithRoute defReq resourceViewsURL
         requestWithRoute r u ZoneViewsSetService'{..}
-          = go _zvssQuotaUser (Just _zvssPrettyPrint)
-              _zvssResourceView
-              _zvssProject
+          = go _zvssProject _zvssZone _zvssResourceView
+              _zvssQuotaUser
+              (Just _zvssPrettyPrint)
               _zvssUserIP
-              _zvssZone
+              _zvssFields
               _zvssKey
               _zvssOAuthToken
-              _zvssFields
               (Just AltJSON)
               _zvssZoneViewsSetServiceRequest
           where go

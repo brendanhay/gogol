@@ -58,9 +58,9 @@ type CollectionviewersDeleteResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Removes the user from the list of those specifically allowed to see the
@@ -181,14 +181,13 @@ instance GoogleRequest CollectionviewersDelete' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u CollectionviewersDelete'{..}
-          = go _cddQuotaUser (Just _cddPrettyPrint)
-              _cddEnterpriseId
+          = go _cddEnterpriseId _cddCollectionId _cddUserId
+              _cddQuotaUser
+              (Just _cddPrettyPrint)
               _cddUserIP
-              _cddCollectionId
-              _cddUserId
+              _cddFields
               _cddKey
               _cddOAuthToken
-              _cddFields
               (Just AltJSON)
           where go
                   = clientWithRoute

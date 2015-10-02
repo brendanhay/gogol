@@ -50,16 +50,16 @@ import           Network.Google.Storage.Types
 type BucketsGetResource =
      "b" :>
        Capture "bucket" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "ifMetagenerationMatch" Word64 :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "ifMetagenerationNotMatch" Word64 :>
-                     QueryParam "projection" StorageBucketsGetProjection
-                       :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+         QueryParam "ifMetagenerationMatch" Word64 :>
+           QueryParam "ifMetagenerationNotMatch" Word64 :>
+             QueryParam "projection" StorageBucketsGetProjection
+               :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Bucket
 
 -- | Returns metadata for the specified bucket.
@@ -182,15 +182,16 @@ instance GoogleRequest BucketsGet' where
         type Rs BucketsGet' = Bucket
         request = requestWithRoute defReq storageURL
         requestWithRoute r u BucketsGet'{..}
-          = go _bgQuotaUser _bgIfMetagenerationMatch
-              (Just _bgPrettyPrint)
-              _bgUserIP
-              _bgBucket
-              _bgKey
+          = go _bgIfMetagenerationMatch
               _bgIfMetagenerationNotMatch
               _bgProjection
-              _bgOAuthToken
+              _bgBucket
+              _bgQuotaUser
+              (Just _bgPrettyPrint)
+              _bgUserIP
               _bgFields
+              _bgKey
+              _bgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy BucketsGetResource)

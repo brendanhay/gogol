@@ -27,7 +27,7 @@ module Network.Google.Resource.Compute.URLMaps.List
       URLMapsListResource
 
     -- * Creating a Request
-    , uRLMapsList'
+    , urlMapsList'
     , URLMapsList'
 
     -- * Request Lenses
@@ -52,21 +52,21 @@ type URLMapsListResource =
      Capture "project" Text :>
        "global" :>
          "urlMaps" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "filter" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] URLMapList
 
 -- | Retrieves the list of UrlMap resources available to the specified
 -- project.
 --
--- /See:/ 'uRLMapsList'' smart constructor.
+-- /See:/ 'urlMapsList'' smart constructor.
 data URLMapsList' = URLMapsList'
     { _umlQuotaUser   :: !(Maybe Text)
     , _umlPrettyPrint :: !Bool
@@ -103,10 +103,10 @@ data URLMapsList' = URLMapsList'
 -- * 'umlMaxResults'
 --
 -- * 'umlFields'
-uRLMapsList'
+urlMapsList'
     :: Text -- ^ 'project'
     -> URLMapsList'
-uRLMapsList' pUmlProject_ =
+urlMapsList' pUmlProject_ =
     URLMapsList'
     { _umlQuotaUser = Nothing
     , _umlPrettyPrint = True
@@ -197,14 +197,14 @@ instance GoogleRequest URLMapsList' where
         type Rs URLMapsList' = URLMapList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u URLMapsList'{..}
-          = go _umlQuotaUser (Just _umlPrettyPrint) _umlProject
+          = go _umlFilter (Just _umlMaxResults) _umlPageToken
+              _umlProject
+              _umlQuotaUser
+              (Just _umlPrettyPrint)
               _umlUserIP
-              _umlKey
-              _umlFilter
-              _umlPageToken
-              _umlOAuthToken
-              (Just _umlMaxResults)
               _umlFields
+              _umlKey
+              _umlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

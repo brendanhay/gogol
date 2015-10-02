@@ -51,9 +51,9 @@ type DatasetsBeginTransactionResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltPROTO :>
                        ReqBody '[JSON] BeginTransactionRequest :>
                          Post '[JSON] BeginTransactionResponse
@@ -164,11 +164,12 @@ instance GoogleRequest DatasetsBeginTransaction'
              BeginTransactionResponse
         request = requestWithRoute defReq datastoreURL
         requestWithRoute r u DatasetsBeginTransaction'{..}
-          = go _dbtQuotaUser (Just _dbtPrettyPrint) _dbtUserIP
-              _dbtKey
-              _dbtDatasetId
-              _dbtOAuthToken
+          = go _dbtDatasetId _dbtQuotaUser
+              (Just _dbtPrettyPrint)
+              _dbtUserIP
               _dbtFields
+              _dbtKey
+              _dbtOAuthToken
               (Just AltPROTO)
               _dbtBeginTransactionRequest
           where go

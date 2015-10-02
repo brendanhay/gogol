@@ -118,27 +118,27 @@ instance ToJSON Status where
 --
 -- /See:/ 'log' smart constructor.
 data Log = Log
-    { _logName        :: !(Maybe Text)
-    , _logDisplayName :: !(Maybe Text)
-    , _logPayLoadType :: !(Maybe Text)
+    { _lName        :: !(Maybe Text)
+    , _lDisplayName :: !(Maybe Text)
+    , _lPayLoadType :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Log' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'logName'
+-- * 'lName'
 --
--- * 'logDisplayName'
+-- * 'lDisplayName'
 --
--- * 'logPayLoadType'
+-- * 'lPayLoadType'
 log
     :: Log
 log =
     Log
-    { _logName = Nothing
-    , _logDisplayName = Nothing
-    , _logPayLoadType = Nothing
+    { _lName = Nothing
+    , _lDisplayName = Nothing
+    , _lPayLoadType = Nothing
     }
 
 -- | The resource name of the log. Example:
@@ -149,21 +149,19 @@ log =
 -- name with the service name, but this is not required. Examples of log
 -- given names: \`\"appengine.googleapis.com\/request_log\"\`,
 -- \`\"apache-access\"\`.
-logName :: Lens' Log (Maybe Text)
-logName = lens _logName (\ s a -> s{_logName = a})
+lName :: Lens' Log (Maybe Text)
+lName = lens _lName (\ s a -> s{_lName = a})
 
 -- | _Optional._ The common name of the log. Example: \`\"request_log\"\`.
-logDisplayName :: Lens' Log (Maybe Text)
-logDisplayName
-  = lens _logDisplayName
-      (\ s a -> s{_logDisplayName = a})
+lDisplayName :: Lens' Log (Maybe Text)
+lDisplayName
+  = lens _lDisplayName (\ s a -> s{_lDisplayName = a})
 
 -- | _Optional_. A URI representing the expected payload type for log
 -- entries.
-logPayLoadType :: Lens' Log (Maybe Text)
-logPayLoadType
-  = lens _logPayLoadType
-      (\ s a -> s{_logPayLoadType = a})
+lPayLoadType :: Lens' Log (Maybe Text)
+lPayLoadType
+  = lens _lPayLoadType (\ s a -> s{_lPayLoadType = a})
 
 instance FromJSON Log where
         parseJSON
@@ -177,9 +175,9 @@ instance ToJSON Log where
         toJSON Log{..}
           = object
               (catMaybes
-                 [("name" .=) <$> _logName,
-                  ("displayName" .=) <$> _logDisplayName,
-                  ("payloadType" .=) <$> _logPayLoadType])
+                 [("name" .=) <$> _lName,
+                  ("displayName" .=) <$> _lDisplayName,
+                  ("payloadType" .=) <$> _lPayLoadType])
 
 -- | Describes a problem with a logging resource or operation.
 --
@@ -1383,31 +1381,31 @@ instance ToJSON ListLogSinksResponse where
 --
 -- /See:/ 'logService' smart constructor.
 data LogService = LogService
-    { _lName      :: !(Maybe Text)
-    , _lIndexKeys :: !(Maybe [Text])
+    { _logName      :: !(Maybe Text)
+    , _logIndexKeys :: !(Maybe [Text])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LogService' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lName'
+-- * 'logName'
 --
--- * 'lIndexKeys'
+-- * 'logIndexKeys'
 logService
     :: LogService
 logService =
     LogService
-    { _lName = Nothing
-    , _lIndexKeys = Nothing
+    { _logName = Nothing
+    , _logIndexKeys = Nothing
     }
 
 -- | The service\'s name. Example: \`\"appengine.googleapis.com\"\`. Log
 -- names beginning with this string are reserved for this service. This
 -- value can appear in the \`LogEntry.metadata.serviceName\` field of log
 -- entries associated with this log service.
-lName :: Lens' LogService (Maybe Text)
-lName = lens _lName (\ s a -> s{_lName = a})
+logName :: Lens' LogService (Maybe Text)
+logName = lens _logName (\ s a -> s{_logName = a})
 
 -- | A list of the names of the keys used to index and label individual log
 -- entries from this service. The first two keys are used as the primary
@@ -1416,10 +1414,10 @@ lName = lens _lName (\ s a -> s{_lName = a})
 -- by version, so its \`indexKeys\` field is the following: [
 -- \"appengine.googleapis.com\/module_id\",
 -- \"appengine.googleapis.com\/version_id\" ]
-lIndexKeys :: Lens' LogService [Text]
-lIndexKeys
-  = lens _lIndexKeys (\ s a -> s{_lIndexKeys = a}) .
-      _Default
+logIndexKeys :: Lens' LogService [Text]
+logIndexKeys
+  = lens _logIndexKeys (\ s a -> s{_logIndexKeys = a})
+      . _Default
       . _Coerce
 
 instance FromJSON LogService where
@@ -1433,8 +1431,8 @@ instance ToJSON LogService where
         toJSON LogService{..}
           = object
               (catMaybes
-                 [("name" .=) <$> _lName,
-                  ("indexKeys" .=) <$> _lIndexKeys])
+                 [("name" .=) <$> _logName,
+                  ("indexKeys" .=) <$> _logIndexKeys])
 
 -- | Result returned from \`ListLogServiceSinks\`.
 --

@@ -50,9 +50,9 @@ type DatasetsDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a dataset.
@@ -145,11 +145,11 @@ instance GoogleRequest DatasetsDelete' where
         type Rs DatasetsDelete' = ()
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u DatasetsDelete'{..}
-          = go _ddQuotaUser (Just _ddPrettyPrint) _ddUserIP
-              _ddKey
-              _ddDatasetId
-              _ddOAuthToken
+          = go _ddDatasetId _ddQuotaUser (Just _ddPrettyPrint)
+              _ddUserIP
               _ddFields
+              _ddKey
+              _ddOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

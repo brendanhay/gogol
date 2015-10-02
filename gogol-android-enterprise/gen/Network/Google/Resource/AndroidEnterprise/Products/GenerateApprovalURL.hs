@@ -59,13 +59,13 @@ type ProductsGenerateApprovalURLResource =
          "products" :>
            Capture "productId" Text :>
              "generateApprovalUrl" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "languageCode" Text :>
+               QueryParam "languageCode" Text :>
+                 QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Post '[JSON] ProductsGenerateApprovalURLResponse
 
@@ -197,14 +197,14 @@ instance GoogleRequest ProductsGenerateApprovalURL'
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u ProductsGenerateApprovalURL'{..}
-          = go _pgauQuotaUser _pgauLanguageCode
+          = go _pgauLanguageCode _pgauEnterpriseId
+              _pgauProductId
+              _pgauQuotaUser
               (Just _pgauPrettyPrint)
-              _pgauEnterpriseId
               _pgauUserIP
+              _pgauFields
               _pgauKey
               _pgauOAuthToken
-              _pgauProductId
-              _pgauFields
               (Just AltJSON)
           where go
                   = clientWithRoute

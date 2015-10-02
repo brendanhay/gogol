@@ -52,9 +52,9 @@ type RemarketingListSharesUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] RemarketingListShare :>
                            Put '[JSON] RemarketingListShare
@@ -168,12 +168,12 @@ instance GoogleRequest RemarketingListSharesUpdate'
              RemarketingListShare
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u RemarketingListSharesUpdate'{..}
-          = go _rlsuQuotaUser (Just _rlsuPrettyPrint)
+          = go _rlsuProfileId _rlsuQuotaUser
+              (Just _rlsuPrettyPrint)
               _rlsuUserIP
-              _rlsuProfileId
+              _rlsuFields
               _rlsuKey
               _rlsuOAuthToken
-              _rlsuFields
               (Just AltJSON)
               _rlsuRemarketingListShare
           where go

@@ -50,9 +50,9 @@ type ReferencesetsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] ReferenceSet
 
 -- | Gets a reference set. Implements GlobalAllianceApi.getReferenceSet.
@@ -148,9 +148,9 @@ instance GoogleRequest ReferencesetsGet' where
           = go _rReferenceSetId _rQuotaUser
               (Just _rPrettyPrint)
               _rUserIP
+              _rFields
               _rKey
               _rOAuthToken
-              _rFields
               (Just AltJSON)
           where go
                   = clientWithRoute

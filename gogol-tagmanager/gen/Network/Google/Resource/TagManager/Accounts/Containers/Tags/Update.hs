@@ -55,13 +55,13 @@ type AccountsContainersTagsUpdateResource =
            Capture "containerId" Text :>
              "tags" :>
                Capture "tagId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fingerprint" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                 QueryParam "fingerprint" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] Tag :> Put '[JSON] Tag
 
@@ -204,15 +204,15 @@ instance GoogleRequest AccountsContainersTagsUpdate'
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersTagsUpdate'{..}
-          = go _actucQuotaUser (Just _actucPrettyPrint)
+          = go _actucFingerprint _actucAccountId
               _actucContainerId
-              _actucUserIP
-              _actucFingerprint
-              _actucAccountId
               _actucTagId
+              _actucQuotaUser
+              (Just _actucPrettyPrint)
+              _actucUserIP
+              _actucFields
               _actucKey
               _actucOAuthToken
-              _actucFields
               (Just AltJSON)
               _actucTag
           where go

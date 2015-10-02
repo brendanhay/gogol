@@ -54,22 +54,22 @@ type AdvertiserGroupsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "advertiserGroups" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
+           QueryParams "ids" Int64 :>
+             QueryParam "maxResults" Int32 :>
+               QueryParam "pageToken" Text :>
                  QueryParam "searchString" Text :>
-                   QueryParams "ids" Int64 :>
+                   QueryParam "sortField"
+                     DfareportingAdvertiserGroupsListSortField
+                     :>
                      QueryParam "sortOrder"
                        DfareportingAdvertiserGroupsListSortOrder
                        :>
-                       QueryParam "key" Key :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "sortField"
-                             DfareportingAdvertiserGroupsListSortField
-                             :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "maxResults" Int32 :>
-                                 QueryParam "fields" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] AdvertiserGroupsListResponse
 
@@ -229,17 +229,17 @@ instance GoogleRequest AdvertiserGroupsList' where
              AdvertiserGroupsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdvertiserGroupsList'{..}
-          = go _aglQuotaUser (Just _aglPrettyPrint) _aglUserIP
+          = go _aglIds _aglMaxResults _aglPageToken
               _aglSearchString
-              _aglIds
-              _aglProfileId
-              _aglSortOrder
-              _aglKey
-              _aglPageToken
               _aglSortField
-              _aglOAuthToken
-              _aglMaxResults
+              _aglSortOrder
+              _aglProfileId
+              _aglQuotaUser
+              (Just _aglPrettyPrint)
+              _aglUserIP
               _aglFields
+              _aglKey
+              _aglOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

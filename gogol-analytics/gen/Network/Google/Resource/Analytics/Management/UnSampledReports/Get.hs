@@ -60,9 +60,9 @@ type ManagementUnSampledReportsGetResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "fields" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] UnSampledReport
 
@@ -198,15 +198,15 @@ instance GoogleRequest ManagementUnSampledReportsGet'
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
           ManagementUnSampledReportsGet'{..}
-          = go _musrgQuotaUser (Just _musrgPrettyPrint)
-              _musrgWebPropertyId
-              _musrgUserIP
+          = go _musrgAccountId _musrgWebPropertyId
               _musrgProfileId
-              _musrgAccountId
-              _musrgKey
               _musrgUnSampledReportId
-              _musrgOAuthToken
+              _musrgQuotaUser
+              (Just _musrgPrettyPrint)
+              _musrgUserIP
               _musrgFields
+              _musrgKey
+              _musrgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

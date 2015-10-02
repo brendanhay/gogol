@@ -51,9 +51,9 @@ type EventsResetAllForAllPlayersResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Resets all draft events for all players. This method is only available
@@ -147,9 +147,9 @@ instance GoogleRequest EventsResetAllForAllPlayers'
         requestWithRoute r u EventsResetAllForAllPlayers'{..}
           = go _erafapQuotaUser (Just _erafapPrettyPrint)
               _erafapUserIP
+              _erafapFields
               _erafapKey
               _erafapOAuthToken
-              _erafapFields
               (Just AltJSON)
           where go
                   = clientWithRoute

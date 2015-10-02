@@ -57,9 +57,9 @@ type SnapshotsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified Snapshot resource. Keep in mind that deleting a
@@ -166,12 +166,12 @@ instance GoogleRequest SnapshotsDelete' where
         type Rs SnapshotsDelete' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u SnapshotsDelete'{..}
-          = go _sdSnapshot _sdQuotaUser (Just _sdPrettyPrint)
-              _sdProject
+          = go _sdProject _sdSnapshot _sdQuotaUser
+              (Just _sdPrettyPrint)
               _sdUserIP
+              _sdFields
               _sdKey
               _sdOAuthToken
-              _sdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

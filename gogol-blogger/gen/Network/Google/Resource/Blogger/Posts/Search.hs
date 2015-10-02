@@ -52,15 +52,15 @@ type PostsSearchResource =
        Capture "blogId" Text :>
          "posts" :>
            "search" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "orderBy" BloggerPostsSearchOrderBy :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "q" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "fetchBodies" Bool :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+             QueryParam "fetchBodies" Bool :>
+               QueryParam "orderBy" BloggerPostsSearchOrderBy :>
+                 QueryParam "q" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Get '[JSON] PostList
 
 -- | Search for a post.
@@ -182,15 +182,15 @@ instance GoogleRequest PostsSearch' where
         type Rs PostsSearch' = PostList
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PostsSearch'{..}
-          = go _psQuotaUser (Just _psPrettyPrint)
-              (Just _psOrderBy)
-              _psUserIP
+          = go (Just _psFetchBodies) (Just _psOrderBy)
               _psBlogId
               (Just _psQ)
-              _psKey
-              (Just _psFetchBodies)
-              _psOAuthToken
+              _psQuotaUser
+              (Just _psPrettyPrint)
+              _psUserIP
               _psFields
+              _psKey
+              _psOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

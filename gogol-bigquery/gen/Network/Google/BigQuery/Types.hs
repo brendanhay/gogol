@@ -253,15 +253,15 @@ module Network.Google.BigQuery.Types
     -- * Job
     , Job
     , job
-    , jobJobReference
-    , jobStatus
-    , jobEtag
-    , jobUserEmail
-    , jobKind
-    , jobSelfLink
-    , jobId
-    , jobStatistics
-    , jobConfiguration
+    , jJobReference
+    , jStatus
+    , jEtag
+    , jUserEmail
+    , jKind
+    , jSelfLink
+    , jId
+    , jStatistics
+    , jConfiguration
 
     -- * JobConfigurationLink
     , JobConfigurationLink
@@ -300,7 +300,7 @@ module Network.Google.BigQuery.Types
 
     -- * JSONObject
     , JSONObject
-    , jSONObject
+    , jsonObject
 
     -- * JobConfigurationQueryTableDefinitions
     , JobConfigurationQueryTableDefinitions
@@ -409,7 +409,7 @@ module Network.Google.BigQuery.Types
 
     -- * CSVOptions
     , CSVOptions
-    , cSVOptions
+    , csvOptions
     , coSkipLeadingRows
     , coAllowJaggedRows
     , coAllowQuotedNewlines

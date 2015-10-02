@@ -54,17 +54,17 @@ type ProjectsTopicsGetResource =
      "v1beta2" :>
        "{+topic}" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :> Get '[JSON] Topic
 
 -- | Gets the configuration of a topic.
@@ -214,17 +214,17 @@ instance GoogleRequest ProjectsTopicsGet' where
         type Rs ProjectsTopicsGet' = Topic
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u ProjectsTopicsGet'{..}
-          = go _ptgXgafv _ptgQuotaUser (Just _ptgPrettyPrint)
-              _ptgUploadProtocol
+          = go _ptgXgafv _ptgAccessToken _ptgBearerToken
+              _ptgCallback
               (Just _ptgPp)
-              _ptgAccessToken
               _ptgUploadType
+              _ptgUploadProtocol
               _ptgTopic
-              _ptgBearerToken
+              _ptgQuotaUser
+              (Just _ptgPrettyPrint)
+              _ptgFields
               _ptgKey
               _ptgOAuthToken
-              _ptgFields
-              _ptgCallback
               (Just AltJSON)
           where go
                   = clientWithRoute

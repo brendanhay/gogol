@@ -53,9 +53,9 @@ type EventTagsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing event tag.
@@ -160,12 +160,12 @@ instance GoogleRequest EventTagsDelete' where
         type Rs EventTagsDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u EventTagsDelete'{..}
-          = go _etdQuotaUser (Just _etdPrettyPrint) _etdUserIP
-              _etdProfileId
-              _etdKey
-              _etdId
-              _etdOAuthToken
+          = go _etdProfileId _etdId _etdQuotaUser
+              (Just _etdPrettyPrint)
+              _etdUserIP
               _etdFields
+              _etdKey
+              _etdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -60,17 +60,17 @@ type ProjectsJobsWorkItemsReportStatusResource =
              Capture "jobId" Text :>
                "workItems:reportStatus" :>
                  QueryParam "$.xgafv" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
                          QueryParam "pp" Bool :>
-                           QueryParam "access_token" Text :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "bearer_token" Text :>
-                                 QueryParam "key" Key :>
-                                   QueryParam "oauth_token" OAuthToken :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "callback" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "upload_protocol" Text :>
+                               QueryParam "quotaUser" Text :>
+                                 QueryParam "prettyPrint" Bool :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "key" Key :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            ReqBody '[JSON]
                                              ReportWorkItemStatusRequest
@@ -256,19 +256,19 @@ instance GoogleRequest
         request = requestWithRoute defReq dataflowURL
         requestWithRoute r u
           ProjectsJobsWorkItemsReportStatus'{..}
-          = go _pjwirsXgafv _pjwirsQuotaUser
-              (Just _pjwirsPrettyPrint)
-              _pjwirsJobId
-              _pjwirsUploadProtocol
-              (Just _pjwirsPp)
-              _pjwirsAccessToken
-              _pjwirsUploadType
+          = go _pjwirsXgafv _pjwirsAccessToken
               _pjwirsBearerToken
-              _pjwirsKey
-              _pjwirsProjectId
-              _pjwirsOAuthToken
-              _pjwirsFields
               _pjwirsCallback
+              (Just _pjwirsPp)
+              _pjwirsUploadType
+              _pjwirsUploadProtocol
+              _pjwirsProjectId
+              _pjwirsJobId
+              _pjwirsQuotaUser
+              (Just _pjwirsPrettyPrint)
+              _pjwirsFields
+              _pjwirsKey
+              _pjwirsOAuthToken
               (Just AltJSON)
               _pjwirsReportWorkItemStatusRequest
           where go

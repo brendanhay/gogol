@@ -60,17 +60,17 @@ type BeaconsUpdateResource =
      "v1beta1" :>
        "{+beaconName}" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] Beacon :> Put '[JSON] Beacon
 
@@ -238,17 +238,17 @@ instance GoogleRequest BeaconsUpdate' where
         type Rs BeaconsUpdate' = Beacon
         request = requestWithRoute defReq proximityBeaconURL
         requestWithRoute r u BeaconsUpdate'{..}
-          = go _buXgafv _buQuotaUser (Just _buPrettyPrint)
-              _buUploadProtocol
+          = go _buXgafv _buAccessToken _buBearerToken
+              _buCallback
               (Just _buPp)
-              _buAccessToken
-              _buBeaconName
               _buUploadType
-              _buBearerToken
+              _buUploadProtocol
+              _buBeaconName
+              _buQuotaUser
+              (Just _buPrettyPrint)
+              _buFields
               _buKey
               _buOAuthToken
-              _buFields
-              _buCallback
               (Just AltJSON)
               _buBeacon
           where go

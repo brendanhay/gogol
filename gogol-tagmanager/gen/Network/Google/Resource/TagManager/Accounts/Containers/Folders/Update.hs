@@ -55,13 +55,13 @@ type AccountsContainersFoldersUpdateResource =
            Capture "containerId" Text :>
              "folders" :>
                Capture "folderId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fingerprint" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                 QueryParam "fingerprint" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] Folder :> Put '[JSON] Folder
 
@@ -205,15 +205,14 @@ instance GoogleRequest
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersFoldersUpdate'{..}
-          = go _acfuQuotaUser (Just _acfuPrettyPrint)
-              _acfuContainerId
-              _acfuUserIP
-              _acfuFingerprint
+          = go _acfuFingerprint _acfuAccountId _acfuContainerId
               _acfuFolderId
-              _acfuAccountId
+              _acfuQuotaUser
+              (Just _acfuPrettyPrint)
+              _acfuUserIP
+              _acfuFields
               _acfuKey
               _acfuOAuthToken
-              _acfuFields
               (Just AltJSON)
               _acfuFolder
           where go

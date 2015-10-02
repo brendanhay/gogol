@@ -47,13 +47,13 @@ import           Network.Google.Prelude
 type DictionaryListOfflineMetadataResource =
      "dictionary" :>
        "listOfflineMetadata" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "cpksver" Text :>
+         QueryParam "cpksver" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Metadata
 
 -- | Returns a list of offline dictionary meatadata available
@@ -153,12 +153,12 @@ instance GoogleRequest DictionaryListOfflineMetadata'
         request = requestWithRoute defReq booksURL
         requestWithRoute r u
           DictionaryListOfflineMetadata'{..}
-          = go _dlomQuotaUser (Just _dlomPrettyPrint)
-              (Just _dlomCpksver)
+          = go (Just _dlomCpksver) _dlomQuotaUser
+              (Just _dlomPrettyPrint)
               _dlomUserIP
+              _dlomFields
               _dlomKey
               _dlomOAuthToken
-              _dlomFields
               (Just AltJSON)
           where go
                   = clientWithRoute

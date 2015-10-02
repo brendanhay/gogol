@@ -51,9 +51,9 @@ type WebResourceUpdateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] SiteVerificationWebResourceResource
                          :> Put '[JSON] SiteVerificationWebResourceResource
@@ -163,11 +163,11 @@ instance GoogleRequest WebResourceUpdate' where
              SiteVerificationWebResourceResource
         request = requestWithRoute defReq siteVerificationURL
         requestWithRoute r u WebResourceUpdate'{..}
-          = go _wruQuotaUser (Just _wruPrettyPrint) _wruUserIP
-              _wruKey
-              _wruId
-              _wruOAuthToken
+          = go _wruId _wruQuotaUser (Just _wruPrettyPrint)
+              _wruUserIP
               _wruFields
+              _wruKey
+              _wruOAuthToken
               (Just AltJSON)
               _wruSiteVerificationWebResourceResource
           where go

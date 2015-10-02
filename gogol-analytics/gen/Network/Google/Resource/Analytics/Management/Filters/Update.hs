@@ -55,9 +55,9 @@ type ManagementFiltersUpdateResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Filter :> Put '[JSON] Filter
 
@@ -174,13 +174,12 @@ instance GoogleRequest ManagementFiltersUpdate' where
         type Rs ManagementFiltersUpdate' = Filter
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementFiltersUpdate'{..}
-          = go _mfuQuotaUser (Just _mfuPrettyPrint)
-              _mfuFilterId
+          = go _mfuAccountId _mfuFilterId _mfuQuotaUser
+              (Just _mfuPrettyPrint)
               _mfuUserIP
-              _mfuAccountId
+              _mfuFields
               _mfuKey
               _mfuOAuthToken
-              _mfuFields
               (Just AltJSON)
               _mfuFilter
           where go

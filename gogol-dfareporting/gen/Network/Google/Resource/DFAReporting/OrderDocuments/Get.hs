@@ -56,9 +56,9 @@ type OrderDocumentsGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] OrderDocument
 
@@ -174,13 +174,12 @@ instance GoogleRequest OrderDocumentsGet' where
         type Rs OrderDocumentsGet' = OrderDocument
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u OrderDocumentsGet'{..}
-          = go _odgQuotaUser (Just _odgPrettyPrint) _odgUserIP
-              _odgProfileId
-              _odgKey
-              _odgId
-              _odgProjectId
-              _odgOAuthToken
+          = go _odgProfileId _odgProjectId _odgId _odgQuotaUser
+              (Just _odgPrettyPrint)
+              _odgUserIP
               _odgFields
+              _odgKey
+              _odgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

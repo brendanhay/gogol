@@ -50,9 +50,9 @@ type ApplicationsPlayedResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Indicate that the the currently authenticated user is playing your
@@ -137,9 +137,9 @@ instance GoogleRequest ApplicationsPlayed' where
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u ApplicationsPlayed'{..}
           = go _apQuotaUser (Just _apPrettyPrint) _apUserIP
+              _apFields
               _apKey
               _apOAuthToken
-              _apFields
               (Just AltJSON)
           where go
                   = clientWithRoute

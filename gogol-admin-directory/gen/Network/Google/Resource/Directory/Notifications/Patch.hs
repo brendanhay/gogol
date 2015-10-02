@@ -54,9 +54,9 @@ type NotificationsPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Notification :>
                              Patch '[JSON] Notification
@@ -173,12 +173,12 @@ instance GoogleRequest NotificationsPatch' where
         type Rs NotificationsPatch' = Notification
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u NotificationsPatch'{..}
-          = go _npQuotaUser (Just _npPrettyPrint) _npUserIP
-              _npCustomer
-              _npKey
-              _npNotificationId
-              _npOAuthToken
+          = go _npCustomer _npNotificationId _npQuotaUser
+              (Just _npPrettyPrint)
+              _npUserIP
               _npFields
+              _npKey
+              _npOAuthToken
               (Just AltJSON)
               _npNotification
           where go

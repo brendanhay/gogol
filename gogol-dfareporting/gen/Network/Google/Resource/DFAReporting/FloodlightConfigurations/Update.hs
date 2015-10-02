@@ -52,9 +52,9 @@ type FloodlightConfigurationsUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] FloodlightConfiguration :>
                            Put '[JSON] FloodlightConfiguration
@@ -167,11 +167,12 @@ instance GoogleRequest
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           FloodlightConfigurationsUpdate'{..}
-          = go _fcuQuotaUser (Just _fcuPrettyPrint) _fcuUserIP
-              _fcuProfileId
+          = go _fcuProfileId _fcuQuotaUser
+              (Just _fcuPrettyPrint)
+              _fcuUserIP
+              _fcuFields
               _fcuKey
               _fcuOAuthToken
-              _fcuFields
               (Just AltJSON)
               _fcuFloodlightConfiguration
           where go

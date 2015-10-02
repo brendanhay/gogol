@@ -51,9 +51,9 @@ type BrowsersListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] BrowsersListResponse
 
@@ -147,11 +147,11 @@ instance GoogleRequest BrowsersList' where
         type Rs BrowsersList' = BrowsersListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u BrowsersList'{..}
-          = go _blQuotaUser (Just _blPrettyPrint) _blUserIP
-              _blProfileId
+          = go _blProfileId _blQuotaUser (Just _blPrettyPrint)
+              _blUserIP
+              _blFields
               _blKey
               _blOAuthToken
-              _blFields
               (Just AltJSON)
           where go
                   = clientWithRoute

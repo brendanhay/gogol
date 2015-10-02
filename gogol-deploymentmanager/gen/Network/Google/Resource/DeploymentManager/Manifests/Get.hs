@@ -56,9 +56,9 @@ type ManifestsGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Manifest
 
 -- | Gets information about a specific manifest.
@@ -172,13 +172,13 @@ instance GoogleRequest ManifestsGet' where
         request
           = requestWithRoute defReq deploymentManagerURL
         requestWithRoute r u ManifestsGet'{..}
-          = go _mgQuotaUser (Just _mgPrettyPrint) _mgProject
+          = go _mgProject _mgDeployment _mgManifest
+              _mgQuotaUser
+              (Just _mgPrettyPrint)
               _mgUserIP
-              _mgKey
-              _mgManifest
-              _mgOAuthToken
               _mgFields
-              _mgDeployment
+              _mgKey
+              _mgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

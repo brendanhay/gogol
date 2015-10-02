@@ -52,9 +52,9 @@ type EditsCommitResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Post '[JSON] AppEdit
 
 -- | Commits\/applies the changes made in this edit back to the app.
@@ -158,13 +158,12 @@ instance GoogleRequest EditsCommit' where
         type Rs EditsCommit' = AppEdit
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u EditsCommit'{..}
-          = go _ecQuotaUser (Just _ecPrettyPrint)
-              _ecPackageName
+          = go _ecPackageName _ecEditId _ecQuotaUser
+              (Just _ecPrettyPrint)
               _ecUserIP
+              _ecFields
               _ecKey
               _ecOAuthToken
-              _ecEditId
-              _ecFields
               (Just AltJSON)
           where go
                   = clientWithRoute

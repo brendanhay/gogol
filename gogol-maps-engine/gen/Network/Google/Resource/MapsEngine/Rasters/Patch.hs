@@ -51,9 +51,9 @@ type RastersPatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Raster :> Patch '[JSON] ()
 
@@ -154,10 +154,10 @@ instance GoogleRequest RastersPatch' where
         type Rs RastersPatch' = ()
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u RastersPatch'{..}
-          = go _rQuotaUser (Just _rPrettyPrint) _rUserIP _rKey
-              _rId
-              _rOAuthToken
+          = go _rId _rQuotaUser (Just _rPrettyPrint) _rUserIP
               _rFields
+              _rKey
+              _rOAuthToken
               (Just AltJSON)
               _rRaster
           where go

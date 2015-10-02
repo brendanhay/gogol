@@ -51,9 +51,9 @@ type WorkerListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] WorkerListResponse
 
@@ -146,11 +146,11 @@ instance GoogleRequest WorkerList' where
         type Rs WorkerList' = WorkerListResponse
         request = requestWithRoute defReq mapsCoordinateURL
         requestWithRoute r u WorkerList'{..}
-          = go _wlQuotaUser (Just _wlPrettyPrint) _wlUserIP
-              _wlTeamId
+          = go _wlTeamId _wlQuotaUser (Just _wlPrettyPrint)
+              _wlUserIP
+              _wlFields
               _wlKey
               _wlOAuthToken
-              _wlFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy WorkerListResource)

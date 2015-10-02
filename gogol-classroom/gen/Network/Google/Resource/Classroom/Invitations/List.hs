@@ -62,21 +62,21 @@ type InvitationsListResource =
      "v1" :>
        "invitations" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "courseId" Text :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "userId" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "pageSize" Int32 :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "callback" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
+                 QueryParam "courseId" Text :>
+                   QueryParam "pageSize" Int32 :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "userId" Text :>
+                               QueryParam "quotaUser" Text :>
+                                 QueryParam "prettyPrint" Bool :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "key" Key :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] ListInvitationsResponse
 
@@ -265,20 +265,20 @@ instance GoogleRequest InvitationsList' where
         type Rs InvitationsList' = ListInvitationsResponse
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u InvitationsList'{..}
-          = go _ilXgafv _ilQuotaUser (Just _ilPrettyPrint)
-              _ilUploadProtocol
-              (Just _ilPp)
-              _ilCourseId
-              _ilAccessToken
-              _ilUploadType
-              _ilUserId
-              _ilBearerToken
-              _ilKey
-              _ilPageToken
-              _ilOAuthToken
-              _ilPageSize
-              _ilFields
+          = go _ilXgafv _ilAccessToken _ilBearerToken
               _ilCallback
+              _ilCourseId
+              _ilPageSize
+              _ilPageToken
+              (Just _ilPp)
+              _ilUploadType
+              _ilUploadProtocol
+              _ilUserId
+              _ilQuotaUser
+              (Just _ilPrettyPrint)
+              _ilFields
+              _ilKey
+              _ilOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

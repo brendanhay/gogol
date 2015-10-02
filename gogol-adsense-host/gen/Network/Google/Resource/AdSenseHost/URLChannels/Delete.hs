@@ -26,7 +26,7 @@ module Network.Google.Resource.AdSenseHost.URLChannels.Delete
       URLChannelsDeleteResource
 
     -- * Creating a Request
-    , uRLChannelsDelete'
+    , urlChannelsDelete'
     , URLChannelsDelete'
 
     -- * Request Lenses
@@ -53,14 +53,14 @@ type URLChannelsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] URLChannel
 
 -- | Delete a URL channel from the host AdSense account.
 --
--- /See:/ 'uRLChannelsDelete'' smart constructor.
+-- /See:/ 'urlChannelsDelete'' smart constructor.
 data URLChannelsDelete' = URLChannelsDelete'
     { _ucdQuotaUser    :: !(Maybe Text)
     , _ucdPrettyPrint  :: !Bool
@@ -91,11 +91,11 @@ data URLChannelsDelete' = URLChannelsDelete'
 -- * 'ucdOAuthToken'
 --
 -- * 'ucdFields'
-uRLChannelsDelete'
+urlChannelsDelete'
     :: Text -- ^ 'urlChannelId'
     -> Text -- ^ 'adClientId'
     -> URLChannelsDelete'
-uRLChannelsDelete' pUcdURLChannelId_ pUcdAdClientId_ =
+urlChannelsDelete' pUcdURLChannelId_ pUcdAdClientId_ =
     URLChannelsDelete'
     { _ucdQuotaUser = Nothing
     , _ucdPrettyPrint = True
@@ -163,13 +163,12 @@ instance GoogleRequest URLChannelsDelete' where
         type Rs URLChannelsDelete' = URLChannel
         request = requestWithRoute defReq adSenseHostURL
         requestWithRoute r u URLChannelsDelete'{..}
-          = go _ucdQuotaUser (Just _ucdPrettyPrint)
-              _ucdURLChannelId
+          = go _ucdAdClientId _ucdURLChannelId _ucdQuotaUser
+              (Just _ucdPrettyPrint)
               _ucdUserIP
-              _ucdAdClientId
+              _ucdFields
               _ucdKey
               _ucdOAuthToken
-              _ucdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

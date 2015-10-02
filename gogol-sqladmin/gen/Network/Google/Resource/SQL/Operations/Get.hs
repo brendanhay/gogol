@@ -53,9 +53,9 @@ type OperationsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Operation
 
 -- | Retrieves an instance operation that has been performed on an instance.
@@ -158,12 +158,12 @@ instance GoogleRequest OperationsGet' where
         type Rs OperationsGet' = Operation
         request = requestWithRoute defReq sQLAdminURL
         requestWithRoute r u OperationsGet'{..}
-          = go _ogQuotaUser (Just _ogPrettyPrint) _ogProject
-              _ogOperation
+          = go _ogProject _ogOperation _ogQuotaUser
+              (Just _ogPrettyPrint)
               _ogUserIP
+              _ogFields
               _ogKey
               _ogOAuthToken
-              _ogFields
               (Just AltJSON)
           where go
                   = clientWithRoute

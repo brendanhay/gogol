@@ -54,9 +54,9 @@ type SubscriptionsSuspendResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Post '[JSON] Subscription
 
 -- | Suspends an active subscription
@@ -160,12 +160,12 @@ instance GoogleRequest SubscriptionsSuspend' where
         type Rs SubscriptionsSuspend' = Subscription
         request = requestWithRoute defReq appsResellerURL
         requestWithRoute r u SubscriptionsSuspend'{..}
-          = go _ssQuotaUser (Just _ssPrettyPrint) _ssUserIP
-              _ssCustomerId
+          = go _ssCustomerId _ssSubscriptionId _ssQuotaUser
+              (Just _ssPrettyPrint)
+              _ssUserIP
+              _ssFields
               _ssKey
               _ssOAuthToken
-              _ssSubscriptionId
-              _ssFields
               (Just AltJSON)
           where go
                   = clientWithRoute

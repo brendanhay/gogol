@@ -53,9 +53,9 @@ type TargetHTTPProxiesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] TargetHTTPProxy :>
                            Post '[JSON] Operation
@@ -170,12 +170,12 @@ instance GoogleRequest TargetHTTPProxiesInsert' where
         type Rs TargetHTTPProxiesInsert' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u TargetHTTPProxiesInsert'{..}
-          = go _thttppiQuotaUser (Just _thttppiPrettyPrint)
-              _thttppiProject
+          = go _thttppiProject _thttppiQuotaUser
+              (Just _thttppiPrettyPrint)
               _thttppiUserIP
+              _thttppiFields
               _thttppiKey
               _thttppiOAuthToken
-              _thttppiFields
               (Just AltJSON)
               _thttppiTargetHTTPProxy
           where go

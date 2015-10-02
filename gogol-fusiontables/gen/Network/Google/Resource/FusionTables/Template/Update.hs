@@ -54,9 +54,9 @@ type TemplateUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Template :> Put '[JSON] Template
 
@@ -174,13 +174,12 @@ instance GoogleRequest TemplateUpdate' where
         type Rs TemplateUpdate' = Template
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TemplateUpdate'{..}
-          = go _temQuotaUser (Just _temPrettyPrint)
-              _temTemplateId
+          = go _temTableId _temTemplateId _temQuotaUser
+              (Just _temPrettyPrint)
               _temUserIP
+              _temFields
               _temKey
               _temOAuthToken
-              _temTableId
-              _temFields
               (Just AltJSON)
               _temTemplate
           where go

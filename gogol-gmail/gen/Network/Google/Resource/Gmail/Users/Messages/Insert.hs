@@ -53,16 +53,16 @@ import           Network.Google.Prelude
 type UsersMessagesInsertResource =
      Capture "userId" Text :>
        "messages" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "deleted" Bool :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "internalDateSource"
-                       GmailUsersMessagesInsertInternalDateSource
-                       :>
-                       QueryParam "fields" Text :>
+         QueryParam "deleted" Bool :>
+           QueryParam "internalDateSource"
+             GmailUsersMessagesInsertInternalDateSource
+             :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            MultipartRelated '[JSON] Message Body :>
                              Post '[JSON] Message
@@ -202,14 +202,15 @@ instance GoogleRequest UsersMessagesInsert' where
         type Rs UsersMessagesInsert' = Message
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersMessagesInsert'{..}
-          = go _umiQuotaUser (Just _umiPrettyPrint) _umiUserIP
-              _umiUserId
+          = go (Just _umiDeleted) (Just _umiInternalDateSource)
               _umiMedia
-              _umiKey
-              (Just _umiDeleted)
-              _umiOAuthToken
-              (Just _umiInternalDateSource)
+              _umiUserId
+              _umiQuotaUser
+              (Just _umiPrettyPrint)
+              _umiUserIP
               _umiFields
+              _umiKey
+              _umiOAuthToken
               (Just AltJSON)
               _umiMessage
           where go

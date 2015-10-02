@@ -53,18 +53,18 @@ import           Network.Google.Prelude
 type ChangesWatchResource =
      "changes" :>
        "watch" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "includeSubscribed" Bool :>
-                 QueryParam "startChangeId" Int64 :>
-                   QueryParam "key" Key :>
-                     QueryParam "spaces" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Int32 :>
-                             QueryParam "includeDeleted" Bool :>
-                               QueryParam "fields" Text :>
+         QueryParam "includeDeleted" Bool :>
+           QueryParam "includeSubscribed" Bool :>
+             QueryParam "maxResults" Int32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "spaces" Text :>
+                   QueryParam "startChangeId" Int64 :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] Channel :>
                                      Post '[JSON] Channel
@@ -218,16 +218,18 @@ instance GoogleRequest ChangesWatch' where
         type Rs ChangesWatch' = Channel
         request = requestWithRoute defReq driveURL
         requestWithRoute r u ChangesWatch'{..}
-          = go _cwQuotaUser (Just _cwPrettyPrint) _cwUserIP
+          = go (Just _cwIncludeDeleted)
               (Just _cwIncludeSubscribed)
-              _cwStartChangeId
-              _cwKey
-              _cwSpaces
-              _cwPageToken
-              _cwOAuthToken
               (Just _cwMaxResults)
-              (Just _cwIncludeDeleted)
+              _cwPageToken
+              _cwSpaces
+              _cwStartChangeId
+              _cwQuotaUser
+              (Just _cwPrettyPrint)
+              _cwUserIP
               _cwFields
+              _cwKey
+              _cwOAuthToken
               (Just AltJSON)
               _cwChannel
           where go

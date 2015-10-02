@@ -61,17 +61,17 @@ type InvitationsAcceptResource =
        "invitations" :>
          "{id}:accept" :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
+             QueryParam "access_token" Text :>
+               QueryParam "bearer_token" Text :>
+                 QueryParam "callback" Text :>
                    QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Post '[JSON] Empty
 
@@ -225,17 +225,17 @@ instance GoogleRequest InvitationsAccept' where
         type Rs InvitationsAccept' = Empty
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u InvitationsAccept'{..}
-          = go _iaXgafv _iaQuotaUser (Just _iaPrettyPrint)
-              _iaUploadProtocol
-              (Just _iaPp)
-              _iaAccessToken
-              _iaUploadType
-              _iaBearerToken
-              _iaKey
-              _iaId
-              _iaOAuthToken
-              _iaFields
+          = go _iaXgafv _iaAccessToken _iaBearerToken
               _iaCallback
+              (Just _iaPp)
+              _iaUploadType
+              _iaUploadProtocol
+              _iaId
+              _iaQuotaUser
+              (Just _iaPrettyPrint)
+              _iaFields
+              _iaKey
+              _iaOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

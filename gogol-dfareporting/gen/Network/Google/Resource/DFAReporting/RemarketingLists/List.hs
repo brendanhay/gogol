@@ -56,24 +56,24 @@ type RemarketingListsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "remarketingLists" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "floodlightActivityId" Int64 :>
-                   QueryParam "advertiserId" Int64 :>
-                     QueryParam "sortOrder"
-                       DfareportingRemarketingListsListSortOrder
+           QueryParam "active" Bool :>
+             QueryParam "floodlightActivityId" Int64 :>
+               QueryParam "maxResults" Int32 :>
+                 QueryParam "name" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "sortField"
+                       DfareportingRemarketingListsListSortField
                        :>
-                       QueryParam "active" Bool :>
-                         QueryParam "key" Key :>
-                           QueryParam "name" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "sortField"
-                                 DfareportingRemarketingListsListSortField
-                                 :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "maxResults" Int32 :>
-                                     QueryParam "fields" Text :>
+                       QueryParam "sortOrder"
+                         DfareportingRemarketingListsListSortOrder
+                         :>
+                         QueryParam "advertiserId" Int64 :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "userIp" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON]
                                            RemarketingListsListResponse
@@ -254,19 +254,20 @@ instance GoogleRequest RemarketingListsList' where
              RemarketingListsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u RemarketingListsList'{..}
-          = go _rllQuotaUser (Just _rllPrettyPrint) _rllUserIP
-              _rllFloodlightActivityId
-              (Just _rllAdvertiserId)
-              _rllProfileId
-              _rllSortOrder
-              _rllActive
-              _rllKey
+          = go _rllActive _rllFloodlightActivityId
+              _rllMaxResults
               _rllName
               _rllPageToken
               _rllSortField
-              _rllOAuthToken
-              _rllMaxResults
+              _rllSortOrder
+              _rllProfileId
+              (Just _rllAdvertiserId)
+              _rllQuotaUser
+              (Just _rllPrettyPrint)
+              _rllUserIP
               _rllFields
+              _rllKey
+              _rllOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -52,9 +52,9 @@ type AccountsPermissionsCreateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] UserAccess :> Post '[JSON] UserAccess
 
@@ -163,11 +163,12 @@ instance GoogleRequest AccountsPermissionsCreate'
         type Rs AccountsPermissionsCreate' = UserAccess
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u AccountsPermissionsCreate'{..}
-          = go _apcQuotaUser (Just _apcPrettyPrint) _apcUserIP
-              _apcAccountId
+          = go _apcAccountId _apcQuotaUser
+              (Just _apcPrettyPrint)
+              _apcUserIP
+              _apcFields
               _apcKey
               _apcOAuthToken
-              _apcFields
               (Just AltJSON)
               _apcUserAccess
           where go

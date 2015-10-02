@@ -53,9 +53,9 @@ type TokensGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Token
 
 -- | Get information about an access token issued by a user.
@@ -159,12 +159,12 @@ instance GoogleRequest TokensGet' where
         type Rs TokensGet' = Token
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u TokensGet'{..}
-          = go _tgClientId _tgQuotaUser (Just _tgPrettyPrint)
+          = go _tgUserKey _tgClientId _tgQuotaUser
+              (Just _tgPrettyPrint)
               _tgUserIP
+              _tgFields
               _tgKey
               _tgOAuthToken
-              _tgUserKey
-              _tgFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TokensGetResource)

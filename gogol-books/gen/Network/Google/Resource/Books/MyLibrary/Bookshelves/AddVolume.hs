@@ -52,17 +52,17 @@ type MyLibraryBookshelvesAddVolumeResource =
        "bookshelves" :>
          Capture "shelf" Text :>
            "addVolume" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "reason"
-                     BooksMyLibraryBookshelvesAddVolumeReason
-                     :>
-                     QueryParam "key" Key :>
-                       QueryParam "volumeId" Text :>
-                         QueryParam "source" Text :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+             QueryParam "reason"
+               BooksMyLibraryBookshelvesAddVolumeReason
+               :>
+               QueryParam "source" Text :>
+                 QueryParam "volumeId" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Adds a volume to a bookshelf.
@@ -191,15 +191,14 @@ instance GoogleRequest MyLibraryBookshelvesAddVolume'
         request = requestWithRoute defReq booksURL
         requestWithRoute r u
           MyLibraryBookshelvesAddVolume'{..}
-          = go _mlbavQuotaUser (Just _mlbavPrettyPrint)
-              _mlbavUserIP
-              _mlbavReason
-              _mlbavShelf
-              _mlbavKey
+          = go _mlbavReason _mlbavSource _mlbavShelf
               (Just _mlbavVolumeId)
-              _mlbavSource
-              _mlbavOAuthToken
+              _mlbavQuotaUser
+              (Just _mlbavPrettyPrint)
+              _mlbavUserIP
               _mlbavFields
+              _mlbavKey
+              _mlbavOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

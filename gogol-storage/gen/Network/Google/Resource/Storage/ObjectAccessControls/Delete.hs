@@ -55,13 +55,13 @@ type ObjectAccessControlsDeleteResource =
            Capture "object" Text :>
              "acl" :>
                Capture "entity" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "generation" Word64 :>
-                             QueryParam "fields" Text :>
+                 QueryParam "generation" Word64 :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Permanently deletes the ACL entry for the specified entity on the
@@ -193,15 +193,14 @@ instance GoogleRequest ObjectAccessControlsDelete'
         type Rs ObjectAccessControlsDelete' = ()
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectAccessControlsDelete'{..}
-          = go _oacdQuotaUser (Just _oacdPrettyPrint)
-              _oacdUserIP
-              _oacdBucket
-              _oacdKey
-              _oacdObject
-              _oacdOAuthToken
+          = go _oacdGeneration _oacdBucket _oacdObject
               _oacdEntity
-              _oacdGeneration
+              _oacdQuotaUser
+              (Just _oacdPrettyPrint)
+              _oacdUserIP
               _oacdFields
+              _oacdKey
+              _oacdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

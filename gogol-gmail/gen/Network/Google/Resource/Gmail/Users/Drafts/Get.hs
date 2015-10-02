@@ -50,13 +50,13 @@ type UsersDraftsGetResource =
      Capture "userId" Text :>
        "drafts" :>
          Capture "id" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "format" GmailUsersDraftsGetFormat :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "format" GmailUsersDraftsGetFormat :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Draft
 
 -- | Gets the specified draft.
@@ -171,13 +171,13 @@ instance GoogleRequest UsersDraftsGet' where
         type Rs UsersDraftsGet' = Draft
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersDraftsGet'{..}
-          = go _udgQuotaUser (Just _udgPrettyPrint) _udgUserIP
-              (Just _udgFormat)
-              _udgUserId
-              _udgKey
-              _udgId
-              _udgOAuthToken
+          = go (Just _udgFormat) _udgUserId _udgId
+              _udgQuotaUser
+              (Just _udgPrettyPrint)
+              _udgUserIP
               _udgFields
+              _udgKey
+              _udgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -51,13 +51,13 @@ type CirclesRemovePeopleResource =
        Capture "circleId" Text :>
          "people" :>
            QueryParams "email" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParams "userId" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+             QueryParams "userId" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Remove a person from a circle.
@@ -170,13 +170,12 @@ instance GoogleRequest CirclesRemovePeople' where
         type Rs CirclesRemovePeople' = ()
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u CirclesRemovePeople'{..}
-          = go _crpEmail _crpQuotaUser (Just _crpPrettyPrint)
+          = go _crpEmail _crpUserId _crpCircleId _crpQuotaUser
+              (Just _crpPrettyPrint)
               _crpUserIP
-              _crpUserId
-              _crpKey
-              _crpCircleId
-              _crpOAuthToken
               _crpFields
+              _crpKey
+              _crpOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

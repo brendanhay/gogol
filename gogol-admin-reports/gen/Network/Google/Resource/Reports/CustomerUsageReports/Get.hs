@@ -52,15 +52,15 @@ type CustomerUsageReportsGetResource =
      "usage" :>
        "dates" :>
          Capture "date" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "customerId" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "parameters" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+           QueryParam "customerId" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "parameters" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] UsageReports
 
@@ -190,15 +190,14 @@ instance GoogleRequest CustomerUsageReportsGet' where
         type Rs CustomerUsageReportsGet' = UsageReports
         request = requestWithRoute defReq adminReportsURL
         requestWithRoute r u CustomerUsageReportsGet'{..}
-          = go _curgQuotaUser (Just _curgPrettyPrint)
-              _curgUserIP
-              _curgCustomerId
+          = go _curgCustomerId _curgPageToken _curgParameters
               _curgDate
-              _curgKey
-              _curgParameters
-              _curgPageToken
-              _curgOAuthToken
+              _curgQuotaUser
+              (Just _curgPrettyPrint)
+              _curgUserIP
               _curgFields
+              _curgKey
+              _curgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

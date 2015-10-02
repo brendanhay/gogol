@@ -52,9 +52,9 @@ type AccountUserProfilesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] AccountUserProfile :>
                            Post '[JSON] AccountUserProfile
@@ -167,12 +167,12 @@ instance GoogleRequest AccountUserProfilesInsert'
              AccountUserProfile
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AccountUserProfilesInsert'{..}
-          = go _aupiQuotaUser (Just _aupiPrettyPrint)
+          = go _aupiProfileId _aupiQuotaUser
+              (Just _aupiPrettyPrint)
               _aupiUserIP
-              _aupiProfileId
+              _aupiFields
               _aupiKey
               _aupiOAuthToken
-              _aupiFields
               (Just AltJSON)
               _aupiAccountUserProfile
           where go

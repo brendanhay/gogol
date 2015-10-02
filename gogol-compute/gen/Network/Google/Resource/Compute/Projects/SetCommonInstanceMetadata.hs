@@ -52,9 +52,9 @@ type ProjectsSetCommonInstanceMetadataResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Metadata :> Post '[JSON] Operation
 
@@ -168,12 +168,12 @@ instance GoogleRequest
         request = requestWithRoute defReq computeURL
         requestWithRoute r u
           ProjectsSetCommonInstanceMetadata'{..}
-          = go _pscimQuotaUser (Just _pscimPrettyPrint)
-              _pscimProject
+          = go _pscimProject _pscimQuotaUser
+              (Just _pscimPrettyPrint)
               _pscimUserIP
+              _pscimFields
               _pscimKey
               _pscimOAuthToken
-              _pscimFields
               (Just AltJSON)
               _pscimMetadata
           where go

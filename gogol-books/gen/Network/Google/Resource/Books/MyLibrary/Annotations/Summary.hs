@@ -49,14 +49,14 @@ type MyLibraryAnnotationsSummaryResource =
      "mylibrary" :>
        "annotations" :>
          "summary" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParams "layerIds" Text :>
-                     QueryParam "volumeId" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+           QueryParams "layerIds" Text :>
+             QueryParam "volumeId" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Post '[JSON] AnnotationsSummary
 
@@ -167,13 +167,13 @@ instance GoogleRequest MyLibraryAnnotationsSummary'
              AnnotationsSummary
         request = requestWithRoute defReq booksURL
         requestWithRoute r u MyLibraryAnnotationsSummary'{..}
-          = go _mlasQuotaUser (Just _mlasPrettyPrint)
+          = go (Just _mlasLayerIds) (Just _mlasVolumeId)
+              _mlasQuotaUser
+              (Just _mlasPrettyPrint)
               _mlasUserIP
-              _mlasKey
-              (Just _mlasLayerIds)
-              (Just _mlasVolumeId)
-              _mlasOAuthToken
               _mlasFields
+              _mlasKey
+              _mlasOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

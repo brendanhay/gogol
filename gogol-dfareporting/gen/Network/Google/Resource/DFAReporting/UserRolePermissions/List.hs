@@ -49,13 +49,13 @@ type UserRolePermissionsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "userRolePermissions" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParams "ids" Int64 :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParams "ids" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] UserRolePermissionsListResponse
 
@@ -163,13 +163,12 @@ instance GoogleRequest UserRolePermissionsList' where
              UserRolePermissionsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u UserRolePermissionsList'{..}
-          = go _urplQuotaUser (Just _urplPrettyPrint)
+          = go _urplIds _urplProfileId _urplQuotaUser
+              (Just _urplPrettyPrint)
               _urplUserIP
-              _urplIds
-              _urplProfileId
+              _urplFields
               _urplKey
               _urplOAuthToken
-              _urplFields
               (Just AltJSON)
           where go
                   = clientWithRoute

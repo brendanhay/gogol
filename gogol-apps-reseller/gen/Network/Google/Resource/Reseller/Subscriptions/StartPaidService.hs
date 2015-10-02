@@ -54,9 +54,9 @@ type SubscriptionsStartPaidServiceResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Post '[JSON] Subscription
 
 -- | Starts paid service of a trial subscription
@@ -168,13 +168,13 @@ instance GoogleRequest SubscriptionsStartPaidService'
         request = requestWithRoute defReq appsResellerURL
         requestWithRoute r u
           SubscriptionsStartPaidService'{..}
-          = go _sspsQuotaUser (Just _sspsPrettyPrint)
+          = go _sspsCustomerId _sspsSubscriptionId
+              _sspsQuotaUser
+              (Just _sspsPrettyPrint)
               _sspsUserIP
-              _sspsCustomerId
+              _sspsFields
               _sspsKey
               _sspsOAuthToken
-              _sspsSubscriptionId
-              _sspsFields
               (Just AltJSON)
           where go
                   = clientWithRoute

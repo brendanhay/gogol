@@ -57,9 +57,9 @@ type AccountsAdUnitsGetAdCodeResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Get '[JSON] AdCode
 
 -- | Get ad code for the specified ad unit.
@@ -181,14 +181,14 @@ instance GoogleRequest AccountsAdUnitsGetAdCode'
         type Rs AccountsAdUnitsGetAdCode' = AdCode
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u AccountsAdUnitsGetAdCode'{..}
-          = go _aaugacQuotaUser (Just _aaugacPrettyPrint)
-              _aaugacUserIP
+          = go _aaugacAccountId _aaugacAdClientId
               _aaugacAdUnitId
-              _aaugacAdClientId
-              _aaugacAccountId
+              _aaugacQuotaUser
+              (Just _aaugacPrettyPrint)
+              _aaugacUserIP
+              _aaugacFields
               _aaugacKey
               _aaugacOAuthToken
-              _aaugacFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -53,9 +53,9 @@ type EditsListingsListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] ListingsListResponse
 
@@ -164,13 +164,12 @@ instance GoogleRequest EditsListingsList' where
         type Rs EditsListingsList' = ListingsListResponse
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u EditsListingsList'{..}
-          = go _ellQuotaUser (Just _ellPrettyPrint)
-              _ellPackageName
+          = go _ellPackageName _ellEditId _ellQuotaUser
+              (Just _ellPrettyPrint)
               _ellUserIP
+              _ellFields
               _ellKey
               _ellOAuthToken
-              _ellEditId
-              _ellFields
               (Just AltJSON)
           where go
                   = clientWithRoute

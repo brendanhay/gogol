@@ -52,13 +52,13 @@ type AchievementsIncrementResource =
        Capture "achievementId" Text :>
          "increment" :>
            QueryParam "requestId" Int64 :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "stepsToIncrement" Int32 :>
-                         QueryParam "fields" Text :>
+             QueryParam "stepsToIncrement" Int32 :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Post '[JSON] AchievementIncrementResponse
 
@@ -177,13 +177,14 @@ instance GoogleRequest AchievementsIncrement' where
              AchievementIncrementResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u AchievementsIncrement'{..}
-          = go _aiRequestId _aiQuotaUser (Just _aiPrettyPrint)
-              _aiAchievementId
+          = go _aiRequestId _aiAchievementId
+              (Just _aiStepsToIncrement)
+              _aiQuotaUser
+              (Just _aiPrettyPrint)
               _aiUserIP
+              _aiFields
               _aiKey
               _aiOAuthToken
-              (Just _aiStepsToIncrement)
-              _aiFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -26,7 +26,7 @@ module Network.Google.Resource.Compute.VPNTunnels.Delete
       VPNTunnelsDeleteResource
 
     -- * Creating a Request
-    , vPNTunnelsDelete'
+    , vpnTunnelsDelete'
     , VPNTunnelsDelete'
 
     -- * Request Lenses
@@ -55,14 +55,14 @@ type VPNTunnelsDeleteResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified VpnTunnel resource.
 --
--- /See:/ 'vPNTunnelsDelete'' smart constructor.
+-- /See:/ 'vpnTunnelsDelete'' smart constructor.
 data VPNTunnelsDelete' = VPNTunnelsDelete'
     { _vtdQuotaUser   :: !(Maybe Text)
     , _vtdPrettyPrint :: !Bool
@@ -96,12 +96,12 @@ data VPNTunnelsDelete' = VPNTunnelsDelete'
 -- * 'vtdOAuthToken'
 --
 -- * 'vtdFields'
-vPNTunnelsDelete'
+vpnTunnelsDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'vpnTunnel'
     -> Text -- ^ 'region'
     -> VPNTunnelsDelete'
-vPNTunnelsDelete' pVtdProject_ pVtdVPNTunnel_ pVtdRegion_ =
+vpnTunnelsDelete' pVtdProject_ pVtdVPNTunnel_ pVtdRegion_ =
     VPNTunnelsDelete'
     { _vtdQuotaUser = Nothing
     , _vtdPrettyPrint = True
@@ -173,13 +173,13 @@ instance GoogleRequest VPNTunnelsDelete' where
         type Rs VPNTunnelsDelete' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u VPNTunnelsDelete'{..}
-          = go _vtdQuotaUser (Just _vtdPrettyPrint) _vtdProject
+          = go _vtdProject _vtdRegion _vtdVPNTunnel
+              _vtdQuotaUser
+              (Just _vtdPrettyPrint)
               _vtdUserIP
-              _vtdKey
-              _vtdVPNTunnel
-              _vtdRegion
-              _vtdOAuthToken
               _vtdFields
+              _vtdKey
+              _vtdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

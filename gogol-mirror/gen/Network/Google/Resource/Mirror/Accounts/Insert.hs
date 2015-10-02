@@ -55,9 +55,9 @@ type AccountsInsertResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Account :> Post '[JSON] Account
 
@@ -183,13 +183,13 @@ instance GoogleRequest AccountsInsert' where
         type Rs AccountsInsert' = Account
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u AccountsInsert'{..}
-          = go _aiQuotaUser (Just _aiPrettyPrint) _aiUserIP
-              _aiAccountName
-              _aiKey
-              _aiUserToken
-              _aiOAuthToken
-              _aiAccountType
+          = go _aiUserToken _aiAccountType _aiAccountName
+              _aiQuotaUser
+              (Just _aiPrettyPrint)
+              _aiUserIP
               _aiFields
+              _aiKey
+              _aiOAuthToken
               (Just AltJSON)
               _aiAccount
           where go

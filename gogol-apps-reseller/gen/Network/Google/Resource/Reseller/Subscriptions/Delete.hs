@@ -51,15 +51,15 @@ type SubscriptionsDeleteResource =
        Capture "customerId" Text :>
          "subscriptions" :>
            Capture "subscriptionId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "deletionType"
-                     ResellerSubscriptionsDeleteDeletionType
-                     :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+             QueryParam "deletionType"
+               ResellerSubscriptionsDeleteDeletionType
+               :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Cancels\/Downgrades a subscription.
@@ -174,13 +174,14 @@ instance GoogleRequest SubscriptionsDelete' where
         type Rs SubscriptionsDelete' = ()
         request = requestWithRoute defReq appsResellerURL
         requestWithRoute r u SubscriptionsDelete'{..}
-          = go _sdQuotaUser (Just _sdPrettyPrint) _sdUserIP
-              _sdCustomerId
+          = go _sdCustomerId _sdSubscriptionId
               (Just _sdDeletionType)
+              _sdQuotaUser
+              (Just _sdPrettyPrint)
+              _sdUserIP
+              _sdFields
               _sdKey
               _sdOAuthToken
-              _sdSubscriptionId
-              _sdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

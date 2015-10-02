@@ -51,15 +51,15 @@ type ScoresSubmitResource =
      "leaderboards" :>
        Capture "leaderboardId" Text :>
          "scores" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "scoreTag" Text :>
-                 QueryParam "score" Int64 :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "language" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+           QueryParam "language" Text :>
+             QueryParam "scoreTag" Text :>
+               QueryParam "score" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Post '[JSON] PlayerScoreResponse
 
@@ -187,14 +187,14 @@ instance GoogleRequest ScoresSubmit' where
         type Rs ScoresSubmit' = PlayerScoreResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u ScoresSubmit'{..}
-          = go _sQuotaUser (Just _sPrettyPrint) _sScoreTag
+          = go _sLanguage _sScoreTag _sLeaderboardId
               (Just _sScore)
+              _sQuotaUser
+              (Just _sPrettyPrint)
               _sUserIP
-              _sLeaderboardId
-              _sKey
-              _sLanguage
-              _sOAuthToken
               _sFields
+              _sKey
+              _sOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

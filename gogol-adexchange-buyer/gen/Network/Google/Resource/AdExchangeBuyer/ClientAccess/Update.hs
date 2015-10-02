@@ -49,13 +49,13 @@ import           Network.Google.Prelude
 type ClientAccessUpdateResource =
      "clientAccess" :>
        Capture "clientAccountId" Int64 :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "sponsorAccountId" Int32 :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+         QueryParam "sponsorAccountId" Int32 :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] ClientAccessCapabilities :>
                            Put '[JSON] ClientAccessCapabilities
@@ -174,12 +174,13 @@ instance GoogleRequest ClientAccessUpdate' where
              ClientAccessCapabilities
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u ClientAccessUpdate'{..}
-          = go _cauQuotaUser (Just _cauPrettyPrint) _cauUserIP
-              (Just _cauSponsorAccountId)
-              _cauKey
-              _cauClientAccountId
-              _cauOAuthToken
+          = go _cauClientAccountId (Just _cauSponsorAccountId)
+              _cauQuotaUser
+              (Just _cauPrettyPrint)
+              _cauUserIP
               _cauFields
+              _cauKey
+              _cauOAuthToken
               (Just AltJSON)
               _cauClientAccessCapabilities
           where go

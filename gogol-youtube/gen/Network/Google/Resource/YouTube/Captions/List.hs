@@ -53,17 +53,17 @@ import           Network.Google.YouTube.Types
 -- 'CaptionsList'' request conforms to.
 type CaptionsListResource =
      "captions" :>
-       QueryParam "onBehalfOf" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "part" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "onBehalfOfContentOwner" Text :>
-                   QueryParam "videoId" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "id" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+       QueryParam "id" Text :>
+         QueryParam "onBehalfOf" Text :>
+           QueryParam "onBehalfOfContentOwner" Text :>
+             QueryParam "part" Text :>
+               QueryParam "videoId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] CaptionListResponse
 
@@ -214,15 +214,15 @@ instance GoogleRequest CaptionsList' where
         type Rs CaptionsList' = CaptionListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u CaptionsList'{..}
-          = go _cllOnBehalfOf _cllQuotaUser (Just _cllPart)
+          = go _cllId _cllOnBehalfOf _cllOnBehalfOfContentOwner
+              (Just _cllPart)
+              (Just _cllVideoId)
+              _cllQuotaUser
               (Just _cllPrettyPrint)
               _cllUserIP
-              _cllOnBehalfOfContentOwner
-              (Just _cllVideoId)
-              _cllKey
-              _cllId
-              _cllOAuthToken
               _cllFields
+              _cllKey
+              _cllOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

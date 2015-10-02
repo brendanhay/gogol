@@ -55,24 +55,24 @@ type MobileDevicesListResource =
        Capture "customerId" Text :>
          "devices" :>
            "mobile" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "orderBy"
-                   DirectoryMobileDevicesListOrderBy
-                   :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "sortOrder"
-                       DirectoryMobileDevicesListSortOrder
-                       :>
-                       QueryParam "key" Key :>
-                         QueryParam "query" Text :>
-                           QueryParam "projection"
-                             DirectoryMobileDevicesListProjection
-                             :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "maxResults" Int32 :>
-                                   QueryParam "fields" Text :>
+             QueryParam "maxResults" Int32 :>
+               QueryParam "orderBy"
+                 DirectoryMobileDevicesListOrderBy
+                 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "projection"
+                     DirectoryMobileDevicesListProjection
+                     :>
+                     QueryParam "query" Text :>
+                       QueryParam "sortOrder"
+                         DirectoryMobileDevicesListSortOrder
+                         :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] MobileDevices
 
@@ -227,17 +227,17 @@ instance GoogleRequest MobileDevicesList' where
         type Rs MobileDevicesList' = MobileDevices
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u MobileDevicesList'{..}
-          = go _mdlQuotaUser (Just _mdlPrettyPrint) _mdlOrderBy
-              _mdlUserIP
-              _mdlCustomerId
-              _mdlSortOrder
-              _mdlKey
-              _mdlQuery
+          = go _mdlMaxResults _mdlOrderBy _mdlPageToken
               _mdlProjection
-              _mdlPageToken
-              _mdlOAuthToken
-              _mdlMaxResults
+              _mdlQuery
+              _mdlSortOrder
+              _mdlCustomerId
+              _mdlQuotaUser
+              (Just _mdlPrettyPrint)
+              _mdlUserIP
               _mdlFields
+              _mdlKey
+              _mdlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

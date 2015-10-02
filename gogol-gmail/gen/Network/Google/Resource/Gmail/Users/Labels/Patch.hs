@@ -53,9 +53,9 @@ type UsersLabelsPatchResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Label :> Patch '[JSON] Label
 
@@ -171,12 +171,12 @@ instance GoogleRequest UsersLabelsPatch' where
         type Rs UsersLabelsPatch' = Label
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersLabelsPatch'{..}
-          = go _ulpQuotaUser (Just _ulpPrettyPrint) _ulpUserIP
-              _ulpUserId
-              _ulpKey
-              _ulpId
-              _ulpOAuthToken
+          = go _ulpUserId _ulpId _ulpQuotaUser
+              (Just _ulpPrettyPrint)
+              _ulpUserIP
               _ulpFields
+              _ulpKey
+              _ulpOAuthToken
               (Just AltJSON)
               _ulpLabel
           where go

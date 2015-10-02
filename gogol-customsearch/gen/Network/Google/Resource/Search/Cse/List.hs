@@ -78,90 +78,92 @@ import           Network.Google.Prelude
 -- 'CseList'' request conforms to.
 type CseListResource =
      "v1" :>
-       QueryParam "imgDominantColor"
-         SearchCseListImgDominantColor
-         :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "siteSearchFilter"
-               SearchCseListSiteSearchFilter
-               :>
-               QueryParam "c2coff" Text :>
-                 QueryParam "orTerms" Text :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "start" Word32 :>
-                       QueryParam "rights" Text :>
-                         QueryParam "excludeTerms" Text :>
-                           QueryParam "num" Word32 :>
-                             QueryParam "fileType" Text :>
-                               QueryParam "searchType" SearchCseListSearchType
-                                 :>
-                                 QueryParam "lr" SearchCseListLr :>
-                                   QueryParam "q" Text :>
-                                     QueryParam "googlehost" Text :>
-                                       QueryParam "relatedSite" Text :>
-                                         QueryParam "hl" Text :>
-                                           QueryParam "key" Key :>
-                                             QueryParam "cref" Text :>
-                                               QueryParam "sort" Text :>
-                                                 QueryParam "siteSearch" Text :>
-                                                   QueryParam "filter"
-                                                     SearchCseListFilter
-                                                     :>
-                                                     QueryParam "dateRestrict"
+       QueryParam "c2coff" Text :>
+         QueryParam "cr" Text :>
+           QueryParam "cref" Text :>
+             QueryParam "cx" Text :>
+               QueryParam "dateRestrict" Text :>
+                 QueryParam "exactTerms" Text :>
+                   QueryParam "excludeTerms" Text :>
+                     QueryParam "fileType" Text :>
+                       QueryParam "filter" SearchCseListFilter :>
+                         QueryParam "gl" Text :>
+                           QueryParam "googlehost" Text :>
+                             QueryParam "highRange" Text :>
+                               QueryParam "hl" Text :>
+                                 QueryParam "hq" Text :>
+                                   QueryParam "imgColorType"
+                                     SearchCseListImgColorType
+                                     :>
+                                     QueryParam "imgDominantColor"
+                                       SearchCseListImgDominantColor
+                                       :>
+                                       QueryParam "imgSize" SearchCseListImgSize
+                                         :>
+                                         QueryParam "imgType"
+                                           SearchCseListImgType
+                                           :>
+                                           QueryParam "linkSite" Text :>
+                                             QueryParam "lowRange" Text :>
+                                               QueryParam "lr" SearchCseListLr
+                                                 :>
+                                                 QueryParam "num" Word32 :>
+                                                   QueryParam "orTerms" Text :>
+                                                     QueryParam "relatedSite"
                                                        Text
                                                        :>
-                                                       QueryParam "linkSite"
-                                                         Text
+                                                       QueryParam "rights" Text
                                                          :>
-                                                         QueryParam
-                                                           "oauth_token"
-                                                           OAuthToken
+                                                         QueryParam "safe"
+                                                           SearchCseListSafe
                                                            :>
-                                                           QueryParam "lowRange"
-                                                             Text
+                                                           QueryParam
+                                                             "searchType"
+                                                             SearchCseListSearchType
                                                              :>
                                                              QueryParam
-                                                               "imgType"
-                                                               SearchCseListImgType
+                                                               "siteSearch"
+                                                               Text
                                                                :>
-                                                               QueryParam "gl"
-                                                                 Text
+                                                               QueryParam
+                                                                 "siteSearchFilter"
+                                                                 SearchCseListSiteSearchFilter
                                                                  :>
-                                                                 QueryParam "cx"
+                                                                 QueryParam
+                                                                   "sort"
                                                                    Text
                                                                    :>
                                                                    QueryParam
-                                                                     "imgColorType"
-                                                                     SearchCseListImgColorType
+                                                                     "start"
+                                                                     Word32
                                                                      :>
                                                                      QueryParam
-                                                                       "imgSize"
-                                                                       SearchCseListImgSize
+                                                                       "q"
+                                                                       Text
                                                                        :>
                                                                        QueryParam
-                                                                         "exactTerms"
+                                                                         "quotaUser"
                                                                          Text
                                                                          :>
                                                                          QueryParam
-                                                                           "cr"
-                                                                           Text
+                                                                           "prettyPrint"
+                                                                           Bool
                                                                            :>
                                                                            QueryParam
-                                                                             "safe"
-                                                                             SearchCseListSafe
+                                                                             "userIp"
+                                                                             Text
                                                                              :>
                                                                              QueryParam
-                                                                               "hq"
+                                                                               "fields"
                                                                                Text
                                                                                :>
                                                                                QueryParam
-                                                                                 "fields"
-                                                                                 Text
+                                                                                 "key"
+                                                                                 Key
                                                                                  :>
                                                                                  QueryParam
-                                                                                   "highRange"
-                                                                                   Text
+                                                                                   "oauth_token"
+                                                                                   OAuthToken
                                                                                    :>
                                                                                    QueryParam
                                                                                      "alt"
@@ -548,43 +550,40 @@ instance GoogleRequest CseList' where
         type Rs CseList' = Search
         request = requestWithRoute defReq customSearchURL
         requestWithRoute r u CseList'{..}
-          = go _clImgDominantColor _clQuotaUser
-              (Just _clPrettyPrint)
-              _clSiteSearchFilter
-              _clC2coff
-              _clOrTerms
-              _clUserIP
-              _clStart
-              _clRights
-              _clExcludeTerms
-              (Just _clNum)
-              _clFileType
-              _clSearchType
-              _clLr
-              (Just _clQ)
-              _clGooglehost
-              _clRelatedSite
-              _clHl
-              _clKey
-              _clCref
-              _clSort
-              _clSiteSearch
-              _clFilter
-              _clDateRestrict
-              _clLinkSite
-              _clOAuthToken
-              _clLowRange
-              _clImgType
-              _clGl
-              _clCx
-              _clImgColorType
-              _clImgSize
+          = go _clC2coff _clCr _clCref _clCx _clDateRestrict
               _clExactTerms
-              _clCr
-              (Just _clSafe)
-              _clHq
-              _clFields
+              _clExcludeTerms
+              _clFileType
+              _clFilter
+              _clGl
+              _clGooglehost
               _clHighRange
+              _clHl
+              _clHq
+              _clImgColorType
+              _clImgDominantColor
+              _clImgSize
+              _clImgType
+              _clLinkSite
+              _clLowRange
+              _clLr
+              (Just _clNum)
+              _clOrTerms
+              _clRelatedSite
+              _clRights
+              (Just _clSafe)
+              _clSearchType
+              _clSiteSearch
+              _clSiteSearchFilter
+              _clSort
+              _clStart
+              (Just _clQ)
+              _clQuotaUser
+              (Just _clPrettyPrint)
+              _clUserIP
+              _clFields
+              _clKey
+              _clOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy CseListResource) r

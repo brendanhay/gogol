@@ -26,7 +26,7 @@ module Network.Google.Resource.Compute.VPNTunnels.Get
       VPNTunnelsGetResource
 
     -- * Creating a Request
-    , vPNTunnelsGet'
+    , vpnTunnelsGet'
     , VPNTunnelsGet'
 
     -- * Request Lenses
@@ -55,14 +55,14 @@ type VPNTunnelsGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] VPNTunnel
 
 -- | Returns the specified VpnTunnel resource.
 --
--- /See:/ 'vPNTunnelsGet'' smart constructor.
+-- /See:/ 'vpnTunnelsGet'' smart constructor.
 data VPNTunnelsGet' = VPNTunnelsGet'
     { _vtgQuotaUser   :: !(Maybe Text)
     , _vtgPrettyPrint :: !Bool
@@ -96,12 +96,12 @@ data VPNTunnelsGet' = VPNTunnelsGet'
 -- * 'vtgOAuthToken'
 --
 -- * 'vtgFields'
-vPNTunnelsGet'
+vpnTunnelsGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'vpnTunnel'
     -> Text -- ^ 'region'
     -> VPNTunnelsGet'
-vPNTunnelsGet' pVtgProject_ pVtgVPNTunnel_ pVtgRegion_ =
+vpnTunnelsGet' pVtgProject_ pVtgVPNTunnel_ pVtgRegion_ =
     VPNTunnelsGet'
     { _vtgQuotaUser = Nothing
     , _vtgPrettyPrint = True
@@ -173,13 +173,13 @@ instance GoogleRequest VPNTunnelsGet' where
         type Rs VPNTunnelsGet' = VPNTunnel
         request = requestWithRoute defReq computeURL
         requestWithRoute r u VPNTunnelsGet'{..}
-          = go _vtgQuotaUser (Just _vtgPrettyPrint) _vtgProject
+          = go _vtgProject _vtgRegion _vtgVPNTunnel
+              _vtgQuotaUser
+              (Just _vtgPrettyPrint)
               _vtgUserIP
-              _vtgKey
-              _vtgVPNTunnel
-              _vtgRegion
-              _vtgOAuthToken
               _vtgFields
+              _vtgKey
+              _vtgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

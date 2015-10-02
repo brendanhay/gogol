@@ -59,47 +59,48 @@ import           Network.Google.Prelude
 -- 'ReportsGenerate'' request conforms to.
 type ReportsGenerateResource =
      "reports" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParams "dimension" Text :>
+       QueryParams "accountId" Text :>
+         QueryParam "currency" Text :>
+           QueryParams "dimension" Text :>
+             QueryParams "filter" Text :>
                QueryParam "locale" Text :>
-                 QueryParam "endDate" Text :>
-                   QueryParam "startDate" Text :>
-                     QueryParams "accountId" Text :>
-                       QueryParams "metric" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "currency" Text :>
-                             QueryParams "sort" Text :>
-                               QueryParams "filter" Text :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "startIndex" Int32 :>
-                                     QueryParam "useTimezoneReporting" Bool :>
-                                       QueryParam "maxResults" Int32 :>
-                                         QueryParam "fields" Text :>
+                 QueryParam "maxResults" Int32 :>
+                   QueryParams "metric" Text :>
+                     QueryParams "sort" Text :>
+                       QueryParam "startIndex" Int32 :>
+                         QueryParam "useTimezoneReporting" Bool :>
+                           QueryParam "startDate" Text :>
+                             QueryParam "endDate" Text :>
+                               QueryParam "quotaUser" Text :>
+                                 QueryParam "prettyPrint" Bool :>
+                                   QueryParam "userIp" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "key" Key :>
+                                         QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
                                              Get '[JSON]
                                                AdsenseReportsGenerateResponse
        :<|>
        "reports" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParams "dimension" Text :>
+         QueryParams "accountId" Text :>
+           QueryParam "currency" Text :>
+             QueryParams "dimension" Text :>
+               QueryParams "filter" Text :>
                  QueryParam "locale" Text :>
-                   QueryParam "endDate" Text :>
-                     QueryParam "startDate" Text :>
-                       QueryParams "accountId" Text :>
-                         QueryParams "metric" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "currency" Text :>
-                               QueryParams "sort" Text :>
-                                 QueryParams "filter" Text :>
-                                   QueryParam "oauth_token" OAuthToken :>
-                                     QueryParam "startIndex" Int32 :>
-                                       QueryParam "useTimezoneReporting" Bool :>
-                                         QueryParam "maxResults" Int32 :>
-                                           QueryParam "fields" Text :>
+                   QueryParam "maxResults" Int32 :>
+                     QueryParams "metric" Text :>
+                       QueryParams "sort" Text :>
+                         QueryParam "startIndex" Int32 :>
+                           QueryParam "useTimezoneReporting" Bool :>
+                             QueryParam "startDate" Text :>
+                               QueryParam "endDate" Text :>
+                                 QueryParam "quotaUser" Text :>
+                                   QueryParam "prettyPrint" Bool :>
+                                     QueryParam "userIp" Text :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "key" Key :>
+                                           QueryParam "oauth_token" OAuthToken
+                                             :>
                                              QueryParam "alt" Media :>
                                                Get '[OctetStream] Stream
 
@@ -299,22 +300,21 @@ instance GoogleRequest ReportsGenerate' where
              AdsenseReportsGenerateResponse
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u ReportsGenerate'{..}
-          = go _rgQuotaUser (Just _rgPrettyPrint) _rgUserIP
-              _rgDimension
+          = go _rgAccountId _rgCurrency _rgDimension _rgFilter
               _rgLocale
-              (Just _rgEndDate)
-              (Just _rgStartDate)
-              _rgAccountId
+              _rgMaxResults
               _rgMetric
-              _rgKey
-              _rgCurrency
               _rgSort
-              _rgFilter
-              _rgOAuthToken
               _rgStartIndex
               _rgUseTimezoneReporting
-              _rgMaxResults
+              (Just _rgStartDate)
+              (Just _rgEndDate)
+              _rgQuotaUser
+              (Just _rgPrettyPrint)
+              _rgUserIP
               _rgFields
+              _rgKey
+              _rgOAuthToken
               (Just AltJSON)
           where go :<|> _
                   = clientWithRoute
@@ -326,22 +326,21 @@ instance GoogleRequest ReportsGenerate' where
         type Rs (Download ReportsGenerate') = Stream
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u ReportsGenerate'{..}
-          = go _rgQuotaUser (Just _rgPrettyPrint) _rgUserIP
-              _rgDimension
+          = go _rgAccountId _rgCurrency _rgDimension _rgFilter
               _rgLocale
-              (Just _rgEndDate)
-              (Just _rgStartDate)
-              _rgAccountId
+              _rgMaxResults
               _rgMetric
-              _rgKey
-              _rgCurrency
               _rgSort
-              _rgFilter
-              _rgOAuthToken
               _rgStartIndex
               _rgUseTimezoneReporting
-              _rgMaxResults
+              (Just _rgStartDate)
+              (Just _rgEndDate)
+              _rgQuotaUser
+              (Just _rgPrettyPrint)
+              _rgUserIP
               _rgFields
+              _rgKey
+              _rgOAuthToken
               (Just Media)
           where go :<|> _
                   = clientWithRoute

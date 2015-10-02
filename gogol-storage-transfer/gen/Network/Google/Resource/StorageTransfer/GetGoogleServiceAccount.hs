@@ -59,18 +59,18 @@ import           Network.Google.StorageTransfer.Types
 type GetGoogleServiceAccountResource =
      "v1:getGoogleServiceAccount" :>
        QueryParam "$.xgafv" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "upload_protocol" Text :>
+         QueryParam "access_token" Text :>
+           QueryParam "bearer_token" Text :>
+             QueryParam "callback" Text :>
                QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
+                 QueryParam "projectId" Text :>
                    QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "projectId" Text :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] GoogleServiceAccount
 
@@ -232,18 +232,17 @@ instance GoogleRequest GetGoogleServiceAccount' where
              GoogleServiceAccount
         request = requestWithRoute defReq storageTransferURL
         requestWithRoute r u GetGoogleServiceAccount'{..}
-          = go _ggsaXgafv _ggsaQuotaUser
-              (Just _ggsaPrettyPrint)
-              _ggsaUploadProtocol
-              (Just _ggsaPp)
-              _ggsaAccessToken
-              _ggsaUploadType
-              _ggsaBearerToken
-              _ggsaKey
-              _ggsaProjectId
-              _ggsaOAuthToken
-              _ggsaFields
+          = go _ggsaXgafv _ggsaAccessToken _ggsaBearerToken
               _ggsaCallback
+              (Just _ggsaPp)
+              _ggsaProjectId
+              _ggsaUploadType
+              _ggsaUploadProtocol
+              _ggsaQuotaUser
+              (Just _ggsaPrettyPrint)
+              _ggsaFields
+              _ggsaKey
+              _ggsaOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

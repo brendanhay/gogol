@@ -56,24 +56,24 @@ type CreativeGroupsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "creativeGroups" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "searchString" Text :>
-                   QueryParams "ids" Int64 :>
-                     QueryParam "sortOrder"
-                       DfareportingCreativeGroupsListSortOrder
-                       :>
-                       QueryParam "groupNumber" Int32 :>
-                         QueryParam "key" Key :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "sortField"
-                               DfareportingCreativeGroupsListSortField
-                               :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParams "advertiserIds" Int64 :>
-                                   QueryParam "maxResults" Int32 :>
-                                     QueryParam "fields" Text :>
+           QueryParams "advertiserIds" Int64 :>
+             QueryParam "groupNumber" Int32 :>
+               QueryParams "ids" Int64 :>
+                 QueryParam "maxResults" Int32 :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "searchString" Text :>
+                       QueryParam "sortField"
+                         DfareportingCreativeGroupsListSortField
+                         :>
+                         QueryParam "sortOrder"
+                           DfareportingCreativeGroupsListSortOrder
+                           :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "userIp" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] CreativeGroupsListResponse
 
@@ -253,19 +253,19 @@ instance GoogleRequest CreativeGroupsList' where
              CreativeGroupsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeGroupsList'{..}
-          = go _cglQuotaUser (Just _cglPrettyPrint) _cglUserIP
-              _cglSearchString
-              _cglIds
-              _cglProfileId
-              _cglSortOrder
-              _cglGroupNumber
-              _cglKey
-              _cglPageToken
-              _cglSortField
-              _cglOAuthToken
-              _cglAdvertiserIds
+          = go _cglAdvertiserIds _cglGroupNumber _cglIds
               _cglMaxResults
+              _cglPageToken
+              _cglSearchString
+              _cglSortField
+              _cglSortOrder
+              _cglProfileId
+              _cglQuotaUser
+              (Just _cglPrettyPrint)
+              _cglUserIP
               _cglFields
+              _cglKey
+              _cglOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

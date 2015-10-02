@@ -55,9 +55,9 @@ type ColumnPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Column :> Patch '[JSON] Column
 
@@ -171,12 +171,12 @@ instance GoogleRequest ColumnPatch' where
         type Rs ColumnPatch' = Column
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u ColumnPatch'{..}
-          = go _cpQuotaUser (Just _cpPrettyPrint) _cpUserIP
+          = go _cpTableId _cpColumnId _cpQuotaUser
+              (Just _cpPrettyPrint)
+              _cpUserIP
+              _cpFields
               _cpKey
               _cpOAuthToken
-              _cpTableId
-              _cpColumnId
-              _cpFields
               (Just AltJSON)
               _cpColumn
           where go

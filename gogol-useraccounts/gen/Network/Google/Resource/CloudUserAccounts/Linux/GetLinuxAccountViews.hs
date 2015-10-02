@@ -56,18 +56,18 @@ type LinuxGetLinuxAccountViewsResource =
        "zones" :>
          Capture "zone" Text :>
            "linuxAccountViews" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
+             QueryParam "filter" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "orderBy" Text :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "filter" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "maxResults" Word32 :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" AltJSON :>
-                                   QueryParam "instance" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "instance" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
+                                   QueryParam "alt" AltJSON :>
                                      Post '[JSON]
                                        LinuxGetLinuxAccountViewsResponse
 
@@ -246,18 +246,18 @@ instance GoogleRequest LinuxGetLinuxAccountViews'
              LinuxGetLinuxAccountViewsResponse
         request = requestWithRoute defReq userAccountsURL
         requestWithRoute r u LinuxGetLinuxAccountViews'{..}
-          = go _lglavQuotaUser (Just _lglavPrettyPrint)
+          = go _lglavFilter (Just _lglavMaxResults)
               _lglavOrderBy
-              _lglavProject
-              _lglavUserIP
-              _lglavZone
-              _lglavKey
-              _lglavFilter
               _lglavPageToken
-              _lglavOAuthToken
-              (Just _lglavMaxResults)
-              _lglavFields
+              _lglavProject
+              _lglavZone
               (Just _lglavInstance)
+              _lglavQuotaUser
+              (Just _lglavPrettyPrint)
+              _lglavUserIP
+              _lglavFields
+              _lglavKey
+              _lglavOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

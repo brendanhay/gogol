@@ -51,9 +51,9 @@ type RevisionsListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] RevisionList
 
 -- | Lists a file\'s revisions.
@@ -145,11 +145,11 @@ instance GoogleRequest RevisionsList' where
         type Rs RevisionsList' = RevisionList
         request = requestWithRoute defReq driveURL
         requestWithRoute r u RevisionsList'{..}
-          = go _rlQuotaUser (Just _rlPrettyPrint) _rlUserIP
-              _rlKey
-              _rlFileId
-              _rlOAuthToken
+          = go _rlFileId _rlQuotaUser (Just _rlPrettyPrint)
+              _rlUserIP
               _rlFields
+              _rlKey
+              _rlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

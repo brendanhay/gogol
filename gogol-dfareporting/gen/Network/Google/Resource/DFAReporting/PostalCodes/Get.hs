@@ -53,9 +53,9 @@ type PostalCodesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] PostalCode
 
 -- | Gets one postal code by ID.
@@ -160,12 +160,12 @@ instance GoogleRequest PostalCodesGet' where
         type Rs PostalCodesGet' = PostalCode
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PostalCodesGet'{..}
-          = go _pcgQuotaUser (Just _pcgPrettyPrint) _pcgUserIP
-              _pcgProfileId
-              _pcgKey
-              _pcgCode
-              _pcgOAuthToken
+          = go _pcgProfileId _pcgCode _pcgQuotaUser
+              (Just _pcgPrettyPrint)
+              _pcgUserIP
               _pcgFields
+              _pcgKey
+              _pcgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

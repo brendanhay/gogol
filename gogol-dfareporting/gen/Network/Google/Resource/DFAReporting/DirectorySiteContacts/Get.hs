@@ -53,9 +53,9 @@ type DirectorySiteContactsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] DirectorySiteContact
 
@@ -165,13 +165,12 @@ instance GoogleRequest DirectorySiteContactsGet'
              DirectorySiteContact
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u DirectorySiteContactsGet'{..}
-          = go _dscgQuotaUser (Just _dscgPrettyPrint)
+          = go _dscgProfileId _dscgId _dscgQuotaUser
+              (Just _dscgPrettyPrint)
               _dscgUserIP
-              _dscgProfileId
-              _dscgKey
-              _dscgId
-              _dscgOAuthToken
               _dscgFields
+              _dscgKey
+              _dscgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

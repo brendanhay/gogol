@@ -51,17 +51,17 @@ import           Network.Google.Storage.Types
 type BucketsUpdateResource =
      "b" :>
        Capture "bucket" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "ifMetagenerationMatch" Word64 :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "ifMetagenerationNotMatch" Word64 :>
-                     QueryParam "projection"
-                       StorageBucketsUpdateProjection
-                       :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+         QueryParam "ifMetagenerationMatch" Word64 :>
+           QueryParam "ifMetagenerationNotMatch" Word64 :>
+             QueryParam "projection"
+               StorageBucketsUpdateProjection
+               :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Bucket :> Put '[JSON] Bucket
 
@@ -194,15 +194,16 @@ instance GoogleRequest BucketsUpdate' where
         type Rs BucketsUpdate' = Bucket
         request = requestWithRoute defReq storageURL
         requestWithRoute r u BucketsUpdate'{..}
-          = go _buQuotaUser _buIfMetagenerationMatch
-              (Just _buPrettyPrint)
-              _buUserIP
-              _buBucket
-              _buKey
+          = go _buIfMetagenerationMatch
               _buIfMetagenerationNotMatch
               _buProjection
-              _buOAuthToken
+              _buBucket
+              _buQuotaUser
+              (Just _buPrettyPrint)
+              _buUserIP
               _buFields
+              _buKey
+              _buOAuthToken
               (Just AltJSON)
               _buBucket
           where go

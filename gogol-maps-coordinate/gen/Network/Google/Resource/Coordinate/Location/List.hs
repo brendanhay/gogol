@@ -54,15 +54,15 @@ type LocationListResource =
          "workers" :>
            Capture "workerEmail" Text :>
              "locations" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "startTimestampMs" Word64 :>
-                       QueryParam "key" Key :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "maxResults" Word32 :>
-                               QueryParam "fields" Text :>
+               QueryParam "maxResults" Word32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "startTimestampMs" Word64 :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] LocationListResponse
 
@@ -195,16 +195,15 @@ instance GoogleRequest LocationList' where
         type Rs LocationList' = LocationListResponse
         request = requestWithRoute defReq mapsCoordinateURL
         requestWithRoute r u LocationList'{..}
-          = go _llQuotaUser (Just _llPrettyPrint)
+          = go _llMaxResults _llPageToken _llTeamId
               _llWorkerEmail
-              _llUserIP
               (Just _llStartTimestampMs)
-              _llTeamId
-              _llKey
-              _llPageToken
-              _llOAuthToken
-              _llMaxResults
+              _llQuotaUser
+              (Just _llPrettyPrint)
+              _llUserIP
               _llFields
+              _llKey
+              _llOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

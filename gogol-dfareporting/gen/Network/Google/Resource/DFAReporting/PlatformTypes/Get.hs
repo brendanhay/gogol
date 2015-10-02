@@ -53,9 +53,9 @@ type PlatformTypesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] PlatformType
 
 -- | Gets one platform type by ID.
@@ -160,12 +160,12 @@ instance GoogleRequest PlatformTypesGet' where
         type Rs PlatformTypesGet' = PlatformType
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlatformTypesGet'{..}
-          = go _ptgQuotaUser (Just _ptgPrettyPrint) _ptgUserIP
-              _ptgProfileId
-              _ptgKey
-              _ptgId
-              _ptgOAuthToken
+          = go _ptgProfileId _ptgId _ptgQuotaUser
+              (Just _ptgPrettyPrint)
+              _ptgUserIP
               _ptgFields
+              _ptgKey
+              _ptgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

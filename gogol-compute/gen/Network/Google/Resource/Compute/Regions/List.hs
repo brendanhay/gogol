@@ -51,15 +51,15 @@ import           Network.Google.Prelude
 type RegionsListResource =
      Capture "project" Text :>
        "regions" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "filter" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "maxResults" Word32 :>
-                         QueryParam "fields" Text :>
+         QueryParam "filter" Text :>
+           QueryParam "maxResults" Word32 :>
+             QueryParam "pageToken" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] RegionList
 
 -- | Retrieves the list of region resources available to the specified
@@ -189,14 +189,14 @@ instance GoogleRequest RegionsList' where
         type Rs RegionsList' = RegionList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u RegionsList'{..}
-          = go _rQuotaUser (Just _rPrettyPrint) _rProject
+          = go _rFilter (Just _rMaxResults) _rPageToken
+              _rProject
+              _rQuotaUser
+              (Just _rPrettyPrint)
               _rUserIP
-              _rKey
-              _rFilter
-              _rPageToken
-              _rOAuthToken
-              (Just _rMaxResults)
               _rFields
+              _rKey
+              _rOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

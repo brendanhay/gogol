@@ -60,21 +60,22 @@ type ProjectsLogsListResource =
          Capture "projectsId" Text :>
            "logs" :>
              QueryParam "$.xgafv" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "upload_protocol" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "access_token" Text :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "serviceName" Text :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "oauth_token" OAuthToken :>
-                                     QueryParam "serviceIndexPrefix" Text :>
-                                       QueryParam "pageSize" Int32 :>
-                                         QueryParam "fields" Text :>
-                                           QueryParam "callback" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "bearer_token" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "pageSize" Int32 :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "serviceIndexPrefix" Text :>
+                             QueryParam "serviceName" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "upload_protocol" Text :>
+                                   QueryParam "quotaUser" Text :>
+                                     QueryParam "prettyPrint" Bool :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "key" Key :>
+                                           QueryParam "oauth_token" OAuthToken
+                                             :>
                                              QueryParam "alt" AltJSON :>
                                                Get '[JSON] ListLogsResponse
 
@@ -279,21 +280,21 @@ instance GoogleRequest ProjectsLogsList' where
         type Rs ProjectsLogsList' = ListLogsResponse
         request = requestWithRoute defReq loggingURL
         requestWithRoute r u ProjectsLogsList'{..}
-          = go _pllXgafv _pllQuotaUser (Just _pllPrettyPrint)
-              _pllUploadProtocol
-              (Just _pllPp)
-              _pllAccessToken
-              _pllUploadType
-              _pllBearerToken
-              _pllKey
-              _pllServiceName
-              _pllPageToken
-              _pllOAuthToken
-              _pllServiceIndexPrefix
-              _pllProjectsId
-              _pllPageSize
-              _pllFields
+          = go _pllXgafv _pllAccessToken _pllBearerToken
               _pllCallback
+              _pllPageSize
+              _pllPageToken
+              (Just _pllPp)
+              _pllServiceIndexPrefix
+              _pllServiceName
+              _pllUploadType
+              _pllUploadProtocol
+              _pllProjectsId
+              _pllQuotaUser
+              (Just _pllPrettyPrint)
+              _pllFields
+              _pllKey
+              _pllOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

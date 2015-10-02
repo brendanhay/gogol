@@ -53,9 +53,9 @@ type ColumnDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes the specified column.
@@ -158,12 +158,12 @@ instance GoogleRequest ColumnDelete' where
         type Rs ColumnDelete' = ()
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u ColumnDelete'{..}
-          = go _cdQuotaUser (Just _cdPrettyPrint) _cdUserIP
+          = go _cdTableId _cdColumnId _cdQuotaUser
+              (Just _cdPrettyPrint)
+              _cdUserIP
+              _cdFields
               _cdKey
               _cdOAuthToken
-              _cdTableId
-              _cdColumnId
-              _cdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

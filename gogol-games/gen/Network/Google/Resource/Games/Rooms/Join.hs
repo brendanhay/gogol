@@ -51,13 +51,13 @@ type RoomsJoinResource =
      "rooms" :>
        Capture "roomId" Text :>
          "join" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "language" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "language" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] RoomJoinRequest :> Post '[JSON] Room
 
@@ -171,12 +171,12 @@ instance GoogleRequest RoomsJoin' where
         type Rs RoomsJoin' = Room
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u RoomsJoin'{..}
-          = go _rjQuotaUser (Just _rjPrettyPrint) _rjUserIP
-              _rjKey
-              _rjRoomId
-              _rjLanguage
-              _rjOAuthToken
+          = go _rjLanguage _rjRoomId _rjQuotaUser
+              (Just _rjPrettyPrint)
+              _rjUserIP
               _rjFields
+              _rjKey
+              _rjOAuthToken
               (Just AltJSON)
               _rjRoomJoinRequest
           where go

@@ -52,9 +52,9 @@ type RegionsGetResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Region
 
 -- | Returns the specified region resource.
@@ -156,12 +156,12 @@ instance GoogleRequest RegionsGet' where
         type Rs RegionsGet' = Region
         request = requestWithRoute defReq computeURL
         requestWithRoute r u RegionsGet'{..}
-          = go _rgQuotaUser (Just _rgPrettyPrint) _rgProject
+          = go _rgProject _rgRegion _rgQuotaUser
+              (Just _rgPrettyPrint)
               _rgUserIP
-              _rgKey
-              _rgRegion
-              _rgOAuthToken
               _rgFields
+              _rgKey
+              _rgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy RegionsGetResource)

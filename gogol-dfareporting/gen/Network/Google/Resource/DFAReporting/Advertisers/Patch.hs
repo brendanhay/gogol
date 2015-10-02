@@ -50,13 +50,13 @@ type AdvertisersPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "advertisers" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "id" Int64 :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Advertiser :>
                              Patch '[JSON] Advertiser
@@ -170,12 +170,12 @@ instance GoogleRequest AdvertisersPatch' where
         type Rs AdvertisersPatch' = Advertiser
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdvertisersPatch'{..}
-          = go _apQuotaUser (Just _apPrettyPrint) _apUserIP
-              _apProfileId
-              _apKey
-              (Just _apId)
-              _apOAuthToken
+          = go _apProfileId (Just _apId) _apQuotaUser
+              (Just _apPrettyPrint)
+              _apUserIP
               _apFields
+              _apKey
+              _apOAuthToken
               (Just AltJSON)
               _apAdvertiser
           where go

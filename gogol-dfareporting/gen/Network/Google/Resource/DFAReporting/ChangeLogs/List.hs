@@ -58,25 +58,25 @@ type ChangeLogsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "changeLogs" :>
-           QueryParams "userProfileIds" Int64 :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "objectType"
-                   DfareportingChangeLogsListObjectType
-                   :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "searchString" Text :>
-                       QueryParams "ids" Int64 :>
-                         QueryParam "action" DfareportingChangeLogsListAction
-                           :>
-                           QueryParam "minChangeTime" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "maxChangeTime" Text :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "oauth_token" OAuthToken :>
-                                     QueryParams "objectIds" Int64 :>
-                                       QueryParam "maxResults" Int32 :>
-                                         QueryParam "fields" Text :>
+           QueryParam "action" DfareportingChangeLogsListAction
+             :>
+             QueryParams "ids" Int64 :>
+               QueryParam "maxChangeTime" Text :>
+                 QueryParam "maxResults" Int32 :>
+                   QueryParam "minChangeTime" Text :>
+                     QueryParams "objectIds" Int64 :>
+                       QueryParam "objectType"
+                         DfareportingChangeLogsListObjectType
+                         :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "searchString" Text :>
+                             QueryParams "userProfileIds" Int64 :>
+                               QueryParam "quotaUser" Text :>
+                                 QueryParam "prettyPrint" Bool :>
+                                   QueryParam "userIp" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "key" Key :>
+                                         QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
                                              Get '[JSON] ChangeLogsListResponse
 
@@ -281,22 +281,21 @@ instance GoogleRequest ChangeLogsList' where
         type Rs ChangeLogsList' = ChangeLogsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ChangeLogsList'{..}
-          = go _cllUserProfileIds _cllQuotaUser
-              (Just _cllPrettyPrint)
-              _cllObjectType
-              _cllUserIP
-              _cllSearchString
-              _cllIds
-              _cllProfileId
-              _cllAction
-              _cllMinChangeTime
-              _cllKey
-              _cllMaxChangeTime
-              _cllPageToken
-              _cllOAuthToken
-              _cllObjectIds
+          = go _cllAction _cllIds _cllMaxChangeTime
               _cllMaxResults
+              _cllMinChangeTime
+              _cllObjectIds
+              _cllObjectType
+              _cllPageToken
+              _cllSearchString
+              _cllUserProfileIds
+              _cllProfileId
+              _cllQuotaUser
+              (Just _cllPrettyPrint)
+              _cllUserIP
               _cllFields
+              _cllKey
+              _cllOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

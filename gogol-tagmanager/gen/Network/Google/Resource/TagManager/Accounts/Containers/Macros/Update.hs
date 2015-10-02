@@ -55,13 +55,13 @@ type AccountsContainersMacrosUpdateResource =
            Capture "containerId" Text :>
              "macros" :>
                Capture "macroId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fingerprint" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                 QueryParam "fingerprint" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] Macro :> Put '[JSON] Macro
 
@@ -205,15 +205,14 @@ instance GoogleRequest
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersMacrosUpdate'{..}
-          = go _acmuQuotaUser (Just _acmuPrettyPrint)
-              _acmuContainerId
-              _acmuUserIP
-              _acmuFingerprint
-              _acmuAccountId
-              _acmuKey
+          = go _acmuFingerprint _acmuAccountId _acmuContainerId
               _acmuMacroId
-              _acmuOAuthToken
+              _acmuQuotaUser
+              (Just _acmuPrettyPrint)
+              _acmuUserIP
               _acmuFields
+              _acmuKey
+              _acmuOAuthToken
               (Just AltJSON)
               _acmuMacro
           where go

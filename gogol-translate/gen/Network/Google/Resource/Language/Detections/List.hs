@@ -47,13 +47,13 @@ import           Network.Google.Translate.Types
 type DetectionsListResource =
      "v2" :>
        "detect" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParams "q" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+         QueryParams "q" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] DetectionsListResponse
 
@@ -146,11 +146,11 @@ instance GoogleRequest DetectionsList' where
         type Rs DetectionsList' = DetectionsListResponse
         request = requestWithRoute defReq translateURL
         requestWithRoute r u DetectionsList'{..}
-          = go _dlQuotaUser (Just _dlPrettyPrint) _dlUserIP
-              (Just _dlQ)
+          = go (Just _dlQ) _dlQuotaUser (Just _dlPrettyPrint)
+              _dlUserIP
+              _dlFields
               _dlKey
               _dlOAuthToken
-              _dlFields
               (Just AltJSON)
           where go
                   = clientWithRoute

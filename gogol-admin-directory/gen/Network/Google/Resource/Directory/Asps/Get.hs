@@ -53,9 +53,9 @@ type AspsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Asp
 
 -- | Get information about an ASP issued by a user.
@@ -158,12 +158,12 @@ instance GoogleRequest AspsGet' where
         type Rs AspsGet' = Asp
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u AspsGet'{..}
-          = go _agQuotaUser (Just _agPrettyPrint) _agCodeId
+          = go _agUserKey _agCodeId _agQuotaUser
+              (Just _agPrettyPrint)
               _agUserIP
+              _agFields
               _agKey
               _agOAuthToken
-              _agUserKey
-              _agFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy AspsGetResource) r

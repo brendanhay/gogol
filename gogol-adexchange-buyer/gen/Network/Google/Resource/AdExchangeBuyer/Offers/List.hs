@@ -49,9 +49,9 @@ type OffersListResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] ListOffersRequest :>
                        Get '[JSON] ListOffersResponse
@@ -148,9 +148,9 @@ instance GoogleRequest OffersList' where
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u OffersList'{..}
           = go _olQuotaUser (Just _olPrettyPrint) _olUserIP
+              _olFields
               _olKey
               _olOAuthToken
-              _olFields
               (Just AltJSON)
               _olListOffersRequest
           where go

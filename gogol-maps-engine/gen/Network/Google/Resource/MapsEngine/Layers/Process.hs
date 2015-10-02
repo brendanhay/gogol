@@ -51,9 +51,9 @@ type LayersProcessResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Post '[JSON] ProcessResponse
 
@@ -146,11 +146,11 @@ instance GoogleRequest LayersProcess' where
         type Rs LayersProcess' = ProcessResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u LayersProcess'{..}
-          = go _lpQuotaUser (Just _lpPrettyPrint) _lpUserIP
-              _lpKey
-              _lpId
-              _lpOAuthToken
+          = go _lpId _lpQuotaUser (Just _lpPrettyPrint)
+              _lpUserIP
               _lpFields
+              _lpKey
+              _lpOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

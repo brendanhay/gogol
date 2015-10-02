@@ -54,14 +54,14 @@ type ManagementWebPropertyAdWordsLinksListResource =
            "webproperties" :>
              Capture "webPropertyId" Text :>
                "entityAdWordsLinks" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "start-index" Int32 :>
-                             QueryParam "max-results" Int32 :>
-                               QueryParam "fields" Text :>
+                 QueryParam "max-results" Int32 :>
+                   QueryParam "start-index" Int32 :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] EntityAdWordsLinks
 
@@ -201,15 +201,15 @@ instance GoogleRequest
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
           ManagementWebPropertyAdWordsLinksList'{..}
-          = go _mwpawllQuotaUser (Just _mwpawllPrettyPrint)
-              _mwpawllWebPropertyId
-              _mwpawllUserIP
+          = go _mwpawllMaxResults _mwpawllStartIndex
               _mwpawllAccountId
+              _mwpawllWebPropertyId
+              _mwpawllQuotaUser
+              (Just _mwpawllPrettyPrint)
+              _mwpawllUserIP
+              _mwpawllFields
               _mwpawllKey
               _mwpawllOAuthToken
-              _mwpawllStartIndex
-              _mwpawllMaxResults
-              _mwpawllFields
               (Just AltJSON)
           where go
                   = clientWithRoute

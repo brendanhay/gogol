@@ -53,9 +53,9 @@ type TimelineAttachmentsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an attachment from a timeline item.
@@ -163,12 +163,12 @@ instance GoogleRequest TimelineAttachmentsDelete'
         type Rs TimelineAttachmentsDelete' = ()
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u TimelineAttachmentsDelete'{..}
-          = go _tadQuotaUser (Just _tadPrettyPrint) _tadUserIP
-              _tadItemId
-              _tadAttachmentId
+          = go _tadItemId _tadAttachmentId _tadQuotaUser
+              (Just _tadPrettyPrint)
+              _tadUserIP
+              _tadFields
               _tadKey
               _tadOAuthToken
-              _tadFields
               (Just AltJSON)
           where go
                   = clientWithRoute

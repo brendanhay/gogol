@@ -50,9 +50,9 @@ type ApplicationsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Application
 
 -- | Retrieves information about an application for the given application ID.
@@ -147,11 +147,12 @@ instance GoogleRequest ApplicationsGet' where
         request
           = requestWithRoute defReq adminDataTransferURL
         requestWithRoute r u ApplicationsGet'{..}
-          = go _agQuotaUser (Just _agPrettyPrint) _agUserIP
-              _agApplicationId
+          = go _agApplicationId _agQuotaUser
+              (Just _agPrettyPrint)
+              _agUserIP
+              _agFields
               _agKey
               _agOAuthToken
-              _agFields
               (Just AltJSON)
           where go
                   = clientWithRoute

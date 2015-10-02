@@ -51,9 +51,9 @@ type MetadataColumnsListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Columns
 
 -- | Lists all columns for a report type
@@ -151,11 +151,12 @@ instance GoogleRequest MetadataColumnsList' where
         type Rs MetadataColumnsList' = Columns
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u MetadataColumnsList'{..}
-          = go _mclQuotaUser (Just _mclPrettyPrint) _mclUserIP
+          = go _mclReportType _mclQuotaUser
+              (Just _mclPrettyPrint)
+              _mclUserIP
+              _mclFields
               _mclKey
               _mclOAuthToken
-              _mclReportType
-              _mclFields
               (Just AltJSON)
           where go
                   = clientWithRoute

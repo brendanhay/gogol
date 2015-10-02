@@ -52,14 +52,14 @@ type ApplicationsListHiddenResource =
        Capture "applicationId" Text :>
          "players" :>
            "hidden" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Int32 :>
-                           QueryParam "fields" Text :>
+             QueryParam "maxResults" Int32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] HiddenPlayerList
 
@@ -179,13 +179,13 @@ instance GoogleRequest ApplicationsListHidden' where
         type Rs ApplicationsListHidden' = HiddenPlayerList
         request = requestWithRoute defReq gamesManagementURL
         requestWithRoute r u ApplicationsListHidden'{..}
-          = go _alhQuotaUser (Just _alhPrettyPrint) _alhUserIP
-              _alhApplicationId
-              _alhKey
-              _alhPageToken
-              _alhOAuthToken
-              _alhMaxResults
+          = go _alhMaxResults _alhPageToken _alhApplicationId
+              _alhQuotaUser
+              (Just _alhPrettyPrint)
+              _alhUserIP
               _alhFields
+              _alhKey
+              _alhOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

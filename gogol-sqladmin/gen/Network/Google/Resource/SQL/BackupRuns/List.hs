@@ -54,14 +54,14 @@ type BackupRunsListResource =
          "instances" :>
            Capture "instance" Text :>
              "backupRuns" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Int32 :>
-                             QueryParam "fields" Text :>
+               QueryParam "maxResults" Int32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] BackupRunsListResponse
 
@@ -189,14 +189,14 @@ instance GoogleRequest BackupRunsList' where
         type Rs BackupRunsList' = BackupRunsListResponse
         request = requestWithRoute defReq sQLAdminURL
         requestWithRoute r u BackupRunsList'{..}
-          = go _brlQuotaUser (Just _brlPrettyPrint) _brlProject
-              _brlUserIP
-              _brlKey
-              _brlPageToken
-              _brlOAuthToken
-              _brlMaxResults
-              _brlFields
+          = go _brlMaxResults _brlPageToken _brlProject
               _brlInstance
+              _brlQuotaUser
+              (Just _brlPrettyPrint)
+              _brlUserIP
+              _brlFields
+              _brlKey
+              _brlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

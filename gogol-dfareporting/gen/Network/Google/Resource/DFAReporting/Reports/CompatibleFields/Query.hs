@@ -56,9 +56,9 @@ type ReportsCompatibleFieldsQueryResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Report :>
                                Post '[JSON] CompatibleFields
@@ -174,12 +174,12 @@ instance GoogleRequest ReportsCompatibleFieldsQuery'
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           ReportsCompatibleFieldsQuery'{..}
-          = go _rcfqQuotaUser (Just _rcfqPrettyPrint)
+          = go _rcfqProfileId _rcfqQuotaUser
+              (Just _rcfqPrettyPrint)
               _rcfqUserIP
-              _rcfqProfileId
+              _rcfqFields
               _rcfqKey
               _rcfqOAuthToken
-              _rcfqFields
               (Just AltJSON)
               _rcfqReport
           where go

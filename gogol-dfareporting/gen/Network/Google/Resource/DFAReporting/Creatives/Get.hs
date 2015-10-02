@@ -53,9 +53,9 @@ type CreativesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Creative
 
 -- | Gets one creative by ID.
@@ -162,13 +162,12 @@ instance GoogleRequest CreativesGet' where
         type Rs CreativesGet' = Creative
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativesGet'{..}
-          = go _crerQuotaUser (Just _crerPrettyPrint)
+          = go _crerProfileId _crerId _crerQuotaUser
+              (Just _crerPrettyPrint)
               _crerUserIP
-              _crerProfileId
-              _crerKey
-              _crerId
-              _crerOAuthToken
               _crerFields
+              _crerKey
+              _crerOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

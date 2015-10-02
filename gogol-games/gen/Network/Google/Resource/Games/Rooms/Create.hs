@@ -49,13 +49,13 @@ import           Network.Google.Prelude
 type RoomsCreateResource =
      "rooms" :>
        "create" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "language" Text :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+         QueryParam "language" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] RoomCreateRequest :>
                            Post '[JSON] Room
@@ -164,11 +164,12 @@ instance GoogleRequest RoomsCreate' where
         type Rs RoomsCreate' = Room
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u RoomsCreate'{..}
-          = go _rooQuotaUser (Just _rooPrettyPrint) _rooUserIP
-              _rooKey
-              _rooLanguage
-              _rooOAuthToken
+          = go _rooLanguage _rooQuotaUser
+              (Just _rooPrettyPrint)
+              _rooUserIP
               _rooFields
+              _rooKey
+              _rooOAuthToken
               (Just AltJSON)
               _rooRoomCreateRequest
           where go

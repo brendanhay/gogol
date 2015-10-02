@@ -55,17 +55,17 @@ type TransferOperationsPauseResource =
      "v1" :>
        "{+name}:pause" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] PauseTransferOperationRequest
                                      :> Post '[JSON] Empty
@@ -228,17 +228,17 @@ instance GoogleRequest TransferOperationsPause' where
         type Rs TransferOperationsPause' = Empty
         request = requestWithRoute defReq storageTransferURL
         requestWithRoute r u TransferOperationsPause'{..}
-          = go _topXgafv _topQuotaUser (Just _topPrettyPrint)
-              _topUploadProtocol
-              (Just _topPp)
-              _topAccessToken
-              _topUploadType
-              _topBearerToken
-              _topKey
-              _topName
-              _topOAuthToken
-              _topFields
+          = go _topXgafv _topAccessToken _topBearerToken
               _topCallback
+              (Just _topPp)
+              _topUploadType
+              _topUploadProtocol
+              _topName
+              _topQuotaUser
+              (Just _topPrettyPrint)
+              _topFields
+              _topKey
+              _topOAuthToken
               (Just AltJSON)
               _topPauseTransferOperationRequest
           where go

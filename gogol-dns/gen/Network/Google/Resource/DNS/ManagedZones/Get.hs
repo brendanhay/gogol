@@ -52,9 +52,9 @@ type ManagedZonesGetResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] ManagedZone
 
 -- | Fetch the representation of an existing ManagedZone.
@@ -162,12 +162,12 @@ instance GoogleRequest ManagedZonesGet' where
         type Rs ManagedZonesGet' = ManagedZone
         request = requestWithRoute defReq dNSURL
         requestWithRoute r u ManagedZonesGet'{..}
-          = go _mzgQuotaUser (Just _mzgPrettyPrint) _mzgProject
+          = go _mzgProject _mzgManagedZone _mzgQuotaUser
+              (Just _mzgPrettyPrint)
               _mzgUserIP
+              _mzgFields
               _mzgKey
               _mzgOAuthToken
-              _mzgManagedZone
-              _mzgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

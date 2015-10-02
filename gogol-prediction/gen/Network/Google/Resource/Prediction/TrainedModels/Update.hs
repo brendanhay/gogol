@@ -53,9 +53,9 @@ type TrainedModelsUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Update :> Put '[JSON] Insert2
 
@@ -171,12 +171,12 @@ instance GoogleRequest TrainedModelsUpdate' where
         type Rs TrainedModelsUpdate' = Insert2
         request = requestWithRoute defReq predictionURL
         requestWithRoute r u TrainedModelsUpdate'{..}
-          = go _tmuQuotaUser (Just _tmuPrettyPrint) _tmuProject
+          = go _tmuProject _tmuId _tmuQuotaUser
+              (Just _tmuPrettyPrint)
               _tmuUserIP
-              _tmuKey
-              _tmuId
-              _tmuOAuthToken
               _tmuFields
+              _tmuKey
+              _tmuOAuthToken
               (Just AltJSON)
               _tmuUpdate
           where go

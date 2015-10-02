@@ -54,15 +54,15 @@ type CustomChannelsAdUnitsListResource =
          "customchannels" :>
            Capture "customChannelId" Text :>
              "adunits" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "includeInactive" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "maxResults" Int32 :>
-                               QueryParam "fields" Text :>
+               QueryParam "includeInactive" Bool :>
+                 QueryParam "maxResults" Int32 :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :> Get '[JSON] AdUnits
 
 -- | List all ad units in the specified custom channel.
@@ -205,16 +205,16 @@ instance GoogleRequest CustomChannelsAdUnitsList'
         type Rs CustomChannelsAdUnitsList' = AdUnits
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u CustomChannelsAdUnitsList'{..}
-          = go _ccaulQuotaUser (Just _ccaulPrettyPrint)
-              _ccaulIncludeInactive
-              _ccaulCustomChannelId
-              _ccaulUserIP
-              _ccaulAdClientId
-              _ccaulKey
+          = go _ccaulIncludeInactive _ccaulMaxResults
               _ccaulPageToken
-              _ccaulOAuthToken
-              _ccaulMaxResults
+              _ccaulAdClientId
+              _ccaulCustomChannelId
+              _ccaulQuotaUser
+              (Just _ccaulPrettyPrint)
+              _ccaulUserIP
               _ccaulFields
+              _ccaulKey
+              _ccaulOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

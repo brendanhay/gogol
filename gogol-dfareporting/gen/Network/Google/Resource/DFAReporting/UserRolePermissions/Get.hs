@@ -53,9 +53,9 @@ type UserRolePermissionsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] UserRolePermission
 
@@ -163,13 +163,12 @@ instance GoogleRequest UserRolePermissionsGet' where
         type Rs UserRolePermissionsGet' = UserRolePermission
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u UserRolePermissionsGet'{..}
-          = go _urpgQuotaUser (Just _urpgPrettyPrint)
+          = go _urpgProfileId _urpgId _urpgQuotaUser
+              (Just _urpgPrettyPrint)
               _urpgUserIP
-              _urpgProfileId
-              _urpgKey
-              _urpgId
-              _urpgOAuthToken
               _urpgFields
+              _urpgKey
+              _urpgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

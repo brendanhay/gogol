@@ -50,9 +50,9 @@ type AssetsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Asset
 
 -- | Return metadata for a particular asset.
@@ -144,11 +144,11 @@ instance GoogleRequest AssetsGet' where
         type Rs AssetsGet' = Asset
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u AssetsGet'{..}
-          = go _agQuotaUser (Just _agPrettyPrint) _agUserIP
-              _agKey
-              _agId
-              _agOAuthToken
+          = go _agId _agQuotaUser (Just _agPrettyPrint)
+              _agUserIP
               _agFields
+              _agKey
+              _agOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy AssetsGetResource)

@@ -53,9 +53,9 @@ type FloodlightActivitiesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] FloodlightActivity
 
@@ -157,12 +157,12 @@ instance GoogleRequest FloodlightActivitiesGet' where
         type Rs FloodlightActivitiesGet' = FloodlightActivity
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u FloodlightActivitiesGet'{..}
-          = go _fQuotaUser (Just _fPrettyPrint) _fUserIP
-              _fProfileId
-              _fKey
-              _fId
-              _fOAuthToken
+          = go _fProfileId _fId _fQuotaUser
+              (Just _fPrettyPrint)
+              _fUserIP
               _fFields
+              _fKey
+              _fOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

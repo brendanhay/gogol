@@ -52,9 +52,9 @@ type PeopleGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Person
 
 -- | Get a person\'s profile. If your app uses scope
@@ -149,11 +149,11 @@ instance GoogleRequest PeopleGet' where
         type Rs PeopleGet' = Person
         request = requestWithRoute defReq plusURL
         requestWithRoute r u PeopleGet'{..}
-          = go _pgQuotaUser (Just _pgPrettyPrint) _pgUserIP
-              _pgUserId
+          = go _pgUserId _pgQuotaUser (Just _pgPrettyPrint)
+              _pgUserIP
+              _pgFields
               _pgKey
               _pgOAuthToken
-              _pgFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy PeopleGetResource)

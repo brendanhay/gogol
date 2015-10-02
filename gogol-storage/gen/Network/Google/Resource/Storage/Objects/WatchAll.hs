@@ -56,20 +56,20 @@ type ObjectsWatchAllResource =
        Capture "bucket" Text :>
          "o" :>
            "watch" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "prefix" Text :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "versions" Bool :>
-                       QueryParam "key" Key :>
-                         QueryParam "projection"
-                           StorageObjectsWatchAllProjection
-                           :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "delimiter" Text :>
-                                 QueryParam "maxResults" Word32 :>
-                                   QueryParam "fields" Text :>
+             QueryParam "delimiter" Text :>
+               QueryParam "maxResults" Word32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "prefix" Text :>
+                     QueryParam "projection"
+                       StorageObjectsWatchAllProjection
+                       :>
+                       QueryParam "versions" Bool :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        ReqBody '[JSON] Channel :>
                                          Post '[JSON] Channel
@@ -239,17 +239,17 @@ instance GoogleRequest ObjectsWatchAll' where
         type Rs ObjectsWatchAll' = Channel
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectsWatchAll'{..}
-          = go _owaQuotaUser (Just _owaPrettyPrint) _owaPrefix
-              _owaUserIP
-              _owaBucket
-              _owaVersions
-              _owaKey
+          = go _owaDelimiter _owaMaxResults _owaPageToken
+              _owaPrefix
               _owaProjection
-              _owaPageToken
-              _owaOAuthToken
-              _owaDelimiter
-              _owaMaxResults
+              _owaVersions
+              _owaBucket
+              _owaQuotaUser
+              (Just _owaPrettyPrint)
+              _owaUserIP
               _owaFields
+              _owaKey
+              _owaOAuthToken
               (Just AltJSON)
               _owaChannel
           where go

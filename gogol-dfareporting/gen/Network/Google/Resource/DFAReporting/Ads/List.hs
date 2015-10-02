@@ -72,73 +72,75 @@ type AdsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "ads" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParams "remarketingListIds" Int64 :>
-                 QueryParams "landingPageIds" Int64 :>
-                   QueryParams "creativeIds" Int64 :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "advertiserId" Int64 :>
-                         QueryParams "campaignIds" Int64 :>
-                           QueryParam "searchString" Text :>
-                             QueryParams "sizeIds" Int64 :>
-                               QueryParam "sslCompliant" Bool :>
-                                 QueryParams "ids" Int64 :>
-                                   QueryParam "sortOrder"
-                                     DfareportingAdsListSortOrder
-                                     :>
-                                     QueryParam "active" Bool :>
-                                       QueryParams
-                                         "creativeOptimizationConfigurationIds"
-                                         Int64
-                                         :>
-                                         QueryParam "key" Key :>
-                                           QueryParams "placementIds" Int64 :>
-                                             QueryParam "sslRequired" Bool :>
-                                               QueryParam "overriddenEventTagId"
-                                                 Int64
-                                                 :>
-                                                 QueryParam "pageToken" Text :>
-                                                   QueryParam "sortField"
-                                                     DfareportingAdsListSortField
+           QueryParam "active" Bool :>
+             QueryParam "advertiserId" Int64 :>
+               QueryParam "archived" Bool :>
+                 QueryParams "audienceSegmentIds" Int64 :>
+                   QueryParams "campaignIds" Int64 :>
+                     QueryParam "compatibility"
+                       DfareportingAdsListCompatibility
+                       :>
+                       QueryParams "creativeIds" Int64 :>
+                         QueryParams "creativeOptimizationConfigurationIds"
+                           Int64
+                           :>
+                           QueryParam "creativeType"
+                             DfareportingAdsListCreativeType
+                             :>
+                             QueryParam "dynamicClickTracker" Bool :>
+                               QueryParams "ids" Int64 :>
+                                 QueryParams "landingPageIds" Int64 :>
+                                   QueryParam "maxResults" Int32 :>
+                                     QueryParam "overriddenEventTagId" Int64 :>
+                                       QueryParam "pageToken" Text :>
+                                         QueryParams "placementIds" Int64 :>
+                                           QueryParams "remarketingListIds"
+                                             Int64
+                                             :>
+                                             QueryParam "searchString" Text :>
+                                               QueryParams "sizeIds" Int64 :>
+                                                 QueryParam "sortField"
+                                                   DfareportingAdsListSortField
+                                                   :>
+                                                   QueryParam "sortOrder"
+                                                     DfareportingAdsListSortOrder
                                                      :>
-                                                     QueryParams "type"
-                                                       DfareportingAdsListType
+                                                     QueryParam "sslCompliant"
+                                                       Bool
                                                        :>
-                                                       QueryParam "oauth_token"
-                                                         OAuthToken
+                                                       QueryParam "sslRequired"
+                                                         Bool
                                                          :>
-                                                         QueryParam
-                                                           "creativeType"
-                                                           DfareportingAdsListCreativeType
+                                                         QueryParams "type"
+                                                           DfareportingAdsListType
                                                            :>
                                                            QueryParam
-                                                             "dynamicClickTracker"
-                                                             Bool
+                                                             "quotaUser"
+                                                             Text
                                                              :>
                                                              QueryParam
-                                                               "compatibility"
-                                                               DfareportingAdsListCompatibility
+                                                               "prettyPrint"
+                                                               Bool
                                                                :>
                                                                QueryParam
-                                                                 "archived"
-                                                                 Bool
+                                                                 "userIp"
+                                                                 Text
                                                                  :>
                                                                  QueryParam
-                                                                   "maxResults"
-                                                                   Int32
+                                                                   "fields"
+                                                                   Text
                                                                    :>
                                                                    QueryParam
-                                                                     "fields"
-                                                                     Text
+                                                                     "key"
+                                                                     Key
                                                                      :>
                                                                      QueryParam
-                                                                       "alt"
-                                                                       AltJSON
+                                                                       "oauth_token"
+                                                                       OAuthToken
                                                                        :>
-                                                                       QueryParams
-                                                                         "audienceSegmentIds"
-                                                                         Int64
+                                                                       QueryParam
+                                                                         "alt"
+                                                                         AltJSON
                                                                          :>
                                                                          Get
                                                                            '[JSON]
@@ -481,36 +483,35 @@ instance GoogleRequest AdsList' where
         type Rs AdsList' = AdsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdsList'{..}
-          = go _adsQuotaUser (Just _adsPrettyPrint)
-              _adsRemarketingListIds
-              _adsLandingPageIds
-              _adsCreativeIds
-              _adsUserIP
-              _adsAdvertiserId
+          = go _adsActive _adsAdvertiserId _adsArchived
+              _adsAudienceSegmentIds
               _adsCampaignIds
-              _adsSearchString
-              _adsSizeIds
-              _adsSSLCompliant
-              _adsIds
-              _adsProfileId
-              _adsSortOrder
-              _adsActive
+              _adsCompatibility
+              _adsCreativeIds
               _adsCreativeOptimizationConfigurationIds
-              _adsKey
-              _adsPlacementIds
-              _adsSSLRequired
-              _adsOverriddenEventTagId
-              _adsPageToken
-              _adsSortField
-              _adsType
-              _adsOAuthToken
               _adsCreativeType
               _adsDynamicClickTracker
-              _adsCompatibility
-              _adsArchived
+              _adsIds
+              _adsLandingPageIds
               _adsMaxResults
+              _adsOverriddenEventTagId
+              _adsPageToken
+              _adsPlacementIds
+              _adsRemarketingListIds
+              _adsSearchString
+              _adsSizeIds
+              _adsSortField
+              _adsSortOrder
+              _adsSSLCompliant
+              _adsSSLRequired
+              _adsType
+              _adsProfileId
+              _adsQuotaUser
+              (Just _adsPrettyPrint)
+              _adsUserIP
               _adsFields
-              _adsAudienceSegmentIds
+              _adsKey
+              _adsOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy AdsListResource) r

@@ -53,9 +53,9 @@ type JobsQueryResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] QueryRequest :>
                            Post '[JSON] QueryResponse
@@ -162,11 +162,11 @@ instance GoogleRequest JobsQuery' where
         type Rs JobsQuery' = QueryResponse
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u JobsQuery'{..}
-          = go _jqQuotaUser (Just _jqPrettyPrint) _jqUserIP
-              _jqKey
-              _jqProjectId
-              _jqOAuthToken
+          = go _jqProjectId _jqQuotaUser (Just _jqPrettyPrint)
+              _jqUserIP
               _jqFields
+              _jqKey
+              _jqOAuthToken
               (Just AltJSON)
               _jqQueryRequest
           where go

@@ -54,9 +54,9 @@ type UsersRevokeTokenResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Revokes a previously generated token (activation code) for the user.
@@ -164,13 +164,12 @@ instance GoogleRequest UsersRevokeToken' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u UsersRevokeToken'{..}
-          = go _urtQuotaUser (Just _urtPrettyPrint)
-              _urtEnterpriseId
+          = go _urtEnterpriseId _urtUserId _urtQuotaUser
+              (Just _urtPrettyPrint)
               _urtUserIP
-              _urtUserId
+              _urtFields
               _urtKey
               _urtOAuthToken
-              _urtFields
               (Just AltJSON)
           where go
                   = clientWithRoute

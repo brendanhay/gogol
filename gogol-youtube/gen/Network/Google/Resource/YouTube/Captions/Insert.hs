@@ -52,15 +52,15 @@ import           Network.Google.YouTube.Types
 type CaptionsInsertResource =
      "captions" :>
        QueryParam "onBehalfOf" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "part" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "onBehalfOfContentOwner" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "sync" Bool :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+         QueryParam "onBehalfOfContentOwner" Text :>
+           QueryParam "sync" Bool :>
+             QueryParam "part" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              MultipartRelated '[JSON] Caption Body :>
                                Post '[JSON] Caption
@@ -216,15 +216,15 @@ instance GoogleRequest CaptionsInsert' where
         type Rs CaptionsInsert' = Caption
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u CaptionsInsert'{..}
-          = go _ciOnBehalfOf _ciQuotaUser (Just _ciPart)
+          = go _ciMedia _ciOnBehalfOf _ciOnBehalfOfContentOwner
+              _ciSync
+              (Just _ciPart)
+              _ciQuotaUser
               (Just _ciPrettyPrint)
               _ciUserIP
-              _ciMedia
-              _ciOnBehalfOfContentOwner
-              _ciKey
-              _ciSync
-              _ciOAuthToken
               _ciFields
+              _ciKey
+              _ciOAuthToken
               (Just AltJSON)
               _ciCaption
           where go

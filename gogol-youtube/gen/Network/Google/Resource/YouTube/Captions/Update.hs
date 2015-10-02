@@ -54,15 +54,15 @@ import           Network.Google.YouTube.Types
 type CaptionsUpdateResource =
      "captions" :>
        QueryParam "onBehalfOf" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "part" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "onBehalfOfContentOwner" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "sync" Bool :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+         QueryParam "onBehalfOfContentOwner" Text :>
+           QueryParam "sync" Bool :>
+             QueryParam "part" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              MultipartRelated '[JSON] Caption Body :>
                                Put '[JSON] Caption
@@ -225,15 +225,16 @@ instance GoogleRequest CaptionsUpdate' where
         type Rs CaptionsUpdate' = Caption
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u CaptionsUpdate'{..}
-          = go _capOnBehalfOf _capQuotaUser (Just _capPart)
+          = go _capMedia _capOnBehalfOf
+              _capOnBehalfOfContentOwner
+              _capSync
+              (Just _capPart)
+              _capQuotaUser
               (Just _capPrettyPrint)
               _capUserIP
-              _capMedia
-              _capOnBehalfOfContentOwner
-              _capKey
-              _capSync
-              _capOAuthToken
               _capFields
+              _capKey
+              _capOAuthToken
               (Just AltJSON)
               _capCaption
           where go

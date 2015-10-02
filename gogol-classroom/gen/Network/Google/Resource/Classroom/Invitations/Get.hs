@@ -59,17 +59,17 @@ type InvitationsGetResource =
        "invitations" :>
          Capture "id" Text :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
+             QueryParam "access_token" Text :>
+               QueryParam "bearer_token" Text :>
+                 QueryParam "callback" Text :>
                    QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] Invitation
 
@@ -221,17 +221,17 @@ instance GoogleRequest InvitationsGet' where
         type Rs InvitationsGet' = Invitation
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u InvitationsGet'{..}
-          = go _igXgafv _igQuotaUser (Just _igPrettyPrint)
-              _igUploadProtocol
-              (Just _igPp)
-              _igAccessToken
-              _igUploadType
-              _igBearerToken
-              _igKey
-              _igId
-              _igOAuthToken
-              _igFields
+          = go _igXgafv _igAccessToken _igBearerToken
               _igCallback
+              (Just _igPp)
+              _igUploadType
+              _igUploadProtocol
+              _igId
+              _igQuotaUser
+              (Just _igPrettyPrint)
+              _igFields
+              _igKey
+              _igOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

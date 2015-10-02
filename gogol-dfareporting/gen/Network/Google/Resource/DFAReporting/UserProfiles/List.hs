@@ -48,9 +48,9 @@ type UserProfilesListResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] UserProfileList
 
@@ -138,9 +138,9 @@ instance GoogleRequest UserProfilesList' where
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u UserProfilesList'{..}
           = go _uplQuotaUser (Just _uplPrettyPrint) _uplUserIP
+              _uplFields
               _uplKey
               _uplOAuthToken
-              _uplFields
               (Just AltJSON)
           where go
                   = clientWithRoute

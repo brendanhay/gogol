@@ -53,9 +53,9 @@ type CountriesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Country
 
 -- | Gets one country by ID.
@@ -157,12 +157,12 @@ instance GoogleRequest CountriesGet' where
         type Rs CountriesGet' = Country
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CountriesGet'{..}
-          = go _cgQuotaUser (Just _cgPrettyPrint) _cgUserIP
-              _cgProfileId
+          = go _cgProfileId _cgDartId _cgQuotaUser
+              (Just _cgPrettyPrint)
+              _cgUserIP
+              _cgFields
               _cgKey
               _cgOAuthToken
-              _cgDartId
-              _cgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

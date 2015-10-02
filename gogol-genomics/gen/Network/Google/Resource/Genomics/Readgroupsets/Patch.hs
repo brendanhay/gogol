@@ -51,9 +51,9 @@ type ReadgroupsetsPatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] ReadGroupSet :>
                          Patch '[JSON] ReadGroupSet
@@ -161,12 +161,12 @@ instance GoogleRequest ReadgroupsetsPatch' where
         type Rs ReadgroupsetsPatch' = ReadGroupSet
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u ReadgroupsetsPatch'{..}
-          = go _rpQuotaUser (Just _rpPrettyPrint)
-              _rpReadGroupSetId
+          = go _rpReadGroupSetId _rpQuotaUser
+              (Just _rpPrettyPrint)
               _rpUserIP
+              _rpFields
               _rpKey
               _rpOAuthToken
-              _rpFields
               (Just AltJSON)
               _rpReadGroupSet
           where go

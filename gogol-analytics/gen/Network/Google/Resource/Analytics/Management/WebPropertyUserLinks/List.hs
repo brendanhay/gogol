@@ -54,14 +54,14 @@ type ManagementWebPropertyUserLinksListResource =
            "webproperties" :>
              Capture "webPropertyId" Text :>
                "entityUserLinks" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "start-index" Int32 :>
-                             QueryParam "max-results" Int32 :>
-                               QueryParam "fields" Text :>
+                 QueryParam "max-results" Int32 :>
+                   QueryParam "start-index" Int32 :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] EntityUserLinks
 
@@ -201,15 +201,15 @@ instance GoogleRequest
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
           ManagementWebPropertyUserLinksList'{..}
-          = go _mwpullQuotaUser (Just _mwpullPrettyPrint)
-              _mwpullWebPropertyId
-              _mwpullUserIP
+          = go _mwpullMaxResults _mwpullStartIndex
               _mwpullAccountId
+              _mwpullWebPropertyId
+              _mwpullQuotaUser
+              (Just _mwpullPrettyPrint)
+              _mwpullUserIP
+              _mwpullFields
               _mwpullKey
               _mwpullOAuthToken
-              _mwpullStartIndex
-              _mwpullMaxResults
-              _mwpullFields
               (Just AltJSON)
           where go
                   = clientWithRoute

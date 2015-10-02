@@ -61,9 +61,9 @@ type ProjectsZonesClustersCreateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] CreateClusterRequest :>
                              Post '[JSON] Operation
@@ -193,13 +193,12 @@ instance GoogleRequest ProjectsZonesClustersCreate'
         type Rs ProjectsZonesClustersCreate' = Operation
         request = requestWithRoute defReq containerURL
         requestWithRoute r u ProjectsZonesClustersCreate'{..}
-          = go _pzccQuotaUser (Just _pzccPrettyPrint)
+          = go _pzccProjectId _pzccZoneId _pzccQuotaUser
+              (Just _pzccPrettyPrint)
               _pzccUserIP
-              _pzccZoneId
-              _pzccKey
-              _pzccProjectId
-              _pzccOAuthToken
               _pzccFields
+              _pzccKey
+              _pzccOAuthToken
               (Just AltJSON)
               _pzccCreateClusterRequest
           where go

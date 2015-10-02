@@ -55,9 +55,9 @@ type ProjectsZonesOperationsGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Operation
 
 -- | Gets the specified operation.
@@ -179,14 +179,13 @@ instance GoogleRequest ProjectsZonesOperationsGet'
         type Rs ProjectsZonesOperationsGet' = Operation
         request = requestWithRoute defReq containerURL
         requestWithRoute r u ProjectsZonesOperationsGet'{..}
-          = go _pzogQuotaUser (Just _pzogPrettyPrint)
+          = go _pzogProjectId _pzogZoneId _pzogOperationId
+              _pzogQuotaUser
+              (Just _pzogPrettyPrint)
               _pzogUserIP
-              _pzogZoneId
-              _pzogKey
-              _pzogProjectId
-              _pzogOperationId
-              _pzogOAuthToken
               _pzogFields
+              _pzogKey
+              _pzogOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -50,13 +50,13 @@ type RastersFilesInsertResource =
      "rasters" :>
        Capture "id" Text :>
          "files" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "filename" Text :>
-                       QueryParam "fields" Text :>
+           QueryParam "filename" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Upload a file to a raster asset.
@@ -169,13 +169,13 @@ instance GoogleRequest RastersFilesInsert' where
         type Rs RastersFilesInsert' = ()
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u RastersFilesInsert'{..}
-          = go _rfiQuotaUser (Just _rfiPrettyPrint) _rfiUserIP
-              _rfiMedia
-              _rfiKey
-              _rfiId
-              _rfiOAuthToken
-              (Just _rfiFilename)
+          = go _rfiMedia _rfiId (Just _rfiFilename)
+              _rfiQuotaUser
+              (Just _rfiPrettyPrint)
+              _rfiUserIP
               _rfiFields
+              _rfiKey
+              _rfiOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

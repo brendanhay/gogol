@@ -562,11 +562,11 @@ module Network.Google.PlusDomains
 
     -- ** ACL
     , ACL
-    , aCL
-    , aclKind
-    , aclItems
-    , aclDomainRestricted
-    , aclDescription
+    , acl
+    , aclcKind
+    , aclcItems
+    , aclcDomainRestricted
+    , aclcDescription
 
     -- ** MediaExif
     , MediaExif

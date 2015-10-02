@@ -50,17 +50,17 @@ import           Network.Google.Translate.Types
 -- 'TranslationsList'' request conforms to.
 type TranslationsListResource =
      "v2" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "format" LanguageTranslationsListFormat :>
-               QueryParams "q" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "source" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParams "cid" Text :>
-                         QueryParam "target" Text :>
-                           QueryParam "fields" Text :>
+       QueryParams "cid" Text :>
+         QueryParam "format" LanguageTranslationsListFormat :>
+           QueryParam "source" Text :>
+             QueryParams "q" Text :>
+               QueryParam "target" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] TranslationsListResponse
 
@@ -186,15 +186,14 @@ instance GoogleRequest TranslationsList' where
         type Rs TranslationsList' = TranslationsListResponse
         request = requestWithRoute defReq translateURL
         requestWithRoute r u TranslationsList'{..}
-          = go _tlQuotaUser (Just _tlPrettyPrint) _tlUserIP
-              _tlFormat
-              (Just _tlQ)
-              _tlKey
-              _tlSource
-              _tlOAuthToken
-              _tlCid
+          = go _tlCid _tlFormat _tlSource (Just _tlQ)
               (Just _tlTarget)
+              _tlQuotaUser
+              (Just _tlPrettyPrint)
+              _tlUserIP
               _tlFields
+              _tlKey
+              _tlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

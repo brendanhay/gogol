@@ -1262,263 +1262,259 @@ instance ToJSON ChildReference where
 --
 -- /See:/ 'app' smart constructor.
 data App = App
-    { _appLongDescription         :: !(Maybe Text)
-    , _appOpenURLTemplate         :: !(Maybe Text)
-    , _appAuthorized              :: !(Maybe Bool)
-    , _appObjectType              :: !(Maybe Text)
-    , _appSecondaryMimeTypes      :: !(Maybe [Text])
-    , _appCreateInFolderTemplate  :: !(Maybe Text)
-    , _appKind                    :: !Text
-    , _appIcons                   :: !(Maybe [AppIcons])
-    , _appProductURL              :: !(Maybe Text)
-    , _appUseByDefault            :: !(Maybe Bool)
-    , _appShortDescription        :: !(Maybe Text)
-    , _appName                    :: !(Maybe Text)
-    , _appCreateURL               :: !(Maybe Text)
-    , _appId                      :: !(Maybe Text)
-    , _appPrimaryFileExtensions   :: !(Maybe [Text])
-    , _appInstalled               :: !(Maybe Bool)
-    , _appSupportsCreate          :: !(Maybe Bool)
-    , _appPrimaryMimeTypes        :: !(Maybe [Text])
-    , _appHasDriveWideScope       :: !(Maybe Bool)
-    , _appProductId               :: !(Maybe Text)
-    , _appSecondaryFileExtensions :: !(Maybe [Text])
-    , _appSupportsMultiOpen       :: !(Maybe Bool)
-    , _appSupportsImport          :: !(Maybe Bool)
-    , _appSupportsOfflineCreate   :: !(Maybe Bool)
+    { _aLongDescription         :: !(Maybe Text)
+    , _aOpenURLTemplate         :: !(Maybe Text)
+    , _aAuthorized              :: !(Maybe Bool)
+    , _aObjectType              :: !(Maybe Text)
+    , _aSecondaryMimeTypes      :: !(Maybe [Text])
+    , _aCreateInFolderTemplate  :: !(Maybe Text)
+    , _aKind                    :: !Text
+    , _aIcons                   :: !(Maybe [AppIcons])
+    , _aProductURL              :: !(Maybe Text)
+    , _aUseByDefault            :: !(Maybe Bool)
+    , _aShortDescription        :: !(Maybe Text)
+    , _aName                    :: !(Maybe Text)
+    , _aCreateURL               :: !(Maybe Text)
+    , _aId                      :: !(Maybe Text)
+    , _aPrimaryFileExtensions   :: !(Maybe [Text])
+    , _aInstalled               :: !(Maybe Bool)
+    , _aSupportsCreate          :: !(Maybe Bool)
+    , _aPrimaryMimeTypes        :: !(Maybe [Text])
+    , _aHasDriveWideScope       :: !(Maybe Bool)
+    , _aProductId               :: !(Maybe Text)
+    , _aSecondaryFileExtensions :: !(Maybe [Text])
+    , _aSupportsMultiOpen       :: !(Maybe Bool)
+    , _aSupportsImport          :: !(Maybe Bool)
+    , _aSupportsOfflineCreate   :: !(Maybe Bool)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'App' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'appLongDescription'
+-- * 'aLongDescription'
 --
--- * 'appOpenURLTemplate'
+-- * 'aOpenURLTemplate'
 --
--- * 'appAuthorized'
+-- * 'aAuthorized'
 --
--- * 'appObjectType'
+-- * 'aObjectType'
 --
--- * 'appSecondaryMimeTypes'
+-- * 'aSecondaryMimeTypes'
 --
--- * 'appCreateInFolderTemplate'
+-- * 'aCreateInFolderTemplate'
 --
--- * 'appKind'
+-- * 'aKind'
 --
--- * 'appIcons'
+-- * 'aIcons'
 --
--- * 'appProductURL'
+-- * 'aProductURL'
 --
--- * 'appUseByDefault'
+-- * 'aUseByDefault'
 --
--- * 'appShortDescription'
+-- * 'aShortDescription'
 --
--- * 'appName'
+-- * 'aName'
 --
--- * 'appCreateURL'
+-- * 'aCreateURL'
 --
--- * 'appId'
+-- * 'aId'
 --
--- * 'appPrimaryFileExtensions'
+-- * 'aPrimaryFileExtensions'
 --
--- * 'appInstalled'
+-- * 'aInstalled'
 --
--- * 'appSupportsCreate'
+-- * 'aSupportsCreate'
 --
--- * 'appPrimaryMimeTypes'
+-- * 'aPrimaryMimeTypes'
 --
--- * 'appHasDriveWideScope'
+-- * 'aHasDriveWideScope'
 --
--- * 'appProductId'
+-- * 'aProductId'
 --
--- * 'appSecondaryFileExtensions'
+-- * 'aSecondaryFileExtensions'
 --
--- * 'appSupportsMultiOpen'
+-- * 'aSupportsMultiOpen'
 --
--- * 'appSupportsImport'
+-- * 'aSupportsImport'
 --
--- * 'appSupportsOfflineCreate'
+-- * 'aSupportsOfflineCreate'
 app
     :: App
 app =
     App
-    { _appLongDescription = Nothing
-    , _appOpenURLTemplate = Nothing
-    , _appAuthorized = Nothing
-    , _appObjectType = Nothing
-    , _appSecondaryMimeTypes = Nothing
-    , _appCreateInFolderTemplate = Nothing
-    , _appKind = "drive#app"
-    , _appIcons = Nothing
-    , _appProductURL = Nothing
-    , _appUseByDefault = Nothing
-    , _appShortDescription = Nothing
-    , _appName = Nothing
-    , _appCreateURL = Nothing
-    , _appId = Nothing
-    , _appPrimaryFileExtensions = Nothing
-    , _appInstalled = Nothing
-    , _appSupportsCreate = Nothing
-    , _appPrimaryMimeTypes = Nothing
-    , _appHasDriveWideScope = Nothing
-    , _appProductId = Nothing
-    , _appSecondaryFileExtensions = Nothing
-    , _appSupportsMultiOpen = Nothing
-    , _appSupportsImport = Nothing
-    , _appSupportsOfflineCreate = Nothing
+    { _aLongDescription = Nothing
+    , _aOpenURLTemplate = Nothing
+    , _aAuthorized = Nothing
+    , _aObjectType = Nothing
+    , _aSecondaryMimeTypes = Nothing
+    , _aCreateInFolderTemplate = Nothing
+    , _aKind = "drive#app"
+    , _aIcons = Nothing
+    , _aProductURL = Nothing
+    , _aUseByDefault = Nothing
+    , _aShortDescription = Nothing
+    , _aName = Nothing
+    , _aCreateURL = Nothing
+    , _aId = Nothing
+    , _aPrimaryFileExtensions = Nothing
+    , _aInstalled = Nothing
+    , _aSupportsCreate = Nothing
+    , _aPrimaryMimeTypes = Nothing
+    , _aHasDriveWideScope = Nothing
+    , _aProductId = Nothing
+    , _aSecondaryFileExtensions = Nothing
+    , _aSupportsMultiOpen = Nothing
+    , _aSupportsImport = Nothing
+    , _aSupportsOfflineCreate = Nothing
     }
 
 -- | A long description of the app.
-appLongDescription :: Lens' App (Maybe Text)
-appLongDescription
-  = lens _appLongDescription
-      (\ s a -> s{_appLongDescription = a})
+aLongDescription :: Lens' App (Maybe Text)
+aLongDescription
+  = lens _aLongDescription
+      (\ s a -> s{_aLongDescription = a})
 
 -- | The template url for opening files with this app. The template will
 -- contain {ids} and\/or {exportIds} to be replaced by the actual file ids.
 -- See Open Files for the full documentation.
-appOpenURLTemplate :: Lens' App (Maybe Text)
-appOpenURLTemplate
-  = lens _appOpenURLTemplate
-      (\ s a -> s{_appOpenURLTemplate = a})
+aOpenURLTemplate :: Lens' App (Maybe Text)
+aOpenURLTemplate
+  = lens _aOpenURLTemplate
+      (\ s a -> s{_aOpenURLTemplate = a})
 
 -- | Whether the app is authorized to access data on the user\'s Drive.
-appAuthorized :: Lens' App (Maybe Bool)
-appAuthorized
-  = lens _appAuthorized
-      (\ s a -> s{_appAuthorized = a})
+aAuthorized :: Lens' App (Maybe Bool)
+aAuthorized
+  = lens _aAuthorized (\ s a -> s{_aAuthorized = a})
 
 -- | The type of object this app creates (e.g. Chart). If empty, the app name
 -- should be used instead.
-appObjectType :: Lens' App (Maybe Text)
-appObjectType
-  = lens _appObjectType
-      (\ s a -> s{_appObjectType = a})
+aObjectType :: Lens' App (Maybe Text)
+aObjectType
+  = lens _aObjectType (\ s a -> s{_aObjectType = a})
 
 -- | The list of secondary mime types.
-appSecondaryMimeTypes :: Lens' App [Text]
-appSecondaryMimeTypes
-  = lens _appSecondaryMimeTypes
-      (\ s a -> s{_appSecondaryMimeTypes = a})
+aSecondaryMimeTypes :: Lens' App [Text]
+aSecondaryMimeTypes
+  = lens _aSecondaryMimeTypes
+      (\ s a -> s{_aSecondaryMimeTypes = a})
       . _Default
       . _Coerce
 
 -- | The template url to create a new file with this app in a given folder.
 -- The template will contain {folderId} to be replaced by the folder to
 -- create the new file in.
-appCreateInFolderTemplate :: Lens' App (Maybe Text)
-appCreateInFolderTemplate
-  = lens _appCreateInFolderTemplate
-      (\ s a -> s{_appCreateInFolderTemplate = a})
+aCreateInFolderTemplate :: Lens' App (Maybe Text)
+aCreateInFolderTemplate
+  = lens _aCreateInFolderTemplate
+      (\ s a -> s{_aCreateInFolderTemplate = a})
 
 -- | This is always drive#app.
-appKind :: Lens' App Text
-appKind = lens _appKind (\ s a -> s{_appKind = a})
+aKind :: Lens' App Text
+aKind = lens _aKind (\ s a -> s{_aKind = a})
 
 -- | The various icons for the app.
-appIcons :: Lens' App [AppIcons]
-appIcons
-  = lens _appIcons (\ s a -> s{_appIcons = a}) .
-      _Default
-      . _Coerce
+aIcons :: Lens' App [AppIcons]
+aIcons
+  = lens _aIcons (\ s a -> s{_aIcons = a}) . _Default .
+      _Coerce
 
 -- | A link to the product listing for this app.
-appProductURL :: Lens' App (Maybe Text)
-appProductURL
-  = lens _appProductURL
-      (\ s a -> s{_appProductURL = a})
+aProductURL :: Lens' App (Maybe Text)
+aProductURL
+  = lens _aProductURL (\ s a -> s{_aProductURL = a})
 
 -- | Whether the app is selected as the default handler for the types it
 -- supports.
-appUseByDefault :: Lens' App (Maybe Bool)
-appUseByDefault
-  = lens _appUseByDefault
-      (\ s a -> s{_appUseByDefault = a})
+aUseByDefault :: Lens' App (Maybe Bool)
+aUseByDefault
+  = lens _aUseByDefault
+      (\ s a -> s{_aUseByDefault = a})
 
 -- | A short description of the app.
-appShortDescription :: Lens' App (Maybe Text)
-appShortDescription
-  = lens _appShortDescription
-      (\ s a -> s{_appShortDescription = a})
+aShortDescription :: Lens' App (Maybe Text)
+aShortDescription
+  = lens _aShortDescription
+      (\ s a -> s{_aShortDescription = a})
 
 -- | The name of the app.
-appName :: Lens' App (Maybe Text)
-appName = lens _appName (\ s a -> s{_appName = a})
+aName :: Lens' App (Maybe Text)
+aName = lens _aName (\ s a -> s{_aName = a})
 
 -- | The url to create a new file with this app.
-appCreateURL :: Lens' App (Maybe Text)
-appCreateURL
-  = lens _appCreateURL (\ s a -> s{_appCreateURL = a})
+aCreateURL :: Lens' App (Maybe Text)
+aCreateURL
+  = lens _aCreateURL (\ s a -> s{_aCreateURL = a})
 
 -- | The ID of the app.
-appId :: Lens' App (Maybe Text)
-appId = lens _appId (\ s a -> s{_appId = a})
+aId :: Lens' App (Maybe Text)
+aId = lens _aId (\ s a -> s{_aId = a})
 
 -- | The list of primary file extensions.
-appPrimaryFileExtensions :: Lens' App [Text]
-appPrimaryFileExtensions
-  = lens _appPrimaryFileExtensions
-      (\ s a -> s{_appPrimaryFileExtensions = a})
+aPrimaryFileExtensions :: Lens' App [Text]
+aPrimaryFileExtensions
+  = lens _aPrimaryFileExtensions
+      (\ s a -> s{_aPrimaryFileExtensions = a})
       . _Default
       . _Coerce
 
 -- | Whether the app is installed.
-appInstalled :: Lens' App (Maybe Bool)
-appInstalled
-  = lens _appInstalled (\ s a -> s{_appInstalled = a})
+aInstalled :: Lens' App (Maybe Bool)
+aInstalled
+  = lens _aInstalled (\ s a -> s{_aInstalled = a})
 
 -- | Whether this app supports creating new objects.
-appSupportsCreate :: Lens' App (Maybe Bool)
-appSupportsCreate
-  = lens _appSupportsCreate
-      (\ s a -> s{_appSupportsCreate = a})
+aSupportsCreate :: Lens' App (Maybe Bool)
+aSupportsCreate
+  = lens _aSupportsCreate
+      (\ s a -> s{_aSupportsCreate = a})
 
 -- | The list of primary mime types.
-appPrimaryMimeTypes :: Lens' App [Text]
-appPrimaryMimeTypes
-  = lens _appPrimaryMimeTypes
-      (\ s a -> s{_appPrimaryMimeTypes = a})
+aPrimaryMimeTypes :: Lens' App [Text]
+aPrimaryMimeTypes
+  = lens _aPrimaryMimeTypes
+      (\ s a -> s{_aPrimaryMimeTypes = a})
       . _Default
       . _Coerce
 
 -- | Whether the app has drive-wide scope. An app with drive-wide scope can
 -- access all files in the user\'s drive.
-appHasDriveWideScope :: Lens' App (Maybe Bool)
-appHasDriveWideScope
-  = lens _appHasDriveWideScope
-      (\ s a -> s{_appHasDriveWideScope = a})
+aHasDriveWideScope :: Lens' App (Maybe Bool)
+aHasDriveWideScope
+  = lens _aHasDriveWideScope
+      (\ s a -> s{_aHasDriveWideScope = a})
 
 -- | The ID of the product listing for this app.
-appProductId :: Lens' App (Maybe Text)
-appProductId
-  = lens _appProductId (\ s a -> s{_appProductId = a})
+aProductId :: Lens' App (Maybe Text)
+aProductId
+  = lens _aProductId (\ s a -> s{_aProductId = a})
 
 -- | The list of secondary file extensions.
-appSecondaryFileExtensions :: Lens' App [Text]
-appSecondaryFileExtensions
-  = lens _appSecondaryFileExtensions
-      (\ s a -> s{_appSecondaryFileExtensions = a})
+aSecondaryFileExtensions :: Lens' App [Text]
+aSecondaryFileExtensions
+  = lens _aSecondaryFileExtensions
+      (\ s a -> s{_aSecondaryFileExtensions = a})
       . _Default
       . _Coerce
 
 -- | Whether this app supports opening more than one file.
-appSupportsMultiOpen :: Lens' App (Maybe Bool)
-appSupportsMultiOpen
-  = lens _appSupportsMultiOpen
-      (\ s a -> s{_appSupportsMultiOpen = a})
+aSupportsMultiOpen :: Lens' App (Maybe Bool)
+aSupportsMultiOpen
+  = lens _aSupportsMultiOpen
+      (\ s a -> s{_aSupportsMultiOpen = a})
 
 -- | Whether this app supports importing Google Docs.
-appSupportsImport :: Lens' App (Maybe Bool)
-appSupportsImport
-  = lens _appSupportsImport
-      (\ s a -> s{_appSupportsImport = a})
+aSupportsImport :: Lens' App (Maybe Bool)
+aSupportsImport
+  = lens _aSupportsImport
+      (\ s a -> s{_aSupportsImport = a})
 
 -- | Whether this app supports creating new files when offline.
-appSupportsOfflineCreate :: Lens' App (Maybe Bool)
-appSupportsOfflineCreate
-  = lens _appSupportsOfflineCreate
-      (\ s a -> s{_appSupportsOfflineCreate = a})
+aSupportsOfflineCreate :: Lens' App (Maybe Bool)
+aSupportsOfflineCreate
+  = lens _aSupportsOfflineCreate
+      (\ s a -> s{_aSupportsOfflineCreate = a})
 
 instance FromJSON App where
         parseJSON
@@ -1554,34 +1550,32 @@ instance ToJSON App where
         toJSON App{..}
           = object
               (catMaybes
-                 [("longDescription" .=) <$> _appLongDescription,
-                  ("openUrlTemplate" .=) <$> _appOpenURLTemplate,
-                  ("authorized" .=) <$> _appAuthorized,
-                  ("objectType" .=) <$> _appObjectType,
-                  ("secondaryMimeTypes" .=) <$> _appSecondaryMimeTypes,
+                 [("longDescription" .=) <$> _aLongDescription,
+                  ("openUrlTemplate" .=) <$> _aOpenURLTemplate,
+                  ("authorized" .=) <$> _aAuthorized,
+                  ("objectType" .=) <$> _aObjectType,
+                  ("secondaryMimeTypes" .=) <$> _aSecondaryMimeTypes,
                   ("createInFolderTemplate" .=) <$>
-                    _appCreateInFolderTemplate,
-                  Just ("kind" .= _appKind),
-                  ("icons" .=) <$> _appIcons,
-                  ("productUrl" .=) <$> _appProductURL,
-                  ("useByDefault" .=) <$> _appUseByDefault,
-                  ("shortDescription" .=) <$> _appShortDescription,
-                  ("name" .=) <$> _appName,
-                  ("createUrl" .=) <$> _appCreateURL,
-                  ("id" .=) <$> _appId,
+                    _aCreateInFolderTemplate,
+                  Just ("kind" .= _aKind), ("icons" .=) <$> _aIcons,
+                  ("productUrl" .=) <$> _aProductURL,
+                  ("useByDefault" .=) <$> _aUseByDefault,
+                  ("shortDescription" .=) <$> _aShortDescription,
+                  ("name" .=) <$> _aName,
+                  ("createUrl" .=) <$> _aCreateURL, ("id" .=) <$> _aId,
                   ("primaryFileExtensions" .=) <$>
-                    _appPrimaryFileExtensions,
-                  ("installed" .=) <$> _appInstalled,
-                  ("supportsCreate" .=) <$> _appSupportsCreate,
-                  ("primaryMimeTypes" .=) <$> _appPrimaryMimeTypes,
-                  ("hasDriveWideScope" .=) <$> _appHasDriveWideScope,
-                  ("productId" .=) <$> _appProductId,
+                    _aPrimaryFileExtensions,
+                  ("installed" .=) <$> _aInstalled,
+                  ("supportsCreate" .=) <$> _aSupportsCreate,
+                  ("primaryMimeTypes" .=) <$> _aPrimaryMimeTypes,
+                  ("hasDriveWideScope" .=) <$> _aHasDriveWideScope,
+                  ("productId" .=) <$> _aProductId,
                   ("secondaryFileExtensions" .=) <$>
-                    _appSecondaryFileExtensions,
-                  ("supportsMultiOpen" .=) <$> _appSupportsMultiOpen,
-                  ("supportsImport" .=) <$> _appSupportsImport,
+                    _aSecondaryFileExtensions,
+                  ("supportsMultiOpen" .=) <$> _aSupportsMultiOpen,
+                  ("supportsImport" .=) <$> _aSupportsImport,
                   ("supportsOfflineCreate" .=) <$>
-                    _appSupportsOfflineCreate])
+                    _aSupportsOfflineCreate])
 
 -- | The JSON template for a user.
 --
@@ -2134,266 +2128,266 @@ instance ToJSON FileIndexableText where
 --
 -- /See:/ 'about' smart constructor.
 data About = About
-    { _aExportFormats           :: !(Maybe [AboutExportFormats])
-    , _aRemainingChangeIds      :: !(Maybe Int64)
-    , _aLanguageCode            :: !(Maybe Text)
-    , _aEtag                    :: !(Maybe Text)
-    , _aImportFormats           :: !(Maybe [AboutImportFormats])
-    , _aKind                    :: !Text
-    , _aDomainSharingPolicy     :: !(Maybe Text)
-    , _aQuotaBytesUsedInTrash   :: !(Maybe Int64)
-    , _aQuotaType               :: !(Maybe Text)
-    , _aMaxUploadSizes          :: !(Maybe [AboutMaxUploadSizes])
-    , _aUser                    :: !(Maybe User)
-    , _aSelfLink                :: !(Maybe Text)
-    , _aName                    :: !(Maybe Text)
-    , _aFeatures                :: !(Maybe [AboutFeatures])
-    , _aIsCurrentAppInstalled   :: !(Maybe Bool)
-    , _aQuotaBytesTotal         :: !(Maybe Int64)
-    , _aRootFolderId            :: !(Maybe Text)
-    , _aQuotaBytesUsed          :: !(Maybe Int64)
-    , _aAdditionalRoleInfo      :: !(Maybe [AboutAdditionalRoleInfo])
-    , _aFolderColorPalette      :: !(Maybe [Text])
-    , _aPermissionId            :: !(Maybe Text)
-    , _aQuotaBytesUsedAggregate :: !(Maybe Int64)
-    , _aQuotaBytesByService     :: !(Maybe [AboutQuotaBytesByService])
-    , _aLargestChangeId         :: !(Maybe Int64)
+    { _aboExportFormats           :: !(Maybe [AboutExportFormats])
+    , _aboRemainingChangeIds      :: !(Maybe Int64)
+    , _aboLanguageCode            :: !(Maybe Text)
+    , _aboEtag                    :: !(Maybe Text)
+    , _aboImportFormats           :: !(Maybe [AboutImportFormats])
+    , _aboKind                    :: !Text
+    , _aboDomainSharingPolicy     :: !(Maybe Text)
+    , _aboQuotaBytesUsedInTrash   :: !(Maybe Int64)
+    , _aboQuotaType               :: !(Maybe Text)
+    , _aboMaxUploadSizes          :: !(Maybe [AboutMaxUploadSizes])
+    , _aboUser                    :: !(Maybe User)
+    , _aboSelfLink                :: !(Maybe Text)
+    , _aboName                    :: !(Maybe Text)
+    , _aboFeatures                :: !(Maybe [AboutFeatures])
+    , _aboIsCurrentAppInstalled   :: !(Maybe Bool)
+    , _aboQuotaBytesTotal         :: !(Maybe Int64)
+    , _aboRootFolderId            :: !(Maybe Text)
+    , _aboQuotaBytesUsed          :: !(Maybe Int64)
+    , _aboAdditionalRoleInfo      :: !(Maybe [AboutAdditionalRoleInfo])
+    , _aboFolderColorPalette      :: !(Maybe [Text])
+    , _aboPermissionId            :: !(Maybe Text)
+    , _aboQuotaBytesUsedAggregate :: !(Maybe Int64)
+    , _aboQuotaBytesByService     :: !(Maybe [AboutQuotaBytesByService])
+    , _aboLargestChangeId         :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'About' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aExportFormats'
+-- * 'aboExportFormats'
 --
--- * 'aRemainingChangeIds'
+-- * 'aboRemainingChangeIds'
 --
--- * 'aLanguageCode'
+-- * 'aboLanguageCode'
 --
--- * 'aEtag'
+-- * 'aboEtag'
 --
--- * 'aImportFormats'
+-- * 'aboImportFormats'
 --
--- * 'aKind'
+-- * 'aboKind'
 --
--- * 'aDomainSharingPolicy'
+-- * 'aboDomainSharingPolicy'
 --
--- * 'aQuotaBytesUsedInTrash'
+-- * 'aboQuotaBytesUsedInTrash'
 --
--- * 'aQuotaType'
+-- * 'aboQuotaType'
 --
--- * 'aMaxUploadSizes'
+-- * 'aboMaxUploadSizes'
 --
--- * 'aUser'
+-- * 'aboUser'
 --
--- * 'aSelfLink'
+-- * 'aboSelfLink'
 --
--- * 'aName'
+-- * 'aboName'
 --
--- * 'aFeatures'
+-- * 'aboFeatures'
 --
--- * 'aIsCurrentAppInstalled'
+-- * 'aboIsCurrentAppInstalled'
 --
--- * 'aQuotaBytesTotal'
+-- * 'aboQuotaBytesTotal'
 --
--- * 'aRootFolderId'
+-- * 'aboRootFolderId'
 --
--- * 'aQuotaBytesUsed'
+-- * 'aboQuotaBytesUsed'
 --
--- * 'aAdditionalRoleInfo'
+-- * 'aboAdditionalRoleInfo'
 --
--- * 'aFolderColorPalette'
+-- * 'aboFolderColorPalette'
 --
--- * 'aPermissionId'
+-- * 'aboPermissionId'
 --
--- * 'aQuotaBytesUsedAggregate'
+-- * 'aboQuotaBytesUsedAggregate'
 --
--- * 'aQuotaBytesByService'
+-- * 'aboQuotaBytesByService'
 --
--- * 'aLargestChangeId'
+-- * 'aboLargestChangeId'
 about
     :: About
 about =
     About
-    { _aExportFormats = Nothing
-    , _aRemainingChangeIds = Nothing
-    , _aLanguageCode = Nothing
-    , _aEtag = Nothing
-    , _aImportFormats = Nothing
-    , _aKind = "drive#about"
-    , _aDomainSharingPolicy = Nothing
-    , _aQuotaBytesUsedInTrash = Nothing
-    , _aQuotaType = Nothing
-    , _aMaxUploadSizes = Nothing
-    , _aUser = Nothing
-    , _aSelfLink = Nothing
-    , _aName = Nothing
-    , _aFeatures = Nothing
-    , _aIsCurrentAppInstalled = Nothing
-    , _aQuotaBytesTotal = Nothing
-    , _aRootFolderId = Nothing
-    , _aQuotaBytesUsed = Nothing
-    , _aAdditionalRoleInfo = Nothing
-    , _aFolderColorPalette = Nothing
-    , _aPermissionId = Nothing
-    , _aQuotaBytesUsedAggregate = Nothing
-    , _aQuotaBytesByService = Nothing
-    , _aLargestChangeId = Nothing
+    { _aboExportFormats = Nothing
+    , _aboRemainingChangeIds = Nothing
+    , _aboLanguageCode = Nothing
+    , _aboEtag = Nothing
+    , _aboImportFormats = Nothing
+    , _aboKind = "drive#about"
+    , _aboDomainSharingPolicy = Nothing
+    , _aboQuotaBytesUsedInTrash = Nothing
+    , _aboQuotaType = Nothing
+    , _aboMaxUploadSizes = Nothing
+    , _aboUser = Nothing
+    , _aboSelfLink = Nothing
+    , _aboName = Nothing
+    , _aboFeatures = Nothing
+    , _aboIsCurrentAppInstalled = Nothing
+    , _aboQuotaBytesTotal = Nothing
+    , _aboRootFolderId = Nothing
+    , _aboQuotaBytesUsed = Nothing
+    , _aboAdditionalRoleInfo = Nothing
+    , _aboFolderColorPalette = Nothing
+    , _aboPermissionId = Nothing
+    , _aboQuotaBytesUsedAggregate = Nothing
+    , _aboQuotaBytesByService = Nothing
+    , _aboLargestChangeId = Nothing
     }
 
 -- | The allowable export formats.
-aExportFormats :: Lens' About [AboutExportFormats]
-aExportFormats
-  = lens _aExportFormats
-      (\ s a -> s{_aExportFormats = a})
+aboExportFormats :: Lens' About [AboutExportFormats]
+aboExportFormats
+  = lens _aboExportFormats
+      (\ s a -> s{_aboExportFormats = a})
       . _Default
       . _Coerce
 
 -- | The number of remaining change ids.
-aRemainingChangeIds :: Lens' About (Maybe Int64)
-aRemainingChangeIds
-  = lens _aRemainingChangeIds
-      (\ s a -> s{_aRemainingChangeIds = a})
+aboRemainingChangeIds :: Lens' About (Maybe Int64)
+aboRemainingChangeIds
+  = lens _aboRemainingChangeIds
+      (\ s a -> s{_aboRemainingChangeIds = a})
 
 -- | The user\'s language or locale code, as defined by BCP 47, with some
 -- extensions from Unicode\'s LDML format
 -- (http:\/\/www.unicode.org\/reports\/tr35\/).
-aLanguageCode :: Lens' About (Maybe Text)
-aLanguageCode
-  = lens _aLanguageCode
-      (\ s a -> s{_aLanguageCode = a})
+aboLanguageCode :: Lens' About (Maybe Text)
+aboLanguageCode
+  = lens _aboLanguageCode
+      (\ s a -> s{_aboLanguageCode = a})
 
 -- | The ETag of the item.
-aEtag :: Lens' About (Maybe Text)
-aEtag = lens _aEtag (\ s a -> s{_aEtag = a})
+aboEtag :: Lens' About (Maybe Text)
+aboEtag = lens _aboEtag (\ s a -> s{_aboEtag = a})
 
 -- | The allowable import formats.
-aImportFormats :: Lens' About [AboutImportFormats]
-aImportFormats
-  = lens _aImportFormats
-      (\ s a -> s{_aImportFormats = a})
+aboImportFormats :: Lens' About [AboutImportFormats]
+aboImportFormats
+  = lens _aboImportFormats
+      (\ s a -> s{_aboImportFormats = a})
       . _Default
       . _Coerce
 
 -- | This is always drive#about.
-aKind :: Lens' About Text
-aKind = lens _aKind (\ s a -> s{_aKind = a})
+aboKind :: Lens' About Text
+aboKind = lens _aboKind (\ s a -> s{_aboKind = a})
 
 -- | The domain sharing policy for the current user. Possible values are: -
 -- allowed - allowedWithWarning - incomingOnly - disallowed
-aDomainSharingPolicy :: Lens' About (Maybe Text)
-aDomainSharingPolicy
-  = lens _aDomainSharingPolicy
-      (\ s a -> s{_aDomainSharingPolicy = a})
+aboDomainSharingPolicy :: Lens' About (Maybe Text)
+aboDomainSharingPolicy
+  = lens _aboDomainSharingPolicy
+      (\ s a -> s{_aboDomainSharingPolicy = a})
 
 -- | The number of quota bytes used by trashed items.
-aQuotaBytesUsedInTrash :: Lens' About (Maybe Int64)
-aQuotaBytesUsedInTrash
-  = lens _aQuotaBytesUsedInTrash
-      (\ s a -> s{_aQuotaBytesUsedInTrash = a})
+aboQuotaBytesUsedInTrash :: Lens' About (Maybe Int64)
+aboQuotaBytesUsedInTrash
+  = lens _aboQuotaBytesUsedInTrash
+      (\ s a -> s{_aboQuotaBytesUsedInTrash = a})
 
 -- | The type of the user\'s storage quota. Possible values are: - LIMITED -
 -- UNLIMITED
-aQuotaType :: Lens' About (Maybe Text)
-aQuotaType
-  = lens _aQuotaType (\ s a -> s{_aQuotaType = a})
+aboQuotaType :: Lens' About (Maybe Text)
+aboQuotaType
+  = lens _aboQuotaType (\ s a -> s{_aboQuotaType = a})
 
 -- | List of max upload sizes for each file type. The most specific type
 -- takes precedence.
-aMaxUploadSizes :: Lens' About [AboutMaxUploadSizes]
-aMaxUploadSizes
-  = lens _aMaxUploadSizes
-      (\ s a -> s{_aMaxUploadSizes = a})
+aboMaxUploadSizes :: Lens' About [AboutMaxUploadSizes]
+aboMaxUploadSizes
+  = lens _aboMaxUploadSizes
+      (\ s a -> s{_aboMaxUploadSizes = a})
       . _Default
       . _Coerce
 
 -- | The authenticated user.
-aUser :: Lens' About (Maybe User)
-aUser = lens _aUser (\ s a -> s{_aUser = a})
+aboUser :: Lens' About (Maybe User)
+aboUser = lens _aboUser (\ s a -> s{_aboUser = a})
 
 -- | A link back to this item.
-aSelfLink :: Lens' About (Maybe Text)
-aSelfLink
-  = lens _aSelfLink (\ s a -> s{_aSelfLink = a})
+aboSelfLink :: Lens' About (Maybe Text)
+aboSelfLink
+  = lens _aboSelfLink (\ s a -> s{_aboSelfLink = a})
 
 -- | The name of the current user.
-aName :: Lens' About (Maybe Text)
-aName = lens _aName (\ s a -> s{_aName = a})
+aboName :: Lens' About (Maybe Text)
+aboName = lens _aboName (\ s a -> s{_aboName = a})
 
 -- | List of additional features enabled on this account.
-aFeatures :: Lens' About [AboutFeatures]
-aFeatures
-  = lens _aFeatures (\ s a -> s{_aFeatures = a}) .
+aboFeatures :: Lens' About [AboutFeatures]
+aboFeatures
+  = lens _aboFeatures (\ s a -> s{_aboFeatures = a}) .
       _Default
       . _Coerce
 
 -- | A boolean indicating whether the authenticated app is installed by the
 -- authenticated user.
-aIsCurrentAppInstalled :: Lens' About (Maybe Bool)
-aIsCurrentAppInstalled
-  = lens _aIsCurrentAppInstalled
-      (\ s a -> s{_aIsCurrentAppInstalled = a})
+aboIsCurrentAppInstalled :: Lens' About (Maybe Bool)
+aboIsCurrentAppInstalled
+  = lens _aboIsCurrentAppInstalled
+      (\ s a -> s{_aboIsCurrentAppInstalled = a})
 
 -- | The total number of quota bytes.
-aQuotaBytesTotal :: Lens' About (Maybe Int64)
-aQuotaBytesTotal
-  = lens _aQuotaBytesTotal
-      (\ s a -> s{_aQuotaBytesTotal = a})
+aboQuotaBytesTotal :: Lens' About (Maybe Int64)
+aboQuotaBytesTotal
+  = lens _aboQuotaBytesTotal
+      (\ s a -> s{_aboQuotaBytesTotal = a})
 
 -- | The id of the root folder.
-aRootFolderId :: Lens' About (Maybe Text)
-aRootFolderId
-  = lens _aRootFolderId
-      (\ s a -> s{_aRootFolderId = a})
+aboRootFolderId :: Lens' About (Maybe Text)
+aboRootFolderId
+  = lens _aboRootFolderId
+      (\ s a -> s{_aboRootFolderId = a})
 
 -- | The number of quota bytes used by Google Drive.
-aQuotaBytesUsed :: Lens' About (Maybe Int64)
-aQuotaBytesUsed
-  = lens _aQuotaBytesUsed
-      (\ s a -> s{_aQuotaBytesUsed = a})
+aboQuotaBytesUsed :: Lens' About (Maybe Int64)
+aboQuotaBytesUsed
+  = lens _aboQuotaBytesUsed
+      (\ s a -> s{_aboQuotaBytesUsed = a})
 
 -- | Information about supported additional roles per file type. The most
 -- specific type takes precedence.
-aAdditionalRoleInfo :: Lens' About [AboutAdditionalRoleInfo]
-aAdditionalRoleInfo
-  = lens _aAdditionalRoleInfo
-      (\ s a -> s{_aAdditionalRoleInfo = a})
+aboAdditionalRoleInfo :: Lens' About [AboutAdditionalRoleInfo]
+aboAdditionalRoleInfo
+  = lens _aboAdditionalRoleInfo
+      (\ s a -> s{_aboAdditionalRoleInfo = a})
       . _Default
       . _Coerce
 
 -- | The palette of allowable folder colors as RGB hex strings.
-aFolderColorPalette :: Lens' About [Text]
-aFolderColorPalette
-  = lens _aFolderColorPalette
-      (\ s a -> s{_aFolderColorPalette = a})
+aboFolderColorPalette :: Lens' About [Text]
+aboFolderColorPalette
+  = lens _aboFolderColorPalette
+      (\ s a -> s{_aboFolderColorPalette = a})
       . _Default
       . _Coerce
 
 -- | The current user\'s ID as visible in the permissions collection.
-aPermissionId :: Lens' About (Maybe Text)
-aPermissionId
-  = lens _aPermissionId
-      (\ s a -> s{_aPermissionId = a})
+aboPermissionId :: Lens' About (Maybe Text)
+aboPermissionId
+  = lens _aboPermissionId
+      (\ s a -> s{_aboPermissionId = a})
 
 -- | The number of quota bytes used by all Google apps (Drive, Picasa, etc.).
-aQuotaBytesUsedAggregate :: Lens' About (Maybe Int64)
-aQuotaBytesUsedAggregate
-  = lens _aQuotaBytesUsedAggregate
-      (\ s a -> s{_aQuotaBytesUsedAggregate = a})
+aboQuotaBytesUsedAggregate :: Lens' About (Maybe Int64)
+aboQuotaBytesUsedAggregate
+  = lens _aboQuotaBytesUsedAggregate
+      (\ s a -> s{_aboQuotaBytesUsedAggregate = a})
 
 -- | The amount of storage quota used by different Google services.
-aQuotaBytesByService :: Lens' About [AboutQuotaBytesByService]
-aQuotaBytesByService
-  = lens _aQuotaBytesByService
-      (\ s a -> s{_aQuotaBytesByService = a})
+aboQuotaBytesByService :: Lens' About [AboutQuotaBytesByService]
+aboQuotaBytesByService
+  = lens _aboQuotaBytesByService
+      (\ s a -> s{_aboQuotaBytesByService = a})
       . _Default
       . _Coerce
 
 -- | The largest change id.
-aLargestChangeId :: Lens' About (Maybe Int64)
-aLargestChangeId
-  = lens _aLargestChangeId
-      (\ s a -> s{_aLargestChangeId = a})
+aboLargestChangeId :: Lens' About (Maybe Int64)
+aboLargestChangeId
+  = lens _aboLargestChangeId
+      (\ s a -> s{_aboLargestChangeId = a})
 
 instance FromJSON About where
         parseJSON
@@ -2429,33 +2423,35 @@ instance ToJSON About where
         toJSON About{..}
           = object
               (catMaybes
-                 [("exportFormats" .=) <$> _aExportFormats,
-                  ("remainingChangeIds" .=) <$> _aRemainingChangeIds,
-                  ("languageCode" .=) <$> _aLanguageCode,
-                  ("etag" .=) <$> _aEtag,
-                  ("importFormats" .=) <$> _aImportFormats,
-                  Just ("kind" .= _aKind),
-                  ("domainSharingPolicy" .=) <$> _aDomainSharingPolicy,
+                 [("exportFormats" .=) <$> _aboExportFormats,
+                  ("remainingChangeIds" .=) <$> _aboRemainingChangeIds,
+                  ("languageCode" .=) <$> _aboLanguageCode,
+                  ("etag" .=) <$> _aboEtag,
+                  ("importFormats" .=) <$> _aboImportFormats,
+                  Just ("kind" .= _aboKind),
+                  ("domainSharingPolicy" .=) <$>
+                    _aboDomainSharingPolicy,
                   ("quotaBytesUsedInTrash" .=) <$>
-                    _aQuotaBytesUsedInTrash,
-                  ("quotaType" .=) <$> _aQuotaType,
-                  ("maxUploadSizes" .=) <$> _aMaxUploadSizes,
-                  ("user" .=) <$> _aUser,
-                  ("selfLink" .=) <$> _aSelfLink,
-                  ("name" .=) <$> _aName,
-                  ("features" .=) <$> _aFeatures,
+                    _aboQuotaBytesUsedInTrash,
+                  ("quotaType" .=) <$> _aboQuotaType,
+                  ("maxUploadSizes" .=) <$> _aboMaxUploadSizes,
+                  ("user" .=) <$> _aboUser,
+                  ("selfLink" .=) <$> _aboSelfLink,
+                  ("name" .=) <$> _aboName,
+                  ("features" .=) <$> _aboFeatures,
                   ("isCurrentAppInstalled" .=) <$>
-                    _aIsCurrentAppInstalled,
-                  ("quotaBytesTotal" .=) <$> _aQuotaBytesTotal,
-                  ("rootFolderId" .=) <$> _aRootFolderId,
-                  ("quotaBytesUsed" .=) <$> _aQuotaBytesUsed,
-                  ("additionalRoleInfo" .=) <$> _aAdditionalRoleInfo,
-                  ("folderColorPalette" .=) <$> _aFolderColorPalette,
-                  ("permissionId" .=) <$> _aPermissionId,
+                    _aboIsCurrentAppInstalled,
+                  ("quotaBytesTotal" .=) <$> _aboQuotaBytesTotal,
+                  ("rootFolderId" .=) <$> _aboRootFolderId,
+                  ("quotaBytesUsed" .=) <$> _aboQuotaBytesUsed,
+                  ("additionalRoleInfo" .=) <$> _aboAdditionalRoleInfo,
+                  ("folderColorPalette" .=) <$> _aboFolderColorPalette,
+                  ("permissionId" .=) <$> _aboPermissionId,
                   ("quotaBytesUsedAggregate" .=) <$>
-                    _aQuotaBytesUsedAggregate,
-                  ("quotaBytesByService" .=) <$> _aQuotaBytesByService,
-                  ("largestChangeId" .=) <$> _aLargestChangeId])
+                    _aboQuotaBytesUsedAggregate,
+                  ("quotaBytesByService" .=) <$>
+                    _aboQuotaBytesByService,
+                  ("largestChangeId" .=) <$> _aboLargestChangeId])
 
 -- | Geographic location information stored in the image.
 --

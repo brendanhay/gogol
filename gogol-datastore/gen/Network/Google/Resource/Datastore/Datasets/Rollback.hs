@@ -51,9 +51,9 @@ type DatasetsRollbackResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltPROTO :>
                        ReqBody '[JSON] RollbackRequest :>
                          Post '[JSON] RollbackResponse
@@ -159,11 +159,11 @@ instance GoogleRequest DatasetsRollback' where
         type Rs DatasetsRollback' = RollbackResponse
         request = requestWithRoute defReq datastoreURL
         requestWithRoute r u DatasetsRollback'{..}
-          = go _drQuotaUser (Just _drPrettyPrint) _drUserIP
-              _drKey
-              _drDatasetId
-              _drOAuthToken
+          = go _drDatasetId _drQuotaUser (Just _drPrettyPrint)
+              _drUserIP
               _drFields
+              _drKey
+              _drOAuthToken
               (Just AltPROTO)
               _drRollbackRequest
           where go

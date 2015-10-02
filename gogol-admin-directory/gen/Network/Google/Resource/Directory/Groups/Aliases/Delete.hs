@@ -53,9 +53,9 @@ type GroupsAliasesDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Remove a alias for the group
@@ -160,12 +160,12 @@ instance GoogleRequest GroupsAliasesDelete' where
         type Rs GroupsAliasesDelete' = ()
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u GroupsAliasesDelete'{..}
-          = go _gadQuotaUser (Just _gadPrettyPrint) _gadUserIP
-              _gadGroupKey
-              _gadAlias
+          = go _gadGroupKey _gadAlias _gadQuotaUser
+              (Just _gadPrettyPrint)
+              _gadUserIP
+              _gadFields
               _gadKey
               _gadOAuthToken
-              _gadFields
               (Just AltJSON)
           where go
                   = clientWithRoute

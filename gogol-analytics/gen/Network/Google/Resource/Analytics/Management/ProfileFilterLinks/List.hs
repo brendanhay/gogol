@@ -57,14 +57,14 @@ type ManagementProfileFilterLinksListResource =
                "profiles" :>
                  Capture "profileId" Text :>
                    "profileFilterLinks" :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "start-index" Int32 :>
-                                 QueryParam "max-results" Int32 :>
-                                   QueryParam "fields" Text :>
+                     QueryParam "max-results" Int32 :>
+                       QueryParam "start-index" Int32 :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] ProfileFilterLinks
 
@@ -214,16 +214,16 @@ instance GoogleRequest
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
           ManagementProfileFilterLinksList'{..}
-          = go _mpfllQuotaUser (Just _mpfllPrettyPrint)
-              _mpfllWebPropertyId
-              _mpfllUserIP
-              _mpfllProfileId
+          = go _mpfllMaxResults _mpfllStartIndex
               _mpfllAccountId
+              _mpfllWebPropertyId
+              _mpfllProfileId
+              _mpfllQuotaUser
+              (Just _mpfllPrettyPrint)
+              _mpfllUserIP
+              _mpfllFields
               _mpfllKey
               _mpfllOAuthToken
-              _mpfllStartIndex
-              _mpfllMaxResults
-              _mpfllFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -53,9 +53,9 @@ type AdvertisersGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Advertiser
 
 -- | Gets one advertiser by ID.
@@ -157,12 +157,12 @@ instance GoogleRequest AdvertisersGet' where
         type Rs AdvertisersGet' = Advertiser
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdvertisersGet'{..}
-          = go _agQuotaUser (Just _agPrettyPrint) _agUserIP
-              _agProfileId
-              _agKey
-              _agId
-              _agOAuthToken
+          = go _agProfileId _agId _agQuotaUser
+              (Just _agPrettyPrint)
+              _agUserIP
               _agFields
+              _agKey
+              _agOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

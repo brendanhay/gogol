@@ -51,9 +51,9 @@ type PretargetingConfigInsertResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] PretargetingConfig :>
                          Post '[JSON] PretargetingConfig
@@ -164,11 +164,12 @@ instance GoogleRequest PretargetingConfigInsert'
              PretargetingConfig
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u PretargetingConfigInsert'{..}
-          = go _pciQuotaUser (Just _pciPrettyPrint) _pciUserIP
-              _pciAccountId
+          = go _pciAccountId _pciQuotaUser
+              (Just _pciPrettyPrint)
+              _pciUserIP
+              _pciFields
               _pciKey
               _pciOAuthToken
-              _pciFields
               (Just AltJSON)
               _pciPretargetingConfig
           where go

@@ -52,9 +52,9 @@ type CalendarListDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an entry on the user\'s calendar list.
@@ -153,12 +153,12 @@ instance GoogleRequest CalendarListDelete' where
         type Rs CalendarListDelete' = ()
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u CalendarListDelete'{..}
-          = go _cldQuotaUser _cldCalendarId
+          = go _cldCalendarId _cldQuotaUser
               (Just _cldPrettyPrint)
               _cldUserIP
+              _cldFields
               _cldKey
               _cldOAuthToken
-              _cldFields
               (Just AltJSON)
           where go
                   = clientWithRoute

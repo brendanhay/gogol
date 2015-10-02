@@ -48,14 +48,14 @@ import           Network.Google.YouTube.Types
 type WatermarksUnsetResource =
      "watermarks" :>
        "unset" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "channelId" Text :>
-                 QueryParam "onBehalfOfContentOwner" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+         QueryParam "onBehalfOfContentOwner" Text :>
+           QueryParam "channelId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Deletes a channel\'s watermark image.
@@ -168,12 +168,13 @@ instance GoogleRequest WatermarksUnset' where
         type Rs WatermarksUnset' = ()
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u WatermarksUnset'{..}
-          = go _wuQuotaUser (Just _wuPrettyPrint) _wuUserIP
-              (Just _wuChannelId)
-              _wuOnBehalfOfContentOwner
+          = go _wuOnBehalfOfContentOwner (Just _wuChannelId)
+              _wuQuotaUser
+              (Just _wuPrettyPrint)
+              _wuUserIP
+              _wuFields
               _wuKey
               _wuOAuthToken
-              _wuFields
               (Just AltJSON)
           where go
                   = clientWithRoute

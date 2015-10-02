@@ -4042,58 +4042,58 @@ instance ToJSON ActivityObjectAttachmentsFullImage
                   ("type" .=) <$> _aoafiType])
 
 --
--- /See:/ 'aCL' smart constructor.
+-- /See:/ 'acl' smart constructor.
 data ACL = ACL
-    { _aclKind             :: !Text
-    , _aclItems            :: !(Maybe [PlusDomainsACLentryResource])
-    , _aclDomainRestricted :: !(Maybe Bool)
-    , _aclDescription      :: !(Maybe Text)
+    { _aclcKind             :: !Text
+    , _aclcItems            :: !(Maybe [PlusDomainsACLentryResource])
+    , _aclcDomainRestricted :: !(Maybe Bool)
+    , _aclcDescription      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ACL' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aclKind'
+-- * 'aclcKind'
 --
--- * 'aclItems'
+-- * 'aclcItems'
 --
--- * 'aclDomainRestricted'
+-- * 'aclcDomainRestricted'
 --
--- * 'aclDescription'
-aCL
+-- * 'aclcDescription'
+acl
     :: ACL
-aCL =
+acl =
     ACL
-    { _aclKind = "plus#acl"
-    , _aclItems = Nothing
-    , _aclDomainRestricted = Nothing
-    , _aclDescription = Nothing
+    { _aclcKind = "plus#acl"
+    , _aclcItems = Nothing
+    , _aclcDomainRestricted = Nothing
+    , _aclcDescription = Nothing
     }
 
 -- | Identifies this resource as a collection of access controls. Value:
 -- \"plus#acl\".
-aclKind :: Lens' ACL Text
-aclKind = lens _aclKind (\ s a -> s{_aclKind = a})
+aclcKind :: Lens' ACL Text
+aclcKind = lens _aclcKind (\ s a -> s{_aclcKind = a})
 
 -- | The list of access entries.
-aclItems :: Lens' ACL [PlusDomainsACLentryResource]
-aclItems
-  = lens _aclItems (\ s a -> s{_aclItems = a}) .
+aclcItems :: Lens' ACL [PlusDomainsACLentryResource]
+aclcItems
+  = lens _aclcItems (\ s a -> s{_aclcItems = a}) .
       _Default
       . _Coerce
 
 -- | Whether access is restricted to the domain.
-aclDomainRestricted :: Lens' ACL (Maybe Bool)
-aclDomainRestricted
-  = lens _aclDomainRestricted
-      (\ s a -> s{_aclDomainRestricted = a})
+aclcDomainRestricted :: Lens' ACL (Maybe Bool)
+aclcDomainRestricted
+  = lens _aclcDomainRestricted
+      (\ s a -> s{_aclcDomainRestricted = a})
 
 -- | Description of the access granted, suitable for display.
-aclDescription :: Lens' ACL (Maybe Text)
-aclDescription
-  = lens _aclDescription
-      (\ s a -> s{_aclDescription = a})
+aclcDescription :: Lens' ACL (Maybe Text)
+aclcDescription
+  = lens _aclcDescription
+      (\ s a -> s{_aclcDescription = a})
 
 instance FromJSON ACL where
         parseJSON
@@ -4109,10 +4109,10 @@ instance ToJSON ACL where
         toJSON ACL{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _aclKind),
-                  ("items" .=) <$> _aclItems,
-                  ("domainRestricted" .=) <$> _aclDomainRestricted,
-                  ("description" .=) <$> _aclDescription])
+                 [Just ("kind" .= _aclcKind),
+                  ("items" .=) <$> _aclcItems,
+                  ("domainRestricted" .=) <$> _aclcDomainRestricted,
+                  ("description" .=) <$> _aclcDescription])
 
 -- | Exif information of the media item.
 --

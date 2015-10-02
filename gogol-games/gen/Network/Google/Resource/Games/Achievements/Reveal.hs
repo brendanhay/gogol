@@ -52,9 +52,9 @@ type AchievementsRevealResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Post '[JSON] AchievementRevealResponse
 
@@ -151,12 +151,12 @@ instance GoogleRequest AchievementsReveal' where
              AchievementRevealResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u AchievementsReveal'{..}
-          = go _arQuotaUser (Just _arPrettyPrint)
-              _arAchievementId
+          = go _arAchievementId _arQuotaUser
+              (Just _arPrettyPrint)
               _arUserIP
+              _arFields
               _arKey
               _arOAuthToken
-              _arFields
               (Just AltJSON)
           where go
                   = clientWithRoute

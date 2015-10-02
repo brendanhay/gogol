@@ -51,9 +51,9 @@ type RastersPermissionsListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] PermissionsListResponse
 
@@ -150,11 +150,11 @@ instance GoogleRequest RastersPermissionsList' where
              PermissionsListResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u RastersPermissionsList'{..}
-          = go _rplQuotaUser (Just _rplPrettyPrint) _rplUserIP
-              _rplKey
-              _rplId
-              _rplOAuthToken
+          = go _rplId _rplQuotaUser (Just _rplPrettyPrint)
+              _rplUserIP
               _rplFields
+              _rplKey
+              _rplOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

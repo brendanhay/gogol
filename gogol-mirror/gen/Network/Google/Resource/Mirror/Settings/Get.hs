@@ -50,9 +50,9 @@ type SettingsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Setting
 
 -- | Gets a single setting by ID.
@@ -148,11 +148,11 @@ instance GoogleRequest SettingsGet' where
         type Rs SettingsGet' = Setting
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u SettingsGet'{..}
-          = go _sgQuotaUser (Just _sgPrettyPrint) _sgUserIP
-              _sgKey
-              _sgId
-              _sgOAuthToken
+          = go _sgId _sgQuotaUser (Just _sgPrettyPrint)
+              _sgUserIP
               _sgFields
+              _sgKey
+              _sgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

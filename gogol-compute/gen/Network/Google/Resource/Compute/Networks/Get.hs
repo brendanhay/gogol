@@ -53,9 +53,9 @@ type NetworksGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Network
 
 -- | Returns the specified network resource.
@@ -158,12 +158,12 @@ instance GoogleRequest NetworksGet' where
         type Rs NetworksGet' = Network
         request = requestWithRoute defReq computeURL
         requestWithRoute r u NetworksGet'{..}
-          = go _ngQuotaUser (Just _ngPrettyPrint) _ngProject
+          = go _ngProject _ngNetwork _ngQuotaUser
+              (Just _ngPrettyPrint)
               _ngUserIP
-              _ngNetwork
+              _ngFields
               _ngKey
               _ngOAuthToken
-              _ngFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -57,9 +57,9 @@ type UsersDataSourcesUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] DataSource :> Put '[JSON] DataSource
 
@@ -184,13 +184,12 @@ instance GoogleRequest UsersDataSourcesUpdate' where
         type Rs UsersDataSourcesUpdate' = DataSource
         request = requestWithRoute defReq fitnessURL
         requestWithRoute r u UsersDataSourcesUpdate'{..}
-          = go _udsuQuotaUser (Just _udsuPrettyPrint)
+          = go _udsuUserId _udsuDataSourceId _udsuQuotaUser
+              (Just _udsuPrettyPrint)
               _udsuUserIP
-              _udsuDataSourceId
-              _udsuUserId
+              _udsuFields
               _udsuKey
               _udsuOAuthToken
-              _udsuFields
               (Just AltJSON)
               _udsuDataSource
           where go

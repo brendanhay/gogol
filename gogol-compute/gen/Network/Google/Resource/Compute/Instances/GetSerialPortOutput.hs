@@ -54,14 +54,14 @@ type InstancesGetSerialPortOutputResource =
            "instances" :>
              Capture "instance" Text :>
                "serialPort" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" AltJSON :>
-                               QueryParam "port" Int32 :>
+                 QueryParam "port" Int32 :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
+                               QueryParam "alt" AltJSON :>
                                  Get '[JSON] SerialPortOutput
 
 -- | Returns the specified instance\'s serial port output.
@@ -192,15 +192,14 @@ instance GoogleRequest InstancesGetSerialPortOutput'
         request = requestWithRoute defReq computeURL
         requestWithRoute r u
           InstancesGetSerialPortOutput'{..}
-          = go _igspoQuotaUser (Just _igspoPrettyPrint)
-              _igspoProject
+          = go (Just _igspoPort) _igspoProject _igspoZone
+              _igspoInstance
+              _igspoQuotaUser
+              (Just _igspoPrettyPrint)
               _igspoUserIP
-              _igspoZone
+              _igspoFields
               _igspoKey
               _igspoOAuthToken
-              _igspoFields
-              (Just _igspoPort)
-              _igspoInstance
               (Just AltJSON)
           where go
                   = clientWithRoute

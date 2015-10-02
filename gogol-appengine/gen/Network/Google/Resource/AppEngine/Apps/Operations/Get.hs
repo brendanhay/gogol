@@ -60,17 +60,17 @@ type AppsOperationsGetResource =
            "operations" :>
              Capture "operationsId" Text :>
                QueryParam "$.xgafv" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "key" Key :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "callback" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "quotaUser" Text :>
+                               QueryParam "prettyPrint" Bool :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] Operation
 
@@ -235,18 +235,18 @@ instance GoogleRequest AppsOperationsGet' where
         type Rs AppsOperationsGet' = Operation
         request = requestWithRoute defReq appEngineURL
         requestWithRoute r u AppsOperationsGet'{..}
-          = go _aogXgafv _aogQuotaUser (Just _aogPrettyPrint)
-              _aogUploadProtocol
-              (Just _aogPp)
-              _aogAccessToken
-              _aogUploadType
-              _aogBearerToken
-              _aogKey
-              _aogAppsId
-              _aogOAuthToken
-              _aogOperationsId
-              _aogFields
+          = go _aogXgafv _aogAccessToken _aogBearerToken
               _aogCallback
+              (Just _aogPp)
+              _aogUploadType
+              _aogUploadProtocol
+              _aogAppsId
+              _aogOperationsId
+              _aogQuotaUser
+              (Just _aogPrettyPrint)
+              _aogFields
+              _aogKey
+              _aogOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

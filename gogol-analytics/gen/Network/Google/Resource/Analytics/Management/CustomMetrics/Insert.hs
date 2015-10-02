@@ -56,9 +56,9 @@ type ManagementCustomMetricsInsertResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] CustomMetric :>
                                  Post '[JSON] CustomMetric
@@ -183,13 +183,12 @@ instance GoogleRequest ManagementCustomMetricsInsert'
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
           ManagementCustomMetricsInsert'{..}
-          = go _mcmiQuotaUser (Just _mcmiPrettyPrint)
-              _mcmiWebPropertyId
+          = go _mcmiAccountId _mcmiWebPropertyId _mcmiQuotaUser
+              (Just _mcmiPrettyPrint)
               _mcmiUserIP
-              _mcmiAccountId
+              _mcmiFields
               _mcmiKey
               _mcmiOAuthToken
-              _mcmiFields
               (Just AltJSON)
               _mcmiCustomMetric
           where go

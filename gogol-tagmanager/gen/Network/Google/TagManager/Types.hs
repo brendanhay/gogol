@@ -58,26 +58,26 @@ module Network.Google.TagManager.Types
     -- * Tag
     , Tag
     , tag
-    , tagBlockingTriggerId
-    , tagScheduleEndMs
-    , tagParentFolderId
-    , tagLiveOnly
-    , tagContainerId
-    , tagPriority
-    , tagTeardownTag
-    , tagFingerprint
-    , tagTagFiringOption
-    , tagAccountId
-    , tagTagId
-    , tagName
-    , tagBlockingRuleId
-    , tagSetupTag
-    , tagFiringTriggerId
-    , tagType
-    , tagScheduleStartMs
-    , tagNotes
-    , tagFiringRuleId
-    , tagParameter
+    , tBlockingTriggerId
+    , tScheduleEndMs
+    , tParentFolderId
+    , tLiveOnly
+    , tContainerId
+    , tPriority
+    , tTeardownTag
+    , tFingerprint
+    , tTagFiringOption
+    , tAccountId
+    , tTagId
+    , tName
+    , tBlockingRuleId
+    , tSetupTag
+    , tFiringTriggerId
+    , tType
+    , tScheduleStartMs
+    , tNotes
+    , tFiringRuleId
+    , tParameter
 
     -- * TeardownTag
     , TeardownTag
@@ -273,25 +273,25 @@ module Network.Google.TagManager.Types
     -- * Trigger
     , Trigger
     , trigger
-    , tCustomEventFilter
-    , tParentFolderId
-    , tContainerId
-    , tTriggerId
-    , tCheckValidation
-    , tFingerprint
-    , tAutoEventFilter
-    , tUniqueTriggerId
-    , tAccountId
-    , tName
-    , tInterval
-    , tEnableAllVideos
-    , tWaitForTagsTimeout
-    , tLimit
-    , tFilter
-    , tType
-    , tVideoPercentageList
-    , tEventName
-    , tWaitForTags
+    , triCustomEventFilter
+    , triParentFolderId
+    , triContainerId
+    , triTriggerId
+    , triCheckValidation
+    , triFingerprint
+    , triAutoEventFilter
+    , triUniqueTriggerId
+    , triAccountId
+    , triName
+    , triInterval
+    , triEnableAllVideos
+    , triWaitForTagsTimeout
+    , triLimit
+    , triFilter
+    , triType
+    , triVideoPercentageList
+    , triEventName
+    , triWaitForTags
 
     -- * Condition
     , Condition

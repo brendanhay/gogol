@@ -51,9 +51,9 @@ type OperatingSystemVersionsListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] OperatingSystemVersionsListResponse
 
@@ -155,12 +155,12 @@ instance GoogleRequest OperatingSystemVersionsList'
              OperatingSystemVersionsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u OperatingSystemVersionsList'{..}
-          = go _osvlQuotaUser (Just _osvlPrettyPrint)
+          = go _osvlProfileId _osvlQuotaUser
+              (Just _osvlPrettyPrint)
               _osvlUserIP
-              _osvlProfileId
+              _osvlFields
               _osvlKey
               _osvlOAuthToken
-              _osvlFields
               (Just AltJSON)
           where go
                   = clientWithRoute

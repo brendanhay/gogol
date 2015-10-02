@@ -26,26 +26,26 @@ module Network.Google.WebmasterTools.Types
 
     -- * URLCrawlErrorCountsPerType
     , URLCrawlErrorCountsPerType
-    , uRLCrawlErrorCountsPerType
+    , urlCrawlErrorCountsPerType
     , ucecptPlatform
     , ucecptEntries
     , ucecptCategory
 
     -- * APIdimensionFilterGroup
     , APIdimensionFilterGroup
-    , aPIdimensionFilterGroup
+    , apidimensionFilterGroup
     , afgFilters
     , afgGroupType
 
     -- * URLSampleDetails
     , URLSampleDetails
-    , uRLSampleDetails
+    , urlSampleDetails
     , usdLinkedFromURLs
     , usdContainingSitemaps
 
     -- * APIdataRow
     , APIdataRow
-    , aPIdataRow
+    , apidataRow
     , arImpressions
     , arKeys
     , arCtr
@@ -54,14 +54,14 @@ module Network.Google.WebmasterTools.Types
 
     -- * APIdimensionFilter
     , APIdimensionFilter
-    , aPIdimensionFilter
+    , apidimensionFilter
     , afOperator
     , afDimension
     , afExpression
 
     -- * URLCrawlErrorCount
     , URLCrawlErrorCount
-    , uRLCrawlErrorCount
+    , urlCrawlErrorCount
     , ucecCount
     , ucecTimestamp
 
@@ -85,17 +85,17 @@ module Network.Google.WebmasterTools.Types
 
     -- * URLCrawlErrorsSamplesListResponse
     , URLCrawlErrorsSamplesListResponse
-    , uRLCrawlErrorsSamplesListResponse
+    , urlCrawlErrorsSamplesListResponse
     , uceslrURLCrawlErrorSample
 
     -- * URLCrawlErrorsCountsQueryResponse
     , URLCrawlErrorsCountsQueryResponse
-    , uRLCrawlErrorsCountsQueryResponse
+    , urlCrawlErrorsCountsQueryResponse
     , ucecqrCountPerTypes
 
     -- * URLCrawlErrorsSample
     , URLCrawlErrorsSample
-    , uRLCrawlErrorsSample
+    , urlCrawlErrorsSample
     , ucesResponseCode
     , ucesURLDetails
     , ucesLastCrawled

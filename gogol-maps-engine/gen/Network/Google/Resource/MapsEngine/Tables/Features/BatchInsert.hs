@@ -59,9 +59,9 @@ type TablesFeaturesBatchInsertResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] FeaturesBatchInsertRequest :>
                              Post '[JSON] ()
@@ -177,12 +177,11 @@ instance GoogleRequest TablesFeaturesBatchInsert'
         type Rs TablesFeaturesBatchInsert' = ()
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u TablesFeaturesBatchInsert'{..}
-          = go _tfbiQuotaUser (Just _tfbiPrettyPrint)
+          = go _tfbiId _tfbiQuotaUser (Just _tfbiPrettyPrint)
               _tfbiUserIP
-              _tfbiKey
-              _tfbiId
-              _tfbiOAuthToken
               _tfbiFields
+              _tfbiKey
+              _tfbiOAuthToken
               (Just AltJSON)
               _tfbiFeaturesBatchInsertRequest
           where go

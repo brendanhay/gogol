@@ -54,9 +54,9 @@ type InstancesStartReplicaResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Starts the replication in the read replica instance.
@@ -157,12 +157,12 @@ instance GoogleRequest InstancesStartReplica' where
         type Rs InstancesStartReplica' = Operation
         request = requestWithRoute defReq sQLAdminURL
         requestWithRoute r u InstancesStartReplica'{..}
-          = go _iQuotaUser (Just _iPrettyPrint) _iProject
+          = go _iProject _iInstance _iQuotaUser
+              (Just _iPrettyPrint)
               _iUserIP
+              _iFields
               _iKey
               _iOAuthToken
-              _iFields
-              _iInstance
               (Just AltJSON)
           where go
                   = clientWithRoute

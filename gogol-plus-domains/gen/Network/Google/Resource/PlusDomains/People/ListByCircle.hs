@@ -50,14 +50,14 @@ type PeopleListByCircleResource =
      "circles" :>
        Capture "circleId" Text :>
          "people" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "maxResults" Word32 :>
-                         QueryParam "fields" Text :>
+           QueryParam "maxResults" Word32 :>
+             QueryParam "pageToken" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] PeopleFeed
 
 -- | List all of the people who are members of a circle.
@@ -178,14 +178,14 @@ instance GoogleRequest PeopleListByCircle' where
         type Rs PeopleListByCircle' = PeopleFeed
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u PeopleListByCircle'{..}
-          = go _plbcQuotaUser (Just _plbcPrettyPrint)
-              _plbcUserIP
-              _plbcKey
+          = go (Just _plbcMaxResults) _plbcPageToken
               _plbcCircleId
-              _plbcPageToken
-              _plbcOAuthToken
-              (Just _plbcMaxResults)
+              _plbcQuotaUser
+              (Just _plbcPrettyPrint)
+              _plbcUserIP
               _plbcFields
+              _plbcKey
+              _plbcOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

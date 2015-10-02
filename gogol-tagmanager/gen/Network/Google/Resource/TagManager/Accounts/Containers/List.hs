@@ -51,9 +51,9 @@ type AccountsContainersListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] ListContainersResponse
 
@@ -151,11 +151,12 @@ instance GoogleRequest AccountsContainersList' where
              ListContainersResponse
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u AccountsContainersList'{..}
-          = go _aclQuotaUser (Just _aclPrettyPrint) _aclUserIP
-              _aclAccountId
+          = go _aclAccountId _aclQuotaUser
+              (Just _aclPrettyPrint)
+              _aclUserIP
+              _aclFields
               _aclKey
               _aclOAuthToken
-              _aclFields
               (Just AltJSON)
           where go
                   = clientWithRoute

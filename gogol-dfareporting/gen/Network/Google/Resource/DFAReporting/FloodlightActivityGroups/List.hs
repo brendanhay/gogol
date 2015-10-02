@@ -57,27 +57,27 @@ type FloodlightActivityGroupsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "floodlightActivityGroups" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "floodlightConfigurationId" Int64 :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "advertiserId" Int64 :>
+           QueryParam "advertiserId" Int64 :>
+             QueryParam "floodlightConfigurationId" Int64 :>
+               QueryParams "ids" Int64 :>
+                 QueryParam "maxResults" Int32 :>
+                   QueryParam "pageToken" Text :>
                      QueryParam "searchString" Text :>
-                       QueryParams "ids" Int64 :>
+                       QueryParam "sortField"
+                         DfareportingFloodlightActivityGroupsListSortField
+                         :>
                          QueryParam "sortOrder"
                            DfareportingFloodlightActivityGroupsListSortOrder
                            :>
-                           QueryParam "key" Key :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "sortField"
-                                 DfareportingFloodlightActivityGroupsListSortField
-                                 :>
-                                 QueryParam "type"
-                                   DfareportingFloodlightActivityGroupsListType
-                                   :>
-                                   QueryParam "oauth_token" OAuthToken :>
-                                     QueryParam "maxResults" Int32 :>
-                                       QueryParam "fields" Text :>
+                           QueryParam "type"
+                             DfareportingFloodlightActivityGroupsListType
+                             :>
+                             QueryParam "quotaUser" Text :>
+                               QueryParam "prettyPrint" Bool :>
+                                 QueryParam "userIp" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "key" Key :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON]
                                              FloodlightActivityGroupsListResponse
@@ -282,21 +282,21 @@ instance GoogleRequest FloodlightActivityGroupsList'
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           FloodlightActivityGroupsList'{..}
-          = go _faglQuotaUser (Just _faglPrettyPrint)
-              _faglFloodlightConfigurationId
-              _faglUserIP
-              _faglAdvertiserId
-              _faglSearchString
+          = go _faglAdvertiserId _faglFloodlightConfigurationId
               _faglIds
-              _faglProfileId
-              _faglSortOrder
-              _faglKey
-              _faglPageToken
-              _faglSortField
-              _faglType
-              _faglOAuthToken
               _faglMaxResults
+              _faglPageToken
+              _faglSearchString
+              _faglSortField
+              _faglSortOrder
+              _faglType
+              _faglProfileId
+              _faglQuotaUser
+              (Just _faglPrettyPrint)
+              _faglUserIP
               _faglFields
+              _faglKey
+              _faglOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

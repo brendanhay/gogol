@@ -59,17 +59,17 @@ type DebuggerDebuggeesBreakpointsDeleteResource =
              "breakpoints" :>
                Capture "breakpointId" Text :>
                  QueryParam "$.xgafv" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
                          QueryParam "pp" Bool :>
-                           QueryParam "access_token" Text :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "bearer_token" Text :>
-                                 QueryParam "key" Key :>
-                                   QueryParam "oauth_token" OAuthToken :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "callback" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "upload_protocol" Text :>
+                               QueryParam "quotaUser" Text :>
+                                 QueryParam "prettyPrint" Bool :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "key" Key :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Delete '[JSON] Empty
 
@@ -238,19 +238,18 @@ instance GoogleRequest
         request = requestWithRoute defReq debuggerURL
         requestWithRoute r u
           DebuggerDebuggeesBreakpointsDelete'{..}
-          = go _ddbdXgafv _ddbdQuotaUser
-              (Just _ddbdPrettyPrint)
-              _ddbdUploadProtocol
-              (Just _ddbdPp)
-              _ddbdAccessToken
-              _ddbdUploadType
-              _ddbdBreakpointId
-              _ddbdBearerToken
-              _ddbdKey
-              _ddbdDebuggeeId
-              _ddbdOAuthToken
-              _ddbdFields
+          = go _ddbdXgafv _ddbdAccessToken _ddbdBearerToken
               _ddbdCallback
+              (Just _ddbdPp)
+              _ddbdUploadType
+              _ddbdUploadProtocol
+              _ddbdDebuggeeId
+              _ddbdBreakpointId
+              _ddbdQuotaUser
+              (Just _ddbdPrettyPrint)
+              _ddbdFields
+              _ddbdKey
+              _ddbdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

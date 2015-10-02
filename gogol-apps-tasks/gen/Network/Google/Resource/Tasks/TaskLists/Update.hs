@@ -53,9 +53,9 @@ type TaskListsUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] TaskList :> Put '[JSON] TaskList
 
@@ -162,11 +162,12 @@ instance GoogleRequest TaskListsUpdate' where
         type Rs TaskListsUpdate' = TaskList
         request = requestWithRoute defReq appsTasksURL
         requestWithRoute r u TaskListsUpdate'{..}
-          = go _tluQuotaUser (Just _tluPrettyPrint) _tluUserIP
-              _tluKey
-              _tluTaskList
-              _tluOAuthToken
+          = go _tluTaskList _tluQuotaUser
+              (Just _tluPrettyPrint)
+              _tluUserIP
               _tluFields
+              _tluKey
+              _tluOAuthToken
               (Just AltJSON)
               _tluTaskList
           where go

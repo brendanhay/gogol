@@ -55,9 +55,9 @@ type BucketAccessControlsPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] BucketAccessControl :>
                              Patch '[JSON] BucketAccessControl
@@ -182,13 +182,12 @@ instance GoogleRequest BucketAccessControlsPatch'
              BucketAccessControl
         request = requestWithRoute defReq storageURL
         requestWithRoute r u BucketAccessControlsPatch'{..}
-          = go _bacpQuotaUser (Just _bacpPrettyPrint)
+          = go _bacpBucket _bacpEntity _bacpQuotaUser
+              (Just _bacpPrettyPrint)
               _bacpUserIP
-              _bacpBucket
+              _bacpFields
               _bacpKey
               _bacpOAuthToken
-              _bacpEntity
-              _bacpFields
               (Just AltJSON)
               _bacpBucketAccessControl
           where go

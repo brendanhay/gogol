@@ -55,9 +55,9 @@ type InstancesCloneResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] InstancesCloneRequest :>
                                Post '[JSON] Operation
@@ -174,12 +174,12 @@ instance GoogleRequest InstancesClone' where
         type Rs InstancesClone' = Operation
         request = requestWithRoute defReq sQLAdminURL
         requestWithRoute r u InstancesClone'{..}
-          = go _icQuotaUser (Just _icPrettyPrint) _icProject
+          = go _icProject _icInstance _icQuotaUser
+              (Just _icPrettyPrint)
               _icUserIP
+              _icFields
               _icKey
               _icOAuthToken
-              _icFields
-              _icInstance
               (Just AltJSON)
               _icInstancesCloneRequest
           where go

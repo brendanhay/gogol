@@ -54,20 +54,20 @@ import           Network.Google.Prelude
 type PromoOfferAcceptResource =
      "promooffer" :>
        "accept" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
+         QueryParam "androidId" Text :>
+           QueryParam "device" Text :>
              QueryParam "manufacturer" Text :>
-               QueryParam "userIp" Text :>
-                 QueryParam "serial" Text :>
-                   QueryParam "device" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "model" Text :>
-                         QueryParam "volumeId" Text :>
-                           QueryParam "offerId" Text :>
-                             QueryParam "product" Text :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "androidId" Text :>
-                                   QueryParam "fields" Text :>
+               QueryParam "model" Text :>
+                 QueryParam "offerId" Text :>
+                   QueryParam "product" Text :>
+                     QueryParam "serial" Text :>
+                       QueryParam "volumeId" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- |
@@ -224,19 +224,18 @@ instance GoogleRequest PromoOfferAccept' where
         type Rs PromoOfferAccept' = ()
         request = requestWithRoute defReq booksURL
         requestWithRoute r u PromoOfferAccept'{..}
-          = go _poaQuotaUser (Just _poaPrettyPrint)
-              _poaManufacturer
-              _poaUserIP
-              _poaSerial
-              _poaDevice
-              _poaKey
+          = go _poaAndroidId _poaDevice _poaManufacturer
               _poaModel
-              _poaVolumeId
               _poaOfferId
               _poaProduct
-              _poaOAuthToken
-              _poaAndroidId
+              _poaSerial
+              _poaVolumeId
+              _poaQuotaUser
+              (Just _poaPrettyPrint)
+              _poaUserIP
               _poaFields
+              _poaKey
+              _poaOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

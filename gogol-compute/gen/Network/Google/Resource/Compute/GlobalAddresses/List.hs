@@ -51,15 +51,15 @@ type GlobalAddressesListResource =
      Capture "project" Text :>
        "global" :>
          "addresses" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "filter" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] AddressList
 
 -- | Retrieves the list of global address resources.
@@ -195,14 +195,14 @@ instance GoogleRequest GlobalAddressesList' where
         type Rs GlobalAddressesList' = AddressList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u GlobalAddressesList'{..}
-          = go _galQuotaUser (Just _galPrettyPrint) _galProject
+          = go _galFilter (Just _galMaxResults) _galPageToken
+              _galProject
+              _galQuotaUser
+              (Just _galPrettyPrint)
               _galUserIP
-              _galKey
-              _galFilter
-              _galPageToken
-              _galOAuthToken
-              (Just _galMaxResults)
               _galFields
+              _galKey
+              _galOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

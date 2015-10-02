@@ -48,16 +48,16 @@ import           Network.Google.Storage.Types
 -- 'BucketsInsert'' request conforms to.
 type BucketsInsertResource =
      "b" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "project" Text :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "projection"
-                   StorageBucketsInsertProjection
-                   :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+       QueryParam "projection"
+         StorageBucketsInsertProjection
+         :>
+         QueryParam "project" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Bucket :> Post '[JSON] Bucket
 
@@ -171,13 +171,12 @@ instance GoogleRequest BucketsInsert' where
         type Rs BucketsInsert' = Bucket
         request = requestWithRoute defReq storageURL
         requestWithRoute r u BucketsInsert'{..}
-          = go _biQuotaUser (Just _biPrettyPrint)
-              (Just _biProject)
+          = go _biProjection (Just _biProject) _biQuotaUser
+              (Just _biPrettyPrint)
               _biUserIP
-              _biKey
-              _biProjection
-              _biOAuthToken
               _biFields
+              _biKey
+              _biOAuthToken
               (Just AltJSON)
               _biBucket
           where go

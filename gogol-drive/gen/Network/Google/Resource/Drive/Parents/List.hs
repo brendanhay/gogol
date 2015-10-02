@@ -51,9 +51,9 @@ type ParentsListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] ParentList
 
 -- | Lists a file\'s parents.
@@ -149,11 +149,11 @@ instance GoogleRequest ParentsList' where
         type Rs ParentsList' = ParentList
         request = requestWithRoute defReq driveURL
         requestWithRoute r u ParentsList'{..}
-          = go _parQuotaUser (Just _parPrettyPrint) _parUserIP
-              _parKey
-              _parFileId
-              _parOAuthToken
+          = go _parFileId _parQuotaUser (Just _parPrettyPrint)
+              _parUserIP
               _parFields
+              _parKey
+              _parOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

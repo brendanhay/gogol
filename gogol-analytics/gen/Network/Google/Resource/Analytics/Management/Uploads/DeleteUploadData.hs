@@ -59,9 +59,9 @@ type ManagementUploadsDeleteUploadDataResource =
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON]
                                      AnalyticsDataimportDeleteUploadDataRequest
@@ -201,14 +201,14 @@ instance GoogleRequest
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
           ManagementUploadsDeleteUploadData'{..}
-          = go _mududQuotaUser (Just _mududPrettyPrint)
-              _mududWebPropertyId
-              _mududUserIP
+          = go _mududAccountId _mududWebPropertyId
               _mududCustomDataSourceId
-              _mududAccountId
+              _mududQuotaUser
+              (Just _mududPrettyPrint)
+              _mududUserIP
+              _mududFields
               _mududKey
               _mududOAuthToken
-              _mududFields
               (Just AltJSON)
               _mududAnalyticsDataimportDeleteUploadDataRequest
           where go

@@ -51,9 +51,9 @@ type AchievementsUnlockResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Post '[JSON] AchievementUnlockResponse
 
@@ -149,12 +149,12 @@ instance GoogleRequest AchievementsUnlock' where
              AchievementUnlockResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u AchievementsUnlock'{..}
-          = go _auQuotaUser (Just _auPrettyPrint)
-              _auAchievementId
+          = go _auAchievementId _auQuotaUser
+              (Just _auPrettyPrint)
               _auUserIP
+              _auFields
               _auKey
               _auOAuthToken
-              _auFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -55,9 +55,9 @@ type InstanceGroupManagersGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] InstanceGroupManager
 
@@ -177,14 +177,13 @@ instance GoogleRequest InstanceGroupManagersGet'
              InstanceGroupManager
         request = requestWithRoute defReq replicaPoolURL
         requestWithRoute r u InstanceGroupManagersGet'{..}
-          = go _igmgQuotaUser (Just _igmgPrettyPrint)
-              _igmgProject
-              _igmgInstanceGroupManager
+          = go _igmgProject _igmgZone _igmgInstanceGroupManager
+              _igmgQuotaUser
+              (Just _igmgPrettyPrint)
               _igmgUserIP
-              _igmgZone
+              _igmgFields
               _igmgKey
               _igmgOAuthToken
-              _igmgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

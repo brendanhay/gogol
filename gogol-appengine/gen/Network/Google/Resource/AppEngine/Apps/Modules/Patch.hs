@@ -61,19 +61,19 @@ type AppsModulesPatchResource =
            "modules" :>
              Capture "modulesId" Text :>
                QueryParam "$.xgafv" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "upload_protocol" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "migrateTraffic" Bool :>
-                               QueryParam "mask" Text :>
-                                 QueryParam "bearer_token" Text :>
-                                   QueryParam "key" Key :>
-                                     QueryParam "oauth_token" OAuthToken :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "callback" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "mask" Text :>
+                         QueryParam "migrateTraffic" Bool :>
+                           QueryParam "pp" Bool :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "upload_protocol" Text :>
+                                 QueryParam "quotaUser" Text :>
+                                   QueryParam "prettyPrint" Bool :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "key" Key :>
+                                         QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
                                              ReqBody '[JSON] Module :>
                                                Patch '[JSON] Operation
@@ -266,20 +266,20 @@ instance GoogleRequest AppsModulesPatch' where
         type Rs AppsModulesPatch' = Operation
         request = requestWithRoute defReq appEngineURL
         requestWithRoute r u AppsModulesPatch'{..}
-          = go _ampXgafv _ampQuotaUser (Just _ampPrettyPrint)
-              _ampUploadProtocol
-              (Just _ampPp)
-              _ampAccessToken
-              _ampUploadType
-              _ampModulesId
-              _ampMigrateTraffic
-              _ampMask
-              _ampBearerToken
-              _ampKey
-              _ampAppsId
-              _ampOAuthToken
-              _ampFields
+          = go _ampXgafv _ampAccessToken _ampBearerToken
               _ampCallback
+              _ampMask
+              _ampMigrateTraffic
+              (Just _ampPp)
+              _ampUploadType
+              _ampUploadProtocol
+              _ampAppsId
+              _ampModulesId
+              _ampQuotaUser
+              (Just _ampPrettyPrint)
+              _ampFields
+              _ampKey
+              _ampOAuthToken
               (Just AltJSON)
               _ampModule
           where go

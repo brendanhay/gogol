@@ -53,9 +53,9 @@ type ProjectsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Project
 
 -- | Gets one project by ID.
@@ -160,12 +160,12 @@ instance GoogleRequest ProjectsGet' where
         type Rs ProjectsGet' = Project
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ProjectsGet'{..}
-          = go _proQuotaUser (Just _proPrettyPrint) _proUserIP
-              _proProfileId
-              _proKey
-              _proId
-              _proOAuthToken
+          = go _proProfileId _proId _proQuotaUser
+              (Just _proPrettyPrint)
+              _proUserIP
               _proFields
+              _proKey
+              _proOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -47,13 +47,13 @@ import           Network.Google.Prelude
 type MyLibraryBookshelvesListResource =
      "mylibrary" :>
        "bookshelves" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "source" Text :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+         QueryParam "source" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Bookshelves
 
 -- | Retrieves a list of bookshelves belonging to the authenticated user.
@@ -150,12 +150,12 @@ instance GoogleRequest MyLibraryBookshelvesList'
         type Rs MyLibraryBookshelvesList' = Bookshelves
         request = requestWithRoute defReq booksURL
         requestWithRoute r u MyLibraryBookshelvesList'{..}
-          = go _mlblQuotaUser (Just _mlblPrettyPrint)
+          = go _mlblSource _mlblQuotaUser
+              (Just _mlblPrettyPrint)
               _mlblUserIP
-              _mlblKey
-              _mlblSource
-              _mlblOAuthToken
               _mlblFields
+              _mlblKey
+              _mlblOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

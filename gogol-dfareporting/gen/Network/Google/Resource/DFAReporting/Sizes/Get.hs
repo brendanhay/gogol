@@ -53,9 +53,9 @@ type SizesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Size
 
 -- | Gets one size by ID.
@@ -160,12 +160,12 @@ instance GoogleRequest SizesGet' where
         type Rs SizesGet' = Size
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u SizesGet'{..}
-          = go _sizQuotaUser (Just _sizPrettyPrint) _sizUserIP
-              _sizProfileId
-              _sizKey
-              _sizId
-              _sizOAuthToken
+          = go _sizProfileId _sizId _sizQuotaUser
+              (Just _sizPrettyPrint)
+              _sizUserIP
               _sizFields
+              _sizKey
+              _sizOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy SizesGetResource) r

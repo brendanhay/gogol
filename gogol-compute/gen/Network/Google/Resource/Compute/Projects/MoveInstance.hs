@@ -52,9 +52,9 @@ type ProjectsMoveInstanceResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] InstanceMoveRequest :>
                          Post '[JSON] Operation
@@ -164,11 +164,11 @@ instance GoogleRequest ProjectsMoveInstance' where
         type Rs ProjectsMoveInstance' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u ProjectsMoveInstance'{..}
-          = go _pmiQuotaUser (Just _pmiPrettyPrint) _pmiProject
+          = go _pmiProject _pmiQuotaUser (Just _pmiPrettyPrint)
               _pmiUserIP
+              _pmiFields
               _pmiKey
               _pmiOAuthToken
-              _pmiFields
               (Just AltJSON)
               _pmiInstanceMoveRequest
           where go

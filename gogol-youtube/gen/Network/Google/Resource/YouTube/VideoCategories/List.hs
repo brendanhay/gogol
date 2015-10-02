@@ -49,16 +49,16 @@ import           Network.Google.YouTube.Types
 -- 'VideoCategoriesList'' request conforms to.
 type VideoCategoriesListResource =
      "videoCategories" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "part" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "regionCode" Text :>
-               QueryParam "userIp" Text :>
-                 QueryParam "hl" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "id" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+       QueryParam "hl" Text :>
+         QueryParam "id" Text :>
+           QueryParam "regionCode" Text :>
+             QueryParam "part" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] VideoCategoryListResponse
 
@@ -186,15 +186,14 @@ instance GoogleRequest VideoCategoriesList' where
              VideoCategoryListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u VideoCategoriesList'{..}
-          = go _vclQuotaUser (Just _vclPart)
+          = go (Just _vclHl) _vclId _vclRegionCode
+              (Just _vclPart)
+              _vclQuotaUser
               (Just _vclPrettyPrint)
-              _vclRegionCode
               _vclUserIP
-              (Just _vclHl)
-              _vclKey
-              _vclId
-              _vclOAuthToken
               _vclFields
+              _vclKey
+              _vclOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

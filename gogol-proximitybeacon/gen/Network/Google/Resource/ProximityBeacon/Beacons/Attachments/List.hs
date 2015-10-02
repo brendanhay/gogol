@@ -61,18 +61,18 @@ type BeaconsAttachmentsListResource =
        "{+beaconName}" :>
          "attachments" :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
+             QueryParam "access_token" Text :>
+               QueryParam "bearer_token" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "namespacedType" Text :>
+                     QueryParam "pp" Bool :>
                        QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "namespacedType" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "callback" Text :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] ListBeaconAttachmentsResponse
 
@@ -243,18 +243,18 @@ instance GoogleRequest BeaconsAttachmentsList' where
              ListBeaconAttachmentsResponse
         request = requestWithRoute defReq proximityBeaconURL
         requestWithRoute r u BeaconsAttachmentsList'{..}
-          = go _balXgafv _balQuotaUser (Just _balPrettyPrint)
-              _balUploadProtocol
-              (Just _balPp)
-              _balAccessToken
-              _balBeaconName
-              _balUploadType
-              _balBearerToken
+          = go _balXgafv _balAccessToken _balBearerToken
+              _balCallback
               _balNamespacedType
+              (Just _balPp)
+              _balUploadType
+              _balUploadProtocol
+              _balBeaconName
+              _balQuotaUser
+              (Just _balPrettyPrint)
+              _balFields
               _balKey
               _balOAuthToken
-              _balFields
-              _balCallback
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -50,15 +50,15 @@ import           Network.Google.Prelude
 type MyLibraryAnnotationsInsertResource =
      "mylibrary" :>
        "annotations" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "country" Text :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "showOnlySummaryInResponse" Bool :>
-                     QueryParam "source" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+         QueryParam "country" Text :>
+           QueryParam "showOnlySummaryInResponse" Bool :>
+             QueryParam "source" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Annotation :>
                                Post '[JSON] Annotation
@@ -188,14 +188,14 @@ instance GoogleRequest MyLibraryAnnotationsInsert'
         type Rs MyLibraryAnnotationsInsert' = Annotation
         request = requestWithRoute defReq booksURL
         requestWithRoute r u MyLibraryAnnotationsInsert'{..}
-          = go _mlaiQuotaUser (Just _mlaiPrettyPrint)
-              _mlaiCountry
-              _mlaiUserIP
-              _mlaiKey
-              _mlaiShowOnlySummaryInResponse
+          = go _mlaiCountry _mlaiShowOnlySummaryInResponse
               _mlaiSource
-              _mlaiOAuthToken
+              _mlaiQuotaUser
+              (Just _mlaiPrettyPrint)
+              _mlaiUserIP
               _mlaiFields
+              _mlaiKey
+              _mlaiOAuthToken
               (Just AltJSON)
               _mlaiAnnotation
           where go

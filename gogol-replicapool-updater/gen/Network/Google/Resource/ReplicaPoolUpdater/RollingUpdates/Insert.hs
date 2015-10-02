@@ -54,9 +54,9 @@ type RollingUpdatesInsertResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] RollingUpdate :>
                              Post '[JSON] Operation
@@ -175,12 +175,12 @@ instance GoogleRequest RollingUpdatesInsert' where
         request
           = requestWithRoute defReq replicaPoolUpdaterURL
         requestWithRoute r u RollingUpdatesInsert'{..}
-          = go _ruiQuotaUser (Just _ruiPrettyPrint) _ruiProject
+          = go _ruiProject _ruiZone _ruiQuotaUser
+              (Just _ruiPrettyPrint)
               _ruiUserIP
-              _ruiZone
+              _ruiFields
               _ruiKey
               _ruiOAuthToken
-              _ruiFields
               (Just AltJSON)
               _ruiRollingUpdate
           where go

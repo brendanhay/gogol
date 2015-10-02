@@ -52,9 +52,9 @@ type CustomChannelsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] CustomChannel :>
                            Post '[JSON] CustomChannel
@@ -164,11 +164,12 @@ instance GoogleRequest CustomChannelsInsert' where
         type Rs CustomChannelsInsert' = CustomChannel
         request = requestWithRoute defReq adSenseHostURL
         requestWithRoute r u CustomChannelsInsert'{..}
-          = go _cciQuotaUser (Just _cciPrettyPrint) _cciUserIP
-              _cciAdClientId
+          = go _cciAdClientId _cciQuotaUser
+              (Just _cciPrettyPrint)
+              _cciUserIP
+              _cciFields
               _cciKey
               _cciOAuthToken
-              _cciFields
               (Just AltJSON)
               _cciCustomChannel
           where go

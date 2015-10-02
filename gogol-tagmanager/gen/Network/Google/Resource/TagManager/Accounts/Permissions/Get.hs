@@ -53,9 +53,9 @@ type AccountsPermissionsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] UserAccess
 
 -- | Gets a user\'s Account & Container Permissions.
@@ -162,12 +162,12 @@ instance GoogleRequest AccountsPermissionsGet' where
         type Rs AccountsPermissionsGet' = UserAccess
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u AccountsPermissionsGet'{..}
-          = go _apgQuotaUser (Just _apgPrettyPrint) _apgUserIP
-              _apgAccountId
+          = go _apgAccountId _apgPermissionId _apgQuotaUser
+              (Just _apgPrettyPrint)
+              _apgUserIP
+              _apgFields
               _apgKey
               _apgOAuthToken
-              _apgPermissionId
-              _apgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -57,17 +57,17 @@ type OrganizationsGetIAMPolicyResource =
        "organizations" :>
          "{resource}:getIamPolicy" :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
+             QueryParam "access_token" Text :>
+               QueryParam "bearer_token" Text :>
+                 QueryParam "callback" Text :>
                    QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] GetIAMPolicyRequest :>
                                        Post '[JSON] Policy
@@ -236,18 +236,17 @@ instance GoogleRequest OrganizationsGetIAMPolicy'
         type Rs OrganizationsGetIAMPolicy' = Policy
         request = requestWithRoute defReq resourceManagerURL
         requestWithRoute r u OrganizationsGetIAMPolicy'{..}
-          = go _ogipXgafv _ogipQuotaUser
-              (Just _ogipPrettyPrint)
-              _ogipUploadProtocol
-              (Just _ogipPp)
-              _ogipAccessToken
-              _ogipUploadType
-              _ogipBearerToken
-              _ogipKey
-              _ogipResource
-              _ogipOAuthToken
-              _ogipFields
+          = go _ogipXgafv _ogipAccessToken _ogipBearerToken
               _ogipCallback
+              (Just _ogipPp)
+              _ogipUploadType
+              _ogipUploadProtocol
+              _ogipResource
+              _ogipQuotaUser
+              (Just _ogipPrettyPrint)
+              _ogipFields
+              _ogipKey
+              _ogipOAuthToken
               (Just AltJSON)
               _ogipGetIAMPolicyRequest
           where go

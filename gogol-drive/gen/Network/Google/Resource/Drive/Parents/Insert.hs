@@ -52,9 +52,9 @@ type ParentsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] ParentReference :>
                            Post '[JSON] ParentReference
@@ -163,11 +163,11 @@ instance GoogleRequest ParentsInsert' where
         type Rs ParentsInsert' = ParentReference
         request = requestWithRoute defReq driveURL
         requestWithRoute r u ParentsInsert'{..}
-          = go _piiQuotaUser (Just _piiPrettyPrint) _piiUserIP
-              _piiKey
-              _piiFileId
-              _piiOAuthToken
+          = go _piiFileId _piiQuotaUser (Just _piiPrettyPrint)
+              _piiUserIP
               _piiFields
+              _piiKey
+              _piiOAuthToken
               (Just AltJSON)
               _piiParentReference
           where go

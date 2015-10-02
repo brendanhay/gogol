@@ -53,14 +53,14 @@ type PostsInsertResource =
        Capture "blogId" Text :>
          "posts" :>
            QueryParam "fetchBody" Bool :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "isDraft" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fetchImages" Bool :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+             QueryParam "fetchImages" Bool :>
+               QueryParam "isDraft" Bool :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Post :> Post '[JSON] Post
 
@@ -196,15 +196,14 @@ instance GoogleRequest PostsInsert' where
         type Rs PostsInsert' = Post
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PostsInsert'{..}
-          = go (Just _piiFetchBody) _piiQuotaUser
-              (Just _piiPrettyPrint)
-              _piiIsDraft
-              _piiUserIP
-              _piiFetchImages
+          = go (Just _piiFetchBody) _piiFetchImages _piiIsDraft
               _piiBlogId
+              _piiQuotaUser
+              (Just _piiPrettyPrint)
+              _piiUserIP
+              _piiFields
               _piiKey
               _piiOAuthToken
-              _piiFields
               (Just AltJSON)
               _piiPost
           where go

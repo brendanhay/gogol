@@ -57,19 +57,19 @@ type ProjectsTopicsListResource =
        "{+project}" :>
          "topics" :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "pageSize" Int32 :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "callback" Text :>
+             QueryParam "access_token" Text :>
+               QueryParam "bearer_token" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "pageSize" Int32 :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "quotaUser" Text :>
+                               QueryParam "prettyPrint" Bool :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] ListTopicsResponse
 
@@ -241,19 +241,19 @@ instance GoogleRequest ProjectsTopicsList' where
         type Rs ProjectsTopicsList' = ListTopicsResponse
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u ProjectsTopicsList'{..}
-          = go _ptlXgafv _ptlQuotaUser (Just _ptlPrettyPrint)
+          = go _ptlXgafv _ptlAccessToken _ptlBearerToken
+              _ptlCallback
+              _ptlPageSize
+              _ptlPageToken
+              (Just _ptlPp)
+              _ptlUploadType
               _ptlUploadProtocol
               _ptlProject
-              (Just _ptlPp)
-              _ptlAccessToken
-              _ptlUploadType
-              _ptlBearerToken
-              _ptlKey
-              _ptlPageToken
-              _ptlOAuthToken
-              _ptlPageSize
+              _ptlQuotaUser
+              (Just _ptlPrettyPrint)
               _ptlFields
-              _ptlCallback
+              _ptlKey
+              _ptlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

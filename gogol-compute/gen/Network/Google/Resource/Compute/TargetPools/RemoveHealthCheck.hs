@@ -57,9 +57,9 @@ type TargetPoolsRemoveHealthCheckResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON]
                                  TargetPoolsRemoveHealthCheckRequest
@@ -195,14 +195,13 @@ instance GoogleRequest TargetPoolsRemoveHealthCheck'
         request = requestWithRoute defReq computeURL
         requestWithRoute r u
           TargetPoolsRemoveHealthCheck'{..}
-          = go _tprhcQuotaUser (Just _tprhcPrettyPrint)
-              _tprhcProject
-              _tprhcTargetPool
+          = go _tprhcProject _tprhcRegion _tprhcTargetPool
+              _tprhcQuotaUser
+              (Just _tprhcPrettyPrint)
               _tprhcUserIP
-              _tprhcKey
-              _tprhcRegion
-              _tprhcOAuthToken
               _tprhcFields
+              _tprhcKey
+              _tprhcOAuthToken
               (Just AltJSON)
               _tprhcTargetPoolsRemoveHealthCheckRequest
           where go

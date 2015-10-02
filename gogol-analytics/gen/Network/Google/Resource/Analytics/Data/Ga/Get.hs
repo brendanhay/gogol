@@ -58,26 +58,27 @@ import           Network.Google.Prelude
 type DataGaGetResource =
      "data" :>
        "ga" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "metrics" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "samplingLevel"
-                 AnalyticsDataGaGetSamplingLevel
-                 :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "filters" Text :>
-                     QueryParam "ids" Text :>
-                       QueryParam "end-date" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "output" AnalyticsDataGaGetOutput :>
-                             QueryParam "sort" Text :>
-                               QueryParam "dimensions" Text :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "start-index" Int32 :>
-                                     QueryParam "max-results" Int32 :>
-                                       QueryParam "segment" Text :>
-                                         QueryParam "start-date" Text :>
-                                           QueryParam "fields" Text :>
+         QueryParam "dimensions" Text :>
+           QueryParam "filters" Text :>
+             QueryParam "max-results" Int32 :>
+               QueryParam "output" AnalyticsDataGaGetOutput :>
+                 QueryParam "samplingLevel"
+                   AnalyticsDataGaGetSamplingLevel
+                   :>
+                   QueryParam "segment" Text :>
+                     QueryParam "sort" Text :>
+                       QueryParam "start-index" Int32 :>
+                         QueryParam "ids" Text :>
+                           QueryParam "start-date" Text :>
+                             QueryParam "end-date" Text :>
+                               QueryParam "metrics" Text :>
+                                 QueryParam "quotaUser" Text :>
+                                   QueryParam "prettyPrint" Bool :>
+                                     QueryParam "userIp" Text :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "key" Key :>
+                                           QueryParam "oauth_token" OAuthToken
+                                             :>
                                              QueryParam "alt" AltJSON :>
                                                Get '[JSON] GaData
 
@@ -288,23 +289,22 @@ instance GoogleRequest DataGaGet' where
         type Rs DataGaGet' = GaData
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u DataGaGet'{..}
-          = go _dggQuotaUser (Just _dggMetrics)
-              (Just _dggPrettyPrint)
-              _dggSamplingLevel
-              _dggUserIP
-              _dggFilters
-              (Just _dggIds)
-              (Just _dggEndDate)
-              _dggKey
+          = go _dggDimensions _dggFilters _dggMaxResults
               _dggOutput
-              _dggSort
-              _dggDimensions
-              _dggOAuthToken
-              _dggStartIndex
-              _dggMaxResults
+              _dggSamplingLevel
               _dggSegment
+              _dggSort
+              _dggStartIndex
+              (Just _dggIds)
               (Just _dggStartDate)
+              (Just _dggEndDate)
+              (Just _dggMetrics)
+              _dggQuotaUser
+              (Just _dggPrettyPrint)
+              _dggUserIP
               _dggFields
+              _dggKey
+              _dggOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy DataGaGetResource)

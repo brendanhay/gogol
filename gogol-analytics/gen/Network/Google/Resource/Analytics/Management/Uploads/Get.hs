@@ -60,9 +60,9 @@ type ManagementUploadsGetResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "fields" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] Upload
 
@@ -191,15 +191,15 @@ instance GoogleRequest ManagementUploadsGet' where
         type Rs ManagementUploadsGet' = Upload
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementUploadsGet'{..}
-          = go _mugQuotaUser (Just _mugPrettyPrint)
-              _mugWebPropertyId
-              _mugUserIP
+          = go _mugAccountId _mugWebPropertyId
               _mugCustomDataSourceId
-              _mugAccountId
+              _mugUploadId
+              _mugQuotaUser
+              (Just _mugPrettyPrint)
+              _mugUserIP
+              _mugFields
               _mugKey
               _mugOAuthToken
-              _mugUploadId
-              _mugFields
               (Just AltJSON)
           where go
                   = clientWithRoute

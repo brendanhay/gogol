@@ -48,15 +48,15 @@ import           Network.Google.Prelude
 -- 'AppsList'' request conforms to.
 type AppsListResource =
      "apps" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "languageCode" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "appFilterExtensions" Text :>
-                     QueryParam "appFilterMimeTypes" Text :>
-                       QueryParam "fields" Text :>
+       QueryParam "appFilterExtensions" Text :>
+         QueryParam "appFilterMimeTypes" Text :>
+           QueryParam "languageCode" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] AppList
 
 -- | Lists a user\'s installed apps.
@@ -177,14 +177,15 @@ instance GoogleRequest AppsList' where
         type Rs AppsList' = AppList
         request = requestWithRoute defReq driveURL
         requestWithRoute r u AppsList'{..}
-          = go _alQuotaUser _alLanguageCode
+          = go (Just _alAppFilterExtensions)
+              (Just _alAppFilterMimeTypes)
+              _alLanguageCode
+              _alQuotaUser
               (Just _alPrettyPrint)
               _alUserIP
+              _alFields
               _alKey
               _alOAuthToken
-              (Just _alAppFilterExtensions)
-              (Just _alAppFilterMimeTypes)
-              _alFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy AppsListResource) r

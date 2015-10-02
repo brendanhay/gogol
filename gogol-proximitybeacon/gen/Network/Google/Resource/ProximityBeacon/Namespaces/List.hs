@@ -55,17 +55,17 @@ type NamespacesListResource =
      "v1beta1" :>
        "namespaces" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] ListNamespacesResponse
 
@@ -206,16 +206,16 @@ instance GoogleRequest NamespacesList' where
         type Rs NamespacesList' = ListNamespacesResponse
         request = requestWithRoute defReq proximityBeaconURL
         requestWithRoute r u NamespacesList'{..}
-          = go _nlXgafv _nlQuotaUser (Just _nlPrettyPrint)
-              _nlUploadProtocol
+          = go _nlXgafv _nlAccessToken _nlBearerToken
+              _nlCallback
               (Just _nlPp)
-              _nlAccessToken
               _nlUploadType
-              _nlBearerToken
+              _nlUploadProtocol
+              _nlQuotaUser
+              (Just _nlPrettyPrint)
+              _nlFields
               _nlKey
               _nlOAuthToken
-              _nlFields
-              _nlCallback
               (Just AltJSON)
           where go
                   = clientWithRoute

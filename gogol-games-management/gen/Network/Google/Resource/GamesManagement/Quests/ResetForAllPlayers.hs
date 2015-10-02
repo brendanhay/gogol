@@ -53,9 +53,9 @@ type QuestsResetForAllPlayersResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Resets all player progress on the quest with the given ID for all
@@ -155,12 +155,12 @@ instance GoogleRequest QuestsResetForAllPlayers'
         type Rs QuestsResetForAllPlayers' = ()
         request = requestWithRoute defReq gamesManagementURL
         requestWithRoute r u QuestsResetForAllPlayers'{..}
-          = go _qrfapQuotaUser (Just _qrfapPrettyPrint)
+          = go _qrfapQuestId _qrfapQuotaUser
+              (Just _qrfapPrettyPrint)
               _qrfapUserIP
+              _qrfapFields
               _qrfapKey
               _qrfapOAuthToken
-              _qrfapQuestId
-              _qrfapFields
               (Just AltJSON)
           where go
                   = clientWithRoute

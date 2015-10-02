@@ -57,9 +57,9 @@ type CommentsRemoveContentResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Post '[JSON] Comment
 
 -- | Removes the content of a comment.
@@ -175,13 +175,13 @@ instance GoogleRequest CommentsRemoveContent' where
         type Rs CommentsRemoveContent' = Comment
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u CommentsRemoveContent'{..}
-          = go _crcQuotaUser (Just _crcPrettyPrint) _crcUserIP
-              _crcBlogId
-              _crcKey
-              _crcPostId
-              _crcOAuthToken
-              _crcCommentId
+          = go _crcBlogId _crcPostId _crcCommentId
+              _crcQuotaUser
+              (Just _crcPrettyPrint)
+              _crcUserIP
               _crcFields
+              _crcKey
+              _crcOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

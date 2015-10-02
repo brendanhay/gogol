@@ -52,17 +52,17 @@ import           Network.Google.Prelude
 type UsersMessagesListResource =
      Capture "userId" Text :>
        "messages" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "q" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "includeSpamTrash" Bool :>
-                     QueryParams "labelIds" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
+         QueryParam "includeSpamTrash" Bool :>
+           QueryParams "labelIds" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "q" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] ListMessagesResponse
 
@@ -209,16 +209,17 @@ instance GoogleRequest UsersMessagesList' where
         type Rs UsersMessagesList' = ListMessagesResponse
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersMessagesList'{..}
-          = go _umlQuotaUser (Just _umlPrettyPrint) _umlUserIP
+          = go (Just _umlIncludeSpamTrash) _umlLabelIds
+              (Just _umlMaxResults)
+              _umlPageToken
               _umlQ
               _umlUserId
-              _umlKey
-              (Just _umlIncludeSpamTrash)
-              _umlLabelIds
-              _umlPageToken
-              _umlOAuthToken
-              (Just _umlMaxResults)
+              _umlQuotaUser
+              (Just _umlPrettyPrint)
+              _umlUserIP
               _umlFields
+              _umlKey
+              _umlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

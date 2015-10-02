@@ -59,9 +59,9 @@ type EditsImagesListResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ImagesListResponse
 
@@ -191,15 +191,14 @@ instance GoogleRequest EditsImagesList' where
         type Rs EditsImagesList' = ImagesListResponse
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u EditsImagesList'{..}
-          = go _eilQuotaUser (Just _eilPrettyPrint)
-              _eilPackageName
-              _eilUserIP
+          = go _eilPackageName _eilEditId _eilLanguage
               _eilImageType
-              _eilKey
-              _eilLanguage
-              _eilOAuthToken
-              _eilEditId
+              _eilQuotaUser
+              (Just _eilPrettyPrint)
+              _eilUserIP
               _eilFields
+              _eilKey
+              _eilOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

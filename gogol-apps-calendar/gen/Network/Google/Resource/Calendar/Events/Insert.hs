@@ -52,15 +52,15 @@ type EventsInsertResource =
      "calendars" :>
        Capture "calendarId" Text :>
          "events" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "maxAttendees" Int32 :>
-                   QueryParam "key" Key :>
-                     QueryParam "sendNotifications" Bool :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "supportsAttachments" Bool :>
-                           QueryParam "fields" Text :>
+           QueryParam "maxAttendees" Int32 :>
+             QueryParam "sendNotifications" Bool :>
+               QueryParam "supportsAttachments" Bool :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Event :> Post '[JSON] Event
 
@@ -203,15 +203,15 @@ instance GoogleRequest EventsInsert' where
         type Rs EventsInsert' = Event
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u EventsInsert'{..}
-          = go _eveQuotaUser _eveCalendarId
+          = go _eveMaxAttendees _eveSendNotifications
+              _eveSupportsAttachments
+              _eveCalendarId
+              _eveQuotaUser
               (Just _evePrettyPrint)
               _eveUserIP
-              _eveMaxAttendees
-              _eveKey
-              _eveSendNotifications
-              _eveOAuthToken
-              _eveSupportsAttachments
               _eveFields
+              _eveKey
+              _eveOAuthToken
               (Just AltJSON)
               _eveEvent
           where go

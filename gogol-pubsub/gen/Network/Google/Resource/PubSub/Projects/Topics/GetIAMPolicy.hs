@@ -55,17 +55,17 @@ type ProjectsTopicsGetIAMPolicyResource =
      "v1beta2" :>
        "{+resource}:getIamPolicy" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :> Get '[JSON] Policy
 
 -- | Gets the access control policy for a resource. Is empty if the policy or
@@ -223,18 +223,17 @@ instance GoogleRequest ProjectsTopicsGetIAMPolicy'
         type Rs ProjectsTopicsGetIAMPolicy' = Policy
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u ProjectsTopicsGetIAMPolicy'{..}
-          = go _ptgipXgafv _ptgipQuotaUser
-              (Just _ptgipPrettyPrint)
-              _ptgipUploadProtocol
-              (Just _ptgipPp)
-              _ptgipAccessToken
-              _ptgipUploadType
-              _ptgipBearerToken
-              _ptgipKey
-              _ptgipResource
-              _ptgipOAuthToken
-              _ptgipFields
+          = go _ptgipXgafv _ptgipAccessToken _ptgipBearerToken
               _ptgipCallback
+              (Just _ptgipPp)
+              _ptgipUploadType
+              _ptgipUploadProtocol
+              _ptgipResource
+              _ptgipQuotaUser
+              (Just _ptgipPrettyPrint)
+              _ptgipFields
+              _ptgipKey
+              _ptgipOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

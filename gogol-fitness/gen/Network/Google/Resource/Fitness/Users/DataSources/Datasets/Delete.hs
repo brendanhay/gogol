@@ -60,14 +60,14 @@ type UsersDataSourcesDatasetsDeleteResource =
          Capture "dataSourceId" Text :>
            "datasets" :>
              Capture "datasetId" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "modifiedTimeMillis" Int64 :>
-                         QueryParam "currentTimeMillis" Int64 :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+               QueryParam "currentTimeMillis" Int64 :>
+                 QueryParam "modifiedTimeMillis" Int64 :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Performs an inclusive delete of all data points whose start and end
@@ -219,16 +219,16 @@ instance GoogleRequest
         request = requestWithRoute defReq fitnessURL
         requestWithRoute r u
           UsersDataSourcesDatasetsDelete'{..}
-          = go _udsddQuotaUser (Just _udsddPrettyPrint)
-              _udsddUserIP
-              _udsddDataSourceId
+          = go _udsddCurrentTimeMillis _udsddModifiedTimeMillis
               _udsddUserId
-              _udsddKey
+              _udsddDataSourceId
               _udsddDatasetId
-              _udsddModifiedTimeMillis
-              _udsddCurrentTimeMillis
-              _udsddOAuthToken
+              _udsddQuotaUser
+              (Just _udsddPrettyPrint)
+              _udsddUserIP
               _udsddFields
+              _udsddKey
+              _udsddOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

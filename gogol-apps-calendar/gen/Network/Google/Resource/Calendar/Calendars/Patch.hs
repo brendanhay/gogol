@@ -51,9 +51,9 @@ type CalendarsPatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Calendar :> Patch '[JSON] Calendar
 
@@ -159,11 +159,11 @@ instance GoogleRequest CalendarsPatch' where
         type Rs CalendarsPatch' = Calendar
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u CalendarsPatch'{..}
-          = go _cpQuotaUser _cpCalendarId (Just _cpPrettyPrint)
+          = go _cpCalendarId _cpQuotaUser (Just _cpPrettyPrint)
               _cpUserIP
+              _cpFields
               _cpKey
               _cpOAuthToken
-              _cpFields
               (Just AltJSON)
               _cpCalendar
           where go

@@ -57,16 +57,16 @@ type PostsUpdateResource =
          "posts" :>
            Capture "postId" Text :>
              QueryParam "fetchBody" Bool :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fetchImages" Bool :>
-                       QueryParam "maxComments" Word32 :>
-                         QueryParam "key" Key :>
-                           QueryParam "revert" Bool :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "publish" Bool :>
-                                 QueryParam "fields" Text :>
+               QueryParam "fetchImages" Bool :>
+                 QueryParam "maxComments" Word32 :>
+                   QueryParam "publish" Bool :>
+                     QueryParam "revert" Bool :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] Post :> Put '[JSON] Post
 
@@ -227,18 +227,18 @@ instance GoogleRequest PostsUpdate' where
         type Rs PostsUpdate' = Post
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PostsUpdate'{..}
-          = go (Just _puFetchBody) _puQuotaUser
+          = go (Just _puFetchBody) _puFetchImages
+              _puMaxComments
+              _puPublish
+              _puRevert
+              _puBlogId
+              _puPostId
+              _puQuotaUser
               (Just _puPrettyPrint)
               _puUserIP
-              _puFetchImages
-              _puBlogId
-              _puMaxComments
-              _puKey
-              _puRevert
-              _puPostId
-              _puOAuthToken
-              _puPublish
               _puFields
+              _puKey
+              _puOAuthToken
               (Just AltJSON)
               _puPost
           where go

@@ -53,14 +53,14 @@ type PagesPatchResource =
        Capture "blogId" Text :>
          "pages" :>
            Capture "pageId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "revert" Bool :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "publish" Bool :>
-                           QueryParam "fields" Text :>
+             QueryParam "publish" Bool :>
+               QueryParam "revert" Bool :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Page :> Patch '[JSON] Page
 
@@ -197,15 +197,13 @@ instance GoogleRequest PagesPatch' where
         type Rs PagesPatch' = Page
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PagesPatch'{..}
-          = go _pagaQuotaUser (Just _pagaPrettyPrint)
+          = go _pagaPublish _pagaRevert _pagaBlogId _pagaPageId
+              _pagaQuotaUser
+              (Just _pagaPrettyPrint)
               _pagaUserIP
-              _pagaBlogId
-              _pagaPageId
-              _pagaKey
-              _pagaRevert
-              _pagaOAuthToken
-              _pagaPublish
               _pagaFields
+              _pagaKey
+              _pagaOAuthToken
               (Just AltJSON)
               _pagaPage
           where go

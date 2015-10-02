@@ -51,9 +51,9 @@ type UsersWatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] WatchRequest :>
                          Post '[JSON] WatchResponse
@@ -159,11 +159,11 @@ instance GoogleRequest UsersWatch' where
         type Rs UsersWatch' = WatchResponse
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersWatch'{..}
-          = go _uwQuotaUser (Just _uwPrettyPrint) _uwUserIP
-              _uwUserId
+          = go _uwUserId _uwQuotaUser (Just _uwPrettyPrint)
+              _uwUserIP
+              _uwFields
               _uwKey
               _uwOAuthToken
-              _uwFields
               (Just AltJSON)
               _uwWatchRequest
           where go

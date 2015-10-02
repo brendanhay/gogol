@@ -56,13 +56,13 @@ type ManagementCustomMetricsUpdateResource =
              Capture "webPropertyId" Text :>
                "customMetrics" :>
                  Capture "customMetricId" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "ignoreCustomDataSourceLinks" Bool :>
+                   QueryParam "ignoreCustomDataSourceLinks" Bool :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] CustomMetric :>
                                      Put '[JSON] CustomMetric
@@ -209,15 +209,16 @@ instance GoogleRequest ManagementCustomMetricsUpdate'
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
           ManagementCustomMetricsUpdate'{..}
-          = go _mcmuQuotaUser (Just _mcmuPrettyPrint)
-              _mcmuCustomMetricId
-              _mcmuWebPropertyId
-              (Just _mcmuIgnoreCustomDataSourceLinks)
-              _mcmuUserIP
+          = go (Just _mcmuIgnoreCustomDataSourceLinks)
               _mcmuAccountId
+              _mcmuWebPropertyId
+              _mcmuCustomMetricId
+              _mcmuQuotaUser
+              (Just _mcmuPrettyPrint)
+              _mcmuUserIP
+              _mcmuFields
               _mcmuKey
               _mcmuOAuthToken
-              _mcmuFields
               (Just AltJSON)
               _mcmuCustomMetric
           where go

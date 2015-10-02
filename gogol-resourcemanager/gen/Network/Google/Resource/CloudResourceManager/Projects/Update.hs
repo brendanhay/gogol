@@ -58,17 +58,17 @@ type ProjectsUpdateResource =
        "projects" :>
          Capture "projectId" Text :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
+             QueryParam "access_token" Text :>
+               QueryParam "bearer_token" Text :>
+                 QueryParam "callback" Text :>
                    QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] Project :>
                                        Put '[JSON] Project
@@ -230,17 +230,17 @@ instance GoogleRequest ProjectsUpdate' where
         type Rs ProjectsUpdate' = Project
         request = requestWithRoute defReq resourceManagerURL
         requestWithRoute r u ProjectsUpdate'{..}
-          = go _puXgafv _puQuotaUser (Just _puPrettyPrint)
-              _puUploadProtocol
-              (Just _puPp)
-              _puAccessToken
-              _puUploadType
-              _puBearerToken
-              _puKey
-              _puProjectId
-              _puOAuthToken
-              _puFields
+          = go _puXgafv _puAccessToken _puBearerToken
               _puCallback
+              (Just _puPp)
+              _puUploadType
+              _puUploadProtocol
+              _puProjectId
+              _puQuotaUser
+              (Just _puPrettyPrint)
+              _puFields
+              _puKey
+              _puOAuthToken
               (Just AltJSON)
               _puProject
           where go

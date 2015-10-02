@@ -54,9 +54,9 @@ type TablesUploadResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Table :> Post '[JSON] Table
 
@@ -154,9 +154,9 @@ instance GoogleRequest TablesUpload' where
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u TablesUpload'{..}
           = go _tuQuotaUser (Just _tuPrettyPrint) _tuUserIP
+              _tuFields
               _tuKey
               _tuOAuthToken
-              _tuFields
               (Just AltJSON)
               _tuTable
           where go

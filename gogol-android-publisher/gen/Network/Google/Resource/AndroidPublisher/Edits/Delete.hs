@@ -54,9 +54,9 @@ type EditsDeleteResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an edit for an app. Creating a new edit will automatically
@@ -162,13 +162,12 @@ instance GoogleRequest EditsDelete' where
         type Rs EditsDelete' = ()
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u EditsDelete'{..}
-          = go _edQuotaUser (Just _edPrettyPrint)
-              _edPackageName
+          = go _edPackageName _edEditId _edQuotaUser
+              (Just _edPrettyPrint)
               _edUserIP
+              _edFields
               _edKey
               _edOAuthToken
-              _edEditId
-              _edFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -76,94 +76,94 @@ import           Network.Google.Prelude
 type CompaniesListResource =
      "v2" :>
        "companies" :>
-         QueryParams "languageCodes" Text :>
-           QueryParam "$.xgafv" Text :>
-             QueryParam "maxMonthlyBudget.units" Int64 :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "upload_protocol" Text :>
-                     QueryParam "orderBy" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "companyName" Text :>
-                           QueryParam "access_token" Text :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "address" Text :>
-                                 QueryParam "minMonthlyBudget.nanos" Int32 :>
-                                   QueryParams "industries" Text :>
-                                     QueryParam
-                                       "requestMetadata.partnersSessionId"
-                                       Text
+         QueryParam "$.xgafv" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "address" Text :>
+               QueryParam "bearer_token" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "companyName" Text :>
+                     QueryParams "gpsMotivations" Text :>
+                       QueryParams "industries" Text :>
+                         QueryParams "languageCodes" Text :>
+                           QueryParam "maxMonthlyBudget.currencyCode" Text :>
+                             QueryParam "maxMonthlyBudget.nanos" Int32 :>
+                               QueryParam "maxMonthlyBudget.units" Int64 :>
+                                 QueryParam "minMonthlyBudget.currencyCode" Text
+                                   :>
+                                   QueryParam "minMonthlyBudget.nanos" Int32 :>
+                                     QueryParam "minMonthlyBudget.units" Int64
                                        :>
-                                       QueryParam "bearer_token" Text :>
-                                         QueryParam "key" Key :>
-                                           QueryParam "maxMonthlyBudget.nanos"
-                                             Int32
-                                             :>
-                                             QueryParam "requestMetadata.locale"
-                                               Text
-                                               :>
-                                               QueryParam "view" Text :>
-                                                 QueryParams
-                                                   "requestMetadata.experimentIds"
+                                       QueryParam "orderBy" Text :>
+                                         QueryParam "pageSize" Int32 :>
+                                           QueryParam "pageToken" Text :>
+                                             QueryParam "pp" Bool :>
+                                               QueryParams
+                                                 "requestMetadata.experimentIds"
+                                                 Text
+                                                 :>
+                                                 QueryParam
+                                                   "requestMetadata.locale"
                                                    Text
                                                    :>
                                                    QueryParam
-                                                     "requestMetadata.userOverrides.ipAddress"
+                                                     "requestMetadata.partnersSessionId"
                                                      Text
                                                      :>
                                                      QueryParam
-                                                       "maxMonthlyBudget.currencyCode"
+                                                       "requestMetadata.trafficSource.trafficSourceId"
                                                        Text
                                                        :>
-                                                       QueryParam "websiteUrl"
+                                                       QueryParam
+                                                         "requestMetadata.trafficSource.trafficSubId"
                                                          Text
                                                          :>
-                                                         QueryParam "pageToken"
+                                                         QueryParam
+                                                           "requestMetadata.userOverrides.ipAddress"
                                                            Text
                                                            :>
                                                            QueryParam
-                                                             "requestMetadata.trafficSource.trafficSubId"
+                                                             "requestMetadata.userOverrides.userId"
                                                              Text
                                                              :>
-                                                             QueryParam
-                                                               "oauth_token"
-                                                               OAuthToken
+                                                             QueryParams
+                                                               "services"
+                                                               Text
                                                                :>
-                                                               QueryParams
-                                                                 "gpsMotivations"
+                                                               QueryParam
+                                                                 "uploadType"
                                                                  Text
                                                                  :>
                                                                  QueryParam
-                                                                   "pageSize"
-                                                                   Int32
+                                                                   "upload_protocol"
+                                                                   Text
                                                                    :>
                                                                    QueryParam
-                                                                     "minMonthlyBudget.currencyCode"
+                                                                     "view"
                                                                      Text
                                                                      :>
-                                                                     QueryParams
-                                                                       "services"
+                                                                     QueryParam
+                                                                       "websiteUrl"
                                                                        Text
                                                                        :>
                                                                        QueryParam
-                                                                         "requestMetadata.userOverrides.userId"
+                                                                         "quotaUser"
                                                                          Text
                                                                          :>
                                                                          QueryParam
-                                                                           "minMonthlyBudget.units"
-                                                                           Int64
+                                                                           "prettyPrint"
+                                                                           Bool
                                                                            :>
                                                                            QueryParam
-                                                                             "requestMetadata.trafficSource.trafficSourceId"
+                                                                             "fields"
                                                                              Text
                                                                              :>
                                                                              QueryParam
-                                                                               "fields"
-                                                                               Text
+                                                                               "key"
+                                                                               Key
                                                                                :>
                                                                                QueryParam
-                                                                                 "callback"
-                                                                                 Text
+                                                                                 "oauth_token"
+                                                                                 OAuthToken
                                                                                  :>
                                                                                  QueryParam
                                                                                    "alt"
@@ -570,41 +570,40 @@ instance GoogleRequest CompaniesList' where
         type Rs CompaniesList' = ListCompaniesResponse
         request = requestWithRoute defReq partnersURL
         requestWithRoute r u CompaniesList'{..}
-          = go _clLanguageCodes _clXgafv
+          = go _clXgafv _clAccessToken _clAddress
+              _clBearerToken
+              _clCallback
+              _clCompanyName
+              _clGpsMotivations
+              _clIndustries
+              _clLanguageCodes
+              _clMaxMonthlyBudgetCurrencyCode
+              _clMaxMonthlyBudgetNanos
               _clMaxMonthlyBudgetUnits
+              _clMinMonthlyBudgetCurrencyCode
+              _clMinMonthlyBudgetNanos
+              _clMinMonthlyBudgetUnits
+              _clOrderBy
+              _clPageSize
+              _clPageToken
+              (Just _clPp)
+              _clRequestMetadataExperimentIds
+              _clRequestMetadataLocale
+              _clRequestMetadataPartnersSessionId
+              _clRequestMetadataTrafficSourceTrafficSourceId
+              _clRequestMetadataTrafficSourceTrafficSubId
+              _clRequestMetadataUserOverridesIPAddress
+              _clRequestMetadataUserOverridesUserId
+              _clServices
+              _clUploadType
+              _clUploadProtocol
+              _clView
+              _clWebsiteURL
               _clQuotaUser
               (Just _clPrettyPrint)
-              _clUploadProtocol
-              _clOrderBy
-              (Just _clPp)
-              _clCompanyName
-              _clAccessToken
-              _clUploadType
-              _clAddress
-              _clMinMonthlyBudgetNanos
-              _clIndustries
-              _clRequestMetadataPartnersSessionId
-              _clBearerToken
-              _clKey
-              _clMaxMonthlyBudgetNanos
-              _clRequestMetadataLocale
-              _clView
-              _clRequestMetadataExperimentIds
-              _clRequestMetadataUserOverridesIPAddress
-              _clMaxMonthlyBudgetCurrencyCode
-              _clWebsiteURL
-              _clPageToken
-              _clRequestMetadataTrafficSourceTrafficSubId
-              _clOAuthToken
-              _clGpsMotivations
-              _clPageSize
-              _clMinMonthlyBudgetCurrencyCode
-              _clServices
-              _clRequestMetadataUserOverridesUserId
-              _clMinMonthlyBudgetUnits
-              _clRequestMetadataTrafficSourceTrafficSourceId
               _clFields
-              _clCallback
+              _clKey
+              _clOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

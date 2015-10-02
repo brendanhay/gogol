@@ -59,9 +59,9 @@ type ManagementProfileFilterLinksInsertResource =
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] ProfileFilterLink :>
                                      Post '[JSON] ProfileFilterLink
@@ -198,14 +198,14 @@ instance GoogleRequest
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
           ManagementProfileFilterLinksInsert'{..}
-          = go _mpfliQuotaUser (Just _mpfliPrettyPrint)
-              _mpfliWebPropertyId
-              _mpfliUserIP
+          = go _mpfliAccountId _mpfliWebPropertyId
               _mpfliProfileId
-              _mpfliAccountId
+              _mpfliQuotaUser
+              (Just _mpfliPrettyPrint)
+              _mpfliUserIP
+              _mpfliFields
               _mpfliKey
               _mpfliOAuthToken
-              _mpfliFields
               (Just AltJSON)
               _mpfliProfileFilterLink
           where go

@@ -52,14 +52,14 @@ type LayersGetResource =
        Capture "volumeId" Text :>
          "layersummary" :>
            Capture "summaryId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "contentVersion" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "source" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+             QueryParam "contentVersion" Text :>
+               QueryParam "source" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] Layersummary
 
@@ -181,14 +181,14 @@ instance GoogleRequest LayersGet' where
         type Rs LayersGet' = Layersummary
         request = requestWithRoute defReq booksURL
         requestWithRoute r u LayersGet'{..}
-          = go _lgQuotaUser (Just _lgPrettyPrint) _lgUserIP
-              _lgContentVersion
-              _lgKey
-              _lgVolumeId
-              _lgSource
-              _lgOAuthToken
-              _lgFields
+          = go _lgContentVersion _lgSource _lgVolumeId
               _lgSummaryId
+              _lgQuotaUser
+              (Just _lgPrettyPrint)
+              _lgUserIP
+              _lgFields
+              _lgKey
+              _lgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy LayersGetResource)

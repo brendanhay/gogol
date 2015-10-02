@@ -60,25 +60,26 @@ type OrderDocumentsListResource =
          "projects" :>
            Capture "projectId" Int64 :>
              "orderDocuments" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "searchString" Text :>
-                       QueryParams "ids" Int64 :>
-                         QueryParam "sortOrder"
-                           DfareportingOrderDocumentsListSortOrder
-                           :>
-                           QueryParam "key" Key :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "sortField"
-                                 DfareportingOrderDocumentsListSortField
+               QueryParam "approved" Bool :>
+                 QueryParams "ids" Int64 :>
+                   QueryParam "maxResults" Int32 :>
+                     QueryParams "orderId" Int64 :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "searchString" Text :>
+                           QueryParams "siteId" Int64 :>
+                             QueryParam "sortField"
+                               DfareportingOrderDocumentsListSortField
+                               :>
+                               QueryParam "sortOrder"
+                                 DfareportingOrderDocumentsListSortOrder
                                  :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParams "orderId" Int64 :>
-                                     QueryParam "approved" Bool :>
-                                       QueryParams "siteId" Int64 :>
-                                         QueryParam "maxResults" Int32 :>
-                                           QueryParam "fields" Text :>
+                                 QueryParam "quotaUser" Text :>
+                                   QueryParam "prettyPrint" Bool :>
+                                     QueryParam "userIp" Text :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "key" Key :>
+                                           QueryParam "oauth_token" OAuthToken
+                                             :>
                                              QueryParam "alt" AltJSON :>
                                                Get '[JSON]
                                                  OrderDocumentsListResponse
@@ -277,21 +278,20 @@ instance GoogleRequest OrderDocumentsList' where
              OrderDocumentsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u OrderDocumentsList'{..}
-          = go _odlQuotaUser (Just _odlPrettyPrint) _odlUserIP
-              _odlSearchString
-              _odlIds
-              _odlProfileId
-              _odlSortOrder
-              _odlKey
+          = go _odlApproved _odlIds _odlMaxResults _odlOrderId
               _odlPageToken
-              _odlProjectId
-              _odlSortField
-              _odlOAuthToken
-              _odlOrderId
-              _odlApproved
+              _odlSearchString
               _odlSiteId
-              _odlMaxResults
+              _odlSortField
+              _odlSortOrder
+              _odlProfileId
+              _odlProjectId
+              _odlQuotaUser
+              (Just _odlPrettyPrint)
+              _odlUserIP
               _odlFields
+              _odlKey
+              _odlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -57,18 +57,18 @@ type JobsListResource =
      "projects" :>
        Capture "projectId" Text :>
          "jobs" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
+           QueryParam "allUsers" Bool :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "projection" BigqueryJobsListProjection :>
                    QueryParams "stateFilter" BigqueryJobsListStateFilter
                      :>
-                     QueryParam "projection" BigqueryJobsListProjection :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "allUsers" Bool :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "maxResults" Word32 :>
-                               QueryParam "fields" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :> Get '[JSON] JobList
 
 -- | Lists all jobs that you started in the specified project. Job
@@ -212,16 +212,16 @@ instance GoogleRequest JobsList' where
         type Rs JobsList' = JobList
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u JobsList'{..}
-          = go _jlQuotaUser (Just _jlPrettyPrint) _jlUserIP
-              _jlKey
-              _jlStateFilter
+          = go _jlAllUsers _jlMaxResults _jlPageToken
               _jlProjection
-              _jlPageToken
+              _jlStateFilter
               _jlProjectId
-              _jlAllUsers
-              _jlOAuthToken
-              _jlMaxResults
+              _jlQuotaUser
+              (Just _jlPrettyPrint)
+              _jlUserIP
               _jlFields
+              _jlKey
+              _jlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy JobsListResource) r

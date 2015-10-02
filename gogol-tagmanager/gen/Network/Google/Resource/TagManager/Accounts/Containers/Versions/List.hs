@@ -52,13 +52,13 @@ type AccountsContainersVersionsListResource =
          "containers" :>
            Capture "containerId" Text :>
              "versions" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "headers" Bool :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+               QueryParam "headers" Bool :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListContainerVersionsResponse
 
@@ -181,14 +181,14 @@ instance GoogleRequest
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersVersionsList'{..}
-          = go _acvlQuotaUser (Just _acvlPrettyPrint)
+          = go (Just _acvlHeaders) _acvlAccountId
               _acvlContainerId
+              _acvlQuotaUser
+              (Just _acvlPrettyPrint)
               _acvlUserIP
-              (Just _acvlHeaders)
-              _acvlAccountId
+              _acvlFields
               _acvlKey
               _acvlOAuthToken
-              _acvlFields
               (Just AltJSON)
           where go
                   = clientWithRoute

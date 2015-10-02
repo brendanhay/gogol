@@ -52,16 +52,16 @@ type GroupsListResource =
      Capture "project" Text :>
        "global" :>
          "groups" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
+           QueryParam "filter" Text :>
+             QueryParam "maxResults" Word32 :>
                QueryParam "orderBy" Text :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "filter" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Get '[JSON] GroupList
 
 -- | Retrieves the list of groups contained within the specified project.
@@ -208,15 +208,15 @@ instance GoogleRequest GroupsList' where
         type Rs GroupsList' = GroupList
         request = requestWithRoute defReq userAccountsURL
         requestWithRoute r u GroupsList'{..}
-          = go _glQuotaUser (Just _glPrettyPrint) _glOrderBy
-              _glProject
-              _glUserIP
-              _glKey
-              _glFilter
+          = go _glFilter (Just _glMaxResults) _glOrderBy
               _glPageToken
-              _glOAuthToken
-              (Just _glMaxResults)
+              _glProject
+              _glQuotaUser
+              (Just _glPrettyPrint)
+              _glUserIP
               _glFields
+              _glKey
+              _glOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy GroupsListResource)

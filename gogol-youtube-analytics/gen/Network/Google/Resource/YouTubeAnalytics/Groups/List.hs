@@ -50,15 +50,15 @@ import           Network.Google.YouTubeAnalytics.Types
 -- 'GroupsList'' request conforms to.
 type GroupsListResource =
      "groups" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "mine" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "id" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+       QueryParam "id" Text :>
+         QueryParam "mine" Bool :>
+           QueryParam "onBehalfOfContentOwner" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] GroupListResponse
 
@@ -182,13 +182,13 @@ instance GoogleRequest GroupsList' where
         type Rs GroupsList' = GroupListResponse
         request = requestWithRoute defReq youTubeAnalyticsURL
         requestWithRoute r u GroupsList'{..}
-          = go _glQuotaUser (Just _glPrettyPrint) _glMine
+          = go _glId _glMine _glOnBehalfOfContentOwner
+              _glQuotaUser
+              (Just _glPrettyPrint)
               _glUserIP
-              _glOnBehalfOfContentOwner
-              _glKey
-              _glId
-              _glOAuthToken
               _glFields
+              _glKey
+              _glOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy GroupsListResource)

@@ -52,17 +52,17 @@ import           Network.Google.Prelude
 type VolumesGetResource =
      "volumes" :>
        Capture "volumeId" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "country" Text :>
-               QueryParam "userIp" Text :>
-                 QueryParam "partner" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "source" Text :>
-                       QueryParam "projection" BooksVolumesGetProjection :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "user_library_consistent_read" Bool :>
-                             QueryParam "fields" Text :>
+         QueryParam "country" Text :>
+           QueryParam "partner" Text :>
+             QueryParam "projection" BooksVolumesGetProjection :>
+               QueryParam "source" Text :>
+                 QueryParam "user_library_consistent_read" Bool :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Get '[JSON] Volume
 
 -- | Gets volume information for a single volume.
@@ -199,16 +199,15 @@ instance GoogleRequest VolumesGet' where
         type Rs VolumesGet' = Volume
         request = requestWithRoute defReq booksURL
         requestWithRoute r u VolumesGet'{..}
-          = go _vgQuotaUser (Just _vgPrettyPrint) _vgCountry
-              _vgUserIP
-              _vgPartner
-              _vgKey
-              _vgVolumeId
-              _vgSource
-              _vgProjection
-              _vgOAuthToken
+          = go _vgCountry _vgPartner _vgProjection _vgSource
               _vgUserLibraryConsistentRead
+              _vgVolumeId
+              _vgQuotaUser
+              (Just _vgPrettyPrint)
+              _vgUserIP
               _vgFields
+              _vgKey
+              _vgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy VolumesGetResource)

@@ -48,13 +48,13 @@ import           Network.Google.Prelude
 type RoomsGetResource =
      "rooms" :>
        Capture "roomId" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "language" Text :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+         QueryParam "language" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Room
 
 -- | Get the data for a room.
@@ -155,12 +155,12 @@ instance GoogleRequest RoomsGet' where
         type Rs RoomsGet' = Room
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u RoomsGet'{..}
-          = go _rgQuotaUser (Just _rgPrettyPrint) _rgUserIP
-              _rgKey
-              _rgRoomId
-              _rgLanguage
-              _rgOAuthToken
+          = go _rgLanguage _rgRoomId _rgQuotaUser
+              (Just _rgPrettyPrint)
+              _rgUserIP
               _rgFields
+              _rgKey
+              _rgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy RoomsGetResource) r

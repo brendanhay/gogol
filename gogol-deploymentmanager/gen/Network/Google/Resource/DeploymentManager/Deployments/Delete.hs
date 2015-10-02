@@ -53,9 +53,9 @@ type DeploymentsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes a deployment and all of the resources in the deployment.
@@ -159,12 +159,12 @@ instance GoogleRequest DeploymentsDelete' where
         request
           = requestWithRoute defReq deploymentManagerURL
         requestWithRoute r u DeploymentsDelete'{..}
-          = go _ddQuotaUser (Just _ddPrettyPrint) _ddProject
+          = go _ddProject _ddDeployment _ddQuotaUser
+              (Just _ddPrettyPrint)
               _ddUserIP
+              _ddFields
               _ddKey
               _ddOAuthToken
-              _ddFields
-              _ddDeployment
               (Just AltJSON)
           where go
                   = clientWithRoute

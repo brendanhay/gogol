@@ -53,9 +53,9 @@ type PlacementStrategiesDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing placement strategy.
@@ -161,12 +161,12 @@ instance GoogleRequest PlacementStrategiesDelete'
         type Rs PlacementStrategiesDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementStrategiesDelete'{..}
-          = go _psdQuotaUser (Just _psdPrettyPrint) _psdUserIP
-              _psdProfileId
-              _psdKey
-              _psdId
-              _psdOAuthToken
+          = go _psdProfileId _psdId _psdQuotaUser
+              (Just _psdPrettyPrint)
+              _psdUserIP
               _psdFields
+              _psdKey
+              _psdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

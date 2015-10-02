@@ -50,9 +50,9 @@ type AchievementConfigurationsDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete the achievement configuration with the given ID.
@@ -153,12 +153,12 @@ instance GoogleRequest
           = requestWithRoute defReq gamesConfigurationURL
         requestWithRoute r u
           AchievementConfigurationsDelete'{..}
-          = go _acdQuotaUser (Just _acdPrettyPrint)
-              _acdAchievementId
+          = go _acdAchievementId _acdQuotaUser
+              (Just _acdPrettyPrint)
               _acdUserIP
+              _acdFields
               _acdKey
               _acdOAuthToken
-              _acdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

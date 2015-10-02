@@ -55,17 +55,17 @@ type ProjectsTopicsCreateResource =
      "v1beta2" :>
        "{+name}" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] Topic :> Put '[JSON] Topic
 
@@ -231,17 +231,17 @@ instance GoogleRequest ProjectsTopicsCreate' where
         type Rs ProjectsTopicsCreate' = Topic
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u ProjectsTopicsCreate'{..}
-          = go _ptcXgafv _ptcQuotaUser (Just _ptcPrettyPrint)
-              _ptcUploadProtocol
-              (Just _ptcPp)
-              _ptcAccessToken
-              _ptcUploadType
-              _ptcBearerToken
-              _ptcKey
-              _ptcName
-              _ptcOAuthToken
-              _ptcFields
+          = go _ptcXgafv _ptcAccessToken _ptcBearerToken
               _ptcCallback
+              (Just _ptcPp)
+              _ptcUploadType
+              _ptcUploadProtocol
+              _ptcName
+              _ptcQuotaUser
+              (Just _ptcPrettyPrint)
+              _ptcFields
+              _ptcKey
+              _ptcOAuthToken
               (Just AltJSON)
               _ptcTopic
           where go

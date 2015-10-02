@@ -54,9 +54,9 @@ type BucketAccessControlsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Permanently deletes the ACL entry for the specified entity on the
@@ -167,13 +167,12 @@ instance GoogleRequest BucketAccessControlsDelete'
         type Rs BucketAccessControlsDelete' = ()
         request = requestWithRoute defReq storageURL
         requestWithRoute r u BucketAccessControlsDelete'{..}
-          = go _bacdQuotaUser (Just _bacdPrettyPrint)
+          = go _bacdBucket _bacdEntity _bacdQuotaUser
+              (Just _bacdPrettyPrint)
               _bacdUserIP
-              _bacdBucket
+              _bacdFields
               _bacdKey
               _bacdOAuthToken
-              _bacdEntity
-              _bacdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

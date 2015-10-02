@@ -57,17 +57,17 @@ type OrganizationsSetIAMPolicyResource =
        "organizations" :>
          "{resource}:setIamPolicy" :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
+             QueryParam "access_token" Text :>
+               QueryParam "bearer_token" Text :>
+                 QueryParam "callback" Text :>
                    QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] SetIAMPolicyRequest :>
                                        Post '[JSON] Policy
@@ -237,18 +237,17 @@ instance GoogleRequest OrganizationsSetIAMPolicy'
         type Rs OrganizationsSetIAMPolicy' = Policy
         request = requestWithRoute defReq resourceManagerURL
         requestWithRoute r u OrganizationsSetIAMPolicy'{..}
-          = go _osipXgafv _osipQuotaUser
-              (Just _osipPrettyPrint)
-              _osipUploadProtocol
-              (Just _osipPp)
-              _osipAccessToken
-              _osipUploadType
-              _osipBearerToken
-              _osipKey
-              _osipResource
-              _osipOAuthToken
-              _osipFields
+          = go _osipXgafv _osipAccessToken _osipBearerToken
               _osipCallback
+              (Just _osipPp)
+              _osipUploadType
+              _osipUploadProtocol
+              _osipResource
+              _osipQuotaUser
+              (Just _osipPrettyPrint)
+              _osipFields
+              _osipKey
+              _osipOAuthToken
               (Just AltJSON)
               _osipSetIAMPolicyRequest
           where go

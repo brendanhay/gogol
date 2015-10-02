@@ -51,13 +51,13 @@ type InappproductsUpdateResource =
      Capture "packageName" Text :>
        "inappproducts" :>
          Capture "sku" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "autoConvertMissingPrices" Bool :>
+           QueryParam "autoConvertMissingPrices" Bool :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] InAppProduct :>
                              Put '[JSON] InAppProduct
@@ -187,14 +187,14 @@ instance GoogleRequest InappproductsUpdate' where
         type Rs InappproductsUpdate' = InAppProduct
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u InappproductsUpdate'{..}
-          = go _iuQuotaUser (Just _iuPrettyPrint)
-              _iuAutoConvertMissingPrices
-              _iuPackageName
-              _iuUserIP
-              _iuKey
+          = go _iuAutoConvertMissingPrices _iuPackageName
               _iuSku
-              _iuOAuthToken
+              _iuQuotaUser
+              (Just _iuPrettyPrint)
+              _iuUserIP
               _iuFields
+              _iuKey
+              _iuOAuthToken
               (Just AltJSON)
               _iuInAppProduct
           where go

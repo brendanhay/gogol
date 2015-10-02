@@ -50,14 +50,14 @@ type AchievementConfigurationsListResource =
      "applications" :>
        Capture "applicationId" Text :>
          "achievements" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "maxResults" Int32 :>
-                         QueryParam "fields" Text :>
+           QueryParam "maxResults" Int32 :>
+             QueryParam "pageToken" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] AchievementConfigurationListResponse
 
@@ -181,13 +181,13 @@ instance GoogleRequest AchievementConfigurationsList'
           = requestWithRoute defReq gamesConfigurationURL
         requestWithRoute r u
           AchievementConfigurationsList'{..}
-          = go _aclQuotaUser (Just _aclPrettyPrint) _aclUserIP
-              _aclApplicationId
-              _aclKey
-              _aclPageToken
-              _aclOAuthToken
-              _aclMaxResults
+          = go _aclMaxResults _aclPageToken _aclApplicationId
+              _aclQuotaUser
+              (Just _aclPrettyPrint)
+              _aclUserIP
               _aclFields
+              _aclKey
+              _aclOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

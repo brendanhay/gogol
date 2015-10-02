@@ -55,18 +55,18 @@ type TransferJobsGetResource =
      "v1" :>
        "{+jobName}" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
+                   QueryParam "projectId" Text :>
                      QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "projectId" Text :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] TransferJob
 
@@ -228,18 +228,18 @@ instance GoogleRequest TransferJobsGet' where
         type Rs TransferJobsGet' = TransferJob
         request = requestWithRoute defReq storageTransferURL
         requestWithRoute r u TransferJobsGet'{..}
-          = go _tjgXgafv _tjgQuotaUser (Just _tjgPrettyPrint)
-              _tjgUploadProtocol
-              (Just _tjgPp)
-              _tjgAccessToken
-              _tjgJobName
-              _tjgUploadType
-              _tjgBearerToken
-              _tjgKey
-              _tjgProjectId
-              _tjgOAuthToken
-              _tjgFields
+          = go _tjgXgafv _tjgAccessToken _tjgBearerToken
               _tjgCallback
+              (Just _tjgPp)
+              _tjgProjectId
+              _tjgUploadType
+              _tjgUploadProtocol
+              _tjgJobName
+              _tjgQuotaUser
+              (Just _tjgPrettyPrint)
+              _tjgFields
+              _tjgKey
+              _tjgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

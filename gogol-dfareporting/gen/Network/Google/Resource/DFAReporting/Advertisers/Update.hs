@@ -52,9 +52,9 @@ type AdvertisersUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Advertiser :> Put '[JSON] Advertiser
 
@@ -162,11 +162,12 @@ instance GoogleRequest AdvertisersUpdate' where
         type Rs AdvertisersUpdate' = Advertiser
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdvertisersUpdate'{..}
-          = go _advQuotaUser (Just _advPrettyPrint) _advUserIP
-              _advProfileId
+          = go _advProfileId _advQuotaUser
+              (Just _advPrettyPrint)
+              _advUserIP
+              _advFields
               _advKey
               _advOAuthToken
-              _advFields
               (Just AltJSON)
               _advAdvertiser
           where go

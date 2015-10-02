@@ -49,13 +49,13 @@ type MapsPublishResource =
      "maps" :>
        Capture "id" Text :>
          "publish" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "force" Bool :>
+           QueryParam "force" Bool :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Post '[JSON] PublishResponse
 
@@ -157,12 +157,11 @@ instance GoogleRequest MapsPublish' where
         type Rs MapsPublish' = PublishResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u MapsPublish'{..}
-          = go _mQuotaUser (Just _mPrettyPrint) _mForce
+          = go _mForce _mId _mQuotaUser (Just _mPrettyPrint)
               _mUserIP
-              _mKey
-              _mId
-              _mOAuthToken
               _mFields
+              _mKey
+              _mOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

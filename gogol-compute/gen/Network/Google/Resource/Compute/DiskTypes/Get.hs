@@ -55,9 +55,9 @@ type DiskTypesGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] DiskType
 
 -- | Returns the specified disk type resource.
@@ -172,13 +172,12 @@ instance GoogleRequest DiskTypesGet' where
         type Rs DiskTypesGet' = DiskType
         request = requestWithRoute defReq computeURL
         requestWithRoute r u DiskTypesGet'{..}
-          = go _dtgQuotaUser (Just _dtgPrettyPrint) _dtgProject
+          = go _dtgProject _dtgZone _dtgDiskType _dtgQuotaUser
+              (Just _dtgPrettyPrint)
               _dtgUserIP
-              _dtgZone
-              _dtgKey
-              _dtgDiskType
-              _dtgOAuthToken
               _dtgFields
+              _dtgKey
+              _dtgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

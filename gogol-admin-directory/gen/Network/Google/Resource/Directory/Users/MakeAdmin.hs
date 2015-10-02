@@ -52,9 +52,9 @@ type UsersMakeAdminResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] UserMakeAdmin :> Post '[JSON] ()
 
@@ -162,11 +162,11 @@ instance GoogleRequest UsersMakeAdmin' where
         type Rs UsersMakeAdmin' = ()
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u UsersMakeAdmin'{..}
-          = go _umaQuotaUser (Just _umaPrettyPrint) _umaUserIP
+          = go _umaUserKey _umaQuotaUser (Just _umaPrettyPrint)
+              _umaUserIP
+              _umaFields
               _umaKey
               _umaOAuthToken
-              _umaUserKey
-              _umaFields
               (Just AltJSON)
               _umaUserMakeAdmin
           where go

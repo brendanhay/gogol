@@ -50,15 +50,15 @@ import           Network.Google.Prelude
 type ManagedZonesListResource =
      Capture "project" Text :>
        "managedZones" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "dnsName" Text :>
-                       QueryParam "maxResults" Int32 :>
-                         QueryParam "fields" Text :>
+         QueryParam "dnsName" Text :>
+           QueryParam "maxResults" Int32 :>
+             QueryParam "pageToken" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ManagedZonesListResponse
 
@@ -185,14 +185,14 @@ instance GoogleRequest ManagedZonesList' where
         type Rs ManagedZonesList' = ManagedZonesListResponse
         request = requestWithRoute defReq dNSURL
         requestWithRoute r u ManagedZonesList'{..}
-          = go _mzlQuotaUser (Just _mzlPrettyPrint) _mzlProject
+          = go _mzlDNSName _mzlMaxResults _mzlPageToken
+              _mzlProject
+              _mzlQuotaUser
+              (Just _mzlPrettyPrint)
               _mzlUserIP
-              _mzlKey
-              _mzlPageToken
-              _mzlOAuthToken
-              _mzlDNSName
-              _mzlMaxResults
               _mzlFields
+              _mzlKey
+              _mzlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

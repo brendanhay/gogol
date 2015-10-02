@@ -27,7 +27,7 @@ module Network.Google.Resource.Compute.URLMaps.Insert
       URLMapsInsertResource
 
     -- * Creating a Request
-    , uRLMapsInsert'
+    , urlMapsInsert'
     , URLMapsInsert'
 
     -- * Request Lenses
@@ -53,16 +53,16 @@ type URLMapsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] URLMap :> Post '[JSON] Operation
 
 -- | Creates a UrlMap resource in the specified project using the data
 -- included in the request.
 --
--- /See:/ 'uRLMapsInsert'' smart constructor.
+-- /See:/ 'urlMapsInsert'' smart constructor.
 data URLMapsInsert' = URLMapsInsert'
     { _umiQuotaUser   :: !(Maybe Text)
     , _umiPrettyPrint :: !Bool
@@ -93,11 +93,11 @@ data URLMapsInsert' = URLMapsInsert'
 -- * 'umiOAuthToken'
 --
 -- * 'umiFields'
-uRLMapsInsert'
+urlMapsInsert'
     :: URLMap -- ^ 'URLMap'
     -> Text -- ^ 'project'
     -> URLMapsInsert'
-uRLMapsInsert' pUmiURLMap_ pUmiProject_ =
+urlMapsInsert' pUmiURLMap_ pUmiProject_ =
     URLMapsInsert'
     { _umiQuotaUser = Nothing
     , _umiPrettyPrint = True
@@ -163,11 +163,11 @@ instance GoogleRequest URLMapsInsert' where
         type Rs URLMapsInsert' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u URLMapsInsert'{..}
-          = go _umiQuotaUser (Just _umiPrettyPrint) _umiProject
+          = go _umiProject _umiQuotaUser (Just _umiPrettyPrint)
               _umiUserIP
+              _umiFields
               _umiKey
               _umiOAuthToken
-              _umiFields
               (Just AltJSON)
               _umiURLMap
           where go

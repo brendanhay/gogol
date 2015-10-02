@@ -54,9 +54,9 @@ type ManagementWebPropertiesGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] WebProperty
 
 -- | Gets a web property to which the user has access.
@@ -166,13 +166,12 @@ instance GoogleRequest ManagementWebPropertiesGet'
         type Rs ManagementWebPropertiesGet' = WebProperty
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementWebPropertiesGet'{..}
-          = go _mwpgQuotaUser (Just _mwpgPrettyPrint)
-              _mwpgWebPropertyId
+          = go _mwpgAccountId _mwpgWebPropertyId _mwpgQuotaUser
+              (Just _mwpgPrettyPrint)
               _mwpgUserIP
-              _mwpgAccountId
+              _mwpgFields
               _mwpgKey
               _mwpgOAuthToken
-              _mwpgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

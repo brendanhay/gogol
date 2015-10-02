@@ -48,14 +48,14 @@ import           Network.Google.YouTube.Types
 -- 'VideoAbuseReportReasonsList'' request conforms to.
 type VideoAbuseReportReasonsListResource =
      "videoAbuseReportReasons" :>
-       QueryParam "quotaUser" Text :>
+       QueryParam "hl" Text :>
          QueryParam "part" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "hl" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] VideoAbuseReportReasonListResponse
 
@@ -167,13 +167,13 @@ instance GoogleRequest VideoAbuseReportReasonsList'
              VideoAbuseReportReasonListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u VideoAbuseReportReasonsList'{..}
-          = go _varrlQuotaUser (Just _varrlPart)
+          = go (Just _varrlHl) (Just _varrlPart)
+              _varrlQuotaUser
               (Just _varrlPrettyPrint)
               _varrlUserIP
-              (Just _varrlHl)
+              _varrlFields
               _varrlKey
               _varrlOAuthToken
-              _varrlFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -53,9 +53,9 @@ type AccountsMetadataDimensionsListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Metadata
 
 -- | List the metadata for the dimensions available to this AdExchange
@@ -157,12 +157,12 @@ instance GoogleRequest
         request = requestWithRoute defReq adExchangeSellerURL
         requestWithRoute r u
           AccountsMetadataDimensionsList'{..}
-          = go _amdlQuotaUser (Just _amdlPrettyPrint)
+          = go _amdlAccountId _amdlQuotaUser
+              (Just _amdlPrettyPrint)
               _amdlUserIP
-              _amdlAccountId
+              _amdlFields
               _amdlKey
               _amdlOAuthToken
-              _amdlFields
               (Just AltJSON)
           where go
                   = clientWithRoute

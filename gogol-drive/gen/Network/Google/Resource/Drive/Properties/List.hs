@@ -51,9 +51,9 @@ type PropertiesListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] PropertyList
 
 -- | Lists a file\'s properties.
@@ -145,11 +145,11 @@ instance GoogleRequest PropertiesList' where
         type Rs PropertiesList' = PropertyList
         request = requestWithRoute defReq driveURL
         requestWithRoute r u PropertiesList'{..}
-          = go _plQuotaUser (Just _plPrettyPrint) _plUserIP
-              _plKey
-              _plFileId
-              _plOAuthToken
+          = go _plFileId _plQuotaUser (Just _plPrettyPrint)
+              _plUserIP
               _plFields
+              _plKey
+              _plOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -51,9 +51,9 @@ type FilesDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Permanently deletes a file by ID. Skips the trash. The currently
@@ -146,11 +146,11 @@ instance GoogleRequest FilesDelete' where
         type Rs FilesDelete' = ()
         request = requestWithRoute defReq driveURL
         requestWithRoute r u FilesDelete'{..}
-          = go _fdQuotaUser (Just _fdPrettyPrint) _fdUserIP
-              _fdKey
-              _fdFileId
-              _fdOAuthToken
+          = go _fdFileId _fdQuotaUser (Just _fdPrettyPrint)
+              _fdUserIP
               _fdFields
+              _fdKey
+              _fdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

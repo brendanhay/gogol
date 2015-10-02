@@ -47,13 +47,13 @@ import           Network.Google.Prelude
 -- 'WebfontsList'' request conforms to.
 type WebfontsListResource =
      "webfonts" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "sort" WebfontsWebfontsListSort :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+       QueryParam "sort" WebfontsWebfontsListSort :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] WebfontList
 
 -- | Retrieves the list of fonts currently served by the Google Fonts
@@ -145,11 +145,11 @@ instance GoogleRequest WebfontsList' where
         type Rs WebfontsList' = WebfontList
         request = requestWithRoute defReq fontsURL
         requestWithRoute r u WebfontsList'{..}
-          = go _wlQuotaUser (Just _wlPrettyPrint) _wlUserIP
-              _wlKey
-              _wlSort
-              _wlOAuthToken
+          = go _wlSort _wlQuotaUser (Just _wlPrettyPrint)
+              _wlUserIP
               _wlFields
+              _wlKey
+              _wlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

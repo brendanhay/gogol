@@ -56,9 +56,9 @@ type AccountsAdUnitsInsertResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] AdUnit :> Post '[JSON] AdUnit
 
@@ -179,13 +179,12 @@ instance GoogleRequest AccountsAdUnitsInsert' where
         type Rs AccountsAdUnitsInsert' = AdUnit
         request = requestWithRoute defReq adSenseHostURL
         requestWithRoute r u AccountsAdUnitsInsert'{..}
-          = go _aauiQuotaUser (Just _aauiPrettyPrint)
+          = go _aauiAccountId _aauiAdClientId _aauiQuotaUser
+              (Just _aauiPrettyPrint)
               _aauiUserIP
-              _aauiAdClientId
-              _aauiAccountId
+              _aauiFields
               _aauiKey
               _aauiOAuthToken
-              _aauiFields
               (Just AltJSON)
               _aauiAdUnit
           where go

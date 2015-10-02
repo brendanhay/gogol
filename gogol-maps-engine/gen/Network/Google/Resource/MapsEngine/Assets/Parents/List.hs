@@ -50,14 +50,14 @@ type AssetsParentsListResource =
      "assets" :>
        Capture "id" Text :>
          "parents" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "maxResults" Word32 :>
-                         QueryParam "fields" Text :>
+           QueryParam "maxResults" Word32 :>
+             QueryParam "pageToken" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ParentsListResponse
 
@@ -175,13 +175,13 @@ instance GoogleRequest AssetsParentsList' where
         type Rs AssetsParentsList' = ParentsListResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u AssetsParentsList'{..}
-          = go _assQuotaUser (Just _assPrettyPrint) _assUserIP
-              _assKey
-              _assId
-              _assPageToken
-              _assOAuthToken
-              _assMaxResults
+          = go _assMaxResults _assPageToken _assId
+              _assQuotaUser
+              (Just _assPrettyPrint)
+              _assUserIP
               _assFields
+              _assKey
+              _assOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

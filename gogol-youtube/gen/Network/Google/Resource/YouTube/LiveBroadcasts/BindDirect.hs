@@ -55,17 +55,17 @@ type LiveBroadcastsBindDirectResource =
      "liveBroadcasts" :>
        "bind" :>
          "direct" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "part" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "onBehalfOfContentOwner" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                         QueryParam "id" Text :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "streamId" Text :>
-                               QueryParam "fields" Text :>
+           QueryParam "onBehalfOfContentOwner" Text :>
+             QueryParam "onBehalfOfContentOwnerChannel" Text :>
+               QueryParam "streamId" Text :>
+                 QueryParam "id" Text :>
+                   QueryParam "part" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Post '[JSON] LiveBroadcast
 
@@ -235,16 +235,17 @@ instance GoogleRequest LiveBroadcastsBindDirect'
         type Rs LiveBroadcastsBindDirect' = LiveBroadcast
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u LiveBroadcastsBindDirect'{..}
-          = go _lbbdQuotaUser (Just _lbbdPart)
+          = go _lbbdOnBehalfOfContentOwner
+              _lbbdOnBehalfOfContentOwnerChannel
+              _lbbdStreamId
+              (Just _lbbdId)
+              (Just _lbbdPart)
+              _lbbdQuotaUser
               (Just _lbbdPrettyPrint)
               _lbbdUserIP
-              _lbbdOnBehalfOfContentOwner
-              _lbbdKey
-              _lbbdOnBehalfOfContentOwnerChannel
-              (Just _lbbdId)
-              _lbbdOAuthToken
-              _lbbdStreamId
               _lbbdFields
+              _lbbdKey
+              _lbbdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

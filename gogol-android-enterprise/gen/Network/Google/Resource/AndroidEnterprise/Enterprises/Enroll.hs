@@ -48,13 +48,13 @@ import           Network.Google.Prelude
 type EnterprisesEnrollResource =
      "enterprises" :>
        "enroll" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "token" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+         QueryParam "token" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Enterprise :> Post '[JSON] Enterprise
 
@@ -158,11 +158,12 @@ instance GoogleRequest EnterprisesEnroll' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u EnterprisesEnroll'{..}
-          = go _eeQuotaUser (Just _eePrettyPrint) _eeUserIP
-              (Just _eeToken)
+          = go (Just _eeToken) _eeQuotaUser
+              (Just _eePrettyPrint)
+              _eeUserIP
+              _eeFields
               _eeKey
               _eeOAuthToken
-              _eeFields
               (Just AltJSON)
               _eeEnterprise
           where go

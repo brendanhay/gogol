@@ -51,13 +51,13 @@ type PagesGetResource =
        Capture "blogId" Text :>
          "pages" :>
            Capture "pageId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "view" BloggerPagesGetView :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+             QueryParam "view" BloggerPagesGetView :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Page
 
 -- | Gets one blog page by ID.
@@ -170,13 +170,12 @@ instance GoogleRequest PagesGet' where
         type Rs PagesGet' = Page
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PagesGet'{..}
-          = go _pggQuotaUser (Just _pggPrettyPrint) _pggUserIP
-              _pggBlogId
-              _pggPageId
-              _pggKey
-              _pggView
-              _pggOAuthToken
+          = go _pggView _pggBlogId _pggPageId _pggQuotaUser
+              (Just _pggPrettyPrint)
+              _pggUserIP
               _pggFields
+              _pggKey
+              _pggOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy PagesGetResource) r

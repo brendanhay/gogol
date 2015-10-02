@@ -51,13 +51,13 @@ type ProductsGetResource =
        Capture "enterpriseId" Text :>
          "products" :>
            Capture "productId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "language" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+             QueryParam "language" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Product
 
 -- | Retrieves details of a product for display to an enterprise admin.
@@ -171,13 +171,13 @@ instance GoogleRequest ProductsGet' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u ProductsGet'{..}
-          = go _pQuotaUser (Just _pPrettyPrint) _pEnterpriseId
+          = go _pLanguage _pEnterpriseId _pProductId
+              _pQuotaUser
+              (Just _pPrettyPrint)
               _pUserIP
-              _pKey
-              _pLanguage
-              _pOAuthToken
-              _pProductId
               _pFields
+              _pKey
+              _pOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

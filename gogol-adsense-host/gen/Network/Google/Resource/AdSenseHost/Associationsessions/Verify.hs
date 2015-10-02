@@ -48,13 +48,13 @@ import           Network.Google.Prelude
 type AssociationsessionsVerifyResource =
      "associationsessions" :>
        "verify" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "token" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+         QueryParam "token" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] AssociationSession
 
@@ -150,11 +150,12 @@ instance GoogleRequest AssociationsessionsVerify'
              AssociationSession
         request = requestWithRoute defReq adSenseHostURL
         requestWithRoute r u AssociationsessionsVerify'{..}
-          = go _avQuotaUser (Just _avPrettyPrint) _avUserIP
-              (Just _avToken)
+          = go (Just _avToken) _avQuotaUser
+              (Just _avPrettyPrint)
+              _avUserIP
+              _avFields
               _avKey
               _avOAuthToken
-              _avFields
               (Just AltJSON)
           where go
                   = clientWithRoute

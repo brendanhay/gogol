@@ -52,9 +52,9 @@ type EventsResetMultipleForAllPlayersResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] EventsResetMultipleForAllRequest :>
                          Post '[JSON] ()
@@ -163,9 +163,9 @@ instance GoogleRequest
           EventsResetMultipleForAllPlayers'{..}
           = go _ermfapQuotaUser (Just _ermfapPrettyPrint)
               _ermfapUserIP
+              _ermfapFields
               _ermfapKey
               _ermfapOAuthToken
-              _ermfapFields
               (Just AltJSON)
               _ermfapEventsResetMultipleForAllRequest
           where go

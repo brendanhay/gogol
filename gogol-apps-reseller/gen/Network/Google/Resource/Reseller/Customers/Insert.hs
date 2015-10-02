@@ -47,13 +47,13 @@ import           Network.Google.Prelude
 -- 'CustomersInsert'' request conforms to.
 type CustomersInsertResource =
      "customers" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "customerAuthToken" Text :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+       QueryParam "customerAuthToken" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Customer :> Post '[JSON] Customer
 
@@ -159,11 +159,12 @@ instance GoogleRequest CustomersInsert' where
         type Rs CustomersInsert' = Customer
         request = requestWithRoute defReq appsResellerURL
         requestWithRoute r u CustomersInsert'{..}
-          = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIP
-              _ciKey
-              _ciCustomerAuthToken
-              _ciOAuthToken
+          = go _ciCustomerAuthToken _ciQuotaUser
+              (Just _ciPrettyPrint)
+              _ciUserIP
               _ciFields
+              _ciKey
+              _ciOAuthToken
               (Just AltJSON)
               _ciCustomer
           where go

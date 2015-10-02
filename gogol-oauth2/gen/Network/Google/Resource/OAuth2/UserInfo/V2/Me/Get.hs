@@ -50,9 +50,9 @@ type UserInfoV2MeGetResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] UserInfoplus
 
 --
@@ -140,9 +140,9 @@ instance GoogleRequest UserInfoV2MeGet' where
         requestWithRoute r u UserInfoV2MeGet'{..}
           = go _uivmgQuotaUser (Just _uivmgPrettyPrint)
               _uivmgUserIP
+              _uivmgFields
               _uivmgKey
               _uivmgOAuthToken
-              _uivmgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

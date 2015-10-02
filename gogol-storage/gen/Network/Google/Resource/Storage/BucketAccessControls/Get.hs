@@ -53,9 +53,9 @@ type BucketAccessControlsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] BucketAccessControl
 
@@ -166,13 +166,12 @@ instance GoogleRequest BucketAccessControlsGet' where
              BucketAccessControl
         request = requestWithRoute defReq storageURL
         requestWithRoute r u BucketAccessControlsGet'{..}
-          = go _bacgQuotaUser (Just _bacgPrettyPrint)
+          = go _bacgBucket _bacgEntity _bacgQuotaUser
+              (Just _bacgPrettyPrint)
               _bacgUserIP
-              _bacgBucket
+              _bacgFields
               _bacgKey
               _bacgOAuthToken
-              _bacgEntity
-              _bacgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

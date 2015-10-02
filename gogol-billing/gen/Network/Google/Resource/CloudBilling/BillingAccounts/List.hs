@@ -56,19 +56,19 @@ type BillingAccountsListResource =
      "v1" :>
        "billingAccounts" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "pageSize" Int32 :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "callback" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
+                 QueryParam "pageSize" Int32 :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] ListBillingAccountsResponse
 
@@ -234,18 +234,18 @@ instance GoogleRequest BillingAccountsList' where
              ListBillingAccountsResponse
         request = requestWithRoute defReq billingURL
         requestWithRoute r u BillingAccountsList'{..}
-          = go _balXgafv _balQuotaUser (Just _balPrettyPrint)
-              _balUploadProtocol
-              (Just _balPp)
-              _balAccessToken
-              _balUploadType
-              _balBearerToken
-              _balKey
-              _balPageToken
-              _balOAuthToken
-              _balPageSize
-              _balFields
+          = go _balXgafv _balAccessToken _balBearerToken
               _balCallback
+              _balPageSize
+              _balPageToken
+              (Just _balPp)
+              _balUploadType
+              _balUploadProtocol
+              _balQuotaUser
+              (Just _balPrettyPrint)
+              _balFields
+              _balKey
+              _balOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

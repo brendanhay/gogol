@@ -54,19 +54,19 @@ type ObjectsListResource =
      "b" :>
        Capture "bucket" Text :>
          "o" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "prefix" Text :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "versions" Bool :>
-                     QueryParam "key" Key :>
-                       QueryParam "projection" StorageObjectsListProjection
-                         :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "delimiter" Text :>
-                               QueryParam "maxResults" Word32 :>
-                                 QueryParam "fields" Text :>
+           QueryParam "delimiter" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "prefix" Text :>
+                   QueryParam "projection" StorageObjectsListProjection
+                     :>
+                     QueryParam "versions" Bool :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] Objects
 
@@ -218,17 +218,17 @@ instance GoogleRequest ObjectsList' where
         type Rs ObjectsList' = Objects
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectsList'{..}
-          = go _olQuotaUser (Just _olPrettyPrint) _olPrefix
-              _olUserIP
-              _olBucket
-              _olVersions
-              _olKey
+          = go _olDelimiter _olMaxResults _olPageToken
+              _olPrefix
               _olProjection
-              _olPageToken
-              _olOAuthToken
-              _olDelimiter
-              _olMaxResults
+              _olVersions
+              _olBucket
+              _olQuotaUser
+              (Just _olPrettyPrint)
+              _olUserIP
               _olFields
+              _olKey
+              _olOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

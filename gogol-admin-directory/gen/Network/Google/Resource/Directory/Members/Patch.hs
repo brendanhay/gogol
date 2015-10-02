@@ -55,9 +55,9 @@ type MembersPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Member :> Patch '[JSON] Member
 
@@ -173,12 +173,12 @@ instance GoogleRequest MembersPatch' where
         type Rs MembersPatch' = Member
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u MembersPatch'{..}
-          = go _mpQuotaUser _mpMemberKey (Just _mpPrettyPrint)
+          = go _mpGroupKey _mpMemberKey _mpQuotaUser
+              (Just _mpPrettyPrint)
               _mpUserIP
-              _mpGroupKey
+              _mpFields
               _mpKey
               _mpOAuthToken
-              _mpFields
               (Just AltJSON)
               _mpMember
           where go

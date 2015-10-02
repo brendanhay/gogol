@@ -58,27 +58,28 @@ import           Network.Google.Prelude
 -- 'TablesList'' request conforms to.
 type TablesListResource =
      "tables" :>
-       QueryParam "createdAfter" UTCTime :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "creatorEmail" Text :>
-                 QueryParam "role" MapsEngineTablesListRole :>
-                   QueryParam "key" Key :>
-                     QueryParam "bbox" Text :>
+       QueryParam "bbox" Text :>
+         QueryParam "createdAfter" UTCTime :>
+           QueryParam "createdBefore" UTCTime :>
+             QueryParam "creatorEmail" Text :>
+               QueryParam "maxResults" Word32 :>
+                 QueryParam "modifiedAfter" UTCTime :>
+                   QueryParam "modifiedBefore" UTCTime :>
+                     QueryParam "pageToken" Text :>
                        QueryParam "processingStatus"
                          MapsEngineTablesListProcessingStatus
                          :>
-                         QueryParam "modifiedAfter" UTCTime :>
-                           QueryParam "modifiedBefore" UTCTime :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "projectId" Text :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "search" Text :>
-                                     QueryParam "maxResults" Word32 :>
-                                       QueryParam "tags" Text :>
-                                         QueryParam "fields" Text :>
-                                           QueryParam "createdBefore" UTCTime :>
+                         QueryParam "projectId" Text :>
+                           QueryParam "role" MapsEngineTablesListRole :>
+                             QueryParam "search" Text :>
+                               QueryParam "tags" Text :>
+                                 QueryParam "quotaUser" Text :>
+                                   QueryParam "prettyPrint" Bool :>
+                                     QueryParam "userIp" Text :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "key" Key :>
+                                           QueryParam "oauth_token" OAuthToken
+                                             :>
                                              QueryParam "alt" AltJSON :>
                                                Get '[JSON] TablesListResponse
 
@@ -295,24 +296,23 @@ instance GoogleRequest TablesList' where
         type Rs TablesList' = TablesListResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u TablesList'{..}
-          = go _tlCreatedAfter _tlQuotaUser
-              (Just _tlPrettyPrint)
-              _tlUserIP
+          = go _tlBbox _tlCreatedAfter _tlCreatedBefore
               _tlCreatorEmail
-              _tlRole
-              _tlKey
-              _tlBbox
-              _tlProcessingStatus
+              _tlMaxResults
               _tlModifiedAfter
               _tlModifiedBefore
               _tlPageToken
+              _tlProcessingStatus
               _tlProjectId
-              _tlOAuthToken
+              _tlRole
               _tlSearch
-              _tlMaxResults
               _tlTags
+              _tlQuotaUser
+              (Just _tlPrettyPrint)
+              _tlUserIP
               _tlFields
-              _tlCreatedBefore
+              _tlKey
+              _tlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TablesListResource)

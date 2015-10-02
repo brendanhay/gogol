@@ -54,9 +54,9 @@ type EditsDetailsUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] AppDetails :> Put '[JSON] AppDetails
 
@@ -176,13 +176,12 @@ instance GoogleRequest EditsDetailsUpdate' where
         type Rs EditsDetailsUpdate' = AppDetails
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u EditsDetailsUpdate'{..}
-          = go _eduQuotaUser (Just _eduPrettyPrint)
-              _eduPackageName
+          = go _eduPackageName _eduEditId _eduQuotaUser
+              (Just _eduPrettyPrint)
               _eduUserIP
+              _eduFields
               _eduKey
               _eduOAuthToken
-              _eduEditId
-              _eduFields
               (Just AltJSON)
               _eduAppDetails
           where go

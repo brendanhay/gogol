@@ -26,7 +26,7 @@ module Network.Google.Resource.Calendar.ACL.Delete
       ACLDeleteResource
 
     -- * Creating a Request
-    , aCLDelete'
+    , aclDelete'
     , ACLDelete'
 
     -- * Request Lenses
@@ -53,14 +53,14 @@ type ACLDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an access control rule.
 --
--- /See:/ 'aCLDelete'' smart constructor.
+-- /See:/ 'aclDelete'' smart constructor.
 data ACLDelete' = ACLDelete'
     { _adQuotaUser   :: !(Maybe Text)
     , _adCalendarId  :: !Text
@@ -91,11 +91,11 @@ data ACLDelete' = ACLDelete'
 -- * 'adOAuthToken'
 --
 -- * 'adFields'
-aCLDelete'
+aclDelete'
     :: Text -- ^ 'calendarId'
     -> Text -- ^ 'ruleId'
     -> ACLDelete'
-aCLDelete' pAdCalendarId_ pAdRuleId_ =
+aclDelete' pAdCalendarId_ pAdRuleId_ =
     ACLDelete'
     { _adQuotaUser = Nothing
     , _adCalendarId = pAdCalendarId_
@@ -159,12 +159,12 @@ instance GoogleRequest ACLDelete' where
         type Rs ACLDelete' = ()
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u ACLDelete'{..}
-          = go _adQuotaUser _adCalendarId (Just _adPrettyPrint)
+          = go _adCalendarId _adRuleId _adQuotaUser
+              (Just _adPrettyPrint)
               _adUserIP
-              _adRuleId
+              _adFields
               _adKey
               _adOAuthToken
-              _adFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy ACLDeleteResource)

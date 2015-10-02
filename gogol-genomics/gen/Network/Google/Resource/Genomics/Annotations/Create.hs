@@ -50,9 +50,9 @@ type AnnotationsCreateResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] Annotation :> Post '[JSON] Annotation
 
@@ -148,9 +148,9 @@ instance GoogleRequest AnnotationsCreate' where
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u AnnotationsCreate'{..}
           = go _acQuotaUser (Just _acPrettyPrint) _acUserIP
+              _acFields
               _acKey
               _acOAuthToken
-              _acFields
               (Just AltJSON)
               _acAnnotation
           where go

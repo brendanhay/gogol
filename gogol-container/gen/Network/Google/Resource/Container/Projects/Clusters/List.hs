@@ -50,9 +50,9 @@ type ProjectsClustersListResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] ListAggregatedClustersResponse
 
@@ -150,11 +150,12 @@ instance GoogleRequest ProjectsClustersList' where
              ListAggregatedClustersResponse
         request = requestWithRoute defReq containerURL
         requestWithRoute r u ProjectsClustersList'{..}
-          = go _pclQuotaUser (Just _pclPrettyPrint) _pclUserIP
-              _pclKey
-              _pclProjectId
-              _pclOAuthToken
+          = go _pclProjectId _pclQuotaUser
+              (Just _pclPrettyPrint)
+              _pclUserIP
               _pclFields
+              _pclKey
+              _pclOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

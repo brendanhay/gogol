@@ -55,29 +55,29 @@ type CaptionsDownloadResource =
      "captions" :>
        Capture "id" Text :>
          QueryParam "onBehalfOf" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "tlang" Text :>
-                   QueryParam "onBehalfOfContentOwner" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "tfmt" YouTubeCaptionsDownloadTfmt :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+           QueryParam "onBehalfOfContentOwner" Text :>
+             QueryParam "tfmt" YouTubeCaptionsDownloadTfmt :>
+               QueryParam "tlang" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] ()
        :<|>
        "captions" :>
          Capture "id" Text :>
            QueryParam "onBehalfOf" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "tlang" Text :>
-                     QueryParam "onBehalfOfContentOwner" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "tfmt" YouTubeCaptionsDownloadTfmt :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "tfmt" YouTubeCaptionsDownloadTfmt :>
+                 QueryParam "tlang" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" Media :>
                                  Get '[OctetStream] Stream
 
@@ -232,16 +232,16 @@ instance GoogleRequest CaptionsDownload' where
         type Rs CaptionsDownload' = ()
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u CaptionsDownload'{..}
-          = go _capaOnBehalfOf _capaQuotaUser
+          = go _capaOnBehalfOf _capaOnBehalfOfContentOwner
+              _capaTfmt
+              _capaTlang
+              _capaId
+              _capaQuotaUser
               (Just _capaPrettyPrint)
               _capaUserIP
-              _capaTlang
-              _capaOnBehalfOfContentOwner
-              _capaKey
-              _capaId
-              _capaTfmt
-              _capaOAuthToken
               _capaFields
+              _capaKey
+              _capaOAuthToken
               (Just AltJSON)
           where go :<|> _
                   = clientWithRoute
@@ -253,16 +253,16 @@ instance GoogleRequest CaptionsDownload' where
         type Rs (Download CaptionsDownload') = Stream
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u CaptionsDownload'{..}
-          = go _capaOnBehalfOf _capaQuotaUser
+          = go _capaOnBehalfOf _capaOnBehalfOfContentOwner
+              _capaTfmt
+              _capaTlang
+              _capaId
+              _capaQuotaUser
               (Just _capaPrettyPrint)
               _capaUserIP
-              _capaTlang
-              _capaOnBehalfOfContentOwner
-              _capaKey
-              _capaId
-              _capaTfmt
-              _capaOAuthToken
               _capaFields
+              _capaKey
+              _capaOAuthToken
               (Just Media)
           where go :<|> _
                   = clientWithRoute

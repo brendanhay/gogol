@@ -49,14 +49,14 @@ import           Network.Google.Prelude
 type ManagementAccountSummariesListResource =
      "management" :>
        "accountSummaries" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "start-index" Int32 :>
-                     QueryParam "max-results" Int32 :>
-                       QueryParam "fields" Text :>
+         QueryParam "max-results" Int32 :>
+           QueryParam "start-index" Int32 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] AccountSummaries
 
@@ -171,13 +171,12 @@ instance GoogleRequest
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
           ManagementAccountSummariesList'{..}
-          = go _maslQuotaUser (Just _maslPrettyPrint)
+          = go _maslMaxResults _maslStartIndex _maslQuotaUser
+              (Just _maslPrettyPrint)
               _maslUserIP
+              _maslFields
               _maslKey
               _maslOAuthToken
-              _maslStartIndex
-              _maslMaxResults
-              _maslFields
               (Just AltJSON)
           where go
                   = clientWithRoute

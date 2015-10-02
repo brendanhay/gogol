@@ -48,13 +48,13 @@ import           Network.Google.Prelude
 type TurnBasedMatchesCreateResource =
      "turnbasedmatches" :>
        "create" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "language" Text :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+         QueryParam "language" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] TurnBasedMatchCreateRequest :>
                            Post '[JSON] TurnBasedMatch
@@ -162,11 +162,12 @@ instance GoogleRequest TurnBasedMatchesCreate' where
         type Rs TurnBasedMatchesCreate' = TurnBasedMatch
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u TurnBasedMatchesCreate'{..}
-          = go _turQuotaUser (Just _turPrettyPrint) _turUserIP
-              _turKey
-              _turLanguage
-              _turOAuthToken
+          = go _turLanguage _turQuotaUser
+              (Just _turPrettyPrint)
+              _turUserIP
               _turFields
+              _turKey
+              _turOAuthToken
               (Just AltJSON)
               _turTurnBasedMatchCreateRequest
           where go

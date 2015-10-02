@@ -52,9 +52,9 @@ type UsersDataSourcesDeleteResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] DataSource
 
 -- | Delete the data source if there are no datapoints associated with it
@@ -163,13 +163,12 @@ instance GoogleRequest UsersDataSourcesDelete' where
         type Rs UsersDataSourcesDelete' = DataSource
         request = requestWithRoute defReq fitnessURL
         requestWithRoute r u UsersDataSourcesDelete'{..}
-          = go _udsdQuotaUser (Just _udsdPrettyPrint)
+          = go _udsdUserId _udsdDataSourceId _udsdQuotaUser
+              (Just _udsdPrettyPrint)
               _udsdUserIP
-              _udsdDataSourceId
-              _udsdUserId
+              _udsdFields
               _udsdKey
               _udsdOAuthToken
-              _udsdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

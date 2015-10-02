@@ -50,15 +50,15 @@ import           Network.Google.Prelude
 type TableImportTableResource =
      "tables" :>
        "import" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "name" Text :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "delimiter" Text :>
-                       QueryParam "encoding" Text :>
-                         QueryParam "fields" Text :>
+         QueryParam "delimiter" Text :>
+           QueryParam "encoding" Text :>
+             QueryParam "name" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Post '[JSON] Table
 
 -- | Imports a new table.
@@ -181,14 +181,14 @@ instance GoogleRequest TableImportTable' where
         type Rs TableImportTable' = Table
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TableImportTable'{..}
-          = go _titQuotaUser (Just _titPrettyPrint) _titUserIP
-              _titMedia
-              _titKey
+          = go _titDelimiter _titEncoding _titMedia
               (Just _titName)
-              _titOAuthToken
-              _titDelimiter
-              _titEncoding
+              _titQuotaUser
+              (Just _titPrettyPrint)
+              _titUserIP
               _titFields
+              _titKey
+              _titOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

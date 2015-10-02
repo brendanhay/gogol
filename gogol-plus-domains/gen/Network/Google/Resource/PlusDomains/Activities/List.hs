@@ -55,14 +55,14 @@ type ActivitiesListResource =
            Capture "collection"
              PlusDomainsActivitiesListCollection
              :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ActivityFeed
 
@@ -188,14 +188,14 @@ instance GoogleRequest ActivitiesList' where
         type Rs ActivitiesList' = ActivityFeed
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u ActivitiesList'{..}
-          = go _aQuotaUser (Just _aPrettyPrint) _aUserIP
+          = go (Just _aMaxResults) _aPageToken _aUserId
               _aCollection
-              _aUserId
-              _aKey
-              _aPageToken
-              _aOAuthToken
-              (Just _aMaxResults)
+              _aQuotaUser
+              (Just _aPrettyPrint)
+              _aUserIP
               _aFields
+              _aKey
+              _aOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

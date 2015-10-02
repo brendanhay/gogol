@@ -53,9 +53,9 @@ type RoutesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Route
 
 -- | Returns the specified route resource.
@@ -160,12 +160,12 @@ instance GoogleRequest RoutesGet' where
         type Rs RoutesGet' = Route
         request = requestWithRoute defReq computeURL
         requestWithRoute r u RoutesGet'{..}
-          = go _rouQuotaUser (Just _rouPrettyPrint) _rouProject
+          = go _rouProject _rouRoute _rouQuotaUser
+              (Just _rouPrettyPrint)
               _rouUserIP
-              _rouRoute
+              _rouFields
               _rouKey
               _rouOAuthToken
-              _rouFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy RoutesGetResource)

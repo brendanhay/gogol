@@ -50,13 +50,13 @@ type SubAccountsPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "subaccounts" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "id" Int64 :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] SubAccount :>
                              Patch '[JSON] SubAccount
@@ -174,12 +174,12 @@ instance GoogleRequest SubAccountsPatch' where
         type Rs SubAccountsPatch' = SubAccount
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u SubAccountsPatch'{..}
-          = go _sapQuotaUser (Just _sapPrettyPrint) _sapUserIP
-              _sapProfileId
-              _sapKey
-              (Just _sapId)
-              _sapOAuthToken
+          = go _sapProfileId (Just _sapId) _sapQuotaUser
+              (Just _sapPrettyPrint)
+              _sapUserIP
               _sapFields
+              _sapKey
+              _sapOAuthToken
               (Just AltJSON)
               _sapSubAccount
           where go

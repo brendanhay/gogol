@@ -58,22 +58,22 @@ type TasksListResource =
      "lists" :>
        Capture "tasklist" Text :>
          "tasks" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "dueMax" Text :>
-                   QueryParam "showDeleted" Bool :>
-                     QueryParam "showCompleted" Bool :>
-                       QueryParam "dueMin" Text :>
-                         QueryParam "showHidden" Bool :>
-                           QueryParam "completedMax" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "updatedMin" Text :>
-                                 QueryParam "completedMin" Text :>
-                                   QueryParam "pageToken" Text :>
-                                     QueryParam "oauth_token" OAuthToken :>
-                                       QueryParam "maxResults" Int64 :>
-                                         QueryParam "fields" Text :>
+           QueryParam "completedMax" Text :>
+             QueryParam "completedMin" Text :>
+               QueryParam "dueMax" Text :>
+                 QueryParam "dueMin" Text :>
+                   QueryParam "maxResults" Int64 :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "showCompleted" Bool :>
+                         QueryParam "showDeleted" Bool :>
+                           QueryParam "showHidden" Bool :>
+                             QueryParam "updatedMin" Text :>
+                               QueryParam "quotaUser" Text :>
+                                 QueryParam "prettyPrint" Bool :>
+                                   QueryParam "userIp" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "key" Key :>
+                                         QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
                                              Get '[JSON] Tasks
 
@@ -269,21 +269,21 @@ instance GoogleRequest TasksList' where
         type Rs TasksList' = Tasks
         request = requestWithRoute defReq appsTasksURL
         requestWithRoute r u TasksList'{..}
-          = go _tlQuotaUser (Just _tlPrettyPrint) _tlUserIP
-              _tlDueMax
-              _tlShowDeleted
-              _tlShowCompleted
+          = go _tlCompletedMax _tlCompletedMin _tlDueMax
               _tlDueMin
+              _tlMaxResults
+              _tlPageToken
+              _tlShowCompleted
+              _tlShowDeleted
               _tlShowHidden
-              _tlCompletedMax
-              _tlKey
               _tlUpdatedMin
               _tlTaskList
-              _tlCompletedMin
-              _tlPageToken
-              _tlOAuthToken
-              _tlMaxResults
+              _tlQuotaUser
+              (Just _tlPrettyPrint)
+              _tlUserIP
               _tlFields
+              _tlKey
+              _tlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TasksListResource)

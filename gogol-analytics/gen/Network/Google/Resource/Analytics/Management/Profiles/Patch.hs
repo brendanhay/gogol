@@ -59,9 +59,9 @@ type ManagementProfilesPatchResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] Profile :>
                                    Patch '[JSON] Profile
@@ -191,14 +191,13 @@ instance GoogleRequest ManagementProfilesPatch' where
         type Rs ManagementProfilesPatch' = Profile
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementProfilesPatch'{..}
-          = go _mppQuotaUser (Just _mppPrettyPrint)
-              _mppWebPropertyId
+          = go _mppAccountId _mppWebPropertyId _mppProfileId
+              _mppQuotaUser
+              (Just _mppPrettyPrint)
               _mppUserIP
-              _mppProfileId
-              _mppAccountId
+              _mppFields
               _mppKey
               _mppOAuthToken
-              _mppFields
               (Just AltJSON)
               _mppProfile
           where go

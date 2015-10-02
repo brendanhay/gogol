@@ -53,13 +53,13 @@ type AdvertisersGetResource =
      Capture "role" GanAdvertisersGetRole :>
        Capture "roleId" Text :>
          "advertiser" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "advertiserId" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "advertiserId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Advertiser
 
 -- | Retrieves data about a single advertiser if that the requesting
@@ -174,13 +174,12 @@ instance GoogleRequest AdvertisersGet' where
         type Rs AdvertisersGet' = Advertiser
         request = requestWithRoute defReq affiliatesURL
         requestWithRoute r u AdvertisersGet'{..}
-          = go _agQuotaUser (Just _agPrettyPrint) _agUserIP
-              _agAdvertiserId
-              _agRoleId
-              _agRole
+          = go _agAdvertiserId _agRole _agRoleId _agQuotaUser
+              (Just _agPrettyPrint)
+              _agUserIP
+              _agFields
               _agKey
               _agOAuthToken
-              _agFields
               (Just AltJSON)
           where go
                   = clientWithRoute

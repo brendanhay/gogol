@@ -60,9 +60,9 @@ type ReadsSearchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] SearchReadsRequest :>
                          Post '[JSON] SearchReadsResponse
@@ -169,9 +169,9 @@ instance GoogleRequest ReadsSearch' where
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u ReadsSearch'{..}
           = go _rsQuotaUser (Just _rsPrettyPrint) _rsUserIP
+              _rsFields
               _rsKey
               _rsOAuthToken
-              _rsFields
               (Just AltJSON)
               _rsSearchReadsRequest
           where go

@@ -56,9 +56,9 @@ type ProductsUpdatePermissionsResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] ProductPermissions :>
                                Put '[JSON] ProductPermissions
@@ -182,13 +182,12 @@ instance GoogleRequest ProductsUpdatePermissions'
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u ProductsUpdatePermissions'{..}
-          = go _pupQuotaUser (Just _pupPrettyPrint)
-              _pupEnterpriseId
+          = go _pupEnterpriseId _pupProductId _pupQuotaUser
+              (Just _pupPrettyPrint)
               _pupUserIP
+              _pupFields
               _pupKey
               _pupOAuthToken
-              _pupProductId
-              _pupFields
               (Just AltJSON)
               _pupProductPermissions
           where go

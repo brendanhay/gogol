@@ -56,9 +56,9 @@ type PlayersUnhideResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Unhide the given player\'s leaderboard scores from the given
@@ -165,12 +165,12 @@ instance GoogleRequest PlayersUnhide' where
         type Rs PlayersUnhide' = ()
         request = requestWithRoute defReq gamesManagementURL
         requestWithRoute r u PlayersUnhide'{..}
-          = go _puQuotaUser (Just _puPrettyPrint) _puUserIP
-              _puApplicationId
+          = go _puApplicationId _puPlayerId _puQuotaUser
+              (Just _puPrettyPrint)
+              _puUserIP
+              _puFields
               _puKey
               _puOAuthToken
-              _puPlayerId
-              _puFields
               (Just AltJSON)
           where go
                   = clientWithRoute

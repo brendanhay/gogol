@@ -55,9 +55,9 @@ type ProjectsZonesClustersGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Cluster
 
 -- | Gets a specific cluster.
@@ -177,14 +177,13 @@ instance GoogleRequest ProjectsZonesClustersGet'
         type Rs ProjectsZonesClustersGet' = Cluster
         request = requestWithRoute defReq containerURL
         requestWithRoute r u ProjectsZonesClustersGet'{..}
-          = go _pzcgQuotaUser (Just _pzcgPrettyPrint)
+          = go _pzcgProjectId _pzcgZoneId _pzcgClusterId
+              _pzcgQuotaUser
+              (Just _pzcgPrettyPrint)
               _pzcgUserIP
-              _pzcgZoneId
-              _pzcgKey
-              _pzcgClusterId
-              _pzcgProjectId
-              _pzcgOAuthToken
               _pzcgFields
+              _pzcgKey
+              _pzcgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

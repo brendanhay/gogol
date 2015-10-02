@@ -56,21 +56,21 @@ type MyLibraryBookshelvesVolumesListResource =
        "bookshelves" :>
          Capture "shelf" Text :>
            "volumes" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "country" Text :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "q" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "source" Text :>
-                           QueryParam "projection"
-                             BooksMyLibraryBookshelvesVolumesListProjection
-                             :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "startIndex" Word32 :>
-                                 QueryParam "maxResults" Word32 :>
-                                   QueryParam "showPreorders" Bool :>
-                                     QueryParam "fields" Text :>
+             QueryParam "country" Text :>
+               QueryParam "maxResults" Word32 :>
+                 QueryParam "projection"
+                   BooksMyLibraryBookshelvesVolumesListProjection
+                   :>
+                   QueryParam "q" Text :>
+                     QueryParam "showPreorders" Bool :>
+                       QueryParam "source" Text :>
+                         QueryParam "startIndex" Word32 :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "userIp" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] Volumes
 
@@ -237,19 +237,18 @@ instance GoogleRequest
         request = requestWithRoute defReq booksURL
         requestWithRoute r u
           MyLibraryBookshelvesVolumesList'{..}
-          = go _mlbvlQuotaUser (Just _mlbvlPrettyPrint)
-              _mlbvlCountry
-              _mlbvlUserIP
+          = go _mlbvlCountry _mlbvlMaxResults _mlbvlProjection
               _mlbvlQ
-              _mlbvlShelf
-              _mlbvlKey
-              _mlbvlSource
-              _mlbvlProjection
-              _mlbvlOAuthToken
-              _mlbvlStartIndex
-              _mlbvlMaxResults
               _mlbvlShowPreOrders
+              _mlbvlSource
+              _mlbvlStartIndex
+              _mlbvlShelf
+              _mlbvlQuotaUser
+              (Just _mlbvlPrettyPrint)
+              _mlbvlUserIP
               _mlbvlFields
+              _mlbvlKey
+              _mlbvlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

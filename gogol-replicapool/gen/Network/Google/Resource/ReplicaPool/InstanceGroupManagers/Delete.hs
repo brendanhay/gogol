@@ -57,9 +57,9 @@ type InstanceGroupManagersDeleteResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the instance group manager and all instances contained within.
@@ -180,14 +180,13 @@ instance GoogleRequest InstanceGroupManagersDelete'
         type Rs InstanceGroupManagersDelete' = Operation
         request = requestWithRoute defReq replicaPoolURL
         requestWithRoute r u InstanceGroupManagersDelete'{..}
-          = go _igmdQuotaUser (Just _igmdPrettyPrint)
-              _igmdProject
-              _igmdInstanceGroupManager
+          = go _igmdProject _igmdZone _igmdInstanceGroupManager
+              _igmdQuotaUser
+              (Just _igmdPrettyPrint)
               _igmdUserIP
-              _igmdZone
+              _igmdFields
               _igmdKey
               _igmdOAuthToken
-              _igmdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

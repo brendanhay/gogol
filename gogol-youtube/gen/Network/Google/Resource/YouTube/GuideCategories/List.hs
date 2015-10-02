@@ -50,16 +50,16 @@ import           Network.Google.YouTube.Types
 -- 'GuideCategoriesList'' request conforms to.
 type GuideCategoriesListResource =
      "guideCategories" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "part" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "regionCode" Text :>
-               QueryParam "userIp" Text :>
-                 QueryParam "hl" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "id" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+       QueryParam "hl" Text :>
+         QueryParam "id" Text :>
+           QueryParam "regionCode" Text :>
+             QueryParam "part" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] GuideCategoryListResponse
 
@@ -190,15 +190,14 @@ instance GoogleRequest GuideCategoriesList' where
              GuideCategoryListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u GuideCategoriesList'{..}
-          = go _gclQuotaUser (Just _gclPart)
+          = go (Just _gclHl) _gclId _gclRegionCode
+              (Just _gclPart)
+              _gclQuotaUser
               (Just _gclPrettyPrint)
-              _gclRegionCode
               _gclUserIP
-              (Just _gclHl)
-              _gclKey
-              _gclId
-              _gclOAuthToken
               _gclFields
+              _gclKey
+              _gclOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

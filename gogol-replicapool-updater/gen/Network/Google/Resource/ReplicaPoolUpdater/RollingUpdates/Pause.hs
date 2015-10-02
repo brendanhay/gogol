@@ -57,9 +57,9 @@ type RollingUpdatesPauseResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Pauses the update in state from ROLLING_FORWARD or ROLLING_BACK. Has no
@@ -177,14 +177,13 @@ instance GoogleRequest RollingUpdatesPause' where
         request
           = requestWithRoute defReq replicaPoolUpdaterURL
         requestWithRoute r u RollingUpdatesPause'{..}
-          = go _rupRollingUpdate _rupQuotaUser
+          = go _rupProject _rupZone _rupRollingUpdate
+              _rupQuotaUser
               (Just _rupPrettyPrint)
-              _rupProject
               _rupUserIP
-              _rupZone
+              _rupFields
               _rupKey
               _rupOAuthToken
-              _rupFields
               (Just AltJSON)
           where go
                   = clientWithRoute

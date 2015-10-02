@@ -55,9 +55,9 @@ type RepliesInsertResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] CommentReply :>
                                Post '[JSON] CommentReply
@@ -172,12 +172,12 @@ instance GoogleRequest RepliesInsert' where
         type Rs RepliesInsert' = CommentReply
         request = requestWithRoute defReq driveURL
         requestWithRoute r u RepliesInsert'{..}
-          = go _riQuotaUser (Just _riPrettyPrint) _riUserIP
-              _riKey
-              _riFileId
-              _riOAuthToken
-              _riCommentId
+          = go _riFileId _riCommentId _riQuotaUser
+              (Just _riPrettyPrint)
+              _riUserIP
               _riFields
+              _riKey
+              _riOAuthToken
               (Just AltJSON)
               _riCommentReply
           where go

@@ -56,21 +56,21 @@ import           Network.Google.Prelude
 -- 'ReportsGenerate'' request conforms to.
 type ReportsGenerateResource =
      "reports" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParams "dimension" Text :>
-               QueryParam "locale" Text :>
-                 QueryParam "endDate" Text :>
-                   QueryParam "startDate" Text :>
-                     QueryParams "metric" Text :>
-                       QueryParam "key" Key :>
-                         QueryParams "sort" Text :>
-                           QueryParams "filter" Text :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "startIndex" Word32 :>
-                                 QueryParam "maxResults" Word32 :>
-                                   QueryParam "fields" Text :>
+       QueryParams "dimension" Text :>
+         QueryParams "filter" Text :>
+           QueryParam "locale" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParams "metric" Text :>
+                 QueryParams "sort" Text :>
+                   QueryParam "startIndex" Word32 :>
+                     QueryParam "startDate" Text :>
+                       QueryParam "endDate" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] Report
 
@@ -239,19 +239,18 @@ instance GoogleRequest ReportsGenerate' where
         type Rs ReportsGenerate' = Report
         request = requestWithRoute defReq adSenseHostURL
         requestWithRoute r u ReportsGenerate'{..}
-          = go _rgQuotaUser (Just _rgPrettyPrint) _rgUserIP
-              _rgDimension
-              _rgLocale
-              (Just _rgEndDate)
-              (Just _rgStartDate)
+          = go _rgDimension _rgFilter _rgLocale _rgMaxResults
               _rgMetric
-              _rgKey
               _rgSort
-              _rgFilter
-              _rgOAuthToken
               _rgStartIndex
-              _rgMaxResults
+              (Just _rgStartDate)
+              (Just _rgEndDate)
+              _rgQuotaUser
+              (Just _rgPrettyPrint)
+              _rgUserIP
               _rgFields
+              _rgKey
+              _rgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

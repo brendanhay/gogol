@@ -53,9 +53,9 @@ type AccountsPreferredDealsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] PreferredDeal
 
 -- | Get information about the selected Ad Exchange Preferred Deal.
@@ -164,13 +164,12 @@ instance GoogleRequest AccountsPreferredDealsGet'
         type Rs AccountsPreferredDealsGet' = PreferredDeal
         request = requestWithRoute defReq adExchangeSellerURL
         requestWithRoute r u AccountsPreferredDealsGet'{..}
-          = go _apdgQuotaUser (Just _apdgPrettyPrint)
+          = go _apdgAccountId _apdgDealId _apdgQuotaUser
+              (Just _apdgPrettyPrint)
               _apdgUserIP
-              _apdgDealId
-              _apdgAccountId
+              _apdgFields
               _apdgKey
               _apdgOAuthToken
-              _apdgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

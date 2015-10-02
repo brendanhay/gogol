@@ -52,9 +52,9 @@ type ReadgroupsetsCallResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] CallReadGroupSetsRequest :>
                          Post '[JSON] CallReadGroupSetsResponse
@@ -154,9 +154,9 @@ instance GoogleRequest ReadgroupsetsCall' where
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u ReadgroupsetsCall'{..}
           = go _rcQuotaUser (Just _rcPrettyPrint) _rcUserIP
+              _rcFields
               _rcKey
               _rcOAuthToken
-              _rcFields
               (Just AltJSON)
               _rcCallReadGroupSetsRequest
           where go

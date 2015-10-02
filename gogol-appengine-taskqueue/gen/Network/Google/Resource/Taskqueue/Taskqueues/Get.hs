@@ -50,13 +50,13 @@ type TaskqueuesGetResource =
      Capture "project" Text :>
        "taskqueues" :>
          Capture "taskqueue" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "getStats" Bool :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "getStats" Bool :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] TaskQueue
 
 -- | Get detailed information about a TaskQueue.
@@ -172,14 +172,13 @@ instance GoogleRequest TaskqueuesGet' where
         request
           = requestWithRoute defReq appEngineTaskQueueURL
         requestWithRoute r u TaskqueuesGet'{..}
-          = go _tasTaskqueue _tasQuotaUser
+          = go _tasGetStats _tasProject _tasTaskqueue
+              _tasQuotaUser
               (Just _tasPrettyPrint)
-              _tasProject
               _tasUserIP
-              _tasKey
-              _tasGetStats
-              _tasOAuthToken
               _tasFields
+              _tasKey
+              _tasOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

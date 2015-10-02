@@ -52,9 +52,9 @@ type VariantsUpdateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Variant :> Put '[JSON] Variant
 
@@ -159,11 +159,11 @@ instance GoogleRequest VariantsUpdate' where
         type Rs VariantsUpdate' = Variant
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u VariantsUpdate'{..}
-          = go _vuQuotaUser (Just _vuPrettyPrint) _vuUserIP
-              _vuKey
-              _vuVariantId
-              _vuOAuthToken
+          = go _vuVariantId _vuQuotaUser (Just _vuPrettyPrint)
+              _vuUserIP
               _vuFields
+              _vuKey
+              _vuOAuthToken
               (Just AltJSON)
               _vuVariant
           where go

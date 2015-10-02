@@ -49,9 +49,9 @@ type TableInsertResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] Table :> Post '[JSON] Table
 
@@ -148,9 +148,9 @@ instance GoogleRequest TableInsert' where
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TableInsert'{..}
           = go _tiiQuotaUser (Just _tiiPrettyPrint) _tiiUserIP
+              _tiiFields
               _tiiKey
               _tiiOAuthToken
-              _tiiFields
               (Just AltJSON)
               _tiiTable
           where go

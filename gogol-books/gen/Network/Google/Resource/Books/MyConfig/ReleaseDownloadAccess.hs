@@ -50,16 +50,16 @@ import           Network.Google.Prelude
 type MyConfigReleaseDownloadAccessResource =
      "myconfig" :>
        "releaseDownloadAccess" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "cpksver" Text :>
-               QueryParam "userIp" Text :>
-                 QueryParam "locale" Text :>
-                   QueryParams "volumeIds" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "source" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+         QueryParam "locale" Text :>
+           QueryParam "source" Text :>
+             QueryParams "volumeIds" Text :>
+               QueryParam "cpksver" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Post '[JSON] DownloadAccesses
 
@@ -190,15 +190,14 @@ instance GoogleRequest MyConfigReleaseDownloadAccess'
         request = requestWithRoute defReq booksURL
         requestWithRoute r u
           MyConfigReleaseDownloadAccess'{..}
-          = go _mcrdaQuotaUser (Just _mcrdaPrettyPrint)
+          = go _mcrdaLocale _mcrdaSource (Just _mcrdaVolumeIds)
               (Just _mcrdaCpksver)
+              _mcrdaQuotaUser
+              (Just _mcrdaPrettyPrint)
               _mcrdaUserIP
-              _mcrdaLocale
-              (Just _mcrdaVolumeIds)
-              _mcrdaKey
-              _mcrdaSource
-              _mcrdaOAuthToken
               _mcrdaFields
+              _mcrdaKey
+              _mcrdaOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

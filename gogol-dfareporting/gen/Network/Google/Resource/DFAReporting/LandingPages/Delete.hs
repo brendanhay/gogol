@@ -56,9 +56,9 @@ type LandingPagesDeleteResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing campaign landing page.
@@ -174,13 +174,13 @@ instance GoogleRequest LandingPagesDelete' where
         type Rs LandingPagesDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u LandingPagesDelete'{..}
-          = go _lpdQuotaUser (Just _lpdPrettyPrint) _lpdUserIP
-              _lpdCampaignId
-              _lpdProfileId
-              _lpdKey
-              _lpdId
-              _lpdOAuthToken
+          = go _lpdProfileId _lpdCampaignId _lpdId
+              _lpdQuotaUser
+              (Just _lpdPrettyPrint)
+              _lpdUserIP
               _lpdFields
+              _lpdKey
+              _lpdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

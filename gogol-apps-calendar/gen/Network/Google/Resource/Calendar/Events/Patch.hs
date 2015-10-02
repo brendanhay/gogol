@@ -55,16 +55,16 @@ type EventsPatchResource =
        Capture "calendarId" Text :>
          "events" :>
            Capture "eventId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "maxAttendees" Int32 :>
-                     QueryParam "key" Key :>
-                       QueryParam "sendNotifications" Bool :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "supportsAttachments" Bool :>
-                             QueryParam "alwaysIncludeEmail" Bool :>
-                               QueryParam "fields" Text :>
+             QueryParam "alwaysIncludeEmail" Bool :>
+               QueryParam "maxAttendees" Int32 :>
+                 QueryParam "sendNotifications" Bool :>
+                   QueryParam "supportsAttachments" Bool :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] Event :> Patch '[JSON] Event
 
@@ -228,16 +228,17 @@ instance GoogleRequest EventsPatch' where
         type Rs EventsPatch' = Event
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u EventsPatch'{..}
-          = go _epQuotaUser _epCalendarId (Just _epPrettyPrint)
-              _epUserIP
-              _epMaxAttendees
-              _epKey
+          = go _epAlwaysIncludeEmail _epMaxAttendees
               _epSendNotifications
-              _epOAuthToken
               _epSupportsAttachments
-              _epAlwaysIncludeEmail
+              _epCalendarId
               _epEventId
+              _epQuotaUser
+              (Just _epPrettyPrint)
+              _epUserIP
               _epFields
+              _epKey
+              _epOAuthToken
               (Just AltJSON)
               _epEvent
           where go

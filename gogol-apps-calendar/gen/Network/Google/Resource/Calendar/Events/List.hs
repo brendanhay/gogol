@@ -65,39 +65,30 @@ type EventsListResource =
      "calendars" :>
        Capture "calendarId" Text :>
          "events" :>
-           QueryParam "syncToken" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "timeMin" UTCTime :>
+           QueryParam "alwaysIncludeEmail" Bool :>
+             QueryParam "iCalUID" Text :>
+               QueryParam "maxAttendees" Int32 :>
+                 QueryParam "maxResults" Int32 :>
                    QueryParam "orderBy" CalendarEventsListOrderBy :>
-                     QueryParam "singleEvents" Bool :>
+                     QueryParam "pageToken" Text :>
                        QueryParams "privateExtendedProperty" Text :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "showDeleted" Bool :>
-                             QueryParam "q" Text :>
-                               QueryParams "sharedExtendedProperty" Text :>
-                                 QueryParam "maxAttendees" Int32 :>
-                                   QueryParam "key" Key :>
-                                     QueryParam "iCalUID" Text :>
-                                       QueryParam "updatedMin" UTCTime :>
-                                         QueryParam "pageToken" Text :>
-                                           QueryParam "timeZone" Text :>
-                                             QueryParam "oauth_token" OAuthToken
-                                               :>
-                                               QueryParam
-                                                 "showHiddenInvitations"
-                                                 Bool
-                                                 :>
-                                                 QueryParam "maxResults" Int32
-                                                   :>
-                                                   QueryParam
-                                                     "alwaysIncludeEmail"
-                                                     Bool
-                                                     :>
-                                                     QueryParam "timeMax"
-                                                       UTCTime
-                                                       :>
-                                                       QueryParam "fields" Text
+                         QueryParam "q" Text :>
+                           QueryParams "sharedExtendedProperty" Text :>
+                             QueryParam "showDeleted" Bool :>
+                               QueryParam "showHiddenInvitations" Bool :>
+                                 QueryParam "singleEvents" Bool :>
+                                   QueryParam "syncToken" Text :>
+                                     QueryParam "timeMax" UTCTime :>
+                                       QueryParam "timeMin" UTCTime :>
+                                         QueryParam "timeZone" Text :>
+                                           QueryParam "updatedMin" UTCTime :>
+                                             QueryParam "quotaUser" Text :>
+                                               QueryParam "prettyPrint" Bool :>
+                                                 QueryParam "userIp" Text :>
+                                                   QueryParam "fields" Text :>
+                                                     QueryParam "key" Key :>
+                                                       QueryParam "oauth_token"
+                                                         OAuthToken
                                                          :>
                                                          QueryParam "alt"
                                                            AltJSON
@@ -401,28 +392,28 @@ instance GoogleRequest EventsList' where
         type Rs EventsList' = Events
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u EventsList'{..}
-          = go _elSyncToken _elQuotaUser _elCalendarId
-              (Just _elPrettyPrint)
-              _elTimeMin
+          = go _elAlwaysIncludeEmail _elICalUId _elMaxAttendees
+              _elMaxResults
               _elOrderBy
-              _elSingleEvents
+              _elPageToken
               _elPrivateExtendedProperty
-              _elUserIP
-              _elShowDeleted
               _elQ
               _elSharedExtendedProperty
-              _elMaxAttendees
-              _elKey
-              _elICalUId
-              _elUpdatedMin
-              _elPageToken
-              _elTimeZone
-              _elOAuthToken
+              _elShowDeleted
               _elShowHiddenInvitations
-              _elMaxResults
-              _elAlwaysIncludeEmail
+              _elSingleEvents
+              _elSyncToken
               _elTimeMax
+              _elTimeMin
+              _elTimeZone
+              _elUpdatedMin
+              _elCalendarId
+              _elQuotaUser
+              (Just _elPrettyPrint)
+              _elUserIP
               _elFields
+              _elKey
+              _elOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy EventsListResource)

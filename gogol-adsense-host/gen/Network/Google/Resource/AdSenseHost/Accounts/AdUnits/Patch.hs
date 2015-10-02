@@ -54,13 +54,13 @@ type AccountsAdUnitsPatchResource =
          "adclients" :>
            Capture "adClientId" Text :>
              "adunits" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "adUnitId" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+               QueryParam "adUnitId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] AdUnit :> Patch '[JSON] AdUnit
 
@@ -191,14 +191,14 @@ instance GoogleRequest AccountsAdUnitsPatch' where
         type Rs AccountsAdUnitsPatch' = AdUnit
         request = requestWithRoute defReq adSenseHostURL
         requestWithRoute r u AccountsAdUnitsPatch'{..}
-          = go _aaupQuotaUser (Just _aaupPrettyPrint)
-              _aaupUserIP
+          = go _aaupAccountId _aaupAdClientId
               (Just _aaupAdUnitId)
-              _aaupAdClientId
-              _aaupAccountId
+              _aaupQuotaUser
+              (Just _aaupPrettyPrint)
+              _aaupUserIP
+              _aaupFields
               _aaupKey
               _aaupOAuthToken
-              _aaupFields
               (Just AltJSON)
               _aaupAdUnit
           where go

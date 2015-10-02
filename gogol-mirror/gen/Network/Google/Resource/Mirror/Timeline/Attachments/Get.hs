@@ -53,9 +53,9 @@ type TimelineAttachmentsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Attachment
        :<|>
        "timeline" :>
@@ -65,9 +65,9 @@ type TimelineAttachmentsGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" Media :> Get '[OctetStream] Stream
 
 -- | Retrieves an attachment on a timeline item by item ID and attachment ID.
@@ -174,12 +174,12 @@ instance GoogleRequest TimelineAttachmentsGet' where
         type Rs TimelineAttachmentsGet' = Attachment
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u TimelineAttachmentsGet'{..}
-          = go _tagQuotaUser (Just _tagPrettyPrint) _tagUserIP
-              _tagItemId
-              _tagAttachmentId
+          = go _tagItemId _tagAttachmentId _tagQuotaUser
+              (Just _tagPrettyPrint)
+              _tagUserIP
+              _tagFields
               _tagKey
               _tagOAuthToken
-              _tagFields
               (Just AltJSON)
           where go :<|> _
                   = clientWithRoute
@@ -191,12 +191,12 @@ instance GoogleRequest TimelineAttachmentsGet' where
         type Rs (Download TimelineAttachmentsGet') = Stream
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u TimelineAttachmentsGet'{..}
-          = go _tagQuotaUser (Just _tagPrettyPrint) _tagUserIP
-              _tagItemId
-              _tagAttachmentId
+          = go _tagItemId _tagAttachmentId _tagQuotaUser
+              (Just _tagPrettyPrint)
+              _tagUserIP
+              _tagFields
               _tagKey
               _tagOAuthToken
-              _tagFields
               (Just Media)
           where go :<|> _
                   = clientWithRoute

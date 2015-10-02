@@ -57,20 +57,20 @@ type ObjectsUpdateResource =
        Capture "bucket" Text :>
          "o" :>
            Capture "object" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "ifMetagenerationMatch" Word64 :>
+             QueryParam "generation" Word64 :>
+               QueryParam "ifGenerationMatch" Word64 :>
                  QueryParam "ifGenerationNotMatch" Word64 :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "ifGenerationMatch" Word64 :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "ifMetagenerationNotMatch" Word64 :>
-                             QueryParam "projection"
-                               StorageObjectsUpdateProjection
-                               :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "generation" Word64 :>
-                                   QueryParam "fields" Text :>
+                   QueryParam "ifMetagenerationMatch" Word64 :>
+                     QueryParam "ifMetagenerationNotMatch" Word64 :>
+                       QueryParam "projection"
+                         StorageObjectsUpdateProjection
+                         :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        ReqBody '[JSON] Object :>
                                          Put '[JSON] Object
@@ -79,20 +79,20 @@ type ObjectsUpdateResource =
          Capture "bucket" Text :>
            "o" :>
              Capture "object" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "ifMetagenerationMatch" Word64 :>
+               QueryParam "generation" Word64 :>
+                 QueryParam "ifGenerationMatch" Word64 :>
                    QueryParam "ifGenerationNotMatch" Word64 :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "ifGenerationMatch" Word64 :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "ifMetagenerationNotMatch" Word64 :>
-                               QueryParam "projection"
-                                 StorageObjectsUpdateProjection
-                                 :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "generation" Word64 :>
-                                     QueryParam "fields" Text :>
+                     QueryParam "ifMetagenerationMatch" Word64 :>
+                       QueryParam "ifMetagenerationNotMatch" Word64 :>
+                         QueryParam "projection"
+                           StorageObjectsUpdateProjection
+                           :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "userIp" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" Media :>
                                          ReqBody '[JSON] Object :>
                                            Put '[OctetStream] Stream
@@ -267,19 +267,19 @@ instance GoogleRequest ObjectsUpdate' where
         type Rs ObjectsUpdate' = Object
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectsUpdate'{..}
-          = go _ouQuotaUser _ouIfMetagenerationMatch
+          = go _ouGeneration _ouIfGenerationMatch
               _ouIfGenerationNotMatch
-              (Just _ouPrettyPrint)
-              _ouIfGenerationMatch
-              _ouUserIP
-              _ouBucket
-              _ouKey
+              _ouIfMetagenerationMatch
               _ouIfMetagenerationNotMatch
-              _ouObject
               _ouProjection
-              _ouOAuthToken
-              _ouGeneration
+              _ouBucket
+              _ouObject
+              _ouQuotaUser
+              (Just _ouPrettyPrint)
+              _ouUserIP
               _ouFields
+              _ouKey
+              _ouOAuthToken
               (Just AltJSON)
               _ouObject
           where go :<|> _
@@ -292,19 +292,19 @@ instance GoogleRequest ObjectsUpdate' where
         type Rs (Download ObjectsUpdate') = Stream
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectsUpdate'{..}
-          = go _ouQuotaUser _ouIfMetagenerationMatch
+          = go _ouGeneration _ouIfGenerationMatch
               _ouIfGenerationNotMatch
-              (Just _ouPrettyPrint)
-              _ouIfGenerationMatch
-              _ouUserIP
-              _ouBucket
-              _ouKey
+              _ouIfMetagenerationMatch
               _ouIfMetagenerationNotMatch
-              _ouObject
               _ouProjection
-              _ouOAuthToken
-              _ouGeneration
+              _ouBucket
+              _ouObject
+              _ouQuotaUser
+              (Just _ouPrettyPrint)
+              _ouUserIP
               _ouFields
+              _ouKey
+              _ouOAuthToken
               (Just Media)
               _ouObject
           where go :<|> _

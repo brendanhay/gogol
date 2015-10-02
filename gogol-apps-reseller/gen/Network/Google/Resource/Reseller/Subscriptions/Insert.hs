@@ -50,13 +50,13 @@ type SubscriptionsInsertResource =
      "customers" :>
        Capture "customerId" Text :>
          "subscriptions" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "customerAuthToken" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "customerAuthToken" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Subscription :>
                              Post '[JSON] Subscription
@@ -174,12 +174,12 @@ instance GoogleRequest SubscriptionsInsert' where
         type Rs SubscriptionsInsert' = Subscription
         request = requestWithRoute defReq appsResellerURL
         requestWithRoute r u SubscriptionsInsert'{..}
-          = go _siQuotaUser (Just _siPrettyPrint) _siUserIP
-              _siCustomerId
-              _siKey
-              _siCustomerAuthToken
-              _siOAuthToken
+          = go _siCustomerAuthToken _siCustomerId _siQuotaUser
+              (Just _siPrettyPrint)
+              _siUserIP
               _siFields
+              _siKey
+              _siOAuthToken
               (Just AltJSON)
               _siSubscription
           where go

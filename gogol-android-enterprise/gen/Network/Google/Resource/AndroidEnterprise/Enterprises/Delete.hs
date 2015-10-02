@@ -53,9 +53,9 @@ type EnterprisesDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes the binding between the MDM and enterprise. This is now
@@ -156,12 +156,12 @@ instance GoogleRequest EnterprisesDelete' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u EnterprisesDelete'{..}
-          = go _eddQuotaUser (Just _eddPrettyPrint)
-              _eddEnterpriseId
+          = go _eddEnterpriseId _eddQuotaUser
+              (Just _eddPrettyPrint)
               _eddUserIP
+              _eddFields
               _eddKey
               _eddOAuthToken
-              _eddFields
               (Just AltJSON)
           where go
                   = clientWithRoute

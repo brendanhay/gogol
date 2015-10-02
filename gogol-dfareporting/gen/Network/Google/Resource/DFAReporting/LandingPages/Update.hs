@@ -55,9 +55,9 @@ type LandingPagesUpdateResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] LandingPage :>
                                Put '[JSON] LandingPage
@@ -177,12 +177,12 @@ instance GoogleRequest LandingPagesUpdate' where
         type Rs LandingPagesUpdate' = LandingPage
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u LandingPagesUpdate'{..}
-          = go _lpuQuotaUser (Just _lpuPrettyPrint) _lpuUserIP
-              _lpuCampaignId
-              _lpuProfileId
+          = go _lpuProfileId _lpuCampaignId _lpuQuotaUser
+              (Just _lpuPrettyPrint)
+              _lpuUserIP
+              _lpuFields
               _lpuKey
               _lpuOAuthToken
-              _lpuFields
               (Just AltJSON)
               _lpuLandingPage
           where go

@@ -52,9 +52,9 @@ type NegotiationRoundsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] NegotiationRoundDto :>
                            Post '[JSON] NegotiationRoundDto
@@ -164,11 +164,12 @@ instance GoogleRequest NegotiationRoundsInsert' where
              NegotiationRoundDto
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u NegotiationRoundsInsert'{..}
-          = go _nriQuotaUser (Just _nriPrettyPrint) _nriUserIP
+          = go _nriNegotiationId _nriQuotaUser
+              (Just _nriPrettyPrint)
+              _nriUserIP
+              _nriFields
               _nriKey
               _nriOAuthToken
-              _nriNegotiationId
-              _nriFields
               (Just AltJSON)
               _nriNegotiationRoundDto
           where go

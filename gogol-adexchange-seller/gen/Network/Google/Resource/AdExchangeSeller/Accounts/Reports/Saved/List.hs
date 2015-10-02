@@ -51,14 +51,14 @@ type AccountsReportsSavedListResource =
        Capture "accountId" Text :>
          "reports" :>
            "saved" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Int32 :>
-                           QueryParam "fields" Text :>
+             QueryParam "maxResults" Int32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] SavedReports
 
@@ -181,14 +181,13 @@ instance GoogleRequest AccountsReportsSavedList'
         type Rs AccountsReportsSavedList' = SavedReports
         request = requestWithRoute defReq adExchangeSellerURL
         requestWithRoute r u AccountsReportsSavedList'{..}
-          = go _arslQuotaUser (Just _arslPrettyPrint)
+          = go _arslMaxResults _arslPageToken _arslAccountId
+              _arslQuotaUser
+              (Just _arslPrettyPrint)
               _arslUserIP
-              _arslAccountId
-              _arslKey
-              _arslPageToken
-              _arslOAuthToken
-              _arslMaxResults
               _arslFields
+              _arslKey
+              _arslOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

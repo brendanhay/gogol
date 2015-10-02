@@ -55,24 +55,24 @@ type ChromeosDevicesListResource =
        Capture "customerId" Text :>
          "devices" :>
            "chromeos" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "orderBy"
-                   DirectoryChromeosDevicesListOrderBy
-                   :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "sortOrder"
-                       DirectoryChromeosDevicesListSortOrder
-                       :>
-                       QueryParam "key" Key :>
-                         QueryParam "query" Text :>
-                           QueryParam "projection"
-                             DirectoryChromeosDevicesListProjection
-                             :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "maxResults" Int32 :>
-                                   QueryParam "fields" Text :>
+             QueryParam "maxResults" Int32 :>
+               QueryParam "orderBy"
+                 DirectoryChromeosDevicesListOrderBy
+                 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "projection"
+                     DirectoryChromeosDevicesListProjection
+                     :>
+                     QueryParam "query" Text :>
+                       QueryParam "sortOrder"
+                         DirectoryChromeosDevicesListSortOrder
+                         :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] ChromeOSDevices
 
@@ -227,17 +227,17 @@ instance GoogleRequest ChromeosDevicesList' where
         type Rs ChromeosDevicesList' = ChromeOSDevices
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u ChromeosDevicesList'{..}
-          = go _cdlQuotaUser (Just _cdlPrettyPrint) _cdlOrderBy
-              _cdlUserIP
-              _cdlCustomerId
-              _cdlSortOrder
-              _cdlKey
-              _cdlQuery
+          = go _cdlMaxResults _cdlOrderBy _cdlPageToken
               _cdlProjection
-              _cdlPageToken
-              _cdlOAuthToken
-              _cdlMaxResults
+              _cdlQuery
+              _cdlSortOrder
+              _cdlCustomerId
+              _cdlQuotaUser
+              (Just _cdlPrettyPrint)
+              _cdlUserIP
               _cdlFields
+              _cdlKey
+              _cdlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

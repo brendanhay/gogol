@@ -54,15 +54,15 @@ type TargetPoolsListResource =
        "regions" :>
          Capture "region" Text :>
            "targetPools" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "filter" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
+             QueryParam "filter" Text :>
+               QueryParam "maxResults" Word32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] TargetPoolList
 
@@ -210,15 +210,15 @@ instance GoogleRequest TargetPoolsList' where
         type Rs TargetPoolsList' = TargetPoolList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u TargetPoolsList'{..}
-          = go _tplQuotaUser (Just _tplPrettyPrint) _tplProject
-              _tplUserIP
-              _tplKey
-              _tplFilter
+          = go _tplFilter (Just _tplMaxResults) _tplPageToken
+              _tplProject
               _tplRegion
-              _tplPageToken
-              _tplOAuthToken
-              (Just _tplMaxResults)
+              _tplQuotaUser
+              (Just _tplPrettyPrint)
+              _tplUserIP
               _tplFields
+              _tplKey
+              _tplOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

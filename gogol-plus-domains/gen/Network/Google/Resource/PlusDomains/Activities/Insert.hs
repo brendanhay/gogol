@@ -50,13 +50,13 @@ type ActivitiesInsertResource =
      "people" :>
        Capture "userId" Text :>
          "activities" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "preview" Bool :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "preview" Bool :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Activity :> Post '[JSON] Activity
 
@@ -171,12 +171,12 @@ instance GoogleRequest ActivitiesInsert' where
         type Rs ActivitiesInsert' = Activity
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u ActivitiesInsert'{..}
-          = go _aiQuotaUser (Just _aiPrettyPrint) _aiUserIP
-              _aiUserId
-              _aiKey
-              _aiPreview
-              _aiOAuthToken
+          = go _aiPreview _aiUserId _aiQuotaUser
+              (Just _aiPrettyPrint)
+              _aiUserIP
               _aiFields
+              _aiKey
+              _aiOAuthToken
               (Just AltJSON)
               _aiActivity
           where go

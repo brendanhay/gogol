@@ -51,9 +51,9 @@ type CustomFieldDefListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] CustomFieldDefListResponse
 
@@ -152,12 +152,12 @@ instance GoogleRequest CustomFieldDefList' where
              CustomFieldDefListResponse
         request = requestWithRoute defReq mapsCoordinateURL
         requestWithRoute r u CustomFieldDefList'{..}
-          = go _cfdlQuotaUser (Just _cfdlPrettyPrint)
+          = go _cfdlTeamId _cfdlQuotaUser
+              (Just _cfdlPrettyPrint)
               _cfdlUserIP
-              _cfdlTeamId
+              _cfdlFields
               _cfdlKey
               _cfdlOAuthToken
-              _cfdlFields
               (Just AltJSON)
           where go
                   = clientWithRoute

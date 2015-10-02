@@ -53,9 +53,9 @@ type NotificationsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a notification
@@ -160,12 +160,12 @@ instance GoogleRequest NotificationsDelete' where
         type Rs NotificationsDelete' = ()
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u NotificationsDelete'{..}
-          = go _ndQuotaUser (Just _ndPrettyPrint) _ndUserIP
-              _ndCustomer
-              _ndKey
-              _ndNotificationId
-              _ndOAuthToken
+          = go _ndCustomer _ndNotificationId _ndQuotaUser
+              (Just _ndPrettyPrint)
+              _ndUserIP
               _ndFields
+              _ndKey
+              _ndOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

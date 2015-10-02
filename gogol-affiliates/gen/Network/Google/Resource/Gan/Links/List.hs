@@ -62,29 +62,30 @@ type LinksListResource =
      Capture "role" GanLinksListRole :>
        Capture "roleId" Text :>
          "links" :>
-           QueryParam "createDateMax" Text :>
-             QueryParam "authorship" GanLinksListAuthorship :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParams "assetSize" Text :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "relationshipStatus"
-                         GanLinksListRelationshipStatus
-                         :>
-                         QueryParams "advertiserId" Int64 :>
-                           QueryParam "searchText" Text :>
-                             QueryParams "promotionType"
-                               GanLinksListPromotionType
+           QueryParams "advertiserId" Int64 :>
+             QueryParams "assetSize" Text :>
+               QueryParam "authorship" GanLinksListAuthorship :>
+                 QueryParam "createDateMax" Text :>
+                   QueryParam "createDateMin" Text :>
+                     QueryParam "linkType" GanLinksListLinkType :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "pageToken" Text :>
+                           QueryParams "promotionType" GanLinksListPromotionType
+                             :>
+                             QueryParam "relationshipStatus"
+                               GanLinksListRelationshipStatus
                                :>
-                               QueryParam "key" Key :>
-                                 QueryParam "createDateMin" Text :>
-                                   QueryParam "linkType" GanLinksListLinkType :>
-                                     QueryParam "pageToken" Text :>
-                                       QueryParam "startDateMax" Text :>
-                                         QueryParam "oauth_token" OAuthToken :>
-                                           QueryParam "startDateMin" Text :>
-                                             QueryParam "maxResults" Word32 :>
-                                               QueryParam "fields" Text :>
+                               QueryParam "searchText" Text :>
+                                 QueryParam "startDateMax" Text :>
+                                   QueryParam "startDateMin" Text :>
+                                     QueryParam "quotaUser" Text :>
+                                       QueryParam "prettyPrint" Bool :>
+                                         QueryParam "userIp" Text :>
+                                           QueryParam "fields" Text :>
+                                             QueryParam "key" Key :>
+                                               QueryParam "oauth_token"
+                                                 OAuthToken
+                                                 :>
                                                  QueryParam "alt" AltJSON :>
                                                    Get '[JSON] Links
 
@@ -313,25 +314,25 @@ instance GoogleRequest LinksList' where
         type Rs LinksList' = Links
         request = requestWithRoute defReq affiliatesURL
         requestWithRoute r u LinksList'{..}
-          = go _llCreateDateMax _llAuthorship _llQuotaUser
-              (Just _llPrettyPrint)
-              _llAssetSize
-              _llUserIP
-              _llRelationshipStatus
-              _llAdvertiserId
-              _llSearchText
-              _llPromotionType
-              _llRoleId
-              _llRole
-              _llKey
+          = go _llAdvertiserId _llAssetSize _llAuthorship
+              _llCreateDateMax
               _llCreateDateMin
               _llLinkType
-              _llPageToken
-              _llStartDateMax
-              _llOAuthToken
-              _llStartDateMin
               _llMaxResults
+              _llPageToken
+              _llPromotionType
+              _llRelationshipStatus
+              _llSearchText
+              _llStartDateMax
+              _llStartDateMin
+              _llRole
+              _llRoleId
+              _llQuotaUser
+              (Just _llPrettyPrint)
+              _llUserIP
               _llFields
+              _llKey
+              _llOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy LinksListResource)

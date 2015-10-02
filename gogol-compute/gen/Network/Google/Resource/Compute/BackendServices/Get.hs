@@ -53,9 +53,9 @@ type BackendServicesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] BackendService
 
@@ -163,12 +163,12 @@ instance GoogleRequest BackendServicesGet' where
         type Rs BackendServicesGet' = BackendService
         request = requestWithRoute defReq computeURL
         requestWithRoute r u BackendServicesGet'{..}
-          = go _bsgQuotaUser (Just _bsgPrettyPrint) _bsgProject
+          = go _bsgProject _bsgBackendService _bsgQuotaUser
+              (Just _bsgPrettyPrint)
               _bsgUserIP
+              _bsgFields
               _bsgKey
               _bsgOAuthToken
-              _bsgFields
-              _bsgBackendService
               (Just AltJSON)
           where go
                   = clientWithRoute

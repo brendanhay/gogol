@@ -55,17 +55,17 @@ type BeaconInfoGetforObservedResource =
      "v1beta1" :>
        "beaconinfo:getforobserved" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON]
                                      GetInfoForObservedBeaconsRequest
@@ -228,17 +228,16 @@ instance GoogleRequest BeaconInfoGetforObserved'
              GetInfoForObservedBeaconsResponse
         request = requestWithRoute defReq proximityBeaconURL
         requestWithRoute r u BeaconInfoGetforObserved'{..}
-          = go _bigoXgafv _bigoQuotaUser
-              (Just _bigoPrettyPrint)
-              _bigoUploadProtocol
+          = go _bigoXgafv _bigoAccessToken _bigoBearerToken
+              _bigoCallback
               (Just _bigoPp)
-              _bigoAccessToken
               _bigoUploadType
-              _bigoBearerToken
+              _bigoUploadProtocol
+              _bigoQuotaUser
+              (Just _bigoPrettyPrint)
+              _bigoFields
               _bigoKey
               _bigoOAuthToken
-              _bigoFields
-              _bigoCallback
               (Just AltJSON)
               _bigoGetInfoForObservedBeaconsRequest
           where go

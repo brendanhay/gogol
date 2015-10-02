@@ -53,9 +53,9 @@ type AccountActiveAdSummariesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] AccountActiveAdSummary
 
@@ -168,13 +168,13 @@ instance GoogleRequest AccountActiveAdSummariesGet'
              AccountActiveAdSummary
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AccountActiveAdSummariesGet'{..}
-          = go _aaasgQuotaUser (Just _aaasgPrettyPrint)
+          = go _aaasgProfileId _aaasgSummaryAccountId
+              _aaasgQuotaUser
+              (Just _aaasgPrettyPrint)
               _aaasgUserIP
-              _aaasgProfileId
-              _aaasgKey
-              _aaasgSummaryAccountId
-              _aaasgOAuthToken
               _aaasgFields
+              _aaasgKey
+              _aaasgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

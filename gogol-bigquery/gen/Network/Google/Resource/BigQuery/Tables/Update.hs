@@ -59,9 +59,9 @@ type TablesUpdateResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Table :> Put '[JSON] Table
 
@@ -186,13 +186,13 @@ instance GoogleRequest TablesUpdate' where
         type Rs TablesUpdate' = Table
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u TablesUpdate'{..}
-          = go _tuQuotaUser (Just _tuPrettyPrint) _tuUserIP
-              _tuKey
-              _tuDatasetId
-              _tuProjectId
-              _tuOAuthToken
-              _tuTableId
+          = go _tuProjectId _tuDatasetId _tuTableId
+              _tuQuotaUser
+              (Just _tuPrettyPrint)
+              _tuUserIP
               _tuFields
+              _tuKey
+              _tuOAuthToken
               (Just AltJSON)
               _tuTable
           where go

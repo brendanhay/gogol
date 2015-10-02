@@ -49,15 +49,15 @@ import           Network.Google.YouTube.Types
 -- 'ChannelSectionsInsert'' request conforms to.
 type ChannelSectionsInsertResource =
      "channelSections" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "part" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+       QueryParam "onBehalfOfContentOwner" Text :>
+         QueryParam "onBehalfOfContentOwnerChannel" Text :>
+           QueryParam "part" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] ChannelSection :>
                              Post '[JSON] ChannelSection
@@ -212,14 +212,15 @@ instance GoogleRequest ChannelSectionsInsert' where
         type Rs ChannelSectionsInsert' = ChannelSection
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u ChannelSectionsInsert'{..}
-          = go _csiQuotaUser (Just _csiPart)
+          = go _csiOnBehalfOfContentOwner
+              _csiOnBehalfOfContentOwnerChannel
+              (Just _csiPart)
+              _csiQuotaUser
               (Just _csiPrettyPrint)
               _csiUserIP
-              _csiOnBehalfOfContentOwner
-              _csiKey
-              _csiOnBehalfOfContentOwnerChannel
-              _csiOAuthToken
               _csiFields
+              _csiKey
+              _csiOAuthToken
               (Just AltJSON)
               _csiChannelSection
           where go

@@ -47,13 +47,13 @@ import           Network.Google.Prelude
 -- 'AccountsList'' request conforms to.
 type AccountsListResource =
      "accounts" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParams "filterAdClientId" Text :>
-                   QueryParam "fields" Text :>
+       QueryParams "filterAdClientId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Accounts
 
 -- | List hosted accounts associated with this AdSense account by ad client
@@ -148,11 +148,12 @@ instance GoogleRequest AccountsList' where
         type Rs AccountsList' = Accounts
         request = requestWithRoute defReq adSenseHostURL
         requestWithRoute r u AccountsList'{..}
-          = go _alQuotaUser (Just _alPrettyPrint) _alUserIP
+          = go (Just _alFilterAdClientId) _alQuotaUser
+              (Just _alPrettyPrint)
+              _alUserIP
+              _alFields
               _alKey
               _alOAuthToken
-              (Just _alFilterAdClientId)
-              _alFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -55,9 +55,9 @@ type TargetVPNGatewaysGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] TargetVPNGateway
 
@@ -176,14 +176,13 @@ instance GoogleRequest TargetVPNGatewaysGet' where
         type Rs TargetVPNGatewaysGet' = TargetVPNGateway
         request = requestWithRoute defReq computeURL
         requestWithRoute r u TargetVPNGatewaysGet'{..}
-          = go _tvggQuotaUser (Just _tvggPrettyPrint)
-              _tvggProject
+          = go _tvggProject _tvggRegion _tvggTargetVPNGateway
+              _tvggQuotaUser
+              (Just _tvggPrettyPrint)
               _tvggUserIP
-              _tvggTargetVPNGateway
-              _tvggKey
-              _tvggRegion
-              _tvggOAuthToken
               _tvggFields
+              _tvggKey
+              _tvggOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

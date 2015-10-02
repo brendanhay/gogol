@@ -53,9 +53,9 @@ type ChangeLogsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] ChangeLog
 
 -- | Gets one change log by ID.
@@ -160,12 +160,12 @@ instance GoogleRequest ChangeLogsGet' where
         type Rs ChangeLogsGet' = ChangeLog
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ChangeLogsGet'{..}
-          = go _clgQuotaUser (Just _clgPrettyPrint) _clgUserIP
-              _clgProfileId
-              _clgKey
-              _clgId
-              _clgOAuthToken
+          = go _clgProfileId _clgId _clgQuotaUser
+              (Just _clgPrettyPrint)
+              _clgUserIP
               _clgFields
+              _clgKey
+              _clgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -50,9 +50,9 @@ type CallsetsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] CallSet
 
 -- | Gets a call set by ID.
@@ -145,11 +145,11 @@ instance GoogleRequest CallsetsGet' where
         type Rs CallsetsGet' = CallSet
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u CallsetsGet'{..}
-          = go _cgQuotaUser (Just _cgPrettyPrint) _cgUserIP
-              _cgKey
-              _cgCallSetId
-              _cgOAuthToken
+          = go _cgCallSetId _cgQuotaUser (Just _cgPrettyPrint)
+              _cgUserIP
               _cgFields
+              _cgKey
+              _cgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

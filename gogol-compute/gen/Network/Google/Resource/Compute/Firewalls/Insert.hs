@@ -53,9 +53,9 @@ type FirewallsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Firewall :> Post '[JSON] Operation
 
@@ -160,11 +160,11 @@ instance GoogleRequest FirewallsInsert' where
         type Rs FirewallsInsert' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u FirewallsInsert'{..}
-          = go _fiQuotaUser (Just _fiPrettyPrint) _fiProject
+          = go _fiProject _fiQuotaUser (Just _fiPrettyPrint)
               _fiUserIP
+              _fiFields
               _fiKey
               _fiOAuthToken
-              _fiFields
               (Just AltJSON)
               _fiFirewall
           where go

@@ -65,27 +65,28 @@ type AccountsStoreInfosListResource =
        "accounts" :>
          Capture "accountId" Text :>
            "storeInfos" :>
-             QueryParams "pphNames" Text :>
-               QueryParam "$.xgafv" Text :>
-                 QueryParams "studioNames" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParams "videoIds" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "upload_protocol" Text :>
-                           QueryParam "pp" Bool :>
-                             QueryParam "access_token" Text :>
-                               QueryParam "uploadType" Text :>
-                                 QueryParams "countries" Text :>
-                                   QueryParam "videoId" Text :>
-                                     QueryParam "bearer_token" Text :>
-                                       QueryParam "key" Key :>
-                                         QueryParam "name" Text :>
-                                           QueryParam "pageToken" Text :>
-                                             QueryParam "oauth_token" OAuthToken
-                                               :>
-                                               QueryParam "pageSize" Int32 :>
-                                                 QueryParam "fields" Text :>
-                                                   QueryParam "callback" Text :>
+             QueryParam "$.xgafv" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "bearer_token" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParams "countries" Text :>
+                       QueryParam "name" Text :>
+                         QueryParam "pageSize" Int32 :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "pp" Bool :>
+                               QueryParams "pphNames" Text :>
+                                 QueryParams "studioNames" Text :>
+                                   QueryParam "uploadType" Text :>
+                                     QueryParam "upload_protocol" Text :>
+                                       QueryParam "videoId" Text :>
+                                         QueryParams "videoIds" Text :>
+                                           QueryParam "quotaUser" Text :>
+                                             QueryParam "prettyPrint" Bool :>
+                                               QueryParam "fields" Text :>
+                                                 QueryParam "key" Key :>
+                                                   QueryParam "oauth_token"
+                                                     OAuthToken
+                                                     :>
                                                      QueryParam "alt" AltJSON :>
                                                        Get '[JSON]
                                                          ListStoreInfosResponse
@@ -324,25 +325,25 @@ instance GoogleRequest AccountsStoreInfosList' where
         request
           = requestWithRoute defReq playMoviesPartnerURL
         requestWithRoute r u AccountsStoreInfosList'{..}
-          = go _asilPphNames _asilXgafv _asilStudioNames
-              _asilQuotaUser
-              _asilVideoIds
-              (Just _asilPrettyPrint)
-              _asilUploadProtocol
-              (Just _asilPp)
-              _asilAccessToken
-              _asilUploadType
-              _asilCountries
-              _asilVideoId
-              _asilAccountId
-              _asilBearerToken
-              _asilKey
-              _asilName
-              _asilPageToken
-              _asilOAuthToken
-              _asilPageSize
-              _asilFields
+          = go _asilXgafv _asilAccessToken _asilBearerToken
               _asilCallback
+              _asilCountries
+              _asilName
+              _asilPageSize
+              _asilPageToken
+              (Just _asilPp)
+              _asilPphNames
+              _asilStudioNames
+              _asilUploadType
+              _asilUploadProtocol
+              _asilVideoId
+              _asilVideoIds
+              _asilAccountId
+              _asilQuotaUser
+              (Just _asilPrettyPrint)
+              _asilFields
+              _asilKey
+              _asilOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

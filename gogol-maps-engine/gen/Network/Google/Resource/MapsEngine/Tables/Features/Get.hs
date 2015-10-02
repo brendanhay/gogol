@@ -52,16 +52,16 @@ type TablesFeaturesGetResource =
        Capture "tableId" Text :>
          "features" :>
            Capture "id" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "version"
-                       MapsEngineTablesFeaturesGetVersion
-                       :>
-                       QueryParam "select" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+             QueryParam "select" Text :>
+               QueryParam "version"
+                 MapsEngineTablesFeaturesGetVersion
+                 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Feature
 
 -- | Return a single feature, given its ID.
@@ -185,14 +185,13 @@ instance GoogleRequest TablesFeaturesGet' where
         type Rs TablesFeaturesGet' = Feature
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u TablesFeaturesGet'{..}
-          = go _tfgQuotaUser (Just _tfgPrettyPrint) _tfgUserIP
-              _tfgKey
-              _tfgVersion
-              _tfgId
-              _tfgSelect
-              _tfgOAuthToken
-              _tfgTableId
+          = go _tfgSelect _tfgVersion _tfgTableId _tfgId
+              _tfgQuotaUser
+              (Just _tfgPrettyPrint)
+              _tfgUserIP
               _tfgFields
+              _tfgKey
+              _tfgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

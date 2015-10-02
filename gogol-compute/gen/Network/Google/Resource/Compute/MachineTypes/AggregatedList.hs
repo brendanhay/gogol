@@ -51,15 +51,15 @@ type MachineTypesAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
          "machineTypes" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "filter" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] MachineTypeAggregatedList
 
@@ -200,15 +200,15 @@ instance GoogleRequest MachineTypesAggregatedList'
              MachineTypeAggregatedList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u MachineTypesAggregatedList'{..}
-          = go _mtalQuotaUser (Just _mtalPrettyPrint)
-              _mtalProject
-              _mtalUserIP
-              _mtalKey
-              _mtalFilter
+          = go _mtalFilter (Just _mtalMaxResults)
               _mtalPageToken
-              _mtalOAuthToken
-              (Just _mtalMaxResults)
+              _mtalProject
+              _mtalQuotaUser
+              (Just _mtalPrettyPrint)
+              _mtalUserIP
               _mtalFields
+              _mtalKey
+              _mtalOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

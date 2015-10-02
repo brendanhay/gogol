@@ -49,9 +49,9 @@ type NegotiationsListResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] GetNegotiationsRequest :>
                        Get '[JSON] GetNegotiationsResponse
@@ -148,9 +148,9 @@ instance GoogleRequest NegotiationsList' where
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u NegotiationsList'{..}
           = go _nlQuotaUser (Just _nlPrettyPrint) _nlUserIP
+              _nlFields
               _nlKey
               _nlOAuthToken
-              _nlFields
               (Just AltJSON)
               _nlGetNegotiationsRequest
           where go

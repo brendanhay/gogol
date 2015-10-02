@@ -52,9 +52,9 @@ type UserRolesUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] UserRole :> Put '[JSON] UserRole
 
@@ -161,11 +161,12 @@ instance GoogleRequest UserRolesUpdate' where
         type Rs UserRolesUpdate' = UserRole
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u UserRolesUpdate'{..}
-          = go _uruQuotaUser (Just _uruPrettyPrint) _uruUserIP
-              _uruProfileId
+          = go _uruProfileId _uruQuotaUser
+              (Just _uruPrettyPrint)
+              _uruUserIP
+              _uruFields
               _uruKey
               _uruOAuthToken
-              _uruFields
               (Just AltJSON)
               _uruUserRole
           where go

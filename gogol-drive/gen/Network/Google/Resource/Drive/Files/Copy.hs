@@ -56,19 +56,19 @@ type FilesCopyResource =
      "files" :>
        Capture "fileId" Text :>
          "copy" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
+           QueryParam "convert" Bool :>
+             QueryParam "ocr" Bool :>
+               QueryParam "ocrLanguage" Text :>
                  QueryParam "pinned" Bool :>
-                   QueryParam "visibility" DriveFilesCopyVisibility :>
-                     QueryParam "timedTextLanguage" Text :>
-                       QueryParam "timedTextTrackName" Text :>
-                         QueryParam "ocrLanguage" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "convert" Bool :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "ocr" Bool :>
-                                   QueryParam "fields" Text :>
+                   QueryParam "timedTextLanguage" Text :>
+                     QueryParam "timedTextTrackName" Text :>
+                       QueryParam "visibility" DriveFilesCopyVisibility :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        ReqBody '[JSON] File :> Post '[JSON] File
 
@@ -237,18 +237,18 @@ instance GoogleRequest FilesCopy' where
         type Rs FilesCopy' = File
         request = requestWithRoute defReq driveURL
         requestWithRoute r u FilesCopy'{..}
-          = go _fcQuotaUser (Just _fcPrettyPrint) _fcUserIP
+          = go (Just _fcConvert) (Just _fcOCR) _fcOCRLanguage
               (Just _fcPinned)
-              (Just _fcVisibility)
               _fcTimedTextLanguage
               _fcTimedTextTrackName
-              _fcOCRLanguage
-              _fcKey
-              (Just _fcConvert)
+              (Just _fcVisibility)
               _fcFileId
-              _fcOAuthToken
-              (Just _fcOCR)
+              _fcQuotaUser
+              (Just _fcPrettyPrint)
+              _fcUserIP
               _fcFields
+              _fcKey
+              _fcOAuthToken
               (Just AltJSON)
               _fcFile
           where go

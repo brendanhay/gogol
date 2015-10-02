@@ -50,9 +50,9 @@ type RastersDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete a raster.
@@ -146,11 +146,11 @@ instance GoogleRequest RastersDelete' where
         type Rs RastersDelete' = ()
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u RastersDelete'{..}
-          = go _rdQuotaUser (Just _rdPrettyPrint) _rdUserIP
-              _rdKey
-              _rdId
-              _rdOAuthToken
+          = go _rdId _rdQuotaUser (Just _rdPrettyPrint)
+              _rdUserIP
               _rdFields
+              _rdKey
+              _rdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -51,15 +51,15 @@ type DeploymentsListResource =
      Capture "project" Text :>
        "global" :>
          "deployments" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "filter" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] DeploymentsListResponse
 
@@ -192,14 +192,14 @@ instance GoogleRequest DeploymentsList' where
         request
           = requestWithRoute defReq deploymentManagerURL
         requestWithRoute r u DeploymentsList'{..}
-          = go _dlQuotaUser (Just _dlPrettyPrint) _dlProject
+          = go _dlFilter (Just _dlMaxResults) _dlPageToken
+              _dlProject
+              _dlQuotaUser
+              (Just _dlPrettyPrint)
               _dlUserIP
-              _dlKey
-              _dlFilter
-              _dlPageToken
-              _dlOAuthToken
-              (Just _dlMaxResults)
               _dlFields
+              _dlKey
+              _dlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

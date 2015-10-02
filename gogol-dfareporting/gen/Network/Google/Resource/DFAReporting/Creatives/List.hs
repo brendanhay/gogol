@@ -64,37 +64,36 @@ type CreativesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "creatives" :>
-           QueryParams "renderingIds" Int64 :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "advertiserId" Int64 :>
-                     QueryParam "searchString" Text :>
-                       QueryParams "sizeIds" Int64 :>
-                         QueryParams "companionCreativeIds" Int64 :>
-                           QueryParam "campaignId" Int64 :>
-                             QueryParams "types" DfareportingCreativesListTypes
-                               :>
-                               QueryParams "ids" Int64 :>
-                                 QueryParam "sortOrder"
-                                   DfareportingCreativesListSortOrder
-                                   :>
-                                   QueryParam "active" Bool :>
-                                     QueryParam "key" Key :>
-                                       QueryParams "creativeFieldIds" Int64 :>
-                                         QueryParam "pageToken" Text :>
-                                           QueryParam "sortField"
-                                             DfareportingCreativesListSortField
-                                             :>
-                                             QueryParam "oauth_token" OAuthToken
-                                               :>
-                                               QueryParam "studioCreativeId"
-                                                 Int64
-                                                 :>
-                                                 QueryParam "archived" Bool :>
-                                                   QueryParam "maxResults" Int32
-                                                     :>
-                                                     QueryParam "fields" Text :>
+           QueryParam "active" Bool :>
+             QueryParam "advertiserId" Int64 :>
+               QueryParam "archived" Bool :>
+                 QueryParam "campaignId" Int64 :>
+                   QueryParams "companionCreativeIds" Int64 :>
+                     QueryParams "creativeFieldIds" Int64 :>
+                       QueryParams "ids" Int64 :>
+                         QueryParam "maxResults" Int32 :>
+                           QueryParam "pageToken" Text :>
+                             QueryParams "renderingIds" Int64 :>
+                               QueryParam "searchString" Text :>
+                                 QueryParams "sizeIds" Int64 :>
+                                   QueryParam "sortField"
+                                     DfareportingCreativesListSortField
+                                     :>
+                                     QueryParam "sortOrder"
+                                       DfareportingCreativesListSortOrder
+                                       :>
+                                       QueryParam "studioCreativeId" Int64 :>
+                                         QueryParams "types"
+                                           DfareportingCreativesListTypes
+                                           :>
+                                           QueryParam "quotaUser" Text :>
+                                             QueryParam "prettyPrint" Bool :>
+                                               QueryParam "userIp" Text :>
+                                                 QueryParam "fields" Text :>
+                                                   QueryParam "key" Key :>
+                                                     QueryParam "oauth_token"
+                                                       OAuthToken
+                                                       :>
                                                        QueryParam "alt" AltJSON
                                                          :>
                                                          Get '[JSON]
@@ -345,28 +344,27 @@ instance GoogleRequest CreativesList' where
         type Rs CreativesList' = CreativesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativesList'{..}
-          = go _clRenderingIds _clQuotaUser
-              (Just _clPrettyPrint)
-              _clUserIP
-              _clAdvertiserId
+          = go _clActive _clAdvertiserId _clArchived
+              _clCampaignId
+              _clCompanionCreativeIds
+              _clCreativeFieldIds
+              _clIds
+              _clMaxResults
+              _clPageToken
+              _clRenderingIds
               _clSearchString
               _clSizeIds
-              _clCompanionCreativeIds
-              _clCampaignId
-              _clTypes
-              _clIds
-              _clProfileId
-              _clSortOrder
-              _clActive
-              _clKey
-              _clCreativeFieldIds
-              _clPageToken
               _clSortField
-              _clOAuthToken
+              _clSortOrder
               _clStudioCreativeId
-              _clArchived
-              _clMaxResults
+              _clTypes
+              _clProfileId
+              _clQuotaUser
+              (Just _clPrettyPrint)
+              _clUserIP
               _clFields
+              _clKey
+              _clOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

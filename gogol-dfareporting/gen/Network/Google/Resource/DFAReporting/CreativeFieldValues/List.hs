@@ -57,22 +57,22 @@ type CreativeFieldValuesListResource =
          "creativeFields" :>
            Capture "creativeFieldId" Int64 :>
              "creativeFieldValues" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
+               QueryParams "ids" Int64 :>
+                 QueryParam "maxResults" Int32 :>
+                   QueryParam "pageToken" Text :>
                      QueryParam "searchString" Text :>
-                       QueryParams "ids" Int64 :>
+                       QueryParam "sortField"
+                         DfareportingCreativeFieldValuesListSortField
+                         :>
                          QueryParam "sortOrder"
                            DfareportingCreativeFieldValuesListSortOrder
                            :>
-                           QueryParam "key" Key :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "sortField"
-                                 DfareportingCreativeFieldValuesListSortField
-                                 :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "maxResults" Int32 :>
-                                     QueryParam "fields" Text :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "userIp" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON]
                                            CreativeFieldValuesListResponse
@@ -243,19 +243,18 @@ instance GoogleRequest CreativeFieldValuesList' where
              CreativeFieldValuesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeFieldValuesList'{..}
-          = go _cfvlCreativeFieldId _cfvlQuotaUser
+          = go _cfvlIds _cfvlMaxResults _cfvlPageToken
+              _cfvlSearchString
+              _cfvlSortField
+              _cfvlSortOrder
+              _cfvlProfileId
+              _cfvlCreativeFieldId
+              _cfvlQuotaUser
               (Just _cfvlPrettyPrint)
               _cfvlUserIP
-              _cfvlSearchString
-              _cfvlIds
-              _cfvlProfileId
-              _cfvlSortOrder
-              _cfvlKey
-              _cfvlPageToken
-              _cfvlSortField
-              _cfvlOAuthToken
-              _cfvlMaxResults
               _cfvlFields
+              _cfvlKey
+              _cfvlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

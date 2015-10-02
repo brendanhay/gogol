@@ -53,9 +53,9 @@ type FilesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] File
        :<|>
        "reports" :>
@@ -65,9 +65,9 @@ type FilesGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" Media :> Get '[OctetStream] Stream
 
 -- | Retrieves a report file by its report ID and file ID.
@@ -169,12 +169,12 @@ instance GoogleRequest FilesGet' where
         type Rs FilesGet' = File
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u FilesGet'{..}
-          = go _fgQuotaUser (Just _fgPrettyPrint) _fgUserIP
-              _fgReportId
-              _fgKey
-              _fgFileId
-              _fgOAuthToken
+          = go _fgReportId _fgFileId _fgQuotaUser
+              (Just _fgPrettyPrint)
+              _fgUserIP
               _fgFields
+              _fgKey
+              _fgOAuthToken
               (Just AltJSON)
           where go :<|> _
                   = clientWithRoute (Proxy :: Proxy FilesGetResource) r
@@ -184,12 +184,12 @@ instance GoogleRequest FilesGet' where
         type Rs (Download FilesGet') = Stream
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u FilesGet'{..}
-          = go _fgQuotaUser (Just _fgPrettyPrint) _fgUserIP
-              _fgReportId
-              _fgKey
-              _fgFileId
-              _fgOAuthToken
+          = go _fgReportId _fgFileId _fgQuotaUser
+              (Just _fgPrettyPrint)
+              _fgUserIP
               _fgFields
+              _fgKey
+              _fgOAuthToken
               (Just Media)
           where go :<|> _
                   = clientWithRoute (Proxy :: Proxy FilesGetResource) r

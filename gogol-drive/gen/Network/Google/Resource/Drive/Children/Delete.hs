@@ -53,9 +53,9 @@ type ChildrenDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Removes a child from a folder.
@@ -161,12 +161,12 @@ instance GoogleRequest ChildrenDelete' where
         type Rs ChildrenDelete' = ()
         request = requestWithRoute defReq driveURL
         requestWithRoute r u ChildrenDelete'{..}
-          = go _cddQuotaUser (Just _cddPrettyPrint) _cddUserIP
-              _cddFolderId
-              _cddKey
-              _cddChildId
-              _cddOAuthToken
+          = go _cddFolderId _cddChildId _cddQuotaUser
+              (Just _cddPrettyPrint)
+              _cddUserIP
               _cddFields
+              _cddKey
+              _cddOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

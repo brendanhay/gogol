@@ -51,9 +51,9 @@ type SubscriptionsUpdateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Subscription :>
                          Put '[JSON] Subscription
@@ -158,11 +158,11 @@ instance GoogleRequest SubscriptionsUpdate' where
         type Rs SubscriptionsUpdate' = Subscription
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u SubscriptionsUpdate'{..}
-          = go _suQuotaUser (Just _suPrettyPrint) _suUserIP
-              _suKey
-              _suId
-              _suOAuthToken
+          = go _suId _suQuotaUser (Just _suPrettyPrint)
+              _suUserIP
               _suFields
+              _suKey
+              _suOAuthToken
               (Just AltJSON)
               _suSubscription
           where go

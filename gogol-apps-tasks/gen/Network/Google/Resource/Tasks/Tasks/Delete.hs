@@ -53,9 +53,9 @@ type TasksDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes the specified task from the task list.
@@ -157,12 +157,12 @@ instance GoogleRequest TasksDelete' where
         type Rs TasksDelete' = ()
         request = requestWithRoute defReq appsTasksURL
         requestWithRoute r u TasksDelete'{..}
-          = go _tdQuotaUser (Just _tdPrettyPrint) _tdUserIP
-              _tdKey
-              _tdTaskList
-              _tdTask
-              _tdOAuthToken
+          = go _tdTaskList _tdTask _tdQuotaUser
+              (Just _tdPrettyPrint)
+              _tdUserIP
               _tdFields
+              _tdKey
+              _tdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

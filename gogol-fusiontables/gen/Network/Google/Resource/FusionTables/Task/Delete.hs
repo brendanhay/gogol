@@ -54,9 +54,9 @@ type TaskDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a specific task by its ID, unless that task has already started
@@ -157,12 +157,12 @@ instance GoogleRequest TaskDelete' where
         type Rs TaskDelete' = ()
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TaskDelete'{..}
-          = go _tQuotaUser (Just _tPrettyPrint) _tTaskId
+          = go _tTableId _tTaskId _tQuotaUser
+              (Just _tPrettyPrint)
               _tUserIP
+              _tFields
               _tKey
               _tOAuthToken
-              _tTableId
-              _tFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TaskDeleteResource)

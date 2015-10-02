@@ -47,14 +47,14 @@ import           Network.Google.YouTube.Types
 -- 'PlayListsDelete'' request conforms to.
 type PlayListsDeleteResource =
      "playlists" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "onBehalfOfContentOwner" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "id" Text :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+       QueryParam "onBehalfOfContentOwner" Text :>
+         QueryParam "id" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a playlist.
@@ -170,12 +170,13 @@ instance GoogleRequest PlayListsDelete' where
         type Rs PlayListsDelete' = ()
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u PlayListsDelete'{..}
-          = go _pldQuotaUser (Just _pldPrettyPrint) _pldUserIP
-              _pldOnBehalfOfContentOwner
-              _pldKey
-              (Just _pldId)
-              _pldOAuthToken
+          = go _pldOnBehalfOfContentOwner (Just _pldId)
+              _pldQuotaUser
+              (Just _pldPrettyPrint)
+              _pldUserIP
               _pldFields
+              _pldKey
+              _pldOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

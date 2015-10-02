@@ -58,17 +58,17 @@ type AppsModulesDeleteResource =
            "modules" :>
              Capture "modulesId" Text :>
                QueryParam "$.xgafv" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "key" Key :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "callback" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "quotaUser" Text :>
+                               QueryParam "prettyPrint" Bool :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Delete '[JSON] Operation
 
@@ -231,18 +231,18 @@ instance GoogleRequest AppsModulesDelete' where
         type Rs AppsModulesDelete' = Operation
         request = requestWithRoute defReq appEngineURL
         requestWithRoute r u AppsModulesDelete'{..}
-          = go _amdXgafv _amdQuotaUser (Just _amdPrettyPrint)
-              _amdUploadProtocol
-              (Just _amdPp)
-              _amdAccessToken
-              _amdUploadType
-              _amdModulesId
-              _amdBearerToken
-              _amdKey
-              _amdAppsId
-              _amdOAuthToken
-              _amdFields
+          = go _amdXgafv _amdAccessToken _amdBearerToken
               _amdCallback
+              (Just _amdPp)
+              _amdUploadType
+              _amdUploadProtocol
+              _amdAppsId
+              _amdModulesId
+              _amdQuotaUser
+              (Just _amdPrettyPrint)
+              _amdFields
+              _amdKey
+              _amdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

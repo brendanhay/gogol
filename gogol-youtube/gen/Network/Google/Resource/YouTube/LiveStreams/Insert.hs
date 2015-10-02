@@ -50,15 +50,15 @@ import           Network.Google.YouTube.Types
 -- 'LiveStreamsInsert'' request conforms to.
 type LiveStreamsInsertResource =
      "liveStreams" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "part" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+       QueryParam "onBehalfOfContentOwner" Text :>
+         QueryParam "onBehalfOfContentOwnerChannel" Text :>
+           QueryParam "part" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] LiveStream :> Post '[JSON] LiveStream
 
@@ -213,14 +213,15 @@ instance GoogleRequest LiveStreamsInsert' where
         type Rs LiveStreamsInsert' = LiveStream
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u LiveStreamsInsert'{..}
-          = go _lsiQuotaUser (Just _lsiPart)
+          = go _lsiOnBehalfOfContentOwner
+              _lsiOnBehalfOfContentOwnerChannel
+              (Just _lsiPart)
+              _lsiQuotaUser
               (Just _lsiPrettyPrint)
               _lsiUserIP
-              _lsiOnBehalfOfContentOwner
-              _lsiKey
-              _lsiOnBehalfOfContentOwnerChannel
-              _lsiOAuthToken
               _lsiFields
+              _lsiKey
+              _lsiOAuthToken
               (Just AltJSON)
               _lsiLiveStream
           where go

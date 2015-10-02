@@ -58,9 +58,9 @@ type InstanceGroupManagersSetTargetPoolsResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON]
                                  InstanceGroupManagersSetTargetPoolsRequest
@@ -202,14 +202,14 @@ instance GoogleRequest
         request = requestWithRoute defReq replicaPoolURL
         requestWithRoute r u
           InstanceGroupManagersSetTargetPools'{..}
-          = go _igmstpQuotaUser (Just _igmstpPrettyPrint)
-              _igmstpProject
+          = go _igmstpProject _igmstpZone
               _igmstpInstanceGroupManager
+              _igmstpQuotaUser
+              (Just _igmstpPrettyPrint)
               _igmstpUserIP
-              _igmstpZone
+              _igmstpFields
               _igmstpKey
               _igmstpOAuthToken
-              _igmstpFields
               (Just AltJSON)
               _igmstpInstanceGroupManagersSetTargetPoolsRequest
           where go

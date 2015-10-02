@@ -53,9 +53,9 @@ type CreativesGetResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Creative
 
 -- | Gets the status for a single creative. A creative will be available
@@ -160,13 +160,12 @@ instance GoogleRequest CreativesGet' where
         type Rs CreativesGet' = Creative
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u CreativesGet'{..}
-          = go _cgQuotaUser (Just _cgPrettyPrint)
-              _cgBuyerCreativeId
+          = go _cgAccountId _cgBuyerCreativeId _cgQuotaUser
+              (Just _cgPrettyPrint)
               _cgUserIP
-              _cgAccountId
+              _cgFields
               _cgKey
               _cgOAuthToken
-              _cgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

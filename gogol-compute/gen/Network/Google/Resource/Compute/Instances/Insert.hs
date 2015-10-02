@@ -55,9 +55,9 @@ type InstancesInsertResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Instance :> Post '[JSON] Operation
 
@@ -171,12 +171,12 @@ instance GoogleRequest InstancesInsert' where
         type Rs InstancesInsert' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstancesInsert'{..}
-          = go _iiQuotaUser (Just _iiPrettyPrint) _iiProject
+          = go _iiProject _iiZone _iiQuotaUser
+              (Just _iiPrettyPrint)
               _iiUserIP
-              _iiZone
+              _iiFields
               _iiKey
               _iiOAuthToken
-              _iiFields
               (Just AltJSON)
               _iiInstance
           where go

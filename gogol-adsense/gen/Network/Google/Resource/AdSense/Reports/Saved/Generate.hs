@@ -51,15 +51,15 @@ import           Network.Google.Prelude
 type ReportsSavedGenerateResource =
      "reports" :>
        Capture "savedReportId" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "locale" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "startIndex" Int32 :>
-                       QueryParam "maxResults" Int32 :>
-                         QueryParam "fields" Text :>
+         QueryParam "locale" Text :>
+           QueryParam "maxResults" Int32 :>
+             QueryParam "startIndex" Int32 :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] AdsenseReportsGenerateResponse
 
@@ -189,14 +189,14 @@ instance GoogleRequest ReportsSavedGenerate' where
              AdsenseReportsGenerateResponse
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u ReportsSavedGenerate'{..}
-          = go _rsgQuotaUser (Just _rsgPrettyPrint) _rsgUserIP
-              _rsgLocale
+          = go _rsgLocale _rsgMaxResults _rsgStartIndex
               _rsgSavedReportId
+              _rsgQuotaUser
+              (Just _rsgPrettyPrint)
+              _rsgUserIP
+              _rsgFields
               _rsgKey
               _rsgOAuthToken
-              _rsgStartIndex
-              _rsgMaxResults
-              _rsgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

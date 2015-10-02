@@ -61,17 +61,17 @@ type CoursesAliasesDeleteResource =
            "aliases" :>
              Capture "alias" Text :>
                QueryParam "$.xgafv" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "key" Key :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "callback" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "quotaUser" Text :>
+                               QueryParam "prettyPrint" Bool :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Delete '[JSON] Empty
 
@@ -237,18 +237,18 @@ instance GoogleRequest CoursesAliasesDelete' where
         type Rs CoursesAliasesDelete' = Empty
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u CoursesAliasesDelete'{..}
-          = go _cadXgafv _cadQuotaUser (Just _cadPrettyPrint)
-              _cadUploadProtocol
+          = go _cadXgafv _cadAccessToken _cadBearerToken
+              _cadCallback
               (Just _cadPp)
-              _cadCourseId
-              _cadAccessToken
               _cadUploadType
+              _cadUploadProtocol
+              _cadCourseId
               _cadAlias
-              _cadBearerToken
+              _cadQuotaUser
+              (Just _cadPrettyPrint)
+              _cadFields
               _cadKey
               _cadOAuthToken
-              _cadFields
-              _cadCallback
               (Just AltJSON)
           where go
                   = clientWithRoute

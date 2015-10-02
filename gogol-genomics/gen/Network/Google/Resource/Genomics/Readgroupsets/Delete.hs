@@ -50,9 +50,9 @@ type ReadgroupsetsDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a read group set.
@@ -147,12 +147,12 @@ instance GoogleRequest ReadgroupsetsDelete' where
         type Rs ReadgroupsetsDelete' = ()
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u ReadgroupsetsDelete'{..}
-          = go _rdQuotaUser (Just _rdPrettyPrint)
-              _rdReadGroupSetId
+          = go _rdReadGroupSetId _rdQuotaUser
+              (Just _rdPrettyPrint)
               _rdUserIP
+              _rdFields
               _rdKey
               _rdOAuthToken
-              _rdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

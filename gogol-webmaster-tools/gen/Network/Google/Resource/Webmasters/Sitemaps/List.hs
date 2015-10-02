@@ -50,13 +50,13 @@ type SitemapsListResource =
      "sites" :>
        Capture "siteUrl" Text :>
          "sitemaps" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "sitemapIndex" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "sitemapIndex" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] SitemapsListResponse
 
@@ -166,12 +166,12 @@ instance GoogleRequest SitemapsList' where
         type Rs SitemapsList' = SitemapsListResponse
         request = requestWithRoute defReq webmasterToolsURL
         requestWithRoute r u SitemapsList'{..}
-          = go _sllQuotaUser (Just _sllPrettyPrint) _sllUserIP
-              _sllSiteURL
-              _sllSitemapIndex
+          = go _sllSitemapIndex _sllSiteURL _sllQuotaUser
+              (Just _sllPrettyPrint)
+              _sllUserIP
+              _sllFields
               _sllKey
               _sllOAuthToken
-              _sllFields
               (Just AltJSON)
           where go
                   = clientWithRoute

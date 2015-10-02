@@ -55,9 +55,9 @@ type TargetPoolsDeleteResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified TargetPool resource.
@@ -174,13 +174,13 @@ instance GoogleRequest TargetPoolsDelete' where
         type Rs TargetPoolsDelete' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u TargetPoolsDelete'{..}
-          = go _tpdQuotaUser (Just _tpdPrettyPrint) _tpdProject
-              _tpdTargetPool
+          = go _tpdProject _tpdRegion _tpdTargetPool
+              _tpdQuotaUser
+              (Just _tpdPrettyPrint)
               _tpdUserIP
-              _tpdKey
-              _tpdRegion
-              _tpdOAuthToken
               _tpdFields
+              _tpdKey
+              _tpdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

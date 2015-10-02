@@ -54,9 +54,9 @@ type AccountsAlertsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Dismiss (delete) the specified alert from the specified publisher
@@ -163,12 +163,12 @@ instance GoogleRequest AccountsAlertsDelete' where
         type Rs AccountsAlertsDelete' = ()
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u AccountsAlertsDelete'{..}
-          = go _aadQuotaUser (Just _aadPrettyPrint) _aadUserIP
-              _aadAlertId
-              _aadAccountId
+          = go _aadAccountId _aadAlertId _aadQuotaUser
+              (Just _aadPrettyPrint)
+              _aadUserIP
+              _aadFields
               _aadKey
               _aadOAuthToken
-              _aadFields
               (Just AltJSON)
           where go
                   = clientWithRoute

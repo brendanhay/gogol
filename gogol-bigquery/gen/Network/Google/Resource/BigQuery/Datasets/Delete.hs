@@ -54,13 +54,13 @@ type DatasetsDeleteResource =
        Capture "projectId" Text :>
          "datasets" :>
            Capture "datasetId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "deleteContents" Bool :>
-                         QueryParam "fields" Text :>
+             QueryParam "deleteContents" Bool :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes the dataset specified by the datasetId value. Before you can
@@ -177,13 +177,13 @@ instance GoogleRequest DatasetsDelete' where
         type Rs DatasetsDelete' = ()
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u DatasetsDelete'{..}
-          = go _ddQuotaUser (Just _ddPrettyPrint) _ddUserIP
-              _ddKey
-              _ddDatasetId
-              _ddProjectId
-              _ddOAuthToken
-              _ddDeleteContents
+          = go _ddDeleteContents _ddProjectId _ddDatasetId
+              _ddQuotaUser
+              (Just _ddPrettyPrint)
+              _ddUserIP
               _ddFields
+              _ddKey
+              _ddOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

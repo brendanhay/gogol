@@ -54,9 +54,9 @@ type EditsDetailsPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] AppDetails :>
                              Patch '[JSON] AppDetails
@@ -177,13 +177,12 @@ instance GoogleRequest EditsDetailsPatch' where
         type Rs EditsDetailsPatch' = AppDetails
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u EditsDetailsPatch'{..}
-          = go _edpQuotaUser (Just _edpPrettyPrint)
-              _edpPackageName
+          = go _edpPackageName _edpEditId _edpQuotaUser
+              (Just _edpPrettyPrint)
               _edpUserIP
+              _edpFields
               _edpKey
               _edpOAuthToken
-              _edpEditId
-              _edpFields
               (Just AltJSON)
               _edpAppDetails
           where go

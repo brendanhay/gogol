@@ -50,14 +50,14 @@ type CirclesListResource =
      "people" :>
        Capture "userId" Text :>
          "circles" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "maxResults" Word32 :>
-                         QueryParam "fields" Text :>
+           QueryParam "maxResults" Word32 :>
+             QueryParam "pageToken" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] CircleFeed
 
 -- | List all of the circles for a user.
@@ -172,13 +172,13 @@ instance GoogleRequest CirclesList' where
         type Rs CirclesList' = CircleFeed
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u CirclesList'{..}
-          = go _clQuotaUser (Just _clPrettyPrint) _clUserIP
-              _clUserId
-              _clKey
-              _clPageToken
-              _clOAuthToken
-              (Just _clMaxResults)
+          = go (Just _clMaxResults) _clPageToken _clUserId
+              _clQuotaUser
+              (Just _clPrettyPrint)
+              _clUserIP
               _clFields
+              _clKey
+              _clOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

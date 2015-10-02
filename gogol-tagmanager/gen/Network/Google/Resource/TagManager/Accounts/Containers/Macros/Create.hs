@@ -55,9 +55,9 @@ type AccountsContainersMacrosCreateResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Macro :> Post '[JSON] Macro
 
@@ -180,13 +180,12 @@ instance GoogleRequest
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersMacrosCreate'{..}
-          = go _acmcQuotaUser (Just _acmcPrettyPrint)
-              _acmcContainerId
+          = go _acmcAccountId _acmcContainerId _acmcQuotaUser
+              (Just _acmcPrettyPrint)
               _acmcUserIP
-              _acmcAccountId
+              _acmcFields
               _acmcKey
               _acmcOAuthToken
-              _acmcFields
               (Just AltJSON)
               _acmcMacro
           where go

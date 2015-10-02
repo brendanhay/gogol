@@ -61,17 +61,17 @@ type CoursesCreateResource =
      "v1" :>
        "courses" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] Course :> Post '[JSON] Course
 
@@ -226,16 +226,16 @@ instance GoogleRequest CoursesCreate' where
         type Rs CoursesCreate' = Course
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u CoursesCreate'{..}
-          = go _ccXgafv _ccQuotaUser (Just _ccPrettyPrint)
-              _ccUploadProtocol
+          = go _ccXgafv _ccAccessToken _ccBearerToken
+              _ccCallback
               (Just _ccPp)
-              _ccAccessToken
               _ccUploadType
-              _ccBearerToken
+              _ccUploadProtocol
+              _ccQuotaUser
+              (Just _ccPrettyPrint)
+              _ccFields
               _ccKey
               _ccOAuthToken
-              _ccFields
-              _ccCallback
               (Just AltJSON)
               _ccCourse
           where go

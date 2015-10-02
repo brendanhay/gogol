@@ -55,16 +55,16 @@ type EventsUpdateResource =
        Capture "calendarId" Text :>
          "events" :>
            Capture "eventId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "maxAttendees" Int32 :>
-                     QueryParam "key" Key :>
-                       QueryParam "sendNotifications" Bool :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "supportsAttachments" Bool :>
-                             QueryParam "alwaysIncludeEmail" Bool :>
-                               QueryParam "fields" Text :>
+             QueryParam "alwaysIncludeEmail" Bool :>
+               QueryParam "maxAttendees" Int32 :>
+                 QueryParam "sendNotifications" Bool :>
+                   QueryParam "supportsAttachments" Bool :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] Event :> Put '[JSON] Event
 
@@ -228,16 +228,17 @@ instance GoogleRequest EventsUpdate' where
         type Rs EventsUpdate' = Event
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u EventsUpdate'{..}
-          = go _euQuotaUser _euCalendarId (Just _euPrettyPrint)
-              _euUserIP
-              _euMaxAttendees
-              _euKey
+          = go _euAlwaysIncludeEmail _euMaxAttendees
               _euSendNotifications
-              _euOAuthToken
               _euSupportsAttachments
-              _euAlwaysIncludeEmail
+              _euCalendarId
               _euEventId
+              _euQuotaUser
+              (Just _euPrettyPrint)
+              _euUserIP
               _euFields
+              _euKey
+              _euOAuthToken
               (Just AltJSON)
               _euEvent
           where go

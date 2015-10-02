@@ -51,13 +51,13 @@ import           Network.Google.Prelude
 type UsersDataSourcesListResource =
      Capture "userId" Text :>
        "dataSources" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParams "dataTypeName" Text :>
+         QueryParams "dataTypeName" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] ListDataSourcesResponse
 
@@ -171,13 +171,12 @@ instance GoogleRequest UsersDataSourcesList' where
              ListDataSourcesResponse
         request = requestWithRoute defReq fitnessURL
         requestWithRoute r u UsersDataSourcesList'{..}
-          = go _udslQuotaUser (Just _udslPrettyPrint)
-              _udslDataTypeName
+          = go _udslDataTypeName _udslUserId _udslQuotaUser
+              (Just _udslPrettyPrint)
               _udslUserIP
-              _udslUserId
+              _udslFields
               _udslKey
               _udslOAuthToken
-              _udslFields
               (Just AltJSON)
           where go
                   = clientWithRoute

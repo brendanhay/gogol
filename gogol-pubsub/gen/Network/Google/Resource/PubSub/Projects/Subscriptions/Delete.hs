@@ -58,17 +58,17 @@ type ProjectsSubscriptionsDeleteResource =
      "v1beta2" :>
        "{+subscription}" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Delete '[JSON] Empty
 
@@ -227,17 +227,17 @@ instance GoogleRequest ProjectsSubscriptionsDelete'
         type Rs ProjectsSubscriptionsDelete' = Empty
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u ProjectsSubscriptionsDelete'{..}
-          = go _psdXgafv _psdQuotaUser (Just _psdPrettyPrint)
-              _psdUploadProtocol
+          = go _psdXgafv _psdAccessToken _psdBearerToken
+              _psdCallback
               (Just _psdPp)
-              _psdAccessToken
               _psdUploadType
-              _psdBearerToken
+              _psdUploadProtocol
+              _psdSubscription
+              _psdQuotaUser
+              (Just _psdPrettyPrint)
+              _psdFields
               _psdKey
               _psdOAuthToken
-              _psdSubscription
-              _psdFields
-              _psdCallback
               (Just AltJSON)
           where go
                   = clientWithRoute

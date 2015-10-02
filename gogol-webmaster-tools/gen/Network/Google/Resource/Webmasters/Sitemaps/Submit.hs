@@ -53,9 +53,9 @@ type SitemapsSubmitResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Put '[JSON] ()
 
 -- | Submits a sitemap for a site.
@@ -160,12 +160,12 @@ instance GoogleRequest SitemapsSubmit' where
         type Rs SitemapsSubmit' = ()
         request = requestWithRoute defReq webmasterToolsURL
         requestWithRoute r u SitemapsSubmit'{..}
-          = go _ssQuotaUser (Just _ssPrettyPrint) _ssFeedpath
+          = go _ssSiteURL _ssFeedpath _ssQuotaUser
+              (Just _ssPrettyPrint)
               _ssUserIP
-              _ssSiteURL
+              _ssFields
               _ssKey
               _ssOAuthToken
-              _ssFields
               (Just AltJSON)
           where go
                   = clientWithRoute

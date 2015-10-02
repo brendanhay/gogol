@@ -54,9 +54,9 @@ type TasksInsertResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Task :> Post '[JSON] Task
 
@@ -170,12 +170,12 @@ instance GoogleRequest TasksInsert' where
         request
           = requestWithRoute defReq appEngineTaskQueueURL
         requestWithRoute r u TasksInsert'{..}
-          = go _tiTaskqueue _tiQuotaUser (Just _tiPrettyPrint)
-              _tiProject
+          = go _tiProject _tiTaskqueue _tiQuotaUser
+              (Just _tiPrettyPrint)
               _tiUserIP
+              _tiFields
               _tiKey
               _tiOAuthToken
-              _tiFields
               (Just AltJSON)
               _tiTask
           where go

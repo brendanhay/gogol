@@ -51,19 +51,19 @@ import           Network.Google.YouTube.Types
 -- 'CommentsList'' request conforms to.
 type CommentsListResource =
      "comments" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "part" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "id" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "textFormat" YouTubeCommentsListTextFormat
-                         :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "parentId" Text :>
-                             QueryParam "fields" Text :>
+       QueryParam "id" Text :>
+         QueryParam "maxResults" Word32 :>
+           QueryParam "pageToken" Text :>
+             QueryParam "parentId" Text :>
+               QueryParam "textFormat" YouTubeCommentsListTextFormat
+                 :>
+                 QueryParam "part" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] CommentListResponse
 
@@ -217,17 +217,16 @@ instance GoogleRequest CommentsList' where
         type Rs CommentsList' = CommentListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u CommentsList'{..}
-          = go _comQuotaUser (Just _comPart)
+          = go _comId (Just _comMaxResults) _comPageToken
+              _comParentId
+              (Just _comTextFormat)
+              (Just _comPart)
+              _comQuotaUser
               (Just _comPrettyPrint)
               _comUserIP
-              _comKey
-              _comId
-              _comPageToken
-              _comOAuthToken
-              (Just _comTextFormat)
-              (Just _comMaxResults)
-              _comParentId
               _comFields
+              _comKey
+              _comOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

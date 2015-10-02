@@ -53,9 +53,9 @@ type AchievementsResetForAllPlayersResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Resets the achievement with the given ID for all players. This method is
@@ -158,12 +158,12 @@ instance GoogleRequest
         request = requestWithRoute defReq gamesManagementURL
         requestWithRoute r u
           AchievementsResetForAllPlayers'{..}
-          = go _arfapQuotaUser (Just _arfapPrettyPrint)
-              _arfapAchievementId
+          = go _arfapAchievementId _arfapQuotaUser
+              (Just _arfapPrettyPrint)
               _arfapUserIP
+              _arfapFields
               _arfapKey
               _arfapOAuthToken
-              _arfapFields
               (Just AltJSON)
           where go
                   = clientWithRoute

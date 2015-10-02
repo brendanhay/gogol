@@ -3949,48 +3949,46 @@ instance ToJSON ActivityObjectAttachmentsFullImage
                   ("type" .=) <$> _aoafiType])
 
 --
--- /See:/ 'aCL' smart constructor.
+-- /See:/ 'acl' smart constructor.
 data ACL = ACL
-    { _aclKind        :: !Text
-    , _aclItems       :: !(Maybe [PlusACLentryResource])
-    , _aclDescription :: !(Maybe Text)
+    { _aKind        :: !Text
+    , _aItems       :: !(Maybe [PlusACLentryResource])
+    , _aDescription :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ACL' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aclKind'
+-- * 'aKind'
 --
--- * 'aclItems'
+-- * 'aItems'
 --
--- * 'aclDescription'
-aCL
+-- * 'aDescription'
+acl
     :: ACL
-aCL =
+acl =
     ACL
-    { _aclKind = "plus#acl"
-    , _aclItems = Nothing
-    , _aclDescription = Nothing
+    { _aKind = "plus#acl"
+    , _aItems = Nothing
+    , _aDescription = Nothing
     }
 
 -- | Identifies this resource as a collection of access controls. Value:
 -- \"plus#acl\".
-aclKind :: Lens' ACL Text
-aclKind = lens _aclKind (\ s a -> s{_aclKind = a})
+aKind :: Lens' ACL Text
+aKind = lens _aKind (\ s a -> s{_aKind = a})
 
 -- | The list of access entries.
-aclItems :: Lens' ACL [PlusACLentryResource]
-aclItems
-  = lens _aclItems (\ s a -> s{_aclItems = a}) .
-      _Default
-      . _Coerce
+aItems :: Lens' ACL [PlusACLentryResource]
+aItems
+  = lens _aItems (\ s a -> s{_aItems = a}) . _Default .
+      _Coerce
 
 -- | Description of the access granted, suitable for display.
-aclDescription :: Lens' ACL (Maybe Text)
-aclDescription
-  = lens _aclDescription
-      (\ s a -> s{_aclDescription = a})
+aDescription :: Lens' ACL (Maybe Text)
+aDescription
+  = lens _aDescription (\ s a -> s{_aDescription = a})
 
 instance FromJSON ACL where
         parseJSON
@@ -4005,9 +4003,8 @@ instance ToJSON ACL where
         toJSON ACL{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _aclKind),
-                  ("items" .=) <$> _aclItems,
-                  ("description" .=) <$> _aclDescription])
+                 [Just ("kind" .= _aKind), ("items" .=) <$> _aItems,
+                  ("description" .=) <$> _aDescription])
 
 --
 -- /See:/ 'momentsFeed' smart constructor.

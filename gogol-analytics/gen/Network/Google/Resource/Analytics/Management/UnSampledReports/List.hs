@@ -57,14 +57,14 @@ type ManagementUnSampledReportsListResource =
                "profiles" :>
                  Capture "profileId" Text :>
                    "unsampledReports" :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "start-index" Int32 :>
-                                 QueryParam "max-results" Int32 :>
-                                   QueryParam "fields" Text :>
+                     QueryParam "max-results" Int32 :>
+                       QueryParam "start-index" Int32 :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] UnSampledReports
 
@@ -213,16 +213,16 @@ instance GoogleRequest
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
           ManagementUnSampledReportsList'{..}
-          = go _musrlQuotaUser (Just _musrlPrettyPrint)
-              _musrlWebPropertyId
-              _musrlUserIP
-              _musrlProfileId
+          = go _musrlMaxResults _musrlStartIndex
               _musrlAccountId
+              _musrlWebPropertyId
+              _musrlProfileId
+              _musrlQuotaUser
+              (Just _musrlPrettyPrint)
+              _musrlUserIP
+              _musrlFields
               _musrlKey
               _musrlOAuthToken
-              _musrlStartIndex
-              _musrlMaxResults
-              _musrlFields
               (Just AltJSON)
           where go
                   = clientWithRoute

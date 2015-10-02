@@ -57,9 +57,9 @@ type ZoneViewsRemoveResourcesResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] ZoneViewsRemoveResourcesRequest
                                  :> Post '[JSON] Operation
@@ -191,14 +191,13 @@ instance GoogleRequest ZoneViewsRemoveResources'
         type Rs ZoneViewsRemoveResources' = Operation
         request = requestWithRoute defReq resourceViewsURL
         requestWithRoute r u ZoneViewsRemoveResources'{..}
-          = go _zvrrQuotaUser (Just _zvrrPrettyPrint)
-              _zvrrResourceView
-              _zvrrProject
+          = go _zvrrProject _zvrrZone _zvrrResourceView
+              _zvrrQuotaUser
+              (Just _zvrrPrettyPrint)
               _zvrrUserIP
-              _zvrrZone
+              _zvrrFields
               _zvrrKey
               _zvrrOAuthToken
-              _zvrrFields
               (Just AltJSON)
               _zvrrZoneViewsRemoveResourcesRequest
           where go

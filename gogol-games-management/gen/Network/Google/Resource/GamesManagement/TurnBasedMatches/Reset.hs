@@ -50,9 +50,9 @@ type TurnBasedMatchesResetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Reset all turn-based match data for a user. This method is only
@@ -142,9 +142,9 @@ instance GoogleRequest TurnBasedMatchesReset' where
         requestWithRoute r u TurnBasedMatchesReset'{..}
           = go _tbmrQuotaUser (Just _tbmrPrettyPrint)
               _tbmrUserIP
+              _tbmrFields
               _tbmrKey
               _tbmrOAuthToken
-              _tbmrFields
               (Just AltJSON)
           where go
                   = clientWithRoute

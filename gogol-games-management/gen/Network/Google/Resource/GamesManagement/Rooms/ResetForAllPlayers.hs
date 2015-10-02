@@ -51,9 +51,9 @@ type RoomsResetForAllPlayersResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Deletes rooms where the only room participants are from whitelisted
@@ -144,9 +144,9 @@ instance GoogleRequest RoomsResetForAllPlayers' where
         requestWithRoute r u RoomsResetForAllPlayers'{..}
           = go _rrfapQuotaUser (Just _rrfapPrettyPrint)
               _rrfapUserIP
+              _rrfapFields
               _rrfapKey
               _rrfapOAuthToken
-              _rrfapFields
               (Just AltJSON)
           where go
                   = clientWithRoute

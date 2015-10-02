@@ -52,9 +52,9 @@ type VariantsetsExportResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] ExportVariantSetRequest :>
                            Post '[JSON] ExportVariantSetResponse
@@ -163,12 +163,12 @@ instance GoogleRequest VariantsetsExport' where
         type Rs VariantsetsExport' = ExportVariantSetResponse
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u VariantsetsExport'{..}
-          = go _veQuotaUser (Just _vePrettyPrint)
-              _veVariantSetId
+          = go _veVariantSetId _veQuotaUser
+              (Just _vePrettyPrint)
               _veUserIP
+              _veFields
               _veKey
               _veOAuthToken
-              _veFields
               (Just AltJSON)
               _veExportVariantSetRequest
           where go

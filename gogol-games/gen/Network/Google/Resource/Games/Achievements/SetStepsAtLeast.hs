@@ -52,13 +52,13 @@ type AchievementsSetStepsAtLeastResource =
      "achievements" :>
        Capture "achievementId" Text :>
          "setStepsAtLeast" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "steps" Int32 :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "steps" Int32 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Post '[JSON] AchievementSetStepsAtLeastResponse
 
@@ -173,13 +173,13 @@ instance GoogleRequest AchievementsSetStepsAtLeast'
              AchievementSetStepsAtLeastResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u AchievementsSetStepsAtLeast'{..}
-          = go _assalQuotaUser (Just _assalPrettyPrint)
-              _assalAchievementId
+          = go _assalAchievementId (Just _assalSteps)
+              _assalQuotaUser
+              (Just _assalPrettyPrint)
               _assalUserIP
-              (Just _assalSteps)
+              _assalFields
               _assalKey
               _assalOAuthToken
-              _assalFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -52,9 +52,9 @@ type AccountUserProfilesUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] AccountUserProfile :>
                            Put '[JSON] AccountUserProfile
@@ -167,12 +167,12 @@ instance GoogleRequest AccountUserProfilesUpdate'
              AccountUserProfile
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AccountUserProfilesUpdate'{..}
-          = go _aupuQuotaUser (Just _aupuPrettyPrint)
+          = go _aupuProfileId _aupuQuotaUser
+              (Just _aupuPrettyPrint)
               _aupuUserIP
-              _aupuProfileId
+              _aupuFields
               _aupuKey
               _aupuOAuthToken
-              _aupuFields
               (Just AltJSON)
               _aupuAccountUserProfile
           where go

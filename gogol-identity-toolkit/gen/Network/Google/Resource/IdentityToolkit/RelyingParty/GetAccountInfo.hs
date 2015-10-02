@@ -49,9 +49,9 @@ type RelyingPartyGetAccountInfoResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON]
                        IdentitytoolkitRelyingPartyGetAccountInfoRequest
@@ -159,9 +159,9 @@ instance GoogleRequest RelyingPartyGetAccountInfo'
         requestWithRoute r u RelyingPartyGetAccountInfo'{..}
           = go _rpgaiQuotaUser (Just _rpgaiPrettyPrint)
               _rpgaiUserIP
+              _rpgaiFields
               _rpgaiKey
               _rpgaiOAuthToken
-              _rpgaiFields
               (Just AltJSON)
               _rpgaiIdentitytoolkitRelyingPartyGetAccountInfoRequest
           where go

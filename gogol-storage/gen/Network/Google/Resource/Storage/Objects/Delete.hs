@@ -57,17 +57,17 @@ type ObjectsDeleteResource =
        Capture "bucket" Text :>
          "o" :>
            Capture "object" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "ifMetagenerationMatch" Word64 :>
+             QueryParam "generation" Word64 :>
+               QueryParam "ifGenerationMatch" Word64 :>
                  QueryParam "ifGenerationNotMatch" Word64 :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "ifGenerationMatch" Word64 :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "ifMetagenerationNotMatch" Word64 :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "generation" Word64 :>
-                                 QueryParam "fields" Text :>
+                   QueryParam "ifMetagenerationMatch" Word64 :>
+                     QueryParam "ifMetagenerationNotMatch" Word64 :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes data blobs and associated metadata. Deletions are permanent if
@@ -224,18 +224,18 @@ instance GoogleRequest ObjectsDelete' where
         type Rs ObjectsDelete' = ()
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectsDelete'{..}
-          = go _odQuotaUser _odIfMetagenerationMatch
+          = go _odGeneration _odIfGenerationMatch
               _odIfGenerationNotMatch
-              (Just _odPrettyPrint)
-              _odIfGenerationMatch
-              _odUserIP
-              _odBucket
-              _odKey
+              _odIfMetagenerationMatch
               _odIfMetagenerationNotMatch
+              _odBucket
               _odObject
-              _odOAuthToken
-              _odGeneration
+              _odQuotaUser
+              (Just _odPrettyPrint)
+              _odUserIP
               _odFields
+              _odKey
+              _odOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

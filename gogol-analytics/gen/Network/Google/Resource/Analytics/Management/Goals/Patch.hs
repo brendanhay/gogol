@@ -62,9 +62,9 @@ type ManagementGoalsPatchResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "fields" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] Goal :> Patch '[JSON] Goal
 
@@ -202,15 +202,14 @@ instance GoogleRequest ManagementGoalsPatch' where
         type Rs ManagementGoalsPatch' = Goal
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementGoalsPatch'{..}
-          = go _mgpQuotaUser (Just _mgpPrettyPrint)
-              _mgpWebPropertyId
+          = go _mgpAccountId _mgpWebPropertyId _mgpProfileId
               _mgpGoalId
+              _mgpQuotaUser
+              (Just _mgpPrettyPrint)
               _mgpUserIP
-              _mgpProfileId
-              _mgpAccountId
+              _mgpFields
               _mgpKey
               _mgpOAuthToken
-              _mgpFields
               (Just AltJSON)
               _mgpGoal
           where go

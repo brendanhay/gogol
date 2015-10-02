@@ -53,19 +53,19 @@ import           Network.Google.Prelude
 type PromoOfferDismissResource =
      "promooffer" :>
        "dismiss" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
+         QueryParam "androidId" Text :>
+           QueryParam "device" Text :>
              QueryParam "manufacturer" Text :>
-               QueryParam "userIp" Text :>
-                 QueryParam "serial" Text :>
-                   QueryParam "device" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "model" Text :>
-                         QueryParam "offerId" Text :>
-                           QueryParam "product" Text :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "androidId" Text :>
-                                 QueryParam "fields" Text :>
+               QueryParam "model" Text :>
+                 QueryParam "offerId" Text :>
+                   QueryParam "product" Text :>
+                     QueryParam "serial" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- |
@@ -214,18 +214,17 @@ instance GoogleRequest PromoOfferDismiss' where
         type Rs PromoOfferDismiss' = ()
         request = requestWithRoute defReq booksURL
         requestWithRoute r u PromoOfferDismiss'{..}
-          = go _podQuotaUser (Just _podPrettyPrint)
-              _podManufacturer
-              _podUserIP
-              _podSerial
-              _podDevice
-              _podKey
+          = go _podAndroidId _podDevice _podManufacturer
               _podModel
               _podOfferId
               _podProduct
-              _podOAuthToken
-              _podAndroidId
+              _podSerial
+              _podQuotaUser
+              (Just _podPrettyPrint)
+              _podUserIP
               _podFields
+              _podKey
+              _podOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

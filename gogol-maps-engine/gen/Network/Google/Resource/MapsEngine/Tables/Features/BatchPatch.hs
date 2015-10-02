@@ -64,9 +64,9 @@ type TablesFeaturesBatchPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] FeaturesBatchPatchRequest :>
                              Post '[JSON] ()
@@ -187,12 +187,11 @@ instance GoogleRequest TablesFeaturesBatchPatch'
         type Rs TablesFeaturesBatchPatch' = ()
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u TablesFeaturesBatchPatch'{..}
-          = go _tfbpQuotaUser (Just _tfbpPrettyPrint)
+          = go _tfbpId _tfbpQuotaUser (Just _tfbpPrettyPrint)
               _tfbpUserIP
-              _tfbpKey
-              _tfbpId
-              _tfbpOAuthToken
               _tfbpFields
+              _tfbpKey
+              _tfbpOAuthToken
               (Just AltJSON)
               _tfbpFeaturesBatchPatchRequest
           where go

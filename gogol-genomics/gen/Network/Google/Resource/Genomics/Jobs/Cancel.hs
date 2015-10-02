@@ -52,9 +52,9 @@ type JobsCancelResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Cancels a job by ID. Note that it is possible for partial results to be
@@ -147,11 +147,11 @@ instance GoogleRequest JobsCancel' where
         type Rs JobsCancel' = ()
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u JobsCancel'{..}
-          = go _jcQuotaUser (Just _jcPrettyPrint) _jcJobId
+          = go _jcJobId _jcQuotaUser (Just _jcPrettyPrint)
               _jcUserIP
+              _jcFields
               _jcKey
               _jcOAuthToken
-              _jcFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy JobsCancelResource)

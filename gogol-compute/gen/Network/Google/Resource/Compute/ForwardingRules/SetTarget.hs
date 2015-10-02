@@ -57,9 +57,9 @@ type ForwardingRulesSetTargetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] TargetReference :>
                                  Post '[JSON] Operation
@@ -191,14 +191,13 @@ instance GoogleRequest ForwardingRulesSetTarget'
         type Rs ForwardingRulesSetTarget' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u ForwardingRulesSetTarget'{..}
-          = go _frstQuotaUser (Just _frstPrettyPrint)
-              _frstProject
-              _frstForwardingRule
+          = go _frstProject _frstRegion _frstForwardingRule
+              _frstQuotaUser
+              (Just _frstPrettyPrint)
               _frstUserIP
-              _frstKey
-              _frstRegion
-              _frstOAuthToken
               _frstFields
+              _frstKey
+              _frstOAuthToken
               (Just AltJSON)
               _frstTargetReference
           where go

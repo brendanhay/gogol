@@ -62,9 +62,9 @@ type InstallsPatchResource =
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] Install :>
                                      Patch '[JSON] Install
@@ -203,15 +203,14 @@ instance GoogleRequest InstallsPatch' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u InstallsPatch'{..}
-          = go _ipQuotaUser (Just _ipPrettyPrint)
-              _ipEnterpriseId
-              _ipUserIP
-              _ipUserId
+          = go _ipEnterpriseId _ipUserId _ipDeviceId
               _ipInstallId
-              _ipKey
-              _ipDeviceId
-              _ipOAuthToken
+              _ipQuotaUser
+              (Just _ipPrettyPrint)
+              _ipUserIP
               _ipFields
+              _ipKey
+              _ipOAuthToken
               (Just AltJSON)
               _ipInstall
           where go

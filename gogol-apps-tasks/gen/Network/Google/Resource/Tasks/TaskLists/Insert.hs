@@ -52,9 +52,9 @@ type TaskListsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] TaskList :> Post '[JSON] TaskList
 
@@ -153,9 +153,9 @@ instance GoogleRequest TaskListsInsert' where
         request = requestWithRoute defReq appsTasksURL
         requestWithRoute r u TaskListsInsert'{..}
           = go _tliQuotaUser (Just _tliPrettyPrint) _tliUserIP
+              _tliFields
               _tliKey
               _tliOAuthToken
-              _tliFields
               (Just AltJSON)
               _tliTaskList
           where go

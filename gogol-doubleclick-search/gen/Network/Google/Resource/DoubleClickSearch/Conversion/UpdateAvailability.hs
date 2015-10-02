@@ -51,9 +51,9 @@ type ConversionUpdateAvailabilityResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] UpdateAvailabilityRequest :>
                          Post '[JSON] UpdateAvailabilityResponse
@@ -159,9 +159,9 @@ instance GoogleRequest ConversionUpdateAvailability'
         requestWithRoute r u
           ConversionUpdateAvailability'{..}
           = go _cuaQuotaUser (Just _cuaPrettyPrint) _cuaUserIP
+              _cuaFields
               _cuaKey
               _cuaOAuthToken
-              _cuaFields
               (Just AltJSON)
               _cuaUpdateAvailabilityRequest
           where go

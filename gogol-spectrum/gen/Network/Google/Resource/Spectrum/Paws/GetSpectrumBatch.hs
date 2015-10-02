@@ -50,9 +50,9 @@ type PawsGetSpectrumBatchResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] PawsGetSpectrumBatchRequest :>
                        Post '[JSON] PawsGetSpectrumBatchResponse
@@ -156,9 +156,9 @@ instance GoogleRequest PawsGetSpectrumBatch' where
         requestWithRoute r u PawsGetSpectrumBatch'{..}
           = go _pgsbQuotaUser (Just _pgsbPrettyPrint)
               _pgsbUserIP
+              _pgsbFields
               _pgsbKey
               _pgsbOAuthToken
-              _pgsbFields
               (Just AltJSON)
               _pgsbPawsGetSpectrumBatchRequest
           where go

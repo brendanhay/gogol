@@ -52,9 +52,9 @@ type PlacementGroupsUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] PlacementGroup :>
                            Put '[JSON] PlacementGroup
@@ -163,11 +163,12 @@ instance GoogleRequest PlacementGroupsUpdate' where
         type Rs PlacementGroupsUpdate' = PlacementGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementGroupsUpdate'{..}
-          = go _pguQuotaUser (Just _pguPrettyPrint) _pguUserIP
-              _pguProfileId
+          = go _pguProfileId _pguQuotaUser
+              (Just _pguPrettyPrint)
+              _pguUserIP
+              _pguFields
               _pguKey
               _pguOAuthToken
-              _pguFields
               (Just AltJSON)
               _pguPlacementGroup
           where go

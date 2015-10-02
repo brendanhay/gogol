@@ -51,9 +51,9 @@ type TimelineAttachmentsListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] AttachmentsListResponse
 
@@ -151,11 +151,11 @@ instance GoogleRequest TimelineAttachmentsList' where
              AttachmentsListResponse
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u TimelineAttachmentsList'{..}
-          = go _talQuotaUser (Just _talPrettyPrint) _talUserIP
-              _talItemId
+          = go _talItemId _talQuotaUser (Just _talPrettyPrint)
+              _talUserIP
+              _talFields
               _talKey
               _talOAuthToken
-              _talFields
               (Just AltJSON)
           where go
                   = clientWithRoute

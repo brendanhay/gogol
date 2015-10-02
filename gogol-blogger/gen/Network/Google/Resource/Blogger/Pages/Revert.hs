@@ -54,9 +54,9 @@ type PagesRevertResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Post '[JSON] Page
 
 -- | Revert a published or scheduled page to draft state.
@@ -162,12 +162,12 @@ instance GoogleRequest PagesRevert' where
         type Rs PagesRevert' = Page
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PagesRevert'{..}
-          = go _pagQuotaUser (Just _pagPrettyPrint) _pagUserIP
-              _pagBlogId
-              _pagPageId
+          = go _pagBlogId _pagPageId _pagQuotaUser
+              (Just _pagPrettyPrint)
+              _pagUserIP
+              _pagFields
               _pagKey
               _pagOAuthToken
-              _pagFields
               (Just AltJSON)
           where go
                   = clientWithRoute

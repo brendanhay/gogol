@@ -56,13 +56,13 @@ type ManagementCustomDimensionsUpdateResource =
              Capture "webPropertyId" Text :>
                "customDimensions" :>
                  Capture "customDimensionId" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "ignoreCustomDataSourceLinks" Bool :>
+                   QueryParam "ignoreCustomDataSourceLinks" Bool :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] CustomDimension :>
                                      Put '[JSON] CustomDimension
@@ -210,15 +210,16 @@ instance GoogleRequest
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
           ManagementCustomDimensionsUpdate'{..}
-          = go _mcduQuotaUser (Just _mcduPrettyPrint)
-              _mcduWebPropertyId
-              (Just _mcduIgnoreCustomDataSourceLinks)
-              _mcduUserIP
+          = go (Just _mcduIgnoreCustomDataSourceLinks)
               _mcduAccountId
+              _mcduWebPropertyId
+              _mcduCustomDimensionId
+              _mcduQuotaUser
+              (Just _mcduPrettyPrint)
+              _mcduUserIP
+              _mcduFields
               _mcduKey
               _mcduOAuthToken
-              _mcduCustomDimensionId
-              _mcduFields
               (Just AltJSON)
               _mcduCustomDimension
           where go

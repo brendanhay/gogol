@@ -54,9 +54,9 @@ type AccountsContainersFoldersListResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ListFoldersResponse
 
@@ -170,13 +170,12 @@ instance GoogleRequest AccountsContainersFoldersList'
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersFoldersList'{..}
-          = go _acflQuotaUser (Just _acflPrettyPrint)
-              _acflContainerId
+          = go _acflAccountId _acflContainerId _acflQuotaUser
+              (Just _acflPrettyPrint)
               _acflUserIP
-              _acflAccountId
+              _acflFields
               _acflKey
               _acflOAuthToken
-              _acflFields
               (Just AltJSON)
           where go
                   = clientWithRoute

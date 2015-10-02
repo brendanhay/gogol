@@ -52,9 +52,9 @@ type SitesUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Site :> Put '[JSON] Site
 
@@ -157,11 +157,11 @@ instance GoogleRequest SitesUpdate' where
         type Rs SitesUpdate' = Site
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u SitesUpdate'{..}
-          = go _suQuotaUser (Just _suPrettyPrint) _suUserIP
-              _suProfileId
+          = go _suProfileId _suQuotaUser (Just _suPrettyPrint)
+              _suUserIP
+              _suFields
               _suKey
               _suOAuthToken
-              _suFields
               (Just AltJSON)
               _suSite
           where go

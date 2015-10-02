@@ -55,17 +55,17 @@ type TransferOperationsCancelResource =
      "v1" :>
        "{+name}:cancel" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :> Post '[JSON] Empty
 
 -- | Cancels a transfer. Use the get method to check whether the cancellation
@@ -217,17 +217,17 @@ instance GoogleRequest TransferOperationsCancel'
         type Rs TransferOperationsCancel' = Empty
         request = requestWithRoute defReq storageTransferURL
         requestWithRoute r u TransferOperationsCancel'{..}
-          = go _tocXgafv _tocQuotaUser (Just _tocPrettyPrint)
-              _tocUploadProtocol
-              (Just _tocPp)
-              _tocAccessToken
-              _tocUploadType
-              _tocBearerToken
-              _tocKey
-              _tocName
-              _tocOAuthToken
-              _tocFields
+          = go _tocXgafv _tocAccessToken _tocBearerToken
               _tocCallback
+              (Just _tocPp)
+              _tocUploadType
+              _tocUploadProtocol
+              _tocName
+              _tocQuotaUser
+              (Just _tocPrettyPrint)
+              _tocFields
+              _tocKey
+              _tocOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

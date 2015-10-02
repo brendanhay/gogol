@@ -58,17 +58,17 @@ type AppsModulesGetResource =
            "modules" :>
              Capture "modulesId" Text :>
                QueryParam "$.xgafv" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "key" Key :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "callback" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "quotaUser" Text :>
+                               QueryParam "prettyPrint" Bool :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] Module
 
@@ -231,18 +231,18 @@ instance GoogleRequest AppsModulesGet' where
         type Rs AppsModulesGet' = Module
         request = requestWithRoute defReq appEngineURL
         requestWithRoute r u AppsModulesGet'{..}
-          = go _amgXgafv _amgQuotaUser (Just _amgPrettyPrint)
-              _amgUploadProtocol
-              (Just _amgPp)
-              _amgAccessToken
-              _amgUploadType
-              _amgModulesId
-              _amgBearerToken
-              _amgKey
-              _amgAppsId
-              _amgOAuthToken
-              _amgFields
+          = go _amgXgafv _amgAccessToken _amgBearerToken
               _amgCallback
+              (Just _amgPp)
+              _amgUploadType
+              _amgUploadProtocol
+              _amgAppsId
+              _amgModulesId
+              _amgQuotaUser
+              (Just _amgPrettyPrint)
+              _amgFields
+              _amgKey
+              _amgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

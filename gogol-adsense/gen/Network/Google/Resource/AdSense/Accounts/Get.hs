@@ -48,13 +48,13 @@ import           Network.Google.Prelude
 type AccountsGetResource =
      "accounts" :>
        Capture "accountId" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "tree" Bool :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+         QueryParam "tree" Bool :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Account
 
 -- | Get information about the selected AdSense account.
@@ -155,12 +155,12 @@ instance GoogleRequest AccountsGet' where
         type Rs AccountsGet' = Account
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u AccountsGet'{..}
-          = go _agQuotaUser (Just _agPrettyPrint) _agUserIP
-              _agTree
-              _agAccountId
+          = go _agTree _agAccountId _agQuotaUser
+              (Just _agPrettyPrint)
+              _agUserIP
+              _agFields
               _agKey
               _agOAuthToken
-              _agFields
               (Just AltJSON)
           where go
                   = clientWithRoute

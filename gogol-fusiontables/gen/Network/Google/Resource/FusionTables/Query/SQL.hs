@@ -49,27 +49,27 @@ import           Network.Google.Prelude
 -- 'QuerySQL'' request conforms to.
 type QuerySQLResource =
      "query" :>
-       QueryParam "typed" Bool :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "hdrs" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "sql" Text :>
-                       QueryParam "fields" Text :>
+       QueryParam "hdrs" Bool :>
+         QueryParam "typed" Bool :>
+           QueryParam "sql" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Post '[JSON] SQLresponse
        :<|>
        "query" :>
-         QueryParam "typed" Bool :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "hdrs" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "sql" Text :>
-                         QueryParam "fields" Text :>
+         QueryParam "hdrs" Bool :>
+           QueryParam "typed" Bool :>
+             QueryParam "sql" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" Media :> Post '[OctetStream] Stream
 
 -- | Executes a Fusion Tables SQL statement, which can be any of - SELECT -
@@ -185,14 +185,13 @@ instance GoogleRequest QuerySQL' where
         type Rs QuerySQL' = SQLresponse
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u QuerySQL'{..}
-          = go _qsqlTyped _qsqlQuotaUser
+          = go _qsqlHdrs _qsqlTyped (Just _qsqlSQL)
+              _qsqlQuotaUser
               (Just _qsqlPrettyPrint)
-              _qsqlHdrs
               _qsqlUserIP
+              _qsqlFields
               _qsqlKey
               _qsqlOAuthToken
-              (Just _qsqlSQL)
-              _qsqlFields
               (Just AltJSON)
           where go :<|> _
                   = clientWithRoute (Proxy :: Proxy QuerySQLResource) r
@@ -202,14 +201,13 @@ instance GoogleRequest QuerySQL' where
         type Rs (Download QuerySQL') = Stream
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u QuerySQL'{..}
-          = go _qsqlTyped _qsqlQuotaUser
+          = go _qsqlHdrs _qsqlTyped (Just _qsqlSQL)
+              _qsqlQuotaUser
               (Just _qsqlPrettyPrint)
-              _qsqlHdrs
               _qsqlUserIP
+              _qsqlFields
               _qsqlKey
               _qsqlOAuthToken
-              (Just _qsqlSQL)
-              _qsqlFields
               (Just Media)
           where go :<|> _
                   = clientWithRoute (Proxy :: Proxy QuerySQLResource) r

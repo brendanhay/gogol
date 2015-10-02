@@ -67,18 +67,18 @@ type ControllerDebuggeesBreakpointsListResource =
            Capture "debuggeeId" Text :>
              "breakpoints" :>
                QueryParam "$.xgafv" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "key" Key :>
-                                 QueryParam "waitToken" Text :>
-                                   QueryParam "oauth_token" OAuthToken :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "callback" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "waitToken" Text :>
+                               QueryParam "quotaUser" Text :>
+                                 QueryParam "prettyPrint" Bool :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "key" Key :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON]
                                              ListActiveBreakpointsResponse
@@ -261,19 +261,18 @@ instance GoogleRequest
         request = requestWithRoute defReq debuggerURL
         requestWithRoute r u
           ControllerDebuggeesBreakpointsList'{..}
-          = go _cdblXgafv _cdblQuotaUser
-              (Just _cdblPrettyPrint)
-              _cdblUploadProtocol
+          = go _cdblXgafv _cdblAccessToken _cdblBearerToken
+              _cdblCallback
               (Just _cdblPp)
-              _cdblAccessToken
               _cdblUploadType
-              _cdblBearerToken
-              _cdblKey
+              _cdblUploadProtocol
               _cdblWaitToken
               _cdblDebuggeeId
-              _cdblOAuthToken
+              _cdblQuotaUser
+              (Just _cdblPrettyPrint)
               _cdblFields
-              _cdblCallback
+              _cdblKey
+              _cdblOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

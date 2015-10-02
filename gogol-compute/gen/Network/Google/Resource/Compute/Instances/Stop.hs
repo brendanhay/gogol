@@ -61,9 +61,9 @@ type InstancesStopResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | This method stops a running instance, shutting it down cleanly, and
@@ -180,13 +180,12 @@ instance GoogleRequest InstancesStop' where
         type Rs InstancesStop' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstancesStop'{..}
-          = go _isQuotaUser (Just _isPrettyPrint) _isProject
+          = go _isProject _isZone _isInstance _isQuotaUser
+              (Just _isPrettyPrint)
               _isUserIP
-              _isZone
+              _isFields
               _isKey
               _isOAuthToken
-              _isFields
-              _isInstance
               (Just AltJSON)
           where go
                   = clientWithRoute

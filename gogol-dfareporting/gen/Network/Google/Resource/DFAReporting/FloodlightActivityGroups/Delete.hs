@@ -53,9 +53,9 @@ type FloodlightActivityGroupsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing floodlight activity group.
@@ -165,13 +165,12 @@ instance GoogleRequest
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           FloodlightActivityGroupsDelete'{..}
-          = go _fagdQuotaUser (Just _fagdPrettyPrint)
+          = go _fagdProfileId _fagdId _fagdQuotaUser
+              (Just _fagdPrettyPrint)
               _fagdUserIP
-              _fagdProfileId
-              _fagdKey
-              _fagdId
-              _fagdOAuthToken
               _fagdFields
+              _fagdKey
+              _fagdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -57,9 +57,9 @@ type ManagementCustomMetricsGetResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] CustomMetric
 
@@ -181,14 +181,14 @@ instance GoogleRequest ManagementCustomMetricsGet'
         type Rs ManagementCustomMetricsGet' = CustomMetric
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementCustomMetricsGet'{..}
-          = go _mcmgQuotaUser (Just _mcmgPrettyPrint)
+          = go _mcmgAccountId _mcmgWebPropertyId
               _mcmgCustomMetricId
-              _mcmgWebPropertyId
+              _mcmgQuotaUser
+              (Just _mcmgPrettyPrint)
               _mcmgUserIP
-              _mcmgAccountId
+              _mcmgFields
               _mcmgKey
               _mcmgOAuthToken
-              _mcmgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

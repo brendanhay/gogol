@@ -46,13 +46,13 @@ import           Network.Google.Prelude
 -- 'EnterprisesList'' request conforms to.
 type EnterprisesListResource =
      "enterprises" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "domain" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+       QueryParam "domain" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] EnterprisesListResponse
 
@@ -150,11 +150,12 @@ instance GoogleRequest EnterprisesList' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u EnterprisesList'{..}
-          = go _ellQuotaUser (Just _ellPrettyPrint) _ellUserIP
-              (Just _ellDomain)
+          = go (Just _ellDomain) _ellQuotaUser
+              (Just _ellPrettyPrint)
+              _ellUserIP
+              _ellFields
               _ellKey
               _ellOAuthToken
-              _ellFields
               (Just AltJSON)
           where go
                   = clientWithRoute

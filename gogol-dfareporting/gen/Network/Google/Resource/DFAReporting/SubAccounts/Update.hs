@@ -52,9 +52,9 @@ type SubAccountsUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] SubAccount :> Put '[JSON] SubAccount
 
@@ -162,11 +162,12 @@ instance GoogleRequest SubAccountsUpdate' where
         type Rs SubAccountsUpdate' = SubAccount
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u SubAccountsUpdate'{..}
-          = go _sauQuotaUser (Just _sauPrettyPrint) _sauUserIP
-              _sauProfileId
+          = go _sauProfileId _sauQuotaUser
+              (Just _sauPrettyPrint)
+              _sauUserIP
+              _sauFields
               _sauKey
               _sauOAuthToken
-              _sauFields
               (Just AltJSON)
               _sauSubAccount
           where go

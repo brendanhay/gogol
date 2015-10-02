@@ -56,9 +56,9 @@ type OrdersGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Order
 
 -- | Gets one order by ID.
@@ -170,13 +170,12 @@ instance GoogleRequest OrdersGet' where
         type Rs OrdersGet' = Order
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u OrdersGet'{..}
-          = go _ogQuotaUser (Just _ogPrettyPrint) _ogUserIP
-              _ogProfileId
-              _ogKey
-              _ogId
-              _ogProjectId
-              _ogOAuthToken
+          = go _ogProfileId _ogProjectId _ogId _ogQuotaUser
+              (Just _ogPrettyPrint)
+              _ogUserIP
               _ogFields
+              _ogKey
+              _ogOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy OrdersGetResource)

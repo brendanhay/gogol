@@ -47,14 +47,14 @@ import           Network.Google.Prelude
 -- 'TableList'' request conforms to.
 type TableListResource =
      "tables" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "maxResults" Word32 :>
-                     QueryParam "fields" Text :>
+       QueryParam "maxResults" Word32 :>
+         QueryParam "pageToken" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] TableList
 
 -- | Retrieves a list of tables a user owns.
@@ -159,12 +159,12 @@ instance GoogleRequest TableList' where
         type Rs TableList' = TableList
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TableList'{..}
-          = go _tabQuotaUser (Just _tabPrettyPrint) _tabUserIP
-              _tabKey
-              _tabPageToken
-              _tabOAuthToken
-              _tabMaxResults
+          = go _tabMaxResults _tabPageToken _tabQuotaUser
+              (Just _tabPrettyPrint)
+              _tabUserIP
               _tabFields
+              _tabKey
+              _tabOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TableListResource)

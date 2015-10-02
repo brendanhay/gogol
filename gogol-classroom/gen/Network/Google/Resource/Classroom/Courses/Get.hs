@@ -59,17 +59,17 @@ type CoursesGetResource =
        "courses" :>
          Capture "id" Text :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
+             QueryParam "access_token" Text :>
+               QueryParam "bearer_token" Text :>
+                 QueryParam "callback" Text :>
                    QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] Course
 
@@ -223,17 +223,17 @@ instance GoogleRequest CoursesGet' where
         type Rs CoursesGet' = Course
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u CoursesGet'{..}
-          = go _cgXgafv _cgQuotaUser (Just _cgPrettyPrint)
-              _cgUploadProtocol
-              (Just _cgPp)
-              _cgAccessToken
-              _cgUploadType
-              _cgBearerToken
-              _cgKey
-              _cgId
-              _cgOAuthToken
-              _cgFields
+          = go _cgXgafv _cgAccessToken _cgBearerToken
               _cgCallback
+              (Just _cgPp)
+              _cgUploadType
+              _cgUploadProtocol
+              _cgId
+              _cgQuotaUser
+              (Just _cgPrettyPrint)
+              _cgFields
+              _cgKey
+              _cgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy CoursesGetResource)

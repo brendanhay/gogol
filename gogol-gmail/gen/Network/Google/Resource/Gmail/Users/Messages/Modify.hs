@@ -54,9 +54,9 @@ type UsersMessagesModifyResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] ModifyMessageRequest :>
                              Post '[JSON] Message
@@ -175,12 +175,12 @@ instance GoogleRequest UsersMessagesModify' where
         type Rs UsersMessagesModify' = Message
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersMessagesModify'{..}
-          = go _ummQuotaUser (Just _ummPrettyPrint) _ummUserIP
-              _ummUserId
-              _ummKey
-              _ummId
-              _ummOAuthToken
+          = go _ummUserId _ummId _ummQuotaUser
+              (Just _ummPrettyPrint)
+              _ummUserIP
               _ummFields
+              _ummKey
+              _ummOAuthToken
               (Just AltJSON)
               _ummModifyMessageRequest
           where go

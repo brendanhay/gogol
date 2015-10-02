@@ -57,9 +57,9 @@ type InstancesResetSSLConfigResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Deletes all client certificates and generates a new server SSL
@@ -169,13 +169,12 @@ instance GoogleRequest InstancesResetSSLConfig' where
         type Rs InstancesResetSSLConfig' = Operation
         request = requestWithRoute defReq sQLAdminURL
         requestWithRoute r u InstancesResetSSLConfig'{..}
-          = go _irscQuotaUser (Just _irscPrettyPrint)
-              _irscProject
+          = go _irscProject _irscInstance _irscQuotaUser
+              (Just _irscPrettyPrint)
               _irscUserIP
+              _irscFields
               _irscKey
               _irscOAuthToken
-              _irscFields
-              _irscInstance
               (Just AltJSON)
           where go
                   = clientWithRoute

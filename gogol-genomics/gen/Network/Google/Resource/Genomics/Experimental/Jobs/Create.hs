@@ -52,9 +52,9 @@ type ExperimentalJobsCreateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] ExperimentalCreateJobRequest :>
                            Post '[JSON] ExperimentalCreateJobResponse
@@ -156,9 +156,9 @@ instance GoogleRequest ExperimentalJobsCreate' where
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u ExperimentalJobsCreate'{..}
           = go _ejcQuotaUser (Just _ejcPrettyPrint) _ejcUserIP
+              _ejcFields
               _ejcKey
               _ejcOAuthToken
-              _ejcFields
               (Just AltJSON)
               _ejcExperimentalCreateJobRequest
           where go

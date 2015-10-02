@@ -48,13 +48,13 @@ import           Network.Google.Prelude
 type MapsGetResource =
      "maps" :>
        Capture "id" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "version" MapsEngineMapsGetVersion :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+         QueryParam "version" MapsEngineMapsGetVersion :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Map
 
 -- | Return metadata for a particular map.
@@ -158,12 +158,12 @@ instance GoogleRequest MapsGet' where
         type Rs MapsGet' = Map
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u MapsGet'{..}
-          = go _mgQuotaUser (Just _mgPrettyPrint) _mgUserIP
-              _mgKey
-              _mgVersion
-              _mgId
-              _mgOAuthToken
+          = go _mgVersion _mgId _mgQuotaUser
+              (Just _mgPrettyPrint)
+              _mgUserIP
               _mgFields
+              _mgKey
+              _mgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy MapsGetResource) r

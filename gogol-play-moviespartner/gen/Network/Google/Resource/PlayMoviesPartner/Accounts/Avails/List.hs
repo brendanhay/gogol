@@ -65,27 +65,28 @@ type AccountsAvailsListResource =
        "accounts" :>
          Capture "accountId" Text :>
            "avails" :>
-             QueryParam "altId" Text :>
-               QueryParams "pphNames" Text :>
-                 QueryParam "$.xgafv" Text :>
-                   QueryParams "studioNames" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParams "videoIds" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "upload_protocol" Text :>
-                             QueryParam "pp" Bool :>
-                               QueryParam "access_token" Text :>
-                                 QueryParam "uploadType" Text :>
-                                   QueryParams "territories" Text :>
-                                     QueryParam "bearer_token" Text :>
-                                       QueryParam "key" Key :>
-                                         QueryParam "pageToken" Text :>
-                                           QueryParam "title" Text :>
-                                             QueryParam "oauth_token" OAuthToken
-                                               :>
-                                               QueryParam "pageSize" Int32 :>
-                                                 QueryParam "fields" Text :>
-                                                   QueryParam "callback" Text :>
+             QueryParam "$.xgafv" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "altId" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "pageSize" Int32 :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "pp" Bool :>
+                             QueryParams "pphNames" Text :>
+                               QueryParams "studioNames" Text :>
+                                 QueryParams "territories" Text :>
+                                   QueryParam "title" Text :>
+                                     QueryParam "uploadType" Text :>
+                                       QueryParam "upload_protocol" Text :>
+                                         QueryParams "videoIds" Text :>
+                                           QueryParam "quotaUser" Text :>
+                                             QueryParam "prettyPrint" Bool :>
+                                               QueryParam "fields" Text :>
+                                                 QueryParam "key" Key :>
+                                                   QueryParam "oauth_token"
+                                                     OAuthToken
+                                                     :>
                                                      QueryParam "alt" AltJSON :>
                                                        Get '[JSON]
                                                          ListAvailsResponse
@@ -316,24 +317,25 @@ instance GoogleRequest AccountsAvailsList' where
         request
           = requestWithRoute defReq playMoviesPartnerURL
         requestWithRoute r u AccountsAvailsList'{..}
-          = go _aalAltId _aalPphNames _aalXgafv _aalStudioNames
-              _aalQuotaUser
-              _aalVideoIds
-              (Just _aalPrettyPrint)
-              _aalUploadProtocol
-              (Just _aalPp)
-              _aalAccessToken
-              _aalUploadType
-              _aalTerritories
-              _aalAccountId
+          = go _aalXgafv _aalAccessToken _aalAltId
               _aalBearerToken
-              _aalKey
-              _aalPageToken
-              _aalTitle
-              _aalOAuthToken
-              _aalPageSize
-              _aalFields
               _aalCallback
+              _aalPageSize
+              _aalPageToken
+              (Just _aalPp)
+              _aalPphNames
+              _aalStudioNames
+              _aalTerritories
+              _aalTitle
+              _aalUploadType
+              _aalUploadProtocol
+              _aalVideoIds
+              _aalAccountId
+              _aalQuotaUser
+              (Just _aalPrettyPrint)
+              _aalFields
+              _aalKey
+              _aalOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

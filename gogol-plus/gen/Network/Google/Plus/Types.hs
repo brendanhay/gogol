@@ -469,10 +469,10 @@ module Network.Google.Plus.Types
 
     -- * ACL
     , ACL
-    , aCL
-    , aclKind
-    , aclItems
-    , aclDescription
+    , acl
+    , aKind
+    , aItems
+    , aDescription
 
     -- * MomentsFeed
     , MomentsFeed

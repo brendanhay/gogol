@@ -59,9 +59,9 @@ type TabledataInsertAllResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] TableDataInsertAllRequest :>
                                    Post '[JSON] TableDataInsertAllResponse
@@ -192,13 +192,13 @@ instance GoogleRequest TabledataInsertAll' where
              TableDataInsertAllResponse
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u TabledataInsertAll'{..}
-          = go _tiaQuotaUser (Just _tiaPrettyPrint) _tiaUserIP
-              _tiaKey
-              _tiaDatasetId
-              _tiaProjectId
-              _tiaOAuthToken
-              _tiaTableId
+          = go _tiaProjectId _tiaDatasetId _tiaTableId
+              _tiaQuotaUser
+              (Just _tiaPrettyPrint)
+              _tiaUserIP
               _tiaFields
+              _tiaKey
+              _tiaOAuthToken
               (Just AltJSON)
               _tiaTableDataInsertAllRequest
           where go

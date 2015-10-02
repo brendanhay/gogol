@@ -56,9 +56,9 @@ type ManagementWebPropertyUserLinksInsertResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] EntityUserLink :>
                                  Post '[JSON] EntityUserLink
@@ -185,13 +185,13 @@ instance GoogleRequest
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
           ManagementWebPropertyUserLinksInsert'{..}
-          = go _mwpuliQuotaUser (Just _mwpuliPrettyPrint)
-              _mwpuliWebPropertyId
+          = go _mwpuliAccountId _mwpuliWebPropertyId
+              _mwpuliQuotaUser
+              (Just _mwpuliPrettyPrint)
               _mwpuliUserIP
-              _mwpuliAccountId
+              _mwpuliFields
               _mwpuliKey
               _mwpuliOAuthToken
-              _mwpuliFields
               (Just AltJSON)
               _mwpuliEntityUserLink
           where go

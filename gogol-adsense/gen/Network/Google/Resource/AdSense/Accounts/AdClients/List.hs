@@ -50,14 +50,14 @@ type AccountsAdClientsListResource =
      "accounts" :>
        Capture "accountId" Text :>
          "adclients" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "maxResults" Int32 :>
-                         QueryParam "fields" Text :>
+           QueryParam "maxResults" Int32 :>
+             QueryParam "pageToken" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] AdClients
 
 -- | List all ad clients in the specified account.
@@ -178,14 +178,13 @@ instance GoogleRequest AccountsAdClientsList' where
         type Rs AccountsAdClientsList' = AdClients
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u AccountsAdClientsList'{..}
-          = go _aaclQuotaUser (Just _aaclPrettyPrint)
+          = go _aaclMaxResults _aaclPageToken _aaclAccountId
+              _aaclQuotaUser
+              (Just _aaclPrettyPrint)
               _aaclUserIP
-              _aaclAccountId
-              _aaclKey
-              _aaclPageToken
-              _aaclOAuthToken
-              _aaclMaxResults
               _aaclFields
+              _aaclKey
+              _aaclOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

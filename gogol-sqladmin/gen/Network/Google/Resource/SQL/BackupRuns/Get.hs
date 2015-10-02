@@ -56,9 +56,9 @@ type BackupRunsGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] BackupRun
 
 -- | Retrieves a resource containing information about a backup run.
@@ -173,13 +173,12 @@ instance GoogleRequest BackupRunsGet' where
         type Rs BackupRunsGet' = BackupRun
         request = requestWithRoute defReq sQLAdminURL
         requestWithRoute r u BackupRunsGet'{..}
-          = go _brgQuotaUser (Just _brgPrettyPrint) _brgProject
+          = go _brgProject _brgInstance _brgId _brgQuotaUser
+              (Just _brgPrettyPrint)
               _brgUserIP
-              _brgKey
-              _brgId
-              _brgOAuthToken
               _brgFields
-              _brgInstance
+              _brgKey
+              _brgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

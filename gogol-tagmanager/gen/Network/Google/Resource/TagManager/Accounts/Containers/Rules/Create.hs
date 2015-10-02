@@ -55,9 +55,9 @@ type AccountsContainersRulesCreateResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Rule :> Post '[JSON] Rule
 
@@ -179,13 +179,12 @@ instance GoogleRequest AccountsContainersRulesCreate'
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersRulesCreate'{..}
-          = go _acrcQuotaUser (Just _acrcPrettyPrint)
-              _acrcContainerId
+          = go _acrcAccountId _acrcContainerId _acrcQuotaUser
+              (Just _acrcPrettyPrint)
               _acrcUserIP
-              _acrcAccountId
+              _acrcFields
               _acrcKey
               _acrcOAuthToken
-              _acrcFields
               (Just AltJSON)
               _acrcRule
           where go

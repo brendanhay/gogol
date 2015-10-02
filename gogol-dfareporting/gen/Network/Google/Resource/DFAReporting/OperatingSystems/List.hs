@@ -51,9 +51,9 @@ type OperatingSystemsListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] OperatingSystemsListResponse
 
@@ -151,11 +151,12 @@ instance GoogleRequest OperatingSystemsList' where
              OperatingSystemsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u OperatingSystemsList'{..}
-          = go _oslQuotaUser (Just _oslPrettyPrint) _oslUserIP
-              _oslProfileId
+          = go _oslProfileId _oslQuotaUser
+              (Just _oslPrettyPrint)
+              _oslUserIP
+              _oslFields
               _oslKey
               _oslOAuthToken
-              _oslFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -50,9 +50,9 @@ type EnterprisesGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Enterprise
 
 -- | Retrieves the name and domain of an enterprise.
@@ -147,12 +147,12 @@ instance GoogleRequest EnterprisesGet' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u EnterprisesGet'{..}
-          = go _egQuotaUser (Just _egPrettyPrint)
-              _egEnterpriseId
+          = go _egEnterpriseId _egQuotaUser
+              (Just _egPrettyPrint)
               _egUserIP
+              _egFields
               _egKey
               _egOAuthToken
-              _egFields
               (Just AltJSON)
           where go
                   = clientWithRoute

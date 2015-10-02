@@ -51,15 +51,15 @@ type DisksAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
          "disks" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "filter" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] DiskAggregatedList
 
@@ -196,14 +196,14 @@ instance GoogleRequest DisksAggregatedList' where
         type Rs DisksAggregatedList' = DiskAggregatedList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u DisksAggregatedList'{..}
-          = go _dalQuotaUser (Just _dalPrettyPrint) _dalProject
+          = go _dalFilter (Just _dalMaxResults) _dalPageToken
+              _dalProject
+              _dalQuotaUser
+              (Just _dalPrettyPrint)
               _dalUserIP
-              _dalKey
-              _dalFilter
-              _dalPageToken
-              _dalOAuthToken
-              (Just _dalMaxResults)
               _dalFields
+              _dalKey
+              _dalOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

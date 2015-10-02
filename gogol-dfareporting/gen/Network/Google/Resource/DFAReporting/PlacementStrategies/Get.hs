@@ -53,9 +53,9 @@ type PlacementStrategiesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] PlacementStrategy
 
@@ -161,12 +161,12 @@ instance GoogleRequest PlacementStrategiesGet' where
         type Rs PlacementStrategiesGet' = PlacementStrategy
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementStrategiesGet'{..}
-          = go _psgQuotaUser (Just _psgPrettyPrint) _psgUserIP
-              _psgProfileId
-              _psgKey
-              _psgId
-              _psgOAuthToken
+          = go _psgProfileId _psgId _psgQuotaUser
+              (Just _psgPrettyPrint)
+              _psgUserIP
               _psgFields
+              _psgKey
+              _psgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

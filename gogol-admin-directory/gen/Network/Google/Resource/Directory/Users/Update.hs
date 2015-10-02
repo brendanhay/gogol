@@ -51,9 +51,9 @@ type UsersUpdateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] User :> Put '[JSON] User
 
@@ -157,11 +157,11 @@ instance GoogleRequest UsersUpdate' where
         type Rs UsersUpdate' = User
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u UsersUpdate'{..}
-          = go _uuQuotaUser (Just _uuPrettyPrint) _uuUserIP
+          = go _uuUserKey _uuQuotaUser (Just _uuPrettyPrint)
+              _uuUserIP
+              _uuFields
               _uuKey
               _uuOAuthToken
-              _uuUserKey
-              _uuFields
               (Just AltJSON)
               _uuUser
           where go

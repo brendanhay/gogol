@@ -58,18 +58,18 @@ type DeploymentsUpdateResource =
              QueryParam "createPolicy"
                DeploymentManagerDeploymentsUpdateCreatePolicy
                :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "updatePolicy"
-                       DeploymentManagerDeploymentsUpdateUpdatePolicy
-                       :>
-                       QueryParam "deletePolicy"
-                         DeploymentManagerDeploymentsUpdateDeletePolicy
-                         :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+               QueryParam "deletePolicy"
+                 DeploymentManagerDeploymentsUpdateDeletePolicy
+                 :>
+                 QueryParam "updatePolicy"
+                   DeploymentManagerDeploymentsUpdateUpdatePolicy
+                   :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] Deployment :>
                                    Put '[JSON] Operation
@@ -216,16 +216,16 @@ instance GoogleRequest DeploymentsUpdate' where
         request
           = requestWithRoute defReq deploymentManagerURL
         requestWithRoute r u DeploymentsUpdate'{..}
-          = go (Just _duCreatePolicy) _duQuotaUser
-              (Just _duPrettyPrint)
-              _duProject
-              _duUserIP
+          = go (Just _duCreatePolicy) (Just _duDeletePolicy)
               (Just _duUpdatePolicy)
-              (Just _duDeletePolicy)
+              _duProject
+              _duDeployment
+              _duQuotaUser
+              (Just _duPrettyPrint)
+              _duUserIP
+              _duFields
               _duKey
               _duOAuthToken
-              _duFields
-              _duDeployment
               (Just AltJSON)
               _duDeployment
           where go

@@ -51,15 +51,15 @@ type TypesListResource =
      Capture "project" Text :>
        "global" :>
          "types" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "filter" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] TypesListResponse
 
@@ -192,14 +192,14 @@ instance GoogleRequest TypesList' where
         request
           = requestWithRoute defReq deploymentManagerURL
         requestWithRoute r u TypesList'{..}
-          = go _tlQuotaUser (Just _tlPrettyPrint) _tlProject
+          = go _tlFilter (Just _tlMaxResults) _tlPageToken
+              _tlProject
+              _tlQuotaUser
+              (Just _tlPrettyPrint)
               _tlUserIP
-              _tlKey
-              _tlFilter
-              _tlPageToken
-              _tlOAuthToken
-              (Just _tlMaxResults)
               _tlFields
+              _tlKey
+              _tlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TypesListResource)

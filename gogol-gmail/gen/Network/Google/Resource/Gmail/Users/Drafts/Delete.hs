@@ -53,9 +53,9 @@ type UsersDraftsDeleteResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Immediately and permanently deletes the specified draft. Does not simply
@@ -162,12 +162,12 @@ instance GoogleRequest UsersDraftsDelete' where
         type Rs UsersDraftsDelete' = ()
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersDraftsDelete'{..}
-          = go _uddQuotaUser (Just _uddPrettyPrint) _uddUserIP
-              _uddUserId
-              _uddKey
-              _uddId
-              _uddOAuthToken
+          = go _uddUserId _uddId _uddQuotaUser
+              (Just _uddPrettyPrint)
+              _uddUserIP
               _uddFields
+              _uddKey
+              _uddOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

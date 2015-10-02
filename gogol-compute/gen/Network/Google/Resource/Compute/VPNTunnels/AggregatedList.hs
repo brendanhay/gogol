@@ -26,7 +26,7 @@ module Network.Google.Resource.Compute.VPNTunnels.AggregatedList
       VPNTunnelsAggregatedListResource
 
     -- * Creating a Request
-    , vPNTunnelsAggregatedList'
+    , vpnTunnelsAggregatedList'
     , VPNTunnelsAggregatedList'
 
     -- * Request Lenses
@@ -51,21 +51,21 @@ type VPNTunnelsAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
          "vpnTunnels" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "filter" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] VPNTunnelAggregatedList
 
 -- | Retrieves the list of VPN tunnels grouped by scope.
 --
--- /See:/ 'vPNTunnelsAggregatedList'' smart constructor.
+-- /See:/ 'vpnTunnelsAggregatedList'' smart constructor.
 data VPNTunnelsAggregatedList' = VPNTunnelsAggregatedList'
     { _vtalQuotaUser   :: !(Maybe Text)
     , _vtalPrettyPrint :: !Bool
@@ -102,10 +102,10 @@ data VPNTunnelsAggregatedList' = VPNTunnelsAggregatedList'
 -- * 'vtalMaxResults'
 --
 -- * 'vtalFields'
-vPNTunnelsAggregatedList'
+vpnTunnelsAggregatedList'
     :: Text -- ^ 'project'
     -> VPNTunnelsAggregatedList'
-vPNTunnelsAggregatedList' pVtalProject_ =
+vpnTunnelsAggregatedList' pVtalProject_ =
     VPNTunnelsAggregatedList'
     { _vtalQuotaUser = Nothing
     , _vtalPrettyPrint = True
@@ -200,15 +200,15 @@ instance GoogleRequest VPNTunnelsAggregatedList'
              VPNTunnelAggregatedList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u VPNTunnelsAggregatedList'{..}
-          = go _vtalQuotaUser (Just _vtalPrettyPrint)
-              _vtalProject
-              _vtalUserIP
-              _vtalKey
-              _vtalFilter
+          = go _vtalFilter (Just _vtalMaxResults)
               _vtalPageToken
-              _vtalOAuthToken
-              (Just _vtalMaxResults)
+              _vtalProject
+              _vtalQuotaUser
+              (Just _vtalPrettyPrint)
+              _vtalUserIP
               _vtalFields
+              _vtalKey
+              _vtalOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -53,9 +53,9 @@ type AnnotationsUpdateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Annotation :> Put '[JSON] Annotation
 
@@ -162,11 +162,12 @@ instance GoogleRequest AnnotationsUpdate' where
         type Rs AnnotationsUpdate' = Annotation
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u AnnotationsUpdate'{..}
-          = go _auQuotaUser (Just _auPrettyPrint) _auUserIP
-              _auKey
-              _auAnnotationId
-              _auOAuthToken
+          = go _auAnnotationId _auQuotaUser
+              (Just _auPrettyPrint)
+              _auUserIP
               _auFields
+              _auKey
+              _auOAuthToken
               (Just AltJSON)
               _auAnnotation
           where go

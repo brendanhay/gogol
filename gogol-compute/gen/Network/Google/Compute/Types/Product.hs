@@ -997,7 +997,7 @@ instance ToJSON OperationList where
                   ("id" .=) <$> _olId])
 
 --
--- /See:/ 'vPNTunnelsScopedList' smart constructor.
+-- /See:/ 'vpnTunnelsScopedList' smart constructor.
 data VPNTunnelsScopedList = VPNTunnelsScopedList
     { _vtslVPNTunnels :: !(Maybe [VPNTunnel])
     , _vtslWarning    :: !(Maybe VPNTunnelsScopedListWarning)
@@ -1010,9 +1010,9 @@ data VPNTunnelsScopedList = VPNTunnelsScopedList
 -- * 'vtslVPNTunnels'
 --
 -- * 'vtslWarning'
-vPNTunnelsScopedList
+vpnTunnelsScopedList
     :: VPNTunnelsScopedList
-vPNTunnelsScopedList =
+vpnTunnelsScopedList =
     VPNTunnelsScopedList
     { _vtslVPNTunnels = Nothing
     , _vtslWarning = Nothing
@@ -1374,7 +1374,7 @@ instance ToJSON ForwardingRuleList where
 -- BackendService resource, based on the \"longest-match\" of the URL\'s
 -- host and path.
 --
--- /See:/ 'uRLMap' smart constructor.
+-- /See:/ 'urlMap' smart constructor.
 data URLMap = URLMap
     { _umTests             :: !(Maybe [URLMapTest])
     , _umKind              :: !Text
@@ -1414,9 +1414,9 @@ data URLMap = URLMap
 -- * 'umHostRules'
 --
 -- * 'umDescription'
-uRLMap
+urlMap
     :: URLMap
-uRLMap =
+urlMap =
     URLMap
     { _umTests = Nothing
     , _umKind = "compute#urlMap"
@@ -3496,7 +3496,7 @@ instance ToJSON Disk where
                   ("sourceSnapshot" .=) <$> _dSourceSnapshot])
 
 --
--- /See:/ 'vPNTunnelsScopedListWarningData' smart constructor.
+-- /See:/ 'vpnTunnelsScopedListWarningData' smart constructor.
 data VPNTunnelsScopedListWarningData = VPNTunnelsScopedListWarningData
     { _vtslwdValue :: !(Maybe Text)
     , _vtslwdKey   :: !(Maybe Text)
@@ -3509,9 +3509,9 @@ data VPNTunnelsScopedListWarningData = VPNTunnelsScopedListWarningData
 -- * 'vtslwdValue'
 --
 -- * 'vtslwdKey'
-vPNTunnelsScopedListWarningData
+vpnTunnelsScopedListWarningData
     :: VPNTunnelsScopedListWarningData
-vPNTunnelsScopedListWarningData =
+vpnTunnelsScopedListWarningData =
     VPNTunnelsScopedListWarningData
     { _vtslwdValue = Nothing
     , _vtslwdKey = Nothing
@@ -4015,7 +4015,7 @@ instance ToJSON DiskMoveRequest where
 -- | Informational warning which replaces the list of addresses when the list
 -- is empty.
 --
--- /See:/ 'vPNTunnelsScopedListWarning' smart constructor.
+-- /See:/ 'vpnTunnelsScopedListWarning' smart constructor.
 data VPNTunnelsScopedListWarning = VPNTunnelsScopedListWarning
     { _vtslwData    :: !(Maybe [VPNTunnelsScopedListWarningData])
     , _vtslwCode    :: !(Maybe VPNTunnelsScopedListWarningCode)
@@ -4031,9 +4031,9 @@ data VPNTunnelsScopedListWarning = VPNTunnelsScopedListWarning
 -- * 'vtslwCode'
 --
 -- * 'vtslwMessage'
-vPNTunnelsScopedListWarning
+vpnTunnelsScopedListWarning
     :: VPNTunnelsScopedListWarning
-vPNTunnelsScopedListWarning =
+vpnTunnelsScopedListWarning =
     VPNTunnelsScopedListWarning
     { _vtslwData = Nothing
     , _vtslwCode = Nothing
@@ -4502,7 +4502,7 @@ instance ToJSON Project where
 
 -- | Contains a list of UrlMap resources.
 --
--- /See:/ 'uRLMapList' smart constructor.
+-- /See:/ 'urlMapList' smart constructor.
 data URLMapList = URLMapList
     { _umlNextPageToken :: !(Maybe Text)
     , _umlKind          :: !Text
@@ -4524,9 +4524,9 @@ data URLMapList = URLMapList
 -- * 'umlSelfLink'
 --
 -- * 'umlId'
-uRLMapList
+urlMapList
     :: URLMapList
-uRLMapList =
+urlMapList =
     URLMapList
     { _umlNextPageToken = Nothing
     , _umlKind = "compute#urlMapList"
@@ -7183,7 +7183,7 @@ instance ToJSON HealthCheckReference where
               (catMaybes [("healthCheck" .=) <$> _hcrHealthCheck])
 
 --
--- /See:/ 'uRLMapsValidateResponse' smart constructor.
+-- /See:/ 'urlMapsValidateResponse' smart constructor.
 newtype URLMapsValidateResponse = URLMapsValidateResponse
     { _umvrResult :: Maybe URLMapValidationResult
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -7193,9 +7193,9 @@ newtype URLMapsValidateResponse = URLMapsValidateResponse
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'umvrResult'
-uRLMapsValidateResponse
+urlMapsValidateResponse
     :: URLMapsValidateResponse
-uRLMapsValidateResponse =
+urlMapsValidateResponse =
     URLMapsValidateResponse
     { _umvrResult = Nothing
     }
@@ -8078,7 +8078,7 @@ instance ToJSON InstanceGroupManagerActionsSummary
                   ("abandoning" .=) <$> _igmasAbandoning])
 
 --
--- /See:/ 'uRLMapReference' smart constructor.
+-- /See:/ 'urlMapReference' smart constructor.
 newtype URLMapReference = URLMapReference
     { _umrURLMap :: Maybe Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -8088,9 +8088,9 @@ newtype URLMapReference = URLMapReference
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'umrURLMap'
-uRLMapReference
+urlMapReference
     :: URLMapReference
-uRLMapReference =
+urlMapReference =
     URLMapReference
     { _umrURLMap = Nothing
     }
@@ -8797,7 +8797,7 @@ instance ToJSON DiskTypeList where
                   ("id" .=) <$> _dtlId])
 
 --
--- /See:/ 'vPNTunnelAggregatedList' smart constructor.
+-- /See:/ 'vpnTunnelAggregatedList' smart constructor.
 data VPNTunnelAggregatedList = VPNTunnelAggregatedList
     { _vtalNextPageToken :: !(Maybe Text)
     , _vtalKind          :: !Text
@@ -8819,9 +8819,9 @@ data VPNTunnelAggregatedList = VPNTunnelAggregatedList
 -- * 'vtalSelfLink'
 --
 -- * 'vtalId'
-vPNTunnelAggregatedList
+vpnTunnelAggregatedList
     :: VPNTunnelAggregatedList
-vPNTunnelAggregatedList =
+vpnTunnelAggregatedList =
     VPNTunnelAggregatedList
     { _vtalNextPageToken = Nothing
     , _vtalKind = "compute#vpnTunnelAggregatedList"
@@ -9279,7 +9279,7 @@ instance ToJSON MachineTypesScopedList where
 
 -- | Contains a list of VpnTunnel resources.
 --
--- /See:/ 'vPNTunnelList' smart constructor.
+-- /See:/ 'vpnTunnelList' smart constructor.
 data VPNTunnelList = VPNTunnelList
     { _vtlNextPageToken :: !(Maybe Text)
     , _vtlKind          :: !Text
@@ -9301,9 +9301,9 @@ data VPNTunnelList = VPNTunnelList
 -- * 'vtlSelfLink'
 --
 -- * 'vtlId'
-vPNTunnelList
+vpnTunnelList
     :: VPNTunnelList
-vPNTunnelList =
+vpnTunnelList =
     VPNTunnelList
     { _vtlNextPageToken = Nothing
     , _vtlKind = "compute#vpnTunnelList"
@@ -10503,7 +10503,7 @@ instance ToJSON DiskType where
 
 -- | Message representing the validation result for a UrlMap.
 --
--- /See:/ 'uRLMapValidationResult' smart constructor.
+-- /See:/ 'urlMapValidationResult' smart constructor.
 data URLMapValidationResult = URLMapValidationResult
     { _umvrLoadErrors    :: !(Maybe [Text])
     , _umvrLoadSucceeded :: !(Maybe Bool)
@@ -10522,9 +10522,9 @@ data URLMapValidationResult = URLMapValidationResult
 -- * 'umvrTestPassed'
 --
 -- * 'umvrTestFailures'
-uRLMapValidationResult
+urlMapValidationResult
     :: URLMapValidationResult
-uRLMapValidationResult =
+urlMapValidationResult =
     URLMapValidationResult
     { _umvrLoadErrors = Nothing
     , _umvrLoadSucceeded = Nothing
@@ -11376,7 +11376,7 @@ instance ToJSON ForwardingRulesScopedListWarning
                   ("message" .=) <$> _frslwMessage])
 
 --
--- /See:/ 'vPNTunnel' smart constructor.
+-- /See:/ 'vpnTunnel' smart constructor.
 data VPNTunnel = VPNTunnel
     { _vtDetailedStatus    :: !(Maybe Text)
     , _vtStatus            :: !(Maybe VPNTunnelStatus)
@@ -11425,9 +11425,9 @@ data VPNTunnel = VPNTunnel
 -- * 'vtRegion'
 --
 -- * 'vtDescription'
-vPNTunnel
+vpnTunnel
     :: VPNTunnel
-vPNTunnel =
+vpnTunnel =
     VPNTunnel
     { _vtDetailedStatus = Nothing
     , _vtStatus = Nothing
@@ -12198,7 +12198,7 @@ instance ToJSON HTTPHealthCheckList where
                   ("id" .=) <$> _httphclId])
 
 --
--- /See:/ 'uRLMapsValidateRequest' smart constructor.
+-- /See:/ 'urlMapsValidateRequest' smart constructor.
 newtype URLMapsValidateRequest = URLMapsValidateRequest
     { _umvrResource :: Maybe URLMap
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -12208,9 +12208,9 @@ newtype URLMapsValidateRequest = URLMapsValidateRequest
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'umvrResource'
-uRLMapsValidateRequest
+urlMapsValidateRequest
     :: URLMapsValidateRequest
-uRLMapsValidateRequest =
+urlMapsValidateRequest =
     URLMapsValidateRequest
     { _umvrResource = Nothing
     }
@@ -14158,7 +14158,7 @@ instance ToJSON BackendService where
 
 -- | Message for the expected URL mappings.
 --
--- /See:/ 'uRLMapTest' smart constructor.
+-- /See:/ 'urlMapTest' smart constructor.
 data URLMapTest = URLMapTest
     { _umtPath        :: !(Maybe Text)
     , _umtService     :: !(Maybe Text)
@@ -14177,9 +14177,9 @@ data URLMapTest = URLMapTest
 -- * 'umtHost'
 --
 -- * 'umtDescription'
-uRLMapTest
+urlMapTest
     :: URLMapTest
-uRLMapTest =
+urlMapTest =
     URLMapTest
     { _umtPath = Nothing
     , _umtService = Nothing
@@ -14538,16 +14538,16 @@ instance ToJSON Instance where
 
 -- | [Output Only] A map of scoped vpn tunnel lists.
 --
--- /See:/ 'vPNTunnelAggregatedListItems' smart constructor.
+-- /See:/ 'vpnTunnelAggregatedListItems' smart constructor.
 data VPNTunnelAggregatedListItems =
     VPNTunnelAggregatedListItems
     deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VPNTunnelAggregatedListItems' with the minimum fields required to make a request.
 --
-vPNTunnelAggregatedListItems
+vpnTunnelAggregatedListItems
     :: VPNTunnelAggregatedListItems
-vPNTunnelAggregatedListItems = VPNTunnelAggregatedListItems
+vpnTunnelAggregatedListItems = VPNTunnelAggregatedListItems
 
 instance FromJSON VPNTunnelAggregatedListItems where
         parseJSON

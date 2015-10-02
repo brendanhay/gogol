@@ -55,13 +55,13 @@ type ObjectAccessControlsUpdateResource =
            Capture "object" Text :>
              "acl" :>
                Capture "entity" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "generation" Word64 :>
-                             QueryParam "fields" Text :>
+                 QueryParam "generation" Word64 :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] ObjectAccessControl :>
                                    Put '[JSON] ObjectAccessControl
@@ -206,15 +206,14 @@ instance GoogleRequest ObjectAccessControlsUpdate'
              ObjectAccessControl
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectAccessControlsUpdate'{..}
-          = go _oacuQuotaUser (Just _oacuPrettyPrint)
-              _oacuUserIP
-              _oacuBucket
-              _oacuKey
-              _oacuObject
-              _oacuOAuthToken
+          = go _oacuGeneration _oacuBucket _oacuObject
               _oacuEntity
-              _oacuGeneration
+              _oacuQuotaUser
+              (Just _oacuPrettyPrint)
+              _oacuUserIP
               _oacuFields
+              _oacuKey
+              _oacuOAuthToken
               (Just AltJSON)
               _oacuObjectAccessControl
           where go

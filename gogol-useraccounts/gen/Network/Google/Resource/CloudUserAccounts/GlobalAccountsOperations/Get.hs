@@ -53,9 +53,9 @@ type GlobalAccountsOperationsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Operation
 
 -- | Retrieves the specified operation resource.
@@ -165,13 +165,12 @@ instance GoogleRequest GlobalAccountsOperationsGet'
         type Rs GlobalAccountsOperationsGet' = Operation
         request = requestWithRoute defReq userAccountsURL
         requestWithRoute r u GlobalAccountsOperationsGet'{..}
-          = go _gaogQuotaUser (Just _gaogPrettyPrint)
-              _gaogProject
-              _gaogOperation
+          = go _gaogProject _gaogOperation _gaogQuotaUser
+              (Just _gaogPrettyPrint)
               _gaogUserIP
+              _gaogFields
               _gaogKey
               _gaogOAuthToken
-              _gaogFields
               (Just AltJSON)
           where go
                   = clientWithRoute

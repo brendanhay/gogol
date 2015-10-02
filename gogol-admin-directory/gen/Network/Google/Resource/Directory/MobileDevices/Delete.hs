@@ -54,9 +54,9 @@ type MobileDevicesDeleteResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete Mobile Device
@@ -164,13 +164,12 @@ instance GoogleRequest MobileDevicesDelete' where
         type Rs MobileDevicesDelete' = ()
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u MobileDevicesDelete'{..}
-          = go _mddQuotaUser _mddResourceId
+          = go _mddCustomerId _mddResourceId _mddQuotaUser
               (Just _mddPrettyPrint)
               _mddUserIP
-              _mddCustomerId
+              _mddFields
               _mddKey
               _mddOAuthToken
-              _mddFields
               (Just AltJSON)
           where go
                   = clientWithRoute

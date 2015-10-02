@@ -52,9 +52,9 @@ type VerificationCodesGenerateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Generate new backup verification codes for the user.
@@ -151,11 +151,11 @@ instance GoogleRequest VerificationCodesGenerate'
         type Rs VerificationCodesGenerate' = ()
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u VerificationCodesGenerate'{..}
-          = go _vcgQuotaUser (Just _vcgPrettyPrint) _vcgUserIP
+          = go _vcgUserKey _vcgQuotaUser (Just _vcgPrettyPrint)
+              _vcgUserIP
+              _vcgFields
               _vcgKey
               _vcgOAuthToken
-              _vcgUserKey
-              _vcgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

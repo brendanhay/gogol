@@ -50,9 +50,9 @@ type MapsDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete a map.
@@ -146,11 +146,11 @@ instance GoogleRequest MapsDelete' where
         type Rs MapsDelete' = ()
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u MapsDelete'{..}
-          = go _mdQuotaUser (Just _mdPrettyPrint) _mdUserIP
-              _mdKey
-              _mdId
-              _mdOAuthToken
+          = go _mdId _mdQuotaUser (Just _mdPrettyPrint)
+              _mdUserIP
               _mdFields
+              _mdKey
+              _mdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy MapsDeleteResource)

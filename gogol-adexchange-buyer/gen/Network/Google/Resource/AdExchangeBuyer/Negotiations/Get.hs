@@ -51,9 +51,9 @@ type NegotiationsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] GetNegotiationByIdRequest :>
                          Get '[JSON] NegotiationDto
@@ -159,11 +159,12 @@ instance GoogleRequest NegotiationsGet' where
         type Rs NegotiationsGet' = NegotiationDto
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u NegotiationsGet'{..}
-          = go _ngQuotaUser (Just _ngPrettyPrint) _ngUserIP
+          = go _ngNegotiationId _ngQuotaUser
+              (Just _ngPrettyPrint)
+              _ngUserIP
+              _ngFields
               _ngKey
               _ngOAuthToken
-              _ngNegotiationId
-              _ngFields
               (Just AltJSON)
               _ngGetNegotiationByIdRequest
           where go

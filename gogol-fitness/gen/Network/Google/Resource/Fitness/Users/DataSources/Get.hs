@@ -52,9 +52,9 @@ type UsersDataSourcesGetResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] DataSource
 
 -- | Returns a data source identified by a data stream ID.
@@ -163,13 +163,12 @@ instance GoogleRequest UsersDataSourcesGet' where
         type Rs UsersDataSourcesGet' = DataSource
         request = requestWithRoute defReq fitnessURL
         requestWithRoute r u UsersDataSourcesGet'{..}
-          = go _udsgQuotaUser (Just _udsgPrettyPrint)
+          = go _udsgUserId _udsgDataSourceId _udsgQuotaUser
+              (Just _udsgPrettyPrint)
               _udsgUserIP
-              _udsgDataSourceId
-              _udsgUserId
+              _udsgFields
               _udsgKey
               _udsgOAuthToken
-              _udsgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

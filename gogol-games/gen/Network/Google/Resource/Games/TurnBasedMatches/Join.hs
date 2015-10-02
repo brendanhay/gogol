@@ -49,13 +49,13 @@ type TurnBasedMatchesJoinResource =
      "turnbasedmatches" :>
        Capture "matchId" Text :>
          "join" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "language" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "language" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Put '[JSON] TurnBasedMatch
 
@@ -162,13 +162,12 @@ instance GoogleRequest TurnBasedMatchesJoin' where
         type Rs TurnBasedMatchesJoin' = TurnBasedMatch
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u TurnBasedMatchesJoin'{..}
-          = go _tbmjQuotaUser (Just _tbmjPrettyPrint)
+          = go _tbmjLanguage _tbmjMatchId _tbmjQuotaUser
+              (Just _tbmjPrettyPrint)
               _tbmjUserIP
-              _tbmjKey
-              _tbmjLanguage
-              _tbmjOAuthToken
-              _tbmjMatchId
               _tbmjFields
+              _tbmjKey
+              _tbmjOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

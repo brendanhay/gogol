@@ -50,9 +50,9 @@ type UserProfilesGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] UserProfile
 
 -- | Gets one user profile by ID.
@@ -148,11 +148,12 @@ instance GoogleRequest UserProfilesGet' where
         type Rs UserProfilesGet' = UserProfile
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u UserProfilesGet'{..}
-          = go _upgQuotaUser (Just _upgPrettyPrint) _upgUserIP
-              _upgProfileId
+          = go _upgProfileId _upgQuotaUser
+              (Just _upgPrettyPrint)
+              _upgUserIP
+              _upgFields
               _upgKey
               _upgOAuthToken
-              _upgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

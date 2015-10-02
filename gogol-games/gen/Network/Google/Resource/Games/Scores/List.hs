@@ -54,16 +54,16 @@ type ScoresListResource =
        Capture "leaderboardId" Text :>
          "scores" :>
            Capture "collection" GamesScoresListCollection :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
+             QueryParam "language" Text :>
+               QueryParam "maxResults" Int32 :>
+                 QueryParam "pageToken" Text :>
                    QueryParam "timeSpan" GamesScoresListTimeSpan :>
-                     QueryParam "key" Key :>
-                       QueryParam "language" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "maxResults" Int32 :>
-                               QueryParam "fields" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] LeaderboardScores
 
@@ -212,16 +212,16 @@ instance GoogleRequest ScoresList' where
         type Rs ScoresList' = LeaderboardScores
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u ScoresList'{..}
-          = go _scoQuotaUser (Just _scoPrettyPrint) _scoUserIP
+          = go _scoLanguage _scoMaxResults _scoPageToken
+              _scoLeaderboardId
               _scoCollection
               (Just _scoTimeSpan)
-              _scoLeaderboardId
-              _scoKey
-              _scoLanguage
-              _scoPageToken
-              _scoOAuthToken
-              _scoMaxResults
+              _scoQuotaUser
+              (Just _scoPrettyPrint)
+              _scoUserIP
               _scoFields
+              _scoKey
+              _scoOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy ScoresListResource)

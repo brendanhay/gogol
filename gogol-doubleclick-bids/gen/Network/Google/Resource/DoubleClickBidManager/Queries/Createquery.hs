@@ -49,9 +49,9 @@ type QueriesCreatequeryResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] Query :> Post '[JSON] Query
 
@@ -145,9 +145,9 @@ instance GoogleRequest QueriesCreatequery' where
         request = requestWithRoute defReq doubleClickBidsURL
         requestWithRoute r u QueriesCreatequery'{..}
           = go _qcQuotaUser (Just _qcPrettyPrint) _qcUserIP
+              _qcFields
               _qcKey
               _qcOAuthToken
-              _qcFields
               (Just AltJSON)
               _qcQuery
           where go

@@ -57,17 +57,17 @@ type ProjectsTestIAMPermissionsResource =
        "projects" :>
          "{resource}:testIamPermissions" :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
+             QueryParam "access_token" Text :>
+               QueryParam "bearer_token" Text :>
+                 QueryParam "callback" Text :>
                    QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] TestIAMPermissionsRequest
                                        :>
@@ -239,18 +239,17 @@ instance GoogleRequest ProjectsTestIAMPermissions'
              TestIAMPermissionsResponse
         request = requestWithRoute defReq resourceManagerURL
         requestWithRoute r u ProjectsTestIAMPermissions'{..}
-          = go _ptipXgafv _ptipQuotaUser
-              (Just _ptipPrettyPrint)
-              _ptipUploadProtocol
-              (Just _ptipPp)
-              _ptipAccessToken
-              _ptipUploadType
-              _ptipBearerToken
-              _ptipKey
-              _ptipResource
-              _ptipOAuthToken
-              _ptipFields
+          = go _ptipXgafv _ptipAccessToken _ptipBearerToken
               _ptipCallback
+              (Just _ptipPp)
+              _ptipUploadType
+              _ptipUploadProtocol
+              _ptipResource
+              _ptipQuotaUser
+              (Just _ptipPrettyPrint)
+              _ptipFields
+              _ptipKey
+              _ptipOAuthToken
               (Just AltJSON)
               _ptipTestIAMPermissionsRequest
           where go

@@ -56,9 +56,9 @@ type LicenseAssignmentsUpdateResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] LicenseAssignment :>
                                Put '[JSON] LicenseAssignment
@@ -187,13 +187,12 @@ instance GoogleRequest LicenseAssignmentsUpdate'
         type Rs LicenseAssignmentsUpdate' = LicenseAssignment
         request = requestWithRoute defReq appsLicensingURL
         requestWithRoute r u LicenseAssignmentsUpdate'{..}
-          = go _lauQuotaUser (Just _lauPrettyPrint) _lauUserIP
-              _lauSkuId
-              _lauUserId
+          = go _lauProductId _lauSkuId _lauUserId _lauQuotaUser
+              (Just _lauPrettyPrint)
+              _lauUserIP
+              _lauFields
               _lauKey
               _lauOAuthToken
-              _lauProductId
-              _lauFields
               (Just AltJSON)
               _lauLicenseAssignment
           where go

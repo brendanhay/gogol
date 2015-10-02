@@ -60,9 +60,9 @@ type AccountsContainersVersionsRestoreResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Post '[JSON] ContainerVersion
 
@@ -190,14 +190,14 @@ instance GoogleRequest
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersVersionsRestore'{..}
-          = go _acvrQuotaUser (Just _acvrPrettyPrint)
-              _acvrContainerId
-              _acvrUserIP
+          = go _acvrAccountId _acvrContainerId
               _acvrContainerVersionId
-              _acvrAccountId
+              _acvrQuotaUser
+              (Just _acvrPrettyPrint)
+              _acvrUserIP
+              _acvrFields
               _acvrKey
               _acvrOAuthToken
-              _acvrFields
               (Just AltJSON)
           where go
                   = clientWithRoute

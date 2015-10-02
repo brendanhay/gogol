@@ -57,9 +57,9 @@ type InstanceGroupsRemoveInstancesResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON]
                                  InstanceGroupsRemoveInstancesRequest
@@ -195,14 +195,13 @@ instance GoogleRequest InstanceGroupsRemoveInstances'
         request = requestWithRoute defReq computeURL
         requestWithRoute r u
           InstanceGroupsRemoveInstances'{..}
-          = go _igriQuotaUser (Just _igriPrettyPrint)
-              _igriProject
+          = go _igriProject _igriZone _igriInstanceGroup
+              _igriQuotaUser
+              (Just _igriPrettyPrint)
               _igriUserIP
-              _igriZone
+              _igriFields
               _igriKey
               _igriOAuthToken
-              _igriInstanceGroup
-              _igriFields
               (Just AltJSON)
               _igriInstanceGroupsRemoveInstancesRequest
           where go

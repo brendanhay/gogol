@@ -67,41 +67,32 @@ type EventsWatchResource =
        Capture "calendarId" Text :>
          "events" :>
            "watch" :>
-             QueryParam "syncToken" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "timeMin" UTCTime :>
+             QueryParam "alwaysIncludeEmail" Bool :>
+               QueryParam "iCalUID" Text :>
+                 QueryParam "maxAttendees" Int32 :>
+                   QueryParam "maxResults" Int32 :>
                      QueryParam "orderBy" CalendarEventsWatchOrderBy :>
-                       QueryParam "singleEvents" Bool :>
+                       QueryParam "pageToken" Text :>
                          QueryParams "privateExtendedProperty" Text :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "showDeleted" Bool :>
-                               QueryParam "q" Text :>
-                                 QueryParams "sharedExtendedProperty" Text :>
-                                   QueryParam "maxAttendees" Int32 :>
-                                     QueryParam "key" Key :>
-                                       QueryParam "iCalUID" Text :>
-                                         QueryParam "updatedMin" UTCTime :>
-                                           QueryParam "pageToken" Text :>
-                                             QueryParam "timeZone" Text :>
-                                               QueryParam "oauth_token"
-                                                 OAuthToken
-                                                 :>
-                                                 QueryParam
-                                                   "showHiddenInvitations"
-                                                   Bool
+                           QueryParam "q" Text :>
+                             QueryParams "sharedExtendedProperty" Text :>
+                               QueryParam "showDeleted" Bool :>
+                                 QueryParam "showHiddenInvitations" Bool :>
+                                   QueryParam "singleEvents" Bool :>
+                                     QueryParam "syncToken" Text :>
+                                       QueryParam "timeMax" UTCTime :>
+                                         QueryParam "timeMin" UTCTime :>
+                                           QueryParam "timeZone" Text :>
+                                             QueryParam "updatedMin" UTCTime :>
+                                               QueryParam "quotaUser" Text :>
+                                                 QueryParam "prettyPrint" Bool
                                                    :>
-                                                   QueryParam "maxResults" Int32
-                                                     :>
-                                                     QueryParam
-                                                       "alwaysIncludeEmail"
-                                                       Bool
-                                                       :>
-                                                       QueryParam "timeMax"
-                                                         UTCTime
-                                                         :>
-                                                         QueryParam "fields"
-                                                           Text
+                                                   QueryParam "userIp" Text :>
+                                                     QueryParam "fields" Text :>
+                                                       QueryParam "key" Key :>
+                                                         QueryParam
+                                                           "oauth_token"
+                                                           OAuthToken
                                                            :>
                                                            QueryParam "alt"
                                                              AltJSON
@@ -420,28 +411,28 @@ instance GoogleRequest EventsWatch' where
         type Rs EventsWatch' = Channel
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u EventsWatch'{..}
-          = go _ewSyncToken _ewQuotaUser _ewCalendarId
-              (Just _ewPrettyPrint)
-              _ewTimeMin
+          = go _ewAlwaysIncludeEmail _ewICalUId _ewMaxAttendees
+              _ewMaxResults
               _ewOrderBy
-              _ewSingleEvents
+              _ewPageToken
               _ewPrivateExtendedProperty
-              _ewUserIP
-              _ewShowDeleted
               _ewQ
               _ewSharedExtendedProperty
-              _ewMaxAttendees
-              _ewKey
-              _ewICalUId
-              _ewUpdatedMin
-              _ewPageToken
-              _ewTimeZone
-              _ewOAuthToken
+              _ewShowDeleted
               _ewShowHiddenInvitations
-              _ewMaxResults
-              _ewAlwaysIncludeEmail
+              _ewSingleEvents
+              _ewSyncToken
               _ewTimeMax
+              _ewTimeMin
+              _ewTimeZone
+              _ewUpdatedMin
+              _ewCalendarId
+              _ewQuotaUser
+              (Just _ewPrettyPrint)
+              _ewUserIP
               _ewFields
+              _ewKey
+              _ewOAuthToken
               (Just AltJSON)
               _ewChannel
           where go

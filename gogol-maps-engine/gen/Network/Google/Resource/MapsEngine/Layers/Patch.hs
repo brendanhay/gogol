@@ -51,9 +51,9 @@ type LayersPatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Layer :> Patch '[JSON] ()
 
@@ -158,11 +158,11 @@ instance GoogleRequest LayersPatch' where
         type Rs LayersPatch' = ()
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u LayersPatch'{..}
-          = go _layQuotaUser (Just _layPrettyPrint) _layUserIP
-              _layKey
-              _layId
-              _layOAuthToken
+          = go _layId _layQuotaUser (Just _layPrettyPrint)
+              _layUserIP
               _layFields
+              _layKey
+              _layOAuthToken
               (Just AltJSON)
               _layLayer
           where go

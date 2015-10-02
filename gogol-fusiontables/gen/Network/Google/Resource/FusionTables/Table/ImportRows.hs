@@ -54,17 +54,17 @@ type TableImportRowsResource =
      "tables" :>
        Capture "tableId" Text :>
          "import" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "startLine" Int32 :>
-                   QueryParam "endLine" Int32 :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "delimiter" Text :>
-                           QueryParam "encoding" Text :>
-                             QueryParam "isStrict" Bool :>
-                               QueryParam "fields" Text :>
+           QueryParam "delimiter" Text :>
+             QueryParam "encoding" Text :>
+               QueryParam "endLine" Int32 :>
+                 QueryParam "isStrict" Bool :>
+                   QueryParam "startLine" Int32 :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :> Post '[JSON] Import
 
 -- | Imports more rows into a table.
@@ -221,17 +221,17 @@ instance GoogleRequest TableImportRows' where
         type Rs TableImportRows' = Import
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TableImportRows'{..}
-          = go _tirQuotaUser (Just _tirPrettyPrint) _tirUserIP
-              _tirStartLine
-              _tirEndLine
+          = go _tirDelimiter _tirEncoding _tirEndLine
+              _tirIsStrict
               _tirMedia
+              _tirStartLine
+              _tirTableId
+              _tirQuotaUser
+              (Just _tirPrettyPrint)
+              _tirUserIP
+              _tirFields
               _tirKey
               _tirOAuthToken
-              _tirTableId
-              _tirDelimiter
-              _tirEncoding
-              _tirIsStrict
-              _tirFields
               (Just AltJSON)
           where go
                   = clientWithRoute

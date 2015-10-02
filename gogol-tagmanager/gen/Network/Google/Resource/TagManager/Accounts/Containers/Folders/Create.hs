@@ -55,9 +55,9 @@ type AccountsContainersFoldersCreateResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Folder :> Post '[JSON] Folder
 
@@ -180,13 +180,12 @@ instance GoogleRequest
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersFoldersCreate'{..}
-          = go _acfcQuotaUser (Just _acfcPrettyPrint)
-              _acfcContainerId
+          = go _acfcAccountId _acfcContainerId _acfcQuotaUser
+              (Just _acfcPrettyPrint)
               _acfcUserIP
-              _acfcAccountId
+              _acfcFields
               _acfcKey
               _acfcOAuthToken
-              _acfcFields
               (Just AltJSON)
               _acfcFolder
           where go

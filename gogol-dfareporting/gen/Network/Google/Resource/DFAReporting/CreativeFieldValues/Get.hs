@@ -56,9 +56,9 @@ type CreativeFieldValuesGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] CreativeFieldValue
 
@@ -177,14 +177,13 @@ instance GoogleRequest CreativeFieldValuesGet' where
         type Rs CreativeFieldValuesGet' = CreativeFieldValue
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeFieldValuesGet'{..}
-          = go _cfvgCreativeFieldId _cfvgQuotaUser
+          = go _cfvgProfileId _cfvgCreativeFieldId _cfvgId
+              _cfvgQuotaUser
               (Just _cfvgPrettyPrint)
               _cfvgUserIP
-              _cfvgProfileId
-              _cfvgKey
-              _cfvgId
-              _cfvgOAuthToken
               _cfvgFields
+              _cfvgKey
+              _cfvgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

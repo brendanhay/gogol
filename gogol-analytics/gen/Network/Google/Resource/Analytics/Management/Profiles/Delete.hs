@@ -57,9 +57,9 @@ type ManagementProfilesDeleteResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a view (profile).
@@ -177,14 +177,13 @@ instance GoogleRequest ManagementProfilesDelete'
         type Rs ManagementProfilesDelete' = ()
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementProfilesDelete'{..}
-          = go _mpdQuotaUser (Just _mpdPrettyPrint)
-              _mpdWebPropertyId
+          = go _mpdAccountId _mpdWebPropertyId _mpdProfileId
+              _mpdQuotaUser
+              (Just _mpdPrettyPrint)
               _mpdUserIP
-              _mpdProfileId
-              _mpdAccountId
+              _mpdFields
               _mpdKey
               _mpdOAuthToken
-              _mpdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

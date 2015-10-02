@@ -62,17 +62,17 @@ type ControllerDebuggeesRegisterResource =
          "debuggees" :>
            "register" :>
              QueryParam "$.xgafv" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "upload_protocol" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "bearer_token" Text :>
+                   QueryParam "callback" Text :>
                      QueryParam "pp" Bool :>
-                       QueryParam "access_token" Text :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "callback" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        ReqBody '[JSON] RegisterDebuggeeRequest
                                          :>
@@ -236,16 +236,16 @@ instance GoogleRequest ControllerDebuggeesRegister'
              RegisterDebuggeeResponse
         request = requestWithRoute defReq debuggerURL
         requestWithRoute r u ControllerDebuggeesRegister'{..}
-          = go _cdrXgafv _cdrQuotaUser (Just _cdrPrettyPrint)
-              _cdrUploadProtocol
+          = go _cdrXgafv _cdrAccessToken _cdrBearerToken
+              _cdrCallback
               (Just _cdrPp)
-              _cdrAccessToken
               _cdrUploadType
-              _cdrBearerToken
+              _cdrUploadProtocol
+              _cdrQuotaUser
+              (Just _cdrPrettyPrint)
+              _cdrFields
               _cdrKey
               _cdrOAuthToken
-              _cdrFields
-              _cdrCallback
               (Just AltJSON)
               _cdrRegisterDebuggeeRequest
           where go

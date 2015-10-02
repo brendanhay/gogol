@@ -398,21 +398,21 @@ module Network.Google.Dataflow.Types
     -- * Job
     , Job
     , job
-    , jobRequestedState
-    , jobEnvironment
-    , jobClientRequestId
-    , jobCurrentState
-    , jobReplacedByJobId
-    , jobSteps
-    , jobExecutionInfo
-    , jobName
-    , jobTransformNameMapping
-    , jobId
-    , jobProjectId
-    , jobType
-    , jobCurrentStateTime
-    , jobReplaceJobId
-    , jobCreateTime
+    , jRequestedState
+    , jEnvironment
+    , jClientRequestId
+    , jCurrentState
+    , jReplacedByJobId
+    , jSteps
+    , jExecutionInfo
+    , jName
+    , jTransformNameMapping
+    , jId
+    , jProjectId
+    , jType
+    , jCurrentStateTime
+    , jReplaceJobId
+    , jCreateTime
 
     -- * SeqMapTaskUserFn
     , SeqMapTaskUserFn

@@ -26,7 +26,7 @@ module Network.Google.Resource.Calendar.ACL.Update
       ACLUpdateResource
 
     -- * Creating a Request
-    , aCLUpdate'
+    , aclUpdate'
     , ACLUpdate'
 
     -- * Request Lenses
@@ -54,15 +54,15 @@ type ACLUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] ACLRule :> Put '[JSON] ACLRule
 
 -- | Updates an access control rule.
 --
--- /See:/ 'aCLUpdate'' smart constructor.
+-- /See:/ 'aclUpdate'' smart constructor.
 data ACLUpdate' = ACLUpdate'
     { _auQuotaUser   :: !(Maybe Text)
     , _auCalendarId  :: !Text
@@ -96,12 +96,12 @@ data ACLUpdate' = ACLUpdate'
 -- * 'auOAuthToken'
 --
 -- * 'auFields'
-aCLUpdate'
+aclUpdate'
     :: Text -- ^ 'calendarId'
     -> Text -- ^ 'ruleId'
     -> ACLRule -- ^ 'ACLRule'
     -> ACLUpdate'
-aCLUpdate' pAuCalendarId_ pAuRuleId_ pAuACLRule_ =
+aclUpdate' pAuCalendarId_ pAuRuleId_ pAuACLRule_ =
     ACLUpdate'
     { _auQuotaUser = Nothing
     , _auCalendarId = pAuCalendarId_
@@ -171,12 +171,12 @@ instance GoogleRequest ACLUpdate' where
         type Rs ACLUpdate' = ACLRule
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u ACLUpdate'{..}
-          = go _auQuotaUser _auCalendarId (Just _auPrettyPrint)
+          = go _auCalendarId _auRuleId _auQuotaUser
+              (Just _auPrettyPrint)
               _auUserIP
-              _auRuleId
+              _auFields
               _auKey
               _auOAuthToken
-              _auFields
               (Just AltJSON)
               _auACLRule
           where go

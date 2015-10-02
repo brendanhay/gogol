@@ -54,9 +54,9 @@ type OrgUnitsUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] OrgUnit :> Put '[JSON] OrgUnit
 
@@ -175,12 +175,12 @@ instance GoogleRequest OrgUnitsUpdate' where
         type Rs OrgUnitsUpdate' = OrgUnit
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u OrgUnitsUpdate'{..}
-          = go _ouuQuotaUser (Just _ouuPrettyPrint) _ouuUserIP
-              _ouuOrgUnitPath
-              _ouuCustomerId
+          = go _ouuCustomerId _ouuOrgUnitPath _ouuQuotaUser
+              (Just _ouuPrettyPrint)
+              _ouuUserIP
+              _ouuFields
               _ouuKey
               _ouuOAuthToken
-              _ouuFields
               (Just AltJSON)
               _ouuOrgUnit
           where go

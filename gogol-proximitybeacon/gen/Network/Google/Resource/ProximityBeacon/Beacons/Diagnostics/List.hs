@@ -60,20 +60,20 @@ type BeaconsDiagnosticsListResource =
        "{+beaconName}" :>
          "diagnostics" :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "pageSize" Int32 :>
-                                   QueryParam "alertFilter" Text :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "callback" Text :>
+             QueryParam "access_token" Text :>
+               QueryParam "alertFilter" Text :>
+                 QueryParam "bearer_token" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "pageSize" Int32 :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "upload_protocol" Text :>
+                               QueryParam "quotaUser" Text :>
+                                 QueryParam "prettyPrint" Bool :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "key" Key :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] ListDiagnosticsResponse
 
@@ -260,20 +260,20 @@ instance GoogleRequest BeaconsDiagnosticsList' where
              ListDiagnosticsResponse
         request = requestWithRoute defReq proximityBeaconURL
         requestWithRoute r u BeaconsDiagnosticsList'{..}
-          = go _bdlXgafv _bdlQuotaUser (Just _bdlPrettyPrint)
-              _bdlUploadProtocol
-              (Just _bdlPp)
-              _bdlAccessToken
-              _bdlBeaconName
-              _bdlUploadType
+          = go _bdlXgafv _bdlAccessToken _bdlAlertFilter
               _bdlBearerToken
-              _bdlKey
-              _bdlPageToken
-              _bdlOAuthToken
-              _bdlPageSize
-              _bdlAlertFilter
-              _bdlFields
               _bdlCallback
+              _bdlPageSize
+              _bdlPageToken
+              (Just _bdlPp)
+              _bdlUploadType
+              _bdlUploadProtocol
+              _bdlBeaconName
+              _bdlQuotaUser
+              (Just _bdlPrettyPrint)
+              _bdlFields
+              _bdlKey
+              _bdlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

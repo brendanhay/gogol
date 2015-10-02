@@ -54,15 +54,15 @@ type ManifestsListResource =
          "deployments" :>
            Capture "deployment" Text :>
              "manifests" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "filter" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "maxResults" Word32 :>
-                               QueryParam "fields" Text :>
+               QueryParam "filter" Text :>
+                 QueryParam "maxResults" Word32 :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] ManifestsListResponse
 
@@ -205,15 +205,15 @@ instance GoogleRequest ManifestsList' where
         request
           = requestWithRoute defReq deploymentManagerURL
         requestWithRoute r u ManifestsList'{..}
-          = go _mlQuotaUser (Just _mlPrettyPrint) _mlProject
-              _mlUserIP
-              _mlKey
-              _mlFilter
-              _mlPageToken
-              _mlOAuthToken
-              (Just _mlMaxResults)
-              _mlFields
+          = go _mlFilter (Just _mlMaxResults) _mlPageToken
+              _mlProject
               _mlDeployment
+              _mlQuotaUser
+              (Just _mlPrettyPrint)
+              _mlUserIP
+              _mlFields
+              _mlKey
+              _mlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

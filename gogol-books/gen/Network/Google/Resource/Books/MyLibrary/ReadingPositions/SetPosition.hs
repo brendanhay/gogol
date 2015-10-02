@@ -55,22 +55,21 @@ type MyLibraryReadingPositionsSetPositionResource =
        "readingpositions" :>
          Capture "volumeId" Text :>
            "setPosition" :>
-             QueryParam "deviceCookie" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "contentVersion" Text :>
-                       QueryParam "action"
-                         BooksMyLibraryReadingPositionsSetPositionAction
-                         :>
-                         QueryParam "key" Key :>
-                           QueryParam "source" Text :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "timestamp" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" AltJSON :>
-                                     QueryParam "position" Text :>
-                                       Post '[JSON] ()
+             QueryParam "action"
+               BooksMyLibraryReadingPositionsSetPositionAction
+               :>
+               QueryParam "contentVersion" Text :>
+                 QueryParam "deviceCookie" Text :>
+                   QueryParam "source" Text :>
+                     QueryParam "timestamp" Text :>
+                       QueryParam "position" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
+                                     QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Sets my reading position information for a volume.
 --
@@ -231,18 +230,18 @@ instance GoogleRequest
         request = requestWithRoute defReq booksURL
         requestWithRoute r u
           MyLibraryReadingPositionsSetPosition'{..}
-          = go _mlrpspDeviceCookie _mlrpspQuotaUser
+          = go _mlrpspAction _mlrpspContentVersion
+              _mlrpspDeviceCookie
+              _mlrpspSource
+              _mlrpspVolumeId
+              (Just _mlrpspTimestamp)
+              (Just _mlrpspPosition)
+              _mlrpspQuotaUser
               (Just _mlrpspPrettyPrint)
               _mlrpspUserIP
-              _mlrpspContentVersion
-              _mlrpspAction
-              _mlrpspKey
-              _mlrpspVolumeId
-              _mlrpspSource
-              _mlrpspOAuthToken
-              (Just _mlrpspTimestamp)
               _mlrpspFields
-              (Just _mlrpspPosition)
+              _mlrpspKey
+              _mlrpspOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

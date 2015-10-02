@@ -51,13 +51,13 @@ import           Network.Google.Prelude
 type TablePatchResource =
      "tables" :>
        Capture "tableId" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "replaceViewDefinition" Bool :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+         QueryParam "replaceViewDefinition" Bool :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Table :> Patch '[JSON] Table
 
@@ -177,12 +177,13 @@ instance GoogleRequest TablePatch' where
         type Rs TablePatch' = Table
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TablePatch'{..}
-          = go _tppQuotaUser (Just _tppPrettyPrint) _tppUserIP
-              _tppReplaceViewDefinition
+          = go _tppReplaceViewDefinition _tppTableId
+              _tppQuotaUser
+              (Just _tppPrettyPrint)
+              _tppUserIP
+              _tppFields
               _tppKey
               _tppOAuthToken
-              _tppTableId
-              _tppFields
               (Just AltJSON)
               _tppTable
           where go

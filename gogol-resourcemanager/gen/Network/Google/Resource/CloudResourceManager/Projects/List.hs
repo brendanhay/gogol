@@ -58,20 +58,20 @@ type ProjectsListResource =
      "v1beta1" :>
        "projects" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "filter" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "pageSize" Int32 :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "callback" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageSize" Int32 :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "quotaUser" Text :>
+                               QueryParam "prettyPrint" Bool :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] ListProjectsResponse
 
@@ -253,19 +253,19 @@ instance GoogleRequest ProjectsList' where
         type Rs ProjectsList' = ListProjectsResponse
         request = requestWithRoute defReq resourceManagerURL
         requestWithRoute r u ProjectsList'{..}
-          = go _plXgafv _plQuotaUser (Just _plPrettyPrint)
-              _plUploadProtocol
-              (Just _plPp)
-              _plAccessToken
-              _plUploadType
-              _plBearerToken
-              _plKey
-              _plFilter
-              _plPageToken
-              _plOAuthToken
-              _plPageSize
-              _plFields
+          = go _plXgafv _plAccessToken _plBearerToken
               _plCallback
+              _plFilter
+              _plPageSize
+              _plPageToken
+              (Just _plPp)
+              _plUploadType
+              _plUploadProtocol
+              _plQuotaUser
+              (Just _plPrettyPrint)
+              _plFields
+              _plKey
+              _plOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

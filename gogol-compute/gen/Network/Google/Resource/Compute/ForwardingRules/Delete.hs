@@ -55,9 +55,9 @@ type ForwardingRulesDeleteResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified ForwardingRule resource.
@@ -174,13 +174,13 @@ instance GoogleRequest ForwardingRulesDelete' where
         type Rs ForwardingRulesDelete' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u ForwardingRulesDelete'{..}
-          = go _frdQuotaUser (Just _frdPrettyPrint) _frdProject
-              _frdForwardingRule
+          = go _frdProject _frdRegion _frdForwardingRule
+              _frdQuotaUser
+              (Just _frdPrettyPrint)
               _frdUserIP
-              _frdKey
-              _frdRegion
-              _frdOAuthToken
               _frdFields
+              _frdKey
+              _frdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

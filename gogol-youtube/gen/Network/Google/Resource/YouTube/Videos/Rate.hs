@@ -48,14 +48,14 @@ import           Network.Google.YouTube.Types
 type VideosRateResource =
      "videos" :>
        "rate" :>
-         QueryParam "quotaUser" Text :>
+         QueryParam "id" Text :>
            QueryParam "rating" YouTubeVideosRateRating :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "id" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Add a like or dislike rating to a video or remove a rating from a video.
@@ -157,13 +157,12 @@ instance GoogleRequest VideosRate' where
         type Rs VideosRate' = ()
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u VideosRate'{..}
-          = go _vrQuotaUser (Just _vrRating)
+          = go (Just _vrId) (Just _vrRating) _vrQuotaUser
               (Just _vrPrettyPrint)
               _vrUserIP
-              _vrKey
-              (Just _vrId)
-              _vrOAuthToken
               _vrFields
+              _vrKey
+              _vrOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy VideosRateResource)

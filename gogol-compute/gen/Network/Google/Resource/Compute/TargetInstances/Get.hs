@@ -55,9 +55,9 @@ type TargetInstancesGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] TargetInstance
 
@@ -174,13 +174,13 @@ instance GoogleRequest TargetInstancesGet' where
         type Rs TargetInstancesGet' = TargetInstance
         request = requestWithRoute defReq computeURL
         requestWithRoute r u TargetInstancesGet'{..}
-          = go _tigQuotaUser (Just _tigPrettyPrint) _tigProject
-              _tigTargetInstance
+          = go _tigProject _tigZone _tigTargetInstance
+              _tigQuotaUser
+              (Just _tigPrettyPrint)
               _tigUserIP
-              _tigZone
+              _tigFields
               _tigKey
               _tigOAuthToken
-              _tigFields
               (Just AltJSON)
           where go
                   = clientWithRoute

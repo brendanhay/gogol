@@ -64,18 +64,18 @@ type CoursesStudentsCreateResource =
          Capture "courseId" Text :>
            "students" :>
              QueryParam "$.xgafv" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "upload_protocol" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "access_token" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "bearer_token" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "enrollmentCode" Text :>
+                       QueryParam "pp" Bool :>
                          QueryParam "uploadType" Text :>
-                           QueryParam "enrollmentCode" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "key" Key :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "callback" Text :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "quotaUser" Text :>
+                               QueryParam "prettyPrint" Bool :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          ReqBody '[JSON] Student :>
                                            Post '[JSON] Student
@@ -259,18 +259,18 @@ instance GoogleRequest CoursesStudentsCreate' where
         type Rs CoursesStudentsCreate' = Student
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u CoursesStudentsCreate'{..}
-          = go _cscXgafv _cscQuotaUser (Just _cscPrettyPrint)
-              _cscUploadProtocol
-              (Just _cscPp)
-              _cscCourseId
-              _cscAccessToken
-              _cscUploadType
+          = go _cscXgafv _cscAccessToken _cscBearerToken
+              _cscCallback
               _cscEnrollmentCode
-              _cscBearerToken
+              (Just _cscPp)
+              _cscUploadType
+              _cscUploadProtocol
+              _cscCourseId
+              _cscQuotaUser
+              (Just _cscPrettyPrint)
+              _cscFields
               _cscKey
               _cscOAuthToken
-              _cscFields
-              _cscCallback
               (Just AltJSON)
               _cscStudent
           where go

@@ -50,9 +50,9 @@ type TableGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Table
 
 -- | Retrieves a specific table by its ID.
@@ -145,11 +145,11 @@ instance GoogleRequest TableGet' where
         type Rs TableGet' = Table
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TableGet'{..}
-          = go _ttQuotaUser (Just _ttPrettyPrint) _ttUserIP
+          = go _ttTableId _ttQuotaUser (Just _ttPrettyPrint)
+              _ttUserIP
+              _ttFields
               _ttKey
               _ttOAuthToken
-              _ttTableId
-              _ttFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TableGetResource) r

@@ -53,9 +53,9 @@ type CollectionsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Collection
 
 -- | Retrieves the details of a collection.
@@ -164,13 +164,12 @@ instance GoogleRequest CollectionsGet' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u CollectionsGet'{..}
-          = go _cggQuotaUser (Just _cggPrettyPrint)
-              _cggEnterpriseId
+          = go _cggEnterpriseId _cggCollectionId _cggQuotaUser
+              (Just _cggPrettyPrint)
               _cggUserIP
-              _cggCollectionId
+              _cggFields
               _cggKey
               _cggOAuthToken
-              _cggFields
               (Just AltJSON)
           where go
                   = clientWithRoute

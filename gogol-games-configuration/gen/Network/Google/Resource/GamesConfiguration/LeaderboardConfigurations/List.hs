@@ -50,14 +50,14 @@ type LeaderboardConfigurationsListResource =
      "applications" :>
        Capture "applicationId" Text :>
          "leaderboards" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "maxResults" Int32 :>
-                         QueryParam "fields" Text :>
+           QueryParam "maxResults" Int32 :>
+             QueryParam "pageToken" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] LeaderboardConfigurationListResponse
 
@@ -181,13 +181,13 @@ instance GoogleRequest LeaderboardConfigurationsList'
           = requestWithRoute defReq gamesConfigurationURL
         requestWithRoute r u
           LeaderboardConfigurationsList'{..}
-          = go _lclQuotaUser (Just _lclPrettyPrint) _lclUserIP
-              _lclApplicationId
-              _lclKey
-              _lclPageToken
-              _lclOAuthToken
-              _lclMaxResults
+          = go _lclMaxResults _lclPageToken _lclApplicationId
+              _lclQuotaUser
+              (Just _lclPrettyPrint)
+              _lclUserIP
               _lclFields
+              _lclKey
+              _lclOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

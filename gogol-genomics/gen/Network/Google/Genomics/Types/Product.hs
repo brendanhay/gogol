@@ -3549,106 +3549,101 @@ instance ToJSON Range where
 --
 -- /See:/ 'job' smart constructor.
 data Job = Job
-    { _jobDetailedStatus :: !(Maybe Text)
-    , _jobStatus         :: !(Maybe JobStatus)
-    , _jobCreated        :: !(Maybe Int64)
-    , _jobProjectNumber  :: !(Maybe Int64)
-    , _jobWarnings       :: !(Maybe [Text])
-    , _jobImportedIds    :: !(Maybe [Text])
-    , _jobId             :: !(Maybe Text)
-    , _jobErrors         :: !(Maybe [Text])
-    , _jobRequest        :: !(Maybe JobRequest)
+    { _jDetailedStatus :: !(Maybe Text)
+    , _jStatus         :: !(Maybe JobStatus)
+    , _jCreated        :: !(Maybe Int64)
+    , _jProjectNumber  :: !(Maybe Int64)
+    , _jWarnings       :: !(Maybe [Text])
+    , _jImportedIds    :: !(Maybe [Text])
+    , _jId             :: !(Maybe Text)
+    , _jErrors         :: !(Maybe [Text])
+    , _jRequest        :: !(Maybe JobRequest)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Job' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'jobDetailedStatus'
+-- * 'jDetailedStatus'
 --
--- * 'jobStatus'
+-- * 'jStatus'
 --
--- * 'jobCreated'
+-- * 'jCreated'
 --
--- * 'jobProjectNumber'
+-- * 'jProjectNumber'
 --
--- * 'jobWarnings'
+-- * 'jWarnings'
 --
--- * 'jobImportedIds'
+-- * 'jImportedIds'
 --
--- * 'jobId'
+-- * 'jId'
 --
--- * 'jobErrors'
+-- * 'jErrors'
 --
--- * 'jobRequest'
+-- * 'jRequest'
 job
     :: Job
 job =
     Job
-    { _jobDetailedStatus = Nothing
-    , _jobStatus = Nothing
-    , _jobCreated = Nothing
-    , _jobProjectNumber = Nothing
-    , _jobWarnings = Nothing
-    , _jobImportedIds = Nothing
-    , _jobId = Nothing
-    , _jobErrors = Nothing
-    , _jobRequest = Nothing
+    { _jDetailedStatus = Nothing
+    , _jStatus = Nothing
+    , _jCreated = Nothing
+    , _jProjectNumber = Nothing
+    , _jWarnings = Nothing
+    , _jImportedIds = Nothing
+    , _jId = Nothing
+    , _jErrors = Nothing
+    , _jRequest = Nothing
     }
 
 -- | A more detailed description of this job\'s current status.
-jobDetailedStatus :: Lens' Job (Maybe Text)
-jobDetailedStatus
-  = lens _jobDetailedStatus
-      (\ s a -> s{_jobDetailedStatus = a})
+jDetailedStatus :: Lens' Job (Maybe Text)
+jDetailedStatus
+  = lens _jDetailedStatus
+      (\ s a -> s{_jDetailedStatus = a})
 
 -- | The status of this job.
-jobStatus :: Lens' Job (Maybe JobStatus)
-jobStatus
-  = lens _jobStatus (\ s a -> s{_jobStatus = a})
+jStatus :: Lens' Job (Maybe JobStatus)
+jStatus = lens _jStatus (\ s a -> s{_jStatus = a})
 
 -- | The date this job was created, in milliseconds from the epoch.
-jobCreated :: Lens' Job (Maybe Int64)
-jobCreated
-  = lens _jobCreated (\ s a -> s{_jobCreated = a})
+jCreated :: Lens' Job (Maybe Int64)
+jCreated = lens _jCreated (\ s a -> s{_jCreated = a})
 
 -- | The Google Developers Console project number to which this job belongs.
-jobProjectNumber :: Lens' Job (Maybe Int64)
-jobProjectNumber
-  = lens _jobProjectNumber
-      (\ s a -> s{_jobProjectNumber = a})
+jProjectNumber :: Lens' Job (Maybe Int64)
+jProjectNumber
+  = lens _jProjectNumber
+      (\ s a -> s{_jProjectNumber = a})
 
 -- | Any warnings that occurred during processing.
-jobWarnings :: Lens' Job [Text]
-jobWarnings
-  = lens _jobWarnings (\ s a -> s{_jobWarnings = a}) .
+jWarnings :: Lens' Job [Text]
+jWarnings
+  = lens _jWarnings (\ s a -> s{_jWarnings = a}) .
       _Default
       . _Coerce
 
 -- | If this Job represents an import, this field will contain the IDs of the
 -- objects that were successfully imported.
-jobImportedIds :: Lens' Job [Text]
-jobImportedIds
-  = lens _jobImportedIds
-      (\ s a -> s{_jobImportedIds = a})
+jImportedIds :: Lens' Job [Text]
+jImportedIds
+  = lens _jImportedIds (\ s a -> s{_jImportedIds = a})
       . _Default
       . _Coerce
 
 -- | The job ID.
-jobId :: Lens' Job (Maybe Text)
-jobId = lens _jobId (\ s a -> s{_jobId = a})
+jId :: Lens' Job (Maybe Text)
+jId = lens _jId (\ s a -> s{_jId = a})
 
 -- | Any errors that occurred during processing.
-jobErrors :: Lens' Job [Text]
-jobErrors
-  = lens _jobErrors (\ s a -> s{_jobErrors = a}) .
-      _Default
+jErrors :: Lens' Job [Text]
+jErrors
+  = lens _jErrors (\ s a -> s{_jErrors = a}) . _Default
       . _Coerce
 
 -- | A summarized representation of the original service request.
-jobRequest :: Lens' Job (Maybe JobRequest)
-jobRequest
-  = lens _jobRequest (\ s a -> s{_jobRequest = a})
+jRequest :: Lens' Job (Maybe JobRequest)
+jRequest = lens _jRequest (\ s a -> s{_jRequest = a})
 
 instance FromJSON Job where
         parseJSON
@@ -3668,14 +3663,14 @@ instance ToJSON Job where
         toJSON Job{..}
           = object
               (catMaybes
-                 [("detailedStatus" .=) <$> _jobDetailedStatus,
-                  ("status" .=) <$> _jobStatus,
-                  ("created" .=) <$> _jobCreated,
-                  ("projectNumber" .=) <$> _jobProjectNumber,
-                  ("warnings" .=) <$> _jobWarnings,
-                  ("importedIds" .=) <$> _jobImportedIds,
-                  ("id" .=) <$> _jobId, ("errors" .=) <$> _jobErrors,
-                  ("request" .=) <$> _jobRequest])
+                 [("detailedStatus" .=) <$> _jDetailedStatus,
+                  ("status" .=) <$> _jStatus,
+                  ("created" .=) <$> _jCreated,
+                  ("projectNumber" .=) <$> _jProjectNumber,
+                  ("warnings" .=) <$> _jWarnings,
+                  ("importedIds" .=) <$> _jImportedIds,
+                  ("id" .=) <$> _jId, ("errors" .=) <$> _jErrors,
+                  ("request" .=) <$> _jRequest])
 
 --
 -- /See:/ 'searchReferenceSetsResponse' smart constructor.

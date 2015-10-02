@@ -50,14 +50,14 @@ type RasterCollectionsParentsListResource =
      "rasterCollections" :>
        Capture "id" Text :>
          "parents" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "maxResults" Word32 :>
-                         QueryParam "fields" Text :>
+           QueryParam "maxResults" Word32 :>
+             QueryParam "pageToken" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ParentsListResponse
 
@@ -181,14 +181,13 @@ instance GoogleRequest RasterCollectionsParentsList'
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u
           RasterCollectionsParentsList'{..}
-          = go _rcplQuotaUser (Just _rcplPrettyPrint)
+          = go _rcplMaxResults _rcplPageToken _rcplId
+              _rcplQuotaUser
+              (Just _rcplPrettyPrint)
               _rcplUserIP
-              _rcplKey
-              _rcplId
-              _rcplPageToken
-              _rcplOAuthToken
-              _rcplMaxResults
               _rcplFields
+              _rcplKey
+              _rcplOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

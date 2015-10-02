@@ -48,9 +48,9 @@ type WebResourceListResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] SiteVerificationWebResourceListResponse
 
@@ -139,9 +139,9 @@ instance GoogleRequest WebResourceList' where
         request = requestWithRoute defReq siteVerificationURL
         requestWithRoute r u WebResourceList'{..}
           = go _wrlQuotaUser (Just _wrlPrettyPrint) _wrlUserIP
+              _wrlFields
               _wrlKey
               _wrlOAuthToken
-              _wrlFields
               (Just AltJSON)
           where go
                   = clientWithRoute

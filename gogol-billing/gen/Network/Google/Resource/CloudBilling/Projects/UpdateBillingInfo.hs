@@ -82,17 +82,17 @@ type ProjectsUpdateBillingInfoResource =
        "{+name}" :>
          "billingInfo" :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
+             QueryParam "access_token" Text :>
+               QueryParam "bearer_token" Text :>
+                 QueryParam "callback" Text :>
                    QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] ProjectBillingInfo :>
                                        Put '[JSON] ProjectBillingInfo
@@ -286,18 +286,17 @@ instance GoogleRequest ProjectsUpdateBillingInfo'
              ProjectBillingInfo
         request = requestWithRoute defReq billingURL
         requestWithRoute r u ProjectsUpdateBillingInfo'{..}
-          = go _pubiXgafv _pubiQuotaUser
-              (Just _pubiPrettyPrint)
-              _pubiUploadProtocol
-              (Just _pubiPp)
-              _pubiAccessToken
-              _pubiUploadType
-              _pubiBearerToken
-              _pubiKey
-              _pubiName
-              _pubiOAuthToken
-              _pubiFields
+          = go _pubiXgafv _pubiAccessToken _pubiBearerToken
               _pubiCallback
+              (Just _pubiPp)
+              _pubiUploadType
+              _pubiUploadProtocol
+              _pubiName
+              _pubiQuotaUser
+              (Just _pubiPrettyPrint)
+              _pubiFields
+              _pubiKey
+              _pubiOAuthToken
               (Just AltJSON)
               _pubiProjectBillingInfo
           where go

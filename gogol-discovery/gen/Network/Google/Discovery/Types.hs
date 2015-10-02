@@ -51,7 +51,7 @@ module Network.Google.Discovery.Types
 
     -- * JSONSchemaVariantMap
     , JSONSchemaVariantMap
-    , jSONSchemaVariantMap
+    , jsonSchemaVariantMap
     , jsvmRef
     , jsvmTypeValue
 
@@ -92,7 +92,7 @@ module Network.Google.Discovery.Types
 
     -- * JSONSchemaVariant
     , JSONSchemaVariant
-    , jSONSchemaVariant
+    , jsonSchemaVariant
     , jsvDiscriminant
     , jsvMap
 
@@ -142,7 +142,7 @@ module Network.Google.Discovery.Types
 
     -- * JSONSchema
     , JSONSchema
-    , jSONSchema
+    , jsonSchema
     , jsAnnotations
     , jsVariant
     , jsLocation
@@ -200,12 +200,12 @@ module Network.Google.Discovery.Types
 
     -- * JSONSchemaAnnotations
     , JSONSchemaAnnotations
-    , jSONSchemaAnnotations
+    , jsonSchemaAnnotations
     , jsaRequired
 
     -- * JSONSchemaProperties
     , JSONSchemaProperties
-    , jSONSchemaProperties
+    , jsonSchemaProperties
 
     -- * RestMethodMediaUpload
     , RestMethodMediaUpload

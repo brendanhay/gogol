@@ -49,9 +49,9 @@ type SubscriptionsInsertResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] Subscription :>
                        Post '[JSON] Subscription
@@ -148,9 +148,9 @@ instance GoogleRequest SubscriptionsInsert' where
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u SubscriptionsInsert'{..}
           = go _siQuotaUser (Just _siPrettyPrint) _siUserIP
+              _siFields
               _siKey
               _siOAuthToken
-              _siFields
               (Just AltJSON)
               _siSubscription
           where go

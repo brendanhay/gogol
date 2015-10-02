@@ -59,19 +59,19 @@ type ProjectsJobsCreateResource =
          Capture "projectId" Text :>
            "jobs" :>
              QueryParam "$.xgafv" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "upload_protocol" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "bearer_token" Text :>
+                   QueryParam "callback" Text :>
                      QueryParam "pp" Bool :>
-                       QueryParam "access_token" Text :>
+                       QueryParam "replaceJobId" Text :>
                          QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "view" Text :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "replaceJobId" Text :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "callback" Text :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "view" Text :>
+                               QueryParam "quotaUser" Text :>
+                                 QueryParam "prettyPrint" Bool :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "key" Key :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            ReqBody '[JSON] Job :>
                                              Post '[JSON] Job
@@ -251,19 +251,19 @@ instance GoogleRequest ProjectsJobsCreate' where
         type Rs ProjectsJobsCreate' = Job
         request = requestWithRoute defReq dataflowURL
         requestWithRoute r u ProjectsJobsCreate'{..}
-          = go _pjcXgafv _pjcQuotaUser (Just _pjcPrettyPrint)
-              _pjcUploadProtocol
+          = go _pjcXgafv _pjcAccessToken _pjcBearerToken
+              _pjcCallback
               (Just _pjcPp)
-              _pjcAccessToken
+              _pjcReplaceJobId
               _pjcUploadType
-              _pjcBearerToken
-              _pjcKey
+              _pjcUploadProtocol
               _pjcView
               _pjcProjectId
-              _pjcOAuthToken
-              _pjcReplaceJobId
+              _pjcQuotaUser
+              (Just _pjcPrettyPrint)
               _pjcFields
-              _pjcCallback
+              _pjcKey
+              _pjcOAuthToken
               (Just AltJSON)
               _pjcJob
           where go

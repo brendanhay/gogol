@@ -55,13 +55,13 @@ type InstancesAddAccessConfigResource =
            "instances" :>
              Capture "instance" Text :>
                "addAccessConfig" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "networkInterface" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                 QueryParam "networkInterface" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] AccessConfig :>
                                    Post '[JSON] Operation
@@ -202,15 +202,14 @@ instance GoogleRequest InstancesAddAccessConfig'
         type Rs InstancesAddAccessConfig' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstancesAddAccessConfig'{..}
-          = go _iaacQuotaUser (Just _iaacPrettyPrint)
-              _iaacProject
-              _iaacUserIP
+          = go _iaacProject _iaacZone _iaacInstance
               (Just _iaacNetworkInterface)
-              _iaacZone
+              _iaacQuotaUser
+              (Just _iaacPrettyPrint)
+              _iaacUserIP
+              _iaacFields
               _iaacKey
               _iaacOAuthToken
-              _iaacFields
-              _iaacInstance
               (Just AltJSON)
               _iaacAccessConfig
           where go

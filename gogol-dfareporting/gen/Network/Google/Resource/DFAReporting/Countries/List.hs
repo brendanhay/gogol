@@ -51,9 +51,9 @@ type CountriesListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] CountriesListResponse
 
@@ -150,11 +150,12 @@ instance GoogleRequest CountriesList' where
         type Rs CountriesList' = CountriesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CountriesList'{..}
-          = go _couQuotaUser (Just _couPrettyPrint) _couUserIP
-              _couProfileId
+          = go _couProfileId _couQuotaUser
+              (Just _couPrettyPrint)
+              _couUserIP
+              _couFields
               _couKey
               _couOAuthToken
-              _couFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -61,18 +61,18 @@ type ReadgroupsetsCoveragebucketsListResource =
      "readgroupsets" :>
        Capture "readGroupSetId" Text :>
          "coveragebuckets" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "range.end" Int64 :>
+           QueryParam "pageSize" Int32 :>
+             QueryParam "pageToken" Text :>
+               QueryParam "range.end" Int64 :>
+                 QueryParam "range.referenceName" Text :>
                    QueryParam "range.start" Int64 :>
                      QueryParam "targetBucketWidth" Int64 :>
-                       QueryParam "key" Key :>
-                         QueryParam "range.referenceName" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "pageSize" Int32 :>
-                                 QueryParam "fields" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] ListCoverageBucketsResponse
 
@@ -248,18 +248,17 @@ instance GoogleRequest
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u
           ReadgroupsetsCoveragebucketsList'{..}
-          = go _rclQuotaUser (Just _rclPrettyPrint)
-              _rclReadGroupSetId
-              _rclUserIP
-              _rclRangeEnd
+          = go _rclPageSize _rclPageToken _rclRangeEnd
+              _rclRangeReferenceName
               _rclRangeStart
               _rclTargetBucketWidth
-              _rclKey
-              _rclRangeReferenceName
-              _rclPageToken
-              _rclOAuthToken
-              _rclPageSize
+              _rclReadGroupSetId
+              _rclQuotaUser
+              (Just _rclPrettyPrint)
+              _rclUserIP
               _rclFields
+              _rclKey
+              _rclOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

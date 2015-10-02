@@ -66,29 +66,28 @@ type AccountsExperienceLocalesListResource =
        "accounts" :>
          Capture "accountId" Text :>
            "experienceLocales" :>
-             QueryParam "titleLevelEidr" Text :>
-               QueryParams "status" Text :>
-                 QueryParams "pphNames" Text :>
-                   QueryParam "$.xgafv" Text :>
-                     QueryParams "studioNames" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "upload_protocol" Text :>
-                             QueryParam "pp" Bool :>
-                               QueryParam "access_token" Text :>
-                                 QueryParam "uploadType" Text :>
-                                   QueryParam "altCutId" Text :>
-                                     QueryParam "customId" Text :>
-                                       QueryParam "bearer_token" Text :>
-                                         QueryParam "key" Key :>
-                                           QueryParam "editLevelEidr" Text :>
-                                             QueryParam "pageToken" Text :>
-                                               QueryParam "oauth_token"
-                                                 OAuthToken
-                                                 :>
-                                                 QueryParam "pageSize" Int32 :>
-                                                   QueryParam "fields" Text :>
-                                                     QueryParam "callback" Text
+             QueryParam "$.xgafv" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "altCutId" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "customId" Text :>
+                         QueryParam "editLevelEidr" Text :>
+                           QueryParam "pageSize" Int32 :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "pp" Bool :>
+                                 QueryParams "pphNames" Text :>
+                                   QueryParams "status" Text :>
+                                     QueryParams "studioNames" Text :>
+                                       QueryParam "titleLevelEidr" Text :>
+                                         QueryParam "uploadType" Text :>
+                                           QueryParam "upload_protocol" Text :>
+                                             QueryParam "quotaUser" Text :>
+                                               QueryParam "prettyPrint" Bool :>
+                                                 QueryParam "fields" Text :>
+                                                   QueryParam "key" Key :>
+                                                     QueryParam "oauth_token"
+                                                       OAuthToken
                                                        :>
                                                        QueryParam "alt" AltJSON
                                                          :>
@@ -340,26 +339,26 @@ instance GoogleRequest AccountsExperienceLocalesList'
           = requestWithRoute defReq playMoviesPartnerURL
         requestWithRoute r u
           AccountsExperienceLocalesList'{..}
-          = go _aellTitleLevelEidr _aellStatus _aellPphNames
-              _aellXgafv
+          = go _aellXgafv _aellAccessToken _aellAltCutId
+              _aellBearerToken
+              _aellCallback
+              _aellCustomId
+              _aellEditLevelEidr
+              _aellPageSize
+              _aellPageToken
+              (Just _aellPp)
+              _aellPphNames
+              _aellStatus
               _aellStudioNames
+              _aellTitleLevelEidr
+              _aellUploadType
+              _aellUploadProtocol
+              _aellAccountId
               _aellQuotaUser
               (Just _aellPrettyPrint)
-              _aellUploadProtocol
-              (Just _aellPp)
-              _aellAccessToken
-              _aellUploadType
-              _aellAltCutId
-              _aellCustomId
-              _aellAccountId
-              _aellBearerToken
-              _aellKey
-              _aellEditLevelEidr
-              _aellPageToken
-              _aellOAuthToken
-              _aellPageSize
               _aellFields
-              _aellCallback
+              _aellKey
+              _aellOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

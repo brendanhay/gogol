@@ -48,14 +48,14 @@ import           Network.Google.Prelude
 type FilesGenerateIdsResource =
      "files" :>
        "generateIds" :>
-         QueryParam "space" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "maxResults" Int32 :>
-                       QueryParam "fields" Text :>
+         QueryParam "maxResults" Int32 :>
+           QueryParam "space" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] GeneratedIds
 
 -- | Generates a set of file IDs which can be provided in insert requests.
@@ -160,13 +160,13 @@ instance GoogleRequest FilesGenerateIds' where
         type Rs FilesGenerateIds' = GeneratedIds
         request = requestWithRoute defReq driveURL
         requestWithRoute r u FilesGenerateIds'{..}
-          = go (Just _fgiSpace) _fgiQuotaUser
+          = go (Just _fgiMaxResults) (Just _fgiSpace)
+              _fgiQuotaUser
               (Just _fgiPrettyPrint)
               _fgiUserIP
+              _fgiFields
               _fgiKey
               _fgiOAuthToken
-              (Just _fgiMaxResults)
-              _fgiFields
               (Just AltJSON)
           where go
                   = clientWithRoute

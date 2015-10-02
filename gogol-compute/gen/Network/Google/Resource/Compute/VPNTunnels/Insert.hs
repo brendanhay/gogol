@@ -27,7 +27,7 @@ module Network.Google.Resource.Compute.VPNTunnels.Insert
       VPNTunnelsInsertResource
 
     -- * Creating a Request
-    , vPNTunnelsInsert'
+    , vpnTunnelsInsert'
     , VPNTunnelsInsert'
 
     -- * Request Lenses
@@ -55,16 +55,16 @@ type VPNTunnelsInsertResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] VPNTunnel :> Post '[JSON] Operation
 
 -- | Creates a VpnTunnel resource in the specified project and region using
 -- the data included in the request.
 --
--- /See:/ 'vPNTunnelsInsert'' smart constructor.
+-- /See:/ 'vpnTunnelsInsert'' smart constructor.
 data VPNTunnelsInsert' = VPNTunnelsInsert'
     { _vtiQuotaUser   :: !(Maybe Text)
     , _vtiPrettyPrint :: !Bool
@@ -98,12 +98,12 @@ data VPNTunnelsInsert' = VPNTunnelsInsert'
 -- * 'vtiOAuthToken'
 --
 -- * 'vtiFields'
-vPNTunnelsInsert'
+vpnTunnelsInsert'
     :: Text -- ^ 'project'
     -> Text -- ^ 'region'
     -> VPNTunnel -- ^ 'VPNTunnel'
     -> VPNTunnelsInsert'
-vPNTunnelsInsert' pVtiProject_ pVtiRegion_ pVtiVPNTunnel_ =
+vpnTunnelsInsert' pVtiProject_ pVtiRegion_ pVtiVPNTunnel_ =
     VPNTunnelsInsert'
     { _vtiQuotaUser = Nothing
     , _vtiPrettyPrint = True
@@ -175,12 +175,12 @@ instance GoogleRequest VPNTunnelsInsert' where
         type Rs VPNTunnelsInsert' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u VPNTunnelsInsert'{..}
-          = go _vtiQuotaUser (Just _vtiPrettyPrint) _vtiProject
+          = go _vtiProject _vtiRegion _vtiQuotaUser
+              (Just _vtiPrettyPrint)
               _vtiUserIP
-              _vtiKey
-              _vtiRegion
-              _vtiOAuthToken
               _vtiFields
+              _vtiKey
+              _vtiOAuthToken
               (Just AltJSON)
               _vtiVPNTunnel
           where go

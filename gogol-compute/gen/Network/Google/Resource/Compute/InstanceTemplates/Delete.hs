@@ -53,9 +53,9 @@ type InstanceTemplatesDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified instance template.
@@ -162,12 +162,12 @@ instance GoogleRequest InstanceTemplatesDelete' where
         type Rs InstanceTemplatesDelete' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstanceTemplatesDelete'{..}
-          = go _itdQuotaUser (Just _itdPrettyPrint) _itdProject
+          = go _itdProject _itdInstanceTemplate _itdQuotaUser
+              (Just _itdPrettyPrint)
               _itdUserIP
-              _itdInstanceTemplate
+              _itdFields
               _itdKey
               _itdOAuthToken
-              _itdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

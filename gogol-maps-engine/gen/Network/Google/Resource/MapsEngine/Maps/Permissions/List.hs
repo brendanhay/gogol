@@ -51,9 +51,9 @@ type MapsPermissionsListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] PermissionsListResponse
 
@@ -150,11 +150,11 @@ instance GoogleRequest MapsPermissionsList' where
              PermissionsListResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u MapsPermissionsList'{..}
-          = go _mplQuotaUser (Just _mplPrettyPrint) _mplUserIP
-              _mplKey
-              _mplId
-              _mplOAuthToken
+          = go _mplId _mplQuotaUser (Just _mplPrettyPrint)
+              _mplUserIP
               _mplFields
+              _mplKey
+              _mplOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

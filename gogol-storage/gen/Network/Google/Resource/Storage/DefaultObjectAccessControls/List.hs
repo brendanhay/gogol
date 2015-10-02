@@ -50,14 +50,14 @@ type DefaultObjectAccessControlsListResource =
      "b" :>
        Capture "bucket" Text :>
          "defaultObjectAcl" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "ifMetagenerationMatch" Int64 :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "ifMetagenerationNotMatch" Int64 :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+           QueryParam "ifMetagenerationMatch" Int64 :>
+             QueryParam "ifMetagenerationNotMatch" Int64 :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ObjectAccessControls
 
@@ -181,14 +181,15 @@ instance GoogleRequest
         request = requestWithRoute defReq storageURL
         requestWithRoute r u
           DefaultObjectAccessControlsList'{..}
-          = go _doaclQuotaUser _doaclIfMetagenerationMatch
+          = go _doaclIfMetagenerationMatch
+              _doaclIfMetagenerationNotMatch
+              _doaclBucket
+              _doaclQuotaUser
               (Just _doaclPrettyPrint)
               _doaclUserIP
-              _doaclBucket
-              _doaclKey
-              _doaclIfMetagenerationNotMatch
-              _doaclOAuthToken
               _doaclFields
+              _doaclKey
+              _doaclOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

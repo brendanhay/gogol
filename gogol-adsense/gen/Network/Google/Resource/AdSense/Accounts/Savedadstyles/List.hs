@@ -50,14 +50,14 @@ type AccountsSavedadstylesListResource =
      "accounts" :>
        Capture "accountId" Text :>
          "savedadstyles" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "maxResults" Int32 :>
-                         QueryParam "fields" Text :>
+           QueryParam "maxResults" Int32 :>
+             QueryParam "pageToken" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] SavedAdStyles
 
 -- | List all saved ad styles in the specified account.
@@ -176,13 +176,13 @@ instance GoogleRequest AccountsSavedadstylesList'
         type Rs AccountsSavedadstylesList' = SavedAdStyles
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u AccountsSavedadstylesList'{..}
-          = go _aslQuotaUser (Just _aslPrettyPrint) _aslUserIP
-              _aslAccountId
-              _aslKey
-              _aslPageToken
-              _aslOAuthToken
-              _aslMaxResults
+          = go _aslMaxResults _aslPageToken _aslAccountId
+              _aslQuotaUser
+              (Just _aslPrettyPrint)
+              _aslUserIP
               _aslFields
+              _aslKey
+              _aslOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

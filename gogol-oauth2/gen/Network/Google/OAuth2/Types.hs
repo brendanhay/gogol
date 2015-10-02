@@ -17,8 +17,8 @@ module Network.Google.OAuth2.Types
     -- * Service URL
       oAuth2URL
 
-    -- * JwkKeys
-    , JwkKeys
+    -- * JWKKeys
+    , JWKKeys
     , jwkKeys
     , jkAlg
     , jkUse
@@ -40,10 +40,10 @@ module Network.Google.OAuth2.Types
     , tiTokenHandle
     , tiIssuedTo
 
-    -- * Jwk
-    , Jwk
+    -- * JWK
+    , JWK
     , jwk
-    , jwkKeys
+    , jKeys
 
     -- * UserInfoplus
     , UserInfoplus

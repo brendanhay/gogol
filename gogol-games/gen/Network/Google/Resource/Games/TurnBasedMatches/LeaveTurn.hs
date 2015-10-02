@@ -52,15 +52,15 @@ type TurnBasedMatchesLeaveTurnResource =
      "turnbasedmatches" :>
        Capture "matchId" Text :>
          "leaveTurn" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "language" Text :>
-                     QueryParam "pendingParticipantId" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "matchVersion" Int32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "language" Text :>
+             QueryParam "pendingParticipantId" Text :>
+               QueryParam "matchVersion" Int32 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Put '[JSON] TurnBasedMatch
 
@@ -194,15 +194,15 @@ instance GoogleRequest TurnBasedMatchesLeaveTurn'
         type Rs TurnBasedMatchesLeaveTurn' = TurnBasedMatch
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u TurnBasedMatchesLeaveTurn'{..}
-          = go _tbmltQuotaUser (Just _tbmltPrettyPrint)
-              _tbmltUserIP
-              _tbmltKey
-              _tbmltLanguage
-              _tbmltPendingParticipantId
-              _tbmltOAuthToken
+          = go _tbmltLanguage _tbmltPendingParticipantId
               _tbmltMatchId
               (Just _tbmltMatchVersion)
+              _tbmltQuotaUser
+              (Just _tbmltPrettyPrint)
+              _tbmltUserIP
               _tbmltFields
+              _tbmltKey
+              _tbmltOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

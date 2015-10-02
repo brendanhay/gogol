@@ -54,17 +54,17 @@ type ChangesListResource =
        "managedZones" :>
          Capture "managedZone" Text :>
            "changes" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
+             QueryParam "maxResults" Int32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "sortBy" DNSChangesListSortBy :>
                    QueryParam "sortOrder" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Int32 :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" AltJSON :>
-                                 QueryParam "sortBy" DNSChangesListSortBy :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
+                                 QueryParam "alt" AltJSON :>
                                    Get '[JSON] ChangesListResponse
 
 -- | Enumerate Changes to a ResourceRecordSet collection.
@@ -206,16 +206,16 @@ instance GoogleRequest ChangesList' where
         type Rs ChangesList' = ChangesListResponse
         request = requestWithRoute defReq dNSURL
         requestWithRoute r u ChangesList'{..}
-          = go _clQuotaUser (Just _clPrettyPrint) _clProject
-              _clUserIP
+          = go _clMaxResults _clPageToken (Just _clSortBy)
               _clSortOrder
-              _clKey
-              _clPageToken
-              _clOAuthToken
+              _clProject
               _clManagedZone
-              _clMaxResults
+              _clQuotaUser
+              (Just _clPrettyPrint)
+              _clUserIP
               _clFields
-              (Just _clSortBy)
+              _clKey
+              _clOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

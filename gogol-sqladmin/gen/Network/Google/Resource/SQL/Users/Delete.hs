@@ -53,14 +53,14 @@ type UsersDeleteResource =
          "instances" :>
            Capture "instance" Text :>
              "users" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "name" Text :>
-                         QueryParam "host" Text :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+               QueryParam "host" Text :>
+                 QueryParam "name" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Delete '[JSON] Operation
 
@@ -182,14 +182,14 @@ instance GoogleRequest UsersDelete' where
         type Rs UsersDelete' = Operation
         request = requestWithRoute defReq sQLAdminURL
         requestWithRoute r u UsersDelete'{..}
-          = go _udQuotaUser (Just _udPrettyPrint) _udProject
-              _udUserIP
-              _udKey
+          = go _udProject _udInstance (Just _udHost)
               (Just _udName)
-              (Just _udHost)
-              _udOAuthToken
+              _udQuotaUser
+              (Just _udPrettyPrint)
+              _udUserIP
               _udFields
-              _udInstance
+              _udKey
+              _udOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -51,9 +51,9 @@ type CallsetsPatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] CallSet :> Patch '[JSON] CallSet
 
@@ -157,11 +157,11 @@ instance GoogleRequest CallsetsPatch' where
         type Rs CallsetsPatch' = CallSet
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u CallsetsPatch'{..}
-          = go _cpQuotaUser (Just _cpPrettyPrint) _cpUserIP
-              _cpKey
-              _cpCallSetId
-              _cpOAuthToken
+          = go _cpCallSetId _cpQuotaUser (Just _cpPrettyPrint)
+              _cpUserIP
               _cpFields
+              _cpKey
+              _cpOAuthToken
               (Just AltJSON)
               _cpCallSet
           where go

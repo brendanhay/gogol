@@ -49,13 +49,13 @@ import           Network.Google.Prelude
 type PermissionsGetResource =
      "permissions" :>
        Capture "permissionId" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "language" Text :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+         QueryParam "language" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Permission
 
 -- | Retrieves details of an Android app permission for display to an
@@ -161,12 +161,12 @@ instance GoogleRequest PermissionsGet' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u PermissionsGet'{..}
-          = go _pgQuotaUser (Just _pgPrettyPrint) _pgUserIP
-              _pgKey
-              _pgLanguage
-              _pgOAuthToken
-              _pgPermissionId
+          = go _pgLanguage _pgPermissionId _pgQuotaUser
+              (Just _pgPrettyPrint)
+              _pgUserIP
               _pgFields
+              _pgKey
+              _pgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

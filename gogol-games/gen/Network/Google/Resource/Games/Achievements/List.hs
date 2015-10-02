@@ -53,16 +53,16 @@ type AchievementsListResource =
      "players" :>
        Capture "playerId" Text :>
          "achievements" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "state" GamesAchievementsListState :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "language" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Int32 :>
-                             QueryParam "fields" Text :>
+           QueryParam "language" Text :>
+             QueryParam "maxResults" Int32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "state" GamesAchievementsListState :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] PlayerAchievementListResponse
 
@@ -197,15 +197,14 @@ instance GoogleRequest AchievementsList' where
              PlayerAchievementListResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u AchievementsList'{..}
-          = go _alQuotaUser (Just _alPrettyPrint) _alState
-              _alUserIP
-              _alKey
-              _alLanguage
-              _alPageToken
-              _alOAuthToken
+          = go _alLanguage _alMaxResults _alPageToken _alState
               _alPlayerId
-              _alMaxResults
+              _alQuotaUser
+              (Just _alPrettyPrint)
+              _alUserIP
               _alFields
+              _alKey
+              _alOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

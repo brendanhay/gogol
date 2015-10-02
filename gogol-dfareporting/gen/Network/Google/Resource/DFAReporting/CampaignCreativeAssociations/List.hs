@@ -55,17 +55,17 @@ type CampaignCreativeAssociationsListResource =
          "campaigns" :>
            Capture "campaignId" Int64 :>
              "campaignCreativeAssociations" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "sortOrder"
-                       DfareportingCampaignCreativeAssociationsListSortOrder
-                       :>
-                       QueryParam "key" Key :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "maxResults" Int32 :>
-                               QueryParam "fields" Text :>
+               QueryParam "maxResults" Int32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "sortOrder"
+                     DfareportingCampaignCreativeAssociationsListSortOrder
+                     :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON]
                                      CampaignCreativeAssociationsListResponse
@@ -211,16 +211,15 @@ instance GoogleRequest
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           CampaignCreativeAssociationsList'{..}
-          = go _ccalQuotaUser (Just _ccalPrettyPrint)
-              _ccalUserIP
-              _ccalCampaignId
+          = go _ccalMaxResults _ccalPageToken _ccalSortOrder
               _ccalProfileId
-              _ccalSortOrder
-              _ccalKey
-              _ccalPageToken
-              _ccalOAuthToken
-              _ccalMaxResults
+              _ccalCampaignId
+              _ccalQuotaUser
+              (Just _ccalPrettyPrint)
+              _ccalUserIP
               _ccalFields
+              _ccalKey
+              _ccalOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

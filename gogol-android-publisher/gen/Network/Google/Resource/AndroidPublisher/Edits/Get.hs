@@ -53,9 +53,9 @@ type EditsGetResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] AppEdit
 
 -- | Returns information about the edit specified. Calls will fail if the
@@ -160,13 +160,12 @@ instance GoogleRequest EditsGet' where
         type Rs EditsGet' = AppEdit
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u EditsGet'{..}
-          = go _egQuotaUser (Just _egPrettyPrint)
-              _egPackageName
+          = go _egPackageName _egEditId _egQuotaUser
+              (Just _egPrettyPrint)
               _egUserIP
+              _egFields
               _egKey
               _egOAuthToken
-              _egEditId
-              _egFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy EditsGetResource) r

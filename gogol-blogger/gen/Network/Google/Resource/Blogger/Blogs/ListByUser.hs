@@ -52,16 +52,16 @@ type BlogsListByUserResource =
      "users" :>
        Capture "userId" Text :>
          "blogs" :>
-           QueryParams "status" BloggerBlogsListByUserStatus :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fetchUserInfo" Bool :>
-                     QueryParams "role" BloggerBlogsListByUserRole :>
-                       QueryParam "key" Key :>
-                         QueryParam "view" BloggerBlogsListByUserView :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+           QueryParam "fetchUserInfo" Bool :>
+             QueryParams "role" BloggerBlogsListByUserRole :>
+               QueryParams "status" BloggerBlogsListByUserStatus :>
+                 QueryParam "view" BloggerBlogsListByUserView :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Get '[JSON] BlogList
 
 -- | Retrieves a list of blogs, possibly filtered.
@@ -199,16 +199,15 @@ instance GoogleRequest BlogsListByUser' where
         type Rs BlogsListByUser' = BlogList
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u BlogsListByUser'{..}
-          = go (Just _blbuStatus) _blbuQuotaUser
+          = go _blbuFetchUserInfo _blbuRole (Just _blbuStatus)
+              _blbuView
+              _blbuUserId
+              _blbuQuotaUser
               (Just _blbuPrettyPrint)
               _blbuUserIP
-              _blbuFetchUserInfo
-              _blbuUserId
-              _blbuRole
-              _blbuKey
-              _blbuView
-              _blbuOAuthToken
               _blbuFields
+              _blbuKey
+              _blbuOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

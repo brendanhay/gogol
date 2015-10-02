@@ -50,15 +50,15 @@ import           Network.Google.Prelude
 type LicenseAssignmentsListForProductResource =
      Capture "productId" Text :>
        "users" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "customerId" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "maxResults" Word32 :>
-                         QueryParam "fields" Text :>
+         QueryParam "maxResults" Word32 :>
+           QueryParam "pageToken" Text :>
+             QueryParam "customerId" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] LicenseAssignmentList
 
@@ -195,15 +195,15 @@ instance GoogleRequest
         request = requestWithRoute defReq appsLicensingURL
         requestWithRoute r u
           LicenseAssignmentsListForProduct'{..}
-          = go _lalfpQuotaUser (Just _lalfpPrettyPrint)
-              _lalfpUserIP
-              (Just _lalfpCustomerId)
-              _lalfpKey
-              (Just _lalfpPageToken)
-              _lalfpOAuthToken
+          = go (Just _lalfpMaxResults) (Just _lalfpPageToken)
               _lalfpProductId
-              (Just _lalfpMaxResults)
+              (Just _lalfpCustomerId)
+              _lalfpQuotaUser
+              (Just _lalfpPrettyPrint)
+              _lalfpUserIP
               _lalfpFields
+              _lalfpKey
+              _lalfpOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

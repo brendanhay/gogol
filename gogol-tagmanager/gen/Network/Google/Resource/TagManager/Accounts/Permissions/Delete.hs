@@ -54,9 +54,9 @@ type AccountsPermissionsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Removes a user from the account, revoking access to it and all of its
@@ -165,12 +165,12 @@ instance GoogleRequest AccountsPermissionsDelete'
         type Rs AccountsPermissionsDelete' = ()
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u AccountsPermissionsDelete'{..}
-          = go _apdQuotaUser (Just _apdPrettyPrint) _apdUserIP
-              _apdAccountId
+          = go _apdAccountId _apdPermissionId _apdQuotaUser
+              (Just _apdPrettyPrint)
+              _apdUserIP
+              _apdFields
               _apdKey
               _apdOAuthToken
-              _apdPermissionId
-              _apdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

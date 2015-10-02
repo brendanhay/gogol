@@ -47,13 +47,13 @@ import           Network.Google.Prelude
 type CloudLoadingDeleteBookResource =
      "cloudloading" :>
        "deleteBook" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "volumeId" Text :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+         QueryParam "volumeId" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Remove the book and its contents
@@ -150,12 +150,12 @@ instance GoogleRequest CloudLoadingDeleteBook' where
         type Rs CloudLoadingDeleteBook' = ()
         request = requestWithRoute defReq booksURL
         requestWithRoute r u CloudLoadingDeleteBook'{..}
-          = go _cldbQuotaUser (Just _cldbPrettyPrint)
+          = go (Just _cldbVolumeId) _cldbQuotaUser
+              (Just _cldbPrettyPrint)
               _cldbUserIP
-              _cldbKey
-              (Just _cldbVolumeId)
-              _cldbOAuthToken
               _cldbFields
+              _cldbKey
+              _cldbOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

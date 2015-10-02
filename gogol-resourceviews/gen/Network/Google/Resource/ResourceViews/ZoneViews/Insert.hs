@@ -54,9 +54,9 @@ type ZoneViewsInsertResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] ResourceView :>
                              Post '[JSON] Operation
@@ -174,12 +174,12 @@ instance GoogleRequest ZoneViewsInsert' where
         type Rs ZoneViewsInsert' = Operation
         request = requestWithRoute defReq resourceViewsURL
         requestWithRoute r u ZoneViewsInsert'{..}
-          = go _zviQuotaUser (Just _zviPrettyPrint) _zviProject
+          = go _zviProject _zviZone _zviQuotaUser
+              (Just _zviPrettyPrint)
               _zviUserIP
-              _zviZone
+              _zviFields
               _zviKey
               _zviOAuthToken
-              _zviFields
               (Just AltJSON)
               _zviResourceView
           where go

@@ -53,9 +53,9 @@ type PermissionsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Permission
 
 -- | Gets a permission by ID.
@@ -162,12 +162,12 @@ instance GoogleRequest PermissionsGet' where
         type Rs PermissionsGet' = Permission
         request = requestWithRoute defReq driveURL
         requestWithRoute r u PermissionsGet'{..}
-          = go _pggQuotaUser (Just _pggPrettyPrint) _pggUserIP
-              _pggKey
-              _pggFileId
-              _pggOAuthToken
-              _pggPermissionId
+          = go _pggFileId _pggPermissionId _pggQuotaUser
+              (Just _pggPrettyPrint)
+              _pggUserIP
               _pggFields
+              _pggKey
+              _pggOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

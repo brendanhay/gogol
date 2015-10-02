@@ -49,15 +49,15 @@ import           Network.Google.Prelude
 -- 'EventsListByPlayer'' request conforms to.
 type EventsListByPlayerResource =
      "events" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "language" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "maxResults" Int32 :>
-                       QueryParam "fields" Text :>
+       QueryParam "language" Text :>
+         QueryParam "maxResults" Int32 :>
+           QueryParam "pageToken" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] PlayerEventListResponse
 
@@ -177,14 +177,13 @@ instance GoogleRequest EventsListByPlayer' where
         type Rs EventsListByPlayer' = PlayerEventListResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u EventsListByPlayer'{..}
-          = go _elbpQuotaUser (Just _elbpPrettyPrint)
+          = go _elbpLanguage _elbpMaxResults _elbpPageToken
+              _elbpQuotaUser
+              (Just _elbpPrettyPrint)
               _elbpUserIP
-              _elbpKey
-              _elbpLanguage
-              _elbpPageToken
-              _elbpOAuthToken
-              _elbpMaxResults
               _elbpFields
+              _elbpKey
+              _elbpOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

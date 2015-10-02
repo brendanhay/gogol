@@ -54,15 +54,15 @@ type InstanceGroupManagersListResource =
        "zones" :>
          Capture "zone" Text :>
            "instanceGroupManagers" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "filter" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
+             QueryParam "filter" Text :>
+               QueryParam "maxResults" Word32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] InstanceGroupManagerList
 
@@ -213,16 +213,16 @@ instance GoogleRequest InstanceGroupManagersList'
              InstanceGroupManagerList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstanceGroupManagersList'{..}
-          = go _igmlQuotaUser (Just _igmlPrettyPrint)
-              _igmlProject
-              _igmlUserIP
-              _igmlZone
-              _igmlKey
-              _igmlFilter
+          = go _igmlFilter (Just _igmlMaxResults)
               _igmlPageToken
-              _igmlOAuthToken
-              (Just _igmlMaxResults)
+              _igmlProject
+              _igmlZone
+              _igmlQuotaUser
+              (Just _igmlPrettyPrint)
+              _igmlUserIP
               _igmlFields
+              _igmlKey
+              _igmlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

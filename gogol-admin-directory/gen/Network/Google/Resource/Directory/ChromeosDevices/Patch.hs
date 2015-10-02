@@ -53,15 +53,15 @@ type ChromeosDevicesPatchResource =
          "devices" :>
            "chromeos" :>
              Capture "deviceId" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "projection"
-                         DirectoryChromeosDevicesPatchProjection
-                         :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+               QueryParam "projection"
+                 DirectoryChromeosDevicesPatchProjection
+                 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] ChromeOSDevice :>
                                  Patch '[JSON] ChromeOSDevice
@@ -191,13 +191,13 @@ instance GoogleRequest ChromeosDevicesPatch' where
         type Rs ChromeosDevicesPatch' = ChromeOSDevice
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u ChromeosDevicesPatch'{..}
-          = go _cdpQuotaUser (Just _cdpPrettyPrint) _cdpUserIP
-              _cdpCustomerId
-              _cdpKey
-              _cdpDeviceId
-              _cdpProjection
-              _cdpOAuthToken
+          = go _cdpProjection _cdpCustomerId _cdpDeviceId
+              _cdpQuotaUser
+              (Just _cdpPrettyPrint)
+              _cdpUserIP
               _cdpFields
+              _cdpKey
+              _cdpOAuthToken
               (Just AltJSON)
               _cdpChromeOSDevice
           where go

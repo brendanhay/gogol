@@ -58,17 +58,17 @@ type UserProfilesGetResource =
        "userProfiles" :>
          Capture "userId" Text :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
+             QueryParam "access_token" Text :>
+               QueryParam "bearer_token" Text :>
+                 QueryParam "callback" Text :>
                    QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] UserProfile
 
@@ -225,17 +225,17 @@ instance GoogleRequest UserProfilesGet' where
         type Rs UserProfilesGet' = UserProfile
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u UserProfilesGet'{..}
-          = go _upgXgafv _upgQuotaUser (Just _upgPrettyPrint)
-              _upgUploadProtocol
+          = go _upgXgafv _upgAccessToken _upgBearerToken
+              _upgCallback
               (Just _upgPp)
-              _upgAccessToken
               _upgUploadType
+              _upgUploadProtocol
               _upgUserId
-              _upgBearerToken
+              _upgQuotaUser
+              (Just _upgPrettyPrint)
+              _upgFields
               _upgKey
               _upgOAuthToken
-              _upgFields
-              _upgCallback
               (Just AltJSON)
           where go
                   = clientWithRoute

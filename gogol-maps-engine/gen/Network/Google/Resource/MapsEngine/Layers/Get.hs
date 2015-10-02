@@ -48,13 +48,13 @@ import           Network.Google.Prelude
 type LayersGetResource =
      "layers" :>
        Capture "id" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "version" MapsEngineLayersGetVersion :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+         QueryParam "version" MapsEngineLayersGetVersion :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Layer
 
 -- | Return metadata for a particular layer.
@@ -158,12 +158,12 @@ instance GoogleRequest LayersGet' where
         type Rs LayersGet' = Layer
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u LayersGet'{..}
-          = go _lgQuotaUser (Just _lgPrettyPrint) _lgUserIP
-              _lgKey
-              _lgVersion
-              _lgId
-              _lgOAuthToken
+          = go _lgVersion _lgId _lgQuotaUser
+              (Just _lgPrettyPrint)
+              _lgUserIP
               _lgFields
+              _lgKey
+              _lgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy LayersGetResource)

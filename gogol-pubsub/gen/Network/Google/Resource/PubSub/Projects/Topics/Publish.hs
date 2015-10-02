@@ -57,17 +57,17 @@ type ProjectsTopicsPublishResource =
      "v1beta2" :>
        "{+topic}:publish" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] PublishRequest :>
                                      Post '[JSON] PublishResponse
@@ -232,17 +232,17 @@ instance GoogleRequest ProjectsTopicsPublish' where
         type Rs ProjectsTopicsPublish' = PublishResponse
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u ProjectsTopicsPublish'{..}
-          = go _ptpXgafv _ptpQuotaUser (Just _ptpPrettyPrint)
-              _ptpUploadProtocol
+          = go _ptpXgafv _ptpAccessToken _ptpBearerToken
+              _ptpCallback
               (Just _ptpPp)
-              _ptpAccessToken
               _ptpUploadType
+              _ptpUploadProtocol
               _ptpTopic
-              _ptpBearerToken
+              _ptpQuotaUser
+              (Just _ptpPrettyPrint)
+              _ptpFields
               _ptpKey
               _ptpOAuthToken
-              _ptpFields
-              _ptpCallback
               (Just AltJSON)
               _ptpPublishRequest
           where go

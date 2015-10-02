@@ -60,18 +60,18 @@ type ProjectsJobsGetMetricsResource =
              Capture "jobId" Text :>
                "metrics" :>
                  QueryParam "$.xgafv" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "upload_protocol" Text :>
-                         QueryParam "startTime" Text :>
-                           QueryParam "pp" Bool :>
-                             QueryParam "access_token" Text :>
-                               QueryParam "uploadType" Text :>
-                                 QueryParam "bearer_token" Text :>
-                                   QueryParam "key" Key :>
-                                     QueryParam "oauth_token" OAuthToken :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "callback" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "startTime" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "upload_protocol" Text :>
+                                 QueryParam "quotaUser" Text :>
+                                   QueryParam "prettyPrint" Bool :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "key" Key :>
+                                         QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
                                              Get '[JSON] JobMetrics
 
@@ -247,20 +247,19 @@ instance GoogleRequest ProjectsJobsGetMetrics' where
         type Rs ProjectsJobsGetMetrics' = JobMetrics
         request = requestWithRoute defReq dataflowURL
         requestWithRoute r u ProjectsJobsGetMetrics'{..}
-          = go _pjgmXgafv _pjgmQuotaUser
-              (Just _pjgmPrettyPrint)
-              _pjgmJobId
-              _pjgmUploadProtocol
-              _pjgmStartTime
-              (Just _pjgmPp)
-              _pjgmAccessToken
-              _pjgmUploadType
-              _pjgmBearerToken
-              _pjgmKey
-              _pjgmProjectId
-              _pjgmOAuthToken
-              _pjgmFields
+          = go _pjgmXgafv _pjgmAccessToken _pjgmBearerToken
               _pjgmCallback
+              (Just _pjgmPp)
+              _pjgmStartTime
+              _pjgmUploadType
+              _pjgmUploadProtocol
+              _pjgmProjectId
+              _pjgmJobId
+              _pjgmQuotaUser
+              (Just _pjgmPrettyPrint)
+              _pjgmFields
+              _pjgmKey
+              _pjgmOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

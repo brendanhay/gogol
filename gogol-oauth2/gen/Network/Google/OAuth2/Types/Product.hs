@@ -20,7 +20,7 @@ import           Network.Google.Prelude
 
 --
 -- /See:/ 'jwkKeys' smart constructor.
-data JwkKeys = JwkKeys
+data JWKKeys = JWKKeys
     { _jkAlg :: !Text
     , _jkUse :: !Text
     , _jkKid :: !(Maybe Text)
@@ -29,7 +29,7 @@ data JwkKeys = JwkKeys
     , _jkKty :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'JwkKeys' with the minimum fields required to make a request.
+-- | Creates a value of 'JWKKeys' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -45,9 +45,9 @@ data JwkKeys = JwkKeys
 --
 -- * 'jkKty'
 jwkKeys
-    :: JwkKeys
+    :: JWKKeys
 jwkKeys =
-    JwkKeys
+    JWKKeys
     { _jkAlg = "RS256"
     , _jkUse = "sig"
     , _jkKid = Nothing
@@ -56,37 +56,37 @@ jwkKeys =
     , _jkKty = "RSA"
     }
 
-jkAlg :: Lens' JwkKeys Text
+jkAlg :: Lens' JWKKeys Text
 jkAlg = lens _jkAlg (\ s a -> s{_jkAlg = a})
 
-jkUse :: Lens' JwkKeys Text
+jkUse :: Lens' JWKKeys Text
 jkUse = lens _jkUse (\ s a -> s{_jkUse = a})
 
-jkKid :: Lens' JwkKeys (Maybe Text)
+jkKid :: Lens' JWKKeys (Maybe Text)
 jkKid = lens _jkKid (\ s a -> s{_jkKid = a})
 
-jkN :: Lens' JwkKeys (Maybe Text)
+jkN :: Lens' JWKKeys (Maybe Text)
 jkN = lens _jkN (\ s a -> s{_jkN = a})
 
-jkE :: Lens' JwkKeys (Maybe Text)
+jkE :: Lens' JWKKeys (Maybe Text)
 jkE = lens _jkE (\ s a -> s{_jkE = a})
 
-jkKty :: Lens' JwkKeys Text
+jkKty :: Lens' JWKKeys Text
 jkKty = lens _jkKty (\ s a -> s{_jkKty = a})
 
-instance FromJSON JwkKeys where
+instance FromJSON JWKKeys where
         parseJSON
-          = withObject "JwkKeys"
+          = withObject "JWKKeys"
               (\ o ->
-                 JwkKeys <$>
+                 JWKKeys <$>
                    (o .:? "alg" .!= "RS256") <*> (o .:? "use" .!= "sig")
                      <*> (o .:? "kid")
                      <*> (o .:? "n")
                      <*> (o .:? "e")
                      <*> (o .:? "kty" .!= "RSA"))
 
-instance ToJSON JwkKeys where
-        toJSON JwkKeys{..}
+instance ToJSON JWKKeys where
+        toJSON JWKKeys{..}
           = object
               (catMaybes
                  [Just ("alg" .= _jkAlg), Just ("use" .= _jkUse),
@@ -220,35 +220,35 @@ instance ToJSON TokenInfo where
 
 --
 -- /See:/ 'jwk' smart constructor.
-newtype Jwk = Jwk
-    { _jwkKeys :: Maybe [JwkKeys]
+newtype JWK = JWK
+    { _jKeys :: Maybe [JWKKeys]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Jwk' with the minimum fields required to make a request.
+-- | Creates a value of 'JWK' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'jwkKeys'
+-- * 'jKeys'
 jwk
-    :: Jwk
+    :: JWK
 jwk =
-    Jwk
-    { _jwkKeys = Nothing
+    JWK
+    { _jKeys = Nothing
     }
 
-jwkKeys :: Lens' Jwk [JwkKeys]
-jwkKeys
-  = lens _jwkKeys (\ s a -> s{_jwkKeys = a}) . _Default
-      . _Coerce
+jKeys :: Lens' JWK [JWKKeys]
+jKeys
+  = lens _jKeys (\ s a -> s{_jKeys = a}) . _Default .
+      _Coerce
 
-instance FromJSON Jwk where
+instance FromJSON JWK where
         parseJSON
-          = withObject "Jwk"
-              (\ o -> Jwk <$> (o .:? "keys" .!= mempty))
+          = withObject "JWK"
+              (\ o -> JWK <$> (o .:? "keys" .!= mempty))
 
-instance ToJSON Jwk where
-        toJSON Jwk{..}
-          = object (catMaybes [("keys" .=) <$> _jwkKeys])
+instance ToJSON JWK where
+        toJSON JWK{..}
+          = object (catMaybes [("keys" .=) <$> _jKeys])
 
 --
 -- /See:/ 'userInfoplus' smart constructor.

@@ -51,9 +51,9 @@ type PushtokensRemoveResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] PushTokenId :> Post '[JSON] ()
 
@@ -150,9 +150,9 @@ instance GoogleRequest PushtokensRemove' where
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u PushtokensRemove'{..}
           = go _prQuotaUser (Just _prPrettyPrint) _prUserIP
+              _prFields
               _prKey
               _prOAuthToken
-              _prFields
               (Just AltJSON)
               _prPushTokenId
           where go

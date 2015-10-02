@@ -52,13 +52,13 @@ type CirclesAddPeopleResource =
        Capture "circleId" Text :>
          "people" :>
            QueryParams "email" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParams "userId" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+             QueryParams "userId" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Put '[JSON] Circle
 
 -- | Add a person to a circle. Google+ limits certain circle operations,
@@ -172,13 +172,12 @@ instance GoogleRequest CirclesAddPeople' where
         type Rs CirclesAddPeople' = Circle
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u CirclesAddPeople'{..}
-          = go _capEmail _capQuotaUser (Just _capPrettyPrint)
+          = go _capEmail _capUserId _capCircleId _capQuotaUser
+              (Just _capPrettyPrint)
               _capUserIP
-              _capUserId
-              _capKey
-              _capCircleId
-              _capOAuthToken
               _capFields
+              _capKey
+              _capOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

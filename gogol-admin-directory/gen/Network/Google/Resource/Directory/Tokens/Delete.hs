@@ -53,9 +53,9 @@ type TokensDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete all access tokens issued by a user for an application.
@@ -159,12 +159,12 @@ instance GoogleRequest TokensDelete' where
         type Rs TokensDelete' = ()
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u TokensDelete'{..}
-          = go _tdClientId _tdQuotaUser (Just _tdPrettyPrint)
+          = go _tdUserKey _tdClientId _tdQuotaUser
+              (Just _tdPrettyPrint)
               _tdUserIP
+              _tdFields
               _tdKey
               _tdOAuthToken
-              _tdUserKey
-              _tdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

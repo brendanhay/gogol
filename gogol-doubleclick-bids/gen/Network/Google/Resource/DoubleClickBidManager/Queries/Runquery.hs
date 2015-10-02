@@ -51,9 +51,9 @@ type QueriesRunqueryResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] RunQueryRequest :> Post '[JSON] ()
 
@@ -158,11 +158,11 @@ instance GoogleRequest QueriesRunquery' where
         type Rs QueriesRunquery' = ()
         request = requestWithRoute defReq doubleClickBidsURL
         requestWithRoute r u QueriesRunquery'{..}
-          = go _qrQuotaUser _qrQueryId (Just _qrPrettyPrint)
+          = go _qrQueryId _qrQuotaUser (Just _qrPrettyPrint)
               _qrUserIP
+              _qrFields
               _qrKey
               _qrOAuthToken
-              _qrFields
               (Just AltJSON)
               _qrRunQueryRequest
           where go

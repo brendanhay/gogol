@@ -54,9 +54,9 @@ type EntitlementsListResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] EntitlementsListResponse
 
@@ -161,13 +161,12 @@ instance GoogleRequest EntitlementsList' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u EntitlementsList'{..}
-          = go _elQuotaUser (Just _elPrettyPrint)
-              _elEnterpriseId
+          = go _elEnterpriseId _elUserId _elQuotaUser
+              (Just _elPrettyPrint)
               _elUserIP
-              _elUserId
+              _elFields
               _elKey
               _elOAuthToken
-              _elFields
               (Just AltJSON)
           where go
                   = clientWithRoute

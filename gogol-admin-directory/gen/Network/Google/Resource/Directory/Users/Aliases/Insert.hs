@@ -52,9 +52,9 @@ type UsersAliasesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Alias :> Post '[JSON] Alias
 
@@ -160,11 +160,11 @@ instance GoogleRequest UsersAliasesInsert' where
         type Rs UsersAliasesInsert' = Alias
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u UsersAliasesInsert'{..}
-          = go _uaiQuotaUser (Just _uaiPrettyPrint) _uaiUserIP
+          = go _uaiUserKey _uaiQuotaUser (Just _uaiPrettyPrint)
+              _uaiUserIP
+              _uaiFields
               _uaiKey
               _uaiOAuthToken
-              _uaiUserKey
-              _uaiFields
               (Just AltJSON)
               _uaiAlias
           where go

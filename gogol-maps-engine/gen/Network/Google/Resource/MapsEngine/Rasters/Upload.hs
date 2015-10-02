@@ -50,9 +50,9 @@ type RastersUploadResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Raster :> Post '[JSON] Raster
 
@@ -146,9 +146,9 @@ instance GoogleRequest RastersUpload' where
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u RastersUpload'{..}
           = go _ruQuotaUser (Just _ruPrettyPrint) _ruUserIP
+              _ruFields
               _ruKey
               _ruOAuthToken
-              _ruFields
               (Just AltJSON)
               _ruRaster
           where go

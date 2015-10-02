@@ -52,9 +52,9 @@ type PlacementGroupsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] PlacementGroup :>
                            Post '[JSON] PlacementGroup
@@ -163,11 +163,12 @@ instance GoogleRequest PlacementGroupsInsert' where
         type Rs PlacementGroupsInsert' = PlacementGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementGroupsInsert'{..}
-          = go _pgiQuotaUser (Just _pgiPrettyPrint) _pgiUserIP
-              _pgiProfileId
+          = go _pgiProfileId _pgiQuotaUser
+              (Just _pgiPrettyPrint)
+              _pgiUserIP
+              _pgiFields
               _pgiKey
               _pgiOAuthToken
-              _pgiFields
               (Just AltJSON)
               _pgiPlacementGroup
           where go

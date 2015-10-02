@@ -352,25 +352,25 @@ module Network.Google.MapsEngine.Types
     -- * Map
     , Map
     , map'
-    , mapCreationTime
-    , mapWritersCanEditPermissions
-    , mapEtag
-    , mapDefaultViewport
-    , mapContents
-    , mapPublishingStatus
-    , mapCreatorEmail
-    , mapLastModifiedTime
-    , mapLastModifierEmail
-    , mapVersions
-    , mapName
-    , mapBbox
-    , mapProcessingStatus
-    , mapId
-    , mapProjectId
-    , mapDraftAccessList
-    , mapPublishedAccessList
-    , mapDescription
-    , mapTags
+    , mapaCreationTime
+    , mapaWritersCanEditPermissions
+    , mapaEtag
+    , mapaDefaultViewport
+    , mapaContents
+    , mapaPublishingStatus
+    , mapaCreatorEmail
+    , mapaLastModifiedTime
+    , mapaLastModifierEmail
+    , mapaVersions
+    , mapaName
+    , mapaBbox
+    , mapaProcessingStatus
+    , mapaId
+    , mapaProjectId
+    , mapaDraftAccessList
+    , mapaPublishedAccessList
+    , mapaDescription
+    , mapaTags
 
     -- * IconStyle
     , IconStyle

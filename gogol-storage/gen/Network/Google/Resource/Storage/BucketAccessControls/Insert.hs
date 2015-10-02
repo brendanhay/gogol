@@ -52,9 +52,9 @@ type BucketAccessControlsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] BucketAccessControl :>
                            Post '[JSON] BucketAccessControl
@@ -166,12 +166,12 @@ instance GoogleRequest BucketAccessControlsInsert'
              BucketAccessControl
         request = requestWithRoute defReq storageURL
         requestWithRoute r u BucketAccessControlsInsert'{..}
-          = go _baciQuotaUser (Just _baciPrettyPrint)
+          = go _baciBucket _baciQuotaUser
+              (Just _baciPrettyPrint)
               _baciUserIP
-              _baciBucket
+              _baciFields
               _baciKey
               _baciOAuthToken
-              _baciFields
               (Just AltJSON)
               _baciBucketAccessControl
           where go

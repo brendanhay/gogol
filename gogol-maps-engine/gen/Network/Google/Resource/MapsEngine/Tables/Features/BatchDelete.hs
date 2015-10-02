@@ -53,9 +53,9 @@ type TablesFeaturesBatchDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] FeaturesBatchDeleteRequest :>
                              Post '[JSON] ()
@@ -165,12 +165,11 @@ instance GoogleRequest TablesFeaturesBatchDelete'
         type Rs TablesFeaturesBatchDelete' = ()
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u TablesFeaturesBatchDelete'{..}
-          = go _tfbdQuotaUser (Just _tfbdPrettyPrint)
+          = go _tfbdId _tfbdQuotaUser (Just _tfbdPrettyPrint)
               _tfbdUserIP
-              _tfbdKey
-              _tfbdId
-              _tfbdOAuthToken
               _tfbdFields
+              _tfbdKey
+              _tfbdOAuthToken
               (Just AltJSON)
               _tfbdFeaturesBatchDeleteRequest
           where go

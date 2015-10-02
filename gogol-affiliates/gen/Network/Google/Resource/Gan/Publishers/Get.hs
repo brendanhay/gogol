@@ -53,13 +53,13 @@ type PublishersGetResource =
      Capture "role" GanPublishersGetRole :>
        Capture "roleId" Text :>
          "publisher" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "publisherId" Text :>
-                       QueryParam "fields" Text :>
+           QueryParam "publisherId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Publisher
 
 -- | Retrieves data about a single advertiser if that the requesting
@@ -174,13 +174,12 @@ instance GoogleRequest PublishersGet' where
         type Rs PublishersGet' = Publisher
         request = requestWithRoute defReq affiliatesURL
         requestWithRoute r u PublishersGet'{..}
-          = go _pgQuotaUser (Just _pgPrettyPrint) _pgUserIP
-              _pgRoleId
-              _pgRole
+          = go _pgPublisherId _pgRole _pgRoleId _pgQuotaUser
+              (Just _pgPrettyPrint)
+              _pgUserIP
+              _pgFields
               _pgKey
               _pgOAuthToken
-              _pgPublisherId
-              _pgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

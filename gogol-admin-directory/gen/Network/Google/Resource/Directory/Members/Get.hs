@@ -53,9 +53,9 @@ type MembersGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Member
 
 -- | Retrieve Group Member
@@ -158,12 +158,12 @@ instance GoogleRequest MembersGet' where
         type Rs MembersGet' = Member
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u MembersGet'{..}
-          = go _mgQuotaUser _mgMemberKey (Just _mgPrettyPrint)
+          = go _mgGroupKey _mgMemberKey _mgQuotaUser
+              (Just _mgPrettyPrint)
               _mgUserIP
-              _mgGroupKey
+              _mgFields
               _mgKey
               _mgOAuthToken
-              _mgFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy MembersGetResource)

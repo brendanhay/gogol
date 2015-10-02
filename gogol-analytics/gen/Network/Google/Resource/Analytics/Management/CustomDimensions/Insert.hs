@@ -56,9 +56,9 @@ type ManagementCustomDimensionsInsertResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] CustomDimension :>
                                  Post '[JSON] CustomDimension
@@ -184,13 +184,12 @@ instance GoogleRequest
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
           ManagementCustomDimensionsInsert'{..}
-          = go _mcdiQuotaUser (Just _mcdiPrettyPrint)
-              _mcdiWebPropertyId
+          = go _mcdiAccountId _mcdiWebPropertyId _mcdiQuotaUser
+              (Just _mcdiPrettyPrint)
               _mcdiUserIP
-              _mcdiAccountId
+              _mcdiFields
               _mcdiKey
               _mcdiOAuthToken
-              _mcdiFields
               (Just AltJSON)
               _mcdiCustomDimension
           where go

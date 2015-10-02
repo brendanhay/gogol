@@ -49,9 +49,9 @@ type TablesCreateResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] Table :> Post '[JSON] Table
 
@@ -145,9 +145,9 @@ instance GoogleRequest TablesCreate' where
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u TablesCreate'{..}
           = go _tcQuotaUser (Just _tcPrettyPrint) _tcUserIP
+              _tcFields
               _tcKey
               _tcOAuthToken
-              _tcFields
               (Just AltJSON)
               _tcTable
           where go

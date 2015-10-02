@@ -50,13 +50,13 @@ type MyLibraryBookshelvesGetResource =
      "mylibrary" :>
        "bookshelves" :>
          Capture "shelf" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "source" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "source" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Bookshelf
 
 -- | Retrieves metadata for a specific bookshelf belonging to the
@@ -163,13 +163,12 @@ instance GoogleRequest MyLibraryBookshelvesGet' where
         type Rs MyLibraryBookshelvesGet' = Bookshelf
         request = requestWithRoute defReq booksURL
         requestWithRoute r u MyLibraryBookshelvesGet'{..}
-          = go _mlbgQuotaUser (Just _mlbgPrettyPrint)
+          = go _mlbgSource _mlbgShelf _mlbgQuotaUser
+              (Just _mlbgPrettyPrint)
               _mlbgUserIP
-              _mlbgShelf
-              _mlbgKey
-              _mlbgSource
-              _mlbgOAuthToken
               _mlbgFields
+              _mlbgKey
+              _mlbgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

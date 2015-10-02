@@ -57,25 +57,25 @@ type AccountUserProfilesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "accountUserProfiles" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userRoleId" Int64 :>
-                 QueryParam "userIp" Text :>
+           QueryParam "active" Bool :>
+             QueryParams "ids" Int64 :>
+               QueryParam "maxResults" Int32 :>
+                 QueryParam "pageToken" Text :>
                    QueryParam "searchString" Text :>
-                     QueryParams "ids" Int64 :>
+                     QueryParam "sortField"
+                       DfareportingAccountUserProfilesListSortField
+                       :>
                        QueryParam "sortOrder"
                          DfareportingAccountUserProfilesListSortOrder
                          :>
-                         QueryParam "active" Bool :>
-                           QueryParam "key" Key :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "sortField"
-                                 DfareportingAccountUserProfilesListSortField
-                                 :>
-                                 QueryParam "subaccountId" Int64 :>
-                                   QueryParam "oauth_token" OAuthToken :>
-                                     QueryParam "maxResults" Int32 :>
-                                       QueryParam "fields" Text :>
+                         QueryParam "subaccountId" Int64 :>
+                           QueryParam "userRoleId" Int64 :>
+                             QueryParam "quotaUser" Text :>
+                               QueryParam "prettyPrint" Bool :>
+                                 QueryParam "userIp" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "key" Key :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON]
                                              AccountUserProfilesListResponse
@@ -269,21 +269,20 @@ instance GoogleRequest AccountUserProfilesList' where
              AccountUserProfilesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AccountUserProfilesList'{..}
-          = go _auplQuotaUser (Just _auplPrettyPrint)
-              _auplUserRoleId
-              _auplUserIP
-              _auplSearchString
-              _auplIds
-              _auplProfileId
-              _auplSortOrder
-              _auplActive
-              _auplKey
+          = go _auplActive _auplIds _auplMaxResults
               _auplPageToken
+              _auplSearchString
               _auplSortField
+              _auplSortOrder
               _auplSubAccountId
-              _auplOAuthToken
-              _auplMaxResults
+              _auplUserRoleId
+              _auplProfileId
+              _auplQuotaUser
+              (Just _auplPrettyPrint)
+              _auplUserIP
               _auplFields
+              _auplKey
+              _auplOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

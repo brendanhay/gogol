@@ -54,9 +54,9 @@ type AnnotationSetsPatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] AnnotationSet :>
                          Patch '[JSON] AnnotationSet
@@ -169,12 +169,12 @@ instance GoogleRequest AnnotationSetsPatch' where
         type Rs AnnotationSetsPatch' = AnnotationSet
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u AnnotationSetsPatch'{..}
-          = go _aspQuotaUser (Just _aspPrettyPrint)
-              _aspAnnotationSetId
+          = go _aspAnnotationSetId _aspQuotaUser
+              (Just _aspPrettyPrint)
               _aspUserIP
+              _aspFields
               _aspKey
               _aspOAuthToken
-              _aspFields
               (Just AltJSON)
               _aspAnnotationSet
           where go

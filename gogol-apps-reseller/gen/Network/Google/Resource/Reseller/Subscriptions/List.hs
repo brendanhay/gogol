@@ -51,17 +51,17 @@ import           Network.Google.Prelude
 -- 'SubscriptionsList'' request conforms to.
 type SubscriptionsListResource =
      "subscriptions" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "customerNamePrefix" Text :>
-               QueryParam "customerId" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "customerAuthToken" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+       QueryParam "customerAuthToken" Text :>
+         QueryParam "customerId" Text :>
+           QueryParam "customerNamePrefix" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] Subscriptions
 
@@ -196,15 +196,16 @@ instance GoogleRequest SubscriptionsList' where
         type Rs SubscriptionsList' = Subscriptions
         request = requestWithRoute defReq appsResellerURL
         requestWithRoute r u SubscriptionsList'{..}
-          = go _slQuotaUser (Just _slPrettyPrint) _slUserIP
+          = go _slCustomerAuthToken _slCustomerId
               _slCustomerNamePrefix
-              _slCustomerId
-              _slKey
-              _slCustomerAuthToken
-              _slPageToken
-              _slOAuthToken
               _slMaxResults
+              _slPageToken
+              _slQuotaUser
+              (Just _slPrettyPrint)
+              _slUserIP
               _slFields
+              _slKey
+              _slOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

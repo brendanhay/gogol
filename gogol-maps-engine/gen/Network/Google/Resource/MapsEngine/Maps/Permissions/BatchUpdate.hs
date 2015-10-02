@@ -55,9 +55,9 @@ type MapsPermissionsBatchUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] PermissionsBatchUpdateRequest :>
                              Post '[JSON] PermissionsBatchUpdateResponse
@@ -170,12 +170,11 @@ instance GoogleRequest MapsPermissionsBatchUpdate'
              PermissionsBatchUpdateResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u MapsPermissionsBatchUpdate'{..}
-          = go _mpbuQuotaUser (Just _mpbuPrettyPrint)
+          = go _mpbuId _mpbuQuotaUser (Just _mpbuPrettyPrint)
               _mpbuUserIP
-              _mpbuKey
-              _mpbuId
-              _mpbuOAuthToken
               _mpbuFields
+              _mpbuKey
+              _mpbuOAuthToken
               (Just AltJSON)
               _mpbuPermissionsBatchUpdateRequest
           where go

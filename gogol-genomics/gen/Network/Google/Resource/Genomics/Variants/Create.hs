@@ -49,9 +49,9 @@ type VariantsCreateResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] Variant :> Post '[JSON] Variant
 
@@ -149,9 +149,9 @@ instance GoogleRequest VariantsCreate' where
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u VariantsCreate'{..}
           = go _varQuotaUser (Just _varPrettyPrint) _varUserIP
+              _varFields
               _varKey
               _varOAuthToken
-              _varFields
               (Just AltJSON)
               _varVariant
           where go

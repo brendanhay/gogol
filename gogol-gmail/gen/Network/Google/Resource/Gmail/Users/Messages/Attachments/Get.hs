@@ -55,9 +55,9 @@ type UsersMessagesAttachmentsGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] MessagePartBody
 
@@ -179,14 +179,13 @@ instance GoogleRequest UsersMessagesAttachmentsGet'
              MessagePartBody
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersMessagesAttachmentsGet'{..}
-          = go _umagQuotaUser (Just _umagPrettyPrint)
+          = go _umagUserId _umagMessageId _umagId
+              _umagQuotaUser
+              (Just _umagPrettyPrint)
               _umagUserIP
-              _umagUserId
-              _umagKey
-              _umagId
-              _umagOAuthToken
-              _umagMessageId
               _umagFields
+              _umagKey
+              _umagOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

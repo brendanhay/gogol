@@ -50,9 +50,9 @@ type CustomersGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Customer
 
 -- | Gets a customer resource if one exists and is owned by the reseller.
@@ -145,11 +145,11 @@ instance GoogleRequest CustomersGet' where
         type Rs CustomersGet' = Customer
         request = requestWithRoute defReq appsResellerURL
         requestWithRoute r u CustomersGet'{..}
-          = go _cgQuotaUser (Just _cgPrettyPrint) _cgUserIP
-              _cgCustomerId
+          = go _cgCustomerId _cgQuotaUser (Just _cgPrettyPrint)
+              _cgUserIP
+              _cgFields
               _cgKey
               _cgOAuthToken
-              _cgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

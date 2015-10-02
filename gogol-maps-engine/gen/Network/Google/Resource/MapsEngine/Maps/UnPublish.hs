@@ -51,9 +51,9 @@ type MapsUnPublishResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Post '[JSON] PublishResponse
 
@@ -149,11 +149,11 @@ instance GoogleRequest MapsUnPublish' where
         type Rs MapsUnPublish' = PublishResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u MapsUnPublish'{..}
-          = go _mupQuotaUser (Just _mupPrettyPrint) _mupUserIP
-              _mupKey
-              _mupId
-              _mupOAuthToken
+          = go _mupId _mupQuotaUser (Just _mupPrettyPrint)
+              _mupUserIP
               _mupFields
+              _mupKey
+              _mupOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -26,7 +26,7 @@ module Network.Google.Resource.Discovery.APIs.GetRest
       APIsGetRestResource
 
     -- * Creating a Request
-    , aPIsGetRest'
+    , apisGetRest'
     , APIsGetRest'
 
     -- * Request Lenses
@@ -53,15 +53,15 @@ type APIsGetRestResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] RestDescription
 
 -- | Retrieve the description of a particular version of an api.
 --
--- /See:/ 'aPIsGetRest'' smart constructor.
+-- /See:/ 'apisGetRest'' smart constructor.
 data APIsGetRest' = APIsGetRest'
     { _agrQuotaUser   :: !(Maybe Text)
     , _agrPrettyPrint :: !Bool
@@ -92,11 +92,11 @@ data APIsGetRest' = APIsGetRest'
 -- * 'agrOAuthToken'
 --
 -- * 'agrFields'
-aPIsGetRest'
+apisGetRest'
     :: Text -- ^ 'version'
     -> Text -- ^ 'api'
     -> APIsGetRest'
-aPIsGetRest' pAgrVersion_ pAgrAPI_ =
+apisGetRest' pAgrVersion_ pAgrAPI_ =
     APIsGetRest'
     { _agrQuotaUser = Nothing
     , _agrPrettyPrint = True
@@ -161,12 +161,12 @@ instance GoogleRequest APIsGetRest' where
         type Rs APIsGetRest' = RestDescription
         request = requestWithRoute defReq discoveryURL
         requestWithRoute r u APIsGetRest'{..}
-          = go _agrQuotaUser (Just _agrPrettyPrint) _agrUserIP
-              _agrKey
-              _agrVersion
-              _agrAPI
-              _agrOAuthToken
+          = go _agrAPI _agrVersion _agrQuotaUser
+              (Just _agrPrettyPrint)
+              _agrUserIP
               _agrFields
+              _agrKey
+              _agrOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

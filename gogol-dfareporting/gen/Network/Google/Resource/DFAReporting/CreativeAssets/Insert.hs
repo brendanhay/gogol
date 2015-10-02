@@ -56,9 +56,9 @@ type CreativeAssetsInsertResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              MultipartRelated '[JSON] CreativeAssetMetadata Body
                                :> Post '[JSON] CreativeAssetMetadata
@@ -186,13 +186,13 @@ instance GoogleRequest CreativeAssetsInsert' where
         type Rs CreativeAssetsInsert' = CreativeAssetMetadata
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeAssetsInsert'{..}
-          = go _caiQuotaUser (Just _caiPrettyPrint) _caiUserIP
-              _caiAdvertiserId
-              _caiProfileId
-              _caiMedia
+          = go _caiMedia _caiProfileId _caiAdvertiserId
+              _caiQuotaUser
+              (Just _caiPrettyPrint)
+              _caiUserIP
+              _caiFields
               _caiKey
               _caiOAuthToken
-              _caiFields
               (Just AltJSON)
               _caiCreativeAssetMetadata
           where go

@@ -46,13 +46,13 @@ import           Network.Google.Prelude
 -- 'AlertsList'' request conforms to.
 type AlertsListResource =
      "alerts" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "locale" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+       QueryParam "locale" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Alerts
 
 -- | List the alerts for this AdSense account.
@@ -144,11 +144,11 @@ instance GoogleRequest AlertsList' where
         type Rs AlertsList' = Alerts
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u AlertsList'{..}
-          = go _aQuotaUser (Just _aPrettyPrint) _aUserIP
-              _aLocale
+          = go _aLocale _aQuotaUser (Just _aPrettyPrint)
+              _aUserIP
+              _aFields
               _aKey
               _aOAuthToken
-              _aFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy AlertsListResource)

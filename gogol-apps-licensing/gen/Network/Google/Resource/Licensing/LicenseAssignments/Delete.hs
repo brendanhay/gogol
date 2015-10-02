@@ -55,9 +55,9 @@ type LicenseAssignmentsDeleteResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Revoke License.
@@ -173,13 +173,12 @@ instance GoogleRequest LicenseAssignmentsDelete'
         type Rs LicenseAssignmentsDelete' = ()
         request = requestWithRoute defReq appsLicensingURL
         requestWithRoute r u LicenseAssignmentsDelete'{..}
-          = go _ladQuotaUser (Just _ladPrettyPrint) _ladUserIP
-              _ladSkuId
-              _ladUserId
+          = go _ladProductId _ladSkuId _ladUserId _ladQuotaUser
+              (Just _ladPrettyPrint)
+              _ladUserIP
+              _ladFields
               _ladKey
               _ladOAuthToken
-              _ladProductId
-              _ladFields
               (Just AltJSON)
           where go
                   = clientWithRoute

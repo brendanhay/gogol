@@ -54,9 +54,9 @@ type SchemasUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Schema :> Put '[JSON] Schema
 
@@ -169,12 +169,12 @@ instance GoogleRequest SchemasUpdate' where
         type Rs SchemasUpdate' = Schema
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u SchemasUpdate'{..}
-          = go _suQuotaUser (Just _suPrettyPrint) _suUserIP
-              _suCustomerId
+          = go _suCustomerId _suSchemaKey _suQuotaUser
+              (Just _suPrettyPrint)
+              _suUserIP
+              _suFields
               _suKey
               _suOAuthToken
-              _suSchemaKey
-              _suFields
               (Just AltJSON)
               _suSchema
           where go

@@ -48,15 +48,15 @@ import           Network.Google.Prelude
 -- 'ApplicationsList'' request conforms to.
 type ApplicationsListResource =
      "applications" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "customerId" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "maxResults" Word32 :>
-                       QueryParam "fields" Text :>
+       QueryParam "customerId" Text :>
+         QueryParam "maxResults" Word32 :>
+           QueryParam "pageToken" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] ApplicationsListResponse
 
@@ -168,13 +168,13 @@ instance GoogleRequest ApplicationsList' where
         request
           = requestWithRoute defReq adminDataTransferURL
         requestWithRoute r u ApplicationsList'{..}
-          = go _alQuotaUser (Just _alPrettyPrint) _alUserIP
-              _alCustomerId
-              _alKey
-              _alPageToken
-              _alOAuthToken
-              _alMaxResults
+          = go _alCustomerId _alMaxResults _alPageToken
+              _alQuotaUser
+              (Just _alPrettyPrint)
+              _alUserIP
               _alFields
+              _alKey
+              _alOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

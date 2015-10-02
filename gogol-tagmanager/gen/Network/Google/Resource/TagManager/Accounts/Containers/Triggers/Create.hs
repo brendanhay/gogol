@@ -55,9 +55,9 @@ type AccountsContainersTriggersCreateResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Trigger :> Post '[JSON] Trigger
 
@@ -180,13 +180,13 @@ instance GoogleRequest
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersTriggersCreate'{..}
-          = go _actccQuotaUser (Just _actccPrettyPrint)
-              _actccContainerId
+          = go _actccAccountId _actccContainerId
+              _actccQuotaUser
+              (Just _actccPrettyPrint)
               _actccUserIP
-              _actccAccountId
+              _actccFields
               _actccKey
               _actccOAuthToken
-              _actccFields
               (Just AltJSON)
               _actccTrigger
           where go

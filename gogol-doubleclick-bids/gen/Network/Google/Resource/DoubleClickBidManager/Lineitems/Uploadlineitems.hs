@@ -50,9 +50,9 @@ type LineitemsUploadlineitemsResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] UploadLineItemsRequest :>
                          Post '[JSON] UploadLineItemsResponse
@@ -151,9 +151,9 @@ instance GoogleRequest LineitemsUploadlineitems'
         request = requestWithRoute defReq doubleClickBidsURL
         requestWithRoute r u LineitemsUploadlineitems'{..}
           = go _luQuotaUser (Just _luPrettyPrint) _luUserIP
+              _luFields
               _luKey
               _luOAuthToken
-              _luFields
               (Just AltJSON)
               _luUploadLineItemsRequest
           where go

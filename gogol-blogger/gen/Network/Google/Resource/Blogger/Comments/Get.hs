@@ -54,13 +54,13 @@ type CommentsGetResource =
            Capture "postId" Text :>
              "comments" :>
                Capture "commentId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "view" BloggerCommentsGetView :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                 QueryParam "view" BloggerCommentsGetView :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Get '[JSON] Comment
 
 -- | Gets one comment by ID.
@@ -182,14 +182,13 @@ instance GoogleRequest CommentsGet' where
         type Rs CommentsGet' = Comment
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u CommentsGet'{..}
-          = go _cgQuotaUser (Just _cgPrettyPrint) _cgUserIP
-              _cgBlogId
-              _cgKey
-              _cgView
-              _cgPostId
-              _cgOAuthToken
-              _cgCommentId
+          = go _cgView _cgBlogId _cgPostId _cgCommentId
+              _cgQuotaUser
+              (Just _cgPrettyPrint)
+              _cgUserIP
               _cgFields
+              _cgKey
+              _cgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

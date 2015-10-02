@@ -57,14 +57,14 @@ type ManagementUploadsListResource =
                "customDataSources" :>
                  Capture "customDataSourceId" Text :>
                    "uploads" :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "start-index" Int32 :>
-                                 QueryParam "max-results" Int32 :>
-                                   QueryParam "fields" Text :>
+                     QueryParam "max-results" Int32 :>
+                       QueryParam "start-index" Int32 :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] Uploads
 
@@ -204,16 +204,15 @@ instance GoogleRequest ManagementUploadsList' where
         type Rs ManagementUploadsList' = Uploads
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementUploadsList'{..}
-          = go _mulQuotaUser (Just _mulPrettyPrint)
+          = go _mulMaxResults _mulStartIndex _mulAccountId
               _mulWebPropertyId
-              _mulUserIP
               _mulCustomDataSourceId
-              _mulAccountId
+              _mulQuotaUser
+              (Just _mulPrettyPrint)
+              _mulUserIP
+              _mulFields
               _mulKey
               _mulOAuthToken
-              _mulStartIndex
-              _mulMaxResults
-              _mulFields
               (Just AltJSON)
           where go
                   = clientWithRoute

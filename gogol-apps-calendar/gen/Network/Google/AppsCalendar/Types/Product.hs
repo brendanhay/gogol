@@ -814,7 +814,7 @@ instance ToJSON Event where
 
 -- | The scope of the rule.
 --
--- /See:/ 'aCLRuleScope' smart constructor.
+-- /See:/ 'aclRuleScope' smart constructor.
 data ACLRuleScope = ACLRuleScope
     { _arsValue :: !(Maybe Text)
     , _arsType  :: !(Maybe Text)
@@ -827,9 +827,9 @@ data ACLRuleScope = ACLRuleScope
 -- * 'arsValue'
 --
 -- * 'arsType'
-aCLRuleScope
+aclRuleScope
     :: ACLRuleScope
-aCLRuleScope =
+aclRuleScope =
     ACLRuleScope
     { _arsValue = Nothing
     , _arsType = Nothing
@@ -2755,7 +2755,7 @@ instance ToJSON EventGadget where
                   ("type" .=) <$> _egType])
 
 --
--- /See:/ 'aCLRule' smart constructor.
+-- /See:/ 'aclRule' smart constructor.
 data ACLRule = ACLRule
     { _arEtag  :: !(Maybe Text)
     , _arKind  :: !Text
@@ -2777,9 +2777,9 @@ data ACLRule = ACLRule
 -- * 'arScope'
 --
 -- * 'arId'
-aCLRule
+aclRule
     :: ACLRule
-aCLRule =
+aclRule =
     ACLRule
     { _arEtag = Nothing
     , _arKind = "calendar#aclRule"
@@ -3002,68 +3002,67 @@ instance ToJSON FreeBusyGroup where
                   ("errors" .=) <$> _fbgErrors])
 
 --
--- /See:/ 'aCL' smart constructor.
+-- /See:/ 'acl' smart constructor.
 data ACL = ACL
-    { _aclEtag          :: !(Maybe Text)
-    , _aclNextPageToken :: !(Maybe Text)
-    , _aclKind          :: !Text
-    , _aclItems         :: !(Maybe [ACLRule])
-    , _aclNextSyncToken :: !(Maybe Text)
+    { _aEtag          :: !(Maybe Text)
+    , _aNextPageToken :: !(Maybe Text)
+    , _aKind          :: !Text
+    , _aItems         :: !(Maybe [ACLRule])
+    , _aNextSyncToken :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ACL' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aclEtag'
+-- * 'aEtag'
 --
--- * 'aclNextPageToken'
+-- * 'aNextPageToken'
 --
--- * 'aclKind'
+-- * 'aKind'
 --
--- * 'aclItems'
+-- * 'aItems'
 --
--- * 'aclNextSyncToken'
-aCL
+-- * 'aNextSyncToken'
+acl
     :: ACL
-aCL =
+acl =
     ACL
-    { _aclEtag = Nothing
-    , _aclNextPageToken = Nothing
-    , _aclKind = "calendar#acl"
-    , _aclItems = Nothing
-    , _aclNextSyncToken = Nothing
+    { _aEtag = Nothing
+    , _aNextPageToken = Nothing
+    , _aKind = "calendar#acl"
+    , _aItems = Nothing
+    , _aNextSyncToken = Nothing
     }
 
 -- | ETag of the collection.
-aclEtag :: Lens' ACL (Maybe Text)
-aclEtag = lens _aclEtag (\ s a -> s{_aclEtag = a})
+aEtag :: Lens' ACL (Maybe Text)
+aEtag = lens _aEtag (\ s a -> s{_aEtag = a})
 
 -- | Token used to access the next page of this result. Omitted if no further
 -- results are available, in which case nextSyncToken is provided.
-aclNextPageToken :: Lens' ACL (Maybe Text)
-aclNextPageToken
-  = lens _aclNextPageToken
-      (\ s a -> s{_aclNextPageToken = a})
+aNextPageToken :: Lens' ACL (Maybe Text)
+aNextPageToken
+  = lens _aNextPageToken
+      (\ s a -> s{_aNextPageToken = a})
 
 -- | Type of the collection (\"calendar#acl\").
-aclKind :: Lens' ACL Text
-aclKind = lens _aclKind (\ s a -> s{_aclKind = a})
+aKind :: Lens' ACL Text
+aKind = lens _aKind (\ s a -> s{_aKind = a})
 
 -- | List of rules on the access control list.
-aclItems :: Lens' ACL [ACLRule]
-aclItems
-  = lens _aclItems (\ s a -> s{_aclItems = a}) .
-      _Default
-      . _Coerce
+aItems :: Lens' ACL [ACLRule]
+aItems
+  = lens _aItems (\ s a -> s{_aItems = a}) . _Default .
+      _Coerce
 
 -- | Token used at a later point in time to retrieve only the entries that
 -- have changed since this result was returned. Omitted if further results
 -- are available, in which case nextPageToken is provided.
-aclNextSyncToken :: Lens' ACL (Maybe Text)
-aclNextSyncToken
-  = lens _aclNextSyncToken
-      (\ s a -> s{_aclNextSyncToken = a})
+aNextSyncToken :: Lens' ACL (Maybe Text)
+aNextSyncToken
+  = lens _aNextSyncToken
+      (\ s a -> s{_aNextSyncToken = a})
 
 instance FromJSON ACL where
         parseJSON
@@ -3079,11 +3078,10 @@ instance ToJSON ACL where
         toJSON ACL{..}
           = object
               (catMaybes
-                 [("etag" .=) <$> _aclEtag,
-                  ("nextPageToken" .=) <$> _aclNextPageToken,
-                  Just ("kind" .= _aclKind),
-                  ("items" .=) <$> _aclItems,
-                  ("nextSyncToken" .=) <$> _aclNextSyncToken])
+                 [("etag" .=) <$> _aEtag,
+                  ("nextPageToken" .=) <$> _aNextPageToken,
+                  Just ("kind" .= _aKind), ("items" .=) <$> _aItems,
+                  ("nextSyncToken" .=) <$> _aNextSyncToken])
 
 -- | Source from which the event was created. For example, a web page, an
 -- email message or any document identifiable by an URL with HTTP or HTTPS

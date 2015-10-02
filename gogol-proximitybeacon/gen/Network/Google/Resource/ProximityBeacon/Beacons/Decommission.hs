@@ -57,17 +57,17 @@ type BeaconsDecommissionResource =
      "v1beta1" :>
        "{+beaconName}:decommission" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :> Post '[JSON] Empty
 
 -- | Decommissions the specified beacon in the service. This beacon will no
@@ -218,17 +218,17 @@ instance GoogleRequest BeaconsDecommission' where
         type Rs BeaconsDecommission' = Empty
         request = requestWithRoute defReq proximityBeaconURL
         requestWithRoute r u BeaconsDecommission'{..}
-          = go _bdXgafv _bdQuotaUser (Just _bdPrettyPrint)
-              _bdUploadProtocol
+          = go _bdXgafv _bdAccessToken _bdBearerToken
+              _bdCallback
               (Just _bdPp)
-              _bdAccessToken
-              _bdBeaconName
               _bdUploadType
-              _bdBearerToken
+              _bdUploadProtocol
+              _bdBeaconName
+              _bdQuotaUser
+              (Just _bdPrettyPrint)
+              _bdFields
               _bdKey
               _bdOAuthToken
-              _bdFields
-              _bdCallback
               (Just AltJSON)
           where go
                   = clientWithRoute

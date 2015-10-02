@@ -53,32 +53,32 @@ type FilesWatchResource =
      "files" :>
        Capture "fileId" Text :>
          "watch" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
+           QueryParam "acknowledgeAbuse" Bool :>
+             QueryParam "projection" DriveFilesWatchProjection :>
+               QueryParam "revisionId" Text :>
                  QueryParam "updateViewedDate" Bool :>
-                   QueryParam "key" Key :>
-                     QueryParam "projection" DriveFilesWatchProjection :>
-                       QueryParam "acknowledgeAbuse" Bool :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "revisionId" Text :>
-                             QueryParam "fields" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] Channel :> Post '[JSON] Channel
        :<|>
        "files" :>
          Capture "fileId" Text :>
            "watch" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
+             QueryParam "acknowledgeAbuse" Bool :>
+               QueryParam "projection" DriveFilesWatchProjection :>
+                 QueryParam "revisionId" Text :>
                    QueryParam "updateViewedDate" Bool :>
-                     QueryParam "key" Key :>
-                       QueryParam "projection" DriveFilesWatchProjection :>
-                         QueryParam "acknowledgeAbuse" Bool :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "revisionId" Text :>
-                               QueryParam "fields" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" Media :>
                                    ReqBody '[JSON] Channel :>
                                      Post '[OctetStream] Stream
@@ -223,15 +223,16 @@ instance GoogleRequest FilesWatch' where
         type Rs FilesWatch' = Channel
         request = requestWithRoute defReq driveURL
         requestWithRoute r u FilesWatch'{..}
-          = go _fwQuotaUser (Just _fwPrettyPrint) _fwUserIP
-              (Just _fwUpdateViewedDate)
-              _fwKey
-              _fwProjection
-              (Just _fwAcknowledgeAbuse)
-              _fwFileId
-              _fwOAuthToken
+          = go (Just _fwAcknowledgeAbuse) _fwProjection
               _fwRevisionId
+              (Just _fwUpdateViewedDate)
+              _fwFileId
+              _fwQuotaUser
+              (Just _fwPrettyPrint)
+              _fwUserIP
               _fwFields
+              _fwKey
+              _fwOAuthToken
               (Just AltJSON)
               _fwChannel
           where go :<|> _
@@ -243,15 +244,16 @@ instance GoogleRequest FilesWatch' where
         type Rs (Download FilesWatch') = Stream
         request = requestWithRoute defReq driveURL
         requestWithRoute r u FilesWatch'{..}
-          = go _fwQuotaUser (Just _fwPrettyPrint) _fwUserIP
-              (Just _fwUpdateViewedDate)
-              _fwKey
-              _fwProjection
-              (Just _fwAcknowledgeAbuse)
-              _fwFileId
-              _fwOAuthToken
+          = go (Just _fwAcknowledgeAbuse) _fwProjection
               _fwRevisionId
+              (Just _fwUpdateViewedDate)
+              _fwFileId
+              _fwQuotaUser
+              (Just _fwPrettyPrint)
+              _fwUserIP
               _fwFields
+              _fwKey
+              _fwOAuthToken
               (Just Media)
               _fwChannel
           where go :<|> _

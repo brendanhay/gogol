@@ -49,9 +49,9 @@ type RelyingPartyGetOOBConfirmationCodeResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] RelyingParty :>
                        Post '[JSON] GetOOBConfirmationCodeResponse
@@ -160,9 +160,9 @@ instance GoogleRequest
           RelyingPartyGetOOBConfirmationCode'{..}
           = go _rpgoobccQuotaUser (Just _rpgoobccPrettyPrint)
               _rpgoobccUserIP
+              _rpgoobccFields
               _rpgoobccKey
               _rpgoobccOAuthToken
-              _rpgoobccFields
               (Just AltJSON)
               _rpgoobccRelyingParty
           where go

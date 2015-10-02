@@ -57,9 +57,9 @@ type ManagementCustomDimensionsGetResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] CustomDimension
 
@@ -184,14 +184,14 @@ instance GoogleRequest ManagementCustomDimensionsGet'
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
           ManagementCustomDimensionsGet'{..}
-          = go _mcdgQuotaUser (Just _mcdgPrettyPrint)
-              _mcdgWebPropertyId
+          = go _mcdgAccountId _mcdgWebPropertyId
+              _mcdgCustomDimensionId
+              _mcdgQuotaUser
+              (Just _mcdgPrettyPrint)
               _mcdgUserIP
-              _mcdgAccountId
+              _mcdgFields
               _mcdgKey
               _mcdgOAuthToken
-              _mcdgCustomDimensionId
-              _mcdgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

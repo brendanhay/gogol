@@ -56,19 +56,19 @@ import           Network.Google.YouTube.Types
 type LiveBroadcastsTransitionResource =
      "liveBroadcasts" :>
        "transition" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "part" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "broadcastStatus"
-                   YouTubeLiveBroadcastsTransitionBroadcastStatus
-                   :>
-                   QueryParam "onBehalfOfContentOwner" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                         QueryParam "id" Text :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+         QueryParam "onBehalfOfContentOwner" Text :>
+           QueryParam "onBehalfOfContentOwnerChannel" Text :>
+             QueryParam "broadcastStatus"
+               YouTubeLiveBroadcastsTransitionBroadcastStatus
+               :>
+               QueryParam "id" Text :>
+                 QueryParam "part" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Post '[JSON] LiveBroadcast
 
@@ -241,16 +241,17 @@ instance GoogleRequest LiveBroadcastsTransition'
         type Rs LiveBroadcastsTransition' = LiveBroadcast
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u LiveBroadcastsTransition'{..}
-          = go _lbtQuotaUser (Just _lbtPart)
+          = go _lbtOnBehalfOfContentOwner
+              _lbtOnBehalfOfContentOwnerChannel
+              (Just _lbtBroadcastStatus)
+              (Just _lbtId)
+              (Just _lbtPart)
+              _lbtQuotaUser
               (Just _lbtPrettyPrint)
               _lbtUserIP
-              (Just _lbtBroadcastStatus)
-              _lbtOnBehalfOfContentOwner
-              _lbtKey
-              _lbtOnBehalfOfContentOwnerChannel
-              (Just _lbtId)
-              _lbtOAuthToken
               _lbtFields
+              _lbtKey
+              _lbtOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -61,19 +61,19 @@ type CoursesTeachersListResource =
          Capture "courseId" Text :>
            "teachers" :>
              QueryParam "$.xgafv" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "upload_protocol" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "access_token" Text :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "pageSize" Int32 :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "callback" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "bearer_token" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "pageSize" Int32 :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "upload_protocol" Text :>
+                               QueryParam "quotaUser" Text :>
+                                 QueryParam "prettyPrint" Bool :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "key" Key :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] ListTeachersResponse
 
@@ -254,19 +254,19 @@ instance GoogleRequest CoursesTeachersList' where
         type Rs CoursesTeachersList' = ListTeachersResponse
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u CoursesTeachersList'{..}
-          = go _ctlXgafv _ctlQuotaUser (Just _ctlPrettyPrint)
-              _ctlUploadProtocol
-              (Just _ctlPp)
-              _ctlCourseId
-              _ctlAccessToken
-              _ctlUploadType
-              _ctlBearerToken
-              _ctlKey
-              _ctlPageToken
-              _ctlOAuthToken
-              _ctlPageSize
-              _ctlFields
+          = go _ctlXgafv _ctlAccessToken _ctlBearerToken
               _ctlCallback
+              _ctlPageSize
+              _ctlPageToken
+              (Just _ctlPp)
+              _ctlUploadType
+              _ctlUploadProtocol
+              _ctlCourseId
+              _ctlQuotaUser
+              (Just _ctlPrettyPrint)
+              _ctlFields
+              _ctlKey
+              _ctlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

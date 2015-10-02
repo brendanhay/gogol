@@ -51,15 +51,15 @@ type AdUnitsListResource =
      "adclients" :>
        Capture "adClientId" Text :>
          "adunits" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "includeInactive" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Int32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "includeInactive" Bool :>
+             QueryParam "maxResults" Int32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] AdUnits
 
 -- | List all ad units in the specified ad client for this AdSense account.
@@ -188,15 +188,14 @@ instance GoogleRequest AdUnitsList' where
         type Rs AdUnitsList' = AdUnits
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u AdUnitsList'{..}
-          = go _aulQuotaUser (Just _aulPrettyPrint)
-              _aulIncludeInactive
-              _aulUserIP
+          = go _aulIncludeInactive _aulMaxResults _aulPageToken
               _aulAdClientId
-              _aulKey
-              _aulPageToken
-              _aulOAuthToken
-              _aulMaxResults
+              _aulQuotaUser
+              (Just _aulPrettyPrint)
+              _aulUserIP
               _aulFields
+              _aulKey
+              _aulOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

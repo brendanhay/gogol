@@ -51,9 +51,9 @@ type RoomsResetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Reset all rooms for the currently authenticated player for your
@@ -139,9 +139,9 @@ instance GoogleRequest RoomsReset' where
         request = requestWithRoute defReq gamesManagementURL
         requestWithRoute r u RoomsReset'{..}
           = go _rrQuotaUser (Just _rrPrettyPrint) _rrUserIP
+              _rrFields
               _rrKey
               _rrOAuthToken
-              _rrFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy RoomsResetResource)

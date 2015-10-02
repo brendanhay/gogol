@@ -52,13 +52,13 @@ type EventsImportResource =
        Capture "calendarId" Text :>
          "events" :>
            "import" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "supportsAttachments" Bool :>
-                         QueryParam "fields" Text :>
+             QueryParam "supportsAttachments" Bool :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Event :> Post '[JSON] Event
 
@@ -174,12 +174,12 @@ instance GoogleRequest EventsImport' where
         type Rs EventsImport' = Event
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u EventsImport'{..}
-          = go _eQuotaUser _eCalendarId (Just _ePrettyPrint)
+          = go _eSupportsAttachments _eCalendarId _eQuotaUser
+              (Just _ePrettyPrint)
               _eUserIP
+              _eFields
               _eKey
               _eOAuthToken
-              _eSupportsAttachments
-              _eFields
               (Just AltJSON)
               _eEvent
           where go

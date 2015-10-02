@@ -78,17 +78,17 @@ type ProjectsDeleteResource =
        "projects" :>
          Capture "projectId" Text :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
+             QueryParam "access_token" Text :>
+               QueryParam "bearer_token" Text :>
+                 QueryParam "callback" Text :>
                    QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Delete '[JSON] Empty
 
@@ -260,17 +260,17 @@ instance GoogleRequest ProjectsDelete' where
         type Rs ProjectsDelete' = Empty
         request = requestWithRoute defReq resourceManagerURL
         requestWithRoute r u ProjectsDelete'{..}
-          = go _pdXgafv _pdQuotaUser (Just _pdPrettyPrint)
-              _pdUploadProtocol
-              (Just _pdPp)
-              _pdAccessToken
-              _pdUploadType
-              _pdBearerToken
-              _pdKey
-              _pdProjectId
-              _pdOAuthToken
-              _pdFields
+          = go _pdXgafv _pdAccessToken _pdBearerToken
               _pdCallback
+              (Just _pdPp)
+              _pdUploadType
+              _pdUploadProtocol
+              _pdProjectId
+              _pdQuotaUser
+              (Just _pdPrettyPrint)
+              _pdFields
+              _pdKey
+              _pdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

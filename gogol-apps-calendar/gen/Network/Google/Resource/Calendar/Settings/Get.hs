@@ -52,9 +52,9 @@ type SettingsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Setting
 
 -- | Returns a single user setting.
@@ -147,11 +147,11 @@ instance GoogleRequest SettingsGet' where
         type Rs SettingsGet' = Setting
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u SettingsGet'{..}
-          = go _sgQuotaUser (Just _sgPrettyPrint) _sgUserIP
-              _sgSetting
+          = go _sgSetting _sgQuotaUser (Just _sgPrettyPrint)
+              _sgUserIP
+              _sgFields
               _sgKey
               _sgOAuthToken
-              _sgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

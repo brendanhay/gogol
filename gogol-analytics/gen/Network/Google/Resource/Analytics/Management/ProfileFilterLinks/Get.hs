@@ -60,9 +60,9 @@ type ManagementProfileFilterLinksGetResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "fields" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] ProfileFilterLink
 
@@ -197,15 +197,15 @@ instance GoogleRequest
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
           ManagementProfileFilterLinksGet'{..}
-          = go _mpflgQuotaUser (Just _mpflgPrettyPrint)
-              _mpflgWebPropertyId
-              _mpflgUserIP
+          = go _mpflgAccountId _mpflgWebPropertyId
               _mpflgProfileId
-              _mpflgAccountId
-              _mpflgKey
               _mpflgLinkId
-              _mpflgOAuthToken
+              _mpflgQuotaUser
+              (Just _mpflgPrettyPrint)
+              _mpflgUserIP
               _mpflgFields
+              _mpflgKey
+              _mpflgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

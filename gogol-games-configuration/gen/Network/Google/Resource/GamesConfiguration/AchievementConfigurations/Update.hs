@@ -51,9 +51,9 @@ type AchievementConfigurationsUpdateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] AchievementConfiguration :>
                          Put '[JSON] AchievementConfiguration
@@ -168,12 +168,12 @@ instance GoogleRequest
           = requestWithRoute defReq gamesConfigurationURL
         requestWithRoute r u
           AchievementConfigurationsUpdate'{..}
-          = go _acuQuotaUser (Just _acuPrettyPrint)
-              _acuAchievementId
+          = go _acuAchievementId _acuQuotaUser
+              (Just _acuPrettyPrint)
               _acuUserIP
+              _acuFields
               _acuKey
               _acuOAuthToken
-              _acuFields
               (Just AltJSON)
               _acuAchievementConfiguration
           where go

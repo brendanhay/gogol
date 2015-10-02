@@ -62,9 +62,9 @@ type ManagementProfileFilterLinksPatchResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "fields" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] ProfileFilterLink :>
                                        Patch '[JSON] ProfileFilterLink
@@ -212,15 +212,15 @@ instance GoogleRequest
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
           ManagementProfileFilterLinksPatch'{..}
-          = go _mpflpQuotaUser (Just _mpflpPrettyPrint)
-              _mpflpWebPropertyId
-              _mpflpUserIP
+          = go _mpflpAccountId _mpflpWebPropertyId
               _mpflpProfileId
-              _mpflpAccountId
-              _mpflpKey
               _mpflpLinkId
-              _mpflpOAuthToken
+              _mpflpQuotaUser
+              (Just _mpflpPrettyPrint)
+              _mpflpUserIP
               _mpflpFields
+              _mpflpKey
+              _mpflpOAuthToken
               (Just AltJSON)
               _mpflpProfileFilterLink
           where go

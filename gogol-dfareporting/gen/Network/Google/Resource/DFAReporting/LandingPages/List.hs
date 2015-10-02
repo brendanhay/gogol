@@ -54,9 +54,9 @@ type LandingPagesListResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] LandingPagesListResponse
 
@@ -164,12 +164,12 @@ instance GoogleRequest LandingPagesList' where
         type Rs LandingPagesList' = LandingPagesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u LandingPagesList'{..}
-          = go _lplQuotaUser (Just _lplPrettyPrint) _lplUserIP
-              _lplCampaignId
-              _lplProfileId
+          = go _lplProfileId _lplCampaignId _lplQuotaUser
+              (Just _lplPrettyPrint)
+              _lplUserIP
+              _lplFields
               _lplKey
               _lplOAuthToken
-              _lplFields
               (Just AltJSON)
           where go
                   = clientWithRoute

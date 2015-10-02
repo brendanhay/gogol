@@ -48,14 +48,14 @@ import           Network.Google.Prelude
 type ManagementSegmentsListResource =
      "management" :>
        "segments" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "start-index" Int32 :>
-                     QueryParam "max-results" Int32 :>
-                       QueryParam "fields" Text :>
+         QueryParam "max-results" Int32 :>
+           QueryParam "start-index" Int32 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Segments
 
 -- | Lists segments to which the user has access.
@@ -162,12 +162,12 @@ instance GoogleRequest ManagementSegmentsList' where
         type Rs ManagementSegmentsList' = Segments
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementSegmentsList'{..}
-          = go _mslQuotaUser (Just _mslPrettyPrint) _mslUserIP
+          = go _mslMaxResults _mslStartIndex _mslQuotaUser
+              (Just _mslPrettyPrint)
+              _mslUserIP
+              _mslFields
               _mslKey
               _mslOAuthToken
-              _mslStartIndex
-              _mslMaxResults
-              _mslFields
               (Just AltJSON)
           where go
                   = clientWithRoute

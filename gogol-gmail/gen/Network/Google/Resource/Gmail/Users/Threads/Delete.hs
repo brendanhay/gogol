@@ -53,9 +53,9 @@ type UsersThreadsDeleteResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Immediately and permanently deletes the specified thread. This operation
@@ -162,12 +162,12 @@ instance GoogleRequest UsersThreadsDelete' where
         type Rs UsersThreadsDelete' = ()
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersThreadsDelete'{..}
-          = go _utdQuotaUser (Just _utdPrettyPrint) _utdUserIP
-              _utdUserId
-              _utdKey
-              _utdId
-              _utdOAuthToken
+          = go _utdUserId _utdId _utdQuotaUser
+              (Just _utdPrettyPrint)
+              _utdUserIP
               _utdFields
+              _utdKey
+              _utdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

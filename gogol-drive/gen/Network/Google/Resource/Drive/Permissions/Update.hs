@@ -52,13 +52,13 @@ type PermissionsUpdateResource =
        Capture "fileId" Text :>
          "permissions" :>
            Capture "permissionId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "transferOwnership" Bool :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+             QueryParam "transferOwnership" Bool :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Permission :>
                                Put '[JSON] Permission
@@ -189,13 +189,14 @@ instance GoogleRequest PermissionsUpdate' where
         type Rs PermissionsUpdate' = Permission
         request = requestWithRoute defReq driveURL
         requestWithRoute r u PermissionsUpdate'{..}
-          = go _puuQuotaUser (Just _puuPrettyPrint) _puuUserIP
-              _puuKey
-              (Just _puuTransferOwnership)
-              _puuFileId
-              _puuOAuthToken
+          = go (Just _puuTransferOwnership) _puuFileId
               _puuPermissionId
+              _puuQuotaUser
+              (Just _puuPrettyPrint)
+              _puuUserIP
               _puuFields
+              _puuKey
+              _puuOAuthToken
               (Just AltJSON)
               _puuPermission
           where go

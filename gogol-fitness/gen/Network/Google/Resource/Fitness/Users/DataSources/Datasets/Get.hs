@@ -58,14 +58,14 @@ type UsersDataSourcesDatasetsGetResource =
          Capture "dataSourceId" Text :>
            "datasets" :>
              Capture "datasetId" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "limit" Int32 :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+               QueryParam "limit" Int32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Get '[JSON] Dataset
 
 -- | Returns a dataset containing all data points whose start and end times
@@ -219,16 +219,15 @@ instance GoogleRequest UsersDataSourcesDatasetsGet'
         type Rs UsersDataSourcesDatasetsGet' = Dataset
         request = requestWithRoute defReq fitnessURL
         requestWithRoute r u UsersDataSourcesDatasetsGet'{..}
-          = go _udsdgQuotaUser (Just _udsdgPrettyPrint)
-              _udsdgUserIP
+          = go _udsdgLimit _udsdgPageToken _udsdgUserId
               _udsdgDataSourceId
-              _udsdgUserId
-              _udsdgKey
               _udsdgDatasetId
-              _udsdgLimit
-              _udsdgPageToken
-              _udsdgOAuthToken
+              _udsdgQuotaUser
+              (Just _udsdgPrettyPrint)
+              _udsdgUserIP
               _udsdgFields
+              _udsdgKey
+              _udsdgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -55,9 +55,9 @@ type ChangesGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Change
 
 -- | Fetch the representation of an existing Change.
@@ -173,13 +173,13 @@ instance GoogleRequest ChangesGet' where
         type Rs ChangesGet' = Change
         request = requestWithRoute defReq dNSURL
         requestWithRoute r u ChangesGet'{..}
-          = go _cgQuotaUser (Just _cgPrettyPrint) _cgProject
+          = go _cgProject _cgManagedZone _cgChangeId
+              _cgQuotaUser
+              (Just _cgPrettyPrint)
               _cgUserIP
-              _cgChangeId
+              _cgFields
               _cgKey
               _cgOAuthToken
-              _cgManagedZone
-              _cgFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy ChangesGetResource)

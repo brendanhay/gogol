@@ -51,13 +51,13 @@ type PlacementStrategiesPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "placementStrategies" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "id" Int64 :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] PlacementStrategy :>
                              Patch '[JSON] PlacementStrategy
@@ -177,12 +177,12 @@ instance GoogleRequest PlacementStrategiesPatch'
         type Rs PlacementStrategiesPatch' = PlacementStrategy
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementStrategiesPatch'{..}
-          = go _pspQuotaUser (Just _pspPrettyPrint) _pspUserIP
-              _pspProfileId
-              _pspKey
-              (Just _pspId)
-              _pspOAuthToken
+          = go _pspProfileId (Just _pspId) _pspQuotaUser
+              (Just _pspPrettyPrint)
+              _pspUserIP
               _pspFields
+              _pspKey
+              _pspOAuthToken
               (Just AltJSON)
               _pspPlacementStrategy
           where go

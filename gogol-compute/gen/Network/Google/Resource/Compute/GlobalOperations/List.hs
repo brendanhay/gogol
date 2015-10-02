@@ -52,15 +52,15 @@ type GlobalOperationsListResource =
      Capture "project" Text :>
        "global" :>
          "operations" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "filter" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] OperationList
 
@@ -198,14 +198,14 @@ instance GoogleRequest GlobalOperationsList' where
         type Rs GlobalOperationsList' = OperationList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u GlobalOperationsList'{..}
-          = go _golQuotaUser (Just _golPrettyPrint) _golProject
+          = go _golFilter (Just _golMaxResults) _golPageToken
+              _golProject
+              _golQuotaUser
+              (Just _golPrettyPrint)
               _golUserIP
-              _golKey
-              _golFilter
-              _golPageToken
-              _golOAuthToken
-              (Just _golMaxResults)
               _golFields
+              _golKey
+              _golOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -57,23 +57,23 @@ import           Network.Google.YouTube.Types
 -- 'ChannelsList'' request conforms to.
 type ChannelsListResource =
      "channels" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "part" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "mine" Bool :>
-               QueryParam "forUsername" Text :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "hl" Text :>
-                     QueryParam "onBehalfOfContentOwner" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "categoryId" Text :>
-                           QueryParam "id" Text :>
-                             QueryParam "mySubscribers" Bool :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "managedByMe" Bool :>
-                                     QueryParam "maxResults" Word32 :>
-                                       QueryParam "fields" Text :>
+       QueryParam "categoryId" Text :>
+         QueryParam "forUsername" Text :>
+           QueryParam "hl" Text :>
+             QueryParam "id" Text :>
+               QueryParam "managedByMe" Bool :>
+                 QueryParam "maxResults" Word32 :>
+                   QueryParam "mine" Bool :>
+                     QueryParam "mySubscribers" Bool :>
+                       QueryParam "onBehalfOfContentOwner" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "part" Text :>
+                             QueryParam "quotaUser" Text :>
+                               QueryParam "prettyPrint" Bool :>
+                                 QueryParam "userIp" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "key" Key :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] ChannelListResponse
 
@@ -288,22 +288,20 @@ instance GoogleRequest ChannelsList' where
         type Rs ChannelsList' = ChannelListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u ChannelsList'{..}
-          = go _clQuotaUser (Just _clPart)
-              (Just _clPrettyPrint)
-              _clMine
-              _clForUsername
-              _clUserIP
-              _clHl
-              _clOnBehalfOfContentOwner
-              _clKey
-              _clCategoryId
-              _clId
-              _clMySubscribers
-              _clPageToken
-              _clOAuthToken
+          = go _clCategoryId _clForUsername _clHl _clId
               _clManagedByMe
               (Just _clMaxResults)
+              _clMine
+              _clMySubscribers
+              _clOnBehalfOfContentOwner
+              _clPageToken
+              (Just _clPart)
+              _clQuotaUser
+              (Just _clPrettyPrint)
+              _clUserIP
               _clFields
+              _clKey
+              _clOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

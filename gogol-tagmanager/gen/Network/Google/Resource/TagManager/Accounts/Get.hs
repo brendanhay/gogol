@@ -50,9 +50,9 @@ type AccountsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Account
 
 -- | Gets a GTM Account.
@@ -145,11 +145,11 @@ instance GoogleRequest AccountsGet' where
         type Rs AccountsGet' = Account
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u AccountsGet'{..}
-          = go _agQuotaUser (Just _agPrettyPrint) _agUserIP
-              _agAccountId
+          = go _agAccountId _agQuotaUser (Just _agPrettyPrint)
+              _agUserIP
+              _agFields
               _agKey
               _agOAuthToken
-              _agFields
               (Just AltJSON)
           where go
                   = clientWithRoute

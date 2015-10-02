@@ -58,25 +58,26 @@ import           Network.Google.Prelude
 -- 'AssetsList'' request conforms to.
 type AssetsListResource =
      "assets" :>
-       QueryParam "createdAfter" UTCTime :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "creatorEmail" Text :>
-                 QueryParam "role" MapsEngineAssetsListRole :>
-                   QueryParam "key" Key :>
-                     QueryParam "bbox" Text :>
-                       QueryParam "modifiedAfter" UTCTime :>
-                         QueryParam "modifiedBefore" UTCTime :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "projectId" Text :>
+       QueryParam "bbox" Text :>
+         QueryParam "createdAfter" UTCTime :>
+           QueryParam "createdBefore" UTCTime :>
+             QueryParam "creatorEmail" Text :>
+               QueryParam "maxResults" Word32 :>
+                 QueryParam "modifiedAfter" UTCTime :>
+                   QueryParam "modifiedBefore" UTCTime :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "projectId" Text :>
+                         QueryParam "role" MapsEngineAssetsListRole :>
+                           QueryParam "search" Text :>
+                             QueryParam "tags" Text :>
                                QueryParam "type" Text :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "search" Text :>
-                                     QueryParam "maxResults" Word32 :>
-                                       QueryParam "tags" Text :>
-                                         QueryParam "fields" Text :>
-                                           QueryParam "createdBefore" UTCTime :>
+                                 QueryParam "quotaUser" Text :>
+                                   QueryParam "prettyPrint" Bool :>
+                                     QueryParam "userIp" Text :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "key" Key :>
+                                           QueryParam "oauth_token" OAuthToken
+                                             :>
                                              QueryParam "alt" AltJSON :>
                                                Get '[JSON] AssetsListResponse
 
@@ -294,24 +295,23 @@ instance GoogleRequest AssetsList' where
         type Rs AssetsList' = AssetsListResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u AssetsList'{..}
-          = go _alCreatedAfter _alQuotaUser
-              (Just _alPrettyPrint)
-              _alUserIP
+          = go _alBbox _alCreatedAfter _alCreatedBefore
               _alCreatorEmail
-              _alRole
-              _alKey
-              _alBbox
+              _alMaxResults
               _alModifiedAfter
               _alModifiedBefore
               _alPageToken
               _alProjectId
-              _alType
-              _alOAuthToken
+              _alRole
               _alSearch
-              _alMaxResults
               _alTags
+              _alType
+              _alQuotaUser
+              (Just _alPrettyPrint)
+              _alUserIP
               _alFields
-              _alCreatedBefore
+              _alKey
+              _alOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy AssetsListResource)

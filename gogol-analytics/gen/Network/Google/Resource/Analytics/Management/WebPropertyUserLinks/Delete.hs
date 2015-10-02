@@ -57,9 +57,9 @@ type ManagementWebPropertyUserLinksDeleteResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Removes a user from the given web property.
@@ -182,14 +182,14 @@ instance GoogleRequest
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
           ManagementWebPropertyUserLinksDelete'{..}
-          = go _mwpuldQuotaUser (Just _mwpuldPrettyPrint)
-              _mwpuldWebPropertyId
-              _mwpuldUserIP
-              _mwpuldAccountId
-              _mwpuldKey
+          = go _mwpuldAccountId _mwpuldWebPropertyId
               _mwpuldLinkId
-              _mwpuldOAuthToken
+              _mwpuldQuotaUser
+              (Just _mwpuldPrettyPrint)
+              _mwpuldUserIP
               _mwpuldFields
+              _mwpuldKey
+              _mwpuldOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -48,15 +48,15 @@ import           Network.Google.Prelude
 -- 'AchievementDefinitionsList'' request conforms to.
 type AchievementDefinitionsListResource =
      "achievements" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "language" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "maxResults" Int32 :>
-                       QueryParam "fields" Text :>
+       QueryParam "language" Text :>
+         QueryParam "maxResults" Int32 :>
+           QueryParam "pageToken" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] AchievementDefinitionsListResponse
 
@@ -175,13 +175,13 @@ instance GoogleRequest AchievementDefinitionsList'
              AchievementDefinitionsListResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u AchievementDefinitionsList'{..}
-          = go _adlQuotaUser (Just _adlPrettyPrint) _adlUserIP
-              _adlKey
-              _adlLanguage
-              _adlPageToken
-              _adlOAuthToken
-              _adlMaxResults
+          = go _adlLanguage _adlMaxResults _adlPageToken
+              _adlQuotaUser
+              (Just _adlPrettyPrint)
+              _adlUserIP
               _adlFields
+              _adlKey
+              _adlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

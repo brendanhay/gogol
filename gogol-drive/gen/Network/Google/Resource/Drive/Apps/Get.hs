@@ -50,9 +50,9 @@ type AppsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] App
 
 -- | Gets a specific app.
@@ -143,11 +143,11 @@ instance GoogleRequest AppsGet' where
         type Rs AppsGet' = App
         request = requestWithRoute defReq driveURL
         requestWithRoute r u AppsGet'{..}
-          = go _aQuotaUser (Just _aPrettyPrint) _aUserIP
-              _aAppId
+          = go _aAppId _aQuotaUser (Just _aPrettyPrint)
+              _aUserIP
+              _aFields
               _aKey
               _aOAuthToken
-              _aFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy AppsGetResource) r

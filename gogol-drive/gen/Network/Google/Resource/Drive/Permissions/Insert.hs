@@ -51,14 +51,14 @@ type PermissionsInsertResource =
      "files" :>
        Capture "fileId" Text :>
          "permissions" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "emailMessage" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "sendNotificationEmails" Bool :>
-                         QueryParam "fields" Text :>
+           QueryParam "emailMessage" Text :>
+             QueryParam "sendNotificationEmails" Bool :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Permission :>
                                Post '[JSON] Permission
@@ -183,13 +183,14 @@ instance GoogleRequest PermissionsInsert' where
         type Rs PermissionsInsert' = Permission
         request = requestWithRoute defReq driveURL
         requestWithRoute r u PermissionsInsert'{..}
-          = go _piQuotaUser (Just _piPrettyPrint) _piUserIP
-              _piKey
-              _piEmailMessage
+          = go _piEmailMessage (Just _piSendNotificationEmails)
               _piFileId
-              _piOAuthToken
-              (Just _piSendNotificationEmails)
+              _piQuotaUser
+              (Just _piPrettyPrint)
+              _piUserIP
               _piFields
+              _piKey
+              _piOAuthToken
               (Just AltJSON)
               _piPermission
           where go

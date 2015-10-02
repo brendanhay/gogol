@@ -48,9 +48,9 @@ type AccountsListResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] ListAccountsResponse
 
@@ -135,9 +135,9 @@ instance GoogleRequest AccountsList' where
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u AccountsList'{..}
           = go _alQuotaUser (Just _alPrettyPrint) _alUserIP
+              _alFields
               _alKey
               _alOAuthToken
-              _alFields
               (Just AltJSON)
           where go
                   = clientWithRoute

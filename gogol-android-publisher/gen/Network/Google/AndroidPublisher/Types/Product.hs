@@ -518,35 +518,33 @@ instance ToJSON SubscriptionPurchasesDeferRequest
 --
 -- /See:/ 'aPK' smart constructor.
 data APK = APK
-    { _apkVersionCode :: !(Maybe Int32)
-    , _apkBinary      :: !(Maybe APKBinary)
+    { _aVersionCode :: !(Maybe Int32)
+    , _aBinary      :: !(Maybe APKBinary)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'APK' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'apkVersionCode'
+-- * 'aVersionCode'
 --
--- * 'apkBinary'
+-- * 'aBinary'
 aPK
     :: APK
 aPK =
     APK
-    { _apkVersionCode = Nothing
-    , _apkBinary = Nothing
+    { _aVersionCode = Nothing
+    , _aBinary = Nothing
     }
 
 -- | The version code of the APK, as specified in the APK\'s manifest file.
-apkVersionCode :: Lens' APK (Maybe Int32)
-apkVersionCode
-  = lens _apkVersionCode
-      (\ s a -> s{_apkVersionCode = a})
+aVersionCode :: Lens' APK (Maybe Int32)
+aVersionCode
+  = lens _aVersionCode (\ s a -> s{_aVersionCode = a})
 
 -- | Information about the binary payload of this APK.
-apkBinary :: Lens' APK (Maybe APKBinary)
-apkBinary
-  = lens _apkBinary (\ s a -> s{_apkBinary = a})
+aBinary :: Lens' APK (Maybe APKBinary)
+aBinary = lens _aBinary (\ s a -> s{_aBinary = a})
 
 instance FromJSON APK where
         parseJSON
@@ -558,8 +556,8 @@ instance ToJSON APK where
         toJSON APK{..}
           = object
               (catMaybes
-                 [("versionCode" .=) <$> _apkVersionCode,
-                  ("binary" .=) <$> _apkBinary])
+                 [("versionCode" .=) <$> _aVersionCode,
+                  ("binary" .=) <$> _aBinary])
 
 --
 -- /See:/ 'testers' smart constructor.

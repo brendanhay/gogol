@@ -54,17 +54,17 @@ type UserEventsLogResource =
      "v2" :>
        "userEvents:log" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] LogUserEventRequest :>
                                      Post '[JSON] LogUserEventResponse
@@ -218,16 +218,16 @@ instance GoogleRequest UserEventsLog' where
         type Rs UserEventsLog' = LogUserEventResponse
         request = requestWithRoute defReq partnersURL
         requestWithRoute r u UserEventsLog'{..}
-          = go _uelXgafv _uelQuotaUser (Just _uelPrettyPrint)
-              _uelUploadProtocol
+          = go _uelXgafv _uelAccessToken _uelBearerToken
+              _uelCallback
               (Just _uelPp)
-              _uelAccessToken
               _uelUploadType
-              _uelBearerToken
+              _uelUploadProtocol
+              _uelQuotaUser
+              (Just _uelPrettyPrint)
+              _uelFields
               _uelKey
               _uelOAuthToken
-              _uelFields
-              _uelCallback
               (Just AltJSON)
               _uelLogUserEventRequest
           where go

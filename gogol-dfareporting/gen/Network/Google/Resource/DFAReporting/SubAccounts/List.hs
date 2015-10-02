@@ -54,22 +54,22 @@ type SubAccountsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "subaccounts" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
+           QueryParams "ids" Int64 :>
+             QueryParam "maxResults" Int32 :>
+               QueryParam "pageToken" Text :>
                  QueryParam "searchString" Text :>
-                   QueryParams "ids" Int64 :>
+                   QueryParam "sortField"
+                     DfareportingSubAccountsListSortField
+                     :>
                      QueryParam "sortOrder"
                        DfareportingSubAccountsListSortOrder
                        :>
-                       QueryParam "key" Key :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "sortField"
-                             DfareportingSubAccountsListSortField
-                             :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "maxResults" Int32 :>
-                                 QueryParam "fields" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] SubAccountsListResponse
 
@@ -227,17 +227,17 @@ instance GoogleRequest SubAccountsList' where
         type Rs SubAccountsList' = SubAccountsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u SubAccountsList'{..}
-          = go _salQuotaUser (Just _salPrettyPrint) _salUserIP
+          = go _salIds _salMaxResults _salPageToken
               _salSearchString
-              _salIds
-              _salProfileId
-              _salSortOrder
-              _salKey
-              _salPageToken
               _salSortField
-              _salOAuthToken
-              _salMaxResults
+              _salSortOrder
+              _salProfileId
+              _salQuotaUser
+              (Just _salPrettyPrint)
+              _salUserIP
               _salFields
+              _salKey
+              _salOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

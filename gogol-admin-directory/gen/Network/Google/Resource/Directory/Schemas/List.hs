@@ -51,9 +51,9 @@ type SchemasListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Schemas
 
 -- | Retrieve all schemas for a customer
@@ -146,11 +146,11 @@ instance GoogleRequest SchemasList' where
         type Rs SchemasList' = Schemas
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u SchemasList'{..}
-          = go _slQuotaUser (Just _slPrettyPrint) _slUserIP
-              _slCustomerId
+          = go _slCustomerId _slQuotaUser (Just _slPrettyPrint)
+              _slUserIP
+              _slFields
               _slKey
               _slOAuthToken
-              _slFields
               (Just AltJSON)
           where go
                   = clientWithRoute

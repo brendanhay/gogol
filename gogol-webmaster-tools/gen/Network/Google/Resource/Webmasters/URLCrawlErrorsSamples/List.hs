@@ -27,7 +27,7 @@ module Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.List
       URLCrawlErrorsSamplesListResource
 
     -- * Creating a Request
-    , uRLCrawlErrorsSamplesList'
+    , urlCrawlErrorsSamplesList'
     , URLCrawlErrorsSamplesList'
 
     -- * Request Lenses
@@ -51,25 +51,25 @@ type URLCrawlErrorsSamplesListResource =
      "sites" :>
        Capture "siteUrl" Text :>
          "urlCrawlErrorsSamples" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "platform"
-                 WebmastersURLCrawlErrorsSamplesListPlatform
-                 :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "category"
-                     WebmastersURLCrawlErrorsSamplesListCategory
-                     :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+           QueryParam "category"
+             WebmastersURLCrawlErrorsSamplesListCategory
+             :>
+             QueryParam "platform"
+               WebmastersURLCrawlErrorsSamplesListPlatform
+               :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] URLCrawlErrorsSamplesListResponse
 
 -- | Lists a site\'s sample URLs for the specified crawl error category and
 -- platform.
 --
--- /See:/ 'uRLCrawlErrorsSamplesList'' smart constructor.
+-- /See:/ 'urlCrawlErrorsSamplesList'' smart constructor.
 data URLCrawlErrorsSamplesList' = URLCrawlErrorsSamplesList'
     { _uceslQuotaUser   :: !(Maybe Text)
     , _uceslPrettyPrint :: !Bool
@@ -103,12 +103,12 @@ data URLCrawlErrorsSamplesList' = URLCrawlErrorsSamplesList'
 -- * 'uceslOAuthToken'
 --
 -- * 'uceslFields'
-uRLCrawlErrorsSamplesList'
+urlCrawlErrorsSamplesList'
     :: WebmastersURLCrawlErrorsSamplesListPlatform -- ^ 'platform'
     -> WebmastersURLCrawlErrorsSamplesListCategory -- ^ 'category'
     -> Text -- ^ 'siteUrl'
     -> URLCrawlErrorsSamplesList'
-uRLCrawlErrorsSamplesList' pUceslPlatform_ pUceslCategory_ pUceslSiteURL_ =
+urlCrawlErrorsSamplesList' pUceslPlatform_ pUceslCategory_ pUceslSiteURL_ =
     URLCrawlErrorsSamplesList'
     { _uceslQuotaUser = Nothing
     , _uceslPrettyPrint = True
@@ -186,14 +186,14 @@ instance GoogleRequest URLCrawlErrorsSamplesList'
              URLCrawlErrorsSamplesListResponse
         request = requestWithRoute defReq webmasterToolsURL
         requestWithRoute r u URLCrawlErrorsSamplesList'{..}
-          = go _uceslQuotaUser (Just _uceslPrettyPrint)
+          = go _uceslSiteURL (Just _uceslCategory)
               (Just _uceslPlatform)
+              _uceslQuotaUser
+              (Just _uceslPrettyPrint)
               _uceslUserIP
-              (Just _uceslCategory)
-              _uceslSiteURL
+              _uceslFields
               _uceslKey
               _uceslOAuthToken
-              _uceslFields
               (Just AltJSON)
           where go
                   = clientWithRoute

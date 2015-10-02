@@ -49,9 +49,9 @@ type RasterCollectionsCreateResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] RasterCollection :>
                        Post '[JSON] RasterCollection
@@ -151,9 +151,9 @@ instance GoogleRequest RasterCollectionsCreate' where
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u RasterCollectionsCreate'{..}
           = go _rccQuotaUser (Just _rccPrettyPrint) _rccUserIP
+              _rccFields
               _rccKey
               _rccOAuthToken
-              _rccFields
               (Just AltJSON)
               _rccRasterCollection
           where go

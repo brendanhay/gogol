@@ -56,9 +56,9 @@ type MobileDevicesActionResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] MobileDeviceAction :>
                                  Post '[JSON] ()
@@ -179,13 +179,12 @@ instance GoogleRequest MobileDevicesAction' where
         type Rs MobileDevicesAction' = ()
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u MobileDevicesAction'{..}
-          = go _mdaQuotaUser _mdaResourceId
+          = go _mdaCustomerId _mdaResourceId _mdaQuotaUser
               (Just _mdaPrettyPrint)
               _mdaUserIP
-              _mdaCustomerId
+              _mdaFields
               _mdaKey
               _mdaOAuthToken
-              _mdaFields
               (Just AltJSON)
               _mdaMobileDeviceAction
           where go

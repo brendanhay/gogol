@@ -50,13 +50,13 @@ type EventTagsPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "eventTags" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "id" Int64 :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] EventTag :> Patch '[JSON] EventTag
 
@@ -172,12 +172,12 @@ instance GoogleRequest EventTagsPatch' where
         type Rs EventTagsPatch' = EventTag
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u EventTagsPatch'{..}
-          = go _etpQuotaUser (Just _etpPrettyPrint) _etpUserIP
-              _etpProfileId
-              _etpKey
-              (Just _etpId)
-              _etpOAuthToken
+          = go _etpProfileId (Just _etpId) _etpQuotaUser
+              (Just _etpPrettyPrint)
+              _etpUserIP
               _etpFields
+              _etpKey
+              _etpOAuthToken
               (Just AltJSON)
               _etpEventTag
           where go

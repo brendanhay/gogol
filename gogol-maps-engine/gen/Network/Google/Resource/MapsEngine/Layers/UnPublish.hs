@@ -51,9 +51,9 @@ type LayersUnPublishResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Post '[JSON] PublishResponse
 
@@ -149,11 +149,11 @@ instance GoogleRequest LayersUnPublish' where
         type Rs LayersUnPublish' = PublishResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u LayersUnPublish'{..}
-          = go _lupQuotaUser (Just _lupPrettyPrint) _lupUserIP
-              _lupKey
-              _lupId
-              _lupOAuthToken
+          = go _lupId _lupQuotaUser (Just _lupPrettyPrint)
+              _lupUserIP
               _lupFields
+              _lupKey
+              _lupOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

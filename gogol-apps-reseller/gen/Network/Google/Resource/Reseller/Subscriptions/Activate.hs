@@ -54,9 +54,9 @@ type SubscriptionsActivateResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Post '[JSON] Subscription
 
 -- | Activates a subscription previously suspended by the reseller
@@ -160,12 +160,12 @@ instance GoogleRequest SubscriptionsActivate' where
         type Rs SubscriptionsActivate' = Subscription
         request = requestWithRoute defReq appsResellerURL
         requestWithRoute r u SubscriptionsActivate'{..}
-          = go _saQuotaUser (Just _saPrettyPrint) _saUserIP
-              _saCustomerId
+          = go _saCustomerId _saSubscriptionId _saQuotaUser
+              (Just _saPrettyPrint)
+              _saUserIP
+              _saFields
               _saKey
               _saOAuthToken
-              _saSubscriptionId
-              _saFields
               (Just AltJSON)
           where go
                   = clientWithRoute

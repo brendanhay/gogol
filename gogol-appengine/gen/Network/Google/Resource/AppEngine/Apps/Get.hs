@@ -56,18 +56,18 @@ type AppsGetResource =
        "apps" :>
          Capture "appsId" Text :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
+             QueryParam "access_token" Text :>
+               QueryParam "bearer_token" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "ensureResourcesExist" Bool :>
+                     QueryParam "pp" Bool :>
                        QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "ensureResourcesExist" Bool :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "callback" Text :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] Application
 
@@ -229,18 +229,18 @@ instance GoogleRequest AppsGet' where
         type Rs AppsGet' = Application
         request = requestWithRoute defReq appEngineURL
         requestWithRoute r u AppsGet'{..}
-          = go _agXgafv _agQuotaUser (Just _agPrettyPrint)
-              _agUploadProtocol
-              (Just _agPp)
-              _agAccessToken
-              _agUploadType
-              _agBearerToken
-              _agKey
-              _agAppsId
-              _agEnsureResourcesExist
-              _agOAuthToken
-              _agFields
+          = go _agXgafv _agAccessToken _agBearerToken
               _agCallback
+              _agEnsureResourcesExist
+              (Just _agPp)
+              _agUploadType
+              _agUploadProtocol
+              _agAppsId
+              _agQuotaUser
+              (Just _agPrettyPrint)
+              _agFields
+              _agKey
+              _agOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy AppsGetResource) r

@@ -50,9 +50,9 @@ type ChangesGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Change
 
 -- | Gets a specific change.
@@ -148,11 +148,12 @@ instance GoogleRequest ChangesGet' where
         type Rs ChangesGet' = Change
         request = requestWithRoute defReq driveURL
         requestWithRoute r u ChangesGet'{..}
-          = go _chaQuotaUser (Just _chaPrettyPrint) _chaUserIP
-              _chaChangeId
+          = go _chaChangeId _chaQuotaUser
+              (Just _chaPrettyPrint)
+              _chaUserIP
+              _chaFields
               _chaKey
               _chaOAuthToken
-              _chaFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy ChangesGetResource)

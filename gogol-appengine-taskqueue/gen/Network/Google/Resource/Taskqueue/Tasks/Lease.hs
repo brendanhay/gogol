@@ -55,16 +55,16 @@ type TasksLeaseResource =
          Capture "taskqueue" Text :>
            "tasks" :>
              "lease" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "tag" Text :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "numTasks" Int32 :>
-                         QueryParam "key" Key :>
-                           QueryParam "leaseSecs" Int32 :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "groupByTag" Bool :>
-                                 QueryParam "fields" Text :>
+               QueryParam "groupByTag" Bool :>
+                 QueryParam "tag" Text :>
+                   QueryParam "numTasks" Int32 :>
+                     QueryParam "leaseSecs" Int32 :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Post '[JSON] Tasks
 
@@ -209,16 +209,15 @@ instance GoogleRequest TasksLease' where
         request
           = requestWithRoute defReq appEngineTaskQueueURL
         requestWithRoute r u TasksLease'{..}
-          = go _tlTaskqueue _tlQuotaUser (Just _tlPrettyPrint)
-              _tlTag
-              _tlProject
-              _tlUserIP
+          = go _tlGroupByTag _tlTag _tlProject _tlTaskqueue
               (Just _tlNumTasks)
-              _tlKey
               (Just _tlLeaseSecs)
-              _tlOAuthToken
-              _tlGroupByTag
+              _tlQuotaUser
+              (Just _tlPrettyPrint)
+              _tlUserIP
               _tlFields
+              _tlKey
+              _tlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TasksLeaseResource)

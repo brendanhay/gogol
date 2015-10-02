@@ -49,9 +49,9 @@ type GroupsInsertResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] Group :> Post '[JSON] Group
 
@@ -145,9 +145,9 @@ instance GoogleRequest GroupsInsert' where
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u GroupsInsert'{..}
           = go _giQuotaUser (Just _giPrettyPrint) _giUserIP
+              _giFields
               _giKey
               _giOAuthToken
-              _giFields
               (Just AltJSON)
               _giGroup
           where go

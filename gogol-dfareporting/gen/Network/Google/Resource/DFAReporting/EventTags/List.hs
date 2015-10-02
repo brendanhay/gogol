@@ -58,28 +58,28 @@ type EventTagsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "eventTags" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "definitionsOnly" Bool :>
-                 QueryParams "eventTagTypes"
-                   DfareportingEventTagsListEventTagTypes
-                   :>
+           QueryParam "adId" Int64 :>
+             QueryParam "advertiserId" Int64 :>
+               QueryParam "campaignId" Int64 :>
+                 QueryParam "definitionsOnly" Bool :>
                    QueryParam "enabled" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "advertiserId" Int64 :>
+                     QueryParams "eventTagTypes"
+                       DfareportingEventTagsListEventTagTypes
+                       :>
+                       QueryParams "ids" Int64 :>
                          QueryParam "searchString" Text :>
-                           QueryParam "campaignId" Int64 :>
-                             QueryParams "ids" Int64 :>
-                               QueryParam "sortOrder"
-                                 DfareportingEventTagsListSortOrder
-                                 :>
-                                 QueryParam "key" Key :>
-                                   QueryParam "adId" Int64 :>
-                                     QueryParam "sortField"
-                                       DfareportingEventTagsListSortField
-                                       :>
-                                       QueryParam "oauth_token" OAuthToken :>
-                                         QueryParam "fields" Text :>
+                           QueryParam "sortField"
+                             DfareportingEventTagsListSortField
+                             :>
+                             QueryParam "sortOrder"
+                               DfareportingEventTagsListSortOrder
+                               :>
+                               QueryParam "quotaUser" Text :>
+                                 QueryParam "prettyPrint" Bool :>
+                                   QueryParam "userIp" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "key" Key :>
+                                         QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
                                              Get '[JSON] EventTagsListResponse
 
@@ -289,22 +289,21 @@ instance GoogleRequest EventTagsList' where
         type Rs EventTagsList' = EventTagsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u EventTagsList'{..}
-          = go _etlQuotaUser (Just _etlPrettyPrint)
+          = go _etlAdId _etlAdvertiserId _etlCampaignId
               _etlDefinitionsOnly
-              _etlEventTagTypes
               _etlEnabled
-              _etlUserIP
-              _etlAdvertiserId
-              _etlSearchString
-              _etlCampaignId
+              _etlEventTagTypes
               _etlIds
-              _etlProfileId
-              _etlSortOrder
-              _etlKey
-              _etlAdId
+              _etlSearchString
               _etlSortField
-              _etlOAuthToken
+              _etlSortOrder
+              _etlProfileId
+              _etlQuotaUser
+              (Just _etlPrettyPrint)
+              _etlUserIP
               _etlFields
+              _etlKey
+              _etlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

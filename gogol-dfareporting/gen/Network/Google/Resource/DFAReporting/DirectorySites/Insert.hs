@@ -52,9 +52,9 @@ type DirectorySitesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] DirectorySite :>
                            Post '[JSON] DirectorySite
@@ -163,11 +163,12 @@ instance GoogleRequest DirectorySitesInsert' where
         type Rs DirectorySitesInsert' = DirectorySite
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u DirectorySitesInsert'{..}
-          = go _dsiQuotaUser (Just _dsiPrettyPrint) _dsiUserIP
-              _dsiProfileId
+          = go _dsiProfileId _dsiQuotaUser
+              (Just _dsiPrettyPrint)
+              _dsiUserIP
+              _dsiFields
               _dsiKey
               _dsiOAuthToken
-              _dsiFields
               (Just AltJSON)
               _dsiDirectorySite
           where go

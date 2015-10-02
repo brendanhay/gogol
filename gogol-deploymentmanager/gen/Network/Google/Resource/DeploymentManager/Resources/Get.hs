@@ -56,9 +56,9 @@ type ResourcesGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Resource
 
 -- | Gets information about a single resource.
@@ -172,13 +172,13 @@ instance GoogleRequest ResourcesGet' where
         request
           = requestWithRoute defReq deploymentManagerURL
         requestWithRoute r u ResourcesGet'{..}
-          = go _rgQuotaUser (Just _rgPrettyPrint) _rgProject
+          = go _rgProject _rgDeployment _rgResource
+              _rgQuotaUser
+              (Just _rgPrettyPrint)
               _rgUserIP
-              _rgKey
-              _rgResource
-              _rgOAuthToken
               _rgFields
-              _rgDeployment
+              _rgKey
+              _rgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

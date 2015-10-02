@@ -58,9 +58,9 @@ type InstancesSetMetadataResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Metadata :>
                                  Post '[JSON] Operation
@@ -188,13 +188,12 @@ instance GoogleRequest InstancesSetMetadata' where
         type Rs InstancesSetMetadata' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstancesSetMetadata'{..}
-          = go _ismQuotaUser (Just _ismPrettyPrint) _ismProject
+          = go _ismProject _ismZone _ismInstance _ismQuotaUser
+              (Just _ismPrettyPrint)
               _ismUserIP
-              _ismZone
+              _ismFields
               _ismKey
               _ismOAuthToken
-              _ismFields
-              _ismInstance
               (Just AltJSON)
               _ismMetadata
           where go

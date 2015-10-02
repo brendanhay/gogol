@@ -51,9 +51,9 @@ type AspsListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Asps
 
 -- | List the ASPs issued by a user.
@@ -147,11 +147,11 @@ instance GoogleRequest AspsList' where
         type Rs AspsList' = Asps
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u AspsList'{..}
-          = go _alQuotaUser (Just _alPrettyPrint) _alUserIP
+          = go _alUserKey _alQuotaUser (Just _alPrettyPrint)
+              _alUserIP
+              _alFields
               _alKey
               _alOAuthToken
-              _alUserKey
-              _alFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy AspsListResource) r

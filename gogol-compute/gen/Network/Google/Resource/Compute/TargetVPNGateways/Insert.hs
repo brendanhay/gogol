@@ -55,9 +55,9 @@ type TargetVPNGatewaysInsertResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] TargetVPNGateway :>
                              Post '[JSON] Operation
@@ -178,13 +178,12 @@ instance GoogleRequest TargetVPNGatewaysInsert' where
         type Rs TargetVPNGatewaysInsert' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u TargetVPNGatewaysInsert'{..}
-          = go _tvgiQuotaUser (Just _tvgiPrettyPrint)
-              _tvgiProject
+          = go _tvgiProject _tvgiRegion _tvgiQuotaUser
+              (Just _tvgiPrettyPrint)
               _tvgiUserIP
-              _tvgiKey
-              _tvgiRegion
-              _tvgiOAuthToken
               _tvgiFields
+              _tvgiKey
+              _tvgiOAuthToken
               (Just AltJSON)
               _tvgiTargetVPNGateway
           where go

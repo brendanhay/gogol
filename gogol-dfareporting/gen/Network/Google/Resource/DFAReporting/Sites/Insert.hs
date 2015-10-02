@@ -52,9 +52,9 @@ type SitesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Site :> Post '[JSON] Site
 
@@ -157,11 +157,11 @@ instance GoogleRequest SitesInsert' where
         type Rs SitesInsert' = Site
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u SitesInsert'{..}
-          = go _siQuotaUser (Just _siPrettyPrint) _siUserIP
-              _siProfileId
+          = go _siProfileId _siQuotaUser (Just _siPrettyPrint)
+              _siUserIP
+              _siFields
               _siKey
               _siOAuthToken
-              _siFields
               (Just AltJSON)
               _siSite
           where go

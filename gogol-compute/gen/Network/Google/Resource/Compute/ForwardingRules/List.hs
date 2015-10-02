@@ -54,15 +54,15 @@ type ForwardingRulesListResource =
        "regions" :>
          Capture "region" Text :>
            "forwardingRules" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "filter" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
+             QueryParam "filter" Text :>
+               QueryParam "maxResults" Word32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] ForwardingRuleList
 
@@ -210,15 +210,15 @@ instance GoogleRequest ForwardingRulesList' where
         type Rs ForwardingRulesList' = ForwardingRuleList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u ForwardingRulesList'{..}
-          = go _frlQuotaUser (Just _frlPrettyPrint) _frlProject
-              _frlUserIP
-              _frlKey
-              _frlFilter
+          = go _frlFilter (Just _frlMaxResults) _frlPageToken
+              _frlProject
               _frlRegion
-              _frlPageToken
-              _frlOAuthToken
-              (Just _frlMaxResults)
+              _frlQuotaUser
+              (Just _frlPrettyPrint)
+              _frlUserIP
               _frlFields
+              _frlKey
+              _frlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

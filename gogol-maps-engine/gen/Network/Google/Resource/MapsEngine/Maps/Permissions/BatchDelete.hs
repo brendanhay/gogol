@@ -53,9 +53,9 @@ type MapsPermissionsBatchDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] PermissionsBatchDeleteRequest :>
                              Post '[JSON] PermissionsBatchDeleteResponse
@@ -166,12 +166,11 @@ instance GoogleRequest MapsPermissionsBatchDelete'
              PermissionsBatchDeleteResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u MapsPermissionsBatchDelete'{..}
-          = go _mpbdQuotaUser (Just _mpbdPrettyPrint)
+          = go _mpbdId _mpbdQuotaUser (Just _mpbdPrettyPrint)
               _mpbdUserIP
-              _mpbdKey
-              _mpbdId
-              _mpbdOAuthToken
               _mpbdFields
+              _mpbdKey
+              _mpbdOAuthToken
               (Just AltJSON)
               _mpbdPermissionsBatchDeleteRequest
           where go

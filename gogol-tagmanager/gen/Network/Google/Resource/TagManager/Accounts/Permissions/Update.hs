@@ -54,9 +54,9 @@ type AccountsPermissionsUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] UserAccess :> Put '[JSON] UserAccess
 
@@ -176,12 +176,12 @@ instance GoogleRequest AccountsPermissionsUpdate'
         type Rs AccountsPermissionsUpdate' = UserAccess
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u AccountsPermissionsUpdate'{..}
-          = go _apuQuotaUser (Just _apuPrettyPrint) _apuUserIP
-              _apuAccountId
+          = go _apuAccountId _apuPermissionId _apuQuotaUser
+              (Just _apuPrettyPrint)
+              _apuUserIP
+              _apuFields
               _apuKey
               _apuOAuthToken
-              _apuPermissionId
-              _apuFields
               (Just AltJSON)
               _apuUserAccess
           where go

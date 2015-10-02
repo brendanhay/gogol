@@ -50,9 +50,9 @@ type AchievementsUpdateMultipleResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] AchievementUpdateMultipleRequest :>
                          Post '[JSON] AchievementUpdateMultipleResponse
@@ -155,9 +155,9 @@ instance GoogleRequest AchievementsUpdateMultiple'
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u AchievementsUpdateMultiple'{..}
           = go _aumQuotaUser (Just _aumPrettyPrint) _aumUserIP
+              _aumFields
               _aumKey
               _aumOAuthToken
-              _aumFields
               (Just AltJSON)
               _aumAchievementUpdateMultipleRequest
           where go

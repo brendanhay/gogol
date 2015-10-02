@@ -53,9 +53,9 @@ type EditsValidateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Post '[JSON] AppEdit
 
 -- | Checks that the edit can be successfully committed. The edit\'s changes
@@ -160,13 +160,12 @@ instance GoogleRequest EditsValidate' where
         type Rs EditsValidate' = AppEdit
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u EditsValidate'{..}
-          = go _evQuotaUser (Just _evPrettyPrint)
-              _evPackageName
+          = go _evPackageName _evEditId _evQuotaUser
+              (Just _evPrettyPrint)
               _evUserIP
+              _evFields
               _evKey
               _evOAuthToken
-              _evEditId
-              _evFields
               (Just AltJSON)
           where go
                   = clientWithRoute

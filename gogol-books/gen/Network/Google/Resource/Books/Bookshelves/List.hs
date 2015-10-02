@@ -49,13 +49,13 @@ type BookshelvesListResource =
      "users" :>
        Capture "userId" Text :>
          "bookshelves" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "source" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "source" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Bookshelves
 
 -- | Retrieves a list of public bookshelves for the specified user.
@@ -155,12 +155,12 @@ instance GoogleRequest BookshelvesList' where
         type Rs BookshelvesList' = Bookshelves
         request = requestWithRoute defReq booksURL
         requestWithRoute r u BookshelvesList'{..}
-          = go _blQuotaUser (Just _blPrettyPrint) _blUserIP
-              _blUserId
-              _blKey
-              _blSource
-              _blOAuthToken
+          = go _blSource _blUserId _blQuotaUser
+              (Just _blPrettyPrint)
+              _blUserIP
               _blFields
+              _blKey
+              _blOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

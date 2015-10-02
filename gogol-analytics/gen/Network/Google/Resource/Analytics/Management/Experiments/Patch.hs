@@ -61,9 +61,9 @@ type ManagementExperimentsPatchResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "fields" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] Experiment :>
                                        Patch '[JSON] Experiment
@@ -205,15 +205,14 @@ instance GoogleRequest ManagementExperimentsPatch'
         type Rs ManagementExperimentsPatch' = Experiment
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementExperimentsPatch'{..}
-          = go _mepQuotaUser (Just _mepPrettyPrint)
-              _mepWebPropertyId
-              _mepUserIP
-              _mepProfileId
-              _mepAccountId
+          = go _mepAccountId _mepWebPropertyId _mepProfileId
               _mepExperimentId
+              _mepQuotaUser
+              (Just _mepPrettyPrint)
+              _mepUserIP
+              _mepFields
               _mepKey
               _mepOAuthToken
-              _mepFields
               (Just AltJSON)
               _mepExperiment
           where go

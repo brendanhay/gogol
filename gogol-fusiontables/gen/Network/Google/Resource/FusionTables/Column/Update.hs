@@ -54,9 +54,9 @@ type ColumnUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Column :> Put '[JSON] Column
 
@@ -169,12 +169,12 @@ instance GoogleRequest ColumnUpdate' where
         type Rs ColumnUpdate' = Column
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u ColumnUpdate'{..}
-          = go _cuQuotaUser (Just _cuPrettyPrint) _cuUserIP
+          = go _cuTableId _cuColumnId _cuQuotaUser
+              (Just _cuPrettyPrint)
+              _cuUserIP
+              _cuFields
               _cuKey
               _cuOAuthToken
-              _cuTableId
-              _cuColumnId
-              _cuFields
               (Just AltJSON)
               _cuColumn
           where go

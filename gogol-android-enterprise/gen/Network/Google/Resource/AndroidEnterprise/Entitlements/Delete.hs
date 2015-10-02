@@ -56,9 +56,9 @@ type EntitlementsDeleteResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Removes an entitlement to an app for a user and uninstalls it.
@@ -173,14 +173,13 @@ instance GoogleRequest EntitlementsDelete' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u EntitlementsDelete'{..}
-          = go _edEntitlementId _edQuotaUser
+          = go _edEnterpriseId _edUserId _edEntitlementId
+              _edQuotaUser
               (Just _edPrettyPrint)
-              _edEnterpriseId
               _edUserIP
-              _edUserId
+              _edFields
               _edKey
               _edOAuthToken
-              _edFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -51,14 +51,14 @@ type UsersThreadsGetResource =
      Capture "userId" Text :>
        "threads" :>
          Capture "id" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "format" GmailUsersThreadsGetFormat :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParams "metadataHeaders" Text :>
-                         QueryParam "fields" Text :>
+           QueryParam "format" GmailUsersThreadsGetFormat :>
+             QueryParams "metadataHeaders" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Thread
 
 -- | Gets the specified thread.
@@ -183,14 +183,14 @@ instance GoogleRequest UsersThreadsGet' where
         type Rs UsersThreadsGet' = Thread
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersThreadsGet'{..}
-          = go _utgQuotaUser (Just _utgPrettyPrint) _utgUserIP
-              (Just _utgFormat)
-              _utgUserId
-              _utgKey
+          = go (Just _utgFormat) _utgMetadataHeaders _utgUserId
               _utgId
-              _utgOAuthToken
-              _utgMetadataHeaders
+              _utgQuotaUser
+              (Just _utgPrettyPrint)
+              _utgUserIP
               _utgFields
+              _utgKey
+              _utgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

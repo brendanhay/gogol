@@ -55,23 +55,23 @@ type DirectorySiteContactsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "directorySiteContacts" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "searchString" Text :>
-                   QueryParams "ids" Int64 :>
-                     QueryParams "directorySiteIds" Int64 :>
+           QueryParams "directorySiteIds" Int64 :>
+             QueryParams "ids" Int64 :>
+               QueryParam "maxResults" Int32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "searchString" Text :>
+                     QueryParam "sortField"
+                       DfareportingDirectorySiteContactsListSortField
+                       :>
                        QueryParam "sortOrder"
                          DfareportingDirectorySiteContactsListSortOrder
                          :>
-                         QueryParam "key" Key :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "sortField"
-                               DfareportingDirectorySiteContactsListSortField
-                               :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "maxResults" Int32 :>
-                                   QueryParam "fields" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON]
                                          DirectorySiteContactsListResponse
@@ -250,19 +250,18 @@ instance GoogleRequest DirectorySiteContactsList'
              DirectorySiteContactsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u DirectorySiteContactsList'{..}
-          = go _dsclQuotaUser (Just _dsclPrettyPrint)
-              _dsclUserIP
-              _dsclSearchString
-              _dsclIds
-              _dsclProfileId
-              _dsclDirectorySiteIds
-              _dsclSortOrder
-              _dsclKey
+          = go _dsclDirectorySiteIds _dsclIds _dsclMaxResults
               _dsclPageToken
+              _dsclSearchString
               _dsclSortField
-              _dsclOAuthToken
-              _dsclMaxResults
+              _dsclSortOrder
+              _dsclProfileId
+              _dsclQuotaUser
+              (Just _dsclPrettyPrint)
+              _dsclUserIP
               _dsclFields
+              _dsclKey
+              _dsclOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

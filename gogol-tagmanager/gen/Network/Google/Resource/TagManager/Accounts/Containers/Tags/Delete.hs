@@ -56,9 +56,9 @@ type AccountsContainersTagsDeleteResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a GTM Tag.
@@ -180,14 +180,13 @@ instance GoogleRequest AccountsContainersTagsDelete'
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersTagsDelete'{..}
-          = go _actdcQuotaUser (Just _actdcPrettyPrint)
-              _actdcContainerId
+          = go _actdcAccountId _actdcContainerId _actdcTagId
+              _actdcQuotaUser
+              (Just _actdcPrettyPrint)
               _actdcUserIP
-              _actdcAccountId
-              _actdcTagId
+              _actdcFields
               _actdcKey
               _actdcOAuthToken
-              _actdcFields
               (Just AltJSON)
           where go
                   = clientWithRoute

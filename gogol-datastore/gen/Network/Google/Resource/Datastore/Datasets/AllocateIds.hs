@@ -52,9 +52,9 @@ type DatasetsAllocateIdsResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltPROTO :>
                        ReqBody '[JSON] AllocateIdsRequest :>
                          Post '[JSON] AllocateIdsResponse
@@ -164,11 +164,12 @@ instance GoogleRequest DatasetsAllocateIds' where
         type Rs DatasetsAllocateIds' = AllocateIdsResponse
         request = requestWithRoute defReq datastoreURL
         requestWithRoute r u DatasetsAllocateIds'{..}
-          = go _daiQuotaUser (Just _daiPrettyPrint) _daiUserIP
-              _daiKey
-              _daiDatasetId
-              _daiOAuthToken
+          = go _daiDatasetId _daiQuotaUser
+              (Just _daiPrettyPrint)
+              _daiUserIP
               _daiFields
+              _daiKey
+              _daiOAuthToken
               (Just AltPROTO)
               _daiAllocateIdsRequest
           where go

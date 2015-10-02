@@ -48,13 +48,13 @@ import           Network.Google.Prelude
 type SnapshotsGetResource =
      "snapshots" :>
        Capture "snapshotId" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "language" Text :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+         QueryParam "language" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Snapshot
 
 -- | Retrieves the metadata for a given snapshot ID.
@@ -160,12 +160,12 @@ instance GoogleRequest SnapshotsGet' where
         type Rs SnapshotsGet' = Snapshot
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u SnapshotsGet'{..}
-          = go _snaQuotaUser (Just _snaPrettyPrint) _snaUserIP
-              _snaKey
-              _snaLanguage
-              _snaOAuthToken
+          = go _snaLanguage _snaSnapshotId _snaQuotaUser
+              (Just _snaPrettyPrint)
+              _snaUserIP
               _snaFields
-              _snaSnapshotId
+              _snaKey
+              _snaOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

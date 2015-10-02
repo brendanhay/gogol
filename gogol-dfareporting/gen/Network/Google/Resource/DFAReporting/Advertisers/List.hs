@@ -60,33 +60,32 @@ type AdvertisersListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "advertisers" :>
-           QueryParam "status" DfareportingAdvertisersListStatus
-             :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "onlyParent" Bool :>
-                     QueryParam "searchString" Text :>
-                       QueryParams "ids" Int64 :>
-                         QueryParam "includeAdvertisersWithoutGroupsOnly" Bool
-                           :>
-                           QueryParam "sortOrder"
-                             DfareportingAdvertisersListSortOrder
+           QueryParams "advertiserGroupIds" Int64 :>
+             QueryParams "floodlightConfigurationIds" Int64 :>
+               QueryParams "ids" Int64 :>
+                 QueryParam "includeAdvertisersWithoutGroupsOnly" Bool
+                   :>
+                   QueryParam "maxResults" Int32 :>
+                     QueryParam "onlyParent" Bool :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "searchString" Text :>
+                           QueryParam "sortField"
+                             DfareportingAdvertisersListSortField
                              :>
-                             QueryParams "advertiserGroupIds" Int64 :>
-                               QueryParam "key" Key :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "sortField"
-                                     DfareportingAdvertisersListSortField
-                                     :>
-                                     QueryParam "subaccountId" Int64 :>
-                                       QueryParam "oauth_token" OAuthToken :>
-                                         QueryParams
-                                           "floodlightConfigurationIds"
-                                           Int64
-                                           :>
-                                           QueryParam "maxResults" Int32 :>
-                                             QueryParam "fields" Text :>
+                             QueryParam "sortOrder"
+                               DfareportingAdvertisersListSortOrder
+                               :>
+                               QueryParam "status"
+                                 DfareportingAdvertisersListStatus
+                                 :>
+                                 QueryParam "subaccountId" Int64 :>
+                                   QueryParam "quotaUser" Text :>
+                                     QueryParam "prettyPrint" Bool :>
+                                       QueryParam "userIp" Text :>
+                                         QueryParam "fields" Text :>
+                                           QueryParam "key" Key :>
+                                             QueryParam "oauth_token" OAuthToken
+                                               :>
                                                QueryParam "alt" AltJSON :>
                                                  Get '[JSON]
                                                    AdvertisersListResponse
@@ -306,23 +305,25 @@ instance GoogleRequest AdvertisersList' where
         type Rs AdvertisersList' = AdvertisersListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdvertisersList'{..}
-          = go _allStatus _allQuotaUser (Just _allPrettyPrint)
-              _allUserIP
-              _allOnlyParent
-              _allSearchString
+          = go _allAdvertiserGroupIds
+              _allFloodlightConfigurationIds
               _allIds
               _allIncludeAdvertisersWithoutGroupsOnly
-              _allProfileId
-              _allSortOrder
-              _allAdvertiserGroupIds
-              _allKey
-              _allPageToken
-              _allSortField
-              _allSubAccountId
-              _allOAuthToken
-              _allFloodlightConfigurationIds
               _allMaxResults
+              _allOnlyParent
+              _allPageToken
+              _allSearchString
+              _allSortField
+              _allSortOrder
+              _allStatus
+              _allSubAccountId
+              _allProfileId
+              _allQuotaUser
+              (Just _allPrettyPrint)
+              _allUserIP
               _allFields
+              _allKey
+              _allOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -50,13 +50,13 @@ type MyLibraryBookshelvesClearVolumesResource =
        "bookshelves" :>
          Capture "shelf" Text :>
            "clearVolumes" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "source" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+             QueryParam "source" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Clears all volumes from a bookshelf.
@@ -165,13 +165,12 @@ instance GoogleRequest
         request = requestWithRoute defReq booksURL
         requestWithRoute r u
           MyLibraryBookshelvesClearVolumes'{..}
-          = go _mlbcvQuotaUser (Just _mlbcvPrettyPrint)
+          = go _mlbcvSource _mlbcvShelf _mlbcvQuotaUser
+              (Just _mlbcvPrettyPrint)
               _mlbcvUserIP
-              _mlbcvShelf
-              _mlbcvKey
-              _mlbcvSource
-              _mlbcvOAuthToken
               _mlbcvFields
+              _mlbcvKey
+              _mlbcvOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

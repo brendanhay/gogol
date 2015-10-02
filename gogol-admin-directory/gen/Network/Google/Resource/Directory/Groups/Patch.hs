@@ -51,9 +51,9 @@ type GroupsPatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Group :> Patch '[JSON] Group
 
@@ -157,11 +157,11 @@ instance GoogleRequest GroupsPatch' where
         type Rs GroupsPatch' = Group
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u GroupsPatch'{..}
-          = go _gpQuotaUser (Just _gpPrettyPrint) _gpUserIP
-              _gpGroupKey
+          = go _gpGroupKey _gpQuotaUser (Just _gpPrettyPrint)
+              _gpUserIP
+              _gpFields
               _gpKey
               _gpOAuthToken
-              _gpFields
               (Just AltJSON)
               _gpGroup
           where go

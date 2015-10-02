@@ -52,13 +52,13 @@ type RoomsReportStatusResource =
      "rooms" :>
        Capture "roomId" Text :>
          "reportstatus" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "language" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "language" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] RoomP2PStatuses :>
                              Post '[JSON] RoomStatus
@@ -178,12 +178,12 @@ instance GoogleRequest RoomsReportStatus' where
         type Rs RoomsReportStatus' = RoomStatus
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u RoomsReportStatus'{..}
-          = go _rrsQuotaUser (Just _rrsPrettyPrint) _rrsUserIP
-              _rrsKey
-              _rrsRoomId
-              _rrsLanguage
-              _rrsOAuthToken
+          = go _rrsLanguage _rrsRoomId _rrsQuotaUser
+              (Just _rrsPrettyPrint)
+              _rrsUserIP
               _rrsFields
+              _rrsKey
+              _rrsOAuthToken
               (Just AltJSON)
               _rrsRoomP2PStatuses
           where go

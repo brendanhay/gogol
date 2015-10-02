@@ -52,9 +52,9 @@ type PretargetingConfigDeleteResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing pretargeting config.
@@ -161,12 +161,12 @@ instance GoogleRequest PretargetingConfigDelete'
         type Rs PretargetingConfigDelete' = ()
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u PretargetingConfigDelete'{..}
-          = go _pcdQuotaUser (Just _pcdPrettyPrint) _pcdUserIP
-              _pcdAccountId
-              _pcdKey
-              _pcdConfigId
-              _pcdOAuthToken
+          = go _pcdAccountId _pcdConfigId _pcdQuotaUser
+              (Just _pcdPrettyPrint)
+              _pcdUserIP
               _pcdFields
+              _pcdKey
+              _pcdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -58,9 +58,9 @@ type ManagementWebPropertyUserLinksUpdateResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] EntityUserLink :>
                                    Put '[JSON] EntityUserLink
@@ -197,14 +197,14 @@ instance GoogleRequest
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
           ManagementWebPropertyUserLinksUpdate'{..}
-          = go _mwpuluQuotaUser (Just _mwpuluPrettyPrint)
-              _mwpuluWebPropertyId
-              _mwpuluUserIP
-              _mwpuluAccountId
-              _mwpuluKey
+          = go _mwpuluAccountId _mwpuluWebPropertyId
               _mwpuluLinkId
-              _mwpuluOAuthToken
+              _mwpuluQuotaUser
+              (Just _mwpuluPrettyPrint)
+              _mwpuluUserIP
               _mwpuluFields
+              _mwpuluKey
+              _mwpuluOAuthToken
               (Just AltJSON)
               _mwpuluEntityUserLink
           where go

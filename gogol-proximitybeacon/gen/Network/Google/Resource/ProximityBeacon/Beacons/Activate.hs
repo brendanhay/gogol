@@ -57,17 +57,17 @@ type BeaconsActivateResource =
      "v1beta1" :>
        "{+beaconName}:activate" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :> Post '[JSON] Empty
 
 -- | (Re)activates a beacon. A beacon that is active will return information
@@ -218,17 +218,17 @@ instance GoogleRequest BeaconsActivate' where
         type Rs BeaconsActivate' = Empty
         request = requestWithRoute defReq proximityBeaconURL
         requestWithRoute r u BeaconsActivate'{..}
-          = go _baXgafv _baQuotaUser (Just _baPrettyPrint)
-              _baUploadProtocol
+          = go _baXgafv _baAccessToken _baBearerToken
+              _baCallback
               (Just _baPp)
-              _baAccessToken
-              _baBeaconName
               _baUploadType
-              _baBearerToken
+              _baUploadProtocol
+              _baBeaconName
+              _baQuotaUser
+              (Just _baPrettyPrint)
+              _baFields
               _baKey
               _baOAuthToken
-              _baFields
-              _baCallback
               (Just AltJSON)
           where go
                   = clientWithRoute

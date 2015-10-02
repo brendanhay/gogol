@@ -49,9 +49,9 @@ type CallsetsCreateResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] CallSet :> Post '[JSON] CallSet
 
@@ -146,9 +146,9 @@ instance GoogleRequest CallsetsCreate' where
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u CallsetsCreate'{..}
           = go _ccQuotaUser (Just _ccPrettyPrint) _ccUserIP
+              _ccFields
               _ccKey
               _ccOAuthToken
-              _ccFields
               (Just AltJSON)
               _ccCallSet
           where go

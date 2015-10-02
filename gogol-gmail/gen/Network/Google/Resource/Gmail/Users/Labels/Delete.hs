@@ -53,9 +53,9 @@ type UsersLabelsDeleteResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Immediately and permanently deletes the specified label and removes it
@@ -162,12 +162,12 @@ instance GoogleRequest UsersLabelsDelete' where
         type Rs UsersLabelsDelete' = ()
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersLabelsDelete'{..}
-          = go _uldQuotaUser (Just _uldPrettyPrint) _uldUserIP
-              _uldUserId
-              _uldKey
-              _uldId
-              _uldOAuthToken
+          = go _uldUserId _uldId _uldQuotaUser
+              (Just _uldPrettyPrint)
+              _uldUserIP
               _uldFields
+              _uldKey
+              _uldOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -49,9 +49,9 @@ type ProjectsGetResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :> Get '[JSON] Project
 
 -- | Fetch the representation of an existing Project.
@@ -144,11 +144,11 @@ instance GoogleRequest ProjectsGet' where
         type Rs ProjectsGet' = Project
         request = requestWithRoute defReq dNSURL
         requestWithRoute r u ProjectsGet'{..}
-          = go _pgQuotaUser (Just _pgPrettyPrint) _pgProject
+          = go _pgProject _pgQuotaUser (Just _pgPrettyPrint)
               _pgUserIP
+              _pgFields
               _pgKey
               _pgOAuthToken
-              _pgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -52,16 +52,16 @@ type JobsListResource =
      "teams" :>
        Capture "teamId" Text :>
          "jobs" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "minModifiedTimestampMs" Word64 :>
-                   QueryParam "key" Key :>
-                     QueryParam "omitJobChanges" Bool :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
+           QueryParam "maxResults" Word32 :>
+             QueryParam "minModifiedTimestampMs" Word64 :>
+               QueryParam "omitJobChanges" Bool :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] JobListResponse
 
@@ -192,15 +192,16 @@ instance GoogleRequest JobsList' where
         type Rs JobsList' = JobListResponse
         request = requestWithRoute defReq mapsCoordinateURL
         requestWithRoute r u JobsList'{..}
-          = go _jlQuotaUser (Just _jlPrettyPrint) _jlUserIP
-              _jlTeamId
-              _jlMinModifiedTimestampMs
-              _jlKey
+          = go _jlMaxResults _jlMinModifiedTimestampMs
               _jlOmitJobChanges
               _jlPageToken
-              _jlOAuthToken
-              _jlMaxResults
+              _jlTeamId
+              _jlQuotaUser
+              (Just _jlPrettyPrint)
+              _jlUserIP
               _jlFields
+              _jlKey
+              _jlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy JobsListResource) r

@@ -56,9 +56,9 @@ type AccountsContainersFoldersDeleteResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a GTM Folder.
@@ -180,14 +180,13 @@ instance GoogleRequest
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersFoldersDelete'{..}
-          = go _acfdQuotaUser (Just _acfdPrettyPrint)
-              _acfdContainerId
+          = go _acfdAccountId _acfdContainerId _acfdFolderId
+              _acfdQuotaUser
+              (Just _acfdPrettyPrint)
               _acfdUserIP
-              _acfdFolderId
-              _acfdAccountId
+              _acfdFields
               _acfdKey
               _acfdOAuthToken
-              _acfdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -51,9 +51,9 @@ type CalendarsDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a secondary calendar. Use calendars.clear for clearing all
@@ -149,11 +149,11 @@ instance GoogleRequest CalendarsDelete' where
         type Rs CalendarsDelete' = ()
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u CalendarsDelete'{..}
-          = go _cdQuotaUser _cdCalendarId (Just _cdPrettyPrint)
+          = go _cdCalendarId _cdQuotaUser (Just _cdPrettyPrint)
               _cdUserIP
+              _cdFields
               _cdKey
               _cdOAuthToken
-              _cdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -52,9 +52,9 @@ type PropertiesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Property :> Post '[JSON] Property
 
@@ -161,11 +161,11 @@ instance GoogleRequest PropertiesInsert' where
         type Rs PropertiesInsert' = Property
         request = requestWithRoute defReq driveURL
         requestWithRoute r u PropertiesInsert'{..}
-          = go _proQuotaUser (Just _proPrettyPrint) _proUserIP
-              _proKey
-              _proFileId
-              _proOAuthToken
+          = go _proFileId _proQuotaUser (Just _proPrettyPrint)
+              _proUserIP
               _proFields
+              _proKey
+              _proOAuthToken
               (Just AltJSON)
               _proProperty
           where go

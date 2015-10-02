@@ -56,9 +56,9 @@ type ImageConfigurationsUploadResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Post '[JSON] ImageConfiguration
 
@@ -177,14 +177,13 @@ instance GoogleRequest ImageConfigurationsUpload'
         request
           = requestWithRoute defReq gamesConfigurationURL
         requestWithRoute r u ImageConfigurationsUpload'{..}
-          = go _icuQuotaUser _icuResourceId
+          = go _icuMedia _icuResourceId _icuImageType
+              _icuQuotaUser
               (Just _icuPrettyPrint)
               _icuUserIP
-              _icuMedia
-              _icuImageType
+              _icuFields
               _icuKey
               _icuOAuthToken
-              _icuFields
               (Just AltJSON)
           where go
                   = clientWithRoute

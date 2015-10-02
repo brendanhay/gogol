@@ -55,13 +55,13 @@ type AccountsContainersTriggersUpdateResource =
            Capture "containerId" Text :>
              "triggers" :>
                Capture "triggerId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fingerprint" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                 QueryParam "fingerprint" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] Trigger :> Put '[JSON] Trigger
 
@@ -206,15 +206,14 @@ instance GoogleRequest
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersTriggersUpdate'{..}
-          = go _actuQuotaUser (Just _actuPrettyPrint)
-              _actuContainerId
+          = go _actuFingerprint _actuAccountId _actuContainerId
               _actuTriggerId
+              _actuQuotaUser
+              (Just _actuPrettyPrint)
               _actuUserIP
-              _actuFingerprint
-              _actuAccountId
+              _actuFields
               _actuKey
               _actuOAuthToken
-              _actuFields
               (Just AltJSON)
               _actuTrigger
           where go

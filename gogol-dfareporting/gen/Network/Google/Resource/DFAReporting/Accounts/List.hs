@@ -55,23 +55,23 @@ type AccountsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "accounts" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "searchString" Text :>
-                   QueryParams "ids" Int64 :>
-                     QueryParam "sortOrder"
-                       DfareportingAccountsListSortOrder
+           QueryParam "active" Bool :>
+             QueryParams "ids" Int64 :>
+               QueryParam "maxResults" Int32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "searchString" Text :>
+                     QueryParam "sortField"
+                       DfareportingAccountsListSortField
                        :>
-                       QueryParam "active" Bool :>
-                         QueryParam "key" Key :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "sortField"
-                               DfareportingAccountsListSortField
-                               :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "maxResults" Int32 :>
-                                   QueryParam "fields" Text :>
+                       QueryParam "sortOrder"
+                         DfareportingAccountsListSortOrder
+                         :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] AccountsListResponse
 
@@ -234,18 +234,17 @@ instance GoogleRequest AccountsList' where
         type Rs AccountsList' = AccountsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AccountsList'{..}
-          = go _alQuotaUser (Just _alPrettyPrint) _alUserIP
+          = go _alActive _alIds _alMaxResults _alPageToken
               _alSearchString
-              _alIds
-              _alProfileId
-              _alSortOrder
-              _alActive
-              _alKey
-              _alPageToken
               _alSortField
-              _alOAuthToken
-              _alMaxResults
+              _alSortOrder
+              _alProfileId
+              _alQuotaUser
+              (Just _alPrettyPrint)
+              _alUserIP
               _alFields
+              _alKey
+              _alOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

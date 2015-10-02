@@ -55,9 +55,9 @@ type AccountsContainersVersionsCreateResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON]
                                CreateContainerVersionRequestVersionOptions
@@ -187,13 +187,12 @@ instance GoogleRequest
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersVersionsCreate'{..}
-          = go _acvcQuotaUser (Just _acvcPrettyPrint)
-              _acvcContainerId
+          = go _acvcAccountId _acvcContainerId _acvcQuotaUser
+              (Just _acvcPrettyPrint)
               _acvcUserIP
-              _acvcAccountId
+              _acvcFields
               _acvcKey
               _acvcOAuthToken
-              _acvcFields
               (Just AltJSON)
               _acvcCreateContainerVersionRequestVersionOptions
           where go

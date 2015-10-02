@@ -59,25 +59,26 @@ type RasterCollectionsRastersListResource =
      "rasterCollections" :>
        Capture "id" Text :>
          "rasters" :>
-           QueryParam "createdAfter" UTCTime :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "creatorEmail" Text :>
-                     QueryParam "role"
-                       MapsEngineRasterCollectionsRastersListRole
-                       :>
-                       QueryParam "key" Key :>
-                         QueryParam "bbox" Text :>
-                           QueryParam "modifiedAfter" UTCTime :>
-                             QueryParam "modifiedBefore" UTCTime :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "search" Text :>
-                                     QueryParam "maxResults" Word32 :>
-                                       QueryParam "tags" Text :>
-                                         QueryParam "fields" Text :>
-                                           QueryParam "createdBefore" UTCTime :>
+           QueryParam "bbox" Text :>
+             QueryParam "createdAfter" UTCTime :>
+               QueryParam "createdBefore" UTCTime :>
+                 QueryParam "creatorEmail" Text :>
+                   QueryParam "maxResults" Word32 :>
+                     QueryParam "modifiedAfter" UTCTime :>
+                       QueryParam "modifiedBefore" UTCTime :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "role"
+                             MapsEngineRasterCollectionsRastersListRole
+                             :>
+                             QueryParam "search" Text :>
+                               QueryParam "tags" Text :>
+                                 QueryParam "quotaUser" Text :>
+                                   QueryParam "prettyPrint" Bool :>
+                                     QueryParam "userIp" Text :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "key" Key :>
+                                           QueryParam "oauth_token" OAuthToken
+                                             :>
                                              QueryParam "alt" AltJSON :>
                                                Get '[JSON]
                                                  RasterCollectionsRastersListResponse
@@ -294,23 +295,22 @@ instance GoogleRequest RasterCollectionsRastersList'
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u
           RasterCollectionsRastersList'{..}
-          = go _rcrlCreatedAfter _rcrlQuotaUser
-              (Just _rcrlPrettyPrint)
-              _rcrlUserIP
+          = go _rcrlBbox _rcrlCreatedAfter _rcrlCreatedBefore
               _rcrlCreatorEmail
-              _rcrlRole
-              _rcrlKey
-              _rcrlBbox
-              _rcrlId
+              _rcrlMaxResults
               _rcrlModifiedAfter
               _rcrlModifiedBefore
               _rcrlPageToken
-              _rcrlOAuthToken
+              _rcrlRole
               _rcrlSearch
-              _rcrlMaxResults
               _rcrlTags
+              _rcrlId
+              _rcrlQuotaUser
+              (Just _rcrlPrettyPrint)
+              _rcrlUserIP
               _rcrlFields
-              _rcrlCreatedBefore
+              _rcrlKey
+              _rcrlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

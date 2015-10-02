@@ -50,9 +50,9 @@ type VariantsDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a variant.
@@ -145,11 +145,11 @@ instance GoogleRequest VariantsDelete' where
         type Rs VariantsDelete' = ()
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u VariantsDelete'{..}
-          = go _vdQuotaUser (Just _vdPrettyPrint) _vdUserIP
-              _vdKey
-              _vdVariantId
-              _vdOAuthToken
+          = go _vdVariantId _vdQuotaUser (Just _vdPrettyPrint)
+              _vdUserIP
               _vdFields
+              _vdKey
+              _vdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

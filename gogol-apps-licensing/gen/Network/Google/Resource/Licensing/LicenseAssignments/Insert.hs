@@ -54,9 +54,9 @@ type LicenseAssignmentsInsertResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] LicenseAssignmentInsert :>
                              Post '[JSON] LicenseAssignment
@@ -175,12 +175,12 @@ instance GoogleRequest LicenseAssignmentsInsert'
         type Rs LicenseAssignmentsInsert' = LicenseAssignment
         request = requestWithRoute defReq appsLicensingURL
         requestWithRoute r u LicenseAssignmentsInsert'{..}
-          = go _laiQuotaUser (Just _laiPrettyPrint) _laiUserIP
-              _laiSkuId
+          = go _laiProductId _laiSkuId _laiQuotaUser
+              (Just _laiPrettyPrint)
+              _laiUserIP
+              _laiFields
               _laiKey
               _laiOAuthToken
-              _laiProductId
-              _laiFields
               (Just AltJSON)
               _laiLicenseAssignmentInsert
           where go

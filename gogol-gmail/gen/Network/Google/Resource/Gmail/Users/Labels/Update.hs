@@ -53,9 +53,9 @@ type UsersLabelsUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Label :> Put '[JSON] Label
 
@@ -171,12 +171,12 @@ instance GoogleRequest UsersLabelsUpdate' where
         type Rs UsersLabelsUpdate' = Label
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersLabelsUpdate'{..}
-          = go _uluQuotaUser (Just _uluPrettyPrint) _uluUserIP
-              _uluUserId
-              _uluKey
-              _uluId
-              _uluOAuthToken
+          = go _uluUserId _uluId _uluQuotaUser
+              (Just _uluPrettyPrint)
+              _uluUserIP
               _uluFields
+              _uluKey
+              _uluOAuthToken
               (Just AltJSON)
               _uluLabel
           where go

@@ -57,9 +57,9 @@ type VariantsetsMergeVariantsResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] MergeVariantsRequest :>
                            Post '[JSON] ()
@@ -175,12 +175,12 @@ instance GoogleRequest VariantsetsMergeVariants'
         type Rs VariantsetsMergeVariants' = ()
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u VariantsetsMergeVariants'{..}
-          = go _vmvQuotaUser (Just _vmvPrettyPrint)
-              _vmvVariantSetId
+          = go _vmvVariantSetId _vmvQuotaUser
+              (Just _vmvPrettyPrint)
               _vmvUserIP
+              _vmvFields
               _vmvKey
               _vmvOAuthToken
-              _vmvFields
               (Just AltJSON)
               _vmvMergeVariantsRequest
           where go

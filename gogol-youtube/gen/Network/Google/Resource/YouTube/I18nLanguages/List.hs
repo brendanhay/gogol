@@ -48,14 +48,14 @@ import           Network.Google.YouTube.Types
 -- 'I18nLanguagesList'' request conforms to.
 type I18nLanguagesListResource =
      "i18nLanguages" :>
-       QueryParam "quotaUser" Text :>
+       QueryParam "hl" Text :>
          QueryParam "part" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "hl" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] I18nLanguageListResponse
 
@@ -162,13 +162,12 @@ instance GoogleRequest I18nLanguagesList' where
         type Rs I18nLanguagesList' = I18nLanguageListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u I18nLanguagesList'{..}
-          = go _illQuotaUser (Just _illPart)
+          = go (Just _illHl) (Just _illPart) _illQuotaUser
               (Just _illPrettyPrint)
               _illUserIP
-              (Just _illHl)
+              _illFields
               _illKey
               _illOAuthToken
-              _illFields
               (Just AltJSON)
           where go
                   = clientWithRoute

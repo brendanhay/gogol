@@ -52,9 +52,9 @@ type AchievementConfigurationsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] AchievementConfiguration :>
                            Post '[JSON] AchievementConfiguration
@@ -169,11 +169,12 @@ instance GoogleRequest
           = requestWithRoute defReq gamesConfigurationURL
         requestWithRoute r u
           AchievementConfigurationsInsert'{..}
-          = go _aciQuotaUser (Just _aciPrettyPrint) _aciUserIP
-              _aciApplicationId
+          = go _aciApplicationId _aciQuotaUser
+              (Just _aciPrettyPrint)
+              _aciUserIP
+              _aciFields
               _aciKey
               _aciOAuthToken
-              _aciFields
               (Just AltJSON)
               _aciAchievementConfiguration
           where go

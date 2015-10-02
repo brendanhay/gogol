@@ -58,21 +58,21 @@ import           Network.Google.YouTube.Types
 -- 'ActivitiesList'' request conforms to.
 type ActivitiesListResource =
      "activities" :>
-       QueryParam "publishedAfter" UTCTime :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "part" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "home" Bool :>
-                 QueryParam "mine" Bool :>
-                   QueryParam "regionCode" Text :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "channelId" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "maxResults" Word32 :>
-                                 QueryParam "publishedBefore" UTCTime :>
-                                   QueryParam "fields" Text :>
+       QueryParam "channelId" Text :>
+         QueryParam "home" Bool :>
+           QueryParam "maxResults" Word32 :>
+             QueryParam "mine" Bool :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "publishedAfter" UTCTime :>
+                   QueryParam "publishedBefore" UTCTime :>
+                     QueryParam "regionCode" Text :>
+                       QueryParam "part" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] ActivityListResponse
 
@@ -268,19 +268,19 @@ instance GoogleRequest ActivitiesList' where
         type Rs ActivitiesList' = ActivityListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u ActivitiesList'{..}
-          = go _alPublishedAfter _alQuotaUser (Just _alPart)
-              (Just _alPrettyPrint)
-              _alHome
+          = go _alChannelId _alHome (Just _alMaxResults)
               _alMine
-              _alRegionCode
-              _alUserIP
-              _alChannelId
-              _alKey
               _alPageToken
-              _alOAuthToken
-              (Just _alMaxResults)
+              _alPublishedAfter
               _alPublishedBefore
+              _alRegionCode
+              (Just _alPart)
+              _alQuotaUser
+              (Just _alPrettyPrint)
+              _alUserIP
               _alFields
+              _alKey
+              _alOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

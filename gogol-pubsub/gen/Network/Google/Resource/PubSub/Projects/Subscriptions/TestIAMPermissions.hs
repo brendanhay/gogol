@@ -56,17 +56,17 @@ type ProjectsSubscriptionsTestIAMPermissionsResource
      "v1beta2" :>
        "{+resource}:testIamPermissions" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] TestIAMPermissionsRequest :>
                                      Post '[JSON] TestIAMPermissionsResponse
@@ -239,18 +239,17 @@ instance GoogleRequest
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u
           ProjectsSubscriptionsTestIAMPermissions'{..}
-          = go _pstipXgafv _pstipQuotaUser
-              (Just _pstipPrettyPrint)
-              _pstipUploadProtocol
-              (Just _pstipPp)
-              _pstipAccessToken
-              _pstipUploadType
-              _pstipBearerToken
-              _pstipKey
-              _pstipResource
-              _pstipOAuthToken
-              _pstipFields
+          = go _pstipXgafv _pstipAccessToken _pstipBearerToken
               _pstipCallback
+              (Just _pstipPp)
+              _pstipUploadType
+              _pstipUploadProtocol
+              _pstipResource
+              _pstipQuotaUser
+              (Just _pstipPrettyPrint)
+              _pstipFields
+              _pstipKey
+              _pstipOAuthToken
               (Just AltJSON)
               _pstipTestIAMPermissionsRequest
           where go

@@ -48,14 +48,14 @@ import           Network.Google.YouTube.Types
 -- 'VideosUpdate'' request conforms to.
 type VideosUpdateResource =
      "videos" :>
-       QueryParam "quotaUser" Text :>
+       QueryParam "onBehalfOfContentOwner" Text :>
          QueryParam "part" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Video :> Put '[JSON] Video
 
@@ -192,13 +192,13 @@ instance GoogleRequest VideosUpdate' where
         type Rs VideosUpdate' = Video
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u VideosUpdate'{..}
-          = go _vuQuotaUser (Just _vuPart)
+          = go _vuOnBehalfOfContentOwner (Just _vuPart)
+              _vuQuotaUser
               (Just _vuPrettyPrint)
               _vuUserIP
-              _vuOnBehalfOfContentOwner
+              _vuFields
               _vuKey
               _vuOAuthToken
-              _vuFields
               (Just AltJSON)
               _vuVideo
           where go

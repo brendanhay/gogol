@@ -53,9 +53,9 @@ type ColumnGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Column
 
 -- | Retrieves a specific column by its ID.
@@ -158,12 +158,12 @@ instance GoogleRequest ColumnGet' where
         type Rs ColumnGet' = Column
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u ColumnGet'{..}
-          = go _cgQuotaUser (Just _cgPrettyPrint) _cgUserIP
+          = go _cgTableId _cgColumnId _cgQuotaUser
+              (Just _cgPrettyPrint)
+              _cgUserIP
+              _cgFields
               _cgKey
               _cgOAuthToken
-              _cgTableId
-              _cgColumnId
-              _cgFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy ColumnGetResource)

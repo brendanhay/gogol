@@ -57,9 +57,9 @@ type TimeseriesWriteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] WriteTimeseriesRequest :>
                          Post '[JSON] WriteTimeseriesResponse
@@ -172,11 +172,11 @@ instance GoogleRequest TimeseriesWrite' where
         type Rs TimeseriesWrite' = WriteTimeseriesResponse
         request = requestWithRoute defReq monitoringURL
         requestWithRoute r u TimeseriesWrite'{..}
-          = go _twQuotaUser (Just _twPrettyPrint) _twProject
+          = go _twProject _twQuotaUser (Just _twPrettyPrint)
               _twUserIP
+              _twFields
               _twKey
               _twOAuthToken
-              _twFields
               (Just AltJSON)
               _twWriteTimeseriesRequest
           where go

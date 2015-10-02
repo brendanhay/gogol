@@ -53,9 +53,9 @@ type ImagesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Image :> Post '[JSON] Operation
 
@@ -162,11 +162,11 @@ instance GoogleRequest ImagesInsert' where
         type Rs ImagesInsert' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u ImagesInsert'{..}
-          = go _imaQuotaUser (Just _imaPrettyPrint) _imaProject
+          = go _imaProject _imaQuotaUser (Just _imaPrettyPrint)
               _imaUserIP
+              _imaFields
               _imaKey
               _imaOAuthToken
-              _imaFields
               (Just AltJSON)
               _imaImage
           where go

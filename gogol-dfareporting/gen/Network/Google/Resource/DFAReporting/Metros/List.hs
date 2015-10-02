@@ -51,9 +51,9 @@ type MetrosListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] MetrosListResponse
 
@@ -147,11 +147,11 @@ instance GoogleRequest MetrosList' where
         type Rs MetrosList' = MetrosListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u MetrosList'{..}
-          = go _mlQuotaUser (Just _mlPrettyPrint) _mlUserIP
-              _mlProfileId
+          = go _mlProfileId _mlQuotaUser (Just _mlPrettyPrint)
+              _mlUserIP
+              _mlFields
               _mlKey
               _mlOAuthToken
-              _mlFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy MetrosListResource)

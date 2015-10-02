@@ -63,17 +63,17 @@ type InvitationsCreateResource =
      "v1" :>
        "invitations" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] Invitation :>
                                      Post '[JSON] Invitation
@@ -232,16 +232,16 @@ instance GoogleRequest InvitationsCreate' where
         type Rs InvitationsCreate' = Invitation
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u InvitationsCreate'{..}
-          = go _icXgafv _icQuotaUser (Just _icPrettyPrint)
-              _icUploadProtocol
+          = go _icXgafv _icAccessToken _icBearerToken
+              _icCallback
               (Just _icPp)
-              _icAccessToken
               _icUploadType
-              _icBearerToken
+              _icUploadProtocol
+              _icQuotaUser
+              (Just _icPrettyPrint)
+              _icFields
               _icKey
               _icOAuthToken
-              _icFields
-              _icCallback
               (Just AltJSON)
               _icInvitation
           where go

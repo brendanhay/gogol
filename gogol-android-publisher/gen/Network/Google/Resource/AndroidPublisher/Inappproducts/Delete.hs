@@ -52,9 +52,9 @@ type InappproductsDeleteResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete an in-app product for an app.
@@ -158,13 +158,12 @@ instance GoogleRequest InappproductsDelete' where
         type Rs InappproductsDelete' = ()
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u InappproductsDelete'{..}
-          = go _idQuotaUser (Just _idPrettyPrint)
-              _idPackageName
+          = go _idPackageName _idSku _idQuotaUser
+              (Just _idPrettyPrint)
               _idUserIP
-              _idKey
-              _idSku
-              _idOAuthToken
               _idFields
+              _idKey
+              _idOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -53,20 +53,20 @@ type CalendarListListResource =
      "users" :>
        "me" :>
          "calendarList" :>
-           QueryParam "syncToken" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "minAccessRole"
-                   CalendarCalendarListListMinAccessRole
-                   :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "showDeleted" Bool :>
-                       QueryParam "showHidden" Bool :>
-                         QueryParam "key" Key :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "maxResults" Int32 :>
-                                 QueryParam "fields" Text :>
+           QueryParam "maxResults" Int32 :>
+             QueryParam "minAccessRole"
+               CalendarCalendarListListMinAccessRole
+               :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "showDeleted" Bool :>
+                   QueryParam "showHidden" Bool :>
+                     QueryParam "syncToken" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] CalendarList
 
@@ -227,17 +227,16 @@ instance GoogleRequest CalendarListList' where
         type Rs CalendarListList' = CalendarList
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u CalendarListList'{..}
-          = go _cllSyncToken _cllQuotaUser
-              (Just _cllPrettyPrint)
-              _cllMinAccessRole
-              _cllUserIP
+          = go _cllMaxResults _cllMinAccessRole _cllPageToken
               _cllShowDeleted
               _cllShowHidden
-              _cllKey
-              _cllPageToken
-              _cllOAuthToken
-              _cllMaxResults
+              _cllSyncToken
+              _cllQuotaUser
+              (Just _cllPrettyPrint)
+              _cllUserIP
               _cllFields
+              _cllKey
+              _cllOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

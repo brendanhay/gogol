@@ -50,13 +50,13 @@ type AccountsPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "accounts" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "id" Int64 :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Account :> Patch '[JSON] Account
 
@@ -172,12 +172,12 @@ instance GoogleRequest AccountsPatch' where
         type Rs AccountsPatch' = Account
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AccountsPatch'{..}
-          = go _ap1QuotaUser (Just _ap1PrettyPrint) _ap1UserIP
-              _ap1ProfileId
-              _ap1Key
-              (Just _ap1Id)
-              _ap1OAuthToken
+          = go _ap1ProfileId (Just _ap1Id) _ap1QuotaUser
+              (Just _ap1PrettyPrint)
+              _ap1UserIP
               _ap1Fields
+              _ap1Key
+              _ap1OAuthToken
               (Just AltJSON)
               _ap1Account
           where go

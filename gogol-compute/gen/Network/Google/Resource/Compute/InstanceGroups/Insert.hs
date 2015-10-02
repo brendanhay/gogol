@@ -55,9 +55,9 @@ type InstanceGroupsInsertResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] InstanceGroup :>
                              Post '[JSON] Operation
@@ -176,12 +176,12 @@ instance GoogleRequest InstanceGroupsInsert' where
         type Rs InstanceGroupsInsert' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstanceGroupsInsert'{..}
-          = go _igiQuotaUser (Just _igiPrettyPrint) _igiProject
+          = go _igiProject _igiZone _igiQuotaUser
+              (Just _igiPrettyPrint)
               _igiUserIP
-              _igiZone
+              _igiFields
               _igiKey
               _igiOAuthToken
-              _igiFields
               (Just AltJSON)
               _igiInstanceGroup
           where go

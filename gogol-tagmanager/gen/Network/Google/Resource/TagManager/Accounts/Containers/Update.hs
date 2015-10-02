@@ -52,13 +52,13 @@ type AccountsContainersUpdateResource =
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "fingerprint" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+             QueryParam "fingerprint" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Container :> Put '[JSON] Container
 
@@ -188,14 +188,13 @@ instance GoogleRequest AccountsContainersUpdate'
         type Rs AccountsContainersUpdate' = Container
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u AccountsContainersUpdate'{..}
-          = go _acuQuotaUser (Just _acuPrettyPrint)
-              _acuContainerId
+          = go _acuFingerprint _acuAccountId _acuContainerId
+              _acuQuotaUser
+              (Just _acuPrettyPrint)
               _acuUserIP
-              _acuFingerprint
-              _acuAccountId
+              _acuFields
               _acuKey
               _acuOAuthToken
-              _acuFields
               (Just AltJSON)
               _acuContainer
           where go

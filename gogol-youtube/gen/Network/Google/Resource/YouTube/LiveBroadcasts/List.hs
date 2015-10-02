@@ -54,22 +54,22 @@ import           Network.Google.YouTube.Types
 -- 'LiveBroadcastsList'' request conforms to.
 type LiveBroadcastsListResource =
      "liveBroadcasts" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "part" Text :>
-           QueryParam "prettyPrint" Bool :>
+       QueryParam "broadcastStatus"
+         YouTubeLiveBroadcastsListBroadcastStatus
+         :>
+         QueryParam "id" Text :>
+           QueryParam "maxResults" Word32 :>
              QueryParam "mine" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "broadcastStatus"
-                   YouTubeLiveBroadcastsListBroadcastStatus
-                   :>
-                   QueryParam "onBehalfOfContentOwner" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                         QueryParam "id" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "maxResults" Word32 :>
-                                 QueryParam "fields" Text :>
+               QueryParam "onBehalfOfContentOwner" Text :>
+                 QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "part" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] LiveBroadcastListResponse
 
@@ -267,19 +267,18 @@ instance GoogleRequest LiveBroadcastsList' where
              LiveBroadcastListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u LiveBroadcastsList'{..}
-          = go _lblQuotaUser (Just _lblPart)
-              (Just _lblPrettyPrint)
+          = go _lblBroadcastStatus _lblId (Just _lblMaxResults)
               _lblMine
-              _lblUserIP
-              _lblBroadcastStatus
               _lblOnBehalfOfContentOwner
-              _lblKey
               _lblOnBehalfOfContentOwnerChannel
-              _lblId
               _lblPageToken
-              _lblOAuthToken
-              (Just _lblMaxResults)
+              (Just _lblPart)
+              _lblQuotaUser
+              (Just _lblPrettyPrint)
+              _lblUserIP
               _lblFields
+              _lblKey
+              _lblOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

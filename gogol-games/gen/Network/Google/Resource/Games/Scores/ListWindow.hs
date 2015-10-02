@@ -58,19 +58,19 @@ type ScoresListWindowResource =
          "window" :>
            Capture "collection" GamesScoresListWindowCollection
              :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "timeSpan" GamesScoresListWindowTimeSpan
-                     :>
+             QueryParam "language" Text :>
+               QueryParam "maxResults" Int32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "resultsAbove" Int32 :>
                      QueryParam "returnTopIfAbsent" Bool :>
-                       QueryParam "key" Key :>
-                         QueryParam "language" Text :>
-                           QueryParam "resultsAbove" Int32 :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "maxResults" Int32 :>
-                                   QueryParam "fields" Text :>
+                       QueryParam "timeSpan" GamesScoresListWindowTimeSpan
+                         :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] LeaderboardScores
 
@@ -244,18 +244,18 @@ instance GoogleRequest ScoresListWindow' where
         type Rs ScoresListWindow' = LeaderboardScores
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u ScoresListWindow'{..}
-          = go _slwQuotaUser (Just _slwPrettyPrint) _slwUserIP
-              _slwCollection
-              (Just _slwTimeSpan)
+          = go _slwLanguage _slwMaxResults _slwPageToken
+              _slwResultsAbove
               _slwReturnTopIfAbsent
               _slwLeaderboardId
-              _slwKey
-              _slwLanguage
-              _slwResultsAbove
-              _slwPageToken
-              _slwOAuthToken
-              _slwMaxResults
+              _slwCollection
+              (Just _slwTimeSpan)
+              _slwQuotaUser
+              (Just _slwPrettyPrint)
+              _slwUserIP
               _slwFields
+              _slwKey
+              _slwOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

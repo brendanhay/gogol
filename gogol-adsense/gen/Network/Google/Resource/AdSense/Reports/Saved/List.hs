@@ -48,14 +48,14 @@ import           Network.Google.Prelude
 type ReportsSavedListResource =
      "reports" :>
        "saved" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "maxResults" Int32 :>
-                       QueryParam "fields" Text :>
+         QueryParam "maxResults" Int32 :>
+           QueryParam "pageToken" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] SavedReports
 
 -- | List all saved reports in this AdSense account.
@@ -163,12 +163,12 @@ instance GoogleRequest ReportsSavedList' where
         type Rs ReportsSavedList' = SavedReports
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u ReportsSavedList'{..}
-          = go _rslQuotaUser (Just _rslPrettyPrint) _rslUserIP
-              _rslKey
-              _rslPageToken
-              _rslOAuthToken
-              _rslMaxResults
+          = go _rslMaxResults _rslPageToken _rslQuotaUser
+              (Just _rslPrettyPrint)
+              _rslUserIP
               _rslFields
+              _rslKey
+              _rslOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

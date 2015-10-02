@@ -53,9 +53,9 @@ type SubAccountsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] SubAccount
 
 -- | Gets one subaccount by ID.
@@ -160,12 +160,12 @@ instance GoogleRequest SubAccountsGet' where
         type Rs SubAccountsGet' = SubAccount
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u SubAccountsGet'{..}
-          = go _sagQuotaUser (Just _sagPrettyPrint) _sagUserIP
-              _sagProfileId
-              _sagKey
-              _sagId
-              _sagOAuthToken
+          = go _sagProfileId _sagId _sagQuotaUser
+              (Just _sagPrettyPrint)
+              _sagUserIP
               _sagFields
+              _sagKey
+              _sagOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

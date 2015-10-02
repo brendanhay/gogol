@@ -51,9 +51,9 @@ type FilesUntrashResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Post '[JSON] File
 
 -- | Restores a file from the trash.
@@ -144,10 +144,11 @@ instance GoogleRequest FilesUntrash' where
         type Rs FilesUntrash' = File
         request = requestWithRoute defReq driveURL
         requestWithRoute r u FilesUntrash'{..}
-          = go _fQuotaUser (Just _fPrettyPrint) _fUserIP _fKey
-              _fFileId
-              _fOAuthToken
+          = go _fFileId _fQuotaUser (Just _fPrettyPrint)
+              _fUserIP
               _fFields
+              _fKey
+              _fOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

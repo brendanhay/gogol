@@ -54,19 +54,19 @@ import           Network.Google.ShoppingContent.Types
 type OrdersListResource =
      Capture "merchantId" Word64 :>
        "orders" :>
-         QueryParam "placedDateEnd" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "orderBy" ContentOrdersListOrderBy :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "acknowledged" Bool :>
-                     QueryParam "key" Key :>
-                       QueryParams "statuses" ContentOrdersListStatuses :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "placedDateStart" Text :>
-                               QueryParam "maxResults" Word32 :>
-                                 QueryParam "fields" Text :>
+         QueryParam "acknowledged" Bool :>
+           QueryParam "maxResults" Word32 :>
+             QueryParam "orderBy" ContentOrdersListOrderBy :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "placedDateEnd" Text :>
+                   QueryParam "placedDateStart" Text :>
+                     QueryParams "statuses" ContentOrdersListStatuses :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] OrdersListResponse
 
@@ -243,18 +243,18 @@ instance GoogleRequest OrdersList' where
         type Rs OrdersList' = OrdersListResponse
         request = requestWithRoute defReq shoppingContentURL
         requestWithRoute r u OrdersList'{..}
-          = go _olPlacedDateEnd _olQuotaUser _olMerchantId
-              (Just _olPrettyPrint)
-              _olOrderBy
-              _olUserIP
-              _olAcknowledged
-              _olKey
-              _olStatuses
+          = go _olAcknowledged _olMaxResults _olOrderBy
               _olPageToken
-              _olOAuthToken
+              _olPlacedDateEnd
               _olPlacedDateStart
-              _olMaxResults
+              _olStatuses
+              _olMerchantId
+              _olQuotaUser
+              (Just _olPrettyPrint)
+              _olUserIP
               _olFields
+              _olKey
+              _olOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy OrdersListResource)

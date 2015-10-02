@@ -49,13 +49,13 @@ import           Network.Google.Prelude
 type PlayersGetResource =
      "players" :>
        Capture "playerId" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "language" Text :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+         QueryParam "language" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Player
 
 -- | Retrieves the Player resource with the given ID. To retrieve the player
@@ -159,12 +159,12 @@ instance GoogleRequest PlayersGet' where
         type Rs PlayersGet' = Player
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u PlayersGet'{..}
-          = go _pgQuotaUser (Just _pgPrettyPrint) _pgUserIP
-              _pgKey
-              _pgLanguage
-              _pgOAuthToken
-              _pgPlayerId
+          = go _pgLanguage _pgPlayerId _pgQuotaUser
+              (Just _pgPrettyPrint)
+              _pgUserIP
               _pgFields
+              _pgKey
+              _pgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy PlayersGetResource)

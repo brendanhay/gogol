@@ -55,9 +55,9 @@ type DisksGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Disk
 
 -- | Returns a specified persistent disk.
@@ -168,13 +168,12 @@ instance GoogleRequest DisksGet' where
         type Rs DisksGet' = Disk
         request = requestWithRoute defReq computeURL
         requestWithRoute r u DisksGet'{..}
-          = go _dgQuotaUser (Just _dgPrettyPrint) _dgProject
-              _dgDisk
+          = go _dgProject _dgZone _dgDisk _dgQuotaUser
+              (Just _dgPrettyPrint)
               _dgUserIP
-              _dgZone
+              _dgFields
               _dgKey
               _dgOAuthToken
-              _dgFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy DisksGetResource) r

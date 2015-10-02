@@ -55,9 +55,9 @@ type InstanceGroupsGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] InstanceGroup
 
 -- | Returns the specified instance group resource.
@@ -173,13 +173,13 @@ instance GoogleRequest InstanceGroupsGet' where
         type Rs InstanceGroupsGet' = InstanceGroup
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstanceGroupsGet'{..}
-          = go _iggQuotaUser (Just _iggPrettyPrint) _iggProject
+          = go _iggProject _iggZone _iggInstanceGroup
+              _iggQuotaUser
+              (Just _iggPrettyPrint)
               _iggUserIP
-              _iggZone
+              _iggFields
               _iggKey
               _iggOAuthToken
-              _iggInstanceGroup
-              _iggFields
               (Just AltJSON)
           where go
                   = clientWithRoute

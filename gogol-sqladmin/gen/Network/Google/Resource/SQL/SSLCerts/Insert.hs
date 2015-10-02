@@ -28,7 +28,7 @@ module Network.Google.Resource.SQL.SSLCerts.Insert
       SSLCertsInsertResource
 
     -- * Creating a Request
-    , sSLCertsInsert'
+    , sslCertsInsert'
     , SSLCertsInsert'
 
     -- * Request Lenses
@@ -57,9 +57,9 @@ type SSLCertsInsertResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] SSLCertsInsertRequest :>
                                Post '[JSON] SSLCertsInsertResponse
@@ -68,7 +68,7 @@ type SSLCertsInsertResource =
 -- server certificate authority. The new certificate will not be usable
 -- until the instance is restarted.
 --
--- /See:/ 'sSLCertsInsert'' smart constructor.
+-- /See:/ 'sslCertsInsert'' smart constructor.
 data SSLCertsInsert' = SSLCertsInsert'
     { _sciQuotaUser             :: !(Maybe Text)
     , _sciPrettyPrint           :: !Bool
@@ -102,12 +102,12 @@ data SSLCertsInsert' = SSLCertsInsert'
 -- * 'sciFields'
 --
 -- * 'sciInstance'
-sSLCertsInsert'
+sslCertsInsert'
     :: Text -- ^ 'project'
     -> SSLCertsInsertRequest -- ^ 'SSLCertsInsertRequest'
     -> Text -- ^ 'instance'
     -> SSLCertsInsert'
-sSLCertsInsert' pSciProject_ pSciSSLCertsInsertRequest_ pSciInstance_ =
+sslCertsInsert' pSciProject_ pSciSSLCertsInsertRequest_ pSciInstance_ =
     SSLCertsInsert'
     { _sciQuotaUser = Nothing
     , _sciPrettyPrint = True
@@ -181,12 +181,12 @@ instance GoogleRequest SSLCertsInsert' where
         type Rs SSLCertsInsert' = SSLCertsInsertResponse
         request = requestWithRoute defReq sQLAdminURL
         requestWithRoute r u SSLCertsInsert'{..}
-          = go _sciQuotaUser (Just _sciPrettyPrint) _sciProject
+          = go _sciProject _sciInstance _sciQuotaUser
+              (Just _sciPrettyPrint)
               _sciUserIP
+              _sciFields
               _sciKey
               _sciOAuthToken
-              _sciFields
-              _sciInstance
               (Just AltJSON)
               _sciSSLCertsInsertRequest
           where go

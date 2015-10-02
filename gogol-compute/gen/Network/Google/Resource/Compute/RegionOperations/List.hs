@@ -54,15 +54,15 @@ type RegionOperationsListResource =
        "regions" :>
          Capture "region" Text :>
            "operations" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "filter" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
+             QueryParam "filter" Text :>
+               QueryParam "maxResults" Word32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] OperationList
 
@@ -210,15 +210,15 @@ instance GoogleRequest RegionOperationsList' where
         type Rs RegionOperationsList' = OperationList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u RegionOperationsList'{..}
-          = go _rolQuotaUser (Just _rolPrettyPrint) _rolProject
-              _rolUserIP
-              _rolKey
-              _rolFilter
+          = go _rolFilter (Just _rolMaxResults) _rolPageToken
+              _rolProject
               _rolRegion
-              _rolPageToken
-              _rolOAuthToken
-              (Just _rolMaxResults)
+              _rolQuotaUser
+              (Just _rolPrettyPrint)
+              _rolUserIP
               _rolFields
+              _rolKey
+              _rolOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

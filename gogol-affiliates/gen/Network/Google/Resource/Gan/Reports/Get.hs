@@ -62,23 +62,24 @@ type ReportsGetResource =
        Capture "roleId" Text :>
          "report" :>
            Capture "reportType" GanReportsGetReportType :>
-             QueryParam "status" GanReportsGetStatus :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParams "advertiserId" Text :>
-                       QueryParam "endDate" Text :>
-                         QueryParam "eventType" GanReportsGetEventType :>
-                           QueryParam "startDate" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "calculateTotals" Bool :>
-                                 QueryParams "linkId" Text :>
-                                   QueryParam "oauth_token" OAuthToken :>
-                                     QueryParams "orderId" Text :>
-                                       QueryParams "publisherId" Text :>
-                                         QueryParam "startIndex" Word32 :>
-                                           QueryParam "maxResults" Word32 :>
-                                             QueryParam "fields" Text :>
+             QueryParams "advertiserId" Text :>
+               QueryParam "calculateTotals" Bool :>
+                 QueryParam "endDate" Text :>
+                   QueryParam "eventType" GanReportsGetEventType :>
+                     QueryParams "linkId" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParams "orderId" Text :>
+                           QueryParams "publisherId" Text :>
+                             QueryParam "startDate" Text :>
+                               QueryParam "startIndex" Word32 :>
+                                 QueryParam "status" GanReportsGetStatus :>
+                                   QueryParam "quotaUser" Text :>
+                                     QueryParam "prettyPrint" Bool :>
+                                       QueryParam "userIp" Text :>
+                                         QueryParam "fields" Text :>
+                                           QueryParam "key" Key :>
+                                             QueryParam "oauth_token" OAuthToken
+                                               :>
                                                QueryParam "alt" AltJSON :>
                                                  Get '[JSON] Report
 
@@ -299,24 +300,24 @@ instance GoogleRequest ReportsGet' where
         type Rs ReportsGet' = Report
         request = requestWithRoute defReq affiliatesURL
         requestWithRoute r u ReportsGet'{..}
-          = go _rgStatus _rgQuotaUser (Just _rgPrettyPrint)
-              _rgUserIP
-              _rgAdvertiserId
-              _rgEndDate
-              _rgRoleId
-              _rgRole
+          = go _rgAdvertiserId _rgCalculateTotals _rgEndDate
               _rgEventType
-              _rgStartDate
-              _rgKey
-              _rgCalculateTotals
               _rgLinkId
-              _rgOAuthToken
+              _rgMaxResults
               _rgOrderId
               _rgPublisherId
-              _rgReportType
+              _rgStartDate
               _rgStartIndex
-              _rgMaxResults
+              _rgStatus
+              _rgRole
+              _rgRoleId
+              _rgReportType
+              _rgQuotaUser
+              (Just _rgPrettyPrint)
+              _rgUserIP
               _rgFields
+              _rgKey
+              _rgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy ReportsGetResource)

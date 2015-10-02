@@ -52,9 +52,9 @@ type FloodlightActivityGroupsUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] FloodlightActivityGroup :>
                            Put '[JSON] FloodlightActivityGroup
@@ -169,12 +169,12 @@ instance GoogleRequest
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           FloodlightActivityGroupsUpdate'{..}
-          = go _faguQuotaUser (Just _faguPrettyPrint)
+          = go _faguProfileId _faguQuotaUser
+              (Just _faguPrettyPrint)
               _faguUserIP
-              _faguProfileId
+              _faguFields
               _faguKey
               _faguOAuthToken
-              _faguFields
               (Just AltJSON)
               _faguFloodlightActivityGroup
           where go

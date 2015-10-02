@@ -54,16 +54,16 @@ type ResourceRecordSetsListResource =
        "managedZones" :>
          Capture "managedZone" Text :>
            "rrsets" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "name" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "type" Text :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "maxResults" Int32 :>
-                               QueryParam "fields" Text :>
+             QueryParam "maxResults" Int32 :>
+               QueryParam "name" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "type" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] ResourceRecordSetsListResponse
 
@@ -214,17 +214,16 @@ instance GoogleRequest ResourceRecordSetsList' where
              ResourceRecordSetsListResponse
         request = requestWithRoute defReq dNSURL
         requestWithRoute r u ResourceRecordSetsList'{..}
-          = go _rrslQuotaUser (Just _rrslPrettyPrint)
-              _rrslProject
-              _rrslUserIP
-              _rrslKey
-              _rrslName
-              _rrslPageToken
+          = go _rrslMaxResults _rrslName _rrslPageToken
               _rrslType
-              _rrslOAuthToken
+              _rrslProject
               _rrslManagedZone
-              _rrslMaxResults
+              _rrslQuotaUser
+              (Just _rrslPrettyPrint)
+              _rrslUserIP
               _rrslFields
+              _rrslKey
+              _rrslOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

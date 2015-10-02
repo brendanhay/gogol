@@ -57,9 +57,9 @@ type ReadgroupsetsImportResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] ImportReadGroupSetsRequest :>
                          Post '[JSON] ImportReadGroupSetsResponse
@@ -164,9 +164,9 @@ instance GoogleRequest ReadgroupsetsImport' where
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u ReadgroupsetsImport'{..}
           = go _riQuotaUser (Just _riPrettyPrint) _riUserIP
+              _riFields
               _riKey
               _riOAuthToken
-              _riFields
               (Just AltJSON)
               _riImportReadGroupSetsRequest
           where go

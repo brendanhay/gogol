@@ -61,9 +61,9 @@ type ManagementExperimentsUpdateResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "fields" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] Experiment :>
                                        Put '[JSON] Experiment
@@ -206,15 +206,14 @@ instance GoogleRequest ManagementExperimentsUpdate'
         type Rs ManagementExperimentsUpdate' = Experiment
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementExperimentsUpdate'{..}
-          = go _meuQuotaUser (Just _meuPrettyPrint)
-              _meuWebPropertyId
-              _meuUserIP
-              _meuProfileId
-              _meuAccountId
+          = go _meuAccountId _meuWebPropertyId _meuProfileId
               _meuExperimentId
+              _meuQuotaUser
+              (Just _meuPrettyPrint)
+              _meuUserIP
+              _meuFields
               _meuKey
               _meuOAuthToken
-              _meuFields
               (Just AltJSON)
               _meuExperiment
           where go

@@ -55,14 +55,14 @@ type PeopleListByActivityResource =
            Capture "collection"
              PlusDomainsPeopleListByActivityCollection
              :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] PeopleFeed
 
 -- | List all of the people in the specified collection for a particular
@@ -196,15 +196,15 @@ instance GoogleRequest PeopleListByActivity' where
         type Rs PeopleListByActivity' = PeopleFeed
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u PeopleListByActivity'{..}
-          = go _plbaQuotaUser (Just _plbaPrettyPrint)
-              _plbaUserIP
+          = go (Just _plbaMaxResults) _plbaPageToken
               _plbaActivityId
               _plbaCollection
-              _plbaKey
-              _plbaPageToken
-              _plbaOAuthToken
-              (Just _plbaMaxResults)
+              _plbaQuotaUser
+              (Just _plbaPrettyPrint)
+              _plbaUserIP
               _plbaFields
+              _plbaKey
+              _plbaOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -57,26 +57,25 @@ import           Network.Google.Prelude
 -- 'UsersList'' request conforms to.
 type UsersListResource =
      "users" :>
-       QueryParam "event" DirectoryUsersListEvent :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "orderBy" DirectoryUsersListOrderBy :>
-               QueryParam "viewType" DirectoryUsersListViewType :>
-                 QueryParam "customFieldMask" Text :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "domain" Text :>
-                       QueryParam "showDeleted" Text :>
-                         QueryParam "sortOrder" DirectoryUsersListSortOrder :>
-                           QueryParam "customer" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "query" Text :>
-                                 QueryParam "projection"
-                                   DirectoryUsersListProjection
-                                   :>
-                                   QueryParam "pageToken" Text :>
-                                     QueryParam "oauth_token" OAuthToken :>
-                                       QueryParam "maxResults" Int32 :>
-                                         QueryParam "fields" Text :>
+       QueryParam "customFieldMask" Text :>
+         QueryParam "customer" Text :>
+           QueryParam "domain" Text :>
+             QueryParam "event" DirectoryUsersListEvent :>
+               QueryParam "maxResults" Int32 :>
+                 QueryParam "orderBy" DirectoryUsersListOrderBy :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "projection" DirectoryUsersListProjection
+                       :>
+                       QueryParam "query" Text :>
+                         QueryParam "showDeleted" Text :>
+                           QueryParam "sortOrder" DirectoryUsersListSortOrder :>
+                             QueryParam "viewType" DirectoryUsersListViewType :>
+                               QueryParam "quotaUser" Text :>
+                                 QueryParam "prettyPrint" Bool :>
+                                   QueryParam "userIp" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "key" Key :>
+                                         QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
                                              Get '[JSON] Users
 
@@ -272,22 +271,22 @@ instance GoogleRequest UsersList' where
         type Rs UsersList' = Users
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u UsersList'{..}
-          = go _ulEvent _ulQuotaUser (Just _ulPrettyPrint)
+          = go _ulCustomFieldMask _ulCustomer _ulDomain
+              _ulEvent
+              _ulMaxResults
               _ulOrderBy
-              (Just _ulViewType)
-              _ulCustomFieldMask
-              _ulUserIP
-              _ulDomain
+              _ulPageToken
+              (Just _ulProjection)
+              _ulQuery
               _ulShowDeleted
               _ulSortOrder
-              _ulCustomer
-              _ulKey
-              _ulQuery
-              (Just _ulProjection)
-              _ulPageToken
-              _ulOAuthToken
-              _ulMaxResults
+              (Just _ulViewType)
+              _ulQuotaUser
+              (Just _ulPrettyPrint)
+              _ulUserIP
               _ulFields
+              _ulKey
+              _ulOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy UsersListResource)

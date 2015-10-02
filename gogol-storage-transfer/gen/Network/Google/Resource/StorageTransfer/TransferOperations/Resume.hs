@@ -55,17 +55,17 @@ type TransferOperationsResumeResource =
      "v1" :>
        "{+name}:resume" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON]
                                      ResumeTransferOperationRequest
@@ -230,17 +230,17 @@ instance GoogleRequest TransferOperationsResume'
         type Rs TransferOperationsResume' = Empty
         request = requestWithRoute defReq storageTransferURL
         requestWithRoute r u TransferOperationsResume'{..}
-          = go _torXgafv _torQuotaUser (Just _torPrettyPrint)
-              _torUploadProtocol
-              (Just _torPp)
-              _torAccessToken
-              _torUploadType
-              _torBearerToken
-              _torKey
-              _torName
-              _torOAuthToken
-              _torFields
+          = go _torXgafv _torAccessToken _torBearerToken
               _torCallback
+              (Just _torPp)
+              _torUploadType
+              _torUploadProtocol
+              _torName
+              _torQuotaUser
+              (Just _torPrettyPrint)
+              _torFields
+              _torKey
+              _torOAuthToken
               (Just AltJSON)
               _torResumeTransferOperationRequest
           where go

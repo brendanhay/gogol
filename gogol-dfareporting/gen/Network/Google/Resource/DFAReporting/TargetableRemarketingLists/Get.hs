@@ -53,9 +53,9 @@ type TargetableRemarketingListsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] TargetableRemarketingList
 
@@ -167,13 +167,12 @@ instance GoogleRequest TargetableRemarketingListsGet'
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           TargetableRemarketingListsGet'{..}
-          = go _trlgQuotaUser (Just _trlgPrettyPrint)
+          = go _trlgProfileId _trlgId _trlgQuotaUser
+              (Just _trlgPrettyPrint)
               _trlgUserIP
-              _trlgProfileId
-              _trlgKey
-              _trlgId
-              _trlgOAuthToken
               _trlgFields
+              _trlgKey
+              _trlgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

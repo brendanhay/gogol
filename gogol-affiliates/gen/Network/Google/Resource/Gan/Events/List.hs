@@ -65,33 +65,31 @@ type EventsListResource =
      Capture "role" GanEventsListRole :>
        Capture "roleId" Text :>
          "events" :>
-           QueryParam "status" GanEventsListStatus :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
+           QueryParam "advertiserId" Text :>
+             QueryParam "chargeType" GanEventsListChargeType :>
+               QueryParam "eventDateMax" Text :>
                  QueryParam "eventDateMin" Text :>
-                   QueryParam "chargeType" GanEventsListChargeType :>
-                     QueryParam "memberId" Text :>
-                       QueryParam "userIp" Text :>
+                   QueryParam "linkId" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "memberId" Text :>
                          QueryParam "modifyDateMax" Text :>
-                           QueryParam "advertiserId" Text :>
-                             QueryParam "modifyDateMin" Text :>
-                               QueryParam "eventDateMax" Text :>
-                                 QueryParam "key" Key :>
-                                   QueryParam "sku" Text :>
-                                     QueryParam "linkId" Text :>
-                                       QueryParam "pageToken" Text :>
+                           QueryParam "modifyDateMin" Text :>
+                             QueryParam "orderId" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "productCategory" Text :>
+                                   QueryParam "publisherId" Text :>
+                                     QueryParam "sku" Text :>
+                                       QueryParam "status" GanEventsListStatus
+                                         :>
                                          QueryParam "type" GanEventsListType :>
-                                           QueryParam "oauth_token" OAuthToken
-                                             :>
-                                             QueryParam "orderId" Text :>
-                                               QueryParam "publisherId" Text :>
-                                                 QueryParam "productCategory"
-                                                   Text
-                                                   :>
-                                                   QueryParam "maxResults"
-                                                     Word32
-                                                     :>
-                                                     QueryParam "fields" Text :>
+                                           QueryParam "quotaUser" Text :>
+                                             QueryParam "prettyPrint" Bool :>
+                                               QueryParam "userIp" Text :>
+                                                 QueryParam "fields" Text :>
+                                                   QueryParam "key" Key :>
+                                                     QueryParam "oauth_token"
+                                                       OAuthToken
+                                                       :>
                                                        QueryParam "alt" AltJSON
                                                          :> Get '[JSON] Events
 
@@ -361,28 +359,28 @@ instance GoogleRequest EventsList' where
         type Rs EventsList' = Events
         request = requestWithRoute defReq affiliatesURL
         requestWithRoute r u EventsList'{..}
-          = go _elStatus _elQuotaUser (Just _elPrettyPrint)
+          = go _elAdvertiserId _elChargeType _elEventDateMax
               _elEventDateMin
-              _elChargeType
-              _elMemberId
-              _elUserIP
-              _elModifyDateMax
-              _elAdvertiserId
-              _elModifyDateMin
-              _elRoleId
-              _elRole
-              _elEventDateMax
-              _elKey
-              _elSku
               _elLinkId
-              _elPageToken
-              _elType
-              _elOAuthToken
-              _elOrderId
-              _elPublisherId
-              _elProductCategory
               _elMaxResults
+              _elMemberId
+              _elModifyDateMax
+              _elModifyDateMin
+              _elOrderId
+              _elPageToken
+              _elProductCategory
+              _elPublisherId
+              _elSku
+              _elStatus
+              _elType
+              _elRole
+              _elRoleId
+              _elQuotaUser
+              (Just _elPrettyPrint)
+              _elUserIP
               _elFields
+              _elKey
+              _elOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy EventsListResource)

@@ -54,9 +54,9 @@ type ScheduleGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Schedule
 
 -- | Retrieves the schedule for a job.
@@ -157,12 +157,12 @@ instance GoogleRequest ScheduleGet' where
         type Rs ScheduleGet' = Schedule
         request = requestWithRoute defReq mapsCoordinateURL
         requestWithRoute r u ScheduleGet'{..}
-          = go _sgQuotaUser (Just _sgPrettyPrint) _sgJobId
+          = go _sgTeamId _sgJobId _sgQuotaUser
+              (Just _sgPrettyPrint)
               _sgUserIP
-              _sgTeamId
+              _sgFields
               _sgKey
               _sgOAuthToken
-              _sgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

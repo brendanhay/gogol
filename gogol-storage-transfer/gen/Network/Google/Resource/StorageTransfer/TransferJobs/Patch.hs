@@ -57,17 +57,17 @@ type TransferJobsPatchResource =
      "v1" :>
        "{+jobName}" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] UpdateTransferJobRequest :>
                                      Patch '[JSON] TransferJob
@@ -233,17 +233,17 @@ instance GoogleRequest TransferJobsPatch' where
         type Rs TransferJobsPatch' = TransferJob
         request = requestWithRoute defReq storageTransferURL
         requestWithRoute r u TransferJobsPatch'{..}
-          = go _tjpXgafv _tjpQuotaUser (Just _tjpPrettyPrint)
-              _tjpUploadProtocol
+          = go _tjpXgafv _tjpAccessToken _tjpBearerToken
+              _tjpCallback
               (Just _tjpPp)
-              _tjpAccessToken
-              _tjpJobName
               _tjpUploadType
-              _tjpBearerToken
+              _tjpUploadProtocol
+              _tjpJobName
+              _tjpQuotaUser
+              (Just _tjpPrettyPrint)
+              _tjpFields
               _tjpKey
               _tjpOAuthToken
-              _tjpFields
-              _tjpCallback
               (Just AltJSON)
               _tjpUpdateTransferJobRequest
           where go

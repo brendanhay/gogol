@@ -74,7 +74,7 @@ module Network.Google.AdSenseHost.Types
 
     -- * URLChannels
     , URLChannels
-    , uRLChannels
+    , urlChannels
     , ucEtag
     , ucNextPageToken
     , ucKind
@@ -167,7 +167,7 @@ module Network.Google.AdSenseHost.Types
 
     -- * URLChannel
     , URLChannel
-    , uRLChannel
+    , urlChannel
     , urlcKind
     , urlcId
     , urlcURLPattern

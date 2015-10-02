@@ -53,15 +53,15 @@ type EventsGetResource =
        Capture "calendarId" Text :>
          "events" :>
            Capture "eventId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "maxAttendees" Int32 :>
-                     QueryParam "key" Key :>
-                       QueryParam "timeZone" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "alwaysIncludeEmail" Bool :>
-                             QueryParam "fields" Text :>
+             QueryParam "alwaysIncludeEmail" Bool :>
+               QueryParam "maxAttendees" Int32 :>
+                 QueryParam "timeZone" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Get '[JSON] Event
 
 -- | Returns an event.
@@ -203,15 +203,16 @@ instance GoogleRequest EventsGet' where
         type Rs EventsGet' = Event
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u EventsGet'{..}
-          = go _egQuotaUser _egCalendarId (Just _egPrettyPrint)
-              _egUserIP
-              _egMaxAttendees
-              _egKey
+          = go _egAlwaysIncludeEmail _egMaxAttendees
               _egTimeZone
-              _egOAuthToken
-              _egAlwaysIncludeEmail
+              _egCalendarId
               _egEventId
+              _egQuotaUser
+              (Just _egPrettyPrint)
+              _egUserIP
               _egFields
+              _egKey
+              _egOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy EventsGetResource)

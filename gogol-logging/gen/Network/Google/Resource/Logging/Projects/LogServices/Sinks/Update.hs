@@ -62,17 +62,17 @@ type ProjectsLogServicesSinksUpdateResource =
                "sinks" :>
                  Capture "sinksId" Text :>
                    QueryParam "$.xgafv" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "callback" Text :>
                            QueryParam "pp" Bool :>
-                             QueryParam "access_token" Text :>
-                               QueryParam "uploadType" Text :>
-                                 QueryParam "bearer_token" Text :>
-                                   QueryParam "key" Key :>
-                                     QueryParam "oauth_token" OAuthToken :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "callback" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "upload_protocol" Text :>
+                                 QueryParam "quotaUser" Text :>
+                                   QueryParam "prettyPrint" Bool :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "key" Key :>
+                                         QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
                                              ReqBody '[JSON] LogSink :>
                                                Put '[JSON] LogSink
@@ -264,20 +264,19 @@ instance GoogleRequest
         request = requestWithRoute defReq loggingURL
         requestWithRoute r u
           ProjectsLogServicesSinksUpdate'{..}
-          = go _plssuXgafv _plssuQuotaUser
-              (Just _plssuPrettyPrint)
-              _plssuUploadProtocol
-              (Just _plssuPp)
-              _plssuAccessToken
-              _plssuUploadType
-              _plssuBearerToken
-              _plssuKey
-              _plssuLogServicesId
-              _plssuOAuthToken
-              _plssuProjectsId
-              _plssuSinksId
-              _plssuFields
+          = go _plssuXgafv _plssuAccessToken _plssuBearerToken
               _plssuCallback
+              (Just _plssuPp)
+              _plssuUploadType
+              _plssuUploadProtocol
+              _plssuProjectsId
+              _plssuLogServicesId
+              _plssuSinksId
+              _plssuQuotaUser
+              (Just _plssuPrettyPrint)
+              _plssuFields
+              _plssuKey
+              _plssuOAuthToken
               (Just AltJSON)
               _plssuLogSink
           where go

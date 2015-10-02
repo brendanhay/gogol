@@ -58,9 +58,9 @@ type TargetPoolsGetHealthResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] InstanceReference :>
                                  Post '[JSON] TargetPoolInstanceHealth
@@ -192,14 +192,13 @@ instance GoogleRequest TargetPoolsGetHealth' where
              TargetPoolInstanceHealth
         request = requestWithRoute defReq computeURL
         requestWithRoute r u TargetPoolsGetHealth'{..}
-          = go _tpghQuotaUser (Just _tpghPrettyPrint)
-              _tpghProject
-              _tpghTargetPool
+          = go _tpghProject _tpghRegion _tpghTargetPool
+              _tpghQuotaUser
+              (Just _tpghPrettyPrint)
               _tpghUserIP
-              _tpghKey
-              _tpghRegion
-              _tpghOAuthToken
               _tpghFields
+              _tpghKey
+              _tpghOAuthToken
               (Just AltJSON)
               _tpghInstanceReference
           where go

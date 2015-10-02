@@ -70,64 +70,59 @@ type PlacementsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "placements" :>
-           QueryParams "placementStrategyIds" Int64 :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParams "contentCategoryIds" Int64 :>
-                   QueryParam "maxEndDate" Text :>
-                     QueryParam "userIp" Text :>
-                       QueryParams "campaignIds" Int64 :>
-                         QueryParams "pricingTypes"
-                           DfareportingPlacementsListPricingTypes
-                           :>
-                           QueryParam "searchString" Text :>
-                             QueryParams "sizeIds" Int64 :>
-                               QueryParams "ids" Int64 :>
-                                 QueryParams "groupIds" Int64 :>
-                                   QueryParams "directorySiteIds" Int64 :>
-                                     QueryParam "sortOrder"
-                                       DfareportingPlacementsListSortOrder
-                                       :>
+           QueryParams "advertiserIds" Int64 :>
+             QueryParam "archived" Bool :>
+               QueryParams "campaignIds" Int64 :>
+                 QueryParams "compatibilities"
+                   DfareportingPlacementsListCompatibilities
+                   :>
+                   QueryParams "contentCategoryIds" Int64 :>
+                     QueryParams "directorySiteIds" Int64 :>
+                       QueryParams "groupIds" Int64 :>
+                         QueryParams "ids" Int64 :>
+                           QueryParam "maxEndDate" Text :>
+                             QueryParam "maxResults" Int32 :>
+                               QueryParam "maxStartDate" Text :>
+                                 QueryParam "minEndDate" Text :>
+                                   QueryParam "minStartDate" Text :>
+                                     QueryParam "pageToken" Text :>
                                        QueryParam "paymentSource"
                                          DfareportingPlacementsListPaymentSource
                                          :>
-                                         QueryParam "key" Key :>
-                                           QueryParams "siteIds" Int64 :>
-                                             QueryParam "pageToken" Text :>
-                                               QueryParam "sortField"
-                                                 DfareportingPlacementsListSortField
-                                                 :>
-                                                 QueryParams "compatibilities"
-                                                   DfareportingPlacementsListCompatibilities
-                                                   :>
-                                                   QueryParam "maxStartDate"
-                                                     Text
+                                         QueryParams "placementStrategyIds"
+                                           Int64
+                                           :>
+                                           QueryParams "pricingTypes"
+                                             DfareportingPlacementsListPricingTypes
+                                             :>
+                                             QueryParam "searchString" Text :>
+                                               QueryParams "siteIds" Int64 :>
+                                                 QueryParams "sizeIds" Int64 :>
+                                                   QueryParam "sortField"
+                                                     DfareportingPlacementsListSortField
                                                      :>
-                                                     QueryParam "oauth_token"
-                                                       OAuthToken
+                                                     QueryParam "sortOrder"
+                                                       DfareportingPlacementsListSortOrder
                                                        :>
-                                                       QueryParams
-                                                         "advertiserIds"
-                                                         Int64
+                                                       QueryParam "quotaUser"
+                                                         Text
                                                          :>
                                                          QueryParam
-                                                           "minStartDate"
-                                                           Text
+                                                           "prettyPrint"
+                                                           Bool
                                                            :>
-                                                           QueryParam "archived"
-                                                             Bool
+                                                           QueryParam "userIp"
+                                                             Text
                                                              :>
-                                                             QueryParam
-                                                               "maxResults"
-                                                               Int32
+                                                             QueryParam "fields"
+                                                               Text
                                                                :>
-                                                               QueryParam
-                                                                 "minEndDate"
-                                                                 Text
+                                                               QueryParam "key"
+                                                                 Key
                                                                  :>
                                                                  QueryParam
-                                                                   "fields"
-                                                                   Text
+                                                                   "oauth_token"
+                                                                   OAuthToken
                                                                    :>
                                                                    QueryParam
                                                                      "alt"
@@ -461,34 +456,33 @@ instance GoogleRequest PlacementsList' where
         type Rs PlacementsList' = PlacementsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementsList'{..}
-          = go _plaPlacementStrategyIds _plaQuotaUser
-              (Just _plaPrettyPrint)
+          = go _plaAdvertiserIds _plaArchived _plaCampaignIds
+              _plaCompatibilities
               _plaContentCategoryIds
+              _plaDirectorySiteIds
+              _plaGroupIds
+              _plaIds
               _plaMaxEndDate
-              _plaUserIP
-              _plaCampaignIds
+              _plaMaxResults
+              _plaMaxStartDate
+              _plaMinEndDate
+              _plaMinStartDate
+              _plaPageToken
+              _plaPaymentSource
+              _plaPlacementStrategyIds
               _plaPricingTypes
               _plaSearchString
-              _plaSizeIds
-              _plaIds
-              _plaProfileId
-              _plaGroupIds
-              _plaDirectorySiteIds
-              _plaSortOrder
-              _plaPaymentSource
-              _plaKey
               _plaSiteIds
-              _plaPageToken
+              _plaSizeIds
               _plaSortField
-              _plaCompatibilities
-              _plaMaxStartDate
-              _plaOAuthToken
-              _plaAdvertiserIds
-              _plaMinStartDate
-              _plaArchived
-              _plaMaxResults
-              _plaMinEndDate
+              _plaSortOrder
+              _plaProfileId
+              _plaQuotaUser
+              (Just _plaPrettyPrint)
+              _plaUserIP
               _plaFields
+              _plaKey
+              _plaOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

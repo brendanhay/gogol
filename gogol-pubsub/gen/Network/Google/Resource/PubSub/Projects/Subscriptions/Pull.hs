@@ -58,17 +58,17 @@ type ProjectsSubscriptionsPullResource =
      "v1beta2" :>
        "{+subscription}:pull" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] PullRequest :>
                                      Post '[JSON] PullResponse
@@ -237,17 +237,17 @@ instance GoogleRequest ProjectsSubscriptionsPull'
         type Rs ProjectsSubscriptionsPull' = PullResponse
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u ProjectsSubscriptionsPull'{..}
-          = go _pspXgafv _pspQuotaUser (Just _pspPrettyPrint)
-              _pspUploadProtocol
+          = go _pspXgafv _pspAccessToken _pspBearerToken
+              _pspCallback
               (Just _pspPp)
-              _pspAccessToken
               _pspUploadType
-              _pspBearerToken
+              _pspUploadProtocol
+              _pspSubscription
+              _pspQuotaUser
+              (Just _pspPrettyPrint)
+              _pspFields
               _pspKey
               _pspOAuthToken
-              _pspSubscription
-              _pspFields
-              _pspCallback
               (Just AltJSON)
               _pspPullRequest
           where go

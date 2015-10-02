@@ -64,26 +64,27 @@ type AccountsOrdersListResource =
        "accounts" :>
          Capture "accountId" Text :>
            "orders" :>
-             QueryParams "status" Text :>
-               QueryParams "pphNames" Text :>
-                 QueryParam "$.xgafv" Text :>
-                   QueryParams "studioNames" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "upload_protocol" Text :>
-                           QueryParam "pp" Bool :>
-                             QueryParam "access_token" Text :>
-                               QueryParam "uploadType" Text :>
-                                 QueryParam "customId" Text :>
-                                   QueryParam "bearer_token" Text :>
-                                     QueryParam "key" Key :>
-                                       QueryParam "name" Text :>
-                                         QueryParam "pageToken" Text :>
-                                           QueryParam "oauth_token" OAuthToken
-                                             :>
-                                             QueryParam "pageSize" Int32 :>
-                                               QueryParam "fields" Text :>
-                                                 QueryParam "callback" Text :>
+             QueryParam "$.xgafv" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "bearer_token" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "customId" Text :>
+                       QueryParam "name" Text :>
+                         QueryParam "pageSize" Int32 :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "pp" Bool :>
+                               QueryParams "pphNames" Text :>
+                                 QueryParams "status" Text :>
+                                   QueryParams "studioNames" Text :>
+                                     QueryParam "uploadType" Text :>
+                                       QueryParam "upload_protocol" Text :>
+                                         QueryParam "quotaUser" Text :>
+                                           QueryParam "prettyPrint" Bool :>
+                                             QueryParam "fields" Text :>
+                                               QueryParam "key" Key :>
+                                                 QueryParam "oauth_token"
+                                                   OAuthToken
+                                                   :>
                                                    QueryParam "alt" AltJSON :>
                                                      Get '[JSON]
                                                        ListOrdersResponse
@@ -303,24 +304,24 @@ instance GoogleRequest AccountsOrdersList' where
         request
           = requestWithRoute defReq playMoviesPartnerURL
         requestWithRoute r u AccountsOrdersList'{..}
-          = go _aolStatus _aolPphNames _aolXgafv
+          = go _aolXgafv _aolAccessToken _aolBearerToken
+              _aolCallback
+              _aolCustomId
+              _aolName
+              _aolPageSize
+              _aolPageToken
+              (Just _aolPp)
+              _aolPphNames
+              _aolStatus
               _aolStudioNames
+              _aolUploadType
+              _aolUploadProtocol
+              _aolAccountId
               _aolQuotaUser
               (Just _aolPrettyPrint)
-              _aolUploadProtocol
-              (Just _aolPp)
-              _aolAccessToken
-              _aolUploadType
-              _aolCustomId
-              _aolAccountId
-              _aolBearerToken
-              _aolKey
-              _aolName
-              _aolPageToken
-              _aolOAuthToken
-              _aolPageSize
               _aolFields
-              _aolCallback
+              _aolKey
+              _aolOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

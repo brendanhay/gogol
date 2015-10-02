@@ -26,7 +26,7 @@ module Network.Google.Resource.Calendar.ACL.Get
       ACLGetResource
 
     -- * Creating a Request
-    , aCLGet'
+    , aclGet'
     , ACLGet'
 
     -- * Request Lenses
@@ -53,14 +53,14 @@ type ACLGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] ACLRule
 
 -- | Returns an access control rule.
 --
--- /See:/ 'aCLGet'' smart constructor.
+-- /See:/ 'aclGet'' smart constructor.
 data ACLGet' = ACLGet'
     { _agQuotaUser   :: !(Maybe Text)
     , _agCalendarId  :: !Text
@@ -91,11 +91,11 @@ data ACLGet' = ACLGet'
 -- * 'agOAuthToken'
 --
 -- * 'agFields'
-aCLGet'
+aclGet'
     :: Text -- ^ 'calendarId'
     -> Text -- ^ 'ruleId'
     -> ACLGet'
-aCLGet' pAgCalendarId_ pAgRuleId_ =
+aclGet' pAgCalendarId_ pAgRuleId_ =
     ACLGet'
     { _agQuotaUser = Nothing
     , _agCalendarId = pAgCalendarId_
@@ -159,12 +159,12 @@ instance GoogleRequest ACLGet' where
         type Rs ACLGet' = ACLRule
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u ACLGet'{..}
-          = go _agQuotaUser _agCalendarId (Just _agPrettyPrint)
+          = go _agCalendarId _agRuleId _agQuotaUser
+              (Just _agPrettyPrint)
               _agUserIP
-              _agRuleId
+              _agFields
               _agKey
               _agOAuthToken
-              _agFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy ACLGetResource) r u

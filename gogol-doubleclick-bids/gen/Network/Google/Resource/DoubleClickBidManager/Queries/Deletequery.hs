@@ -50,9 +50,9 @@ type QueriesDeletequeryResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a stored query as well as the associated stored reports.
@@ -145,11 +145,11 @@ instance GoogleRequest QueriesDeletequery' where
         type Rs QueriesDeletequery' = ()
         request = requestWithRoute defReq doubleClickBidsURL
         requestWithRoute r u QueriesDeletequery'{..}
-          = go _qdQuotaUser _qdQueryId (Just _qdPrettyPrint)
+          = go _qdQueryId _qdQuotaUser (Just _qdPrettyPrint)
               _qdUserIP
+              _qdFields
               _qdKey
               _qdOAuthToken
-              _qdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

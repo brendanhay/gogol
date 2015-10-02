@@ -57,9 +57,9 @@ type InstancesAttachDiskResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] AttachedDisk :>
                                  Post '[JSON] Operation
@@ -187,13 +187,12 @@ instance GoogleRequest InstancesAttachDisk' where
         type Rs InstancesAttachDisk' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstancesAttachDisk'{..}
-          = go _iadQuotaUser (Just _iadPrettyPrint) _iadProject
+          = go _iadProject _iadZone _iadInstance _iadQuotaUser
+              (Just _iadPrettyPrint)
               _iadUserIP
-              _iadZone
+              _iadFields
               _iadKey
               _iadOAuthToken
-              _iadFields
-              _iadInstance
               (Just AltJSON)
               _iadAttachedDisk
           where go

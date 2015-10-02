@@ -58,9 +58,9 @@ type DisksDeleteResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified persistent disk. Deleting a disk removes its data
@@ -174,13 +174,12 @@ instance GoogleRequest DisksDelete' where
         type Rs DisksDelete' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u DisksDelete'{..}
-          = go _ddQuotaUser (Just _ddPrettyPrint) _ddProject
-              _ddDisk
+          = go _ddProject _ddZone _ddDisk _ddQuotaUser
+              (Just _ddPrettyPrint)
               _ddUserIP
-              _ddZone
+              _ddFields
               _ddKey
               _ddOAuthToken
-              _ddFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -58,9 +58,9 @@ type InstanceGroupManagersRecreateInstancesResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON]
                                  InstanceGroupManagersRecreateInstancesRequest
@@ -200,14 +200,14 @@ instance GoogleRequest
         request = requestWithRoute defReq computeURL
         requestWithRoute r u
           InstanceGroupManagersRecreateInstances'{..}
-          = go _igmriQuotaUser (Just _igmriPrettyPrint)
-              _igmriProject
+          = go _igmriProject _igmriZone
               _igmriInstanceGroupManager
+              _igmriQuotaUser
+              (Just _igmriPrettyPrint)
               _igmriUserIP
-              _igmriZone
+              _igmriFields
               _igmriKey
               _igmriOAuthToken
-              _igmriFields
               (Just AltJSON)
               _igmriInstanceGroupManagersRecreateInstancesRequest
           where go

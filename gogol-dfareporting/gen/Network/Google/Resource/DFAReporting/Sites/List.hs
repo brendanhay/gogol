@@ -63,36 +63,33 @@ type SitesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "sites" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "unmappedSite" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParams "campaignIds" Int64 :>
-                     QueryParam "searchString" Text :>
-                       QueryParam "acceptsInterstitialPlacements" Bool :>
-                         QueryParam "acceptsPublisherPaidPlacements" Bool :>
-                           QueryParams "ids" Int64 :>
-                             QueryParams "directorySiteIds" Int64 :>
-                               QueryParam "sortOrder"
-                                 DfareportingSitesListSortOrder
-                                 :>
-                                 QueryParam "key" Key :>
-                                   QueryParam "pageToken" Text :>
-                                     QueryParam "sortField"
-                                       DfareportingSitesListSortField
-                                       :>
-                                       QueryParam "subaccountId" Int64 :>
-                                         QueryParam
-                                           "acceptsInStreamVideoPlacements"
-                                           Bool
-                                           :>
-                                           QueryParam "oauth_token" OAuthToken
-                                             :>
-                                             QueryParam "approved" Bool :>
-                                               QueryParam "adWordsSite" Bool :>
-                                                 QueryParam "maxResults" Int32
-                                                   :>
-                                                   QueryParam "fields" Text :>
+           QueryParam "acceptsInStreamVideoPlacements" Bool :>
+             QueryParam "acceptsInterstitialPlacements" Bool :>
+               QueryParam "acceptsPublisherPaidPlacements" Bool :>
+                 QueryParam "adWordsSite" Bool :>
+                   QueryParam "approved" Bool :>
+                     QueryParams "campaignIds" Int64 :>
+                       QueryParams "directorySiteIds" Int64 :>
+                         QueryParams "ids" Int64 :>
+                           QueryParam "maxResults" Int32 :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "searchString" Text :>
+                                 QueryParam "sortField"
+                                   DfareportingSitesListSortField
+                                   :>
+                                   QueryParam "sortOrder"
+                                     DfareportingSitesListSortOrder
+                                     :>
+                                     QueryParam "subaccountId" Int64 :>
+                                       QueryParam "unmappedSite" Bool :>
+                                         QueryParam "quotaUser" Text :>
+                                           QueryParam "prettyPrint" Bool :>
+                                             QueryParam "userIp" Text :>
+                                               QueryParam "fields" Text :>
+                                                 QueryParam "key" Key :>
+                                                   QueryParam "oauth_token"
+                                                     OAuthToken
+                                                     :>
                                                      QueryParam "alt" AltJSON :>
                                                        Get '[JSON]
                                                          SitesListResponse
@@ -341,27 +338,28 @@ instance GoogleRequest SitesList' where
         type Rs SitesList' = SitesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u SitesList'{..}
-          = go _sitQuotaUser (Just _sitPrettyPrint)
-              _sitUnmappedSite
-              _sitUserIP
-              _sitCampaignIds
-              _sitSearchString
+          = go _sitAcceptsInStreamVideoPlacements
               _sitAcceptsInterstitialPlacements
               _sitAcceptsPublisherPaidPlacements
-              _sitIds
-              _sitProfileId
-              _sitDirectorySiteIds
-              _sitSortOrder
-              _sitKey
-              _sitPageToken
-              _sitSortField
-              _sitSubAccountId
-              _sitAcceptsInStreamVideoPlacements
-              _sitOAuthToken
-              _sitApproved
               _sitAdWordsSite
+              _sitApproved
+              _sitCampaignIds
+              _sitDirectorySiteIds
+              _sitIds
               _sitMaxResults
+              _sitPageToken
+              _sitSearchString
+              _sitSortField
+              _sitSortOrder
+              _sitSubAccountId
+              _sitUnmappedSite
+              _sitProfileId
+              _sitQuotaUser
+              (Just _sitPrettyPrint)
+              _sitUserIP
               _sitFields
+              _sitKey
+              _sitOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy SitesListResource)

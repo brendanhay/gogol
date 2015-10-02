@@ -54,15 +54,15 @@ type AccountsReportsSavedGenerateResource =
        Capture "accountId" Text :>
          "reports" :>
            Capture "savedReportId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "locale" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "startIndex" Int32 :>
-                           QueryParam "maxResults" Int32 :>
-                             QueryParam "fields" Text :>
+             QueryParam "locale" Text :>
+               QueryParam "maxResults" Int32 :>
+                 QueryParam "startIndex" Int32 :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] AdsenseReportsGenerateResponse
 
@@ -207,16 +207,15 @@ instance GoogleRequest AccountsReportsSavedGenerate'
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u
           AccountsReportsSavedGenerate'{..}
-          = go _arsgQuotaUser (Just _arsgPrettyPrint)
-              _arsgUserIP
-              _arsgLocale
-              _arsgSavedReportId
+          = go _arsgLocale _arsgMaxResults _arsgStartIndex
               _arsgAccountId
+              _arsgSavedReportId
+              _arsgQuotaUser
+              (Just _arsgPrettyPrint)
+              _arsgUserIP
+              _arsgFields
               _arsgKey
               _arsgOAuthToken
-              _arsgStartIndex
-              _arsgMaxResults
-              _arsgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

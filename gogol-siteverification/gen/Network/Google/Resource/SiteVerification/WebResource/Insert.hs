@@ -47,13 +47,13 @@ import           Network.Google.SiteVerification.Types
 -- 'WebResourceInsert'' request conforms to.
 type WebResourceInsertResource =
      "webResource" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "verificationMethod" Text :>
-                   QueryParam "fields" Text :>
+       QueryParam "verificationMethod" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] SiteVerificationWebResourceResource
                          :> Post '[JSON] SiteVerificationWebResourceResource
@@ -165,11 +165,12 @@ instance GoogleRequest WebResourceInsert' where
              SiteVerificationWebResourceResource
         request = requestWithRoute defReq siteVerificationURL
         requestWithRoute r u WebResourceInsert'{..}
-          = go _wriQuotaUser (Just _wriPrettyPrint) _wriUserIP
+          = go (Just _wriVerificationMethod) _wriQuotaUser
+              (Just _wriPrettyPrint)
+              _wriUserIP
+              _wriFields
               _wriKey
               _wriOAuthToken
-              (Just _wriVerificationMethod)
-              _wriFields
               (Just AltJSON)
               _wriSiteVerificationWebResourceResource
           where go

@@ -53,9 +53,9 @@ type ProjectsZonesClustersListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] ListClustersResponse
 
@@ -166,13 +166,12 @@ instance GoogleRequest ProjectsZonesClustersList'
              ListClustersResponse
         request = requestWithRoute defReq containerURL
         requestWithRoute r u ProjectsZonesClustersList'{..}
-          = go _pzclQuotaUser (Just _pzclPrettyPrint)
+          = go _pzclProjectId _pzclZoneId _pzclQuotaUser
+              (Just _pzclPrettyPrint)
               _pzclUserIP
-              _pzclZoneId
-              _pzclKey
-              _pzclProjectId
-              _pzclOAuthToken
               _pzclFields
+              _pzclKey
+              _pzclOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

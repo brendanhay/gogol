@@ -52,9 +52,9 @@ type TrainedModelsGetResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Insert2
 
 -- | Check training status of your model.
@@ -159,12 +159,12 @@ instance GoogleRequest TrainedModelsGet' where
         type Rs TrainedModelsGet' = Insert2
         request = requestWithRoute defReq predictionURL
         requestWithRoute r u TrainedModelsGet'{..}
-          = go _tmgQuotaUser (Just _tmgPrettyPrint) _tmgProject
+          = go _tmgProject _tmgId _tmgQuotaUser
+              (Just _tmgPrettyPrint)
               _tmgUserIP
-              _tmgKey
-              _tmgId
-              _tmgOAuthToken
               _tmgFields
+              _tmgKey
+              _tmgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

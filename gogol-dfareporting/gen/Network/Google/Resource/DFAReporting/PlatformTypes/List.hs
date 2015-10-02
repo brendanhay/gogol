@@ -51,9 +51,9 @@ type PlatformTypesListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] PlatformTypesListResponse
 
@@ -151,11 +151,12 @@ instance GoogleRequest PlatformTypesList' where
              PlatformTypesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlatformTypesList'{..}
-          = go _ptlQuotaUser (Just _ptlPrettyPrint) _ptlUserIP
-              _ptlProfileId
+          = go _ptlProfileId _ptlQuotaUser
+              (Just _ptlPrettyPrint)
+              _ptlUserIP
+              _ptlFields
               _ptlKey
               _ptlOAuthToken
-              _ptlFields
               (Just AltJSON)
           where go
                   = clientWithRoute

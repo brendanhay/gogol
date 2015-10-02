@@ -53,9 +53,9 @@ type RoutesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Route :> Post '[JSON] Operation
 
@@ -159,11 +159,11 @@ instance GoogleRequest RoutesInsert' where
         type Rs RoutesInsert' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u RoutesInsert'{..}
-          = go _riQuotaUser (Just _riPrettyPrint) _riProject
+          = go _riProject _riQuotaUser (Just _riPrettyPrint)
               _riUserIP
+              _riFields
               _riKey
               _riOAuthToken
-              _riFields
               (Just AltJSON)
               _riRoute
           where go

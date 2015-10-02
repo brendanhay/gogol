@@ -47,13 +47,13 @@ import           Network.Google.Prelude
 type RevisionsCheckResource =
      "revisions" :>
        "check" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "clientRevision" Text :>
+         QueryParam "clientRevision" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] RevisionCheckResponse
 
@@ -151,12 +151,12 @@ instance GoogleRequest RevisionsCheck' where
         type Rs RevisionsCheck' = RevisionCheckResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u RevisionsCheck'{..}
-          = go _rcQuotaUser (Just _rcPrettyPrint)
-              (Just _rcClientRevision)
+          = go (Just _rcClientRevision) _rcQuotaUser
+              (Just _rcPrettyPrint)
               _rcUserIP
+              _rcFields
               _rcKey
               _rcOAuthToken
-              _rcFields
               (Just AltJSON)
           where go
                   = clientWithRoute

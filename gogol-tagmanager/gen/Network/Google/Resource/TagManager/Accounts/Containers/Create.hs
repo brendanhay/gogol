@@ -52,9 +52,9 @@ type AccountsContainersCreateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Container :> Post '[JSON] Container
 
@@ -162,11 +162,12 @@ instance GoogleRequest AccountsContainersCreate'
         type Rs AccountsContainersCreate' = Container
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u AccountsContainersCreate'{..}
-          = go _accQuotaUser (Just _accPrettyPrint) _accUserIP
-              _accAccountId
+          = go _accAccountId _accQuotaUser
+              (Just _accPrettyPrint)
+              _accUserIP
+              _accFields
               _accKey
               _accOAuthToken
-              _accFields
               (Just AltJSON)
               _accContainer
           where go

@@ -26,7 +26,7 @@ module Network.Google.Resource.Compute.URLMaps.Delete
       URLMapsDeleteResource
 
     -- * Creating a Request
-    , uRLMapsDelete'
+    , urlMapsDelete'
     , URLMapsDelete'
 
     -- * Request Lenses
@@ -53,14 +53,14 @@ type URLMapsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified UrlMap resource.
 --
--- /See:/ 'uRLMapsDelete'' smart constructor.
+-- /See:/ 'urlMapsDelete'' smart constructor.
 data URLMapsDelete' = URLMapsDelete'
     { _umdQuotaUser   :: !(Maybe Text)
     , _umdURLMap      :: !Text
@@ -91,11 +91,11 @@ data URLMapsDelete' = URLMapsDelete'
 -- * 'umdOAuthToken'
 --
 -- * 'umdFields'
-uRLMapsDelete'
+urlMapsDelete'
     :: Text -- ^ 'urlMap'
     -> Text -- ^ 'project'
     -> URLMapsDelete'
-uRLMapsDelete' pUmdURLMap_ pUmdProject_ =
+urlMapsDelete' pUmdURLMap_ pUmdProject_ =
     URLMapsDelete'
     { _umdQuotaUser = Nothing
     , _umdURLMap = pUmdURLMap_
@@ -161,12 +161,12 @@ instance GoogleRequest URLMapsDelete' where
         type Rs URLMapsDelete' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u URLMapsDelete'{..}
-          = go _umdQuotaUser _umdURLMap (Just _umdPrettyPrint)
-              _umdProject
+          = go _umdProject _umdURLMap _umdQuotaUser
+              (Just _umdPrettyPrint)
               _umdUserIP
+              _umdFields
               _umdKey
               _umdOAuthToken
-              _umdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

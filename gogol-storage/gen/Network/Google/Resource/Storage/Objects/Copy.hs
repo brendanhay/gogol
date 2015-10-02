@@ -69,37 +69,31 @@ type ObjectsCopyResource =
                  Capture "destinationBucket" Text :>
                    "o" :>
                      Capture "destinationObject" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "ifSourceGenerationMatch" Word64 :>
+                       QueryParam "ifGenerationMatch" Word64 :>
+                         QueryParam "ifGenerationNotMatch" Word64 :>
                            QueryParam "ifMetagenerationMatch" Word64 :>
-                             QueryParam "ifGenerationNotMatch" Word64 :>
-                               QueryParam "prettyPrint" Bool :>
-                                 QueryParam "ifSourceMetagenerationNotMatch"
-                                   Word64
+                             QueryParam "ifMetagenerationNotMatch" Word64 :>
+                               QueryParam "ifSourceGenerationMatch" Word64 :>
+                                 QueryParam "ifSourceGenerationNotMatch" Word64
                                    :>
                                    QueryParam "ifSourceMetagenerationMatch"
                                      Word64
                                      :>
-                                     QueryParam "ifGenerationMatch" Word64 :>
-                                       QueryParam "userIp" Text :>
-                                         QueryParam "key" Key :>
-                                           QueryParam "ifMetagenerationNotMatch"
-                                             Word64
-                                             :>
-                                             QueryParam
-                                               "ifSourceGenerationNotMatch"
-                                               Word64
-                                               :>
-                                               QueryParam "projection"
-                                                 StorageObjectsCopyProjection
-                                                 :>
-                                                 QueryParam "oauth_token"
-                                                   OAuthToken
-                                                   :>
-                                                   QueryParam "sourceGeneration"
-                                                     Word64
-                                                     :>
-                                                     QueryParam "fields" Text :>
+                                     QueryParam "ifSourceMetagenerationNotMatch"
+                                       Word64
+                                       :>
+                                       QueryParam "projection"
+                                         StorageObjectsCopyProjection
+                                         :>
+                                         QueryParam "sourceGeneration" Word64 :>
+                                           QueryParam "quotaUser" Text :>
+                                             QueryParam "prettyPrint" Bool :>
+                                               QueryParam "userIp" Text :>
+                                                 QueryParam "fields" Text :>
+                                                   QueryParam "key" Key :>
+                                                     QueryParam "oauth_token"
+                                                       OAuthToken
+                                                       :>
                                                        QueryParam "alt" AltJSON
                                                          :>
                                                          ReqBody '[JSON] Object
@@ -115,39 +109,33 @@ type ObjectsCopyResource =
                    Capture "destinationBucket" Text :>
                      "o" :>
                        Capture "destinationObject" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "ifSourceGenerationMatch" Word64 :>
+                         QueryParam "ifGenerationMatch" Word64 :>
+                           QueryParam "ifGenerationNotMatch" Word64 :>
                              QueryParam "ifMetagenerationMatch" Word64 :>
-                               QueryParam "ifGenerationNotMatch" Word64 :>
-                                 QueryParam "prettyPrint" Bool :>
-                                   QueryParam "ifSourceMetagenerationNotMatch"
+                               QueryParam "ifMetagenerationNotMatch" Word64 :>
+                                 QueryParam "ifSourceGenerationMatch" Word64 :>
+                                   QueryParam "ifSourceGenerationNotMatch"
                                      Word64
                                      :>
                                      QueryParam "ifSourceMetagenerationMatch"
                                        Word64
                                        :>
-                                       QueryParam "ifGenerationMatch" Word64 :>
-                                         QueryParam "userIp" Text :>
-                                           QueryParam "key" Key :>
-                                             QueryParam
-                                               "ifMetagenerationNotMatch"
-                                               Word64
-                                               :>
-                                               QueryParam
-                                                 "ifSourceGenerationNotMatch"
-                                                 Word64
-                                                 :>
-                                                 QueryParam "projection"
-                                                   StorageObjectsCopyProjection
-                                                   :>
-                                                   QueryParam "oauth_token"
-                                                     OAuthToken
-                                                     :>
-                                                     QueryParam
-                                                       "sourceGeneration"
-                                                       Word64
-                                                       :>
-                                                       QueryParam "fields" Text
+                                       QueryParam
+                                         "ifSourceMetagenerationNotMatch"
+                                         Word64
+                                         :>
+                                         QueryParam "projection"
+                                           StorageObjectsCopyProjection
+                                           :>
+                                           QueryParam "sourceGeneration" Word64
+                                             :>
+                                             QueryParam "quotaUser" Text :>
+                                               QueryParam "prettyPrint" Bool :>
+                                                 QueryParam "userIp" Text :>
+                                                   QueryParam "fields" Text :>
+                                                     QueryParam "key" Key :>
+                                                       QueryParam "oauth_token"
+                                                         OAuthToken
                                                          :>
                                                          QueryParam "alt" Media
                                                            :>
@@ -402,25 +390,25 @@ instance GoogleRequest ObjectsCopy' where
         type Rs ObjectsCopy' = Object
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectsCopy'{..}
-          = go _ocQuotaUser _ocIfSourceGenerationMatch
+          = go _ocIfGenerationMatch _ocIfGenerationNotMatch
               _ocIfMetagenerationMatch
-              _ocIfGenerationNotMatch
-              (Just _ocPrettyPrint)
-              _ocIfSourceMetagenerationNotMatch
-              _ocIfSourceMetagenerationMatch
-              _ocIfGenerationMatch
-              _ocUserIP
-              _ocSourceObject
-              _ocSourceBucket
-              _ocKey
-              _ocDestinationBucket
               _ocIfMetagenerationNotMatch
+              _ocIfSourceGenerationMatch
               _ocIfSourceGenerationNotMatch
+              _ocIfSourceMetagenerationMatch
+              _ocIfSourceMetagenerationNotMatch
               _ocProjection
-              _ocOAuthToken
               _ocSourceGeneration
-              _ocFields
+              _ocSourceBucket
+              _ocSourceObject
+              _ocDestinationBucket
               _ocDestinationObject
+              _ocQuotaUser
+              (Just _ocPrettyPrint)
+              _ocUserIP
+              _ocFields
+              _ocKey
+              _ocOAuthToken
               (Just AltJSON)
               _ocObject
           where go :<|> _
@@ -433,25 +421,25 @@ instance GoogleRequest ObjectsCopy' where
         type Rs (Download ObjectsCopy') = Stream
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectsCopy'{..}
-          = go _ocQuotaUser _ocIfSourceGenerationMatch
+          = go _ocIfGenerationMatch _ocIfGenerationNotMatch
               _ocIfMetagenerationMatch
-              _ocIfGenerationNotMatch
-              (Just _ocPrettyPrint)
-              _ocIfSourceMetagenerationNotMatch
-              _ocIfSourceMetagenerationMatch
-              _ocIfGenerationMatch
-              _ocUserIP
-              _ocSourceObject
-              _ocSourceBucket
-              _ocKey
-              _ocDestinationBucket
               _ocIfMetagenerationNotMatch
+              _ocIfSourceGenerationMatch
               _ocIfSourceGenerationNotMatch
+              _ocIfSourceMetagenerationMatch
+              _ocIfSourceMetagenerationNotMatch
               _ocProjection
-              _ocOAuthToken
               _ocSourceGeneration
-              _ocFields
+              _ocSourceBucket
+              _ocSourceObject
+              _ocDestinationBucket
               _ocDestinationObject
+              _ocQuotaUser
+              (Just _ocPrettyPrint)
+              _ocUserIP
+              _ocFields
+              _ocKey
+              _ocOAuthToken
               (Just Media)
               _ocObject
           where go :<|> _

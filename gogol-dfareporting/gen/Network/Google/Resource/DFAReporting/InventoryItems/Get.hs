@@ -56,9 +56,9 @@ type InventoryItemsGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] InventoryItem
 
@@ -174,13 +174,12 @@ instance GoogleRequest InventoryItemsGet' where
         type Rs InventoryItemsGet' = InventoryItem
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u InventoryItemsGet'{..}
-          = go _iigQuotaUser (Just _iigPrettyPrint) _iigUserIP
-              _iigProfileId
-              _iigKey
-              _iigId
-              _iigProjectId
-              _iigOAuthToken
+          = go _iigProfileId _iigProjectId _iigId _iigQuotaUser
+              (Just _iigPrettyPrint)
+              _iigUserIP
               _iigFields
+              _iigKey
+              _iigOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

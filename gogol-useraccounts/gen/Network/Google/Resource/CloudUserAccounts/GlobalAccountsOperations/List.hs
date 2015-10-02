@@ -53,16 +53,16 @@ type GlobalAccountsOperationsListResource =
      Capture "project" Text :>
        "global" :>
          "operations" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
+           QueryParam "filter" Text :>
+             QueryParam "maxResults" Word32 :>
                QueryParam "orderBy" Text :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "filter" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] OperationList
 
@@ -221,16 +221,15 @@ instance GoogleRequest GlobalAccountsOperationsList'
         request = requestWithRoute defReq userAccountsURL
         requestWithRoute r u
           GlobalAccountsOperationsList'{..}
-          = go _gaolQuotaUser (Just _gaolPrettyPrint)
-              _gaolOrderBy
-              _gaolProject
-              _gaolUserIP
-              _gaolKey
-              _gaolFilter
+          = go _gaolFilter (Just _gaolMaxResults) _gaolOrderBy
               _gaolPageToken
-              _gaolOAuthToken
-              (Just _gaolMaxResults)
+              _gaolProject
+              _gaolQuotaUser
+              (Just _gaolPrettyPrint)
+              _gaolUserIP
               _gaolFields
+              _gaolKey
+              _gaolOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

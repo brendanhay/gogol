@@ -53,9 +53,9 @@ type MarketplaceDealsInsertResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] AddOrderDealsRequest :>
                              Post '[JSON] AddOrderDealsResponse
@@ -165,11 +165,11 @@ instance GoogleRequest MarketplaceDealsInsert' where
              AddOrderDealsResponse
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u MarketplaceDealsInsert'{..}
-          = go _mdiQuotaUser (Just _mdiPrettyPrint) _mdiUserIP
+          = go _mdiOrderId _mdiQuotaUser (Just _mdiPrettyPrint)
+              _mdiUserIP
+              _mdiFields
               _mdiKey
               _mdiOAuthToken
-              _mdiOrderId
-              _mdiFields
               (Just AltJSON)
               _mdiAddOrderDealsRequest
           where go

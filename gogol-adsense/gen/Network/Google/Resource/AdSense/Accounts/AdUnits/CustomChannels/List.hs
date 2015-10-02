@@ -56,14 +56,14 @@ type AccountsAdUnitsCustomChannelsListResource =
              "adunits" :>
                Capture "adUnitId" Text :>
                  "customchannels" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "maxResults" Int32 :>
-                                 QueryParam "fields" Text :>
+                   QueryParam "maxResults" Int32 :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] CustomChannels
 
@@ -212,16 +212,16 @@ instance GoogleRequest
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u
           AccountsAdUnitsCustomChannelsList'{..}
-          = go _aaucclQuotaUser (Just _aaucclPrettyPrint)
-              _aaucclUserIP
-              _aaucclAdUnitId
-              _aaucclAdClientId
+          = go _aaucclMaxResults _aaucclPageToken
               _aaucclAccountId
-              _aaucclKey
-              _aaucclPageToken
-              _aaucclOAuthToken
-              _aaucclMaxResults
+              _aaucclAdClientId
+              _aaucclAdUnitId
+              _aaucclQuotaUser
+              (Just _aaucclPrettyPrint)
+              _aaucclUserIP
               _aaucclFields
+              _aaucclKey
+              _aaucclOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

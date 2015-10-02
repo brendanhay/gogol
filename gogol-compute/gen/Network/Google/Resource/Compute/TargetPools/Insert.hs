@@ -55,9 +55,9 @@ type TargetPoolsInsertResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] TargetPool :> Post '[JSON] Operation
 
@@ -176,12 +176,12 @@ instance GoogleRequest TargetPoolsInsert' where
         type Rs TargetPoolsInsert' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u TargetPoolsInsert'{..}
-          = go _tpiQuotaUser (Just _tpiPrettyPrint) _tpiProject
+          = go _tpiProject _tpiRegion _tpiQuotaUser
+              (Just _tpiPrettyPrint)
               _tpiUserIP
-              _tpiKey
-              _tpiRegion
-              _tpiOAuthToken
               _tpiFields
+              _tpiKey
+              _tpiOAuthToken
               (Just AltJSON)
               _tpiTargetPool
           where go

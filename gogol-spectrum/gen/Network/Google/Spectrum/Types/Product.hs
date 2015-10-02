@@ -464,7 +464,7 @@ instance ToJSON Vcard where
 -- | This message is provided by the database to notify devices of an
 -- upcoming change to the database URI.
 --
--- /See:/ 'dBUpdateSpec' smart constructor.
+-- /See:/ 'dbUpdateSpec' smart constructor.
 newtype DBUpdateSpec = DBUpdateSpec
     { _dusDatabases :: Maybe [DatabaseSpec]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -474,9 +474,9 @@ newtype DBUpdateSpec = DBUpdateSpec
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'dusDatabases'
-dBUpdateSpec
+dbUpdateSpec
     :: DBUpdateSpec
-dBUpdateSpec =
+dbUpdateSpec =
     DBUpdateSpec
     { _dusDatabases = Nothing
     }

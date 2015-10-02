@@ -54,9 +54,9 @@ type StatesDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a key and the data associated with it. The key is removed and no
@@ -153,11 +153,11 @@ instance GoogleRequest StatesDelete' where
         type Rs StatesDelete' = ()
         request = requestWithRoute defReq appStateURL
         requestWithRoute r u StatesDelete'{..}
-          = go _sdQuotaUser (Just _sdPrettyPrint) _sdUserIP
-              _sdStateKey
+          = go _sdStateKey _sdQuotaUser (Just _sdPrettyPrint)
+              _sdUserIP
+              _sdFields
               _sdKey
               _sdOAuthToken
-              _sdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

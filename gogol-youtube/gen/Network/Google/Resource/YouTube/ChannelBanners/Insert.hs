@@ -57,13 +57,13 @@ import           Network.Google.YouTube.Types
 type ChannelBannersInsertResource =
      "channelBanners" :>
        "insert" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+         QueryParam "onBehalfOfContentOwner" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          MultipartRelated '[JSON] ChannelBannerResource Body
                            :> Post '[JSON] ChannelBannerResource
@@ -197,12 +197,13 @@ instance GoogleRequest ChannelBannersInsert' where
         type Rs ChannelBannersInsert' = ChannelBannerResource
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u ChannelBannersInsert'{..}
-          = go _cbiQuotaUser (Just _cbiPrettyPrint) _cbiUserIP
-              _cbiMedia
-              _cbiOnBehalfOfContentOwner
+          = go _cbiMedia _cbiOnBehalfOfContentOwner
+              _cbiQuotaUser
+              (Just _cbiPrettyPrint)
+              _cbiUserIP
+              _cbiFields
               _cbiKey
               _cbiOAuthToken
-              _cbiFields
               (Just AltJSON)
               _cbiChannelBannerResource
           where go

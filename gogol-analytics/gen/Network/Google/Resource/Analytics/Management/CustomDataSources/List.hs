@@ -54,14 +54,14 @@ type ManagementCustomDataSourcesListResource =
            "webproperties" :>
              Capture "webPropertyId" Text :>
                "customDataSources" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "start-index" Int32 :>
-                             QueryParam "max-results" Int32 :>
-                               QueryParam "fields" Text :>
+                 QueryParam "max-results" Int32 :>
+                   QueryParam "start-index" Int32 :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] CustomDataSources
 
@@ -197,15 +197,15 @@ instance GoogleRequest
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
           ManagementCustomDataSourcesList'{..}
-          = go _mcdslQuotaUser (Just _mcdslPrettyPrint)
-              _mcdslWebPropertyId
-              _mcdslUserIP
+          = go _mcdslMaxResults _mcdslStartIndex
               _mcdslAccountId
+              _mcdslWebPropertyId
+              _mcdslQuotaUser
+              (Just _mcdslPrettyPrint)
+              _mcdslUserIP
+              _mcdslFields
               _mcdslKey
               _mcdslOAuthToken
-              _mcdslStartIndex
-              _mcdslMaxResults
-              _mcdslFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -48,14 +48,14 @@ import           Network.Google.YouTubeAnalytics.Types
 -- 'GroupItemsList'' request conforms to.
 type GroupItemsListResource =
      "groupItems" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "onBehalfOfContentOwner" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "groupId" Text :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+       QueryParam "onBehalfOfContentOwner" Text :>
+         QueryParam "groupId" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] GroupItemListResponse
 
@@ -173,12 +173,13 @@ instance GoogleRequest GroupItemsList' where
         type Rs GroupItemsList' = GroupItemListResponse
         request = requestWithRoute defReq youTubeAnalyticsURL
         requestWithRoute r u GroupItemsList'{..}
-          = go _gilQuotaUser (Just _gilPrettyPrint) _gilUserIP
-              _gilOnBehalfOfContentOwner
-              _gilKey
-              (Just _gilGroupId)
-              _gilOAuthToken
+          = go _gilOnBehalfOfContentOwner (Just _gilGroupId)
+              _gilQuotaUser
+              (Just _gilPrettyPrint)
+              _gilUserIP
               _gilFields
+              _gilKey
+              _gilOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

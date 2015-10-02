@@ -57,9 +57,9 @@ type CampaignCreativeAssociationsInsertResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] CampaignCreativeAssociation :>
                                Post '[JSON] CampaignCreativeAssociation
@@ -187,13 +187,12 @@ instance GoogleRequest
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           CampaignCreativeAssociationsInsert'{..}
-          = go _ccaiQuotaUser (Just _ccaiPrettyPrint)
+          = go _ccaiProfileId _ccaiCampaignId _ccaiQuotaUser
+              (Just _ccaiPrettyPrint)
               _ccaiUserIP
-              _ccaiCampaignId
-              _ccaiProfileId
+              _ccaiFields
               _ccaiKey
               _ccaiOAuthToken
-              _ccaiFields
               (Just AltJSON)
               _ccaiCampaignCreativeAssociation
           where go

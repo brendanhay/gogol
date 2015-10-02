@@ -55,20 +55,20 @@ import           Network.Google.Prelude
 -- 'FilesInsert'' request conforms to.
 type FilesInsertResource =
      "files" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
+       QueryParam "convert" Bool :>
+         QueryParam "ocr" Bool :>
+           QueryParam "ocrLanguage" Text :>
              QueryParam "pinned" Bool :>
-               QueryParam "visibility" DriveFilesInsertVisibility :>
-                 QueryParam "timedTextLanguage" Text :>
+               QueryParam "timedTextLanguage" Text :>
+                 QueryParam "timedTextTrackName" Text :>
                    QueryParam "useContentAsIndexableText" Bool :>
-                     QueryParam "timedTextTrackName" Text :>
-                       QueryParam "ocrLanguage" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "convert" Bool :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "ocr" Bool :>
-                                 QueryParam "fields" Text :>
+                     QueryParam "visibility" DriveFilesInsertVisibility :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      MultipartRelated '[JSON] File Body :>
                                        Post '[JSON] File
@@ -247,19 +247,19 @@ instance GoogleRequest FilesInsert' where
         type Rs FilesInsert' = File
         request = requestWithRoute defReq driveURL
         requestWithRoute r u FilesInsert'{..}
-          = go _fiQuotaUser (Just _fiPrettyPrint) _fiUserIP
-              (Just _fiPinned)
-              (Just _fiVisibility)
-              _fiTimedTextLanguage
-              (Just _fiUseContentAsIndexableText)
-              _fiMedia
-              _fiTimedTextTrackName
+          = go (Just _fiConvert) _fiMedia (Just _fiOCR)
               _fiOCRLanguage
-              _fiKey
-              (Just _fiConvert)
-              _fiOAuthToken
-              (Just _fiOCR)
+              (Just _fiPinned)
+              _fiTimedTextLanguage
+              _fiTimedTextTrackName
+              (Just _fiUseContentAsIndexableText)
+              (Just _fiVisibility)
+              _fiQuotaUser
+              (Just _fiPrettyPrint)
+              _fiUserIP
               _fiFields
+              _fiKey
+              _fiOAuthToken
               (Just AltJSON)
               _fiFile
           where go

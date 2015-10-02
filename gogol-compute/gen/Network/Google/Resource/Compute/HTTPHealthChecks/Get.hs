@@ -53,9 +53,9 @@ type HTTPHealthChecksGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] HTTPHealthCheck
 
@@ -168,13 +168,13 @@ instance GoogleRequest HTTPHealthChecksGet' where
         type Rs HTTPHealthChecksGet' = HTTPHealthCheck
         request = requestWithRoute defReq computeURL
         requestWithRoute r u HTTPHealthChecksGet'{..}
-          = go _httphcgQuotaUser (Just _httphcgPrettyPrint)
-              _httphcgProject
+          = go _httphcgProject _httphcgHTTPHealthCheck
+              _httphcgQuotaUser
+              (Just _httphcgPrettyPrint)
               _httphcgUserIP
-              _httphcgKey
-              _httphcgHTTPHealthCheck
-              _httphcgOAuthToken
               _httphcgFields
+              _httphcgKey
+              _httphcgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

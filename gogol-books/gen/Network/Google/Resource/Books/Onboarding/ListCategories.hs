@@ -47,13 +47,13 @@ import           Network.Google.Prelude
 type OnboardingListCategoriesResource =
      "onboarding" :>
        "listCategories" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "locale" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+         QueryParam "locale" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Category
 
 -- | List categories for onboarding experience.
@@ -150,11 +150,11 @@ instance GoogleRequest OnboardingListCategories'
         type Rs OnboardingListCategories' = Category
         request = requestWithRoute defReq booksURL
         requestWithRoute r u OnboardingListCategories'{..}
-          = go _olcQuotaUser (Just _olcPrettyPrint) _olcUserIP
-              _olcLocale
+          = go _olcLocale _olcQuotaUser (Just _olcPrettyPrint)
+              _olcUserIP
+              _olcFields
               _olcKey
               _olcOAuthToken
-              _olcFields
               (Just AltJSON)
           where go
                   = clientWithRoute

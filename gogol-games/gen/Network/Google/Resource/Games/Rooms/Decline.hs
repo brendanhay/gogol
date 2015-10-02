@@ -50,13 +50,13 @@ type RoomsDeclineResource =
      "rooms" :>
        Capture "roomId" Text :>
          "decline" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "language" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "language" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Post '[JSON] Room
 
 -- | Decline an invitation to join a room. For internal use by the Games SDK
@@ -158,12 +158,12 @@ instance GoogleRequest RoomsDecline' where
         type Rs RoomsDecline' = Room
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u RoomsDecline'{..}
-          = go _rdQuotaUser (Just _rdPrettyPrint) _rdUserIP
-              _rdKey
-              _rdRoomId
-              _rdLanguage
-              _rdOAuthToken
+          = go _rdLanguage _rdRoomId _rdQuotaUser
+              (Just _rdPrettyPrint)
+              _rdUserIP
               _rdFields
+              _rdKey
+              _rdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

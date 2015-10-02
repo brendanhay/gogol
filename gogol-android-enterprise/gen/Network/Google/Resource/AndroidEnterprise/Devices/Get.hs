@@ -56,9 +56,9 @@ type DevicesGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Device
 
 -- | Retrieves the details of a device.
@@ -172,14 +172,13 @@ instance GoogleRequest DevicesGet' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u DevicesGet'{..}
-          = go _dgQuotaUser (Just _dgPrettyPrint)
-              _dgEnterpriseId
+          = go _dgEnterpriseId _dgUserId _dgDeviceId
+              _dgQuotaUser
+              (Just _dgPrettyPrint)
               _dgUserIP
-              _dgUserId
-              _dgKey
-              _dgDeviceId
-              _dgOAuthToken
               _dgFields
+              _dgKey
+              _dgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy DevicesGetResource)

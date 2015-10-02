@@ -52,15 +52,15 @@ type SnapshotsListResource =
      "players" :>
        Capture "playerId" Text :>
          "snapshots" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "language" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Int32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "language" Text :>
+             QueryParam "maxResults" Int32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] SnapshotListResponse
 
@@ -185,14 +185,14 @@ instance GoogleRequest SnapshotsList' where
         type Rs SnapshotsList' = SnapshotListResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u SnapshotsList'{..}
-          = go _slQuotaUser (Just _slPrettyPrint) _slUserIP
-              _slKey
-              _slLanguage
-              _slPageToken
-              _slOAuthToken
+          = go _slLanguage _slMaxResults _slPageToken
               _slPlayerId
-              _slMaxResults
+              _slQuotaUser
+              (Just _slPrettyPrint)
+              _slUserIP
               _slFields
+              _slKey
+              _slOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

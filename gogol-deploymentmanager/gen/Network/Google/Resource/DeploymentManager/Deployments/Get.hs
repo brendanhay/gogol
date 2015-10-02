@@ -53,9 +53,9 @@ type DeploymentsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Deployment
 
 -- | Gets information about a specific deployment.
@@ -159,12 +159,12 @@ instance GoogleRequest DeploymentsGet' where
         request
           = requestWithRoute defReq deploymentManagerURL
         requestWithRoute r u DeploymentsGet'{..}
-          = go _dgQuotaUser (Just _dgPrettyPrint) _dgProject
+          = go _dgProject _dgDeployment _dgQuotaUser
+              (Just _dgPrettyPrint)
               _dgUserIP
+              _dgFields
               _dgKey
               _dgOAuthToken
-              _dgFields
-              _dgDeployment
               (Just AltJSON)
           where go
                   = clientWithRoute

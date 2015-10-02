@@ -60,9 +60,9 @@ type EditsAPKListingsUpdateResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] APKListing :>
                                    Put '[JSON] APKListing
@@ -211,15 +211,15 @@ instance GoogleRequest EditsAPKListingsUpdate' where
         type Rs EditsAPKListingsUpdate' = APKListing
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u EditsAPKListingsUpdate'{..}
-          = go _eapkluQuotaUser (Just _eapkluPrettyPrint)
-              _eapkluPackageName
+          = go _eapkluPackageName _eapkluEditId
               _eapkluAPKVersionCode
-              _eapkluUserIP
-              _eapkluKey
               _eapkluLanguage
-              _eapkluOAuthToken
-              _eapkluEditId
+              _eapkluQuotaUser
+              (Just _eapkluPrettyPrint)
+              _eapkluUserIP
               _eapkluFields
+              _eapkluKey
+              _eapkluOAuthToken
               (Just AltJSON)
               _eapkluAPKListing
           where go

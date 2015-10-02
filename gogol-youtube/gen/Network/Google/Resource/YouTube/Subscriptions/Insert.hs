@@ -47,13 +47,13 @@ import           Network.Google.YouTube.Types
 -- 'SubscriptionsInsert'' request conforms to.
 type SubscriptionsInsertResource =
      "subscriptions" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "part" Text :>
+       QueryParam "part" Text :>
+         QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Subscription :>
                          Post '[JSON] Subscription
@@ -160,12 +160,12 @@ instance GoogleRequest SubscriptionsInsert' where
         type Rs SubscriptionsInsert' = Subscription
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u SubscriptionsInsert'{..}
-          = go _siQuotaUser (Just _siPart)
+          = go (Just _siPart) _siQuotaUser
               (Just _siPrettyPrint)
               _siUserIP
+              _siFields
               _siKey
               _siOAuthToken
-              _siFields
               (Just AltJSON)
               _siSubscription
           where go

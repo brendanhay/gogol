@@ -57,13 +57,13 @@ type UsersDataSourcesDatasetsPatchResource =
          Capture "dataSourceId" Text :>
            "datasets" :>
              Capture "datasetId" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "currentTimeMillis" Int64 :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+               QueryParam "currentTimeMillis" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Dataset :> Patch '[JSON] Dataset
 
@@ -215,15 +215,15 @@ instance GoogleRequest UsersDataSourcesDatasetsPatch'
         request = requestWithRoute defReq fitnessURL
         requestWithRoute r u
           UsersDataSourcesDatasetsPatch'{..}
-          = go _udsdpQuotaUser (Just _udsdpPrettyPrint)
-              _udsdpUserIP
+          = go _udsdpCurrentTimeMillis _udsdpUserId
               _udsdpDataSourceId
-              _udsdpUserId
-              _udsdpKey
               _udsdpDatasetId
-              _udsdpCurrentTimeMillis
-              _udsdpOAuthToken
+              _udsdpQuotaUser
+              (Just _udsdpPrettyPrint)
+              _udsdpUserIP
               _udsdpFields
+              _udsdpKey
+              _udsdpOAuthToken
               (Just AltJSON)
               _udsdpDataset
           where go

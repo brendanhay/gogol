@@ -52,15 +52,15 @@ type RoutesListResource =
      Capture "project" Text :>
        "global" :>
          "routes" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "filter" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] RouteList
 
 -- | Retrieves the list of route resources available to the specified
@@ -192,14 +192,14 @@ instance GoogleRequest RoutesList' where
         type Rs RoutesList' = RouteList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u RoutesList'{..}
-          = go _rlQuotaUser (Just _rlPrettyPrint) _rlProject
+          = go _rlFilter (Just _rlMaxResults) _rlPageToken
+              _rlProject
+              _rlQuotaUser
+              (Just _rlPrettyPrint)
               _rlUserIP
-              _rlKey
-              _rlFilter
-              _rlPageToken
-              _rlOAuthToken
-              (Just _rlMaxResults)
               _rlFields
+              _rlKey
+              _rlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy RoutesListResource)

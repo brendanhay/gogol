@@ -51,9 +51,9 @@ type VariantsetsDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes the contents of a variant set. The variant set object is not
@@ -151,12 +151,12 @@ instance GoogleRequest VariantsetsDelete' where
         type Rs VariantsetsDelete' = ()
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u VariantsetsDelete'{..}
-          = go _vddQuotaUser (Just _vddPrettyPrint)
-              _vddVariantSetId
+          = go _vddVariantSetId _vddQuotaUser
+              (Just _vddPrettyPrint)
               _vddUserIP
+              _vddFields
               _vddKey
               _vddOAuthToken
-              _vddFields
               (Just AltJSON)
           where go
                   = clientWithRoute

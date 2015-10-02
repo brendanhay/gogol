@@ -59,17 +59,17 @@ type ProjectsSubscriptionsAcknowledgeResource =
      "v1beta2" :>
        "{+subscription}:acknowledge" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] AcknowledgeRequest :>
                                      Post '[JSON] Empty
@@ -241,17 +241,17 @@ instance GoogleRequest
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u
           ProjectsSubscriptionsAcknowledge'{..}
-          = go _psaXgafv _psaQuotaUser (Just _psaPrettyPrint)
-              _psaUploadProtocol
+          = go _psaXgafv _psaAccessToken _psaBearerToken
+              _psaCallback
               (Just _psaPp)
-              _psaAccessToken
               _psaUploadType
-              _psaBearerToken
+              _psaUploadProtocol
+              _psaSubscription
+              _psaQuotaUser
+              (Just _psaPrettyPrint)
+              _psaFields
               _psaKey
               _psaOAuthToken
-              _psaSubscription
-              _psaFields
-              _psaCallback
               (Just AltJSON)
               _psaAcknowledgeRequest
           where go

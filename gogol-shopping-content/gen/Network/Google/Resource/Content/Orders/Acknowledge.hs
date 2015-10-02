@@ -54,9 +54,9 @@ type OrdersAcknowledgeResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] OrdersAcknowledgeRequest :>
                              Post '[JSON] OrdersAcknowledgeResponse
@@ -173,12 +173,12 @@ instance GoogleRequest OrdersAcknowledge' where
              OrdersAcknowledgeResponse
         request = requestWithRoute defReq shoppingContentURL
         requestWithRoute r u OrdersAcknowledge'{..}
-          = go _oaQuotaUser _oaMerchantId (Just _oaPrettyPrint)
+          = go _oaMerchantId _oaOrderId _oaQuotaUser
+              (Just _oaPrettyPrint)
               _oaUserIP
+              _oaFields
               _oaKey
               _oaOAuthToken
-              _oaOrderId
-              _oaFields
               (Just AltJSON)
               _oaOrdersAcknowledgeRequest
           where go

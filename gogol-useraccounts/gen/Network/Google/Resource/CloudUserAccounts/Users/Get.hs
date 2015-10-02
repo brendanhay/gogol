@@ -53,9 +53,9 @@ type UsersGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] User
 
 -- | Returns the specified User resource.
@@ -157,12 +157,12 @@ instance GoogleRequest UsersGet' where
         type Rs UsersGet' = User
         request = requestWithRoute defReq userAccountsURL
         requestWithRoute r u UsersGet'{..}
-          = go _ugQuotaUser (Just _ugPrettyPrint) _ugProject
+          = go _ugProject _ugUser _ugQuotaUser
+              (Just _ugPrettyPrint)
               _ugUserIP
-              _ugUser
+              _ugFields
               _ugKey
               _ugOAuthToken
-              _ugFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy UsersGetResource) r

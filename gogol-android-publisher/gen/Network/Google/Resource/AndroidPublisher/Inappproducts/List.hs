@@ -51,15 +51,15 @@ import           Network.Google.Prelude
 type InappproductsListResource =
      Capture "packageName" Text :>
        "inappproducts" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "token" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "startIndex" Word32 :>
-                       QueryParam "maxResults" Word32 :>
-                         QueryParam "fields" Text :>
+         QueryParam "maxResults" Word32 :>
+           QueryParam "startIndex" Word32 :>
+             QueryParam "token" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] InappproductsListResponse
 
@@ -180,15 +180,14 @@ instance GoogleRequest InappproductsList' where
              InappproductsListResponse
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u InappproductsList'{..}
-          = go _ilQuotaUser (Just _ilPrettyPrint)
+          = go _ilMaxResults _ilStartIndex _ilToken
               _ilPackageName
+              _ilQuotaUser
+              (Just _ilPrettyPrint)
               _ilUserIP
-              _ilToken
+              _ilFields
               _ilKey
               _ilOAuthToken
-              _ilStartIndex
-              _ilMaxResults
-              _ilFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -51,18 +51,18 @@ import           Network.Google.Prelude
 -- 'ChangesList'' request conforms to.
 type ChangesListResource =
      "changes" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "includeSubscribed" Bool :>
-               QueryParam "startChangeId" Int64 :>
-                 QueryParam "key" Key :>
-                   QueryParam "spaces" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Int32 :>
-                           QueryParam "includeDeleted" Bool :>
-                             QueryParam "fields" Text :>
+       QueryParam "includeDeleted" Bool :>
+         QueryParam "includeSubscribed" Bool :>
+           QueryParam "maxResults" Int32 :>
+             QueryParam "pageToken" Text :>
+               QueryParam "spaces" Text :>
+                 QueryParam "startChangeId" Int64 :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] ChangeList
 
@@ -210,16 +210,18 @@ instance GoogleRequest ChangesList' where
         type Rs ChangesList' = ChangeList
         request = requestWithRoute defReq driveURL
         requestWithRoute r u ChangesList'{..}
-          = go _cllQuotaUser (Just _cllPrettyPrint) _cllUserIP
+          = go (Just _cllIncludeDeleted)
               (Just _cllIncludeSubscribed)
-              _cllStartChangeId
-              _cllKey
-              _cllSpaces
-              _cllPageToken
-              _cllOAuthToken
               (Just _cllMaxResults)
-              (Just _cllIncludeDeleted)
+              _cllPageToken
+              _cllSpaces
+              _cllStartChangeId
+              _cllQuotaUser
+              (Just _cllPrettyPrint)
+              _cllUserIP
               _cllFields
+              _cllKey
+              _cllOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

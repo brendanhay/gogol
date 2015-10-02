@@ -51,15 +51,15 @@ type DiskTypesAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
          "diskTypes" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "filter" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] DiskTypeAggregatedList
 
@@ -199,15 +199,15 @@ instance GoogleRequest DiskTypesAggregatedList' where
              DiskTypeAggregatedList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u DiskTypesAggregatedList'{..}
-          = go _dtalQuotaUser (Just _dtalPrettyPrint)
-              _dtalProject
-              _dtalUserIP
-              _dtalKey
-              _dtalFilter
+          = go _dtalFilter (Just _dtalMaxResults)
               _dtalPageToken
-              _dtalOAuthToken
-              (Just _dtalMaxResults)
+              _dtalProject
+              _dtalQuotaUser
+              (Just _dtalPrettyPrint)
+              _dtalUserIP
               _dtalFields
+              _dtalKey
+              _dtalOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

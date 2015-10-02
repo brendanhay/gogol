@@ -55,13 +55,13 @@ type AccountsContainersRulesUpdateResource =
            Capture "containerId" Text :>
              "rules" :>
                Capture "ruleId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fingerprint" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                 QueryParam "fingerprint" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] Rule :> Put '[JSON] Rule
 
@@ -204,15 +204,14 @@ instance GoogleRequest AccountsContainersRulesUpdate'
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersRulesUpdate'{..}
-          = go _acruQuotaUser (Just _acruPrettyPrint)
-              _acruContainerId
-              _acruUserIP
-              _acruFingerprint
+          = go _acruFingerprint _acruAccountId _acruContainerId
               _acruRuleId
-              _acruAccountId
+              _acruQuotaUser
+              (Just _acruPrettyPrint)
+              _acruUserIP
+              _acruFields
               _acruKey
               _acruOAuthToken
-              _acruFields
               (Just AltJSON)
               _acruRule
           where go

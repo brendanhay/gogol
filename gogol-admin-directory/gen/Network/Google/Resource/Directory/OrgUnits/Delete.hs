@@ -53,9 +53,9 @@ type OrgUnitsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Remove Organization Unit
@@ -163,12 +163,12 @@ instance GoogleRequest OrgUnitsDelete' where
         type Rs OrgUnitsDelete' = ()
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u OrgUnitsDelete'{..}
-          = go _oudQuotaUser (Just _oudPrettyPrint) _oudUserIP
-              _oudOrgUnitPath
-              _oudCustomerId
+          = go _oudCustomerId _oudOrgUnitPath _oudQuotaUser
+              (Just _oudPrettyPrint)
+              _oudUserIP
+              _oudFields
               _oudKey
               _oudOAuthToken
-              _oudFields
               (Just AltJSON)
           where go
                   = clientWithRoute

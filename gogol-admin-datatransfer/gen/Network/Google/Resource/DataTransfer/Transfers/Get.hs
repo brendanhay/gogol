@@ -50,9 +50,9 @@ type TransfersGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] DataTransfer
 
 -- | Retrieves a data transfer request by its resource ID.
@@ -148,11 +148,12 @@ instance GoogleRequest TransfersGet' where
         request
           = requestWithRoute defReq adminDataTransferURL
         requestWithRoute r u TransfersGet'{..}
-          = go _tgQuotaUser (Just _tgPrettyPrint) _tgUserIP
+          = go _tgDataTransferId _tgQuotaUser
+              (Just _tgPrettyPrint)
+              _tgUserIP
+              _tgFields
               _tgKey
               _tgOAuthToken
-              _tgDataTransferId
-              _tgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

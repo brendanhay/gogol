@@ -49,9 +49,9 @@ type CalendarsInsertResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] Calendar :> Post '[JSON] Calendar
 
@@ -146,9 +146,9 @@ instance GoogleRequest CalendarsInsert' where
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u CalendarsInsert'{..}
           = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIP
+              _ciFields
               _ciKey
               _ciOAuthToken
-              _ciFields
               (Just AltJSON)
               _ciCalendar
           where go

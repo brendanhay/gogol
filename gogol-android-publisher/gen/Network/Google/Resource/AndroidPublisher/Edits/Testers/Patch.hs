@@ -58,9 +58,9 @@ type EditsTestersPatchResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Testers :> Patch '[JSON] Testers
 
@@ -188,14 +188,13 @@ instance GoogleRequest EditsTestersPatch' where
         type Rs EditsTestersPatch' = Testers
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u EditsTestersPatch'{..}
-          = go _etptQuotaUser _etptTrack
+          = go _etptPackageName _etptEditId _etptTrack
+              _etptQuotaUser
               (Just _etptPrettyPrint)
-              _etptPackageName
               _etptUserIP
+              _etptFields
               _etptKey
               _etptOAuthToken
-              _etptEditId
-              _etptFields
               (Just AltJSON)
               _etptTesters
           where go

@@ -58,9 +58,9 @@ type PurchasesSubscriptionsRevokeResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Refunds and immediately revokes a user\'s subscription purchase. Access
@@ -184,14 +184,13 @@ instance GoogleRequest PurchasesSubscriptionsRevoke'
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u
           PurchasesSubscriptionsRevoke'{..}
-          = go _psrQuotaUser (Just _psrPrettyPrint)
-              _psrPackageName
+          = go _psrPackageName _psrSubscriptionId _psrToken
+              _psrQuotaUser
+              (Just _psrPrettyPrint)
               _psrUserIP
-              _psrToken
+              _psrFields
               _psrKey
               _psrOAuthToken
-              _psrSubscriptionId
-              _psrFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -58,20 +58,19 @@ type ObjectsPatchResource =
        Capture "bucket" Text :>
          "o" :>
            Capture "object" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "ifMetagenerationMatch" Word64 :>
+             QueryParam "generation" Word64 :>
+               QueryParam "ifGenerationMatch" Word64 :>
                  QueryParam "ifGenerationNotMatch" Word64 :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "ifGenerationMatch" Word64 :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "ifMetagenerationNotMatch" Word64 :>
-                             QueryParam "projection"
-                               StorageObjectsPatchProjection
-                               :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "generation" Word64 :>
-                                   QueryParam "fields" Text :>
+                   QueryParam "ifMetagenerationMatch" Word64 :>
+                     QueryParam "ifMetagenerationNotMatch" Word64 :>
+                       QueryParam "projection" StorageObjectsPatchProjection
+                         :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        ReqBody '[JSON] Object :>
                                          Patch '[JSON] Object
@@ -247,19 +246,19 @@ instance GoogleRequest ObjectsPatch' where
         type Rs ObjectsPatch' = Object
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectsPatch'{..}
-          = go _opQuotaUser _opIfMetagenerationMatch
+          = go _opGeneration _opIfGenerationMatch
               _opIfGenerationNotMatch
-              (Just _opPrettyPrint)
-              _opIfGenerationMatch
-              _opUserIP
-              _opBucket
-              _opKey
+              _opIfMetagenerationMatch
               _opIfMetagenerationNotMatch
-              _opObject
               _opProjection
-              _opOAuthToken
-              _opGeneration
+              _opBucket
+              _opObject
+              _opQuotaUser
+              (Just _opPrettyPrint)
+              _opUserIP
               _opFields
+              _opKey
+              _opOAuthToken
               (Just AltJSON)
               _opObject
           where go

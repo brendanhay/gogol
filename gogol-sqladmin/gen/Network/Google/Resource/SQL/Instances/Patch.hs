@@ -57,9 +57,9 @@ type InstancesPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] DatabaseInstance :>
                              Patch '[JSON] Operation
@@ -178,12 +178,12 @@ instance GoogleRequest InstancesPatch' where
         type Rs InstancesPatch' = Operation
         request = requestWithRoute defReq sQLAdminURL
         requestWithRoute r u InstancesPatch'{..}
-          = go _ipQuotaUser (Just _ipPrettyPrint) _ipProject
+          = go _ipProject _ipInstance _ipQuotaUser
+              (Just _ipPrettyPrint)
               _ipUserIP
+              _ipFields
               _ipKey
               _ipOAuthToken
-              _ipFields
-              _ipInstance
               (Just AltJSON)
               _ipDatabaseInstance
           where go

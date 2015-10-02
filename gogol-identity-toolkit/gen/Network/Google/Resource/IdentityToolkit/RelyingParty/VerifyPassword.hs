@@ -49,9 +49,9 @@ type RelyingPartyVerifyPasswordResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON]
                        IdentitytoolkitRelyingPartyVerifyPasswordRequest
@@ -159,9 +159,9 @@ instance GoogleRequest RelyingPartyVerifyPassword'
         requestWithRoute r u RelyingPartyVerifyPassword'{..}
           = go _rpvpQuotaUser (Just _rpvpPrettyPrint)
               _rpvpUserIP
+              _rpvpFields
               _rpvpKey
               _rpvpOAuthToken
-              _rpvpFields
               (Just AltJSON)
               _rpvpIdentitytoolkitRelyingPartyVerifyPasswordRequest
           where go

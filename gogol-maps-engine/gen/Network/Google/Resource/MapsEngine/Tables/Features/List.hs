@@ -58,22 +58,22 @@ type TablesFeaturesListResource =
        Capture "id" Text :>
          "features" :>
            QueryParam "include" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "where" Text :>
+             QueryParam "intersects" Text :>
+               QueryParam "limit" Word32 :>
+                 QueryParam "maxResults" Word32 :>
                    QueryParam "orderBy" Text :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "select" Text :>
                          QueryParam "version"
                            MapsEngineTablesFeaturesListVersion
                            :>
-                           QueryParam "limit" Word32 :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "select" Text :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "intersects" Text :>
-                                     QueryParam "maxResults" Word32 :>
-                                       QueryParam "fields" Text :>
+                           QueryParam "where" Text :>
+                             QueryParam "quotaUser" Text :>
+                               QueryParam "prettyPrint" Bool :>
+                                 QueryParam "userIp" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "key" Key :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] FeaturesListResponse
 
@@ -257,20 +257,20 @@ instance GoogleRequest TablesFeaturesList' where
         type Rs TablesFeaturesList' = FeaturesListResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u TablesFeaturesList'{..}
-          = go _tflInclude _tflQuotaUser (Just _tflPrettyPrint)
-              _tflWhere
+          = go _tflInclude _tflIntersects _tflLimit
+              _tflMaxResults
               _tflOrderBy
-              _tflUserIP
-              _tflKey
-              _tflVersion
-              _tflId
-              _tflLimit
               _tflPageToken
               _tflSelect
-              _tflOAuthToken
-              _tflIntersects
-              _tflMaxResults
+              _tflVersion
+              _tflWhere
+              _tflId
+              _tflQuotaUser
+              (Just _tflPrettyPrint)
+              _tflUserIP
               _tflFields
+              _tflKey
+              _tflOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

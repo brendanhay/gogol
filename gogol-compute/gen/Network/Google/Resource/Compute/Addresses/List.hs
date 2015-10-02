@@ -54,15 +54,15 @@ type AddressesListResource =
        "regions" :>
          Capture "region" Text :>
            "addresses" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "filter" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
+             QueryParam "filter" Text :>
+               QueryParam "maxResults" Word32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] AddressList
 
@@ -204,15 +204,15 @@ instance GoogleRequest AddressesList' where
         type Rs AddressesList' = AddressList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u AddressesList'{..}
-          = go _alQuotaUser (Just _alPrettyPrint) _alProject
-              _alUserIP
-              _alKey
-              _alFilter
+          = go _alFilter (Just _alMaxResults) _alPageToken
+              _alProject
               _alRegion
-              _alPageToken
-              _alOAuthToken
-              (Just _alMaxResults)
+              _alQuotaUser
+              (Just _alPrettyPrint)
+              _alUserIP
               _alFields
+              _alKey
+              _alOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

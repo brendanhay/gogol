@@ -51,13 +51,13 @@ type CreativeGroupsPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "creativeGroups" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "id" Int64 :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] CreativeGroup :>
                              Patch '[JSON] CreativeGroup
@@ -176,12 +176,12 @@ instance GoogleRequest CreativeGroupsPatch' where
         type Rs CreativeGroupsPatch' = CreativeGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeGroupsPatch'{..}
-          = go _cgpQuotaUser (Just _cgpPrettyPrint) _cgpUserIP
-              _cgpProfileId
-              _cgpKey
-              (Just _cgpId)
-              _cgpOAuthToken
+          = go _cgpProfileId (Just _cgpId) _cgpQuotaUser
+              (Just _cgpPrettyPrint)
+              _cgpUserIP
               _cgpFields
+              _cgpKey
+              _cgpOAuthToken
               (Just AltJSON)
               _cgpCreativeGroup
           where go

@@ -57,9 +57,9 @@ type CommentsApproveResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Post '[JSON] Comment
 
 -- | Marks a comment as not spam.
@@ -170,13 +170,12 @@ instance GoogleRequest CommentsApprove' where
         type Rs CommentsApprove' = Comment
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u CommentsApprove'{..}
-          = go _caQuotaUser (Just _caPrettyPrint) _caUserIP
-              _caBlogId
-              _caKey
-              _caPostId
-              _caOAuthToken
-              _caCommentId
+          = go _caBlogId _caPostId _caCommentId _caQuotaUser
+              (Just _caPrettyPrint)
+              _caUserIP
               _caFields
+              _caKey
+              _caOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

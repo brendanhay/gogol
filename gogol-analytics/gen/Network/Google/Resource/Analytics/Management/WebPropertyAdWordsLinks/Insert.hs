@@ -57,9 +57,9 @@ type ManagementWebPropertyAdWordsLinksInsertResource
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] EntityAdWordsLink :>
                                  Post '[JSON] EntityAdWordsLink
@@ -188,13 +188,13 @@ instance GoogleRequest
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
           ManagementWebPropertyAdWordsLinksInsert'{..}
-          = go _mwpawliQuotaUser (Just _mwpawliPrettyPrint)
-              _mwpawliWebPropertyId
+          = go _mwpawliAccountId _mwpawliWebPropertyId
+              _mwpawliQuotaUser
+              (Just _mwpawliPrettyPrint)
               _mwpawliUserIP
-              _mwpawliAccountId
+              _mwpawliFields
               _mwpawliKey
               _mwpawliOAuthToken
-              _mwpawliFields
               (Just AltJSON)
               _mwpawliEntityAdWordsLink
           where go

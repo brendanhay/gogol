@@ -56,9 +56,9 @@ type RepliesDeleteResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a reply.
@@ -174,13 +174,13 @@ instance GoogleRequest RepliesDelete' where
         type Rs RepliesDelete' = ()
         request = requestWithRoute defReq driveURL
         requestWithRoute r u RepliesDelete'{..}
-          = go _rddQuotaUser (Just _rddPrettyPrint) _rddUserIP
-              _rddKey
-              _rddReplyId
-              _rddFileId
-              _rddOAuthToken
-              _rddCommentId
+          = go _rddFileId _rddCommentId _rddReplyId
+              _rddQuotaUser
+              (Just _rddPrettyPrint)
+              _rddUserIP
               _rddFields
+              _rddKey
+              _rddOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

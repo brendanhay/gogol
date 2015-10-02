@@ -48,9 +48,9 @@ type FlagsListResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] FlagsListResponse
 
@@ -135,9 +135,9 @@ instance GoogleRequest FlagsList' where
         request = requestWithRoute defReq sQLAdminURL
         requestWithRoute r u FlagsList'{..}
           = go _flQuotaUser (Just _flPrettyPrint) _flUserIP
+              _flFields
               _flKey
               _flOAuthToken
-              _flFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy FlagsListResource)

@@ -59,17 +59,17 @@ type ProjectsSubscriptionsModifyPushConfigResource =
      "v1beta2" :>
        "{+subscription}:modifyPushConfig" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] ModifyPushConfigRequest :>
                                      Post '[JSON] Empty
@@ -245,18 +245,17 @@ instance GoogleRequest
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u
           ProjectsSubscriptionsModifyPushConfig'{..}
-          = go _psmpcXgafv _psmpcQuotaUser
-              (Just _psmpcPrettyPrint)
-              _psmpcUploadProtocol
+          = go _psmpcXgafv _psmpcAccessToken _psmpcBearerToken
+              _psmpcCallback
               (Just _psmpcPp)
-              _psmpcAccessToken
               _psmpcUploadType
-              _psmpcBearerToken
+              _psmpcUploadProtocol
+              _psmpcSubscription
+              _psmpcQuotaUser
+              (Just _psmpcPrettyPrint)
+              _psmpcFields
               _psmpcKey
               _psmpcOAuthToken
-              _psmpcSubscription
-              _psmpcFields
-              _psmpcCallback
               (Just AltJSON)
               _psmpcModifyPushConfigRequest
           where go

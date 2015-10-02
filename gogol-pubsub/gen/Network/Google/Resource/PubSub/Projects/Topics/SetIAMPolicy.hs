@@ -56,17 +56,17 @@ type ProjectsTopicsSetIAMPolicyResource =
      "v1beta2" :>
        "{+resource}:setIamPolicy" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] SetIAMPolicyRequest :>
                                      Post '[JSON] Policy
@@ -238,18 +238,17 @@ instance GoogleRequest ProjectsTopicsSetIAMPolicy'
         type Rs ProjectsTopicsSetIAMPolicy' = Policy
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u ProjectsTopicsSetIAMPolicy'{..}
-          = go _ptsipXgafv _ptsipQuotaUser
-              (Just _ptsipPrettyPrint)
-              _ptsipUploadProtocol
-              (Just _ptsipPp)
-              _ptsipAccessToken
-              _ptsipUploadType
-              _ptsipBearerToken
-              _ptsipKey
-              _ptsipResource
-              _ptsipOAuthToken
-              _ptsipFields
+          = go _ptsipXgafv _ptsipAccessToken _ptsipBearerToken
               _ptsipCallback
+              (Just _ptsipPp)
+              _ptsipUploadType
+              _ptsipUploadProtocol
+              _ptsipResource
+              _ptsipQuotaUser
+              (Just _ptsipPrettyPrint)
+              _ptsipFields
+              _ptsipKey
+              _ptsipOAuthToken
               (Just AltJSON)
               _ptsipSetIAMPolicyRequest
           where go

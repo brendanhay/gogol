@@ -51,15 +51,15 @@ type TargetVPNGatewaysAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
          "targetVpnGateways" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "filter" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] TargetVPNGatewayAggregatedList
 
@@ -202,15 +202,15 @@ instance GoogleRequest
         request = requestWithRoute defReq computeURL
         requestWithRoute r u
           TargetVPNGatewaysAggregatedList'{..}
-          = go _tvgalQuotaUser (Just _tvgalPrettyPrint)
-              _tvgalProject
-              _tvgalUserIP
-              _tvgalKey
-              _tvgalFilter
+          = go _tvgalFilter (Just _tvgalMaxResults)
               _tvgalPageToken
-              _tvgalOAuthToken
-              (Just _tvgalMaxResults)
+              _tvgalProject
+              _tvgalQuotaUser
+              (Just _tvgalPrettyPrint)
+              _tvgalUserIP
               _tvgalFields
+              _tvgalKey
+              _tvgalOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

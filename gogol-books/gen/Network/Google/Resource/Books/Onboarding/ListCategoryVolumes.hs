@@ -51,19 +51,19 @@ import           Network.Google.Prelude
 type OnboardingListCategoryVolumesResource =
      "onboarding" :>
        "listCategoryVolumes" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "locale" Text :>
-                 QueryParam "maxAllowedMaturityRating"
-                   BooksOnboardingListCategoryVolumesMaxAllowedMaturityRating
-                   :>
-                   QueryParam "key" Key :>
-                     QueryParams "categoryId" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "pageSize" Word32 :>
-                             QueryParam "fields" Text :>
+         QueryParams "categoryId" Text :>
+           QueryParam "locale" Text :>
+             QueryParam "maxAllowedMaturityRating"
+               BooksOnboardingListCategoryVolumesMaxAllowedMaturityRating
+               :>
+               QueryParam "pageSize" Word32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Get '[JSON] Volume2
 
 -- | List available volumes under categories for onboarding experience.
@@ -203,16 +203,16 @@ instance GoogleRequest OnboardingListCategoryVolumes'
         request = requestWithRoute defReq booksURL
         requestWithRoute r u
           OnboardingListCategoryVolumes'{..}
-          = go _olcvQuotaUser (Just _olcvPrettyPrint)
-              _olcvUserIP
-              _olcvLocale
+          = go _olcvCategoryId _olcvLocale
               _olcvMaxAllowedMaturityRating
-              _olcvKey
-              _olcvCategoryId
-              _olcvPageToken
-              _olcvOAuthToken
               _olcvPageSize
+              _olcvPageToken
+              _olcvQuotaUser
+              (Just _olcvPrettyPrint)
+              _olcvUserIP
               _olcvFields
+              _olcvKey
+              _olcvOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -53,9 +53,9 @@ type ReadgroupsetsExportResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] ExportReadGroupSetsRequest :>
                          Post '[JSON] ExportReadGroupSetsResponse
@@ -156,9 +156,9 @@ instance GoogleRequest ReadgroupsetsExport' where
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u ReadgroupsetsExport'{..}
           = go _reQuotaUser (Just _rePrettyPrint) _reUserIP
+              _reFields
               _reKey
               _reOAuthToken
-              _reFields
               (Just AltJSON)
               _reExportReadGroupSetsRequest
           where go

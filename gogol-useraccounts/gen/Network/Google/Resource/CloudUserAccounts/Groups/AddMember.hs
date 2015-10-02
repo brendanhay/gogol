@@ -55,9 +55,9 @@ type GroupsAddMemberResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] GroupsAddMemberRequest :>
                                Post '[JSON] Operation
@@ -176,12 +176,12 @@ instance GoogleRequest GroupsAddMember' where
         type Rs GroupsAddMember' = Operation
         request = requestWithRoute defReq userAccountsURL
         requestWithRoute r u GroupsAddMember'{..}
-          = go _gamQuotaUser (Just _gamPrettyPrint) _gamProject
+          = go _gamProject _gamGroupName _gamQuotaUser
+              (Just _gamPrettyPrint)
               _gamUserIP
-              _gamKey
-              _gamGroupName
-              _gamOAuthToken
               _gamFields
+              _gamKey
+              _gamOAuthToken
               (Just AltJSON)
               _gamGroupsAddMemberRequest
           where go

@@ -59,17 +59,17 @@ type ProjectsJobsUpdateResource =
            "jobs" :>
              Capture "jobId" Text :>
                QueryParam "$.xgafv" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "key" Key :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "callback" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "quotaUser" Text :>
+                               QueryParam "prettyPrint" Bool :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          ReqBody '[JSON] Job :> Put '[JSON] Job
 
@@ -239,18 +239,18 @@ instance GoogleRequest ProjectsJobsUpdate' where
         type Rs ProjectsJobsUpdate' = Job
         request = requestWithRoute defReq dataflowURL
         requestWithRoute r u ProjectsJobsUpdate'{..}
-          = go _pjuXgafv _pjuQuotaUser (Just _pjuPrettyPrint)
-              _pjuJobId
-              _pjuUploadProtocol
-              (Just _pjuPp)
-              _pjuAccessToken
-              _pjuUploadType
-              _pjuBearerToken
-              _pjuKey
-              _pjuProjectId
-              _pjuOAuthToken
-              _pjuFields
+          = go _pjuXgafv _pjuAccessToken _pjuBearerToken
               _pjuCallback
+              (Just _pjuPp)
+              _pjuUploadType
+              _pjuUploadProtocol
+              _pjuProjectId
+              _pjuJobId
+              _pjuQuotaUser
+              (Just _pjuPrettyPrint)
+              _pjuFields
+              _pjuKey
+              _pjuOAuthToken
               (Just AltJSON)
               _pjuJob
           where go

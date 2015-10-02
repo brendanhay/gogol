@@ -51,15 +51,15 @@ type CommentsListResource =
      "activities" :>
        Capture "activityId" Text :>
          "comments" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "sortOrder" PlusCommentsListSortOrder :>
-                   QueryParam "key" Key :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "maxResults" Word32 :>
+             QueryParam "pageToken" Text :>
+               QueryParam "sortOrder" PlusCommentsListSortOrder :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] CommentFeed
 
 -- | List all of the comments for an activity.
@@ -183,14 +183,15 @@ instance GoogleRequest CommentsList' where
         type Rs CommentsList' = CommentFeed
         request = requestWithRoute defReq plusURL
         requestWithRoute r u CommentsList'{..}
-          = go _clQuotaUser (Just _clPrettyPrint) _clUserIP
-              _clActivityId
+          = go (Just _clMaxResults) _clPageToken
               (Just _clSortOrder)
-              _clKey
-              _clPageToken
-              _clOAuthToken
-              (Just _clMaxResults)
+              _clActivityId
+              _clQuotaUser
+              (Just _clPrettyPrint)
+              _clUserIP
               _clFields
+              _clKey
+              _clOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -50,13 +50,13 @@ type UsersSessionsDeleteResource =
      Capture "userId" Text :>
        "sessions" :>
          Capture "sessionId" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "currentTimeMillis" Int64 :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "currentTimeMillis" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a session specified by the given session ID.
@@ -173,13 +173,13 @@ instance GoogleRequest UsersSessionsDelete' where
         type Rs UsersSessionsDelete' = ()
         request = requestWithRoute defReq fitnessURL
         requestWithRoute r u UsersSessionsDelete'{..}
-          = go _usdQuotaUser (Just _usdPrettyPrint) _usdUserIP
-              _usdUserId
-              _usdKey
-              _usdCurrentTimeMillis
-              _usdOAuthToken
-              _usdSessionId
+          = go _usdCurrentTimeMillis _usdUserId _usdSessionId
+              _usdQuotaUser
+              (Just _usdPrettyPrint)
+              _usdUserIP
               _usdFields
+              _usdKey
+              _usdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

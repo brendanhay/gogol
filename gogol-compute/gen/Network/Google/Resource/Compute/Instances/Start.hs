@@ -57,9 +57,9 @@ type InstancesStartResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | This method starts an instance that was stopped using the using the
@@ -176,14 +176,13 @@ instance GoogleRequest InstancesStart' where
         type Rs InstancesStart' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstancesStart'{..}
-          = go _insnQuotaUser (Just _insnPrettyPrint)
-              _insnProject
+          = go _insnProject _insnZone _insnInstance
+              _insnQuotaUser
+              (Just _insnPrettyPrint)
               _insnUserIP
-              _insnZone
+              _insnFields
               _insnKey
               _insnOAuthToken
-              _insnFields
-              _insnInstance
               (Just AltJSON)
           where go
                   = clientWithRoute

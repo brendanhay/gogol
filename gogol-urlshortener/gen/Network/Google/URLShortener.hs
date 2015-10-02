@@ -39,13 +39,13 @@ module Network.Google.URLShortener
 
     -- ** URL
     , URL
-    , uRL
-    , urlStatus
-    , urlKind
-    , urlCreated
-    , urlAnalytics
-    , urlLongURL
-    , urlId
+    , url
+    , uStatus
+    , uKind
+    , uCreated
+    , uAnalytics
+    , uLongURL
+    , uId
 
     -- ** StringCount
     , StringCount
@@ -80,7 +80,7 @@ module Network.Google.URLShortener
 
     -- ** URLHistory
     , URLHistory
-    , uRLHistory
+    , urlHistory
     , uhTotalItems
     , uhNextPageToken
     , uhItemsPerPage

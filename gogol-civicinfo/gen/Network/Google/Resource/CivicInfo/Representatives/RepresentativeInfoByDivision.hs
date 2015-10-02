@@ -51,19 +51,19 @@ type RepresentativesRepresentativeInfoByDivisionResource
      =
      "representatives" :>
        Capture "ocdId" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParams "roles"
-             CivicInfoRepresentativesRepresentativeInfoByDivisionRoles
-             :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "recursive" Bool :>
-                     QueryParams "levels"
-                       CivicInfoRepresentativesRepresentativeInfoByDivisionLevels
-                       :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+         QueryParams "levels"
+           CivicInfoRepresentativesRepresentativeInfoByDivisionLevels
+           :>
+           QueryParam "recursive" Bool :>
+             QueryParams "roles"
+               CivicInfoRepresentativesRepresentativeInfoByDivisionRoles
+               :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] RepresentativeInfoData
 
@@ -200,15 +200,14 @@ instance GoogleRequest
         request = requestWithRoute defReq civicInfoURL
         requestWithRoute r u
           RepresentativesRepresentativeInfoByDivision'{..}
-          = go _rribdQuotaUser _rribdRoles
+          = go _rribdLevels _rribdRecursive _rribdRoles
+              _rribdOcdId
+              _rribdQuotaUser
               (Just _rribdPrettyPrint)
               _rribdUserIP
-              _rribdKey
-              _rribdRecursive
-              _rribdOcdId
-              _rribdLevels
-              _rribdOAuthToken
               _rribdFields
+              _rribdKey
+              _rribdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

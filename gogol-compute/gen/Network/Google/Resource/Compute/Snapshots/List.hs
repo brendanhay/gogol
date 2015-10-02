@@ -52,15 +52,15 @@ type SnapshotsListResource =
      Capture "project" Text :>
        "global" :>
          "snapshots" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "filter" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] SnapshotList
 
@@ -193,14 +193,14 @@ instance GoogleRequest SnapshotsList' where
         type Rs SnapshotsList' = SnapshotList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u SnapshotsList'{..}
-          = go _slQuotaUser (Just _slPrettyPrint) _slProject
+          = go _slFilter (Just _slMaxResults) _slPageToken
+              _slProject
+              _slQuotaUser
+              (Just _slPrettyPrint)
               _slUserIP
-              _slKey
-              _slFilter
-              _slPageToken
-              _slOAuthToken
-              (Just _slMaxResults)
               _slFields
+              _slKey
+              _slOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

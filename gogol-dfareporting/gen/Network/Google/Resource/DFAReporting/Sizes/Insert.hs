@@ -52,9 +52,9 @@ type SizesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Size :> Post '[JSON] Size
 
@@ -156,11 +156,11 @@ instance GoogleRequest SizesInsert' where
         type Rs SizesInsert' = Size
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u SizesInsert'{..}
-          = go _sQuotaUser (Just _sPrettyPrint) _sUserIP
-              _sProfileId
+          = go _sProfileId _sQuotaUser (Just _sPrettyPrint)
+              _sUserIP
+              _sFields
               _sKey
               _sOAuthToken
-              _sFields
               (Just AltJSON)
               _sSize
           where go

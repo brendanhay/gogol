@@ -60,21 +60,22 @@ type EventsInstancesResource =
          "events" :>
            Capture "eventId" Text :>
              "instances" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "timeMin" UTCTime :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "showDeleted" Bool :>
-                         QueryParam "originalStart" Text :>
-                           QueryParam "maxAttendees" Int32 :>
-                             QueryParam "key" Key :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "timeZone" Text :>
-                                   QueryParam "oauth_token" OAuthToken :>
-                                     QueryParam "maxResults" Int32 :>
-                                       QueryParam "alwaysIncludeEmail" Bool :>
-                                         QueryParam "timeMax" UTCTime :>
-                                           QueryParam "fields" Text :>
+               QueryParam "alwaysIncludeEmail" Bool :>
+                 QueryParam "maxAttendees" Int32 :>
+                   QueryParam "maxResults" Int32 :>
+                     QueryParam "originalStart" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "showDeleted" Bool :>
+                           QueryParam "timeMax" UTCTime :>
+                             QueryParam "timeMin" UTCTime :>
+                               QueryParam "timeZone" Text :>
+                                 QueryParam "quotaUser" Text :>
+                                   QueryParam "prettyPrint" Bool :>
+                                     QueryParam "userIp" Text :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "key" Key :>
+                                           QueryParam "oauth_token" OAuthToken
+                                             :>
                                              QueryParam "alt" AltJSON :>
                                                Get '[JSON] Events
 
@@ -281,21 +282,22 @@ instance GoogleRequest EventsInstances' where
         type Rs EventsInstances' = Events
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u EventsInstances'{..}
-          = go _eiQuotaUser _eiCalendarId (Just _eiPrettyPrint)
-              _eiTimeMin
-              _eiUserIP
-              _eiShowDeleted
-              _eiOriginalStart
-              _eiMaxAttendees
-              _eiKey
-              _eiPageToken
-              _eiTimeZone
-              _eiOAuthToken
+          = go _eiAlwaysIncludeEmail _eiMaxAttendees
               _eiMaxResults
-              _eiAlwaysIncludeEmail
+              _eiOriginalStart
+              _eiPageToken
+              _eiShowDeleted
               _eiTimeMax
+              _eiTimeMin
+              _eiTimeZone
+              _eiCalendarId
               _eiEventId
+              _eiQuotaUser
+              (Just _eiPrettyPrint)
+              _eiUserIP
               _eiFields
+              _eiKey
+              _eiOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -304,7 +304,7 @@ instance ToJSON RestDescriptionMethods where
         toJSON = const (Object mempty)
 
 --
--- /See:/ 'jSONSchemaVariantMap' smart constructor.
+-- /See:/ 'jsonSchemaVariantMap' smart constructor.
 data JSONSchemaVariantMap = JSONSchemaVariantMap
     { _jsvmRef       :: !(Maybe Text)
     , _jsvmTypeValue :: !(Maybe Text)
@@ -317,9 +317,9 @@ data JSONSchemaVariantMap = JSONSchemaVariantMap
 -- * 'jsvmRef'
 --
 -- * 'jsvmTypeValue'
-jSONSchemaVariantMap
+jsonSchemaVariantMap
     :: JSONSchemaVariantMap
-jSONSchemaVariantMap =
+jsonSchemaVariantMap =
     JSONSchemaVariantMap
     { _jsvmRef = Nothing
     , _jsvmTypeValue = Nothing
@@ -590,7 +590,7 @@ instance ToJSON RestResourceMethods where
 -- how to interpret the entire entity. Its value must exist in a map of
 -- descriminant values to schema names.
 --
--- /See:/ 'jSONSchemaVariant' smart constructor.
+-- /See:/ 'jsonSchemaVariant' smart constructor.
 data JSONSchemaVariant = JSONSchemaVariant
     { _jsvDiscriminant :: !(Maybe Text)
     , _jsvMap          :: !(Maybe [JSONSchemaVariantMap])
@@ -603,9 +603,9 @@ data JSONSchemaVariant = JSONSchemaVariant
 -- * 'jsvDiscriminant'
 --
 -- * 'jsvMap'
-jSONSchemaVariant
+jsonSchemaVariant
     :: JSONSchemaVariant
-jSONSchemaVariant =
+jsonSchemaVariant =
     JSONSchemaVariant
     { _jsvDiscriminant = Nothing
     , _jsvMap = Nothing
@@ -1066,7 +1066,7 @@ instance ToJSON RestDescription where
                   ("description" .=) <$> _rdDescription])
 
 --
--- /See:/ 'jSONSchema' smart constructor.
+-- /See:/ 'jsonSchema' smart constructor.
 data JSONSchema = JSONSchema
     { _jsAnnotations          :: !(Maybe JSONSchemaAnnotations)
     , _jsVariant              :: !(Maybe JSONSchemaVariant)
@@ -1133,9 +1133,9 @@ data JSONSchema = JSONSchema
 -- * 'jsDescription'
 --
 -- * 'jsProperties'
-jSONSchema
+jsonSchema
     :: JSONSchema
-jSONSchema =
+jsonSchema =
     JSONSchema
     { _jsAnnotations = Nothing
     , _jsVariant = Nothing
@@ -1593,7 +1593,7 @@ instance ToJSON DirectoryListItems where
 
 -- | Additional information about this property.
 --
--- /See:/ 'jSONSchemaAnnotations' smart constructor.
+-- /See:/ 'jsonSchemaAnnotations' smart constructor.
 newtype JSONSchemaAnnotations = JSONSchemaAnnotations
     { _jsaRequired :: Maybe [Text]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1603,9 +1603,9 @@ newtype JSONSchemaAnnotations = JSONSchemaAnnotations
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'jsaRequired'
-jSONSchemaAnnotations
+jsonSchemaAnnotations
     :: JSONSchemaAnnotations
-jSONSchemaAnnotations =
+jsonSchemaAnnotations =
     JSONSchemaAnnotations
     { _jsaRequired = Nothing
     }
@@ -1632,16 +1632,16 @@ instance ToJSON JSONSchemaAnnotations where
 -- | If this is a schema for an object, list the schema for each property of
 -- this object.
 --
--- /See:/ 'jSONSchemaProperties' smart constructor.
+-- /See:/ 'jsonSchemaProperties' smart constructor.
 data JSONSchemaProperties =
     JSONSchemaProperties
     deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JSONSchemaProperties' with the minimum fields required to make a request.
 --
-jSONSchemaProperties
+jsonSchemaProperties
     :: JSONSchemaProperties
-jSONSchemaProperties = JSONSchemaProperties
+jsonSchemaProperties = JSONSchemaProperties
 
 instance FromJSON JSONSchemaProperties where
         parseJSON

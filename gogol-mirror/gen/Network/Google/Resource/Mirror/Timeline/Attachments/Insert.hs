@@ -52,9 +52,9 @@ type TimelineAttachmentsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Post '[JSON] Attachment
 
 -- | Adds a new attachment to a timeline item.
@@ -159,12 +159,12 @@ instance GoogleRequest TimelineAttachmentsInsert'
         type Rs TimelineAttachmentsInsert' = Attachment
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u TimelineAttachmentsInsert'{..}
-          = go _taiQuotaUser (Just _taiPrettyPrint) _taiUserIP
-              _taiItemId
-              _taiMedia
+          = go _taiMedia _taiItemId _taiQuotaUser
+              (Just _taiPrettyPrint)
+              _taiUserIP
+              _taiFields
               _taiKey
               _taiOAuthToken
-              _taiFields
               (Just AltJSON)
           where go
                   = clientWithRoute

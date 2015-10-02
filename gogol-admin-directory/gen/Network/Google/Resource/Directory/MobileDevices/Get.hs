@@ -52,15 +52,15 @@ type MobileDevicesGetResource =
          "devices" :>
            "mobile" :>
              Capture "resourceId" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "projection"
-                         DirectoryMobileDevicesGetProjection
-                         :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+               QueryParam "projection"
+                 DirectoryMobileDevicesGetProjection
+                 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] MobileDevice
 
@@ -179,14 +179,13 @@ instance GoogleRequest MobileDevicesGet' where
         type Rs MobileDevicesGet' = MobileDevice
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u MobileDevicesGet'{..}
-          = go _mdgQuotaUser _mdgResourceId
+          = go _mdgProjection _mdgCustomerId _mdgResourceId
+              _mdgQuotaUser
               (Just _mdgPrettyPrint)
               _mdgUserIP
-              _mdgCustomerId
-              _mdgKey
-              _mdgProjection
-              _mdgOAuthToken
               _mdgFields
+              _mdgKey
+              _mdgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

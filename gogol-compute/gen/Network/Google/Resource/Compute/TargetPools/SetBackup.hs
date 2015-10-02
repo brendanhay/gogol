@@ -55,13 +55,13 @@ type TargetPoolsSetBackupResource =
            "targetPools" :>
              Capture "targetPool" Text :>
                "setBackup" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "failoverRatio" Float :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                 QueryParam "failoverRatio" Float :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] TargetReference :>
                                    Post '[JSON] Operation
@@ -202,15 +202,14 @@ instance GoogleRequest TargetPoolsSetBackup' where
         type Rs TargetPoolsSetBackup' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u TargetPoolsSetBackup'{..}
-          = go _tpsbQuotaUser (Just _tpsbPrettyPrint)
-              _tpsbProject
+          = go _tpsbFailoverRatio _tpsbProject _tpsbRegion
               _tpsbTargetPool
+              _tpsbQuotaUser
+              (Just _tpsbPrettyPrint)
               _tpsbUserIP
-              _tpsbKey
-              _tpsbFailoverRatio
-              _tpsbRegion
-              _tpsbOAuthToken
               _tpsbFields
+              _tpsbKey
+              _tpsbOAuthToken
               (Just AltJSON)
               _tpsbTargetReference
           where go

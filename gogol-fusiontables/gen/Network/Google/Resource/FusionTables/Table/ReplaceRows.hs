@@ -55,17 +55,17 @@ type TableReplaceRowsResource =
      "tables" :>
        Capture "tableId" Text :>
          "replace" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "startLine" Int32 :>
-                   QueryParam "endLine" Int32 :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "delimiter" Text :>
-                           QueryParam "encoding" Text :>
-                             QueryParam "isStrict" Bool :>
-                               QueryParam "fields" Text :>
+           QueryParam "delimiter" Text :>
+             QueryParam "encoding" Text :>
+               QueryParam "endLine" Int32 :>
+                 QueryParam "isStrict" Bool :>
+                   QueryParam "startLine" Int32 :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :> Post '[JSON] Task
 
 -- | Replaces rows of an existing table. Current rows remain visible until
@@ -224,17 +224,17 @@ instance GoogleRequest TableReplaceRows' where
         type Rs TableReplaceRows' = Task
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TableReplaceRows'{..}
-          = go _trrQuotaUser (Just _trrPrettyPrint) _trrUserIP
-              _trrStartLine
-              _trrEndLine
+          = go _trrDelimiter _trrEncoding _trrEndLine
+              _trrIsStrict
               _trrMedia
+              _trrStartLine
+              _trrTableId
+              _trrQuotaUser
+              (Just _trrPrettyPrint)
+              _trrUserIP
+              _trrFields
               _trrKey
               _trrOAuthToken
-              _trrTableId
-              _trrDelimiter
-              _trrEncoding
-              _trrIsStrict
-              _trrFields
               (Just AltJSON)
           where go
                   = clientWithRoute

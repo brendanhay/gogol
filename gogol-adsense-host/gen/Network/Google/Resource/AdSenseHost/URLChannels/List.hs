@@ -26,7 +26,7 @@ module Network.Google.Resource.AdSenseHost.URLChannels.List
       URLChannelsListResource
 
     -- * Creating a Request
-    , uRLChannelsList'
+    , urlChannelsList'
     , URLChannelsList'
 
     -- * Request Lenses
@@ -50,19 +50,19 @@ type URLChannelsListResource =
      "adclients" :>
        Capture "adClientId" Text :>
          "urlchannels" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "maxResults" Word32 :>
-                         QueryParam "fields" Text :>
+           QueryParam "maxResults" Word32 :>
+             QueryParam "pageToken" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] URLChannels
 
 -- | List all host URL channels in the host AdSense account.
 --
--- /See:/ 'uRLChannelsList'' smart constructor.
+-- /See:/ 'urlChannelsList'' smart constructor.
 data URLChannelsList' = URLChannelsList'
     { _uclQuotaUser   :: !(Maybe Text)
     , _uclPrettyPrint :: !Bool
@@ -96,10 +96,10 @@ data URLChannelsList' = URLChannelsList'
 -- * 'uclMaxResults'
 --
 -- * 'uclFields'
-uRLChannelsList'
+urlChannelsList'
     :: Text -- ^ 'adClientId'
     -> URLChannelsList'
-uRLChannelsList' pUclAdClientId_ =
+urlChannelsList' pUclAdClientId_ =
     URLChannelsList'
     { _uclQuotaUser = Nothing
     , _uclPrettyPrint = True
@@ -176,13 +176,13 @@ instance GoogleRequest URLChannelsList' where
         type Rs URLChannelsList' = URLChannels
         request = requestWithRoute defReq adSenseHostURL
         requestWithRoute r u URLChannelsList'{..}
-          = go _uclQuotaUser (Just _uclPrettyPrint) _uclUserIP
-              _uclAdClientId
-              _uclKey
-              _uclPageToken
-              _uclOAuthToken
-              _uclMaxResults
+          = go _uclMaxResults _uclPageToken _uclAdClientId
+              _uclQuotaUser
+              (Just _uclPrettyPrint)
+              _uclUserIP
               _uclFields
+              _uclKey
+              _uclOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

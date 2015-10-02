@@ -20,7 +20,7 @@ import           Network.Google.SQLAdmin.Types.Sum
 
 -- | SslCerts Resource
 --
--- /See:/ 'sSLCert' smart constructor.
+-- /See:/ 'sslCert' smart constructor.
 data SSLCert = SSLCert
     { _scCommonName       :: !(Maybe Text)
     , _scKind             :: !Text
@@ -54,9 +54,9 @@ data SSLCert = SSLCert
 -- * 'scCreateTime'
 --
 -- * 'scInstance'
-sSLCert
+sslCert
     :: SSLCert
-sSLCert =
+sslCert =
     SSLCert
     { _scCommonName = Nothing
     , _scKind = "sql#sslCert"
@@ -630,7 +630,7 @@ instance ToJSON Settings where
 
 -- | SslCerts create ephemeral certificate request.
 --
--- /See:/ 'sSLCertsCreateEphemeralRequest' smart constructor.
+-- /See:/ 'sslCertsCreateEphemeralRequest' smart constructor.
 newtype SSLCertsCreateEphemeralRequest = SSLCertsCreateEphemeralRequest
     { _sccerPublicKey :: Maybe Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -640,9 +640,9 @@ newtype SSLCertsCreateEphemeralRequest = SSLCertsCreateEphemeralRequest
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'sccerPublicKey'
-sSLCertsCreateEphemeralRequest
+sslCertsCreateEphemeralRequest
     :: SSLCertsCreateEphemeralRequest
-sSLCertsCreateEphemeralRequest =
+sslCertsCreateEphemeralRequest =
     SSLCertsCreateEphemeralRequest
     { _sccerPublicKey = Nothing
     }
@@ -778,7 +778,7 @@ instance ToJSON Database where
 
 -- | Database instance IP Mapping.
 --
--- /See:/ 'iPMapping' smart constructor.
+-- /See:/ 'ipMapping' smart constructor.
 data IPMapping = IPMapping
     { _imIPAddress    :: !(Maybe Text)
     , _imTimeToRetire :: !(Maybe UTCTime)
@@ -791,9 +791,9 @@ data IPMapping = IPMapping
 -- * 'imIPAddress'
 --
 -- * 'imTimeToRetire'
-iPMapping
+ipMapping
     :: IPMapping
-iPMapping =
+ipMapping =
     IPMapping
     { _imIPAddress = Nothing
     , _imTimeToRetire = Nothing
@@ -1348,7 +1348,7 @@ instance ToJSON OperationErrors where
 
 -- | SslCerts list response.
 --
--- /See:/ 'sSLCertsListResponse' smart constructor.
+-- /See:/ 'sslCertsListResponse' smart constructor.
 data SSLCertsListResponse = SSLCertsListResponse
     { _sclrKind  :: !Text
     , _sclrItems :: !(Maybe [SSLCert])
@@ -1361,9 +1361,9 @@ data SSLCertsListResponse = SSLCertsListResponse
 -- * 'sclrKind'
 --
 -- * 'sclrItems'
-sSLCertsListResponse
+sslCertsListResponse
     :: SSLCertsListResponse
-sSLCertsListResponse =
+sslCertsListResponse =
     SSLCertsListResponse
     { _sclrKind = "sql#sslCertsList"
     , _sclrItems = Nothing
@@ -1397,7 +1397,7 @@ instance ToJSON SSLCertsListResponse where
 
 -- | IP Management configuration.
 --
--- /See:/ 'iPConfiguration' smart constructor.
+-- /See:/ 'ipConfiguration' smart constructor.
 data IPConfiguration = IPConfiguration
     { _icAuthorizedNetworks :: !(Maybe [ACLEntry])
     , _icRequireSSL         :: !(Maybe Bool)
@@ -1413,9 +1413,9 @@ data IPConfiguration = IPConfiguration
 -- * 'icRequireSSL'
 --
 -- * 'icIPv4Enabled'
-iPConfiguration
+ipConfiguration
     :: IPConfiguration
-iPConfiguration =
+ipConfiguration =
     IPConfiguration
     { _icAuthorizedNetworks = Nothing
     , _icRequireSSL = Nothing
@@ -1501,7 +1501,7 @@ instance ToJSON ExportContextCSVExportOptions where
 
 -- | SslCerts insert request.
 --
--- /See:/ 'sSLCertsInsertRequest' smart constructor.
+-- /See:/ 'sslCertsInsertRequest' smart constructor.
 newtype SSLCertsInsertRequest = SSLCertsInsertRequest
     { _scirCommonName :: Maybe Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1511,9 +1511,9 @@ newtype SSLCertsInsertRequest = SSLCertsInsertRequest
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'scirCommonName'
-sSLCertsInsertRequest
+sslCertsInsertRequest
     :: SSLCertsInsertRequest
-sSLCertsInsertRequest =
+sslCertsInsertRequest =
     SSLCertsInsertRequest
     { _scirCommonName = Nothing
     }
@@ -2276,7 +2276,7 @@ instance ToJSON BackupRun where
 
 -- | An entry for an Access Control list.
 --
--- /See:/ 'aCLEntry' smart constructor.
+-- /See:/ 'aclEntry' smart constructor.
 data ACLEntry = ACLEntry
     { _aeKind           :: !Text
     , _aeValue          :: !(Maybe Text)
@@ -2295,9 +2295,9 @@ data ACLEntry = ACLEntry
 -- * 'aeName'
 --
 -- * 'aeExpirationTime'
-aCLEntry
+aclEntry
     :: ACLEntry
-aCLEntry =
+aclEntry =
     ACLEntry
     { _aeKind = "sql#aclEntry"
     , _aeValue = Nothing
@@ -2734,7 +2734,7 @@ instance ToJSON OperationError where
 
 -- | SslCertDetail.
 --
--- /See:/ 'sSLCertDetail' smart constructor.
+-- /See:/ 'sslCertDetail' smart constructor.
 data SSLCertDetail = SSLCertDetail
     { _scdCertInfo       :: !(Maybe SSLCert)
     , _scdCertPrivateKey :: !(Maybe Text)
@@ -2747,9 +2747,9 @@ data SSLCertDetail = SSLCertDetail
 -- * 'scdCertInfo'
 --
 -- * 'scdCertPrivateKey'
-sSLCertDetail
+sslCertDetail
     :: SSLCertDetail
-sSLCertDetail =
+sslCertDetail =
     SSLCertDetail
     { _scdCertInfo = Nothing
     , _scdCertPrivateKey = Nothing
@@ -2937,7 +2937,7 @@ instance ToJSON ReplicaConfiguration where
 
 -- | SslCert insert response.
 --
--- /See:/ 'sSLCertsInsertResponse' smart constructor.
+-- /See:/ 'sslCertsInsertResponse' smart constructor.
 data SSLCertsInsertResponse = SSLCertsInsertResponse
     { _scirServerCaCert :: !(Maybe SSLCert)
     , _scirKind         :: !Text
@@ -2953,9 +2953,9 @@ data SSLCertsInsertResponse = SSLCertsInsertResponse
 -- * 'scirKind'
 --
 -- * 'scirClientCert'
-sSLCertsInsertResponse
+sslCertsInsertResponse
     :: SSLCertsInsertResponse
-sSLCertsInsertResponse =
+sslCertsInsertResponse =
     SSLCertsInsertResponse
     { _scirServerCaCert = Nothing
     , _scirKind = "sql#sslCertsInsert"

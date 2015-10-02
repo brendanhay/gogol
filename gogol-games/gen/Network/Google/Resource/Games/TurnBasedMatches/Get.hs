@@ -49,14 +49,14 @@ import           Network.Google.Prelude
 type TurnBasedMatchesGetResource =
      "turnbasedmatches" :>
        Capture "matchId" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "includeMatchData" Bool :>
-                   QueryParam "language" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+         QueryParam "includeMatchData" Bool :>
+           QueryParam "language" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] TurnBasedMatch
 
@@ -173,14 +173,13 @@ instance GoogleRequest TurnBasedMatchesGet' where
         type Rs TurnBasedMatchesGet' = TurnBasedMatch
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u TurnBasedMatchesGet'{..}
-          = go _tbmgQuotaUser (Just _tbmgPrettyPrint)
+          = go _tbmgIncludeMatchData _tbmgLanguage _tbmgMatchId
+              _tbmgQuotaUser
+              (Just _tbmgPrettyPrint)
               _tbmgUserIP
-              _tbmgKey
-              _tbmgIncludeMatchData
-              _tbmgLanguage
-              _tbmgOAuthToken
-              _tbmgMatchId
               _tbmgFields
+              _tbmgKey
+              _tbmgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

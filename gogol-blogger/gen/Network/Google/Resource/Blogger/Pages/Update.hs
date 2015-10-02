@@ -53,14 +53,14 @@ type PagesUpdateResource =
        Capture "blogId" Text :>
          "pages" :>
            Capture "pageId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "revert" Bool :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "publish" Bool :>
-                           QueryParam "fields" Text :>
+             QueryParam "publish" Bool :>
+               QueryParam "revert" Bool :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Page :> Put '[JSON] Page
 
@@ -196,14 +196,13 @@ instance GoogleRequest PagesUpdate' where
         type Rs PagesUpdate' = Page
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PagesUpdate'{..}
-          = go _puuQuotaUser (Just _puuPrettyPrint) _puuUserIP
-              _puuBlogId
-              _puuPageId
-              _puuKey
-              _puuRevert
-              _puuOAuthToken
-              _puuPublish
+          = go _puuPublish _puuRevert _puuBlogId _puuPageId
+              _puuQuotaUser
+              (Just _puuPrettyPrint)
+              _puuUserIP
               _puuFields
+              _puuKey
+              _puuOAuthToken
               (Just AltJSON)
               _puuPage
           where go

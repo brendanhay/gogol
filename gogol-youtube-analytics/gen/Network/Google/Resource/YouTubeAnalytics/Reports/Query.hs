@@ -55,22 +55,22 @@ import           Network.Google.YouTubeAnalytics.Types
 -- 'ReportsQuery'' request conforms to.
 type ReportsQueryResource =
      "reports" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "metrics" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "filters" Text :>
-                 QueryParam "ids" Text :>
-                   QueryParam "end-date" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "currency" Text :>
-                         QueryParam "sort" Text :>
-                           QueryParam "dimensions" Text :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "start-index" Int32 :>
-                                 QueryParam "max-results" Int32 :>
-                                   QueryParam "start-date" Text :>
-                                     QueryParam "fields" Text :>
+       QueryParam "currency" Text :>
+         QueryParam "dimensions" Text :>
+           QueryParam "filters" Text :>
+             QueryParam "max-results" Int32 :>
+               QueryParam "sort" Text :>
+                 QueryParam "start-index" Int32 :>
+                   QueryParam "ids" Text :>
+                     QueryParam "start-date" Text :>
+                       QueryParam "end-date" Text :>
+                         QueryParam "metrics" Text :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "userIp" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] ResultTable
 
@@ -274,21 +274,20 @@ instance GoogleRequest ReportsQuery' where
         type Rs ReportsQuery' = ResultTable
         request = requestWithRoute defReq youTubeAnalyticsURL
         requestWithRoute r u ReportsQuery'{..}
-          = go _rqQuotaUser (Just _rqMetrics)
+          = go _rqCurrency _rqDimensions _rqFilters
+              _rqMaxResults
+              _rqSort
+              _rqStartIndex
+              (Just _rqIds)
+              (Just _rqStartDate)
+              (Just _rqEndDate)
+              (Just _rqMetrics)
+              _rqQuotaUser
               (Just _rqPrettyPrint)
               _rqUserIP
-              _rqFilters
-              (Just _rqIds)
-              (Just _rqEndDate)
-              _rqKey
-              _rqCurrency
-              _rqSort
-              _rqDimensions
-              _rqOAuthToken
-              _rqStartIndex
-              _rqMaxResults
-              (Just _rqStartDate)
               _rqFields
+              _rqKey
+              _rqOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -50,17 +50,16 @@ type TokenInfoMethod =
      "oauth2" :>
        "v2" :>
          "tokeninfo" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "token_handle" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" AltJSON :>
-                             QueryParam "id_token" Text :>
-                               Post '[JSON] TokenInfo
+           QueryParam "access_token" Text :>
+             QueryParam "id_token" Text :>
+               QueryParam "token_handle" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
+                             QueryParam "alt" AltJSON :> Post '[JSON] TokenInfo
 
 --
 -- /See:/ 'tokenInfo'' smart constructor.
@@ -163,13 +162,13 @@ instance GoogleRequest TokenInfo' where
         type Rs TokenInfo' = TokenInfo
         request = requestWithRoute defReq oAuth2URL
         requestWithRoute r u TokenInfo'{..}
-          = go _tQuotaUser (Just _tPrettyPrint) _tUserIP
-              _tAccessToken
+          = go _tAccessToken _tIdToken _tTokenHandle
+              _tQuotaUser
+              (Just _tPrettyPrint)
+              _tUserIP
+              _tFields
               _tKey
               _tOAuthToken
-              _tTokenHandle
-              _tFields
-              _tIdToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TokenInfoMethod) r

@@ -55,9 +55,9 @@ type InstancesPromoteReplicaResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Promotes the read replica instance to be a stand-alone Cloud SQL
@@ -164,12 +164,12 @@ instance GoogleRequest InstancesPromoteReplica' where
         type Rs InstancesPromoteReplica' = Operation
         request = requestWithRoute defReq sQLAdminURL
         requestWithRoute r u InstancesPromoteReplica'{..}
-          = go _iprQuotaUser (Just _iprPrettyPrint) _iprProject
+          = go _iprProject _iprInstance _iprQuotaUser
+              (Just _iprPrettyPrint)
               _iprUserIP
+              _iprFields
               _iprKey
               _iprOAuthToken
-              _iprFields
-              _iprInstance
               (Just AltJSON)
           where go
                   = clientWithRoute

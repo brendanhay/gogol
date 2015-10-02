@@ -48,14 +48,14 @@ import           Network.Google.Prelude
 -- 'ClientAccessInsert'' request conforms to.
 type ClientAccessInsertResource =
      "clientAccess" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "sponsorAccountId" Int32 :>
-               QueryParam "key" Key :>
-                 QueryParam "clientAccountId" Int64 :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+       QueryParam "clientAccountId" Int64 :>
+         QueryParam "sponsorAccountId" Int32 :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] ClientAccessCapabilities :>
                            Post '[JSON] ClientAccessCapabilities
@@ -172,12 +172,13 @@ instance GoogleRequest ClientAccessInsert' where
              ClientAccessCapabilities
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u ClientAccessInsert'{..}
-          = go _caiQuotaUser (Just _caiPrettyPrint) _caiUserIP
-              _caiSponsorAccountId
-              _caiKey
-              _caiClientAccountId
-              _caiOAuthToken
+          = go _caiClientAccountId _caiSponsorAccountId
+              _caiQuotaUser
+              (Just _caiPrettyPrint)
+              _caiUserIP
               _caiFields
+              _caiKey
+              _caiOAuthToken
               (Just AltJSON)
               _caiClientAccessCapabilities
           where go

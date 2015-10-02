@@ -56,17 +56,17 @@ type BeaconsRegisterResource =
      "v1beta1" :>
        "beacons:register" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] Beacon :> Post '[JSON] Beacon
 
@@ -216,16 +216,16 @@ instance GoogleRequest BeaconsRegister' where
         type Rs BeaconsRegister' = Beacon
         request = requestWithRoute defReq proximityBeaconURL
         requestWithRoute r u BeaconsRegister'{..}
-          = go _brXgafv _brQuotaUser (Just _brPrettyPrint)
-              _brUploadProtocol
+          = go _brXgafv _brAccessToken _brBearerToken
+              _brCallback
               (Just _brPp)
-              _brAccessToken
               _brUploadType
-              _brBearerToken
+              _brUploadProtocol
+              _brQuotaUser
+              (Just _brPrettyPrint)
+              _brFields
               _brKey
               _brOAuthToken
-              _brFields
-              _brCallback
               (Just AltJSON)
               _brBeacon
           where go

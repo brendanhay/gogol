@@ -47,14 +47,14 @@ import           Network.Google.Prelude
 -- 'SavedadstylesList'' request conforms to.
 type SavedadstylesListResource =
      "savedadstyles" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "maxResults" Int32 :>
-                     QueryParam "fields" Text :>
+       QueryParam "maxResults" Int32 :>
+         QueryParam "pageToken" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] SavedAdStyles
 
 -- | List all saved ad styles in the user\'s account.
@@ -158,12 +158,12 @@ instance GoogleRequest SavedadstylesList' where
         type Rs SavedadstylesList' = SavedAdStyles
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u SavedadstylesList'{..}
-          = go _slQuotaUser (Just _slPrettyPrint) _slUserIP
-              _slKey
-              _slPageToken
-              _slOAuthToken
-              _slMaxResults
+          = go _slMaxResults _slPageToken _slQuotaUser
+              (Just _slPrettyPrint)
+              _slUserIP
               _slFields
+              _slKey
+              _slOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

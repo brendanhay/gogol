@@ -26,7 +26,7 @@ module Network.Google.Resource.Calendar.ACL.Patch
       ACLPatchResource
 
     -- * Creating a Request
-    , aCLPatch'
+    , aclPatch'
     , ACLPatch'
 
     -- * Request Lenses
@@ -54,15 +54,15 @@ type ACLPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] ACLRule :> Patch '[JSON] ACLRule
 
 -- | Updates an access control rule. This method supports patch semantics.
 --
--- /See:/ 'aCLPatch'' smart constructor.
+-- /See:/ 'aclPatch'' smart constructor.
 data ACLPatch' = ACLPatch'
     { _apQuotaUser   :: !(Maybe Text)
     , _apCalendarId  :: !Text
@@ -96,12 +96,12 @@ data ACLPatch' = ACLPatch'
 -- * 'apOAuthToken'
 --
 -- * 'apFields'
-aCLPatch'
+aclPatch'
     :: Text -- ^ 'calendarId'
     -> Text -- ^ 'ruleId'
     -> ACLRule -- ^ 'ACLRule'
     -> ACLPatch'
-aCLPatch' pApCalendarId_ pApRuleId_ pApACLRule_ =
+aclPatch' pApCalendarId_ pApRuleId_ pApACLRule_ =
     ACLPatch'
     { _apQuotaUser = Nothing
     , _apCalendarId = pApCalendarId_
@@ -171,12 +171,12 @@ instance GoogleRequest ACLPatch' where
         type Rs ACLPatch' = ACLRule
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u ACLPatch'{..}
-          = go _apQuotaUser _apCalendarId (Just _apPrettyPrint)
+          = go _apCalendarId _apRuleId _apQuotaUser
+              (Just _apPrettyPrint)
               _apUserIP
-              _apRuleId
+              _apFields
               _apKey
               _apOAuthToken
-              _apFields
               (Just AltJSON)
               _apACLRule
           where go

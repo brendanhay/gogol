@@ -55,9 +55,9 @@ type ManagementWebPropertiesInsertResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] WebProperty :>
                              Post '[JSON] WebProperty
@@ -173,12 +173,12 @@ instance GoogleRequest ManagementWebPropertiesInsert'
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
           ManagementWebPropertiesInsert'{..}
-          = go _mwpiQuotaUser (Just _mwpiPrettyPrint)
+          = go _mwpiAccountId _mwpiQuotaUser
+              (Just _mwpiPrettyPrint)
               _mwpiUserIP
-              _mwpiAccountId
+              _mwpiFields
               _mwpiKey
               _mwpiOAuthToken
-              _mwpiFields
               (Just AltJSON)
               _mwpiWebProperty
           where go

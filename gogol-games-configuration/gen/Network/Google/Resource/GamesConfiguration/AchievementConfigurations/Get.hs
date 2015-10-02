@@ -51,9 +51,9 @@ type AchievementConfigurationsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] AchievementConfiguration
 
@@ -157,12 +157,12 @@ instance GoogleRequest AchievementConfigurationsGet'
           = requestWithRoute defReq gamesConfigurationURL
         requestWithRoute r u
           AchievementConfigurationsGet'{..}
-          = go _acgQuotaUser (Just _acgPrettyPrint)
-              _acgAchievementId
+          = go _acgAchievementId _acgQuotaUser
+              (Just _acgPrettyPrint)
               _acgUserIP
+              _acgFields
               _acgKey
               _acgOAuthToken
-              _acgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

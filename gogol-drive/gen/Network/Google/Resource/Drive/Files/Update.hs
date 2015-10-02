@@ -62,27 +62,28 @@ import           Network.Google.Prelude
 type FilesUpdateResource =
      "files" :>
        Capture "fileId" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "newRevision" Bool :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "pinned" Bool :>
-                   QueryParam "timedTextLanguage" Text :>
-                     QueryParam "updateViewedDate" Bool :>
+         QueryParam "addParents" Text :>
+           QueryParam "convert" Bool :>
+             QueryParam "modifiedDateBehavior"
+               DriveFilesUpdateModifiedDateBehavior
+               :>
+               QueryParam "newRevision" Bool :>
+                 QueryParam "ocr" Bool :>
+                   QueryParam "ocrLanguage" Text :>
+                     QueryParam "pinned" Bool :>
                        QueryParam "removeParents" Text :>
-                         QueryParam "modifiedDateBehavior"
-                           DriveFilesUpdateModifiedDateBehavior
-                           :>
-                           QueryParam "useContentAsIndexableText" Bool :>
+                         QueryParam "setModifiedDate" Bool :>
+                           QueryParam "timedTextLanguage" Text :>
                              QueryParam "timedTextTrackName" Text :>
-                               QueryParam "ocrLanguage" Text :>
-                                 QueryParam "key" Key :>
-                                   QueryParam "convert" Bool :>
-                                     QueryParam "setModifiedDate" Bool :>
-                                       QueryParam "oauth_token" OAuthToken :>
-                                         QueryParam "addParents" Text :>
-                                           QueryParam "ocr" Bool :>
-                                             QueryParam "fields" Text :>
+                               QueryParam "updateViewedDate" Bool :>
+                                 QueryParam "useContentAsIndexableText" Bool :>
+                                   QueryParam "quotaUser" Text :>
+                                     QueryParam "prettyPrint" Bool :>
+                                       QueryParam "userIp" Text :>
+                                         QueryParam "fields" Text :>
+                                           QueryParam "key" Key :>
+                                             QueryParam "oauth_token" OAuthToken
+                                               :>
                                                QueryParam "alt" AltJSON :>
                                                  MultipartRelated '[JSON] File
                                                    Body
@@ -327,26 +328,25 @@ instance GoogleRequest FilesUpdate' where
         type Rs FilesUpdate' = File
         request = requestWithRoute defReq driveURL
         requestWithRoute r u FilesUpdate'{..}
-          = go _fuQuotaUser (Just _fuNewRevision)
+          = go _fuAddParents (Just _fuConvert) _fuMedia
+              _fuModifiedDateBehavior
+              (Just _fuNewRevision)
+              (Just _fuOCR)
+              _fuOCRLanguage
+              (Just _fuPinned)
+              _fuRemoveParents
+              (Just _fuSetModifiedDate)
+              _fuTimedTextLanguage
+              _fuTimedTextTrackName
+              (Just _fuUpdateViewedDate)
+              (Just _fuUseContentAsIndexableText)
+              _fuFileId
+              _fuQuotaUser
               (Just _fuPrettyPrint)
               _fuUserIP
-              (Just _fuPinned)
-              _fuTimedTextLanguage
-              (Just _fuUpdateViewedDate)
-              _fuRemoveParents
-              _fuModifiedDateBehavior
-              (Just _fuUseContentAsIndexableText)
-              _fuMedia
-              _fuTimedTextTrackName
-              _fuOCRLanguage
-              _fuKey
-              (Just _fuConvert)
-              (Just _fuSetModifiedDate)
-              _fuFileId
-              _fuOAuthToken
-              _fuAddParents
-              (Just _fuOCR)
               _fuFields
+              _fuKey
+              _fuOAuthToken
               (Just AltJSON)
               _fuFile
           where go

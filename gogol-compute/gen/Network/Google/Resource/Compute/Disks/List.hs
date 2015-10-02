@@ -54,15 +54,15 @@ type DisksListResource =
        "zones" :>
          Capture "zone" Text :>
            "disks" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "filter" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
+             QueryParam "filter" Text :>
+               QueryParam "maxResults" Word32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Get '[JSON] DiskList
 
 -- | Retrieves the list of persistent disks contained within the specified
@@ -203,15 +203,15 @@ instance GoogleRequest DisksList' where
         type Rs DisksList' = DiskList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u DisksList'{..}
-          = go _dlQuotaUser (Just _dlPrettyPrint) _dlProject
-              _dlUserIP
+          = go _dlFilter (Just _dlMaxResults) _dlPageToken
+              _dlProject
               _dlZone
-              _dlKey
-              _dlFilter
-              _dlPageToken
-              _dlOAuthToken
-              (Just _dlMaxResults)
+              _dlQuotaUser
+              (Just _dlPrettyPrint)
+              _dlUserIP
               _dlFields
+              _dlKey
+              _dlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy DisksListResource)

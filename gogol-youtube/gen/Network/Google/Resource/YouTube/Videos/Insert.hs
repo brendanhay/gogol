@@ -53,18 +53,18 @@ import           Network.Google.YouTube.Types
 -- 'VideosInsert'' request conforms to.
 type VideosInsertResource =
      "videos" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "part" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "stabilize" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "onBehalfOfContentOwner" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                       QueryParam "notifySubscribers" Bool :>
-                         QueryParam "autoLevels" Bool :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+       QueryParam "autoLevels" Bool :>
+         QueryParam "notifySubscribers" Bool :>
+           QueryParam "onBehalfOfContentOwner" Text :>
+             QueryParam "onBehalfOfContentOwnerChannel" Text :>
+               QueryParam "stabilize" Bool :>
+                 QueryParam "part" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  MultipartRelated '[JSON] Video Body :>
                                    Post '[JSON] Video
@@ -262,18 +262,18 @@ instance GoogleRequest VideosInsert' where
         type Rs VideosInsert' = Video
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u VideosInsert'{..}
-          = go _viQuotaUser (Just _viPart)
-              (Just _viPrettyPrint)
-              _viStabilize
-              _viUserIP
-              _viMedia
-              _viOnBehalfOfContentOwner
-              _viKey
-              _viOnBehalfOfContentOwnerChannel
+          = go _viAutoLevels _viMedia
               (Just _viNotifySubscribers)
-              _viAutoLevels
-              _viOAuthToken
+              _viOnBehalfOfContentOwner
+              _viOnBehalfOfContentOwnerChannel
+              _viStabilize
+              (Just _viPart)
+              _viQuotaUser
+              (Just _viPrettyPrint)
+              _viUserIP
               _viFields
+              _viKey
+              _viOAuthToken
               (Just AltJSON)
               _viVideo
           where go

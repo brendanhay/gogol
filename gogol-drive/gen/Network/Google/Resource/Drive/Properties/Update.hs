@@ -52,13 +52,13 @@ type PropertiesUpdateResource =
        Capture "fileId" Text :>
          "properties" :>
            Capture "propertyKey" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "visibility" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+             QueryParam "visibility" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Property :> Put '[JSON] Property
 
@@ -181,14 +181,13 @@ instance GoogleRequest PropertiesUpdate' where
         type Rs PropertiesUpdate' = Property
         request = requestWithRoute defReq driveURL
         requestWithRoute r u PropertiesUpdate'{..}
-          = go _puQuotaUser (Just _puPrettyPrint)
-              _puPropertyKey
+          = go (Just _puVisibility) _puFileId _puPropertyKey
+              _puQuotaUser
+              (Just _puPrettyPrint)
               _puUserIP
-              (Just _puVisibility)
-              _puKey
-              _puFileId
-              _puOAuthToken
               _puFields
+              _puKey
+              _puOAuthToken
               (Just AltJSON)
               _puProperty
           where go

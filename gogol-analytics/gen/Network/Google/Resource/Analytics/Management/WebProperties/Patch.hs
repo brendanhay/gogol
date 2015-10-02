@@ -55,9 +55,9 @@ type ManagementWebPropertiesPatchResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] WebProperty :>
                                Patch '[JSON] WebProperty
@@ -182,13 +182,12 @@ instance GoogleRequest ManagementWebPropertiesPatch'
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
           ManagementWebPropertiesPatch'{..}
-          = go _mwppQuotaUser (Just _mwppPrettyPrint)
-              _mwppWebPropertyId
+          = go _mwppAccountId _mwppWebPropertyId _mwppQuotaUser
+              (Just _mwppPrettyPrint)
               _mwppUserIP
-              _mwppAccountId
+              _mwppFields
               _mwppKey
               _mwppOAuthToken
-              _mwppFields
               (Just AltJSON)
               _mwppWebProperty
           where go

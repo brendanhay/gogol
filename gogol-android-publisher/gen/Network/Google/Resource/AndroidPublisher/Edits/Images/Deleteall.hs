@@ -59,9 +59,9 @@ type EditsImagesDeleteallResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Delete '[JSON] ImagesDeleteAllResponse
 
@@ -194,15 +194,14 @@ instance GoogleRequest EditsImagesDeleteall' where
              ImagesDeleteAllResponse
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u EditsImagesDeleteall'{..}
-          = go _eidiQuotaUser (Just _eidiPrettyPrint)
-              _eidiPackageName
-              _eidiUserIP
+          = go _eidiPackageName _eidiEditId _eidiLanguage
               _eidiImageType
-              _eidiKey
-              _eidiLanguage
-              _eidiOAuthToken
-              _eidiEditId
+              _eidiQuotaUser
+              (Just _eidiPrettyPrint)
+              _eidiUserIP
               _eidiFields
+              _eidiKey
+              _eidiOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

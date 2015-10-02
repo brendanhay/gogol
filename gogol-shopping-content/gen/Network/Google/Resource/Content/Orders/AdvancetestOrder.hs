@@ -54,9 +54,9 @@ type OrdersAdvancetestOrderResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Post '[JSON] OrdersAdvanceTestOrderResponse
 
@@ -166,13 +166,12 @@ instance GoogleRequest OrdersAdvancetestOrder' where
              OrdersAdvanceTestOrderResponse
         request = requestWithRoute defReq shoppingContentURL
         requestWithRoute r u OrdersAdvancetestOrder'{..}
-          = go _oaoQuotaUser _oaoMerchantId
+          = go _oaoMerchantId _oaoOrderId _oaoQuotaUser
               (Just _oaoPrettyPrint)
               _oaoUserIP
+              _oaoFields
               _oaoKey
               _oaoOAuthToken
-              _oaoOrderId
-              _oaoFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -50,14 +50,14 @@ type MyLibraryReadingPositionsGetResource =
      "mylibrary" :>
        "readingpositions" :>
          Capture "volumeId" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "contentVersion" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "source" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+           QueryParam "contentVersion" Text :>
+             QueryParam "source" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ReadingPosition
 
@@ -179,14 +179,13 @@ instance GoogleRequest MyLibraryReadingPositionsGet'
         request = requestWithRoute defReq booksURL
         requestWithRoute r u
           MyLibraryReadingPositionsGet'{..}
-          = go _mlrpgQuotaUser (Just _mlrpgPrettyPrint)
+          = go _mlrpgContentVersion _mlrpgSource _mlrpgVolumeId
+              _mlrpgQuotaUser
+              (Just _mlrpgPrettyPrint)
               _mlrpgUserIP
-              _mlrpgContentVersion
-              _mlrpgKey
-              _mlrpgVolumeId
-              _mlrpgSource
-              _mlrpgOAuthToken
               _mlrpgFields
+              _mlrpgKey
+              _mlrpgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -63,17 +63,17 @@ type ProjectsUndeleteResource =
        "projects" :>
          "{projectId}:undelete" :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
+             QueryParam "access_token" Text :>
+               QueryParam "bearer_token" Text :>
+                 QueryParam "callback" Text :>
                    QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Post '[JSON] Empty
 
@@ -233,17 +233,17 @@ instance GoogleRequest ProjectsUndelete' where
         type Rs ProjectsUndelete' = Empty
         request = requestWithRoute defReq resourceManagerURL
         requestWithRoute r u ProjectsUndelete'{..}
-          = go _proXgafv _proQuotaUser (Just _proPrettyPrint)
-              _proUploadProtocol
-              (Just _proPp)
-              _proAccessToken
-              _proUploadType
-              _proBearerToken
-              _proKey
-              _proProjectId
-              _proOAuthToken
-              _proFields
+          = go _proXgafv _proAccessToken _proBearerToken
               _proCallback
+              (Just _proPp)
+              _proUploadType
+              _proUploadProtocol
+              _proProjectId
+              _proQuotaUser
+              (Just _proPrettyPrint)
+              _proFields
+              _proKey
+              _proOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

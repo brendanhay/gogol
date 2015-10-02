@@ -51,13 +51,13 @@ type FloodlightConfigurationsPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "floodlightConfigurations" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "id" Int64 :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] FloodlightConfiguration :>
                              Patch '[JSON] FloodlightConfiguration
@@ -180,12 +180,12 @@ instance GoogleRequest FloodlightConfigurationsPatch'
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           FloodlightConfigurationsPatch'{..}
-          = go _fcpQuotaUser (Just _fcpPrettyPrint) _fcpUserIP
-              _fcpProfileId
-              _fcpKey
-              (Just _fcpId)
-              _fcpOAuthToken
+          = go _fcpProfileId (Just _fcpId) _fcpQuotaUser
+              (Just _fcpPrettyPrint)
+              _fcpUserIP
               _fcpFields
+              _fcpKey
+              _fcpOAuthToken
               (Just AltJSON)
               _fcpFloodlightConfiguration
           where go

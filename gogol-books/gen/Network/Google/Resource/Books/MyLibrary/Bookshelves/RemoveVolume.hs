@@ -52,17 +52,17 @@ type MyLibraryBookshelvesRemoveVolumeResource =
        "bookshelves" :>
          Capture "shelf" Text :>
            "removeVolume" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "reason"
-                     BooksMyLibraryBookshelvesRemoveVolumeReason
-                     :>
-                     QueryParam "key" Key :>
-                       QueryParam "volumeId" Text :>
-                         QueryParam "source" Text :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+             QueryParam "reason"
+               BooksMyLibraryBookshelvesRemoveVolumeReason
+               :>
+               QueryParam "source" Text :>
+                 QueryParam "volumeId" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Removes a volume from a bookshelf.
@@ -191,15 +191,14 @@ instance GoogleRequest
         request = requestWithRoute defReq booksURL
         requestWithRoute r u
           MyLibraryBookshelvesRemoveVolume'{..}
-          = go _mlbrvQuotaUser (Just _mlbrvPrettyPrint)
-              _mlbrvUserIP
-              _mlbrvReason
-              _mlbrvShelf
-              _mlbrvKey
+          = go _mlbrvReason _mlbrvSource _mlbrvShelf
               (Just _mlbrvVolumeId)
-              _mlbrvSource
-              _mlbrvOAuthToken
+              _mlbrvQuotaUser
+              (Just _mlbrvPrettyPrint)
+              _mlbrvUserIP
               _mlbrvFields
+              _mlbrvKey
+              _mlbrvOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -60,9 +60,9 @@ type VariantsetsImportVariantsResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] ImportVariantsRequest :>
                            Post '[JSON] ImportVariantsResponse
@@ -182,12 +182,12 @@ instance GoogleRequest VariantsetsImportVariants'
              ImportVariantsResponse
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u VariantsetsImportVariants'{..}
-          = go _vivQuotaUser (Just _vivPrettyPrint)
-              _vivVariantSetId
+          = go _vivVariantSetId _vivQuotaUser
+              (Just _vivPrettyPrint)
               _vivUserIP
+              _vivFields
               _vivKey
               _vivOAuthToken
-              _vivFields
               (Just AltJSON)
               _vivImportVariantsRequest
           where go

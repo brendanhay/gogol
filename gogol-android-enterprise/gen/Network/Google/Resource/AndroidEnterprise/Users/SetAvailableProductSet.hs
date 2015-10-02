@@ -55,9 +55,9 @@ type UsersSetAvailableProductSetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] ProductSet :>
                                Put '[JSON] ProductSet
@@ -181,13 +181,12 @@ instance GoogleRequest UsersSetAvailableProductSet'
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u UsersSetAvailableProductSet'{..}
-          = go _usapsQuotaUser (Just _usapsPrettyPrint)
-              _usapsEnterpriseId
+          = go _usapsEnterpriseId _usapsUserId _usapsQuotaUser
+              (Just _usapsPrettyPrint)
               _usapsUserIP
-              _usapsUserId
+              _usapsFields
               _usapsKey
               _usapsOAuthToken
-              _usapsFields
               (Just AltJSON)
               _usapsProductSet
           where go

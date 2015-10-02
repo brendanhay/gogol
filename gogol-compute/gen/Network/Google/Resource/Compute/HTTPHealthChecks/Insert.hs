@@ -53,9 +53,9 @@ type HTTPHealthChecksInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] HTTPHealthCheck :>
                            Post '[JSON] Operation
@@ -170,12 +170,12 @@ instance GoogleRequest HTTPHealthChecksInsert' where
         type Rs HTTPHealthChecksInsert' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u HTTPHealthChecksInsert'{..}
-          = go _httphciQuotaUser (Just _httphciPrettyPrint)
-              _httphciProject
+          = go _httphciProject _httphciQuotaUser
+              (Just _httphciPrettyPrint)
               _httphciUserIP
+              _httphciFields
               _httphciKey
               _httphciOAuthToken
-              _httphciFields
               (Just AltJSON)
               _httphciHTTPHealthCheck
           where go

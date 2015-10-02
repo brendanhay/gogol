@@ -54,9 +54,9 @@ type EditsDetailsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] AppDetails
 
 -- | Fetches app details for this edit. This includes the default language
@@ -165,13 +165,12 @@ instance GoogleRequest EditsDetailsGet' where
         type Rs EditsDetailsGet' = AppDetails
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u EditsDetailsGet'{..}
-          = go _edgQuotaUser (Just _edgPrettyPrint)
-              _edgPackageName
+          = go _edgPackageName _edgEditId _edgQuotaUser
+              (Just _edgPrettyPrint)
               _edgUserIP
+              _edgFields
               _edgKey
               _edgOAuthToken
-              _edgEditId
-              _edgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

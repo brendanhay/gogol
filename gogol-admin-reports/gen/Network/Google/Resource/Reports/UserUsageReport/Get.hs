@@ -57,17 +57,17 @@ type UserUsageReportGetResource =
          Capture "userKey" Text :>
            "dates" :>
              Capture "date" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "filters" Text :>
-                       QueryParam "customerId" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "parameters" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "maxResults" Word32 :>
-                                   QueryParam "fields" Text :>
+               QueryParam "customerId" Text :>
+                 QueryParam "filters" Text :>
+                   QueryParam "maxResults" Word32 :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "parameters" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] UsageReports
 
@@ -227,18 +227,17 @@ instance GoogleRequest UserUsageReportGet' where
         type Rs UserUsageReportGet' = UsageReports
         request = requestWithRoute defReq adminReportsURL
         requestWithRoute r u UserUsageReportGet'{..}
-          = go _uurgQuotaUser (Just _uurgPrettyPrint)
-              _uurgUserIP
-              _uurgFilters
-              _uurgCustomerId
-              _uurgDate
-              _uurgKey
-              _uurgParameters
+          = go _uurgCustomerId _uurgFilters _uurgMaxResults
               _uurgPageToken
-              _uurgOAuthToken
+              _uurgParameters
               _uurgUserKey
-              _uurgMaxResults
+              _uurgDate
+              _uurgQuotaUser
+              (Just _uurgPrettyPrint)
+              _uurgUserIP
               _uurgFields
+              _uurgKey
+              _uurgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

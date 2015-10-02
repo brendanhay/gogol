@@ -50,17 +50,17 @@ import           Network.Google.Prelude
 -- 'PerformanceReportList'' request conforms to.
 type PerformanceReportListResource =
      "performancereport" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "accountId" Int64 :>
-               QueryParam "key" Key :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "endDateTime" Text :>
-                       QueryParam "maxResults" Word32 :>
-                         QueryParam "startDateTime" Text :>
-                           QueryParam "fields" Text :>
+       QueryParam "maxResults" Word32 :>
+         QueryParam "pageToken" Text :>
+           QueryParam "accountId" Int64 :>
+             QueryParam "endDateTime" Text :>
+               QueryParam "startDateTime" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] PerformanceReportList
 
@@ -202,15 +202,16 @@ instance GoogleRequest PerformanceReportList' where
              PerformanceReportList
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u PerformanceReportList'{..}
-          = go _prlQuotaUser (Just _prlPrettyPrint) _prlUserIP
+          = go _prlMaxResults _prlPageToken
               (Just _prlAccountId)
-              _prlKey
-              _prlPageToken
-              _prlOAuthToken
               (Just _prlEndDateTime)
-              _prlMaxResults
               (Just _prlStartDateTime)
+              _prlQuotaUser
+              (Just _prlPrettyPrint)
+              _prlUserIP
               _prlFields
+              _prlKey
+              _prlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

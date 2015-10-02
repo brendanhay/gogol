@@ -56,15 +56,15 @@ type MetagameListCategoriesByPlayerResource =
            Capture "collection"
              GamesMetagameListCategoriesByPlayerCollection
              :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "language" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Int32 :>
-                             QueryParam "fields" Text :>
+             QueryParam "language" Text :>
+               QueryParam "maxResults" Int32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] CategoryListResponse
 
@@ -212,16 +212,15 @@ instance GoogleRequest
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u
           MetagameListCategoriesByPlayer'{..}
-          = go _mlcbpQuotaUser (Just _mlcbpPrettyPrint)
-              _mlcbpUserIP
-              _mlcbpCollection
-              _mlcbpKey
-              _mlcbpLanguage
-              _mlcbpPageToken
-              _mlcbpOAuthToken
+          = go _mlcbpLanguage _mlcbpMaxResults _mlcbpPageToken
               _mlcbpPlayerId
-              _mlcbpMaxResults
+              _mlcbpCollection
+              _mlcbpQuotaUser
+              (Just _mlcbpPrettyPrint)
+              _mlcbpUserIP
               _mlcbpFields
+              _mlcbpKey
+              _mlcbpOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

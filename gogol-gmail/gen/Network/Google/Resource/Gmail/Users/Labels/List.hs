@@ -50,9 +50,9 @@ type UsersLabelsListResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] ListLabelsResponse
 
@@ -150,11 +150,11 @@ instance GoogleRequest UsersLabelsList' where
         type Rs UsersLabelsList' = ListLabelsResponse
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersLabelsList'{..}
-          = go _ullQuotaUser (Just _ullPrettyPrint) _ullUserIP
-              _ullUserId
+          = go _ullUserId _ullQuotaUser (Just _ullPrettyPrint)
+              _ullUserIP
+              _ullFields
               _ullKey
               _ullOAuthToken
-              _ullFields
               (Just AltJSON)
           where go
                   = clientWithRoute

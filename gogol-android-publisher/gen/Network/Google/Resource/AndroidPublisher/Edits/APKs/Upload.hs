@@ -54,9 +54,9 @@ type EditsAPKsUploadResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Post '[JSON] APK
 
 --
@@ -173,14 +173,13 @@ instance GoogleRequest EditsAPKsUpload' where
         type Rs EditsAPKsUpload' = APK
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u EditsAPKsUpload'{..}
-          = go _eapkuQuotaUser (Just _eapkuPrettyPrint)
-              _eapkuPackageName
+          = go _eapkuMedia _eapkuPackageName _eapkuEditId
+              _eapkuQuotaUser
+              (Just _eapkuPrettyPrint)
               _eapkuUserIP
-              _eapkuMedia
+              _eapkuFields
               _eapkuKey
               _eapkuOAuthToken
-              _eapkuEditId
-              _eapkuFields
               (Just AltJSON)
           where go
                   = clientWithRoute

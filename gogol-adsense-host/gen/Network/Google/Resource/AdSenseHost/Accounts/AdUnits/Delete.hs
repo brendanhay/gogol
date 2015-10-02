@@ -57,9 +57,9 @@ type AccountsAdUnitsDeleteResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Delete '[JSON] AdUnit
 
 -- | Delete the specified ad unit from the specified publisher AdSense
@@ -179,14 +179,13 @@ instance GoogleRequest AccountsAdUnitsDelete' where
         type Rs AccountsAdUnitsDelete' = AdUnit
         request = requestWithRoute defReq adSenseHostURL
         requestWithRoute r u AccountsAdUnitsDelete'{..}
-          = go _aaudQuotaUser (Just _aaudPrettyPrint)
+          = go _aaudAccountId _aaudAdClientId _aaudAdUnitId
+              _aaudQuotaUser
+              (Just _aaudPrettyPrint)
               _aaudUserIP
-              _aaudAdUnitId
-              _aaudAdClientId
-              _aaudAccountId
+              _aaudFields
               _aaudKey
               _aaudOAuthToken
-              _aaudFields
               (Just AltJSON)
           where go
                   = clientWithRoute

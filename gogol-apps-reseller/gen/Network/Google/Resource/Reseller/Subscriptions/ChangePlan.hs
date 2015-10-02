@@ -55,9 +55,9 @@ type SubscriptionsChangePlanResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] ChangePlanRequest :>
                                Post '[JSON] Subscription
@@ -178,12 +178,12 @@ instance GoogleRequest SubscriptionsChangePlan' where
         type Rs SubscriptionsChangePlan' = Subscription
         request = requestWithRoute defReq appsResellerURL
         requestWithRoute r u SubscriptionsChangePlan'{..}
-          = go _scpQuotaUser (Just _scpPrettyPrint) _scpUserIP
-              _scpCustomerId
+          = go _scpCustomerId _scpSubscriptionId _scpQuotaUser
+              (Just _scpPrettyPrint)
+              _scpUserIP
+              _scpFields
               _scpKey
               _scpOAuthToken
-              _scpSubscriptionId
-              _scpFields
               (Just AltJSON)
               _scpChangePlanRequest
           where go

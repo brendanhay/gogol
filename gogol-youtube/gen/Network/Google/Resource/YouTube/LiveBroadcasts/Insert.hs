@@ -49,15 +49,15 @@ import           Network.Google.YouTube.Types
 -- 'LiveBroadcastsInsert'' request conforms to.
 type LiveBroadcastsInsertResource =
      "liveBroadcasts" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "part" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+       QueryParam "onBehalfOfContentOwner" Text :>
+         QueryParam "onBehalfOfContentOwnerChannel" Text :>
+           QueryParam "part" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] LiveBroadcast :>
                              Post '[JSON] LiveBroadcast
@@ -213,14 +213,15 @@ instance GoogleRequest LiveBroadcastsInsert' where
         type Rs LiveBroadcastsInsert' = LiveBroadcast
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u LiveBroadcastsInsert'{..}
-          = go _lbiQuotaUser (Just _lbiPart)
+          = go _lbiOnBehalfOfContentOwner
+              _lbiOnBehalfOfContentOwnerChannel
+              (Just _lbiPart)
+              _lbiQuotaUser
               (Just _lbiPrettyPrint)
               _lbiUserIP
-              _lbiOnBehalfOfContentOwner
-              _lbiKey
-              _lbiOnBehalfOfContentOwnerChannel
-              _lbiOAuthToken
               _lbiFields
+              _lbiKey
+              _lbiOAuthToken
               (Just AltJSON)
               _lbiLiveBroadcast
           where go

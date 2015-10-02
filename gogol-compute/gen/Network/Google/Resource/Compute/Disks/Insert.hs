@@ -53,13 +53,13 @@ type DisksInsertResource =
        "zones" :>
          Capture "zone" Text :>
            "disks" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "sourceImage" Text :>
+             QueryParam "sourceImage" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Disk :> Post '[JSON] Operation
 
@@ -182,14 +182,12 @@ instance GoogleRequest DisksInsert' where
         type Rs DisksInsert' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u DisksInsert'{..}
-          = go _diQuotaUser (Just _diPrettyPrint)
-              _diSourceImage
-              _diProject
+          = go _diSourceImage _diProject _diZone _diQuotaUser
+              (Just _diPrettyPrint)
               _diUserIP
-              _diZone
+              _diFields
               _diKey
               _diOAuthToken
-              _diFields
               (Just AltJSON)
               _diDisk
           where go

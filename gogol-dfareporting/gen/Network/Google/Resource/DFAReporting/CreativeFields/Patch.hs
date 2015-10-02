@@ -51,13 +51,13 @@ type CreativeFieldsPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "creativeFields" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "id" Int64 :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] CreativeField :>
                              Patch '[JSON] CreativeField
@@ -176,12 +176,12 @@ instance GoogleRequest CreativeFieldsPatch' where
         type Rs CreativeFieldsPatch' = CreativeField
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeFieldsPatch'{..}
-          = go _cfpQuotaUser (Just _cfpPrettyPrint) _cfpUserIP
-              _cfpProfileId
-              _cfpKey
-              (Just _cfpId)
-              _cfpOAuthToken
+          = go _cfpProfileId (Just _cfpId) _cfpQuotaUser
+              (Just _cfpPrettyPrint)
+              _cfpUserIP
               _cfpFields
+              _cfpKey
+              _cfpOAuthToken
               (Just AltJSON)
               _cfpCreativeField
           where go

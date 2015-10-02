@@ -50,9 +50,9 @@ type TimelineGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] TimelineItem
 
 -- | Gets a single timeline item by ID.
@@ -144,11 +144,11 @@ instance GoogleRequest TimelineGet' where
         type Rs TimelineGet' = TimelineItem
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u TimelineGet'{..}
-          = go _tgQuotaUser (Just _tgPrettyPrint) _tgUserIP
-              _tgKey
-              _tgId
-              _tgOAuthToken
+          = go _tgId _tgQuotaUser (Just _tgPrettyPrint)
+              _tgUserIP
               _tgFields
+              _tgKey
+              _tgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

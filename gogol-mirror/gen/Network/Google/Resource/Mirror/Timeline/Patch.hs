@@ -51,9 +51,9 @@ type TimelinePatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] TimelineItem :>
                          Patch '[JSON] TimelineItem
@@ -158,11 +158,11 @@ instance GoogleRequest TimelinePatch' where
         type Rs TimelinePatch' = TimelineItem
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u TimelinePatch'{..}
-          = go _tpQuotaUser (Just _tpPrettyPrint) _tpUserIP
-              _tpKey
-              _tpId
-              _tpOAuthToken
+          = go _tpId _tpQuotaUser (Just _tpPrettyPrint)
+              _tpUserIP
               _tpFields
+              _tpKey
+              _tpOAuthToken
               (Just AltJSON)
               _tpTimelineItem
           where go

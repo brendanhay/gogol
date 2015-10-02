@@ -53,9 +53,9 @@ type CollectionsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a collection.
@@ -161,13 +161,12 @@ instance GoogleRequest CollectionsDelete' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u CollectionsDelete'{..}
-          = go _cdQuotaUser (Just _cdPrettyPrint)
-              _cdEnterpriseId
+          = go _cdEnterpriseId _cdCollectionId _cdQuotaUser
+              (Just _cdPrettyPrint)
               _cdUserIP
-              _cdCollectionId
+              _cdFields
               _cdKey
               _cdOAuthToken
-              _cdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

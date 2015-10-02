@@ -49,14 +49,14 @@ import           Network.Google.YouTube.Types
 type CaptionsDeleteResource =
      "captions" :>
        QueryParam "onBehalfOf" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "id" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+         QueryParam "onBehalfOfContentOwner" Text :>
+           QueryParam "id" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a specified caption track.
@@ -183,14 +183,14 @@ instance GoogleRequest CaptionsDelete' where
         type Rs CaptionsDelete' = ()
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u CaptionsDelete'{..}
-          = go _cddOnBehalfOf _cddQuotaUser
+          = go _cddOnBehalfOf _cddOnBehalfOfContentOwner
+              (Just _cddId)
+              _cddQuotaUser
               (Just _cddPrettyPrint)
               _cddUserIP
-              _cddOnBehalfOfContentOwner
-              _cddKey
-              (Just _cddId)
-              _cddOAuthToken
               _cddFields
+              _cddKey
+              _cddOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -52,9 +52,9 @@ type UsersDraftsCreateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        MultipartRelated '[JSON] Draft Body :>
                          Post '[JSON] Draft
@@ -170,12 +170,12 @@ instance GoogleRequest UsersDraftsCreate' where
         type Rs UsersDraftsCreate' = Draft
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersDraftsCreate'{..}
-          = go _udcQuotaUser (Just _udcPrettyPrint) _udcUserIP
-              _udcUserId
-              _udcMedia
+          = go _udcMedia _udcUserId _udcQuotaUser
+              (Just _udcPrettyPrint)
+              _udcUserIP
+              _udcFields
               _udcKey
               _udcOAuthToken
-              _udcFields
               (Just AltJSON)
               _udcDraft
           where go

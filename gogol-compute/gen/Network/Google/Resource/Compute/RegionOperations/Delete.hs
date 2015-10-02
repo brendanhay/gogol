@@ -55,9 +55,9 @@ type RegionOperationsDeleteResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes the specified region-specific Operations resource.
@@ -173,13 +173,13 @@ instance GoogleRequest RegionOperationsDelete' where
         type Rs RegionOperationsDelete' = ()
         request = requestWithRoute defReq computeURL
         requestWithRoute r u RegionOperationsDelete'{..}
-          = go _rodQuotaUser (Just _rodPrettyPrint) _rodProject
-              _rodOperation
+          = go _rodProject _rodRegion _rodOperation
+              _rodQuotaUser
+              (Just _rodPrettyPrint)
               _rodUserIP
-              _rodKey
-              _rodRegion
-              _rodOAuthToken
               _rodFields
+              _rodKey
+              _rodOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

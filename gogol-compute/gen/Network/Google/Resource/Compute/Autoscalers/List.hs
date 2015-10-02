@@ -54,15 +54,15 @@ type AutoscalersListResource =
        "zones" :>
          Capture "zone" Text :>
            "autoscalers" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "filter" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
+             QueryParam "filter" Text :>
+               QueryParam "maxResults" Word32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] AutoscalerList
 
@@ -209,15 +209,15 @@ instance GoogleRequest AutoscalersList' where
         type Rs AutoscalersList' = AutoscalerList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u AutoscalersList'{..}
-          = go _autQuotaUser (Just _autPrettyPrint) _autProject
-              _autUserIP
+          = go _autFilter (Just _autMaxResults) _autPageToken
+              _autProject
               _autZone
-              _autKey
-              _autFilter
-              _autPageToken
-              _autOAuthToken
-              (Just _autMaxResults)
+              _autQuotaUser
+              (Just _autPrettyPrint)
+              _autUserIP
               _autFields
+              _autKey
+              _autOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

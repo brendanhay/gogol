@@ -53,9 +53,9 @@ type NotificationsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Notification
 
 -- | Retrieves a notification.
@@ -160,12 +160,12 @@ instance GoogleRequest NotificationsGet' where
         type Rs NotificationsGet' = Notification
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u NotificationsGet'{..}
-          = go _ngQuotaUser (Just _ngPrettyPrint) _ngUserIP
-              _ngCustomer
-              _ngKey
-              _ngNotificationId
-              _ngOAuthToken
+          = go _ngCustomer _ngNotificationId _ngQuotaUser
+              (Just _ngPrettyPrint)
+              _ngUserIP
               _ngFields
+              _ngKey
+              _ngOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

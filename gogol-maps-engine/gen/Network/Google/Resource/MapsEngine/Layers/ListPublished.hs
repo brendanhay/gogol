@@ -49,15 +49,15 @@ import           Network.Google.Prelude
 type LayersListPublishedResource =
      "layers" :>
        "published" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "projectId" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "maxResults" Word32 :>
-                         QueryParam "fields" Text :>
+         QueryParam "maxResults" Word32 :>
+           QueryParam "pageToken" Text :>
+             QueryParam "projectId" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] PublishedLayersListResponse
 
@@ -179,13 +179,13 @@ instance GoogleRequest LayersListPublished' where
              PublishedLayersListResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u LayersListPublished'{..}
-          = go _llpQuotaUser (Just _llpPrettyPrint) _llpUserIP
-              _llpKey
-              _llpPageToken
-              _llpProjectId
-              _llpOAuthToken
-              _llpMaxResults
+          = go _llpMaxResults _llpPageToken _llpProjectId
+              _llpQuotaUser
+              (Just _llpPrettyPrint)
+              _llpUserIP
               _llpFields
+              _llpKey
+              _llpOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

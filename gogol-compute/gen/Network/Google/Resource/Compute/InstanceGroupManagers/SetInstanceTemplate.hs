@@ -60,9 +60,9 @@ type InstanceGroupManagersSetInstanceTemplateResource
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON]
                                  InstanceGroupManagersSetInstanceTemplateRequest
@@ -205,14 +205,14 @@ instance GoogleRequest
         request = requestWithRoute defReq computeURL
         requestWithRoute r u
           InstanceGroupManagersSetInstanceTemplate'{..}
-          = go _igmsitQuotaUser (Just _igmsitPrettyPrint)
-              _igmsitProject
+          = go _igmsitProject _igmsitZone
               _igmsitInstanceGroupManager
+              _igmsitQuotaUser
+              (Just _igmsitPrettyPrint)
               _igmsitUserIP
-              _igmsitZone
+              _igmsitFields
               _igmsitKey
               _igmsitOAuthToken
-              _igmsitFields
               (Just AltJSON)
               _igmsitInstanceGroupManagersSetInstanceTemplateRequest
           where go

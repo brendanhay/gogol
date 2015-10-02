@@ -50,9 +50,9 @@ type AdClientsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] AdClient
 
 -- | Get information about one of the ad clients in the Host AdSense account.
@@ -149,11 +149,12 @@ instance GoogleRequest AdClientsGet' where
         type Rs AdClientsGet' = AdClient
         request = requestWithRoute defReq adSenseHostURL
         requestWithRoute r u AdClientsGet'{..}
-          = go _acgQuotaUser (Just _acgPrettyPrint) _acgUserIP
-              _acgAdClientId
+          = go _acgAdClientId _acgQuotaUser
+              (Just _acgPrettyPrint)
+              _acgUserIP
+              _acgFields
               _acgKey
               _acgOAuthToken
-              _acgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

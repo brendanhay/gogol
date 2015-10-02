@@ -51,13 +51,13 @@ type RemarketingListsPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "remarketingLists" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "id" Int64 :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] RemarketingList :>
                              Patch '[JSON] RemarketingList
@@ -176,12 +176,12 @@ instance GoogleRequest RemarketingListsPatch' where
         type Rs RemarketingListsPatch' = RemarketingList
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u RemarketingListsPatch'{..}
-          = go _rlpQuotaUser (Just _rlpPrettyPrint) _rlpUserIP
-              _rlpProfileId
-              _rlpKey
-              (Just _rlpId)
-              _rlpOAuthToken
+          = go _rlpProfileId (Just _rlpId) _rlpQuotaUser
+              (Just _rlpPrettyPrint)
+              _rlpUserIP
               _rlpFields
+              _rlpKey
+              _rlpOAuthToken
               (Just AltJSON)
               _rlpRemarketingList
           where go

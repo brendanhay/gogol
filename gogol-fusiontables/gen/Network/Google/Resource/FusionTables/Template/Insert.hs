@@ -52,9 +52,9 @@ type TemplateInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Template :> Post '[JSON] Template
 
@@ -158,11 +158,11 @@ instance GoogleRequest TemplateInsert' where
         type Rs TemplateInsert' = Template
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TemplateInsert'{..}
-          = go _tiQuotaUser (Just _tiPrettyPrint) _tiUserIP
+          = go _tiTableId _tiQuotaUser (Just _tiPrettyPrint)
+              _tiUserIP
+              _tiFields
               _tiKey
               _tiOAuthToken
-              _tiTableId
-              _tiFields
               (Just AltJSON)
               _tiTemplate
           where go

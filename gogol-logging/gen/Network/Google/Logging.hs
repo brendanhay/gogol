@@ -99,9 +99,9 @@ module Network.Google.Logging
     -- ** Log
     , Log
     , log
-    , logName
-    , logDisplayName
-    , logPayLoadType
+    , lName
+    , lDisplayName
+    , lPayLoadType
 
     -- ** LogError
     , LogError
@@ -234,8 +234,8 @@ module Network.Google.Logging
     -- ** LogService
     , LogService
     , logService
-    , lName
-    , lIndexKeys
+    , logName
+    , logIndexKeys
 
     -- ** ListLogServiceSinksResponse
     , ListLogServiceSinksResponse

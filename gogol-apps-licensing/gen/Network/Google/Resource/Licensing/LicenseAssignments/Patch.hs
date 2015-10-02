@@ -56,9 +56,9 @@ type LicenseAssignmentsPatchResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] LicenseAssignment :>
                                Patch '[JSON] LicenseAssignment
@@ -186,13 +186,12 @@ instance GoogleRequest LicenseAssignmentsPatch' where
         type Rs LicenseAssignmentsPatch' = LicenseAssignment
         request = requestWithRoute defReq appsLicensingURL
         requestWithRoute r u LicenseAssignmentsPatch'{..}
-          = go _lapQuotaUser (Just _lapPrettyPrint) _lapUserIP
-              _lapSkuId
-              _lapUserId
+          = go _lapProductId _lapSkuId _lapUserId _lapQuotaUser
+              (Just _lapPrettyPrint)
+              _lapUserIP
+              _lapFields
               _lapKey
               _lapOAuthToken
-              _lapProductId
-              _lapFields
               (Just AltJSON)
               _lapLicenseAssignment
           where go

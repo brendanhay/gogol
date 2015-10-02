@@ -52,15 +52,15 @@ type ChromeosDevicesGetResource =
          "devices" :>
            "chromeos" :>
              Capture "deviceId" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "projection"
-                         DirectoryChromeosDevicesGetProjection
-                         :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+               QueryParam "projection"
+                 DirectoryChromeosDevicesGetProjection
+                 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ChromeOSDevice
 
@@ -178,13 +178,13 @@ instance GoogleRequest ChromeosDevicesGet' where
         type Rs ChromeosDevicesGet' = ChromeOSDevice
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u ChromeosDevicesGet'{..}
-          = go _cdgQuotaUser (Just _cdgPrettyPrint) _cdgUserIP
-              _cdgCustomerId
-              _cdgKey
-              _cdgDeviceId
-              _cdgProjection
-              _cdgOAuthToken
+          = go _cdgProjection _cdgCustomerId _cdgDeviceId
+              _cdgQuotaUser
+              (Just _cdgPrettyPrint)
+              _cdgUserIP
               _cdgFields
+              _cdgKey
+              _cdgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

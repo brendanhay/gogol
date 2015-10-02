@@ -52,15 +52,15 @@ type PostsGetByPathResource =
        Capture "blogId" Text :>
          "posts" :>
            "bypath" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
+             QueryParam "maxComments" Word32 :>
+               QueryParam "view" BloggerPostsGetByPathView :>
                  QueryParam "path" Text :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "maxComments" Word32 :>
-                       QueryParam "key" Key :>
-                         QueryParam "view" BloggerPostsGetByPathView :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Get '[JSON] Post
 
 -- | Retrieve a Post by Path.
@@ -185,15 +185,14 @@ instance GoogleRequest PostsGetByPath' where
         type Rs PostsGetByPath' = Post
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PostsGetByPath'{..}
-          = go _pgbpQuotaUser (Just _pgbpPrettyPrint)
+          = go _pgbpMaxComments _pgbpView _pgbpBlogId
               (Just _pgbpPath)
+              _pgbpQuotaUser
+              (Just _pgbpPrettyPrint)
               _pgbpUserIP
-              _pgbpBlogId
-              _pgbpMaxComments
-              _pgbpKey
-              _pgbpView
-              _pgbpOAuthToken
               _pgbpFields
+              _pgbpKey
+              _pgbpOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

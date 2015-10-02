@@ -56,9 +56,9 @@ type LandingPagesGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] LandingPage
 
 -- | Gets one campaign landing page by ID.
@@ -174,13 +174,13 @@ instance GoogleRequest LandingPagesGet' where
         type Rs LandingPagesGet' = LandingPage
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u LandingPagesGet'{..}
-          = go _lpgQuotaUser (Just _lpgPrettyPrint) _lpgUserIP
-              _lpgCampaignId
-              _lpgProfileId
-              _lpgKey
-              _lpgId
-              _lpgOAuthToken
+          = go _lpgProfileId _lpgCampaignId _lpgId
+              _lpgQuotaUser
+              (Just _lpgPrettyPrint)
+              _lpgUserIP
               _lpgFields
+              _lpgKey
+              _lpgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

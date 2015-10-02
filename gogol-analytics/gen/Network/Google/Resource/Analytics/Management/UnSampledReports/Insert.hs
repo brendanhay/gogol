@@ -59,9 +59,9 @@ type ManagementUnSampledReportsInsertResource =
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] UnSampledReport :>
                                      Post '[JSON] UnSampledReport
@@ -198,14 +198,14 @@ instance GoogleRequest
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
           ManagementUnSampledReportsInsert'{..}
-          = go _musriQuotaUser (Just _musriPrettyPrint)
-              _musriWebPropertyId
-              _musriUserIP
+          = go _musriAccountId _musriWebPropertyId
               _musriProfileId
-              _musriAccountId
+              _musriQuotaUser
+              (Just _musriPrettyPrint)
+              _musriUserIP
+              _musriFields
               _musriKey
               _musriOAuthToken
-              _musriFields
               (Just AltJSON)
               _musriUnSampledReport
           where go

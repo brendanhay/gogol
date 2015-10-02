@@ -59,9 +59,9 @@ type MediaInsertResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            MultipartRelated '[JSON] Media Body :>
                              Post '[JSON] Media
@@ -184,13 +184,12 @@ instance GoogleRequest MediaInsert' where
         type Rs MediaInsert' = Media
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u MediaInsert'{..}
-          = go _miQuotaUser (Just _miPrettyPrint) _miUserIP
-              _miCollection
-              _miUserId
-              _miMedia
+          = go _miMedia _miUserId _miCollection _miQuotaUser
+              (Just _miPrettyPrint)
+              _miUserIP
+              _miFields
               _miKey
               _miOAuthToken
-              _miFields
               (Just AltJSON)
               _miMedia
           where go

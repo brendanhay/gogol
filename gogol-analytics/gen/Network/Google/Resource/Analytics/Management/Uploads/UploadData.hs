@@ -59,9 +59,9 @@ type ManagementUploadsUploadDataResource =
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :> Post '[JSON] Upload
 
 -- | Upload data for a custom data source.
@@ -192,15 +192,14 @@ instance GoogleRequest ManagementUploadsUploadData'
         type Rs ManagementUploadsUploadData' = Upload
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementUploadsUploadData'{..}
-          = go _muudQuotaUser (Just _muudPrettyPrint)
-              _muudWebPropertyId
-              _muudUserIP
+          = go _muudMedia _muudAccountId _muudWebPropertyId
               _muudCustomDataSourceId
-              _muudMedia
-              _muudAccountId
+              _muudQuotaUser
+              (Just _muudPrettyPrint)
+              _muudUserIP
+              _muudFields
               _muudKey
               _muudOAuthToken
-              _muudFields
               (Just AltJSON)
           where go
                   = clientWithRoute

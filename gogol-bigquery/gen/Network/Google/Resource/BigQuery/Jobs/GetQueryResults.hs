@@ -54,16 +54,16 @@ type JobsGetQueryResultsResource =
        Capture "projectId" Text :>
          "queries" :>
            Capture "jobId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "timeoutMs" Word32 :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "startIndex" Word64 :>
-                             QueryParam "maxResults" Word32 :>
-                               QueryParam "fields" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "startIndex" Word64 :>
+                   QueryParam "timeoutMs" Word32 :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] GetQueryResultsResponse
 
@@ -216,17 +216,16 @@ instance GoogleRequest JobsGetQueryResults' where
              GetQueryResultsResponse
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u JobsGetQueryResults'{..}
-          = go _jgqrQuotaUser (Just _jgqrPrettyPrint)
-              _jgqrJobId
-              _jgqrUserIP
-              _jgqrKey
+          = go _jgqrMaxResults _jgqrPageToken _jgqrStartIndex
               _jgqrTimeoutMs
-              _jgqrPageToken
               _jgqrProjectId
-              _jgqrOAuthToken
-              _jgqrStartIndex
-              _jgqrMaxResults
+              _jgqrJobId
+              _jgqrQuotaUser
+              (Just _jgqrPrettyPrint)
+              _jgqrUserIP
               _jgqrFields
+              _jgqrKey
+              _jgqrOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

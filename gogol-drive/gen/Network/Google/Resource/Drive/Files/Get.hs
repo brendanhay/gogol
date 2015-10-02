@@ -51,30 +51,30 @@ import           Network.Google.Prelude
 type FilesGetResource =
      "files" :>
        Capture "fileId" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
+         QueryParam "acknowledgeAbuse" Bool :>
+           QueryParam "projection" DriveFilesGetProjection :>
+             QueryParam "revisionId" Text :>
                QueryParam "updateViewedDate" Bool :>
-                 QueryParam "key" Key :>
-                   QueryParam "projection" DriveFilesGetProjection :>
-                     QueryParam "acknowledgeAbuse" Bool :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "revisionId" Text :>
-                           QueryParam "fields" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] File
        :<|>
        "files" :>
          Capture "fileId" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
+           QueryParam "acknowledgeAbuse" Bool :>
+             QueryParam "projection" DriveFilesGetProjection :>
+               QueryParam "revisionId" Text :>
                  QueryParam "updateViewedDate" Bool :>
-                   QueryParam "key" Key :>
-                     QueryParam "projection" DriveFilesGetProjection :>
-                       QueryParam "acknowledgeAbuse" Bool :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "revisionId" Text :>
-                             QueryParam "fields" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" Media :>
                                  Get '[OctetStream] Stream
 
@@ -208,15 +208,16 @@ instance GoogleRequest FilesGet' where
         type Rs FilesGet' = File
         request = requestWithRoute defReq driveURL
         requestWithRoute r u FilesGet'{..}
-          = go _fgQuotaUser (Just _fgPrettyPrint) _fgUserIP
-              (Just _fgUpdateViewedDate)
-              _fgKey
-              _fgProjection
-              (Just _fgAcknowledgeAbuse)
-              _fgFileId
-              _fgOAuthToken
+          = go (Just _fgAcknowledgeAbuse) _fgProjection
               _fgRevisionId
+              (Just _fgUpdateViewedDate)
+              _fgFileId
+              _fgQuotaUser
+              (Just _fgPrettyPrint)
+              _fgUserIP
               _fgFields
+              _fgKey
+              _fgOAuthToken
               (Just AltJSON)
           where go :<|> _
                   = clientWithRoute (Proxy :: Proxy FilesGetResource) r
@@ -226,15 +227,16 @@ instance GoogleRequest FilesGet' where
         type Rs (Download FilesGet') = Stream
         request = requestWithRoute defReq driveURL
         requestWithRoute r u FilesGet'{..}
-          = go _fgQuotaUser (Just _fgPrettyPrint) _fgUserIP
-              (Just _fgUpdateViewedDate)
-              _fgKey
-              _fgProjection
-              (Just _fgAcknowledgeAbuse)
-              _fgFileId
-              _fgOAuthToken
+          = go (Just _fgAcknowledgeAbuse) _fgProjection
               _fgRevisionId
+              (Just _fgUpdateViewedDate)
+              _fgFileId
+              _fgQuotaUser
+              (Just _fgPrettyPrint)
+              _fgUserIP
               _fgFields
+              _fgKey
+              _fgOAuthToken
               (Just Media)
           where go :<|> _
                   = clientWithRoute (Proxy :: Proxy FilesGetResource) r

@@ -55,9 +55,9 @@ type AddressesInsertResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Address :> Post '[JSON] Operation
 
@@ -171,12 +171,12 @@ instance GoogleRequest AddressesInsert' where
         type Rs AddressesInsert' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u AddressesInsert'{..}
-          = go _aiQuotaUser (Just _aiPrettyPrint) _aiProject
+          = go _aiProject _aiRegion _aiQuotaUser
+              (Just _aiPrettyPrint)
               _aiUserIP
-              _aiKey
-              _aiRegion
-              _aiOAuthToken
               _aiFields
+              _aiKey
+              _aiOAuthToken
               (Just AltJSON)
               _aiAddress
           where go

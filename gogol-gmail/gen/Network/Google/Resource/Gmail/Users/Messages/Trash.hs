@@ -53,9 +53,9 @@ type UsersMessagesTrashResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Post '[JSON] Message
 
 -- | Moves the specified message to the trash.
@@ -161,12 +161,12 @@ instance GoogleRequest UsersMessagesTrash' where
         type Rs UsersMessagesTrash' = Message
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersMessagesTrash'{..}
-          = go _umtQuotaUser (Just _umtPrettyPrint) _umtUserIP
-              _umtUserId
-              _umtKey
-              _umtId
-              _umtOAuthToken
+          = go _umtUserId _umtId _umtQuotaUser
+              (Just _umtPrettyPrint)
+              _umtUserIP
               _umtFields
+              _umtKey
+              _umtOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

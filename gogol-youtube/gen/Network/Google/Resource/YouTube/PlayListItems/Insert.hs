@@ -48,14 +48,14 @@ import           Network.Google.YouTube.Types
 -- 'PlayListItemsInsert'' request conforms to.
 type PlayListItemsInsertResource =
      "playlistItems" :>
-       QueryParam "quotaUser" Text :>
+       QueryParam "onBehalfOfContentOwner" Text :>
          QueryParam "part" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] PlayListItem :>
                            Post '[JSON] PlayListItem
@@ -185,13 +185,13 @@ instance GoogleRequest PlayListItemsInsert' where
         type Rs PlayListItemsInsert' = PlayListItem
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u PlayListItemsInsert'{..}
-          = go _pliiQuotaUser (Just _pliiPart)
+          = go _pliiOnBehalfOfContentOwner (Just _pliiPart)
+              _pliiQuotaUser
               (Just _pliiPrettyPrint)
               _pliiUserIP
-              _pliiOnBehalfOfContentOwner
+              _pliiFields
               _pliiKey
               _pliiOAuthToken
-              _pliiFields
               (Just AltJSON)
               _pliiPlayListItem
           where go

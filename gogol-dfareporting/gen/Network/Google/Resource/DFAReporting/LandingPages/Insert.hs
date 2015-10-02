@@ -55,9 +55,9 @@ type LandingPagesInsertResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] LandingPage :>
                                Post '[JSON] LandingPage
@@ -177,12 +177,12 @@ instance GoogleRequest LandingPagesInsert' where
         type Rs LandingPagesInsert' = LandingPage
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u LandingPagesInsert'{..}
-          = go _lpiQuotaUser (Just _lpiPrettyPrint) _lpiUserIP
-              _lpiCampaignId
-              _lpiProfileId
+          = go _lpiProfileId _lpiCampaignId _lpiQuotaUser
+              (Just _lpiPrettyPrint)
+              _lpiUserIP
+              _lpiFields
               _lpiKey
               _lpiOAuthToken
-              _lpiFields
               (Just AltJSON)
               _lpiLandingPage
           where go

@@ -58,9 +58,9 @@ type ManagementWebPropertyAdWordsLinksDeleteResource
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a web property-AdWords link.
@@ -186,14 +186,14 @@ instance GoogleRequest
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
           ManagementWebPropertyAdWordsLinksDelete'{..}
-          = go _mwpawldQuotaUser (Just _mwpawldPrettyPrint)
-              _mwpawldWebPropertyId
-              _mwpawldUserIP
-              _mwpawldAccountId
-              _mwpawldKey
+          = go _mwpawldAccountId _mwpawldWebPropertyId
               _mwpawldWebPropertyAdWordsLinkId
-              _mwpawldOAuthToken
+              _mwpawldQuotaUser
+              (Just _mwpawldPrettyPrint)
+              _mwpawldUserIP
               _mwpawldFields
+              _mwpawldKey
+              _mwpawldOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

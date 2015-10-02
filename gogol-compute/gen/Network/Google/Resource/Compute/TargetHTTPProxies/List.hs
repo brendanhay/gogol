@@ -52,15 +52,15 @@ type TargetHTTPProxiesListResource =
      Capture "project" Text :>
        "global" :>
          "targetHttpProxies" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "filter" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] TargetHTTPProxyList
 
@@ -205,15 +205,15 @@ instance GoogleRequest TargetHTTPProxiesList' where
         type Rs TargetHTTPProxiesList' = TargetHTTPProxyList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u TargetHTTPProxiesList'{..}
-          = go _thttpplQuotaUser (Just _thttpplPrettyPrint)
-              _thttpplProject
-              _thttpplUserIP
-              _thttpplKey
-              _thttpplFilter
+          = go _thttpplFilter (Just _thttpplMaxResults)
               _thttpplPageToken
-              _thttpplOAuthToken
-              (Just _thttpplMaxResults)
+              _thttpplProject
+              _thttpplQuotaUser
+              (Just _thttpplPrettyPrint)
+              _thttpplUserIP
               _thttpplFields
+              _thttpplKey
+              _thttpplOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

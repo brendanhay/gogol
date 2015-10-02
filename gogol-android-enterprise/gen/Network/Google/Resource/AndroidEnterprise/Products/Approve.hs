@@ -56,9 +56,9 @@ type ProductsApproveResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] ProductsApproveRequest :>
                                Post '[JSON] ()
@@ -177,13 +177,12 @@ instance GoogleRequest ProductsApprove' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u ProductsApprove'{..}
-          = go _paQuotaUser (Just _paPrettyPrint)
-              _paEnterpriseId
+          = go _paEnterpriseId _paProductId _paQuotaUser
+              (Just _paPrettyPrint)
               _paUserIP
+              _paFields
               _paKey
               _paOAuthToken
-              _paProductId
-              _paFields
               (Just AltJSON)
               _paProductsApproveRequest
           where go

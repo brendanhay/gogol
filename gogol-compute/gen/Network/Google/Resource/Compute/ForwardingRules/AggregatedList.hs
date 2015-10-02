@@ -51,15 +51,15 @@ type ForwardingRulesAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
          "forwardingRules" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "filter" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ForwardingRuleAggregatedList
 
@@ -202,15 +202,15 @@ instance GoogleRequest ForwardingRulesAggregatedList'
         request = requestWithRoute defReq computeURL
         requestWithRoute r u
           ForwardingRulesAggregatedList'{..}
-          = go _fralQuotaUser (Just _fralPrettyPrint)
-              _fralProject
-              _fralUserIP
-              _fralKey
-              _fralFilter
+          = go _fralFilter (Just _fralMaxResults)
               _fralPageToken
-              _fralOAuthToken
-              (Just _fralMaxResults)
+              _fralProject
+              _fralQuotaUser
+              (Just _fralPrettyPrint)
+              _fralUserIP
               _fralFields
+              _fralKey
+              _fralOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

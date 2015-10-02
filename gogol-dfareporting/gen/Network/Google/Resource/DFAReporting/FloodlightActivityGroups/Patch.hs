@@ -51,13 +51,13 @@ type FloodlightActivityGroupsPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "floodlightActivityGroups" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "id" Int64 :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] FloodlightActivityGroup :>
                              Patch '[JSON] FloodlightActivityGroup
@@ -182,13 +182,12 @@ instance GoogleRequest FloodlightActivityGroupsPatch'
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           FloodlightActivityGroupsPatch'{..}
-          = go _fagpQuotaUser (Just _fagpPrettyPrint)
+          = go _fagpProfileId (Just _fagpId) _fagpQuotaUser
+              (Just _fagpPrettyPrint)
               _fagpUserIP
-              _fagpProfileId
-              _fagpKey
-              (Just _fagpId)
-              _fagpOAuthToken
               _fagpFields
+              _fagpKey
+              _fagpOAuthToken
               (Just AltJSON)
               _fagpFloodlightActivityGroup
           where go

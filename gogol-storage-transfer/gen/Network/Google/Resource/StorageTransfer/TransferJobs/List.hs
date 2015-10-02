@@ -56,20 +56,20 @@ type TransferJobsListResource =
      "v1" :>
        "transferJobs" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "filter" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "pageSize" Int32 :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "callback" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageSize" Int32 :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "quotaUser" Text :>
+                               QueryParam "prettyPrint" Bool :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] ListTransferJobsResponse
 
@@ -245,19 +245,19 @@ instance GoogleRequest TransferJobsList' where
         type Rs TransferJobsList' = ListTransferJobsResponse
         request = requestWithRoute defReq storageTransferURL
         requestWithRoute r u TransferJobsList'{..}
-          = go _tjlXgafv _tjlQuotaUser (Just _tjlPrettyPrint)
-              _tjlUploadProtocol
-              (Just _tjlPp)
-              _tjlAccessToken
-              _tjlUploadType
-              _tjlBearerToken
-              _tjlKey
-              _tjlFilter
-              _tjlPageToken
-              _tjlOAuthToken
-              _tjlPageSize
-              _tjlFields
+          = go _tjlXgafv _tjlAccessToken _tjlBearerToken
               _tjlCallback
+              _tjlFilter
+              _tjlPageSize
+              _tjlPageToken
+              (Just _tjlPp)
+              _tjlUploadType
+              _tjlUploadProtocol
+              _tjlQuotaUser
+              (Just _tjlPrettyPrint)
+              _tjlFields
+              _tjlKey
+              _tjlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

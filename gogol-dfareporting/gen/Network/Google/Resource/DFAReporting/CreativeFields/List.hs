@@ -55,23 +55,23 @@ type CreativeFieldsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "creativeFields" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "searchString" Text :>
-                   QueryParams "ids" Int64 :>
-                     QueryParam "sortOrder"
-                       DfareportingCreativeFieldsListSortOrder
+           QueryParams "advertiserIds" Int64 :>
+             QueryParams "ids" Int64 :>
+               QueryParam "maxResults" Int32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "searchString" Text :>
+                     QueryParam "sortField"
+                       DfareportingCreativeFieldsListSortField
                        :>
-                       QueryParam "key" Key :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "sortField"
-                             DfareportingCreativeFieldsListSortField
-                             :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParams "advertiserIds" Int64 :>
-                                 QueryParam "maxResults" Int32 :>
-                                   QueryParam "fields" Text :>
+                       QueryParam "sortOrder"
+                         DfareportingCreativeFieldsListSortOrder
+                         :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] CreativeFieldsListResponse
 
@@ -241,18 +241,18 @@ instance GoogleRequest CreativeFieldsList' where
              CreativeFieldsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeFieldsList'{..}
-          = go _cflQuotaUser (Just _cflPrettyPrint) _cflUserIP
-              _cflSearchString
-              _cflIds
-              _cflProfileId
-              _cflSortOrder
-              _cflKey
+          = go _cflAdvertiserIds _cflIds _cflMaxResults
               _cflPageToken
+              _cflSearchString
               _cflSortField
-              _cflOAuthToken
-              _cflAdvertiserIds
-              _cflMaxResults
+              _cflSortOrder
+              _cflProfileId
+              _cflQuotaUser
+              (Just _cflPrettyPrint)
+              _cflUserIP
               _cflFields
+              _cflKey
+              _cflOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

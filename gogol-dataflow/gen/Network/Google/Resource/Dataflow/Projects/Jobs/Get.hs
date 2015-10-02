@@ -59,18 +59,18 @@ type ProjectsJobsGetResource =
            "jobs" :>
              Capture "jobId" Text :>
                QueryParam "$.xgafv" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "key" Key :>
-                                 QueryParam "view" Text :>
-                                   QueryParam "oauth_token" OAuthToken :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "callback" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "view" Text :>
+                               QueryParam "quotaUser" Text :>
+                                 QueryParam "prettyPrint" Bool :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "key" Key :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] Job
 
@@ -239,19 +239,19 @@ instance GoogleRequest ProjectsJobsGet' where
         type Rs ProjectsJobsGet' = Job
         request = requestWithRoute defReq dataflowURL
         requestWithRoute r u ProjectsJobsGet'{..}
-          = go _pjgXgafv _pjgQuotaUser (Just _pjgPrettyPrint)
-              _pjgJobId
-              _pjgUploadProtocol
+          = go _pjgXgafv _pjgAccessToken _pjgBearerToken
+              _pjgCallback
               (Just _pjgPp)
-              _pjgAccessToken
               _pjgUploadType
-              _pjgBearerToken
-              _pjgKey
+              _pjgUploadProtocol
               _pjgView
               _pjgProjectId
-              _pjgOAuthToken
+              _pjgJobId
+              _pjgQuotaUser
+              (Just _pjgPrettyPrint)
               _pjgFields
-              _pjgCallback
+              _pjgKey
+              _pjgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -90,7 +90,7 @@ module Network.Google.AppsCalendar.Types
 
     -- * ACLRuleScope
     , ACLRuleScope
-    , aCLRuleScope
+    , aclRuleScope
     , arsValue
     , arsType
 
@@ -325,7 +325,7 @@ module Network.Google.AppsCalendar.Types
 
     -- * ACLRule
     , ACLRule
-    , aCLRule
+    , aclRule
     , arEtag
     , arKind
     , arRole
@@ -356,12 +356,12 @@ module Network.Google.AppsCalendar.Types
 
     -- * ACL
     , ACL
-    , aCL
-    , aclEtag
-    , aclNextPageToken
-    , aclKind
-    , aclItems
-    , aclNextSyncToken
+    , acl
+    , aEtag
+    , aNextPageToken
+    , aKind
+    , aItems
+    , aNextSyncToken
 
     -- * EventSource
     , EventSource

@@ -49,9 +49,9 @@ type ContactsInsertResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] Contact :> Post '[JSON] Contact
 
@@ -146,9 +146,9 @@ instance GoogleRequest ContactsInsert' where
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u ContactsInsert'{..}
           = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIP
+              _ciFields
               _ciKey
               _ciOAuthToken
-              _ciFields
               (Just AltJSON)
               _ciContact
           where go

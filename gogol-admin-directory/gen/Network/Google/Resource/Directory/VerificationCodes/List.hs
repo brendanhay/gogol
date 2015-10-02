@@ -52,9 +52,9 @@ type VerificationCodesListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] VerificationCodes
 
@@ -153,11 +153,11 @@ instance GoogleRequest VerificationCodesList' where
         type Rs VerificationCodesList' = VerificationCodes
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u VerificationCodesList'{..}
-          = go _vclQuotaUser (Just _vclPrettyPrint) _vclUserIP
+          = go _vclUserKey _vclQuotaUser (Just _vclPrettyPrint)
+              _vclUserIP
+              _vclFields
               _vclKey
               _vclOAuthToken
-              _vclUserKey
-              _vclFields
               (Just AltJSON)
           where go
                   = clientWithRoute

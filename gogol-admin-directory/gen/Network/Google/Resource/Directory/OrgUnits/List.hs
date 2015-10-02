@@ -50,14 +50,14 @@ type OrgUnitsListResource =
      "customer" :>
        Capture "customerId" Text :>
          "orgunits" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "orgUnitPath" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "type" DirectoryOrgUnitsListType :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+           QueryParam "orgUnitPath" Text :>
+             QueryParam "type" DirectoryOrgUnitsListType :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] OrgUnits
 
 -- | Retrieve all Organization Units
@@ -172,13 +172,13 @@ instance GoogleRequest OrgUnitsList' where
         type Rs OrgUnitsList' = OrgUnits
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u OrgUnitsList'{..}
-          = go _oulQuotaUser (Just _oulPrettyPrint) _oulUserIP
-              (Just _oulOrgUnitPath)
-              _oulCustomerId
-              _oulKey
-              _oulType
-              _oulOAuthToken
+          = go (Just _oulOrgUnitPath) _oulType _oulCustomerId
+              _oulQuotaUser
+              (Just _oulPrettyPrint)
+              _oulUserIP
               _oulFields
+              _oulKey
+              _oulOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

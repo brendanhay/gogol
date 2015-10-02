@@ -49,9 +49,9 @@ type ReportsRequestResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] ReportRequest :> Post '[JSON] Report
 
@@ -148,9 +148,9 @@ instance GoogleRequest ReportsRequest' where
           = requestWithRoute defReq doubleClickSearchURL
         requestWithRoute r u ReportsRequest'{..}
           = go _rrQuotaUser (Just _rrPrettyPrint) _rrUserIP
+              _rrFields
               _rrKey
               _rrOAuthToken
-              _rrFields
               (Just AltJSON)
               _rrReportRequest
           where go

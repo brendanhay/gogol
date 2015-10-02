@@ -54,9 +54,9 @@ type RevisionsUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Revision :> Put '[JSON] Revision
 
@@ -169,12 +169,12 @@ instance GoogleRequest RevisionsUpdate' where
         type Rs RevisionsUpdate' = Revision
         request = requestWithRoute defReq driveURL
         requestWithRoute r u RevisionsUpdate'{..}
-          = go _ruQuotaUser (Just _ruPrettyPrint) _ruUserIP
-              _ruKey
-              _ruFileId
-              _ruOAuthToken
-              _ruRevisionId
+          = go _ruFileId _ruRevisionId _ruQuotaUser
+              (Just _ruPrettyPrint)
+              _ruUserIP
               _ruFields
+              _ruKey
+              _ruOAuthToken
               (Just AltJSON)
               _ruRevision
           where go

@@ -27,7 +27,7 @@ module Network.Google.Resource.Compute.VPNTunnels.List
       VPNTunnelsListResource
 
     -- * Creating a Request
-    , vPNTunnelsList'
+    , vpnTunnelsList'
     , VPNTunnelsList'
 
     -- * Request Lenses
@@ -54,22 +54,22 @@ type VPNTunnelsListResource =
        "regions" :>
          Capture "region" Text :>
            "vpnTunnels" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "filter" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
+             QueryParam "filter" Text :>
+               QueryParam "maxResults" Word32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] VPNTunnelList
 
 -- | Retrieves the list of VpnTunnel resources contained in the specified
 -- project and region.
 --
--- /See:/ 'vPNTunnelsList'' smart constructor.
+-- /See:/ 'vpnTunnelsList'' smart constructor.
 data VPNTunnelsList' = VPNTunnelsList'
     { _vtlQuotaUser   :: !(Maybe Text)
     , _vtlPrettyPrint :: !Bool
@@ -109,11 +109,11 @@ data VPNTunnelsList' = VPNTunnelsList'
 -- * 'vtlMaxResults'
 --
 -- * 'vtlFields'
-vPNTunnelsList'
+vpnTunnelsList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'region'
     -> VPNTunnelsList'
-vPNTunnelsList' pVtlProject_ pVtlRegion_ =
+vpnTunnelsList' pVtlProject_ pVtlRegion_ =
     VPNTunnelsList'
     { _vtlQuotaUser = Nothing
     , _vtlPrettyPrint = True
@@ -210,15 +210,15 @@ instance GoogleRequest VPNTunnelsList' where
         type Rs VPNTunnelsList' = VPNTunnelList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u VPNTunnelsList'{..}
-          = go _vtlQuotaUser (Just _vtlPrettyPrint) _vtlProject
-              _vtlUserIP
-              _vtlKey
-              _vtlFilter
+          = go _vtlFilter (Just _vtlMaxResults) _vtlPageToken
+              _vtlProject
               _vtlRegion
-              _vtlPageToken
-              _vtlOAuthToken
-              (Just _vtlMaxResults)
+              _vtlQuotaUser
+              (Just _vtlPrettyPrint)
+              _vtlUserIP
               _vtlFields
+              _vtlKey
+              _vtlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

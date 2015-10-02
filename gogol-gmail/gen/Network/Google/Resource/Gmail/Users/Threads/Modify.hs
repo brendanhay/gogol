@@ -55,9 +55,9 @@ type UsersThreadsModifyResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] ModifyThreadRequest :>
                              Post '[JSON] Thread
@@ -177,12 +177,12 @@ instance GoogleRequest UsersThreadsModify' where
         type Rs UsersThreadsModify' = Thread
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersThreadsModify'{..}
-          = go _utmQuotaUser (Just _utmPrettyPrint) _utmUserIP
-              _utmUserId
-              _utmKey
-              _utmId
-              _utmOAuthToken
+          = go _utmUserId _utmId _utmQuotaUser
+              (Just _utmPrettyPrint)
+              _utmUserIP
               _utmFields
+              _utmKey
+              _utmOAuthToken
               (Just AltJSON)
               _utmModifyThreadRequest
           where go

@@ -57,16 +57,16 @@ type SchedulePatchResource =
          "jobs" :>
            Capture "jobId" Word64 :>
              "schedule" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "allDay" Bool :>
+               QueryParam "allDay" Bool :>
+                 QueryParam "duration" Word64 :>
+                   QueryParam "endTime" Word64 :>
                      QueryParam "startTime" Word64 :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "endTime" Word64 :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "duration" Word64 :>
-                                 QueryParam "fields" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] Schedule :>
                                        Patch '[JSON] Schedule
@@ -216,16 +216,15 @@ instance GoogleRequest SchedulePatch' where
         type Rs SchedulePatch' = Schedule
         request = requestWithRoute defReq mapsCoordinateURL
         requestWithRoute r u SchedulePatch'{..}
-          = go _spQuotaUser (Just _spPrettyPrint) _spJobId
-              _spAllDay
-              _spStartTime
-              _spUserIP
+          = go _spAllDay _spDuration _spEndTime _spStartTime
               _spTeamId
-              _spKey
-              _spEndTime
-              _spOAuthToken
-              _spDuration
+              _spJobId
+              _spQuotaUser
+              (Just _spPrettyPrint)
+              _spUserIP
               _spFields
+              _spKey
+              _spOAuthToken
               (Just AltJSON)
               _spSchedule
           where go

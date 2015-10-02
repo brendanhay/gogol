@@ -51,13 +51,13 @@ type RealtimeUpdateResource =
      "files" :>
        Capture "fileId" Text :>
          "realtime" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "baseRevision" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "baseRevision" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Put '[JSON] ()
 
 -- | Overwrites the Realtime API data model associated with this file with
@@ -171,13 +171,12 @@ instance GoogleRequest RealtimeUpdate' where
         type Rs RealtimeUpdate' = ()
         request = requestWithRoute defReq driveURL
         requestWithRoute r u RealtimeUpdate'{..}
-          = go _rQuotaUser (Just _rPrettyPrint) _rUserIP
-              _rBaseRevision
-              _rMedia
-              _rKey
-              _rFileId
-              _rOAuthToken
+          = go _rBaseRevision _rMedia _rFileId _rQuotaUser
+              (Just _rPrettyPrint)
+              _rUserIP
               _rFields
+              _rKey
+              _rOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

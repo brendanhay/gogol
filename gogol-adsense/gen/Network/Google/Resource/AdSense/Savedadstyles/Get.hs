@@ -50,9 +50,9 @@ type SavedadstylesGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] SavedAdStyle
 
 -- | Get a specific saved ad style from the user\'s account.
@@ -146,12 +146,12 @@ instance GoogleRequest SavedadstylesGet' where
         type Rs SavedadstylesGet' = SavedAdStyle
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u SavedadstylesGet'{..}
-          = go _sgQuotaUser (Just _sgPrettyPrint)
-              _sgSavedAdStyleId
+          = go _sgSavedAdStyleId _sgQuotaUser
+              (Just _sgPrettyPrint)
               _sgUserIP
+              _sgFields
               _sgKey
               _sgOAuthToken
-              _sgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

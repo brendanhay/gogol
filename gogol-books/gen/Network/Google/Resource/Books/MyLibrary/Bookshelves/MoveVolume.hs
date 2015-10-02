@@ -52,15 +52,15 @@ type MyLibraryBookshelvesMoveVolumeResource =
        "bookshelves" :>
          Capture "shelf" Text :>
            "moveVolume" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "volumeId" Text :>
-                       QueryParam "source" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "volumePosition" Int32 :>
-                             QueryParam "fields" Text :>
+             QueryParam "source" Text :>
+               QueryParam "volumeId" Text :>
+                 QueryParam "volumePosition" Int32 :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Moves a volume within a bookshelf.
@@ -192,15 +192,14 @@ instance GoogleRequest
         request = requestWithRoute defReq booksURL
         requestWithRoute r u
           MyLibraryBookshelvesMoveVolume'{..}
-          = go _mlbmvQuotaUser (Just _mlbmvPrettyPrint)
-              _mlbmvUserIP
-              _mlbmvShelf
-              _mlbmvKey
-              (Just _mlbmvVolumeId)
-              _mlbmvSource
-              _mlbmvOAuthToken
+          = go _mlbmvSource _mlbmvShelf (Just _mlbmvVolumeId)
               (Just _mlbmvVolumePosition)
+              _mlbmvQuotaUser
+              (Just _mlbmvPrettyPrint)
+              _mlbmvUserIP
               _mlbmvFields
+              _mlbmvKey
+              _mlbmvOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -58,19 +58,19 @@ type AppsModulesListResource =
          Capture "appsId" Text :>
            "modules" :>
              QueryParam "$.xgafv" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "upload_protocol" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "access_token" Text :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "pageSize" Int32 :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "callback" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "bearer_token" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "pageSize" Int32 :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "upload_protocol" Text :>
+                               QueryParam "quotaUser" Text :>
+                                 QueryParam "prettyPrint" Bool :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "key" Key :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] ListModulesResponse
 
@@ -241,19 +241,19 @@ instance GoogleRequest AppsModulesList' where
         type Rs AppsModulesList' = ListModulesResponse
         request = requestWithRoute defReq appEngineURL
         requestWithRoute r u AppsModulesList'{..}
-          = go _amlXgafv _amlQuotaUser (Just _amlPrettyPrint)
-              _amlUploadProtocol
-              (Just _amlPp)
-              _amlAccessToken
-              _amlUploadType
-              _amlBearerToken
-              _amlKey
-              _amlAppsId
-              _amlPageToken
-              _amlOAuthToken
-              _amlPageSize
-              _amlFields
+          = go _amlXgafv _amlAccessToken _amlBearerToken
               _amlCallback
+              _amlPageSize
+              _amlPageToken
+              (Just _amlPp)
+              _amlUploadType
+              _amlUploadProtocol
+              _amlAppsId
+              _amlQuotaUser
+              (Just _amlPrettyPrint)
+              _amlFields
+              _amlKey
+              _amlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

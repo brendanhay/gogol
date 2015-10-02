@@ -55,14 +55,14 @@ type InstancesSetDiskAutoDeleteResource =
            "instances" :>
              Capture "instance" Text :>
                "setDiskAutoDelete" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "autoDelete" Bool :>
-                         QueryParam "deviceName" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
+                 QueryParam "autoDelete" Bool :>
+                   QueryParam "deviceName" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Post '[JSON] Operation
 
@@ -204,16 +204,15 @@ instance GoogleRequest InstancesSetDiskAutoDelete'
         type Rs InstancesSetDiskAutoDelete' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstancesSetDiskAutoDelete'{..}
-          = go _isdadQuotaUser (Just _isdadPrettyPrint)
-              _isdadProject
-              _isdadUserIP
+          = go _isdadProject _isdadZone _isdadInstance
               (Just _isdadAutoDelete)
-              _isdadZone
               (Just _isdadDeviceName)
+              _isdadQuotaUser
+              (Just _isdadPrettyPrint)
+              _isdadUserIP
+              _isdadFields
               _isdadKey
               _isdadOAuthToken
-              _isdadFields
-              _isdadInstance
               (Just AltJSON)
           where go
                   = clientWithRoute

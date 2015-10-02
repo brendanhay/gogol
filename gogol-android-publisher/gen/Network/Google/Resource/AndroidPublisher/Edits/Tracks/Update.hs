@@ -60,9 +60,9 @@ type EditsTracksUpdateResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Track :> Put '[JSON] Track
 
@@ -191,13 +191,13 @@ instance GoogleRequest EditsTracksUpdate' where
         type Rs EditsTracksUpdate' = Track
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u EditsTracksUpdate'{..}
-          = go _etuQuotaUser _etuTrack (Just _etuPrettyPrint)
-              _etuPackageName
+          = go _etuPackageName _etuEditId _etuTrack
+              _etuQuotaUser
+              (Just _etuPrettyPrint)
               _etuUserIP
+              _etuFields
               _etuKey
               _etuOAuthToken
-              _etuEditId
-              _etuFields
               (Just AltJSON)
               _etuTrack
           where go

@@ -52,9 +52,9 @@ type AccountsMetadataMetricsListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Metadata
 
 -- | List the metadata for the metrics available to this AdExchange account.
@@ -154,12 +154,12 @@ instance GoogleRequest AccountsMetadataMetricsList'
         type Rs AccountsMetadataMetricsList' = Metadata
         request = requestWithRoute defReq adExchangeSellerURL
         requestWithRoute r u AccountsMetadataMetricsList'{..}
-          = go _ammlQuotaUser (Just _ammlPrettyPrint)
+          = go _ammlAccountId _ammlQuotaUser
+              (Just _ammlPrettyPrint)
               _ammlUserIP
-              _ammlAccountId
+              _ammlFields
               _ammlKey
               _ammlOAuthToken
-              _ammlFields
               (Just AltJSON)
           where go
                   = clientWithRoute

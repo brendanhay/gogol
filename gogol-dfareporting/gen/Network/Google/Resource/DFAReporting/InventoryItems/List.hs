@@ -59,24 +59,24 @@ type InventoryItemsListResource =
          "projects" :>
            Capture "projectId" Int64 :>
              "inventoryItems" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParams "ids" Int64 :>
-                       QueryParam "sortOrder"
-                         DfareportingInventoryItemsListSortOrder
-                         :>
-                         QueryParam "inPlan" Bool :>
-                           QueryParam "key" Key :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "sortField"
-                                 DfareportingInventoryItemsListSortField
-                                 :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParams "orderId" Int64 :>
-                                     QueryParams "siteId" Int64 :>
-                                       QueryParam "maxResults" Int32 :>
-                                         QueryParam "fields" Text :>
+               QueryParams "ids" Int64 :>
+                 QueryParam "inPlan" Bool :>
+                   QueryParam "maxResults" Int32 :>
+                     QueryParams "orderId" Int64 :>
+                       QueryParam "pageToken" Text :>
+                         QueryParams "siteId" Int64 :>
+                           QueryParam "sortField"
+                             DfareportingInventoryItemsListSortField
+                             :>
+                             QueryParam "sortOrder"
+                               DfareportingInventoryItemsListSortOrder
+                               :>
+                               QueryParam "quotaUser" Text :>
+                                 QueryParam "prettyPrint" Bool :>
+                                   QueryParam "userIp" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "key" Key :>
+                                         QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
                                              Get '[JSON]
                                                InventoryItemsListResponse
@@ -257,20 +257,19 @@ instance GoogleRequest InventoryItemsList' where
              InventoryItemsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u InventoryItemsList'{..}
-          = go _iilQuotaUser (Just _iilPrettyPrint) _iilUserIP
-              _iilIds
-              _iilProfileId
-              _iilSortOrder
-              _iilInPlan
-              _iilKey
+          = go _iilIds _iilInPlan _iilMaxResults _iilOrderId
               _iilPageToken
-              _iilProjectId
-              _iilSortField
-              _iilOAuthToken
-              _iilOrderId
               _iilSiteId
-              _iilMaxResults
+              _iilSortField
+              _iilSortOrder
+              _iilProfileId
+              _iilProjectId
+              _iilQuotaUser
+              (Just _iilPrettyPrint)
+              _iilUserIP
               _iilFields
+              _iilKey
+              _iilOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

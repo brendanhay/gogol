@@ -53,9 +53,9 @@ type EditsListingsDeleteallResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes all localized listings from an edit.
@@ -163,13 +163,12 @@ instance GoogleRequest EditsListingsDeleteall' where
         type Rs EditsListingsDeleteall' = ()
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u EditsListingsDeleteall'{..}
-          = go _ediQuotaUser (Just _ediPrettyPrint)
-              _ediPackageName
+          = go _ediPackageName _ediEditId _ediQuotaUser
+              (Just _ediPrettyPrint)
               _ediUserIP
+              _ediFields
               _ediKey
               _ediOAuthToken
-              _ediEditId
-              _ediFields
               (Just AltJSON)
           where go
                   = clientWithRoute

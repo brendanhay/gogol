@@ -51,9 +51,9 @@ type LayersCancelProcessingResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Post '[JSON] ProcessResponse
 
@@ -149,11 +149,11 @@ instance GoogleRequest LayersCancelProcessing' where
         type Rs LayersCancelProcessing' = ProcessResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u LayersCancelProcessing'{..}
-          = go _lcpQuotaUser (Just _lcpPrettyPrint) _lcpUserIP
-              _lcpKey
-              _lcpId
-              _lcpOAuthToken
+          = go _lcpId _lcpQuotaUser (Just _lcpPrettyPrint)
+              _lcpUserIP
               _lcpFields
+              _lcpKey
+              _lcpOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

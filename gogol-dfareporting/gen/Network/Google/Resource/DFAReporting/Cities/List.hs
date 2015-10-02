@@ -52,16 +52,16 @@ type CitiesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "cities" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParams "regionDartIds" Int64 :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "namePrefix" Text :>
-                     QueryParam "key" Key :>
-                       QueryParams "countryDartIds" Int64 :>
-                         QueryParams "dartIds" Int64 :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+           QueryParams "countryDartIds" Int64 :>
+             QueryParams "dartIds" Int64 :>
+               QueryParam "namePrefix" Text :>
+                 QueryParams "regionDartIds" Int64 :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] CitiesListResponse
 
@@ -191,15 +191,15 @@ instance GoogleRequest CitiesList' where
         type Rs CitiesList' = CitiesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CitiesList'{..}
-          = go _cQuotaUser (Just _cPrettyPrint) _cRegionDartIds
-              _cUserIP
+          = go _cCountryDartIds _cDartIds _cNamePrefix
+              _cRegionDartIds
               _cProfileId
-              _cNamePrefix
-              _cKey
-              _cCountryDartIds
-              _cDartIds
-              _cOAuthToken
+              _cQuotaUser
+              (Just _cPrettyPrint)
+              _cUserIP
               _cFields
+              _cKey
+              _cOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy CitiesListResource)

@@ -52,16 +52,16 @@ import           Network.Google.Prelude
 type UsersHistoryListResource =
      Capture "userId" Text :>
        "history" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "startHistoryId" Word64 :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "labelId" Text :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+         QueryParam "labelId" Text :>
+           QueryParam "maxResults" Word32 :>
+             QueryParam "pageToken" Text :>
+               QueryParam "startHistoryId" Word64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListHistoryResponse
 
@@ -208,15 +208,15 @@ instance GoogleRequest UsersHistoryList' where
         type Rs UsersHistoryList' = ListHistoryResponse
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersHistoryList'{..}
-          = go _uhlQuotaUser (Just _uhlPrettyPrint) _uhlUserIP
-              _uhlUserId
-              _uhlKey
+          = go _uhlLabelId (Just _uhlMaxResults) _uhlPageToken
               _uhlStartHistoryId
-              _uhlPageToken
-              _uhlOAuthToken
-              _uhlLabelId
-              (Just _uhlMaxResults)
+              _uhlUserId
+              _uhlQuotaUser
+              (Just _uhlPrettyPrint)
+              _uhlUserIP
               _uhlFields
+              _uhlKey
+              _uhlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

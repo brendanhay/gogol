@@ -58,28 +58,29 @@ import           Network.Google.Prelude
 -- 'RasterCollectionsList'' request conforms to.
 type RasterCollectionsListResource =
      "rasterCollections" :>
-       QueryParam "createdAfter" UTCTime :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "creatorEmail" Text :>
-                 QueryParam "role" MapsEngineRasterCollectionsListRole
-                   :>
-                   QueryParam "key" Key :>
-                     QueryParam "bbox" Text :>
+       QueryParam "bbox" Text :>
+         QueryParam "createdAfter" UTCTime :>
+           QueryParam "createdBefore" UTCTime :>
+             QueryParam "creatorEmail" Text :>
+               QueryParam "maxResults" Word32 :>
+                 QueryParam "modifiedAfter" UTCTime :>
+                   QueryParam "modifiedBefore" UTCTime :>
+                     QueryParam "pageToken" Text :>
                        QueryParam "processingStatus"
                          MapsEngineRasterCollectionsListProcessingStatus
                          :>
-                         QueryParam "modifiedAfter" UTCTime :>
-                           QueryParam "modifiedBefore" UTCTime :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "projectId" Text :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "search" Text :>
-                                     QueryParam "maxResults" Word32 :>
-                                       QueryParam "tags" Text :>
-                                         QueryParam "fields" Text :>
-                                           QueryParam "createdBefore" UTCTime :>
+                         QueryParam "projectId" Text :>
+                           QueryParam "role" MapsEngineRasterCollectionsListRole
+                             :>
+                             QueryParam "search" Text :>
+                               QueryParam "tags" Text :>
+                                 QueryParam "quotaUser" Text :>
+                                   QueryParam "prettyPrint" Bool :>
+                                     QueryParam "userIp" Text :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "key" Key :>
+                                           QueryParam "oauth_token" OAuthToken
+                                             :>
                                              QueryParam "alt" AltJSON :>
                                                Get '[JSON]
                                                  RasterCollectionsListResponse
@@ -303,24 +304,23 @@ instance GoogleRequest RasterCollectionsList' where
              RasterCollectionsListResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u RasterCollectionsList'{..}
-          = go _rclCreatedAfter _rclQuotaUser
-              (Just _rclPrettyPrint)
-              _rclUserIP
+          = go _rclBbox _rclCreatedAfter _rclCreatedBefore
               _rclCreatorEmail
-              _rclRole
-              _rclKey
-              _rclBbox
-              _rclProcessingStatus
+              _rclMaxResults
               _rclModifiedAfter
               _rclModifiedBefore
               _rclPageToken
+              _rclProcessingStatus
               _rclProjectId
-              _rclOAuthToken
+              _rclRole
               _rclSearch
-              _rclMaxResults
               _rclTags
+              _rclQuotaUser
+              (Just _rclPrettyPrint)
+              _rclUserIP
               _rclFields
-              _rclCreatedBefore
+              _rclKey
+              _rclOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

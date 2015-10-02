@@ -52,9 +52,9 @@ type CreativeFieldsUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] CreativeField :>
                            Put '[JSON] CreativeField
@@ -163,11 +163,12 @@ instance GoogleRequest CreativeFieldsUpdate' where
         type Rs CreativeFieldsUpdate' = CreativeField
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeFieldsUpdate'{..}
-          = go _cfuQuotaUser (Just _cfuPrettyPrint) _cfuUserIP
-              _cfuProfileId
+          = go _cfuProfileId _cfuQuotaUser
+              (Just _cfuPrettyPrint)
+              _cfuUserIP
+              _cfuFields
               _cfuKey
               _cfuOAuthToken
-              _cfuFields
               (Just AltJSON)
               _cfuCreativeField
           where go

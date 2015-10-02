@@ -51,9 +51,9 @@ type RegionsListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] RegionsListResponse
 
@@ -147,11 +147,11 @@ instance GoogleRequest RegionsList' where
         type Rs RegionsList' = RegionsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u RegionsList'{..}
-          = go _rlQuotaUser (Just _rlPrettyPrint) _rlUserIP
-              _rlProfileId
+          = go _rlProfileId _rlQuotaUser (Just _rlPrettyPrint)
+              _rlUserIP
+              _rlFields
               _rlKey
               _rlOAuthToken
-              _rlFields
               (Just AltJSON)
           where go
                   = clientWithRoute

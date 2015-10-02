@@ -48,13 +48,13 @@ import           Network.Google.Prelude
 type ClientAccessGetResource =
      "clientAccess" :>
        Capture "clientAccountId" Int64 :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "sponsorAccountId" Int32 :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+         QueryParam "sponsorAccountId" Int32 :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] ClientAccessCapabilities
 
@@ -160,12 +160,13 @@ instance GoogleRequest ClientAccessGet' where
         type Rs ClientAccessGet' = ClientAccessCapabilities
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u ClientAccessGet'{..}
-          = go _cagQuotaUser (Just _cagPrettyPrint) _cagUserIP
-              (Just _cagSponsorAccountId)
-              _cagKey
-              _cagClientAccountId
-              _cagOAuthToken
+          = go _cagClientAccountId (Just _cagSponsorAccountId)
+              _cagQuotaUser
+              (Just _cagPrettyPrint)
+              _cagUserIP
               _cagFields
+              _cagKey
+              _cagOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

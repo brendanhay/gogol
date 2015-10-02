@@ -51,9 +51,9 @@ type ReadgroupsetsUpdateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] ReadGroupSet :>
                          Put '[JSON] ReadGroupSet
@@ -161,12 +161,12 @@ instance GoogleRequest ReadgroupsetsUpdate' where
         type Rs ReadgroupsetsUpdate' = ReadGroupSet
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u ReadgroupsetsUpdate'{..}
-          = go _ruQuotaUser (Just _ruPrettyPrint)
-              _ruReadGroupSetId
+          = go _ruReadGroupSetId _ruQuotaUser
+              (Just _ruPrettyPrint)
               _ruUserIP
+              _ruFields
               _ruKey
               _ruOAuthToken
-              _ruFields
               (Just AltJSON)
               _ruReadGroupSet
           where go

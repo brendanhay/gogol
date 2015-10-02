@@ -57,9 +57,9 @@ type AccountsContainersFoldersEntitiesListResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] FolderEntities
 
@@ -184,14 +184,13 @@ instance GoogleRequest
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersFoldersEntitiesList'{..}
-          = go _acfelQuotaUser (Just _acfelPrettyPrint)
-              _acfelContainerId
+          = go _acfelAccountId _acfelContainerId _acfelFolderId
+              _acfelQuotaUser
+              (Just _acfelPrettyPrint)
               _acfelUserIP
-              _acfelFolderId
-              _acfelAccountId
+              _acfelFields
               _acfelKey
               _acfelOAuthToken
-              _acfelFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -52,9 +52,9 @@ type ContentCategoriesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] ContentCategory :>
                            Post '[JSON] ContentCategory
@@ -163,11 +163,12 @@ instance GoogleRequest ContentCategoriesInsert' where
         type Rs ContentCategoriesInsert' = ContentCategory
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ContentCategoriesInsert'{..}
-          = go _cciQuotaUser (Just _cciPrettyPrint) _cciUserIP
-              _cciProfileId
+          = go _cciProfileId _cciQuotaUser
+              (Just _cciPrettyPrint)
+              _cciUserIP
+              _cciFields
               _cciKey
               _cciOAuthToken
-              _cciFields
               (Just AltJSON)
               _cciContentCategory
           where go

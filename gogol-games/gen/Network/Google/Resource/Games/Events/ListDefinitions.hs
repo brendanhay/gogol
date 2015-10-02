@@ -48,15 +48,15 @@ import           Network.Google.Prelude
 -- 'EventsListDefinitions'' request conforms to.
 type EventsListDefinitionsResource =
      "eventDefinitions" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "language" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "maxResults" Int32 :>
-                       QueryParam "fields" Text :>
+       QueryParam "language" Text :>
+         QueryParam "maxResults" Int32 :>
+           QueryParam "pageToken" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] EventDefinitionListResponse
 
@@ -174,13 +174,13 @@ instance GoogleRequest EventsListDefinitions' where
              EventDefinitionListResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u EventsListDefinitions'{..}
-          = go _eldQuotaUser (Just _eldPrettyPrint) _eldUserIP
-              _eldKey
-              _eldLanguage
-              _eldPageToken
-              _eldOAuthToken
-              _eldMaxResults
+          = go _eldLanguage _eldMaxResults _eldPageToken
+              _eldQuotaUser
+              (Just _eldPrettyPrint)
+              _eldUserIP
               _eldFields
+              _eldKey
+              _eldOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

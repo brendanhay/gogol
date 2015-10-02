@@ -52,15 +52,15 @@ type GlobalForwardingRulesListResource =
      Capture "project" Text :>
        "global" :>
          "forwardingRules" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "filter" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ForwardingRuleList
 
@@ -202,15 +202,15 @@ instance GoogleRequest GlobalForwardingRulesList'
              ForwardingRuleList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u GlobalForwardingRulesList'{..}
-          = go _gfrlQuotaUser (Just _gfrlPrettyPrint)
-              _gfrlProject
-              _gfrlUserIP
-              _gfrlKey
-              _gfrlFilter
+          = go _gfrlFilter (Just _gfrlMaxResults)
               _gfrlPageToken
-              _gfrlOAuthToken
-              (Just _gfrlMaxResults)
+              _gfrlProject
+              _gfrlQuotaUser
+              (Just _gfrlPrettyPrint)
+              _gfrlUserIP
               _gfrlFields
+              _gfrlKey
+              _gfrlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

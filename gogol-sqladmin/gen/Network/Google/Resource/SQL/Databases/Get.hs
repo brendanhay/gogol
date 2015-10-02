@@ -57,9 +57,9 @@ type DatabasesGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Database
 
 -- | Retrieves a resource containing information about a database inside a
@@ -173,13 +173,12 @@ instance GoogleRequest DatabasesGet' where
         type Rs DatabasesGet' = Database
         request = requestWithRoute defReq sQLAdminURL
         requestWithRoute r u DatabasesGet'{..}
-          = go _dgQuotaUser (Just _dgPrettyPrint) _dgProject
-              _dgDatabase
+          = go _dgProject _dgInstance _dgDatabase _dgQuotaUser
+              (Just _dgPrettyPrint)
               _dgUserIP
+              _dgFields
               _dgKey
               _dgOAuthToken
-              _dgFields
-              _dgInstance
               (Just AltJSON)
           where go
                   = clientWithRoute

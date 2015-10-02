@@ -58,9 +58,9 @@ type QuestMilestonesClaimResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Put '[JSON] ()
 
 -- | Report that a reward for the milestone corresponding to milestoneId for
@@ -180,14 +180,13 @@ instance GoogleRequest QuestMilestonesClaim' where
         type Rs QuestMilestonesClaim' = ()
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u QuestMilestonesClaim'{..}
-          = go (Just _qmcRequestId) _qmcQuotaUser
+          = go _qmcQuestId _qmcMilestoneId (Just _qmcRequestId)
+              _qmcQuotaUser
               (Just _qmcPrettyPrint)
               _qmcUserIP
-              _qmcMilestoneId
+              _qmcFields
               _qmcKey
               _qmcOAuthToken
-              _qmcQuestId
-              _qmcFields
               (Just AltJSON)
           where go
                   = clientWithRoute

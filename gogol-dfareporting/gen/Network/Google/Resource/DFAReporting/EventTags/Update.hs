@@ -52,9 +52,9 @@ type EventTagsUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] EventTag :> Put '[JSON] EventTag
 
@@ -161,11 +161,12 @@ instance GoogleRequest EventTagsUpdate' where
         type Rs EventTagsUpdate' = EventTag
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u EventTagsUpdate'{..}
-          = go _etuQuotaUser (Just _etuPrettyPrint) _etuUserIP
-              _etuProfileId
+          = go _etuProfileId _etuQuotaUser
+              (Just _etuPrettyPrint)
+              _etuUserIP
+              _etuFields
               _etuKey
               _etuOAuthToken
-              _etuFields
               (Just AltJSON)
               _etuEventTag
           where go

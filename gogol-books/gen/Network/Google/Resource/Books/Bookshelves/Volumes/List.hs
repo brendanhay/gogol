@@ -55,16 +55,16 @@ type BookshelvesVolumesListResource =
          "bookshelves" :>
            Capture "shelf" Text :>
              "volumes" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "source" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "startIndex" Word32 :>
-                             QueryParam "maxResults" Word32 :>
-                               QueryParam "showPreorders" Bool :>
-                                 QueryParam "fields" Text :>
+               QueryParam "maxResults" Word32 :>
+                 QueryParam "showPreorders" Bool :>
+                   QueryParam "source" Text :>
+                     QueryParam "startIndex" Word32 :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] Volumes
 
@@ -209,16 +209,16 @@ instance GoogleRequest BookshelvesVolumesList' where
         type Rs BookshelvesVolumesList' = Volumes
         request = requestWithRoute defReq booksURL
         requestWithRoute r u BookshelvesVolumesList'{..}
-          = go _bvlQuotaUser (Just _bvlPrettyPrint) _bvlUserIP
+          = go _bvlMaxResults _bvlShowPreOrders _bvlSource
+              _bvlStartIndex
               _bvlUserId
               _bvlShelf
-              _bvlKey
-              _bvlSource
-              _bvlOAuthToken
-              _bvlStartIndex
-              _bvlMaxResults
-              _bvlShowPreOrders
+              _bvlQuotaUser
+              (Just _bvlPrettyPrint)
+              _bvlUserIP
               _bvlFields
+              _bvlKey
+              _bvlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

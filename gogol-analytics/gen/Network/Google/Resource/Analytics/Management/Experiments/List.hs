@@ -57,14 +57,14 @@ type ManagementExperimentsListResource =
                "profiles" :>
                  Capture "profileId" Text :>
                    "experiments" :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "start-index" Int32 :>
-                                 QueryParam "max-results" Int32 :>
-                                   QueryParam "fields" Text :>
+                     QueryParam "max-results" Int32 :>
+                       QueryParam "start-index" Int32 :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] Experiments
 
@@ -204,16 +204,15 @@ instance GoogleRequest ManagementExperimentsList'
         type Rs ManagementExperimentsList' = Experiments
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementExperimentsList'{..}
-          = go _melQuotaUser (Just _melPrettyPrint)
+          = go _melMaxResults _melStartIndex _melAccountId
               _melWebPropertyId
-              _melUserIP
               _melProfileId
-              _melAccountId
+              _melQuotaUser
+              (Just _melPrettyPrint)
+              _melUserIP
+              _melFields
               _melKey
               _melOAuthToken
-              _melStartIndex
-              _melMaxResults
-              _melFields
               (Just AltJSON)
           where go
                   = clientWithRoute

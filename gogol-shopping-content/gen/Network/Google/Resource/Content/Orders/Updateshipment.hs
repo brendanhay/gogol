@@ -54,9 +54,9 @@ type OrdersUpdateshipmentResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] OrdersUpdateShipmentRequest :>
                              Post '[JSON] OrdersUpdateShipmentResponse
@@ -173,12 +173,12 @@ instance GoogleRequest OrdersUpdateshipment' where
              OrdersUpdateShipmentResponse
         request = requestWithRoute defReq shoppingContentURL
         requestWithRoute r u OrdersUpdateshipment'{..}
-          = go _ouQuotaUser _ouMerchantId (Just _ouPrettyPrint)
+          = go _ouMerchantId _ouOrderId _ouQuotaUser
+              (Just _ouPrettyPrint)
               _ouUserIP
+              _ouFields
               _ouKey
               _ouOAuthToken
-              _ouOrderId
-              _ouFields
               (Just AltJSON)
               _ouOrdersUpdateShipmentRequest
           where go

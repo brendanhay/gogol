@@ -54,22 +54,22 @@ type PlacementStrategiesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "placementStrategies" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
+           QueryParams "ids" Int64 :>
+             QueryParam "maxResults" Int32 :>
+               QueryParam "pageToken" Text :>
                  QueryParam "searchString" Text :>
-                   QueryParams "ids" Int64 :>
+                   QueryParam "sortField"
+                     DfareportingPlacementStrategiesListSortField
+                     :>
                      QueryParam "sortOrder"
                        DfareportingPlacementStrategiesListSortOrder
                        :>
-                       QueryParam "key" Key :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "sortField"
-                             DfareportingPlacementStrategiesListSortField
-                             :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "maxResults" Int32 :>
-                                 QueryParam "fields" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] PlacementStrategiesListResponse
 
@@ -229,17 +229,17 @@ instance GoogleRequest PlacementStrategiesList' where
              PlacementStrategiesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementStrategiesList'{..}
-          = go _pslQuotaUser (Just _pslPrettyPrint) _pslUserIP
+          = go _pslIds _pslMaxResults _pslPageToken
               _pslSearchString
-              _pslIds
-              _pslProfileId
-              _pslSortOrder
-              _pslKey
-              _pslPageToken
               _pslSortField
-              _pslOAuthToken
-              _pslMaxResults
+              _pslSortOrder
+              _pslProfileId
+              _pslQuotaUser
+              (Just _pslPrettyPrint)
+              _pslUserIP
               _pslFields
+              _pslKey
+              _pslOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

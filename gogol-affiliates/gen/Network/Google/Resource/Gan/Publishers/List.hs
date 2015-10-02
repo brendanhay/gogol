@@ -57,21 +57,21 @@ type PublishersListResource =
      Capture "role" GanPublishersListRole :>
        Capture "roleId" Text :>
          "publishers" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "relationshipStatus"
-                   GanPublishersListRelationshipStatus
-                   :>
-                   QueryParam "minSevenDayEpc" Double :>
-                     QueryParam "minNinetyDayEpc" Double :>
-                       QueryParam "key" Key :>
-                         QueryParam "minPayoutRank" Int32 :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "publisherCategory" Text :>
-                                 QueryParam "maxResults" Word32 :>
-                                   QueryParam "fields" Text :>
+           QueryParam "maxResults" Word32 :>
+             QueryParam "minNinetyDayEpc" Double :>
+               QueryParam "minPayoutRank" Int32 :>
+                 QueryParam "minSevenDayEpc" Double :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "publisherCategory" Text :>
+                       QueryParam "relationshipStatus"
+                         GanPublishersListRelationshipStatus
+                         :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] Publishers
 
@@ -253,19 +253,20 @@ instance GoogleRequest PublishersList' where
         type Rs PublishersList' = Publishers
         request = requestWithRoute defReq affiliatesURL
         requestWithRoute r u PublishersList'{..}
-          = go _plQuotaUser (Just _plPrettyPrint) _plUserIP
-              _plRelationshipStatus
-              _plMinSevenDayEpc
-              _plRoleId
-              _plMinNinetyDayEpc
-              _plRole
-              _plKey
+          = go _plMaxResults _plMinNinetyDayEpc
               _plMinPayoutRank
+              _plMinSevenDayEpc
               _plPageToken
-              _plOAuthToken
               _plPublisherCategory
-              _plMaxResults
+              _plRelationshipStatus
+              _plRole
+              _plRoleId
+              _plQuotaUser
+              (Just _plPrettyPrint)
+              _plUserIP
               _plFields
+              _plKey
+              _plOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

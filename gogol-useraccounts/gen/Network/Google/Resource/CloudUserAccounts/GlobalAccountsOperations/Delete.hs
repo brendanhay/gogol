@@ -53,9 +53,9 @@ type GlobalAccountsOperationsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes the specified operation resource.
@@ -166,13 +166,12 @@ instance GoogleRequest
         request = requestWithRoute defReq userAccountsURL
         requestWithRoute r u
           GlobalAccountsOperationsDelete'{..}
-          = go _gaodQuotaUser (Just _gaodPrettyPrint)
-              _gaodProject
-              _gaodOperation
+          = go _gaodProject _gaodOperation _gaodQuotaUser
+              (Just _gaodPrettyPrint)
               _gaodUserIP
+              _gaodFields
               _gaodKey
               _gaodOAuthToken
-              _gaodFields
               (Just AltJSON)
           where go
                   = clientWithRoute

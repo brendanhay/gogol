@@ -26,7 +26,7 @@ module Network.Google.Resource.Compute.URLMaps.Update
       URLMapsUpdateResource
 
     -- * Creating a Request
-    , uRLMapsUpdate'
+    , urlMapsUpdate'
     , URLMapsUpdate'
 
     -- * Request Lenses
@@ -54,15 +54,15 @@ type URLMapsUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] URLMap :> Put '[JSON] Operation
 
 -- | Update the entire content of the UrlMap resource.
 --
--- /See:/ 'uRLMapsUpdate'' smart constructor.
+-- /See:/ 'urlMapsUpdate'' smart constructor.
 data URLMapsUpdate' = URLMapsUpdate'
     { _umuQuotaUser   :: !(Maybe Text)
     , _umuURLMap      :: !Text
@@ -96,12 +96,12 @@ data URLMapsUpdate' = URLMapsUpdate'
 -- * 'umuOAuthToken'
 --
 -- * 'umuFields'
-uRLMapsUpdate'
+urlMapsUpdate'
     :: Text -- ^ 'urlMap'
     -> URLMap -- ^ 'URLMap'
     -> Text -- ^ 'project'
     -> URLMapsUpdate'
-uRLMapsUpdate' pUmuURLMap_ pUmuURLMap_ pUmuProject_ =
+urlMapsUpdate' pUmuURLMap_ pUmuURLMap_ pUmuProject_ =
     URLMapsUpdate'
     { _umuQuotaUser = Nothing
     , _umuURLMap = pUmuURLMap_
@@ -173,12 +173,12 @@ instance GoogleRequest URLMapsUpdate' where
         type Rs URLMapsUpdate' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u URLMapsUpdate'{..}
-          = go _umuQuotaUser _umuURLMap (Just _umuPrettyPrint)
-              _umuProject
+          = go _umuProject _umuURLMap _umuQuotaUser
+              (Just _umuPrettyPrint)
               _umuUserIP
+              _umuFields
               _umuKey
               _umuOAuthToken
-              _umuFields
               (Just AltJSON)
               _umuURLMap
           where go

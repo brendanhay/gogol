@@ -48,13 +48,13 @@ import           Network.Google.YouTube.Types
 -- 'CommentThreadsInsert'' request conforms to.
 type CommentThreadsInsertResource =
      "commentThreads" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "part" Text :>
+       QueryParam "part" Text :>
+         QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] CommentThread :>
                          Post '[JSON] CommentThread
@@ -165,12 +165,12 @@ instance GoogleRequest CommentThreadsInsert' where
         type Rs CommentThreadsInsert' = CommentThread
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u CommentThreadsInsert'{..}
-          = go _ctiQuotaUser (Just _ctiPart)
+          = go (Just _ctiPart) _ctiQuotaUser
               (Just _ctiPrettyPrint)
               _ctiUserIP
+              _ctiFields
               _ctiKey
               _ctiOAuthToken
-              _ctiFields
               (Just AltJSON)
               _ctiCommentThread
           where go

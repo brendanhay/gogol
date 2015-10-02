@@ -50,9 +50,9 @@ type RasterCollectionsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] RasterCollection
 
@@ -148,11 +148,11 @@ instance GoogleRequest RasterCollectionsGet' where
         type Rs RasterCollectionsGet' = RasterCollection
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u RasterCollectionsGet'{..}
-          = go _rcgQuotaUser (Just _rcgPrettyPrint) _rcgUserIP
-              _rcgKey
-              _rcgId
-              _rcgOAuthToken
+          = go _rcgId _rcgQuotaUser (Just _rcgPrettyPrint)
+              _rcgUserIP
               _rcgFields
+              _rcgKey
+              _rcgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

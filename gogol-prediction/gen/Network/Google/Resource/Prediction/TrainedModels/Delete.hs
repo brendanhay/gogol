@@ -52,9 +52,9 @@ type TrainedModelsDeleteResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete a trained model.
@@ -159,12 +159,12 @@ instance GoogleRequest TrainedModelsDelete' where
         type Rs TrainedModelsDelete' = ()
         request = requestWithRoute defReq predictionURL
         requestWithRoute r u TrainedModelsDelete'{..}
-          = go _tmdQuotaUser (Just _tmdPrettyPrint) _tmdProject
+          = go _tmdProject _tmdId _tmdQuotaUser
+              (Just _tmdPrettyPrint)
               _tmdUserIP
-              _tmdKey
-              _tmdId
-              _tmdOAuthToken
               _tmdFields
+              _tmdKey
+              _tmdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

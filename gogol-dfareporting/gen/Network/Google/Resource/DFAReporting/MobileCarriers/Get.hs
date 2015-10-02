@@ -53,9 +53,9 @@ type MobileCarriersGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] MobileCarrier
 
 -- | Gets one mobile carrier by ID.
@@ -160,12 +160,12 @@ instance GoogleRequest MobileCarriersGet' where
         type Rs MobileCarriersGet' = MobileCarrier
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u MobileCarriersGet'{..}
-          = go _mcgQuotaUser (Just _mcgPrettyPrint) _mcgUserIP
-              _mcgProfileId
-              _mcgKey
-              _mcgId
-              _mcgOAuthToken
+          = go _mcgProfileId _mcgId _mcgQuotaUser
+              (Just _mcgPrettyPrint)
+              _mcgUserIP
               _mcgFields
+              _mcgKey
+              _mcgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -53,9 +53,9 @@ type ReportsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a report by its ID.
@@ -158,12 +158,12 @@ instance GoogleRequest ReportsDelete' where
         type Rs ReportsDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ReportsDelete'{..}
-          = go _rdQuotaUser (Just _rdPrettyPrint) _rdUserIP
-              _rdReportId
-              _rdProfileId
+          = go _rdProfileId _rdReportId _rdQuotaUser
+              (Just _rdPrettyPrint)
+              _rdUserIP
+              _rdFields
               _rdKey
               _rdOAuthToken
-              _rdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

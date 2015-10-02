@@ -55,9 +55,9 @@ type RollingUpdatesGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] RollingUpdate
 
 -- | Returns information about an update.
@@ -174,14 +174,13 @@ instance GoogleRequest RollingUpdatesGet' where
         request
           = requestWithRoute defReq replicaPoolUpdaterURL
         requestWithRoute r u RollingUpdatesGet'{..}
-          = go _rugRollingUpdate _rugQuotaUser
+          = go _rugProject _rugZone _rugRollingUpdate
+              _rugQuotaUser
               (Just _rugPrettyPrint)
-              _rugProject
               _rugUserIP
-              _rugZone
+              _rugFields
               _rugKey
               _rugOAuthToken
-              _rugFields
               (Just AltJSON)
           where go
                   = clientWithRoute

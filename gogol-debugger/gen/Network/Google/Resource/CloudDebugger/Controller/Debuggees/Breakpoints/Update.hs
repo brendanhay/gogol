@@ -66,17 +66,17 @@ type ControllerDebuggeesBreakpointsUpdateResource =
              "breakpoints" :>
                Capture "id" Text :>
                  QueryParam "$.xgafv" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
                          QueryParam "pp" Bool :>
-                           QueryParam "access_token" Text :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "bearer_token" Text :>
-                                 QueryParam "key" Key :>
-                                   QueryParam "oauth_token" OAuthToken :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "callback" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "upload_protocol" Text :>
+                               QueryParam "quotaUser" Text :>
+                                 QueryParam "prettyPrint" Bool :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "key" Key :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            ReqBody '[JSON]
                                              UpdateActiveBreakpointRequest
@@ -265,19 +265,18 @@ instance GoogleRequest
         request = requestWithRoute defReq debuggerURL
         requestWithRoute r u
           ControllerDebuggeesBreakpointsUpdate'{..}
-          = go _cdbuXgafv _cdbuQuotaUser
-              (Just _cdbuPrettyPrint)
-              _cdbuUploadProtocol
-              (Just _cdbuPp)
-              _cdbuAccessToken
-              _cdbuUploadType
-              _cdbuBearerToken
-              _cdbuKey
-              _cdbuId
-              _cdbuDebuggeeId
-              _cdbuOAuthToken
-              _cdbuFields
+          = go _cdbuXgafv _cdbuAccessToken _cdbuBearerToken
               _cdbuCallback
+              (Just _cdbuPp)
+              _cdbuUploadType
+              _cdbuUploadProtocol
+              _cdbuDebuggeeId
+              _cdbuId
+              _cdbuQuotaUser
+              (Just _cdbuPrettyPrint)
+              _cdbuFields
+              _cdbuKey
+              _cdbuOAuthToken
               (Just AltJSON)
               _cdbuUpdateActiveBreakpointRequest
           where go

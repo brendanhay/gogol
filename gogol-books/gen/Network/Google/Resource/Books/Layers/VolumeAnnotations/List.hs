@@ -63,26 +63,27 @@ type LayersVolumeAnnotationsListResource =
        Capture "volumeId" Text :>
          "layers" :>
            Capture "layerId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "startOffset" Text :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "locale" Text :>
-                       QueryParam "contentVersion" Text :>
-                         QueryParam "showDeleted" Bool :>
-                           QueryParam "volumeAnnotationsVersion" Text :>
-                             QueryParam "updatedMax" Text :>
-                               QueryParam "key" Key :>
+             QueryParam "endOffset" Text :>
+               QueryParam "endPosition" Text :>
+                 QueryParam "locale" Text :>
+                   QueryParam "maxResults" Word32 :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "showDeleted" Bool :>
+                         QueryParam "source" Text :>
+                           QueryParam "startOffset" Text :>
+                             QueryParam "startPosition" Text :>
+                               QueryParam "updatedMax" Text :>
                                  QueryParam "updatedMin" Text :>
-                                   QueryParam "endOffset" Text :>
-                                     QueryParam "source" Text :>
-                                       QueryParam "pageToken" Text :>
-                                         QueryParam "oauth_token" OAuthToken :>
-                                           QueryParam "endPosition" Text :>
-                                             QueryParam "maxResults" Word32 :>
-                                               QueryParam "startPosition" Text
-                                                 :>
-                                                 QueryParam "fields" Text :>
+                                   QueryParam "volumeAnnotationsVersion" Text :>
+                                     QueryParam "contentVersion" Text :>
+                                       QueryParam "quotaUser" Text :>
+                                         QueryParam "prettyPrint" Bool :>
+                                           QueryParam "userIp" Text :>
+                                             QueryParam "fields" Text :>
+                                               QueryParam "key" Key :>
+                                                 QueryParam "oauth_token"
+                                                   OAuthToken
+                                                   :>
                                                    QueryParam "alt" AltJSON :>
                                                      Get '[JSON]
                                                        Volumeannotations
@@ -327,26 +328,25 @@ instance GoogleRequest LayersVolumeAnnotationsList'
              Volumeannotations
         request = requestWithRoute defReq booksURL
         requestWithRoute r u LayersVolumeAnnotationsList'{..}
-          = go _lvalQuotaUser (Just _lvalPrettyPrint)
-              _lvalStartOffset
-              _lvalUserIP
-              _lvalLocale
-              (Just _lvalContentVersion)
-              _lvalShowDeleted
-              _lvalVolumeAnnotationsVersion
-              _lvalUpdatedMax
-              _lvalKey
-              _lvalUpdatedMin
-              _lvalEndOffset
-              _lvalVolumeId
-              _lvalSource
-              _lvalPageToken
-              _lvalOAuthToken
-              _lvalEndPosition
-              _lvalLayerId
+          = go _lvalEndOffset _lvalEndPosition _lvalLocale
               _lvalMaxResults
+              _lvalPageToken
+              _lvalShowDeleted
+              _lvalSource
+              _lvalStartOffset
               _lvalStartPosition
+              _lvalUpdatedMax
+              _lvalUpdatedMin
+              _lvalVolumeAnnotationsVersion
+              _lvalVolumeId
+              _lvalLayerId
+              (Just _lvalContentVersion)
+              _lvalQuotaUser
+              (Just _lvalPrettyPrint)
+              _lvalUserIP
               _lvalFields
+              _lvalKey
+              _lvalOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

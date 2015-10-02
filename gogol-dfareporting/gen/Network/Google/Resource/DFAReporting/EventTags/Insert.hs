@@ -52,9 +52,9 @@ type EventTagsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] EventTag :> Post '[JSON] EventTag
 
@@ -161,11 +161,12 @@ instance GoogleRequest EventTagsInsert' where
         type Rs EventTagsInsert' = EventTag
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u EventTagsInsert'{..}
-          = go _etiQuotaUser (Just _etiPrettyPrint) _etiUserIP
-              _etiProfileId
+          = go _etiProfileId _etiQuotaUser
+              (Just _etiPrettyPrint)
+              _etiUserIP
+              _etiFields
               _etiKey
               _etiOAuthToken
-              _etiFields
               (Just AltJSON)
               _etiEventTag
           where go

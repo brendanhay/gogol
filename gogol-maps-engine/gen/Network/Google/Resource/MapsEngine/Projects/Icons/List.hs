@@ -50,14 +50,14 @@ type ProjectsIconsListResource =
      "projects" :>
        Capture "projectId" Text :>
          "icons" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "maxResults" Word32 :>
-                         QueryParam "fields" Text :>
+           QueryParam "maxResults" Word32 :>
+             QueryParam "pageToken" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] IconsListResponse
 
@@ -176,13 +176,13 @@ instance GoogleRequest ProjectsIconsList' where
         type Rs ProjectsIconsList' = IconsListResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u ProjectsIconsList'{..}
-          = go _pilQuotaUser (Just _pilPrettyPrint) _pilUserIP
-              _pilKey
-              _pilPageToken
-              _pilProjectId
-              _pilOAuthToken
-              _pilMaxResults
+          = go _pilMaxResults _pilPageToken _pilProjectId
+              _pilQuotaUser
+              (Just _pilPrettyPrint)
+              _pilUserIP
               _pilFields
+              _pilKey
+              _pilOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

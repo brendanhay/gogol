@@ -52,20 +52,20 @@ import           Network.Google.Prelude
 type VolumesUserUploadedListResource =
      "volumes" :>
        "useruploaded" :>
-         QueryParams "processingState"
-           BooksVolumesUserUploadedListProcessingState
-           :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "locale" Text :>
-                   QueryParam "key" Key :>
-                     QueryParams "volumeId" Text :>
-                       QueryParam "source" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "startIndex" Word32 :>
-                             QueryParam "maxResults" Word32 :>
-                               QueryParam "fields" Text :>
+         QueryParam "locale" Text :>
+           QueryParam "maxResults" Word32 :>
+             QueryParams "processingState"
+               BooksVolumesUserUploadedListProcessingState
+               :>
+               QueryParam "source" Text :>
+                 QueryParam "startIndex" Word32 :>
+                   QueryParams "volumeId" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :> Get '[JSON] Volumes
 
 -- | Return a list of books uploaded by the current user.
@@ -211,17 +211,16 @@ instance GoogleRequest VolumesUserUploadedList' where
         type Rs VolumesUserUploadedList' = Volumes
         request = requestWithRoute defReq booksURL
         requestWithRoute r u VolumesUserUploadedList'{..}
-          = go _vuulProcessingState _vuulQuotaUser
+          = go _vuulLocale _vuulMaxResults _vuulProcessingState
+              _vuulSource
+              _vuulStartIndex
+              _vuulVolumeId
+              _vuulQuotaUser
               (Just _vuulPrettyPrint)
               _vuulUserIP
-              _vuulLocale
-              _vuulKey
-              _vuulVolumeId
-              _vuulSource
-              _vuulOAuthToken
-              _vuulStartIndex
-              _vuulMaxResults
               _vuulFields
+              _vuulKey
+              _vuulOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

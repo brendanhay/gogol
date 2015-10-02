@@ -50,9 +50,9 @@ type CommentsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Comment
 
 -- | Get a comment.
@@ -144,10 +144,11 @@ instance GoogleRequest CommentsGet' where
         type Rs CommentsGet' = Comment
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u CommentsGet'{..}
-          = go _cQuotaUser (Just _cPrettyPrint) _cUserIP _cKey
-              _cOAuthToken
-              _cCommentId
+          = go _cCommentId _cQuotaUser (Just _cPrettyPrint)
+              _cUserIP
               _cFields
+              _cKey
+              _cOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

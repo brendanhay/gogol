@@ -50,15 +50,15 @@ type SettingsListResource =
      "users" :>
        "me" :>
          "settings" :>
-           QueryParam "syncToken" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Int32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "maxResults" Int32 :>
+             QueryParam "pageToken" Text :>
+               QueryParam "syncToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Settings
 
 -- | Returns all user settings for the authenticated user.
@@ -176,13 +176,13 @@ instance GoogleRequest SettingsList' where
         type Rs SettingsList' = Settings
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u SettingsList'{..}
-          = go _slSyncToken _slQuotaUser (Just _slPrettyPrint)
+          = go _slMaxResults _slPageToken _slSyncToken
+              _slQuotaUser
+              (Just _slPrettyPrint)
               _slUserIP
-              _slKey
-              _slPageToken
-              _slOAuthToken
-              _slMaxResults
               _slFields
+              _slKey
+              _slOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

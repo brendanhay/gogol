@@ -53,9 +53,9 @@ type FloodlightActivityGroupsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] FloodlightActivityGroup
 
@@ -166,13 +166,12 @@ instance GoogleRequest FloodlightActivityGroupsGet'
              FloodlightActivityGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u FloodlightActivityGroupsGet'{..}
-          = go _faggQuotaUser (Just _faggPrettyPrint)
+          = go _faggProfileId _faggId _faggQuotaUser
+              (Just _faggPrettyPrint)
               _faggUserIP
-              _faggProfileId
-              _faggKey
-              _faggId
-              _faggOAuthToken
               _faggFields
+              _faggKey
+              _faggOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

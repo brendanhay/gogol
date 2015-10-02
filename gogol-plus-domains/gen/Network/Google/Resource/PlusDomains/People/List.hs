@@ -54,15 +54,15 @@ type PeopleListResource =
          "people" :>
            Capture "collection" PlusDomainsPeopleListCollection
              :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "orderBy" PlusDomainsPeopleListOrderBy :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "orderBy" PlusDomainsPeopleListOrderBy :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] PeopleFeed
 
@@ -197,15 +197,15 @@ instance GoogleRequest PeopleList' where
         type Rs PeopleList' = PeopleFeed
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u PeopleList'{..}
-          = go _plQuotaUser (Just _plPrettyPrint) _plOrderBy
-              _plUserIP
-              _plCollection
+          = go (Just _plMaxResults) _plOrderBy _plPageToken
               _plUserId
-              _plKey
-              _plPageToken
-              _plOAuthToken
-              (Just _plMaxResults)
+              _plCollection
+              _plQuotaUser
+              (Just _plPrettyPrint)
+              _plUserIP
               _plFields
+              _plKey
+              _plOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy PeopleListResource)

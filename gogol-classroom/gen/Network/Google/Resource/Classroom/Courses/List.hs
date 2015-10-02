@@ -61,22 +61,22 @@ import           Network.Google.Prelude
 type CoursesListResource =
      "v1" :>
        "courses" :>
-         QueryParam "studentId" Text :>
-           QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
+                 QueryParam "pageSize" Int32 :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "studentId" Text :>
                          QueryParam "teacherId" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "pageSize" Int32 :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "callback" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "upload_protocol" Text :>
+                               QueryParam "quotaUser" Text :>
+                                 QueryParam "prettyPrint" Bool :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "key" Key :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] ListCoursesResponse
 
@@ -269,20 +269,20 @@ instance GoogleRequest CoursesList' where
         type Rs CoursesList' = ListCoursesResponse
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u CoursesList'{..}
-          = go _clStudentId _clXgafv _clQuotaUser
-              (Just _clPrettyPrint)
-              _clUploadProtocol
-              (Just _clPp)
-              _clAccessToken
-              _clUploadType
-              _clTeacherId
-              _clBearerToken
-              _clKey
-              _clPageToken
-              _clOAuthToken
-              _clPageSize
-              _clFields
+          = go _clXgafv _clAccessToken _clBearerToken
               _clCallback
+              _clPageSize
+              _clPageToken
+              (Just _clPp)
+              _clStudentId
+              _clTeacherId
+              _clUploadType
+              _clUploadProtocol
+              _clQuotaUser
+              (Just _clPrettyPrint)
+              _clFields
+              _clKey
+              _clOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

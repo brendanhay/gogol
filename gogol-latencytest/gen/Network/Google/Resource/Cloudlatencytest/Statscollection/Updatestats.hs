@@ -49,9 +49,9 @@ type StatscollectionUpdatestatsResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] Stats :> Post '[JSON] StatsReply
 
@@ -144,9 +144,10 @@ instance GoogleRequest StatscollectionUpdatestats'
         type Rs StatscollectionUpdatestats' = StatsReply
         request = requestWithRoute defReq latencyTestURL
         requestWithRoute r u StatscollectionUpdatestats'{..}
-          = go _sQuotaUser (Just _sPrettyPrint) _sUserIP _sKey
-              _sOAuthToken
+          = go _sQuotaUser (Just _sPrettyPrint) _sUserIP
               _sFields
+              _sKey
+              _sOAuthToken
               (Just AltJSON)
               _sStats
           where go

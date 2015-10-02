@@ -57,9 +57,9 @@ type InstanceGroupManagersListManagedInstancesResource
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Post '[JSON]
                                  InstanceGroupManagersListManagedInstancesResponse
@@ -185,14 +185,14 @@ instance GoogleRequest
         request = requestWithRoute defReq computeURL
         requestWithRoute r u
           InstanceGroupManagersListManagedInstances'{..}
-          = go _igmlmiQuotaUser (Just _igmlmiPrettyPrint)
-              _igmlmiProject
+          = go _igmlmiProject _igmlmiZone
               _igmlmiInstanceGroupManager
+              _igmlmiQuotaUser
+              (Just _igmlmiPrettyPrint)
               _igmlmiUserIP
-              _igmlmiZone
+              _igmlmiFields
               _igmlmiKey
               _igmlmiOAuthToken
-              _igmlmiFields
               (Just AltJSON)
           where go
                   = clientWithRoute

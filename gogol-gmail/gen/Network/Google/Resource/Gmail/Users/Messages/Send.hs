@@ -54,9 +54,9 @@ type UsersMessagesSendResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          MultipartRelated '[JSON] Message Body :>
                            Post '[JSON] Message
@@ -174,12 +174,12 @@ instance GoogleRequest UsersMessagesSend' where
         type Rs UsersMessagesSend' = Message
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersMessagesSend'{..}
-          = go _umsQuotaUser (Just _umsPrettyPrint) _umsUserIP
-              _umsUserId
-              _umsMedia
+          = go _umsMedia _umsUserId _umsQuotaUser
+              (Just _umsPrettyPrint)
+              _umsUserIP
+              _umsFields
               _umsKey
               _umsOAuthToken
-              _umsFields
               (Just AltJSON)
               _umsMessage
           where go

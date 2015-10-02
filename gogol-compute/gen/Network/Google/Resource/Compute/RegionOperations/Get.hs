@@ -55,9 +55,9 @@ type RegionOperationsGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Operation
 
 -- | Retrieves the specified region-specific Operations resource.
@@ -173,13 +173,13 @@ instance GoogleRequest RegionOperationsGet' where
         type Rs RegionOperationsGet' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u RegionOperationsGet'{..}
-          = go _rogQuotaUser (Just _rogPrettyPrint) _rogProject
-              _rogOperation
+          = go _rogProject _rogRegion _rogOperation
+              _rogQuotaUser
+              (Just _rogPrettyPrint)
               _rogUserIP
-              _rogKey
-              _rogRegion
-              _rogOAuthToken
               _rogFields
+              _rogKey
+              _rogOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -54,9 +54,9 @@ type StyleUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] StyleSetting :>
                              Put '[JSON] StyleSetting
@@ -172,12 +172,12 @@ instance GoogleRequest StyleUpdate' where
         type Rs StyleUpdate' = StyleSetting
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u StyleUpdate'{..}
-          = go _suQuotaUser (Just _suPrettyPrint) _suUserIP
-              _suKey
-              _suStyleId
-              _suOAuthToken
-              _suTableId
+          = go _suTableId _suStyleId _suQuotaUser
+              (Just _suPrettyPrint)
+              _suUserIP
               _suFields
+              _suKey
+              _suOAuthToken
               (Just AltJSON)
               _suStyleSetting
           where go

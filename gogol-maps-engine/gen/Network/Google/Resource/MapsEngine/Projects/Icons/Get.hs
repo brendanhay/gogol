@@ -53,9 +53,9 @@ type ProjectsIconsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Icon
        :<|>
        "projects" :>
@@ -65,9 +65,9 @@ type ProjectsIconsGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" Media :> Get '[OctetStream] Stream
 
 -- | Return an icon or its associated metadata
@@ -172,12 +172,12 @@ instance GoogleRequest ProjectsIconsGet' where
         type Rs ProjectsIconsGet' = Icon
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u ProjectsIconsGet'{..}
-          = go _pigQuotaUser (Just _pigPrettyPrint) _pigUserIP
-              _pigKey
-              _pigId
-              _pigProjectId
-              _pigOAuthToken
+          = go _pigProjectId _pigId _pigQuotaUser
+              (Just _pigPrettyPrint)
+              _pigUserIP
               _pigFields
+              _pigKey
+              _pigOAuthToken
               (Just AltJSON)
           where go :<|> _
                   = clientWithRoute
@@ -189,12 +189,12 @@ instance GoogleRequest ProjectsIconsGet' where
         type Rs (Download ProjectsIconsGet') = Stream
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u ProjectsIconsGet'{..}
-          = go _pigQuotaUser (Just _pigPrettyPrint) _pigUserIP
-              _pigKey
-              _pigId
-              _pigProjectId
-              _pigOAuthToken
+          = go _pigProjectId _pigId _pigQuotaUser
+              (Just _pigPrettyPrint)
+              _pigUserIP
               _pigFields
+              _pigKey
+              _pigOAuthToken
               (Just Media)
           where go :<|> _
                   = clientWithRoute

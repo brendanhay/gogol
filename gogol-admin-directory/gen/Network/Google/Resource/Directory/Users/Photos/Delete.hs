@@ -52,9 +52,9 @@ type UsersPhotosDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Remove photos for the user
@@ -150,11 +150,11 @@ instance GoogleRequest UsersPhotosDelete' where
         type Rs UsersPhotosDelete' = ()
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u UsersPhotosDelete'{..}
-          = go _updQuotaUser (Just _updPrettyPrint) _updUserIP
+          = go _updUserKey _updQuotaUser (Just _updPrettyPrint)
+              _updUserIP
+              _updFields
               _updKey
               _updOAuthToken
-              _updUserKey
-              _updFields
               (Just AltJSON)
           where go
                   = clientWithRoute

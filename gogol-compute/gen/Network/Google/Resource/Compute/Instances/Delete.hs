@@ -56,9 +56,9 @@ type InstancesDeleteResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified Instance resource. For more information, see
@@ -169,13 +169,12 @@ instance GoogleRequest InstancesDelete' where
         type Rs InstancesDelete' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstancesDelete'{..}
-          = go _iQuotaUser (Just _iPrettyPrint) _iProject
+          = go _iProject _iZone _iInstance _iQuotaUser
+              (Just _iPrettyPrint)
               _iUserIP
-              _iZone
+              _iFields
               _iKey
               _iOAuthToken
-              _iFields
-              _iInstance
               (Just AltJSON)
           where go
                   = clientWithRoute

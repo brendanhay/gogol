@@ -52,9 +52,9 @@ type CalendarsClearResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Clears a primary calendar. This operation deletes all events associated
@@ -150,11 +150,11 @@ instance GoogleRequest CalendarsClear' where
         type Rs CalendarsClear' = ()
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u CalendarsClear'{..}
-          = go _ccQuotaUser _ccCalendarId (Just _ccPrettyPrint)
+          = go _ccCalendarId _ccQuotaUser (Just _ccPrettyPrint)
               _ccUserIP
+              _ccFields
               _ccKey
               _ccOAuthToken
-              _ccFields
               (Just AltJSON)
           where go
                   = clientWithRoute

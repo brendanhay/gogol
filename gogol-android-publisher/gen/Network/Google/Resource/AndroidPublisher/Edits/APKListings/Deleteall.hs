@@ -56,9 +56,9 @@ type EditsAPKListingsDeleteallResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes all the APK-specific localized listings for a specified APK.
@@ -184,14 +184,14 @@ instance GoogleRequest EditsAPKListingsDeleteall'
         type Rs EditsAPKListingsDeleteall' = ()
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u EditsAPKListingsDeleteall'{..}
-          = go _eapkldaQuotaUser (Just _eapkldaPrettyPrint)
-              _eapkldaPackageName
+          = go _eapkldaPackageName _eapkldaEditId
               _eapkldaAPKVersionCode
+              _eapkldaQuotaUser
+              (Just _eapkldaPrettyPrint)
               _eapkldaUserIP
+              _eapkldaFields
               _eapkldaKey
               _eapkldaOAuthToken
-              _eapkldaEditId
-              _eapkldaFields
               (Just AltJSON)
           where go
                   = clientWithRoute

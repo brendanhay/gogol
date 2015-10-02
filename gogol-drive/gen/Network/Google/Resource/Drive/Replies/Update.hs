@@ -57,9 +57,9 @@ type RepliesUpdateResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] CommentReply :>
                                  Put '[JSON] CommentReply
@@ -188,13 +188,13 @@ instance GoogleRequest RepliesUpdate' where
         type Rs RepliesUpdate' = CommentReply
         request = requestWithRoute defReq driveURL
         requestWithRoute r u RepliesUpdate'{..}
-          = go _repQuotaUser (Just _repPrettyPrint) _repUserIP
-              _repKey
-              _repReplyId
-              _repFileId
-              _repOAuthToken
-              _repCommentId
+          = go _repFileId _repCommentId _repReplyId
+              _repQuotaUser
+              (Just _repPrettyPrint)
+              _repUserIP
               _repFields
+              _repKey
+              _repOAuthToken
               (Just AltJSON)
               _repCommentReply
           where go

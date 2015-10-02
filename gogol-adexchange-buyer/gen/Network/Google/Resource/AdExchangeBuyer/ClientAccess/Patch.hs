@@ -49,13 +49,13 @@ import           Network.Google.Prelude
 type ClientAccessPatchResource =
      "clientAccess" :>
        Capture "clientAccountId" Int64 :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "sponsorAccountId" Int32 :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+         QueryParam "sponsorAccountId" Int32 :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] ClientAccessCapabilities :>
                            Patch '[JSON] ClientAccessCapabilities
@@ -173,12 +173,13 @@ instance GoogleRequest ClientAccessPatch' where
         type Rs ClientAccessPatch' = ClientAccessCapabilities
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u ClientAccessPatch'{..}
-          = go _capQuotaUser (Just _capPrettyPrint) _capUserIP
-              (Just _capSponsorAccountId)
-              _capKey
-              _capClientAccountId
-              _capOAuthToken
+          = go _capClientAccountId (Just _capSponsorAccountId)
+              _capQuotaUser
+              (Just _capPrettyPrint)
+              _capUserIP
               _capFields
+              _capKey
+              _capOAuthToken
               (Just AltJSON)
               _capClientAccessCapabilities
           where go

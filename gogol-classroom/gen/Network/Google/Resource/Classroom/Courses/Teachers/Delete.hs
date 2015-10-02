@@ -64,17 +64,17 @@ type CoursesTeachersDeleteResource =
            "teachers" :>
              Capture "userId" Text :>
                QueryParam "$.xgafv" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "key" Key :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "callback" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "quotaUser" Text :>
+                               QueryParam "prettyPrint" Bool :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Delete '[JSON] Empty
 
@@ -246,18 +246,18 @@ instance GoogleRequest CoursesTeachersDelete' where
         type Rs CoursesTeachersDelete' = Empty
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u CoursesTeachersDelete'{..}
-          = go _ctdXgafv _ctdQuotaUser (Just _ctdPrettyPrint)
-              _ctdUploadProtocol
+          = go _ctdXgafv _ctdAccessToken _ctdBearerToken
+              _ctdCallback
               (Just _ctdPp)
-              _ctdCourseId
-              _ctdAccessToken
               _ctdUploadType
+              _ctdUploadProtocol
+              _ctdCourseId
               _ctdUserId
-              _ctdBearerToken
+              _ctdQuotaUser
+              (Just _ctdPrettyPrint)
+              _ctdFields
               _ctdKey
               _ctdOAuthToken
-              _ctdFields
-              _ctdCallback
               (Just AltJSON)
           where go
                   = clientWithRoute

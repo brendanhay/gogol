@@ -63,20 +63,20 @@ type AppsOperationsListResource =
          Capture "appsId" Text :>
            "operations" :>
              QueryParam "$.xgafv" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "upload_protocol" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "access_token" Text :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "filter" Text :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "oauth_token" OAuthToken :>
-                                     QueryParam "pageSize" Int32 :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "callback" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "bearer_token" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageSize" Int32 :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "pp" Bool :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "upload_protocol" Text :>
+                                 QueryParam "quotaUser" Text :>
+                                   QueryParam "prettyPrint" Bool :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "key" Key :>
+                                         QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
                                              Get '[JSON] ListOperationsResponse
 
@@ -259,20 +259,20 @@ instance GoogleRequest AppsOperationsList' where
         type Rs AppsOperationsList' = ListOperationsResponse
         request = requestWithRoute defReq appEngineURL
         requestWithRoute r u AppsOperationsList'{..}
-          = go _aolXgafv _aolQuotaUser (Just _aolPrettyPrint)
-              _aolUploadProtocol
-              (Just _aolPp)
-              _aolAccessToken
-              _aolUploadType
-              _aolBearerToken
-              _aolKey
-              _aolAppsId
-              _aolFilter
-              _aolPageToken
-              _aolOAuthToken
-              _aolPageSize
-              _aolFields
+          = go _aolXgafv _aolAccessToken _aolBearerToken
               _aolCallback
+              _aolFilter
+              _aolPageSize
+              _aolPageToken
+              (Just _aolPp)
+              _aolUploadType
+              _aolUploadProtocol
+              _aolAppsId
+              _aolQuotaUser
+              (Just _aolPrettyPrint)
+              _aolFields
+              _aolKey
+              _aolOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

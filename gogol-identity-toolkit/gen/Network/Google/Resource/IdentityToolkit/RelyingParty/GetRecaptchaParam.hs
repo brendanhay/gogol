@@ -48,9 +48,9 @@ type RelyingPartyGetRecaptchaParamResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] GetRecaptchaParamResponse
 
@@ -144,9 +144,9 @@ instance GoogleRequest RelyingPartyGetRecaptchaParam'
           RelyingPartyGetRecaptchaParam'{..}
           = go _rpgrpQuotaUser (Just _rpgrpPrettyPrint)
               _rpgrpUserIP
+              _rpgrpFields
               _rpgrpKey
               _rpgrpOAuthToken
-              _rpgrpFields
               (Just AltJSON)
           where go
                   = clientWithRoute

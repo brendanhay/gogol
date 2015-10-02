@@ -53,13 +53,13 @@ type ObjectAccessControlsInsertResource =
          "o" :>
            Capture "object" Text :>
              "acl" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "generation" Word64 :>
-                           QueryParam "fields" Text :>
+               QueryParam "generation" Word64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] ObjectAccessControl :>
                                  Post '[JSON] ObjectAccessControl
@@ -192,14 +192,13 @@ instance GoogleRequest ObjectAccessControlsInsert'
              ObjectAccessControl
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectAccessControlsInsert'{..}
-          = go _oaciQuotaUser (Just _oaciPrettyPrint)
+          = go _oaciGeneration _oaciBucket _oaciObject
+              _oaciQuotaUser
+              (Just _oaciPrettyPrint)
               _oaciUserIP
-              _oaciBucket
-              _oaciKey
-              _oaciObject
-              _oaciOAuthToken
-              _oaciGeneration
               _oaciFields
+              _oaciKey
+              _oaciOAuthToken
               (Just AltJSON)
               _oaciObjectAccessControl
           where go

@@ -61,20 +61,20 @@ type TransferOperationsListResource =
      "v1" :>
        "{+name}" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "filter" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "pageSize" Int32 :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "callback" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageSize" Int32 :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "quotaUser" Text :>
+                               QueryParam "prettyPrint" Bool :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] ListOperationsResponse
 
@@ -257,20 +257,20 @@ instance GoogleRequest TransferOperationsList' where
              ListOperationsResponse
         request = requestWithRoute defReq storageTransferURL
         requestWithRoute r u TransferOperationsList'{..}
-          = go _tolXgafv _tolQuotaUser (Just _tolPrettyPrint)
-              _tolUploadProtocol
-              (Just _tolPp)
-              _tolAccessToken
-              _tolUploadType
-              _tolBearerToken
-              _tolKey
-              _tolName
-              _tolFilter
-              _tolPageToken
-              _tolOAuthToken
-              _tolPageSize
-              _tolFields
+          = go _tolXgafv _tolAccessToken _tolBearerToken
               _tolCallback
+              _tolFilter
+              _tolPageSize
+              _tolPageToken
+              (Just _tolPp)
+              _tolUploadType
+              _tolUploadProtocol
+              _tolName
+              _tolQuotaUser
+              (Just _tolPrettyPrint)
+              _tolFields
+              _tolKey
+              _tolOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

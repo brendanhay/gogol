@@ -53,9 +53,9 @@ type ConnectionTypesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] ConnectionType
 
@@ -161,12 +161,12 @@ instance GoogleRequest ConnectionTypesGet' where
         type Rs ConnectionTypesGet' = ConnectionType
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ConnectionTypesGet'{..}
-          = go _ctgQuotaUser (Just _ctgPrettyPrint) _ctgUserIP
-              _ctgProfileId
-              _ctgKey
-              _ctgId
-              _ctgOAuthToken
+          = go _ctgProfileId _ctgId _ctgQuotaUser
+              (Just _ctgPrettyPrint)
+              _ctgUserIP
               _ctgFields
+              _ctgKey
+              _ctgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -60,9 +60,9 @@ type ManagementExperimentsDeleteResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "fields" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete an experiment.
@@ -192,15 +192,14 @@ instance GoogleRequest ManagementExperimentsDelete'
         type Rs ManagementExperimentsDelete' = ()
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementExperimentsDelete'{..}
-          = go _medQuotaUser (Just _medPrettyPrint)
-              _medWebPropertyId
-              _medUserIP
-              _medProfileId
-              _medAccountId
+          = go _medAccountId _medWebPropertyId _medProfileId
               _medExperimentId
+              _medQuotaUser
+              (Just _medPrettyPrint)
+              _medUserIP
+              _medFields
               _medKey
               _medOAuthToken
-              _medFields
               (Just AltJSON)
           where go
                   = clientWithRoute

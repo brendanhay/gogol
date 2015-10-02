@@ -57,9 +57,9 @@ type TablesDeleteResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes the table specified by tableId from the dataset. If the table
@@ -173,13 +173,13 @@ instance GoogleRequest TablesDelete' where
         type Rs TablesDelete' = ()
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u TablesDelete'{..}
-          = go _tdQuotaUser (Just _tdPrettyPrint) _tdUserIP
-              _tdKey
-              _tdDatasetId
-              _tdProjectId
-              _tdOAuthToken
-              _tdTableId
+          = go _tdProjectId _tdDatasetId _tdTableId
+              _tdQuotaUser
+              (Just _tdPrettyPrint)
+              _tdUserIP
               _tdFields
+              _tdKey
+              _tdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

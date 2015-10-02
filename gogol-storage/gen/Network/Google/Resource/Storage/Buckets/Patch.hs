@@ -51,16 +51,16 @@ import           Network.Google.Storage.Types
 type BucketsPatchResource =
      "b" :>
        Capture "bucket" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "ifMetagenerationMatch" Word64 :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "ifMetagenerationNotMatch" Word64 :>
-                     QueryParam "projection" StorageBucketsPatchProjection
-                       :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+         QueryParam "ifMetagenerationMatch" Word64 :>
+           QueryParam "ifMetagenerationNotMatch" Word64 :>
+             QueryParam "projection" StorageBucketsPatchProjection
+               :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Bucket :> Patch '[JSON] Bucket
 
@@ -193,15 +193,16 @@ instance GoogleRequest BucketsPatch' where
         type Rs BucketsPatch' = Bucket
         request = requestWithRoute defReq storageURL
         requestWithRoute r u BucketsPatch'{..}
-          = go _bpQuotaUser _bpIfMetagenerationMatch
-              (Just _bpPrettyPrint)
-              _bpUserIP
-              _bpBucket
-              _bpKey
+          = go _bpIfMetagenerationMatch
               _bpIfMetagenerationNotMatch
               _bpProjection
-              _bpOAuthToken
+              _bpBucket
+              _bpQuotaUser
+              (Just _bpPrettyPrint)
+              _bpUserIP
               _bpFields
+              _bpKey
+              _bpOAuthToken
               (Just AltJSON)
               _bpBucket
           where go

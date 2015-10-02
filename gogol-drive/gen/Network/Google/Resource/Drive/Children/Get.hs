@@ -53,9 +53,9 @@ type ChildrenGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] ChildReference
 
@@ -162,12 +162,12 @@ instance GoogleRequest ChildrenGet' where
         type Rs ChildrenGet' = ChildReference
         request = requestWithRoute defReq driveURL
         requestWithRoute r u ChildrenGet'{..}
-          = go _chiQuotaUser (Just _chiPrettyPrint) _chiUserIP
-              _chiFolderId
-              _chiKey
-              _chiChildId
-              _chiOAuthToken
+          = go _chiFolderId _chiChildId _chiQuotaUser
+              (Just _chiPrettyPrint)
+              _chiUserIP
               _chiFields
+              _chiKey
+              _chiOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

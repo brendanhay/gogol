@@ -797,52 +797,52 @@ instance ToJSON CustomFieldDefListResponse where
 --
 -- /See:/ 'job' smart constructor.
 data Job = Job
-    { _jobState     :: !(Maybe JobState)
-    , _jobKind      :: !Text
-    , _jobJobChange :: !(Maybe [JobChange])
-    , _jobId        :: !(Maybe Word64)
+    { _jState     :: !(Maybe JobState)
+    , _jKind      :: !Text
+    , _jJobChange :: !(Maybe [JobChange])
+    , _jId        :: !(Maybe Word64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Job' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'jobState'
+-- * 'jState'
 --
--- * 'jobKind'
+-- * 'jKind'
 --
--- * 'jobJobChange'
+-- * 'jJobChange'
 --
--- * 'jobId'
+-- * 'jId'
 job
     :: Job
 job =
     Job
-    { _jobState = Nothing
-    , _jobKind = "coordinate#job"
-    , _jobJobChange = Nothing
-    , _jobId = Nothing
+    { _jState = Nothing
+    , _jKind = "coordinate#job"
+    , _jJobChange = Nothing
+    , _jId = Nothing
     }
 
 -- | Current job state.
-jobState :: Lens' Job (Maybe JobState)
-jobState = lens _jobState (\ s a -> s{_jobState = a})
+jState :: Lens' Job (Maybe JobState)
+jState = lens _jState (\ s a -> s{_jState = a})
 
 -- | Identifies this object as a job.
-jobKind :: Lens' Job Text
-jobKind = lens _jobKind (\ s a -> s{_jobKind = a})
+jKind :: Lens' Job Text
+jKind = lens _jKind (\ s a -> s{_jKind = a})
 
 -- | List of job changes since it was created. The first change corresponds
 -- to the state of the job when it was created.
-jobJobChange :: Lens' Job [JobChange]
-jobJobChange
-  = lens _jobJobChange (\ s a -> s{_jobJobChange = a})
-      . _Default
+jJobChange :: Lens' Job [JobChange]
+jJobChange
+  = lens _jJobChange (\ s a -> s{_jJobChange = a}) .
+      _Default
       . _Coerce
 
 -- | Job id.
-jobId :: Lens' Job (Maybe Word64)
-jobId = lens _jobId (\ s a -> s{_jobId = a})
+jId :: Lens' Job (Maybe Word64)
+jId = lens _jId (\ s a -> s{_jId = a})
 
 instance FromJSON Job where
         parseJSON
@@ -858,10 +858,9 @@ instance ToJSON Job where
         toJSON Job{..}
           = object
               (catMaybes
-                 [("state" .=) <$> _jobState,
-                  Just ("kind" .= _jobKind),
-                  ("jobChange" .=) <$> _jobJobChange,
-                  ("id" .=) <$> _jobId])
+                 [("state" .=) <$> _jState, Just ("kind" .= _jKind),
+                  ("jobChange" .=) <$> _jJobChange,
+                  ("id" .=) <$> _jId])
 
 -- | Collection of custom fields.
 --

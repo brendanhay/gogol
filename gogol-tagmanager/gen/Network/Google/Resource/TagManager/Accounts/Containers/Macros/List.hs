@@ -54,9 +54,9 @@ type AccountsContainersMacrosListResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ListMacrosResponse
 
@@ -170,13 +170,12 @@ instance GoogleRequest AccountsContainersMacrosList'
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersMacrosList'{..}
-          = go _acmlQuotaUser (Just _acmlPrettyPrint)
-              _acmlContainerId
+          = go _acmlAccountId _acmlContainerId _acmlQuotaUser
+              (Just _acmlPrettyPrint)
               _acmlUserIP
-              _acmlAccountId
+              _acmlFields
               _acmlKey
               _acmlOAuthToken
-              _acmlFields
               (Just AltJSON)
           where go
                   = clientWithRoute

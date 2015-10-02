@@ -58,29 +58,28 @@ import           Network.Google.Prelude
 -- 'VolumesList'' request conforms to.
 type VolumesListResource =
      "volumes" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "orderBy" BooksVolumesListOrderBy :>
-             QueryParam "userIp" Text :>
-               QueryParam "libraryRestrict"
-                 BooksVolumesListLibraryRestrict
-                 :>
-                 QueryParam "partner" Text :>
-                   QueryParam "q" Text :>
-                     QueryParam "download" BooksVolumesListDownload :>
-                       QueryParam "key" Key :>
-                         QueryParam "source" Text :>
-                           QueryParam "projection" BooksVolumesListProjection :>
-                             QueryParam "filter" BooksVolumesListFilter :>
-                               QueryParam "langRestrict" Text :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "startIndex" Word32 :>
-                                     QueryParam "maxResults" Word32 :>
-                                       QueryParam "showPreorders" Bool :>
-                                         QueryParam "printType"
-                                           BooksVolumesListPrintType
-                                           :>
-                                           QueryParam "fields" Text :>
+       QueryParam "download" BooksVolumesListDownload :>
+         QueryParam "filter" BooksVolumesListFilter :>
+           QueryParam "langRestrict" Text :>
+             QueryParam "libraryRestrict"
+               BooksVolumesListLibraryRestrict
+               :>
+               QueryParam "maxResults" Word32 :>
+                 QueryParam "orderBy" BooksVolumesListOrderBy :>
+                   QueryParam "partner" Text :>
+                     QueryParam "printType" BooksVolumesListPrintType :>
+                       QueryParam "projection" BooksVolumesListProjection :>
+                         QueryParam "showPreorders" Bool :>
+                           QueryParam "source" Text :>
+                             QueryParam "startIndex" Word32 :>
+                               QueryParam "q" Text :>
+                                 QueryParam "quotaUser" Text :>
+                                   QueryParam "prettyPrint" Bool :>
+                                     QueryParam "userIp" Text :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "key" Key :>
+                                           QueryParam "oauth_token" OAuthToken
+                                             :>
                                              QueryParam "alt" AltJSON :>
                                                Get '[JSON] Volumes
 
@@ -282,23 +281,23 @@ instance GoogleRequest VolumesList' where
         type Rs VolumesList' = Volumes
         request = requestWithRoute defReq booksURL
         requestWithRoute r u VolumesList'{..}
-          = go _vlQuotaUser (Just _vlPrettyPrint) _vlOrderBy
-              _vlUserIP
+          = go _vlDownload _vlFilter _vlLangRestrict
               _vlLibraryRestrict
-              _vlPartner
-              (Just _vlQ)
-              _vlDownload
-              _vlKey
-              _vlSource
-              _vlProjection
-              _vlFilter
-              _vlLangRestrict
-              _vlOAuthToken
-              _vlStartIndex
               _vlMaxResults
-              _vlShowPreOrders
+              _vlOrderBy
+              _vlPartner
               _vlPrintType
+              _vlProjection
+              _vlShowPreOrders
+              _vlSource
+              _vlStartIndex
+              (Just _vlQ)
+              _vlQuotaUser
+              (Just _vlPrettyPrint)
+              _vlUserIP
               _vlFields
+              _vlKey
+              _vlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

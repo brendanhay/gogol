@@ -3500,380 +3500,383 @@ instance ToJSON DimensionValueRequest where
 --
 -- /See:/ 'ad' smart constructor.
 data Ad = Ad
-    { _adCreativeGroupAssignments              :: !(Maybe [CreativeGroupAssignment])
-    , _adGeoTargeting                          :: !(Maybe GeoTargeting)
-    , _adCreativeRotation                      :: !(Maybe CreativeRotation)
-    , _adTechnologyTargeting                   :: !(Maybe TechnologyTargeting)
-    , _adAudienceSegmentId                     :: !(Maybe Int64)
-    , _adDayPartTargeting                      :: !(Maybe DayPartTargeting)
-    , _adSize                                  :: !(Maybe Size)
-    , _adStartTime                             :: !(Maybe UTCTime)
-    , _adKind                                  :: !Text
-    , _adClickThroughURLSuffixProperties       :: !(Maybe ClickThroughURLSuffixProperties)
-    , _adCampaignIdDimensionValue              :: !(Maybe DimensionValue)
-    , _adAdvertiserId                          :: !(Maybe Int64)
-    , _adAdvertiserIdDimensionValue            :: !(Maybe DimensionValue)
-    , _adSSLCompliant                          :: !(Maybe Bool)
-    , _adCampaignId                            :: !(Maybe Int64)
-    , _adIdDimensionValue                      :: !(Maybe DimensionValue)
-    , _adClickThroughURL                       :: !(Maybe ClickThroughURL)
-    , _adDeliverySchedule                      :: !(Maybe DeliverySchedule)
-    , _adEventTagOverrides                     :: !(Maybe [EventTagOverride])
-    , _adActive                                :: !(Maybe Bool)
-    , _adAccountId                             :: !(Maybe Int64)
-    , _adName                                  :: !(Maybe Text)
-    , _adKeyValueTargetingExpression           :: !(Maybe KeyValueTargetingExpression)
-    , _adEndTime                               :: !(Maybe UTCTime)
-    , _adCreateInfo                            :: !(Maybe LastModifiedInfo)
-    , _adLastModifiedInfo                      :: !(Maybe LastModifiedInfo)
-    , _adId                                    :: !(Maybe Int64)
-    , _adSSLRequired                           :: !(Maybe Bool)
-    , _adComments                              :: !(Maybe Text)
-    , _adSubAccountId                          :: !(Maybe Int64)
-    , _adType                                  :: !(Maybe AdType)
-    , _adRemarketingListExpression             :: !(Maybe ListTargetingExpression)
-    , _adDynamicClickTracker                   :: !(Maybe Bool)
-    , _adCompatibility                         :: !(Maybe AdCompatibility)
-    , _adArchived                              :: !(Maybe Bool)
-    , _adDefaultClickThroughEventTagProperties :: !(Maybe DefaultClickThroughEventTagProperties)
-    , _adPlacementAssignments                  :: !(Maybe [PlacementAssignment])
+    { _addCreativeGroupAssignments              :: !(Maybe [CreativeGroupAssignment])
+    , _addGeoTargeting                          :: !(Maybe GeoTargeting)
+    , _addCreativeRotation                      :: !(Maybe CreativeRotation)
+    , _addTechnologyTargeting                   :: !(Maybe TechnologyTargeting)
+    , _addAudienceSegmentId                     :: !(Maybe Int64)
+    , _addDayPartTargeting                      :: !(Maybe DayPartTargeting)
+    , _addSize                                  :: !(Maybe Size)
+    , _addStartTime                             :: !(Maybe UTCTime)
+    , _addKind                                  :: !Text
+    , _addClickThroughURLSuffixProperties       :: !(Maybe ClickThroughURLSuffixProperties)
+    , _addCampaignIdDimensionValue              :: !(Maybe DimensionValue)
+    , _addAdvertiserId                          :: !(Maybe Int64)
+    , _addAdvertiserIdDimensionValue            :: !(Maybe DimensionValue)
+    , _addSSLCompliant                          :: !(Maybe Bool)
+    , _addCampaignId                            :: !(Maybe Int64)
+    , _addIdDimensionValue                      :: !(Maybe DimensionValue)
+    , _addClickThroughURL                       :: !(Maybe ClickThroughURL)
+    , _addDeliverySchedule                      :: !(Maybe DeliverySchedule)
+    , _addEventTagOverrides                     :: !(Maybe [EventTagOverride])
+    , _addActive                                :: !(Maybe Bool)
+    , _addAccountId                             :: !(Maybe Int64)
+    , _addName                                  :: !(Maybe Text)
+    , _addKeyValueTargetingExpression           :: !(Maybe KeyValueTargetingExpression)
+    , _addEndTime                               :: !(Maybe UTCTime)
+    , _addCreateInfo                            :: !(Maybe LastModifiedInfo)
+    , _addLastModifiedInfo                      :: !(Maybe LastModifiedInfo)
+    , _addId                                    :: !(Maybe Int64)
+    , _addSSLRequired                           :: !(Maybe Bool)
+    , _addComments                              :: !(Maybe Text)
+    , _addSubAccountId                          :: !(Maybe Int64)
+    , _addType                                  :: !(Maybe AdType)
+    , _addRemarketingListExpression             :: !(Maybe ListTargetingExpression)
+    , _addDynamicClickTracker                   :: !(Maybe Bool)
+    , _addCompatibility                         :: !(Maybe AdCompatibility)
+    , _addArchived                              :: !(Maybe Bool)
+    , _addDefaultClickThroughEventTagProperties :: !(Maybe DefaultClickThroughEventTagProperties)
+    , _addPlacementAssignments                  :: !(Maybe [PlacementAssignment])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Ad' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'adCreativeGroupAssignments'
+-- * 'addCreativeGroupAssignments'
 --
--- * 'adGeoTargeting'
+-- * 'addGeoTargeting'
 --
--- * 'adCreativeRotation'
+-- * 'addCreativeRotation'
 --
--- * 'adTechnologyTargeting'
+-- * 'addTechnologyTargeting'
 --
--- * 'adAudienceSegmentId'
+-- * 'addAudienceSegmentId'
 --
--- * 'adDayPartTargeting'
+-- * 'addDayPartTargeting'
 --
--- * 'adSize'
+-- * 'addSize'
 --
--- * 'adStartTime'
+-- * 'addStartTime'
 --
--- * 'adKind'
+-- * 'addKind'
 --
--- * 'adClickThroughURLSuffixProperties'
+-- * 'addClickThroughURLSuffixProperties'
 --
--- * 'adCampaignIdDimensionValue'
+-- * 'addCampaignIdDimensionValue'
 --
--- * 'adAdvertiserId'
+-- * 'addAdvertiserId'
 --
--- * 'adAdvertiserIdDimensionValue'
+-- * 'addAdvertiserIdDimensionValue'
 --
--- * 'adSSLCompliant'
+-- * 'addSSLCompliant'
 --
--- * 'adCampaignId'
+-- * 'addCampaignId'
 --
--- * 'adIdDimensionValue'
+-- * 'addIdDimensionValue'
 --
--- * 'adClickThroughURL'
+-- * 'addClickThroughURL'
 --
--- * 'adDeliverySchedule'
+-- * 'addDeliverySchedule'
 --
--- * 'adEventTagOverrides'
+-- * 'addEventTagOverrides'
 --
--- * 'adActive'
+-- * 'addActive'
 --
--- * 'adAccountId'
+-- * 'addAccountId'
 --
--- * 'adName'
+-- * 'addName'
 --
--- * 'adKeyValueTargetingExpression'
+-- * 'addKeyValueTargetingExpression'
 --
--- * 'adEndTime'
+-- * 'addEndTime'
 --
--- * 'adCreateInfo'
+-- * 'addCreateInfo'
 --
--- * 'adLastModifiedInfo'
+-- * 'addLastModifiedInfo'
 --
--- * 'adId'
+-- * 'addId'
 --
--- * 'adSSLRequired'
+-- * 'addSSLRequired'
 --
--- * 'adComments'
+-- * 'addComments'
 --
--- * 'adSubAccountId'
+-- * 'addSubAccountId'
 --
--- * 'adType'
+-- * 'addType'
 --
--- * 'adRemarketingListExpression'
+-- * 'addRemarketingListExpression'
 --
--- * 'adDynamicClickTracker'
+-- * 'addDynamicClickTracker'
 --
--- * 'adCompatibility'
+-- * 'addCompatibility'
 --
--- * 'adArchived'
+-- * 'addArchived'
 --
--- * 'adDefaultClickThroughEventTagProperties'
+-- * 'addDefaultClickThroughEventTagProperties'
 --
--- * 'adPlacementAssignments'
+-- * 'addPlacementAssignments'
 ad
     :: Ad
 ad =
     Ad
-    { _adCreativeGroupAssignments = Nothing
-    , _adGeoTargeting = Nothing
-    , _adCreativeRotation = Nothing
-    , _adTechnologyTargeting = Nothing
-    , _adAudienceSegmentId = Nothing
-    , _adDayPartTargeting = Nothing
-    , _adSize = Nothing
-    , _adStartTime = Nothing
-    , _adKind = "dfareporting#ad"
-    , _adClickThroughURLSuffixProperties = Nothing
-    , _adCampaignIdDimensionValue = Nothing
-    , _adAdvertiserId = Nothing
-    , _adAdvertiserIdDimensionValue = Nothing
-    , _adSSLCompliant = Nothing
-    , _adCampaignId = Nothing
-    , _adIdDimensionValue = Nothing
-    , _adClickThroughURL = Nothing
-    , _adDeliverySchedule = Nothing
-    , _adEventTagOverrides = Nothing
-    , _adActive = Nothing
-    , _adAccountId = Nothing
-    , _adName = Nothing
-    , _adKeyValueTargetingExpression = Nothing
-    , _adEndTime = Nothing
-    , _adCreateInfo = Nothing
-    , _adLastModifiedInfo = Nothing
-    , _adId = Nothing
-    , _adSSLRequired = Nothing
-    , _adComments = Nothing
-    , _adSubAccountId = Nothing
-    , _adType = Nothing
-    , _adRemarketingListExpression = Nothing
-    , _adDynamicClickTracker = Nothing
-    , _adCompatibility = Nothing
-    , _adArchived = Nothing
-    , _adDefaultClickThroughEventTagProperties = Nothing
-    , _adPlacementAssignments = Nothing
+    { _addCreativeGroupAssignments = Nothing
+    , _addGeoTargeting = Nothing
+    , _addCreativeRotation = Nothing
+    , _addTechnologyTargeting = Nothing
+    , _addAudienceSegmentId = Nothing
+    , _addDayPartTargeting = Nothing
+    , _addSize = Nothing
+    , _addStartTime = Nothing
+    , _addKind = "dfareporting#ad"
+    , _addClickThroughURLSuffixProperties = Nothing
+    , _addCampaignIdDimensionValue = Nothing
+    , _addAdvertiserId = Nothing
+    , _addAdvertiserIdDimensionValue = Nothing
+    , _addSSLCompliant = Nothing
+    , _addCampaignId = Nothing
+    , _addIdDimensionValue = Nothing
+    , _addClickThroughURL = Nothing
+    , _addDeliverySchedule = Nothing
+    , _addEventTagOverrides = Nothing
+    , _addActive = Nothing
+    , _addAccountId = Nothing
+    , _addName = Nothing
+    , _addKeyValueTargetingExpression = Nothing
+    , _addEndTime = Nothing
+    , _addCreateInfo = Nothing
+    , _addLastModifiedInfo = Nothing
+    , _addId = Nothing
+    , _addSSLRequired = Nothing
+    , _addComments = Nothing
+    , _addSubAccountId = Nothing
+    , _addType = Nothing
+    , _addRemarketingListExpression = Nothing
+    , _addDynamicClickTracker = Nothing
+    , _addCompatibility = Nothing
+    , _addArchived = Nothing
+    , _addDefaultClickThroughEventTagProperties = Nothing
+    , _addPlacementAssignments = Nothing
     }
 
 -- | Creative group assignments for this ad. Applicable when type is
 -- AD_SERVING_CLICK_TRACKER. Only one assignment per creative group number
 -- is allowed for a maximum of two assignments.
-adCreativeGroupAssignments :: Lens' Ad [CreativeGroupAssignment]
-adCreativeGroupAssignments
-  = lens _adCreativeGroupAssignments
-      (\ s a -> s{_adCreativeGroupAssignments = a})
+addCreativeGroupAssignments :: Lens' Ad [CreativeGroupAssignment]
+addCreativeGroupAssignments
+  = lens _addCreativeGroupAssignments
+      (\ s a -> s{_addCreativeGroupAssignments = a})
       . _Default
       . _Coerce
 
 -- | Geographical targeting information for this ad.Applicable when type is
 -- AD_SERVING_STANDARD_AD.
-adGeoTargeting :: Lens' Ad (Maybe GeoTargeting)
-adGeoTargeting
-  = lens _adGeoTargeting
-      (\ s a -> s{_adGeoTargeting = a})
+addGeoTargeting :: Lens' Ad (Maybe GeoTargeting)
+addGeoTargeting
+  = lens _addGeoTargeting
+      (\ s a -> s{_addGeoTargeting = a})
 
 -- | Creative rotation for this ad. Applicable when type is
 -- AD_SERVING_DEFAULT_AD, AD_SERVING_STANDARD_AD, or AD_SERVING_TRACKING.
 -- When type is AD_SERVING_DEFAULT_AD, this field should have exactly one
 -- creativeAssignment.
-adCreativeRotation :: Lens' Ad (Maybe CreativeRotation)
-adCreativeRotation
-  = lens _adCreativeRotation
-      (\ s a -> s{_adCreativeRotation = a})
+addCreativeRotation :: Lens' Ad (Maybe CreativeRotation)
+addCreativeRotation
+  = lens _addCreativeRotation
+      (\ s a -> s{_addCreativeRotation = a})
 
 -- | Technology platform targeting information for this ad. Applicable when
 -- type is AD_SERVING_STANDARD_AD.
-adTechnologyTargeting :: Lens' Ad (Maybe TechnologyTargeting)
-adTechnologyTargeting
-  = lens _adTechnologyTargeting
-      (\ s a -> s{_adTechnologyTargeting = a})
+addTechnologyTargeting :: Lens' Ad (Maybe TechnologyTargeting)
+addTechnologyTargeting
+  = lens _addTechnologyTargeting
+      (\ s a -> s{_addTechnologyTargeting = a})
 
 -- | Audience segment ID that is being targeted for this ad. Applicable when
 -- type is AD_SERVING_STANDARD_AD.
-adAudienceSegmentId :: Lens' Ad (Maybe Int64)
-adAudienceSegmentId
-  = lens _adAudienceSegmentId
-      (\ s a -> s{_adAudienceSegmentId = a})
+addAudienceSegmentId :: Lens' Ad (Maybe Int64)
+addAudienceSegmentId
+  = lens _addAudienceSegmentId
+      (\ s a -> s{_addAudienceSegmentId = a})
 
 -- | Time and day targeting information for this ad. Applicable when type is
 -- AD_SERVING_STANDARD_AD.
-adDayPartTargeting :: Lens' Ad (Maybe DayPartTargeting)
-adDayPartTargeting
-  = lens _adDayPartTargeting
-      (\ s a -> s{_adDayPartTargeting = a})
+addDayPartTargeting :: Lens' Ad (Maybe DayPartTargeting)
+addDayPartTargeting
+  = lens _addDayPartTargeting
+      (\ s a -> s{_addDayPartTargeting = a})
 
 -- | Size of this ad. Applicable when type is AD_SERVING_DEFAULT_AD.
-adSize :: Lens' Ad (Maybe Size)
-adSize = lens _adSize (\ s a -> s{_adSize = a})
+addSize :: Lens' Ad (Maybe Size)
+addSize = lens _addSize (\ s a -> s{_addSize = a})
 
 -- | Date and time that this ad should start serving. If creating an ad, this
 -- field must be a time in the future. This is a required field on
 -- insertion.
-adStartTime :: Lens' Ad (Maybe UTCTime)
-adStartTime
-  = lens _adStartTime (\ s a -> s{_adStartTime = a})
+addStartTime :: Lens' Ad (Maybe UTCTime)
+addStartTime
+  = lens _addStartTime (\ s a -> s{_addStartTime = a})
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#ad\".
-adKind :: Lens' Ad Text
-adKind = lens _adKind (\ s a -> s{_adKind = a})
+addKind :: Lens' Ad Text
+addKind = lens _addKind (\ s a -> s{_addKind = a})
 
 -- | Click-through URL suffix properties for this ad. Applies to the URL in
 -- the ad or (if overriding ad properties) the URL in the creative.
-adClickThroughURLSuffixProperties :: Lens' Ad (Maybe ClickThroughURLSuffixProperties)
-adClickThroughURLSuffixProperties
-  = lens _adClickThroughURLSuffixProperties
-      (\ s a -> s{_adClickThroughURLSuffixProperties = a})
+addClickThroughURLSuffixProperties :: Lens' Ad (Maybe ClickThroughURLSuffixProperties)
+addClickThroughURLSuffixProperties
+  = lens _addClickThroughURLSuffixProperties
+      (\ s a -> s{_addClickThroughURLSuffixProperties = a})
 
 -- | Dimension value for the ID of the campaign. This is a read-only,
 -- auto-generated field.
-adCampaignIdDimensionValue :: Lens' Ad (Maybe DimensionValue)
-adCampaignIdDimensionValue
-  = lens _adCampaignIdDimensionValue
-      (\ s a -> s{_adCampaignIdDimensionValue = a})
+addCampaignIdDimensionValue :: Lens' Ad (Maybe DimensionValue)
+addCampaignIdDimensionValue
+  = lens _addCampaignIdDimensionValue
+      (\ s a -> s{_addCampaignIdDimensionValue = a})
 
 -- | Advertiser ID of this ad. This is a required field on insertion.
-adAdvertiserId :: Lens' Ad (Maybe Int64)
-adAdvertiserId
-  = lens _adAdvertiserId
-      (\ s a -> s{_adAdvertiserId = a})
+addAdvertiserId :: Lens' Ad (Maybe Int64)
+addAdvertiserId
+  = lens _addAdvertiserId
+      (\ s a -> s{_addAdvertiserId = a})
 
 -- | Dimension value for the ID of the advertiser. This is a read-only,
 -- auto-generated field.
-adAdvertiserIdDimensionValue :: Lens' Ad (Maybe DimensionValue)
-adAdvertiserIdDimensionValue
-  = lens _adAdvertiserIdDimensionValue
-      (\ s a -> s{_adAdvertiserIdDimensionValue = a})
+addAdvertiserIdDimensionValue :: Lens' Ad (Maybe DimensionValue)
+addAdvertiserIdDimensionValue
+  = lens _addAdvertiserIdDimensionValue
+      (\ s a -> s{_addAdvertiserIdDimensionValue = a})
 
 -- | Whether this ad is ssl compliant. This is a read-only field that is
 -- auto-generated when the ad is inserted or updated.
-adSSLCompliant :: Lens' Ad (Maybe Bool)
-adSSLCompliant
-  = lens _adSSLCompliant
-      (\ s a -> s{_adSSLCompliant = a})
+addSSLCompliant :: Lens' Ad (Maybe Bool)
+addSSLCompliant
+  = lens _addSSLCompliant
+      (\ s a -> s{_addSSLCompliant = a})
 
 -- | Campaign ID of this ad. This is a required field on insertion.
-adCampaignId :: Lens' Ad (Maybe Int64)
-adCampaignId
-  = lens _adCampaignId (\ s a -> s{_adCampaignId = a})
+addCampaignId :: Lens' Ad (Maybe Int64)
+addCampaignId
+  = lens _addCampaignId
+      (\ s a -> s{_addCampaignId = a})
 
 -- | Dimension value for the ID of this ad. This is a read-only,
 -- auto-generated field.
-adIdDimensionValue :: Lens' Ad (Maybe DimensionValue)
-adIdDimensionValue
-  = lens _adIdDimensionValue
-      (\ s a -> s{_adIdDimensionValue = a})
+addIdDimensionValue :: Lens' Ad (Maybe DimensionValue)
+addIdDimensionValue
+  = lens _addIdDimensionValue
+      (\ s a -> s{_addIdDimensionValue = a})
 
 -- | Click-through URL for this ad. This is a required field on insertion.
 -- Applicable when type is AD_SERVING_CLICK_TRACKER.
-adClickThroughURL :: Lens' Ad (Maybe ClickThroughURL)
-adClickThroughURL
-  = lens _adClickThroughURL
-      (\ s a -> s{_adClickThroughURL = a})
+addClickThroughURL :: Lens' Ad (Maybe ClickThroughURL)
+addClickThroughURL
+  = lens _addClickThroughURL
+      (\ s a -> s{_addClickThroughURL = a})
 
 -- | Delivery schedule information for this ad. Applicable when type is
 -- AD_SERVING_STANDARD_AD or AD_SERVING_TRACKING. This field along with
 -- subfields priority and impressionRatio are required on insertion when
 -- type is AD_SERVING_STANDARD_AD.
-adDeliverySchedule :: Lens' Ad (Maybe DeliverySchedule)
-adDeliverySchedule
-  = lens _adDeliverySchedule
-      (\ s a -> s{_adDeliverySchedule = a})
+addDeliverySchedule :: Lens' Ad (Maybe DeliverySchedule)
+addDeliverySchedule
+  = lens _addDeliverySchedule
+      (\ s a -> s{_addDeliverySchedule = a})
 
 -- | Event tag overrides for this ad.
-adEventTagOverrides :: Lens' Ad [EventTagOverride]
-adEventTagOverrides
-  = lens _adEventTagOverrides
-      (\ s a -> s{_adEventTagOverrides = a})
+addEventTagOverrides :: Lens' Ad [EventTagOverride]
+addEventTagOverrides
+  = lens _addEventTagOverrides
+      (\ s a -> s{_addEventTagOverrides = a})
       . _Default
       . _Coerce
 
 -- | Whether this ad is active.
-adActive :: Lens' Ad (Maybe Bool)
-adActive = lens _adActive (\ s a -> s{_adActive = a})
+addActive :: Lens' Ad (Maybe Bool)
+addActive
+  = lens _addActive (\ s a -> s{_addActive = a})
 
 -- | Account ID of this ad. This is a read-only field that can be left blank.
-adAccountId :: Lens' Ad (Maybe Int64)
-adAccountId
-  = lens _adAccountId (\ s a -> s{_adAccountId = a})
+addAccountId :: Lens' Ad (Maybe Int64)
+addAccountId
+  = lens _addAccountId (\ s a -> s{_addAccountId = a})
 
 -- | Name of this ad. This is a required field and must be less than 256
 -- characters long.
-adName :: Lens' Ad (Maybe Text)
-adName = lens _adName (\ s a -> s{_adName = a})
+addName :: Lens' Ad (Maybe Text)
+addName = lens _addName (\ s a -> s{_addName = a})
 
 -- | Key-value targeting information for this ad. Applicable when type is
 -- AD_SERVING_STANDARD_AD.
-adKeyValueTargetingExpression :: Lens' Ad (Maybe KeyValueTargetingExpression)
-adKeyValueTargetingExpression
-  = lens _adKeyValueTargetingExpression
-      (\ s a -> s{_adKeyValueTargetingExpression = a})
+addKeyValueTargetingExpression :: Lens' Ad (Maybe KeyValueTargetingExpression)
+addKeyValueTargetingExpression
+  = lens _addKeyValueTargetingExpression
+      (\ s a -> s{_addKeyValueTargetingExpression = a})
 
 -- | Date and time that this ad should stop serving. Must be later than the
 -- start time. This is a required field on insertion.
-adEndTime :: Lens' Ad (Maybe UTCTime)
-adEndTime
-  = lens _adEndTime (\ s a -> s{_adEndTime = a})
+addEndTime :: Lens' Ad (Maybe UTCTime)
+addEndTime
+  = lens _addEndTime (\ s a -> s{_addEndTime = a})
 
 -- | Information about the creation of this ad.This is a read-only field.
-adCreateInfo :: Lens' Ad (Maybe LastModifiedInfo)
-adCreateInfo
-  = lens _adCreateInfo (\ s a -> s{_adCreateInfo = a})
+addCreateInfo :: Lens' Ad (Maybe LastModifiedInfo)
+addCreateInfo
+  = lens _addCreateInfo
+      (\ s a -> s{_addCreateInfo = a})
 
 -- | Information about the most recent modification of this ad. This is a
 -- read-only field.
-adLastModifiedInfo :: Lens' Ad (Maybe LastModifiedInfo)
-adLastModifiedInfo
-  = lens _adLastModifiedInfo
-      (\ s a -> s{_adLastModifiedInfo = a})
+addLastModifiedInfo :: Lens' Ad (Maybe LastModifiedInfo)
+addLastModifiedInfo
+  = lens _addLastModifiedInfo
+      (\ s a -> s{_addLastModifiedInfo = a})
 
 -- | ID of this ad. This is a read-only, auto-generated field.
-adId :: Lens' Ad (Maybe Int64)
-adId = lens _adId (\ s a -> s{_adId = a})
+addId :: Lens' Ad (Maybe Int64)
+addId = lens _addId (\ s a -> s{_addId = a})
 
 -- | Whether this ad requires ssl. This is a read-only field that is
 -- auto-generated when the ad is inserted or updated.
-adSSLRequired :: Lens' Ad (Maybe Bool)
-adSSLRequired
-  = lens _adSSLRequired
-      (\ s a -> s{_adSSLRequired = a})
+addSSLRequired :: Lens' Ad (Maybe Bool)
+addSSLRequired
+  = lens _addSSLRequired
+      (\ s a -> s{_addSSLRequired = a})
 
 -- | Comments for this ad.
-adComments :: Lens' Ad (Maybe Text)
-adComments
-  = lens _adComments (\ s a -> s{_adComments = a})
+addComments :: Lens' Ad (Maybe Text)
+addComments
+  = lens _addComments (\ s a -> s{_addComments = a})
 
 -- | Subaccount ID of this ad. This is a read-only field that can be left
 -- blank.
-adSubAccountId :: Lens' Ad (Maybe Int64)
-adSubAccountId
-  = lens _adSubAccountId
-      (\ s a -> s{_adSubAccountId = a})
+addSubAccountId :: Lens' Ad (Maybe Int64)
+addSubAccountId
+  = lens _addSubAccountId
+      (\ s a -> s{_addSubAccountId = a})
 
 -- | Type of ad. This is a required field on insertion. Note that default ads
 -- (AD_SERVING_DEFAULT_AD) cannot be created directly (see Creative
 -- resource).
-adType :: Lens' Ad (Maybe AdType)
-adType = lens _adType (\ s a -> s{_adType = a})
+addType :: Lens' Ad (Maybe AdType)
+addType = lens _addType (\ s a -> s{_addType = a})
 
 -- | Applicable when type is AD_SERVING_STANDARD_AD. Remarketing list
 -- targeting expression for this ad.
-adRemarketingListExpression :: Lens' Ad (Maybe ListTargetingExpression)
-adRemarketingListExpression
-  = lens _adRemarketingListExpression
-      (\ s a -> s{_adRemarketingListExpression = a})
+addRemarketingListExpression :: Lens' Ad (Maybe ListTargetingExpression)
+addRemarketingListExpression
+  = lens _addRemarketingListExpression
+      (\ s a -> s{_addRemarketingListExpression = a})
 
 -- | Whether this ad is a dynamic click tracker. Applicable when type is
 -- AD_SERVING_CLICK_TRACKER. This is a required field on insert, and is
 -- read-only after insert.
-adDynamicClickTracker :: Lens' Ad (Maybe Bool)
-adDynamicClickTracker
-  = lens _adDynamicClickTracker
-      (\ s a -> s{_adDynamicClickTracker = a})
+addDynamicClickTracker :: Lens' Ad (Maybe Bool)
+addDynamicClickTracker
+  = lens _addDynamicClickTracker
+      (\ s a -> s{_addDynamicClickTracker = a})
 
 -- | Compatibility of this ad. Applicable when type is AD_SERVING_DEFAULT_AD.
 -- WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on
@@ -3881,28 +3884,28 @@ adDynamicClickTracker
 -- APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO
 -- refers to rendering an in-stream video ads developed with the VAST
 -- standard.
-adCompatibility :: Lens' Ad (Maybe AdCompatibility)
-adCompatibility
-  = lens _adCompatibility
-      (\ s a -> s{_adCompatibility = a})
+addCompatibility :: Lens' Ad (Maybe AdCompatibility)
+addCompatibility
+  = lens _addCompatibility
+      (\ s a -> s{_addCompatibility = a})
 
 -- | Whether this ad is archived.
-adArchived :: Lens' Ad (Maybe Bool)
-adArchived
-  = lens _adArchived (\ s a -> s{_adArchived = a})
+addArchived :: Lens' Ad (Maybe Bool)
+addArchived
+  = lens _addArchived (\ s a -> s{_addArchived = a})
 
 -- | Default click-through event tag properties for this ad.
-adDefaultClickThroughEventTagProperties :: Lens' Ad (Maybe DefaultClickThroughEventTagProperties)
-adDefaultClickThroughEventTagProperties
-  = lens _adDefaultClickThroughEventTagProperties
+addDefaultClickThroughEventTagProperties :: Lens' Ad (Maybe DefaultClickThroughEventTagProperties)
+addDefaultClickThroughEventTagProperties
+  = lens _addDefaultClickThroughEventTagProperties
       (\ s a ->
-         s{_adDefaultClickThroughEventTagProperties = a})
+         s{_addDefaultClickThroughEventTagProperties = a})
 
 -- | Placement assignments for this ad.
-adPlacementAssignments :: Lens' Ad [PlacementAssignment]
-adPlacementAssignments
-  = lens _adPlacementAssignments
-      (\ s a -> s{_adPlacementAssignments = a})
+addPlacementAssignments :: Lens' Ad [PlacementAssignment]
+addPlacementAssignments
+  = lens _addPlacementAssignments
+      (\ s a -> s{_addPlacementAssignments = a})
       . _Default
       . _Coerce
 
@@ -3954,52 +3957,52 @@ instance ToJSON Ad where
           = object
               (catMaybes
                  [("creativeGroupAssignments" .=) <$>
-                    _adCreativeGroupAssignments,
-                  ("geoTargeting" .=) <$> _adGeoTargeting,
-                  ("creativeRotation" .=) <$> _adCreativeRotation,
+                    _addCreativeGroupAssignments,
+                  ("geoTargeting" .=) <$> _addGeoTargeting,
+                  ("creativeRotation" .=) <$> _addCreativeRotation,
                   ("technologyTargeting" .=) <$>
-                    _adTechnologyTargeting,
-                  ("audienceSegmentId" .=) <$> _adAudienceSegmentId,
-                  ("dayPartTargeting" .=) <$> _adDayPartTargeting,
-                  ("size" .=) <$> _adSize,
-                  ("startTime" .=) <$> _adStartTime,
-                  Just ("kind" .= _adKind),
+                    _addTechnologyTargeting,
+                  ("audienceSegmentId" .=) <$> _addAudienceSegmentId,
+                  ("dayPartTargeting" .=) <$> _addDayPartTargeting,
+                  ("size" .=) <$> _addSize,
+                  ("startTime" .=) <$> _addStartTime,
+                  Just ("kind" .= _addKind),
                   ("clickThroughUrlSuffixProperties" .=) <$>
-                    _adClickThroughURLSuffixProperties,
+                    _addClickThroughURLSuffixProperties,
                   ("campaignIdDimensionValue" .=) <$>
-                    _adCampaignIdDimensionValue,
-                  ("advertiserId" .=) <$> _adAdvertiserId,
+                    _addCampaignIdDimensionValue,
+                  ("advertiserId" .=) <$> _addAdvertiserId,
                   ("advertiserIdDimensionValue" .=) <$>
-                    _adAdvertiserIdDimensionValue,
-                  ("sslCompliant" .=) <$> _adSSLCompliant,
-                  ("campaignId" .=) <$> _adCampaignId,
-                  ("idDimensionValue" .=) <$> _adIdDimensionValue,
-                  ("clickThroughUrl" .=) <$> _adClickThroughURL,
-                  ("deliverySchedule" .=) <$> _adDeliverySchedule,
-                  ("eventTagOverrides" .=) <$> _adEventTagOverrides,
-                  ("active" .=) <$> _adActive,
-                  ("accountId" .=) <$> _adAccountId,
-                  ("name" .=) <$> _adName,
+                    _addAdvertiserIdDimensionValue,
+                  ("sslCompliant" .=) <$> _addSSLCompliant,
+                  ("campaignId" .=) <$> _addCampaignId,
+                  ("idDimensionValue" .=) <$> _addIdDimensionValue,
+                  ("clickThroughUrl" .=) <$> _addClickThroughURL,
+                  ("deliverySchedule" .=) <$> _addDeliverySchedule,
+                  ("eventTagOverrides" .=) <$> _addEventTagOverrides,
+                  ("active" .=) <$> _addActive,
+                  ("accountId" .=) <$> _addAccountId,
+                  ("name" .=) <$> _addName,
                   ("keyValueTargetingExpression" .=) <$>
-                    _adKeyValueTargetingExpression,
-                  ("endTime" .=) <$> _adEndTime,
-                  ("createInfo" .=) <$> _adCreateInfo,
-                  ("lastModifiedInfo" .=) <$> _adLastModifiedInfo,
-                  ("id" .=) <$> _adId,
-                  ("sslRequired" .=) <$> _adSSLRequired,
-                  ("comments" .=) <$> _adComments,
-                  ("subaccountId" .=) <$> _adSubAccountId,
-                  ("type" .=) <$> _adType,
+                    _addKeyValueTargetingExpression,
+                  ("endTime" .=) <$> _addEndTime,
+                  ("createInfo" .=) <$> _addCreateInfo,
+                  ("lastModifiedInfo" .=) <$> _addLastModifiedInfo,
+                  ("id" .=) <$> _addId,
+                  ("sslRequired" .=) <$> _addSSLRequired,
+                  ("comments" .=) <$> _addComments,
+                  ("subaccountId" .=) <$> _addSubAccountId,
+                  ("type" .=) <$> _addType,
                   ("remarketingListExpression" .=) <$>
-                    _adRemarketingListExpression,
+                    _addRemarketingListExpression,
                   ("dynamicClickTracker" .=) <$>
-                    _adDynamicClickTracker,
-                  ("compatibility" .=) <$> _adCompatibility,
-                  ("archived" .=) <$> _adArchived,
+                    _addDynamicClickTracker,
+                  ("compatibility" .=) <$> _addCompatibility,
+                  ("archived" .=) <$> _addArchived,
                   ("defaultClickThroughEventTagProperties" .=) <$>
-                    _adDefaultClickThroughEventTagProperties,
+                    _addDefaultClickThroughEventTagProperties,
                   ("placementAssignments" .=) <$>
-                    _adPlacementAssignments])
+                    _addPlacementAssignments])
 
 -- | Object Filter.
 --
@@ -19681,94 +19684,93 @@ instance ToJSON OrderDocument where
 --
 -- /See:/ 'adSlot' smart constructor.
 data AdSlot = AdSlot
-    { _assHeight            :: !(Maybe Int64)
-    , _assPaymentSourceType :: !(Maybe AdSlotPaymentSourceType)
-    , _assLinkedPlacementId :: !(Maybe Int64)
-    , _assWidth             :: !(Maybe Int64)
-    , _assPrimary           :: !(Maybe Bool)
-    , _assName              :: !(Maybe Text)
-    , _assComment           :: !(Maybe Text)
-    , _assCompatibility     :: !(Maybe AdSlotCompatibility)
+    { _adHeight            :: !(Maybe Int64)
+    , _adPaymentSourceType :: !(Maybe AdSlotPaymentSourceType)
+    , _adLinkedPlacementId :: !(Maybe Int64)
+    , _adWidth             :: !(Maybe Int64)
+    , _adPrimary           :: !(Maybe Bool)
+    , _adName              :: !(Maybe Text)
+    , _adComment           :: !(Maybe Text)
+    , _adCompatibility     :: !(Maybe AdSlotCompatibility)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdSlot' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'assHeight'
+-- * 'adHeight'
 --
--- * 'assPaymentSourceType'
+-- * 'adPaymentSourceType'
 --
--- * 'assLinkedPlacementId'
+-- * 'adLinkedPlacementId'
 --
--- * 'assWidth'
+-- * 'adWidth'
 --
--- * 'assPrimary'
+-- * 'adPrimary'
 --
--- * 'assName'
+-- * 'adName'
 --
--- * 'assComment'
+-- * 'adComment'
 --
--- * 'assCompatibility'
+-- * 'adCompatibility'
 adSlot
     :: AdSlot
 adSlot =
     AdSlot
-    { _assHeight = Nothing
-    , _assPaymentSourceType = Nothing
-    , _assLinkedPlacementId = Nothing
-    , _assWidth = Nothing
-    , _assPrimary = Nothing
-    , _assName = Nothing
-    , _assComment = Nothing
-    , _assCompatibility = Nothing
+    { _adHeight = Nothing
+    , _adPaymentSourceType = Nothing
+    , _adLinkedPlacementId = Nothing
+    , _adWidth = Nothing
+    , _adPrimary = Nothing
+    , _adName = Nothing
+    , _adComment = Nothing
+    , _adCompatibility = Nothing
     }
 
 -- | Height of this ad slot.
-assHeight :: Lens' AdSlot (Maybe Int64)
-assHeight
-  = lens _assHeight (\ s a -> s{_assHeight = a})
+adHeight :: Lens' AdSlot (Maybe Int64)
+adHeight = lens _adHeight (\ s a -> s{_adHeight = a})
 
 -- | Payment source type of this ad slot.
-assPaymentSourceType :: Lens' AdSlot (Maybe AdSlotPaymentSourceType)
-assPaymentSourceType
-  = lens _assPaymentSourceType
-      (\ s a -> s{_assPaymentSourceType = a})
+adPaymentSourceType :: Lens' AdSlot (Maybe AdSlotPaymentSourceType)
+adPaymentSourceType
+  = lens _adPaymentSourceType
+      (\ s a -> s{_adPaymentSourceType = a})
 
 -- | ID of the placement from an external platform that is linked to this ad
 -- slot.
-assLinkedPlacementId :: Lens' AdSlot (Maybe Int64)
-assLinkedPlacementId
-  = lens _assLinkedPlacementId
-      (\ s a -> s{_assLinkedPlacementId = a})
+adLinkedPlacementId :: Lens' AdSlot (Maybe Int64)
+adLinkedPlacementId
+  = lens _adLinkedPlacementId
+      (\ s a -> s{_adLinkedPlacementId = a})
 
 -- | Width of this ad slot.
-assWidth :: Lens' AdSlot (Maybe Int64)
-assWidth = lens _assWidth (\ s a -> s{_assWidth = a})
+adWidth :: Lens' AdSlot (Maybe Int64)
+adWidth = lens _adWidth (\ s a -> s{_adWidth = a})
 
 -- | Primary ad slot of a roadblock inventory item.
-assPrimary :: Lens' AdSlot (Maybe Bool)
-assPrimary
-  = lens _assPrimary (\ s a -> s{_assPrimary = a})
+adPrimary :: Lens' AdSlot (Maybe Bool)
+adPrimary
+  = lens _adPrimary (\ s a -> s{_adPrimary = a})
 
 -- | Name of this ad slot.
-assName :: Lens' AdSlot (Maybe Text)
-assName = lens _assName (\ s a -> s{_assName = a})
+adName :: Lens' AdSlot (Maybe Text)
+adName = lens _adName (\ s a -> s{_adName = a})
 
 -- | Comment for this ad slot.
-assComment :: Lens' AdSlot (Maybe Text)
-assComment
-  = lens _assComment (\ s a -> s{_assComment = a})
+adComment :: Lens' AdSlot (Maybe Text)
+adComment
+  = lens _adComment (\ s a -> s{_adComment = a})
 
 -- | Ad slot compatibility. WEB and WEB_INTERSTITIAL refer to rendering
 -- either on desktop or on mobile devices for regular or interstitial ads
 -- respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps.
 -- IN_STREAM_VIDEO refers to rendering in in-stream video ads developed
 -- with the VAST standard.
-assCompatibility :: Lens' AdSlot (Maybe AdSlotCompatibility)
-assCompatibility
-  = lens _assCompatibility
-      (\ s a -> s{_assCompatibility = a})
+adCompatibility :: Lens' AdSlot (Maybe AdSlotCompatibility)
+adCompatibility
+  = lens _adCompatibility
+      (\ s a -> s{_adCompatibility = a})
 
 instance FromJSON AdSlot where
         parseJSON
@@ -19787,14 +19789,14 @@ instance ToJSON AdSlot where
         toJSON AdSlot{..}
           = object
               (catMaybes
-                 [("height" .=) <$> _assHeight,
-                  ("paymentSourceType" .=) <$> _assPaymentSourceType,
-                  ("linkedPlacementId" .=) <$> _assLinkedPlacementId,
-                  ("width" .=) <$> _assWidth,
-                  ("primary" .=) <$> _assPrimary,
-                  ("name" .=) <$> _assName,
-                  ("comment" .=) <$> _assComment,
-                  ("compatibility" .=) <$> _assCompatibility])
+                 [("height" .=) <$> _adHeight,
+                  ("paymentSourceType" .=) <$> _adPaymentSourceType,
+                  ("linkedPlacementId" .=) <$> _adLinkedPlacementId,
+                  ("width" .=) <$> _adWidth,
+                  ("primary" .=) <$> _adPrimary,
+                  ("name" .=) <$> _adName,
+                  ("comment" .=) <$> _adComment,
+                  ("compatibility" .=) <$> _adCompatibility])
 
 -- | Contains properties of a creative field.
 --

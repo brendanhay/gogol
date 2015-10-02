@@ -53,9 +53,9 @@ type DeploymentsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Deployment :> Post '[JSON] Operation
 
@@ -161,11 +161,11 @@ instance GoogleRequest DeploymentsInsert' where
         request
           = requestWithRoute defReq deploymentManagerURL
         requestWithRoute r u DeploymentsInsert'{..}
-          = go _diQuotaUser (Just _diPrettyPrint) _diProject
+          = go _diProject _diQuotaUser (Just _diPrettyPrint)
               _diUserIP
+              _diFields
               _diKey
               _diOAuthToken
-              _diFields
               (Just AltJSON)
               _diDeployment
           where go

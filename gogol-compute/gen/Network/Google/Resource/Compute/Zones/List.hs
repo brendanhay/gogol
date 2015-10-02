@@ -50,15 +50,15 @@ import           Network.Google.Prelude
 type ZonesListResource =
      Capture "project" Text :>
        "zones" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "filter" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "maxResults" Word32 :>
-                         QueryParam "fields" Text :>
+         QueryParam "filter" Text :>
+           QueryParam "maxResults" Word32 :>
+             QueryParam "pageToken" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] ZoneList
 
 -- | Retrieves the list of zone resources available to the specified project.
@@ -189,14 +189,14 @@ instance GoogleRequest ZonesList' where
         type Rs ZonesList' = ZoneList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u ZonesList'{..}
-          = go _zlQuotaUser (Just _zlPrettyPrint) _zlProject
+          = go _zlFilter (Just _zlMaxResults) _zlPageToken
+              _zlProject
+              _zlQuotaUser
+              (Just _zlPrettyPrint)
               _zlUserIP
-              _zlKey
-              _zlFilter
-              _zlPageToken
-              _zlOAuthToken
-              (Just _zlMaxResults)
               _zlFields
+              _zlKey
+              _zlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy ZonesListResource)

@@ -61,9 +61,9 @@ type EditsImagesUploadResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Post '[JSON] ImagesUploadResponse
 
@@ -202,16 +202,15 @@ instance GoogleRequest EditsImagesUpload' where
         type Rs EditsImagesUpload' = ImagesUploadResponse
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u EditsImagesUpload'{..}
-          = go _eiuQuotaUser (Just _eiuPrettyPrint)
-              _eiuPackageName
-              _eiuUserIP
-              _eiuMedia
-              _eiuImageType
-              _eiuKey
+          = go _eiuMedia _eiuPackageName _eiuEditId
               _eiuLanguage
-              _eiuOAuthToken
-              _eiuEditId
+              _eiuImageType
+              _eiuQuotaUser
+              (Just _eiuPrettyPrint)
+              _eiuUserIP
               _eiuFields
+              _eiuKey
+              _eiuOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

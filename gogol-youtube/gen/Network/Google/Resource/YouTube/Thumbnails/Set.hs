@@ -49,14 +49,14 @@ import           Network.Google.YouTube.Types
 type ThumbnailsSetResource =
      "thumbnails" :>
        "set" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "videoId" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+         QueryParam "onBehalfOfContentOwner" Text :>
+           QueryParam "videoId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Post '[JSON] ThumbnailSetResponse
 
@@ -178,13 +178,14 @@ instance GoogleRequest ThumbnailsSet' where
         type Rs ThumbnailsSet' = ThumbnailSetResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u ThumbnailsSet'{..}
-          = go _tsQuotaUser (Just _tsPrettyPrint) _tsUserIP
-              _tsMedia
-              _tsOnBehalfOfContentOwner
+          = go _tsMedia _tsOnBehalfOfContentOwner
               (Just _tsVideoId)
+              _tsQuotaUser
+              (Just _tsPrettyPrint)
+              _tsUserIP
+              _tsFields
               _tsKey
               _tsOAuthToken
-              _tsFields
               (Just AltJSON)
           where go
                   = clientWithRoute

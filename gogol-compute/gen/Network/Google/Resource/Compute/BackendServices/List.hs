@@ -52,15 +52,15 @@ type BackendServicesListResource =
      Capture "project" Text :>
        "global" :>
          "backendServices" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "filter" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] BackendServiceList
 
@@ -198,14 +198,14 @@ instance GoogleRequest BackendServicesList' where
         type Rs BackendServicesList' = BackendServiceList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u BackendServicesList'{..}
-          = go _bslQuotaUser (Just _bslPrettyPrint) _bslProject
+          = go _bslFilter (Just _bslMaxResults) _bslPageToken
+              _bslProject
+              _bslQuotaUser
+              (Just _bslPrettyPrint)
               _bslUserIP
-              _bslKey
-              _bslFilter
-              _bslPageToken
-              _bslOAuthToken
-              (Just _bslMaxResults)
               _bslFields
+              _bslKey
+              _bslOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

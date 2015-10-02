@@ -53,9 +53,9 @@ type UsersPhotosPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] UserPhoto :> Patch '[JSON] UserPhoto
 
@@ -162,11 +162,11 @@ instance GoogleRequest UsersPhotosPatch' where
         type Rs UsersPhotosPatch' = UserPhoto
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u UsersPhotosPatch'{..}
-          = go _uppQuotaUser (Just _uppPrettyPrint) _uppUserIP
+          = go _uppUserKey _uppQuotaUser (Just _uppPrettyPrint)
+              _uppUserIP
+              _uppFields
               _uppKey
               _uppOAuthToken
-              _uppUserKey
-              _uppFields
               (Just AltJSON)
               _uppUserPhoto
           where go

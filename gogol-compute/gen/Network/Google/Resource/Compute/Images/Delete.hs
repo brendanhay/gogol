@@ -53,9 +53,9 @@ type ImagesDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified image resource.
@@ -157,12 +157,12 @@ instance GoogleRequest ImagesDelete' where
         type Rs ImagesDelete' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u ImagesDelete'{..}
-          = go _idQuotaUser _idImage (Just _idPrettyPrint)
-              _idProject
+          = go _idProject _idImage _idQuotaUser
+              (Just _idPrettyPrint)
               _idUserIP
+              _idFields
               _idKey
               _idOAuthToken
-              _idFields
               (Just AltJSON)
           where go
                   = clientWithRoute

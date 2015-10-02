@@ -51,9 +51,9 @@ type TrainedModelsInsertResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Insert :> Post '[JSON] Insert2
 
@@ -160,11 +160,11 @@ instance GoogleRequest TrainedModelsInsert' where
         type Rs TrainedModelsInsert' = Insert2
         request = requestWithRoute defReq predictionURL
         requestWithRoute r u TrainedModelsInsert'{..}
-          = go _tmiQuotaUser (Just _tmiPrettyPrint) _tmiProject
+          = go _tmiProject _tmiQuotaUser (Just _tmiPrettyPrint)
               _tmiUserIP
+              _tmiFields
               _tmiKey
               _tmiOAuthToken
-              _tmiFields
               (Just AltJSON)
               _tmiInsert
           where go

@@ -50,14 +50,14 @@ type TrainedModelsListResource =
      Capture "project" Text :>
        "trainedmodels" :>
          "list" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "maxResults" Word32 :>
-                         QueryParam "fields" Text :>
+           QueryParam "maxResults" Word32 :>
+             QueryParam "pageToken" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] List
 
 -- | List available models.
@@ -172,13 +172,13 @@ instance GoogleRequest TrainedModelsList' where
         type Rs TrainedModelsList' = List
         request = requestWithRoute defReq predictionURL
         requestWithRoute r u TrainedModelsList'{..}
-          = go _tmlQuotaUser (Just _tmlPrettyPrint) _tmlProject
+          = go _tmlMaxResults _tmlPageToken _tmlProject
+              _tmlQuotaUser
+              (Just _tmlPrettyPrint)
               _tmlUserIP
-              _tmlKey
-              _tmlPageToken
-              _tmlOAuthToken
-              _tmlMaxResults
               _tmlFields
+              _tmlKey
+              _tmlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

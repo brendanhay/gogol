@@ -54,17 +54,17 @@ type ProjectsSubscriptionsGetResource =
      "v1beta2" :>
        "{+subscription}" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] Subscription
 
@@ -218,17 +218,17 @@ instance GoogleRequest ProjectsSubscriptionsGet'
         type Rs ProjectsSubscriptionsGet' = Subscription
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u ProjectsSubscriptionsGet'{..}
-          = go _psgXgafv _psgQuotaUser (Just _psgPrettyPrint)
-              _psgUploadProtocol
+          = go _psgXgafv _psgAccessToken _psgBearerToken
+              _psgCallback
               (Just _psgPp)
-              _psgAccessToken
               _psgUploadType
-              _psgBearerToken
+              _psgUploadProtocol
+              _psgSubscription
+              _psgQuotaUser
+              (Just _psgPrettyPrint)
+              _psgFields
               _psgKey
               _psgOAuthToken
-              _psgSubscription
-              _psgFields
-              _psgCallback
               (Just AltJSON)
           where go
                   = clientWithRoute

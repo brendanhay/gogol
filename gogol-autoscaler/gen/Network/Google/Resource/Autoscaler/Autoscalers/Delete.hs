@@ -56,9 +56,9 @@ type AutoscalersDeleteResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Delete '[JSON] Operation
 
@@ -171,13 +171,12 @@ instance GoogleRequest AutoscalersDelete' where
         type Rs AutoscalersDelete' = Operation
         request = requestWithRoute defReq autoscalerURL
         requestWithRoute r u AutoscalersDelete'{..}
-          = go _adQuotaUser (Just _adPrettyPrint) _adProject
+          = go _adProject _adZone _adAutoscaler _adQuotaUser
+              (Just _adPrettyPrint)
               _adUserIP
-              _adZone
-              _adKey
-              _adAutoscaler
-              _adOAuthToken
               _adFields
+              _adKey
+              _adOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

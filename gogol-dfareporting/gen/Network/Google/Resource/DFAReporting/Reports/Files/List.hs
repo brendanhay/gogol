@@ -55,20 +55,20 @@ type ReportsFilesListResource =
          "reports" :>
            Capture "reportId" Int64 :>
              "files" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
+               QueryParam "maxResults" Int32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "sortField"
+                     DfareportingReportsFilesListSortField
+                     :>
                      QueryParam "sortOrder"
                        DfareportingReportsFilesListSortOrder
                        :>
-                       QueryParam "key" Key :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "sortField"
-                             DfareportingReportsFilesListSortField
-                             :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "maxResults" Int32 :>
-                                 QueryParam "fields" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] FileList
 
@@ -212,16 +212,17 @@ instance GoogleRequest ReportsFilesList' where
         type Rs ReportsFilesList' = FileList
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ReportsFilesList'{..}
-          = go _rflQuotaUser (Just _rflPrettyPrint) _rflUserIP
-              _rflReportId
-              _rflProfileId
-              (Just _rflSortOrder)
-              _rflKey
-              _rflPageToken
+          = go _rflMaxResults _rflPageToken
               (Just _rflSortField)
-              _rflOAuthToken
-              _rflMaxResults
+              (Just _rflSortOrder)
+              _rflProfileId
+              _rflReportId
+              _rflQuotaUser
+              (Just _rflPrettyPrint)
+              _rflUserIP
               _rflFields
+              _rflKey
+              _rflOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

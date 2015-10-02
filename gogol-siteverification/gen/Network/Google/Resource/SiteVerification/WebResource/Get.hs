@@ -50,9 +50,9 @@ type WebResourceGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] SiteVerificationWebResourceResource
 
@@ -149,11 +149,11 @@ instance GoogleRequest WebResourceGet' where
              SiteVerificationWebResourceResource
         request = requestWithRoute defReq siteVerificationURL
         requestWithRoute r u WebResourceGet'{..}
-          = go _wrgQuotaUser (Just _wrgPrettyPrint) _wrgUserIP
-              _wrgKey
-              _wrgId
-              _wrgOAuthToken
+          = go _wrgId _wrgQuotaUser (Just _wrgPrettyPrint)
+              _wrgUserIP
               _wrgFields
+              _wrgKey
+              _wrgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

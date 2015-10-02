@@ -55,9 +55,9 @@ type SubscriptionsChangeSeatsResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Seats :> Post '[JSON] Subscription
 
@@ -176,12 +176,12 @@ instance GoogleRequest SubscriptionsChangeSeats'
         type Rs SubscriptionsChangeSeats' = Subscription
         request = requestWithRoute defReq appsResellerURL
         requestWithRoute r u SubscriptionsChangeSeats'{..}
-          = go _scsQuotaUser (Just _scsPrettyPrint) _scsUserIP
-              _scsCustomerId
+          = go _scsCustomerId _scsSubscriptionId _scsQuotaUser
+              (Just _scsPrettyPrint)
+              _scsUserIP
+              _scsFields
               _scsKey
               _scsOAuthToken
-              _scsSubscriptionId
-              _scsFields
               (Just AltJSON)
               _scsSeats
           where go

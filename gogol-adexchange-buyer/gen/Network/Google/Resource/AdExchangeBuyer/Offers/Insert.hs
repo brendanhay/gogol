@@ -49,9 +49,9 @@ type OffersInsertResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] OfferDto :> Post '[JSON] OfferDto
 
@@ -146,9 +146,9 @@ instance GoogleRequest OffersInsert' where
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u OffersInsert'{..}
           = go _oiQuotaUser (Just _oiPrettyPrint) _oiUserIP
+              _oiFields
               _oiKey
               _oiOAuthToken
-              _oiFields
               (Just AltJSON)
               _oiOfferDto
           where go

@@ -56,24 +56,24 @@ import           Network.Google.Prelude
 type DataMcfGetResource =
      "data" :>
        "mcf" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "metrics" Text :>
-             QueryParam "prettyPrint" Bool :>
+         QueryParam "dimensions" Text :>
+           QueryParam "filters" Text :>
+             QueryParam "max-results" Int32 :>
                QueryParam "samplingLevel"
                  AnalyticsDataMcfGetSamplingLevel
                  :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "filters" Text :>
+                 QueryParam "sort" Text :>
+                   QueryParam "start-index" Int32 :>
                      QueryParam "ids" Text :>
-                       QueryParam "end-date" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "sort" Text :>
-                             QueryParam "dimensions" Text :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "start-index" Int32 :>
-                                   QueryParam "max-results" Int32 :>
-                                     QueryParam "start-date" Text :>
-                                       QueryParam "fields" Text :>
+                       QueryParam "start-date" Text :>
+                         QueryParam "end-date" Text :>
+                           QueryParam "metrics" Text :>
+                             QueryParam "quotaUser" Text :>
+                               QueryParam "prettyPrint" Bool :>
+                                 QueryParam "userIp" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "key" Key :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] McfData
 
@@ -267,21 +267,20 @@ instance GoogleRequest DataMcfGet' where
         type Rs DataMcfGet' = McfData
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u DataMcfGet'{..}
-          = go _dmgQuotaUser (Just _dmgMetrics)
-              (Just _dmgPrettyPrint)
+          = go _dmgDimensions _dmgFilters _dmgMaxResults
               _dmgSamplingLevel
-              _dmgUserIP
-              _dmgFilters
-              (Just _dmgIds)
-              (Just _dmgEndDate)
-              _dmgKey
               _dmgSort
-              _dmgDimensions
-              _dmgOAuthToken
               _dmgStartIndex
-              _dmgMaxResults
+              (Just _dmgIds)
               (Just _dmgStartDate)
+              (Just _dmgEndDate)
+              (Just _dmgMetrics)
+              _dmgQuotaUser
+              (Just _dmgPrettyPrint)
+              _dmgUserIP
               _dmgFields
+              _dmgKey
+              _dmgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy DataMcfGetResource)

@@ -55,17 +55,17 @@ type OrganizationsGetResource =
        "organizations" :>
          Capture "organizationId" Text :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
+             QueryParam "access_token" Text :>
+               QueryParam "bearer_token" Text :>
+                 QueryParam "callback" Text :>
                    QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] Organization
 
@@ -215,17 +215,17 @@ instance GoogleRequest OrganizationsGet' where
         type Rs OrganizationsGet' = Organization
         request = requestWithRoute defReq resourceManagerURL
         requestWithRoute r u OrganizationsGet'{..}
-          = go _ogXgafv _ogQuotaUser (Just _ogPrettyPrint)
-              _ogUploadProtocol
+          = go _ogXgafv _ogAccessToken _ogBearerToken
+              _ogCallback
               (Just _ogPp)
-              _ogAccessToken
               _ogUploadType
-              _ogBearerToken
+              _ogUploadProtocol
+              _ogOrganizationId
+              _ogQuotaUser
+              (Just _ogPrettyPrint)
+              _ogFields
               _ogKey
               _ogOAuthToken
-              _ogOrganizationId
-              _ogFields
-              _ogCallback
               (Just AltJSON)
           where go
                   = clientWithRoute

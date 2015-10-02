@@ -57,22 +57,22 @@ import           Network.Google.YouTube.Types
 type VideosListResource =
      "videos" :>
        QueryParam "chart" YouTubeVideosListChart :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "part" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "regionCode" Text :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "locale" Text :>
-                     QueryParam "myRating" YouTubeVideosListMyRating :>
-                       QueryParam "hl" Text :>
-                         QueryParam "onBehalfOfContentOwner" Text :>
-                           QueryParam "videoCategoryId" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "id" Text :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "oauth_token" OAuthToken :>
-                                     QueryParam "maxResults" Word32 :>
-                                       QueryParam "fields" Text :>
+         QueryParam "hl" Text :>
+           QueryParam "id" Text :>
+             QueryParam "locale" Text :>
+               QueryParam "maxResults" Word32 :>
+                 QueryParam "myRating" YouTubeVideosListMyRating :>
+                   QueryParam "onBehalfOfContentOwner" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "regionCode" Text :>
+                         QueryParam "videoCategoryId" Text :>
+                           QueryParam "part" Text :>
+                             QueryParam "quotaUser" Text :>
+                               QueryParam "prettyPrint" Bool :>
+                                 QueryParam "userIp" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "key" Key :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] VideoListResponse
 
@@ -292,21 +292,20 @@ instance GoogleRequest VideosList' where
         type Rs VideosList' = VideoListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u VideosList'{..}
-          = go _vlChart _vlQuotaUser (Just _vlPart)
-              (Just _vlPrettyPrint)
-              _vlRegionCode
-              _vlUserIP
-              _vlLocale
-              _vlMyRating
-              _vlHl
-              _vlOnBehalfOfContentOwner
-              (Just _vlVideoCategoryId)
-              _vlKey
-              _vlId
-              _vlPageToken
-              _vlOAuthToken
+          = go _vlChart _vlHl _vlId _vlLocale
               (Just _vlMaxResults)
+              _vlMyRating
+              _vlOnBehalfOfContentOwner
+              _vlPageToken
+              _vlRegionCode
+              (Just _vlVideoCategoryId)
+              (Just _vlPart)
+              _vlQuotaUser
+              (Just _vlPrettyPrint)
+              _vlUserIP
               _vlFields
+              _vlKey
+              _vlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy VideosListResource)

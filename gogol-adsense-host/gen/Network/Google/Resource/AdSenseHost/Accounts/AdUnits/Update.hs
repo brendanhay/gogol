@@ -55,9 +55,9 @@ type AccountsAdUnitsUpdateResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] AdUnit :> Put '[JSON] AdUnit
 
@@ -177,13 +177,12 @@ instance GoogleRequest AccountsAdUnitsUpdate' where
         type Rs AccountsAdUnitsUpdate' = AdUnit
         request = requestWithRoute defReq adSenseHostURL
         requestWithRoute r u AccountsAdUnitsUpdate'{..}
-          = go _aauuQuotaUser (Just _aauuPrettyPrint)
+          = go _aauuAccountId _aauuAdClientId _aauuQuotaUser
+              (Just _aauuPrettyPrint)
               _aauuUserIP
-              _aauuAdClientId
-              _aauuAccountId
+              _aauuFields
               _aauuKey
               _aauuOAuthToken
-              _aauuFields
               (Just AltJSON)
               _aauuAdUnit
           where go

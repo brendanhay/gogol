@@ -53,9 +53,9 @@ type TasksClearResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Clears all completed tasks from the specified task list. The affected
@@ -150,11 +150,11 @@ instance GoogleRequest TasksClear' where
         type Rs TasksClear' = ()
         request = requestWithRoute defReq appsTasksURL
         requestWithRoute r u TasksClear'{..}
-          = go _tcQuotaUser (Just _tcPrettyPrint) _tcUserIP
-              _tcKey
-              _tcTaskList
-              _tcOAuthToken
+          = go _tcTaskList _tcQuotaUser (Just _tcPrettyPrint)
+              _tcUserIP
               _tcFields
+              _tcKey
+              _tcOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TasksClearResource)

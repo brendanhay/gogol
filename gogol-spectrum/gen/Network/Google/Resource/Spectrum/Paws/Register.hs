@@ -50,9 +50,9 @@ type PawsRegisterResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] PawsRegisterRequest :>
                        Post '[JSON] PawsRegisterResponse
@@ -150,9 +150,9 @@ instance GoogleRequest PawsRegister' where
         request = requestWithRoute defReq spectrumURL
         requestWithRoute r u PawsRegister'{..}
           = go _prQuotaUser (Just _prPrettyPrint) _prUserIP
+              _prFields
               _prKey
               _prOAuthToken
-              _prFields
               (Just AltJSON)
               _prPawsRegisterRequest
           where go

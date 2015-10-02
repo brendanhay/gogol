@@ -56,17 +56,17 @@ type OrganizationsTestIAMPermissionsResource =
        "organizations" :>
          "{resource}:testIamPermissions" :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
+             QueryParam "access_token" Text :>
+               QueryParam "bearer_token" Text :>
+                 QueryParam "callback" Text :>
                    QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] TestIAMPermissionsRequest
                                        :>
@@ -239,18 +239,17 @@ instance GoogleRequest
         request = requestWithRoute defReq resourceManagerURL
         requestWithRoute r u
           OrganizationsTestIAMPermissions'{..}
-          = go _otipXgafv _otipQuotaUser
-              (Just _otipPrettyPrint)
-              _otipUploadProtocol
-              (Just _otipPp)
-              _otipAccessToken
-              _otipUploadType
-              _otipBearerToken
-              _otipKey
-              _otipResource
-              _otipOAuthToken
-              _otipFields
+          = go _otipXgafv _otipAccessToken _otipBearerToken
               _otipCallback
+              (Just _otipPp)
+              _otipUploadType
+              _otipUploadProtocol
+              _otipResource
+              _otipQuotaUser
+              (Just _otipPrettyPrint)
+              _otipFields
+              _otipKey
+              _otipOAuthToken
               (Just AltJSON)
               _otipTestIAMPermissionsRequest
           where go

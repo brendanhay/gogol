@@ -58,17 +58,17 @@ type BeaconsAttachmentsDeleteResource =
      "v1beta1" :>
        "{+attachmentName}" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Delete '[JSON] Empty
 
@@ -229,17 +229,17 @@ instance GoogleRequest BeaconsAttachmentsDelete'
         type Rs BeaconsAttachmentsDelete' = Empty
         request = requestWithRoute defReq proximityBeaconURL
         requestWithRoute r u BeaconsAttachmentsDelete'{..}
-          = go _badXgafv _badQuotaUser (Just _badPrettyPrint)
-              _badUploadProtocol
+          = go _badXgafv _badAccessToken _badBearerToken
+              _badCallback
               (Just _badPp)
-              _badAccessToken
               _badUploadType
+              _badUploadProtocol
               _badAttachmentName
-              _badBearerToken
+              _badQuotaUser
+              (Just _badPrettyPrint)
+              _badFields
               _badKey
               _badOAuthToken
-              _badFields
-              _badCallback
               (Just AltJSON)
           where go
                   = clientWithRoute

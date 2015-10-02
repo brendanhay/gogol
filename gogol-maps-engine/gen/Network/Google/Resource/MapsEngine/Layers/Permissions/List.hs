@@ -51,9 +51,9 @@ type LayersPermissionsListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] PermissionsListResponse
 
@@ -150,11 +150,11 @@ instance GoogleRequest LayersPermissionsList' where
              PermissionsListResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u LayersPermissionsList'{..}
-          = go _lplQuotaUser (Just _lplPrettyPrint) _lplUserIP
-              _lplKey
-              _lplId
-              _lplOAuthToken
+          = go _lplId _lplQuotaUser (Just _lplPrettyPrint)
+              _lplUserIP
               _lplFields
+              _lplKey
+              _lplOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

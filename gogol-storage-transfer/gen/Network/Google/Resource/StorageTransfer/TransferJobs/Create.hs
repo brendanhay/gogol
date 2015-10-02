@@ -54,17 +54,17 @@ type TransferJobsCreateResource =
      "v1" :>
        "transferJobs" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] TransferJob :>
                                      Post '[JSON] TransferJob
@@ -218,16 +218,16 @@ instance GoogleRequest TransferJobsCreate' where
         type Rs TransferJobsCreate' = TransferJob
         request = requestWithRoute defReq storageTransferURL
         requestWithRoute r u TransferJobsCreate'{..}
-          = go _tjcXgafv _tjcQuotaUser (Just _tjcPrettyPrint)
-              _tjcUploadProtocol
+          = go _tjcXgafv _tjcAccessToken _tjcBearerToken
+              _tjcCallback
               (Just _tjcPp)
-              _tjcAccessToken
               _tjcUploadType
-              _tjcBearerToken
+              _tjcUploadProtocol
+              _tjcQuotaUser
+              (Just _tjcPrettyPrint)
+              _tjcFields
               _tjcKey
               _tjcOAuthToken
-              _tjcFields
-              _tjcCallback
               (Just AltJSON)
               _tjcTransferJob
           where go

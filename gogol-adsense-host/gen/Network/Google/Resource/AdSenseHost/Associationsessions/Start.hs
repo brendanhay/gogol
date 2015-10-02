@@ -51,18 +51,18 @@ import           Network.Google.Prelude
 type AssociationsessionsStartResource =
      "associationsessions" :>
        "start" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "websiteLocale" Text :>
-                 QueryParam "userLocale" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "websiteUrl" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParams "productCode"
-                           AdsensehostAssociationsessionsStartProductCode
-                           :>
-                           QueryParam "fields" Text :>
+         QueryParam "userLocale" Text :>
+           QueryParam "websiteLocale" Text :>
+             QueryParams "productCode"
+               AdsensehostAssociationsessionsStartProductCode
+               :>
+               QueryParam "websiteUrl" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] AssociationSession
 
@@ -187,14 +187,15 @@ instance GoogleRequest AssociationsessionsStart'
              AssociationSession
         request = requestWithRoute defReq adSenseHostURL
         requestWithRoute r u AssociationsessionsStart'{..}
-          = go _aQuotaUser (Just _aPrettyPrint) _aUserIP
-              _aWebsiteLocale
-              _aUserLocale
-              _aKey
-              (Just _aWebsiteURL)
-              _aOAuthToken
+          = go _aUserLocale _aWebsiteLocale
               (Just _aProductCode)
+              (Just _aWebsiteURL)
+              _aQuotaUser
+              (Just _aPrettyPrint)
+              _aUserIP
               _aFields
+              _aKey
+              _aOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

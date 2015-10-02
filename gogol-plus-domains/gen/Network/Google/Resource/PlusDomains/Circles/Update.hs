@@ -51,9 +51,9 @@ type CirclesUpdateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Circle :> Put '[JSON] Circle
 
@@ -156,11 +156,11 @@ instance GoogleRequest CirclesUpdate' where
         type Rs CirclesUpdate' = Circle
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u CirclesUpdate'{..}
-          = go _cuQuotaUser (Just _cuPrettyPrint) _cuUserIP
-              _cuKey
-              _cuCircleId
-              _cuOAuthToken
+          = go _cuCircleId _cuQuotaUser (Just _cuPrettyPrint)
+              _cuUserIP
               _cuFields
+              _cuKey
+              _cuOAuthToken
               (Just AltJSON)
               _cuCircle
           where go

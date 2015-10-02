@@ -53,13 +53,13 @@ type PostsPublishResource =
          "posts" :>
            Capture "postId" Text :>
              "publish" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "publishDate" UTCTime :>
+               QueryParam "publishDate" UTCTime :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Post '[JSON] Post
 
 -- | Publishes a draft post, optionally at the specific time of the given
@@ -179,14 +179,13 @@ instance GoogleRequest PostsPublish' where
         type Rs PostsPublish' = Post
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PostsPublish'{..}
-          = go _posQuotaUser (Just _posPrettyPrint)
-              _posPublishDate
+          = go _posPublishDate _posBlogId _posPostId
+              _posQuotaUser
+              (Just _posPrettyPrint)
               _posUserIP
-              _posBlogId
-              _posKey
-              _posPostId
-              _posOAuthToken
               _posFields
+              _posKey
+              _posOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

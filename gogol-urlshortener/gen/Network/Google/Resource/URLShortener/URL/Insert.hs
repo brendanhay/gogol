@@ -26,7 +26,7 @@ module Network.Google.Resource.URLShortener.URL.Insert
       URLInsertResource
 
     -- * Creating a Request
-    , uRLInsert'
+    , urlInsert'
     , URLInsert'
 
     -- * Request Lenses
@@ -49,15 +49,15 @@ type URLInsertResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] URL :> Post '[JSON] URL
 
 -- | Creates a new short URL.
 --
--- /See:/ 'uRLInsert'' smart constructor.
+-- /See:/ 'urlInsert'' smart constructor.
 data URLInsert' = URLInsert'
     { _uiQuotaUser   :: !(Maybe Text)
     , _uiPrettyPrint :: !Bool
@@ -85,10 +85,10 @@ data URLInsert' = URLInsert'
 -- * 'uiOAuthToken'
 --
 -- * 'uiFields'
-uRLInsert'
+urlInsert'
     :: URL -- ^ 'URL'
     -> URLInsert'
-uRLInsert' pUiURL_ =
+urlInsert' pUiURL_ =
     URLInsert'
     { _uiQuotaUser = Nothing
     , _uiPrettyPrint = True
@@ -145,9 +145,9 @@ instance GoogleRequest URLInsert' where
         request = requestWithRoute defReq uRLShortenerURL
         requestWithRoute r u URLInsert'{..}
           = go _uiQuotaUser (Just _uiPrettyPrint) _uiUserIP
+              _uiFields
               _uiKey
               _uiOAuthToken
-              _uiFields
               (Just AltJSON)
               _uiURL
           where go

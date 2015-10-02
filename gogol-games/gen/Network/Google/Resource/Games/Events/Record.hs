@@ -48,13 +48,13 @@ import           Network.Google.Prelude
 -- 'EventsRecord'' request conforms to.
 type EventsRecordResource =
      "events" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "language" Text :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+       QueryParam "language" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] EventRecordRequest :>
                          Post '[JSON] EventUpdateResponse
@@ -160,11 +160,11 @@ instance GoogleRequest EventsRecord' where
         type Rs EventsRecord' = EventUpdateResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u EventsRecord'{..}
-          = go _erQuotaUser (Just _erPrettyPrint) _erUserIP
-              _erKey
-              _erLanguage
-              _erOAuthToken
+          = go _erLanguage _erQuotaUser (Just _erPrettyPrint)
+              _erUserIP
               _erFields
+              _erKey
+              _erOAuthToken
               (Just AltJSON)
               _erEventRecordRequest
           where go

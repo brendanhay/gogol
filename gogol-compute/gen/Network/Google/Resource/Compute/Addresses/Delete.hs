@@ -55,9 +55,9 @@ type AddressesDeleteResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified address resource.
@@ -173,13 +173,12 @@ instance GoogleRequest AddressesDelete' where
         type Rs AddressesDelete' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u AddressesDelete'{..}
-          = go _addQuotaUser (Just _addPrettyPrint) _addProject
+          = go _addProject _addRegion _addAddress _addQuotaUser
+              (Just _addPrettyPrint)
               _addUserIP
-              _addAddress
-              _addKey
-              _addRegion
-              _addOAuthToken
               _addFields
+              _addKey
+              _addOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

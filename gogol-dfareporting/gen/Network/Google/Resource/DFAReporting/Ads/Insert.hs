@@ -52,9 +52,9 @@ type AdsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Ad :> Post '[JSON] Ad
 
@@ -157,11 +157,11 @@ instance GoogleRequest AdsInsert' where
         type Rs AdsInsert' = Ad
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdsInsert'{..}
-          = go _aiQuotaUser (Just _aiPrettyPrint) _aiUserIP
-              _aiProfileId
+          = go _aiProfileId _aiQuotaUser (Just _aiPrettyPrint)
+              _aiUserIP
+              _aiFields
               _aiKey
               _aiOAuthToken
-              _aiFields
               (Just AltJSON)
               _aiAd
           where go

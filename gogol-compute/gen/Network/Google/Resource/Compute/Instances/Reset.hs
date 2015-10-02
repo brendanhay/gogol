@@ -56,9 +56,9 @@ type InstancesResetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Performs a hard reset on the instance.
@@ -173,13 +173,12 @@ instance GoogleRequest InstancesReset' where
         type Rs InstancesReset' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstancesReset'{..}
-          = go _irrQuotaUser (Just _irrPrettyPrint) _irrProject
+          = go _irrProject _irrZone _irrInstance _irrQuotaUser
+              (Just _irrPrettyPrint)
               _irrUserIP
-              _irrZone
+              _irrFields
               _irrKey
               _irrOAuthToken
-              _irrFields
-              _irrInstance
               (Just AltJSON)
           where go
                   = clientWithRoute

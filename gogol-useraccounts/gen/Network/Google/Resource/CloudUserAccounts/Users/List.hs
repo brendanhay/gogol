@@ -52,16 +52,16 @@ type UsersListResource =
      Capture "project" Text :>
        "global" :>
          "users" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
+           QueryParam "filter" Text :>
+             QueryParam "maxResults" Word32 :>
                QueryParam "orderBy" Text :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "filter" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Get '[JSON] UserList
 
 -- | Retrieves a list of users contained within the specified project.
@@ -208,15 +208,15 @@ instance GoogleRequest UsersList' where
         type Rs UsersList' = UserList
         request = requestWithRoute defReq userAccountsURL
         requestWithRoute r u UsersList'{..}
-          = go _ulQuotaUser (Just _ulPrettyPrint) _ulOrderBy
-              _ulProject
-              _ulUserIP
-              _ulKey
-              _ulFilter
+          = go _ulFilter (Just _ulMaxResults) _ulOrderBy
               _ulPageToken
-              _ulOAuthToken
-              (Just _ulMaxResults)
+              _ulProject
+              _ulQuotaUser
+              (Just _ulPrettyPrint)
+              _ulUserIP
               _ulFields
+              _ulKey
+              _ulOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy UsersListResource)

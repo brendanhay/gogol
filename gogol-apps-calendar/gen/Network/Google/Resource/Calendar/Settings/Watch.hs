@@ -52,15 +52,15 @@ type SettingsWatchResource =
        "me" :>
          "settings" :>
            "watch" :>
-             QueryParam "syncToken" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Int32 :>
-                             QueryParam "fields" Text :>
+             QueryParam "maxResults" Int32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "syncToken" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] Channel :> Post '[JSON] Channel
 
@@ -189,13 +189,13 @@ instance GoogleRequest SettingsWatch' where
         type Rs SettingsWatch' = Channel
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u SettingsWatch'{..}
-          = go _swSyncToken _swQuotaUser (Just _swPrettyPrint)
+          = go _swMaxResults _swPageToken _swSyncToken
+              _swQuotaUser
+              (Just _swPrettyPrint)
               _swUserIP
-              _swKey
-              _swPageToken
-              _swOAuthToken
-              _swMaxResults
               _swFields
+              _swKey
+              _swOAuthToken
               (Just AltJSON)
               _swChannel
           where go

@@ -56,13 +56,13 @@ type AccountsAdUnitsGetAdCodeResource =
              "adunits" :>
                Capture "adUnitId" Text :>
                  "adcode" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParams "hostCustomChannelId" Text :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
+                   QueryParams "hostCustomChannelId" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :> Get '[JSON] AdCode
 
 -- | Get ad code for the specified ad unit, attaching the specified host
@@ -195,15 +195,15 @@ instance GoogleRequest AccountsAdUnitsGetAdCode'
         type Rs AccountsAdUnitsGetAdCode' = AdCode
         request = requestWithRoute defReq adSenseHostURL
         requestWithRoute r u AccountsAdUnitsGetAdCode'{..}
-          = go _aaugacQuotaUser (Just _aaugacPrettyPrint)
-              _aaugacUserIP
-              _aaugacAdUnitId
+          = go _aaugacHostCustomChannelId _aaugacAccountId
               _aaugacAdClientId
-              _aaugacAccountId
-              _aaugacKey
-              _aaugacHostCustomChannelId
-              _aaugacOAuthToken
+              _aaugacAdUnitId
+              _aaugacQuotaUser
+              (Just _aaugacPrettyPrint)
+              _aaugacUserIP
               _aaugacFields
+              _aaugacKey
+              _aaugacOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

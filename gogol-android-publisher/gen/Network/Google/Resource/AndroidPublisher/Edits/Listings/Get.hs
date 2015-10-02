@@ -55,9 +55,9 @@ type EditsListingsGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Listing
 
 -- | Fetches information about a localized store listing.
@@ -176,14 +176,13 @@ instance GoogleRequest EditsListingsGet' where
         type Rs EditsListingsGet' = Listing
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u EditsListingsGet'{..}
-          = go _elgQuotaUser (Just _elgPrettyPrint)
-              _elgPackageName
+          = go _elgPackageName _elgEditId _elgLanguage
+              _elgQuotaUser
+              (Just _elgPrettyPrint)
               _elgUserIP
-              _elgKey
-              _elgLanguage
-              _elgOAuthToken
-              _elgEditId
               _elgFields
+              _elgKey
+              _elgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

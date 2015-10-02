@@ -52,14 +52,14 @@ type ZoneViewsListResource =
        "zones" :>
          Capture "zone" Text :>
            "resourceViews" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Int32 :>
-                           QueryParam "fields" Text :>
+             QueryParam "maxResults" Int32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ZoneViewsList
 
@@ -187,14 +187,14 @@ instance GoogleRequest ZoneViewsList' where
         type Rs ZoneViewsList' = ZoneViewsList
         request = requestWithRoute defReq resourceViewsURL
         requestWithRoute r u ZoneViewsList'{..}
-          = go _zvlQuotaUser (Just _zvlPrettyPrint) _zvlProject
-              _zvlUserIP
+          = go (Just _zvlMaxResults) _zvlPageToken _zvlProject
               _zvlZone
-              _zvlKey
-              _zvlPageToken
-              _zvlOAuthToken
-              (Just _zvlMaxResults)
+              _zvlQuotaUser
+              (Just _zvlPrettyPrint)
+              _zvlUserIP
               _zvlFields
+              _zvlKey
+              _zvlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

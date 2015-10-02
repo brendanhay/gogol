@@ -53,9 +53,9 @@ type MembersDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Remove membership.
@@ -158,12 +158,12 @@ instance GoogleRequest MembersDelete' where
         type Rs MembersDelete' = ()
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u MembersDelete'{..}
-          = go _mdQuotaUser _mdMemberKey (Just _mdPrettyPrint)
+          = go _mdGroupKey _mdMemberKey _mdQuotaUser
+              (Just _mdPrettyPrint)
               _mdUserIP
-              _mdGroupKey
+              _mdFields
               _mdKey
               _mdOAuthToken
-              _mdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

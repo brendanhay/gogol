@@ -47,13 +47,13 @@ import           Network.Google.Prelude
 -- 'LayersCreate'' request conforms to.
 type LayersCreateResource =
      "layers" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "process" Bool :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+       QueryParam "process" Bool :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Layer :> Post '[JSON] Layer
 
@@ -155,11 +155,11 @@ instance GoogleRequest LayersCreate' where
         type Rs LayersCreate' = Layer
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u LayersCreate'{..}
-          = go _lcQuotaUser (Just _lcPrettyPrint) _lcUserIP
-              _lcProcess
+          = go _lcProcess _lcQuotaUser (Just _lcPrettyPrint)
+              _lcUserIP
+              _lcFields
               _lcKey
               _lcOAuthToken
-              _lcFields
               (Just AltJSON)
               _lcLayer
           where go

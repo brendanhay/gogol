@@ -61,17 +61,17 @@ type CoursesAliasesCreateResource =
          Capture "courseId" Text :>
            "aliases" :>
              QueryParam "$.xgafv" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "upload_protocol" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "bearer_token" Text :>
+                   QueryParam "callback" Text :>
                      QueryParam "pp" Bool :>
-                       QueryParam "access_token" Text :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "callback" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        ReqBody '[JSON] CourseAlias :>
                                          Post '[JSON] CourseAlias
@@ -241,17 +241,17 @@ instance GoogleRequest CoursesAliasesCreate' where
         type Rs CoursesAliasesCreate' = CourseAlias
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u CoursesAliasesCreate'{..}
-          = go _cacXgafv _cacQuotaUser (Just _cacPrettyPrint)
-              _cacUploadProtocol
+          = go _cacXgafv _cacAccessToken _cacBearerToken
+              _cacCallback
               (Just _cacPp)
-              _cacCourseId
-              _cacAccessToken
               _cacUploadType
-              _cacBearerToken
+              _cacUploadProtocol
+              _cacCourseId
+              _cacQuotaUser
+              (Just _cacPrettyPrint)
+              _cacFields
               _cacKey
               _cacOAuthToken
-              _cacFields
-              _cacCallback
               (Just AltJSON)
               _cacCourseAlias
           where go

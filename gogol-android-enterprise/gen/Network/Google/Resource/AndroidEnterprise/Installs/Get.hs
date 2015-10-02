@@ -59,9 +59,9 @@ type InstallsGetResource =
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :> Get '[JSON] Install
 
 -- | Retrieves details of an installation of an app on a device.
@@ -186,15 +186,14 @@ instance GoogleRequest InstallsGet' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u InstallsGet'{..}
-          = go _igQuotaUser (Just _igPrettyPrint)
-              _igEnterpriseId
-              _igUserIP
-              _igUserId
+          = go _igEnterpriseId _igUserId _igDeviceId
               _igInstallId
-              _igKey
-              _igDeviceId
-              _igOAuthToken
+              _igQuotaUser
+              (Just _igPrettyPrint)
+              _igUserIP
               _igFields
+              _igKey
+              _igOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

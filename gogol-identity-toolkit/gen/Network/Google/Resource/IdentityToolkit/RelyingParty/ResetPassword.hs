@@ -49,9 +49,9 @@ type RelyingPartyResetPasswordResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON]
                        IdentitytoolkitRelyingPartyResetPasswordRequest
@@ -159,9 +159,9 @@ instance GoogleRequest RelyingPartyResetPassword'
         requestWithRoute r u RelyingPartyResetPassword'{..}
           = go _rprpQuotaUser (Just _rprpPrettyPrint)
               _rprpUserIP
+              _rprpFields
               _rprpKey
               _rprpOAuthToken
-              _rprpFields
               (Just AltJSON)
               _rprpIdentitytoolkitRelyingPartyResetPasswordRequest
           where go

@@ -62,20 +62,21 @@ type AppsModulesVersionsListResource =
              Capture "modulesId" Text :>
                "versions" :>
                  QueryParam "$.xgafv" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "upload_protocol" Text :>
-                         QueryParam "pp" Bool :>
-                           QueryParam "access_token" Text :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "bearer_token" Text :>
-                                 QueryParam "key" Key :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "pageSize" Int32 :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "pp" Bool :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "upload_protocol" Text :>
                                    QueryParam "view" Text :>
-                                     QueryParam "pageToken" Text :>
-                                       QueryParam "oauth_token" OAuthToken :>
-                                         QueryParam "pageSize" Int32 :>
-                                           QueryParam "fields" Text :>
-                                             QueryParam "callback" Text :>
+                                     QueryParam "quotaUser" Text :>
+                                       QueryParam "prettyPrint" Bool :>
+                                         QueryParam "fields" Text :>
+                                           QueryParam "key" Key :>
+                                             QueryParam "oauth_token" OAuthToken
+                                               :>
                                                QueryParam "alt" AltJSON :>
                                                  Get '[JSON]
                                                    ListVersionsResponse
@@ -270,22 +271,21 @@ instance GoogleRequest AppsModulesVersionsList' where
              ListVersionsResponse
         request = requestWithRoute defReq appEngineURL
         requestWithRoute r u AppsModulesVersionsList'{..}
-          = go _amvlXgafv _amvlQuotaUser
-              (Just _amvlPrettyPrint)
-              _amvlUploadProtocol
-              (Just _amvlPp)
-              _amvlAccessToken
-              _amvlUploadType
-              _amvlModulesId
-              _amvlBearerToken
-              _amvlKey
-              _amvlAppsId
-              _amvlView
-              _amvlPageToken
-              _amvlOAuthToken
-              _amvlPageSize
-              _amvlFields
+          = go _amvlXgafv _amvlAccessToken _amvlBearerToken
               _amvlCallback
+              _amvlPageSize
+              _amvlPageToken
+              (Just _amvlPp)
+              _amvlUploadType
+              _amvlUploadProtocol
+              _amvlView
+              _amvlAppsId
+              _amvlModulesId
+              _amvlQuotaUser
+              (Just _amvlPrettyPrint)
+              _amvlFields
+              _amvlKey
+              _amvlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

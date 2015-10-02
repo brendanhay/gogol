@@ -58,27 +58,28 @@ import           Network.Google.Prelude
 -- 'LayersList'' request conforms to.
 type LayersListResource =
      "layers" :>
-       QueryParam "createdAfter" UTCTime :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "creatorEmail" Text :>
-                 QueryParam "role" MapsEngineLayersListRole :>
-                   QueryParam "key" Key :>
-                     QueryParam "bbox" Text :>
+       QueryParam "bbox" Text :>
+         QueryParam "createdAfter" UTCTime :>
+           QueryParam "createdBefore" UTCTime :>
+             QueryParam "creatorEmail" Text :>
+               QueryParam "maxResults" Word32 :>
+                 QueryParam "modifiedAfter" UTCTime :>
+                   QueryParam "modifiedBefore" UTCTime :>
+                     QueryParam "pageToken" Text :>
                        QueryParam "processingStatus"
                          MapsEngineLayersListProcessingStatus
                          :>
-                         QueryParam "modifiedAfter" UTCTime :>
-                           QueryParam "modifiedBefore" UTCTime :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "projectId" Text :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "search" Text :>
-                                     QueryParam "maxResults" Word32 :>
-                                       QueryParam "tags" Text :>
-                                         QueryParam "fields" Text :>
-                                           QueryParam "createdBefore" UTCTime :>
+                         QueryParam "projectId" Text :>
+                           QueryParam "role" MapsEngineLayersListRole :>
+                             QueryParam "search" Text :>
+                               QueryParam "tags" Text :>
+                                 QueryParam "quotaUser" Text :>
+                                   QueryParam "prettyPrint" Bool :>
+                                     QueryParam "userIp" Text :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "key" Key :>
+                                           QueryParam "oauth_token" OAuthToken
+                                             :>
                                              QueryParam "alt" AltJSON :>
                                                Get '[JSON] LayersListResponse
 
@@ -295,24 +296,23 @@ instance GoogleRequest LayersList' where
         type Rs LayersList' = LayersListResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u LayersList'{..}
-          = go _llCreatedAfter _llQuotaUser
-              (Just _llPrettyPrint)
-              _llUserIP
+          = go _llBbox _llCreatedAfter _llCreatedBefore
               _llCreatorEmail
-              _llRole
-              _llKey
-              _llBbox
-              _llProcessingStatus
+              _llMaxResults
               _llModifiedAfter
               _llModifiedBefore
               _llPageToken
+              _llProcessingStatus
               _llProjectId
-              _llOAuthToken
+              _llRole
               _llSearch
-              _llMaxResults
               _llTags
+              _llQuotaUser
+              (Just _llPrettyPrint)
+              _llUserIP
               _llFields
-              _llCreatedBefore
+              _llKey
+              _llOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy LayersListResource)

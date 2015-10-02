@@ -51,15 +51,15 @@ type TaskListResource =
      "tables" :>
        Capture "tableId" Text :>
          "tasks" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "startIndex" Word32 :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "maxResults" Word32 :>
+             QueryParam "pageToken" Text :>
+               QueryParam "startIndex" Word32 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] TaskList
 
 -- | Retrieves a list of tasks.
@@ -179,14 +179,14 @@ instance GoogleRequest TaskList' where
         type Rs TaskList' = TaskList
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TaskList'{..}
-          = go _tlQuotaUser (Just _tlPrettyPrint) _tlUserIP
-              _tlKey
-              _tlPageToken
-              _tlOAuthToken
+          = go _tlMaxResults _tlPageToken _tlStartIndex
               _tlTableId
-              _tlStartIndex
-              _tlMaxResults
+              _tlQuotaUser
+              (Just _tlPrettyPrint)
+              _tlUserIP
               _tlFields
+              _tlKey
+              _tlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TaskListResource) r

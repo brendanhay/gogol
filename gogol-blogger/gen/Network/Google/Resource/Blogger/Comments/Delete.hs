@@ -56,9 +56,9 @@ type CommentsDeleteResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete a comment by ID.
@@ -169,13 +169,12 @@ instance GoogleRequest CommentsDelete' where
         type Rs CommentsDelete' = ()
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u CommentsDelete'{..}
-          = go _cdQuotaUser (Just _cdPrettyPrint) _cdUserIP
-              _cdBlogId
-              _cdKey
-              _cdPostId
-              _cdOAuthToken
-              _cdCommentId
+          = go _cdBlogId _cdPostId _cdCommentId _cdQuotaUser
+              (Just _cdPrettyPrint)
+              _cdUserIP
               _cdFields
+              _cdKey
+              _cdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

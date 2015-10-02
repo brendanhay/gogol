@@ -53,9 +53,9 @@ type NetworksInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Network :> Post '[JSON] Operation
 
@@ -160,11 +160,11 @@ instance GoogleRequest NetworksInsert' where
         type Rs NetworksInsert' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u NetworksInsert'{..}
-          = go _niQuotaUser (Just _niPrettyPrint) _niProject
+          = go _niProject _niQuotaUser (Just _niPrettyPrint)
               _niUserIP
+              _niFields
               _niKey
               _niOAuthToken
-              _niFields
               (Just AltJSON)
               _niNetwork
           where go

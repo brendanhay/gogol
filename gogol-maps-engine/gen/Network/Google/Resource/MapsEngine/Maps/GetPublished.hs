@@ -51,9 +51,9 @@ type MapsGetPublishedResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] PublishedMap
 
 -- | Return the published metadata for a particular map.
@@ -148,11 +148,11 @@ instance GoogleRequest MapsGetPublished' where
         type Rs MapsGetPublished' = PublishedMap
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u MapsGetPublished'{..}
-          = go _mgpQuotaUser (Just _mgpPrettyPrint) _mgpUserIP
-              _mgpKey
-              _mgpId
-              _mgpOAuthToken
+          = go _mgpId _mgpQuotaUser (Just _mgpPrettyPrint)
+              _mgpUserIP
               _mgpFields
+              _mgpKey
+              _mgpOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

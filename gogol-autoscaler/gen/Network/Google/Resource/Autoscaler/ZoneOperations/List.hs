@@ -54,15 +54,15 @@ type ZoneOperationsListResource =
        "zones" :>
          Capture "zone" Text :>
            "operations" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "filter" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
+             QueryParam "filter" Text :>
+               QueryParam "maxResults" Word32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] OperationList
 
@@ -192,15 +192,15 @@ instance GoogleRequest ZoneOperationsList' where
         type Rs ZoneOperationsList' = OperationList
         request = requestWithRoute defReq autoscalerURL
         requestWithRoute r u ZoneOperationsList'{..}
-          = go _zolQuotaUser (Just _zolPrettyPrint) _zolProject
-              _zolUserIP
+          = go _zolFilter (Just _zolMaxResults) _zolPageToken
+              _zolProject
               _zolZone
-              _zolKey
-              _zolFilter
-              _zolPageToken
-              _zolOAuthToken
-              (Just _zolMaxResults)
+              _zolQuotaUser
+              (Just _zolPrettyPrint)
+              _zolUserIP
               _zolFields
+              _zolKey
+              _zolOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

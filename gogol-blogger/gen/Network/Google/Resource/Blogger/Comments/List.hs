@@ -58,19 +58,19 @@ type CommentsListResource =
          "posts" :>
            Capture "postId" Text :>
              "comments" :>
-               QueryParams "status" BloggerCommentsListStatus :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "endDate" UTCTime :>
-                         QueryParam "startDate" UTCTime :>
-                           QueryParam "key" Key :>
-                             QueryParam "fetchBodies" Bool :>
-                               QueryParam "view" BloggerCommentsListView :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "oauth_token" OAuthToken :>
-                                     QueryParam "maxResults" Word32 :>
-                                       QueryParam "fields" Text :>
+               QueryParam "endDate" UTCTime :>
+                 QueryParam "fetchBodies" Bool :>
+                   QueryParam "maxResults" Word32 :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "startDate" UTCTime :>
+                         QueryParams "status" BloggerCommentsListStatus :>
+                           QueryParam "view" BloggerCommentsListView :>
+                             QueryParam "quotaUser" Text :>
+                               QueryParam "prettyPrint" Bool :>
+                                 QueryParam "userIp" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "key" Key :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] CommentList
 
@@ -234,19 +234,19 @@ instance GoogleRequest CommentsList' where
         type Rs CommentsList' = CommentList
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u CommentsList'{..}
-          = go _clStatus _clQuotaUser (Just _clPrettyPrint)
-              _clUserIP
-              _clEndDate
-              _clBlogId
-              _clStartDate
-              _clKey
-              _clFetchBodies
-              _clView
-              _clPostId
+          = go _clEndDate _clFetchBodies _clMaxResults
               _clPageToken
-              _clOAuthToken
-              _clMaxResults
+              _clStartDate
+              _clStatus
+              _clView
+              _clBlogId
+              _clPostId
+              _clQuotaUser
+              (Just _clPrettyPrint)
+              _clUserIP
               _clFields
+              _clKey
+              _clOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

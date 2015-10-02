@@ -56,9 +56,9 @@ type JobsCancelResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Post '[JSON] JobCancelResponse
 
@@ -163,12 +163,12 @@ instance GoogleRequest JobsCancel' where
         type Rs JobsCancel' = JobCancelResponse
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u JobsCancel'{..}
-          = go _jcQuotaUser (Just _jcPrettyPrint) _jcJobId
+          = go _jcProjectId _jcJobId _jcQuotaUser
+              (Just _jcPrettyPrint)
               _jcUserIP
-              _jcKey
-              _jcProjectId
-              _jcOAuthToken
               _jcFields
+              _jcKey
+              _jcOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy JobsCancelResource)

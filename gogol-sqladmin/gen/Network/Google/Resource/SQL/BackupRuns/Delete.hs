@@ -56,9 +56,9 @@ type BackupRunsDeleteResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Delete '[JSON] Operation
 
@@ -174,13 +174,12 @@ instance GoogleRequest BackupRunsDelete' where
         type Rs BackupRunsDelete' = Operation
         request = requestWithRoute defReq sQLAdminURL
         requestWithRoute r u BackupRunsDelete'{..}
-          = go _brdQuotaUser (Just _brdPrettyPrint) _brdProject
+          = go _brdProject _brdInstance _brdId _brdQuotaUser
+              (Just _brdPrettyPrint)
               _brdUserIP
-              _brdKey
-              _brdId
-              _brdOAuthToken
               _brdFields
-              _brdInstance
+              _brdKey
+              _brdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

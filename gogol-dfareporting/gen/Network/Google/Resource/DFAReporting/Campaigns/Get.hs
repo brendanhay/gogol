@@ -53,9 +53,9 @@ type CampaignsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Campaign
 
 -- | Gets one campaign by ID.
@@ -162,13 +162,12 @@ instance GoogleRequest CampaignsGet' where
         type Rs CampaignsGet' = Campaign
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CampaignsGet'{..}
-          = go _camaQuotaUser (Just _camaPrettyPrint)
+          = go _camaProfileId _camaId _camaQuotaUser
+              (Just _camaPrettyPrint)
               _camaUserIP
-              _camaProfileId
-              _camaKey
-              _camaId
-              _camaOAuthToken
               _camaFields
+              _camaKey
+              _camaOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

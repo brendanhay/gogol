@@ -50,9 +50,9 @@ type TableDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a table.
@@ -145,11 +145,11 @@ instance GoogleRequest TableDelete' where
         type Rs TableDelete' = ()
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TableDelete'{..}
-          = go _tdQuotaUser (Just _tdPrettyPrint) _tdUserIP
+          = go _tdTableId _tdQuotaUser (Just _tdPrettyPrint)
+              _tdUserIP
+              _tdFields
               _tdKey
               _tdOAuthToken
-              _tdTableId
-              _tdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

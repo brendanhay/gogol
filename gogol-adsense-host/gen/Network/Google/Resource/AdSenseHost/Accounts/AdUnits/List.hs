@@ -54,15 +54,15 @@ type AccountsAdUnitsListResource =
          "adclients" :>
            Capture "adClientId" Text :>
              "adunits" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "includeInactive" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "maxResults" Word32 :>
-                               QueryParam "fields" Text :>
+               QueryParam "includeInactive" Bool :>
+                 QueryParam "maxResults" Word32 :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :> Get '[JSON] AdUnits
 
 -- | List all ad units in the specified publisher\'s AdSense account.
@@ -204,16 +204,16 @@ instance GoogleRequest AccountsAdUnitsList' where
         type Rs AccountsAdUnitsList' = AdUnits
         request = requestWithRoute defReq adSenseHostURL
         requestWithRoute r u AccountsAdUnitsList'{..}
-          = go _aaulQuotaUser (Just _aaulPrettyPrint)
-              _aaulIncludeInactive
-              _aaulUserIP
-              _aaulAdClientId
-              _aaulAccountId
-              _aaulKey
+          = go _aaulIncludeInactive _aaulMaxResults
               _aaulPageToken
-              _aaulOAuthToken
-              _aaulMaxResults
+              _aaulAccountId
+              _aaulAdClientId
+              _aaulQuotaUser
+              (Just _aaulPrettyPrint)
+              _aaulUserIP
               _aaulFields
+              _aaulKey
+              _aaulOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

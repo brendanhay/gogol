@@ -52,9 +52,9 @@ type GrouplicensesListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] GroupLicensesListResponse
 
@@ -152,12 +152,12 @@ instance GoogleRequest GrouplicensesList' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u GrouplicensesList'{..}
-          = go _glQuotaUser (Just _glPrettyPrint)
-              _glEnterpriseId
+          = go _glEnterpriseId _glQuotaUser
+              (Just _glPrettyPrint)
               _glUserIP
+              _glFields
               _glKey
               _glOAuthToken
-              _glFields
               (Just AltJSON)
           where go
                   = clientWithRoute

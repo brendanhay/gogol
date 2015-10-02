@@ -52,22 +52,22 @@ import           Network.Google.Prelude
 type VolumesMybooksListResource =
      "volumes" :>
        "mybooks" :>
-         QueryParams "processingState"
-           BooksVolumesMybooksListProcessingState
+         QueryParams "acquireMethod"
+           BooksVolumesMybooksListAcquireMethod
            :>
-           QueryParam "quotaUser" Text :>
-             QueryParams "acquireMethod"
-               BooksVolumesMybooksListAcquireMethod
-               :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "locale" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "source" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "startIndex" Word32 :>
-                             QueryParam "maxResults" Word32 :>
-                               QueryParam "fields" Text :>
+           QueryParam "locale" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParams "processingState"
+                 BooksVolumesMybooksListProcessingState
+                 :>
+                 QueryParam "source" Text :>
+                   QueryParam "startIndex" Word32 :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :> Get '[JSON] Volumes
 
 -- | Return a list of books in My Library.
@@ -213,17 +213,16 @@ instance GoogleRequest VolumesMybooksList' where
         type Rs VolumesMybooksList' = Volumes
         request = requestWithRoute defReq booksURL
         requestWithRoute r u VolumesMybooksList'{..}
-          = go _vmlProcessingState _vmlQuotaUser
-              _vmlAcquireMethod
+          = go _vmlAcquireMethod _vmlLocale _vmlMaxResults
+              _vmlProcessingState
+              _vmlSource
+              _vmlStartIndex
+              _vmlQuotaUser
               (Just _vmlPrettyPrint)
               _vmlUserIP
-              _vmlLocale
-              _vmlKey
-              _vmlSource
-              _vmlOAuthToken
-              _vmlStartIndex
-              _vmlMaxResults
               _vmlFields
+              _vmlKey
+              _vmlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -60,9 +60,9 @@ type ManagementExperimentsGetResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "fields" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] Experiment
 
@@ -192,15 +192,14 @@ instance GoogleRequest ManagementExperimentsGet'
         type Rs ManagementExperimentsGet' = Experiment
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementExperimentsGet'{..}
-          = go _megQuotaUser (Just _megPrettyPrint)
-              _megWebPropertyId
-              _megUserIP
-              _megProfileId
-              _megAccountId
+          = go _megAccountId _megWebPropertyId _megProfileId
               _megExperimentId
+              _megQuotaUser
+              (Just _megPrettyPrint)
+              _megUserIP
+              _megFields
               _megKey
               _megOAuthToken
-              _megFields
               (Just AltJSON)
           where go
                   = clientWithRoute

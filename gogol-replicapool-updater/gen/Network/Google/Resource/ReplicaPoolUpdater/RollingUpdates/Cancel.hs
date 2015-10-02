@@ -57,9 +57,9 @@ type RollingUpdatesCancelResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Cancels an update. The update must be PAUSED before it can be cancelled.
@@ -177,14 +177,13 @@ instance GoogleRequest RollingUpdatesCancel' where
         request
           = requestWithRoute defReq replicaPoolUpdaterURL
         requestWithRoute r u RollingUpdatesCancel'{..}
-          = go _rucRollingUpdate _rucQuotaUser
+          = go _rucProject _rucZone _rucRollingUpdate
+              _rucQuotaUser
               (Just _rucPrettyPrint)
-              _rucProject
               _rucUserIP
-              _rucZone
+              _rucFields
               _rucKey
               _rucOAuthToken
-              _rucFields
               (Just AltJSON)
           where go
                   = clientWithRoute

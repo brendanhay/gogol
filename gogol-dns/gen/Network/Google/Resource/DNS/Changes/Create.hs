@@ -54,9 +54,9 @@ type ChangesCreateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Change :> Post '[JSON] Change
 
@@ -171,12 +171,12 @@ instance GoogleRequest ChangesCreate' where
         type Rs ChangesCreate' = Change
         request = requestWithRoute defReq dNSURL
         requestWithRoute r u ChangesCreate'{..}
-          = go _ccQuotaUser (Just _ccPrettyPrint) _ccProject
+          = go _ccProject _ccManagedZone _ccQuotaUser
+              (Just _ccPrettyPrint)
               _ccUserIP
+              _ccFields
               _ccKey
               _ccOAuthToken
-              _ccManagedZone
-              _ccFields
               (Just AltJSON)
               _ccChange
           where go

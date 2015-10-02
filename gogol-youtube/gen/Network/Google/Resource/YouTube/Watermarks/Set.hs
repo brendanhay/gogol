@@ -50,14 +50,14 @@ import           Network.Google.YouTube.Types
 type WatermarksSetResource =
      "watermarks" :>
        "set" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "channelId" Text :>
-                 QueryParam "onBehalfOfContentOwner" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+         QueryParam "onBehalfOfContentOwner" Text :>
+           QueryParam "channelId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            MultipartRelated '[JSON] InvideoBranding Body :>
                              Post '[JSON] ()
@@ -191,13 +191,14 @@ instance GoogleRequest WatermarksSet' where
         type Rs WatermarksSet' = ()
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u WatermarksSet'{..}
-          = go _wsQuotaUser (Just _wsPrettyPrint) _wsUserIP
+          = go _wsMedia _wsOnBehalfOfContentOwner
               (Just _wsChannelId)
-              _wsMedia
-              _wsOnBehalfOfContentOwner
+              _wsQuotaUser
+              (Just _wsPrettyPrint)
+              _wsUserIP
+              _wsFields
               _wsKey
               _wsOAuthToken
-              _wsFields
               (Just AltJSON)
               _wsInvideoBranding
           where go

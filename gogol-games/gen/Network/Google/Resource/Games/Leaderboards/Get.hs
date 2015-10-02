@@ -48,13 +48,13 @@ import           Network.Google.Prelude
 type LeaderboardsGetResource =
      "leaderboards" :>
        Capture "leaderboardId" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "language" Text :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+         QueryParam "language" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Leaderboard
 
 -- | Retrieves the metadata of the leaderboard with the given ID.
@@ -157,12 +157,12 @@ instance GoogleRequest LeaderboardsGet' where
         type Rs LeaderboardsGet' = Leaderboard
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u LeaderboardsGet'{..}
-          = go _lgQuotaUser (Just _lgPrettyPrint) _lgUserIP
-              _lgLeaderboardId
-              _lgKey
-              _lgLanguage
-              _lgOAuthToken
+          = go _lgLanguage _lgLeaderboardId _lgQuotaUser
+              (Just _lgPrettyPrint)
+              _lgUserIP
               _lgFields
+              _lgKey
+              _lgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

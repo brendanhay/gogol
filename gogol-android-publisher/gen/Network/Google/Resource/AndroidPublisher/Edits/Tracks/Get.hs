@@ -57,9 +57,9 @@ type EditsTracksGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Track
 
 -- | Fetches the track configuration for the specified track type. Includes
@@ -177,13 +177,13 @@ instance GoogleRequest EditsTracksGet' where
         type Rs EditsTracksGet' = Track
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u EditsTracksGet'{..}
-          = go _etgQuotaUser _etgTrack (Just _etgPrettyPrint)
-              _etgPackageName
+          = go _etgPackageName _etgEditId _etgTrack
+              _etgQuotaUser
+              (Just _etgPrettyPrint)
               _etgUserIP
+              _etgFields
               _etgKey
               _etgOAuthToken
-              _etgEditId
-              _etgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

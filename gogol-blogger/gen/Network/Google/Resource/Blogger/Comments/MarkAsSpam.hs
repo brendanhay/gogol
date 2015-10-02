@@ -57,9 +57,9 @@ type CommentsMarkAsSpamResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Post '[JSON] Comment
 
 -- | Marks a comment as spam.
@@ -177,14 +177,13 @@ instance GoogleRequest CommentsMarkAsSpam' where
         type Rs CommentsMarkAsSpam' = Comment
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u CommentsMarkAsSpam'{..}
-          = go _cmasQuotaUser (Just _cmasPrettyPrint)
+          = go _cmasBlogId _cmasPostId _cmasCommentId
+              _cmasQuotaUser
+              (Just _cmasPrettyPrint)
               _cmasUserIP
-              _cmasBlogId
-              _cmasKey
-              _cmasPostId
-              _cmasOAuthToken
-              _cmasCommentId
               _cmasFields
+              _cmasKey
+              _cmasOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

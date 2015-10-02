@@ -47,13 +47,13 @@ import           Network.Google.YouTubeAnalytics.Types
 -- 'GroupItemsInsert'' request conforms to.
 type GroupItemsInsertResource =
      "groupItems" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "onBehalfOfContentOwner" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+       QueryParam "onBehalfOfContentOwner" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] GroupItem :> Post '[JSON] GroupItem
 
@@ -169,11 +169,12 @@ instance GoogleRequest GroupItemsInsert' where
         type Rs GroupItemsInsert' = GroupItem
         request = requestWithRoute defReq youTubeAnalyticsURL
         requestWithRoute r u GroupItemsInsert'{..}
-          = go _giiQuotaUser (Just _giiPrettyPrint) _giiUserIP
-              _giiOnBehalfOfContentOwner
+          = go _giiOnBehalfOfContentOwner _giiQuotaUser
+              (Just _giiPrettyPrint)
+              _giiUserIP
+              _giiFields
               _giiKey
               _giiOAuthToken
-              _giiFields
               (Just AltJSON)
               _giiGroupItem
           where go

@@ -54,14 +54,14 @@ type ManagementCustomDimensionsListResource =
            "webproperties" :>
              Capture "webPropertyId" Text :>
                "customDimensions" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "start-index" Int32 :>
-                             QueryParam "max-results" Int32 :>
-                               QueryParam "fields" Text :>
+                 QueryParam "max-results" Int32 :>
+                   QueryParam "start-index" Int32 :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] CustomDimensions
 
@@ -196,15 +196,14 @@ instance GoogleRequest
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
           ManagementCustomDimensionsList'{..}
-          = go _mcdlQuotaUser (Just _mcdlPrettyPrint)
+          = go _mcdlMaxResults _mcdlStartIndex _mcdlAccountId
               _mcdlWebPropertyId
+              _mcdlQuotaUser
+              (Just _mcdlPrettyPrint)
               _mcdlUserIP
-              _mcdlAccountId
+              _mcdlFields
               _mcdlKey
               _mcdlOAuthToken
-              _mcdlStartIndex
-              _mcdlMaxResults
-              _mcdlFields
               (Just AltJSON)
           where go
                   = clientWithRoute

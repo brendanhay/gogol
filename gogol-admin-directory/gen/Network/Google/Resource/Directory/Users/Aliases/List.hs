@@ -53,9 +53,9 @@ type UsersAliasesListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Aliases
 
 -- | List all aliases for a user
@@ -159,12 +159,12 @@ instance GoogleRequest UsersAliasesList' where
         type Rs UsersAliasesList' = Aliases
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u UsersAliasesList'{..}
-          = go _ualEvent _ualQuotaUser (Just _ualPrettyPrint)
+          = go _ualEvent _ualUserKey _ualQuotaUser
+              (Just _ualPrettyPrint)
               _ualUserIP
+              _ualFields
               _ualKey
               _ualOAuthToken
-              _ualUserKey
-              _ualFields
               (Just AltJSON)
           where go
                   = clientWithRoute

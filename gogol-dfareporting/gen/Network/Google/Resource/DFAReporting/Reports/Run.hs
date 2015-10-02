@@ -52,13 +52,13 @@ type ReportsRunResource =
          "reports" :>
            Capture "reportId" Int64 :>
              "run" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "synchronous" Bool :>
+               QueryParam "synchronous" Bool :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Post '[JSON] File
 
 -- | Runs a report.
@@ -171,14 +171,13 @@ instance GoogleRequest ReportsRun' where
         type Rs ReportsRun' = File
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ReportsRun'{..}
-          = go _rrQuotaUser (Just _rrPrettyPrint)
-              _rrSynchronous
+          = go _rrSynchronous _rrProfileId _rrReportId
+              _rrQuotaUser
+              (Just _rrPrettyPrint)
               _rrUserIP
-              _rrReportId
-              _rrProfileId
+              _rrFields
               _rrKey
               _rrOAuthToken
-              _rrFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy ReportsRunResource)

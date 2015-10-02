@@ -63,17 +63,17 @@ type AccountsStoreInfosCountryGetResource =
                "country" :>
                  Capture "country" Text :>
                    QueryParam "$.xgafv" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "callback" Text :>
                            QueryParam "pp" Bool :>
-                             QueryParam "access_token" Text :>
-                               QueryParam "uploadType" Text :>
-                                 QueryParam "bearer_token" Text :>
-                                   QueryParam "key" Key :>
-                                     QueryParam "oauth_token" OAuthToken :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "callback" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "upload_protocol" Text :>
+                                 QueryParam "quotaUser" Text :>
+                                   QueryParam "prettyPrint" Bool :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "key" Key :>
+                                         QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
                                              Get '[JSON] StoreInfo
 
@@ -255,20 +255,19 @@ instance GoogleRequest AccountsStoreInfosCountryGet'
           = requestWithRoute defReq playMoviesPartnerURL
         requestWithRoute r u
           AccountsStoreInfosCountryGet'{..}
-          = go _asicgXgafv _asicgQuotaUser
-              (Just _asicgPrettyPrint)
-              _asicgUploadProtocol
-              _asicgCountry
+          = go _asicgXgafv _asicgAccessToken _asicgBearerToken
+              _asicgCallback
               (Just _asicgPp)
-              _asicgAccessToken
               _asicgUploadType
-              _asicgVideoId
+              _asicgUploadProtocol
               _asicgAccountId
-              _asicgBearerToken
+              _asicgVideoId
+              _asicgCountry
+              _asicgQuotaUser
+              (Just _asicgPrettyPrint)
+              _asicgFields
               _asicgKey
               _asicgOAuthToken
-              _asicgFields
-              _asicgCallback
               (Just AltJSON)
           where go
                   = clientWithRoute

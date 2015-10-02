@@ -49,13 +49,13 @@ import           Network.Google.Prelude
 type InappproductsInsertResource =
      Capture "packageName" Text :>
        "inappproducts" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "autoConvertMissingPrices" Bool :>
+         QueryParam "autoConvertMissingPrices" Bool :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] InAppProduct :>
                            Post '[JSON] InAppProduct
@@ -175,13 +175,13 @@ instance GoogleRequest InappproductsInsert' where
         type Rs InappproductsInsert' = InAppProduct
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u InappproductsInsert'{..}
-          = go _iiQuotaUser (Just _iiPrettyPrint)
-              _iiAutoConvertMissingPrices
-              _iiPackageName
+          = go _iiAutoConvertMissingPrices _iiPackageName
+              _iiQuotaUser
+              (Just _iiPrettyPrint)
               _iiUserIP
+              _iiFields
               _iiKey
               _iiOAuthToken
-              _iiFields
               (Just AltJSON)
               _iiInAppProduct
           where go

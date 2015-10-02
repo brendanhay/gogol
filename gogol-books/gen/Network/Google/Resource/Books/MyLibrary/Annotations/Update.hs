@@ -50,13 +50,13 @@ type MyLibraryAnnotationsUpdateResource =
      "mylibrary" :>
        "annotations" :>
          Capture "annotationId" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "source" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "source" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Annotation :> Put '[JSON] Annotation
 
@@ -176,13 +176,12 @@ instance GoogleRequest MyLibraryAnnotationsUpdate'
         type Rs MyLibraryAnnotationsUpdate' = Annotation
         request = requestWithRoute defReq booksURL
         requestWithRoute r u MyLibraryAnnotationsUpdate'{..}
-          = go _mlauQuotaUser (Just _mlauPrettyPrint)
+          = go _mlauSource _mlauAnnotationId _mlauQuotaUser
+              (Just _mlauPrettyPrint)
               _mlauUserIP
-              _mlauKey
-              _mlauAnnotationId
-              _mlauSource
-              _mlauOAuthToken
               _mlauFields
+              _mlauKey
+              _mlauOAuthToken
               (Just AltJSON)
               _mlauAnnotation
           where go

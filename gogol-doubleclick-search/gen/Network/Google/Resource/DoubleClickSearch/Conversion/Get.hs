@@ -63,20 +63,21 @@ type ConversionGetResource =
              "engine" :>
                Capture "engineAccountId" Int64 :>
                  "conversion" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "adGroupId" Int64 :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
+                   QueryParam "adGroupId" Int64 :>
+                     QueryParam "adId" Int64 :>
+                       QueryParam "campaignId" Int64 :>
+                         QueryParam "criterionId" Int64 :>
                            QueryParam "endDate" Int32 :>
-                             QueryParam "campaignId" Int64 :>
-                               QueryParam "criterionId" Int64 :>
-                                 QueryParam "startDate" Int32 :>
-                                   QueryParam "key" Key :>
-                                     QueryParam "startRow" Word32 :>
-                                       QueryParam "adId" Int64 :>
-                                         QueryParam "oauth_token" OAuthToken :>
-                                           QueryParam "rowCount" Int32 :>
-                                             QueryParam "fields" Text :>
+                             QueryParam "rowCount" Int32 :>
+                               QueryParam "startDate" Int32 :>
+                                 QueryParam "startRow" Word32 :>
+                                   QueryParam "quotaUser" Text :>
+                                     QueryParam "prettyPrint" Bool :>
+                                       QueryParam "userIp" Text :>
+                                         QueryParam "fields" Text :>
+                                           QueryParam "key" Key :>
+                                             QueryParam "oauth_token" OAuthToken
+                                               :>
                                                QueryParam "alt" AltJSON :>
                                                  Get '[JSON] ConversionList
 
@@ -272,21 +273,21 @@ instance GoogleRequest ConversionGet' where
         request
           = requestWithRoute defReq doubleClickSearchURL
         requestWithRoute r u ConversionGet'{..}
-          = go _cgQuotaUser _cgAdGroupId (Just _cgPrettyPrint)
-              _cgEngineAccountId
-              _cgAgencyId
-              _cgUserIP
-              _cgAdvertiserId
-              (Just _cgEndDate)
-              _cgCampaignId
+          = go _cgAdGroupId _cgAdId _cgCampaignId
               _cgCriterionId
-              (Just _cgStartDate)
-              _cgKey
-              (Just _cgStartRow)
-              _cgAdId
-              _cgOAuthToken
+              _cgAgencyId
+              _cgAdvertiserId
+              _cgEngineAccountId
+              (Just _cgEndDate)
               (Just _cgRowCount)
+              (Just _cgStartDate)
+              (Just _cgStartRow)
+              _cgQuotaUser
+              (Just _cgPrettyPrint)
+              _cgUserIP
               _cgFields
+              _cgKey
+              _cgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

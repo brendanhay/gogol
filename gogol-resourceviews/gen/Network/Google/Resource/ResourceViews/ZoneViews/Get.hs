@@ -55,9 +55,9 @@ type ZoneViewsGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] ResourceView
 
 -- | Get the information of a zonal resource view.
@@ -173,14 +173,13 @@ instance GoogleRequest ZoneViewsGet' where
         type Rs ZoneViewsGet' = ResourceView
         request = requestWithRoute defReq resourceViewsURL
         requestWithRoute r u ZoneViewsGet'{..}
-          = go _zvgQuotaUser (Just _zvgPrettyPrint)
-              _zvgResourceView
-              _zvgProject
+          = go _zvgProject _zvgZone _zvgResourceView
+              _zvgQuotaUser
+              (Just _zvgPrettyPrint)
               _zvgUserIP
-              _zvgZone
+              _zvgFields
               _zvgKey
               _zvgOAuthToken
-              _zvgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

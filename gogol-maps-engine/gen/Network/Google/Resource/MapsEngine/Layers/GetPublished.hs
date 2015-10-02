@@ -51,9 +51,9 @@ type LayersGetPublishedResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] PublishedLayer
 
@@ -149,11 +149,11 @@ instance GoogleRequest LayersGetPublished' where
         type Rs LayersGetPublished' = PublishedLayer
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u LayersGetPublished'{..}
-          = go _lgpQuotaUser (Just _lgpPrettyPrint) _lgpUserIP
-              _lgpKey
-              _lgpId
-              _lgpOAuthToken
+          = go _lgpId _lgpQuotaUser (Just _lgpPrettyPrint)
+              _lgpUserIP
               _lgpFields
+              _lgpKey
+              _lgpOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

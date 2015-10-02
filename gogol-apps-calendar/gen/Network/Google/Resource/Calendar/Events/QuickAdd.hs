@@ -51,14 +51,14 @@ type EventsQuickAddResource =
        Capture "calendarId" Text :>
          "events" :>
            "quickAdd" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "text" Text :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "sendNotifications" Bool :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+             QueryParam "sendNotifications" Bool :>
+               QueryParam "text" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Post '[JSON] Event
 
 -- | Creates an event based on a simple text string.
@@ -177,14 +177,14 @@ instance GoogleRequest EventsQuickAdd' where
         type Rs EventsQuickAdd' = Event
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u EventsQuickAdd'{..}
-          = go _eqaQuotaUser _eqaCalendarId
-              (Just _eqaPrettyPrint)
+          = go _eqaSendNotifications _eqaCalendarId
               (Just _eqaText)
+              _eqaQuotaUser
+              (Just _eqaPrettyPrint)
               _eqaUserIP
-              _eqaKey
-              _eqaSendNotifications
-              _eqaOAuthToken
               _eqaFields
+              _eqaKey
+              _eqaOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

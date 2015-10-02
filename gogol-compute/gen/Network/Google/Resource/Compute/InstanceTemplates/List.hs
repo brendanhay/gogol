@@ -52,15 +52,15 @@ type InstanceTemplatesListResource =
      Capture "project" Text :>
        "global" :>
          "instanceTemplates" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "filter" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] InstanceTemplateList
 
@@ -198,14 +198,14 @@ instance GoogleRequest InstanceTemplatesList' where
         type Rs InstanceTemplatesList' = InstanceTemplateList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstanceTemplatesList'{..}
-          = go _itlQuotaUser (Just _itlPrettyPrint) _itlProject
+          = go _itlFilter (Just _itlMaxResults) _itlPageToken
+              _itlProject
+              _itlQuotaUser
+              (Just _itlPrettyPrint)
               _itlUserIP
-              _itlKey
-              _itlFilter
-              _itlPageToken
-              _itlOAuthToken
-              (Just _itlMaxResults)
               _itlFields
+              _itlKey
+              _itlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

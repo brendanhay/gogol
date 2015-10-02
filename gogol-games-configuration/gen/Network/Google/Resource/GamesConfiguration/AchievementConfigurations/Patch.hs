@@ -52,9 +52,9 @@ type AchievementConfigurationsPatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] AchievementConfiguration :>
                          Patch '[JSON] AchievementConfiguration
@@ -170,12 +170,12 @@ instance GoogleRequest
           = requestWithRoute defReq gamesConfigurationURL
         requestWithRoute r u
           AchievementConfigurationsPatch'{..}
-          = go _acpQuotaUser (Just _acpPrettyPrint)
-              _acpAchievementId
+          = go _acpAchievementId _acpQuotaUser
+              (Just _acpPrettyPrint)
               _acpUserIP
+              _acpFields
               _acpKey
               _acpOAuthToken
-              _acpFields
               (Just AltJSON)
               _acpAchievementConfiguration
           where go

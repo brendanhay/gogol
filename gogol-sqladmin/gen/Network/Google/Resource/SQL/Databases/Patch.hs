@@ -58,9 +58,9 @@ type DatabasesPatchResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Database :>
                                  Patch '[JSON] Operation
@@ -186,13 +186,12 @@ instance GoogleRequest DatabasesPatch' where
         type Rs DatabasesPatch' = Operation
         request = requestWithRoute defReq sQLAdminURL
         requestWithRoute r u DatabasesPatch'{..}
-          = go _dpQuotaUser (Just _dpPrettyPrint) _dpProject
-              _dpDatabase
+          = go _dpProject _dpInstance _dpDatabase _dpQuotaUser
+              (Just _dpPrettyPrint)
               _dpUserIP
+              _dpFields
               _dpKey
               _dpOAuthToken
-              _dpFields
-              _dpInstance
               (Just AltJSON)
               _dpDatabase
           where go

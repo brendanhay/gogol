@@ -57,9 +57,9 @@ type DisksCreateSnapshotResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Snapshot :>
                                  Post '[JSON] Operation
@@ -185,13 +185,12 @@ instance GoogleRequest DisksCreateSnapshot' where
         type Rs DisksCreateSnapshot' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u DisksCreateSnapshot'{..}
-          = go _dcsQuotaUser (Just _dcsPrettyPrint) _dcsProject
-              _dcsDisk
+          = go _dcsProject _dcsZone _dcsDisk _dcsQuotaUser
+              (Just _dcsPrettyPrint)
               _dcsUserIP
-              _dcsZone
+              _dcsFields
               _dcsKey
               _dcsOAuthToken
-              _dcsFields
               (Just AltJSON)
               _dcsSnapshot
           where go

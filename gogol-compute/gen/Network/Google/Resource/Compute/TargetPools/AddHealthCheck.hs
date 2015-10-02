@@ -57,9 +57,9 @@ type TargetPoolsAddHealthCheckResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] TargetPoolsAddHealthCheckRequest
                                  :> Post '[JSON] Operation
@@ -192,14 +192,13 @@ instance GoogleRequest TargetPoolsAddHealthCheck'
         type Rs TargetPoolsAddHealthCheck' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u TargetPoolsAddHealthCheck'{..}
-          = go _tpahcQuotaUser (Just _tpahcPrettyPrint)
-              _tpahcProject
-              _tpahcTargetPool
+          = go _tpahcProject _tpahcRegion _tpahcTargetPool
+              _tpahcQuotaUser
+              (Just _tpahcPrettyPrint)
               _tpahcUserIP
-              _tpahcKey
-              _tpahcRegion
-              _tpahcOAuthToken
               _tpahcFields
+              _tpahcKey
+              _tpahcOAuthToken
               (Just AltJSON)
               _tpahcTargetPoolsAddHealthCheckRequest
           where go

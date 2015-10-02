@@ -52,9 +52,9 @@ type FilesTrashResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Post '[JSON] File
 
 -- | Moves a file to the trash. The currently authenticated user must own the
@@ -151,11 +151,11 @@ instance GoogleRequest FilesTrash' where
         type Rs FilesTrash' = File
         request = requestWithRoute defReq driveURL
         requestWithRoute r u FilesTrash'{..}
-          = go _filQuotaUser (Just _filPrettyPrint) _filUserIP
-              _filKey
-              _filFileId
-              _filOAuthToken
+          = go _filFileId _filQuotaUser (Just _filPrettyPrint)
+              _filUserIP
               _filFields
+              _filKey
+              _filOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy FilesTrashResource)

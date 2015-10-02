@@ -51,13 +51,13 @@ type CommentsGetResource =
        Capture "fileId" Text :>
          "comments" :>
            Capture "commentId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "includeDeleted" Bool :>
-                         QueryParam "fields" Text :>
+             QueryParam "includeDeleted" Bool :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Comment
 
 -- | Gets a comment by ID.
@@ -170,13 +170,13 @@ instance GoogleRequest CommentsGet' where
         type Rs CommentsGet' = Comment
         request = requestWithRoute defReq driveURL
         requestWithRoute r u CommentsGet'{..}
-          = go _cgQuotaUser (Just _cgPrettyPrint) _cgUserIP
-              _cgKey
-              _cgFileId
-              _cgOAuthToken
-              _cgCommentId
-              (Just _cgIncludeDeleted)
+          = go (Just _cgIncludeDeleted) _cgFileId _cgCommentId
+              _cgQuotaUser
+              (Just _cgPrettyPrint)
+              _cgUserIP
               _cgFields
+              _cgKey
+              _cgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

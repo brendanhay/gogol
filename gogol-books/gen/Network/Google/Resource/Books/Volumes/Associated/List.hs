@@ -52,21 +52,21 @@ type VolumesAssociatedListResource =
      "volumes" :>
        Capture "volumeId" Text :>
          "associated" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "locale" Text :>
-                   QueryParam "maxAllowedMaturityRating"
-                     BooksVolumesAssociatedListMaxAllowedMaturityRating
-                     :>
-                     QueryParam "key" Key :>
-                       QueryParam "source" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" AltJSON :>
-                               QueryParam "association"
-                                 BooksVolumesAssociatedListAssociation
-                                 :> Get '[JSON] Volumes
+           QueryParam "association"
+             BooksVolumesAssociatedListAssociation
+             :>
+             QueryParam "locale" Text :>
+               QueryParam "maxAllowedMaturityRating"
+                 BooksVolumesAssociatedListMaxAllowedMaturityRating
+                 :>
+                 QueryParam "source" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
+                               QueryParam "alt" AltJSON :> Get '[JSON] Volumes
 
 -- | Return a list of associated books.
 --
@@ -201,15 +201,16 @@ instance GoogleRequest VolumesAssociatedList' where
         type Rs VolumesAssociatedList' = Volumes
         request = requestWithRoute defReq booksURL
         requestWithRoute r u VolumesAssociatedList'{..}
-          = go _valQuotaUser (Just _valPrettyPrint) _valUserIP
-              _valLocale
+          = go _valAssociation _valLocale
               _valMaxAllowedMaturityRating
-              _valKey
-              _valVolumeId
               _valSource
-              _valOAuthToken
+              _valVolumeId
+              _valQuotaUser
+              (Just _valPrettyPrint)
+              _valUserIP
               _valFields
-              _valAssociation
+              _valKey
+              _valOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

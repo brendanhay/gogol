@@ -53,9 +53,9 @@ type InstancesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] DatabaseInstance
 
@@ -159,12 +159,12 @@ instance GoogleRequest InstancesGet' where
         type Rs InstancesGet' = DatabaseInstance
         request = requestWithRoute defReq sQLAdminURL
         requestWithRoute r u InstancesGet'{..}
-          = go _igQuotaUser (Just _igPrettyPrint) _igProject
+          = go _igProject _igInstance _igQuotaUser
+              (Just _igPrettyPrint)
               _igUserIP
+              _igFields
               _igKey
               _igOAuthToken
-              _igFields
-              _igInstance
               (Just AltJSON)
           where go
                   = clientWithRoute

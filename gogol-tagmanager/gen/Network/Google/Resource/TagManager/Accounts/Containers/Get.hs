@@ -53,9 +53,9 @@ type AccountsContainersGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Container
 
 -- | Gets a Container.
@@ -162,13 +162,12 @@ instance GoogleRequest AccountsContainersGet' where
         type Rs AccountsContainersGet' = Container
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u AccountsContainersGet'{..}
-          = go _acgQuotaUser (Just _acgPrettyPrint)
-              _acgContainerId
+          = go _acgAccountId _acgContainerId _acgQuotaUser
+              (Just _acgPrettyPrint)
               _acgUserIP
-              _acgAccountId
+              _acgFields
               _acgKey
               _acgOAuthToken
-              _acgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

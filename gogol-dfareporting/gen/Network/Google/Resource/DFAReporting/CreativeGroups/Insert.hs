@@ -52,9 +52,9 @@ type CreativeGroupsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] CreativeGroup :>
                            Post '[JSON] CreativeGroup
@@ -163,11 +163,12 @@ instance GoogleRequest CreativeGroupsInsert' where
         type Rs CreativeGroupsInsert' = CreativeGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeGroupsInsert'{..}
-          = go _cgiQuotaUser (Just _cgiPrettyPrint) _cgiUserIP
-              _cgiProfileId
+          = go _cgiProfileId _cgiQuotaUser
+              (Just _cgiPrettyPrint)
+              _cgiUserIP
+              _cgiFields
               _cgiKey
               _cgiOAuthToken
-              _cgiFields
               (Just AltJSON)
               _cgiCreativeGroup
           where go

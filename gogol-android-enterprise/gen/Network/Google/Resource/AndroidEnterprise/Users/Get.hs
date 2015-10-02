@@ -53,9 +53,9 @@ type UsersGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] User
 
 -- | Retrieves a user\'s details.
@@ -159,13 +159,12 @@ instance GoogleRequest UsersGet' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u UsersGet'{..}
-          = go _ugQuotaUser (Just _ugPrettyPrint)
-              _ugEnterpriseId
+          = go _ugEnterpriseId _ugUserId _ugQuotaUser
+              (Just _ugPrettyPrint)
               _ugUserIP
-              _ugUserId
+              _ugFields
               _ugKey
               _ugOAuthToken
-              _ugFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy UsersGetResource) r

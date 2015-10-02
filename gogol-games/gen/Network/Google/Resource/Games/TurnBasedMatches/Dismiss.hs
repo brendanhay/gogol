@@ -52,9 +52,9 @@ type TurnBasedMatchesDismissResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Put '[JSON] ()
 
 -- | Dismiss a turn-based match from the match list. The match will no longer
@@ -152,12 +152,12 @@ instance GoogleRequest TurnBasedMatchesDismiss' where
         type Rs TurnBasedMatchesDismiss' = ()
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u TurnBasedMatchesDismiss'{..}
-          = go _tbmdQuotaUser (Just _tbmdPrettyPrint)
+          = go _tbmdMatchId _tbmdQuotaUser
+              (Just _tbmdPrettyPrint)
               _tbmdUserIP
+              _tbmdFields
               _tbmdKey
               _tbmdOAuthToken
-              _tbmdMatchId
-              _tbmdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

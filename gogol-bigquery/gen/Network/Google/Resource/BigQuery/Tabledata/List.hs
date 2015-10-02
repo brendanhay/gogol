@@ -58,15 +58,15 @@ type TabledataListResource =
              "tables" :>
                Capture "tableId" Text :>
                  "data" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "startIndex" Word64 :>
-                                 QueryParam "maxResults" Word32 :>
-                                   QueryParam "fields" Text :>
+                   QueryParam "maxResults" Word32 :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "startIndex" Word64 :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] TableDataList
 
@@ -206,15 +206,16 @@ instance GoogleRequest TabledataList' where
         type Rs TabledataList' = TableDataList
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u TabledataList'{..}
-          = go _tQuotaUser (Just _tPrettyPrint) _tUserIP _tKey
-              _tDatasetId
-              _tPageToken
+          = go _tMaxResults _tPageToken _tStartIndex
               _tProjectId
-              _tOAuthToken
+              _tDatasetId
               _tTableId
-              _tStartIndex
-              _tMaxResults
+              _tQuotaUser
+              (Just _tPrettyPrint)
+              _tUserIP
               _tFields
+              _tKey
+              _tOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

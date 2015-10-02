@@ -56,9 +56,9 @@ type AccountsContainersTagsGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Tag
 
 -- | Gets a GTM Tag.
@@ -178,14 +178,13 @@ instance GoogleRequest AccountsContainersTagsGet'
         type Rs AccountsContainersTagsGet' = Tag
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u AccountsContainersTagsGet'{..}
-          = go _actgcQuotaUser (Just _actgcPrettyPrint)
-              _actgcContainerId
+          = go _actgcAccountId _actgcContainerId _actgcTagId
+              _actgcQuotaUser
+              (Just _actgcPrettyPrint)
               _actgcUserIP
-              _actgcAccountId
-              _actgcTagId
+              _actgcFields
               _actgcKey
               _actgcOAuthToken
-              _actgcFields
               (Just AltJSON)
           where go
                   = clientWithRoute

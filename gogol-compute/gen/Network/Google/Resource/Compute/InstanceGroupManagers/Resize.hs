@@ -57,13 +57,13 @@ type InstanceGroupManagersResizeResource =
            "instanceGroupManagers" :>
              Capture "instanceGroupManager" Text :>
                "resize" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "size" Int32 :>
+                 QueryParam "size" Int32 :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Post '[JSON] Operation
 
@@ -198,15 +198,14 @@ instance GoogleRequest InstanceGroupManagersResize'
         type Rs InstanceGroupManagersResize' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstanceGroupManagersResize'{..}
-          = go _igmrQuotaUser (Just _igmrPrettyPrint)
-              _igmrProject
+          = go _igmrProject _igmrZone _igmrInstanceGroupManager
               (Just _igmrSize)
-              _igmrInstanceGroupManager
+              _igmrQuotaUser
+              (Just _igmrPrettyPrint)
               _igmrUserIP
-              _igmrZone
+              _igmrFields
               _igmrKey
               _igmrOAuthToken
-              _igmrFields
               (Just AltJSON)
           where go
                   = clientWithRoute

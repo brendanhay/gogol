@@ -62,17 +62,17 @@ type CoursesStudentsGetResource =
            "students" :>
              Capture "userId" Text :>
                QueryParam "$.xgafv" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "key" Key :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "callback" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "quotaUser" Text :>
+                               QueryParam "prettyPrint" Bool :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] Student
 
@@ -242,18 +242,18 @@ instance GoogleRequest CoursesStudentsGet' where
         type Rs CoursesStudentsGet' = Student
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u CoursesStudentsGet'{..}
-          = go _csgXgafv _csgQuotaUser (Just _csgPrettyPrint)
-              _csgUploadProtocol
+          = go _csgXgafv _csgAccessToken _csgBearerToken
+              _csgCallback
               (Just _csgPp)
-              _csgCourseId
-              _csgAccessToken
               _csgUploadType
+              _csgUploadProtocol
+              _csgCourseId
               _csgUserId
-              _csgBearerToken
+              _csgQuotaUser
+              (Just _csgPrettyPrint)
+              _csgFields
               _csgKey
               _csgOAuthToken
-              _csgFields
-              _csgCallback
               (Just AltJSON)
           where go
                   = clientWithRoute

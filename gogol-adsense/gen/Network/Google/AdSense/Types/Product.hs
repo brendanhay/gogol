@@ -744,7 +744,7 @@ instance ToJSON SavedReport where
                   ("id" .=) <$> _sId])
 
 --
--- /See:/ 'uRLChannels' smart constructor.
+-- /See:/ 'urlChannels' smart constructor.
 data URLChannels = URLChannels
     { _ucEtag          :: !(Maybe Text)
     , _ucNextPageToken :: !(Maybe Text)
@@ -763,9 +763,9 @@ data URLChannels = URLChannels
 -- * 'ucKind'
 --
 -- * 'ucItems'
-uRLChannels
+urlChannels
     :: URLChannels
-uRLChannels =
+urlChannels =
     URLChannels
     { _ucEtag = Nothing
     , _ucNextPageToken = Nothing
@@ -1950,7 +1950,7 @@ instance ToJSON CustomChannel where
                   ("code" .=) <$> _cCode, ("id" .=) <$> _cId])
 
 --
--- /See:/ 'uRLChannel' smart constructor.
+-- /See:/ 'urlChannel' smart constructor.
 data URLChannel = URLChannel
     { _urlcKind       :: !Text
     , _urlcId         :: !(Maybe Text)
@@ -1966,9 +1966,9 @@ data URLChannel = URLChannel
 -- * 'urlcId'
 --
 -- * 'urlcURLPattern'
-uRLChannel
+urlChannel
     :: URLChannel
-uRLChannel =
+urlChannel =
     URLChannel
     { _urlcKind = "adsense#urlChannel"
     , _urlcId = Nothing

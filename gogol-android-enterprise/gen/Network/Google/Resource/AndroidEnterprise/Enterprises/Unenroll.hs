@@ -51,9 +51,9 @@ type EnterprisesUnenrollResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Unenrolls an enterprise from the calling MDM.
@@ -148,12 +148,12 @@ instance GoogleRequest EnterprisesUnenroll' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u EnterprisesUnenroll'{..}
-          = go _euQuotaUser (Just _euPrettyPrint)
-              _euEnterpriseId
+          = go _euEnterpriseId _euQuotaUser
+              (Just _euPrettyPrint)
               _euUserIP
+              _euFields
               _euKey
               _euOAuthToken
-              _euFields
               (Just AltJSON)
           where go
                   = clientWithRoute

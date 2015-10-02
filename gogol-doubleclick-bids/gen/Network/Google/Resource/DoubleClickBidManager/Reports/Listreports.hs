@@ -51,9 +51,9 @@ type ReportsListreportsResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] ListReportsResponse
 
@@ -147,11 +147,11 @@ instance GoogleRequest ReportsListreports' where
         type Rs ReportsListreports' = ListReportsResponse
         request = requestWithRoute defReq doubleClickBidsURL
         requestWithRoute r u ReportsListreports'{..}
-          = go _rlQuotaUser _rlQueryId (Just _rlPrettyPrint)
+          = go _rlQueryId _rlQuotaUser (Just _rlPrettyPrint)
               _rlUserIP
+              _rlFields
               _rlKey
               _rlOAuthToken
-              _rlFields
               (Just AltJSON)
           where go
                   = clientWithRoute

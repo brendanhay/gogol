@@ -52,9 +52,9 @@ type SchemasInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Schema :> Post '[JSON] Schema
 
@@ -157,11 +157,11 @@ instance GoogleRequest SchemasInsert' where
         type Rs SchemasInsert' = Schema
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u SchemasInsert'{..}
-          = go _siQuotaUser (Just _siPrettyPrint) _siUserIP
-              _siCustomerId
+          = go _siCustomerId _siQuotaUser (Just _siPrettyPrint)
+              _siUserIP
+              _siFields
               _siKey
               _siOAuthToken
-              _siFields
               (Just AltJSON)
               _siSchema
           where go

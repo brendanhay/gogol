@@ -52,17 +52,17 @@ import           Network.Google.Prelude
 type UsersThreadsListResource =
      Capture "userId" Text :>
        "threads" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "q" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "includeSpamTrash" Bool :>
-                     QueryParams "labelIds" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
+         QueryParam "includeSpamTrash" Bool :>
+           QueryParams "labelIds" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "q" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] ListThreadsResponse
 
@@ -209,16 +209,17 @@ instance GoogleRequest UsersThreadsList' where
         type Rs UsersThreadsList' = ListThreadsResponse
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersThreadsList'{..}
-          = go _utlQuotaUser (Just _utlPrettyPrint) _utlUserIP
+          = go (Just _utlIncludeSpamTrash) _utlLabelIds
+              (Just _utlMaxResults)
+              _utlPageToken
               _utlQ
               _utlUserId
-              _utlKey
-              (Just _utlIncludeSpamTrash)
-              _utlLabelIds
-              _utlPageToken
-              _utlOAuthToken
-              (Just _utlMaxResults)
+              _utlQuotaUser
+              (Just _utlPrettyPrint)
+              _utlUserIP
               _utlFields
+              _utlKey
+              _utlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

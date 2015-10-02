@@ -54,9 +54,9 @@ type UsersDatasetAggregateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] AggregateRequest :>
                          Post '[JSON] AggregateResponse
@@ -169,11 +169,11 @@ instance GoogleRequest UsersDatasetAggregate' where
         type Rs UsersDatasetAggregate' = AggregateResponse
         request = requestWithRoute defReq fitnessURL
         requestWithRoute r u UsersDatasetAggregate'{..}
-          = go _udaQuotaUser (Just _udaPrettyPrint) _udaUserIP
-              _udaUserId
+          = go _udaUserId _udaQuotaUser (Just _udaPrettyPrint)
+              _udaUserIP
+              _udaFields
               _udaKey
               _udaOAuthToken
-              _udaFields
               (Just AltJSON)
               _udaAggregateRequest
           where go

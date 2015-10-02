@@ -52,13 +52,13 @@ type ObjectAccessControlsListResource =
          "o" :>
            Capture "object" Text :>
              "acl" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "generation" Word64 :>
-                           QueryParam "fields" Text :>
+               QueryParam "generation" Word64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ObjectAccessControls
 
@@ -179,14 +179,13 @@ instance GoogleRequest ObjectAccessControlsList'
              ObjectAccessControls
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectAccessControlsList'{..}
-          = go _oaclQuotaUser (Just _oaclPrettyPrint)
+          = go _oaclGeneration _oaclBucket _oaclObject
+              _oaclQuotaUser
+              (Just _oaclPrettyPrint)
               _oaclUserIP
-              _oaclBucket
-              _oaclKey
-              _oaclObject
-              _oaclOAuthToken
-              _oaclGeneration
               _oaclFields
+              _oaclKey
+              _oaclOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

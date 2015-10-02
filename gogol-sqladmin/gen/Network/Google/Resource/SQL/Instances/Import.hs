@@ -56,9 +56,9 @@ type InstancesImportResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] InstancesImportRequest :>
                                Post '[JSON] Operation
@@ -178,12 +178,12 @@ instance GoogleRequest InstancesImport' where
         type Rs InstancesImport' = Operation
         request = requestWithRoute defReq sQLAdminURL
         requestWithRoute r u InstancesImport'{..}
-          = go _insQuotaUser (Just _insPrettyPrint) _insProject
+          = go _insProject _insInstance _insQuotaUser
+              (Just _insPrettyPrint)
               _insUserIP
+              _insFields
               _insKey
               _insOAuthToken
-              _insFields
-              _insInstance
               (Just AltJSON)
               _insInstancesImportRequest
           where go

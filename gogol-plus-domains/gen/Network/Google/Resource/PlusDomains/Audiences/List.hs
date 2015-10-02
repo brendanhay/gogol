@@ -50,14 +50,14 @@ type AudiencesListResource =
      "people" :>
        Capture "userId" Text :>
          "audiences" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "maxResults" Word32 :>
-                         QueryParam "fields" Text :>
+           QueryParam "maxResults" Word32 :>
+             QueryParam "pageToken" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] AudiencesFeed
 
 -- | List all of the audiences to which a user can share.
@@ -172,13 +172,13 @@ instance GoogleRequest AudiencesList' where
         type Rs AudiencesList' = AudiencesFeed
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u AudiencesList'{..}
-          = go _alQuotaUser (Just _alPrettyPrint) _alUserIP
-              _alUserId
-              _alKey
-              _alPageToken
-              _alOAuthToken
-              (Just _alMaxResults)
+          = go (Just _alMaxResults) _alPageToken _alUserId
+              _alQuotaUser
+              (Just _alPrettyPrint)
+              _alUserIP
               _alFields
+              _alKey
+              _alOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

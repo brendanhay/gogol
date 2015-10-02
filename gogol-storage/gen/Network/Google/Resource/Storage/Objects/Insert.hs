@@ -56,20 +56,20 @@ type ObjectsInsertResource =
      "b" :>
        Capture "bucket" Text :>
          "o" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "ifMetagenerationMatch" Word64 :>
-               QueryParam "ifGenerationNotMatch" Word64 :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "ifGenerationMatch" Word64 :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "name" Text :>
-                           QueryParam "ifMetagenerationNotMatch" Word64 :>
-                             QueryParam "projection"
-                               StorageObjectsInsertProjection
-                               :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "fields" Text :>
+           QueryParam "ifGenerationMatch" Word64 :>
+             QueryParam "ifGenerationNotMatch" Word64 :>
+               QueryParam "ifMetagenerationMatch" Word64 :>
+                 QueryParam "ifMetagenerationNotMatch" Word64 :>
+                   QueryParam "name" Text :>
+                     QueryParam "projection"
+                       StorageObjectsInsertProjection
+                       :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      MultipartRelated '[JSON] Object Body :>
                                        Post '[JSON] Object
@@ -77,20 +77,20 @@ type ObjectsInsertResource =
        "b" :>
          Capture "bucket" Text :>
            "o" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "ifMetagenerationMatch" Word64 :>
-                 QueryParam "ifGenerationNotMatch" Word64 :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "ifGenerationMatch" Word64 :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "name" Text :>
-                             QueryParam "ifMetagenerationNotMatch" Word64 :>
-                               QueryParam "projection"
-                                 StorageObjectsInsertProjection
-                                 :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "fields" Text :>
+             QueryParam "ifGenerationMatch" Word64 :>
+               QueryParam "ifGenerationNotMatch" Word64 :>
+                 QueryParam "ifMetagenerationMatch" Word64 :>
+                   QueryParam "ifMetagenerationNotMatch" Word64 :>
+                     QueryParam "name" Text :>
+                       QueryParam "projection"
+                         StorageObjectsInsertProjection
+                         :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" Media :>
                                        MultipartRelated '[JSON] Object Body :>
                                          Post '[OctetStream] Stream
@@ -265,19 +265,19 @@ instance GoogleRequest ObjectsInsert' where
         type Rs ObjectsInsert' = Object
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectsInsert'{..}
-          = go _oiQuotaUser _oiIfMetagenerationMatch
-              _oiIfGenerationNotMatch
-              (Just _oiPrettyPrint)
-              _oiIfGenerationMatch
-              _oiUserIP
-              _oiBucket
-              _oiMedia
-              _oiKey
-              _oiName
+          = go _oiIfGenerationMatch _oiIfGenerationNotMatch
+              _oiIfMetagenerationMatch
               _oiIfMetagenerationNotMatch
+              _oiMedia
+              _oiName
               _oiProjection
-              _oiOAuthToken
+              _oiBucket
+              _oiQuotaUser
+              (Just _oiPrettyPrint)
+              _oiUserIP
               _oiFields
+              _oiKey
+              _oiOAuthToken
               (Just AltJSON)
               _oiObject
           where go :<|> _
@@ -290,19 +290,19 @@ instance GoogleRequest ObjectsInsert' where
         type Rs (Download ObjectsInsert') = Stream
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectsInsert'{..}
-          = go _oiQuotaUser _oiIfMetagenerationMatch
-              _oiIfGenerationNotMatch
-              (Just _oiPrettyPrint)
-              _oiIfGenerationMatch
-              _oiUserIP
-              _oiBucket
-              _oiMedia
-              _oiKey
-              _oiName
+          = go _oiIfGenerationMatch _oiIfGenerationNotMatch
+              _oiIfMetagenerationMatch
               _oiIfMetagenerationNotMatch
+              _oiMedia
+              _oiName
               _oiProjection
-              _oiOAuthToken
+              _oiBucket
+              _oiQuotaUser
+              (Just _oiPrettyPrint)
+              _oiUserIP
               _oiFields
+              _oiKey
+              _oiOAuthToken
               (Just Media)
               _oiObject
           where go :<|> _

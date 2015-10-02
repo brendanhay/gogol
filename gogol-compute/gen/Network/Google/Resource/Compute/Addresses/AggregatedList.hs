@@ -51,15 +51,15 @@ type AddressesAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
          "addresses" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "filter" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] AddressAggregatedList
 
@@ -197,14 +197,14 @@ instance GoogleRequest AddressesAggregatedList' where
              AddressAggregatedList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u AddressesAggregatedList'{..}
-          = go _aalQuotaUser (Just _aalPrettyPrint) _aalProject
+          = go _aalFilter (Just _aalMaxResults) _aalPageToken
+              _aalProject
+              _aalQuotaUser
+              (Just _aalPrettyPrint)
               _aalUserIP
-              _aalKey
-              _aalFilter
-              _aalPageToken
-              _aalOAuthToken
-              (Just _aalMaxResults)
               _aalFields
+              _aalKey
+              _aalOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

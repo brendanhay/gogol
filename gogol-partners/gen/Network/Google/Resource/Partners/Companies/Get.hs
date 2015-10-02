@@ -66,48 +66,44 @@ type CompaniesGetResource =
        "companies" :>
          Capture "companyId" Text :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "currencyCode" Text :>
-                   QueryParam "upload_protocol" Text :>
-                     QueryParam "orderBy" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "address" Text :>
+             QueryParam "access_token" Text :>
+               QueryParam "address" Text :>
+                 QueryParam "bearer_token" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "currencyCode" Text :>
+                       QueryParam "orderBy" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParams "requestMetadata.experimentIds" Text :>
+                             QueryParam "requestMetadata.locale" Text :>
                                QueryParam "requestMetadata.partnersSessionId"
                                  Text
                                  :>
-                                 QueryParam "bearer_token" Text :>
-                                   QueryParam "key" Key :>
-                                     QueryParam "requestMetadata.locale" Text :>
-                                       QueryParam "view" Text :>
-                                         QueryParams
-                                           "requestMetadata.experimentIds"
-                                           Text
-                                           :>
-                                           QueryParam
-                                             "requestMetadata.userOverrides.ipAddress"
-                                             Text
-                                             :>
-                                             QueryParam
-                                               "requestMetadata.trafficSource.trafficSubId"
-                                               Text
-                                               :>
-                                               QueryParam "oauth_token"
-                                                 OAuthToken
-                                                 :>
-                                                 QueryParam
-                                                   "requestMetadata.userOverrides.userId"
-                                                   Text
+                                 QueryParam
+                                   "requestMetadata.trafficSource.trafficSourceId"
+                                   Text
+                                   :>
+                                   QueryParam
+                                     "requestMetadata.trafficSource.trafficSubId"
+                                     Text
+                                     :>
+                                     QueryParam
+                                       "requestMetadata.userOverrides.ipAddress"
+                                       Text
+                                       :>
+                                       QueryParam
+                                         "requestMetadata.userOverrides.userId"
+                                         Text
+                                         :>
+                                         QueryParam "uploadType" Text :>
+                                           QueryParam "upload_protocol" Text :>
+                                             QueryParam "view" Text :>
+                                               QueryParam "quotaUser" Text :>
+                                                 QueryParam "prettyPrint" Bool
                                                    :>
-                                                   QueryParam
-                                                     "requestMetadata.trafficSource.trafficSourceId"
-                                                     Text
-                                                     :>
-                                                     QueryParam "fields" Text :>
-                                                       QueryParam "callback"
-                                                         Text
+                                                   QueryParam "fields" Text :>
+                                                     QueryParam "key" Key :>
+                                                       QueryParam "oauth_token"
+                                                         OAuthToken
                                                          :>
                                                          QueryParam "alt"
                                                            AltJSON
@@ -381,28 +377,28 @@ instance GoogleRequest CompaniesGet' where
         type Rs CompaniesGet' = GetCompanyResponse
         request = requestWithRoute defReq partnersURL
         requestWithRoute r u CompaniesGet'{..}
-          = go _cgXgafv _cgQuotaUser (Just _cgPrettyPrint)
+          = go _cgXgafv _cgAccessToken _cgAddress
+              _cgBearerToken
+              _cgCallback
               _cgCurrencyCode
-              _cgUploadProtocol
-              _cgCompanyId
               _cgOrderBy
               (Just _cgPp)
-              _cgAccessToken
-              _cgUploadType
-              _cgAddress
-              _cgRequestMetadataPartnersSessionId
-              _cgBearerToken
-              _cgKey
-              _cgRequestMetadataLocale
-              _cgView
               _cgRequestMetadataExperimentIds
-              _cgRequestMetadataUserOverridesIPAddress
-              _cgRequestMetadataTrafficSourceTrafficSubId
-              _cgOAuthToken
-              _cgRequestMetadataUserOverridesUserId
+              _cgRequestMetadataLocale
+              _cgRequestMetadataPartnersSessionId
               _cgRequestMetadataTrafficSourceTrafficSourceId
+              _cgRequestMetadataTrafficSourceTrafficSubId
+              _cgRequestMetadataUserOverridesIPAddress
+              _cgRequestMetadataUserOverridesUserId
+              _cgUploadType
+              _cgUploadProtocol
+              _cgView
+              _cgCompanyId
+              _cgQuotaUser
+              (Just _cgPrettyPrint)
               _cgFields
-              _cgCallback
+              _cgKey
+              _cgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

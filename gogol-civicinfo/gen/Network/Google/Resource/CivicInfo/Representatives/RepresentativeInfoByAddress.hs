@@ -51,20 +51,20 @@ import           Network.Google.Prelude
 type RepresentativesRepresentativeInfoByAddressResource
      =
      "representatives" :>
-       QueryParam "quotaUser" Text :>
-         QueryParams "roles"
-           CivicInfoRepresentativesRepresentativeInfoByAddressRoles
-           :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "address" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "includeOffices" Bool :>
-                     QueryParams "levels"
-                       CivicInfoRepresentativesRepresentativeInfoByAddressLevels
-                       :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+       QueryParam "address" Text :>
+         QueryParam "includeOffices" Bool :>
+           QueryParams "levels"
+             CivicInfoRepresentativesRepresentativeInfoByAddressLevels
+             :>
+             QueryParams "roles"
+               CivicInfoRepresentativesRepresentativeInfoByAddressRoles
+               :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] RepresentativeInfoResponse
 
@@ -200,15 +200,15 @@ instance GoogleRequest
         request = requestWithRoute defReq civicInfoURL
         requestWithRoute r u
           RepresentativesRepresentativeInfoByAddress'{..}
-          = go _rribaQuotaUser _rribaRoles
+          = go _rribaAddress (Just _rribaIncludeOffices)
+              _rribaLevels
+              _rribaRoles
+              _rribaQuotaUser
               (Just _rribaPrettyPrint)
               _rribaUserIP
-              _rribaAddress
-              _rribaKey
-              (Just _rribaIncludeOffices)
-              _rribaLevels
-              _rribaOAuthToken
               _rribaFields
+              _rribaKey
+              _rribaOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

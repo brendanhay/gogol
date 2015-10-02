@@ -56,17 +56,17 @@ type TransferOperationsGetResource =
      "v1" :>
        "{+name}" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] Operation
 
@@ -219,17 +219,17 @@ instance GoogleRequest TransferOperationsGet' where
         type Rs TransferOperationsGet' = Operation
         request = requestWithRoute defReq storageTransferURL
         requestWithRoute r u TransferOperationsGet'{..}
-          = go _togXgafv _togQuotaUser (Just _togPrettyPrint)
-              _togUploadProtocol
-              (Just _togPp)
-              _togAccessToken
-              _togUploadType
-              _togBearerToken
-              _togKey
-              _togName
-              _togOAuthToken
-              _togFields
+          = go _togXgafv _togAccessToken _togBearerToken
               _togCallback
+              (Just _togPp)
+              _togUploadType
+              _togUploadProtocol
+              _togName
+              _togQuotaUser
+              (Just _togPrettyPrint)
+              _togFields
+              _togKey
+              _togOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

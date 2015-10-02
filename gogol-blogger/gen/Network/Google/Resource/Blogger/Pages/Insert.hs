@@ -50,13 +50,13 @@ type PagesInsertResource =
      "blogs" :>
        Capture "blogId" Text :>
          "pages" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "isDraft" Bool :>
+           QueryParam "isDraft" Bool :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Page :> Post '[JSON] Page
 
@@ -167,12 +167,12 @@ instance GoogleRequest PagesInsert' where
         type Rs PagesInsert' = Page
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PagesInsert'{..}
-          = go _piQuotaUser (Just _piPrettyPrint) _piIsDraft
+          = go _piIsDraft _piBlogId _piQuotaUser
+              (Just _piPrettyPrint)
               _piUserIP
-              _piBlogId
+              _piFields
               _piKey
               _piOAuthToken
-              _piFields
               (Just AltJSON)
               _piPage
           where go

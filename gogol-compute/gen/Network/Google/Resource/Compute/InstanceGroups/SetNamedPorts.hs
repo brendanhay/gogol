@@ -57,9 +57,9 @@ type InstanceGroupsSetNamedPortsResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON]
                                  InstanceGroupsSetNamedPortsRequest
@@ -194,14 +194,13 @@ instance GoogleRequest InstanceGroupsSetNamedPorts'
         type Rs InstanceGroupsSetNamedPorts' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstanceGroupsSetNamedPorts'{..}
-          = go _igsnpQuotaUser (Just _igsnpPrettyPrint)
-              _igsnpProject
+          = go _igsnpProject _igsnpZone _igsnpInstanceGroup
+              _igsnpQuotaUser
+              (Just _igsnpPrettyPrint)
               _igsnpUserIP
-              _igsnpZone
+              _igsnpFields
               _igsnpKey
               _igsnpOAuthToken
-              _igsnpInstanceGroup
-              _igsnpFields
               (Just AltJSON)
               _igsnpInstanceGroupsSetNamedPortsRequest
           where go

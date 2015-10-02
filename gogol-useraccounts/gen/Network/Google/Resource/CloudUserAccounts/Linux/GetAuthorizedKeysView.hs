@@ -54,15 +54,15 @@ type LinuxGetAuthorizedKeysViewResource =
          Capture "zone" Text :>
            "authorizedKeysView" :>
              Capture "user" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "login" Bool :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" AltJSON :>
-                               QueryParam "instance" Text :>
+               QueryParam "login" Bool :>
+                 QueryParam "instance" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
+                               QueryParam "alt" AltJSON :>
                                  Post '[JSON] LinuxGetAuthorizedKeysViewResponse
 
 -- | Returns a list of authorized public keys for a specific user account.
@@ -202,16 +202,14 @@ instance GoogleRequest LinuxGetAuthorizedKeysView'
              LinuxGetAuthorizedKeysViewResponse
         request = requestWithRoute defReq userAccountsURL
         requestWithRoute r u LinuxGetAuthorizedKeysView'{..}
-          = go _lgakvQuotaUser (Just _lgakvPrettyPrint)
-              _lgakvProject
+          = go _lgakvLogin _lgakvProject _lgakvZone _lgakvUser
+              (Just _lgakvInstance)
+              _lgakvQuotaUser
+              (Just _lgakvPrettyPrint)
               _lgakvUserIP
-              _lgakvZone
-              _lgakvUser
+              _lgakvFields
               _lgakvKey
               _lgakvOAuthToken
-              _lgakvLogin
-              _lgakvFields
-              (Just _lgakvInstance)
               (Just AltJSON)
           where go
                   = clientWithRoute

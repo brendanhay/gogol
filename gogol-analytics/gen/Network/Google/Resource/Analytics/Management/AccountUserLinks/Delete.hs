@@ -54,9 +54,9 @@ type ManagementAccountUserLinksDeleteResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Removes a user from the given account.
@@ -167,13 +167,12 @@ instance GoogleRequest
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
           ManagementAccountUserLinksDelete'{..}
-          = go _mauldQuotaUser (Just _mauldPrettyPrint)
+          = go _mauldAccountId _mauldLinkId _mauldQuotaUser
+              (Just _mauldPrettyPrint)
               _mauldUserIP
-              _mauldAccountId
-              _mauldKey
-              _mauldLinkId
-              _mauldOAuthToken
               _mauldFields
+              _mauldKey
+              _mauldOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

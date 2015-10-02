@@ -51,9 +51,9 @@ type UsersPatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] User :> Patch '[JSON] User
 
@@ -157,11 +157,11 @@ instance GoogleRequest UsersPatch' where
         type Rs UsersPatch' = User
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u UsersPatch'{..}
-          = go _upQuotaUser (Just _upPrettyPrint) _upUserIP
+          = go _upUserKey _upQuotaUser (Just _upPrettyPrint)
+              _upUserIP
+              _upFields
               _upKey
               _upOAuthToken
-              _upUserKey
-              _upFields
               (Just AltJSON)
               _upUser
           where go

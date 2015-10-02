@@ -53,9 +53,9 @@ type SchemasDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete schema
@@ -158,12 +158,12 @@ instance GoogleRequest SchemasDelete' where
         type Rs SchemasDelete' = ()
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u SchemasDelete'{..}
-          = go _sdQuotaUser (Just _sdPrettyPrint) _sdUserIP
-              _sdCustomerId
+          = go _sdCustomerId _sdSchemaKey _sdQuotaUser
+              (Just _sdPrettyPrint)
+              _sdUserIP
+              _sdFields
               _sdKey
               _sdOAuthToken
-              _sdSchemaKey
-              _sdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

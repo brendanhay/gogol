@@ -49,17 +49,17 @@ import           Network.Google.Storage.Types
 -- 'BucketsList'' request conforms to.
 type BucketsListResource =
      "b" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "project" Text :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "projection" StorageBucketsListProjection
-                   :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "maxResults" Word32 :>
-                         QueryParam "fields" Text :>
+       QueryParam "maxResults" Word32 :>
+         QueryParam "pageToken" Text :>
+           QueryParam "projection" StorageBucketsListProjection
+             :>
+             QueryParam "project" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Buckets
 
 -- | Retrieves a list of buckets for a given project.
@@ -180,15 +180,14 @@ instance GoogleRequest BucketsList' where
         type Rs BucketsList' = Buckets
         request = requestWithRoute defReq storageURL
         requestWithRoute r u BucketsList'{..}
-          = go _blQuotaUser (Just _blPrettyPrint)
+          = go _blMaxResults _blPageToken _blProjection
               (Just _blProject)
+              _blQuotaUser
+              (Just _blPrettyPrint)
               _blUserIP
-              _blKey
-              _blProjection
-              _blPageToken
-              _blOAuthToken
-              _blMaxResults
               _blFields
+              _blKey
+              _blOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

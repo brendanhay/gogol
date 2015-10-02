@@ -58,17 +58,17 @@ type ProjectsTopicsDeleteResource =
      "v1beta2" :>
        "{+topic}" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Delete '[JSON] Empty
 
@@ -223,17 +223,17 @@ instance GoogleRequest ProjectsTopicsDelete' where
         type Rs ProjectsTopicsDelete' = Empty
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u ProjectsTopicsDelete'{..}
-          = go _ptdXgafv _ptdQuotaUser (Just _ptdPrettyPrint)
-              _ptdUploadProtocol
+          = go _ptdXgafv _ptdAccessToken _ptdBearerToken
+              _ptdCallback
               (Just _ptdPp)
-              _ptdAccessToken
               _ptdUploadType
+              _ptdUploadProtocol
               _ptdTopic
-              _ptdBearerToken
+              _ptdQuotaUser
+              (Just _ptdPrettyPrint)
+              _ptdFields
               _ptdKey
               _ptdOAuthToken
-              _ptdFields
-              _ptdCallback
               (Just AltJSON)
           where go
                   = clientWithRoute

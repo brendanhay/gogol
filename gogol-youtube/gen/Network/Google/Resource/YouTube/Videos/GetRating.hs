@@ -49,14 +49,14 @@ import           Network.Google.YouTube.Types
 type VideosGetRatingResource =
      "videos" :>
        "getRating" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "id" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+         QueryParam "onBehalfOfContentOwner" Text :>
+           QueryParam "id" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] VideoGetRatingResponse
 
@@ -174,12 +174,13 @@ instance GoogleRequest VideosGetRating' where
         type Rs VideosGetRating' = VideoGetRatingResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u VideosGetRating'{..}
-          = go _vgrQuotaUser (Just _vgrPrettyPrint) _vgrUserIP
-              _vgrOnBehalfOfContentOwner
-              _vgrKey
-              (Just _vgrId)
-              _vgrOAuthToken
+          = go _vgrOnBehalfOfContentOwner (Just _vgrId)
+              _vgrQuotaUser
+              (Just _vgrPrettyPrint)
+              _vgrUserIP
               _vgrFields
+              _vgrKey
+              _vgrOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -56,15 +56,15 @@ type RollingUpdatesListInstanceUpdatesResource =
            "rollingUpdates" :>
              Capture "rollingUpdate" Text :>
                "instanceUpdates" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "filter" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "maxResults" Word32 :>
-                                 QueryParam "fields" Text :>
+                 QueryParam "filter" Text :>
+                   QueryParam "maxResults" Word32 :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] InstanceUpdateList
 
@@ -219,17 +219,17 @@ instance GoogleRequest
           = requestWithRoute defReq replicaPoolUpdaterURL
         requestWithRoute r u
           RollingUpdatesListInstanceUpdates'{..}
-          = go _ruliuRollingUpdate _ruliuQuotaUser
-              (Just _ruliuPrettyPrint)
-              _ruliuProject
-              _ruliuUserIP
-              _ruliuZone
-              _ruliuKey
-              _ruliuFilter
+          = go _ruliuFilter (Just _ruliuMaxResults)
               _ruliuPageToken
-              _ruliuOAuthToken
-              (Just _ruliuMaxResults)
+              _ruliuProject
+              _ruliuZone
+              _ruliuRollingUpdate
+              _ruliuQuotaUser
+              (Just _ruliuPrettyPrint)
+              _ruliuUserIP
               _ruliuFields
+              _ruliuKey
+              _ruliuOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

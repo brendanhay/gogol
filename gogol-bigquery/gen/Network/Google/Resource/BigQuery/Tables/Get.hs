@@ -58,9 +58,9 @@ type TablesGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Table
 
 -- | Gets the specified table resource by table ID. This method does not
@@ -175,13 +175,13 @@ instance GoogleRequest TablesGet' where
         type Rs TablesGet' = Table
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u TablesGet'{..}
-          = go _tgQuotaUser (Just _tgPrettyPrint) _tgUserIP
-              _tgKey
-              _tgDatasetId
-              _tgProjectId
-              _tgOAuthToken
-              _tgTableId
+          = go _tgProjectId _tgDatasetId _tgTableId
+              _tgQuotaUser
+              (Just _tgPrettyPrint)
+              _tgUserIP
               _tgFields
+              _tgKey
+              _tgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TablesGetResource)

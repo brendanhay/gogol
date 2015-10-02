@@ -51,16 +51,16 @@ import           Network.Google.Prelude
 type UsersSessionsListResource =
      Capture "userId" Text :>
        "sessions" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "startTime" Text :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "endTime" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "includeDeleted" Bool :>
-                           QueryParam "fields" Text :>
+         QueryParam "endTime" Text :>
+           QueryParam "includeDeleted" Bool :>
+             QueryParam "pageToken" Text :>
+               QueryParam "startTime" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListSessionsResponse
 
@@ -201,16 +201,15 @@ instance GoogleRequest UsersSessionsList' where
         type Rs UsersSessionsList' = ListSessionsResponse
         request = requestWithRoute defReq fitnessURL
         requestWithRoute r u UsersSessionsList'{..}
-          = go _uslQuotaUser (Just _uslPrettyPrint)
+          = go _uslEndTime _uslIncludeDeleted _uslPageToken
               _uslStartTime
-              _uslUserIP
               _uslUserId
-              _uslKey
-              _uslEndTime
-              _uslPageToken
-              _uslOAuthToken
-              _uslIncludeDeleted
+              _uslQuotaUser
+              (Just _uslPrettyPrint)
+              _uslUserIP
               _uslFields
+              _uslKey
+              _uslOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

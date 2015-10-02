@@ -58,9 +58,9 @@ type SearchanalyticsQueryResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] SearchAnalyticsQueryRequest :>
                              Post '[JSON] SearchAnalyticsQueryResponse
@@ -173,11 +173,11 @@ instance GoogleRequest SearchanalyticsQuery' where
              SearchAnalyticsQueryResponse
         request = requestWithRoute defReq webmasterToolsURL
         requestWithRoute r u SearchanalyticsQuery'{..}
-          = go _sqQuotaUser (Just _sqPrettyPrint) _sqUserIP
-              _sqSiteURL
+          = go _sqSiteURL _sqQuotaUser (Just _sqPrettyPrint)
+              _sqUserIP
+              _sqFields
               _sqKey
               _sqOAuthToken
-              _sqFields
               (Just AltJSON)
               _sqSearchAnalyticsQueryRequest
           where go

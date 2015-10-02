@@ -51,13 +51,13 @@ type PropertiesDeleteResource =
        Capture "fileId" Text :>
          "properties" :>
            Capture "propertyKey" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "visibility" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+             QueryParam "visibility" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a property.
@@ -169,14 +169,13 @@ instance GoogleRequest PropertiesDelete' where
         type Rs PropertiesDelete' = ()
         request = requestWithRoute defReq driveURL
         requestWithRoute r u PropertiesDelete'{..}
-          = go _pdQuotaUser (Just _pdPrettyPrint)
-              _pdPropertyKey
+          = go (Just _pdVisibility) _pdFileId _pdPropertyKey
+              _pdQuotaUser
+              (Just _pdPrettyPrint)
               _pdUserIP
-              (Just _pdVisibility)
-              _pdKey
-              _pdFileId
-              _pdOAuthToken
               _pdFields
+              _pdKey
+              _pdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

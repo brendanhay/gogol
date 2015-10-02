@@ -50,9 +50,9 @@ type DatasetsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Dataset
 
 -- | Gets a dataset by ID.
@@ -145,11 +145,11 @@ instance GoogleRequest DatasetsGet' where
         type Rs DatasetsGet' = Dataset
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u DatasetsGet'{..}
-          = go _dgQuotaUser (Just _dgPrettyPrint) _dgUserIP
-              _dgKey
-              _dgDatasetId
-              _dgOAuthToken
+          = go _dgDatasetId _dgQuotaUser (Just _dgPrettyPrint)
+              _dgUserIP
               _dgFields
+              _dgKey
+              _dgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -61,9 +61,9 @@ type ManagementGoalsUpdateResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "fields" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] Goal :> Put '[JSON] Goal
 
@@ -200,15 +200,14 @@ instance GoogleRequest ManagementGoalsUpdate' where
         type Rs ManagementGoalsUpdate' = Goal
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementGoalsUpdate'{..}
-          = go _mguQuotaUser (Just _mguPrettyPrint)
-              _mguWebPropertyId
+          = go _mguAccountId _mguWebPropertyId _mguProfileId
               _mguGoalId
+              _mguQuotaUser
+              (Just _mguPrettyPrint)
               _mguUserIP
-              _mguProfileId
-              _mguAccountId
+              _mguFields
               _mguKey
               _mguOAuthToken
-              _mguFields
               (Just AltJSON)
               _mguGoal
           where go

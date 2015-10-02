@@ -48,9 +48,9 @@ type ProjectsListResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] ProjectsListResponse
 
@@ -135,9 +135,9 @@ instance GoogleRequest ProjectsList' where
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u ProjectsList'{..}
           = go _plQuotaUser (Just _plPrettyPrint) _plUserIP
+              _plFields
               _plKey
               _plOAuthToken
-              _plFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -50,9 +50,9 @@ type SitesDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Removes a site from the set of the user\'s Webmaster Tools sites.
@@ -146,11 +146,11 @@ instance GoogleRequest SitesDelete' where
         type Rs SitesDelete' = ()
         request = requestWithRoute defReq webmasterToolsURL
         requestWithRoute r u SitesDelete'{..}
-          = go _sdQuotaUser (Just _sdPrettyPrint) _sdUserIP
-              _sdSiteURL
+          = go _sdSiteURL _sdQuotaUser (Just _sdPrettyPrint)
+              _sdUserIP
+              _sdFields
               _sdKey
               _sdOAuthToken
-              _sdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

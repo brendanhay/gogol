@@ -57,17 +57,17 @@ type ProjectsCreateResource =
      "v1beta1" :>
        "projects" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] Project :>
                                      Post '[JSON] Project
@@ -220,16 +220,16 @@ instance GoogleRequest ProjectsCreate' where
         type Rs ProjectsCreate' = Project
         request = requestWithRoute defReq resourceManagerURL
         requestWithRoute r u ProjectsCreate'{..}
-          = go _pcXgafv _pcQuotaUser (Just _pcPrettyPrint)
-              _pcUploadProtocol
+          = go _pcXgafv _pcAccessToken _pcBearerToken
+              _pcCallback
               (Just _pcPp)
-              _pcAccessToken
               _pcUploadType
-              _pcBearerToken
+              _pcUploadProtocol
+              _pcQuotaUser
+              (Just _pcPrettyPrint)
+              _pcFields
               _pcKey
               _pcOAuthToken
-              _pcFields
-              _pcCallback
               (Just AltJSON)
               _pcProject
           where go

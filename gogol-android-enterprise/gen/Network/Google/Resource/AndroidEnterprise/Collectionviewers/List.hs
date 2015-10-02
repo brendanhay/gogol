@@ -56,9 +56,9 @@ type CollectionviewersListResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] CollectionViewersListResponse
 
@@ -168,13 +168,12 @@ instance GoogleRequest CollectionviewersList' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u CollectionviewersList'{..}
-          = go _clQuotaUser (Just _clPrettyPrint)
-              _clEnterpriseId
+          = go _clEnterpriseId _clCollectionId _clQuotaUser
+              (Just _clPrettyPrint)
               _clUserIP
-              _clCollectionId
+              _clFields
               _clKey
               _clOAuthToken
-              _clFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -53,9 +53,9 @@ type CreativeGroupsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] CreativeGroup
 
 -- | Gets one creative group by ID.
@@ -160,12 +160,12 @@ instance GoogleRequest CreativeGroupsGet' where
         type Rs CreativeGroupsGet' = CreativeGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeGroupsGet'{..}
-          = go _cggQuotaUser (Just _cggPrettyPrint) _cggUserIP
-              _cggProfileId
-              _cggKey
-              _cggId
-              _cggOAuthToken
+          = go _cggProfileId _cggId _cggQuotaUser
+              (Just _cggPrettyPrint)
+              _cggUserIP
               _cggFields
+              _cggKey
+              _cggOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -52,15 +52,15 @@ type PlayersListResource =
        "me" :>
          "players" :>
            Capture "collection" GamesPlayersListCollection :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "language" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Int32 :>
-                             QueryParam "fields" Text :>
+             QueryParam "language" Text :>
+               QueryParam "maxResults" Int32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] PlayerListResponse
 
@@ -183,14 +183,14 @@ instance GoogleRequest PlayersList' where
         type Rs PlayersList' = PlayerListResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u PlayersList'{..}
-          = go _plQuotaUser (Just _plPrettyPrint) _plUserIP
+          = go _plLanguage _plMaxResults _plPageToken
               _plCollection
-              _plKey
-              _plLanguage
-              _plPageToken
-              _plOAuthToken
-              _plMaxResults
+              _plQuotaUser
+              (Just _plPrettyPrint)
+              _plUserIP
               _plFields
+              _plKey
+              _plOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

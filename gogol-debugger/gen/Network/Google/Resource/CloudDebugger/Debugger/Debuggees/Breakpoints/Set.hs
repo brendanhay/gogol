@@ -59,17 +59,17 @@ type DebuggerDebuggeesBreakpointsSetResource =
              "breakpoints" :>
                "set" :>
                  QueryParam "$.xgafv" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
                          QueryParam "pp" Bool :>
-                           QueryParam "access_token" Text :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "bearer_token" Text :>
-                                 QueryParam "key" Key :>
-                                   QueryParam "oauth_token" OAuthToken :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "callback" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "upload_protocol" Text :>
+                               QueryParam "quotaUser" Text :>
+                                 QueryParam "prettyPrint" Bool :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "key" Key :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            ReqBody '[JSON] Breakpoint :>
                                              Post '[JSON] SetBreakpointResponse
@@ -240,18 +240,17 @@ instance GoogleRequest
         request = requestWithRoute defReq debuggerURL
         requestWithRoute r u
           DebuggerDebuggeesBreakpointsSet'{..}
-          = go _ddbsXgafv _ddbsQuotaUser
-              (Just _ddbsPrettyPrint)
-              _ddbsUploadProtocol
-              (Just _ddbsPp)
-              _ddbsAccessToken
-              _ddbsUploadType
-              _ddbsBearerToken
-              _ddbsKey
-              _ddbsDebuggeeId
-              _ddbsOAuthToken
-              _ddbsFields
+          = go _ddbsXgafv _ddbsAccessToken _ddbsBearerToken
               _ddbsCallback
+              (Just _ddbsPp)
+              _ddbsUploadType
+              _ddbsUploadProtocol
+              _ddbsDebuggeeId
+              _ddbsQuotaUser
+              (Just _ddbsPrettyPrint)
+              _ddbsFields
+              _ddbsKey
+              _ddbsOAuthToken
               (Just AltJSON)
               _ddbsBreakpoint
           where go

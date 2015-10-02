@@ -51,9 +51,9 @@ type TurnBasedMatchesResetForAllPlayersResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Deletes turn-based matches where the only match participants are from
@@ -150,9 +150,9 @@ instance GoogleRequest
           TurnBasedMatchesResetForAllPlayers'{..}
           = go _tbmrfapQuotaUser (Just _tbmrfapPrettyPrint)
               _tbmrfapUserIP
+              _tbmrfapFields
               _tbmrfapKey
               _tbmrfapOAuthToken
-              _tbmrfapFields
               (Just AltJSON)
           where go
                   = clientWithRoute

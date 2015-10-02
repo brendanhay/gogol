@@ -59,17 +59,17 @@ type ProjectsLogsSinksListResource =
              Capture "logsId" Text :>
                "sinks" :>
                  QueryParam "$.xgafv" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
                          QueryParam "pp" Bool :>
-                           QueryParam "access_token" Text :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "bearer_token" Text :>
-                                 QueryParam "key" Key :>
-                                   QueryParam "oauth_token" OAuthToken :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "callback" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "upload_protocol" Text :>
+                               QueryParam "quotaUser" Text :>
+                                 QueryParam "prettyPrint" Bool :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "key" Key :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] ListLogSinksResponse
 
@@ -225,18 +225,17 @@ instance GoogleRequest ProjectsLogsSinksList' where
         type Rs ProjectsLogsSinksList' = ListLogSinksResponse
         request = requestWithRoute defReq loggingURL
         requestWithRoute r u ProjectsLogsSinksList'{..}
-          = go _pXgafv _pQuotaUser (Just _pPrettyPrint)
-              _pUploadProtocol
-              _pLogsId
+          = go _pXgafv _pAccessToken _pBearerToken _pCallback
               (Just _pPp)
-              _pAccessToken
               _pUploadType
-              _pBearerToken
+              _pUploadProtocol
+              _pProjectsId
+              _pLogsId
+              _pQuotaUser
+              (Just _pPrettyPrint)
+              _pFields
               _pKey
               _pOAuthToken
-              _pProjectsId
-              _pFields
-              _pCallback
               (Just AltJSON)
           where go
                   = clientWithRoute

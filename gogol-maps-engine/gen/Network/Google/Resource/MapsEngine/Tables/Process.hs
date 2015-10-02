@@ -51,9 +51,9 @@ type TablesProcessResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Post '[JSON] ProcessResponse
 
@@ -145,10 +145,10 @@ instance GoogleRequest TablesProcess' where
         type Rs TablesProcess' = ProcessResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u TablesProcess'{..}
-          = go _tQuotaUser (Just _tPrettyPrint) _tUserIP _tKey
-              _tId
-              _tOAuthToken
+          = go _tId _tQuotaUser (Just _tPrettyPrint) _tUserIP
               _tFields
+              _tKey
+              _tOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

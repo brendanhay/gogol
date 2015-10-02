@@ -51,15 +51,15 @@ type GlobalOperationsAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
          "operations" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "filter" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] OperationAggregatedList
 
@@ -202,15 +202,15 @@ instance GoogleRequest
         request = requestWithRoute defReq computeURL
         requestWithRoute r u
           GlobalOperationsAggregatedList'{..}
-          = go _goalQuotaUser (Just _goalPrettyPrint)
-              _goalProject
-              _goalUserIP
-              _goalKey
-              _goalFilter
+          = go _goalFilter (Just _goalMaxResults)
               _goalPageToken
-              _goalOAuthToken
-              (Just _goalMaxResults)
+              _goalProject
+              _goalQuotaUser
+              (Just _goalPrettyPrint)
+              _goalUserIP
               _goalFields
+              _goalKey
+              _goalOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

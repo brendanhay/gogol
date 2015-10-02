@@ -55,9 +55,9 @@ type HTTPHealthChecksPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] HTTPHealthCheck :>
                              Patch '[JSON] Operation
@@ -183,13 +183,13 @@ instance GoogleRequest HTTPHealthChecksPatch' where
         type Rs HTTPHealthChecksPatch' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u HTTPHealthChecksPatch'{..}
-          = go _httphcpQuotaUser (Just _httphcpPrettyPrint)
-              _httphcpProject
+          = go _httphcpProject _httphcpHTTPHealthCheck
+              _httphcpQuotaUser
+              (Just _httphcpPrettyPrint)
               _httphcpUserIP
-              _httphcpKey
-              _httphcpHTTPHealthCheck
-              _httphcpOAuthToken
               _httphcpFields
+              _httphcpKey
+              _httphcpOAuthToken
               (Just AltJSON)
               _httphcpHTTPHealthCheck
           where go

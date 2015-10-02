@@ -47,13 +47,13 @@ import           Network.Google.Translate.Types
 type LanguagesListResource =
      "v2" :>
        "languages" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "target" Text :>
-                     QueryParam "fields" Text :>
+         QueryParam "target" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] LanguagesListResponse
 
@@ -146,11 +146,11 @@ instance GoogleRequest LanguagesList' where
         type Rs LanguagesList' = LanguagesListResponse
         request = requestWithRoute defReq translateURL
         requestWithRoute r u LanguagesList'{..}
-          = go _llQuotaUser (Just _llPrettyPrint) _llUserIP
+          = go _llTarget _llQuotaUser (Just _llPrettyPrint)
+              _llUserIP
+              _llFields
               _llKey
               _llOAuthToken
-              _llTarget
-              _llFields
               (Just AltJSON)
           where go
                   = clientWithRoute

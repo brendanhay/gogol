@@ -50,9 +50,9 @@ type UserInfoGetResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] UserInfoplus
 
 --
@@ -138,9 +138,9 @@ instance GoogleRequest UserInfoGet' where
         request = requestWithRoute defReq oAuth2URL
         requestWithRoute r u UserInfoGet'{..}
           = go _uigQuotaUser (Just _uigPrettyPrint) _uigUserIP
+              _uigFields
               _uigKey
               _uigOAuthToken
-              _uigFields
               (Just AltJSON)
           where go
                   = clientWithRoute

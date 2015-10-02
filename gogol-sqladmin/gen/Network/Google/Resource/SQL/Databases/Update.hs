@@ -58,9 +58,9 @@ type DatabasesUpdateResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Database :> Put '[JSON] Operation
 
@@ -185,13 +185,12 @@ instance GoogleRequest DatabasesUpdate' where
         type Rs DatabasesUpdate' = Operation
         request = requestWithRoute defReq sQLAdminURL
         requestWithRoute r u DatabasesUpdate'{..}
-          = go _duQuotaUser (Just _duPrettyPrint) _duProject
-              _duDatabase
+          = go _duProject _duInstance _duDatabase _duQuotaUser
+              (Just _duPrettyPrint)
               _duUserIP
+              _duFields
               _duKey
               _duOAuthToken
-              _duFields
-              _duInstance
               (Just AltJSON)
               _duDatabase
           where go

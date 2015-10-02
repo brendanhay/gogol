@@ -53,9 +53,9 @@ type JobsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          MultipartRelated '[JSON] Job Body :> Post '[JSON] Job
 
@@ -166,12 +166,12 @@ instance GoogleRequest JobsInsert' where
         type Rs JobsInsert' = Job
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u JobsInsert'{..}
-          = go _jiQuotaUser (Just _jiPrettyPrint) _jiUserIP
-              _jiMedia
-              _jiKey
-              _jiProjectId
-              _jiOAuthToken
+          = go _jiMedia _jiProjectId _jiQuotaUser
+              (Just _jiPrettyPrint)
+              _jiUserIP
               _jiFields
+              _jiKey
+              _jiOAuthToken
               (Just AltJSON)
               _jiJob
           where go

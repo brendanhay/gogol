@@ -48,14 +48,14 @@ import           Network.Google.Prelude
 type ManagementAccountsListResource =
      "management" :>
        "accounts" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "start-index" Int32 :>
-                     QueryParam "max-results" Int32 :>
-                       QueryParam "fields" Text :>
+         QueryParam "max-results" Int32 :>
+           QueryParam "start-index" Int32 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Accounts
 
 -- | Lists all accounts to which the user has access.
@@ -162,12 +162,12 @@ instance GoogleRequest ManagementAccountsList' where
         type Rs ManagementAccountsList' = Accounts
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementAccountsList'{..}
-          = go _malQuotaUser (Just _malPrettyPrint) _malUserIP
+          = go _malMaxResults _malStartIndex _malQuotaUser
+              (Just _malPrettyPrint)
+              _malUserIP
+              _malFields
               _malKey
               _malOAuthToken
-              _malStartIndex
-              _malMaxResults
-              _malFields
               (Just AltJSON)
           where go
                   = clientWithRoute

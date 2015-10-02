@@ -59,19 +59,19 @@ type BillingAccountsProjectsListResource =
        "{+name}" :>
          "projects" :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "pageSize" Int32 :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "callback" Text :>
+             QueryParam "access_token" Text :>
+               QueryParam "bearer_token" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "pageSize" Int32 :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "quotaUser" Text :>
+                               QueryParam "prettyPrint" Bool :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON]
                                            ListProjectBillingInfoResponse
@@ -255,20 +255,19 @@ instance GoogleRequest BillingAccountsProjectsList'
              ListProjectBillingInfoResponse
         request = requestWithRoute defReq billingURL
         requestWithRoute r u BillingAccountsProjectsList'{..}
-          = go _baplXgafv _baplQuotaUser
-              (Just _baplPrettyPrint)
-              _baplUploadProtocol
-              (Just _baplPp)
-              _baplAccessToken
-              _baplUploadType
-              _baplBearerToken
-              _baplKey
-              _baplName
-              _baplPageToken
-              _baplOAuthToken
-              _baplPageSize
-              _baplFields
+          = go _baplXgafv _baplAccessToken _baplBearerToken
               _baplCallback
+              _baplPageSize
+              _baplPageToken
+              (Just _baplPp)
+              _baplUploadType
+              _baplUploadProtocol
+              _baplName
+              _baplQuotaUser
+              (Just _baplPrettyPrint)
+              _baplFields
+              _baplKey
+              _baplOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -53,9 +53,9 @@ type AnnotationsSearchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] SearchAnnotationsRequest :>
                          Post '[JSON] SearchAnnotationsResponse
@@ -156,9 +156,9 @@ instance GoogleRequest AnnotationsSearch' where
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u AnnotationsSearch'{..}
           = go _asQuotaUser (Just _asPrettyPrint) _asUserIP
+              _asFields
               _asKey
               _asOAuthToken
-              _asFields
               (Just AltJSON)
               _asSearchAnnotationsRequest
           where go

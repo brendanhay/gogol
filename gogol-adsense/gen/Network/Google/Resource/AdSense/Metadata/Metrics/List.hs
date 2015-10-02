@@ -49,9 +49,9 @@ type MetadataMetricsListResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Metadata
 
 -- | List the metadata for the metrics available to this AdSense account.
@@ -138,9 +138,9 @@ instance GoogleRequest MetadataMetricsList' where
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u MetadataMetricsList'{..}
           = go _mmlQuotaUser (Just _mmlPrettyPrint) _mmlUserIP
+              _mmlFields
               _mmlKey
               _mmlOAuthToken
-              _mmlFields
               (Just AltJSON)
           where go
                   = clientWithRoute

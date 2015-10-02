@@ -55,9 +55,9 @@ type OrdersGettestOrdertemplateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] OrdersGetTestOrderTemplateResponse
 
@@ -169,13 +169,12 @@ instance GoogleRequest OrdersGettestOrdertemplate'
              OrdersGetTestOrderTemplateResponse
         request = requestWithRoute defReq shoppingContentURL
         requestWithRoute r u OrdersGettestOrdertemplate'{..}
-          = go _ogoQuotaUser _ogoMerchantId
+          = go _ogoMerchantId _ogoTemplateName _ogoQuotaUser
               (Just _ogoPrettyPrint)
-              _ogoTemplateName
               _ogoUserIP
+              _ogoFields
               _ogoKey
               _ogoOAuthToken
-              _ogoFields
               (Just AltJSON)
           where go
                   = clientWithRoute

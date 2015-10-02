@@ -52,9 +52,9 @@ type LeaderboardConfigurationsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] LeaderboardConfiguration :>
                            Post '[JSON] LeaderboardConfiguration
@@ -169,11 +169,12 @@ instance GoogleRequest
           = requestWithRoute defReq gamesConfigurationURL
         requestWithRoute r u
           LeaderboardConfigurationsInsert'{..}
-          = go _lciQuotaUser (Just _lciPrettyPrint) _lciUserIP
-              _lciApplicationId
+          = go _lciApplicationId _lciQuotaUser
+              (Just _lciPrettyPrint)
+              _lciUserIP
+              _lciFields
               _lciKey
               _lciOAuthToken
-              _lciFields
               (Just AltJSON)
               _lciLeaderboardConfiguration
           where go

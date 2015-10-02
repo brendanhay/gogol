@@ -52,13 +52,13 @@ type UsersRemovePublicKeyResource =
          "users" :>
            Capture "user" Text :>
              "removePublicKey" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fingerprint" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+               QueryParam "fingerprint" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Removes the specified public key from the user.
@@ -177,14 +177,13 @@ instance GoogleRequest UsersRemovePublicKey' where
         type Rs UsersRemovePublicKey' = Operation
         request = requestWithRoute defReq userAccountsURL
         requestWithRoute r u UsersRemovePublicKey'{..}
-          = go _urpkQuotaUser (Just _urpkPrettyPrint)
-              _urpkProject
+          = go _urpkProject _urpkUser (Just _urpkFingerprint)
+              _urpkQuotaUser
+              (Just _urpkPrettyPrint)
               _urpkUserIP
-              (Just _urpkFingerprint)
-              _urpkUser
+              _urpkFields
               _urpkKey
               _urpkOAuthToken
-              _urpkFields
               (Just AltJSON)
           where go
                   = clientWithRoute

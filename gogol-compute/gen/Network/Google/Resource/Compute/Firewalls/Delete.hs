@@ -53,9 +53,9 @@ type FirewallsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified firewall resource.
@@ -158,12 +158,12 @@ instance GoogleRequest FirewallsDelete' where
         type Rs FirewallsDelete' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u FirewallsDelete'{..}
-          = go _fdQuotaUser (Just _fdPrettyPrint) _fdProject
+          = go _fdProject _fdFirewall _fdQuotaUser
+              (Just _fdPrettyPrint)
               _fdUserIP
+              _fdFields
               _fdKey
               _fdOAuthToken
-              _fdFirewall
-              _fdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -50,13 +50,13 @@ type QuestsAcceptResource =
      "quests" :>
        Capture "questId" Text :>
          "accept" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "language" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "language" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Post '[JSON] Quest
 
 -- | Indicates that the currently authorized user will participate in the
@@ -159,12 +159,12 @@ instance GoogleRequest QuestsAccept' where
         type Rs QuestsAccept' = Quest
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u QuestsAccept'{..}
-          = go _qaQuotaUser (Just _qaPrettyPrint) _qaUserIP
-              _qaKey
-              _qaLanguage
-              _qaOAuthToken
-              _qaQuestId
+          = go _qaLanguage _qaQuestId _qaQuotaUser
+              (Just _qaPrettyPrint)
+              _qaUserIP
               _qaFields
+              _qaKey
+              _qaOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -50,9 +50,9 @@ type ReferencesGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Reference
 
 -- | Gets a reference. Implements GlobalAllianceApi.getReference.
@@ -149,11 +149,12 @@ instance GoogleRequest ReferencesGet' where
         type Rs ReferencesGet' = Reference
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u ReferencesGet'{..}
-          = go _rggQuotaUser (Just _rggPrettyPrint) _rggUserIP
-              _rggReferenceId
+          = go _rggReferenceId _rggQuotaUser
+              (Just _rggPrettyPrint)
+              _rggUserIP
+              _rggFields
               _rggKey
               _rggOAuthToken
-              _rggFields
               (Just AltJSON)
           where go
                   = clientWithRoute

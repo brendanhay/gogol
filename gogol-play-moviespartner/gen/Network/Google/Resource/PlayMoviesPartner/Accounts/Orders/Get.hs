@@ -59,17 +59,17 @@ type AccountsOrdersGetResource =
            "orders" :>
              Capture "orderId" Text :>
                QueryParam "$.xgafv" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "key" Key :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "callback" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "quotaUser" Text :>
+                               QueryParam "prettyPrint" Bool :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] Order
 
@@ -233,18 +233,18 @@ instance GoogleRequest AccountsOrdersGet' where
         request
           = requestWithRoute defReq playMoviesPartnerURL
         requestWithRoute r u AccountsOrdersGet'{..}
-          = go _aogXgafv _aogQuotaUser (Just _aogPrettyPrint)
-              _aogUploadProtocol
+          = go _aogXgafv _aogAccessToken _aogBearerToken
+              _aogCallback
               (Just _aogPp)
-              _aogAccessToken
               _aogUploadType
+              _aogUploadProtocol
               _aogAccountId
-              _aogBearerToken
+              _aogOrderId
+              _aogQuotaUser
+              (Just _aogPrettyPrint)
+              _aogFields
               _aogKey
               _aogOAuthToken
-              _aogOrderId
-              _aogFields
-              _aogCallback
               (Just AltJSON)
           where go
                   = clientWithRoute

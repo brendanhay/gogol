@@ -56,17 +56,17 @@ type ProjectsGetIAMPolicyResource =
        "projects" :>
          "{resource}:getIamPolicy" :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
+             QueryParam "access_token" Text :>
+               QueryParam "bearer_token" Text :>
+                 QueryParam "callback" Text :>
                    QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] GetIAMPolicyRequest :>
                                        Post '[JSON] Policy
@@ -233,18 +233,17 @@ instance GoogleRequest ProjectsGetIAMPolicy' where
         type Rs ProjectsGetIAMPolicy' = Policy
         request = requestWithRoute defReq resourceManagerURL
         requestWithRoute r u ProjectsGetIAMPolicy'{..}
-          = go _pgipXgafv _pgipQuotaUser
-              (Just _pgipPrettyPrint)
-              _pgipUploadProtocol
-              (Just _pgipPp)
-              _pgipAccessToken
-              _pgipUploadType
-              _pgipBearerToken
-              _pgipKey
-              _pgipResource
-              _pgipOAuthToken
-              _pgipFields
+          = go _pgipXgafv _pgipAccessToken _pgipBearerToken
               _pgipCallback
+              (Just _pgipPp)
+              _pgipUploadType
+              _pgipUploadProtocol
+              _pgipResource
+              _pgipQuotaUser
+              (Just _pgipPrettyPrint)
+              _pgipFields
+              _pgipKey
+              _pgipOAuthToken
               (Just AltJSON)
               _pgipGetIAMPolicyRequest
           where go

@@ -55,9 +55,9 @@ type InstancesRestoreBackupResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] InstancesRestoreBackupRequest :>
                                Post '[JSON] Operation
@@ -176,12 +176,12 @@ instance GoogleRequest InstancesRestoreBackup' where
         type Rs InstancesRestoreBackup' = Operation
         request = requestWithRoute defReq sQLAdminURL
         requestWithRoute r u InstancesRestoreBackup'{..}
-          = go _irbQuotaUser (Just _irbPrettyPrint) _irbProject
+          = go _irbProject _irbInstance _irbQuotaUser
+              (Just _irbPrettyPrint)
               _irbUserIP
+              _irbFields
               _irbKey
               _irbOAuthToken
-              _irbFields
-              _irbInstance
               (Just AltJSON)
               _irbInstancesRestoreBackupRequest
           where go

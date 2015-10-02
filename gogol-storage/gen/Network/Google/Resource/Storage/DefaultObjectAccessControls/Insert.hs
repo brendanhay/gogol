@@ -52,9 +52,9 @@ type DefaultObjectAccessControlsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] ObjectAccessControl :>
                            Post '[JSON] ObjectAccessControl
@@ -168,12 +168,12 @@ instance GoogleRequest
         request = requestWithRoute defReq storageURL
         requestWithRoute r u
           DefaultObjectAccessControlsInsert'{..}
-          = go _doaciQuotaUser (Just _doaciPrettyPrint)
+          = go _doaciBucket _doaciQuotaUser
+              (Just _doaciPrettyPrint)
               _doaciUserIP
-              _doaciBucket
+              _doaciFields
               _doaciKey
               _doaciOAuthToken
-              _doaciFields
               (Just AltJSON)
               _doaciObjectAccessControl
           where go

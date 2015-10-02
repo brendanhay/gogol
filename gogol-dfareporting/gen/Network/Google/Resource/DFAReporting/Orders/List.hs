@@ -58,23 +58,23 @@ type OrdersListResource =
          "projects" :>
            Capture "projectId" Int64 :>
              "orders" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
+               QueryParams "ids" Int64 :>
+                 QueryParam "maxResults" Int32 :>
+                   QueryParam "pageToken" Text :>
                      QueryParam "searchString" Text :>
-                       QueryParams "ids" Int64 :>
-                         QueryParam "sortOrder"
-                           DfareportingOrdersListSortOrder
+                       QueryParams "siteId" Int64 :>
+                         QueryParam "sortField"
+                           DfareportingOrdersListSortField
                            :>
-                           QueryParam "key" Key :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "sortField"
-                                 DfareportingOrdersListSortField
-                                 :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParams "siteId" Int64 :>
-                                     QueryParam "maxResults" Int32 :>
-                                       QueryParam "fields" Text :>
+                           QueryParam "sortOrder"
+                             DfareportingOrdersListSortOrder
+                             :>
+                             QueryParam "quotaUser" Text :>
+                               QueryParam "prettyPrint" Bool :>
+                                 QueryParam "userIp" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "key" Key :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] OrdersListResponse
 
@@ -245,19 +245,19 @@ instance GoogleRequest OrdersList' where
         type Rs OrdersList' = OrdersListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u OrdersList'{..}
-          = go _olQuotaUser (Just _olPrettyPrint) _olUserIP
+          = go _olIds _olMaxResults _olPageToken
               _olSearchString
-              _olIds
-              _olProfileId
-              _olSortOrder
-              _olKey
-              _olPageToken
-              _olProjectId
-              _olSortField
-              _olOAuthToken
               _olSiteId
-              _olMaxResults
+              _olSortField
+              _olSortOrder
+              _olProfileId
+              _olProjectId
+              _olQuotaUser
+              (Just _olPrettyPrint)
+              _olUserIP
               _olFields
+              _olKey
+              _olOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy OrdersListResource)

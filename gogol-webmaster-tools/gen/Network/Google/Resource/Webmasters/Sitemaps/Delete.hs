@@ -53,9 +53,9 @@ type SitemapsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a sitemap from this site.
@@ -163,13 +163,12 @@ instance GoogleRequest SitemapsDelete' where
         type Rs SitemapsDelete' = ()
         request = requestWithRoute defReq webmasterToolsURL
         requestWithRoute r u SitemapsDelete'{..}
-          = go _sitQuotaUser (Just _sitPrettyPrint)
-              _sitFeedpath
+          = go _sitSiteURL _sitFeedpath _sitQuotaUser
+              (Just _sitPrettyPrint)
               _sitUserIP
-              _sitSiteURL
+              _sitFields
               _sitKey
               _sitOAuthToken
-              _sitFields
               (Just AltJSON)
           where go
                   = clientWithRoute

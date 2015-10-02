@@ -54,13 +54,13 @@ type ZoneViewsGetServiceResource =
            "resourceViews" :>
              Capture "resourceView" Text :>
                "getService" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "resourceName" Text :>
+                 QueryParam "resourceName" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Post '[JSON] ZoneViewsGetServiceResponse
 
@@ -190,15 +190,14 @@ instance GoogleRequest ZoneViewsGetService' where
              ZoneViewsGetServiceResponse
         request = requestWithRoute defReq resourceViewsURL
         requestWithRoute r u ZoneViewsGetService'{..}
-          = go _zvgsQuotaUser (Just _zvgsPrettyPrint)
+          = go _zvgsResourceName _zvgsProject _zvgsZone
               _zvgsResourceView
-              _zvgsResourceName
-              _zvgsProject
+              _zvgsQuotaUser
+              (Just _zvgsPrettyPrint)
               _zvgsUserIP
-              _zvgsZone
+              _zvgsFields
               _zvgsKey
               _zvgsOAuthToken
-              _zvgsFields
               (Just AltJSON)
           where go
                   = clientWithRoute

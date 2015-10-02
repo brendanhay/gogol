@@ -57,9 +57,9 @@ type TargetPoolsRemoveInstanceResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] TargetPoolsRemoveInstanceRequest
                                  :> Post '[JSON] Operation
@@ -191,14 +191,13 @@ instance GoogleRequest TargetPoolsRemoveInstance'
         type Rs TargetPoolsRemoveInstance' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u TargetPoolsRemoveInstance'{..}
-          = go _tpriQuotaUser (Just _tpriPrettyPrint)
-              _tpriProject
-              _tpriTargetPool
+          = go _tpriProject _tpriRegion _tpriTargetPool
+              _tpriQuotaUser
+              (Just _tpriPrettyPrint)
               _tpriUserIP
-              _tpriKey
-              _tpriRegion
-              _tpriOAuthToken
               _tpriFields
+              _tpriKey
+              _tpriOAuthToken
               (Just AltJSON)
               _tpriTargetPoolsRemoveInstanceRequest
           where go

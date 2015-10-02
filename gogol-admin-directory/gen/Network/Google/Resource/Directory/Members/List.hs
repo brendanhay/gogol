@@ -51,15 +51,15 @@ type MembersListResource =
      "groups" :>
        Capture "groupKey" Text :>
          "members" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "roles" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Int32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "maxResults" Int32 :>
+             QueryParam "pageToken" Text :>
+               QueryParam "roles" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Members
 
 -- | Retrieve all members in a group (paginated)
@@ -178,14 +178,13 @@ instance GoogleRequest MembersList' where
         type Rs MembersList' = Members
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u MembersList'{..}
-          = go _mlQuotaUser _mlRoles (Just _mlPrettyPrint)
+          = go _mlMaxResults _mlPageToken _mlRoles _mlGroupKey
+              _mlQuotaUser
+              (Just _mlPrettyPrint)
               _mlUserIP
-              _mlGroupKey
-              _mlKey
-              _mlPageToken
-              _mlOAuthToken
-              _mlMaxResults
               _mlFields
+              _mlKey
+              _mlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

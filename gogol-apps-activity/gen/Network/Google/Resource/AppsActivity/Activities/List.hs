@@ -57,21 +57,21 @@ import           Network.Google.Prelude
 -- 'ActivitiesList'' request conforms to.
 type ActivitiesListResource =
      "activities" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "drive.fileId" Text :>
-               QueryParam "drive.ancestorId" Text :>
-                 QueryParam "groupingStrategy"
-                   AppsactivityActivitiesListGroupingStrategy
-                   :>
+       QueryParam "drive.ancestorId" Text :>
+         QueryParam "drive.fileId" Text :>
+           QueryParam "groupingStrategy"
+             AppsactivityActivitiesListGroupingStrategy
+             :>
+             QueryParam "pageSize" Int32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "source" Text :>
                    QueryParam "userId" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "source" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "pageSize" Int32 :>
-                               QueryParam "fields" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] ListActivitiesResponse
 
@@ -229,17 +229,18 @@ instance GoogleRequest ActivitiesList' where
         type Rs ActivitiesList' = ListActivitiesResponse
         request = requestWithRoute defReq appsActivityURL
         requestWithRoute r u ActivitiesList'{..}
-          = go _alQuotaUser (Just _alPrettyPrint) _alUserIP
-              _alDriveFileId
-              _alDriveAncestorId
+          = go _alDriveAncestorId _alDriveFileId
               (Just _alGroupingStrategy)
-              (Just _alUserId)
-              _alKey
-              _alSource
-              _alPageToken
-              _alOAuthToken
               (Just _alPageSize)
+              _alPageToken
+              _alSource
+              (Just _alUserId)
+              _alQuotaUser
+              (Just _alPrettyPrint)
+              _alUserIP
               _alFields
+              _alKey
+              _alOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

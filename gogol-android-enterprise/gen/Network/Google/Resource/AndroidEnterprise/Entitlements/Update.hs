@@ -55,13 +55,13 @@ type EntitlementsUpdateResource =
            Capture "userId" Text :>
              "entitlements" :>
                Capture "entitlementId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "install" Bool :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                 QueryParam "install" Bool :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] Entitlement :>
                                    Put '[JSON] Entitlement
@@ -205,15 +205,14 @@ instance GoogleRequest EntitlementsUpdate' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u EntitlementsUpdate'{..}
-          = go _entEntitlementId _entQuotaUser
+          = go _entInstall _entEnterpriseId _entUserId
+              _entEntitlementId
+              _entQuotaUser
               (Just _entPrettyPrint)
-              _entEnterpriseId
               _entUserIP
-              _entInstall
-              _entUserId
+              _entFields
               _entKey
               _entOAuthToken
-              _entFields
               (Just AltJSON)
               _entEntitlement
           where go

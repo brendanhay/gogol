@@ -52,19 +52,19 @@ import           Network.Google.Prelude
 -- 'FilesList'' request conforms to.
 type FilesListResource =
      "files" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
+       QueryParam "corpus" DriveFilesListCorpus :>
+         QueryParam "maxResults" Int32 :>
            QueryParam "orderBy" Text :>
-             QueryParam "userIp" Text :>
-               QueryParam "q" Text :>
-                 QueryParam "key" Key :>
+             QueryParam "pageToken" Text :>
+               QueryParam "projection" DriveFilesListProjection :>
+                 QueryParam "q" Text :>
                    QueryParam "spaces" Text :>
-                     QueryParam "projection" DriveFilesListProjection :>
-                       QueryParam "corpus" DriveFilesListCorpus :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "maxResults" Int32 :>
-                               QueryParam "fields" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] FileList
 
@@ -216,17 +216,17 @@ instance GoogleRequest FilesList' where
         type Rs FilesList' = FileList
         request = requestWithRoute defReq driveURL
         requestWithRoute r u FilesList'{..}
-          = go _flQuotaUser (Just _flPrettyPrint) _flOrderBy
-              _flUserIP
-              _flQ
-              _flKey
-              _flSpaces
-              _flProjection
-              _flCorpus
+          = go _flCorpus (Just _flMaxResults) _flOrderBy
               _flPageToken
-              _flOAuthToken
-              (Just _flMaxResults)
+              _flProjection
+              _flQ
+              _flSpaces
+              _flQuotaUser
+              (Just _flPrettyPrint)
+              _flUserIP
               _flFields
+              _flKey
+              _flOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy FilesListResource)

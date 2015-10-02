@@ -57,9 +57,9 @@ type InstallsListResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] InstallsListResponse
 
@@ -174,14 +174,13 @@ instance GoogleRequest InstallsList' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u InstallsList'{..}
-          = go _ilQuotaUser (Just _ilPrettyPrint)
-              _ilEnterpriseId
+          = go _ilEnterpriseId _ilUserId _ilDeviceId
+              _ilQuotaUser
+              (Just _ilPrettyPrint)
               _ilUserIP
-              _ilUserId
-              _ilKey
-              _ilDeviceId
-              _ilOAuthToken
               _ilFields
+              _ilKey
+              _ilOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

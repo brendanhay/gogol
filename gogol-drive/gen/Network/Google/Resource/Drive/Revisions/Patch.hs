@@ -54,9 +54,9 @@ type RevisionsPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Revision :> Patch '[JSON] Revision
 
@@ -174,12 +174,12 @@ instance GoogleRequest RevisionsPatch' where
         type Rs RevisionsPatch' = Revision
         request = requestWithRoute defReq driveURL
         requestWithRoute r u RevisionsPatch'{..}
-          = go _rppQuotaUser (Just _rppPrettyPrint) _rppUserIP
-              _rppKey
-              _rppFileId
-              _rppOAuthToken
-              _rppRevisionId
+          = go _rppFileId _rppRevisionId _rppQuotaUser
+              (Just _rppPrettyPrint)
+              _rppUserIP
               _rppFields
+              _rppKey
+              _rppOAuthToken
               (Just AltJSON)
               _rppRevision
           where go

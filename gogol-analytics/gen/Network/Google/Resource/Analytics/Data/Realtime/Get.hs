@@ -52,18 +52,18 @@ import           Network.Google.Prelude
 type DataRealtimeGetResource =
      "data" :>
        "realtime" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "metrics" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "filters" Text :>
-                   QueryParam "ids" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "sort" Text :>
-                         QueryParam "dimensions" Text :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "max-results" Int32 :>
-                               QueryParam "fields" Text :>
+         QueryParam "dimensions" Text :>
+           QueryParam "filters" Text :>
+             QueryParam "max-results" Int32 :>
+               QueryParam "sort" Text :>
+                 QueryParam "ids" Text :>
+                   QueryParam "metrics" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] RealtimeData
 
@@ -211,17 +211,16 @@ instance GoogleRequest DataRealtimeGet' where
         type Rs DataRealtimeGet' = RealtimeData
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u DataRealtimeGet'{..}
-          = go _drgQuotaUser (Just _drgMetrics)
+          = go _drgDimensions _drgFilters _drgMaxResults
+              _drgSort
+              (Just _drgIds)
+              (Just _drgMetrics)
+              _drgQuotaUser
               (Just _drgPrettyPrint)
               _drgUserIP
-              _drgFilters
-              (Just _drgIds)
-              _drgKey
-              _drgSort
-              _drgDimensions
-              _drgOAuthToken
-              _drgMaxResults
               _drgFields
+              _drgKey
+              _drgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

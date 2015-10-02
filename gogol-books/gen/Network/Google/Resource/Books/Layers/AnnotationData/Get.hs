@@ -60,19 +60,19 @@ type LayersAnnotationDataGetResource =
            Capture "layerId" Text :>
              "data" :>
                Capture "annotationDataId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "w" Int32 :>
-                     QueryParam "prettyPrint" Bool :>
+                 QueryParam "allowWebDefinitions" Bool :>
+                   QueryParam "h" Int32 :>
+                     QueryParam "locale" Text :>
                        QueryParam "scale" Int32 :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "locale" Text :>
+                         QueryParam "source" Text :>
+                           QueryParam "w" Int32 :>
                              QueryParam "contentVersion" Text :>
-                               QueryParam "key" Key :>
-                                 QueryParam "allowWebDefinitions" Bool :>
-                                   QueryParam "source" Text :>
-                                     QueryParam "h" Int32 :>
-                                       QueryParam "oauth_token" OAuthToken :>
-                                         QueryParam "fields" Text :>
+                               QueryParam "quotaUser" Text :>
+                                 QueryParam "prettyPrint" Bool :>
+                                   QueryParam "userIp" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "key" Key :>
+                                         QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
                                              Get '[JSON] Annotationdata
 
@@ -258,20 +258,20 @@ instance GoogleRequest LayersAnnotationDataGet' where
         type Rs LayersAnnotationDataGet' = Annotationdata
         request = requestWithRoute defReq booksURL
         requestWithRoute r u LayersAnnotationDataGet'{..}
-          = go _ladgQuotaUser _ladgW (Just _ladgPrettyPrint)
+          = go _ladgAllowWebDefinitions _ladgH _ladgLocale
               _ladgScale
-              _ladgUserIP
-              _ladgLocale
-              (Just _ladgContentVersion)
-              _ladgKey
-              _ladgAllowWebDefinitions
-              _ladgAnnotationDataId
-              _ladgVolumeId
               _ladgSource
-              _ladgH
-              _ladgOAuthToken
+              _ladgW
+              _ladgVolumeId
               _ladgLayerId
+              _ladgAnnotationDataId
+              (Just _ladgContentVersion)
+              _ladgQuotaUser
+              (Just _ladgPrettyPrint)
+              _ladgUserIP
               _ladgFields
+              _ladgKey
+              _ladgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

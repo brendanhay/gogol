@@ -48,9 +48,9 @@ type ColorsGetResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :> Get '[JSON] Colors
 
 -- | Returns the color definitions for calendars and events.
@@ -134,9 +134,9 @@ instance GoogleRequest ColorsGet' where
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u ColorsGet'{..}
           = go _cgQuotaUser (Just _cgPrettyPrint) _cgUserIP
+              _cgFields
               _cgKey
               _cgOAuthToken
-              _cgFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy ColorsGetResource)

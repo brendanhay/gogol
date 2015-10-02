@@ -26,7 +26,7 @@ module Network.Google.Resource.SQL.SSLCerts.List
       SSLCertsListResource
 
     -- * Creating a Request
-    , sSLCertsList'
+    , sslCertsList'
     , SSLCertsList'
 
     -- * Request Lenses
@@ -54,15 +54,15 @@ type SSLCertsListResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] SSLCertsListResponse
 
 -- | Lists all of the current SSL certificates for the instance.
 --
--- /See:/ 'sSLCertsList'' smart constructor.
+-- /See:/ 'sslCertsList'' smart constructor.
 data SSLCertsList' = SSLCertsList'
     { _sclQuotaUser   :: !(Maybe Text)
     , _sclPrettyPrint :: !Bool
@@ -93,11 +93,11 @@ data SSLCertsList' = SSLCertsList'
 -- * 'sclFields'
 --
 -- * 'sclInstance'
-sSLCertsList'
+sslCertsList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instance'
     -> SSLCertsList'
-sSLCertsList' pSclProject_ pSclInstance_ =
+sslCertsList' pSclProject_ pSclInstance_ =
     SSLCertsList'
     { _sclQuotaUser = Nothing
     , _sclPrettyPrint = True
@@ -163,12 +163,12 @@ instance GoogleRequest SSLCertsList' where
         type Rs SSLCertsList' = SSLCertsListResponse
         request = requestWithRoute defReq sQLAdminURL
         requestWithRoute r u SSLCertsList'{..}
-          = go _sclQuotaUser (Just _sclPrettyPrint) _sclProject
+          = go _sclProject _sclInstance _sclQuotaUser
+              (Just _sclPrettyPrint)
               _sclUserIP
+              _sclFields
               _sclKey
               _sclOAuthToken
-              _sclFields
-              _sclInstance
               (Just AltJSON)
           where go
                   = clientWithRoute

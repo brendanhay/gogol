@@ -53,13 +53,13 @@ type InstanceGroupManagersInsertResource =
        "zones" :>
          Capture "zone" Text :>
            "instanceGroupManagers" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "size" Int32 :>
+             QueryParam "size" Int32 :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] InstanceGroupManager :>
                                Post '[JSON] Operation
@@ -190,14 +190,13 @@ instance GoogleRequest InstanceGroupManagersInsert'
         type Rs InstanceGroupManagersInsert' = Operation
         request = requestWithRoute defReq replicaPoolURL
         requestWithRoute r u InstanceGroupManagersInsert'{..}
-          = go _igmiQuotaUser (Just _igmiPrettyPrint)
-              _igmiProject
-              (Just _igmiSize)
+          = go _igmiProject _igmiZone (Just _igmiSize)
+              _igmiQuotaUser
+              (Just _igmiPrettyPrint)
               _igmiUserIP
-              _igmiZone
+              _igmiFields
               _igmiKey
               _igmiOAuthToken
-              _igmiFields
               (Just AltJSON)
               _igmiInstanceGroupManager
           where go

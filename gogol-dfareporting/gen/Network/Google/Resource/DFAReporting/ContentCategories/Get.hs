@@ -53,9 +53,9 @@ type ContentCategoriesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] ContentCategory
 
@@ -161,12 +161,12 @@ instance GoogleRequest ContentCategoriesGet' where
         type Rs ContentCategoriesGet' = ContentCategory
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ContentCategoriesGet'{..}
-          = go _ccgQuotaUser (Just _ccgPrettyPrint) _ccgUserIP
-              _ccgProfileId
-              _ccgKey
-              _ccgId
-              _ccgOAuthToken
+          = go _ccgProfileId _ccgId _ccgQuotaUser
+              (Just _ccgPrettyPrint)
+              _ccgUserIP
               _ccgFields
+              _ccgKey
+              _ccgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

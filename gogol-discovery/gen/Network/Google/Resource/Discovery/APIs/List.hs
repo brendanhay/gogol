@@ -26,7 +26,7 @@ module Network.Google.Resource.Discovery.APIs.List
       APIsListResource
 
     -- * Creating a Request
-    , aPIsList'
+    , apisList'
     , APIsList'
 
     -- * Request Lenses
@@ -47,19 +47,19 @@ import           Network.Google.Prelude
 -- 'APIsList'' request conforms to.
 type APIsListResource =
      "apis" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "preferred" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "name" Text :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+       QueryParam "name" Text :>
+         QueryParam "preferred" Bool :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] DirectoryList
 
 -- | Retrieve the list of APIs supported at this endpoint.
 --
--- /See:/ 'aPIsList'' smart constructor.
+-- /See:/ 'apisList'' smart constructor.
 data APIsList' = APIsList'
     { _alQuotaUser   :: !(Maybe Text)
     , _alPrettyPrint :: !Bool
@@ -90,9 +90,9 @@ data APIsList' = APIsList'
 -- * 'alOAuthToken'
 --
 -- * 'alFields'
-aPIsList'
+apisList'
     :: APIsList'
-aPIsList' =
+apisList' =
     APIsList'
     { _alQuotaUser = Nothing
     , _alPrettyPrint = True
@@ -154,13 +154,12 @@ instance GoogleRequest APIsList' where
         type Rs APIsList' = DirectoryList
         request = requestWithRoute defReq discoveryURL
         requestWithRoute r u APIsList'{..}
-          = go _alQuotaUser (Just _alPrettyPrint)
-              (Just _alPreferred)
+          = go _alName (Just _alPreferred) _alQuotaUser
+              (Just _alPrettyPrint)
               _alUserIP
-              _alKey
-              _alName
-              _alOAuthToken
               _alFields
+              _alKey
+              _alOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy APIsListResource) r

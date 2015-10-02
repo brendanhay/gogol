@@ -65,17 +65,17 @@ type ProjectsLogsEntriesWriteResource =
              Capture "logsId" Text :>
                "entries:write" :>
                  QueryParam "$.xgafv" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
                          QueryParam "pp" Bool :>
-                           QueryParam "access_token" Text :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "bearer_token" Text :>
-                                 QueryParam "key" Key :>
-                                   QueryParam "oauth_token" OAuthToken :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "callback" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "upload_protocol" Text :>
+                               QueryParam "quotaUser" Text :>
+                                 QueryParam "prettyPrint" Bool :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "key" Key :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            ReqBody '[JSON]
                                              WriteLogEntriesRequest
@@ -263,19 +263,18 @@ instance GoogleRequest ProjectsLogsEntriesWrite'
              WriteLogEntriesResponse
         request = requestWithRoute defReq loggingURL
         requestWithRoute r u ProjectsLogsEntriesWrite'{..}
-          = go _plewXgafv _plewQuotaUser
-              (Just _plewPrettyPrint)
-              _plewUploadProtocol
-              _plewLogsId
+          = go _plewXgafv _plewAccessToken _plewBearerToken
+              _plewCallback
               (Just _plewPp)
-              _plewAccessToken
               _plewUploadType
-              _plewBearerToken
+              _plewUploadProtocol
+              _plewProjectsId
+              _plewLogsId
+              _plewQuotaUser
+              (Just _plewPrettyPrint)
+              _plewFields
               _plewKey
               _plewOAuthToken
-              _plewProjectsId
-              _plewFields
-              _plewCallback
               (Just AltJSON)
               _plewWriteLogEntriesRequest
           where go

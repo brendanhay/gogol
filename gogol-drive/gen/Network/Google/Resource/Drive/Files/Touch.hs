@@ -51,9 +51,9 @@ type FilesTouchResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Post '[JSON] File
 
 -- | Set the file\'s updated time to the current server time.
@@ -145,11 +145,11 @@ instance GoogleRequest FilesTouch' where
         type Rs FilesTouch' = File
         request = requestWithRoute defReq driveURL
         requestWithRoute r u FilesTouch'{..}
-          = go _ftQuotaUser (Just _ftPrettyPrint) _ftUserIP
-              _ftKey
-              _ftFileId
-              _ftOAuthToken
+          = go _ftFileId _ftQuotaUser (Just _ftPrettyPrint)
+              _ftUserIP
               _ftFields
+              _ftKey
+              _ftOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy FilesTouchResource)

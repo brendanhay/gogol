@@ -52,9 +52,9 @@ type FloodlightActivitiesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] FloodlightActivity :>
                            Post '[JSON] FloodlightActivity
@@ -165,11 +165,12 @@ instance GoogleRequest FloodlightActivitiesInsert'
              FloodlightActivity
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u FloodlightActivitiesInsert'{..}
-          = go _faiQuotaUser (Just _faiPrettyPrint) _faiUserIP
-              _faiProfileId
+          = go _faiProfileId _faiQuotaUser
+              (Just _faiPrettyPrint)
+              _faiUserIP
+              _faiFields
               _faiKey
               _faiOAuthToken
-              _faiFields
               (Just AltJSON)
               _faiFloodlightActivity
           where go

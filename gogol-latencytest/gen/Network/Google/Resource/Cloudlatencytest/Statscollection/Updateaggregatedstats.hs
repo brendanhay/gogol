@@ -49,9 +49,9 @@ type StatscollectionUpdateaggregatedstatsResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] AggregatedStats :>
                        Post '[JSON] AggregatedStatsReply
@@ -152,9 +152,9 @@ instance GoogleRequest
         requestWithRoute r u
           StatscollectionUpdateaggregatedstats'{..}
           = go _suQuotaUser (Just _suPrettyPrint) _suUserIP
+              _suFields
               _suKey
               _suOAuthToken
-              _suFields
               (Just AltJSON)
               _suAggregatedStats
           where go

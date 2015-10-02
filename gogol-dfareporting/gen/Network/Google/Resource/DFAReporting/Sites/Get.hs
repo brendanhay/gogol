@@ -53,9 +53,9 @@ type SitesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Site
 
 -- | Gets one site by ID.
@@ -157,12 +157,12 @@ instance GoogleRequest SitesGet' where
         type Rs SitesGet' = Site
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u SitesGet'{..}
-          = go _sgQuotaUser (Just _sgPrettyPrint) _sgUserIP
-              _sgProfileId
-              _sgKey
-              _sgId
-              _sgOAuthToken
+          = go _sgProfileId _sgId _sgQuotaUser
+              (Just _sgPrettyPrint)
+              _sgUserIP
               _sgFields
+              _sgKey
+              _sgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy SitesGetResource) r

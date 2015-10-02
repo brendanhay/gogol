@@ -53,9 +53,9 @@ type EditsTracksListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] TracksListResponse
 
@@ -164,13 +164,12 @@ instance GoogleRequest EditsTracksList' where
         type Rs EditsTracksList' = TracksListResponse
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u EditsTracksList'{..}
-          = go _etlQuotaUser (Just _etlPrettyPrint)
-              _etlPackageName
+          = go _etlPackageName _etlEditId _etlQuotaUser
+              (Just _etlPrettyPrint)
               _etlUserIP
+              _etlFields
               _etlKey
               _etlOAuthToken
-              _etlEditId
-              _etlFields
               (Just AltJSON)
           where go
                   = clientWithRoute

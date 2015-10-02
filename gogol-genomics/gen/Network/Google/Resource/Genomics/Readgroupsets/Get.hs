@@ -50,9 +50,9 @@ type ReadgroupsetsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] ReadGroupSet
 
 -- | Gets a read group set by ID.
@@ -146,12 +146,12 @@ instance GoogleRequest ReadgroupsetsGet' where
         type Rs ReadgroupsetsGet' = ReadGroupSet
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u ReadgroupsetsGet'{..}
-          = go _rgQuotaUser (Just _rgPrettyPrint)
-              _rgReadGroupSetId
+          = go _rgReadGroupSetId _rgQuotaUser
+              (Just _rgPrettyPrint)
               _rgUserIP
+              _rgFields
               _rgKey
               _rgOAuthToken
-              _rgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -52,13 +52,13 @@ type CalendarListPatchResource =
        "me" :>
          "calendarList" :>
            Capture "calendarId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "colorRgbFormat" Bool :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+             QueryParam "colorRgbFormat" Bool :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] CalendarListEntry :>
                                Patch '[JSON] CalendarListEntry
@@ -184,13 +184,12 @@ instance GoogleRequest CalendarListPatch' where
         type Rs CalendarListPatch' = CalendarListEntry
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u CalendarListPatch'{..}
-          = go _clpQuotaUser _clpCalendarId
+          = go _clpColorRgbFormat _clpCalendarId _clpQuotaUser
               (Just _clpPrettyPrint)
               _clpUserIP
-              _clpColorRgbFormat
+              _clpFields
               _clpKey
               _clpOAuthToken
-              _clpFields
               (Just AltJSON)
               _clpCalendarListEntry
           where go

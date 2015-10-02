@@ -55,9 +55,9 @@ type GroupsRemoveMemberResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] GroupsRemoveMemberRequest :>
                                Post '[JSON] Operation
@@ -176,12 +176,12 @@ instance GoogleRequest GroupsRemoveMember' where
         type Rs GroupsRemoveMember' = Operation
         request = requestWithRoute defReq userAccountsURL
         requestWithRoute r u GroupsRemoveMember'{..}
-          = go _grmQuotaUser (Just _grmPrettyPrint) _grmProject
+          = go _grmProject _grmGroupName _grmQuotaUser
+              (Just _grmPrettyPrint)
               _grmUserIP
-              _grmKey
-              _grmGroupName
-              _grmOAuthToken
               _grmFields
+              _grmKey
+              _grmOAuthToken
               (Just AltJSON)
               _grmGroupsRemoveMemberRequest
           where go

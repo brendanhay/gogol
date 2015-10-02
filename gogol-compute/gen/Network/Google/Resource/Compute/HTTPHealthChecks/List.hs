@@ -52,15 +52,15 @@ type HTTPHealthChecksListResource =
      Capture "project" Text :>
        "global" :>
          "httpHealthChecks" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "filter" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] HTTPHealthCheckList
 
@@ -205,15 +205,15 @@ instance GoogleRequest HTTPHealthChecksList' where
         type Rs HTTPHealthChecksList' = HTTPHealthCheckList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u HTTPHealthChecksList'{..}
-          = go _httphclQuotaUser (Just _httphclPrettyPrint)
-              _httphclProject
-              _httphclUserIP
-              _httphclKey
-              _httphclFilter
+          = go _httphclFilter (Just _httphclMaxResults)
               _httphclPageToken
-              _httphclOAuthToken
-              (Just _httphclMaxResults)
+              _httphclProject
+              _httphclQuotaUser
+              (Just _httphclPrettyPrint)
+              _httphclUserIP
               _httphclFields
+              _httphclKey
+              _httphclOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

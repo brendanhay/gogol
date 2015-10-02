@@ -50,13 +50,13 @@ type TurnBasedMatchesLeaveResource =
      "turnbasedmatches" :>
        Capture "matchId" Text :>
          "leave" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "language" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "language" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Put '[JSON] TurnBasedMatch
 
@@ -165,13 +165,12 @@ instance GoogleRequest TurnBasedMatchesLeave' where
         type Rs TurnBasedMatchesLeave' = TurnBasedMatch
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u TurnBasedMatchesLeave'{..}
-          = go _tbmlbQuotaUser (Just _tbmlbPrettyPrint)
+          = go _tbmlbLanguage _tbmlbMatchId _tbmlbQuotaUser
+              (Just _tbmlbPrettyPrint)
               _tbmlbUserIP
-              _tbmlbKey
-              _tbmlbLanguage
-              _tbmlbOAuthToken
-              _tbmlbMatchId
               _tbmlbFields
+              _tbmlbKey
+              _tbmlbOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -53,14 +53,14 @@ type AdUnitsCustomChannelsListResource =
          "adunits" :>
            Capture "adUnitId" Text :>
              "customchannels" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Int32 :>
-                             QueryParam "fields" Text :>
+               QueryParam "maxResults" Int32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] CustomChannels
 
@@ -194,15 +194,15 @@ instance GoogleRequest AdUnitsCustomChannelsList'
         type Rs AdUnitsCustomChannelsList' = CustomChannels
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u AdUnitsCustomChannelsList'{..}
-          = go _aucclQuotaUser (Just _aucclPrettyPrint)
-              _aucclUserIP
-              _aucclAdUnitId
+          = go _aucclMaxResults _aucclPageToken
               _aucclAdClientId
-              _aucclKey
-              _aucclPageToken
-              _aucclOAuthToken
-              _aucclMaxResults
+              _aucclAdUnitId
+              _aucclQuotaUser
+              (Just _aucclPrettyPrint)
+              _aucclUserIP
               _aucclFields
+              _aucclKey
+              _aucclOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

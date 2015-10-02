@@ -50,9 +50,9 @@ type ReportsGenerateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] ReportRequest :> Post '[JSON] Report
 
@@ -147,9 +147,10 @@ instance GoogleRequest ReportsGenerate' where
         request
           = requestWithRoute defReq doubleClickSearchURL
         requestWithRoute r u ReportsGenerate'{..}
-          = go _rQuotaUser (Just _rPrettyPrint) _rUserIP _rKey
-              _rOAuthToken
+          = go _rQuotaUser (Just _rPrettyPrint) _rUserIP
               _rFields
+              _rKey
+              _rOAuthToken
               (Just AltJSON)
               _rReportRequest
           where go

@@ -50,9 +50,9 @@ type ReportsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Report
 
 -- | Polls for the status of a report request.
@@ -146,11 +146,11 @@ instance GoogleRequest ReportsGet' where
         request
           = requestWithRoute defReq doubleClickSearchURL
         requestWithRoute r u ReportsGet'{..}
-          = go _rgQuotaUser (Just _rgPrettyPrint) _rgUserIP
-              _rgReportId
+          = go _rgReportId _rgQuotaUser (Just _rgPrettyPrint)
+              _rgUserIP
+              _rgFields
               _rgKey
               _rgOAuthToken
-              _rgFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy ReportsGetResource)

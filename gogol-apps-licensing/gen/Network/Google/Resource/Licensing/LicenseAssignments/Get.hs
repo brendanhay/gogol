@@ -55,9 +55,9 @@ type LicenseAssignmentsGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] LicenseAssignment
 
@@ -173,13 +173,12 @@ instance GoogleRequest LicenseAssignmentsGet' where
         type Rs LicenseAssignmentsGet' = LicenseAssignment
         request = requestWithRoute defReq appsLicensingURL
         requestWithRoute r u LicenseAssignmentsGet'{..}
-          = go _lagQuotaUser (Just _lagPrettyPrint) _lagUserIP
-              _lagSkuId
-              _lagUserId
+          = go _lagProductId _lagSkuId _lagUserId _lagQuotaUser
+              (Just _lagPrettyPrint)
+              _lagUserIP
+              _lagFields
               _lagKey
               _lagOAuthToken
-              _lagProductId
-              _lagFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -56,9 +56,9 @@ type AccountsContainersTriggersGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Trigger
 
 -- | Gets a GTM Trigger.
@@ -181,14 +181,13 @@ instance GoogleRequest AccountsContainersTriggersGet'
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersTriggersGet'{..}
-          = go _actgQuotaUser (Just _actgPrettyPrint)
-              _actgContainerId
-              _actgTriggerId
+          = go _actgAccountId _actgContainerId _actgTriggerId
+              _actgQuotaUser
+              (Just _actgPrettyPrint)
               _actgUserIP
-              _actgAccountId
+              _actgFields
               _actgKey
               _actgOAuthToken
-              _actgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

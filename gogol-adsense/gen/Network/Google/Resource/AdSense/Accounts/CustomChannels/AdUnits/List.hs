@@ -57,15 +57,15 @@ type AccountsCustomChannelsAdUnitsListResource =
              "customchannels" :>
                Capture "customChannelId" Text :>
                  "adunits" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "includeInactive" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "maxResults" Int32 :>
-                                   QueryParam "fields" Text :>
+                   QueryParam "includeInactive" Bool :>
+                     QueryParam "maxResults" Int32 :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] AdUnits
 
@@ -223,17 +223,17 @@ instance GoogleRequest
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u
           AccountsCustomChannelsAdUnitsList'{..}
-          = go _accaulQuotaUser (Just _accaulPrettyPrint)
-              _accaulIncludeInactive
-              _accaulCustomChannelId
-              _accaulUserIP
-              _accaulAdClientId
-              _accaulAccountId
-              _accaulKey
+          = go _accaulIncludeInactive _accaulMaxResults
               _accaulPageToken
-              _accaulOAuthToken
-              _accaulMaxResults
+              _accaulAccountId
+              _accaulAdClientId
+              _accaulCustomChannelId
+              _accaulQuotaUser
+              (Just _accaulPrettyPrint)
+              _accaulUserIP
               _accaulFields
+              _accaulKey
+              _accaulOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

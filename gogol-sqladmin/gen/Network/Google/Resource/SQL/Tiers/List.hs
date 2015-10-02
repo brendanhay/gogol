@@ -52,9 +52,9 @@ type TiersListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] TiersListResponse
 
@@ -149,11 +149,11 @@ instance GoogleRequest TiersList' where
         type Rs TiersList' = TiersListResponse
         request = requestWithRoute defReq sQLAdminURL
         requestWithRoute r u TiersList'{..}
-          = go _tlQuotaUser (Just _tlPrettyPrint) _tlProject
+          = go _tlProject _tlQuotaUser (Just _tlPrettyPrint)
               _tlUserIP
+              _tlFields
               _tlKey
               _tlOAuthToken
-              _tlFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TiersListResource)

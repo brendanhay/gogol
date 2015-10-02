@@ -53,9 +53,9 @@ type LinksInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Link :> Post '[JSON] Link
 
@@ -167,12 +167,12 @@ instance GoogleRequest LinksInsert' where
         type Rs LinksInsert' = Link
         request = requestWithRoute defReq affiliatesURL
         requestWithRoute r u LinksInsert'{..}
-          = go _liQuotaUser (Just _liPrettyPrint) _liUserIP
-              _liRoleId
-              _liRole
+          = go _liRole _liRoleId _liQuotaUser
+              (Just _liPrettyPrint)
+              _liUserIP
+              _liFields
               _liKey
               _liOAuthToken
-              _liFields
               (Just AltJSON)
               _liLink
           where go

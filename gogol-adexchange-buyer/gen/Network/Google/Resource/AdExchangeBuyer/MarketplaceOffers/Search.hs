@@ -47,13 +47,13 @@ import           Network.Google.Prelude
 type MarketplaceOffersSearchResource =
      "marketplaceOffers" :>
        "search" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "pqlQuery" Text :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+         QueryParam "pqlQuery" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] GetOffersResponse
 
@@ -149,11 +149,12 @@ instance GoogleRequest MarketplaceOffersSearch' where
         type Rs MarketplaceOffersSearch' = GetOffersResponse
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u MarketplaceOffersSearch'{..}
-          = go _mosQuotaUser (Just _mosPrettyPrint) _mosUserIP
-              _mosKey
-              _mosPqlQuery
-              _mosOAuthToken
+          = go _mosPqlQuery _mosQuotaUser
+              (Just _mosPrettyPrint)
+              _mosUserIP
               _mosFields
+              _mosKey
+              _mosOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

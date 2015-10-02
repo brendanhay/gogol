@@ -51,13 +51,13 @@ type StatesClearResource =
      "states" :>
        Capture "stateKey" Int32 :>
          "clear" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "currentDataVersion" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "currentDataVersion" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Post '[JSON] WriteResult
 
 -- | Clears (sets to empty) the data for the passed key if and only if the
@@ -163,12 +163,12 @@ instance GoogleRequest StatesClear' where
         type Rs StatesClear' = WriteResult
         request = requestWithRoute defReq appStateURL
         requestWithRoute r u StatesClear'{..}
-          = go _scQuotaUser (Just _scPrettyPrint) _scUserIP
-              _scStateKey
-              _scCurrentDataVersion
+          = go _scCurrentDataVersion _scStateKey _scQuotaUser
+              (Just _scPrettyPrint)
+              _scUserIP
+              _scFields
               _scKey
               _scOAuthToken
-              _scFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -51,9 +51,9 @@ type OrdersCreatetestOrderResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] OrdersCreateTestOrderRequest :>
                          Post '[JSON] OrdersCreateTestOrderResponse
@@ -164,12 +164,12 @@ instance GoogleRequest OrdersCreatetestOrder' where
              OrdersCreateTestOrderResponse
         request = requestWithRoute defReq shoppingContentURL
         requestWithRoute r u OrdersCreatetestOrder'{..}
-          = go _ocoQuotaUser _ocoMerchantId
+          = go _ocoMerchantId _ocoQuotaUser
               (Just _ocoPrettyPrint)
               _ocoUserIP
+              _ocoFields
               _ocoKey
               _ocoOAuthToken
-              _ocoFields
               (Just AltJSON)
               _ocoOrdersCreateTestOrderRequest
           where go

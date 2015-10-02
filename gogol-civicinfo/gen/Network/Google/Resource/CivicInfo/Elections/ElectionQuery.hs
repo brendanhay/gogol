@@ -48,9 +48,9 @@ type ElectionsElectionQueryResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] ElectionsQueryResponse
 
@@ -139,9 +139,9 @@ instance GoogleRequest ElectionsElectionQuery' where
         request = requestWithRoute defReq civicInfoURL
         requestWithRoute r u ElectionsElectionQuery'{..}
           = go _eeqQuotaUser (Just _eeqPrettyPrint) _eeqUserIP
+              _eeqFields
               _eeqKey
               _eeqOAuthToken
-              _eeqFields
               (Just AltJSON)
           where go
                   = clientWithRoute

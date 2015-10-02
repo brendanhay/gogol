@@ -52,19 +52,19 @@ import           Network.Google.Prelude
 -- 'TimelineList'' request conforms to.
 type TimelineListResource =
      "timeline" :>
-       QueryParam "pinnedOnly" Bool :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
+       QueryParam "bundleId" Text :>
+         QueryParam "includeDeleted" Bool :>
+           QueryParam "maxResults" Word32 :>
              QueryParam "orderBy" MirrorTimelineListOrderBy :>
-               QueryParam "userIp" Text :>
-                 QueryParam "bundleId" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "sourceItemId" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "includeDeleted" Bool :>
-                               QueryParam "fields" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "pinnedOnly" Bool :>
+                   QueryParam "sourceItemId" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] TimelineListResponse
 
@@ -213,17 +213,17 @@ instance GoogleRequest TimelineList' where
         type Rs TimelineList' = TimelineListResponse
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u TimelineList'{..}
-          = go _tlPinnedOnly _tlQuotaUser (Just _tlPrettyPrint)
+          = go _tlBundleId _tlIncludeDeleted _tlMaxResults
               _tlOrderBy
-              _tlUserIP
-              _tlBundleId
-              _tlKey
-              _tlSourceItemId
               _tlPageToken
-              _tlOAuthToken
-              _tlMaxResults
-              _tlIncludeDeleted
+              _tlPinnedOnly
+              _tlSourceItemId
+              _tlQuotaUser
+              (Just _tlPrettyPrint)
+              _tlUserIP
               _tlFields
+              _tlKey
+              _tlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

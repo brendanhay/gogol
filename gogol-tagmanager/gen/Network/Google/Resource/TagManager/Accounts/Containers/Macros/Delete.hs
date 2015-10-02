@@ -56,9 +56,9 @@ type AccountsContainersMacrosDeleteResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a GTM Macro.
@@ -180,14 +180,13 @@ instance GoogleRequest
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersMacrosDelete'{..}
-          = go _acmdQuotaUser (Just _acmdPrettyPrint)
-              _acmdContainerId
+          = go _acmdAccountId _acmdContainerId _acmdMacroId
+              _acmdQuotaUser
+              (Just _acmdPrettyPrint)
               _acmdUserIP
-              _acmdAccountId
-              _acmdKey
-              _acmdMacroId
-              _acmdOAuthToken
               _acmdFields
+              _acmdKey
+              _acmdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

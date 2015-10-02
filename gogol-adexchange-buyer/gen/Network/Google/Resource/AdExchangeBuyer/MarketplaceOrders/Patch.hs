@@ -57,9 +57,9 @@ type MarketplaceOrdersPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] MarketplaceOrder :>
                              Patch '[JSON] MarketplaceOrder
@@ -193,14 +193,13 @@ instance GoogleRequest MarketplaceOrdersPatch' where
         type Rs MarketplaceOrdersPatch' = MarketplaceOrder
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u MarketplaceOrdersPatch'{..}
-          = go _mopQuotaUser _mopUpdateAction
+          = go _mopOrderId _mopRevisionNumber _mopUpdateAction
+              _mopQuotaUser
               (Just _mopPrettyPrint)
               _mopUserIP
-              _mopRevisionNumber
+              _mopFields
               _mopKey
               _mopOAuthToken
-              _mopOrderId
-              _mopFields
               (Just AltJSON)
               _mopMarketplaceOrder
           where go

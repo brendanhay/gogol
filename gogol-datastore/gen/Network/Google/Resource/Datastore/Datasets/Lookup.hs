@@ -51,9 +51,9 @@ type DatasetsLookupResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltPROTO :>
                        ReqBody '[JSON] LookupRequest :>
                          Post '[JSON] LookupResponse
@@ -159,11 +159,11 @@ instance GoogleRequest DatasetsLookup' where
         type Rs DatasetsLookup' = LookupResponse
         request = requestWithRoute defReq datastoreURL
         requestWithRoute r u DatasetsLookup'{..}
-          = go _dlQuotaUser (Just _dlPrettyPrint) _dlUserIP
-              _dlKey
-              _dlDatasetId
-              _dlOAuthToken
+          = go _dlDatasetId _dlQuotaUser (Just _dlPrettyPrint)
+              _dlUserIP
               _dlFields
+              _dlKey
+              _dlOAuthToken
               (Just AltPROTO)
               _dlLookupRequest
           where go

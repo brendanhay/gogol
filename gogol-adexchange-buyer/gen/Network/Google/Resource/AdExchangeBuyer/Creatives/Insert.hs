@@ -49,9 +49,9 @@ type CreativesInsertResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] Creative :> Post '[JSON] Creative
 
@@ -146,9 +146,9 @@ instance GoogleRequest CreativesInsert' where
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u CreativesInsert'{..}
           = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIP
+              _ciFields
               _ciKey
               _ciOAuthToken
-              _ciFields
               (Just AltJSON)
               _ciCreative
           where go

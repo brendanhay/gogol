@@ -53,9 +53,9 @@ type UsersThreadsUntrashResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Post '[JSON] Thread
 
 -- | Removes the specified thread from the trash.
@@ -161,12 +161,12 @@ instance GoogleRequest UsersThreadsUntrash' where
         type Rs UsersThreadsUntrash' = Thread
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersThreadsUntrash'{..}
-          = go _utuQuotaUser (Just _utuPrettyPrint) _utuUserIP
-              _utuUserId
-              _utuKey
-              _utuId
-              _utuOAuthToken
+          = go _utuUserId _utuId _utuQuotaUser
+              (Just _utuPrettyPrint)
+              _utuUserIP
               _utuFields
+              _utuKey
+              _utuOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

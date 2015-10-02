@@ -50,9 +50,9 @@ type TimelineInsertResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      MultipartRelated '[JSON] TimelineItem Body :>
                        Post '[JSON] TimelineItem
@@ -156,11 +156,11 @@ instance GoogleRequest TimelineInsert' where
         type Rs TimelineInsert' = TimelineItem
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u TimelineInsert'{..}
-          = go _tiQuotaUser (Just _tiPrettyPrint) _tiUserIP
-              _tiMedia
+          = go _tiMedia _tiQuotaUser (Just _tiPrettyPrint)
+              _tiUserIP
+              _tiFields
               _tiKey
               _tiOAuthToken
-              _tiFields
               (Just AltJSON)
               _tiTimelineItem
           where go

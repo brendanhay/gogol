@@ -56,17 +56,17 @@ type BillingAccountsGetResource =
      "v1" :>
        "{+name}" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] BillingAccount
 
@@ -220,17 +220,17 @@ instance GoogleRequest BillingAccountsGet' where
         type Rs BillingAccountsGet' = BillingAccount
         request = requestWithRoute defReq billingURL
         requestWithRoute r u BillingAccountsGet'{..}
-          = go _bagXgafv _bagQuotaUser (Just _bagPrettyPrint)
-              _bagUploadProtocol
-              (Just _bagPp)
-              _bagAccessToken
-              _bagUploadType
-              _bagBearerToken
-              _bagKey
-              _bagName
-              _bagOAuthToken
-              _bagFields
+          = go _bagXgafv _bagAccessToken _bagBearerToken
               _bagCallback
+              (Just _bagPp)
+              _bagUploadType
+              _bagUploadProtocol
+              _bagName
+              _bagQuotaUser
+              (Just _bagPrettyPrint)
+              _bagFields
+              _bagKey
+              _bagOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

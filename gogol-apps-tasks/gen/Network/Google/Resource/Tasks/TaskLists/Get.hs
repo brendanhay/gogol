@@ -52,9 +52,9 @@ type TaskListsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] TaskList
 
 -- | Returns the authenticated user\'s specified task list.
@@ -150,11 +150,12 @@ instance GoogleRequest TaskListsGet' where
         type Rs TaskListsGet' = TaskList
         request = requestWithRoute defReq appsTasksURL
         requestWithRoute r u TaskListsGet'{..}
-          = go _tlgQuotaUser (Just _tlgPrettyPrint) _tlgUserIP
-              _tlgKey
-              _tlgTaskList
-              _tlgOAuthToken
+          = go _tlgTaskList _tlgQuotaUser
+              (Just _tlgPrettyPrint)
+              _tlgUserIP
               _tlgFields
+              _tlgKey
+              _tlgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

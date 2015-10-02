@@ -54,14 +54,14 @@ type ManagementProfilesListResource =
            "webproperties" :>
              Capture "webPropertyId" Text :>
                "profiles" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "start-index" Int32 :>
-                             QueryParam "max-results" Int32 :>
-                               QueryParam "fields" Text :>
+                 QueryParam "max-results" Int32 :>
+                   QueryParam "start-index" Int32 :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] Profiles
 
@@ -194,15 +194,14 @@ instance GoogleRequest ManagementProfilesList' where
         type Rs ManagementProfilesList' = Profiles
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementProfilesList'{..}
-          = go _mplQuotaUser (Just _mplPrettyPrint)
+          = go _mplMaxResults _mplStartIndex _mplAccountId
               _mplWebPropertyId
+              _mplQuotaUser
+              (Just _mplPrettyPrint)
               _mplUserIP
-              _mplAccountId
+              _mplFields
               _mplKey
               _mplOAuthToken
-              _mplStartIndex
-              _mplMaxResults
-              _mplFields
               (Just AltJSON)
           where go
                   = clientWithRoute

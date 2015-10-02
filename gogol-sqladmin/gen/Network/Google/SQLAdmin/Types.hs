@@ -19,7 +19,7 @@ module Network.Google.SQLAdmin.Types
 
     -- * SSLCert
     , SSLCert
-    , sSLCert
+    , sslCert
     , scCommonName
     , scKind
     , scCertSerialNumber
@@ -82,7 +82,7 @@ module Network.Google.SQLAdmin.Types
 
     -- * SSLCertsCreateEphemeralRequest
     , SSLCertsCreateEphemeralRequest
-    , sSLCertsCreateEphemeralRequest
+    , sslCertsCreateEphemeralRequest
     , sccerPublicKey
 
     -- * Database
@@ -99,7 +99,7 @@ module Network.Google.SQLAdmin.Types
 
     -- * IPMapping
     , IPMapping
-    , iPMapping
+    , ipMapping
     , imIPAddress
     , imTimeToRetire
 
@@ -160,13 +160,13 @@ module Network.Google.SQLAdmin.Types
 
     -- * SSLCertsListResponse
     , SSLCertsListResponse
-    , sSLCertsListResponse
+    , sslCertsListResponse
     , sclrKind
     , sclrItems
 
     -- * IPConfiguration
     , IPConfiguration
-    , iPConfiguration
+    , ipConfiguration
     , icAuthorizedNetworks
     , icRequireSSL
     , icIPv4Enabled
@@ -178,7 +178,7 @@ module Network.Google.SQLAdmin.Types
 
     -- * SSLCertsInsertRequest
     , SSLCertsInsertRequest
-    , sSLCertsInsertRequest
+    , sslCertsInsertRequest
     , scirCommonName
 
     -- * User
@@ -256,7 +256,7 @@ module Network.Google.SQLAdmin.Types
 
     -- * ACLEntry
     , ACLEntry
-    , aCLEntry
+    , aclEntry
     , aeKind
     , aeValue
     , aeName
@@ -306,7 +306,7 @@ module Network.Google.SQLAdmin.Types
 
     -- * SSLCertDetail
     , SSLCertDetail
-    , sSLCertDetail
+    , sslCertDetail
     , scdCertInfo
     , scdCertPrivateKey
 
@@ -330,7 +330,7 @@ module Network.Google.SQLAdmin.Types
 
     -- * SSLCertsInsertResponse
     , SSLCertsInsertResponse
-    , sSLCertsInsertResponse
+    , sslCertsInsertResponse
     , scirServerCaCert
     , scirKind
     , scirClientCert

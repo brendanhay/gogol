@@ -52,9 +52,9 @@ type MetricDescriptorsDeleteResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Delete '[JSON] DeleteMetricDescriptorResponse
 
@@ -162,12 +162,12 @@ instance GoogleRequest MetricDescriptorsDelete' where
              DeleteMetricDescriptorResponse
         request = requestWithRoute defReq monitoringURL
         requestWithRoute r u MetricDescriptorsDelete'{..}
-          = go _mddQuotaUser (Just _mddPrettyPrint) _mddProject
+          = go _mddProject _mddMetric _mddQuotaUser
+              (Just _mddPrettyPrint)
               _mddUserIP
-              _mddMetric
+              _mddFields
               _mddKey
               _mddOAuthToken
-              _mddFields
               (Just AltJSON)
           where go
                   = clientWithRoute

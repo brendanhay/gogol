@@ -54,9 +54,9 @@ type ManagementFiltersDeleteResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] Filter
 
 -- | Delete a filter.
@@ -162,13 +162,12 @@ instance GoogleRequest ManagementFiltersDelete' where
         type Rs ManagementFiltersDelete' = Filter
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementFiltersDelete'{..}
-          = go _mfdQuotaUser (Just _mfdPrettyPrint)
-              _mfdFilterId
+          = go _mfdAccountId _mfdFilterId _mfdQuotaUser
+              (Just _mfdPrettyPrint)
               _mfdUserIP
-              _mfdAccountId
+              _mfdFields
               _mfdKey
               _mfdOAuthToken
-              _mfdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

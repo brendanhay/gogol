@@ -53,9 +53,9 @@ type TargetHTTPProxiesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] TargetHTTPProxy
 
@@ -168,13 +168,13 @@ instance GoogleRequest TargetHTTPProxiesGet' where
         type Rs TargetHTTPProxiesGet' = TargetHTTPProxy
         request = requestWithRoute defReq computeURL
         requestWithRoute r u TargetHTTPProxiesGet'{..}
-          = go _thttppgQuotaUser (Just _thttppgPrettyPrint)
-              _thttppgProject
+          = go _thttppgProject _thttppgTargetHTTPProxy
+              _thttppgQuotaUser
+              (Just _thttppgPrettyPrint)
               _thttppgUserIP
-              _thttppgKey
-              _thttppgTargetHTTPProxy
-              _thttppgOAuthToken
               _thttppgFields
+              _thttppgKey
+              _thttppgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -51,9 +51,9 @@ type EventsResetAllResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Resets all player progress on all events for the currently authenticated
@@ -142,9 +142,9 @@ instance GoogleRequest EventsResetAll' where
         request = requestWithRoute defReq gamesManagementURL
         requestWithRoute r u EventsResetAll'{..}
           = go _eraQuotaUser (Just _eraPrettyPrint) _eraUserIP
+              _eraFields
               _eraKey
               _eraOAuthToken
-              _eraFields
               (Just AltJSON)
           where go
                   = clientWithRoute

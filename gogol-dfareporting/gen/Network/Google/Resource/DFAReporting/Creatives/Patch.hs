@@ -50,13 +50,13 @@ type CreativesPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "creatives" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "id" Int64 :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Creative :> Patch '[JSON] Creative
 
@@ -172,12 +172,12 @@ instance GoogleRequest CreativesPatch' where
         type Rs CreativesPatch' = Creative
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativesPatch'{..}
-          = go _cppQuotaUser (Just _cppPrettyPrint) _cppUserIP
-              _cppProfileId
-              _cppKey
-              (Just _cppId)
-              _cppOAuthToken
+          = go _cppProfileId (Just _cppId) _cppQuotaUser
+              (Just _cppPrettyPrint)
+              _cppUserIP
               _cppFields
+              _cppKey
+              _cppOAuthToken
               (Just AltJSON)
               _cppCreative
           where go

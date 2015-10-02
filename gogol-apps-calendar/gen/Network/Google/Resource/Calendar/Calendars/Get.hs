@@ -50,9 +50,9 @@ type CalendarsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Calendar
 
 -- | Returns metadata for a calendar.
@@ -146,11 +146,11 @@ instance GoogleRequest CalendarsGet' where
         type Rs CalendarsGet' = Calendar
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u CalendarsGet'{..}
-          = go _cQuotaUser _cCalendarId (Just _cPrettyPrint)
+          = go _cCalendarId _cQuotaUser (Just _cPrettyPrint)
               _cUserIP
+              _cFields
               _cKey
               _cOAuthToken
-              _cFields
               (Just AltJSON)
           where go
                   = clientWithRoute

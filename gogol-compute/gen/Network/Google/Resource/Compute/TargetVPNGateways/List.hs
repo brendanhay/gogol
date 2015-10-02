@@ -54,15 +54,15 @@ type TargetVPNGatewaysListResource =
        "regions" :>
          Capture "region" Text :>
            "targetVpnGateways" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "filter" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
+             QueryParam "filter" Text :>
+               QueryParam "maxResults" Word32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] TargetVPNGatewayList
 
@@ -212,16 +212,16 @@ instance GoogleRequest TargetVPNGatewaysList' where
         type Rs TargetVPNGatewaysList' = TargetVPNGatewayList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u TargetVPNGatewaysList'{..}
-          = go _tvglQuotaUser (Just _tvglPrettyPrint)
-              _tvglProject
-              _tvglUserIP
-              _tvglKey
-              _tvglFilter
-              _tvglRegion
+          = go _tvglFilter (Just _tvglMaxResults)
               _tvglPageToken
-              _tvglOAuthToken
-              (Just _tvglMaxResults)
+              _tvglProject
+              _tvglRegion
+              _tvglQuotaUser
+              (Just _tvglPrettyPrint)
+              _tvglUserIP
               _tvglFields
+              _tvglKey
+              _tvglOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

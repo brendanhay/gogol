@@ -50,9 +50,9 @@ type UsersGetProfileResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Profile
 
 -- | Gets the current user\'s Gmail profile.
@@ -149,11 +149,11 @@ instance GoogleRequest UsersGetProfile' where
         type Rs UsersGetProfile' = Profile
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersGetProfile'{..}
-          = go _ugpQuotaUser (Just _ugpPrettyPrint) _ugpUserIP
-              _ugpUserId
+          = go _ugpUserId _ugpQuotaUser (Just _ugpPrettyPrint)
+              _ugpUserIP
+              _ugpFields
               _ugpKey
               _ugpOAuthToken
-              _ugpFields
               (Just AltJSON)
           where go
                   = clientWithRoute

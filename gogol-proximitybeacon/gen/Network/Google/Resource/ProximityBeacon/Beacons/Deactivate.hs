@@ -58,17 +58,17 @@ type BeaconsDeactivateResource =
      "v1beta1" :>
        "{+beaconName}:deactivate" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :> Post '[JSON] Empty
 
 -- | Deactivates a beacon. Once deactivated, the API will not return
@@ -224,17 +224,17 @@ instance GoogleRequest BeaconsDeactivate' where
         type Rs BeaconsDeactivate' = Empty
         request = requestWithRoute defReq proximityBeaconURL
         requestWithRoute r u BeaconsDeactivate'{..}
-          = go _beaXgafv _beaQuotaUser (Just _beaPrettyPrint)
-              _beaUploadProtocol
+          = go _beaXgafv _beaAccessToken _beaBearerToken
+              _beaCallback
               (Just _beaPp)
-              _beaAccessToken
-              _beaBeaconName
               _beaUploadType
-              _beaBearerToken
+              _beaUploadProtocol
+              _beaBeaconName
+              _beaQuotaUser
+              (Just _beaPrettyPrint)
+              _beaFields
               _beaKey
               _beaOAuthToken
-              _beaFields
-              _beaCallback
               (Just AltJSON)
           where go
                   = clientWithRoute

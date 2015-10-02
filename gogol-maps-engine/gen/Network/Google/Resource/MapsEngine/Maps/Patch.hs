@@ -51,9 +51,9 @@ type MapsPatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Map :> Patch '[JSON] ()
 
@@ -155,11 +155,11 @@ instance GoogleRequest MapsPatch' where
         type Rs MapsPatch' = ()
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u MapsPatch'{..}
-          = go _mpQuotaUser (Just _mpPrettyPrint) _mpUserIP
-              _mpKey
-              _mpId
-              _mpOAuthToken
+          = go _mpId _mpQuotaUser (Just _mpPrettyPrint)
+              _mpUserIP
               _mpFields
+              _mpKey
+              _mpOAuthToken
               (Just AltJSON)
               _mpMap
           where go

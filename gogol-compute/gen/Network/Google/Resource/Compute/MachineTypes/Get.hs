@@ -55,9 +55,9 @@ type MachineTypesGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] MachineType
 
 -- | Returns the specified machine type resource.
@@ -173,13 +173,13 @@ instance GoogleRequest MachineTypesGet' where
         type Rs MachineTypesGet' = MachineType
         request = requestWithRoute defReq computeURL
         requestWithRoute r u MachineTypesGet'{..}
-          = go _mtgQuotaUser (Just _mtgPrettyPrint) _mtgProject
+          = go _mtgProject _mtgZone _mtgMachineType
+              _mtgQuotaUser
+              (Just _mtgPrettyPrint)
               _mtgUserIP
-              _mtgZone
-              _mtgKey
-              _mtgMachineType
-              _mtgOAuthToken
               _mtgFields
+              _mtgKey
+              _mtgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

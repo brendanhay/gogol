@@ -62,17 +62,17 @@ type BeaconsAttachmentsCreateResource =
        "{+beaconName}" :>
          "attachments" :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
+             QueryParam "access_token" Text :>
+               QueryParam "bearer_token" Text :>
+                 QueryParam "callback" Text :>
                    QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] BeaconAttachment :>
                                        Post '[JSON] BeaconAttachment
@@ -244,17 +244,17 @@ instance GoogleRequest BeaconsAttachmentsCreate'
         type Rs BeaconsAttachmentsCreate' = BeaconAttachment
         request = requestWithRoute defReq proximityBeaconURL
         requestWithRoute r u BeaconsAttachmentsCreate'{..}
-          = go _bacXgafv _bacQuotaUser (Just _bacPrettyPrint)
-              _bacUploadProtocol
+          = go _bacXgafv _bacAccessToken _bacBearerToken
+              _bacCallback
               (Just _bacPp)
-              _bacAccessToken
-              _bacBeaconName
               _bacUploadType
-              _bacBearerToken
+              _bacUploadProtocol
+              _bacBeaconName
+              _bacQuotaUser
+              (Just _bacPrettyPrint)
+              _bacFields
               _bacKey
               _bacOAuthToken
-              _bacFields
-              _bacCallback
               (Just AltJSON)
               _bacBeaconAttachment
           where go

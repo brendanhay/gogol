@@ -53,9 +53,9 @@ type InstancesDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes a Cloud SQL instance.
@@ -158,12 +158,12 @@ instance GoogleRequest InstancesDelete' where
         type Rs InstancesDelete' = Operation
         request = requestWithRoute defReq sQLAdminURL
         requestWithRoute r u InstancesDelete'{..}
-          = go _idQuotaUser (Just _idPrettyPrint) _idProject
+          = go _idProject _idInstance _idQuotaUser
+              (Just _idPrettyPrint)
               _idUserIP
+              _idFields
               _idKey
               _idOAuthToken
-              _idFields
-              _idInstance
               (Just AltJSON)
           where go
                   = clientWithRoute

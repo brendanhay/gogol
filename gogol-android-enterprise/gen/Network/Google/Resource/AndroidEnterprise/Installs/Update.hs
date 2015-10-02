@@ -62,9 +62,9 @@ type InstallsUpdateResource =
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] Install :>
                                      Put '[JSON] Install
@@ -203,15 +203,14 @@ instance GoogleRequest InstallsUpdate' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u InstallsUpdate'{..}
-          = go _iuQuotaUser (Just _iuPrettyPrint)
-              _iuEnterpriseId
-              _iuUserIP
-              _iuUserId
+          = go _iuEnterpriseId _iuUserId _iuDeviceId
               _iuInstallId
-              _iuKey
-              _iuDeviceId
-              _iuOAuthToken
+              _iuQuotaUser
+              (Just _iuPrettyPrint)
+              _iuUserIP
               _iuFields
+              _iuKey
+              _iuOAuthToken
               (Just AltJSON)
               _iuInstall
           where go

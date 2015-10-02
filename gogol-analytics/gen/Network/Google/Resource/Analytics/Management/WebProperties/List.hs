@@ -51,14 +51,14 @@ type ManagementWebPropertiesListResource =
        "accounts" :>
          Capture "accountId" Text :>
            "webproperties" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "start-index" Int32 :>
-                         QueryParam "max-results" Int32 :>
-                           QueryParam "fields" Text :>
+             QueryParam "max-results" Int32 :>
+               QueryParam "start-index" Int32 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] WebProperties
 
@@ -182,14 +182,13 @@ instance GoogleRequest ManagementWebPropertiesList'
         type Rs ManagementWebPropertiesList' = WebProperties
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementWebPropertiesList'{..}
-          = go _mwplQuotaUser (Just _mwplPrettyPrint)
+          = go _mwplMaxResults _mwplStartIndex _mwplAccountId
+              _mwplQuotaUser
+              (Just _mwplPrettyPrint)
               _mwplUserIP
-              _mwplAccountId
+              _mwplFields
               _mwplKey
               _mwplOAuthToken
-              _mwplStartIndex
-              _mwplMaxResults
-              _mwplFields
               (Just AltJSON)
           where go
                   = clientWithRoute

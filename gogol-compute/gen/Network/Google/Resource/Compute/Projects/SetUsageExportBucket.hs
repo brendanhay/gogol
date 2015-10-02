@@ -53,9 +53,9 @@ type ProjectsSetUsageExportBucketResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] UsageExportLocation :>
                          Post '[JSON] Operation
@@ -170,12 +170,12 @@ instance GoogleRequest ProjectsSetUsageExportBucket'
         request = requestWithRoute defReq computeURL
         requestWithRoute r u
           ProjectsSetUsageExportBucket'{..}
-          = go _psuebQuotaUser (Just _psuebPrettyPrint)
-              _psuebProject
+          = go _psuebProject _psuebQuotaUser
+              (Just _psuebPrettyPrint)
               _psuebUserIP
+              _psuebFields
               _psuebKey
               _psuebOAuthToken
-              _psuebFields
               (Just AltJSON)
               _psuebUsageExportLocation
           where go

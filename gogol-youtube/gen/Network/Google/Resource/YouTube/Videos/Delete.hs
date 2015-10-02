@@ -47,14 +47,14 @@ import           Network.Google.YouTube.Types
 -- 'VideosDelete'' request conforms to.
 type VideosDeleteResource =
      "videos" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "onBehalfOfContentOwner" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "id" Text :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+       QueryParam "onBehalfOfContentOwner" Text :>
+         QueryParam "id" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a YouTube video.
@@ -167,12 +167,13 @@ instance GoogleRequest VideosDelete' where
         type Rs VideosDelete' = ()
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u VideosDelete'{..}
-          = go _vdQuotaUser (Just _vdPrettyPrint) _vdUserIP
-              _vdOnBehalfOfContentOwner
-              _vdKey
-              (Just _vdId)
-              _vdOAuthToken
+          = go _vdOnBehalfOfContentOwner (Just _vdId)
+              _vdQuotaUser
+              (Just _vdPrettyPrint)
+              _vdUserIP
               _vdFields
+              _vdKey
+              _vdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -56,9 +56,9 @@ type InstancesExportResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] InstancesExportRequest :>
                                Post '[JSON] Operation
@@ -175,12 +175,12 @@ instance GoogleRequest InstancesExport' where
         type Rs InstancesExport' = Operation
         request = requestWithRoute defReq sQLAdminURL
         requestWithRoute r u InstancesExport'{..}
-          = go _ieQuotaUser (Just _iePrettyPrint) _ieProject
+          = go _ieProject _ieInstance _ieQuotaUser
+              (Just _iePrettyPrint)
               _ieUserIP
+              _ieFields
               _ieKey
               _ieOAuthToken
-              _ieFields
-              _ieInstance
               (Just AltJSON)
               _ieInstancesExportRequest
           where go

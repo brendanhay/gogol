@@ -48,13 +48,13 @@ import           Network.Google.YouTube.Types
 type CommentsMarkAsSpamResource =
      "comments" :>
        "markAsSpam" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "id" Text :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+         QueryParam "id" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Expresses the caller\'s opinion that one or more comments should be
@@ -152,12 +152,12 @@ instance GoogleRequest CommentsMarkAsSpam' where
         type Rs CommentsMarkAsSpam' = ()
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u CommentsMarkAsSpam'{..}
-          = go _cmasQuotaUser (Just _cmasPrettyPrint)
+          = go (Just _cmasId) _cmasQuotaUser
+              (Just _cmasPrettyPrint)
               _cmasUserIP
-              _cmasKey
-              (Just _cmasId)
-              _cmasOAuthToken
               _cmasFields
+              _cmasKey
+              _cmasOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

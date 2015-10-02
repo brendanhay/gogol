@@ -677,7 +677,7 @@ module Network.Google.Compute
 
     -- ** VPNTunnelsScopedList
     , VPNTunnelsScopedList
-    , vPNTunnelsScopedList
+    , vpnTunnelsScopedList
     , vtslVPNTunnels
     , vtslWarning
 
@@ -723,7 +723,7 @@ module Network.Google.Compute
 
     -- ** URLMap
     , URLMap
-    , uRLMap
+    , urlMap
     , umTests
     , umKind
     , umFingerprint
@@ -952,7 +952,7 @@ module Network.Google.Compute
 
     -- ** VPNTunnelsScopedListWarningData
     , VPNTunnelsScopedListWarningData
-    , vPNTunnelsScopedListWarningData
+    , vpnTunnelsScopedListWarningData
     , vtslwdValue
     , vtslwdKey
 
@@ -1011,7 +1011,7 @@ module Network.Google.Compute
 
     -- ** VPNTunnelsScopedListWarning
     , VPNTunnelsScopedListWarning
-    , vPNTunnelsScopedListWarning
+    , vpnTunnelsScopedListWarning
     , vtslwData
     , vtslwCode
     , vtslwMessage
@@ -1061,7 +1061,7 @@ module Network.Google.Compute
 
     -- ** URLMapList
     , URLMapList
-    , uRLMapList
+    , urlMapList
     , umlNextPageToken
     , umlKind
     , umlItems
@@ -1394,7 +1394,7 @@ module Network.Google.Compute
 
     -- ** URLMapsValidateResponse
     , URLMapsValidateResponse
-    , uRLMapsValidateResponse
+    , urlMapsValidateResponse
     , umvrResult
 
     -- ** InstanceGroupAggregatedList
@@ -1498,7 +1498,7 @@ module Network.Google.Compute
 
     -- ** URLMapReference
     , URLMapReference
-    , uRLMapReference
+    , urlMapReference
     , umrURLMap
 
     -- ** VPNTunnelStatus
@@ -1590,7 +1590,7 @@ module Network.Google.Compute
 
     -- ** VPNTunnelAggregatedList
     , VPNTunnelAggregatedList
-    , vPNTunnelAggregatedList
+    , vpnTunnelAggregatedList
     , vtalNextPageToken
     , vtalKind
     , vtalItems
@@ -1642,7 +1642,7 @@ module Network.Google.Compute
 
     -- ** VPNTunnelList
     , VPNTunnelList
-    , vPNTunnelList
+    , vpnTunnelList
     , vtlNextPageToken
     , vtlKind
     , vtlItems
@@ -1790,7 +1790,7 @@ module Network.Google.Compute
 
     -- ** URLMapValidationResult
     , URLMapValidationResult
-    , uRLMapValidationResult
+    , urlMapValidationResult
     , umvrLoadErrors
     , umvrLoadSucceeded
     , umvrTestPassed
@@ -1896,7 +1896,7 @@ module Network.Google.Compute
 
     -- ** VPNTunnel
     , VPNTunnel
-    , vPNTunnel
+    , vpnTunnel
     , vtDetailedStatus
     , vtStatus
     , vtKind
@@ -1991,7 +1991,7 @@ module Network.Google.Compute
 
     -- ** URLMapsValidateRequest
     , URLMapsValidateRequest
-    , uRLMapsValidateRequest
+    , urlMapsValidateRequest
     , umvrResource
 
     -- ** PathRule
@@ -2217,7 +2217,7 @@ module Network.Google.Compute
 
     -- ** URLMapTest
     , URLMapTest
-    , uRLMapTest
+    , urlMapTest
     , umtPath
     , umtService
     , umtHost
@@ -2256,7 +2256,7 @@ module Network.Google.Compute
 
     -- ** VPNTunnelAggregatedListItems
     , VPNTunnelAggregatedListItems
-    , vPNTunnelAggregatedListItems
+    , vpnTunnelAggregatedListItems
 
     -- ** PathMatcher
     , PathMatcher

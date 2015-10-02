@@ -48,15 +48,15 @@ import           Network.Google.YouTube.Types
 -- 'LiveBroadcastsDelete'' request conforms to.
 type LiveBroadcastsDeleteResource =
      "liveBroadcasts" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "onBehalfOfContentOwner" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                   QueryParam "id" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+       QueryParam "onBehalfOfContentOwner" Text :>
+         QueryParam "onBehalfOfContentOwnerChannel" Text :>
+           QueryParam "id" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a broadcast.
@@ -196,13 +196,15 @@ instance GoogleRequest LiveBroadcastsDelete' where
         type Rs LiveBroadcastsDelete' = ()
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u LiveBroadcastsDelete'{..}
-          = go _lbdQuotaUser (Just _lbdPrettyPrint) _lbdUserIP
-              _lbdOnBehalfOfContentOwner
-              _lbdKey
+          = go _lbdOnBehalfOfContentOwner
               _lbdOnBehalfOfContentOwnerChannel
               (Just _lbdId)
-              _lbdOAuthToken
+              _lbdQuotaUser
+              (Just _lbdPrettyPrint)
+              _lbdUserIP
               _lbdFields
+              _lbdKey
+              _lbdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

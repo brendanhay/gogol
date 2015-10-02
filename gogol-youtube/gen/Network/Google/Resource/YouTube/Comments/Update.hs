@@ -47,13 +47,13 @@ import           Network.Google.YouTube.Types
 -- 'CommentsUpdate'' request conforms to.
 type CommentsUpdateResource =
      "comments" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "part" Text :>
+       QueryParam "part" Text :>
+         QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Comment :> Put '[JSON] Comment
 
@@ -159,12 +159,12 @@ instance GoogleRequest CommentsUpdate' where
         type Rs CommentsUpdate' = Comment
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u CommentsUpdate'{..}
-          = go _cuQuotaUser (Just _cuPart)
+          = go (Just _cuPart) _cuQuotaUser
               (Just _cuPrettyPrint)
               _cuUserIP
+              _cuFields
               _cuKey
               _cuOAuthToken
-              _cuFields
               (Just AltJSON)
               _cuComment
           where go

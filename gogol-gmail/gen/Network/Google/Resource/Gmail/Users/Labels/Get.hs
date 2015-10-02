@@ -52,9 +52,9 @@ type UsersLabelsGetResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Label
 
 -- | Gets the specified label.
@@ -160,12 +160,12 @@ instance GoogleRequest UsersLabelsGet' where
         type Rs UsersLabelsGet' = Label
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersLabelsGet'{..}
-          = go _ulgQuotaUser (Just _ulgPrettyPrint) _ulgUserIP
-              _ulgUserId
-              _ulgKey
-              _ulgId
-              _ulgOAuthToken
+          = go _ulgUserId _ulgId _ulgQuotaUser
+              (Just _ulgPrettyPrint)
+              _ulgUserIP
               _ulgFields
+              _ulgKey
+              _ulgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

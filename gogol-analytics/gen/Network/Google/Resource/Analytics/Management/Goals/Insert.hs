@@ -59,9 +59,9 @@ type ManagementGoalsInsertResource =
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] Goal :> Post '[JSON] Goal
 
@@ -188,14 +188,13 @@ instance GoogleRequest ManagementGoalsInsert' where
         type Rs ManagementGoalsInsert' = Goal
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementGoalsInsert'{..}
-          = go _mgiQuotaUser (Just _mgiPrettyPrint)
-              _mgiWebPropertyId
+          = go _mgiAccountId _mgiWebPropertyId _mgiProfileId
+              _mgiQuotaUser
+              (Just _mgiPrettyPrint)
               _mgiUserIP
-              _mgiProfileId
-              _mgiAccountId
+              _mgiFields
               _mgiKey
               _mgiOAuthToken
-              _mgiFields
               (Just AltJSON)
               _mgiGoal
           where go

@@ -53,9 +53,9 @@ type TemplateGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Template
 
 -- | Retrieves a specific template by its id
@@ -162,13 +162,12 @@ instance GoogleRequest TemplateGet' where
         type Rs TemplateGet' = Template
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TemplateGet'{..}
-          = go _tggQuotaUser (Just _tggPrettyPrint)
-              _tggTemplateId
+          = go _tggTableId _tggTemplateId _tggQuotaUser
+              (Just _tggPrettyPrint)
               _tggUserIP
+              _tggFields
               _tggKey
               _tggOAuthToken
-              _tggTableId
-              _tggFields
               (Just AltJSON)
           where go
                   = clientWithRoute

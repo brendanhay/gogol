@@ -490,11 +490,11 @@ module Network.Google.PlusDomains.Types
 
     -- * ACL
     , ACL
-    , aCL
-    , aclKind
-    , aclItems
-    , aclDomainRestricted
-    , aclDescription
+    , acl
+    , aclcKind
+    , aclcItems
+    , aclcDomainRestricted
+    , aclcDescription
 
     -- * MediaExif
     , MediaExif

@@ -55,9 +55,9 @@ type JobsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Job
 
 -- | Returns information about a specific job. Job information is available
@@ -161,12 +161,12 @@ instance GoogleRequest JobsGet' where
         type Rs JobsGet' = Job
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u JobsGet'{..}
-          = go _jgQuotaUser (Just _jgPrettyPrint) _jgJobId
+          = go _jgProjectId _jgJobId _jgQuotaUser
+              (Just _jgPrettyPrint)
               _jgUserIP
-              _jgKey
-              _jgProjectId
-              _jgOAuthToken
               _jgFields
+              _jgKey
+              _jgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy JobsGetResource) r

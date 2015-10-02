@@ -57,9 +57,9 @@ type ManagementWebPropertyAdWordsLinksGetResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] EntityAdWordsLink
 
@@ -187,14 +187,14 @@ instance GoogleRequest
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
           ManagementWebPropertyAdWordsLinksGet'{..}
-          = go _mwpawlgQuotaUser (Just _mwpawlgPrettyPrint)
-              _mwpawlgWebPropertyId
-              _mwpawlgUserIP
-              _mwpawlgAccountId
-              _mwpawlgKey
+          = go _mwpawlgAccountId _mwpawlgWebPropertyId
               _mwpawlgWebPropertyAdWordsLinkId
-              _mwpawlgOAuthToken
+              _mwpawlgQuotaUser
+              (Just _mwpawlgPrettyPrint)
+              _mwpawlgUserIP
               _mwpawlgFields
+              _mwpawlgKey
+              _mwpawlgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

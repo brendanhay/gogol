@@ -49,9 +49,9 @@ type BillingInfoListResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] BillingInfoList
 
@@ -140,9 +140,9 @@ instance GoogleRequest BillingInfoList' where
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u BillingInfoList'{..}
           = go _bilQuotaUser (Just _bilPrettyPrint) _bilUserIP
+              _bilFields
               _bilKey
               _bilOAuthToken
-              _bilFields
               (Just AltJSON)
           where go
                   = clientWithRoute

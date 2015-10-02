@@ -61,17 +61,17 @@ type AppsModulesVersionsDeleteResource =
                "versions" :>
                  Capture "versionsId" Text :>
                    QueryParam "$.xgafv" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "callback" Text :>
                            QueryParam "pp" Bool :>
-                             QueryParam "access_token" Text :>
-                               QueryParam "uploadType" Text :>
-                                 QueryParam "bearer_token" Text :>
-                                   QueryParam "key" Key :>
-                                     QueryParam "oauth_token" OAuthToken :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "callback" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "upload_protocol" Text :>
+                                 QueryParam "quotaUser" Text :>
+                                   QueryParam "prettyPrint" Bool :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "key" Key :>
+                                         QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
                                              Delete '[JSON] Operation
 
@@ -249,20 +249,19 @@ instance GoogleRequest AppsModulesVersionsDelete'
         type Rs AppsModulesVersionsDelete' = Operation
         request = requestWithRoute defReq appEngineURL
         requestWithRoute r u AppsModulesVersionsDelete'{..}
-          = go _amvdXgafv _amvdQuotaUser
-              (Just _amvdPrettyPrint)
-              _amvdUploadProtocol
-              (Just _amvdPp)
-              _amvdAccessToken
-              _amvdUploadType
-              _amvdVersionsId
-              _amvdModulesId
-              _amvdBearerToken
-              _amvdKey
-              _amvdAppsId
-              _amvdOAuthToken
-              _amvdFields
+          = go _amvdXgafv _amvdAccessToken _amvdBearerToken
               _amvdCallback
+              (Just _amvdPp)
+              _amvdUploadType
+              _amvdUploadProtocol
+              _amvdAppsId
+              _amvdModulesId
+              _amvdVersionsId
+              _amvdQuotaUser
+              (Just _amvdPrettyPrint)
+              _amvdFields
+              _amvdKey
+              _amvdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -54,16 +54,16 @@ type MomentsListResource =
        Capture "userId" Text :>
          "moments" :>
            Capture "collection" PlusMomentsListCollection :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
                  QueryParam "targetUrl" Text :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "type" Text :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "maxResults" Word32 :>
-                               QueryParam "fields" Text :>
+                   QueryParam "type" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] MomentsFeed
 
@@ -206,16 +206,16 @@ instance GoogleRequest MomentsList' where
         type Rs MomentsList' = MomentsFeed
         request = requestWithRoute defReq plusURL
         requestWithRoute r u MomentsList'{..}
-          = go _mlQuotaUser (Just _mlPrettyPrint) _mlTargetURL
-              _mlUserIP
-              _mlCollection
-              _mlUserId
-              _mlKey
-              _mlPageToken
+          = go (Just _mlMaxResults) _mlPageToken _mlTargetURL
               _mlType
-              _mlOAuthToken
-              (Just _mlMaxResults)
+              _mlUserId
+              _mlCollection
+              _mlQuotaUser
+              (Just _mlPrettyPrint)
+              _mlUserIP
               _mlFields
+              _mlKey
+              _mlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

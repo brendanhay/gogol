@@ -52,16 +52,16 @@ type SizesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "sizes" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "height" Int32 :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParams "ids" Int64 :>
-                     QueryParam "width" Int32 :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "iabStandard" Bool :>
-                             QueryParam "fields" Text :>
+           QueryParam "height" Int32 :>
+             QueryParam "iabStandard" Bool :>
+               QueryParams "ids" Int64 :>
+                 QueryParam "width" Int32 :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] SizesListResponse
 
@@ -189,15 +189,14 @@ instance GoogleRequest SizesList' where
         type Rs SizesList' = SizesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u SizesList'{..}
-          = go _slQuotaUser _slHeight (Just _slPrettyPrint)
-              _slUserIP
-              _slIds
-              _slWidth
+          = go _slHeight _slIabStandard _slIds _slWidth
               _slProfileId
+              _slQuotaUser
+              (Just _slPrettyPrint)
+              _slUserIP
+              _slFields
               _slKey
               _slOAuthToken
-              _slIabStandard
-              _slFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy SizesListResource)

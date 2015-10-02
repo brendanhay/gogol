@@ -56,19 +56,19 @@ type DebuggerDebuggeesListResource =
        "debugger" :>
          "debuggees" :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "includeInactive" Bool :>
-                   QueryParam "upload_protocol" Text :>
-                     QueryParam "project" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "key" Key :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "callback" Text :>
+             QueryParam "access_token" Text :>
+               QueryParam "bearer_token" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "includeInactive" Bool :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "project" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "quotaUser" Text :>
+                               QueryParam "prettyPrint" Bool :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] ListDebuggeesResponse
 
@@ -232,18 +232,18 @@ instance GoogleRequest DebuggerDebuggeesList' where
              ListDebuggeesResponse
         request = requestWithRoute defReq debuggerURL
         requestWithRoute r u DebuggerDebuggeesList'{..}
-          = go _ddlXgafv _ddlQuotaUser (Just _ddlPrettyPrint)
+          = go _ddlXgafv _ddlAccessToken _ddlBearerToken
+              _ddlCallback
               _ddlIncludeInactive
-              _ddlUploadProtocol
-              _ddlProject
               (Just _ddlPp)
-              _ddlAccessToken
+              _ddlProject
               _ddlUploadType
-              _ddlBearerToken
+              _ddlUploadProtocol
+              _ddlQuotaUser
+              (Just _ddlPrettyPrint)
+              _ddlFields
               _ddlKey
               _ddlOAuthToken
-              _ddlFields
-              _ddlCallback
               (Just AltJSON)
           where go
                   = clientWithRoute

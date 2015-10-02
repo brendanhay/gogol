@@ -56,20 +56,20 @@ type OrganizationsListResource =
      "v1beta1" :>
        "organizations" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "filter" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "pageSize" Int32 :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "callback" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageSize" Int32 :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "quotaUser" Text :>
+                               QueryParam "prettyPrint" Bool :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] ListOrganizationsResponse
 
@@ -245,19 +245,19 @@ instance GoogleRequest OrganizationsList' where
              ListOrganizationsResponse
         request = requestWithRoute defReq resourceManagerURL
         requestWithRoute r u OrganizationsList'{..}
-          = go _olXgafv _olQuotaUser (Just _olPrettyPrint)
-              _olUploadProtocol
-              (Just _olPp)
-              _olAccessToken
-              _olUploadType
-              _olBearerToken
-              _olKey
-              _olFilter
-              _olPageToken
-              _olOAuthToken
-              _olPageSize
-              _olFields
+          = go _olXgafv _olAccessToken _olBearerToken
               _olCallback
+              _olFilter
+              _olPageSize
+              _olPageToken
+              (Just _olPp)
+              _olUploadType
+              _olUploadProtocol
+              _olQuotaUser
+              (Just _olPrettyPrint)
+              _olFields
+              _olKey
+              _olOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -64,23 +64,24 @@ type ProjectsJobsMessagesListResource =
              Capture "jobId" Text :>
                "messages" :>
                  QueryParam "$.xgafv" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "upload_protocol" Text :>
-                         QueryParam "startTime" Text :>
-                           QueryParam "pp" Bool :>
-                             QueryParam "access_token" Text :>
-                               QueryParam "uploadType" Text :>
-                                 QueryParam "bearer_token" Text :>
-                                   QueryParam "key" Key :>
-                                     QueryParam "endTime" Text :>
-                                       QueryParam "minimumImportance" Text :>
-                                         QueryParam "pageToken" Text :>
-                                           QueryParam "oauth_token" OAuthToken
-                                             :>
-                                             QueryParam "pageSize" Int32 :>
-                                               QueryParam "fields" Text :>
-                                                 QueryParam "callback" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "endTime" Text :>
+                           QueryParam "minimumImportance" Text :>
+                             QueryParam "pageSize" Int32 :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "pp" Bool :>
+                                   QueryParam "startTime" Text :>
+                                     QueryParam "uploadType" Text :>
+                                       QueryParam "upload_protocol" Text :>
+                                         QueryParam "quotaUser" Text :>
+                                           QueryParam "prettyPrint" Bool :>
+                                             QueryParam "fields" Text :>
+                                               QueryParam "key" Key :>
+                                                 QueryParam "oauth_token"
+                                                   OAuthToken
+                                                   :>
                                                    QueryParam "alt" AltJSON :>
                                                      Get '[JSON]
                                                        ListJobMessagesResponse
@@ -301,24 +302,23 @@ instance GoogleRequest ProjectsJobsMessagesList'
              ListJobMessagesResponse
         request = requestWithRoute defReq dataflowURL
         requestWithRoute r u ProjectsJobsMessagesList'{..}
-          = go _pjmlXgafv _pjmlQuotaUser
-              (Just _pjmlPrettyPrint)
-              _pjmlJobId
-              _pjmlUploadProtocol
-              _pjmlStartTime
-              (Just _pjmlPp)
-              _pjmlAccessToken
-              _pjmlUploadType
-              _pjmlBearerToken
-              _pjmlKey
+          = go _pjmlXgafv _pjmlAccessToken _pjmlBearerToken
+              _pjmlCallback
               _pjmlEndTime
               _pjmlMinimumImportance
-              _pjmlPageToken
-              _pjmlProjectId
-              _pjmlOAuthToken
               _pjmlPageSize
+              _pjmlPageToken
+              (Just _pjmlPp)
+              _pjmlStartTime
+              _pjmlUploadType
+              _pjmlUploadProtocol
+              _pjmlProjectId
+              _pjmlJobId
+              _pjmlQuotaUser
+              (Just _pjmlPrettyPrint)
               _pjmlFields
-              _pjmlCallback
+              _pjmlKey
+              _pjmlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

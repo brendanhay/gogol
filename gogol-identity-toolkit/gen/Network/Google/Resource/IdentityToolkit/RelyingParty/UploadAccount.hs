@@ -49,9 +49,9 @@ type RelyingPartyUploadAccountResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON]
                        IdentitytoolkitRelyingPartyUploadAccountRequest
@@ -159,9 +159,9 @@ instance GoogleRequest RelyingPartyUploadAccount'
         requestWithRoute r u RelyingPartyUploadAccount'{..}
           = go _rpuaQuotaUser (Just _rpuaPrettyPrint)
               _rpuaUserIP
+              _rpuaFields
               _rpuaKey
               _rpuaOAuthToken
-              _rpuaFields
               (Just AltJSON)
               _rpuaIdentitytoolkitRelyingPartyUploadAccountRequest
           where go

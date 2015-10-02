@@ -56,9 +56,9 @@ type RasterCollectionsPermissionsBatchUpdateResource
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] PermissionsBatchUpdateRequest :>
                              Post '[JSON] PermissionsBatchUpdateResponse
@@ -173,12 +173,12 @@ instance GoogleRequest
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u
           RasterCollectionsPermissionsBatchUpdate'{..}
-          = go _rcpbuQuotaUser (Just _rcpbuPrettyPrint)
+          = go _rcpbuId _rcpbuQuotaUser
+              (Just _rcpbuPrettyPrint)
               _rcpbuUserIP
-              _rcpbuKey
-              _rcpbuId
-              _rcpbuOAuthToken
               _rcpbuFields
+              _rcpbuKey
+              _rcpbuOAuthToken
               (Just AltJSON)
               _rcpbuPermissionsBatchUpdateRequest
           where go

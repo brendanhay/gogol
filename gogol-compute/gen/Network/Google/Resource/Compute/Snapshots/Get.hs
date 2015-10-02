@@ -53,9 +53,9 @@ type SnapshotsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Snapshot
 
 -- | Returns the specified Snapshot resource.
@@ -158,12 +158,12 @@ instance GoogleRequest SnapshotsGet' where
         type Rs SnapshotsGet' = Snapshot
         request = requestWithRoute defReq computeURL
         requestWithRoute r u SnapshotsGet'{..}
-          = go _sgSnapshot _sgQuotaUser (Just _sgPrettyPrint)
-              _sgProject
+          = go _sgProject _sgSnapshot _sgQuotaUser
+              (Just _sgPrettyPrint)
               _sgUserIP
+              _sgFields
               _sgKey
               _sgOAuthToken
-              _sgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

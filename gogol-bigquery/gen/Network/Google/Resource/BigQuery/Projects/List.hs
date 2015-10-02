@@ -47,14 +47,14 @@ import           Network.Google.Prelude
 -- 'ProjectsList'' request conforms to.
 type ProjectsListResource =
      "projects" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "maxResults" Word32 :>
-                     QueryParam "fields" Text :>
+       QueryParam "maxResults" Word32 :>
+         QueryParam "pageToken" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] ProjectList
 
 -- | Lists all projects to which you have been granted any project role.
@@ -156,12 +156,12 @@ instance GoogleRequest ProjectsList' where
         type Rs ProjectsList' = ProjectList
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u ProjectsList'{..}
-          = go _plQuotaUser (Just _plPrettyPrint) _plUserIP
-              _plKey
-              _plPageToken
-              _plOAuthToken
-              _plMaxResults
+          = go _plMaxResults _plPageToken _plQuotaUser
+              (Just _plPrettyPrint)
+              _plUserIP
               _plFields
+              _plKey
+              _plOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

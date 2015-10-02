@@ -49,9 +49,9 @@ type SubscriptionsListResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] SubscriptionsListResponse
 
@@ -138,9 +138,9 @@ instance GoogleRequest SubscriptionsList' where
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u SubscriptionsList'{..}
           = go _slQuotaUser (Just _slPrettyPrint) _slUserIP
+              _slFields
               _slKey
               _slOAuthToken
-              _slFields
               (Just AltJSON)
           where go
                   = clientWithRoute

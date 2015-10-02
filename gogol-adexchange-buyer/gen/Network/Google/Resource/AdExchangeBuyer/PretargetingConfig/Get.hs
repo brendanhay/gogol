@@ -52,9 +52,9 @@ type PretargetingConfigGetResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] PretargetingConfig
 
@@ -161,12 +161,12 @@ instance GoogleRequest PretargetingConfigGet' where
         type Rs PretargetingConfigGet' = PretargetingConfig
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u PretargetingConfigGet'{..}
-          = go _pcgQuotaUser (Just _pcgPrettyPrint) _pcgUserIP
-              _pcgAccountId
-              _pcgKey
-              _pcgConfigId
-              _pcgOAuthToken
+          = go _pcgAccountId _pcgConfigId _pcgQuotaUser
+              (Just _pcgPrettyPrint)
+              _pcgUserIP
               _pcgFields
+              _pcgKey
+              _pcgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -50,14 +50,14 @@ type RastersParentsListResource =
      "rasters" :>
        Capture "id" Text :>
          "parents" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "maxResults" Word32 :>
-                         QueryParam "fields" Text :>
+           QueryParam "maxResults" Word32 :>
+             QueryParam "pageToken" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ParentsListResponse
 
@@ -175,13 +175,13 @@ instance GoogleRequest RastersParentsList' where
         type Rs RastersParentsList' = ParentsListResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u RastersParentsList'{..}
-          = go _rasQuotaUser (Just _rasPrettyPrint) _rasUserIP
-              _rasKey
-              _rasId
-              _rasPageToken
-              _rasOAuthToken
-              _rasMaxResults
+          = go _rasMaxResults _rasPageToken _rasId
+              _rasQuotaUser
+              (Just _rasPrettyPrint)
+              _rasUserIP
               _rasFields
+              _rasKey
+              _rasOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

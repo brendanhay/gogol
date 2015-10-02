@@ -53,9 +53,9 @@ type ProjectsZonesOperationsListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] ListOperationsResponse
 
@@ -167,13 +167,12 @@ instance GoogleRequest ProjectsZonesOperationsList'
              ListOperationsResponse
         request = requestWithRoute defReq containerURL
         requestWithRoute r u ProjectsZonesOperationsList'{..}
-          = go _pzolQuotaUser (Just _pzolPrettyPrint)
+          = go _pzolProjectId _pzolZoneId _pzolQuotaUser
+              (Just _pzolPrettyPrint)
               _pzolUserIP
-              _pzolZoneId
-              _pzolKey
-              _pzolProjectId
-              _pzolOAuthToken
               _pzolFields
+              _pzolKey
+              _pzolOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

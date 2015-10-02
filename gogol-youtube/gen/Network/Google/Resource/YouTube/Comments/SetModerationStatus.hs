@@ -51,17 +51,17 @@ import           Network.Google.YouTube.Types
 type CommentsSetModerationStatusResource =
      "comments" :>
        "setModerationStatus" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "banAuthor" Bool :>
-               QueryParam "moderationStatus"
-                 YouTubeCommentsSetModerationStatusModerationStatus
-                 :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "id" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+         QueryParam "banAuthor" Bool :>
+           QueryParam "id" Text :>
+             QueryParam "moderationStatus"
+               YouTubeCommentsSetModerationStatusModerationStatus
+               :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Sets the moderation status of one or more comments. The API request must
@@ -186,14 +186,14 @@ instance GoogleRequest CommentsSetModerationStatus'
         type Rs CommentsSetModerationStatus' = ()
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u CommentsSetModerationStatus'{..}
-          = go _csmsQuotaUser (Just _csmsPrettyPrint)
-              (Just _csmsBanAuthor)
+          = go (Just _csmsBanAuthor) (Just _csmsId)
               (Just _csmsModerationStatus)
+              _csmsQuotaUser
+              (Just _csmsPrettyPrint)
               _csmsUserIP
-              _csmsKey
-              (Just _csmsId)
-              _csmsOAuthToken
               _csmsFields
+              _csmsKey
+              _csmsOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

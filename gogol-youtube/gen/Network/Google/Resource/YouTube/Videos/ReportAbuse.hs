@@ -48,13 +48,13 @@ import           Network.Google.YouTube.Types
 type VideosReportAbuseResource =
      "videos" :>
        "reportAbuse" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+         QueryParam "onBehalfOfContentOwner" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] VideoAbuseReport :> Post '[JSON] ()
 
@@ -171,11 +171,12 @@ instance GoogleRequest VideosReportAbuse' where
         type Rs VideosReportAbuse' = ()
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u VideosReportAbuse'{..}
-          = go _vraQuotaUser (Just _vraPrettyPrint) _vraUserIP
-              _vraOnBehalfOfContentOwner
+          = go _vraOnBehalfOfContentOwner _vraQuotaUser
+              (Just _vraPrettyPrint)
+              _vraUserIP
+              _vraFields
               _vraKey
               _vraOAuthToken
-              _vraFields
               (Just AltJSON)
               _vraVideoAbuseReport
           where go

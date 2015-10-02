@@ -57,9 +57,9 @@ type DatabasesDeleteResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Delete '[JSON] Operation
 
@@ -174,13 +174,12 @@ instance GoogleRequest DatabasesDelete' where
         type Rs DatabasesDelete' = Operation
         request = requestWithRoute defReq sQLAdminURL
         requestWithRoute r u DatabasesDelete'{..}
-          = go _ddQuotaUser (Just _ddPrettyPrint) _ddProject
-              _ddDatabase
+          = go _ddProject _ddInstance _ddDatabase _ddQuotaUser
+              (Just _ddPrettyPrint)
               _ddUserIP
+              _ddFields
               _ddKey
               _ddOAuthToken
-              _ddFields
-              _ddInstance
               (Just AltJSON)
           where go
                   = clientWithRoute

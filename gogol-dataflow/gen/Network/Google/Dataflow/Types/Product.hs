@@ -3409,75 +3409,75 @@ instance ToJSON JobMessage where
 --
 -- /See:/ 'job' smart constructor.
 data Job = Job
-    { _jobRequestedState       :: !(Maybe Text)
-    , _jobEnvironment          :: !(Maybe Environment)
-    , _jobClientRequestId      :: !(Maybe Text)
-    , _jobCurrentState         :: !(Maybe Text)
-    , _jobReplacedByJobId      :: !(Maybe Text)
-    , _jobSteps                :: !(Maybe [Step])
-    , _jobExecutionInfo        :: !(Maybe JobExecutionInfo)
-    , _jobName                 :: !(Maybe Text)
-    , _jobTransformNameMapping :: !(Maybe JobTransformNameMapping)
-    , _jobId                   :: !(Maybe Text)
-    , _jobProjectId            :: !(Maybe Text)
-    , _jobType                 :: !(Maybe Text)
-    , _jobCurrentStateTime     :: !(Maybe Text)
-    , _jobReplaceJobId         :: !(Maybe Text)
-    , _jobCreateTime           :: !(Maybe Text)
+    { _jRequestedState       :: !(Maybe Text)
+    , _jEnvironment          :: !(Maybe Environment)
+    , _jClientRequestId      :: !(Maybe Text)
+    , _jCurrentState         :: !(Maybe Text)
+    , _jReplacedByJobId      :: !(Maybe Text)
+    , _jSteps                :: !(Maybe [Step])
+    , _jExecutionInfo        :: !(Maybe JobExecutionInfo)
+    , _jName                 :: !(Maybe Text)
+    , _jTransformNameMapping :: !(Maybe JobTransformNameMapping)
+    , _jId                   :: !(Maybe Text)
+    , _jProjectId            :: !(Maybe Text)
+    , _jType                 :: !(Maybe Text)
+    , _jCurrentStateTime     :: !(Maybe Text)
+    , _jReplaceJobId         :: !(Maybe Text)
+    , _jCreateTime           :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Job' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'jobRequestedState'
+-- * 'jRequestedState'
 --
--- * 'jobEnvironment'
+-- * 'jEnvironment'
 --
--- * 'jobClientRequestId'
+-- * 'jClientRequestId'
 --
--- * 'jobCurrentState'
+-- * 'jCurrentState'
 --
--- * 'jobReplacedByJobId'
+-- * 'jReplacedByJobId'
 --
--- * 'jobSteps'
+-- * 'jSteps'
 --
--- * 'jobExecutionInfo'
+-- * 'jExecutionInfo'
 --
--- * 'jobName'
+-- * 'jName'
 --
--- * 'jobTransformNameMapping'
+-- * 'jTransformNameMapping'
 --
--- * 'jobId'
+-- * 'jId'
 --
--- * 'jobProjectId'
+-- * 'jProjectId'
 --
--- * 'jobType'
+-- * 'jType'
 --
--- * 'jobCurrentStateTime'
+-- * 'jCurrentStateTime'
 --
--- * 'jobReplaceJobId'
+-- * 'jReplaceJobId'
 --
--- * 'jobCreateTime'
+-- * 'jCreateTime'
 job
     :: Job
 job =
     Job
-    { _jobRequestedState = Nothing
-    , _jobEnvironment = Nothing
-    , _jobClientRequestId = Nothing
-    , _jobCurrentState = Nothing
-    , _jobReplacedByJobId = Nothing
-    , _jobSteps = Nothing
-    , _jobExecutionInfo = Nothing
-    , _jobName = Nothing
-    , _jobTransformNameMapping = Nothing
-    , _jobId = Nothing
-    , _jobProjectId = Nothing
-    , _jobType = Nothing
-    , _jobCurrentStateTime = Nothing
-    , _jobReplaceJobId = Nothing
-    , _jobCreateTime = Nothing
+    { _jRequestedState = Nothing
+    , _jEnvironment = Nothing
+    , _jClientRequestId = Nothing
+    , _jCurrentState = Nothing
+    , _jReplacedByJobId = Nothing
+    , _jSteps = Nothing
+    , _jExecutionInfo = Nothing
+    , _jName = Nothing
+    , _jTransformNameMapping = Nothing
+    , _jId = Nothing
+    , _jProjectId = Nothing
+    , _jType = Nothing
+    , _jCurrentStateTime = Nothing
+    , _jReplaceJobId = Nothing
+    , _jCreateTime = Nothing
     }
 
 -- | The job\'s requested state. UpdateJob may be used to switch between the
@@ -3485,16 +3485,15 @@ job =
 -- requested_state. UpdateJob may also be used to directly set a job\'s
 -- requested state to JOB_STATE_CANCELLED or JOB_STATE_DONE, irrevocably
 -- terminating the job if it has not already reached a terminal state.
-jobRequestedState :: Lens' Job (Maybe Text)
-jobRequestedState
-  = lens _jobRequestedState
-      (\ s a -> s{_jobRequestedState = a})
+jRequestedState :: Lens' Job (Maybe Text)
+jRequestedState
+  = lens _jRequestedState
+      (\ s a -> s{_jRequestedState = a})
 
 -- | Environment for the job.
-jobEnvironment :: Lens' Job (Maybe Environment)
-jobEnvironment
-  = lens _jobEnvironment
-      (\ s a -> s{_jobEnvironment = a})
+jEnvironment :: Lens' Job (Maybe Environment)
+jEnvironment
+  = lens _jEnvironment (\ s a -> s{_jEnvironment = a})
 
 -- | Client\'s unique identifier of the job, re-used by SDK across retried
 -- attempts. If this field is set, the service will ensure its uniqueness.
@@ -3503,91 +3502,89 @@ jobEnvironment
 -- job name. The caller may, for example, use this field to ensure
 -- idempotence of job creation across retried attempts to create a job. By
 -- default, the field is empty and, in that case, the service ignores it.
-jobClientRequestId :: Lens' Job (Maybe Text)
-jobClientRequestId
-  = lens _jobClientRequestId
-      (\ s a -> s{_jobClientRequestId = a})
+jClientRequestId :: Lens' Job (Maybe Text)
+jClientRequestId
+  = lens _jClientRequestId
+      (\ s a -> s{_jClientRequestId = a})
 
 -- | The current state of the job. Jobs are created in the JOB_STATE_STOPPED
 -- state unless otherwise specified. A job in the JOB_STATE_RUNNING state
 -- may asynchronously enter a terminal state. Once a job has reached a
 -- terminal state, no further state updates may be made. This field may be
 -- mutated by the Dataflow service; callers cannot mutate it.
-jobCurrentState :: Lens' Job (Maybe Text)
-jobCurrentState
-  = lens _jobCurrentState
-      (\ s a -> s{_jobCurrentState = a})
+jCurrentState :: Lens' Job (Maybe Text)
+jCurrentState
+  = lens _jCurrentState
+      (\ s a -> s{_jCurrentState = a})
 
 -- | If another job is an update of this job (and thus, this job is in
 -- JOB_STATE_UPDATED), this field will contain the ID of that job.
-jobReplacedByJobId :: Lens' Job (Maybe Text)
-jobReplacedByJobId
-  = lens _jobReplacedByJobId
-      (\ s a -> s{_jobReplacedByJobId = a})
+jReplacedByJobId :: Lens' Job (Maybe Text)
+jReplacedByJobId
+  = lens _jReplacedByJobId
+      (\ s a -> s{_jReplacedByJobId = a})
 
 -- | The top-level steps that constitute the entire job.
-jobSteps :: Lens' Job [Step]
-jobSteps
-  = lens _jobSteps (\ s a -> s{_jobSteps = a}) .
-      _Default
-      . _Coerce
+jSteps :: Lens' Job [Step]
+jSteps
+  = lens _jSteps (\ s a -> s{_jSteps = a}) . _Default .
+      _Coerce
 
 -- | Information about how the Dataflow service will actually run the job.
-jobExecutionInfo :: Lens' Job (Maybe JobExecutionInfo)
-jobExecutionInfo
-  = lens _jobExecutionInfo
-      (\ s a -> s{_jobExecutionInfo = a})
+jExecutionInfo :: Lens' Job (Maybe JobExecutionInfo)
+jExecutionInfo
+  = lens _jExecutionInfo
+      (\ s a -> s{_jExecutionInfo = a})
 
 -- | The user-specified Dataflow job name. Only one Job with a given name may
 -- exist in a project at any given time. If a caller attempts to create a
 -- Job with the same name as an already-existing Job, the attempt will
 -- return the existing Job. The name must match the regular expression
 -- [a-z]([-a-z0-9]{0,38}[a-z0-9])?
-jobName :: Lens' Job (Maybe Text)
-jobName = lens _jobName (\ s a -> s{_jobName = a})
+jName :: Lens' Job (Maybe Text)
+jName = lens _jName (\ s a -> s{_jName = a})
 
 -- | Map of transform name prefixes of the job to be replaced to the
 -- corresponding name prefixes of the new job.
-jobTransformNameMapping :: Lens' Job (Maybe JobTransformNameMapping)
-jobTransformNameMapping
-  = lens _jobTransformNameMapping
-      (\ s a -> s{_jobTransformNameMapping = a})
+jTransformNameMapping :: Lens' Job (Maybe JobTransformNameMapping)
+jTransformNameMapping
+  = lens _jTransformNameMapping
+      (\ s a -> s{_jTransformNameMapping = a})
 
 -- | The unique ID of this job. This field is set by the Dataflow service
 -- when the Job is created, and is immutable for the life of the Job.
-jobId :: Lens' Job (Maybe Text)
-jobId = lens _jobId (\ s a -> s{_jobId = a})
+jId :: Lens' Job (Maybe Text)
+jId = lens _jId (\ s a -> s{_jId = a})
 
 -- | The project which owns the job.
-jobProjectId :: Lens' Job (Maybe Text)
-jobProjectId
-  = lens _jobProjectId (\ s a -> s{_jobProjectId = a})
+jProjectId :: Lens' Job (Maybe Text)
+jProjectId
+  = lens _jProjectId (\ s a -> s{_jProjectId = a})
 
 -- | The type of dataflow job.
-jobType :: Lens' Job (Maybe Text)
-jobType = lens _jobType (\ s a -> s{_jobType = a})
+jType :: Lens' Job (Maybe Text)
+jType = lens _jType (\ s a -> s{_jType = a})
 
 -- | The timestamp associated with the current state.
-jobCurrentStateTime :: Lens' Job (Maybe Text)
-jobCurrentStateTime
-  = lens _jobCurrentStateTime
-      (\ s a -> s{_jobCurrentStateTime = a})
+jCurrentStateTime :: Lens' Job (Maybe Text)
+jCurrentStateTime
+  = lens _jCurrentStateTime
+      (\ s a -> s{_jCurrentStateTime = a})
 
 -- | If this job is an update of an existing job, this field will be the ID
 -- of the job it replaced. When sending a CreateJobRequest, you can update
 -- a job by specifying it here. The job named here will be stopped, and its
 -- intermediate state transferred to this job.
-jobReplaceJobId :: Lens' Job (Maybe Text)
-jobReplaceJobId
-  = lens _jobReplaceJobId
-      (\ s a -> s{_jobReplaceJobId = a})
+jReplaceJobId :: Lens' Job (Maybe Text)
+jReplaceJobId
+  = lens _jReplaceJobId
+      (\ s a -> s{_jReplaceJobId = a})
 
 -- | Timestamp when job was initially created. Immutable, set by the Dataflow
 -- service.
-jobCreateTime :: Lens' Job (Maybe Text)
-jobCreateTime
-  = lens _jobCreateTime
-      (\ s a -> s{_jobCreateTime = a})
+jCreateTime :: Lens' Job (Maybe Text)
+jCreateTime
+  = lens _jCreateTime (\ s a -> s{_jCreateTime = a})
 
 instance FromJSON Job where
         parseJSON
@@ -3613,22 +3610,21 @@ instance ToJSON Job where
         toJSON Job{..}
           = object
               (catMaybes
-                 [("requestedState" .=) <$> _jobRequestedState,
-                  ("environment" .=) <$> _jobEnvironment,
-                  ("clientRequestId" .=) <$> _jobClientRequestId,
-                  ("currentState" .=) <$> _jobCurrentState,
-                  ("replacedByJobId" .=) <$> _jobReplacedByJobId,
-                  ("steps" .=) <$> _jobSteps,
-                  ("executionInfo" .=) <$> _jobExecutionInfo,
-                  ("name" .=) <$> _jobName,
+                 [("requestedState" .=) <$> _jRequestedState,
+                  ("environment" .=) <$> _jEnvironment,
+                  ("clientRequestId" .=) <$> _jClientRequestId,
+                  ("currentState" .=) <$> _jCurrentState,
+                  ("replacedByJobId" .=) <$> _jReplacedByJobId,
+                  ("steps" .=) <$> _jSteps,
+                  ("executionInfo" .=) <$> _jExecutionInfo,
+                  ("name" .=) <$> _jName,
                   ("transformNameMapping" .=) <$>
-                    _jobTransformNameMapping,
-                  ("id" .=) <$> _jobId,
-                  ("projectId" .=) <$> _jobProjectId,
-                  ("type" .=) <$> _jobType,
-                  ("currentStateTime" .=) <$> _jobCurrentStateTime,
-                  ("replaceJobId" .=) <$> _jobReplaceJobId,
-                  ("createTime" .=) <$> _jobCreateTime])
+                    _jTransformNameMapping,
+                  ("id" .=) <$> _jId, ("projectId" .=) <$> _jProjectId,
+                  ("type" .=) <$> _jType,
+                  ("currentStateTime" .=) <$> _jCurrentStateTime,
+                  ("replaceJobId" .=) <$> _jReplaceJobId,
+                  ("createTime" .=) <$> _jCreateTime])
 
 -- | The user function to invoke.
 --

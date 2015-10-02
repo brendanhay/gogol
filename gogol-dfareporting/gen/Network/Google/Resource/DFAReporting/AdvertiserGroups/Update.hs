@@ -52,9 +52,9 @@ type AdvertiserGroupsUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] AdvertiserGroup :>
                            Put '[JSON] AdvertiserGroup
@@ -163,11 +163,12 @@ instance GoogleRequest AdvertiserGroupsUpdate' where
         type Rs AdvertiserGroupsUpdate' = AdvertiserGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdvertiserGroupsUpdate'{..}
-          = go _aguQuotaUser (Just _aguPrettyPrint) _aguUserIP
-              _aguProfileId
+          = go _aguProfileId _aguQuotaUser
+              (Just _aguPrettyPrint)
+              _aguUserIP
+              _aguFields
               _aguKey
               _aguOAuthToken
-              _aguFields
               (Just AltJSON)
               _aguAdvertiserGroup
           where go

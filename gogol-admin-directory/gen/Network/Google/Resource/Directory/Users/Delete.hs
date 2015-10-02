@@ -50,9 +50,9 @@ type UsersDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete user
@@ -145,11 +145,11 @@ instance GoogleRequest UsersDelete' where
         type Rs UsersDelete' = ()
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u UsersDelete'{..}
-          = go _udQuotaUser (Just _udPrettyPrint) _udUserIP
+          = go _udUserKey _udQuotaUser (Just _udPrettyPrint)
+              _udUserIP
+              _udFields
               _udKey
               _udOAuthToken
-              _udUserKey
-              _udFields
               (Just AltJSON)
           where go
                   = clientWithRoute

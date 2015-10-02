@@ -55,9 +55,9 @@ type FirewallsUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Firewall :> Put '[JSON] Operation
 
@@ -172,12 +172,12 @@ instance GoogleRequest FirewallsUpdate' where
         type Rs FirewallsUpdate' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u FirewallsUpdate'{..}
-          = go _fuQuotaUser (Just _fuPrettyPrint) _fuProject
+          = go _fuProject _fuFirewall _fuQuotaUser
+              (Just _fuPrettyPrint)
               _fuUserIP
+              _fuFields
               _fuKey
               _fuOAuthToken
-              _fuFirewall
-              _fuFields
               (Just AltJSON)
               _fuFirewall
           where go

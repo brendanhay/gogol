@@ -54,9 +54,9 @@ type PagesPublishResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Post '[JSON] Page
 
 -- | Publishes a draft page.
@@ -162,12 +162,12 @@ instance GoogleRequest PagesPublish' where
         type Rs PagesPublish' = Page
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PagesPublish'{..}
-          = go _pppQuotaUser (Just _pppPrettyPrint) _pppUserIP
-              _pppBlogId
-              _pppPageId
+          = go _pppBlogId _pppPageId _pppQuotaUser
+              (Just _pppPrettyPrint)
+              _pppUserIP
+              _pppFields
               _pppKey
               _pppOAuthToken
-              _pppFields
               (Just AltJSON)
           where go
                   = clientWithRoute

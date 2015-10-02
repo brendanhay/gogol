@@ -54,17 +54,17 @@ type BeaconsGetResource =
      "v1beta1" :>
        "{+beaconName}" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :> Get '[JSON] Beacon
 
 -- | Returns detailed information about the specified beacon.
@@ -212,17 +212,17 @@ instance GoogleRequest BeaconsGet' where
         type Rs BeaconsGet' = Beacon
         request = requestWithRoute defReq proximityBeaconURL
         requestWithRoute r u BeaconsGet'{..}
-          = go _bgXgafv _bgQuotaUser (Just _bgPrettyPrint)
-              _bgUploadProtocol
+          = go _bgXgafv _bgAccessToken _bgBearerToken
+              _bgCallback
               (Just _bgPp)
-              _bgAccessToken
-              _bgBeaconName
               _bgUploadType
-              _bgBearerToken
+              _bgUploadProtocol
+              _bgBeaconName
+              _bgQuotaUser
+              (Just _bgPrettyPrint)
+              _bgFields
               _bgKey
               _bgOAuthToken
-              _bgFields
-              _bgCallback
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy BeaconsGetResource)

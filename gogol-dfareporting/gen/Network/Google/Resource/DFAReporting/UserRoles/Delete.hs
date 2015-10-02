@@ -53,9 +53,9 @@ type UserRolesDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing user role.
@@ -160,12 +160,12 @@ instance GoogleRequest UserRolesDelete' where
         type Rs UserRolesDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u UserRolesDelete'{..}
-          = go _urdQuotaUser (Just _urdPrettyPrint) _urdUserIP
-              _urdProfileId
-              _urdKey
-              _urdId
-              _urdOAuthToken
+          = go _urdProfileId _urdId _urdQuotaUser
+              (Just _urdPrettyPrint)
+              _urdUserIP
               _urdFields
+              _urdKey
+              _urdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

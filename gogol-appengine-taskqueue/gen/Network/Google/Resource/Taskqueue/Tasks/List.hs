@@ -53,9 +53,9 @@ type TasksListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Tasks2
 
 -- | List Tasks in a TaskQueue
@@ -157,12 +157,12 @@ instance GoogleRequest TasksList' where
         request
           = requestWithRoute defReq appEngineTaskQueueURL
         requestWithRoute r u TasksList'{..}
-          = go _tTaskqueue _tQuotaUser (Just _tPrettyPrint)
-              _tProject
+          = go _tProject _tTaskqueue _tQuotaUser
+              (Just _tPrettyPrint)
               _tUserIP
+              _tFields
               _tKey
               _tOAuthToken
-              _tFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TasksListResource)

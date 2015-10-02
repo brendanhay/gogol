@@ -50,9 +50,9 @@ type WebResourceDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Relinquish ownership of a website or domain.
@@ -147,11 +147,11 @@ instance GoogleRequest WebResourceDelete' where
         type Rs WebResourceDelete' = ()
         request = requestWithRoute defReq siteVerificationURL
         requestWithRoute r u WebResourceDelete'{..}
-          = go _wrdQuotaUser (Just _wrdPrettyPrint) _wrdUserIP
-              _wrdKey
-              _wrdId
-              _wrdOAuthToken
+          = go _wrdId _wrdQuotaUser (Just _wrdPrettyPrint)
+              _wrdUserIP
               _wrdFields
+              _wrdKey
+              _wrdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

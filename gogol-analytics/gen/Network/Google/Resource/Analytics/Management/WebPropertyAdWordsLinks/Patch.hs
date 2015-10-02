@@ -59,9 +59,9 @@ type ManagementWebPropertyAdWordsLinksPatchResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] EntityAdWordsLink :>
                                    Patch '[JSON] EntityAdWordsLink
@@ -202,14 +202,14 @@ instance GoogleRequest
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
           ManagementWebPropertyAdWordsLinksPatch'{..}
-          = go _mwpawlpQuotaUser (Just _mwpawlpPrettyPrint)
-              _mwpawlpWebPropertyId
-              _mwpawlpUserIP
-              _mwpawlpAccountId
-              _mwpawlpKey
+          = go _mwpawlpAccountId _mwpawlpWebPropertyId
               _mwpawlpWebPropertyAdWordsLinkId
-              _mwpawlpOAuthToken
+              _mwpawlpQuotaUser
+              (Just _mwpawlpPrettyPrint)
+              _mwpawlpUserIP
               _mwpawlpFields
+              _mwpawlpKey
+              _mwpawlpOAuthToken
               (Just AltJSON)
               _mwpawlpEntityAdWordsLink
           where go

@@ -54,9 +54,9 @@ type DatabasesListResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] DatabasesListResponse
 
@@ -160,12 +160,12 @@ instance GoogleRequest DatabasesList' where
         type Rs DatabasesList' = DatabasesListResponse
         request = requestWithRoute defReq sQLAdminURL
         requestWithRoute r u DatabasesList'{..}
-          = go _dlQuotaUser (Just _dlPrettyPrint) _dlProject
+          = go _dlProject _dlInstance _dlQuotaUser
+              (Just _dlPrettyPrint)
               _dlUserIP
+              _dlFields
               _dlKey
               _dlOAuthToken
-              _dlFields
-              _dlInstance
               (Just AltJSON)
           where go
                   = clientWithRoute

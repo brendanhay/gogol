@@ -54,9 +54,9 @@ type OrdersCancellineitemResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] OrdersCancelLineItemRequest :>
                              Post '[JSON] OrdersCancelLineItemResponse
@@ -171,12 +171,12 @@ instance GoogleRequest OrdersCancellineitem' where
              OrdersCancelLineItemResponse
         request = requestWithRoute defReq shoppingContentURL
         requestWithRoute r u OrdersCancellineitem'{..}
-          = go _oQuotaUser _oMerchantId (Just _oPrettyPrint)
+          = go _oMerchantId _oOrderId _oQuotaUser
+              (Just _oPrettyPrint)
               _oUserIP
+              _oFields
               _oKey
               _oOAuthToken
-              _oOrderId
-              _oFields
               (Just AltJSON)
               _oOrdersCancelLineItemRequest
           where go

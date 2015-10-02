@@ -51,9 +51,9 @@ type TurnBasedMatchesCancelResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Put '[JSON] ()
 
 -- | Cancel a turn-based match.
@@ -150,12 +150,12 @@ instance GoogleRequest TurnBasedMatchesCancel' where
         type Rs TurnBasedMatchesCancel' = ()
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u TurnBasedMatchesCancel'{..}
-          = go _tbmcQuotaUser (Just _tbmcPrettyPrint)
+          = go _tbmcMatchId _tbmcQuotaUser
+              (Just _tbmcPrettyPrint)
               _tbmcUserIP
+              _tbmcFields
               _tbmcKey
               _tbmcOAuthToken
-              _tbmcMatchId
-              _tbmcFields
               (Just AltJSON)
           where go
                   = clientWithRoute

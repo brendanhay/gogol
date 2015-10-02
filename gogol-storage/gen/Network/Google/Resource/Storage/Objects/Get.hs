@@ -56,19 +56,19 @@ type ObjectsGetResource =
        Capture "bucket" Text :>
          "o" :>
            Capture "object" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "ifMetagenerationMatch" Word64 :>
+             QueryParam "generation" Word64 :>
+               QueryParam "ifGenerationMatch" Word64 :>
                  QueryParam "ifGenerationNotMatch" Word64 :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "ifGenerationMatch" Word64 :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "ifMetagenerationNotMatch" Word64 :>
-                             QueryParam "projection" StorageObjectsGetProjection
-                               :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "generation" Word64 :>
-                                   QueryParam "fields" Text :>
+                   QueryParam "ifMetagenerationMatch" Word64 :>
+                     QueryParam "ifMetagenerationNotMatch" Word64 :>
+                       QueryParam "projection" StorageObjectsGetProjection
+                         :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] Object
        :<|>
@@ -76,20 +76,19 @@ type ObjectsGetResource =
          Capture "bucket" Text :>
            "o" :>
              Capture "object" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "ifMetagenerationMatch" Word64 :>
+               QueryParam "generation" Word64 :>
+                 QueryParam "ifGenerationMatch" Word64 :>
                    QueryParam "ifGenerationNotMatch" Word64 :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "ifGenerationMatch" Word64 :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "ifMetagenerationNotMatch" Word64 :>
-                               QueryParam "projection"
-                                 StorageObjectsGetProjection
-                                 :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "generation" Word64 :>
-                                     QueryParam "fields" Text :>
+                     QueryParam "ifMetagenerationMatch" Word64 :>
+                       QueryParam "ifMetagenerationNotMatch" Word64 :>
+                         QueryParam "projection" StorageObjectsGetProjection
+                           :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "userIp" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" Media :>
                                          Get '[OctetStream] Stream
 
@@ -254,19 +253,19 @@ instance GoogleRequest ObjectsGet' where
         type Rs ObjectsGet' = Object
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectsGet'{..}
-          = go _ogQuotaUser _ogIfMetagenerationMatch
+          = go _ogGeneration _ogIfGenerationMatch
               _ogIfGenerationNotMatch
-              (Just _ogPrettyPrint)
-              _ogIfGenerationMatch
-              _ogUserIP
-              _ogBucket
-              _ogKey
+              _ogIfMetagenerationMatch
               _ogIfMetagenerationNotMatch
-              _ogObject
               _ogProjection
-              _ogOAuthToken
-              _ogGeneration
+              _ogBucket
+              _ogObject
+              _ogQuotaUser
+              (Just _ogPrettyPrint)
+              _ogUserIP
               _ogFields
+              _ogKey
+              _ogOAuthToken
               (Just AltJSON)
           where go :<|> _
                   = clientWithRoute (Proxy :: Proxy ObjectsGetResource)
@@ -277,19 +276,19 @@ instance GoogleRequest ObjectsGet' where
         type Rs (Download ObjectsGet') = Stream
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectsGet'{..}
-          = go _ogQuotaUser _ogIfMetagenerationMatch
+          = go _ogGeneration _ogIfGenerationMatch
               _ogIfGenerationNotMatch
-              (Just _ogPrettyPrint)
-              _ogIfGenerationMatch
-              _ogUserIP
-              _ogBucket
-              _ogKey
+              _ogIfMetagenerationMatch
               _ogIfMetagenerationNotMatch
-              _ogObject
               _ogProjection
-              _ogOAuthToken
-              _ogGeneration
+              _ogBucket
+              _ogObject
+              _ogQuotaUser
+              (Just _ogPrettyPrint)
+              _ogUserIP
               _ogFields
+              _ogKey
+              _ogOAuthToken
               (Just Media)
           where go :<|> _
                   = clientWithRoute (Proxy :: Proxy ObjectsGetResource)

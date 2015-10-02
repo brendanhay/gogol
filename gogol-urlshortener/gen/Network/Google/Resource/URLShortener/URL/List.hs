@@ -26,7 +26,7 @@ module Network.Google.Resource.URLShortener.URL.List
       URLListResource
 
     -- * Creating a Request
-    , uRLList'
+    , urlList'
     , URLList'
 
     -- * Request Lenses
@@ -48,20 +48,20 @@ import           Network.Google.URLShortener.Types
 type URLListResource =
      "url" :>
        "history" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "start-token" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "projection" URLshortenerURLListProjection
-                     :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+         QueryParam "projection" URLshortenerURLListProjection
+           :>
+           QueryParam "start-token" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] URLHistory
 
 -- | Retrieves a list of URLs shortened by a user.
 --
--- /See:/ 'uRLList'' smart constructor.
+-- /See:/ 'urlList'' smart constructor.
 data URLList' = URLList'
     { _ulQuotaUser   :: !(Maybe Text)
     , _ulPrettyPrint :: !Bool
@@ -92,9 +92,9 @@ data URLList' = URLList'
 -- * 'ulOAuthToken'
 --
 -- * 'ulFields'
-uRLList'
+urlList'
     :: URLList'
-uRLList' =
+urlList' =
     URLList'
     { _ulQuotaUser = Nothing
     , _ulPrettyPrint = True
@@ -157,12 +157,12 @@ instance GoogleRequest URLList' where
         type Rs URLList' = URLHistory
         request = requestWithRoute defReq uRLShortenerURL
         requestWithRoute r u URLList'{..}
-          = go _ulQuotaUser (Just _ulPrettyPrint) _ulUserIP
-              _ulStartToken
-              _ulKey
-              _ulProjection
-              _ulOAuthToken
+          = go _ulProjection _ulStartToken _ulQuotaUser
+              (Just _ulPrettyPrint)
+              _ulUserIP
               _ulFields
+              _ulKey
+              _ulOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy URLListResource) r

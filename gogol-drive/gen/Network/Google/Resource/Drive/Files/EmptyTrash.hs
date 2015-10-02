@@ -49,9 +49,9 @@ type FilesEmptyTrashResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Permanently deletes all of the user\'s trashed files.
@@ -138,9 +138,9 @@ instance GoogleRequest FilesEmptyTrash' where
         request = requestWithRoute defReq driveURL
         requestWithRoute r u FilesEmptyTrash'{..}
           = go _fetQuotaUser (Just _fetPrettyPrint) _fetUserIP
+              _fetFields
               _fetKey
               _fetOAuthToken
-              _fetFields
               (Just AltJSON)
           where go
                   = clientWithRoute

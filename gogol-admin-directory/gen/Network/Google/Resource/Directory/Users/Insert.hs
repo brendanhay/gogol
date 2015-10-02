@@ -49,9 +49,9 @@ type UsersInsertResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] User :> Post '[JSON] User
 
@@ -145,9 +145,9 @@ instance GoogleRequest UsersInsert' where
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u UsersInsert'{..}
           = go _uiQuotaUser (Just _uiPrettyPrint) _uiUserIP
+              _uiFields
               _uiKey
               _uiOAuthToken
-              _uiFields
               (Just AltJSON)
               _uiUser
           where go

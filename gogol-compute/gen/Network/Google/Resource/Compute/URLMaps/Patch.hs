@@ -27,7 +27,7 @@ module Network.Google.Resource.Compute.URLMaps.Patch
       URLMapsPatchResource
 
     -- * Creating a Request
-    , uRLMapsPatch'
+    , urlMapsPatch'
     , URLMapsPatch'
 
     -- * Request Lenses
@@ -55,16 +55,16 @@ type URLMapsPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] URLMap :> Patch '[JSON] Operation
 
 -- | Update the entire content of the UrlMap resource. This method supports
 -- patch semantics.
 --
--- /See:/ 'uRLMapsPatch'' smart constructor.
+-- /See:/ 'urlMapsPatch'' smart constructor.
 data URLMapsPatch' = URLMapsPatch'
     { _umpQuotaUser   :: !(Maybe Text)
     , _umpURLMap      :: !Text
@@ -98,12 +98,12 @@ data URLMapsPatch' = URLMapsPatch'
 -- * 'umpOAuthToken'
 --
 -- * 'umpFields'
-uRLMapsPatch'
+urlMapsPatch'
     :: Text -- ^ 'urlMap'
     -> URLMap -- ^ 'URLMap'
     -> Text -- ^ 'project'
     -> URLMapsPatch'
-uRLMapsPatch' pUmpURLMap_ pUmpURLMap_ pUmpProject_ =
+urlMapsPatch' pUmpURLMap_ pUmpURLMap_ pUmpProject_ =
     URLMapsPatch'
     { _umpQuotaUser = Nothing
     , _umpURLMap = pUmpURLMap_
@@ -175,12 +175,12 @@ instance GoogleRequest URLMapsPatch' where
         type Rs URLMapsPatch' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u URLMapsPatch'{..}
-          = go _umpQuotaUser _umpURLMap (Just _umpPrettyPrint)
-              _umpProject
+          = go _umpProject _umpURLMap _umpQuotaUser
+              (Just _umpPrettyPrint)
               _umpUserIP
+              _umpFields
               _umpKey
               _umpOAuthToken
-              _umpFields
               (Just AltJSON)
               _umpURLMap
           where go

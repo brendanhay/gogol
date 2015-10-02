@@ -62,24 +62,25 @@ type LayersAnnotationDataListResource =
          "layers" :>
            Capture "layerId" Text :>
              "data" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "w" Int32 :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "scale" Int32 :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "locale" Text :>
-                           QueryParam "contentVersion" Text :>
+               QueryParams "annotationDataId" Text :>
+                 QueryParam "h" Int32 :>
+                   QueryParam "locale" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "scale" Int32 :>
+                           QueryParam "source" Text :>
                              QueryParam "updatedMax" Text :>
-                               QueryParam "key" Key :>
-                                 QueryParam "updatedMin" Text :>
-                                   QueryParams "annotationDataId" Text :>
-                                     QueryParam "source" Text :>
-                                       QueryParam "h" Int32 :>
-                                         QueryParam "pageToken" Text :>
-                                           QueryParam "oauth_token" OAuthToken
-                                             :>
-                                             QueryParam "maxResults" Word32 :>
-                                               QueryParam "fields" Text :>
+                               QueryParam "updatedMin" Text :>
+                                 QueryParam "w" Int32 :>
+                                   QueryParam "contentVersion" Text :>
+                                     QueryParam "quotaUser" Text :>
+                                       QueryParam "prettyPrint" Bool :>
+                                         QueryParam "userIp" Text :>
+                                           QueryParam "fields" Text :>
+                                             QueryParam "key" Key :>
+                                               QueryParam "oauth_token"
+                                                 OAuthToken
+                                                 :>
                                                  QueryParam "alt" AltJSON :>
                                                    Get '[JSON] Annotationsdata
 
@@ -298,23 +299,23 @@ instance GoogleRequest LayersAnnotationDataList'
         type Rs LayersAnnotationDataList' = Annotationsdata
         request = requestWithRoute defReq booksURL
         requestWithRoute r u LayersAnnotationDataList'{..}
-          = go _ladlQuotaUser _ladlW (Just _ladlPrettyPrint)
-              _ladlScale
-              _ladlUserIP
-              _ladlLocale
-              (Just _ladlContentVersion)
-              _ladlUpdatedMax
-              _ladlKey
-              _ladlUpdatedMin
-              _ladlAnnotationDataId
-              _ladlVolumeId
-              _ladlSource
-              _ladlH
-              _ladlPageToken
-              _ladlOAuthToken
-              _ladlLayerId
+          = go _ladlAnnotationDataId _ladlH _ladlLocale
               _ladlMaxResults
+              _ladlPageToken
+              _ladlScale
+              _ladlSource
+              _ladlUpdatedMax
+              _ladlUpdatedMin
+              _ladlW
+              _ladlVolumeId
+              _ladlLayerId
+              (Just _ladlContentVersion)
+              _ladlQuotaUser
+              (Just _ladlPrettyPrint)
+              _ladlUserIP
               _ladlFields
+              _ladlKey
+              _ladlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

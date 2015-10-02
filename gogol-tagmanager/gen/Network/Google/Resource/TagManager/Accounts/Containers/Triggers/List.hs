@@ -54,9 +54,9 @@ type AccountsContainersTriggersListResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ListTriggersResponse
 
@@ -170,13 +170,12 @@ instance GoogleRequest
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersTriggersList'{..}
-          = go _actlQuotaUser (Just _actlPrettyPrint)
-              _actlContainerId
+          = go _actlAccountId _actlContainerId _actlQuotaUser
+              (Just _actlPrettyPrint)
               _actlUserIP
-              _actlAccountId
+              _actlFields
               _actlKey
               _actlOAuthToken
-              _actlFields
               (Just AltJSON)
           where go
                   = clientWithRoute

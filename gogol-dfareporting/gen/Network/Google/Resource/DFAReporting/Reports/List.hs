@@ -53,21 +53,21 @@ type ReportsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "reports" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "sortOrder"
-                   DfareportingReportsListSortOrder
+           QueryParam "maxResults" Int32 :>
+             QueryParam "pageToken" Text :>
+               QueryParam "scope" DfareportingReportsListScope :>
+                 QueryParam "sortField"
+                   DfareportingReportsListSortField
                    :>
-                   QueryParam "key" Key :>
-                     QueryParam "scope" DfareportingReportsListScope :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "sortField"
-                           DfareportingReportsListSortField
-                           :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "maxResults" Int32 :>
-                               QueryParam "fields" Text :>
+                   QueryParam "sortOrder"
+                     DfareportingReportsListSortOrder
+                     :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] ReportList
 
@@ -204,16 +204,16 @@ instance GoogleRequest ReportsList' where
         type Rs ReportsList' = ReportList
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ReportsList'{..}
-          = go _rQuotaUser (Just _rPrettyPrint) _rUserIP
-              _rProfileId
-              (Just _rSortOrder)
-              _rKey
-              (Just _rScope)
-              _rPageToken
+          = go _rMaxResults _rPageToken (Just _rScope)
               (Just _rSortField)
-              _rOAuthToken
-              _rMaxResults
+              (Just _rSortOrder)
+              _rProfileId
+              _rQuotaUser
+              (Just _rPrettyPrint)
+              _rUserIP
               _rFields
+              _rKey
+              _rOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

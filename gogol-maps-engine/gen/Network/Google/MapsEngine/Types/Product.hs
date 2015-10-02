@@ -2125,190 +2125,192 @@ instance ToJSON TablesListResponse where
 --
 -- /See:/ 'map'' smart constructor.
 data Map = Map
-    { _mapCreationTime              :: !(Maybe UTCTime)
-    , _mapWritersCanEditPermissions :: !(Maybe Bool)
-    , _mapEtag                      :: !(Maybe Text)
-    , _mapDefaultViewport           :: !(Maybe [Double])
-    , _mapContents                  :: !(Maybe [MapItem])
-    , _mapPublishingStatus          :: !(Maybe MapPublishingStatus)
-    , _mapCreatorEmail              :: !(Maybe Text)
-    , _mapLastModifiedTime          :: !(Maybe UTCTime)
-    , _mapLastModifierEmail         :: !(Maybe Text)
-    , _mapVersions                  :: !(Maybe [Text])
-    , _mapName                      :: !(Maybe Text)
-    , _mapBbox                      :: !(Maybe [Double])
-    , _mapProcessingStatus          :: !(Maybe MapProcessingStatus)
-    , _mapId                        :: !(Maybe Text)
-    , _mapProjectId                 :: !(Maybe Text)
-    , _mapDraftAccessList           :: !(Maybe Text)
-    , _mapPublishedAccessList       :: !(Maybe Text)
-    , _mapDescription               :: !(Maybe Text)
-    , _mapTags                      :: !(Maybe [Text])
+    { _mapaCreationTime              :: !(Maybe UTCTime)
+    , _mapaWritersCanEditPermissions :: !(Maybe Bool)
+    , _mapaEtag                      :: !(Maybe Text)
+    , _mapaDefaultViewport           :: !(Maybe [Double])
+    , _mapaContents                  :: !(Maybe [MapItem])
+    , _mapaPublishingStatus          :: !(Maybe MapPublishingStatus)
+    , _mapaCreatorEmail              :: !(Maybe Text)
+    , _mapaLastModifiedTime          :: !(Maybe UTCTime)
+    , _mapaLastModifierEmail         :: !(Maybe Text)
+    , _mapaVersions                  :: !(Maybe [Text])
+    , _mapaName                      :: !(Maybe Text)
+    , _mapaBbox                      :: !(Maybe [Double])
+    , _mapaProcessingStatus          :: !(Maybe MapProcessingStatus)
+    , _mapaId                        :: !(Maybe Text)
+    , _mapaProjectId                 :: !(Maybe Text)
+    , _mapaDraftAccessList           :: !(Maybe Text)
+    , _mapaPublishedAccessList       :: !(Maybe Text)
+    , _mapaDescription               :: !(Maybe Text)
+    , _mapaTags                      :: !(Maybe [Text])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Map' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mapCreationTime'
+-- * 'mapaCreationTime'
 --
--- * 'mapWritersCanEditPermissions'
+-- * 'mapaWritersCanEditPermissions'
 --
--- * 'mapEtag'
+-- * 'mapaEtag'
 --
--- * 'mapDefaultViewport'
+-- * 'mapaDefaultViewport'
 --
--- * 'mapContents'
+-- * 'mapaContents'
 --
--- * 'mapPublishingStatus'
+-- * 'mapaPublishingStatus'
 --
--- * 'mapCreatorEmail'
+-- * 'mapaCreatorEmail'
 --
--- * 'mapLastModifiedTime'
+-- * 'mapaLastModifiedTime'
 --
--- * 'mapLastModifierEmail'
+-- * 'mapaLastModifierEmail'
 --
--- * 'mapVersions'
+-- * 'mapaVersions'
 --
--- * 'mapName'
+-- * 'mapaName'
 --
--- * 'mapBbox'
+-- * 'mapaBbox'
 --
--- * 'mapProcessingStatus'
+-- * 'mapaProcessingStatus'
 --
--- * 'mapId'
+-- * 'mapaId'
 --
--- * 'mapProjectId'
+-- * 'mapaProjectId'
 --
--- * 'mapDraftAccessList'
+-- * 'mapaDraftAccessList'
 --
--- * 'mapPublishedAccessList'
+-- * 'mapaPublishedAccessList'
 --
--- * 'mapDescription'
+-- * 'mapaDescription'
 --
--- * 'mapTags'
+-- * 'mapaTags'
 map'
     :: Map
 map' =
     Map
-    { _mapCreationTime = Nothing
-    , _mapWritersCanEditPermissions = Nothing
-    , _mapEtag = Nothing
-    , _mapDefaultViewport = Nothing
-    , _mapContents = Nothing
-    , _mapPublishingStatus = Nothing
-    , _mapCreatorEmail = Nothing
-    , _mapLastModifiedTime = Nothing
-    , _mapLastModifierEmail = Nothing
-    , _mapVersions = Nothing
-    , _mapName = Nothing
-    , _mapBbox = Nothing
-    , _mapProcessingStatus = Nothing
-    , _mapId = Nothing
-    , _mapProjectId = Nothing
-    , _mapDraftAccessList = Nothing
-    , _mapPublishedAccessList = Nothing
-    , _mapDescription = Nothing
-    , _mapTags = Nothing
+    { _mapaCreationTime = Nothing
+    , _mapaWritersCanEditPermissions = Nothing
+    , _mapaEtag = Nothing
+    , _mapaDefaultViewport = Nothing
+    , _mapaContents = Nothing
+    , _mapaPublishingStatus = Nothing
+    , _mapaCreatorEmail = Nothing
+    , _mapaLastModifiedTime = Nothing
+    , _mapaLastModifierEmail = Nothing
+    , _mapaVersions = Nothing
+    , _mapaName = Nothing
+    , _mapaBbox = Nothing
+    , _mapaProcessingStatus = Nothing
+    , _mapaId = Nothing
+    , _mapaProjectId = Nothing
+    , _mapaDraftAccessList = Nothing
+    , _mapaPublishedAccessList = Nothing
+    , _mapaDescription = Nothing
+    , _mapaTags = Nothing
     }
 
 -- | The creation time of this map. The value is an RFC 3339 formatted
 -- date-time value (e.g. 1970-01-01T00:00:00Z).
-mapCreationTime :: Lens' Map (Maybe UTCTime)
-mapCreationTime
-  = lens _mapCreationTime
-      (\ s a -> s{_mapCreationTime = a})
+mapaCreationTime :: Lens' Map (Maybe UTCTime)
+mapaCreationTime
+  = lens _mapaCreationTime
+      (\ s a -> s{_mapaCreationTime = a})
 
 -- | If true, WRITERs of the asset are able to edit the asset permissions.
-mapWritersCanEditPermissions :: Lens' Map (Maybe Bool)
-mapWritersCanEditPermissions
-  = lens _mapWritersCanEditPermissions
-      (\ s a -> s{_mapWritersCanEditPermissions = a})
+mapaWritersCanEditPermissions :: Lens' Map (Maybe Bool)
+mapaWritersCanEditPermissions
+  = lens _mapaWritersCanEditPermissions
+      (\ s a -> s{_mapaWritersCanEditPermissions = a})
 
 -- | The ETag, used to refer to the current version of the asset.
-mapEtag :: Lens' Map (Maybe Text)
-mapEtag = lens _mapEtag (\ s a -> s{_mapEtag = a})
+mapaEtag :: Lens' Map (Maybe Text)
+mapaEtag = lens _mapaEtag (\ s a -> s{_mapaEtag = a})
 
 -- | An array of four numbers (west, south, east, north) which defines the
 -- rectangular bounding box of the default viewport. The numbers represent
 -- latitude and longitude in decimal degrees.
-mapDefaultViewport :: Lens' Map [Double]
-mapDefaultViewport
-  = lens _mapDefaultViewport
-      (\ s a -> s{_mapDefaultViewport = a})
+mapaDefaultViewport :: Lens' Map [Double]
+mapaDefaultViewport
+  = lens _mapaDefaultViewport
+      (\ s a -> s{_mapaDefaultViewport = a})
       . _Default
       . _Coerce
 
 -- | The contents of this Map.
-mapContents :: Lens' Map [MapItem]
-mapContents
-  = lens _mapContents (\ s a -> s{_mapContents = a}) .
-      _Default
+mapaContents :: Lens' Map [MapItem]
+mapaContents
+  = lens _mapaContents (\ s a -> s{_mapaContents = a})
+      . _Default
       . _Coerce
 
 -- | The publishing status of this map.
-mapPublishingStatus :: Lens' Map (Maybe MapPublishingStatus)
-mapPublishingStatus
-  = lens _mapPublishingStatus
-      (\ s a -> s{_mapPublishingStatus = a})
+mapaPublishingStatus :: Lens' Map (Maybe MapPublishingStatus)
+mapaPublishingStatus
+  = lens _mapaPublishingStatus
+      (\ s a -> s{_mapaPublishingStatus = a})
 
 -- | The email address of the creator of this map. This is only returned on
 -- GET requests and not LIST requests.
-mapCreatorEmail :: Lens' Map (Maybe Text)
-mapCreatorEmail
-  = lens _mapCreatorEmail
-      (\ s a -> s{_mapCreatorEmail = a})
+mapaCreatorEmail :: Lens' Map (Maybe Text)
+mapaCreatorEmail
+  = lens _mapaCreatorEmail
+      (\ s a -> s{_mapaCreatorEmail = a})
 
 -- | The last modified time of this map. The value is an RFC 3339 formatted
 -- date-time value (e.g. 1970-01-01T00:00:00Z).
-mapLastModifiedTime :: Lens' Map (Maybe UTCTime)
-mapLastModifiedTime
-  = lens _mapLastModifiedTime
-      (\ s a -> s{_mapLastModifiedTime = a})
+mapaLastModifiedTime :: Lens' Map (Maybe UTCTime)
+mapaLastModifiedTime
+  = lens _mapaLastModifiedTime
+      (\ s a -> s{_mapaLastModifiedTime = a})
 
 -- | The email address of the last modifier of this map. This is only
 -- returned on GET requests and not LIST requests.
-mapLastModifierEmail :: Lens' Map (Maybe Text)
-mapLastModifierEmail
-  = lens _mapLastModifierEmail
-      (\ s a -> s{_mapLastModifierEmail = a})
+mapaLastModifierEmail :: Lens' Map (Maybe Text)
+mapaLastModifierEmail
+  = lens _mapaLastModifierEmail
+      (\ s a -> s{_mapaLastModifierEmail = a})
 
 -- | Deprecated: An array containing the available versions of this Map.
 -- Currently may only contain \"published\". The publishingStatus field
 -- should be used instead.
-mapVersions :: Lens' Map [Text]
-mapVersions
-  = lens _mapVersions (\ s a -> s{_mapVersions = a}) .
-      _Default
+mapaVersions :: Lens' Map [Text]
+mapaVersions
+  = lens _mapaVersions (\ s a -> s{_mapaVersions = a})
+      . _Default
       . _Coerce
 
 -- | The name of this Map, supplied by the author.
-mapName :: Lens' Map (Maybe Text)
-mapName = lens _mapName (\ s a -> s{_mapName = a})
+mapaName :: Lens' Map (Maybe Text)
+mapaName = lens _mapaName (\ s a -> s{_mapaName = a})
 
 -- | A rectangular bounding box which contains all of the data in this Map.
 -- The box is expressed as \\\"west, south, east, north\\\". The numbers
 -- represent latitude and longitude in decimal degrees.
-mapBbox :: Lens' Map [Double]
-mapBbox
-  = lens _mapBbox (\ s a -> s{_mapBbox = a}) . _Default
+mapaBbox :: Lens' Map [Double]
+mapaBbox
+  = lens _mapaBbox (\ s a -> s{_mapaBbox = a}) .
+      _Default
       . _Coerce
 
 -- | The processing status of this map. Map processing is automatically
 -- started once a map becomes ready for processing.
-mapProcessingStatus :: Lens' Map (Maybe MapProcessingStatus)
-mapProcessingStatus
-  = lens _mapProcessingStatus
-      (\ s a -> s{_mapProcessingStatus = a})
+mapaProcessingStatus :: Lens' Map (Maybe MapProcessingStatus)
+mapaProcessingStatus
+  = lens _mapaProcessingStatus
+      (\ s a -> s{_mapaProcessingStatus = a})
 
 -- | A globally unique ID, used to refer to this Map.
-mapId :: Lens' Map (Maybe Text)
-mapId = lens _mapId (\ s a -> s{_mapId = a})
+mapaId :: Lens' Map (Maybe Text)
+mapaId = lens _mapaId (\ s a -> s{_mapaId = a})
 
 -- | The ID of the project that this Map is in.
-mapProjectId :: Lens' Map (Maybe Text)
-mapProjectId
-  = lens _mapProjectId (\ s a -> s{_mapProjectId = a})
+mapaProjectId :: Lens' Map (Maybe Text)
+mapaProjectId
+  = lens _mapaProjectId
+      (\ s a -> s{_mapaProjectId = a})
 
 -- | Deprecated: The name of an access list of the Map Editor type. The user
 -- on whose behalf the request is being sent must be an editor on that
@@ -2319,10 +2321,10 @@ mapProjectId
 -- July 14th, 2014, you will not be able to send API requests that include
 -- access lists. Note: This is an input field only. It is not returned in
 -- response to a list or get request.
-mapDraftAccessList :: Lens' Map (Maybe Text)
-mapDraftAccessList
-  = lens _mapDraftAccessList
-      (\ s a -> s{_mapDraftAccessList = a})
+mapaDraftAccessList :: Lens' Map (Maybe Text)
+mapaDraftAccessList
+  = lens _mapaDraftAccessList
+      (\ s a -> s{_mapaDraftAccessList = a})
 
 -- | Deprecated: The access list to whom view permissions are granted. The
 -- value must be the name of a Maps Engine access list of the Map Viewer
@@ -2333,21 +2335,22 @@ mapDraftAccessList
 -- GME account\/project after July 14th, 2014, you will not be able to send
 -- API requests that include access lists. This is an input field only. It
 -- is not returned in response to a list or get request.
-mapPublishedAccessList :: Lens' Map (Maybe Text)
-mapPublishedAccessList
-  = lens _mapPublishedAccessList
-      (\ s a -> s{_mapPublishedAccessList = a})
+mapaPublishedAccessList :: Lens' Map (Maybe Text)
+mapaPublishedAccessList
+  = lens _mapaPublishedAccessList
+      (\ s a -> s{_mapaPublishedAccessList = a})
 
 -- | The description of this Map, supplied by the author.
-mapDescription :: Lens' Map (Maybe Text)
-mapDescription
-  = lens _mapDescription
-      (\ s a -> s{_mapDescription = a})
+mapaDescription :: Lens' Map (Maybe Text)
+mapaDescription
+  = lens _mapaDescription
+      (\ s a -> s{_mapaDescription = a})
 
 -- | Tags of this Map.
-mapTags :: Lens' Map [Text]
-mapTags
-  = lens _mapTags (\ s a -> s{_mapTags = a}) . _Default
+mapaTags :: Lens' Map [Text]
+mapaTags
+  = lens _mapaTags (\ s a -> s{_mapaTags = a}) .
+      _Default
       . _Coerce
 
 instance FromJSON Map where
@@ -2379,26 +2382,26 @@ instance ToJSON Map where
         toJSON Map{..}
           = object
               (catMaybes
-                 [("creationTime" .=) <$> _mapCreationTime,
+                 [("creationTime" .=) <$> _mapaCreationTime,
                   ("writersCanEditPermissions" .=) <$>
-                    _mapWritersCanEditPermissions,
-                  ("etag" .=) <$> _mapEtag,
-                  ("defaultViewport" .=) <$> _mapDefaultViewport,
-                  ("contents" .=) <$> _mapContents,
-                  ("publishingStatus" .=) <$> _mapPublishingStatus,
-                  ("creatorEmail" .=) <$> _mapCreatorEmail,
-                  ("lastModifiedTime" .=) <$> _mapLastModifiedTime,
-                  ("lastModifierEmail" .=) <$> _mapLastModifierEmail,
-                  ("versions" .=) <$> _mapVersions,
-                  ("name" .=) <$> _mapName, ("bbox" .=) <$> _mapBbox,
-                  ("processingStatus" .=) <$> _mapProcessingStatus,
-                  ("id" .=) <$> _mapId,
-                  ("projectId" .=) <$> _mapProjectId,
-                  ("draftAccessList" .=) <$> _mapDraftAccessList,
+                    _mapaWritersCanEditPermissions,
+                  ("etag" .=) <$> _mapaEtag,
+                  ("defaultViewport" .=) <$> _mapaDefaultViewport,
+                  ("contents" .=) <$> _mapaContents,
+                  ("publishingStatus" .=) <$> _mapaPublishingStatus,
+                  ("creatorEmail" .=) <$> _mapaCreatorEmail,
+                  ("lastModifiedTime" .=) <$> _mapaLastModifiedTime,
+                  ("lastModifierEmail" .=) <$> _mapaLastModifierEmail,
+                  ("versions" .=) <$> _mapaVersions,
+                  ("name" .=) <$> _mapaName, ("bbox" .=) <$> _mapaBbox,
+                  ("processingStatus" .=) <$> _mapaProcessingStatus,
+                  ("id" .=) <$> _mapaId,
+                  ("projectId" .=) <$> _mapaProjectId,
+                  ("draftAccessList" .=) <$> _mapaDraftAccessList,
                   ("publishedAccessList" .=) <$>
-                    _mapPublishedAccessList,
-                  ("description" .=) <$> _mapDescription,
-                  ("tags" .=) <$> _mapTags])
+                    _mapaPublishedAccessList,
+                  ("description" .=) <$> _mapaDescription,
+                  ("tags" .=) <$> _mapaTags])
 
 -- | Style for icon, this is part of point style.
 --

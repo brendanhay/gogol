@@ -27,7 +27,7 @@ module Network.Google.Resource.SQL.SSLCerts.Delete
       SSLCertsDeleteResource
 
     -- * Creating a Request
-    , sSLCertsDelete'
+    , sslCertsDelete'
     , SSLCertsDelete'
 
     -- * Request Lenses
@@ -57,16 +57,16 @@ type SSLCertsDeleteResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Delete '[JSON] Operation
 
 -- | Deletes the SSL certificate. The change will not take effect until the
 -- instance is restarted.
 --
--- /See:/ 'sSLCertsDelete'' smart constructor.
+-- /See:/ 'sslCertsDelete'' smart constructor.
 data SSLCertsDelete' = SSLCertsDelete'
     { _scdQuotaUser       :: !(Maybe Text)
     , _scdPrettyPrint     :: !Bool
@@ -100,12 +100,12 @@ data SSLCertsDelete' = SSLCertsDelete'
 -- * 'scdFields'
 --
 -- * 'scdInstance'
-sSLCertsDelete'
+sslCertsDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'sha1Fingerprint'
     -> Text -- ^ 'instance'
     -> SSLCertsDelete'
-sSLCertsDelete' pScdProject_ pScdSha1Fingerprint_ pScdInstance_ =
+sslCertsDelete' pScdProject_ pScdSha1Fingerprint_ pScdInstance_ =
     SSLCertsDelete'
     { _scdQuotaUser = Nothing
     , _scdPrettyPrint = True
@@ -178,13 +178,13 @@ instance GoogleRequest SSLCertsDelete' where
         type Rs SSLCertsDelete' = Operation
         request = requestWithRoute defReq sQLAdminURL
         requestWithRoute r u SSLCertsDelete'{..}
-          = go _scdQuotaUser (Just _scdPrettyPrint) _scdProject
+          = go _scdProject _scdInstance _scdSha1Fingerprint
+              _scdQuotaUser
+              (Just _scdPrettyPrint)
               _scdUserIP
+              _scdFields
               _scdKey
               _scdOAuthToken
-              _scdSha1Fingerprint
-              _scdFields
-              _scdInstance
               (Just AltJSON)
           where go
                   = clientWithRoute

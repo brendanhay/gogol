@@ -49,15 +49,15 @@ import           Network.Google.Prelude
 -- 'AboutGet'' request conforms to.
 type AboutGetResource =
      "about" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "includeSubscribed" Bool :>
-               QueryParam "startChangeId" Int64 :>
-                 QueryParam "maxChangeIdCount" Int64 :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+       QueryParam "includeSubscribed" Bool :>
+         QueryParam "maxChangeIdCount" Int64 :>
+           QueryParam "startChangeId" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] About
 
 -- | Gets the information about the current user along with Drive API
@@ -175,13 +175,15 @@ instance GoogleRequest AboutGet' where
         type Rs AboutGet' = About
         request = requestWithRoute defReq driveURL
         requestWithRoute r u AboutGet'{..}
-          = go _agQuotaUser (Just _agPrettyPrint) _agUserIP
-              (Just _agIncludeSubscribed)
-              _agStartChangeId
+          = go (Just _agIncludeSubscribed)
               (Just _agMaxChangeIdCount)
+              _agStartChangeId
+              _agQuotaUser
+              (Just _agPrettyPrint)
+              _agUserIP
+              _agFields
               _agKey
               _agOAuthToken
-              _agFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy AboutGetResource) r

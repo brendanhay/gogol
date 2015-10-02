@@ -53,9 +53,9 @@ type ImagesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Image
 
 -- | Returns the specified image resource.
@@ -162,13 +162,12 @@ instance GoogleRequest ImagesGet' where
         type Rs ImagesGet' = Image
         request = requestWithRoute defReq computeURL
         requestWithRoute r u ImagesGet'{..}
-          = go _imamQuotaUser _imamImage
+          = go _imamProject _imamImage _imamQuotaUser
               (Just _imamPrettyPrint)
-              _imamProject
               _imamUserIP
+              _imamFields
               _imamKey
               _imamOAuthToken
-              _imamFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy ImagesGetResource)

@@ -50,16 +50,16 @@ import           Network.Google.Prelude
 type CloudLoadingAddBookResource =
      "cloudloading" :>
        "addBook" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "mime_type" Text :>
-                 QueryParam "upload_client_token" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "name" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "drive_document_id" Text :>
-                           QueryParam "fields" Text :>
+         QueryParam "drive_document_id" Text :>
+           QueryParam "mime_type" Text :>
+             QueryParam "name" Text :>
+               QueryParam "upload_client_token" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Post '[JSON] BooksCloudLoadingResource
 
@@ -185,15 +185,14 @@ instance GoogleRequest CloudLoadingAddBook' where
              BooksCloudLoadingResource
         request = requestWithRoute defReq booksURL
         requestWithRoute r u CloudLoadingAddBook'{..}
-          = go _clabQuotaUser (Just _clabPrettyPrint)
-              _clabUserIP
-              _clabMimeType
+          = go _clabDriveDocumentId _clabMimeType _clabName
               _clabUploadClientToken
-              _clabKey
-              _clabName
-              _clabOAuthToken
-              _clabDriveDocumentId
+              _clabQuotaUser
+              (Just _clabPrettyPrint)
+              _clabUserIP
               _clabFields
+              _clabKey
+              _clabOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

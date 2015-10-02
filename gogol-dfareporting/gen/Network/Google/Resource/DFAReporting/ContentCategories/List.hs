@@ -54,22 +54,22 @@ type ContentCategoriesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "contentCategories" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
+           QueryParams "ids" Int64 :>
+             QueryParam "maxResults" Int32 :>
+               QueryParam "pageToken" Text :>
                  QueryParam "searchString" Text :>
-                   QueryParams "ids" Int64 :>
+                   QueryParam "sortField"
+                     DfareportingContentCategoriesListSortField
+                     :>
                      QueryParam "sortOrder"
                        DfareportingContentCategoriesListSortOrder
                        :>
-                       QueryParam "key" Key :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "sortField"
-                             DfareportingContentCategoriesListSortField
-                             :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "maxResults" Int32 :>
-                                 QueryParam "fields" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] ContentCategoriesListResponse
 
@@ -229,17 +229,17 @@ instance GoogleRequest ContentCategoriesList' where
              ContentCategoriesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ContentCategoriesList'{..}
-          = go _cclQuotaUser (Just _cclPrettyPrint) _cclUserIP
+          = go _cclIds _cclMaxResults _cclPageToken
               _cclSearchString
-              _cclIds
-              _cclProfileId
-              _cclSortOrder
-              _cclKey
-              _cclPageToken
               _cclSortField
-              _cclOAuthToken
-              _cclMaxResults
+              _cclSortOrder
+              _cclProfileId
+              _cclQuotaUser
+              (Just _cclPrettyPrint)
+              _cclUserIP
               _cclFields
+              _cclKey
+              _cclOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

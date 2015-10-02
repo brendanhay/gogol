@@ -51,9 +51,9 @@ type ReferencesetsSearchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] SearchReferenceSetsRequest :>
                          Post '[JSON] SearchReferenceSetsResponse
@@ -155,9 +155,9 @@ instance GoogleRequest ReferencesetsSearch' where
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u ReferencesetsSearch'{..}
           = go _rssQuotaUser (Just _rssPrettyPrint) _rssUserIP
+              _rssFields
               _rssKey
               _rssOAuthToken
-              _rssFields
               (Just AltJSON)
               _rssSearchReferenceSetsRequest
           where go

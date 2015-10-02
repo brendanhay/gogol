@@ -54,9 +54,9 @@ type TrainedModelsPredictResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Input :> Post '[JSON] Output
 
@@ -171,12 +171,12 @@ instance GoogleRequest TrainedModelsPredict' where
         type Rs TrainedModelsPredict' = Output
         request = requestWithRoute defReq predictionURL
         requestWithRoute r u TrainedModelsPredict'{..}
-          = go _tmpQuotaUser (Just _tmpPrettyPrint) _tmpProject
+          = go _tmpProject _tmpId _tmpQuotaUser
+              (Just _tmpPrettyPrint)
               _tmpUserIP
-              _tmpKey
-              _tmpId
-              _tmpOAuthToken
               _tmpFields
+              _tmpKey
+              _tmpOAuthToken
               (Just AltJSON)
               _tmpInput
           where go

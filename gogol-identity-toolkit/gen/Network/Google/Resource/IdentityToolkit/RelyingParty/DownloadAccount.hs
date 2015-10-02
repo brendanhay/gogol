@@ -49,9 +49,9 @@ type RelyingPartyDownloadAccountResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON]
                        IdentitytoolkitRelyingPartyDownloadAccountRequest
@@ -160,9 +160,9 @@ instance GoogleRequest RelyingPartyDownloadAccount'
         requestWithRoute r u RelyingPartyDownloadAccount'{..}
           = go _rpdaQuotaUser (Just _rpdaPrettyPrint)
               _rpdaUserIP
+              _rpdaFields
               _rpdaKey
               _rpdaOAuthToken
-              _rpdaFields
               (Just AltJSON)
               _rpdaIdentitytoolkitRelyingPartyDownloadAccountRequest
           where go

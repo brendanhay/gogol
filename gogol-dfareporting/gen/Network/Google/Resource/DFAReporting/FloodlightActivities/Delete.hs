@@ -53,9 +53,9 @@ type FloodlightActivitiesDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing floodlight activity.
@@ -161,12 +161,12 @@ instance GoogleRequest FloodlightActivitiesDelete'
         type Rs FloodlightActivitiesDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u FloodlightActivitiesDelete'{..}
-          = go _fadQuotaUser (Just _fadPrettyPrint) _fadUserIP
-              _fadProfileId
-              _fadKey
-              _fadId
-              _fadOAuthToken
+          = go _fadProfileId _fadId _fadQuotaUser
+              (Just _fadPrettyPrint)
+              _fadUserIP
               _fadFields
+              _fadKey
+              _fadOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

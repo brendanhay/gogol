@@ -53,9 +53,9 @@ type AccountsContainersDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a Container.
@@ -163,13 +163,12 @@ instance GoogleRequest AccountsContainersDelete'
         type Rs AccountsContainersDelete' = ()
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u AccountsContainersDelete'{..}
-          = go _acdQuotaUser (Just _acdPrettyPrint)
-              _acdContainerId
+          = go _acdAccountId _acdContainerId _acdQuotaUser
+              (Just _acdPrettyPrint)
               _acdUserIP
-              _acdAccountId
+              _acdFields
               _acdKey
               _acdOAuthToken
-              _acdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

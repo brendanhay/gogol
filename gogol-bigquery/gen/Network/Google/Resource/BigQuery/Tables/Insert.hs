@@ -55,9 +55,9 @@ type TablesInsertResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Table :> Post '[JSON] Table
 
@@ -170,12 +170,12 @@ instance GoogleRequest TablesInsert' where
         type Rs TablesInsert' = Table
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u TablesInsert'{..}
-          = go _tiQuotaUser (Just _tiPrettyPrint) _tiUserIP
-              _tiKey
-              _tiDatasetId
-              _tiProjectId
-              _tiOAuthToken
+          = go _tiProjectId _tiDatasetId _tiQuotaUser
+              (Just _tiPrettyPrint)
+              _tiUserIP
               _tiFields
+              _tiKey
+              _tiOAuthToken
               (Just AltJSON)
               _tiTable
           where go

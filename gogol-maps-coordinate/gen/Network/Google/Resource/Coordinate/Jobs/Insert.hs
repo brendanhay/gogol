@@ -58,21 +58,21 @@ type JobsInsertResource =
      "teams" :>
        Capture "teamId" Text :>
          "jobs" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "note" Text :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "customerPhoneNumber" Text :>
-                     QueryParam "customerName" Text :>
-                       QueryParam "address" Text :>
-                         QueryParam "assignee" Text :>
-                           QueryParam "lat" Double :>
-                             QueryParam "key" Key :>
-                               QueryParam "lng" Double :>
-                                 QueryParam "title" Text :>
-                                   QueryParam "oauth_token" OAuthToken :>
-                                     QueryParam "fields" Text :>
-                                       QueryParams "customField" Text :>
+           QueryParam "assignee" Text :>
+             QueryParams "customField" Text :>
+               QueryParam "customerName" Text :>
+                 QueryParam "customerPhoneNumber" Text :>
+                   QueryParam "note" Text :>
+                     QueryParam "address" Text :>
+                       QueryParam "lat" Double :>
+                         QueryParam "lng" Double :>
+                           QueryParam "title" Text :>
+                             QueryParam "quotaUser" Text :>
+                               QueryParam "prettyPrint" Bool :>
+                                 QueryParam "userIp" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "key" Key :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            ReqBody '[JSON] Job :>
                                              Post '[JSON] Job
@@ -264,20 +264,20 @@ instance GoogleRequest JobsInsert' where
         type Rs JobsInsert' = Job
         request = requestWithRoute defReq mapsCoordinateURL
         requestWithRoute r u JobsInsert'{..}
-          = go _jiQuotaUser (Just _jiPrettyPrint) _jiNote
-              _jiUserIP
-              _jiTeamId
+          = go _jiAssignee _jiCustomField _jiCustomerName
               _jiCustomerPhoneNumber
-              _jiCustomerName
+              _jiNote
+              _jiTeamId
               (Just _jiAddress)
-              _jiAssignee
               (Just _jiLat)
-              _jiKey
               (Just _jiLng)
               (Just _jiTitle)
-              _jiOAuthToken
+              _jiQuotaUser
+              (Just _jiPrettyPrint)
+              _jiUserIP
               _jiFields
-              _jiCustomField
+              _jiKey
+              _jiOAuthToken
               (Just AltJSON)
               _jiJob
           where go

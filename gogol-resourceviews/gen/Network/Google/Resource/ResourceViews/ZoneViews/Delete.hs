@@ -55,9 +55,9 @@ type ZoneViewsDeleteResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Delete a resource view.
@@ -173,14 +173,13 @@ instance GoogleRequest ZoneViewsDelete' where
         type Rs ZoneViewsDelete' = Operation
         request = requestWithRoute defReq resourceViewsURL
         requestWithRoute r u ZoneViewsDelete'{..}
-          = go _zvdQuotaUser (Just _zvdPrettyPrint)
-              _zvdResourceView
-              _zvdProject
+          = go _zvdProject _zvdZone _zvdResourceView
+              _zvdQuotaUser
+              (Just _zvdPrettyPrint)
               _zvdUserIP
-              _zvdZone
+              _zvdFields
               _zvdKey
               _zvdOAuthToken
-              _zvdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

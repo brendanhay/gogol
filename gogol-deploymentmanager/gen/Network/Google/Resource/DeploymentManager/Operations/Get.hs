@@ -53,9 +53,9 @@ type OperationsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Operation
 
 -- | Gets information about a specific operation.
@@ -159,12 +159,12 @@ instance GoogleRequest OperationsGet' where
         request
           = requestWithRoute defReq deploymentManagerURL
         requestWithRoute r u OperationsGet'{..}
-          = go _ogQuotaUser (Just _ogPrettyPrint) _ogProject
-              _ogOperation
+          = go _ogProject _ogOperation _ogQuotaUser
+              (Just _ogPrettyPrint)
               _ogUserIP
+              _ogFields
               _ogKey
               _ogOAuthToken
-              _ogFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -57,9 +57,9 @@ type ManagementProfilesGetResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Get '[JSON] Profile
 
 -- | Gets a view (profile) to which the user has access.
@@ -176,14 +176,13 @@ instance GoogleRequest ManagementProfilesGet' where
         type Rs ManagementProfilesGet' = Profile
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementProfilesGet'{..}
-          = go _mpgQuotaUser (Just _mpgPrettyPrint)
-              _mpgWebPropertyId
+          = go _mpgAccountId _mpgWebPropertyId _mpgProfileId
+              _mpgQuotaUser
+              (Just _mpgPrettyPrint)
               _mpgUserIP
-              _mpgProfileId
-              _mpgAccountId
+              _mpgFields
               _mpgKey
               _mpgOAuthToken
-              _mpgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

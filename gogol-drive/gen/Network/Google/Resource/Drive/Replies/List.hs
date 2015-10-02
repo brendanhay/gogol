@@ -54,15 +54,15 @@ type RepliesListResource =
          "comments" :>
            Capture "commentId" Text :>
              "replies" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Int32 :>
-                             QueryParam "includeDeleted" Bool :>
-                               QueryParam "fields" Text :>
+               QueryParam "includeDeleted" Bool :>
+                 QueryParam "maxResults" Int32 :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] CommentReplyList
 
@@ -202,15 +202,16 @@ instance GoogleRequest RepliesList' where
         type Rs RepliesList' = CommentReplyList
         request = requestWithRoute defReq driveURL
         requestWithRoute r u RepliesList'{..}
-          = go _rllQuotaUser (Just _rllPrettyPrint) _rllUserIP
-              _rllKey
+          = go (Just _rllIncludeDeleted) (Just _rllMaxResults)
               _rllPageToken
               _rllFileId
-              _rllOAuthToken
               _rllCommentId
-              (Just _rllMaxResults)
-              (Just _rllIncludeDeleted)
+              _rllQuotaUser
+              (Just _rllPrettyPrint)
+              _rllUserIP
               _rllFields
+              _rllKey
+              _rllOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

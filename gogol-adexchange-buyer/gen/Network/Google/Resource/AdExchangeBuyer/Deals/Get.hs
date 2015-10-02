@@ -51,9 +51,9 @@ type DealsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON]
                          GetFinalizedNegotiationByExternalDealIdRequest
@@ -161,11 +161,11 @@ instance GoogleRequest DealsGet' where
         type Rs DealsGet' = NegotiationDto
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u DealsGet'{..}
-          = go _dgQuotaUser (Just _dgPrettyPrint) _dgUserIP
-              _dgDealId
+          = go _dgDealId _dgQuotaUser (Just _dgPrettyPrint)
+              _dgUserIP
+              _dgFields
               _dgKey
               _dgOAuthToken
-              _dgFields
               (Just AltJSON)
               _dgGetFinalizedNegotiationByExternalDealIdRequest
           where go

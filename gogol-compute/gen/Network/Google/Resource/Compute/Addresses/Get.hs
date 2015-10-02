@@ -55,9 +55,9 @@ type AddressesGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Address
 
 -- | Returns the specified address resource.
@@ -173,13 +173,12 @@ instance GoogleRequest AddressesGet' where
         type Rs AddressesGet' = Address
         request = requestWithRoute defReq computeURL
         requestWithRoute r u AddressesGet'{..}
-          = go _aggQuotaUser (Just _aggPrettyPrint) _aggProject
+          = go _aggProject _aggRegion _aggAddress _aggQuotaUser
+              (Just _aggPrettyPrint)
               _aggUserIP
-              _aggAddress
-              _aggKey
-              _aggRegion
-              _aggOAuthToken
               _aggFields
+              _aggKey
+              _aggOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -49,9 +49,9 @@ type RelyingPartyCreateAuthURIResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON]
                        IdentitytoolkitRelyingPartyCreateAuthURIRequest
@@ -159,9 +159,9 @@ instance GoogleRequest RelyingPartyCreateAuthURI'
         requestWithRoute r u RelyingPartyCreateAuthURI'{..}
           = go _rpcauQuotaUser (Just _rpcauPrettyPrint)
               _rpcauUserIP
+              _rpcauFields
               _rpcauKey
               _rpcauOAuthToken
-              _rpcauFields
               (Just AltJSON)
               _rpcauIdentitytoolkitRelyingPartyCreateAuthURIRequest
           where go

@@ -49,9 +49,9 @@ type MetadataDimensionsListResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Metadata
 
 -- | List the metadata for the dimensions available to this AdSense account.
@@ -138,9 +138,9 @@ instance GoogleRequest MetadataDimensionsList' where
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u MetadataDimensionsList'{..}
           = go _mdlQuotaUser (Just _mdlPrettyPrint) _mdlUserIP
+              _mdlFields
               _mdlKey
               _mdlOAuthToken
-              _mdlFields
               (Just AltJSON)
           where go
                   = clientWithRoute

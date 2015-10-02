@@ -49,17 +49,17 @@ import           Network.Google.Prelude
 type VolumesRecommendedListResource =
      "volumes" :>
        "recommended" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "locale" Text :>
-                 QueryParam "maxAllowedMaturityRating"
-                   BooksVolumesRecommendedListMaxAllowedMaturityRating
-                   :>
-                   QueryParam "key" Key :>
-                     QueryParam "source" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+         QueryParam "locale" Text :>
+           QueryParam "maxAllowedMaturityRating"
+             BooksVolumesRecommendedListMaxAllowedMaturityRating
+             :>
+             QueryParam "source" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Volumes
 
 -- | Return a list of recommended books for the current user.
@@ -175,13 +175,14 @@ instance GoogleRequest VolumesRecommendedList' where
         type Rs VolumesRecommendedList' = Volumes
         request = requestWithRoute defReq booksURL
         requestWithRoute r u VolumesRecommendedList'{..}
-          = go _vrlQuotaUser (Just _vrlPrettyPrint) _vrlUserIP
-              _vrlLocale
-              _vrlMaxAllowedMaturityRating
-              _vrlKey
+          = go _vrlLocale _vrlMaxAllowedMaturityRating
               _vrlSource
-              _vrlOAuthToken
+              _vrlQuotaUser
+              (Just _vrlPrettyPrint)
+              _vrlUserIP
               _vrlFields
+              _vrlKey
+              _vrlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

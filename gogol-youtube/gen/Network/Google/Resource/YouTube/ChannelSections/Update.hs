@@ -48,14 +48,14 @@ import           Network.Google.YouTube.Types
 -- 'ChannelSectionsUpdate'' request conforms to.
 type ChannelSectionsUpdateResource =
      "channelSections" :>
-       QueryParam "quotaUser" Text :>
+       QueryParam "onBehalfOfContentOwner" Text :>
          QueryParam "part" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] ChannelSection :>
                            Put '[JSON] ChannelSection
@@ -185,13 +185,13 @@ instance GoogleRequest ChannelSectionsUpdate' where
         type Rs ChannelSectionsUpdate' = ChannelSection
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u ChannelSectionsUpdate'{..}
-          = go _csuQuotaUser (Just _csuPart)
+          = go _csuOnBehalfOfContentOwner (Just _csuPart)
+              _csuQuotaUser
               (Just _csuPrettyPrint)
               _csuUserIP
-              _csuOnBehalfOfContentOwner
+              _csuFields
               _csuKey
               _csuOAuthToken
-              _csuFields
               (Just AltJSON)
               _csuChannelSection
           where go

@@ -55,9 +55,9 @@ type DefaultObjectAccessControlsPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] ObjectAccessControl :>
                              Patch '[JSON] ObjectAccessControl
@@ -184,13 +184,12 @@ instance GoogleRequest
         request = requestWithRoute defReq storageURL
         requestWithRoute r u
           DefaultObjectAccessControlsPatch'{..}
-          = go _doacpQuotaUser (Just _doacpPrettyPrint)
+          = go _doacpBucket _doacpEntity _doacpQuotaUser
+              (Just _doacpPrettyPrint)
               _doacpUserIP
-              _doacpBucket
+              _doacpFields
               _doacpKey
               _doacpOAuthToken
-              _doacpEntity
-              _doacpFields
               (Just AltJSON)
               _doacpObjectAccessControl
           where go

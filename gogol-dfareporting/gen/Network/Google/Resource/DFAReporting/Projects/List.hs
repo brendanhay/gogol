@@ -55,23 +55,23 @@ type ProjectsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "projects" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "searchString" Text :>
-                   QueryParams "ids" Int64 :>
-                     QueryParam "sortOrder"
-                       DfareportingProjectsListSortOrder
+           QueryParams "advertiserIds" Int64 :>
+             QueryParams "ids" Int64 :>
+               QueryParam "maxResults" Int32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "searchString" Text :>
+                     QueryParam "sortField"
+                       DfareportingProjectsListSortField
                        :>
-                       QueryParam "key" Key :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "sortField"
-                             DfareportingProjectsListSortField
-                             :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParams "advertiserIds" Int64 :>
-                                 QueryParam "maxResults" Int32 :>
-                                   QueryParam "fields" Text :>
+                       QueryParam "sortOrder"
+                         DfareportingProjectsListSortOrder
+                         :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] ProjectsListResponse
 
@@ -235,18 +235,18 @@ instance GoogleRequest ProjectsList' where
         type Rs ProjectsList' = ProjectsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ProjectsList'{..}
-          = go _plQuotaUser (Just _plPrettyPrint) _plUserIP
-              _plSearchString
-              _plIds
-              _plProfileId
-              _plSortOrder
-              _plKey
+          = go _plAdvertiserIds _plIds _plMaxResults
               _plPageToken
+              _plSearchString
               _plSortField
-              _plOAuthToken
-              _plAdvertiserIds
-              _plMaxResults
+              _plSortOrder
+              _plProfileId
+              _plQuotaUser
+              (Just _plPrettyPrint)
+              _plUserIP
               _plFields
+              _plKey
+              _plOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

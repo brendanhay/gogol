@@ -49,9 +49,9 @@ type TransfersInsertResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] DataTransfer :>
                        Post '[JSON] DataTransfer
@@ -149,9 +149,9 @@ instance GoogleRequest TransfersInsert' where
           = requestWithRoute defReq adminDataTransferURL
         requestWithRoute r u TransfersInsert'{..}
           = go _tiQuotaUser (Just _tiPrettyPrint) _tiUserIP
+              _tiFields
               _tiKey
               _tiOAuthToken
-              _tiFields
               (Just AltJSON)
               _tiDataTransfer
           where go

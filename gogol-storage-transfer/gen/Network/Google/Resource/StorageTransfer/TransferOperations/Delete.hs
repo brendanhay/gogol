@@ -54,17 +54,17 @@ type TransferOperationsDeleteResource =
      "v1" :>
        "{+name}" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Delete '[JSON] Empty
 
@@ -216,17 +216,17 @@ instance GoogleRequest TransferOperationsDelete'
         type Rs TransferOperationsDelete' = Empty
         request = requestWithRoute defReq storageTransferURL
         requestWithRoute r u TransferOperationsDelete'{..}
-          = go _todXgafv _todQuotaUser (Just _todPrettyPrint)
-              _todUploadProtocol
-              (Just _todPp)
-              _todAccessToken
-              _todUploadType
-              _todBearerToken
-              _todKey
-              _todName
-              _todOAuthToken
-              _todFields
+          = go _todXgafv _todAccessToken _todBearerToken
               _todCallback
+              (Just _todPp)
+              _todUploadType
+              _todUploadProtocol
+              _todName
+              _todQuotaUser
+              (Just _todPrettyPrint)
+              _todFields
+              _todKey
+              _todOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -49,13 +49,13 @@ type AccountsAlertsListResource =
      "accounts" :>
        Capture "accountId" Text :>
          "alerts" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "locale" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "locale" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Alerts
 
 -- | List the alerts for this Ad Exchange account.
@@ -162,12 +162,12 @@ instance GoogleRequest AccountsAlertsList' where
         type Rs AccountsAlertsList' = Alerts
         request = requestWithRoute defReq adExchangeSellerURL
         requestWithRoute r u AccountsAlertsList'{..}
-          = go _aalQuotaUser (Just _aalPrettyPrint) _aalUserIP
-              _aalLocale
-              _aalAccountId
+          = go _aalLocale _aalAccountId _aalQuotaUser
+              (Just _aalPrettyPrint)
+              _aalUserIP
+              _aalFields
               _aalKey
               _aalOAuthToken
-              _aalFields
               (Just AltJSON)
           where go
                   = clientWithRoute

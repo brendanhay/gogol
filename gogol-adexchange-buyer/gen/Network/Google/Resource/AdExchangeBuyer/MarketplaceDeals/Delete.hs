@@ -53,9 +53,9 @@ type MarketplaceDealsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] DeleteOrderDealsRequest :>
                              Post '[JSON] DeleteOrderDealsResponse
@@ -165,11 +165,11 @@ instance GoogleRequest MarketplaceDealsDelete' where
              DeleteOrderDealsResponse
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u MarketplaceDealsDelete'{..}
-          = go _mddQuotaUser (Just _mddPrettyPrint) _mddUserIP
+          = go _mddOrderId _mddQuotaUser (Just _mddPrettyPrint)
+              _mddUserIP
+              _mddFields
               _mddKey
               _mddOAuthToken
-              _mddOrderId
-              _mddFields
               (Just AltJSON)
               _mddDeleteOrderDealsRequest
           where go

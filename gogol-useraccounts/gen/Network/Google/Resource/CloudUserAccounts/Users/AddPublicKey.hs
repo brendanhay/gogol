@@ -56,9 +56,9 @@ type UsersAddPublicKeyResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] PublicKey :> Post '[JSON] Operation
 
@@ -177,13 +177,12 @@ instance GoogleRequest UsersAddPublicKey' where
         type Rs UsersAddPublicKey' = Operation
         request = requestWithRoute defReq userAccountsURL
         requestWithRoute r u UsersAddPublicKey'{..}
-          = go _uapkQuotaUser (Just _uapkPrettyPrint)
-              _uapkProject
+          = go _uapkProject _uapkUser _uapkQuotaUser
+              (Just _uapkPrettyPrint)
               _uapkUserIP
-              _uapkUser
+              _uapkFields
               _uapkKey
               _uapkOAuthToken
-              _uapkFields
               (Just AltJSON)
               _uapkPublicKey
           where go

@@ -51,9 +51,9 @@ type UsersLabelsCreateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Label :> Post '[JSON] Label
 
@@ -160,11 +160,11 @@ instance GoogleRequest UsersLabelsCreate' where
         type Rs UsersLabelsCreate' = Label
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersLabelsCreate'{..}
-          = go _ulcQuotaUser (Just _ulcPrettyPrint) _ulcUserIP
-              _ulcUserId
+          = go _ulcUserId _ulcQuotaUser (Just _ulcPrettyPrint)
+              _ulcUserIP
+              _ulcFields
               _ulcKey
               _ulcOAuthToken
-              _ulcFields
               (Just AltJSON)
               _ulcLabel
           where go

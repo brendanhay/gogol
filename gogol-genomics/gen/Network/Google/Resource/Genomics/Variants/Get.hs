@@ -50,9 +50,9 @@ type VariantsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Variant
 
 -- | Gets a variant by ID.
@@ -148,11 +148,12 @@ instance GoogleRequest VariantsGet' where
         type Rs VariantsGet' = Variant
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u VariantsGet'{..}
-          = go _vggQuotaUser (Just _vggPrettyPrint) _vggUserIP
-              _vggKey
-              _vggVariantId
-              _vggOAuthToken
+          = go _vggVariantId _vggQuotaUser
+              (Just _vggPrettyPrint)
+              _vggUserIP
               _vggFields
+              _vggKey
+              _vggOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

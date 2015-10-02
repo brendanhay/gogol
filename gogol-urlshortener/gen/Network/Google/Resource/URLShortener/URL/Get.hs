@@ -26,7 +26,7 @@ module Network.Google.Resource.URLShortener.URL.Get
       URLGetResource
 
     -- * Creating a Request
-    , uRLGet'
+    , urlGet'
     , URLGet'
 
     -- * Request Lenses
@@ -47,20 +47,20 @@ import           Network.Google.URLShortener.Types
 -- 'URLGet'' request conforms to.
 type URLGetResource =
      "url" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "projection" URLshortenerURLGetProjection
-                 :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "shortUrl" Text :>
-                     QueryParam "fields" Text :>
+       QueryParam "projection" URLshortenerURLGetProjection
+         :>
+         QueryParam "shortUrl" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] URL
 
 -- | Expands a short URL or gets creation time and analytics.
 --
--- /See:/ 'uRLGet'' smart constructor.
+-- /See:/ 'urlGet'' smart constructor.
 data URLGet' = URLGet'
     { _ugQuotaUser   :: !(Maybe Text)
     , _ugPrettyPrint :: !Bool
@@ -91,10 +91,10 @@ data URLGet' = URLGet'
 -- * 'ugShortURL'
 --
 -- * 'ugFields'
-uRLGet'
+urlGet'
     :: Text -- ^ 'shortUrl'
     -> URLGet'
-uRLGet' pUgShortURL_ =
+urlGet' pUgShortURL_ =
     URLGet'
     { _ugQuotaUser = Nothing
     , _ugPrettyPrint = True
@@ -157,12 +157,12 @@ instance GoogleRequest URLGet' where
         type Rs URLGet' = URL
         request = requestWithRoute defReq uRLShortenerURL
         requestWithRoute r u URLGet'{..}
-          = go _ugQuotaUser (Just _ugPrettyPrint) _ugUserIP
-              _ugKey
-              _ugProjection
-              _ugOAuthToken
-              (Just _ugShortURL)
+          = go _ugProjection (Just _ugShortURL) _ugQuotaUser
+              (Just _ugPrettyPrint)
+              _ugUserIP
               _ugFields
+              _ugKey
+              _ugOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy URLGetResource) r u

@@ -58,9 +58,9 @@ type ManagementProfilesUpdateResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] Profile :> Put '[JSON] Profile
 
@@ -189,14 +189,13 @@ instance GoogleRequest ManagementProfilesUpdate'
         type Rs ManagementProfilesUpdate' = Profile
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementProfilesUpdate'{..}
-          = go _mpuQuotaUser (Just _mpuPrettyPrint)
-              _mpuWebPropertyId
+          = go _mpuAccountId _mpuWebPropertyId _mpuProfileId
+              _mpuQuotaUser
+              (Just _mpuPrettyPrint)
               _mpuUserIP
-              _mpuProfileId
-              _mpuAccountId
+              _mpuFields
               _mpuKey
               _mpuOAuthToken
-              _mpuFields
               (Just AltJSON)
               _mpuProfile
           where go

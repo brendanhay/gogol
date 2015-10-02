@@ -56,9 +56,9 @@ type EditsTestersGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Testers
 
 --
@@ -175,14 +175,13 @@ instance GoogleRequest EditsTestersGet' where
         type Rs EditsTestersGet' = Testers
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u EditsTestersGet'{..}
-          = go _etgtQuotaUser _etgtTrack
+          = go _etgtPackageName _etgtEditId _etgtTrack
+              _etgtQuotaUser
               (Just _etgtPrettyPrint)
-              _etgtPackageName
               _etgtUserIP
+              _etgtFields
               _etgtKey
               _etgtOAuthToken
-              _etgtEditId
-              _etgtFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -53,17 +53,17 @@ type PagesListResource =
      "blogs" :>
        Capture "blogId" Text :>
          "pages" :>
-           QueryParams "status" BloggerPagesListStatus :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "fetchBodies" Bool :>
-                       QueryParam "view" BloggerPagesListView :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "maxResults" Word32 :>
-                               QueryParam "fields" Text :>
+           QueryParam "fetchBodies" Bool :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParams "status" BloggerPagesListStatus :>
+                   QueryParam "view" BloggerPagesListView :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] PageList
 
@@ -200,16 +200,16 @@ instance GoogleRequest PagesList' where
         type Rs PagesList' = PageList
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PagesList'{..}
-          = go _plStatus _plQuotaUser (Just _plPrettyPrint)
-              _plUserIP
-              _plBlogId
-              _plKey
-              _plFetchBodies
+          = go _plFetchBodies _plMaxResults _plPageToken
+              _plStatus
               _plView
-              _plPageToken
-              _plOAuthToken
-              _plMaxResults
+              _plBlogId
+              _plQuotaUser
+              (Just _plPrettyPrint)
+              _plUserIP
               _plFields
+              _plKey
+              _plOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy PagesListResource)

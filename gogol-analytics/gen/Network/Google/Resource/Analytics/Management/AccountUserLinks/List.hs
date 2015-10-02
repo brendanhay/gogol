@@ -51,14 +51,14 @@ type ManagementAccountUserLinksListResource =
        "accounts" :>
          Capture "accountId" Text :>
            "entityUserLinks" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "start-index" Int32 :>
-                         QueryParam "max-results" Int32 :>
-                           QueryParam "fields" Text :>
+             QueryParam "max-results" Int32 :>
+               QueryParam "start-index" Int32 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] EntityUserLinks
 
@@ -182,14 +182,14 @@ instance GoogleRequest
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
           ManagementAccountUserLinksList'{..}
-          = go _maullQuotaUser (Just _maullPrettyPrint)
-              _maullUserIP
+          = go _maullMaxResults _maullStartIndex
               _maullAccountId
+              _maullQuotaUser
+              (Just _maullPrettyPrint)
+              _maullUserIP
+              _maullFields
               _maullKey
               _maullOAuthToken
-              _maullStartIndex
-              _maullMaxResults
-              _maullFields
               (Just AltJSON)
           where go
                   = clientWithRoute

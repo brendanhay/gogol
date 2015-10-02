@@ -56,9 +56,9 @@ type AccountsContainersRulesGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Rule
 
 -- | Gets a GTM Rule.
@@ -178,14 +178,13 @@ instance GoogleRequest AccountsContainersRulesGet'
         type Rs AccountsContainersRulesGet' = Rule
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u AccountsContainersRulesGet'{..}
-          = go _acrgQuotaUser (Just _acrgPrettyPrint)
-              _acrgContainerId
+          = go _acrgAccountId _acrgContainerId _acrgRuleId
+              _acrgQuotaUser
+              (Just _acrgPrettyPrint)
               _acrgUserIP
-              _acrgRuleId
-              _acrgAccountId
+              _acrgFields
               _acrgKey
               _acrgOAuthToken
-              _acrgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -49,9 +49,9 @@ type DatasetsCreateResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] Dataset :> Post '[JSON] Dataset
 
@@ -146,9 +146,9 @@ instance GoogleRequest DatasetsCreate' where
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u DatasetsCreate'{..}
           = go _dcQuotaUser (Just _dcPrettyPrint) _dcUserIP
+              _dcFields
               _dcKey
               _dcOAuthToken
-              _dcFields
               (Just AltJSON)
               _dcDataset
           where go

@@ -55,9 +55,9 @@ type TablesPermissionsBatchUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] PermissionsBatchUpdateRequest :>
                              Post '[JSON] PermissionsBatchUpdateResponse
@@ -172,12 +172,11 @@ instance GoogleRequest TablesPermissionsBatchUpdate'
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u
           TablesPermissionsBatchUpdate'{..}
-          = go _tpbuQuotaUser (Just _tpbuPrettyPrint)
+          = go _tpbuId _tpbuQuotaUser (Just _tpbuPrettyPrint)
               _tpbuUserIP
-              _tpbuKey
-              _tpbuId
-              _tpbuOAuthToken
               _tpbuFields
+              _tpbuKey
+              _tpbuOAuthToken
               (Just AltJSON)
               _tpbuPermissionsBatchUpdateRequest
           where go

@@ -50,9 +50,9 @@ type TablesDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete a table.
@@ -146,11 +146,11 @@ instance GoogleRequest TablesDelete' where
         type Rs TablesDelete' = ()
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u TablesDelete'{..}
-          = go _tdQuotaUser (Just _tdPrettyPrint) _tdUserIP
-              _tdKey
-              _tdId
-              _tdOAuthToken
+          = go _tdId _tdQuotaUser (Just _tdPrettyPrint)
+              _tdUserIP
               _tdFields
+              _tdKey
+              _tdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

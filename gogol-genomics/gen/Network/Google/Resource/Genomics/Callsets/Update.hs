@@ -51,9 +51,9 @@ type CallsetsUpdateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] CallSet :> Put '[JSON] CallSet
 
@@ -157,11 +157,11 @@ instance GoogleRequest CallsetsUpdate' where
         type Rs CallsetsUpdate' = CallSet
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u CallsetsUpdate'{..}
-          = go _cuQuotaUser (Just _cuPrettyPrint) _cuUserIP
-              _cuKey
-              _cuCallSetId
-              _cuOAuthToken
+          = go _cuCallSetId _cuQuotaUser (Just _cuPrettyPrint)
+              _cuUserIP
               _cuFields
+              _cuKey
+              _cuOAuthToken
               (Just AltJSON)
               _cuCallSet
           where go

@@ -49,13 +49,13 @@ import           Network.Google.TagManager.Types
 type AccountsUpdateResource =
      "accounts" :>
        Capture "accountId" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "fingerprint" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+         QueryParam "fingerprint" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Account :> Put '[JSON] Account
 
@@ -170,12 +170,12 @@ instance GoogleRequest AccountsUpdate' where
         type Rs AccountsUpdate' = Account
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u AccountsUpdate'{..}
-          = go _auQuotaUser (Just _auPrettyPrint) _auUserIP
-              _auFingerprint
-              _auAccountId
+          = go _auFingerprint _auAccountId _auQuotaUser
+              (Just _auPrettyPrint)
+              _auUserIP
+              _auFields
               _auKey
               _auOAuthToken
-              _auFields
               (Just AltJSON)
               _auAccount
           where go

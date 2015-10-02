@@ -54,9 +54,9 @@ type TasksPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Task :> Patch '[JSON] Task
 
@@ -168,12 +168,12 @@ instance GoogleRequest TasksPatch' where
         type Rs TasksPatch' = Task
         request = requestWithRoute defReq appsTasksURL
         requestWithRoute r u TasksPatch'{..}
-          = go _tpQuotaUser (Just _tpPrettyPrint) _tpUserIP
-              _tpKey
-              _tpTaskList
-              _tpTask
-              _tpOAuthToken
+          = go _tpTaskList _tpTask _tpQuotaUser
+              (Just _tpPrettyPrint)
+              _tpUserIP
               _tpFields
+              _tpKey
+              _tpOAuthToken
               (Just AltJSON)
               _tpTask
           where go

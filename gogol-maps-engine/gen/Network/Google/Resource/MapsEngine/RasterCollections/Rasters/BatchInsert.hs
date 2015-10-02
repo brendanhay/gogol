@@ -56,9 +56,9 @@ type RasterCollectionsRastersBatchInsertResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON]
                              RasterCollectionsRastersBatchInsertRequest
@@ -180,12 +180,12 @@ instance GoogleRequest
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u
           RasterCollectionsRastersBatchInsert'{..}
-          = go _rcrbiQuotaUser (Just _rcrbiPrettyPrint)
+          = go _rcrbiId _rcrbiQuotaUser
+              (Just _rcrbiPrettyPrint)
               _rcrbiUserIP
-              _rcrbiKey
-              _rcrbiId
-              _rcrbiOAuthToken
               _rcrbiFields
+              _rcrbiKey
+              _rcrbiOAuthToken
               (Just AltJSON)
               _rcrbiRasterCollectionsRastersBatchInsertRequest
           where go

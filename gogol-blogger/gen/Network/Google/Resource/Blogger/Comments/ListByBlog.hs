@@ -54,19 +54,19 @@ type CommentsListByBlogResource =
      "blogs" :>
        Capture "blogId" Text :>
          "comments" :>
-           QueryParams "status" BloggerCommentsListByBlogStatus
-             :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "endDate" UTCTime :>
-                     QueryParam "startDate" UTCTime :>
-                       QueryParam "key" Key :>
-                         QueryParam "fetchBodies" Bool :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "maxResults" Word32 :>
-                                 QueryParam "fields" Text :>
+           QueryParam "endDate" UTCTime :>
+             QueryParam "fetchBodies" Bool :>
+               QueryParam "maxResults" Word32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "startDate" UTCTime :>
+                     QueryParams "status" BloggerCommentsListByBlogStatus
+                       :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] CommentList
 
@@ -221,18 +221,17 @@ instance GoogleRequest CommentsListByBlog' where
         type Rs CommentsListByBlog' = CommentList
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u CommentsListByBlog'{..}
-          = go _clbbStatus _clbbQuotaUser
+          = go _clbbEndDate _clbbFetchBodies _clbbMaxResults
+              _clbbPageToken
+              _clbbStartDate
+              _clbbStatus
+              _clbbBlogId
+              _clbbQuotaUser
               (Just _clbbPrettyPrint)
               _clbbUserIP
-              _clbbEndDate
-              _clbbBlogId
-              _clbbStartDate
-              _clbbKey
-              _clbbFetchBodies
-              _clbbPageToken
-              _clbbOAuthToken
-              _clbbMaxResults
               _clbbFields
+              _clbbKey
+              _clbbOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

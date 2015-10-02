@@ -53,9 +53,9 @@ type SchemasGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Schema
 
 -- | Retrieve schema
@@ -158,12 +158,12 @@ instance GoogleRequest SchemasGet' where
         type Rs SchemasGet' = Schema
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u SchemasGet'{..}
-          = go _sgQuotaUser (Just _sgPrettyPrint) _sgUserIP
-              _sgCustomerId
+          = go _sgCustomerId _sgSchemaKey _sgQuotaUser
+              (Just _sgPrettyPrint)
+              _sgUserIP
+              _sgFields
               _sgKey
               _sgOAuthToken
-              _sgSchemaKey
-              _sgFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy SchemasGetResource)

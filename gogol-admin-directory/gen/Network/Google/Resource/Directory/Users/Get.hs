@@ -50,16 +50,16 @@ import           Network.Google.Prelude
 type UsersGetResource =
      "users" :>
        Capture "userKey" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
+         QueryParam "customFieldMask" Text :>
+           QueryParam "projection" DirectoryUsersGetProjection
+             :>
              QueryParam "viewType" DirectoryUsersGetViewType :>
-               QueryParam "customFieldMask" Text :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "projection" DirectoryUsersGetProjection
-                       :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] User
 
 -- | retrieve user
@@ -181,15 +181,15 @@ instance GoogleRequest UsersGet' where
         type Rs UsersGet' = User
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u UsersGet'{..}
-          = go _ugQuotaUser (Just _ugPrettyPrint)
+          = go _ugCustomFieldMask (Just _ugProjection)
               (Just _ugViewType)
-              _ugCustomFieldMask
-              _ugUserIP
-              _ugKey
-              (Just _ugProjection)
-              _ugOAuthToken
               _ugUserKey
+              _ugQuotaUser
+              (Just _ugPrettyPrint)
+              _ugUserIP
               _ugFields
+              _ugKey
+              _ugOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy UsersGetResource) r

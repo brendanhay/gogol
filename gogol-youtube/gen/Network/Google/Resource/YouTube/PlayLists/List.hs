@@ -56,21 +56,21 @@ import           Network.Google.YouTube.Types
 -- 'PlayListsList'' request conforms to.
 type PlayListsListResource =
      "playlists" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "part" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "mine" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "channelId" Text :>
-                   QueryParam "hl" Text :>
-                     QueryParam "onBehalfOfContentOwner" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                           QueryParam "id" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "maxResults" Word32 :>
-                                   QueryParam "fields" Text :>
+       QueryParam "channelId" Text :>
+         QueryParam "hl" Text :>
+           QueryParam "id" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "mine" Bool :>
+                 QueryParam "onBehalfOfContentOwner" Text :>
+                   QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "part" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] PlayListListResponse
 
@@ -279,20 +279,19 @@ instance GoogleRequest PlayListsList' where
         type Rs PlayListsList' = PlayListListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u PlayListsList'{..}
-          = go _pllQuotaUser (Just _pllPart)
-              (Just _pllPrettyPrint)
-              _pllMine
-              _pllUserIP
-              _pllChannelId
-              _pllHl
-              _pllOnBehalfOfContentOwner
-              _pllKey
-              _pllOnBehalfOfContentOwnerChannel
-              _pllId
-              _pllPageToken
-              _pllOAuthToken
+          = go _pllChannelId _pllHl _pllId
               (Just _pllMaxResults)
+              _pllMine
+              _pllOnBehalfOfContentOwner
+              _pllOnBehalfOfContentOwnerChannel
+              _pllPageToken
+              (Just _pllPart)
+              _pllQuotaUser
+              (Just _pllPrettyPrint)
+              _pllUserIP
               _pllFields
+              _pllKey
+              _pllOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

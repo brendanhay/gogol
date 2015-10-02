@@ -51,18 +51,18 @@ import           Network.Google.Prelude
 -- 'Reconcile'' request conforms to.
 type ReconcileMethod =
      "reconcile" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParams "kind" Text :>
-             QueryParam "userIp" Text :>
-               QueryParams "lang" Text :>
-                 QueryParam "confidence" Float :>
-                   QueryParam "key" Key :>
-                     QueryParam "name" Text :>
-                       QueryParam "limit" Int32 :>
-                         QueryParams "prop" Text :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+       QueryParam "confidence" Float :>
+         QueryParams "kind" Text :>
+           QueryParams "lang" Text :>
+             QueryParam "limit" Int32 :>
+               QueryParam "name" Text :>
+                 QueryParams "prop" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] ReconcileGet
 
@@ -195,15 +195,15 @@ instance GoogleRequest Reconcile' where
         type Rs Reconcile' = ReconcileGet
         request = requestWithRoute defReq freebaseSearchURL
         requestWithRoute r u Reconcile'{..}
-          = go _rQuotaUser (Just _rPrettyPrint) _rKind _rUserIP
-              _rLang
-              (Just _rConfidence)
-              _rKey
+          = go (Just _rConfidence) _rKind _rLang (Just _rLimit)
               _rName
-              (Just _rLimit)
               _rProp
-              _rOAuthToken
+              _rQuotaUser
+              (Just _rPrettyPrint)
+              _rUserIP
               _rFields
+              _rKey
+              _rOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy ReconcileMethod) r

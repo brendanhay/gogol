@@ -52,13 +52,13 @@ type TasksInsertResource =
        Capture "tasklist" Text :>
          "tasks" :>
            QueryParam "parent" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
-                         QueryParam "previous" Text :>
+             QueryParam "previous" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Task :> Post '[JSON] Task
 
@@ -180,13 +180,12 @@ instance GoogleRequest TasksInsert' where
         type Rs TasksInsert' = Task
         request = requestWithRoute defReq appsTasksURL
         requestWithRoute r u TasksInsert'{..}
-          = go _tiParent _tiQuotaUser (Just _tiPrettyPrint)
+          = go _tiParent _tiPrevious _tiTaskList _tiQuotaUser
+              (Just _tiPrettyPrint)
               _tiUserIP
-              _tiKey
-              _tiTaskList
-              _tiOAuthToken
               _tiFields
-              _tiPrevious
+              _tiKey
+              _tiOAuthToken
               (Just AltJSON)
               _tiTask
           where go

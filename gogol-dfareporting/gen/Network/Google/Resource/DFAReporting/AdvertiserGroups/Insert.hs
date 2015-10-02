@@ -52,9 +52,9 @@ type AdvertiserGroupsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] AdvertiserGroup :>
                            Post '[JSON] AdvertiserGroup
@@ -163,11 +163,12 @@ instance GoogleRequest AdvertiserGroupsInsert' where
         type Rs AdvertiserGroupsInsert' = AdvertiserGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdvertiserGroupsInsert'{..}
-          = go _agiQuotaUser (Just _agiPrettyPrint) _agiUserIP
-              _agiProfileId
+          = go _agiProfileId _agiQuotaUser
+              (Just _agiPrettyPrint)
+              _agiUserIP
+              _agiFields
               _agiKey
               _agiOAuthToken
-              _agiFields
               (Just AltJSON)
               _agiAdvertiserGroup
           where go

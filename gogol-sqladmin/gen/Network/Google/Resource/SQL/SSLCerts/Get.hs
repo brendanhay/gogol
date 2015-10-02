@@ -28,7 +28,7 @@ module Network.Google.Resource.SQL.SSLCerts.Get
       SSLCertsGetResource
 
     -- * Creating a Request
-    , sSLCertsGet'
+    , sslCertsGet'
     , SSLCertsGet'
 
     -- * Request Lenses
@@ -58,16 +58,16 @@ type SSLCertsGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] SSLCert
 
 -- | Retrieves a particular SSL certificate. Does not include the private key
 -- (required for usage). The private key must be saved from the response to
 -- initial creation.
 --
--- /See:/ 'sSLCertsGet'' smart constructor.
+-- /See:/ 'sslCertsGet'' smart constructor.
 data SSLCertsGet' = SSLCertsGet'
     { _scgQuotaUser       :: !(Maybe Text)
     , _scgPrettyPrint     :: !Bool
@@ -101,12 +101,12 @@ data SSLCertsGet' = SSLCertsGet'
 -- * 'scgFields'
 --
 -- * 'scgInstance'
-sSLCertsGet'
+sslCertsGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'sha1Fingerprint'
     -> Text -- ^ 'instance'
     -> SSLCertsGet'
-sSLCertsGet' pScgProject_ pScgSha1Fingerprint_ pScgInstance_ =
+sslCertsGet' pScgProject_ pScgSha1Fingerprint_ pScgInstance_ =
     SSLCertsGet'
     { _scgQuotaUser = Nothing
     , _scgPrettyPrint = True
@@ -179,13 +179,13 @@ instance GoogleRequest SSLCertsGet' where
         type Rs SSLCertsGet' = SSLCert
         request = requestWithRoute defReq sQLAdminURL
         requestWithRoute r u SSLCertsGet'{..}
-          = go _scgQuotaUser (Just _scgPrettyPrint) _scgProject
+          = go _scgProject _scgInstance _scgSha1Fingerprint
+              _scgQuotaUser
+              (Just _scgPrettyPrint)
               _scgUserIP
+              _scgFields
               _scgKey
               _scgOAuthToken
-              _scgSha1Fingerprint
-              _scgFields
-              _scgInstance
               (Just AltJSON)
           where go
                   = clientWithRoute

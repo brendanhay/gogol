@@ -47,14 +47,14 @@ import           Network.Google.YouTubeAnalytics.Types
 -- 'GroupsDelete'' request conforms to.
 type GroupsDeleteResource =
      "groups" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "onBehalfOfContentOwner" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "id" Text :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+       QueryParam "onBehalfOfContentOwner" Text :>
+         QueryParam "id" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a group.
@@ -166,12 +166,13 @@ instance GoogleRequest GroupsDelete' where
         type Rs GroupsDelete' = ()
         request = requestWithRoute defReq youTubeAnalyticsURL
         requestWithRoute r u GroupsDelete'{..}
-          = go _gdQuotaUser (Just _gdPrettyPrint) _gdUserIP
-              _gdOnBehalfOfContentOwner
-              _gdKey
-              (Just _gdId)
-              _gdOAuthToken
+          = go _gdOnBehalfOfContentOwner (Just _gdId)
+              _gdQuotaUser
+              (Just _gdPrettyPrint)
+              _gdUserIP
               _gdFields
+              _gdKey
+              _gdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

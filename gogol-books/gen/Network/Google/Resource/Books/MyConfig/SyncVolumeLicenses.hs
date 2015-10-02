@@ -54,21 +54,21 @@ import           Network.Google.Prelude
 type MyConfigSyncVolumeLicensesResource =
      "myconfig" :>
        "syncVolumeLicenses" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "cpksver" Text :>
-               QueryParam "userIp" Text :>
-                 QueryParam "locale" Text :>
-                   QueryParams "volumeIds" Text :>
-                     QueryParam "key" Key :>
-                       QueryParams "features"
-                         BooksMyConfigSyncVolumeLicensesFeatures
-                         :>
-                         QueryParam "source" Text :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "showPreorders" Bool :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "nonce" Text :>
+         QueryParams "features"
+           BooksMyConfigSyncVolumeLicensesFeatures
+           :>
+           QueryParam "locale" Text :>
+             QueryParam "showPreorders" Bool :>
+               QueryParams "volumeIds" Text :>
+                 QueryParam "source" Text :>
+                   QueryParam "nonce" Text :>
+                     QueryParam "cpksver" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Post '[JSON] Volumes
 
@@ -227,18 +227,17 @@ instance GoogleRequest MyConfigSyncVolumeLicenses'
         type Rs MyConfigSyncVolumeLicenses' = Volumes
         request = requestWithRoute defReq booksURL
         requestWithRoute r u MyConfigSyncVolumeLicenses'{..}
-          = go _mcsvlQuotaUser (Just _mcsvlPrettyPrint)
-              (Just _mcsvlCpksver)
-              _mcsvlUserIP
-              _mcsvlLocale
+          = go _mcsvlFeatures _mcsvlLocale _mcsvlShowPreOrders
               _mcsvlVolumeIds
-              _mcsvlKey
-              _mcsvlFeatures
               (Just _mcsvlSource)
-              _mcsvlOAuthToken
-              _mcsvlShowPreOrders
-              _mcsvlFields
               (Just _mcsvlNonce)
+              (Just _mcsvlCpksver)
+              _mcsvlQuotaUser
+              (Just _mcsvlPrettyPrint)
+              _mcsvlUserIP
+              _mcsvlFields
+              _mcsvlKey
+              _mcsvlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

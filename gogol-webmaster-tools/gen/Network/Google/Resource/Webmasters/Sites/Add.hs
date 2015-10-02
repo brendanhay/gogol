@@ -50,9 +50,9 @@ type SitesAddResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Put '[JSON] ()
 
 -- | Adds a site to the set of the user\'s sites in Webmaster Tools.
@@ -145,11 +145,11 @@ instance GoogleRequest SitesAdd' where
         type Rs SitesAdd' = ()
         request = requestWithRoute defReq webmasterToolsURL
         requestWithRoute r u SitesAdd'{..}
-          = go _saQuotaUser (Just _saPrettyPrint) _saUserIP
-              _saSiteURL
+          = go _saSiteURL _saQuotaUser (Just _saPrettyPrint)
+              _saUserIP
+              _saFields
               _saKey
               _saOAuthToken
-              _saFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy SitesAddResource) r

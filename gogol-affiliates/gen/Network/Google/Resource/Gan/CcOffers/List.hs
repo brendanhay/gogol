@@ -50,14 +50,14 @@ type CcOffersListResource =
      "publishers" :>
        Capture "publisher" Text :>
          "ccOffers" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParams "advertiser" Text :>
-                     QueryParam "projection" GanCcOffersListProjection :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+           QueryParams "advertiser" Text :>
+             QueryParam "projection" GanCcOffersListProjection :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] CcOffers
 
 -- | Retrieves credit card offers for the given publisher.
@@ -174,13 +174,13 @@ instance GoogleRequest CcOffersList' where
         type Rs CcOffersList' = CcOffers
         request = requestWithRoute defReq affiliatesURL
         requestWithRoute r u CcOffersList'{..}
-          = go _colQuotaUser (Just _colPrettyPrint) _colUserIP
-              _colKey
-              _colAdvertiser
-              _colProjection
-              _colOAuthToken
-              _colPublisher
+          = go _colAdvertiser _colProjection _colPublisher
+              _colQuotaUser
+              (Just _colPrettyPrint)
+              _colUserIP
               _colFields
+              _colKey
+              _colOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -51,14 +51,14 @@ type CampaignsInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "campaigns" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "defaultLandingPageUrl" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "defaultLandingPageName" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+           QueryParam "defaultLandingPageName" Text :>
+             QueryParam "defaultLandingPageUrl" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Campaign :> Post '[JSON] Campaign
 
@@ -185,13 +185,14 @@ instance GoogleRequest CampaignsInsert' where
         type Rs CampaignsInsert' = Campaign
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CampaignsInsert'{..}
-          = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIP
-              _ciProfileId
+          = go _ciProfileId (Just _ciDefaultLandingPageName)
               (Just _ciDefaultLandingPageURL)
-              _ciKey
-              (Just _ciDefaultLandingPageName)
-              _ciOAuthToken
+              _ciQuotaUser
+              (Just _ciPrettyPrint)
+              _ciUserIP
               _ciFields
+              _ciKey
+              _ciOAuthToken
               (Just AltJSON)
               _ciCampaign
           where go

@@ -50,9 +50,9 @@ type ActivitiesGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Activity
 
 -- | Get an activity.
@@ -145,11 +145,11 @@ instance GoogleRequest ActivitiesGet' where
         type Rs ActivitiesGet' = Activity
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u ActivitiesGet'{..}
-          = go _agQuotaUser (Just _agPrettyPrint) _agUserIP
-              _agActivityId
+          = go _agActivityId _agQuotaUser (Just _agPrettyPrint)
+              _agUserIP
+              _agFields
               _agKey
               _agOAuthToken
-              _agFields
               (Just AltJSON)
           where go
                   = clientWithRoute

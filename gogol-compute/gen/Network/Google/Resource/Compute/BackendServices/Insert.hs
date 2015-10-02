@@ -53,9 +53,9 @@ type BackendServicesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] BackendService :>
                            Post '[JSON] Operation
@@ -165,11 +165,11 @@ instance GoogleRequest BackendServicesInsert' where
         type Rs BackendServicesInsert' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u BackendServicesInsert'{..}
-          = go _bsiQuotaUser (Just _bsiPrettyPrint) _bsiProject
+          = go _bsiProject _bsiQuotaUser (Just _bsiPrettyPrint)
               _bsiUserIP
+              _bsiFields
               _bsiKey
               _bsiOAuthToken
-              _bsiFields
               (Just AltJSON)
               _bsiBackendService
           where go

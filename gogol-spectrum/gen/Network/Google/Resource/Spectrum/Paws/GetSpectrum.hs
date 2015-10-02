@@ -51,9 +51,9 @@ type PawsGetSpectrumResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] PawsGetSpectrumRequest :>
                        Post '[JSON] PawsGetSpectrumResponse
@@ -155,9 +155,9 @@ instance GoogleRequest PawsGetSpectrum' where
         request = requestWithRoute defReq spectrumURL
         requestWithRoute r u PawsGetSpectrum'{..}
           = go _pgsQuotaUser (Just _pgsPrettyPrint) _pgsUserIP
+              _pgsFields
               _pgsKey
               _pgsOAuthToken
-              _pgsFields
               (Just AltJSON)
               _pgsPawsGetSpectrumRequest
           where go

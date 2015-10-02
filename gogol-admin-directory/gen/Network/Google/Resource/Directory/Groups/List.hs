@@ -50,17 +50,17 @@ import           Network.Google.Prelude
 -- 'GroupsList'' request conforms to.
 type GroupsListResource =
      "groups" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "domain" Text :>
-               QueryParam "customer" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "userKey" Text :>
-                         QueryParam "maxResults" Int32 :>
-                           QueryParam "fields" Text :>
+       QueryParam "customer" Text :>
+         QueryParam "domain" Text :>
+           QueryParam "maxResults" Int32 :>
+             QueryParam "pageToken" Text :>
+               QueryParam "userKey" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Groups
 
 -- | Retrieve all groups in a domain (paginated)
@@ -191,15 +191,14 @@ instance GoogleRequest GroupsList' where
         type Rs GroupsList' = Groups
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u GroupsList'{..}
-          = go _glQuotaUser (Just _glPrettyPrint) _glUserIP
-              _glDomain
-              _glCustomer
-              _glKey
-              _glPageToken
-              _glOAuthToken
+          = go _glCustomer _glDomain _glMaxResults _glPageToken
               _glUserKey
-              _glMaxResults
+              _glQuotaUser
+              (Just _glPrettyPrint)
+              _glUserIP
               _glFields
+              _glKey
+              _glOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy GroupsListResource)

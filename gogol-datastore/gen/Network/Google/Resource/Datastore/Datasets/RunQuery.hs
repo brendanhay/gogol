@@ -51,9 +51,9 @@ type DatasetsRunQueryResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltPROTO :>
                        ReqBody '[JSON] RunQueryRequest :>
                          Post '[JSON] RunQueryResponse
@@ -162,11 +162,12 @@ instance GoogleRequest DatasetsRunQuery' where
         type Rs DatasetsRunQuery' = RunQueryResponse
         request = requestWithRoute defReq datastoreURL
         requestWithRoute r u DatasetsRunQuery'{..}
-          = go _drqQuotaUser (Just _drqPrettyPrint) _drqUserIP
-              _drqKey
-              _drqDatasetId
-              _drqOAuthToken
+          = go _drqDatasetId _drqQuotaUser
+              (Just _drqPrettyPrint)
+              _drqUserIP
               _drqFields
+              _drqKey
+              _drqOAuthToken
               (Just AltPROTO)
               _drqRunQueryRequest
           where go

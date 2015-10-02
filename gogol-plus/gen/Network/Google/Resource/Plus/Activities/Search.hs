@@ -50,17 +50,17 @@ import           Network.Google.Prelude
 -- 'ActivitiesSearch'' request conforms to.
 type ActivitiesSearchResource =
      "activities" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
+       QueryParam "language" Text :>
+         QueryParam "maxResults" Word32 :>
            QueryParam "orderBy" PlusActivitiesSearchOrderBy :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "query" Text :>
-                   QueryParam "language" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "query" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ActivityFeed
 
@@ -195,16 +195,16 @@ instance GoogleRequest ActivitiesSearch' where
         type Rs ActivitiesSearch' = ActivityFeed
         request = requestWithRoute defReq plusURL
         requestWithRoute r u ActivitiesSearch'{..}
-          = go _asQuotaUser (Just _asPrettyPrint)
+          = go (Just _asLanguage) (Just _asMaxResults)
               (Just _asOrderBy)
-              _asUserIP
-              _asKey
-              (Just _asQuery)
-              (Just _asLanguage)
               _asPageToken
-              _asOAuthToken
-              (Just _asMaxResults)
+              (Just _asQuery)
+              _asQuotaUser
+              (Just _asPrettyPrint)
+              _asUserIP
               _asFields
+              _asKey
+              _asOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

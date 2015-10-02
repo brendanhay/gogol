@@ -51,9 +51,9 @@ type MetricDescriptorsCreateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] MetricDescriptor :>
                          Post '[JSON] MetricDescriptor
@@ -163,11 +163,11 @@ instance GoogleRequest MetricDescriptorsCreate' where
         type Rs MetricDescriptorsCreate' = MetricDescriptor
         request = requestWithRoute defReq monitoringURL
         requestWithRoute r u MetricDescriptorsCreate'{..}
-          = go _mdcQuotaUser (Just _mdcPrettyPrint) _mdcProject
+          = go _mdcProject _mdcQuotaUser (Just _mdcPrettyPrint)
               _mdcUserIP
+              _mdcFields
               _mdcKey
               _mdcOAuthToken
-              _mdcFields
               (Just AltJSON)
               _mdcMetricDescriptor
           where go

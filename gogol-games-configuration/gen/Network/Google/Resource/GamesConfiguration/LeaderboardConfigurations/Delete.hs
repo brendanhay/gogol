@@ -50,9 +50,9 @@ type LeaderboardConfigurationsDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete the leaderboard configuration with the given ID.
@@ -153,11 +153,12 @@ instance GoogleRequest
           = requestWithRoute defReq gamesConfigurationURL
         requestWithRoute r u
           LeaderboardConfigurationsDelete'{..}
-          = go _lcdQuotaUser (Just _lcdPrettyPrint) _lcdUserIP
-              _lcdLeaderboardId
+          = go _lcdLeaderboardId _lcdQuotaUser
+              (Just _lcdPrettyPrint)
+              _lcdUserIP
+              _lcdFields
               _lcdKey
               _lcdOAuthToken
-              _lcdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

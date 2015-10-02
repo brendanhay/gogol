@@ -54,19 +54,19 @@ import           Network.Google.YouTube.Types
 type LiveBroadcastsControlResource =
      "liveBroadcasts" :>
        "control" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "part" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "onBehalfOfContentOwner" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                       QueryParam "id" Text :>
-                         QueryParam "displaySlate" Bool :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "walltime" UTCTime :>
-                               QueryParam "offsetTimeMs" Word64 :>
-                                 QueryParam "fields" Text :>
+         QueryParam "displaySlate" Bool :>
+           QueryParam "offsetTimeMs" Word64 :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                 QueryParam "walltime" UTCTime :>
+                   QueryParam "id" Text :>
+                     QueryParam "part" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Post '[JSON] LiveBroadcast
 
@@ -261,18 +261,18 @@ instance GoogleRequest LiveBroadcastsControl' where
         type Rs LiveBroadcastsControl' = LiveBroadcast
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u LiveBroadcastsControl'{..}
-          = go _lbcQuotaUser (Just _lbcPart)
+          = go _lbcDisplaySlate _lbcOffsetTimeMs
+              _lbcOnBehalfOfContentOwner
+              _lbcOnBehalfOfContentOwnerChannel
+              _lbcWalltime
+              (Just _lbcId)
+              (Just _lbcPart)
+              _lbcQuotaUser
               (Just _lbcPrettyPrint)
               _lbcUserIP
-              _lbcOnBehalfOfContentOwner
-              _lbcKey
-              _lbcOnBehalfOfContentOwnerChannel
-              (Just _lbcId)
-              _lbcDisplaySlate
-              _lbcOAuthToken
-              _lbcWalltime
-              _lbcOffsetTimeMs
               _lbcFields
+              _lbcKey
+              _lbcOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

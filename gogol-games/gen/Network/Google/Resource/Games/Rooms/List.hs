@@ -48,15 +48,15 @@ import           Network.Google.Prelude
 -- 'RoomsList'' request conforms to.
 type RoomsListResource =
      "rooms" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "language" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "maxResults" Int32 :>
-                       QueryParam "fields" Text :>
+       QueryParam "language" Text :>
+         QueryParam "maxResults" Int32 :>
+           QueryParam "pageToken" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] RoomList
 
 -- | Returns invitations to join rooms.
@@ -167,12 +167,12 @@ instance GoogleRequest RoomsList' where
         type Rs RoomsList' = RoomList
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u RoomsList'{..}
-          = go _rQuotaUser (Just _rPrettyPrint) _rUserIP _rKey
-              _rLanguage
-              _rPageToken
-              _rOAuthToken
-              _rMaxResults
+          = go _rLanguage _rMaxResults _rPageToken _rQuotaUser
+              (Just _rPrettyPrint)
+              _rUserIP
               _rFields
+              _rKey
+              _rOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy RoomsListResource)

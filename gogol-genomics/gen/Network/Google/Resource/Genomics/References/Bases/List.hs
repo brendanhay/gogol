@@ -53,16 +53,16 @@ type ReferencesBasesListResource =
      "references" :>
        Capture "referenceId" Text :>
          "bases" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
+           QueryParam "end" Int64 :>
+             QueryParam "pageSize" Int32 :>
+               QueryParam "pageToken" Text :>
                  QueryParam "start" Int64 :>
-                   QueryParam "key" Key :>
-                     QueryParam "end" Int64 :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "pageSize" Int32 :>
-                             QueryParam "fields" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] ListBasesResponse
 
@@ -198,15 +198,14 @@ instance GoogleRequest ReferencesBasesList' where
         type Rs ReferencesBasesList' = ListBasesResponse
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u ReferencesBasesList'{..}
-          = go _rblQuotaUser (Just _rblPrettyPrint) _rblUserIP
-              _rblStart
+          = go _rblEnd _rblPageSize _rblPageToken _rblStart
               _rblReferenceId
-              _rblKey
-              _rblEnd
-              _rblPageToken
-              _rblOAuthToken
-              _rblPageSize
+              _rblQuotaUser
+              (Just _rblPrettyPrint)
+              _rblUserIP
               _rblFields
+              _rblKey
+              _rblOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

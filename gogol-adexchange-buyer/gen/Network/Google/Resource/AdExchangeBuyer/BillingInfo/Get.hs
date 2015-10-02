@@ -50,9 +50,9 @@ type BillingInfoGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] BillingInfo
 
 -- | Returns the billing information for one account specified by account ID.
@@ -148,11 +148,12 @@ instance GoogleRequest BillingInfoGet' where
         type Rs BillingInfoGet' = BillingInfo
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u BillingInfoGet'{..}
-          = go _bigQuotaUser (Just _bigPrettyPrint) _bigUserIP
-              _bigAccountId
+          = go _bigAccountId _bigQuotaUser
+              (Just _bigPrettyPrint)
+              _bigUserIP
+              _bigFields
               _bigKey
               _bigOAuthToken
-              _bigFields
               (Just AltJSON)
           where go
                   = clientWithRoute

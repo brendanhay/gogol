@@ -55,9 +55,9 @@ type BackendServicesGetHealthResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] ResourceGroupReference :>
                                Post '[JSON] BackendServiceGroupHealth
@@ -180,13 +180,12 @@ instance GoogleRequest BackendServicesGetHealth'
              BackendServiceGroupHealth
         request = requestWithRoute defReq computeURL
         requestWithRoute r u BackendServicesGetHealth'{..}
-          = go _bsghQuotaUser (Just _bsghPrettyPrint)
-              _bsghProject
+          = go _bsghProject _bsghBackendService _bsghQuotaUser
+              (Just _bsghPrettyPrint)
               _bsghUserIP
+              _bsghFields
               _bsghKey
               _bsghOAuthToken
-              _bsghFields
-              _bsghBackendService
               (Just AltJSON)
               _bsghResourceGroupReference
           where go

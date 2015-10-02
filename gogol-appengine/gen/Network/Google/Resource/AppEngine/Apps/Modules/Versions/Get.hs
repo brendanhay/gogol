@@ -62,18 +62,19 @@ type AppsModulesVersionsGetResource =
                "versions" :>
                  Capture "versionsId" Text :>
                    QueryParam "$.xgafv" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "callback" Text :>
                            QueryParam "pp" Bool :>
-                             QueryParam "access_token" Text :>
-                               QueryParam "uploadType" Text :>
-                                 QueryParam "bearer_token" Text :>
-                                   QueryParam "key" Key :>
-                                     QueryParam "view" Text :>
-                                       QueryParam "oauth_token" OAuthToken :>
-                                         QueryParam "fields" Text :>
-                                           QueryParam "callback" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "upload_protocol" Text :>
+                                 QueryParam "view" Text :>
+                                   QueryParam "quotaUser" Text :>
+                                     QueryParam "prettyPrint" Bool :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "key" Key :>
+                                           QueryParam "oauth_token" OAuthToken
+                                             :>
                                              QueryParam "alt" AltJSON :>
                                                Get '[JSON] Version
 
@@ -258,21 +259,20 @@ instance GoogleRequest AppsModulesVersionsGet' where
         type Rs AppsModulesVersionsGet' = Version
         request = requestWithRoute defReq appEngineURL
         requestWithRoute r u AppsModulesVersionsGet'{..}
-          = go _amvgXgafv _amvgQuotaUser
-              (Just _amvgPrettyPrint)
-              _amvgUploadProtocol
-              (Just _amvgPp)
-              _amvgAccessToken
-              _amvgUploadType
-              _amvgVersionsId
-              _amvgModulesId
-              _amvgBearerToken
-              _amvgKey
-              _amvgAppsId
-              _amvgView
-              _amvgOAuthToken
-              _amvgFields
+          = go _amvgXgafv _amvgAccessToken _amvgBearerToken
               _amvgCallback
+              (Just _amvgPp)
+              _amvgUploadType
+              _amvgUploadProtocol
+              _amvgView
+              _amvgAppsId
+              _amvgModulesId
+              _amvgVersionsId
+              _amvgQuotaUser
+              (Just _amvgPrettyPrint)
+              _amvgFields
+              _amvgKey
+              _amvgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

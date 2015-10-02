@@ -56,24 +56,24 @@ type UserRolesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "userRoles" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "searchString" Text :>
-                   QueryParams "ids" Int64 :>
-                     QueryParam "sortOrder"
-                       DfareportingUserRolesListSortOrder
+           QueryParam "accountUserRoleOnly" Bool :>
+             QueryParams "ids" Int64 :>
+               QueryParam "maxResults" Int32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "searchString" Text :>
+                     QueryParam "sortField"
+                       DfareportingUserRolesListSortField
                        :>
-                       QueryParam "key" Key :>
-                         QueryParam "accountUserRoleOnly" Bool :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "sortField"
-                               DfareportingUserRolesListSortField
-                               :>
-                               QueryParam "subaccountId" Int64 :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "maxResults" Int32 :>
-                                     QueryParam "fields" Text :>
+                       QueryParam "sortOrder"
+                         DfareportingUserRolesListSortOrder
+                         :>
+                         QueryParam "subaccountId" Int64 :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "userIp" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] UserRolesListResponse
 
@@ -252,19 +252,19 @@ instance GoogleRequest UserRolesList' where
         type Rs UserRolesList' = UserRolesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u UserRolesList'{..}
-          = go _urlQuotaUser (Just _urlPrettyPrint) _urlUserIP
-              _urlSearchString
-              _urlIds
-              _urlProfileId
-              _urlSortOrder
-              _urlKey
-              _urlAccountUserRoleOnly
+          = go _urlAccountUserRoleOnly _urlIds _urlMaxResults
               _urlPageToken
+              _urlSearchString
               _urlSortField
+              _urlSortOrder
               _urlSubAccountId
-              _urlOAuthToken
-              _urlMaxResults
+              _urlProfileId
+              _urlQuotaUser
+              (Just _urlPrettyPrint)
+              _urlUserIP
               _urlFields
+              _urlKey
+              _urlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

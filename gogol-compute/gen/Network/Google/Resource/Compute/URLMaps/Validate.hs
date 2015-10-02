@@ -28,7 +28,7 @@ module Network.Google.Resource.Compute.URLMaps.Validate
       URLMapsValidateResource
 
     -- * Creating a Request
-    , uRLMapsValidate'
+    , urlMapsValidate'
     , URLMapsValidate'
 
     -- * Request Lenses
@@ -57,9 +57,9 @@ type URLMapsValidateResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] URLMapsValidateRequest :>
                                Post '[JSON] URLMapsValidateResponse
@@ -68,7 +68,7 @@ type URLMapsValidateResource =
 -- provided UrlMap will be run. Calling this method does NOT create the
 -- UrlMap.
 --
--- /See:/ 'uRLMapsValidate'' smart constructor.
+-- /See:/ 'urlMapsValidate'' smart constructor.
 data URLMapsValidate' = URLMapsValidate'
     { _umvQuotaUser              :: !(Maybe Text)
     , _umvURLMap                 :: !Text
@@ -102,12 +102,12 @@ data URLMapsValidate' = URLMapsValidate'
 -- * 'umvOAuthToken'
 --
 -- * 'umvFields'
-uRLMapsValidate'
+urlMapsValidate'
     :: Text -- ^ 'urlMap'
     -> Text -- ^ 'project'
     -> URLMapsValidateRequest -- ^ 'URLMapsValidateRequest'
     -> URLMapsValidate'
-uRLMapsValidate' pUmvURLMap_ pUmvProject_ pUmvURLMapsValidateRequest_ =
+urlMapsValidate' pUmvURLMap_ pUmvProject_ pUmvURLMapsValidateRequest_ =
     URLMapsValidate'
     { _umvQuotaUser = Nothing
     , _umvURLMap = pUmvURLMap_
@@ -180,12 +180,12 @@ instance GoogleRequest URLMapsValidate' where
         type Rs URLMapsValidate' = URLMapsValidateResponse
         request = requestWithRoute defReq computeURL
         requestWithRoute r u URLMapsValidate'{..}
-          = go _umvQuotaUser _umvURLMap (Just _umvPrettyPrint)
-              _umvProject
+          = go _umvProject _umvURLMap _umvQuotaUser
+              (Just _umvPrettyPrint)
               _umvUserIP
+              _umvFields
               _umvKey
               _umvOAuthToken
-              _umvFields
               (Just AltJSON)
               _umvURLMapsValidateRequest
           where go

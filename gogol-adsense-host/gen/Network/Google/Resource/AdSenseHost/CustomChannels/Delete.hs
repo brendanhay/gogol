@@ -53,9 +53,9 @@ type CustomChannelsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Delete '[JSON] CustomChannel
 
@@ -164,13 +164,12 @@ instance GoogleRequest CustomChannelsDelete' where
         type Rs CustomChannelsDelete' = CustomChannel
         request = requestWithRoute defReq adSenseHostURL
         requestWithRoute r u CustomChannelsDelete'{..}
-          = go _ccdQuotaUser (Just _ccdPrettyPrint)
-              _ccdCustomChannelId
+          = go _ccdAdClientId _ccdCustomChannelId _ccdQuotaUser
+              (Just _ccdPrettyPrint)
               _ccdUserIP
-              _ccdAdClientId
+              _ccdFields
               _ccdKey
               _ccdOAuthToken
-              _ccdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

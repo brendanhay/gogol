@@ -52,9 +52,9 @@ type CommentsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Comment :> Post '[JSON] Comment
 
@@ -158,11 +158,11 @@ instance GoogleRequest CommentsInsert' where
         type Rs CommentsInsert' = Comment
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u CommentsInsert'{..}
-          = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIP
-              _ciActivityId
+          = go _ciActivityId _ciQuotaUser (Just _ciPrettyPrint)
+              _ciUserIP
+              _ciFields
               _ciKey
               _ciOAuthToken
-              _ciFields
               (Just AltJSON)
               _ciComment
           where go

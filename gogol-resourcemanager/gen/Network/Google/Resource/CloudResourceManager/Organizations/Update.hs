@@ -56,17 +56,17 @@ type OrganizationsUpdateResource =
        "organizations" :>
          Capture "organizationId" Text :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
+             QueryParam "access_token" Text :>
+               QueryParam "bearer_token" Text :>
+                 QueryParam "callback" Text :>
                    QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] Organization :>
                                        Put '[JSON] Organization
@@ -230,17 +230,17 @@ instance GoogleRequest OrganizationsUpdate' where
         type Rs OrganizationsUpdate' = Organization
         request = requestWithRoute defReq resourceManagerURL
         requestWithRoute r u OrganizationsUpdate'{..}
-          = go _ouXgafv _ouQuotaUser (Just _ouPrettyPrint)
-              _ouUploadProtocol
+          = go _ouXgafv _ouAccessToken _ouBearerToken
+              _ouCallback
               (Just _ouPp)
-              _ouAccessToken
               _ouUploadType
-              _ouBearerToken
+              _ouUploadProtocol
+              _ouOrganizationId
+              _ouQuotaUser
+              (Just _ouPrettyPrint)
+              _ouFields
               _ouKey
               _ouOAuthToken
-              _ouOrganizationId
-              _ouFields
-              _ouCallback
               (Just AltJSON)
               _ouOrganization
           where go

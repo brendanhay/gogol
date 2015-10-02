@@ -53,9 +53,9 @@ type PermissionsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a permission from a file.
@@ -162,12 +162,12 @@ instance GoogleRequest PermissionsDelete' where
         type Rs PermissionsDelete' = ()
         request = requestWithRoute defReq driveURL
         requestWithRoute r u PermissionsDelete'{..}
-          = go _perQuotaUser (Just _perPrettyPrint) _perUserIP
-              _perKey
-              _perFileId
-              _perOAuthToken
-              _perPermissionId
+          = go _perFileId _perPermissionId _perQuotaUser
+              (Just _perPrettyPrint)
+              _perUserIP
               _perFields
+              _perKey
+              _perOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

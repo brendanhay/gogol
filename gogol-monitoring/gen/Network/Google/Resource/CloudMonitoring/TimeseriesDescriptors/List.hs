@@ -62,22 +62,22 @@ type TimeseriesDescriptorsListResource =
      Capture "project" Text :>
        "timeseriesDescriptors" :>
          Capture "metric" Text :>
-           QueryParam "window" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "count" Int32 :>
-                     QueryParam "aggregator"
-                       CloudMonitoringTimeseriesDescriptorsListAggregator
-                       :>
-                       QueryParam "timespan" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oldest" Text :>
-                             QueryParams "labels" Text :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "youngest" Text :>
-                                   QueryParam "oauth_token" OAuthToken :>
-                                     QueryParam "fields" Text :>
+           QueryParam "aggregator"
+             CloudMonitoringTimeseriesDescriptorsListAggregator
+             :>
+             QueryParam "count" Int32 :>
+               QueryParams "labels" Text :>
+                 QueryParam "oldest" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "timespan" Text :>
+                       QueryParam "window" Text :>
+                         QueryParam "youngest" Text :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "userIp" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          ReqBody '[JSON]
                                            ListTimeseriesDescriptorsRequest
@@ -294,20 +294,19 @@ instance GoogleRequest TimeseriesDescriptorsList'
              ListTimeseriesDescriptorsResponse
         request = requestWithRoute defReq monitoringURL
         requestWithRoute r u TimeseriesDescriptorsList'{..}
-          = go _tWindow _tQuotaUser (Just _tPrettyPrint)
-              _tProject
-              _tUserIP
-              (Just _tCount)
-              _tAggregator
-              _tTimespan
-              _tMetric
-              _tKey
-              _tOldest
-              _tLabels
+          = go _tAggregator (Just _tCount) _tLabels _tOldest
               _tPageToken
+              _tTimespan
+              _tWindow
+              _tProject
+              _tMetric
               (Just _tYoungest)
-              _tOAuthToken
+              _tQuotaUser
+              (Just _tPrettyPrint)
+              _tUserIP
               _tFields
+              _tKey
+              _tOAuthToken
               (Just AltJSON)
               _tListTimeseriesDescriptorsRequest
           where go

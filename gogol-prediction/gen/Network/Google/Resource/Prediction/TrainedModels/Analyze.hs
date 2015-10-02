@@ -53,9 +53,9 @@ type TrainedModelsAnalyzeResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Analyze
 
 -- | Get analysis of the model and the data the model was trained on.
@@ -160,12 +160,12 @@ instance GoogleRequest TrainedModelsAnalyze' where
         type Rs TrainedModelsAnalyze' = Analyze
         request = requestWithRoute defReq predictionURL
         requestWithRoute r u TrainedModelsAnalyze'{..}
-          = go _tmaQuotaUser (Just _tmaPrettyPrint) _tmaProject
+          = go _tmaProject _tmaId _tmaQuotaUser
+              (Just _tmaPrettyPrint)
               _tmaUserIP
-              _tmaKey
-              _tmaId
-              _tmaOAuthToken
               _tmaFields
+              _tmaKey
+              _tmaOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

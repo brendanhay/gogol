@@ -52,9 +52,9 @@ type ReadgroupsetsAlignResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] AlignReadGroupSetsRequest :>
                          Post '[JSON] AlignReadGroupSetsResponse
@@ -154,9 +154,9 @@ instance GoogleRequest ReadgroupsetsAlign' where
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u ReadgroupsetsAlign'{..}
           = go _raQuotaUser (Just _raPrettyPrint) _raUserIP
+              _raFields
               _raKey
               _raOAuthToken
-              _raFields
               (Just AltJSON)
               _raAlignReadGroupSetsRequest
           where go

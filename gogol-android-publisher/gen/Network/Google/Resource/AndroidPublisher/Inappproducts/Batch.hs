@@ -50,9 +50,9 @@ type InappproductsBatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] InappproductsBatchRequest :>
                          Post '[JSON] InappproductsBatchResponse
@@ -149,9 +149,9 @@ instance GoogleRequest InappproductsBatch' where
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u InappproductsBatch'{..}
           = go _ibQuotaUser (Just _ibPrettyPrint) _ibUserIP
+              _ibFields
               _ibKey
               _ibOAuthToken
-              _ibFields
               (Just AltJSON)
               _ibInappproductsBatchRequest
           where go

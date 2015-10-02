@@ -61,29 +61,31 @@ type CampaignsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "campaigns" :>
-           QueryParams "excludedIds" Int64 :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "searchString" Text :>
+           QueryParams "advertiserGroupIds" Int64 :>
+             QueryParams "advertiserIds" Int64 :>
+               QueryParam "archived" Bool :>
+                 QueryParam "atLeastOneOptimizationActivity" Bool :>
+                   QueryParams "excludedIds" Int64 :>
                      QueryParams "ids" Int64 :>
-                       QueryParam "sortOrder"
-                         DfareportingCampaignsListSortOrder
-                         :>
-                         QueryParams "advertiserGroupIds" Int64 :>
-                           QueryParam "key" Key :>
-                             QueryParam "atLeastOneOptimizationActivity" Bool :>
-                               QueryParam "overriddenEventTagId" Int64 :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "sortField"
-                                     DfareportingCampaignsListSortField
-                                     :>
-                                     QueryParam "subaccountId" Int64 :>
-                                       QueryParam "oauth_token" OAuthToken :>
-                                         QueryParams "advertiserIds" Int64 :>
-                                           QueryParam "archived" Bool :>
-                                             QueryParam "maxResults" Int32 :>
-                                               QueryParam "fields" Text :>
+                       QueryParam "maxResults" Int32 :>
+                         QueryParam "overriddenEventTagId" Int64 :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "searchString" Text :>
+                               QueryParam "sortField"
+                                 DfareportingCampaignsListSortField
+                                 :>
+                                 QueryParam "sortOrder"
+                                   DfareportingCampaignsListSortOrder
+                                   :>
+                                   QueryParam "subaccountId" Int64 :>
+                                     QueryParam "quotaUser" Text :>
+                                       QueryParam "prettyPrint" Bool :>
+                                         QueryParam "userIp" Text :>
+                                           QueryParam "fields" Text :>
+                                             QueryParam "key" Key :>
+                                               QueryParam "oauth_token"
+                                                 OAuthToken
+                                                 :>
                                                  QueryParam "alt" AltJSON :>
                                                    Get '[JSON]
                                                      CampaignsListResponse
@@ -309,25 +311,25 @@ instance GoogleRequest CampaignsList' where
         type Rs CampaignsList' = CampaignsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CampaignsList'{..}
-          = go _ccExcludedIds _ccQuotaUser
-              (Just _ccPrettyPrint)
-              _ccUserIP
-              _ccSearchString
-              _ccIds
-              _ccProfileId
-              _ccSortOrder
-              _ccAdvertiserGroupIds
-              _ccKey
+          = go _ccAdvertiserGroupIds _ccAdvertiserIds
+              _ccArchived
               _ccAtLeastOneOptimizationActivity
+              _ccExcludedIds
+              _ccIds
+              _ccMaxResults
               _ccOverriddenEventTagId
               _ccPageToken
+              _ccSearchString
               _ccSortField
+              _ccSortOrder
               _ccSubAccountId
-              _ccOAuthToken
-              _ccAdvertiserIds
-              _ccArchived
-              _ccMaxResults
+              _ccProfileId
+              _ccQuotaUser
+              (Just _ccPrettyPrint)
+              _ccUserIP
               _ccFields
+              _ccKey
+              _ccOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -51,15 +51,15 @@ type TargetPoolsAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
          "targetPools" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "filter" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] TargetPoolAggregatedList
 
@@ -200,15 +200,15 @@ instance GoogleRequest TargetPoolsAggregatedList'
              TargetPoolAggregatedList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u TargetPoolsAggregatedList'{..}
-          = go _tpalQuotaUser (Just _tpalPrettyPrint)
-              _tpalProject
-              _tpalUserIP
-              _tpalKey
-              _tpalFilter
+          = go _tpalFilter (Just _tpalMaxResults)
               _tpalPageToken
-              _tpalOAuthToken
-              (Just _tpalMaxResults)
+              _tpalProject
+              _tpalQuotaUser
+              (Just _tpalPrettyPrint)
+              _tpalUserIP
               _tpalFields
+              _tpalKey
+              _tpalOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

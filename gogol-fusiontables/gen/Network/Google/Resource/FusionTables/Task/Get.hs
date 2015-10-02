@@ -53,9 +53,9 @@ type TaskGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Task
 
 -- | Retrieves a specific task by its ID.
@@ -157,12 +157,12 @@ instance GoogleRequest TaskGet' where
         type Rs TaskGet' = Task
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TaskGet'{..}
-          = go _tgQuotaUser (Just _tgPrettyPrint) _tgTaskId
+          = go _tgTableId _tgTaskId _tgQuotaUser
+              (Just _tgPrettyPrint)
               _tgUserIP
+              _tgFields
               _tgKey
               _tgOAuthToken
-              _tgTableId
-              _tgFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TaskGetResource) r

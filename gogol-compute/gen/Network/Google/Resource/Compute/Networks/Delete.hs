@@ -53,9 +53,9 @@ type NetworksDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified network resource.
@@ -158,12 +158,12 @@ instance GoogleRequest NetworksDelete' where
         type Rs NetworksDelete' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u NetworksDelete'{..}
-          = go _ndQuotaUser (Just _ndPrettyPrint) _ndProject
+          = go _ndProject _ndNetwork _ndQuotaUser
+              (Just _ndPrettyPrint)
               _ndUserIP
-              _ndNetwork
+              _ndFields
               _ndKey
               _ndOAuthToken
-              _ndFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -58,21 +58,21 @@ type ZoneViewsListResourcesResource =
            "resourceViews" :>
              Capture "resourceView" Text :>
                "resources" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "listState"
-                       ResourceviewsZoneViewsListResourcesListState
-                       :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "format"
-                           ResourceviewsZoneViewsListResourcesFormat
-                           :>
-                           QueryParam "key" Key :>
-                             QueryParam "serviceName" Text :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "maxResults" Int32 :>
-                                     QueryParam "fields" Text :>
+                 QueryParam "format"
+                   ResourceviewsZoneViewsListResourcesFormat
+                   :>
+                   QueryParam "listState"
+                     ResourceviewsZoneViewsListResourcesListState
+                     :>
+                     QueryParam "maxResults" Int32 :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "serviceName" Text :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "userIp" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON]
                                            ZoneViewsListResourcesResponse
@@ -247,19 +247,19 @@ instance GoogleRequest ZoneViewsListResources' where
              ZoneViewsListResourcesResponse
         request = requestWithRoute defReq resourceViewsURL
         requestWithRoute r u ZoneViewsListResources'{..}
-          = go _zvlrQuotaUser (Just _zvlrPrettyPrint)
-              _zvlrResourceView
-              (Just _zvlrListState)
-              _zvlrProject
-              _zvlrUserIP
-              _zvlrFormat
-              _zvlrZone
-              _zvlrKey
-              _zvlrServiceName
-              _zvlrPageToken
-              _zvlrOAuthToken
+          = go _zvlrFormat (Just _zvlrListState)
               (Just _zvlrMaxResults)
+              _zvlrPageToken
+              _zvlrServiceName
+              _zvlrProject
+              _zvlrZone
+              _zvlrResourceView
+              _zvlrQuotaUser
+              (Just _zvlrPrettyPrint)
+              _zvlrUserIP
               _zvlrFields
+              _zvlrKey
+              _zvlrOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

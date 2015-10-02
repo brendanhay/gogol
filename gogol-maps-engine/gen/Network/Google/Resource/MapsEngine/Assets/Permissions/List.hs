@@ -51,9 +51,9 @@ type AssetsPermissionsListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] PermissionsListResponse
 
@@ -150,11 +150,11 @@ instance GoogleRequest AssetsPermissionsList' where
              PermissionsListResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u AssetsPermissionsList'{..}
-          = go _aplQuotaUser (Just _aplPrettyPrint) _aplUserIP
-              _aplKey
-              _aplId
-              _aplOAuthToken
+          = go _aplId _aplQuotaUser (Just _aplPrettyPrint)
+              _aplUserIP
               _aplFields
+              _aplKey
+              _aplOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

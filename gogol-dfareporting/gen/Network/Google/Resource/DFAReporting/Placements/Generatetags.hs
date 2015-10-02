@@ -52,17 +52,17 @@ type PlacementsGeneratetagsResource =
        Capture "profileId" Int64 :>
          "placements" :>
            "generatetags" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
+             QueryParam "campaignId" Int64 :>
+               QueryParams "placementIds" Int64 :>
                  QueryParams "tagFormats"
                    DfareportingPlacementsGeneratetagsTagFormats
                    :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "campaignId" Int64 :>
-                       QueryParam "key" Key :>
-                         QueryParams "placementIds" Int64 :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Post '[JSON] PlacementsGenerateTagsResponse
 
@@ -185,14 +185,14 @@ instance GoogleRequest PlacementsGeneratetags' where
              PlacementsGenerateTagsResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementsGeneratetags'{..}
-          = go _pQuotaUser (Just _pPrettyPrint) _pTagFormats
-              _pUserIP
-              _pCampaignId
+          = go _pCampaignId _pPlacementIds _pTagFormats
               _pProfileId
-              _pKey
-              _pPlacementIds
-              _pOAuthToken
+              _pQuotaUser
+              (Just _pPrettyPrint)
+              _pUserIP
               _pFields
+              _pKey
+              _pOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

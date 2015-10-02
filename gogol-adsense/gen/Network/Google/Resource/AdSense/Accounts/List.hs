@@ -47,14 +47,14 @@ import           Network.Google.Prelude
 -- 'AccountsList'' request conforms to.
 type AccountsListResource =
      "accounts" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "maxResults" Int32 :>
-                     QueryParam "fields" Text :>
+       QueryParam "maxResults" Int32 :>
+         QueryParam "pageToken" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Accounts
 
 -- | List all accounts available to this AdSense account.
@@ -158,12 +158,12 @@ instance GoogleRequest AccountsList' where
         type Rs AccountsList' = Accounts
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u AccountsList'{..}
-          = go _alQuotaUser (Just _alPrettyPrint) _alUserIP
-              _alKey
-              _alPageToken
-              _alOAuthToken
-              _alMaxResults
+          = go _alMaxResults _alPageToken _alQuotaUser
+              (Just _alPrettyPrint)
+              _alUserIP
               _alFields
+              _alKey
+              _alOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

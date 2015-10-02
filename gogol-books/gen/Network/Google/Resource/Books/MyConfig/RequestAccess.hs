@@ -52,20 +52,20 @@ import           Network.Google.Prelude
 type MyConfigRequestAccessResource =
      "myconfig" :>
        "requestAccess" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "cpksver" Text :>
-               QueryParam "userIp" Text :>
-                 QueryParam "locale" Text :>
-                   QueryParam "licenseTypes"
-                     BooksMyConfigRequestAccessLicenseTypes
-                     :>
-                     QueryParam "key" Key :>
-                       QueryParam "volumeId" Text :>
-                         QueryParam "source" Text :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "nonce" Text :>
+         QueryParam "licenseTypes"
+           BooksMyConfigRequestAccessLicenseTypes
+           :>
+           QueryParam "locale" Text :>
+             QueryParam "source" Text :>
+               QueryParam "volumeId" Text :>
+                 QueryParam "nonce" Text :>
+                   QueryParam "cpksver" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Post '[JSON] RequestAccess
 
@@ -213,17 +213,16 @@ instance GoogleRequest MyConfigRequestAccess' where
         type Rs MyConfigRequestAccess' = RequestAccess
         request = requestWithRoute defReq booksURL
         requestWithRoute r u MyConfigRequestAccess'{..}
-          = go _mcraQuotaUser (Just _mcraPrettyPrint)
-              (Just _mcraCpksver)
-              _mcraUserIP
-              _mcraLocale
-              _mcraLicenseTypes
-              _mcraKey
+          = go _mcraLicenseTypes _mcraLocale (Just _mcraSource)
               (Just _mcraVolumeId)
-              (Just _mcraSource)
-              _mcraOAuthToken
-              _mcraFields
               (Just _mcraNonce)
+              (Just _mcraCpksver)
+              _mcraQuotaUser
+              (Just _mcraPrettyPrint)
+              _mcraUserIP
+              _mcraFields
+              _mcraKey
+              _mcraOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

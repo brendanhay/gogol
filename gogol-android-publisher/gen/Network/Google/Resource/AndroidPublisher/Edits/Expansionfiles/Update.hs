@@ -63,9 +63,9 @@ type EditsExpansionfilesUpdateResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] ExpansionFile :>
                                    Put '[JSON] ExpansionFile
@@ -205,14 +205,14 @@ instance GoogleRequest EditsExpansionfilesUpdate'
         type Rs EditsExpansionfilesUpdate' = ExpansionFile
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u EditsExpansionfilesUpdate'{..}
-          = go _eQuotaUser (Just _ePrettyPrint) _ePackageName
-              _eAPKVersionCode
-              _eUserIP
-              _eKey
+          = go _ePackageName _eEditId _eAPKVersionCode
               _eExpansionFileType
-              _eOAuthToken
-              _eEditId
+              _eQuotaUser
+              (Just _ePrettyPrint)
+              _eUserIP
               _eFields
+              _eKey
+              _eOAuthToken
               (Just AltJSON)
               _eExpansionFile
           where go

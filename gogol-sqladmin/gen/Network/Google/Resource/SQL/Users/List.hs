@@ -54,9 +54,9 @@ type UsersListResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] UsersListResponse
 
@@ -160,12 +160,12 @@ instance GoogleRequest UsersList' where
         type Rs UsersList' = UsersListResponse
         request = requestWithRoute defReq sQLAdminURL
         requestWithRoute r u UsersList'{..}
-          = go _ulQuotaUser (Just _ulPrettyPrint) _ulProject
+          = go _ulProject _ulInstance _ulQuotaUser
+              (Just _ulPrettyPrint)
               _ulUserIP
+              _ulFields
               _ulKey
               _ulOAuthToken
-              _ulFields
-              _ulInstance
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy UsersListResource)

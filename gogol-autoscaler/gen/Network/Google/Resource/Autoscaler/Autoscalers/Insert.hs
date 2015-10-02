@@ -55,9 +55,9 @@ type AutoscalersInsertResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Autoscaler :>
                                Post '[JSON] Operation
@@ -171,12 +171,12 @@ instance GoogleRequest AutoscalersInsert' where
         type Rs AutoscalersInsert' = Operation
         request = requestWithRoute defReq autoscalerURL
         requestWithRoute r u AutoscalersInsert'{..}
-          = go _aiQuotaUser (Just _aiPrettyPrint) _aiProject
+          = go _aiProject _aiZone _aiQuotaUser
+              (Just _aiPrettyPrint)
               _aiUserIP
-              _aiZone
+              _aiFields
               _aiKey
               _aiOAuthToken
-              _aiFields
               (Just AltJSON)
               _aiAutoscaler
           where go

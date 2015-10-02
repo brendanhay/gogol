@@ -53,9 +53,9 @@ type DatasetsUndeleteResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Post '[JSON] Dataset
 
 -- | Undeletes a dataset by restoring a dataset which was deleted via this
@@ -150,11 +150,11 @@ instance GoogleRequest DatasetsUndelete' where
         type Rs DatasetsUndelete' = Dataset
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u DatasetsUndelete'{..}
-          = go _duQuotaUser (Just _duPrettyPrint) _duUserIP
-              _duKey
-              _duDatasetId
-              _duOAuthToken
+          = go _duDatasetId _duQuotaUser (Just _duPrettyPrint)
+              _duUserIP
               _duFields
+              _duKey
+              _duOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

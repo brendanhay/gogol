@@ -58,9 +58,9 @@ type PurchasesSubscriptionsDeferResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] SubscriptionPurchasesDeferRequest
                                  :>
@@ -198,14 +198,13 @@ instance GoogleRequest PurchasesSubscriptionsDefer'
              SubscriptionPurchasesDeferResponse
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u PurchasesSubscriptionsDefer'{..}
-          = go _psdQuotaUser (Just _psdPrettyPrint)
-              _psdPackageName
+          = go _psdPackageName _psdSubscriptionId _psdToken
+              _psdQuotaUser
+              (Just _psdPrettyPrint)
               _psdUserIP
-              _psdToken
+              _psdFields
               _psdKey
               _psdOAuthToken
-              _psdSubscriptionId
-              _psdFields
               (Just AltJSON)
               _psdSubscriptionPurchasesDeferRequest
           where go

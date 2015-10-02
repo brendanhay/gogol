@@ -54,9 +54,9 @@ type SchemasPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Schema :> Patch '[JSON] Schema
 
@@ -169,12 +169,12 @@ instance GoogleRequest SchemasPatch' where
         type Rs SchemasPatch' = Schema
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u SchemasPatch'{..}
-          = go _spQuotaUser (Just _spPrettyPrint) _spUserIP
-              _spCustomerId
+          = go _spCustomerId _spSchemaKey _spQuotaUser
+              (Just _spPrettyPrint)
+              _spUserIP
+              _spFields
               _spKey
               _spOAuthToken
-              _spSchemaKey
-              _spFields
               (Just AltJSON)
               _spSchema
           where go

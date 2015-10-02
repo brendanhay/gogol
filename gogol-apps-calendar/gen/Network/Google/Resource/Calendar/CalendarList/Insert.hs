@@ -49,13 +49,13 @@ type CalendarListInsertResource =
      "users" :>
        "me" :>
          "calendarList" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "colorRgbFormat" Bool :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "colorRgbFormat" Bool :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] CalendarListEntry :>
                              Post '[JSON] CalendarListEntry
@@ -167,11 +167,12 @@ instance GoogleRequest CalendarListInsert' where
         type Rs CalendarListInsert' = CalendarListEntry
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u CalendarListInsert'{..}
-          = go _cliQuotaUser (Just _cliPrettyPrint) _cliUserIP
-              _cliColorRgbFormat
+          = go _cliColorRgbFormat _cliQuotaUser
+              (Just _cliPrettyPrint)
+              _cliUserIP
+              _cliFields
               _cliKey
               _cliOAuthToken
-              _cliFields
               (Just AltJSON)
               _cliCalendarListEntry
           where go

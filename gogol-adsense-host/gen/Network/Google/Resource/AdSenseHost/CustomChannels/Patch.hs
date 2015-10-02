@@ -51,13 +51,13 @@ type CustomChannelsPatchResource =
      "adclients" :>
        Capture "adClientId" Text :>
          "customchannels" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "customChannelId" Text :>
+           QueryParam "customChannelId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] CustomChannel :>
                              Patch '[JSON] CustomChannel
@@ -179,13 +179,13 @@ instance GoogleRequest CustomChannelsPatch' where
         type Rs CustomChannelsPatch' = CustomChannel
         request = requestWithRoute defReq adSenseHostURL
         requestWithRoute r u CustomChannelsPatch'{..}
-          = go _ccpQuotaUser (Just _ccpPrettyPrint)
-              (Just _ccpCustomChannelId)
+          = go _ccpAdClientId (Just _ccpCustomChannelId)
+              _ccpQuotaUser
+              (Just _ccpPrettyPrint)
               _ccpUserIP
-              _ccpAdClientId
+              _ccpFields
               _ccpKey
               _ccpOAuthToken
-              _ccpFields
               (Just AltJSON)
               _ccpCustomChannel
           where go

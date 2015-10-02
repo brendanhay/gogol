@@ -53,9 +53,9 @@ type OperatingSystemVersionsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] OperatingSystemVersion
 
@@ -165,13 +165,12 @@ instance GoogleRequest OperatingSystemVersionsGet'
              OperatingSystemVersion
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u OperatingSystemVersionsGet'{..}
-          = go _osvgQuotaUser (Just _osvgPrettyPrint)
+          = go _osvgProfileId _osvgId _osvgQuotaUser
+              (Just _osvgPrettyPrint)
               _osvgUserIP
-              _osvgProfileId
-              _osvgKey
-              _osvgId
-              _osvgOAuthToken
               _osvgFields
+              _osvgKey
+              _osvgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

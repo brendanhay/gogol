@@ -50,14 +50,14 @@ type CustomChannelsListResource =
      "adclients" :>
        Capture "adClientId" Text :>
          "customchannels" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "maxResults" Word32 :>
-                         QueryParam "fields" Text :>
+           QueryParam "maxResults" Word32 :>
+             QueryParam "pageToken" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] CustomChannels
 
@@ -177,13 +177,13 @@ instance GoogleRequest CustomChannelsList' where
         type Rs CustomChannelsList' = CustomChannels
         request = requestWithRoute defReq adSenseHostURL
         requestWithRoute r u CustomChannelsList'{..}
-          = go _cclQuotaUser (Just _cclPrettyPrint) _cclUserIP
-              _cclAdClientId
-              _cclKey
-              _cclPageToken
-              _cclOAuthToken
-              _cclMaxResults
+          = go _cclMaxResults _cclPageToken _cclAdClientId
+              _cclQuotaUser
+              (Just _cclPrettyPrint)
+              _cclUserIP
               _cclFields
+              _cclKey
+              _cclOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

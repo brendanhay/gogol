@@ -52,9 +52,9 @@ type VerificationCodesInvalidateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Invalidate the current backup verification codes for the user.
@@ -152,11 +152,11 @@ instance GoogleRequest VerificationCodesInvalidate'
         type Rs VerificationCodesInvalidate' = ()
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u VerificationCodesInvalidate'{..}
-          = go _vciQuotaUser (Just _vciPrettyPrint) _vciUserIP
+          = go _vciUserKey _vciQuotaUser (Just _vciPrettyPrint)
+              _vciUserIP
+              _vciFields
               _vciKey
               _vciOAuthToken
-              _vciUserKey
-              _vciFields
               (Just AltJSON)
           where go
                   = clientWithRoute

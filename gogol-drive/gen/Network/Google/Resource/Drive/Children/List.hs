@@ -52,16 +52,16 @@ type ChildrenListResource =
      "files" :>
        Capture "folderId" Text :>
          "children" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "orderBy" Text :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "q" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Int32 :>
-                             QueryParam "fields" Text :>
+           QueryParam "maxResults" Int32 :>
+             QueryParam "orderBy" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "q" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Get '[JSON] ChildList
 
 -- | Lists a folder\'s children.
@@ -196,15 +196,15 @@ instance GoogleRequest ChildrenList' where
         type Rs ChildrenList' = ChildList
         request = requestWithRoute defReq driveURL
         requestWithRoute r u ChildrenList'{..}
-          = go _clQuotaUser (Just _clPrettyPrint) _clOrderBy
-              _clUserIP
-              _clFolderId
+          = go (Just _clMaxResults) _clOrderBy _clPageToken
               _clQ
-              _clKey
-              _clPageToken
-              _clOAuthToken
-              (Just _clMaxResults)
+              _clFolderId
+              _clQuotaUser
+              (Just _clPrettyPrint)
+              _clUserIP
               _clFields
+              _clKey
+              _clOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

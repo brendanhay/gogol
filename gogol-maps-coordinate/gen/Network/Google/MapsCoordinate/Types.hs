@@ -108,10 +108,10 @@ module Network.Google.MapsCoordinate.Types
     -- * Job
     , Job
     , job
-    , jobState
-    , jobKind
-    , jobJobChange
-    , jobId
+    , jState
+    , jKind
+    , jJobChange
+    , jId
 
     -- * CoordinateJobsUpdateProgress
     , CoordinateJobsUpdateProgress (..)

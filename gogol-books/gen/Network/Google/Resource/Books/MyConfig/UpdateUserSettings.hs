@@ -52,9 +52,9 @@ type MyConfigUpdateUserSettingsResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Usersettings :>
                          Post '[JSON] Usersettings
@@ -159,9 +159,9 @@ instance GoogleRequest MyConfigUpdateUserSettings'
         requestWithRoute r u MyConfigUpdateUserSettings'{..}
           = go _mcuusQuotaUser (Just _mcuusPrettyPrint)
               _mcuusUserIP
+              _mcuusFields
               _mcuusKey
               _mcuusOAuthToken
-              _mcuusFields
               (Just AltJSON)
               _mcuusUsersettings
           where go

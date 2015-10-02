@@ -62,19 +62,19 @@ type CoursesAliasesListResource =
          Capture "courseId" Text :>
            "aliases" :>
              QueryParam "$.xgafv" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "upload_protocol" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "access_token" Text :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "pageSize" Int32 :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "callback" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "bearer_token" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "pageSize" Int32 :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "upload_protocol" Text :>
+                               QueryParam "quotaUser" Text :>
+                                 QueryParam "prettyPrint" Bool :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "key" Key :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] ListCourseAliasesResponse
 
@@ -258,19 +258,19 @@ instance GoogleRequest CoursesAliasesList' where
              ListCourseAliasesResponse
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u CoursesAliasesList'{..}
-          = go _calXgafv _calQuotaUser (Just _calPrettyPrint)
-              _calUploadProtocol
-              (Just _calPp)
-              _calCourseId
-              _calAccessToken
-              _calUploadType
-              _calBearerToken
-              _calKey
-              _calPageToken
-              _calOAuthToken
-              _calPageSize
-              _calFields
+          = go _calXgafv _calAccessToken _calBearerToken
               _calCallback
+              _calPageSize
+              _calPageToken
+              (Just _calPp)
+              _calUploadType
+              _calUploadProtocol
+              _calCourseId
+              _calQuotaUser
+              (Just _calPrettyPrint)
+              _calFields
+              _calKey
+              _calOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

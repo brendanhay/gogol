@@ -56,17 +56,17 @@ type ClientMessagesLogResource =
      "v2" :>
        "clientMessages:log" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] LogMessageRequest :>
                                      Post '[JSON] LogMessageResponse
@@ -222,16 +222,16 @@ instance GoogleRequest ClientMessagesLog' where
         type Rs ClientMessagesLog' = LogMessageResponse
         request = requestWithRoute defReq partnersURL
         requestWithRoute r u ClientMessagesLog'{..}
-          = go _cmlXgafv _cmlQuotaUser (Just _cmlPrettyPrint)
-              _cmlUploadProtocol
+          = go _cmlXgafv _cmlAccessToken _cmlBearerToken
+              _cmlCallback
               (Just _cmlPp)
-              _cmlAccessToken
               _cmlUploadType
-              _cmlBearerToken
+              _cmlUploadProtocol
+              _cmlQuotaUser
+              (Just _cmlPrettyPrint)
+              _cmlFields
               _cmlKey
               _cmlOAuthToken
-              _cmlFields
-              _cmlCallback
               (Just AltJSON)
               _cmlLogMessageRequest
           where go

@@ -61,18 +61,18 @@ type ScoresGetResource =
            Capture "leaderboardId" Text :>
              "scores" :>
                Capture "timeSpan" GamesScoresGetTimeSpan :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "includeRankType"
-                           GamesScoresGetIncludeRankType
-                           :>
-                           QueryParam "language" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "maxResults" Int32 :>
-                                   QueryParam "fields" Text :>
+                 QueryParam "includeRankType"
+                   GamesScoresGetIncludeRankType
+                   :>
+                   QueryParam "language" Text :>
+                     QueryParam "maxResults" Int32 :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON]
                                          PlayerLeaderboardScoreListResponse
@@ -235,17 +235,17 @@ instance GoogleRequest ScoresGet' where
              PlayerLeaderboardScoreListResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u ScoresGet'{..}
-          = go _sgQuotaUser (Just _sgPrettyPrint) _sgUserIP
-              _sgTimeSpan
-              _sgLeaderboardId
-              _sgKey
-              _sgIncludeRankType
-              _sgLanguage
+          = go _sgIncludeRankType _sgLanguage _sgMaxResults
               _sgPageToken
-              _sgOAuthToken
               _sgPlayerId
-              _sgMaxResults
+              _sgLeaderboardId
+              _sgTimeSpan
+              _sgQuotaUser
+              (Just _sgPrettyPrint)
+              _sgUserIP
               _sgFields
+              _sgKey
+              _sgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy ScoresGetResource)

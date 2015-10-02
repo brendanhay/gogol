@@ -51,9 +51,9 @@ type AnnotationsDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an annotation. Caller must have WRITE permission for the
@@ -148,11 +148,12 @@ instance GoogleRequest AnnotationsDelete' where
         type Rs AnnotationsDelete' = ()
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u AnnotationsDelete'{..}
-          = go _adQuotaUser (Just _adPrettyPrint) _adUserIP
-              _adKey
-              _adAnnotationId
-              _adOAuthToken
+          = go _adAnnotationId _adQuotaUser
+              (Just _adPrettyPrint)
+              _adUserIP
               _adFields
+              _adKey
+              _adOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

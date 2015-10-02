@@ -55,9 +55,9 @@ type ManagementFiltersPatchResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Filter :> Patch '[JSON] Filter
 
@@ -174,13 +174,12 @@ instance GoogleRequest ManagementFiltersPatch' where
         type Rs ManagementFiltersPatch' = Filter
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementFiltersPatch'{..}
-          = go _mfpQuotaUser (Just _mfpPrettyPrint)
-              _mfpFilterId
+          = go _mfpAccountId _mfpFilterId _mfpQuotaUser
+              (Just _mfpPrettyPrint)
               _mfpUserIP
-              _mfpAccountId
+              _mfpFields
               _mfpKey
               _mfpOAuthToken
-              _mfpFields
               (Just AltJSON)
               _mfpFilter
           where go

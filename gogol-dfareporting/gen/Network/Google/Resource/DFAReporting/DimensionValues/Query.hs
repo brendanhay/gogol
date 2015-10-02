@@ -52,14 +52,14 @@ type DimensionValuesQueryResource =
        Capture "profileId" Int64 :>
          "dimensionvalues" :>
            "query" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Int32 :>
-                           QueryParam "fields" Text :>
+             QueryParam "maxResults" Int32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] DimensionValueRequest :>
                                  Post '[JSON] DimensionValueList
@@ -187,13 +187,13 @@ instance GoogleRequest DimensionValuesQuery' where
         type Rs DimensionValuesQuery' = DimensionValueList
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u DimensionValuesQuery'{..}
-          = go _dvqQuotaUser (Just _dvqPrettyPrint) _dvqUserIP
-              _dvqProfileId
-              _dvqKey
-              _dvqPageToken
-              _dvqOAuthToken
-              _dvqMaxResults
+          = go _dvqMaxResults _dvqPageToken _dvqProfileId
+              _dvqQuotaUser
+              (Just _dvqPrettyPrint)
+              _dvqUserIP
               _dvqFields
+              _dvqKey
+              _dvqOAuthToken
               (Just AltJSON)
               _dvqDimensionValueRequest
           where go

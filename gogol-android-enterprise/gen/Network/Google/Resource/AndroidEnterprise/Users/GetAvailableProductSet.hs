@@ -54,9 +54,9 @@ type UsersGetAvailableProductSetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] ProductSet
 
 -- | Retrieves the set of products a user is entitled to access.
@@ -167,13 +167,12 @@ instance GoogleRequest UsersGetAvailableProductSet'
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u UsersGetAvailableProductSet'{..}
-          = go _ugapsQuotaUser (Just _ugapsPrettyPrint)
-              _ugapsEnterpriseId
+          = go _ugapsEnterpriseId _ugapsUserId _ugapsQuotaUser
+              (Just _ugapsPrettyPrint)
               _ugapsUserIP
-              _ugapsUserId
+              _ugapsFields
               _ugapsKey
               _ugapsOAuthToken
-              _ugapsFields
               (Just AltJSON)
           where go
                   = clientWithRoute

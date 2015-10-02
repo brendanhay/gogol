@@ -55,9 +55,9 @@ type ZoneOperationsDeleteResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes the specified zone-specific operation resource.
@@ -169,13 +169,12 @@ instance GoogleRequest ZoneOperationsDelete' where
         type Rs ZoneOperationsDelete' = ()
         request = requestWithRoute defReq autoscalerURL
         requestWithRoute r u ZoneOperationsDelete'{..}
-          = go _zodQuotaUser (Just _zodPrettyPrint) _zodProject
-              _zodOperation
+          = go _zodProject _zodZone _zodOperation _zodQuotaUser
+              (Just _zodPrettyPrint)
               _zodUserIP
-              _zodZone
+              _zodFields
               _zodKey
               _zodOAuthToken
-              _zodFields
               (Just AltJSON)
           where go
                   = clientWithRoute

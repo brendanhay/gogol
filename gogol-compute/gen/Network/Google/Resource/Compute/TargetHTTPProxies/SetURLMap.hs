@@ -54,9 +54,9 @@ type TargetHTTPProxiesSetURLMapResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] URLMapReference :>
                              Post '[JSON] Operation
@@ -182,13 +182,13 @@ instance GoogleRequest TargetHTTPProxiesSetURLMap'
         type Rs TargetHTTPProxiesSetURLMap' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u TargetHTTPProxiesSetURLMap'{..}
-          = go _thttppsumQuotaUser (Just _thttppsumPrettyPrint)
-              _thttppsumProject
+          = go _thttppsumProject _thttppsumTargetHTTPProxy
+              _thttppsumQuotaUser
+              (Just _thttppsumPrettyPrint)
               _thttppsumUserIP
-              _thttppsumKey
-              _thttppsumTargetHTTPProxy
-              _thttppsumOAuthToken
               _thttppsumFields
+              _thttppsumKey
+              _thttppsumOAuthToken
               (Just AltJSON)
               _thttppsumURLMapReference
           where go

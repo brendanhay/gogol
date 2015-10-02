@@ -52,9 +52,9 @@ type TokensListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Tokens
 
 -- | Returns the set of tokens specified user has issued to 3rd party
@@ -149,11 +149,11 @@ instance GoogleRequest TokensList' where
         type Rs TokensList' = Tokens
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u TokensList'{..}
-          = go _tlQuotaUser (Just _tlPrettyPrint) _tlUserIP
+          = go _tlUserKey _tlQuotaUser (Just _tlPrettyPrint)
+              _tlUserIP
+              _tlFields
               _tlKey
               _tlOAuthToken
-              _tlUserKey
-              _tlFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TokensListResource)

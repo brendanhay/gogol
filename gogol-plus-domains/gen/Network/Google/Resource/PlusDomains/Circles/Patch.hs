@@ -51,9 +51,9 @@ type CirclesPatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Circle :> Patch '[JSON] Circle
 
@@ -156,11 +156,11 @@ instance GoogleRequest CirclesPatch' where
         type Rs CirclesPatch' = Circle
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u CirclesPatch'{..}
-          = go _cpQuotaUser (Just _cpPrettyPrint) _cpUserIP
-              _cpKey
-              _cpCircleId
-              _cpOAuthToken
+          = go _cpCircleId _cpQuotaUser (Just _cpPrettyPrint)
+              _cpUserIP
               _cpFields
+              _cpKey
+              _cpOAuthToken
               (Just AltJSON)
               _cpCircle
           where go

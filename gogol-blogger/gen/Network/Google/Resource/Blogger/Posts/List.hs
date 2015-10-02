@@ -58,22 +58,22 @@ type PostsListResource =
      "blogs" :>
        Capture "blogId" Text :>
          "posts" :>
-           QueryParams "status" BloggerPostsListStatus :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "orderBy" BloggerPostsListOrderBy :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fetchImages" Bool :>
-                       QueryParam "endDate" UTCTime :>
+           QueryParam "endDate" UTCTime :>
+             QueryParam "fetchBodies" Bool :>
+               QueryParam "fetchImages" Bool :>
+                 QueryParam "labels" Text :>
+                   QueryParam "maxResults" Word32 :>
+                     QueryParam "orderBy" BloggerPostsListOrderBy :>
+                       QueryParam "pageToken" Text :>
                          QueryParam "startDate" UTCTime :>
-                           QueryParam "key" Key :>
-                             QueryParam "fetchBodies" Bool :>
-                               QueryParam "view" BloggerPostsListView :>
-                                 QueryParam "labels" Text :>
-                                   QueryParam "pageToken" Text :>
-                                     QueryParam "oauth_token" OAuthToken :>
-                                       QueryParam "maxResults" Word32 :>
-                                         QueryParam "fields" Text :>
+                           QueryParams "status" BloggerPostsListStatus :>
+                             QueryParam "view" BloggerPostsListView :>
+                               QueryParam "quotaUser" Text :>
+                                 QueryParam "prettyPrint" Bool :>
+                                   QueryParam "userIp" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "key" Key :>
+                                         QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
                                              Get '[JSON] PostList
 
@@ -265,21 +265,22 @@ instance GoogleRequest PostsList' where
         type Rs PostsList' = PostList
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PostsList'{..}
-          = go _pllStatus _pllQuotaUser (Just _pllPrettyPrint)
-              (Just _pllOrderBy)
-              _pllUserIP
+          = go _pllEndDate (Just _pllFetchBodies)
               _pllFetchImages
-              _pllEndDate
-              _pllBlogId
-              _pllStartDate
-              _pllKey
-              (Just _pllFetchBodies)
-              _pllView
               _pllLabels
-              _pllPageToken
-              _pllOAuthToken
               _pllMaxResults
+              (Just _pllOrderBy)
+              _pllPageToken
+              _pllStartDate
+              _pllStatus
+              _pllView
+              _pllBlogId
+              _pllQuotaUser
+              (Just _pllPrettyPrint)
+              _pllUserIP
               _pllFields
+              _pllKey
+              _pllOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy PostsListResource)

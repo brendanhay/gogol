@@ -56,9 +56,9 @@ type ReportsFilesGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] File
        :<|>
        "userprofiles" :>
@@ -70,9 +70,9 @@ type ReportsFilesGetResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" Media :>
                                  Get '[OctetStream] Stream
 
@@ -189,13 +189,13 @@ instance GoogleRequest ReportsFilesGet' where
         type Rs ReportsFilesGet' = File
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ReportsFilesGet'{..}
-          = go _rfgQuotaUser (Just _rfgPrettyPrint) _rfgUserIP
-              _rfgReportId
-              _rfgProfileId
-              _rfgKey
-              _rfgFileId
-              _rfgOAuthToken
+          = go _rfgProfileId _rfgReportId _rfgFileId
+              _rfgQuotaUser
+              (Just _rfgPrettyPrint)
+              _rfgUserIP
               _rfgFields
+              _rfgKey
+              _rfgOAuthToken
               (Just AltJSON)
           where go :<|> _
                   = clientWithRoute
@@ -207,13 +207,13 @@ instance GoogleRequest ReportsFilesGet' where
         type Rs (Download ReportsFilesGet') = Stream
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ReportsFilesGet'{..}
-          = go _rfgQuotaUser (Just _rfgPrettyPrint) _rfgUserIP
-              _rfgReportId
-              _rfgProfileId
-              _rfgKey
-              _rfgFileId
-              _rfgOAuthToken
+          = go _rfgProfileId _rfgReportId _rfgFileId
+              _rfgQuotaUser
+              (Just _rfgPrettyPrint)
+              _rfgUserIP
               _rfgFields
+              _rfgKey
+              _rfgOAuthToken
               (Just Media)
           where go :<|> _
                   = clientWithRoute

@@ -46,13 +46,13 @@ import           Network.Google.YouTube.Types
 -- 'CommentsDelete'' request conforms to.
 type CommentsDeleteResource =
      "comments" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "id" Text :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+       QueryParam "id" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a comment.
@@ -145,11 +145,11 @@ instance GoogleRequest CommentsDelete' where
         type Rs CommentsDelete' = ()
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u CommentsDelete'{..}
-          = go _cdQuotaUser (Just _cdPrettyPrint) _cdUserIP
-              _cdKey
-              (Just _cdId)
-              _cdOAuthToken
+          = go (Just _cdId) _cdQuotaUser (Just _cdPrettyPrint)
+              _cdUserIP
               _cdFields
+              _cdKey
+              _cdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

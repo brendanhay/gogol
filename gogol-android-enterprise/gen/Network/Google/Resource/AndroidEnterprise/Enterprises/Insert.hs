@@ -48,13 +48,13 @@ import           Network.Google.Prelude
 -- 'EnterprisesInsert'' request conforms to.
 type EnterprisesInsertResource =
      "enterprises" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "token" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+       QueryParam "token" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Enterprise :> Post '[JSON] Enterprise
 
@@ -159,11 +159,12 @@ instance GoogleRequest EnterprisesInsert' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u EnterprisesInsert'{..}
-          = go _eiQuotaUser (Just _eiPrettyPrint) _eiUserIP
-              (Just _eiToken)
+          = go (Just _eiToken) _eiQuotaUser
+              (Just _eiPrettyPrint)
+              _eiUserIP
+              _eiFields
               _eiKey
               _eiOAuthToken
-              _eiFields
               (Just AltJSON)
               _eiEnterprise
           where go

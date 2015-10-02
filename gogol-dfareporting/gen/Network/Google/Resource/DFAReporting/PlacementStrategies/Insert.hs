@@ -52,9 +52,9 @@ type PlacementStrategiesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] PlacementStrategy :>
                            Post '[JSON] PlacementStrategy
@@ -165,11 +165,12 @@ instance GoogleRequest PlacementStrategiesInsert'
              PlacementStrategy
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementStrategiesInsert'{..}
-          = go _psiQuotaUser (Just _psiPrettyPrint) _psiUserIP
-              _psiProfileId
+          = go _psiProfileId _psiQuotaUser
+              (Just _psiPrettyPrint)
+              _psiUserIP
+              _psiFields
               _psiKey
               _psiOAuthToken
-              _psiFields
               (Just AltJSON)
               _psiPlacementStrategy
           where go

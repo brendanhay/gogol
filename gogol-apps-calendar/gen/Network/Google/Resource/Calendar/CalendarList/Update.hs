@@ -51,13 +51,13 @@ type CalendarListUpdateResource =
        "me" :>
          "calendarList" :>
            Capture "calendarId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "colorRgbFormat" Bool :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+             QueryParam "colorRgbFormat" Bool :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] CalendarListEntry :>
                                Put '[JSON] CalendarListEntry
@@ -182,13 +182,12 @@ instance GoogleRequest CalendarListUpdate' where
         type Rs CalendarListUpdate' = CalendarListEntry
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u CalendarListUpdate'{..}
-          = go _cluQuotaUser _cluCalendarId
+          = go _cluColorRgbFormat _cluCalendarId _cluQuotaUser
               (Just _cluPrettyPrint)
               _cluUserIP
-              _cluColorRgbFormat
+              _cluFields
               _cluKey
               _cluOAuthToken
-              _cluFields
               (Just AltJSON)
               _cluCalendarListEntry
           where go

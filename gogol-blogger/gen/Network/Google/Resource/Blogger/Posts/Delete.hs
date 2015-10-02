@@ -53,9 +53,9 @@ type PostsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete a post by ID.
@@ -156,12 +156,12 @@ instance GoogleRequest PostsDelete' where
         type Rs PostsDelete' = ()
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PostsDelete'{..}
-          = go _pdQuotaUser (Just _pdPrettyPrint) _pdUserIP
-              _pdBlogId
-              _pdKey
-              _pdPostId
-              _pdOAuthToken
+          = go _pdBlogId _pdPostId _pdQuotaUser
+              (Just _pdPrettyPrint)
+              _pdUserIP
               _pdFields
+              _pdKey
+              _pdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

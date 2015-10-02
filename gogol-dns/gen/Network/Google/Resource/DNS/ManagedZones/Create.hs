@@ -51,9 +51,9 @@ type ManagedZonesCreateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] ManagedZone :>
                          Post '[JSON] ManagedZone
@@ -162,11 +162,11 @@ instance GoogleRequest ManagedZonesCreate' where
         type Rs ManagedZonesCreate' = ManagedZone
         request = requestWithRoute defReq dNSURL
         requestWithRoute r u ManagedZonesCreate'{..}
-          = go _mzcQuotaUser (Just _mzcPrettyPrint) _mzcProject
+          = go _mzcProject _mzcQuotaUser (Just _mzcPrettyPrint)
               _mzcUserIP
+              _mzcFields
               _mzcKey
               _mzcOAuthToken
-              _mzcFields
               (Just AltJSON)
               _mzcManagedZone
           where go

@@ -57,9 +57,9 @@ type PurchasesSubscriptionsRefundResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Refunds a user\'s subscription purchase, but the subscription remains
@@ -177,13 +177,13 @@ instance GoogleRequest PurchasesSubscriptionsRefund'
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u
           PurchasesSubscriptionsRefund'{..}
-          = go _pQuotaUser (Just _pPrettyPrint) _pPackageName
+          = go _pPackageName _pSubscriptionId _pToken
+              _pQuotaUser
+              (Just _pPrettyPrint)
               _pUserIP
-              _pToken
+              _pFields
               _pKey
               _pOAuthToken
-              _pSubscriptionId
-              _pFields
               (Just AltJSON)
           where go
                   = clientWithRoute

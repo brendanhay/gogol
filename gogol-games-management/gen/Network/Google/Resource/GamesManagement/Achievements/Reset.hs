@@ -53,9 +53,9 @@ type AchievementsResetResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Post '[JSON] AchievementResetResponse
 
@@ -152,12 +152,12 @@ instance GoogleRequest AchievementsReset' where
         type Rs AchievementsReset' = AchievementResetResponse
         request = requestWithRoute defReq gamesManagementURL
         requestWithRoute r u AchievementsReset'{..}
-          = go _arQuotaUser (Just _arPrettyPrint)
-              _arAchievementId
+          = go _arAchievementId _arQuotaUser
+              (Just _arPrettyPrint)
               _arUserIP
+              _arFields
               _arKey
               _arOAuthToken
-              _arFields
               (Just AltJSON)
           where go
                   = clientWithRoute

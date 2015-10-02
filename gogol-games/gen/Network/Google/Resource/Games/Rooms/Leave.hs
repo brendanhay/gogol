@@ -51,13 +51,13 @@ type RoomsLeaveResource =
      "rooms" :>
        Capture "roomId" Text :>
          "leave" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "language" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "language" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] RoomLeaveRequest :> Post '[JSON] Room
 
@@ -171,12 +171,12 @@ instance GoogleRequest RoomsLeave' where
         type Rs RoomsLeave' = Room
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u RoomsLeave'{..}
-          = go _rlQuotaUser (Just _rlPrettyPrint) _rlUserIP
-              _rlKey
-              _rlRoomId
-              _rlLanguage
-              _rlOAuthToken
+          = go _rlLanguage _rlRoomId _rlQuotaUser
+              (Just _rlPrettyPrint)
+              _rlUserIP
               _rlFields
+              _rlKey
+              _rlOAuthToken
               (Just AltJSON)
               _rlRoomLeaveRequest
           where go

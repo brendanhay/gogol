@@ -52,9 +52,9 @@ type CirclesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Circle :> Post '[JSON] Circle
 
@@ -162,11 +162,11 @@ instance GoogleRequest CirclesInsert' where
         type Rs CirclesInsert' = Circle
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u CirclesInsert'{..}
-          = go _cirQuotaUser (Just _cirPrettyPrint) _cirUserIP
-              _cirUserId
+          = go _cirUserId _cirQuotaUser (Just _cirPrettyPrint)
+              _cirUserIP
+              _cirFields
               _cirKey
               _cirOAuthToken
-              _cirFields
               (Just AltJSON)
               _cirCircle
           where go

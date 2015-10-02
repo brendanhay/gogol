@@ -52,9 +52,9 @@ type EnterprisesSendTestPushNotificationResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Post '[JSON]
                            EnterprisesSendTestPushNotificationResponse
@@ -160,12 +160,12 @@ instance GoogleRequest
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u
           EnterprisesSendTestPushNotification'{..}
-          = go _estpnQuotaUser (Just _estpnPrettyPrint)
-              _estpnEnterpriseId
+          = go _estpnEnterpriseId _estpnQuotaUser
+              (Just _estpnPrettyPrint)
               _estpnUserIP
+              _estpnFields
               _estpnKey
               _estpnOAuthToken
-              _estpnFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -53,9 +53,9 @@ type GrouplicensesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] GroupLicense
 
 -- | Retrieves details of an enterprise\'s group license for a product.
@@ -162,13 +162,12 @@ instance GoogleRequest GrouplicensesGet' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u GrouplicensesGet'{..}
-          = go _ggQuotaUser (Just _ggPrettyPrint)
-              _ggEnterpriseId
+          = go _ggEnterpriseId _ggGroupLicenseId _ggQuotaUser
+              (Just _ggPrettyPrint)
               _ggUserIP
+              _ggFields
               _ggKey
               _ggOAuthToken
-              _ggGroupLicenseId
-              _ggFields
               (Just AltJSON)
           where go
                   = clientWithRoute

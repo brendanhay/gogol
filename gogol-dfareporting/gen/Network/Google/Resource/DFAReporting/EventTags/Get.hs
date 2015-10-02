@@ -53,9 +53,9 @@ type EventTagsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] EventTag
 
 -- | Gets one event tag by ID.
@@ -160,12 +160,12 @@ instance GoogleRequest EventTagsGet' where
         type Rs EventTagsGet' = EventTag
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u EventTagsGet'{..}
-          = go _etgQuotaUser (Just _etgPrettyPrint) _etgUserIP
-              _etgProfileId
-              _etgKey
-              _etgId
-              _etgOAuthToken
+          = go _etgProfileId _etgId _etgQuotaUser
+              (Just _etgPrettyPrint)
+              _etgUserIP
               _etgFields
+              _etgKey
+              _etgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

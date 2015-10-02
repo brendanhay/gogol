@@ -54,13 +54,13 @@ type LandingPagesPatchResource =
          "campaigns" :>
            Capture "campaignId" Int64 :>
              "landingPages" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "id" Int64 :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+               QueryParam "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] LandingPage :>
                                  Patch '[JSON] LandingPage
@@ -190,13 +190,13 @@ instance GoogleRequest LandingPagesPatch' where
         type Rs LandingPagesPatch' = LandingPage
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u LandingPagesPatch'{..}
-          = go _lppQuotaUser (Just _lppPrettyPrint) _lppUserIP
-              _lppCampaignId
-              _lppProfileId
-              _lppKey
-              (Just _lppId)
-              _lppOAuthToken
+          = go _lppProfileId _lppCampaignId (Just _lppId)
+              _lppQuotaUser
+              (Just _lppPrettyPrint)
+              _lppUserIP
               _lppFields
+              _lppKey
+              _lppOAuthToken
               (Just AltJSON)
               _lppLandingPage
           where go

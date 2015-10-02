@@ -26,7 +26,7 @@ module Network.Google.Resource.Compute.URLMaps.Get
       URLMapsGetResource
 
     -- * Creating a Request
-    , uRLMapsGet'
+    , urlMapsGet'
     , URLMapsGet'
 
     -- * Request Lenses
@@ -53,14 +53,14 @@ type URLMapsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] URLMap
 
 -- | Returns the specified UrlMap resource.
 --
--- /See:/ 'uRLMapsGet'' smart constructor.
+-- /See:/ 'urlMapsGet'' smart constructor.
 data URLMapsGet' = URLMapsGet'
     { _umgQuotaUser   :: !(Maybe Text)
     , _umgURLMap      :: !Text
@@ -91,11 +91,11 @@ data URLMapsGet' = URLMapsGet'
 -- * 'umgOAuthToken'
 --
 -- * 'umgFields'
-uRLMapsGet'
+urlMapsGet'
     :: Text -- ^ 'urlMap'
     -> Text -- ^ 'project'
     -> URLMapsGet'
-uRLMapsGet' pUmgURLMap_ pUmgProject_ =
+urlMapsGet' pUmgURLMap_ pUmgProject_ =
     URLMapsGet'
     { _umgQuotaUser = Nothing
     , _umgURLMap = pUmgURLMap_
@@ -161,12 +161,12 @@ instance GoogleRequest URLMapsGet' where
         type Rs URLMapsGet' = URLMap
         request = requestWithRoute defReq computeURL
         requestWithRoute r u URLMapsGet'{..}
-          = go _umgQuotaUser _umgURLMap (Just _umgPrettyPrint)
-              _umgProject
+          = go _umgProject _umgURLMap _umgQuotaUser
+              (Just _umgPrettyPrint)
               _umgUserIP
+              _umgFields
               _umgKey
               _umgOAuthToken
-              _umgFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy URLMapsGetResource)

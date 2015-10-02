@@ -50,9 +50,9 @@ type LocationsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Location
 
 -- | Gets a single location by ID.
@@ -144,11 +144,11 @@ instance GoogleRequest LocationsGet' where
         type Rs LocationsGet' = Location
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u LocationsGet'{..}
-          = go _lgQuotaUser (Just _lgPrettyPrint) _lgUserIP
-              _lgKey
-              _lgId
-              _lgOAuthToken
+          = go _lgId _lgQuotaUser (Just _lgPrettyPrint)
+              _lgUserIP
               _lgFields
+              _lgKey
+              _lgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -50,14 +50,14 @@ type TablesParentsListResource =
      "tables" :>
        Capture "id" Text :>
          "parents" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "maxResults" Word32 :>
-                         QueryParam "fields" Text :>
+           QueryParam "maxResults" Word32 :>
+             QueryParam "pageToken" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ParentsListResponse
 
@@ -175,13 +175,13 @@ instance GoogleRequest TablesParentsList' where
         type Rs TablesParentsList' = ParentsListResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u TablesParentsList'{..}
-          = go _tabQuotaUser (Just _tabPrettyPrint) _tabUserIP
-              _tabKey
-              _tabId
-              _tabPageToken
-              _tabOAuthToken
-              _tabMaxResults
+          = go _tabMaxResults _tabPageToken _tabId
+              _tabQuotaUser
+              (Just _tabPrettyPrint)
+              _tabUserIP
               _tabFields
+              _tabKey
+              _tabOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

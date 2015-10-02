@@ -50,9 +50,9 @@ type AchievementsResetAllForAllPlayersResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Resets all draft achievements for all players. This method is only
@@ -146,9 +146,9 @@ instance GoogleRequest
           AchievementsResetAllForAllPlayers'{..}
           = go _arafapQuotaUser (Just _arafapPrettyPrint)
               _arafapUserIP
+              _arafapFields
               _arafapKey
               _arafapOAuthToken
-              _arafapFields
               (Just AltJSON)
           where go
                   = clientWithRoute

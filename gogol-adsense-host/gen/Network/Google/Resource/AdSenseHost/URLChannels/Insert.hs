@@ -26,7 +26,7 @@ module Network.Google.Resource.AdSenseHost.URLChannels.Insert
       URLChannelsInsertResource
 
     -- * Creating a Request
-    , uRLChannelsInsert'
+    , urlChannelsInsert'
     , URLChannelsInsert'
 
     -- * Request Lenses
@@ -52,15 +52,15 @@ type URLChannelsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] URLChannel :> Post '[JSON] URLChannel
 
 -- | Add a new URL channel to the host AdSense account.
 --
--- /See:/ 'uRLChannelsInsert'' smart constructor.
+-- /See:/ 'urlChannelsInsert'' smart constructor.
 data URLChannelsInsert' = URLChannelsInsert'
     { _uciQuotaUser   :: !(Maybe Text)
     , _uciPrettyPrint :: !Bool
@@ -91,11 +91,11 @@ data URLChannelsInsert' = URLChannelsInsert'
 -- * 'uciOAuthToken'
 --
 -- * 'uciFields'
-uRLChannelsInsert'
+urlChannelsInsert'
     :: Text -- ^ 'adClientId'
     -> URLChannel -- ^ 'URLChannel'
     -> URLChannelsInsert'
-uRLChannelsInsert' pUciAdClientId_ pUciURLChannel_ =
+urlChannelsInsert' pUciAdClientId_ pUciURLChannel_ =
     URLChannelsInsert'
     { _uciQuotaUser = Nothing
     , _uciPrettyPrint = True
@@ -163,11 +163,12 @@ instance GoogleRequest URLChannelsInsert' where
         type Rs URLChannelsInsert' = URLChannel
         request = requestWithRoute defReq adSenseHostURL
         requestWithRoute r u URLChannelsInsert'{..}
-          = go _uciQuotaUser (Just _uciPrettyPrint) _uciUserIP
-              _uciAdClientId
+          = go _uciAdClientId _uciQuotaUser
+              (Just _uciPrettyPrint)
+              _uciUserIP
+              _uciFields
               _uciKey
               _uciOAuthToken
-              _uciFields
               (Just AltJSON)
               _uciURLChannel
           where go

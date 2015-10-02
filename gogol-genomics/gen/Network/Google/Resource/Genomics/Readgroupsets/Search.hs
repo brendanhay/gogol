@@ -51,9 +51,9 @@ type ReadgroupsetsSearchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] SearchReadGroupSetsRequest :>
                          Post '[JSON] SearchReadGroupSetsResponse
@@ -155,9 +155,9 @@ instance GoogleRequest ReadgroupsetsSearch' where
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u ReadgroupsetsSearch'{..}
           = go _reaQuotaUser (Just _reaPrettyPrint) _reaUserIP
+              _reaFields
               _reaKey
               _reaOAuthToken
-              _reaFields
               (Just AltJSON)
               _reaSearchReadGroupSetsRequest
           where go

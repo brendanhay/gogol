@@ -57,14 +57,14 @@ type ManagementGoalsListResource =
                "profiles" :>
                  Capture "profileId" Text :>
                    "goals" :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "start-index" Int32 :>
-                                 QueryParam "max-results" Int32 :>
-                                   QueryParam "fields" Text :>
+                     QueryParam "max-results" Int32 :>
+                       QueryParam "start-index" Int32 :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] Goals
 
@@ -208,16 +208,15 @@ instance GoogleRequest ManagementGoalsList' where
         type Rs ManagementGoalsList' = Goals
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementGoalsList'{..}
-          = go _mglQuotaUser (Just _mglPrettyPrint)
+          = go _mglMaxResults _mglStartIndex _mglAccountId
               _mglWebPropertyId
-              _mglUserIP
               _mglProfileId
-              _mglAccountId
+              _mglQuotaUser
+              (Just _mglPrettyPrint)
+              _mglUserIP
+              _mglFields
               _mglKey
               _mglOAuthToken
-              _mglStartIndex
-              _mglMaxResults
-              _mglFields
               (Just AltJSON)
           where go
                   = clientWithRoute

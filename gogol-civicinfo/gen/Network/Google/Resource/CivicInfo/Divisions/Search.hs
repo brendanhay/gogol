@@ -46,13 +46,13 @@ import           Network.Google.Prelude
 -- 'DivisionsSearch'' request conforms to.
 type DivisionsSearchResource =
      "divisions" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "query" Text :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+       QueryParam "query" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] DivisionSearchResponse
 
@@ -148,11 +148,11 @@ instance GoogleRequest DivisionsSearch' where
         type Rs DivisionsSearch' = DivisionSearchResponse
         request = requestWithRoute defReq civicInfoURL
         requestWithRoute r u DivisionsSearch'{..}
-          = go _dsQuotaUser (Just _dsPrettyPrint) _dsUserIP
-              _dsKey
-              _dsQuery
-              _dsOAuthToken
+          = go _dsQuery _dsQuotaUser (Just _dsPrettyPrint)
+              _dsUserIP
               _dsFields
+              _dsKey
+              _dsOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

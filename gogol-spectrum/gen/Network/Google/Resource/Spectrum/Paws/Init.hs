@@ -50,9 +50,9 @@ type PawsInitResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] PawsInitRequest :>
                        Post '[JSON] PawsInitResponse
@@ -150,9 +150,9 @@ instance GoogleRequest PawsInit' where
         request = requestWithRoute defReq spectrumURL
         requestWithRoute r u PawsInit'{..}
           = go _piQuotaUser (Just _piPrettyPrint) _piUserIP
+              _piFields
               _piKey
               _piOAuthToken
-              _piFields
               (Just AltJSON)
               _piPawsInitRequest
           where go

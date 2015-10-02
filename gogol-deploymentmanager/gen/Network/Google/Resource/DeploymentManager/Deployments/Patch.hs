@@ -58,18 +58,18 @@ type DeploymentsPatchResource =
              QueryParam "createPolicy"
                DeploymentManagerDeploymentsPatchCreatePolicy
                :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "updatePolicy"
-                       DeploymentManagerDeploymentsPatchUpdatePolicy
-                       :>
-                       QueryParam "deletePolicy"
-                         DeploymentManagerDeploymentsPatchDeletePolicy
-                         :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+               QueryParam "deletePolicy"
+                 DeploymentManagerDeploymentsPatchDeletePolicy
+                 :>
+                 QueryParam "updatePolicy"
+                   DeploymentManagerDeploymentsPatchUpdatePolicy
+                   :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] Deployment :>
                                    Patch '[JSON] Operation
@@ -216,16 +216,16 @@ instance GoogleRequest DeploymentsPatch' where
         request
           = requestWithRoute defReq deploymentManagerURL
         requestWithRoute r u DeploymentsPatch'{..}
-          = go (Just _dpCreatePolicy) _dpQuotaUser
-              (Just _dpPrettyPrint)
-              _dpProject
-              _dpUserIP
+          = go (Just _dpCreatePolicy) (Just _dpDeletePolicy)
               (Just _dpUpdatePolicy)
-              (Just _dpDeletePolicy)
+              _dpProject
+              _dpDeployment
+              _dpQuotaUser
+              (Just _dpPrettyPrint)
+              _dpUserIP
+              _dpFields
               _dpKey
               _dpOAuthToken
-              _dpFields
-              _dpDeployment
               (Just AltJSON)
               _dpDeployment
           where go

@@ -60,9 +60,9 @@ type CollectionviewersPatchResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] User :> Patch '[JSON] User
 
@@ -190,14 +190,13 @@ instance GoogleRequest CollectionviewersPatch' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u CollectionviewersPatch'{..}
-          = go _cpQuotaUser (Just _cpPrettyPrint)
-              _cpEnterpriseId
+          = go _cpEnterpriseId _cpCollectionId _cpUserId
+              _cpQuotaUser
+              (Just _cpPrettyPrint)
               _cpUserIP
-              _cpCollectionId
-              _cpUserId
+              _cpFields
               _cpKey
               _cpOAuthToken
-              _cpFields
               (Just AltJSON)
               _cpUser
           where go

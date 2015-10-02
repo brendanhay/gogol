@@ -55,9 +55,9 @@ type LayersPermissionsBatchUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] PermissionsBatchUpdateRequest :>
                              Post '[JSON] PermissionsBatchUpdateResponse
@@ -172,12 +172,11 @@ instance GoogleRequest LayersPermissionsBatchUpdate'
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u
           LayersPermissionsBatchUpdate'{..}
-          = go _lpbuQuotaUser (Just _lpbuPrettyPrint)
+          = go _lpbuId _lpbuQuotaUser (Just _lpbuPrettyPrint)
               _lpbuUserIP
-              _lpbuKey
-              _lpbuId
-              _lpbuOAuthToken
               _lpbuFields
+              _lpbuKey
+              _lpbuOAuthToken
               (Just AltJSON)
               _lpbuPermissionsBatchUpdateRequest
           where go

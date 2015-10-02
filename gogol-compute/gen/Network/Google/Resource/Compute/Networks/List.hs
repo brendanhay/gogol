@@ -52,15 +52,15 @@ type NetworksListResource =
      Capture "project" Text :>
        "global" :>
          "networks" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "filter" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] NetworkList
 
 -- | Retrieves the list of network resources available to the specified
@@ -192,14 +192,14 @@ instance GoogleRequest NetworksList' where
         type Rs NetworksList' = NetworkList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u NetworksList'{..}
-          = go _nlQuotaUser (Just _nlPrettyPrint) _nlProject
+          = go _nlFilter (Just _nlMaxResults) _nlPageToken
+              _nlProject
+              _nlQuotaUser
+              (Just _nlPrettyPrint)
               _nlUserIP
-              _nlKey
-              _nlFilter
-              _nlPageToken
-              _nlOAuthToken
-              (Just _nlMaxResults)
               _nlFields
+              _nlKey
+              _nlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

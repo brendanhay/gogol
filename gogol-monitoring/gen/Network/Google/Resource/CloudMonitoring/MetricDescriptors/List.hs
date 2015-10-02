@@ -55,15 +55,15 @@ import           Network.Google.Prelude
 type MetricDescriptorsListResource =
      Capture "project" Text :>
        "metricDescriptors" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "count" Int32 :>
-                 QueryParam "key" Key :>
-                   QueryParam "query" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+         QueryParam "count" Int32 :>
+           QueryParam "pageToken" Text :>
+             QueryParam "query" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] ListMetricDescriptorsRequest :>
                                Get '[JSON] ListMetricDescriptorsResponse
@@ -210,14 +210,14 @@ instance GoogleRequest MetricDescriptorsList' where
              ListMetricDescriptorsResponse
         request = requestWithRoute defReq monitoringURL
         requestWithRoute r u MetricDescriptorsList'{..}
-          = go _mdlQuotaUser (Just _mdlPrettyPrint) _mdlProject
+          = go (Just _mdlCount) _mdlPageToken _mdlQuery
+              _mdlProject
+              _mdlQuotaUser
+              (Just _mdlPrettyPrint)
               _mdlUserIP
-              (Just _mdlCount)
-              _mdlKey
-              _mdlQuery
-              _mdlPageToken
-              _mdlOAuthToken
               _mdlFields
+              _mdlKey
+              _mdlOAuthToken
               (Just AltJSON)
               _mdlListMetricDescriptorsRequest
           where go

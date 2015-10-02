@@ -53,9 +53,9 @@ type DirectorySitesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] DirectorySite
 
 -- | Gets one directory site by ID.
@@ -160,12 +160,12 @@ instance GoogleRequest DirectorySitesGet' where
         type Rs DirectorySitesGet' = DirectorySite
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u DirectorySitesGet'{..}
-          = go _dsgQuotaUser (Just _dsgPrettyPrint) _dsgUserIP
-              _dsgProfileId
-              _dsgKey
-              _dsgId
-              _dsgOAuthToken
+          = go _dsgProfileId _dsgId _dsgQuotaUser
+              (Just _dsgPrettyPrint)
+              _dsgUserIP
               _dsgFields
+              _dsgKey
+              _dsgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

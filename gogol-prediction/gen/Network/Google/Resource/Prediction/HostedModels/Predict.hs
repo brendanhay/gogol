@@ -54,9 +54,9 @@ type HostedModelsPredictResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Input :> Post '[JSON] Output
 
@@ -173,12 +173,12 @@ instance GoogleRequest HostedModelsPredict' where
         type Rs HostedModelsPredict' = Output
         request = requestWithRoute defReq predictionURL
         requestWithRoute r u HostedModelsPredict'{..}
-          = go _hmpQuotaUser (Just _hmpPrettyPrint) _hmpProject
+          = go _hmpProject _hmpHostedModelName _hmpQuotaUser
+              (Just _hmpPrettyPrint)
               _hmpUserIP
+              _hmpFields
               _hmpKey
               _hmpOAuthToken
-              _hmpFields
-              _hmpHostedModelName
               (Just AltJSON)
               _hmpInput
           where go

@@ -57,9 +57,9 @@ type InstancesSetSchedulingResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Scheduling :>
                                  Post '[JSON] Operation
@@ -187,13 +187,12 @@ instance GoogleRequest InstancesSetScheduling' where
         type Rs InstancesSetScheduling' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstancesSetScheduling'{..}
-          = go _issQuotaUser (Just _issPrettyPrint) _issProject
+          = go _issProject _issZone _issInstance _issQuotaUser
+              (Just _issPrettyPrint)
               _issUserIP
-              _issZone
+              _issFields
               _issKey
               _issOAuthToken
-              _issFields
-              _issInstance
               (Just AltJSON)
               _issScheduling
           where go

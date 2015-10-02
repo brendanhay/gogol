@@ -47,14 +47,14 @@ import           Network.Google.YouTube.Types
 -- 'ChannelSectionsDelete'' request conforms to.
 type ChannelSectionsDeleteResource =
      "channelSections" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "onBehalfOfContentOwner" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "id" Text :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+       QueryParam "onBehalfOfContentOwner" Text :>
+         QueryParam "id" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a channelSection.
@@ -170,12 +170,13 @@ instance GoogleRequest ChannelSectionsDelete' where
         type Rs ChannelSectionsDelete' = ()
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u ChannelSectionsDelete'{..}
-          = go _csdQuotaUser (Just _csdPrettyPrint) _csdUserIP
-              _csdOnBehalfOfContentOwner
-              _csdKey
-              (Just _csdId)
-              _csdOAuthToken
+          = go _csdOnBehalfOfContentOwner (Just _csdId)
+              _csdQuotaUser
+              (Just _csdPrettyPrint)
+              _csdUserIP
               _csdFields
+              _csdKey
+              _csdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

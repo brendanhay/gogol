@@ -56,13 +56,13 @@ type TasksMoveResource =
            Capture "task" Text :>
              "move" :>
                QueryParam "parent" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
-                             QueryParam "previous" Text :>
+                 QueryParam "previous" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Post '[JSON] Task
 
 -- | Moves the specified task to another position in the task list. This can
@@ -185,14 +185,13 @@ instance GoogleRequest TasksMove' where
         type Rs TasksMove' = Task
         request = requestWithRoute defReq appsTasksURL
         requestWithRoute r u TasksMove'{..}
-          = go _tmParent _tmQuotaUser (Just _tmPrettyPrint)
+          = go _tmParent _tmPrevious _tmTaskList _tmTask
+              _tmQuotaUser
+              (Just _tmPrettyPrint)
               _tmUserIP
-              _tmKey
-              _tmTaskList
-              _tmTask
-              _tmOAuthToken
               _tmFields
-              _tmPrevious
+              _tmKey
+              _tmOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TasksMoveResource)

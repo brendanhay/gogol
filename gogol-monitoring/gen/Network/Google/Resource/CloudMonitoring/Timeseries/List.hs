@@ -62,22 +62,22 @@ type TimeseriesListResource =
      Capture "project" Text :>
        "timeseries" :>
          Capture "metric" Text :>
-           QueryParam "window" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "count" Int32 :>
-                     QueryParam "aggregator"
-                       CloudMonitoringTimeseriesListAggregator
-                       :>
-                       QueryParam "timespan" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oldest" Text :>
-                             QueryParams "labels" Text :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "youngest" Text :>
-                                   QueryParam "oauth_token" OAuthToken :>
-                                     QueryParam "fields" Text :>
+           QueryParam "aggregator"
+             CloudMonitoringTimeseriesListAggregator
+             :>
+             QueryParam "count" Int32 :>
+               QueryParams "labels" Text :>
+                 QueryParam "oldest" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "timespan" Text :>
+                       QueryParam "window" Text :>
+                         QueryParam "youngest" Text :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "userIp" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          ReqBody '[JSON] ListTimeseriesRequest
                                            :> Get '[JSON] ListTimeseriesResponse
@@ -291,20 +291,20 @@ instance GoogleRequest TimeseriesList' where
         type Rs TimeseriesList' = ListTimeseriesResponse
         request = requestWithRoute defReq monitoringURL
         requestWithRoute r u TimeseriesList'{..}
-          = go _tlWindow _tlQuotaUser (Just _tlPrettyPrint)
-              _tlProject
-              _tlUserIP
-              (Just _tlCount)
-              _tlAggregator
-              _tlTimespan
-              _tlMetric
-              _tlKey
+          = go _tlAggregator (Just _tlCount) _tlLabels
               _tlOldest
-              _tlLabels
               _tlPageToken
+              _tlTimespan
+              _tlWindow
+              _tlProject
+              _tlMetric
               (Just _tlYoungest)
-              _tlOAuthToken
+              _tlQuotaUser
+              (Just _tlPrettyPrint)
+              _tlUserIP
               _tlFields
+              _tlKey
+              _tlOAuthToken
               (Just AltJSON)
               _tlListTimeseriesRequest
           where go

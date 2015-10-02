@@ -54,9 +54,9 @@ type ManagementFiltersGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Filter
 
 -- | Returns a filters to which the user has access.
@@ -162,13 +162,12 @@ instance GoogleRequest ManagementFiltersGet' where
         type Rs ManagementFiltersGet' = Filter
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementFiltersGet'{..}
-          = go _mfgQuotaUser (Just _mfgPrettyPrint)
-              _mfgFilterId
+          = go _mfgAccountId _mfgFilterId _mfgQuotaUser
+              (Just _mfgPrettyPrint)
               _mfgUserIP
-              _mfgAccountId
+              _mfgFields
               _mfgKey
               _mfgOAuthToken
-              _mfgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

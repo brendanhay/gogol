@@ -48,14 +48,14 @@ import           Network.Google.Prelude
 type BlogsGetByURLResource =
      "blogs" :>
        "byurl" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "url" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "view" BloggerBlogsGetByURLView :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+         QueryParam "view" BloggerBlogsGetByURLView :>
+           QueryParam "url" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Blog
 
 -- | Retrieve a Blog by URL.
@@ -160,13 +160,12 @@ instance GoogleRequest BlogsGetByURL' where
         type Rs BlogsGetByURL' = Blog
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u BlogsGetByURL'{..}
-          = go _bgbuQuotaUser (Just _bgbuPrettyPrint)
+          = go _bgbuView (Just _bgbuURL) _bgbuQuotaUser
+              (Just _bgbuPrettyPrint)
               _bgbuUserIP
-              (Just _bgbuURL)
-              _bgbuKey
-              _bgbuView
-              _bgbuOAuthToken
               _bgbuFields
+              _bgbuKey
+              _bgbuOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

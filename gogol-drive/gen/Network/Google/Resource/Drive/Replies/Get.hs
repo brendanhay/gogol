@@ -54,13 +54,13 @@ type RepliesGetResource =
            Capture "commentId" Text :>
              "replies" :>
                Capture "replyId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "includeDeleted" Bool :>
-                             QueryParam "fields" Text :>
+                 QueryParam "includeDeleted" Bool :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] CommentReply
 
@@ -183,14 +183,14 @@ instance GoogleRequest RepliesGet' where
         type Rs RepliesGet' = CommentReply
         request = requestWithRoute defReq driveURL
         requestWithRoute r u RepliesGet'{..}
-          = go _rgQuotaUser (Just _rgPrettyPrint) _rgUserIP
-              _rgKey
+          = go (Just _rgIncludeDeleted) _rgFileId _rgCommentId
               _rgReplyId
-              _rgFileId
-              _rgOAuthToken
-              _rgCommentId
-              (Just _rgIncludeDeleted)
+              _rgQuotaUser
+              (Just _rgPrettyPrint)
+              _rgUserIP
               _rgFields
+              _rgKey
+              _rgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy RepliesGetResource)

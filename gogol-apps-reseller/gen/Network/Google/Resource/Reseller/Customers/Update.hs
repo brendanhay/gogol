@@ -52,9 +52,9 @@ type CustomersUpdateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Customer :> Put '[JSON] Customer
 
@@ -159,11 +159,11 @@ instance GoogleRequest CustomersUpdate' where
         type Rs CustomersUpdate' = Customer
         request = requestWithRoute defReq appsResellerURL
         requestWithRoute r u CustomersUpdate'{..}
-          = go _cuQuotaUser (Just _cuPrettyPrint) _cuUserIP
-              _cuCustomerId
+          = go _cuCustomerId _cuQuotaUser (Just _cuPrettyPrint)
+              _cuUserIP
+              _cuFields
               _cuKey
               _cuOAuthToken
-              _cuFields
               (Just AltJSON)
               _cuCustomer
           where go

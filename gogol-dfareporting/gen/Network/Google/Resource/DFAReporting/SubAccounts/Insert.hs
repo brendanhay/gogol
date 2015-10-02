@@ -52,9 +52,9 @@ type SubAccountsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] SubAccount :> Post '[JSON] SubAccount
 
@@ -162,11 +162,12 @@ instance GoogleRequest SubAccountsInsert' where
         type Rs SubAccountsInsert' = SubAccount
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u SubAccountsInsert'{..}
-          = go _saiQuotaUser (Just _saiPrettyPrint) _saiUserIP
-              _saiProfileId
+          = go _saiProfileId _saiQuotaUser
+              (Just _saiPrettyPrint)
+              _saiUserIP
+              _saiFields
               _saiKey
               _saiOAuthToken
-              _saiFields
               (Just AltJSON)
               _saiSubAccount
           where go

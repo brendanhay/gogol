@@ -53,9 +53,9 @@ type GlobalForwardingRulesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] ForwardingRule :>
                            Post '[JSON] Operation
@@ -168,12 +168,12 @@ instance GoogleRequest GlobalForwardingRulesInsert'
         type Rs GlobalForwardingRulesInsert' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u GlobalForwardingRulesInsert'{..}
-          = go _gfriQuotaUser (Just _gfriPrettyPrint)
-              _gfriProject
+          = go _gfriProject _gfriQuotaUser
+              (Just _gfriPrettyPrint)
               _gfriUserIP
+              _gfriFields
               _gfriKey
               _gfriOAuthToken
-              _gfriFields
               (Just AltJSON)
               _gfriForwardingRule
           where go

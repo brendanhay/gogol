@@ -51,9 +51,9 @@ type RasterCollectionsCancelProcessingResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Post '[JSON] ProcessResponse
 
@@ -154,12 +154,11 @@ instance GoogleRequest
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u
           RasterCollectionsCancelProcessing'{..}
-          = go _rccpQuotaUser (Just _rccpPrettyPrint)
+          = go _rccpId _rccpQuotaUser (Just _rccpPrettyPrint)
               _rccpUserIP
-              _rccpKey
-              _rccpId
-              _rccpOAuthToken
               _rccpFields
+              _rccpKey
+              _rccpOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

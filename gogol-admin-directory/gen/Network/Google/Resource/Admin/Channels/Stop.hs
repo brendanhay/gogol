@@ -52,9 +52,9 @@ type ChannelsStopResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Channel :> Post '[JSON] ()
 
@@ -149,9 +149,9 @@ instance GoogleRequest ChannelsStop' where
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u ChannelsStop'{..}
           = go _csQuotaUser (Just _csPrettyPrint) _csUserIP
+              _csFields
               _csKey
               _csOAuthToken
-              _csFields
               (Just AltJSON)
               _csChannel
           where go

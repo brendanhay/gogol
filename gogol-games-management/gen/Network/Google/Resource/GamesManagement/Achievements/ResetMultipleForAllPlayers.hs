@@ -52,9 +52,9 @@ type AchievementsResetMultipleForAllPlayersResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] AchievementResetMultipleForAllRequest
                          :> Post '[JSON] ()
@@ -163,9 +163,9 @@ instance GoogleRequest
           AchievementsResetMultipleForAllPlayers'{..}
           = go _armfapQuotaUser (Just _armfapPrettyPrint)
               _armfapUserIP
+              _armfapFields
               _armfapKey
               _armfapOAuthToken
-              _armfapFields
               (Just AltJSON)
               _armfapAchievementResetMultipleForAllRequest
           where go

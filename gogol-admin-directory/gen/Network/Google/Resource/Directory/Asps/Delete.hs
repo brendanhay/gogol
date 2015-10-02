@@ -53,9 +53,9 @@ type AspsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete an ASP issued by a user.
@@ -158,12 +158,12 @@ instance GoogleRequest AspsDelete' where
         type Rs AspsDelete' = ()
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u AspsDelete'{..}
-          = go _adQuotaUser (Just _adPrettyPrint) _adCodeId
+          = go _adUserKey _adCodeId _adQuotaUser
+              (Just _adPrettyPrint)
               _adUserIP
+              _adFields
               _adKey
               _adOAuthToken
-              _adUserKey
-              _adFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy AspsDeleteResource)

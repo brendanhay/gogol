@@ -57,9 +57,9 @@ type PurchasesSubscriptionsCancelResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Cancels a user\'s subscription purchase. The subscription remains valid
@@ -182,14 +182,13 @@ instance GoogleRequest PurchasesSubscriptionsCancel'
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u
           PurchasesSubscriptionsCancel'{..}
-          = go _pscQuotaUser (Just _pscPrettyPrint)
-              _pscPackageName
+          = go _pscPackageName _pscSubscriptionId _pscToken
+              _pscQuotaUser
+              (Just _pscPrettyPrint)
               _pscUserIP
-              _pscToken
+              _pscFields
               _pscKey
               _pscOAuthToken
-              _pscSubscriptionId
-              _pscFields
               (Just AltJSON)
           where go
                   = clientWithRoute

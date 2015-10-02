@@ -26,7 +26,7 @@ module Network.Google.Resource.Calendar.ACL.Insert
       ACLInsertResource
 
     -- * Creating a Request
-    , aCLInsert'
+    , aclInsert'
     , ACLInsert'
 
     -- * Request Lenses
@@ -52,15 +52,15 @@ type ACLInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] ACLRule :> Post '[JSON] ACLRule
 
 -- | Creates an access control rule.
 --
--- /See:/ 'aCLInsert'' smart constructor.
+-- /See:/ 'aclInsert'' smart constructor.
 data ACLInsert' = ACLInsert'
     { _aiQuotaUser   :: !(Maybe Text)
     , _aiCalendarId  :: !Text
@@ -91,11 +91,11 @@ data ACLInsert' = ACLInsert'
 -- * 'aiOAuthToken'
 --
 -- * 'aiFields'
-aCLInsert'
+aclInsert'
     :: Text -- ^ 'calendarId'
     -> ACLRule -- ^ 'ACLRule'
     -> ACLInsert'
-aCLInsert' pAiCalendarId_ pAiACLRule_ =
+aclInsert' pAiCalendarId_ pAiACLRule_ =
     ACLInsert'
     { _aiQuotaUser = Nothing
     , _aiCalendarId = pAiCalendarId_
@@ -160,11 +160,11 @@ instance GoogleRequest ACLInsert' where
         type Rs ACLInsert' = ACLRule
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u ACLInsert'{..}
-          = go _aiQuotaUser _aiCalendarId (Just _aiPrettyPrint)
+          = go _aiCalendarId _aiQuotaUser (Just _aiPrettyPrint)
               _aiUserIP
+              _aiFields
               _aiKey
               _aiOAuthToken
-              _aiFields
               (Just AltJSON)
               _aiACLRule
           where go

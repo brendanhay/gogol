@@ -52,9 +52,9 @@ type UsersUndeleteResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] UserUndelete :> Post '[JSON] ()
 
@@ -157,10 +157,11 @@ instance GoogleRequest UsersUndelete' where
         type Rs UsersUndelete' = ()
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u UsersUndelete'{..}
-          = go _uQuotaUser (Just _uPrettyPrint) _uUserIP _uKey
-              _uOAuthToken
-              _uUserKey
+          = go _uUserKey _uQuotaUser (Just _uPrettyPrint)
+              _uUserIP
               _uFields
+              _uKey
+              _uOAuthToken
               (Just AltJSON)
               _uUserUndelete
           where go

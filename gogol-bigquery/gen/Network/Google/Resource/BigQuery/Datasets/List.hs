@@ -52,15 +52,15 @@ type DatasetsListResource =
      "projects" :>
        Capture "projectId" Text :>
          "datasets" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "all" Bool :>
-                   QueryParam "key" Key :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "all" Bool :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] DatasetList
 
 -- | Lists all datasets in the specified project to which you have been
@@ -181,14 +181,13 @@ instance GoogleRequest DatasetsList' where
         type Rs DatasetsList' = DatasetList
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u DatasetsList'{..}
-          = go _dlQuotaUser (Just _dlPrettyPrint) _dlUserIP
-              _dlAll
-              _dlKey
-              _dlPageToken
-              _dlProjectId
-              _dlOAuthToken
-              _dlMaxResults
+          = go _dlAll _dlMaxResults _dlPageToken _dlProjectId
+              _dlQuotaUser
+              (Just _dlPrettyPrint)
+              _dlUserIP
               _dlFields
+              _dlKey
+              _dlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -50,9 +50,9 @@ type TimelineDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a timeline item.
@@ -144,11 +144,11 @@ instance GoogleRequest TimelineDelete' where
         type Rs TimelineDelete' = ()
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u TimelineDelete'{..}
-          = go _tdQuotaUser (Just _tdPrettyPrint) _tdUserIP
-              _tdKey
-              _tdId
-              _tdOAuthToken
+          = go _tdId _tdQuotaUser (Just _tdPrettyPrint)
+              _tdUserIP
               _tdFields
+              _tdKey
+              _tdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

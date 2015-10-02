@@ -55,17 +55,17 @@ type ProjectsTopicsTestIAMPermissionsResource =
      "v1beta2" :>
        "{+resource}:testIamPermissions" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] TestIAMPermissionsRequest :>
                                      Post '[JSON] TestIAMPermissionsResponse
@@ -238,18 +238,17 @@ instance GoogleRequest
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u
           ProjectsTopicsTestIAMPermissions'{..}
-          = go _pttipXgafv _pttipQuotaUser
-              (Just _pttipPrettyPrint)
-              _pttipUploadProtocol
-              (Just _pttipPp)
-              _pttipAccessToken
-              _pttipUploadType
-              _pttipBearerToken
-              _pttipKey
-              _pttipResource
-              _pttipOAuthToken
-              _pttipFields
+          = go _pttipXgafv _pttipAccessToken _pttipBearerToken
               _pttipCallback
+              (Just _pttipPp)
+              _pttipUploadType
+              _pttipUploadProtocol
+              _pttipResource
+              _pttipQuotaUser
+              (Just _pttipPrettyPrint)
+              _pttipFields
+              _pttipKey
+              _pttipOAuthToken
               (Just AltJSON)
               _pttipTestIAMPermissionsRequest
           where go

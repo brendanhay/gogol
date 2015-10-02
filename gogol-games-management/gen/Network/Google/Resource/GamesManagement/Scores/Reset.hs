@@ -54,9 +54,9 @@ type ScoresResetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Post '[JSON] PlayerScoreResetResponse
 
@@ -153,11 +153,12 @@ instance GoogleRequest ScoresReset' where
         type Rs ScoresReset' = PlayerScoreResetResponse
         request = requestWithRoute defReq gamesManagementURL
         requestWithRoute r u ScoresReset'{..}
-          = go _srQuotaUser (Just _srPrettyPrint) _srUserIP
-              _srLeaderboardId
+          = go _srLeaderboardId _srQuotaUser
+              (Just _srPrettyPrint)
+              _srUserIP
+              _srFields
               _srKey
               _srOAuthToken
-              _srFields
               (Just AltJSON)
           where go
                   = clientWithRoute

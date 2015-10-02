@@ -51,14 +51,14 @@ type UsersMessagesGetResource =
      Capture "userId" Text :>
        "messages" :>
          Capture "id" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "format" GmailUsersMessagesGetFormat :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParams "metadataHeaders" Text :>
-                         QueryParam "fields" Text :>
+           QueryParam "format" GmailUsersMessagesGetFormat :>
+             QueryParams "metadataHeaders" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Message
 
 -- | Gets the specified message.
@@ -183,14 +183,14 @@ instance GoogleRequest UsersMessagesGet' where
         type Rs UsersMessagesGet' = Message
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersMessagesGet'{..}
-          = go _umgQuotaUser (Just _umgPrettyPrint) _umgUserIP
-              (Just _umgFormat)
-              _umgUserId
-              _umgKey
+          = go (Just _umgFormat) _umgMetadataHeaders _umgUserId
               _umgId
-              _umgOAuthToken
-              _umgMetadataHeaders
+              _umgQuotaUser
+              (Just _umgPrettyPrint)
+              _umgUserIP
               _umgFields
+              _umgKey
+              _umgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

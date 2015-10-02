@@ -50,9 +50,9 @@ type GroupsUpdateResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltATOM :>
                      ReqBody '[JSON] Groups :> Put '[JSON] Groups
 
@@ -156,11 +156,12 @@ instance GoogleRequest GroupsUpdate' where
         type Rs GroupsUpdate' = Groups
         request = requestWithRoute defReq groupsSettingsURL
         requestWithRoute r u GroupsUpdate'{..}
-          = go _guQuotaUser (Just _guPrettyPrint) _guUserIP
+          = go _guGroupUniqueId _guQuotaUser
+              (Just _guPrettyPrint)
+              _guUserIP
+              _guFields
               _guKey
               _guOAuthToken
-              _guGroupUniqueId
-              _guFields
               (Just AltATOM)
               _guGroups
           where go

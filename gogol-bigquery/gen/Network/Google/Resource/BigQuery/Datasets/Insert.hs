@@ -52,9 +52,9 @@ type DatasetsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Dataset :> Post '[JSON] Dataset
 
@@ -158,11 +158,11 @@ instance GoogleRequest DatasetsInsert' where
         type Rs DatasetsInsert' = Dataset
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u DatasetsInsert'{..}
-          = go _diQuotaUser (Just _diPrettyPrint) _diUserIP
-              _diKey
-              _diProjectId
-              _diOAuthToken
+          = go _diProjectId _diQuotaUser (Just _diPrettyPrint)
+              _diUserIP
               _diFields
+              _diKey
+              _diOAuthToken
               (Just AltJSON)
               _diDataset
           where go

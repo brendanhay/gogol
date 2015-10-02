@@ -56,18 +56,18 @@ type UsersMessagesImportResource =
      Capture "userId" Text :>
        "messages" :>
          "import" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "processForCalendar" Bool :>
-                     QueryParam "deleted" Bool :>
-                       QueryParam "neverMarkSpam" Bool :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "internalDateSource"
-                             GmailUsersMessagesImportInternalDateSource
-                             :>
-                             QueryParam "fields" Text :>
+           QueryParam "deleted" Bool :>
+             QueryParam "internalDateSource"
+               GmailUsersMessagesImportInternalDateSource
+               :>
+               QueryParam "neverMarkSpam" Bool :>
+                 QueryParam "processForCalendar" Bool :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  MultipartRelated '[JSON] Message Body :>
                                    Post '[JSON] Message
@@ -222,16 +222,17 @@ instance GoogleRequest UsersMessagesImport' where
         type Rs UsersMessagesImport' = Message
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersMessagesImport'{..}
-          = go _uQuotaUser (Just _uPrettyPrint) _uUserIP
-              _uUserId
+          = go (Just _uDeleted) (Just _uInternalDateSource)
               _uMedia
-              _uKey
-              (Just _uProcessForCalendar)
-              (Just _uDeleted)
               (Just _uNeverMarkSpam)
-              _uOAuthToken
-              (Just _uInternalDateSource)
+              (Just _uProcessForCalendar)
+              _uUserId
+              _uQuotaUser
+              (Just _uPrettyPrint)
+              _uUserIP
               _uFields
+              _uKey
+              _uOAuthToken
               (Just AltJSON)
               _uMessage
           where go

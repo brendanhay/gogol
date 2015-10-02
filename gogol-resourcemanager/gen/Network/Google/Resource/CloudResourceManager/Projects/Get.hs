@@ -57,17 +57,17 @@ type ProjectsGetResource =
        "projects" :>
          Capture "projectId" Text :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
+             QueryParam "access_token" Text :>
+               QueryParam "bearer_token" Text :>
+                 QueryParam "callback" Text :>
                    QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] Project
 
@@ -218,17 +218,17 @@ instance GoogleRequest ProjectsGet' where
         type Rs ProjectsGet' = Project
         request = requestWithRoute defReq resourceManagerURL
         requestWithRoute r u ProjectsGet'{..}
-          = go _pgXgafv _pgQuotaUser (Just _pgPrettyPrint)
-              _pgUploadProtocol
-              (Just _pgPp)
-              _pgAccessToken
-              _pgUploadType
-              _pgBearerToken
-              _pgKey
-              _pgProjectId
-              _pgOAuthToken
-              _pgFields
+          = go _pgXgafv _pgAccessToken _pgBearerToken
               _pgCallback
+              (Just _pgPp)
+              _pgUploadType
+              _pgUploadProtocol
+              _pgProjectId
+              _pgQuotaUser
+              (Just _pgPrettyPrint)
+              _pgFields
+              _pgKey
+              _pgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

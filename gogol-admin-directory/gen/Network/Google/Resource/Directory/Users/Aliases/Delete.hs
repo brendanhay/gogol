@@ -53,9 +53,9 @@ type UsersAliasesDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Remove a alias for the user
@@ -160,12 +160,12 @@ instance GoogleRequest UsersAliasesDelete' where
         type Rs UsersAliasesDelete' = ()
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u UsersAliasesDelete'{..}
-          = go _uadQuotaUser (Just _uadPrettyPrint) _uadUserIP
-              _uadAlias
+          = go _uadUserKey _uadAlias _uadQuotaUser
+              (Just _uadPrettyPrint)
+              _uadUserIP
+              _uadFields
               _uadKey
               _uadOAuthToken
-              _uadUserKey
-              _uadFields
               (Just AltJSON)
           where go
                   = clientWithRoute

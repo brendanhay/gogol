@@ -54,15 +54,15 @@ type InstanceGroupsListResource =
        "zones" :>
          Capture "zone" Text :>
            "instanceGroups" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "filter" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
+             QueryParam "filter" Text :>
+               QueryParam "maxResults" Word32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] InstanceGroupList
 
@@ -209,15 +209,15 @@ instance GoogleRequest InstanceGroupsList' where
         type Rs InstanceGroupsList' = InstanceGroupList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstanceGroupsList'{..}
-          = go _iglQuotaUser (Just _iglPrettyPrint) _iglProject
-              _iglUserIP
+          = go _iglFilter (Just _iglMaxResults) _iglPageToken
+              _iglProject
               _iglZone
-              _iglKey
-              _iglFilter
-              _iglPageToken
-              _iglOAuthToken
-              (Just _iglMaxResults)
+              _iglQuotaUser
+              (Just _iglPrettyPrint)
+              _iglUserIP
               _iglFields
+              _iglKey
+              _iglOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

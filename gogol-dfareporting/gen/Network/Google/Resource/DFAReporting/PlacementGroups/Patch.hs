@@ -51,13 +51,13 @@ type PlacementGroupsPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "placementGroups" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "id" Int64 :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] PlacementGroup :>
                              Patch '[JSON] PlacementGroup
@@ -176,12 +176,12 @@ instance GoogleRequest PlacementGroupsPatch' where
         type Rs PlacementGroupsPatch' = PlacementGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementGroupsPatch'{..}
-          = go _pgpQuotaUser (Just _pgpPrettyPrint) _pgpUserIP
-              _pgpProfileId
-              _pgpKey
-              (Just _pgpId)
-              _pgpOAuthToken
+          = go _pgpProfileId (Just _pgpId) _pgpQuotaUser
+              (Just _pgpPrettyPrint)
+              _pgpUserIP
               _pgpFields
+              _pgpKey
+              _pgpOAuthToken
               (Just AltJSON)
               _pgpPlacementGroup
           where go

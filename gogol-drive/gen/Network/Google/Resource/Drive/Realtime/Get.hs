@@ -50,25 +50,25 @@ type RealtimeGetResource =
      "files" :>
        Capture "fileId" Text :>
          "realtime" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "revision" Int32 :>
-                       QueryParam "fields" Text :>
+           QueryParam "revision" Int32 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] ()
        :<|>
        "files" :>
          Capture "fileId" Text :>
            "realtime" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "revision" Int32 :>
-                         QueryParam "fields" Text :>
+             QueryParam "revision" Int32 :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" Media :> Get '[OctetStream] Stream
 
 -- | Exports the contents of the Realtime API data model associated with this
@@ -177,12 +177,12 @@ instance GoogleRequest RealtimeGet' where
         type Rs RealtimeGet' = ()
         request = requestWithRoute defReq driveURL
         requestWithRoute r u RealtimeGet'{..}
-          = go _reaQuotaUser (Just _reaPrettyPrint) _reaUserIP
-              _reaKey
-              _reaFileId
-              _reaOAuthToken
-              _reaRevision
+          = go _reaRevision _reaFileId _reaQuotaUser
+              (Just _reaPrettyPrint)
+              _reaUserIP
               _reaFields
+              _reaKey
+              _reaOAuthToken
               (Just AltJSON)
           where go :<|> _
                   = clientWithRoute
@@ -194,12 +194,12 @@ instance GoogleRequest RealtimeGet' where
         type Rs (Download RealtimeGet') = Stream
         request = requestWithRoute defReq driveURL
         requestWithRoute r u RealtimeGet'{..}
-          = go _reaQuotaUser (Just _reaPrettyPrint) _reaUserIP
-              _reaKey
-              _reaFileId
-              _reaOAuthToken
-              _reaRevision
+          = go _reaRevision _reaFileId _reaQuotaUser
+              (Just _reaPrettyPrint)
+              _reaUserIP
               _reaFields
+              _reaKey
+              _reaOAuthToken
               (Just Media)
           where go :<|> _
                   = clientWithRoute

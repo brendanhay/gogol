@@ -52,15 +52,15 @@ type FirewallsListResource =
      Capture "project" Text :>
        "global" :>
          "firewalls" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "filter" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] FirewallList
 
@@ -193,14 +193,14 @@ instance GoogleRequest FirewallsList' where
         type Rs FirewallsList' = FirewallList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u FirewallsList'{..}
-          = go _flQuotaUser (Just _flPrettyPrint) _flProject
+          = go _flFilter (Just _flMaxResults) _flPageToken
+              _flProject
+              _flQuotaUser
+              (Just _flPrettyPrint)
               _flUserIP
-              _flKey
-              _flFilter
-              _flPageToken
-              _flOAuthToken
-              (Just _flMaxResults)
               _flFields
+              _flKey
+              _flOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

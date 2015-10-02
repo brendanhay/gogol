@@ -49,14 +49,14 @@ import           Network.Google.YouTube.Types
 -- 'PlayListsUpdate'' request conforms to.
 type PlayListsUpdateResource =
      "playlists" :>
-       QueryParam "quotaUser" Text :>
+       QueryParam "onBehalfOfContentOwner" Text :>
          QueryParam "part" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] PlayList :> Put '[JSON] PlayList
 
@@ -190,13 +190,13 @@ instance GoogleRequest PlayListsUpdate' where
         type Rs PlayListsUpdate' = PlayList
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u PlayListsUpdate'{..}
-          = go _pluQuotaUser (Just _pluPart)
+          = go _pluOnBehalfOfContentOwner (Just _pluPart)
+              _pluQuotaUser
               (Just _pluPrettyPrint)
               _pluUserIP
-              _pluOnBehalfOfContentOwner
+              _pluFields
               _pluKey
               _pluOAuthToken
-              _pluFields
               (Just AltJSON)
               _pluPlayList
           where go

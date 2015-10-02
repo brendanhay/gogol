@@ -50,9 +50,9 @@ type CloudLoadingUpdateBookResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] BooksCloudLoadingResource :>
                          Post '[JSON] BooksCloudLoadingResource
@@ -155,9 +155,9 @@ instance GoogleRequest CloudLoadingUpdateBook' where
         requestWithRoute r u CloudLoadingUpdateBook'{..}
           = go _clubQuotaUser (Just _clubPrettyPrint)
               _clubUserIP
+              _clubFields
               _clubKey
               _clubOAuthToken
-              _clubFields
               (Just AltJSON)
               _clubBooksCloudLoadingResource
           where go

@@ -54,14 +54,14 @@ type UsersUpdateResource =
          "instances" :>
            Capture "instance" Text :>
              "users" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "name" Text :>
-                         QueryParam "host" Text :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+               QueryParam "host" Text :>
+                 QueryParam "name" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] User :> Put '[JSON] Operation
 
@@ -192,14 +192,14 @@ instance GoogleRequest UsersUpdate' where
         type Rs UsersUpdate' = Operation
         request = requestWithRoute defReq sQLAdminURL
         requestWithRoute r u UsersUpdate'{..}
-          = go _uuQuotaUser (Just _uuPrettyPrint) _uuProject
-              _uuUserIP
-              _uuKey
+          = go _uuProject _uuInstance (Just _uuHost)
               (Just _uuName)
-              (Just _uuHost)
-              _uuOAuthToken
+              _uuQuotaUser
+              (Just _uuPrettyPrint)
+              _uuUserIP
               _uuFields
-              _uuInstance
+              _uuKey
+              _uuOAuthToken
               (Just AltJSON)
               _uuUser
           where go

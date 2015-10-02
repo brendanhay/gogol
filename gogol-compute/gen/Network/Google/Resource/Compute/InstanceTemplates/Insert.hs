@@ -53,9 +53,9 @@ type InstanceTemplatesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] InstanceTemplate :>
                            Post '[JSON] Operation
@@ -165,11 +165,11 @@ instance GoogleRequest InstanceTemplatesInsert' where
         type Rs InstanceTemplatesInsert' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstanceTemplatesInsert'{..}
-          = go _itiQuotaUser (Just _itiPrettyPrint) _itiProject
+          = go _itiProject _itiQuotaUser (Just _itiPrettyPrint)
               _itiUserIP
+              _itiFields
               _itiKey
               _itiOAuthToken
-              _itiFields
               (Just AltJSON)
               _itiInstanceTemplate
           where go

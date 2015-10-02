@@ -58,17 +58,17 @@ type ProjectsSinksCreateResource =
          Capture "projectsId" Text :>
            "sinks" :>
              QueryParam "$.xgafv" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "upload_protocol" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "bearer_token" Text :>
+                   QueryParam "callback" Text :>
                      QueryParam "pp" Bool :>
-                       QueryParam "access_token" Text :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "callback" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        ReqBody '[JSON] LogSink :>
                                          Post '[JSON] LogSink
@@ -234,17 +234,17 @@ instance GoogleRequest ProjectsSinksCreate' where
         type Rs ProjectsSinksCreate' = LogSink
         request = requestWithRoute defReq loggingURL
         requestWithRoute r u ProjectsSinksCreate'{..}
-          = go _pscXgafv _pscQuotaUser (Just _pscPrettyPrint)
-              _pscUploadProtocol
+          = go _pscXgafv _pscAccessToken _pscBearerToken
+              _pscCallback
               (Just _pscPp)
-              _pscAccessToken
               _pscUploadType
-              _pscBearerToken
+              _pscUploadProtocol
+              _pscProjectsId
+              _pscQuotaUser
+              (Just _pscPrettyPrint)
+              _pscFields
               _pscKey
               _pscOAuthToken
-              _pscProjectsId
-              _pscFields
-              _pscCallback
               (Just AltJSON)
               _pscLogSink
           where go

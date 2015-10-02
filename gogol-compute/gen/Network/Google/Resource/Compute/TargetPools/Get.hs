@@ -55,9 +55,9 @@ type TargetPoolsGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] TargetPool
 
 -- | Returns the specified TargetPool resource.
@@ -174,13 +174,13 @@ instance GoogleRequest TargetPoolsGet' where
         type Rs TargetPoolsGet' = TargetPool
         request = requestWithRoute defReq computeURL
         requestWithRoute r u TargetPoolsGet'{..}
-          = go _tpgQuotaUser (Just _tpgPrettyPrint) _tpgProject
-              _tpgTargetPool
+          = go _tpgProject _tpgRegion _tpgTargetPool
+              _tpgQuotaUser
+              (Just _tpgPrettyPrint)
               _tpgUserIP
-              _tpgKey
-              _tpgRegion
-              _tpgOAuthToken
               _tpgFields
+              _tpgKey
+              _tpgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

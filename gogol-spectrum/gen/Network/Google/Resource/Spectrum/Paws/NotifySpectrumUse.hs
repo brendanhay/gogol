@@ -52,9 +52,9 @@ type PawsNotifySpectrumUseResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] PawsNotifySpectrumUseRequest :>
                        Post '[JSON] PawsNotifySpectrumUseResponse
@@ -160,9 +160,9 @@ instance GoogleRequest PawsNotifySpectrumUse' where
         requestWithRoute r u PawsNotifySpectrumUse'{..}
           = go _pnsuQuotaUser (Just _pnsuPrettyPrint)
               _pnsuUserIP
+              _pnsuFields
               _pnsuKey
               _pnsuOAuthToken
-              _pnsuFields
               (Just AltJSON)
               _pnsuPawsNotifySpectrumUseRequest
           where go

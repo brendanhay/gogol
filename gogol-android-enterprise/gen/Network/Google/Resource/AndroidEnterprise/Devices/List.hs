@@ -54,9 +54,9 @@ type DevicesListResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] DevicesListResponse
 
@@ -161,13 +161,12 @@ instance GoogleRequest DevicesList' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u DevicesList'{..}
-          = go _dlQuotaUser (Just _dlPrettyPrint)
-              _dlEnterpriseId
+          = go _dlEnterpriseId _dlUserId _dlQuotaUser
+              (Just _dlPrettyPrint)
               _dlUserIP
-              _dlUserId
+              _dlFields
               _dlKey
               _dlOAuthToken
-              _dlFields
               (Just AltJSON)
           where go
                   = clientWithRoute

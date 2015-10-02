@@ -49,9 +49,9 @@ type WebResourceGetTokenResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON]
                        SiteVerificationWebResourceGettokenRequest
@@ -160,9 +160,9 @@ instance GoogleRequest WebResourceGetToken' where
         requestWithRoute r u WebResourceGetToken'{..}
           = go _wrgtQuotaUser (Just _wrgtPrettyPrint)
               _wrgtUserIP
+              _wrgtFields
               _wrgtKey
               _wrgtOAuthToken
-              _wrgtFields
               (Just AltJSON)
               _wrgtSiteVerificationWebResourceGettokenRequest
           where go

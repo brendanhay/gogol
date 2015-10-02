@@ -79,97 +79,91 @@ import           Network.Google.YouTube.Types
 -- 'SearchList'' request conforms to.
 type SearchListResource =
      "search" :>
-       QueryParam "publishedAfter" UTCTime :>
-         QueryParam "videoDefinition"
-           YouTubeSearchListVideoDefinition
+       QueryParam "channelId" Text :>
+         QueryParam "channelType" YouTubeSearchListChannelType
            :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "part" Text :>
-               QueryParam "videoDuration"
-                 YouTubeSearchListVideoDuration
-                 :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "videoCaption"
-                     YouTubeSearchListVideoCaption
-                     :>
-                     QueryParam "videoLicense"
-                       YouTubeSearchListVideoLicense
-                       :>
-                       QueryParam "regionCode" Text :>
-                         QueryParam "forDeveloper" Bool :>
-                           QueryParam "location" Text :>
-                             QueryParam "locationRadius" Text :>
-                               QueryParam "userIp" Text :>
-                                 QueryParam "forContentOwner" Bool :>
-                                   QueryParam "channelId" Text :>
-                                     QueryParam "q" Text :>
-                                       QueryParam "forMine" Bool :>
-                                         QueryParam "videoEmbeddable"
-                                           YouTubeSearchListVideoEmbeddable
-                                           :>
-                                           QueryParam "eventType"
-                                             YouTubeSearchListEventType
+           QueryParam "eventType" YouTubeSearchListEventType :>
+             QueryParam "forContentOwner" Bool :>
+               QueryParam "forDeveloper" Bool :>
+                 QueryParam "forMine" Bool :>
+                   QueryParam "location" Text :>
+                     QueryParam "locationRadius" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "onBehalfOfContentOwner" Text :>
+                           QueryParam "order" YouTubeSearchListOrder :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "publishedAfter" UTCTime :>
+                                 QueryParam "publishedBefore" UTCTime :>
+                                   QueryParam "q" Text :>
+                                     QueryParam "regionCode" Text :>
+                                       QueryParam "relatedToVideoId" Text :>
+                                         QueryParam "relevanceLanguage" Text :>
+                                           QueryParam "safeSearch"
+                                             YouTubeSearchListSafeSearch
                                              :>
-                                             QueryParam "onBehalfOfContentOwner"
-                                               Text
-                                               :>
-                                               QueryParam "videoCategoryId" Text
-                                                 :>
-                                                 QueryParam "topicId" Text :>
-                                                   QueryParam "key" Key :>
-                                                     QueryParam "safeSearch"
-                                                       YouTubeSearchListSafeSearch
+                                             QueryParam "topicId" Text :>
+                                               QueryParam "type" Text :>
+                                                 QueryParam "videoCaption"
+                                                   YouTubeSearchListVideoCaption
+                                                   :>
+                                                   QueryParam "videoCategoryId"
+                                                     Text
+                                                     :>
+                                                     QueryParam
+                                                       "videoDefinition"
+                                                       YouTubeSearchListVideoDefinition
                                                        :>
                                                        QueryParam
-                                                         "videoSyndicated"
-                                                         YouTubeSearchListVideoSyndicated
+                                                         "videoDimension"
+                                                         YouTubeSearchListVideoDimension
                                                          :>
                                                          QueryParam
-                                                           "relatedToVideoId"
-                                                           Text
+                                                           "videoDuration"
+                                                           YouTubeSearchListVideoDuration
                                                            :>
                                                            QueryParam
-                                                             "pageToken"
-                                                             Text
+                                                             "videoEmbeddable"
+                                                             YouTubeSearchListVideoEmbeddable
                                                              :>
-                                                             QueryParam "type"
-                                                               Text
+                                                             QueryParam
+                                                               "videoLicense"
+                                                               YouTubeSearchListVideoLicense
                                                                :>
                                                                QueryParam
-                                                                 "oauth_token"
-                                                                 OAuthToken
+                                                                 "videoSyndicated"
+                                                                 YouTubeSearchListVideoSyndicated
                                                                  :>
                                                                  QueryParam
-                                                                   "channelType"
-                                                                   YouTubeSearchListChannelType
+                                                                   "videoType"
+                                                                   YouTubeSearchListVideoType
                                                                    :>
                                                                    QueryParam
-                                                                     "relevanceLanguage"
+                                                                     "part"
                                                                      Text
                                                                      :>
                                                                      QueryParam
-                                                                       "order"
-                                                                       YouTubeSearchListOrder
+                                                                       "quotaUser"
+                                                                       Text
                                                                        :>
                                                                        QueryParam
-                                                                         "maxResults"
-                                                                         Word32
+                                                                         "prettyPrint"
+                                                                         Bool
                                                                          :>
                                                                          QueryParam
-                                                                           "publishedBefore"
-                                                                           UTCTime
+                                                                           "userIp"
+                                                                           Text
                                                                            :>
                                                                            QueryParam
-                                                                             "videoType"
-                                                                             YouTubeSearchListVideoType
+                                                                             "fields"
+                                                                             Text
                                                                              :>
                                                                              QueryParam
-                                                                               "videoDimension"
-                                                                               YouTubeSearchListVideoDimension
+                                                                               "key"
+                                                                               Key
                                                                                :>
                                                                                QueryParam
-                                                                                 "fields"
-                                                                                 Text
+                                                                                 "oauth_token"
+                                                                                 OAuthToken
                                                                                  :>
                                                                                  QueryParam
                                                                                    "alt"
@@ -654,42 +648,41 @@ instance GoogleRequest SearchList' where
         type Rs SearchList' = SearchListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u SearchList'{..}
-          = go _slPublishedAfter _slVideoDefinition
-              _slQuotaUser
-              (Just _slPart)
-              _slVideoDuration
-              (Just _slPrettyPrint)
-              _slVideoCaption
-              _slVideoLicense
-              _slRegionCode
+          = go _slChannelId _slChannelType _slEventType
+              _slForContentOwner
               _slForDeveloper
+              _slForMine
               _slLocation
               _slLocationRadius
-              _slUserIP
-              _slForContentOwner
-              _slChannelId
-              _slQ
-              _slForMine
-              _slVideoEmbeddable
-              _slEventType
-              _slOnBehalfOfContentOwner
-              _slVideoCategoryId
-              _slTopicId
-              _slKey
-              _slSafeSearch
-              _slVideoSyndicated
-              _slRelatedToVideoId
-              _slPageToken
-              (Just _slType)
-              _slOAuthToken
-              _slChannelType
-              _slRelevanceLanguage
-              (Just _slOrder)
               (Just _slMaxResults)
+              _slOnBehalfOfContentOwner
+              (Just _slOrder)
+              _slPageToken
+              _slPublishedAfter
               _slPublishedBefore
-              _slVideoType
+              _slQ
+              _slRegionCode
+              _slRelatedToVideoId
+              _slRelevanceLanguage
+              _slSafeSearch
+              _slTopicId
+              (Just _slType)
+              _slVideoCaption
+              _slVideoCategoryId
+              _slVideoDefinition
               _slVideoDimension
+              _slVideoDuration
+              _slVideoEmbeddable
+              _slVideoLicense
+              _slVideoSyndicated
+              _slVideoType
+              (Just _slPart)
+              _slQuotaUser
+              (Just _slPrettyPrint)
+              _slUserIP
               _slFields
+              _slKey
+              _slOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy SearchListResource)

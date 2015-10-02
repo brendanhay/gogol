@@ -51,15 +51,15 @@ type NotificationsListResource =
      "customer" :>
        Capture "customer" Text :>
          "notifications" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "language" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "language" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] Notifications
 
@@ -181,14 +181,14 @@ instance GoogleRequest NotificationsList' where
         type Rs NotificationsList' = Notifications
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u NotificationsList'{..}
-          = go _nlQuotaUser (Just _nlPrettyPrint) _nlUserIP
+          = go _nlLanguage _nlMaxResults _nlPageToken
               _nlCustomer
-              _nlKey
-              _nlLanguage
-              _nlPageToken
-              _nlOAuthToken
-              _nlMaxResults
+              _nlQuotaUser
+              (Just _nlPrettyPrint)
+              _nlUserIP
               _nlFields
+              _nlKey
+              _nlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

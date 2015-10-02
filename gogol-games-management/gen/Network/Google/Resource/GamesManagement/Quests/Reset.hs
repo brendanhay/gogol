@@ -53,9 +53,9 @@ type QuestsResetResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Resets all player progress on the quest with the given ID for the
@@ -150,11 +150,11 @@ instance GoogleRequest QuestsReset' where
         type Rs QuestsReset' = ()
         request = requestWithRoute defReq gamesManagementURL
         requestWithRoute r u QuestsReset'{..}
-          = go _qrQuotaUser (Just _qrPrettyPrint) _qrUserIP
+          = go _qrQuestId _qrQuotaUser (Just _qrPrettyPrint)
+              _qrUserIP
+              _qrFields
               _qrKey
               _qrOAuthToken
-              _qrQuestId
-              _qrFields
               (Just AltJSON)
           where go
                   = clientWithRoute

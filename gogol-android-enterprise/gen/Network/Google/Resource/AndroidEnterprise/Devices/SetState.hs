@@ -62,9 +62,9 @@ type DevicesSetStateResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] DeviceState :>
                                    Put '[JSON] DeviceState
@@ -199,14 +199,13 @@ instance GoogleRequest DevicesSetState' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u DevicesSetState'{..}
-          = go _dssQuotaUser (Just _dssPrettyPrint)
-              _dssEnterpriseId
+          = go _dssEnterpriseId _dssUserId _dssDeviceId
+              _dssQuotaUser
+              (Just _dssPrettyPrint)
               _dssUserIP
-              _dssUserId
-              _dssKey
-              _dssDeviceId
-              _dssOAuthToken
               _dssFields
+              _dssKey
+              _dssOAuthToken
               (Just AltJSON)
               _dssDeviceState
           where go

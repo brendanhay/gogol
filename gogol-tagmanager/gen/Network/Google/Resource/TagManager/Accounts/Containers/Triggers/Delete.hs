@@ -56,9 +56,9 @@ type AccountsContainersTriggersDeleteResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a GTM Trigger.
@@ -181,14 +181,13 @@ instance GoogleRequest
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersTriggersDelete'{..}
-          = go _actdQuotaUser (Just _actdPrettyPrint)
-              _actdContainerId
-              _actdTriggerId
+          = go _actdAccountId _actdContainerId _actdTriggerId
+              _actdQuotaUser
+              (Just _actdPrettyPrint)
               _actdUserIP
-              _actdAccountId
+              _actdFields
               _actdKey
               _actdOAuthToken
-              _actdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

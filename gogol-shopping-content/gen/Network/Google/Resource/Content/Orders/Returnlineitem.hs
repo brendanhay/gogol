@@ -54,9 +54,9 @@ type OrdersReturnlineitemResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] OrdersReturnLineItemRequest :>
                              Post '[JSON] OrdersReturnLineItemResponse
@@ -177,13 +177,12 @@ instance GoogleRequest OrdersReturnlineitem' where
              OrdersReturnLineItemResponse
         request = requestWithRoute defReq shoppingContentURL
         requestWithRoute r u OrdersReturnlineitem'{..}
-          = go _orrQuotaUser _orrMerchantId
+          = go _orrMerchantId _orrOrderId _orrQuotaUser
               (Just _orrPrettyPrint)
               _orrUserIP
+              _orrFields
               _orrKey
               _orrOAuthToken
-              _orrOrderId
-              _orrFields
               (Just AltJSON)
               _orrOrdersReturnLineItemRequest
           where go

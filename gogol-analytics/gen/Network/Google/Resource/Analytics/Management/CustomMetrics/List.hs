@@ -54,14 +54,14 @@ type ManagementCustomMetricsListResource =
            "webproperties" :>
              Capture "webPropertyId" Text :>
                "customMetrics" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "start-index" Int32 :>
-                             QueryParam "max-results" Int32 :>
-                               QueryParam "fields" Text :>
+                 QueryParam "max-results" Int32 :>
+                   QueryParam "start-index" Int32 :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] CustomMetrics
 
@@ -194,15 +194,14 @@ instance GoogleRequest ManagementCustomMetricsList'
         type Rs ManagementCustomMetricsList' = CustomMetrics
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementCustomMetricsList'{..}
-          = go _mcmlQuotaUser (Just _mcmlPrettyPrint)
+          = go _mcmlMaxResults _mcmlStartIndex _mcmlAccountId
               _mcmlWebPropertyId
+              _mcmlQuotaUser
+              (Just _mcmlPrettyPrint)
               _mcmlUserIP
-              _mcmlAccountId
+              _mcmlFields
               _mcmlKey
               _mcmlOAuthToken
-              _mcmlStartIndex
-              _mcmlMaxResults
-              _mcmlFields
               (Just AltJSON)
           where go
                   = clientWithRoute

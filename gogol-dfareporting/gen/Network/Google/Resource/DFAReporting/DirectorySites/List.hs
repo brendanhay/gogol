@@ -61,32 +61,31 @@ type DirectorySitesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "directorySites" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "searchString" Text :>
-                   QueryParam "acceptsInterstitialPlacements" Bool :>
-                     QueryParam "acceptsPublisherPaidPlacements" Bool :>
+           QueryParam "acceptsInStreamVideoPlacements" Bool :>
+             QueryParam "acceptsInterstitialPlacements" Bool :>
+               QueryParam "acceptsPublisherPaidPlacements" Bool :>
+                 QueryParam "active" Bool :>
+                   QueryParam "countryId" Int64 :>
+                     QueryParam "dfp_network_code" Text :>
                        QueryParams "ids" Int64 :>
-                         QueryParam "sortOrder"
-                           DfareportingDirectorySitesListSortOrder
-                           :>
-                           QueryParam "active" Bool :>
-                             QueryParam "key" Key :>
-                               QueryParam "countryId" Int64 :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "sortField"
-                                     DfareportingDirectorySitesListSortField
+                         QueryParam "maxResults" Int32 :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "parentId" Int64 :>
+                               QueryParam "searchString" Text :>
+                                 QueryParam "sortField"
+                                   DfareportingDirectorySitesListSortField
+                                   :>
+                                   QueryParam "sortOrder"
+                                     DfareportingDirectorySitesListSortOrder
                                      :>
-                                     QueryParam "acceptsInStreamVideoPlacements"
-                                       Bool
-                                       :>
-                                       QueryParam "oauth_token" OAuthToken :>
-                                         QueryParam "maxResults" Int32 :>
-                                           QueryParam "parentId" Int64 :>
-                                             QueryParam "dfp_network_code" Text
-                                               :>
-                                               QueryParam "fields" Text :>
+                                     QueryParam "quotaUser" Text :>
+                                       QueryParam "prettyPrint" Bool :>
+                                         QueryParam "userIp" Text :>
+                                           QueryParam "fields" Text :>
+                                             QueryParam "key" Key :>
+                                               QueryParam "oauth_token"
+                                                 OAuthToken
+                                                 :>
                                                  QueryParam "alt" AltJSON :>
                                                    Get '[JSON]
                                                      DirectorySitesListResponse
@@ -318,24 +317,26 @@ instance GoogleRequest DirectorySitesList' where
              DirectorySitesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u DirectorySitesList'{..}
-          = go _dslQuotaUser (Just _dslPrettyPrint) _dslUserIP
-              _dslSearchString
+          = go _dslAcceptsInStreamVideoPlacements
               _dslAcceptsInterstitialPlacements
               _dslAcceptsPublisherPaidPlacements
-              _dslIds
-              _dslProfileId
-              _dslSortOrder
               _dslActive
-              _dslKey
               _dslCountryId
-              _dslPageToken
-              _dslSortField
-              _dslAcceptsInStreamVideoPlacements
-              _dslOAuthToken
-              _dslMaxResults
-              _dslParentId
               _dslDfpNetworkCode
+              _dslIds
+              _dslMaxResults
+              _dslPageToken
+              _dslParentId
+              _dslSearchString
+              _dslSortField
+              _dslSortOrder
+              _dslProfileId
+              _dslQuotaUser
+              (Just _dslPrettyPrint)
+              _dslUserIP
               _dslFields
+              _dslKey
+              _dslOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

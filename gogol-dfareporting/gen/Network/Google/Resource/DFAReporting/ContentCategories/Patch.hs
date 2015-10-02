@@ -51,13 +51,13 @@ type ContentCategoriesPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "contentCategories" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "id" Int64 :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] ContentCategory :>
                              Patch '[JSON] ContentCategory
@@ -176,12 +176,12 @@ instance GoogleRequest ContentCategoriesPatch' where
         type Rs ContentCategoriesPatch' = ContentCategory
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ContentCategoriesPatch'{..}
-          = go _ccpQuotaUser (Just _ccpPrettyPrint) _ccpUserIP
-              _ccpProfileId
-              _ccpKey
-              (Just _ccpId)
-              _ccpOAuthToken
+          = go _ccpProfileId (Just _ccpId) _ccpQuotaUser
+              (Just _ccpPrettyPrint)
+              _ccpUserIP
               _ccpFields
+              _ccpKey
+              _ccpOAuthToken
               (Just AltJSON)
               _ccpContentCategory
           where go

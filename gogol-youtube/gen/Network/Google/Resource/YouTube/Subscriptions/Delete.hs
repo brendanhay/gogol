@@ -46,13 +46,13 @@ import           Network.Google.YouTube.Types
 -- 'SubscriptionsDelete'' request conforms to.
 type SubscriptionsDeleteResource =
      "subscriptions" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "id" Text :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+       QueryParam "id" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a subscription.
@@ -146,11 +146,11 @@ instance GoogleRequest SubscriptionsDelete' where
         type Rs SubscriptionsDelete' = ()
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u SubscriptionsDelete'{..}
-          = go _sdQuotaUser (Just _sdPrettyPrint) _sdUserIP
-              _sdKey
-              (Just _sdId)
-              _sdOAuthToken
+          = go (Just _sdId) _sdQuotaUser (Just _sdPrettyPrint)
+              _sdUserIP
               _sdFields
+              _sdKey
+              _sdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

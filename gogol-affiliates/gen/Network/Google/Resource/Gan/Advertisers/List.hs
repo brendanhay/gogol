@@ -57,21 +57,21 @@ type AdvertisersListResource =
      Capture "role" GanAdvertisersListRole :>
        Capture "roleId" Text :>
          "advertisers" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "relationshipStatus"
-                   GanAdvertisersListRelationshipStatus
-                   :>
+           QueryParam "advertiserCategory" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "minNinetyDayEpc" Double :>
+                 QueryParam "minPayoutRank" Int32 :>
                    QueryParam "minSevenDayEpc" Double :>
-                     QueryParam "minNinetyDayEpc" Double :>
-                       QueryParam "key" Key :>
-                         QueryParam "minPayoutRank" Int32 :>
-                           QueryParam "advertiserCategory" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "maxResults" Word32 :>
-                                   QueryParam "fields" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "relationshipStatus"
+                         GanAdvertisersListRelationshipStatus
+                         :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] Advertisers
 
@@ -254,19 +254,20 @@ instance GoogleRequest AdvertisersList' where
         type Rs AdvertisersList' = Advertisers
         request = requestWithRoute defReq affiliatesURL
         requestWithRoute r u AdvertisersList'{..}
-          = go _alQuotaUser (Just _alPrettyPrint) _alUserIP
-              _alRelationshipStatus
-              _alMinSevenDayEpc
-              _alRoleId
+          = go _alAdvertiserCategory _alMaxResults
               _alMinNinetyDayEpc
-              _alRole
-              _alKey
               _alMinPayoutRank
-              _alAdvertiserCategory
+              _alMinSevenDayEpc
               _alPageToken
-              _alOAuthToken
-              _alMaxResults
+              _alRelationshipStatus
+              _alRole
+              _alRoleId
+              _alQuotaUser
+              (Just _alPrettyPrint)
+              _alUserIP
               _alFields
+              _alKey
+              _alOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

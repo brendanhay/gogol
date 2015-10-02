@@ -50,17 +50,17 @@ import           Network.Google.Prelude
 -- 'TurnBasedMatchesList'' request conforms to.
 type TurnBasedMatchesListResource =
      "turnbasedmatches" :>
-       QueryParam "maxCompletedMatches" Int32 :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "includeMatchData" Bool :>
-                   QueryParam "language" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Int32 :>
-                           QueryParam "fields" Text :>
+       QueryParam "includeMatchData" Bool :>
+         QueryParam "language" Text :>
+           QueryParam "maxCompletedMatches" Int32 :>
+             QueryParam "maxResults" Int32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] TurnBasedMatchList
 
@@ -205,16 +205,16 @@ instance GoogleRequest TurnBasedMatchesList' where
         type Rs TurnBasedMatchesList' = TurnBasedMatchList
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u TurnBasedMatchesList'{..}
-          = go _tbmlMaxCompletedMatches _tbmlQuotaUser
+          = go _tbmlIncludeMatchData _tbmlLanguage
+              _tbmlMaxCompletedMatches
+              _tbmlMaxResults
+              _tbmlPageToken
+              _tbmlQuotaUser
               (Just _tbmlPrettyPrint)
               _tbmlUserIP
-              _tbmlKey
-              _tbmlIncludeMatchData
-              _tbmlLanguage
-              _tbmlPageToken
-              _tbmlOAuthToken
-              _tbmlMaxResults
               _tbmlFields
+              _tbmlKey
+              _tbmlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

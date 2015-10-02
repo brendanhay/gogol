@@ -56,29 +56,27 @@ import           Network.Google.YouTube.Types
 -- 'CommentThreadsList'' request conforms to.
 type CommentThreadsListResource =
      "commentThreads" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "part" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "moderationStatus"
-               YouTubeCommentThreadsListModerationStatus
-               :>
-               QueryParam "userIp" Text :>
-                 QueryParam "searchTerms" Text :>
-                   QueryParam "channelId" Text :>
-                     QueryParam "allThreadsRelatedToChannelId" Text :>
-                       QueryParam "videoId" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "id" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "order"
-                                   YouTubeCommentThreadsListOrder
-                                   :>
-                                   QueryParam "textFormat"
-                                     YouTubeCommentThreadsListTextFormat
-                                     :>
-                                     QueryParam "maxResults" Word32 :>
-                                       QueryParam "fields" Text :>
+       QueryParam "allThreadsRelatedToChannelId" Text :>
+         QueryParam "channelId" Text :>
+           QueryParam "id" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "moderationStatus"
+                 YouTubeCommentThreadsListModerationStatus
+                 :>
+                 QueryParam "order" YouTubeCommentThreadsListOrder :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "searchTerms" Text :>
+                       QueryParam "textFormat"
+                         YouTubeCommentThreadsListTextFormat
+                         :>
+                         QueryParam "videoId" Text :>
+                           QueryParam "part" Text :>
+                             QueryParam "quotaUser" Text :>
+                               QueryParam "prettyPrint" Bool :>
+                                 QueryParam "userIp" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "key" Key :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] CommentThreadListResponse
 
@@ -290,22 +288,22 @@ instance GoogleRequest CommentThreadsList' where
              CommentThreadListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u CommentThreadsList'{..}
-          = go _ctlQuotaUser (Just _ctlPart)
-              (Just _ctlPrettyPrint)
-              (Just _ctlModerationStatus)
-              _ctlUserIP
-              _ctlSearchTerms
-              _ctlChannelId
-              _ctlAllThreadsRelatedToChannelId
-              _ctlVideoId
-              _ctlKey
+          = go _ctlAllThreadsRelatedToChannelId _ctlChannelId
               _ctlId
-              _ctlPageToken
-              _ctlOAuthToken
-              (Just _ctlOrder)
-              (Just _ctlTextFormat)
               (Just _ctlMaxResults)
+              (Just _ctlModerationStatus)
+              (Just _ctlOrder)
+              _ctlPageToken
+              _ctlSearchTerms
+              (Just _ctlTextFormat)
+              _ctlVideoId
+              (Just _ctlPart)
+              _ctlQuotaUser
+              (Just _ctlPrettyPrint)
+              _ctlUserIP
               _ctlFields
+              _ctlKey
+              _ctlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

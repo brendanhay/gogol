@@ -59,20 +59,20 @@ type ActivitiesListResource =
          Capture "userKey" Text :>
            "applications" :>
              Capture "applicationName" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "startTime" Text :>
-                     QueryParam "userIp" Text :>
+               QueryParam "actorIpAddress" Text :>
+                 QueryParam "customerId" Text :>
+                   QueryParam "endTime" Text :>
+                     QueryParam "eventName" Text :>
                        QueryParam "filters" Text :>
-                         QueryParam "customerId" Text :>
-                           QueryParam "actorIpAddress" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "endTime" Text :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "oauth_token" OAuthToken :>
-                                     QueryParam "eventName" Text :>
-                                       QueryParam "maxResults" Int32 :>
-                                         QueryParam "fields" Text :>
+                         QueryParam "maxResults" Int32 :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "startTime" Text :>
+                               QueryParam "quotaUser" Text :>
+                                 QueryParam "prettyPrint" Bool :>
+                                   QueryParam "userIp" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "key" Key :>
+                                         QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
                                              Get '[JSON] Activities
 
@@ -254,20 +254,20 @@ instance GoogleRequest ActivitiesList' where
         type Rs ActivitiesList' = Activities
         request = requestWithRoute defReq adminReportsURL
         requestWithRoute r u ActivitiesList'{..}
-          = go _alQuotaUser (Just _alPrettyPrint) _alStartTime
-              _alUserIP
-              _alFilters
-              _alCustomerId
-              _alActorIPAddress
-              _alKey
-              _alEndTime
-              _alApplicationName
-              _alPageToken
-              _alOAuthToken
+          = go _alActorIPAddress _alCustomerId _alEndTime
               _alEventName
-              _alUserKey
+              _alFilters
               _alMaxResults
+              _alPageToken
+              _alStartTime
+              _alUserKey
+              _alApplicationName
+              _alQuotaUser
+              (Just _alPrettyPrint)
+              _alUserIP
               _alFields
+              _alKey
+              _alOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

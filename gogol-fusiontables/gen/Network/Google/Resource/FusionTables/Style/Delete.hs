@@ -53,9 +53,9 @@ type StyleDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a style.
@@ -158,12 +158,12 @@ instance GoogleRequest StyleDelete' where
         type Rs StyleDelete' = ()
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u StyleDelete'{..}
-          = go _sdQuotaUser (Just _sdPrettyPrint) _sdUserIP
-              _sdKey
-              _sdStyleId
-              _sdOAuthToken
-              _sdTableId
+          = go _sdTableId _sdStyleId _sdQuotaUser
+              (Just _sdPrettyPrint)
+              _sdUserIP
               _sdFields
+              _sdKey
+              _sdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -55,13 +55,13 @@ type AccountsContainersVersionsPublishResource =
              "versions" :>
                Capture "containerVersionId" Text :>
                  "publish" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "fingerprint" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
+                   QueryParam "fingerprint" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Post '[JSON] PublishContainerVersionResponse
 
@@ -197,15 +197,14 @@ instance GoogleRequest
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersVersionsPublish'{..}
-          = go _acvpQuotaUser (Just _acvpPrettyPrint)
-              _acvpContainerId
-              _acvpUserIP
-              _acvpFingerprint
+          = go _acvpFingerprint _acvpAccountId _acvpContainerId
               _acvpContainerVersionId
-              _acvpAccountId
+              _acvpQuotaUser
+              (Just _acvpPrettyPrint)
+              _acvpUserIP
+              _acvpFields
               _acvpKey
               _acvpOAuthToken
-              _acvpFields
               (Just AltJSON)
           where go
                   = clientWithRoute

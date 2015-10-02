@@ -53,13 +53,13 @@ type MomentsInsertResource =
        Capture "userId" Text :>
          "moments" :>
            Capture "collection" PlusMomentsInsertCollection :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "debug" Bool :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+             QueryParam "debug" Bool :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Moment :> Post '[JSON] Moment
 
@@ -181,13 +181,12 @@ instance GoogleRequest MomentsInsert' where
         type Rs MomentsInsert' = Moment
         request = requestWithRoute defReq plusURL
         requestWithRoute r u MomentsInsert'{..}
-          = go _miQuotaUser (Just _miPrettyPrint) _miUserIP
-              _miCollection
-              _miDebug
-              _miUserId
+          = go _miDebug _miUserId _miCollection _miQuotaUser
+              (Just _miPrettyPrint)
+              _miUserIP
+              _miFields
               _miKey
               _miOAuthToken
-              _miFields
               (Just AltJSON)
               _miMoment
           where go

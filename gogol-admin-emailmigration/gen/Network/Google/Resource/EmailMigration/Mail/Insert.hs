@@ -52,9 +52,9 @@ type MailInsertResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        MultipartRelated '[JSON] MailItem Body :>
                          Post '[JSON] ()
@@ -168,12 +168,12 @@ instance GoogleRequest MailInsert' where
         request
           = requestWithRoute defReq adminEmailMigrationURL
         requestWithRoute r u MailInsert'{..}
-          = go _miQuotaUser (Just _miPrettyPrint) _miUserIP
-              _miMedia
+          = go _miMedia _miUserKey _miQuotaUser
+              (Just _miPrettyPrint)
+              _miUserIP
+              _miFields
               _miKey
               _miOAuthToken
-              _miUserKey
-              _miFields
               (Just AltJSON)
               _miMailItem
           where go

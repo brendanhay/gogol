@@ -52,16 +52,16 @@ type LayersListResource =
      "volumes" :>
        Capture "volumeId" Text :>
          "layersummary" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "contentVersion" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "source" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
+           QueryParam "contentVersion" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "source" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] Layersummaries
 
@@ -191,15 +191,15 @@ instance GoogleRequest LayersList' where
         type Rs LayersList' = Layersummaries
         request = requestWithRoute defReq booksURL
         requestWithRoute r u LayersList'{..}
-          = go _llQuotaUser (Just _llPrettyPrint) _llUserIP
-              _llContentVersion
-              _llKey
-              _llVolumeId
+          = go _llContentVersion _llMaxResults _llPageToken
               _llSource
-              _llPageToken
-              _llOAuthToken
-              _llMaxResults
+              _llVolumeId
+              _llQuotaUser
+              (Just _llPrettyPrint)
+              _llUserIP
               _llFields
+              _llKey
+              _llOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy LayersListResource)

@@ -52,9 +52,9 @@ type ReportsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Report :> Post '[JSON] Report
 
@@ -157,11 +157,11 @@ instance GoogleRequest ReportsInsert' where
         type Rs ReportsInsert' = Report
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ReportsInsert'{..}
-          = go _riQuotaUser (Just _riPrettyPrint) _riUserIP
-              _riProfileId
+          = go _riProfileId _riQuotaUser (Just _riPrettyPrint)
+              _riUserIP
+              _riFields
               _riKey
               _riOAuthToken
-              _riFields
               (Just AltJSON)
               _riReport
           where go

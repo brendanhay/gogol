@@ -55,9 +55,9 @@ type TargetVPNGatewaysDeleteResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified TargetVpnGateway resource.
@@ -175,14 +175,13 @@ instance GoogleRequest TargetVPNGatewaysDelete' where
         type Rs TargetVPNGatewaysDelete' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u TargetVPNGatewaysDelete'{..}
-          = go _tvgdQuotaUser (Just _tvgdPrettyPrint)
-              _tvgdProject
+          = go _tvgdProject _tvgdRegion _tvgdTargetVPNGateway
+              _tvgdQuotaUser
+              (Just _tvgdPrettyPrint)
               _tvgdUserIP
-              _tvgdTargetVPNGateway
-              _tvgdKey
-              _tvgdRegion
-              _tvgdOAuthToken
               _tvgdFields
+              _tvgdKey
+              _tvgdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

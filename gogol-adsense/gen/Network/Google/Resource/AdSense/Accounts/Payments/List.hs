@@ -51,9 +51,9 @@ type AccountsPaymentsListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Payments
 
 -- | List the payments for the specified AdSense account.
@@ -149,11 +149,12 @@ instance GoogleRequest AccountsPaymentsList' where
         type Rs AccountsPaymentsList' = Payments
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u AccountsPaymentsList'{..}
-          = go _aplQuotaUser (Just _aplPrettyPrint) _aplUserIP
-              _aplAccountId
+          = go _aplAccountId _aplQuotaUser
+              (Just _aplPrettyPrint)
+              _aplUserIP
+              _aplFields
               _aplKey
               _aplOAuthToken
-              _aplFields
               (Just AltJSON)
           where go
                   = clientWithRoute

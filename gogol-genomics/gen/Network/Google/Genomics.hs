@@ -599,15 +599,15 @@ module Network.Google.Genomics
     -- ** Job
     , Job
     , job
-    , jobDetailedStatus
-    , jobStatus
-    , jobCreated
-    , jobProjectNumber
-    , jobWarnings
-    , jobImportedIds
-    , jobId
-    , jobErrors
-    , jobRequest
+    , jDetailedStatus
+    , jStatus
+    , jCreated
+    , jProjectNumber
+    , jWarnings
+    , jImportedIds
+    , jId
+    , jErrors
+    , jRequest
 
     -- ** AnnotationType
     , AnnotationType (..)

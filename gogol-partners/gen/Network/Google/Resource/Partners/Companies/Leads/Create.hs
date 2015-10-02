@@ -57,17 +57,17 @@ type CompaniesLeadsCreateResource =
          Capture "companyId" Text :>
            "leads" :>
              QueryParam "$.xgafv" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "upload_protocol" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "bearer_token" Text :>
+                   QueryParam "callback" Text :>
                      QueryParam "pp" Bool :>
-                       QueryParam "access_token" Text :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "callback" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        ReqBody '[JSON] CreateLeadRequest :>
                                          Post '[JSON] CreateLeadResponse
@@ -231,17 +231,17 @@ instance GoogleRequest CompaniesLeadsCreate' where
         type Rs CompaniesLeadsCreate' = CreateLeadResponse
         request = requestWithRoute defReq partnersURL
         requestWithRoute r u CompaniesLeadsCreate'{..}
-          = go _clcXgafv _clcQuotaUser (Just _clcPrettyPrint)
+          = go _clcXgafv _clcAccessToken _clcBearerToken
+              _clcCallback
+              (Just _clcPp)
+              _clcUploadType
               _clcUploadProtocol
               _clcCompanyId
-              (Just _clcPp)
-              _clcAccessToken
-              _clcUploadType
-              _clcBearerToken
+              _clcQuotaUser
+              (Just _clcPrettyPrint)
+              _clcFields
               _clcKey
               _clcOAuthToken
-              _clcFields
-              _clcCallback
               (Just AltJSON)
               _clcCreateLeadRequest
           where go

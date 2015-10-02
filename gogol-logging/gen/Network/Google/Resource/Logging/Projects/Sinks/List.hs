@@ -56,17 +56,17 @@ type ProjectsSinksListResource =
          Capture "projectsId" Text :>
            "sinks" :>
              QueryParam "$.xgafv" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "upload_protocol" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "bearer_token" Text :>
+                   QueryParam "callback" Text :>
                      QueryParam "pp" Bool :>
-                       QueryParam "access_token" Text :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "callback" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] ListSinksResponse
 
@@ -219,17 +219,17 @@ instance GoogleRequest ProjectsSinksList' where
         type Rs ProjectsSinksList' = ListSinksResponse
         request = requestWithRoute defReq loggingURL
         requestWithRoute r u ProjectsSinksList'{..}
-          = go _pslXgafv _pslQuotaUser (Just _pslPrettyPrint)
-              _pslUploadProtocol
+          = go _pslXgafv _pslAccessToken _pslBearerToken
+              _pslCallback
               (Just _pslPp)
-              _pslAccessToken
               _pslUploadType
-              _pslBearerToken
+              _pslUploadProtocol
+              _pslProjectsId
+              _pslQuotaUser
+              (Just _pslPrettyPrint)
+              _pslFields
               _pslKey
               _pslOAuthToken
-              _pslProjectsId
-              _pslFields
-              _pslCallback
               (Just AltJSON)
           where go
                   = clientWithRoute

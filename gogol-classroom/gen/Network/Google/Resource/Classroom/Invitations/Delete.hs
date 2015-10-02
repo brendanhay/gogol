@@ -59,17 +59,17 @@ type InvitationsDeleteResource =
        "invitations" :>
          Capture "id" Text :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
+             QueryParam "access_token" Text :>
+               QueryParam "bearer_token" Text :>
+                 QueryParam "callback" Text :>
                    QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Delete '[JSON] Empty
 
@@ -221,17 +221,17 @@ instance GoogleRequest InvitationsDelete' where
         type Rs InvitationsDelete' = Empty
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u InvitationsDelete'{..}
-          = go _idXgafv _idQuotaUser (Just _idPrettyPrint)
-              _idUploadProtocol
-              (Just _idPp)
-              _idAccessToken
-              _idUploadType
-              _idBearerToken
-              _idKey
-              _idId
-              _idOAuthToken
-              _idFields
+          = go _idXgafv _idAccessToken _idBearerToken
               _idCallback
+              (Just _idPp)
+              _idUploadType
+              _idUploadProtocol
+              _idId
+              _idQuotaUser
+              (Just _idPrettyPrint)
+              _idFields
+              _idKey
+              _idOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

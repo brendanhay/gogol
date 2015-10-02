@@ -51,9 +51,9 @@ type VariantsetsSearchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] SearchVariantSetsRequest :>
                          Post '[JSON] SearchVariantSetsResponse
@@ -150,9 +150,10 @@ instance GoogleRequest VariantsetsSearch' where
              SearchVariantSetsResponse
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u VariantsetsSearch'{..}
-          = go _vQuotaUser (Just _vPrettyPrint) _vUserIP _vKey
-              _vOAuthToken
+          = go _vQuotaUser (Just _vPrettyPrint) _vUserIP
               _vFields
+              _vKey
+              _vOAuthToken
               (Just AltJSON)
               _vSearchVariantSetsRequest
           where go

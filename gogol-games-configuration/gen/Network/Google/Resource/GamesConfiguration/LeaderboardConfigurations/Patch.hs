@@ -52,9 +52,9 @@ type LeaderboardConfigurationsPatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] LeaderboardConfiguration :>
                          Patch '[JSON] LeaderboardConfiguration
@@ -170,11 +170,12 @@ instance GoogleRequest
           = requestWithRoute defReq gamesConfigurationURL
         requestWithRoute r u
           LeaderboardConfigurationsPatch'{..}
-          = go _lcpQuotaUser (Just _lcpPrettyPrint) _lcpUserIP
-              _lcpLeaderboardId
+          = go _lcpLeaderboardId _lcpQuotaUser
+              (Just _lcpPrettyPrint)
+              _lcpUserIP
+              _lcpFields
               _lcpKey
               _lcpOAuthToken
-              _lcpFields
               (Just AltJSON)
               _lcpLeaderboardConfiguration
           where go

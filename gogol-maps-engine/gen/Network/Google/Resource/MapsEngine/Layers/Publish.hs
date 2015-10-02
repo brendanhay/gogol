@@ -49,13 +49,13 @@ type LayersPublishResource =
      "layers" :>
        Capture "id" Text :>
          "publish" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "force" Bool :>
+           QueryParam "force" Bool :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Post '[JSON] PublishResponse
 
@@ -157,12 +157,11 @@ instance GoogleRequest LayersPublish' where
         type Rs LayersPublish' = PublishResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u LayersPublish'{..}
-          = go _lQuotaUser (Just _lPrettyPrint) _lForce
+          = go _lForce _lId _lQuotaUser (Just _lPrettyPrint)
               _lUserIP
-              _lKey
-              _lId
-              _lOAuthToken
               _lFields
+              _lKey
+              _lOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

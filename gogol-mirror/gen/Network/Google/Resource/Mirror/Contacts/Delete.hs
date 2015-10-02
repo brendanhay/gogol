@@ -50,9 +50,9 @@ type ContactsDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a contact.
@@ -144,11 +144,11 @@ instance GoogleRequest ContactsDelete' where
         type Rs ContactsDelete' = ()
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u ContactsDelete'{..}
-          = go _cdQuotaUser (Just _cdPrettyPrint) _cdUserIP
-              _cdKey
-              _cdId
-              _cdOAuthToken
+          = go _cdId _cdQuotaUser (Just _cdPrettyPrint)
+              _cdUserIP
               _cdFields
+              _cdKey
+              _cdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

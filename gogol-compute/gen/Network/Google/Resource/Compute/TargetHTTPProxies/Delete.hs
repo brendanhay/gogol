@@ -53,9 +53,9 @@ type TargetHTTPProxiesDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified TargetHttpProxy resource.
@@ -167,13 +167,13 @@ instance GoogleRequest TargetHTTPProxiesDelete' where
         type Rs TargetHTTPProxiesDelete' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u TargetHTTPProxiesDelete'{..}
-          = go _thttppdQuotaUser (Just _thttppdPrettyPrint)
-              _thttppdProject
+          = go _thttppdProject _thttppdTargetHTTPProxy
+              _thttppdQuotaUser
+              (Just _thttppdPrettyPrint)
               _thttppdUserIP
-              _thttppdKey
-              _thttppdTargetHTTPProxy
-              _thttppdOAuthToken
               _thttppdFields
+              _thttppdKey
+              _thttppdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

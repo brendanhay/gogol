@@ -61,9 +61,9 @@ type InstallsDeleteResource =
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Requests to remove an app from a device. A call to get or list will
@@ -190,15 +190,14 @@ instance GoogleRequest InstallsDelete' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u InstallsDelete'{..}
-          = go _idQuotaUser (Just _idPrettyPrint)
-              _idEnterpriseId
-              _idUserIP
-              _idUserId
+          = go _idEnterpriseId _idUserId _idDeviceId
               _idInstallId
-              _idKey
-              _idDeviceId
-              _idOAuthToken
+              _idQuotaUser
+              (Just _idPrettyPrint)
+              _idUserIP
               _idFields
+              _idKey
+              _idOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

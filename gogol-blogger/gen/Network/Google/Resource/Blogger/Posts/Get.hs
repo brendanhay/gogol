@@ -55,15 +55,15 @@ type PostsGetResource =
          "posts" :>
            Capture "postId" Text :>
              QueryParam "fetchBody" Bool :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fetchImages" Bool :>
-                       QueryParam "maxComments" Word32 :>
-                         QueryParam "key" Key :>
-                           QueryParam "view" BloggerPostsGetView :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
+               QueryParam "fetchImages" Bool :>
+                 QueryParam "maxComments" Word32 :>
+                   QueryParam "view" BloggerPostsGetView :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :> Get '[JSON] Post
 
 -- | Get a post by ID.
@@ -204,17 +204,17 @@ instance GoogleRequest PostsGet' where
         type Rs PostsGet' = Post
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PostsGet'{..}
-          = go (Just _pgFetchBody) _pgQuotaUser
+          = go (Just _pgFetchBody) _pgFetchImages
+              _pgMaxComments
+              _pgView
+              _pgBlogId
+              _pgPostId
+              _pgQuotaUser
               (Just _pgPrettyPrint)
               _pgUserIP
-              _pgFetchImages
-              _pgBlogId
-              _pgMaxComments
-              _pgKey
-              _pgView
-              _pgPostId
-              _pgOAuthToken
               _pgFields
+              _pgKey
+              _pgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy PostsGetResource) r

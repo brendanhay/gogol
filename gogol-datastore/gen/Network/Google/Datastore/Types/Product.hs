@@ -1366,32 +1366,31 @@ instance ToJSON KeyPathElement where
 --
 -- /See:/ 'key' smart constructor.
 data Key = Key
-    { _keyPartitionId :: !(Maybe PartitionId)
-    , _keyPath        :: !(Maybe [KeyPathElement])
+    { _kPartitionId :: !(Maybe PartitionId)
+    , _kPath        :: !(Maybe [KeyPathElement])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Key' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'keyPartitionId'
+-- * 'kPartitionId'
 --
--- * 'keyPath'
+-- * 'kPath'
 key
     :: Key
 key =
     Key
-    { _keyPartitionId = Nothing
-    , _keyPath = Nothing
+    { _kPartitionId = Nothing
+    , _kPath = Nothing
     }
 
 -- | Entities are partitioned into subsets, currently identified by a dataset
 -- (usually implicitly specified by the project) and namespace ID. Queries
 -- are scoped to a single partition.
-keyPartitionId :: Lens' Key (Maybe PartitionId)
-keyPartitionId
-  = lens _keyPartitionId
-      (\ s a -> s{_keyPartitionId = a})
+kPartitionId :: Lens' Key (Maybe PartitionId)
+kPartitionId
+  = lens _kPartitionId (\ s a -> s{_kPartitionId = a})
 
 -- | The entity path. An entity path consists of one or more elements
 -- composed of a kind and a string or numerical identifier, which identify
@@ -1404,10 +1403,10 @@ keyPartitionId
 -- in some documented cases, the identifier in the last path element (for
 -- the entity) itself may be omitted. A path can never be empty. The path
 -- can have at most 100 elements.
-keyPath :: Lens' Key [KeyPathElement]
-keyPath
-  = lens _keyPath (\ s a -> s{_keyPath = a}) . _Default
-      . _Coerce
+kPath :: Lens' Key [KeyPathElement]
+kPath
+  = lens _kPath (\ s a -> s{_kPath = a}) . _Default .
+      _Coerce
 
 instance FromJSON Key where
         parseJSON
@@ -1420,8 +1419,8 @@ instance ToJSON Key where
         toJSON Key{..}
           = object
               (catMaybes
-                 [("partitionId" .=) <$> _keyPartitionId,
-                  ("path" .=) <$> _keyPath])
+                 [("partitionId" .=) <$> _kPartitionId,
+                  ("path" .=) <$> _kPath])
 
 -- | A filter on a specific property.
 --

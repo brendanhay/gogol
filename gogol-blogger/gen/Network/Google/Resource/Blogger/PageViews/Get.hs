@@ -49,13 +49,13 @@ type PageViewsGetResource =
      "blogs" :>
        Capture "blogId" Text :>
          "pageviews" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParams "range" BloggerPageViewsGetRange :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParams "range" BloggerPageViewsGetRange :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Pageviews
 
 -- | Retrieve pageview stats for a Blog.
@@ -158,12 +158,12 @@ instance GoogleRequest PageViewsGet' where
         type Rs PageViewsGet' = Pageviews
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PageViewsGet'{..}
-          = go _pvgQuotaUser (Just _pvgPrettyPrint) _pvgUserIP
-              _pvgBlogId
-              _pvgKey
-              _pvgRange
-              _pvgOAuthToken
+          = go _pvgRange _pvgBlogId _pvgQuotaUser
+              (Just _pvgPrettyPrint)
+              _pvgUserIP
               _pvgFields
+              _pvgKey
+              _pvgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

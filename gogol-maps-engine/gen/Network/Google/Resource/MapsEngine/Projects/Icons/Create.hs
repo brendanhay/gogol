@@ -53,9 +53,9 @@ type ProjectsIconsCreateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          MultipartRelated '[JSON] Icon Body :>
                            Post '[JSON] Icon
@@ -170,12 +170,12 @@ instance GoogleRequest ProjectsIconsCreate' where
         type Rs ProjectsIconsCreate' = Icon
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u ProjectsIconsCreate'{..}
-          = go _picQuotaUser (Just _picPrettyPrint) _picUserIP
-              _picMedia
-              _picKey
-              _picProjectId
-              _picOAuthToken
+          = go _picMedia _picProjectId _picQuotaUser
+              (Just _picPrettyPrint)
+              _picUserIP
               _picFields
+              _picKey
+              _picOAuthToken
               (Just AltJSON)
               _picIcon
           where go

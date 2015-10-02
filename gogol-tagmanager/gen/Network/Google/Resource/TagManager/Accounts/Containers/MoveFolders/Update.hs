@@ -56,15 +56,15 @@ type AccountsContainersMoveFoldersUpdateResource =
            Capture "containerId" Text :>
              "move_folders" :>
                Capture "folderId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParams "triggerId" Text :>
-                       QueryParam "userIp" Text :>
-                         QueryParams "variableId" Text :>
-                           QueryParams "tagId" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "fields" Text :>
+                 QueryParams "tagId" Text :>
+                   QueryParams "triggerId" Text :>
+                     QueryParams "variableId" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :> Put '[JSON] ()
 
 -- | Moves entities to a GTM Folder.
@@ -216,17 +216,16 @@ instance GoogleRequest
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersMoveFoldersUpdate'{..}
-          = go _acmfuQuotaUser (Just _acmfuPrettyPrint)
-              _acmfuContainerId
-              _acmfuTriggerId
-              _acmfuUserIP
-              _acmfuVariableId
-              _acmfuFolderId
+          = go _acmfuTagId _acmfuTriggerId _acmfuVariableId
               _acmfuAccountId
-              _acmfuTagId
+              _acmfuContainerId
+              _acmfuFolderId
+              _acmfuQuotaUser
+              (Just _acmfuPrettyPrint)
+              _acmfuUserIP
+              _acmfuFields
               _acmfuKey
               _acmfuOAuthToken
-              _acmfuFields
               (Just AltJSON)
           where go
                   = clientWithRoute

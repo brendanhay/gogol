@@ -52,9 +52,9 @@ type ColumnInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Column :> Post '[JSON] Column
 
@@ -157,11 +157,11 @@ instance GoogleRequest ColumnInsert' where
         type Rs ColumnInsert' = Column
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u ColumnInsert'{..}
-          = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIP
+          = go _ciTableId _ciQuotaUser (Just _ciPrettyPrint)
+              _ciUserIP
+              _ciFields
               _ciKey
               _ciOAuthToken
-              _ciTableId
-              _ciFields
               (Just AltJSON)
               _ciColumn
           where go

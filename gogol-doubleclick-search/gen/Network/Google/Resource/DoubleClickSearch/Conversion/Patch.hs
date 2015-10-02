@@ -54,19 +54,19 @@ import           Network.Google.Prelude
 -- 'ConversionPatch'' request conforms to.
 type ConversionPatchResource =
      "conversion" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "engineAccountId" Int64 :>
-             QueryParam "agencyId" Int64 :>
-               QueryParam "userIp" Text :>
-                 QueryParam "advertiserId" Int64 :>
-                   QueryParam "endDate" Int32 :>
-                     QueryParam "startDate" Int32 :>
-                       QueryParam "key" Key :>
-                         QueryParam "startRow" Word32 :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "rowCount" Int32 :>
-                               QueryParam "fields" Text :>
+       QueryParam "advertiserId" Int64 :>
+         QueryParam "agencyId" Int64 :>
+           QueryParam "endDate" Int32 :>
+             QueryParam "engineAccountId" Int64 :>
+               QueryParam "rowCount" Int32 :>
+                 QueryParam "startDate" Int32 :>
+                   QueryParam "startRow" Word32 :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] ConversionList :>
                                      Patch '[JSON] ConversionList
@@ -238,18 +238,18 @@ instance GoogleRequest ConversionPatch' where
         request
           = requestWithRoute defReq doubleClickSearchURL
         requestWithRoute r u ConversionPatch'{..}
-          = go _cpQuotaUser (Just _cpPrettyPrint)
-              (Just _cpEngineAccountId)
-              (Just _cpAgencyId)
-              _cpUserIP
-              (Just _cpAdvertiserId)
+          = go (Just _cpAdvertiserId) (Just _cpAgencyId)
               (Just _cpEndDate)
-              (Just _cpStartDate)
-              _cpKey
-              (Just _cpStartRow)
-              _cpOAuthToken
+              (Just _cpEngineAccountId)
               (Just _cpRowCount)
+              (Just _cpStartDate)
+              (Just _cpStartRow)
+              _cpQuotaUser
+              (Just _cpPrettyPrint)
+              _cpUserIP
               _cpFields
+              _cpKey
+              _cpOAuthToken
               (Just AltJSON)
               _cpConversionList
           where go

@@ -79,7 +79,7 @@ instance ToJSON WmxSitemapContent where
 -- | Number of errors per day for a specific error type (defined by platform
 -- and category).
 --
--- /See:/ 'uRLCrawlErrorCountsPerType' smart constructor.
+-- /See:/ 'urlCrawlErrorCountsPerType' smart constructor.
 data URLCrawlErrorCountsPerType = URLCrawlErrorCountsPerType
     { _ucecptPlatform :: !(Maybe Text)
     , _ucecptEntries  :: !(Maybe [URLCrawlErrorCount])
@@ -95,9 +95,9 @@ data URLCrawlErrorCountsPerType = URLCrawlErrorCountsPerType
 -- * 'ucecptEntries'
 --
 -- * 'ucecptCategory'
-uRLCrawlErrorCountsPerType
+urlCrawlErrorCountsPerType
     :: URLCrawlErrorCountsPerType
-uRLCrawlErrorCountsPerType =
+urlCrawlErrorCountsPerType =
     URLCrawlErrorCountsPerType
     { _ucecptPlatform = Nothing
     , _ucecptEntries = Nothing
@@ -142,7 +142,7 @@ instance ToJSON URLCrawlErrorCountsPerType where
                   ("category" .=) <$> _ucecptCategory])
 
 --
--- /See:/ 'aPIdimensionFilterGroup' smart constructor.
+-- /See:/ 'apidimensionFilterGroup' smart constructor.
 data APIdimensionFilterGroup = APIdimensionFilterGroup
     { _afgFilters   :: !(Maybe [APIdimensionFilter])
     , _afgGroupType :: !(Maybe Text)
@@ -155,9 +155,9 @@ data APIdimensionFilterGroup = APIdimensionFilterGroup
 -- * 'afgFilters'
 --
 -- * 'afgGroupType'
-aPIdimensionFilterGroup
+apidimensionFilterGroup
     :: APIdimensionFilterGroup
-aPIdimensionFilterGroup =
+apidimensionFilterGroup =
     APIdimensionFilterGroup
     { _afgFilters = Nothing
     , _afgGroupType = Nothing
@@ -189,7 +189,7 @@ instance ToJSON APIdimensionFilterGroup where
 
 -- | Additional details about the URL, set only when calling get().
 --
--- /See:/ 'uRLSampleDetails' smart constructor.
+-- /See:/ 'urlSampleDetails' smart constructor.
 data URLSampleDetails = URLSampleDetails
     { _usdLinkedFromURLs     :: !(Maybe [Text])
     , _usdContainingSitemaps :: !(Maybe [Text])
@@ -202,9 +202,9 @@ data URLSampleDetails = URLSampleDetails
 -- * 'usdLinkedFromURLs'
 --
 -- * 'usdContainingSitemaps'
-uRLSampleDetails
+urlSampleDetails
     :: URLSampleDetails
-uRLSampleDetails =
+urlSampleDetails =
     URLSampleDetails
     { _usdLinkedFromURLs = Nothing
     , _usdContainingSitemaps = Nothing
@@ -243,7 +243,7 @@ instance ToJSON URLSampleDetails where
                     _usdContainingSitemaps])
 
 --
--- /See:/ 'aPIdataRow' smart constructor.
+-- /See:/ 'apidataRow' smart constructor.
 data APIdataRow = APIdataRow
     { _arImpressions :: !(Maybe Double)
     , _arKeys        :: !(Maybe [Text])
@@ -265,9 +265,9 @@ data APIdataRow = APIdataRow
 -- * 'arClicks'
 --
 -- * 'arPosition'
-aPIdataRow
+apidataRow
     :: APIdataRow
-aPIdataRow =
+apidataRow =
     APIdataRow
     { _arImpressions = Nothing
     , _arKeys = Nothing
@@ -316,7 +316,7 @@ instance ToJSON APIdataRow where
                   ("position" .=) <$> _arPosition])
 
 --
--- /See:/ 'aPIdimensionFilter' smart constructor.
+-- /See:/ 'apidimensionFilter' smart constructor.
 data APIdimensionFilter = APIdimensionFilter
     { _afOperator   :: !(Maybe Text)
     , _afDimension  :: !(Maybe Text)
@@ -332,9 +332,9 @@ data APIdimensionFilter = APIdimensionFilter
 -- * 'afDimension'
 --
 -- * 'afExpression'
-aPIdimensionFilter
+apidimensionFilter
     :: APIdimensionFilter
-aPIdimensionFilter =
+apidimensionFilter =
     APIdimensionFilter
     { _afOperator = Nothing
     , _afDimension = Nothing
@@ -371,7 +371,7 @@ instance ToJSON APIdimensionFilter where
 
 -- | An entry in a URL crawl errors time series.
 --
--- /See:/ 'uRLCrawlErrorCount' smart constructor.
+-- /See:/ 'urlCrawlErrorCount' smart constructor.
 data URLCrawlErrorCount = URLCrawlErrorCount
     { _ucecCount     :: !(Maybe Int64)
     , _ucecTimestamp :: !(Maybe UTCTime)
@@ -384,9 +384,9 @@ data URLCrawlErrorCount = URLCrawlErrorCount
 -- * 'ucecCount'
 --
 -- * 'ucecTimestamp'
-uRLCrawlErrorCount
+urlCrawlErrorCount
     :: URLCrawlErrorCount
-uRLCrawlErrorCount =
+urlCrawlErrorCount =
     URLCrawlErrorCount
     { _ucecCount = Nothing
     , _ucecTimestamp = Nothing
@@ -474,7 +474,7 @@ instance ToJSON SearchAnalyticsQueryResponse where
 
 -- | List of crawl error samples.
 --
--- /See:/ 'uRLCrawlErrorsSamplesListResponse' smart constructor.
+-- /See:/ 'urlCrawlErrorsSamplesListResponse' smart constructor.
 newtype URLCrawlErrorsSamplesListResponse = URLCrawlErrorsSamplesListResponse
     { _uceslrURLCrawlErrorSample :: Maybe [URLCrawlErrorsSample]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -484,9 +484,9 @@ newtype URLCrawlErrorsSamplesListResponse = URLCrawlErrorsSamplesListResponse
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'uceslrURLCrawlErrorSample'
-uRLCrawlErrorsSamplesListResponse
+urlCrawlErrorsSamplesListResponse
     :: URLCrawlErrorsSamplesListResponse
-uRLCrawlErrorsSamplesListResponse =
+urlCrawlErrorsSamplesListResponse =
     URLCrawlErrorsSamplesListResponse
     { _uceslrURLCrawlErrorSample = Nothing
     }
@@ -518,7 +518,7 @@ instance ToJSON URLCrawlErrorsSamplesListResponse
 -- | A time series of the number of URL crawl errors per error category and
 -- platform.
 --
--- /See:/ 'uRLCrawlErrorsCountsQueryResponse' smart constructor.
+-- /See:/ 'urlCrawlErrorsCountsQueryResponse' smart constructor.
 newtype URLCrawlErrorsCountsQueryResponse = URLCrawlErrorsCountsQueryResponse
     { _ucecqrCountPerTypes :: Maybe [URLCrawlErrorCountsPerType]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -528,9 +528,9 @@ newtype URLCrawlErrorsCountsQueryResponse = URLCrawlErrorsCountsQueryResponse
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ucecqrCountPerTypes'
-uRLCrawlErrorsCountsQueryResponse
+urlCrawlErrorsCountsQueryResponse
     :: URLCrawlErrorsCountsQueryResponse
-uRLCrawlErrorsCountsQueryResponse =
+urlCrawlErrorsCountsQueryResponse =
     URLCrawlErrorsCountsQueryResponse
     { _ucecqrCountPerTypes = Nothing
     }
@@ -561,7 +561,7 @@ instance ToJSON URLCrawlErrorsCountsQueryResponse
 
 -- | Contains information about specific crawl errors.
 --
--- /See:/ 'uRLCrawlErrorsSample' smart constructor.
+-- /See:/ 'urlCrawlErrorsSample' smart constructor.
 data URLCrawlErrorsSample = URLCrawlErrorsSample
     { _ucesResponseCode  :: !(Maybe Int32)
     , _ucesURLDetails    :: !(Maybe URLSampleDetails)
@@ -583,9 +583,9 @@ data URLCrawlErrorsSample = URLCrawlErrorsSample
 -- * 'ucesPageURL'
 --
 -- * 'ucesFirstDetected'
-uRLCrawlErrorsSample
+urlCrawlErrorsSample
     :: URLCrawlErrorsSample
-uRLCrawlErrorsSample =
+urlCrawlErrorsSample =
     URLCrawlErrorsSample
     { _ucesResponseCode = Nothing
     , _ucesURLDetails = Nothing

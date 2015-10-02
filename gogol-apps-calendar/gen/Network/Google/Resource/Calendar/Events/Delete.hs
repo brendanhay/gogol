@@ -51,13 +51,13 @@ type EventsDeleteResource =
        Capture "calendarId" Text :>
          "events" :>
            Capture "eventId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "sendNotifications" Bool :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+             QueryParam "sendNotifications" Bool :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an event.
@@ -173,13 +173,13 @@ instance GoogleRequest EventsDelete' where
         type Rs EventsDelete' = ()
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u EventsDelete'{..}
-          = go _edQuotaUser _edCalendarId (Just _edPrettyPrint)
+          = go _edSendNotifications _edCalendarId _edEventId
+              _edQuotaUser
+              (Just _edPrettyPrint)
               _edUserIP
-              _edKey
-              _edSendNotifications
-              _edOAuthToken
-              _edEventId
               _edFields
+              _edKey
+              _edOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

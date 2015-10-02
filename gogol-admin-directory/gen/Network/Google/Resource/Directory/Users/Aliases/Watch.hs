@@ -55,9 +55,9 @@ type UsersAliasesWatchResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Channel :> Post '[JSON] Channel
 
@@ -172,12 +172,12 @@ instance GoogleRequest UsersAliasesWatch' where
         type Rs UsersAliasesWatch' = Channel
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u UsersAliasesWatch'{..}
-          = go _uawEvent _uawQuotaUser (Just _uawPrettyPrint)
+          = go _uawEvent _uawUserKey _uawQuotaUser
+              (Just _uawPrettyPrint)
               _uawUserIP
+              _uawFields
               _uawKey
               _uawOAuthToken
-              _uawUserKey
-              _uawFields
               (Just AltJSON)
               _uawChannel
           where go

@@ -53,20 +53,20 @@ import           Network.Google.Prelude
 -- 'PagespeedapiRunpagespeed'' request conforms to.
 type PagespeedapiRunpagespeedResource =
      "runPagespeed" :>
-       QueryParam "screenshot" Bool :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "locale" Text :>
+       QueryParam "filter_third_party_resources" Bool :>
+         QueryParam "locale" Text :>
+           QueryParams "rule" Text :>
+             QueryParam "screenshot" Bool :>
+               QueryParam "strategy"
+                 PagespeedonlinePagespeedapiRunpagespeedStrategy
+                 :>
                  QueryParam "url" Text :>
-                   QueryParam "filter_third_party_resources" Bool :>
-                     QueryParam "strategy"
-                       PagespeedonlinePagespeedapiRunpagespeedStrategy
-                       :>
-                       QueryParams "rule" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Get '[JSON] Result
 
 -- | Runs PageSpeed analysis on the page at the specified URL, and returns
@@ -206,17 +206,17 @@ instance GoogleRequest PagespeedapiRunpagespeed'
         type Rs PagespeedapiRunpagespeed' = Result
         request = requestWithRoute defReq pageSpeedURL
         requestWithRoute r u PagespeedapiRunpagespeed'{..}
-          = go (Just _prScreenshot) _prQuotaUser
+          = go (Just _prFilterThirdPartyResources) _prLocale
+              _prRule
+              (Just _prScreenshot)
+              _prStrategy
+              (Just _prURL)
+              _prQuotaUser
               (Just _prPrettyPrint)
               _prUserIP
-              _prLocale
-              (Just _prURL)
-              (Just _prFilterThirdPartyResources)
-              _prStrategy
-              _prRule
+              _prFields
               _prKey
               _prOAuthToken
-              _prFields
               (Just AltJSON)
           where go
                   = clientWithRoute

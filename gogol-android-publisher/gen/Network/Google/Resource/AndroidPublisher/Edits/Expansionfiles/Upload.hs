@@ -61,9 +61,9 @@ type EditsExpansionfilesUploadResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Post '[JSON] ExpansionFilesUploadResponse
 
@@ -204,16 +204,15 @@ instance GoogleRequest EditsExpansionfilesUpload'
              ExpansionFilesUploadResponse
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u EditsExpansionfilesUpload'{..}
-          = go _eeuQuotaUser (Just _eeuPrettyPrint)
-              _eeuPackageName
+          = go _eeuMedia _eeuPackageName _eeuEditId
               _eeuAPKVersionCode
-              _eeuUserIP
-              _eeuMedia
-              _eeuKey
               _eeuExpansionFileType
-              _eeuOAuthToken
-              _eeuEditId
+              _eeuQuotaUser
+              (Just _eeuPrettyPrint)
+              _eeuUserIP
               _eeuFields
+              _eeuKey
+              _eeuOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

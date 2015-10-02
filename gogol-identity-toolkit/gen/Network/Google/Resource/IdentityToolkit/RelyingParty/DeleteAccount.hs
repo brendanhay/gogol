@@ -49,9 +49,9 @@ type RelyingPartyDeleteAccountResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON]
                        IdentitytoolkitRelyingPartyDeleteAccountRequest
@@ -152,9 +152,10 @@ instance GoogleRequest RelyingPartyDeleteAccount'
              DeleteAccountResponse
         request = requestWithRoute defReq identityToolkitURL
         requestWithRoute r u RelyingPartyDeleteAccount'{..}
-          = go _rQuotaUser (Just _rPrettyPrint) _rUserIP _rKey
-              _rOAuthToken
+          = go _rQuotaUser (Just _rPrettyPrint) _rUserIP
               _rFields
+              _rKey
+              _rOAuthToken
               (Just AltJSON)
               _rIdentitytoolkitRelyingPartyDeleteAccountRequest
           where go

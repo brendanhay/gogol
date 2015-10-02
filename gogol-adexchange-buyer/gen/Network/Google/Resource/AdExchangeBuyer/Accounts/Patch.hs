@@ -51,9 +51,9 @@ type AccountsPatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Account :> Patch '[JSON] Account
 
@@ -156,11 +156,11 @@ instance GoogleRequest AccountsPatch' where
         type Rs AccountsPatch' = Account
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u AccountsPatch'{..}
-          = go _apQuotaUser (Just _apPrettyPrint) _apUserIP
-              _apKey
-              _apId
-              _apOAuthToken
+          = go _apId _apQuotaUser (Just _apPrettyPrint)
+              _apUserIP
               _apFields
+              _apKey
+              _apOAuthToken
               (Just AltJSON)
               _apAccount
           where go

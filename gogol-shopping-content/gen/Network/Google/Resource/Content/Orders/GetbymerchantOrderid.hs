@@ -52,9 +52,9 @@ type OrdersGetbymerchantOrderidResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] OrdersGetByMerchantOrderIdResponse
 
@@ -166,13 +166,13 @@ instance GoogleRequest OrdersGetbymerchantOrderid'
              OrdersGetByMerchantOrderIdResponse
         request = requestWithRoute defReq shoppingContentURL
         requestWithRoute r u OrdersGetbymerchantOrderid'{..}
-          = go _ogogQuotaUser _ogogMerchantId
+          = go _ogogMerchantId _ogogMerchantOrderId
+              _ogogQuotaUser
               (Just _ogogPrettyPrint)
               _ogogUserIP
-              _ogogMerchantOrderId
+              _ogogFields
               _ogogKey
               _ogogOAuthToken
-              _ogogFields
               (Just AltJSON)
           where go
                   = clientWithRoute

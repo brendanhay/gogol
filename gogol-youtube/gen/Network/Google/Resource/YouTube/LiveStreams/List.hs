@@ -52,19 +52,19 @@ import           Network.Google.YouTube.Types
 -- 'LiveStreamsList'' request conforms to.
 type LiveStreamsListResource =
      "liveStreams" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "part" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "mine" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "onBehalfOfContentOwner" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                       QueryParam "id" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "maxResults" Word32 :>
-                               QueryParam "fields" Text :>
+       QueryParam "id" Text :>
+         QueryParam "maxResults" Word32 :>
+           QueryParam "mine" Bool :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "part" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] LiveStreamListResponse
 
@@ -249,18 +249,17 @@ instance GoogleRequest LiveStreamsList' where
         type Rs LiveStreamsList' = LiveStreamListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u LiveStreamsList'{..}
-          = go _lslQuotaUser (Just _lslPart)
-              (Just _lslPrettyPrint)
-              _lslMine
-              _lslUserIP
+          = go _lslId (Just _lslMaxResults) _lslMine
               _lslOnBehalfOfContentOwner
-              _lslKey
               _lslOnBehalfOfContentOwnerChannel
-              _lslId
               _lslPageToken
-              _lslOAuthToken
-              (Just _lslMaxResults)
+              (Just _lslPart)
+              _lslQuotaUser
+              (Just _lslPrettyPrint)
+              _lslUserIP
               _lslFields
+              _lslKey
+              _lslOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

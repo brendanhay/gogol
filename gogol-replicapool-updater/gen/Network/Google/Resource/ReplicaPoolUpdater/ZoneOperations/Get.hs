@@ -55,9 +55,9 @@ type ZoneOperationsGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Operation
 
 -- | Retrieves the specified zone-specific operation resource.
@@ -173,13 +173,12 @@ instance GoogleRequest ZoneOperationsGet' where
         request
           = requestWithRoute defReq replicaPoolUpdaterURL
         requestWithRoute r u ZoneOperationsGet'{..}
-          = go _zogQuotaUser (Just _zogPrettyPrint) _zogProject
-              _zogOperation
+          = go _zogProject _zogZone _zogOperation _zogQuotaUser
+              (Just _zogPrettyPrint)
               _zogUserIP
-              _zogZone
+              _zogFields
               _zogKey
               _zogOAuthToken
-              _zogFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -53,9 +53,9 @@ type UsersMessagesDeleteResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Immediately and permanently deletes the specified message. This
@@ -162,12 +162,12 @@ instance GoogleRequest UsersMessagesDelete' where
         type Rs UsersMessagesDelete' = ()
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersMessagesDelete'{..}
-          = go _umdQuotaUser (Just _umdPrettyPrint) _umdUserIP
-              _umdUserId
-              _umdKey
-              _umdId
-              _umdOAuthToken
+          = go _umdUserId _umdId _umdQuotaUser
+              (Just _umdPrettyPrint)
+              _umdUserIP
               _umdFields
+              _umdKey
+              _umdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

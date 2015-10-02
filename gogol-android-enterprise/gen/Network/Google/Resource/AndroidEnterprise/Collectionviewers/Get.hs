@@ -58,9 +58,9 @@ type CollectionviewersGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] User
 
 -- | Retrieves the ID of the user if they have been specifically allowed to
@@ -177,14 +177,13 @@ instance GoogleRequest CollectionviewersGet' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u CollectionviewersGet'{..}
-          = go _cgQuotaUser (Just _cgPrettyPrint)
-              _cgEnterpriseId
+          = go _cgEnterpriseId _cgCollectionId _cgUserId
+              _cgQuotaUser
+              (Just _cgPrettyPrint)
               _cgUserIP
-              _cgCollectionId
-              _cgUserId
+              _cgFields
               _cgKey
               _cgOAuthToken
-              _cgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

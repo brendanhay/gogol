@@ -52,9 +52,9 @@ type MembersInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Member :> Post '[JSON] Member
 
@@ -157,11 +157,11 @@ instance GoogleRequest MembersInsert' where
         type Rs MembersInsert' = Member
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u MembersInsert'{..}
-          = go _miQuotaUser (Just _miPrettyPrint) _miUserIP
-              _miGroupKey
+          = go _miGroupKey _miQuotaUser (Just _miPrettyPrint)
+              _miUserIP
+              _miFields
               _miKey
               _miOAuthToken
-              _miFields
               (Just AltJSON)
               _miMember
           where go

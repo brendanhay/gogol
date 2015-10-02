@@ -48,13 +48,13 @@ import           Network.Google.Prelude
 type TablesGetResource =
      "tables" :>
        Capture "id" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "version" MapsEngineTablesGetVersion :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+         QueryParam "version" MapsEngineTablesGetVersion :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Table
 
 -- | Return metadata for a particular table, including the schema.
@@ -154,12 +154,12 @@ instance GoogleRequest TablesGet' where
         type Rs TablesGet' = Table
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u TablesGet'{..}
-          = go _tgQuotaUser (Just _tgPrettyPrint) _tgUserIP
-              _tgKey
-              _tgVersion
-              _tgId
-              _tgOAuthToken
+          = go _tgVersion _tgId _tgQuotaUser
+              (Just _tgPrettyPrint)
+              _tgUserIP
               _tgFields
+              _tgKey
+              _tgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TablesGetResource)

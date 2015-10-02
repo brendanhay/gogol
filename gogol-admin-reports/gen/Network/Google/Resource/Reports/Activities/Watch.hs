@@ -61,20 +61,21 @@ type ActivitiesWatchResource =
            "applications" :>
              Capture "applicationName" Text :>
                "watch" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "startTime" Text :>
-                       QueryParam "userIp" Text :>
+                 QueryParam "actorIpAddress" Text :>
+                   QueryParam "customerId" Text :>
+                     QueryParam "endTime" Text :>
+                       QueryParam "eventName" Text :>
                          QueryParam "filters" Text :>
-                           QueryParam "customerId" Text :>
-                             QueryParam "actorIpAddress" Text :>
-                               QueryParam "key" Key :>
-                                 QueryParam "endTime" Text :>
-                                   QueryParam "pageToken" Text :>
-                                     QueryParam "oauth_token" OAuthToken :>
-                                       QueryParam "eventName" Text :>
-                                         QueryParam "maxResults" Int32 :>
-                                           QueryParam "fields" Text :>
+                           QueryParam "maxResults" Int32 :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "startTime" Text :>
+                                 QueryParam "quotaUser" Text :>
+                                   QueryParam "prettyPrint" Bool :>
+                                     QueryParam "userIp" Text :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "key" Key :>
+                                           QueryParam "oauth_token" OAuthToken
+                                             :>
                                              QueryParam "alt" AltJSON :>
                                                ReqBody '[JSON] Channel :>
                                                  Post '[JSON] Channel
@@ -267,20 +268,20 @@ instance GoogleRequest ActivitiesWatch' where
         type Rs ActivitiesWatch' = Channel
         request = requestWithRoute defReq adminReportsURL
         requestWithRoute r u ActivitiesWatch'{..}
-          = go _awQuotaUser (Just _awPrettyPrint) _awStartTime
-              _awUserIP
-              _awFilters
-              _awCustomerId
-              _awActorIPAddress
-              _awKey
-              _awEndTime
-              _awApplicationName
-              _awPageToken
-              _awOAuthToken
+          = go _awActorIPAddress _awCustomerId _awEndTime
               _awEventName
-              _awUserKey
+              _awFilters
               _awMaxResults
+              _awPageToken
+              _awStartTime
+              _awUserKey
+              _awApplicationName
+              _awQuotaUser
+              (Just _awPrettyPrint)
+              _awUserIP
               _awFields
+              _awKey
+              _awOAuthToken
               (Just AltJSON)
               _awChannel
           where go

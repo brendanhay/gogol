@@ -53,14 +53,14 @@ type TurnBasedMatchesRematchResource =
      "turnbasedmatches" :>
        Capture "matchId" Text :>
          "rematch" :>
-           QueryParam "requestId" Int64 :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "language" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+           QueryParam "language" Text :>
+             QueryParam "requestId" Int64 :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Post '[JSON] TurnBasedMatchRematch
 
@@ -183,14 +183,13 @@ instance GoogleRequest TurnBasedMatchesRematch' where
              TurnBasedMatchRematch
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u TurnBasedMatchesRematch'{..}
-          = go _tbmrRequestId _tbmrQuotaUser
+          = go _tbmrLanguage _tbmrRequestId _tbmrMatchId
+              _tbmrQuotaUser
               (Just _tbmrPrettyPrint)
               _tbmrUserIP
-              _tbmrKey
-              _tbmrLanguage
-              _tbmrOAuthToken
-              _tbmrMatchId
               _tbmrFields
+              _tbmrKey
+              _tbmrOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -60,9 +60,9 @@ type ManagementGoalsGetResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
-                             QueryParam "key" Key :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "fields" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :> Get '[JSON] Goal
 
 -- | Gets a goal to which the user has access.
@@ -189,15 +189,14 @@ instance GoogleRequest ManagementGoalsGet' where
         type Rs ManagementGoalsGet' = Goal
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementGoalsGet'{..}
-          = go _mggQuotaUser (Just _mggPrettyPrint)
-              _mggWebPropertyId
+          = go _mggAccountId _mggWebPropertyId _mggProfileId
               _mggGoalId
+              _mggQuotaUser
+              (Just _mggPrettyPrint)
               _mggUserIP
-              _mggProfileId
-              _mggAccountId
+              _mggFields
               _mggKey
               _mggOAuthToken
-              _mggFields
               (Just AltJSON)
           where go
                   = clientWithRoute

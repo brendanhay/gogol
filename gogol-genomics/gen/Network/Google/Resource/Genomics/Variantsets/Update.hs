@@ -52,9 +52,9 @@ type VariantsetsUpdateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] VariantSet :> Put '[JSON] VariantSet
 
@@ -164,12 +164,12 @@ instance GoogleRequest VariantsetsUpdate' where
         type Rs VariantsetsUpdate' = VariantSet
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u VariantsetsUpdate'{..}
-          = go _vuuQuotaUser (Just _vuuPrettyPrint)
-              _vuuVariantSetId
+          = go _vuuVariantSetId _vuuQuotaUser
+              (Just _vuuPrettyPrint)
               _vuuUserIP
+              _vuuFields
               _vuuKey
               _vuuOAuthToken
-              _vuuFields
               (Just AltJSON)
               _vuuVariantSet
           where go

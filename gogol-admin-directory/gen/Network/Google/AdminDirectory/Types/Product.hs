@@ -728,79 +728,77 @@ instance ToJSON ChromeOSDeviceActiveTimeRanges where
 --
 -- /See:/ 'asp' smart constructor.
 data Asp = Asp
-    { _aspCreationTime :: !(Maybe Int64)
-    , _aspEtag         :: !(Maybe Text)
-    , _aspCodeId       :: !(Maybe Int32)
-    , _aspKind         :: !Text
-    , _aspName         :: !(Maybe Text)
-    , _aspLastTimeUsed :: !(Maybe Int64)
-    , _aspUserKey      :: !(Maybe Text)
+    { _aCreationTime :: !(Maybe Int64)
+    , _aEtag         :: !(Maybe Text)
+    , _aCodeId       :: !(Maybe Int32)
+    , _aKind         :: !Text
+    , _aName         :: !(Maybe Text)
+    , _aLastTimeUsed :: !(Maybe Int64)
+    , _aUserKey      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Asp' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aspCreationTime'
+-- * 'aCreationTime'
 --
--- * 'aspEtag'
+-- * 'aEtag'
 --
--- * 'aspCodeId'
+-- * 'aCodeId'
 --
--- * 'aspKind'
+-- * 'aKind'
 --
--- * 'aspName'
+-- * 'aName'
 --
--- * 'aspLastTimeUsed'
+-- * 'aLastTimeUsed'
 --
--- * 'aspUserKey'
+-- * 'aUserKey'
 asp
     :: Asp
 asp =
     Asp
-    { _aspCreationTime = Nothing
-    , _aspEtag = Nothing
-    , _aspCodeId = Nothing
-    , _aspKind = "admin#directory#asp"
-    , _aspName = Nothing
-    , _aspLastTimeUsed = Nothing
-    , _aspUserKey = Nothing
+    { _aCreationTime = Nothing
+    , _aEtag = Nothing
+    , _aCodeId = Nothing
+    , _aKind = "admin#directory#asp"
+    , _aName = Nothing
+    , _aLastTimeUsed = Nothing
+    , _aUserKey = Nothing
     }
 
 -- | The time when the ASP was created. Expressed in Unix time format.
-aspCreationTime :: Lens' Asp (Maybe Int64)
-aspCreationTime
-  = lens _aspCreationTime
-      (\ s a -> s{_aspCreationTime = a})
+aCreationTime :: Lens' Asp (Maybe Int64)
+aCreationTime
+  = lens _aCreationTime
+      (\ s a -> s{_aCreationTime = a})
 
 -- | ETag of the ASP.
-aspEtag :: Lens' Asp (Maybe Text)
-aspEtag = lens _aspEtag (\ s a -> s{_aspEtag = a})
+aEtag :: Lens' Asp (Maybe Text)
+aEtag = lens _aEtag (\ s a -> s{_aEtag = a})
 
 -- | The unique ID of the ASP.
-aspCodeId :: Lens' Asp (Maybe Int32)
-aspCodeId
-  = lens _aspCodeId (\ s a -> s{_aspCodeId = a})
+aCodeId :: Lens' Asp (Maybe Int32)
+aCodeId = lens _aCodeId (\ s a -> s{_aCodeId = a})
 
 -- | The type of the API resource. This is always admin#directory#asp.
-aspKind :: Lens' Asp Text
-aspKind = lens _aspKind (\ s a -> s{_aspKind = a})
+aKind :: Lens' Asp Text
+aKind = lens _aKind (\ s a -> s{_aKind = a})
 
 -- | The name of the application that the user, represented by their userId,
 -- entered when the ASP was created.
-aspName :: Lens' Asp (Maybe Text)
-aspName = lens _aspName (\ s a -> s{_aspName = a})
+aName :: Lens' Asp (Maybe Text)
+aName = lens _aName (\ s a -> s{_aName = a})
 
 -- | The time when the ASP was last used. Expressed in Unix time format.
-aspLastTimeUsed :: Lens' Asp (Maybe Int64)
-aspLastTimeUsed
-  = lens _aspLastTimeUsed
-      (\ s a -> s{_aspLastTimeUsed = a})
+aLastTimeUsed :: Lens' Asp (Maybe Int64)
+aLastTimeUsed
+  = lens _aLastTimeUsed
+      (\ s a -> s{_aLastTimeUsed = a})
 
 -- | The unique ID of the user who issued the ASP.
-aspUserKey :: Lens' Asp (Maybe Text)
-aspUserKey
-  = lens _aspUserKey (\ s a -> s{_aspUserKey = a})
+aUserKey :: Lens' Asp (Maybe Text)
+aUserKey = lens _aUserKey (\ s a -> s{_aUserKey = a})
 
 instance FromJSON Asp where
         parseJSON
@@ -818,12 +816,11 @@ instance ToJSON Asp where
         toJSON Asp{..}
           = object
               (catMaybes
-                 [("creationTime" .=) <$> _aspCreationTime,
-                  ("etag" .=) <$> _aspEtag,
-                  ("codeId" .=) <$> _aspCodeId,
-                  Just ("kind" .= _aspKind), ("name" .=) <$> _aspName,
-                  ("lastTimeUsed" .=) <$> _aspLastTimeUsed,
-                  ("userKey" .=) <$> _aspUserKey])
+                 [("creationTime" .=) <$> _aCreationTime,
+                  ("etag" .=) <$> _aEtag, ("codeId" .=) <$> _aCodeId,
+                  Just ("kind" .= _aKind), ("name" .=) <$> _aName,
+                  ("lastTimeUsed" .=) <$> _aLastTimeUsed,
+                  ("userKey" .=) <$> _aUserKey])
 
 -- | JSON response template for List Schema operation in Directory API.
 --
@@ -1511,41 +1508,41 @@ instance ToJSON UserCustomSchemas where
 --
 -- /See:/ 'aliases' smart constructor.
 data Aliases = Aliases
-    { _aEtag    :: !(Maybe Text)
-    , _aKind    :: !Text
-    , _aAliases :: !(Maybe [Alias])
+    { _aliEtag    :: !(Maybe Text)
+    , _aliKind    :: !Text
+    , _aliAliases :: !(Maybe [Alias])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Aliases' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aEtag'
+-- * 'aliEtag'
 --
--- * 'aKind'
+-- * 'aliKind'
 --
--- * 'aAliases'
+-- * 'aliAliases'
 aliases
     :: Aliases
 aliases =
     Aliases
-    { _aEtag = Nothing
-    , _aKind = "admin#directory#aliases"
-    , _aAliases = Nothing
+    { _aliEtag = Nothing
+    , _aliKind = "admin#directory#aliases"
+    , _aliAliases = Nothing
     }
 
 -- | ETag of the resource.
-aEtag :: Lens' Aliases (Maybe Text)
-aEtag = lens _aEtag (\ s a -> s{_aEtag = a})
+aliEtag :: Lens' Aliases (Maybe Text)
+aliEtag = lens _aliEtag (\ s a -> s{_aliEtag = a})
 
 -- | Kind of resource this is.
-aKind :: Lens' Aliases Text
-aKind = lens _aKind (\ s a -> s{_aKind = a})
+aliKind :: Lens' Aliases Text
+aliKind = lens _aliKind (\ s a -> s{_aliKind = a})
 
 -- | List of alias objects.
-aAliases :: Lens' Aliases [Alias]
-aAliases
-  = lens _aAliases (\ s a -> s{_aAliases = a}) .
+aliAliases :: Lens' Aliases [Alias]
+aliAliases
+  = lens _aliAliases (\ s a -> s{_aliAliases = a}) .
       _Default
       . _Coerce
 
@@ -1562,8 +1559,8 @@ instance ToJSON Aliases where
         toJSON Aliases{..}
           = object
               (catMaybes
-                 [("etag" .=) <$> _aEtag, Just ("kind" .= _aKind),
-                  ("aliases" .=) <$> _aAliases])
+                 [("etag" .=) <$> _aliEtag, Just ("kind" .= _aliKind),
+                  ("aliases" .=) <$> _aliAliases])
 
 -- | JSON response template for List tokens operation in Directory API.
 --
@@ -2096,58 +2093,58 @@ instance ToJSON Channel where
 --
 -- /See:/ 'alias' smart constructor.
 data Alias = Alias
-    { _aliEtag         :: !(Maybe Text)
-    , _aliKind         :: !Text
-    , _aliAlias        :: !(Maybe Text)
-    , _aliId           :: !(Maybe Text)
-    , _aliPrimaryEmail :: !(Maybe Text)
+    { _aaEtag         :: !(Maybe Text)
+    , _aaKind         :: !Text
+    , _aaAlias        :: !(Maybe Text)
+    , _aaId           :: !(Maybe Text)
+    , _aaPrimaryEmail :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Alias' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aliEtag'
+-- * 'aaEtag'
 --
--- * 'aliKind'
+-- * 'aaKind'
 --
--- * 'aliAlias'
+-- * 'aaAlias'
 --
--- * 'aliId'
+-- * 'aaId'
 --
--- * 'aliPrimaryEmail'
+-- * 'aaPrimaryEmail'
 alias
     :: Alias
 alias =
     Alias
-    { _aliEtag = Nothing
-    , _aliKind = "admin#directory#alias"
-    , _aliAlias = Nothing
-    , _aliId = Nothing
-    , _aliPrimaryEmail = Nothing
+    { _aaEtag = Nothing
+    , _aaKind = "admin#directory#alias"
+    , _aaAlias = Nothing
+    , _aaId = Nothing
+    , _aaPrimaryEmail = Nothing
     }
 
 -- | ETag of the resource.
-aliEtag :: Lens' Alias (Maybe Text)
-aliEtag = lens _aliEtag (\ s a -> s{_aliEtag = a})
+aaEtag :: Lens' Alias (Maybe Text)
+aaEtag = lens _aaEtag (\ s a -> s{_aaEtag = a})
 
 -- | Kind of resource this is.
-aliKind :: Lens' Alias Text
-aliKind = lens _aliKind (\ s a -> s{_aliKind = a})
+aaKind :: Lens' Alias Text
+aaKind = lens _aaKind (\ s a -> s{_aaKind = a})
 
 -- | A alias email
-aliAlias :: Lens' Alias (Maybe Text)
-aliAlias = lens _aliAlias (\ s a -> s{_aliAlias = a})
+aaAlias :: Lens' Alias (Maybe Text)
+aaAlias = lens _aaAlias (\ s a -> s{_aaAlias = a})
 
 -- | Unique id of the group (Read-only) Unique id of the user (Read-only)
-aliId :: Lens' Alias (Maybe Text)
-aliId = lens _aliId (\ s a -> s{_aliId = a})
+aaId :: Lens' Alias (Maybe Text)
+aaId = lens _aaId (\ s a -> s{_aaId = a})
 
 -- | Group\'s primary email (Read-only) User\'s primary email (Read-only)
-aliPrimaryEmail :: Lens' Alias (Maybe Text)
-aliPrimaryEmail
-  = lens _aliPrimaryEmail
-      (\ s a -> s{_aliPrimaryEmail = a})
+aaPrimaryEmail :: Lens' Alias (Maybe Text)
+aaPrimaryEmail
+  = lens _aaPrimaryEmail
+      (\ s a -> s{_aaPrimaryEmail = a})
 
 instance FromJSON Alias where
         parseJSON
@@ -2164,9 +2161,9 @@ instance ToJSON Alias where
         toJSON Alias{..}
           = object
               (catMaybes
-                 [("etag" .=) <$> _aliEtag, Just ("kind" .= _aliKind),
-                  ("alias" .=) <$> _aliAlias, ("id" .=) <$> _aliId,
-                  ("primaryEmail" .=) <$> _aliPrimaryEmail])
+                 [("etag" .=) <$> _aaEtag, Just ("kind" .= _aaKind),
+                  ("alias" .=) <$> _aaAlias, ("id" .=) <$> _aaId,
+                  ("primaryEmail" .=) <$> _aaPrimaryEmail])
 
 -- | JSON template for name of a user in Directory API.
 --
@@ -4331,41 +4328,42 @@ instance ToJSON UserExternalId where
 --
 -- /See:/ 'asps' smart constructor.
 data Asps = Asps
-    { _aaEtag  :: !(Maybe Text)
-    , _aaKind  :: !Text
-    , _aaItems :: !(Maybe [Asp])
+    { _aspEtag  :: !(Maybe Text)
+    , _aspKind  :: !Text
+    , _aspItems :: !(Maybe [Asp])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Asps' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aaEtag'
+-- * 'aspEtag'
 --
--- * 'aaKind'
+-- * 'aspKind'
 --
--- * 'aaItems'
+-- * 'aspItems'
 asps
     :: Asps
 asps =
     Asps
-    { _aaEtag = Nothing
-    , _aaKind = "admin#directory#aspList"
-    , _aaItems = Nothing
+    { _aspEtag = Nothing
+    , _aspKind = "admin#directory#aspList"
+    , _aspItems = Nothing
     }
 
 -- | ETag of the resource.
-aaEtag :: Lens' Asps (Maybe Text)
-aaEtag = lens _aaEtag (\ s a -> s{_aaEtag = a})
+aspEtag :: Lens' Asps (Maybe Text)
+aspEtag = lens _aspEtag (\ s a -> s{_aspEtag = a})
 
 -- | The type of the API resource. This is always admin#directory#aspList.
-aaKind :: Lens' Asps Text
-aaKind = lens _aaKind (\ s a -> s{_aaKind = a})
+aspKind :: Lens' Asps Text
+aspKind = lens _aspKind (\ s a -> s{_aspKind = a})
 
 -- | A list of ASP resources.
-aaItems :: Lens' Asps [Asp]
-aaItems
-  = lens _aaItems (\ s a -> s{_aaItems = a}) . _Default
+aspItems :: Lens' Asps [Asp]
+aspItems
+  = lens _aspItems (\ s a -> s{_aspItems = a}) .
+      _Default
       . _Coerce
 
 instance FromJSON Asps where
@@ -4381,8 +4379,8 @@ instance ToJSON Asps where
         toJSON Asps{..}
           = object
               (catMaybes
-                 [("etag" .=) <$> _aaEtag, Just ("kind" .= _aaKind),
-                  ("items" .=) <$> _aaItems])
+                 [("etag" .=) <$> _aspEtag, Just ("kind" .= _aspKind),
+                  ("items" .=) <$> _aspItems])
 
 -- | JSON response template for List Chrome OS Devices operation in Directory
 -- API.

@@ -56,9 +56,9 @@ type AutoscalersGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Autoscaler
 
 -- | Gets the specified Autoscaler resource.
@@ -170,13 +170,12 @@ instance GoogleRequest AutoscalersGet' where
         type Rs AutoscalersGet' = Autoscaler
         request = requestWithRoute defReq autoscalerURL
         requestWithRoute r u AutoscalersGet'{..}
-          = go _agQuotaUser (Just _agPrettyPrint) _agProject
+          = go _agProject _agZone _agAutoscaler _agQuotaUser
+              (Just _agPrettyPrint)
               _agUserIP
-              _agZone
-              _agKey
-              _agAutoscaler
-              _agOAuthToken
               _agFields
+              _agKey
+              _agOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

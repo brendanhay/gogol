@@ -60,17 +60,17 @@ type AppsModulesVersionsCreateResource =
              Capture "modulesId" Text :>
                "versions" :>
                  QueryParam "$.xgafv" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
                          QueryParam "pp" Bool :>
-                           QueryParam "access_token" Text :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "bearer_token" Text :>
-                                 QueryParam "key" Key :>
-                                   QueryParam "oauth_token" OAuthToken :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "callback" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "upload_protocol" Text :>
+                               QueryParam "quotaUser" Text :>
+                                 QueryParam "prettyPrint" Bool :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "key" Key :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            ReqBody '[JSON] Version :>
                                              Post '[JSON] Operation
@@ -248,19 +248,18 @@ instance GoogleRequest AppsModulesVersionsCreate'
         type Rs AppsModulesVersionsCreate' = Operation
         request = requestWithRoute defReq appEngineURL
         requestWithRoute r u AppsModulesVersionsCreate'{..}
-          = go _amvcXgafv _amvcQuotaUser
-              (Just _amvcPrettyPrint)
-              _amvcUploadProtocol
-              (Just _amvcPp)
-              _amvcAccessToken
-              _amvcUploadType
-              _amvcModulesId
-              _amvcBearerToken
-              _amvcKey
-              _amvcAppsId
-              _amvcOAuthToken
-              _amvcFields
+          = go _amvcXgafv _amvcAccessToken _amvcBearerToken
               _amvcCallback
+              (Just _amvcPp)
+              _amvcUploadType
+              _amvcUploadProtocol
+              _amvcAppsId
+              _amvcModulesId
+              _amvcQuotaUser
+              (Just _amvcPrettyPrint)
+              _amvcFields
+              _amvcKey
+              _amvcOAuthToken
               (Just AltJSON)
               _amvcVersion
           where go

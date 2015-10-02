@@ -58,9 +58,9 @@ type EditsAPKsAddexternallyhostedResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] APKsAddExternallyHostedRequest :>
                                Post '[JSON] APKsAddExternallyHostedResponse
@@ -190,13 +190,12 @@ instance GoogleRequest EditsAPKsAddexternallyhosted'
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u
           EditsAPKsAddexternallyhosted'{..}
-          = go _eapkaQuotaUser (Just _eapkaPrettyPrint)
-              _eapkaPackageName
+          = go _eapkaPackageName _eapkaEditId _eapkaQuotaUser
+              (Just _eapkaPrettyPrint)
               _eapkaUserIP
+              _eapkaFields
               _eapkaKey
               _eapkaOAuthToken
-              _eapkaEditId
-              _eapkaFields
               (Just AltJSON)
               _eapkaAPKsAddExternallyHostedRequest
           where go

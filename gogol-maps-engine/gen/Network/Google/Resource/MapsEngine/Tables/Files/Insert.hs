@@ -53,13 +53,13 @@ type TablesFilesInsertResource =
      "tables" :>
        Capture "id" Text :>
          "files" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "filename" Text :>
-                       QueryParam "fields" Text :>
+           QueryParam "filename" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Upload a file to a placeholder table asset. See Table Upload in the
@@ -175,13 +175,13 @@ instance GoogleRequest TablesFilesInsert' where
         type Rs TablesFilesInsert' = ()
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u TablesFilesInsert'{..}
-          = go _tfiQuotaUser (Just _tfiPrettyPrint) _tfiUserIP
-              _tfiMedia
-              _tfiKey
-              _tfiId
-              _tfiOAuthToken
-              (Just _tfiFilename)
+          = go _tfiMedia _tfiId (Just _tfiFilename)
+              _tfiQuotaUser
+              (Just _tfiPrettyPrint)
+              _tfiUserIP
               _tfiFields
+              _tfiKey
+              _tfiOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -19,76 +19,73 @@ import           Network.Google.Prelude
 import           Network.Google.URLShortener.Types.Sum
 
 --
--- /See:/ 'uRL' smart constructor.
+-- /See:/ 'url' smart constructor.
 data URL = URL
-    { _urlStatus    :: !(Maybe Text)
-    , _urlKind      :: !Text
-    , _urlCreated   :: !(Maybe Text)
-    , _urlAnalytics :: !(Maybe AnalyticsSummary)
-    , _urlLongURL   :: !(Maybe Text)
-    , _urlId        :: !(Maybe Text)
+    { _uStatus    :: !(Maybe Text)
+    , _uKind      :: !Text
+    , _uCreated   :: !(Maybe Text)
+    , _uAnalytics :: !(Maybe AnalyticsSummary)
+    , _uLongURL   :: !(Maybe Text)
+    , _uId        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URL' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'urlStatus'
+-- * 'uStatus'
 --
--- * 'urlKind'
+-- * 'uKind'
 --
--- * 'urlCreated'
+-- * 'uCreated'
 --
--- * 'urlAnalytics'
+-- * 'uAnalytics'
 --
--- * 'urlLongURL'
+-- * 'uLongURL'
 --
--- * 'urlId'
-uRL
+-- * 'uId'
+url
     :: URL
-uRL =
+url =
     URL
-    { _urlStatus = Nothing
-    , _urlKind = "urlshortener#url"
-    , _urlCreated = Nothing
-    , _urlAnalytics = Nothing
-    , _urlLongURL = Nothing
-    , _urlId = Nothing
+    { _uStatus = Nothing
+    , _uKind = "urlshortener#url"
+    , _uCreated = Nothing
+    , _uAnalytics = Nothing
+    , _uLongURL = Nothing
+    , _uId = Nothing
     }
 
 -- | Status of the target URL. Possible values: \"OK\", \"MALWARE\",
 -- \"PHISHING\", or \"REMOVED\". A URL might be marked \"REMOVED\" if it
 -- was flagged as spam, for example.
-urlStatus :: Lens' URL (Maybe Text)
-urlStatus
-  = lens _urlStatus (\ s a -> s{_urlStatus = a})
+uStatus :: Lens' URL (Maybe Text)
+uStatus = lens _uStatus (\ s a -> s{_uStatus = a})
 
 -- | The fixed string \"urlshortener#url\".
-urlKind :: Lens' URL Text
-urlKind = lens _urlKind (\ s a -> s{_urlKind = a})
+uKind :: Lens' URL Text
+uKind = lens _uKind (\ s a -> s{_uKind = a})
 
 -- | Time the short URL was created; ISO 8601 representation using the
 -- yyyy-MM-dd\'T\'HH:mm:ss.SSSZZ format, e.g.
 -- \"2010-10-14T19:01:24.944+00:00\".
-urlCreated :: Lens' URL (Maybe Text)
-urlCreated
-  = lens _urlCreated (\ s a -> s{_urlCreated = a})
+uCreated :: Lens' URL (Maybe Text)
+uCreated = lens _uCreated (\ s a -> s{_uCreated = a})
 
 -- | A summary of the click analytics for the short and long URL. Might not
 -- be present if not requested or currently unavailable.
-urlAnalytics :: Lens' URL (Maybe AnalyticsSummary)
-urlAnalytics
-  = lens _urlAnalytics (\ s a -> s{_urlAnalytics = a})
+uAnalytics :: Lens' URL (Maybe AnalyticsSummary)
+uAnalytics
+  = lens _uAnalytics (\ s a -> s{_uAnalytics = a})
 
 -- | Long URL, e.g. \"http:\/\/www.google.com\/\". Might not be present if
 -- the status is \"REMOVED\".
-urlLongURL :: Lens' URL (Maybe Text)
-urlLongURL
-  = lens _urlLongURL (\ s a -> s{_urlLongURL = a})
+uLongURL :: Lens' URL (Maybe Text)
+uLongURL = lens _uLongURL (\ s a -> s{_uLongURL = a})
 
 -- | Short URL, e.g. \"http:\/\/goo.gl\/l6MS\".
-urlId :: Lens' URL (Maybe Text)
-urlId = lens _urlId (\ s a -> s{_urlId = a})
+uId :: Lens' URL (Maybe Text)
+uId = lens _uId (\ s a -> s{_uId = a})
 
 instance FromJSON URL where
         parseJSON
@@ -106,12 +103,10 @@ instance ToJSON URL where
         toJSON URL{..}
           = object
               (catMaybes
-                 [("status" .=) <$> _urlStatus,
-                  Just ("kind" .= _urlKind),
-                  ("created" .=) <$> _urlCreated,
-                  ("analytics" .=) <$> _urlAnalytics,
-                  ("longUrl" .=) <$> _urlLongURL,
-                  ("id" .=) <$> _urlId])
+                 [("status" .=) <$> _uStatus, Just ("kind" .= _uKind),
+                  ("created" .=) <$> _uCreated,
+                  ("analytics" .=) <$> _uAnalytics,
+                  ("longUrl" .=) <$> _uLongURL, ("id" .=) <$> _uId])
 
 --
 -- /See:/ 'stringCount' smart constructor.
@@ -338,7 +333,7 @@ instance ToJSON AnalyticsSummary where
                   ("month" .=) <$> _asMonth])
 
 --
--- /See:/ 'uRLHistory' smart constructor.
+-- /See:/ 'urlHistory' smart constructor.
 data URLHistory = URLHistory
     { _uhTotalItems    :: !(Maybe Int32)
     , _uhNextPageToken :: !(Maybe Text)
@@ -360,9 +355,9 @@ data URLHistory = URLHistory
 -- * 'uhKind'
 --
 -- * 'uhItems'
-uRLHistory
+urlHistory
     :: URLHistory
-uRLHistory =
+urlHistory =
     URLHistory
     { _uhTotalItems = Nothing
     , _uhNextPageToken = Nothing

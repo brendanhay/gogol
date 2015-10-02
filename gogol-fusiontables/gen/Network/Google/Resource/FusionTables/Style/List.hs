@@ -50,14 +50,14 @@ type StyleListResource =
      "tables" :>
        Capture "tableId" Text :>
          "styles" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "maxResults" Word32 :>
-                         QueryParam "fields" Text :>
+           QueryParam "maxResults" Word32 :>
+             QueryParam "pageToken" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] StyleSettingList
 
@@ -169,13 +169,13 @@ instance GoogleRequest StyleList' where
         type Rs StyleList' = StyleSettingList
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u StyleList'{..}
-          = go _slQuotaUser (Just _slPrettyPrint) _slUserIP
-              _slKey
-              _slPageToken
-              _slOAuthToken
-              _slTableId
-              _slMaxResults
+          = go _slMaxResults _slPageToken _slTableId
+              _slQuotaUser
+              (Just _slPrettyPrint)
+              _slUserIP
               _slFields
+              _slKey
+              _slOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy StyleListResource)

@@ -48,15 +48,15 @@ import           Network.Google.Prelude
 -- 'DatasetsList'' request conforms to.
 type DatasetsListResource =
      "datasets" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "projectNumber" Int64 :>
-               QueryParam "key" Key :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "pageSize" Int32 :>
-                       QueryParam "fields" Text :>
+       QueryParam "pageSize" Int32 :>
+         QueryParam "pageToken" Text :>
+           QueryParam "projectNumber" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] ListDatasetsResponse
 
@@ -171,13 +171,13 @@ instance GoogleRequest DatasetsList' where
         type Rs DatasetsList' = ListDatasetsResponse
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u DatasetsList'{..}
-          = go _dlQuotaUser (Just _dlPrettyPrint) _dlUserIP
-              _dlProjectNumber
-              _dlKey
-              _dlPageToken
-              _dlOAuthToken
-              _dlPageSize
+          = go _dlPageSize _dlPageToken _dlProjectNumber
+              _dlQuotaUser
+              (Just _dlPrettyPrint)
+              _dlUserIP
               _dlFields
+              _dlKey
+              _dlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

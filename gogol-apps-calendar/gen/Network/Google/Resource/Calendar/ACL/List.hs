@@ -26,7 +26,7 @@ module Network.Google.Resource.Calendar.ACL.List
       ACLListResource
 
     -- * Creating a Request
-    , aCLList'
+    , aclList'
     , ACLList'
 
     -- * Request Lenses
@@ -52,21 +52,21 @@ type ACLListResource =
      "calendars" :>
        Capture "calendarId" Text :>
          "acl" :>
-           QueryParam "syncToken" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "showDeleted" Bool :>
-                     QueryParam "key" Key :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Int32 :>
-                             QueryParam "fields" Text :>
+           QueryParam "maxResults" Int32 :>
+             QueryParam "pageToken" Text :>
+               QueryParam "showDeleted" Bool :>
+                 QueryParam "syncToken" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Get '[JSON] ACL
 
 -- | Returns the rules in the access control list for the calendar.
 --
--- /See:/ 'aCLList'' smart constructor.
+-- /See:/ 'aclList'' smart constructor.
 data ACLList' = ACLList'
     { _alSyncToken   :: !(Maybe Text)
     , _alQuotaUser   :: !(Maybe Text)
@@ -106,10 +106,10 @@ data ACLList' = ACLList'
 -- * 'alMaxResults'
 --
 -- * 'alFields'
-aCLList'
+aclList'
     :: Text -- ^ 'calendarId'
     -> ACLList'
-aCLList' pAlCalendarId_ =
+aclList' pAlCalendarId_ =
     ACLList'
     { _alSyncToken = Nothing
     , _alQuotaUser = Nothing
@@ -205,15 +205,15 @@ instance GoogleRequest ACLList' where
         type Rs ACLList' = ACL
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u ACLList'{..}
-          = go _alSyncToken _alQuotaUser _alCalendarId
+          = go _alMaxResults _alPageToken _alShowDeleted
+              _alSyncToken
+              _alCalendarId
+              _alQuotaUser
               (Just _alPrettyPrint)
               _alUserIP
-              _alShowDeleted
-              _alKey
-              _alPageToken
-              _alOAuthToken
-              _alMaxResults
               _alFields
+              _alKey
+              _alOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy ACLListResource) r

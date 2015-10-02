@@ -56,9 +56,9 @@ type ImagesDeprecateResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] DeprecationStatus :>
                                Post '[JSON] Operation
@@ -177,12 +177,12 @@ instance GoogleRequest ImagesDeprecate' where
         type Rs ImagesDeprecate' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u ImagesDeprecate'{..}
-          = go _id1QuotaUser _id1Image (Just _id1PrettyPrint)
-              _id1Project
+          = go _id1Project _id1Image _id1QuotaUser
+              (Just _id1PrettyPrint)
               _id1UserIP
+              _id1Fields
               _id1Key
               _id1OAuthToken
-              _id1Fields
               (Just AltJSON)
               _id1DeprecationStatus
           where go

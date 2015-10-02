@@ -52,9 +52,9 @@ type ContentCategoriesUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] ContentCategory :>
                            Put '[JSON] ContentCategory
@@ -163,11 +163,12 @@ instance GoogleRequest ContentCategoriesUpdate' where
         type Rs ContentCategoriesUpdate' = ContentCategory
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ContentCategoriesUpdate'{..}
-          = go _ccuQuotaUser (Just _ccuPrettyPrint) _ccuUserIP
-              _ccuProfileId
+          = go _ccuProfileId _ccuQuotaUser
+              (Just _ccuPrettyPrint)
+              _ccuUserIP
+              _ccuFields
               _ccuKey
               _ccuOAuthToken
-              _ccuFields
               (Just AltJSON)
               _ccuContentCategory
           where go

@@ -49,7 +49,7 @@ module Network.Google.AppEngine.Types
 
     -- * URLMap
     , URLMap
-    , uRLMap
+    , urlMap
     , umScript
     , umSecurityLevel
     , umAPIEndpoint
@@ -62,7 +62,7 @@ module Network.Google.AppEngine.Types
 
     -- * APIConfigHandler
     , APIConfigHandler
-    , aPIConfigHandler
+    , apiConfigHandler
     , achScript
     , achSecurityLevel
     , achURL
@@ -95,7 +95,7 @@ module Network.Google.AppEngine.Types
 
     -- * URLDispatchRule
     , URLDispatchRule
-    , uRLDispatchRule
+    , urlDispatchRule
     , udrPath
     , udrDomain
     , udrModule
@@ -151,7 +151,7 @@ module Network.Google.AppEngine.Types
 
     -- * APIEndpointHandler
     , APIEndpointHandler
-    , aPIEndpointHandler
+    , apiEndpointHandler
     , aehScriptPath
 
     -- * StatusDetails
@@ -178,7 +178,7 @@ module Network.Google.AppEngine.Types
 
     -- * CPUUtilization
     , CPUUtilization
-    , cPUUtilization
+    , cpuUtilization
     , cuAggregationWindowLength
     , cuTargetUtilization
 

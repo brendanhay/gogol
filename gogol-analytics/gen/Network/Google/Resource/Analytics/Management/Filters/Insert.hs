@@ -53,9 +53,9 @@ type ManagementFiltersInsertResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Filter :> Post '[JSON] Filter
 
@@ -162,11 +162,12 @@ instance GoogleRequest ManagementFiltersInsert' where
         type Rs ManagementFiltersInsert' = Filter
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementFiltersInsert'{..}
-          = go _mfiQuotaUser (Just _mfiPrettyPrint) _mfiUserIP
-              _mfiAccountId
+          = go _mfiAccountId _mfiQuotaUser
+              (Just _mfiPrettyPrint)
+              _mfiUserIP
+              _mfiFields
               _mfiKey
               _mfiOAuthToken
-              _mfiFields
               (Just AltJSON)
               _mfiFilter
           where go

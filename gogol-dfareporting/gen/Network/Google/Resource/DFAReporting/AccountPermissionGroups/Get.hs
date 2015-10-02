@@ -53,9 +53,9 @@ type AccountPermissionGroupsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] AccountPermissionGroup
 
@@ -165,13 +165,12 @@ instance GoogleRequest AccountPermissionGroupsGet'
              AccountPermissionGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AccountPermissionGroupsGet'{..}
-          = go _apggQuotaUser (Just _apggPrettyPrint)
+          = go _apggProfileId _apggId _apggQuotaUser
+              (Just _apggPrettyPrint)
               _apggUserIP
-              _apggProfileId
-              _apggKey
-              _apggId
-              _apggOAuthToken
               _apggFields
+              _apggKey
+              _apggOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

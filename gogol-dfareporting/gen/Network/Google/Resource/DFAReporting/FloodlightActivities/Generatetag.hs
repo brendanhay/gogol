@@ -50,13 +50,13 @@ type FloodlightActivitiesGeneratetagResource =
        Capture "profileId" Int64 :>
          "floodlightActivities" :>
            "generatetag" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "floodlightActivityId" Int64 :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+             QueryParam "floodlightActivityId" Int64 :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Post '[JSON]
                                FloodlightActivitiesGenerateTagResponse
@@ -168,12 +168,13 @@ instance GoogleRequest
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           FloodlightActivitiesGeneratetag'{..}
-          = go _fagQuotaUser (Just _fagPrettyPrint) _fagUserIP
-              _fagFloodlightActivityId
-              _fagProfileId
+          = go _fagFloodlightActivityId _fagProfileId
+              _fagQuotaUser
+              (Just _fagPrettyPrint)
+              _fagUserIP
+              _fagFields
               _fagKey
               _fagOAuthToken
-              _fagFields
               (Just AltJSON)
           where go
                   = clientWithRoute

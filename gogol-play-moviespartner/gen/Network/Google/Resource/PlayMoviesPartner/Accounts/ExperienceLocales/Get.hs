@@ -60,17 +60,17 @@ type AccountsExperienceLocalesGetResource =
            "experienceLocales" :>
              Capture "elId" Text :>
                QueryParam "$.xgafv" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "key" Key :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "callback" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "quotaUser" Text :>
+                               QueryParam "prettyPrint" Bool :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] ExperienceLocale
 
@@ -241,19 +241,18 @@ instance GoogleRequest AccountsExperienceLocalesGet'
           = requestWithRoute defReq playMoviesPartnerURL
         requestWithRoute r u
           AccountsExperienceLocalesGet'{..}
-          = go _aelgXgafv _aelgQuotaUser
-              (Just _aelgPrettyPrint)
-              _aelgUploadProtocol
+          = go _aelgXgafv _aelgAccessToken _aelgBearerToken
+              _aelgCallback
               (Just _aelgPp)
-              _aelgAccessToken
               _aelgUploadType
-              _aelgElId
+              _aelgUploadProtocol
               _aelgAccountId
-              _aelgBearerToken
+              _aelgElId
+              _aelgQuotaUser
+              (Just _aelgPrettyPrint)
+              _aelgFields
               _aelgKey
               _aelgOAuthToken
-              _aelgFields
-              _aelgCallback
               (Just AltJSON)
           where go
                   = clientWithRoute

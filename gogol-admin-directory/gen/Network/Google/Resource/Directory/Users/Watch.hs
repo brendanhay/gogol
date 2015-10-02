@@ -59,27 +59,28 @@ import           Network.Google.Prelude
 type UsersWatchResource =
      "users" :>
        "watch" :>
-         QueryParam "event" DirectoryUsersWatchEvent :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "orderBy" DirectoryUsersWatchOrderBy :>
-                 QueryParam "viewType" DirectoryUsersWatchViewType :>
-                   QueryParam "customFieldMask" Text :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "domain" Text :>
-                         QueryParam "showDeleted" Text :>
-                           QueryParam "sortOrder" DirectoryUsersWatchSortOrder
-                             :>
-                             QueryParam "customer" Text :>
-                               QueryParam "key" Key :>
-                                 QueryParam "query" Text :>
-                                   QueryParam "projection"
-                                     DirectoryUsersWatchProjection
-                                     :>
-                                     QueryParam "pageToken" Text :>
-                                       QueryParam "oauth_token" OAuthToken :>
-                                         QueryParam "maxResults" Int32 :>
-                                           QueryParam "fields" Text :>
+         QueryParam "customFieldMask" Text :>
+           QueryParam "customer" Text :>
+             QueryParam "domain" Text :>
+               QueryParam "event" DirectoryUsersWatchEvent :>
+                 QueryParam "maxResults" Int32 :>
+                   QueryParam "orderBy" DirectoryUsersWatchOrderBy :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "projection" DirectoryUsersWatchProjection
+                         :>
+                         QueryParam "query" Text :>
+                           QueryParam "showDeleted" Text :>
+                             QueryParam "sortOrder" DirectoryUsersWatchSortOrder
+                               :>
+                               QueryParam "viewType" DirectoryUsersWatchViewType
+                                 :>
+                                 QueryParam "quotaUser" Text :>
+                                   QueryParam "prettyPrint" Bool :>
+                                     QueryParam "userIp" Text :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "key" Key :>
+                                           QueryParam "oauth_token" OAuthToken
+                                             :>
                                              QueryParam "alt" AltJSON :>
                                                ReqBody '[JSON] Channel :>
                                                  Post '[JSON] Channel
@@ -286,22 +287,22 @@ instance GoogleRequest UsersWatch' where
         type Rs UsersWatch' = Channel
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u UsersWatch'{..}
-          = go _uwEvent _uwQuotaUser (Just _uwPrettyPrint)
+          = go _uwCustomFieldMask _uwCustomer _uwDomain
+              _uwEvent
+              _uwMaxResults
               _uwOrderBy
-              (Just _uwViewType)
-              _uwCustomFieldMask
-              _uwUserIP
-              _uwDomain
+              _uwPageToken
+              (Just _uwProjection)
+              _uwQuery
               _uwShowDeleted
               _uwSortOrder
-              _uwCustomer
-              _uwKey
-              _uwQuery
-              (Just _uwProjection)
-              _uwPageToken
-              _uwOAuthToken
-              _uwMaxResults
+              (Just _uwViewType)
+              _uwQuotaUser
+              (Just _uwPrettyPrint)
+              _uwUserIP
               _uwFields
+              _uwKey
+              _uwOAuthToken
               (Just AltJSON)
               _uwChannel
           where go

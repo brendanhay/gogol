@@ -55,23 +55,23 @@ type TargetableRemarketingListsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "targetableRemarketingLists" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "advertiserId" Int64 :>
-                   QueryParam "sortOrder"
-                     DfareportingTargetableRemarketingListsListSortOrder
+           QueryParam "active" Bool :>
+             QueryParam "maxResults" Int32 :>
+               QueryParam "name" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "sortField"
+                     DfareportingTargetableRemarketingListsListSortField
                      :>
-                     QueryParam "active" Bool :>
-                       QueryParam "key" Key :>
-                         QueryParam "name" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "sortField"
-                               DfareportingTargetableRemarketingListsListSortField
-                               :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "maxResults" Int32 :>
-                                   QueryParam "fields" Text :>
+                     QueryParam "sortOrder"
+                       DfareportingTargetableRemarketingListsListSortOrder
+                       :>
+                       QueryParam "advertiserId" Int64 :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON]
                                          TargetableRemarketingListsListResponse
@@ -251,19 +251,18 @@ instance GoogleRequest
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           TargetableRemarketingListsList'{..}
-          = go _trllQuotaUser (Just _trllPrettyPrint)
-              _trllUserIP
-              (Just _trllAdvertiserId)
-              _trllProfileId
-              _trllSortOrder
-              _trllActive
-              _trllKey
-              _trllName
+          = go _trllActive _trllMaxResults _trllName
               _trllPageToken
               _trllSortField
-              _trllOAuthToken
-              _trllMaxResults
+              _trllSortOrder
+              _trllProfileId
+              (Just _trllAdvertiserId)
+              _trllQuotaUser
+              (Just _trllPrettyPrint)
+              _trllUserIP
               _trllFields
+              _trllKey
+              _trllOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

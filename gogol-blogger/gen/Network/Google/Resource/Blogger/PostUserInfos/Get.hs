@@ -56,13 +56,13 @@ type PostUserInfosGetResource =
            Capture "blogId" Text :>
              "posts" :>
                Capture "postId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "maxComments" Word32 :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                 QueryParam "maxComments" Word32 :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] PostUserInfo
 
@@ -193,15 +193,14 @@ instance GoogleRequest PostUserInfosGet' where
         type Rs PostUserInfosGet' = PostUserInfo
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PostUserInfosGet'{..}
-          = go _puigQuotaUser (Just _puigPrettyPrint)
-              _puigUserIP
-              _puigBlogId
-              _puigMaxComments
-              _puigUserId
-              _puigKey
+          = go _puigMaxComments _puigUserId _puigBlogId
               _puigPostId
-              _puigOAuthToken
+              _puigQuotaUser
+              (Just _puigPrettyPrint)
+              _puigUserIP
               _puigFields
+              _puigKey
+              _puigOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

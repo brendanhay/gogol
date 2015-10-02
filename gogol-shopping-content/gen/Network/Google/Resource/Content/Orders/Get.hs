@@ -52,9 +52,9 @@ type OrdersGetResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Order
 
 -- | Retrieves an order from your Merchant Center account.
@@ -157,12 +157,12 @@ instance GoogleRequest OrdersGet' where
         type Rs OrdersGet' = Order
         request = requestWithRoute defReq shoppingContentURL
         requestWithRoute r u OrdersGet'{..}
-          = go _ogQuotaUser _ogMerchantId (Just _ogPrettyPrint)
+          = go _ogMerchantId _ogOrderId _ogQuotaUser
+              (Just _ogPrettyPrint)
               _ogUserIP
+              _ogFields
               _ogKey
               _ogOAuthToken
-              _ogOrderId
-              _ogFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy OrdersGetResource)

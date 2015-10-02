@@ -48,15 +48,15 @@ import           Network.Google.Prelude
 -- 'TeamList'' request conforms to.
 type TeamListResource =
      "teams" :>
-       QueryParam "quotaUser" Text :>
+       QueryParam "admin" Bool :>
          QueryParam "dispatcher" Bool :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "admin" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "worker" Bool :>
-                       QueryParam "fields" Text :>
+           QueryParam "worker" Bool :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] TeamListResponse
 
@@ -165,13 +165,12 @@ instance GoogleRequest TeamList' where
         type Rs TeamList' = TeamListResponse
         request = requestWithRoute defReq mapsCoordinateURL
         requestWithRoute r u TeamList'{..}
-          = go _tlQuotaUser _tlDispatcher (Just _tlPrettyPrint)
-              _tlAdmin
+          = go _tlAdmin _tlDispatcher _tlWorker _tlQuotaUser
+              (Just _tlPrettyPrint)
               _tlUserIP
+              _tlFields
               _tlKey
               _tlOAuthToken
-              _tlWorker
-              _tlFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TeamListResource) r

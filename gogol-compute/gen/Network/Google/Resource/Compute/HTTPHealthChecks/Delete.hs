@@ -53,9 +53,9 @@ type HTTPHealthChecksDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified HttpHealthCheck resource.
@@ -167,13 +167,13 @@ instance GoogleRequest HTTPHealthChecksDelete' where
         type Rs HTTPHealthChecksDelete' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u HTTPHealthChecksDelete'{..}
-          = go _httphcdQuotaUser (Just _httphcdPrettyPrint)
-              _httphcdProject
+          = go _httphcdProject _httphcdHTTPHealthCheck
+              _httphcdQuotaUser
+              (Just _httphcdPrettyPrint)
               _httphcdUserIP
-              _httphcdKey
-              _httphcdHTTPHealthCheck
-              _httphcdOAuthToken
               _httphcdFields
+              _httphcdKey
+              _httphcdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

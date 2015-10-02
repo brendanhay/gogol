@@ -57,9 +57,9 @@ type PurchasesSubscriptionsGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] SubscriptionPurchase
 
@@ -182,14 +182,13 @@ instance GoogleRequest PurchasesSubscriptionsGet'
              SubscriptionPurchase
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u PurchasesSubscriptionsGet'{..}
-          = go _psgQuotaUser (Just _psgPrettyPrint)
-              _psgPackageName
+          = go _psgPackageName _psgSubscriptionId _psgToken
+              _psgQuotaUser
+              (Just _psgPrettyPrint)
               _psgUserIP
-              _psgToken
+              _psgFields
               _psgKey
               _psgOAuthToken
-              _psgSubscriptionId
-              _psgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

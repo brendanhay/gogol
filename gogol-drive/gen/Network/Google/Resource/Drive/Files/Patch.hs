@@ -62,27 +62,28 @@ import           Network.Google.Prelude
 type FilesPatchResource =
      "files" :>
        Capture "fileId" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "newRevision" Bool :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "pinned" Bool :>
-                   QueryParam "timedTextLanguage" Text :>
-                     QueryParam "updateViewedDate" Bool :>
+         QueryParam "addParents" Text :>
+           QueryParam "convert" Bool :>
+             QueryParam "modifiedDateBehavior"
+               DriveFilesPatchModifiedDateBehavior
+               :>
+               QueryParam "newRevision" Bool :>
+                 QueryParam "ocr" Bool :>
+                   QueryParam "ocrLanguage" Text :>
+                     QueryParam "pinned" Bool :>
                        QueryParam "removeParents" Text :>
-                         QueryParam "modifiedDateBehavior"
-                           DriveFilesPatchModifiedDateBehavior
-                           :>
-                           QueryParam "useContentAsIndexableText" Bool :>
+                         QueryParam "setModifiedDate" Bool :>
+                           QueryParam "timedTextLanguage" Text :>
                              QueryParam "timedTextTrackName" Text :>
-                               QueryParam "ocrLanguage" Text :>
-                                 QueryParam "key" Key :>
-                                   QueryParam "convert" Bool :>
-                                     QueryParam "setModifiedDate" Bool :>
-                                       QueryParam "oauth_token" OAuthToken :>
-                                         QueryParam "addParents" Text :>
-                                           QueryParam "ocr" Bool :>
-                                             QueryParam "fields" Text :>
+                               QueryParam "updateViewedDate" Bool :>
+                                 QueryParam "useContentAsIndexableText" Bool :>
+                                   QueryParam "quotaUser" Text :>
+                                     QueryParam "prettyPrint" Bool :>
+                                       QueryParam "userIp" Text :>
+                                         QueryParam "fields" Text :>
+                                           QueryParam "key" Key :>
+                                             QueryParam "oauth_token" OAuthToken
+                                               :>
                                                QueryParam "alt" AltJSON :>
                                                  ReqBody '[JSON] File :>
                                                    Patch '[JSON] File
@@ -319,25 +320,25 @@ instance GoogleRequest FilesPatch' where
         type Rs FilesPatch' = File
         request = requestWithRoute defReq driveURL
         requestWithRoute r u FilesPatch'{..}
-          = go _fpQuotaUser (Just _fpNewRevision)
+          = go _fpAddParents (Just _fpConvert)
+              _fpModifiedDateBehavior
+              (Just _fpNewRevision)
+              (Just _fpOCR)
+              _fpOCRLanguage
+              (Just _fpPinned)
+              _fpRemoveParents
+              (Just _fpSetModifiedDate)
+              _fpTimedTextLanguage
+              _fpTimedTextTrackName
+              (Just _fpUpdateViewedDate)
+              (Just _fpUseContentAsIndexableText)
+              _fpFileId
+              _fpQuotaUser
               (Just _fpPrettyPrint)
               _fpUserIP
-              (Just _fpPinned)
-              _fpTimedTextLanguage
-              (Just _fpUpdateViewedDate)
-              _fpRemoveParents
-              _fpModifiedDateBehavior
-              (Just _fpUseContentAsIndexableText)
-              _fpTimedTextTrackName
-              _fpOCRLanguage
-              _fpKey
-              (Just _fpConvert)
-              (Just _fpSetModifiedDate)
-              _fpFileId
-              _fpOAuthToken
-              _fpAddParents
-              (Just _fpOCR)
               _fpFields
+              _fpKey
+              _fpOAuthToken
               (Just AltJSON)
               _fpFile
           where go

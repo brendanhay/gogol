@@ -53,9 +53,9 @@ type JobsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Job
 
 -- | Retrieves a job, including all the changes made to the job.
@@ -156,12 +156,12 @@ instance GoogleRequest JobsGet' where
         type Rs JobsGet' = Job
         request = requestWithRoute defReq mapsCoordinateURL
         requestWithRoute r u JobsGet'{..}
-          = go _jgQuotaUser (Just _jgPrettyPrint) _jgJobId
+          = go _jgTeamId _jgJobId _jgQuotaUser
+              (Just _jgPrettyPrint)
               _jgUserIP
-              _jgTeamId
+              _jgFields
               _jgKey
               _jgOAuthToken
-              _jgFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy JobsGetResource) r

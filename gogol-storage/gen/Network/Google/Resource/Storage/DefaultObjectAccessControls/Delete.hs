@@ -54,9 +54,9 @@ type DefaultObjectAccessControlsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Permanently deletes the default object ACL entry for the specified
@@ -169,13 +169,12 @@ instance GoogleRequest
         request = requestWithRoute defReq storageURL
         requestWithRoute r u
           DefaultObjectAccessControlsDelete'{..}
-          = go _doacdQuotaUser (Just _doacdPrettyPrint)
+          = go _doacdBucket _doacdEntity _doacdQuotaUser
+              (Just _doacdPrettyPrint)
               _doacdUserIP
-              _doacdBucket
+              _doacdFields
               _doacdKey
               _doacdOAuthToken
-              _doacdEntity
-              _doacdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

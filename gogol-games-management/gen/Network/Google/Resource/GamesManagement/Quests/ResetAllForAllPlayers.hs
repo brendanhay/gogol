@@ -50,9 +50,9 @@ type QuestsResetAllForAllPlayersResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Resets all draft quests for all players. This method is only available
@@ -145,9 +145,9 @@ instance GoogleRequest QuestsResetAllForAllPlayers'
         requestWithRoute r u QuestsResetAllForAllPlayers'{..}
           = go _qrafapQuotaUser (Just _qrafapPrettyPrint)
               _qrafapUserIP
+              _qrafapFields
               _qrafapKey
               _qrafapOAuthToken
-              _qrafapFields
               (Just AltJSON)
           where go
                   = clientWithRoute

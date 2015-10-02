@@ -52,9 +52,9 @@ type InappproductsGetResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] InAppProduct
 
 -- | Returns information about the in-app product specified.
@@ -156,13 +156,12 @@ instance GoogleRequest InappproductsGet' where
         type Rs InappproductsGet' = InAppProduct
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u InappproductsGet'{..}
-          = go _igQuotaUser (Just _igPrettyPrint)
-              _igPackageName
+          = go _igPackageName _igSku _igQuotaUser
+              (Just _igPrettyPrint)
               _igUserIP
-              _igKey
-              _igSku
-              _igOAuthToken
               _igFields
+              _igKey
+              _igOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

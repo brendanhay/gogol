@@ -52,16 +52,16 @@ type CommentsListResource =
      "files" :>
        Capture "fileId" Text :>
          "comments" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "updatedMin" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Int32 :>
-                           QueryParam "includeDeleted" Bool :>
-                             QueryParam "fields" Text :>
+           QueryParam "includeDeleted" Bool :>
+             QueryParam "maxResults" Int32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "updatedMin" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] CommentList
 
@@ -202,15 +202,16 @@ instance GoogleRequest CommentsList' where
         type Rs CommentsList' = CommentList
         request = requestWithRoute defReq driveURL
         requestWithRoute r u CommentsList'{..}
-          = go _comQuotaUser (Just _comPrettyPrint) _comUserIP
-              _comKey
-              _comUpdatedMin
+          = go (Just _comIncludeDeleted) (Just _comMaxResults)
               _comPageToken
+              _comUpdatedMin
               _comFileId
-              _comOAuthToken
-              (Just _comMaxResults)
-              (Just _comIncludeDeleted)
+              _comQuotaUser
+              (Just _comPrettyPrint)
+              _comUserIP
               _comFields
+              _comKey
+              _comOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

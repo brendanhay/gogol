@@ -50,9 +50,9 @@ type PermissionsGetIdForEmailResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] PermissionId
 
 -- | Returns the permission ID for an email address.
@@ -153,9 +153,9 @@ instance GoogleRequest PermissionsGetIdForEmail'
           = go _pgifeEmail _pgifeQuotaUser
               (Just _pgifePrettyPrint)
               _pgifeUserIP
+              _pgifeFields
               _pgifeKey
               _pgifeOAuthToken
-              _pgifeFields
               (Just AltJSON)
           where go
                   = clientWithRoute

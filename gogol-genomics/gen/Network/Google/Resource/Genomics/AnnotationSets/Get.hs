@@ -51,9 +51,9 @@ type AnnotationSetsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] AnnotationSet
 
 -- | Gets an annotation set. Caller must have READ permission for the
@@ -151,12 +151,12 @@ instance GoogleRequest AnnotationSetsGet' where
         type Rs AnnotationSetsGet' = AnnotationSet
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u AnnotationSetsGet'{..}
-          = go _asgQuotaUser (Just _asgPrettyPrint)
-              _asgAnnotationSetId
+          = go _asgAnnotationSetId _asgQuotaUser
+              (Just _asgPrettyPrint)
               _asgUserIP
+              _asgFields
               _asgKey
               _asgOAuthToken
-              _asgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

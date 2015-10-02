@@ -27,7 +27,7 @@ module Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.MarkAsFixed
       URLCrawlErrorsSamplesMarkAsFixedResource
 
     -- * Creating a Request
-    , uRLCrawlErrorsSamplesMarkAsFixed'
+    , urlCrawlErrorsSamplesMarkAsFixed'
     , URLCrawlErrorsSamplesMarkAsFixed'
 
     -- * Request Lenses
@@ -53,24 +53,24 @@ type URLCrawlErrorsSamplesMarkAsFixedResource =
        Capture "siteUrl" Text :>
          "urlCrawlErrorsSamples" :>
            Capture "url" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "platform"
-                   WebmastersURLCrawlErrorsSamplesMarkAsFixedPlatform
-                   :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "category"
-                       WebmastersURLCrawlErrorsSamplesMarkAsFixedCategory
-                       :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+             QueryParam "category"
+               WebmastersURLCrawlErrorsSamplesMarkAsFixedCategory
+               :>
+               QueryParam "platform"
+                 WebmastersURLCrawlErrorsSamplesMarkAsFixedPlatform
+                 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Marks the provided site\'s sample URL as fixed, and removes it from the
 -- samples list.
 --
--- /See:/ 'uRLCrawlErrorsSamplesMarkAsFixed'' smart constructor.
+-- /See:/ 'urlCrawlErrorsSamplesMarkAsFixed'' smart constructor.
 data URLCrawlErrorsSamplesMarkAsFixed' = URLCrawlErrorsSamplesMarkAsFixed'
     { _ucesmafQuotaUser   :: !(Maybe Text)
     , _ucesmafPrettyPrint :: !Bool
@@ -107,13 +107,13 @@ data URLCrawlErrorsSamplesMarkAsFixed' = URLCrawlErrorsSamplesMarkAsFixed'
 -- * 'ucesmafOAuthToken'
 --
 -- * 'ucesmafFields'
-uRLCrawlErrorsSamplesMarkAsFixed'
+urlCrawlErrorsSamplesMarkAsFixed'
     :: WebmastersURLCrawlErrorsSamplesMarkAsFixedPlatform -- ^ 'platform'
     -> WebmastersURLCrawlErrorsSamplesMarkAsFixedCategory -- ^ 'category'
     -> Text -- ^ 'siteUrl'
     -> Text -- ^ 'url'
     -> URLCrawlErrorsSamplesMarkAsFixed'
-uRLCrawlErrorsSamplesMarkAsFixed' pUcesmafPlatform_ pUcesmafCategory_ pUcesmafSiteURL_ pUcesmafURL_ =
+urlCrawlErrorsSamplesMarkAsFixed' pUcesmafPlatform_ pUcesmafCategory_ pUcesmafSiteURL_ pUcesmafURL_ =
     URLCrawlErrorsSamplesMarkAsFixed'
     { _ucesmafQuotaUser = Nothing
     , _ucesmafPrettyPrint = True
@@ -205,15 +205,15 @@ instance GoogleRequest
         request = requestWithRoute defReq webmasterToolsURL
         requestWithRoute r u
           URLCrawlErrorsSamplesMarkAsFixed'{..}
-          = go _ucesmafQuotaUser (Just _ucesmafPrettyPrint)
-              (Just _ucesmafPlatform)
-              _ucesmafUserIP
+          = go _ucesmafSiteURL _ucesmafURL
               (Just _ucesmafCategory)
-              _ucesmafSiteURL
-              _ucesmafURL
+              (Just _ucesmafPlatform)
+              _ucesmafQuotaUser
+              (Just _ucesmafPrettyPrint)
+              _ucesmafUserIP
+              _ucesmafFields
               _ucesmafKey
               _ucesmafOAuthToken
-              _ucesmafFields
               (Just AltJSON)
           where go
                   = clientWithRoute

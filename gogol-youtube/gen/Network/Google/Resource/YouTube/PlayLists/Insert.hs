@@ -49,15 +49,15 @@ import           Network.Google.YouTube.Types
 -- 'PlayListsInsert'' request conforms to.
 type PlayListsInsertResource =
      "playlists" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "part" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+       QueryParam "onBehalfOfContentOwner" Text :>
+         QueryParam "onBehalfOfContentOwnerChannel" Text :>
+           QueryParam "part" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] PlayList :> Post '[JSON] PlayList
 
@@ -209,14 +209,15 @@ instance GoogleRequest PlayListsInsert' where
         type Rs PlayListsInsert' = PlayList
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u PlayListsInsert'{..}
-          = go _pliQuotaUser (Just _pliPart)
+          = go _pliOnBehalfOfContentOwner
+              _pliOnBehalfOfContentOwnerChannel
+              (Just _pliPart)
+              _pliQuotaUser
               (Just _pliPrettyPrint)
               _pliUserIP
-              _pliOnBehalfOfContentOwner
-              _pliKey
-              _pliOnBehalfOfContentOwnerChannel
-              _pliOAuthToken
               _pliFields
+              _pliKey
+              _pliOAuthToken
               (Just AltJSON)
               _pliPlayList
           where go

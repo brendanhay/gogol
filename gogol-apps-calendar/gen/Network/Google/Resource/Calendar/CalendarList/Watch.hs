@@ -55,20 +55,20 @@ type CalendarListWatchResource =
        "me" :>
          "calendarList" :>
            "watch" :>
-             QueryParam "syncToken" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "minAccessRole"
-                     CalendarCalendarListWatchMinAccessRole
-                     :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "showDeleted" Bool :>
-                         QueryParam "showHidden" Bool :>
-                           QueryParam "key" Key :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "maxResults" Int32 :>
-                                   QueryParam "fields" Text :>
+             QueryParam "maxResults" Int32 :>
+               QueryParam "minAccessRole"
+                 CalendarCalendarListWatchMinAccessRole
+                 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "showDeleted" Bool :>
+                     QueryParam "showHidden" Bool :>
+                       QueryParam "syncToken" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        ReqBody '[JSON] Channel :>
                                          Post '[JSON] Channel
@@ -240,17 +240,16 @@ instance GoogleRequest CalendarListWatch' where
         type Rs CalendarListWatch' = Channel
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u CalendarListWatch'{..}
-          = go _clwSyncToken _clwQuotaUser
-              (Just _clwPrettyPrint)
-              _clwMinAccessRole
-              _clwUserIP
+          = go _clwMaxResults _clwMinAccessRole _clwPageToken
               _clwShowDeleted
               _clwShowHidden
-              _clwKey
-              _clwPageToken
-              _clwOAuthToken
-              _clwMaxResults
+              _clwSyncToken
+              _clwQuotaUser
+              (Just _clwPrettyPrint)
+              _clwUserIP
               _clwFields
+              _clwKey
+              _clwOAuthToken
               (Just AltJSON)
               _clwChannel
           where go

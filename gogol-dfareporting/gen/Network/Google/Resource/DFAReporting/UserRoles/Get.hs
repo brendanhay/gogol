@@ -53,9 +53,9 @@ type UserRolesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] UserRole
 
 -- | Gets one user role by ID.
@@ -160,12 +160,12 @@ instance GoogleRequest UserRolesGet' where
         type Rs UserRolesGet' = UserRole
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u UserRolesGet'{..}
-          = go _urgQuotaUser (Just _urgPrettyPrint) _urgUserIP
-              _urgProfileId
-              _urgKey
-              _urgId
-              _urgOAuthToken
+          = go _urgProfileId _urgId _urgQuotaUser
+              (Just _urgPrettyPrint)
+              _urgUserIP
               _urgFields
+              _urgKey
+              _urgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

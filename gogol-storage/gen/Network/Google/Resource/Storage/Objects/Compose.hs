@@ -55,14 +55,14 @@ type ObjectsComposeResource =
          "o" :>
            Capture "destinationObject" Text :>
              "compose" :>
-               QueryParam "quotaUser" Text :>
+               QueryParam "ifGenerationMatch" Word64 :>
                  QueryParam "ifMetagenerationMatch" Word64 :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "ifGenerationMatch" Word64 :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] ComposeRequest :>
                                    Post '[JSON] Object
@@ -72,14 +72,14 @@ type ObjectsComposeResource =
            "o" :>
              Capture "destinationObject" Text :>
                "compose" :>
-                 QueryParam "quotaUser" Text :>
+                 QueryParam "ifGenerationMatch" Word64 :>
                    QueryParam "ifMetagenerationMatch" Word64 :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "ifGenerationMatch" Word64 :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" Media :>
                                    ReqBody '[JSON] ComposeRequest :>
                                      Post '[OctetStream] Stream
@@ -219,15 +219,15 @@ instance GoogleRequest ObjectsCompose' where
         type Rs ObjectsCompose' = Object
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectsCompose'{..}
-          = go _oQuotaUser _oIfMetagenerationMatch
-              (Just _oPrettyPrint)
-              _oIfGenerationMatch
-              _oUserIP
-              _oKey
+          = go _oIfGenerationMatch _oIfMetagenerationMatch
               _oDestinationBucket
-              _oOAuthToken
-              _oFields
               _oDestinationObject
+              _oQuotaUser
+              (Just _oPrettyPrint)
+              _oUserIP
+              _oFields
+              _oKey
+              _oOAuthToken
               (Just AltJSON)
               _oComposeRequest
           where go :<|> _
@@ -240,15 +240,15 @@ instance GoogleRequest ObjectsCompose' where
         type Rs (Download ObjectsCompose') = Stream
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectsCompose'{..}
-          = go _oQuotaUser _oIfMetagenerationMatch
-              (Just _oPrettyPrint)
-              _oIfGenerationMatch
-              _oUserIP
-              _oKey
+          = go _oIfGenerationMatch _oIfMetagenerationMatch
               _oDestinationBucket
-              _oOAuthToken
-              _oFields
               _oDestinationObject
+              _oQuotaUser
+              (Just _oPrettyPrint)
+              _oUserIP
+              _oFields
+              _oKey
+              _oOAuthToken
               (Just Media)
               _oComposeRequest
           where go :<|> _

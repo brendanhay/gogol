@@ -55,9 +55,9 @@ type SubscriptionsChangeRenewalSettingsResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] RenewalSettings :>
                                Post '[JSON] Subscription
@@ -183,13 +183,13 @@ instance GoogleRequest
         request = requestWithRoute defReq appsResellerURL
         requestWithRoute r u
           SubscriptionsChangeRenewalSettings'{..}
-          = go _scrsQuotaUser (Just _scrsPrettyPrint)
+          = go _scrsCustomerId _scrsSubscriptionId
+              _scrsQuotaUser
+              (Just _scrsPrettyPrint)
               _scrsUserIP
-              _scrsCustomerId
+              _scrsFields
               _scrsKey
               _scrsOAuthToken
-              _scrsSubscriptionId
-              _scrsFields
               (Just AltJSON)
               _scrsRenewalSettings
           where go

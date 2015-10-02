@@ -52,9 +52,9 @@ type RemarketingListsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] RemarketingList :>
                            Post '[JSON] RemarketingList
@@ -163,11 +163,12 @@ instance GoogleRequest RemarketingListsInsert' where
         type Rs RemarketingListsInsert' = RemarketingList
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u RemarketingListsInsert'{..}
-          = go _rliQuotaUser (Just _rliPrettyPrint) _rliUserIP
-              _rliProfileId
+          = go _rliProfileId _rliQuotaUser
+              (Just _rliPrettyPrint)
+              _rliUserIP
+              _rliFields
               _rliKey
               _rliOAuthToken
-              _rliFields
               (Just AltJSON)
               _rliRemarketingList
           where go

@@ -91,8 +91,8 @@ module Network.Google.AndroidPublisher.Types
     -- * APK
     , APK
     , aPK
-    , apkVersionCode
-    , apkBinary
+    , aVersionCode
+    , aBinary
 
     -- * Testers
     , Testers

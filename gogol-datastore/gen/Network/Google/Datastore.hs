@@ -216,8 +216,8 @@ module Network.Google.Datastore
     -- ** Key
     , Key
     , key
-    , keyPartitionId
-    , keyPath
+    , kPartitionId
+    , kPath
 
     -- ** PropertyFilterOperator
     , PropertyFilterOperator (..)

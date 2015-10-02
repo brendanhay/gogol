@@ -59,17 +59,17 @@ type ProjectsSinksDeleteResource =
            "sinks" :>
              Capture "sinksId" Text :>
                QueryParam "$.xgafv" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "key" Key :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "callback" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "quotaUser" Text :>
+                               QueryParam "prettyPrint" Bool :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Delete '[JSON] Empty
 
@@ -233,18 +233,18 @@ instance GoogleRequest ProjectsSinksDelete' where
         type Rs ProjectsSinksDelete' = Empty
         request = requestWithRoute defReq loggingURL
         requestWithRoute r u ProjectsSinksDelete'{..}
-          = go _psdXgafv _psdQuotaUser (Just _psdPrettyPrint)
-              _psdUploadProtocol
+          = go _psdXgafv _psdAccessToken _psdBearerToken
+              _psdCallback
               (Just _psdPp)
-              _psdAccessToken
               _psdUploadType
-              _psdBearerToken
-              _psdKey
-              _psdOAuthToken
+              _psdUploadProtocol
               _psdProjectsId
               _psdSinksId
+              _psdQuotaUser
+              (Just _psdPrettyPrint)
               _psdFields
-              _psdCallback
+              _psdKey
+              _psdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

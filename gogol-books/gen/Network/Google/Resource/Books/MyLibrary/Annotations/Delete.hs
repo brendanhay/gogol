@@ -49,13 +49,13 @@ type MyLibraryAnnotationsDeleteResource =
      "mylibrary" :>
        "annotations" :>
          Capture "annotationId" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "source" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "source" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an annotation.
@@ -163,13 +163,12 @@ instance GoogleRequest MyLibraryAnnotationsDelete'
         type Rs MyLibraryAnnotationsDelete' = ()
         request = requestWithRoute defReq booksURL
         requestWithRoute r u MyLibraryAnnotationsDelete'{..}
-          = go _mladQuotaUser (Just _mladPrettyPrint)
+          = go _mladSource _mladAnnotationId _mladQuotaUser
+              (Just _mladPrettyPrint)
               _mladUserIP
-              _mladKey
-              _mladAnnotationId
-              _mladSource
-              _mladOAuthToken
               _mladFields
+              _mladKey
+              _mladOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

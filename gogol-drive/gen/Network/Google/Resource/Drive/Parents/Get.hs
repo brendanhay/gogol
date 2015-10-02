@@ -53,9 +53,9 @@ type ParentsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] ParentReference
 
@@ -163,13 +163,12 @@ instance GoogleRequest ParentsGet' where
         type Rs ParentsGet' = ParentReference
         request = requestWithRoute defReq driveURL
         requestWithRoute r u ParentsGet'{..}
-          = go _paraQuotaUser (Just _paraPrettyPrint)
+          = go _paraFileId _paraParentId _paraQuotaUser
+              (Just _paraPrettyPrint)
               _paraUserIP
-              _paraKey
-              _paraFileId
-              _paraOAuthToken
-              _paraParentId
               _paraFields
+              _paraKey
+              _paraOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy ParentsGetResource)

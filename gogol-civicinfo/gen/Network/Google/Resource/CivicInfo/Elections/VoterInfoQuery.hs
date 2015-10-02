@@ -49,15 +49,15 @@ import           Network.Google.Prelude
 -- 'ElectionsVoterInfoQuery'' request conforms to.
 type ElectionsVoterInfoQueryResource =
      "voterinfo" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "electionId" Int64 :>
-               QueryParam "address" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "officialOnly" Bool :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+       QueryParam "electionId" Int64 :>
+         QueryParam "officialOnly" Bool :>
+           QueryParam "address" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] VoterInfoResponse
 
@@ -178,14 +178,14 @@ instance GoogleRequest ElectionsVoterInfoQuery' where
         type Rs ElectionsVoterInfoQuery' = VoterInfoResponse
         request = requestWithRoute defReq civicInfoURL
         requestWithRoute r u ElectionsVoterInfoQuery'{..}
-          = go _eviqQuotaUser (Just _eviqPrettyPrint)
-              _eviqUserIP
-              (Just _eviqElectionId)
+          = go (Just _eviqElectionId) (Just _eviqOfficialOnly)
               (Just _eviqAddress)
-              _eviqKey
-              (Just _eviqOfficialOnly)
-              _eviqOAuthToken
+              _eviqQuotaUser
+              (Just _eviqPrettyPrint)
+              _eviqUserIP
               _eviqFields
+              _eviqKey
+              _eviqOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

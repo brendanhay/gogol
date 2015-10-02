@@ -60,38 +60,37 @@ type UserStatesListResource =
      "v2" :>
        "userStates" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
+                   QueryParams "requestMetadata.experimentIds" Text :>
+                     QueryParam "requestMetadata.locale" Text :>
                        QueryParam "requestMetadata.partnersSessionId" Text
                          :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "requestMetadata.locale" Text :>
-                               QueryParams "requestMetadata.experimentIds" Text
+                         QueryParam
+                           "requestMetadata.trafficSource.trafficSourceId"
+                           Text
+                           :>
+                           QueryParam
+                             "requestMetadata.trafficSource.trafficSubId"
+                             Text
+                             :>
+                             QueryParam
+                               "requestMetadata.userOverrides.ipAddress"
+                               Text
+                               :>
+                               QueryParam "requestMetadata.userOverrides.userId"
+                                 Text
                                  :>
-                                 QueryParam
-                                   "requestMetadata.userOverrides.ipAddress"
-                                   Text
-                                   :>
-                                   QueryParam
-                                     "requestMetadata.trafficSource.trafficSubId"
-                                     Text
-                                     :>
-                                     QueryParam "oauth_token" OAuthToken :>
-                                       QueryParam
-                                         "requestMetadata.userOverrides.userId"
-                                         Text
-                                         :>
-                                         QueryParam
-                                           "requestMetadata.trafficSource.trafficSourceId"
-                                           Text
-                                           :>
-                                           QueryParam "fields" Text :>
-                                             QueryParam "callback" Text :>
+                                 QueryParam "uploadType" Text :>
+                                   QueryParam "upload_protocol" Text :>
+                                     QueryParam "quotaUser" Text :>
+                                       QueryParam "prettyPrint" Bool :>
+                                         QueryParam "fields" Text :>
+                                           QueryParam "key" Key :>
+                                             QueryParam "oauth_token" OAuthToken
+                                               :>
                                                QueryParam "alt" AltJSON :>
                                                  Get '[JSON]
                                                    ListUserStatesResponse
@@ -314,23 +313,23 @@ instance GoogleRequest UserStatesList' where
         type Rs UserStatesList' = ListUserStatesResponse
         request = requestWithRoute defReq partnersURL
         requestWithRoute r u UserStatesList'{..}
-          = go _uslXgafv _uslQuotaUser (Just _uslPrettyPrint)
-              _uslUploadProtocol
-              (Just _uslPp)
-              _uslAccessToken
-              _uslUploadType
-              _uslRequestMetadataPartnersSessionId
-              _uslBearerToken
-              _uslKey
-              _uslRequestMetadataLocale
-              _uslRequestMetadataExperimentIds
-              _uslRequestMetadataUserOverridesIPAddress
-              _uslRequestMetadataTrafficSourceTrafficSubId
-              _uslOAuthToken
-              _uslRequestMetadataUserOverridesUserId
-              _uslRequestMetadataTrafficSourceTrafficSourceId
-              _uslFields
+          = go _uslXgafv _uslAccessToken _uslBearerToken
               _uslCallback
+              (Just _uslPp)
+              _uslRequestMetadataExperimentIds
+              _uslRequestMetadataLocale
+              _uslRequestMetadataPartnersSessionId
+              _uslRequestMetadataTrafficSourceTrafficSourceId
+              _uslRequestMetadataTrafficSourceTrafficSubId
+              _uslRequestMetadataUserOverridesIPAddress
+              _uslRequestMetadataUserOverridesUserId
+              _uslUploadType
+              _uslUploadProtocol
+              _uslQuotaUser
+              (Just _uslPrettyPrint)
+              _uslFields
+              _uslKey
+              _uslOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

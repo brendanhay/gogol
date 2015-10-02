@@ -46,13 +46,13 @@ import           Network.Google.YouTubeAnalytics.Types
 -- 'BatchReportDefinitionsList'' request conforms to.
 type BatchReportDefinitionsListResource =
      "batchReportDefinitions" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "onBehalfOfContentOwner" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+       QueryParam "onBehalfOfContentOwner" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] BatchReportDefinitionList
 
@@ -154,12 +154,13 @@ instance GoogleRequest BatchReportDefinitionsList'
              BatchReportDefinitionList
         request = requestWithRoute defReq youTubeAnalyticsURL
         requestWithRoute r u BatchReportDefinitionsList'{..}
-          = go _brdlQuotaUser (Just _brdlPrettyPrint)
+          = go (Just _brdlOnBehalfOfContentOwner)
+              _brdlQuotaUser
+              (Just _brdlPrettyPrint)
               _brdlUserIP
-              (Just _brdlOnBehalfOfContentOwner)
+              _brdlFields
               _brdlKey
               _brdlOAuthToken
-              _brdlFields
               (Just AltJSON)
           where go
                   = clientWithRoute

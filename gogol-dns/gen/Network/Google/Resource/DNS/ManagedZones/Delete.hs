@@ -52,9 +52,9 @@ type ManagedZonesDeleteResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete a previously created ManagedZone.
@@ -162,12 +162,12 @@ instance GoogleRequest ManagedZonesDelete' where
         type Rs ManagedZonesDelete' = ()
         request = requestWithRoute defReq dNSURL
         requestWithRoute r u ManagedZonesDelete'{..}
-          = go _mzdQuotaUser (Just _mzdPrettyPrint) _mzdProject
+          = go _mzdProject _mzdManagedZone _mzdQuotaUser
+              (Just _mzdPrettyPrint)
               _mzdUserIP
+              _mzdFields
               _mzdKey
               _mzdOAuthToken
-              _mzdManagedZone
-              _mzdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

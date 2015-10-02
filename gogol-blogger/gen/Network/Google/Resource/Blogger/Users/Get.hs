@@ -50,9 +50,9 @@ type UsersGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] User
 
 -- | Gets one user by ID.
@@ -144,11 +144,11 @@ instance GoogleRequest UsersGet' where
         type Rs UsersGet' = User
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u UsersGet'{..}
-          = go _ugQuotaUser (Just _ugPrettyPrint) _ugUserIP
-              _ugUserId
+          = go _ugUserId _ugQuotaUser (Just _ugPrettyPrint)
+              _ugUserIP
+              _ugFields
               _ugKey
               _ugOAuthToken
-              _ugFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy UsersGetResource) r

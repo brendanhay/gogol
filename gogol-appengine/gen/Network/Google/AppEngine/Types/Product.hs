@@ -311,7 +311,7 @@ instance ToJSON ScriptHandler where
 -- can handle URLs by executing application code, or by serving static
 -- files uploaded with the code, such as images, CSS or JavaScript.
 --
--- /See:/ 'uRLMap' smart constructor.
+-- /See:/ 'urlMap' smart constructor.
 data URLMap = URLMap
     { _umScript                   :: !(Maybe ScriptHandler)
     , _umSecurityLevel            :: !(Maybe Text)
@@ -345,9 +345,9 @@ data URLMap = URLMap
 -- * 'umLogin'
 --
 -- * 'umStaticDirectory'
-uRLMap
+urlMap
     :: URLMap
-uRLMap =
+urlMap =
     URLMap
     { _umScript = Nothing
     , _umSecurityLevel = Nothing
@@ -448,7 +448,7 @@ instance ToJSON URLMap where
 
 -- | API Serving configuration for Cloud Endpoints.
 --
--- /See:/ 'aPIConfigHandler' smart constructor.
+-- /See:/ 'apiConfigHandler' smart constructor.
 data APIConfigHandler = APIConfigHandler
     { _achScript         :: !(Maybe Text)
     , _achSecurityLevel  :: !(Maybe Text)
@@ -470,9 +470,9 @@ data APIConfigHandler = APIConfigHandler
 -- * 'achAuthFailAction'
 --
 -- * 'achLogin'
-aPIConfigHandler
+apiConfigHandler
     :: APIConfigHandler
-aPIConfigHandler =
+apiConfigHandler =
     APIConfigHandler
     { _achScript = Nothing
     , _achSecurityLevel = Nothing
@@ -756,7 +756,7 @@ instance ToJSON HealthCheck where
 
 -- | Rules to match an HTTP request and dispatch that request to a module.
 --
--- /See:/ 'uRLDispatchRule' smart constructor.
+-- /See:/ 'urlDispatchRule' smart constructor.
 data URLDispatchRule = URLDispatchRule
     { _udrPath   :: !(Maybe Text)
     , _udrDomain :: !(Maybe Text)
@@ -772,9 +772,9 @@ data URLDispatchRule = URLDispatchRule
 -- * 'udrDomain'
 --
 -- * 'udrModule'
-uRLDispatchRule
+urlDispatchRule
     :: URLDispatchRule
-uRLDispatchRule =
+urlDispatchRule =
     URLDispatchRule
     { _udrPath = Nothing
     , _udrDomain = Nothing
@@ -1263,7 +1263,7 @@ instance ToJSON AutomaticScaling where
 
 -- | Use Google Cloud Endpoints to handle requests.
 --
--- /See:/ 'aPIEndpointHandler' smart constructor.
+-- /See:/ 'apiEndpointHandler' smart constructor.
 newtype APIEndpointHandler = APIEndpointHandler
     { _aehScriptPath :: Maybe Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1273,9 +1273,9 @@ newtype APIEndpointHandler = APIEndpointHandler
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'aehScriptPath'
-aPIEndpointHandler
+apiEndpointHandler
     :: APIEndpointHandler
-aPIEndpointHandler =
+apiEndpointHandler =
     APIEndpointHandler
     { _aehScriptPath = Nothing
     }
@@ -1458,7 +1458,7 @@ instance ToJSON StaticFilesHandlerHTTPHeaders where
 
 -- | Target scaling by CPU usage.
 --
--- /See:/ 'cPUUtilization' smart constructor.
+-- /See:/ 'cpuUtilization' smart constructor.
 data CPUUtilization = CPUUtilization
     { _cuAggregationWindowLength :: !(Maybe Text)
     , _cuTargetUtilization       :: !(Maybe Double)
@@ -1471,9 +1471,9 @@ data CPUUtilization = CPUUtilization
 -- * 'cuAggregationWindowLength'
 --
 -- * 'cuTargetUtilization'
-cPUUtilization
+cpuUtilization
     :: CPUUtilization
-cPUUtilization =
+cpuUtilization =
     CPUUtilization
     { _cuAggregationWindowLength = Nothing
     , _cuTargetUtilization = Nothing

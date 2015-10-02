@@ -51,17 +51,17 @@ type VolumesRecommendedRateResource =
      "volumes" :>
        "recommended" :>
          "rate" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "rating" BooksVolumesRecommendedRateRating
-               :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "locale" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "volumeId" Text :>
-                         QueryParam "source" Text :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+           QueryParam "locale" Text :>
+             QueryParam "source" Text :>
+               QueryParam "rating" BooksVolumesRecommendedRateRating
+                 :>
+                 QueryParam "volumeId" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Post '[JSON]
                                    BooksVolumesRecommendedRateResponse
@@ -189,15 +189,14 @@ instance GoogleRequest VolumesRecommendedRate' where
              BooksVolumesRecommendedRateResponse
         request = requestWithRoute defReq booksURL
         requestWithRoute r u VolumesRecommendedRate'{..}
-          = go _vrrQuotaUser (Just _vrrRating)
+          = go _vrrLocale _vrrSource (Just _vrrRating)
+              (Just _vrrVolumeId)
+              _vrrQuotaUser
               (Just _vrrPrettyPrint)
               _vrrUserIP
-              _vrrLocale
-              _vrrKey
-              (Just _vrrVolumeId)
-              _vrrSource
-              _vrrOAuthToken
               _vrrFields
+              _vrrKey
+              _vrrOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

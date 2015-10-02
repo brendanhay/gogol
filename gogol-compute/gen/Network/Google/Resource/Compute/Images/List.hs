@@ -52,15 +52,15 @@ type ImagesListResource =
      Capture "project" Text :>
        "global" :>
          "images" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "filter" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] ImageList
 
 -- | Retrieves the list of image resources available to the specified
@@ -192,14 +192,14 @@ instance GoogleRequest ImagesList' where
         type Rs ImagesList' = ImageList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u ImagesList'{..}
-          = go _ilQuotaUser (Just _ilPrettyPrint) _ilProject
+          = go _ilFilter (Just _ilMaxResults) _ilPageToken
+              _ilProject
+              _ilQuotaUser
+              (Just _ilPrettyPrint)
               _ilUserIP
-              _ilKey
-              _ilFilter
-              _ilPageToken
-              _ilOAuthToken
-              (Just _ilMaxResults)
               _ilFields
+              _ilKey
+              _ilOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy ImagesListResource)

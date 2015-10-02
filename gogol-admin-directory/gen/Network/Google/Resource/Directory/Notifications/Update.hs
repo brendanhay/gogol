@@ -54,9 +54,9 @@ type NotificationsUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Notification :>
                              Put '[JSON] Notification
@@ -173,12 +173,12 @@ instance GoogleRequest NotificationsUpdate' where
         type Rs NotificationsUpdate' = Notification
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u NotificationsUpdate'{..}
-          = go _nuQuotaUser (Just _nuPrettyPrint) _nuUserIP
-              _nuCustomer
-              _nuKey
-              _nuNotificationId
-              _nuOAuthToken
+          = go _nuCustomer _nuNotificationId _nuQuotaUser
+              (Just _nuPrettyPrint)
+              _nuUserIP
               _nuFields
+              _nuKey
+              _nuOAuthToken
               (Just AltJSON)
               _nuNotification
           where go

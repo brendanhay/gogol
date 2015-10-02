@@ -58,17 +58,17 @@ type ProjectsGetBillingInfoResource =
        "{+name}" :>
          "billingInfo" :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
+             QueryParam "access_token" Text :>
+               QueryParam "bearer_token" Text :>
+                 QueryParam "callback" Text :>
                    QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] ProjectBillingInfo
 
@@ -225,18 +225,17 @@ instance GoogleRequest ProjectsGetBillingInfo' where
         type Rs ProjectsGetBillingInfo' = ProjectBillingInfo
         request = requestWithRoute defReq billingURL
         requestWithRoute r u ProjectsGetBillingInfo'{..}
-          = go _pgbiXgafv _pgbiQuotaUser
-              (Just _pgbiPrettyPrint)
-              _pgbiUploadProtocol
-              (Just _pgbiPp)
-              _pgbiAccessToken
-              _pgbiUploadType
-              _pgbiBearerToken
-              _pgbiKey
-              _pgbiName
-              _pgbiOAuthToken
-              _pgbiFields
+          = go _pgbiXgafv _pgbiAccessToken _pgbiBearerToken
               _pgbiCallback
+              (Just _pgbiPp)
+              _pgbiUploadType
+              _pgbiUploadProtocol
+              _pgbiName
+              _pgbiQuotaUser
+              (Just _pgbiPrettyPrint)
+              _pgbiFields
+              _pgbiKey
+              _pgbiOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

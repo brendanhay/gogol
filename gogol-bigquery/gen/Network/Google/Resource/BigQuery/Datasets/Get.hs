@@ -53,9 +53,9 @@ type DatasetsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Dataset
 
 -- | Returns the dataset specified by datasetID.
@@ -158,12 +158,12 @@ instance GoogleRequest DatasetsGet' where
         type Rs DatasetsGet' = Dataset
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u DatasetsGet'{..}
-          = go _dgQuotaUser (Just _dgPrettyPrint) _dgUserIP
-              _dgKey
-              _dgDatasetId
-              _dgProjectId
-              _dgOAuthToken
+          = go _dgProjectId _dgDatasetId _dgQuotaUser
+              (Just _dgPrettyPrint)
+              _dgUserIP
               _dgFields
+              _dgKey
+              _dgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

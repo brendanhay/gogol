@@ -57,19 +57,19 @@ type ProjectsTopicsSubscriptionsListResource =
        "{+topic}" :>
          "subscriptions" :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "pageSize" Int32 :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "callback" Text :>
+             QueryParam "access_token" Text :>
+               QueryParam "bearer_token" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "pageSize" Int32 :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "quotaUser" Text :>
+                               QueryParam "prettyPrint" Bool :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON]
                                            ListTopicSubscriptionsResponse
@@ -249,20 +249,19 @@ instance GoogleRequest
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u
           ProjectsTopicsSubscriptionsList'{..}
-          = go _ptslXgafv _ptslQuotaUser
-              (Just _ptslPrettyPrint)
-              _ptslUploadProtocol
-              (Just _ptslPp)
-              _ptslAccessToken
-              _ptslUploadType
-              _ptslTopic
-              _ptslBearerToken
-              _ptslKey
-              _ptslPageToken
-              _ptslOAuthToken
-              _ptslPageSize
-              _ptslFields
+          = go _ptslXgafv _ptslAccessToken _ptslBearerToken
               _ptslCallback
+              _ptslPageSize
+              _ptslPageToken
+              (Just _ptslPp)
+              _ptslUploadType
+              _ptslUploadProtocol
+              _ptslTopic
+              _ptslQuotaUser
+              (Just _ptslPrettyPrint)
+              _ptslFields
+              _ptslKey
+              _ptslOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

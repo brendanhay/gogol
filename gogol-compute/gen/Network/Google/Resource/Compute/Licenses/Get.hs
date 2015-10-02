@@ -53,9 +53,9 @@ type LicensesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] License
 
 -- | Returns the specified license resource.
@@ -158,12 +158,12 @@ instance GoogleRequest LicensesGet' where
         type Rs LicensesGet' = License
         request = requestWithRoute defReq computeURL
         requestWithRoute r u LicensesGet'{..}
-          = go _lgQuotaUser (Just _lgPrettyPrint) _lgProject
+          = go _lgProject _lgLicense _lgQuotaUser
+              (Just _lgPrettyPrint)
               _lgUserIP
-              _lgKey
-              _lgLicense
-              _lgOAuthToken
               _lgFields
+              _lgKey
+              _lgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

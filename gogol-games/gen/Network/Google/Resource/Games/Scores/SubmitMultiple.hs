@@ -48,13 +48,13 @@ import           Network.Google.Prelude
 type ScoresSubmitMultipleResource =
      "leaderboards" :>
        "scores" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "language" Text :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+         QueryParam "language" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] PlayerScoreSubmissionList :>
                            Post '[JSON] PlayerScoreListResponse
@@ -163,11 +163,12 @@ instance GoogleRequest ScoresSubmitMultiple' where
              PlayerScoreListResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u ScoresSubmitMultiple'{..}
-          = go _ssmQuotaUser (Just _ssmPrettyPrint) _ssmUserIP
-              _ssmKey
-              _ssmLanguage
-              _ssmOAuthToken
+          = go _ssmLanguage _ssmQuotaUser
+              (Just _ssmPrettyPrint)
+              _ssmUserIP
               _ssmFields
+              _ssmKey
+              _ssmOAuthToken
               (Just AltJSON)
               _ssmPlayerScoreSubmissionList
           where go

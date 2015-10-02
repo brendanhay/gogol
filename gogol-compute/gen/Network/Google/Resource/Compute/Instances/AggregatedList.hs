@@ -51,15 +51,15 @@ type InstancesAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
          "instances" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "filter" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] InstanceAggregatedList
 
@@ -196,14 +196,14 @@ instance GoogleRequest InstancesAggregatedList' where
              InstanceAggregatedList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstancesAggregatedList'{..}
-          = go _ialQuotaUser (Just _ialPrettyPrint) _ialProject
+          = go _ialFilter (Just _ialMaxResults) _ialPageToken
+              _ialProject
+              _ialQuotaUser
+              (Just _ialPrettyPrint)
               _ialUserIP
-              _ialKey
-              _ialFilter
-              _ialPageToken
-              _ialOAuthToken
-              (Just _ialMaxResults)
               _ialFields
+              _ialKey
+              _ialOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

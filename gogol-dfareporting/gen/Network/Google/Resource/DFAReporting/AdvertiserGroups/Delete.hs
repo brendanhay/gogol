@@ -53,9 +53,9 @@ type AdvertiserGroupsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing advertiser group.
@@ -160,12 +160,12 @@ instance GoogleRequest AdvertiserGroupsDelete' where
         type Rs AdvertiserGroupsDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdvertiserGroupsDelete'{..}
-          = go _agdQuotaUser (Just _agdPrettyPrint) _agdUserIP
-              _agdProfileId
-              _agdKey
-              _agdId
-              _agdOAuthToken
+          = go _agdProfileId _agdId _agdQuotaUser
+              (Just _agdPrettyPrint)
+              _agdUserIP
               _agdFields
+              _agdKey
+              _agdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

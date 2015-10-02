@@ -40,8 +40,8 @@ module Network.Google.OAuth2
 
     -- * Types
 
-    -- ** JwkKeys
-    , JwkKeys
+    -- ** JWKKeys
+    , JWKKeys
     , jwkKeys
     , jkAlg
     , jkUse
@@ -63,10 +63,10 @@ module Network.Google.OAuth2
     , tiTokenHandle
     , tiIssuedTo
 
-    -- ** Jwk
-    , Jwk
+    -- ** JWK
+    , JWK
     , jwk
-    , jwkKeys
+    , jKeys
 
     -- ** UserInfoplus
     , UserInfoplus

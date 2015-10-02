@@ -56,9 +56,9 @@ type PlayersHideResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Hide the given player\'s leaderboard scores from the given application.
@@ -165,12 +165,12 @@ instance GoogleRequest PlayersHide' where
         type Rs PlayersHide' = ()
         request = requestWithRoute defReq gamesManagementURL
         requestWithRoute r u PlayersHide'{..}
-          = go _phQuotaUser (Just _phPrettyPrint) _phUserIP
-              _phApplicationId
+          = go _phApplicationId _phPlayerId _phQuotaUser
+              (Just _phPrettyPrint)
+              _phUserIP
+              _phFields
               _phKey
               _phOAuthToken
-              _phPlayerId
-              _phFields
               (Just AltJSON)
           where go
                   = clientWithRoute

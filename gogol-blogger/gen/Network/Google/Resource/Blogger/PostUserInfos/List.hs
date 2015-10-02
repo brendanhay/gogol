@@ -62,24 +62,24 @@ type PostUserInfosListResource =
          "blogs" :>
            Capture "blogId" Text :>
              "posts" :>
-               QueryParams "status" BloggerPostUserInfosListStatus
-                 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "orderBy" BloggerPostUserInfosListOrderBy
-                       :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "endDate" UTCTime :>
+               QueryParam "endDate" UTCTime :>
+                 QueryParam "fetchBodies" Bool :>
+                   QueryParam "labels" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "orderBy" BloggerPostUserInfosListOrderBy
+                         :>
+                         QueryParam "pageToken" Text :>
                            QueryParam "startDate" UTCTime :>
-                             QueryParam "key" Key :>
-                               QueryParam "fetchBodies" Bool :>
-                                 QueryParam "view" BloggerPostUserInfosListView
-                                   :>
-                                   QueryParam "labels" Text :>
-                                     QueryParam "pageToken" Text :>
-                                       QueryParam "oauth_token" OAuthToken :>
-                                         QueryParam "maxResults" Word32 :>
-                                           QueryParam "fields" Text :>
+                             QueryParams "status" BloggerPostUserInfosListStatus
+                               :>
+                               QueryParam "view" BloggerPostUserInfosListView :>
+                                 QueryParam "quotaUser" Text :>
+                                   QueryParam "prettyPrint" Bool :>
+                                     QueryParam "userIp" Text :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "key" Key :>
+                                           QueryParam "oauth_token" OAuthToken
+                                             :>
                                              QueryParam "alt" AltJSON :>
                                                Get '[JSON] PostUserInfosList
 
@@ -274,22 +274,21 @@ instance GoogleRequest PostUserInfosList' where
         type Rs PostUserInfosList' = PostUserInfosList
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PostUserInfosList'{..}
-          = go _puilStatus _puilQuotaUser
-              (Just _puilPrettyPrint)
-              (Just _puilOrderBy)
-              _puilUserIP
-              _puilEndDate
-              _puilBlogId
-              _puilUserId
-              _puilStartDate
-              _puilKey
-              (Just _puilFetchBodies)
-              _puilView
-              _puilLabels
-              _puilPageToken
-              _puilOAuthToken
+          = go _puilEndDate (Just _puilFetchBodies) _puilLabels
               _puilMaxResults
+              (Just _puilOrderBy)
+              _puilPageToken
+              _puilStartDate
+              _puilStatus
+              _puilView
+              _puilUserId
+              _puilBlogId
+              _puilQuotaUser
+              (Just _puilPrettyPrint)
+              _puilUserIP
               _puilFields
+              _puilKey
+              _puilOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -50,13 +50,13 @@ type SitesPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "sites" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "id" Int64 :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Site :> Patch '[JSON] Site
 
@@ -168,12 +168,12 @@ instance GoogleRequest SitesPatch' where
         type Rs SitesPatch' = Site
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u SitesPatch'{..}
-          = go _spQuotaUser (Just _spPrettyPrint) _spUserIP
-              _spProfileId
-              _spKey
-              (Just _spId)
-              _spOAuthToken
+          = go _spProfileId (Just _spId) _spQuotaUser
+              (Just _spPrettyPrint)
+              _spUserIP
               _spFields
+              _spKey
+              _spOAuthToken
               (Just AltJSON)
               _spSite
           where go

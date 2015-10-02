@@ -155,10 +155,10 @@ module Network.Google.MapsCoordinate
     -- ** Job
     , Job
     , job
-    , jobState
-    , jobKind
-    , jobJobChange
-    , jobId
+    , jState
+    , jKind
+    , jJobChange
+    , jId
 
     -- ** CoordinateJobsUpdateProgress
     , CoordinateJobsUpdateProgress (..)

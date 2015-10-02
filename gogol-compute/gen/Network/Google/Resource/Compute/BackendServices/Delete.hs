@@ -53,9 +53,9 @@ type BackendServicesDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified BackendService resource.
@@ -162,12 +162,12 @@ instance GoogleRequest BackendServicesDelete' where
         type Rs BackendServicesDelete' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u BackendServicesDelete'{..}
-          = go _bsdQuotaUser (Just _bsdPrettyPrint) _bsdProject
+          = go _bsdProject _bsdBackendService _bsdQuotaUser
+              (Just _bsdPrettyPrint)
               _bsdUserIP
+              _bsdFields
               _bsdKey
               _bsdOAuthToken
-              _bsdFields
-              _bsdBackendService
               (Just AltJSON)
           where go
                   = clientWithRoute

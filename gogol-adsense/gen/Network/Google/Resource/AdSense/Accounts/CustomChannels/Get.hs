@@ -57,9 +57,9 @@ type AccountsCustomChannelsGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] CustomChannel
 
@@ -182,14 +182,14 @@ instance GoogleRequest AccountsCustomChannelsGet'
         type Rs AccountsCustomChannelsGet' = CustomChannel
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u AccountsCustomChannelsGet'{..}
-          = go _accgQuotaUser (Just _accgPrettyPrint)
+          = go _accgAccountId _accgAdClientId
               _accgCustomChannelId
+              _accgQuotaUser
+              (Just _accgPrettyPrint)
               _accgUserIP
-              _accgAdClientId
-              _accgAccountId
+              _accgFields
               _accgKey
               _accgOAuthToken
-              _accgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

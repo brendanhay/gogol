@@ -47,14 +47,14 @@ import           Network.Google.YouTube.Types
 -- 'I18nRegionsList'' request conforms to.
 type I18nRegionsListResource =
      "i18nRegions" :>
-       QueryParam "quotaUser" Text :>
+       QueryParam "hl" Text :>
          QueryParam "part" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "hl" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] I18nRegionListResponse
 
@@ -160,13 +160,12 @@ instance GoogleRequest I18nRegionsList' where
         type Rs I18nRegionsList' = I18nRegionListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u I18nRegionsList'{..}
-          = go _irlQuotaUser (Just _irlPart)
+          = go (Just _irlHl) (Just _irlPart) _irlQuotaUser
               (Just _irlPrettyPrint)
               _irlUserIP
-              (Just _irlHl)
+              _irlFields
               _irlKey
               _irlOAuthToken
-              _irlFields
               (Just AltJSON)
           where go
                   = clientWithRoute

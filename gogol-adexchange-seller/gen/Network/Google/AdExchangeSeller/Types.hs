@@ -74,7 +74,7 @@ module Network.Google.AdExchangeSeller.Types
 
     -- * URLChannels
     , URLChannels
-    , uRLChannels
+    , urlChannels
     , ucEtag
     , ucNextPageToken
     , ucKind
@@ -155,7 +155,7 @@ module Network.Google.AdExchangeSeller.Types
 
     -- * URLChannel
     , URLChannel
-    , uRLChannel
+    , urlChannel
     , urlcKind
     , urlcId
     , urlcURLPattern

@@ -53,9 +53,9 @@ type FirewallsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Firewall
 
 -- | Returns the specified firewall resource.
@@ -158,12 +158,12 @@ instance GoogleRequest FirewallsGet' where
         type Rs FirewallsGet' = Firewall
         request = requestWithRoute defReq computeURL
         requestWithRoute r u FirewallsGet'{..}
-          = go _fgQuotaUser (Just _fgPrettyPrint) _fgProject
+          = go _fgProject _fgFirewall _fgQuotaUser
+              (Just _fgPrettyPrint)
               _fgUserIP
+              _fgFields
               _fgKey
               _fgOAuthToken
-              _fgFirewall
-              _fgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

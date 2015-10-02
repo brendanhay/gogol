@@ -59,9 +59,9 @@ type CollectionviewersUpdateResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] User :> Put '[JSON] User
 
@@ -192,14 +192,13 @@ instance GoogleRequest CollectionviewersUpdate' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u CollectionviewersUpdate'{..}
-          = go _cuuQuotaUser (Just _cuuPrettyPrint)
-              _cuuEnterpriseId
+          = go _cuuEnterpriseId _cuuCollectionId _cuuUserId
+              _cuuQuotaUser
+              (Just _cuuPrettyPrint)
               _cuuUserIP
-              _cuuCollectionId
-              _cuuUserId
+              _cuuFields
               _cuuKey
               _cuuOAuthToken
-              _cuuFields
               (Just AltJSON)
               _cuuUser
           where go

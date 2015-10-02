@@ -59,17 +59,17 @@ type ProjectsSubscriptionsCreateResource =
      "v1beta2" :>
        "{+name}" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
+           QueryParam "access_token" Text :>
+             QueryParam "bearer_token" Text :>
+               QueryParam "callback" Text :>
                  QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] Subscription :>
                                      Put '[JSON] Subscription
@@ -244,17 +244,17 @@ instance GoogleRequest ProjectsSubscriptionsCreate'
         type Rs ProjectsSubscriptionsCreate' = Subscription
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u ProjectsSubscriptionsCreate'{..}
-          = go _pscXgafv _pscQuotaUser (Just _pscPrettyPrint)
-              _pscUploadProtocol
-              (Just _pscPp)
-              _pscAccessToken
-              _pscUploadType
-              _pscBearerToken
-              _pscKey
-              _pscName
-              _pscOAuthToken
-              _pscFields
+          = go _pscXgafv _pscAccessToken _pscBearerToken
               _pscCallback
+              (Just _pscPp)
+              _pscUploadType
+              _pscUploadProtocol
+              _pscName
+              _pscQuotaUser
+              (Just _pscPrettyPrint)
+              _pscFields
+              _pscKey
+              _pscOAuthToken
               (Just AltJSON)
               _pscSubscription
           where go

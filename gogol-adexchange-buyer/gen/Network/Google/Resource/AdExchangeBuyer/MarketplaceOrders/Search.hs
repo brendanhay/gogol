@@ -47,13 +47,13 @@ import           Network.Google.Prelude
 type MarketplaceOrdersSearchResource =
      "marketplaceOrders" :>
        "search" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "pqlQuery" Text :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+         QueryParam "pqlQuery" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] GetOrdersResponse
 
@@ -149,11 +149,12 @@ instance GoogleRequest MarketplaceOrdersSearch' where
         type Rs MarketplaceOrdersSearch' = GetOrdersResponse
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u MarketplaceOrdersSearch'{..}
-          = go _marQuotaUser (Just _marPrettyPrint) _marUserIP
-              _marKey
-              _marPqlQuery
-              _marOAuthToken
+          = go _marPqlQuery _marQuotaUser
+              (Just _marPrettyPrint)
+              _marUserIP
               _marFields
+              _marKey
+              _marOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

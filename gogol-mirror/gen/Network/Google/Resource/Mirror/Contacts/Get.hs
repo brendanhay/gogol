@@ -50,9 +50,9 @@ type ContactsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Contact
 
 -- | Gets a single contact by ID.
@@ -144,11 +144,11 @@ instance GoogleRequest ContactsGet' where
         type Rs ContactsGet' = Contact
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u ContactsGet'{..}
-          = go _cgQuotaUser (Just _cgPrettyPrint) _cgUserIP
-              _cgKey
-              _cgId
-              _cgOAuthToken
+          = go _cgId _cgQuotaUser (Just _cgPrettyPrint)
+              _cgUserIP
               _cgFields
+              _cgKey
+              _cgOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

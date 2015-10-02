@@ -54,9 +54,9 @@ type SavedColumnsListResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] SavedColumnList
 
@@ -165,13 +165,12 @@ instance GoogleRequest SavedColumnsList' where
         request
           = requestWithRoute defReq doubleClickSearchURL
         requestWithRoute r u SavedColumnsList'{..}
-          = go _sclQuotaUser (Just _sclPrettyPrint)
-              _sclAgencyId
+          = go _sclAgencyId _sclAdvertiserId _sclQuotaUser
+              (Just _sclPrettyPrint)
               _sclUserIP
-              _sclAdvertiserId
+              _sclFields
               _sclKey
               _sclOAuthToken
-              _sclFields
               (Just AltJSON)
           where go
                   = clientWithRoute

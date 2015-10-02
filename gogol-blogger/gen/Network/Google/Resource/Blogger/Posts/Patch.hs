@@ -57,16 +57,16 @@ type PostsPatchResource =
          "posts" :>
            Capture "postId" Text :>
              QueryParam "fetchBody" Bool :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "fetchImages" Bool :>
-                       QueryParam "maxComments" Word32 :>
-                         QueryParam "key" Key :>
-                           QueryParam "revert" Bool :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "publish" Bool :>
-                                 QueryParam "fields" Text :>
+               QueryParam "fetchImages" Bool :>
+                 QueryParam "maxComments" Word32 :>
+                   QueryParam "publish" Bool :>
+                     QueryParam "revert" Bool :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] Post :> Patch '[JSON] Post
 
@@ -227,18 +227,18 @@ instance GoogleRequest PostsPatch' where
         type Rs PostsPatch' = Post
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PostsPatch'{..}
-          = go (Just _ppFetchBody) _ppQuotaUser
+          = go (Just _ppFetchBody) _ppFetchImages
+              _ppMaxComments
+              _ppPublish
+              _ppRevert
+              _ppBlogId
+              _ppPostId
+              _ppQuotaUser
               (Just _ppPrettyPrint)
               _ppUserIP
-              _ppFetchImages
-              _ppBlogId
-              _ppMaxComments
-              _ppKey
-              _ppRevert
-              _ppPostId
-              _ppOAuthToken
-              _ppPublish
               _ppFields
+              _ppKey
+              _ppOAuthToken
               (Just AltJSON)
               _ppPost
           where go

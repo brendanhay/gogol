@@ -49,9 +49,9 @@ type ClientAccessListResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] ListClientAccessCapabilitiesRequest
                        :> Get '[JSON] ListClientAccessCapabilitiesResponse
@@ -152,9 +152,9 @@ instance GoogleRequest ClientAccessList' where
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u ClientAccessList'{..}
           = go _calQuotaUser (Just _calPrettyPrint) _calUserIP
+              _calFields
               _calKey
               _calOAuthToken
-              _calFields
               (Just AltJSON)
               _calListClientAccessCapabilitiesRequest
           where go

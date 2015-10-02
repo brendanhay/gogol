@@ -48,13 +48,13 @@ import           Network.Google.Prelude
 type ClientAccessDeleteResource =
      "clientAccess" :>
        Capture "clientAccountId" Int64 :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "sponsorAccountId" Int32 :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+         QueryParam "sponsorAccountId" Int32 :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 --
@@ -159,12 +159,13 @@ instance GoogleRequest ClientAccessDelete' where
         type Rs ClientAccessDelete' = ()
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u ClientAccessDelete'{..}
-          = go _cadQuotaUser (Just _cadPrettyPrint) _cadUserIP
-              (Just _cadSponsorAccountId)
-              _cadKey
-              _cadClientAccountId
-              _cadOAuthToken
+          = go _cadClientAccountId (Just _cadSponsorAccountId)
+              _cadQuotaUser
+              (Just _cadPrettyPrint)
+              _cadUserIP
               _cadFields
+              _cadKey
+              _cadOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

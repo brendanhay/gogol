@@ -55,9 +55,9 @@ type StatesUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] UpdateRequest :>
                            Put '[JSON] WriteResult
@@ -178,13 +178,12 @@ instance GoogleRequest StatesUpdate' where
         type Rs StatesUpdate' = WriteResult
         request = requestWithRoute defReq appStateURL
         requestWithRoute r u StatesUpdate'{..}
-          = go _suCurrentStateVersion _suQuotaUser
+          = go _suCurrentStateVersion _suStateKey _suQuotaUser
               (Just _suPrettyPrint)
               _suUserIP
-              _suStateKey
+              _suFields
               _suKey
               _suOAuthToken
-              _suFields
               (Just AltJSON)
               _suUpdateRequest
           where go

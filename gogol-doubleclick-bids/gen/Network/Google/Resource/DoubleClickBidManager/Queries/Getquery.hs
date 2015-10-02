@@ -50,9 +50,9 @@ type QueriesGetqueryResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Query
 
 -- | Retrieves a stored query.
@@ -145,11 +145,11 @@ instance GoogleRequest QueriesGetquery' where
         type Rs QueriesGetquery' = Query
         request = requestWithRoute defReq doubleClickBidsURL
         requestWithRoute r u QueriesGetquery'{..}
-          = go _qgQuotaUser _qgQueryId (Just _qgPrettyPrint)
+          = go _qgQueryId _qgQuotaUser (Just _qgPrettyPrint)
               _qgUserIP
+              _qgFields
               _qgKey
               _qgOAuthToken
-              _qgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

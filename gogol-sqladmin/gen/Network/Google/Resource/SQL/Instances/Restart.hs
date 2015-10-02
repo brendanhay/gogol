@@ -54,9 +54,9 @@ type InstancesRestartResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Restarts a Cloud SQL instance.
@@ -159,12 +159,12 @@ instance GoogleRequest InstancesRestart' where
         type Rs InstancesRestart' = Operation
         request = requestWithRoute defReq sQLAdminURL
         requestWithRoute r u InstancesRestart'{..}
-          = go _irQuotaUser (Just _irPrettyPrint) _irProject
+          = go _irProject _irInstance _irQuotaUser
+              (Just _irPrettyPrint)
               _irUserIP
+              _irFields
               _irKey
               _irOAuthToken
-              _irFields
-              _irInstance
               (Just AltJSON)
           where go
                   = clientWithRoute

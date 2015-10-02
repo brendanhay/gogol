@@ -51,9 +51,9 @@ type DatasetsUpdateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Dataset :> Put '[JSON] Dataset
 
@@ -155,10 +155,11 @@ instance GoogleRequest DatasetsUpdate' where
         type Rs DatasetsUpdate' = Dataset
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u DatasetsUpdate'{..}
-          = go _dQuotaUser (Just _dPrettyPrint) _dUserIP _dKey
-              _dDatasetId
-              _dOAuthToken
+          = go _dDatasetId _dQuotaUser (Just _dPrettyPrint)
+              _dUserIP
               _dFields
+              _dKey
+              _dOAuthToken
               (Just AltJSON)
               _dDataset
           where go

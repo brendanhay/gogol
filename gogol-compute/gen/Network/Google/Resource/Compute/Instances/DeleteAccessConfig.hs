@@ -55,14 +55,14 @@ type InstancesDeleteAccessConfigResource =
            "instances" :>
              Capture "instance" Text :>
                "deleteAccessConfig" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "networkInterface" Text :>
-                         QueryParam "key" Key :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "accessConfig" Text :>
-                               QueryParam "fields" Text :>
+                 QueryParam "accessConfig" Text :>
+                   QueryParam "networkInterface" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Post '[JSON] Operation
 
@@ -203,16 +203,15 @@ instance GoogleRequest InstancesDeleteAccessConfig'
         type Rs InstancesDeleteAccessConfig' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstancesDeleteAccessConfig'{..}
-          = go _idacQuotaUser (Just _idacPrettyPrint)
-              _idacProject
-              _idacUserIP
+          = go _idacProject _idacZone _idacInstance
+              (Just _idacAccessConfig)
               (Just _idacNetworkInterface)
-              _idacZone
+              _idacQuotaUser
+              (Just _idacPrettyPrint)
+              _idacUserIP
+              _idacFields
               _idacKey
               _idacOAuthToken
-              (Just _idacAccessConfig)
-              _idacFields
-              _idacInstance
               (Just AltJSON)
           where go
                   = clientWithRoute

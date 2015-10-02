@@ -50,9 +50,9 @@ type GroupsDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete Group
@@ -145,11 +145,11 @@ instance GoogleRequest GroupsDelete' where
         type Rs GroupsDelete' = ()
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u GroupsDelete'{..}
-          = go _gdQuotaUser (Just _gdPrettyPrint) _gdUserIP
-              _gdGroupKey
+          = go _gdGroupKey _gdQuotaUser (Just _gdPrettyPrint)
+              _gdUserIP
+              _gdFields
               _gdKey
               _gdOAuthToken
-              _gdFields
               (Just AltJSON)
           where go
                   = clientWithRoute

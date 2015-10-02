@@ -27,7 +27,7 @@ module Network.Google.Resource.Webmasters.URLCrawlErrorscounts.Query
       URLCrawlErrorscountsQueryResource
 
     -- * Creating a Request
-    , uRLCrawlErrorscountsQuery'
+    , urlCrawlErrorscountsQuery'
     , URLCrawlErrorscountsQuery'
 
     -- * Request Lenses
@@ -53,26 +53,26 @@ type URLCrawlErrorscountsQueryResource =
        Capture "siteUrl" Text :>
          "urlCrawlErrorsCounts" :>
            "query" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
+             QueryParam "category"
+               WebmastersURLCrawlErrorscountsQueryCategory
+               :>
+               QueryParam "latestCountsOnly" Bool :>
                  QueryParam "platform"
                    WebmastersURLCrawlErrorscountsQueryPlatform
                    :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "category"
-                       WebmastersURLCrawlErrorscountsQueryCategory
-                       :>
-                       QueryParam "key" Key :>
-                         QueryParam "latestCountsOnly" Bool :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] URLCrawlErrorsCountsQueryResponse
 
 -- | Retrieves a time series of the number of URL crawl errors per error
 -- category and platform.
 --
--- /See:/ 'uRLCrawlErrorscountsQuery'' smart constructor.
+-- /See:/ 'urlCrawlErrorscountsQuery'' smart constructor.
 data URLCrawlErrorscountsQuery' = URLCrawlErrorscountsQuery'
     { _uceqQuotaUser        :: !(Maybe Text)
     , _uceqPrettyPrint      :: !Bool
@@ -109,10 +109,10 @@ data URLCrawlErrorscountsQuery' = URLCrawlErrorscountsQuery'
 -- * 'uceqOAuthToken'
 --
 -- * 'uceqFields'
-uRLCrawlErrorscountsQuery'
+urlCrawlErrorscountsQuery'
     :: Text -- ^ 'siteUrl'
     -> URLCrawlErrorscountsQuery'
-uRLCrawlErrorscountsQuery' pUceqSiteURL_ =
+urlCrawlErrorscountsQuery' pUceqSiteURL_ =
     URLCrawlErrorscountsQuery'
     { _uceqQuotaUser = Nothing
     , _uceqPrettyPrint = True
@@ -197,15 +197,15 @@ instance GoogleRequest URLCrawlErrorscountsQuery'
              URLCrawlErrorsCountsQueryResponse
         request = requestWithRoute defReq webmasterToolsURL
         requestWithRoute r u URLCrawlErrorscountsQuery'{..}
-          = go _uceqQuotaUser (Just _uceqPrettyPrint)
+          = go _uceqCategory (Just _uceqLatestCountsOnly)
               _uceqPlatform
-              _uceqUserIP
-              _uceqCategory
               _uceqSiteURL
-              _uceqKey
-              (Just _uceqLatestCountsOnly)
-              _uceqOAuthToken
+              _uceqQuotaUser
+              (Just _uceqPrettyPrint)
+              _uceqUserIP
               _uceqFields
+              _uceqKey
+              _uceqOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -54,13 +54,13 @@ type TasksUpdateResource =
          Capture "taskqueue" Text :>
            "tasks" :>
              Capture "task" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "newLeaseSeconds" Int32 :>
-                           QueryParam "fields" Text :>
+               QueryParam "newLeaseSeconds" Int32 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Task :> Post '[JSON] Task
 
@@ -192,14 +192,14 @@ instance GoogleRequest TasksUpdate' where
         request
           = requestWithRoute defReq appEngineTaskQueueURL
         requestWithRoute r u TasksUpdate'{..}
-          = go _tuTaskqueue _tuQuotaUser (Just _tuPrettyPrint)
-              _tuProject
-              _tuUserIP
-              _tuKey
-              _tuTask
-              _tuOAuthToken
+          = go _tuProject _tuTaskqueue _tuTask
               (Just _tuNewLeaseSeconds)
+              _tuQuotaUser
+              (Just _tuPrettyPrint)
+              _tuUserIP
               _tuFields
+              _tuKey
+              _tuOAuthToken
               (Just AltJSON)
               _tuTask
           where go

@@ -52,22 +52,22 @@ import           Network.Google.Prelude
 -- 'CreativesList'' request conforms to.
 type CreativesListResource =
      "creatives" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParams "buyerCreativeId" Text :>
-             QueryParam "userIp" Text :>
+       QueryParams "accountId" Int32 :>
+         QueryParams "buyerCreativeId" Text :>
+           QueryParam "dealsStatusFilter"
+             AdexchangebuyerCreativesListDealsStatusFilter
+             :>
+             QueryParam "maxResults" Word32 :>
                QueryParam "openAuctionStatusFilter"
                  AdexchangebuyerCreativesListOpenAuctionStatusFilter
                  :>
-                 QueryParams "accountId" Int32 :>
-                   QueryParam "key" Key :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "dealsStatusFilter"
-                         AdexchangebuyerCreativesListDealsStatusFilter
-                         :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] CreativesList
 
@@ -215,17 +215,17 @@ instance GoogleRequest CreativesList' where
         type Rs CreativesList' = CreativesList
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u CreativesList'{..}
-          = go _clQuotaUser (Just _clPrettyPrint)
-              _clBuyerCreativeId
-              _clUserIP
-              _clOpenAuctionStatusFilter
-              _clAccountId
-              _clKey
-              _clPageToken
+          = go _clAccountId _clBuyerCreativeId
               _clDealsStatusFilter
-              _clOAuthToken
               _clMaxResults
+              _clOpenAuctionStatusFilter
+              _clPageToken
+              _clQuotaUser
+              (Just _clPrettyPrint)
+              _clUserIP
               _clFields
+              _clKey
+              _clOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -54,9 +54,9 @@ type OrdersRefundResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] OrdersRefundRequest :>
                              Post '[JSON] OrdersRefundResponse
@@ -172,12 +172,12 @@ instance GoogleRequest OrdersRefund' where
         type Rs OrdersRefund' = OrdersRefundResponse
         request = requestWithRoute defReq shoppingContentURL
         requestWithRoute r u OrdersRefund'{..}
-          = go _orQuotaUser _orMerchantId (Just _orPrettyPrint)
+          = go _orMerchantId _orOrderId _orQuotaUser
+              (Just _orPrettyPrint)
               _orUserIP
+              _orFields
               _orKey
               _orOAuthToken
-              _orOrderId
-              _orFields
               (Just AltJSON)
               _orOrdersRefundRequest
           where go

@@ -57,9 +57,9 @@ type DatasetsPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Dataset :> Patch '[JSON] Dataset
 
@@ -176,12 +176,12 @@ instance GoogleRequest DatasetsPatch' where
         type Rs DatasetsPatch' = Dataset
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u DatasetsPatch'{..}
-          = go _dpQuotaUser (Just _dpPrettyPrint) _dpUserIP
-              _dpKey
-              _dpDatasetId
-              _dpProjectId
-              _dpOAuthToken
+          = go _dpProjectId _dpDatasetId _dpQuotaUser
+              (Just _dpPrettyPrint)
+              _dpUserIP
               _dpFields
+              _dpKey
+              _dpOAuthToken
               (Just AltJSON)
               _dpDataset
           where go

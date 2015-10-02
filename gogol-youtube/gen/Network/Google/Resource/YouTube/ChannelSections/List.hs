@@ -51,18 +51,18 @@ import           Network.Google.YouTube.Types
 -- 'ChannelSectionsList'' request conforms to.
 type ChannelSectionsListResource =
      "channelSections" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "part" Text :>
-           QueryParam "prettyPrint" Bool :>
+       QueryParam "channelId" Text :>
+         QueryParam "hl" Text :>
+           QueryParam "id" Text :>
              QueryParam "mine" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "channelId" Text :>
-                   QueryParam "hl" Text :>
-                     QueryParam "onBehalfOfContentOwner" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "id" Text :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "fields" Text :>
+               QueryParam "onBehalfOfContentOwner" Text :>
+                 QueryParam "part" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] ChannelSectionListResponse
 
@@ -231,17 +231,15 @@ instance GoogleRequest ChannelSectionsList' where
              ChannelSectionListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u ChannelSectionsList'{..}
-          = go _cslQuotaUser (Just _cslPart)
-              (Just _cslPrettyPrint)
-              _cslMine
-              _cslUserIP
-              _cslChannelId
-              _cslHl
+          = go _cslChannelId _cslHl _cslId _cslMine
               _cslOnBehalfOfContentOwner
-              _cslKey
-              _cslId
-              _cslOAuthToken
+              (Just _cslPart)
+              _cslQuotaUser
+              (Just _cslPrettyPrint)
+              _cslUserIP
               _cslFields
+              _cslKey
+              _cslOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

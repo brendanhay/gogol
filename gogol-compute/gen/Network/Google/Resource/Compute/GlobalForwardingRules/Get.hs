@@ -53,9 +53,9 @@ type GlobalForwardingRulesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] ForwardingRule
 
@@ -165,13 +165,12 @@ instance GoogleRequest GlobalForwardingRulesGet'
         type Rs GlobalForwardingRulesGet' = ForwardingRule
         request = requestWithRoute defReq computeURL
         requestWithRoute r u GlobalForwardingRulesGet'{..}
-          = go _gfrgQuotaUser (Just _gfrgPrettyPrint)
-              _gfrgProject
-              _gfrgForwardingRule
+          = go _gfrgProject _gfrgForwardingRule _gfrgQuotaUser
+              (Just _gfrgPrettyPrint)
               _gfrgUserIP
+              _gfrgFields
               _gfrgKey
               _gfrgOAuthToken
-              _gfrgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

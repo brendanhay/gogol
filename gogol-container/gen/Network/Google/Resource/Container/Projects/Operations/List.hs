@@ -50,9 +50,9 @@ type ProjectsOperationsListResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] ListAggregatedOperationsResponse
 
@@ -150,11 +150,12 @@ instance GoogleRequest ProjectsOperationsList' where
              ListAggregatedOperationsResponse
         request = requestWithRoute defReq containerURL
         requestWithRoute r u ProjectsOperationsList'{..}
-          = go _polQuotaUser (Just _polPrettyPrint) _polUserIP
-              _polKey
-              _polProjectId
-              _polOAuthToken
+          = go _polProjectId _polQuotaUser
+              (Just _polPrettyPrint)
+              _polUserIP
               _polFields
+              _polKey
+              _polOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

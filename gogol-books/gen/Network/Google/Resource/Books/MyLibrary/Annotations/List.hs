@@ -56,22 +56,22 @@ import           Network.Google.Prelude
 type MyLibraryAnnotationsListResource =
      "mylibrary" :>
        "annotations" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "contentVersion" Text :>
-                 QueryParam "showDeleted" Bool :>
-                   QueryParam "updatedMax" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "updatedMin" Text :>
-                         QueryParams "layerIds" Text :>
+         QueryParam "contentVersion" Text :>
+           QueryParam "layerId" Text :>
+             QueryParams "layerIds" Text :>
+               QueryParam "maxResults" Word32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "showDeleted" Bool :>
+                     QueryParam "source" Text :>
+                       QueryParam "updatedMax" Text :>
+                         QueryParam "updatedMin" Text :>
                            QueryParam "volumeId" Text :>
-                             QueryParam "source" Text :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "oauth_token" OAuthToken :>
-                                   QueryParam "layerId" Text :>
-                                     QueryParam "maxResults" Word32 :>
-                                       QueryParam "fields" Text :>
+                             QueryParam "quotaUser" Text :>
+                               QueryParam "prettyPrint" Bool :>
+                                 QueryParam "userIp" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "key" Key :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] Annotations
 
@@ -259,21 +259,20 @@ instance GoogleRequest MyLibraryAnnotationsList'
         type Rs MyLibraryAnnotationsList' = Annotations
         request = requestWithRoute defReq booksURL
         requestWithRoute r u MyLibraryAnnotationsList'{..}
-          = go _mlalQuotaUser (Just _mlalPrettyPrint)
-              _mlalUserIP
-              _mlalContentVersion
-              _mlalShowDeleted
-              _mlalUpdatedMax
-              _mlalKey
-              _mlalUpdatedMin
-              _mlalLayerIds
-              _mlalVolumeId
-              _mlalSource
-              _mlalPageToken
-              _mlalOAuthToken
-              _mlalLayerId
+          = go _mlalContentVersion _mlalLayerId _mlalLayerIds
               _mlalMaxResults
+              _mlalPageToken
+              _mlalShowDeleted
+              _mlalSource
+              _mlalUpdatedMax
+              _mlalUpdatedMin
+              _mlalVolumeId
+              _mlalQuotaUser
+              (Just _mlalPrettyPrint)
+              _mlalUserIP
               _mlalFields
+              _mlalKey
+              _mlalOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

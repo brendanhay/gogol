@@ -54,9 +54,9 @@ type CommentsUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Comment :> Put '[JSON] Comment
 
@@ -169,12 +169,12 @@ instance GoogleRequest CommentsUpdate' where
         type Rs CommentsUpdate' = Comment
         request = requestWithRoute defReq driveURL
         requestWithRoute r u CommentsUpdate'{..}
-          = go _cuQuotaUser (Just _cuPrettyPrint) _cuUserIP
-              _cuKey
-              _cuFileId
-              _cuOAuthToken
-              _cuCommentId
+          = go _cuFileId _cuCommentId _cuQuotaUser
+              (Just _cuPrettyPrint)
+              _cuUserIP
               _cuFields
+              _cuKey
+              _cuOAuthToken
               (Just AltJSON)
               _cuComment
           where go

@@ -50,9 +50,9 @@ type UsersStopResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Stop receiving push notifications for the given user mailbox.
@@ -145,11 +145,11 @@ instance GoogleRequest UsersStop' where
         type Rs UsersStop' = ()
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersStop'{..}
-          = go _usQuotaUser (Just _usPrettyPrint) _usUserIP
-              _usUserId
+          = go _usUserId _usQuotaUser (Just _usPrettyPrint)
+              _usUserIP
+              _usFields
               _usKey
               _usOAuthToken
-              _usFields
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy UsersStopResource)

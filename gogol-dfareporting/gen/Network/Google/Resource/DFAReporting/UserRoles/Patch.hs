@@ -50,13 +50,13 @@ type UserRolesPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "userRoles" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "id" Int64 :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+           QueryParam "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] UserRole :> Patch '[JSON] UserRole
 
@@ -172,12 +172,12 @@ instance GoogleRequest UserRolesPatch' where
         type Rs UserRolesPatch' = UserRole
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u UserRolesPatch'{..}
-          = go _urpQuotaUser (Just _urpPrettyPrint) _urpUserIP
-              _urpProfileId
-              _urpKey
-              (Just _urpId)
-              _urpOAuthToken
+          = go _urpProfileId (Just _urpId) _urpQuotaUser
+              (Just _urpPrettyPrint)
+              _urpUserIP
               _urpFields
+              _urpKey
+              _urpOAuthToken
               (Just AltJSON)
               _urpUserRole
           where go

@@ -50,9 +50,9 @@ type CallsetsDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a call set.
@@ -145,11 +145,11 @@ instance GoogleRequest CallsetsDelete' where
         type Rs CallsetsDelete' = ()
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u CallsetsDelete'{..}
-          = go _cdQuotaUser (Just _cdPrettyPrint) _cdUserIP
-              _cdKey
-              _cdCallSetId
-              _cdOAuthToken
+          = go _cdCallSetId _cdQuotaUser (Just _cdPrettyPrint)
+              _cdUserIP
               _cdFields
+              _cdKey
+              _cdOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

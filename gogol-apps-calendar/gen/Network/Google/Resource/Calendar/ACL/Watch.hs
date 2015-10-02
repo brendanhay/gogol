@@ -26,7 +26,7 @@ module Network.Google.Resource.Calendar.ACL.Watch
       ACLWatchResource
 
     -- * Creating a Request
-    , aCLWatch'
+    , aclWatch'
     , ACLWatch'
 
     -- * Request Lenses
@@ -54,23 +54,23 @@ type ACLWatchResource =
        Capture "calendarId" Text :>
          "acl" :>
            "watch" :>
-             QueryParam "syncToken" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "showDeleted" Bool :>
-                       QueryParam "key" Key :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "maxResults" Int32 :>
-                               QueryParam "fields" Text :>
+             QueryParam "maxResults" Int32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "showDeleted" Bool :>
+                   QueryParam "syncToken" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] Channel :>
                                      Post '[JSON] Channel
 
 -- | Watch for changes to ACL resources.
 --
--- /See:/ 'aCLWatch'' smart constructor.
+-- /See:/ 'aclWatch'' smart constructor.
 data ACLWatch' = ACLWatch'
     { _awSyncToken   :: !(Maybe Text)
     , _awQuotaUser   :: !(Maybe Text)
@@ -113,11 +113,11 @@ data ACLWatch' = ACLWatch'
 -- * 'awMaxResults'
 --
 -- * 'awFields'
-aCLWatch'
+aclWatch'
     :: Text -- ^ 'calendarId'
     -> Channel -- ^ 'Channel'
     -> ACLWatch'
-aCLWatch' pAwCalendarId_ pAwChannel_ =
+aclWatch' pAwCalendarId_ pAwChannel_ =
     ACLWatch'
     { _awSyncToken = Nothing
     , _awQuotaUser = Nothing
@@ -219,15 +219,15 @@ instance GoogleRequest ACLWatch' where
         type Rs ACLWatch' = Channel
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u ACLWatch'{..}
-          = go _awSyncToken _awQuotaUser _awCalendarId
+          = go _awMaxResults _awPageToken _awShowDeleted
+              _awSyncToken
+              _awCalendarId
+              _awQuotaUser
               (Just _awPrettyPrint)
               _awUserIP
-              _awShowDeleted
-              _awKey
-              _awPageToken
-              _awOAuthToken
-              _awMaxResults
               _awFields
+              _awKey
+              _awOAuthToken
               (Just AltJSON)
               _awChannel
           where go

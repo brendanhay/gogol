@@ -58,17 +58,17 @@ type ProjectsSetIAMPolicyResource =
        "projects" :>
          "{resource}:setIamPolicy" :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
+             QueryParam "access_token" Text :>
+               QueryParam "bearer_token" Text :>
+                 QueryParam "callback" Text :>
                    QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Key :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] SetIAMPolicyRequest :>
                                        Post '[JSON] Policy
@@ -238,18 +238,17 @@ instance GoogleRequest ProjectsSetIAMPolicy' where
         type Rs ProjectsSetIAMPolicy' = Policy
         request = requestWithRoute defReq resourceManagerURL
         requestWithRoute r u ProjectsSetIAMPolicy'{..}
-          = go _psipXgafv _psipQuotaUser
-              (Just _psipPrettyPrint)
-              _psipUploadProtocol
-              (Just _psipPp)
-              _psipAccessToken
-              _psipUploadType
-              _psipBearerToken
-              _psipKey
-              _psipResource
-              _psipOAuthToken
-              _psipFields
+          = go _psipXgafv _psipAccessToken _psipBearerToken
               _psipCallback
+              (Just _psipPp)
+              _psipUploadType
+              _psipUploadProtocol
+              _psipResource
+              _psipQuotaUser
+              (Just _psipPrettyPrint)
+              _psipFields
+              _psipKey
+              _psipOAuthToken
               (Just AltJSON)
               _psipSetIAMPolicyRequest
           where go

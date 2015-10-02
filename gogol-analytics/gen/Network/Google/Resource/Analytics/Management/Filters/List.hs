@@ -51,14 +51,14 @@ type ManagementFiltersListResource =
        "accounts" :>
          Capture "accountId" Text :>
            "filters" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "start-index" Int32 :>
-                         QueryParam "max-results" Int32 :>
-                           QueryParam "fields" Text :>
+             QueryParam "max-results" Int32 :>
+               QueryParam "start-index" Int32 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Filters
 
 -- | Lists all filters for an account
@@ -175,13 +175,13 @@ instance GoogleRequest ManagementFiltersList' where
         type Rs ManagementFiltersList' = Filters
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementFiltersList'{..}
-          = go _mflQuotaUser (Just _mflPrettyPrint) _mflUserIP
-              _mflAccountId
+          = go _mflMaxResults _mflStartIndex _mflAccountId
+              _mflQuotaUser
+              (Just _mflPrettyPrint)
+              _mflUserIP
+              _mflFields
               _mflKey
               _mflOAuthToken
-              _mflStartIndex
-              _mflMaxResults
-              _mflFields
               (Just AltJSON)
           where go
                   = clientWithRoute

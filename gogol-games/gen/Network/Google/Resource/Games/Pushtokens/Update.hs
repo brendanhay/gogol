@@ -49,9 +49,9 @@ type PushtokensUpdateResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Key :>
-               QueryParam "oauth_token" OAuthToken :>
-                 QueryParam "fields" Text :>
+             QueryParam "fields" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] PushToken :> Put '[JSON] ()
 
@@ -146,9 +146,9 @@ instance GoogleRequest PushtokensUpdate' where
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u PushtokensUpdate'{..}
           = go _puQuotaUser (Just _puPrettyPrint) _puUserIP
+              _puFields
               _puKey
               _puOAuthToken
-              _puFields
               (Just AltJSON)
               _puPushToken
           where go

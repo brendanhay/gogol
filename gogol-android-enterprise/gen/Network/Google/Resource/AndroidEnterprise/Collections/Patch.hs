@@ -54,9 +54,9 @@ type CollectionsPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Collection :>
                              Patch '[JSON] Collection
@@ -178,13 +178,12 @@ instance GoogleRequest CollectionsPatch' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u CollectionsPatch'{..}
-          = go _colQuotaUser (Just _colPrettyPrint)
-              _colEnterpriseId
+          = go _colEnterpriseId _colCollectionId _colQuotaUser
+              (Just _colPrettyPrint)
               _colUserIP
-              _colCollectionId
+              _colFields
               _colKey
               _colOAuthToken
-              _colFields
               (Just AltJSON)
               _colCollection
           where go

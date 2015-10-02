@@ -52,13 +52,13 @@ type PermissionsPatchResource =
        Capture "fileId" Text :>
          "permissions" :>
            Capture "permissionId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "transferOwnership" Bool :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+             QueryParam "transferOwnership" Bool :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Permission :>
                                Patch '[JSON] Permission
@@ -189,13 +189,14 @@ instance GoogleRequest PermissionsPatch' where
         type Rs PermissionsPatch' = Permission
         request = requestWithRoute defReq driveURL
         requestWithRoute r u PermissionsPatch'{..}
-          = go _pppQuotaUser (Just _pppPrettyPrint) _pppUserIP
-              _pppKey
-              (Just _pppTransferOwnership)
-              _pppFileId
-              _pppOAuthToken
+          = go (Just _pppTransferOwnership) _pppFileId
               _pppPermissionId
+              _pppQuotaUser
+              (Just _pppPrettyPrint)
+              _pppUserIP
               _pppFields
+              _pppKey
+              _pppOAuthToken
               (Just AltJSON)
               _pppPermission
           where go

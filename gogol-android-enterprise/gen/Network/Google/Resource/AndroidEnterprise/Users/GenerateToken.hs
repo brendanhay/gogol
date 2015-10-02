@@ -56,9 +56,9 @@ type UsersGenerateTokenResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Key :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "fields" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Post '[JSON] UserToken
 
 -- | Generates a token (activation code) to allow this user to configure
@@ -168,13 +168,12 @@ instance GoogleRequest UsersGenerateToken' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u UsersGenerateToken'{..}
-          = go _ugtQuotaUser (Just _ugtPrettyPrint)
-              _ugtEnterpriseId
+          = go _ugtEnterpriseId _ugtUserId _ugtQuotaUser
+              (Just _ugtPrettyPrint)
               _ugtUserIP
-              _ugtUserId
+              _ugtFields
               _ugtKey
               _ugtOAuthToken
-              _ugtFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -49,15 +49,15 @@ import           Network.Google.Prelude
 type MapsListPublishedResource =
      "maps" :>
        "published" :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "projectId" Text :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "maxResults" Word32 :>
-                         QueryParam "fields" Text :>
+         QueryParam "maxResults" Word32 :>
+           QueryParam "pageToken" Text :>
+             QueryParam "projectId" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] PublishedMapsListResponse
 
@@ -179,13 +179,13 @@ instance GoogleRequest MapsListPublished' where
              PublishedMapsListResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u MapsListPublished'{..}
-          = go _mlpQuotaUser (Just _mlpPrettyPrint) _mlpUserIP
-              _mlpKey
-              _mlpPageToken
-              _mlpProjectId
-              _mlpOAuthToken
-              _mlpMaxResults
+          = go _mlpMaxResults _mlpPageToken _mlpProjectId
+              _mlpQuotaUser
+              (Just _mlpPrettyPrint)
+              _mlpUserIP
               _mlpFields
+              _mlpKey
+              _mlpOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

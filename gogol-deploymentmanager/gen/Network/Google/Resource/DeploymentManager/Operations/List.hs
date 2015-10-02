@@ -51,15 +51,15 @@ type OperationsListResource =
      Capture "project" Text :>
        "global" :>
          "operations" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "maxResults" Word32 :>
-                           QueryParam "fields" Text :>
+           QueryParam "filter" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] OperationsListResponse
 
@@ -192,14 +192,14 @@ instance GoogleRequest OperationsList' where
         request
           = requestWithRoute defReq deploymentManagerURL
         requestWithRoute r u OperationsList'{..}
-          = go _olQuotaUser (Just _olPrettyPrint) _olProject
+          = go _olFilter (Just _olMaxResults) _olPageToken
+              _olProject
+              _olQuotaUser
+              (Just _olPrettyPrint)
               _olUserIP
-              _olKey
-              _olFilter
-              _olPageToken
-              _olOAuthToken
-              (Just _olMaxResults)
               _olFields
+              _olKey
+              _olOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -47,13 +47,13 @@ import           Network.Google.YouTubeAnalytics.Types
 -- 'GroupsUpdate'' request conforms to.
 type GroupsUpdateResource =
      "groups" :>
-       QueryParam "quotaUser" Text :>
-         QueryParam "prettyPrint" Bool :>
-           QueryParam "userIp" Text :>
-             QueryParam "onBehalfOfContentOwner" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+       QueryParam "onBehalfOfContentOwner" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Group :> Put '[JSON] Group
 
@@ -165,11 +165,12 @@ instance GoogleRequest GroupsUpdate' where
         type Rs GroupsUpdate' = Group
         request = requestWithRoute defReq youTubeAnalyticsURL
         requestWithRoute r u GroupsUpdate'{..}
-          = go _guQuotaUser (Just _guPrettyPrint) _guUserIP
-              _guOnBehalfOfContentOwner
+          = go _guOnBehalfOfContentOwner _guQuotaUser
+              (Just _guPrettyPrint)
+              _guUserIP
+              _guFields
               _guKey
               _guOAuthToken
-              _guFields
               (Just AltJSON)
               _guGroup
           where go

@@ -67,51 +67,43 @@ type PlacementGroupsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "placementGroups" :>
-           QueryParams "placementStrategyIds" Int64 :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
+           QueryParams "advertiserIds" Int64 :>
+             QueryParam "archived" Bool :>
+               QueryParams "campaignIds" Int64 :>
                  QueryParams "contentCategoryIds" Int64 :>
-                   QueryParam "maxEndDate" Text :>
-                     QueryParam "userIp" Text :>
-                       QueryParams "campaignIds" Int64 :>
-                         QueryParams "pricingTypes"
-                           DfareportingPlacementGroupsListPricingTypes
-                           :>
-                           QueryParam "searchString" Text :>
-                             QueryParams "ids" Int64 :>
-                               QueryParam "placementGroupType"
-                                 DfareportingPlacementGroupsListPlacementGroupType
-                                 :>
-                                 QueryParams "directorySiteIds" Int64 :>
-                                   QueryParam "sortOrder"
-                                     DfareportingPlacementGroupsListSortOrder
+                   QueryParams "directorySiteIds" Int64 :>
+                     QueryParams "ids" Int64 :>
+                       QueryParam "maxEndDate" Text :>
+                         QueryParam "maxResults" Int32 :>
+                           QueryParam "maxStartDate" Text :>
+                             QueryParam "minEndDate" Text :>
+                               QueryParam "minStartDate" Text :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "placementGroupType"
+                                     DfareportingPlacementGroupsListPlacementGroupType
                                      :>
-                                     QueryParam "key" Key :>
-                                       QueryParams "siteIds" Int64 :>
-                                         QueryParam "pageToken" Text :>
-                                           QueryParam "sortField"
-                                             DfareportingPlacementGroupsListSortField
-                                             :>
-                                             QueryParam "maxStartDate" Text :>
-                                               QueryParam "oauth_token"
-                                                 OAuthToken
+                                     QueryParams "placementStrategyIds" Int64 :>
+                                       QueryParams "pricingTypes"
+                                         DfareportingPlacementGroupsListPricingTypes
+                                         :>
+                                         QueryParam "searchString" Text :>
+                                           QueryParams "siteIds" Int64 :>
+                                             QueryParam "sortField"
+                                               DfareportingPlacementGroupsListSortField
+                                               :>
+                                               QueryParam "sortOrder"
+                                                 DfareportingPlacementGroupsListSortOrder
                                                  :>
-                                                 QueryParams "advertiserIds"
-                                                   Int64
-                                                   :>
-                                                   QueryParam "minStartDate"
-                                                     Text
+                                                 QueryParam "quotaUser" Text :>
+                                                   QueryParam "prettyPrint" Bool
                                                      :>
-                                                     QueryParam "archived" Bool
-                                                       :>
-                                                       QueryParam "maxResults"
-                                                         Int32
+                                                     QueryParam "userIp" Text :>
+                                                       QueryParam "fields" Text
                                                          :>
-                                                         QueryParam "minEndDate"
-                                                           Text
-                                                           :>
-                                                           QueryParam "fields"
-                                                             Text
+                                                         QueryParam "key" Key :>
+                                                           QueryParam
+                                                             "oauth_token"
+                                                             OAuthToken
                                                              :>
                                                              QueryParam "alt"
                                                                AltJSON
@@ -420,31 +412,30 @@ instance GoogleRequest PlacementGroupsList' where
              PlacementGroupsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementGroupsList'{..}
-          = go _pglPlacementStrategyIds _pglQuotaUser
-              (Just _pglPrettyPrint)
+          = go _pglAdvertiserIds _pglArchived _pglCampaignIds
               _pglContentCategoryIds
+              _pglDirectorySiteIds
+              _pglIds
               _pglMaxEndDate
-              _pglUserIP
-              _pglCampaignIds
+              _pglMaxResults
+              _pglMaxStartDate
+              _pglMinEndDate
+              _pglMinStartDate
+              _pglPageToken
+              _pglPlacementGroupType
+              _pglPlacementStrategyIds
               _pglPricingTypes
               _pglSearchString
-              _pglIds
-              _pglProfileId
-              _pglPlacementGroupType
-              _pglDirectorySiteIds
-              _pglSortOrder
-              _pglKey
               _pglSiteIds
-              _pglPageToken
               _pglSortField
-              _pglMaxStartDate
-              _pglOAuthToken
-              _pglAdvertiserIds
-              _pglMinStartDate
-              _pglArchived
-              _pglMaxResults
-              _pglMinEndDate
+              _pglSortOrder
+              _pglProfileId
+              _pglQuotaUser
+              (Just _pglPrettyPrint)
+              _pglUserIP
               _pglFields
+              _pglKey
+              _pglOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

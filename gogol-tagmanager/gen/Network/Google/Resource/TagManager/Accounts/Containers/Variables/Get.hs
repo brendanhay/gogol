@@ -56,9 +56,9 @@ type AccountsContainersVariablesGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "fields" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Variable
 
 -- | Gets a GTM Variable.
@@ -181,14 +181,13 @@ instance GoogleRequest
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersVariablesGet'{..}
-          = go _acvgQuotaUser (Just _acvgPrettyPrint)
-              _acvgContainerId
+          = go _acvgAccountId _acvgContainerId _acvgVariableId
+              _acvgQuotaUser
+              (Just _acvgPrettyPrint)
               _acvgUserIP
-              _acvgVariableId
-              _acvgAccountId
+              _acvgFields
               _acvgKey
               _acvgOAuthToken
-              _acvgFields
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -59,15 +59,15 @@ type InstanceGroupsListInstancesResource =
            "instanceGroups" :>
              Capture "instanceGroup" Text :>
                "listInstances" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Key :>
-                         QueryParam "filter" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "maxResults" Word32 :>
-                                 QueryParam "fields" Text :>
+                 QueryParam "filter" Text :>
+                   QueryParam "maxResults" Word32 :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON]
                                        InstanceGroupsListInstancesRequest
@@ -247,17 +247,17 @@ instance GoogleRequest InstanceGroupsListInstances'
              InstanceGroupsListInstances
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstanceGroupsListInstances'{..}
-          = go _igliQuotaUser (Just _igliPrettyPrint)
-              _igliProject
-              _igliUserIP
-              _igliZone
-              _igliKey
-              _igliFilter
+          = go _igliFilter (Just _igliMaxResults)
               _igliPageToken
-              _igliOAuthToken
+              _igliProject
+              _igliZone
               _igliInstanceGroup
-              (Just _igliMaxResults)
+              _igliQuotaUser
+              (Just _igliPrettyPrint)
+              _igliUserIP
               _igliFields
+              _igliKey
+              _igliOAuthToken
               (Just AltJSON)
               _igliInstanceGroupsListInstancesRequest
           where go

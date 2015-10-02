@@ -54,15 +54,15 @@ type TargetInstancesListResource =
        "zones" :>
          Capture "zone" Text :>
            "targetInstances" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "filter" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
+             QueryParam "filter" Text :>
+               QueryParam "maxResults" Word32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] TargetInstanceList
 
@@ -209,15 +209,15 @@ instance GoogleRequest TargetInstancesList' where
         type Rs TargetInstancesList' = TargetInstanceList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u TargetInstancesList'{..}
-          = go _tilQuotaUser (Just _tilPrettyPrint) _tilProject
-              _tilUserIP
+          = go _tilFilter (Just _tilMaxResults) _tilPageToken
+              _tilProject
               _tilZone
-              _tilKey
-              _tilFilter
-              _tilPageToken
-              _tilOAuthToken
-              (Just _tilMaxResults)
+              _tilQuotaUser
+              (Just _tilPrettyPrint)
+              _tilUserIP
               _tilFields
+              _tilKey
+              _tilOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

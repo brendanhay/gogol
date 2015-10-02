@@ -53,9 +53,9 @@ type TemplateDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Key :>
-                     QueryParam "oauth_token" OAuthToken :>
-                       QueryParam "fields" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a template
@@ -162,13 +162,12 @@ instance GoogleRequest TemplateDelete' where
         type Rs TemplateDelete' = ()
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TemplateDelete'{..}
-          = go _tddQuotaUser (Just _tddPrettyPrint)
-              _tddTemplateId
+          = go _tddTableId _tddTemplateId _tddQuotaUser
+              (Just _tddPrettyPrint)
               _tddUserIP
+              _tddFields
               _tddKey
               _tddOAuthToken
-              _tddTableId
-              _tddFields
               (Just AltJSON)
           where go
                   = clientWithRoute

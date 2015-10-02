@@ -51,9 +51,9 @@ type MarketplaceNotesListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] GetOrderNotesResponse
 
@@ -150,11 +150,11 @@ instance GoogleRequest MarketplaceNotesList' where
         type Rs MarketplaceNotesList' = GetOrderNotesResponse
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u MarketplaceNotesList'{..}
-          = go _mnlQuotaUser (Just _mnlPrettyPrint) _mnlUserIP
+          = go _mnlOrderId _mnlQuotaUser (Just _mnlPrettyPrint)
+              _mnlUserIP
+              _mnlFields
               _mnlKey
               _mnlOAuthToken
-              _mnlOrderId
-              _mnlFields
               (Just AltJSON)
           where go
                   = clientWithRoute

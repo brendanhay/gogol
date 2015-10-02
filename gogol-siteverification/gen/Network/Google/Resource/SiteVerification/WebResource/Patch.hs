@@ -52,9 +52,9 @@ type WebResourcePatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Key :>
-                 QueryParam "oauth_token" OAuthToken :>
-                   QueryParam "fields" Text :>
+               QueryParam "fields" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] SiteVerificationWebResourceResource
                          :> Patch '[JSON] SiteVerificationWebResourceResource
@@ -165,11 +165,11 @@ instance GoogleRequest WebResourcePatch' where
              SiteVerificationWebResourceResource
         request = requestWithRoute defReq siteVerificationURL
         requestWithRoute r u WebResourcePatch'{..}
-          = go _wrpQuotaUser (Just _wrpPrettyPrint) _wrpUserIP
-              _wrpKey
-              _wrpId
-              _wrpOAuthToken
+          = go _wrpId _wrpQuotaUser (Just _wrpPrettyPrint)
+              _wrpUserIP
               _wrpFields
+              _wrpKey
+              _wrpOAuthToken
               (Just AltJSON)
               _wrpSiteVerificationWebResourceResource
           where go

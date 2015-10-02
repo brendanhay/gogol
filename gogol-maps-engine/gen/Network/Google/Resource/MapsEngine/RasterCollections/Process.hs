@@ -51,9 +51,9 @@ type RasterCollectionsProcessResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Post '[JSON] ProcessResponse
 
@@ -151,12 +151,11 @@ instance GoogleRequest RasterCollectionsProcess'
         type Rs RasterCollectionsProcess' = ProcessResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u RasterCollectionsProcess'{..}
-          = go _rcpcQuotaUser (Just _rcpcPrettyPrint)
+          = go _rcpcId _rcpcQuotaUser (Just _rcpcPrettyPrint)
               _rcpcUserIP
-              _rcpcKey
-              _rcpcId
-              _rcpcOAuthToken
               _rcpcFields
+              _rcpcKey
+              _rcpcOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

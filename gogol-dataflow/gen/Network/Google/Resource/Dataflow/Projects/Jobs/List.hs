@@ -59,20 +59,20 @@ type ProjectsJobsListResource =
          Capture "projectId" Text :>
            "jobs" :>
              QueryParam "$.xgafv" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "upload_protocol" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "access_token" Text :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "key" Key :>
+               QueryParam "access_token" Text :>
+                 QueryParam "bearer_token" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "pageSize" Int32 :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "upload_protocol" Text :>
                                QueryParam "view" Text :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "oauth_token" OAuthToken :>
-                                     QueryParam "pageSize" Int32 :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "callback" Text :>
+                                 QueryParam "quotaUser" Text :>
+                                   QueryParam "prettyPrint" Bool :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "key" Key :>
+                                         QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
                                              Get '[JSON] ListJobsResponse
 
@@ -253,20 +253,20 @@ instance GoogleRequest ProjectsJobsList' where
         type Rs ProjectsJobsList' = ListJobsResponse
         request = requestWithRoute defReq dataflowURL
         requestWithRoute r u ProjectsJobsList'{..}
-          = go _pjlXgafv _pjlQuotaUser (Just _pjlPrettyPrint)
-              _pjlUploadProtocol
-              (Just _pjlPp)
-              _pjlAccessToken
-              _pjlUploadType
-              _pjlBearerToken
-              _pjlKey
-              _pjlView
-              _pjlPageToken
-              _pjlProjectId
-              _pjlOAuthToken
-              _pjlPageSize
-              _pjlFields
+          = go _pjlXgafv _pjlAccessToken _pjlBearerToken
               _pjlCallback
+              _pjlPageSize
+              _pjlPageToken
+              (Just _pjlPp)
+              _pjlUploadType
+              _pjlUploadProtocol
+              _pjlView
+              _pjlProjectId
+              _pjlQuotaUser
+              (Just _pjlPrettyPrint)
+              _pjlFields
+              _pjlKey
+              _pjlOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -55,9 +55,9 @@ type BudgetPatchResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Key :>
-                   QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "fields" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Budget :> Patch '[JSON] Budget
 
@@ -172,12 +172,12 @@ instance GoogleRequest BudgetPatch' where
         type Rs BudgetPatch' = Budget
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u BudgetPatch'{..}
-          = go _bpQuotaUser (Just _bpPrettyPrint) _bpUserIP
-              _bpAccountId
+          = go _bpAccountId _bpBillingId _bpQuotaUser
+              (Just _bpPrettyPrint)
+              _bpUserIP
+              _bpFields
               _bpKey
               _bpOAuthToken
-              _bpBillingId
-              _bpFields
               (Just AltJSON)
               _bpBudget
           where go
