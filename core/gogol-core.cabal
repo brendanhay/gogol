@@ -45,13 +45,14 @@ library
     build-depends:
           aeson      >= 0.8
         , base       >= 4.7 && < 5
+        , either
         , hashable   >= 1.2
+        , http-media
         , lens       >= 4.4
+        , scientific >= 0.3
         , servant    >= 0.4.4
         , servant-client
         , text       >= 1.1
-        , either
-        , scientific >= 0.3
 
     if !impl(ghc>=7.9)
         build-depends:
