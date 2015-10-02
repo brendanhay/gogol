@@ -29,6 +29,7 @@ import           Control.Lens         hiding (enum)
 import           Control.Monad.Except
 import           Data.CaseInsensitive (CI)
 import qualified Data.CaseInsensitive as CI
+import           Data.Char            (isDigit)
 import           Data.Hashable
 import qualified Data.HashMap.Strict  as Map
 import qualified Data.HashSet         as Set
@@ -141,15 +142,18 @@ getPrefix g = loc "getPrefix" g $ memo prefixed g go
         _                 -> pure mempty
 
     field rs = do
-        let ls = Map.keys rs
-            ks = Set.fromList (map (CI.mk . local) ls)
         p <- uniq fields (acronymPrefixes g) ks
         pure (Prefix p)
+      where
+        ls = Map.keys rs
+        ks = Set.fromList (map (CI.mk . local) ls)
 
     branch vs = do
-        p <- uniq branches ("" : acronymPrefixes g) $
-            Set.fromList (map CI.mk vs)
+        p <- uniq branches ps (Set.fromList (map CI.mk vs))
         pure (Prefix p)
+      where
+        ps | any (isDigit . Text.head) vs = acronymPrefixes g
+           | otherwise                    = "" : acronymPrefixes g
 
     uniq :: Lens' Memo Seen
          -> [CI Text]

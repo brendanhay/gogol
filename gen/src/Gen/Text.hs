@@ -220,7 +220,7 @@ upperAcronym x = Fold.foldl' (flip (uncurry RE.replaceAll)) x xs
          , ("info",        "Info")
          , ("library",     "Library")
          , ("list",        "List")
-         , ("([^pn]load",  "$1Load")
+         , ("([^pn])load", "$1Load")
          , ("manager",     "Manager")
          , ("model",       "Model")
          , ("monitor",     "Monitor")
