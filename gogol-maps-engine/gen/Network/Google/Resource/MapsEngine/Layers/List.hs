@@ -59,12 +59,12 @@ import           Network.Google.Prelude
 type LayersListResource =
      "layers" :>
        QueryParam "bbox" Text :>
-         QueryParam "createdAfter" UTCTime :>
-           QueryParam "createdBefore" UTCTime :>
+         QueryParam "createdAfter" DateTime :>
+           QueryParam "createdBefore" DateTime :>
              QueryParam "creatorEmail" Text :>
                QueryParam "maxResults" Word32 :>
-                 QueryParam "modifiedAfter" UTCTime :>
-                   QueryParam "modifiedBefore" UTCTime :>
+                 QueryParam "modifiedAfter" DateTime :>
+                   QueryParam "modifiedBefore" DateTime :>
                      QueryParam "pageToken" Text :>
                        QueryParam "processingStatus"
                          MapsEngineLayersListProcessingStatus
@@ -87,7 +87,7 @@ type LayersListResource =
 --
 -- /See:/ 'layersList'' smart constructor.
 data LayersList' = LayersList'
-    { _llCreatedAfter     :: !(Maybe UTCTime)
+    { _llCreatedAfter     :: !(Maybe DateTime)
     , _llQuotaUser        :: !(Maybe Text)
     , _llPrettyPrint      :: !Bool
     , _llUserIP           :: !(Maybe Text)
@@ -96,8 +96,8 @@ data LayersList' = LayersList'
     , _llKey              :: !(Maybe Key)
     , _llBbox             :: !(Maybe Text)
     , _llProcessingStatus :: !(Maybe MapsEngineLayersListProcessingStatus)
-    , _llModifiedAfter    :: !(Maybe UTCTime)
-    , _llModifiedBefore   :: !(Maybe UTCTime)
+    , _llModifiedAfter    :: !(Maybe DateTime)
+    , _llModifiedBefore   :: !(Maybe DateTime)
     , _llPageToken        :: !(Maybe Text)
     , _llProjectId        :: !(Maybe Text)
     , _llOAuthToken       :: !(Maybe OAuthToken)
@@ -105,7 +105,7 @@ data LayersList' = LayersList'
     , _llMaxResults       :: !(Maybe Word32)
     , _llTags             :: !(Maybe Text)
     , _llFields           :: !(Maybe Text)
-    , _llCreatedBefore    :: !(Maybe UTCTime)
+    , _llCreatedBefore    :: !(Maybe DateTime)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersList'' with the minimum fields required to make a request.

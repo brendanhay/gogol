@@ -390,7 +390,7 @@ data Annotation = Annotation
     , _aaPageIds              :: !(Maybe [Text])
     , _aaKind                 :: !Text
     , _aaData                 :: !(Maybe Text)
-    , _aaCreated              :: !(Maybe UTCTime)
+    , _aaCreated              :: !(Maybe DateTime)
     , _aaAfterSelectedText    :: !(Maybe Text)
     , _aaSelfLink             :: !(Maybe Text)
     , _aaCurrentVersionRanges :: !(Maybe AnnotationCurrentVersionRanges)
@@ -398,7 +398,7 @@ data Annotation = Annotation
     , _aaBeforeSelectedText   :: !(Maybe Text)
     , _aaId                   :: !(Maybe Text)
     , _aaDeleted              :: !(Maybe Bool)
-    , _aaUpdated              :: !(Maybe UTCTime)
+    , _aaUpdated              :: !(Maybe DateTime)
     , _aaLayerId              :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -759,7 +759,7 @@ data Layersummary = Layersummary
     , _lSelfLink                 :: !(Maybe Text)
     , _lVolumeId                 :: !(Maybe Text)
     , _lId                       :: !(Maybe Text)
-    , _lUpdated                  :: !(Maybe UTCTime)
+    , _lUpdated                  :: !(Maybe DateTime)
     , _lLayerId                  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -933,7 +933,7 @@ data VolumeUserInfo = VolumeUserInfo
     , _vuiIsPreOrdered           :: !(Maybe Bool)
     , _vuiReview                 :: !(Maybe Review)
     , _vuiRentalPeriod           :: !(Maybe VolumeUserInfoRentalPeriod)
-    , _vuiUpdated                :: !(Maybe UTCTime)
+    , _vuiUpdated                :: !(Maybe DateTime)
     , _vuiIsUploaded             :: !(Maybe Bool)
     , _vuiIsInMyBooks            :: !(Maybe Bool)
     , _vuiReadingPosition        :: !(Maybe ReadingPosition)
@@ -1150,7 +1150,7 @@ data Annotationdata = Annotationdata
     , _annnAnnotationType :: !(Maybe Text)
     , _annnVolumeId       :: !(Maybe Text)
     , _annnId             :: !(Maybe Text)
-    , _annnUpdated        :: !(Maybe UTCTime)
+    , _annnUpdated        :: !(Maybe DateTime)
     , _annnLayerId        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1278,7 +1278,7 @@ data Volumeannotation = Volumeannotation
     , _volVolumeId           :: !(Maybe Text)
     , _volId                 :: !(Maybe Text)
     , _volDeleted            :: !(Maybe Bool)
-    , _volUpdated            :: !(Maybe UTCTime)
+    , _volUpdated            :: !(Maybe DateTime)
     , _volLayerId            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1868,7 +1868,7 @@ instance ToJSON VolumeAccessInfo where
 data VolumeUserInfoCopy = VolumeUserInfoCopy
     { _vuicLimitType               :: !(Maybe Text)
     , _vuicAllowedCharacterCount   :: !(Maybe Int32)
-    , _vuicUpdated                 :: !(Maybe UTCTime)
+    , _vuicUpdated                 :: !(Maybe DateTime)
     , _vuicRemainingCharacterCount :: !(Maybe Int32)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -2071,13 +2071,13 @@ instance ToJSON DictlayerdataDictWordsExamples where
 -- /See:/ 'bookshelf' smart constructor.
 data Bookshelf = Bookshelf
     { _bAccess             :: !(Maybe Text)
-    , _bVolumesLastUpdated :: !(Maybe UTCTime)
+    , _bVolumesLastUpdated :: !(Maybe DateTime)
     , _bKind               :: !Text
-    , _bCreated            :: !(Maybe UTCTime)
+    , _bCreated            :: !(Maybe DateTime)
     , _bVolumeCount        :: !(Maybe Int32)
     , _bSelfLink           :: !(Maybe Text)
     , _bId                 :: !(Maybe Int32)
-    , _bUpdated            :: !(Maybe UTCTime)
+    , _bUpdated            :: !(Maybe DateTime)
     , _bTitle              :: !(Maybe Text)
     , _bDescription        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -3970,7 +3970,7 @@ instance ToJSON VolumeLayerInfo where
 -- /See:/ 'volumeSaleInfo' smart constructor.
 data VolumeSaleInfo = VolumeSaleInfo
     { _vsiCountry     :: !(Maybe Text)
-    , _vsiOnSaleDate  :: !(Maybe UTCTime)
+    , _vsiOnSaleDate  :: !(Maybe DateTime)
     , _vsiListPrice   :: !(Maybe VolumeSaleInfoListPrice)
     , _vsiRetailPrice :: !(Maybe VolumeSaleInfoRetailPrice)
     , _vsiOffers      :: !(Maybe [VolumeSaleInfoOffers])
@@ -4615,7 +4615,7 @@ instance ToJSON AnnotationClientVersionRanges where
 data AnnotationsSummaryLayers = AnnotationsSummaryLayers
     { _aslLimitType               :: !(Maybe Text)
     , _aslAllowedCharacterCount   :: !(Maybe Int32)
-    , _aslUpdated                 :: !(Maybe UTCTime)
+    , _aslUpdated                 :: !(Maybe DateTime)
     , _aslLayerId                 :: !(Maybe Text)
     , _aslRemainingCharacterCount :: !(Maybe Int32)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -4790,7 +4790,7 @@ data ReadingPosition = ReadingPosition
     , _rpGbImagePosition :: !(Maybe Text)
     , _rpPdfPosition     :: !(Maybe Text)
     , _rpVolumeId        :: !(Maybe Text)
-    , _rpUpdated         :: !(Maybe UTCTime)
+    , _rpUpdated         :: !(Maybe DateTime)
     , _rpGbTextPosition  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 

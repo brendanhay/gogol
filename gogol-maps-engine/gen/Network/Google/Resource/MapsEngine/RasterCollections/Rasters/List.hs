@@ -60,12 +60,12 @@ type RasterCollectionsRastersListResource =
        Capture "id" Text :>
          "rasters" :>
            QueryParam "bbox" Text :>
-             QueryParam "createdAfter" UTCTime :>
-               QueryParam "createdBefore" UTCTime :>
+             QueryParam "createdAfter" DateTime :>
+               QueryParam "createdBefore" DateTime :>
                  QueryParam "creatorEmail" Text :>
                    QueryParam "maxResults" Word32 :>
-                     QueryParam "modifiedAfter" UTCTime :>
-                       QueryParam "modifiedBefore" UTCTime :>
+                     QueryParam "modifiedAfter" DateTime :>
+                       QueryParam "modifiedBefore" DateTime :>
                          QueryParam "pageToken" Text :>
                            QueryParam "role"
                              MapsEngineRasterCollectionsRastersListRole
@@ -87,7 +87,7 @@ type RasterCollectionsRastersListResource =
 --
 -- /See:/ 'rasterCollectionsRastersList'' smart constructor.
 data RasterCollectionsRastersList' = RasterCollectionsRastersList'
-    { _rcrlCreatedAfter   :: !(Maybe UTCTime)
+    { _rcrlCreatedAfter   :: !(Maybe DateTime)
     , _rcrlQuotaUser      :: !(Maybe Text)
     , _rcrlPrettyPrint    :: !Bool
     , _rcrlUserIP         :: !(Maybe Text)
@@ -96,15 +96,15 @@ data RasterCollectionsRastersList' = RasterCollectionsRastersList'
     , _rcrlKey            :: !(Maybe Key)
     , _rcrlBbox           :: !(Maybe Text)
     , _rcrlId             :: !Text
-    , _rcrlModifiedAfter  :: !(Maybe UTCTime)
-    , _rcrlModifiedBefore :: !(Maybe UTCTime)
+    , _rcrlModifiedAfter  :: !(Maybe DateTime)
+    , _rcrlModifiedBefore :: !(Maybe DateTime)
     , _rcrlPageToken      :: !(Maybe Text)
     , _rcrlOAuthToken     :: !(Maybe OAuthToken)
     , _rcrlSearch         :: !(Maybe Text)
     , _rcrlMaxResults     :: !(Maybe Word32)
     , _rcrlTags           :: !(Maybe Text)
     , _rcrlFields         :: !(Maybe Text)
-    , _rcrlCreatedBefore  :: !(Maybe UTCTime)
+    , _rcrlCreatedBefore  :: !(Maybe DateTime)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollectionsRastersList'' with the minimum fields required to make a request.

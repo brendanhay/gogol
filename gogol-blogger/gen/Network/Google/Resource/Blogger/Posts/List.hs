@@ -58,14 +58,14 @@ type PostsListResource =
      "blogs" :>
        Capture "blogId" Text :>
          "posts" :>
-           QueryParam "endDate" UTCTime :>
+           QueryParam "endDate" DateTime :>
              QueryParam "fetchBodies" Bool :>
                QueryParam "fetchImages" Bool :>
                  QueryParam "labels" Text :>
                    QueryParam "maxResults" Word32 :>
                      QueryParam "orderBy" BloggerPostsListOrderBy :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "startDate" UTCTime :>
+                         QueryParam "startDate" DateTime :>
                            QueryParams "status" BloggerPostsListStatus :>
                              QueryParam "view" BloggerPostsListView :>
                                QueryParam "quotaUser" Text :>
@@ -87,9 +87,9 @@ data PostsList' = PostsList'
     , _pllOrderBy     :: !BloggerPostsListOrderBy
     , _pllUserIP      :: !(Maybe Text)
     , _pllFetchImages :: !(Maybe Bool)
-    , _pllEndDate     :: !(Maybe UTCTime)
+    , _pllEndDate     :: !(Maybe DateTime)
     , _pllBlogId      :: !Text
-    , _pllStartDate   :: !(Maybe UTCTime)
+    , _pllStartDate   :: !(Maybe DateTime)
     , _pllKey         :: !(Maybe Key)
     , _pllFetchBodies :: !Bool
     , _pllView        :: !(Maybe BloggerPostsListView)

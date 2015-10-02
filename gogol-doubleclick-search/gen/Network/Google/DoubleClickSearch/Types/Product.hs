@@ -944,9 +944,9 @@ instance ToJSON ReportAPIColumnSpec where
 -- /See:/ 'reportRequestTimeRange' smart constructor.
 data ReportRequestTimeRange = ReportRequestTimeRange
     { _rrtrEndDate                         :: !(Maybe Text)
-    , _rrtrChangedAttributesSinceTimestamp :: !(Maybe UTCTime)
+    , _rrtrChangedAttributesSinceTimestamp :: !(Maybe DateTime)
     , _rrtrStartDate                       :: !(Maybe Text)
-    , _rrtrChangedMetricsSinceTimestamp    :: !(Maybe UTCTime)
+    , _rrtrChangedMetricsSinceTimestamp    :: !(Maybe DateTime)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportRequestTimeRange' with the minimum fields required to make a request.

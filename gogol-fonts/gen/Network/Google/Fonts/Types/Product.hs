@@ -28,7 +28,7 @@ data Webfont = Webfont
     , _wVersion      :: !(Maybe Text)
     , _wFiles        :: !(Maybe WebfontFiles)
     , _wSubsets      :: !(Maybe [Text])
-    , _wLastModified :: !(Maybe UTCTime)
+    , _wLastModified :: !(Maybe Date)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Webfont' with the minimum fields required to make a request.

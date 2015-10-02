@@ -679,7 +679,7 @@ instance ToJSON Group where
 --
 -- /See:/ 'chromeOSDeviceActiveTimeRanges' smart constructor.
 data ChromeOSDeviceActiveTimeRanges = ChromeOSDeviceActiveTimeRanges
-    { _codatrDate       :: !(Maybe UTCTime)
+    { _codatrDate       :: !(Maybe Date)
     , _codatrActiveTime :: !(Maybe Int32)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -888,16 +888,16 @@ data ChromeOSDevice = ChromeOSDevice
     , _codEtag               :: !(Maybe Text)
     , _codAnnotatedUser      :: !(Maybe Text)
     , _codPlatformVersion    :: !(Maybe Text)
-    , _codLastSync           :: !(Maybe UTCTime)
+    , _codLastSync           :: !(Maybe DateTime)
     , _codActiveTimeRanges   :: !(Maybe [ChromeOSDeviceActiveTimeRanges])
     , _codKind               :: !Text
     , _codEthernetMACAddress :: !(Maybe Text)
-    , _codLastEnrollmentTime :: !(Maybe UTCTime)
+    , _codLastEnrollmentTime :: !(Maybe DateTime)
     , _codAnnotatedLocation  :: !(Maybe Text)
     , _codMACAddress         :: !(Maybe Text)
     , _codOrgUnitPath        :: !(Maybe Text)
     , _codRecentUsers        :: !(Maybe [ChromeOSDeviceRecentUsers])
-    , _codSupportEndDate     :: !(Maybe UTCTime)
+    , _codSupportEndDate     :: !(Maybe DateTime)
     , _codModel              :: !(Maybe Text)
     , _codWillAutoRenew      :: !(Maybe Bool)
     , _codMeid               :: !(Maybe Text)
@@ -1386,7 +1386,7 @@ data Notification = Notification
     , _nFromAddress    :: !(Maybe Text)
     , _nIsUnread       :: !(Maybe Bool)
     , _nNotificationId :: !(Maybe Text)
-    , _nSendTime       :: !(Maybe UTCTime)
+    , _nSendTime       :: !(Maybe DateTime)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Notification' with the minimum fields required to make a request.
@@ -2313,8 +2313,8 @@ instance ToJSON MobileDeviceApplications where
 --
 -- /See:/ 'user' smart constructor.
 data User = User
-    { _useCreationTime               :: !(Maybe UTCTime)
-    , _useLastLoginTime              :: !(Maybe UTCTime)
+    { _useCreationTime               :: !(Maybe DateTime)
+    , _useLastLoginTime              :: !(Maybe DateTime)
     , _useThumbnailPhotoEtag         :: !(Maybe Text)
     , _useEtag                       :: !(Maybe Text)
     , _useIPWhiteListed              :: !(Maybe Bool)
@@ -2329,7 +2329,7 @@ data User = User
     , _useExternalIds                :: !(Maybe JSONValue)
     , _useSuspended                  :: !(Maybe Bool)
     , _useAgreedToTerms              :: !(Maybe Bool)
-    , _useDeletionTime               :: !(Maybe UTCTime)
+    , _useDeletionTime               :: !(Maybe DateTime)
     , _useNonEditableAliases         :: !(Maybe [Text])
     , _useOrgUnitPath                :: !(Maybe Text)
     , _useCustomerId                 :: !(Maybe Text)
@@ -3565,7 +3565,7 @@ data MobileDevice = MobileDevice
     , _mobResourceId                     :: !(Maybe Text)
     , _mobBuildNumber                    :: !(Maybe Text)
     , _mobManagedAccountIsOnOwnerProfile :: !(Maybe Bool)
-    , _mobLastSync                       :: !(Maybe UTCTime)
+    , _mobLastSync                       :: !(Maybe DateTime)
     , _mobOtherAccountsInfo              :: !(Maybe [Text])
     , _mobKind                           :: !Text
     , _mobAdbStatus                      :: !(Maybe Bool)
@@ -3578,7 +3578,7 @@ data MobileDevice = MobileDevice
     , _mobUnknownSourcesStatus           :: !(Maybe Bool)
     , _mobMeid                           :: !(Maybe Text)
     , _mobDeviceId                       :: !(Maybe Text)
-    , _mobFirstSync                      :: !(Maybe UTCTime)
+    , _mobFirstSync                      :: !(Maybe DateTime)
     , _mobUserAgent                      :: !(Maybe Text)
     , _mobImei                           :: !(Maybe Text)
     , _mobType                           :: !(Maybe Text)

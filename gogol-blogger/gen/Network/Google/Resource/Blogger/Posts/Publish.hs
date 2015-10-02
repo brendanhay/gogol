@@ -53,7 +53,7 @@ type PostsPublishResource =
          "posts" :>
            Capture "postId" Text :>
              "publish" :>
-               QueryParam "publishDate" UTCTime :>
+               QueryParam "publishDate" DateTime :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -69,7 +69,7 @@ type PostsPublishResource =
 data PostsPublish' = PostsPublish'
     { _posQuotaUser   :: !(Maybe Text)
     , _posPrettyPrint :: !Bool
-    , _posPublishDate :: !(Maybe UTCTime)
+    , _posPublishDate :: !(Maybe DateTime)
     , _posUserIP      :: !(Maybe Text)
     , _posBlogId      :: !Text
     , _posKey         :: !(Maybe Key)

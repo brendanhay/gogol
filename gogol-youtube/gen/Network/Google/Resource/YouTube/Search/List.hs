@@ -92,8 +92,8 @@ type SearchListResource =
                          QueryParam "onBehalfOfContentOwner" Text :>
                            QueryParam "order" YouTubeSearchListOrder :>
                              QueryParam "pageToken" Text :>
-                               QueryParam "publishedAfter" UTCTime :>
-                                 QueryParam "publishedBefore" UTCTime :>
+                               QueryParam "publishedAfter" DateTime :>
+                                 QueryParam "publishedBefore" DateTime :>
                                    QueryParam "q" Text :>
                                      QueryParam "regionCode" Text :>
                                        QueryParam "relatedToVideoId" Text :>
@@ -180,7 +180,7 @@ type SearchListResource =
 --
 -- /See:/ 'searchList'' smart constructor.
 data SearchList' = SearchList'
-    { _slPublishedAfter         :: !(Maybe UTCTime)
+    { _slPublishedAfter         :: !(Maybe DateTime)
     , _slVideoDefinition        :: !(Maybe YouTubeSearchListVideoDefinition)
     , _slQuotaUser              :: !(Maybe Text)
     , _slPart                   :: !Text
@@ -213,7 +213,7 @@ data SearchList' = SearchList'
     , _slRelevanceLanguage      :: !(Maybe Text)
     , _slOrder                  :: !YouTubeSearchListOrder
     , _slMaxResults             :: !Word32
-    , _slPublishedBefore        :: !(Maybe UTCTime)
+    , _slPublishedBefore        :: !(Maybe DateTime)
     , _slVideoType              :: !(Maybe YouTubeSearchListVideoType)
     , _slVideoDimension         :: !(Maybe YouTubeSearchListVideoDimension)
     , _slFields                 :: !(Maybe Text)

@@ -1023,7 +1023,7 @@ instance ToJSON ChannelStatus where
 --
 -- /See:/ 'liveStreamSnippet' smart constructor.
 data LiveStreamSnippet = LiveStreamSnippet
-    { _lssPublishedAt     :: !(Maybe UTCTime)
+    { _lssPublishedAt     :: !(Maybe DateTime)
     , _lssChannelId       :: !(Maybe Text)
     , _lssIsDefaultStream :: !(Maybe Bool)
     , _lssTitle           :: !(Maybe Text)
@@ -3050,7 +3050,7 @@ data VideoStatus = VideoStatus
     { _vsFailureReason       :: !(Maybe VideoStatusFailureReason)
     , _vsPublicStatsViewable :: !(Maybe Bool)
     , _vsRejectionReason     :: !(Maybe VideoStatusRejectionReason)
-    , _vsPublishAt           :: !(Maybe UTCTime)
+    , _vsPublishAt           :: !(Maybe DateTime)
     , _vsUploadStatus        :: !(Maybe VideoStatusUploadStatus)
     , _vsPrivacyStatus       :: !(Maybe VideoStatusPrivacyStatus)
     , _vsEmbeddable          :: !(Maybe Bool)
@@ -3591,7 +3591,7 @@ instance ToJSON ChannelContentDetails where
 --
 -- /See:/ 'activitySnippet' smart constructor.
 data ActivitySnippet = ActivitySnippet
-    { _asPublishedAt  :: !(Maybe UTCTime)
+    { _asPublishedAt  :: !(Maybe DateTime)
     , _asChannelTitle :: !(Maybe Text)
     , _asChannelId    :: !(Maybe Text)
     , _asThumbnails   :: !(Maybe ThumbnailDetails)
@@ -4504,7 +4504,7 @@ instance ToJSON ChannelSectionListResponse where
 --
 -- /See:/ 'playListSnippet' smart constructor.
 data PlayListSnippet = PlayListSnippet
-    { _plsPublishedAt     :: !(Maybe UTCTime)
+    { _plsPublishedAt     :: !(Maybe DateTime)
     , _plsChannelTitle    :: !(Maybe Text)
     , _plsChannelId       :: !(Maybe Text)
     , _plsThumbnails      :: !(Maybe ThumbnailDetails)
@@ -5721,7 +5721,7 @@ instance ToJSON ThumbnailDetails where
 --
 -- /See:/ 'channelSnippet' smart constructor.
 data ChannelSnippet = ChannelSnippet
-    { _csPublishedAt     :: !(Maybe UTCTime)
+    { _csPublishedAt     :: !(Maybe DateTime)
     , _csCountry         :: !(Maybe Text)
     , _csThumbnails      :: !(Maybe ThumbnailDetails)
     , _csLocalized       :: !(Maybe ChannelLocalization)
@@ -6924,7 +6924,7 @@ instance ToJSON WatchSettings where
 -- /See:/ 'videoSnippet' smart constructor.
 data VideoSnippet = VideoSnippet
     { _vsDefaultAudioLanguage :: !(Maybe Text)
-    , _vsPublishedAt          :: !(Maybe UTCTime)
+    , _vsPublishedAt          :: !(Maybe DateTime)
     , _vsChannelTitle         :: !(Maybe Text)
     , _vsChannelId            :: !(Maybe Text)
     , _vsThumbnails           :: !(Maybe ThumbnailDetails)
@@ -7422,15 +7422,15 @@ instance ToJSON VideoStatistics where
 --
 -- /See:/ 'liveBroadcastSnippet' smart constructor.
 data LiveBroadcastSnippet = LiveBroadcastSnippet
-    { _lbsActualEndTime      :: !(Maybe UTCTime)
+    { _lbsActualEndTime      :: !(Maybe DateTime)
     , _lbsLiveChatId         :: !(Maybe Text)
-    , _lbsPublishedAt        :: !(Maybe UTCTime)
-    , _lbsScheduledEndTime   :: !(Maybe UTCTime)
+    , _lbsPublishedAt        :: !(Maybe DateTime)
+    , _lbsScheduledEndTime   :: !(Maybe DateTime)
     , _lbsChannelId          :: !(Maybe Text)
-    , _lbsScheduledStartTime :: !(Maybe UTCTime)
+    , _lbsScheduledStartTime :: !(Maybe DateTime)
     , _lbsThumbnails         :: !(Maybe ThumbnailDetails)
     , _lbsTitle              :: !(Maybe Text)
-    , _lbsActualStartTime    :: !(Maybe UTCTime)
+    , _lbsActualStartTime    :: !(Maybe DateTime)
     , _lbsIsDefaultBroadcast :: !(Maybe Bool)
     , _lbsDescription        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -8225,7 +8225,7 @@ instance ToJSON PromotedItemId where
 --
 -- /See:/ 'searchResultSnippet' smart constructor.
 data SearchResultSnippet = SearchResultSnippet
-    { _srsPublishedAt          :: !(Maybe UTCTime)
+    { _srsPublishedAt          :: !(Maybe DateTime)
     , _srsChannelTitle         :: !(Maybe Text)
     , _srsChannelId            :: !(Maybe Text)
     , _srsThumbnails           :: !(Maybe ThumbnailDetails)
@@ -10691,7 +10691,7 @@ instance ToJSON I18nRegionSnippet where
 data CaptionSnippet = CaptionSnippet
     { _csFailureReason  :: !(Maybe CaptionSnippetFailureReason)
     , _csStatus         :: !(Maybe CaptionSnippetStatus)
-    , _csLastUpdated    :: !(Maybe UTCTime)
+    , _csLastUpdated    :: !(Maybe DateTime)
     , _csTrackKind      :: !(Maybe CaptionSnippetTrackKind)
     , _csIsDraft        :: !(Maybe Bool)
     , _csIsCC           :: !(Maybe Bool)
@@ -10943,7 +10943,7 @@ instance ToJSON Comment where
 -- /See:/ 'playListItemSnippet' smart constructor.
 data PlayListItemSnippet = PlayListItemSnippet
     { _plisResourceId   :: !(Maybe ResourceId)
-    , _plisPublishedAt  :: !(Maybe UTCTime)
+    , _plisPublishedAt  :: !(Maybe DateTime)
     , _plisChannelTitle :: !(Maybe Text)
     , _plisChannelId    :: !(Maybe Text)
     , _plisThumbnails   :: !(Maybe ThumbnailDetails)
@@ -12207,7 +12207,7 @@ instance ToJSON ContentRating where
 -- /See:/ 'commentSnippet' smart constructor.
 data CommentSnippet = CommentSnippet
     { _cViewerRating               :: !(Maybe CommentSnippetViewerRating)
-    , _cPublishedAt                :: !(Maybe UTCTime)
+    , _cPublishedAt                :: !(Maybe DateTime)
     , _cAuthorChannelURL           :: !(Maybe Text)
     , _cModerationStatus           :: !(Maybe CommentSnippetModerationStatus)
     , _cLikeCount                  :: !(Maybe Word32)
@@ -12217,7 +12217,7 @@ data CommentSnippet = CommentSnippet
     , _cTextDisplay                :: !(Maybe Text)
     , _cAuthorProfileImageURL      :: !(Maybe Text)
     , _cAuthorDisplayName          :: !(Maybe Text)
-    , _cUpdatedAt                  :: !(Maybe UTCTime)
+    , _cUpdatedAt                  :: !(Maybe DateTime)
     , _cAuthorChannelId            :: !(Maybe ChannelId)
     , _cCanRate                    :: !(Maybe Bool)
     , _cAuthorGoogleplusProfileURL :: !(Maybe Text)
@@ -12429,7 +12429,7 @@ instance ToJSON CommentSnippet where
 data VideoRecordingDetails = VideoRecordingDetails
     { _vrdLocation            :: !(Maybe GeoPoint)
     , _vrdLocationDescription :: !(Maybe Text)
-    , _vrdRecordingDate       :: !(Maybe UTCTime)
+    , _vrdRecordingDate       :: !(Maybe DateTime)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideoRecordingDetails' with the minimum fields required to make a request.
@@ -12685,7 +12685,7 @@ instance ToJSON ChannelSettings where
 -- /See:/ 'subscriptionSnippet' smart constructor.
 data SubscriptionSnippet = SubscriptionSnippet
     { _ssResourceId   :: !(Maybe ResourceId)
-    , _ssPublishedAt  :: !(Maybe UTCTime)
+    , _ssPublishedAt  :: !(Maybe DateTime)
     , _ssChannelTitle :: !(Maybe Text)
     , _ssChannelId    :: !(Maybe Text)
     , _ssThumbnails   :: !(Maybe ThumbnailDetails)
@@ -12840,11 +12840,11 @@ instance ToJSON LiveStreamStatus where
 --
 -- /See:/ 'videoLiveStreamingDetails' smart constructor.
 data VideoLiveStreamingDetails = VideoLiveStreamingDetails
-    { _vlsdActualEndTime      :: !(Maybe UTCTime)
+    { _vlsdActualEndTime      :: !(Maybe DateTime)
     , _vlsdConcurrentViewers  :: !(Maybe Word64)
-    , _vlsdScheduledEndTime   :: !(Maybe UTCTime)
-    , _vlsdScheduledStartTime :: !(Maybe UTCTime)
-    , _vlsdActualStartTime    :: !(Maybe UTCTime)
+    , _vlsdScheduledEndTime   :: !(Maybe DateTime)
+    , _vlsdScheduledStartTime :: !(Maybe DateTime)
+    , _vlsdActualStartTime    :: !(Maybe DateTime)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideoLiveStreamingDetails' with the minimum fields required to make a request.
@@ -13375,7 +13375,7 @@ instance ToJSON VideoConversionPing where
 --
 -- /See:/ 'channelContentOwnerDetails' smart constructor.
 data ChannelContentOwnerDetails = ChannelContentOwnerDetails
-    { _ccodTimeLinked   :: !(Maybe UTCTime)
+    { _ccodTimeLinked   :: !(Maybe DateTime)
     , _ccodContentOwner :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 

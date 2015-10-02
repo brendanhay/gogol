@@ -59,12 +59,12 @@ import           Network.Google.Prelude
 type RastersListResource =
      "rasters" :>
        QueryParam "bbox" Text :>
-         QueryParam "createdAfter" UTCTime :>
-           QueryParam "createdBefore" UTCTime :>
+         QueryParam "createdAfter" DateTime :>
+           QueryParam "createdBefore" DateTime :>
              QueryParam "creatorEmail" Text :>
                QueryParam "maxResults" Word32 :>
-                 QueryParam "modifiedAfter" UTCTime :>
-                   QueryParam "modifiedBefore" UTCTime :>
+                 QueryParam "modifiedAfter" DateTime :>
+                   QueryParam "modifiedBefore" DateTime :>
                      QueryParam "pageToken" Text :>
                        QueryParam "processingStatus"
                          MapsEngineRastersListProcessingStatus
@@ -87,7 +87,7 @@ type RastersListResource =
 --
 -- /See:/ 'rastersList'' smart constructor.
 data RastersList' = RastersList'
-    { _rlCreatedAfter     :: !(Maybe UTCTime)
+    { _rlCreatedAfter     :: !(Maybe DateTime)
     , _rlQuotaUser        :: !(Maybe Text)
     , _rlPrettyPrint      :: !Bool
     , _rlUserIP           :: !(Maybe Text)
@@ -96,8 +96,8 @@ data RastersList' = RastersList'
     , _rlKey              :: !(Maybe Key)
     , _rlBbox             :: !(Maybe Text)
     , _rlProcessingStatus :: !(Maybe MapsEngineRastersListProcessingStatus)
-    , _rlModifiedAfter    :: !(Maybe UTCTime)
-    , _rlModifiedBefore   :: !(Maybe UTCTime)
+    , _rlModifiedAfter    :: !(Maybe DateTime)
+    , _rlModifiedBefore   :: !(Maybe DateTime)
     , _rlPageToken        :: !(Maybe Text)
     , _rlProjectId        :: !Text
     , _rlOAuthToken       :: !(Maybe OAuthToken)
@@ -105,7 +105,7 @@ data RastersList' = RastersList'
     , _rlMaxResults       :: !(Maybe Word32)
     , _rlTags             :: !(Maybe Text)
     , _rlFields           :: !(Maybe Text)
-    , _rlCreatedBefore    :: !(Maybe UTCTime)
+    , _rlCreatedBefore    :: !(Maybe DateTime)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RastersList'' with the minimum fields required to make a request.

@@ -28,8 +28,8 @@ data SSLCert = SSLCert
     , _scSelfLink         :: !(Maybe Text)
     , _scCert             :: !(Maybe Text)
     , _scSha1Fingerprint  :: !(Maybe Text)
-    , _scExpirationTime   :: !(Maybe UTCTime)
-    , _scCreateTime       :: !(Maybe UTCTime)
+    , _scExpirationTime   :: !(Maybe DateTime)
+    , _scCreateTime       :: !(Maybe DateTime)
     , _scInstance         :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -781,7 +781,7 @@ instance ToJSON Database where
 -- /See:/ 'ipMapping' smart constructor.
 data IPMapping = IPMapping
     { _imIPAddress    :: !(Maybe Text)
-    , _imTimeToRetire :: !(Maybe UTCTime)
+    , _imTimeToRetire :: !(Maybe DateTime)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'IPMapping' with the minimum fields required to make a request.
@@ -836,16 +836,16 @@ data Operation = Operation
     { _oTargetId      :: !(Maybe Text)
     , _oTargetProject :: !(Maybe Text)
     , _oStatus        :: !(Maybe Text)
-    , _oInsertTime    :: !(Maybe UTCTime)
+    , _oInsertTime    :: !(Maybe DateTime)
     , _oImportContext :: !(Maybe ImportContext)
-    , _oStartTime     :: !(Maybe UTCTime)
+    , _oStartTime     :: !(Maybe DateTime)
     , _oKind          :: !Text
     , _oError         :: !(Maybe OperationErrors)
     , _oExportContext :: !(Maybe ExportContext)
     , _oUser          :: !(Maybe Text)
     , _oSelfLink      :: !(Maybe Text)
     , _oName          :: !(Maybe Text)
-    , _oEndTime       :: !(Maybe UTCTime)
+    , _oEndTime       :: !(Maybe DateTime)
     , _oOperationType :: !(Maybe Text)
     , _oTargetLink    :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -2142,14 +2142,14 @@ instance ToJSON CloneContext where
 -- /See:/ 'backupRun' smart constructor.
 data BackupRun = BackupRun
     { _brStatus          :: !(Maybe Text)
-    , _brStartTime       :: !(Maybe UTCTime)
+    , _brStartTime       :: !(Maybe DateTime)
     , _brKind            :: !Text
     , _brError           :: !(Maybe OperationError)
-    , _brWindowStartTime :: !(Maybe UTCTime)
+    , _brWindowStartTime :: !(Maybe DateTime)
     , _brSelfLink        :: !(Maybe Text)
-    , _brEndTime         :: !(Maybe UTCTime)
+    , _brEndTime         :: !(Maybe DateTime)
     , _brId              :: !(Maybe Int64)
-    , _brEnqueuedTime    :: !(Maybe UTCTime)
+    , _brEnqueuedTime    :: !(Maybe DateTime)
     , _brInstance        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -2281,7 +2281,7 @@ data ACLEntry = ACLEntry
     { _aeKind           :: !Text
     , _aeValue          :: !(Maybe Text)
     , _aeName           :: !(Maybe Text)
-    , _aeExpirationTime :: !(Maybe UTCTime)
+    , _aeExpirationTime :: !(Maybe DateTime)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ACLEntry' with the minimum fields required to make a request.

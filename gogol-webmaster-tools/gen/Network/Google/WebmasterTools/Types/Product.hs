@@ -374,7 +374,7 @@ instance ToJSON APIdimensionFilter where
 -- /See:/ 'urlCrawlErrorCount' smart constructor.
 data URLCrawlErrorCount = URLCrawlErrorCount
     { _ucecCount     :: !(Maybe Int64)
-    , _ucecTimestamp :: !(Maybe UTCTime)
+    , _ucecTimestamp :: !(Maybe DateTime)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLCrawlErrorCount' with the minimum fields required to make a request.
@@ -565,9 +565,9 @@ instance ToJSON URLCrawlErrorsCountsQueryResponse
 data URLCrawlErrorsSample = URLCrawlErrorsSample
     { _ucesResponseCode  :: !(Maybe Int32)
     , _ucesURLDetails    :: !(Maybe URLSampleDetails)
-    , _ucesLastCrawled   :: !(Maybe UTCTime)
+    , _ucesLastCrawled   :: !(Maybe DateTime)
     , _ucesPageURL       :: !(Maybe Text)
-    , _ucesFirstDetected :: !(Maybe UTCTime)
+    , _ucesFirstDetected :: !(Maybe DateTime)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLCrawlErrorsSample' with the minimum fields required to make a request.
@@ -689,9 +689,9 @@ data WmxSitemap = WmxSitemap
     { _wsContents        :: !(Maybe [WmxSitemapContent])
     , _wsPath            :: !(Maybe Text)
     , _wsIsSitemapsIndex :: !(Maybe Bool)
-    , _wsLastSubmitted   :: !(Maybe UTCTime)
+    , _wsLastSubmitted   :: !(Maybe DateTime)
     , _wsWarnings        :: !(Maybe Int64)
-    , _wsLastDownloaded  :: !(Maybe UTCTime)
+    , _wsLastDownloaded  :: !(Maybe DateTime)
     , _wsIsPending       :: !(Maybe Bool)
     , _wsType            :: !(Maybe Text)
     , _wsErrors          :: !(Maybe Int64)

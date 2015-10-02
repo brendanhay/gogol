@@ -109,7 +109,7 @@ instance ToJSON LocationsListResponse where
 --
 -- /See:/ 'notificationConfig' smart constructor.
 data NotificationConfig = NotificationConfig
-    { _ncDeliveryTime :: !(Maybe UTCTime)
+    { _ncDeliveryTime :: !(Maybe DateTime)
     , _ncLevel        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -165,7 +165,7 @@ data Location = Location
     , _lId          :: !(Maybe Text)
     , _lAccuracy    :: !(Maybe Double)
     , _lLongitude   :: !(Maybe Double)
-    , _lTimestamp   :: !(Maybe UTCTime)
+    , _lTimestamp   :: !(Maybe DateTime)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
@@ -1259,7 +1259,7 @@ data Subscription = Subscription
     , _subVerifyToken  :: !(Maybe Text)
     , _subUserToken    :: !(Maybe Text)
     , _subId           :: !(Maybe Text)
-    , _subUpdated      :: !(Maybe UTCTime)
+    , _subUpdated      :: !(Maybe DateTime)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Subscription' with the minimum fields required to make a request.
@@ -1393,7 +1393,7 @@ instance ToJSON Subscription where
 -- /See:/ 'timelineItem' smart constructor.
 data TimelineItem = TimelineItem
     { _tiCreator       :: !(Maybe Contact)
-    , _tiDisplayTime   :: !(Maybe UTCTime)
+    , _tiDisplayTime   :: !(Maybe DateTime)
     , _tiEtag          :: !(Maybe Text)
     , _tiIsDeleted     :: !(Maybe Bool)
     , _tiPinScore      :: !(Maybe Int32)
@@ -1403,7 +1403,7 @@ data TimelineItem = TimelineItem
     , _tiNotification  :: !(Maybe NotificationConfig)
     , _tiText          :: !(Maybe Text)
     , _tiKind          :: !Text
-    , _tiCreated       :: !(Maybe UTCTime)
+    , _tiCreated       :: !(Maybe DateTime)
     , _tiSpeakableText :: !(Maybe Text)
     , _tiIsBundleCover :: !(Maybe Bool)
     , _tiSpeakableType :: !(Maybe Text)
@@ -1414,7 +1414,7 @@ data TimelineItem = TimelineItem
     , _tiSourceItemId  :: !(Maybe Text)
     , _tiId            :: !(Maybe Text)
     , _tiHTML          :: !(Maybe Text)
-    , _tiUpdated       :: !(Maybe UTCTime)
+    , _tiUpdated       :: !(Maybe DateTime)
     , _tiRecipients    :: !(Maybe [Contact])
     , _tiTitle         :: !(Maybe Text)
     , _tiInReplyTo     :: !(Maybe Text)

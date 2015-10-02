@@ -163,7 +163,7 @@ instance ToJSON UsageReports where
 --
 -- /See:/ 'activityId' smart constructor.
 data ActivityId = ActivityId
-    { _aiTime            :: !(Maybe UTCTime)
+    { _aiTime            :: !(Maybe DateTime)
     , _aiUniqueQualifier :: !(Maybe Int64)
     , _aiCustomerId      :: !(Maybe Text)
     , _aiApplicationName :: !(Maybe Text)
@@ -983,7 +983,7 @@ instance ToJSON ActivityActor where
 --
 -- /See:/ 'usageReportParameters' smart constructor.
 data UsageReportParameters = UsageReportParameters
-    { _urpDatetimeValue :: !(Maybe UTCTime)
+    { _urpDatetimeValue :: !(Maybe DateTime)
     , _urpBoolValue     :: !(Maybe Bool)
     , _urpIntValue      :: !(Maybe Int64)
     , _urpStringValue   :: !(Maybe Text)

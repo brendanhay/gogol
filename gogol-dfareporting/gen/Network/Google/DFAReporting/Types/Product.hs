@@ -3414,9 +3414,9 @@ instance ToJSON FloodlightConfigurationsListResponse
 -- /See:/ 'dimensionValueRequest' smart constructor.
 data DimensionValueRequest = DimensionValueRequest
     { _dvrKind          :: !Text
-    , _dvrEndDate       :: !(Maybe UTCTime)
+    , _dvrEndDate       :: !(Maybe Date)
     , _dvrFilters       :: !(Maybe [DimensionFilter])
-    , _dvrStartDate     :: !(Maybe UTCTime)
+    , _dvrStartDate     :: !(Maybe Date)
     , _dvrDimensionName :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -3507,7 +3507,7 @@ data Ad = Ad
     , _addAudienceSegmentId                     :: !(Maybe Int64)
     , _addDayPartTargeting                      :: !(Maybe DayPartTargeting)
     , _addSize                                  :: !(Maybe Size)
-    , _addStartTime                             :: !(Maybe UTCTime)
+    , _addStartTime                             :: !(Maybe DateTime)
     , _addKind                                  :: !Text
     , _addClickThroughURLSuffixProperties       :: !(Maybe ClickThroughURLSuffixProperties)
     , _addCampaignIdDimensionValue              :: !(Maybe DimensionValue)
@@ -3523,7 +3523,7 @@ data Ad = Ad
     , _addAccountId                             :: !(Maybe Int64)
     , _addName                                  :: !(Maybe Text)
     , _addKeyValueTargetingExpression           :: !(Maybe KeyValueTargetingExpression)
-    , _addEndTime                               :: !(Maybe UTCTime)
+    , _addEndTime                               :: !(Maybe DateTime)
     , _addCreateInfo                            :: !(Maybe LastModifiedInfo)
     , _addLastModifiedInfo                      :: !(Maybe LastModifiedInfo)
     , _addId                                    :: !(Maybe Int64)
@@ -4520,10 +4520,10 @@ data Project = Project
     , _pBudget            :: !(Maybe Int64)
     , _pKind              :: !Text
     , _pAdvertiserId      :: !(Maybe Int64)
-    , _pEndDate           :: !(Maybe UTCTime)
+    , _pEndDate           :: !(Maybe Date)
     , _pOverview          :: !(Maybe Text)
     , _pTargetImpressions :: !(Maybe Int64)
-    , _pStartDate         :: !(Maybe UTCTime)
+    , _pStartDate         :: !(Maybe Date)
     , _pTargetCpcNanos    :: !(Maybe Int64)
     , _pAccountId         :: !(Maybe Int64)
     , _pName              :: !(Maybe Text)
@@ -4931,11 +4931,11 @@ instance ToJSON PlacementStrategiesListResponse where
 --
 -- /See:/ 'pricingSchedule' smart constructor.
 data PricingSchedule = PricingSchedule
-    { _psTestingStartDate      :: !(Maybe UTCTime)
+    { _psTestingStartDate      :: !(Maybe Date)
     , _psFloodlightActivityId  :: !(Maybe Int64)
-    , _psEndDate               :: !(Maybe UTCTime)
+    , _psEndDate               :: !(Maybe Date)
     , _psDisregardOverdelivery :: !(Maybe Bool)
-    , _psStartDate             :: !(Maybe UTCTime)
+    , _psStartDate             :: !(Maybe Date)
     , _psCapCostOption         :: !(Maybe PricingScheduleCapCostOption)
     , _psPricingType           :: !(Maybe PricingSchedulePricingType)
     , _psPricingPeriods        :: !(Maybe [PricingSchedulePricingPeriod])
@@ -5800,8 +5800,8 @@ instance ToJSON Country where
 --
 -- /See:/ 'pricing' smart constructor.
 data Pricing = Pricing
-    { _priEndDate     :: !(Maybe UTCTime)
-    , _priStartDate   :: !(Maybe UTCTime)
+    { _priEndDate     :: !(Maybe Date)
+    , _priStartDate   :: !(Maybe Date)
     , _priGroupType   :: !(Maybe PricingGroupType)
     , _priPricingType :: !(Maybe PricingPricingType)
     , _priFlights     :: !(Maybe [Flight])
@@ -6065,8 +6065,8 @@ instance ToJSON Dimension where
 -- /See:/ 'flight' smart constructor.
 data Flight = Flight
     { _fRateOrCost :: !(Maybe Int64)
-    , _fEndDate    :: !(Maybe UTCTime)
-    , _fStartDate  :: !(Maybe UTCTime)
+    , _fEndDate    :: !(Maybe Date)
+    , _fStartDate  :: !(Maybe Date)
     , _fUnits      :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -7372,8 +7372,8 @@ instance ToJSON SiteContact where
 -- /See:/ 'dateRange' smart constructor.
 data DateRange = DateRange
     { _drKind              :: !Text
-    , _drEndDate           :: !(Maybe UTCTime)
-    , _drStartDate         :: !(Maybe UTCTime)
+    , _drEndDate           :: !(Maybe Date)
+    , _drStartDate         :: !(Maybe Date)
     , _drRelativeDateRange :: !(Maybe DateRangeRelativeDateRange)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -8362,12 +8362,12 @@ data Campaign = Campaign
     , _camKind                                         :: !Text
     , _camClickThroughURLSuffixProperties              :: !(Maybe ClickThroughURLSuffixProperties)
     , _camAdvertiserId                                 :: !(Maybe Int64)
-    , _camEndDate                                      :: !(Maybe UTCTime)
+    , _camEndDate                                      :: !(Maybe Date)
     , _camAdvertiserIdDimensionValue                   :: !(Maybe DimensionValue)
     , _camIdDimensionValue                             :: !(Maybe DimensionValue)
     , _camEventTagOverrides                            :: !(Maybe [EventTagOverride])
     , _camLookbackConfiguration                        :: !(Maybe LookbackConfiguration)
-    , _camStartDate                                    :: !(Maybe UTCTime)
+    , _camStartDate                                    :: !(Maybe Date)
     , _camAccountId                                    :: !(Maybe Int64)
     , _camComscoreVceEnabled                           :: !(Maybe Bool)
     , _camName                                         :: !(Maybe Text)
@@ -12782,7 +12782,7 @@ data ChangeLog = ChangeLog
     , _clFieldName       :: !(Maybe Text)
     , _clId              :: !(Maybe Int64)
     , _clSubAccountId    :: !(Maybe Int64)
-    , _clChangeTime      :: !(Maybe UTCTime)
+    , _clChangeTime      :: !(Maybe DateTime)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangeLog' with the minimum fields required to make a request.
@@ -14346,9 +14346,9 @@ instance ToJSON DimensionFilter where
 --
 -- /See:/ 'pricingSchedulePricingPeriod' smart constructor.
 data PricingSchedulePricingPeriod = PricingSchedulePricingPeriod
-    { _psppEndDate         :: !(Maybe UTCTime)
+    { _psppEndDate         :: !(Maybe Date)
     , _psppRateOrCostNanos :: !(Maybe Int64)
-    , _psppStartDate       :: !(Maybe UTCTime)
+    , _psppStartDate       :: !(Maybe Date)
     , _psppUnits           :: !(Maybe Int64)
     , _psppPricingComment  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -14915,7 +14915,7 @@ instance ToJSON RichMediaExitOverride where
 -- /See:/ 'creativeAssignment' smart constructor.
 data CreativeAssignment = CreativeAssignment
     { _caCreativeGroupAssignments   :: !(Maybe [CreativeGroupAssignment])
-    , _caStartTime                  :: !(Maybe UTCTime)
+    , _caStartTime                  :: !(Maybe DateTime)
     , _caWeight                     :: !(Maybe Int32)
     , _caRichMediaExitOverrides     :: !(Maybe [RichMediaExitOverride])
     , _caSSLCompliant               :: !(Maybe Bool)
@@ -14924,7 +14924,7 @@ data CreativeAssignment = CreativeAssignment
     , _caApplyEventTags             :: !(Maybe Bool)
     , _caActive                     :: !(Maybe Bool)
     , _caSequence                   :: !(Maybe Int32)
-    , _caEndTime                    :: !(Maybe UTCTime)
+    , _caEndTime                    :: !(Maybe DateTime)
     , _caCompanionCreativeOverrides :: !(Maybe [CompanionClickThroughOverride])
     , _caCreativeIdDimensionValue   :: !(Maybe DimensionValue)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -16530,8 +16530,8 @@ data ReportSchedule = ReportSchedule
     { _rsEvery             :: !(Maybe Int32)
     , _rsActive            :: !(Maybe Bool)
     , _rsRepeats           :: !(Maybe Text)
-    , _rsStartDate         :: !(Maybe UTCTime)
-    , _rsExpirationDate    :: !(Maybe UTCTime)
+    , _rsStartDate         :: !(Maybe Date)
+    , _rsExpirationDate    :: !(Maybe Date)
     , _rsRunsOnDayOfMonth  :: !(Maybe ReportScheduleRunsOnDayOfMonth)
     , _rsRepeatsOnWeekDays :: !(Maybe [ReportScheduleRepeatsOnWeekDays])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -19462,10 +19462,10 @@ data OrderDocument = OrderDocument
     { _odSigned                   :: !(Maybe Bool)
     , _odKind                     :: !Text
     , _odAdvertiserId             :: !(Maybe Int64)
-    , _odLastSentTime             :: !(Maybe UTCTime)
+    , _odLastSentTime             :: !(Maybe DateTime)
     , _odAmendedOrderDocumentId   :: !(Maybe Int64)
     , _odLastSentRecipients       :: !(Maybe [Text])
-    , _odEffectiveDate            :: !(Maybe UTCTime)
+    , _odEffectiveDate            :: !(Maybe Date)
     , _odApprovedByUserProfileIds :: !(Maybe [Int64])
     , _odAccountId                :: !(Maybe Int64)
     , _odId                       :: !(Maybe Int64)

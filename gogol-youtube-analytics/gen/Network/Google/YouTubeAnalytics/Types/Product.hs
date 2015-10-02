@@ -337,7 +337,7 @@ instance ToJSON BatchReportDefinition where
 --
 -- /See:/ 'groupSnippet' smart constructor.
 data GroupSnippet = GroupSnippet
-    { _gsPublishedAt :: !(Maybe UTCTime)
+    { _gsPublishedAt :: !(Maybe DateTime)
     , _gsTitle       :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -382,7 +382,7 @@ instance ToJSON GroupSnippet where
 --
 -- /See:/ 'batchReport' smart constructor.
 data BatchReport = BatchReport
-    { _brTimeUpdated :: !(Maybe UTCTime)
+    { _brTimeUpdated :: !(Maybe DateTime)
     , _brKind        :: !Text
     , _brReportId    :: !(Maybe Text)
     , _brTimeSpan    :: !(Maybe BatchReportTimeSpan)
@@ -710,8 +710,8 @@ instance ToJSON BatchReportList where
 --
 -- /See:/ 'batchReportTimeSpan' smart constructor.
 data BatchReportTimeSpan = BatchReportTimeSpan
-    { _brtsStartTime :: !(Maybe UTCTime)
-    , _brtsEndTime   :: !(Maybe UTCTime)
+    { _brtsStartTime :: !(Maybe DateTime)
+    , _brtsEndTime   :: !(Maybe DateTime)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BatchReportTimeSpan' with the minimum fields required to make a request.

@@ -80,10 +80,10 @@ type EventsWatchResource =
                                  QueryParam "showHiddenInvitations" Bool :>
                                    QueryParam "singleEvents" Bool :>
                                      QueryParam "syncToken" Text :>
-                                       QueryParam "timeMax" UTCTime :>
-                                         QueryParam "timeMin" UTCTime :>
+                                       QueryParam "timeMax" DateTime :>
+                                         QueryParam "timeMin" DateTime :>
                                            QueryParam "timeZone" Text :>
-                                             QueryParam "updatedMin" UTCTime :>
+                                             QueryParam "updatedMin" DateTime :>
                                                QueryParam "quotaUser" Text :>
                                                  QueryParam "prettyPrint" Bool
                                                    :>
@@ -111,7 +111,7 @@ data EventsWatch' = EventsWatch'
     , _ewQuotaUser               :: !(Maybe Text)
     , _ewCalendarId              :: !Text
     , _ewPrettyPrint             :: !Bool
-    , _ewTimeMin                 :: !(Maybe UTCTime)
+    , _ewTimeMin                 :: !(Maybe DateTime)
     , _ewOrderBy                 :: !(Maybe CalendarEventsWatchOrderBy)
     , _ewSingleEvents            :: !(Maybe Bool)
     , _ewPrivateExtendedProperty :: !(Maybe Text)
@@ -123,14 +123,14 @@ data EventsWatch' = EventsWatch'
     , _ewMaxAttendees            :: !(Maybe Int32)
     , _ewKey                     :: !(Maybe Key)
     , _ewICalUId                 :: !(Maybe Text)
-    , _ewUpdatedMin              :: !(Maybe UTCTime)
+    , _ewUpdatedMin              :: !(Maybe DateTime)
     , _ewPageToken               :: !(Maybe Text)
     , _ewTimeZone                :: !(Maybe Text)
     , _ewOAuthToken              :: !(Maybe OAuthToken)
     , _ewShowHiddenInvitations   :: !(Maybe Bool)
     , _ewMaxResults              :: !(Maybe Int32)
     , _ewAlwaysIncludeEmail      :: !(Maybe Bool)
-    , _ewTimeMax                 :: !(Maybe UTCTime)
+    , _ewTimeMax                 :: !(Maybe DateTime)
     , _ewFields                  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 

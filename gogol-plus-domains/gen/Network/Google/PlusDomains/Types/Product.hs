@@ -2259,7 +2259,7 @@ data Media = Media
     , _mVideoDuration    :: !(Maybe Int64)
     , _mVideoStatus      :: !(Maybe Text)
     , _mKind             :: !Text
-    , _mPublished        :: !(Maybe UTCTime)
+    , _mPublished        :: !(Maybe DateTime)
     , _mURL              :: !(Maybe Text)
     , _mWidth            :: !(Maybe Word32)
     , _mMediaURL         :: !(Maybe Text)
@@ -2268,8 +2268,8 @@ data Media = Media
     , _mDisplayName      :: !(Maybe Text)
     , _mAuthor           :: !(Maybe MediaAuthor)
     , _mId               :: !(Maybe Text)
-    , _mUpdated          :: !(Maybe UTCTime)
-    , _mMediaCreatedTime :: !(Maybe UTCTime)
+    , _mUpdated          :: !(Maybe DateTime)
+    , _mMediaCreatedTime :: !(Maybe DateTime)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Media' with the minimum fields required to make a request.
@@ -2551,7 +2551,7 @@ data ActivityFeed = ActivityFeed
     , _afItems         :: !(Maybe [Activity])
     , _afSelfLink      :: !(Maybe Text)
     , _afId            :: !(Maybe Text)
-    , _afUpdated       :: !(Maybe UTCTime)
+    , _afUpdated       :: !(Maybe DateTime)
     , _afTitle         :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -3212,13 +3212,13 @@ data Activity = Activity
     , _aaGeocode         :: !(Maybe Text)
     , _aaKind            :: !Text
     , _aaRadius          :: !(Maybe Text)
-    , _aaPublished       :: !(Maybe UTCTime)
+    , _aaPublished       :: !(Maybe DateTime)
     , _aaURL             :: !(Maybe Text)
     , _aaActor           :: !(Maybe ActivityActor)
     , _aaAddress         :: !(Maybe Text)
     , _aaObject          :: !(Maybe ActivityObject)
     , _aaId              :: !(Maybe Text)
-    , _aaUpdated         :: !(Maybe UTCTime)
+    , _aaUpdated         :: !(Maybe DateTime)
     , _aaTitle           :: !(Maybe Text)
     , _aaVerb            :: !(Maybe Text)
     , _aaCrosspostSource :: !(Maybe Text)
@@ -3683,12 +3683,12 @@ data Comment = Comment
     { _comEtag      :: !(Maybe Text)
     , _comPlusoners :: !(Maybe CommentPlusoners)
     , _comKind      :: !Text
-    , _comPublished :: !(Maybe UTCTime)
+    , _comPublished :: !(Maybe DateTime)
     , _comActor     :: !(Maybe CommentActor)
     , _comSelfLink  :: !(Maybe Text)
     , _comObject    :: !(Maybe CommentObject)
     , _comId        :: !(Maybe Text)
-    , _comUpdated   :: !(Maybe UTCTime)
+    , _comUpdated   :: !(Maybe DateTime)
     , _comVerb      :: !Text
     , _comInReplyTo :: !(Maybe [CommentInReplyTo])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -4118,7 +4118,7 @@ instance ToJSON ACL where
 --
 -- /See:/ 'mediaExif' smart constructor.
 newtype MediaExif = MediaExif
-    { _meTime :: Maybe UTCTime
+    { _meTime :: Maybe DateTime
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MediaExif' with the minimum fields required to make a request.
@@ -4155,7 +4155,7 @@ data CommentFeed = CommentFeed
     , _cffKind          :: !Text
     , _cffItems         :: !(Maybe [Comment])
     , _cffId            :: !(Maybe Text)
-    , _cffUpdated       :: !(Maybe UTCTime)
+    , _cffUpdated       :: !(Maybe DateTime)
     , _cffTitle         :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 

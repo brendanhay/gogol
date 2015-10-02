@@ -214,7 +214,7 @@ data TaskList = TaskList
     , _tasKind     :: !Text
     , _tasSelfLink :: !(Maybe Text)
     , _tasId       :: !(Maybe Text)
-    , _tasUpdated  :: !(Maybe UTCTime)
+    , _tasUpdated  :: !(Maybe DateTime)
     , _tasTitle    :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -298,15 +298,15 @@ instance ToJSON TaskList where
 data Task = Task
     { _ttParent    :: !(Maybe Text)
     , _ttStatus    :: !(Maybe Text)
-    , _ttDue       :: !(Maybe UTCTime)
+    , _ttDue       :: !(Maybe DateTime)
     , _ttEtag      :: !(Maybe Text)
     , _ttKind      :: !Text
     , _ttSelfLink  :: !(Maybe Text)
     , _ttHidden    :: !(Maybe Bool)
-    , _ttCompleted :: !(Maybe UTCTime)
+    , _ttCompleted :: !(Maybe DateTime)
     , _ttId        :: !(Maybe Text)
     , _ttDeleted   :: !(Maybe Bool)
-    , _ttUpdated   :: !(Maybe UTCTime)
+    , _ttUpdated   :: !(Maybe DateTime)
     , _ttTitle     :: !(Maybe Text)
     , _ttLinks     :: !(Maybe [TaskLinks])
     , _ttNotes     :: !(Maybe Text)

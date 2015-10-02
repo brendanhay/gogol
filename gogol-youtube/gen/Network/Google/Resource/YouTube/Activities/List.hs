@@ -63,8 +63,8 @@ type ActivitiesListResource =
            QueryParam "maxResults" Word32 :>
              QueryParam "mine" Bool :>
                QueryParam "pageToken" Text :>
-                 QueryParam "publishedAfter" UTCTime :>
-                   QueryParam "publishedBefore" UTCTime :>
+                 QueryParam "publishedAfter" DateTime :>
+                   QueryParam "publishedBefore" DateTime :>
                      QueryParam "regionCode" Text :>
                        QueryParam "part" Text :>
                          QueryParam "quotaUser" Text :>
@@ -84,7 +84,7 @@ type ActivitiesListResource =
 --
 -- /See:/ 'activitiesList'' smart constructor.
 data ActivitiesList' = ActivitiesList'
-    { _alPublishedAfter  :: !(Maybe UTCTime)
+    { _alPublishedAfter  :: !(Maybe DateTime)
     , _alQuotaUser       :: !(Maybe Text)
     , _alPart            :: !Text
     , _alPrettyPrint     :: !Bool
@@ -97,7 +97,7 @@ data ActivitiesList' = ActivitiesList'
     , _alPageToken       :: !(Maybe Text)
     , _alOAuthToken      :: !(Maybe OAuthToken)
     , _alMaxResults      :: !Word32
-    , _alPublishedBefore :: !(Maybe UTCTime)
+    , _alPublishedBefore :: !(Maybe DateTime)
     , _alFields          :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 

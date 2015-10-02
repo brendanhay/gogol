@@ -59,12 +59,12 @@ import           Network.Google.Prelude
 type MapsListResource =
      "maps" :>
        QueryParam "bbox" Text :>
-         QueryParam "createdAfter" UTCTime :>
-           QueryParam "createdBefore" UTCTime :>
+         QueryParam "createdAfter" DateTime :>
+           QueryParam "createdBefore" DateTime :>
              QueryParam "creatorEmail" Text :>
                QueryParam "maxResults" Word32 :>
-                 QueryParam "modifiedAfter" UTCTime :>
-                   QueryParam "modifiedBefore" UTCTime :>
+                 QueryParam "modifiedAfter" DateTime :>
+                   QueryParam "modifiedBefore" DateTime :>
                      QueryParam "pageToken" Text :>
                        QueryParam "processingStatus"
                          MapsEngineMapsListProcessingStatus
@@ -87,7 +87,7 @@ type MapsListResource =
 --
 -- /See:/ 'mapsList'' smart constructor.
 data MapsList' = MapsList'
-    { _mapCreatedAfter     :: !(Maybe UTCTime)
+    { _mapCreatedAfter     :: !(Maybe DateTime)
     , _mapQuotaUser        :: !(Maybe Text)
     , _mapPrettyPrint      :: !Bool
     , _mapUserIP           :: !(Maybe Text)
@@ -96,8 +96,8 @@ data MapsList' = MapsList'
     , _mapKey              :: !(Maybe Key)
     , _mapBbox             :: !(Maybe Text)
     , _mapProcessingStatus :: !(Maybe MapsEngineMapsListProcessingStatus)
-    , _mapModifiedAfter    :: !(Maybe UTCTime)
-    , _mapModifiedBefore   :: !(Maybe UTCTime)
+    , _mapModifiedAfter    :: !(Maybe DateTime)
+    , _mapModifiedBefore   :: !(Maybe DateTime)
     , _mapPageToken        :: !(Maybe Text)
     , _mapProjectId        :: !(Maybe Text)
     , _mapOAuthToken       :: !(Maybe OAuthToken)
@@ -105,7 +105,7 @@ data MapsList' = MapsList'
     , _mapMaxResults       :: !(Maybe Word32)
     , _mapTags             :: !(Maybe Text)
     , _mapFields           :: !(Maybe Text)
-    , _mapCreatedBefore    :: !(Maybe UTCTime)
+    , _mapCreatedBefore    :: !(Maybe DateTime)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapsList'' with the minimum fields required to make a request.

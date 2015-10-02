@@ -368,8 +368,8 @@ data Insert2 = Insert2
     { _insStorageDataLocation      :: !(Maybe Text)
     , _insModelType                :: !(Maybe Text)
     , _insKind                     :: !Text
-    , _insCreated                  :: !(Maybe UTCTime)
-    , _insTrainingComplete         :: !(Maybe UTCTime)
+    , _insCreated                  :: !(Maybe DateTime)
+    , _insTrainingComplete         :: !(Maybe DateTime)
     , _insSelfLink                 :: !(Maybe Text)
     , _insTrainingStatus           :: !(Maybe Text)
     , _insStoragePMMLModelLocation :: !(Maybe Text)

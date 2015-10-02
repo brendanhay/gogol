@@ -78,10 +78,10 @@ type EventsListResource =
                                QueryParam "showHiddenInvitations" Bool :>
                                  QueryParam "singleEvents" Bool :>
                                    QueryParam "syncToken" Text :>
-                                     QueryParam "timeMax" UTCTime :>
-                                       QueryParam "timeMin" UTCTime :>
+                                     QueryParam "timeMax" DateTime :>
+                                       QueryParam "timeMin" DateTime :>
                                          QueryParam "timeZone" Text :>
-                                           QueryParam "updatedMin" UTCTime :>
+                                           QueryParam "updatedMin" DateTime :>
                                              QueryParam "quotaUser" Text :>
                                                QueryParam "prettyPrint" Bool :>
                                                  QueryParam "userIp" Text :>
@@ -102,7 +102,7 @@ data EventsList' = EventsList'
     , _elQuotaUser               :: !(Maybe Text)
     , _elCalendarId              :: !Text
     , _elPrettyPrint             :: !Bool
-    , _elTimeMin                 :: !(Maybe UTCTime)
+    , _elTimeMin                 :: !(Maybe DateTime)
     , _elOrderBy                 :: !(Maybe CalendarEventsListOrderBy)
     , _elSingleEvents            :: !(Maybe Bool)
     , _elPrivateExtendedProperty :: !(Maybe Text)
@@ -113,14 +113,14 @@ data EventsList' = EventsList'
     , _elMaxAttendees            :: !(Maybe Int32)
     , _elKey                     :: !(Maybe Key)
     , _elICalUId                 :: !(Maybe Text)
-    , _elUpdatedMin              :: !(Maybe UTCTime)
+    , _elUpdatedMin              :: !(Maybe DateTime)
     , _elPageToken               :: !(Maybe Text)
     , _elTimeZone                :: !(Maybe Text)
     , _elOAuthToken              :: !(Maybe OAuthToken)
     , _elShowHiddenInvitations   :: !(Maybe Bool)
     , _elMaxResults              :: !(Maybe Int32)
     , _elAlwaysIncludeEmail      :: !(Maybe Bool)
-    , _elTimeMax                 :: !(Maybe UTCTime)
+    , _elTimeMax                 :: !(Maybe DateTime)
     , _elFields                  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 

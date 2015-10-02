@@ -66,8 +66,8 @@ type EventsInstancesResource =
                      QueryParam "originalStart" Text :>
                        QueryParam "pageToken" Text :>
                          QueryParam "showDeleted" Bool :>
-                           QueryParam "timeMax" UTCTime :>
-                             QueryParam "timeMin" UTCTime :>
+                           QueryParam "timeMax" DateTime :>
+                             QueryParam "timeMin" DateTime :>
                                QueryParam "timeZone" Text :>
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
@@ -86,7 +86,7 @@ data EventsInstances' = EventsInstances'
     { _eiQuotaUser          :: !(Maybe Text)
     , _eiCalendarId         :: !Text
     , _eiPrettyPrint        :: !Bool
-    , _eiTimeMin            :: !(Maybe UTCTime)
+    , _eiTimeMin            :: !(Maybe DateTime)
     , _eiUserIP             :: !(Maybe Text)
     , _eiShowDeleted        :: !(Maybe Bool)
     , _eiOriginalStart      :: !(Maybe Text)
@@ -97,7 +97,7 @@ data EventsInstances' = EventsInstances'
     , _eiOAuthToken         :: !(Maybe OAuthToken)
     , _eiMaxResults         :: !(Maybe Int32)
     , _eiAlwaysIncludeEmail :: !(Maybe Bool)
-    , _eiTimeMax            :: !(Maybe UTCTime)
+    , _eiTimeMax            :: !(Maybe DateTime)
     , _eiEventId            :: !Text
     , _eiFields             :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)

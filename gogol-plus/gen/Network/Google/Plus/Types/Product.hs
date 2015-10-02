@@ -1155,7 +1155,7 @@ instance ToJSON CommentActor where
 data Moment = Moment
     { _mKind      :: !Text
     , _mResult    :: !(Maybe ItemScope)
-    , _mStartDate :: !(Maybe UTCTime)
+    , _mStartDate :: !(Maybe DateTime)
     , _mObject    :: !(Maybe ItemScope)
     , _mId        :: !(Maybe Text)
     , _mType      :: !(Maybe Text)
@@ -2568,7 +2568,7 @@ data ActivityFeed = ActivityFeed
     , _afItems         :: !(Maybe [Activity])
     , _afSelfLink      :: !(Maybe Text)
     , _afId            :: !(Maybe Text)
-    , _afUpdated       :: !(Maybe UTCTime)
+    , _afUpdated       :: !(Maybe DateTime)
     , _afTitle         :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -3121,13 +3121,13 @@ data Activity = Activity
     , _aaGeocode         :: !(Maybe Text)
     , _aaKind            :: !Text
     , _aaRadius          :: !(Maybe Text)
-    , _aaPublished       :: !(Maybe UTCTime)
+    , _aaPublished       :: !(Maybe DateTime)
     , _aaURL             :: !(Maybe Text)
     , _aaActor           :: !(Maybe ActivityActor)
     , _aaAddress         :: !(Maybe Text)
     , _aaObject          :: !(Maybe ActivityObject)
     , _aaId              :: !(Maybe Text)
-    , _aaUpdated         :: !(Maybe UTCTime)
+    , _aaUpdated         :: !(Maybe DateTime)
     , _aaTitle           :: !(Maybe Text)
     , _aaVerb            :: !(Maybe Text)
     , _aaCrosspostSource :: !(Maybe Text)
@@ -3592,12 +3592,12 @@ data Comment = Comment
     { _cEtag      :: !(Maybe Text)
     , _cPlusoners :: !(Maybe CommentPlusoners)
     , _cKind      :: !Text
-    , _cPublished :: !(Maybe UTCTime)
+    , _cPublished :: !(Maybe DateTime)
     , _cActor     :: !(Maybe CommentActor)
     , _cSelfLink  :: !(Maybe Text)
     , _cObject    :: !(Maybe CommentObject)
     , _cId        :: !(Maybe Text)
-    , _cUpdated   :: !(Maybe UTCTime)
+    , _cUpdated   :: !(Maybe DateTime)
     , _cVerb      :: !Text
     , _cInReplyTo :: !(Maybe [CommentInReplyTo])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -4015,7 +4015,7 @@ data MomentsFeed = MomentsFeed
     , _mfKind          :: !Text
     , _mfItems         :: !(Maybe [Moment])
     , _mfSelfLink      :: !(Maybe Text)
-    , _mfUpdated       :: !(Maybe UTCTime)
+    , _mfUpdated       :: !(Maybe DateTime)
     , _mfTitle         :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -4129,7 +4129,7 @@ data CommentFeed = CommentFeed
     , _cfKind          :: !Text
     , _cfItems         :: !(Maybe [Comment])
     , _cfId            :: !(Maybe Text)
-    , _cfUpdated       :: !(Maybe UTCTime)
+    , _cfUpdated       :: !(Maybe DateTime)
     , _cfTitle         :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 

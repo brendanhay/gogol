@@ -59,12 +59,12 @@ import           Network.Google.Prelude
 type TablesListResource =
      "tables" :>
        QueryParam "bbox" Text :>
-         QueryParam "createdAfter" UTCTime :>
-           QueryParam "createdBefore" UTCTime :>
+         QueryParam "createdAfter" DateTime :>
+           QueryParam "createdBefore" DateTime :>
              QueryParam "creatorEmail" Text :>
                QueryParam "maxResults" Word32 :>
-                 QueryParam "modifiedAfter" UTCTime :>
-                   QueryParam "modifiedBefore" UTCTime :>
+                 QueryParam "modifiedAfter" DateTime :>
+                   QueryParam "modifiedBefore" DateTime :>
                      QueryParam "pageToken" Text :>
                        QueryParam "processingStatus"
                          MapsEngineTablesListProcessingStatus
@@ -87,7 +87,7 @@ type TablesListResource =
 --
 -- /See:/ 'tablesList'' smart constructor.
 data TablesList' = TablesList'
-    { _tlCreatedAfter     :: !(Maybe UTCTime)
+    { _tlCreatedAfter     :: !(Maybe DateTime)
     , _tlQuotaUser        :: !(Maybe Text)
     , _tlPrettyPrint      :: !Bool
     , _tlUserIP           :: !(Maybe Text)
@@ -96,8 +96,8 @@ data TablesList' = TablesList'
     , _tlKey              :: !(Maybe Key)
     , _tlBbox             :: !(Maybe Text)
     , _tlProcessingStatus :: !(Maybe MapsEngineTablesListProcessingStatus)
-    , _tlModifiedAfter    :: !(Maybe UTCTime)
-    , _tlModifiedBefore   :: !(Maybe UTCTime)
+    , _tlModifiedAfter    :: !(Maybe DateTime)
+    , _tlModifiedBefore   :: !(Maybe DateTime)
     , _tlPageToken        :: !(Maybe Text)
     , _tlProjectId        :: !(Maybe Text)
     , _tlOAuthToken       :: !(Maybe OAuthToken)
@@ -105,7 +105,7 @@ data TablesList' = TablesList'
     , _tlMaxResults       :: !(Maybe Word32)
     , _tlTags             :: !(Maybe Text)
     , _tlFields           :: !(Maybe Text)
-    , _tlCreatedBefore    :: !(Maybe UTCTime)
+    , _tlCreatedBefore    :: !(Maybe DateTime)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesList'' with the minimum fields required to make a request.

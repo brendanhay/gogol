@@ -62,14 +62,14 @@ type PostUserInfosListResource =
          "blogs" :>
            Capture "blogId" Text :>
              "posts" :>
-               QueryParam "endDate" UTCTime :>
+               QueryParam "endDate" DateTime :>
                  QueryParam "fetchBodies" Bool :>
                    QueryParam "labels" Text :>
                      QueryParam "maxResults" Word32 :>
                        QueryParam "orderBy" BloggerPostUserInfosListOrderBy
                          :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "startDate" UTCTime :>
+                           QueryParam "startDate" DateTime :>
                              QueryParams "status" BloggerPostUserInfosListStatus
                                :>
                                QueryParam "view" BloggerPostUserInfosListView :>
@@ -94,10 +94,10 @@ data PostUserInfosList' = PostUserInfosList'
     , _puilPrettyPrint :: !Bool
     , _puilOrderBy     :: !BloggerPostUserInfosListOrderBy
     , _puilUserIP      :: !(Maybe Text)
-    , _puilEndDate     :: !(Maybe UTCTime)
+    , _puilEndDate     :: !(Maybe DateTime)
     , _puilBlogId      :: !Text
     , _puilUserId      :: !Text
-    , _puilStartDate   :: !(Maybe UTCTime)
+    , _puilStartDate   :: !(Maybe DateTime)
     , _puilKey         :: !(Maybe Key)
     , _puilFetchBodies :: !Bool
     , _puilView        :: !(Maybe BloggerPostUserInfosListView)

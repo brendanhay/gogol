@@ -1923,7 +1923,7 @@ data Creative = Creative
     , _cVersion               :: !(Maybe Int32)
     , _cSensitiveCategories   :: !(Maybe [Int32])
     , _cVideoURL              :: !(Maybe Text)
-    , _cAPIUploadTimestamp    :: !(Maybe UTCTime)
+    , _cAPIUploadTimestamp    :: !(Maybe DateTime)
     , _cServingRestrictions   :: !(Maybe [CreativeServingRestrictions])
     , _cOpenAuctionStatus     :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)

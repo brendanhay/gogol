@@ -329,7 +329,7 @@ data Event = Event
     , _eAttendees               :: !(Maybe [EventAttendee])
     , _eReminders               :: !(Maybe EventReminders)
     , _eKind                    :: !Text
-    , _eCreated                 :: !(Maybe UTCTime)
+    , _eCreated                 :: !(Maybe DateTime)
     , _eTransparency            :: !Text
     , _eRecurringEventId        :: !(Maybe Text)
     , _eStart                   :: !(Maybe EventDateTime)
@@ -347,7 +347,7 @@ data Event = Event
     , _eSource                  :: !(Maybe EventSource)
     , _eId                      :: !(Maybe Text)
     , _eHTMLLink                :: !(Maybe Text)
-    , _eUpdated                 :: !(Maybe UTCTime)
+    , _eUpdated                 :: !(Maybe DateTime)
     , _eColorId                 :: !(Maybe Text)
     , _eAnyoneCanAddSelf        :: !Bool
     , _eGuestsCanSeeOtherGuests :: !Bool
@@ -1147,8 +1147,8 @@ instance ToJSON EventCreator where
 --
 -- /See:/ 'timePeriod' smart constructor.
 data TimePeriod = TimePeriod
-    { _tpStart :: !(Maybe UTCTime)
-    , _tpEnd   :: !(Maybe UTCTime)
+    { _tpStart :: !(Maybe DateTime)
+    , _tpEnd   :: !(Maybe DateTime)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimePeriod' with the minimum fields required to make a request.
@@ -1733,7 +1733,7 @@ data Events = Events
     , _eveKind             :: !Text
     , _eveItems            :: !(Maybe [Event])
     , _eveDefaultReminders :: !(Maybe [EventReminder])
-    , _eveUpdated          :: !(Maybe UTCTime)
+    , _eveUpdated          :: !(Maybe DateTime)
     , _eveAccessRole       :: !(Maybe Text)
     , _eveTimeZone         :: !(Maybe Text)
     , _eveNextSyncToken    :: !(Maybe Text)
@@ -1945,10 +1945,10 @@ instance ToJSON EventReminder where
 -- /See:/ 'freeBusyResponse' smart constructor.
 data FreeBusyResponse = FreeBusyResponse
     { _fbrGroups    :: !(Maybe FreeBusyResponseGroups)
-    , _fbrTimeMin   :: !(Maybe UTCTime)
+    , _fbrTimeMin   :: !(Maybe DateTime)
     , _fbrKind      :: !Text
     , _fbrCalendars :: !(Maybe FreeBusyResponseCalendars)
-    , _fbrTimeMax   :: !(Maybe UTCTime)
+    , _fbrTimeMax   :: !(Maybe DateTime)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FreeBusyResponse' with the minimum fields required to make a request.
@@ -2385,9 +2385,9 @@ instance ToJSON EventOrganizer where
 --
 -- /See:/ 'eventDateTime' smart constructor.
 data EventDateTime = EventDateTime
-    { _edtDate     :: !(Maybe UTCTime)
+    { _edtDate     :: !(Maybe Date)
     , _edtTimeZone :: !(Maybe Text)
-    , _edtDateTime :: !(Maybe UTCTime)
+    , _edtDateTime :: !(Maybe DateTime)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventDateTime' with the minimum fields required to make a request.
@@ -2551,11 +2551,11 @@ instance ToJSON CalendarList where
 -- /See:/ 'freeBusyRequest' smart constructor.
 data FreeBusyRequest = FreeBusyRequest
     { _fCalendarExpansionMax :: !(Maybe Int32)
-    , _fTimeMin              :: !(Maybe UTCTime)
+    , _fTimeMin              :: !(Maybe DateTime)
     , _fItems                :: !(Maybe [FreeBusyRequestItem])
     , _fGroupExpansionMax    :: !(Maybe Int32)
     , _fTimeZone             :: !Text
-    , _fTimeMax              :: !(Maybe UTCTime)
+    , _fTimeMax              :: !(Maybe DateTime)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FreeBusyRequest' with the minimum fields required to make a request.
@@ -2884,7 +2884,7 @@ data Colors = Colors
     { _colEvent    :: !(Maybe ColorsEvent)
     , _colKind     :: !Text
     , _colCalendar :: !(Maybe ColorsCalendar)
-    , _colUpdated  :: !(Maybe UTCTime)
+    , _colUpdated  :: !(Maybe DateTime)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Colors' with the minimum fields required to make a request.

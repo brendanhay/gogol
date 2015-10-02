@@ -54,11 +54,11 @@ type CommentsListByBlogResource =
      "blogs" :>
        Capture "blogId" Text :>
          "comments" :>
-           QueryParam "endDate" UTCTime :>
+           QueryParam "endDate" DateTime :>
              QueryParam "fetchBodies" Bool :>
                QueryParam "maxResults" Word32 :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "startDate" UTCTime :>
+                   QueryParam "startDate" DateTime :>
                      QueryParams "status" BloggerCommentsListByBlogStatus
                        :>
                        QueryParam "quotaUser" Text :>
@@ -78,9 +78,9 @@ data CommentsListByBlog' = CommentsListByBlog'
     , _clbbQuotaUser   :: !(Maybe Text)
     , _clbbPrettyPrint :: !Bool
     , _clbbUserIP      :: !(Maybe Text)
-    , _clbbEndDate     :: !(Maybe UTCTime)
+    , _clbbEndDate     :: !(Maybe DateTime)
     , _clbbBlogId      :: !Text
-    , _clbbStartDate   :: !(Maybe UTCTime)
+    , _clbbStartDate   :: !(Maybe DateTime)
     , _clbbKey         :: !(Maybe Key)
     , _clbbFetchBodies :: !(Maybe Bool)
     , _clbbPageToken   :: !(Maybe Text)

@@ -199,7 +199,7 @@ instance ToJSON QueryResultBatch where
 data Property = Property
     { _pKeyValue      :: !(Maybe Key)
     , _pBlobKeyValue  :: !(Maybe Text)
-    , _pDateTimeValue :: !(Maybe UTCTime)
+    , _pDateTimeValue :: !(Maybe DateTime)
     , _pIntegerValue  :: !(Maybe Int64)
     , _pEntityValue   :: !(Maybe Entity)
     , _pDoubleValue   :: !(Maybe Double)
@@ -865,7 +865,7 @@ instance ToJSON AllocateIdsResponse where
 data Value = Value
     { _vKeyValue      :: !(Maybe Key)
     , _vBlobKeyValue  :: !(Maybe Text)
-    , _vDateTimeValue :: !(Maybe UTCTime)
+    , _vDateTimeValue :: !(Maybe DateTime)
     , _vIntegerValue  :: !(Maybe Int64)
     , _vEntityValue   :: !(Maybe Entity)
     , _vDoubleValue   :: !(Maybe Double)

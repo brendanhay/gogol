@@ -119,7 +119,7 @@ instance ToJSON CcOfferRewards where
 --
 -- /See:/ 'event' smart constructor.
 data Event = Event
-    { _eModifyDate          :: !(Maybe UTCTime)
+    { _eModifyDate          :: !(Maybe DateTime)
     , _eStatus              :: !(Maybe Text)
     , _eCommissionableSales :: !(Maybe Money)
     , _eChargeId            :: !(Maybe Text)
@@ -129,7 +129,7 @@ data Event = Event
     , _eKind                :: !Text
     , _eNetworkFee          :: !(Maybe Money)
     , _eAdvertiserId        :: !(Maybe Int64)
-    , _eEventDate           :: !(Maybe UTCTime)
+    , _eEventDate           :: !(Maybe DateTime)
     , _eProducts            :: !(Maybe [EventProducts])
     , _ePublisherFee        :: !(Maybe Money)
     , _eType                :: !(Maybe Text)
@@ -353,14 +353,14 @@ data Link = Link
     { _lAuthorship            :: !(Maybe Text)
     , _lDestinationURL        :: !(Maybe Text)
     , _lClickTrackingURL      :: !(Maybe Text)
-    , _lCreateDate            :: !(Maybe UTCTime)
+    , _lCreateDate            :: !(Maybe DateTime)
     , _lKind                  :: !Text
     , _lAdvertiserId          :: !(Maybe Int64)
-    , _lEndDate               :: !(Maybe UTCTime)
+    , _lEndDate               :: !(Maybe DateTime)
     , _lImageAltText          :: !(Maybe Text)
     , _lPromotionType         :: !(Maybe Text)
     , _lAvailability          :: !(Maybe Text)
-    , _lStartDate             :: !(Maybe UTCTime)
+    , _lStartDate             :: !(Maybe DateTime)
     , _lName                  :: !(Maybe Text)
     , _lImpressionTrackingURL :: !(Maybe Text)
     , _lSpecialOffers         :: !(Maybe LinkSpecialOffers)
@@ -1380,7 +1380,7 @@ data Advertiser = Advertiser
     , _advCategory                   :: !(Maybe Text)
     , _advSiteURL                    :: !(Maybe Text)
     , _advPayoutRank                 :: !(Maybe Text)
-    , _advJoinDate                   :: !(Maybe UTCTime)
+    , _advJoinDate                   :: !(Maybe DateTime)
     , _advDefaultLinkId              :: !(Maybe Int64)
     , _advRedirectDomains            :: !(Maybe [Text])
     , _advName                       :: !(Maybe Text)
@@ -2548,7 +2548,7 @@ data Publisher = Publisher
     { _pubStatus              :: !(Maybe Text)
     , _pubKind                :: !Text
     , _pubPayoutRank          :: !(Maybe Text)
-    , _pubJoinDate            :: !(Maybe UTCTime)
+    , _pubJoinDate            :: !(Maybe DateTime)
     , _pubClassification      :: !(Maybe Text)
     , _pubName                :: !(Maybe Text)
     , _pubEpcSevenDayAverage  :: !(Maybe Money)

@@ -59,12 +59,12 @@ import           Network.Google.Prelude
 type AssetsListResource =
      "assets" :>
        QueryParam "bbox" Text :>
-         QueryParam "createdAfter" UTCTime :>
-           QueryParam "createdBefore" UTCTime :>
+         QueryParam "createdAfter" DateTime :>
+           QueryParam "createdBefore" DateTime :>
              QueryParam "creatorEmail" Text :>
                QueryParam "maxResults" Word32 :>
-                 QueryParam "modifiedAfter" UTCTime :>
-                   QueryParam "modifiedBefore" UTCTime :>
+                 QueryParam "modifiedAfter" DateTime :>
+                   QueryParam "modifiedBefore" DateTime :>
                      QueryParam "pageToken" Text :>
                        QueryParam "projectId" Text :>
                          QueryParam "role" MapsEngineAssetsListRole :>
@@ -85,7 +85,7 @@ type AssetsListResource =
 --
 -- /See:/ 'assetsList'' smart constructor.
 data AssetsList' = AssetsList'
-    { _alCreatedAfter   :: !(Maybe UTCTime)
+    { _alCreatedAfter   :: !(Maybe DateTime)
     , _alQuotaUser      :: !(Maybe Text)
     , _alPrettyPrint    :: !Bool
     , _alUserIP         :: !(Maybe Text)
@@ -93,8 +93,8 @@ data AssetsList' = AssetsList'
     , _alRole           :: !(Maybe MapsEngineAssetsListRole)
     , _alKey            :: !(Maybe Key)
     , _alBbox           :: !(Maybe Text)
-    , _alModifiedAfter  :: !(Maybe UTCTime)
-    , _alModifiedBefore :: !(Maybe UTCTime)
+    , _alModifiedAfter  :: !(Maybe DateTime)
+    , _alModifiedBefore :: !(Maybe DateTime)
     , _alPageToken      :: !(Maybe Text)
     , _alProjectId      :: !(Maybe Text)
     , _alType           :: !(Maybe Text)
@@ -103,7 +103,7 @@ data AssetsList' = AssetsList'
     , _alMaxResults     :: !(Maybe Word32)
     , _alTags           :: !(Maybe Text)
     , _alFields         :: !(Maybe Text)
-    , _alCreatedBefore  :: !(Maybe UTCTime)
+    , _alCreatedBefore  :: !(Maybe DateTime)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AssetsList'' with the minimum fields required to make a request.

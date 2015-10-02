@@ -275,7 +275,7 @@ data BucketLifecycleRuleCondition = BucketLifecycleRuleCondition
     { _blrcAge              :: !(Maybe Int32)
     , _blrcIsLive           :: !(Maybe Bool)
     , _blrcNumNewerVersions :: !(Maybe Int32)
-    , _blrcCreatedBefore    :: !(Maybe UTCTime)
+    , _blrcCreatedBefore    :: !(Maybe Date)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketLifecycleRuleCondition' with the minimum fields required to make a request.
@@ -663,7 +663,7 @@ data Bucket = Bucket
     , _bucStorageClass     :: !(Maybe Text)
     , _bucVersioning       :: !(Maybe BucketVersioning)
     , _bucCORS             :: !(Maybe [BucketCORS])
-    , _bucTimeCreated      :: !(Maybe UTCTime)
+    , _bucTimeCreated      :: !(Maybe DateTime)
     , _bucId               :: !(Maybe Text)
     , _bucDefaultObjectACL :: !(Maybe [ObjectAccessControl])
     , _bucMetageneration   :: !(Maybe Int64)
@@ -1417,7 +1417,7 @@ data Object = Object
     { _objEtag               :: !(Maybe Text)
     , _objSize               :: !(Maybe Word64)
     , _objKind               :: !Text
-    , _objTimeDeleted        :: !(Maybe UTCTime)
+    , _objTimeDeleted        :: !(Maybe DateTime)
     , _objCrc32c             :: !(Maybe Text)
     , _objBucket             :: !(Maybe Text)
     , _objOwner              :: !(Maybe ObjectOwner)
@@ -1429,7 +1429,7 @@ data Object = Object
     , _objContentEncoding    :: !(Maybe Text)
     , _objMetadata           :: !(Maybe ObjectMetadata)
     , _objId                 :: !(Maybe Text)
-    , _objUpdated            :: !(Maybe UTCTime)
+    , _objUpdated            :: !(Maybe DateTime)
     , _objContentLanguage    :: !(Maybe Text)
     , _objCacheControl       :: !(Maybe Text)
     , _objMetageneration     :: !(Maybe Int64)

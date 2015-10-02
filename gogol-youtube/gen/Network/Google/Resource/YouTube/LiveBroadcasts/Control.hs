@@ -58,7 +58,7 @@ type LiveBroadcastsControlResource =
            QueryParam "offsetTimeMs" Word64 :>
              QueryParam "onBehalfOfContentOwner" Text :>
                QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                 QueryParam "walltime" UTCTime :>
+                 QueryParam "walltime" DateTime :>
                    QueryParam "id" Text :>
                      QueryParam "part" Text :>
                        QueryParam "quotaUser" Text :>
@@ -85,7 +85,7 @@ data LiveBroadcastsControl' = LiveBroadcastsControl'
     , _lbcId                            :: !Text
     , _lbcDisplaySlate                  :: !(Maybe Bool)
     , _lbcOAuthToken                    :: !(Maybe OAuthToken)
-    , _lbcWalltime                      :: !(Maybe UTCTime)
+    , _lbcWalltime                      :: !(Maybe DateTime)
     , _lbcOffsetTimeMs                  :: !(Maybe Word64)
     , _lbcFields                        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)

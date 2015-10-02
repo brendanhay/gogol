@@ -743,12 +743,12 @@ instance ToJSON MapFolder where
 --
 -- /See:/ 'rasterCollection' smart constructor.
 data RasterCollection = RasterCollection
-    { _rcCreationTime              :: !(Maybe UTCTime)
+    { _rcCreationTime              :: !(Maybe DateTime)
     , _rcWritersCanEditPermissions :: !(Maybe Bool)
     , _rcEtag                      :: !(Maybe Text)
     , _rcCreatorEmail              :: !(Maybe Text)
     , _rcRasterType                :: !(Maybe RasterCollectionRasterType)
-    , _rcLastModifiedTime          :: !(Maybe UTCTime)
+    , _rcLastModifiedTime          :: !(Maybe DateTime)
     , _rcLastModifierEmail         :: !(Maybe Text)
     , _rcName                      :: !(Maybe Text)
     , _rcBbox                      :: !(Maybe [Double])
@@ -1128,11 +1128,11 @@ instance ToJSON Color where
 --
 -- /See:/ 'asset' smart constructor.
 data Asset = Asset
-    { _aCreationTime              :: !(Maybe UTCTime)
+    { _aCreationTime              :: !(Maybe DateTime)
     , _aWritersCanEditPermissions :: !(Maybe Bool)
     , _aEtag                      :: !(Maybe Text)
     , _aCreatorEmail              :: !(Maybe Text)
-    , _aLastModifiedTime          :: !(Maybe UTCTime)
+    , _aLastModifiedTime          :: !(Maybe DateTime)
     , _aLastModifierEmail         :: !(Maybe Text)
     , _aName                      :: !(Maybe Text)
     , _aBbox                      :: !(Maybe [Double])
@@ -2012,9 +2012,9 @@ instance ToJSON Schema where
 --
 -- /See:/ 'acquisitionTime' smart constructor.
 data AcquisitionTime = AcquisitionTime
-    { _atStart     :: !(Maybe UTCTime)
+    { _atStart     :: !(Maybe DateTime)
     , _atPrecision :: !(Maybe AcquisitionTimePrecision)
-    , _atEnd       :: !(Maybe UTCTime)
+    , _atEnd       :: !(Maybe DateTime)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AcquisitionTime' with the minimum fields required to make a request.
@@ -2125,14 +2125,14 @@ instance ToJSON TablesListResponse where
 --
 -- /See:/ 'map'' smart constructor.
 data Map = Map
-    { _mapaCreationTime              :: !(Maybe UTCTime)
+    { _mapaCreationTime              :: !(Maybe DateTime)
     , _mapaWritersCanEditPermissions :: !(Maybe Bool)
     , _mapaEtag                      :: !(Maybe Text)
     , _mapaDefaultViewport           :: !(Maybe [Double])
     , _mapaContents                  :: !(Maybe [MapItem])
     , _mapaPublishingStatus          :: !(Maybe MapPublishingStatus)
     , _mapaCreatorEmail              :: !(Maybe Text)
-    , _mapaLastModifiedTime          :: !(Maybe UTCTime)
+    , _mapaLastModifiedTime          :: !(Maybe DateTime)
     , _mapaLastModifierEmail         :: !(Maybe Text)
     , _mapaVersions                  :: !(Maybe [Text])
     , _mapaName                      :: !(Maybe Text)
@@ -3014,9 +3014,9 @@ instance ToJSON PublishResponse where
 --
 -- /See:/ 'rasterCollectionsRaster' smart constructor.
 data RasterCollectionsRaster = RasterCollectionsRaster
-    { _rcrCreationTime     :: !(Maybe UTCTime)
+    { _rcrCreationTime     :: !(Maybe DateTime)
     , _rcrRasterType       :: !Text
-    , _rcrLastModifiedTime :: !(Maybe UTCTime)
+    , _rcrLastModifiedTime :: !(Maybe DateTime)
     , _rcrName             :: !(Maybe Text)
     , _rcrBbox             :: !(Maybe [Double])
     , _rcrId               :: !(Maybe Text)
@@ -3385,13 +3385,13 @@ instance ToJSON GeoJSONMultiPoint where
 --
 -- /See:/ 'raster' smart constructor.
 data Raster = Raster
-    { _rrCreationTime              :: !(Maybe UTCTime)
+    { _rrCreationTime              :: !(Maybe DateTime)
     , _rrWritersCanEditPermissions :: !(Maybe Bool)
     , _rrMaskType                  :: !Text
     , _rrEtag                      :: !(Maybe Text)
     , _rrCreatorEmail              :: !(Maybe Text)
     , _rrRasterType                :: !(Maybe RasterRasterType)
-    , _rrLastModifiedTime          :: !(Maybe UTCTime)
+    , _rrLastModifiedTime          :: !(Maybe DateTime)
     , _rrLastModifierEmail         :: !(Maybe Text)
     , _rrAcquisitionTime           :: !(Maybe AcquisitionTime)
     , _rrName                      :: !(Maybe Text)
@@ -3838,7 +3838,7 @@ instance ToJSON Permission where
 --
 -- /See:/ 'layer' smart constructor.
 data Layer = Layer
-    { _layaCreationTime              :: !(Maybe UTCTime)
+    { _layaCreationTime              :: !(Maybe DateTime)
     , _layaWritersCanEditPermissions :: !(Maybe Bool)
     , _layaStyle                     :: !(Maybe VectorStyle)
     , _layaEtag                      :: !(Maybe Text)
@@ -3846,7 +3846,7 @@ data Layer = Layer
     , _layaPublishingStatus          :: !(Maybe LayerPublishingStatus)
     , _layaCreatorEmail              :: !(Maybe Text)
     , _layaLayerType                 :: !(Maybe LayerLayerType)
-    , _layaLastModifiedTime          :: !(Maybe UTCTime)
+    , _layaLastModifiedTime          :: !(Maybe DateTime)
     , _layaDatasources               :: !(Maybe [Datasource])
     , _layaLastModifierEmail         :: !(Maybe Text)
     , _layaName                      :: !(Maybe Text)
@@ -4433,11 +4433,11 @@ instance ToJSON PermissionsBatchDeleteResponse where
 --
 -- /See:/ 'table' smart constructor.
 data Table = Table
-    { _ttCreationTime              :: !(Maybe UTCTime)
+    { _ttCreationTime              :: !(Maybe DateTime)
     , _ttWritersCanEditPermissions :: !(Maybe Bool)
     , _ttEtag                      :: !(Maybe Text)
     , _ttCreatorEmail              :: !(Maybe Text)
-    , _ttLastModifiedTime          :: !(Maybe UTCTime)
+    , _ttLastModifiedTime          :: !(Maybe DateTime)
     , _ttSchema                    :: !(Maybe Schema)
     , _ttLastModifierEmail         :: !(Maybe Text)
     , _ttName                      :: !(Maybe Text)

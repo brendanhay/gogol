@@ -76,8 +76,8 @@ instance ToJSON MetricDescriptorTypeDescriptor where
 data ListTimeseriesResponse = ListTimeseriesResponse
     { _ltrNextPageToken :: !(Maybe Text)
     , _ltrKind          :: !Text
-    , _ltrOldest        :: !(Maybe UTCTime)
-    , _ltrYoungest      :: !(Maybe UTCTime)
+    , _ltrOldest        :: !(Maybe DateTime)
+    , _ltrYoungest      :: !(Maybe DateTime)
     , _ltrTimeseries    :: !(Maybe [Timeseries])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -764,11 +764,11 @@ instance ToJSON PointDistribution where
 -- /See:/ 'point' smart constructor.
 data Point = Point
     { _pBoolValue         :: !(Maybe Bool)
-    , _pStart             :: !(Maybe UTCTime)
+    , _pStart             :: !(Maybe DateTime)
     , _pDoubleValue       :: !(Maybe Double)
     , _pStringValue       :: !(Maybe Text)
     , _pDistributionValue :: !(Maybe PointDistribution)
-    , _pEnd               :: !(Maybe UTCTime)
+    , _pEnd               :: !(Maybe DateTime)
     , _pInt64Value        :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -930,8 +930,8 @@ instance ToJSON PointDistributionOverflowBucket where
 data ListTimeseriesDescriptorsResponse = ListTimeseriesDescriptorsResponse
     { _lNextPageToken :: !(Maybe Text)
     , _lKind          :: !Text
-    , _lOldest        :: !(Maybe UTCTime)
-    , _lYoungest      :: !(Maybe UTCTime)
+    , _lOldest        :: !(Maybe DateTime)
+    , _lYoungest      :: !(Maybe DateTime)
     , _lTimeseries    :: !(Maybe [TimeseriesDescriptor])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
