@@ -183,13 +183,16 @@ overlap :: (Eq a, Hashable a) => Set a -> Set a -> Bool
 overlap xs ys = not . Set.null $ Set.intersection xs ys
 
 acronymPrefixes :: Global -> [CI Text]
-acronymPrefixes (global -> g) = map CI.mk (xs ++ map suffix ys ++ zs)
+acronymPrefixes (global -> g) = filter (/= full) $
+    map CI.mk (xs ++ map suffix ys ++ zs)
   where
     -- Take the next char
     suffix x = Text.snoc x c
       where
         c | Text.length x >= 2 = Text.head (Text.drop 1 x)
           | otherwise          = Text.head x
+
+    full = CI.mk g
 
     zs = zipWith (\n x -> Text.snoc x (head (show n))) ([1..] :: [Int]) xs
 

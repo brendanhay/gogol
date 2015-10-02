@@ -80,7 +80,7 @@ mname abrv (Suffix suf) (Global g) =
 
 dname, cname :: Global -> Name
 dname = name . Text.unpack . upperHead . global
-cname = name . Text.unpack . renameReserved . lowerHead . global
+cname = name . Text.unpack . renameReserved . lowerHead . lowerFirstAcronym . global
 
 bname :: Prefix -> Text -> Name
 bname (Prefix p) = name

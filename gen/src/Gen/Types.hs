@@ -39,6 +39,7 @@ import           Control.Monad.State.Strict
 import           Data.Aeson                 hiding (Array, Bool, String)
 import           Data.CaseInsensitive       (CI)
 import qualified Data.CaseInsensitive       as CI
+import           Data.Char
 import           Data.Function              (on)
 import qualified Data.HashMap.Strict        as Map
 import qualified Data.HashSet               as Set
@@ -49,6 +50,7 @@ import           Data.Text                  (Text)
 import qualified Data.Text                  as Text
 import qualified Data.Text.Lazy             as LText
 import qualified Data.Text.Lazy.Builder     as Build
+import           Debug.Trace
 import qualified Filesystem.Path.CurrentOS  as Path
 import           Formatting
 import           Gen.Orphans                ()
@@ -266,7 +268,7 @@ data Memo = Memo
     }
 
 initial :: Service (Fix Schema) -> Memo
-initial s = Memo s mempty mempty core mempty reserve mempty
+initial s = Memo s mempty mempty core mempty reserveBranches mempty
   where
     -- Types available in Network.Google.Prelude.
     core = Map.fromList
@@ -274,7 +276,7 @@ initial s = Memo s mempty mempty core mempty reserve mempty
         ]
 
     -- Reserved sum constructor names.
-    reserve = Map.singleton mempty . Set.fromList $
+    reserveBranches = Map.singleton mempty . Set.fromList $
         map (CI.mk . global) (Map.keys (s ^. dSchemas))
 
 makeLenses ''Memo

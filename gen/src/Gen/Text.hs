@@ -58,7 +58,7 @@ renameAbbrev = mconcat
     . stripSuffix " API"
 
 renameField :: Text -> Text
-renameField = lowerHead . upperAcronym . toCamel
+renameField = lowerHead . lowerFirstAcronym . upperAcronym . toCamel
 
 renameBranch :: Text -> Text
 renameBranch t
@@ -202,6 +202,7 @@ upperAcronym x = Fold.foldl' (flip (uncurry RE.replaceAll)) x xs
          , ("Apk",           "APK")
          , ("Os",            "OS")
          , ("Oob",           "OOB")
+         , ("Jwk",           "JWK")
 
          , ("access",      "Access")
          , ("account",     "Account")
@@ -309,4 +310,5 @@ acronyms =
     , ("VPN",      "Vpn")
     , ("XML",      "Xml")
     , ("ID",       "Id")
+    , ("JWK",      "Jwk")
     ]
