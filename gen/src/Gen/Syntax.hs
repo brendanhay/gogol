@@ -386,18 +386,19 @@ internalType = \case
 
 externalLit :: Lit -> Type
 externalLit = \case
-    Text   -> TyCon "Text"
-    Bool   -> TyCon "Bool"
-    Time   -> TyCon "UTCTime"
-    Date   -> TyCon "UTCTime"
-    Nat    -> TyCon "Natural"
-    Float  -> TyCon "Float"
-    Double -> TyCon "Double"
-    Byte   -> TyCon "Word8"
-    UInt32 -> TyCon "Word32"
-    UInt64 -> TyCon "Word64"
-    Int32  -> TyCon "Int32"
-    Int64  -> TyCon "Int64"
+    Text     -> TyCon "Text"
+    Bool     -> TyCon "Bool"
+    Time     -> TyCon "UTCTime"
+    Date     -> TyCon "UTCTime"
+    DateTime -> TyCon "UTCTime"
+    Nat      -> TyCon "Natural"
+    Float    -> TyCon "Float"
+    Double   -> TyCon "Double"
+    Byte     -> TyCon "Word8"
+    UInt32   -> TyCon "Word32"
+    UInt64   -> TyCon "Word64"
+    Int32    -> TyCon "Int32"
+    Int64    -> TyCon "Int64"
 
     Alt t      -> TyCon (unqual (Text.unpack t))
     Key        -> TyCon "Key"
@@ -406,18 +407,19 @@ externalLit = \case
 
 internalLit :: Lit -> Type
 internalLit = \case
-    Text   -> TyCon "Text"
-    Bool   -> TyCon "Bool"
-    Time   -> TyCon "UTCTime"
-    Date   -> TyCon "UTCTime"
-    Nat    -> TyCon "Nat"
-    Float  -> TyCon "Float"
-    Double -> TyCon "Double"
-    Byte   -> TyCon "Word8"
-    UInt32 -> TyCon "Word32"
-    UInt64 -> TyCon "Word64"
-    Int32  -> TyCon "Int32"
-    Int64  -> TyCon "Int64"
+    Text     -> TyCon "Text"
+    Bool     -> TyCon "Bool"
+    Time     -> TyCon "Time"
+    Date     -> TyCon "Date"
+    DateTime -> TyCon "DateTime"
+    Nat      -> TyCon "Nat"
+    Float    -> TyCon "Float"
+    Double   -> TyCon "Double"
+    Byte     -> TyCon "Word8"
+    UInt32   -> TyCon "Word32"
+    UInt64   -> TyCon "Word64"
+    Int32    -> TyCon "Int32"
+    Int64    -> TyCon "Int64"
 
     Alt t      -> TyCon (unqual (Text.unpack t))
     Key        -> TyCon "Key"

@@ -55,6 +55,15 @@ _Default = iso f Just
     f (Just x) = x
     f Nothing  = mempty
 
+data Time = Time Text
+    deriving (Eq, Ord, Show, Read, Generic, Data, Typeable, ToText, FromText)
+
+data Date = Date Text
+    deriving (Eq, Ord, Show, Read, Generic, Data, Typeable, ToText, FromText)
+
+data DateTime = DateTime Text
+    deriving (Eq, Ord, Show, Read, Generic, Data, Typeable, ToText, FromText)
+
 data AltJSON  = AltJSON
     deriving (Eq, Ord, Show, Read, Generic, Data, Typeable)
 

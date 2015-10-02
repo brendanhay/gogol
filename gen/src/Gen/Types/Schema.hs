@@ -188,8 +188,9 @@ data Lit
     | Int32
     | Int64
     | Nat
-    | Date
     | Time
+    | Date
+    | DateTime
     -- Core types.
     | Body
     | Alt Text
@@ -213,8 +214,9 @@ instance FromJSON Lit where
             "uint64"    -> pure UInt64
             "int32"     -> pure Int32
             "int64"     -> pure Int64
+            "time"      -> pure Time
             "date"      -> pure Date
-            "date-time" -> pure Time
+            "date-time" -> pure DateTime
 
             _           -> fail $
                 "Unable to parse Literal from: " ++ Text.unpack t
