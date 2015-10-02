@@ -27,6 +27,7 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
+         Network.Google
 
     other-modules:
 
