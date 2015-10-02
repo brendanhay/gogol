@@ -23,7 +23,7 @@
 module Network.Google.Resource.Calendar.ACL.Patch
     (
     -- * REST Resource
-      AclPatchResource
+      ACLPatchResource
 
     -- * Creating a Request
     , aCLPatch'
@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarACLPatch@ which the
 -- 'ACLPatch'' request conforms to.
-type AclPatchResource =
+type ACLPatchResource =
      "calendars" :>
        Capture "calendarId" Text :>
          "acl" :>
@@ -180,5 +180,5 @@ instance GoogleRequest ACLPatch' where
               (Just AltJSON)
               _apACLRule
           where go
-                  = clientWithRoute (Proxy :: Proxy AclPatchResource) r
+                  = clientWithRoute (Proxy :: Proxy ACLPatchResource) r
                       u

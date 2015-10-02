@@ -23,7 +23,7 @@
 module Network.Google.Resource.AndroidPublisher.Edits.APKs.List
     (
     -- * REST Resource
-      EditsApksListResource
+      EditsAPKsListResource
 
     -- * Creating a Request
     , editsAPKsList'
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidPublisherEditsAPKsList@ which the
 -- 'EditsAPKsList'' request conforms to.
-type EditsApksListResource =
+type EditsAPKsListResource =
      Capture "packageName" Text :>
        "edits" :>
          Capture "editId" Text :>
@@ -174,6 +174,6 @@ instance GoogleRequest EditsAPKsList' where
               (Just AltJSON)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EditsApksListResource)
+                      (Proxy :: Proxy EditsAPKsListResource)
                       r
                       u

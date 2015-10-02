@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | Gives AdSense publishers access to their inventory and the ability to
+-- | Gives AdSense publishers access to their inventory and the ability to
 -- generate reports
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference>
@@ -457,7 +457,7 @@ type AdSenseAPI =
        :<|> AccountsAdUnitsListResource
        :<|> AccountsAdUnitsGetResource
        :<|> AccountsAdUnitsGetAdCodeResource
-       :<|> AccountsUrlChannelsListResource
+       :<|> AccountsURLChannelsListResource
        :<|> AccountsCustomChannelsAdUnitsListResource
        :<|> AccountsCustomChannelsListResource
        :<|> AccountsCustomChannelsGetResource
@@ -475,7 +475,7 @@ type AdSenseAPI =
        :<|> AdUnitsListResource
        :<|> AdUnitsGetResource
        :<|> AdUnitsGetAdCodeResource
-       :<|> UrlChannelsListResource
+       :<|> URLChannelsListResource
        :<|> CustomChannelsAdUnitsListResource
        :<|> CustomChannelsListResource
        :<|> CustomChannelsGetResource

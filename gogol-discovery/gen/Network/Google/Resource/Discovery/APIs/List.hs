@@ -23,7 +23,7 @@
 module Network.Google.Resource.Discovery.APIs.List
     (
     -- * REST Resource
-      ApisListResource
+      APIsListResource
 
     -- * Creating a Request
     , aPIsList'
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 
 -- | A resource alias for @DiscoveryAPIsList@ which the
 -- 'APIsList'' request conforms to.
-type ApisListResource =
+type APIsListResource =
      "apis" :>
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
@@ -163,5 +163,5 @@ instance GoogleRequest APIsList' where
               _alFields
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy ApisListResource) r
+                  = clientWithRoute (Proxy :: Proxy APIsListResource) r
                       u

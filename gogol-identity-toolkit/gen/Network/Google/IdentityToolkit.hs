@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | Help the third party sites to implement federated login.
+-- | Help the third party sites to implement federated login.
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference>
 module Network.Google.IdentityToolkit
@@ -26,41 +26,41 @@ module Network.Google.IdentityToolkit
 
     -- * REST Resources
 
-    -- ** IdentitytoolkitRelyingPartyyCreateAuthURI
-    , module Network.Google.Resource.IdentityToolkit.RelyingPartyy.CreateAuthURI
+    -- ** IdentitytoolkitRelyingPartyCreateAuthURI
+    , module Network.Google.Resource.IdentityToolkit.RelyingParty.CreateAuthURI
 
-    -- ** IdentitytoolkitRelyingPartyyDeleteAccount
-    , module Network.Google.Resource.IdentityToolkit.RelyingPartyy.DeleteAccount
+    -- ** IdentitytoolkitRelyingPartyDeleteAccount
+    , module Network.Google.Resource.IdentityToolkit.RelyingParty.DeleteAccount
 
-    -- ** IdentitytoolkitRelyingPartyyDownloadAccount
-    , module Network.Google.Resource.IdentityToolkit.RelyingPartyy.DownloadAccount
+    -- ** IdentitytoolkitRelyingPartyDownloadAccount
+    , module Network.Google.Resource.IdentityToolkit.RelyingParty.DownloadAccount
 
-    -- ** IdentitytoolkitRelyingPartyyGetAccountInfo
-    , module Network.Google.Resource.IdentityToolkit.RelyingPartyy.GetAccountInfo
+    -- ** IdentitytoolkitRelyingPartyGetAccountInfo
+    , module Network.Google.Resource.IdentityToolkit.RelyingParty.GetAccountInfo
 
-    -- ** IdentitytoolkitRelyingPartyyGetOobConfirmationCode
-    , module Network.Google.Resource.IdentityToolkit.RelyingPartyy.GetOobConfirmationCode
+    -- ** IdentitytoolkitRelyingPartyGetOOBConfirmationCode
+    , module Network.Google.Resource.IdentityToolkit.RelyingParty.GetOOBConfirmationCode
 
-    -- ** IdentitytoolkitRelyingPartyyGetPublicKeys
-    , module Network.Google.Resource.IdentityToolkit.RelyingPartyy.GetPublicKeys
+    -- ** IdentitytoolkitRelyingPartyGetPublicKeys
+    , module Network.Google.Resource.IdentityToolkit.RelyingParty.GetPublicKeys
 
-    -- ** IdentitytoolkitRelyingPartyyGetRecaptchaParam
-    , module Network.Google.Resource.IdentityToolkit.RelyingPartyy.GetRecaptchaParam
+    -- ** IdentitytoolkitRelyingPartyGetRecaptchaParam
+    , module Network.Google.Resource.IdentityToolkit.RelyingParty.GetRecaptchaParam
 
-    -- ** IdentitytoolkitRelyingPartyyResetPassword
-    , module Network.Google.Resource.IdentityToolkit.RelyingPartyy.ResetPassword
+    -- ** IdentitytoolkitRelyingPartyResetPassword
+    , module Network.Google.Resource.IdentityToolkit.RelyingParty.ResetPassword
 
-    -- ** IdentitytoolkitRelyingPartyySetAccountInfo
-    , module Network.Google.Resource.IdentityToolkit.RelyingPartyy.SetAccountInfo
+    -- ** IdentitytoolkitRelyingPartySetAccountInfo
+    , module Network.Google.Resource.IdentityToolkit.RelyingParty.SetAccountInfo
 
-    -- ** IdentitytoolkitRelyingPartyyUploadAccount
-    , module Network.Google.Resource.IdentityToolkit.RelyingPartyy.UploadAccount
+    -- ** IdentitytoolkitRelyingPartyUploadAccount
+    , module Network.Google.Resource.IdentityToolkit.RelyingParty.UploadAccount
 
-    -- ** IdentitytoolkitRelyingPartyyVerifyAssertion
-    , module Network.Google.Resource.IdentityToolkit.RelyingPartyy.VerifyAssertion
+    -- ** IdentitytoolkitRelyingPartyVerifyAssertion
+    , module Network.Google.Resource.IdentityToolkit.RelyingParty.VerifyAssertion
 
-    -- ** IdentitytoolkitRelyingPartyyVerifyPassword
-    , module Network.Google.Resource.IdentityToolkit.RelyingPartyy.VerifyPassword
+    -- ** IdentitytoolkitRelyingPartyVerifyPassword
+    , module Network.Google.Resource.IdentityToolkit.RelyingParty.VerifyPassword
 
     -- * Types
 
@@ -80,31 +80,31 @@ module Network.Google.IdentityToolkit
     , uiPasswordHash
     , uiLocalId
 
-    -- ** IdentitytoolkitRelyingPartyyVerifyPasswordRequest
-    , IdentitytoolkitRelyingPartyyVerifyPasswordRequest
-    , identitytoolkitRelyingPartyyVerifyPasswordRequest
+    -- ** IdentitytoolkitRelyingPartyVerifyPasswordRequest
+    , IdentitytoolkitRelyingPartyVerifyPasswordRequest
+    , identitytoolkitRelyingPartyVerifyPasswordRequest
     , irpvprEmail
     , irpvprCaptchaChallenge
     , irpvprPassword
     , irpvprCaptchaResponse
     , irpvprPendingIdToken
 
-    -- ** IdentitytoolkitRelyingPartyyVerifyAssertionRequest
-    , IdentitytoolkitRelyingPartyyVerifyAssertionRequest
-    , identitytoolkitRelyingPartyyVerifyAssertionRequest
+    -- ** IdentitytoolkitRelyingPartyVerifyAssertionRequest
+    , IdentitytoolkitRelyingPartyVerifyAssertionRequest
+    , identitytoolkitRelyingPartyVerifyAssertionRequest
     , irpvarPostBody
     , irpvarReturnRefreshToken
     , irpvarRequestURI
     , irpvarPendingIdToken
 
-    -- ** IdentitytoolkitRelyingPartyySetAccountInfoRequest
-    , IdentitytoolkitRelyingPartyySetAccountInfoRequest
-    , identitytoolkitRelyingPartyySetAccountInfoRequest
+    -- ** IdentitytoolkitRelyingPartySetAccountInfoRequest
+    , IdentitytoolkitRelyingPartySetAccountInfoRequest
+    , identitytoolkitRelyingPartySetAccountInfoRequest
     , irpsairUpgradeToFederatedLogin
     , irpsairEmail
     , irpsairCaptchaChallenge
     , irpsairValidSince
-    , irpsairOobCode
+    , irpsairOOBCode
     , irpsairPassword
     , irpsairCaptchaResponse
     , irpsairEmailVerified
@@ -148,9 +148,9 @@ module Network.Google.IdentityToolkit
     , caurRegistered
     , caurForExistingProvider
 
-    -- ** RelyingPartyy
-    , RelyingPartyy
-    , relyingPartyy
+    -- ** RelyingParty
+    , RelyingParty
+    , relyingParty
     , rpEmail
     , rpKind
     , rpUserIP
@@ -160,20 +160,20 @@ module Network.Google.IdentityToolkit
     , rpChallenge
     , rpIdToken
 
-    -- ** IdentitytoolkitRelyingPartyyGetAccountInfoRequest
-    , IdentitytoolkitRelyingPartyyGetAccountInfoRequest
-    , identitytoolkitRelyingPartyyGetAccountInfoRequest
+    -- ** IdentitytoolkitRelyingPartyGetAccountInfoRequest
+    , IdentitytoolkitRelyingPartyGetAccountInfoRequest
+    , identitytoolkitRelyingPartyGetAccountInfoRequest
     , irpgairEmail
     , irpgairLocalId
     , irpgairIdToken
 
-    -- ** IdentitytoolkitRelyingPartyyGetPublicKeysResponse
-    , IdentitytoolkitRelyingPartyyGetPublicKeysResponse
-    , identitytoolkitRelyingPartyyGetPublicKeysResponse
+    -- ** IdentitytoolkitRelyingPartyGetPublicKeysResponse
+    , IdentitytoolkitRelyingPartyGetPublicKeysResponse
+    , identitytoolkitRelyingPartyGetPublicKeysResponse
 
-    -- ** IdentitytoolkitRelyingPartyyCreateAuthURIRequest
-    , IdentitytoolkitRelyingPartyyCreateAuthURIRequest
-    , identitytoolkitRelyingPartyyCreateAuthURIRequest
+    -- ** IdentitytoolkitRelyingPartyCreateAuthURIRequest
+    , IdentitytoolkitRelyingPartyCreateAuthURIRequest
+    , identitytoolkitRelyingPartyCreateAuthURIRequest
     , irpcaurProviderId
     , irpcaurClientId
     , irpcaurContext
@@ -185,9 +185,9 @@ module Network.Google.IdentityToolkit
     , irpcaurOAuthScope
     , irpcaurOpenidRealm
 
-    -- ** IdentitytoolkitRelyingPartyyUploadAccountRequest
-    , IdentitytoolkitRelyingPartyyUploadAccountRequest
-    , identitytoolkitRelyingPartyyUploadAccountRequest
+    -- ** IdentitytoolkitRelyingPartyUploadAccountRequest
+    , IdentitytoolkitRelyingPartyUploadAccountRequest
+    , identitytoolkitRelyingPartyUploadAccountRequest
     , irpuarUsers
     , irpuarMemoryCost
     , irpuarSaltSeparator
@@ -195,12 +195,12 @@ module Network.Google.IdentityToolkit
     , irpuarSignerKey
     , irpuarRounds
 
-    -- ** IdentitytoolkitRelyingPartyyResetPasswordRequest
-    , IdentitytoolkitRelyingPartyyResetPasswordRequest
-    , identitytoolkitRelyingPartyyResetPasswordRequest
+    -- ** IdentitytoolkitRelyingPartyResetPasswordRequest
+    , IdentitytoolkitRelyingPartyResetPasswordRequest
+    , identitytoolkitRelyingPartyResetPasswordRequest
     , irprprEmail
     , irprprNewPassword
-    , irprprOobCode
+    , irprprOOBCode
     , irprprOldPassword
 
     -- ** GetAccountInfoResponse
@@ -209,15 +209,15 @@ module Network.Google.IdentityToolkit
     , gairUsers
     , gairKind
 
-    -- ** GetOobConfirmationCodeResponse
-    , GetOobConfirmationCodeResponse
-    , getOobConfirmationCodeResponse
-    , goccrKind
-    , goccrOobCode
+    -- ** GetOOBConfirmationCodeResponse
+    , GetOOBConfirmationCodeResponse
+    , getOOBConfirmationCodeResponse
+    , goobccrKind
+    , goobccrOOBCode
 
-    -- ** IdentitytoolkitRelyingPartyyDeleteAccountRequest
-    , IdentitytoolkitRelyingPartyyDeleteAccountRequest
-    , identitytoolkitRelyingPartyyDeleteAccountRequest
+    -- ** IdentitytoolkitRelyingPartyDeleteAccountRequest
+    , IdentitytoolkitRelyingPartyDeleteAccountRequest
+    , identitytoolkitRelyingPartyDeleteAccountRequest
     , irpdarLocalId
 
     -- ** SetAccountInfoResponseProviderUserInfo
@@ -227,9 +227,9 @@ module Network.Google.IdentityToolkit
     , sairpuiPhotoURL
     , sairpuiDisplayName
 
-    -- ** IdentitytoolkitRelyingPartyyDownloadAccountRequest
-    , IdentitytoolkitRelyingPartyyDownloadAccountRequest
-    , identitytoolkitRelyingPartyyDownloadAccountRequest
+    -- ** IdentitytoolkitRelyingPartyDownloadAccountRequest
+    , IdentitytoolkitRelyingPartyDownloadAccountRequest
+    , identitytoolkitRelyingPartyDownloadAccountRequest
     , irpdarNextPageToken
     , irpdarMaxResults
 
@@ -315,36 +315,36 @@ module Network.Google.IdentityToolkit
 
 import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
-import           Network.Google.Resource.IdentityToolkit.RelyingPartyy.CreateAuthURI
-import           Network.Google.Resource.IdentityToolkit.RelyingPartyy.DeleteAccount
-import           Network.Google.Resource.IdentityToolkit.RelyingPartyy.DownloadAccount
-import           Network.Google.Resource.IdentityToolkit.RelyingPartyy.GetAccountInfo
-import           Network.Google.Resource.IdentityToolkit.RelyingPartyy.GetOobConfirmationCode
-import           Network.Google.Resource.IdentityToolkit.RelyingPartyy.GetPublicKeys
-import           Network.Google.Resource.IdentityToolkit.RelyingPartyy.GetRecaptchaParam
-import           Network.Google.Resource.IdentityToolkit.RelyingPartyy.ResetPassword
-import           Network.Google.Resource.IdentityToolkit.RelyingPartyy.SetAccountInfo
-import           Network.Google.Resource.IdentityToolkit.RelyingPartyy.UploadAccount
-import           Network.Google.Resource.IdentityToolkit.RelyingPartyy.VerifyAssertion
-import           Network.Google.Resource.IdentityToolkit.RelyingPartyy.VerifyPassword
+import           Network.Google.Resource.IdentityToolkit.RelyingParty.CreateAuthURI
+import           Network.Google.Resource.IdentityToolkit.RelyingParty.DeleteAccount
+import           Network.Google.Resource.IdentityToolkit.RelyingParty.DownloadAccount
+import           Network.Google.Resource.IdentityToolkit.RelyingParty.GetAccountInfo
+import           Network.Google.Resource.IdentityToolkit.RelyingParty.GetOOBConfirmationCode
+import           Network.Google.Resource.IdentityToolkit.RelyingParty.GetPublicKeys
+import           Network.Google.Resource.IdentityToolkit.RelyingParty.GetRecaptchaParam
+import           Network.Google.Resource.IdentityToolkit.RelyingParty.ResetPassword
+import           Network.Google.Resource.IdentityToolkit.RelyingParty.SetAccountInfo
+import           Network.Google.Resource.IdentityToolkit.RelyingParty.UploadAccount
+import           Network.Google.Resource.IdentityToolkit.RelyingParty.VerifyAssertion
+import           Network.Google.Resource.IdentityToolkit.RelyingParty.VerifyPassword
 
 {- $resources
 TODO
 -}
 
 type IdentityToolkitAPI =
-     RelyingPartyyCreateAuthURIResource :<|>
-       RelyingPartyyUploadAccountResource
-       :<|> RelyingPartyyResetPasswordResource
-       :<|> RelyingPartyySetAccountInfoResource
-       :<|> RelyingPartyyVerifyAssertionResource
-       :<|> RelyingPartyyDeleteAccountResource
-       :<|> RelyingPartyyGetOobConfirmationCodeResource
-       :<|> RelyingPartyyGetRecaptchaParamResource
-       :<|> RelyingPartyyDownloadAccountResource
-       :<|> RelyingPartyyVerifyPasswordResource
-       :<|> RelyingPartyyGetPublicKeysResource
-       :<|> RelyingPartyyGetAccountInfoResource
+     RelyingPartyCreateAuthURIResource :<|>
+       RelyingPartyUploadAccountResource
+       :<|> RelyingPartyResetPasswordResource
+       :<|> RelyingPartySetAccountInfoResource
+       :<|> RelyingPartyVerifyAssertionResource
+       :<|> RelyingPartyDeleteAccountResource
+       :<|> RelyingPartyGetOOBConfirmationCodeResource
+       :<|> RelyingPartyGetRecaptchaParamResource
+       :<|> RelyingPartyDownloadAccountResource
+       :<|> RelyingPartyVerifyPasswordResource
+       :<|> RelyingPartyGetPublicKeysResource
+       :<|> RelyingPartyGetAccountInfoResource
 
 identityToolkitAPI :: Proxy IdentityToolkitAPI
 identityToolkitAPI = Proxy

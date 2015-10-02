@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | Provides reliable, many-to-many, asynchronous messaging between
+-- | Provides reliable, many-to-many, asynchronous messaging between
 -- applications.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference>

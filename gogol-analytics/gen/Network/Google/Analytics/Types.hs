@@ -24,17 +24,17 @@ module Network.Google.Analytics.Types
     , gdchName
     , gdchDataType
 
-    -- * UnsampledReports
-    , UnsampledReports
-    , unsampledReports
-    , urNextLink
-    , urItemsPerPage
-    , urKind
-    , urUsername
-    , urItems
-    , urTotalResults
-    , urStartIndex
-    , urPreviousLink
+    -- * UnSampledReports
+    , UnSampledReports
+    , unSampledReports
+    , usrNextLink
+    , usrItemsPerPage
+    , usrKind
+    , usrUsername
+    , usrItems
+    , usrTotalResults
+    , usrStartIndex
+    , usrPreviousLink
 
     -- * GaDataQuery
     , GaDataQuery
@@ -51,9 +51,9 @@ module Network.Google.Analytics.Types
     , gdqSegment
     , gdqStartDate
 
-    -- * UnsampledReport
-    , UnsampledReport
-    , unsampledReport
+    -- * UnSampledReport
+    , UnSampledReport
+    , unSampledReport
     , uDownloadType
     , uStatus
     , uMetrics
@@ -163,10 +163,10 @@ module Network.Google.Analytics.Types
     -- * AnalyticsDataMcfGetSamplingLevel
     , AnalyticsDataMcfGetSamplingLevel (..)
 
-    -- * UnsampledReportDriveDownloadDetails
-    , UnsampledReportDriveDownloadDetails
-    , unsampledReportDriveDownloadDetails
-    , urdddDocumentId
+    -- * UnSampledReportDriveDownloadDetails
+    , UnSampledReportDriveDownloadDetails
+    , unSampledReportDriveDownloadDetails
+    , usrdddDocumentId
 
     -- * WebPropertyChildLink
     , WebPropertyChildLink
@@ -260,9 +260,9 @@ module Network.Google.Analytics.Types
     -- * UserRef
     , UserRef
     , userRef
-    , useEmail
-    , useKind
-    , useId
+    , urEmail
+    , urKind
+    , urId
 
     -- * ProfilePermissions
     , ProfilePermissions
@@ -965,11 +965,11 @@ module Network.Google.Analytics.Types
     , McfDataTotalsForAllResults
     , mcfDataTotalsForAllResults
 
-    -- * UnsampledReportCloudStorageDownloadDetails
-    , UnsampledReportCloudStorageDownloadDetails
-    , unsampledReportCloudStorageDownloadDetails
-    , urcsddObjectId
-    , urcsddBucketId
+    -- * UnSampledReportCloudStorageDownloadDetails
+    , UnSampledReportCloudStorageDownloadDetails
+    , unSampledReportCloudStorageDownloadDetails
+    , usrcsddObjectId
+    , usrcsddBucketId
 
     -- * GoalURLDestinationDetailsSteps
     , GoalURLDestinationDetailsSteps

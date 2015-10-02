@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | Email Migration API lets you migrate emails of users to Google backends.
+-- | Email Migration API lets you migrate emails of users to Google backends.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/email-migration/v2/ Email Migration API v2 Reference>
 module Network.Google.AdminEmailMigration

@@ -21,7 +21,7 @@
 -- Authorization rules_ and _Get methods rules_ for more information about
 -- this method.
 --
--- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @PlaymoviesPartynerAccountsStoreInfosCountryGet@.
+-- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @PlaymoviesPartnerAccountsStoreInfosCountryGet@.
 module Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
     (
     -- * REST Resource
@@ -52,7 +52,7 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
 import           Network.Google.PlayMoviesPartner.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlaymoviesPartynerAccountsStoreInfosCountryGet@ which the
+-- | A resource alias for @PlaymoviesPartnerAccountsStoreInfosCountryGet@ which the
 -- 'AccountsStoreInfosCountryGet'' request conforms to.
 type AccountsStoreInfosCountryGetResource =
      "v1" :>

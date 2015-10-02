@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | Google Cloud Logging API lets you create logs, ingest log entries, and
+-- | Google Cloud Logging API lets you create logs, ingest log entries, and
 -- manage log sinks.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference>

@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | The Google App State API.
+-- | The Google App State API.
 --
 -- /See:/ <https://developers.google.com/games/services/web/api/states Google App State API Reference>
 module Network.Google.AppState

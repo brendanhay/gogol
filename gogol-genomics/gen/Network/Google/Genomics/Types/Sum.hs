@@ -120,13 +120,13 @@ instance ToJSON SearchJobsRequestStatus where
 
 -- | The type of annotations contained within this set.
 data AnnotationSetType
-    = Gene
+    = ASTGene
       -- ^ @GENE@
-    | Generic
+    | ASTGeneric
       -- ^ @GENERIC@
-    | Transcript
+    | ASTTranscript
       -- ^ @TRANSCRIPT@
-    | Variant
+    | ASTVariant
       -- ^ @VARIANT@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -134,18 +134,18 @@ instance Hashable AnnotationSetType
 
 instance FromText AnnotationSetType where
     fromText = \case
-        "GENE" -> Just Gene
-        "GENERIC" -> Just Generic
-        "TRANSCRIPT" -> Just Transcript
-        "VARIANT" -> Just Variant
+        "GENE" -> Just ASTGene
+        "GENERIC" -> Just ASTGeneric
+        "TRANSCRIPT" -> Just ASTTranscript
+        "VARIANT" -> Just ASTVariant
         _ -> Nothing
 
 instance ToText AnnotationSetType where
     toText = \case
-        Gene -> "GENE"
-        Generic -> "GENERIC"
-        Transcript -> "TRANSCRIPT"
-        Variant -> "VARIANT"
+        ASTGene -> "GENE"
+        ASTGeneric -> "GENERIC"
+        ASTTranscript -> "TRANSCRIPT"
+        ASTVariant -> "VARIANT"
 
 instance FromJSON AnnotationSetType where
     parseJSON = parseJSONText "AnnotationSetType"

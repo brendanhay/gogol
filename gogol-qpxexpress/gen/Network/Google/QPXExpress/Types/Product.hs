@@ -486,7 +486,7 @@ data LegInfo = LegInfo
     , _liConnectionDuration  :: !(Maybe Int32)
     , _liDuration            :: !(Maybe Int32)
     , _liMileage             :: !(Maybe Int32)
-    , _liDePartyureTime      :: !(Maybe Text)
+    , _liDePartureTime       :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LegInfo' with the minimum fields required to make a request.
@@ -525,7 +525,7 @@ data LegInfo = LegInfo
 --
 -- * 'liMileage'
 --
--- * 'liDePartyureTime'
+-- * 'liDePartureTime'
 legInfo
     :: LegInfo
 legInfo =
@@ -546,7 +546,7 @@ legInfo =
     , _liConnectionDuration = Nothing
     , _liDuration = Nothing
     , _liMileage = Nothing
-    , _liDePartyureTime = Nothing
+    , _liDePartureTime = Nothing
     }
 
 -- | The leg destination as a city and airport.
@@ -646,10 +646,10 @@ liMileage
 
 -- | The scheduled departure time of the leg, local to the point of
 -- departure.
-liDePartyureTime :: Lens' LegInfo (Maybe Text)
-liDePartyureTime
-  = lens _liDePartyureTime
-      (\ s a -> s{_liDePartyureTime = a})
+liDePartureTime :: Lens' LegInfo (Maybe Text)
+liDePartureTime
+  = lens _liDePartureTime
+      (\ s a -> s{_liDePartureTime = a})
 
 instance FromJSON LegInfo where
         parseJSON
@@ -694,7 +694,7 @@ instance ToJSON LegInfo where
                   ("connectionDuration" .=) <$> _liConnectionDuration,
                   ("duration" .=) <$> _liDuration,
                   ("mileage" .=) <$> _liMileage,
-                  ("departureTime" .=) <$> _liDePartyureTime])
+                  ("departureTime" .=) <$> _liDePartureTime])
 
 -- | An airport.
 --
@@ -1976,17 +1976,17 @@ instance ToJSON FareInfo where
 --
 -- /See:/ 'sliceInput' smart constructor.
 data SliceInput = SliceInput
-    { _sliDestination             :: !(Maybe Text)
-    , _sliOrigin                  :: !(Maybe Text)
-    , _sliMaxStops                :: !(Maybe Int32)
-    , _sliKind                    :: !Text
-    , _sliProhibitedCarrier       :: !(Maybe [Text])
-    , _sliDate                    :: !(Maybe Text)
-    , _sliMaxConnectionDuration   :: !(Maybe Int32)
-    , _sliPreferredCabin          :: !(Maybe Text)
-    , _sliPermittedDePartyureTime :: !(Maybe TimeOfDayRange)
-    , _sliPermittedCarrier        :: !(Maybe [Text])
-    , _sliAlliance                :: !(Maybe Text)
+    { _sliDestination            :: !(Maybe Text)
+    , _sliOrigin                 :: !(Maybe Text)
+    , _sliMaxStops               :: !(Maybe Int32)
+    , _sliKind                   :: !Text
+    , _sliProhibitedCarrier      :: !(Maybe [Text])
+    , _sliDate                   :: !(Maybe Text)
+    , _sliMaxConnectionDuration  :: !(Maybe Int32)
+    , _sliPreferredCabin         :: !(Maybe Text)
+    , _sliPermittedDePartureTime :: !(Maybe TimeOfDayRange)
+    , _sliPermittedCarrier       :: !(Maybe [Text])
+    , _sliAlliance               :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SliceInput' with the minimum fields required to make a request.
@@ -2009,7 +2009,7 @@ data SliceInput = SliceInput
 --
 -- * 'sliPreferredCabin'
 --
--- * 'sliPermittedDePartyureTime'
+-- * 'sliPermittedDePartureTime'
 --
 -- * 'sliPermittedCarrier'
 --
@@ -2026,7 +2026,7 @@ sliceInput =
     , _sliDate = Nothing
     , _sliMaxConnectionDuration = Nothing
     , _sliPreferredCabin = Nothing
-    , _sliPermittedDePartyureTime = Nothing
+    , _sliPermittedDePartureTime = Nothing
     , _sliPermittedCarrier = Nothing
     , _sliAlliance = Nothing
     }
@@ -2082,10 +2082,10 @@ sliPreferredCabin
 
 -- | Slices must depart in this time of day range, local to the point of
 -- departure.
-sliPermittedDePartyureTime :: Lens' SliceInput (Maybe TimeOfDayRange)
-sliPermittedDePartyureTime
-  = lens _sliPermittedDePartyureTime
-      (\ s a -> s{_sliPermittedDePartyureTime = a})
+sliPermittedDePartureTime :: Lens' SliceInput (Maybe TimeOfDayRange)
+sliPermittedDePartureTime
+  = lens _sliPermittedDePartureTime
+      (\ s a -> s{_sliPermittedDePartureTime = a})
 
 -- | A list of 2-letter IATA airline designators. Slices with only these
 -- carriers should be returned.
@@ -2133,7 +2133,7 @@ instance ToJSON SliceInput where
                     _sliMaxConnectionDuration,
                   ("preferredCabin" .=) <$> _sliPreferredCabin,
                   ("permittedDepartureTime" .=) <$>
-                    _sliPermittedDePartyureTime,
+                    _sliPermittedDePartureTime,
                   ("permittedCarrier" .=) <$> _sliPermittedCarrier,
                   ("alliance" .=) <$> _sliAlliance])
 

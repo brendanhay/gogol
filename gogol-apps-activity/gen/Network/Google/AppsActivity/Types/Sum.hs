@@ -19,27 +19,27 @@ import           Network.Google.Prelude
 
 -- | The main type of event that occurred.
 data EventPrimaryEventType
-    = Comment
+    = EPETComment
       -- ^ @comment@
-    | Create
+    | EPETCreate
       -- ^ @create@
-    | Edit
+    | EPETEdit
       -- ^ @edit@
-    | EmptyTrash
+    | EPETEmptyTrash
       -- ^ @emptyTrash@
-    | Move
+    | EPETMove
       -- ^ @move@
-    | PermissionChange
+    | EPETPermissionChange
       -- ^ @permissionChange@
-    | Rename
+    | EPETRename
       -- ^ @rename@
-    | Trash
+    | EPETTrash
       -- ^ @trash@
-    | Unknown
+    | EPETUnknown
       -- ^ @unknown@
-    | Untrash
+    | EPETUntrash
       -- ^ @untrash@
-    | Upload
+    | EPETUpload
       -- ^ @upload@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -47,32 +47,32 @@ instance Hashable EventPrimaryEventType
 
 instance FromText EventPrimaryEventType where
     fromText = \case
-        "comment" -> Just Comment
-        "create" -> Just Create
-        "edit" -> Just Edit
-        "emptyTrash" -> Just EmptyTrash
-        "move" -> Just Move
-        "permissionChange" -> Just PermissionChange
-        "rename" -> Just Rename
-        "trash" -> Just Trash
-        "unknown" -> Just Unknown
-        "untrash" -> Just Untrash
-        "upload" -> Just Upload
+        "comment" -> Just EPETComment
+        "create" -> Just EPETCreate
+        "edit" -> Just EPETEdit
+        "emptyTrash" -> Just EPETEmptyTrash
+        "move" -> Just EPETMove
+        "permissionChange" -> Just EPETPermissionChange
+        "rename" -> Just EPETRename
+        "trash" -> Just EPETTrash
+        "unknown" -> Just EPETUnknown
+        "untrash" -> Just EPETUntrash
+        "upload" -> Just EPETUpload
         _ -> Nothing
 
 instance ToText EventPrimaryEventType where
     toText = \case
-        Comment -> "comment"
-        Create -> "create"
-        Edit -> "edit"
-        EmptyTrash -> "emptyTrash"
-        Move -> "move"
-        PermissionChange -> "permissionChange"
-        Rename -> "rename"
-        Trash -> "trash"
-        Unknown -> "unknown"
-        Untrash -> "untrash"
-        Upload -> "upload"
+        EPETComment -> "comment"
+        EPETCreate -> "create"
+        EPETEdit -> "edit"
+        EPETEmptyTrash -> "emptyTrash"
+        EPETMove -> "move"
+        EPETPermissionChange -> "permissionChange"
+        EPETRename -> "rename"
+        EPETTrash -> "trash"
+        EPETUnknown -> "unknown"
+        EPETUntrash -> "untrash"
+        EPETUpload -> "upload"
 
 instance FromJSON EventPrimaryEventType where
     parseJSON = parseJSONText "EventPrimaryEventType"
@@ -208,13 +208,13 @@ instance ToJSON AppsactivityActivitiesListGroupingStrategy where
 
 -- | Indicates how widely permissions are granted.
 data PermissionType
-    = Anyone
+    = PTAnyone
       -- ^ @anyone@
-    | Domain
+    | PTDomain
       -- ^ @domain@
-    | Group
+    | PTGroup
       -- ^ @group@
-    | User
+    | PTUser
       -- ^ @user@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -222,18 +222,18 @@ instance Hashable PermissionType
 
 instance FromText PermissionType where
     fromText = \case
-        "anyone" -> Just Anyone
-        "domain" -> Just Domain
-        "group" -> Just Group
-        "user" -> Just User
+        "anyone" -> Just PTAnyone
+        "domain" -> Just PTDomain
+        "group" -> Just PTGroup
+        "user" -> Just PTUser
         _ -> Nothing
 
 instance ToText PermissionType where
     toText = \case
-        Anyone -> "anyone"
-        Domain -> "domain"
-        Group -> "group"
-        User -> "user"
+        PTAnyone -> "anyone"
+        PTDomain -> "domain"
+        PTGroup -> "group"
+        PTUser -> "user"
 
 instance FromJSON PermissionType where
     parseJSON = parseJSONText "PermissionType"

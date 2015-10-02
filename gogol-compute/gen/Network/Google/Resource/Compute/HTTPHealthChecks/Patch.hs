@@ -24,7 +24,7 @@
 module Network.Google.Resource.Compute.HTTPHealthChecks.Patch
     (
     -- * REST Resource
-      HttpHealthChecksPatchResource
+      HTTPHealthChecksPatchResource
 
     -- * Creating a Request
     , hTTPHealthChecksPatch'
@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeHTTPHealthChecksPatch@ which the
 -- 'HTTPHealthChecksPatch'' request conforms to.
-type HttpHealthChecksPatchResource =
+type HTTPHealthChecksPatchResource =
      Capture "project" Text :>
        "global" :>
          "httpHealthChecks" :>
@@ -194,6 +194,6 @@ instance GoogleRequest HTTPHealthChecksPatch' where
               _httphcpHTTPHealthCheck
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy HttpHealthChecksPatchResource)
+                      (Proxy :: Proxy HTTPHealthChecksPatchResource)
                       r
                       u

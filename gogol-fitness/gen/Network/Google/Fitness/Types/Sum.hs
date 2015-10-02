@@ -20,15 +20,15 @@ import           Network.Google.Prelude
 -- | The type of a bucket signifies how the data aggregation is performed in
 -- the bucket.
 data AggregateBucketType
-    = ActivitySegment
+    = ABTActivitySegment
       -- ^ @activitySegment@
-    | ActivityType
+    | ABTActivityType
       -- ^ @activityType@
-    | Session
+    | ABTSession
       -- ^ @session@
-    | Time
+    | ABTTime
       -- ^ @time@
-    | Unknown
+    | ABTUnknown
       -- ^ @unknown@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -36,20 +36,20 @@ instance Hashable AggregateBucketType
 
 instance FromText AggregateBucketType where
     fromText = \case
-        "activitySegment" -> Just ActivitySegment
-        "activityType" -> Just ActivityType
-        "session" -> Just Session
-        "time" -> Just Time
-        "unknown" -> Just Unknown
+        "activitySegment" -> Just ABTActivitySegment
+        "activityType" -> Just ABTActivityType
+        "session" -> Just ABTSession
+        "time" -> Just ABTTime
+        "unknown" -> Just ABTUnknown
         _ -> Nothing
 
 instance ToText AggregateBucketType where
     toText = \case
-        ActivitySegment -> "activitySegment"
-        ActivityType -> "activityType"
-        Session -> "session"
-        Time -> "time"
-        Unknown -> "unknown"
+        ABTActivitySegment -> "activitySegment"
+        ABTActivityType -> "activityType"
+        ABTSession -> "session"
+        ABTTime -> "time"
+        ABTUnknown -> "unknown"
 
 instance FromJSON AggregateBucketType where
     parseJSON = parseJSONText "AggregateBucketType"
@@ -87,17 +87,17 @@ instance ToJSON DataSourceType where
 
 -- | A constant representing the type of the device.
 data DeviceType
-    = DTChestStrap
+    = ChestStrap
       -- ^ @chestStrap@
-    | DTPhone
+    | Phone
       -- ^ @phone@
-    | DTScale
+    | Scale
       -- ^ @scale@
-    | DTTablet
+    | Tablet
       -- ^ @tablet@
-    | DTUnknown
+    | Unknown
       -- ^ @unknown@
-    | DTWatch
+    | Watch
       -- ^ @watch@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -105,22 +105,22 @@ instance Hashable DeviceType
 
 instance FromText DeviceType where
     fromText = \case
-        "chestStrap" -> Just DTChestStrap
-        "phone" -> Just DTPhone
-        "scale" -> Just DTScale
-        "tablet" -> Just DTTablet
-        "unknown" -> Just DTUnknown
-        "watch" -> Just DTWatch
+        "chestStrap" -> Just ChestStrap
+        "phone" -> Just Phone
+        "scale" -> Just Scale
+        "tablet" -> Just Tablet
+        "unknown" -> Just Unknown
+        "watch" -> Just Watch
         _ -> Nothing
 
 instance ToText DeviceType where
     toText = \case
-        DTChestStrap -> "chestStrap"
-        DTPhone -> "phone"
-        DTScale -> "scale"
-        DTTablet -> "tablet"
-        DTUnknown -> "unknown"
-        DTWatch -> "watch"
+        ChestStrap -> "chestStrap"
+        Phone -> "phone"
+        Scale -> "scale"
+        Tablet -> "tablet"
+        Unknown -> "unknown"
+        Watch -> "watch"
 
 instance FromJSON DeviceType where
     parseJSON = parseJSONText "DeviceType"

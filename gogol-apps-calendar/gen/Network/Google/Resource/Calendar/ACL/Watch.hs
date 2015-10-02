@@ -23,7 +23,7 @@
 module Network.Google.Resource.Calendar.ACL.Watch
     (
     -- * REST Resource
-      AclWatchResource
+      ACLWatchResource
 
     -- * Creating a Request
     , aCLWatch'
@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarACLWatch@ which the
 -- 'ACLWatch'' request conforms to.
-type AclWatchResource =
+type ACLWatchResource =
      "calendars" :>
        Capture "calendarId" Text :>
          "acl" :>
@@ -231,5 +231,5 @@ instance GoogleRequest ACLWatch' where
               (Just AltJSON)
               _awChannel
           where go
-                  = clientWithRoute (Proxy :: Proxy AclWatchResource) r
+                  = clientWithRoute (Proxy :: Proxy ACLWatchResource) r
                       u

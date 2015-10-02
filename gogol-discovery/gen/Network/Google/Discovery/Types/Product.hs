@@ -484,8 +484,8 @@ instance ToJSON RestResourceResources where
 --
 -- /See:/ 'restMethodMediaUploadProtocolsSimple' smart constructor.
 data RestMethodMediaUploadProtocolsSimple = RestMethodMediaUploadProtocolsSimple
-    { _rmmupsPath       :: !(Maybe Text)
-    , _rmmupsMultiParty :: !Bool
+    { _rmmupsPath      :: !(Maybe Text)
+    , _rmmupsMultiPart :: !Bool
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RestMethodMediaUploadProtocolsSimple' with the minimum fields required to make a request.
@@ -494,13 +494,13 @@ data RestMethodMediaUploadProtocolsSimple = RestMethodMediaUploadProtocolsSimple
 --
 -- * 'rmmupsPath'
 --
--- * 'rmmupsMultiParty'
+-- * 'rmmupsMultiPart'
 restMethodMediaUploadProtocolsSimple
     :: RestMethodMediaUploadProtocolsSimple
 restMethodMediaUploadProtocolsSimple =
     RestMethodMediaUploadProtocolsSimple
     { _rmmupsPath = Nothing
-    , _rmmupsMultiParty = True
+    , _rmmupsMultiPart = True
     }
 
 -- | The URI path to be used for upload. Should be used in conjunction with
@@ -510,10 +510,10 @@ rmmupsPath
   = lens _rmmupsPath (\ s a -> s{_rmmupsPath = a})
 
 -- | True if this endpoint supports upload multipart media.
-rmmupsMultiParty :: Lens' RestMethodMediaUploadProtocolsSimple Bool
-rmmupsMultiParty
-  = lens _rmmupsMultiParty
-      (\ s a -> s{_rmmupsMultiParty = a})
+rmmupsMultiPart :: Lens' RestMethodMediaUploadProtocolsSimple Bool
+rmmupsMultiPart
+  = lens _rmmupsMultiPart
+      (\ s a -> s{_rmmupsMultiPart = a})
 
 instance FromJSON
          RestMethodMediaUploadProtocolsSimple where
@@ -529,7 +529,7 @@ instance ToJSON RestMethodMediaUploadProtocolsSimple
           = object
               (catMaybes
                  [("path" .=) <$> _rmmupsPath,
-                  Just ("multipart" .= _rmmupsMultiParty)])
+                  Just ("multipart" .= _rmmupsMultiPart)])
 
 -- | OAuth 2.0 authentication information.
 --
@@ -1774,8 +1774,8 @@ instance ToJSON DirectoryList where
 --
 -- /See:/ 'restMethodMediaUploadProtocolsResumable' smart constructor.
 data RestMethodMediaUploadProtocolsResumable = RestMethodMediaUploadProtocolsResumable
-    { _rmmuprPath       :: !(Maybe Text)
-    , _rmmuprMultiParty :: !Bool
+    { _rmmuprPath      :: !(Maybe Text)
+    , _rmmuprMultiPart :: !Bool
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RestMethodMediaUploadProtocolsResumable' with the minimum fields required to make a request.
@@ -1784,13 +1784,13 @@ data RestMethodMediaUploadProtocolsResumable = RestMethodMediaUploadProtocolsRes
 --
 -- * 'rmmuprPath'
 --
--- * 'rmmuprMultiParty'
+-- * 'rmmuprMultiPart'
 restMethodMediaUploadProtocolsResumable
     :: RestMethodMediaUploadProtocolsResumable
 restMethodMediaUploadProtocolsResumable =
     RestMethodMediaUploadProtocolsResumable
     { _rmmuprPath = Nothing
-    , _rmmuprMultiParty = True
+    , _rmmuprMultiPart = True
     }
 
 -- | The URI path to be used for upload. Should be used in conjunction with
@@ -1800,10 +1800,10 @@ rmmuprPath
   = lens _rmmuprPath (\ s a -> s{_rmmuprPath = a})
 
 -- | True if this endpoint supports uploading multipart media.
-rmmuprMultiParty :: Lens' RestMethodMediaUploadProtocolsResumable Bool
-rmmuprMultiParty
-  = lens _rmmuprMultiParty
-      (\ s a -> s{_rmmuprMultiParty = a})
+rmmuprMultiPart :: Lens' RestMethodMediaUploadProtocolsResumable Bool
+rmmuprMultiPart
+  = lens _rmmuprMultiPart
+      (\ s a -> s{_rmmuprMultiPart = a})
 
 instance FromJSON
          RestMethodMediaUploadProtocolsResumable where
@@ -1820,7 +1820,7 @@ instance ToJSON
           = object
               (catMaybes
                  [("path" .=) <$> _rmmuprPath,
-                  Just ("multipart" .= _rmmuprMultiParty)])
+                  Just ("multipart" .= _rmmuprMultiPart)])
 
 -- | The schema for the request.
 --

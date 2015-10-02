@@ -124,7 +124,7 @@ module Network.Google.Plus.Types
     -- * PersonOrganizations
     , PersonOrganizations
     , personOrganizations
-    , poDePartyment
+    , poDePartment
     , poLocation
     , poEndDate
     , poPrimary

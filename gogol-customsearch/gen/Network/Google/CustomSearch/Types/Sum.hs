@@ -85,7 +85,7 @@ instance ToJSON SearchCseListImgColorType where
 -- | Returns images of a type, which can be one of: clipart, face, lineart,
 -- news, and photo.
 data SearchCseListImgType
-    = CliParty
+    = CliPart
       -- ^ @clipart@
       -- clipart
     | Face
@@ -106,7 +106,7 @@ instance Hashable SearchCseListImgType
 
 instance FromText SearchCseListImgType where
     fromText = \case
-        "clipart" -> Just CliParty
+        "clipart" -> Just CliPart
         "face" -> Just Face
         "lineart" -> Just Lineart
         "news" -> Just News
@@ -115,7 +115,7 @@ instance FromText SearchCseListImgType where
 
 instance ToText SearchCseListImgType where
     toText = \case
-        CliParty -> "clipart"
+        CliPart -> "clipart"
         Face -> "face"
         Lineart -> "lineart"
         News -> "news"

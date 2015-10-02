@@ -32,18 +32,18 @@ library
     exposed-modules:
           Network.Google.IdentityToolkit
         , Network.Google.IdentityToolkit.Types
-        , Network.Google.Resource.IdentityToolkit.RelyingPartyy.CreateAuthURI
-        , Network.Google.Resource.IdentityToolkit.RelyingPartyy.DeleteAccount
-        , Network.Google.Resource.IdentityToolkit.RelyingPartyy.DownloadAccount
-        , Network.Google.Resource.IdentityToolkit.RelyingPartyy.GetAccountInfo
-        , Network.Google.Resource.IdentityToolkit.RelyingPartyy.GetOobConfirmationCode
-        , Network.Google.Resource.IdentityToolkit.RelyingPartyy.GetPublicKeys
-        , Network.Google.Resource.IdentityToolkit.RelyingPartyy.GetRecaptchaParam
-        , Network.Google.Resource.IdentityToolkit.RelyingPartyy.ResetPassword
-        , Network.Google.Resource.IdentityToolkit.RelyingPartyy.SetAccountInfo
-        , Network.Google.Resource.IdentityToolkit.RelyingPartyy.UploadAccount
-        , Network.Google.Resource.IdentityToolkit.RelyingPartyy.VerifyAssertion
-        , Network.Google.Resource.IdentityToolkit.RelyingPartyy.VerifyPassword
+        , Network.Google.Resource.IdentityToolkit.RelyingParty.CreateAuthURI
+        , Network.Google.Resource.IdentityToolkit.RelyingParty.DeleteAccount
+        , Network.Google.Resource.IdentityToolkit.RelyingParty.DownloadAccount
+        , Network.Google.Resource.IdentityToolkit.RelyingParty.GetAccountInfo
+        , Network.Google.Resource.IdentityToolkit.RelyingParty.GetOOBConfirmationCode
+        , Network.Google.Resource.IdentityToolkit.RelyingParty.GetPublicKeys
+        , Network.Google.Resource.IdentityToolkit.RelyingParty.GetRecaptchaParam
+        , Network.Google.Resource.IdentityToolkit.RelyingParty.ResetPassword
+        , Network.Google.Resource.IdentityToolkit.RelyingParty.SetAccountInfo
+        , Network.Google.Resource.IdentityToolkit.RelyingParty.UploadAccount
+        , Network.Google.Resource.IdentityToolkit.RelyingParty.VerifyAssertion
+        , Network.Google.Resource.IdentityToolkit.RelyingParty.VerifyPassword
 
     other-modules:
           Network.Google.IdentityToolkit.Types.Product

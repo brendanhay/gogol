@@ -1021,11 +1021,11 @@ instance ToJSON ContentRatingAnatelRating where
 
 -- | Describes the type of the promoted item.
 data PromotedItemIdType
-    = RecentUpload
+    = PIITRecentUpload
       -- ^ @recentUpload@
-    | Video
+    | PIITVideo
       -- ^ @video@
-    | Website
+    | PIITWebsite
       -- ^ @website@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -1033,16 +1033,16 @@ instance Hashable PromotedItemIdType
 
 instance FromText PromotedItemIdType where
     fromText = \case
-        "recentUpload" -> Just RecentUpload
-        "video" -> Just Video
-        "website" -> Just Website
+        "recentUpload" -> Just PIITRecentUpload
+        "video" -> Just PIITVideo
+        "website" -> Just PIITWebsite
         _ -> Nothing
 
 instance ToText PromotedItemIdType where
     toText = \case
-        RecentUpload -> "recentUpload"
-        Video -> "video"
-        Website -> "website"
+        PIITRecentUpload -> "recentUpload"
+        PIITVideo -> "video"
+        PIITWebsite -> "website"
 
 instance FromJSON PromotedItemIdType where
     parseJSON = parseJSONText "PromotedItemIdType"
@@ -4545,27 +4545,27 @@ instance ToJSON YouTubeSearchListVideoDimension where
 
 -- | The type of activity that the resource describes.
 data ActivitySnippetType
-    = Bulletin
+    = ASTBulletin
       -- ^ @bulletin@
-    | ChannelItem
+    | ASTChannelItem
       -- ^ @channelItem@
-    | Comment
+    | ASTComment
       -- ^ @comment@
-    | Favorite
+    | ASTFavorite
       -- ^ @favorite@
-    | Like
+    | ASTLike
       -- ^ @like@
-    | PlayListItem
+    | ASTPlayListItem
       -- ^ @playlistItem@
-    | PromotedItem
+    | ASTPromotedItem
       -- ^ @promotedItem@
-    | Recommendation
+    | ASTRecommendation
       -- ^ @recommendation@
-    | Social
+    | ASTSocial
       -- ^ @social@
-    | Subscription
+    | ASTSubscription
       -- ^ @subscription@
-    | Upload
+    | ASTUpload
       -- ^ @upload@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -4573,32 +4573,32 @@ instance Hashable ActivitySnippetType
 
 instance FromText ActivitySnippetType where
     fromText = \case
-        "bulletin" -> Just Bulletin
-        "channelItem" -> Just ChannelItem
-        "comment" -> Just Comment
-        "favorite" -> Just Favorite
-        "like" -> Just Like
-        "playlistItem" -> Just PlayListItem
-        "promotedItem" -> Just PromotedItem
-        "recommendation" -> Just Recommendation
-        "social" -> Just Social
-        "subscription" -> Just Subscription
-        "upload" -> Just Upload
+        "bulletin" -> Just ASTBulletin
+        "channelItem" -> Just ASTChannelItem
+        "comment" -> Just ASTComment
+        "favorite" -> Just ASTFavorite
+        "like" -> Just ASTLike
+        "playlistItem" -> Just ASTPlayListItem
+        "promotedItem" -> Just ASTPromotedItem
+        "recommendation" -> Just ASTRecommendation
+        "social" -> Just ASTSocial
+        "subscription" -> Just ASTSubscription
+        "upload" -> Just ASTUpload
         _ -> Nothing
 
 instance ToText ActivitySnippetType where
     toText = \case
-        Bulletin -> "bulletin"
-        ChannelItem -> "channelItem"
-        Comment -> "comment"
-        Favorite -> "favorite"
-        Like -> "like"
-        PlayListItem -> "playlistItem"
-        PromotedItem -> "promotedItem"
-        Recommendation -> "recommendation"
-        Social -> "social"
-        Subscription -> "subscription"
-        Upload -> "upload"
+        ASTBulletin -> "bulletin"
+        ASTChannelItem -> "channelItem"
+        ASTComment -> "comment"
+        ASTFavorite -> "favorite"
+        ASTLike -> "like"
+        ASTPlayListItem -> "playlistItem"
+        ASTPromotedItem -> "promotedItem"
+        ASTRecommendation -> "recommendation"
+        ASTSocial -> "social"
+        ASTSubscription -> "subscription"
+        ASTUpload -> "upload"
 
 instance FromJSON ActivitySnippetType where
     parseJSON = parseJSONText "ActivitySnippetType"
@@ -5146,10 +5146,10 @@ instance ToJSON VideoSuggestionsProcessingErrors where
 -- | Set this parameter\'s value to like or dislike to instruct the API to
 -- only return videos liked or disliked by the authenticated user.
 data YouTubeVideosListMyRating
-    = YTVLMRDislike
+    = Dislike
       -- ^ @dislike@
       -- Returns only videos disliked by the authenticated user.
-    | YTVLMRLike
+    | Like
       -- ^ @like@
       -- Returns only video liked by the authenticated user.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
@@ -5158,14 +5158,14 @@ instance Hashable YouTubeVideosListMyRating
 
 instance FromText YouTubeVideosListMyRating where
     fromText = \case
-        "dislike" -> Just YTVLMRDislike
-        "like" -> Just YTVLMRLike
+        "dislike" -> Just Dislike
+        "like" -> Just Like
         _ -> Nothing
 
 instance ToText YouTubeVideosListMyRating where
     toText = \case
-        YTVLMRDislike -> "dislike"
-        YTVLMRLike -> "like"
+        Dislike -> "dislike"
+        Like -> "like"
 
 instance FromJSON YouTubeVideosListMyRating where
     parseJSON = parseJSONText "YouTubeVideosListMyRating"

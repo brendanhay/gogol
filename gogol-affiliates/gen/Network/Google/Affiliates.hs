@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | Lets you have programmatic access to your Google Affiliate Network data.
+-- | Lets you have programmatic access to your Google Affiliate Network data.
 --
 -- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference>
 module Network.Google.Affiliates

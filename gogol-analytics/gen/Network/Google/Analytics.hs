@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | View and manage your Google Analytics data
+-- | View and manage your Google Analytics data
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference>
 module Network.Google.Analytics
@@ -188,14 +188,14 @@ module Network.Google.Analytics
     -- ** AnalyticsManagementSegmentsList
     , module Network.Google.Resource.Analytics.Management.Segments.List
 
-    -- ** AnalyticsManagementUnsampledReportsGet
-    , module Network.Google.Resource.Analytics.Management.UnsampledReports.Get
+    -- ** AnalyticsManagementUnSampledReportsGet
+    , module Network.Google.Resource.Analytics.Management.UnSampledReports.Get
 
-    -- ** AnalyticsManagementUnsampledReportsInsert
-    , module Network.Google.Resource.Analytics.Management.UnsampledReports.Insert
+    -- ** AnalyticsManagementUnSampledReportsInsert
+    , module Network.Google.Resource.Analytics.Management.UnSampledReports.Insert
 
-    -- ** AnalyticsManagementUnsampledReportsList
-    , module Network.Google.Resource.Analytics.Management.UnsampledReports.List
+    -- ** AnalyticsManagementUnSampledReportsList
+    , module Network.Google.Resource.Analytics.Management.UnSampledReports.List
 
     -- ** AnalyticsManagementUploadsDeleteUploadData
     , module Network.Google.Resource.Analytics.Management.Uploads.DeleteUploadData
@@ -269,17 +269,17 @@ module Network.Google.Analytics
     , gdchName
     , gdchDataType
 
-    -- ** UnsampledReports
-    , UnsampledReports
-    , unsampledReports
-    , urNextLink
-    , urItemsPerPage
-    , urKind
-    , urUsername
-    , urItems
-    , urTotalResults
-    , urStartIndex
-    , urPreviousLink
+    -- ** UnSampledReports
+    , UnSampledReports
+    , unSampledReports
+    , usrNextLink
+    , usrItemsPerPage
+    , usrKind
+    , usrUsername
+    , usrItems
+    , usrTotalResults
+    , usrStartIndex
+    , usrPreviousLink
 
     -- ** GaDataQuery
     , GaDataQuery
@@ -296,9 +296,9 @@ module Network.Google.Analytics
     , gdqSegment
     , gdqStartDate
 
-    -- ** UnsampledReport
-    , UnsampledReport
-    , unsampledReport
+    -- ** UnSampledReport
+    , UnSampledReport
+    , unSampledReport
     , uDownloadType
     , uStatus
     , uMetrics
@@ -408,10 +408,10 @@ module Network.Google.Analytics
     -- ** AnalyticsDataMcfGetSamplingLevel
     , AnalyticsDataMcfGetSamplingLevel (..)
 
-    -- ** UnsampledReportDriveDownloadDetails
-    , UnsampledReportDriveDownloadDetails
-    , unsampledReportDriveDownloadDetails
-    , urdddDocumentId
+    -- ** UnSampledReportDriveDownloadDetails
+    , UnSampledReportDriveDownloadDetails
+    , unSampledReportDriveDownloadDetails
+    , usrdddDocumentId
 
     -- ** WebPropertyChildLink
     , WebPropertyChildLink
@@ -505,9 +505,9 @@ module Network.Google.Analytics
     -- ** UserRef
     , UserRef
     , userRef
-    , useEmail
-    , useKind
-    , useId
+    , urEmail
+    , urKind
+    , urId
 
     -- ** ProfilePermissions
     , ProfilePermissions
@@ -1210,11 +1210,11 @@ module Network.Google.Analytics
     , McfDataTotalsForAllResults
     , mcfDataTotalsForAllResults
 
-    -- ** UnsampledReportCloudStorageDownloadDetails
-    , UnsampledReportCloudStorageDownloadDetails
-    , unsampledReportCloudStorageDownloadDetails
-    , urcsddObjectId
-    , urcsddBucketId
+    -- ** UnSampledReportCloudStorageDownloadDetails
+    , UnSampledReportCloudStorageDownloadDetails
+    , unSampledReportCloudStorageDownloadDetails
+    , usrcsddObjectId
+    , usrcsddBucketId
 
     -- ** GoalURLDestinationDetailsSteps
     , GoalURLDestinationDetailsSteps
@@ -1301,9 +1301,9 @@ import           Network.Google.Resource.Analytics.Management.ProfileUserLinks.I
 import           Network.Google.Resource.Analytics.Management.ProfileUserLinks.List
 import           Network.Google.Resource.Analytics.Management.ProfileUserLinks.Update
 import           Network.Google.Resource.Analytics.Management.Segments.List
-import           Network.Google.Resource.Analytics.Management.UnsampledReports.Get
-import           Network.Google.Resource.Analytics.Management.UnsampledReports.Insert
-import           Network.Google.Resource.Analytics.Management.UnsampledReports.List
+import           Network.Google.Resource.Analytics.Management.UnSampledReports.Get
+import           Network.Google.Resource.Analytics.Management.UnSampledReports.Insert
+import           Network.Google.Resource.Analytics.Management.UnSampledReports.List
 import           Network.Google.Resource.Analytics.Management.Uploads.DeleteUploadData
 import           Network.Google.Resource.Analytics.Management.Uploads.Get
 import           Network.Google.Resource.Analytics.Management.Uploads.List
@@ -1339,9 +1339,9 @@ type AnalyticsAPI =
        :<|> ManagementWebPropertyAdWordsLinksGetResource
        :<|> ManagementWebPropertyAdWordsLinksDeleteResource
        :<|> ManagementWebPropertyAdWordsLinksUpdateResource
-       :<|> ManagementUnsampledReportsInsertResource
-       :<|> ManagementUnsampledReportsListResource
-       :<|> ManagementUnsampledReportsGetResource
+       :<|> ManagementUnSampledReportsInsertResource
+       :<|> ManagementUnSampledReportsListResource
+       :<|> ManagementUnSampledReportsGetResource
        :<|> ManagementAccountsListResource
        :<|> ManagementExperimentsInsertResource
        :<|> ManagementExperimentsListResource

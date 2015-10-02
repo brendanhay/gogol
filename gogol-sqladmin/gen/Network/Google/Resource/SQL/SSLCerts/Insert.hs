@@ -25,7 +25,7 @@
 module Network.Google.Resource.SQL.SSLCerts.Insert
     (
     -- * REST Resource
-      SslCertsInsertResource
+      SSLCertsInsertResource
 
     -- * Creating a Request
     , sSLCertsInsert'
@@ -48,7 +48,7 @@ import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SQLSSLCertsInsert@ which the
 -- 'SSLCertsInsert'' request conforms to.
-type SslCertsInsertResource =
+type SSLCertsInsertResource =
      "projects" :>
        Capture "project" Text :>
          "instances" :>
@@ -191,6 +191,6 @@ instance GoogleRequest SSLCertsInsert' where
               _sciSSLCertsInsertRequest
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy SslCertsInsertResource)
+                      (Proxy :: Proxy SSLCertsInsertResource)
                       r
                       u

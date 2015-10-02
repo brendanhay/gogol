@@ -82,104 +82,106 @@ instance ToJSON GaDataColumnHeaders where
 -- unsampled reports. Each resource in the unsampled report collection
 -- corresponds to a single Analytics unsampled report.
 --
--- /See:/ 'unsampledReports' smart constructor.
-data UnsampledReports = UnsampledReports
-    { _urNextLink     :: !(Maybe Text)
-    , _urItemsPerPage :: !(Maybe Int32)
-    , _urKind         :: !Text
-    , _urUsername     :: !(Maybe Text)
-    , _urItems        :: !(Maybe [UnsampledReport])
-    , _urTotalResults :: !(Maybe Int32)
-    , _urStartIndex   :: !(Maybe Int32)
-    , _urPreviousLink :: !(Maybe Text)
+-- /See:/ 'unSampledReports' smart constructor.
+data UnSampledReports = UnSampledReports
+    { _usrNextLink     :: !(Maybe Text)
+    , _usrItemsPerPage :: !(Maybe Int32)
+    , _usrKind         :: !Text
+    , _usrUsername     :: !(Maybe Text)
+    , _usrItems        :: !(Maybe [UnSampledReport])
+    , _usrTotalResults :: !(Maybe Int32)
+    , _usrStartIndex   :: !(Maybe Int32)
+    , _usrPreviousLink :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UnsampledReports' with the minimum fields required to make a request.
+-- | Creates a value of 'UnSampledReports' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'urNextLink'
+-- * 'usrNextLink'
 --
--- * 'urItemsPerPage'
+-- * 'usrItemsPerPage'
 --
--- * 'urKind'
+-- * 'usrKind'
 --
--- * 'urUsername'
+-- * 'usrUsername'
 --
--- * 'urItems'
+-- * 'usrItems'
 --
--- * 'urTotalResults'
+-- * 'usrTotalResults'
 --
--- * 'urStartIndex'
+-- * 'usrStartIndex'
 --
--- * 'urPreviousLink'
-unsampledReports
-    :: UnsampledReports
-unsampledReports =
-    UnsampledReports
-    { _urNextLink = Nothing
-    , _urItemsPerPage = Nothing
-    , _urKind = "analytics#unsampledReports"
-    , _urUsername = Nothing
-    , _urItems = Nothing
-    , _urTotalResults = Nothing
-    , _urStartIndex = Nothing
-    , _urPreviousLink = Nothing
+-- * 'usrPreviousLink'
+unSampledReports
+    :: UnSampledReports
+unSampledReports =
+    UnSampledReports
+    { _usrNextLink = Nothing
+    , _usrItemsPerPage = Nothing
+    , _usrKind = "analytics#unsampledReports"
+    , _usrUsername = Nothing
+    , _usrItems = Nothing
+    , _usrTotalResults = Nothing
+    , _usrStartIndex = Nothing
+    , _usrPreviousLink = Nothing
     }
 
 -- | Link to next page for this unsampled report collection.
-urNextLink :: Lens' UnsampledReports (Maybe Text)
-urNextLink
-  = lens _urNextLink (\ s a -> s{_urNextLink = a})
+usrNextLink :: Lens' UnSampledReports (Maybe Text)
+usrNextLink
+  = lens _usrNextLink (\ s a -> s{_usrNextLink = a})
 
 -- | The maximum number of resources the response can contain, regardless of
 -- the actual number of resources returned. Its value ranges from 1 to 1000
 -- with a value of 1000 by default, or otherwise specified by the
 -- max-results query parameter.
-urItemsPerPage :: Lens' UnsampledReports (Maybe Int32)
-urItemsPerPage
-  = lens _urItemsPerPage
-      (\ s a -> s{_urItemsPerPage = a})
+usrItemsPerPage :: Lens' UnSampledReports (Maybe Int32)
+usrItemsPerPage
+  = lens _usrItemsPerPage
+      (\ s a -> s{_usrItemsPerPage = a})
 
 -- | Collection type.
-urKind :: Lens' UnsampledReports Text
-urKind = lens _urKind (\ s a -> s{_urKind = a})
+usrKind :: Lens' UnSampledReports Text
+usrKind = lens _usrKind (\ s a -> s{_usrKind = a})
 
 -- | Email ID of the authenticated user
-urUsername :: Lens' UnsampledReports (Maybe Text)
-urUsername
-  = lens _urUsername (\ s a -> s{_urUsername = a})
+usrUsername :: Lens' UnSampledReports (Maybe Text)
+usrUsername
+  = lens _usrUsername (\ s a -> s{_usrUsername = a})
 
 -- | A list of unsampled reports.
-urItems :: Lens' UnsampledReports [UnsampledReport]
-urItems
-  = lens _urItems (\ s a -> s{_urItems = a}) . _Default
+usrItems :: Lens' UnSampledReports [UnSampledReport]
+usrItems
+  = lens _usrItems (\ s a -> s{_usrItems = a}) .
+      _Default
       . _Coerce
 
 -- | The total number of results for the query, regardless of the number of
 -- resources in the result.
-urTotalResults :: Lens' UnsampledReports (Maybe Int32)
-urTotalResults
-  = lens _urTotalResults
-      (\ s a -> s{_urTotalResults = a})
+usrTotalResults :: Lens' UnSampledReports (Maybe Int32)
+usrTotalResults
+  = lens _usrTotalResults
+      (\ s a -> s{_usrTotalResults = a})
 
 -- | The starting index of the resources, which is 1 by default or otherwise
 -- specified by the start-index query parameter.
-urStartIndex :: Lens' UnsampledReports (Maybe Int32)
-urStartIndex
-  = lens _urStartIndex (\ s a -> s{_urStartIndex = a})
+usrStartIndex :: Lens' UnSampledReports (Maybe Int32)
+usrStartIndex
+  = lens _usrStartIndex
+      (\ s a -> s{_usrStartIndex = a})
 
 -- | Link to previous page for this unsampled report collection.
-urPreviousLink :: Lens' UnsampledReports (Maybe Text)
-urPreviousLink
-  = lens _urPreviousLink
-      (\ s a -> s{_urPreviousLink = a})
+usrPreviousLink :: Lens' UnSampledReports (Maybe Text)
+usrPreviousLink
+  = lens _usrPreviousLink
+      (\ s a -> s{_usrPreviousLink = a})
 
-instance FromJSON UnsampledReports where
+instance FromJSON UnSampledReports where
         parseJSON
-          = withObject "UnsampledReports"
+          = withObject "UnSampledReports"
               (\ o ->
-                 UnsampledReports <$>
+                 UnSampledReports <$>
                    (o .:? "nextLink") <*> (o .:? "itemsPerPage") <*>
                      (o .:? "kind" .!= "analytics#unsampledReports")
                      <*> (o .:? "username")
@@ -188,18 +190,18 @@ instance FromJSON UnsampledReports where
                      <*> (o .:? "startIndex")
                      <*> (o .:? "previousLink"))
 
-instance ToJSON UnsampledReports where
-        toJSON UnsampledReports{..}
+instance ToJSON UnSampledReports where
+        toJSON UnSampledReports{..}
           = object
               (catMaybes
-                 [("nextLink" .=) <$> _urNextLink,
-                  ("itemsPerPage" .=) <$> _urItemsPerPage,
-                  Just ("kind" .= _urKind),
-                  ("username" .=) <$> _urUsername,
-                  ("items" .=) <$> _urItems,
-                  ("totalResults" .=) <$> _urTotalResults,
-                  ("startIndex" .=) <$> _urStartIndex,
-                  ("previousLink" .=) <$> _urPreviousLink])
+                 [("nextLink" .=) <$> _usrNextLink,
+                  ("itemsPerPage" .=) <$> _usrItemsPerPage,
+                  Just ("kind" .= _usrKind),
+                  ("username" .=) <$> _usrUsername,
+                  ("items" .=) <$> _usrItems,
+                  ("totalResults" .=) <$> _usrTotalResults,
+                  ("startIndex" .=) <$> _usrStartIndex,
+                  ("previousLink" .=) <$> _usrPreviousLink])
 
 -- | Analytics data request query parameters.
 --
@@ -356,12 +358,12 @@ instance ToJSON GaDataQuery where
 
 -- | JSON template for Analytics unsampled report resource.
 --
--- /See:/ 'unsampledReport' smart constructor.
-data UnsampledReport = UnsampledReport
+-- /See:/ 'unSampledReport' smart constructor.
+data UnSampledReport = UnSampledReport
     { _uDownloadType                :: !(Maybe Text)
     , _uStatus                      :: !(Maybe Text)
     , _uMetrics                     :: !(Maybe Text)
-    , _uDriveDownloadDetails        :: !(Maybe UnsampledReportDriveDownloadDetails)
+    , _uDriveDownloadDetails        :: !(Maybe UnSampledReportDriveDownloadDetails)
     , _uWebPropertyId               :: !(Maybe Text)
     , _uKind                        :: !Text
     , _uCreated                     :: !(Maybe UTCTime)
@@ -375,11 +377,11 @@ data UnsampledReport = UnsampledReport
     , _uTitle                       :: !(Maybe Text)
     , _uDimensions                  :: !(Maybe Text)
     , _uSegment                     :: !(Maybe Text)
-    , _uCloudStorageDownloadDetails :: !(Maybe UnsampledReportCloudStorageDownloadDetails)
+    , _uCloudStorageDownloadDetails :: !(Maybe UnSampledReportCloudStorageDownloadDetails)
     , _uStartDate                   :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UnsampledReport' with the minimum fields required to make a request.
+-- | Creates a value of 'UnSampledReport' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -420,10 +422,10 @@ data UnsampledReport = UnsampledReport
 -- * 'uCloudStorageDownloadDetails'
 --
 -- * 'uStartDate'
-unsampledReport
-    :: UnsampledReport
-unsampledReport =
-    UnsampledReport
+unSampledReport
+    :: UnSampledReport
+unSampledReport =
+    UnSampledReport
     { _uDownloadType = Nothing
     , _uStatus = Nothing
     , _uMetrics = Nothing
@@ -446,101 +448,101 @@ unsampledReport =
     }
 
 -- | The type of download you need to use for the report data file.
-uDownloadType :: Lens' UnsampledReport (Maybe Text)
+uDownloadType :: Lens' UnSampledReport (Maybe Text)
 uDownloadType
   = lens _uDownloadType
       (\ s a -> s{_uDownloadType = a})
 
 -- | Status of this unsampled report. Possible values are PENDING, COMPLETED,
 -- or FAILED.
-uStatus :: Lens' UnsampledReport (Maybe Text)
+uStatus :: Lens' UnSampledReport (Maybe Text)
 uStatus = lens _uStatus (\ s a -> s{_uStatus = a})
 
 -- | The metrics for the unsampled report.
-uMetrics :: Lens' UnsampledReport (Maybe Text)
+uMetrics :: Lens' UnSampledReport (Maybe Text)
 uMetrics = lens _uMetrics (\ s a -> s{_uMetrics = a})
 
 -- | Download details for a file stored in Google Drive.
-uDriveDownloadDetails :: Lens' UnsampledReport (Maybe UnsampledReportDriveDownloadDetails)
+uDriveDownloadDetails :: Lens' UnSampledReport (Maybe UnSampledReportDriveDownloadDetails)
 uDriveDownloadDetails
   = lens _uDriveDownloadDetails
       (\ s a -> s{_uDriveDownloadDetails = a})
 
 -- | Web property ID to which this unsampled report belongs. The web property
 -- ID is of the form UA-XXXXX-YY.
-uWebPropertyId :: Lens' UnsampledReport (Maybe Text)
+uWebPropertyId :: Lens' UnSampledReport (Maybe Text)
 uWebPropertyId
   = lens _uWebPropertyId
       (\ s a -> s{_uWebPropertyId = a})
 
 -- | Resource type for an Analytics unsampled report.
-uKind :: Lens' UnsampledReport Text
+uKind :: Lens' UnSampledReport Text
 uKind = lens _uKind (\ s a -> s{_uKind = a})
 
 -- | Time this unsampled report was created.
-uCreated :: Lens' UnsampledReport (Maybe UTCTime)
+uCreated :: Lens' UnSampledReport (Maybe UTCTime)
 uCreated = lens _uCreated (\ s a -> s{_uCreated = a})
 
 -- | The filters for the unsampled report.
-uFilters :: Lens' UnsampledReport (Maybe Text)
+uFilters :: Lens' UnSampledReport (Maybe Text)
 uFilters = lens _uFilters (\ s a -> s{_uFilters = a})
 
 -- | View (Profile) ID to which this unsampled report belongs.
-uProfileId :: Lens' UnsampledReport (Maybe Text)
+uProfileId :: Lens' UnSampledReport (Maybe Text)
 uProfileId
   = lens _uProfileId (\ s a -> s{_uProfileId = a})
 
 -- | The end date for the unsampled report.
-uEndDate :: Lens' UnsampledReport (Maybe Text)
+uEndDate :: Lens' UnSampledReport (Maybe Text)
 uEndDate = lens _uEndDate (\ s a -> s{_uEndDate = a})
 
 -- | Link for this unsampled report.
-uSelfLink :: Lens' UnsampledReport (Maybe Text)
+uSelfLink :: Lens' UnSampledReport (Maybe Text)
 uSelfLink
   = lens _uSelfLink (\ s a -> s{_uSelfLink = a})
 
 -- | Account ID to which this unsampled report belongs.
-uAccountId :: Lens' UnsampledReport (Maybe Text)
+uAccountId :: Lens' UnSampledReport (Maybe Text)
 uAccountId
   = lens _uAccountId (\ s a -> s{_uAccountId = a})
 
 -- | Unsampled report ID.
-uId :: Lens' UnsampledReport (Maybe Text)
+uId :: Lens' UnSampledReport (Maybe Text)
 uId = lens _uId (\ s a -> s{_uId = a})
 
 -- | Time this unsampled report was last modified.
-uUpdated :: Lens' UnsampledReport (Maybe UTCTime)
+uUpdated :: Lens' UnSampledReport (Maybe UTCTime)
 uUpdated = lens _uUpdated (\ s a -> s{_uUpdated = a})
 
 -- | Title of the unsampled report.
-uTitle :: Lens' UnsampledReport (Maybe Text)
+uTitle :: Lens' UnSampledReport (Maybe Text)
 uTitle = lens _uTitle (\ s a -> s{_uTitle = a})
 
 -- | The dimensions for the unsampled report.
-uDimensions :: Lens' UnsampledReport (Maybe Text)
+uDimensions :: Lens' UnSampledReport (Maybe Text)
 uDimensions
   = lens _uDimensions (\ s a -> s{_uDimensions = a})
 
 -- | The segment for the unsampled report.
-uSegment :: Lens' UnsampledReport (Maybe Text)
+uSegment :: Lens' UnSampledReport (Maybe Text)
 uSegment = lens _uSegment (\ s a -> s{_uSegment = a})
 
 -- | Download details for a file stored in Google Cloud Storage.
-uCloudStorageDownloadDetails :: Lens' UnsampledReport (Maybe UnsampledReportCloudStorageDownloadDetails)
+uCloudStorageDownloadDetails :: Lens' UnSampledReport (Maybe UnSampledReportCloudStorageDownloadDetails)
 uCloudStorageDownloadDetails
   = lens _uCloudStorageDownloadDetails
       (\ s a -> s{_uCloudStorageDownloadDetails = a})
 
 -- | The start date for the unsampled report.
-uStartDate :: Lens' UnsampledReport (Maybe Text)
+uStartDate :: Lens' UnSampledReport (Maybe Text)
 uStartDate
   = lens _uStartDate (\ s a -> s{_uStartDate = a})
 
-instance FromJSON UnsampledReport where
+instance FromJSON UnSampledReport where
         parseJSON
-          = withObject "UnsampledReport"
+          = withObject "UnSampledReport"
               (\ o ->
-                 UnsampledReport <$>
+                 UnSampledReport <$>
                    (o .:? "downloadType") <*> (o .:? "status") <*>
                      (o .:? "metrics")
                      <*> (o .:? "driveDownloadDetails")
@@ -560,8 +562,8 @@ instance FromJSON UnsampledReport where
                      <*> (o .:? "cloudStorageDownloadDetails")
                      <*> (o .:? "start-date"))
 
-instance ToJSON UnsampledReport where
-        toJSON UnsampledReport{..}
+instance ToJSON UnSampledReport where
+        toJSON UnSampledReport{..}
           = object
               (catMaybes
                  [("downloadType" .=) <$> _uDownloadType,
@@ -1420,42 +1422,42 @@ instance ToJSON ExperimentParentLink where
 
 -- | Download details for a file stored in Google Drive.
 --
--- /See:/ 'unsampledReportDriveDownloadDetails' smart constructor.
-newtype UnsampledReportDriveDownloadDetails = UnsampledReportDriveDownloadDetails
-    { _urdddDocumentId :: Maybe Text
+-- /See:/ 'unSampledReportDriveDownloadDetails' smart constructor.
+newtype UnSampledReportDriveDownloadDetails = UnSampledReportDriveDownloadDetails
+    { _usrdddDocumentId :: Maybe Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UnsampledReportDriveDownloadDetails' with the minimum fields required to make a request.
+-- | Creates a value of 'UnSampledReportDriveDownloadDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'urdddDocumentId'
-unsampledReportDriveDownloadDetails
-    :: UnsampledReportDriveDownloadDetails
-unsampledReportDriveDownloadDetails =
-    UnsampledReportDriveDownloadDetails
-    { _urdddDocumentId = Nothing
+-- * 'usrdddDocumentId'
+unSampledReportDriveDownloadDetails
+    :: UnSampledReportDriveDownloadDetails
+unSampledReportDriveDownloadDetails =
+    UnSampledReportDriveDownloadDetails
+    { _usrdddDocumentId = Nothing
     }
 
 -- | Id of the document\/file containing the report data.
-urdddDocumentId :: Lens' UnsampledReportDriveDownloadDetails (Maybe Text)
-urdddDocumentId
-  = lens _urdddDocumentId
-      (\ s a -> s{_urdddDocumentId = a})
+usrdddDocumentId :: Lens' UnSampledReportDriveDownloadDetails (Maybe Text)
+usrdddDocumentId
+  = lens _usrdddDocumentId
+      (\ s a -> s{_usrdddDocumentId = a})
 
-instance FromJSON UnsampledReportDriveDownloadDetails
+instance FromJSON UnSampledReportDriveDownloadDetails
          where
         parseJSON
-          = withObject "UnsampledReportDriveDownloadDetails"
+          = withObject "UnSampledReportDriveDownloadDetails"
               (\ o ->
-                 UnsampledReportDriveDownloadDetails <$>
+                 UnSampledReportDriveDownloadDetails <$>
                    (o .:? "documentId"))
 
-instance ToJSON UnsampledReportDriveDownloadDetails
+instance ToJSON UnSampledReportDriveDownloadDetails
          where
-        toJSON UnsampledReportDriveDownloadDetails{..}
+        toJSON UnSampledReportDriveDownloadDetails{..}
           = object
-              (catMaybes [("documentId" .=) <$> _urdddDocumentId])
+              (catMaybes [("documentId" .=) <$> _usrdddDocumentId])
 
 -- | Child link for this web property. Points to the list of views (profiles)
 -- for this web property.
@@ -2336,39 +2338,39 @@ instance ToJSON Profiles where
 --
 -- /See:/ 'userRef' smart constructor.
 data UserRef = UserRef
-    { _useEmail :: !(Maybe Text)
-    , _useKind  :: !Text
-    , _useId    :: !(Maybe Text)
+    { _urEmail :: !(Maybe Text)
+    , _urKind  :: !Text
+    , _urId    :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRef' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'useEmail'
+-- * 'urEmail'
 --
--- * 'useKind'
+-- * 'urKind'
 --
--- * 'useId'
+-- * 'urId'
 userRef
     :: UserRef
 userRef =
     UserRef
-    { _useEmail = Nothing
-    , _useKind = "analytics#userRef"
-    , _useId = Nothing
+    { _urEmail = Nothing
+    , _urKind = "analytics#userRef"
+    , _urId = Nothing
     }
 
 -- | Email ID of this user.
-useEmail :: Lens' UserRef (Maybe Text)
-useEmail = lens _useEmail (\ s a -> s{_useEmail = a})
+urEmail :: Lens' UserRef (Maybe Text)
+urEmail = lens _urEmail (\ s a -> s{_urEmail = a})
 
-useKind :: Lens' UserRef Text
-useKind = lens _useKind (\ s a -> s{_useKind = a})
+urKind :: Lens' UserRef Text
+urKind = lens _urKind (\ s a -> s{_urKind = a})
 
 -- | User ID.
-useId :: Lens' UserRef (Maybe Text)
-useId = lens _useId (\ s a -> s{_useId = a})
+urId :: Lens' UserRef (Maybe Text)
+urId = lens _urId (\ s a -> s{_urId = a})
 
 instance FromJSON UserRef where
         parseJSON
@@ -2383,8 +2385,8 @@ instance ToJSON UserRef where
         toJSON UserRef{..}
           = object
               (catMaybes
-                 [("email" .=) <$> _useEmail,
-                  Just ("kind" .= _useKind), ("id" .=) <$> _useId])
+                 [("email" .=) <$> _urEmail, Just ("kind" .= _urKind),
+                  ("id" .=) <$> _urId])
 
 -- | Permissions the user has for this view (profile).
 --
@@ -9082,55 +9084,55 @@ instance ToJSON McfDataTotalsForAllResults where
 
 -- | Download details for a file stored in Google Cloud Storage.
 --
--- /See:/ 'unsampledReportCloudStorageDownloadDetails' smart constructor.
-data UnsampledReportCloudStorageDownloadDetails = UnsampledReportCloudStorageDownloadDetails
-    { _urcsddObjectId :: !(Maybe Text)
-    , _urcsddBucketId :: !(Maybe Text)
+-- /See:/ 'unSampledReportCloudStorageDownloadDetails' smart constructor.
+data UnSampledReportCloudStorageDownloadDetails = UnSampledReportCloudStorageDownloadDetails
+    { _usrcsddObjectId :: !(Maybe Text)
+    , _usrcsddBucketId :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UnsampledReportCloudStorageDownloadDetails' with the minimum fields required to make a request.
+-- | Creates a value of 'UnSampledReportCloudStorageDownloadDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'urcsddObjectId'
+-- * 'usrcsddObjectId'
 --
--- * 'urcsddBucketId'
-unsampledReportCloudStorageDownloadDetails
-    :: UnsampledReportCloudStorageDownloadDetails
-unsampledReportCloudStorageDownloadDetails =
-    UnsampledReportCloudStorageDownloadDetails
-    { _urcsddObjectId = Nothing
-    , _urcsddBucketId = Nothing
+-- * 'usrcsddBucketId'
+unSampledReportCloudStorageDownloadDetails
+    :: UnSampledReportCloudStorageDownloadDetails
+unSampledReportCloudStorageDownloadDetails =
+    UnSampledReportCloudStorageDownloadDetails
+    { _usrcsddObjectId = Nothing
+    , _usrcsddBucketId = Nothing
     }
 
 -- | Id of the file object containing the report data.
-urcsddObjectId :: Lens' UnsampledReportCloudStorageDownloadDetails (Maybe Text)
-urcsddObjectId
-  = lens _urcsddObjectId
-      (\ s a -> s{_urcsddObjectId = a})
+usrcsddObjectId :: Lens' UnSampledReportCloudStorageDownloadDetails (Maybe Text)
+usrcsddObjectId
+  = lens _usrcsddObjectId
+      (\ s a -> s{_usrcsddObjectId = a})
 
 -- | Id of the bucket the file object is stored in.
-urcsddBucketId :: Lens' UnsampledReportCloudStorageDownloadDetails (Maybe Text)
-urcsddBucketId
-  = lens _urcsddBucketId
-      (\ s a -> s{_urcsddBucketId = a})
+usrcsddBucketId :: Lens' UnSampledReportCloudStorageDownloadDetails (Maybe Text)
+usrcsddBucketId
+  = lens _usrcsddBucketId
+      (\ s a -> s{_usrcsddBucketId = a})
 
 instance FromJSON
-         UnsampledReportCloudStorageDownloadDetails where
+         UnSampledReportCloudStorageDownloadDetails where
         parseJSON
           = withObject
-              "UnsampledReportCloudStorageDownloadDetails"
+              "UnSampledReportCloudStorageDownloadDetails"
               (\ o ->
-                 UnsampledReportCloudStorageDownloadDetails <$>
+                 UnSampledReportCloudStorageDownloadDetails <$>
                    (o .:? "objectId") <*> (o .:? "bucketId"))
 
 instance ToJSON
-         UnsampledReportCloudStorageDownloadDetails where
-        toJSON UnsampledReportCloudStorageDownloadDetails{..}
+         UnSampledReportCloudStorageDownloadDetails where
+        toJSON UnSampledReportCloudStorageDownloadDetails{..}
           = object
               (catMaybes
-                 [("objectId" .=) <$> _urcsddObjectId,
-                  ("bucketId" .=) <$> _urcsddBucketId])
+                 [("objectId" .=) <$> _usrcsddObjectId,
+                  ("bucketId" .=) <$> _usrcsddBucketId])
 
 --
 -- /See:/ 'goalURLDestinationDetailsSteps' smart constructor.

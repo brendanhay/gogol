@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | Transfers data from external data sources to a Google Cloud Storage
+-- | Transfers data from external data sources to a Google Cloud Storage
 -- bucket or between Google Cloud Storage buckets.
 --
 -- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference>

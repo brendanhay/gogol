@@ -885,7 +885,7 @@ instance ToJSON CommentInReplyTo where
 --
 -- /See:/ 'personOrganizations' smart constructor.
 data PersonOrganizations = PersonOrganizations
-    { _poDePartyment :: !(Maybe Text)
+    { _poDePartment  :: !(Maybe Text)
     , _poLocation    :: !(Maybe Text)
     , _poEndDate     :: !(Maybe Text)
     , _poPrimary     :: !(Maybe Bool)
@@ -900,7 +900,7 @@ data PersonOrganizations = PersonOrganizations
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'poDePartyment'
+-- * 'poDePartment'
 --
 -- * 'poLocation'
 --
@@ -921,7 +921,7 @@ personOrganizations
     :: PersonOrganizations
 personOrganizations =
     PersonOrganizations
-    { _poDePartyment = Nothing
+    { _poDePartment = Nothing
     , _poLocation = Nothing
     , _poEndDate = Nothing
     , _poPrimary = Nothing
@@ -933,10 +933,9 @@ personOrganizations =
     }
 
 -- | The department within the organization. Deprecated.
-poDePartyment :: Lens' PersonOrganizations (Maybe Text)
-poDePartyment
-  = lens _poDePartyment
-      (\ s a -> s{_poDePartyment = a})
+poDePartment :: Lens' PersonOrganizations (Maybe Text)
+poDePartment
+  = lens _poDePartment (\ s a -> s{_poDePartment = a})
 
 -- | The location of this organization. Deprecated.
 poLocation :: Lens' PersonOrganizations (Maybe Text)
@@ -997,7 +996,7 @@ instance ToJSON PersonOrganizations where
         toJSON PersonOrganizations{..}
           = object
               (catMaybes
-                 [("department" .=) <$> _poDePartyment,
+                 [("department" .=) <$> _poDePartment,
                   ("location" .=) <$> _poLocation,
                   ("endDate" .=) <$> _poEndDate,
                   ("primary" .=) <$> _poPrimary,

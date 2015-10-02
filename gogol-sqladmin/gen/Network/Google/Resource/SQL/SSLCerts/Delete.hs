@@ -24,7 +24,7 @@
 module Network.Google.Resource.SQL.SSLCerts.Delete
     (
     -- * REST Resource
-      SslCertsDeleteResource
+      SSLCertsDeleteResource
 
     -- * Creating a Request
     , sSLCertsDelete'
@@ -47,7 +47,7 @@ import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SQLSSLCertsDelete@ which the
 -- 'SSLCertsDelete'' request conforms to.
-type SslCertsDeleteResource =
+type SSLCertsDeleteResource =
      "projects" :>
        Capture "project" Text :>
          "instances" :>
@@ -188,6 +188,6 @@ instance GoogleRequest SSLCertsDelete' where
               (Just AltJSON)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy SslCertsDeleteResource)
+                      (Proxy :: Proxy SSLCertsDeleteResource)
                       r
                       u

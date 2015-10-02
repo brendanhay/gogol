@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | Google Dataflow API.
+-- | Google Dataflow API.
 --
 -- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference>
 module Network.Google.Dataflow

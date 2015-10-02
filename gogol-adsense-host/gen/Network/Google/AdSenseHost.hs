@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | Gives AdSense Hosts access to report generation, ad code generation, and
+-- | Gives AdSense Hosts access to report generation, ad code generation, and
 -- publisher management capabilities.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference>
@@ -327,9 +327,9 @@ type AdSenseHostAPI =
        :<|> AccountsListResource
        :<|> AccountsGetResource
        :<|> ReportsGenerateResource
-       :<|> UrlChannelsInsertResource
-       :<|> UrlChannelsListResource
-       :<|> UrlChannelsDeleteResource
+       :<|> URLChannelsInsertResource
+       :<|> URLChannelsListResource
+       :<|> URLChannelsDeleteResource
        :<|> CustomChannelsInsertResource
        :<|> CustomChannelsListResource
        :<|> CustomChannelsPatchResource

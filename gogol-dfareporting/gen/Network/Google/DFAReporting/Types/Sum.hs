@@ -6747,13 +6747,13 @@ instance ToJSON CreativeCustomEventAdvertiserCustomEventType where
 
 -- | The dimension option.
 data ReportCrossDimensionReachCriteriaDimension
-    = Advertiser
+    = RCDRCDAdvertiser
       -- ^ @ADVERTISER@
-    | Campaign
+    | RCDRCDCampaign
       -- ^ @CAMPAIGN@
-    | SiteByAdvertiser
+    | RCDRCDSiteByAdvertiser
       -- ^ @SITE_BY_ADVERTISER@
-    | SiteByCampaign
+    | RCDRCDSiteByCampaign
       -- ^ @SITE_BY_CAMPAIGN@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -6761,18 +6761,18 @@ instance Hashable ReportCrossDimensionReachCriteriaDimension
 
 instance FromText ReportCrossDimensionReachCriteriaDimension where
     fromText = \case
-        "ADVERTISER" -> Just Advertiser
-        "CAMPAIGN" -> Just Campaign
-        "SITE_BY_ADVERTISER" -> Just SiteByAdvertiser
-        "SITE_BY_CAMPAIGN" -> Just SiteByCampaign
+        "ADVERTISER" -> Just RCDRCDAdvertiser
+        "CAMPAIGN" -> Just RCDRCDCampaign
+        "SITE_BY_ADVERTISER" -> Just RCDRCDSiteByAdvertiser
+        "SITE_BY_CAMPAIGN" -> Just RCDRCDSiteByCampaign
         _ -> Nothing
 
 instance ToText ReportCrossDimensionReachCriteriaDimension where
     toText = \case
-        Advertiser -> "ADVERTISER"
-        Campaign -> "CAMPAIGN"
-        SiteByAdvertiser -> "SITE_BY_ADVERTISER"
-        SiteByCampaign -> "SITE_BY_CAMPAIGN"
+        RCDRCDAdvertiser -> "ADVERTISER"
+        RCDRCDCampaign -> "CAMPAIGN"
+        RCDRCDSiteByAdvertiser -> "SITE_BY_ADVERTISER"
+        RCDRCDSiteByCampaign -> "SITE_BY_CAMPAIGN"
 
 instance FromJSON ReportCrossDimensionReachCriteriaDimension where
     parseJSON = parseJSONText "ReportCrossDimensionReachCriteriaDimension"

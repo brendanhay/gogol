@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | The Resource View API allows users to create and manage logical sets of
+-- | The Resource View API allows users to create and manage logical sets of
 -- Google Compute Engine instances.
 --
 -- /See:/ <https://developers.google.com/compute/ Google Compute Engine Instance Groups API Reference>

@@ -23,7 +23,7 @@
 module Network.Google.Resource.AdSenseHost.URLChannels.Insert
     (
     -- * REST Resource
-      UrlChannelsInsertResource
+      URLChannelsInsertResource
 
     -- * Creating a Request
     , uRLChannelsInsert'
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 
 -- | A resource alias for @AdsensehostURLChannelsInsert@ which the
 -- 'URLChannelsInsert'' request conforms to.
-type UrlChannelsInsertResource =
+type URLChannelsInsertResource =
      "adclients" :>
        Capture "adClientId" Text :>
          "urlchannels" :>
@@ -172,6 +172,6 @@ instance GoogleRequest URLChannelsInsert' where
               _uciURLChannel
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UrlChannelsInsertResource)
+                      (Proxy :: Proxy URLChannelsInsertResource)
                       r
                       u

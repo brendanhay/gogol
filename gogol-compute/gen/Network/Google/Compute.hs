@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | API for the Google Compute Engine service.
+-- | API for the Google Compute Engine service.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference>
 module Network.Google.Compute
@@ -2462,13 +2462,13 @@ type ComputeAPI =
        ImagesGetResource
        :<|> ImagesDeprecateResource
        :<|> ImagesDeleteResource
-       :<|> UrlMapsInsertResource
-       :<|> UrlMapsListResource
-       :<|> UrlMapsPatchResource
-       :<|> UrlMapsGetResource
-       :<|> UrlMapsValidateResource
-       :<|> UrlMapsDeleteResource
-       :<|> UrlMapsUpdateResource
+       :<|> URLMapsInsertResource
+       :<|> URLMapsListResource
+       :<|> URLMapsPatchResource
+       :<|> URLMapsGetResource
+       :<|> URLMapsValidateResource
+       :<|> URLMapsDeleteResource
+       :<|> URLMapsUpdateResource
        :<|> InstanceTemplatesInsertResource
        :<|> InstanceTemplatesListResource
        :<|> InstanceTemplatesGetResource
@@ -2498,11 +2498,11 @@ type ComputeAPI =
        :<|> AddressesListResource
        :<|> AddressesGetResource
        :<|> AddressesDeleteResource
-       :<|> VpnTunnelsAggregatedListResource
-       :<|> VpnTunnelsInsertResource
-       :<|> VpnTunnelsListResource
-       :<|> VpnTunnelsGetResource
-       :<|> VpnTunnelsDeleteResource
+       :<|> VPNTunnelsAggregatedListResource
+       :<|> VPNTunnelsInsertResource
+       :<|> VPNTunnelsListResource
+       :<|> VPNTunnelsGetResource
+       :<|> VPNTunnelsDeleteResource
        :<|> RegionsListResource
        :<|> RegionsGetResource
        :<|> GlobalAddressesInsertResource
@@ -2530,12 +2530,12 @@ type ComputeAPI =
        :<|> MachineTypesAggregatedListResource
        :<|> MachineTypesListResource
        :<|> MachineTypesGetResource
-       :<|> HttpHealthChecksInsertResource
-       :<|> HttpHealthChecksListResource
-       :<|> HttpHealthChecksPatchResource
-       :<|> HttpHealthChecksGetResource
-       :<|> HttpHealthChecksDeleteResource
-       :<|> HttpHealthChecksUpdateResource
+       :<|> HTTPHealthChecksInsertResource
+       :<|> HTTPHealthChecksListResource
+       :<|> HTTPHealthChecksPatchResource
+       :<|> HTTPHealthChecksGetResource
+       :<|> HTTPHealthChecksDeleteResource
+       :<|> HTTPHealthChecksUpdateResource
        :<|> SnapshotsListResource
        :<|> SnapshotsGetResource
        :<|> SnapshotsDeleteResource

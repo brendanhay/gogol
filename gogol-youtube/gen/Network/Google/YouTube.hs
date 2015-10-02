@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | Programmatic access to YouTube features.
+-- | Programmatic access to YouTube features.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference>
 module Network.Google.YouTube
@@ -108,7 +108,7 @@ module Network.Google.YouTube
     , module Network.Google.Resource.YouTube.LiveBroadcasts.Bind
 
     -- ** YouTubeLiveBroadcastsBind_direct
-    , module Network.Google.Resource.YouTube.LiveBroadcasts.Bind_direct
+    , module Network.Google.Resource.YouTube.LiveBroadcasts.BindDirect
 
     -- ** YouTubeLiveBroadcastsControl
     , module Network.Google.Resource.YouTube.LiveBroadcasts.Control
@@ -2066,7 +2066,7 @@ import           Network.Google.Resource.YouTube.GuideCategories.List
 import           Network.Google.Resource.YouTube.I18nLanguages.List
 import           Network.Google.Resource.YouTube.I18nRegions.List
 import           Network.Google.Resource.YouTube.LiveBroadcasts.Bind
-import           Network.Google.Resource.YouTube.LiveBroadcasts.Bind_direct
+import           Network.Google.Resource.YouTube.LiveBroadcasts.BindDirect
 import           Network.Google.Resource.YouTube.LiveBroadcasts.Control
 import           Network.Google.Resource.YouTube.LiveBroadcasts.Delete
 import           Network.Google.Resource.YouTube.LiveBroadcasts.Insert
@@ -2123,7 +2123,7 @@ type YouTubeAPI =
        :<|> LiveBroadcastsInsertResource
        :<|> LiveBroadcastsListResource
        :<|> LiveBroadcastsBindResource
-       :<|> LiveBroadcastsBind_directResource
+       :<|> LiveBroadcastsBindDirectResource
        :<|> LiveBroadcastsDeleteResource
        :<|> LiveBroadcastsUpdateResource
        :<|> CaptionsInsertResource

@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | Provides access to Genomics data.
+-- | Provides access to Genomics data.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference>
 module Network.Google.Genomics

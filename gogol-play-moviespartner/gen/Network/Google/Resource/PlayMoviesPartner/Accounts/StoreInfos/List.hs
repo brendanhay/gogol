@@ -21,7 +21,7 @@
 -- Authorization rules_ and _List methods rules_ for more information about
 -- this method.
 --
--- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @PlaymoviesPartynerAccountsStoreInfosList@.
+-- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @PlaymoviesPartnerAccountsStoreInfosList@.
 module Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.List
     (
     -- * REST Resource
@@ -58,7 +58,7 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.List
 import           Network.Google.PlayMoviesPartner.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlaymoviesPartynerAccountsStoreInfosList@ which the
+-- | A resource alias for @PlaymoviesPartnerAccountsStoreInfosList@ which the
 -- 'AccountsStoreInfosList'' request conforms to.
 type AccountsStoreInfosListResource =
      "v1" :>

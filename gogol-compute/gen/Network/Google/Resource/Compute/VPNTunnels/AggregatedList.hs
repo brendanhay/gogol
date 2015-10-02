@@ -23,7 +23,7 @@
 module Network.Google.Resource.Compute.VPNTunnels.AggregatedList
     (
     -- * REST Resource
-      VpnTunnelsAggregatedListResource
+      VPNTunnelsAggregatedListResource
 
     -- * Creating a Request
     , vPNTunnelsAggregatedList'
@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeVPNTunnelsAggregatedList@ which the
 -- 'VPNTunnelsAggregatedList'' request conforms to.
-type VpnTunnelsAggregatedListResource =
+type VPNTunnelsAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
          "vpnTunnels" :>
@@ -212,6 +212,6 @@ instance GoogleRequest VPNTunnelsAggregatedList'
               (Just AltJSON)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy VpnTunnelsAggregatedListResource)
+                      (Proxy :: Proxy VPNTunnelsAggregatedListResource)
                       r
                       u

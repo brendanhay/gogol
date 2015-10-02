@@ -24,7 +24,7 @@
 module Network.Google.Resource.Compute.VPNTunnels.Insert
     (
     -- * REST Resource
-      VpnTunnelsInsertResource
+      VPNTunnelsInsertResource
 
     -- * Creating a Request
     , vPNTunnelsInsert'
@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeVPNTunnelsInsert@ which the
 -- 'VPNTunnelsInsert'' request conforms to.
-type VpnTunnelsInsertResource =
+type VPNTunnelsInsertResource =
      Capture "project" Text :>
        "regions" :>
          Capture "region" Text :>
@@ -185,6 +185,6 @@ instance GoogleRequest VPNTunnelsInsert' where
               _vtiVPNTunnel
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy VpnTunnelsInsertResource)
+                      (Proxy :: Proxy VPNTunnelsInsertResource)
                       r
                       u

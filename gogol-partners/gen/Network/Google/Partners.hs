@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | Lets advertisers search certified companies and create contact leads
+-- | Lets advertisers search certified companies and create contact leads
 -- with them, and also audits the usage of clients.
 --
 -- /See:/ <https://developers.google.com/partners/ Google Partners API Reference>

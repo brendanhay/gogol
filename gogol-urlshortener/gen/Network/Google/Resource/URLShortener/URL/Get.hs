@@ -23,7 +23,7 @@
 module Network.Google.Resource.URLShortener.URL.Get
     (
     -- * REST Resource
-      UrlGetResource
+      URLGetResource
 
     -- * Creating a Request
     , uRLGet'
@@ -45,7 +45,7 @@ import           Network.Google.URLShortener.Types
 
 -- | A resource alias for @URLshortenerURLGet@ which the
 -- 'URLGet'' request conforms to.
-type UrlGetResource =
+type URLGetResource =
      "url" :>
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
@@ -165,4 +165,4 @@ instance GoogleRequest URLGet' where
               _ugFields
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy UrlGetResource) r u
+                  = clientWithRoute (Proxy :: Proxy URLGetResource) r u

@@ -23,7 +23,7 @@
 module Network.Google.Resource.Calendar.ACL.Insert
     (
     -- * REST Resource
-      AclInsertResource
+      ACLInsertResource
 
     -- * Creating a Request
     , aCLInsert'
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarACLInsert@ which the
 -- 'ACLInsert'' request conforms to.
-type AclInsertResource =
+type ACLInsertResource =
      "calendars" :>
        Capture "calendarId" Text :>
          "acl" :>
@@ -168,6 +168,6 @@ instance GoogleRequest ACLInsert' where
               (Just AltJSON)
               _aiACLRule
           where go
-                  = clientWithRoute (Proxy :: Proxy AclInsertResource)
+                  = clientWithRoute (Proxy :: Proxy ACLInsertResource)
                       r
                       u

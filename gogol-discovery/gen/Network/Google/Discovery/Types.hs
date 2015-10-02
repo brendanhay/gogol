@@ -79,7 +79,7 @@ module Network.Google.Discovery.Types
     , RestMethodMediaUploadProtocolsSimple
     , restMethodMediaUploadProtocolsSimple
     , rmmupsPath
-    , rmmupsMultiParty
+    , rmmupsMultiPart
 
     -- * RestDescriptionAuthOAuth2
     , RestDescriptionAuthOAuth2
@@ -225,7 +225,7 @@ module Network.Google.Discovery.Types
     , RestMethodMediaUploadProtocolsResumable
     , restMethodMediaUploadProtocolsResumable
     , rmmuprPath
-    , rmmuprMultiParty
+    , rmmuprMultiPart
 
     -- * RestMethodRequest
     , RestMethodRequest

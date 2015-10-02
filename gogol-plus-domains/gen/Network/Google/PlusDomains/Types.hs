@@ -150,7 +150,7 @@ module Network.Google.PlusDomains.Types
     -- * PersonOrganizations
     , PersonOrganizations
     , personOrganizations
-    , poDePartyment
+    , poDePartment
     , poLocation
     , poEndDate
     , poPrimary

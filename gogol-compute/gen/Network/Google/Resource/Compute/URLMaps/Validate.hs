@@ -25,7 +25,7 @@
 module Network.Google.Resource.Compute.URLMaps.Validate
     (
     -- * REST Resource
-      UrlMapsValidateResource
+      URLMapsValidateResource
 
     -- * Creating a Request
     , uRLMapsValidate'
@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeURLMapsValidate@ which the
 -- 'URLMapsValidate'' request conforms to.
-type UrlMapsValidateResource =
+type URLMapsValidateResource =
      Capture "project" Text :>
        "global" :>
          "urlMaps" :>
@@ -190,6 +190,6 @@ instance GoogleRequest URLMapsValidate' where
               _umvURLMapsValidateRequest
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UrlMapsValidateResource)
+                      (Proxy :: Proxy URLMapsValidateResource)
                       r
                       u

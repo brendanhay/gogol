@@ -57,7 +57,7 @@ library
         , Network.Google.Resource.YouTube.I18nLanguages.List
         , Network.Google.Resource.YouTube.I18nRegions.List
         , Network.Google.Resource.YouTube.LiveBroadcasts.Bind
-        , Network.Google.Resource.YouTube.LiveBroadcasts.Bind_direct
+        , Network.Google.Resource.YouTube.LiveBroadcasts.BindDirect
         , Network.Google.Resource.YouTube.LiveBroadcasts.Control
         , Network.Google.Resource.YouTube.LiveBroadcasts.Delete
         , Network.Google.Resource.YouTube.LiveBroadcasts.Insert

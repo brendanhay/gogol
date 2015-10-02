@@ -19,7 +19,7 @@ import           Network.Google.Prelude
 
 -- | The crawl error category. For example: serverError. If not specified,
 -- returns results for all categories.
-data WebmastersURLcrawlerrorscountsQueryCategory
+data WebmastersURLCrawlErrorscountsQueryCategory
     = AuthPermissions
       -- ^ @authPermissions@
     | ManyToOneRedirect
@@ -38,9 +38,9 @@ data WebmastersURLcrawlerrorscountsQueryCategory
       -- ^ @soft404@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable WebmastersURLcrawlerrorscountsQueryCategory
+instance Hashable WebmastersURLCrawlErrorscountsQueryCategory
 
-instance FromText WebmastersURLcrawlerrorscountsQueryCategory where
+instance FromText WebmastersURLCrawlErrorscountsQueryCategory where
     fromText = \case
         "authPermissions" -> Just AuthPermissions
         "manyToOneRedirect" -> Just ManyToOneRedirect
@@ -52,7 +52,7 @@ instance FromText WebmastersURLcrawlerrorscountsQueryCategory where
         "soft404" -> Just SOFT404
         _ -> Nothing
 
-instance ToText WebmastersURLcrawlerrorscountsQueryCategory where
+instance ToText WebmastersURLCrawlErrorscountsQueryCategory where
     toText = \case
         AuthPermissions -> "authPermissions"
         ManyToOneRedirect -> "manyToOneRedirect"
@@ -63,14 +63,14 @@ instance ToText WebmastersURLcrawlerrorscountsQueryCategory where
         ServerError -> "serverError"
         SOFT404 -> "soft404"
 
-instance FromJSON WebmastersURLcrawlerrorscountsQueryCategory where
-    parseJSON = parseJSONText "WebmastersURLcrawlerrorscountsQueryCategory"
+instance FromJSON WebmastersURLCrawlErrorscountsQueryCategory where
+    parseJSON = parseJSONText "WebmastersURLCrawlErrorscountsQueryCategory"
 
-instance ToJSON WebmastersURLcrawlerrorscountsQueryCategory where
+instance ToJSON WebmastersURLCrawlErrorscountsQueryCategory where
     toJSON = toJSONText
 
 -- | The user agent type (platform) that made the request. For example: web
-data WebmastersURLcrawlerrorssamplesListPlatform
+data WebmastersURLCrawlErrorsSamplesListPlatform
     = Mobile
       -- ^ @mobile@
     | SmartphoneOnly
@@ -79,270 +79,270 @@ data WebmastersURLcrawlerrorssamplesListPlatform
       -- ^ @web@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable WebmastersURLcrawlerrorssamplesListPlatform
+instance Hashable WebmastersURLCrawlErrorsSamplesListPlatform
 
-instance FromText WebmastersURLcrawlerrorssamplesListPlatform where
+instance FromText WebmastersURLCrawlErrorsSamplesListPlatform where
     fromText = \case
         "mobile" -> Just Mobile
         "smartphoneOnly" -> Just SmartphoneOnly
         "web" -> Just Web
         _ -> Nothing
 
-instance ToText WebmastersURLcrawlerrorssamplesListPlatform where
+instance ToText WebmastersURLCrawlErrorsSamplesListPlatform where
     toText = \case
         Mobile -> "mobile"
         SmartphoneOnly -> "smartphoneOnly"
         Web -> "web"
 
-instance FromJSON WebmastersURLcrawlerrorssamplesListPlatform where
-    parseJSON = parseJSONText "WebmastersURLcrawlerrorssamplesListPlatform"
+instance FromJSON WebmastersURLCrawlErrorsSamplesListPlatform where
+    parseJSON = parseJSONText "WebmastersURLCrawlErrorsSamplesListPlatform"
 
-instance ToJSON WebmastersURLcrawlerrorssamplesListPlatform where
+instance ToJSON WebmastersURLCrawlErrorsSamplesListPlatform where
     toJSON = toJSONText
 
 -- | The crawl error category. For example: authPermissions
-data WebmastersURLcrawlerrorssamplesGetCategory
-    = WUGCAuthPermissions
+data WebmastersURLCrawlErrorsSamplesGetCategory
+    = WUCESGCAuthPermissions
       -- ^ @authPermissions@
-    | WUGCManyToOneRedirect
+    | WUCESGCManyToOneRedirect
       -- ^ @manyToOneRedirect@
-    | WUGCNotFollowed
+    | WUCESGCNotFollowed
       -- ^ @notFollowed@
-    | WUGCNotFound
+    | WUCESGCNotFound
       -- ^ @notFound@
-    | WUGCOther
+    | WUCESGCOther
       -- ^ @other@
-    | WUGCRoboted
+    | WUCESGCRoboted
       -- ^ @roboted@
-    | WUGCServerError
+    | WUCESGCServerError
       -- ^ @serverError@
-    | WUGCSOFT404
+    | WUCESGCSOFT404
       -- ^ @soft404@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable WebmastersURLcrawlerrorssamplesGetCategory
+instance Hashable WebmastersURLCrawlErrorsSamplesGetCategory
 
-instance FromText WebmastersURLcrawlerrorssamplesGetCategory where
+instance FromText WebmastersURLCrawlErrorsSamplesGetCategory where
     fromText = \case
-        "authPermissions" -> Just WUGCAuthPermissions
-        "manyToOneRedirect" -> Just WUGCManyToOneRedirect
-        "notFollowed" -> Just WUGCNotFollowed
-        "notFound" -> Just WUGCNotFound
-        "other" -> Just WUGCOther
-        "roboted" -> Just WUGCRoboted
-        "serverError" -> Just WUGCServerError
-        "soft404" -> Just WUGCSOFT404
+        "authPermissions" -> Just WUCESGCAuthPermissions
+        "manyToOneRedirect" -> Just WUCESGCManyToOneRedirect
+        "notFollowed" -> Just WUCESGCNotFollowed
+        "notFound" -> Just WUCESGCNotFound
+        "other" -> Just WUCESGCOther
+        "roboted" -> Just WUCESGCRoboted
+        "serverError" -> Just WUCESGCServerError
+        "soft404" -> Just WUCESGCSOFT404
         _ -> Nothing
 
-instance ToText WebmastersURLcrawlerrorssamplesGetCategory where
+instance ToText WebmastersURLCrawlErrorsSamplesGetCategory where
     toText = \case
-        WUGCAuthPermissions -> "authPermissions"
-        WUGCManyToOneRedirect -> "manyToOneRedirect"
-        WUGCNotFollowed -> "notFollowed"
-        WUGCNotFound -> "notFound"
-        WUGCOther -> "other"
-        WUGCRoboted -> "roboted"
-        WUGCServerError -> "serverError"
-        WUGCSOFT404 -> "soft404"
+        WUCESGCAuthPermissions -> "authPermissions"
+        WUCESGCManyToOneRedirect -> "manyToOneRedirect"
+        WUCESGCNotFollowed -> "notFollowed"
+        WUCESGCNotFound -> "notFound"
+        WUCESGCOther -> "other"
+        WUCESGCRoboted -> "roboted"
+        WUCESGCServerError -> "serverError"
+        WUCESGCSOFT404 -> "soft404"
 
-instance FromJSON WebmastersURLcrawlerrorssamplesGetCategory where
-    parseJSON = parseJSONText "WebmastersURLcrawlerrorssamplesGetCategory"
+instance FromJSON WebmastersURLCrawlErrorsSamplesGetCategory where
+    parseJSON = parseJSONText "WebmastersURLCrawlErrorsSamplesGetCategory"
 
-instance ToJSON WebmastersURLcrawlerrorssamplesGetCategory where
+instance ToJSON WebmastersURLCrawlErrorsSamplesGetCategory where
     toJSON = toJSONText
 
 -- | The user agent type (platform) that made the request. For example: web
-data WebmastersURLcrawlerrorssamplesMarkAsFixedPlatform
-    = WUMAFPMobile
+data WebmastersURLCrawlErrorsSamplesMarkAsFixedPlatform
+    = WUCESMAFPMobile
       -- ^ @mobile@
-    | WUMAFPSmartphoneOnly
+    | WUCESMAFPSmartphoneOnly
       -- ^ @smartphoneOnly@
-    | WUMAFPWeb
+    | WUCESMAFPWeb
       -- ^ @web@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable WebmastersURLcrawlerrorssamplesMarkAsFixedPlatform
+instance Hashable WebmastersURLCrawlErrorsSamplesMarkAsFixedPlatform
 
-instance FromText WebmastersURLcrawlerrorssamplesMarkAsFixedPlatform where
+instance FromText WebmastersURLCrawlErrorsSamplesMarkAsFixedPlatform where
     fromText = \case
-        "mobile" -> Just WUMAFPMobile
-        "smartphoneOnly" -> Just WUMAFPSmartphoneOnly
-        "web" -> Just WUMAFPWeb
+        "mobile" -> Just WUCESMAFPMobile
+        "smartphoneOnly" -> Just WUCESMAFPSmartphoneOnly
+        "web" -> Just WUCESMAFPWeb
         _ -> Nothing
 
-instance ToText WebmastersURLcrawlerrorssamplesMarkAsFixedPlatform where
+instance ToText WebmastersURLCrawlErrorsSamplesMarkAsFixedPlatform where
     toText = \case
-        WUMAFPMobile -> "mobile"
-        WUMAFPSmartphoneOnly -> "smartphoneOnly"
-        WUMAFPWeb -> "web"
+        WUCESMAFPMobile -> "mobile"
+        WUCESMAFPSmartphoneOnly -> "smartphoneOnly"
+        WUCESMAFPWeb -> "web"
 
-instance FromJSON WebmastersURLcrawlerrorssamplesMarkAsFixedPlatform where
-    parseJSON = parseJSONText "WebmastersURLcrawlerrorssamplesMarkAsFixedPlatform"
+instance FromJSON WebmastersURLCrawlErrorsSamplesMarkAsFixedPlatform where
+    parseJSON = parseJSONText "WebmastersURLCrawlErrorsSamplesMarkAsFixedPlatform"
 
-instance ToJSON WebmastersURLcrawlerrorssamplesMarkAsFixedPlatform where
+instance ToJSON WebmastersURLCrawlErrorsSamplesMarkAsFixedPlatform where
     toJSON = toJSONText
 
 -- | The crawl error category. For example: authPermissions
-data WebmastersURLcrawlerrorssamplesMarkAsFixedCategory
-    = WUMAFCAuthPermissions
+data WebmastersURLCrawlErrorsSamplesMarkAsFixedCategory
+    = WUCESMAFCAuthPermissions
       -- ^ @authPermissions@
-    | WUMAFCManyToOneRedirect
+    | WUCESMAFCManyToOneRedirect
       -- ^ @manyToOneRedirect@
-    | WUMAFCNotFollowed
+    | WUCESMAFCNotFollowed
       -- ^ @notFollowed@
-    | WUMAFCNotFound
+    | WUCESMAFCNotFound
       -- ^ @notFound@
-    | WUMAFCOther
+    | WUCESMAFCOther
       -- ^ @other@
-    | WUMAFCRoboted
+    | WUCESMAFCRoboted
       -- ^ @roboted@
-    | WUMAFCServerError
+    | WUCESMAFCServerError
       -- ^ @serverError@
-    | WUMAFCSOFT404
+    | WUCESMAFCSOFT404
       -- ^ @soft404@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable WebmastersURLcrawlerrorssamplesMarkAsFixedCategory
+instance Hashable WebmastersURLCrawlErrorsSamplesMarkAsFixedCategory
 
-instance FromText WebmastersURLcrawlerrorssamplesMarkAsFixedCategory where
+instance FromText WebmastersURLCrawlErrorsSamplesMarkAsFixedCategory where
     fromText = \case
-        "authPermissions" -> Just WUMAFCAuthPermissions
-        "manyToOneRedirect" -> Just WUMAFCManyToOneRedirect
-        "notFollowed" -> Just WUMAFCNotFollowed
-        "notFound" -> Just WUMAFCNotFound
-        "other" -> Just WUMAFCOther
-        "roboted" -> Just WUMAFCRoboted
-        "serverError" -> Just WUMAFCServerError
-        "soft404" -> Just WUMAFCSOFT404
+        "authPermissions" -> Just WUCESMAFCAuthPermissions
+        "manyToOneRedirect" -> Just WUCESMAFCManyToOneRedirect
+        "notFollowed" -> Just WUCESMAFCNotFollowed
+        "notFound" -> Just WUCESMAFCNotFound
+        "other" -> Just WUCESMAFCOther
+        "roboted" -> Just WUCESMAFCRoboted
+        "serverError" -> Just WUCESMAFCServerError
+        "soft404" -> Just WUCESMAFCSOFT404
         _ -> Nothing
 
-instance ToText WebmastersURLcrawlerrorssamplesMarkAsFixedCategory where
+instance ToText WebmastersURLCrawlErrorsSamplesMarkAsFixedCategory where
     toText = \case
-        WUMAFCAuthPermissions -> "authPermissions"
-        WUMAFCManyToOneRedirect -> "manyToOneRedirect"
-        WUMAFCNotFollowed -> "notFollowed"
-        WUMAFCNotFound -> "notFound"
-        WUMAFCOther -> "other"
-        WUMAFCRoboted -> "roboted"
-        WUMAFCServerError -> "serverError"
-        WUMAFCSOFT404 -> "soft404"
+        WUCESMAFCAuthPermissions -> "authPermissions"
+        WUCESMAFCManyToOneRedirect -> "manyToOneRedirect"
+        WUCESMAFCNotFollowed -> "notFollowed"
+        WUCESMAFCNotFound -> "notFound"
+        WUCESMAFCOther -> "other"
+        WUCESMAFCRoboted -> "roboted"
+        WUCESMAFCServerError -> "serverError"
+        WUCESMAFCSOFT404 -> "soft404"
 
-instance FromJSON WebmastersURLcrawlerrorssamplesMarkAsFixedCategory where
-    parseJSON = parseJSONText "WebmastersURLcrawlerrorssamplesMarkAsFixedCategory"
+instance FromJSON WebmastersURLCrawlErrorsSamplesMarkAsFixedCategory where
+    parseJSON = parseJSONText "WebmastersURLCrawlErrorsSamplesMarkAsFixedCategory"
 
-instance ToJSON WebmastersURLcrawlerrorssamplesMarkAsFixedCategory where
+instance ToJSON WebmastersURLCrawlErrorsSamplesMarkAsFixedCategory where
     toJSON = toJSONText
 
 -- | The user agent type (platform) that made the request. For example: web
-data WebmastersURLcrawlerrorssamplesGetPlatform
-    = WUGPMobile
+data WebmastersURLCrawlErrorsSamplesGetPlatform
+    = WUCESGPMobile
       -- ^ @mobile@
-    | WUGPSmartphoneOnly
+    | WUCESGPSmartphoneOnly
       -- ^ @smartphoneOnly@
-    | WUGPWeb
+    | WUCESGPWeb
       -- ^ @web@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable WebmastersURLcrawlerrorssamplesGetPlatform
+instance Hashable WebmastersURLCrawlErrorsSamplesGetPlatform
 
-instance FromText WebmastersURLcrawlerrorssamplesGetPlatform where
+instance FromText WebmastersURLCrawlErrorsSamplesGetPlatform where
     fromText = \case
-        "mobile" -> Just WUGPMobile
-        "smartphoneOnly" -> Just WUGPSmartphoneOnly
-        "web" -> Just WUGPWeb
+        "mobile" -> Just WUCESGPMobile
+        "smartphoneOnly" -> Just WUCESGPSmartphoneOnly
+        "web" -> Just WUCESGPWeb
         _ -> Nothing
 
-instance ToText WebmastersURLcrawlerrorssamplesGetPlatform where
+instance ToText WebmastersURLCrawlErrorsSamplesGetPlatform where
     toText = \case
-        WUGPMobile -> "mobile"
-        WUGPSmartphoneOnly -> "smartphoneOnly"
-        WUGPWeb -> "web"
+        WUCESGPMobile -> "mobile"
+        WUCESGPSmartphoneOnly -> "smartphoneOnly"
+        WUCESGPWeb -> "web"
 
-instance FromJSON WebmastersURLcrawlerrorssamplesGetPlatform where
-    parseJSON = parseJSONText "WebmastersURLcrawlerrorssamplesGetPlatform"
+instance FromJSON WebmastersURLCrawlErrorsSamplesGetPlatform where
+    parseJSON = parseJSONText "WebmastersURLCrawlErrorsSamplesGetPlatform"
 
-instance ToJSON WebmastersURLcrawlerrorssamplesGetPlatform where
+instance ToJSON WebmastersURLCrawlErrorsSamplesGetPlatform where
     toJSON = toJSONText
 
 -- | The crawl error category. For example: authPermissions
-data WebmastersURLcrawlerrorssamplesListCategory
-    = WULCAuthPermissions
+data WebmastersURLCrawlErrorsSamplesListCategory
+    = WUCESLCAuthPermissions
       -- ^ @authPermissions@
-    | WULCManyToOneRedirect
+    | WUCESLCManyToOneRedirect
       -- ^ @manyToOneRedirect@
-    | WULCNotFollowed
+    | WUCESLCNotFollowed
       -- ^ @notFollowed@
-    | WULCNotFound
+    | WUCESLCNotFound
       -- ^ @notFound@
-    | WULCOther
+    | WUCESLCOther
       -- ^ @other@
-    | WULCRoboted
+    | WUCESLCRoboted
       -- ^ @roboted@
-    | WULCServerError
+    | WUCESLCServerError
       -- ^ @serverError@
-    | WULCSOFT404
+    | WUCESLCSOFT404
       -- ^ @soft404@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable WebmastersURLcrawlerrorssamplesListCategory
+instance Hashable WebmastersURLCrawlErrorsSamplesListCategory
 
-instance FromText WebmastersURLcrawlerrorssamplesListCategory where
+instance FromText WebmastersURLCrawlErrorsSamplesListCategory where
     fromText = \case
-        "authPermissions" -> Just WULCAuthPermissions
-        "manyToOneRedirect" -> Just WULCManyToOneRedirect
-        "notFollowed" -> Just WULCNotFollowed
-        "notFound" -> Just WULCNotFound
-        "other" -> Just WULCOther
-        "roboted" -> Just WULCRoboted
-        "serverError" -> Just WULCServerError
-        "soft404" -> Just WULCSOFT404
+        "authPermissions" -> Just WUCESLCAuthPermissions
+        "manyToOneRedirect" -> Just WUCESLCManyToOneRedirect
+        "notFollowed" -> Just WUCESLCNotFollowed
+        "notFound" -> Just WUCESLCNotFound
+        "other" -> Just WUCESLCOther
+        "roboted" -> Just WUCESLCRoboted
+        "serverError" -> Just WUCESLCServerError
+        "soft404" -> Just WUCESLCSOFT404
         _ -> Nothing
 
-instance ToText WebmastersURLcrawlerrorssamplesListCategory where
+instance ToText WebmastersURLCrawlErrorsSamplesListCategory where
     toText = \case
-        WULCAuthPermissions -> "authPermissions"
-        WULCManyToOneRedirect -> "manyToOneRedirect"
-        WULCNotFollowed -> "notFollowed"
-        WULCNotFound -> "notFound"
-        WULCOther -> "other"
-        WULCRoboted -> "roboted"
-        WULCServerError -> "serverError"
-        WULCSOFT404 -> "soft404"
+        WUCESLCAuthPermissions -> "authPermissions"
+        WUCESLCManyToOneRedirect -> "manyToOneRedirect"
+        WUCESLCNotFollowed -> "notFollowed"
+        WUCESLCNotFound -> "notFound"
+        WUCESLCOther -> "other"
+        WUCESLCRoboted -> "roboted"
+        WUCESLCServerError -> "serverError"
+        WUCESLCSOFT404 -> "soft404"
 
-instance FromJSON WebmastersURLcrawlerrorssamplesListCategory where
-    parseJSON = parseJSONText "WebmastersURLcrawlerrorssamplesListCategory"
+instance FromJSON WebmastersURLCrawlErrorsSamplesListCategory where
+    parseJSON = parseJSONText "WebmastersURLCrawlErrorsSamplesListCategory"
 
-instance ToJSON WebmastersURLcrawlerrorssamplesListCategory where
+instance ToJSON WebmastersURLCrawlErrorsSamplesListCategory where
     toJSON = toJSONText
 
 -- | The user agent type (platform) that made the request. For example: web.
 -- If not specified, returns results for all platforms.
-data WebmastersURLcrawlerrorscountsQueryPlatform
-    = WUQPMobile
+data WebmastersURLCrawlErrorscountsQueryPlatform
+    = WUCEQPMobile
       -- ^ @mobile@
-    | WUQPSmartphoneOnly
+    | WUCEQPSmartphoneOnly
       -- ^ @smartphoneOnly@
-    | WUQPWeb
+    | WUCEQPWeb
       -- ^ @web@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable WebmastersURLcrawlerrorscountsQueryPlatform
+instance Hashable WebmastersURLCrawlErrorscountsQueryPlatform
 
-instance FromText WebmastersURLcrawlerrorscountsQueryPlatform where
+instance FromText WebmastersURLCrawlErrorscountsQueryPlatform where
     fromText = \case
-        "mobile" -> Just WUQPMobile
-        "smartphoneOnly" -> Just WUQPSmartphoneOnly
-        "web" -> Just WUQPWeb
+        "mobile" -> Just WUCEQPMobile
+        "smartphoneOnly" -> Just WUCEQPSmartphoneOnly
+        "web" -> Just WUCEQPWeb
         _ -> Nothing
 
-instance ToText WebmastersURLcrawlerrorscountsQueryPlatform where
+instance ToText WebmastersURLCrawlErrorscountsQueryPlatform where
     toText = \case
-        WUQPMobile -> "mobile"
-        WUQPSmartphoneOnly -> "smartphoneOnly"
-        WUQPWeb -> "web"
+        WUCEQPMobile -> "mobile"
+        WUCEQPSmartphoneOnly -> "smartphoneOnly"
+        WUCEQPWeb -> "web"
 
-instance FromJSON WebmastersURLcrawlerrorscountsQueryPlatform where
-    parseJSON = parseJSONText "WebmastersURLcrawlerrorscountsQueryPlatform"
+instance FromJSON WebmastersURLCrawlErrorscountsQueryPlatform where
+    parseJSON = parseJSONText "WebmastersURLCrawlErrorscountsQueryPlatform"
 
-instance ToJSON WebmastersURLcrawlerrorscountsQueryPlatform where
+instance ToJSON WebmastersURLCrawlErrorscountsQueryPlatform where
     toJSON = toJSONText

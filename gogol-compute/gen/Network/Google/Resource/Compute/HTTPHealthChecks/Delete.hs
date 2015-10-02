@@ -23,7 +23,7 @@
 module Network.Google.Resource.Compute.HTTPHealthChecks.Delete
     (
     -- * REST Resource
-      HttpHealthChecksDeleteResource
+      HTTPHealthChecksDeleteResource
 
     -- * Creating a Request
     , hTTPHealthChecksDelete'
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeHTTPHealthChecksDelete@ which the
 -- 'HTTPHealthChecksDelete'' request conforms to.
-type HttpHealthChecksDeleteResource =
+type HTTPHealthChecksDeleteResource =
      Capture "project" Text :>
        "global" :>
          "httpHealthChecks" :>
@@ -177,6 +177,6 @@ instance GoogleRequest HTTPHealthChecksDelete' where
               (Just AltJSON)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy HttpHealthChecksDeleteResource)
+                      (Proxy :: Proxy HTTPHealthChecksDeleteResource)
                       r
                       u

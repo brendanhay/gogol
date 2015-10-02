@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | Retrieves Google Developers Console billing accounts and associates them
+-- | Retrieves Google Developers Console billing accounts and associates them
 -- with projects.
 --
 -- /See:/ <https://cloud.google.com/billing/ Google Cloud Billing API Reference>

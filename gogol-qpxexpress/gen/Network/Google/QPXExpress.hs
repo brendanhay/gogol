@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | Lets you find the least expensive flights between an origin and a
+-- | Lets you find the least expensive flights between an origin and a
 -- destination.
 --
 -- /See:/ <http://developers.google.com/qpx-express QPX Express API Reference>
@@ -100,7 +100,7 @@ module Network.Google.QPXExpress
     , liConnectionDuration
     , liDuration
     , liMileage
-    , liDePartyureTime
+    , liDePartureTime
 
     -- ** AirportData
     , AirportData
@@ -249,7 +249,7 @@ module Network.Google.QPXExpress
     , sliDate
     , sliMaxConnectionDuration
     , sliPreferredCabin
-    , sliPermittedDePartyureTime
+    , sliPermittedDePartureTime
     , sliPermittedCarrier
     , sliAlliance
 

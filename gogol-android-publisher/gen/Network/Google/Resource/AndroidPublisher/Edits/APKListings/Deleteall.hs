@@ -23,7 +23,7 @@
 module Network.Google.Resource.AndroidPublisher.Edits.APKListings.Deleteall
     (
     -- * REST Resource
-      EditsApkListingsDeleteallResource
+      EditsAPKListingsDeleteallResource
 
     -- * Creating a Request
     , editsAPKListingsDeleteall'
@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidPublisherEditsAPKListingsDeleteall@ which the
 -- 'EditsAPKListingsDeleteall'' request conforms to.
-type EditsApkListingsDeleteallResource =
+type EditsAPKListingsDeleteallResource =
      Capture "packageName" Text :>
        "edits" :>
          Capture "editId" Text :>
@@ -195,6 +195,6 @@ instance GoogleRequest EditsAPKListingsDeleteall'
               (Just AltJSON)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EditsApkListingsDeleteallResource)
+                      (Proxy :: Proxy EditsAPKListingsDeleteallResource)
                       r
                       u

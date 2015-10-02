@@ -25,7 +25,7 @@
 module Network.Google.Resource.SQL.SSLCerts.Get
     (
     -- * REST Resource
-      SslCertsGetResource
+      SSLCertsGetResource
 
     -- * Creating a Request
     , sSLCertsGet'
@@ -48,7 +48,7 @@ import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SQLSSLCertsGet@ which the
 -- 'SSLCertsGet'' request conforms to.
-type SslCertsGetResource =
+type SSLCertsGetResource =
      "projects" :>
        Capture "project" Text :>
          "instances" :>
@@ -189,6 +189,6 @@ instance GoogleRequest SSLCertsGet' where
               (Just AltJSON)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy SslCertsGetResource)
+                      (Proxy :: Proxy SSLCertsGetResource)
                       r
                       u

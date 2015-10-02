@@ -23,7 +23,7 @@
 module Network.Google.Resource.Compute.HTTPHealthChecks.Get
     (
     -- * REST Resource
-      HttpHealthChecksGetResource
+      HTTPHealthChecksGetResource
 
     -- * Creating a Request
     , hTTPHealthChecksGet'
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeHTTPHealthChecksGet@ which the
 -- 'HTTPHealthChecksGet'' request conforms to.
-type HttpHealthChecksGetResource =
+type HTTPHealthChecksGetResource =
      Capture "project" Text :>
        "global" :>
          "httpHealthChecks" :>
@@ -178,6 +178,6 @@ instance GoogleRequest HTTPHealthChecksGet' where
               (Just AltJSON)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy HttpHealthChecksGetResource)
+                      (Proxy :: Proxy HTTPHealthChecksGetResource)
                       r
                       u

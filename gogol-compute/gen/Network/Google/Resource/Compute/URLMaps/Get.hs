@@ -23,7 +23,7 @@
 module Network.Google.Resource.Compute.URLMaps.Get
     (
     -- * REST Resource
-      UrlMapsGetResource
+      URLMapsGetResource
 
     -- * Creating a Request
     , uRLMapsGet'
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeURLMapsGet@ which the
 -- 'URLMapsGet'' request conforms to.
-type UrlMapsGetResource =
+type URLMapsGetResource =
      Capture "project" Text :>
        "global" :>
          "urlMaps" :>
@@ -169,6 +169,6 @@ instance GoogleRequest URLMapsGet' where
               _umgFields
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy UrlMapsGetResource)
+                  = clientWithRoute (Proxy :: Proxy URLMapsGetResource)
                       r
                       u

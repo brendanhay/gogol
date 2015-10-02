@@ -23,7 +23,7 @@
 module Network.Google.Resource.URLShortener.URL.List
     (
     -- * REST Resource
-      UrlListResource
+      URLListResource
 
     -- * Creating a Request
     , uRLList'
@@ -45,7 +45,7 @@ import           Network.Google.URLShortener.Types
 
 -- | A resource alias for @URLshortenerURLList@ which the
 -- 'URLList'' request conforms to.
-type UrlListResource =
+type URLListResource =
      "url" :>
        "history" :>
          QueryParam "quotaUser" Text :>
@@ -165,5 +165,5 @@ instance GoogleRequest URLList' where
               _ulFields
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy UrlListResource) r
+                  = clientWithRoute (Proxy :: Proxy URLListResource) r
                       u

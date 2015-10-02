@@ -304,89 +304,89 @@ instance ToJSON ParameterType where
     toJSON = toJSONText
 
 data ContainerEnabledBuiltInVariable
-    = AdvertiserId
+    = CEBIVAdvertiserId
       -- ^ @advertiserId@
-    | AdvertisingTrackingEnabled
+    | CEBIVAdvertisingTrackingEnabled
       -- ^ @advertisingTrackingEnabled@
-    | AppId
+    | CEBIVAppId
       -- ^ @appId@
-    | AppName
+    | CEBIVAppName
       -- ^ @appName@
-    | AppVersionCode
+    | CEBIVAppVersionCode
       -- ^ @appVersionCode@
-    | AppVersionName
+    | CEBIVAppVersionName
       -- ^ @appVersionName@
-    | ClickClasses
+    | CEBIVClickClasses
       -- ^ @clickClasses@
-    | ClickElement
+    | CEBIVClickElement
       -- ^ @clickElement@
-    | ClickId
+    | CEBIVClickId
       -- ^ @clickId@
-    | ClickTarget
+    | CEBIVClickTarget
       -- ^ @clickTarget@
-    | ClickText
+    | CEBIVClickText
       -- ^ @clickText@
-    | ClickURL
+    | CEBIVClickURL
       -- ^ @clickUrl@
-    | ContainerId
+    | CEBIVContainerId
       -- ^ @containerId@
-    | ContainerVersion
+    | CEBIVContainerVersion
       -- ^ @containerVersion@
-    | DebugMode
+    | CEBIVDebugMode
       -- ^ @debugMode@
-    | DeviceName
+    | CEBIVDeviceName
       -- ^ @deviceName@
-    | ErrorLine
+    | CEBIVErrorLine
       -- ^ @errorLine@
-    | ErrorMessage
+    | CEBIVErrorMessage
       -- ^ @errorMessage@
-    | ErrorURL
+    | CEBIVErrorURL
       -- ^ @errorUrl@
-    | Event
+    | CEBIVEvent
       -- ^ @event@
-    | FormClasses
+    | CEBIVFormClasses
       -- ^ @formClasses@
-    | FormElement
+    | CEBIVFormElement
       -- ^ @formElement@
-    | FormId
+    | CEBIVFormId
       -- ^ @formId@
-    | FormTarget
+    | CEBIVFormTarget
       -- ^ @formTarget@
-    | FormText
+    | CEBIVFormText
       -- ^ @formText@
-    | FormURL
+    | CEBIVFormURL
       -- ^ @formUrl@
-    | HistorySource
+    | CEBIVHistorySource
       -- ^ @historySource@
-    | HTMLId
+    | CEBIVHTMLId
       -- ^ @htmlId@
-    | Language
+    | CEBIVLanguage
       -- ^ @language@
-    | NewHistoryFragment
+    | CEBIVNewHistoryFragment
       -- ^ @newHistoryFragment@
-    | NewHistoryState
+    | CEBIVNewHistoryState
       -- ^ @newHistoryState@
-    | OldHistoryFragment
+    | CEBIVOldHistoryFragment
       -- ^ @oldHistoryFragment@
-    | OldHistoryState
+    | CEBIVOldHistoryState
       -- ^ @oldHistoryState@
-    | OSVersion
+    | CEBIVOSVersion
       -- ^ @osVersion@
-    | PageHostname
+    | CEBIVPageHostname
       -- ^ @pageHostname@
-    | PagePath
+    | CEBIVPagePath
       -- ^ @pagePath@
-    | PageURL
+    | CEBIVPageURL
       -- ^ @pageUrl@
-    | Platform
+    | CEBIVPlatform
       -- ^ @platform@
-    | RandomNumber
+    | CEBIVRandomNumber
       -- ^ @randomNumber@
-    | Referrer
+    | CEBIVReferrer
       -- ^ @referrer@
-    | Resolution
+    | CEBIVResolution
       -- ^ @resolution@
-    | SdkVersion
+    | CEBIVSdkVersion
       -- ^ @sdkVersion@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -394,94 +394,94 @@ instance Hashable ContainerEnabledBuiltInVariable
 
 instance FromText ContainerEnabledBuiltInVariable where
     fromText = \case
-        "advertiserId" -> Just AdvertiserId
-        "advertisingTrackingEnabled" -> Just AdvertisingTrackingEnabled
-        "appId" -> Just AppId
-        "appName" -> Just AppName
-        "appVersionCode" -> Just AppVersionCode
-        "appVersionName" -> Just AppVersionName
-        "clickClasses" -> Just ClickClasses
-        "clickElement" -> Just ClickElement
-        "clickId" -> Just ClickId
-        "clickTarget" -> Just ClickTarget
-        "clickText" -> Just ClickText
-        "clickUrl" -> Just ClickURL
-        "containerId" -> Just ContainerId
-        "containerVersion" -> Just ContainerVersion
-        "debugMode" -> Just DebugMode
-        "deviceName" -> Just DeviceName
-        "errorLine" -> Just ErrorLine
-        "errorMessage" -> Just ErrorMessage
-        "errorUrl" -> Just ErrorURL
-        "event" -> Just Event
-        "formClasses" -> Just FormClasses
-        "formElement" -> Just FormElement
-        "formId" -> Just FormId
-        "formTarget" -> Just FormTarget
-        "formText" -> Just FormText
-        "formUrl" -> Just FormURL
-        "historySource" -> Just HistorySource
-        "htmlId" -> Just HTMLId
-        "language" -> Just Language
-        "newHistoryFragment" -> Just NewHistoryFragment
-        "newHistoryState" -> Just NewHistoryState
-        "oldHistoryFragment" -> Just OldHistoryFragment
-        "oldHistoryState" -> Just OldHistoryState
-        "osVersion" -> Just OSVersion
-        "pageHostname" -> Just PageHostname
-        "pagePath" -> Just PagePath
-        "pageUrl" -> Just PageURL
-        "platform" -> Just Platform
-        "randomNumber" -> Just RandomNumber
-        "referrer" -> Just Referrer
-        "resolution" -> Just Resolution
-        "sdkVersion" -> Just SdkVersion
+        "advertiserId" -> Just CEBIVAdvertiserId
+        "advertisingTrackingEnabled" -> Just CEBIVAdvertisingTrackingEnabled
+        "appId" -> Just CEBIVAppId
+        "appName" -> Just CEBIVAppName
+        "appVersionCode" -> Just CEBIVAppVersionCode
+        "appVersionName" -> Just CEBIVAppVersionName
+        "clickClasses" -> Just CEBIVClickClasses
+        "clickElement" -> Just CEBIVClickElement
+        "clickId" -> Just CEBIVClickId
+        "clickTarget" -> Just CEBIVClickTarget
+        "clickText" -> Just CEBIVClickText
+        "clickUrl" -> Just CEBIVClickURL
+        "containerId" -> Just CEBIVContainerId
+        "containerVersion" -> Just CEBIVContainerVersion
+        "debugMode" -> Just CEBIVDebugMode
+        "deviceName" -> Just CEBIVDeviceName
+        "errorLine" -> Just CEBIVErrorLine
+        "errorMessage" -> Just CEBIVErrorMessage
+        "errorUrl" -> Just CEBIVErrorURL
+        "event" -> Just CEBIVEvent
+        "formClasses" -> Just CEBIVFormClasses
+        "formElement" -> Just CEBIVFormElement
+        "formId" -> Just CEBIVFormId
+        "formTarget" -> Just CEBIVFormTarget
+        "formText" -> Just CEBIVFormText
+        "formUrl" -> Just CEBIVFormURL
+        "historySource" -> Just CEBIVHistorySource
+        "htmlId" -> Just CEBIVHTMLId
+        "language" -> Just CEBIVLanguage
+        "newHistoryFragment" -> Just CEBIVNewHistoryFragment
+        "newHistoryState" -> Just CEBIVNewHistoryState
+        "oldHistoryFragment" -> Just CEBIVOldHistoryFragment
+        "oldHistoryState" -> Just CEBIVOldHistoryState
+        "osVersion" -> Just CEBIVOSVersion
+        "pageHostname" -> Just CEBIVPageHostname
+        "pagePath" -> Just CEBIVPagePath
+        "pageUrl" -> Just CEBIVPageURL
+        "platform" -> Just CEBIVPlatform
+        "randomNumber" -> Just CEBIVRandomNumber
+        "referrer" -> Just CEBIVReferrer
+        "resolution" -> Just CEBIVResolution
+        "sdkVersion" -> Just CEBIVSdkVersion
         _ -> Nothing
 
 instance ToText ContainerEnabledBuiltInVariable where
     toText = \case
-        AdvertiserId -> "advertiserId"
-        AdvertisingTrackingEnabled -> "advertisingTrackingEnabled"
-        AppId -> "appId"
-        AppName -> "appName"
-        AppVersionCode -> "appVersionCode"
-        AppVersionName -> "appVersionName"
-        ClickClasses -> "clickClasses"
-        ClickElement -> "clickElement"
-        ClickId -> "clickId"
-        ClickTarget -> "clickTarget"
-        ClickText -> "clickText"
-        ClickURL -> "clickUrl"
-        ContainerId -> "containerId"
-        ContainerVersion -> "containerVersion"
-        DebugMode -> "debugMode"
-        DeviceName -> "deviceName"
-        ErrorLine -> "errorLine"
-        ErrorMessage -> "errorMessage"
-        ErrorURL -> "errorUrl"
-        Event -> "event"
-        FormClasses -> "formClasses"
-        FormElement -> "formElement"
-        FormId -> "formId"
-        FormTarget -> "formTarget"
-        FormText -> "formText"
-        FormURL -> "formUrl"
-        HistorySource -> "historySource"
-        HTMLId -> "htmlId"
-        Language -> "language"
-        NewHistoryFragment -> "newHistoryFragment"
-        NewHistoryState -> "newHistoryState"
-        OldHistoryFragment -> "oldHistoryFragment"
-        OldHistoryState -> "oldHistoryState"
-        OSVersion -> "osVersion"
-        PageHostname -> "pageHostname"
-        PagePath -> "pagePath"
-        PageURL -> "pageUrl"
-        Platform -> "platform"
-        RandomNumber -> "randomNumber"
-        Referrer -> "referrer"
-        Resolution -> "resolution"
-        SdkVersion -> "sdkVersion"
+        CEBIVAdvertiserId -> "advertiserId"
+        CEBIVAdvertisingTrackingEnabled -> "advertisingTrackingEnabled"
+        CEBIVAppId -> "appId"
+        CEBIVAppName -> "appName"
+        CEBIVAppVersionCode -> "appVersionCode"
+        CEBIVAppVersionName -> "appVersionName"
+        CEBIVClickClasses -> "clickClasses"
+        CEBIVClickElement -> "clickElement"
+        CEBIVClickId -> "clickId"
+        CEBIVClickTarget -> "clickTarget"
+        CEBIVClickText -> "clickText"
+        CEBIVClickURL -> "clickUrl"
+        CEBIVContainerId -> "containerId"
+        CEBIVContainerVersion -> "containerVersion"
+        CEBIVDebugMode -> "debugMode"
+        CEBIVDeviceName -> "deviceName"
+        CEBIVErrorLine -> "errorLine"
+        CEBIVErrorMessage -> "errorMessage"
+        CEBIVErrorURL -> "errorUrl"
+        CEBIVEvent -> "event"
+        CEBIVFormClasses -> "formClasses"
+        CEBIVFormElement -> "formElement"
+        CEBIVFormId -> "formId"
+        CEBIVFormTarget -> "formTarget"
+        CEBIVFormText -> "formText"
+        CEBIVFormURL -> "formUrl"
+        CEBIVHistorySource -> "historySource"
+        CEBIVHTMLId -> "htmlId"
+        CEBIVLanguage -> "language"
+        CEBIVNewHistoryFragment -> "newHistoryFragment"
+        CEBIVNewHistoryState -> "newHistoryState"
+        CEBIVOldHistoryFragment -> "oldHistoryFragment"
+        CEBIVOldHistoryState -> "oldHistoryState"
+        CEBIVOSVersion -> "osVersion"
+        CEBIVPageHostname -> "pageHostname"
+        CEBIVPagePath -> "pagePath"
+        CEBIVPageURL -> "pageUrl"
+        CEBIVPlatform -> "platform"
+        CEBIVRandomNumber -> "randomNumber"
+        CEBIVReferrer -> "referrer"
+        CEBIVResolution -> "resolution"
+        CEBIVSdkVersion -> "sdkVersion"
 
 instance FromJSON ContainerEnabledBuiltInVariable where
     parseJSON = parseJSONText "ContainerEnabledBuiltInVariable"

@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | API for accessing Google Cloud and API monitoring data.
+-- | API for accessing Google Cloud and API monitoring data.
 --
 -- /See:/ <https://cloud.google.com/monitoring/v2beta2/ Cloud Monitoring API Reference>
 module Network.Google.Monitoring

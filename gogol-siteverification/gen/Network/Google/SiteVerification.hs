@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | Lets you programatically verify ownership of websites or domains with
+-- | Lets you programatically verify ownership of websites or domains with
 -- Google.
 --
 -- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference>

@@ -23,7 +23,7 @@
 module Network.Google.Resource.Discovery.APIs.GetRest
     (
     -- * REST Resource
-      ApisGetRestResource
+      APIsGetRestResource
 
     -- * Creating a Request
     , aPIsGetRest'
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 
 -- | A resource alias for @DiscoveryAPIsGetRest@ which the
 -- 'APIsGetRest'' request conforms to.
-type ApisGetRestResource =
+type APIsGetRestResource =
      "apis" :>
        Capture "api" Text :>
          Capture "version" Text :>
@@ -170,6 +170,6 @@ instance GoogleRequest APIsGetRest' where
               (Just AltJSON)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ApisGetRestResource)
+                      (Proxy :: Proxy APIsGetRestResource)
                       r
                       u

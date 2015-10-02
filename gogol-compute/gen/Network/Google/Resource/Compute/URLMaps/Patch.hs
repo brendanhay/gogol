@@ -24,7 +24,7 @@
 module Network.Google.Resource.Compute.URLMaps.Patch
     (
     -- * REST Resource
-      UrlMapsPatchResource
+      URLMapsPatchResource
 
     -- * Creating a Request
     , uRLMapsPatch'
@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeURLMapsPatch@ which the
 -- 'URLMapsPatch'' request conforms to.
-type UrlMapsPatchResource =
+type URLMapsPatchResource =
      Capture "project" Text :>
        "global" :>
          "urlMaps" :>
@@ -185,6 +185,6 @@ instance GoogleRequest URLMapsPatch' where
               _umpURLMap
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UrlMapsPatchResource)
+                      (Proxy :: Proxy URLMapsPatchResource)
                       r
                       u

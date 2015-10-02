@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | The Google Fonts Developer API.
+-- | The Google Fonts Developer API.
 --
 -- /See:/ <https://developers.google.com/fonts/docs/developer_api Google Fonts Developer API Reference>
 module Network.Google.Fonts

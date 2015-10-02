@@ -23,7 +23,7 @@
 module Network.Google.Resource.AndroidPublisher.Edits.APKs.Upload
     (
     -- * REST Resource
-      EditsApksUploadResource
+      EditsAPKsUploadResource
 
     -- * Creating a Request
     , editsAPKsUpload'
@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidPublisherEditsAPKsUpload@ which the
 -- 'EditsAPKsUpload'' request conforms to.
-type EditsApksUploadResource =
+type EditsAPKsUploadResource =
      Capture "packageName" Text :>
        "edits" :>
          Capture "editId" Text :>
@@ -184,6 +184,6 @@ instance GoogleRequest EditsAPKsUpload' where
               (Just AltJSON)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EditsApksUploadResource)
+                      (Proxy :: Proxy EditsAPKsUploadResource)
                       r
                       u

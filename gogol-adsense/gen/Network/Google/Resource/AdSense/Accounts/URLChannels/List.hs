@@ -24,7 +24,7 @@
 module Network.Google.Resource.AdSense.Accounts.URLChannels.List
     (
     -- * REST Resource
-      AccountsUrlChannelsListResource
+      AccountsURLChannelsListResource
 
     -- * Creating a Request
     , accountsURLChannelsList'
@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseAccountsURLChannelsList@ which the
 -- 'AccountsURLChannelsList'' request conforms to.
-type AccountsUrlChannelsListResource =
+type AccountsURLChannelsListResource =
      "accounts" :>
        Capture "accountId" Text :>
          "adclients" :>
@@ -207,6 +207,6 @@ instance GoogleRequest AccountsURLChannelsList' where
               (Just AltJSON)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsUrlChannelsListResource)
+                      (Proxy :: Proxy AccountsURLChannelsListResource)
                       r
                       u

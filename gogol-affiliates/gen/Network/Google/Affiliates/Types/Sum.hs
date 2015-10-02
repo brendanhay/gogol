@@ -20,10 +20,10 @@ import           Network.Google.Prelude
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
 data GanPublishersGetRole
-    = Advertisers
+    = GPGRAdvertisers
       -- ^ @advertisers@
       -- The requester is requesting as an advertiser.
-    | Publishers
+    | GPGRPublishers
       -- ^ @publishers@
       -- The requester is requesting as a publisher.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
@@ -32,14 +32,14 @@ instance Hashable GanPublishersGetRole
 
 instance FromText GanPublishersGetRole where
     fromText = \case
-        "advertisers" -> Just Advertisers
-        "publishers" -> Just Publishers
+        "advertisers" -> Just GPGRAdvertisers
+        "publishers" -> Just GPGRPublishers
         _ -> Nothing
 
 instance ToText GanPublishersGetRole where
     toText = \case
-        Advertisers -> "advertisers"
-        Publishers -> "publishers"
+        GPGRAdvertisers -> "advertisers"
+        GPGRPublishers -> "publishers"
 
 instance FromJSON GanPublishersGetRole where
     parseJSON = parseJSONText "GanPublishersGetRole"
@@ -343,9 +343,9 @@ instance ToJSON GanPublishersListRole where
 
 -- | The role of the author of the link.
 data GanLinksListAuthorship
-    = Advertiser
+    = GLLAAdvertiser
       -- ^ @advertiser@
-    | Publisher
+    | GLLAPublisher
       -- ^ @publisher@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -353,14 +353,14 @@ instance Hashable GanLinksListAuthorship
 
 instance FromText GanLinksListAuthorship where
     fromText = \case
-        "advertiser" -> Just Advertiser
-        "publisher" -> Just Publisher
+        "advertiser" -> Just GLLAAdvertiser
+        "publisher" -> Just GLLAPublisher
         _ -> Nothing
 
 instance ToText GanLinksListAuthorship where
     toText = \case
-        Advertiser -> "advertiser"
-        Publisher -> "publisher"
+        GLLAAdvertiser -> "advertiser"
+        GLLAPublisher -> "publisher"
 
 instance FromJSON GanLinksListAuthorship where
     parseJSON = parseJSONText "GanLinksListAuthorship"

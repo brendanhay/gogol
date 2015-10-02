@@ -10,7 +10,7 @@
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 
 -- |
--- Module      : Network.Google.Resource.IdentityToolkit.RelyingPartyy.DownloadAccount
+-- Module      : Network.Google.Resource.IdentityToolkit.RelyingParty.DownloadAccount
 -- Copyright   : (c) 2015 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
@@ -19,22 +19,22 @@
 --
 -- | Batch download user accounts.
 --
--- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingPartyyDownloadAccount@.
-module Network.Google.Resource.IdentityToolkit.RelyingPartyy.DownloadAccount
+-- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingPartyDownloadAccount@.
+module Network.Google.Resource.IdentityToolkit.RelyingParty.DownloadAccount
     (
     -- * REST Resource
-      RelyingPartyyDownloadAccountResource
+      RelyingPartyDownloadAccountResource
 
     -- * Creating a Request
-    , relyingPartyyDownloadAccount'
-    , RelyingPartyyDownloadAccount'
+    , relyingPartyDownloadAccount'
+    , RelyingPartyDownloadAccount'
 
     -- * Request Lenses
     , rpdaQuotaUser
     , rpdaPrettyPrint
     , rpdaUserIP
-    , rpdaIdentitytoolkitRelyingPartyyDownloadAccountRequest
     , rpdaKey
+    , rpdaIdentitytoolkitRelyingPartyDownloadAccountRequest
     , rpdaOAuthToken
     , rpdaFields
     ) where
@@ -42,9 +42,9 @@ module Network.Google.Resource.IdentityToolkit.RelyingPartyy.DownloadAccount
 import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @IdentitytoolkitRelyingPartyyDownloadAccount@ which the
--- 'RelyingPartyyDownloadAccount'' request conforms to.
-type RelyingPartyyDownloadAccountResource =
+-- | A resource alias for @IdentitytoolkitRelyingPartyDownloadAccount@ which the
+-- 'RelyingPartyDownloadAccount'' request conforms to.
+type RelyingPartyDownloadAccountResource =
      "downloadAccount" :>
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
@@ -54,23 +54,23 @@ type RelyingPartyyDownloadAccountResource =
                  QueryParam "fields" Text :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON]
-                       IdentitytoolkitRelyingPartyyDownloadAccountRequest
+                       IdentitytoolkitRelyingPartyDownloadAccountRequest
                        :> Post '[JSON] DownloadAccountResponse
 
 -- | Batch download user accounts.
 --
--- /See:/ 'relyingPartyyDownloadAccount'' smart constructor.
-data RelyingPartyyDownloadAccount' = RelyingPartyyDownloadAccount'
-    { _rpdaQuotaUser                                          :: !(Maybe Text)
-    , _rpdaPrettyPrint                                        :: !Bool
-    , _rpdaUserIP                                             :: !(Maybe Text)
-    , _rpdaIdentitytoolkitRelyingPartyyDownloadAccountRequest :: !IdentitytoolkitRelyingPartyyDownloadAccountRequest
-    , _rpdaKey                                                :: !(Maybe Key)
-    , _rpdaOAuthToken                                         :: !(Maybe OAuthToken)
-    , _rpdaFields                                             :: !(Maybe Text)
+-- /See:/ 'relyingPartyDownloadAccount'' smart constructor.
+data RelyingPartyDownloadAccount' = RelyingPartyDownloadAccount'
+    { _rpdaQuotaUser                                         :: !(Maybe Text)
+    , _rpdaPrettyPrint                                       :: !Bool
+    , _rpdaUserIP                                            :: !(Maybe Text)
+    , _rpdaKey                                               :: !(Maybe Key)
+    , _rpdaIdentitytoolkitRelyingPartyDownloadAccountRequest :: !IdentitytoolkitRelyingPartyDownloadAccountRequest
+    , _rpdaOAuthToken                                        :: !(Maybe OAuthToken)
+    , _rpdaFields                                            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RelyingPartyyDownloadAccount'' with the minimum fields required to make a request.
+-- | Creates a value of 'RelyingPartyDownloadAccount'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -80,23 +80,23 @@ data RelyingPartyyDownloadAccount' = RelyingPartyyDownloadAccount'
 --
 -- * 'rpdaUserIP'
 --
--- * 'rpdaIdentitytoolkitRelyingPartyyDownloadAccountRequest'
---
 -- * 'rpdaKey'
+--
+-- * 'rpdaIdentitytoolkitRelyingPartyDownloadAccountRequest'
 --
 -- * 'rpdaOAuthToken'
 --
 -- * 'rpdaFields'
-relyingPartyyDownloadAccount'
-    :: IdentitytoolkitRelyingPartyyDownloadAccountRequest -- ^ 'IdentitytoolkitRelyingPartyyDownloadAccountRequest'
-    -> RelyingPartyyDownloadAccount'
-relyingPartyyDownloadAccount' pRpdaIdentitytoolkitRelyingPartyyDownloadAccountRequest_ =
-    RelyingPartyyDownloadAccount'
+relyingPartyDownloadAccount'
+    :: IdentitytoolkitRelyingPartyDownloadAccountRequest -- ^ 'IdentitytoolkitRelyingPartyDownloadAccountRequest'
+    -> RelyingPartyDownloadAccount'
+relyingPartyDownloadAccount' pRpdaIdentitytoolkitRelyingPartyDownloadAccountRequest_ =
+    RelyingPartyDownloadAccount'
     { _rpdaQuotaUser = Nothing
     , _rpdaPrettyPrint = True
     , _rpdaUserIP = Nothing
-    , _rpdaIdentitytoolkitRelyingPartyyDownloadAccountRequest = pRpdaIdentitytoolkitRelyingPartyyDownloadAccountRequest_
     , _rpdaKey = Nothing
+    , _rpdaIdentitytoolkitRelyingPartyDownloadAccountRequest = pRpdaIdentitytoolkitRelyingPartyDownloadAccountRequest_
     , _rpdaOAuthToken = Nothing
     , _rpdaFields = Nothing
     }
@@ -104,70 +104,69 @@ relyingPartyyDownloadAccount' pRpdaIdentitytoolkitRelyingPartyyDownloadAccountRe
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-rpdaQuotaUser :: Lens' RelyingPartyyDownloadAccount' (Maybe Text)
+rpdaQuotaUser :: Lens' RelyingPartyDownloadAccount' (Maybe Text)
 rpdaQuotaUser
   = lens _rpdaQuotaUser
       (\ s a -> s{_rpdaQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-rpdaPrettyPrint :: Lens' RelyingPartyyDownloadAccount' Bool
+rpdaPrettyPrint :: Lens' RelyingPartyDownloadAccount' Bool
 rpdaPrettyPrint
   = lens _rpdaPrettyPrint
       (\ s a -> s{_rpdaPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rpdaUserIP :: Lens' RelyingPartyyDownloadAccount' (Maybe Text)
+rpdaUserIP :: Lens' RelyingPartyDownloadAccount' (Maybe Text)
 rpdaUserIP
   = lens _rpdaUserIP (\ s a -> s{_rpdaUserIP = a})
-
--- | Multipart request metadata.
-rpdaIdentitytoolkitRelyingPartyyDownloadAccountRequest :: Lens' RelyingPartyyDownloadAccount' IdentitytoolkitRelyingPartyyDownloadAccountRequest
-rpdaIdentitytoolkitRelyingPartyyDownloadAccountRequest
-  = lens
-      _rpdaIdentitytoolkitRelyingPartyyDownloadAccountRequest
-      (\ s a ->
-         s{_rpdaIdentitytoolkitRelyingPartyyDownloadAccountRequest
-             = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rpdaKey :: Lens' RelyingPartyyDownloadAccount' (Maybe Key)
+rpdaKey :: Lens' RelyingPartyDownloadAccount' (Maybe Key)
 rpdaKey = lens _rpdaKey (\ s a -> s{_rpdaKey = a})
 
+-- | Multipart request metadata.
+rpdaIdentitytoolkitRelyingPartyDownloadAccountRequest :: Lens' RelyingPartyDownloadAccount' IdentitytoolkitRelyingPartyDownloadAccountRequest
+rpdaIdentitytoolkitRelyingPartyDownloadAccountRequest
+  = lens
+      _rpdaIdentitytoolkitRelyingPartyDownloadAccountRequest
+      (\ s a ->
+         s{_rpdaIdentitytoolkitRelyingPartyDownloadAccountRequest
+             = a})
+
 -- | OAuth 2.0 token for the current user.
-rpdaOAuthToken :: Lens' RelyingPartyyDownloadAccount' (Maybe OAuthToken)
+rpdaOAuthToken :: Lens' RelyingPartyDownloadAccount' (Maybe OAuthToken)
 rpdaOAuthToken
   = lens _rpdaOAuthToken
       (\ s a -> s{_rpdaOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-rpdaFields :: Lens' RelyingPartyyDownloadAccount' (Maybe Text)
+rpdaFields :: Lens' RelyingPartyDownloadAccount' (Maybe Text)
 rpdaFields
   = lens _rpdaFields (\ s a -> s{_rpdaFields = a})
 
-instance GoogleAuth RelyingPartyyDownloadAccount'
+instance GoogleAuth RelyingPartyDownloadAccount'
          where
         authKey = rpdaKey . _Just
         authToken = rpdaOAuthToken . _Just
 
-instance GoogleRequest RelyingPartyyDownloadAccount'
+instance GoogleRequest RelyingPartyDownloadAccount'
          where
-        type Rs RelyingPartyyDownloadAccount' =
+        type Rs RelyingPartyDownloadAccount' =
              DownloadAccountResponse
         request = requestWithRoute defReq identityToolkitURL
-        requestWithRoute r u
-          RelyingPartyyDownloadAccount'{..}
+        requestWithRoute r u RelyingPartyDownloadAccount'{..}
           = go _rpdaQuotaUser (Just _rpdaPrettyPrint)
               _rpdaUserIP
               _rpdaKey
               _rpdaOAuthToken
               _rpdaFields
               (Just AltJSON)
-              _rpdaIdentitytoolkitRelyingPartyyDownloadAccountRequest
+              _rpdaIdentitytoolkitRelyingPartyDownloadAccountRequest
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RelyingPartyyDownloadAccountResource)
+                      (Proxy :: Proxy RelyingPartyDownloadAccountResource)
                       r
                       u

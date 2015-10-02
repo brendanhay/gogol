@@ -26,7 +26,7 @@
 module Network.Google.Resource.AndroidPublisher.Edits.APKs.Addexternallyhosted
     (
     -- * REST Resource
-      EditsApksAddexternallyhostedResource
+      EditsAPKsAddexternallyhostedResource
 
     -- * Creating a Request
     , editsAPKsAddexternallyhosted'
@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidPublisherEditsAPKsAddexternallyhosted@ which the
 -- 'EditsAPKsAddexternallyhosted'' request conforms to.
-type EditsApksAddexternallyhostedResource =
+type EditsAPKsAddexternallyhostedResource =
      Capture "packageName" Text :>
        "edits" :>
          Capture "editId" Text :>
@@ -201,6 +201,6 @@ instance GoogleRequest EditsAPKsAddexternallyhosted'
               _eapkaAPKsAddExternallyHostedRequest
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EditsApksAddexternallyhostedResource)
+                      (Proxy :: Proxy EditsAPKsAddexternallyhostedResource)
                       r
                       u

@@ -20,7 +20,7 @@
 -- | Get an Order given its id. See _Authentication and Authorization rules_
 -- and _Get methods rules_ for more information about this method.
 --
--- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @PlaymoviesPartynerAccountsOrdersGet@.
+-- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @PlaymoviesPartnerAccountsOrdersGet@.
 module Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.Get
     (
     -- * REST Resource
@@ -50,7 +50,7 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.Get
 import           Network.Google.PlayMoviesPartner.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlaymoviesPartynerAccountsOrdersGet@ which the
+-- | A resource alias for @PlaymoviesPartnerAccountsOrdersGet@ which the
 -- 'AccountsOrdersGet'' request conforms to.
 type AccountsOrdersGetResource =
      "v1" :>

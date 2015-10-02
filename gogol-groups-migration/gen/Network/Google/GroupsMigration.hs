@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | Groups Migration Api.
+-- | Groups Migration Api.
 --
 -- /See:/ <https://developers.google.com/google-apps/groups-migration/ Groups Migration API Reference>
 module Network.Google.GroupsMigration

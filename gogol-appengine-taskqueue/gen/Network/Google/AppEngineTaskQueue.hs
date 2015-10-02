@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | Lets you access a Google App Engine Pull Task Queue over REST.
+-- | Lets you access a Google App Engine Pull Task Queue over REST.
 --
 -- /See:/ <https://developers.google.com/appengine/docs/python/taskqueue/rest TaskQueue API Reference>
 module Network.Google.AppEngineTaskQueue

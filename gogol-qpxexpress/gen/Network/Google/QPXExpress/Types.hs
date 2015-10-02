@@ -85,7 +85,7 @@ module Network.Google.QPXExpress.Types
     , liConnectionDuration
     , liDuration
     , liMileage
-    , liDePartyureTime
+    , liDePartureTime
 
     -- * AirportData
     , AirportData
@@ -234,7 +234,7 @@ module Network.Google.QPXExpress.Types
     , sliDate
     , sliMaxConnectionDuration
     , sliPreferredCabin
-    , sliPermittedDePartyureTime
+    , sliPermittedDePartureTime
     , sliPermittedCarrier
     , sliAlliance
 

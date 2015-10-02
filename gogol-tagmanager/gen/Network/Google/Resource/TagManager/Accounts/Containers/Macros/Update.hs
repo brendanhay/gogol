@@ -30,17 +30,17 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Macros.Update
     , AccountsContainersMacrosUpdate'
 
     -- * Request Lenses
-    , acmucQuotaUser
-    , acmucPrettyPrint
-    , acmucMacro
-    , acmucContainerId
-    , acmucUserIP
-    , acmucFingerprint
-    , acmucAccountId
-    , acmucKey
-    , acmucMacroId
-    , acmucOAuthToken
-    , acmucFields
+    , acmuQuotaUser
+    , acmuPrettyPrint
+    , acmuMacro
+    , acmuContainerId
+    , acmuUserIP
+    , acmuFingerprint
+    , acmuAccountId
+    , acmuKey
+    , acmuMacroId
+    , acmuOAuthToken
+    , acmuFields
     ) where
 
 import           Network.Google.Prelude
@@ -69,135 +69,135 @@ type AccountsContainersMacrosUpdateResource =
 --
 -- /See:/ 'accountsContainersMacrosUpdate'' smart constructor.
 data AccountsContainersMacrosUpdate' = AccountsContainersMacrosUpdate'
-    { _acmucQuotaUser   :: !(Maybe Text)
-    , _acmucPrettyPrint :: !Bool
-    , _acmucMacro       :: !Macro
-    , _acmucContainerId :: !Text
-    , _acmucUserIP      :: !(Maybe Text)
-    , _acmucFingerprint :: !(Maybe Text)
-    , _acmucAccountId   :: !Text
-    , _acmucKey         :: !(Maybe Key)
-    , _acmucMacroId     :: !Text
-    , _acmucOAuthToken  :: !(Maybe OAuthToken)
-    , _acmucFields      :: !(Maybe Text)
+    { _acmuQuotaUser   :: !(Maybe Text)
+    , _acmuPrettyPrint :: !Bool
+    , _acmuMacro       :: !Macro
+    , _acmuContainerId :: !Text
+    , _acmuUserIP      :: !(Maybe Text)
+    , _acmuFingerprint :: !(Maybe Text)
+    , _acmuAccountId   :: !Text
+    , _acmuKey         :: !(Maybe Key)
+    , _acmuMacroId     :: !Text
+    , _acmuOAuthToken  :: !(Maybe OAuthToken)
+    , _acmuFields      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersMacrosUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acmucQuotaUser'
+-- * 'acmuQuotaUser'
 --
--- * 'acmucPrettyPrint'
+-- * 'acmuPrettyPrint'
 --
--- * 'acmucMacro'
+-- * 'acmuMacro'
 --
--- * 'acmucContainerId'
+-- * 'acmuContainerId'
 --
--- * 'acmucUserIP'
+-- * 'acmuUserIP'
 --
--- * 'acmucFingerprint'
+-- * 'acmuFingerprint'
 --
--- * 'acmucAccountId'
+-- * 'acmuAccountId'
 --
--- * 'acmucKey'
+-- * 'acmuKey'
 --
--- * 'acmucMacroId'
+-- * 'acmuMacroId'
 --
--- * 'acmucOAuthToken'
+-- * 'acmuOAuthToken'
 --
--- * 'acmucFields'
+-- * 'acmuFields'
 accountsContainersMacrosUpdate'
     :: Macro -- ^ 'Macro'
     -> Text -- ^ 'containerId'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'macroId'
     -> AccountsContainersMacrosUpdate'
-accountsContainersMacrosUpdate' pAcmucMacro_ pAcmucContainerId_ pAcmucAccountId_ pAcmucMacroId_ =
+accountsContainersMacrosUpdate' pAcmuMacro_ pAcmuContainerId_ pAcmuAccountId_ pAcmuMacroId_ =
     AccountsContainersMacrosUpdate'
-    { _acmucQuotaUser = Nothing
-    , _acmucPrettyPrint = True
-    , _acmucMacro = pAcmucMacro_
-    , _acmucContainerId = pAcmucContainerId_
-    , _acmucUserIP = Nothing
-    , _acmucFingerprint = Nothing
-    , _acmucAccountId = pAcmucAccountId_
-    , _acmucKey = Nothing
-    , _acmucMacroId = pAcmucMacroId_
-    , _acmucOAuthToken = Nothing
-    , _acmucFields = Nothing
+    { _acmuQuotaUser = Nothing
+    , _acmuPrettyPrint = True
+    , _acmuMacro = pAcmuMacro_
+    , _acmuContainerId = pAcmuContainerId_
+    , _acmuUserIP = Nothing
+    , _acmuFingerprint = Nothing
+    , _acmuAccountId = pAcmuAccountId_
+    , _acmuKey = Nothing
+    , _acmuMacroId = pAcmuMacroId_
+    , _acmuOAuthToken = Nothing
+    , _acmuFields = Nothing
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-acmucQuotaUser :: Lens' AccountsContainersMacrosUpdate' (Maybe Text)
-acmucQuotaUser
-  = lens _acmucQuotaUser
-      (\ s a -> s{_acmucQuotaUser = a})
+acmuQuotaUser :: Lens' AccountsContainersMacrosUpdate' (Maybe Text)
+acmuQuotaUser
+  = lens _acmuQuotaUser
+      (\ s a -> s{_acmuQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-acmucPrettyPrint :: Lens' AccountsContainersMacrosUpdate' Bool
-acmucPrettyPrint
-  = lens _acmucPrettyPrint
-      (\ s a -> s{_acmucPrettyPrint = a})
+acmuPrettyPrint :: Lens' AccountsContainersMacrosUpdate' Bool
+acmuPrettyPrint
+  = lens _acmuPrettyPrint
+      (\ s a -> s{_acmuPrettyPrint = a})
 
 -- | Multipart request metadata.
-acmucMacro :: Lens' AccountsContainersMacrosUpdate' Macro
-acmucMacro
-  = lens _acmucMacro (\ s a -> s{_acmucMacro = a})
+acmuMacro :: Lens' AccountsContainersMacrosUpdate' Macro
+acmuMacro
+  = lens _acmuMacro (\ s a -> s{_acmuMacro = a})
 
 -- | The GTM Container ID.
-acmucContainerId :: Lens' AccountsContainersMacrosUpdate' Text
-acmucContainerId
-  = lens _acmucContainerId
-      (\ s a -> s{_acmucContainerId = a})
+acmuContainerId :: Lens' AccountsContainersMacrosUpdate' Text
+acmuContainerId
+  = lens _acmuContainerId
+      (\ s a -> s{_acmuContainerId = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-acmucUserIP :: Lens' AccountsContainersMacrosUpdate' (Maybe Text)
-acmucUserIP
-  = lens _acmucUserIP (\ s a -> s{_acmucUserIP = a})
+acmuUserIP :: Lens' AccountsContainersMacrosUpdate' (Maybe Text)
+acmuUserIP
+  = lens _acmuUserIP (\ s a -> s{_acmuUserIP = a})
 
 -- | When provided, this fingerprint must match the fingerprint of the macro
 -- in storage.
-acmucFingerprint :: Lens' AccountsContainersMacrosUpdate' (Maybe Text)
-acmucFingerprint
-  = lens _acmucFingerprint
-      (\ s a -> s{_acmucFingerprint = a})
+acmuFingerprint :: Lens' AccountsContainersMacrosUpdate' (Maybe Text)
+acmuFingerprint
+  = lens _acmuFingerprint
+      (\ s a -> s{_acmuFingerprint = a})
 
 -- | The GTM Account ID.
-acmucAccountId :: Lens' AccountsContainersMacrosUpdate' Text
-acmucAccountId
-  = lens _acmucAccountId
-      (\ s a -> s{_acmucAccountId = a})
+acmuAccountId :: Lens' AccountsContainersMacrosUpdate' Text
+acmuAccountId
+  = lens _acmuAccountId
+      (\ s a -> s{_acmuAccountId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acmucKey :: Lens' AccountsContainersMacrosUpdate' (Maybe Key)
-acmucKey = lens _acmucKey (\ s a -> s{_acmucKey = a})
+acmuKey :: Lens' AccountsContainersMacrosUpdate' (Maybe Key)
+acmuKey = lens _acmuKey (\ s a -> s{_acmuKey = a})
 
 -- | The GTM Macro ID.
-acmucMacroId :: Lens' AccountsContainersMacrosUpdate' Text
-acmucMacroId
-  = lens _acmucMacroId (\ s a -> s{_acmucMacroId = a})
+acmuMacroId :: Lens' AccountsContainersMacrosUpdate' Text
+acmuMacroId
+  = lens _acmuMacroId (\ s a -> s{_acmuMacroId = a})
 
 -- | OAuth 2.0 token for the current user.
-acmucOAuthToken :: Lens' AccountsContainersMacrosUpdate' (Maybe OAuthToken)
-acmucOAuthToken
-  = lens _acmucOAuthToken
-      (\ s a -> s{_acmucOAuthToken = a})
+acmuOAuthToken :: Lens' AccountsContainersMacrosUpdate' (Maybe OAuthToken)
+acmuOAuthToken
+  = lens _acmuOAuthToken
+      (\ s a -> s{_acmuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-acmucFields :: Lens' AccountsContainersMacrosUpdate' (Maybe Text)
-acmucFields
-  = lens _acmucFields (\ s a -> s{_acmucFields = a})
+acmuFields :: Lens' AccountsContainersMacrosUpdate' (Maybe Text)
+acmuFields
+  = lens _acmuFields (\ s a -> s{_acmuFields = a})
 
 instance GoogleAuth AccountsContainersMacrosUpdate'
          where
-        authKey = acmucKey . _Just
-        authToken = acmucOAuthToken . _Just
+        authKey = acmuKey . _Just
+        authToken = acmuOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersMacrosUpdate' where
@@ -205,17 +205,17 @@ instance GoogleRequest
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersMacrosUpdate'{..}
-          = go _acmucQuotaUser (Just _acmucPrettyPrint)
-              _acmucContainerId
-              _acmucUserIP
-              _acmucFingerprint
-              _acmucAccountId
-              _acmucKey
-              _acmucMacroId
-              _acmucOAuthToken
-              _acmucFields
+          = go _acmuQuotaUser (Just _acmuPrettyPrint)
+              _acmuContainerId
+              _acmuUserIP
+              _acmuFingerprint
+              _acmuAccountId
+              _acmuKey
+              _acmuMacroId
+              _acmuOAuthToken
+              _acmuFields
               (Just AltJSON)
-              _acmucMacro
+              _acmuMacro
           where go
                   = clientWithRoute
                       (Proxy ::

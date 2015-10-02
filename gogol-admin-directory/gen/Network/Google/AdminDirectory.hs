@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | The Admin SDK Directory API lets you view and manage enterprise
+-- | The Admin SDK Directory API lets you view and manage enterprise
 -- resources such as users and groups, administrative notifications,
 -- security features, and more.
 --
@@ -620,7 +620,7 @@ module Network.Google.AdminDirectory
     -- ** UserOrganization
     , UserOrganization
     , userOrganization
-    , uoDePartyment
+    , uoDePartment
     , uoLocation
     , uoCostCenter
     , uoDomain

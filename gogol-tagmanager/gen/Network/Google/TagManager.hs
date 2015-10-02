@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | API for accessing Tag Manager accounts and containers.
+-- | API for accessing Tag Manager accounts and containers.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference>
 module Network.Google.TagManager
@@ -72,7 +72,7 @@ module Network.Google.TagManager
     , module Network.Google.Resource.TagManager.Accounts.Containers.Macros.Update
 
     -- ** TagManagerAccountsContainersMove_foldersUpdate
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Move_folders.Update
+    , module Network.Google.Resource.TagManager.Accounts.Containers.MoveFolders.Update
 
     -- ** TagManagerAccountsContainersRulesCreate
     , module Network.Google.Resource.TagManager.Accounts.Containers.Rules.Create
@@ -508,7 +508,7 @@ import           Network.Google.Resource.TagManager.Accounts.Containers.Macros.D
 import           Network.Google.Resource.TagManager.Accounts.Containers.Macros.Get
 import           Network.Google.Resource.TagManager.Accounts.Containers.Macros.List
 import           Network.Google.Resource.TagManager.Accounts.Containers.Macros.Update
-import           Network.Google.Resource.TagManager.Accounts.Containers.Move_folders.Update
+import           Network.Google.Resource.TagManager.Accounts.Containers.MoveFolders.Update
 import           Network.Google.Resource.TagManager.Accounts.Containers.Rules.Create
 import           Network.Google.Resource.TagManager.Accounts.Containers.Rules.Delete
 import           Network.Google.Resource.TagManager.Accounts.Containers.Rules.Get
@@ -582,7 +582,7 @@ type TagManagerAPI =
        :<|> AccountsContainersVersionsDeleteResource
        :<|> AccountsContainersVersionsUpdateResource
        :<|> AccountsContainersVersionsPublishResource
-       :<|> AccountsContainersMove_foldersUpdateResource
+       :<|> AccountsContainersMoveFoldersUpdateResource
        :<|> AccountsContainersMacrosListResource
        :<|> AccountsContainersMacrosGetResource
        :<|> AccountsContainersMacrosCreateResource

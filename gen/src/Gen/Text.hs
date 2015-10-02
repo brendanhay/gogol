@@ -201,6 +201,7 @@ upperAcronym x = Fold.foldl' (flip (uncurry RE.replaceAll)) x xs
          , ("Sql",           "SQL")
          , ("Apk",           "APK")
          , ("Os",            "OS")
+         , ("Oob",           "OOB")
 
          , ("access",      "Access")
          , ("account",     "Account")
@@ -226,7 +227,7 @@ upperAcronym x = Fold.foldl' (flip (uncurry RE.replaceAll)) x xs
          , ("monitor",     "Monitor")
          , ("note",        "Note")
          , ("offer",       "Offer")
-         , ("part",        "Party")
+         , ("part",        "Part")
          , ("proper",      "Proper")
          , ("publish",     "Publish")
          , ("resource",    "Resource")
@@ -240,6 +241,9 @@ upperAcronym x = Fold.foldl' (flip (uncurry RE.replaceAll)) x xs
          , ("observe",     "Observe")
          , ("order",       "Order")
          , ("position",    "Position")
+         , ("crawl",       "Crawl")
+         , ("error",       "Error")
+         , ("sample",      "Sample")
          ]
 
 acronyms :: [(String, String)]

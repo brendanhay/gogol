@@ -24,7 +24,7 @@
 module Network.Google.Resource.Compute.URLMaps.List
     (
     -- * REST Resource
-      UrlMapsListResource
+      URLMapsListResource
 
     -- * Creating a Request
     , uRLMapsList'
@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeURLMapsList@ which the
 -- 'URLMapsList'' request conforms to.
-type UrlMapsListResource =
+type URLMapsListResource =
      Capture "project" Text :>
        "global" :>
          "urlMaps" :>
@@ -208,6 +208,6 @@ instance GoogleRequest URLMapsList' where
               (Just AltJSON)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UrlMapsListResource)
+                      (Proxy :: Proxy URLMapsListResource)
                       r
                       u

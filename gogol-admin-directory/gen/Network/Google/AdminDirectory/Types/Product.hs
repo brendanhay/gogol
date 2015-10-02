@@ -3083,7 +3083,7 @@ instance ToJSON UserWebsite where
 --
 -- /See:/ 'userOrganization' smart constructor.
 data UserOrganization = UserOrganization
-    { _uoDePartyment :: !(Maybe Text)
+    { _uoDePartment  :: !(Maybe Text)
     , _uoLocation    :: !(Maybe Text)
     , _uoCostCenter  :: !(Maybe Text)
     , _uoDomain      :: !(Maybe Text)
@@ -3100,7 +3100,7 @@ data UserOrganization = UserOrganization
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uoDePartyment'
+-- * 'uoDePartment'
 --
 -- * 'uoLocation'
 --
@@ -3125,7 +3125,7 @@ userOrganization
     :: UserOrganization
 userOrganization =
     UserOrganization
-    { _uoDePartyment = Nothing
+    { _uoDePartment = Nothing
     , _uoLocation = Nothing
     , _uoCostCenter = Nothing
     , _uoDomain = Nothing
@@ -3139,10 +3139,9 @@ userOrganization =
     }
 
 -- | Department within the organization.
-uoDePartyment :: Lens' UserOrganization (Maybe Text)
-uoDePartyment
-  = lens _uoDePartyment
-      (\ s a -> s{_uoDePartyment = a})
+uoDePartment :: Lens' UserOrganization (Maybe Text)
+uoDePartment
+  = lens _uoDePartment (\ s a -> s{_uoDePartment = a})
 
 -- | Location of the organization. This need not be fully qualified address.
 uoLocation :: Lens' UserOrganization (Maybe Text)
@@ -3214,7 +3213,7 @@ instance ToJSON UserOrganization where
         toJSON UserOrganization{..}
           = object
               (catMaybes
-                 [("department" .=) <$> _uoDePartyment,
+                 [("department" .=) <$> _uoDePartment,
                   ("location" .=) <$> _uoLocation,
                   ("costCenter" .=) <$> _uoCostCenter,
                   ("domain" .=) <$> _uoDomain,

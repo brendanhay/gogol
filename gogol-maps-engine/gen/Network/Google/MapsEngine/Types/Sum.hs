@@ -658,7 +658,7 @@ instance ToJSON GeoJSONLineStringType where
 
 -- | The type of the vector style. Currently, only displayRule is supported.
 data VectorStyleType
-    = DisplayRule
+    = VSTDisplayRule
       -- ^ @displayRule@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -666,12 +666,12 @@ instance Hashable VectorStyleType
 
 instance FromText VectorStyleType where
     fromText = \case
-        "displayRule" -> Just DisplayRule
+        "displayRule" -> Just VSTDisplayRule
         _ -> Nothing
 
 instance ToText VectorStyleType where
     toText = \case
-        DisplayRule -> "displayRule"
+        VSTDisplayRule -> "displayRule"
 
 instance FromJSON VectorStyleType where
     parseJSON = parseJSONText "VectorStyleType"
@@ -907,7 +907,7 @@ instance ToJSON MapsEngineAssetsListRole where
 
 -- | Identifies this object as a MapLayer.
 data MapLayerType
-    = Layer
+    = MLTLayer
       -- ^ @layer@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -915,12 +915,12 @@ instance Hashable MapLayerType
 
 instance FromText MapLayerType where
     fromText = \case
-        "layer" -> Just Layer
+        "layer" -> Just MLTLayer
         _ -> Nothing
 
 instance ToText MapLayerType where
     toText = \case
-        Layer -> "layer"
+        MLTLayer -> "layer"
 
 instance FromJSON MapLayerType where
     parseJSON = parseJSONText "MapLayerType"

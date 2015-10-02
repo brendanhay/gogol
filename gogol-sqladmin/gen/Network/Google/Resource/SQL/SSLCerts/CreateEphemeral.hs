@@ -26,7 +26,7 @@
 module Network.Google.Resource.SQL.SSLCerts.CreateEphemeral
     (
     -- * REST Resource
-      SslCertsCreateEphemeralResource
+      SSLCertsCreateEphemeralResource
 
     -- * Creating a Request
     , sSLCertsCreateEphemeral'
@@ -49,7 +49,7 @@ import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SQLSSLCertsCreateEphemeral@ which the
 -- 'SSLCertsCreateEphemeral'' request conforms to.
-type SslCertsCreateEphemeralResource =
+type SSLCertsCreateEphemeralResource =
      "projects" :>
        Capture "project" Text :>
          "instances" :>
@@ -194,6 +194,6 @@ instance GoogleRequest SSLCertsCreateEphemeral' where
               _scceSSLCertsCreateEphemeralRequest
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy SslCertsCreateEphemeralResource)
+                      (Proxy :: Proxy SSLCertsCreateEphemeralResource)
                       r
                       u

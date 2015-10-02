@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | Lets you analyze the performance of a web page and get tailored
+-- | Lets you analyze the performance of a web page and get tailored
 -- suggestions to make that page faster.
 --
 -- /See:/ <https://developers.google.com/speed/docs/insights/v2/getting-started PageSpeed Insights API Reference>

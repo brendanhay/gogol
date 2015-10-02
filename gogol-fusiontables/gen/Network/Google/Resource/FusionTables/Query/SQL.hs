@@ -24,7 +24,7 @@
 module Network.Google.Resource.FusionTables.Query.SQL
     (
     -- * REST Resource
-      QuerySqlResource
+      QuerySQLResource
 
     -- * Creating a Request
     , querySQL'
@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesQuerySQL@ which the
 -- 'QuerySQL'' request conforms to.
-type QuerySqlResource =
+type QuerySQLResource =
      "query" :>
        QueryParam "typed" Bool :>
          QueryParam "quotaUser" Text :>
@@ -195,7 +195,7 @@ instance GoogleRequest QuerySQL' where
               _qsqlFields
               (Just AltJSON)
           where go :<|> _
-                  = clientWithRoute (Proxy :: Proxy QuerySqlResource) r
+                  = clientWithRoute (Proxy :: Proxy QuerySQLResource) r
                       u
 
 instance GoogleRequest QuerySQL' where
@@ -212,5 +212,5 @@ instance GoogleRequest QuerySQL' where
               _qsqlFields
               (Just Media)
           where go :<|> _
-                  = clientWithRoute (Proxy :: Proxy QuerySqlResource) r
+                  = clientWithRoute (Proxy :: Proxy QuerySQLResource) r
                       u

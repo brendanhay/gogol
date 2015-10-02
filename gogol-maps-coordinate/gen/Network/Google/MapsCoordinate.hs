@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | Lets you view and manage jobs in a Coordinate team.
+-- | Lets you view and manage jobs in a Coordinate team.
 --
 -- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference>
 module Network.Google.MapsCoordinate

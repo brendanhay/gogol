@@ -24,7 +24,7 @@
 module Network.Google.Resource.Compute.VPNTunnels.List
     (
     -- * REST Resource
-      VpnTunnelsListResource
+      VPNTunnelsListResource
 
     -- * Creating a Request
     , vPNTunnelsList'
@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeVPNTunnelsList@ which the
 -- 'VPNTunnelsList'' request conforms to.
-type VpnTunnelsListResource =
+type VPNTunnelsListResource =
      Capture "project" Text :>
        "regions" :>
          Capture "region" Text :>
@@ -222,6 +222,6 @@ instance GoogleRequest VPNTunnelsList' where
               (Just AltJSON)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy VpnTunnelsListResource)
+                      (Proxy :: Proxy VPNTunnelsListResource)
                       r
                       u

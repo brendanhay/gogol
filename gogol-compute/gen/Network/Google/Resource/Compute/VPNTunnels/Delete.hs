@@ -23,7 +23,7 @@
 module Network.Google.Resource.Compute.VPNTunnels.Delete
     (
     -- * REST Resource
-      VpnTunnelsDeleteResource
+      VPNTunnelsDeleteResource
 
     -- * Creating a Request
     , vPNTunnelsDelete'
@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeVPNTunnelsDelete@ which the
 -- 'VPNTunnelsDelete'' request conforms to.
-type VpnTunnelsDeleteResource =
+type VPNTunnelsDeleteResource =
      Capture "project" Text :>
        "regions" :>
          Capture "region" Text :>
@@ -183,6 +183,6 @@ instance GoogleRequest VPNTunnelsDelete' where
               (Just AltJSON)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy VpnTunnelsDeleteResource)
+                      (Proxy :: Proxy VPNTunnelsDeleteResource)
                       r
                       u

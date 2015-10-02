@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | Gives Ad Exchange seller users access to their inventory and the ability
+-- | Gives Ad Exchange seller users access to their inventory and the ability
 -- to generate reports
 --
 -- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference>
@@ -254,7 +254,7 @@ type AdExchangeSellerAPI =
        :<|> AccountsReportsSavedGenerateResource
        :<|> AccountsReportsGenerateResource
        :<|> AccountsAlertsListResource
-       :<|> AccountsUrlChannelsListResource
+       :<|> AccountsURLChannelsListResource
        :<|> AccountsCustomChannelsListResource
        :<|> AccountsCustomChannelsGetResource
        :<|> AccountsPreferredDealsListResource

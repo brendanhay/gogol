@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | API for spectrum-management functions.
+-- | API for spectrum-management functions.
 --
 -- /See:/ <http://developers.google.com/spectrum Google Spectrum Database API Reference>
 module Network.Google.Spectrum

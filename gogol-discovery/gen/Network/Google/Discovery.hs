@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | Lets you discover information about other Google APIs, such as what APIs
+-- | Lets you discover information about other Google APIs, such as what APIs
 -- are available, the resource and method details for each API.
 --
 -- /See:/ <https://developers.google.com/discovery/ APIs Discovery Service Reference>
@@ -97,7 +97,7 @@ module Network.Google.Discovery
     , RestMethodMediaUploadProtocolsSimple
     , restMethodMediaUploadProtocolsSimple
     , rmmupsPath
-    , rmmupsMultiParty
+    , rmmupsMultiPart
 
     -- ** RestDescriptionAuthOAuth2
     , RestDescriptionAuthOAuth2
@@ -243,7 +243,7 @@ module Network.Google.Discovery
     , RestMethodMediaUploadProtocolsResumable
     , restMethodMediaUploadProtocolsResumable
     , rmmuprPath
-    , rmmuprMultiParty
+    , rmmuprMultiPart
 
     -- ** RestMethodRequest
     , RestMethodRequest
@@ -262,7 +262,7 @@ TODO
 -}
 
 type DiscoveryAPI =
-     ApisListResource :<|> ApisGetRestResource
+     APIsListResource :<|> APIsGetRestResource
 
 discoveryAPI :: Proxy DiscoveryAPI
 discoveryAPI = Proxy

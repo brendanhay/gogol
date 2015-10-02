@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | Lets you search for books and manage your Google Books library.
+-- | Lets you search for books and manage your Google Books library.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference>
 module Network.Google.Books

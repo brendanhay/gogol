@@ -23,7 +23,7 @@
 module Network.Google.Resource.URLShortener.URL.Insert
     (
     -- * REST Resource
-      UrlInsertResource
+      URLInsertResource
 
     -- * Creating a Request
     , uRLInsert'
@@ -44,7 +44,7 @@ import           Network.Google.URLShortener.Types
 
 -- | A resource alias for @URLshortenerURLInsert@ which the
 -- 'URLInsert'' request conforms to.
-type UrlInsertResource =
+type URLInsertResource =
      "url" :>
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
@@ -151,6 +151,6 @@ instance GoogleRequest URLInsert' where
               (Just AltJSON)
               _uiURL
           where go
-                  = clientWithRoute (Proxy :: Proxy UrlInsertResource)
+                  = clientWithRoute (Proxy :: Proxy URLInsertResource)
                       r
                       u

@@ -23,7 +23,7 @@
 module Network.Google.Resource.Calendar.ACL.Delete
     (
     -- * REST Resource
-      AclDeleteResource
+      ACLDeleteResource
 
     -- * Creating a Request
     , aCLDelete'
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarACLDelete@ which the
 -- 'ACLDelete'' request conforms to.
-type AclDeleteResource =
+type ACLDeleteResource =
      "calendars" :>
        Capture "calendarId" Text :>
          "acl" :>
@@ -167,6 +167,6 @@ instance GoogleRequest ACLDelete' where
               _adFields
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy AclDeleteResource)
+                  = clientWithRoute (Proxy :: Proxy ACLDeleteResource)
                       r
                       u

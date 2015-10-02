@@ -23,7 +23,7 @@
 module Network.Google.Resource.AdSenseHost.URLChannels.Delete
     (
     -- * REST Resource
-      UrlChannelsDeleteResource
+      URLChannelsDeleteResource
 
     -- * Creating a Request
     , uRLChannelsDelete'
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 
 -- | A resource alias for @AdsensehostURLChannelsDelete@ which the
 -- 'URLChannelsDelete'' request conforms to.
-type UrlChannelsDeleteResource =
+type URLChannelsDeleteResource =
      "adclients" :>
        Capture "adClientId" Text :>
          "urlchannels" :>
@@ -173,6 +173,6 @@ instance GoogleRequest URLChannelsDelete' where
               (Just AltJSON)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UrlChannelsDeleteResource)
+                      (Proxy :: Proxy URLChannelsDeleteResource)
                       r
                       u

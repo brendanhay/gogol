@@ -406,7 +406,7 @@ module Network.Google.AdminDirectory.Types
     -- * UserOrganization
     , UserOrganization
     , userOrganization
-    , uoDePartyment
+    , uoDePartment
     , uoLocation
     , uoCostCenter
     , uoDomain

@@ -24,7 +24,7 @@
 module Network.Google.Resource.AndroidPublisher.Edits.APKListings.Patch
     (
     -- * REST Resource
-      EditsApkListingsPatchResource
+      EditsAPKListingsPatchResource
 
     -- * Creating a Request
     , editsAPKListingsPatch'
@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidPublisherEditsAPKListingsPatch@ which the
 -- 'EditsAPKListingsPatch'' request conforms to.
-type EditsApkListingsPatchResource =
+type EditsAPKListingsPatchResource =
      Capture "packageName" Text :>
        "edits" :>
          Capture "editId" Text :>
@@ -224,6 +224,6 @@ instance GoogleRequest EditsAPKListingsPatch' where
               _eapklpAPKListing
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EditsApkListingsPatchResource)
+                      (Proxy :: Proxy EditsAPKListingsPatchResource)
                       r
                       u

@@ -65,8 +65,8 @@ module Network.Google.WebmasterTools.Types
     , ucecCount
     , ucecTimestamp
 
-    -- * WebmastersURLcrawlerrorscountsQueryCategory
-    , WebmastersURLcrawlerrorscountsQueryCategory (..)
+    -- * WebmastersURLCrawlErrorscountsQueryCategory
+    , WebmastersURLCrawlErrorscountsQueryCategory (..)
 
     -- * SearchAnalyticsQueryResponse
     , SearchAnalyticsQueryResponse
@@ -74,14 +74,14 @@ module Network.Google.WebmasterTools.Types
     , saqrRows
     , saqrResponseAggregationType
 
-    -- * WebmastersURLcrawlerrorssamplesListPlatform
-    , WebmastersURLcrawlerrorssamplesListPlatform (..)
+    -- * WebmastersURLCrawlErrorsSamplesListPlatform
+    , WebmastersURLCrawlErrorsSamplesListPlatform (..)
 
-    -- * WebmastersURLcrawlerrorssamplesGetCategory
-    , WebmastersURLcrawlerrorssamplesGetCategory (..)
+    -- * WebmastersURLCrawlErrorsSamplesGetCategory
+    , WebmastersURLCrawlErrorsSamplesGetCategory (..)
 
-    -- * WebmastersURLcrawlerrorssamplesMarkAsFixedPlatform
-    , WebmastersURLcrawlerrorssamplesMarkAsFixedPlatform (..)
+    -- * WebmastersURLCrawlErrorsSamplesMarkAsFixedPlatform
+    , WebmastersURLCrawlErrorsSamplesMarkAsFixedPlatform (..)
 
     -- * URLCrawlErrorsSamplesListResponse
     , URLCrawlErrorsSamplesListResponse
@@ -120,11 +120,11 @@ module Network.Google.WebmasterTools.Types
     , wsType
     , wsErrors
 
-    -- * WebmastersURLcrawlerrorssamplesMarkAsFixedCategory
-    , WebmastersURLcrawlerrorssamplesMarkAsFixedCategory (..)
+    -- * WebmastersURLCrawlErrorsSamplesMarkAsFixedCategory
+    , WebmastersURLCrawlErrorsSamplesMarkAsFixedCategory (..)
 
-    -- * WebmastersURLcrawlerrorssamplesGetPlatform
-    , WebmastersURLcrawlerrorssamplesGetPlatform (..)
+    -- * WebmastersURLCrawlErrorsSamplesGetPlatform
+    , WebmastersURLCrawlErrorsSamplesGetPlatform (..)
 
     -- * SearchAnalyticsQueryRequest
     , SearchAnalyticsQueryRequest
@@ -137,8 +137,8 @@ module Network.Google.WebmasterTools.Types
     , saqrStartDate
     , saqrDimensions
 
-    -- * WebmastersURLcrawlerrorssamplesListCategory
-    , WebmastersURLcrawlerrorssamplesListCategory (..)
+    -- * WebmastersURLCrawlErrorsSamplesListCategory
+    , WebmastersURLCrawlErrorsSamplesListCategory (..)
 
     -- * SitesListResponse
     , SitesListResponse
@@ -151,8 +151,8 @@ module Network.Google.WebmasterTools.Types
     , wsPermissionLevel
     , wsSiteURL
 
-    -- * WebmastersURLcrawlerrorscountsQueryPlatform
-    , WebmastersURLcrawlerrorscountsQueryPlatform (..)
+    -- * WebmastersURLCrawlErrorscountsQueryPlatform
+    , WebmastersURLCrawlErrorscountsQueryPlatform (..)
     ) where
 
 import           Network.Google.Prelude

@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | The Google Maps Engine API allows developers to store and query
+-- | The Google Maps Engine API allows developers to store and query
 -- geospatial vector and raster data.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference>

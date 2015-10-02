@@ -6,7 +6,7 @@
 
 {% include "_include/license.ede" %}
 --
--- {{ description }}
+{{ description }}
 --
 -- /See:/ <{{ documentationLink }} {{ title }} Reference>
 module {{ moduleName }}

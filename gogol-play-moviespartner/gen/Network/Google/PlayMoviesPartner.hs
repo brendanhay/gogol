@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | Lets Google Play Movies Partners get the delivery status of their
+-- | Lets Google Play Movies Partners get the delivery status of their
 -- titles.
 --
 -- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference>
@@ -27,25 +27,25 @@ module Network.Google.PlayMoviesPartner
 
     -- * REST Resources
 
-    -- ** PlaymoviesPartynerAccountsAvailsList
+    -- ** PlaymoviesPartnerAccountsAvailsList
     , module Network.Google.Resource.PlayMoviesPartner.Accounts.Avails.List
 
-    -- ** PlaymoviesPartynerAccountsExperienceLocalesGet
+    -- ** PlaymoviesPartnerAccountsExperienceLocalesGet
     , module Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.Get
 
-    -- ** PlaymoviesPartynerAccountsExperienceLocalesList
+    -- ** PlaymoviesPartnerAccountsExperienceLocalesList
     , module Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.List
 
-    -- ** PlaymoviesPartynerAccountsOrdersGet
+    -- ** PlaymoviesPartnerAccountsOrdersGet
     , module Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.Get
 
-    -- ** PlaymoviesPartynerAccountsOrdersList
+    -- ** PlaymoviesPartnerAccountsOrdersList
     , module Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.List
 
-    -- ** PlaymoviesPartynerAccountsStoreInfosCountryGet
+    -- ** PlaymoviesPartnerAccountsStoreInfosCountryGet
     , module Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
 
-    -- ** PlaymoviesPartynerAccountsStoreInfosList
+    -- ** PlaymoviesPartnerAccountsStoreInfosList
     , module Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.List
 
     -- * Types

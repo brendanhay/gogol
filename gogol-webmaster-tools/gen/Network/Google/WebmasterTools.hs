@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | Lets you view Google Webmaster Tools data for your verified sites.
+-- | Lets you view Google Webmaster Tools data for your verified sites.
 --
 -- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference>
 module Network.Google.WebmasterTools
@@ -53,17 +53,17 @@ module Network.Google.WebmasterTools
     -- ** WebmastersSitesList
     , module Network.Google.Resource.Webmasters.Sites.List
 
-    -- ** WebmastersURLcrawlerrorscountsQuery
-    , module Network.Google.Resource.Webmasters.URLcrawlerrorscounts.Query
+    -- ** WebmastersURLCrawlErrorscountsQuery
+    , module Network.Google.Resource.Webmasters.URLCrawlErrorscounts.Query
 
-    -- ** WebmastersURLcrawlerrorssamplesGet
-    , module Network.Google.Resource.Webmasters.URLcrawlerrorssamples.Get
+    -- ** WebmastersURLCrawlErrorsSamplesGet
+    , module Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.Get
 
-    -- ** WebmastersURLcrawlerrorssamplesList
-    , module Network.Google.Resource.Webmasters.URLcrawlerrorssamples.List
+    -- ** WebmastersURLCrawlErrorsSamplesList
+    , module Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.List
 
-    -- ** WebmastersURLcrawlerrorssamplesMarkAsFixed
-    , module Network.Google.Resource.Webmasters.URLcrawlerrorssamples.MarkAsFixed
+    -- ** WebmastersURLCrawlErrorsSamplesMarkAsFixed
+    , module Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.MarkAsFixed
 
     -- * Types
 
@@ -115,8 +115,8 @@ module Network.Google.WebmasterTools
     , ucecCount
     , ucecTimestamp
 
-    -- ** WebmastersURLcrawlerrorscountsQueryCategory
-    , WebmastersURLcrawlerrorscountsQueryCategory (..)
+    -- ** WebmastersURLCrawlErrorscountsQueryCategory
+    , WebmastersURLCrawlErrorscountsQueryCategory (..)
 
     -- ** SearchAnalyticsQueryResponse
     , SearchAnalyticsQueryResponse
@@ -124,14 +124,14 @@ module Network.Google.WebmasterTools
     , saqrRows
     , saqrResponseAggregationType
 
-    -- ** WebmastersURLcrawlerrorssamplesListPlatform
-    , WebmastersURLcrawlerrorssamplesListPlatform (..)
+    -- ** WebmastersURLCrawlErrorsSamplesListPlatform
+    , WebmastersURLCrawlErrorsSamplesListPlatform (..)
 
-    -- ** WebmastersURLcrawlerrorssamplesGetCategory
-    , WebmastersURLcrawlerrorssamplesGetCategory (..)
+    -- ** WebmastersURLCrawlErrorsSamplesGetCategory
+    , WebmastersURLCrawlErrorsSamplesGetCategory (..)
 
-    -- ** WebmastersURLcrawlerrorssamplesMarkAsFixedPlatform
-    , WebmastersURLcrawlerrorssamplesMarkAsFixedPlatform (..)
+    -- ** WebmastersURLCrawlErrorsSamplesMarkAsFixedPlatform
+    , WebmastersURLCrawlErrorsSamplesMarkAsFixedPlatform (..)
 
     -- ** URLCrawlErrorsSamplesListResponse
     , URLCrawlErrorsSamplesListResponse
@@ -170,11 +170,11 @@ module Network.Google.WebmasterTools
     , wsType
     , wsErrors
 
-    -- ** WebmastersURLcrawlerrorssamplesMarkAsFixedCategory
-    , WebmastersURLcrawlerrorssamplesMarkAsFixedCategory (..)
+    -- ** WebmastersURLCrawlErrorsSamplesMarkAsFixedCategory
+    , WebmastersURLCrawlErrorsSamplesMarkAsFixedCategory (..)
 
-    -- ** WebmastersURLcrawlerrorssamplesGetPlatform
-    , WebmastersURLcrawlerrorssamplesGetPlatform (..)
+    -- ** WebmastersURLCrawlErrorsSamplesGetPlatform
+    , WebmastersURLCrawlErrorsSamplesGetPlatform (..)
 
     -- ** SearchAnalyticsQueryRequest
     , SearchAnalyticsQueryRequest
@@ -187,8 +187,8 @@ module Network.Google.WebmasterTools
     , saqrStartDate
     , saqrDimensions
 
-    -- ** WebmastersURLcrawlerrorssamplesListCategory
-    , WebmastersURLcrawlerrorssamplesListCategory (..)
+    -- ** WebmastersURLCrawlErrorsSamplesListCategory
+    , WebmastersURLCrawlErrorsSamplesListCategory (..)
 
     -- ** SitesListResponse
     , SitesListResponse
@@ -201,8 +201,8 @@ module Network.Google.WebmasterTools
     , wsPermissionLevel
     , wsSiteURL
 
-    -- ** WebmastersURLcrawlerrorscountsQueryPlatform
-    , WebmastersURLcrawlerrorscountsQueryPlatform (..)
+    -- ** WebmastersURLCrawlErrorscountsQueryPlatform
+    , WebmastersURLCrawlErrorscountsQueryPlatform (..)
     ) where
 
 import           Network.Google.Prelude
@@ -215,10 +215,10 @@ import           Network.Google.Resource.Webmasters.Sites.Add
 import           Network.Google.Resource.Webmasters.Sites.Delete
 import           Network.Google.Resource.Webmasters.Sites.Get
 import           Network.Google.Resource.Webmasters.Sites.List
-import           Network.Google.Resource.Webmasters.URLcrawlerrorscounts.Query
-import           Network.Google.Resource.Webmasters.URLcrawlerrorssamples.Get
-import           Network.Google.Resource.Webmasters.URLcrawlerrorssamples.List
-import           Network.Google.Resource.Webmasters.URLcrawlerrorssamples.MarkAsFixed
+import           Network.Google.Resource.Webmasters.URLCrawlErrorscounts.Query
+import           Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.Get
+import           Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.List
+import           Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.MarkAsFixed
 import           Network.Google.WebmasterTools.Types
 
 {- $resources
@@ -226,9 +226,9 @@ TODO
 -}
 
 type WebmasterToolsAPI =
-     UrlcrawlerrorssamplesListResource :<|>
-       UrlcrawlerrorssamplesGetResource
-       :<|> UrlcrawlerrorssamplesMarkAsFixedResource
+     URLCrawlErrorsSamplesListResource :<|>
+       URLCrawlErrorsSamplesGetResource
+       :<|> URLCrawlErrorsSamplesMarkAsFixedResource
        :<|> SitemapsListResource
        :<|> SitemapsGetResource
        :<|> SitemapsSubmitResource
@@ -238,7 +238,7 @@ type WebmasterToolsAPI =
        :<|> SitesGetResource
        :<|> SitesAddResource
        :<|> SitesDeleteResource
-       :<|> UrlcrawlerrorscountsQueryResource
+       :<|> URLCrawlErrorscountsQueryResource
 
 webmasterToolsAPI :: Proxy WebmasterToolsAPI
 webmasterToolsAPI = Proxy

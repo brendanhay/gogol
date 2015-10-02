@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | The Google+ API enables developers to build on top of the Google+
+-- | The Google+ API enables developers to build on top of the Google+
 -- platform.
 --
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference>
@@ -169,7 +169,7 @@ module Network.Google.Plus
     -- ** PersonOrganizations
     , PersonOrganizations
     , personOrganizations
-    , poDePartyment
+    , poDePartment
     , poLocation
     , poEndDate
     , poPrimary

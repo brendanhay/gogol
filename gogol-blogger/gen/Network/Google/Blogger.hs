@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | API for access to the data within Blogger.
+-- | API for access to the data within Blogger.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference>
 module Network.Google.Blogger

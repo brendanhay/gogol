@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | The Google Cloud DNS API provides services for configuring and serving
+-- | The Google Cloud DNS API provides services for configuring and serving
 -- authoritative DNS records.
 --
 -- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference>

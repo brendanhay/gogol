@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | Lets you access a cloud hosted machine learning service that makes it
+-- | Lets you access a cloud hosted machine learning service that makes it
 -- easy to build smart apps
 --
 -- /See:/ <https://developers.google.com/prediction/docs/developer-guide Prediction API Reference>

@@ -24,7 +24,7 @@
 module Network.Google.Resource.Compute.URLMaps.Insert
     (
     -- * REST Resource
-      UrlMapsInsertResource
+      URLMapsInsertResource
 
     -- * Creating a Request
     , uRLMapsInsert'
@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeURLMapsInsert@ which the
 -- 'URLMapsInsert'' request conforms to.
-type UrlMapsInsertResource =
+type URLMapsInsertResource =
      Capture "project" Text :>
        "global" :>
          "urlMaps" :>
@@ -172,6 +172,6 @@ instance GoogleRequest URLMapsInsert' where
               _umiURLMap
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UrlMapsInsertResource)
+                      (Proxy :: Proxy URLMapsInsertResource)
                       r
                       u

@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | Lets you manage permission levels and related settings of a group.
+-- | Lets you manage permission levels and related settings of a group.
 --
 -- /See:/ <https://developers.google.com/google-apps/groups-settings/get_started Groups Settings API Reference>
 module Network.Google.GroupsSettings

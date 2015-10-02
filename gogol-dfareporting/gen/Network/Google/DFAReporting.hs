@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | Manage your DoubleClick Campaign Manager ad campaigns and reports.
+-- | Manage your DoubleClick Campaign Manager ad campaigns and reports.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference>
 module Network.Google.DFAReporting

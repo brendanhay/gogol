@@ -23,7 +23,7 @@
 module Network.Google.Resource.Compute.URLMaps.Delete
     (
     -- * REST Resource
-      UrlMapsDeleteResource
+      URLMapsDeleteResource
 
     -- * Creating a Request
     , uRLMapsDelete'
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeURLMapsDelete@ which the
 -- 'URLMapsDelete'' request conforms to.
-type UrlMapsDeleteResource =
+type URLMapsDeleteResource =
      Capture "project" Text :>
        "global" :>
          "urlMaps" :>
@@ -170,6 +170,6 @@ instance GoogleRequest URLMapsDelete' where
               (Just AltJSON)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UrlMapsDeleteResource)
+                      (Proxy :: Proxy URLMapsDeleteResource)
                       r
                       u

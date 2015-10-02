@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | Lets you store and retrieve potentially-large, immutable data objects.
+-- | Lets you store and retrieve potentially-large, immutable data objects.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference>
 module Network.Google.Storage

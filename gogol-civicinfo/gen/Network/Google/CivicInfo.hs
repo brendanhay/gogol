@@ -12,7 +12,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- -- | An API for accessing civic information.
+-- | An API for accessing civic information.
 --
 -- /See:/ <https://developers.google.com/civic-information Google Civic Information API Reference>
 module Network.Google.CivicInfo

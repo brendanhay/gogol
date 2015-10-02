@@ -45,7 +45,7 @@ library
         , Network.Google.Resource.TagManager.Accounts.Containers.Macros.Get
         , Network.Google.Resource.TagManager.Accounts.Containers.Macros.List
         , Network.Google.Resource.TagManager.Accounts.Containers.Macros.Update
-        , Network.Google.Resource.TagManager.Accounts.Containers.Move_folders.Update
+        , Network.Google.Resource.TagManager.Accounts.Containers.MoveFolders.Update
         , Network.Google.Resource.TagManager.Accounts.Containers.Rules.Create
         , Network.Google.Resource.TagManager.Accounts.Containers.Rules.Delete
         , Network.Google.Resource.TagManager.Accounts.Containers.Rules.Get

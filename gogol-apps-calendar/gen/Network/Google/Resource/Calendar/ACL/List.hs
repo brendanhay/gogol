@@ -23,7 +23,7 @@
 module Network.Google.Resource.Calendar.ACL.List
     (
     -- * REST Resource
-      AclListResource
+      ACLListResource
 
     -- * Creating a Request
     , aCLList'
@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarACLList@ which the
 -- 'ACLList'' request conforms to.
-type AclListResource =
+type ACLListResource =
      "calendars" :>
        Capture "calendarId" Text :>
          "acl" :>
@@ -216,5 +216,5 @@ instance GoogleRequest ACLList' where
               _alFields
               (Just AltJSON)
           where go
-                  = clientWithRoute (Proxy :: Proxy AclListResource) r
+                  = clientWithRoute (Proxy :: Proxy ACLListResource) r
                       u
