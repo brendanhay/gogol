@@ -117,21 +117,21 @@ getDerive g = loc "getDerive" g $ memo derived g go
         SObj _ (Obj _ ps) -> foldM props base (Map.elems ps)
 
     literal = \case
-        Text  -> base <> [DOrd, DIsString]
+        Text  -> base <> [DRead, DOrd, DIsString]
         Bool  -> enum
-        Time  -> base
-        Date  -> base
+        Time  -> DRead : base
+        Date  -> DRead : base
         Body  -> base
-        Alt _ -> base
-        Key   -> base
+        Alt _ -> DRead : base
+        Key   -> DRead : base
         -- FIXME: Add numeric cases
-        _     -> [DNum, DIntegral, DReal] <> enum
+        _     -> [DRead, DNum, DIntegral, DReal] <> enum
 
     props ds x = intersect ds <$> getDerive x
 
     list = [DMonoid]
     enum = [DOrd, DEnum] <> base
-    base = [DEq, DRead, DShow, DData, DTypeable, DGeneric]
+    base = [DEq, DShow, DData, DTypeable, DGeneric]
 
 getPrefix :: Global -> AST Prefix
 getPrefix g = loc "getPrefix" g $ memo prefixed g go

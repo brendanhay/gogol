@@ -33,6 +33,7 @@ import           Data.Semigroup               ((<>))
 import qualified Data.Text                    as Text
 import qualified Data.Text.Lazy               as LText
 import qualified Data.Text.Lazy.Builder       as Build
+import           Debug.Trace
 import           Gen.AST.Solve                (getSolved)
 import           Gen.Formatting
 import           Gen.Syntax

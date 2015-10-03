@@ -4,6 +4,7 @@
 {-# LANGUAGE LambdaCase                 #-}
 {-# LANGUAGE OverloadedStrings          #-}
 {-# LANGUAGE ScopedTypeVariables        #-}
+{-# LANGUAGE ViewPatterns               #-}
 
 -- Module      : Gen.Types.Id
 -- Copyright   : (c) 2015 Brendan Hay
@@ -24,6 +25,8 @@ module Gen.Types.Id
 
     , global
     , local
+
+    , globalise
     , localise
 
     , gid
@@ -31,6 +34,8 @@ module Gen.Types.Id
 
     , reference
 
+    -- FIXME: move these
+    , extractPath
     , orderParams
 
     -- * Naming
@@ -52,7 +57,9 @@ import qualified Data.CaseInsensitive         as CI
 import           Data.Coerce
 import           Data.Foldable                (foldl')
 import           Data.Hashable
-import           Data.List                    (elemIndex, sortOn)
+import           Data.List                    (elemIndex, nub, sortOn)
+import           Data.Maybe
+import           Data.Ord
 import           Data.Semigroup               hiding (Sum)
 import           Data.String
 import           Data.Text                    (Text)
@@ -86,7 +93,7 @@ mname abrv (Suffix suf) (Global g) =
         x:xs = map (upperAcronym . toPascal) g
 
 dname, cname :: Global -> Name
-dname = name . Text.unpack . upperHead . global
+dname = name . Text.unpack . renameReserved . upperHead . global
 cname = name . Text.unpack . renameReserved . lowerHead . lowerFirstAcronym . global
 
 bname :: Prefix -> Text -> Name
@@ -149,15 +156,39 @@ global :: Global -> Text
 global (Global g) = foldMap (upperAcronym . upperHead) g
 
 reference :: Global -> Local -> Global
-reference (Global g) (Local l) = Global (g <> Text.split (== '.') l)
+reference (Global g) (Local l) = Global
+    . mappend g
+    . filter (not . Text.null)
+    $ Text.split (== '.') l
 
 localise :: Global -> Local
 localise = Local . global
 
+globalise :: Local -> Global
+globalise = Global . (:[]) . local
+
+extractPath :: Text -> [Either Text (Local, Maybe Text)]
+extractPath = map match . filter (not . Text.null) . Text.split (== '/')
+  where
+    match x =
+        case Text.uncons x of
+            Just (c, Text.dropWhile (== '+') -> t)
+                | c == '{' -> Right $
+                    let y = toKey (Text.takeWhile (/= '}') t)
+                     in case Text.dropWhile (/= ':') t of
+                         "" -> (y, Nothing)
+                         z  -> (y, Just z)
+
+        --      Resource "editId" "commit"
+        --     "path": "{packageName}/edits/{editId}:commit",
+
+            _              -> Left x
+
+
 orderParams :: (a -> Local) -> [a] -> [Local] -> [a]
 orderParams f xs ys = orderBy f zs (del zs [] ++ global)
   where
-    zs = orderBy f (sortOn f xs) ys
+    zs = orderBy f (sortOn f xs) (nub (ys ++ map f xs))
 
     del _      [] = []
     del []     rs = reverse rs

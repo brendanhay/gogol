@@ -14,17 +14,18 @@ module Gen.Syntax where
 
 import           Control.Lens                 hiding (iso, mapping, op, pre,
                                                strict)
+import           Data.Either
 import           Data.Foldable                (find, foldl', foldr')
 import           Data.Hashable
 import qualified Data.HashMap.Strict          as Map
-import           Data.List                    (delete)
-import           Data.Maybe
+import           Data.List                    (delete, nub)
 import           Data.Maybe
 import           Data.Semigroup               ((<>))
 import           Data.String
 import           Data.Text                    (Text)
 import qualified Data.Text                    as Text
 import           Data.Text.Manipulate
+import           Debug.Trace
 import           Gen.Orphans
 import           Gen.Text
 import           Gen.Types
@@ -56,26 +57,31 @@ verbAlias n m
   where
     rest     = alias verb (path ++ qry params ++ media)
     download = TyInfix rest (UnQual (sym ":<|>")) $
-        alias (TyApp (TyApp meth octet) (TyCon "Stream"))
+        alias (TyApp (TyApp meth octet) (TyCon "Body"))
         (path ++ qry (Map.delete "alt" (_mParameters m)) ++ [alt] ++ media)
 
     alias = foldr' (\l r -> TyInfix l (UnQual (sym ":>")) r)
 
     path :: [Type]
-    path = map match
-         . filter (not . Text.null)
-         $ Text.split (== '/') (_mPath m)
+    path = map match $ extractPath (_mPath m)
       where
-        -- FIXME: should error if '{' '}' is found and cannot find the ref.
-        match x
-            | Just (c, t) <- Text.uncons x
-            , c == '{'
-            , Just k <- Map.lookup (toKey (Text.init t)) params
-            , _pLocation k == Path
-                        = TyApp (TyApp (TyCon "Capture")
-                                       (sing (Text.init t)))
-                                (terminalType (_type (_pParam k)))
-            | otherwise = sing x
+        match (Left  t)      = sing t
+        match (Right (l, c)) =
+            case Map.lookup l (_mParameters m) of
+                Nothing -> error $ "Unable to find path parameter " ++ show l
+                Just x  ->
+                    case c of
+                        Nothing ->
+                            TyApp (TyApp (TyCon "Capture")
+                                         (sing (local l)))
+                                  (terminalType (_type (_pParam x)))
+
+                        Just y  ->
+                            TyApp (TyApp (TyApp (TyCon "CaptureMode")
+                                                (sing (local l)))
+                                         (sing y))
+                                  (terminalType (_type (_pParam x)))
+
 
     qry xs = mapMaybe f $ orderParams fst (Map.toList xs) (_mParameterOrder m)
       where
@@ -106,9 +112,9 @@ verbAlias n m
     octet = tylist ["OctetStream"]
     json  = tylist ["JSON"]
 
-    alt = TyApp (TyApp (TyCon "QueryParam") (sing "alt")) (TyCon "Media")
+    alt = TyApp (TyApp (TyCon "QueryParam") (sing "alt")) (TyCon "AltMedia")
 
-    params = _mParameters m
+    params = Map.filter ((/= Path) . _pLocation) (_mParameters m)
 
 downloadDecl :: Global
              -> Prefix
@@ -122,7 +128,7 @@ downloadDecl n p api url fs m =
   where
     rs = InsType noLoc
         (TyApp (TyCon "Rs") (TyApp (TyCon "Download") (tycon n)))
-        (TyCon "Stream")
+        (TyCon "Body")
 
     alt = Just (var "Media")
 
@@ -191,10 +197,13 @@ googleRequestDecl g n assoc alt p api url fields m =
             ps = _mParameters m
             v  = var . fname p
 
-            (fs', rq) | Just r <- _mRequest m = let x = localise (ref r) in (delete x fs, Just x)
+            (fs', rq) | Just _ <- _mRequest m = (delete "payload" fs, Just "payload")
                       | otherwise             = (fs, Nothing)
 
-    fs = orderParams id fields (_mParameterOrder m)
+    fs = delete "alt"
+       . orderParams id (Map.keys (_mParameters m))
+       . nub
+       $ map fst (rights (extractPath (_mPath m))) ++ _mParameterOrder m
 
     pats = [pvar "r", pvar "u", prec]
     prec = PRec (UnQual (dname g)) [PFieldWildcard]

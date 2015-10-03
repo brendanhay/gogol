@@ -117,10 +117,13 @@ renameReserved x
         , "object"
         , "get"
         , "group"
-        , "error"
         , "True"
         , "False"
+        , "error"
         , "Error"
+        , "read"
+        , "Read"
+        , "request"
         ] ++ map Text.pack (reservedNames haskellDef)
 
 camelAcronym :: Text -> Text
@@ -204,6 +207,7 @@ upperAcronym x = Fold.foldl' (flip (uncurry RE.replaceAll)) x xs
          , ("Oob",           "OOB")
          , ("Jwk",           "JWK")
          , ("Dto",           "DTO")
+         , ("Sku",           "SKU")
 
          , ("access",      "Access")
          , ("account",     "Account")
@@ -223,7 +227,7 @@ upperAcronym x = Fold.foldl' (flip (uncurry RE.replaceAll)) x xs
          , ("info",        "Info")
          , ("library",     "Library")
          , ("list",        "List")
-         , ("([^pn])load", "$1Load")
+         , ("([^ypn])load", "$1Load")
          , ("manager",     "Manager")
          , ("model",       "Model")
          , ("monitor",     "Monitor")

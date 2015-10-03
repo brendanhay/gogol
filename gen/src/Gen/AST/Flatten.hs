@@ -36,11 +36,10 @@ import           Prelude              hiding (sum)
 
 flatten :: Service (Fix Schema) -> AST (Service Global)
 flatten s = do
-    _  <- Map.traverseWithKey globalSchema (s ^. dSchemas)
     ps <- Map.traverseWithKey globalParam  (s ^. dParameters)
-
     rs <- Map.traverseWithKey (resource ps "Resource") (s ^. dResources)
     ms <- traverse            (method   ps "Method")   (s ^. dMethods)
+    _  <- Map.traverseWithKey globalSchema (s ^. dSchemas)
 
     -- The horror.
     ss <- use schemas
@@ -58,7 +57,14 @@ globalSchema :: Global -> Fix Schema -> AST Global
 globalSchema g = schema g Nothing
 
 localSchema :: Global -> Local -> Fix Schema -> AST Global
-localSchema g l = schema g (Just l)
+localSchema g l s = do
+    let r = globalise l
+    p <- uses schemas (Map.member r)
+    if p
+        then schema g (Just l) s
+        else schema r Nothing  s
+    -- local schema, check if the local schema exists and then just add it as
+    -- a global?
 
 schema :: Global -> Maybe Local -> Fix Schema -> AST Global
 schema g ml (Fix f) = go f >>= insert this
@@ -76,7 +82,7 @@ schema g ml (Fix f) = go f >>= insert this
         SObj i o -> SObj i <$> object o
 
     array (Arr e) =
-        Arr <$> localSchema this "" (setRequired e)
+        Arr <$> localSchema this "item" (setRequired e)
 
     object (Obj aps ps) =
         Obj Nothing <$> Map.traverseWithKey (localSchema this) ps
@@ -136,7 +142,7 @@ method qs suf m@Method {..} = do
     body p = case _mRequest of
         Nothing -> pure id
         Just x  -> do
-            let f = localise (ref x)
+            let f = "payload" -- localise (ref x)
             g <- localSchema p f (Fix (SRef bodyInfo x))
             pure (Map.insert f g)
 
