@@ -119,7 +119,7 @@ instance ToJSON CcOfferRewards where
 --
 -- /See:/ 'event' smart constructor.
 data Event = Event
-    { _eModifyDate          :: !(Maybe DateTime)
+    { _eModifyDate          :: !(Maybe DateTime')
     , _eStatus              :: !(Maybe Text)
     , _eCommissionableSales :: !(Maybe Money)
     , _eChargeId            :: !(Maybe Text)
@@ -129,7 +129,7 @@ data Event = Event
     , _eKind                :: !Text
     , _eNetworkFee          :: !(Maybe Money)
     , _eAdvertiserId        :: !(Maybe Int64)
-    , _eEventDate           :: !(Maybe DateTime)
+    , _eEventDate           :: !(Maybe DateTime')
     , _eProducts            :: !(Maybe [EventProducts])
     , _ePublisherFee        :: !(Maybe Money)
     , _eType                :: !(Maybe Text)
@@ -206,7 +206,8 @@ event =
 -- value.
 eModifyDate :: Lens' Event (Maybe UTCTime)
 eModifyDate
-  = lens _eModifyDate (\ s a -> s{_eModifyDate = a})
+  = lens _eModifyDate (\ s a -> s{_eModifyDate = a}) .
+      mapping _DateTime
 
 -- | Status of the event (active|canceled). Only returned for charge and
 -- conversion events.
@@ -262,7 +263,8 @@ eAdvertiserId
 -- | The date-time this event was initiated as a RFC 3339 date-time value.
 eEventDate :: Lens' Event (Maybe UTCTime)
 eEventDate
-  = lens _eEventDate (\ s a -> s{_eEventDate = a})
+  = lens _eEventDate (\ s a -> s{_eEventDate = a}) .
+      mapping _DateTime
 
 -- | Products associated with the event.
 eProducts :: Lens' Event [EventProducts]
@@ -353,14 +355,14 @@ data Link = Link
     { _lAuthorship            :: !(Maybe Text)
     , _lDestinationURL        :: !(Maybe Text)
     , _lClickTrackingURL      :: !(Maybe Text)
-    , _lCreateDate            :: !(Maybe DateTime)
+    , _lCreateDate            :: !(Maybe DateTime')
     , _lKind                  :: !Text
     , _lAdvertiserId          :: !(Maybe Int64)
-    , _lEndDate               :: !(Maybe DateTime)
+    , _lEndDate               :: !(Maybe DateTime')
     , _lImageAltText          :: !(Maybe Text)
     , _lPromotionType         :: !(Maybe Text)
     , _lAvailability          :: !(Maybe Text)
-    , _lStartDate             :: !(Maybe DateTime)
+    , _lStartDate             :: !(Maybe DateTime')
     , _lName                  :: !(Maybe Text)
     , _lImpressionTrackingURL :: !(Maybe Text)
     , _lSpecialOffers         :: !(Maybe LinkSpecialOffers)
@@ -465,7 +467,8 @@ lClickTrackingURL
 -- | Date that this link was created.
 lCreateDate :: Lens' Link (Maybe UTCTime)
 lCreateDate
-  = lens _lCreateDate (\ s a -> s{_lCreateDate = a})
+  = lens _lCreateDate (\ s a -> s{_lCreateDate = a}) .
+      mapping _DateTime
 
 -- | The kind for one entity.
 lKind :: Lens' Link Text
@@ -479,7 +482,9 @@ lAdvertiserId
 
 -- | Date that this link becomes inactive.
 lEndDate :: Lens' Link (Maybe UTCTime)
-lEndDate = lens _lEndDate (\ s a -> s{_lEndDate = a})
+lEndDate
+  = lens _lEndDate (\ s a -> s{_lEndDate = a}) .
+      mapping _DateTime
 
 -- | image alt text.
 lImageAltText :: Lens' Link (Maybe Text)
@@ -502,7 +507,8 @@ lAvailability
 -- | Date that this link becomes active.
 lStartDate :: Lens' Link (Maybe UTCTime)
 lStartDate
-  = lens _lStartDate (\ s a -> s{_lStartDate = a})
+  = lens _lStartDate (\ s a -> s{_lStartDate = a}) .
+      mapping _DateTime
 
 -- | The logical name for this link.
 lName :: Lens' Link (Maybe Text)
@@ -1380,7 +1386,7 @@ data Advertiser = Advertiser
     , _advCategory                   :: !(Maybe Text)
     , _advSiteURL                    :: !(Maybe Text)
     , _advPayoutRank                 :: !(Maybe Text)
-    , _advJoinDate                   :: !(Maybe DateTime)
+    , _advJoinDate                   :: !(Maybe DateTime')
     , _advDefaultLinkId              :: !(Maybe Int64)
     , _advRedirectDomains            :: !(Maybe [Text])
     , _advName                       :: !(Maybe Text)
@@ -1522,7 +1528,8 @@ advPayoutRank
 -- advertiser.
 advJoinDate :: Lens' Advertiser (Maybe UTCTime)
 advJoinDate
-  = lens _advJoinDate (\ s a -> s{_advJoinDate = a})
+  = lens _advJoinDate (\ s a -> s{_advJoinDate = a}) .
+      mapping _DateTime
 
 -- | The default link id for this advertiser.
 advDefaultLinkId :: Lens' Advertiser (Maybe Int64)
@@ -2548,7 +2555,7 @@ data Publisher = Publisher
     { _pubStatus              :: !(Maybe Text)
     , _pubKind                :: !Text
     , _pubPayoutRank          :: !(Maybe Text)
-    , _pubJoinDate            :: !(Maybe DateTime)
+    , _pubJoinDate            :: !(Maybe DateTime')
     , _pubClassification      :: !(Maybe Text)
     , _pubName                :: !(Maybe Text)
     , _pubEpcSevenDayAverage  :: !(Maybe Money)
@@ -2622,7 +2629,8 @@ pubPayoutRank
 -- publisher.
 pubJoinDate :: Lens' Publisher (Maybe UTCTime)
 pubJoinDate
-  = lens _pubJoinDate (\ s a -> s{_pubJoinDate = a})
+  = lens _pubJoinDate (\ s a -> s{_pubJoinDate = a}) .
+      mapping _DateTime
 
 -- | Classification that this publisher belongs to. See this link for all
 -- publisher classifications:

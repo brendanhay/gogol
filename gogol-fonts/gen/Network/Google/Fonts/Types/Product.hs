@@ -28,7 +28,7 @@ data Webfont = Webfont
     , _wVersion      :: !(Maybe Text)
     , _wFiles        :: !(Maybe WebfontFiles)
     , _wSubsets      :: !(Maybe [Text])
-    , _wLastModified :: !(Maybe Date)
+    , _wLastModified :: !(Maybe Date')
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Webfont' with the minimum fields required to make a request.
@@ -102,10 +102,11 @@ wSubsets
 
 -- | The date (format \"yyyy-MM-dd\") the font was modified for the last
 -- time.
-wLastModified :: Lens' Webfont (Maybe UTCTime)
+wLastModified :: Lens' Webfont (Maybe LocalTime)
 wLastModified
   = lens _wLastModified
       (\ s a -> s{_wLastModified = a})
+      . mapping _Date
 
 instance FromJSON Webfont where
         parseJSON

@@ -1155,7 +1155,7 @@ instance ToJSON CommentActor where
 data Moment = Moment
     { _mKind      :: !Text
     , _mResult    :: !(Maybe ItemScope)
-    , _mStartDate :: !(Maybe DateTime)
+    , _mStartDate :: !(Maybe DateTime')
     , _mObject    :: !(Maybe ItemScope)
     , _mId        :: !(Maybe Text)
     , _mType      :: !(Maybe Text)
@@ -1205,7 +1205,8 @@ mResult = lens _mResult (\ s a -> s{_mResult = a})
 -- | Time stamp of when the action occurred in RFC3339 format.
 mStartDate :: Lens' Moment (Maybe UTCTime)
 mStartDate
-  = lens _mStartDate (\ s a -> s{_mStartDate = a})
+  = lens _mStartDate (\ s a -> s{_mStartDate = a}) .
+      mapping _DateTime
 
 -- | The object on which the action was performed. Specifying this is
 -- equivalent with specifying \"target\". Note that responses from the
@@ -2568,7 +2569,7 @@ data ActivityFeed = ActivityFeed
     , _afItems         :: !(Maybe [Activity])
     , _afSelfLink      :: !(Maybe Text)
     , _afId            :: !(Maybe Text)
-    , _afUpdated       :: !(Maybe DateTime)
+    , _afUpdated       :: !(Maybe DateTime')
     , _afTitle         :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -2649,7 +2650,8 @@ afId = lens _afId (\ s a -> s{_afId = a})
 -- Formatted as an RFC 3339 timestamp.
 afUpdated :: Lens' ActivityFeed (Maybe UTCTime)
 afUpdated
-  = lens _afUpdated (\ s a -> s{_afUpdated = a})
+  = lens _afUpdated (\ s a -> s{_afUpdated = a}) .
+      mapping _DateTime
 
 -- | The title of this collection of activities, which is a truncated portion
 -- of the content.
@@ -3121,13 +3123,13 @@ data Activity = Activity
     , _aaGeocode         :: !(Maybe Text)
     , _aaKind            :: !Text
     , _aaRadius          :: !(Maybe Text)
-    , _aaPublished       :: !(Maybe DateTime)
+    , _aaPublished       :: !(Maybe DateTime')
     , _aaURL             :: !(Maybe Text)
     , _aaActor           :: !(Maybe ActivityActor)
     , _aaAddress         :: !(Maybe Text)
     , _aaObject          :: !(Maybe ActivityObject)
     , _aaId              :: !(Maybe Text)
-    , _aaUpdated         :: !(Maybe DateTime)
+    , _aaUpdated         :: !(Maybe DateTime')
     , _aaTitle           :: !(Maybe Text)
     , _aaVerb            :: !(Maybe Text)
     , _aaCrosspostSource :: !(Maybe Text)
@@ -3247,7 +3249,8 @@ aaRadius = lens _aaRadius (\ s a -> s{_aaRadius = a})
 -- RFC 3339 timestamp.
 aaPublished :: Lens' Activity (Maybe UTCTime)
 aaPublished
-  = lens _aaPublished (\ s a -> s{_aaPublished = a})
+  = lens _aaPublished (\ s a -> s{_aaPublished = a}) .
+      mapping _DateTime
 
 -- | The link to this activity.
 aaURL :: Lens' Activity (Maybe Text)
@@ -3274,7 +3277,8 @@ aaId = lens _aaId (\ s a -> s{_aaId = a})
 -- 3339 timestamp.
 aaUpdated :: Lens' Activity (Maybe UTCTime)
 aaUpdated
-  = lens _aaUpdated (\ s a -> s{_aaUpdated = a})
+  = lens _aaUpdated (\ s a -> s{_aaUpdated = a}) .
+      mapping _DateTime
 
 -- | Title of this activity.
 aaTitle :: Lens' Activity (Maybe Text)
@@ -3592,12 +3596,12 @@ data Comment = Comment
     { _cEtag      :: !(Maybe Text)
     , _cPlusoners :: !(Maybe CommentPlusoners)
     , _cKind      :: !Text
-    , _cPublished :: !(Maybe DateTime)
+    , _cPublished :: !(Maybe DateTime')
     , _cActor     :: !(Maybe CommentActor)
     , _cSelfLink  :: !(Maybe Text)
     , _cObject    :: !(Maybe CommentObject)
     , _cId        :: !(Maybe Text)
-    , _cUpdated   :: !(Maybe DateTime)
+    , _cUpdated   :: !(Maybe DateTime')
     , _cVerb      :: !Text
     , _cInReplyTo :: !(Maybe [CommentInReplyTo])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -3661,7 +3665,8 @@ cKind = lens _cKind (\ s a -> s{_cKind = a})
 -- RFC 3339 timestamp.
 cPublished :: Lens' Comment (Maybe UTCTime)
 cPublished
-  = lens _cPublished (\ s a -> s{_cPublished = a})
+  = lens _cPublished (\ s a -> s{_cPublished = a}) .
+      mapping _DateTime
 
 -- | The person who posted this comment.
 cActor :: Lens' Comment (Maybe CommentActor)
@@ -3683,7 +3688,9 @@ cId = lens _cId (\ s a -> s{_cId = a})
 -- | The time at which this comment was last updated. Formatted as an RFC
 -- 3339 timestamp.
 cUpdated :: Lens' Comment (Maybe UTCTime)
-cUpdated = lens _cUpdated (\ s a -> s{_cUpdated = a})
+cUpdated
+  = lens _cUpdated (\ s a -> s{_cUpdated = a}) .
+      mapping _DateTime
 
 -- | This comment\'s verb, indicating what action was performed. Possible
 -- values are: - \"post\" - Publish content to the stream.
@@ -4015,7 +4022,7 @@ data MomentsFeed = MomentsFeed
     , _mfKind          :: !Text
     , _mfItems         :: !(Maybe [Moment])
     , _mfSelfLink      :: !(Maybe Text)
-    , _mfUpdated       :: !(Maybe DateTime)
+    , _mfUpdated       :: !(Maybe DateTime')
     , _mfTitle         :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -4089,7 +4096,8 @@ mfSelfLink
 -- updated.
 mfUpdated :: Lens' MomentsFeed (Maybe UTCTime)
 mfUpdated
-  = lens _mfUpdated (\ s a -> s{_mfUpdated = a})
+  = lens _mfUpdated (\ s a -> s{_mfUpdated = a}) .
+      mapping _DateTime
 
 -- | The title of this collection of moments.
 mfTitle :: Lens' MomentsFeed (Maybe Text)
@@ -4129,7 +4137,7 @@ data CommentFeed = CommentFeed
     , _cfKind          :: !Text
     , _cfItems         :: !(Maybe [Comment])
     , _cfId            :: !(Maybe Text)
-    , _cfUpdated       :: !(Maybe DateTime)
+    , _cfUpdated       :: !(Maybe DateTime')
     , _cfTitle         :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -4202,7 +4210,8 @@ cfId = lens _cfId (\ s a -> s{_cfId = a})
 -- Formatted as an RFC 3339 timestamp.
 cfUpdated :: Lens' CommentFeed (Maybe UTCTime)
 cfUpdated
-  = lens _cfUpdated (\ s a -> s{_cfUpdated = a})
+  = lens _cfUpdated (\ s a -> s{_cfUpdated = a}) .
+      mapping _DateTime
 
 -- | The title of this collection of comments.
 cfTitle :: Lens' CommentFeed (Maybe Text)

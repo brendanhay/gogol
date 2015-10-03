@@ -275,7 +275,7 @@ data BucketLifecycleRuleCondition = BucketLifecycleRuleCondition
     { _blrcAge              :: !(Maybe Int32)
     , _blrcIsLive           :: !(Maybe Bool)
     , _blrcNumNewerVersions :: !(Maybe Int32)
-    , _blrcCreatedBefore    :: !(Maybe Date)
+    , _blrcCreatedBefore    :: !(Maybe Date')
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketLifecycleRuleCondition' with the minimum fields required to make a request.
@@ -322,10 +322,11 @@ blrcNumNewerVersions
 -- | A date in RFC 3339 format with only the date part, e.g. \"2013-01-15\".
 -- This condition is satisfied when an object is created before midnight of
 -- the specified date in UTC.
-blrcCreatedBefore :: Lens' BucketLifecycleRuleCondition (Maybe UTCTime)
+blrcCreatedBefore :: Lens' BucketLifecycleRuleCondition (Maybe LocalTime)
 blrcCreatedBefore
   = lens _blrcCreatedBefore
       (\ s a -> s{_blrcCreatedBefore = a})
+      . mapping _Date
 
 instance FromJSON BucketLifecycleRuleCondition where
         parseJSON
@@ -663,7 +664,7 @@ data Bucket = Bucket
     , _bucStorageClass     :: !(Maybe Text)
     , _bucVersioning       :: !(Maybe BucketVersioning)
     , _bucCORS             :: !(Maybe [BucketCORS])
-    , _bucTimeCreated      :: !(Maybe DateTime)
+    , _bucTimeCreated      :: !(Maybe DateTime')
     , _bucId               :: !(Maybe Text)
     , _bucDefaultObjectACL :: !(Maybe [ObjectAccessControl])
     , _bucMetageneration   :: !(Maybe Int64)
@@ -797,6 +798,7 @@ bucTimeCreated :: Lens' Bucket (Maybe UTCTime)
 bucTimeCreated
   = lens _bucTimeCreated
       (\ s a -> s{_bucTimeCreated = a})
+      . mapping _DateTime
 
 -- | The ID of the bucket.
 bucId :: Lens' Bucket (Maybe Text)
@@ -1417,7 +1419,7 @@ data Object = Object
     { _objEtag               :: !(Maybe Text)
     , _objSize               :: !(Maybe Word64)
     , _objKind               :: !Text
-    , _objTimeDeleted        :: !(Maybe DateTime)
+    , _objTimeDeleted        :: !(Maybe DateTime')
     , _objCrc32c             :: !(Maybe Text)
     , _objBucket             :: !(Maybe Text)
     , _objOwner              :: !(Maybe ObjectOwner)
@@ -1429,7 +1431,7 @@ data Object = Object
     , _objContentEncoding    :: !(Maybe Text)
     , _objMetadata           :: !(Maybe ObjectMetadata)
     , _objId                 :: !(Maybe Text)
-    , _objUpdated            :: !(Maybe DateTime)
+    , _objUpdated            :: !(Maybe DateTime')
     , _objContentLanguage    :: !(Maybe Text)
     , _objCacheControl       :: !(Maybe Text)
     , _objMetageneration     :: !(Maybe Int64)
@@ -1539,6 +1541,7 @@ objTimeDeleted :: Lens' Object (Maybe UTCTime)
 objTimeDeleted
   = lens _objTimeDeleted
       (\ s a -> s{_objTimeDeleted = a})
+      . mapping _DateTime
 
 -- | CRC32c checksum, as described in RFC 4960, Appendix B; encoded using
 -- base64.
@@ -1600,7 +1603,8 @@ objId = lens _objId (\ s a -> s{_objId = a})
 -- | Modification time of the object metadata in RFC 3339 format.
 objUpdated :: Lens' Object (Maybe UTCTime)
 objUpdated
-  = lens _objUpdated (\ s a -> s{_objUpdated = a})
+  = lens _objUpdated (\ s a -> s{_objUpdated = a}) .
+      mapping _DateTime
 
 -- | Content-Language of the object data.
 objContentLanguage :: Lens' Object (Maybe Text)

@@ -203,6 +203,7 @@ upperAcronym x = Fold.foldl' (flip (uncurry RE.replaceAll)) x xs
          , ("Os",            "OS")
          , ("Oob",           "OOB")
          , ("Jwk",           "JWK")
+         , ("Dto",           "DTO")
 
          , ("access",      "Access")
          , ("account",     "Account")

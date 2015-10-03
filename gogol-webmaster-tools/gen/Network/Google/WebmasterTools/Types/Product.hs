@@ -374,7 +374,7 @@ instance ToJSON APIdimensionFilter where
 -- /See:/ 'urlCrawlErrorCount' smart constructor.
 data URLCrawlErrorCount = URLCrawlErrorCount
     { _ucecCount     :: !(Maybe Int64)
-    , _ucecTimestamp :: !(Maybe DateTime)
+    , _ucecTimestamp :: !(Maybe DateTime')
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLCrawlErrorCount' with the minimum fields required to make a request.
@@ -402,6 +402,7 @@ ucecTimestamp :: Lens' URLCrawlErrorCount (Maybe UTCTime)
 ucecTimestamp
   = lens _ucecTimestamp
       (\ s a -> s{_ucecTimestamp = a})
+      . mapping _DateTime
 
 instance FromJSON URLCrawlErrorCount where
         parseJSON
@@ -565,9 +566,9 @@ instance ToJSON URLCrawlErrorsCountsQueryResponse
 data URLCrawlErrorsSample = URLCrawlErrorsSample
     { _ucesResponseCode  :: !(Maybe Int32)
     , _ucesURLDetails    :: !(Maybe URLSampleDetails)
-    , _ucesLastCrawled   :: !(Maybe DateTime)
+    , _ucesLastCrawled   :: !(Maybe DateTime')
     , _ucesPageURL       :: !(Maybe Text)
-    , _ucesFirstDetected :: !(Maybe DateTime)
+    , _ucesFirstDetected :: !(Maybe DateTime')
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLCrawlErrorsSample' with the minimum fields required to make a request.
@@ -611,6 +612,7 @@ ucesLastCrawled :: Lens' URLCrawlErrorsSample (Maybe UTCTime)
 ucesLastCrawled
   = lens _ucesLastCrawled
       (\ s a -> s{_ucesLastCrawled = a})
+      . mapping _DateTime
 
 -- | The URL of an error, relative to the site.
 ucesPageURL :: Lens' URLCrawlErrorsSample (Maybe Text)
@@ -622,6 +624,7 @@ ucesFirstDetected :: Lens' URLCrawlErrorsSample (Maybe UTCTime)
 ucesFirstDetected
   = lens _ucesFirstDetected
       (\ s a -> s{_ucesFirstDetected = a})
+      . mapping _DateTime
 
 instance FromJSON URLCrawlErrorsSample where
         parseJSON
@@ -689,9 +692,9 @@ data WmxSitemap = WmxSitemap
     { _wsContents        :: !(Maybe [WmxSitemapContent])
     , _wsPath            :: !(Maybe Text)
     , _wsIsSitemapsIndex :: !(Maybe Bool)
-    , _wsLastSubmitted   :: !(Maybe DateTime)
+    , _wsLastSubmitted   :: !(Maybe DateTime')
     , _wsWarnings        :: !(Maybe Int64)
-    , _wsLastDownloaded  :: !(Maybe DateTime)
+    , _wsLastDownloaded  :: !(Maybe DateTime')
     , _wsIsPending       :: !(Maybe Bool)
     , _wsType            :: !(Maybe Text)
     , _wsErrors          :: !(Maybe Int64)
@@ -756,6 +759,7 @@ wsLastSubmitted :: Lens' WmxSitemap (Maybe UTCTime)
 wsLastSubmitted
   = lens _wsLastSubmitted
       (\ s a -> s{_wsLastSubmitted = a})
+      . mapping _DateTime
 
 -- | Number of warnings for the sitemap. These are generally non-critical
 -- issues with URLs in the sitemaps.
@@ -769,6 +773,7 @@ wsLastDownloaded :: Lens' WmxSitemap (Maybe UTCTime)
 wsLastDownloaded
   = lens _wsLastDownloaded
       (\ s a -> s{_wsLastDownloaded = a})
+      . mapping _DateTime
 
 -- | If true, the sitemap has not been processed.
 wsIsPending :: Lens' WmxSitemap (Maybe Bool)

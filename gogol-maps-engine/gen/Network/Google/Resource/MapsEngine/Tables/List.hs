@@ -59,12 +59,12 @@ import           Network.Google.Prelude
 type TablesListResource =
      "tables" :>
        QueryParam "bbox" Text :>
-         QueryParam "createdAfter" DateTime :>
-           QueryParam "createdBefore" DateTime :>
+         QueryParam "createdAfter" DateTime' :>
+           QueryParam "createdBefore" DateTime' :>
              QueryParam "creatorEmail" Text :>
                QueryParam "maxResults" Word32 :>
-                 QueryParam "modifiedAfter" DateTime :>
-                   QueryParam "modifiedBefore" DateTime :>
+                 QueryParam "modifiedAfter" DateTime' :>
+                   QueryParam "modifiedBefore" DateTime' :>
                      QueryParam "pageToken" Text :>
                        QueryParam "processingStatus"
                          MapsEngineTablesListProcessingStatus
@@ -87,7 +87,7 @@ type TablesListResource =
 --
 -- /See:/ 'tablesList'' smart constructor.
 data TablesList' = TablesList'
-    { _tlCreatedAfter     :: !(Maybe DateTime)
+    { _tlCreatedAfter     :: !(Maybe DateTime')
     , _tlQuotaUser        :: !(Maybe Text)
     , _tlPrettyPrint      :: !Bool
     , _tlUserIP           :: !(Maybe Text)
@@ -96,8 +96,8 @@ data TablesList' = TablesList'
     , _tlKey              :: !(Maybe Key)
     , _tlBbox             :: !(Maybe Text)
     , _tlProcessingStatus :: !(Maybe MapsEngineTablesListProcessingStatus)
-    , _tlModifiedAfter    :: !(Maybe DateTime)
-    , _tlModifiedBefore   :: !(Maybe DateTime)
+    , _tlModifiedAfter    :: !(Maybe DateTime')
+    , _tlModifiedBefore   :: !(Maybe DateTime')
     , _tlPageToken        :: !(Maybe Text)
     , _tlProjectId        :: !(Maybe Text)
     , _tlOAuthToken       :: !(Maybe OAuthToken)
@@ -105,7 +105,7 @@ data TablesList' = TablesList'
     , _tlMaxResults       :: !(Maybe Word32)
     , _tlTags             :: !(Maybe Text)
     , _tlFields           :: !(Maybe Text)
-    , _tlCreatedBefore    :: !(Maybe DateTime)
+    , _tlCreatedBefore    :: !(Maybe DateTime')
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesList'' with the minimum fields required to make a request.
@@ -180,6 +180,7 @@ tlCreatedAfter :: Lens' TablesList' (Maybe UTCTime)
 tlCreatedAfter
   = lens _tlCreatedAfter
       (\ s a -> s{_tlCreatedAfter = a})
+      . mapping _DateTime
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -233,6 +234,7 @@ tlModifiedAfter :: Lens' TablesList' (Maybe UTCTime)
 tlModifiedAfter
   = lens _tlModifiedAfter
       (\ s a -> s{_tlModifiedAfter = a})
+      . mapping _DateTime
 
 -- | An RFC 3339 formatted date-time value (e.g. 1970-01-01T00:00:00Z).
 -- Returned assets will have been modified at or before this time.
@@ -240,6 +242,7 @@ tlModifiedBefore :: Lens' TablesList' (Maybe UTCTime)
 tlModifiedBefore
   = lens _tlModifiedBefore
       (\ s a -> s{_tlModifiedBefore = a})
+      . mapping _DateTime
 
 -- | The continuation token, used to page through large result sets. To get
 -- the next page of results, set this parameter to the value of
@@ -287,6 +290,7 @@ tlCreatedBefore :: Lens' TablesList' (Maybe UTCTime)
 tlCreatedBefore
   = lens _tlCreatedBefore
       (\ s a -> s{_tlCreatedBefore = a})
+      . mapping _DateTime
 
 instance GoogleAuth TablesList' where
         authKey = tlKey . _Just

@@ -366,14 +366,14 @@ data UnSampledReport = UnSampledReport
     , _uDriveDownloadDetails        :: !(Maybe UnSampledReportDriveDownloadDetails)
     , _uWebPropertyId               :: !(Maybe Text)
     , _uKind                        :: !Text
-    , _uCreated                     :: !(Maybe DateTime)
+    , _uCreated                     :: !(Maybe DateTime')
     , _uFilters                     :: !(Maybe Text)
     , _uProfileId                   :: !(Maybe Text)
     , _uEndDate                     :: !(Maybe Text)
     , _uSelfLink                    :: !(Maybe Text)
     , _uAccountId                   :: !(Maybe Text)
     , _uId                          :: !(Maybe Text)
-    , _uUpdated                     :: !(Maybe DateTime)
+    , _uUpdated                     :: !(Maybe DateTime')
     , _uTitle                       :: !(Maybe Text)
     , _uDimensions                  :: !(Maybe Text)
     , _uSegment                     :: !(Maybe Text)
@@ -481,7 +481,9 @@ uKind = lens _uKind (\ s a -> s{_uKind = a})
 
 -- | Time this unsampled report was created.
 uCreated :: Lens' UnSampledReport (Maybe UTCTime)
-uCreated = lens _uCreated (\ s a -> s{_uCreated = a})
+uCreated
+  = lens _uCreated (\ s a -> s{_uCreated = a}) .
+      mapping _DateTime
 
 -- | The filters for the unsampled report.
 uFilters :: Lens' UnSampledReport (Maybe Text)
@@ -512,7 +514,9 @@ uId = lens _uId (\ s a -> s{_uId = a})
 
 -- | Time this unsampled report was last modified.
 uUpdated :: Lens' UnSampledReport (Maybe UTCTime)
-uUpdated = lens _uUpdated (\ s a -> s{_uUpdated = a})
+uUpdated
+  = lens _uUpdated (\ s a -> s{_uUpdated = a}) .
+      mapping _DateTime
 
 -- | Title of the unsampled report.
 uTitle :: Lens' UnSampledReport (Maybe Text)
@@ -3033,14 +3037,14 @@ data Profile = Profile
     , _proSiteSearchQueryParameters         :: !(Maybe Text)
     , _proKind                              :: !Text
     , _proDefaultPage                       :: !(Maybe Text)
-    , _proCreated                           :: !(Maybe DateTime)
+    , _proCreated                           :: !(Maybe DateTime')
     , _proSelfLink                          :: !(Maybe Text)
     , _proAccountId                         :: !(Maybe Text)
     , _proName                              :: !(Maybe Text)
     , _proCurrency                          :: !(Maybe Text)
     , _proInternalWebPropertyId             :: !(Maybe Text)
     , _proId                                :: !(Maybe Text)
-    , _proUpdated                           :: !(Maybe DateTime)
+    , _proUpdated                           :: !(Maybe DateTime')
     , _proPermissions                       :: !(Maybe ProfilePermissions)
     , _proWebsiteURL                        :: !(Maybe Text)
     , _proType                              :: !(Maybe Text)
@@ -3183,7 +3187,8 @@ proDefaultPage
 -- | Time this view (profile) was created.
 proCreated :: Lens' Profile (Maybe UTCTime)
 proCreated
-  = lens _proCreated (\ s a -> s{_proCreated = a})
+  = lens _proCreated (\ s a -> s{_proCreated = a}) .
+      mapping _DateTime
 
 -- | Link for this view (profile).
 proSelfLink :: Lens' Profile (Maybe Text)
@@ -3220,7 +3225,8 @@ proId = lens _proId (\ s a -> s{_proId = a})
 -- | Time this view (profile) was last modified.
 proUpdated :: Lens' Profile (Maybe UTCTime)
 proUpdated
-  = lens _proUpdated (\ s a -> s{_proUpdated = a})
+  = lens _proUpdated (\ s a -> s{_proUpdated = a}) .
+      mapping _DateTime
 
 -- | Permissions the user has for this view (profile).
 proPermissions :: Lens' Profile (Maybe ProfilePermissions)
@@ -3801,14 +3807,14 @@ data CustomDataSource = CustomDataSource
     , _cWebPropertyId  :: !(Maybe Text)
     , _cChildLink      :: !(Maybe CustomDataSourceChildLink)
     , _cKind           :: !Text
-    , _cCreated        :: !(Maybe DateTime)
+    , _cCreated        :: !(Maybe DateTime')
     , _cUploadType     :: !(Maybe Text)
     , _cImportBehavior :: !(Maybe Text)
     , _cSelfLink       :: !(Maybe Text)
     , _cAccountId      :: !(Maybe Text)
     , _cName           :: !(Maybe Text)
     , _cId             :: !(Maybe Text)
-    , _cUpdated        :: !(Maybe DateTime)
+    , _cUpdated        :: !(Maybe DateTime')
     , _cType           :: !(Maybe Text)
     , _cDescription    :: !(Maybe Text)
     , _cProfilesLinked :: !(Maybe [Text])
@@ -3891,7 +3897,9 @@ cKind = lens _cKind (\ s a -> s{_cKind = a})
 
 -- | Time this custom data source was created.
 cCreated :: Lens' CustomDataSource (Maybe UTCTime)
-cCreated = lens _cCreated (\ s a -> s{_cCreated = a})
+cCreated
+  = lens _cCreated (\ s a -> s{_cCreated = a}) .
+      mapping _DateTime
 
 cUploadType :: Lens' CustomDataSource (Maybe Text)
 cUploadType
@@ -3922,7 +3930,9 @@ cId = lens _cId (\ s a -> s{_cId = a})
 
 -- | Time this custom data source was last modified.
 cUpdated :: Lens' CustomDataSource (Maybe UTCTime)
-cUpdated = lens _cUpdated (\ s a -> s{_cUpdated = a})
+cUpdated
+  = lens _cUpdated (\ s a -> s{_cUpdated = a}) .
+      mapping _DateTime
 
 -- | Type of the custom data source.
 cType :: Lens' CustomDataSource (Maybe Text)
@@ -4276,11 +4286,11 @@ instance ToJSON GoalVisitTimeOnSiteDetails where
 data Account = Account
     { _accChildLink   :: !(Maybe AccountChildLink)
     , _accKind        :: !Text
-    , _accCreated     :: !(Maybe DateTime)
+    , _accCreated     :: !(Maybe DateTime')
     , _accSelfLink    :: !(Maybe Text)
     , _accName        :: !(Maybe Text)
     , _accId          :: !(Maybe Text)
-    , _accUpdated     :: !(Maybe DateTime)
+    , _accUpdated     :: !(Maybe DateTime')
     , _accPermissions :: !(Maybe AccountPermissions)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -4330,7 +4340,8 @@ accKind = lens _accKind (\ s a -> s{_accKind = a})
 -- | Time the account was created.
 accCreated :: Lens' Account (Maybe UTCTime)
 accCreated
-  = lens _accCreated (\ s a -> s{_accCreated = a})
+  = lens _accCreated (\ s a -> s{_accCreated = a}) .
+      mapping _DateTime
 
 -- | Link for this account.
 accSelfLink :: Lens' Account (Maybe Text)
@@ -4348,7 +4359,8 @@ accId = lens _accId (\ s a -> s{_accId = a})
 -- | Time the account was last modified.
 accUpdated :: Lens' Account (Maybe UTCTime)
 accUpdated
-  = lens _accUpdated (\ s a -> s{_accUpdated = a})
+  = lens _accUpdated (\ s a -> s{_accUpdated = a}) .
+      mapping _DateTime
 
 -- | Permissions the user has for this account.
 accPermissions :: Lens' Account (Maybe AccountPermissions)
@@ -4566,10 +4578,10 @@ data Experiment = Experiment
     , _expEqualWeighting                 :: !(Maybe Bool)
     , _expStatus                         :: !(Maybe Text)
     , _expWebPropertyId                  :: !(Maybe Text)
-    , _expStartTime                      :: !(Maybe DateTime)
+    , _expStartTime                      :: !(Maybe DateTime')
     , _expSnippet                        :: !(Maybe Text)
     , _expKind                           :: !Text
-    , _expCreated                        :: !(Maybe DateTime)
+    , _expCreated                        :: !(Maybe DateTime')
     , _expReasonExperimentEnded          :: !(Maybe Text)
     , _expTrafficCoverage                :: !(Maybe Double)
     , _expEditableInGaUi                 :: !(Maybe Bool)
@@ -4580,11 +4592,11 @@ data Experiment = Experiment
     , _expAccountId                      :: !(Maybe Text)
     , _expName                           :: !(Maybe Text)
     , _expWinnerFound                    :: !(Maybe Bool)
-    , _expEndTime                        :: !(Maybe DateTime)
+    , _expEndTime                        :: !(Maybe DateTime')
     , _expVariations                     :: !(Maybe [ExperimentVariations])
     , _expInternalWebPropertyId          :: !(Maybe Text)
     , _expId                             :: !(Maybe Text)
-    , _expUpdated                        :: !(Maybe DateTime)
+    , _expUpdated                        :: !(Maybe DateTime')
     , _expRewriteVariationURLsAsOriginal :: !(Maybe Bool)
     , _expObjectiveMetric                :: !(Maybe Text)
     , _expWinnerConfidenceLevel          :: !(Maybe Double)
@@ -4723,6 +4735,7 @@ expWebPropertyId
 expStartTime :: Lens' Experiment (Maybe UTCTime)
 expStartTime
   = lens _expStartTime (\ s a -> s{_expStartTime = a})
+      . mapping _DateTime
 
 -- | The snippet of code to include on the control page(s). This field is
 -- read-only.
@@ -4737,7 +4750,8 @@ expKind = lens _expKind (\ s a -> s{_expKind = a})
 -- | Time the experiment was created. This field is read-only.
 expCreated :: Lens' Experiment (Maybe UTCTime)
 expCreated
-  = lens _expCreated (\ s a -> s{_expCreated = a})
+  = lens _expCreated (\ s a -> s{_expCreated = a}) .
+      mapping _DateTime
 
 -- | Why the experiment ended. Possible values: \"STOPPED_BY_USER\",
 -- \"WINNER_FOUND\", \"EXPERIMENT_EXPIRED\", \"ENDED_WITH_NO_WINNER\",
@@ -4816,7 +4830,8 @@ expWinnerFound
 -- ended. This field is read-only.
 expEndTime :: Lens' Experiment (Maybe UTCTime)
 expEndTime
-  = lens _expEndTime (\ s a -> s{_expEndTime = a})
+  = lens _expEndTime (\ s a -> s{_expEndTime = a}) .
+      mapping _DateTime
 
 -- | Array of variations. The first variation in the array is the original.
 -- The number of variations may not change once an experiment is in the
@@ -4843,7 +4858,8 @@ expId = lens _expId (\ s a -> s{_expId = a})
 -- | Time the experiment was last modified. This field is read-only.
 expUpdated :: Lens' Experiment (Maybe UTCTime)
 expUpdated
-  = lens _expUpdated (\ s a -> s{_expUpdated = a})
+  = lens _expUpdated (\ s a -> s{_expUpdated = a}) .
+      mapping _DateTime
 
 -- | Boolean specifying whether variations URLS are rewritten to match those
 -- of the original. This field may not be changed for an experiments whose
@@ -5577,13 +5593,13 @@ data WebProperty = WebProperty
     , _wChildLink             :: !(Maybe WebPropertyChildLink)
     , _wDefaultProfileId      :: !(Maybe Int64)
     , _wKind                  :: !Text
-    , _wCreated               :: !(Maybe DateTime)
+    , _wCreated               :: !(Maybe DateTime')
     , _wSelfLink              :: !(Maybe Text)
     , _wAccountId             :: !(Maybe Text)
     , _wName                  :: !(Maybe Text)
     , _wInternalWebPropertyId :: !(Maybe Text)
     , _wId                    :: !(Maybe Text)
-    , _wUpdated               :: !(Maybe DateTime)
+    , _wUpdated               :: !(Maybe DateTime')
     , _wProfileCount          :: !(Maybe Int32)
     , _wPermissions           :: !(Maybe WebPropertyPermissions)
     , _wWebsiteURL            :: !(Maybe Text)
@@ -5672,7 +5688,9 @@ wKind = lens _wKind (\ s a -> s{_wKind = a})
 
 -- | Time this web property was created.
 wCreated :: Lens' WebProperty (Maybe UTCTime)
-wCreated = lens _wCreated (\ s a -> s{_wCreated = a})
+wCreated
+  = lens _wCreated (\ s a -> s{_wCreated = a}) .
+      mapping _DateTime
 
 -- | Link for this web property.
 wSelfLink :: Lens' WebProperty (Maybe Text)
@@ -5700,7 +5718,9 @@ wId = lens _wId (\ s a -> s{_wId = a})
 
 -- | Time this web property was last modified.
 wUpdated :: Lens' WebProperty (Maybe UTCTime)
-wUpdated = lens _wUpdated (\ s a -> s{_wUpdated = a})
+wUpdated
+  = lens _wUpdated (\ s a -> s{_wUpdated = a}) .
+      mapping _DateTime
 
 -- | View (Profile) count for this web property.
 wProfileCount :: Lens' WebProperty (Maybe Int32)
@@ -5778,7 +5798,7 @@ data CustomMetric = CustomMetric
     , _cusWebPropertyId :: !(Maybe Text)
     , _cusKind          :: !Text
     , _cusMaxValue      :: !(Maybe Text)
-    , _cusCreated       :: !(Maybe DateTime)
+    , _cusCreated       :: !(Maybe DateTime')
     , _cusMinValue      :: !(Maybe Text)
     , _cusActive        :: !(Maybe Bool)
     , _cusSelfLink      :: !(Maybe Text)
@@ -5786,7 +5806,7 @@ data CustomMetric = CustomMetric
     , _cusName          :: !(Maybe Text)
     , _cusScope         :: !(Maybe Text)
     , _cusId            :: !(Maybe Text)
-    , _cusUpdated       :: !(Maybe DateTime)
+    , _cusUpdated       :: !(Maybe DateTime')
     , _cusType          :: !(Maybe Text)
     , _cusIndex         :: !(Maybe Int32)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -5871,7 +5891,8 @@ cusMaxValue
 -- | Time the custom metric was created.
 cusCreated :: Lens' CustomMetric (Maybe UTCTime)
 cusCreated
-  = lens _cusCreated (\ s a -> s{_cusCreated = a})
+  = lens _cusCreated (\ s a -> s{_cusCreated = a}) .
+      mapping _DateTime
 
 -- | Min value of custom metric.
 cusMinValue :: Lens' CustomMetric (Maybe Text)
@@ -5908,7 +5929,8 @@ cusId = lens _cusId (\ s a -> s{_cusId = a})
 -- | Time the custom metric was last modified.
 cusUpdated :: Lens' CustomMetric (Maybe UTCTime)
 cusUpdated
-  = lens _cusUpdated (\ s a -> s{_cusUpdated = a})
+  = lens _cusUpdated (\ s a -> s{_cusUpdated = a}) .
+      mapping _DateTime
 
 -- | Data type of custom metric.
 cusType :: Lens' CustomMetric (Maybe Text)
@@ -6956,7 +6978,7 @@ data Goal = Goal
     { _goaParentLink             :: !(Maybe GoalParentLink)
     , _goaWebPropertyId          :: !(Maybe Text)
     , _goaKind                   :: !Text
-    , _goaCreated                :: !(Maybe DateTime)
+    , _goaCreated                :: !(Maybe DateTime')
     , _goaValue                  :: !(Maybe Float)
     , _goaProfileId              :: !(Maybe Text)
     , _goaEventDetails           :: !(Maybe GoalEventDetails)
@@ -6969,7 +6991,7 @@ data Goal = Goal
     , _goaId                     :: !(Maybe Text)
     , _goaURLDestinationDetails  :: !(Maybe GoalURLDestinationDetails)
     , _goaVisitNumPagesDetails   :: !(Maybe GoalVisitNumPagesDetails)
-    , _goaUpdated                :: !(Maybe DateTime)
+    , _goaUpdated                :: !(Maybe DateTime')
     , _goaType                   :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -7057,7 +7079,8 @@ goaKind = lens _goaKind (\ s a -> s{_goaKind = a})
 -- | Time this goal was created.
 goaCreated :: Lens' Goal (Maybe UTCTime)
 goaCreated
-  = lens _goaCreated (\ s a -> s{_goaCreated = a})
+  = lens _goaCreated (\ s a -> s{_goaCreated = a}) .
+      mapping _DateTime
 
 -- | Goal value.
 goaValue :: Lens' Goal (Maybe Float)
@@ -7124,7 +7147,8 @@ goaVisitNumPagesDetails
 -- | Time this goal was last modified.
 goaUpdated :: Lens' Goal (Maybe UTCTime)
 goaUpdated
-  = lens _goaUpdated (\ s a -> s{_goaUpdated = a})
+  = lens _goaUpdated (\ s a -> s{_goaUpdated = a}) .
+      mapping _DateTime
 
 -- | Goal type. Possible values are URL_DESTINATION, VISIT_TIME_ON_SITE,
 -- VISIT_NUM_PAGES, AND EVENT.
@@ -7681,14 +7705,14 @@ data Filter = Filter
     , _filUppercaseDetails        :: !(Maybe FilterUppercaseDetails)
     , _filLowercaseDetails        :: !(Maybe FilterLowercaseDetails)
     , _filKind                    :: !Text
-    , _filCreated                 :: !(Maybe DateTime)
+    , _filCreated                 :: !(Maybe DateTime')
     , _filIncludeDetails          :: !(Maybe FilterExpression)
     , _filExcludeDetails          :: !(Maybe FilterExpression)
     , _filSelfLink                :: !(Maybe Text)
     , _filAccountId               :: !(Maybe Text)
     , _filName                    :: !(Maybe Text)
     , _filId                      :: !(Maybe Text)
-    , _filUpdated                 :: !(Maybe DateTime)
+    , _filUpdated                 :: !(Maybe DateTime')
     , _filType                    :: !(Maybe Text)
     , _filSearchAndReplaceDetails :: !(Maybe FilterSearchAndReplaceDetails)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -7779,7 +7803,8 @@ filKind = lens _filKind (\ s a -> s{_filKind = a})
 -- | Time this filter was created.
 filCreated :: Lens' Filter (Maybe UTCTime)
 filCreated
-  = lens _filCreated (\ s a -> s{_filCreated = a})
+  = lens _filCreated (\ s a -> s{_filCreated = a}) .
+      mapping _DateTime
 
 -- | Details for the filter of the type INCLUDE.
 filIncludeDetails :: Lens' Filter (Maybe FilterExpression)
@@ -7814,7 +7839,8 @@ filId = lens _filId (\ s a -> s{_filId = a})
 -- | Time this filter was last modified.
 filUpdated :: Lens' Filter (Maybe UTCTime)
 filUpdated
-  = lens _filUpdated (\ s a -> s{_filUpdated = a})
+  = lens _filUpdated (\ s a -> s{_filUpdated = a}) .
+      mapping _DateTime
 
 -- | Type of this filter. Possible values are INCLUDE, EXCLUDE, LOWERCASE,
 -- UPPERCASE, SEARCH_AND_REPLACE and ADVANCED.
@@ -8170,11 +8196,11 @@ instance ToJSON ProfileFilterLinks where
 data Segment = Segment
     { _segDefinition :: !(Maybe Text)
     , _segKind       :: !Text
-    , _segCreated    :: !(Maybe DateTime)
+    , _segCreated    :: !(Maybe DateTime')
     , _segSelfLink   :: !(Maybe Text)
     , _segName       :: !(Maybe Text)
     , _segId         :: !(Maybe Text)
-    , _segUpdated    :: !(Maybe DateTime)
+    , _segUpdated    :: !(Maybe DateTime')
     , _segType       :: !(Maybe Text)
     , _segSegmentId  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -8228,7 +8254,8 @@ segKind = lens _segKind (\ s a -> s{_segKind = a})
 -- | Time the segment was created.
 segCreated :: Lens' Segment (Maybe UTCTime)
 segCreated
-  = lens _segCreated (\ s a -> s{_segCreated = a})
+  = lens _segCreated (\ s a -> s{_segCreated = a}) .
+      mapping _DateTime
 
 -- | Link for this segment.
 segSelfLink :: Lens' Segment (Maybe Text)
@@ -8246,7 +8273,8 @@ segId = lens _segId (\ s a -> s{_segId = a})
 -- | Time the segment was last modified.
 segUpdated :: Lens' Segment (Maybe UTCTime)
 segUpdated
-  = lens _segUpdated (\ s a -> s{_segUpdated = a})
+  = lens _segUpdated (\ s a -> s{_segUpdated = a}) .
+      mapping _DateTime
 
 -- | Type for a segment. Possible values are \"BUILT_IN\" or \"CUSTOM\".
 segType :: Lens' Segment (Maybe Text)
@@ -8565,14 +8593,14 @@ data CustomDimension = CustomDimension
     { _cddParentLink    :: !(Maybe CustomDimensionParentLink)
     , _cddWebPropertyId :: !(Maybe Text)
     , _cddKind          :: !Text
-    , _cddCreated       :: !(Maybe DateTime)
+    , _cddCreated       :: !(Maybe DateTime')
     , _cddActive        :: !(Maybe Bool)
     , _cddSelfLink      :: !(Maybe Text)
     , _cddAccountId     :: !(Maybe Text)
     , _cddName          :: !(Maybe Text)
     , _cddScope         :: !(Maybe Text)
     , _cddId            :: !(Maybe Text)
-    , _cddUpdated       :: !(Maybe DateTime)
+    , _cddUpdated       :: !(Maybe DateTime')
     , _cddIndex         :: !(Maybe Int32)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -8642,7 +8670,8 @@ cddKind = lens _cddKind (\ s a -> s{_cddKind = a})
 -- | Time the custom dimension was created.
 cddCreated :: Lens' CustomDimension (Maybe UTCTime)
 cddCreated
-  = lens _cddCreated (\ s a -> s{_cddCreated = a})
+  = lens _cddCreated (\ s a -> s{_cddCreated = a}) .
+      mapping _DateTime
 
 -- | Boolean indicating whether the custom dimension is active.
 cddActive :: Lens' CustomDimension (Maybe Bool)
@@ -8674,7 +8703,8 @@ cddId = lens _cddId (\ s a -> s{_cddId = a})
 -- | Time the custom dimension was last modified.
 cddUpdated :: Lens' CustomDimension (Maybe UTCTime)
 cddUpdated
-  = lens _cddUpdated (\ s a -> s{_cddUpdated = a})
+  = lens _cddUpdated (\ s a -> s{_cddUpdated = a}) .
+      mapping _DateTime
 
 -- | Index of the custom dimension.
 cddIndex :: Lens' CustomDimension (Maybe Int32)

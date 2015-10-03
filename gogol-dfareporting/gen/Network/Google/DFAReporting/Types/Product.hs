@@ -3414,9 +3414,9 @@ instance ToJSON FloodlightConfigurationsListResponse
 -- /See:/ 'dimensionValueRequest' smart constructor.
 data DimensionValueRequest = DimensionValueRequest
     { _dvrKind          :: !Text
-    , _dvrEndDate       :: !(Maybe Date)
+    , _dvrEndDate       :: !(Maybe Date')
     , _dvrFilters       :: !(Maybe [DimensionFilter])
-    , _dvrStartDate     :: !(Maybe Date)
+    , _dvrStartDate     :: !(Maybe Date')
     , _dvrDimensionName :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -3451,9 +3451,10 @@ dvrKind = lens _dvrKind (\ s a -> s{_dvrKind = a})
 
 -- | The end date of the date range for which to retrieve dimension values. A
 -- string of the format \"yyyy-MM-dd\".
-dvrEndDate :: Lens' DimensionValueRequest (Maybe UTCTime)
+dvrEndDate :: Lens' DimensionValueRequest (Maybe LocalTime)
 dvrEndDate
-  = lens _dvrEndDate (\ s a -> s{_dvrEndDate = a})
+  = lens _dvrEndDate (\ s a -> s{_dvrEndDate = a}) .
+      mapping _Date
 
 -- | The list of filters by which to filter values. The filters are ANDed.
 dvrFilters :: Lens' DimensionValueRequest [DimensionFilter]
@@ -3464,9 +3465,10 @@ dvrFilters
 
 -- | The start date of the date range for which to retrieve dimension values.
 -- A string of the format \"yyyy-MM-dd\".
-dvrStartDate :: Lens' DimensionValueRequest (Maybe UTCTime)
+dvrStartDate :: Lens' DimensionValueRequest (Maybe LocalTime)
 dvrStartDate
   = lens _dvrStartDate (\ s a -> s{_dvrStartDate = a})
+      . mapping _Date
 
 -- | The name of the dimension for which values should be requested.
 dvrDimensionName :: Lens' DimensionValueRequest (Maybe Text)
@@ -3507,7 +3509,7 @@ data Ad = Ad
     , _addAudienceSegmentId                     :: !(Maybe Int64)
     , _addDayPartTargeting                      :: !(Maybe DayPartTargeting)
     , _addSize                                  :: !(Maybe Size)
-    , _addStartTime                             :: !(Maybe DateTime)
+    , _addStartTime                             :: !(Maybe DateTime')
     , _addKind                                  :: !Text
     , _addClickThroughURLSuffixProperties       :: !(Maybe ClickThroughURLSuffixProperties)
     , _addCampaignIdDimensionValue              :: !(Maybe DimensionValue)
@@ -3523,7 +3525,7 @@ data Ad = Ad
     , _addAccountId                             :: !(Maybe Int64)
     , _addName                                  :: !(Maybe Text)
     , _addKeyValueTargetingExpression           :: !(Maybe KeyValueTargetingExpression)
-    , _addEndTime                               :: !(Maybe DateTime)
+    , _addEndTime                               :: !(Maybe DateTime')
     , _addCreateInfo                            :: !(Maybe LastModifiedInfo)
     , _addLastModifiedInfo                      :: !(Maybe LastModifiedInfo)
     , _addId                                    :: !(Maybe Int64)
@@ -3716,6 +3718,7 @@ addSize = lens _addSize (\ s a -> s{_addSize = a})
 addStartTime :: Lens' Ad (Maybe UTCTime)
 addStartTime
   = lens _addStartTime (\ s a -> s{_addStartTime = a})
+      . mapping _DateTime
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#ad\".
@@ -3819,7 +3822,8 @@ addKeyValueTargetingExpression
 -- start time. This is a required field on insertion.
 addEndTime :: Lens' Ad (Maybe UTCTime)
 addEndTime
-  = lens _addEndTime (\ s a -> s{_addEndTime = a})
+  = lens _addEndTime (\ s a -> s{_addEndTime = a}) .
+      mapping _DateTime
 
 -- | Information about the creation of this ad.This is a read-only field.
 addCreateInfo :: Lens' Ad (Maybe LastModifiedInfo)
@@ -4520,10 +4524,10 @@ data Project = Project
     , _pBudget            :: !(Maybe Int64)
     , _pKind              :: !Text
     , _pAdvertiserId      :: !(Maybe Int64)
-    , _pEndDate           :: !(Maybe Date)
+    , _pEndDate           :: !(Maybe Date')
     , _pOverview          :: !(Maybe Text)
     , _pTargetImpressions :: !(Maybe Int64)
-    , _pStartDate         :: !(Maybe Date)
+    , _pStartDate         :: !(Maybe Date')
     , _pTargetCpcNanos    :: !(Maybe Int64)
     , _pAccountId         :: !(Maybe Int64)
     , _pName              :: !(Maybe Text)
@@ -4651,8 +4655,10 @@ pAdvertiserId
       (\ s a -> s{_pAdvertiserId = a})
 
 -- | End date of the project.
-pEndDate :: Lens' Project (Maybe UTCTime)
-pEndDate = lens _pEndDate (\ s a -> s{_pEndDate = a})
+pEndDate :: Lens' Project (Maybe LocalTime)
+pEndDate
+  = lens _pEndDate (\ s a -> s{_pEndDate = a}) .
+      mapping _Date
 
 -- | Overview of this project.
 pOverview :: Lens' Project (Maybe Text)
@@ -4666,9 +4672,10 @@ pTargetImpressions
       (\ s a -> s{_pTargetImpressions = a})
 
 -- | Start date of the project.
-pStartDate :: Lens' Project (Maybe UTCTime)
+pStartDate :: Lens' Project (Maybe LocalTime)
 pStartDate
-  = lens _pStartDate (\ s a -> s{_pStartDate = a})
+  = lens _pStartDate (\ s a -> s{_pStartDate = a}) .
+      mapping _Date
 
 -- | CPC that the advertiser is targeting.
 pTargetCpcNanos :: Lens' Project (Maybe Int64)
@@ -4931,11 +4938,11 @@ instance ToJSON PlacementStrategiesListResponse where
 --
 -- /See:/ 'pricingSchedule' smart constructor.
 data PricingSchedule = PricingSchedule
-    { _psTestingStartDate      :: !(Maybe Date)
+    { _psTestingStartDate      :: !(Maybe Date')
     , _psFloodlightActivityId  :: !(Maybe Int64)
-    , _psEndDate               :: !(Maybe Date)
+    , _psEndDate               :: !(Maybe Date')
     , _psDisregardOverdelivery :: !(Maybe Bool)
-    , _psStartDate             :: !(Maybe Date)
+    , _psStartDate             :: !(Maybe Date')
     , _psCapCostOption         :: !(Maybe PricingScheduleCapCostOption)
     , _psPricingType           :: !(Maybe PricingSchedulePricingType)
     , _psPricingPeriods        :: !(Maybe [PricingSchedulePricingPeriod])
@@ -4980,10 +4987,11 @@ pricingSchedule =
 
 -- | Testing start date of this placement. The hours, minutes, and seconds of
 -- the start date should not be set, as doing so will result in an error.
-psTestingStartDate :: Lens' PricingSchedule (Maybe UTCTime)
+psTestingStartDate :: Lens' PricingSchedule (Maybe LocalTime)
 psTestingStartDate
   = lens _psTestingStartDate
       (\ s a -> s{_psTestingStartDate = a})
+      . mapping _Date
 
 -- | Floodlight activity ID associated with this placement. This field should
 -- be set when placement pricing type is set to PRICING_TYPE_CPA.
@@ -4998,9 +5006,10 @@ psFloodlightActivityId
 -- effective placement date is just that day only, 6\/25\/2015. The hours,
 -- minutes, and seconds of the end date should not be set, as doing so will
 -- result in an error. This field is required on insertion.
-psEndDate :: Lens' PricingSchedule (Maybe UTCTime)
+psEndDate :: Lens' PricingSchedule (Maybe LocalTime)
 psEndDate
-  = lens _psEndDate (\ s a -> s{_psEndDate = a})
+  = lens _psEndDate (\ s a -> s{_psEndDate = a}) .
+      mapping _Date
 
 -- | Whether cap costs are ignored by ad serving.
 psDisregardOverdelivery :: Lens' PricingSchedule (Maybe Bool)
@@ -5012,9 +5021,10 @@ psDisregardOverdelivery
 -- the campaign start date. The hours, minutes, and seconds of the start
 -- date should not be set, as doing so will result in an error. This field
 -- is required on insertion.
-psStartDate :: Lens' PricingSchedule (Maybe UTCTime)
+psStartDate :: Lens' PricingSchedule (Maybe LocalTime)
 psStartDate
-  = lens _psStartDate (\ s a -> s{_psStartDate = a})
+  = lens _psStartDate (\ s a -> s{_psStartDate = a}) .
+      mapping _Date
 
 -- | Placement cap cost option.
 psCapCostOption :: Lens' PricingSchedule (Maybe PricingScheduleCapCostOption)
@@ -5800,8 +5810,8 @@ instance ToJSON Country where
 --
 -- /See:/ 'pricing' smart constructor.
 data Pricing = Pricing
-    { _priEndDate     :: !(Maybe Date)
-    , _priStartDate   :: !(Maybe Date)
+    { _priEndDate     :: !(Maybe Date')
+    , _priStartDate   :: !(Maybe Date')
     , _priGroupType   :: !(Maybe PricingGroupType)
     , _priPricingType :: !(Maybe PricingPricingType)
     , _priFlights     :: !(Maybe [Flight])
@@ -5836,14 +5846,16 @@ pricing =
     }
 
 -- | End date of this inventory item.
-priEndDate :: Lens' Pricing (Maybe UTCTime)
+priEndDate :: Lens' Pricing (Maybe LocalTime)
 priEndDate
-  = lens _priEndDate (\ s a -> s{_priEndDate = a})
+  = lens _priEndDate (\ s a -> s{_priEndDate = a}) .
+      mapping _Date
 
 -- | Start date of this inventory item.
-priStartDate :: Lens' Pricing (Maybe UTCTime)
+priStartDate :: Lens' Pricing (Maybe LocalTime)
 priStartDate
   = lens _priStartDate (\ s a -> s{_priStartDate = a})
+      . mapping _Date
 
 -- | Group type of this inventory item if it represents a placement group. Is
 -- null otherwise. There are two type of placement groups:
@@ -6065,8 +6077,8 @@ instance ToJSON Dimension where
 -- /See:/ 'flight' smart constructor.
 data Flight = Flight
     { _fRateOrCost :: !(Maybe Int64)
-    , _fEndDate    :: !(Maybe Date)
-    , _fStartDate  :: !(Maybe Date)
+    , _fEndDate    :: !(Maybe Date')
+    , _fStartDate  :: !(Maybe Date')
     , _fUnits      :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -6097,13 +6109,16 @@ fRateOrCost
   = lens _fRateOrCost (\ s a -> s{_fRateOrCost = a})
 
 -- | Inventory item flight end date.
-fEndDate :: Lens' Flight (Maybe UTCTime)
-fEndDate = lens _fEndDate (\ s a -> s{_fEndDate = a})
+fEndDate :: Lens' Flight (Maybe LocalTime)
+fEndDate
+  = lens _fEndDate (\ s a -> s{_fEndDate = a}) .
+      mapping _Date
 
 -- | Inventory item flight start date.
-fStartDate :: Lens' Flight (Maybe UTCTime)
+fStartDate :: Lens' Flight (Maybe LocalTime)
 fStartDate
-  = lens _fStartDate (\ s a -> s{_fStartDate = a})
+  = lens _fStartDate (\ s a -> s{_fStartDate = a}) .
+      mapping _Date
 
 -- | Units of this flight.
 fUnits :: Lens' Flight (Maybe Int64)
@@ -7372,8 +7387,8 @@ instance ToJSON SiteContact where
 -- /See:/ 'dateRange' smart constructor.
 data DateRange = DateRange
     { _drKind              :: !Text
-    , _drEndDate           :: !(Maybe Date)
-    , _drStartDate         :: !(Maybe Date)
+    , _drEndDate           :: !(Maybe Date')
+    , _drStartDate         :: !(Maybe Date')
     , _drRelativeDateRange :: !(Maybe DateRangeRelativeDateRange)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -7404,15 +7419,17 @@ drKind = lens _drKind (\ s a -> s{_drKind = a})
 
 -- | The end date of the date range, inclusive. A string of the format:
 -- \"yyyy-MM-dd\".
-drEndDate :: Lens' DateRange (Maybe UTCTime)
+drEndDate :: Lens' DateRange (Maybe LocalTime)
 drEndDate
-  = lens _drEndDate (\ s a -> s{_drEndDate = a})
+  = lens _drEndDate (\ s a -> s{_drEndDate = a}) .
+      mapping _Date
 
 -- | The start date of the date range, inclusive. A string of the format:
 -- \"yyyy-MM-dd\".
-drStartDate :: Lens' DateRange (Maybe UTCTime)
+drStartDate :: Lens' DateRange (Maybe LocalTime)
 drStartDate
-  = lens _drStartDate (\ s a -> s{_drStartDate = a})
+  = lens _drStartDate (\ s a -> s{_drStartDate = a}) .
+      mapping _Date
 
 -- | The date range relative to the date of when the report is run.
 drRelativeDateRange :: Lens' DateRange (Maybe DateRangeRelativeDateRange)
@@ -8362,12 +8379,12 @@ data Campaign = Campaign
     , _camKind                                         :: !Text
     , _camClickThroughURLSuffixProperties              :: !(Maybe ClickThroughURLSuffixProperties)
     , _camAdvertiserId                                 :: !(Maybe Int64)
-    , _camEndDate                                      :: !(Maybe Date)
+    , _camEndDate                                      :: !(Maybe Date')
     , _camAdvertiserIdDimensionValue                   :: !(Maybe DimensionValue)
     , _camIdDimensionValue                             :: !(Maybe DimensionValue)
     , _camEventTagOverrides                            :: !(Maybe [EventTagOverride])
     , _camLookbackConfiguration                        :: !(Maybe LookbackConfiguration)
-    , _camStartDate                                    :: !(Maybe Date)
+    , _camStartDate                                    :: !(Maybe Date')
     , _camAccountId                                    :: !(Maybe Int64)
     , _camComscoreVceEnabled                           :: !(Maybe Bool)
     , _camName                                         :: !(Maybe Text)
@@ -8524,9 +8541,10 @@ camAdvertiserId
 -- day only, 6\/25\/2015. The hours, minutes, and seconds of the end date
 -- should not be set, as doing so will result in an error. This is a
 -- required field.
-camEndDate :: Lens' Campaign (Maybe UTCTime)
+camEndDate :: Lens' Campaign (Maybe LocalTime)
 camEndDate
-  = lens _camEndDate (\ s a -> s{_camEndDate = a})
+  = lens _camEndDate (\ s a -> s{_camEndDate = a}) .
+      mapping _Date
 
 -- | Dimension value for the advertiser ID of this campaign. This is a
 -- read-only, auto-generated field.
@@ -8560,9 +8578,10 @@ camLookbackConfiguration
 -- | Date on which the campaign starts running. The start date can be any
 -- date. The hours, minutes, and seconds of the start date should not be
 -- set, as doing so will result in an error. This is a required field.
-camStartDate :: Lens' Campaign (Maybe UTCTime)
+camStartDate :: Lens' Campaign (Maybe LocalTime)
 camStartDate
   = lens _camStartDate (\ s a -> s{_camStartDate = a})
+      . mapping _Date
 
 -- | Account ID of this campaign. This is a read-only field that can be left
 -- blank.
@@ -12782,7 +12801,7 @@ data ChangeLog = ChangeLog
     , _clFieldName       :: !(Maybe Text)
     , _clId              :: !(Maybe Int64)
     , _clSubAccountId    :: !(Maybe Int64)
-    , _clChangeTime      :: !(Maybe DateTime)
+    , _clChangeTime      :: !(Maybe DateTime')
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangeLog' with the minimum fields required to make a request.
@@ -12910,6 +12929,7 @@ clSubAccountId
 clChangeTime :: Lens' ChangeLog (Maybe UTCTime)
 clChangeTime
   = lens _clChangeTime (\ s a -> s{_clChangeTime = a})
+      . mapping _DateTime
 
 instance FromJSON ChangeLog where
         parseJSON
@@ -14346,9 +14366,9 @@ instance ToJSON DimensionFilter where
 --
 -- /See:/ 'pricingSchedulePricingPeriod' smart constructor.
 data PricingSchedulePricingPeriod = PricingSchedulePricingPeriod
-    { _psppEndDate         :: !(Maybe Date)
+    { _psppEndDate         :: !(Maybe Date')
     , _psppRateOrCostNanos :: !(Maybe Int64)
-    , _psppStartDate       :: !(Maybe Date)
+    , _psppStartDate       :: !(Maybe Date')
     , _psppUnits           :: !(Maybe Int64)
     , _psppPricingComment  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -14384,9 +14404,10 @@ pricingSchedulePricingPeriod =
 -- the effective pricing period date is just that day only, 6\/25\/2015.
 -- The hours, minutes, and seconds of the end date should not be set, as
 -- doing so will result in an error.
-psppEndDate :: Lens' PricingSchedulePricingPeriod (Maybe UTCTime)
+psppEndDate :: Lens' PricingSchedulePricingPeriod (Maybe LocalTime)
 psppEndDate
-  = lens _psppEndDate (\ s a -> s{_psppEndDate = a})
+  = lens _psppEndDate (\ s a -> s{_psppEndDate = a}) .
+      mapping _Date
 
 -- | Rate or cost of this pricing period.
 psppRateOrCostNanos :: Lens' PricingSchedulePricingPeriod (Maybe Int64)
@@ -14397,10 +14418,11 @@ psppRateOrCostNanos
 -- | Pricing period start date. This date must be later than, or the same day
 -- as, the placement start date. The hours, minutes, and seconds of the
 -- start date should not be set, as doing so will result in an error.
-psppStartDate :: Lens' PricingSchedulePricingPeriod (Maybe UTCTime)
+psppStartDate :: Lens' PricingSchedulePricingPeriod (Maybe LocalTime)
 psppStartDate
   = lens _psppStartDate
       (\ s a -> s{_psppStartDate = a})
+      . mapping _Date
 
 -- | Units of this pricing period.
 psppUnits :: Lens' PricingSchedulePricingPeriod (Maybe Int64)
@@ -14915,7 +14937,7 @@ instance ToJSON RichMediaExitOverride where
 -- /See:/ 'creativeAssignment' smart constructor.
 data CreativeAssignment = CreativeAssignment
     { _caCreativeGroupAssignments   :: !(Maybe [CreativeGroupAssignment])
-    , _caStartTime                  :: !(Maybe DateTime)
+    , _caStartTime                  :: !(Maybe DateTime')
     , _caWeight                     :: !(Maybe Int32)
     , _caRichMediaExitOverrides     :: !(Maybe [RichMediaExitOverride])
     , _caSSLCompliant               :: !(Maybe Bool)
@@ -14924,7 +14946,7 @@ data CreativeAssignment = CreativeAssignment
     , _caApplyEventTags             :: !(Maybe Bool)
     , _caActive                     :: !(Maybe Bool)
     , _caSequence                   :: !(Maybe Int32)
-    , _caEndTime                    :: !(Maybe DateTime)
+    , _caEndTime                    :: !(Maybe DateTime')
     , _caCompanionCreativeOverrides :: !(Maybe [CompanionClickThroughOverride])
     , _caCreativeIdDimensionValue   :: !(Maybe DimensionValue)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -14990,7 +15012,8 @@ caCreativeGroupAssignments
 -- | Date and time that the assigned creative should start serving.
 caStartTime :: Lens' CreativeAssignment (Maybe UTCTime)
 caStartTime
-  = lens _caStartTime (\ s a -> s{_caStartTime = a})
+  = lens _caStartTime (\ s a -> s{_caStartTime = a}) .
+      mapping _DateTime
 
 -- | Weight of the creative assignment, applicable when the rotation type is
 -- CREATIVE_ROTATION_TYPE_RANDOM.
@@ -15053,7 +15076,8 @@ caSequence
 -- later than the start time.
 caEndTime :: Lens' CreativeAssignment (Maybe UTCTime)
 caEndTime
-  = lens _caEndTime (\ s a -> s{_caEndTime = a})
+  = lens _caEndTime (\ s a -> s{_caEndTime = a}) .
+      mapping _DateTime
 
 -- | Companion creative overrides for this creative assignment. Applicable to
 -- video ads.
@@ -16530,8 +16554,8 @@ data ReportSchedule = ReportSchedule
     { _rsEvery             :: !(Maybe Int32)
     , _rsActive            :: !(Maybe Bool)
     , _rsRepeats           :: !(Maybe Text)
-    , _rsStartDate         :: !(Maybe Date)
-    , _rsExpirationDate    :: !(Maybe Date)
+    , _rsStartDate         :: !(Maybe Date')
+    , _rsExpirationDate    :: !(Maybe Date')
     , _rsRunsOnDayOfMonth  :: !(Maybe ReportScheduleRunsOnDayOfMonth)
     , _rsRepeatsOnWeekDays :: !(Maybe [ReportScheduleRepeatsOnWeekDays])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -16586,15 +16610,17 @@ rsRepeats
   = lens _rsRepeats (\ s a -> s{_rsRepeats = a})
 
 -- | Start date of date range for which scheduled reports should be run.
-rsStartDate :: Lens' ReportSchedule (Maybe UTCTime)
+rsStartDate :: Lens' ReportSchedule (Maybe LocalTime)
 rsStartDate
-  = lens _rsStartDate (\ s a -> s{_rsStartDate = a})
+  = lens _rsStartDate (\ s a -> s{_rsStartDate = a}) .
+      mapping _Date
 
 -- | The expiration date when the scheduled report stops running.
-rsExpirationDate :: Lens' ReportSchedule (Maybe UTCTime)
+rsExpirationDate :: Lens' ReportSchedule (Maybe LocalTime)
 rsExpirationDate
   = lens _rsExpirationDate
       (\ s a -> s{_rsExpirationDate = a})
+      . mapping _Date
 
 -- | Enum to define for \"MONTHLY\" scheduled reports whether reports should
 -- be repeated on the same day of the month as \"startDate\" or the same
@@ -19462,10 +19488,10 @@ data OrderDocument = OrderDocument
     { _odSigned                   :: !(Maybe Bool)
     , _odKind                     :: !Text
     , _odAdvertiserId             :: !(Maybe Int64)
-    , _odLastSentTime             :: !(Maybe DateTime)
+    , _odLastSentTime             :: !(Maybe DateTime')
     , _odAmendedOrderDocumentId   :: !(Maybe Int64)
     , _odLastSentRecipients       :: !(Maybe [Text])
-    , _odEffectiveDate            :: !(Maybe Date)
+    , _odEffectiveDate            :: !(Maybe Date')
     , _odApprovedByUserProfileIds :: !(Maybe [Int64])
     , _odAccountId                :: !(Maybe Int64)
     , _odId                       :: !(Maybe Int64)
@@ -19558,6 +19584,7 @@ odLastSentTime :: Lens' OrderDocument (Maybe UTCTime)
 odLastSentTime
   = lens _odLastSentTime
       (\ s a -> s{_odLastSentTime = a})
+      . mapping _DateTime
 
 -- | The amended order document ID of this order document. An order document
 -- can be created by optionally amending another order document so that the
@@ -19576,10 +19603,11 @@ odLastSentRecipients
       . _Coerce
 
 -- | Effective date of this order document.
-odEffectiveDate :: Lens' OrderDocument (Maybe UTCTime)
+odEffectiveDate :: Lens' OrderDocument (Maybe LocalTime)
 odEffectiveDate
   = lens _odEffectiveDate
       (\ s a -> s{_odEffectiveDate = a})
+      . mapping _Date
 
 -- | IDs of users who have approved this order document.
 odApprovedByUserProfileIds :: Lens' OrderDocument [Int64]

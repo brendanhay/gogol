@@ -59,12 +59,12 @@ import           Network.Google.Prelude
 type AssetsListResource =
      "assets" :>
        QueryParam "bbox" Text :>
-         QueryParam "createdAfter" DateTime :>
-           QueryParam "createdBefore" DateTime :>
+         QueryParam "createdAfter" DateTime' :>
+           QueryParam "createdBefore" DateTime' :>
              QueryParam "creatorEmail" Text :>
                QueryParam "maxResults" Word32 :>
-                 QueryParam "modifiedAfter" DateTime :>
-                   QueryParam "modifiedBefore" DateTime :>
+                 QueryParam "modifiedAfter" DateTime' :>
+                   QueryParam "modifiedBefore" DateTime' :>
                      QueryParam "pageToken" Text :>
                        QueryParam "projectId" Text :>
                          QueryParam "role" MapsEngineAssetsListRole :>
@@ -85,7 +85,7 @@ type AssetsListResource =
 --
 -- /See:/ 'assetsList'' smart constructor.
 data AssetsList' = AssetsList'
-    { _alCreatedAfter   :: !(Maybe DateTime)
+    { _alCreatedAfter   :: !(Maybe DateTime')
     , _alQuotaUser      :: !(Maybe Text)
     , _alPrettyPrint    :: !Bool
     , _alUserIP         :: !(Maybe Text)
@@ -93,8 +93,8 @@ data AssetsList' = AssetsList'
     , _alRole           :: !(Maybe MapsEngineAssetsListRole)
     , _alKey            :: !(Maybe Key)
     , _alBbox           :: !(Maybe Text)
-    , _alModifiedAfter  :: !(Maybe DateTime)
-    , _alModifiedBefore :: !(Maybe DateTime)
+    , _alModifiedAfter  :: !(Maybe DateTime')
+    , _alModifiedBefore :: !(Maybe DateTime')
     , _alPageToken      :: !(Maybe Text)
     , _alProjectId      :: !(Maybe Text)
     , _alType           :: !(Maybe Text)
@@ -103,7 +103,7 @@ data AssetsList' = AssetsList'
     , _alMaxResults     :: !(Maybe Word32)
     , _alTags           :: !(Maybe Text)
     , _alFields         :: !(Maybe Text)
-    , _alCreatedBefore  :: !(Maybe DateTime)
+    , _alCreatedBefore  :: !(Maybe DateTime')
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AssetsList'' with the minimum fields required to make a request.
@@ -178,6 +178,7 @@ alCreatedAfter :: Lens' AssetsList' (Maybe UTCTime)
 alCreatedAfter
   = lens _alCreatedAfter
       (\ s a -> s{_alCreatedAfter = a})
+      . mapping _DateTime
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -226,6 +227,7 @@ alModifiedAfter :: Lens' AssetsList' (Maybe UTCTime)
 alModifiedAfter
   = lens _alModifiedAfter
       (\ s a -> s{_alModifiedAfter = a})
+      . mapping _DateTime
 
 -- | An RFC 3339 formatted date-time value (e.g. 1970-01-01T00:00:00Z).
 -- Returned assets will have been modified at or before this time.
@@ -233,6 +235,7 @@ alModifiedBefore :: Lens' AssetsList' (Maybe UTCTime)
 alModifiedBefore
   = lens _alModifiedBefore
       (\ s a -> s{_alModifiedBefore = a})
+      . mapping _DateTime
 
 -- | The continuation token, used to page through large result sets. To get
 -- the next page of results, set this parameter to the value of
@@ -286,6 +289,7 @@ alCreatedBefore :: Lens' AssetsList' (Maybe UTCTime)
 alCreatedBefore
   = lens _alCreatedBefore
       (\ s a -> s{_alCreatedBefore = a})
+      . mapping _DateTime
 
 instance GoogleAuth AssetsList' where
         authKey = alKey . _Just

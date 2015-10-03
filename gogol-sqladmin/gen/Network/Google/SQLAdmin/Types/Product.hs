@@ -28,8 +28,8 @@ data SSLCert = SSLCert
     , _scSelfLink         :: !(Maybe Text)
     , _scCert             :: !(Maybe Text)
     , _scSha1Fingerprint  :: !(Maybe Text)
-    , _scExpirationTime   :: !(Maybe DateTime)
-    , _scCreateTime       :: !(Maybe DateTime)
+    , _scExpirationTime   :: !(Maybe DateTime')
+    , _scCreateTime       :: !(Maybe DateTime')
     , _scInstance         :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -105,12 +105,14 @@ scExpirationTime :: Lens' SSLCert (Maybe UTCTime)
 scExpirationTime
   = lens _scExpirationTime
       (\ s a -> s{_scExpirationTime = a})
+      . mapping _DateTime
 
 -- | The time when the certificate was created in RFC 3339 format, for
 -- example 2012-11-15T16:19:00.094Z
 scCreateTime :: Lens' SSLCert (Maybe UTCTime)
 scCreateTime
   = lens _scCreateTime (\ s a -> s{_scCreateTime = a})
+      . mapping _DateTime
 
 -- | Name of the database instance.
 scInstance :: Lens' SSLCert (Maybe Text)
@@ -781,7 +783,7 @@ instance ToJSON Database where
 -- /See:/ 'ipMapping' smart constructor.
 data IPMapping = IPMapping
     { _imIPAddress    :: !(Maybe Text)
-    , _imTimeToRetire :: !(Maybe DateTime)
+    , _imTimeToRetire :: !(Maybe DateTime')
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'IPMapping' with the minimum fields required to make a request.
@@ -811,6 +813,7 @@ imTimeToRetire :: Lens' IPMapping (Maybe UTCTime)
 imTimeToRetire
   = lens _imTimeToRetire
       (\ s a -> s{_imTimeToRetire = a})
+      . mapping _DateTime
 
 instance FromJSON IPMapping where
         parseJSON
@@ -836,16 +839,16 @@ data Operation = Operation
     { _oTargetId      :: !(Maybe Text)
     , _oTargetProject :: !(Maybe Text)
     , _oStatus        :: !(Maybe Text)
-    , _oInsertTime    :: !(Maybe DateTime)
+    , _oInsertTime    :: !(Maybe DateTime')
     , _oImportContext :: !(Maybe ImportContext)
-    , _oStartTime     :: !(Maybe DateTime)
+    , _oStartTime     :: !(Maybe DateTime')
     , _oKind          :: !Text
     , _oError         :: !(Maybe OperationErrors)
     , _oExportContext :: !(Maybe ExportContext)
     , _oUser          :: !(Maybe Text)
     , _oSelfLink      :: !(Maybe Text)
     , _oName          :: !(Maybe Text)
-    , _oEndTime       :: !(Maybe DateTime)
+    , _oEndTime       :: !(Maybe DateTime')
     , _oOperationType :: !(Maybe Text)
     , _oTargetLink    :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -924,7 +927,8 @@ oStatus = lens _oStatus (\ s a -> s{_oStatus = a})
 -- for example 2012-11-15T16:19:00.094Z.
 oInsertTime :: Lens' Operation (Maybe UTCTime)
 oInsertTime
-  = lens _oInsertTime (\ s a -> s{_oInsertTime = a})
+  = lens _oInsertTime (\ s a -> s{_oInsertTime = a}) .
+      mapping _DateTime
 
 -- | The context for import operation, if applicable.
 oImportContext :: Lens' Operation (Maybe ImportContext)
@@ -936,7 +940,8 @@ oImportContext
 -- format, for example 2012-11-15T16:19:00.094Z.
 oStartTime :: Lens' Operation (Maybe UTCTime)
 oStartTime
-  = lens _oStartTime (\ s a -> s{_oStartTime = a})
+  = lens _oStartTime (\ s a -> s{_oStartTime = a}) .
+      mapping _DateTime
 
 -- | This is always sql#operation.
 oKind :: Lens' Operation Text
@@ -971,7 +976,9 @@ oName = lens _oName (\ s a -> s{_oName = a})
 -- | The time this operation finished in UTC timezone in RFC 3339 format, for
 -- example 2012-11-15T16:19:00.094Z.
 oEndTime :: Lens' Operation (Maybe UTCTime)
-oEndTime = lens _oEndTime (\ s a -> s{_oEndTime = a})
+oEndTime
+  = lens _oEndTime (\ s a -> s{_oEndTime = a}) .
+      mapping _DateTime
 
 -- | The type of the operation. Valid values are CREATE, DELETE, UPDATE,
 -- RESTART, IMPORT, EXPORT, BACKUP_VOLUME, RESTORE_VOLUME, CREATE_USER,
@@ -2142,14 +2149,14 @@ instance ToJSON CloneContext where
 -- /See:/ 'backupRun' smart constructor.
 data BackupRun = BackupRun
     { _brStatus          :: !(Maybe Text)
-    , _brStartTime       :: !(Maybe DateTime)
+    , _brStartTime       :: !(Maybe DateTime')
     , _brKind            :: !Text
     , _brError           :: !(Maybe OperationError)
-    , _brWindowStartTime :: !(Maybe DateTime)
+    , _brWindowStartTime :: !(Maybe DateTime')
     , _brSelfLink        :: !(Maybe Text)
-    , _brEndTime         :: !(Maybe DateTime)
+    , _brEndTime         :: !(Maybe DateTime')
     , _brId              :: !(Maybe Int64)
-    , _brEnqueuedTime    :: !(Maybe DateTime)
+    , _brEnqueuedTime    :: !(Maybe DateTime')
     , _brInstance        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -2200,7 +2207,8 @@ brStatus = lens _brStatus (\ s a -> s{_brStatus = a})
 -- 3339 format, for example 2012-11-15T16:19:00.094Z.
 brStartTime :: Lens' BackupRun (Maybe UTCTime)
 brStartTime
-  = lens _brStartTime (\ s a -> s{_brStartTime = a})
+  = lens _brStartTime (\ s a -> s{_brStartTime = a}) .
+      mapping _DateTime
 
 -- | This is always sql#backupRun.
 brKind :: Lens' BackupRun Text
@@ -2217,6 +2225,7 @@ brWindowStartTime :: Lens' BackupRun (Maybe UTCTime)
 brWindowStartTime
   = lens _brWindowStartTime
       (\ s a -> s{_brWindowStartTime = a})
+      . mapping _DateTime
 
 -- | The URI of this resource.
 brSelfLink :: Lens' BackupRun (Maybe Text)
@@ -2227,7 +2236,8 @@ brSelfLink
 -- format, for example 2012-11-15T16:19:00.094Z.
 brEndTime :: Lens' BackupRun (Maybe UTCTime)
 brEndTime
-  = lens _brEndTime (\ s a -> s{_brEndTime = a})
+  = lens _brEndTime (\ s a -> s{_brEndTime = a}) .
+      mapping _DateTime
 
 -- | A unique identifier for this backup run. Note that this is unique only
 -- within the scope of a particular Cloud SQL instance.
@@ -2240,6 +2250,7 @@ brEnqueuedTime :: Lens' BackupRun (Maybe UTCTime)
 brEnqueuedTime
   = lens _brEnqueuedTime
       (\ s a -> s{_brEnqueuedTime = a})
+      . mapping _DateTime
 
 -- | Name of the database instance.
 brInstance :: Lens' BackupRun (Maybe Text)
@@ -2281,7 +2292,7 @@ data ACLEntry = ACLEntry
     { _aeKind           :: !Text
     , _aeValue          :: !(Maybe Text)
     , _aeName           :: !(Maybe Text)
-    , _aeExpirationTime :: !(Maybe DateTime)
+    , _aeExpirationTime :: !(Maybe DateTime')
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ACLEntry' with the minimum fields required to make a request.
@@ -2323,6 +2334,7 @@ aeExpirationTime :: Lens' ACLEntry (Maybe UTCTime)
 aeExpirationTime
   = lens _aeExpirationTime
       (\ s a -> s{_aeExpirationTime = a})
+      . mapping _DateTime
 
 instance FromJSON ACLEntry where
         parseJSON

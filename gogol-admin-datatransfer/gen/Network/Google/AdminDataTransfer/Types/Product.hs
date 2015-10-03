@@ -229,7 +229,7 @@ data DataTransfer = DataTransfer
     , _dtOldOwnerUserId            :: !(Maybe Text)
     , _dtKind                      :: !Text
     , _dtNewOwnerUserId            :: !(Maybe Text)
-    , _dtRequestTime               :: !(Maybe DateTime)
+    , _dtRequestTime               :: !(Maybe DateTime')
     , _dtApplicationDataTransfers  :: !(Maybe [ApplicationDataTransfer])
     , _dtId                        :: !(Maybe Text)
     , _dtOverallTransferStatusCode :: !(Maybe Text)
@@ -293,6 +293,7 @@ dtRequestTime :: Lens' DataTransfer (Maybe UTCTime)
 dtRequestTime
   = lens _dtRequestTime
       (\ s a -> s{_dtRequestTime = a})
+      . mapping _DateTime
 
 -- | List of per application data transfer resources. It contains data
 -- transfer details of the applications associated with this transfer

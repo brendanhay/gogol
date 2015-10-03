@@ -59,12 +59,12 @@ import           Network.Google.Prelude
 type LayersListResource =
      "layers" :>
        QueryParam "bbox" Text :>
-         QueryParam "createdAfter" DateTime :>
-           QueryParam "createdBefore" DateTime :>
+         QueryParam "createdAfter" DateTime' :>
+           QueryParam "createdBefore" DateTime' :>
              QueryParam "creatorEmail" Text :>
                QueryParam "maxResults" Word32 :>
-                 QueryParam "modifiedAfter" DateTime :>
-                   QueryParam "modifiedBefore" DateTime :>
+                 QueryParam "modifiedAfter" DateTime' :>
+                   QueryParam "modifiedBefore" DateTime' :>
                      QueryParam "pageToken" Text :>
                        QueryParam "processingStatus"
                          MapsEngineLayersListProcessingStatus
@@ -87,7 +87,7 @@ type LayersListResource =
 --
 -- /See:/ 'layersList'' smart constructor.
 data LayersList' = LayersList'
-    { _llCreatedAfter     :: !(Maybe DateTime)
+    { _llCreatedAfter     :: !(Maybe DateTime')
     , _llQuotaUser        :: !(Maybe Text)
     , _llPrettyPrint      :: !Bool
     , _llUserIP           :: !(Maybe Text)
@@ -96,8 +96,8 @@ data LayersList' = LayersList'
     , _llKey              :: !(Maybe Key)
     , _llBbox             :: !(Maybe Text)
     , _llProcessingStatus :: !(Maybe MapsEngineLayersListProcessingStatus)
-    , _llModifiedAfter    :: !(Maybe DateTime)
-    , _llModifiedBefore   :: !(Maybe DateTime)
+    , _llModifiedAfter    :: !(Maybe DateTime')
+    , _llModifiedBefore   :: !(Maybe DateTime')
     , _llPageToken        :: !(Maybe Text)
     , _llProjectId        :: !(Maybe Text)
     , _llOAuthToken       :: !(Maybe OAuthToken)
@@ -105,7 +105,7 @@ data LayersList' = LayersList'
     , _llMaxResults       :: !(Maybe Word32)
     , _llTags             :: !(Maybe Text)
     , _llFields           :: !(Maybe Text)
-    , _llCreatedBefore    :: !(Maybe DateTime)
+    , _llCreatedBefore    :: !(Maybe DateTime')
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersList'' with the minimum fields required to make a request.
@@ -180,6 +180,7 @@ llCreatedAfter :: Lens' LayersList' (Maybe UTCTime)
 llCreatedAfter
   = lens _llCreatedAfter
       (\ s a -> s{_llCreatedAfter = a})
+      . mapping _DateTime
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -233,6 +234,7 @@ llModifiedAfter :: Lens' LayersList' (Maybe UTCTime)
 llModifiedAfter
   = lens _llModifiedAfter
       (\ s a -> s{_llModifiedAfter = a})
+      . mapping _DateTime
 
 -- | An RFC 3339 formatted date-time value (e.g. 1970-01-01T00:00:00Z).
 -- Returned assets will have been modified at or before this time.
@@ -240,6 +242,7 @@ llModifiedBefore :: Lens' LayersList' (Maybe UTCTime)
 llModifiedBefore
   = lens _llModifiedBefore
       (\ s a -> s{_llModifiedBefore = a})
+      . mapping _DateTime
 
 -- | The continuation token, used to page through large result sets. To get
 -- the next page of results, set this parameter to the value of
@@ -287,6 +290,7 @@ llCreatedBefore :: Lens' LayersList' (Maybe UTCTime)
 llCreatedBefore
   = lens _llCreatedBefore
       (\ s a -> s{_llCreatedBefore = a})
+      . mapping _DateTime
 
 instance GoogleAuth LayersList' where
         authKey = llKey . _Just

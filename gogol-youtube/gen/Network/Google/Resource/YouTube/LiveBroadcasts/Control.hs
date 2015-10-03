@@ -58,7 +58,7 @@ type LiveBroadcastsControlResource =
            QueryParam "offsetTimeMs" Word64 :>
              QueryParam "onBehalfOfContentOwner" Text :>
                QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                 QueryParam "walltime" DateTime :>
+                 QueryParam "walltime" DateTime' :>
                    QueryParam "id" Text :>
                      QueryParam "part" Text :>
                        QueryParam "quotaUser" Text :>
@@ -85,7 +85,7 @@ data LiveBroadcastsControl' = LiveBroadcastsControl'
     , _lbcId                            :: !Text
     , _lbcDisplaySlate                  :: !(Maybe Bool)
     , _lbcOAuthToken                    :: !(Maybe OAuthToken)
-    , _lbcWalltime                      :: !(Maybe DateTime)
+    , _lbcWalltime                      :: !(Maybe DateTime')
     , _lbcOffsetTimeMs                  :: !(Maybe Word64)
     , _lbcFields                        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -231,7 +231,8 @@ lbcOAuthToken
 -- (YYYY-MM-DDThh:mm:ss.sssZ) format.
 lbcWalltime :: Lens' LiveBroadcastsControl' (Maybe UTCTime)
 lbcWalltime
-  = lens _lbcWalltime (\ s a -> s{_lbcWalltime = a})
+  = lens _lbcWalltime (\ s a -> s{_lbcWalltime = a}) .
+      mapping _DateTime
 
 -- | The offsetTimeMs parameter specifies a positive time offset when the
 -- specified slate change will occur. The value is measured in milliseconds

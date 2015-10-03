@@ -679,7 +679,7 @@ instance ToJSON Group where
 --
 -- /See:/ 'chromeOSDeviceActiveTimeRanges' smart constructor.
 data ChromeOSDeviceActiveTimeRanges = ChromeOSDeviceActiveTimeRanges
-    { _codatrDate       :: !(Maybe Date)
+    { _codatrDate       :: !(Maybe Date')
     , _codatrActiveTime :: !(Maybe Int32)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -699,9 +699,10 @@ chromeOSDeviceActiveTimeRanges =
     }
 
 -- | Date of usage
-codatrDate :: Lens' ChromeOSDeviceActiveTimeRanges (Maybe UTCTime)
+codatrDate :: Lens' ChromeOSDeviceActiveTimeRanges (Maybe LocalTime)
 codatrDate
-  = lens _codatrDate (\ s a -> s{_codatrDate = a})
+  = lens _codatrDate (\ s a -> s{_codatrDate = a}) .
+      mapping _Date
 
 -- | Duration in milliseconds
 codatrActiveTime :: Lens' ChromeOSDeviceActiveTimeRanges (Maybe Int32)
@@ -888,16 +889,16 @@ data ChromeOSDevice = ChromeOSDevice
     , _codEtag               :: !(Maybe Text)
     , _codAnnotatedUser      :: !(Maybe Text)
     , _codPlatformVersion    :: !(Maybe Text)
-    , _codLastSync           :: !(Maybe DateTime)
+    , _codLastSync           :: !(Maybe DateTime')
     , _codActiveTimeRanges   :: !(Maybe [ChromeOSDeviceActiveTimeRanges])
     , _codKind               :: !Text
     , _codEthernetMACAddress :: !(Maybe Text)
-    , _codLastEnrollmentTime :: !(Maybe DateTime)
+    , _codLastEnrollmentTime :: !(Maybe DateTime')
     , _codAnnotatedLocation  :: !(Maybe Text)
     , _codMACAddress         :: !(Maybe Text)
     , _codOrgUnitPath        :: !(Maybe Text)
     , _codRecentUsers        :: !(Maybe [ChromeOSDeviceRecentUsers])
-    , _codSupportEndDate     :: !(Maybe DateTime)
+    , _codSupportEndDate     :: !(Maybe DateTime')
     , _codModel              :: !(Maybe Text)
     , _codWillAutoRenew      :: !(Maybe Bool)
     , _codMeid               :: !(Maybe Text)
@@ -1020,7 +1021,8 @@ codPlatformVersion
 -- in the Google Apps administrator control panel (Read-only)
 codLastSync :: Lens' ChromeOSDevice (Maybe UTCTime)
 codLastSync
-  = lens _codLastSync (\ s a -> s{_codLastSync = a})
+  = lens _codLastSync (\ s a -> s{_codLastSync = a}) .
+      mapping _DateTime
 
 -- | List of active time ranges (Read-only)
 codActiveTimeRanges :: Lens' ChromeOSDevice [ChromeOSDeviceActiveTimeRanges]
@@ -1045,6 +1047,7 @@ codLastEnrollmentTime :: Lens' ChromeOSDevice (Maybe UTCTime)
 codLastEnrollmentTime
   = lens _codLastEnrollmentTime
       (\ s a -> s{_codLastEnrollmentTime = a})
+      . mapping _DateTime
 
 -- | Address or location of the device as noted by the administrator
 codAnnotatedLocation :: Lens' ChromeOSDevice (Maybe Text)
@@ -1078,6 +1081,7 @@ codSupportEndDate :: Lens' ChromeOSDevice (Maybe UTCTime)
 codSupportEndDate
   = lens _codSupportEndDate
       (\ s a -> s{_codSupportEndDate = a})
+      . mapping _DateTime
 
 -- | Chromebook Model (Read-only)
 codModel :: Lens' ChromeOSDevice (Maybe Text)
@@ -1386,7 +1390,7 @@ data Notification = Notification
     , _nFromAddress    :: !(Maybe Text)
     , _nIsUnread       :: !(Maybe Bool)
     , _nNotificationId :: !(Maybe Text)
-    , _nSendTime       :: !(Maybe DateTime)
+    , _nSendTime       :: !(Maybe DateTime')
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Notification' with the minimum fields required to make a request.
@@ -1456,7 +1460,8 @@ nNotificationId
 -- | Time at which notification was sent (Read-only)
 nSendTime :: Lens' Notification (Maybe UTCTime)
 nSendTime
-  = lens _nSendTime (\ s a -> s{_nSendTime = a})
+  = lens _nSendTime (\ s a -> s{_nSendTime = a}) .
+      mapping _DateTime
 
 instance FromJSON Notification where
         parseJSON
@@ -2313,8 +2318,8 @@ instance ToJSON MobileDeviceApplications where
 --
 -- /See:/ 'user' smart constructor.
 data User = User
-    { _useCreationTime               :: !(Maybe DateTime)
-    , _useLastLoginTime              :: !(Maybe DateTime)
+    { _useCreationTime               :: !(Maybe DateTime')
+    , _useLastLoginTime              :: !(Maybe DateTime')
     , _useThumbnailPhotoEtag         :: !(Maybe Text)
     , _useEtag                       :: !(Maybe Text)
     , _useIPWhiteListed              :: !(Maybe Bool)
@@ -2329,7 +2334,7 @@ data User = User
     , _useExternalIds                :: !(Maybe JSONValue)
     , _useSuspended                  :: !(Maybe Bool)
     , _useAgreedToTerms              :: !(Maybe Bool)
-    , _useDeletionTime               :: !(Maybe DateTime)
+    , _useDeletionTime               :: !(Maybe DateTime')
     , _useNonEditableAliases         :: !(Maybe [Text])
     , _useOrgUnitPath                :: !(Maybe Text)
     , _useCustomerId                 :: !(Maybe Text)
@@ -2469,12 +2474,14 @@ useCreationTime :: Lens' User (Maybe UTCTime)
 useCreationTime
   = lens _useCreationTime
       (\ s a -> s{_useCreationTime = a})
+      . mapping _DateTime
 
 -- | User\'s last login time. (Read-only)
 useLastLoginTime :: Lens' User (Maybe UTCTime)
 useLastLoginTime
   = lens _useLastLoginTime
       (\ s a -> s{_useLastLoginTime = a})
+      . mapping _DateTime
 
 -- | ETag of the user\'s photo (Read-only)
 useThumbnailPhotoEtag :: Lens' User (Maybe Text)
@@ -2553,6 +2560,7 @@ useDeletionTime :: Lens' User (Maybe UTCTime)
 useDeletionTime
   = lens _useDeletionTime
       (\ s a -> s{_useDeletionTime = a})
+      . mapping _DateTime
 
 -- | List of non editable aliases (Read-only)
 useNonEditableAliases :: Lens' User [Text]
@@ -3565,7 +3573,7 @@ data MobileDevice = MobileDevice
     , _mobResourceId                     :: !(Maybe Text)
     , _mobBuildNumber                    :: !(Maybe Text)
     , _mobManagedAccountIsOnOwnerProfile :: !(Maybe Bool)
-    , _mobLastSync                       :: !(Maybe DateTime)
+    , _mobLastSync                       :: !(Maybe DateTime')
     , _mobOtherAccountsInfo              :: !(Maybe [Text])
     , _mobKind                           :: !Text
     , _mobAdbStatus                      :: !(Maybe Bool)
@@ -3578,7 +3586,7 @@ data MobileDevice = MobileDevice
     , _mobUnknownSourcesStatus           :: !(Maybe Bool)
     , _mobMeid                           :: !(Maybe Text)
     , _mobDeviceId                       :: !(Maybe Text)
-    , _mobFirstSync                      :: !(Maybe DateTime)
+    , _mobFirstSync                      :: !(Maybe DateTime')
     , _mobUserAgent                      :: !(Maybe Text)
     , _mobImei                           :: !(Maybe Text)
     , _mobType                           :: !(Maybe Text)
@@ -3733,7 +3741,8 @@ mobManagedAccountIsOnOwnerProfile
 -- in the Google Apps administrator control panel (Read-only)
 mobLastSync :: Lens' MobileDevice (Maybe UTCTime)
 mobLastSync
-  = lens _mobLastSync (\ s a -> s{_mobLastSync = a})
+  = lens _mobLastSync (\ s a -> s{_mobLastSync = a}) .
+      mapping _DateTime
 
 -- | List of accounts added on device (Read-only)
 mobOtherAccountsInfo :: Lens' MobileDevice [Text]
@@ -3804,6 +3813,7 @@ mobDeviceId
 mobFirstSync :: Lens' MobileDevice (Maybe UTCTime)
 mobFirstSync
   = lens _mobFirstSync (\ s a -> s{_mobFirstSync = a})
+      . mapping _DateTime
 
 -- | Mobile Device user agent
 mobUserAgent :: Lens' MobileDevice (Maybe Text)

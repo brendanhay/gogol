@@ -59,12 +59,12 @@ import           Network.Google.Prelude
 type RasterCollectionsListResource =
      "rasterCollections" :>
        QueryParam "bbox" Text :>
-         QueryParam "createdAfter" DateTime :>
-           QueryParam "createdBefore" DateTime :>
+         QueryParam "createdAfter" DateTime' :>
+           QueryParam "createdBefore" DateTime' :>
              QueryParam "creatorEmail" Text :>
                QueryParam "maxResults" Word32 :>
-                 QueryParam "modifiedAfter" DateTime :>
-                   QueryParam "modifiedBefore" DateTime :>
+                 QueryParam "modifiedAfter" DateTime' :>
+                   QueryParam "modifiedBefore" DateTime' :>
                      QueryParam "pageToken" Text :>
                        QueryParam "processingStatus"
                          MapsEngineRasterCollectionsListProcessingStatus
@@ -89,7 +89,7 @@ type RasterCollectionsListResource =
 --
 -- /See:/ 'rasterCollectionsList'' smart constructor.
 data RasterCollectionsList' = RasterCollectionsList'
-    { _rclCreatedAfter     :: !(Maybe DateTime)
+    { _rclCreatedAfter     :: !(Maybe DateTime')
     , _rclQuotaUser        :: !(Maybe Text)
     , _rclPrettyPrint      :: !Bool
     , _rclUserIP           :: !(Maybe Text)
@@ -98,8 +98,8 @@ data RasterCollectionsList' = RasterCollectionsList'
     , _rclKey              :: !(Maybe Key)
     , _rclBbox             :: !(Maybe Text)
     , _rclProcessingStatus :: !(Maybe MapsEngineRasterCollectionsListProcessingStatus)
-    , _rclModifiedAfter    :: !(Maybe DateTime)
-    , _rclModifiedBefore   :: !(Maybe DateTime)
+    , _rclModifiedAfter    :: !(Maybe DateTime')
+    , _rclModifiedBefore   :: !(Maybe DateTime')
     , _rclPageToken        :: !(Maybe Text)
     , _rclProjectId        :: !(Maybe Text)
     , _rclOAuthToken       :: !(Maybe OAuthToken)
@@ -107,7 +107,7 @@ data RasterCollectionsList' = RasterCollectionsList'
     , _rclMaxResults       :: !(Maybe Word32)
     , _rclTags             :: !(Maybe Text)
     , _rclFields           :: !(Maybe Text)
-    , _rclCreatedBefore    :: !(Maybe DateTime)
+    , _rclCreatedBefore    :: !(Maybe DateTime')
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollectionsList'' with the minimum fields required to make a request.
@@ -182,6 +182,7 @@ rclCreatedAfter :: Lens' RasterCollectionsList' (Maybe UTCTime)
 rclCreatedAfter
   = lens _rclCreatedAfter
       (\ s a -> s{_rclCreatedAfter = a})
+      . mapping _DateTime
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -236,6 +237,7 @@ rclModifiedAfter :: Lens' RasterCollectionsList' (Maybe UTCTime)
 rclModifiedAfter
   = lens _rclModifiedAfter
       (\ s a -> s{_rclModifiedAfter = a})
+      . mapping _DateTime
 
 -- | An RFC 3339 formatted date-time value (e.g. 1970-01-01T00:00:00Z).
 -- Returned assets will have been modified at or before this time.
@@ -243,6 +245,7 @@ rclModifiedBefore :: Lens' RasterCollectionsList' (Maybe UTCTime)
 rclModifiedBefore
   = lens _rclModifiedBefore
       (\ s a -> s{_rclModifiedBefore = a})
+      . mapping _DateTime
 
 -- | The continuation token, used to page through large result sets. To get
 -- the next page of results, set this parameter to the value of
@@ -294,6 +297,7 @@ rclCreatedBefore :: Lens' RasterCollectionsList' (Maybe UTCTime)
 rclCreatedBefore
   = lens _rclCreatedBefore
       (\ s a -> s{_rclCreatedBefore = a})
+      . mapping _DateTime
 
 instance GoogleAuth RasterCollectionsList' where
         authKey = rclKey . _Just

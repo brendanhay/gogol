@@ -58,14 +58,14 @@ type PostsListResource =
      "blogs" :>
        Capture "blogId" Text :>
          "posts" :>
-           QueryParam "endDate" DateTime :>
+           QueryParam "endDate" DateTime' :>
              QueryParam "fetchBodies" Bool :>
                QueryParam "fetchImages" Bool :>
                  QueryParam "labels" Text :>
                    QueryParam "maxResults" Word32 :>
                      QueryParam "orderBy" BloggerPostsListOrderBy :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "startDate" DateTime :>
+                         QueryParam "startDate" DateTime' :>
                            QueryParams "status" BloggerPostsListStatus :>
                              QueryParam "view" BloggerPostsListView :>
                                QueryParam "quotaUser" Text :>
@@ -87,9 +87,9 @@ data PostsList' = PostsList'
     , _pllOrderBy     :: !BloggerPostsListOrderBy
     , _pllUserIP      :: !(Maybe Text)
     , _pllFetchImages :: !(Maybe Bool)
-    , _pllEndDate     :: !(Maybe DateTime)
+    , _pllEndDate     :: !(Maybe DateTime')
     , _pllBlogId      :: !Text
-    , _pllStartDate   :: !(Maybe DateTime)
+    , _pllStartDate   :: !(Maybe DateTime')
     , _pllKey         :: !(Maybe Key)
     , _pllFetchBodies :: !Bool
     , _pllView        :: !(Maybe BloggerPostsListView)
@@ -199,7 +199,8 @@ pllFetchImages
 -- | Latest post date to fetch, a date-time with RFC 3339 formatting.
 pllEndDate :: Lens' PostsList' (Maybe UTCTime)
 pllEndDate
-  = lens _pllEndDate (\ s a -> s{_pllEndDate = a})
+  = lens _pllEndDate (\ s a -> s{_pllEndDate = a}) .
+      mapping _DateTime
 
 -- | ID of the blog to fetch posts from.
 pllBlogId :: Lens' PostsList' Text
@@ -210,6 +211,7 @@ pllBlogId
 pllStartDate :: Lens' PostsList' (Maybe UTCTime)
 pllStartDate
   = lens _pllStartDate (\ s a -> s{_pllStartDate = a})
+      . mapping _DateTime
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0

@@ -109,7 +109,7 @@ instance ToJSON LocationsListResponse where
 --
 -- /See:/ 'notificationConfig' smart constructor.
 data NotificationConfig = NotificationConfig
-    { _ncDeliveryTime :: !(Maybe DateTime)
+    { _ncDeliveryTime :: !(Maybe DateTime')
     , _ncLevel        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -133,6 +133,7 @@ ncDeliveryTime :: Lens' NotificationConfig (Maybe UTCTime)
 ncDeliveryTime
   = lens _ncDeliveryTime
       (\ s a -> s{_ncDeliveryTime = a})
+      . mapping _DateTime
 
 -- | Describes how important the notification is. Allowed values are: -
 -- DEFAULT - Notifications of default importance. A chime will be played to
@@ -165,7 +166,7 @@ data Location = Location
     , _lId          :: !(Maybe Text)
     , _lAccuracy    :: !(Maybe Double)
     , _lLongitude   :: !(Maybe Double)
-    , _lTimestamp   :: !(Maybe DateTime)
+    , _lTimestamp   :: !(Maybe DateTime')
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
@@ -238,7 +239,8 @@ lLongitude
 -- 3339.
 lTimestamp :: Lens' Location (Maybe UTCTime)
 lTimestamp
-  = lens _lTimestamp (\ s a -> s{_lTimestamp = a})
+  = lens _lTimestamp (\ s a -> s{_lTimestamp = a}) .
+      mapping _DateTime
 
 instance FromJSON Location where
         parseJSON
@@ -1259,7 +1261,7 @@ data Subscription = Subscription
     , _subVerifyToken  :: !(Maybe Text)
     , _subUserToken    :: !(Maybe Text)
     , _subId           :: !(Maybe Text)
-    , _subUpdated      :: !(Maybe DateTime)
+    , _subUpdated      :: !(Maybe DateTime')
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Subscription' with the minimum fields required to make a request.
@@ -1356,7 +1358,8 @@ subId = lens _subId (\ s a -> s{_subId = a})
 -- according to RFC 3339.
 subUpdated :: Lens' Subscription (Maybe UTCTime)
 subUpdated
-  = lens _subUpdated (\ s a -> s{_subUpdated = a})
+  = lens _subUpdated (\ s a -> s{_subUpdated = a}) .
+      mapping _DateTime
 
 instance FromJSON Subscription where
         parseJSON
@@ -1393,7 +1396,7 @@ instance ToJSON Subscription where
 -- /See:/ 'timelineItem' smart constructor.
 data TimelineItem = TimelineItem
     { _tiCreator       :: !(Maybe Contact)
-    , _tiDisplayTime   :: !(Maybe DateTime)
+    , _tiDisplayTime   :: !(Maybe DateTime')
     , _tiEtag          :: !(Maybe Text)
     , _tiIsDeleted     :: !(Maybe Bool)
     , _tiPinScore      :: !(Maybe Int32)
@@ -1403,7 +1406,7 @@ data TimelineItem = TimelineItem
     , _tiNotification  :: !(Maybe NotificationConfig)
     , _tiText          :: !(Maybe Text)
     , _tiKind          :: !Text
-    , _tiCreated       :: !(Maybe DateTime)
+    , _tiCreated       :: !(Maybe DateTime')
     , _tiSpeakableText :: !(Maybe Text)
     , _tiIsBundleCover :: !(Maybe Bool)
     , _tiSpeakableType :: !(Maybe Text)
@@ -1414,7 +1417,7 @@ data TimelineItem = TimelineItem
     , _tiSourceItemId  :: !(Maybe Text)
     , _tiId            :: !(Maybe Text)
     , _tiHTML          :: !(Maybe Text)
-    , _tiUpdated       :: !(Maybe DateTime)
+    , _tiUpdated       :: !(Maybe DateTime')
     , _tiRecipients    :: !(Maybe [Contact])
     , _tiTitle         :: !(Maybe Text)
     , _tiInReplyTo     :: !(Maybe Text)
@@ -1521,6 +1524,7 @@ tiDisplayTime :: Lens' TimelineItem (Maybe UTCTime)
 tiDisplayTime
   = lens _tiDisplayTime
       (\ s a -> s{_tiDisplayTime = a})
+      . mapping _DateTime
 
 -- | ETag for this item.
 tiEtag :: Lens' TimelineItem (Maybe Text)
@@ -1584,7 +1588,8 @@ tiKind = lens _tiKind (\ s a -> s{_tiKind = a})
 -- 3339.
 tiCreated :: Lens' TimelineItem (Maybe UTCTime)
 tiCreated
-  = lens _tiCreated (\ s a -> s{_tiCreated = a})
+  = lens _tiCreated (\ s a -> s{_tiCreated = a}) .
+      mapping _DateTime
 
 -- | The speakable version of the content of this item. Along with the
 -- READ_ALOUD menu item, use this field to provide text that would be
@@ -1683,7 +1688,8 @@ tiHTML = lens _tiHTML (\ s a -> s{_tiHTML = a})
 -- RFC 3339.
 tiUpdated :: Lens' TimelineItem (Maybe UTCTime)
 tiUpdated
-  = lens _tiUpdated (\ s a -> s{_tiUpdated = a})
+  = lens _tiUpdated (\ s a -> s{_tiUpdated = a}) .
+      mapping _DateTime
 
 -- | A list of users or groups that this item has been shared with.
 tiRecipients :: Lens' TimelineItem [Contact]

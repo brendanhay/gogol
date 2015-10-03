@@ -1023,7 +1023,7 @@ instance ToJSON ChannelStatus where
 --
 -- /See:/ 'liveStreamSnippet' smart constructor.
 data LiveStreamSnippet = LiveStreamSnippet
-    { _lssPublishedAt     :: !(Maybe DateTime)
+    { _lssPublishedAt     :: !(Maybe DateTime')
     , _lssChannelId       :: !(Maybe Text)
     , _lssIsDefaultStream :: !(Maybe Bool)
     , _lssTitle           :: !(Maybe Text)
@@ -1060,6 +1060,7 @@ lssPublishedAt :: Lens' LiveStreamSnippet (Maybe UTCTime)
 lssPublishedAt
   = lens _lssPublishedAt
       (\ s a -> s{_lssPublishedAt = a})
+      . mapping _DateTime
 
 -- | The ID that YouTube uses to uniquely identify the channel that is
 -- transmitting the stream.
@@ -3050,7 +3051,7 @@ data VideoStatus = VideoStatus
     { _vsFailureReason       :: !(Maybe VideoStatusFailureReason)
     , _vsPublicStatsViewable :: !(Maybe Bool)
     , _vsRejectionReason     :: !(Maybe VideoStatusRejectionReason)
-    , _vsPublishAt           :: !(Maybe DateTime)
+    , _vsPublishAt           :: !(Maybe DateTime')
     , _vsUploadStatus        :: !(Maybe VideoStatusUploadStatus)
     , _vsPrivacyStatus       :: !(Maybe VideoStatusPrivacyStatus)
     , _vsEmbeddable          :: !(Maybe Bool)
@@ -3118,7 +3119,8 @@ vsRejectionReason
 -- specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
 vsPublishAt :: Lens' VideoStatus (Maybe UTCTime)
 vsPublishAt
-  = lens _vsPublishAt (\ s a -> s{_vsPublishAt = a})
+  = lens _vsPublishAt (\ s a -> s{_vsPublishAt = a}) .
+      mapping _DateTime
 
 -- | The status of the uploaded video.
 vsUploadStatus :: Lens' VideoStatus (Maybe VideoStatusUploadStatus)
@@ -3591,7 +3593,7 @@ instance ToJSON ChannelContentDetails where
 --
 -- /See:/ 'activitySnippet' smart constructor.
 data ActivitySnippet = ActivitySnippet
-    { _asPublishedAt  :: !(Maybe DateTime)
+    { _asPublishedAt  :: !(Maybe DateTime')
     , _asChannelTitle :: !(Maybe Text)
     , _asChannelId    :: !(Maybe Text)
     , _asThumbnails   :: !(Maybe ThumbnailDetails)
@@ -3640,6 +3642,7 @@ asPublishedAt :: Lens' ActivitySnippet (Maybe UTCTime)
 asPublishedAt
   = lens _asPublishedAt
       (\ s a -> s{_asPublishedAt = a})
+      . mapping _DateTime
 
 -- | Channel title for the channel responsible for this activity
 asChannelTitle :: Lens' ActivitySnippet (Maybe Text)
@@ -4504,7 +4507,7 @@ instance ToJSON ChannelSectionListResponse where
 --
 -- /See:/ 'playListSnippet' smart constructor.
 data PlayListSnippet = PlayListSnippet
-    { _plsPublishedAt     :: !(Maybe DateTime)
+    { _plsPublishedAt     :: !(Maybe DateTime')
     , _plsChannelTitle    :: !(Maybe Text)
     , _plsChannelId       :: !(Maybe Text)
     , _plsThumbnails      :: !(Maybe ThumbnailDetails)
@@ -4557,6 +4560,7 @@ plsPublishedAt :: Lens' PlayListSnippet (Maybe UTCTime)
 plsPublishedAt
   = lens _plsPublishedAt
       (\ s a -> s{_plsPublishedAt = a})
+      . mapping _DateTime
 
 -- | The channel title of the channel that the video belongs to.
 plsChannelTitle :: Lens' PlayListSnippet (Maybe Text)
@@ -5721,7 +5725,7 @@ instance ToJSON ThumbnailDetails where
 --
 -- /See:/ 'channelSnippet' smart constructor.
 data ChannelSnippet = ChannelSnippet
-    { _csPublishedAt     :: !(Maybe DateTime)
+    { _csPublishedAt     :: !(Maybe DateTime')
     , _csCountry         :: !(Maybe Text)
     , _csThumbnails      :: !(Maybe ThumbnailDetails)
     , _csLocalized       :: !(Maybe ChannelLocalization)
@@ -5766,6 +5770,7 @@ csPublishedAt :: Lens' ChannelSnippet (Maybe UTCTime)
 csPublishedAt
   = lens _csPublishedAt
       (\ s a -> s{_csPublishedAt = a})
+      . mapping _DateTime
 
 -- | The country of the channel.
 csCountry :: Lens' ChannelSnippet (Maybe Text)
@@ -6924,7 +6929,7 @@ instance ToJSON WatchSettings where
 -- /See:/ 'videoSnippet' smart constructor.
 data VideoSnippet = VideoSnippet
     { _vsDefaultAudioLanguage :: !(Maybe Text)
-    , _vsPublishedAt          :: !(Maybe DateTime)
+    , _vsPublishedAt          :: !(Maybe DateTime')
     , _vsChannelTitle         :: !(Maybe Text)
     , _vsChannelId            :: !(Maybe Text)
     , _vsThumbnails           :: !(Maybe ThumbnailDetails)
@@ -6995,6 +7000,7 @@ vsPublishedAt :: Lens' VideoSnippet (Maybe UTCTime)
 vsPublishedAt
   = lens _vsPublishedAt
       (\ s a -> s{_vsPublishedAt = a})
+      . mapping _DateTime
 
 -- | Channel title for the channel that the video belongs to.
 vsChannelTitle :: Lens' VideoSnippet (Maybe Text)
@@ -7422,15 +7428,15 @@ instance ToJSON VideoStatistics where
 --
 -- /See:/ 'liveBroadcastSnippet' smart constructor.
 data LiveBroadcastSnippet = LiveBroadcastSnippet
-    { _lbsActualEndTime      :: !(Maybe DateTime)
+    { _lbsActualEndTime      :: !(Maybe DateTime')
     , _lbsLiveChatId         :: !(Maybe Text)
-    , _lbsPublishedAt        :: !(Maybe DateTime)
-    , _lbsScheduledEndTime   :: !(Maybe DateTime)
+    , _lbsPublishedAt        :: !(Maybe DateTime')
+    , _lbsScheduledEndTime   :: !(Maybe DateTime')
     , _lbsChannelId          :: !(Maybe Text)
-    , _lbsScheduledStartTime :: !(Maybe DateTime)
+    , _lbsScheduledStartTime :: !(Maybe DateTime')
     , _lbsThumbnails         :: !(Maybe ThumbnailDetails)
     , _lbsTitle              :: !(Maybe Text)
-    , _lbsActualStartTime    :: !(Maybe DateTime)
+    , _lbsActualStartTime    :: !(Maybe DateTime')
     , _lbsIsDefaultBroadcast :: !(Maybe Bool)
     , _lbsDescription        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -7484,6 +7490,7 @@ lbsActualEndTime :: Lens' LiveBroadcastSnippet (Maybe UTCTime)
 lbsActualEndTime
   = lens _lbsActualEndTime
       (\ s a -> s{_lbsActualEndTime = a})
+      . mapping _DateTime
 
 -- | The id of the live chat for this broadcast.
 lbsLiveChatId :: Lens' LiveBroadcastSnippet (Maybe Text)
@@ -7498,6 +7505,7 @@ lbsPublishedAt :: Lens' LiveBroadcastSnippet (Maybe UTCTime)
 lbsPublishedAt
   = lens _lbsPublishedAt
       (\ s a -> s{_lbsPublishedAt = a})
+      . mapping _DateTime
 
 -- | The date and time that the broadcast is scheduled to end. The value is
 -- specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
@@ -7505,6 +7513,7 @@ lbsScheduledEndTime :: Lens' LiveBroadcastSnippet (Maybe UTCTime)
 lbsScheduledEndTime
   = lens _lbsScheduledEndTime
       (\ s a -> s{_lbsScheduledEndTime = a})
+      . mapping _DateTime
 
 -- | The ID that YouTube uses to uniquely identify the channel that is
 -- publishing the broadcast.
@@ -7518,6 +7527,7 @@ lbsScheduledStartTime :: Lens' LiveBroadcastSnippet (Maybe UTCTime)
 lbsScheduledStartTime
   = lens _lbsScheduledStartTime
       (\ s a -> s{_lbsScheduledStartTime = a})
+      . mapping _DateTime
 
 -- | A map of thumbnail images associated with the broadcast. For each nested
 -- object in this object, the key is the name of the thumbnail image, and
@@ -7542,6 +7552,7 @@ lbsActualStartTime :: Lens' LiveBroadcastSnippet (Maybe UTCTime)
 lbsActualStartTime
   = lens _lbsActualStartTime
       (\ s a -> s{_lbsActualStartTime = a})
+      . mapping _DateTime
 
 lbsIsDefaultBroadcast :: Lens' LiveBroadcastSnippet (Maybe Bool)
 lbsIsDefaultBroadcast
@@ -8225,7 +8236,7 @@ instance ToJSON PromotedItemId where
 --
 -- /See:/ 'searchResultSnippet' smart constructor.
 data SearchResultSnippet = SearchResultSnippet
-    { _srsPublishedAt          :: !(Maybe DateTime)
+    { _srsPublishedAt          :: !(Maybe DateTime')
     , _srsChannelTitle         :: !(Maybe Text)
     , _srsChannelId            :: !(Maybe Text)
     , _srsThumbnails           :: !(Maybe ThumbnailDetails)
@@ -8271,6 +8282,7 @@ srsPublishedAt :: Lens' SearchResultSnippet (Maybe UTCTime)
 srsPublishedAt
   = lens _srsPublishedAt
       (\ s a -> s{_srsPublishedAt = a})
+      . mapping _DateTime
 
 -- | The title of the channel that published the resource that the search
 -- result identifies.
@@ -10691,7 +10703,7 @@ instance ToJSON I18nRegionSnippet where
 data CaptionSnippet = CaptionSnippet
     { _csFailureReason  :: !(Maybe CaptionSnippetFailureReason)
     , _csStatus         :: !(Maybe CaptionSnippetStatus)
-    , _csLastUpdated    :: !(Maybe DateTime)
+    , _csLastUpdated    :: !(Maybe DateTime')
     , _csTrackKind      :: !(Maybe CaptionSnippetTrackKind)
     , _csIsDraft        :: !(Maybe Bool)
     , _csIsCC           :: !(Maybe Bool)
@@ -10769,6 +10781,7 @@ csLastUpdated :: Lens' CaptionSnippet (Maybe UTCTime)
 csLastUpdated
   = lens _csLastUpdated
       (\ s a -> s{_csLastUpdated = a})
+      . mapping _DateTime
 
 -- | The caption track\'s type.
 csTrackKind :: Lens' CaptionSnippet (Maybe CaptionSnippetTrackKind)
@@ -10943,7 +10956,7 @@ instance ToJSON Comment where
 -- /See:/ 'playListItemSnippet' smart constructor.
 data PlayListItemSnippet = PlayListItemSnippet
     { _plisResourceId   :: !(Maybe ResourceId)
-    , _plisPublishedAt  :: !(Maybe DateTime)
+    , _plisPublishedAt  :: !(Maybe DateTime')
     , _plisChannelTitle :: !(Maybe Text)
     , _plisChannelId    :: !(Maybe Text)
     , _plisThumbnails   :: !(Maybe ThumbnailDetails)
@@ -11002,6 +11015,7 @@ plisPublishedAt :: Lens' PlayListItemSnippet (Maybe UTCTime)
 plisPublishedAt
   = lens _plisPublishedAt
       (\ s a -> s{_plisPublishedAt = a})
+      . mapping _DateTime
 
 -- | Channel title for the channel that the playlist item belongs to.
 plisChannelTitle :: Lens' PlayListItemSnippet (Maybe Text)
@@ -12207,7 +12221,7 @@ instance ToJSON ContentRating where
 -- /See:/ 'commentSnippet' smart constructor.
 data CommentSnippet = CommentSnippet
     { _cViewerRating               :: !(Maybe CommentSnippetViewerRating)
-    , _cPublishedAt                :: !(Maybe DateTime)
+    , _cPublishedAt                :: !(Maybe DateTime')
     , _cAuthorChannelURL           :: !(Maybe Text)
     , _cModerationStatus           :: !(Maybe CommentSnippetModerationStatus)
     , _cLikeCount                  :: !(Maybe Word32)
@@ -12217,7 +12231,7 @@ data CommentSnippet = CommentSnippet
     , _cTextDisplay                :: !(Maybe Text)
     , _cAuthorProfileImageURL      :: !(Maybe Text)
     , _cAuthorDisplayName          :: !(Maybe Text)
-    , _cUpdatedAt                  :: !(Maybe DateTime)
+    , _cUpdatedAt                  :: !(Maybe DateTime')
     , _cAuthorChannelId            :: !(Maybe ChannelId)
     , _cCanRate                    :: !(Maybe Bool)
     , _cAuthorGoogleplusProfileURL :: !(Maybe Text)
@@ -12294,6 +12308,7 @@ cViewerRating
 cPublishedAt :: Lens' CommentSnippet (Maybe UTCTime)
 cPublishedAt
   = lens _cPublishedAt (\ s a -> s{_cPublishedAt = a})
+      . mapping _DateTime
 
 -- | Link to the author\'s YouTube channel, if any.
 cAuthorChannelURL :: Lens' CommentSnippet (Maybe Text)
@@ -12356,7 +12371,8 @@ cAuthorDisplayName
 -- 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
 cUpdatedAt :: Lens' CommentSnippet (Maybe UTCTime)
 cUpdatedAt
-  = lens _cUpdatedAt (\ s a -> s{_cUpdatedAt = a})
+  = lens _cUpdatedAt (\ s a -> s{_cUpdatedAt = a}) .
+      mapping _DateTime
 
 -- | The id of the author\'s YouTube channel, if any.
 cAuthorChannelId :: Lens' CommentSnippet (Maybe ChannelId)
@@ -12429,7 +12445,7 @@ instance ToJSON CommentSnippet where
 data VideoRecordingDetails = VideoRecordingDetails
     { _vrdLocation            :: !(Maybe GeoPoint)
     , _vrdLocationDescription :: !(Maybe Text)
-    , _vrdRecordingDate       :: !(Maybe DateTime)
+    , _vrdRecordingDate       :: !(Maybe DateTime')
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideoRecordingDetails' with the minimum fields required to make a request.
@@ -12467,6 +12483,7 @@ vrdRecordingDate :: Lens' VideoRecordingDetails (Maybe UTCTime)
 vrdRecordingDate
   = lens _vrdRecordingDate
       (\ s a -> s{_vrdRecordingDate = a})
+      . mapping _DateTime
 
 instance FromJSON VideoRecordingDetails where
         parseJSON
@@ -12685,7 +12702,7 @@ instance ToJSON ChannelSettings where
 -- /See:/ 'subscriptionSnippet' smart constructor.
 data SubscriptionSnippet = SubscriptionSnippet
     { _ssResourceId   :: !(Maybe ResourceId)
-    , _ssPublishedAt  :: !(Maybe DateTime)
+    , _ssPublishedAt  :: !(Maybe DateTime')
     , _ssChannelTitle :: !(Maybe Text)
     , _ssChannelId    :: !(Maybe Text)
     , _ssThumbnails   :: !(Maybe ThumbnailDetails)
@@ -12735,6 +12752,7 @@ ssPublishedAt :: Lens' SubscriptionSnippet (Maybe UTCTime)
 ssPublishedAt
   = lens _ssPublishedAt
       (\ s a -> s{_ssPublishedAt = a})
+      . mapping _DateTime
 
 -- | Channel title for the channel that the subscription belongs to.
 ssChannelTitle :: Lens' SubscriptionSnippet (Maybe Text)
@@ -12840,11 +12858,11 @@ instance ToJSON LiveStreamStatus where
 --
 -- /See:/ 'videoLiveStreamingDetails' smart constructor.
 data VideoLiveStreamingDetails = VideoLiveStreamingDetails
-    { _vlsdActualEndTime      :: !(Maybe DateTime)
+    { _vlsdActualEndTime      :: !(Maybe DateTime')
     , _vlsdConcurrentViewers  :: !(Maybe Word64)
-    , _vlsdScheduledEndTime   :: !(Maybe DateTime)
-    , _vlsdScheduledStartTime :: !(Maybe DateTime)
-    , _vlsdActualStartTime    :: !(Maybe DateTime)
+    , _vlsdScheduledEndTime   :: !(Maybe DateTime')
+    , _vlsdScheduledStartTime :: !(Maybe DateTime')
+    , _vlsdActualStartTime    :: !(Maybe DateTime')
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideoLiveStreamingDetails' with the minimum fields required to make a request.
@@ -12878,6 +12896,7 @@ vlsdActualEndTime :: Lens' VideoLiveStreamingDetails (Maybe UTCTime)
 vlsdActualEndTime
   = lens _vlsdActualEndTime
       (\ s a -> s{_vlsdActualEndTime = a})
+      . mapping _DateTime
 
 -- | The number of viewers currently watching the broadcast. The property and
 -- its value will be present if the broadcast has current viewers and the
@@ -12899,6 +12918,7 @@ vlsdScheduledEndTime :: Lens' VideoLiveStreamingDetails (Maybe UTCTime)
 vlsdScheduledEndTime
   = lens _vlsdScheduledEndTime
       (\ s a -> s{_vlsdScheduledEndTime = a})
+      . mapping _DateTime
 
 -- | The time that the broadcast is scheduled to begin. The value is
 -- specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
@@ -12906,6 +12926,7 @@ vlsdScheduledStartTime :: Lens' VideoLiveStreamingDetails (Maybe UTCTime)
 vlsdScheduledStartTime
   = lens _vlsdScheduledStartTime
       (\ s a -> s{_vlsdScheduledStartTime = a})
+      . mapping _DateTime
 
 -- | The time that the broadcast actually started. The value is specified in
 -- ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format. This value will not be
@@ -12914,6 +12935,7 @@ vlsdActualStartTime :: Lens' VideoLiveStreamingDetails (Maybe UTCTime)
 vlsdActualStartTime
   = lens _vlsdActualStartTime
       (\ s a -> s{_vlsdActualStartTime = a})
+      . mapping _DateTime
 
 instance FromJSON VideoLiveStreamingDetails where
         parseJSON
@@ -13375,7 +13397,7 @@ instance ToJSON VideoConversionPing where
 --
 -- /See:/ 'channelContentOwnerDetails' smart constructor.
 data ChannelContentOwnerDetails = ChannelContentOwnerDetails
-    { _ccodTimeLinked   :: !(Maybe DateTime)
+    { _ccodTimeLinked   :: !(Maybe DateTime')
     , _ccodContentOwner :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -13400,6 +13422,7 @@ ccodTimeLinked :: Lens' ChannelContentOwnerDetails (Maybe UTCTime)
 ccodTimeLinked
   = lens _ccodTimeLinked
       (\ s a -> s{_ccodTimeLinked = a})
+      . mapping _DateTime
 
 -- | The ID of the content owner linked to the channel.
 ccodContentOwner :: Lens' ChannelContentOwnerDetails (Maybe Text)

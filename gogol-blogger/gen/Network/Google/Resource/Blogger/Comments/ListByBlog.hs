@@ -54,11 +54,11 @@ type CommentsListByBlogResource =
      "blogs" :>
        Capture "blogId" Text :>
          "comments" :>
-           QueryParam "endDate" DateTime :>
+           QueryParam "endDate" DateTime' :>
              QueryParam "fetchBodies" Bool :>
                QueryParam "maxResults" Word32 :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "startDate" DateTime :>
+                   QueryParam "startDate" DateTime' :>
                      QueryParams "status" BloggerCommentsListByBlogStatus
                        :>
                        QueryParam "quotaUser" Text :>
@@ -78,9 +78,9 @@ data CommentsListByBlog' = CommentsListByBlog'
     , _clbbQuotaUser   :: !(Maybe Text)
     , _clbbPrettyPrint :: !Bool
     , _clbbUserIP      :: !(Maybe Text)
-    , _clbbEndDate     :: !(Maybe DateTime)
+    , _clbbEndDate     :: !(Maybe DateTime')
     , _clbbBlogId      :: !Text
-    , _clbbStartDate   :: !(Maybe DateTime)
+    , _clbbStartDate   :: !(Maybe DateTime')
     , _clbbKey         :: !(Maybe Key)
     , _clbbFetchBodies :: !(Maybe Bool)
     , _clbbPageToken   :: !(Maybe Text)
@@ -165,7 +165,8 @@ clbbUserIP
 -- | Latest date of comment to fetch, a date-time with RFC 3339 formatting.
 clbbEndDate :: Lens' CommentsListByBlog' (Maybe UTCTime)
 clbbEndDate
-  = lens _clbbEndDate (\ s a -> s{_clbbEndDate = a})
+  = lens _clbbEndDate (\ s a -> s{_clbbEndDate = a}) .
+      mapping _DateTime
 
 -- | ID of the blog to fetch comments from.
 clbbBlogId :: Lens' CommentsListByBlog' Text
@@ -177,6 +178,7 @@ clbbStartDate :: Lens' CommentsListByBlog' (Maybe UTCTime)
 clbbStartDate
   = lens _clbbStartDate
       (\ s a -> s{_clbbStartDate = a})
+      . mapping _DateTime
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0

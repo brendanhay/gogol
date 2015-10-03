@@ -58,11 +58,11 @@ type CommentsListResource =
          "posts" :>
            Capture "postId" Text :>
              "comments" :>
-               QueryParam "endDate" DateTime :>
+               QueryParam "endDate" DateTime' :>
                  QueryParam "fetchBodies" Bool :>
                    QueryParam "maxResults" Word32 :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "startDate" DateTime :>
+                       QueryParam "startDate" DateTime' :>
                          QueryParams "status" BloggerCommentsListStatus :>
                            QueryParam "view" BloggerCommentsListView :>
                              QueryParam "quotaUser" Text :>
@@ -82,9 +82,9 @@ data CommentsList' = CommentsList'
     , _clQuotaUser   :: !(Maybe Text)
     , _clPrettyPrint :: !Bool
     , _clUserIP      :: !(Maybe Text)
-    , _clEndDate     :: !(Maybe DateTime)
+    , _clEndDate     :: !(Maybe DateTime')
     , _clBlogId      :: !Text
-    , _clStartDate   :: !(Maybe DateTime)
+    , _clStartDate   :: !(Maybe DateTime')
     , _clKey         :: !(Maybe Key)
     , _clFetchBodies :: !(Maybe Bool)
     , _clView        :: !(Maybe BloggerCommentsListView)
@@ -175,7 +175,8 @@ clUserIP = lens _clUserIP (\ s a -> s{_clUserIP = a})
 -- | Latest date of comment to fetch, a date-time with RFC 3339 formatting.
 clEndDate :: Lens' CommentsList' (Maybe UTCTime)
 clEndDate
-  = lens _clEndDate (\ s a -> s{_clEndDate = a})
+  = lens _clEndDate (\ s a -> s{_clEndDate = a}) .
+      mapping _DateTime
 
 -- | ID of the blog to fetch comments from.
 clBlogId :: Lens' CommentsList' Text
@@ -184,7 +185,8 @@ clBlogId = lens _clBlogId (\ s a -> s{_clBlogId = a})
 -- | Earliest date of comment to fetch, a date-time with RFC 3339 formatting.
 clStartDate :: Lens' CommentsList' (Maybe UTCTime)
 clStartDate
-  = lens _clStartDate (\ s a -> s{_clStartDate = a})
+  = lens _clStartDate (\ s a -> s{_clStartDate = a}) .
+      mapping _DateTime
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0

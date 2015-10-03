@@ -66,8 +66,8 @@ type EventsInstancesResource =
                      QueryParam "originalStart" Text :>
                        QueryParam "pageToken" Text :>
                          QueryParam "showDeleted" Bool :>
-                           QueryParam "timeMax" DateTime :>
-                             QueryParam "timeMin" DateTime :>
+                           QueryParam "timeMax" DateTime' :>
+                             QueryParam "timeMin" DateTime' :>
                                QueryParam "timeZone" Text :>
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
@@ -86,7 +86,7 @@ data EventsInstances' = EventsInstances'
     { _eiQuotaUser          :: !(Maybe Text)
     , _eiCalendarId         :: !Text
     , _eiPrettyPrint        :: !Bool
-    , _eiTimeMin            :: !(Maybe DateTime)
+    , _eiTimeMin            :: !(Maybe DateTime')
     , _eiUserIP             :: !(Maybe Text)
     , _eiShowDeleted        :: !(Maybe Bool)
     , _eiOriginalStart      :: !(Maybe Text)
@@ -97,7 +97,7 @@ data EventsInstances' = EventsInstances'
     , _eiOAuthToken         :: !(Maybe OAuthToken)
     , _eiMaxResults         :: !(Maybe Int32)
     , _eiAlwaysIncludeEmail :: !(Maybe Bool)
-    , _eiTimeMax            :: !(Maybe DateTime)
+    , _eiTimeMax            :: !(Maybe DateTime')
     , _eiEventId            :: !Text
     , _eiFields             :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -189,7 +189,8 @@ eiPrettyPrint
 -- with mandatory time zone offset.
 eiTimeMin :: Lens' EventsInstances' (Maybe UTCTime)
 eiTimeMin
-  = lens _eiTimeMin (\ s a -> s{_eiTimeMin = a})
+  = lens _eiTimeMin (\ s a -> s{_eiTimeMin = a}) .
+      mapping _DateTime
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
@@ -263,7 +264,8 @@ eiAlwaysIncludeEmail
 -- timestamp with mandatory time zone offset.
 eiTimeMax :: Lens' EventsInstances' (Maybe UTCTime)
 eiTimeMax
-  = lens _eiTimeMax (\ s a -> s{_eiTimeMax = a})
+  = lens _eiTimeMax (\ s a -> s{_eiTimeMax = a}) .
+      mapping _DateTime
 
 -- | Recurring event identifier.
 eiEventId :: Lens' EventsInstances' Text

@@ -62,14 +62,14 @@ type PostUserInfosListResource =
          "blogs" :>
            Capture "blogId" Text :>
              "posts" :>
-               QueryParam "endDate" DateTime :>
+               QueryParam "endDate" DateTime' :>
                  QueryParam "fetchBodies" Bool :>
                    QueryParam "labels" Text :>
                      QueryParam "maxResults" Word32 :>
                        QueryParam "orderBy" BloggerPostUserInfosListOrderBy
                          :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "startDate" DateTime :>
+                           QueryParam "startDate" DateTime' :>
                              QueryParams "status" BloggerPostUserInfosListStatus
                                :>
                                QueryParam "view" BloggerPostUserInfosListView :>
@@ -94,10 +94,10 @@ data PostUserInfosList' = PostUserInfosList'
     , _puilPrettyPrint :: !Bool
     , _puilOrderBy     :: !BloggerPostUserInfosListOrderBy
     , _puilUserIP      :: !(Maybe Text)
-    , _puilEndDate     :: !(Maybe DateTime)
+    , _puilEndDate     :: !(Maybe DateTime')
     , _puilBlogId      :: !Text
     , _puilUserId      :: !Text
-    , _puilStartDate   :: !(Maybe DateTime)
+    , _puilStartDate   :: !(Maybe DateTime')
     , _puilKey         :: !(Maybe Key)
     , _puilFetchBodies :: !Bool
     , _puilView        :: !(Maybe BloggerPostUserInfosListView)
@@ -202,7 +202,8 @@ puilUserIP
 -- | Latest post date to fetch, a date-time with RFC 3339 formatting.
 puilEndDate :: Lens' PostUserInfosList' (Maybe UTCTime)
 puilEndDate
-  = lens _puilEndDate (\ s a -> s{_puilEndDate = a})
+  = lens _puilEndDate (\ s a -> s{_puilEndDate = a}) .
+      mapping _DateTime
 
 -- | ID of the blog to fetch posts from.
 puilBlogId :: Lens' PostUserInfosList' Text
@@ -220,6 +221,7 @@ puilStartDate :: Lens' PostUserInfosList' (Maybe UTCTime)
 puilStartDate
   = lens _puilStartDate
       (\ s a -> s{_puilStartDate = a})
+      . mapping _DateTime
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0

@@ -368,8 +368,8 @@ data Insert2 = Insert2
     { _insStorageDataLocation      :: !(Maybe Text)
     , _insModelType                :: !(Maybe Text)
     , _insKind                     :: !Text
-    , _insCreated                  :: !(Maybe DateTime)
-    , _insTrainingComplete         :: !(Maybe DateTime)
+    , _insCreated                  :: !(Maybe DateTime')
+    , _insTrainingComplete         :: !(Maybe DateTime')
     , _insSelfLink                 :: !(Maybe Text)
     , _insTrainingStatus           :: !(Maybe Text)
     , _insStoragePMMLModelLocation :: !(Maybe Text)
@@ -438,13 +438,15 @@ insKind = lens _insKind (\ s a -> s{_insKind = a})
 -- | Insert time of the model (as a RFC 3339 timestamp).
 insCreated :: Lens' Insert2 (Maybe UTCTime)
 insCreated
-  = lens _insCreated (\ s a -> s{_insCreated = a})
+  = lens _insCreated (\ s a -> s{_insCreated = a}) .
+      mapping _DateTime
 
 -- | Training completion time (as a RFC 3339 timestamp).
 insTrainingComplete :: Lens' Insert2 (Maybe UTCTime)
 insTrainingComplete
   = lens _insTrainingComplete
       (\ s a -> s{_insTrainingComplete = a})
+      . mapping _DateTime
 
 -- | A URL to re-request this resource.
 insSelfLink :: Lens' Insert2 (Maybe Text)

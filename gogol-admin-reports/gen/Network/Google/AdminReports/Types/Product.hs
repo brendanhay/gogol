@@ -163,7 +163,7 @@ instance ToJSON UsageReports where
 --
 -- /See:/ 'activityId' smart constructor.
 data ActivityId = ActivityId
-    { _aiTime            :: !(Maybe DateTime)
+    { _aiTime            :: !(Maybe DateTime')
     , _aiUniqueQualifier :: !(Maybe Int64)
     , _aiCustomerId      :: !(Maybe Text)
     , _aiApplicationName :: !(Maybe Text)
@@ -192,7 +192,9 @@ activityId =
 
 -- | Time of occurrence of the activity.
 aiTime :: Lens' ActivityId (Maybe UTCTime)
-aiTime = lens _aiTime (\ s a -> s{_aiTime = a})
+aiTime
+  = lens _aiTime (\ s a -> s{_aiTime = a}) .
+      mapping _DateTime
 
 -- | Unique qualifier if multiple events have the same time.
 aiUniqueQualifier :: Lens' ActivityId (Maybe Int64)
@@ -983,7 +985,7 @@ instance ToJSON ActivityActor where
 --
 -- /See:/ 'usageReportParameters' smart constructor.
 data UsageReportParameters = UsageReportParameters
-    { _urpDatetimeValue :: !(Maybe DateTime)
+    { _urpDatetimeValue :: !(Maybe DateTime')
     , _urpBoolValue     :: !(Maybe Bool)
     , _urpIntValue      :: !(Maybe Int64)
     , _urpStringValue   :: !(Maybe Text)
@@ -1023,6 +1025,7 @@ urpDatetimeValue :: Lens' UsageReportParameters (Maybe UTCTime)
 urpDatetimeValue
   = lens _urpDatetimeValue
       (\ s a -> s{_urpDatetimeValue = a})
+      . mapping _DateTime
 
 -- | Boolean value of the parameter.
 urpBoolValue :: Lens' UsageReportParameters (Maybe Bool)

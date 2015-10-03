@@ -497,7 +497,7 @@ data Post = Post
     , _posReaderComments :: !(Maybe Text)
     , _posLocation       :: !(Maybe PostLocation)
     , _posKind           :: !Text
-    , _posPublished      :: !(Maybe DateTime)
+    , _posPublished      :: !(Maybe DateTime')
     , _posURL            :: !(Maybe Text)
     , _posBlog           :: !(Maybe PostBlog)
     , _posCustomMetaData :: !(Maybe Text)
@@ -507,7 +507,7 @@ data Post = Post
     , _posAuthor         :: !(Maybe PostAuthor)
     , _posId             :: !(Maybe Text)
     , _posLabels         :: !(Maybe [Text])
-    , _posUpdated        :: !(Maybe DateTime)
+    , _posUpdated        :: !(Maybe DateTime')
     , _posTitleLink      :: !(Maybe Text)
     , _posTitle          :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -613,6 +613,7 @@ posKind = lens _posKind (\ s a -> s{_posKind = a})
 posPublished :: Lens' Post (Maybe UTCTime)
 posPublished
   = lens _posPublished (\ s a -> s{_posPublished = a})
+      . mapping _DateTime
 
 -- | The URL where this Post is displayed.
 posURL :: Lens' Post (Maybe Text)
@@ -662,7 +663,8 @@ posLabels
 -- | RFC 3339 date-time when this Post was last updated.
 posUpdated :: Lens' Post (Maybe UTCTime)
 posUpdated
-  = lens _posUpdated (\ s a -> s{_posUpdated = a})
+  = lens _posUpdated (\ s a -> s{_posUpdated = a}) .
+      mapping _DateTime
 
 -- | The title link URL, similar to atom\'s related link.
 posTitleLink :: Lens' Post (Maybe Text)
@@ -725,14 +727,14 @@ data Page = Page
     { _pagStatus    :: !(Maybe Text)
     , _pagEtag      :: !(Maybe Text)
     , _pagKind      :: !Text
-    , _pagPublished :: !(Maybe DateTime)
+    , _pagPublished :: !(Maybe DateTime')
     , _pagURL       :: !(Maybe Text)
     , _pagBlog      :: !(Maybe PageBlog)
     , _pagContent   :: !(Maybe Text)
     , _pagSelfLink  :: !(Maybe Text)
     , _pagAuthor    :: !(Maybe PageAuthor)
     , _pagId        :: !(Maybe Text)
-    , _pagUpdated   :: !(Maybe DateTime)
+    , _pagUpdated   :: !(Maybe DateTime')
     , _pagTitle     :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -798,6 +800,7 @@ pagKind = lens _pagKind (\ s a -> s{_pagKind = a})
 pagPublished :: Lens' Page (Maybe UTCTime)
 pagPublished
   = lens _pagPublished (\ s a -> s{_pagPublished = a})
+      . mapping _DateTime
 
 -- | The URL that this Page is displayed at.
 pagURL :: Lens' Page (Maybe Text)
@@ -829,7 +832,8 @@ pagId = lens _pagId (\ s a -> s{_pagId = a})
 -- | RFC 3339 date-time when this Page was last updated.
 pagUpdated :: Lens' Page (Maybe UTCTime)
 pagUpdated
-  = lens _pagUpdated (\ s a -> s{_pagUpdated = a})
+  = lens _pagUpdated (\ s a -> s{_pagUpdated = a}) .
+      mapping _DateTime
 
 -- | The title of this entity. This is the name displayed in the Admin user
 -- interface.
@@ -1030,13 +1034,13 @@ data Blog = Blog
     , _bKind           :: !Text
     , _bPages          :: !(Maybe BlogPages)
     , _bLocale         :: !(Maybe BlogLocale)
-    , _bPublished      :: !(Maybe DateTime)
+    , _bPublished      :: !(Maybe DateTime')
     , _bURL            :: !(Maybe Text)
     , _bCustomMetaData :: !(Maybe Text)
     , _bSelfLink       :: !(Maybe Text)
     , _bName           :: !(Maybe Text)
     , _bId             :: !(Maybe Text)
-    , _bUpdated        :: !(Maybe DateTime)
+    , _bUpdated        :: !(Maybe DateTime')
     , _bPosts          :: !(Maybe BlogPosts)
     , _bDescription    :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1108,7 +1112,8 @@ bLocale = lens _bLocale (\ s a -> s{_bLocale = a})
 -- | RFC 3339 date-time when this blog was published.
 bPublished :: Lens' Blog (Maybe UTCTime)
 bPublished
-  = lens _bPublished (\ s a -> s{_bPublished = a})
+  = lens _bPublished (\ s a -> s{_bPublished = a}) .
+      mapping _DateTime
 
 -- | The URL where this blog is published.
 bURL :: Lens' Blog (Maybe Text)
@@ -1135,7 +1140,9 @@ bId = lens _bId (\ s a -> s{_bId = a})
 
 -- | RFC 3339 date-time when this blog was last updated.
 bUpdated :: Lens' Blog (Maybe UTCTime)
-bUpdated = lens _bUpdated (\ s a -> s{_bUpdated = a})
+bUpdated
+  = lens _bUpdated (\ s a -> s{_bUpdated = a}) .
+      mapping _DateTime
 
 -- | The container of posts in this blog.
 bPosts :: Lens' Blog (Maybe BlogPosts)
@@ -1334,7 +1341,7 @@ instance ToJSON PageList where
 data User = User
     { _uBlogs       :: !(Maybe UserBlogs)
     , _uKind        :: !Text
-    , _uCreated     :: !(Maybe DateTime)
+    , _uCreated     :: !(Maybe DateTime')
     , _uLocale      :: !(Maybe UserLocale)
     , _uURL         :: !(Maybe Text)
     , _uSelfLink    :: !(Maybe Text)
@@ -1389,7 +1396,9 @@ uKind = lens _uKind (\ s a -> s{_uKind = a})
 
 -- | The timestamp of when this profile was created, in seconds since epoch.
 uCreated :: Lens' User (Maybe UTCTime)
-uCreated = lens _uCreated (\ s a -> s{_uCreated = a})
+uCreated
+  = lens _uCreated (\ s a -> s{_uCreated = a}) .
+      mapping _DateTime
 
 -- | This user\'s locale
 uLocale :: Lens' User (Maybe UserLocale)
@@ -1869,13 +1878,13 @@ data Comment = Comment
     { _cStatus    :: !(Maybe Text)
     , _cPost      :: !(Maybe CommentPost)
     , _cKind      :: !Text
-    , _cPublished :: !(Maybe DateTime)
+    , _cPublished :: !(Maybe DateTime')
     , _cBlog      :: !(Maybe CommentBlog)
     , _cContent   :: !(Maybe Text)
     , _cSelfLink  :: !(Maybe Text)
     , _cAuthor    :: !(Maybe CommentAuthor)
     , _cId        :: !(Maybe Text)
-    , _cUpdated   :: !(Maybe DateTime)
+    , _cUpdated   :: !(Maybe DateTime')
     , _cInReplyTo :: !(Maybe CommentInReplyTo)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1936,7 +1945,8 @@ cKind = lens _cKind (\ s a -> s{_cKind = a})
 -- | RFC 3339 date-time when this comment was published.
 cPublished :: Lens' Comment (Maybe UTCTime)
 cPublished
-  = lens _cPublished (\ s a -> s{_cPublished = a})
+  = lens _cPublished (\ s a -> s{_cPublished = a}) .
+      mapping _DateTime
 
 -- | Data about the blog containing this comment.
 cBlog :: Lens' Comment (Maybe CommentBlog)
@@ -1961,7 +1971,9 @@ cId = lens _cId (\ s a -> s{_cId = a})
 
 -- | RFC 3339 date-time when this comment was last updated.
 cUpdated :: Lens' Comment (Maybe UTCTime)
-cUpdated = lens _cUpdated (\ s a -> s{_cUpdated = a})
+cUpdated
+  = lens _cUpdated (\ s a -> s{_cUpdated = a}) .
+      mapping _DateTime
 
 -- | Data about the comment this is in reply to.
 cInReplyTo :: Lens' Comment (Maybe CommentInReplyTo)

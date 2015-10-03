@@ -92,8 +92,8 @@ type SearchListResource =
                          QueryParam "onBehalfOfContentOwner" Text :>
                            QueryParam "order" YouTubeSearchListOrder :>
                              QueryParam "pageToken" Text :>
-                               QueryParam "publishedAfter" DateTime :>
-                                 QueryParam "publishedBefore" DateTime :>
+                               QueryParam "publishedAfter" DateTime' :>
+                                 QueryParam "publishedBefore" DateTime' :>
                                    QueryParam "q" Text :>
                                      QueryParam "regionCode" Text :>
                                        QueryParam "relatedToVideoId" Text :>
@@ -180,7 +180,7 @@ type SearchListResource =
 --
 -- /See:/ 'searchList'' smart constructor.
 data SearchList' = SearchList'
-    { _slPublishedAfter         :: !(Maybe DateTime)
+    { _slPublishedAfter         :: !(Maybe DateTime')
     , _slVideoDefinition        :: !(Maybe YouTubeSearchListVideoDefinition)
     , _slQuotaUser              :: !(Maybe Text)
     , _slPart                   :: !Text
@@ -213,7 +213,7 @@ data SearchList' = SearchList'
     , _slRelevanceLanguage      :: !(Maybe Text)
     , _slOrder                  :: !YouTubeSearchListOrder
     , _slMaxResults             :: !Word32
-    , _slPublishedBefore        :: !(Maybe DateTime)
+    , _slPublishedBefore        :: !(Maybe DateTime')
     , _slVideoType              :: !(Maybe YouTubeSearchListVideoType)
     , _slVideoDimension         :: !(Maybe YouTubeSearchListVideoDimension)
     , _slFields                 :: !(Maybe Text)
@@ -347,6 +347,7 @@ slPublishedAfter :: Lens' SearchList' (Maybe UTCTime)
 slPublishedAfter
   = lens _slPublishedAfter
       (\ s a -> s{_slPublishedAfter = a})
+      . mapping _DateTime
 
 -- | The videoDefinition parameter lets you restrict a search to only include
 -- either high definition (HD) or standard definition (SD) videos. HD
@@ -620,6 +621,7 @@ slPublishedBefore :: Lens' SearchList' (Maybe UTCTime)
 slPublishedBefore
   = lens _slPublishedBefore
       (\ s a -> s{_slPublishedBefore = a})
+      . mapping _DateTime
 
 -- | The videoType parameter lets you restrict a search to a particular type
 -- of videos. If you specify a value for this parameter, you must also set

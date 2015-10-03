@@ -59,12 +59,12 @@ import           Network.Google.Prelude
 type MapsListResource =
      "maps" :>
        QueryParam "bbox" Text :>
-         QueryParam "createdAfter" DateTime :>
-           QueryParam "createdBefore" DateTime :>
+         QueryParam "createdAfter" DateTime' :>
+           QueryParam "createdBefore" DateTime' :>
              QueryParam "creatorEmail" Text :>
                QueryParam "maxResults" Word32 :>
-                 QueryParam "modifiedAfter" DateTime :>
-                   QueryParam "modifiedBefore" DateTime :>
+                 QueryParam "modifiedAfter" DateTime' :>
+                   QueryParam "modifiedBefore" DateTime' :>
                      QueryParam "pageToken" Text :>
                        QueryParam "processingStatus"
                          MapsEngineMapsListProcessingStatus
@@ -87,7 +87,7 @@ type MapsListResource =
 --
 -- /See:/ 'mapsList'' smart constructor.
 data MapsList' = MapsList'
-    { _mapCreatedAfter     :: !(Maybe DateTime)
+    { _mapCreatedAfter     :: !(Maybe DateTime')
     , _mapQuotaUser        :: !(Maybe Text)
     , _mapPrettyPrint      :: !Bool
     , _mapUserIP           :: !(Maybe Text)
@@ -96,8 +96,8 @@ data MapsList' = MapsList'
     , _mapKey              :: !(Maybe Key)
     , _mapBbox             :: !(Maybe Text)
     , _mapProcessingStatus :: !(Maybe MapsEngineMapsListProcessingStatus)
-    , _mapModifiedAfter    :: !(Maybe DateTime)
-    , _mapModifiedBefore   :: !(Maybe DateTime)
+    , _mapModifiedAfter    :: !(Maybe DateTime')
+    , _mapModifiedBefore   :: !(Maybe DateTime')
     , _mapPageToken        :: !(Maybe Text)
     , _mapProjectId        :: !(Maybe Text)
     , _mapOAuthToken       :: !(Maybe OAuthToken)
@@ -105,7 +105,7 @@ data MapsList' = MapsList'
     , _mapMaxResults       :: !(Maybe Word32)
     , _mapTags             :: !(Maybe Text)
     , _mapFields           :: !(Maybe Text)
-    , _mapCreatedBefore    :: !(Maybe DateTime)
+    , _mapCreatedBefore    :: !(Maybe DateTime')
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapsList'' with the minimum fields required to make a request.
@@ -180,6 +180,7 @@ mapCreatedAfter :: Lens' MapsList' (Maybe UTCTime)
 mapCreatedAfter
   = lens _mapCreatedAfter
       (\ s a -> s{_mapCreatedAfter = a})
+      . mapping _DateTime
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -234,6 +235,7 @@ mapModifiedAfter :: Lens' MapsList' (Maybe UTCTime)
 mapModifiedAfter
   = lens _mapModifiedAfter
       (\ s a -> s{_mapModifiedAfter = a})
+      . mapping _DateTime
 
 -- | An RFC 3339 formatted date-time value (e.g. 1970-01-01T00:00:00Z).
 -- Returned assets will have been modified at or before this time.
@@ -241,6 +243,7 @@ mapModifiedBefore :: Lens' MapsList' (Maybe UTCTime)
 mapModifiedBefore
   = lens _mapModifiedBefore
       (\ s a -> s{_mapModifiedBefore = a})
+      . mapping _DateTime
 
 -- | The continuation token, used to page through large result sets. To get
 -- the next page of results, set this parameter to the value of
@@ -292,6 +295,7 @@ mapCreatedBefore :: Lens' MapsList' (Maybe UTCTime)
 mapCreatedBefore
   = lens _mapCreatedBefore
       (\ s a -> s{_mapCreatedBefore = a})
+      . mapping _DateTime
 
 instance GoogleAuth MapsList' where
         authKey = mapKey . _Just

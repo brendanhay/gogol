@@ -34,7 +34,7 @@ module Network.Google.Resource.AdExchangeBuyer.Offers.Insert
     , oiPrettyPrint
     , oiUserIP
     , oiKey
-    , oiOfferDto
+    , oiOfferDTO
     , oiOAuthToken
     , oiFields
     ) where
@@ -53,7 +53,7 @@ type OffersInsertResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] OfferDto :> Post '[JSON] OfferDto
+                     ReqBody '[JSON] OfferDTO :> Post '[JSON] OfferDTO
 
 -- | Creates or updates the requested offer.
 --
@@ -63,7 +63,7 @@ data OffersInsert' = OffersInsert'
     , _oiPrettyPrint :: !Bool
     , _oiUserIP      :: !(Maybe Text)
     , _oiKey         :: !(Maybe Key)
-    , _oiOfferDto    :: !OfferDto
+    , _oiOfferDTO    :: !OfferDTO
     , _oiOAuthToken  :: !(Maybe OAuthToken)
     , _oiFields      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -80,21 +80,21 @@ data OffersInsert' = OffersInsert'
 --
 -- * 'oiKey'
 --
--- * 'oiOfferDto'
+-- * 'oiOfferDTO'
 --
 -- * 'oiOAuthToken'
 --
 -- * 'oiFields'
 offersInsert'
-    :: OfferDto -- ^ 'OfferDto'
+    :: OfferDTO -- ^ 'OfferDTO'
     -> OffersInsert'
-offersInsert' pOiOfferDto_ =
+offersInsert' pOiOfferDTO_ =
     OffersInsert'
     { _oiQuotaUser = Nothing
     , _oiPrettyPrint = True
     , _oiUserIP = Nothing
     , _oiKey = Nothing
-    , _oiOfferDto = pOiOfferDto_
+    , _oiOfferDTO = pOiOfferDTO_
     , _oiOAuthToken = Nothing
     , _oiFields = Nothing
     }
@@ -124,9 +124,9 @@ oiKey :: Lens' OffersInsert' (Maybe Key)
 oiKey = lens _oiKey (\ s a -> s{_oiKey = a})
 
 -- | Multipart request metadata.
-oiOfferDto :: Lens' OffersInsert' OfferDto
-oiOfferDto
-  = lens _oiOfferDto (\ s a -> s{_oiOfferDto = a})
+oiOfferDTO :: Lens' OffersInsert' OfferDTO
+oiOfferDTO
+  = lens _oiOfferDTO (\ s a -> s{_oiOfferDTO = a})
 
 -- | OAuth 2.0 token for the current user.
 oiOAuthToken :: Lens' OffersInsert' (Maybe OAuthToken)
@@ -142,7 +142,7 @@ instance GoogleAuth OffersInsert' where
         authToken = oiOAuthToken . _Just
 
 instance GoogleRequest OffersInsert' where
-        type Rs OffersInsert' = OfferDto
+        type Rs OffersInsert' = OfferDTO
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u OffersInsert'{..}
           = go _oiQuotaUser (Just _oiPrettyPrint) _oiUserIP
@@ -150,7 +150,7 @@ instance GoogleRequest OffersInsert' where
               _oiKey
               _oiOAuthToken
               (Just AltJSON)
-              _oiOfferDto
+              _oiOfferDTO
           where go
                   = clientWithRoute
                       (Proxy :: Proxy OffersInsertResource)

@@ -36,7 +36,7 @@ module Network.Google.Resource.AdExchangeBuyer.NegotiationRounds.Insert
     , nriKey
     , nriOAuthToken
     , nriNegotiationId
-    , nriNegotiationRoundDto
+    , nriNegotiationRoundDTO
     , nriFields
     ) where
 
@@ -56,8 +56,8 @@ type NegotiationRoundsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] NegotiationRoundDto :>
-                           Post '[JSON] NegotiationRoundDto
+                         ReqBody '[JSON] NegotiationRoundDTO :>
+                           Post '[JSON] NegotiationRoundDTO
 
 -- | Adds the requested negotiationRound to the requested negotiation.
 --
@@ -69,7 +69,7 @@ data NegotiationRoundsInsert' = NegotiationRoundsInsert'
     , _nriKey                 :: !(Maybe Key)
     , _nriOAuthToken          :: !(Maybe OAuthToken)
     , _nriNegotiationId       :: !Int64
-    , _nriNegotiationRoundDto :: !NegotiationRoundDto
+    , _nriNegotiationRoundDTO :: !NegotiationRoundDTO
     , _nriFields              :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -89,14 +89,14 @@ data NegotiationRoundsInsert' = NegotiationRoundsInsert'
 --
 -- * 'nriNegotiationId'
 --
--- * 'nriNegotiationRoundDto'
+-- * 'nriNegotiationRoundDTO'
 --
 -- * 'nriFields'
 negotiationRoundsInsert'
     :: Int64 -- ^ 'negotiationId'
-    -> NegotiationRoundDto -- ^ 'NegotiationRoundDto'
+    -> NegotiationRoundDTO -- ^ 'NegotiationRoundDTO'
     -> NegotiationRoundsInsert'
-negotiationRoundsInsert' pNriNegotiationId_ pNriNegotiationRoundDto_ =
+negotiationRoundsInsert' pNriNegotiationId_ pNriNegotiationRoundDTO_ =
     NegotiationRoundsInsert'
     { _nriQuotaUser = Nothing
     , _nriPrettyPrint = True
@@ -104,7 +104,7 @@ negotiationRoundsInsert' pNriNegotiationId_ pNriNegotiationRoundDto_ =
     , _nriKey = Nothing
     , _nriOAuthToken = Nothing
     , _nriNegotiationId = pNriNegotiationId_
-    , _nriNegotiationRoundDto = pNriNegotiationRoundDto_
+    , _nriNegotiationRoundDTO = pNriNegotiationRoundDTO_
     , _nriFields = Nothing
     }
 
@@ -145,10 +145,10 @@ nriNegotiationId
       (\ s a -> s{_nriNegotiationId = a})
 
 -- | Multipart request metadata.
-nriNegotiationRoundDto :: Lens' NegotiationRoundsInsert' NegotiationRoundDto
-nriNegotiationRoundDto
-  = lens _nriNegotiationRoundDto
-      (\ s a -> s{_nriNegotiationRoundDto = a})
+nriNegotiationRoundDTO :: Lens' NegotiationRoundsInsert' NegotiationRoundDTO
+nriNegotiationRoundDTO
+  = lens _nriNegotiationRoundDTO
+      (\ s a -> s{_nriNegotiationRoundDTO = a})
 
 -- | Selector specifying which fields to include in a partial response.
 nriFields :: Lens' NegotiationRoundsInsert' (Maybe Text)
@@ -161,7 +161,7 @@ instance GoogleAuth NegotiationRoundsInsert' where
 
 instance GoogleRequest NegotiationRoundsInsert' where
         type Rs NegotiationRoundsInsert' =
-             NegotiationRoundDto
+             NegotiationRoundDTO
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u NegotiationRoundsInsert'{..}
           = go _nriNegotiationId _nriQuotaUser
@@ -171,7 +171,7 @@ instance GoogleRequest NegotiationRoundsInsert' where
               _nriKey
               _nriOAuthToken
               (Just AltJSON)
-              _nriNegotiationRoundDto
+              _nriNegotiationRoundDTO
           where go
                   = clientWithRoute
                       (Proxy :: Proxy NegotiationRoundsInsertResource)

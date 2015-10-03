@@ -57,7 +57,7 @@ type DealsGetResource =
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON]
                          GetFinalizedNegotiationByExternalDealIdRequest
-                         :> Get '[JSON] NegotiationDto
+                         :> Get '[JSON] NegotiationDTO
 
 -- | Gets the requested deal.
 --
@@ -158,7 +158,7 @@ instance GoogleAuth DealsGet' where
         authToken = dgOAuthToken . _Just
 
 instance GoogleRequest DealsGet' where
-        type Rs DealsGet' = NegotiationDto
+        type Rs DealsGet' = NegotiationDTO
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u DealsGet'{..}
           = go _dgDealId _dgQuotaUser (Just _dgPrettyPrint)

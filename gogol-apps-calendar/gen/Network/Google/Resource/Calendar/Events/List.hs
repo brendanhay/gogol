@@ -78,10 +78,10 @@ type EventsListResource =
                                QueryParam "showHiddenInvitations" Bool :>
                                  QueryParam "singleEvents" Bool :>
                                    QueryParam "syncToken" Text :>
-                                     QueryParam "timeMax" DateTime :>
-                                       QueryParam "timeMin" DateTime :>
+                                     QueryParam "timeMax" DateTime' :>
+                                       QueryParam "timeMin" DateTime' :>
                                          QueryParam "timeZone" Text :>
-                                           QueryParam "updatedMin" DateTime :>
+                                           QueryParam "updatedMin" DateTime' :>
                                              QueryParam "quotaUser" Text :>
                                                QueryParam "prettyPrint" Bool :>
                                                  QueryParam "userIp" Text :>
@@ -102,7 +102,7 @@ data EventsList' = EventsList'
     , _elQuotaUser               :: !(Maybe Text)
     , _elCalendarId              :: !Text
     , _elPrettyPrint             :: !Bool
-    , _elTimeMin                 :: !(Maybe DateTime)
+    , _elTimeMin                 :: !(Maybe DateTime')
     , _elOrderBy                 :: !(Maybe CalendarEventsListOrderBy)
     , _elSingleEvents            :: !(Maybe Bool)
     , _elPrivateExtendedProperty :: !(Maybe Text)
@@ -113,14 +113,14 @@ data EventsList' = EventsList'
     , _elMaxAttendees            :: !(Maybe Int32)
     , _elKey                     :: !(Maybe Key)
     , _elICalUId                 :: !(Maybe Text)
-    , _elUpdatedMin              :: !(Maybe DateTime)
+    , _elUpdatedMin              :: !(Maybe DateTime')
     , _elPageToken               :: !(Maybe Text)
     , _elTimeZone                :: !(Maybe Text)
     , _elOAuthToken              :: !(Maybe OAuthToken)
     , _elShowHiddenInvitations   :: !(Maybe Bool)
     , _elMaxResults              :: !(Maybe Int32)
     , _elAlwaysIncludeEmail      :: !(Maybe Bool)
-    , _elTimeMax                 :: !(Maybe DateTime)
+    , _elTimeMax                 :: !(Maybe DateTime')
     , _elFields                  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -249,7 +249,8 @@ elPrettyPrint
 -- 2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored.
 elTimeMin :: Lens' EventsList' (Maybe UTCTime)
 elTimeMin
-  = lens _elTimeMin (\ s a -> s{_elTimeMin = a})
+  = lens _elTimeMin (\ s a -> s{_elTimeMin = a}) .
+      mapping _DateTime
 
 -- | The order of the events returned in the result. Optional. The default is
 -- an unspecified, stable order.
@@ -329,6 +330,7 @@ elICalUId
 elUpdatedMin :: Lens' EventsList' (Maybe UTCTime)
 elUpdatedMin
   = lens _elUpdatedMin (\ s a -> s{_elUpdatedMin = a})
+      . mapping _DateTime
 
 -- | Token specifying which result page to return. Optional.
 elPageToken :: Lens' EventsList' (Maybe Text)
@@ -378,7 +380,8 @@ elAlwaysIncludeEmail
 -- provided but will be ignored.
 elTimeMax :: Lens' EventsList' (Maybe UTCTime)
 elTimeMax
-  = lens _elTimeMax (\ s a -> s{_elTimeMax = a})
+  = lens _elTimeMax (\ s a -> s{_elTimeMax = a}) .
+      mapping _DateTime
 
 -- | Selector specifying which fields to include in a partial response.
 elFields :: Lens' EventsList' (Maybe Text)

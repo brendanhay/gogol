@@ -337,7 +337,7 @@ instance ToJSON BatchReportDefinition where
 --
 -- /See:/ 'groupSnippet' smart constructor.
 data GroupSnippet = GroupSnippet
-    { _gsPublishedAt :: !(Maybe DateTime)
+    { _gsPublishedAt :: !(Maybe DateTime')
     , _gsTitle       :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -360,6 +360,7 @@ gsPublishedAt :: Lens' GroupSnippet (Maybe UTCTime)
 gsPublishedAt
   = lens _gsPublishedAt
       (\ s a -> s{_gsPublishedAt = a})
+      . mapping _DateTime
 
 gsTitle :: Lens' GroupSnippet (Maybe Text)
 gsTitle = lens _gsTitle (\ s a -> s{_gsTitle = a})
@@ -382,7 +383,7 @@ instance ToJSON GroupSnippet where
 --
 -- /See:/ 'batchReport' smart constructor.
 data BatchReport = BatchReport
-    { _brTimeUpdated :: !(Maybe DateTime)
+    { _brTimeUpdated :: !(Maybe DateTime')
     , _brKind        :: !Text
     , _brReportId    :: !(Maybe Text)
     , _brTimeSpan    :: !(Maybe BatchReportTimeSpan)
@@ -422,6 +423,7 @@ brTimeUpdated :: Lens' BatchReport (Maybe UTCTime)
 brTimeUpdated
   = lens _brTimeUpdated
       (\ s a -> s{_brTimeUpdated = a})
+      . mapping _DateTime
 
 -- | This value specifies the type of data of this item. For batch report the
 -- kind property value is youtubeAnalytics#batchReport.
@@ -710,8 +712,8 @@ instance ToJSON BatchReportList where
 --
 -- /See:/ 'batchReportTimeSpan' smart constructor.
 data BatchReportTimeSpan = BatchReportTimeSpan
-    { _brtsStartTime :: !(Maybe DateTime)
-    , _brtsEndTime   :: !(Maybe DateTime)
+    { _brtsStartTime :: !(Maybe DateTime')
+    , _brtsEndTime   :: !(Maybe DateTime')
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BatchReportTimeSpan' with the minimum fields required to make a request.
@@ -734,12 +736,14 @@ brtsStartTime :: Lens' BatchReportTimeSpan (Maybe UTCTime)
 brtsStartTime
   = lens _brtsStartTime
       (\ s a -> s{_brtsStartTime = a})
+      . mapping _DateTime
 
 -- | End of the period included in the report. Inclusive. For reports
 -- containing all entities endTime is not set.
 brtsEndTime :: Lens' BatchReportTimeSpan (Maybe UTCTime)
 brtsEndTime
-  = lens _brtsEndTime (\ s a -> s{_brtsEndTime = a})
+  = lens _brtsEndTime (\ s a -> s{_brtsEndTime = a}) .
+      mapping _DateTime
 
 instance FromJSON BatchReportTimeSpan where
         parseJSON

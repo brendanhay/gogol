@@ -1094,7 +1094,7 @@ instance ToJSON FileVideoMediaMetadata where
 data Change = Change
     { _chaKind             :: !Text
     , _chaSelfLink         :: !(Maybe Text)
-    , _chaModificationDate :: !(Maybe DateTime)
+    , _chaModificationDate :: !(Maybe DateTime')
     , _chaId               :: !(Maybe Int64)
     , _chaDeleted          :: !(Maybe Bool)
     , _chaFileId           :: !(Maybe Text)
@@ -1145,6 +1145,7 @@ chaModificationDate :: Lens' Change (Maybe UTCTime)
 chaModificationDate
   = lens _chaModificationDate
       (\ s a -> s{_chaModificationDate = a})
+      . mapping _DateTime
 
 -- | The ID of the change.
 chaId :: Lens' Change (Maybe Int64)
@@ -1727,10 +1728,10 @@ data CommentReply = CommentReply
     { _comHTMLContent  :: !(Maybe Text)
     , _comKind         :: !Text
     , _comContent      :: !(Maybe Text)
-    , _comCreatedDate  :: !(Maybe DateTime)
+    , _comCreatedDate  :: !(Maybe DateTime')
     , _comReplyId      :: !(Maybe Text)
     , _comAuthor       :: !(Maybe User)
-    , _comModifiedDate :: !(Maybe DateTime)
+    , _comModifiedDate :: !(Maybe DateTime')
     , _comDeleted      :: !(Maybe Bool)
     , _comVerb         :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1794,6 +1795,7 @@ comCreatedDate :: Lens' CommentReply (Maybe UTCTime)
 comCreatedDate
   = lens _comCreatedDate
       (\ s a -> s{_comCreatedDate = a})
+      . mapping _DateTime
 
 -- | The ID of the reply.
 comReplyId :: Lens' CommentReply (Maybe Text)
@@ -1810,6 +1812,7 @@ comModifiedDate :: Lens' CommentReply (Maybe UTCTime)
 comModifiedDate
   = lens _comModifiedDate
       (\ s a -> s{_comModifiedDate = a})
+      . mapping _DateTime
 
 -- | Whether this reply has been deleted. If a reply has been deleted the
 -- content will be cleared and this will only represent a reply that once
@@ -2886,7 +2889,7 @@ data Revision = Revision
     , _rExportLinks            :: !(Maybe RevisionExportLinks)
     , _rPublishedOutsideDomain :: !(Maybe Bool)
     , _rId                     :: !(Maybe Text)
-    , _rModifiedDate           :: !(Maybe DateTime)
+    , _rModifiedDate           :: !(Maybe DateTime')
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Revision' with the minimum fields required to make a request.
@@ -3054,6 +3057,7 @@ rModifiedDate :: Lens' Revision (Maybe UTCTime)
 rModifiedDate
   = lens _rModifiedDate
       (\ s a -> s{_rModifiedDate = a})
+      . mapping _DateTime
 
 instance FromJSON Revision where
         parseJSON
@@ -3301,10 +3305,10 @@ data Comment = Comment
     , _ccAnchor       :: !(Maybe Text)
     , _ccContent      :: !(Maybe Text)
     , _ccReplies      :: !(Maybe [CommentReply])
-    , _ccCreatedDate  :: !(Maybe DateTime)
+    , _ccCreatedDate  :: !(Maybe DateTime')
     , _ccSelfLink     :: !(Maybe Text)
     , _ccAuthor       :: !(Maybe User)
-    , _ccModifiedDate :: !(Maybe DateTime)
+    , _ccModifiedDate :: !(Maybe DateTime')
     , _ccDeleted      :: !(Maybe Bool)
     , _ccFileId       :: !(Maybe Text)
     , _ccCommentId    :: !(Maybe Text)
@@ -3416,6 +3420,7 @@ ccCreatedDate :: Lens' Comment (Maybe UTCTime)
 ccCreatedDate
   = lens _ccCreatedDate
       (\ s a -> s{_ccCreatedDate = a})
+      . mapping _DateTime
 
 -- | A link back to this comment.
 ccSelfLink :: Lens' Comment (Maybe Text)
@@ -3431,6 +3436,7 @@ ccModifiedDate :: Lens' Comment (Maybe UTCTime)
 ccModifiedDate
   = lens _ccModifiedDate
       (\ s a -> s{_ccModifiedDate = a})
+      . mapping _DateTime
 
 -- | Whether this comment has been deleted. If a comment has been deleted the
 -- content will be cleared and this will only represent a comment that once
@@ -3541,7 +3547,7 @@ data File = File
     , _fThumbnailLink         :: !(Maybe Text)
     , _fFullFileExtension     :: !(Maybe Text)
     , _fThumbnail             :: !(Maybe FileThumbnail)
-    , _fMarkedViewedByMeDate  :: !(Maybe DateTime)
+    , _fMarkedViewedByMeDate  :: !(Maybe DateTime')
     , _fEtag                  :: !(Maybe Text)
     , _fFileExtension         :: !(Maybe Text)
     , _fCanComment            :: !(Maybe Bool)
@@ -3559,13 +3565,13 @@ data File = File
     , _fImageMediaMetadata    :: !(Maybe FileImageMediaMetadata)
     , _fExplicitlyTrashed     :: !(Maybe Bool)
     , _fEditable              :: !(Maybe Bool)
-    , _fModifiedByMeDate      :: !(Maybe DateTime)
-    , _fLastViewedByMeDate    :: !(Maybe DateTime)
+    , _fModifiedByMeDate      :: !(Maybe DateTime')
+    , _fLastViewedByMeDate    :: !(Maybe DateTime')
     , _fShared                :: !(Maybe Bool)
     , _fMD5Checksum           :: !(Maybe Text)
     , _fFolderColorRgb        :: !(Maybe Text)
     , _fMimeType              :: !(Maybe Text)
-    , _fCreatedDate           :: !(Maybe DateTime)
+    , _fCreatedDate           :: !(Maybe DateTime')
     , _fSelfLink              :: !(Maybe Text)
     , _fLastModifyingUserName :: !(Maybe Text)
     , _fShareable             :: !(Maybe Bool)
@@ -3573,7 +3579,7 @@ data File = File
     , _fExportLinks           :: !(Maybe FileExportLinks)
     , _fCopyable              :: !(Maybe Bool)
     , _fParents               :: !(Maybe [ParentReference])
-    , _fSharedWithMeDate      :: !(Maybe DateTime)
+    , _fSharedWithMeDate      :: !(Maybe DateTime')
     , _fSpaces                :: !(Maybe [Text])
     , _fVersion               :: !(Maybe Int64)
     , _fUserPermission        :: !(Maybe Permission)
@@ -3581,7 +3587,7 @@ data File = File
     , _fDefaultOpenWithLink   :: !(Maybe Text)
     , _fId                    :: !(Maybe Text)
     , _fLabels                :: !(Maybe FileLabels)
-    , _fModifiedDate          :: !(Maybe DateTime)
+    , _fModifiedDate          :: !(Maybe DateTime')
     , _fPermissions           :: !(Maybe [Permission])
     , _fQuotaBytesUsed        :: !(Maybe Int64)
     , _fTitle                 :: !(Maybe Text)
@@ -3807,6 +3813,7 @@ fMarkedViewedByMeDate :: Lens' File (Maybe UTCTime)
 fMarkedViewedByMeDate
   = lens _fMarkedViewedByMeDate
       (\ s a -> s{_fMarkedViewedByMeDate = a})
+      . mapping _DateTime
 
 -- | ETag of the file.
 fEtag :: Lens' File (Maybe Text)
@@ -3923,6 +3930,7 @@ fModifiedByMeDate :: Lens' File (Maybe UTCTime)
 fModifiedByMeDate
   = lens _fModifiedByMeDate
       (\ s a -> s{_fModifiedByMeDate = a})
+      . mapping _DateTime
 
 -- | Last time this file was viewed by the user (formatted RFC 3339
 -- timestamp).
@@ -3930,6 +3938,7 @@ fLastViewedByMeDate :: Lens' File (Maybe UTCTime)
 fLastViewedByMeDate
   = lens _fLastViewedByMeDate
       (\ s a -> s{_fLastViewedByMeDate = a})
+      . mapping _DateTime
 
 -- | Whether the file has been shared.
 fShared :: Lens' File (Maybe Bool)
@@ -3962,6 +3971,7 @@ fMimeType
 fCreatedDate :: Lens' File (Maybe UTCTime)
 fCreatedDate
   = lens _fCreatedDate (\ s a -> s{_fCreatedDate = a})
+      . mapping _DateTime
 
 -- | A link back to this file.
 fSelfLink :: Lens' File (Maybe Text)
@@ -4010,6 +4020,7 @@ fSharedWithMeDate :: Lens' File (Maybe UTCTime)
 fSharedWithMeDate
   = lens _fSharedWithMeDate
       (\ s a -> s{_fSharedWithMeDate = a})
+      . mapping _DateTime
 
 -- | The list of spaces which contain the file. Supported values are
 -- \'drive\', \'appDataFolder\' and \'photos\'.
@@ -4058,6 +4069,7 @@ fModifiedDate :: Lens' File (Maybe UTCTime)
 fModifiedDate
   = lens _fModifiedDate
       (\ s a -> s{_fModifiedDate = a})
+      . mapping _DateTime
 
 -- | The list of permissions for users with access to this file.
 fPermissions :: Lens' File [Permission]

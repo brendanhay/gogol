@@ -53,7 +53,7 @@ type OffersGetResource =
                QueryParam "fields" Text :>
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] OfferDto
+                     QueryParam "alt" AltJSON :> Get '[JSON] OfferDTO
 
 -- | Gets the requested offer.
 --
@@ -141,7 +141,7 @@ instance GoogleAuth OffersGet' where
         authToken = ogOAuthToken . _Just
 
 instance GoogleRequest OffersGet' where
-        type Rs OffersGet' = OfferDto
+        type Rs OffersGet' = OfferDTO
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u OffersGet'{..}
           = go _ogOfferId _ogQuotaUser (Just _ogPrettyPrint)

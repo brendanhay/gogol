@@ -76,8 +76,8 @@ instance ToJSON MetricDescriptorTypeDescriptor where
 data ListTimeseriesResponse = ListTimeseriesResponse
     { _ltrNextPageToken :: !(Maybe Text)
     , _ltrKind          :: !Text
-    , _ltrOldest        :: !(Maybe DateTime)
-    , _ltrYoungest      :: !(Maybe DateTime)
+    , _ltrOldest        :: !(Maybe DateTime')
+    , _ltrYoungest      :: !(Maybe DateTime')
     , _ltrTimeseries    :: !(Maybe [Timeseries])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -124,13 +124,15 @@ ltrKind = lens _ltrKind (\ s a -> s{_ltrKind = a})
 -- string.
 ltrOldest :: Lens' ListTimeseriesResponse (Maybe UTCTime)
 ltrOldest
-  = lens _ltrOldest (\ s a -> s{_ltrOldest = a})
+  = lens _ltrOldest (\ s a -> s{_ltrOldest = a}) .
+      mapping _DateTime
 
 -- | The youngest timestamp of the interval of this query as an RFC 3339
 -- string.
 ltrYoungest :: Lens' ListTimeseriesResponse (Maybe UTCTime)
 ltrYoungest
-  = lens _ltrYoungest (\ s a -> s{_ltrYoungest = a})
+  = lens _ltrYoungest (\ s a -> s{_ltrYoungest = a}) .
+      mapping _DateTime
 
 -- | The returned time series.
 ltrTimeseries :: Lens' ListTimeseriesResponse [Timeseries]
@@ -764,11 +766,11 @@ instance ToJSON PointDistribution where
 -- /See:/ 'point' smart constructor.
 data Point = Point
     { _pBoolValue         :: !(Maybe Bool)
-    , _pStart             :: !(Maybe DateTime)
+    , _pStart             :: !(Maybe DateTime')
     , _pDoubleValue       :: !(Maybe Double)
     , _pStringValue       :: !(Maybe Text)
     , _pDistributionValue :: !(Maybe PointDistribution)
-    , _pEnd               :: !(Maybe DateTime)
+    , _pEnd               :: !(Maybe DateTime')
     , _pInt64Value        :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -813,7 +815,9 @@ pBoolValue
 -- metrics (of which deltas and rates are special cases), the interval
 -- should be non-empty. Both start and end are RFC 3339 strings.
 pStart :: Lens' Point (Maybe UTCTime)
-pStart = lens _pStart (\ s a -> s{_pStart = a})
+pStart
+  = lens _pStart (\ s a -> s{_pStart = a}) .
+      mapping _DateTime
 
 -- | The value of this data point as a double-precision floating-point
 -- number.
@@ -841,7 +845,9 @@ pDistributionValue
 -- metrics (of which deltas and rates are special cases), the interval
 -- should be non-empty. Both start and end are RFC 3339 strings.
 pEnd :: Lens' Point (Maybe UTCTime)
-pEnd = lens _pEnd (\ s a -> s{_pEnd = a})
+pEnd
+  = lens _pEnd (\ s a -> s{_pEnd = a}) .
+      mapping _DateTime
 
 -- | The value of this data point as a 64-bit integer.
 pInt64Value :: Lens' Point (Maybe Int64)
@@ -930,8 +936,8 @@ instance ToJSON PointDistributionOverflowBucket where
 data ListTimeseriesDescriptorsResponse = ListTimeseriesDescriptorsResponse
     { _lNextPageToken :: !(Maybe Text)
     , _lKind          :: !Text
-    , _lOldest        :: !(Maybe DateTime)
-    , _lYoungest      :: !(Maybe DateTime)
+    , _lOldest        :: !(Maybe DateTime')
+    , _lYoungest      :: !(Maybe DateTime')
     , _lTimeseries    :: !(Maybe [TimeseriesDescriptor])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -975,13 +981,16 @@ lKind = lens _lKind (\ s a -> s{_lKind = a})
 -- | The oldest timestamp of the interval of this query, as an RFC 3339
 -- string.
 lOldest :: Lens' ListTimeseriesDescriptorsResponse (Maybe UTCTime)
-lOldest = lens _lOldest (\ s a -> s{_lOldest = a})
+lOldest
+  = lens _lOldest (\ s a -> s{_lOldest = a}) .
+      mapping _DateTime
 
 -- | The youngest timestamp of the interval of this query, as an RFC 3339
 -- string.
 lYoungest :: Lens' ListTimeseriesDescriptorsResponse (Maybe UTCTime)
 lYoungest
-  = lens _lYoungest (\ s a -> s{_lYoungest = a})
+  = lens _lYoungest (\ s a -> s{_lYoungest = a}) .
+      mapping _DateTime
 
 -- | The returned time series descriptors.
 lTimeseries :: Lens' ListTimeseriesDescriptorsResponse [TimeseriesDescriptor]

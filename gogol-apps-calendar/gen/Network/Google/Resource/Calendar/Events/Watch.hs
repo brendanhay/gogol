@@ -80,10 +80,11 @@ type EventsWatchResource =
                                  QueryParam "showHiddenInvitations" Bool :>
                                    QueryParam "singleEvents" Bool :>
                                      QueryParam "syncToken" Text :>
-                                       QueryParam "timeMax" DateTime :>
-                                         QueryParam "timeMin" DateTime :>
+                                       QueryParam "timeMax" DateTime' :>
+                                         QueryParam "timeMin" DateTime' :>
                                            QueryParam "timeZone" Text :>
-                                             QueryParam "updatedMin" DateTime :>
+                                             QueryParam "updatedMin" DateTime'
+                                               :>
                                                QueryParam "quotaUser" Text :>
                                                  QueryParam "prettyPrint" Bool
                                                    :>
@@ -111,7 +112,7 @@ data EventsWatch' = EventsWatch'
     , _ewQuotaUser               :: !(Maybe Text)
     , _ewCalendarId              :: !Text
     , _ewPrettyPrint             :: !Bool
-    , _ewTimeMin                 :: !(Maybe DateTime)
+    , _ewTimeMin                 :: !(Maybe DateTime')
     , _ewOrderBy                 :: !(Maybe CalendarEventsWatchOrderBy)
     , _ewSingleEvents            :: !(Maybe Bool)
     , _ewPrivateExtendedProperty :: !(Maybe Text)
@@ -123,14 +124,14 @@ data EventsWatch' = EventsWatch'
     , _ewMaxAttendees            :: !(Maybe Int32)
     , _ewKey                     :: !(Maybe Key)
     , _ewICalUId                 :: !(Maybe Text)
-    , _ewUpdatedMin              :: !(Maybe DateTime)
+    , _ewUpdatedMin              :: !(Maybe DateTime')
     , _ewPageToken               :: !(Maybe Text)
     , _ewTimeZone                :: !(Maybe Text)
     , _ewOAuthToken              :: !(Maybe OAuthToken)
     , _ewShowHiddenInvitations   :: !(Maybe Bool)
     , _ewMaxResults              :: !(Maybe Int32)
     , _ewAlwaysIncludeEmail      :: !(Maybe Bool)
-    , _ewTimeMax                 :: !(Maybe DateTime)
+    , _ewTimeMax                 :: !(Maybe DateTime')
     , _ewFields                  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -263,7 +264,8 @@ ewPrettyPrint
 -- 2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored.
 ewTimeMin :: Lens' EventsWatch' (Maybe UTCTime)
 ewTimeMin
-  = lens _ewTimeMin (\ s a -> s{_ewTimeMin = a})
+  = lens _ewTimeMin (\ s a -> s{_ewTimeMin = a}) .
+      mapping _DateTime
 
 -- | The order of the events returned in the result. Optional. The default is
 -- an unspecified, stable order.
@@ -348,6 +350,7 @@ ewICalUId
 ewUpdatedMin :: Lens' EventsWatch' (Maybe UTCTime)
 ewUpdatedMin
   = lens _ewUpdatedMin (\ s a -> s{_ewUpdatedMin = a})
+      . mapping _DateTime
 
 -- | Token specifying which result page to return. Optional.
 ewPageToken :: Lens' EventsWatch' (Maybe Text)
@@ -397,7 +400,8 @@ ewAlwaysIncludeEmail
 -- provided but will be ignored.
 ewTimeMax :: Lens' EventsWatch' (Maybe UTCTime)
 ewTimeMax
-  = lens _ewTimeMax (\ s a -> s{_ewTimeMax = a})
+  = lens _ewTimeMax (\ s a -> s{_ewTimeMax = a}) .
+      mapping _DateTime
 
 -- | Selector specifying which fields to include in a partial response.
 ewFields :: Lens' EventsWatch' (Maybe Text)

@@ -329,7 +329,7 @@ data Event = Event
     , _eAttendees               :: !(Maybe [EventAttendee])
     , _eReminders               :: !(Maybe EventReminders)
     , _eKind                    :: !Text
-    , _eCreated                 :: !(Maybe DateTime)
+    , _eCreated                 :: !(Maybe DateTime')
     , _eTransparency            :: !Text
     , _eRecurringEventId        :: !(Maybe Text)
     , _eStart                   :: !(Maybe EventDateTime)
@@ -347,7 +347,7 @@ data Event = Event
     , _eSource                  :: !(Maybe EventSource)
     , _eId                      :: !(Maybe Text)
     , _eHTMLLink                :: !(Maybe Text)
-    , _eUpdated                 :: !(Maybe DateTime)
+    , _eUpdated                 :: !(Maybe DateTime')
     , _eColorId                 :: !(Maybe Text)
     , _eAnyoneCanAddSelf        :: !Bool
     , _eGuestsCanSeeOtherGuests :: !Bool
@@ -550,7 +550,9 @@ eKind = lens _eKind (\ s a -> s{_eKind = a})
 
 -- | Creation time of the event (as a RFC3339 timestamp). Read-only.
 eCreated :: Lens' Event (Maybe UTCTime)
-eCreated = lens _eCreated (\ s a -> s{_eCreated = a})
+eCreated
+  = lens _eCreated (\ s a -> s{_eCreated = a}) .
+      mapping _DateTime
 
 -- | Whether the event blocks time on the calendar. Optional. Possible values
 -- are: - \"opaque\" - The event blocks time on the calendar. This is the
@@ -687,7 +689,9 @@ eHTMLLink
 
 -- | Last modification time of the event (as a RFC3339 timestamp). Read-only.
 eUpdated :: Lens' Event (Maybe UTCTime)
-eUpdated = lens _eUpdated (\ s a -> s{_eUpdated = a})
+eUpdated
+  = lens _eUpdated (\ s a -> s{_eUpdated = a}) .
+      mapping _DateTime
 
 -- | The color of the event. This is an ID referring to an entry in the event
 -- section of the colors definition (see the colors endpoint). Optional.
@@ -1147,8 +1151,8 @@ instance ToJSON EventCreator where
 --
 -- /See:/ 'timePeriod' smart constructor.
 data TimePeriod = TimePeriod
-    { _tpStart :: !(Maybe DateTime)
-    , _tpEnd   :: !(Maybe DateTime)
+    { _tpStart :: !(Maybe DateTime')
+    , _tpEnd   :: !(Maybe DateTime')
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimePeriod' with the minimum fields required to make a request.
@@ -1168,11 +1172,15 @@ timePeriod =
 
 -- | The (inclusive) start of the time period.
 tpStart :: Lens' TimePeriod (Maybe UTCTime)
-tpStart = lens _tpStart (\ s a -> s{_tpStart = a})
+tpStart
+  = lens _tpStart (\ s a -> s{_tpStart = a}) .
+      mapping _DateTime
 
 -- | The (exclusive) end of the time period.
 tpEnd :: Lens' TimePeriod (Maybe UTCTime)
-tpEnd = lens _tpEnd (\ s a -> s{_tpEnd = a})
+tpEnd
+  = lens _tpEnd (\ s a -> s{_tpEnd = a}) .
+      mapping _DateTime
 
 instance FromJSON TimePeriod where
         parseJSON
@@ -1733,7 +1741,7 @@ data Events = Events
     , _eveKind             :: !Text
     , _eveItems            :: !(Maybe [Event])
     , _eveDefaultReminders :: !(Maybe [EventReminder])
-    , _eveUpdated          :: !(Maybe DateTime)
+    , _eveUpdated          :: !(Maybe DateTime')
     , _eveAccessRole       :: !(Maybe Text)
     , _eveTimeZone         :: !(Maybe Text)
     , _eveNextSyncToken    :: !(Maybe Text)
@@ -1823,7 +1831,8 @@ eveDefaultReminders
 -- Read-only.
 eveUpdated :: Lens' Events (Maybe UTCTime)
 eveUpdated
-  = lens _eveUpdated (\ s a -> s{_eveUpdated = a})
+  = lens _eveUpdated (\ s a -> s{_eveUpdated = a}) .
+      mapping _DateTime
 
 -- | The user\'s access role for this calendar. Read-only. Possible values
 -- are: - \"none\" - The user has no access. - \"freeBusyReader\" - The
@@ -1945,10 +1954,10 @@ instance ToJSON EventReminder where
 -- /See:/ 'freeBusyResponse' smart constructor.
 data FreeBusyResponse = FreeBusyResponse
     { _fbrGroups    :: !(Maybe FreeBusyResponseGroups)
-    , _fbrTimeMin   :: !(Maybe DateTime)
+    , _fbrTimeMin   :: !(Maybe DateTime')
     , _fbrKind      :: !Text
     , _fbrCalendars :: !(Maybe FreeBusyResponseCalendars)
-    , _fbrTimeMax   :: !(Maybe DateTime)
+    , _fbrTimeMax   :: !(Maybe DateTime')
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FreeBusyResponse' with the minimum fields required to make a request.
@@ -1983,7 +1992,8 @@ fbrGroups
 -- | The start of the interval.
 fbrTimeMin :: Lens' FreeBusyResponse (Maybe UTCTime)
 fbrTimeMin
-  = lens _fbrTimeMin (\ s a -> s{_fbrTimeMin = a})
+  = lens _fbrTimeMin (\ s a -> s{_fbrTimeMin = a}) .
+      mapping _DateTime
 
 -- | Type of the resource (\"calendar#freeBusy\").
 fbrKind :: Lens' FreeBusyResponse Text
@@ -1997,7 +2007,8 @@ fbrCalendars
 -- | The end of the interval.
 fbrTimeMax :: Lens' FreeBusyResponse (Maybe UTCTime)
 fbrTimeMax
-  = lens _fbrTimeMax (\ s a -> s{_fbrTimeMax = a})
+  = lens _fbrTimeMax (\ s a -> s{_fbrTimeMax = a}) .
+      mapping _DateTime
 
 instance FromJSON FreeBusyResponse where
         parseJSON
@@ -2385,9 +2396,9 @@ instance ToJSON EventOrganizer where
 --
 -- /See:/ 'eventDateTime' smart constructor.
 data EventDateTime = EventDateTime
-    { _edtDate     :: !(Maybe Date)
+    { _edtDate     :: !(Maybe Date')
     , _edtTimeZone :: !(Maybe Text)
-    , _edtDateTime :: !(Maybe DateTime)
+    , _edtDateTime :: !(Maybe DateTime')
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventDateTime' with the minimum fields required to make a request.
@@ -2409,8 +2420,10 @@ eventDateTime =
     }
 
 -- | The date, in the format \"yyyy-mm-dd\", if this is an all-day event.
-edtDate :: Lens' EventDateTime (Maybe UTCTime)
-edtDate = lens _edtDate (\ s a -> s{_edtDate = a})
+edtDate :: Lens' EventDateTime (Maybe LocalTime)
+edtDate
+  = lens _edtDate (\ s a -> s{_edtDate = a}) .
+      mapping _Date
 
 -- | The time zone in which the time is specified. (Formatted as an IANA Time
 -- Zone Database name, e.g. \"Europe\/Zurich\".) For recurring events this
@@ -2426,7 +2439,8 @@ edtTimeZone
 -- explicitly specified in timeZone.
 edtDateTime :: Lens' EventDateTime (Maybe UTCTime)
 edtDateTime
-  = lens _edtDateTime (\ s a -> s{_edtDateTime = a})
+  = lens _edtDateTime (\ s a -> s{_edtDateTime = a}) .
+      mapping _DateTime
 
 instance FromJSON EventDateTime where
         parseJSON
@@ -2551,11 +2565,11 @@ instance ToJSON CalendarList where
 -- /See:/ 'freeBusyRequest' smart constructor.
 data FreeBusyRequest = FreeBusyRequest
     { _fCalendarExpansionMax :: !(Maybe Int32)
-    , _fTimeMin              :: !(Maybe DateTime)
+    , _fTimeMin              :: !(Maybe DateTime')
     , _fItems                :: !(Maybe [FreeBusyRequestItem])
     , _fGroupExpansionMax    :: !(Maybe Int32)
     , _fTimeZone             :: !Text
-    , _fTimeMax              :: !(Maybe DateTime)
+    , _fTimeMax              :: !(Maybe DateTime')
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FreeBusyRequest' with the minimum fields required to make a request.
@@ -2594,7 +2608,9 @@ fCalendarExpansionMax
 
 -- | The start of the interval for the query.
 fTimeMin :: Lens' FreeBusyRequest (Maybe UTCTime)
-fTimeMin = lens _fTimeMin (\ s a -> s{_fTimeMin = a})
+fTimeMin
+  = lens _fTimeMin (\ s a -> s{_fTimeMin = a}) .
+      mapping _DateTime
 
 -- | List of calendars and\/or groups to query.
 fItems :: Lens' FreeBusyRequest [FreeBusyRequestItem]
@@ -2617,7 +2633,9 @@ fTimeZone
 
 -- | The end of the interval for the query.
 fTimeMax :: Lens' FreeBusyRequest (Maybe UTCTime)
-fTimeMax = lens _fTimeMax (\ s a -> s{_fTimeMax = a})
+fTimeMax
+  = lens _fTimeMax (\ s a -> s{_fTimeMax = a}) .
+      mapping _DateTime
 
 instance FromJSON FreeBusyRequest where
         parseJSON
@@ -2884,7 +2902,7 @@ data Colors = Colors
     { _colEvent    :: !(Maybe ColorsEvent)
     , _colKind     :: !Text
     , _colCalendar :: !(Maybe ColorsCalendar)
-    , _colUpdated  :: !(Maybe DateTime)
+    , _colUpdated  :: !(Maybe DateTime')
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Colors' with the minimum fields required to make a request.
@@ -2929,7 +2947,8 @@ colCalendar
 -- Read-only.
 colUpdated :: Lens' Colors (Maybe UTCTime)
 colUpdated
-  = lens _colUpdated (\ s a -> s{_colUpdated = a})
+  = lens _colUpdated (\ s a -> s{_colUpdated = a}) .
+      mapping _DateTime
 
 instance FromJSON Colors where
         parseJSON

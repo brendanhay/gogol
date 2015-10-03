@@ -56,7 +56,7 @@ type NegotiationsGetResource =
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] GetNegotiationByIdRequest :>
-                         Get '[JSON] NegotiationDto
+                         Get '[JSON] NegotiationDTO
 
 -- | Gets the requested negotiation.
 --
@@ -156,7 +156,7 @@ instance GoogleAuth NegotiationsGet' where
         authToken = ngOAuthToken . _Just
 
 instance GoogleRequest NegotiationsGet' where
-        type Rs NegotiationsGet' = NegotiationDto
+        type Rs NegotiationsGet' = NegotiationDTO
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u NegotiationsGet'{..}
           = go _ngNegotiationId _ngQuotaUser

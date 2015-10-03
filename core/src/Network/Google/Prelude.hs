@@ -55,14 +55,14 @@ _Default = iso f Just
     f (Just x) = x
     f Nothing  = mempty
 
-newtype Time = Time Text
-    deriving (Eq, Ord, Show, Read, Generic, Newtype, Typeable, ToText, FromText)
+newtype Time' = Time' Text
+    deriving (Eq, Ord, Show, Read, Generic, Data, Typeable, ToText, FromText)
 
-newtype Date = Date Text
-    deriving (Eq, Ord, Show, Read, Generic, Newtype, Typeable, ToText, FromText)
+newtype Date' = Date' Text
+    deriving (Eq, Ord, Show, Read, Generic, Data, Typeable, ToText, FromText)
 
-newtype DateTime = DateTime Text
-    deriving (Eq, Ord, Show, Read, Generic, Newtype, Typeable, ToText, FromText)
+newtype DateTime' = DateTime' Text
+    deriving (Eq, Ord, Show, Read, Generic, Data, Typeable, ToText, FromText)
 
 data AltJSON  = AltJSON
     deriving (Eq, Ord, Show, Read, Generic, Data, Typeable)
@@ -105,7 +105,28 @@ instance GoogleAuth a => GoogleAuth (Download a) where
 data Body = Body -- MediaType
     deriving (Eq, Show, Generic, Data, Typeable)
 
+
 data MultipartRelated (metatypes :: [*]) meta media
+
+-- IsElem sa (ReqBody y x :> sb)           = IsElem sa sb
+
+-- instance HasLink sub => HasLink (ReqBody ct a :> sub) where
+--     type MkLink (ReqBody ct a :> sub) = MkLink sub
+--     toLink _ = toLink (Proxy :: Proxy sub)
+
+-- instance (MimeRender ct a, HasClient sublayout)
+--       => HasClient (ReqBody (ct ': cts) a :> sublayout) where
+--   type Client (ReqBody (ct ': cts) a :> sublayout) =
+--     a -> Client sublayout
+
+--   clientWithRoute Proxy req baseurl body =
+--     clientWithRoute (Proxy :: Proxy sublayout)
+--                     (let ctProxy = Proxy :: Proxy ct
+--                      in setRQBody (mimeRender ctProxy body)
+--                                   (contentType ctProxy)
+--                                   req
+--                     )
+--                     baseurl
 
 -- POST /upload/drive/v2/files?uploadType=multipart HTTP/1.1
 -- Host: www.googleapis.com

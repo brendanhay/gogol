@@ -743,12 +743,12 @@ instance ToJSON MapFolder where
 --
 -- /See:/ 'rasterCollection' smart constructor.
 data RasterCollection = RasterCollection
-    { _rcCreationTime              :: !(Maybe DateTime)
+    { _rcCreationTime              :: !(Maybe DateTime')
     , _rcWritersCanEditPermissions :: !(Maybe Bool)
     , _rcEtag                      :: !(Maybe Text)
     , _rcCreatorEmail              :: !(Maybe Text)
     , _rcRasterType                :: !(Maybe RasterCollectionRasterType)
-    , _rcLastModifiedTime          :: !(Maybe DateTime)
+    , _rcLastModifiedTime          :: !(Maybe DateTime')
     , _rcLastModifierEmail         :: !(Maybe Text)
     , _rcName                      :: !(Maybe Text)
     , _rcBbox                      :: !(Maybe [Double])
@@ -828,6 +828,7 @@ rcCreationTime :: Lens' RasterCollection (Maybe UTCTime)
 rcCreationTime
   = lens _rcCreationTime
       (\ s a -> s{_rcCreationTime = a})
+      . mapping _DateTime
 
 -- | If true, WRITERs of the asset are able to edit the asset permissions.
 rcWritersCanEditPermissions :: Lens' RasterCollection (Maybe Bool)
@@ -857,6 +858,7 @@ rcLastModifiedTime :: Lens' RasterCollection (Maybe UTCTime)
 rcLastModifiedTime
   = lens _rcLastModifiedTime
       (\ s a -> s{_rcLastModifiedTime = a})
+      . mapping _DateTime
 
 -- | The email address of the last modifier of this raster collection. This
 -- is only returned on GET requests and not LIST requests.
@@ -1128,11 +1130,11 @@ instance ToJSON Color where
 --
 -- /See:/ 'asset' smart constructor.
 data Asset = Asset
-    { _aCreationTime              :: !(Maybe DateTime)
+    { _aCreationTime              :: !(Maybe DateTime')
     , _aWritersCanEditPermissions :: !(Maybe Bool)
     , _aEtag                      :: !(Maybe Text)
     , _aCreatorEmail              :: !(Maybe Text)
-    , _aLastModifiedTime          :: !(Maybe DateTime)
+    , _aLastModifiedTime          :: !(Maybe DateTime')
     , _aLastModifierEmail         :: !(Maybe Text)
     , _aName                      :: !(Maybe Text)
     , _aBbox                      :: !(Maybe [Double])
@@ -1201,6 +1203,7 @@ aCreationTime :: Lens' Asset (Maybe UTCTime)
 aCreationTime
   = lens _aCreationTime
       (\ s a -> s{_aCreationTime = a})
+      . mapping _DateTime
 
 -- | If true, WRITERs of the asset are able to edit the asset permissions.
 aWritersCanEditPermissions :: Lens' Asset (Maybe Bool)
@@ -1225,6 +1228,7 @@ aLastModifiedTime :: Lens' Asset (Maybe UTCTime)
 aLastModifiedTime
   = lens _aLastModifiedTime
       (\ s a -> s{_aLastModifiedTime = a})
+      . mapping _DateTime
 
 -- | The email address of the last modifier of this asset. This is only
 -- returned on GET requests and not LIST requests.
@@ -2012,9 +2016,9 @@ instance ToJSON Schema where
 --
 -- /See:/ 'acquisitionTime' smart constructor.
 data AcquisitionTime = AcquisitionTime
-    { _atStart     :: !(Maybe DateTime)
+    { _atStart     :: !(Maybe DateTime')
     , _atPrecision :: !(Maybe AcquisitionTimePrecision)
-    , _atEnd       :: !(Maybe DateTime)
+    , _atEnd       :: !(Maybe DateTime')
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AcquisitionTime' with the minimum fields required to make a request.
@@ -2038,7 +2042,9 @@ acquisitionTime =
 -- | The acquisition time, or start time if acquisition time is a range. The
 -- value is an RFC 3339 formatted date-time value (1970-01-01T00:00:00Z).
 atStart :: Lens' AcquisitionTime (Maybe UTCTime)
-atStart = lens _atStart (\ s a -> s{_atStart = a})
+atStart
+  = lens _atStart (\ s a -> s{_atStart = a}) .
+      mapping _DateTime
 
 -- | The precision of acquisition time.
 atPrecision :: Lens' AcquisitionTime (Maybe AcquisitionTimePrecision)
@@ -2048,7 +2054,9 @@ atPrecision
 -- | The end time if acquisition time is a range. The value is an RFC 3339
 -- formatted date-time value (1970-01-01T00:00:00Z).
 atEnd :: Lens' AcquisitionTime (Maybe UTCTime)
-atEnd = lens _atEnd (\ s a -> s{_atEnd = a})
+atEnd
+  = lens _atEnd (\ s a -> s{_atEnd = a}) .
+      mapping _DateTime
 
 instance FromJSON AcquisitionTime where
         parseJSON
@@ -2125,14 +2133,14 @@ instance ToJSON TablesListResponse where
 --
 -- /See:/ 'map'' smart constructor.
 data Map = Map
-    { _mapaCreationTime              :: !(Maybe DateTime)
+    { _mapaCreationTime              :: !(Maybe DateTime')
     , _mapaWritersCanEditPermissions :: !(Maybe Bool)
     , _mapaEtag                      :: !(Maybe Text)
     , _mapaDefaultViewport           :: !(Maybe [Double])
     , _mapaContents                  :: !(Maybe [MapItem])
     , _mapaPublishingStatus          :: !(Maybe MapPublishingStatus)
     , _mapaCreatorEmail              :: !(Maybe Text)
-    , _mapaLastModifiedTime          :: !(Maybe DateTime)
+    , _mapaLastModifiedTime          :: !(Maybe DateTime')
     , _mapaLastModifierEmail         :: !(Maybe Text)
     , _mapaVersions                  :: !(Maybe [Text])
     , _mapaName                      :: !(Maybe Text)
@@ -2218,6 +2226,7 @@ mapaCreationTime :: Lens' Map (Maybe UTCTime)
 mapaCreationTime
   = lens _mapaCreationTime
       (\ s a -> s{_mapaCreationTime = a})
+      . mapping _DateTime
 
 -- | If true, WRITERs of the asset are able to edit the asset permissions.
 mapaWritersCanEditPermissions :: Lens' Map (Maybe Bool)
@@ -2265,6 +2274,7 @@ mapaLastModifiedTime :: Lens' Map (Maybe UTCTime)
 mapaLastModifiedTime
   = lens _mapaLastModifiedTime
       (\ s a -> s{_mapaLastModifiedTime = a})
+      . mapping _DateTime
 
 -- | The email address of the last modifier of this map. This is only
 -- returned on GET requests and not LIST requests.
@@ -3014,9 +3024,9 @@ instance ToJSON PublishResponse where
 --
 -- /See:/ 'rasterCollectionsRaster' smart constructor.
 data RasterCollectionsRaster = RasterCollectionsRaster
-    { _rcrCreationTime     :: !(Maybe DateTime)
+    { _rcrCreationTime     :: !(Maybe DateTime')
     , _rcrRasterType       :: !Text
-    , _rcrLastModifiedTime :: !(Maybe DateTime)
+    , _rcrLastModifiedTime :: !(Maybe DateTime')
     , _rcrName             :: !(Maybe Text)
     , _rcrBbox             :: !(Maybe [Double])
     , _rcrId               :: !(Maybe Text)
@@ -3067,6 +3077,7 @@ rcrCreationTime :: Lens' RasterCollectionsRaster (Maybe UTCTime)
 rcrCreationTime
   = lens _rcrCreationTime
       (\ s a -> s{_rcrCreationTime = a})
+      . mapping _DateTime
 
 -- | The type of this Raster. Always \"image\" today.
 rcrRasterType :: Lens' RasterCollectionsRaster Text
@@ -3080,6 +3091,7 @@ rcrLastModifiedTime :: Lens' RasterCollectionsRaster (Maybe UTCTime)
 rcrLastModifiedTime
   = lens _rcrLastModifiedTime
       (\ s a -> s{_rcrLastModifiedTime = a})
+      . mapping _DateTime
 
 -- | The name of this Raster, supplied by the author.
 rcrName :: Lens' RasterCollectionsRaster (Maybe Text)
@@ -3385,13 +3397,13 @@ instance ToJSON GeoJSONMultiPoint where
 --
 -- /See:/ 'raster' smart constructor.
 data Raster = Raster
-    { _rrCreationTime              :: !(Maybe DateTime)
+    { _rrCreationTime              :: !(Maybe DateTime')
     , _rrWritersCanEditPermissions :: !(Maybe Bool)
     , _rrMaskType                  :: !Text
     , _rrEtag                      :: !(Maybe Text)
     , _rrCreatorEmail              :: !(Maybe Text)
     , _rrRasterType                :: !(Maybe RasterRasterType)
-    , _rrLastModifiedTime          :: !(Maybe DateTime)
+    , _rrLastModifiedTime          :: !(Maybe DateTime')
     , _rrLastModifierEmail         :: !(Maybe Text)
     , _rrAcquisitionTime           :: !(Maybe AcquisitionTime)
     , _rrName                      :: !(Maybe Text)
@@ -3478,6 +3490,7 @@ rrCreationTime :: Lens' Raster (Maybe UTCTime)
 rrCreationTime
   = lens _rrCreationTime
       (\ s a -> s{_rrCreationTime = a})
+      . mapping _DateTime
 
 -- | If true, WRITERs of the asset are able to edit the asset permissions.
 rrWritersCanEditPermissions :: Lens' Raster (Maybe Bool)
@@ -3512,6 +3525,7 @@ rrLastModifiedTime :: Lens' Raster (Maybe UTCTime)
 rrLastModifiedTime
   = lens _rrLastModifiedTime
       (\ s a -> s{_rrLastModifiedTime = a})
+      . mapping _DateTime
 
 -- | The email address of the last modifier of this raster. This is only
 -- returned on GET requests and not LIST requests.
@@ -3838,7 +3852,7 @@ instance ToJSON Permission where
 --
 -- /See:/ 'layer' smart constructor.
 data Layer = Layer
-    { _layaCreationTime              :: !(Maybe DateTime)
+    { _layaCreationTime              :: !(Maybe DateTime')
     , _layaWritersCanEditPermissions :: !(Maybe Bool)
     , _layaStyle                     :: !(Maybe VectorStyle)
     , _layaEtag                      :: !(Maybe Text)
@@ -3846,7 +3860,7 @@ data Layer = Layer
     , _layaPublishingStatus          :: !(Maybe LayerPublishingStatus)
     , _layaCreatorEmail              :: !(Maybe Text)
     , _layaLayerType                 :: !(Maybe LayerLayerType)
-    , _layaLastModifiedTime          :: !(Maybe DateTime)
+    , _layaLastModifiedTime          :: !(Maybe DateTime')
     , _layaDatasources               :: !(Maybe [Datasource])
     , _layaLastModifierEmail         :: !(Maybe Text)
     , _layaName                      :: !(Maybe Text)
@@ -3935,6 +3949,7 @@ layaCreationTime :: Lens' Layer (Maybe UTCTime)
 layaCreationTime
   = lens _layaCreationTime
       (\ s a -> s{_layaCreationTime = a})
+      . mapping _DateTime
 
 -- | If true, WRITERs of the asset are able to edit the asset permissions.
 layaWritersCanEditPermissions :: Lens' Layer (Maybe Bool)
@@ -3989,6 +4004,7 @@ layaLastModifiedTime :: Lens' Layer (Maybe UTCTime)
 layaLastModifiedTime
   = lens _layaLastModifiedTime
       (\ s a -> s{_layaLastModifiedTime = a})
+      . mapping _DateTime
 
 -- | An array of datasources used to build this layer. If layerType is
 -- \"image\", or layerType is not specified and datasourceType is
@@ -4433,11 +4449,11 @@ instance ToJSON PermissionsBatchDeleteResponse where
 --
 -- /See:/ 'table' smart constructor.
 data Table = Table
-    { _ttCreationTime              :: !(Maybe DateTime)
+    { _ttCreationTime              :: !(Maybe DateTime')
     , _ttWritersCanEditPermissions :: !(Maybe Bool)
     , _ttEtag                      :: !(Maybe Text)
     , _ttCreatorEmail              :: !(Maybe Text)
-    , _ttLastModifiedTime          :: !(Maybe DateTime)
+    , _ttLastModifiedTime          :: !(Maybe DateTime')
     , _ttSchema                    :: !(Maybe Schema)
     , _ttLastModifierEmail         :: !(Maybe Text)
     , _ttName                      :: !(Maybe Text)
@@ -4522,6 +4538,7 @@ ttCreationTime :: Lens' Table (Maybe UTCTime)
 ttCreationTime
   = lens _ttCreationTime
       (\ s a -> s{_ttCreationTime = a})
+      . mapping _DateTime
 
 -- | If true, WRITERs of the asset are able to edit the asset permissions.
 ttWritersCanEditPermissions :: Lens' Table (Maybe Bool)
@@ -4546,6 +4563,7 @@ ttLastModifiedTime :: Lens' Table (Maybe UTCTime)
 ttLastModifiedTime
   = lens _ttLastModifiedTime
       (\ s a -> s{_ttLastModifiedTime = a})
+      . mapping _DateTime
 
 -- | The schema for this table. Note: The schema is returned in response to a
 -- get request but not a list request. After requesting a list of tables,

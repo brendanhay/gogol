@@ -388,8 +388,8 @@ externalLit :: Lit -> Type
 externalLit = \case
     Text     -> TyCon "Text"
     Bool     -> TyCon "Bool"
-    Time     -> TyCon "UTCTime"
-    Date     -> TyCon "UTCTime"
+    Time     -> TyCon "TimeOfDay"
+    Date     -> TyCon "LocalTime"
     DateTime -> TyCon "UTCTime"
     Nat      -> TyCon "Natural"
     Float    -> TyCon "Float"
@@ -409,9 +409,9 @@ internalLit :: Lit -> Type
 internalLit = \case
     Text     -> TyCon "Text"
     Bool     -> TyCon "Bool"
-    Time     -> TyCon "Time"
-    Date     -> TyCon "Date"
-    DateTime -> TyCon "DateTime"
+    Time     -> TyCon "Time'"
+    Date     -> TyCon "Date'"
+    DateTime -> TyCon "DateTime'"
     Nat      -> TyCon "Nat"
     Float    -> TyCon "Float"
     Double   -> TyCon "Double"
@@ -439,9 +439,12 @@ mapping t e = infixE e "." (go t)
 
 iso :: TType -> Maybe Exp
 iso = \case
-    TList {} -> Just (var "_Coerce")
-    TLit Nat -> Just (var "_Nat")
-    _        -> Nothing
+    TList {}      -> Just (var "_Coerce")
+    TLit Nat      -> Just (var "_Nat")
+    TLit Time     -> Just (var "_Time")
+    TLit Date     -> Just (var "_Date")
+    TLit DateTime -> Just (var "_DateTime")
+    _             -> Nothing
 
 strict :: Type -> Type
 strict = TyBang BangedTy . \case

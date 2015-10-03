@@ -53,7 +53,7 @@ type PostsPublishResource =
          "posts" :>
            Capture "postId" Text :>
              "publish" :>
-               QueryParam "publishDate" DateTime :>
+               QueryParam "publishDate" DateTime' :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -69,7 +69,7 @@ type PostsPublishResource =
 data PostsPublish' = PostsPublish'
     { _posQuotaUser   :: !(Maybe Text)
     , _posPrettyPrint :: !Bool
-    , _posPublishDate :: !(Maybe DateTime)
+    , _posPublishDate :: !(Maybe DateTime')
     , _posUserIP      :: !(Maybe Text)
     , _posBlogId      :: !Text
     , _posKey         :: !(Maybe Key)
@@ -137,6 +137,7 @@ posPublishDate :: Lens' PostsPublish' (Maybe UTCTime)
 posPublishDate
   = lens _posPublishDate
       (\ s a -> s{_posPublishDate = a})
+      . mapping _DateTime
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.

@@ -390,7 +390,7 @@ data Annotation = Annotation
     , _aaPageIds              :: !(Maybe [Text])
     , _aaKind                 :: !Text
     , _aaData                 :: !(Maybe Text)
-    , _aaCreated              :: !(Maybe DateTime)
+    , _aaCreated              :: !(Maybe DateTime')
     , _aaAfterSelectedText    :: !(Maybe Text)
     , _aaSelfLink             :: !(Maybe Text)
     , _aaCurrentVersionRanges :: !(Maybe AnnotationCurrentVersionRanges)
@@ -398,7 +398,7 @@ data Annotation = Annotation
     , _aaBeforeSelectedText   :: !(Maybe Text)
     , _aaId                   :: !(Maybe Text)
     , _aaDeleted              :: !(Maybe Bool)
-    , _aaUpdated              :: !(Maybe DateTime)
+    , _aaUpdated              :: !(Maybe DateTime')
     , _aaLayerId              :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -503,7 +503,8 @@ aaData = lens _aaData (\ s a -> s{_aaData = a})
 -- | Timestamp for the created time of this annotation.
 aaCreated :: Lens' Annotation (Maybe UTCTime)
 aaCreated
-  = lens _aaCreated (\ s a -> s{_aaCreated = a})
+  = lens _aaCreated (\ s a -> s{_aaCreated = a}) .
+      mapping _DateTime
 
 -- | Anchor text after excerpt. For requests, if the user bookmarked a screen
 -- that has no flowing text on it, then this field should be empty.
@@ -547,7 +548,8 @@ aaDeleted
 -- | Timestamp for the last time this annotation was modified.
 aaUpdated :: Lens' Annotation (Maybe UTCTime)
 aaUpdated
-  = lens _aaUpdated (\ s a -> s{_aaUpdated = a})
+  = lens _aaUpdated (\ s a -> s{_aaUpdated = a}) .
+      mapping _DateTime
 
 -- | The layer this annotation is for.
 aaLayerId :: Lens' Annotation (Maybe Text)
@@ -759,7 +761,7 @@ data Layersummary = Layersummary
     , _lSelfLink                 :: !(Maybe Text)
     , _lVolumeId                 :: !(Maybe Text)
     , _lId                       :: !(Maybe Text)
-    , _lUpdated                  :: !(Maybe DateTime)
+    , _lUpdated                  :: !(Maybe DateTime')
     , _lLayerId                  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -877,7 +879,9 @@ lId = lens _lId (\ s a -> s{_lId = a})
 -- | Timestamp for the last time an item in this layer was updated. (RFC 3339
 -- UTC date-time format).
 lUpdated :: Lens' Layersummary (Maybe UTCTime)
-lUpdated = lens _lUpdated (\ s a -> s{_lUpdated = a})
+lUpdated
+  = lens _lUpdated (\ s a -> s{_lUpdated = a}) .
+      mapping _DateTime
 
 -- | The layer id for this summary.
 lLayerId :: Lens' Layersummary (Maybe Text)
@@ -933,7 +937,7 @@ data VolumeUserInfo = VolumeUserInfo
     , _vuiIsPreOrdered           :: !(Maybe Bool)
     , _vuiReview                 :: !(Maybe Review)
     , _vuiRentalPeriod           :: !(Maybe VolumeUserInfoRentalPeriod)
-    , _vuiUpdated                :: !(Maybe DateTime)
+    , _vuiUpdated                :: !(Maybe DateTime')
     , _vuiIsUploaded             :: !(Maybe Bool)
     , _vuiIsInMyBooks            :: !(Maybe Bool)
     , _vuiReadingPosition        :: !(Maybe ReadingPosition)
@@ -1026,7 +1030,8 @@ vuiRentalPeriod
 -- UTC date-time format).
 vuiUpdated :: Lens' VolumeUserInfo (Maybe UTCTime)
 vuiUpdated
-  = lens _vuiUpdated (\ s a -> s{_vuiUpdated = a})
+  = lens _vuiUpdated (\ s a -> s{_vuiUpdated = a}) .
+      mapping _DateTime
 
 -- | Whether or not this volume was user uploaded.
 vuiIsUploaded :: Lens' VolumeUserInfo (Maybe Bool)
@@ -1150,7 +1155,7 @@ data Annotationdata = Annotationdata
     , _annnAnnotationType :: !(Maybe Text)
     , _annnVolumeId       :: !(Maybe Text)
     , _annnId             :: !(Maybe Text)
-    , _annnUpdated        :: !(Maybe DateTime)
+    , _annnUpdated        :: !(Maybe DateTime')
     , _annnLayerId        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1227,7 +1232,8 @@ annnId = lens _annnId (\ s a -> s{_annnId = a})
 -- date-time format).
 annnUpdated :: Lens' Annotationdata (Maybe UTCTime)
 annnUpdated
-  = lens _annnUpdated (\ s a -> s{_annnUpdated = a})
+  = lens _annnUpdated (\ s a -> s{_annnUpdated = a}) .
+      mapping _DateTime
 
 -- | The Layer id for this data. *
 annnLayerId :: Lens' Annotationdata (Maybe Text)
@@ -1278,7 +1284,7 @@ data Volumeannotation = Volumeannotation
     , _volVolumeId           :: !(Maybe Text)
     , _volId                 :: !(Maybe Text)
     , _volDeleted            :: !(Maybe Bool)
-    , _volUpdated            :: !(Maybe DateTime)
+    , _volUpdated            :: !(Maybe DateTime')
     , _volLayerId            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1401,7 +1407,8 @@ volDeleted
 -- date-time format).
 volUpdated :: Lens' Volumeannotation (Maybe UTCTime)
 volUpdated
-  = lens _volUpdated (\ s a -> s{_volUpdated = a})
+  = lens _volUpdated (\ s a -> s{_volUpdated = a}) .
+      mapping _DateTime
 
 -- | The Layer this annotation is for.
 volLayerId :: Lens' Volumeannotation (Maybe Text)
@@ -1868,7 +1875,7 @@ instance ToJSON VolumeAccessInfo where
 data VolumeUserInfoCopy = VolumeUserInfoCopy
     { _vuicLimitType               :: !(Maybe Text)
     , _vuicAllowedCharacterCount   :: !(Maybe Int32)
-    , _vuicUpdated                 :: !(Maybe DateTime)
+    , _vuicUpdated                 :: !(Maybe DateTime')
     , _vuicRemainingCharacterCount :: !(Maybe Int32)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1905,7 +1912,8 @@ vuicAllowedCharacterCount
 
 vuicUpdated :: Lens' VolumeUserInfoCopy (Maybe UTCTime)
 vuicUpdated
-  = lens _vuicUpdated (\ s a -> s{_vuicUpdated = a})
+  = lens _vuicUpdated (\ s a -> s{_vuicUpdated = a}) .
+      mapping _DateTime
 
 vuicRemainingCharacterCount :: Lens' VolumeUserInfoCopy (Maybe Int32)
 vuicRemainingCharacterCount
@@ -2071,13 +2079,13 @@ instance ToJSON DictlayerdataDictWordsExamples where
 -- /See:/ 'bookshelf' smart constructor.
 data Bookshelf = Bookshelf
     { _bAccess             :: !(Maybe Text)
-    , _bVolumesLastUpdated :: !(Maybe DateTime)
+    , _bVolumesLastUpdated :: !(Maybe DateTime')
     , _bKind               :: !Text
-    , _bCreated            :: !(Maybe DateTime)
+    , _bCreated            :: !(Maybe DateTime')
     , _bVolumeCount        :: !(Maybe Int32)
     , _bSelfLink           :: !(Maybe Text)
     , _bId                 :: !(Maybe Int32)
-    , _bUpdated            :: !(Maybe DateTime)
+    , _bUpdated            :: !(Maybe DateTime')
     , _bTitle              :: !(Maybe Text)
     , _bDescription        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -2131,6 +2139,7 @@ bVolumesLastUpdated :: Lens' Bookshelf (Maybe UTCTime)
 bVolumesLastUpdated
   = lens _bVolumesLastUpdated
       (\ s a -> s{_bVolumesLastUpdated = a})
+      . mapping _DateTime
 
 -- | Resource type for bookshelf metadata.
 bKind :: Lens' Bookshelf Text
@@ -2139,7 +2148,9 @@ bKind = lens _bKind (\ s a -> s{_bKind = a})
 -- | Created time for this bookshelf (formatted UTC timestamp with
 -- millisecond resolution).
 bCreated :: Lens' Bookshelf (Maybe UTCTime)
-bCreated = lens _bCreated (\ s a -> s{_bCreated = a})
+bCreated
+  = lens _bCreated (\ s a -> s{_bCreated = a}) .
+      mapping _DateTime
 
 -- | Number of volumes in this bookshelf.
 bVolumeCount :: Lens' Bookshelf (Maybe Int32)
@@ -2158,7 +2169,9 @@ bId = lens _bId (\ s a -> s{_bId = a})
 -- | Last modified time of this bookshelf (formatted UTC timestamp with
 -- millisecond resolution).
 bUpdated :: Lens' Bookshelf (Maybe UTCTime)
-bUpdated = lens _bUpdated (\ s a -> s{_bUpdated = a})
+bUpdated
+  = lens _bUpdated (\ s a -> s{_bUpdated = a}) .
+      mapping _DateTime
 
 -- | Title of this bookshelf.
 bTitle :: Lens' Bookshelf (Maybe Text)
@@ -3970,7 +3983,7 @@ instance ToJSON VolumeLayerInfo where
 -- /See:/ 'volumeSaleInfo' smart constructor.
 data VolumeSaleInfo = VolumeSaleInfo
     { _vsiCountry     :: !(Maybe Text)
-    , _vsiOnSaleDate  :: !(Maybe DateTime)
+    , _vsiOnSaleDate  :: !(Maybe DateTime')
     , _vsiListPrice   :: !(Maybe VolumeSaleInfoListPrice)
     , _vsiRetailPrice :: !(Maybe VolumeSaleInfoRetailPrice)
     , _vsiOffers      :: !(Maybe [VolumeSaleInfoOffers])
@@ -4023,6 +4036,7 @@ vsiOnSaleDate :: Lens' VolumeSaleInfo (Maybe UTCTime)
 vsiOnSaleDate
   = lens _vsiOnSaleDate
       (\ s a -> s{_vsiOnSaleDate = a})
+      . mapping _DateTime
 
 -- | Suggested retail price. (In LITE projection.)
 vsiListPrice :: Lens' VolumeSaleInfo (Maybe VolumeSaleInfoListPrice)
@@ -4615,7 +4629,7 @@ instance ToJSON AnnotationClientVersionRanges where
 data AnnotationsSummaryLayers = AnnotationsSummaryLayers
     { _aslLimitType               :: !(Maybe Text)
     , _aslAllowedCharacterCount   :: !(Maybe Int32)
-    , _aslUpdated                 :: !(Maybe DateTime)
+    , _aslUpdated                 :: !(Maybe DateTime')
     , _aslLayerId                 :: !(Maybe Text)
     , _aslRemainingCharacterCount :: !(Maybe Int32)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -4655,7 +4669,8 @@ aslAllowedCharacterCount
 
 aslUpdated :: Lens' AnnotationsSummaryLayers (Maybe UTCTime)
 aslUpdated
-  = lens _aslUpdated (\ s a -> s{_aslUpdated = a})
+  = lens _aslUpdated (\ s a -> s{_aslUpdated = a}) .
+      mapping _DateTime
 
 aslLayerId :: Lens' AnnotationsSummaryLayers (Maybe Text)
 aslLayerId
@@ -4790,7 +4805,7 @@ data ReadingPosition = ReadingPosition
     , _rpGbImagePosition :: !(Maybe Text)
     , _rpPdfPosition     :: !(Maybe Text)
     , _rpVolumeId        :: !(Maybe Text)
-    , _rpUpdated         :: !(Maybe DateTime)
+    , _rpUpdated         :: !(Maybe DateTime')
     , _rpGbTextPosition  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -4855,7 +4870,8 @@ rpVolumeId
 -- timestamp with millisecond resolution).
 rpUpdated :: Lens' ReadingPosition (Maybe UTCTime)
 rpUpdated
-  = lens _rpUpdated (\ s a -> s{_rpUpdated = a})
+  = lens _rpUpdated (\ s a -> s{_rpUpdated = a}) .
+      mapping _DateTime
 
 -- | Position in a volume for text-based content.
 rpGbTextPosition :: Lens' ReadingPosition (Maybe Text)

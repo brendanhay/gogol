@@ -63,8 +63,8 @@ type ActivitiesListResource =
            QueryParam "maxResults" Word32 :>
              QueryParam "mine" Bool :>
                QueryParam "pageToken" Text :>
-                 QueryParam "publishedAfter" DateTime :>
-                   QueryParam "publishedBefore" DateTime :>
+                 QueryParam "publishedAfter" DateTime' :>
+                   QueryParam "publishedBefore" DateTime' :>
                      QueryParam "regionCode" Text :>
                        QueryParam "part" Text :>
                          QueryParam "quotaUser" Text :>
@@ -84,7 +84,7 @@ type ActivitiesListResource =
 --
 -- /See:/ 'activitiesList'' smart constructor.
 data ActivitiesList' = ActivitiesList'
-    { _alPublishedAfter  :: !(Maybe DateTime)
+    { _alPublishedAfter  :: !(Maybe DateTime')
     , _alQuotaUser       :: !(Maybe Text)
     , _alPart            :: !Text
     , _alPrettyPrint     :: !Bool
@@ -97,7 +97,7 @@ data ActivitiesList' = ActivitiesList'
     , _alPageToken       :: !(Maybe Text)
     , _alOAuthToken      :: !(Maybe OAuthToken)
     , _alMaxResults      :: !Word32
-    , _alPublishedBefore :: !(Maybe DateTime)
+    , _alPublishedBefore :: !(Maybe DateTime')
     , _alFields          :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -166,6 +166,7 @@ alPublishedAfter :: Lens' ActivitiesList' (Maybe UTCTime)
 alPublishedAfter
   = lens _alPublishedAfter
       (\ s a -> s{_alPublishedAfter = a})
+      . mapping _DateTime
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -255,6 +256,7 @@ alPublishedBefore :: Lens' ActivitiesList' (Maybe UTCTime)
 alPublishedBefore
   = lens _alPublishedBefore
       (\ s a -> s{_alPublishedBefore = a})
+      . mapping _DateTime
 
 -- | Selector specifying which fields to include in a partial response.
 alFields :: Lens' ActivitiesList' (Maybe Text)

@@ -2259,7 +2259,7 @@ data Media = Media
     , _mVideoDuration    :: !(Maybe Int64)
     , _mVideoStatus      :: !(Maybe Text)
     , _mKind             :: !Text
-    , _mPublished        :: !(Maybe DateTime)
+    , _mPublished        :: !(Maybe DateTime')
     , _mURL              :: !(Maybe Text)
     , _mWidth            :: !(Maybe Word32)
     , _mMediaURL         :: !(Maybe Text)
@@ -2268,8 +2268,8 @@ data Media = Media
     , _mDisplayName      :: !(Maybe Text)
     , _mAuthor           :: !(Maybe MediaAuthor)
     , _mId               :: !(Maybe Text)
-    , _mUpdated          :: !(Maybe DateTime)
-    , _mMediaCreatedTime :: !(Maybe DateTime)
+    , _mUpdated          :: !(Maybe DateTime')
+    , _mMediaCreatedTime :: !(Maybe DateTime')
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Media' with the minimum fields required to make a request.
@@ -2375,7 +2375,8 @@ mKind = lens _mKind (\ s a -> s{_mKind = a})
 -- timestamp.
 mPublished :: Lens' Media (Maybe UTCTime)
 mPublished
-  = lens _mPublished (\ s a -> s{_mPublished = a})
+  = lens _mPublished (\ s a -> s{_mPublished = a}) .
+      mapping _DateTime
 
 -- | The URL for the page that hosts this media.
 mURL :: Lens' Media (Maybe Text)
@@ -2419,7 +2420,9 @@ mId = lens _mId (\ s a -> s{_mId = a})
 -- | The time at which this media was last updated. This includes changes to
 -- media metadata. Formatted as an RFC 3339 timestamp.
 mUpdated :: Lens' Media (Maybe UTCTime)
-mUpdated = lens _mUpdated (\ s a -> s{_mUpdated = a})
+mUpdated
+  = lens _mUpdated (\ s a -> s{_mUpdated = a}) .
+      mapping _DateTime
 
 -- | The time at which this media was originally created in UTC. Formatted as
 -- an RFC 3339 timestamp that matches this example:
@@ -2428,6 +2431,7 @@ mMediaCreatedTime :: Lens' Media (Maybe UTCTime)
 mMediaCreatedTime
   = lens _mMediaCreatedTime
       (\ s a -> s{_mMediaCreatedTime = a})
+      . mapping _DateTime
 
 instance FromJSON Media where
         parseJSON
@@ -2551,7 +2555,7 @@ data ActivityFeed = ActivityFeed
     , _afItems         :: !(Maybe [Activity])
     , _afSelfLink      :: !(Maybe Text)
     , _afId            :: !(Maybe Text)
-    , _afUpdated       :: !(Maybe DateTime)
+    , _afUpdated       :: !(Maybe DateTime')
     , _afTitle         :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -2632,7 +2636,8 @@ afId = lens _afId (\ s a -> s{_afId = a})
 -- Formatted as an RFC 3339 timestamp.
 afUpdated :: Lens' ActivityFeed (Maybe UTCTime)
 afUpdated
-  = lens _afUpdated (\ s a -> s{_afUpdated = a})
+  = lens _afUpdated (\ s a -> s{_afUpdated = a}) .
+      mapping _DateTime
 
 -- | The title of this collection of activities, which is a truncated portion
 -- of the content.
@@ -3212,13 +3217,13 @@ data Activity = Activity
     , _aaGeocode         :: !(Maybe Text)
     , _aaKind            :: !Text
     , _aaRadius          :: !(Maybe Text)
-    , _aaPublished       :: !(Maybe DateTime)
+    , _aaPublished       :: !(Maybe DateTime')
     , _aaURL             :: !(Maybe Text)
     , _aaActor           :: !(Maybe ActivityActor)
     , _aaAddress         :: !(Maybe Text)
     , _aaObject          :: !(Maybe ActivityObject)
     , _aaId              :: !(Maybe Text)
-    , _aaUpdated         :: !(Maybe DateTime)
+    , _aaUpdated         :: !(Maybe DateTime')
     , _aaTitle           :: !(Maybe Text)
     , _aaVerb            :: !(Maybe Text)
     , _aaCrosspostSource :: !(Maybe Text)
@@ -3338,7 +3343,8 @@ aaRadius = lens _aaRadius (\ s a -> s{_aaRadius = a})
 -- RFC 3339 timestamp.
 aaPublished :: Lens' Activity (Maybe UTCTime)
 aaPublished
-  = lens _aaPublished (\ s a -> s{_aaPublished = a})
+  = lens _aaPublished (\ s a -> s{_aaPublished = a}) .
+      mapping _DateTime
 
 -- | The link to this activity.
 aaURL :: Lens' Activity (Maybe Text)
@@ -3365,7 +3371,8 @@ aaId = lens _aaId (\ s a -> s{_aaId = a})
 -- 3339 timestamp.
 aaUpdated :: Lens' Activity (Maybe UTCTime)
 aaUpdated
-  = lens _aaUpdated (\ s a -> s{_aaUpdated = a})
+  = lens _aaUpdated (\ s a -> s{_aaUpdated = a}) .
+      mapping _DateTime
 
 -- | Title of this activity.
 aaTitle :: Lens' Activity (Maybe Text)
@@ -3683,12 +3690,12 @@ data Comment = Comment
     { _comEtag      :: !(Maybe Text)
     , _comPlusoners :: !(Maybe CommentPlusoners)
     , _comKind      :: !Text
-    , _comPublished :: !(Maybe DateTime)
+    , _comPublished :: !(Maybe DateTime')
     , _comActor     :: !(Maybe CommentActor)
     , _comSelfLink  :: !(Maybe Text)
     , _comObject    :: !(Maybe CommentObject)
     , _comId        :: !(Maybe Text)
-    , _comUpdated   :: !(Maybe DateTime)
+    , _comUpdated   :: !(Maybe DateTime')
     , _comVerb      :: !Text
     , _comInReplyTo :: !(Maybe [CommentInReplyTo])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -3753,6 +3760,7 @@ comKind = lens _comKind (\ s a -> s{_comKind = a})
 comPublished :: Lens' Comment (Maybe UTCTime)
 comPublished
   = lens _comPublished (\ s a -> s{_comPublished = a})
+      . mapping _DateTime
 
 -- | The person who posted this comment.
 comActor :: Lens' Comment (Maybe CommentActor)
@@ -3776,7 +3784,8 @@ comId = lens _comId (\ s a -> s{_comId = a})
 -- 3339 timestamp.
 comUpdated :: Lens' Comment (Maybe UTCTime)
 comUpdated
-  = lens _comUpdated (\ s a -> s{_comUpdated = a})
+  = lens _comUpdated (\ s a -> s{_comUpdated = a}) .
+      mapping _DateTime
 
 -- | This comment\'s verb, indicating what action was performed. Possible
 -- values are: - \"post\" - Publish content to the stream.
@@ -4118,7 +4127,7 @@ instance ToJSON ACL where
 --
 -- /See:/ 'mediaExif' smart constructor.
 newtype MediaExif = MediaExif
-    { _meTime :: Maybe DateTime
+    { _meTime :: Maybe DateTime'
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MediaExif' with the minimum fields required to make a request.
@@ -4135,7 +4144,9 @@ mediaExif =
 
 -- | The time the media was captured. Formatted as an RFC 3339 timestamp.
 meTime :: Lens' MediaExif (Maybe UTCTime)
-meTime = lens _meTime (\ s a -> s{_meTime = a})
+meTime
+  = lens _meTime (\ s a -> s{_meTime = a}) .
+      mapping _DateTime
 
 instance FromJSON MediaExif where
         parseJSON
@@ -4155,7 +4166,7 @@ data CommentFeed = CommentFeed
     , _cffKind          :: !Text
     , _cffItems         :: !(Maybe [Comment])
     , _cffId            :: !(Maybe Text)
-    , _cffUpdated       :: !(Maybe DateTime)
+    , _cffUpdated       :: !(Maybe DateTime')
     , _cffTitle         :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -4229,7 +4240,8 @@ cffId = lens _cffId (\ s a -> s{_cffId = a})
 -- Formatted as an RFC 3339 timestamp.
 cffUpdated :: Lens' CommentFeed (Maybe UTCTime)
 cffUpdated
-  = lens _cffUpdated (\ s a -> s{_cffUpdated = a})
+  = lens _cffUpdated (\ s a -> s{_cffUpdated = a}) .
+      mapping _DateTime
 
 -- | The title of this collection of comments.
 cffTitle :: Lens' CommentFeed (Maybe Text)

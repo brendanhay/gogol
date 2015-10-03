@@ -944,9 +944,9 @@ instance ToJSON ReportAPIColumnSpec where
 -- /See:/ 'reportRequestTimeRange' smart constructor.
 data ReportRequestTimeRange = ReportRequestTimeRange
     { _rrtrEndDate                         :: !(Maybe Text)
-    , _rrtrChangedAttributesSinceTimestamp :: !(Maybe DateTime)
+    , _rrtrChangedAttributesSinceTimestamp :: !(Maybe DateTime')
     , _rrtrStartDate                       :: !(Maybe Text)
-    , _rrtrChangedMetricsSinceTimestamp    :: !(Maybe DateTime)
+    , _rrtrChangedMetricsSinceTimestamp    :: !(Maybe DateTime')
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportRequestTimeRange' with the minimum fields required to make a request.
@@ -982,6 +982,7 @@ rrtrChangedAttributesSinceTimestamp
   = lens _rrtrChangedAttributesSinceTimestamp
       (\ s a ->
          s{_rrtrChangedAttributesSinceTimestamp = a})
+      . mapping _DateTime
 
 -- | Inclusive date in YYYY-MM-DD format.
 rrtrStartDate :: Lens' ReportRequestTimeRange (Maybe Text)
@@ -995,6 +996,7 @@ rrtrChangedMetricsSinceTimestamp :: Lens' ReportRequestTimeRange (Maybe UTCTime)
 rrtrChangedMetricsSinceTimestamp
   = lens _rrtrChangedMetricsSinceTimestamp
       (\ s a -> s{_rrtrChangedMetricsSinceTimestamp = a})
+      . mapping _DateTime
 
 instance FromJSON ReportRequestTimeRange where
         parseJSON

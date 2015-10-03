@@ -199,7 +199,7 @@ instance ToJSON QueryResultBatch where
 data Property = Property
     { _pKeyValue      :: !(Maybe Key)
     , _pBlobKeyValue  :: !(Maybe Text)
-    , _pDateTimeValue :: !(Maybe DateTime)
+    , _pDateTimeValue :: !(Maybe DateTime')
     , _pIntegerValue  :: !(Maybe Int64)
     , _pEntityValue   :: !(Maybe Entity)
     , _pDoubleValue   :: !(Maybe Double)
@@ -272,6 +272,7 @@ pDateTimeValue :: Lens' Property (Maybe UTCTime)
 pDateTimeValue
   = lens _pDateTimeValue
       (\ s a -> s{_pDateTimeValue = a})
+      . mapping _DateTime
 
 -- | An integer value.
 pIntegerValue :: Lens' Property (Maybe Int64)
@@ -865,7 +866,7 @@ instance ToJSON AllocateIdsResponse where
 data Value = Value
     { _vKeyValue      :: !(Maybe Key)
     , _vBlobKeyValue  :: !(Maybe Text)
-    , _vDateTimeValue :: !(Maybe DateTime)
+    , _vDateTimeValue :: !(Maybe DateTime')
     , _vIntegerValue  :: !(Maybe Int64)
     , _vEntityValue   :: !(Maybe Entity)
     , _vDoubleValue   :: !(Maybe Double)
@@ -938,6 +939,7 @@ vDateTimeValue :: Lens' Value (Maybe UTCTime)
 vDateTimeValue
   = lens _vDateTimeValue
       (\ s a -> s{_vDateTimeValue = a})
+      . mapping _DateTime
 
 -- | An integer value.
 vIntegerValue :: Lens' Value (Maybe Int64)
