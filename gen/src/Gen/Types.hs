@@ -268,16 +268,12 @@ data Memo = Memo
     }
 
 initial :: Service (Fix Schema) -> Memo
-initial s = Memo s mempty mempty core mempty reserveBranches mempty
+initial s = Memo s mempty mempty core mempty mempty mempty
   where
     -- Types available in Network.Google.Prelude.
     core = Map.fromList
         [ ("Body", SLit requiredInfo Body)
         ]
-
-    -- Reserved sum constructor names.
-    reserveBranches = Map.singleton mempty . Set.fromList $
-        map (CI.mk . global) (Map.keys (s ^. dSchemas))
 
 makeLenses ''Memo
 
@@ -285,3 +281,9 @@ instance HasService Memo (Fix Schema) where
     service = context
 
 type AST = ExceptT Error (State Memo)
+
+reserveBranches :: AST ()
+reserveBranches = do
+    ss <- use schemas
+    let bs = Set.fromList $ map (CI.mk . global) (Map.keys ss)
+    branches %= Map.insertWith (<>) mempty bs

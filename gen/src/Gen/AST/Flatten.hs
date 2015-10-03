@@ -44,6 +44,8 @@ flatten s = do
     -- The horror.
     ss <- use schemas
 
+    reserveBranches
+
     let d = (s ^. sDescription)
           { _dSchemas    = Map.fromList $ map (join (,)) (Map.keys ss)
           , _dParameters = ps
@@ -82,7 +84,7 @@ schema g ml (Fix f) = go f >>= insert this
         SObj i o -> SObj i <$> object o
 
     array (Arr e) =
-        Arr <$> localSchema this "item" (setRequired e)
+        Arr <$> schema this (Just "item") (setRequired e)
 
     object (Obj aps ps) =
         Obj Nothing <$> Map.traverseWithKey (localSchema this) ps
@@ -176,5 +178,5 @@ insert g s = do
   where
     exists n x =
         format ("Schema exists: " % stext % " - " % gid %
-                "\nCurrent: " % shown % "\nTried: " % shown)
+                "\n\n[Current]\n" % shown % "\n[Tried]\n\n" % shown)
                 n g x s
