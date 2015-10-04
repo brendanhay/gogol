@@ -45,6 +45,8 @@ flatten s = do
     -- The horror.
     ss <- use schemas
 
+    -- _  <- mapM (\k -> trace (show k) $ return 1) (Map.keys ss)
+
     reserveBranches
     reserveFields
 
@@ -73,11 +75,10 @@ localSchema g l = schema g (Just l)
 schema :: Global -> Maybe Local -> Fix Schema -> AST Global
 schema g ml (Fix f) = go (maybe g (reference g) ml) f >>= uncurry insert
   where
-    go :: Global -> Schema (Fix Schema) -> AST (Global, Schema Global)
     go p = \case
-        SAny i a -> pure (p, SAny i a)
-        SRef i r -> pure (p, SRef i r)
-        SLit i l -> pure (p, SLit i l)
+        SAny i a -> pure (reference p "Any", SAny i a)
+        SRef i r -> pure (reference p "Ref", SRef i r)
+        SLit i l -> pure (reference p "Lit", SLit i l)
         SEnm i e -> (,SEnm i e) <$> name i p ["Type", "Option"]
         SArr i a -> do
             u <- name i p ["List", "Array"]
@@ -92,16 +93,17 @@ schema g ml (Fix f) = go (maybe g (reference g) ml) f >>= uncurry insert
     object p (Obj aps ps) =
         Obj Nothing <$> Map.traverseWithKey (localSchema p) ps
 
-    name i p xs
-        | Just x <- i ^. iId = pure x
-        | otherwise          = do
-            e <- uses schemas (Map.lookup p)
-            case (e, xs) of
-                (Nothing, _)    -> pure p
-                (Just _,  z:zs) -> name i (reference g z) zs
-                (Just x,  [])   -> throwError $
-                    format ("Unable to generate name for: " % gid % ", " % shown % ", " % gid % "\n" % shown)
-                           g ml p x
+    -- | Just x <- i ^. iId = pure x
+    -- | otherwise          = do
+
+    name i p xs = do
+        e <- uses schemas (Map.lookup p)
+        case (e, xs) of
+            (Nothing, _)    -> pure p
+            (Just _,  z:zs) -> name i (reference g z) zs
+            (Just x,  [])   -> throwError $
+                format ("Unable to generate name for: " % gid % ", " % shown % ", " % gid % "\n" % shown)
+                       g ml p x
 
 globalParam :: Local -> Param (Fix Schema) -> AST (Param Global)
 globalParam l p = ($ p) $ case l of

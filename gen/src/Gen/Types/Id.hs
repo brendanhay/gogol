@@ -60,6 +60,7 @@ import           Data.CaseInsensitive         (CI)
 import qualified Data.CaseInsensitive         as CI
 import           Data.Coerce
 import           Data.Foldable                (foldl')
+import           Data.Function                (on)
 import           Data.Hashable
 import           Data.List                    (elemIndex, nub, sortOn)
 import           Data.Maybe
@@ -130,8 +131,9 @@ newtype Global = Global [Text]
     deriving (Ord, Show, Generic)
 
 instance Eq Global where
-    Global xs == Global ys =
-        map CI.mk xs == map CI.mk ys
+    Global xs == Global ys = on (==) f xs ys
+      where
+        f = CI.mk . mconcat
 
 instance Hashable Global where
     hashWithSalt salt (Global g) = foldl' hashWithSalt salt (map CI.mk g)
