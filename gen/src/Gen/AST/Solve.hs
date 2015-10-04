@@ -89,25 +89,26 @@ getType :: Global -> AST TType
 getType g = loc "getType" g $ memo typed g go
   where
     go s = case s of
-        SAny {}        -> may (TType "JSONValue")
-        SRef _ r       -> unmay <$> getType (ref r)
+        SAny {}        -> res (TType "JSONValue")
+        SRef _ r       -> req <$> getType (ref r)
         --- FIXME: add natural/numeric manipulations
-        SLit i l       -> may (lit i l)
-        SEnm {}        -> may (TType g)
-        SArr _ (Arr e) -> (TList <$> (getType e)) >>= may
-        SObj {}        -> may (TType g)
+        SLit i l       -> res (TLit l)
+        SEnm {}        -> res (TType g)
+        SArr _ (Arr e) -> (TList <$> (getType e)) >>= pure . may
+        SObj {}        -> res (TType g)
       where
-        lit i l
-            | i ^. iRepeated = TList (TLit l)
-            | otherwise      = TLit l
+        res = pure . may . rep
 
-        may | required  s = pure
-            | defaulted s = pure
-            | otherwise   = pure . TMaybe
+        may | required  s = id
+            | defaulted s = id
+            | otherwise   = TMaybe
 
-        unmay (TMaybe x)
+        req (TMaybe x)
             | required s = x
-        unmay x          = x
+        req x            = x
+
+        rep | s ^. iRepeated = TList
+            | otherwise      = id
 
 getDerive :: Global -> AST [Derive]
 getDerive g = loc "getDerive" g $ memo derived g go

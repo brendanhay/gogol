@@ -205,9 +205,11 @@ googleRequestDecl g n assoc alt p api url fields m pat prec =
           where
             go l = case Map.lookup l ps of
                 Just p | _pLocation p == Query
+                       , not (required p)
                        , p ^. iRepeated -> infixApp (v l) "^." (var "_Default")
 
                 Just p | _pLocation p == Query
+                       , not (p ^. iRepeated)
                        , parameter p || defaulted p -> app (var "Just") (v l)
 
                 _       -> v l
