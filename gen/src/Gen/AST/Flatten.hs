@@ -30,6 +30,7 @@ import qualified Data.HashMap.Strict  as Map
 import           Data.Maybe
 import           Data.Semigroup       ((<>))
 import qualified Data.Text            as Text
+import           Debug.Trace
 import           Gen.Formatting
 import           Gen.Types
 import           Prelude              hiding (sum)
@@ -60,35 +61,47 @@ globalSchema :: Global -> Fix Schema -> AST Global
 globalSchema g = schema g Nothing
 
 localSchema :: Global -> Local -> Fix Schema -> AST Global
-localSchema g l s = do
-    let r = globalise l
-    p <- uses schemas (Map.member r)
-    if p
-        then schema g (Just l) s
-        else schema r Nothing  s
-    -- local schema, check if the local schema exists and then just add it as
-    -- a global?
+localSchema g l = schema g (Just l)
+
+    -- -- unsafe due to depth first adding of a single schema's properties.
+    -- let r = globalise l
+    -- p <- uses schemas (Map.member r)
+    -- if p
+    --     then schema g (Just l) s
+    --     else schema r Nothing  s
 
 schema :: Global -> Maybe Local -> Fix Schema -> AST Global
-schema g ml (Fix f) = go f >>= insert this
+schema g ml (Fix f) = go (maybe g (reference g) ml) f >>= uncurry insert
   where
-    this :: Global
-    this = maybe g (reference g) ml
+    go :: Global -> Schema (Fix Schema) -> AST (Global, Schema Global)
+    go p = \case
+        SAny i a -> pure (p, SAny i a)
+        SRef i r -> pure (p, SRef i r)
+        SLit i l -> pure (p, SLit i l)
+        SEnm i e -> (,SEnm i e) <$> name i p ["Type", "Option"]
+        SArr i a -> do
+            u <- name i p ["List", "Array"]
+            (u,) . SArr i <$> array u a
+        SObj i o -> do
+            u <- name i p ["Schema", "Object"]
+            (u,) . SObj i <$> object u o
 
-    go :: Schema (Fix Schema) -> AST (Schema Global)
-    go = \case
-        SAny i a -> pure (SAny i a)
-        SRef i r -> pure (SRef i r)
-        SLit i l -> pure (SLit i l)
-        SEnm i e -> pure (SEnm i e)
-        SArr i a -> SArr i <$> array  a
-        SObj i o -> SObj i <$> object o
+    array p (Arr e) =
+        Arr <$> schema p (Just "item") (setRequired e)
 
-    array (Arr e) =
-        Arr <$> schema this (Just "item") (setRequired e)
+    object p (Obj aps ps) =
+        Obj Nothing <$> Map.traverseWithKey (localSchema p) ps
 
-    object (Obj aps ps) =
-        Obj Nothing <$> Map.traverseWithKey (localSchema this) ps
+    name i p xs
+        | Just x <- i ^. iId = pure x
+        | otherwise          = do
+            e <- uses schemas (Map.lookup p)
+            case (e, xs) of
+                (Nothing, _)    -> pure p
+                (Just _,  z:zs) -> name i (reference g z) zs
+                (Just x,  [])   -> throwError $
+                    format ("Unable to generate name for: " % gid % ", " % shown % ", " % gid % "\n" % shown)
+                           g ml p x
 
 globalParam :: Local -> Param (Fix Schema) -> AST (Param Global)
 globalParam l p = ($ p) $ case l of
@@ -126,15 +139,15 @@ method :: Map Local (Param Global)
        -> Method (Fix Schema)
        -> AST (Method Global)
 method qs suf m@Method {..} = do
-    ps <- Map.traverseWithKey (localParam _mId) _mParameters
+    ps <- Map.traverseWithKey (localParam (abbreviate _mId)) _mParameters
     cn <- use sCanonicalName
 
     let (_, typ, _) = mname cn suf _mId
 
     b  <- body typ
 
-    let params   = ps <> qs
-        fields   = Map.delete "alt" $ b (upload (Map.map _pParam params))
+    let params = ps <> qs
+        fields = Map.delete "alt" $ b (upload (Map.map _pParam params))
 
     void $ insert typ (SObj schemaInfo (Obj Nothing fields))
     pure $! m { _mParameters = params }
@@ -177,7 +190,7 @@ insert g s = do
     schemas %= Map.insert g s
     pure g
   where
-    exists n x =
+    exists n s' =
         format ("Schema exists: " % stext % " - " % gid %
-                "\n\n[Current]\n" % shown % "\n[Tried]\n\n" % shown)
-                n g x s
+                "\n\n[Current]\n" % shown % "\n\n[Tried]\n" % shown % "\n\n")
+                n g s' s

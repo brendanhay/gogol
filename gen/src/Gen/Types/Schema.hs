@@ -31,6 +31,7 @@ import           Data.Aeson           hiding (Array, Bool, Object, String)
 import qualified Data.Aeson           as A
 import           Data.Aeson.TH
 import           Data.Aeson.Types     (Parser)
+import           Data.Function        (on)
 import qualified Data.HashMap.Strict  as Map
 import           Data.Maybe
 import           Data.Semigroup       ((<>))
@@ -72,9 +73,15 @@ data Info = Info
     , _iMaximum     :: Maybe Text
     , _iRepeated    :: Bool
     , _iAnnotations :: Ann
-    } deriving (Eq, Show)
+    } deriving (Show)
 
 makeClassy ''Info
+
+instance Eq Info where
+   a == b = on (==) _iId       a b
+         && on (==) _iDefault  a b
+         && on (==) _iRequired a b
+         && on (==) _iRepeated a b
 
 instance FromJSON Info where
     parseJSON = withObject "info" $ \o -> Info

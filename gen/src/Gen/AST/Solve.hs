@@ -39,6 +39,7 @@ import           Data.Semigroup       ((<>))
 import           Data.Text            (Text)
 import qualified Data.Text            as Text
 import           Data.Text.Manipulate
+import           Debug.Trace
 import           Gen.Formatting
 import           Gen.Text
 import           Gen.Types
@@ -90,12 +91,17 @@ getType g = loc "getType" g $ memo typed g go
   where
     go s = case s of
         SAny {}        -> res (TType "JSONValue")
-        SRef _ r       -> req <$> getType (ref r)
         --- FIXME: add natural/numeric manipulations
-        SLit i l       -> res (TLit l)
+        SLit _ l       -> res (TLit l)
         SEnm {}        -> res (TType g)
         SArr _ (Arr e) -> (TList <$> (getType e)) >>= pure . may
         SObj {}        -> res (TType g)
+        SRef _ r
+            | ref r /= g -> req <$> getType (ref r)
+--            | otherwise  -> res (TType (ref r))
+            | otherwise  -> throwError $
+                format ("Ref cycle detected between: " % gid % " == " % shown)
+                       g s
       where
         res = pure . may . rep
 
@@ -246,4 +252,4 @@ memo l g f = do
             pure x
 
 loc :: String -> Global -> a -> a
-loc _ _ = id -- trace (n ++ ": " ++ Text.unpack (fromKey g))
+loc _ _ = id -- trace (n ++ ": " ++ Text.unpack (global g))

@@ -26,6 +26,7 @@ module Gen.Types.Id
     , global
     , local
 
+    , abbreviate
     , globalise
     , localise
 
@@ -126,7 +127,14 @@ newtype Prefix = Prefix Text
     deriving (Show, Monoid)
 
 newtype Global = Global [Text]
-    deriving (Eq, Ord, Show, Generic, Hashable)
+    deriving (Ord, Show, Generic)
+
+instance Eq Global where
+    Global xs == Global ys =
+        map CI.mk xs == map CI.mk ys
+
+instance Hashable Global where
+    hashWithSalt salt (Global g) = foldl' hashWithSalt salt (map CI.mk g)
 
 instance IsString Global where
     fromString = mkGlobal . fromString
@@ -163,6 +171,11 @@ reference (Global g) (Local l) = Global
     . mappend g
     . filter (not . Text.null)
     $ Text.split (== '.') l
+
+abbreviate :: Global -> Global
+abbreviate (Global g)
+    | length g > 2 = Global (drop 1 g)
+    | otherwise    = Global g
 
 localise :: Global -> Local
 localise = Local . global

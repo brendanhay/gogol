@@ -100,13 +100,18 @@ verbAlias n m
                 Path  -> Nothing
 
     media :: [Type]
-    media | Just b <- _mRequest m =
-             let g = ref b
-              in if _mSupportsMediaUpload m
-                     then [TyApp (TyApp (TyApp (TyCon "MultipartRelated") json)
-                                        (tycon g))
-                                 (TyCon "Body")]
-                     else [TyApp (TyApp (TyCon "ReqBody") json) (tycon g)]
+    media | Just b <- _mRequest m
+          , _mSupportsMediaUpload m =
+              [TyApp (TyApp (TyApp (TyCon "MultipartRelated") json)
+                            (tycon (ref b)))
+                     (TyCon "Body")]
+
+          | Just b <- _mRequest m =
+              [TyApp (TyApp (TyCon "ReqBody") octet) (tycon (ref b))]
+
+          | _mSupportsMediaUpload m =
+              [TyApp (TyApp (TyCon "ReqBody") json) (TyCon "Body")]
+
           | otherwise = []
 
     verb = TyApp (TyApp meth json) $
