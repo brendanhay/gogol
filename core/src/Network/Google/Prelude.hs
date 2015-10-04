@@ -2,8 +2,11 @@
 {-# LANGUAGE DeriveDataTypeable         #-}
 {-# LANGUAGE DeriveGeneric              #-}
 {-# LANGUAGE FlexibleContexts           #-}
+{-# LANGUAGE FlexibleInstances          #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE MultiParamTypeClasses      #-}
 {-# LANGUAGE OverloadedStrings          #-}
+{-# LANGUAGE ScopedTypeVariables        #-}
 {-# LANGUAGE TypeFamilies               #-}
 {-# LANGUAGE TypeOperators              #-}
 
@@ -21,50 +24,57 @@ module Network.Google.Prelude
     ) where
 
 import           Control.Lens                as Export (Lens', lens, mapping,
-                                                        _Just)
+                                                        (^.), _Just)
 import           Control.Lens                hiding (coerce)
 import           Control.Monad.Trans.Either  as Export (EitherT)
-import           Data.Aeson                  as Export
 import           Data.Coerce
 import           Data.Data                   as Export (Data, Typeable)
 import           Data.Hashable               as Export
 import           Data.Int                    as Export (Int32, Int64)
 import           Data.Maybe                  as Export
+import           Data.Monoid
 import           Data.Proxy                  as Export
 import           Data.Text                   as Export (Text)
-import           Data.Time                   as Export (UTCTime)
+import qualified Data.Text                   as Text
+import           Data.Time                   as Export
 import           Data.Word                   as Export (Word32, Word64, Word8)
 import           GHC.Generics                as Export (Generic)
+import           GHC.TypeLits
 import           Network.Google.Data.JSON    as Export
 import           Network.Google.Data.Numeric as Export
-import           Network.HTTP.Media
+-- import           Network.HTTP.Media
 import           Numeric.Natural             as Export (Natural)
 import           Servant.API                 as Export
 import           Servant.Client              as Export
 import           Servant.Common.Req          as Export (Req, defReq)
+import           Servant.Common.Req          (appendToPath)
 import           Servant.Utils.Links         as Export
 
 _Coerce :: (Coercible a b, Coercible b a) => Iso' a b
 _Coerce = iso coerce coerce
 
--- | Invalid Iso, should be a Prism but exists for ease of composition
--- with the current 'Lens . Iso' chaining to hide internal types from the user.
+-- | Invalid Iso, exists for ease of composition with the current 'Lens . Iso'
+-- chaining to hide internal types from the user.
 _Default :: Monoid a => Iso' (Maybe a) a
 _Default = iso f Just
   where
     f (Just x) = x
     f Nothing  = mempty
 
-newtype Time' = Time' Text
-    deriving (Eq, Ord, Show, Read, Generic, Data, Typeable, ToText, FromText)
+_Time     = undefined
+_Date     = undefined
+_DateTime = undefined
 
-newtype Date' = Date' Text
-    deriving (Eq, Ord, Show, Read, Generic, Data, Typeable, ToText, FromText)
+newtype Time' = Time' Text -- TimeOfDay
+    deriving (Eq, Ord, Show, Read, Generic, Data, Typeable, FromText, ToText, FromJSON, ToJSON)
 
-newtype DateTime' = DateTime' Text
-    deriving (Eq, Ord, Show, Read, Generic, Data, Typeable, ToText, FromText)
+newtype Date' = Date' Text -- LocalTime
+    deriving (Eq, Ord, Show, Read, Generic, Data, Typeable, FromText, ToText, FromJSON, ToJSON)
 
-data AltJSON  = AltJSON
+newtype DateTime' = DateTime' Text -- UTCTime
+    deriving (Eq, Ord, Show, Read, Generic, Data, Typeable, FromText, ToText, FromJSON, ToJSON)
+
+data AltJSON = AltJSON
     deriving (Eq, Ord, Show, Read, Generic, Data, Typeable)
 
 instance ToText AltJSON where
@@ -105,8 +115,52 @@ instance GoogleAuth a => GoogleAuth (Download a) where
 data Body = Body -- MediaType
     deriving (Eq, Show, Generic, Data, Typeable)
 
+data Captures (capture :: Symbol) a
+    deriving (Typeable)
+
+instance (KnownSymbol capture, ToText a, HasClient sublayout)
+        => HasClient (Captures capture a :> sublayout) where
+    type Client (Captures capture a :> sublayout) = [a] -> Client sublayout
+
+    clientWithRoute Proxy req baseUrl xs =
+        clientWithRoute (Proxy :: Proxy sublayout) (appendToPath vs req) baseUrl
+      where
+        vs = Text.unpack $ Text.intercalate "/" (map toText xs)
+
+data CaptureMode (capture :: Symbol) (mode :: Symbol) a
+    deriving (Typeable)
+
+instance (KnownSymbol capture, KnownSymbol mode, ToText a, HasClient sublayout)
+        => HasClient (CaptureMode capture mode a :> sublayout) where
+    type Client (CaptureMode capture mode a :> sublayout) = a -> Client sublayout
+
+    clientWithRoute Proxy req baseUrl val =
+        clientWithRoute (Proxy :: Proxy sublayout) (appendToPath p req) baseUrl
+      where
+        p = Text.unpack (toText val) <> m
+        m = symbolVal (Proxy :: Proxy mode)
+
+instance MimeUnrender OctetStream Body
 
 data MultipartRelated (metatypes :: [*]) meta media
+    deriving (Typeable)
+
+instance (MimeUnrender ct a, HasClient sublayout)
+        => HasClient (MultipartRelated (ct ': cts) a b :> sublayout) where
+
+    type Client (MultipartRelated (ct ': cts) a b :> sublayout) =
+        a -> b -> Client sublayout
+
+    clientWithRoute Proxy req baseurl meta media = undefined
+
+    -- clientWithRoute (Proxy :: Proxy sublayout)
+    --                 (let ctProxy = Proxy :: Proxy ct
+    --                  in setRQBody (mimeRender ctProxy body)
+    --                               (contentType ctProxy)
+    --                               req
+    --                 )
+    --                 baseurl
+
 
 -- IsElem sa (ReqBody y x :> sb)           = IsElem sa sb
 

@@ -10,9 +10,23 @@
 -- Stability   : provisional
 -- Portability : non-portable (GHC extensions)
 --
-module Network.Google.Data.JSON where
+module Network.Google.Data.JSON
+    ( module Network.Google.Data.JSON
 
-import           Control.Lens
+    , FromJSON (..)
+    , ToJSON   (..)
+
+    , Value (Object)
+    , withObject
+    , object
+
+    , (.=)
+    , (.:)
+    , (.:?)
+    , (.!=)
+    ) where
+
+import           Control.Lens     hiding ((.=))
 import           Data.Aeson
 import           Data.Aeson.Types
 import           Servant.API

@@ -4,7 +4,7 @@
 {-# LANGUAGE LambdaCase                 #-}
 {-# LANGUAGE OverloadedStrings          #-}
 {-# LANGUAGE ScopedTypeVariables        #-}
-{-# LANGUAGE ViewPatterns               #-}
+{-# LANGUAGE TupleSections              #-}
 
 -- Module      : Gen.Types.Id
 -- Copyright   : (c) 2015 Brendan Hay
@@ -51,7 +51,10 @@ module Gen.Types.Id
     , pname
     ) where
 
+import           Control.Applicative
+import           Control.Monad
 import           Data.Aeson                   hiding (Bool, String)
+import qualified Data.Attoparsec.Text         as A
 import           Data.CaseInsensitive         (CI)
 import qualified Data.CaseInsensitive         as CI
 import           Data.Coerce
@@ -168,22 +171,23 @@ globalise :: Local -> Global
 globalise = Global . (:[]) . local
 
 extractPath :: Text -> [Either Text (Local, Maybe Text)]
-extractPath = map match . filter (not . Text.null) . Text.split (== '/')
+extractPath = either (error . show) id . A.parseOnly path
   where
-    match x =
-        case Text.uncons x of
-            Just (c, Text.dropWhile (== '+') -> t)
-                | c == '{' -> Right $
-                    let y = toKey (Text.takeWhile (/= '}') t)
-                     in case Text.dropWhile (/= ':') t of
-                         "" -> (y, Nothing)
-                         z  -> (y, Just z)
+    path = A.many1 (seg <|> repeat <|> var) <* A.endOfInput
 
-        --      Resource "editId" "commit"
-        --     "path": "{packageName}/edits/{editId}:commit",
+    seg = fmap Left $
+        optional (A.char '/') *> A.takeWhile1 (A.notInClass "/{+*}:")
 
-            _              -> Left x
+    repeat = fmap Right $ do
+        A.string "{/"
+        (,Nothing) <$> fmap Local (A.takeWhile1 (/= '*'))
+                    <* A.string "*}"
 
+    var = fmap Right $ do
+        void $ optional (A.char '/') *> A.char '{'
+        (,) <$> fmap Local (A.takeWhile1 (A.notInClass "/{+*}:"))
+             <* A.char '}'
+            <*> optional (A.char ':' *> A.takeWhile1 (A.notInClass "/{+*}:"))
 
 orderParams :: (a -> Local) -> [a] -> [Local] -> [a]
 orderParams f xs ys = orderBy f zs (del zs [] ++ global)

@@ -71,6 +71,11 @@ verbAlias n m
                 Nothing -> error $ "Unable to find path parameter " ++ show l
                 Just x  ->
                     case c of
+                        Nothing | x ^. iRepeated ->
+                            TyApp (TyApp (TyCon "Captures")
+                                         (sing (local l)))
+                                  (terminalType (_type (_pParam x)))
+
                         Nothing ->
                             TyApp (TyApp (TyCon "Capture")
                                          (sing (local l)))
