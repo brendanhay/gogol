@@ -15,6 +15,7 @@
 {-# LANGUAGE RankNTypes                 #-}
 {-# LANGUAGE RecordWildCards            #-}
 {-# LANGUAGE TemplateHaskell            #-}
+{-# LANGUAGE ViewPatterns               #-}
 
 -- Module      : Gen.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -50,6 +51,7 @@ import           Data.Text                  (Text)
 import qualified Data.Text                  as Text
 import qualified Data.Text.Lazy             as LText
 import qualified Data.Text.Lazy.Builder     as Build
+import           Data.Text.Manipulate
 import           Debug.Trace
 import qualified Filesystem.Path.CurrentOS  as Path
 import           Formatting
@@ -287,3 +289,11 @@ reserveBranches = do
     ss <- use schemas
     let bs = Set.fromList $ map (CI.mk . global) (Map.keys ss)
     branches %= Map.insertWith (<>) mempty bs
+
+reserveFields :: AST ()
+reserveFields = do
+    ss <- use schemas
+    forM_ (Map.keys ss) $ \(global -> k) -> do
+        let p:ps = splitWords k
+            s    = mconcat ps
+        fields %= Map.insertWith (<>) (CI.mk p) (Set.singleton (CI.mk s))

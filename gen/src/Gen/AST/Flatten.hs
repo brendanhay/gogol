@@ -45,6 +45,7 @@ flatten s = do
     ss <- use schemas
 
     reserveBranches
+    reserveFields
 
     let d = (s ^. sDescription)
           { _dSchemas    = Map.fromList $ map (join (,)) (Map.keys ss)
