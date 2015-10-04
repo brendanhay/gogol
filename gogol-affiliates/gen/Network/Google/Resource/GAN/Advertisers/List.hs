@@ -11,7 +11,7 @@
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 
 -- |
--- Module      : Network.Google.Resource.Gan.Advertisers.List
+-- Module      : Network.Google.Resource.GAN.Advertisers.List
 -- Copyright   : (c) 2015 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
@@ -21,8 +21,8 @@
 -- | Retrieves data about all advertisers that the requesting
 -- advertiser\/publisher has access to.
 --
--- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GanAdvertisersList@.
-module Network.Google.Resource.Gan.Advertisers.List
+-- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GANAdvertisersList@.
+module Network.Google.Resource.GAN.Advertisers.List
     (
     -- * REST Resource
       AdvertisersListResource
@@ -52,10 +52,10 @@ module Network.Google.Resource.Gan.Advertisers.List
 import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GanAdvertisersList@ which the
+-- | A resource alias for @GANAdvertisersList@ which the
 -- 'AdvertisersList'' request conforms to.
 type AdvertisersListResource =
-     Capture "role" GanAdvertisersListRole :>
+     Capture "role" GANAdvertisersListRole :>
        Capture "roleId" Text :>
          "advertisers" :>
            QueryParam "relationshipStatus" RelationshipStatus :>
@@ -86,7 +86,7 @@ data AdvertisersList' = AdvertisersList'
     , _alMinSevenDayEpc     :: !(Maybe Double)
     , _alRoleId             :: !Text
     , _alMinNinetyDayEpc    :: !(Maybe Double)
-    , _alRole               :: !GanAdvertisersListRole
+    , _alRole               :: !GANAdvertisersListRole
     , _alKey                :: !(Maybe Key)
     , _alMinPayoutRank      :: !(Maybe Int32)
     , _alAdvertiserCategory :: !(Maybe Text)
@@ -131,7 +131,7 @@ data AdvertisersList' = AdvertisersList'
 -- * 'alFields'
 advertisersList'
     :: Text -- ^ 'roleId'
-    -> GanAdvertisersListRole -- ^ 'role'
+    -> GANAdvertisersListRole -- ^ 'role'
     -> AdvertisersList'
 advertisersList' pAlRoleId_ pAlRole_ =
     AdvertisersList'
@@ -197,7 +197,7 @@ alMinNinetyDayEpc
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-alRole :: Lens' AdvertisersList' GanAdvertisersListRole
+alRole :: Lens' AdvertisersList' GANAdvertisersListRole
 alRole = lens _alRole (\ s a -> s{_alRole = a})
 
 -- | API key. Your API key identifies your project and provides you with API

@@ -72,7 +72,7 @@ type PagesListResource =
 --
 -- /See:/ 'pagesList'' smart constructor.
 data PagesList' = PagesList'
-    { _plStatus      :: !(Maybe BloggerPagesListStatus)
+    { _plStatus      :: !(Maybe [BloggerPagesListStatus])
     , _plQuotaUser   :: !(Maybe Text)
     , _plPrettyPrint :: !Bool
     , _plUserIP      :: !(Maybe Text)
@@ -132,8 +132,11 @@ pagesList' pPlBlogId_ =
     , _plFields = Nothing
     }
 
-plStatus :: Lens' PagesList' (Maybe BloggerPagesListStatus)
-plStatus = lens _plStatus (\ s a -> s{_plStatus = a})
+plStatus :: Lens' PagesList' [BloggerPagesListStatus]
+plStatus
+  = lens _plStatus (\ s a -> s{_plStatus = a}) .
+      _Default
+      . _Coerce
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40

@@ -69,11 +69,11 @@ module Network.Google.AdSenseHost
     -- ** AdsensehostAdClientsList
     , module Network.Google.Resource.AdSenseHost.AdClients.List
 
-    -- ** AdsensehostAssociationsessionsStart
-    , module Network.Google.Resource.AdSenseHost.Associationsessions.Start
+    -- ** AdsensehostAssociationSessionsStart
+    , module Network.Google.Resource.AdSenseHost.AssociationSessions.Start
 
-    -- ** AdsensehostAssociationsessionsVerify
-    , module Network.Google.Resource.AdSenseHost.Associationsessions.Verify
+    -- ** AdsensehostAssociationSessionsVerify
+    , module Network.Google.Resource.AdSenseHost.AssociationSessions.Verify
 
     -- ** AdsensehostCustomChannelsDelete
     , module Network.Google.Resource.AdSenseHost.CustomChannels.Delete
@@ -292,8 +292,8 @@ import           Network.Google.Resource.AdSenseHost.Accounts.List
 import           Network.Google.Resource.AdSenseHost.Accounts.Reports.Generate
 import           Network.Google.Resource.AdSenseHost.AdClients.Get
 import           Network.Google.Resource.AdSenseHost.AdClients.List
-import           Network.Google.Resource.AdSenseHost.Associationsessions.Start
-import           Network.Google.Resource.AdSenseHost.Associationsessions.Verify
+import           Network.Google.Resource.AdSenseHost.AssociationSessions.Start
+import           Network.Google.Resource.AdSenseHost.AssociationSessions.Verify
 import           Network.Google.Resource.AdSenseHost.CustomChannels.Delete
 import           Network.Google.Resource.AdSenseHost.CustomChannels.Get
 import           Network.Google.Resource.AdSenseHost.CustomChannels.Insert
@@ -310,8 +310,8 @@ TODO
 -}
 
 type AdSenseHostAPI =
-     AssociationsessionsVerifyResource :<|>
-       AssociationsessionsStartResource
+     AssociationSessionsVerifyResource :<|>
+       AssociationSessionsStartResource
        :<|> AdClientsListResource
        :<|> AdClientsGetResource
        :<|> AccountsAdClientsListResource

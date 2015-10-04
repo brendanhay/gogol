@@ -11,7 +11,7 @@
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 
 -- |
--- Module      : Network.Google.Resource.Gan.Publishers.Get
+-- Module      : Network.Google.Resource.GAN.Publishers.Get
 -- Copyright   : (c) 2015 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
@@ -23,8 +23,8 @@
 -- publishers. Publishers can request information about themselves by
 -- omitting the publisherId query parameter.
 --
--- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GanPublishersGet@.
-module Network.Google.Resource.Gan.Publishers.Get
+-- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GANPublishersGet@.
+module Network.Google.Resource.GAN.Publishers.Get
     (
     -- * REST Resource
       PublishersGetResource
@@ -48,10 +48,10 @@ module Network.Google.Resource.Gan.Publishers.Get
 import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GanPublishersGet@ which the
+-- | A resource alias for @GANPublishersGet@ which the
 -- 'PublishersGet'' request conforms to.
 type PublishersGetResource =
-     Capture "role" GanPublishersGetRole :>
+     Capture "role" GANPublishersGetRole :>
        Capture "roleId" Text :>
          "publisher" :>
            QueryParam "publisherId" Text :>
@@ -74,7 +74,7 @@ data PublishersGet' = PublishersGet'
     , _pgPrettyPrint :: !Bool
     , _pgUserIP      :: !(Maybe Text)
     , _pgRoleId      :: !Text
-    , _pgRole        :: !GanPublishersGetRole
+    , _pgRole        :: !GANPublishersGetRole
     , _pgKey         :: !(Maybe Key)
     , _pgOAuthToken  :: !(Maybe OAuthToken)
     , _pgPublisherId :: !(Maybe Text)
@@ -104,7 +104,7 @@ data PublishersGet' = PublishersGet'
 -- * 'pgFields'
 publishersGet'
     :: Text -- ^ 'roleId'
-    -> GanPublishersGetRole -- ^ 'role'
+    -> GANPublishersGetRole -- ^ 'role'
     -> PublishersGet'
 publishersGet' pPgRoleId_ pPgRole_ =
     PublishersGet'
@@ -143,7 +143,7 @@ pgRoleId = lens _pgRoleId (\ s a -> s{_pgRoleId = a})
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-pgRole :: Lens' PublishersGet' GanPublishersGetRole
+pgRole :: Lens' PublishersGet' GANPublishersGetRole
 pgRole = lens _pgRole (\ s a -> s{_pgRole = a})
 
 -- | API key. Your API key identifies your project and provides you with API

@@ -26,35 +26,35 @@ module Network.Google.Affiliates
 
     -- * REST Resources
 
-    -- ** GanAdvertisersGet
-    , module Network.Google.Resource.Gan.Advertisers.Get
+    -- ** GANAdvertisersGet
+    , module Network.Google.Resource.GAN.Advertisers.Get
 
-    -- ** GanAdvertisersList
-    , module Network.Google.Resource.Gan.Advertisers.List
+    -- ** GANAdvertisersList
+    , module Network.Google.Resource.GAN.Advertisers.List
 
-    -- ** GanCcOffersList
-    , module Network.Google.Resource.Gan.CcOffers.List
+    -- ** GANCcOffersList
+    , module Network.Google.Resource.GAN.CcOffers.List
 
-    -- ** GanEventsList
-    , module Network.Google.Resource.Gan.Events.List
+    -- ** GANEventsList
+    , module Network.Google.Resource.GAN.Events.List
 
-    -- ** GanLinksGet
-    , module Network.Google.Resource.Gan.Links.Get
+    -- ** GANLinksGet
+    , module Network.Google.Resource.GAN.Links.Get
 
-    -- ** GanLinksInsert
-    , module Network.Google.Resource.Gan.Links.Insert
+    -- ** GANLinksInsert
+    , module Network.Google.Resource.GAN.Links.Insert
 
-    -- ** GanLinksList
-    , module Network.Google.Resource.Gan.Links.List
+    -- ** GANLinksList
+    , module Network.Google.Resource.GAN.Links.List
 
-    -- ** GanPublishersGet
-    , module Network.Google.Resource.Gan.Publishers.Get
+    -- ** GANPublishersGet
+    , module Network.Google.Resource.GAN.Publishers.Get
 
-    -- ** GanPublishersList
-    , module Network.Google.Resource.Gan.Publishers.List
+    -- ** GANPublishersList
+    , module Network.Google.Resource.GAN.Publishers.List
 
-    -- ** GanReportsGet
-    , module Network.Google.Resource.Gan.Reports.Get
+    -- ** GANReportsGet
+    , module Network.Google.Resource.GAN.Reports.Get
 
     -- * Types
 
@@ -92,14 +92,14 @@ module Network.Google.Affiliates
     -- ** Authorship
     , Authorship (..)
 
-    -- ** GanPublishersGetRole
-    , GanPublishersGetRole (..)
+    -- ** GANPublishersGetRole
+    , GANPublishersGetRole (..)
 
     -- ** ChargeType
     , ChargeType (..)
 
-    -- ** GanLinksListRole
-    , GanLinksListRole (..)
+    -- ** GANLinksListRole
+    , GANLinksListRole (..)
 
     -- ** ProductsItem
     , ProductsItem
@@ -148,11 +148,11 @@ module Network.Google.Affiliates
     , mAmount
     , mCurrencyCode
 
-    -- ** GanLinksInsertRole
-    , GanLinksInsertRole (..)
+    -- ** GANLinksInsertRole
+    , GANLinksInsertRole (..)
 
-    -- ** GanAdvertisersListRole
-    , GanAdvertisersListRole (..)
+    -- ** GANAdvertisersListRole
+    , GANAdvertisersListRole (..)
 
     -- ** PromotionType
     , PromotionType (..)
@@ -163,8 +163,8 @@ module Network.Google.Affiliates
     , coKind
     , coItems
 
-    -- ** GanPublishersListRole
-    , GanPublishersListRole (..)
+    -- ** GANPublishersListRole
+    , GANPublishersListRole (..)
 
     -- ** Advertisers
     , Advertisers
@@ -185,8 +185,8 @@ module Network.Google.Affiliates
     , rColumnNames
     , rType
 
-    -- ** GanLinksGetRole
-    , GanLinksGetRole (..)
+    -- ** GANLinksGetRole
+    , GANLinksGetRole (..)
 
     -- ** RewardsItem
     , RewardsItem
@@ -198,14 +198,14 @@ module Network.Google.Affiliates
     , riMaxRewardTier
     , riMinRewardTier
 
-    -- ** GanEventsListRole
-    , GanEventsListRole (..)
+    -- ** GANEventsListRole
+    , GANEventsListRole (..)
 
     -- ** Role
     , Role (..)
 
-    -- ** GanAdvertisersGetRole
-    , GanAdvertisersGetRole (..)
+    -- ** GANAdvertisersGetRole
+    , GANAdvertisersGetRole (..)
 
     -- ** EventType
     , EventType (..)
@@ -217,8 +217,8 @@ module Network.Google.Affiliates
     , eveKind
     , eveItems
 
-    -- ** GanPublishersListRelationshipStatus
-    , GanPublishersListRelationshipStatus (..)
+    -- ** GANPublishersListRelationshipStatus
+    , GANPublishersListRelationshipStatus (..)
 
     -- ** SpecialOffers
     , SpecialOffers
@@ -373,25 +373,25 @@ module Network.Google.Affiliates
     , pubEpcNinetyDayAverage
     , pubSites
 
-    -- ** GanLinksListRelationshipStatus
-    , GanLinksListRelationshipStatus (..)
+    -- ** GANLinksListRelationshipStatus
+    , GANLinksListRelationshipStatus (..)
 
-    -- ** GanEventsListStatus
-    , GanEventsListStatus (..)
+    -- ** GANEventsListStatus
+    , GANEventsListStatus (..)
     ) where
 
 import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
-import           Network.Google.Resource.Gan.Advertisers.Get
-import           Network.Google.Resource.Gan.Advertisers.List
-import           Network.Google.Resource.Gan.CcOffers.List
-import           Network.Google.Resource.Gan.Events.List
-import           Network.Google.Resource.Gan.Links.Get
-import           Network.Google.Resource.Gan.Links.Insert
-import           Network.Google.Resource.Gan.Links.List
-import           Network.Google.Resource.Gan.Publishers.Get
-import           Network.Google.Resource.Gan.Publishers.List
-import           Network.Google.Resource.Gan.Reports.Get
+import           Network.Google.Resource.GAN.Advertisers.Get
+import           Network.Google.Resource.GAN.Advertisers.List
+import           Network.Google.Resource.GAN.CcOffers.List
+import           Network.Google.Resource.GAN.Events.List
+import           Network.Google.Resource.GAN.Links.Get
+import           Network.Google.Resource.GAN.Links.Insert
+import           Network.Google.Resource.GAN.Links.List
+import           Network.Google.Resource.GAN.Publishers.Get
+import           Network.Google.Resource.GAN.Publishers.List
+import           Network.Google.Resource.GAN.Reports.Get
 
 {- $resources
 TODO

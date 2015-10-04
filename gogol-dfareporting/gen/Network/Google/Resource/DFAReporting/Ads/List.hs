@@ -175,7 +175,7 @@ data AdsList' = AdsList'
     , _adsOverriddenEventTagId                 :: !(Maybe Int64)
     , _adsPageToken                            :: !(Maybe Text)
     , _adsSortField                            :: !(Maybe DfareportingAdsListSortField)
-    , _adsType                                 :: !(Maybe Type)
+    , _adsType                                 :: !(Maybe [Type])
     , _adsOAuthToken                           :: !(Maybe OAuthToken)
     , _adsCreativeType                         :: !(Maybe CreativeType)
     , _adsDynamicClickTracker                  :: !(Maybe Bool)
@@ -438,8 +438,10 @@ adsSortField
   = lens _adsSortField (\ s a -> s{_adsSortField = a})
 
 -- | Select only ads with these types.
-adsType :: Lens' AdsList' (Maybe Type)
-adsType = lens _adsType (\ s a -> s{_adsType = a})
+adsType :: Lens' AdsList' [Type]
+adsType
+  = lens _adsType (\ s a -> s{_adsType = a}) . _Default
+      . _Coerce
 
 -- | OAuth 2.0 token for the current user.
 adsOAuthToken :: Lens' AdsList' (Maybe OAuthToken)

@@ -192,8 +192,7 @@ instance GoogleRequest MyConfigReleaseDownloadAccess'
         request = requestWithRoute defReq booksURL
         requestWithRoute r u
           MyConfigReleaseDownloadAccess'{..}
-          = go (_mcrdaVolumeIds ^. _Default)
-              (Just _mcrdaCpksver)
+          = go _mcrdaVolumeIds (Just _mcrdaCpksver)
               _mcrdaLocale
               _mcrdaSource
               _mcrdaQuotaUser

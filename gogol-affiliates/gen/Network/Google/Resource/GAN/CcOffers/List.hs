@@ -11,7 +11,7 @@
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 
 -- |
--- Module      : Network.Google.Resource.Gan.CcOffers.List
+-- Module      : Network.Google.Resource.GAN.CcOffers.List
 -- Copyright   : (c) 2015 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
@@ -20,8 +20,8 @@
 --
 -- | Retrieves credit card offers for the given publisher.
 --
--- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GanCcOffersList@.
-module Network.Google.Resource.Gan.CcOffers.List
+-- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GANCcOffersList@.
+module Network.Google.Resource.GAN.CcOffers.List
     (
     -- * REST Resource
       CcOffersListResource
@@ -45,7 +45,7 @@ module Network.Google.Resource.Gan.CcOffers.List
 import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GanCcOffersList@ which the
+-- | A resource alias for @GANCcOffersList@ which the
 -- 'CcOffersList'' request conforms to.
 type CcOffersListResource =
      "publishers" :>

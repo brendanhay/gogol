@@ -11,7 +11,7 @@
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 
 -- |
--- Module      : Network.Google.Resource.Gan.Publishers.List
+-- Module      : Network.Google.Resource.GAN.Publishers.List
 -- Copyright   : (c) 2015 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
@@ -21,8 +21,8 @@
 -- | Retrieves data about all publishers that the requesting
 -- advertiser\/publisher has access to.
 --
--- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GanPublishersList@.
-module Network.Google.Resource.Gan.Publishers.List
+-- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GANPublishersList@.
+module Network.Google.Resource.GAN.Publishers.List
     (
     -- * REST Resource
       PublishersListResource
@@ -52,14 +52,14 @@ module Network.Google.Resource.Gan.Publishers.List
 import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GanPublishersList@ which the
+-- | A resource alias for @GANPublishersList@ which the
 -- 'PublishersList'' request conforms to.
 type PublishersListResource =
-     Capture "role" GanPublishersListRole :>
+     Capture "role" GANPublishersListRole :>
        Capture "roleId" Text :>
          "publishers" :>
            QueryParam "relationshipStatus"
-             GanPublishersListRelationshipStatus
+             GANPublishersListRelationshipStatus
              :>
              QueryParam "minSevenDayEpc" Double :>
                QueryParam "minNinetyDayEpc" Double :>
@@ -84,11 +84,11 @@ data PublishersList' = PublishersList'
     { _plQuotaUser          :: !(Maybe Text)
     , _plPrettyPrint        :: !Bool
     , _plUserIP             :: !(Maybe Text)
-    , _plRelationshipStatus :: !(Maybe GanPublishersListRelationshipStatus)
+    , _plRelationshipStatus :: !(Maybe GANPublishersListRelationshipStatus)
     , _plMinSevenDayEpc     :: !(Maybe Double)
     , _plRoleId             :: !Text
     , _plMinNinetyDayEpc    :: !(Maybe Double)
-    , _plRole               :: !GanPublishersListRole
+    , _plRole               :: !GANPublishersListRole
     , _plKey                :: !(Maybe Key)
     , _plMinPayoutRank      :: !(Maybe Int32)
     , _plPageToken          :: !(Maybe Text)
@@ -133,7 +133,7 @@ data PublishersList' = PublishersList'
 -- * 'plFields'
 publishersList'
     :: Text -- ^ 'roleId'
-    -> GanPublishersListRole -- ^ 'role'
+    -> GANPublishersListRole -- ^ 'role'
     -> PublishersList'
 publishersList' pPlRoleId_ pPlRole_ =
     PublishersList'
@@ -174,7 +174,7 @@ plUserIP = lens _plUserIP (\ s a -> s{_plUserIP = a})
 
 -- | Filters out all publishers for which do not have the given relationship
 -- status with the requesting publisher.
-plRelationshipStatus :: Lens' PublishersList' (Maybe GanPublishersListRelationshipStatus)
+plRelationshipStatus :: Lens' PublishersList' (Maybe GANPublishersListRelationshipStatus)
 plRelationshipStatus
   = lens _plRelationshipStatus
       (\ s a -> s{_plRelationshipStatus = a})
@@ -199,7 +199,7 @@ plMinNinetyDayEpc
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-plRole :: Lens' PublishersList' GanPublishersListRole
+plRole :: Lens' PublishersList' GANPublishersListRole
 plRole = lens _plRole (\ s a -> s{_plRole = a})
 
 -- | API key. Your API key identifies your project and provides you with API

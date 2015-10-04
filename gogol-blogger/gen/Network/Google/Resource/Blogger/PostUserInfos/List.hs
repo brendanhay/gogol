@@ -88,7 +88,7 @@ type PostUserInfosListResource =
 --
 -- /See:/ 'postUserInfosList'' smart constructor.
 data PostUserInfosList' = PostUserInfosList'
-    { _puilStatus      :: !(Maybe Status)
+    { _puilStatus      :: !(Maybe [Status])
     , _puilQuotaUser   :: !(Maybe Text)
     , _puilPrettyPrint :: !Bool
     , _puilOrderBy     :: !OrderBy
@@ -169,9 +169,11 @@ postUserInfosList' pPuilBlogId_ pPuilUserId_ =
     , _puilFields = Nothing
     }
 
-puilStatus :: Lens' PostUserInfosList' (Maybe Status)
+puilStatus :: Lens' PostUserInfosList' [Status]
 puilStatus
-  = lens _puilStatus (\ s a -> s{_puilStatus = a})
+  = lens _puilStatus (\ s a -> s{_puilStatus = a}) .
+      _Default
+      . _Coerce
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40

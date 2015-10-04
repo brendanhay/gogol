@@ -11,7 +11,7 @@
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 
 -- |
--- Module      : Network.Google.Resource.Gan.Reports.Get
+-- Module      : Network.Google.Resource.GAN.Reports.Get
 -- Copyright   : (c) 2015 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
@@ -20,8 +20,8 @@
 --
 -- | Retrieves a report of the specified type.
 --
--- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GanReportsGet@.
-module Network.Google.Resource.Gan.Reports.Get
+-- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GANReportsGet@.
+module Network.Google.Resource.GAN.Reports.Get
     (
     -- * REST Resource
       ReportsGetResource
@@ -56,7 +56,7 @@ module Network.Google.Resource.Gan.Reports.Get
 import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GanReportsGet@ which the
+-- | A resource alias for @GANReportsGet@ which the
 -- 'ReportsGet'' request conforms to.
 type ReportsGetResource =
      Capture "role" Role :>

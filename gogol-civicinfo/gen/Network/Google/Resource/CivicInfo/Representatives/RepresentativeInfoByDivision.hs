@@ -69,13 +69,13 @@ type RepresentativesRepresentativeInfoByDivisionResource
 -- /See:/ 'representativesRepresentativeInfoByDivision'' smart constructor.
 data RepresentativesRepresentativeInfoByDivision' = RepresentativesRepresentativeInfoByDivision'
     { _rribdQuotaUser   :: !(Maybe Text)
-    , _rribdRoles       :: !(Maybe Roles)
+    , _rribdRoles       :: !(Maybe [Roles])
     , _rribdPrettyPrint :: !Bool
     , _rribdUserIP      :: !(Maybe Text)
     , _rribdKey         :: !(Maybe Key)
     , _rribdRecursive   :: !(Maybe Bool)
     , _rribdOcdId       :: !Text
-    , _rribdLevels      :: !(Maybe Levels)
+    , _rribdLevels      :: !(Maybe [Levels])
     , _rribdOAuthToken  :: !(Maybe OAuthToken)
     , _rribdFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -131,9 +131,11 @@ rribdQuotaUser
 -- | A list of office roles to filter by. Only offices fulfilling one of
 -- these roles will be returned. Divisions that don\'t contain a matching
 -- office will not be returned.
-rribdRoles :: Lens' RepresentativesRepresentativeInfoByDivision' (Maybe Roles)
+rribdRoles :: Lens' RepresentativesRepresentativeInfoByDivision' [Roles]
 rribdRoles
-  = lens _rribdRoles (\ s a -> s{_rribdRoles = a})
+  = lens _rribdRoles (\ s a -> s{_rribdRoles = a}) .
+      _Default
+      . _Coerce
 
 -- | Returns response with indentations and line breaks.
 rribdPrettyPrint :: Lens' RepresentativesRepresentativeInfoByDivision' Bool
@@ -170,9 +172,11 @@ rribdOcdId
 -- | A list of office levels to filter by. Only offices that serve at least
 -- one of these levels will be returned. Divisions that don\'t contain a
 -- matching office will not be returned.
-rribdLevels :: Lens' RepresentativesRepresentativeInfoByDivision' (Maybe Levels)
+rribdLevels :: Lens' RepresentativesRepresentativeInfoByDivision' [Levels]
 rribdLevels
-  = lens _rribdLevels (\ s a -> s{_rribdLevels = a})
+  = lens _rribdLevels (\ s a -> s{_rribdLevels = a}) .
+      _Default
+      . _Coerce
 
 -- | OAuth 2.0 token for the current user.
 rribdOAuthToken :: Lens' RepresentativesRepresentativeInfoByDivision' (Maybe OAuthToken)

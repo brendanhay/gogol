@@ -51,14 +51,14 @@ module Network.Google.Affiliates.Types
     -- * Authorship
     , Authorship (..)
 
-    -- * GanPublishersGetRole
-    , GanPublishersGetRole (..)
+    -- * GANPublishersGetRole
+    , GANPublishersGetRole (..)
 
     -- * ChargeType
     , ChargeType (..)
 
-    -- * GanLinksListRole
-    , GanLinksListRole (..)
+    -- * GANLinksListRole
+    , GANLinksListRole (..)
 
     -- * ProductsItem
     , ProductsItem
@@ -107,11 +107,11 @@ module Network.Google.Affiliates.Types
     , mAmount
     , mCurrencyCode
 
-    -- * GanLinksInsertRole
-    , GanLinksInsertRole (..)
+    -- * GANLinksInsertRole
+    , GANLinksInsertRole (..)
 
-    -- * GanAdvertisersListRole
-    , GanAdvertisersListRole (..)
+    -- * GANAdvertisersListRole
+    , GANAdvertisersListRole (..)
 
     -- * PromotionType
     , PromotionType (..)
@@ -122,8 +122,8 @@ module Network.Google.Affiliates.Types
     , coKind
     , coItems
 
-    -- * GanPublishersListRole
-    , GanPublishersListRole (..)
+    -- * GANPublishersListRole
+    , GANPublishersListRole (..)
 
     -- * Advertisers
     , Advertisers
@@ -144,8 +144,8 @@ module Network.Google.Affiliates.Types
     , rColumnNames
     , rType
 
-    -- * GanLinksGetRole
-    , GanLinksGetRole (..)
+    -- * GANLinksGetRole
+    , GANLinksGetRole (..)
 
     -- * RewardsItem
     , RewardsItem
@@ -157,14 +157,14 @@ module Network.Google.Affiliates.Types
     , riMaxRewardTier
     , riMinRewardTier
 
-    -- * GanEventsListRole
-    , GanEventsListRole (..)
+    -- * GANEventsListRole
+    , GANEventsListRole (..)
 
     -- * Role
     , Role (..)
 
-    -- * GanAdvertisersGetRole
-    , GanAdvertisersGetRole (..)
+    -- * GANAdvertisersGetRole
+    , GANAdvertisersGetRole (..)
 
     -- * EventType
     , EventType (..)
@@ -176,8 +176,8 @@ module Network.Google.Affiliates.Types
     , eveKind
     , eveItems
 
-    -- * GanPublishersListRelationshipStatus
-    , GanPublishersListRelationshipStatus (..)
+    -- * GANPublishersListRelationshipStatus
+    , GANPublishersListRelationshipStatus (..)
 
     -- * SpecialOffers
     , SpecialOffers
@@ -332,11 +332,11 @@ module Network.Google.Affiliates.Types
     , pubEpcNinetyDayAverage
     , pubSites
 
-    -- * GanLinksListRelationshipStatus
-    , GanLinksListRelationshipStatus (..)
+    -- * GANLinksListRelationshipStatus
+    , GANLinksListRelationshipStatus (..)
 
-    -- * GanEventsListStatus
-    , GanEventsListStatus (..)
+    -- * GANEventsListStatus
+    , GANEventsListStatus (..)
     ) where
 
 import           Network.Google.Affiliates.Types.Product

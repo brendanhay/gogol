@@ -81,32 +81,32 @@ instance ToJSON Authorship where
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-data GanPublishersGetRole
-    = GPGRAdvertisers
+data GANPublishersGetRole
+    = GANPGRAdvertisers
       -- ^ @advertisers@
       -- The requester is requesting as an advertiser.
-    | GPGRPublishers
+    | GANPGRPublishers
       -- ^ @publishers@
       -- The requester is requesting as a publisher.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable GanPublishersGetRole
+instance Hashable GANPublishersGetRole
 
-instance FromText GanPublishersGetRole where
+instance FromText GANPublishersGetRole where
     fromText = \case
-        "advertisers" -> Just GPGRAdvertisers
-        "publishers" -> Just GPGRPublishers
+        "advertisers" -> Just GANPGRAdvertisers
+        "publishers" -> Just GANPGRPublishers
         _ -> Nothing
 
-instance ToText GanPublishersGetRole where
+instance ToText GANPublishersGetRole where
     toText = \case
-        GPGRAdvertisers -> "advertisers"
-        GPGRPublishers -> "publishers"
+        GANPGRAdvertisers -> "advertisers"
+        GANPGRPublishers -> "publishers"
 
-instance FromJSON GanPublishersGetRole where
-    parseJSON = parseJSONText "GanPublishersGetRole"
+instance FromJSON GANPublishersGetRole where
+    parseJSON = parseJSONText "GANPublishersGetRole"
 
-instance ToJSON GanPublishersGetRole where
+instance ToJSON GANPublishersGetRole where
     toJSON = toJSONText
 
 -- | Filters out all charge events that are not of the given charge type.
@@ -166,32 +166,32 @@ instance ToJSON ChargeType where
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-data GanLinksListRole
-    = GLLRAdvertisers
+data GANLinksListRole
+    = GANLLRAdvertisers
       -- ^ @advertisers@
       -- The requester is requesting as an advertiser.
-    | GLLRPublishers
+    | GANLLRPublishers
       -- ^ @publishers@
       -- The requester is requesting as a publisher.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable GanLinksListRole
+instance Hashable GANLinksListRole
 
-instance FromText GanLinksListRole where
+instance FromText GANLinksListRole where
     fromText = \case
-        "advertisers" -> Just GLLRAdvertisers
-        "publishers" -> Just GLLRPublishers
+        "advertisers" -> Just GANLLRAdvertisers
+        "publishers" -> Just GANLLRPublishers
         _ -> Nothing
 
-instance ToText GanLinksListRole where
+instance ToText GANLinksListRole where
     toText = \case
-        GLLRAdvertisers -> "advertisers"
-        GLLRPublishers -> "publishers"
+        GANLLRAdvertisers -> "advertisers"
+        GANLLRPublishers -> "publishers"
 
-instance FromJSON GanLinksListRole where
-    parseJSON = parseJSONText "GanLinksListRole"
+instance FromJSON GANLinksListRole where
+    parseJSON = parseJSONText "GANLinksListRole"
 
-instance ToJSON GanLinksListRole where
+instance ToJSON GANLinksListRole where
     toJSON = toJSONText
 
 -- | Filters out all advertisers for which do not have the given relationship
@@ -244,62 +244,62 @@ instance ToJSON RelationshipStatus where
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-data GanLinksInsertRole
-    = GLIRAdvertisers
+data GANLinksInsertRole
+    = GANLIRAdvertisers
       -- ^ @advertisers@
       -- The requester is requesting as an advertiser.
-    | GLIRPublishers
+    | GANLIRPublishers
       -- ^ @publishers@
       -- The requester is requesting as a publisher.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable GanLinksInsertRole
+instance Hashable GANLinksInsertRole
 
-instance FromText GanLinksInsertRole where
+instance FromText GANLinksInsertRole where
     fromText = \case
-        "advertisers" -> Just GLIRAdvertisers
-        "publishers" -> Just GLIRPublishers
+        "advertisers" -> Just GANLIRAdvertisers
+        "publishers" -> Just GANLIRPublishers
         _ -> Nothing
 
-instance ToText GanLinksInsertRole where
+instance ToText GANLinksInsertRole where
     toText = \case
-        GLIRAdvertisers -> "advertisers"
-        GLIRPublishers -> "publishers"
+        GANLIRAdvertisers -> "advertisers"
+        GANLIRPublishers -> "publishers"
 
-instance FromJSON GanLinksInsertRole where
-    parseJSON = parseJSONText "GanLinksInsertRole"
+instance FromJSON GANLinksInsertRole where
+    parseJSON = parseJSONText "GANLinksInsertRole"
 
-instance ToJSON GanLinksInsertRole where
+instance ToJSON GANLinksInsertRole where
     toJSON = toJSONText
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-data GanAdvertisersListRole
-    = GALRAdvertisers
+data GANAdvertisersListRole
+    = GANALRAdvertisers
       -- ^ @advertisers@
       -- The requester is requesting as an advertiser.
-    | GALRPublishers
+    | GANALRPublishers
       -- ^ @publishers@
       -- The requester is requesting as a publisher.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable GanAdvertisersListRole
+instance Hashable GANAdvertisersListRole
 
-instance FromText GanAdvertisersListRole where
+instance FromText GANAdvertisersListRole where
     fromText = \case
-        "advertisers" -> Just GALRAdvertisers
-        "publishers" -> Just GALRPublishers
+        "advertisers" -> Just GANALRAdvertisers
+        "publishers" -> Just GANALRPublishers
         _ -> Nothing
 
-instance ToText GanAdvertisersListRole where
+instance ToText GANAdvertisersListRole where
     toText = \case
-        GALRAdvertisers -> "advertisers"
-        GALRPublishers -> "publishers"
+        GANALRAdvertisers -> "advertisers"
+        GANALRPublishers -> "publishers"
 
-instance FromJSON GanAdvertisersListRole where
-    parseJSON = parseJSONText "GanAdvertisersListRole"
+instance FromJSON GANAdvertisersListRole where
+    parseJSON = parseJSONText "GANAdvertisersListRole"
 
-instance ToJSON GanAdvertisersListRole where
+instance ToJSON GANAdvertisersListRole where
     toJSON = toJSONText
 
 -- | The promotion type.
@@ -343,92 +343,92 @@ instance ToJSON PromotionType where
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-data GanPublishersListRole
-    = GPLRAdvertisers
+data GANPublishersListRole
+    = GANPLRAdvertisers
       -- ^ @advertisers@
       -- The requester is requesting as an advertiser.
-    | GPLRPublishers
+    | GANPLRPublishers
       -- ^ @publishers@
       -- The requester is requesting as a publisher.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable GanPublishersListRole
+instance Hashable GANPublishersListRole
 
-instance FromText GanPublishersListRole where
+instance FromText GANPublishersListRole where
     fromText = \case
-        "advertisers" -> Just GPLRAdvertisers
-        "publishers" -> Just GPLRPublishers
+        "advertisers" -> Just GANPLRAdvertisers
+        "publishers" -> Just GANPLRPublishers
         _ -> Nothing
 
-instance ToText GanPublishersListRole where
+instance ToText GANPublishersListRole where
     toText = \case
-        GPLRAdvertisers -> "advertisers"
-        GPLRPublishers -> "publishers"
+        GANPLRAdvertisers -> "advertisers"
+        GANPLRPublishers -> "publishers"
 
-instance FromJSON GanPublishersListRole where
-    parseJSON = parseJSONText "GanPublishersListRole"
+instance FromJSON GANPublishersListRole where
+    parseJSON = parseJSONText "GANPublishersListRole"
 
-instance ToJSON GanPublishersListRole where
+instance ToJSON GANPublishersListRole where
     toJSON = toJSONText
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-data GanLinksGetRole
-    = GLGRAdvertisers
+data GANLinksGetRole
+    = GANLGRAdvertisers
       -- ^ @advertisers@
       -- The requester is requesting as an advertiser.
-    | GLGRPublishers
+    | GANLGRPublishers
       -- ^ @publishers@
       -- The requester is requesting as a publisher.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable GanLinksGetRole
+instance Hashable GANLinksGetRole
 
-instance FromText GanLinksGetRole where
+instance FromText GANLinksGetRole where
     fromText = \case
-        "advertisers" -> Just GLGRAdvertisers
-        "publishers" -> Just GLGRPublishers
+        "advertisers" -> Just GANLGRAdvertisers
+        "publishers" -> Just GANLGRPublishers
         _ -> Nothing
 
-instance ToText GanLinksGetRole where
+instance ToText GANLinksGetRole where
     toText = \case
-        GLGRAdvertisers -> "advertisers"
-        GLGRPublishers -> "publishers"
+        GANLGRAdvertisers -> "advertisers"
+        GANLGRPublishers -> "publishers"
 
-instance FromJSON GanLinksGetRole where
-    parseJSON = parseJSONText "GanLinksGetRole"
+instance FromJSON GANLinksGetRole where
+    parseJSON = parseJSONText "GANLinksGetRole"
 
-instance ToJSON GanLinksGetRole where
+instance ToJSON GANLinksGetRole where
     toJSON = toJSONText
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-data GanEventsListRole
-    = GELRAdvertisers
+data GANEventsListRole
+    = GANELRAdvertisers
       -- ^ @advertisers@
       -- The requester is requesting as an advertiser.
-    | GELRPublishers
+    | GANELRPublishers
       -- ^ @publishers@
       -- The requester is requesting as a publisher.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable GanEventsListRole
+instance Hashable GANEventsListRole
 
-instance FromText GanEventsListRole where
+instance FromText GANEventsListRole where
     fromText = \case
-        "advertisers" -> Just GELRAdvertisers
-        "publishers" -> Just GELRPublishers
+        "advertisers" -> Just GANELRAdvertisers
+        "publishers" -> Just GANELRPublishers
         _ -> Nothing
 
-instance ToText GanEventsListRole where
+instance ToText GANEventsListRole where
     toText = \case
-        GELRAdvertisers -> "advertisers"
-        GELRPublishers -> "publishers"
+        GANELRAdvertisers -> "advertisers"
+        GANELRPublishers -> "publishers"
 
-instance FromJSON GanEventsListRole where
-    parseJSON = parseJSONText "GanEventsListRole"
+instance FromJSON GANEventsListRole where
+    parseJSON = parseJSONText "GANEventsListRole"
 
-instance ToJSON GanEventsListRole where
+instance ToJSON GANEventsListRole where
     toJSON = toJSONText
 
 -- | The role of the requester. Valid values: \'advertisers\' or
@@ -463,32 +463,32 @@ instance ToJSON Role where
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-data GanAdvertisersGetRole
-    = GAGRAdvertisers
+data GANAdvertisersGetRole
+    = GANAGRAdvertisers
       -- ^ @advertisers@
       -- The requester is requesting as an advertiser.
-    | GAGRPublishers
+    | GANAGRPublishers
       -- ^ @publishers@
       -- The requester is requesting as a publisher.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable GanAdvertisersGetRole
+instance Hashable GANAdvertisersGetRole
 
-instance FromText GanAdvertisersGetRole where
+instance FromText GANAdvertisersGetRole where
     fromText = \case
-        "advertisers" -> Just GAGRAdvertisers
-        "publishers" -> Just GAGRPublishers
+        "advertisers" -> Just GANAGRAdvertisers
+        "publishers" -> Just GANAGRPublishers
         _ -> Nothing
 
-instance ToText GanAdvertisersGetRole where
+instance ToText GANAdvertisersGetRole where
     toText = \case
-        GAGRAdvertisers -> "advertisers"
-        GAGRPublishers -> "publishers"
+        GANAGRAdvertisers -> "advertisers"
+        GANAGRPublishers -> "publishers"
 
-instance FromJSON GanAdvertisersGetRole where
-    parseJSON = parseJSONText "GanAdvertisersGetRole"
+instance FromJSON GANAdvertisersGetRole where
+    parseJSON = parseJSONText "GANAdvertisersGetRole"
 
-instance ToJSON GanAdvertisersGetRole where
+instance ToJSON GANAdvertisersGetRole where
     toJSON = toJSONText
 
 -- | Filters out all events that are not of the given type. Valid values:
@@ -528,49 +528,49 @@ instance ToJSON EventType where
 
 -- | Filters out all publishers for which do not have the given relationship
 -- status with the requesting publisher.
-data GanPublishersListRelationshipStatus
-    = GPLRSApproved
+data GANPublishersListRelationshipStatus
+    = GANPLRSApproved
       -- ^ @approved@
       -- Publishers you\'ve approved to your program.
-    | GPLRSAvailable
+    | GANPLRSAvailable
       -- ^ @available@
       -- Publishers available for you to recruit.
-    | GPLRSDeactivated
+    | GANPLRSDeactivated
       -- ^ @deactivated@
       -- A publisher that you terminated from your program. Publishers also have
       -- the ability to remove themselves from your program.
-    | GPLRSDeclined
+    | GANPLRSDeclined
       -- ^ @declined@
       -- A publisher that you did not approve to your program.
-    | GPLRSPending
+    | GANPLRSPending
       -- ^ @pending@
       -- Publishers that have applied to your program. We recommend reviewing and
       -- deciding on pending publishers on a weekly basis.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable GanPublishersListRelationshipStatus
+instance Hashable GANPublishersListRelationshipStatus
 
-instance FromText GanPublishersListRelationshipStatus where
+instance FromText GANPublishersListRelationshipStatus where
     fromText = \case
-        "approved" -> Just GPLRSApproved
-        "available" -> Just GPLRSAvailable
-        "deactivated" -> Just GPLRSDeactivated
-        "declined" -> Just GPLRSDeclined
-        "pending" -> Just GPLRSPending
+        "approved" -> Just GANPLRSApproved
+        "available" -> Just GANPLRSAvailable
+        "deactivated" -> Just GANPLRSDeactivated
+        "declined" -> Just GANPLRSDeclined
+        "pending" -> Just GANPLRSPending
         _ -> Nothing
 
-instance ToText GanPublishersListRelationshipStatus where
+instance ToText GANPublishersListRelationshipStatus where
     toText = \case
-        GPLRSApproved -> "approved"
-        GPLRSAvailable -> "available"
-        GPLRSDeactivated -> "deactivated"
-        GPLRSDeclined -> "declined"
-        GPLRSPending -> "pending"
+        GANPLRSApproved -> "approved"
+        GANPLRSAvailable -> "available"
+        GANPLRSDeactivated -> "deactivated"
+        GANPLRSDeclined -> "declined"
+        GANPLRSPending -> "pending"
 
-instance FromJSON GanPublishersListRelationshipStatus where
-    parseJSON = parseJSONText "GanPublishersListRelationshipStatus"
+instance FromJSON GANPublishersListRelationshipStatus where
+    parseJSON = parseJSONText "GANPublishersListRelationshipStatus"
 
-instance ToJSON GanPublishersListRelationshipStatus where
+instance ToJSON GANPublishersListRelationshipStatus where
     toJSON = toJSONText
 
 -- | The set of fields to return.
@@ -695,58 +695,58 @@ instance ToJSON ReportType where
     toJSON = toJSONText
 
 -- | The status of the relationship.
-data GanLinksListRelationshipStatus
-    = GLLRSApproved
+data GANLinksListRelationshipStatus
+    = GANLLRSApproved
       -- ^ @approved@
-    | GLLRSAvailable
+    | GANLLRSAvailable
       -- ^ @available@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable GanLinksListRelationshipStatus
+instance Hashable GANLinksListRelationshipStatus
 
-instance FromText GanLinksListRelationshipStatus where
+instance FromText GANLinksListRelationshipStatus where
     fromText = \case
-        "approved" -> Just GLLRSApproved
-        "available" -> Just GLLRSAvailable
+        "approved" -> Just GANLLRSApproved
+        "available" -> Just GANLLRSAvailable
         _ -> Nothing
 
-instance ToText GanLinksListRelationshipStatus where
+instance ToText GANLinksListRelationshipStatus where
     toText = \case
-        GLLRSApproved -> "approved"
-        GLLRSAvailable -> "available"
+        GANLLRSApproved -> "approved"
+        GANLLRSAvailable -> "available"
 
-instance FromJSON GanLinksListRelationshipStatus where
-    parseJSON = parseJSONText "GanLinksListRelationshipStatus"
+instance FromJSON GANLinksListRelationshipStatus where
+    parseJSON = parseJSONText "GANLinksListRelationshipStatus"
 
-instance ToJSON GanLinksListRelationshipStatus where
+instance ToJSON GANLinksListRelationshipStatus where
     toJSON = toJSONText
 
 -- | Filters out all events that do not have the given status. Valid values:
 -- \'active\', \'canceled\'. Optional.
-data GanEventsListStatus
-    = GELSActive
+data GANEventsListStatus
+    = GANELSActive
       -- ^ @active@
       -- Event is currently active.
-    | GELSCanceled
+    | GANELSCanceled
       -- ^ @canceled@
       -- Event is currently canceled.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable GanEventsListStatus
+instance Hashable GANEventsListStatus
 
-instance FromText GanEventsListStatus where
+instance FromText GANEventsListStatus where
     fromText = \case
-        "active" -> Just GELSActive
-        "canceled" -> Just GELSCanceled
+        "active" -> Just GANELSActive
+        "canceled" -> Just GANELSCanceled
         _ -> Nothing
 
-instance ToText GanEventsListStatus where
+instance ToText GANEventsListStatus where
     toText = \case
-        GELSActive -> "active"
-        GELSCanceled -> "canceled"
+        GANELSActive -> "active"
+        GANELSCanceled -> "canceled"
 
-instance FromJSON GanEventsListStatus where
-    parseJSON = parseJSONText "GanEventsListStatus"
+instance FromJSON GANEventsListStatus where
+    parseJSON = parseJSONText "GANEventsListStatus"
 
-instance ToJSON GanEventsListStatus where
+instance ToJSON GANEventsListStatus where
     toJSON = toJSONText

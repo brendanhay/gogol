@@ -47,8 +47,8 @@ library
         , Network.Google.Resource.AdSenseHost.Accounts.Reports.Generate
         , Network.Google.Resource.AdSenseHost.AdClients.Get
         , Network.Google.Resource.AdSenseHost.AdClients.List
-        , Network.Google.Resource.AdSenseHost.Associationsessions.Start
-        , Network.Google.Resource.AdSenseHost.Associationsessions.Verify
+        , Network.Google.Resource.AdSenseHost.AssociationSessions.Start
+        , Network.Google.Resource.AdSenseHost.AssociationSessions.Verify
         , Network.Google.Resource.AdSenseHost.CustomChannels.Delete
         , Network.Google.Resource.AdSenseHost.CustomChannels.Get
         , Network.Google.Resource.AdSenseHost.CustomChannels.Insert

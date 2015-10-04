@@ -169,7 +169,7 @@ instance GoogleRequest MyLibraryAnnotationsSummary'
              AnnotationsSummary
         request = requestWithRoute defReq booksURL
         requestWithRoute r u MyLibraryAnnotationsSummary'{..}
-          = go (_mlasLayerIds ^. _Default) (Just _mlasVolumeId)
+          = go _mlasLayerIds (Just _mlasVolumeId)
               _mlasQuotaUser
               (Just _mlasPrettyPrint)
               _mlasUserIP

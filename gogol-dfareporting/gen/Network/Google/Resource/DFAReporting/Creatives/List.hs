@@ -111,7 +111,7 @@ data CreativesList' = CreativesList'
     , _clSizeIds              :: !(Maybe [Int64])
     , _clCompanionCreativeIds :: !(Maybe [Int64])
     , _clCampaignId           :: !(Maybe Int64)
-    , _clTypes                :: !(Maybe Types)
+    , _clTypes                :: !(Maybe [Types])
     , _clIds                  :: !(Maybe [Int64])
     , _clProfileId            :: !Int64
     , _clSortOrder            :: !(Maybe DfareportingCreativesListSortOrder)
@@ -271,8 +271,10 @@ clCampaignId
   = lens _clCampaignId (\ s a -> s{_clCampaignId = a})
 
 -- | Select only creatives with these creative types.
-clTypes :: Lens' CreativesList' (Maybe Types)
-clTypes = lens _clTypes (\ s a -> s{_clTypes = a})
+clTypes :: Lens' CreativesList' [Types]
+clTypes
+  = lens _clTypes (\ s a -> s{_clTypes = a}) . _Default
+      . _Coerce
 
 -- | Select only creatives with these IDs.
 clIds :: Lens' CreativesList' [Int64]

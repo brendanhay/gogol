@@ -71,7 +71,7 @@ type PlacementsGeneratetagsResource =
 data PlacementsGeneratetags' = PlacementsGeneratetags'
     { _pQuotaUser    :: !(Maybe Text)
     , _pPrettyPrint  :: !Bool
-    , _pTagFormats   :: !(Maybe TagFormats)
+    , _pTagFormats   :: !(Maybe [TagFormats])
     , _pUserIP       :: !(Maybe Text)
     , _pCampaignId   :: !(Maybe Int64)
     , _pProfileId    :: !Int64
@@ -134,9 +134,11 @@ pPrettyPrint
   = lens _pPrettyPrint (\ s a -> s{_pPrettyPrint = a})
 
 -- | Tag formats to generate for these placements.
-pTagFormats :: Lens' PlacementsGeneratetags' (Maybe TagFormats)
+pTagFormats :: Lens' PlacementsGeneratetags' [TagFormats]
 pTagFormats
-  = lens _pTagFormats (\ s a -> s{_pTagFormats = a})
+  = lens _pTagFormats (\ s a -> s{_pTagFormats = a}) .
+      _Default
+      . _Coerce
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.

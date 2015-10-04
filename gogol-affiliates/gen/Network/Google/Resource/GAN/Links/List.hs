@@ -11,7 +11,7 @@
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 
 -- |
--- Module      : Network.Google.Resource.Gan.Links.List
+-- Module      : Network.Google.Resource.GAN.Links.List
 -- Copyright   : (c) 2015 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
@@ -20,8 +20,8 @@
 --
 -- | Retrieves all links that match the query parameters.
 --
--- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GanLinksList@.
-module Network.Google.Resource.Gan.Links.List
+-- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GANLinksList@.
+module Network.Google.Resource.GAN.Links.List
     (
     -- * REST Resource
       LinksListResource
@@ -57,17 +57,17 @@ module Network.Google.Resource.Gan.Links.List
 import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GanLinksList@ which the
+-- | A resource alias for @GANLinksList@ which the
 -- 'LinksList'' request conforms to.
 type LinksListResource =
-     Capture "role" GanLinksListRole :>
+     Capture "role" GANLinksListRole :>
        Capture "roleId" Text :>
          "links" :>
            QueryParam "createDateMax" Text :>
              QueryParam "authorship" Authorship :>
                QueryParams "assetSize" Text :>
                  QueryParam "relationshipStatus"
-                   GanLinksListRelationshipStatus
+                   GANLinksListRelationshipStatus
                    :>
                    QueryParams "advertiserId" Int64 :>
                      QueryParam "searchText" Text :>
@@ -99,12 +99,12 @@ data LinksList' = LinksList'
     , _llPrettyPrint        :: !Bool
     , _llAssetSize          :: !(Maybe [Text])
     , _llUserIP             :: !(Maybe Text)
-    , _llRelationshipStatus :: !(Maybe GanLinksListRelationshipStatus)
+    , _llRelationshipStatus :: !(Maybe GANLinksListRelationshipStatus)
     , _llAdvertiserId       :: !(Maybe [Int64])
     , _llSearchText         :: !(Maybe Text)
-    , _llPromotionType      :: !(Maybe PromotionType)
+    , _llPromotionType      :: !(Maybe [PromotionType])
     , _llRoleId             :: !Text
-    , _llRole               :: !GanLinksListRole
+    , _llRole               :: !GANLinksListRole
     , _llKey                :: !(Maybe Key)
     , _llCreateDateMin      :: !(Maybe Text)
     , _llLinkType           :: !(Maybe LinkType)
@@ -163,7 +163,7 @@ data LinksList' = LinksList'
 -- * 'llFields'
 linksList'
     :: Text -- ^ 'roleId'
-    -> GanLinksListRole -- ^ 'role'
+    -> GANLinksListRole -- ^ 'role'
     -> LinksList'
 linksList' pLlRoleId_ pLlRole_ =
     LinksList'
@@ -227,7 +227,7 @@ llUserIP :: Lens' LinksList' (Maybe Text)
 llUserIP = lens _llUserIP (\ s a -> s{_llUserIP = a})
 
 -- | The status of the relationship.
-llRelationshipStatus :: Lens' LinksList' (Maybe GanLinksListRelationshipStatus)
+llRelationshipStatus :: Lens' LinksList' (Maybe GANLinksListRelationshipStatus)
 llRelationshipStatus
   = lens _llRelationshipStatus
       (\ s a -> s{_llRelationshipStatus = a})
@@ -248,10 +248,12 @@ llSearchText
   = lens _llSearchText (\ s a -> s{_llSearchText = a})
 
 -- | The promotion type.
-llPromotionType :: Lens' LinksList' (Maybe PromotionType)
+llPromotionType :: Lens' LinksList' [PromotionType]
 llPromotionType
   = lens _llPromotionType
       (\ s a -> s{_llPromotionType = a})
+      . _Default
+      . _Coerce
 
 -- | The ID of the requesting advertiser or publisher.
 llRoleId :: Lens' LinksList' Text
@@ -259,7 +261,7 @@ llRoleId = lens _llRoleId (\ s a -> s{_llRoleId = a})
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-llRole :: Lens' LinksList' GanLinksListRole
+llRole :: Lens' LinksList' GANLinksListRole
 llRole = lens _llRole (\ s a -> s{_llRole = a})
 
 -- | API key. Your API key identifies your project and provides you with API

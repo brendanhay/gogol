@@ -71,7 +71,7 @@ type VolumesUserUploadedListResource =
 --
 -- /See:/ 'volumesUserUploadedList'' smart constructor.
 data VolumesUserUploadedList' = VolumesUserUploadedList'
-    { _vuulProcessingState :: !(Maybe ProcessingState)
+    { _vuulProcessingState :: !(Maybe [ProcessingState])
     , _vuulQuotaUser       :: !(Maybe Text)
     , _vuulPrettyPrint     :: !Bool
     , _vuulUserIP          :: !(Maybe Text)
@@ -131,10 +131,12 @@ volumesUserUploadedList' =
     }
 
 -- | The processing state of the user uploaded volumes to be returned.
-vuulProcessingState :: Lens' VolumesUserUploadedList' (Maybe ProcessingState)
+vuulProcessingState :: Lens' VolumesUserUploadedList' [ProcessingState]
 vuulProcessingState
   = lens _vuulProcessingState
       (\ s a -> s{_vuulProcessingState = a})
+      . _Default
+      . _Coerce
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40

@@ -82,7 +82,7 @@ type PostsListResource =
 --
 -- /See:/ 'postsList'' smart constructor.
 data PostsList' = PostsList'
-    { _pllStatus      :: !(Maybe BloggerPostsListStatus)
+    { _pllStatus      :: !(Maybe [BloggerPostsListStatus])
     , _pllQuotaUser   :: !(Maybe Text)
     , _pllPrettyPrint :: !Bool
     , _pllOrderBy     :: !BloggerPostsListOrderBy
@@ -163,9 +163,11 @@ postsList' pPllBlogId_ =
     }
 
 -- | Statuses to include in the results.
-pllStatus :: Lens' PostsList' (Maybe BloggerPostsListStatus)
+pllStatus :: Lens' PostsList' [BloggerPostsListStatus]
 pllStatus
-  = lens _pllStatus (\ s a -> s{_pllStatus = a})
+  = lens _pllStatus (\ s a -> s{_pllStatus = a}) .
+      _Default
+      . _Coerce
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40

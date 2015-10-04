@@ -75,13 +75,13 @@ type RepresentativesRepresentativeInfoByAddressResource
 -- /See:/ 'representativesRepresentativeInfoByAddress'' smart constructor.
 data RepresentativesRepresentativeInfoByAddress' = RepresentativesRepresentativeInfoByAddress'
     { _rribaQuotaUser      :: !(Maybe Text)
-    , _rribaRoles          :: !(Maybe CivicInfoRepresentativesRepresentativeInfoByAddressRoles)
+    , _rribaRoles          :: !(Maybe [CivicInfoRepresentativesRepresentativeInfoByAddressRoles])
     , _rribaPrettyPrint    :: !Bool
     , _rribaUserIP         :: !(Maybe Text)
     , _rribaAddress        :: !(Maybe Text)
     , _rribaKey            :: !(Maybe Key)
     , _rribaIncludeOffices :: !Bool
-    , _rribaLevels         :: !(Maybe CivicInfoRepresentativesRepresentativeInfoByAddressLevels)
+    , _rribaLevels         :: !(Maybe [CivicInfoRepresentativesRepresentativeInfoByAddressLevels])
     , _rribaOAuthToken     :: !(Maybe OAuthToken)
     , _rribaFields         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -136,9 +136,11 @@ rribaQuotaUser
 -- | A list of office roles to filter by. Only offices fulfilling one of
 -- these roles will be returned. Divisions that don\'t contain a matching
 -- office will not be returned.
-rribaRoles :: Lens' RepresentativesRepresentativeInfoByAddress' (Maybe CivicInfoRepresentativesRepresentativeInfoByAddressRoles)
+rribaRoles :: Lens' RepresentativesRepresentativeInfoByAddress' [CivicInfoRepresentativesRepresentativeInfoByAddressRoles]
 rribaRoles
-  = lens _rribaRoles (\ s a -> s{_rribaRoles = a})
+  = lens _rribaRoles (\ s a -> s{_rribaRoles = a}) .
+      _Default
+      . _Coerce
 
 -- | Returns response with indentations and line breaks.
 rribaPrettyPrint :: Lens' RepresentativesRepresentativeInfoByAddress' Bool
@@ -174,9 +176,11 @@ rribaIncludeOffices
 -- | A list of office levels to filter by. Only offices that serve at least
 -- one of these levels will be returned. Divisions that don\'t contain a
 -- matching office will not be returned.
-rribaLevels :: Lens' RepresentativesRepresentativeInfoByAddress' (Maybe CivicInfoRepresentativesRepresentativeInfoByAddressLevels)
+rribaLevels :: Lens' RepresentativesRepresentativeInfoByAddress' [CivicInfoRepresentativesRepresentativeInfoByAddressLevels]
 rribaLevels
-  = lens _rribaLevels (\ s a -> s{_rribaLevels = a})
+  = lens _rribaLevels (\ s a -> s{_rribaLevels = a}) .
+      _Default
+      . _Coerce
 
 -- | OAuth 2.0 token for the current user.
 rribaOAuthToken :: Lens' RepresentativesRepresentativeInfoByAddress' (Maybe OAuthToken)

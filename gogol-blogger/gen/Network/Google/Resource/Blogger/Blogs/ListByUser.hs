@@ -69,13 +69,13 @@ type BlogsListByUserResource =
 --
 -- /See:/ 'blogsListByUser'' smart constructor.
 data BlogsListByUser' = BlogsListByUser'
-    { _blbuStatus        :: !BloggerBlogsListByUserStatus
+    { _blbuStatus        :: ![BloggerBlogsListByUserStatus]
     , _blbuQuotaUser     :: !(Maybe Text)
     , _blbuPrettyPrint   :: !Bool
     , _blbuUserIP        :: !(Maybe Text)
     , _blbuFetchUserInfo :: !(Maybe Bool)
     , _blbuUserId        :: !Text
-    , _blbuRole          :: !(Maybe Role)
+    , _blbuRole          :: !(Maybe [Role])
     , _blbuKey           :: !(Maybe Key)
     , _blbuView          :: !(Maybe BloggerBlogsListByUserView)
     , _blbuOAuthToken    :: !(Maybe OAuthToken)
@@ -127,9 +127,10 @@ blogsListByUser' pBlbuUserId_ =
 
 -- | Blog statuses to include in the result (default: Live blogs only). Note
 -- that ADMIN access is required to view deleted blogs.
-blbuStatus :: Lens' BlogsListByUser' BloggerBlogsListByUserStatus
+blbuStatus :: Lens' BlogsListByUser' [BloggerBlogsListByUserStatus]
 blbuStatus
-  = lens _blbuStatus (\ s a -> s{_blbuStatus = a})
+  = lens _blbuStatus (\ s a -> s{_blbuStatus = a}) .
+      _Coerce
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -167,8 +168,11 @@ blbuUserId
 -- | User access types for blogs to include in the results, e.g. AUTHOR will
 -- return blogs where the user has author level access. If no roles are
 -- specified, defaults to ADMIN and AUTHOR roles.
-blbuRole :: Lens' BlogsListByUser' (Maybe Role)
-blbuRole = lens _blbuRole (\ s a -> s{_blbuRole = a})
+blbuRole :: Lens' BlogsListByUser' [Role]
+blbuRole
+  = lens _blbuRole (\ s a -> s{_blbuRole = a}) .
+      _Default
+      . _Coerce
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0

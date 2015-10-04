@@ -83,7 +83,7 @@ data JobsList' = JobsList'
     , _jlPrettyPrint :: !Bool
     , _jlUserIP      :: !(Maybe Text)
     , _jlKey         :: !(Maybe Key)
-    , _jlStateFilter :: !(Maybe StateFilter)
+    , _jlStateFilter :: !(Maybe [StateFilter])
     , _jlProjection  :: !(Maybe Projection)
     , _jlPageToken   :: !(Maybe Text)
     , _jlProjectId   :: !Text
@@ -164,10 +164,12 @@ jlKey :: Lens' JobsList' (Maybe Key)
 jlKey = lens _jlKey (\ s a -> s{_jlKey = a})
 
 -- | Filter for job state
-jlStateFilter :: Lens' JobsList' (Maybe StateFilter)
+jlStateFilter :: Lens' JobsList' [StateFilter]
 jlStateFilter
   = lens _jlStateFilter
       (\ s a -> s{_jlStateFilter = a})
+      . _Default
+      . _Coerce
 
 -- | Restrict information returned to a set of selected fields
 jlProjection :: Lens' JobsList' (Maybe Projection)

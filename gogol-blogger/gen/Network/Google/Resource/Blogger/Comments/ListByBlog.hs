@@ -75,7 +75,7 @@ type CommentsListByBlogResource =
 --
 -- /See:/ 'commentsListByBlog'' smart constructor.
 data CommentsListByBlog' = CommentsListByBlog'
-    { _clbbStatus      :: !(Maybe BloggerCommentsListByBlogStatus)
+    { _clbbStatus      :: !(Maybe [BloggerCommentsListByBlogStatus])
     , _clbbQuotaUser   :: !(Maybe Text)
     , _clbbPrettyPrint :: !Bool
     , _clbbUserIP      :: !(Maybe Text)
@@ -139,9 +139,11 @@ commentsListByBlog' pClbbBlogId_ =
     , _clbbFields = Nothing
     }
 
-clbbStatus :: Lens' CommentsListByBlog' (Maybe BloggerCommentsListByBlogStatus)
+clbbStatus :: Lens' CommentsListByBlog' [BloggerCommentsListByBlogStatus]
 clbbStatus
-  = lens _clbbStatus (\ s a -> s{_clbbStatus = a})
+  = lens _clbbStatus (\ s a -> s{_clbbStatus = a}) .
+      _Default
+      . _Coerce
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40

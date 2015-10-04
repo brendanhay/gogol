@@ -73,9 +73,9 @@ type VolumesMybooksListResource =
 --
 -- /See:/ 'volumesMybooksList'' smart constructor.
 data VolumesMybooksList' = VolumesMybooksList'
-    { _vmlProcessingState :: !(Maybe BooksVolumesMybooksListProcessingState)
+    { _vmlProcessingState :: !(Maybe [BooksVolumesMybooksListProcessingState])
     , _vmlQuotaUser       :: !(Maybe Text)
-    , _vmlAcquireMethod   :: !(Maybe AcquireMethod)
+    , _vmlAcquireMethod   :: !(Maybe [AcquireMethod])
     , _vmlPrettyPrint     :: !Bool
     , _vmlUserIP          :: !(Maybe Text)
     , _vmlLocale          :: !(Maybe Text)
@@ -134,10 +134,12 @@ volumesMybooksList' =
 
 -- | The processing state of the user uploaded volumes to be returned.
 -- Applicable only if the UPLOADED is specified in the acquireMethod.
-vmlProcessingState :: Lens' VolumesMybooksList' (Maybe BooksVolumesMybooksListProcessingState)
+vmlProcessingState :: Lens' VolumesMybooksList' [BooksVolumesMybooksListProcessingState]
 vmlProcessingState
   = lens _vmlProcessingState
       (\ s a -> s{_vmlProcessingState = a})
+      . _Default
+      . _Coerce
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -147,10 +149,12 @@ vmlQuotaUser
   = lens _vmlQuotaUser (\ s a -> s{_vmlQuotaUser = a})
 
 -- | How the book was aquired
-vmlAcquireMethod :: Lens' VolumesMybooksList' (Maybe AcquireMethod)
+vmlAcquireMethod :: Lens' VolumesMybooksList' [AcquireMethod]
 vmlAcquireMethod
   = lens _vmlAcquireMethod
       (\ s a -> s{_vmlAcquireMethod = a})
+      . _Default
+      . _Coerce
 
 -- | Returns response with indentations and line breaks.
 vmlPrettyPrint :: Lens' VolumesMybooksList' Bool

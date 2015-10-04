@@ -11,7 +11,7 @@
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 
 -- |
--- Module      : Network.Google.Resource.Gan.Events.List
+-- Module      : Network.Google.Resource.GAN.Events.List
 -- Copyright   : (c) 2015 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
@@ -20,8 +20,8 @@
 --
 -- | Retrieves event data for a given advertiser\/publisher.
 --
--- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GanEventsList@.
-module Network.Google.Resource.Gan.Events.List
+-- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GANEventsList@.
+module Network.Google.Resource.GAN.Events.List
     (
     -- * REST Resource
       EventsListResource
@@ -60,13 +60,13 @@ module Network.Google.Resource.Gan.Events.List
 import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GanEventsList@ which the
+-- | A resource alias for @GANEventsList@ which the
 -- 'EventsList'' request conforms to.
 type EventsListResource =
-     Capture "role" GanEventsListRole :>
+     Capture "role" GANEventsListRole :>
        Capture "roleId" Text :>
          "events" :>
-           QueryParam "status" GanEventsListStatus :>
+           QueryParam "status" GANEventsListStatus :>
              QueryParam "eventDateMin" Text :>
                QueryParam "chargeType" ChargeType :>
                  QueryParam "memberId" Text :>
@@ -97,7 +97,7 @@ type EventsListResource =
 --
 -- /See:/ 'eventsList'' smart constructor.
 data EventsList' = EventsList'
-    { _elStatus          :: !(Maybe GanEventsListStatus)
+    { _elStatus          :: !(Maybe GANEventsListStatus)
     , _elQuotaUser       :: !(Maybe Text)
     , _elPrettyPrint     :: !Bool
     , _elEventDateMin    :: !(Maybe Text)
@@ -108,7 +108,7 @@ data EventsList' = EventsList'
     , _elAdvertiserId    :: !(Maybe Text)
     , _elModifyDateMin   :: !(Maybe Text)
     , _elRoleId          :: !Text
-    , _elRole            :: !GanEventsListRole
+    , _elRole            :: !GANEventsListRole
     , _elEventDateMax    :: !(Maybe Text)
     , _elKey             :: !(Maybe Key)
     , _elSKU             :: !(Maybe Text)
@@ -176,7 +176,7 @@ data EventsList' = EventsList'
 -- * 'elFields'
 eventsList'
     :: Text -- ^ 'roleId'
-    -> GanEventsListRole -- ^ 'role'
+    -> GANEventsListRole -- ^ 'role'
     -> EventsList'
 eventsList' pElRoleId_ pElRole_ =
     EventsList'
@@ -208,7 +208,7 @@ eventsList' pElRoleId_ pElRole_ =
 
 -- | Filters out all events that do not have the given status. Valid values:
 -- \'active\', \'canceled\'. Optional.
-elStatus :: Lens' EventsList' (Maybe GanEventsListStatus)
+elStatus :: Lens' EventsList' (Maybe GANEventsListStatus)
 elStatus = lens _elStatus (\ s a -> s{_elStatus = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -279,7 +279,7 @@ elRoleId = lens _elRoleId (\ s a -> s{_elRoleId = a})
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-elRole :: Lens' EventsList' GanEventsListRole
+elRole :: Lens' EventsList' GANEventsListRole
 elRole = lens _elRole (\ s a -> s{_elRole = a})
 
 -- | Filters out all events later than given date. Optional. Defaults to 24

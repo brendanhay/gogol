@@ -150,7 +150,7 @@ instance GoogleRequest AccountsList' where
         type Rs AccountsList' = Accounts
         request = requestWithRoute defReq adSenseHostURL
         requestWithRoute r u AccountsList'{..}
-          = go (_alFilterAdClientId ^. _Default) _alQuotaUser
+          = go _alFilterAdClientId _alQuotaUser
               (Just _alPrettyPrint)
               _alUserIP
               _alFields

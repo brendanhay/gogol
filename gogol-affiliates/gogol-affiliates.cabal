@@ -32,16 +32,16 @@ library
     exposed-modules:
           Network.Google.Affiliates
         , Network.Google.Affiliates.Types
-        , Network.Google.Resource.Gan.Advertisers.Get
-        , Network.Google.Resource.Gan.Advertisers.List
-        , Network.Google.Resource.Gan.CcOffers.List
-        , Network.Google.Resource.Gan.Events.List
-        , Network.Google.Resource.Gan.Links.Get
-        , Network.Google.Resource.Gan.Links.Insert
-        , Network.Google.Resource.Gan.Links.List
-        , Network.Google.Resource.Gan.Publishers.Get
-        , Network.Google.Resource.Gan.Publishers.List
-        , Network.Google.Resource.Gan.Reports.Get
+        , Network.Google.Resource.GAN.Advertisers.Get
+        , Network.Google.Resource.GAN.Advertisers.List
+        , Network.Google.Resource.GAN.CcOffers.List
+        , Network.Google.Resource.GAN.Events.List
+        , Network.Google.Resource.GAN.Links.Get
+        , Network.Google.Resource.GAN.Links.Insert
+        , Network.Google.Resource.GAN.Links.List
+        , Network.Google.Resource.GAN.Publishers.Get
+        , Network.Google.Resource.GAN.Publishers.List
+        , Network.Google.Resource.GAN.Reports.Get
 
     other-modules:
           Network.Google.Affiliates.Types.Product

@@ -11,7 +11,7 @@
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 
 -- |
--- Module      : Network.Google.Resource.Gan.Advertisers.Get
+-- Module      : Network.Google.Resource.GAN.Advertisers.Get
 -- Copyright   : (c) 2015 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
@@ -23,8 +23,8 @@
 -- advertisers. Advertisers can request information about themselves by
 -- omitting the advertiserId query parameter.
 --
--- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GanAdvertisersGet@.
-module Network.Google.Resource.Gan.Advertisers.Get
+-- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GANAdvertisersGet@.
+module Network.Google.Resource.GAN.Advertisers.Get
     (
     -- * REST Resource
       AdvertisersGetResource
@@ -48,10 +48,10 @@ module Network.Google.Resource.Gan.Advertisers.Get
 import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GanAdvertisersGet@ which the
+-- | A resource alias for @GANAdvertisersGet@ which the
 -- 'AdvertisersGet'' request conforms to.
 type AdvertisersGetResource =
-     Capture "role" GanAdvertisersGetRole :>
+     Capture "role" GANAdvertisersGetRole :>
        Capture "roleId" Text :>
          "advertiser" :>
            QueryParam "advertiserId" Text :>
@@ -75,7 +75,7 @@ data AdvertisersGet' = AdvertisersGet'
     , _agUserIP       :: !(Maybe Text)
     , _agAdvertiserId :: !(Maybe Text)
     , _agRoleId       :: !Text
-    , _agRole         :: !GanAdvertisersGetRole
+    , _agRole         :: !GANAdvertisersGetRole
     , _agKey          :: !(Maybe Key)
     , _agOAuthToken   :: !(Maybe OAuthToken)
     , _agFields       :: !(Maybe Text)
@@ -104,7 +104,7 @@ data AdvertisersGet' = AdvertisersGet'
 -- * 'agFields'
 advertisersGet'
     :: Text -- ^ 'roleId'
-    -> GanAdvertisersGetRole -- ^ 'role'
+    -> GANAdvertisersGetRole -- ^ 'role'
     -> AdvertisersGet'
 advertisersGet' pAgRoleId_ pAgRole_ =
     AdvertisersGet'
@@ -149,7 +149,7 @@ agRoleId = lens _agRoleId (\ s a -> s{_agRoleId = a})
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-agRole :: Lens' AdvertisersGet' GanAdvertisersGetRole
+agRole :: Lens' AdvertisersGet' GANAdvertisersGetRole
 agRole = lens _agRole (\ s a -> s{_agRole = a})
 
 -- | API key. Your API key identifies your project and provides you with API

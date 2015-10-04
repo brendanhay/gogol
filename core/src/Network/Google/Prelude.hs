@@ -48,7 +48,7 @@ import           Servant.API                 as Export
 import           Servant.Client              as Export
 import           Servant.Common.Req          as Export (Req, defReq)
 import           Servant.Common.Req          (appendToPath)
-import           Servant.Utils.Links         as Export
+import           Servant.Utils.Links         as Export hiding (Link)
 
 _Coerce :: (Coercible a b, Coercible b a) => Iso' a b
 _Coerce = iso coerce coerce

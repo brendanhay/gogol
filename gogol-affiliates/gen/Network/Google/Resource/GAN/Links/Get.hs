@@ -11,7 +11,7 @@
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 
 -- |
--- Module      : Network.Google.Resource.Gan.Links.Get
+-- Module      : Network.Google.Resource.GAN.Links.Get
 -- Copyright   : (c) 2015 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
@@ -23,8 +23,8 @@
 -- own links. Publishers can look up visible links or links belonging to
 -- advertisers they are in a relationship with.
 --
--- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GanLinksGet@.
-module Network.Google.Resource.Gan.Links.Get
+-- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GANLinksGet@.
+module Network.Google.Resource.GAN.Links.Get
     (
     -- * REST Resource
       LinksGetResource
@@ -48,10 +48,10 @@ module Network.Google.Resource.Gan.Links.Get
 import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GanLinksGet@ which the
+-- | A resource alias for @GANLinksGet@ which the
 -- 'LinksGet'' request conforms to.
 type LinksGetResource =
-     Capture "role" GanLinksGetRole :>
+     Capture "role" GANLinksGetRole :>
        Capture "roleId" Text :>
          "link" :>
            Capture "linkId" Int64 :>
@@ -74,7 +74,7 @@ data LinksGet' = LinksGet'
     , _lgPrettyPrint :: !Bool
     , _lgUserIP      :: !(Maybe Text)
     , _lgRoleId      :: !Text
-    , _lgRole        :: !GanLinksGetRole
+    , _lgRole        :: !GANLinksGetRole
     , _lgKey         :: !(Maybe Key)
     , _lgLinkId      :: !Int64
     , _lgOAuthToken  :: !(Maybe OAuthToken)
@@ -104,7 +104,7 @@ data LinksGet' = LinksGet'
 -- * 'lgFields'
 linksGet'
     :: Text -- ^ 'roleId'
-    -> GanLinksGetRole -- ^ 'role'
+    -> GANLinksGetRole -- ^ 'role'
     -> Int64 -- ^ 'linkId'
     -> LinksGet'
 linksGet' pLgRoleId_ pLgRole_ pLgLinkId_ =
@@ -144,7 +144,7 @@ lgRoleId = lens _lgRoleId (\ s a -> s{_lgRoleId = a})
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-lgRole :: Lens' LinksGet' GanLinksGetRole
+lgRole :: Lens' LinksGet' GANLinksGetRole
 lgRole = lens _lgRole (\ s a -> s{_lgRole = a})
 
 -- | API key. Your API key identifies your project and provides you with API

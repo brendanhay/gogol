@@ -121,7 +121,7 @@ data PlacementGroupsList' = PlacementGroupsList'
     , _pglMaxEndDate           :: !(Maybe Text)
     , _pglUserIP               :: !(Maybe Text)
     , _pglCampaignIds          :: !(Maybe [Int64])
-    , _pglPricingTypes         :: !(Maybe DfareportingPlacementGroupsListPricingTypes)
+    , _pglPricingTypes         :: !(Maybe [DfareportingPlacementGroupsListPricingTypes])
     , _pglSearchString         :: !(Maybe Text)
     , _pglIds                  :: !(Maybe [Int64])
     , _pglProfileId            :: !Int64
@@ -284,10 +284,12 @@ pglCampaignIds
       . _Coerce
 
 -- | Select only placement groups with these pricing types.
-pglPricingTypes :: Lens' PlacementGroupsList' (Maybe DfareportingPlacementGroupsListPricingTypes)
+pglPricingTypes :: Lens' PlacementGroupsList' [DfareportingPlacementGroupsListPricingTypes]
 pglPricingTypes
   = lens _pglPricingTypes
       (\ s a -> s{_pglPricingTypes = a})
+      . _Default
+      . _Coerce
 
 -- | Allows searching for placement groups by name or ID. Wildcards (*) are
 -- allowed. For example, \"placement*2015\" will return placement groups

@@ -83,7 +83,7 @@ data MyConfigSyncVolumeLicenses' = MyConfigSyncVolumeLicenses'
     , _mcsvlLocale        :: !(Maybe Text)
     , _mcsvlVolumeIds     :: !(Maybe [Text])
     , _mcsvlKey           :: !(Maybe Key)
-    , _mcsvlFeatures      :: !(Maybe Features)
+    , _mcsvlFeatures      :: !(Maybe [Features])
     , _mcsvlSource        :: !Text
     , _mcsvlOAuthToken    :: !(Maybe OAuthToken)
     , _mcsvlShowPreOrders :: !(Maybe Bool)
@@ -187,10 +187,12 @@ mcsvlKey :: Lens' MyConfigSyncVolumeLicenses' (Maybe Key)
 mcsvlKey = lens _mcsvlKey (\ s a -> s{_mcsvlKey = a})
 
 -- | List of features supported by the client, i.e., \'RENTALS\'
-mcsvlFeatures :: Lens' MyConfigSyncVolumeLicenses' (Maybe Features)
+mcsvlFeatures :: Lens' MyConfigSyncVolumeLicenses' [Features]
 mcsvlFeatures
   = lens _mcsvlFeatures
       (\ s a -> s{_mcsvlFeatures = a})
+      . _Default
+      . _Coerce
 
 -- | String to identify the originator of this request.
 mcsvlSource :: Lens' MyConfigSyncVolumeLicenses' Text

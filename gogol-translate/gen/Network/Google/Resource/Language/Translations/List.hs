@@ -189,8 +189,7 @@ instance GoogleRequest TranslationsList' where
         type Rs TranslationsList' = TranslationsListResponse
         request = requestWithRoute defReq translateURL
         requestWithRoute r u TranslationsList'{..}
-          = go (_tlQ ^. _Default) (Just _tlTarget) _tlFormat
-              _tlSource
+          = go _tlQ (Just _tlTarget) _tlFormat _tlSource
               (_tlCid ^. _Default)
               _tlQuotaUser
               (Just _tlPrettyPrint)

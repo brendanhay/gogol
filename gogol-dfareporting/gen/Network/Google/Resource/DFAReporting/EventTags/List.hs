@@ -89,7 +89,7 @@ data EventTagsList' = EventTagsList'
     { _etlQuotaUser       :: !(Maybe Text)
     , _etlPrettyPrint     :: !Bool
     , _etlDefinitionsOnly :: !(Maybe Bool)
-    , _etlEventTagTypes   :: !(Maybe EventTagTypes)
+    , _etlEventTagTypes   :: !(Maybe [EventTagTypes])
     , _etlEnabled         :: !(Maybe Bool)
     , _etlUserIP          :: !(Maybe Text)
     , _etlAdvertiserId    :: !(Maybe Int64)
@@ -194,10 +194,12 @@ etlDefinitionsOnly
 -- types can be used to specify whether to use a third-party pixel, a
 -- third-party JavaScript URL, or a third-party click-through URL for
 -- either impression or click tracking.
-etlEventTagTypes :: Lens' EventTagsList' (Maybe EventTagTypes)
+etlEventTagTypes :: Lens' EventTagsList' [EventTagTypes]
 etlEventTagTypes
   = lens _etlEventTagTypes
       (\ s a -> s{_etlEventTagTypes = a})
+      . _Default
+      . _Coerce
 
 -- | Select only enabled event tags. What is considered enabled or disabled
 -- depends on the definitionsOnly parameter. When definitionsOnly is set to

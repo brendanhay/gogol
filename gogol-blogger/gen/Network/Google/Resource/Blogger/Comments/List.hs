@@ -79,7 +79,7 @@ type CommentsListResource =
 --
 -- /See:/ 'commentsList'' smart constructor.
 data CommentsList' = CommentsList'
-    { _clStatus      :: !(Maybe BloggerCommentsListStatus)
+    { _clStatus      :: !(Maybe [BloggerCommentsListStatus])
     , _clQuotaUser   :: !(Maybe Text)
     , _clPrettyPrint :: !Bool
     , _clUserIP      :: !(Maybe Text)
@@ -152,8 +152,11 @@ commentsList' pClBlogId_ pClPostId_ =
     , _clFields = Nothing
     }
 
-clStatus :: Lens' CommentsList' (Maybe BloggerCommentsListStatus)
-clStatus = lens _clStatus (\ s a -> s{_clStatus = a})
+clStatus :: Lens' CommentsList' [BloggerCommentsListStatus]
+clStatus
+  = lens _clStatus (\ s a -> s{_clStatus = a}) .
+      _Default
+      . _Coerce
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40

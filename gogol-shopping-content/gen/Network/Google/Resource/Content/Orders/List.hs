@@ -83,7 +83,7 @@ data OrdersList' = OrdersList'
     , _olUserIP          :: !(Maybe Text)
     , _olAcknowledged    :: !(Maybe Bool)
     , _olKey             :: !(Maybe Key)
-    , _olStatuses        :: !(Maybe Statuses)
+    , _olStatuses        :: !(Maybe [Statuses])
     , _olPageToken       :: !(Maybe Text)
     , _olOAuthToken      :: !(Maybe OAuthToken)
     , _olPlacedDateStart :: !(Maybe Text)
@@ -204,9 +204,11 @@ olKey = lens _olKey (\ s a -> s{_olKey = a})
 -- active is a shortcut for pendingShipment and partiallyShipped, and
 -- completed is a shortcut for shipped , partiallyDelivered, delivered,
 -- partiallyReturned, returned, and canceled.
-olStatuses :: Lens' OrdersList' (Maybe Statuses)
+olStatuses :: Lens' OrdersList' [Statuses]
 olStatuses
-  = lens _olStatuses (\ s a -> s{_olStatuses = a})
+  = lens _olStatuses (\ s a -> s{_olStatuses = a}) .
+      _Default
+      . _Coerce
 
 -- | The token returned by the previous request.
 olPageToken :: Lens' OrdersList' (Maybe Text)

@@ -11,7 +11,7 @@
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 
 -- |
--- Module      : Network.Google.Resource.Gan.Links.Insert
+-- Module      : Network.Google.Resource.GAN.Links.Insert
 -- Copyright   : (c) 2015 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
@@ -20,8 +20,8 @@
 --
 -- | Inserts a new link.
 --
--- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GanLinksInsert@.
-module Network.Google.Resource.Gan.Links.Insert
+-- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GANLinksInsert@.
+module Network.Google.Resource.GAN.Links.Insert
     (
     -- * REST Resource
       LinksInsertResource
@@ -45,10 +45,10 @@ module Network.Google.Resource.Gan.Links.Insert
 import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GanLinksInsert@ which the
+-- | A resource alias for @GANLinksInsert@ which the
 -- 'LinksInsert'' request conforms to.
 type LinksInsertResource =
-     Capture "role" GanLinksInsertRole :>
+     Capture "role" GANLinksInsertRole :>
        Capture "roleId" Text :>
          "link" :>
            QueryParam "quotaUser" Text :>
@@ -69,7 +69,7 @@ data LinksInsert' = LinksInsert'
     , _liUserIP      :: !(Maybe Text)
     , _liPayload     :: !Link
     , _liRoleId      :: !Text
-    , _liRole        :: !GanLinksInsertRole
+    , _liRole        :: !GANLinksInsertRole
     , _liKey         :: !(Maybe Key)
     , _liOAuthToken  :: !(Maybe OAuthToken)
     , _liFields      :: !(Maybe Text)
@@ -99,7 +99,7 @@ data LinksInsert' = LinksInsert'
 linksInsert'
     :: Link -- ^ 'payload'
     -> Text -- ^ 'roleId'
-    -> GanLinksInsertRole -- ^ 'role'
+    -> GANLinksInsertRole -- ^ 'role'
     -> LinksInsert'
 linksInsert' pLiPayload_ pLiRoleId_ pLiRole_ =
     LinksInsert'
@@ -143,7 +143,7 @@ liRoleId = lens _liRoleId (\ s a -> s{_liRoleId = a})
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-liRole :: Lens' LinksInsert' GanLinksInsertRole
+liRole :: Lens' LinksInsert' GANLinksInsertRole
 liRole = lens _liRole (\ s a -> s{_liRole = a})
 
 -- | API key. Your API key identifies your project and provides you with API

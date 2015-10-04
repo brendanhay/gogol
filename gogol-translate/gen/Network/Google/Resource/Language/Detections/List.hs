@@ -147,8 +147,7 @@ instance GoogleRequest DetectionsList' where
         type Rs DetectionsList' = DetectionsListResponse
         request = requestWithRoute defReq translateURL
         requestWithRoute r u DetectionsList'{..}
-          = go (_dlQ ^. _Default) _dlQuotaUser
-              (Just _dlPrettyPrint)
+          = go _dlQ _dlQuotaUser (Just _dlPrettyPrint)
               _dlUserIP
               _dlFields
               _dlKey

@@ -68,7 +68,7 @@ data PageViewsGet' = PageViewsGet'
     , _pvgUserIP      :: !(Maybe Text)
     , _pvgBlogId      :: !Text
     , _pvgKey         :: !(Maybe Key)
-    , _pvgRange       :: !(Maybe Range)
+    , _pvgRange       :: !(Maybe [Range])
     , _pvgOAuthToken  :: !(Maybe OAuthToken)
     , _pvgFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -137,8 +137,11 @@ pvgBlogId
 pvgKey :: Lens' PageViewsGet' (Maybe Key)
 pvgKey = lens _pvgKey (\ s a -> s{_pvgKey = a})
 
-pvgRange :: Lens' PageViewsGet' (Maybe Range)
-pvgRange = lens _pvgRange (\ s a -> s{_pvgRange = a})
+pvgRange :: Lens' PageViewsGet' [Range]
+pvgRange
+  = lens _pvgRange (\ s a -> s{_pvgRange = a}) .
+      _Default
+      . _Coerce
 
 -- | OAuth 2.0 token for the current user.
 pvgOAuthToken :: Lens' PageViewsGet' (Maybe OAuthToken)

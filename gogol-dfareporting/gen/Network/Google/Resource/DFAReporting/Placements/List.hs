@@ -141,7 +141,7 @@ data PlacementsList' = PlacementsList'
     , _plaMaxEndDate           :: !(Maybe Text)
     , _plaUserIP               :: !(Maybe Text)
     , _plaCampaignIds          :: !(Maybe [Int64])
-    , _plaPricingTypes         :: !(Maybe PricingTypes)
+    , _plaPricingTypes         :: !(Maybe [PricingTypes])
     , _plaSearchString         :: !(Maybe Text)
     , _plaSizeIds              :: !(Maybe [Int64])
     , _plaIds                  :: !(Maybe [Int64])
@@ -154,7 +154,7 @@ data PlacementsList' = PlacementsList'
     , _plaSiteIds              :: !(Maybe [Int64])
     , _plaPageToken            :: !(Maybe Text)
     , _plaSortField            :: !(Maybe DfareportingPlacementsListSortField)
-    , _plaCompatibilities      :: !(Maybe Compatibilities)
+    , _plaCompatibilities      :: !(Maybe [Compatibilities])
     , _plaMaxStartDate         :: !(Maybe Text)
     , _plaOAuthToken           :: !(Maybe OAuthToken)
     , _plaAdvertiserIds        :: !(Maybe [Int64])
@@ -316,10 +316,12 @@ plaCampaignIds
       . _Coerce
 
 -- | Select only placements with these pricing types.
-plaPricingTypes :: Lens' PlacementsList' (Maybe PricingTypes)
+plaPricingTypes :: Lens' PlacementsList' [PricingTypes]
 plaPricingTypes
   = lens _plaPricingTypes
       (\ s a -> s{_plaPricingTypes = a})
+      . _Default
+      . _Coerce
 
 -- | Allows searching for placements by name or ID. Wildcards (*) are
 -- allowed. For example, \"placement*2015\" will return placements with
@@ -405,10 +407,12 @@ plaSortField
 -- mobile devices for regular or interstitial ads respectively. APP and
 -- APP_INTERSTITIAL are for rendering in mobile apps.IN_STREAM_VIDEO refers
 -- to rendering in in-stream video ads developed with the VAST standard.
-plaCompatibilities :: Lens' PlacementsList' (Maybe Compatibilities)
+plaCompatibilities :: Lens' PlacementsList' [Compatibilities]
 plaCompatibilities
   = lens _plaCompatibilities
       (\ s a -> s{_plaCompatibilities = a})
+      . _Default
+      . _Coerce
 
 -- | Select only placements or placement groups whose start date is on or
 -- before the specified maxStartDate. The date should be formatted as
