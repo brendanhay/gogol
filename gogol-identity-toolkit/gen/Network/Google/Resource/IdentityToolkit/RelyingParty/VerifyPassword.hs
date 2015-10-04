@@ -54,7 +54,7 @@ type RelyingPartyVerifyPasswordResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[OctetStream]
+                     ReqBody '[JSON]
                        IdentitytoolkitRelyingPartyVerifyPasswordRequest
                        :> Post '[JSON] VerifyPasswordResponse
 

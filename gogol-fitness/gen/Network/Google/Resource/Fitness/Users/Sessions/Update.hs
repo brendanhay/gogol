@@ -60,7 +60,7 @@ type UsersSessionsUpdateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Session :> Put '[JSON] Session
+                           ReqBody '[JSON] Session :> Put '[JSON] Session
 
 -- | Updates or insert a given session.
 --

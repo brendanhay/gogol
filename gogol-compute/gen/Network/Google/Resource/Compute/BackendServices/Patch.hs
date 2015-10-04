@@ -60,7 +60,7 @@ type BackendServicesPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] BackendService :>
+                           ReqBody '[JSON] BackendService :>
                              Patch '[JSON] Operation
 
 -- | Update the entire content of the BackendService resource. This method

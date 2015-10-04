@@ -65,7 +65,7 @@ type ManagementCustomMetricsPatchResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[OctetStream] CustomMetric :>
+                                   ReqBody '[JSON] CustomMetric :>
                                      Patch '[JSON] CustomMetric
 
 -- | Updates an existing custom metric. This method supports patch semantics.

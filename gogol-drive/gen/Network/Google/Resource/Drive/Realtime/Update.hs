@@ -60,7 +60,7 @@ type RealtimeUpdateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Body :> Put '[JSON] ()
+                           ReqBody '[OctetStream] Body :> Put '[JSON] ()
 
 -- | Overwrites the Realtime API data model associated with this file with
 -- the provided JSON data model.

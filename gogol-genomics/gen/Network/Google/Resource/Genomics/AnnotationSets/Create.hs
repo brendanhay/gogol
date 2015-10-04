@@ -55,7 +55,7 @@ type AnnotationSetsCreateResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[OctetStream] AnnotationSet :>
+                     ReqBody '[JSON] AnnotationSet :>
                        Post '[JSON] AnnotationSet
 
 -- | Creates a new annotation set. Caller must have WRITE permission for the

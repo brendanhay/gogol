@@ -59,7 +59,7 @@ type StylePatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] StyleSetting :>
+                           ReqBody '[JSON] StyleSetting :>
                              Patch '[JSON] StyleSetting
 
 -- | Updates an existing style. This method supports patch semantics.

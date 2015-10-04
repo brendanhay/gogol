@@ -59,7 +59,7 @@ type NotificationsUpdateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Notification :>
+                           ReqBody '[JSON] Notification :>
                              Put '[JSON] Notification
 
 -- | Updates a notification.

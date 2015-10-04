@@ -54,7 +54,7 @@ type URLInsertResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[OctetStream] URL :> Post '[JSON] URL
+                     ReqBody '[JSON] URL :> Post '[JSON] URL
 
 -- | Creates a new short URL.
 --

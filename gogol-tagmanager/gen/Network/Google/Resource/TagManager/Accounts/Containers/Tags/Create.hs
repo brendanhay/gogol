@@ -60,7 +60,7 @@ type AccountsContainersTagsCreateResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] Tag :> Post '[JSON] Tag
+                             ReqBody '[JSON] Tag :> Post '[JSON] Tag
 
 -- | Creates a GTM Tag.
 --

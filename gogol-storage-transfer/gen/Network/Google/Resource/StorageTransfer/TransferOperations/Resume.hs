@@ -68,7 +68,7 @@ type TransferOperationsResumeResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[OctetStream]
+                                   ReqBody '[JSON]
                                      ResumeTransferOperationRequest
                                      :> Post '[JSON] Empty
 

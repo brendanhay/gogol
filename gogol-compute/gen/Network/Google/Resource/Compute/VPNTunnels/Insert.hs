@@ -60,8 +60,7 @@ type VPNTunnelsInsertResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] VPNTunnel :>
-                             Post '[JSON] Operation
+                           ReqBody '[JSON] VPNTunnel :> Post '[JSON] Operation
 
 -- | Creates a VpnTunnel resource in the specified project and region using
 -- the data included in the request.

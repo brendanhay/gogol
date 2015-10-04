@@ -60,8 +60,7 @@ type SubscriptionsChangeSeatsResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] Seats :>
-                               Post '[JSON] Subscription
+                             ReqBody '[JSON] Seats :> Post '[JSON] Subscription
 
 -- | Changes the seats configuration of a subscription
 --

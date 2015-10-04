@@ -66,7 +66,7 @@ type ManagementExperimentsPatchResource =
                                QueryParam "key" Key :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
-                                     ReqBody '[OctetStream] Experiment :>
+                                     ReqBody '[JSON] Experiment :>
                                        Patch '[JSON] Experiment
 
 -- | Update an existing experiment. This method supports patch semantics.

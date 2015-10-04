@@ -60,8 +60,7 @@ type ManagementFiltersPatchResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] Filter :>
-                               Patch '[JSON] Filter
+                             ReqBody '[JSON] Filter :> Patch '[JSON] Filter
 
 -- | Updates an existing filter. This method supports patch semantics.
 --

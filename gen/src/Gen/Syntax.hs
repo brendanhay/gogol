@@ -107,10 +107,10 @@ verbAlias n m
                      (TyCon "Body")]
 
           | Just b <- _mRequest m =
-              [TyApp (TyApp (TyCon "ReqBody") octet) (tycon (ref b))]
+              [TyApp (TyApp (TyCon "ReqBody") json) (tycon (ref b))]
 
           | _mSupportsMediaUpload m =
-              [TyApp (TyApp (TyCon "ReqBody") json) (TyCon "Body")]
+              [TyApp (TyApp (TyCon "ReqBody") octet) (TyCon "Body")]
 
           | otherwise = []
 

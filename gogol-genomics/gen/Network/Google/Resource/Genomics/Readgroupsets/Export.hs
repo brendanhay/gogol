@@ -58,7 +58,7 @@ type ReadgroupsetsExportResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] ExportReadGroupSetsRequest :>
+                       ReqBody '[JSON] ExportReadGroupSetsRequest :>
                          Post '[JSON] ExportReadGroupSetsResponse
 
 -- | Exports read group sets to a BAM file in Google Cloud Storage. Note that

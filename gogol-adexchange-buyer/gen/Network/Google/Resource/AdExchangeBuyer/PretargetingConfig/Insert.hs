@@ -56,7 +56,7 @@ type PretargetingConfigInsertResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] PretargetingConfig :>
+                       ReqBody '[JSON] PretargetingConfig :>
                          Post '[JSON] PretargetingConfig
 
 -- | Inserts a new pretargeting configuration.

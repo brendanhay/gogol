@@ -60,7 +60,7 @@ type PlacementGroupsPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] PlacementGroup :>
+                           ReqBody '[JSON] PlacementGroup :>
                              Patch '[JSON] PlacementGroup
 
 -- | Updates an existing placement group. This method supports patch

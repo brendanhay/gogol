@@ -57,7 +57,7 @@ type ReadgroupsetsCallResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] CallReadGroupSetsRequest :>
+                       ReqBody '[JSON] CallReadGroupSetsRequest :>
                          Post '[JSON] CallReadGroupSetsResponse
 
 -- | Calls variants on read data from existing read group sets or files from

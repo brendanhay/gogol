@@ -59,7 +59,7 @@ type RollingUpdatesInsertResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] RollingUpdate :>
+                           ReqBody '[JSON] RollingUpdate :>
                              Post '[JSON] Operation
 
 -- | Inserts and starts a new update.

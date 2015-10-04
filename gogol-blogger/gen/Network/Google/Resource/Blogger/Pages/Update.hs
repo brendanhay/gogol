@@ -63,7 +63,7 @@ type PagesUpdateResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[OctetStream] Page :> Put '[JSON] Page
+                               ReqBody '[JSON] Page :> Put '[JSON] Page
 
 -- | Update a page.
 --

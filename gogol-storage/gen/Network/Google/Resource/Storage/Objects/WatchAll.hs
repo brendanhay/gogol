@@ -70,7 +70,7 @@ type ObjectsWatchAllResource =
                                  QueryParam "key" Key :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
-                                       ReqBody '[OctetStream] Channel :>
+                                       ReqBody '[JSON] Channel :>
                                          Post '[JSON] Channel
 
 -- | Watch for changes on all objects in a bucket.

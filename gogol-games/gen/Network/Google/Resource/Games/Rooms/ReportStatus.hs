@@ -61,7 +61,7 @@ type RoomsReportStatusResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] RoomP2PStatuses :>
+                           ReqBody '[JSON] RoomP2PStatuses :>
                              Post '[JSON] RoomStatus
 
 -- | Updates sent by a client reporting the status of peers in a room. For

@@ -59,7 +59,7 @@ type CollectionsPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Collection :>
+                           ReqBody '[JSON] Collection :>
                              Patch '[JSON] Collection
 
 -- | Updates a collection. This method supports patch semantics.

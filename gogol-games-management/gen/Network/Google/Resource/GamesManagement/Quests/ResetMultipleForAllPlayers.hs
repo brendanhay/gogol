@@ -57,9 +57,8 @@ type QuestsResetMultipleForAllPlayersResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream]
-                         QuestsResetMultipleForAllRequest
-                         :> Post '[JSON] ()
+                       ReqBody '[JSON] QuestsResetMultipleForAllRequest :>
+                         Post '[JSON] ()
 
 -- | Resets quests with the given IDs for all players. This method is only
 -- available to user accounts for your developer console. Only draft quests

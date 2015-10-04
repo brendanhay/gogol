@@ -76,7 +76,7 @@ type CoursesTeachersCreateResource =
                                  QueryParam "key" Key :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
-                                       ReqBody '[OctetStream] Teacher :>
+                                       ReqBody '[JSON] Teacher :>
                                          Post '[JSON] Teacher
 
 -- | Creates a teacher of a course. This method returns the following error

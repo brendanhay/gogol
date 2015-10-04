@@ -63,7 +63,7 @@ type CreativeFieldValuesPatchResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[OctetStream] CreativeFieldValue :>
+                               ReqBody '[JSON] CreativeFieldValue :>
                                  Patch '[JSON] CreativeFieldValue
 
 -- | Updates an existing creative field value. This method supports patch

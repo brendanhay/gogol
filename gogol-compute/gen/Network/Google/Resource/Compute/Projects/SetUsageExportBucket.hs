@@ -58,7 +58,7 @@ type ProjectsSetUsageExportBucketResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] UsageExportLocation :>
+                       ReqBody '[JSON] UsageExportLocation :>
                          Post '[JSON] Operation
 
 -- | Enables the usage export feature and sets the usage export bucket where

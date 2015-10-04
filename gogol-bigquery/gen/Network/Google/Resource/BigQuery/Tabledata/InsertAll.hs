@@ -64,9 +64,8 @@ type TabledataInsertAllResource =
                            QueryParam "key" Key :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
-                                 ReqBody '[OctetStream]
-                                   TableDataInsertAllRequest
-                                   :> Post '[JSON] TableDataInsertAllResponse
+                                 ReqBody '[JSON] TableDataInsertAllRequest :>
+                                   Post '[JSON] TableDataInsertAllResponse
 
 -- | Streams data into BigQuery one record at a time without needing to run a
 -- load job. Requires the WRITER dataset role.

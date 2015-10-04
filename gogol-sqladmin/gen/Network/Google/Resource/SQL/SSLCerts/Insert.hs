@@ -62,7 +62,7 @@ type SSLCertsInsertResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] SSLCertsInsertRequest :>
+                             ReqBody '[JSON] SSLCertsInsertRequest :>
                                Post '[JSON] SSLCertsInsertResponse
 
 -- | Creates an SSL certificate and returns it along with the private key and

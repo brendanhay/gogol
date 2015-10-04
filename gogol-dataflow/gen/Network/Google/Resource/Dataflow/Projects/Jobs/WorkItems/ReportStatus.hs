@@ -73,7 +73,7 @@ type ProjectsJobsWorkItemsReportStatusResource =
                                      QueryParam "key" Key :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
-                                           ReqBody '[OctetStream]
+                                           ReqBody '[JSON]
                                              ReportWorkItemStatusRequest
                                              :>
                                              Post '[JSON]

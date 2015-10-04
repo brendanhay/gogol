@@ -58,8 +58,7 @@ type DeploymentsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] Deployment :>
-                           Post '[JSON] Operation
+                         ReqBody '[JSON] Deployment :> Post '[JSON] Operation
 
 -- | Creates a deployment and all of the resources described by the
 -- deployment manifest.

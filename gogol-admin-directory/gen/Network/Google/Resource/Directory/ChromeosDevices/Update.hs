@@ -64,7 +64,7 @@ type ChromeosDevicesUpdateResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[OctetStream] ChromeOSDevice :>
+                               ReqBody '[JSON] ChromeOSDevice :>
                                  Put '[JSON] ChromeOSDevice
 
 -- | Update Chrome OS Device

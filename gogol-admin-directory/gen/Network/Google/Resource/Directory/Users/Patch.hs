@@ -56,7 +56,7 @@ type UsersPatchResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] User :> Patch '[JSON] User
+                       ReqBody '[JSON] User :> Patch '[JSON] User
 
 -- | update user. This method supports patch semantics.
 --

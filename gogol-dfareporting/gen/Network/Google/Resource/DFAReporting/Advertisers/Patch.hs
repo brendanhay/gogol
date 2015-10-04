@@ -59,7 +59,7 @@ type AdvertisersPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Advertiser :>
+                           ReqBody '[JSON] Advertiser :>
                              Patch '[JSON] Advertiser
 
 -- | Updates an existing advertiser. This method supports patch semantics.

@@ -58,7 +58,7 @@ type ClientAccessInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] ClientAccessCapabilities :>
+                         ReqBody '[JSON] ClientAccessCapabilities :>
                            Post '[JSON] ClientAccessCapabilities
 
 --

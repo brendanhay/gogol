@@ -56,8 +56,8 @@ type OrdersCreatetestOrderResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] OrdersCreateTestOrderRequest
-                         :> Post '[JSON] OrdersCreateTestOrderResponse
+                       ReqBody '[JSON] OrdersCreateTestOrderRequest :>
+                         Post '[JSON] OrdersCreateTestOrderResponse
 
 -- | Sandbox only. Creates a test order.
 --

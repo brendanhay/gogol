@@ -67,8 +67,7 @@ type EventsPatchResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[OctetStream] Event :>
-                                     Patch '[JSON] Event
+                                   ReqBody '[JSON] Event :> Patch '[JSON] Event
 
 -- | Updates an event. This method supports patch semantics.
 --

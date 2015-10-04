@@ -57,7 +57,7 @@ type ScoresSubmitMultipleResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] PlayerScoreSubmissionList :>
+                         ReqBody '[JSON] PlayerScoreSubmissionList :>
                            Post '[JSON] PlayerScoreListResponse
 
 -- | Submits multiple scores to leaderboards.

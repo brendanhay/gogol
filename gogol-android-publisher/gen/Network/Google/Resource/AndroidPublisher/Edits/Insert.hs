@@ -56,8 +56,7 @@ type EditsInsertResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] AppEdit :>
-                         Post '[JSON] AppEdit
+                       ReqBody '[JSON] AppEdit :> Post '[JSON] AppEdit
 
 -- | Creates a new edit for an app, populated with the app\'s current state.
 --

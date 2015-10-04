@@ -61,8 +61,8 @@ type AnnotationsBatchCreateResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[OctetStream] BatchCreateAnnotationsRequest
-                       :> Post '[JSON] BatchAnnotationsResponse
+                     ReqBody '[JSON] BatchCreateAnnotationsRequest :>
+                       Post '[JSON] BatchAnnotationsResponse
 
 -- | Creates one or more new annotations atomically. All annotations must
 -- belong to the same annotation set. Caller must have WRITE permission for

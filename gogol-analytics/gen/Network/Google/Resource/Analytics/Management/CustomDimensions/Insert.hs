@@ -61,7 +61,7 @@ type ManagementCustomDimensionsInsertResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[OctetStream] CustomDimension :>
+                               ReqBody '[JSON] CustomDimension :>
                                  Post '[JSON] CustomDimension
 
 -- | Create a new custom dimension.

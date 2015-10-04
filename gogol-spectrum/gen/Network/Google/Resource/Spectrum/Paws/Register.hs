@@ -55,7 +55,7 @@ type PawsRegisterResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[OctetStream] PawsRegisterRequest :>
+                     ReqBody '[JSON] PawsRegisterRequest :>
                        Post '[JSON] PawsRegisterResponse
 
 -- | The Google Spectrum Database implements registration in the getSpectrum

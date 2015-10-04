@@ -57,7 +57,7 @@ type FloodlightActivityGroupsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] FloodlightActivityGroup :>
+                         ReqBody '[JSON] FloodlightActivityGroup :>
                            Post '[JSON] FloodlightActivityGroup
 
 -- | Inserts a new floodlight activity group.

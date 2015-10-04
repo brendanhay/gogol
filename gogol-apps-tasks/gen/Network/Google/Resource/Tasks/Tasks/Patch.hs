@@ -59,7 +59,7 @@ type TasksPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Task :> Patch '[JSON] Task
+                           ReqBody '[JSON] Task :> Patch '[JSON] Task
 
 -- | Updates the specified task. This method supports patch semantics.
 --

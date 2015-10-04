@@ -60,8 +60,7 @@ type AccountsContainersVariablesCreateResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] Variable :>
-                               Post '[JSON] Variable
+                             ReqBody '[JSON] Variable :> Post '[JSON] Variable
 
 -- | Creates a GTM Variable.
 --

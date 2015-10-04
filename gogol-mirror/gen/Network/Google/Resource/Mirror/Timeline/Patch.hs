@@ -56,7 +56,7 @@ type TimelinePatchResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] TimelineItem :>
+                       ReqBody '[JSON] TimelineItem :>
                          Patch '[JSON] TimelineItem
 
 -- | Updates a timeline item in place. This method supports patch semantics.

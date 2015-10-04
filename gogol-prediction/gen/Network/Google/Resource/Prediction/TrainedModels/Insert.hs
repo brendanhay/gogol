@@ -56,7 +56,7 @@ type TrainedModelsInsertResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] Insert :> Post '[JSON] Insert2
+                       ReqBody '[JSON] Insert :> Post '[JSON] Insert2
 
 -- | Train a Prediction API model.
 --

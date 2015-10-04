@@ -62,7 +62,7 @@ type ManagementWebPropertyAdWordsLinksInsertResource
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[OctetStream] EntityAdWordsLink :>
+                               ReqBody '[JSON] EntityAdWordsLink :>
                                  Post '[JSON] EntityAdWordsLink
 
 -- | Creates a webProperty-AdWords link.

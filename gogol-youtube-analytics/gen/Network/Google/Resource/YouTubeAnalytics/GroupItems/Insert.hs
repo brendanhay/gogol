@@ -56,8 +56,7 @@ type GroupItemsInsertResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] GroupItem :>
-                         Post '[JSON] GroupItem
+                       ReqBody '[JSON] GroupItem :> Post '[JSON] GroupItem
 
 -- | Creates a group item.
 --

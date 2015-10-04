@@ -57,7 +57,7 @@ type ChildrenInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] ChildReference :>
+                         ReqBody '[JSON] ChildReference :>
                            Post '[JSON] ChildReference
 
 -- | Inserts a file into a folder.

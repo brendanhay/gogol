@@ -69,7 +69,7 @@ type ProjectsTopicsSetIAMPolicyResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[OctetStream] SetIAMPolicyRequest :>
+                                   ReqBody '[JSON] SetIAMPolicyRequest :>
                                      Post '[JSON] Policy
 
 -- | Sets the access control policy on the specified resource. Replaces any

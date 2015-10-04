@@ -86,7 +86,7 @@ type FilesPatchResource =
                                              QueryParam "oauth_token" OAuthToken
                                                :>
                                                QueryParam "alt" AltJSON :>
-                                                 ReqBody '[OctetStream] File :>
+                                                 ReqBody '[JSON] File :>
                                                    Patch '[JSON] File
 
 -- | Updates file metadata and\/or content. This method supports patch

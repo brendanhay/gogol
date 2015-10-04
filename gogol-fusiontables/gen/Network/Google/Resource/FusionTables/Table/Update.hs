@@ -59,7 +59,7 @@ type TableUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] Table :> Put '[JSON] Table
+                         ReqBody '[JSON] Table :> Put '[JSON] Table
 
 -- | Updates an existing table. Unless explicitly requested, only the name,
 -- description, and attribution will be updated.

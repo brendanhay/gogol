@@ -59,7 +59,7 @@ type ReportsPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Report :> Patch '[JSON] Report
+                           ReqBody '[JSON] Report :> Patch '[JSON] Report
 
 -- | Updates a report. This method supports patch semantics.
 --

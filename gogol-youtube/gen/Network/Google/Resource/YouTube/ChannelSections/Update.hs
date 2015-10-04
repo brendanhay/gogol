@@ -58,7 +58,7 @@ type ChannelSectionsUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] ChannelSection :>
+                         ReqBody '[JSON] ChannelSection :>
                            Put '[JSON] ChannelSection
 
 -- | Update a channelSection.

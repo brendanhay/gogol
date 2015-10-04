@@ -56,7 +56,7 @@ type UsersUpdateResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] User :> Put '[JSON] User
+                       ReqBody '[JSON] User :> Put '[JSON] User
 
 -- | update user
 --

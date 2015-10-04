@@ -60,7 +60,7 @@ type AutoscalersInsertResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] Autoscaler :>
+                             ReqBody '[JSON] Autoscaler :>
                                Post '[JSON] Operation
 
 -- | Adds new Autoscaler resource.

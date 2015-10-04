@@ -55,7 +55,7 @@ type LineitemsDownloadlineitemsResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] DownloadLineItemsRequest :>
+                       ReqBody '[JSON] DownloadLineItemsRequest :>
                          Post '[JSON] DownloadLineItemsResponse
 
 -- | Retrieves line items in CSV format.

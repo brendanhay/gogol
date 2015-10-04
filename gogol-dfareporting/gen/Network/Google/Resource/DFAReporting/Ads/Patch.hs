@@ -59,7 +59,7 @@ type AdsPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Ad :> Patch '[JSON] Ad
+                           ReqBody '[JSON] Ad :> Patch '[JSON] Ad
 
 -- | Updates an existing ad. This method supports patch semantics.
 --

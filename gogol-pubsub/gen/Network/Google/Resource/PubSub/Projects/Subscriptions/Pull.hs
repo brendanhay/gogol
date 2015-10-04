@@ -71,7 +71,7 @@ type ProjectsSubscriptionsPullResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[OctetStream] PullRequest :>
+                                   ReqBody '[JSON] PullRequest :>
                                      Post '[JSON] PullResponse
 
 -- | Pulls messages from the server. Returns an empty list if there are no

@@ -59,7 +59,7 @@ type TargetHTTPProxiesSetURLMapResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] URLMapReference :>
+                           ReqBody '[JSON] URLMapReference :>
                              Post '[JSON] Operation
 
 -- | Changes the URL map for TargetHttpProxy.

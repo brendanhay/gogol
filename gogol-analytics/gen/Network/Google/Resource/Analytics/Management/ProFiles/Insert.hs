@@ -61,8 +61,7 @@ type ManagementProFilesInsertResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[OctetStream] ProFile :>
-                                 Post '[JSON] ProFile
+                               ReqBody '[JSON] ProFile :> Post '[JSON] ProFile
 
 -- | Create a new view (profile).
 --

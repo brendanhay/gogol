@@ -64,7 +64,7 @@ type ChromeosDevicesPatchResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[OctetStream] ChromeOSDevice :>
+                               ReqBody '[JSON] ChromeOSDevice :>
                                  Patch '[JSON] ChromeOSDevice
 
 -- | Update Chrome OS Device. This method supports patch semantics.

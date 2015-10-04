@@ -59,7 +59,7 @@ type TasksInsertResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Task :> Post '[JSON] Task
+                           ReqBody '[JSON] Task :> Post '[JSON] Task
 
 -- | Insert a new task in a TaskQueue
 --

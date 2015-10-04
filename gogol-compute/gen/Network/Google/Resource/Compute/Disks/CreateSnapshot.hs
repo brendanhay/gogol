@@ -62,7 +62,7 @@ type DisksCreateSnapshotResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[OctetStream] Snapshot :>
+                               ReqBody '[JSON] Snapshot :>
                                  Post '[JSON] Operation
 
 -- | Creates a snapshot of this disk.

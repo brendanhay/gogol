@@ -57,8 +57,7 @@ type VariantsetsCreateResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[OctetStream] VariantSet :>
-                       Post '[JSON] VariantSet
+                     ReqBody '[JSON] VariantSet :> Post '[JSON] VariantSet
 
 -- | Creates a new variant set (only necessary in v1). The provided variant
 -- set must have a valid datasetId set - all other fields are optional.

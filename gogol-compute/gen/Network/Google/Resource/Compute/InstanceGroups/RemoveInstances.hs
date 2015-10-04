@@ -62,7 +62,7 @@ type InstanceGroupsRemoveInstancesResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[OctetStream]
+                               ReqBody '[JSON]
                                  InstanceGroupsRemoveInstancesRequest
                                  :> Post '[JSON] Operation
 

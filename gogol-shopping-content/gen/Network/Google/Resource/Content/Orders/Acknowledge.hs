@@ -59,7 +59,7 @@ type OrdersAcknowledgeResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] OrdersAcknowledgeRequest :>
+                           ReqBody '[JSON] OrdersAcknowledgeRequest :>
                              Post '[JSON] OrdersAcknowledgeResponse
 
 -- | Marks an order as acknowledged.

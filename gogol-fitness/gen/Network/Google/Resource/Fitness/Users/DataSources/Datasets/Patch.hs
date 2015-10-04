@@ -66,8 +66,7 @@ type UsersDataSourcesDatasetsPatchResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[OctetStream] Dataset :>
-                                 Patch '[JSON] Dataset
+                               ReqBody '[JSON] Dataset :> Patch '[JSON] Dataset
 
 -- | Adds data points to a dataset. The dataset need not be previously
 -- created. All points within the given dataset will be returned with

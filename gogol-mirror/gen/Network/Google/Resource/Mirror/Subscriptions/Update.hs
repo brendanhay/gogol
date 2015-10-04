@@ -56,7 +56,7 @@ type SubscriptionsUpdateResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] Subscription :>
+                       ReqBody '[JSON] Subscription :>
                          Put '[JSON] Subscription
 
 -- | Updates an existing subscription in place.

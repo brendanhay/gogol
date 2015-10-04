@@ -57,8 +57,7 @@ type CollectionsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] Collection :>
-                           Post '[JSON] Collection
+                         ReqBody '[JSON] Collection :> Post '[JSON] Collection
 
 -- | Creates a new collection.
 --

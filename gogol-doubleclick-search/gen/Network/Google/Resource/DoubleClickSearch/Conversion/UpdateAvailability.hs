@@ -56,7 +56,7 @@ type ConversionUpdateAvailabilityResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] UpdateAvailabilityRequest :>
+                       ReqBody '[JSON] UpdateAvailabilityRequest :>
                          Post '[JSON] UpdateAvailabilityResponse
 
 -- | Updates the availabilities of a batch of floodlight activities in

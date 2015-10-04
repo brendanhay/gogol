@@ -62,7 +62,7 @@ type MarketplaceOrdersUpdateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] MarketplaceOrder :>
+                           ReqBody '[JSON] MarketplaceOrder :>
                              Put '[JSON] MarketplaceOrder
 
 -- | Update the given order

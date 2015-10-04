@@ -61,7 +61,7 @@ type InstancesUpdateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] DatabaseInstance :>
+                           ReqBody '[JSON] DatabaseInstance :>
                              Put '[JSON] Operation
 
 -- | Updates settings of a Cloud SQL instance. Caution: This is not a partial

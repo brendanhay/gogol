@@ -57,7 +57,7 @@ type FloodlightActivitiesUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] FloodlightActivity :>
+                         ReqBody '[JSON] FloodlightActivity :>
                            Put '[JSON] FloodlightActivity
 
 -- | Updates an existing floodlight activity.

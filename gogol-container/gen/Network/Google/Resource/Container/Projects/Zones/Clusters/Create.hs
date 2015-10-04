@@ -66,7 +66,7 @@ type ProjectsZonesClustersCreateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] CreateClusterRequest :>
+                           ReqBody '[JSON] CreateClusterRequest :>
                              Post '[JSON] Operation
 
 -- | Creates a cluster, consisting of the specified number and type of Google

@@ -54,7 +54,7 @@ type MapsCreateResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[OctetStream] Map :> Post '[JSON] Map
+                     ReqBody '[JSON] Map :> Post '[JSON] Map
 
 -- | Create a map asset.
 --

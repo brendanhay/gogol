@@ -59,7 +59,7 @@ type LicenseAssignmentsInsertResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] LicenseAssignmentInsert :>
+                           ReqBody '[JSON] LicenseAssignmentInsert :>
                              Post '[JSON] LicenseAssignment
 
 -- | Assign License.

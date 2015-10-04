@@ -57,8 +57,7 @@ type VariantsetsUpdateResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] VariantSet :>
-                         Put '[JSON] VariantSet
+                       ReqBody '[JSON] VariantSet :> Put '[JSON] VariantSet
 
 -- | Updates a variant set\'s metadata. All other modifications are silently
 -- ignored.

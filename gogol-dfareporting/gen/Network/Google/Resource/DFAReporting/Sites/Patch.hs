@@ -59,7 +59,7 @@ type SitesPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Site :> Patch '[JSON] Site
+                           ReqBody '[JSON] Site :> Patch '[JSON] Site
 
 -- | Updates an existing site. This method supports patch semantics.
 --

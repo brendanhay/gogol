@@ -60,8 +60,7 @@ type InstancesInsertResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Instance :>
-                             Post '[JSON] Operation
+                           ReqBody '[JSON] Instance :> Post '[JSON] Operation
 
 -- | Creates an instance resource in the specified project using the data
 -- included in the request.

@@ -62,7 +62,7 @@ type RepliesUpdateResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[OctetStream] CommentReply :>
+                               ReqBody '[JSON] CommentReply :>
                                  Put '[JSON] CommentReply
 
 -- | Updates an existing reply.

@@ -56,7 +56,7 @@ type GroupsPatchResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] Group :> Patch '[JSON] Group
+                       ReqBody '[JSON] Group :> Patch '[JSON] Group
 
 -- | Update Group. This method supports patch semantics.
 --

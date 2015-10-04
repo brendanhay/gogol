@@ -57,7 +57,7 @@ type SitesInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] Site :> Post '[JSON] Site
+                         ReqBody '[JSON] Site :> Post '[JSON] Site
 
 -- | Inserts a new site.
 --

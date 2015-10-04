@@ -69,7 +69,7 @@ type ConversionPatchResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[OctetStream] ConversionList :>
+                                   ReqBody '[JSON] ConversionList :>
                                      Patch '[JSON] ConversionList
 
 -- | Updates a batch of conversions in DoubleClick Search. This method

@@ -61,7 +61,7 @@ type ImageConfigurationsUploadResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Body :>
+                           ReqBody '[OctetStream] Body :>
                              Post '[JSON] ImageConfiguration
 
 -- | Uploads an image for a resource with the given ID and image type.

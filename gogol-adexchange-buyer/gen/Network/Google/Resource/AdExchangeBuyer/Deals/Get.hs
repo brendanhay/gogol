@@ -56,7 +56,7 @@ type DealsGetResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream]
+                       ReqBody '[JSON]
                          GetFinalizedNegotiationByExternalDealIdRequest
                          :> Get '[JSON] NegotiationDTO
 

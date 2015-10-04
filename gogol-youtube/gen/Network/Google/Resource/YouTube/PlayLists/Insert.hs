@@ -60,8 +60,7 @@ type PlayListsInsertResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] PlayList :>
-                             Post '[JSON] PlayList
+                           ReqBody '[JSON] PlayList :> Post '[JSON] PlayList
 
 -- | Creates a playlist.
 --

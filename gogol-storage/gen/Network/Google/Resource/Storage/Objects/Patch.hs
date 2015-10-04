@@ -72,7 +72,7 @@ type ObjectsPatchResource =
                                  QueryParam "key" Key :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
-                                       ReqBody '[OctetStream] Object :>
+                                       ReqBody '[JSON] Object :>
                                          Patch '[JSON] Object
 
 -- | Updates a data blob\'s associated metadata. This method supports patch

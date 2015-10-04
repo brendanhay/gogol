@@ -57,8 +57,7 @@ type ProjectsSetCommonInstanceMetadataResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] Metadata :>
-                         Post '[JSON] Operation
+                       ReqBody '[JSON] Metadata :> Post '[JSON] Operation
 
 -- | Sets metadata common to all instances within the specified project using
 -- the data included in the request.

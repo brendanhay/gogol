@@ -69,8 +69,7 @@ type BeaconsRegisterResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[OctetStream] Beacon :>
-                                     Post '[JSON] Beacon
+                                   ReqBody '[JSON] Beacon :> Post '[JSON] Beacon
 
 -- | Registers a previously unregistered beacon given its \`advertisedId\`.
 -- These IDs are unique within the system. An ID can be registered only

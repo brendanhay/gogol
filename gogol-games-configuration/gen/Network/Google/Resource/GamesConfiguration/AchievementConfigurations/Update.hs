@@ -56,7 +56,7 @@ type AchievementConfigurationsUpdateResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] AchievementConfiguration :>
+                       ReqBody '[JSON] AchievementConfiguration :>
                          Put '[JSON] AchievementConfiguration
 
 -- | Update the metadata of the achievement configuration with the given ID.

@@ -62,8 +62,7 @@ type MomentsInsertResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] Moment :>
-                               Post '[JSON] Moment
+                             ReqBody '[JSON] Moment :> Post '[JSON] Moment
 
 -- | Record a moment representing a user\'s action such as making a purchase
 -- or commenting on a blog.

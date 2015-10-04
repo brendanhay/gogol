@@ -57,8 +57,7 @@ type SubAccountsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] SubAccount :>
-                           Post '[JSON] SubAccount
+                         ReqBody '[JSON] SubAccount :> Post '[JSON] SubAccount
 
 -- | Inserts a new subaccount.
 --

@@ -60,8 +60,7 @@ type TargetPoolsInsertResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] TargetPool :>
-                             Post '[JSON] Operation
+                           ReqBody '[JSON] TargetPool :> Post '[JSON] Operation
 
 -- | Creates a TargetPool resource in the specified project and region using
 -- the data included in the request.

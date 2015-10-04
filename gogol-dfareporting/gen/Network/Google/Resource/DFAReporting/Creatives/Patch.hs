@@ -59,8 +59,7 @@ type CreativesPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Creative :>
-                             Patch '[JSON] Creative
+                           ReqBody '[JSON] Creative :> Patch '[JSON] Creative
 
 -- | Updates an existing creative. This method supports patch semantics.
 --

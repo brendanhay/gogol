@@ -64,7 +64,7 @@ type TargetPoolsSetBackupResource =
                            QueryParam "key" Key :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
-                                 ReqBody '[OctetStream] TargetReference :>
+                                 ReqBody '[JSON] TargetReference :>
                                    Post '[JSON] Operation
 
 -- | Changes backup pool configurations.

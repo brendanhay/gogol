@@ -57,7 +57,7 @@ type DirectorySitesInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] DirectorySite :>
+                         ReqBody '[JSON] DirectorySite :>
                            Post '[JSON] DirectorySite
 
 -- | Inserts a new directory site.

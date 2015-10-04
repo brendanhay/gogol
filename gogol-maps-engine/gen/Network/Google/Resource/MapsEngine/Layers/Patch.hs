@@ -56,7 +56,7 @@ type LayersPatchResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] Layer :> Patch '[JSON] ()
+                       ReqBody '[JSON] Layer :> Patch '[JSON] ()
 
 -- | Mutate a layer asset.
 --

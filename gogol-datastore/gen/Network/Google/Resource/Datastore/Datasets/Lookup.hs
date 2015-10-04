@@ -56,7 +56,7 @@ type DatasetsLookupResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltPROTO :>
-                       ReqBody '[OctetStream] LookupRequest :>
+                       ReqBody '[JSON] LookupRequest :>
                          Post '[JSON] LookupResponse
 
 -- | Look up some entities by key.

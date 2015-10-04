@@ -59,7 +59,7 @@ type NotificationsPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Notification :>
+                           ReqBody '[JSON] Notification :>
                              Patch '[JSON] Notification
 
 -- | Updates a notification. This method supports patch semantics.

@@ -63,8 +63,7 @@ type InstancesSetTagsResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[OctetStream] Tags :>
-                                 Post '[JSON] Operation
+                               ReqBody '[JSON] Tags :> Post '[JSON] Operation
 
 -- | Sets tags for the specified instance to the data included in the
 -- request.

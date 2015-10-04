@@ -61,7 +61,7 @@ type PermissionsPatchResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] Permission :>
+                             ReqBody '[JSON] Permission :>
                                Patch '[JSON] Permission
 
 -- | Updates a permission using patch semantics.

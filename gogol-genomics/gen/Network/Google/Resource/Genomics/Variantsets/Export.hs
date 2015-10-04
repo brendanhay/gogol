@@ -57,7 +57,7 @@ type VariantsetsExportResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] ExportVariantSetRequest :>
+                         ReqBody '[JSON] ExportVariantSetRequest :>
                            Post '[JSON] ExportVariantSetResponse
 
 -- | Exports variant set data to an external destination.

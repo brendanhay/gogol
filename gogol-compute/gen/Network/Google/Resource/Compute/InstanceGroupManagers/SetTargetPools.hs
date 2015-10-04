@@ -64,7 +64,7 @@ type InstanceGroupManagersSetTargetPoolsResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[OctetStream]
+                               ReqBody '[JSON]
                                  InstanceGroupManagersSetTargetPoolsRequest
                                  :> Post '[JSON] Operation
 

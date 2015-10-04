@@ -55,7 +55,7 @@ type MarketplaceOrdersInsertResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] CreateOrdersRequest :>
+                       ReqBody '[JSON] CreateOrdersRequest :>
                          Post '[JSON] CreateOrdersResponse
 
 -- | Create the given list of orders

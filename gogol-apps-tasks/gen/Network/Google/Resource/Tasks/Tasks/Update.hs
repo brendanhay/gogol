@@ -59,7 +59,7 @@ type TasksUpdateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Task :> Put '[JSON] Task
+                           ReqBody '[JSON] Task :> Put '[JSON] Task
 
 -- | Updates the specified task.
 --

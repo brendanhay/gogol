@@ -63,8 +63,7 @@ type UsersDataSourcesCreateResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] DataSource :>
-                         Post '[JSON] DataSource
+                       ReqBody '[JSON] DataSource :> Post '[JSON] DataSource
 
 -- | Creates a new data source that is unique across all data sources
 -- belonging to this user. The data stream ID field can be omitted and will

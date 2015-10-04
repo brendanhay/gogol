@@ -58,7 +58,7 @@ type UsersLabelsPatchResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] Label :> Patch '[JSON] Label
+                         ReqBody '[JSON] Label :> Patch '[JSON] Label
 
 -- | Updates the specified label. This method supports patch semantics.
 --

@@ -58,7 +58,7 @@ type GlobalForwardingRulesInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] ForwardingRule :>
+                         ReqBody '[JSON] ForwardingRule :>
                            Post '[JSON] Operation
 
 -- | Creates a ForwardingRule resource in the specified project and region

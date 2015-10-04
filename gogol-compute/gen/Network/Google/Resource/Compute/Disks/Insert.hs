@@ -62,8 +62,7 @@ type DisksInsertResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] Disk :>
-                               Post '[JSON] Operation
+                             ReqBody '[JSON] Disk :> Post '[JSON] Operation
 
 -- | Creates a persistent disk in the specified project using the data
 -- included in the request.

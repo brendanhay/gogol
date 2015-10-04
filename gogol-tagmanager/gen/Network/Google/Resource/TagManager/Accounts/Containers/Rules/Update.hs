@@ -64,7 +64,7 @@ type AccountsContainersRulesUpdateResource =
                            QueryParam "key" Key :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
-                                 ReqBody '[OctetStream] Rule :> Put '[JSON] Rule
+                                 ReqBody '[JSON] Rule :> Put '[JSON] Rule
 
 -- | Updates a GTM Rule.
 --

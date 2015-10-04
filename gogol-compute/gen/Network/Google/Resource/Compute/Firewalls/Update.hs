@@ -60,8 +60,7 @@ type FirewallsUpdateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Firewall :>
-                             Put '[JSON] Operation
+                           ReqBody '[JSON] Firewall :> Put '[JSON] Operation
 
 -- | Updates the specified firewall resource with the data included in the
 -- request.

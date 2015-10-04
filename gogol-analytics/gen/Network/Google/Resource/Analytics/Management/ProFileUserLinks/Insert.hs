@@ -64,7 +64,7 @@ type ManagementProFileUserLinksInsertResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[OctetStream] EntityUserLink :>
+                                   ReqBody '[JSON] EntityUserLink :>
                                      Post '[JSON] EntityUserLink
 
 -- | Adds a new user to the given view (profile).

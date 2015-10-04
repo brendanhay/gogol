@@ -62,7 +62,7 @@ type DimensionValuesQueryResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[OctetStream] DimensionValueRequest :>
+                               ReqBody '[JSON] DimensionValueRequest :>
                                  Post '[JSON] DimensionValueList
 
 -- | Retrieves list of report dimension values for a list of filters.

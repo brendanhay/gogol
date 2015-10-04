@@ -56,7 +56,7 @@ type ArchiveInsertResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Body :> Post '[JSON] Groups
+                       ReqBody '[OctetStream] Body :> Post '[JSON] Groups
 
 -- | Inserts a new mail into the archive of the Google group.
 --

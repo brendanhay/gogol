@@ -67,7 +67,7 @@ type TransferJobsCreateResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[OctetStream] TransferJob :>
+                                   ReqBody '[JSON] TransferJob :>
                                      Post '[JSON] TransferJob
 
 -- | Creates a transfer job that runs periodically.

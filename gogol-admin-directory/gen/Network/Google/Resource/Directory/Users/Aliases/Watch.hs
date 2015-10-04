@@ -60,8 +60,7 @@ type UsersAliasesWatchResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] Channel :>
-                               Post '[JSON] Channel
+                             ReqBody '[JSON] Channel :> Post '[JSON] Channel
 
 -- | Watch for changes in user aliases list
 --

@@ -57,7 +57,7 @@ type FloodlightConfigurationsUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] FloodlightConfiguration :>
+                         ReqBody '[JSON] FloodlightConfiguration :>
                            Put '[JSON] FloodlightConfiguration
 
 -- | Updates an existing floodlight configuration.

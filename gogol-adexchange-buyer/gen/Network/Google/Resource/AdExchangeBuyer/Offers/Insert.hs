@@ -54,8 +54,7 @@ type OffersInsertResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[OctetStream] OfferDTO :>
-                       Post '[JSON] OfferDTO
+                     ReqBody '[JSON] OfferDTO :> Post '[JSON] OfferDTO
 
 -- | Creates or updates the requested offer.
 --

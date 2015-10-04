@@ -57,7 +57,7 @@ type ProjectsMoveInstanceResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] InstanceMoveRequest :>
+                       ReqBody '[JSON] InstanceMoveRequest :>
                          Post '[JSON] Operation
 
 -- | Moves an instance and its attached persistent disks from one zone to

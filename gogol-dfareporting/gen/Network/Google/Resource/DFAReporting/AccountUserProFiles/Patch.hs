@@ -60,7 +60,7 @@ type AccountUserProFilesPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] AccountUserProFile :>
+                           ReqBody '[JSON] AccountUserProFile :>
                              Patch '[JSON] AccountUserProFile
 
 -- | Updates an existing account user profile. This method supports patch

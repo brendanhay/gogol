@@ -57,8 +57,7 @@ type PlacementsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] Placement :>
-                           Post '[JSON] Placement
+                         ReqBody '[JSON] Placement :> Post '[JSON] Placement
 
 -- | Inserts a new placement.
 --

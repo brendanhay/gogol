@@ -56,7 +56,7 @@ type LayersCreateResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] Layer :> Post '[JSON] Layer
+                       ReqBody '[JSON] Layer :> Post '[JSON] Layer
 
 -- | Create a layer asset.
 --

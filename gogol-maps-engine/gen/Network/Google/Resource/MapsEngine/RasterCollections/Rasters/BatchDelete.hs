@@ -60,7 +60,7 @@ type RasterCollectionsRastersBatchDeleteResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream]
+                           ReqBody '[JSON]
                              RasterCollectionsRasterBatchDeleteRequest
                              :>
                              Post '[JSON]

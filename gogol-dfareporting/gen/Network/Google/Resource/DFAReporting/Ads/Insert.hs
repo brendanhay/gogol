@@ -57,7 +57,7 @@ type AdsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] Ad :> Post '[JSON] Ad
+                         ReqBody '[JSON] Ad :> Post '[JSON] Ad
 
 -- | Inserts a new ad.
 --

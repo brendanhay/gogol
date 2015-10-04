@@ -70,9 +70,8 @@ type TransferJobsPatchResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[OctetStream]
-                                     UpdateTransferJobRequest
-                                     :> Patch '[JSON] TransferJob
+                                   ReqBody '[JSON] UpdateTransferJobRequest :>
+                                     Patch '[JSON] TransferJob
 
 -- | Updates a transfer job. Updating a job\'s transfer spec does not affect
 -- transfer operations that are running already. Updating the scheduling of

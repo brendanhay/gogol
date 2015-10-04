@@ -59,8 +59,7 @@ type RevisionsPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Revision :>
-                             Patch '[JSON] Revision
+                           ReqBody '[JSON] Revision :> Patch '[JSON] Revision
 
 -- | Updates a revision. This method supports patch semantics.
 --

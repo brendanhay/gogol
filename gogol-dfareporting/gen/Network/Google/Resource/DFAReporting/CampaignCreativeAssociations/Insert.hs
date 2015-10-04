@@ -62,8 +62,8 @@ type CampaignCreativeAssociationsInsertResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] CampaignCreativeAssociation
-                               :> Post '[JSON] CampaignCreativeAssociation
+                             ReqBody '[JSON] CampaignCreativeAssociation :>
+                               Post '[JSON] CampaignCreativeAssociation
 
 -- | Associates a creative with the specified campaign. This method creates a
 -- default ad with dimensions matching the creative in the campaign if such

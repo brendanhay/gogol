@@ -63,8 +63,7 @@ type AccountsAdUnitsPatchResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[OctetStream] AdUnit :>
-                                 Patch '[JSON] AdUnit
+                               ReqBody '[JSON] AdUnit :> Patch '[JSON] AdUnit
 
 -- | Update the supplied ad unit in the specified publisher AdSense account.
 -- This method supports patch semantics.

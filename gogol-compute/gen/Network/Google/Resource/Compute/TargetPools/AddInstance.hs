@@ -62,9 +62,8 @@ type TargetPoolsAddInstanceResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[OctetStream]
-                                 TargetPoolsAddInstanceRequest
-                                 :> Post '[JSON] Operation
+                               ReqBody '[JSON] TargetPoolsAddInstanceRequest :>
+                                 Post '[JSON] Operation
 
 -- | Adds instance url to targetPool.
 --

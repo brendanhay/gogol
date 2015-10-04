@@ -56,7 +56,7 @@ type ReferencesetsSearchResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] SearchReferenceSetsRequest :>
+                       ReqBody '[JSON] SearchReferenceSetsRequest :>
                          Post '[JSON] SearchReferenceSetsResponse
 
 -- | Searches for reference sets which match the given criteria. Implements

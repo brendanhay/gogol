@@ -63,7 +63,7 @@ type AutoscalersPatchResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[OctetStream] Autoscaler :>
+                               ReqBody '[JSON] Autoscaler :>
                                  Patch '[JSON] Operation
 
 -- | Update the entire content of the Autoscaler resource. This method

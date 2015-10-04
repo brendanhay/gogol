@@ -57,7 +57,7 @@ type CustomChannelsUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] CustomChannel :>
+                         ReqBody '[JSON] CustomChannel :>
                            Put '[JSON] CustomChannel
 
 -- | Update a custom channel in the host AdSense account.

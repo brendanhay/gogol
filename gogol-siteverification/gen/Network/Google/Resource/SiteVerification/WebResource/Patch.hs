@@ -57,8 +57,7 @@ type WebResourcePatchResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream]
-                         SiteVerificationWebResourceResource
+                       ReqBody '[JSON] SiteVerificationWebResourceResource
                          :> Patch '[JSON] SiteVerificationWebResourceResource
 
 -- | Modify the list of owners for your website or domain. This method

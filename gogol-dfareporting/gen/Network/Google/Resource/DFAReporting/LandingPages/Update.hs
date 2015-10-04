@@ -60,7 +60,7 @@ type LandingPagesUpdateResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] LandingPage :>
+                             ReqBody '[JSON] LandingPage :>
                                Put '[JSON] LandingPage
 
 -- | Updates an existing campaign landing page.

@@ -59,7 +59,7 @@ type SubscriptionsInsertResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Subscription :>
+                           ReqBody '[JSON] Subscription :>
                              Post '[JSON] Subscription
 
 -- | Creates\/Transfers a subscription for the customer.

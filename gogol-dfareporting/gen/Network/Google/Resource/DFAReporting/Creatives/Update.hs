@@ -57,8 +57,7 @@ type CreativesUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] Creative :>
-                           Put '[JSON] Creative
+                         ReqBody '[JSON] Creative :> Put '[JSON] Creative
 
 -- | Updates an existing creative.
 --

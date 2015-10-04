@@ -62,8 +62,8 @@ type ZoneViewsSetServiceResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[OctetStream] ZoneViewsSetServiceRequest
-                                 :> Post '[JSON] Operation
+                               ReqBody '[JSON] ZoneViewsSetServiceRequest :>
+                                 Post '[JSON] Operation
 
 -- | Update the service information of a resource view or a resource.
 --

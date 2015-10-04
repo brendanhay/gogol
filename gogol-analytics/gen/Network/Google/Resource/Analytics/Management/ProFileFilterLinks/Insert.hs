@@ -64,7 +64,7 @@ type ManagementProFileFilterLinksInsertResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[OctetStream] ProFileFilterLink :>
+                                   ReqBody '[JSON] ProFileFilterLink :>
                                      Post '[JSON] ProFileFilterLink
 
 -- | Create a new profile filter link.

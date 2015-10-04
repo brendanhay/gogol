@@ -60,9 +60,8 @@ type InstancesRestoreBackupResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream]
-                               InstancesRestoreBackupRequest
-                               :> Post '[JSON] Operation
+                             ReqBody '[JSON] InstancesRestoreBackupRequest :>
+                               Post '[JSON] Operation
 
 -- | Restores a backup of a Cloud SQL instance.
 --

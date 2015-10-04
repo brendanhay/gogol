@@ -57,7 +57,7 @@ type LeaderboardConfigurationsPatchResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] LeaderboardConfiguration :>
+                       ReqBody '[JSON] LeaderboardConfiguration :>
                          Patch '[JSON] LeaderboardConfiguration
 
 -- | Update the metadata of the leaderboard configuration with the given ID.

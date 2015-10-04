@@ -59,7 +59,7 @@ type SchemasPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Schema :> Patch '[JSON] Schema
+                           ReqBody '[JSON] Schema :> Patch '[JSON] Schema
 
 -- | Update schema. This method supports patch semantics.
 --

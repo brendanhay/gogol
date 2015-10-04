@@ -65,7 +65,7 @@ type VariantsetsImportVariantsResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] ImportVariantsRequest :>
+                         ReqBody '[JSON] ImportVariantsRequest :>
                            Post '[JSON] ImportVariantsResponse
 
 -- | Creates variant data by asynchronously importing the provided

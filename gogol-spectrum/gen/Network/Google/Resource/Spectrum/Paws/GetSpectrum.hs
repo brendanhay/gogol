@@ -56,7 +56,7 @@ type PawsGetSpectrumResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[OctetStream] PawsGetSpectrumRequest :>
+                     ReqBody '[JSON] PawsGetSpectrumRequest :>
                        Post '[JSON] PawsGetSpectrumResponse
 
 -- | Requests information about the available spectrum for a device at a

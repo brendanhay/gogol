@@ -100,8 +100,7 @@ type EventsWatchResource =
                                                            QueryParam "alt"
                                                              AltJSON
                                                              :>
-                                                             ReqBody
-                                                               '[OctetStream]
+                                                             ReqBody '[JSON]
                                                                Channel
                                                                :>
                                                                Post '[JSON]

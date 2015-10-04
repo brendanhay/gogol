@@ -60,7 +60,7 @@ type ManagementFiltersUpdateResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] Filter :> Put '[JSON] Filter
+                             ReqBody '[JSON] Filter :> Put '[JSON] Filter
 
 -- | Updates an existing filter.
 --

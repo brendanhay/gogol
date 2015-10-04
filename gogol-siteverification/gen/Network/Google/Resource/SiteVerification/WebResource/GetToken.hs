@@ -54,7 +54,7 @@ type WebResourceGetTokenResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[OctetStream]
+                     ReqBody '[JSON]
                        SiteVerificationWebResourceGettokenRequest
                        :>
                        Post '[JSON]

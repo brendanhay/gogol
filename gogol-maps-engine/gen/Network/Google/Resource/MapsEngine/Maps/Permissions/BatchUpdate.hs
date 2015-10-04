@@ -60,8 +60,8 @@ type MapsPermissionsBatchUpdateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] PermissionsBatchUpdateRequest
-                             :> Post '[JSON] PermissionsBatchUpdateResponse
+                           ReqBody '[JSON] PermissionsBatchUpdateRequest :>
+                             Post '[JSON] PermissionsBatchUpdateResponse
 
 -- | Add or update permission entries to an already existing asset. An asset
 -- can hold up to 20 different permission entries. Each batchInsert request

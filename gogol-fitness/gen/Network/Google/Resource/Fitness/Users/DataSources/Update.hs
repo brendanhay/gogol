@@ -62,8 +62,7 @@ type UsersDataSourcesUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] DataSource :>
-                           Put '[JSON] DataSource
+                         ReqBody '[JSON] DataSource :> Put '[JSON] DataSource
 
 -- | Updates a given data source. It is an error to modify the data source\'s
 -- data stream ID, data type, type, stream name or device information apart

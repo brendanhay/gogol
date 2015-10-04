@@ -60,8 +60,7 @@ type AddressesInsertResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Address :>
-                             Post '[JSON] Operation
+                           ReqBody '[JSON] Address :> Post '[JSON] Operation
 
 -- | Creates an address resource in the specified project using the data
 -- included in the request.

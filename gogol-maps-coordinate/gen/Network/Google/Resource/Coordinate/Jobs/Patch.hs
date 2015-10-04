@@ -81,7 +81,7 @@ type JobsPatchResource =
                                            QueryParam "oauth_token" OAuthToken
                                              :>
                                              QueryParam "alt" AltJSON :>
-                                               ReqBody '[OctetStream] Job :>
+                                               ReqBody '[JSON] Job :>
                                                  Patch '[JSON] Job
 
 -- | Updates a job. Fields that are set in the job state will be updated.

@@ -58,7 +58,7 @@ type AnnotationsSearchResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] SearchAnnotationsRequest :>
+                       ReqBody '[JSON] SearchAnnotationsRequest :>
                          Post '[JSON] SearchAnnotationsResponse
 
 -- | Searches for annotations that match the given criteria. Results are

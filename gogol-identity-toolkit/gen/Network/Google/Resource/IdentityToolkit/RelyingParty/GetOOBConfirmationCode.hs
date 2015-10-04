@@ -54,7 +54,7 @@ type RelyingPartyGetOOBConfirmationCodeResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[OctetStream] RelyingParty :>
+                     ReqBody '[JSON] RelyingParty :>
                        Post '[JSON] GetOOBConfirmationCodeResponse
 
 -- | Get a code for user action confirmation.

@@ -65,7 +65,7 @@ type EntitlementsPatchResource =
                            QueryParam "key" Key :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
-                                 ReqBody '[OctetStream] Entitlement :>
+                                 ReqBody '[JSON] Entitlement :>
                                    Patch '[JSON] Entitlement
 
 -- | Adds or updates an entitlement to an app for a user. This method

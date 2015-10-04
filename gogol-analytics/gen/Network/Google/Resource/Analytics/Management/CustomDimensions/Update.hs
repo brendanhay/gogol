@@ -65,7 +65,7 @@ type ManagementCustomDimensionsUpdateResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[OctetStream] CustomDimension :>
+                                   ReqBody '[JSON] CustomDimension :>
                                      Put '[JSON] CustomDimension
 
 -- | Updates an existing custom dimension.

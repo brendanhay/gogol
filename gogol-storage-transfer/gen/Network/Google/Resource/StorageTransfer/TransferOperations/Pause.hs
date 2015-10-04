@@ -68,8 +68,7 @@ type TransferOperationsPauseResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[OctetStream]
-                                     PauseTransferOperationRequest
+                                   ReqBody '[JSON] PauseTransferOperationRequest
                                      :> Post '[JSON] Empty
 
 -- | Pauses a transfer operation.

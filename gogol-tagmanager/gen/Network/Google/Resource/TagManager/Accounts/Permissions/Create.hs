@@ -57,8 +57,7 @@ type AccountsPermissionsCreateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] UserAccess :>
-                           Post '[JSON] UserAccess
+                         ReqBody '[JSON] UserAccess :> Post '[JSON] UserAccess
 
 -- | Creates a user\'s Account & Container Permissions.
 --

@@ -62,7 +62,7 @@ type URLMapsValidateResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] URLMapsValidateRequest :>
+                             ReqBody '[JSON] URLMapsValidateRequest :>
                                Post '[JSON] URLMapsValidateResponse
 
 -- | Run static validation for the UrlMap. In particular, the tests of the

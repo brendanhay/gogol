@@ -60,7 +60,7 @@ type SubscriptionsChangeRenewalSettingsResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] RenewalSettings :>
+                             ReqBody '[JSON] RenewalSettings :>
                                Post '[JSON] Subscription
 
 -- | Changes the renewal settings of a subscription

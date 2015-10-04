@@ -57,7 +57,7 @@ type PlacementStrategiesUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] PlacementStrategy :>
+                         ReqBody '[JSON] PlacementStrategy :>
                            Put '[JSON] PlacementStrategy
 
 -- | Updates an existing placement strategy.

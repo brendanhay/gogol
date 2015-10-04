@@ -69,9 +69,8 @@ type ProjectsSubscriptionsTestIAMPermissionsResource
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[OctetStream]
-                                     TestIAMPermissionsRequest
-                                     :> Post '[JSON] TestIAMPermissionsResponse
+                                   ReqBody '[JSON] TestIAMPermissionsRequest :>
+                                     Post '[JSON] TestIAMPermissionsResponse
 
 -- | Returns permissions that a caller has on the specified resource.
 --

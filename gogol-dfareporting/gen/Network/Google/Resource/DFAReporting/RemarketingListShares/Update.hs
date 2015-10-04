@@ -57,7 +57,7 @@ type RemarketingListSharesUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] RemarketingListShare :>
+                         ReqBody '[JSON] RemarketingListShare :>
                            Put '[JSON] RemarketingListShare
 
 -- | Updates an existing remarketing list share.

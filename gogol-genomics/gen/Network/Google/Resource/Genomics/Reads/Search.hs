@@ -65,7 +65,7 @@ type ReadsSearchResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] SearchReadsRequest :>
+                       ReqBody '[JSON] SearchReadsRequest :>
                          Post '[JSON] SearchReadsResponse
 
 -- | Gets a list of reads for one or more read group sets. Reads search

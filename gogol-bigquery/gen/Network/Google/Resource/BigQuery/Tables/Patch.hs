@@ -65,8 +65,7 @@ type TablesPatchResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[OctetStream] Table :>
-                                 Patch '[JSON] Table
+                               ReqBody '[JSON] Table :> Patch '[JSON] Table
 
 -- | Updates information in an existing table. The update method replaces the
 -- entire table resource, whereas the patch method only replaces fields

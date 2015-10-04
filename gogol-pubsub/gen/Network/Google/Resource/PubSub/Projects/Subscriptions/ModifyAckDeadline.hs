@@ -72,9 +72,8 @@ type ProjectsSubscriptionsModifyAckDeadlineResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[OctetStream]
-                                     ModifyAckDeadlineRequest
-                                     :> Post '[JSON] Empty
+                                   ReqBody '[JSON] ModifyAckDeadlineRequest :>
+                                     Post '[JSON] Empty
 
 -- | Modifies the ack deadline for a specific message. This method is useful
 -- to indicate that more time is needed to process a message by the

@@ -63,8 +63,7 @@ type ManagementProFilesUpdateResource =
                            QueryParam "key" Key :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
-                                 ReqBody '[OctetStream] ProFile :>
-                                   Put '[JSON] ProFile
+                                 ReqBody '[JSON] ProFile :> Put '[JSON] ProFile
 
 -- | Updates an existing view (profile).
 --

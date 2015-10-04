@@ -60,7 +60,7 @@ type RemarketingListSharesPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] RemarketingListShare :>
+                           ReqBody '[JSON] RemarketingListShare :>
                              Patch '[JSON] RemarketingListShare
 
 -- | Updates an existing remarketing list share. This method supports patch

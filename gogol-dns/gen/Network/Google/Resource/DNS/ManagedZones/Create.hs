@@ -56,7 +56,7 @@ type ManagedZonesCreateResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] ManagedZone :>
+                       ReqBody '[JSON] ManagedZone :>
                          Post '[JSON] ManagedZone
 
 -- | Create a new ManagedZone.

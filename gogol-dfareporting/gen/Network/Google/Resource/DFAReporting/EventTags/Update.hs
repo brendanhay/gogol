@@ -57,8 +57,7 @@ type EventTagsUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] EventTag :>
-                           Put '[JSON] EventTag
+                         ReqBody '[JSON] EventTag :> Put '[JSON] EventTag
 
 -- | Updates an existing event tag.
 --

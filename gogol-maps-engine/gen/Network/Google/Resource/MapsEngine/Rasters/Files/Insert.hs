@@ -59,7 +59,7 @@ type RastersFilesInsertResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Body :> Post '[JSON] ()
+                           ReqBody '[OctetStream] Body :> Post '[JSON] ()
 
 -- | Upload a file to a raster asset.
 --

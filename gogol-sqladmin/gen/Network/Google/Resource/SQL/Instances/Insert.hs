@@ -57,7 +57,7 @@ type InstancesInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] DatabaseInstance :>
+                         ReqBody '[JSON] DatabaseInstance :>
                            Post '[JSON] Operation
 
 -- | Creates a new Cloud SQL instance.

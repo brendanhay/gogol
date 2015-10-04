@@ -58,7 +58,7 @@ type TrainedModelsUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] Update :> Put '[JSON] Insert2
+                         ReqBody '[JSON] Update :> Put '[JSON] Insert2
 
 -- | Add new data to a trained model.
 --

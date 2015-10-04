@@ -61,7 +61,7 @@ type ProductsUpdatePermissionsResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] ProductPermissions :>
+                             ReqBody '[JSON] ProductPermissions :>
                                Put '[JSON] ProductPermissions
 
 -- | Updates the set of Android app permissions for this app that have been

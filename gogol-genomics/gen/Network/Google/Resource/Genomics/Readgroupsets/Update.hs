@@ -56,7 +56,7 @@ type ReadgroupsetsUpdateResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] ReadGroupSet :>
+                       ReqBody '[JSON] ReadGroupSet :>
                          Put '[JSON] ReadGroupSet
 
 -- | Updates a read group set.

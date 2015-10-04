@@ -64,7 +64,7 @@ type ManagementProFilesPatchResource =
                            QueryParam "key" Key :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
-                                 ReqBody '[OctetStream] ProFile :>
+                                 ReqBody '[JSON] ProFile :>
                                    Patch '[JSON] ProFile
 
 -- | Updates an existing view (profile). This method supports patch

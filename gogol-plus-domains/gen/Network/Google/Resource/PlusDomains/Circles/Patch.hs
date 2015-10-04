@@ -56,7 +56,7 @@ type CirclesPatchResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] Circle :> Patch '[JSON] Circle
+                       ReqBody '[JSON] Circle :> Patch '[JSON] Circle
 
 -- | Update a circle\'s description. This method supports patch semantics.
 --

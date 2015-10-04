@@ -57,7 +57,7 @@ type DefaultObjectAccessControlsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] ObjectAccessControl :>
+                         ReqBody '[JSON] ObjectAccessControl :>
                            Post '[JSON] ObjectAccessControl
 
 -- | Creates a new default object ACL entry on the specified bucket.

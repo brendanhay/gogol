@@ -60,7 +60,7 @@ type ManagementAccountUserLinksUpdateResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] EntityUserLink :>
+                             ReqBody '[JSON] EntityUserLink :>
                                Put '[JSON] EntityUserLink
 
 -- | Updates permissions for an existing user on the given account.

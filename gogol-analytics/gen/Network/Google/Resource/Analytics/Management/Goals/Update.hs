@@ -66,8 +66,7 @@ type ManagementGoalsUpdateResource =
                                QueryParam "key" Key :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
-                                     ReqBody '[OctetStream] Goal :>
-                                       Put '[JSON] Goal
+                                     ReqBody '[JSON] Goal :> Put '[JSON] Goal
 
 -- | Updates an existing view (profile).
 --

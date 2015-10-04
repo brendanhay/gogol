@@ -61,8 +61,7 @@ type EditsListingsUpdateResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] Listing :>
-                               Put '[JSON] Listing
+                             ReqBody '[JSON] Listing :> Put '[JSON] Listing
 
 -- | Creates or updates a localized store listing.
 --

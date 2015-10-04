@@ -72,7 +72,7 @@ type DeploymentsPatchResource =
                            QueryParam "key" Key :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
-                                 ReqBody '[OctetStream] Deployment :>
+                                 ReqBody '[JSON] Deployment :>
                                    Patch '[JSON] Operation
 
 -- | Updates a deployment and all of the resources described by the

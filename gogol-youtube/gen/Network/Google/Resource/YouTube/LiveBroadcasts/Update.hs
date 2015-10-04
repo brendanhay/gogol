@@ -61,7 +61,7 @@ type LiveBroadcastsUpdateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] LiveBroadcast :>
+                           ReqBody '[JSON] LiveBroadcast :>
                              Put '[JSON] LiveBroadcast
 
 -- | Updates a broadcast. For example, you could modify the broadcast

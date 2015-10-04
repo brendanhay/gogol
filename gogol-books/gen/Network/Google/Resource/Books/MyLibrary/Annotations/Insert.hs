@@ -61,7 +61,7 @@ type MyLibraryAnnotationsInsertResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] Annotation :>
+                             ReqBody '[JSON] Annotation :>
                                Post '[JSON] Annotation
 
 -- | Inserts a new annotation.

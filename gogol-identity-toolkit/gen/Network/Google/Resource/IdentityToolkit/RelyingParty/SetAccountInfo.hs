@@ -54,7 +54,7 @@ type RelyingPartySetAccountInfoResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[OctetStream]
+                     ReqBody '[JSON]
                        IdentitytoolkitRelyingPartySetAccountInfoRequest
                        :> Post '[JSON] SetAccountInfoResponse
 

@@ -64,8 +64,7 @@ type AccountsContainersTriggersUpdateResource =
                            QueryParam "key" Key :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
-                                 ReqBody '[OctetStream] Trigger :>
-                                   Put '[JSON] Trigger
+                                 ReqBody '[JSON] Trigger :> Put '[JSON] Trigger
 
 -- | Updates a GTM Trigger.
 --

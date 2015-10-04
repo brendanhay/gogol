@@ -59,7 +59,7 @@ type ReportsUpdateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Report :> Put '[JSON] Report
+                           ReqBody '[JSON] Report :> Put '[JSON] Report
 
 -- | Updates a report.
 --

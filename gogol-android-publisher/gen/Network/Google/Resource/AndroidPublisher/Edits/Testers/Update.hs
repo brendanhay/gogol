@@ -61,8 +61,7 @@ type EditsTestersUpdateResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] Testers :>
-                               Put '[JSON] Testers
+                             ReqBody '[JSON] Testers :> Put '[JSON] Testers
 
 --
 -- /See:/ 'editsTestersUpdate'' smart constructor.

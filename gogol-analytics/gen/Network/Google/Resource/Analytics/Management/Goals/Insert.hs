@@ -64,8 +64,7 @@ type ManagementGoalsInsertResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[OctetStream] Goal :>
-                                     Post '[JSON] Goal
+                                   ReqBody '[JSON] Goal :> Post '[JSON] Goal
 
 -- | Create a new goal.
 --

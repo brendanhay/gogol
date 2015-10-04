@@ -73,7 +73,7 @@ type AppsModulesVersionsCreateResource =
                                      QueryParam "key" Key :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
-                                           ReqBody '[OctetStream] Version :>
+                                           ReqBody '[JSON] Version :>
                                              Post '[JSON] Operation
 
 -- | Deploys new code and resource files to a version.

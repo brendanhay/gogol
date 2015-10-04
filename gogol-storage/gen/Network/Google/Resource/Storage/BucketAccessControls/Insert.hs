@@ -57,7 +57,7 @@ type BucketAccessControlsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] BucketAccessControl :>
+                         ReqBody '[JSON] BucketAccessControl :>
                            Post '[JSON] BucketAccessControl
 
 -- | Creates a new ACL entry on the specified bucket.

@@ -57,7 +57,7 @@ type ContentCategoriesUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] ContentCategory :>
+                         ReqBody '[JSON] ContentCategory :>
                            Put '[JSON] ContentCategory
 
 -- | Updates an existing content category.

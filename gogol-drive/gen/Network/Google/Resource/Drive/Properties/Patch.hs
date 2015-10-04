@@ -61,8 +61,7 @@ type PropertiesPatchResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] Property :>
-                               Patch '[JSON] Property
+                             ReqBody '[JSON] Property :> Patch '[JSON] Property
 
 -- | Updates a property. This method supports patch semantics.
 --

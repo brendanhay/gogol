@@ -57,7 +57,7 @@ type ChannelsStopResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Channel :> Post '[JSON] ()
+                           ReqBody '[JSON] Channel :> Post '[JSON] ()
 
 -- | Stop watching resources through this channel
 --

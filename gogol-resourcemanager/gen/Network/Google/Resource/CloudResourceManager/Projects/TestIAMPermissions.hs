@@ -70,8 +70,7 @@ type ProjectsTestIAMPermissionsResource =
                                QueryParam "key" Key :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
-                                     ReqBody '[OctetStream]
-                                       TestIAMPermissionsRequest
+                                     ReqBody '[JSON] TestIAMPermissionsRequest
                                        :>
                                        Post '[JSON] TestIAMPermissionsResponse
 

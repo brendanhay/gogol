@@ -62,8 +62,7 @@ type BucketsPatchResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] Bucket :>
-                               Patch '[JSON] Bucket
+                             ReqBody '[JSON] Bucket :> Patch '[JSON] Bucket
 
 -- | Updates a bucket. This method supports patch semantics.
 --

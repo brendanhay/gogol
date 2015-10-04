@@ -58,8 +58,7 @@ type UsersPhotosPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] UserPhoto :>
-                             Patch '[JSON] UserPhoto
+                           ReqBody '[JSON] UserPhoto :> Patch '[JSON] UserPhoto
 
 -- | Add a photo for the user. This method supports patch semantics.
 --

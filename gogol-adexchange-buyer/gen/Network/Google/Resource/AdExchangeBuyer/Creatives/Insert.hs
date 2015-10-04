@@ -54,8 +54,7 @@ type CreativesInsertResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[OctetStream] Creative :>
-                       Post '[JSON] Creative
+                     ReqBody '[JSON] Creative :> Post '[JSON] Creative
 
 -- | Submit a new creative.
 --

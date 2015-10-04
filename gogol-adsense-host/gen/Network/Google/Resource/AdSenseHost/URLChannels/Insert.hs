@@ -57,8 +57,7 @@ type URLChannelsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] URLChannel :>
-                           Post '[JSON] URLChannel
+                         ReqBody '[JSON] URLChannel :> Post '[JSON] URLChannel
 
 -- | Add a new URL channel to the host AdSense account.
 --

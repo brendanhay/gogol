@@ -72,8 +72,7 @@ type ProjectsJobsUpdateResource =
                                    QueryParam "key" Key :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
-                                         ReqBody '[OctetStream] Job :>
-                                           Put '[JSON] Job
+                                         ReqBody '[JSON] Job :> Put '[JSON] Job
 
 -- | Updates the state of an existing dataflow job.
 --

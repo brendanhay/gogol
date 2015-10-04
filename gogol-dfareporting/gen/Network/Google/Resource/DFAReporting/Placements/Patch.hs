@@ -59,8 +59,7 @@ type PlacementsPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Placement :>
-                             Patch '[JSON] Placement
+                           ReqBody '[JSON] Placement :> Patch '[JSON] Placement
 
 -- | Updates an existing placement. This method supports patch semantics.
 --

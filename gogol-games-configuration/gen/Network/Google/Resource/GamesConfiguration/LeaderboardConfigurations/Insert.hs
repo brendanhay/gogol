@@ -57,7 +57,7 @@ type LeaderboardConfigurationsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] LeaderboardConfiguration :>
+                         ReqBody '[JSON] LeaderboardConfiguration :>
                            Post '[JSON] LeaderboardConfiguration
 
 -- | Insert a new leaderboard configuration in this application.

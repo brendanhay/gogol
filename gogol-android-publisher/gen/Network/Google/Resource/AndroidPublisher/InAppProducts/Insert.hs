@@ -58,7 +58,7 @@ type InAppProductsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] InAppProduct :>
+                         ReqBody '[JSON] InAppProduct :>
                            Post '[JSON] InAppProduct
 
 -- | Creates a new in-app product for an app.

@@ -59,7 +59,7 @@ type ThumbnailsSetResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Body :>
+                           ReqBody '[OctetStream] Body :>
                              Post '[JSON] ThumbnailSetResponse
 
 -- | Uploads a custom video thumbnail to YouTube and sets it for a video.

@@ -59,9 +59,8 @@ type OrdersUpdatemerchantOrderidResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream]
-                             OrdersUpdateMerchantOrderIdRequest
-                             :> Post '[JSON] OrdersUpdateMerchantOrderIdResponse
+                           ReqBody '[JSON] OrdersUpdateMerchantOrderIdRequest :>
+                             Post '[JSON] OrdersUpdateMerchantOrderIdResponse
 
 -- | Updates the merchant order ID for a given order.
 --

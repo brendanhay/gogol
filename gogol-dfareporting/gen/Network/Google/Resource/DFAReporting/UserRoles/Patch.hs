@@ -59,8 +59,7 @@ type UserRolesPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] UserRole :>
-                             Patch '[JSON] UserRole
+                           ReqBody '[JSON] UserRole :> Patch '[JSON] UserRole
 
 -- | Updates an existing user role. This method supports patch semantics.
 --

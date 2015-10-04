@@ -61,7 +61,7 @@ type RasterCollectionsRastersBatchInsertResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream]
+                           ReqBody '[JSON]
                              RasterCollectionsRastersBatchInsertRequest
                              :>
                              Post '[JSON]

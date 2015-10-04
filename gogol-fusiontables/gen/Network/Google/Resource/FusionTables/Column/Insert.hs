@@ -57,7 +57,7 @@ type ColumnInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] Column :> Post '[JSON] Column
+                         ReqBody '[JSON] Column :> Post '[JSON] Column
 
 -- | Adds a new column to the table.
 --

@@ -57,7 +57,7 @@ type SizesInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] Size :> Post '[JSON] Size
+                         ReqBody '[JSON] Size :> Post '[JSON] Size
 
 -- | Inserts a new size.
 --

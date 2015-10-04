@@ -61,7 +61,7 @@ type InstancesImportResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] InstancesImportRequest :>
+                             ReqBody '[JSON] InstancesImportRequest :>
                                Post '[JSON] Operation
 
 -- | Imports data into a Cloud SQL instance from a MySQL dump file in Google

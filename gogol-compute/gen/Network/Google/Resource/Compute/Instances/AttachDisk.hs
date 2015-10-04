@@ -62,7 +62,7 @@ type InstancesAttachDiskResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[OctetStream] AttachedDisk :>
+                               ReqBody '[JSON] AttachedDisk :>
                                  Post '[JSON] Operation
 
 -- | Attaches a Disk resource to an instance.

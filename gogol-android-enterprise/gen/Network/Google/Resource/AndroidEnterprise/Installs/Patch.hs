@@ -67,7 +67,7 @@ type InstallsPatchResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[OctetStream] Install :>
+                                   ReqBody '[JSON] Install :>
                                      Patch '[JSON] Install
 
 -- | Requests to install the latest version of an app to a device. If the app

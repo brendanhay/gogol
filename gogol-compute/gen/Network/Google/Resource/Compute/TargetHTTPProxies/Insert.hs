@@ -58,7 +58,7 @@ type TargetHTTPProxiesInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] TargetHTTPProxy :>
+                         ReqBody '[JSON] TargetHTTPProxy :>
                            Post '[JSON] Operation
 
 -- | Creates a TargetHttpProxy resource in the specified project using the

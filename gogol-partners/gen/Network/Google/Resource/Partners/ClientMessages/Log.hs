@@ -69,7 +69,7 @@ type ClientMessagesLogResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[OctetStream] LogMessageRequest :>
+                                   ReqBody '[JSON] LogMessageRequest :>
                                      Post '[JSON] LogMessageResponse
 
 -- | Logs a generic message from the client, such as \`Failed to render

@@ -74,8 +74,7 @@ type CoursesCreateResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[OctetStream] Course :>
-                                     Post '[JSON] Course
+                                   ReqBody '[JSON] Course :> Post '[JSON] Course
 
 -- | Creates a course. The user specified in \`ownerId\` is the owner of the
 -- created course and added as a teacher. This method returns the following

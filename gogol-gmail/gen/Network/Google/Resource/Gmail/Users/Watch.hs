@@ -56,7 +56,7 @@ type UsersWatchResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] WatchRequest :>
+                       ReqBody '[JSON] WatchRequest :>
                          Post '[JSON] WatchResponse
 
 -- | Set up or update a push notification watch on the given user mailbox.

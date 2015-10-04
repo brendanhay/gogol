@@ -57,8 +57,7 @@ type TaskListsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] TaskList :>
-                           Post '[JSON] TaskList
+                         ReqBody '[JSON] TaskList :> Post '[JSON] TaskList
 
 -- | Creates a new task list and adds it to the authenticated user\'s task
 -- lists.

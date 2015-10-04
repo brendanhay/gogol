@@ -58,7 +58,7 @@ type MarketplaceNotesInsertResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] AddOrderNotesRequest :>
+                           ReqBody '[JSON] AddOrderNotesRequest :>
                              Post '[JSON] AddOrderNotesResponse
 
 -- | Add notes to the order

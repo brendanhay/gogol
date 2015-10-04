@@ -76,7 +76,7 @@ type InvitationsCreateResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[OctetStream] Invitation :>
+                                   ReqBody '[JSON] Invitation :>
                                      Post '[JSON] Invitation
 
 -- | Creates an invitation. Only one invitation for a user and course may

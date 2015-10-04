@@ -56,8 +56,7 @@ type WebResourceInsertResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream]
-                         SiteVerificationWebResourceResource
+                       ReqBody '[JSON] SiteVerificationWebResourceResource
                          :> Post '[JSON] SiteVerificationWebResourceResource
 
 -- | Attempt verification of a website or domain.

@@ -78,8 +78,7 @@ type TimeseriesListResource =
                                    QueryParam "key" Key :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
-                                         ReqBody '[OctetStream]
-                                           ListTimeseriesRequest
+                                         ReqBody '[JSON] ListTimeseriesRequest
                                            :> Get '[JSON] ListTimeseriesResponse
 
 -- | List the data points of the time series that match the metric and labels

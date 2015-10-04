@@ -57,8 +57,7 @@ type UserRolesUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] UserRole :>
-                           Put '[JSON] UserRole
+                         ReqBody '[JSON] UserRole :> Put '[JSON] UserRole
 
 -- | Updates an existing user role.
 --

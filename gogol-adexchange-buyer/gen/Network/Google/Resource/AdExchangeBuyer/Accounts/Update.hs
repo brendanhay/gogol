@@ -56,7 +56,7 @@ type AccountsUpdateResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] Account :> Put '[JSON] Account
+                       ReqBody '[JSON] Account :> Put '[JSON] Account
 
 -- | Updates an existing account.
 --

@@ -66,7 +66,7 @@ type EditsExpansionFilesUploadResource =
                            QueryParam "key" Key :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
-                                 ReqBody '[JSON] Body :>
+                                 ReqBody '[OctetStream] Body :>
                                    Post '[JSON] ExpansionFilesUploadResponse
 
 -- | Uploads and attaches a new Expansion File to the APK specified.

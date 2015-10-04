@@ -57,8 +57,7 @@ type CustomersUpdateResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] Customer :>
-                         Put '[JSON] Customer
+                       ReqBody '[JSON] Customer :> Put '[JSON] Customer
 
 -- | Update a customer resource if one it exists and is owned by the
 -- reseller.

@@ -67,7 +67,7 @@ type ChangesWatchResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[OctetStream] Channel :>
+                                   ReqBody '[JSON] Channel :>
                                      Post '[JSON] Channel
 
 -- | Subscribe to changes for a user.

@@ -67,8 +67,7 @@ type ManagementGoalsPatchResource =
                                QueryParam "key" Key :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
-                                     ReqBody '[OctetStream] Goal :>
-                                       Patch '[JSON] Goal
+                                     ReqBody '[JSON] Goal :> Patch '[JSON] Goal
 
 -- | Updates an existing view (profile). This method supports patch
 -- semantics.

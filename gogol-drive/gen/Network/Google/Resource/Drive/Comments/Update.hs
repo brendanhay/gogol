@@ -59,7 +59,7 @@ type CommentsUpdateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Comment :> Put '[JSON] Comment
+                           ReqBody '[JSON] Comment :> Put '[JSON] Comment
 
 -- | Updates an existing comment.
 --

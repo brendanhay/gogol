@@ -59,7 +59,7 @@ type UsersMessagesModifyResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] ModifyMessageRequest :>
+                           ReqBody '[JSON] ModifyMessageRequest :>
                              Post '[JSON] Message
 
 -- | Modifies the labels on the specified message.

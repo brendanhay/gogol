@@ -54,7 +54,7 @@ type RasterCollectionsCreateResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[OctetStream] RasterCollection :>
+                     ReqBody '[JSON] RasterCollection :>
                        Post '[JSON] RasterCollection
 
 -- | Create a raster collection asset.

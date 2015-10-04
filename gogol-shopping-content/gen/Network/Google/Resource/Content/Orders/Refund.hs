@@ -59,7 +59,7 @@ type OrdersRefundResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] OrdersRefundRequest :>
+                           ReqBody '[JSON] OrdersRefundRequest :>
                              Post '[JSON] OrdersRefundResponse
 
 -- | Refund a portion of the order, up to the full amount paid.

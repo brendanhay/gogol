@@ -56,7 +56,7 @@ type ContactsUpdateResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] Contact :> Put '[JSON] Contact
+                       ReqBody '[JSON] Contact :> Put '[JSON] Contact
 
 -- | Updates a contact in place.
 --

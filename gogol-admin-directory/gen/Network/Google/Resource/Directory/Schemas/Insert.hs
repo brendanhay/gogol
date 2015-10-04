@@ -57,7 +57,7 @@ type SchemasInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] Schema :> Post '[JSON] Schema
+                         ReqBody '[JSON] Schema :> Post '[JSON] Schema
 
 -- | Create schema.
 --

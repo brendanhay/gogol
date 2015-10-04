@@ -57,8 +57,7 @@ type CampaignsUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] Campaign :>
-                           Put '[JSON] Campaign
+                         ReqBody '[JSON] Campaign :> Put '[JSON] Campaign
 
 -- | Updates an existing campaign.
 --

@@ -57,8 +57,7 @@ type UserRolesInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] UserRole :>
-                           Post '[JSON] UserRole
+                         ReqBody '[JSON] UserRole :> Post '[JSON] UserRole
 
 -- | Inserts a new user role.
 --

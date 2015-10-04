@@ -64,7 +64,8 @@ type ManagementUploadsUploadDataResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] Body :> Post '[JSON] Upload
+                                   ReqBody '[OctetStream] Body :>
+                                     Post '[JSON] Upload
 
 -- | Upload data for a custom data source.
 --

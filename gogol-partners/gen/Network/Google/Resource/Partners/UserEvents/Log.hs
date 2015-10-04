@@ -67,7 +67,7 @@ type UserEventsLogResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[OctetStream] LogUserEventRequest :>
+                                   ReqBody '[JSON] LogUserEventRequest :>
                                      Post '[JSON] LogUserEventResponse
 
 -- | Logs a user event.

@@ -56,7 +56,7 @@ type VariantsSearchResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] SearchVariantsRequest :>
+                       ReqBody '[JSON] SearchVariantsRequest :>
                          Post '[JSON] SearchVariantsResponse
 
 -- | Gets a list of variants matching the criteria. Implements

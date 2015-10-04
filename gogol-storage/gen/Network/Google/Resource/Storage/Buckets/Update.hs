@@ -62,7 +62,7 @@ type BucketsUpdateResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] Bucket :> Put '[JSON] Bucket
+                             ReqBody '[JSON] Bucket :> Put '[JSON] Bucket
 
 -- | Updates a bucket.
 --

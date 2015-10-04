@@ -55,7 +55,7 @@ type OrdersCustombatchResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] OrdersCustomBatchRequest :>
+                       ReqBody '[JSON] OrdersCustomBatchRequest :>
                          Post '[JSON] OrdersCustomBatchResponse
 
 -- | Retrieves or modifies multiple orders in a single request.

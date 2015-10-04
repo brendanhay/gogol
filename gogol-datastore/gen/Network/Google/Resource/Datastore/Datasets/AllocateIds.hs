@@ -57,7 +57,7 @@ type DatasetsAllocateIdsResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltPROTO :>
-                       ReqBody '[OctetStream] AllocateIdsRequest :>
+                       ReqBody '[JSON] AllocateIdsRequest :>
                          Post '[JSON] AllocateIdsResponse
 
 -- | Allocate IDs for incomplete keys (useful for referencing an entity

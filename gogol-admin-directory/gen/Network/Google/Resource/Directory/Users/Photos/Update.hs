@@ -58,8 +58,7 @@ type UsersPhotosUpdateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] UserPhoto :>
-                             Put '[JSON] UserPhoto
+                           ReqBody '[JSON] UserPhoto :> Put '[JSON] UserPhoto
 
 -- | Add a photo for the user
 --

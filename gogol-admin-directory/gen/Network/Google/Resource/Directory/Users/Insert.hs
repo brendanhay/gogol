@@ -54,7 +54,7 @@ type UsersInsertResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[OctetStream] User :> Post '[JSON] User
+                     ReqBody '[JSON] User :> Post '[JSON] User
 
 -- | create user.
 --

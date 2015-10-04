@@ -56,7 +56,7 @@ type DatasetsRunQueryResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltPROTO :>
-                       ReqBody '[OctetStream] RunQueryRequest :>
+                       ReqBody '[JSON] RunQueryRequest :>
                          Post '[JSON] RunQueryResponse
 
 -- | Query for entities.

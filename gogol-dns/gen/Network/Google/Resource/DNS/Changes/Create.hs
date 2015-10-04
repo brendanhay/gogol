@@ -59,7 +59,7 @@ type ChangesCreateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Change :> Post '[JSON] Change
+                           ReqBody '[JSON] Change :> Post '[JSON] Change
 
 -- | Atomically update the ResourceRecordSet collection.
 --

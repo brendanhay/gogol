@@ -60,7 +60,7 @@ type FloodlightActivitiesPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] FloodlightActivity :>
+                           ReqBody '[JSON] FloodlightActivity :>
                              Patch '[JSON] FloodlightActivity
 
 -- | Updates an existing floodlight activity. This method supports patch

@@ -56,7 +56,7 @@ type MapsPatchResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] Map :> Patch '[JSON] ()
+                       ReqBody '[JSON] Map :> Patch '[JSON] ()
 
 -- | Mutate a map asset.
 --

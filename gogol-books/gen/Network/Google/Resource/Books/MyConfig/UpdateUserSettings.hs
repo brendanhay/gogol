@@ -57,7 +57,7 @@ type MyConfigUpdateUserSettingsResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] Usersettings :>
+                       ReqBody '[JSON] Usersettings :>
                          Post '[JSON] Usersettings
 
 -- | Sets the settings for the user. If a sub-object is specified, it will

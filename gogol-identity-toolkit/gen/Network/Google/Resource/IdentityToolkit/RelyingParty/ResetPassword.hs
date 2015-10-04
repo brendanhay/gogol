@@ -54,7 +54,7 @@ type RelyingPartyResetPasswordResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[OctetStream]
+                     ReqBody '[JSON]
                        IdentitytoolkitRelyingPartyResetPasswordRequest
                        :> Post '[JSON] ResetPasswordResponse
 

@@ -58,8 +58,7 @@ type TaskListsUpdateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] TaskList :>
-                             Put '[JSON] TaskList
+                           ReqBody '[JSON] TaskList :> Put '[JSON] TaskList
 
 -- | Updates the authenticated user\'s specified task list.
 --

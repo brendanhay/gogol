@@ -57,7 +57,7 @@ type CreativeGroupsUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] CreativeGroup :>
+                         ReqBody '[JSON] CreativeGroup :>
                            Put '[JSON] CreativeGroup
 
 -- | Updates an existing creative group.

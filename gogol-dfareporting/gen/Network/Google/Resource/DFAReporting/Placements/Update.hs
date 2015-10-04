@@ -57,8 +57,7 @@ type PlacementsUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] Placement :>
-                           Put '[JSON] Placement
+                         ReqBody '[JSON] Placement :> Put '[JSON] Placement
 
 -- | Updates an existing placement.
 --

@@ -71,7 +71,7 @@ type ObjectsUpdateResource =
                                  QueryParam "key" Key :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
-                                       ReqBody '[OctetStream] Object :>
+                                       ReqBody '[JSON] Object :>
                                          Put '[JSON] Object
        :<|>
        "b" :>
@@ -91,7 +91,7 @@ type ObjectsUpdateResource =
                                    QueryParam "key" Key :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltMedia :>
-                                         ReqBody '[OctetStream] Object :>
+                                         ReqBody '[JSON] Object :>
                                            Put '[OctetStream] Body
 
 -- | Updates a data blob\'s associated metadata.

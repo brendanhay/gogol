@@ -57,7 +57,7 @@ type SitesUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] Site :> Put '[JSON] Site
+                         ReqBody '[JSON] Site :> Put '[JSON] Site
 
 -- | Updates an existing site.
 --

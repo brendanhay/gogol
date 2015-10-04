@@ -64,7 +64,7 @@ type ManagementWebPropertyAdWordsLinksPatchResource =
                            QueryParam "key" Key :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
-                                 ReqBody '[OctetStream] EntityAdWordsLink :>
+                                 ReqBody '[JSON] EntityAdWordsLink :>
                                    Patch '[JSON] EntityAdWordsLink
 
 -- | Updates an existing webProperty-AdWords link. This method supports patch

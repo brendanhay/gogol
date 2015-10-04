@@ -58,8 +58,7 @@ type ImagesInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] Image :>
-                           Post '[JSON] Operation
+                         ReqBody '[JSON] Image :> Post '[JSON] Operation
 
 -- | Creates an image resource in the specified project using the data
 -- included in the request.

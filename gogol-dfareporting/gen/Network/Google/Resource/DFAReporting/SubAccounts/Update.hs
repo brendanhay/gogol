@@ -57,8 +57,7 @@ type SubAccountsUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] SubAccount :>
-                           Put '[JSON] SubAccount
+                         ReqBody '[JSON] SubAccount :> Put '[JSON] SubAccount
 
 -- | Updates an existing subaccount.
 --

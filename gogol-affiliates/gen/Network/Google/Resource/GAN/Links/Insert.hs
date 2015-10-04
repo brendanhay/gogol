@@ -58,7 +58,7 @@ type LinksInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] Link :> Post '[JSON] Link
+                         ReqBody '[JSON] Link :> Post '[JSON] Link
 
 -- | Inserts a new link.
 --

@@ -58,8 +58,8 @@ type MapsPermissionsBatchDeleteResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] PermissionsBatchDeleteRequest
-                             :> Post '[JSON] PermissionsBatchDeleteResponse
+                           ReqBody '[JSON] PermissionsBatchDeleteRequest :>
+                             Post '[JSON] PermissionsBatchDeleteResponse
 
 -- | Remove permission entries from an already existing asset.
 --

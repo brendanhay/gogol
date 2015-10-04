@@ -65,7 +65,7 @@ type InstanceGroupManagersAbandonInstancesResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[OctetStream]
+                               ReqBody '[JSON]
                                  InstanceGroupManagersAbandonInstancesRequest
                                  :> Post '[JSON] Operation
 

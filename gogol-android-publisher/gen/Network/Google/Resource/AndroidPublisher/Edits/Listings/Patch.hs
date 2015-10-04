@@ -62,8 +62,7 @@ type EditsListingsPatchResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] Listing :>
-                               Patch '[JSON] Listing
+                             ReqBody '[JSON] Listing :> Patch '[JSON] Listing
 
 -- | Creates or updates a localized store listing. This method supports patch
 -- semantics.

@@ -57,7 +57,7 @@ type GroupsAliasesInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] Alias :> Post '[JSON] Alias
+                         ReqBody '[JSON] Alias :> Post '[JSON] Alias
 
 -- | Add a alias for the group
 --

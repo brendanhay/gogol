@@ -56,7 +56,7 @@ type PawsVerifyDeviceResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[OctetStream] PawsVerifyDeviceRequest :>
+                     ReqBody '[JSON] PawsVerifyDeviceRequest :>
                        Post '[JSON] PawsVerifyDeviceResponse
 
 -- | Validates a device for white space use in accordance with regulatory

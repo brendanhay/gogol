@@ -62,7 +62,7 @@ type VariantsetsMergeVariantsResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] MergeVariantsRequest :>
+                         ReqBody '[JSON] MergeVariantsRequest :>
                            Post '[JSON] ()
 
 -- | Merges the given variants with existing variants. Each variant will be

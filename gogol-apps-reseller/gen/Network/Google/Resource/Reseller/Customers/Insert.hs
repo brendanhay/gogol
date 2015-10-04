@@ -56,8 +56,7 @@ type CustomersInsertResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] Customer :>
-                         Post '[JSON] Customer
+                       ReqBody '[JSON] Customer :> Post '[JSON] Customer
 
 -- | Creates a customer resource if one does not already exist.
 --

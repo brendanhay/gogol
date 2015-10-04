@@ -54,7 +54,7 @@ type PushtokensUpdateResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[OctetStream] PushToken :> Put '[JSON] ()
+                     ReqBody '[JSON] PushToken :> Put '[JSON] ()
 
 -- | Registers a push token for the current user and application.
 --

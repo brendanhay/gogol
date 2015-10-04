@@ -64,8 +64,7 @@ type AccountsContainersFoldersUpdateResource =
                            QueryParam "key" Key :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
-                                 ReqBody '[OctetStream] Folder :>
-                                   Put '[JSON] Folder
+                                 ReqBody '[JSON] Folder :> Put '[JSON] Folder
 
 -- | Updates a GTM Folder.
 --

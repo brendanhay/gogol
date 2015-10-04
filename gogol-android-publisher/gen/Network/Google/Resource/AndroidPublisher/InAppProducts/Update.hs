@@ -60,7 +60,7 @@ type InAppProductsUpdateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] InAppProduct :>
+                           ReqBody '[JSON] InAppProduct :>
                              Put '[JSON] InAppProduct
 
 -- | Updates the details of an in-app product.

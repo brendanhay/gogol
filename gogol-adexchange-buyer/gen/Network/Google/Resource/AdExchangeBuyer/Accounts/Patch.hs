@@ -56,8 +56,7 @@ type AccountsPatchResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] Account :>
-                         Patch '[JSON] Account
+                       ReqBody '[JSON] Account :> Patch '[JSON] Account
 
 -- | Updates an existing account. This method supports patch semantics.
 --

@@ -59,7 +59,7 @@ type SubAccountsPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] SubAccount :>
+                           ReqBody '[JSON] SubAccount :>
                              Patch '[JSON] SubAccount
 
 -- | Updates an existing subaccount. This method supports patch semantics.

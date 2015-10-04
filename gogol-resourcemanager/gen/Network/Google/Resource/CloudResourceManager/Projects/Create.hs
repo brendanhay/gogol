@@ -70,7 +70,7 @@ type ProjectsCreateResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[OctetStream] Project :>
+                                   ReqBody '[JSON] Project :>
                                      Post '[JSON] Project
 
 -- | Creates a project resource. Initially, the project resource is owned by

@@ -60,7 +60,7 @@ type CreativeGroupsPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] CreativeGroup :>
+                           ReqBody '[JSON] CreativeGroup :>
                              Patch '[JSON] CreativeGroup
 
 -- | Updates an existing creative group. This method supports patch

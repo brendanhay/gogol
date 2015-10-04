@@ -59,8 +59,7 @@ type EventTagsPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] EventTag :>
-                             Patch '[JSON] EventTag
+                           ReqBody '[JSON] EventTag :> Patch '[JSON] EventTag
 
 -- | Updates an existing event tag. This method supports patch semantics.
 --

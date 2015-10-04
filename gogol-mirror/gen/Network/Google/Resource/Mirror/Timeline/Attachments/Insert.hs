@@ -57,7 +57,8 @@ type TimelineAttachmentsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Body :> Post '[JSON] Attachment
+                         ReqBody '[OctetStream] Body :>
+                           Post '[JSON] Attachment
 
 -- | Adds a new attachment to a timeline item.
 --

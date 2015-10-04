@@ -75,8 +75,7 @@ type ControllerDebuggeesRegisterResource =
                                  QueryParam "key" Key :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
-                                       ReqBody '[OctetStream]
-                                         RegisterDebuggeeRequest
+                                       ReqBody '[JSON] RegisterDebuggeeRequest
                                          :>
                                          Post '[JSON] RegisterDebuggeeResponse
 

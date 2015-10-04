@@ -58,7 +58,7 @@ type JobsQueryResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] QueryRequest :>
+                         ReqBody '[JSON] QueryRequest :>
                            Post '[JSON] QueryResponse
 
 -- | Runs a BigQuery SQL query synchronously and returns query results if the

@@ -58,8 +58,7 @@ type NetworksInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] Network :>
-                           Post '[JSON] Operation
+                         ReqBody '[JSON] Network :> Post '[JSON] Operation
 
 -- | Creates a network resource in the specified project using the data
 -- included in the request.

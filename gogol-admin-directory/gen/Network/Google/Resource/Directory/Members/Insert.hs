@@ -57,7 +57,7 @@ type MembersInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] Member :> Post '[JSON] Member
+                         ReqBody '[JSON] Member :> Post '[JSON] Member
 
 -- | Add user to the specified group.
 --

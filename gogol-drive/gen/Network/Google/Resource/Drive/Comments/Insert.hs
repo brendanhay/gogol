@@ -57,8 +57,7 @@ type CommentsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] Comment :>
-                           Post '[JSON] Comment
+                         ReqBody '[JSON] Comment :> Post '[JSON] Comment
 
 -- | Creates a new comment on the given file.
 --

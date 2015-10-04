@@ -56,7 +56,7 @@ type CallsetsUpdateResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] CallSet :> Put '[JSON] CallSet
+                       ReqBody '[JSON] CallSet :> Put '[JSON] CallSet
 
 -- | Updates a call set.
 --

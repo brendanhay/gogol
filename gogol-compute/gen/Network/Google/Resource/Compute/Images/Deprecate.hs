@@ -61,7 +61,7 @@ type ImagesDeprecateResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] DeprecationStatus :>
+                             ReqBody '[JSON] DeprecationStatus :>
                                Post '[JSON] Operation
 
 -- | Sets the deprecation status of an image. If an empty request body is

@@ -60,7 +60,7 @@ type InstancesCloneResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] InstancesCloneRequest :>
+                             ReqBody '[JSON] InstancesCloneRequest :>
                                Post '[JSON] Operation
 
 -- | Creates a Cloud SQL instance as a clone of the source instance.

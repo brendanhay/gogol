@@ -67,8 +67,7 @@ type EventsUpdateResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[OctetStream] Event :>
-                                     Put '[JSON] Event
+                                   ReqBody '[JSON] Event :> Put '[JSON] Event
 
 -- | Updates an event.
 --

@@ -57,7 +57,7 @@ type AccountUserProFilesInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] AccountUserProFile :>
+                         ReqBody '[JSON] AccountUserProFile :>
                            Post '[JSON] AccountUserProFile
 
 -- | Inserts a new account user profile.

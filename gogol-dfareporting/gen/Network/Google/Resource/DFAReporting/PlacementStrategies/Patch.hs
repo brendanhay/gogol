@@ -60,7 +60,7 @@ type PlacementStrategiesPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] PlacementStrategy :>
+                           ReqBody '[JSON] PlacementStrategy :>
                              Patch '[JSON] PlacementStrategy
 
 -- | Updates an existing placement strategy. This method supports patch

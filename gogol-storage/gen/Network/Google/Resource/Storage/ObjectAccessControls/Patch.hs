@@ -65,7 +65,7 @@ type ObjectAccessControlsPatchResource =
                            QueryParam "key" Key :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
-                                 ReqBody '[OctetStream] ObjectAccessControl :>
+                                 ReqBody '[JSON] ObjectAccessControl :>
                                    Patch '[JSON] ObjectAccessControl
 
 -- | Updates an ACL entry on the specified object. This method supports patch

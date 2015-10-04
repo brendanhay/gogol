@@ -55,7 +55,7 @@ type GroupsPatchResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltATOM :>
-                     ReqBody '[OctetStream] Groups :> Patch '[JSON] Groups
+                     ReqBody '[JSON] Groups :> Patch '[JSON] Groups
 
 -- | Updates an existing resource. This method supports patch semantics.
 --

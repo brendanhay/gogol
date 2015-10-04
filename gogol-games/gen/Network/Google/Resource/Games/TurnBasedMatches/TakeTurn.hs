@@ -59,7 +59,7 @@ type TurnBasedMatchesTakeTurnResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] TurnBasedMatchTurn :>
+                           ReqBody '[JSON] TurnBasedMatchTurn :>
                              Put '[JSON] TurnBasedMatch
 
 -- | Commit the results of a player turn.

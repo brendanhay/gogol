@@ -71,8 +71,7 @@ type FilesCopyResource =
                                  QueryParam "key" Key :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
-                                       ReqBody '[OctetStream] File :>
-                                         Post '[JSON] File
+                                       ReqBody '[JSON] File :> Post '[JSON] File
 
 -- | Creates a copy of the specified file.
 --

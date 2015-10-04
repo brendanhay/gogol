@@ -56,7 +56,7 @@ type ProjectsMoveDiskResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] DiskMoveRequest :>
+                       ReqBody '[JSON] DiskMoveRequest :>
                          Post '[JSON] Operation
 
 -- | Moves a persistent disk from one zone to another.

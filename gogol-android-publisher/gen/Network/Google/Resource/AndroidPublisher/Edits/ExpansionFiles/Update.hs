@@ -68,7 +68,7 @@ type EditsExpansionFilesUpdateResource =
                            QueryParam "key" Key :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
-                                 ReqBody '[OctetStream] ExpansionFile :>
+                                 ReqBody '[JSON] ExpansionFile :>
                                    Put '[JSON] ExpansionFile
 
 -- | Updates the APK\'s Expansion File configuration to reference another

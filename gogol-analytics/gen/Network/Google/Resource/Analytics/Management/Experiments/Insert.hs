@@ -64,7 +64,7 @@ type ManagementExperimentsInsertResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[OctetStream] Experiment :>
+                                   ReqBody '[JSON] Experiment :>
                                      Post '[JSON] Experiment
 
 -- | Create a new experiment.

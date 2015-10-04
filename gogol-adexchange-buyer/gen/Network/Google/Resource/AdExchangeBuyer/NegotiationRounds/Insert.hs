@@ -57,7 +57,7 @@ type NegotiationRoundsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] NegotiationRoundDTO :>
+                         ReqBody '[JSON] NegotiationRoundDTO :>
                            Post '[JSON] NegotiationRoundDTO
 
 -- | Adds the requested negotiationRound to the requested negotiation.

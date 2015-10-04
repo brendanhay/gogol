@@ -57,7 +57,7 @@ type ContentCategoriesInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] ContentCategory :>
+                         ReqBody '[JSON] ContentCategory :>
                            Post '[JSON] ContentCategory
 
 -- | Inserts a new content category.

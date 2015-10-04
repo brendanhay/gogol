@@ -64,7 +64,7 @@ type EditsTracksPatchResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] Track :> Patch '[JSON] Track
+                             ReqBody '[JSON] Track :> Patch '[JSON] Track
 
 -- | Updates the track configuration for the specified track type. When
 -- halted, the rollout track cannot be updated without adding new APKs, and

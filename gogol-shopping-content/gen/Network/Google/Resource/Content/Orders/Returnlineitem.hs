@@ -59,7 +59,7 @@ type OrdersReturnlineitemResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] OrdersReturnLineItemRequest :>
+                           ReqBody '[JSON] OrdersReturnLineItemRequest :>
                              Post '[JSON] OrdersReturnLineItemResponse
 
 -- | Returns a line item.

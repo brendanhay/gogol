@@ -78,7 +78,7 @@ type ActivitiesWatchResource =
                                            QueryParam "oauth_token" OAuthToken
                                              :>
                                              QueryParam "alt" AltJSON :>
-                                               ReqBody '[OctetStream] Channel :>
+                                               ReqBody '[JSON] Channel :>
                                                  Post '[JSON] Channel
 
 -- | Push changes to activities

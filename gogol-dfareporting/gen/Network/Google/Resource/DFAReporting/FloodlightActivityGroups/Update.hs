@@ -57,7 +57,7 @@ type FloodlightActivityGroupsUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] FloodlightActivityGroup :>
+                         ReqBody '[JSON] FloodlightActivityGroup :>
                            Put '[JSON] FloodlightActivityGroup
 
 -- | Updates an existing floodlight activity group.

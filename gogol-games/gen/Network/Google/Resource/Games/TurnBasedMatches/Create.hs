@@ -57,7 +57,7 @@ type TurnBasedMatchesCreateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] TurnBasedMatchCreateRequest :>
+                         ReqBody '[JSON] TurnBasedMatchCreateRequest :>
                            Post '[JSON] TurnBasedMatch
 
 -- | Create a turn-based match.

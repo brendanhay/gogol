@@ -58,7 +58,7 @@ type RoomsCreateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] RoomCreateRequest :>
+                         ReqBody '[JSON] RoomCreateRequest :>
                            Post '[JSON] Room
 
 -- | Create a room. For internal use by the Games SDK only. Calling this

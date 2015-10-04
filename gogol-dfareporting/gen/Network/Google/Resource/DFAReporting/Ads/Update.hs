@@ -57,7 +57,7 @@ type AdsUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] Ad :> Put '[JSON] Ad
+                         ReqBody '[JSON] Ad :> Put '[JSON] Ad
 
 -- | Updates an existing ad.
 --

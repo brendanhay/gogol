@@ -59,8 +59,7 @@ type EditsDetailsUpdateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] AppDetails :>
-                             Put '[JSON] AppDetails
+                           ReqBody '[JSON] AppDetails :> Put '[JSON] AppDetails
 
 -- | Updates app details for this edit.
 --

@@ -60,7 +60,7 @@ type CreativeFieldValuesUpdateResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] CreativeFieldValue :>
+                             ReqBody '[JSON] CreativeFieldValue :>
                                Put '[JSON] CreativeFieldValue
 
 -- | Updates an existing creative field value.

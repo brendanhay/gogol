@@ -55,7 +55,7 @@ type InAppProductsBatchResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] InAppProductsBatchRequest :>
+                       ReqBody '[JSON] InAppProductsBatchRequest :>
                          Post '[JSON] InAppProductsBatchResponse
 
 --

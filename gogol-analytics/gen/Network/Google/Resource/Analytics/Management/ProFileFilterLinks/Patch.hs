@@ -67,7 +67,7 @@ type ManagementProFileFilterLinksPatchResource =
                                QueryParam "key" Key :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
-                                     ReqBody '[OctetStream] ProFileFilterLink :>
+                                     ReqBody '[JSON] ProFileFilterLink :>
                                        Patch '[JSON] ProFileFilterLink
 
 -- | Update an existing profile filter link. This method supports patch

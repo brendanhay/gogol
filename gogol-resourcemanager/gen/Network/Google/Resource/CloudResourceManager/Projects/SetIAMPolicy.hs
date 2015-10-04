@@ -71,8 +71,8 @@ type ProjectsSetIAMPolicyResource =
                                QueryParam "key" Key :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
-                                     ReqBody '[OctetStream] SetIAMPolicyRequest
-                                       :> Post '[JSON] Policy
+                                     ReqBody '[JSON] SetIAMPolicyRequest :>
+                                       Post '[JSON] Policy
 
 -- | Sets the IAM access control policy for the specified project. We do not
 -- currently support \'domain:\' prefixed members in a Binding of a Policy.

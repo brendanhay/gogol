@@ -61,7 +61,7 @@ type DatasetsUpdateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Dataset :> Put '[JSON] Dataset
+                           ReqBody '[JSON] Dataset :> Put '[JSON] Dataset
 
 -- | Updates information in an existing dataset. The update method replaces
 -- the entire dataset resource, whereas the patch method only replaces

@@ -63,8 +63,7 @@ type EventsInsertResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[OctetStream] Event :>
-                                 Post '[JSON] Event
+                               ReqBody '[JSON] Event :> Post '[JSON] Event
 
 -- | Creates an event.
 --

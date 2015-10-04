@@ -61,8 +61,7 @@ type CampaignsInsertResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] Campaign :>
-                               Post '[JSON] Campaign
+                             ReqBody '[JSON] Campaign :> Post '[JSON] Campaign
 
 -- | Inserts a new campaign.
 --

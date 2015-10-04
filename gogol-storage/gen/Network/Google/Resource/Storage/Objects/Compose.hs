@@ -65,7 +65,7 @@ type ObjectsComposeResource =
                            QueryParam "key" Key :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
-                                 ReqBody '[OctetStream] ComposeRequest :>
+                                 ReqBody '[JSON] ComposeRequest :>
                                    Post '[JSON] Object
        :<|>
        "b" :>
@@ -82,7 +82,7 @@ type ObjectsComposeResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltMedia :>
-                                   ReqBody '[OctetStream] ComposeRequest :>
+                                   ReqBody '[JSON] ComposeRequest :>
                                      Post '[OctetStream] Body
 
 -- | Concatenates a list of existing objects into a new object in the same

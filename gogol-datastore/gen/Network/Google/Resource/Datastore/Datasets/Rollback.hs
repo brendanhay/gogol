@@ -56,7 +56,7 @@ type DatasetsRollbackResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltPROTO :>
-                       ReqBody '[OctetStream] RollbackRequest :>
+                       ReqBody '[JSON] RollbackRequest :>
                          Post '[JSON] RollbackResponse
 
 -- | Roll back a transaction.

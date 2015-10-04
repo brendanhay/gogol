@@ -62,7 +62,7 @@ type MarketplaceOrdersPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] MarketplaceOrder :>
+                           ReqBody '[JSON] MarketplaceOrder :>
                              Patch '[JSON] MarketplaceOrder
 
 -- | Update the given order. This method supports patch semantics.

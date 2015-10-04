@@ -64,7 +64,7 @@ type EditsImagesUploadResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] Body :>
+                               ReqBody '[OctetStream] Body :>
                                  Post '[JSON] ImagesUploadResponse
 
 -- | Uploads a new image and adds it to the list of images for the specified

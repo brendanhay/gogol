@@ -56,8 +56,7 @@ type QueriesRunqueryResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] RunQueryRequest :>
-                         Post '[JSON] ()
+                       ReqBody '[JSON] RunQueryRequest :> Post '[JSON] ()
 
 -- | Runs a stored query to generate a report.
 --

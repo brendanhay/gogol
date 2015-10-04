@@ -57,9 +57,8 @@ type ScoresResetMultipleForAllPlayersResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream]
-                         ScoresResetMultipleForAllRequest
-                         :> Post '[JSON] ()
+                       ReqBody '[JSON] ScoresResetMultipleForAllRequest :>
+                         Post '[JSON] ()
 
 -- | Resets scores for the leaderboards with the given IDs for all players.
 -- This method is only available to user accounts for your developer

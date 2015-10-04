@@ -69,7 +69,7 @@ type SchedulePatchResource =
                                QueryParam "key" Key :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
-                                     ReqBody '[OctetStream] Schedule :>
+                                     ReqBody '[JSON] Schedule :>
                                        Patch '[JSON] Schedule
 
 -- | Replaces the schedule of a job with the provided schedule. This method

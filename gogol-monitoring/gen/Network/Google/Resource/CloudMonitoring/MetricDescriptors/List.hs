@@ -66,8 +66,8 @@ type MetricDescriptorsListResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] ListMetricDescriptorsRequest
-                               :> Get '[JSON] ListMetricDescriptorsResponse
+                             ReqBody '[JSON] ListMetricDescriptorsRequest :>
+                               Get '[JSON] ListMetricDescriptorsResponse
 
 -- | List metric descriptors that match the query. If the query is not set,
 -- then all of the metric descriptors will be returned. Large responses

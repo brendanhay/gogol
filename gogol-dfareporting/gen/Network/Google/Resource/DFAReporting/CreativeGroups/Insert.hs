@@ -57,7 +57,7 @@ type CreativeGroupsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] CreativeGroup :>
+                         ReqBody '[JSON] CreativeGroup :>
                            Post '[JSON] CreativeGroup
 
 -- | Inserts a new creative group.

@@ -54,7 +54,7 @@ type TablesCreateResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[OctetStream] Table :> Post '[JSON] Table
+                     ReqBody '[JSON] Table :> Post '[JSON] Table
 
 -- | Create a table asset.
 --

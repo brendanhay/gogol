@@ -72,9 +72,8 @@ type ProjectsSubscriptionsModifyPushConfigResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[OctetStream]
-                                     ModifyPushConfigRequest
-                                     :> Post '[JSON] Empty
+                                   ReqBody '[JSON] ModifyPushConfigRequest :>
+                                     Post '[JSON] Empty
 
 -- | Modifies the PushConfig for a specified subscription. This may be used
 -- to change a push subscription to a pull one (signified by an empty

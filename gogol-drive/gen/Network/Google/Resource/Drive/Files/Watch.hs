@@ -65,8 +65,7 @@ type FilesWatchResource =
                            QueryParam "key" Key :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
-                                 ReqBody '[OctetStream] Channel :>
-                                   Post '[JSON] Channel
+                                 ReqBody '[JSON] Channel :> Post '[JSON] Channel
        :<|>
        "files" :>
          Capture "fileId" Text :>
@@ -82,7 +81,7 @@ type FilesWatchResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltMedia :>
-                                   ReqBody '[OctetStream] Channel :>
+                                   ReqBody '[JSON] Channel :>
                                      Post '[OctetStream] Body
 
 -- | Subscribe to changes on a file

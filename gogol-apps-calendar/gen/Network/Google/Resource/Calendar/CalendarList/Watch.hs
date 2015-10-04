@@ -71,7 +71,7 @@ type CalendarListWatchResource =
                                  QueryParam "key" Key :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
-                                       ReqBody '[OctetStream] Channel :>
+                                       ReqBody '[JSON] Channel :>
                                          Post '[JSON] Channel
 
 -- | Watch for changes to CalendarList resources.

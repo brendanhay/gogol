@@ -60,7 +60,7 @@ type AdvertiserGroupsPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] AdvertiserGroup :>
+                           ReqBody '[JSON] AdvertiserGroup :>
                              Patch '[JSON] AdvertiserGroup
 
 -- | Updates an existing advertiser group. This method supports patch

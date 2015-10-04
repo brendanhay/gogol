@@ -69,7 +69,7 @@ type OrganizationsUpdateResource =
                                QueryParam "key" Key :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
-                                     ReqBody '[OctetStream] Organization :>
+                                     ReqBody '[JSON] Organization :>
                                        Put '[JSON] Organization
 
 -- | Updates an Organization resource.

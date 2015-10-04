@@ -59,7 +59,7 @@ type StyleUpdateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] StyleSetting :>
+                           ReqBody '[JSON] StyleSetting :>
                              Put '[JSON] StyleSetting
 
 -- | Updates an existing style.

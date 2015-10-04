@@ -57,8 +57,7 @@ type VideosReportAbuseResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] VideoAbuseReport :>
-                           Post '[JSON] ()
+                         ReqBody '[JSON] VideoAbuseReport :> Post '[JSON] ()
 
 -- | Report abuse for a video.
 --

@@ -57,7 +57,7 @@ type RemarketingListsUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] RemarketingList :>
+                         ReqBody '[JSON] RemarketingList :>
                            Put '[JSON] RemarketingList
 
 -- | Updates an existing remarketing list.

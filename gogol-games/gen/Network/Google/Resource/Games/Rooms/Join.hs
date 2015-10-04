@@ -60,8 +60,7 @@ type RoomsJoinResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] RoomJoinRequest :>
-                             Post '[JSON] Room
+                           ReqBody '[JSON] RoomJoinRequest :> Post '[JSON] Room
 
 -- | Join a room. For internal use by the Games SDK only. Calling this method
 -- directly is unsupported.

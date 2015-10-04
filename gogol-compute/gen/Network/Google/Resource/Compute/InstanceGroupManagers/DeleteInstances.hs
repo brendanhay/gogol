@@ -65,7 +65,7 @@ type InstanceGroupManagersDeleteInstancesResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[OctetStream]
+                               ReqBody '[JSON]
                                  InstanceGroupManagersDeleteInstancesRequest
                                  :> Post '[JSON] Operation
 

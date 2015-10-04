@@ -61,7 +61,7 @@ type ProductsApproveResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] ProductsApproveRequest :>
+                             ReqBody '[JSON] ProductsApproveRequest :>
                                Post '[JSON] ()
 
 -- | Approves the specified product (and the relevant app permissions, if

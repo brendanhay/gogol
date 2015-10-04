@@ -57,8 +57,7 @@ type PropertiesInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] Property :>
-                           Post '[JSON] Property
+                         ReqBody '[JSON] Property :> Post '[JSON] Property
 
 -- | Adds a property to a file.
 --

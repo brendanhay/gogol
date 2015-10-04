@@ -97,8 +97,7 @@ type ObjectsCopyResource =
                                                        :>
                                                        QueryParam "alt" AltJSON
                                                          :>
-                                                         ReqBody '[OctetStream]
-                                                           Object
+                                                         ReqBody '[JSON] Object
                                                            :>
                                                            Post '[JSON] Object
        :<|>
@@ -142,8 +141,7 @@ type ObjectsCopyResource =
                                                          QueryParam "alt"
                                                            AltMedia
                                                            :>
-                                                           ReqBody
-                                                             '[OctetStream]
+                                                           ReqBody '[JSON]
                                                              Object
                                                              :>
                                                              Post '[OctetStream]

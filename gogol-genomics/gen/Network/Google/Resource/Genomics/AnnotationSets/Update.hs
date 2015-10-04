@@ -58,7 +58,7 @@ type AnnotationSetsUpdateResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] AnnotationSet :>
+                       ReqBody '[JSON] AnnotationSet :>
                          Put '[JSON] AnnotationSet
 
 -- | Updates an annotation set. The update must respect all mutability

@@ -57,7 +57,7 @@ type AdvertiserGroupsUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] AdvertiserGroup :>
+                         ReqBody '[JSON] AdvertiserGroup :>
                            Put '[JSON] AdvertiserGroup
 
 -- | Updates an existing advertiser group.

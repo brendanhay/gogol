@@ -61,7 +61,7 @@ type ReportsCompatibleFieldsQueryResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] Report :>
+                             ReqBody '[JSON] Report :>
                                Post '[JSON] CompatibleFields
 
 -- | Returns the fields that are compatible to be selected in the respective

@@ -65,7 +65,7 @@ type ManagementCustomMetricsUpdateResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[OctetStream] CustomMetric :>
+                                   ReqBody '[JSON] CustomMetric :>
                                      Put '[JSON] CustomMetric
 
 -- | Updates an existing custom metric.

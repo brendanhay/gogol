@@ -60,7 +60,7 @@ type ManagementWebPropertiesPatchResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] WebProperty :>
+                             ReqBody '[JSON] WebProperty :>
                                Patch '[JSON] WebProperty
 
 -- | Updates an existing web property. This method supports patch semantics.

@@ -57,7 +57,7 @@ type AccountUserProFilesUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] AccountUserProFile :>
+                         ReqBody '[JSON] AccountUserProFile :>
                            Put '[JSON] AccountUserProFile
 
 -- | Updates an existing account user profile.

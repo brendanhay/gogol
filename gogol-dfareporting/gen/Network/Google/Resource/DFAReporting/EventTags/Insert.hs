@@ -57,8 +57,7 @@ type EventTagsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] EventTag :>
-                           Post '[JSON] EventTag
+                         ReqBody '[JSON] EventTag :> Post '[JSON] EventTag
 
 -- | Inserts a new event tag.
 --

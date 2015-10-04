@@ -68,8 +68,7 @@ type ProjectsTopicsCreateResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[OctetStream] Topic :>
-                                     Put '[JSON] Topic
+                                   ReqBody '[JSON] Topic :> Put '[JSON] Topic
 
 -- | Creates the given topic with the given name.
 --

@@ -57,8 +57,7 @@ type EnterprisesInsertResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] Enterprise :>
-                         Post '[JSON] Enterprise
+                       ReqBody '[JSON] Enterprise :> Post '[JSON] Enterprise
 
 -- | Establishes the binding between the MDM and an enterprise. This is now
 -- deprecated; use enroll instead.

@@ -68,7 +68,7 @@ type ScheduleUpdateResource =
                                QueryParam "key" Key :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
-                                     ReqBody '[OctetStream] Schedule :>
+                                     ReqBody '[JSON] Schedule :>
                                        Put '[JSON] Schedule
 
 -- | Replaces the schedule of a job with the provided schedule.

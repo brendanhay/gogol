@@ -60,7 +60,7 @@ type LandingPagesInsertResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] LandingPage :>
+                             ReqBody '[JSON] LandingPage :>
                                Post '[JSON] LandingPage
 
 -- | Inserts a new landing page for the specified campaign.

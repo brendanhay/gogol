@@ -57,7 +57,7 @@ type PlacementGroupsUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] PlacementGroup :>
+                         ReqBody '[JSON] PlacementGroup :>
                            Put '[JSON] PlacementGroup
 
 -- | Updates an existing placement group.

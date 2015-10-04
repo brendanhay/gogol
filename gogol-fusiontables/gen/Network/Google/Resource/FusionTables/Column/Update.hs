@@ -59,7 +59,7 @@ type ColumnUpdateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Column :> Put '[JSON] Column
+                           ReqBody '[JSON] Column :> Put '[JSON] Column
 
 -- | Updates the name or type of an existing column.
 --

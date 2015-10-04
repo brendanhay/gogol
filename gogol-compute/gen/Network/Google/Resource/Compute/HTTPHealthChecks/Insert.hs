@@ -58,7 +58,7 @@ type HTTPHealthChecksInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] HTTPHealthCheck :>
+                         ReqBody '[JSON] HTTPHealthCheck :>
                            Post '[JSON] Operation
 
 -- | Creates a HttpHealthCheck resource in the specified project using the

@@ -67,7 +67,7 @@ type DevicesSetStateResource =
                            QueryParam "key" Key :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
-                                 ReqBody '[OctetStream] DeviceState :>
+                                 ReqBody '[JSON] DeviceState :>
                                    Put '[JSON] DeviceState
 
 -- | Sets whether a device is enabled or disabled for access by the user to

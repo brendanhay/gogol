@@ -61,8 +61,7 @@ type AccountsAdUnitsInsertResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] AdUnit :>
-                               Post '[JSON] AdUnit
+                             ReqBody '[JSON] AdUnit :> Post '[JSON] AdUnit
 
 -- | Insert the supplied ad unit into the specified publisher AdSense
 -- account.

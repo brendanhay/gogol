@@ -73,8 +73,7 @@ type ProjectsJobsWorkItemsLeaseResource =
                                      QueryParam "key" Key :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
-                                           ReqBody '[OctetStream]
-                                             LeaseWorkItemRequest
+                                           ReqBody '[JSON] LeaseWorkItemRequest
                                              :>
                                              Post '[JSON] LeaseWorkItemResponse
 

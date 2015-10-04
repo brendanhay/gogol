@@ -57,7 +57,7 @@ type ReportsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] Report :> Post '[JSON] Report
+                         ReqBody '[JSON] Report :> Post '[JSON] Report
 
 -- | Creates a report.
 --

@@ -57,8 +57,7 @@ type DatasetsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] Dataset :>
-                           Post '[JSON] Dataset
+                         ReqBody '[JSON] Dataset :> Post '[JSON] Dataset
 
 -- | Creates a new empty dataset.
 --

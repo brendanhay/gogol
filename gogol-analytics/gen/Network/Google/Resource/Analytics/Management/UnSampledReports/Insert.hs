@@ -64,7 +64,7 @@ type ManagementUnSampledReportsInsertResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[OctetStream] UnSampledReport :>
+                                   ReqBody '[JSON] UnSampledReport :>
                                      Post '[JSON] UnSampledReport
 
 -- | Create a new unsampled report.

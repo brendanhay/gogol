@@ -59,8 +59,7 @@ type CampaignsPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Campaign :>
-                             Patch '[JSON] Campaign
+                           ReqBody '[JSON] Campaign :> Patch '[JSON] Campaign
 
 -- | Updates an existing campaign. This method supports patch semantics.
 --

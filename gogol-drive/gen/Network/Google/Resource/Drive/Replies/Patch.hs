@@ -62,7 +62,7 @@ type RepliesPatchResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[OctetStream] CommentReply :>
+                               ReqBody '[JSON] CommentReply :>
                                  Patch '[JSON] CommentReply
 
 -- | Updates an existing reply. This method supports patch semantics.

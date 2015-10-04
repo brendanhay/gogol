@@ -59,8 +59,7 @@ type RevisionsUpdateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Revision :>
-                             Put '[JSON] Revision
+                           ReqBody '[JSON] Revision :> Put '[JSON] Revision
 
 -- | Updates a revision.
 --

@@ -57,8 +57,7 @@ type ACLInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] ACLRule :>
-                           Post '[JSON] ACLRule
+                         ReqBody '[JSON] ACLRule :> Post '[JSON] ACLRule
 
 -- | Creates an access control rule.
 --

@@ -63,7 +63,7 @@ type PagesPatchResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[OctetStream] Page :> Patch '[JSON] Page
+                               ReqBody '[JSON] Page :> Patch '[JSON] Page
 
 -- | Update a page. This method supports patch semantics.
 --

@@ -63,7 +63,7 @@ type PostsInsertResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[OctetStream] Post :> Post '[JSON] Post
+                               ReqBody '[JSON] Post :> Post '[JSON] Post
 
 -- | Add a post.
 --

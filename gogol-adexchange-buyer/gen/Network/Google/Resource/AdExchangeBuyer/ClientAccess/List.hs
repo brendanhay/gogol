@@ -54,8 +54,7 @@ type ClientAccessListResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[OctetStream]
-                       ListClientAccessCapabilitiesRequest
+                     ReqBody '[JSON] ListClientAccessCapabilitiesRequest
                        :> Get '[JSON] ListClientAccessCapabilitiesResponse
 
 --

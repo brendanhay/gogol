@@ -60,7 +60,7 @@ type GroupsRemoveMemberResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[OctetStream] GroupsRemoveMemberRequest :>
+                             ReqBody '[JSON] GroupsRemoveMemberRequest :>
                                Post '[JSON] Operation
 
 -- | Removes users from the specified group.

@@ -58,7 +58,7 @@ type BucketsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[OctetStream] Bucket :> Post '[JSON] Bucket
+                         ReqBody '[JSON] Bucket :> Post '[JSON] Bucket
 
 -- | Creates a new bucket.
 --

@@ -59,8 +59,7 @@ type TemplatePatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] Template :>
-                             Patch '[JSON] Template
+                           ReqBody '[JSON] Template :> Patch '[JSON] Template
 
 -- | Updates an existing template. This method supports patch semantics.
 --

@@ -60,7 +60,7 @@ type ContentCategoriesPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[OctetStream] ContentCategory :>
+                           ReqBody '[JSON] ContentCategory :>
                              Patch '[JSON] ContentCategory
 
 -- | Updates an existing content category. This method supports patch

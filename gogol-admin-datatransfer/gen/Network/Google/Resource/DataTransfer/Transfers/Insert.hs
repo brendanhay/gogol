@@ -54,7 +54,7 @@ type TransfersInsertResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[OctetStream] DataTransfer :>
+                     ReqBody '[JSON] DataTransfer :>
                        Post '[JSON] DataTransfer
 
 -- | Inserts a data transfer request.
