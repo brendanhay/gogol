@@ -92,11 +92,15 @@ getType g = loc "getType" g $ memo typed g go
         SAny {}        -> may (TType "JSONValue")
         SRef _ r       -> unmay <$> getType (ref r)
         --- FIXME: add natural/numeric manipulations
-        SLit _ l       -> may (TLit l)
+        SLit i l       -> may (lit i l)
         SEnm {}        -> may (TType g)
         SArr _ (Arr e) -> (TList <$> (getType e)) >>= may
         SObj {}        -> may (TType g)
       where
+        lit i l
+            | i ^. iRepeated = TList (TLit l)
+            | otherwise      = TLit l
+
         may | required  s = pure
             | defaulted s = pure
             | otherwise   = pure . TMaybe

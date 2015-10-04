@@ -124,13 +124,17 @@ downloadDecl :: Global
              -> Method Solved
              -> Decl
 downloadDecl n p api url fs m =
-    googleRequestDecl n (tycon n) rs alt p api url fs m
+    googleRequestDecl n ty rs alt p api url fs m pat prec
   where
-    rs = InsType noLoc
-        (TyApp (TyCon "Rs") (TyApp (TyCon "Download") (tycon n)))
-        (TyCon "Body")
+    ty = TyApp (TyCon "Download") (tycon n)
+    rs = InsType noLoc (TyApp (TyCon "Rs") ty) (TyCon "Body")
 
-    alt = Just (var "Media")
+    alt = Just (var "AltMedia")
+
+    pat | _mSupportsMediaDownload m = PInfixApp PWildCard (UnQual (sym ":<|>")) (pvar "go")
+        | otherwise                 = pvar "go"
+
+    prec = PApp (UnQual "Download") [PRec (UnQual (dname n)) [PFieldWildcard]]
 
 requestDecl :: Global
             -> Prefix
@@ -140,13 +144,18 @@ requestDecl :: Global
             -> Method Solved
             -> Decl
 requestDecl n p api url fs m =
-    googleRequestDecl n (tycon n) rs alt p api url fs m
+    googleRequestDecl n (tycon n) rs alt p api url fs m pat prec
   where
     rs = InsType noLoc (TyApp (TyCon "Rs") (tycon n)) $
         maybe unit_tycon (tycon . ref) (_mResponse m)
 
     alt = var . name . Text.unpack . alternate <$>
         (Map.lookup "alt" (_mParameters m) >>= view iDefault)
+
+    pat | _mSupportsMediaDownload m = PInfixApp (pvar "go") (UnQual (sym ":<|>")) PWildCard
+        | otherwise                 = pvar "go"
+
+    prec = PRec (UnQual (dname n)) [PFieldWildcard]
 
 googleRequestDecl :: Global
                   -> Type
@@ -157,8 +166,10 @@ googleRequestDecl :: Global
                   -> Name
                   -> [Local]
                   -> Method Solved
+                  -> Pat
+                  -> Pat
                   -> Decl
-googleRequestDecl g n assoc alt p api url fields m =
+googleRequestDecl g n assoc alt p api url fields m pat prec =
     InstDecl noLoc Nothing [] [] (unqual "GoogleRequest") [n]
         [ assoc
         , request
@@ -181,18 +192,20 @@ googleRequestDecl g n assoc alt p api url fields m =
                     , var "u"
                     ]
             ]
-          where
-            pat | _mSupportsMediaDownload m = PInfixApp (pvar "go") (UnQual (sym ":<|>")) PWildCard
-                | otherwise = pvar "go"
 
         rhs = UnGuardedRhs . appFun (var "go") $ map go fs'
             ++ maybeToList (app (var "Just") <$> alt)
             ++ maybeToList (go <$> rq)
+            ++ maybeToList (go <$> pay)
           where
-            go l | Just p <- Map.lookup l ps
-                 , _pLocation p == Query
-                 , parameter p || defaulted p = app (var "Just") (v l)
-                 | otherwise                  = v l
+            go l = case Map.lookup l ps of
+                Just p | _pLocation p == Query
+                       , p ^. iRepeated -> infixApp (v l) "^." (var "_Default")
+
+                Just p | _pLocation p == Query
+                       , parameter p || defaulted p -> app (var "Just") (v l)
+
+                _       -> v l
 
             ps = _mParameters m
             v  = var . fname p
@@ -200,13 +213,15 @@ googleRequestDecl g n assoc alt p api url fields m =
             (fs', rq) | Just _ <- _mRequest m = (delete "payload" fs, Just "payload")
                       | otherwise             = (fs, Nothing)
 
+            pay | _mSupportsMediaUpload m = Just "media"
+                | otherwise               = Nothing
+
     fs = delete "alt"
        . orderParams id (Map.keys (_mParameters m))
        . nub
        $ map fst (rights (extractPath (_mPath m))) ++ _mParameterOrder m
 
     pats = [pvar "r", pvar "u", prec]
-    prec = PRec (UnQual (dname g)) [PFieldWildcard]
 
 authDecl :: Global -> Prefix -> [Local] -> Decl
 authDecl g p fs = InstDecl noLoc Nothing [] [] (unqual "GoogleAuth") [tycon g]
@@ -374,8 +389,8 @@ def s
 terminalType :: TType -> Type
 terminalType = internalType . go
   where
-    go (TMaybe x) = x
-    go (TList  x) = x
+    go (TMaybe x) = go x
+    go (TList  x) = go x
     go x          = x
 
 externalType :: TType -> Type
