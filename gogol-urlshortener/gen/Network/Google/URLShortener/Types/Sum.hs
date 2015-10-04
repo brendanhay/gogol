@@ -18,64 +18,64 @@ module Network.Google.URLShortener.Types.Sum where
 import           Network.Google.Prelude
 
 -- | Additional information to return.
-data URLshortenerURLGetProjection
+data URLListProjection
     = AnalyticsClicks
       -- ^ @ANALYTICS_CLICKS@
+      -- Returns short URL click counts.
+    | Full
+      -- ^ @FULL@
+      -- Returns short URL click counts.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable URLListProjection
+
+instance FromText URLListProjection where
+    fromText = \case
+        "ANALYTICS_CLICKS" -> Just AnalyticsClicks
+        "FULL" -> Just Full
+        _ -> Nothing
+
+instance ToText URLListProjection where
+    toText = \case
+        AnalyticsClicks -> "ANALYTICS_CLICKS"
+        Full -> "FULL"
+
+instance FromJSON URLListProjection where
+    parseJSON = parseJSONText "URLListProjection"
+
+instance ToJSON URLListProjection where
+    toJSON = toJSONText
+
+-- | Additional information to return.
+data URLGetProjection
+    = UGPAnalyticsClicks
+      -- ^ @ANALYTICS_CLICKS@
       -- Returns only click counts.
-    | AnalyticsTopStrings
+    | UGPAnalyticsTopStrings
       -- ^ @ANALYTICS_TOP_STRINGS@
       -- Returns only top string counts.
-    | Full
+    | UGPFull
       -- ^ @FULL@
       -- Returns the creation timestamp and all available analytics.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable URLshortenerURLGetProjection
+instance Hashable URLGetProjection
 
-instance FromText URLshortenerURLGetProjection where
+instance FromText URLGetProjection where
     fromText = \case
-        "ANALYTICS_CLICKS" -> Just AnalyticsClicks
-        "ANALYTICS_TOP_STRINGS" -> Just AnalyticsTopStrings
-        "FULL" -> Just Full
+        "ANALYTICS_CLICKS" -> Just UGPAnalyticsClicks
+        "ANALYTICS_TOP_STRINGS" -> Just UGPAnalyticsTopStrings
+        "FULL" -> Just UGPFull
         _ -> Nothing
 
-instance ToText URLshortenerURLGetProjection where
+instance ToText URLGetProjection where
     toText = \case
-        AnalyticsClicks -> "ANALYTICS_CLICKS"
-        AnalyticsTopStrings -> "ANALYTICS_TOP_STRINGS"
-        Full -> "FULL"
+        UGPAnalyticsClicks -> "ANALYTICS_CLICKS"
+        UGPAnalyticsTopStrings -> "ANALYTICS_TOP_STRINGS"
+        UGPFull -> "FULL"
 
-instance FromJSON URLshortenerURLGetProjection where
-    parseJSON = parseJSONText "URLshortenerURLGetProjection"
+instance FromJSON URLGetProjection where
+    parseJSON = parseJSONText "URLGetProjection"
 
-instance ToJSON URLshortenerURLGetProjection where
-    toJSON = toJSONText
-
--- | Additional information to return.
-data Projection
-    = PAnalyticsClicks
-      -- ^ @ANALYTICS_CLICKS@
-      -- Returns short URL click counts.
-    | PFull
-      -- ^ @FULL@
-      -- Returns short URL click counts.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Projection
-
-instance FromText Projection where
-    fromText = \case
-        "ANALYTICS_CLICKS" -> Just PAnalyticsClicks
-        "FULL" -> Just PFull
-        _ -> Nothing
-
-instance ToText Projection where
-    toText = \case
-        PAnalyticsClicks -> "ANALYTICS_CLICKS"
-        PFull -> "FULL"
-
-instance FromJSON Projection where
-    parseJSON = parseJSONText "Projection"
-
-instance ToJSON Projection where
+instance ToJSON URLGetProjection where
     toJSON = toJSONText

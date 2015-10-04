@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Advertisers.Update
     , advQuotaUser
     , advPrettyPrint
     , advUserIP
-    , advProfileId
+    , advProFileId
     , advPayload
     , advKey
     , advOAuthToken
@@ -57,7 +57,8 @@ type AdvertisersUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Advertiser :> Put '[JSON] Advertiser
+                         ReqBody '[OctetStream] Advertiser :>
+                           Put '[JSON] Advertiser
 
 -- | Updates an existing advertiser.
 --
@@ -66,7 +67,7 @@ data AdvertisersUpdate' = AdvertisersUpdate'
     { _advQuotaUser   :: !(Maybe Text)
     , _advPrettyPrint :: !Bool
     , _advUserIP      :: !(Maybe Text)
-    , _advProfileId   :: !Int64
+    , _advProFileId   :: !Int64
     , _advPayload     :: !Advertiser
     , _advKey         :: !(Maybe Key)
     , _advOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +84,7 @@ data AdvertisersUpdate' = AdvertisersUpdate'
 --
 -- * 'advUserIP'
 --
--- * 'advProfileId'
+-- * 'advProFileId'
 --
 -- * 'advPayload'
 --
@@ -96,12 +97,12 @@ advertisersUpdate'
     :: Int64 -- ^ 'profileId'
     -> Advertiser -- ^ 'payload'
     -> AdvertisersUpdate'
-advertisersUpdate' pAdvProfileId_ pAdvPayload_ =
+advertisersUpdate' pAdvProFileId_ pAdvPayload_ =
     AdvertisersUpdate'
     { _advQuotaUser = Nothing
     , _advPrettyPrint = True
     , _advUserIP = Nothing
-    , _advProfileId = pAdvProfileId_
+    , _advProFileId = pAdvProFileId_
     , _advPayload = pAdvPayload_
     , _advKey = Nothing
     , _advOAuthToken = Nothing
@@ -128,9 +129,9 @@ advUserIP
   = lens _advUserIP (\ s a -> s{_advUserIP = a})
 
 -- | User profile ID associated with this request.
-advProfileId :: Lens' AdvertisersUpdate' Int64
-advProfileId
-  = lens _advProfileId (\ s a -> s{_advProfileId = a})
+advProFileId :: Lens' AdvertisersUpdate' Int64
+advProFileId
+  = lens _advProFileId (\ s a -> s{_advProFileId = a})
 
 -- | Multipart request metadata.
 advPayload :: Lens' AdvertisersUpdate' Advertiser
@@ -162,7 +163,7 @@ instance GoogleRequest AdvertisersUpdate' where
         type Rs AdvertisersUpdate' = Advertiser
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdvertisersUpdate'{..}
-          = go _advProfileId _advQuotaUser
+          = go _advProFileId _advQuotaUser
               (Just _advPrettyPrint)
               _advUserIP
               _advFields

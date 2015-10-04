@@ -58,8 +58,8 @@ module Network.Google.DoubleClickBids
     , lrrReports
     , lrrKind
 
-    -- ** Frequency
-    , Frequency (..)
+    -- ** QueryMetadataFormat
+    , QueryMetadataFormat (..)
 
     -- ** QueryMetadata
     , QueryMetadata
@@ -76,28 +76,6 @@ module Network.Google.DoubleClickBids
     , qmTitle
     , qmSendNotification
 
-    -- ** State
-    , State (..)
-
-    -- ** GroupBysItem
-    , GroupBysItem (..)
-
-    -- ** ParametersType
-    , ParametersType (..)
-
-    -- ** UploadLineItemsRequest
-    , UploadLineItemsRequest
-    , uploadLineItemsRequest
-    , ulirLineItems
-    , ulirFormat
-    , ulirDryRun
-
-    -- ** FilterPair
-    , FilterPair
-    , filterPair
-    , fpValue
-    , fpType
-
     -- ** RunQueryRequest
     , RunQueryRequest
     , runQueryRequest
@@ -106,11 +84,24 @@ module Network.Google.DoubleClickBids
     , rqrReportDataStartTimeMs
     , rqrTimezoneCode
 
-    -- ** ListQueriesResponse
-    , ListQueriesResponse
-    , listQueriesResponse
-    , lqrQueries
-    , lqrKind
+    -- ** FilterPair
+    , FilterPair
+    , filterPair
+    , fpValue
+    , fpType
+
+    -- ** UploadLineItemsRequest
+    , UploadLineItemsRequest
+    , uploadLineItemsRequest
+    , ulirLineItems
+    , ulirFormat
+    , ulirDryRun
+
+    -- ** ParametersType
+    , ParametersType (..)
+
+    -- ** DownloadLineItemsRequestFilterType
+    , DownloadLineItemsRequestFilterType (..)
 
     -- ** DownloadLineItemsRequest
     , DownloadLineItemsRequest
@@ -119,16 +110,25 @@ module Network.Google.DoubleClickBids
     , dlirFormat
     , dlirFilterIds
 
+    -- ** ListQueriesResponse
+    , ListQueriesResponse
+    , listQueriesResponse
+    , lqrQueries
+    , lqrKind
+
     -- ** UploadLineItemsResponse
     , UploadLineItemsResponse
     , uploadLineItemsResponse
     , ulirUploadStatus
 
-    -- ** FilterType
-    , FilterType (..)
+    -- ** QueryMetadataDataRange
+    , QueryMetadataDataRange (..)
 
-    -- ** Format
-    , Format (..)
+    -- ** ParametersMetricsItem
+    , ParametersMetricsItem (..)
+
+    -- ** QueryScheduleFrequency
+    , QueryScheduleFrequency (..)
 
     -- ** ReportMetadata
     , ReportMetadata
@@ -170,14 +170,6 @@ module Network.Google.DoubleClickBids
     , usRowStatus
     , usErrors
 
-    -- ** DownloadLineItemsResponse
-    , DownloadLineItemsResponse
-    , downloadLineItemsResponse
-    , dlirLineItems
-
-    -- ** DataRange
-    , DataRange (..)
-
     -- ** QuerySchedule
     , QuerySchedule
     , querySchedule
@@ -186,6 +178,11 @@ module Network.Google.DoubleClickBids
     , qsNextRunMinuteOfDay
     , qsNextRunTimezoneCode
 
+    -- ** DownloadLineItemsResponse
+    , DownloadLineItemsResponse
+    , downloadLineItemsResponse
+    , dlirLineItems
+
     -- ** ReportStatus
     , ReportStatus
     , reportStatus
@@ -193,9 +190,6 @@ module Network.Google.DoubleClickBids
     , rsFinishTimeMs
     , rsFormat
     , rsFailure
-
-    -- ** MetricsItem
-    , MetricsItem (..)
 
     -- ** Query
     , Query
@@ -218,22 +212,28 @@ module Network.Google.DoubleClickBids
     , pGroupBys
     , pType
 
+    -- ** FilterPairType
+    , FilterPairType (..)
+
     -- ** RunQueryRequestDataRange
     , RunQueryRequestDataRange (..)
 
-    -- ** ErrorCode
-    , ErrorCode (..)
+    -- ** ReportStatusState
+    , ReportStatusState (..)
 
-    -- ** Type
-    , Type (..)
+    -- ** ParametersGroupBysItem
+    , ParametersGroupBysItem (..)
+
+    -- ** ReportFailureErrorCode
+    , ReportFailureErrorCode (..)
+
+    -- ** DownloadLineItemsRequestFormat
+    , DownloadLineItemsRequestFormat (..)
 
     -- ** ReportFailure
     , ReportFailure
     , reportFailure
     , rfErrorCode
-
-    -- ** DownloadLineItemsRequestFormat
-    , DownloadLineItemsRequestFormat (..)
 
     -- ** ReportStatusFormat
     , ReportStatusFormat (..)

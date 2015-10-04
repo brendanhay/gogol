@@ -57,7 +57,7 @@ type ParentsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] ParentReference :>
+                         ReqBody '[OctetStream] ParentReference :>
                            Post '[JSON] ParentReference
 
 -- | Adds a parent folder for a file.

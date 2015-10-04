@@ -19,66 +19,39 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types.Sum
 
 --
--- /See:/ 'testOrderCustomer' smart constructor.
-data TestOrderCustomer = TestOrderCustomer
-    { _tocFullName                    :: !(Maybe Text)
-    , _tocEmail                       :: !(Maybe Text)
-    , _tocExplicitMarketingPreference :: !(Maybe Bool)
+-- /See:/ 'ordersAcknowledgeRequest' smart constructor.
+newtype OrdersAcknowledgeRequest = OrdersAcknowledgeRequest
+    { _oarOperationId :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TestOrderCustomer' with the minimum fields required to make a request.
+-- | Creates a value of 'OrdersAcknowledgeRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tocFullName'
---
--- * 'tocEmail'
---
--- * 'tocExplicitMarketingPreference'
-testOrderCustomer
-    :: TestOrderCustomer
-testOrderCustomer =
-    TestOrderCustomer
-    { _tocFullName = Nothing
-    , _tocEmail = Nothing
-    , _tocExplicitMarketingPreference = Nothing
+-- * 'oarOperationId'
+ordersAcknowledgeRequest
+    :: OrdersAcknowledgeRequest
+ordersAcknowledgeRequest =
+    OrdersAcknowledgeRequest
+    { _oarOperationId = Nothing
     }
 
--- | Full name of the customer.
-tocFullName :: Lens' TestOrderCustomer (Maybe Text)
-tocFullName
-  = lens _tocFullName (\ s a -> s{_tocFullName = a})
+-- | The ID of the operation. Unique across all operations for a given order.
+oarOperationId :: Lens' OrdersAcknowledgeRequest (Maybe Text)
+oarOperationId
+  = lens _oarOperationId
+      (\ s a -> s{_oarOperationId = a})
 
--- | Email address of the customer.
-tocEmail :: Lens' TestOrderCustomer (Maybe Text)
-tocEmail = lens _tocEmail (\ s a -> s{_tocEmail = a})
-
--- | If set, this indicates the user had a choice to opt in or out of
--- providing marketing rights to the merchant. If unset, this indicates the
--- user has already made this choice in a previous purchase, and was thus
--- not shown the marketing right opt in\/out checkbox during the Purchases
--- on Google checkout flow. Optional.
-tocExplicitMarketingPreference :: Lens' TestOrderCustomer (Maybe Bool)
-tocExplicitMarketingPreference
-  = lens _tocExplicitMarketingPreference
-      (\ s a -> s{_tocExplicitMarketingPreference = a})
-
-instance FromJSON TestOrderCustomer where
+instance FromJSON OrdersAcknowledgeRequest where
         parseJSON
-          = withObject "TestOrderCustomer"
+          = withObject "OrdersAcknowledgeRequest"
               (\ o ->
-                 TestOrderCustomer <$>
-                   (o .:? "fullName") <*> (o .:? "email") <*>
-                     (o .:? "explicitMarketingPreference"))
+                 OrdersAcknowledgeRequest <$> (o .:? "operationId"))
 
-instance ToJSON TestOrderCustomer where
-        toJSON TestOrderCustomer{..}
+instance ToJSON OrdersAcknowledgeRequest where
+        toJSON OrdersAcknowledgeRequest{..}
           = object
-              (catMaybes
-                 [("fullName" .=) <$> _tocFullName,
-                  ("email" .=) <$> _tocEmail,
-                  ("explicitMarketingPreference" .=) <$>
-                    _tocExplicitMarketingPreference])
+              (catMaybes [("operationId" .=) <$> _oarOperationId])
 
 --
 -- /See:/ 'ordersUpdateMerchantOrderIdRequest' smart constructor.
@@ -169,39 +142,66 @@ instance ToJSON OrdersAdvanceTestOrderResponse where
           = object (catMaybes [Just ("kind" .= _oatorKind)])
 
 --
--- /See:/ 'ordersAcknowledgeRequest' smart constructor.
-newtype OrdersAcknowledgeRequest = OrdersAcknowledgeRequest
-    { _oarOperationId :: Maybe Text
+-- /See:/ 'testOrderCustomer' smart constructor.
+data TestOrderCustomer = TestOrderCustomer
+    { _tocFullName                    :: !(Maybe Text)
+    , _tocEmail                       :: !(Maybe Text)
+    , _tocExplicitMarketingPreference :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrdersAcknowledgeRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'TestOrderCustomer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'oarOperationId'
-ordersAcknowledgeRequest
-    :: OrdersAcknowledgeRequest
-ordersAcknowledgeRequest =
-    OrdersAcknowledgeRequest
-    { _oarOperationId = Nothing
+-- * 'tocFullName'
+--
+-- * 'tocEmail'
+--
+-- * 'tocExplicitMarketingPreference'
+testOrderCustomer
+    :: TestOrderCustomer
+testOrderCustomer =
+    TestOrderCustomer
+    { _tocFullName = Nothing
+    , _tocEmail = Nothing
+    , _tocExplicitMarketingPreference = Nothing
     }
 
--- | The ID of the operation. Unique across all operations for a given order.
-oarOperationId :: Lens' OrdersAcknowledgeRequest (Maybe Text)
-oarOperationId
-  = lens _oarOperationId
-      (\ s a -> s{_oarOperationId = a})
+-- | Full name of the customer.
+tocFullName :: Lens' TestOrderCustomer (Maybe Text)
+tocFullName
+  = lens _tocFullName (\ s a -> s{_tocFullName = a})
 
-instance FromJSON OrdersAcknowledgeRequest where
+-- | Email address of the customer.
+tocEmail :: Lens' TestOrderCustomer (Maybe Text)
+tocEmail = lens _tocEmail (\ s a -> s{_tocEmail = a})
+
+-- | If set, this indicates the user had a choice to opt in or out of
+-- providing marketing rights to the merchant. If unset, this indicates the
+-- user has already made this choice in a previous purchase, and was thus
+-- not shown the marketing right opt in\/out checkbox during the Purchases
+-- on Google checkout flow. Optional.
+tocExplicitMarketingPreference :: Lens' TestOrderCustomer (Maybe Bool)
+tocExplicitMarketingPreference
+  = lens _tocExplicitMarketingPreference
+      (\ s a -> s{_tocExplicitMarketingPreference = a})
+
+instance FromJSON TestOrderCustomer where
         parseJSON
-          = withObject "OrdersAcknowledgeRequest"
+          = withObject "TestOrderCustomer"
               (\ o ->
-                 OrdersAcknowledgeRequest <$> (o .:? "operationId"))
+                 TestOrderCustomer <$>
+                   (o .:? "fullName") <*> (o .:? "email") <*>
+                     (o .:? "explicitMarketingPreference"))
 
-instance ToJSON OrdersAcknowledgeRequest where
-        toJSON OrdersAcknowledgeRequest{..}
+instance ToJSON TestOrderCustomer where
+        toJSON TestOrderCustomer{..}
           = object
-              (catMaybes [("operationId" .=) <$> _oarOperationId])
+              (catMaybes
+                 [("fullName" .=) <$> _tocFullName,
+                  ("email" .=) <$> _tocEmail,
+                  ("explicitMarketingPreference" .=) <$>
+                    _tocExplicitMarketingPreference])
 
 --
 -- /See:/ 'orderReturn' smart constructor.
@@ -448,129 +448,6 @@ instance ToJSON OrdersCustomBatchRequestEntry where
                   ("batchId" .=) <$> _ocbreBatchId])
 
 --
--- /See:/ 'orderLineItemShippingDetailsMethod' smart constructor.
-data OrderLineItemShippingDetailsMethod = OrderLineItemShippingDetailsMethod
-    { _olisdmCarrier          :: !(Maybe Text)
-    , _olisdmMethodName       :: !(Maybe Text)
-    , _olisdmMaxDaysInTransit :: !(Maybe Word32)
-    , _olisdmMinDaysInTransit :: !(Maybe Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'OrderLineItemShippingDetailsMethod' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'olisdmCarrier'
---
--- * 'olisdmMethodName'
---
--- * 'olisdmMaxDaysInTransit'
---
--- * 'olisdmMinDaysInTransit'
-orderLineItemShippingDetailsMethod
-    :: OrderLineItemShippingDetailsMethod
-orderLineItemShippingDetailsMethod =
-    OrderLineItemShippingDetailsMethod
-    { _olisdmCarrier = Nothing
-    , _olisdmMethodName = Nothing
-    , _olisdmMaxDaysInTransit = Nothing
-    , _olisdmMinDaysInTransit = Nothing
-    }
-
--- | The carrier for the shipping. Optional.
-olisdmCarrier :: Lens' OrderLineItemShippingDetailsMethod (Maybe Text)
-olisdmCarrier
-  = lens _olisdmCarrier
-      (\ s a -> s{_olisdmCarrier = a})
-
--- | The name of the shipping method.
-olisdmMethodName :: Lens' OrderLineItemShippingDetailsMethod (Maybe Text)
-olisdmMethodName
-  = lens _olisdmMethodName
-      (\ s a -> s{_olisdmMethodName = a})
-
--- | Maximum transit time.
-olisdmMaxDaysInTransit :: Lens' OrderLineItemShippingDetailsMethod (Maybe Word32)
-olisdmMaxDaysInTransit
-  = lens _olisdmMaxDaysInTransit
-      (\ s a -> s{_olisdmMaxDaysInTransit = a})
-
--- | Minimum transit time.
-olisdmMinDaysInTransit :: Lens' OrderLineItemShippingDetailsMethod (Maybe Word32)
-olisdmMinDaysInTransit
-  = lens _olisdmMinDaysInTransit
-      (\ s a -> s{_olisdmMinDaysInTransit = a})
-
-instance FromJSON OrderLineItemShippingDetailsMethod
-         where
-        parseJSON
-          = withObject "OrderLineItemShippingDetailsMethod"
-              (\ o ->
-                 OrderLineItemShippingDetailsMethod <$>
-                   (o .:? "carrier") <*> (o .:? "methodName") <*>
-                     (o .:? "maxDaysInTransit")
-                     <*> (o .:? "minDaysInTransit"))
-
-instance ToJSON OrderLineItemShippingDetailsMethod
-         where
-        toJSON OrderLineItemShippingDetailsMethod{..}
-          = object
-              (catMaybes
-                 [("carrier" .=) <$> _olisdmCarrier,
-                  ("methodName" .=) <$> _olisdmMethodName,
-                  ("maxDaysInTransit" .=) <$> _olisdmMaxDaysInTransit,
-                  ("minDaysInTransit" .=) <$> _olisdmMinDaysInTransit])
-
---
--- /See:/ 'ordersCreateTestOrderResponse' smart constructor.
-data OrdersCreateTestOrderResponse = OrdersCreateTestOrderResponse
-    { _octorKind    :: !Text
-    , _octorOrderId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'OrdersCreateTestOrderResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'octorKind'
---
--- * 'octorOrderId'
-ordersCreateTestOrderResponse
-    :: OrdersCreateTestOrderResponse
-ordersCreateTestOrderResponse =
-    OrdersCreateTestOrderResponse
-    { _octorKind = "content#ordersCreateTestOrderResponse"
-    , _octorOrderId = Nothing
-    }
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"content#ordersCreateTestOrderResponse\".
-octorKind :: Lens' OrdersCreateTestOrderResponse Text
-octorKind
-  = lens _octorKind (\ s a -> s{_octorKind = a})
-
--- | The ID of the newly created test order.
-octorOrderId :: Lens' OrdersCreateTestOrderResponse (Maybe Text)
-octorOrderId
-  = lens _octorOrderId (\ s a -> s{_octorOrderId = a})
-
-instance FromJSON OrdersCreateTestOrderResponse where
-        parseJSON
-          = withObject "OrdersCreateTestOrderResponse"
-              (\ o ->
-                 OrdersCreateTestOrderResponse <$>
-                   (o .:? "kind" .!=
-                      "content#ordersCreateTestOrderResponse")
-                     <*> (o .:? "orderId"))
-
-instance ToJSON OrdersCreateTestOrderResponse where
-        toJSON OrdersCreateTestOrderResponse{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _octorKind),
-                  ("orderId" .=) <$> _octorOrderId])
-
---
 -- /See:/ 'ordersRefundRequest' smart constructor.
 data OrdersRefundRequest = OrdersRefundRequest
     { _orrAmount      :: !(Maybe Price)
@@ -717,86 +594,127 @@ instance ToJSON
                   ("reasonText" .=) <$> _ocbrecliReasonText])
 
 --
--- /See:/ 'ordersUpdateShipmentRequest' smart constructor.
-data OrdersUpdateShipmentRequest = OrdersUpdateShipmentRequest
-    { _ousrCarrier     :: !(Maybe Text)
-    , _ousrStatus      :: !(Maybe Text)
-    , _ousrTrackingId  :: !(Maybe Text)
-    , _ousrShipmentId  :: !(Maybe Text)
-    , _ousrOperationId :: !(Maybe Text)
+-- /See:/ 'orderLineItemShippingDetailsMethod' smart constructor.
+data OrderLineItemShippingDetailsMethod = OrderLineItemShippingDetailsMethod
+    { _olisdmCarrier          :: !(Maybe Text)
+    , _olisdmMethodName       :: !(Maybe Text)
+    , _olisdmMaxDaysInTransit :: !(Maybe Word32)
+    , _olisdmMinDaysInTransit :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrdersUpdateShipmentRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'OrderLineItemShippingDetailsMethod' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ousrCarrier'
+-- * 'olisdmCarrier'
 --
--- * 'ousrStatus'
+-- * 'olisdmMethodName'
 --
--- * 'ousrTrackingId'
+-- * 'olisdmMaxDaysInTransit'
 --
--- * 'ousrShipmentId'
---
--- * 'ousrOperationId'
-ordersUpdateShipmentRequest
-    :: OrdersUpdateShipmentRequest
-ordersUpdateShipmentRequest =
-    OrdersUpdateShipmentRequest
-    { _ousrCarrier = Nothing
-    , _ousrStatus = Nothing
-    , _ousrTrackingId = Nothing
-    , _ousrShipmentId = Nothing
-    , _ousrOperationId = Nothing
+-- * 'olisdmMinDaysInTransit'
+orderLineItemShippingDetailsMethod
+    :: OrderLineItemShippingDetailsMethod
+orderLineItemShippingDetailsMethod =
+    OrderLineItemShippingDetailsMethod
+    { _olisdmCarrier = Nothing
+    , _olisdmMethodName = Nothing
+    , _olisdmMaxDaysInTransit = Nothing
+    , _olisdmMinDaysInTransit = Nothing
     }
 
--- | The carrier handling the shipment. Not updated if missing.
-ousrCarrier :: Lens' OrdersUpdateShipmentRequest (Maybe Text)
-ousrCarrier
-  = lens _ousrCarrier (\ s a -> s{_ousrCarrier = a})
+-- | The carrier for the shipping. Optional.
+olisdmCarrier :: Lens' OrderLineItemShippingDetailsMethod (Maybe Text)
+olisdmCarrier
+  = lens _olisdmCarrier
+      (\ s a -> s{_olisdmCarrier = a})
 
--- | New status for the shipment. Not updated if missing.
-ousrStatus :: Lens' OrdersUpdateShipmentRequest (Maybe Text)
-ousrStatus
-  = lens _ousrStatus (\ s a -> s{_ousrStatus = a})
+-- | The name of the shipping method.
+olisdmMethodName :: Lens' OrderLineItemShippingDetailsMethod (Maybe Text)
+olisdmMethodName
+  = lens _olisdmMethodName
+      (\ s a -> s{_olisdmMethodName = a})
 
--- | The tracking id for the shipment. Not updated if missing.
-ousrTrackingId :: Lens' OrdersUpdateShipmentRequest (Maybe Text)
-ousrTrackingId
-  = lens _ousrTrackingId
-      (\ s a -> s{_ousrTrackingId = a})
+-- | Maximum transit time.
+olisdmMaxDaysInTransit :: Lens' OrderLineItemShippingDetailsMethod (Maybe Word32)
+olisdmMaxDaysInTransit
+  = lens _olisdmMaxDaysInTransit
+      (\ s a -> s{_olisdmMaxDaysInTransit = a})
 
--- | The ID of the shipment.
-ousrShipmentId :: Lens' OrdersUpdateShipmentRequest (Maybe Text)
-ousrShipmentId
-  = lens _ousrShipmentId
-      (\ s a -> s{_ousrShipmentId = a})
+-- | Minimum transit time.
+olisdmMinDaysInTransit :: Lens' OrderLineItemShippingDetailsMethod (Maybe Word32)
+olisdmMinDaysInTransit
+  = lens _olisdmMinDaysInTransit
+      (\ s a -> s{_olisdmMinDaysInTransit = a})
 
--- | The ID of the operation. Unique across all operations for a given order.
-ousrOperationId :: Lens' OrdersUpdateShipmentRequest (Maybe Text)
-ousrOperationId
-  = lens _ousrOperationId
-      (\ s a -> s{_ousrOperationId = a})
-
-instance FromJSON OrdersUpdateShipmentRequest where
+instance FromJSON OrderLineItemShippingDetailsMethod
+         where
         parseJSON
-          = withObject "OrdersUpdateShipmentRequest"
+          = withObject "OrderLineItemShippingDetailsMethod"
               (\ o ->
-                 OrdersUpdateShipmentRequest <$>
-                   (o .:? "carrier") <*> (o .:? "status") <*>
-                     (o .:? "trackingId")
-                     <*> (o .:? "shipmentId")
-                     <*> (o .:? "operationId"))
+                 OrderLineItemShippingDetailsMethod <$>
+                   (o .:? "carrier") <*> (o .:? "methodName") <*>
+                     (o .:? "maxDaysInTransit")
+                     <*> (o .:? "minDaysInTransit"))
 
-instance ToJSON OrdersUpdateShipmentRequest where
-        toJSON OrdersUpdateShipmentRequest{..}
+instance ToJSON OrderLineItemShippingDetailsMethod
+         where
+        toJSON OrderLineItemShippingDetailsMethod{..}
           = object
               (catMaybes
-                 [("carrier" .=) <$> _ousrCarrier,
-                  ("status" .=) <$> _ousrStatus,
-                  ("trackingId" .=) <$> _ousrTrackingId,
-                  ("shipmentId" .=) <$> _ousrShipmentId,
-                  ("operationId" .=) <$> _ousrOperationId])
+                 [("carrier" .=) <$> _olisdmCarrier,
+                  ("methodName" .=) <$> _olisdmMethodName,
+                  ("maxDaysInTransit" .=) <$> _olisdmMaxDaysInTransit,
+                  ("minDaysInTransit" .=) <$> _olisdmMinDaysInTransit])
+
+--
+-- /See:/ 'ordersCreateTestOrderResponse' smart constructor.
+data OrdersCreateTestOrderResponse = OrdersCreateTestOrderResponse
+    { _octorKind    :: !Text
+    , _octorOrderId :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrdersCreateTestOrderResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'octorKind'
+--
+-- * 'octorOrderId'
+ordersCreateTestOrderResponse
+    :: OrdersCreateTestOrderResponse
+ordersCreateTestOrderResponse =
+    OrdersCreateTestOrderResponse
+    { _octorKind = "content#ordersCreateTestOrderResponse"
+    , _octorOrderId = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#ordersCreateTestOrderResponse\".
+octorKind :: Lens' OrdersCreateTestOrderResponse Text
+octorKind
+  = lens _octorKind (\ s a -> s{_octorKind = a})
+
+-- | The ID of the newly created test order.
+octorOrderId :: Lens' OrdersCreateTestOrderResponse (Maybe Text)
+octorOrderId
+  = lens _octorOrderId (\ s a -> s{_octorOrderId = a})
+
+instance FromJSON OrdersCreateTestOrderResponse where
+        parseJSON
+          = withObject "OrdersCreateTestOrderResponse"
+              (\ o ->
+                 OrdersCreateTestOrderResponse <$>
+                   (o .:? "kind" .!=
+                      "content#ordersCreateTestOrderResponse")
+                     <*> (o .:? "orderId"))
+
+instance ToJSON OrdersCreateTestOrderResponse where
+        toJSON OrdersCreateTestOrderResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _octorKind),
+                  ("orderId" .=) <$> _octorOrderId])
 
 --
 -- /See:/ 'testOrderPaymentMethod' smart constructor.
@@ -882,166 +800,6 @@ instance ToJSON TestOrderPaymentMethod where
                   ("type" .=) <$> _topmType,
                   ("predefinedBillingAddress" .=) <$>
                     _topmPredefinedBillingAddress])
-
---
--- /See:/ 'ordersReturnLineItemRequest' smart constructor.
-data OrdersReturnLineItemRequest = OrdersReturnLineItemRequest
-    { _orlirQuantity    :: !(Maybe Word32)
-    , _orlirLineItemId  :: !(Maybe Text)
-    , _orlirReason      :: !(Maybe Text)
-    , _orlirOperationId :: !(Maybe Text)
-    , _orlirReasonText  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'OrdersReturnLineItemRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'orlirQuantity'
---
--- * 'orlirLineItemId'
---
--- * 'orlirReason'
---
--- * 'orlirOperationId'
---
--- * 'orlirReasonText'
-ordersReturnLineItemRequest
-    :: OrdersReturnLineItemRequest
-ordersReturnLineItemRequest =
-    OrdersReturnLineItemRequest
-    { _orlirQuantity = Nothing
-    , _orlirLineItemId = Nothing
-    , _orlirReason = Nothing
-    , _orlirOperationId = Nothing
-    , _orlirReasonText = Nothing
-    }
-
--- | The quantity to return.
-orlirQuantity :: Lens' OrdersReturnLineItemRequest (Maybe Word32)
-orlirQuantity
-  = lens _orlirQuantity
-      (\ s a -> s{_orlirQuantity = a})
-
--- | The ID of the line item to return.
-orlirLineItemId :: Lens' OrdersReturnLineItemRequest (Maybe Text)
-orlirLineItemId
-  = lens _orlirLineItemId
-      (\ s a -> s{_orlirLineItemId = a})
-
--- | The reason for the return.
-orlirReason :: Lens' OrdersReturnLineItemRequest (Maybe Text)
-orlirReason
-  = lens _orlirReason (\ s a -> s{_orlirReason = a})
-
--- | The ID of the operation. Unique across all operations for a given order.
-orlirOperationId :: Lens' OrdersReturnLineItemRequest (Maybe Text)
-orlirOperationId
-  = lens _orlirOperationId
-      (\ s a -> s{_orlirOperationId = a})
-
--- | The explanation of the reason.
-orlirReasonText :: Lens' OrdersReturnLineItemRequest (Maybe Text)
-orlirReasonText
-  = lens _orlirReasonText
-      (\ s a -> s{_orlirReasonText = a})
-
-instance FromJSON OrdersReturnLineItemRequest where
-        parseJSON
-          = withObject "OrdersReturnLineItemRequest"
-              (\ o ->
-                 OrdersReturnLineItemRequest <$>
-                   (o .:? "quantity") <*> (o .:? "lineItemId") <*>
-                     (o .:? "reason")
-                     <*> (o .:? "operationId")
-                     <*> (o .:? "reasonText"))
-
-instance ToJSON OrdersReturnLineItemRequest where
-        toJSON OrdersReturnLineItemRequest{..}
-          = object
-              (catMaybes
-                 [("quantity" .=) <$> _orlirQuantity,
-                  ("lineItemId" .=) <$> _orlirLineItemId,
-                  ("reason" .=) <$> _orlirReason,
-                  ("operationId" .=) <$> _orlirOperationId,
-                  ("reasonText" .=) <$> _orlirReasonText])
-
---
--- /See:/ 'ordersCustomBatchRequestEntryShipLineItems' smart constructor.
-data OrdersCustomBatchRequestEntryShipLineItems = OrdersCustomBatchRequestEntryShipLineItems
-    { _ocbresliCarrier    :: !(Maybe Text)
-    , _ocbresliTrackingId :: !(Maybe Text)
-    , _ocbresliShipmentId :: !(Maybe Text)
-    , _ocbresliLineItems  :: !(Maybe [OrderShipmentLineItemShipment])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'OrdersCustomBatchRequestEntryShipLineItems' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ocbresliCarrier'
---
--- * 'ocbresliTrackingId'
---
--- * 'ocbresliShipmentId'
---
--- * 'ocbresliLineItems'
-ordersCustomBatchRequestEntryShipLineItems
-    :: OrdersCustomBatchRequestEntryShipLineItems
-ordersCustomBatchRequestEntryShipLineItems =
-    OrdersCustomBatchRequestEntryShipLineItems
-    { _ocbresliCarrier = Nothing
-    , _ocbresliTrackingId = Nothing
-    , _ocbresliShipmentId = Nothing
-    , _ocbresliLineItems = Nothing
-    }
-
--- | The carrier handling the shipment.
-ocbresliCarrier :: Lens' OrdersCustomBatchRequestEntryShipLineItems (Maybe Text)
-ocbresliCarrier
-  = lens _ocbresliCarrier
-      (\ s a -> s{_ocbresliCarrier = a})
-
--- | The tracking id for the shipment.
-ocbresliTrackingId :: Lens' OrdersCustomBatchRequestEntryShipLineItems (Maybe Text)
-ocbresliTrackingId
-  = lens _ocbresliTrackingId
-      (\ s a -> s{_ocbresliTrackingId = a})
-
--- | The ID of the shipment.
-ocbresliShipmentId :: Lens' OrdersCustomBatchRequestEntryShipLineItems (Maybe Text)
-ocbresliShipmentId
-  = lens _ocbresliShipmentId
-      (\ s a -> s{_ocbresliShipmentId = a})
-
--- | Line items to ship.
-ocbresliLineItems :: Lens' OrdersCustomBatchRequestEntryShipLineItems [OrderShipmentLineItemShipment]
-ocbresliLineItems
-  = lens _ocbresliLineItems
-      (\ s a -> s{_ocbresliLineItems = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON
-         OrdersCustomBatchRequestEntryShipLineItems where
-        parseJSON
-          = withObject
-              "OrdersCustomBatchRequestEntryShipLineItems"
-              (\ o ->
-                 OrdersCustomBatchRequestEntryShipLineItems <$>
-                   (o .:? "carrier") <*> (o .:? "trackingId") <*>
-                     (o .:? "shipmentId")
-                     <*> (o .:? "lineItems" .!= mempty))
-
-instance ToJSON
-         OrdersCustomBatchRequestEntryShipLineItems where
-        toJSON OrdersCustomBatchRequestEntryShipLineItems{..}
-          = object
-              (catMaybes
-                 [("carrier" .=) <$> _ocbresliCarrier,
-                  ("trackingId" .=) <$> _ocbresliTrackingId,
-                  ("shipmentId" .=) <$> _ocbresliShipmentId,
-                  ("lineItems" .=) <$> _ocbresliLineItems])
 
 --
 -- /See:/ 'orderLineItem' smart constructor.
@@ -1234,6 +992,88 @@ instance ToJSON OrderLineItem where
                   ("returns" .=) <$> _oliReturns])
 
 --
+-- /See:/ 'ordersUpdateShipmentRequest' smart constructor.
+data OrdersUpdateShipmentRequest = OrdersUpdateShipmentRequest
+    { _ousrCarrier     :: !(Maybe Text)
+    , _ousrStatus      :: !(Maybe Text)
+    , _ousrTrackingId  :: !(Maybe Text)
+    , _ousrShipmentId  :: !(Maybe Text)
+    , _ousrOperationId :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrdersUpdateShipmentRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ousrCarrier'
+--
+-- * 'ousrStatus'
+--
+-- * 'ousrTrackingId'
+--
+-- * 'ousrShipmentId'
+--
+-- * 'ousrOperationId'
+ordersUpdateShipmentRequest
+    :: OrdersUpdateShipmentRequest
+ordersUpdateShipmentRequest =
+    OrdersUpdateShipmentRequest
+    { _ousrCarrier = Nothing
+    , _ousrStatus = Nothing
+    , _ousrTrackingId = Nothing
+    , _ousrShipmentId = Nothing
+    , _ousrOperationId = Nothing
+    }
+
+-- | The carrier handling the shipment. Not updated if missing.
+ousrCarrier :: Lens' OrdersUpdateShipmentRequest (Maybe Text)
+ousrCarrier
+  = lens _ousrCarrier (\ s a -> s{_ousrCarrier = a})
+
+-- | New status for the shipment. Not updated if missing.
+ousrStatus :: Lens' OrdersUpdateShipmentRequest (Maybe Text)
+ousrStatus
+  = lens _ousrStatus (\ s a -> s{_ousrStatus = a})
+
+-- | The tracking id for the shipment. Not updated if missing.
+ousrTrackingId :: Lens' OrdersUpdateShipmentRequest (Maybe Text)
+ousrTrackingId
+  = lens _ousrTrackingId
+      (\ s a -> s{_ousrTrackingId = a})
+
+-- | The ID of the shipment.
+ousrShipmentId :: Lens' OrdersUpdateShipmentRequest (Maybe Text)
+ousrShipmentId
+  = lens _ousrShipmentId
+      (\ s a -> s{_ousrShipmentId = a})
+
+-- | The ID of the operation. Unique across all operations for a given order.
+ousrOperationId :: Lens' OrdersUpdateShipmentRequest (Maybe Text)
+ousrOperationId
+  = lens _ousrOperationId
+      (\ s a -> s{_ousrOperationId = a})
+
+instance FromJSON OrdersUpdateShipmentRequest where
+        parseJSON
+          = withObject "OrdersUpdateShipmentRequest"
+              (\ o ->
+                 OrdersUpdateShipmentRequest <$>
+                   (o .:? "carrier") <*> (o .:? "status") <*>
+                     (o .:? "trackingId")
+                     <*> (o .:? "shipmentId")
+                     <*> (o .:? "operationId"))
+
+instance ToJSON OrdersUpdateShipmentRequest where
+        toJSON OrdersUpdateShipmentRequest{..}
+          = object
+              (catMaybes
+                 [("carrier" .=) <$> _ousrCarrier,
+                  ("status" .=) <$> _ousrStatus,
+                  ("trackingId" .=) <$> _ousrTrackingId,
+                  ("shipmentId" .=) <$> _ousrShipmentId,
+                  ("operationId" .=) <$> _ousrOperationId])
+
+--
 -- /See:/ 'orderShipmentLineItemShipment' smart constructor.
 data OrderShipmentLineItemShipment = OrderShipmentLineItemShipment
     { _oslisQuantity   :: !(Maybe Word32)
@@ -1282,102 +1122,164 @@ instance ToJSON OrderShipmentLineItemShipment where
                   ("lineItemId" .=) <$> _oslisLineItemId])
 
 --
--- /See:/ 'ordersRefundResponse' smart constructor.
-data OrdersRefundResponse = OrdersRefundResponse
-    { _orrKind            :: !Text
-    , _orrExecutionStatus :: !(Maybe Text)
+-- /See:/ 'ordersCustomBatchRequestEntryShipLineItems' smart constructor.
+data OrdersCustomBatchRequestEntryShipLineItems = OrdersCustomBatchRequestEntryShipLineItems
+    { _ocbresliCarrier    :: !(Maybe Text)
+    , _ocbresliTrackingId :: !(Maybe Text)
+    , _ocbresliShipmentId :: !(Maybe Text)
+    , _ocbresliLineItems  :: !(Maybe [OrderShipmentLineItemShipment])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrdersRefundResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'OrdersCustomBatchRequestEntryShipLineItems' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'orrKind'
+-- * 'ocbresliCarrier'
 --
--- * 'orrExecutionStatus'
-ordersRefundResponse
-    :: OrdersRefundResponse
-ordersRefundResponse =
-    OrdersRefundResponse
-    { _orrKind = "content#ordersRefundResponse"
-    , _orrExecutionStatus = Nothing
+-- * 'ocbresliTrackingId'
+--
+-- * 'ocbresliShipmentId'
+--
+-- * 'ocbresliLineItems'
+ordersCustomBatchRequestEntryShipLineItems
+    :: OrdersCustomBatchRequestEntryShipLineItems
+ordersCustomBatchRequestEntryShipLineItems =
+    OrdersCustomBatchRequestEntryShipLineItems
+    { _ocbresliCarrier = Nothing
+    , _ocbresliTrackingId = Nothing
+    , _ocbresliShipmentId = Nothing
+    , _ocbresliLineItems = Nothing
     }
 
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"content#ordersRefundResponse\".
-orrKind :: Lens' OrdersRefundResponse Text
-orrKind = lens _orrKind (\ s a -> s{_orrKind = a})
+-- | The carrier handling the shipment.
+ocbresliCarrier :: Lens' OrdersCustomBatchRequestEntryShipLineItems (Maybe Text)
+ocbresliCarrier
+  = lens _ocbresliCarrier
+      (\ s a -> s{_ocbresliCarrier = a})
 
--- | The status of the execution.
-orrExecutionStatus :: Lens' OrdersRefundResponse (Maybe Text)
-orrExecutionStatus
-  = lens _orrExecutionStatus
-      (\ s a -> s{_orrExecutionStatus = a})
+-- | The tracking id for the shipment.
+ocbresliTrackingId :: Lens' OrdersCustomBatchRequestEntryShipLineItems (Maybe Text)
+ocbresliTrackingId
+  = lens _ocbresliTrackingId
+      (\ s a -> s{_ocbresliTrackingId = a})
 
-instance FromJSON OrdersRefundResponse where
+-- | The ID of the shipment.
+ocbresliShipmentId :: Lens' OrdersCustomBatchRequestEntryShipLineItems (Maybe Text)
+ocbresliShipmentId
+  = lens _ocbresliShipmentId
+      (\ s a -> s{_ocbresliShipmentId = a})
+
+-- | Line items to ship.
+ocbresliLineItems :: Lens' OrdersCustomBatchRequestEntryShipLineItems [OrderShipmentLineItemShipment]
+ocbresliLineItems
+  = lens _ocbresliLineItems
+      (\ s a -> s{_ocbresliLineItems = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON
+         OrdersCustomBatchRequestEntryShipLineItems where
         parseJSON
-          = withObject "OrdersRefundResponse"
+          = withObject
+              "OrdersCustomBatchRequestEntryShipLineItems"
               (\ o ->
-                 OrdersRefundResponse <$>
-                   (o .:? "kind" .!= "content#ordersRefundResponse") <*>
-                     (o .:? "executionStatus"))
+                 OrdersCustomBatchRequestEntryShipLineItems <$>
+                   (o .:? "carrier") <*> (o .:? "trackingId") <*>
+                     (o .:? "shipmentId")
+                     <*> (o .:? "lineItems" .!= mempty))
 
-instance ToJSON OrdersRefundResponse where
-        toJSON OrdersRefundResponse{..}
+instance ToJSON
+         OrdersCustomBatchRequestEntryShipLineItems where
+        toJSON OrdersCustomBatchRequestEntryShipLineItems{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _orrKind),
-                  ("executionStatus" .=) <$> _orrExecutionStatus])
+                 [("carrier" .=) <$> _ocbresliCarrier,
+                  ("trackingId" .=) <$> _ocbresliTrackingId,
+                  ("shipmentId" .=) <$> _ocbresliShipmentId,
+                  ("lineItems" .=) <$> _ocbresliLineItems])
 
 --
--- /See:/ 'ordersCreateTestOrderRequest' smart constructor.
-data OrdersCreateTestOrderRequest = OrdersCreateTestOrderRequest
-    { _octorTemplateName :: !(Maybe Text)
-    , _octorTestOrder    :: !(Maybe TestOrder)
+-- /See:/ 'ordersReturnLineItemRequest' smart constructor.
+data OrdersReturnLineItemRequest = OrdersReturnLineItemRequest
+    { _orlirQuantity    :: !(Maybe Word32)
+    , _orlirLineItemId  :: !(Maybe Text)
+    , _orlirReason      :: !(Maybe Text)
+    , _orlirOperationId :: !(Maybe Text)
+    , _orlirReasonText  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrdersCreateTestOrderRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'OrdersReturnLineItemRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'octorTemplateName'
+-- * 'orlirQuantity'
 --
--- * 'octorTestOrder'
-ordersCreateTestOrderRequest
-    :: OrdersCreateTestOrderRequest
-ordersCreateTestOrderRequest =
-    OrdersCreateTestOrderRequest
-    { _octorTemplateName = Nothing
-    , _octorTestOrder = Nothing
+-- * 'orlirLineItemId'
+--
+-- * 'orlirReason'
+--
+-- * 'orlirOperationId'
+--
+-- * 'orlirReasonText'
+ordersReturnLineItemRequest
+    :: OrdersReturnLineItemRequest
+ordersReturnLineItemRequest =
+    OrdersReturnLineItemRequest
+    { _orlirQuantity = Nothing
+    , _orlirLineItemId = Nothing
+    , _orlirReason = Nothing
+    , _orlirOperationId = Nothing
+    , _orlirReasonText = Nothing
     }
 
--- | The test order template to use. Specify as an alternative to testOrder
--- as a shortcut for retrieving a template and then creating an order using
--- that template.
-octorTemplateName :: Lens' OrdersCreateTestOrderRequest (Maybe Text)
-octorTemplateName
-  = lens _octorTemplateName
-      (\ s a -> s{_octorTemplateName = a})
+-- | The quantity to return.
+orlirQuantity :: Lens' OrdersReturnLineItemRequest (Maybe Word32)
+orlirQuantity
+  = lens _orlirQuantity
+      (\ s a -> s{_orlirQuantity = a})
 
--- | The test order to create.
-octorTestOrder :: Lens' OrdersCreateTestOrderRequest (Maybe TestOrder)
-octorTestOrder
-  = lens _octorTestOrder
-      (\ s a -> s{_octorTestOrder = a})
+-- | The ID of the line item to return.
+orlirLineItemId :: Lens' OrdersReturnLineItemRequest (Maybe Text)
+orlirLineItemId
+  = lens _orlirLineItemId
+      (\ s a -> s{_orlirLineItemId = a})
 
-instance FromJSON OrdersCreateTestOrderRequest where
+-- | The reason for the return.
+orlirReason :: Lens' OrdersReturnLineItemRequest (Maybe Text)
+orlirReason
+  = lens _orlirReason (\ s a -> s{_orlirReason = a})
+
+-- | The ID of the operation. Unique across all operations for a given order.
+orlirOperationId :: Lens' OrdersReturnLineItemRequest (Maybe Text)
+orlirOperationId
+  = lens _orlirOperationId
+      (\ s a -> s{_orlirOperationId = a})
+
+-- | The explanation of the reason.
+orlirReasonText :: Lens' OrdersReturnLineItemRequest (Maybe Text)
+orlirReasonText
+  = lens _orlirReasonText
+      (\ s a -> s{_orlirReasonText = a})
+
+instance FromJSON OrdersReturnLineItemRequest where
         parseJSON
-          = withObject "OrdersCreateTestOrderRequest"
+          = withObject "OrdersReturnLineItemRequest"
               (\ o ->
-                 OrdersCreateTestOrderRequest <$>
-                   (o .:? "templateName") <*> (o .:? "testOrder"))
+                 OrdersReturnLineItemRequest <$>
+                   (o .:? "quantity") <*> (o .:? "lineItemId") <*>
+                     (o .:? "reason")
+                     <*> (o .:? "operationId")
+                     <*> (o .:? "reasonText"))
 
-instance ToJSON OrdersCreateTestOrderRequest where
-        toJSON OrdersCreateTestOrderRequest{..}
+instance ToJSON OrdersReturnLineItemRequest where
+        toJSON OrdersReturnLineItemRequest{..}
           = object
               (catMaybes
-                 [("templateName" .=) <$> _octorTemplateName,
-                  ("testOrder" .=) <$> _octorTestOrder])
+                 [("quantity" .=) <$> _orlirQuantity,
+                  ("lineItemId" .=) <$> _orlirLineItemId,
+                  ("reason" .=) <$> _orlirReason,
+                  ("operationId" .=) <$> _orlirOperationId,
+                  ("reasonText" .=) <$> _orlirReasonText])
 
 --
 -- /See:/ 'ordersGetTestOrderTemplateResponse' smart constructor.
@@ -1485,6 +1387,104 @@ instance ToJSON Error' where
                  [("domain" .=) <$> _eDomain,
                   ("reason" .=) <$> _eReason,
                   ("message" .=) <$> _eMessage])
+
+--
+-- /See:/ 'ordersRefundResponse' smart constructor.
+data OrdersRefundResponse = OrdersRefundResponse
+    { _orrKind            :: !Text
+    , _orrExecutionStatus :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrdersRefundResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'orrKind'
+--
+-- * 'orrExecutionStatus'
+ordersRefundResponse
+    :: OrdersRefundResponse
+ordersRefundResponse =
+    OrdersRefundResponse
+    { _orrKind = "content#ordersRefundResponse"
+    , _orrExecutionStatus = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#ordersRefundResponse\".
+orrKind :: Lens' OrdersRefundResponse Text
+orrKind = lens _orrKind (\ s a -> s{_orrKind = a})
+
+-- | The status of the execution.
+orrExecutionStatus :: Lens' OrdersRefundResponse (Maybe Text)
+orrExecutionStatus
+  = lens _orrExecutionStatus
+      (\ s a -> s{_orrExecutionStatus = a})
+
+instance FromJSON OrdersRefundResponse where
+        parseJSON
+          = withObject "OrdersRefundResponse"
+              (\ o ->
+                 OrdersRefundResponse <$>
+                   (o .:? "kind" .!= "content#ordersRefundResponse") <*>
+                     (o .:? "executionStatus"))
+
+instance ToJSON OrdersRefundResponse where
+        toJSON OrdersRefundResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _orrKind),
+                  ("executionStatus" .=) <$> _orrExecutionStatus])
+
+--
+-- /See:/ 'ordersCreateTestOrderRequest' smart constructor.
+data OrdersCreateTestOrderRequest = OrdersCreateTestOrderRequest
+    { _octorTemplateName :: !(Maybe Text)
+    , _octorTestOrder    :: !(Maybe TestOrder)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrdersCreateTestOrderRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'octorTemplateName'
+--
+-- * 'octorTestOrder'
+ordersCreateTestOrderRequest
+    :: OrdersCreateTestOrderRequest
+ordersCreateTestOrderRequest =
+    OrdersCreateTestOrderRequest
+    { _octorTemplateName = Nothing
+    , _octorTestOrder = Nothing
+    }
+
+-- | The test order template to use. Specify as an alternative to testOrder
+-- as a shortcut for retrieving a template and then creating an order using
+-- that template.
+octorTemplateName :: Lens' OrdersCreateTestOrderRequest (Maybe Text)
+octorTemplateName
+  = lens _octorTemplateName
+      (\ s a -> s{_octorTemplateName = a})
+
+-- | The test order to create.
+octorTestOrder :: Lens' OrdersCreateTestOrderRequest (Maybe TestOrder)
+octorTestOrder
+  = lens _octorTestOrder
+      (\ s a -> s{_octorTestOrder = a})
+
+instance FromJSON OrdersCreateTestOrderRequest where
+        parseJSON
+          = withObject "OrdersCreateTestOrderRequest"
+              (\ o ->
+                 OrdersCreateTestOrderRequest <$>
+                   (o .:? "templateName") <*> (o .:? "testOrder"))
+
+instance ToJSON OrdersCreateTestOrderRequest where
+        toJSON OrdersCreateTestOrderRequest{..}
+          = object
+              (catMaybes
+                 [("templateName" .=) <$> _octorTemplateName,
+                  ("testOrder" .=) <$> _octorTestOrder])
 
 --
 -- /See:/ 'ordersCustomBatchRequest' smart constructor.
@@ -1905,56 +1905,6 @@ instance ToJSON OrdersCustomBatchRequestEntryCancel
                   ("reasonText" .=) <$> _ocbrecReasonText])
 
 --
--- /See:/ 'ordersShipLineItemsResponse' smart constructor.
-data OrdersShipLineItemsResponse = OrdersShipLineItemsResponse
-    { _oslirKind            :: !Text
-    , _oslirExecutionStatus :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'OrdersShipLineItemsResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'oslirKind'
---
--- * 'oslirExecutionStatus'
-ordersShipLineItemsResponse
-    :: OrdersShipLineItemsResponse
-ordersShipLineItemsResponse =
-    OrdersShipLineItemsResponse
-    { _oslirKind = "content#ordersShipLineItemsResponse"
-    , _oslirExecutionStatus = Nothing
-    }
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"content#ordersShipLineItemsResponse\".
-oslirKind :: Lens' OrdersShipLineItemsResponse Text
-oslirKind
-  = lens _oslirKind (\ s a -> s{_oslirKind = a})
-
--- | The status of the execution.
-oslirExecutionStatus :: Lens' OrdersShipLineItemsResponse (Maybe Text)
-oslirExecutionStatus
-  = lens _oslirExecutionStatus
-      (\ s a -> s{_oslirExecutionStatus = a})
-
-instance FromJSON OrdersShipLineItemsResponse where
-        parseJSON
-          = withObject "OrdersShipLineItemsResponse"
-              (\ o ->
-                 OrdersShipLineItemsResponse <$>
-                   (o .:? "kind" .!=
-                      "content#ordersShipLineItemsResponse")
-                     <*> (o .:? "executionStatus"))
-
-instance ToJSON OrdersShipLineItemsResponse where
-        toJSON OrdersShipLineItemsResponse{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _oslirKind),
-                  ("executionStatus" .=) <$> _oslirExecutionStatus])
-
---
 -- /See:/ 'ordersListResponse' smart constructor.
 data OrdersListResponse = OrdersListResponse
     { _olrNextPageToken :: !(Maybe Text)
@@ -2015,54 +1965,54 @@ instance ToJSON OrdersListResponse where
                   ("resources" .=) <$> _olrResources])
 
 --
--- /See:/ 'ordersReturnLineItemResponse' smart constructor.
-data OrdersReturnLineItemResponse = OrdersReturnLineItemResponse
-    { _orlirKind            :: !Text
-    , _orlirExecutionStatus :: !(Maybe Text)
+-- /See:/ 'ordersShipLineItemsResponse' smart constructor.
+data OrdersShipLineItemsResponse = OrdersShipLineItemsResponse
+    { _oslirKind            :: !Text
+    , _oslirExecutionStatus :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrdersReturnLineItemResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'OrdersShipLineItemsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'orlirKind'
+-- * 'oslirKind'
 --
--- * 'orlirExecutionStatus'
-ordersReturnLineItemResponse
-    :: OrdersReturnLineItemResponse
-ordersReturnLineItemResponse =
-    OrdersReturnLineItemResponse
-    { _orlirKind = "content#ordersReturnLineItemResponse"
-    , _orlirExecutionStatus = Nothing
+-- * 'oslirExecutionStatus'
+ordersShipLineItemsResponse
+    :: OrdersShipLineItemsResponse
+ordersShipLineItemsResponse =
+    OrdersShipLineItemsResponse
+    { _oslirKind = "content#ordersShipLineItemsResponse"
+    , _oslirExecutionStatus = Nothing
     }
 
 -- | Identifies what kind of resource this is. Value: the fixed string
--- \"content#ordersReturnLineItemResponse\".
-orlirKind :: Lens' OrdersReturnLineItemResponse Text
-orlirKind
-  = lens _orlirKind (\ s a -> s{_orlirKind = a})
+-- \"content#ordersShipLineItemsResponse\".
+oslirKind :: Lens' OrdersShipLineItemsResponse Text
+oslirKind
+  = lens _oslirKind (\ s a -> s{_oslirKind = a})
 
 -- | The status of the execution.
-orlirExecutionStatus :: Lens' OrdersReturnLineItemResponse (Maybe Text)
-orlirExecutionStatus
-  = lens _orlirExecutionStatus
-      (\ s a -> s{_orlirExecutionStatus = a})
+oslirExecutionStatus :: Lens' OrdersShipLineItemsResponse (Maybe Text)
+oslirExecutionStatus
+  = lens _oslirExecutionStatus
+      (\ s a -> s{_oslirExecutionStatus = a})
 
-instance FromJSON OrdersReturnLineItemResponse where
+instance FromJSON OrdersShipLineItemsResponse where
         parseJSON
-          = withObject "OrdersReturnLineItemResponse"
+          = withObject "OrdersShipLineItemsResponse"
               (\ o ->
-                 OrdersReturnLineItemResponse <$>
+                 OrdersShipLineItemsResponse <$>
                    (o .:? "kind" .!=
-                      "content#ordersReturnLineItemResponse")
+                      "content#ordersShipLineItemsResponse")
                      <*> (o .:? "executionStatus"))
 
-instance ToJSON OrdersReturnLineItemResponse where
-        toJSON OrdersReturnLineItemResponse{..}
+instance ToJSON OrdersShipLineItemsResponse where
+        toJSON OrdersShipLineItemsResponse{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _orlirKind),
-                  ("executionStatus" .=) <$> _orlirExecutionStatus])
+                 [Just ("kind" .= _oslirKind),
+                  ("executionStatus" .=) <$> _oslirExecutionStatus])
 
 --
 -- /See:/ 'ordersUpdateShipmentResponse' smart constructor.
@@ -2114,63 +2064,54 @@ instance ToJSON OrdersUpdateShipmentResponse where
                   ("executionStatus" .=) <$> _ousrExecutionStatus])
 
 --
--- /See:/ 'ordersCancelRequest' smart constructor.
-data OrdersCancelRequest = OrdersCancelRequest
-    { _ocrReason      :: !(Maybe Text)
-    , _ocrOperationId :: !(Maybe Text)
-    , _ocrReasonText  :: !(Maybe Text)
+-- /See:/ 'ordersReturnLineItemResponse' smart constructor.
+data OrdersReturnLineItemResponse = OrdersReturnLineItemResponse
+    { _orlirKind            :: !Text
+    , _orlirExecutionStatus :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrdersCancelRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'OrdersReturnLineItemResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ocrReason'
+-- * 'orlirKind'
 --
--- * 'ocrOperationId'
---
--- * 'ocrReasonText'
-ordersCancelRequest
-    :: OrdersCancelRequest
-ordersCancelRequest =
-    OrdersCancelRequest
-    { _ocrReason = Nothing
-    , _ocrOperationId = Nothing
-    , _ocrReasonText = Nothing
+-- * 'orlirExecutionStatus'
+ordersReturnLineItemResponse
+    :: OrdersReturnLineItemResponse
+ordersReturnLineItemResponse =
+    OrdersReturnLineItemResponse
+    { _orlirKind = "content#ordersReturnLineItemResponse"
+    , _orlirExecutionStatus = Nothing
     }
 
--- | The reason for the cancellation.
-ocrReason :: Lens' OrdersCancelRequest (Maybe Text)
-ocrReason
-  = lens _ocrReason (\ s a -> s{_ocrReason = a})
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#ordersReturnLineItemResponse\".
+orlirKind :: Lens' OrdersReturnLineItemResponse Text
+orlirKind
+  = lens _orlirKind (\ s a -> s{_orlirKind = a})
 
--- | The ID of the operation. Unique across all operations for a given order.
-ocrOperationId :: Lens' OrdersCancelRequest (Maybe Text)
-ocrOperationId
-  = lens _ocrOperationId
-      (\ s a -> s{_ocrOperationId = a})
+-- | The status of the execution.
+orlirExecutionStatus :: Lens' OrdersReturnLineItemResponse (Maybe Text)
+orlirExecutionStatus
+  = lens _orlirExecutionStatus
+      (\ s a -> s{_orlirExecutionStatus = a})
 
--- | The explanation of the reason.
-ocrReasonText :: Lens' OrdersCancelRequest (Maybe Text)
-ocrReasonText
-  = lens _ocrReasonText
-      (\ s a -> s{_ocrReasonText = a})
-
-instance FromJSON OrdersCancelRequest where
+instance FromJSON OrdersReturnLineItemResponse where
         parseJSON
-          = withObject "OrdersCancelRequest"
+          = withObject "OrdersReturnLineItemResponse"
               (\ o ->
-                 OrdersCancelRequest <$>
-                   (o .:? "reason") <*> (o .:? "operationId") <*>
-                     (o .:? "reasonText"))
+                 OrdersReturnLineItemResponse <$>
+                   (o .:? "kind" .!=
+                      "content#ordersReturnLineItemResponse")
+                     <*> (o .:? "executionStatus"))
 
-instance ToJSON OrdersCancelRequest where
-        toJSON OrdersCancelRequest{..}
+instance ToJSON OrdersReturnLineItemResponse where
+        toJSON OrdersReturnLineItemResponse{..}
           = object
               (catMaybes
-                 [("reason" .=) <$> _ocrReason,
-                  ("operationId" .=) <$> _ocrOperationId,
-                  ("reasonText" .=) <$> _ocrReasonText])
+                 [Just ("kind" .= _orlirKind),
+                  ("executionStatus" .=) <$> _orlirExecutionStatus])
 
 --
 -- /See:/ 'orderCustomer' smart constructor.
@@ -2286,107 +2227,63 @@ instance ToJSON OrdersGetByMerchantOrderIdResponse
                   ("order" .=) <$> _ogbmoirOrder])
 
 --
--- /See:/ 'orderLineItemShippingDetails' smart constructor.
-data OrderLineItemShippingDetails = OrderLineItemShippingDetails
-    { _olisdShipByDate    :: !(Maybe Text)
-    , _olisdMethod        :: !(Maybe OrderLineItemShippingDetailsMethod)
-    , _olisdDeliverByDate :: !(Maybe Text)
+-- /See:/ 'ordersCancelRequest' smart constructor.
+data OrdersCancelRequest = OrdersCancelRequest
+    { _ocrReason      :: !(Maybe Text)
+    , _ocrOperationId :: !(Maybe Text)
+    , _ocrReasonText  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrderLineItemShippingDetails' with the minimum fields required to make a request.
+-- | Creates a value of 'OrdersCancelRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'olisdShipByDate'
+-- * 'ocrReason'
 --
--- * 'olisdMethod'
+-- * 'ocrOperationId'
 --
--- * 'olisdDeliverByDate'
-orderLineItemShippingDetails
-    :: OrderLineItemShippingDetails
-orderLineItemShippingDetails =
-    OrderLineItemShippingDetails
-    { _olisdShipByDate = Nothing
-    , _olisdMethod = Nothing
-    , _olisdDeliverByDate = Nothing
+-- * 'ocrReasonText'
+ordersCancelRequest
+    :: OrdersCancelRequest
+ordersCancelRequest =
+    OrdersCancelRequest
+    { _ocrReason = Nothing
+    , _ocrOperationId = Nothing
+    , _ocrReasonText = Nothing
     }
 
--- | The ship by date, in ISO 8601 format.
-olisdShipByDate :: Lens' OrderLineItemShippingDetails (Maybe Text)
-olisdShipByDate
-  = lens _olisdShipByDate
-      (\ s a -> s{_olisdShipByDate = a})
+-- | The reason for the cancellation.
+ocrReason :: Lens' OrdersCancelRequest (Maybe Text)
+ocrReason
+  = lens _ocrReason (\ s a -> s{_ocrReason = a})
 
--- | Details of the shipping method.
-olisdMethod :: Lens' OrderLineItemShippingDetails (Maybe OrderLineItemShippingDetailsMethod)
-olisdMethod
-  = lens _olisdMethod (\ s a -> s{_olisdMethod = a})
+-- | The ID of the operation. Unique across all operations for a given order.
+ocrOperationId :: Lens' OrdersCancelRequest (Maybe Text)
+ocrOperationId
+  = lens _ocrOperationId
+      (\ s a -> s{_ocrOperationId = a})
 
--- | The delivery by date, in ISO 8601 format.
-olisdDeliverByDate :: Lens' OrderLineItemShippingDetails (Maybe Text)
-olisdDeliverByDate
-  = lens _olisdDeliverByDate
-      (\ s a -> s{_olisdDeliverByDate = a})
+-- | The explanation of the reason.
+ocrReasonText :: Lens' OrdersCancelRequest (Maybe Text)
+ocrReasonText
+  = lens _ocrReasonText
+      (\ s a -> s{_ocrReasonText = a})
 
-instance FromJSON OrderLineItemShippingDetails where
+instance FromJSON OrdersCancelRequest where
         parseJSON
-          = withObject "OrderLineItemShippingDetails"
+          = withObject "OrdersCancelRequest"
               (\ o ->
-                 OrderLineItemShippingDetails <$>
-                   (o .:? "shipByDate") <*> (o .:? "method") <*>
-                     (o .:? "deliverByDate"))
+                 OrdersCancelRequest <$>
+                   (o .:? "reason") <*> (o .:? "operationId") <*>
+                     (o .:? "reasonText"))
 
-instance ToJSON OrderLineItemShippingDetails where
-        toJSON OrderLineItemShippingDetails{..}
+instance ToJSON OrdersCancelRequest where
+        toJSON OrdersCancelRequest{..}
           = object
               (catMaybes
-                 [("shipByDate" .=) <$> _olisdShipByDate,
-                  ("method" .=) <$> _olisdMethod,
-                  ("deliverByDate" .=) <$> _olisdDeliverByDate])
-
---
--- /See:/ 'price' smart constructor.
-data Price = Price
-    { _pValue    :: !(Maybe Text)
-    , _pCurrency :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Price' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pValue'
---
--- * 'pCurrency'
-price
-    :: Price
-price =
-    Price
-    { _pValue = Nothing
-    , _pCurrency = Nothing
-    }
-
--- | The price represented as a number.
-pValue :: Lens' Price (Maybe Text)
-pValue = lens _pValue (\ s a -> s{_pValue = a})
-
--- | The currency of the price.
-pCurrency :: Lens' Price (Maybe Text)
-pCurrency
-  = lens _pCurrency (\ s a -> s{_pCurrency = a})
-
-instance FromJSON Price where
-        parseJSON
-          = withObject "Price"
-              (\ o ->
-                 Price <$> (o .:? "value") <*> (o .:? "currency"))
-
-instance ToJSON Price where
-        toJSON Price{..}
-          = object
-              (catMaybes
-                 [("value" .=) <$> _pValue,
-                  ("currency" .=) <$> _pCurrency])
+                 [("reason" .=) <$> _ocrReason,
+                  ("operationId" .=) <$> _ocrOperationId,
+                  ("reasonText" .=) <$> _ocrReasonText])
 
 --
 -- /See:/ 'orderLineItemProductVariantAttribute' smart constructor.
@@ -2519,178 +2416,202 @@ instance ToJSON OrdersCustomBatchResponseEntry where
                   ("batchId" .=) <$> _oBatchId])
 
 --
--- /See:/ 'testOrderLineItemProduct' smart constructor.
-data TestOrderLineItemProduct = TestOrderLineItemProduct
-    { _tolipImageLink         :: !(Maybe Text)
-    , _tolipChannel           :: !(Maybe Text)
-    , _tolipBrand             :: !(Maybe Text)
-    , _tolipTargetCountry     :: !(Maybe Text)
-    , _tolipGtin              :: !(Maybe Text)
-    , _tolipItemGroupId       :: !(Maybe Text)
-    , _tolipOfferId           :: !(Maybe Text)
-    , _tolipPrice             :: !(Maybe Price)
-    , _tolipVariantAttributes :: !(Maybe [OrderLineItemProductVariantAttribute])
-    , _tolipTitle             :: !(Maybe Text)
-    , _tolipContentLanguage   :: !(Maybe Text)
-    , _tolipMpn               :: !(Maybe Text)
-    , _tolipCondition         :: !(Maybe Text)
+-- /See:/ 'price' smart constructor.
+data Price = Price
+    { _pValue    :: !(Maybe Text)
+    , _pCurrency :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TestOrderLineItemProduct' with the minimum fields required to make a request.
+-- | Creates a value of 'Price' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tolipImageLink'
+-- * 'pValue'
 --
--- * 'tolipChannel'
---
--- * 'tolipBrand'
---
--- * 'tolipTargetCountry'
---
--- * 'tolipGtin'
---
--- * 'tolipItemGroupId'
---
--- * 'tolipOfferId'
---
--- * 'tolipPrice'
---
--- * 'tolipVariantAttributes'
---
--- * 'tolipTitle'
---
--- * 'tolipContentLanguage'
---
--- * 'tolipMpn'
---
--- * 'tolipCondition'
-testOrderLineItemProduct
-    :: TestOrderLineItemProduct
-testOrderLineItemProduct =
-    TestOrderLineItemProduct
-    { _tolipImageLink = Nothing
-    , _tolipChannel = Nothing
-    , _tolipBrand = Nothing
-    , _tolipTargetCountry = Nothing
-    , _tolipGtin = Nothing
-    , _tolipItemGroupId = Nothing
-    , _tolipOfferId = Nothing
-    , _tolipPrice = Nothing
-    , _tolipVariantAttributes = Nothing
-    , _tolipTitle = Nothing
-    , _tolipContentLanguage = Nothing
-    , _tolipMpn = Nothing
-    , _tolipCondition = Nothing
+-- * 'pCurrency'
+price
+    :: Price
+price =
+    Price
+    { _pValue = Nothing
+    , _pCurrency = Nothing
     }
 
--- | URL of an image of the item.
-tolipImageLink :: Lens' TestOrderLineItemProduct (Maybe Text)
-tolipImageLink
-  = lens _tolipImageLink
-      (\ s a -> s{_tolipImageLink = a})
+-- | The price represented as a number.
+pValue :: Lens' Price (Maybe Text)
+pValue = lens _pValue (\ s a -> s{_pValue = a})
 
--- | The item\'s channel.
-tolipChannel :: Lens' TestOrderLineItemProduct (Maybe Text)
-tolipChannel
-  = lens _tolipChannel (\ s a -> s{_tolipChannel = a})
+-- | The currency of the price.
+pCurrency :: Lens' Price (Maybe Text)
+pCurrency
+  = lens _pCurrency (\ s a -> s{_pCurrency = a})
 
--- | Brand of the item.
-tolipBrand :: Lens' TestOrderLineItemProduct (Maybe Text)
-tolipBrand
-  = lens _tolipBrand (\ s a -> s{_tolipBrand = a})
-
--- | The CLDR territory code of the target country of the product.
-tolipTargetCountry :: Lens' TestOrderLineItemProduct (Maybe Text)
-tolipTargetCountry
-  = lens _tolipTargetCountry
-      (\ s a -> s{_tolipTargetCountry = a})
-
--- | Global Trade Item Number (GTIN) of the item. Optional.
-tolipGtin :: Lens' TestOrderLineItemProduct (Maybe Text)
-tolipGtin
-  = lens _tolipGtin (\ s a -> s{_tolipGtin = a})
-
--- | Shared identifier for all variants of the same product. Optional.
-tolipItemGroupId :: Lens' TestOrderLineItemProduct (Maybe Text)
-tolipItemGroupId
-  = lens _tolipItemGroupId
-      (\ s a -> s{_tolipItemGroupId = a})
-
--- | An identifier of the item.
-tolipOfferId :: Lens' TestOrderLineItemProduct (Maybe Text)
-tolipOfferId
-  = lens _tolipOfferId (\ s a -> s{_tolipOfferId = a})
-
--- | The price for the product.
-tolipPrice :: Lens' TestOrderLineItemProduct (Maybe Price)
-tolipPrice
-  = lens _tolipPrice (\ s a -> s{_tolipPrice = a})
-
--- | Variant attributes for the item. Optional.
-tolipVariantAttributes :: Lens' TestOrderLineItemProduct [OrderLineItemProductVariantAttribute]
-tolipVariantAttributes
-  = lens _tolipVariantAttributes
-      (\ s a -> s{_tolipVariantAttributes = a})
-      . _Default
-      . _Coerce
-
--- | The title of the product.
-tolipTitle :: Lens' TestOrderLineItemProduct (Maybe Text)
-tolipTitle
-  = lens _tolipTitle (\ s a -> s{_tolipTitle = a})
-
--- | The two-letter ISO 639-1 language code for the item.
-tolipContentLanguage :: Lens' TestOrderLineItemProduct (Maybe Text)
-tolipContentLanguage
-  = lens _tolipContentLanguage
-      (\ s a -> s{_tolipContentLanguage = a})
-
--- | Manufacturer Part Number (MPN) of the item. Optional.
-tolipMpn :: Lens' TestOrderLineItemProduct (Maybe Text)
-tolipMpn = lens _tolipMpn (\ s a -> s{_tolipMpn = a})
-
--- | Condition or state of the item.
-tolipCondition :: Lens' TestOrderLineItemProduct (Maybe Text)
-tolipCondition
-  = lens _tolipCondition
-      (\ s a -> s{_tolipCondition = a})
-
-instance FromJSON TestOrderLineItemProduct where
+instance FromJSON Price where
         parseJSON
-          = withObject "TestOrderLineItemProduct"
+          = withObject "Price"
               (\ o ->
-                 TestOrderLineItemProduct <$>
-                   (o .:? "imageLink") <*> (o .:? "channel") <*>
-                     (o .:? "brand")
-                     <*> (o .:? "targetCountry")
-                     <*> (o .:? "gtin")
-                     <*> (o .:? "itemGroupId")
-                     <*> (o .:? "offerId")
-                     <*> (o .:? "price")
-                     <*> (o .:? "variantAttributes" .!= mempty)
-                     <*> (o .:? "title")
-                     <*> (o .:? "contentLanguage")
-                     <*> (o .:? "mpn")
-                     <*> (o .:? "condition"))
+                 Price <$> (o .:? "value") <*> (o .:? "currency"))
 
-instance ToJSON TestOrderLineItemProduct where
-        toJSON TestOrderLineItemProduct{..}
+instance ToJSON Price where
+        toJSON Price{..}
           = object
               (catMaybes
-                 [("imageLink" .=) <$> _tolipImageLink,
-                  ("channel" .=) <$> _tolipChannel,
-                  ("brand" .=) <$> _tolipBrand,
-                  ("targetCountry" .=) <$> _tolipTargetCountry,
-                  ("gtin" .=) <$> _tolipGtin,
-                  ("itemGroupId" .=) <$> _tolipItemGroupId,
-                  ("offerId" .=) <$> _tolipOfferId,
-                  ("price" .=) <$> _tolipPrice,
-                  ("variantAttributes" .=) <$> _tolipVariantAttributes,
-                  ("title" .=) <$> _tolipTitle,
-                  ("contentLanguage" .=) <$> _tolipContentLanguage,
-                  ("mpn" .=) <$> _tolipMpn,
-                  ("condition" .=) <$> _tolipCondition])
+                 [("value" .=) <$> _pValue,
+                  ("currency" .=) <$> _pCurrency])
+
+--
+-- /See:/ 'orderLineItemShippingDetails' smart constructor.
+data OrderLineItemShippingDetails = OrderLineItemShippingDetails
+    { _olisdShipByDate    :: !(Maybe Text)
+    , _olisdMethod        :: !(Maybe OrderLineItemShippingDetailsMethod)
+    , _olisdDeliverByDate :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrderLineItemShippingDetails' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'olisdShipByDate'
+--
+-- * 'olisdMethod'
+--
+-- * 'olisdDeliverByDate'
+orderLineItemShippingDetails
+    :: OrderLineItemShippingDetails
+orderLineItemShippingDetails =
+    OrderLineItemShippingDetails
+    { _olisdShipByDate = Nothing
+    , _olisdMethod = Nothing
+    , _olisdDeliverByDate = Nothing
+    }
+
+-- | The ship by date, in ISO 8601 format.
+olisdShipByDate :: Lens' OrderLineItemShippingDetails (Maybe Text)
+olisdShipByDate
+  = lens _olisdShipByDate
+      (\ s a -> s{_olisdShipByDate = a})
+
+-- | Details of the shipping method.
+olisdMethod :: Lens' OrderLineItemShippingDetails (Maybe OrderLineItemShippingDetailsMethod)
+olisdMethod
+  = lens _olisdMethod (\ s a -> s{_olisdMethod = a})
+
+-- | The delivery by date, in ISO 8601 format.
+olisdDeliverByDate :: Lens' OrderLineItemShippingDetails (Maybe Text)
+olisdDeliverByDate
+  = lens _olisdDeliverByDate
+      (\ s a -> s{_olisdDeliverByDate = a})
+
+instance FromJSON OrderLineItemShippingDetails where
+        parseJSON
+          = withObject "OrderLineItemShippingDetails"
+              (\ o ->
+                 OrderLineItemShippingDetails <$>
+                   (o .:? "shipByDate") <*> (o .:? "method") <*>
+                     (o .:? "deliverByDate"))
+
+instance ToJSON OrderLineItemShippingDetails where
+        toJSON OrderLineItemShippingDetails{..}
+          = object
+              (catMaybes
+                 [("shipByDate" .=) <$> _olisdShipByDate,
+                  ("method" .=) <$> _olisdMethod,
+                  ("deliverByDate" .=) <$> _olisdDeliverByDate])
+
+--
+-- /See:/ 'orderDeliveryDetails' smart constructor.
+data OrderDeliveryDetails = OrderDeliveryDetails
+    { _oddAddress     :: !(Maybe OrderAddress)
+    , _oddPhoneNumber :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrderDeliveryDetails' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oddAddress'
+--
+-- * 'oddPhoneNumber'
+orderDeliveryDetails
+    :: OrderDeliveryDetails
+orderDeliveryDetails =
+    OrderDeliveryDetails
+    { _oddAddress = Nothing
+    , _oddPhoneNumber = Nothing
+    }
+
+-- | The delivery address
+oddAddress :: Lens' OrderDeliveryDetails (Maybe OrderAddress)
+oddAddress
+  = lens _oddAddress (\ s a -> s{_oddAddress = a})
+
+-- | The phone number of the person receiving the delivery.
+oddPhoneNumber :: Lens' OrderDeliveryDetails (Maybe Text)
+oddPhoneNumber
+  = lens _oddPhoneNumber
+      (\ s a -> s{_oddPhoneNumber = a})
+
+instance FromJSON OrderDeliveryDetails where
+        parseJSON
+          = withObject "OrderDeliveryDetails"
+              (\ o ->
+                 OrderDeliveryDetails <$>
+                   (o .:? "address") <*> (o .:? "phoneNumber"))
+
+instance ToJSON OrderDeliveryDetails where
+        toJSON OrderDeliveryDetails{..}
+          = object
+              (catMaybes
+                 [("address" .=) <$> _oddAddress,
+                  ("phoneNumber" .=) <$> _oddPhoneNumber])
+
+--
+-- /See:/ 'ordersCancelResponse' smart constructor.
+data OrdersCancelResponse = OrdersCancelResponse
+    { _ocrKind            :: !Text
+    , _ocrExecutionStatus :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrdersCancelResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ocrKind'
+--
+-- * 'ocrExecutionStatus'
+ordersCancelResponse
+    :: OrdersCancelResponse
+ordersCancelResponse =
+    OrdersCancelResponse
+    { _ocrKind = "content#ordersCancelResponse"
+    , _ocrExecutionStatus = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#ordersCancelResponse\".
+ocrKind :: Lens' OrdersCancelResponse Text
+ocrKind = lens _ocrKind (\ s a -> s{_ocrKind = a})
+
+-- | The status of the execution.
+ocrExecutionStatus :: Lens' OrdersCancelResponse (Maybe Text)
+ocrExecutionStatus
+  = lens _ocrExecutionStatus
+      (\ s a -> s{_ocrExecutionStatus = a})
+
+instance FromJSON OrdersCancelResponse where
+        parseJSON
+          = withObject "OrdersCancelResponse"
+              (\ o ->
+                 OrdersCancelResponse <$>
+                   (o .:? "kind" .!= "content#ordersCancelResponse") <*>
+                     (o .:? "executionStatus"))
+
+instance ToJSON OrdersCancelResponse where
+        toJSON OrdersCancelResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _ocrKind),
+                  ("executionStatus" .=) <$> _ocrExecutionStatus])
 
 --
 -- /See:/ 'testOrder' smart constructor.
@@ -2890,51 +2811,178 @@ instance ToJSON OrderRefund where
                   ("reasonText" .=) <$> _oReasonText])
 
 --
--- /See:/ 'orderDeliveryDetails' smart constructor.
-data OrderDeliveryDetails = OrderDeliveryDetails
-    { _oddAddress     :: !(Maybe OrderAddress)
-    , _oddPhoneNumber :: !(Maybe Text)
+-- /See:/ 'testOrderLineItemProduct' smart constructor.
+data TestOrderLineItemProduct = TestOrderLineItemProduct
+    { _tolipImageLink         :: !(Maybe Text)
+    , _tolipChannel           :: !(Maybe Text)
+    , _tolipBrand             :: !(Maybe Text)
+    , _tolipTargetCountry     :: !(Maybe Text)
+    , _tolipGtin              :: !(Maybe Text)
+    , _tolipItemGroupId       :: !(Maybe Text)
+    , _tolipOfferId           :: !(Maybe Text)
+    , _tolipPrice             :: !(Maybe Price)
+    , _tolipVariantAttributes :: !(Maybe [OrderLineItemProductVariantAttribute])
+    , _tolipTitle             :: !(Maybe Text)
+    , _tolipContentLanguage   :: !(Maybe Text)
+    , _tolipMpn               :: !(Maybe Text)
+    , _tolipCondition         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrderDeliveryDetails' with the minimum fields required to make a request.
+-- | Creates a value of 'TestOrderLineItemProduct' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'oddAddress'
+-- * 'tolipImageLink'
 --
--- * 'oddPhoneNumber'
-orderDeliveryDetails
-    :: OrderDeliveryDetails
-orderDeliveryDetails =
-    OrderDeliveryDetails
-    { _oddAddress = Nothing
-    , _oddPhoneNumber = Nothing
+-- * 'tolipChannel'
+--
+-- * 'tolipBrand'
+--
+-- * 'tolipTargetCountry'
+--
+-- * 'tolipGtin'
+--
+-- * 'tolipItemGroupId'
+--
+-- * 'tolipOfferId'
+--
+-- * 'tolipPrice'
+--
+-- * 'tolipVariantAttributes'
+--
+-- * 'tolipTitle'
+--
+-- * 'tolipContentLanguage'
+--
+-- * 'tolipMpn'
+--
+-- * 'tolipCondition'
+testOrderLineItemProduct
+    :: TestOrderLineItemProduct
+testOrderLineItemProduct =
+    TestOrderLineItemProduct
+    { _tolipImageLink = Nothing
+    , _tolipChannel = Nothing
+    , _tolipBrand = Nothing
+    , _tolipTargetCountry = Nothing
+    , _tolipGtin = Nothing
+    , _tolipItemGroupId = Nothing
+    , _tolipOfferId = Nothing
+    , _tolipPrice = Nothing
+    , _tolipVariantAttributes = Nothing
+    , _tolipTitle = Nothing
+    , _tolipContentLanguage = Nothing
+    , _tolipMpn = Nothing
+    , _tolipCondition = Nothing
     }
 
--- | The delivery address
-oddAddress :: Lens' OrderDeliveryDetails (Maybe OrderAddress)
-oddAddress
-  = lens _oddAddress (\ s a -> s{_oddAddress = a})
+-- | URL of an image of the item.
+tolipImageLink :: Lens' TestOrderLineItemProduct (Maybe Text)
+tolipImageLink
+  = lens _tolipImageLink
+      (\ s a -> s{_tolipImageLink = a})
 
--- | The phone number of the person receiving the delivery.
-oddPhoneNumber :: Lens' OrderDeliveryDetails (Maybe Text)
-oddPhoneNumber
-  = lens _oddPhoneNumber
-      (\ s a -> s{_oddPhoneNumber = a})
+-- | The item\'s channel.
+tolipChannel :: Lens' TestOrderLineItemProduct (Maybe Text)
+tolipChannel
+  = lens _tolipChannel (\ s a -> s{_tolipChannel = a})
 
-instance FromJSON OrderDeliveryDetails where
+-- | Brand of the item.
+tolipBrand :: Lens' TestOrderLineItemProduct (Maybe Text)
+tolipBrand
+  = lens _tolipBrand (\ s a -> s{_tolipBrand = a})
+
+-- | The CLDR territory code of the target country of the product.
+tolipTargetCountry :: Lens' TestOrderLineItemProduct (Maybe Text)
+tolipTargetCountry
+  = lens _tolipTargetCountry
+      (\ s a -> s{_tolipTargetCountry = a})
+
+-- | Global Trade Item Number (GTIN) of the item. Optional.
+tolipGtin :: Lens' TestOrderLineItemProduct (Maybe Text)
+tolipGtin
+  = lens _tolipGtin (\ s a -> s{_tolipGtin = a})
+
+-- | Shared identifier for all variants of the same product. Optional.
+tolipItemGroupId :: Lens' TestOrderLineItemProduct (Maybe Text)
+tolipItemGroupId
+  = lens _tolipItemGroupId
+      (\ s a -> s{_tolipItemGroupId = a})
+
+-- | An identifier of the item.
+tolipOfferId :: Lens' TestOrderLineItemProduct (Maybe Text)
+tolipOfferId
+  = lens _tolipOfferId (\ s a -> s{_tolipOfferId = a})
+
+-- | The price for the product.
+tolipPrice :: Lens' TestOrderLineItemProduct (Maybe Price)
+tolipPrice
+  = lens _tolipPrice (\ s a -> s{_tolipPrice = a})
+
+-- | Variant attributes for the item. Optional.
+tolipVariantAttributes :: Lens' TestOrderLineItemProduct [OrderLineItemProductVariantAttribute]
+tolipVariantAttributes
+  = lens _tolipVariantAttributes
+      (\ s a -> s{_tolipVariantAttributes = a})
+      . _Default
+      . _Coerce
+
+-- | The title of the product.
+tolipTitle :: Lens' TestOrderLineItemProduct (Maybe Text)
+tolipTitle
+  = lens _tolipTitle (\ s a -> s{_tolipTitle = a})
+
+-- | The two-letter ISO 639-1 language code for the item.
+tolipContentLanguage :: Lens' TestOrderLineItemProduct (Maybe Text)
+tolipContentLanguage
+  = lens _tolipContentLanguage
+      (\ s a -> s{_tolipContentLanguage = a})
+
+-- | Manufacturer Part Number (MPN) of the item. Optional.
+tolipMpn :: Lens' TestOrderLineItemProduct (Maybe Text)
+tolipMpn = lens _tolipMpn (\ s a -> s{_tolipMpn = a})
+
+-- | Condition or state of the item.
+tolipCondition :: Lens' TestOrderLineItemProduct (Maybe Text)
+tolipCondition
+  = lens _tolipCondition
+      (\ s a -> s{_tolipCondition = a})
+
+instance FromJSON TestOrderLineItemProduct where
         parseJSON
-          = withObject "OrderDeliveryDetails"
+          = withObject "TestOrderLineItemProduct"
               (\ o ->
-                 OrderDeliveryDetails <$>
-                   (o .:? "address") <*> (o .:? "phoneNumber"))
+                 TestOrderLineItemProduct <$>
+                   (o .:? "imageLink") <*> (o .:? "channel") <*>
+                     (o .:? "brand")
+                     <*> (o .:? "targetCountry")
+                     <*> (o .:? "gtin")
+                     <*> (o .:? "itemGroupId")
+                     <*> (o .:? "offerId")
+                     <*> (o .:? "price")
+                     <*> (o .:? "variantAttributes" .!= mempty)
+                     <*> (o .:? "title")
+                     <*> (o .:? "contentLanguage")
+                     <*> (o .:? "mpn")
+                     <*> (o .:? "condition"))
 
-instance ToJSON OrderDeliveryDetails where
-        toJSON OrderDeliveryDetails{..}
+instance ToJSON TestOrderLineItemProduct where
+        toJSON TestOrderLineItemProduct{..}
           = object
               (catMaybes
-                 [("address" .=) <$> _oddAddress,
-                  ("phoneNumber" .=) <$> _oddPhoneNumber])
+                 [("imageLink" .=) <$> _tolipImageLink,
+                  ("channel" .=) <$> _tolipChannel,
+                  ("brand" .=) <$> _tolipBrand,
+                  ("targetCountry" .=) <$> _tolipTargetCountry,
+                  ("gtin" .=) <$> _tolipGtin,
+                  ("itemGroupId" .=) <$> _tolipItemGroupId,
+                  ("offerId" .=) <$> _tolipOfferId,
+                  ("price" .=) <$> _tolipPrice,
+                  ("variantAttributes" .=) <$> _tolipVariantAttributes,
+                  ("title" .=) <$> _tolipTitle,
+                  ("contentLanguage" .=) <$> _tolipContentLanguage,
+                  ("mpn" .=) <$> _tolipMpn,
+                  ("condition" .=) <$> _tolipCondition])
 
 --
 -- /See:/ 'orderAddress' smart constructor.
@@ -3058,136 +3106,6 @@ instance ToJSON OrderAddress where
                   ("isPostOfficeBox" .=) <$> _oaIsPostOfficeBox,
                   ("fullAddress" .=) <$> _oaFullAddress,
                   ("region" .=) <$> _oaRegion])
-
---
--- /See:/ 'ordersCancelResponse' smart constructor.
-data OrdersCancelResponse = OrdersCancelResponse
-    { _ocrKind            :: !Text
-    , _ocrExecutionStatus :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'OrdersCancelResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ocrKind'
---
--- * 'ocrExecutionStatus'
-ordersCancelResponse
-    :: OrdersCancelResponse
-ordersCancelResponse =
-    OrdersCancelResponse
-    { _ocrKind = "content#ordersCancelResponse"
-    , _ocrExecutionStatus = Nothing
-    }
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"content#ordersCancelResponse\".
-ocrKind :: Lens' OrdersCancelResponse Text
-ocrKind = lens _ocrKind (\ s a -> s{_ocrKind = a})
-
--- | The status of the execution.
-ocrExecutionStatus :: Lens' OrdersCancelResponse (Maybe Text)
-ocrExecutionStatus
-  = lens _ocrExecutionStatus
-      (\ s a -> s{_ocrExecutionStatus = a})
-
-instance FromJSON OrdersCancelResponse where
-        parseJSON
-          = withObject "OrdersCancelResponse"
-              (\ o ->
-                 OrdersCancelResponse <$>
-                   (o .:? "kind" .!= "content#ordersCancelResponse") <*>
-                     (o .:? "executionStatus"))
-
-instance ToJSON OrdersCancelResponse where
-        toJSON OrdersCancelResponse{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _ocrKind),
-                  ("executionStatus" .=) <$> _ocrExecutionStatus])
-
---
--- /See:/ 'testOrderLineItem' smart constructor.
-data TestOrderLineItem = TestOrderLineItem
-    { _toliQuantityOrdered :: !(Maybe Word32)
-    , _toliReturnInfo      :: !(Maybe OrderLineItemReturnInfo)
-    , _toliShippingDetails :: !(Maybe OrderLineItemShippingDetails)
-    , _toliProduct         :: !(Maybe TestOrderLineItemProduct)
-    , _toliUnitTax         :: !(Maybe Price)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'TestOrderLineItem' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'toliQuantityOrdered'
---
--- * 'toliReturnInfo'
---
--- * 'toliShippingDetails'
---
--- * 'toliProduct'
---
--- * 'toliUnitTax'
-testOrderLineItem
-    :: TestOrderLineItem
-testOrderLineItem =
-    TestOrderLineItem
-    { _toliQuantityOrdered = Nothing
-    , _toliReturnInfo = Nothing
-    , _toliShippingDetails = Nothing
-    , _toliProduct = Nothing
-    , _toliUnitTax = Nothing
-    }
-
--- | Number of items ordered.
-toliQuantityOrdered :: Lens' TestOrderLineItem (Maybe Word32)
-toliQuantityOrdered
-  = lens _toliQuantityOrdered
-      (\ s a -> s{_toliQuantityOrdered = a})
-
--- | Details of the return policy for the line item.
-toliReturnInfo :: Lens' TestOrderLineItem (Maybe OrderLineItemReturnInfo)
-toliReturnInfo
-  = lens _toliReturnInfo
-      (\ s a -> s{_toliReturnInfo = a})
-
--- | Details of the requested shipping for the line item.
-toliShippingDetails :: Lens' TestOrderLineItem (Maybe OrderLineItemShippingDetails)
-toliShippingDetails
-  = lens _toliShippingDetails
-      (\ s a -> s{_toliShippingDetails = a})
-
--- | Product data from the time of the order placement.
-toliProduct :: Lens' TestOrderLineItem (Maybe TestOrderLineItemProduct)
-toliProduct
-  = lens _toliProduct (\ s a -> s{_toliProduct = a})
-
--- | Unit tax for the line item.
-toliUnitTax :: Lens' TestOrderLineItem (Maybe Price)
-toliUnitTax
-  = lens _toliUnitTax (\ s a -> s{_toliUnitTax = a})
-
-instance FromJSON TestOrderLineItem where
-        parseJSON
-          = withObject "TestOrderLineItem"
-              (\ o ->
-                 TestOrderLineItem <$>
-                   (o .:? "quantityOrdered") <*> (o .:? "returnInfo")
-                     <*> (o .:? "shippingDetails")
-                     <*> (o .:? "product")
-                     <*> (o .:? "unitTax"))
-
-instance ToJSON TestOrderLineItem where
-        toJSON TestOrderLineItem{..}
-          = object
-              (catMaybes
-                 [("quantityOrdered" .=) <$> _toliQuantityOrdered,
-                  ("returnInfo" .=) <$> _toliReturnInfo,
-                  ("shippingDetails" .=) <$> _toliShippingDetails,
-                  ("product" .=) <$> _toliProduct,
-                  ("unitTax" .=) <$> _toliUnitTax])
 
 --
 -- /See:/ 'orderPaymentMethod' smart constructor.
@@ -3394,276 +3312,138 @@ instance ToJSON OrdersCancelLineItemResponse where
                   ("executionStatus" .=) <$> _oclirExecutionStatus])
 
 --
--- /See:/ 'ordersCustomBatchRequestEntryUpdateShipment' smart constructor.
-data OrdersCustomBatchRequestEntryUpdateShipment = OrdersCustomBatchRequestEntryUpdateShipment
-    { _ocbreusCarrier    :: !(Maybe Text)
-    , _ocbreusStatus     :: !(Maybe Text)
-    , _ocbreusTrackingId :: !(Maybe Text)
-    , _ocbreusShipmentId :: !(Maybe Text)
+-- /See:/ 'testOrderLineItem' smart constructor.
+data TestOrderLineItem = TestOrderLineItem
+    { _toliQuantityOrdered :: !(Maybe Word32)
+    , _toliReturnInfo      :: !(Maybe OrderLineItemReturnInfo)
+    , _toliShippingDetails :: !(Maybe OrderLineItemShippingDetails)
+    , _toliProduct         :: !(Maybe TestOrderLineItemProduct)
+    , _toliUnitTax         :: !(Maybe Price)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrdersCustomBatchRequestEntryUpdateShipment' with the minimum fields required to make a request.
+-- | Creates a value of 'TestOrderLineItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ocbreusCarrier'
+-- * 'toliQuantityOrdered'
 --
--- * 'ocbreusStatus'
+-- * 'toliReturnInfo'
 --
--- * 'ocbreusTrackingId'
+-- * 'toliShippingDetails'
 --
--- * 'ocbreusShipmentId'
-ordersCustomBatchRequestEntryUpdateShipment
-    :: OrdersCustomBatchRequestEntryUpdateShipment
-ordersCustomBatchRequestEntryUpdateShipment =
-    OrdersCustomBatchRequestEntryUpdateShipment
-    { _ocbreusCarrier = Nothing
-    , _ocbreusStatus = Nothing
-    , _ocbreusTrackingId = Nothing
-    , _ocbreusShipmentId = Nothing
+-- * 'toliProduct'
+--
+-- * 'toliUnitTax'
+testOrderLineItem
+    :: TestOrderLineItem
+testOrderLineItem =
+    TestOrderLineItem
+    { _toliQuantityOrdered = Nothing
+    , _toliReturnInfo = Nothing
+    , _toliShippingDetails = Nothing
+    , _toliProduct = Nothing
+    , _toliUnitTax = Nothing
     }
 
--- | The carrier handling the shipment. Not updated if missing.
-ocbreusCarrier :: Lens' OrdersCustomBatchRequestEntryUpdateShipment (Maybe Text)
-ocbreusCarrier
-  = lens _ocbreusCarrier
-      (\ s a -> s{_ocbreusCarrier = a})
+-- | Number of items ordered.
+toliQuantityOrdered :: Lens' TestOrderLineItem (Maybe Word32)
+toliQuantityOrdered
+  = lens _toliQuantityOrdered
+      (\ s a -> s{_toliQuantityOrdered = a})
 
--- | New status for the shipment. Not updated if missing.
-ocbreusStatus :: Lens' OrdersCustomBatchRequestEntryUpdateShipment (Maybe Text)
-ocbreusStatus
-  = lens _ocbreusStatus
-      (\ s a -> s{_ocbreusStatus = a})
+-- | Details of the return policy for the line item.
+toliReturnInfo :: Lens' TestOrderLineItem (Maybe OrderLineItemReturnInfo)
+toliReturnInfo
+  = lens _toliReturnInfo
+      (\ s a -> s{_toliReturnInfo = a})
 
--- | The tracking id for the shipment. Not updated if missing.
-ocbreusTrackingId :: Lens' OrdersCustomBatchRequestEntryUpdateShipment (Maybe Text)
-ocbreusTrackingId
-  = lens _ocbreusTrackingId
-      (\ s a -> s{_ocbreusTrackingId = a})
+-- | Details of the requested shipping for the line item.
+toliShippingDetails :: Lens' TestOrderLineItem (Maybe OrderLineItemShippingDetails)
+toliShippingDetails
+  = lens _toliShippingDetails
+      (\ s a -> s{_toliShippingDetails = a})
 
--- | The ID of the shipment.
-ocbreusShipmentId :: Lens' OrdersCustomBatchRequestEntryUpdateShipment (Maybe Text)
-ocbreusShipmentId
-  = lens _ocbreusShipmentId
-      (\ s a -> s{_ocbreusShipmentId = a})
+-- | Product data from the time of the order placement.
+toliProduct :: Lens' TestOrderLineItem (Maybe TestOrderLineItemProduct)
+toliProduct
+  = lens _toliProduct (\ s a -> s{_toliProduct = a})
 
-instance FromJSON
-         OrdersCustomBatchRequestEntryUpdateShipment where
+-- | Unit tax for the line item.
+toliUnitTax :: Lens' TestOrderLineItem (Maybe Price)
+toliUnitTax
+  = lens _toliUnitTax (\ s a -> s{_toliUnitTax = a})
+
+instance FromJSON TestOrderLineItem where
         parseJSON
-          = withObject
-              "OrdersCustomBatchRequestEntryUpdateShipment"
+          = withObject "TestOrderLineItem"
               (\ o ->
-                 OrdersCustomBatchRequestEntryUpdateShipment <$>
-                   (o .:? "carrier") <*> (o .:? "status") <*>
-                     (o .:? "trackingId")
-                     <*> (o .:? "shipmentId"))
+                 TestOrderLineItem <$>
+                   (o .:? "quantityOrdered") <*> (o .:? "returnInfo")
+                     <*> (o .:? "shippingDetails")
+                     <*> (o .:? "product")
+                     <*> (o .:? "unitTax"))
 
-instance ToJSON
-         OrdersCustomBatchRequestEntryUpdateShipment where
-        toJSON
-          OrdersCustomBatchRequestEntryUpdateShipment{..}
+instance ToJSON TestOrderLineItem where
+        toJSON TestOrderLineItem{..}
           = object
               (catMaybes
-                 [("carrier" .=) <$> _ocbreusCarrier,
-                  ("status" .=) <$> _ocbreusStatus,
-                  ("trackingId" .=) <$> _ocbreusTrackingId,
-                  ("shipmentId" .=) <$> _ocbreusShipmentId])
+                 [("quantityOrdered" .=) <$> _toliQuantityOrdered,
+                  ("returnInfo" .=) <$> _toliReturnInfo,
+                  ("shippingDetails" .=) <$> _toliShippingDetails,
+                  ("product" .=) <$> _toliProduct,
+                  ("unitTax" .=) <$> _toliUnitTax])
 
 --
--- /See:/ 'orderLineItemProduct' smart constructor.
-data OrderLineItemProduct = OrderLineItemProduct
-    { _olipImageLink         :: !(Maybe Text)
-    , _olipShownImage        :: !(Maybe Text)
-    , _olipChannel           :: !(Maybe Text)
-    , _olipBrand             :: !(Maybe Text)
-    , _olipTargetCountry     :: !(Maybe Text)
-    , _olipGtin              :: !(Maybe Text)
-    , _olipItemGroupId       :: !(Maybe Text)
-    , _olipOfferId           :: !(Maybe Text)
-    , _olipId                :: !(Maybe Text)
-    , _olipPrice             :: !(Maybe Price)
-    , _olipVariantAttributes :: !(Maybe [OrderLineItemProductVariantAttribute])
-    , _olipTitle             :: !(Maybe Text)
-    , _olipContentLanguage   :: !(Maybe Text)
-    , _olipMpn               :: !(Maybe Text)
-    , _olipCondition         :: !(Maybe Text)
+-- /See:/ 'ordersUpdateMerchantOrderIdResponse' smart constructor.
+data OrdersUpdateMerchantOrderIdResponse = OrdersUpdateMerchantOrderIdResponse
+    { _oumoirKind            :: !Text
+    , _oumoirExecutionStatus :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrderLineItemProduct' with the minimum fields required to make a request.
+-- | Creates a value of 'OrdersUpdateMerchantOrderIdResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'olipImageLink'
+-- * 'oumoirKind'
 --
--- * 'olipShownImage'
---
--- * 'olipChannel'
---
--- * 'olipBrand'
---
--- * 'olipTargetCountry'
---
--- * 'olipGtin'
---
--- * 'olipItemGroupId'
---
--- * 'olipOfferId'
---
--- * 'olipId'
---
--- * 'olipPrice'
---
--- * 'olipVariantAttributes'
---
--- * 'olipTitle'
---
--- * 'olipContentLanguage'
---
--- * 'olipMpn'
---
--- * 'olipCondition'
-orderLineItemProduct
-    :: OrderLineItemProduct
-orderLineItemProduct =
-    OrderLineItemProduct
-    { _olipImageLink = Nothing
-    , _olipShownImage = Nothing
-    , _olipChannel = Nothing
-    , _olipBrand = Nothing
-    , _olipTargetCountry = Nothing
-    , _olipGtin = Nothing
-    , _olipItemGroupId = Nothing
-    , _olipOfferId = Nothing
-    , _olipId = Nothing
-    , _olipPrice = Nothing
-    , _olipVariantAttributes = Nothing
-    , _olipTitle = Nothing
-    , _olipContentLanguage = Nothing
-    , _olipMpn = Nothing
-    , _olipCondition = Nothing
+-- * 'oumoirExecutionStatus'
+ordersUpdateMerchantOrderIdResponse
+    :: OrdersUpdateMerchantOrderIdResponse
+ordersUpdateMerchantOrderIdResponse =
+    OrdersUpdateMerchantOrderIdResponse
+    { _oumoirKind = "content#ordersUpdateMerchantOrderIdResponse"
+    , _oumoirExecutionStatus = Nothing
     }
 
--- | URL of an image of the item.
-olipImageLink :: Lens' OrderLineItemProduct (Maybe Text)
-olipImageLink
-  = lens _olipImageLink
-      (\ s a -> s{_olipImageLink = a})
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#ordersUpdateMerchantOrderIdResponse\".
+oumoirKind :: Lens' OrdersUpdateMerchantOrderIdResponse Text
+oumoirKind
+  = lens _oumoirKind (\ s a -> s{_oumoirKind = a})
 
--- | URL to the cached image shown to the user when order was placed.
-olipShownImage :: Lens' OrderLineItemProduct (Maybe Text)
-olipShownImage
-  = lens _olipShownImage
-      (\ s a -> s{_olipShownImage = a})
+-- | The status of the execution.
+oumoirExecutionStatus :: Lens' OrdersUpdateMerchantOrderIdResponse (Maybe Text)
+oumoirExecutionStatus
+  = lens _oumoirExecutionStatus
+      (\ s a -> s{_oumoirExecutionStatus = a})
 
--- | The item\'s channel (online or local).
-olipChannel :: Lens' OrderLineItemProduct (Maybe Text)
-olipChannel
-  = lens _olipChannel (\ s a -> s{_olipChannel = a})
-
--- | Brand of the item.
-olipBrand :: Lens' OrderLineItemProduct (Maybe Text)
-olipBrand
-  = lens _olipBrand (\ s a -> s{_olipBrand = a})
-
--- | The CLDR territory code of the target country of the product.
-olipTargetCountry :: Lens' OrderLineItemProduct (Maybe Text)
-olipTargetCountry
-  = lens _olipTargetCountry
-      (\ s a -> s{_olipTargetCountry = a})
-
--- | Global Trade Item Number (GTIN) of the item.
-olipGtin :: Lens' OrderLineItemProduct (Maybe Text)
-olipGtin = lens _olipGtin (\ s a -> s{_olipGtin = a})
-
--- | Shared identifier for all variants of the same product.
-olipItemGroupId :: Lens' OrderLineItemProduct (Maybe Text)
-olipItemGroupId
-  = lens _olipItemGroupId
-      (\ s a -> s{_olipItemGroupId = a})
-
--- | An identifier of the item.
-olipOfferId :: Lens' OrderLineItemProduct (Maybe Text)
-olipOfferId
-  = lens _olipOfferId (\ s a -> s{_olipOfferId = a})
-
--- | The REST id of the product.
-olipId :: Lens' OrderLineItemProduct (Maybe Text)
-olipId = lens _olipId (\ s a -> s{_olipId = a})
-
--- | Price of the item.
-olipPrice :: Lens' OrderLineItemProduct (Maybe Price)
-olipPrice
-  = lens _olipPrice (\ s a -> s{_olipPrice = a})
-
--- | Variant attributes for the item. These are dimensions of the product,
--- such as color, gender, material, pattern, and size. You can find a
--- comprehensive list of variant attributes here.
-olipVariantAttributes :: Lens' OrderLineItemProduct [OrderLineItemProductVariantAttribute]
-olipVariantAttributes
-  = lens _olipVariantAttributes
-      (\ s a -> s{_olipVariantAttributes = a})
-      . _Default
-      . _Coerce
-
--- | The title of the product.
-olipTitle :: Lens' OrderLineItemProduct (Maybe Text)
-olipTitle
-  = lens _olipTitle (\ s a -> s{_olipTitle = a})
-
--- | The two-letter ISO 639-1 language code for the item.
-olipContentLanguage :: Lens' OrderLineItemProduct (Maybe Text)
-olipContentLanguage
-  = lens _olipContentLanguage
-      (\ s a -> s{_olipContentLanguage = a})
-
--- | Manufacturer Part Number (MPN) of the item.
-olipMpn :: Lens' OrderLineItemProduct (Maybe Text)
-olipMpn = lens _olipMpn (\ s a -> s{_olipMpn = a})
-
--- | Condition or state of the item.
-olipCondition :: Lens' OrderLineItemProduct (Maybe Text)
-olipCondition
-  = lens _olipCondition
-      (\ s a -> s{_olipCondition = a})
-
-instance FromJSON OrderLineItemProduct where
+instance FromJSON OrdersUpdateMerchantOrderIdResponse
+         where
         parseJSON
-          = withObject "OrderLineItemProduct"
+          = withObject "OrdersUpdateMerchantOrderIdResponse"
               (\ o ->
-                 OrderLineItemProduct <$>
-                   (o .:? "imageLink") <*> (o .:? "shownImage") <*>
-                     (o .:? "channel")
-                     <*> (o .:? "brand")
-                     <*> (o .:? "targetCountry")
-                     <*> (o .:? "gtin")
-                     <*> (o .:? "itemGroupId")
-                     <*> (o .:? "offerId")
-                     <*> (o .:? "id")
-                     <*> (o .:? "price")
-                     <*> (o .:? "variantAttributes" .!= mempty)
-                     <*> (o .:? "title")
-                     <*> (o .:? "contentLanguage")
-                     <*> (o .:? "mpn")
-                     <*> (o .:? "condition"))
+                 OrdersUpdateMerchantOrderIdResponse <$>
+                   (o .:? "kind" .!=
+                      "content#ordersUpdateMerchantOrderIdResponse")
+                     <*> (o .:? "executionStatus"))
 
-instance ToJSON OrderLineItemProduct where
-        toJSON OrderLineItemProduct{..}
+instance ToJSON OrdersUpdateMerchantOrderIdResponse
+         where
+        toJSON OrdersUpdateMerchantOrderIdResponse{..}
           = object
               (catMaybes
-                 [("imageLink" .=) <$> _olipImageLink,
-                  ("shownImage" .=) <$> _olipShownImage,
-                  ("channel" .=) <$> _olipChannel,
-                  ("brand" .=) <$> _olipBrand,
-                  ("targetCountry" .=) <$> _olipTargetCountry,
-                  ("gtin" .=) <$> _olipGtin,
-                  ("itemGroupId" .=) <$> _olipItemGroupId,
-                  ("offerId" .=) <$> _olipOfferId,
-                  ("id" .=) <$> _olipId, ("price" .=) <$> _olipPrice,
-                  ("variantAttributes" .=) <$> _olipVariantAttributes,
-                  ("title" .=) <$> _olipTitle,
-                  ("contentLanguage" .=) <$> _olipContentLanguage,
-                  ("mpn" .=) <$> _olipMpn,
-                  ("condition" .=) <$> _olipCondition])
+                 [Just ("kind" .= _oumoirKind),
+                  ("executionStatus" .=) <$> _oumoirExecutionStatus])
 
 --
 -- /See:/ 'ordersAcknowledgeResponse' smart constructor.
@@ -3953,6 +3733,202 @@ instance ToJSON Order where
                   ("shippingCost" .=) <$> _ordShippingCost])
 
 --
+-- /See:/ 'orderLineItemProduct' smart constructor.
+data OrderLineItemProduct = OrderLineItemProduct
+    { _olipImageLink         :: !(Maybe Text)
+    , _olipShownImage        :: !(Maybe Text)
+    , _olipChannel           :: !(Maybe Text)
+    , _olipBrand             :: !(Maybe Text)
+    , _olipTargetCountry     :: !(Maybe Text)
+    , _olipGtin              :: !(Maybe Text)
+    , _olipItemGroupId       :: !(Maybe Text)
+    , _olipOfferId           :: !(Maybe Text)
+    , _olipId                :: !(Maybe Text)
+    , _olipPrice             :: !(Maybe Price)
+    , _olipVariantAttributes :: !(Maybe [OrderLineItemProductVariantAttribute])
+    , _olipTitle             :: !(Maybe Text)
+    , _olipContentLanguage   :: !(Maybe Text)
+    , _olipMpn               :: !(Maybe Text)
+    , _olipCondition         :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrderLineItemProduct' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'olipImageLink'
+--
+-- * 'olipShownImage'
+--
+-- * 'olipChannel'
+--
+-- * 'olipBrand'
+--
+-- * 'olipTargetCountry'
+--
+-- * 'olipGtin'
+--
+-- * 'olipItemGroupId'
+--
+-- * 'olipOfferId'
+--
+-- * 'olipId'
+--
+-- * 'olipPrice'
+--
+-- * 'olipVariantAttributes'
+--
+-- * 'olipTitle'
+--
+-- * 'olipContentLanguage'
+--
+-- * 'olipMpn'
+--
+-- * 'olipCondition'
+orderLineItemProduct
+    :: OrderLineItemProduct
+orderLineItemProduct =
+    OrderLineItemProduct
+    { _olipImageLink = Nothing
+    , _olipShownImage = Nothing
+    , _olipChannel = Nothing
+    , _olipBrand = Nothing
+    , _olipTargetCountry = Nothing
+    , _olipGtin = Nothing
+    , _olipItemGroupId = Nothing
+    , _olipOfferId = Nothing
+    , _olipId = Nothing
+    , _olipPrice = Nothing
+    , _olipVariantAttributes = Nothing
+    , _olipTitle = Nothing
+    , _olipContentLanguage = Nothing
+    , _olipMpn = Nothing
+    , _olipCondition = Nothing
+    }
+
+-- | URL of an image of the item.
+olipImageLink :: Lens' OrderLineItemProduct (Maybe Text)
+olipImageLink
+  = lens _olipImageLink
+      (\ s a -> s{_olipImageLink = a})
+
+-- | URL to the cached image shown to the user when order was placed.
+olipShownImage :: Lens' OrderLineItemProduct (Maybe Text)
+olipShownImage
+  = lens _olipShownImage
+      (\ s a -> s{_olipShownImage = a})
+
+-- | The item\'s channel (online or local).
+olipChannel :: Lens' OrderLineItemProduct (Maybe Text)
+olipChannel
+  = lens _olipChannel (\ s a -> s{_olipChannel = a})
+
+-- | Brand of the item.
+olipBrand :: Lens' OrderLineItemProduct (Maybe Text)
+olipBrand
+  = lens _olipBrand (\ s a -> s{_olipBrand = a})
+
+-- | The CLDR territory code of the target country of the product.
+olipTargetCountry :: Lens' OrderLineItemProduct (Maybe Text)
+olipTargetCountry
+  = lens _olipTargetCountry
+      (\ s a -> s{_olipTargetCountry = a})
+
+-- | Global Trade Item Number (GTIN) of the item.
+olipGtin :: Lens' OrderLineItemProduct (Maybe Text)
+olipGtin = lens _olipGtin (\ s a -> s{_olipGtin = a})
+
+-- | Shared identifier for all variants of the same product.
+olipItemGroupId :: Lens' OrderLineItemProduct (Maybe Text)
+olipItemGroupId
+  = lens _olipItemGroupId
+      (\ s a -> s{_olipItemGroupId = a})
+
+-- | An identifier of the item.
+olipOfferId :: Lens' OrderLineItemProduct (Maybe Text)
+olipOfferId
+  = lens _olipOfferId (\ s a -> s{_olipOfferId = a})
+
+-- | The REST id of the product.
+olipId :: Lens' OrderLineItemProduct (Maybe Text)
+olipId = lens _olipId (\ s a -> s{_olipId = a})
+
+-- | Price of the item.
+olipPrice :: Lens' OrderLineItemProduct (Maybe Price)
+olipPrice
+  = lens _olipPrice (\ s a -> s{_olipPrice = a})
+
+-- | Variant attributes for the item. These are dimensions of the product,
+-- such as color, gender, material, pattern, and size. You can find a
+-- comprehensive list of variant attributes here.
+olipVariantAttributes :: Lens' OrderLineItemProduct [OrderLineItemProductVariantAttribute]
+olipVariantAttributes
+  = lens _olipVariantAttributes
+      (\ s a -> s{_olipVariantAttributes = a})
+      . _Default
+      . _Coerce
+
+-- | The title of the product.
+olipTitle :: Lens' OrderLineItemProduct (Maybe Text)
+olipTitle
+  = lens _olipTitle (\ s a -> s{_olipTitle = a})
+
+-- | The two-letter ISO 639-1 language code for the item.
+olipContentLanguage :: Lens' OrderLineItemProduct (Maybe Text)
+olipContentLanguage
+  = lens _olipContentLanguage
+      (\ s a -> s{_olipContentLanguage = a})
+
+-- | Manufacturer Part Number (MPN) of the item.
+olipMpn :: Lens' OrderLineItemProduct (Maybe Text)
+olipMpn = lens _olipMpn (\ s a -> s{_olipMpn = a})
+
+-- | Condition or state of the item.
+olipCondition :: Lens' OrderLineItemProduct (Maybe Text)
+olipCondition
+  = lens _olipCondition
+      (\ s a -> s{_olipCondition = a})
+
+instance FromJSON OrderLineItemProduct where
+        parseJSON
+          = withObject "OrderLineItemProduct"
+              (\ o ->
+                 OrderLineItemProduct <$>
+                   (o .:? "imageLink") <*> (o .:? "shownImage") <*>
+                     (o .:? "channel")
+                     <*> (o .:? "brand")
+                     <*> (o .:? "targetCountry")
+                     <*> (o .:? "gtin")
+                     <*> (o .:? "itemGroupId")
+                     <*> (o .:? "offerId")
+                     <*> (o .:? "id")
+                     <*> (o .:? "price")
+                     <*> (o .:? "variantAttributes" .!= mempty)
+                     <*> (o .:? "title")
+                     <*> (o .:? "contentLanguage")
+                     <*> (o .:? "mpn")
+                     <*> (o .:? "condition"))
+
+instance ToJSON OrderLineItemProduct where
+        toJSON OrderLineItemProduct{..}
+          = object
+              (catMaybes
+                 [("imageLink" .=) <$> _olipImageLink,
+                  ("shownImage" .=) <$> _olipShownImage,
+                  ("channel" .=) <$> _olipChannel,
+                  ("brand" .=) <$> _olipBrand,
+                  ("targetCountry" .=) <$> _olipTargetCountry,
+                  ("gtin" .=) <$> _olipGtin,
+                  ("itemGroupId" .=) <$> _olipItemGroupId,
+                  ("offerId" .=) <$> _olipOfferId,
+                  ("id" .=) <$> _olipId, ("price" .=) <$> _olipPrice,
+                  ("variantAttributes" .=) <$> _olipVariantAttributes,
+                  ("title" .=) <$> _olipTitle,
+                  ("contentLanguage" .=) <$> _olipContentLanguage,
+                  ("mpn" .=) <$> _olipMpn,
+                  ("condition" .=) <$> _olipCondition])
+
+--
 -- /See:/ 'ordersCustomBatchRequestEntryReturnLineItem' smart constructor.
 data OrdersCustomBatchRequestEntryReturnLineItem = OrdersCustomBatchRequestEntryReturnLineItem
     { _ocbrerliQuantity   :: !(Maybe Word32)
@@ -4029,56 +4005,80 @@ instance ToJSON
                   ("reasonText" .=) <$> _ocbrerliReasonText])
 
 --
--- /See:/ 'ordersUpdateMerchantOrderIdResponse' smart constructor.
-data OrdersUpdateMerchantOrderIdResponse = OrdersUpdateMerchantOrderIdResponse
-    { _oumoirKind            :: !Text
-    , _oumoirExecutionStatus :: !(Maybe Text)
+-- /See:/ 'ordersCustomBatchRequestEntryUpdateShipment' smart constructor.
+data OrdersCustomBatchRequestEntryUpdateShipment = OrdersCustomBatchRequestEntryUpdateShipment
+    { _ocbreusCarrier    :: !(Maybe Text)
+    , _ocbreusStatus     :: !(Maybe Text)
+    , _ocbreusTrackingId :: !(Maybe Text)
+    , _ocbreusShipmentId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrdersUpdateMerchantOrderIdResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'OrdersCustomBatchRequestEntryUpdateShipment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'oumoirKind'
+-- * 'ocbreusCarrier'
 --
--- * 'oumoirExecutionStatus'
-ordersUpdateMerchantOrderIdResponse
-    :: OrdersUpdateMerchantOrderIdResponse
-ordersUpdateMerchantOrderIdResponse =
-    OrdersUpdateMerchantOrderIdResponse
-    { _oumoirKind = "content#ordersUpdateMerchantOrderIdResponse"
-    , _oumoirExecutionStatus = Nothing
+-- * 'ocbreusStatus'
+--
+-- * 'ocbreusTrackingId'
+--
+-- * 'ocbreusShipmentId'
+ordersCustomBatchRequestEntryUpdateShipment
+    :: OrdersCustomBatchRequestEntryUpdateShipment
+ordersCustomBatchRequestEntryUpdateShipment =
+    OrdersCustomBatchRequestEntryUpdateShipment
+    { _ocbreusCarrier = Nothing
+    , _ocbreusStatus = Nothing
+    , _ocbreusTrackingId = Nothing
+    , _ocbreusShipmentId = Nothing
     }
 
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"content#ordersUpdateMerchantOrderIdResponse\".
-oumoirKind :: Lens' OrdersUpdateMerchantOrderIdResponse Text
-oumoirKind
-  = lens _oumoirKind (\ s a -> s{_oumoirKind = a})
+-- | The carrier handling the shipment. Not updated if missing.
+ocbreusCarrier :: Lens' OrdersCustomBatchRequestEntryUpdateShipment (Maybe Text)
+ocbreusCarrier
+  = lens _ocbreusCarrier
+      (\ s a -> s{_ocbreusCarrier = a})
 
--- | The status of the execution.
-oumoirExecutionStatus :: Lens' OrdersUpdateMerchantOrderIdResponse (Maybe Text)
-oumoirExecutionStatus
-  = lens _oumoirExecutionStatus
-      (\ s a -> s{_oumoirExecutionStatus = a})
+-- | New status for the shipment. Not updated if missing.
+ocbreusStatus :: Lens' OrdersCustomBatchRequestEntryUpdateShipment (Maybe Text)
+ocbreusStatus
+  = lens _ocbreusStatus
+      (\ s a -> s{_ocbreusStatus = a})
 
-instance FromJSON OrdersUpdateMerchantOrderIdResponse
-         where
+-- | The tracking id for the shipment. Not updated if missing.
+ocbreusTrackingId :: Lens' OrdersCustomBatchRequestEntryUpdateShipment (Maybe Text)
+ocbreusTrackingId
+  = lens _ocbreusTrackingId
+      (\ s a -> s{_ocbreusTrackingId = a})
+
+-- | The ID of the shipment.
+ocbreusShipmentId :: Lens' OrdersCustomBatchRequestEntryUpdateShipment (Maybe Text)
+ocbreusShipmentId
+  = lens _ocbreusShipmentId
+      (\ s a -> s{_ocbreusShipmentId = a})
+
+instance FromJSON
+         OrdersCustomBatchRequestEntryUpdateShipment where
         parseJSON
-          = withObject "OrdersUpdateMerchantOrderIdResponse"
+          = withObject
+              "OrdersCustomBatchRequestEntryUpdateShipment"
               (\ o ->
-                 OrdersUpdateMerchantOrderIdResponse <$>
-                   (o .:? "kind" .!=
-                      "content#ordersUpdateMerchantOrderIdResponse")
-                     <*> (o .:? "executionStatus"))
+                 OrdersCustomBatchRequestEntryUpdateShipment <$>
+                   (o .:? "carrier") <*> (o .:? "status") <*>
+                     (o .:? "trackingId")
+                     <*> (o .:? "shipmentId"))
 
-instance ToJSON OrdersUpdateMerchantOrderIdResponse
-         where
-        toJSON OrdersUpdateMerchantOrderIdResponse{..}
+instance ToJSON
+         OrdersCustomBatchRequestEntryUpdateShipment where
+        toJSON
+          OrdersCustomBatchRequestEntryUpdateShipment{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _oumoirKind),
-                  ("executionStatus" .=) <$> _oumoirExecutionStatus])
+                 [("carrier" .=) <$> _ocbreusCarrier,
+                  ("status" .=) <$> _ocbreusStatus,
+                  ("trackingId" .=) <$> _ocbreusTrackingId,
+                  ("shipmentId" .=) <$> _ocbreusShipmentId])
 
 --
 -- /See:/ 'ordersCustomBatchRequestEntryRefund' smart constructor.

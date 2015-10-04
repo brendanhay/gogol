@@ -79,7 +79,7 @@ type ControllerDebuggeesBreakpointsUpdateResource =
                                      QueryParam "key" Key :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
-                                           ReqBody '[JSON]
+                                           ReqBody '[OctetStream]
                                              UpdateActiveBreakpointRequest
                                              :>
                                              Put '[JSON]

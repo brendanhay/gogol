@@ -17,24 +17,11 @@ module Network.Google.AppsReseller.Types
     -- * Service URL
       appsResellerURL
 
-    -- * CommitmentInterval
-    , CommitmentInterval
-    , commitmentInterval
-    , ciStartTime
-    , ciEndTime
-
-    -- * TrialSettings
-    , TrialSettings
-    , trialSettings
-    , tsIsInTrial
-    , tsTrialEndTime
-
-    -- * Plan
-    , Plan
-    , plan
-    , pCommitmentInterval
-    , pIsCommitmentPlan
-    , pPlanName
+    -- * SubscriptionTrialSettings
+    , SubscriptionTrialSettings
+    , subscriptionTrialSettings
+    , stsIsInTrial
+    , stsTrialEndTime
 
     -- * Address
     , Address
@@ -49,9 +36,6 @@ module Network.Google.AppsReseller.Types
     , aCountryCode
     , aRegion
     , aAddressLine3
-
-    -- * DeletionType
-    , DeletionType (..)
 
     -- * Customer
     , Customer
@@ -72,51 +56,67 @@ module Network.Google.AppsReseller.Types
     , cprPurchaseOrderId
     , cprSeats
 
-    -- * TransferInfo
-    , TransferInfo
-    , transferInfo
-    , tiTransferabilityExpirationTime
-    , tiMinimumTransferableSeats
+    -- * SubscriptionPlanCommitmentInterval
+    , SubscriptionPlanCommitmentInterval
+    , subscriptionPlanCommitmentInterval
+    , spciStartTime
+    , spciEndTime
 
-    -- * Seats
-    , Seats
-    , seats
-    , sNumberOfSeats
-    , sMaximumNumberOfSeats
-    , sLicensedNumberOfSeats
-    , sKind
+    -- * SubscriptionsDeleteDeletionType
+    , SubscriptionsDeleteDeletionType (..)
+
+    -- * SubscriptionPlan
+    , SubscriptionPlan
+    , subscriptionPlan
+    , spCommitmentInterval
+    , spIsCommitmentPlan
+    , spPlanName
 
     -- * Subscriptions
     , Subscriptions
     , subscriptions
-    , subNextPageToken
-    , subKind
-    , subSubscriptions
+    , sNextPageToken
+    , sKind
+    , sSubscriptions
 
-    -- * Subscription
-    , Subscription
-    , subscription
-    , subuCreationTime
-    , subuBillingMethod
-    , subuStatus
-    , subuTrialSettings
-    , subuResourceUiURL
-    , subuKind
-    , subuSKUId
-    , subuPlan
-    , subuCustomerId
-    , subuSuspensionReasons
-    , subuTransferInfo
-    , subuPurchaseOrderId
-    , subuSeats
-    , subuRenewalSettings
-    , subuSubscriptionId
+    -- * Seats
+    , Seats
+    , seats
+    , seaNumberOfSeats
+    , seaMaximumNumberOfSeats
+    , seaLicensedNumberOfSeats
+    , seaKind
 
     -- * RenewalSettings
     , RenewalSettings
     , renewalSettings
     , rsKind
     , rsRenewalType
+
+    -- * Subscription
+    , Subscription
+    , subscription
+    , subCreationTime
+    , subBillingMethod
+    , subStatus
+    , subTrialSettings
+    , subResourceUiURL
+    , subKind
+    , subSKUId
+    , subPlan
+    , subCustomerId
+    , subSuspensionReasons
+    , subTransferInfo
+    , subPurchaseOrderId
+    , subSeats
+    , subRenewalSettings
+    , subSubscriptionId
+
+    -- * SubscriptionTransferInfo
+    , SubscriptionTransferInfo
+    , subscriptionTransferInfo
+    , stiTransferabilityExpirationTime
+    , stiMinimumTransferableSeats
     ) where
 
 import           Network.Google.AppsReseller.Types.Product

@@ -95,8 +95,8 @@ type ProjectsUpdateBillingInfoResource =
                                QueryParam "key" Key :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
-                                     ReqBody '[JSON] ProjectBillingInfo :>
-                                       Put '[JSON] ProjectBillingInfo
+                                     ReqBody '[OctetStream] ProjectBillingInfo
+                                       :> Put '[JSON] ProjectBillingInfo
 
 -- | Sets or updates the billing account associated with a project. You
 -- specify the new billing account by setting the \`billing_account_name\`

@@ -32,15 +32,15 @@ module Network.Google.Resource.Compute.Instances.Delete
     , InstancesDelete'
 
     -- * Request Lenses
-    , iQuotaUser
-    , iPrettyPrint
-    , iProject
-    , iUserIP
-    , iZone
-    , iKey
-    , iOAuthToken
-    , iFields
-    , iInstance
+    , insQuotaUser
+    , insPrettyPrint
+    , insProject
+    , insUserIP
+    , insZone
+    , insKey
+    , insOAuthToken
+    , insFields
+    , insInstance
     ) where
 
 import           Network.Google.Compute.Types
@@ -67,115 +67,120 @@ type InstancesDeleteResource =
 --
 -- /See:/ 'instancesDelete'' smart constructor.
 data InstancesDelete' = InstancesDelete'
-    { _iQuotaUser   :: !(Maybe Text)
-    , _iPrettyPrint :: !Bool
-    , _iProject     :: !Text
-    , _iUserIP      :: !(Maybe Text)
-    , _iZone        :: !Text
-    , _iKey         :: !(Maybe Key)
-    , _iOAuthToken  :: !(Maybe OAuthToken)
-    , _iFields      :: !(Maybe Text)
-    , _iInstance    :: !Text
+    { _insQuotaUser   :: !(Maybe Text)
+    , _insPrettyPrint :: !Bool
+    , _insProject     :: !Text
+    , _insUserIP      :: !(Maybe Text)
+    , _insZone        :: !Text
+    , _insKey         :: !(Maybe Key)
+    , _insOAuthToken  :: !(Maybe OAuthToken)
+    , _insFields      :: !(Maybe Text)
+    , _insInstance    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'iQuotaUser'
+-- * 'insQuotaUser'
 --
--- * 'iPrettyPrint'
+-- * 'insPrettyPrint'
 --
--- * 'iProject'
+-- * 'insProject'
 --
--- * 'iUserIP'
+-- * 'insUserIP'
 --
--- * 'iZone'
+-- * 'insZone'
 --
--- * 'iKey'
+-- * 'insKey'
 --
--- * 'iOAuthToken'
+-- * 'insOAuthToken'
 --
--- * 'iFields'
+-- * 'insFields'
 --
--- * 'iInstance'
+-- * 'insInstance'
 instancesDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> Text -- ^ 'instance'
     -> InstancesDelete'
-instancesDelete' pIProject_ pIZone_ pIInstance_ =
+instancesDelete' pInsProject_ pInsZone_ pInsInstance_ =
     InstancesDelete'
-    { _iQuotaUser = Nothing
-    , _iPrettyPrint = True
-    , _iProject = pIProject_
-    , _iUserIP = Nothing
-    , _iZone = pIZone_
-    , _iKey = Nothing
-    , _iOAuthToken = Nothing
-    , _iFields = Nothing
-    , _iInstance = pIInstance_
+    { _insQuotaUser = Nothing
+    , _insPrettyPrint = True
+    , _insProject = pInsProject_
+    , _insUserIP = Nothing
+    , _insZone = pInsZone_
+    , _insKey = Nothing
+    , _insOAuthToken = Nothing
+    , _insFields = Nothing
+    , _insInstance = pInsInstance_
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-iQuotaUser :: Lens' InstancesDelete' (Maybe Text)
-iQuotaUser
-  = lens _iQuotaUser (\ s a -> s{_iQuotaUser = a})
+insQuotaUser :: Lens' InstancesDelete' (Maybe Text)
+insQuotaUser
+  = lens _insQuotaUser (\ s a -> s{_insQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-iPrettyPrint :: Lens' InstancesDelete' Bool
-iPrettyPrint
-  = lens _iPrettyPrint (\ s a -> s{_iPrettyPrint = a})
+insPrettyPrint :: Lens' InstancesDelete' Bool
+insPrettyPrint
+  = lens _insPrettyPrint
+      (\ s a -> s{_insPrettyPrint = a})
 
 -- | Project ID for this request.
-iProject :: Lens' InstancesDelete' Text
-iProject = lens _iProject (\ s a -> s{_iProject = a})
+insProject :: Lens' InstancesDelete' Text
+insProject
+  = lens _insProject (\ s a -> s{_insProject = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-iUserIP :: Lens' InstancesDelete' (Maybe Text)
-iUserIP = lens _iUserIP (\ s a -> s{_iUserIP = a})
+insUserIP :: Lens' InstancesDelete' (Maybe Text)
+insUserIP
+  = lens _insUserIP (\ s a -> s{_insUserIP = a})
 
 -- | The name of the zone for this request.
-iZone :: Lens' InstancesDelete' Text
-iZone = lens _iZone (\ s a -> s{_iZone = a})
+insZone :: Lens' InstancesDelete' Text
+insZone = lens _insZone (\ s a -> s{_insZone = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-iKey :: Lens' InstancesDelete' (Maybe Key)
-iKey = lens _iKey (\ s a -> s{_iKey = a})
+insKey :: Lens' InstancesDelete' (Maybe Key)
+insKey = lens _insKey (\ s a -> s{_insKey = a})
 
 -- | OAuth 2.0 token for the current user.
-iOAuthToken :: Lens' InstancesDelete' (Maybe OAuthToken)
-iOAuthToken
-  = lens _iOAuthToken (\ s a -> s{_iOAuthToken = a})
+insOAuthToken :: Lens' InstancesDelete' (Maybe OAuthToken)
+insOAuthToken
+  = lens _insOAuthToken
+      (\ s a -> s{_insOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-iFields :: Lens' InstancesDelete' (Maybe Text)
-iFields = lens _iFields (\ s a -> s{_iFields = a})
+insFields :: Lens' InstancesDelete' (Maybe Text)
+insFields
+  = lens _insFields (\ s a -> s{_insFields = a})
 
 -- | Name of the instance resource to delete.
-iInstance :: Lens' InstancesDelete' Text
-iInstance
-  = lens _iInstance (\ s a -> s{_iInstance = a})
+insInstance :: Lens' InstancesDelete' Text
+insInstance
+  = lens _insInstance (\ s a -> s{_insInstance = a})
 
 instance GoogleAuth InstancesDelete' where
-        authKey = iKey . _Just
-        authToken = iOAuthToken . _Just
+        authKey = insKey . _Just
+        authToken = insOAuthToken . _Just
 
 instance GoogleRequest InstancesDelete' where
         type Rs InstancesDelete' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstancesDelete'{..}
-          = go _iProject _iZone _iInstance _iQuotaUser
-              (Just _iPrettyPrint)
-              _iUserIP
-              _iFields
-              _iKey
-              _iOAuthToken
+          = go _insProject _insZone _insInstance _insQuotaUser
+              (Just _insPrettyPrint)
+              _insUserIP
+              _insFields
+              _insKey
+              _insOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

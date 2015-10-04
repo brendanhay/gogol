@@ -57,7 +57,7 @@ type VariantsUpdateResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Variant :> Put '[JSON] Variant
+                       ReqBody '[OctetStream] Variant :> Put '[JSON] Variant
 
 -- | Updates a variant\'s names and info fields. All other modifications are
 -- silently ignored. Returns the modified variant without its calls.

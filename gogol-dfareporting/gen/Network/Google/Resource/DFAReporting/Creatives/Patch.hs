@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Creatives.Patch
     , cppQuotaUser
     , cppPrettyPrint
     , cppUserIP
-    , cppProfileId
+    , cppProFileId
     , cppPayload
     , cppKey
     , cppId
@@ -59,7 +59,8 @@ type CreativesPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Creative :> Patch '[JSON] Creative
+                           ReqBody '[OctetStream] Creative :>
+                             Patch '[JSON] Creative
 
 -- | Updates an existing creative. This method supports patch semantics.
 --
@@ -68,7 +69,7 @@ data CreativesPatch' = CreativesPatch'
     { _cppQuotaUser   :: !(Maybe Text)
     , _cppPrettyPrint :: !Bool
     , _cppUserIP      :: !(Maybe Text)
-    , _cppProfileId   :: !Int64
+    , _cppProFileId   :: !Int64
     , _cppPayload     :: !Creative
     , _cppKey         :: !(Maybe Key)
     , _cppId          :: !Int64
@@ -86,7 +87,7 @@ data CreativesPatch' = CreativesPatch'
 --
 -- * 'cppUserIP'
 --
--- * 'cppProfileId'
+-- * 'cppProFileId'
 --
 -- * 'cppPayload'
 --
@@ -102,12 +103,12 @@ creativesPatch'
     -> Creative -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> CreativesPatch'
-creativesPatch' pCppProfileId_ pCppPayload_ pCppId_ =
+creativesPatch' pCppProFileId_ pCppPayload_ pCppId_ =
     CreativesPatch'
     { _cppQuotaUser = Nothing
     , _cppPrettyPrint = True
     , _cppUserIP = Nothing
-    , _cppProfileId = pCppProfileId_
+    , _cppProFileId = pCppProFileId_
     , _cppPayload = pCppPayload_
     , _cppKey = Nothing
     , _cppId = pCppId_
@@ -135,9 +136,9 @@ cppUserIP
   = lens _cppUserIP (\ s a -> s{_cppUserIP = a})
 
 -- | User profile ID associated with this request.
-cppProfileId :: Lens' CreativesPatch' Int64
-cppProfileId
-  = lens _cppProfileId (\ s a -> s{_cppProfileId = a})
+cppProFileId :: Lens' CreativesPatch' Int64
+cppProFileId
+  = lens _cppProFileId (\ s a -> s{_cppProFileId = a})
 
 -- | Multipart request metadata.
 cppPayload :: Lens' CreativesPatch' Creative
@@ -173,7 +174,7 @@ instance GoogleRequest CreativesPatch' where
         type Rs CreativesPatch' = Creative
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativesPatch'{..}
-          = go _cppProfileId (Just _cppId) _cppQuotaUser
+          = go _cppProFileId (Just _cppId) _cppQuotaUser
               (Just _cppPrettyPrint)
               _cppUserIP
               _cppFields

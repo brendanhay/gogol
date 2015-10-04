@@ -62,9 +62,7 @@ type ObjectsUpdateResource =
                QueryParam "ifGenerationNotMatch" Word64 :>
                  QueryParam "ifGenerationMatch" Word64 :>
                    QueryParam "ifMetagenerationNotMatch" Word64 :>
-                     QueryParam "projection"
-                       StorageObjectsUpdateProjection
-                       :>
+                     QueryParam "projection" ObjectsUpdateProjection :>
                        QueryParam "generation" Word64 :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
@@ -73,7 +71,7 @@ type ObjectsUpdateResource =
                                  QueryParam "key" Key :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
-                                       ReqBody '[JSON] Object :>
+                                       ReqBody '[OctetStream] Object :>
                                          Put '[JSON] Object
        :<|>
        "b" :>
@@ -84,9 +82,7 @@ type ObjectsUpdateResource =
                  QueryParam "ifGenerationNotMatch" Word64 :>
                    QueryParam "ifGenerationMatch" Word64 :>
                      QueryParam "ifMetagenerationNotMatch" Word64 :>
-                       QueryParam "projection"
-                         StorageObjectsUpdateProjection
-                         :>
+                       QueryParam "projection" ObjectsUpdateProjection :>
                          QueryParam "generation" Word64 :>
                            QueryParam "quotaUser" Text :>
                              QueryParam "prettyPrint" Bool :>
@@ -95,7 +91,7 @@ type ObjectsUpdateResource =
                                    QueryParam "key" Key :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltMedia :>
-                                         ReqBody '[JSON] Object :>
+                                         ReqBody '[OctetStream] Object :>
                                            Put '[OctetStream] Body
 
 -- | Updates a data blob\'s associated metadata.
@@ -113,7 +109,7 @@ data ObjectsUpdate' = ObjectsUpdate'
     , _ouKey                      :: !(Maybe Key)
     , _ouIfMetagenerationNotMatch :: !(Maybe Word64)
     , _ouObject                   :: !Text
-    , _ouProjection               :: !(Maybe StorageObjectsUpdateProjection)
+    , _ouProjection               :: !(Maybe ObjectsUpdateProjection)
     , _ouOAuthToken               :: !(Maybe OAuthToken)
     , _ouGeneration               :: !(Maybe Word64)
     , _ouFields                   :: !(Maybe Text)
@@ -242,7 +238,7 @@ ouObject :: Lens' ObjectsUpdate' Text
 ouObject = lens _ouObject (\ s a -> s{_ouObject = a})
 
 -- | Set of properties to return. Defaults to full.
-ouProjection :: Lens' ObjectsUpdate' (Maybe StorageObjectsUpdateProjection)
+ouProjection :: Lens' ObjectsUpdate' (Maybe ObjectsUpdateProjection)
 ouProjection
   = lens _ouProjection (\ s a -> s{_ouProjection = a})
 

@@ -54,7 +54,8 @@ type ReportsRequestResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] ReportRequest :> Post '[JSON] Report
+                     ReqBody '[OctetStream] ReportRequest :>
+                       Post '[JSON] Report
 
 -- | Inserts a report request into the reporting system.
 --

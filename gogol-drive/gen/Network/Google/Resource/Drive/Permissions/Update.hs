@@ -61,7 +61,7 @@ type PermissionsUpdateResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Permission :>
+                             ReqBody '[OctetStream] Permission :>
                                Put '[JSON] Permission
 
 -- | Updates a permission.

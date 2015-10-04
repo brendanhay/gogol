@@ -61,7 +61,8 @@ type LiveStreamsInsertResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] LiveStream :> Post '[JSON] LiveStream
+                           ReqBody '[OctetStream] LiveStream :>
+                             Post '[JSON] LiveStream
 
 -- | Creates a video stream. The stream enables you to send your video to
 -- YouTube, which can then broadcast the video to your audience.

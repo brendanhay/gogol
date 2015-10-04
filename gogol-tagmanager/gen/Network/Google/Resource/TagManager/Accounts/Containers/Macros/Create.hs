@@ -60,7 +60,7 @@ type AccountsContainersMacrosCreateResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Macro :> Post '[JSON] Macro
+                             ReqBody '[OctetStream] Macro :> Post '[JSON] Macro
 
 -- | Creates a GTM Macro.
 --

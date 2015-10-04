@@ -59,7 +59,8 @@ type OrgUnitsPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] OrgUnit :> Patch '[JSON] OrgUnit
+                           ReqBody '[OctetStream] OrgUnit :>
+                             Patch '[JSON] OrgUnit
 
 -- | Update Organization Unit. This method supports patch semantics.
 --

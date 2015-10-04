@@ -54,7 +54,7 @@ type ConversionUpdateResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] ConversionList :>
+                     ReqBody '[OctetStream] ConversionList :>
                        Put '[JSON] ConversionList
 
 -- | Updates a batch of conversions in DoubleClick Search.

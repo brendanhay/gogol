@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.ContentCategories.Get
     , ccgQuotaUser
     , ccgPrettyPrint
     , ccgUserIP
-    , ccgProfileId
+    , ccgProFileId
     , ccgKey
     , ccgId
     , ccgOAuthToken
@@ -67,7 +67,7 @@ data ContentCategoriesGet' = ContentCategoriesGet'
     { _ccgQuotaUser   :: !(Maybe Text)
     , _ccgPrettyPrint :: !Bool
     , _ccgUserIP      :: !(Maybe Text)
-    , _ccgProfileId   :: !Int64
+    , _ccgProFileId   :: !Int64
     , _ccgKey         :: !(Maybe Key)
     , _ccgId          :: !Int64
     , _ccgOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data ContentCategoriesGet' = ContentCategoriesGet'
 --
 -- * 'ccgUserIP'
 --
--- * 'ccgProfileId'
+-- * 'ccgProFileId'
 --
 -- * 'ccgKey'
 --
@@ -97,12 +97,12 @@ contentCategoriesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> ContentCategoriesGet'
-contentCategoriesGet' pCcgProfileId_ pCcgId_ =
+contentCategoriesGet' pCcgProFileId_ pCcgId_ =
     ContentCategoriesGet'
     { _ccgQuotaUser = Nothing
     , _ccgPrettyPrint = True
     , _ccgUserIP = Nothing
-    , _ccgProfileId = pCcgProfileId_
+    , _ccgProFileId = pCcgProFileId_
     , _ccgKey = Nothing
     , _ccgId = pCcgId_
     , _ccgOAuthToken = Nothing
@@ -129,9 +129,9 @@ ccgUserIP
   = lens _ccgUserIP (\ s a -> s{_ccgUserIP = a})
 
 -- | User profile ID associated with this request.
-ccgProfileId :: Lens' ContentCategoriesGet' Int64
-ccgProfileId
-  = lens _ccgProfileId (\ s a -> s{_ccgProfileId = a})
+ccgProFileId :: Lens' ContentCategoriesGet' Int64
+ccgProFileId
+  = lens _ccgProFileId (\ s a -> s{_ccgProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -162,7 +162,7 @@ instance GoogleRequest ContentCategoriesGet' where
         type Rs ContentCategoriesGet' = ContentCategory
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ContentCategoriesGet'{..}
-          = go _ccgProfileId _ccgId _ccgQuotaUser
+          = go _ccgProFileId _ccgId _ccgQuotaUser
               (Just _ccgPrettyPrint)
               _ccgUserIP
               _ccgFields

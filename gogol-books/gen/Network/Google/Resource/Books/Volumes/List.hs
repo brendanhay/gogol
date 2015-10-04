@@ -60,18 +60,20 @@ import           Network.Google.Prelude
 type VolumesListResource =
      "volumes" :>
        QueryParam "q" Text :>
-         QueryParam "orderBy" OrderBy :>
-           QueryParam "libraryRestrict" LibraryRestrict :>
+         QueryParam "orderBy" VolumesListOrderBy :>
+           QueryParam "libraryRestrict"
+             VolumesListLibraryRestrict
+             :>
              QueryParam "partner" Text :>
-               QueryParam "download" Download :>
+               QueryParam "download" VolumesListDownload :>
                  QueryParam "source" Text :>
-                   QueryParam "projection" BooksVolumesListProjection :>
-                     QueryParam "filter" Filter :>
+                   QueryParam "projection" VolumesListProjection :>
+                     QueryParam "filter" VolumesListFilter :>
                        QueryParam "langRestrict" Text :>
                          QueryParam "startIndex" Word32 :>
                            QueryParam "maxResults" Word32 :>
                              QueryParam "showPreorders" Bool :>
-                               QueryParam "printType" PrintType :>
+                               QueryParam "printType" VolumesListPrintType :>
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "userIp" Text :>
@@ -88,22 +90,22 @@ type VolumesListResource =
 data VolumesList' = VolumesList'
     { _vlQuotaUser       :: !(Maybe Text)
     , _vlPrettyPrint     :: !Bool
-    , _vlOrderBy         :: !(Maybe OrderBy)
+    , _vlOrderBy         :: !(Maybe VolumesListOrderBy)
     , _vlUserIP          :: !(Maybe Text)
-    , _vlLibraryRestrict :: !(Maybe LibraryRestrict)
+    , _vlLibraryRestrict :: !(Maybe VolumesListLibraryRestrict)
     , _vlPartner         :: !(Maybe Text)
     , _vlQ               :: !Text
-    , _vlDownload        :: !(Maybe Download)
+    , _vlDownload        :: !(Maybe VolumesListDownload)
     , _vlKey             :: !(Maybe Key)
     , _vlSource          :: !(Maybe Text)
-    , _vlProjection      :: !(Maybe BooksVolumesListProjection)
-    , _vlFilter          :: !(Maybe Filter)
+    , _vlProjection      :: !(Maybe VolumesListProjection)
+    , _vlFilter          :: !(Maybe VolumesListFilter)
     , _vlLangRestrict    :: !(Maybe Text)
     , _vlOAuthToken      :: !(Maybe OAuthToken)
     , _vlStartIndex      :: !(Maybe Word32)
     , _vlMaxResults      :: !(Maybe Word32)
     , _vlShowPreOrders   :: !(Maybe Bool)
-    , _vlPrintType       :: !(Maybe PrintType)
+    , _vlPrintType       :: !(Maybe VolumesListPrintType)
     , _vlFields          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -188,7 +190,7 @@ vlPrettyPrint
       (\ s a -> s{_vlPrettyPrint = a})
 
 -- | Sort search results.
-vlOrderBy :: Lens' VolumesList' (Maybe OrderBy)
+vlOrderBy :: Lens' VolumesList' (Maybe VolumesListOrderBy)
 vlOrderBy
   = lens _vlOrderBy (\ s a -> s{_vlOrderBy = a})
 
@@ -198,7 +200,7 @@ vlUserIP :: Lens' VolumesList' (Maybe Text)
 vlUserIP = lens _vlUserIP (\ s a -> s{_vlUserIP = a})
 
 -- | Restrict search to this user\'s library.
-vlLibraryRestrict :: Lens' VolumesList' (Maybe LibraryRestrict)
+vlLibraryRestrict :: Lens' VolumesList' (Maybe VolumesListLibraryRestrict)
 vlLibraryRestrict
   = lens _vlLibraryRestrict
       (\ s a -> s{_vlLibraryRestrict = a})
@@ -213,7 +215,7 @@ vlQ :: Lens' VolumesList' Text
 vlQ = lens _vlQ (\ s a -> s{_vlQ = a})
 
 -- | Restrict to volumes by download availability.
-vlDownload :: Lens' VolumesList' (Maybe Download)
+vlDownload :: Lens' VolumesList' (Maybe VolumesListDownload)
 vlDownload
   = lens _vlDownload (\ s a -> s{_vlDownload = a})
 
@@ -228,12 +230,12 @@ vlSource :: Lens' VolumesList' (Maybe Text)
 vlSource = lens _vlSource (\ s a -> s{_vlSource = a})
 
 -- | Restrict information returned to a set of selected fields.
-vlProjection :: Lens' VolumesList' (Maybe BooksVolumesListProjection)
+vlProjection :: Lens' VolumesList' (Maybe VolumesListProjection)
 vlProjection
   = lens _vlProjection (\ s a -> s{_vlProjection = a})
 
 -- | Filter search results.
-vlFilter :: Lens' VolumesList' (Maybe Filter)
+vlFilter :: Lens' VolumesList' (Maybe VolumesListFilter)
 vlFilter = lens _vlFilter (\ s a -> s{_vlFilter = a})
 
 -- | Restrict results to books with this language code.
@@ -264,7 +266,7 @@ vlShowPreOrders
       (\ s a -> s{_vlShowPreOrders = a})
 
 -- | Restrict to books or magazines.
-vlPrintType :: Lens' VolumesList' (Maybe PrintType)
+vlPrintType :: Lens' VolumesList' (Maybe VolumesListPrintType)
 vlPrintType
   = lens _vlPrintType (\ s a -> s{_vlPrintType = a})
 

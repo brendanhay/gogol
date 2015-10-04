@@ -294,66 +294,257 @@ instance ToJSON Snapshot where
                   ("description" .=) <$> _sDescription,
                   ("driveId" .=) <$> _sDriveId])
 
--- | This is a JSON template for a turn-based match data object.
+-- | This is a JSON template for a room resource object.
 --
--- /See:/ 'turnBasedMatchData' smart constructor.
-data TurnBasedMatchData = TurnBasedMatchData
-    { _tbmdKind          :: !Text
-    , _tbmdData          :: !(Maybe Word8)
-    , _tbmdDataAvailable :: !(Maybe Bool)
+-- /See:/ 'room' smart constructor.
+data Room = Room
+    { _rStatus               :: !(Maybe Text)
+    , _rVariant              :: !(Maybe Int32)
+    , _rKind                 :: !Text
+    , _rAutoMatchingStatus   :: !(Maybe RoomAutoMatchStatus)
+    , _rCreationDetails      :: !(Maybe RoomModification)
+    , _rInviterId            :: !(Maybe Text)
+    , _rLastUpdateDetails    :: !(Maybe RoomModification)
+    , _rRoomStatusVersion    :: !(Maybe Int32)
+    , _rParticipants         :: !(Maybe [RoomParticipant])
+    , _rApplicationId        :: !(Maybe Text)
+    , _rAutoMatchingCriteria :: !(Maybe RoomAutoMatchingCriteria)
+    , _rRoomId               :: !(Maybe Text)
+    , _rDescription          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TurnBasedMatchData' with the minimum fields required to make a request.
+-- | Creates a value of 'Room' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tbmdKind'
+-- * 'rStatus'
 --
--- * 'tbmdData'
+-- * 'rVariant'
 --
--- * 'tbmdDataAvailable'
-turnBasedMatchData
-    :: TurnBasedMatchData
-turnBasedMatchData =
-    TurnBasedMatchData
-    { _tbmdKind = "games#turnBasedMatchData"
-    , _tbmdData = Nothing
-    , _tbmdDataAvailable = Nothing
+-- * 'rKind'
+--
+-- * 'rAutoMatchingStatus'
+--
+-- * 'rCreationDetails'
+--
+-- * 'rInviterId'
+--
+-- * 'rLastUpdateDetails'
+--
+-- * 'rRoomStatusVersion'
+--
+-- * 'rParticipants'
+--
+-- * 'rApplicationId'
+--
+-- * 'rAutoMatchingCriteria'
+--
+-- * 'rRoomId'
+--
+-- * 'rDescription'
+room
+    :: Room
+room =
+    Room
+    { _rStatus = Nothing
+    , _rVariant = Nothing
+    , _rKind = "games#room"
+    , _rAutoMatchingStatus = Nothing
+    , _rCreationDetails = Nothing
+    , _rInviterId = Nothing
+    , _rLastUpdateDetails = Nothing
+    , _rRoomStatusVersion = Nothing
+    , _rParticipants = Nothing
+    , _rApplicationId = Nothing
+    , _rAutoMatchingCriteria = Nothing
+    , _rRoomId = Nothing
+    , _rDescription = Nothing
     }
 
+-- | The status of the room. Possible values are: - \"ROOM_INVITING\" - One
+-- or more players have been invited and not responded. -
+-- \"ROOM_AUTO_MATCHING\" - One or more slots need to be filled by
+-- auto-matching. - \"ROOM_CONNECTING\" - Players have joined and are
+-- connecting to each other (either before or after auto-matching). -
+-- \"ROOM_ACTIVE\" - All players have joined and connected to each other. -
+-- \"ROOM_DELETED\" - The room should no longer be shown on the client.
+-- Returned in sync calls when a player joins a room (as a tombstone), or
+-- for rooms where all joined participants have left.
+rStatus :: Lens' Room (Maybe Text)
+rStatus = lens _rStatus (\ s a -> s{_rStatus = a})
+
+-- | The variant \/ mode of the application being played; can be any integer
+-- value, or left blank.
+rVariant :: Lens' Room (Maybe Int32)
+rVariant = lens _rVariant (\ s a -> s{_rVariant = a})
+
 -- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#turnBasedMatchData.
-tbmdKind :: Lens' TurnBasedMatchData Text
-tbmdKind = lens _tbmdKind (\ s a -> s{_tbmdKind = a})
+-- string games#room.
+rKind :: Lens' Room Text
+rKind = lens _rKind (\ s a -> s{_rKind = a})
 
--- | The byte representation of the data (limited to 128 kB), as a
--- Base64-encoded string with the URL_SAFE encoding option.
-tbmdData :: Lens' TurnBasedMatchData (Maybe Word8)
-tbmdData = lens _tbmdData (\ s a -> s{_tbmdData = a})
+-- | Auto-matching status for this room. Not set if the room is not currently
+-- in the auto-matching queue.
+rAutoMatchingStatus :: Lens' Room (Maybe RoomAutoMatchStatus)
+rAutoMatchingStatus
+  = lens _rAutoMatchingStatus
+      (\ s a -> s{_rAutoMatchingStatus = a})
 
--- | True if this match has data available but it wasn\'t returned in a list
--- response; fetching the match individually will retrieve this data.
-tbmdDataAvailable :: Lens' TurnBasedMatchData (Maybe Bool)
-tbmdDataAvailable
-  = lens _tbmdDataAvailable
-      (\ s a -> s{_tbmdDataAvailable = a})
+-- | Details about the room creation.
+rCreationDetails :: Lens' Room (Maybe RoomModification)
+rCreationDetails
+  = lens _rCreationDetails
+      (\ s a -> s{_rCreationDetails = a})
 
-instance FromJSON TurnBasedMatchData where
+-- | The ID of the participant that invited the user to the room. Not set if
+-- the user was not invited to the room.
+rInviterId :: Lens' Room (Maybe Text)
+rInviterId
+  = lens _rInviterId (\ s a -> s{_rInviterId = a})
+
+-- | Details about the last update to the room.
+rLastUpdateDetails :: Lens' Room (Maybe RoomModification)
+rLastUpdateDetails
+  = lens _rLastUpdateDetails
+      (\ s a -> s{_rLastUpdateDetails = a})
+
+-- | The version of the room status: an increasing counter, used by the
+-- client to ignore out-of-order updates to room status.
+rRoomStatusVersion :: Lens' Room (Maybe Int32)
+rRoomStatusVersion
+  = lens _rRoomStatusVersion
+      (\ s a -> s{_rRoomStatusVersion = a})
+
+-- | The participants involved in the room, along with their statuses.
+-- Includes participants who have left or declined invitations.
+rParticipants :: Lens' Room [RoomParticipant]
+rParticipants
+  = lens _rParticipants
+      (\ s a -> s{_rParticipants = a})
+      . _Default
+      . _Coerce
+
+-- | The ID of the application being played.
+rApplicationId :: Lens' Room (Maybe Text)
+rApplicationId
+  = lens _rApplicationId
+      (\ s a -> s{_rApplicationId = a})
+
+-- | Criteria for auto-matching players into this room.
+rAutoMatchingCriteria :: Lens' Room (Maybe RoomAutoMatchingCriteria)
+rAutoMatchingCriteria
+  = lens _rAutoMatchingCriteria
+      (\ s a -> s{_rAutoMatchingCriteria = a})
+
+-- | Globally unique ID for a room.
+rRoomId :: Lens' Room (Maybe Text)
+rRoomId = lens _rRoomId (\ s a -> s{_rRoomId = a})
+
+-- | This short description is generated by our servers and worded relative
+-- to the player requesting the room. It is intended to be displayed when
+-- the room is shown in a list (that is, an invitation to a room.)
+rDescription :: Lens' Room (Maybe Text)
+rDescription
+  = lens _rDescription (\ s a -> s{_rDescription = a})
+
+instance FromJSON Room where
         parseJSON
-          = withObject "TurnBasedMatchData"
+          = withObject "Room"
               (\ o ->
-                 TurnBasedMatchData <$>
-                   (o .:? "kind" .!= "games#turnBasedMatchData") <*>
-                     (o .:? "data")
-                     <*> (o .:? "dataAvailable"))
+                 Room <$>
+                   (o .:? "status") <*> (o .:? "variant") <*>
+                     (o .:? "kind" .!= "games#room")
+                     <*> (o .:? "autoMatchingStatus")
+                     <*> (o .:? "creationDetails")
+                     <*> (o .:? "inviterId")
+                     <*> (o .:? "lastUpdateDetails")
+                     <*> (o .:? "roomStatusVersion")
+                     <*> (o .:? "participants" .!= mempty)
+                     <*> (o .:? "applicationId")
+                     <*> (o .:? "autoMatchingCriteria")
+                     <*> (o .:? "roomId")
+                     <*> (o .:? "description"))
 
-instance ToJSON TurnBasedMatchData where
-        toJSON TurnBasedMatchData{..}
+instance ToJSON Room where
+        toJSON Room{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _tbmdKind),
-                  ("data" .=) <$> _tbmdData,
-                  ("dataAvailable" .=) <$> _tbmdDataAvailable])
+                 [("status" .=) <$> _rStatus,
+                  ("variant" .=) <$> _rVariant,
+                  Just ("kind" .= _rKind),
+                  ("autoMatchingStatus" .=) <$> _rAutoMatchingStatus,
+                  ("creationDetails" .=) <$> _rCreationDetails,
+                  ("inviterId" .=) <$> _rInviterId,
+                  ("lastUpdateDetails" .=) <$> _rLastUpdateDetails,
+                  ("roomStatusVersion" .=) <$> _rRoomStatusVersion,
+                  ("participants" .=) <$> _rParticipants,
+                  ("applicationId" .=) <$> _rApplicationId,
+                  ("autoMatchingCriteria" .=) <$>
+                    _rAutoMatchingCriteria,
+                  ("roomId" .=) <$> _rRoomId,
+                  ("description" .=) <$> _rDescription])
+
+-- | This is a JSON template for a list of quest objects.
+--
+-- /See:/ 'questListResponse' smart constructor.
+data QuestListResponse = QuestListResponse
+    { _qlrNextPageToken :: !(Maybe Text)
+    , _qlrKind          :: !Text
+    , _qlrItems         :: !(Maybe [Quest])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'QuestListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'qlrNextPageToken'
+--
+-- * 'qlrKind'
+--
+-- * 'qlrItems'
+questListResponse
+    :: QuestListResponse
+questListResponse =
+    QuestListResponse
+    { _qlrNextPageToken = Nothing
+    , _qlrKind = "games#questListResponse"
+    , _qlrItems = Nothing
+    }
+
+-- | Token corresponding to the next page of results.
+qlrNextPageToken :: Lens' QuestListResponse (Maybe Text)
+qlrNextPageToken
+  = lens _qlrNextPageToken
+      (\ s a -> s{_qlrNextPageToken = a})
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#questListResponse.
+qlrKind :: Lens' QuestListResponse Text
+qlrKind = lens _qlrKind (\ s a -> s{_qlrKind = a})
+
+-- | The quests.
+qlrItems :: Lens' QuestListResponse [Quest]
+qlrItems
+  = lens _qlrItems (\ s a -> s{_qlrItems = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON QuestListResponse where
+        parseJSON
+          = withObject "QuestListResponse"
+              (\ o ->
+                 QuestListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "games#questListResponse")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON QuestListResponse where
+        toJSON QuestListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _qlrNextPageToken,
+                  Just ("kind" .= _qlrKind),
+                  ("items" .=) <$> _qlrItems])
 
 -- | This is a JSON template for a turn-based match resource object.
 --
@@ -640,6 +831,67 @@ instance ToJSON TurnBasedMatch where
                   ("rematchId" .=) <$> _tbmRematchId,
                   ("matchVersion" .=) <$> _tbmMatchVersion])
 
+-- | This is a JSON template for a turn-based match data object.
+--
+-- /See:/ 'turnBasedMatchData' smart constructor.
+data TurnBasedMatchData = TurnBasedMatchData
+    { _tbmdKind          :: !Text
+    , _tbmdData          :: !(Maybe Word8)
+    , _tbmdDataAvailable :: !(Maybe Bool)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TurnBasedMatchData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tbmdKind'
+--
+-- * 'tbmdData'
+--
+-- * 'tbmdDataAvailable'
+turnBasedMatchData
+    :: TurnBasedMatchData
+turnBasedMatchData =
+    TurnBasedMatchData
+    { _tbmdKind = "games#turnBasedMatchData"
+    , _tbmdData = Nothing
+    , _tbmdDataAvailable = Nothing
+    }
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#turnBasedMatchData.
+tbmdKind :: Lens' TurnBasedMatchData Text
+tbmdKind = lens _tbmdKind (\ s a -> s{_tbmdKind = a})
+
+-- | The byte representation of the data (limited to 128 kB), as a
+-- Base64-encoded string with the URL_SAFE encoding option.
+tbmdData :: Lens' TurnBasedMatchData (Maybe Word8)
+tbmdData = lens _tbmdData (\ s a -> s{_tbmdData = a})
+
+-- | True if this match has data available but it wasn\'t returned in a list
+-- response; fetching the match individually will retrieve this data.
+tbmdDataAvailable :: Lens' TurnBasedMatchData (Maybe Bool)
+tbmdDataAvailable
+  = lens _tbmdDataAvailable
+      (\ s a -> s{_tbmdDataAvailable = a})
+
+instance FromJSON TurnBasedMatchData where
+        parseJSON
+          = withObject "TurnBasedMatchData"
+              (\ o ->
+                 TurnBasedMatchData <$>
+                   (o .:? "kind" .!= "games#turnBasedMatchData") <*>
+                     (o .:? "data")
+                     <*> (o .:? "dataAvailable"))
+
+instance ToJSON TurnBasedMatchData where
+        toJSON TurnBasedMatchData{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _tbmdKind),
+                  ("data" .=) <$> _tbmdData,
+                  ("dataAvailable" .=) <$> _tbmdDataAvailable])
+
 -- | This is a JSON template for an event status resource.
 --
 -- /See:/ 'playerEvent' smart constructor.
@@ -725,257 +977,140 @@ instance ToJSON PlayerEvent where
                   ("definitionId" .=) <$> _peDefinitionId,
                   ("playerId" .=) <$> _pePlayerId])
 
--- | This is a JSON template for a room resource object.
+-- | This is a JSON template for a player leaderboard score object.
 --
--- /See:/ 'room' smart constructor.
-data Room = Room
-    { _rStatus               :: !(Maybe Text)
-    , _rVariant              :: !(Maybe Int32)
-    , _rKind                 :: !Text
-    , _rAutoMatchingStatus   :: !(Maybe RoomAutoMatchStatus)
-    , _rCreationDetails      :: !(Maybe RoomModification)
-    , _rInviterId            :: !(Maybe Text)
-    , _rLastUpdateDetails    :: !(Maybe RoomModification)
-    , _rRoomStatusVersion    :: !(Maybe Int32)
-    , _rParticipants         :: !(Maybe [RoomParticipant])
-    , _rApplicationId        :: !(Maybe Text)
-    , _rAutoMatchingCriteria :: !(Maybe RoomAutoMatchingCriteria)
-    , _rRoomId               :: !(Maybe Text)
-    , _rDescription          :: !(Maybe Text)
+-- /See:/ 'playerLeaderboardScore' smart constructor.
+data PlayerLeaderboardScore = PlayerLeaderboardScore
+    { _plsScoreTag       :: !(Maybe Text)
+    , _plsScoreString    :: !(Maybe Text)
+    , _plsKind           :: !Text
+    , _plsScoreValue     :: !(Maybe Int64)
+    , _plsTimeSpan       :: !(Maybe Text)
+    , _plsPublicRank     :: !(Maybe LeaderboardScoreRank)
+    , _plsSocialRank     :: !(Maybe LeaderboardScoreRank)
+    , _plsLeaderboardId  :: !(Maybe Text)
+    , _plsWriteTimestamp :: !(Maybe Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Room' with the minimum fields required to make a request.
+-- | Creates a value of 'PlayerLeaderboardScore' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rStatus'
+-- * 'plsScoreTag'
 --
--- * 'rVariant'
+-- * 'plsScoreString'
 --
--- * 'rKind'
+-- * 'plsKind'
 --
--- * 'rAutoMatchingStatus'
+-- * 'plsScoreValue'
 --
--- * 'rCreationDetails'
+-- * 'plsTimeSpan'
 --
--- * 'rInviterId'
+-- * 'plsPublicRank'
 --
--- * 'rLastUpdateDetails'
+-- * 'plsSocialRank'
 --
--- * 'rRoomStatusVersion'
+-- * 'plsLeaderboardId'
 --
--- * 'rParticipants'
---
--- * 'rApplicationId'
---
--- * 'rAutoMatchingCriteria'
---
--- * 'rRoomId'
---
--- * 'rDescription'
-room
-    :: Room
-room =
-    Room
-    { _rStatus = Nothing
-    , _rVariant = Nothing
-    , _rKind = "games#room"
-    , _rAutoMatchingStatus = Nothing
-    , _rCreationDetails = Nothing
-    , _rInviterId = Nothing
-    , _rLastUpdateDetails = Nothing
-    , _rRoomStatusVersion = Nothing
-    , _rParticipants = Nothing
-    , _rApplicationId = Nothing
-    , _rAutoMatchingCriteria = Nothing
-    , _rRoomId = Nothing
-    , _rDescription = Nothing
+-- * 'plsWriteTimestamp'
+playerLeaderboardScore
+    :: PlayerLeaderboardScore
+playerLeaderboardScore =
+    PlayerLeaderboardScore
+    { _plsScoreTag = Nothing
+    , _plsScoreString = Nothing
+    , _plsKind = "games#playerLeaderboardScore"
+    , _plsScoreValue = Nothing
+    , _plsTimeSpan = Nothing
+    , _plsPublicRank = Nothing
+    , _plsSocialRank = Nothing
+    , _plsLeaderboardId = Nothing
+    , _plsWriteTimestamp = Nothing
     }
 
--- | The status of the room. Possible values are: - \"ROOM_INVITING\" - One
--- or more players have been invited and not responded. -
--- \"ROOM_AUTO_MATCHING\" - One or more slots need to be filled by
--- auto-matching. - \"ROOM_CONNECTING\" - Players have joined and are
--- connecting to each other (either before or after auto-matching). -
--- \"ROOM_ACTIVE\" - All players have joined and connected to each other. -
--- \"ROOM_DELETED\" - The room should no longer be shown on the client.
--- Returned in sync calls when a player joins a room (as a tombstone), or
--- for rooms where all joined participants have left.
-rStatus :: Lens' Room (Maybe Text)
-rStatus = lens _rStatus (\ s a -> s{_rStatus = a})
+-- | Additional information about the score. Values must contain no more than
+-- 64 URI-safe characters as defined by section 2.3 of RFC 3986.
+plsScoreTag :: Lens' PlayerLeaderboardScore (Maybe Text)
+plsScoreTag
+  = lens _plsScoreTag (\ s a -> s{_plsScoreTag = a})
 
--- | The variant \/ mode of the application being played; can be any integer
--- value, or left blank.
-rVariant :: Lens' Room (Maybe Int32)
-rVariant = lens _rVariant (\ s a -> s{_rVariant = a})
+-- | The formatted value of this score.
+plsScoreString :: Lens' PlayerLeaderboardScore (Maybe Text)
+plsScoreString
+  = lens _plsScoreString
+      (\ s a -> s{_plsScoreString = a})
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#room.
-rKind :: Lens' Room Text
-rKind = lens _rKind (\ s a -> s{_rKind = a})
+-- string games#playerLeaderboardScore.
+plsKind :: Lens' PlayerLeaderboardScore Text
+plsKind = lens _plsKind (\ s a -> s{_plsKind = a})
 
--- | Auto-matching status for this room. Not set if the room is not currently
--- in the auto-matching queue.
-rAutoMatchingStatus :: Lens' Room (Maybe RoomAutoMatchStatus)
-rAutoMatchingStatus
-  = lens _rAutoMatchingStatus
-      (\ s a -> s{_rAutoMatchingStatus = a})
+-- | The numerical value of this score.
+plsScoreValue :: Lens' PlayerLeaderboardScore (Maybe Int64)
+plsScoreValue
+  = lens _plsScoreValue
+      (\ s a -> s{_plsScoreValue = a})
 
--- | Details about the room creation.
-rCreationDetails :: Lens' Room (Maybe RoomModification)
-rCreationDetails
-  = lens _rCreationDetails
-      (\ s a -> s{_rCreationDetails = a})
+-- | The time span of this score. Possible values are: - \"ALL_TIME\" - The
+-- score is an all-time score. - \"WEEKLY\" - The score is a weekly score.
+-- - \"DAILY\" - The score is a daily score.
+plsTimeSpan :: Lens' PlayerLeaderboardScore (Maybe Text)
+plsTimeSpan
+  = lens _plsTimeSpan (\ s a -> s{_plsTimeSpan = a})
 
--- | The ID of the participant that invited the user to the room. Not set if
--- the user was not invited to the room.
-rInviterId :: Lens' Room (Maybe Text)
-rInviterId
-  = lens _rInviterId (\ s a -> s{_rInviterId = a})
+-- | The public rank of the score in this leaderboard. This object will not
+-- be present if the user is not sharing their scores publicly.
+plsPublicRank :: Lens' PlayerLeaderboardScore (Maybe LeaderboardScoreRank)
+plsPublicRank
+  = lens _plsPublicRank
+      (\ s a -> s{_plsPublicRank = a})
 
--- | Details about the last update to the room.
-rLastUpdateDetails :: Lens' Room (Maybe RoomModification)
-rLastUpdateDetails
-  = lens _rLastUpdateDetails
-      (\ s a -> s{_rLastUpdateDetails = a})
+-- | The social rank of the score in this leaderboard.
+plsSocialRank :: Lens' PlayerLeaderboardScore (Maybe LeaderboardScoreRank)
+plsSocialRank
+  = lens _plsSocialRank
+      (\ s a -> s{_plsSocialRank = a})
 
--- | The version of the room status: an increasing counter, used by the
--- client to ignore out-of-order updates to room status.
-rRoomStatusVersion :: Lens' Room (Maybe Int32)
-rRoomStatusVersion
-  = lens _rRoomStatusVersion
-      (\ s a -> s{_rRoomStatusVersion = a})
+-- | The ID of the leaderboard this score is in.
+plsLeaderboardId :: Lens' PlayerLeaderboardScore (Maybe Text)
+plsLeaderboardId
+  = lens _plsLeaderboardId
+      (\ s a -> s{_plsLeaderboardId = a})
 
--- | The participants involved in the room, along with their statuses.
--- Includes participants who have left or declined invitations.
-rParticipants :: Lens' Room [RoomParticipant]
-rParticipants
-  = lens _rParticipants
-      (\ s a -> s{_rParticipants = a})
-      . _Default
-      . _Coerce
+-- | The timestamp at which this score was recorded, in milliseconds since
+-- the epoch in UTC.
+plsWriteTimestamp :: Lens' PlayerLeaderboardScore (Maybe Int64)
+plsWriteTimestamp
+  = lens _plsWriteTimestamp
+      (\ s a -> s{_plsWriteTimestamp = a})
 
--- | The ID of the application being played.
-rApplicationId :: Lens' Room (Maybe Text)
-rApplicationId
-  = lens _rApplicationId
-      (\ s a -> s{_rApplicationId = a})
-
--- | Criteria for auto-matching players into this room.
-rAutoMatchingCriteria :: Lens' Room (Maybe RoomAutoMatchingCriteria)
-rAutoMatchingCriteria
-  = lens _rAutoMatchingCriteria
-      (\ s a -> s{_rAutoMatchingCriteria = a})
-
--- | Globally unique ID for a room.
-rRoomId :: Lens' Room (Maybe Text)
-rRoomId = lens _rRoomId (\ s a -> s{_rRoomId = a})
-
--- | This short description is generated by our servers and worded relative
--- to the player requesting the room. It is intended to be displayed when
--- the room is shown in a list (that is, an invitation to a room.)
-rDescription :: Lens' Room (Maybe Text)
-rDescription
-  = lens _rDescription (\ s a -> s{_rDescription = a})
-
-instance FromJSON Room where
+instance FromJSON PlayerLeaderboardScore where
         parseJSON
-          = withObject "Room"
+          = withObject "PlayerLeaderboardScore"
               (\ o ->
-                 Room <$>
-                   (o .:? "status") <*> (o .:? "variant") <*>
-                     (o .:? "kind" .!= "games#room")
-                     <*> (o .:? "autoMatchingStatus")
-                     <*> (o .:? "creationDetails")
-                     <*> (o .:? "inviterId")
-                     <*> (o .:? "lastUpdateDetails")
-                     <*> (o .:? "roomStatusVersion")
-                     <*> (o .:? "participants" .!= mempty)
-                     <*> (o .:? "applicationId")
-                     <*> (o .:? "autoMatchingCriteria")
-                     <*> (o .:? "roomId")
-                     <*> (o .:? "description"))
+                 PlayerLeaderboardScore <$>
+                   (o .:? "scoreTag") <*> (o .:? "scoreString") <*>
+                     (o .:? "kind" .!= "games#playerLeaderboardScore")
+                     <*> (o .:? "scoreValue")
+                     <*> (o .:? "timeSpan")
+                     <*> (o .:? "publicRank")
+                     <*> (o .:? "socialRank")
+                     <*> (o .:? "leaderboard_id")
+                     <*> (o .:? "writeTimestamp"))
 
-instance ToJSON Room where
-        toJSON Room{..}
+instance ToJSON PlayerLeaderboardScore where
+        toJSON PlayerLeaderboardScore{..}
           = object
               (catMaybes
-                 [("status" .=) <$> _rStatus,
-                  ("variant" .=) <$> _rVariant,
-                  Just ("kind" .= _rKind),
-                  ("autoMatchingStatus" .=) <$> _rAutoMatchingStatus,
-                  ("creationDetails" .=) <$> _rCreationDetails,
-                  ("inviterId" .=) <$> _rInviterId,
-                  ("lastUpdateDetails" .=) <$> _rLastUpdateDetails,
-                  ("roomStatusVersion" .=) <$> _rRoomStatusVersion,
-                  ("participants" .=) <$> _rParticipants,
-                  ("applicationId" .=) <$> _rApplicationId,
-                  ("autoMatchingCriteria" .=) <$>
-                    _rAutoMatchingCriteria,
-                  ("roomId" .=) <$> _rRoomId,
-                  ("description" .=) <$> _rDescription])
-
--- | This is a JSON template for a list of quest objects.
---
--- /See:/ 'questListResponse' smart constructor.
-data QuestListResponse = QuestListResponse
-    { _qlrNextPageToken :: !(Maybe Text)
-    , _qlrKind          :: !Text
-    , _qlrItems         :: !(Maybe [Quest])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'QuestListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'qlrNextPageToken'
---
--- * 'qlrKind'
---
--- * 'qlrItems'
-questListResponse
-    :: QuestListResponse
-questListResponse =
-    QuestListResponse
-    { _qlrNextPageToken = Nothing
-    , _qlrKind = "games#questListResponse"
-    , _qlrItems = Nothing
-    }
-
--- | Token corresponding to the next page of results.
-qlrNextPageToken :: Lens' QuestListResponse (Maybe Text)
-qlrNextPageToken
-  = lens _qlrNextPageToken
-      (\ s a -> s{_qlrNextPageToken = a})
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#questListResponse.
-qlrKind :: Lens' QuestListResponse Text
-qlrKind = lens _qlrKind (\ s a -> s{_qlrKind = a})
-
--- | The quests.
-qlrItems :: Lens' QuestListResponse [Quest]
-qlrItems
-  = lens _qlrItems (\ s a -> s{_qlrItems = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON QuestListResponse where
-        parseJSON
-          = withObject "QuestListResponse"
-              (\ o ->
-                 QuestListResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "games#questListResponse")
-                     <*> (o .:? "items" .!= mempty))
-
-instance ToJSON QuestListResponse where
-        toJSON QuestListResponse{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _qlrNextPageToken,
-                  Just ("kind" .= _qlrKind),
-                  ("items" .=) <$> _qlrItems])
+                 [("scoreTag" .=) <$> _plsScoreTag,
+                  ("scoreString" .=) <$> _plsScoreString,
+                  Just ("kind" .= _plsKind),
+                  ("scoreValue" .=) <$> _plsScoreValue,
+                  ("timeSpan" .=) <$> _plsTimeSpan,
+                  ("publicRank" .=) <$> _plsPublicRank,
+                  ("socialRank" .=) <$> _plsSocialRank,
+                  ("leaderboard_id" .=) <$> _plsLeaderboardId,
+                  ("writeTimestamp" .=) <$> _plsWriteTimestamp])
 
 -- | This is a JSON template for the Application resource.
 --
@@ -1154,96 +1289,6 @@ instance ToJSON Application where
                   ("description" .=) <$> _aDescription,
                   ("lastUpdatedTimestamp" .=) <$>
                     _aLastUpdatedTimestamp])
-
--- | This is a JSON template for the object representing a turn.
---
--- /See:/ 'turnBasedMatchTurn' smart constructor.
-data TurnBasedMatchTurn = TurnBasedMatchTurn
-    { _tbmtResults              :: !(Maybe [ParticipantResult])
-    , _tbmtKind                 :: !Text
-    , _tbmtData                 :: !(Maybe TurnBasedMatchDataRequest)
-    , _tbmtPendingParticipantId :: !(Maybe Text)
-    , _tbmtMatchVersion         :: !(Maybe Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'TurnBasedMatchTurn' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'tbmtResults'
---
--- * 'tbmtKind'
---
--- * 'tbmtData'
---
--- * 'tbmtPendingParticipantId'
---
--- * 'tbmtMatchVersion'
-turnBasedMatchTurn
-    :: TurnBasedMatchTurn
-turnBasedMatchTurn =
-    TurnBasedMatchTurn
-    { _tbmtResults = Nothing
-    , _tbmtKind = "games#turnBasedMatchTurn"
-    , _tbmtData = Nothing
-    , _tbmtPendingParticipantId = Nothing
-    , _tbmtMatchVersion = Nothing
-    }
-
--- | The match results for the participants in the match.
-tbmtResults :: Lens' TurnBasedMatchTurn [ParticipantResult]
-tbmtResults
-  = lens _tbmtResults (\ s a -> s{_tbmtResults = a}) .
-      _Default
-      . _Coerce
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#turnBasedMatchTurn.
-tbmtKind :: Lens' TurnBasedMatchTurn Text
-tbmtKind = lens _tbmtKind (\ s a -> s{_tbmtKind = a})
-
--- | The shared game state data after the turn is over.
-tbmtData :: Lens' TurnBasedMatchTurn (Maybe TurnBasedMatchDataRequest)
-tbmtData = lens _tbmtData (\ s a -> s{_tbmtData = a})
-
--- | The ID of the participant who should take their turn next. May be set to
--- the current player\'s participant ID to update match state without
--- changing the turn. If not set, the match will wait for other player(s)
--- to join via automatching; this is only valid if automatch criteria is
--- set on the match with remaining slots for automatched players.
-tbmtPendingParticipantId :: Lens' TurnBasedMatchTurn (Maybe Text)
-tbmtPendingParticipantId
-  = lens _tbmtPendingParticipantId
-      (\ s a -> s{_tbmtPendingParticipantId = a})
-
--- | The version of this match: an increasing counter, used to avoid
--- out-of-date updates to the match.
-tbmtMatchVersion :: Lens' TurnBasedMatchTurn (Maybe Int32)
-tbmtMatchVersion
-  = lens _tbmtMatchVersion
-      (\ s a -> s{_tbmtMatchVersion = a})
-
-instance FromJSON TurnBasedMatchTurn where
-        parseJSON
-          = withObject "TurnBasedMatchTurn"
-              (\ o ->
-                 TurnBasedMatchTurn <$>
-                   (o .:? "results" .!= mempty) <*>
-                     (o .:? "kind" .!= "games#turnBasedMatchTurn")
-                     <*> (o .:? "data")
-                     <*> (o .:? "pendingParticipantId")
-                     <*> (o .:? "matchVersion"))
-
-instance ToJSON TurnBasedMatchTurn where
-        toJSON TurnBasedMatchTurn{..}
-          = object
-              (catMaybes
-                 [("results" .=) <$> _tbmtResults,
-                  Just ("kind" .= _tbmtKind),
-                  ("data" .=) <$> _tbmtData,
-                  ("pendingParticipantId" .=) <$>
-                    _tbmtPendingParticipantId,
-                  ("matchVersion" .=) <$> _tbmtMatchVersion])
 
 -- | This is a JSON template for an application category object.
 --
@@ -1475,140 +1520,95 @@ instance ToJSON NetworkDiagnostics where
                   ("androidNetworkSubtype" .=) <$>
                     _ndAndroidNetworkSubtype])
 
--- | This is a JSON template for a player leaderboard score object.
+-- | This is a JSON template for the object representing a turn.
 --
--- /See:/ 'playerLeaderboardScore' smart constructor.
-data PlayerLeaderboardScore = PlayerLeaderboardScore
-    { _plsScoreTag       :: !(Maybe Text)
-    , _plsScoreString    :: !(Maybe Text)
-    , _plsKind           :: !Text
-    , _plsScoreValue     :: !(Maybe Int64)
-    , _plsTimeSpan       :: !(Maybe Text)
-    , _plsPublicRank     :: !(Maybe LeaderboardScoreRank)
-    , _plsSocialRank     :: !(Maybe LeaderboardScoreRank)
-    , _plsLeaderboardId  :: !(Maybe Text)
-    , _plsWriteTimestamp :: !(Maybe Int64)
+-- /See:/ 'turnBasedMatchTurn' smart constructor.
+data TurnBasedMatchTurn = TurnBasedMatchTurn
+    { _tbmtResults              :: !(Maybe [ParticipantResult])
+    , _tbmtKind                 :: !Text
+    , _tbmtData                 :: !(Maybe TurnBasedMatchDataRequest)
+    , _tbmtPendingParticipantId :: !(Maybe Text)
+    , _tbmtMatchVersion         :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PlayerLeaderboardScore' with the minimum fields required to make a request.
+-- | Creates a value of 'TurnBasedMatchTurn' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'plsScoreTag'
+-- * 'tbmtResults'
 --
--- * 'plsScoreString'
+-- * 'tbmtKind'
 --
--- * 'plsKind'
+-- * 'tbmtData'
 --
--- * 'plsScoreValue'
+-- * 'tbmtPendingParticipantId'
 --
--- * 'plsTimeSpan'
---
--- * 'plsPublicRank'
---
--- * 'plsSocialRank'
---
--- * 'plsLeaderboardId'
---
--- * 'plsWriteTimestamp'
-playerLeaderboardScore
-    :: PlayerLeaderboardScore
-playerLeaderboardScore =
-    PlayerLeaderboardScore
-    { _plsScoreTag = Nothing
-    , _plsScoreString = Nothing
-    , _plsKind = "games#playerLeaderboardScore"
-    , _plsScoreValue = Nothing
-    , _plsTimeSpan = Nothing
-    , _plsPublicRank = Nothing
-    , _plsSocialRank = Nothing
-    , _plsLeaderboardId = Nothing
-    , _plsWriteTimestamp = Nothing
+-- * 'tbmtMatchVersion'
+turnBasedMatchTurn
+    :: TurnBasedMatchTurn
+turnBasedMatchTurn =
+    TurnBasedMatchTurn
+    { _tbmtResults = Nothing
+    , _tbmtKind = "games#turnBasedMatchTurn"
+    , _tbmtData = Nothing
+    , _tbmtPendingParticipantId = Nothing
+    , _tbmtMatchVersion = Nothing
     }
 
--- | Additional information about the score. Values must contain no more than
--- 64 URI-safe characters as defined by section 2.3 of RFC 3986.
-plsScoreTag :: Lens' PlayerLeaderboardScore (Maybe Text)
-plsScoreTag
-  = lens _plsScoreTag (\ s a -> s{_plsScoreTag = a})
-
--- | The formatted value of this score.
-plsScoreString :: Lens' PlayerLeaderboardScore (Maybe Text)
-plsScoreString
-  = lens _plsScoreString
-      (\ s a -> s{_plsScoreString = a})
+-- | The match results for the participants in the match.
+tbmtResults :: Lens' TurnBasedMatchTurn [ParticipantResult]
+tbmtResults
+  = lens _tbmtResults (\ s a -> s{_tbmtResults = a}) .
+      _Default
+      . _Coerce
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#playerLeaderboardScore.
-plsKind :: Lens' PlayerLeaderboardScore Text
-plsKind = lens _plsKind (\ s a -> s{_plsKind = a})
+-- string games#turnBasedMatchTurn.
+tbmtKind :: Lens' TurnBasedMatchTurn Text
+tbmtKind = lens _tbmtKind (\ s a -> s{_tbmtKind = a})
 
--- | The numerical value of this score.
-plsScoreValue :: Lens' PlayerLeaderboardScore (Maybe Int64)
-plsScoreValue
-  = lens _plsScoreValue
-      (\ s a -> s{_plsScoreValue = a})
+-- | The shared game state data after the turn is over.
+tbmtData :: Lens' TurnBasedMatchTurn (Maybe TurnBasedMatchDataRequest)
+tbmtData = lens _tbmtData (\ s a -> s{_tbmtData = a})
 
--- | The time span of this score. Possible values are: - \"ALL_TIME\" - The
--- score is an all-time score. - \"WEEKLY\" - The score is a weekly score.
--- - \"DAILY\" - The score is a daily score.
-plsTimeSpan :: Lens' PlayerLeaderboardScore (Maybe Text)
-plsTimeSpan
-  = lens _plsTimeSpan (\ s a -> s{_plsTimeSpan = a})
+-- | The ID of the participant who should take their turn next. May be set to
+-- the current player\'s participant ID to update match state without
+-- changing the turn. If not set, the match will wait for other player(s)
+-- to join via automatching; this is only valid if automatch criteria is
+-- set on the match with remaining slots for automatched players.
+tbmtPendingParticipantId :: Lens' TurnBasedMatchTurn (Maybe Text)
+tbmtPendingParticipantId
+  = lens _tbmtPendingParticipantId
+      (\ s a -> s{_tbmtPendingParticipantId = a})
 
--- | The public rank of the score in this leaderboard. This object will not
--- be present if the user is not sharing their scores publicly.
-plsPublicRank :: Lens' PlayerLeaderboardScore (Maybe LeaderboardScoreRank)
-plsPublicRank
-  = lens _plsPublicRank
-      (\ s a -> s{_plsPublicRank = a})
+-- | The version of this match: an increasing counter, used to avoid
+-- out-of-date updates to the match.
+tbmtMatchVersion :: Lens' TurnBasedMatchTurn (Maybe Int32)
+tbmtMatchVersion
+  = lens _tbmtMatchVersion
+      (\ s a -> s{_tbmtMatchVersion = a})
 
--- | The social rank of the score in this leaderboard.
-plsSocialRank :: Lens' PlayerLeaderboardScore (Maybe LeaderboardScoreRank)
-plsSocialRank
-  = lens _plsSocialRank
-      (\ s a -> s{_plsSocialRank = a})
-
--- | The ID of the leaderboard this score is in.
-plsLeaderboardId :: Lens' PlayerLeaderboardScore (Maybe Text)
-plsLeaderboardId
-  = lens _plsLeaderboardId
-      (\ s a -> s{_plsLeaderboardId = a})
-
--- | The timestamp at which this score was recorded, in milliseconds since
--- the epoch in UTC.
-plsWriteTimestamp :: Lens' PlayerLeaderboardScore (Maybe Int64)
-plsWriteTimestamp
-  = lens _plsWriteTimestamp
-      (\ s a -> s{_plsWriteTimestamp = a})
-
-instance FromJSON PlayerLeaderboardScore where
+instance FromJSON TurnBasedMatchTurn where
         parseJSON
-          = withObject "PlayerLeaderboardScore"
+          = withObject "TurnBasedMatchTurn"
               (\ o ->
-                 PlayerLeaderboardScore <$>
-                   (o .:? "scoreTag") <*> (o .:? "scoreString") <*>
-                     (o .:? "kind" .!= "games#playerLeaderboardScore")
-                     <*> (o .:? "scoreValue")
-                     <*> (o .:? "timeSpan")
-                     <*> (o .:? "publicRank")
-                     <*> (o .:? "socialRank")
-                     <*> (o .:? "leaderboard_id")
-                     <*> (o .:? "writeTimestamp"))
+                 TurnBasedMatchTurn <$>
+                   (o .:? "results" .!= mempty) <*>
+                     (o .:? "kind" .!= "games#turnBasedMatchTurn")
+                     <*> (o .:? "data")
+                     <*> (o .:? "pendingParticipantId")
+                     <*> (o .:? "matchVersion"))
 
-instance ToJSON PlayerLeaderboardScore where
-        toJSON PlayerLeaderboardScore{..}
+instance ToJSON TurnBasedMatchTurn where
+        toJSON TurnBasedMatchTurn{..}
           = object
               (catMaybes
-                 [("scoreTag" .=) <$> _plsScoreTag,
-                  ("scoreString" .=) <$> _plsScoreString,
-                  Just ("kind" .= _plsKind),
-                  ("scoreValue" .=) <$> _plsScoreValue,
-                  ("timeSpan" .=) <$> _plsTimeSpan,
-                  ("publicRank" .=) <$> _plsPublicRank,
-                  ("socialRank" .=) <$> _plsSocialRank,
-                  ("leaderboard_id" .=) <$> _plsLeaderboardId,
-                  ("writeTimestamp" .=) <$> _plsWriteTimestamp])
+                 [("results" .=) <$> _tbmtResults,
+                  Just ("kind" .= _tbmtKind),
+                  ("data" .=) <$> _tbmtData,
+                  ("pendingParticipantId" .=) <$>
+                    _tbmtPendingParticipantId,
+                  ("matchVersion" .=) <$> _tbmtMatchVersion])
 
 -- | This is a JSON template for a Quest Criterion resource.
 --
@@ -1705,294 +1705,6 @@ instance ToJSON QuestCriterion where
                     _qcInitialPlayerProgress,
                   ("eventId" .=) <$> _qcEventId])
 
--- | A push token ID for iOS devices.
---
--- /See:/ 'ios' smart constructor.
-data Ios = Ios
-    { _iAPNSDeviceToken :: !(Maybe Word8)
-    , _iAPNSEnvironment :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Ios' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'iAPNSDeviceToken'
---
--- * 'iAPNSEnvironment'
-ios
-    :: Ios
-ios =
-    Ios
-    { _iAPNSDeviceToken = Nothing
-    , _iAPNSEnvironment = Nothing
-    }
-
--- | Device token supplied by an iOS system call to register for remote
--- notifications. Encode this field as web-safe base64.
-iAPNSDeviceToken :: Lens' Ios (Maybe Word8)
-iAPNSDeviceToken
-  = lens _iAPNSDeviceToken
-      (\ s a -> s{_iAPNSDeviceToken = a})
-
--- | Indicates whether this token should be used for the production or
--- sandbox APNS server.
-iAPNSEnvironment :: Lens' Ios (Maybe Text)
-iAPNSEnvironment
-  = lens _iAPNSEnvironment
-      (\ s a -> s{_iAPNSEnvironment = a})
-
-instance FromJSON Ios where
-        parseJSON
-          = withObject "Ios"
-              (\ o ->
-                 Ios <$>
-                   (o .:? "apns_device_token") <*>
-                     (o .:? "apns_environment"))
-
-instance ToJSON Ios where
-        toJSON Ios{..}
-          = object
-              (catMaybes
-                 [("apns_device_token" .=) <$> _iAPNSDeviceToken,
-                  ("apns_environment" .=) <$> _iAPNSEnvironment])
-
--- | This is a JSON template for an achievement update response.
---
--- /See:/ 'achievementUpdateResponse' smart constructor.
-data AchievementUpdateResponse = AchievementUpdateResponse
-    { _aurUpdateOccurred :: !(Maybe Bool)
-    , _aurAchievementId  :: !(Maybe Text)
-    , _aurKind           :: !Text
-    , _aurCurrentState   :: !(Maybe Text)
-    , _aurNewlyUnlocked  :: !(Maybe Bool)
-    , _aurCurrentSteps   :: !(Maybe Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AchievementUpdateResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aurUpdateOccurred'
---
--- * 'aurAchievementId'
---
--- * 'aurKind'
---
--- * 'aurCurrentState'
---
--- * 'aurNewlyUnlocked'
---
--- * 'aurCurrentSteps'
-achievementUpdateResponse
-    :: AchievementUpdateResponse
-achievementUpdateResponse =
-    AchievementUpdateResponse
-    { _aurUpdateOccurred = Nothing
-    , _aurAchievementId = Nothing
-    , _aurKind = "games#achievementUpdateResponse"
-    , _aurCurrentState = Nothing
-    , _aurNewlyUnlocked = Nothing
-    , _aurCurrentSteps = Nothing
-    }
-
--- | Whether the requested updates actually affected the achievement.
-aurUpdateOccurred :: Lens' AchievementUpdateResponse (Maybe Bool)
-aurUpdateOccurred
-  = lens _aurUpdateOccurred
-      (\ s a -> s{_aurUpdateOccurred = a})
-
--- | The achievement this update is was applied to.
-aurAchievementId :: Lens' AchievementUpdateResponse (Maybe Text)
-aurAchievementId
-  = lens _aurAchievementId
-      (\ s a -> s{_aurAchievementId = a})
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#achievementUpdateResponse.
-aurKind :: Lens' AchievementUpdateResponse Text
-aurKind = lens _aurKind (\ s a -> s{_aurKind = a})
-
--- | The current state of the achievement. Possible values are: - \"HIDDEN\"
--- - Achievement is hidden. - \"REVEALED\" - Achievement is revealed. -
--- \"UNLOCKED\" - Achievement is unlocked.
-aurCurrentState :: Lens' AchievementUpdateResponse (Maybe Text)
-aurCurrentState
-  = lens _aurCurrentState
-      (\ s a -> s{_aurCurrentState = a})
-
--- | Whether this achievement was newly unlocked (that is, whether the unlock
--- request for the achievement was the first for the player).
-aurNewlyUnlocked :: Lens' AchievementUpdateResponse (Maybe Bool)
-aurNewlyUnlocked
-  = lens _aurNewlyUnlocked
-      (\ s a -> s{_aurNewlyUnlocked = a})
-
--- | The current steps recorded for this achievement if it is incremental.
-aurCurrentSteps :: Lens' AchievementUpdateResponse (Maybe Int32)
-aurCurrentSteps
-  = lens _aurCurrentSteps
-      (\ s a -> s{_aurCurrentSteps = a})
-
-instance FromJSON AchievementUpdateResponse where
-        parseJSON
-          = withObject "AchievementUpdateResponse"
-              (\ o ->
-                 AchievementUpdateResponse <$>
-                   (o .:? "updateOccurred") <*> (o .:? "achievementId")
-                     <*>
-                     (o .:? "kind" .!= "games#achievementUpdateResponse")
-                     <*> (o .:? "currentState")
-                     <*> (o .:? "newlyUnlocked")
-                     <*> (o .:? "currentSteps"))
-
-instance ToJSON AchievementUpdateResponse where
-        toJSON AchievementUpdateResponse{..}
-          = object
-              (catMaybes
-                 [("updateOccurred" .=) <$> _aurUpdateOccurred,
-                  ("achievementId" .=) <$> _aurAchievementId,
-                  Just ("kind" .= _aurKind),
-                  ("currentState" .=) <$> _aurCurrentState,
-                  ("newlyUnlocked" .=) <$> _aurNewlyUnlocked,
-                  ("currentSteps" .=) <$> _aurCurrentSteps])
-
--- | This is a JSON template for a list of snapshot objects.
---
--- /See:/ 'snapshotListResponse' smart constructor.
-data SnapshotListResponse = SnapshotListResponse
-    { _slrNextPageToken :: !(Maybe Text)
-    , _slrKind          :: !Text
-    , _slrItems         :: !(Maybe [Snapshot])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SnapshotListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'slrNextPageToken'
---
--- * 'slrKind'
---
--- * 'slrItems'
-snapshotListResponse
-    :: SnapshotListResponse
-snapshotListResponse =
-    SnapshotListResponse
-    { _slrNextPageToken = Nothing
-    , _slrKind = "games#snapshotListResponse"
-    , _slrItems = Nothing
-    }
-
--- | Token corresponding to the next page of results. If there are no more
--- results, the token is omitted.
-slrNextPageToken :: Lens' SnapshotListResponse (Maybe Text)
-slrNextPageToken
-  = lens _slrNextPageToken
-      (\ s a -> s{_slrNextPageToken = a})
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#snapshotListResponse.
-slrKind :: Lens' SnapshotListResponse Text
-slrKind = lens _slrKind (\ s a -> s{_slrKind = a})
-
--- | The snapshots.
-slrItems :: Lens' SnapshotListResponse [Snapshot]
-slrItems
-  = lens _slrItems (\ s a -> s{_slrItems = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON SnapshotListResponse where
-        parseJSON
-          = withObject "SnapshotListResponse"
-              (\ o ->
-                 SnapshotListResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "games#snapshotListResponse")
-                     <*> (o .:? "items" .!= mempty))
-
-instance ToJSON SnapshotListResponse where
-        toJSON SnapshotListResponse{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _slrNextPageToken,
-                  Just ("kind" .= _slrKind),
-                  ("items" .=) <$> _slrItems])
-
--- | This is a JSON template for a push token resource.
---
--- /See:/ 'pushToken' smart constructor.
-data PushToken = PushToken
-    { _ptClientRevision :: !(Maybe Text)
-    , _ptKind           :: !Text
-    , _ptLanguage       :: !(Maybe Text)
-    , _ptId             :: !(Maybe PushTokenId)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PushToken' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ptClientRevision'
---
--- * 'ptKind'
---
--- * 'ptLanguage'
---
--- * 'ptId'
-pushToken
-    :: PushToken
-pushToken =
-    PushToken
-    { _ptClientRevision = Nothing
-    , _ptKind = "games#pushToken"
-    , _ptLanguage = Nothing
-    , _ptId = Nothing
-    }
-
--- | The revision of the client SDK used by your application, in the same
--- format that\'s used by revisions.check. Used to send backward compatible
--- messages. Format: [PLATFORM_TYPE]:[VERSION_NUMBER]. Possible values of
--- PLATFORM_TYPE are: - IOS - Push token is for iOS
-ptClientRevision :: Lens' PushToken (Maybe Text)
-ptClientRevision
-  = lens _ptClientRevision
-      (\ s a -> s{_ptClientRevision = a})
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#pushToken.
-ptKind :: Lens' PushToken Text
-ptKind = lens _ptKind (\ s a -> s{_ptKind = a})
-
--- | The preferred language for notifications that are sent using this token.
-ptLanguage :: Lens' PushToken (Maybe Text)
-ptLanguage
-  = lens _ptLanguage (\ s a -> s{_ptLanguage = a})
-
--- | Unique identifier for this push token.
-ptId :: Lens' PushToken (Maybe PushTokenId)
-ptId = lens _ptId (\ s a -> s{_ptId = a})
-
-instance FromJSON PushToken where
-        parseJSON
-          = withObject "PushToken"
-              (\ o ->
-                 PushToken <$>
-                   (o .:? "clientRevision") <*>
-                     (o .:? "kind" .!= "games#pushToken")
-                     <*> (o .:? "language")
-                     <*> (o .:? "id"))
-
-instance ToJSON PushToken where
-        toJSON PushToken{..}
-          = object
-              (catMaybes
-                 [("clientRevision" .=) <$> _ptClientRevision,
-                  Just ("kind" .= _ptKind),
-                  ("language" .=) <$> _ptLanguage,
-                  ("id" .=) <$> _ptId])
-
 -- | This is a JSON template for a list of turn-based matches.
 --
 -- /See:/ 'turnBasedMatchList' smart constructor.
@@ -2054,139 +1766,6 @@ instance ToJSON TurnBasedMatchList where
                  [("nextPageToken" .=) <$> _tbmlNextPageToken,
                   Just ("kind" .= _tbmlKind),
                   ("items" .=) <$> _tbmlItems])
-
--- | This is a JSON template for 1P\/3P metadata about a user\'s level.
---
--- /See:/ 'playerLevel' smart constructor.
-data PlayerLevel = PlayerLevel
-    { _plMaxExperiencePoints :: !(Maybe Int64)
-    , _plKind                :: !Text
-    , _plMinExperiencePoints :: !(Maybe Int64)
-    , _plLevel               :: !(Maybe Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PlayerLevel' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'plMaxExperiencePoints'
---
--- * 'plKind'
---
--- * 'plMinExperiencePoints'
---
--- * 'plLevel'
-playerLevel
-    :: PlayerLevel
-playerLevel =
-    PlayerLevel
-    { _plMaxExperiencePoints = Nothing
-    , _plKind = "games#playerLevel"
-    , _plMinExperiencePoints = Nothing
-    , _plLevel = Nothing
-    }
-
--- | The maximum experience points for this level.
-plMaxExperiencePoints :: Lens' PlayerLevel (Maybe Int64)
-plMaxExperiencePoints
-  = lens _plMaxExperiencePoints
-      (\ s a -> s{_plMaxExperiencePoints = a})
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#playerLevel.
-plKind :: Lens' PlayerLevel Text
-plKind = lens _plKind (\ s a -> s{_plKind = a})
-
--- | The minimum experience points for this level.
-plMinExperiencePoints :: Lens' PlayerLevel (Maybe Int64)
-plMinExperiencePoints
-  = lens _plMinExperiencePoints
-      (\ s a -> s{_plMinExperiencePoints = a})
-
--- | The level for the user.
-plLevel :: Lens' PlayerLevel (Maybe Int32)
-plLevel = lens _plLevel (\ s a -> s{_plLevel = a})
-
-instance FromJSON PlayerLevel where
-        parseJSON
-          = withObject "PlayerLevel"
-              (\ o ->
-                 PlayerLevel <$>
-                   (o .:? "maxExperiencePoints") <*>
-                     (o .:? "kind" .!= "games#playerLevel")
-                     <*> (o .:? "minExperiencePoints")
-                     <*> (o .:? "level"))
-
-instance ToJSON PlayerLevel where
-        toJSON PlayerLevel{..}
-          = object
-              (catMaybes
-                 [("maxExperiencePoints" .=) <$>
-                    _plMaxExperiencePoints,
-                  Just ("kind" .= _plKind),
-                  ("minExperiencePoints" .=) <$>
-                    _plMinExperiencePoints,
-                  ("level" .=) <$> _plLevel])
-
--- | This is a JSON template for a list of rooms.
---
--- /See:/ 'roomList' smart constructor.
-data RoomList = RoomList
-    { _rlNextPageToken :: !(Maybe Text)
-    , _rlKind          :: !Text
-    , _rlItems         :: !(Maybe [Room])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'RoomList' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rlNextPageToken'
---
--- * 'rlKind'
---
--- * 'rlItems'
-roomList
-    :: RoomList
-roomList =
-    RoomList
-    { _rlNextPageToken = Nothing
-    , _rlKind = "games#roomList"
-    , _rlItems = Nothing
-    }
-
--- | The pagination token for the next page of results.
-rlNextPageToken :: Lens' RoomList (Maybe Text)
-rlNextPageToken
-  = lens _rlNextPageToken
-      (\ s a -> s{_rlNextPageToken = a})
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#roomList.
-rlKind :: Lens' RoomList Text
-rlKind = lens _rlKind (\ s a -> s{_rlKind = a})
-
--- | The rooms.
-rlItems :: Lens' RoomList [Room]
-rlItems
-  = lens _rlItems (\ s a -> s{_rlItems = a}) . _Default
-      . _Coerce
-
-instance FromJSON RoomList where
-        parseJSON
-          = withObject "RoomList"
-              (\ o ->
-                 RoomList <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "games#roomList")
-                     <*> (o .:? "items" .!= mempty))
-
-instance ToJSON RoomList where
-        toJSON RoomList{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _rlNextPageToken,
-                  Just ("kind" .= _rlKind), ("items" .=) <$> _rlItems])
 
 -- | This is a JSON template for peer channel diagnostics.
 --
@@ -2308,6 +1887,239 @@ instance ToJSON PeerChannelDiagnostics where
                     _pcdNumMessagesReceived,
                   ("numSendFailures" .=) <$> _pcdNumSendFailures,
                   ("numMessagesSent" .=) <$> _pcdNumMessagesSent])
+
+-- | This is a JSON template for a list of rooms.
+--
+-- /See:/ 'roomList' smart constructor.
+data RoomList = RoomList
+    { _rlNextPageToken :: !(Maybe Text)
+    , _rlKind          :: !Text
+    , _rlItems         :: !(Maybe [Room])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RoomList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rlNextPageToken'
+--
+-- * 'rlKind'
+--
+-- * 'rlItems'
+roomList
+    :: RoomList
+roomList =
+    RoomList
+    { _rlNextPageToken = Nothing
+    , _rlKind = "games#roomList"
+    , _rlItems = Nothing
+    }
+
+-- | The pagination token for the next page of results.
+rlNextPageToken :: Lens' RoomList (Maybe Text)
+rlNextPageToken
+  = lens _rlNextPageToken
+      (\ s a -> s{_rlNextPageToken = a})
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#roomList.
+rlKind :: Lens' RoomList Text
+rlKind = lens _rlKind (\ s a -> s{_rlKind = a})
+
+-- | The rooms.
+rlItems :: Lens' RoomList [Room]
+rlItems
+  = lens _rlItems (\ s a -> s{_rlItems = a}) . _Default
+      . _Coerce
+
+instance FromJSON RoomList where
+        parseJSON
+          = withObject "RoomList"
+              (\ o ->
+                 RoomList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "games#roomList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON RoomList where
+        toJSON RoomList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _rlNextPageToken,
+                  Just ("kind" .= _rlKind), ("items" .=) <$> _rlItems])
+
+-- | This is a JSON template for a push token resource.
+--
+-- /See:/ 'pushToken' smart constructor.
+data PushToken = PushToken
+    { _ptClientRevision :: !(Maybe Text)
+    , _ptKind           :: !Text
+    , _ptLanguage       :: !(Maybe Text)
+    , _ptId             :: !(Maybe PushTokenId)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PushToken' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ptClientRevision'
+--
+-- * 'ptKind'
+--
+-- * 'ptLanguage'
+--
+-- * 'ptId'
+pushToken
+    :: PushToken
+pushToken =
+    PushToken
+    { _ptClientRevision = Nothing
+    , _ptKind = "games#pushToken"
+    , _ptLanguage = Nothing
+    , _ptId = Nothing
+    }
+
+-- | The revision of the client SDK used by your application, in the same
+-- format that\'s used by revisions.check. Used to send backward compatible
+-- messages. Format: [PLATFORM_TYPE]:[VERSION_NUMBER]. Possible values of
+-- PLATFORM_TYPE are: - IOS - Push token is for iOS
+ptClientRevision :: Lens' PushToken (Maybe Text)
+ptClientRevision
+  = lens _ptClientRevision
+      (\ s a -> s{_ptClientRevision = a})
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#pushToken.
+ptKind :: Lens' PushToken Text
+ptKind = lens _ptKind (\ s a -> s{_ptKind = a})
+
+-- | The preferred language for notifications that are sent using this token.
+ptLanguage :: Lens' PushToken (Maybe Text)
+ptLanguage
+  = lens _ptLanguage (\ s a -> s{_ptLanguage = a})
+
+-- | Unique identifier for this push token.
+ptId :: Lens' PushToken (Maybe PushTokenId)
+ptId = lens _ptId (\ s a -> s{_ptId = a})
+
+instance FromJSON PushToken where
+        parseJSON
+          = withObject "PushToken"
+              (\ o ->
+                 PushToken <$>
+                   (o .:? "clientRevision") <*>
+                     (o .:? "kind" .!= "games#pushToken")
+                     <*> (o .:? "language")
+                     <*> (o .:? "id"))
+
+instance ToJSON PushToken where
+        toJSON PushToken{..}
+          = object
+              (catMaybes
+                 [("clientRevision" .=) <$> _ptClientRevision,
+                  Just ("kind" .= _ptKind),
+                  ("language" .=) <$> _ptLanguage,
+                  ("id" .=) <$> _ptId])
+
+-- | This is a JSON template for an achievement update response.
+--
+-- /See:/ 'achievementUpdateResponse' smart constructor.
+data AchievementUpdateResponse = AchievementUpdateResponse
+    { _aurUpdateOccurred :: !(Maybe Bool)
+    , _aurAchievementId  :: !(Maybe Text)
+    , _aurKind           :: !Text
+    , _aurCurrentState   :: !(Maybe Text)
+    , _aurNewlyUnlocked  :: !(Maybe Bool)
+    , _aurCurrentSteps   :: !(Maybe Int32)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AchievementUpdateResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aurUpdateOccurred'
+--
+-- * 'aurAchievementId'
+--
+-- * 'aurKind'
+--
+-- * 'aurCurrentState'
+--
+-- * 'aurNewlyUnlocked'
+--
+-- * 'aurCurrentSteps'
+achievementUpdateResponse
+    :: AchievementUpdateResponse
+achievementUpdateResponse =
+    AchievementUpdateResponse
+    { _aurUpdateOccurred = Nothing
+    , _aurAchievementId = Nothing
+    , _aurKind = "games#achievementUpdateResponse"
+    , _aurCurrentState = Nothing
+    , _aurNewlyUnlocked = Nothing
+    , _aurCurrentSteps = Nothing
+    }
+
+-- | Whether the requested updates actually affected the achievement.
+aurUpdateOccurred :: Lens' AchievementUpdateResponse (Maybe Bool)
+aurUpdateOccurred
+  = lens _aurUpdateOccurred
+      (\ s a -> s{_aurUpdateOccurred = a})
+
+-- | The achievement this update is was applied to.
+aurAchievementId :: Lens' AchievementUpdateResponse (Maybe Text)
+aurAchievementId
+  = lens _aurAchievementId
+      (\ s a -> s{_aurAchievementId = a})
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#achievementUpdateResponse.
+aurKind :: Lens' AchievementUpdateResponse Text
+aurKind = lens _aurKind (\ s a -> s{_aurKind = a})
+
+-- | The current state of the achievement. Possible values are: - \"HIDDEN\"
+-- - Achievement is hidden. - \"REVEALED\" - Achievement is revealed. -
+-- \"UNLOCKED\" - Achievement is unlocked.
+aurCurrentState :: Lens' AchievementUpdateResponse (Maybe Text)
+aurCurrentState
+  = lens _aurCurrentState
+      (\ s a -> s{_aurCurrentState = a})
+
+-- | Whether this achievement was newly unlocked (that is, whether the unlock
+-- request for the achievement was the first for the player).
+aurNewlyUnlocked :: Lens' AchievementUpdateResponse (Maybe Bool)
+aurNewlyUnlocked
+  = lens _aurNewlyUnlocked
+      (\ s a -> s{_aurNewlyUnlocked = a})
+
+-- | The current steps recorded for this achievement if it is incremental.
+aurCurrentSteps :: Lens' AchievementUpdateResponse (Maybe Int32)
+aurCurrentSteps
+  = lens _aurCurrentSteps
+      (\ s a -> s{_aurCurrentSteps = a})
+
+instance FromJSON AchievementUpdateResponse where
+        parseJSON
+          = withObject "AchievementUpdateResponse"
+              (\ o ->
+                 AchievementUpdateResponse <$>
+                   (o .:? "updateOccurred") <*> (o .:? "achievementId")
+                     <*>
+                     (o .:? "kind" .!= "games#achievementUpdateResponse")
+                     <*> (o .:? "currentState")
+                     <*> (o .:? "newlyUnlocked")
+                     <*> (o .:? "currentSteps"))
+
+instance ToJSON AchievementUpdateResponse where
+        toJSON AchievementUpdateResponse{..}
+          = object
+              (catMaybes
+                 [("updateOccurred" .=) <$> _aurUpdateOccurred,
+                  ("achievementId" .=) <$> _aurAchievementId,
+                  Just ("kind" .= _aurKind),
+                  ("currentState" .=) <$> _aurCurrentState,
+                  ("newlyUnlocked" .=) <$> _aurNewlyUnlocked,
+                  ("currentSteps" .=) <$> _aurCurrentSteps])
 
 -- | This is a JSON template for the Leaderboard Entry resource.
 --
@@ -2440,6 +2252,142 @@ instance ToJSON LeaderboardEntry where
                   ("player" .=) <$> _lePlayer,
                   ("scoreRank" .=) <$> _leScoreRank])
 
+-- | This is a JSON template for a list of snapshot objects.
+--
+-- /See:/ 'snapshotListResponse' smart constructor.
+data SnapshotListResponse = SnapshotListResponse
+    { _slrNextPageToken :: !(Maybe Text)
+    , _slrKind          :: !Text
+    , _slrItems         :: !(Maybe [Snapshot])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SnapshotListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'slrNextPageToken'
+--
+-- * 'slrKind'
+--
+-- * 'slrItems'
+snapshotListResponse
+    :: SnapshotListResponse
+snapshotListResponse =
+    SnapshotListResponse
+    { _slrNextPageToken = Nothing
+    , _slrKind = "games#snapshotListResponse"
+    , _slrItems = Nothing
+    }
+
+-- | Token corresponding to the next page of results. If there are no more
+-- results, the token is omitted.
+slrNextPageToken :: Lens' SnapshotListResponse (Maybe Text)
+slrNextPageToken
+  = lens _slrNextPageToken
+      (\ s a -> s{_slrNextPageToken = a})
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#snapshotListResponse.
+slrKind :: Lens' SnapshotListResponse Text
+slrKind = lens _slrKind (\ s a -> s{_slrKind = a})
+
+-- | The snapshots.
+slrItems :: Lens' SnapshotListResponse [Snapshot]
+slrItems
+  = lens _slrItems (\ s a -> s{_slrItems = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON SnapshotListResponse where
+        parseJSON
+          = withObject "SnapshotListResponse"
+              (\ o ->
+                 SnapshotListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "games#snapshotListResponse")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON SnapshotListResponse where
+        toJSON SnapshotListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _slrNextPageToken,
+                  Just ("kind" .= _slrKind),
+                  ("items" .=) <$> _slrItems])
+
+-- | This is a JSON template for 1P\/3P metadata about a user\'s level.
+--
+-- /See:/ 'playerLevel' smart constructor.
+data PlayerLevel = PlayerLevel
+    { _plMaxExperiencePoints :: !(Maybe Int64)
+    , _plKind                :: !Text
+    , _plMinExperiencePoints :: !(Maybe Int64)
+    , _plLevel               :: !(Maybe Int32)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PlayerLevel' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'plMaxExperiencePoints'
+--
+-- * 'plKind'
+--
+-- * 'plMinExperiencePoints'
+--
+-- * 'plLevel'
+playerLevel
+    :: PlayerLevel
+playerLevel =
+    PlayerLevel
+    { _plMaxExperiencePoints = Nothing
+    , _plKind = "games#playerLevel"
+    , _plMinExperiencePoints = Nothing
+    , _plLevel = Nothing
+    }
+
+-- | The maximum experience points for this level.
+plMaxExperiencePoints :: Lens' PlayerLevel (Maybe Int64)
+plMaxExperiencePoints
+  = lens _plMaxExperiencePoints
+      (\ s a -> s{_plMaxExperiencePoints = a})
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#playerLevel.
+plKind :: Lens' PlayerLevel Text
+plKind = lens _plKind (\ s a -> s{_plKind = a})
+
+-- | The minimum experience points for this level.
+plMinExperiencePoints :: Lens' PlayerLevel (Maybe Int64)
+plMinExperiencePoints
+  = lens _plMinExperiencePoints
+      (\ s a -> s{_plMinExperiencePoints = a})
+
+-- | The level for the user.
+plLevel :: Lens' PlayerLevel (Maybe Int32)
+plLevel = lens _plLevel (\ s a -> s{_plLevel = a})
+
+instance FromJSON PlayerLevel where
+        parseJSON
+          = withObject "PlayerLevel"
+              (\ o ->
+                 PlayerLevel <$>
+                   (o .:? "maxExperiencePoints") <*>
+                     (o .:? "kind" .!= "games#playerLevel")
+                     <*> (o .:? "minExperiencePoints")
+                     <*> (o .:? "level"))
+
+instance ToJSON PlayerLevel where
+        toJSON PlayerLevel{..}
+          = object
+              (catMaybes
+                 [("maxExperiencePoints" .=) <$>
+                    _plMaxExperiencePoints,
+                  Just ("kind" .= _plKind),
+                  ("minExperiencePoints" .=) <$>
+                    _plMinExperiencePoints,
+                  ("level" .=) <$> _plLevel])
+
 -- | This is a JSON template for an achievement unlock response.
 --
 -- /See:/ 'achievementUpdateMultipleResponse' smart constructor.
@@ -2494,526 +2442,6 @@ instance ToJSON AchievementUpdateMultipleResponse
                  [Just ("kind" .= _aumrKind),
                   ("updatedAchievements" .=) <$>
                     _aumrUpdatedAchievements])
-
--- | This is a JSON template for a list of leaderboard entry resources.
---
--- /See:/ 'playerScoreResponse' smart constructor.
-data PlayerScoreResponse = PlayerScoreResponse
-    { _psrScoreTag             :: !(Maybe Text)
-    , _psrKind                 :: !Text
-    , _psrFormattedScore       :: !(Maybe Text)
-    , _psrLeaderboardId        :: !(Maybe Text)
-    , _psrBeatenScoreTimeSpans :: !(Maybe [Text])
-    , _psrUnbeatenScores       :: !(Maybe [PlayerScore])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PlayerScoreResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'psrScoreTag'
---
--- * 'psrKind'
---
--- * 'psrFormattedScore'
---
--- * 'psrLeaderboardId'
---
--- * 'psrBeatenScoreTimeSpans'
---
--- * 'psrUnbeatenScores'
-playerScoreResponse
-    :: PlayerScoreResponse
-playerScoreResponse =
-    PlayerScoreResponse
-    { _psrScoreTag = Nothing
-    , _psrKind = "games#playerScoreResponse"
-    , _psrFormattedScore = Nothing
-    , _psrLeaderboardId = Nothing
-    , _psrBeatenScoreTimeSpans = Nothing
-    , _psrUnbeatenScores = Nothing
-    }
-
--- | Additional information about this score. Values will contain no more
--- than 64 URI-safe characters as defined by section 2.3 of RFC 3986.
-psrScoreTag :: Lens' PlayerScoreResponse (Maybe Text)
-psrScoreTag
-  = lens _psrScoreTag (\ s a -> s{_psrScoreTag = a})
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#playerScoreResponse.
-psrKind :: Lens' PlayerScoreResponse Text
-psrKind = lens _psrKind (\ s a -> s{_psrKind = a})
-
--- | The formatted value of the submitted score.
-psrFormattedScore :: Lens' PlayerScoreResponse (Maybe Text)
-psrFormattedScore
-  = lens _psrFormattedScore
-      (\ s a -> s{_psrFormattedScore = a})
-
--- | The leaderboard ID that this score was submitted to.
-psrLeaderboardId :: Lens' PlayerScoreResponse (Maybe Text)
-psrLeaderboardId
-  = lens _psrLeaderboardId
-      (\ s a -> s{_psrLeaderboardId = a})
-
--- | The time spans where the submitted score is better than the existing
--- score for that time span. Possible values are: - \"ALL_TIME\" - The
--- score is an all-time score. - \"WEEKLY\" - The score is a weekly score.
--- - \"DAILY\" - The score is a daily score.
-psrBeatenScoreTimeSpans :: Lens' PlayerScoreResponse [Text]
-psrBeatenScoreTimeSpans
-  = lens _psrBeatenScoreTimeSpans
-      (\ s a -> s{_psrBeatenScoreTimeSpans = a})
-      . _Default
-      . _Coerce
-
--- | The scores in time spans that have not been beaten. As an example, the
--- submitted score may be better than the player\'s DAILY score, but not
--- better than the player\'s scores for the WEEKLY or ALL_TIME time spans.
-psrUnbeatenScores :: Lens' PlayerScoreResponse [PlayerScore]
-psrUnbeatenScores
-  = lens _psrUnbeatenScores
-      (\ s a -> s{_psrUnbeatenScores = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON PlayerScoreResponse where
-        parseJSON
-          = withObject "PlayerScoreResponse"
-              (\ o ->
-                 PlayerScoreResponse <$>
-                   (o .:? "scoreTag") <*>
-                     (o .:? "kind" .!= "games#playerScoreResponse")
-                     <*> (o .:? "formattedScore")
-                     <*> (o .:? "leaderboardId")
-                     <*> (o .:? "beatenScoreTimeSpans" .!= mempty)
-                     <*> (o .:? "unbeatenScores" .!= mempty))
-
-instance ToJSON PlayerScoreResponse where
-        toJSON PlayerScoreResponse{..}
-          = object
-              (catMaybes
-                 [("scoreTag" .=) <$> _psrScoreTag,
-                  Just ("kind" .= _psrKind),
-                  ("formattedScore" .=) <$> _psrFormattedScore,
-                  ("leaderboardId" .=) <$> _psrLeaderboardId,
-                  ("beatenScoreTimeSpans" .=) <$>
-                    _psrBeatenScoreTimeSpans,
-                  ("unbeatenScores" .=) <$> _psrUnbeatenScores])
-
--- | This is a JSON template for a participant in a turn-based match.
---
--- /See:/ 'turnBasedMatchParticipant' smart constructor.
-data TurnBasedMatchParticipant = TurnBasedMatchParticipant
-    { _tbmpStatus            :: !(Maybe Text)
-    , _tbmpKind              :: !Text
-    , _tbmpId                :: !(Maybe Text)
-    , _tbmpAutoMatched       :: !(Maybe Bool)
-    , _tbmpPlayer            :: !(Maybe Player)
-    , _tbmpAutoMatchedPlayer :: !(Maybe AnonymousPlayer)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'TurnBasedMatchParticipant' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'tbmpStatus'
---
--- * 'tbmpKind'
---
--- * 'tbmpId'
---
--- * 'tbmpAutoMatched'
---
--- * 'tbmpPlayer'
---
--- * 'tbmpAutoMatchedPlayer'
-turnBasedMatchParticipant
-    :: TurnBasedMatchParticipant
-turnBasedMatchParticipant =
-    TurnBasedMatchParticipant
-    { _tbmpStatus = Nothing
-    , _tbmpKind = "games#turnBasedMatchParticipant"
-    , _tbmpId = Nothing
-    , _tbmpAutoMatched = Nothing
-    , _tbmpPlayer = Nothing
-    , _tbmpAutoMatchedPlayer = Nothing
-    }
-
--- | The status of the participant with respect to the match. Possible values
--- are: - \"PARTICIPANT_NOT_INVITED_YET\" - The participant is slated to be
--- invited to the match, but the invitation has not been sent; the invite
--- will be sent when it becomes their turn. - \"PARTICIPANT_INVITED\" - The
--- participant has been invited to join the match, but has not yet
--- responded. - \"PARTICIPANT_JOINED\" - The participant has joined the
--- match (either after creating it or accepting an invitation.) -
--- \"PARTICIPANT_DECLINED\" - The participant declined an invitation to
--- join the match. - \"PARTICIPANT_LEFT\" - The participant joined the
--- match and then left it. - \"PARTICIPANT_FINISHED\" - The participant
--- finished playing in the match. - \"PARTICIPANT_UNRESPONSIVE\" - The
--- participant did not take their turn in the allotted time.
-tbmpStatus :: Lens' TurnBasedMatchParticipant (Maybe Text)
-tbmpStatus
-  = lens _tbmpStatus (\ s a -> s{_tbmpStatus = a})
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#turnBasedMatchParticipant.
-tbmpKind :: Lens' TurnBasedMatchParticipant Text
-tbmpKind = lens _tbmpKind (\ s a -> s{_tbmpKind = a})
-
--- | An identifier for the participant in the scope of the match. Cannot be
--- used to identify a player across matches or in other contexts.
-tbmpId :: Lens' TurnBasedMatchParticipant (Maybe Text)
-tbmpId = lens _tbmpId (\ s a -> s{_tbmpId = a})
-
--- | True if this participant was auto-matched with the requesting player.
-tbmpAutoMatched :: Lens' TurnBasedMatchParticipant (Maybe Bool)
-tbmpAutoMatched
-  = lens _tbmpAutoMatched
-      (\ s a -> s{_tbmpAutoMatched = a})
-
--- | Information about the player. Not populated if this player was
--- anonymously auto-matched against the requesting player. (Either player
--- or autoMatchedPlayer will be set.)
-tbmpPlayer :: Lens' TurnBasedMatchParticipant (Maybe Player)
-tbmpPlayer
-  = lens _tbmpPlayer (\ s a -> s{_tbmpPlayer = a})
-
--- | Information about a player that has been anonymously auto-matched
--- against the requesting player. (Either player or autoMatchedPlayer will
--- be set.)
-tbmpAutoMatchedPlayer :: Lens' TurnBasedMatchParticipant (Maybe AnonymousPlayer)
-tbmpAutoMatchedPlayer
-  = lens _tbmpAutoMatchedPlayer
-      (\ s a -> s{_tbmpAutoMatchedPlayer = a})
-
-instance FromJSON TurnBasedMatchParticipant where
-        parseJSON
-          = withObject "TurnBasedMatchParticipant"
-              (\ o ->
-                 TurnBasedMatchParticipant <$>
-                   (o .:? "status") <*>
-                     (o .:? "kind" .!= "games#turnBasedMatchParticipant")
-                     <*> (o .:? "id")
-                     <*> (o .:? "autoMatched")
-                     <*> (o .:? "player")
-                     <*> (o .:? "autoMatchedPlayer"))
-
-instance ToJSON TurnBasedMatchParticipant where
-        toJSON TurnBasedMatchParticipant{..}
-          = object
-              (catMaybes
-                 [("status" .=) <$> _tbmpStatus,
-                  Just ("kind" .= _tbmpKind), ("id" .=) <$> _tbmpId,
-                  ("autoMatched" .=) <$> _tbmpAutoMatched,
-                  ("player" .=) <$> _tbmpPlayer,
-                  ("autoMatchedPlayer" .=) <$> _tbmpAutoMatchedPlayer])
-
--- | This is a JSON template for the client address when setting up a room.
---
--- /See:/ 'roomClientAddress' smart constructor.
-data RoomClientAddress = RoomClientAddress
-    { _rcaKind        :: !Text
-    , _rcaXmppAddress :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'RoomClientAddress' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rcaKind'
---
--- * 'rcaXmppAddress'
-roomClientAddress
-    :: RoomClientAddress
-roomClientAddress =
-    RoomClientAddress
-    { _rcaKind = "games#roomClientAddress"
-    , _rcaXmppAddress = Nothing
-    }
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#roomClientAddress.
-rcaKind :: Lens' RoomClientAddress Text
-rcaKind = lens _rcaKind (\ s a -> s{_rcaKind = a})
-
--- | The XMPP address of the client on the Google Games XMPP network.
-rcaXmppAddress :: Lens' RoomClientAddress (Maybe Text)
-rcaXmppAddress
-  = lens _rcaXmppAddress
-      (\ s a -> s{_rcaXmppAddress = a})
-
-instance FromJSON RoomClientAddress where
-        parseJSON
-          = withObject "RoomClientAddress"
-              (\ o ->
-                 RoomClientAddress <$>
-                   (o .:? "kind" .!= "games#roomClientAddress") <*>
-                     (o .:? "xmppAddress"))
-
-instance ToJSON RoomClientAddress where
-        toJSON RoomClientAddress{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _rcaKind),
-                  ("xmppAddress" .=) <$> _rcaXmppAddress])
-
--- | This is a JSON template for the Android instance details resource.
---
--- /See:/ 'instanceAndroidDetails' smart constructor.
-data InstanceAndroidDetails = InstanceAndroidDetails
-    { _iadPackageName       :: !(Maybe Text)
-    , _iadPreferred         :: !(Maybe Bool)
-    , _iadKind              :: !Text
-    , _iadEnablePiracyCheck :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'InstanceAndroidDetails' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'iadPackageName'
---
--- * 'iadPreferred'
---
--- * 'iadKind'
---
--- * 'iadEnablePiracyCheck'
-instanceAndroidDetails
-    :: InstanceAndroidDetails
-instanceAndroidDetails =
-    InstanceAndroidDetails
-    { _iadPackageName = Nothing
-    , _iadPreferred = Nothing
-    , _iadKind = "games#instanceAndroidDetails"
-    , _iadEnablePiracyCheck = Nothing
-    }
-
--- | Android package name which maps to Google Play URL.
-iadPackageName :: Lens' InstanceAndroidDetails (Maybe Text)
-iadPackageName
-  = lens _iadPackageName
-      (\ s a -> s{_iadPackageName = a})
-
--- | Indicates that this instance is the default for new installations.
-iadPreferred :: Lens' InstanceAndroidDetails (Maybe Bool)
-iadPreferred
-  = lens _iadPreferred (\ s a -> s{_iadPreferred = a})
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#instanceAndroidDetails.
-iadKind :: Lens' InstanceAndroidDetails Text
-iadKind = lens _iadKind (\ s a -> s{_iadKind = a})
-
--- | Flag indicating whether the anti-piracy check is enabled.
-iadEnablePiracyCheck :: Lens' InstanceAndroidDetails (Maybe Bool)
-iadEnablePiracyCheck
-  = lens _iadEnablePiracyCheck
-      (\ s a -> s{_iadEnablePiracyCheck = a})
-
-instance FromJSON InstanceAndroidDetails where
-        parseJSON
-          = withObject "InstanceAndroidDetails"
-              (\ o ->
-                 InstanceAndroidDetails <$>
-                   (o .:? "packageName") <*> (o .:? "preferred") <*>
-                     (o .:? "kind" .!= "games#instanceAndroidDetails")
-                     <*> (o .:? "enablePiracyCheck"))
-
-instance ToJSON InstanceAndroidDetails where
-        toJSON InstanceAndroidDetails{..}
-          = object
-              (catMaybes
-                 [("packageName" .=) <$> _iadPackageName,
-                  ("preferred" .=) <$> _iadPreferred,
-                  Just ("kind" .= _iadKind),
-                  ("enablePiracyCheck" .=) <$> _iadEnablePiracyCheck])
-
--- | This is a JSON template for a list of leaderboard objects.
---
--- /See:/ 'leaderboardListResponse' smart constructor.
-data LeaderboardListResponse = LeaderboardListResponse
-    { _llrNextPageToken :: !(Maybe Text)
-    , _llrKind          :: !Text
-    , _llrItems         :: !(Maybe [Leaderboard])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'LeaderboardListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'llrNextPageToken'
---
--- * 'llrKind'
---
--- * 'llrItems'
-leaderboardListResponse
-    :: LeaderboardListResponse
-leaderboardListResponse =
-    LeaderboardListResponse
-    { _llrNextPageToken = Nothing
-    , _llrKind = "games#leaderboardListResponse"
-    , _llrItems = Nothing
-    }
-
--- | Token corresponding to the next page of results.
-llrNextPageToken :: Lens' LeaderboardListResponse (Maybe Text)
-llrNextPageToken
-  = lens _llrNextPageToken
-      (\ s a -> s{_llrNextPageToken = a})
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#leaderboardListResponse.
-llrKind :: Lens' LeaderboardListResponse Text
-llrKind = lens _llrKind (\ s a -> s{_llrKind = a})
-
--- | The leaderboards.
-llrItems :: Lens' LeaderboardListResponse [Leaderboard]
-llrItems
-  = lens _llrItems (\ s a -> s{_llrItems = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON LeaderboardListResponse where
-        parseJSON
-          = withObject "LeaderboardListResponse"
-              (\ o ->
-                 LeaderboardListResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "games#leaderboardListResponse")
-                     <*> (o .:? "items" .!= mempty))
-
-instance ToJSON LeaderboardListResponse where
-        toJSON LeaderboardListResponse{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _llrNextPageToken,
-                  Just ("kind" .= _llrKind),
-                  ("items" .=) <$> _llrItems])
-
--- | This is a JSON template for data related to individual game categories.
---
--- /See:/ 'category' smart constructor.
-data Category = Category
-    { _cKind             :: !Text
-    , _cCategory         :: !(Maybe Text)
-    , _cExperiencePoints :: !(Maybe Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Category' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cKind'
---
--- * 'cCategory'
---
--- * 'cExperiencePoints'
-category
-    :: Category
-category =
-    Category
-    { _cKind = "games#category"
-    , _cCategory = Nothing
-    , _cExperiencePoints = Nothing
-    }
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#category.
-cKind :: Lens' Category Text
-cKind = lens _cKind (\ s a -> s{_cKind = a})
-
--- | The category name.
-cCategory :: Lens' Category (Maybe Text)
-cCategory
-  = lens _cCategory (\ s a -> s{_cCategory = a})
-
--- | Experience points earned in this category.
-cExperiencePoints :: Lens' Category (Maybe Int64)
-cExperiencePoints
-  = lens _cExperiencePoints
-      (\ s a -> s{_cExperiencePoints = a})
-
-instance FromJSON Category where
-        parseJSON
-          = withObject "Category"
-              (\ o ->
-                 Category <$>
-                   (o .:? "kind" .!= "games#category") <*>
-                     (o .:? "category")
-                     <*> (o .:? "experiencePoints"))
-
-instance ToJSON Category where
-        toJSON Category{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _cKind),
-                  ("category" .=) <$> _cCategory,
-                  ("experiencePoints" .=) <$> _cExperiencePoints])
-
--- | This is a JSON template for a ListDefinitions response.
---
--- /See:/ 'eventDefinitionListResponse' smart constructor.
-data EventDefinitionListResponse = EventDefinitionListResponse
-    { _edlrNextPageToken :: !(Maybe Text)
-    , _edlrKind          :: !Text
-    , _edlrItems         :: !(Maybe [EventDefinition])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'EventDefinitionListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'edlrNextPageToken'
---
--- * 'edlrKind'
---
--- * 'edlrItems'
-eventDefinitionListResponse
-    :: EventDefinitionListResponse
-eventDefinitionListResponse =
-    EventDefinitionListResponse
-    { _edlrNextPageToken = Nothing
-    , _edlrKind = "games#eventDefinitionListResponse"
-    , _edlrItems = Nothing
-    }
-
--- | The pagination token for the next page of results.
-edlrNextPageToken :: Lens' EventDefinitionListResponse (Maybe Text)
-edlrNextPageToken
-  = lens _edlrNextPageToken
-      (\ s a -> s{_edlrNextPageToken = a})
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#eventDefinitionListResponse.
-edlrKind :: Lens' EventDefinitionListResponse Text
-edlrKind = lens _edlrKind (\ s a -> s{_edlrKind = a})
-
--- | The event definitions.
-edlrItems :: Lens' EventDefinitionListResponse [EventDefinition]
-edlrItems
-  = lens _edlrItems (\ s a -> s{_edlrItems = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON EventDefinitionListResponse where
-        parseJSON
-          = withObject "EventDefinitionListResponse"
-              (\ o ->
-                 EventDefinitionListResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!=
-                        "games#eventDefinitionListResponse")
-                     <*> (o .:? "items" .!= mempty))
-
-instance ToJSON EventDefinitionListResponse where
-        toJSON EventDefinitionListResponse{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _edlrNextPageToken,
-                  Just ("kind" .= _edlrKind),
-                  ("items" .=) <$> _edlrItems])
 
 -- | This is a JSON template for a participant in a room.
 --
@@ -3177,66 +2605,307 @@ instance ToJSON RoomParticipant where
                   ("capabilities" .=) <$> _rpCapabilities,
                   ("autoMatchedPlayer" .=) <$> _rpAutoMatchedPlayer])
 
--- | This is a JSON template for an anonymous player
+-- | This is a JSON template for a ListDefinitions response.
 --
--- /See:/ 'anonymousPlayer' smart constructor.
-data AnonymousPlayer = AnonymousPlayer
-    { _apAvatarImageURL :: !(Maybe Text)
-    , _apKind           :: !Text
-    , _apDisplayName    :: !(Maybe Text)
+-- /See:/ 'eventDefinitionListResponse' smart constructor.
+data EventDefinitionListResponse = EventDefinitionListResponse
+    { _edlrNextPageToken :: !(Maybe Text)
+    , _edlrKind          :: !Text
+    , _edlrItems         :: !(Maybe [EventDefinition])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AnonymousPlayer' with the minimum fields required to make a request.
+-- | Creates a value of 'EventDefinitionListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'apAvatarImageURL'
+-- * 'edlrNextPageToken'
 --
--- * 'apKind'
+-- * 'edlrKind'
 --
--- * 'apDisplayName'
-anonymousPlayer
-    :: AnonymousPlayer
-anonymousPlayer =
-    AnonymousPlayer
-    { _apAvatarImageURL = Nothing
-    , _apKind = "games#anonymousPlayer"
-    , _apDisplayName = Nothing
+-- * 'edlrItems'
+eventDefinitionListResponse
+    :: EventDefinitionListResponse
+eventDefinitionListResponse =
+    EventDefinitionListResponse
+    { _edlrNextPageToken = Nothing
+    , _edlrKind = "games#eventDefinitionListResponse"
+    , _edlrItems = Nothing
     }
 
--- | The base URL for the image to display for the anonymous player.
-apAvatarImageURL :: Lens' AnonymousPlayer (Maybe Text)
-apAvatarImageURL
-  = lens _apAvatarImageURL
-      (\ s a -> s{_apAvatarImageURL = a})
+-- | The pagination token for the next page of results.
+edlrNextPageToken :: Lens' EventDefinitionListResponse (Maybe Text)
+edlrNextPageToken
+  = lens _edlrNextPageToken
+      (\ s a -> s{_edlrNextPageToken = a})
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#anonymousPlayer.
-apKind :: Lens' AnonymousPlayer Text
-apKind = lens _apKind (\ s a -> s{_apKind = a})
+-- string games#eventDefinitionListResponse.
+edlrKind :: Lens' EventDefinitionListResponse Text
+edlrKind = lens _edlrKind (\ s a -> s{_edlrKind = a})
 
--- | The name to display for the anonymous player.
-apDisplayName :: Lens' AnonymousPlayer (Maybe Text)
-apDisplayName
-  = lens _apDisplayName
-      (\ s a -> s{_apDisplayName = a})
+-- | The event definitions.
+edlrItems :: Lens' EventDefinitionListResponse [EventDefinition]
+edlrItems
+  = lens _edlrItems (\ s a -> s{_edlrItems = a}) .
+      _Default
+      . _Coerce
 
-instance FromJSON AnonymousPlayer where
+instance FromJSON EventDefinitionListResponse where
         parseJSON
-          = withObject "AnonymousPlayer"
+          = withObject "EventDefinitionListResponse"
               (\ o ->
-                 AnonymousPlayer <$>
-                   (o .:? "avatarImageUrl") <*>
-                     (o .:? "kind" .!= "games#anonymousPlayer")
-                     <*> (o .:? "displayName"))
+                 EventDefinitionListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "games#eventDefinitionListResponse")
+                     <*> (o .:? "items" .!= mempty))
 
-instance ToJSON AnonymousPlayer where
-        toJSON AnonymousPlayer{..}
+instance ToJSON EventDefinitionListResponse where
+        toJSON EventDefinitionListResponse{..}
           = object
               (catMaybes
-                 [("avatarImageUrl" .=) <$> _apAvatarImageURL,
-                  Just ("kind" .= _apKind),
-                  ("displayName" .=) <$> _apDisplayName])
+                 [("nextPageToken" .=) <$> _edlrNextPageToken,
+                  Just ("kind" .= _edlrKind),
+                  ("items" .=) <$> _edlrItems])
+
+-- | This is a JSON template for data related to individual game categories.
+--
+-- /See:/ 'category' smart constructor.
+data Category = Category
+    { _cKind             :: !Text
+    , _cCategory         :: !(Maybe Text)
+    , _cExperiencePoints :: !(Maybe Int64)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Category' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cKind'
+--
+-- * 'cCategory'
+--
+-- * 'cExperiencePoints'
+category
+    :: Category
+category =
+    Category
+    { _cKind = "games#category"
+    , _cCategory = Nothing
+    , _cExperiencePoints = Nothing
+    }
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#category.
+cKind :: Lens' Category Text
+cKind = lens _cKind (\ s a -> s{_cKind = a})
+
+-- | The category name.
+cCategory :: Lens' Category (Maybe Text)
+cCategory
+  = lens _cCategory (\ s a -> s{_cCategory = a})
+
+-- | Experience points earned in this category.
+cExperiencePoints :: Lens' Category (Maybe Int64)
+cExperiencePoints
+  = lens _cExperiencePoints
+      (\ s a -> s{_cExperiencePoints = a})
+
+instance FromJSON Category where
+        parseJSON
+          = withObject "Category"
+              (\ o ->
+                 Category <$>
+                   (o .:? "kind" .!= "games#category") <*>
+                     (o .:? "category")
+                     <*> (o .:? "experiencePoints"))
+
+instance ToJSON Category where
+        toJSON Category{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _cKind),
+                  ("category" .=) <$> _cCategory,
+                  ("experiencePoints" .=) <$> _cExperiencePoints])
+
+-- | This is a JSON template for the Android instance details resource.
+--
+-- /See:/ 'instanceAndroidDetails' smart constructor.
+data InstanceAndroidDetails = InstanceAndroidDetails
+    { _iadPackageName       :: !(Maybe Text)
+    , _iadPreferred         :: !(Maybe Bool)
+    , _iadKind              :: !Text
+    , _iadEnablePiracyCheck :: !(Maybe Bool)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InstanceAndroidDetails' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'iadPackageName'
+--
+-- * 'iadPreferred'
+--
+-- * 'iadKind'
+--
+-- * 'iadEnablePiracyCheck'
+instanceAndroidDetails
+    :: InstanceAndroidDetails
+instanceAndroidDetails =
+    InstanceAndroidDetails
+    { _iadPackageName = Nothing
+    , _iadPreferred = Nothing
+    , _iadKind = "games#instanceAndroidDetails"
+    , _iadEnablePiracyCheck = Nothing
+    }
+
+-- | Android package name which maps to Google Play URL.
+iadPackageName :: Lens' InstanceAndroidDetails (Maybe Text)
+iadPackageName
+  = lens _iadPackageName
+      (\ s a -> s{_iadPackageName = a})
+
+-- | Indicates that this instance is the default for new installations.
+iadPreferred :: Lens' InstanceAndroidDetails (Maybe Bool)
+iadPreferred
+  = lens _iadPreferred (\ s a -> s{_iadPreferred = a})
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#instanceAndroidDetails.
+iadKind :: Lens' InstanceAndroidDetails Text
+iadKind = lens _iadKind (\ s a -> s{_iadKind = a})
+
+-- | Flag indicating whether the anti-piracy check is enabled.
+iadEnablePiracyCheck :: Lens' InstanceAndroidDetails (Maybe Bool)
+iadEnablePiracyCheck
+  = lens _iadEnablePiracyCheck
+      (\ s a -> s{_iadEnablePiracyCheck = a})
+
+instance FromJSON InstanceAndroidDetails where
+        parseJSON
+          = withObject "InstanceAndroidDetails"
+              (\ o ->
+                 InstanceAndroidDetails <$>
+                   (o .:? "packageName") <*> (o .:? "preferred") <*>
+                     (o .:? "kind" .!= "games#instanceAndroidDetails")
+                     <*> (o .:? "enablePiracyCheck"))
+
+instance ToJSON InstanceAndroidDetails where
+        toJSON InstanceAndroidDetails{..}
+          = object
+              (catMaybes
+                 [("packageName" .=) <$> _iadPackageName,
+                  ("preferred" .=) <$> _iadPreferred,
+                  Just ("kind" .= _iadKind),
+                  ("enablePiracyCheck" .=) <$> _iadEnablePiracyCheck])
+
+-- | This is a JSON template for a participant in a turn-based match.
+--
+-- /See:/ 'turnBasedMatchParticipant' smart constructor.
+data TurnBasedMatchParticipant = TurnBasedMatchParticipant
+    { _tbmpStatus            :: !(Maybe Text)
+    , _tbmpKind              :: !Text
+    , _tbmpId                :: !(Maybe Text)
+    , _tbmpAutoMatched       :: !(Maybe Bool)
+    , _tbmpPlayer            :: !(Maybe Player)
+    , _tbmpAutoMatchedPlayer :: !(Maybe AnonymousPlayer)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TurnBasedMatchParticipant' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tbmpStatus'
+--
+-- * 'tbmpKind'
+--
+-- * 'tbmpId'
+--
+-- * 'tbmpAutoMatched'
+--
+-- * 'tbmpPlayer'
+--
+-- * 'tbmpAutoMatchedPlayer'
+turnBasedMatchParticipant
+    :: TurnBasedMatchParticipant
+turnBasedMatchParticipant =
+    TurnBasedMatchParticipant
+    { _tbmpStatus = Nothing
+    , _tbmpKind = "games#turnBasedMatchParticipant"
+    , _tbmpId = Nothing
+    , _tbmpAutoMatched = Nothing
+    , _tbmpPlayer = Nothing
+    , _tbmpAutoMatchedPlayer = Nothing
+    }
+
+-- | The status of the participant with respect to the match. Possible values
+-- are: - \"PARTICIPANT_NOT_INVITED_YET\" - The participant is slated to be
+-- invited to the match, but the invitation has not been sent; the invite
+-- will be sent when it becomes their turn. - \"PARTICIPANT_INVITED\" - The
+-- participant has been invited to join the match, but has not yet
+-- responded. - \"PARTICIPANT_JOINED\" - The participant has joined the
+-- match (either after creating it or accepting an invitation.) -
+-- \"PARTICIPANT_DECLINED\" - The participant declined an invitation to
+-- join the match. - \"PARTICIPANT_LEFT\" - The participant joined the
+-- match and then left it. - \"PARTICIPANT_FINISHED\" - The participant
+-- finished playing in the match. - \"PARTICIPANT_UNRESPONSIVE\" - The
+-- participant did not take their turn in the allotted time.
+tbmpStatus :: Lens' TurnBasedMatchParticipant (Maybe Text)
+tbmpStatus
+  = lens _tbmpStatus (\ s a -> s{_tbmpStatus = a})
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#turnBasedMatchParticipant.
+tbmpKind :: Lens' TurnBasedMatchParticipant Text
+tbmpKind = lens _tbmpKind (\ s a -> s{_tbmpKind = a})
+
+-- | An identifier for the participant in the scope of the match. Cannot be
+-- used to identify a player across matches or in other contexts.
+tbmpId :: Lens' TurnBasedMatchParticipant (Maybe Text)
+tbmpId = lens _tbmpId (\ s a -> s{_tbmpId = a})
+
+-- | True if this participant was auto-matched with the requesting player.
+tbmpAutoMatched :: Lens' TurnBasedMatchParticipant (Maybe Bool)
+tbmpAutoMatched
+  = lens _tbmpAutoMatched
+      (\ s a -> s{_tbmpAutoMatched = a})
+
+-- | Information about the player. Not populated if this player was
+-- anonymously auto-matched against the requesting player. (Either player
+-- or autoMatchedPlayer will be set.)
+tbmpPlayer :: Lens' TurnBasedMatchParticipant (Maybe Player)
+tbmpPlayer
+  = lens _tbmpPlayer (\ s a -> s{_tbmpPlayer = a})
+
+-- | Information about a player that has been anonymously auto-matched
+-- against the requesting player. (Either player or autoMatchedPlayer will
+-- be set.)
+tbmpAutoMatchedPlayer :: Lens' TurnBasedMatchParticipant (Maybe AnonymousPlayer)
+tbmpAutoMatchedPlayer
+  = lens _tbmpAutoMatchedPlayer
+      (\ s a -> s{_tbmpAutoMatchedPlayer = a})
+
+instance FromJSON TurnBasedMatchParticipant where
+        parseJSON
+          = withObject "TurnBasedMatchParticipant"
+              (\ o ->
+                 TurnBasedMatchParticipant <$>
+                   (o .:? "status") <*>
+                     (o .:? "kind" .!= "games#turnBasedMatchParticipant")
+                     <*> (o .:? "id")
+                     <*> (o .:? "autoMatched")
+                     <*> (o .:? "player")
+                     <*> (o .:? "autoMatchedPlayer"))
+
+instance ToJSON TurnBasedMatchParticipant where
+        toJSON TurnBasedMatchParticipant{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _tbmpStatus,
+                  Just ("kind" .= _tbmpKind), ("id" .=) <$> _tbmpId,
+                  ("autoMatched" .=) <$> _tbmpAutoMatched,
+                  ("player" .=) <$> _tbmpPlayer,
+                  ("autoMatchedPlayer" .=) <$> _tbmpAutoMatchedPlayer])
 
 -- | This is a JSON template for a list of achievement definition objects.
 --
@@ -3303,6 +2972,174 @@ instance ToJSON AchievementDefinitionsListResponse
                   Just ("kind" .= _adlrKind),
                   ("items" .=) <$> _adlrItems])
 
+-- | This is a JSON template for a list of leaderboard entry resources.
+--
+-- /See:/ 'playerScoreResponse' smart constructor.
+data PlayerScoreResponse = PlayerScoreResponse
+    { _psrScoreTag             :: !(Maybe Text)
+    , _psrKind                 :: !Text
+    , _psrFormattedScore       :: !(Maybe Text)
+    , _psrLeaderboardId        :: !(Maybe Text)
+    , _psrBeatenScoreTimeSpans :: !(Maybe [Text])
+    , _psrUnbeatenScores       :: !(Maybe [PlayerScore])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PlayerScoreResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'psrScoreTag'
+--
+-- * 'psrKind'
+--
+-- * 'psrFormattedScore'
+--
+-- * 'psrLeaderboardId'
+--
+-- * 'psrBeatenScoreTimeSpans'
+--
+-- * 'psrUnbeatenScores'
+playerScoreResponse
+    :: PlayerScoreResponse
+playerScoreResponse =
+    PlayerScoreResponse
+    { _psrScoreTag = Nothing
+    , _psrKind = "games#playerScoreResponse"
+    , _psrFormattedScore = Nothing
+    , _psrLeaderboardId = Nothing
+    , _psrBeatenScoreTimeSpans = Nothing
+    , _psrUnbeatenScores = Nothing
+    }
+
+-- | Additional information about this score. Values will contain no more
+-- than 64 URI-safe characters as defined by section 2.3 of RFC 3986.
+psrScoreTag :: Lens' PlayerScoreResponse (Maybe Text)
+psrScoreTag
+  = lens _psrScoreTag (\ s a -> s{_psrScoreTag = a})
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#playerScoreResponse.
+psrKind :: Lens' PlayerScoreResponse Text
+psrKind = lens _psrKind (\ s a -> s{_psrKind = a})
+
+-- | The formatted value of the submitted score.
+psrFormattedScore :: Lens' PlayerScoreResponse (Maybe Text)
+psrFormattedScore
+  = lens _psrFormattedScore
+      (\ s a -> s{_psrFormattedScore = a})
+
+-- | The leaderboard ID that this score was submitted to.
+psrLeaderboardId :: Lens' PlayerScoreResponse (Maybe Text)
+psrLeaderboardId
+  = lens _psrLeaderboardId
+      (\ s a -> s{_psrLeaderboardId = a})
+
+-- | The time spans where the submitted score is better than the existing
+-- score for that time span. Possible values are: - \"ALL_TIME\" - The
+-- score is an all-time score. - \"WEEKLY\" - The score is a weekly score.
+-- - \"DAILY\" - The score is a daily score.
+psrBeatenScoreTimeSpans :: Lens' PlayerScoreResponse [Text]
+psrBeatenScoreTimeSpans
+  = lens _psrBeatenScoreTimeSpans
+      (\ s a -> s{_psrBeatenScoreTimeSpans = a})
+      . _Default
+      . _Coerce
+
+-- | The scores in time spans that have not been beaten. As an example, the
+-- submitted score may be better than the player\'s DAILY score, but not
+-- better than the player\'s scores for the WEEKLY or ALL_TIME time spans.
+psrUnbeatenScores :: Lens' PlayerScoreResponse [PlayerScore]
+psrUnbeatenScores
+  = lens _psrUnbeatenScores
+      (\ s a -> s{_psrUnbeatenScores = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON PlayerScoreResponse where
+        parseJSON
+          = withObject "PlayerScoreResponse"
+              (\ o ->
+                 PlayerScoreResponse <$>
+                   (o .:? "scoreTag") <*>
+                     (o .:? "kind" .!= "games#playerScoreResponse")
+                     <*> (o .:? "formattedScore")
+                     <*> (o .:? "leaderboardId")
+                     <*> (o .:? "beatenScoreTimeSpans" .!= mempty)
+                     <*> (o .:? "unbeatenScores" .!= mempty))
+
+instance ToJSON PlayerScoreResponse where
+        toJSON PlayerScoreResponse{..}
+          = object
+              (catMaybes
+                 [("scoreTag" .=) <$> _psrScoreTag,
+                  Just ("kind" .= _psrKind),
+                  ("formattedScore" .=) <$> _psrFormattedScore,
+                  ("leaderboardId" .=) <$> _psrLeaderboardId,
+                  ("beatenScoreTimeSpans" .=) <$>
+                    _psrBeatenScoreTimeSpans,
+                  ("unbeatenScores" .=) <$> _psrUnbeatenScores])
+
+-- | This is a JSON template for an anonymous player
+--
+-- /See:/ 'anonymousPlayer' smart constructor.
+data AnonymousPlayer = AnonymousPlayer
+    { _apAvatarImageURL :: !(Maybe Text)
+    , _apKind           :: !Text
+    , _apDisplayName    :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AnonymousPlayer' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'apAvatarImageURL'
+--
+-- * 'apKind'
+--
+-- * 'apDisplayName'
+anonymousPlayer
+    :: AnonymousPlayer
+anonymousPlayer =
+    AnonymousPlayer
+    { _apAvatarImageURL = Nothing
+    , _apKind = "games#anonymousPlayer"
+    , _apDisplayName = Nothing
+    }
+
+-- | The base URL for the image to display for the anonymous player.
+apAvatarImageURL :: Lens' AnonymousPlayer (Maybe Text)
+apAvatarImageURL
+  = lens _apAvatarImageURL
+      (\ s a -> s{_apAvatarImageURL = a})
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#anonymousPlayer.
+apKind :: Lens' AnonymousPlayer Text
+apKind = lens _apKind (\ s a -> s{_apKind = a})
+
+-- | The name to display for the anonymous player.
+apDisplayName :: Lens' AnonymousPlayer (Maybe Text)
+apDisplayName
+  = lens _apDisplayName
+      (\ s a -> s{_apDisplayName = a})
+
+instance FromJSON AnonymousPlayer where
+        parseJSON
+          = withObject "AnonymousPlayer"
+              (\ o ->
+                 AnonymousPlayer <$>
+                   (o .:? "avatarImageUrl") <*>
+                     (o .:? "kind" .!= "games#anonymousPlayer")
+                     <*> (o .:? "displayName"))
+
+instance ToJSON AnonymousPlayer where
+        toJSON AnonymousPlayer{..}
+          = object
+              (catMaybes
+                 [("avatarImageUrl" .=) <$> _apAvatarImageURL,
+                  Just ("kind" .= _apKind),
+                  ("displayName" .=) <$> _apDisplayName])
+
 -- | This is a JSON template for a Quest Criterion Contribution resource.
 --
 -- /See:/ 'questContribution' smart constructor.
@@ -3363,82 +3200,279 @@ instance ToJSON QuestContribution where
                  [Just ("kind" .= _qKind), ("value" .=) <$> _qValue,
                   ("formattedValue" .=) <$> _qFormattedValue])
 
--- | This is a JSON template for a list of player leaderboard scores.
+-- | This is a JSON template for the client address when setting up a room.
 --
--- /See:/ 'playerLeaderboardScoreListResponse' smart constructor.
-data PlayerLeaderboardScoreListResponse = PlayerLeaderboardScoreListResponse
-    { _plslrNextPageToken :: !(Maybe Text)
-    , _plslrKind          :: !Text
-    , _plslrItems         :: !(Maybe [PlayerLeaderboardScore])
-    , _plslrPlayer        :: !(Maybe Player)
+-- /See:/ 'roomClientAddress' smart constructor.
+data RoomClientAddress = RoomClientAddress
+    { _rcaKind        :: !Text
+    , _rcaXmppAddress :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PlayerLeaderboardScoreListResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'RoomClientAddress' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'plslrNextPageToken'
+-- * 'rcaKind'
 --
--- * 'plslrKind'
---
--- * 'plslrItems'
---
--- * 'plslrPlayer'
-playerLeaderboardScoreListResponse
-    :: PlayerLeaderboardScoreListResponse
-playerLeaderboardScoreListResponse =
-    PlayerLeaderboardScoreListResponse
-    { _plslrNextPageToken = Nothing
-    , _plslrKind = "games#playerLeaderboardScoreListResponse"
-    , _plslrItems = Nothing
-    , _plslrPlayer = Nothing
+-- * 'rcaXmppAddress'
+roomClientAddress
+    :: RoomClientAddress
+roomClientAddress =
+    RoomClientAddress
+    { _rcaKind = "games#roomClientAddress"
+    , _rcaXmppAddress = Nothing
     }
 
--- | The pagination token for the next page of results.
-plslrNextPageToken :: Lens' PlayerLeaderboardScoreListResponse (Maybe Text)
-plslrNextPageToken
-  = lens _plslrNextPageToken
-      (\ s a -> s{_plslrNextPageToken = a})
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#roomClientAddress.
+rcaKind :: Lens' RoomClientAddress Text
+rcaKind = lens _rcaKind (\ s a -> s{_rcaKind = a})
+
+-- | The XMPP address of the client on the Google Games XMPP network.
+rcaXmppAddress :: Lens' RoomClientAddress (Maybe Text)
+rcaXmppAddress
+  = lens _rcaXmppAddress
+      (\ s a -> s{_rcaXmppAddress = a})
+
+instance FromJSON RoomClientAddress where
+        parseJSON
+          = withObject "RoomClientAddress"
+              (\ o ->
+                 RoomClientAddress <$>
+                   (o .:? "kind" .!= "games#roomClientAddress") <*>
+                     (o .:? "xmppAddress"))
+
+instance ToJSON RoomClientAddress where
+        toJSON RoomClientAddress{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _rcaKind),
+                  ("xmppAddress" .=) <$> _rcaXmppAddress])
+
+-- | This is a JSON template for a list of leaderboard objects.
+--
+-- /See:/ 'leaderboardListResponse' smart constructor.
+data LeaderboardListResponse = LeaderboardListResponse
+    { _llrNextPageToken :: !(Maybe Text)
+    , _llrKind          :: !Text
+    , _llrItems         :: !(Maybe [Leaderboard])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LeaderboardListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'llrNextPageToken'
+--
+-- * 'llrKind'
+--
+-- * 'llrItems'
+leaderboardListResponse
+    :: LeaderboardListResponse
+leaderboardListResponse =
+    LeaderboardListResponse
+    { _llrNextPageToken = Nothing
+    , _llrKind = "games#leaderboardListResponse"
+    , _llrItems = Nothing
+    }
+
+-- | Token corresponding to the next page of results.
+llrNextPageToken :: Lens' LeaderboardListResponse (Maybe Text)
+llrNextPageToken
+  = lens _llrNextPageToken
+      (\ s a -> s{_llrNextPageToken = a})
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#playerLeaderboardScoreListResponse.
-plslrKind :: Lens' PlayerLeaderboardScoreListResponse Text
-plslrKind
-  = lens _plslrKind (\ s a -> s{_plslrKind = a})
+-- string games#leaderboardListResponse.
+llrKind :: Lens' LeaderboardListResponse Text
+llrKind = lens _llrKind (\ s a -> s{_llrKind = a})
 
--- | The leaderboard scores.
-plslrItems :: Lens' PlayerLeaderboardScoreListResponse [PlayerLeaderboardScore]
-plslrItems
-  = lens _plslrItems (\ s a -> s{_plslrItems = a}) .
+-- | The leaderboards.
+llrItems :: Lens' LeaderboardListResponse [Leaderboard]
+llrItems
+  = lens _llrItems (\ s a -> s{_llrItems = a}) .
       _Default
       . _Coerce
 
--- | The Player resources for the owner of this score.
-plslrPlayer :: Lens' PlayerLeaderboardScoreListResponse (Maybe Player)
-plslrPlayer
-  = lens _plslrPlayer (\ s a -> s{_plslrPlayer = a})
-
-instance FromJSON PlayerLeaderboardScoreListResponse
-         where
+instance FromJSON LeaderboardListResponse where
         parseJSON
-          = withObject "PlayerLeaderboardScoreListResponse"
+          = withObject "LeaderboardListResponse"
               (\ o ->
-                 PlayerLeaderboardScoreListResponse <$>
+                 LeaderboardListResponse <$>
                    (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!=
-                        "games#playerLeaderboardScoreListResponse")
-                     <*> (o .:? "items" .!= mempty)
-                     <*> (o .:? "player"))
+                     (o .:? "kind" .!= "games#leaderboardListResponse")
+                     <*> (o .:? "items" .!= mempty))
 
-instance ToJSON PlayerLeaderboardScoreListResponse
-         where
-        toJSON PlayerLeaderboardScoreListResponse{..}
+instance ToJSON LeaderboardListResponse where
+        toJSON LeaderboardListResponse{..}
           = object
               (catMaybes
-                 [("nextPageToken" .=) <$> _plslrNextPageToken,
-                  Just ("kind" .= _plslrKind),
-                  ("items" .=) <$> _plslrItems,
-                  ("player" .=) <$> _plslrPlayer])
+                 [("nextPageToken" .=) <$> _llrNextPageToken,
+                  Just ("kind" .= _llrKind),
+                  ("items" .=) <$> _llrItems])
+
+-- | This is a JSON template for a player score.
+--
+-- /See:/ 'playerScore' smart constructor.
+data PlayerScore = PlayerScore
+    { _psScoreTag       :: !(Maybe Text)
+    , _psScore          :: !(Maybe Int64)
+    , _psKind           :: !Text
+    , _psFormattedScore :: !(Maybe Text)
+    , _psTimeSpan       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PlayerScore' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'psScoreTag'
+--
+-- * 'psScore'
+--
+-- * 'psKind'
+--
+-- * 'psFormattedScore'
+--
+-- * 'psTimeSpan'
+playerScore
+    :: PlayerScore
+playerScore =
+    PlayerScore
+    { _psScoreTag = Nothing
+    , _psScore = Nothing
+    , _psKind = "games#playerScore"
+    , _psFormattedScore = Nothing
+    , _psTimeSpan = Nothing
+    }
+
+-- | Additional information about this score. Values will contain no more
+-- than 64 URI-safe characters as defined by section 2.3 of RFC 3986.
+psScoreTag :: Lens' PlayerScore (Maybe Text)
+psScoreTag
+  = lens _psScoreTag (\ s a -> s{_psScoreTag = a})
+
+-- | The numerical value for this player score.
+psScore :: Lens' PlayerScore (Maybe Int64)
+psScore = lens _psScore (\ s a -> s{_psScore = a})
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#playerScore.
+psKind :: Lens' PlayerScore Text
+psKind = lens _psKind (\ s a -> s{_psKind = a})
+
+-- | The formatted score for this player score.
+psFormattedScore :: Lens' PlayerScore (Maybe Text)
+psFormattedScore
+  = lens _psFormattedScore
+      (\ s a -> s{_psFormattedScore = a})
+
+-- | The time span for this player score. Possible values are: - \"ALL_TIME\"
+-- - The score is an all-time score. - \"WEEKLY\" - The score is a weekly
+-- score. - \"DAILY\" - The score is a daily score.
+psTimeSpan :: Lens' PlayerScore (Maybe Text)
+psTimeSpan
+  = lens _psTimeSpan (\ s a -> s{_psTimeSpan = a})
+
+instance FromJSON PlayerScore where
+        parseJSON
+          = withObject "PlayerScore"
+              (\ o ->
+                 PlayerScore <$>
+                   (o .:? "scoreTag") <*> (o .:? "score") <*>
+                     (o .:? "kind" .!= "games#playerScore")
+                     <*> (o .:? "formattedScore")
+                     <*> (o .:? "timeSpan"))
+
+instance ToJSON PlayerScore where
+        toJSON PlayerScore{..}
+          = object
+              (catMaybes
+                 [("scoreTag" .=) <$> _psScoreTag,
+                  ("score" .=) <$> _psScore, Just ("kind" .= _psKind),
+                  ("formattedScore" .=) <$> _psFormattedScore,
+                  ("timeSpan" .=) <$> _psTimeSpan])
+
+-- | This is a JSON template for an turn-based auto-match criteria object.
+--
+-- /See:/ 'turnBasedAutoMatchingCriteria' smart constructor.
+data TurnBasedAutoMatchingCriteria = TurnBasedAutoMatchingCriteria
+    { _tbamcKind                   :: !Text
+    , _tbamcExclusiveBitmask       :: !(Maybe Int64)
+    , _tbamcMaxAutoMatchingPlayers :: !(Maybe Int32)
+    , _tbamcMinAutoMatchingPlayers :: !(Maybe Int32)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TurnBasedAutoMatchingCriteria' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tbamcKind'
+--
+-- * 'tbamcExclusiveBitmask'
+--
+-- * 'tbamcMaxAutoMatchingPlayers'
+--
+-- * 'tbamcMinAutoMatchingPlayers'
+turnBasedAutoMatchingCriteria
+    :: TurnBasedAutoMatchingCriteria
+turnBasedAutoMatchingCriteria =
+    TurnBasedAutoMatchingCriteria
+    { _tbamcKind = "games#turnBasedAutoMatchingCriteria"
+    , _tbamcExclusiveBitmask = Nothing
+    , _tbamcMaxAutoMatchingPlayers = Nothing
+    , _tbamcMinAutoMatchingPlayers = Nothing
+    }
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#turnBasedAutoMatchingCriteria.
+tbamcKind :: Lens' TurnBasedAutoMatchingCriteria Text
+tbamcKind
+  = lens _tbamcKind (\ s a -> s{_tbamcKind = a})
+
+-- | A bitmask indicating when auto-matches are valid. When ANDed with other
+-- exclusive bitmasks, the result must be zero. Can be used to support
+-- exclusive roles within a game.
+tbamcExclusiveBitmask :: Lens' TurnBasedAutoMatchingCriteria (Maybe Int64)
+tbamcExclusiveBitmask
+  = lens _tbamcExclusiveBitmask
+      (\ s a -> s{_tbamcExclusiveBitmask = a})
+
+-- | The maximum number of players that should be added to the match by
+-- auto-matching.
+tbamcMaxAutoMatchingPlayers :: Lens' TurnBasedAutoMatchingCriteria (Maybe Int32)
+tbamcMaxAutoMatchingPlayers
+  = lens _tbamcMaxAutoMatchingPlayers
+      (\ s a -> s{_tbamcMaxAutoMatchingPlayers = a})
+
+-- | The minimum number of players that should be added to the match by
+-- auto-matching.
+tbamcMinAutoMatchingPlayers :: Lens' TurnBasedAutoMatchingCriteria (Maybe Int32)
+tbamcMinAutoMatchingPlayers
+  = lens _tbamcMinAutoMatchingPlayers
+      (\ s a -> s{_tbamcMinAutoMatchingPlayers = a})
+
+instance FromJSON TurnBasedAutoMatchingCriteria where
+        parseJSON
+          = withObject "TurnBasedAutoMatchingCriteria"
+              (\ o ->
+                 TurnBasedAutoMatchingCriteria <$>
+                   (o .:? "kind" .!=
+                      "games#turnBasedAutoMatchingCriteria")
+                     <*> (o .:? "exclusiveBitmask")
+                     <*> (o .:? "maxAutoMatchingPlayers")
+                     <*> (o .:? "minAutoMatchingPlayers"))
+
+instance ToJSON TurnBasedAutoMatchingCriteria where
+        toJSON TurnBasedAutoMatchingCriteria{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _tbamcKind),
+                  ("exclusiveBitmask" .=) <$> _tbamcExclusiveBitmask,
+                  ("maxAutoMatchingPlayers" .=) <$>
+                    _tbamcMaxAutoMatchingPlayers,
+                  ("minAutoMatchingPlayers" .=) <$>
+                    _tbamcMinAutoMatchingPlayers])
 
 -- | This is a JSON template for an image of a snapshot.
 --
@@ -3623,168 +3657,82 @@ instance ToJSON RoomStatus where
                   ("participants" .=) <$> _rsParticipants,
                   ("roomId" .=) <$> _rsRoomId])
 
--- | This is a JSON template for an turn-based auto-match criteria object.
+-- | This is a JSON template for a list of player leaderboard scores.
 --
--- /See:/ 'turnBasedAutoMatchingCriteria' smart constructor.
-data TurnBasedAutoMatchingCriteria = TurnBasedAutoMatchingCriteria
-    { _tbamcKind                   :: !Text
-    , _tbamcExclusiveBitmask       :: !(Maybe Int64)
-    , _tbamcMaxAutoMatchingPlayers :: !(Maybe Int32)
-    , _tbamcMinAutoMatchingPlayers :: !(Maybe Int32)
+-- /See:/ 'playerLeaderboardScoreListResponse' smart constructor.
+data PlayerLeaderboardScoreListResponse = PlayerLeaderboardScoreListResponse
+    { _plslrNextPageToken :: !(Maybe Text)
+    , _plslrKind          :: !Text
+    , _plslrItems         :: !(Maybe [PlayerLeaderboardScore])
+    , _plslrPlayer        :: !(Maybe Player)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TurnBasedAutoMatchingCriteria' with the minimum fields required to make a request.
+-- | Creates a value of 'PlayerLeaderboardScoreListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tbamcKind'
+-- * 'plslrNextPageToken'
 --
--- * 'tbamcExclusiveBitmask'
+-- * 'plslrKind'
 --
--- * 'tbamcMaxAutoMatchingPlayers'
+-- * 'plslrItems'
 --
--- * 'tbamcMinAutoMatchingPlayers'
-turnBasedAutoMatchingCriteria
-    :: TurnBasedAutoMatchingCriteria
-turnBasedAutoMatchingCriteria =
-    TurnBasedAutoMatchingCriteria
-    { _tbamcKind = "games#turnBasedAutoMatchingCriteria"
-    , _tbamcExclusiveBitmask = Nothing
-    , _tbamcMaxAutoMatchingPlayers = Nothing
-    , _tbamcMinAutoMatchingPlayers = Nothing
+-- * 'plslrPlayer'
+playerLeaderboardScoreListResponse
+    :: PlayerLeaderboardScoreListResponse
+playerLeaderboardScoreListResponse =
+    PlayerLeaderboardScoreListResponse
+    { _plslrNextPageToken = Nothing
+    , _plslrKind = "games#playerLeaderboardScoreListResponse"
+    , _plslrItems = Nothing
+    , _plslrPlayer = Nothing
     }
 
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#turnBasedAutoMatchingCriteria.
-tbamcKind :: Lens' TurnBasedAutoMatchingCriteria Text
-tbamcKind
-  = lens _tbamcKind (\ s a -> s{_tbamcKind = a})
-
--- | A bitmask indicating when auto-matches are valid. When ANDed with other
--- exclusive bitmasks, the result must be zero. Can be used to support
--- exclusive roles within a game.
-tbamcExclusiveBitmask :: Lens' TurnBasedAutoMatchingCriteria (Maybe Int64)
-tbamcExclusiveBitmask
-  = lens _tbamcExclusiveBitmask
-      (\ s a -> s{_tbamcExclusiveBitmask = a})
-
--- | The maximum number of players that should be added to the match by
--- auto-matching.
-tbamcMaxAutoMatchingPlayers :: Lens' TurnBasedAutoMatchingCriteria (Maybe Int32)
-tbamcMaxAutoMatchingPlayers
-  = lens _tbamcMaxAutoMatchingPlayers
-      (\ s a -> s{_tbamcMaxAutoMatchingPlayers = a})
-
--- | The minimum number of players that should be added to the match by
--- auto-matching.
-tbamcMinAutoMatchingPlayers :: Lens' TurnBasedAutoMatchingCriteria (Maybe Int32)
-tbamcMinAutoMatchingPlayers
-  = lens _tbamcMinAutoMatchingPlayers
-      (\ s a -> s{_tbamcMinAutoMatchingPlayers = a})
-
-instance FromJSON TurnBasedAutoMatchingCriteria where
-        parseJSON
-          = withObject "TurnBasedAutoMatchingCriteria"
-              (\ o ->
-                 TurnBasedAutoMatchingCriteria <$>
-                   (o .:? "kind" .!=
-                      "games#turnBasedAutoMatchingCriteria")
-                     <*> (o .:? "exclusiveBitmask")
-                     <*> (o .:? "maxAutoMatchingPlayers")
-                     <*> (o .:? "minAutoMatchingPlayers"))
-
-instance ToJSON TurnBasedAutoMatchingCriteria where
-        toJSON TurnBasedAutoMatchingCriteria{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _tbamcKind),
-                  ("exclusiveBitmask" .=) <$> _tbamcExclusiveBitmask,
-                  ("maxAutoMatchingPlayers" .=) <$>
-                    _tbamcMaxAutoMatchingPlayers,
-                  ("minAutoMatchingPlayers" .=) <$>
-                    _tbamcMinAutoMatchingPlayers])
-
--- | This is a JSON template for a player score.
---
--- /See:/ 'playerScore' smart constructor.
-data PlayerScore = PlayerScore
-    { _psScoreTag       :: !(Maybe Text)
-    , _psScore          :: !(Maybe Int64)
-    , _psKind           :: !Text
-    , _psFormattedScore :: !(Maybe Text)
-    , _psTimeSpan       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PlayerScore' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'psScoreTag'
---
--- * 'psScore'
---
--- * 'psKind'
---
--- * 'psFormattedScore'
---
--- * 'psTimeSpan'
-playerScore
-    :: PlayerScore
-playerScore =
-    PlayerScore
-    { _psScoreTag = Nothing
-    , _psScore = Nothing
-    , _psKind = "games#playerScore"
-    , _psFormattedScore = Nothing
-    , _psTimeSpan = Nothing
-    }
-
--- | Additional information about this score. Values will contain no more
--- than 64 URI-safe characters as defined by section 2.3 of RFC 3986.
-psScoreTag :: Lens' PlayerScore (Maybe Text)
-psScoreTag
-  = lens _psScoreTag (\ s a -> s{_psScoreTag = a})
-
--- | The numerical value for this player score.
-psScore :: Lens' PlayerScore (Maybe Int64)
-psScore = lens _psScore (\ s a -> s{_psScore = a})
+-- | The pagination token for the next page of results.
+plslrNextPageToken :: Lens' PlayerLeaderboardScoreListResponse (Maybe Text)
+plslrNextPageToken
+  = lens _plslrNextPageToken
+      (\ s a -> s{_plslrNextPageToken = a})
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#playerScore.
-psKind :: Lens' PlayerScore Text
-psKind = lens _psKind (\ s a -> s{_psKind = a})
+-- string games#playerLeaderboardScoreListResponse.
+plslrKind :: Lens' PlayerLeaderboardScoreListResponse Text
+plslrKind
+  = lens _plslrKind (\ s a -> s{_plslrKind = a})
 
--- | The formatted score for this player score.
-psFormattedScore :: Lens' PlayerScore (Maybe Text)
-psFormattedScore
-  = lens _psFormattedScore
-      (\ s a -> s{_psFormattedScore = a})
+-- | The leaderboard scores.
+plslrItems :: Lens' PlayerLeaderboardScoreListResponse [PlayerLeaderboardScore]
+plslrItems
+  = lens _plslrItems (\ s a -> s{_plslrItems = a}) .
+      _Default
+      . _Coerce
 
--- | The time span for this player score. Possible values are: - \"ALL_TIME\"
--- - The score is an all-time score. - \"WEEKLY\" - The score is a weekly
--- score. - \"DAILY\" - The score is a daily score.
-psTimeSpan :: Lens' PlayerScore (Maybe Text)
-psTimeSpan
-  = lens _psTimeSpan (\ s a -> s{_psTimeSpan = a})
+-- | The Player resources for the owner of this score.
+plslrPlayer :: Lens' PlayerLeaderboardScoreListResponse (Maybe Player)
+plslrPlayer
+  = lens _plslrPlayer (\ s a -> s{_plslrPlayer = a})
 
-instance FromJSON PlayerScore where
+instance FromJSON PlayerLeaderboardScoreListResponse
+         where
         parseJSON
-          = withObject "PlayerScore"
+          = withObject "PlayerLeaderboardScoreListResponse"
               (\ o ->
-                 PlayerScore <$>
-                   (o .:? "scoreTag") <*> (o .:? "score") <*>
-                     (o .:? "kind" .!= "games#playerScore")
-                     <*> (o .:? "formattedScore")
-                     <*> (o .:? "timeSpan"))
+                 PlayerLeaderboardScoreListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "games#playerLeaderboardScoreListResponse")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "player"))
 
-instance ToJSON PlayerScore where
-        toJSON PlayerScore{..}
+instance ToJSON PlayerLeaderboardScoreListResponse
+         where
+        toJSON PlayerLeaderboardScoreListResponse{..}
           = object
               (catMaybes
-                 [("scoreTag" .=) <$> _psScoreTag,
-                  ("score" .=) <$> _psScore, Just ("kind" .= _psKind),
-                  ("formattedScore" .=) <$> _psFormattedScore,
-                  ("timeSpan" .=) <$> _psTimeSpan])
+                 [("nextPageToken" .=) <$> _plslrNextPageToken,
+                  Just ("kind" .= _plslrKind),
+                  ("items" .=) <$> _plslrItems,
+                  ("player" .=) <$> _plslrPlayer])
 
 -- | This is a JSON template for the iOS details resource.
 --
@@ -4121,6 +4069,162 @@ instance ToJSON ParticipantResult where
                   ("result" .=) <$> _prResult,
                   ("placing" .=) <$> _prPlacing])
 
+-- | This is a JSON template for the Leaderboard resource.
+--
+-- /See:/ 'leaderboard' smart constructor.
+data Leaderboard = Leaderboard
+    { _lKind             :: !Text
+    , _lIsIconURLDefault :: !(Maybe Bool)
+    , _lName             :: !(Maybe Text)
+    , _lId               :: !(Maybe Text)
+    , _lIconURL          :: !(Maybe Text)
+    , _lOrder            :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Leaderboard' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lKind'
+--
+-- * 'lIsIconURLDefault'
+--
+-- * 'lName'
+--
+-- * 'lId'
+--
+-- * 'lIconURL'
+--
+-- * 'lOrder'
+leaderboard
+    :: Leaderboard
+leaderboard =
+    Leaderboard
+    { _lKind = "games#leaderboard"
+    , _lIsIconURLDefault = Nothing
+    , _lName = Nothing
+    , _lId = Nothing
+    , _lIconURL = Nothing
+    , _lOrder = Nothing
+    }
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#leaderboard.
+lKind :: Lens' Leaderboard Text
+lKind = lens _lKind (\ s a -> s{_lKind = a})
+
+-- | Indicates whether the icon image being returned is a default image, or
+-- is game-provided.
+lIsIconURLDefault :: Lens' Leaderboard (Maybe Bool)
+lIsIconURLDefault
+  = lens _lIsIconURLDefault
+      (\ s a -> s{_lIsIconURLDefault = a})
+
+-- | The name of the leaderboard.
+lName :: Lens' Leaderboard (Maybe Text)
+lName = lens _lName (\ s a -> s{_lName = a})
+
+-- | The leaderboard ID.
+lId :: Lens' Leaderboard (Maybe Text)
+lId = lens _lId (\ s a -> s{_lId = a})
+
+-- | The icon for the leaderboard.
+lIconURL :: Lens' Leaderboard (Maybe Text)
+lIconURL = lens _lIconURL (\ s a -> s{_lIconURL = a})
+
+-- | How scores are ordered. Possible values are: - \"LARGER_IS_BETTER\" -
+-- Larger values are better; scores are sorted in descending order. -
+-- \"SMALLER_IS_BETTER\" - Smaller values are better; scores are sorted in
+-- ascending order.
+lOrder :: Lens' Leaderboard (Maybe Text)
+lOrder = lens _lOrder (\ s a -> s{_lOrder = a})
+
+instance FromJSON Leaderboard where
+        parseJSON
+          = withObject "Leaderboard"
+              (\ o ->
+                 Leaderboard <$>
+                   (o .:? "kind" .!= "games#leaderboard") <*>
+                     (o .:? "isIconUrlDefault")
+                     <*> (o .:? "name")
+                     <*> (o .:? "id")
+                     <*> (o .:? "iconUrl")
+                     <*> (o .:? "order"))
+
+instance ToJSON Leaderboard where
+        toJSON Leaderboard{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _lKind),
+                  ("isIconUrlDefault" .=) <$> _lIsIconURLDefault,
+                  ("name" .=) <$> _lName, ("id" .=) <$> _lId,
+                  ("iconUrl" .=) <$> _lIconURL,
+                  ("order" .=) <$> _lOrder])
+
+-- | This is a JSON template for the metagame config resource
+--
+-- /See:/ 'metagameConfig' smart constructor.
+data MetagameConfig = MetagameConfig
+    { _mcKind           :: !Text
+    , _mcCurrentVersion :: !(Maybe Int32)
+    , _mcPlayerLevels   :: !(Maybe [PlayerLevel])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MetagameConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mcKind'
+--
+-- * 'mcCurrentVersion'
+--
+-- * 'mcPlayerLevels'
+metagameConfig
+    :: MetagameConfig
+metagameConfig =
+    MetagameConfig
+    { _mcKind = "games#metagameConfig"
+    , _mcCurrentVersion = Nothing
+    , _mcPlayerLevels = Nothing
+    }
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#metagameConfig.
+mcKind :: Lens' MetagameConfig Text
+mcKind = lens _mcKind (\ s a -> s{_mcKind = a})
+
+-- | Current version of the metagame configuration data. When this data is
+-- updated, the version number will be increased by one.
+mcCurrentVersion :: Lens' MetagameConfig (Maybe Int32)
+mcCurrentVersion
+  = lens _mcCurrentVersion
+      (\ s a -> s{_mcCurrentVersion = a})
+
+-- | The list of player levels.
+mcPlayerLevels :: Lens' MetagameConfig [PlayerLevel]
+mcPlayerLevels
+  = lens _mcPlayerLevels
+      (\ s a -> s{_mcPlayerLevels = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON MetagameConfig where
+        parseJSON
+          = withObject "MetagameConfig"
+              (\ o ->
+                 MetagameConfig <$>
+                   (o .:? "kind" .!= "games#metagameConfig") <*>
+                     (o .:? "currentVersion")
+                     <*> (o .:? "playerLevels" .!= mempty))
+
+instance ToJSON MetagameConfig where
+        toJSON MetagameConfig{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _mcKind),
+                  ("currentVersion" .=) <$> _mcCurrentVersion,
+                  ("playerLevels" .=) <$> _mcPlayerLevels])
+
 -- | This is a JSON template for a list of category data objects.
 --
 -- /See:/ 'categoryListResponse' smart constructor.
@@ -4182,69 +4286,6 @@ instance ToJSON CategoryListResponse where
                  [("nextPageToken" .=) <$> _clrNextPageToken,
                   Just ("kind" .= _clrKind),
                   ("items" .=) <$> _clrItems])
-
--- | This is a JSON template for turn-based match modification metadata.
---
--- /See:/ 'turnBasedMatchModification' smart constructor.
-data TurnBasedMatchModification = TurnBasedMatchModification
-    { _tbmmParticipantId           :: !(Maybe Text)
-    , _tbmmKind                    :: !Text
-    , _tbmmModifiedTimestampMillis :: !(Maybe Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'TurnBasedMatchModification' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'tbmmParticipantId'
---
--- * 'tbmmKind'
---
--- * 'tbmmModifiedTimestampMillis'
-turnBasedMatchModification
-    :: TurnBasedMatchModification
-turnBasedMatchModification =
-    TurnBasedMatchModification
-    { _tbmmParticipantId = Nothing
-    , _tbmmKind = "games#turnBasedMatchModification"
-    , _tbmmModifiedTimestampMillis = Nothing
-    }
-
--- | The ID of the participant that modified the match.
-tbmmParticipantId :: Lens' TurnBasedMatchModification (Maybe Text)
-tbmmParticipantId
-  = lens _tbmmParticipantId
-      (\ s a -> s{_tbmmParticipantId = a})
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#turnBasedMatchModification.
-tbmmKind :: Lens' TurnBasedMatchModification Text
-tbmmKind = lens _tbmmKind (\ s a -> s{_tbmmKind = a})
-
--- | The timestamp at which they modified the match, in milliseconds since
--- the epoch in UTC.
-tbmmModifiedTimestampMillis :: Lens' TurnBasedMatchModification (Maybe Int64)
-tbmmModifiedTimestampMillis
-  = lens _tbmmModifiedTimestampMillis
-      (\ s a -> s{_tbmmModifiedTimestampMillis = a})
-
-instance FromJSON TurnBasedMatchModification where
-        parseJSON
-          = withObject "TurnBasedMatchModification"
-              (\ o ->
-                 TurnBasedMatchModification <$>
-                   (o .:? "participantId") <*>
-                     (o .:? "kind" .!= "games#turnBasedMatchModification")
-                     <*> (o .:? "modifiedTimestampMillis"))
-
-instance ToJSON TurnBasedMatchModification where
-        toJSON TurnBasedMatchModification{..}
-          = object
-              (catMaybes
-                 [("participantId" .=) <$> _tbmmParticipantId,
-                  Just ("kind" .= _tbmmKind),
-                  ("modifiedTimestampMillis" .=) <$>
-                    _tbmmModifiedTimestampMillis])
 
 -- | This is a JSON template for an update on the status of a peer in a room.
 --
@@ -4365,161 +4406,68 @@ instance ToJSON RoomP2PStatus where
                   ("unreliableRoundtripLatencyMillis" .=) <$>
                     _rppsUnreliableRoundtripLatencyMillis])
 
--- | This is a JSON template for the metagame config resource
+-- | This is a JSON template for turn-based match modification metadata.
 --
--- /See:/ 'metagameConfig' smart constructor.
-data MetagameConfig = MetagameConfig
-    { _mcKind           :: !Text
-    , _mcCurrentVersion :: !(Maybe Int32)
-    , _mcPlayerLevels   :: !(Maybe [PlayerLevel])
+-- /See:/ 'turnBasedMatchModification' smart constructor.
+data TurnBasedMatchModification = TurnBasedMatchModification
+    { _tbmmParticipantId           :: !(Maybe Text)
+    , _tbmmKind                    :: !Text
+    , _tbmmModifiedTimestampMillis :: !(Maybe Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MetagameConfig' with the minimum fields required to make a request.
+-- | Creates a value of 'TurnBasedMatchModification' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mcKind'
+-- * 'tbmmParticipantId'
 --
--- * 'mcCurrentVersion'
+-- * 'tbmmKind'
 --
--- * 'mcPlayerLevels'
-metagameConfig
-    :: MetagameConfig
-metagameConfig =
-    MetagameConfig
-    { _mcKind = "games#metagameConfig"
-    , _mcCurrentVersion = Nothing
-    , _mcPlayerLevels = Nothing
+-- * 'tbmmModifiedTimestampMillis'
+turnBasedMatchModification
+    :: TurnBasedMatchModification
+turnBasedMatchModification =
+    TurnBasedMatchModification
+    { _tbmmParticipantId = Nothing
+    , _tbmmKind = "games#turnBasedMatchModification"
+    , _tbmmModifiedTimestampMillis = Nothing
     }
 
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#metagameConfig.
-mcKind :: Lens' MetagameConfig Text
-mcKind = lens _mcKind (\ s a -> s{_mcKind = a})
-
--- | Current version of the metagame configuration data. When this data is
--- updated, the version number will be increased by one.
-mcCurrentVersion :: Lens' MetagameConfig (Maybe Int32)
-mcCurrentVersion
-  = lens _mcCurrentVersion
-      (\ s a -> s{_mcCurrentVersion = a})
-
--- | The list of player levels.
-mcPlayerLevels :: Lens' MetagameConfig [PlayerLevel]
-mcPlayerLevels
-  = lens _mcPlayerLevels
-      (\ s a -> s{_mcPlayerLevels = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON MetagameConfig where
-        parseJSON
-          = withObject "MetagameConfig"
-              (\ o ->
-                 MetagameConfig <$>
-                   (o .:? "kind" .!= "games#metagameConfig") <*>
-                     (o .:? "currentVersion")
-                     <*> (o .:? "playerLevels" .!= mempty))
-
-instance ToJSON MetagameConfig where
-        toJSON MetagameConfig{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _mcKind),
-                  ("currentVersion" .=) <$> _mcCurrentVersion,
-                  ("playerLevels" .=) <$> _mcPlayerLevels])
-
--- | This is a JSON template for the Leaderboard resource.
---
--- /See:/ 'leaderboard' smart constructor.
-data Leaderboard = Leaderboard
-    { _lKind             :: !Text
-    , _lIsIconURLDefault :: !(Maybe Bool)
-    , _lName             :: !(Maybe Text)
-    , _lId               :: !(Maybe Text)
-    , _lIconURL          :: !(Maybe Text)
-    , _lOrder            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Leaderboard' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lKind'
---
--- * 'lIsIconURLDefault'
---
--- * 'lName'
---
--- * 'lId'
---
--- * 'lIconURL'
---
--- * 'lOrder'
-leaderboard
-    :: Leaderboard
-leaderboard =
-    Leaderboard
-    { _lKind = "games#leaderboard"
-    , _lIsIconURLDefault = Nothing
-    , _lName = Nothing
-    , _lId = Nothing
-    , _lIconURL = Nothing
-    , _lOrder = Nothing
-    }
+-- | The ID of the participant that modified the match.
+tbmmParticipantId :: Lens' TurnBasedMatchModification (Maybe Text)
+tbmmParticipantId
+  = lens _tbmmParticipantId
+      (\ s a -> s{_tbmmParticipantId = a})
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#leaderboard.
-lKind :: Lens' Leaderboard Text
-lKind = lens _lKind (\ s a -> s{_lKind = a})
+-- string games#turnBasedMatchModification.
+tbmmKind :: Lens' TurnBasedMatchModification Text
+tbmmKind = lens _tbmmKind (\ s a -> s{_tbmmKind = a})
 
--- | Indicates whether the icon image being returned is a default image, or
--- is game-provided.
-lIsIconURLDefault :: Lens' Leaderboard (Maybe Bool)
-lIsIconURLDefault
-  = lens _lIsIconURLDefault
-      (\ s a -> s{_lIsIconURLDefault = a})
+-- | The timestamp at which they modified the match, in milliseconds since
+-- the epoch in UTC.
+tbmmModifiedTimestampMillis :: Lens' TurnBasedMatchModification (Maybe Int64)
+tbmmModifiedTimestampMillis
+  = lens _tbmmModifiedTimestampMillis
+      (\ s a -> s{_tbmmModifiedTimestampMillis = a})
 
--- | The name of the leaderboard.
-lName :: Lens' Leaderboard (Maybe Text)
-lName = lens _lName (\ s a -> s{_lName = a})
-
--- | The leaderboard ID.
-lId :: Lens' Leaderboard (Maybe Text)
-lId = lens _lId (\ s a -> s{_lId = a})
-
--- | The icon for the leaderboard.
-lIconURL :: Lens' Leaderboard (Maybe Text)
-lIconURL = lens _lIconURL (\ s a -> s{_lIconURL = a})
-
--- | How scores are ordered. Possible values are: - \"LARGER_IS_BETTER\" -
--- Larger values are better; scores are sorted in descending order. -
--- \"SMALLER_IS_BETTER\" - Smaller values are better; scores are sorted in
--- ascending order.
-lOrder :: Lens' Leaderboard (Maybe Text)
-lOrder = lens _lOrder (\ s a -> s{_lOrder = a})
-
-instance FromJSON Leaderboard where
+instance FromJSON TurnBasedMatchModification where
         parseJSON
-          = withObject "Leaderboard"
+          = withObject "TurnBasedMatchModification"
               (\ o ->
-                 Leaderboard <$>
-                   (o .:? "kind" .!= "games#leaderboard") <*>
-                     (o .:? "isIconUrlDefault")
-                     <*> (o .:? "name")
-                     <*> (o .:? "id")
-                     <*> (o .:? "iconUrl")
-                     <*> (o .:? "order"))
+                 TurnBasedMatchModification <$>
+                   (o .:? "participantId") <*>
+                     (o .:? "kind" .!= "games#turnBasedMatchModification")
+                     <*> (o .:? "modifiedTimestampMillis"))
 
-instance ToJSON Leaderboard where
-        toJSON Leaderboard{..}
+instance ToJSON TurnBasedMatchModification where
+        toJSON TurnBasedMatchModification{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _lKind),
-                  ("isIconUrlDefault" .=) <$> _lIsIconURLDefault,
-                  ("name" .=) <$> _lName, ("id" .=) <$> _lId,
-                  ("iconUrl" .=) <$> _lIconURL,
-                  ("order" .=) <$> _lOrder])
+                 [("participantId" .=) <$> _tbmmParticipantId,
+                  Just ("kind" .= _tbmmKind),
+                  ("modifiedTimestampMillis" .=) <$>
+                    _tbmmModifiedTimestampMillis])
 
 -- | This is a JSON template for an event definition resource.
 --
@@ -4707,56 +4655,6 @@ instance ToJSON RoomModification where
                   ("modifiedTimestampMillis" .=) <$>
                     _rmModifiedTimestampMillis])
 
--- | This is a JSON template for an achievement unlock response
---
--- /See:/ 'achievementUnlockResponse' smart constructor.
-data AchievementUnlockResponse = AchievementUnlockResponse
-    { _achKind          :: !Text
-    , _achNewlyUnlocked :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AchievementUnlockResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'achKind'
---
--- * 'achNewlyUnlocked'
-achievementUnlockResponse
-    :: AchievementUnlockResponse
-achievementUnlockResponse =
-    AchievementUnlockResponse
-    { _achKind = "games#achievementUnlockResponse"
-    , _achNewlyUnlocked = Nothing
-    }
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#achievementUnlockResponse.
-achKind :: Lens' AchievementUnlockResponse Text
-achKind = lens _achKind (\ s a -> s{_achKind = a})
-
--- | Whether this achievement was newly unlocked (that is, whether the unlock
--- request for the achievement was the first for the player).
-achNewlyUnlocked :: Lens' AchievementUnlockResponse (Maybe Bool)
-achNewlyUnlocked
-  = lens _achNewlyUnlocked
-      (\ s a -> s{_achNewlyUnlocked = a})
-
-instance FromJSON AchievementUnlockResponse where
-        parseJSON
-          = withObject "AchievementUnlockResponse"
-              (\ o ->
-                 AchievementUnlockResponse <$>
-                   (o .:? "kind" .!= "games#achievementUnlockResponse")
-                     <*> (o .:? "newlyUnlocked"))
-
-instance ToJSON AchievementUnlockResponse where
-        toJSON AchievementUnlockResponse{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _achKind),
-                  ("newlyUnlocked" .=) <$> _achNewlyUnlocked])
-
 -- | This is a JSON template for an event period update resource.
 --
 -- /See:/ 'eventUpdateRequest' smart constructor.
@@ -4816,6 +4714,56 @@ instance ToJSON EventUpdateRequest where
                  [("updateCount" .=) <$> _eUpdateCount,
                   Just ("kind" .= _eKind),
                   ("definitionId" .=) <$> _eDefinitionId])
+
+-- | This is a JSON template for an achievement unlock response
+--
+-- /See:/ 'achievementUnlockResponse' smart constructor.
+data AchievementUnlockResponse = AchievementUnlockResponse
+    { _achKind          :: !Text
+    , _achNewlyUnlocked :: !(Maybe Bool)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AchievementUnlockResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'achKind'
+--
+-- * 'achNewlyUnlocked'
+achievementUnlockResponse
+    :: AchievementUnlockResponse
+achievementUnlockResponse =
+    AchievementUnlockResponse
+    { _achKind = "games#achievementUnlockResponse"
+    , _achNewlyUnlocked = Nothing
+    }
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#achievementUnlockResponse.
+achKind :: Lens' AchievementUnlockResponse Text
+achKind = lens _achKind (\ s a -> s{_achKind = a})
+
+-- | Whether this achievement was newly unlocked (that is, whether the unlock
+-- request for the achievement was the first for the player).
+achNewlyUnlocked :: Lens' AchievementUnlockResponse (Maybe Bool)
+achNewlyUnlocked
+  = lens _achNewlyUnlocked
+      (\ s a -> s{_achNewlyUnlocked = a})
+
+instance FromJSON AchievementUnlockResponse where
+        parseJSON
+          = withObject "AchievementUnlockResponse"
+              (\ o ->
+                 AchievementUnlockResponse <$>
+                   (o .:? "kind" .!= "games#achievementUnlockResponse")
+                     <*> (o .:? "newlyUnlocked"))
+
+instance ToJSON AchievementUnlockResponse where
+        toJSON AchievementUnlockResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _achKind),
+                  ("newlyUnlocked" .=) <$> _achNewlyUnlocked])
 
 -- | This is a JSON template for an achievement object.
 --
@@ -4981,97 +4929,6 @@ instance ToJSON RoomP2PStatuses where
                  [Just ("kind" .= _rppssKind),
                   ("updates" .=) <$> _rppssUpdates])
 
--- | This is a JSON template for a request to update an achievement.
---
--- /See:/ 'achievementUpdateRequest' smart constructor.
-data AchievementUpdateRequest = AchievementUpdateRequest
-    { _auruAchievementId          :: !(Maybe Text)
-    , _auruKind                   :: !Text
-    , _auruUpdateType             :: !(Maybe Text)
-    , _auruSetStepsAtLeastPayload :: !(Maybe GamesAchievementSetStepsAtLeast)
-    , _auruIncrementPayload       :: !(Maybe GamesAchievementIncrement)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AchievementUpdateRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'auruAchievementId'
---
--- * 'auruKind'
---
--- * 'auruUpdateType'
---
--- * 'auruSetStepsAtLeastPayload'
---
--- * 'auruIncrementPayload'
-achievementUpdateRequest
-    :: AchievementUpdateRequest
-achievementUpdateRequest =
-    AchievementUpdateRequest
-    { _auruAchievementId = Nothing
-    , _auruKind = "games#achievementUpdateRequest"
-    , _auruUpdateType = Nothing
-    , _auruSetStepsAtLeastPayload = Nothing
-    , _auruIncrementPayload = Nothing
-    }
-
--- | The achievement this update is being applied to.
-auruAchievementId :: Lens' AchievementUpdateRequest (Maybe Text)
-auruAchievementId
-  = lens _auruAchievementId
-      (\ s a -> s{_auruAchievementId = a})
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#achievementUpdateRequest.
-auruKind :: Lens' AchievementUpdateRequest Text
-auruKind = lens _auruKind (\ s a -> s{_auruKind = a})
-
--- | The type of update being applied. Possible values are: - \"REVEAL\" -
--- Achievement is revealed. - \"UNLOCK\" - Achievement is unlocked. -
--- \"INCREMENT\" - Achievement is incremented. - \"SET_STEPS_AT_LEAST\" -
--- Achievement progress is set to at least the passed value.
-auruUpdateType :: Lens' AchievementUpdateRequest (Maybe Text)
-auruUpdateType
-  = lens _auruUpdateType
-      (\ s a -> s{_auruUpdateType = a})
-
--- | The payload if an update of type SET_STEPS_AT_LEAST was requested for
--- the achievement.
-auruSetStepsAtLeastPayload :: Lens' AchievementUpdateRequest (Maybe GamesAchievementSetStepsAtLeast)
-auruSetStepsAtLeastPayload
-  = lens _auruSetStepsAtLeastPayload
-      (\ s a -> s{_auruSetStepsAtLeastPayload = a})
-
--- | The payload if an update of type INCREMENT was requested for the
--- achievement.
-auruIncrementPayload :: Lens' AchievementUpdateRequest (Maybe GamesAchievementIncrement)
-auruIncrementPayload
-  = lens _auruIncrementPayload
-      (\ s a -> s{_auruIncrementPayload = a})
-
-instance FromJSON AchievementUpdateRequest where
-        parseJSON
-          = withObject "AchievementUpdateRequest"
-              (\ o ->
-                 AchievementUpdateRequest <$>
-                   (o .:? "achievementId") <*>
-                     (o .:? "kind" .!= "games#achievementUpdateRequest")
-                     <*> (o .:? "updateType")
-                     <*> (o .:? "setStepsAtLeastPayload")
-                     <*> (o .:? "incrementPayload"))
-
-instance ToJSON AchievementUpdateRequest where
-        toJSON AchievementUpdateRequest{..}
-          = object
-              (catMaybes
-                 [("achievementId" .=) <$> _auruAchievementId,
-                  Just ("kind" .= _auruKind),
-                  ("updateType" .=) <$> _auruUpdateType,
-                  ("setStepsAtLeastPayload" .=) <$>
-                    _auruSetStepsAtLeastPayload,
-                  ("incrementPayload" .=) <$> _auruIncrementPayload])
-
 -- | This is a JSON template for an image asset object.
 --
 -- /See:/ 'imageAsset' smart constructor.
@@ -5146,88 +5003,6 @@ instance ToJSON ImageAsset where
                  [("height" .=) <$> _iaHeight,
                   Just ("kind" .= _iaKind), ("url" .=) <$> _iaURL,
                   ("width" .=) <$> _iaWidth, ("name" .=) <$> _iaName])
-
--- | This is a JSON template for a score rank in a leaderboard.
---
--- /See:/ 'leaderboardScoreRank' smart constructor.
-data LeaderboardScoreRank = LeaderboardScoreRank
-    { _lsrNumScores          :: !(Maybe Int64)
-    , _lsrKind               :: !Text
-    , _lsrFormattedRank      :: !(Maybe Text)
-    , _lsrFormattedNumScores :: !(Maybe Text)
-    , _lsrRank               :: !(Maybe Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'LeaderboardScoreRank' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lsrNumScores'
---
--- * 'lsrKind'
---
--- * 'lsrFormattedRank'
---
--- * 'lsrFormattedNumScores'
---
--- * 'lsrRank'
-leaderboardScoreRank
-    :: LeaderboardScoreRank
-leaderboardScoreRank =
-    LeaderboardScoreRank
-    { _lsrNumScores = Nothing
-    , _lsrKind = "games#leaderboardScoreRank"
-    , _lsrFormattedRank = Nothing
-    , _lsrFormattedNumScores = Nothing
-    , _lsrRank = Nothing
-    }
-
--- | The number of scores in the leaderboard.
-lsrNumScores :: Lens' LeaderboardScoreRank (Maybe Int64)
-lsrNumScores
-  = lens _lsrNumScores (\ s a -> s{_lsrNumScores = a})
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#leaderboardScoreRank.
-lsrKind :: Lens' LeaderboardScoreRank Text
-lsrKind = lens _lsrKind (\ s a -> s{_lsrKind = a})
-
--- | The rank in the leaderboard as a string.
-lsrFormattedRank :: Lens' LeaderboardScoreRank (Maybe Text)
-lsrFormattedRank
-  = lens _lsrFormattedRank
-      (\ s a -> s{_lsrFormattedRank = a})
-
--- | The number of scores in the leaderboard as a string.
-lsrFormattedNumScores :: Lens' LeaderboardScoreRank (Maybe Text)
-lsrFormattedNumScores
-  = lens _lsrFormattedNumScores
-      (\ s a -> s{_lsrFormattedNumScores = a})
-
--- | The rank in the leaderboard.
-lsrRank :: Lens' LeaderboardScoreRank (Maybe Int64)
-lsrRank = lens _lsrRank (\ s a -> s{_lsrRank = a})
-
-instance FromJSON LeaderboardScoreRank where
-        parseJSON
-          = withObject "LeaderboardScoreRank"
-              (\ o ->
-                 LeaderboardScoreRank <$>
-                   (o .:? "numScores") <*>
-                     (o .:? "kind" .!= "games#leaderboardScoreRank")
-                     <*> (o .:? "formattedRank")
-                     <*> (o .:? "formattedNumScores")
-                     <*> (o .:? "rank"))
-
-instance ToJSON LeaderboardScoreRank where
-        toJSON LeaderboardScoreRank{..}
-          = object
-              (catMaybes
-                 [("numScores" .=) <$> _lsrNumScores,
-                  Just ("kind" .= _lsrKind),
-                  ("formattedRank" .=) <$> _lsrFormattedRank,
-                  ("formattedNumScores" .=) <$> _lsrFormattedNumScores,
-                  ("rank" .=) <$> _lsrRank])
 
 -- | This is a JSON template for a list of achievement update requests.
 --
@@ -5334,6 +5109,179 @@ instance ToJSON RoomAutoMatchStatus where
                  [Just ("kind" .= _ramsKind),
                   ("waitEstimateSeconds" .=) <$>
                     _ramsWaitEstimateSeconds])
+
+-- | This is a JSON template for a request to update an achievement.
+--
+-- /See:/ 'achievementUpdateRequest' smart constructor.
+data AchievementUpdateRequest = AchievementUpdateRequest
+    { _auruAchievementId          :: !(Maybe Text)
+    , _auruKind                   :: !Text
+    , _auruUpdateType             :: !(Maybe Text)
+    , _auruSetStepsAtLeastPayload :: !(Maybe GamesAchievementSetStepsAtLeast)
+    , _auruIncrementPayload       :: !(Maybe GamesAchievementIncrement)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AchievementUpdateRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'auruAchievementId'
+--
+-- * 'auruKind'
+--
+-- * 'auruUpdateType'
+--
+-- * 'auruSetStepsAtLeastPayload'
+--
+-- * 'auruIncrementPayload'
+achievementUpdateRequest
+    :: AchievementUpdateRequest
+achievementUpdateRequest =
+    AchievementUpdateRequest
+    { _auruAchievementId = Nothing
+    , _auruKind = "games#achievementUpdateRequest"
+    , _auruUpdateType = Nothing
+    , _auruSetStepsAtLeastPayload = Nothing
+    , _auruIncrementPayload = Nothing
+    }
+
+-- | The achievement this update is being applied to.
+auruAchievementId :: Lens' AchievementUpdateRequest (Maybe Text)
+auruAchievementId
+  = lens _auruAchievementId
+      (\ s a -> s{_auruAchievementId = a})
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#achievementUpdateRequest.
+auruKind :: Lens' AchievementUpdateRequest Text
+auruKind = lens _auruKind (\ s a -> s{_auruKind = a})
+
+-- | The type of update being applied. Possible values are: - \"REVEAL\" -
+-- Achievement is revealed. - \"UNLOCK\" - Achievement is unlocked. -
+-- \"INCREMENT\" - Achievement is incremented. - \"SET_STEPS_AT_LEAST\" -
+-- Achievement progress is set to at least the passed value.
+auruUpdateType :: Lens' AchievementUpdateRequest (Maybe Text)
+auruUpdateType
+  = lens _auruUpdateType
+      (\ s a -> s{_auruUpdateType = a})
+
+-- | The payload if an update of type SET_STEPS_AT_LEAST was requested for
+-- the achievement.
+auruSetStepsAtLeastPayload :: Lens' AchievementUpdateRequest (Maybe GamesAchievementSetStepsAtLeast)
+auruSetStepsAtLeastPayload
+  = lens _auruSetStepsAtLeastPayload
+      (\ s a -> s{_auruSetStepsAtLeastPayload = a})
+
+-- | The payload if an update of type INCREMENT was requested for the
+-- achievement.
+auruIncrementPayload :: Lens' AchievementUpdateRequest (Maybe GamesAchievementIncrement)
+auruIncrementPayload
+  = lens _auruIncrementPayload
+      (\ s a -> s{_auruIncrementPayload = a})
+
+instance FromJSON AchievementUpdateRequest where
+        parseJSON
+          = withObject "AchievementUpdateRequest"
+              (\ o ->
+                 AchievementUpdateRequest <$>
+                   (o .:? "achievementId") <*>
+                     (o .:? "kind" .!= "games#achievementUpdateRequest")
+                     <*> (o .:? "updateType")
+                     <*> (o .:? "setStepsAtLeastPayload")
+                     <*> (o .:? "incrementPayload"))
+
+instance ToJSON AchievementUpdateRequest where
+        toJSON AchievementUpdateRequest{..}
+          = object
+              (catMaybes
+                 [("achievementId" .=) <$> _auruAchievementId,
+                  Just ("kind" .= _auruKind),
+                  ("updateType" .=) <$> _auruUpdateType,
+                  ("setStepsAtLeastPayload" .=) <$>
+                    _auruSetStepsAtLeastPayload,
+                  ("incrementPayload" .=) <$> _auruIncrementPayload])
+
+-- | This is a JSON template for a score rank in a leaderboard.
+--
+-- /See:/ 'leaderboardScoreRank' smart constructor.
+data LeaderboardScoreRank = LeaderboardScoreRank
+    { _lsrNumScores          :: !(Maybe Int64)
+    , _lsrKind               :: !Text
+    , _lsrFormattedRank      :: !(Maybe Text)
+    , _lsrFormattedNumScores :: !(Maybe Text)
+    , _lsrRank               :: !(Maybe Int64)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LeaderboardScoreRank' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lsrNumScores'
+--
+-- * 'lsrKind'
+--
+-- * 'lsrFormattedRank'
+--
+-- * 'lsrFormattedNumScores'
+--
+-- * 'lsrRank'
+leaderboardScoreRank
+    :: LeaderboardScoreRank
+leaderboardScoreRank =
+    LeaderboardScoreRank
+    { _lsrNumScores = Nothing
+    , _lsrKind = "games#leaderboardScoreRank"
+    , _lsrFormattedRank = Nothing
+    , _lsrFormattedNumScores = Nothing
+    , _lsrRank = Nothing
+    }
+
+-- | The number of scores in the leaderboard.
+lsrNumScores :: Lens' LeaderboardScoreRank (Maybe Int64)
+lsrNumScores
+  = lens _lsrNumScores (\ s a -> s{_lsrNumScores = a})
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#leaderboardScoreRank.
+lsrKind :: Lens' LeaderboardScoreRank Text
+lsrKind = lens _lsrKind (\ s a -> s{_lsrKind = a})
+
+-- | The rank in the leaderboard as a string.
+lsrFormattedRank :: Lens' LeaderboardScoreRank (Maybe Text)
+lsrFormattedRank
+  = lens _lsrFormattedRank
+      (\ s a -> s{_lsrFormattedRank = a})
+
+-- | The number of scores in the leaderboard as a string.
+lsrFormattedNumScores :: Lens' LeaderboardScoreRank (Maybe Text)
+lsrFormattedNumScores
+  = lens _lsrFormattedNumScores
+      (\ s a -> s{_lsrFormattedNumScores = a})
+
+-- | The rank in the leaderboard.
+lsrRank :: Lens' LeaderboardScoreRank (Maybe Int64)
+lsrRank = lens _lsrRank (\ s a -> s{_lsrRank = a})
+
+instance FromJSON LeaderboardScoreRank where
+        parseJSON
+          = withObject "LeaderboardScoreRank"
+              (\ o ->
+                 LeaderboardScoreRank <$>
+                   (o .:? "numScores") <*>
+                     (o .:? "kind" .!= "games#leaderboardScoreRank")
+                     <*> (o .:? "formattedRank")
+                     <*> (o .:? "formattedNumScores")
+                     <*> (o .:? "rank"))
+
+instance ToJSON LeaderboardScoreRank where
+        toJSON LeaderboardScoreRank{..}
+          = object
+              (catMaybes
+                 [("numScores" .=) <$> _lsrNumScores,
+                  Just ("kind" .= _lsrKind),
+                  ("formattedRank" .=) <$> _lsrFormattedRank,
+                  ("formattedNumScores" .=) <$> _lsrFormattedNumScores,
+                  ("rank" .=) <$> _lsrRank])
 
 -- | This is a JSON template for a room creation request.
 --
@@ -5461,6 +5409,68 @@ instance ToJSON RoomCreateRequest where
                     _rooAutoMatchingCriteria,
                   ("capabilities" .=) <$> _rooCapabilities])
 
+-- | This is a JSON template for a third party player list response.
+--
+-- /See:/ 'playerListResponse' smart constructor.
+data PlayerListResponse = PlayerListResponse
+    { _plrNextPageToken :: !(Maybe Text)
+    , _plrKind          :: !Text
+    , _plrItems         :: !(Maybe [Player])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PlayerListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'plrNextPageToken'
+--
+-- * 'plrKind'
+--
+-- * 'plrItems'
+playerListResponse
+    :: PlayerListResponse
+playerListResponse =
+    PlayerListResponse
+    { _plrNextPageToken = Nothing
+    , _plrKind = "games#playerListResponse"
+    , _plrItems = Nothing
+    }
+
+-- | Token corresponding to the next page of results.
+plrNextPageToken :: Lens' PlayerListResponse (Maybe Text)
+plrNextPageToken
+  = lens _plrNextPageToken
+      (\ s a -> s{_plrNextPageToken = a})
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#playerListResponse.
+plrKind :: Lens' PlayerListResponse Text
+plrKind = lens _plrKind (\ s a -> s{_plrKind = a})
+
+-- | The players.
+plrItems :: Lens' PlayerListResponse [Player]
+plrItems
+  = lens _plrItems (\ s a -> s{_plrItems = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON PlayerListResponse where
+        parseJSON
+          = withObject "PlayerListResponse"
+              (\ o ->
+                 PlayerListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "games#playerListResponse")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON PlayerListResponse where
+        toJSON PlayerListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _plrNextPageToken,
+                  Just ("kind" .= _plrKind),
+                  ("items" .=) <$> _plrItems])
+
 -- | This is a JSON template for a ListScores response.
 --
 -- /See:/ 'leaderboardScores' smart constructor.
@@ -5559,159 +5569,6 @@ instance ToJSON LeaderboardScores where
                   ("playerScore" .=) <$> _lsPlayerScore,
                   ("items" .=) <$> _lsItems,
                   ("prevPageToken" .=) <$> _lsPrevPageToken])
-
--- | This is a JSON template for a third party player list response.
---
--- /See:/ 'playerListResponse' smart constructor.
-data PlayerListResponse = PlayerListResponse
-    { _plrNextPageToken :: !(Maybe Text)
-    , _plrKind          :: !Text
-    , _plrItems         :: !(Maybe [Player])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PlayerListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'plrNextPageToken'
---
--- * 'plrKind'
---
--- * 'plrItems'
-playerListResponse
-    :: PlayerListResponse
-playerListResponse =
-    PlayerListResponse
-    { _plrNextPageToken = Nothing
-    , _plrKind = "games#playerListResponse"
-    , _plrItems = Nothing
-    }
-
--- | Token corresponding to the next page of results.
-plrNextPageToken :: Lens' PlayerListResponse (Maybe Text)
-plrNextPageToken
-  = lens _plrNextPageToken
-      (\ s a -> s{_plrNextPageToken = a})
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#playerListResponse.
-plrKind :: Lens' PlayerListResponse Text
-plrKind = lens _plrKind (\ s a -> s{_plrKind = a})
-
--- | The players.
-plrItems :: Lens' PlayerListResponse [Player]
-plrItems
-  = lens _plrItems (\ s a -> s{_plrItems = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON PlayerListResponse where
-        parseJSON
-          = withObject "PlayerListResponse"
-              (\ o ->
-                 PlayerListResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "games#playerListResponse")
-                     <*> (o .:? "items" .!= mempty))
-
-instance ToJSON PlayerListResponse where
-        toJSON PlayerListResponse{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _plrNextPageToken,
-                  Just ("kind" .= _plrKind),
-                  ("items" .=) <$> _plrItems])
-
--- | This is a JSON template for a turn-based match creation request.
---
--- /See:/ 'turnBasedMatchCreateRequest' smart constructor.
-data TurnBasedMatchCreateRequest = TurnBasedMatchCreateRequest
-    { _tbmcrRequestId            :: !(Maybe Int64)
-    , _tbmcrVariant              :: !(Maybe Int32)
-    , _tbmcrKind                 :: !Text
-    , _tbmcrInvitedPlayerIds     :: !(Maybe [Text])
-    , _tbmcrAutoMatchingCriteria :: !(Maybe TurnBasedAutoMatchingCriteria)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'TurnBasedMatchCreateRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'tbmcrRequestId'
---
--- * 'tbmcrVariant'
---
--- * 'tbmcrKind'
---
--- * 'tbmcrInvitedPlayerIds'
---
--- * 'tbmcrAutoMatchingCriteria'
-turnBasedMatchCreateRequest
-    :: TurnBasedMatchCreateRequest
-turnBasedMatchCreateRequest =
-    TurnBasedMatchCreateRequest
-    { _tbmcrRequestId = Nothing
-    , _tbmcrVariant = Nothing
-    , _tbmcrKind = "games#turnBasedMatchCreateRequest"
-    , _tbmcrInvitedPlayerIds = Nothing
-    , _tbmcrAutoMatchingCriteria = Nothing
-    }
-
--- | A randomly generated numeric ID. This number is used at the server to
--- ensure that the request is handled correctly across retries.
-tbmcrRequestId :: Lens' TurnBasedMatchCreateRequest (Maybe Int64)
-tbmcrRequestId
-  = lens _tbmcrRequestId
-      (\ s a -> s{_tbmcrRequestId = a})
-
--- | The variant \/ mode of the application to be played. This can be any
--- integer value, or left blank. You should use a small number of variants
--- to keep the auto-matching pool as large as possible.
-tbmcrVariant :: Lens' TurnBasedMatchCreateRequest (Maybe Int32)
-tbmcrVariant
-  = lens _tbmcrVariant (\ s a -> s{_tbmcrVariant = a})
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#turnBasedMatchCreateRequest.
-tbmcrKind :: Lens' TurnBasedMatchCreateRequest Text
-tbmcrKind
-  = lens _tbmcrKind (\ s a -> s{_tbmcrKind = a})
-
--- | The player ids to invite to the match.
-tbmcrInvitedPlayerIds :: Lens' TurnBasedMatchCreateRequest [Text]
-tbmcrInvitedPlayerIds
-  = lens _tbmcrInvitedPlayerIds
-      (\ s a -> s{_tbmcrInvitedPlayerIds = a})
-      . _Default
-      . _Coerce
-
--- | Criteria for auto-matching players into this match.
-tbmcrAutoMatchingCriteria :: Lens' TurnBasedMatchCreateRequest (Maybe TurnBasedAutoMatchingCriteria)
-tbmcrAutoMatchingCriteria
-  = lens _tbmcrAutoMatchingCriteria
-      (\ s a -> s{_tbmcrAutoMatchingCriteria = a})
-
-instance FromJSON TurnBasedMatchCreateRequest where
-        parseJSON
-          = withObject "TurnBasedMatchCreateRequest"
-              (\ o ->
-                 TurnBasedMatchCreateRequest <$>
-                   (o .:? "requestId") <*> (o .:? "variant") <*>
-                     (o .:? "kind" .!=
-                        "games#turnBasedMatchCreateRequest")
-                     <*> (o .:? "invitedPlayerIds" .!= mempty)
-                     <*> (o .:? "autoMatchingCriteria"))
-
-instance ToJSON TurnBasedMatchCreateRequest where
-        toJSON TurnBasedMatchCreateRequest{..}
-          = object
-              (catMaybes
-                 [("requestId" .=) <$> _tbmcrRequestId,
-                  ("variant" .=) <$> _tbmcrVariant,
-                  Just ("kind" .= _tbmcrKind),
-                  ("invitedPlayerIds" .=) <$> _tbmcrInvitedPlayerIds,
-                  ("autoMatchingCriteria" .=) <$>
-                    _tbmcrAutoMatchingCriteria])
 
 -- | This is a JSON template for an achievement definition object.
 --
@@ -5897,134 +5754,96 @@ instance ToJSON AchievementDefinition where
                     _adIsRevealedIconURLDefault,
                   ("unlockedIconUrl" .=) <$> _adUnlockedIconURL])
 
--- | This is a JSON template for a list of achievement objects.
+-- | This is a JSON template for a turn-based match creation request.
 --
--- /See:/ 'playerAchievementListResponse' smart constructor.
-data PlayerAchievementListResponse = PlayerAchievementListResponse
-    { _palrNextPageToken :: !(Maybe Text)
-    , _palrKind          :: !Text
-    , _palrItems         :: !(Maybe [PlayerAchievement])
+-- /See:/ 'turnBasedMatchCreateRequest' smart constructor.
+data TurnBasedMatchCreateRequest = TurnBasedMatchCreateRequest
+    { _tbmcrRequestId            :: !(Maybe Int64)
+    , _tbmcrVariant              :: !(Maybe Int32)
+    , _tbmcrKind                 :: !Text
+    , _tbmcrInvitedPlayerIds     :: !(Maybe [Text])
+    , _tbmcrAutoMatchingCriteria :: !(Maybe TurnBasedAutoMatchingCriteria)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PlayerAchievementListResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'TurnBasedMatchCreateRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'palrNextPageToken'
+-- * 'tbmcrRequestId'
 --
--- * 'palrKind'
+-- * 'tbmcrVariant'
 --
--- * 'palrItems'
-playerAchievementListResponse
-    :: PlayerAchievementListResponse
-playerAchievementListResponse =
-    PlayerAchievementListResponse
-    { _palrNextPageToken = Nothing
-    , _palrKind = "games#playerAchievementListResponse"
-    , _palrItems = Nothing
+-- * 'tbmcrKind'
+--
+-- * 'tbmcrInvitedPlayerIds'
+--
+-- * 'tbmcrAutoMatchingCriteria'
+turnBasedMatchCreateRequest
+    :: TurnBasedMatchCreateRequest
+turnBasedMatchCreateRequest =
+    TurnBasedMatchCreateRequest
+    { _tbmcrRequestId = Nothing
+    , _tbmcrVariant = Nothing
+    , _tbmcrKind = "games#turnBasedMatchCreateRequest"
+    , _tbmcrInvitedPlayerIds = Nothing
+    , _tbmcrAutoMatchingCriteria = Nothing
     }
 
--- | Token corresponding to the next page of results.
-palrNextPageToken :: Lens' PlayerAchievementListResponse (Maybe Text)
-palrNextPageToken
-  = lens _palrNextPageToken
-      (\ s a -> s{_palrNextPageToken = a})
+-- | A randomly generated numeric ID. This number is used at the server to
+-- ensure that the request is handled correctly across retries.
+tbmcrRequestId :: Lens' TurnBasedMatchCreateRequest (Maybe Int64)
+tbmcrRequestId
+  = lens _tbmcrRequestId
+      (\ s a -> s{_tbmcrRequestId = a})
+
+-- | The variant \/ mode of the application to be played. This can be any
+-- integer value, or left blank. You should use a small number of variants
+-- to keep the auto-matching pool as large as possible.
+tbmcrVariant :: Lens' TurnBasedMatchCreateRequest (Maybe Int32)
+tbmcrVariant
+  = lens _tbmcrVariant (\ s a -> s{_tbmcrVariant = a})
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#playerAchievementListResponse.
-palrKind :: Lens' PlayerAchievementListResponse Text
-palrKind = lens _palrKind (\ s a -> s{_palrKind = a})
+-- string games#turnBasedMatchCreateRequest.
+tbmcrKind :: Lens' TurnBasedMatchCreateRequest Text
+tbmcrKind
+  = lens _tbmcrKind (\ s a -> s{_tbmcrKind = a})
 
--- | The achievements.
-palrItems :: Lens' PlayerAchievementListResponse [PlayerAchievement]
-palrItems
-  = lens _palrItems (\ s a -> s{_palrItems = a}) .
-      _Default
+-- | The player ids to invite to the match.
+tbmcrInvitedPlayerIds :: Lens' TurnBasedMatchCreateRequest [Text]
+tbmcrInvitedPlayerIds
+  = lens _tbmcrInvitedPlayerIds
+      (\ s a -> s{_tbmcrInvitedPlayerIds = a})
+      . _Default
       . _Coerce
 
-instance FromJSON PlayerAchievementListResponse where
+-- | Criteria for auto-matching players into this match.
+tbmcrAutoMatchingCriteria :: Lens' TurnBasedMatchCreateRequest (Maybe TurnBasedAutoMatchingCriteria)
+tbmcrAutoMatchingCriteria
+  = lens _tbmcrAutoMatchingCriteria
+      (\ s a -> s{_tbmcrAutoMatchingCriteria = a})
+
+instance FromJSON TurnBasedMatchCreateRequest where
         parseJSON
-          = withObject "PlayerAchievementListResponse"
+          = withObject "TurnBasedMatchCreateRequest"
               (\ o ->
-                 PlayerAchievementListResponse <$>
-                   (o .:? "nextPageToken") <*>
+                 TurnBasedMatchCreateRequest <$>
+                   (o .:? "requestId") <*> (o .:? "variant") <*>
                      (o .:? "kind" .!=
-                        "games#playerAchievementListResponse")
-                     <*> (o .:? "items" .!= mempty))
+                        "games#turnBasedMatchCreateRequest")
+                     <*> (o .:? "invitedPlayerIds" .!= mempty)
+                     <*> (o .:? "autoMatchingCriteria"))
 
-instance ToJSON PlayerAchievementListResponse where
-        toJSON PlayerAchievementListResponse{..}
+instance ToJSON TurnBasedMatchCreateRequest where
+        toJSON TurnBasedMatchCreateRequest{..}
           = object
               (catMaybes
-                 [("nextPageToken" .=) <$> _palrNextPageToken,
-                  Just ("kind" .= _palrKind),
-                  ("items" .=) <$> _palrItems])
-
--- | This is a JSON template for an achievement set steps at least response.
---
--- /See:/ 'achievementSetStepsAtLeastResponse' smart constructor.
-data AchievementSetStepsAtLeastResponse = AchievementSetStepsAtLeastResponse
-    { _assalrKind          :: !Text
-    , _assalrNewlyUnlocked :: !(Maybe Bool)
-    , _assalrCurrentSteps  :: !(Maybe Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AchievementSetStepsAtLeastResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'assalrKind'
---
--- * 'assalrNewlyUnlocked'
---
--- * 'assalrCurrentSteps'
-achievementSetStepsAtLeastResponse
-    :: AchievementSetStepsAtLeastResponse
-achievementSetStepsAtLeastResponse =
-    AchievementSetStepsAtLeastResponse
-    { _assalrKind = "games#achievementSetStepsAtLeastResponse"
-    , _assalrNewlyUnlocked = Nothing
-    , _assalrCurrentSteps = Nothing
-    }
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#achievementSetStepsAtLeastResponse.
-assalrKind :: Lens' AchievementSetStepsAtLeastResponse Text
-assalrKind
-  = lens _assalrKind (\ s a -> s{_assalrKind = a})
-
--- | Whether the the current steps for the achievement has reached the number
--- of steps required to unlock.
-assalrNewlyUnlocked :: Lens' AchievementSetStepsAtLeastResponse (Maybe Bool)
-assalrNewlyUnlocked
-  = lens _assalrNewlyUnlocked
-      (\ s a -> s{_assalrNewlyUnlocked = a})
-
--- | The current steps recorded for this incremental achievement.
-assalrCurrentSteps :: Lens' AchievementSetStepsAtLeastResponse (Maybe Int32)
-assalrCurrentSteps
-  = lens _assalrCurrentSteps
-      (\ s a -> s{_assalrCurrentSteps = a})
-
-instance FromJSON AchievementSetStepsAtLeastResponse
-         where
-        parseJSON
-          = withObject "AchievementSetStepsAtLeastResponse"
-              (\ o ->
-                 AchievementSetStepsAtLeastResponse <$>
-                   (o .:? "kind" .!=
-                      "games#achievementSetStepsAtLeastResponse")
-                     <*> (o .:? "newlyUnlocked")
-                     <*> (o .:? "currentSteps"))
-
-instance ToJSON AchievementSetStepsAtLeastResponse
-         where
-        toJSON AchievementSetStepsAtLeastResponse{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _assalrKind),
-                  ("newlyUnlocked" .=) <$> _assalrNewlyUnlocked,
-                  ("currentSteps" .=) <$> _assalrCurrentSteps])
+                 [("requestId" .=) <$> _tbmcrRequestId,
+                  ("variant" .=) <$> _tbmcrVariant,
+                  Just ("kind" .= _tbmcrKind),
+                  ("invitedPlayerIds" .=) <$> _tbmcrInvitedPlayerIds,
+                  ("autoMatchingCriteria" .=) <$>
+                    _tbmcrAutoMatchingCriteria])
 
 -- | This is a JSON template for a batch update failure resource.
 --
@@ -6166,6 +5985,58 @@ instance ToJSON TurnBasedMatchResults where
                   ("data" .=) <$> _tbmrData,
                   ("matchVersion" .=) <$> _tbmrMatchVersion])
 
+-- | A push token ID for iOS devices.
+--
+-- /See:/ 'pushTokenIdIos' smart constructor.
+data PushTokenIdIos = PushTokenIdIos
+    { _ptiiAPNSDeviceToken :: !(Maybe Word8)
+    , _ptiiAPNSEnvironment :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PushTokenIdIos' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ptiiAPNSDeviceToken'
+--
+-- * 'ptiiAPNSEnvironment'
+pushTokenIdIos
+    :: PushTokenIdIos
+pushTokenIdIos =
+    PushTokenIdIos
+    { _ptiiAPNSDeviceToken = Nothing
+    , _ptiiAPNSEnvironment = Nothing
+    }
+
+-- | Device token supplied by an iOS system call to register for remote
+-- notifications. Encode this field as web-safe base64.
+ptiiAPNSDeviceToken :: Lens' PushTokenIdIos (Maybe Word8)
+ptiiAPNSDeviceToken
+  = lens _ptiiAPNSDeviceToken
+      (\ s a -> s{_ptiiAPNSDeviceToken = a})
+
+-- | Indicates whether this token should be used for the production or
+-- sandbox APNS server.
+ptiiAPNSEnvironment :: Lens' PushTokenIdIos (Maybe Text)
+ptiiAPNSEnvironment
+  = lens _ptiiAPNSEnvironment
+      (\ s a -> s{_ptiiAPNSEnvironment = a})
+
+instance FromJSON PushTokenIdIos where
+        parseJSON
+          = withObject "PushTokenIdIos"
+              (\ o ->
+                 PushTokenIdIos <$>
+                   (o .:? "apns_device_token") <*>
+                     (o .:? "apns_environment"))
+
+instance ToJSON PushTokenIdIos where
+        toJSON PushTokenIdIos{..}
+          = object
+              (catMaybes
+                 [("apns_device_token" .=) <$> _ptiiAPNSDeviceToken,
+                  ("apns_environment" .=) <$> _ptiiAPNSEnvironment])
+
 -- | This is a JSON template for a leave room request.
 --
 -- /See:/ 'roomLeaveRequest' smart constructor.
@@ -6241,6 +6112,68 @@ instance ToJSON RoomLeaveRequest where
                  [Just ("kind" .= _rlrKind),
                   ("reason" .=) <$> _rlrReason,
                   ("leaveDiagnostics" .=) <$> _rlrLeaveDiagnostics])
+
+-- | This is a JSON template for metadata about a player playing a game with
+-- the currently authenticated user.
+--
+-- /See:/ 'played' smart constructor.
+data Played = Played
+    { _pKind        :: !Text
+    , _pAutoMatched :: !(Maybe Bool)
+    , _pTimeMillis  :: !(Maybe Int64)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Played' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pKind'
+--
+-- * 'pAutoMatched'
+--
+-- * 'pTimeMillis'
+played
+    :: Played
+played =
+    Played
+    { _pKind = "games#played"
+    , _pAutoMatched = Nothing
+    , _pTimeMillis = Nothing
+    }
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#played.
+pKind :: Lens' Played Text
+pKind = lens _pKind (\ s a -> s{_pKind = a})
+
+-- | True if the player was auto-matched with the currently authenticated
+-- user.
+pAutoMatched :: Lens' Played (Maybe Bool)
+pAutoMatched
+  = lens _pAutoMatched (\ s a -> s{_pAutoMatched = a})
+
+-- | The last time the player played the game in milliseconds since the epoch
+-- in UTC.
+pTimeMillis :: Lens' Played (Maybe Int64)
+pTimeMillis
+  = lens _pTimeMillis (\ s a -> s{_pTimeMillis = a})
+
+instance FromJSON Played where
+        parseJSON
+          = withObject "Played"
+              (\ o ->
+                 Played <$>
+                   (o .:? "kind" .!= "games#played") <*>
+                     (o .:? "autoMatched")
+                     <*> (o .:? "timeMillis"))
+
+instance ToJSON Played where
+        toJSON Played{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _pKind),
+                  ("autoMatched" .=) <$> _pAutoMatched,
+                  ("timeMillis" .=) <$> _pTimeMillis])
 
 -- | This is a JSON template for an achievement increment response
 --
@@ -6357,67 +6290,209 @@ instance ToJSON AchievementRevealResponse where
                  [Just ("kind" .= _arrKind),
                   ("currentState" .=) <$> _arrCurrentState])
 
--- | This is a JSON template for metadata about a player playing a game with
--- the currently authenticated user.
+-- | This is a JSON template for an achievement set steps at least response.
 --
--- /See:/ 'played' smart constructor.
-data Played = Played
-    { _pKind        :: !Text
-    , _pAutoMatched :: !(Maybe Bool)
-    , _pTimeMillis  :: !(Maybe Int64)
+-- /See:/ 'achievementSetStepsAtLeastResponse' smart constructor.
+data AchievementSetStepsAtLeastResponse = AchievementSetStepsAtLeastResponse
+    { _assalrKind          :: !Text
+    , _assalrNewlyUnlocked :: !(Maybe Bool)
+    , _assalrCurrentSteps  :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Played' with the minimum fields required to make a request.
+-- | Creates a value of 'AchievementSetStepsAtLeastResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pKind'
+-- * 'assalrKind'
 --
--- * 'pAutoMatched'
+-- * 'assalrNewlyUnlocked'
 --
--- * 'pTimeMillis'
-played
-    :: Played
-played =
-    Played
-    { _pKind = "games#played"
-    , _pAutoMatched = Nothing
-    , _pTimeMillis = Nothing
+-- * 'assalrCurrentSteps'
+achievementSetStepsAtLeastResponse
+    :: AchievementSetStepsAtLeastResponse
+achievementSetStepsAtLeastResponse =
+    AchievementSetStepsAtLeastResponse
+    { _assalrKind = "games#achievementSetStepsAtLeastResponse"
+    , _assalrNewlyUnlocked = Nothing
+    , _assalrCurrentSteps = Nothing
     }
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#played.
-pKind :: Lens' Played Text
-pKind = lens _pKind (\ s a -> s{_pKind = a})
+-- string games#achievementSetStepsAtLeastResponse.
+assalrKind :: Lens' AchievementSetStepsAtLeastResponse Text
+assalrKind
+  = lens _assalrKind (\ s a -> s{_assalrKind = a})
 
--- | True if the player was auto-matched with the currently authenticated
--- user.
-pAutoMatched :: Lens' Played (Maybe Bool)
-pAutoMatched
-  = lens _pAutoMatched (\ s a -> s{_pAutoMatched = a})
+-- | Whether the the current steps for the achievement has reached the number
+-- of steps required to unlock.
+assalrNewlyUnlocked :: Lens' AchievementSetStepsAtLeastResponse (Maybe Bool)
+assalrNewlyUnlocked
+  = lens _assalrNewlyUnlocked
+      (\ s a -> s{_assalrNewlyUnlocked = a})
 
--- | The last time the player played the game in milliseconds since the epoch
--- in UTC.
-pTimeMillis :: Lens' Played (Maybe Int64)
-pTimeMillis
-  = lens _pTimeMillis (\ s a -> s{_pTimeMillis = a})
+-- | The current steps recorded for this incremental achievement.
+assalrCurrentSteps :: Lens' AchievementSetStepsAtLeastResponse (Maybe Int32)
+assalrCurrentSteps
+  = lens _assalrCurrentSteps
+      (\ s a -> s{_assalrCurrentSteps = a})
 
-instance FromJSON Played where
+instance FromJSON AchievementSetStepsAtLeastResponse
+         where
         parseJSON
-          = withObject "Played"
+          = withObject "AchievementSetStepsAtLeastResponse"
               (\ o ->
-                 Played <$>
-                   (o .:? "kind" .!= "games#played") <*>
-                     (o .:? "autoMatched")
-                     <*> (o .:? "timeMillis"))
+                 AchievementSetStepsAtLeastResponse <$>
+                   (o .:? "kind" .!=
+                      "games#achievementSetStepsAtLeastResponse")
+                     <*> (o .:? "newlyUnlocked")
+                     <*> (o .:? "currentSteps"))
 
-instance ToJSON Played where
-        toJSON Played{..}
+instance ToJSON AchievementSetStepsAtLeastResponse
+         where
+        toJSON AchievementSetStepsAtLeastResponse{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _pKind),
-                  ("autoMatched" .=) <$> _pAutoMatched,
-                  ("timeMillis" .=) <$> _pTimeMillis])
+                 [Just ("kind" .= _assalrKind),
+                  ("newlyUnlocked" .=) <$> _assalrNewlyUnlocked,
+                  ("currentSteps" .=) <$> _assalrCurrentSteps])
+
+-- | This is a JSON template for a list of achievement objects.
+--
+-- /See:/ 'playerAchievementListResponse' smart constructor.
+data PlayerAchievementListResponse = PlayerAchievementListResponse
+    { _palrNextPageToken :: !(Maybe Text)
+    , _palrKind          :: !Text
+    , _palrItems         :: !(Maybe [PlayerAchievement])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PlayerAchievementListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'palrNextPageToken'
+--
+-- * 'palrKind'
+--
+-- * 'palrItems'
+playerAchievementListResponse
+    :: PlayerAchievementListResponse
+playerAchievementListResponse =
+    PlayerAchievementListResponse
+    { _palrNextPageToken = Nothing
+    , _palrKind = "games#playerAchievementListResponse"
+    , _palrItems = Nothing
+    }
+
+-- | Token corresponding to the next page of results.
+palrNextPageToken :: Lens' PlayerAchievementListResponse (Maybe Text)
+palrNextPageToken
+  = lens _palrNextPageToken
+      (\ s a -> s{_palrNextPageToken = a})
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#playerAchievementListResponse.
+palrKind :: Lens' PlayerAchievementListResponse Text
+palrKind = lens _palrKind (\ s a -> s{_palrKind = a})
+
+-- | The achievements.
+palrItems :: Lens' PlayerAchievementListResponse [PlayerAchievement]
+palrItems
+  = lens _palrItems (\ s a -> s{_palrItems = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON PlayerAchievementListResponse where
+        parseJSON
+          = withObject "PlayerAchievementListResponse"
+              (\ o ->
+                 PlayerAchievementListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "games#playerAchievementListResponse")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON PlayerAchievementListResponse where
+        toJSON PlayerAchievementListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _palrNextPageToken,
+                  Just ("kind" .= _palrKind),
+                  ("items" .=) <$> _palrItems])
+
+-- | This is a JSON template for an event period update resource.
+--
+-- /See:/ 'eventRecordRequest' smart constructor.
+data EventRecordRequest = EventRecordRequest
+    { _errRequestId         :: !(Maybe Int64)
+    , _errKind              :: !Text
+    , _errCurrentTimeMillis :: !(Maybe Int64)
+    , _errTimePeriods       :: !(Maybe [EventPeriodUpdate])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EventRecordRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'errRequestId'
+--
+-- * 'errKind'
+--
+-- * 'errCurrentTimeMillis'
+--
+-- * 'errTimePeriods'
+eventRecordRequest
+    :: EventRecordRequest
+eventRecordRequest =
+    EventRecordRequest
+    { _errRequestId = Nothing
+    , _errKind = "games#eventRecordRequest"
+    , _errCurrentTimeMillis = Nothing
+    , _errTimePeriods = Nothing
+    }
+
+-- | The request ID used to identify this attempt to record events.
+errRequestId :: Lens' EventRecordRequest (Maybe Int64)
+errRequestId
+  = lens _errRequestId (\ s a -> s{_errRequestId = a})
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#eventRecordRequest.
+errKind :: Lens' EventRecordRequest Text
+errKind = lens _errKind (\ s a -> s{_errKind = a})
+
+-- | The current time when this update was sent, in milliseconds, since 1970
+-- UTC (Unix Epoch).
+errCurrentTimeMillis :: Lens' EventRecordRequest (Maybe Int64)
+errCurrentTimeMillis
+  = lens _errCurrentTimeMillis
+      (\ s a -> s{_errCurrentTimeMillis = a})
+
+-- | A list of the time period updates being made in this request.
+errTimePeriods :: Lens' EventRecordRequest [EventPeriodUpdate]
+errTimePeriods
+  = lens _errTimePeriods
+      (\ s a -> s{_errTimePeriods = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON EventRecordRequest where
+        parseJSON
+          = withObject "EventRecordRequest"
+              (\ o ->
+                 EventRecordRequest <$>
+                   (o .:? "requestId") <*>
+                     (o .:? "kind" .!= "games#eventRecordRequest")
+                     <*> (o .:? "currentTimeMillis")
+                     <*> (o .:? "timePeriods" .!= mempty))
+
+instance ToJSON EventRecordRequest where
+        toJSON EventRecordRequest{..}
+          = object
+              (catMaybes
+                 [("requestId" .=) <$> _errRequestId,
+                  Just ("kind" .= _errKind),
+                  ("currentTimeMillis" .=) <$> _errCurrentTimeMillis,
+                  ("timePeriods" .=) <$> _errTimePeriods])
 
 -- | This is a JSON template for a room auto-match criteria object.
 --
@@ -6498,80 +6573,446 @@ instance ToJSON RoomAutoMatchingCriteria where
                   ("minAutoMatchingPlayers" .=) <$>
                     _ramcMinAutoMatchingPlayers])
 
--- | This is a JSON template for aggregate stats.
+-- | This is a JSON template for a Quest Milestone resource.
 --
--- /See:/ 'aggregateStats' smart constructor.
-data AggregateStats = AggregateStats
-    { _asMax   :: !(Maybe Int64)
-    , _asKind  :: !Text
-    , _asCount :: !(Maybe Int64)
-    , _asMin   :: !(Maybe Int64)
-    , _asSum   :: !(Maybe Int64)
+-- /See:/ 'questMilestone' smart constructor.
+data QuestMilestone = QuestMilestone
+    { _qmState                :: !(Maybe Text)
+    , _qmKind                 :: !Text
+    , _qmId                   :: !(Maybe Text)
+    , _qmCompletionRewardData :: !(Maybe Word8)
+    , _qmCriteria             :: !(Maybe [QuestCriterion])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AggregateStats' with the minimum fields required to make a request.
+-- | Creates a value of 'QuestMilestone' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'asMax'
+-- * 'qmState'
 --
--- * 'asKind'
+-- * 'qmKind'
 --
--- * 'asCount'
+-- * 'qmId'
 --
--- * 'asMin'
+-- * 'qmCompletionRewardData'
 --
--- * 'asSum'
-aggregateStats
-    :: AggregateStats
-aggregateStats =
-    AggregateStats
-    { _asMax = Nothing
-    , _asKind = "games#aggregateStats"
-    , _asCount = Nothing
-    , _asMin = Nothing
-    , _asSum = Nothing
+-- * 'qmCriteria'
+questMilestone
+    :: QuestMilestone
+questMilestone =
+    QuestMilestone
+    { _qmState = Nothing
+    , _qmKind = "games#questMilestone"
+    , _qmId = Nothing
+    , _qmCompletionRewardData = Nothing
+    , _qmCriteria = Nothing
     }
 
--- | The maximum amount.
-asMax :: Lens' AggregateStats (Maybe Int64)
-asMax = lens _asMax (\ s a -> s{_asMax = a})
+-- | The current state of the milestone. Possible values are: -
+-- \"COMPLETED_NOT_CLAIMED\" - The milestone is complete, but has not yet
+-- been claimed. - \"CLAIMED\" - The milestone is complete and has been
+-- claimed. - \"NOT_COMPLETED\" - The milestone has not yet been completed.
+-- - \"NOT_STARTED\" - The milestone is for a quest that has not yet been
+-- accepted.
+qmState :: Lens' QuestMilestone (Maybe Text)
+qmState = lens _qmState (\ s a -> s{_qmState = a})
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#aggregateStats.
-asKind :: Lens' AggregateStats Text
-asKind = lens _asKind (\ s a -> s{_asKind = a})
+-- string games#questMilestone.
+qmKind :: Lens' QuestMilestone Text
+qmKind = lens _qmKind (\ s a -> s{_qmKind = a})
 
--- | The number of messages sent between a pair of peers.
-asCount :: Lens' AggregateStats (Maybe Int64)
-asCount = lens _asCount (\ s a -> s{_asCount = a})
+-- | The milestone ID.
+qmId :: Lens' QuestMilestone (Maybe Text)
+qmId = lens _qmId (\ s a -> s{_qmId = a})
 
--- | The minimum amount.
-asMin :: Lens' AggregateStats (Maybe Int64)
-asMin = lens _asMin (\ s a -> s{_asMin = a})
+-- | The completion reward data of the milestone, represented as a
+-- Base64-encoded string. This is a developer-specified binary blob with
+-- size between 0 and 2 KB before encoding.
+qmCompletionRewardData :: Lens' QuestMilestone (Maybe Word8)
+qmCompletionRewardData
+  = lens _qmCompletionRewardData
+      (\ s a -> s{_qmCompletionRewardData = a})
 
--- | The total number of bytes sent for messages between a pair of peers.
-asSum :: Lens' AggregateStats (Maybe Int64)
-asSum = lens _asSum (\ s a -> s{_asSum = a})
+-- | The criteria of the milestone.
+qmCriteria :: Lens' QuestMilestone [QuestCriterion]
+qmCriteria
+  = lens _qmCriteria (\ s a -> s{_qmCriteria = a}) .
+      _Default
+      . _Coerce
 
-instance FromJSON AggregateStats where
+instance FromJSON QuestMilestone where
         parseJSON
-          = withObject "AggregateStats"
+          = withObject "QuestMilestone"
               (\ o ->
-                 AggregateStats <$>
-                   (o .:? "max") <*>
-                     (o .:? "kind" .!= "games#aggregateStats")
-                     <*> (o .:? "count")
-                     <*> (o .:? "min")
-                     <*> (o .:? "sum"))
+                 QuestMilestone <$>
+                   (o .:? "state") <*>
+                     (o .:? "kind" .!= "games#questMilestone")
+                     <*> (o .:? "id")
+                     <*> (o .:? "completionRewardData")
+                     <*> (o .:? "criteria" .!= mempty))
 
-instance ToJSON AggregateStats where
-        toJSON AggregateStats{..}
+instance ToJSON QuestMilestone where
+        toJSON QuestMilestone{..}
           = object
               (catMaybes
-                 [("max" .=) <$> _asMax, Just ("kind" .= _asKind),
-                  ("count" .=) <$> _asCount, ("min" .=) <$> _asMin,
-                  ("sum" .=) <$> _asSum])
+                 [("state" .=) <$> _qmState, Just ("kind" .= _qmKind),
+                  ("id" .=) <$> _qmId,
+                  ("completionRewardData" .=) <$>
+                    _qmCompletionRewardData,
+                  ("criteria" .=) <$> _qmCriteria])
+
+-- | This is a JSON template for peer session diagnostics.
+--
+-- /See:/ 'peerSessionDiagnostics' smart constructor.
+data PeerSessionDiagnostics = PeerSessionDiagnostics
+    { _psdConnectedTimestampMillis :: !(Maybe Int64)
+    , _psdParticipantId            :: !(Maybe Text)
+    , _psdKind                     :: !Text
+    , _psdUnreliableChannel        :: !(Maybe PeerChannelDiagnostics)
+    , _psdReliableChannel          :: !(Maybe PeerChannelDiagnostics)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PeerSessionDiagnostics' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'psdConnectedTimestampMillis'
+--
+-- * 'psdParticipantId'
+--
+-- * 'psdKind'
+--
+-- * 'psdUnreliableChannel'
+--
+-- * 'psdReliableChannel'
+peerSessionDiagnostics
+    :: PeerSessionDiagnostics
+peerSessionDiagnostics =
+    PeerSessionDiagnostics
+    { _psdConnectedTimestampMillis = Nothing
+    , _psdParticipantId = Nothing
+    , _psdKind = "games#peerSessionDiagnostics"
+    , _psdUnreliableChannel = Nothing
+    , _psdReliableChannel = Nothing
+    }
+
+-- | Connected time in milliseconds.
+psdConnectedTimestampMillis :: Lens' PeerSessionDiagnostics (Maybe Int64)
+psdConnectedTimestampMillis
+  = lens _psdConnectedTimestampMillis
+      (\ s a -> s{_psdConnectedTimestampMillis = a})
+
+-- | The participant ID of the peer.
+psdParticipantId :: Lens' PeerSessionDiagnostics (Maybe Text)
+psdParticipantId
+  = lens _psdParticipantId
+      (\ s a -> s{_psdParticipantId = a})
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#peerSessionDiagnostics.
+psdKind :: Lens' PeerSessionDiagnostics Text
+psdKind = lens _psdKind (\ s a -> s{_psdKind = a})
+
+-- | Unreliable channel diagnostics.
+psdUnreliableChannel :: Lens' PeerSessionDiagnostics (Maybe PeerChannelDiagnostics)
+psdUnreliableChannel
+  = lens _psdUnreliableChannel
+      (\ s a -> s{_psdUnreliableChannel = a})
+
+-- | Reliable channel diagnostics.
+psdReliableChannel :: Lens' PeerSessionDiagnostics (Maybe PeerChannelDiagnostics)
+psdReliableChannel
+  = lens _psdReliableChannel
+      (\ s a -> s{_psdReliableChannel = a})
+
+instance FromJSON PeerSessionDiagnostics where
+        parseJSON
+          = withObject "PeerSessionDiagnostics"
+              (\ o ->
+                 PeerSessionDiagnostics <$>
+                   (o .:? "connectedTimestampMillis") <*>
+                     (o .:? "participantId")
+                     <*> (o .:? "kind" .!= "games#peerSessionDiagnostics")
+                     <*> (o .:? "unreliableChannel")
+                     <*> (o .:? "reliableChannel"))
+
+instance ToJSON PeerSessionDiagnostics where
+        toJSON PeerSessionDiagnostics{..}
+          = object
+              (catMaybes
+                 [("connectedTimestampMillis" .=) <$>
+                    _psdConnectedTimestampMillis,
+                  ("participantId" .=) <$> _psdParticipantId,
+                  Just ("kind" .= _psdKind),
+                  ("unreliableChannel" .=) <$> _psdUnreliableChannel,
+                  ("reliableChannel" .=) <$> _psdReliableChannel])
+
+-- | This is a JSON template for a push token ID resource.
+--
+-- /See:/ 'pushTokenId' smart constructor.
+data PushTokenId = PushTokenId
+    { _ptiIos  :: !(Maybe PushTokenIdIos)
+    , _ptiKind :: !Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PushTokenId' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ptiIos'
+--
+-- * 'ptiKind'
+pushTokenId
+    :: PushTokenId
+pushTokenId =
+    PushTokenId
+    { _ptiIos = Nothing
+    , _ptiKind = "games#pushTokenId"
+    }
+
+-- | A push token ID for iOS devices.
+ptiIos :: Lens' PushTokenId (Maybe PushTokenIdIos)
+ptiIos = lens _ptiIos (\ s a -> s{_ptiIos = a})
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#pushTokenId.
+ptiKind :: Lens' PushTokenId Text
+ptiKind = lens _ptiKind (\ s a -> s{_ptiKind = a})
+
+instance FromJSON PushTokenId where
+        parseJSON
+          = withObject "PushTokenId"
+              (\ o ->
+                 PushTokenId <$>
+                   (o .:? "ios") <*>
+                     (o .:? "kind" .!= "games#pushTokenId"))
+
+instance ToJSON PushTokenId where
+        toJSON PushTokenId{..}
+          = object
+              (catMaybes
+                 [("ios" .=) <$> _ptiIos, Just ("kind" .= _ptiKind)])
+
+-- | This is a JSON template for an event period update resource.
+--
+-- /See:/ 'eventPeriodUpdate' smart constructor.
+data EventPeriodUpdate = EventPeriodUpdate
+    { _epuKind       :: !Text
+    , _epuTimePeriod :: !(Maybe EventPeriodRange)
+    , _epuUpdates    :: !(Maybe [EventUpdateRequest])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EventPeriodUpdate' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'epuKind'
+--
+-- * 'epuTimePeriod'
+--
+-- * 'epuUpdates'
+eventPeriodUpdate
+    :: EventPeriodUpdate
+eventPeriodUpdate =
+    EventPeriodUpdate
+    { _epuKind = "games#eventPeriodUpdate"
+    , _epuTimePeriod = Nothing
+    , _epuUpdates = Nothing
+    }
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#eventPeriodUpdate.
+epuKind :: Lens' EventPeriodUpdate Text
+epuKind = lens _epuKind (\ s a -> s{_epuKind = a})
+
+-- | The time period being covered by this update.
+epuTimePeriod :: Lens' EventPeriodUpdate (Maybe EventPeriodRange)
+epuTimePeriod
+  = lens _epuTimePeriod
+      (\ s a -> s{_epuTimePeriod = a})
+
+-- | The updates being made for this time period.
+epuUpdates :: Lens' EventPeriodUpdate [EventUpdateRequest]
+epuUpdates
+  = lens _epuUpdates (\ s a -> s{_epuUpdates = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON EventPeriodUpdate where
+        parseJSON
+          = withObject "EventPeriodUpdate"
+              (\ o ->
+                 EventPeriodUpdate <$>
+                   (o .:? "kind" .!= "games#eventPeriodUpdate") <*>
+                     (o .:? "timePeriod")
+                     <*> (o .:? "updates" .!= mempty))
+
+instance ToJSON EventPeriodUpdate where
+        toJSON EventPeriodUpdate{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _epuKind),
+                  ("timePeriod" .=) <$> _epuTimePeriod,
+                  ("updates" .=) <$> _epuUpdates])
+
+-- | This is a JSON template for a list of turn-based matches returned from a
+-- sync.
+--
+-- /See:/ 'turnBasedMatchSync' smart constructor.
+data TurnBasedMatchSync = TurnBasedMatchSync
+    { _tbmsMoreAvailable :: !(Maybe Bool)
+    , _tbmsNextPageToken :: !(Maybe Text)
+    , _tbmsKind          :: !Text
+    , _tbmsItems         :: !(Maybe [TurnBasedMatch])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TurnBasedMatchSync' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tbmsMoreAvailable'
+--
+-- * 'tbmsNextPageToken'
+--
+-- * 'tbmsKind'
+--
+-- * 'tbmsItems'
+turnBasedMatchSync
+    :: TurnBasedMatchSync
+turnBasedMatchSync =
+    TurnBasedMatchSync
+    { _tbmsMoreAvailable = Nothing
+    , _tbmsNextPageToken = Nothing
+    , _tbmsKind = "games#turnBasedMatchSync"
+    , _tbmsItems = Nothing
+    }
+
+-- | True if there were more matches available to fetch at the time the
+-- response was generated (which were not returned due to page size
+-- limits.)
+tbmsMoreAvailable :: Lens' TurnBasedMatchSync (Maybe Bool)
+tbmsMoreAvailable
+  = lens _tbmsMoreAvailable
+      (\ s a -> s{_tbmsMoreAvailable = a})
+
+-- | The pagination token for the next page of results.
+tbmsNextPageToken :: Lens' TurnBasedMatchSync (Maybe Text)
+tbmsNextPageToken
+  = lens _tbmsNextPageToken
+      (\ s a -> s{_tbmsNextPageToken = a})
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#turnBasedMatchSync.
+tbmsKind :: Lens' TurnBasedMatchSync Text
+tbmsKind = lens _tbmsKind (\ s a -> s{_tbmsKind = a})
+
+-- | The matches.
+tbmsItems :: Lens' TurnBasedMatchSync [TurnBasedMatch]
+tbmsItems
+  = lens _tbmsItems (\ s a -> s{_tbmsItems = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON TurnBasedMatchSync where
+        parseJSON
+          = withObject "TurnBasedMatchSync"
+              (\ o ->
+                 TurnBasedMatchSync <$>
+                   (o .:? "moreAvailable") <*> (o .:? "nextPageToken")
+                     <*> (o .:? "kind" .!= "games#turnBasedMatchSync")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON TurnBasedMatchSync where
+        toJSON TurnBasedMatchSync{..}
+          = object
+              (catMaybes
+                 [("moreAvailable" .=) <$> _tbmsMoreAvailable,
+                  ("nextPageToken" .=) <$> _tbmsNextPageToken,
+                  Just ("kind" .= _tbmsKind),
+                  ("items" .=) <$> _tbmsItems])
+
+-- | This is a JSON template for a request to submit a score to leaderboards.
+--
+-- /See:/ 'scoreSubmission' smart constructor.
+data ScoreSubmission = ScoreSubmission
+    { _scoSignature     :: !(Maybe Text)
+    , _scoScoreTag      :: !(Maybe Text)
+    , _scoScore         :: !(Maybe Int64)
+    , _scoKind          :: !Text
+    , _scoLeaderboardId :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ScoreSubmission' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'scoSignature'
+--
+-- * 'scoScoreTag'
+--
+-- * 'scoScore'
+--
+-- * 'scoKind'
+--
+-- * 'scoLeaderboardId'
+scoreSubmission
+    :: ScoreSubmission
+scoreSubmission =
+    ScoreSubmission
+    { _scoSignature = Nothing
+    , _scoScoreTag = Nothing
+    , _scoScore = Nothing
+    , _scoKind = "games#scoreSubmission"
+    , _scoLeaderboardId = Nothing
+    }
+
+-- | Signature Values will contain URI-safe characters as defined by section
+-- 2.3 of RFC 3986.
+scoSignature :: Lens' ScoreSubmission (Maybe Text)
+scoSignature
+  = lens _scoSignature (\ s a -> s{_scoSignature = a})
+
+-- | Additional information about this score. Values will contain no more
+-- than 64 URI-safe characters as defined by section 2.3 of RFC 3986.
+scoScoreTag :: Lens' ScoreSubmission (Maybe Text)
+scoScoreTag
+  = lens _scoScoreTag (\ s a -> s{_scoScoreTag = a})
+
+-- | The new score being submitted.
+scoScore :: Lens' ScoreSubmission (Maybe Int64)
+scoScore = lens _scoScore (\ s a -> s{_scoScore = a})
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#scoreSubmission.
+scoKind :: Lens' ScoreSubmission Text
+scoKind = lens _scoKind (\ s a -> s{_scoKind = a})
+
+-- | The leaderboard this score is being submitted to.
+scoLeaderboardId :: Lens' ScoreSubmission (Maybe Text)
+scoLeaderboardId
+  = lens _scoLeaderboardId
+      (\ s a -> s{_scoLeaderboardId = a})
+
+instance FromJSON ScoreSubmission where
+        parseJSON
+          = withObject "ScoreSubmission"
+              (\ o ->
+                 ScoreSubmission <$>
+                   (o .:? "signature") <*> (o .:? "scoreTag") <*>
+                     (o .:? "score")
+                     <*> (o .:? "kind" .!= "games#scoreSubmission")
+                     <*> (o .:? "leaderboardId"))
+
+instance ToJSON ScoreSubmission where
+        toJSON ScoreSubmission{..}
+          = object
+              (catMaybes
+                 [("signature" .=) <$> _scoSignature,
+                  ("scoreTag" .=) <$> _scoScoreTag,
+                  ("score" .=) <$> _scoScore,
+                  Just ("kind" .= _scoKind),
+                  ("leaderboardId" .=) <$> _scoLeaderboardId])
 
 -- | This is a JSON template for room leave diagnostics.
 --
@@ -6707,631 +7148,200 @@ instance ToJSON RoomLeaveDiagnostics where
                   ("androidNetworkSubtype" .=) <$>
                     _rldAndroidNetworkSubtype])
 
--- | This is a JSON template for a list of turn-based matches returned from a
--- sync.
+-- | This is a JSON template for aggregate stats.
 --
--- /See:/ 'turnBasedMatchSync' smart constructor.
-data TurnBasedMatchSync = TurnBasedMatchSync
-    { _tbmsMoreAvailable :: !(Maybe Bool)
-    , _tbmsNextPageToken :: !(Maybe Text)
-    , _tbmsKind          :: !Text
-    , _tbmsItems         :: !(Maybe [TurnBasedMatch])
+-- /See:/ 'aggregateStats' smart constructor.
+data AggregateStats = AggregateStats
+    { _asMax   :: !(Maybe Int64)
+    , _asKind  :: !Text
+    , _asCount :: !(Maybe Int64)
+    , _asMin   :: !(Maybe Int64)
+    , _asSum   :: !(Maybe Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TurnBasedMatchSync' with the minimum fields required to make a request.
+-- | Creates a value of 'AggregateStats' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tbmsMoreAvailable'
+-- * 'asMax'
 --
--- * 'tbmsNextPageToken'
+-- * 'asKind'
 --
--- * 'tbmsKind'
+-- * 'asCount'
 --
--- * 'tbmsItems'
-turnBasedMatchSync
-    :: TurnBasedMatchSync
-turnBasedMatchSync =
-    TurnBasedMatchSync
-    { _tbmsMoreAvailable = Nothing
-    , _tbmsNextPageToken = Nothing
-    , _tbmsKind = "games#turnBasedMatchSync"
-    , _tbmsItems = Nothing
+-- * 'asMin'
+--
+-- * 'asSum'
+aggregateStats
+    :: AggregateStats
+aggregateStats =
+    AggregateStats
+    { _asMax = Nothing
+    , _asKind = "games#aggregateStats"
+    , _asCount = Nothing
+    , _asMin = Nothing
+    , _asSum = Nothing
     }
 
--- | True if there were more matches available to fetch at the time the
--- response was generated (which were not returned due to page size
--- limits.)
-tbmsMoreAvailable :: Lens' TurnBasedMatchSync (Maybe Bool)
-tbmsMoreAvailable
-  = lens _tbmsMoreAvailable
-      (\ s a -> s{_tbmsMoreAvailable = a})
-
--- | The pagination token for the next page of results.
-tbmsNextPageToken :: Lens' TurnBasedMatchSync (Maybe Text)
-tbmsNextPageToken
-  = lens _tbmsNextPageToken
-      (\ s a -> s{_tbmsNextPageToken = a})
+-- | The maximum amount.
+asMax :: Lens' AggregateStats (Maybe Int64)
+asMax = lens _asMax (\ s a -> s{_asMax = a})
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#turnBasedMatchSync.
-tbmsKind :: Lens' TurnBasedMatchSync Text
-tbmsKind = lens _tbmsKind (\ s a -> s{_tbmsKind = a})
+-- string games#aggregateStats.
+asKind :: Lens' AggregateStats Text
+asKind = lens _asKind (\ s a -> s{_asKind = a})
 
--- | The matches.
-tbmsItems :: Lens' TurnBasedMatchSync [TurnBasedMatch]
-tbmsItems
-  = lens _tbmsItems (\ s a -> s{_tbmsItems = a}) .
-      _Default
-      . _Coerce
+-- | The number of messages sent between a pair of peers.
+asCount :: Lens' AggregateStats (Maybe Int64)
+asCount = lens _asCount (\ s a -> s{_asCount = a})
 
-instance FromJSON TurnBasedMatchSync where
+-- | The minimum amount.
+asMin :: Lens' AggregateStats (Maybe Int64)
+asMin = lens _asMin (\ s a -> s{_asMin = a})
+
+-- | The total number of bytes sent for messages between a pair of peers.
+asSum :: Lens' AggregateStats (Maybe Int64)
+asSum = lens _asSum (\ s a -> s{_asSum = a})
+
+instance FromJSON AggregateStats where
         parseJSON
-          = withObject "TurnBasedMatchSync"
+          = withObject "AggregateStats"
               (\ o ->
-                 TurnBasedMatchSync <$>
-                   (o .:? "moreAvailable") <*> (o .:? "nextPageToken")
-                     <*> (o .:? "kind" .!= "games#turnBasedMatchSync")
-                     <*> (o .:? "items" .!= mempty))
+                 AggregateStats <$>
+                   (o .:? "max") <*>
+                     (o .:? "kind" .!= "games#aggregateStats")
+                     <*> (o .:? "count")
+                     <*> (o .:? "min")
+                     <*> (o .:? "sum"))
 
-instance ToJSON TurnBasedMatchSync where
-        toJSON TurnBasedMatchSync{..}
+instance ToJSON AggregateStats where
+        toJSON AggregateStats{..}
           = object
               (catMaybes
-                 [("moreAvailable" .=) <$> _tbmsMoreAvailable,
-                  ("nextPageToken" .=) <$> _tbmsNextPageToken,
-                  Just ("kind" .= _tbmsKind),
-                  ("items" .=) <$> _tbmsItems])
+                 [("max" .=) <$> _asMax, Just ("kind" .= _asKind),
+                  ("count" .=) <$> _asCount, ("min" .=) <$> _asMin,
+                  ("sum" .=) <$> _asSum])
 
--- | This is a JSON template for a Quest Milestone resource.
+-- | This is a JSON template for the Web details resource.
 --
--- /See:/ 'questMilestone' smart constructor.
-data QuestMilestone = QuestMilestone
-    { _qmState                :: !(Maybe Text)
-    , _qmKind                 :: !Text
-    , _qmId                   :: !(Maybe Text)
-    , _qmCompletionRewardData :: !(Maybe Word8)
-    , _qmCriteria             :: !(Maybe [QuestCriterion])
+-- /See:/ 'instanceWebDetails' smart constructor.
+data InstanceWebDetails = InstanceWebDetails
+    { _iwdPreferred :: !(Maybe Bool)
+    , _iwdKind      :: !Text
+    , _iwdLaunchURL :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'QuestMilestone' with the minimum fields required to make a request.
+-- | Creates a value of 'InstanceWebDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'qmState'
+-- * 'iwdPreferred'
 --
--- * 'qmKind'
+-- * 'iwdKind'
 --
--- * 'qmId'
---
--- * 'qmCompletionRewardData'
---
--- * 'qmCriteria'
-questMilestone
-    :: QuestMilestone
-questMilestone =
-    QuestMilestone
-    { _qmState = Nothing
-    , _qmKind = "games#questMilestone"
-    , _qmId = Nothing
-    , _qmCompletionRewardData = Nothing
-    , _qmCriteria = Nothing
+-- * 'iwdLaunchURL'
+instanceWebDetails
+    :: InstanceWebDetails
+instanceWebDetails =
+    InstanceWebDetails
+    { _iwdPreferred = Nothing
+    , _iwdKind = "games#instanceWebDetails"
+    , _iwdLaunchURL = Nothing
     }
 
--- | The current state of the milestone. Possible values are: -
--- \"COMPLETED_NOT_CLAIMED\" - The milestone is complete, but has not yet
--- been claimed. - \"CLAIMED\" - The milestone is complete and has been
--- claimed. - \"NOT_COMPLETED\" - The milestone has not yet been completed.
--- - \"NOT_STARTED\" - The milestone is for a quest that has not yet been
--- accepted.
-qmState :: Lens' QuestMilestone (Maybe Text)
-qmState = lens _qmState (\ s a -> s{_qmState = a})
+-- | Indicates that this instance is the default for new installations.
+iwdPreferred :: Lens' InstanceWebDetails (Maybe Bool)
+iwdPreferred
+  = lens _iwdPreferred (\ s a -> s{_iwdPreferred = a})
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#questMilestone.
-qmKind :: Lens' QuestMilestone Text
-qmKind = lens _qmKind (\ s a -> s{_qmKind = a})
+-- string games#instanceWebDetails.
+iwdKind :: Lens' InstanceWebDetails Text
+iwdKind = lens _iwdKind (\ s a -> s{_iwdKind = a})
 
--- | The milestone ID.
-qmId :: Lens' QuestMilestone (Maybe Text)
-qmId = lens _qmId (\ s a -> s{_qmId = a})
+-- | Launch URL for the game.
+iwdLaunchURL :: Lens' InstanceWebDetails (Maybe Text)
+iwdLaunchURL
+  = lens _iwdLaunchURL (\ s a -> s{_iwdLaunchURL = a})
 
--- | The completion reward data of the milestone, represented as a
--- Base64-encoded string. This is a developer-specified binary blob with
--- size between 0 and 2 KB before encoding.
-qmCompletionRewardData :: Lens' QuestMilestone (Maybe Word8)
-qmCompletionRewardData
-  = lens _qmCompletionRewardData
-      (\ s a -> s{_qmCompletionRewardData = a})
-
--- | The criteria of the milestone.
-qmCriteria :: Lens' QuestMilestone [QuestCriterion]
-qmCriteria
-  = lens _qmCriteria (\ s a -> s{_qmCriteria = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON QuestMilestone where
+instance FromJSON InstanceWebDetails where
         parseJSON
-          = withObject "QuestMilestone"
+          = withObject "InstanceWebDetails"
               (\ o ->
-                 QuestMilestone <$>
-                   (o .:? "state") <*>
-                     (o .:? "kind" .!= "games#questMilestone")
-                     <*> (o .:? "id")
-                     <*> (o .:? "completionRewardData")
-                     <*> (o .:? "criteria" .!= mempty))
+                 InstanceWebDetails <$>
+                   (o .:? "preferred") <*>
+                     (o .:? "kind" .!= "games#instanceWebDetails")
+                     <*> (o .:? "launchUrl"))
 
-instance ToJSON QuestMilestone where
-        toJSON QuestMilestone{..}
+instance ToJSON InstanceWebDetails where
+        toJSON InstanceWebDetails{..}
           = object
               (catMaybes
-                 [("state" .=) <$> _qmState, Just ("kind" .= _qmKind),
-                  ("id" .=) <$> _qmId,
-                  ("completionRewardData" .=) <$>
-                    _qmCompletionRewardData,
-                  ("criteria" .=) <$> _qmCriteria])
+                 [("preferred" .=) <$> _iwdPreferred,
+                  Just ("kind" .= _iwdKind),
+                  ("launchUrl" .=) <$> _iwdLaunchURL])
 
--- | This is a JSON template for a push token ID resource.
+-- | This is a JSON template for a rematch response.
 --
--- /See:/ 'pushTokenId' smart constructor.
-data PushTokenId = PushTokenId
-    { _ptiIos  :: !(Maybe Ios)
-    , _ptiKind :: !Text
+-- /See:/ 'turnBasedMatchRematch' smart constructor.
+data TurnBasedMatchRematch = TurnBasedMatchRematch
+    { _tRematch       :: !(Maybe TurnBasedMatch)
+    , _tKind          :: !Text
+    , _tPreviousMatch :: !(Maybe TurnBasedMatch)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PushTokenId' with the minimum fields required to make a request.
+-- | Creates a value of 'TurnBasedMatchRematch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ptiIos'
+-- * 'tRematch'
 --
--- * 'ptiKind'
-pushTokenId
-    :: PushTokenId
-pushTokenId =
-    PushTokenId
-    { _ptiIos = Nothing
-    , _ptiKind = "games#pushTokenId"
+-- * 'tKind'
+--
+-- * 'tPreviousMatch'
+turnBasedMatchRematch
+    :: TurnBasedMatchRematch
+turnBasedMatchRematch =
+    TurnBasedMatchRematch
+    { _tRematch = Nothing
+    , _tKind = "games#turnBasedMatchRematch"
+    , _tPreviousMatch = Nothing
     }
 
--- | A push token ID for iOS devices.
-ptiIos :: Lens' PushTokenId (Maybe Ios)
-ptiIos = lens _ptiIos (\ s a -> s{_ptiIos = a})
+-- | The newly created match; a rematch of the old match with the same
+-- participants.
+tRematch :: Lens' TurnBasedMatchRematch (Maybe TurnBasedMatch)
+tRematch = lens _tRematch (\ s a -> s{_tRematch = a})
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#pushTokenId.
-ptiKind :: Lens' PushTokenId Text
-ptiKind = lens _ptiKind (\ s a -> s{_ptiKind = a})
+-- string games#turnBasedMatchRematch.
+tKind :: Lens' TurnBasedMatchRematch Text
+tKind = lens _tKind (\ s a -> s{_tKind = a})
 
-instance FromJSON PushTokenId where
+-- | The old match that the rematch was created from; will be updated such
+-- that the rematchId field will point at the new match.
+tPreviousMatch :: Lens' TurnBasedMatchRematch (Maybe TurnBasedMatch)
+tPreviousMatch
+  = lens _tPreviousMatch
+      (\ s a -> s{_tPreviousMatch = a})
+
+instance FromJSON TurnBasedMatchRematch where
         parseJSON
-          = withObject "PushTokenId"
+          = withObject "TurnBasedMatchRematch"
               (\ o ->
-                 PushTokenId <$>
-                   (o .:? "ios") <*>
-                     (o .:? "kind" .!= "games#pushTokenId"))
+                 TurnBasedMatchRematch <$>
+                   (o .:? "rematch") <*>
+                     (o .:? "kind" .!= "games#turnBasedMatchRematch")
+                     <*> (o .:? "previousMatch"))
 
-instance ToJSON PushTokenId where
-        toJSON PushTokenId{..}
+instance ToJSON TurnBasedMatchRematch where
+        toJSON TurnBasedMatchRematch{..}
           = object
               (catMaybes
-                 [("ios" .=) <$> _ptiIos, Just ("kind" .= _ptiKind)])
-
--- | This is a JSON template for an event period update resource.
---
--- /See:/ 'eventRecordRequest' smart constructor.
-data EventRecordRequest = EventRecordRequest
-    { _errRequestId         :: !(Maybe Int64)
-    , _errKind              :: !Text
-    , _errCurrentTimeMillis :: !(Maybe Int64)
-    , _errTimePeriods       :: !(Maybe [EventPeriodUpdate])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'EventRecordRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'errRequestId'
---
--- * 'errKind'
---
--- * 'errCurrentTimeMillis'
---
--- * 'errTimePeriods'
-eventRecordRequest
-    :: EventRecordRequest
-eventRecordRequest =
-    EventRecordRequest
-    { _errRequestId = Nothing
-    , _errKind = "games#eventRecordRequest"
-    , _errCurrentTimeMillis = Nothing
-    , _errTimePeriods = Nothing
-    }
-
--- | The request ID used to identify this attempt to record events.
-errRequestId :: Lens' EventRecordRequest (Maybe Int64)
-errRequestId
-  = lens _errRequestId (\ s a -> s{_errRequestId = a})
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#eventRecordRequest.
-errKind :: Lens' EventRecordRequest Text
-errKind = lens _errKind (\ s a -> s{_errKind = a})
-
--- | The current time when this update was sent, in milliseconds, since 1970
--- UTC (Unix Epoch).
-errCurrentTimeMillis :: Lens' EventRecordRequest (Maybe Int64)
-errCurrentTimeMillis
-  = lens _errCurrentTimeMillis
-      (\ s a -> s{_errCurrentTimeMillis = a})
-
--- | A list of the time period updates being made in this request.
-errTimePeriods :: Lens' EventRecordRequest [EventPeriodUpdate]
-errTimePeriods
-  = lens _errTimePeriods
-      (\ s a -> s{_errTimePeriods = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON EventRecordRequest where
-        parseJSON
-          = withObject "EventRecordRequest"
-              (\ o ->
-                 EventRecordRequest <$>
-                   (o .:? "requestId") <*>
-                     (o .:? "kind" .!= "games#eventRecordRequest")
-                     <*> (o .:? "currentTimeMillis")
-                     <*> (o .:? "timePeriods" .!= mempty))
-
-instance ToJSON EventRecordRequest where
-        toJSON EventRecordRequest{..}
-          = object
-              (catMaybes
-                 [("requestId" .=) <$> _errRequestId,
-                  Just ("kind" .= _errKind),
-                  ("currentTimeMillis" .=) <$> _errCurrentTimeMillis,
-                  ("timePeriods" .=) <$> _errTimePeriods])
-
--- | This is a JSON template for a request to submit a score to leaderboards.
---
--- /See:/ 'scoreSubmission' smart constructor.
-data ScoreSubmission = ScoreSubmission
-    { _ssSignature     :: !(Maybe Text)
-    , _ssScoreTag      :: !(Maybe Text)
-    , _ssScore         :: !(Maybe Int64)
-    , _ssKind          :: !Text
-    , _ssLeaderboardId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ScoreSubmission' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ssSignature'
---
--- * 'ssScoreTag'
---
--- * 'ssScore'
---
--- * 'ssKind'
---
--- * 'ssLeaderboardId'
-scoreSubmission
-    :: ScoreSubmission
-scoreSubmission =
-    ScoreSubmission
-    { _ssSignature = Nothing
-    , _ssScoreTag = Nothing
-    , _ssScore = Nothing
-    , _ssKind = "games#scoreSubmission"
-    , _ssLeaderboardId = Nothing
-    }
-
--- | Signature Values will contain URI-safe characters as defined by section
--- 2.3 of RFC 3986.
-ssSignature :: Lens' ScoreSubmission (Maybe Text)
-ssSignature
-  = lens _ssSignature (\ s a -> s{_ssSignature = a})
-
--- | Additional information about this score. Values will contain no more
--- than 64 URI-safe characters as defined by section 2.3 of RFC 3986.
-ssScoreTag :: Lens' ScoreSubmission (Maybe Text)
-ssScoreTag
-  = lens _ssScoreTag (\ s a -> s{_ssScoreTag = a})
-
--- | The new score being submitted.
-ssScore :: Lens' ScoreSubmission (Maybe Int64)
-ssScore = lens _ssScore (\ s a -> s{_ssScore = a})
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#scoreSubmission.
-ssKind :: Lens' ScoreSubmission Text
-ssKind = lens _ssKind (\ s a -> s{_ssKind = a})
-
--- | The leaderboard this score is being submitted to.
-ssLeaderboardId :: Lens' ScoreSubmission (Maybe Text)
-ssLeaderboardId
-  = lens _ssLeaderboardId
-      (\ s a -> s{_ssLeaderboardId = a})
-
-instance FromJSON ScoreSubmission where
-        parseJSON
-          = withObject "ScoreSubmission"
-              (\ o ->
-                 ScoreSubmission <$>
-                   (o .:? "signature") <*> (o .:? "scoreTag") <*>
-                     (o .:? "score")
-                     <*> (o .:? "kind" .!= "games#scoreSubmission")
-                     <*> (o .:? "leaderboardId"))
-
-instance ToJSON ScoreSubmission where
-        toJSON ScoreSubmission{..}
-          = object
-              (catMaybes
-                 [("signature" .=) <$> _ssSignature,
-                  ("scoreTag" .=) <$> _ssScoreTag,
-                  ("score" .=) <$> _ssScore, Just ("kind" .= _ssKind),
-                  ("leaderboardId" .=) <$> _ssLeaderboardId])
-
--- | This is a JSON template for peer session diagnostics.
---
--- /See:/ 'peerSessionDiagnostics' smart constructor.
-data PeerSessionDiagnostics = PeerSessionDiagnostics
-    { _psdConnectedTimestampMillis :: !(Maybe Int64)
-    , _psdParticipantId            :: !(Maybe Text)
-    , _psdKind                     :: !Text
-    , _psdUnreliableChannel        :: !(Maybe PeerChannelDiagnostics)
-    , _psdReliableChannel          :: !(Maybe PeerChannelDiagnostics)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PeerSessionDiagnostics' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'psdConnectedTimestampMillis'
---
--- * 'psdParticipantId'
---
--- * 'psdKind'
---
--- * 'psdUnreliableChannel'
---
--- * 'psdReliableChannel'
-peerSessionDiagnostics
-    :: PeerSessionDiagnostics
-peerSessionDiagnostics =
-    PeerSessionDiagnostics
-    { _psdConnectedTimestampMillis = Nothing
-    , _psdParticipantId = Nothing
-    , _psdKind = "games#peerSessionDiagnostics"
-    , _psdUnreliableChannel = Nothing
-    , _psdReliableChannel = Nothing
-    }
-
--- | Connected time in milliseconds.
-psdConnectedTimestampMillis :: Lens' PeerSessionDiagnostics (Maybe Int64)
-psdConnectedTimestampMillis
-  = lens _psdConnectedTimestampMillis
-      (\ s a -> s{_psdConnectedTimestampMillis = a})
-
--- | The participant ID of the peer.
-psdParticipantId :: Lens' PeerSessionDiagnostics (Maybe Text)
-psdParticipantId
-  = lens _psdParticipantId
-      (\ s a -> s{_psdParticipantId = a})
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#peerSessionDiagnostics.
-psdKind :: Lens' PeerSessionDiagnostics Text
-psdKind = lens _psdKind (\ s a -> s{_psdKind = a})
-
--- | Unreliable channel diagnostics.
-psdUnreliableChannel :: Lens' PeerSessionDiagnostics (Maybe PeerChannelDiagnostics)
-psdUnreliableChannel
-  = lens _psdUnreliableChannel
-      (\ s a -> s{_psdUnreliableChannel = a})
-
--- | Reliable channel diagnostics.
-psdReliableChannel :: Lens' PeerSessionDiagnostics (Maybe PeerChannelDiagnostics)
-psdReliableChannel
-  = lens _psdReliableChannel
-      (\ s a -> s{_psdReliableChannel = a})
-
-instance FromJSON PeerSessionDiagnostics where
-        parseJSON
-          = withObject "PeerSessionDiagnostics"
-              (\ o ->
-                 PeerSessionDiagnostics <$>
-                   (o .:? "connectedTimestampMillis") <*>
-                     (o .:? "participantId")
-                     <*> (o .:? "kind" .!= "games#peerSessionDiagnostics")
-                     <*> (o .:? "unreliableChannel")
-                     <*> (o .:? "reliableChannel"))
-
-instance ToJSON PeerSessionDiagnostics where
-        toJSON PeerSessionDiagnostics{..}
-          = object
-              (catMaybes
-                 [("connectedTimestampMillis" .=) <$>
-                    _psdConnectedTimestampMillis,
-                  ("participantId" .=) <$> _psdParticipantId,
-                  Just ("kind" .= _psdKind),
-                  ("unreliableChannel" .=) <$> _psdUnreliableChannel,
-                  ("reliableChannel" .=) <$> _psdReliableChannel])
-
--- | This is a JSON template for an event period update resource.
---
--- /See:/ 'eventPeriodUpdate' smart constructor.
-data EventPeriodUpdate = EventPeriodUpdate
-    { _epuKind       :: !Text
-    , _epuTimePeriod :: !(Maybe EventPeriodRange)
-    , _epuUpdates    :: !(Maybe [EventUpdateRequest])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'EventPeriodUpdate' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'epuKind'
---
--- * 'epuTimePeriod'
---
--- * 'epuUpdates'
-eventPeriodUpdate
-    :: EventPeriodUpdate
-eventPeriodUpdate =
-    EventPeriodUpdate
-    { _epuKind = "games#eventPeriodUpdate"
-    , _epuTimePeriod = Nothing
-    , _epuUpdates = Nothing
-    }
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#eventPeriodUpdate.
-epuKind :: Lens' EventPeriodUpdate Text
-epuKind = lens _epuKind (\ s a -> s{_epuKind = a})
-
--- | The time period being covered by this update.
-epuTimePeriod :: Lens' EventPeriodUpdate (Maybe EventPeriodRange)
-epuTimePeriod
-  = lens _epuTimePeriod
-      (\ s a -> s{_epuTimePeriod = a})
-
--- | The updates being made for this time period.
-epuUpdates :: Lens' EventPeriodUpdate [EventUpdateRequest]
-epuUpdates
-  = lens _epuUpdates (\ s a -> s{_epuUpdates = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON EventPeriodUpdate where
-        parseJSON
-          = withObject "EventPeriodUpdate"
-              (\ o ->
-                 EventPeriodUpdate <$>
-                   (o .:? "kind" .!= "games#eventPeriodUpdate") <*>
-                     (o .:? "timePeriod")
-                     <*> (o .:? "updates" .!= mempty))
-
-instance ToJSON EventPeriodUpdate where
-        toJSON EventPeriodUpdate{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _epuKind),
-                  ("timePeriod" .=) <$> _epuTimePeriod,
-                  ("updates" .=) <$> _epuUpdates])
-
--- | This is a JSON template for the payload to request to increment an
--- achievement.
---
--- /See:/ 'gamesAchievementIncrement' smart constructor.
-data GamesAchievementIncrement = GamesAchievementIncrement
-    { _gaiRequestId :: !(Maybe Int64)
-    , _gaiKind      :: !Text
-    , _gaiSteps     :: !(Maybe Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'GamesAchievementIncrement' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'gaiRequestId'
---
--- * 'gaiKind'
---
--- * 'gaiSteps'
-gamesAchievementIncrement
-    :: GamesAchievementIncrement
-gamesAchievementIncrement =
-    GamesAchievementIncrement
-    { _gaiRequestId = Nothing
-    , _gaiKind = "games#GamesAchievementIncrement"
-    , _gaiSteps = Nothing
-    }
-
--- | The requestId associated with an increment to an achievement.
-gaiRequestId :: Lens' GamesAchievementIncrement (Maybe Int64)
-gaiRequestId
-  = lens _gaiRequestId (\ s a -> s{_gaiRequestId = a})
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#GamesAchievementIncrement.
-gaiKind :: Lens' GamesAchievementIncrement Text
-gaiKind = lens _gaiKind (\ s a -> s{_gaiKind = a})
-
--- | The number of steps to be incremented.
-gaiSteps :: Lens' GamesAchievementIncrement (Maybe Int32)
-gaiSteps = lens _gaiSteps (\ s a -> s{_gaiSteps = a})
-
-instance FromJSON GamesAchievementIncrement where
-        parseJSON
-          = withObject "GamesAchievementIncrement"
-              (\ o ->
-                 GamesAchievementIncrement <$>
-                   (o .:? "requestId") <*>
-                     (o .:? "kind" .!= "games#GamesAchievementIncrement")
-                     <*> (o .:? "steps"))
-
-instance ToJSON GamesAchievementIncrement where
-        toJSON GamesAchievementIncrement{..}
-          = object
-              (catMaybes
-                 [("requestId" .=) <$> _gaiRequestId,
-                  Just ("kind" .= _gaiKind),
-                  ("steps" .=) <$> _gaiSteps])
-
--- | This is a JSON template for the payload to request to increment an
--- achievement.
---
--- /See:/ 'gamesAchievementSetStepsAtLeast' smart constructor.
-data GamesAchievementSetStepsAtLeast = GamesAchievementSetStepsAtLeast
-    { _gassalKind  :: !Text
-    , _gassalSteps :: !(Maybe Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'GamesAchievementSetStepsAtLeast' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'gassalKind'
---
--- * 'gassalSteps'
-gamesAchievementSetStepsAtLeast
-    :: GamesAchievementSetStepsAtLeast
-gamesAchievementSetStepsAtLeast =
-    GamesAchievementSetStepsAtLeast
-    { _gassalKind = "games#GamesAchievementSetStepsAtLeast"
-    , _gassalSteps = Nothing
-    }
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#GamesAchievementSetStepsAtLeast.
-gassalKind :: Lens' GamesAchievementSetStepsAtLeast Text
-gassalKind
-  = lens _gassalKind (\ s a -> s{_gassalKind = a})
-
--- | The minimum number of steps for the achievement to be set to.
-gassalSteps :: Lens' GamesAchievementSetStepsAtLeast (Maybe Int32)
-gassalSteps
-  = lens _gassalSteps (\ s a -> s{_gassalSteps = a})
-
-instance FromJSON GamesAchievementSetStepsAtLeast
-         where
-        parseJSON
-          = withObject "GamesAchievementSetStepsAtLeast"
-              (\ o ->
-                 GamesAchievementSetStepsAtLeast <$>
-                   (o .:? "kind" .!=
-                      "games#GamesAchievementSetStepsAtLeast")
-                     <*> (o .:? "steps"))
-
-instance ToJSON GamesAchievementSetStepsAtLeast where
-        toJSON GamesAchievementSetStepsAtLeast{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _gassalKind),
-                  ("steps" .=) <$> _gassalSteps])
+                 [("rematch" .=) <$> _tRematch,
+                  Just ("kind" .= _tKind),
+                  ("previousMatch" .=) <$> _tPreviousMatch])
 
 -- | This is a JSON template for 1P\/3P metadata about the player\'s
 -- experience.
@@ -7421,6 +7431,58 @@ instance ToJSON PlayerExperienceInfo where
                   ("nextLevel" .=) <$> _peiNextLevel,
                   ("lastLevelUpTimestampMillis" .=) <$>
                     _peiLastLevelUpTimestampMillis])
+
+-- | This is a JSON template for the payload to request to increment an
+-- achievement.
+--
+-- /See:/ 'gamesAchievementSetStepsAtLeast' smart constructor.
+data GamesAchievementSetStepsAtLeast = GamesAchievementSetStepsAtLeast
+    { _gassalKind  :: !Text
+    , _gassalSteps :: !(Maybe Int32)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GamesAchievementSetStepsAtLeast' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gassalKind'
+--
+-- * 'gassalSteps'
+gamesAchievementSetStepsAtLeast
+    :: GamesAchievementSetStepsAtLeast
+gamesAchievementSetStepsAtLeast =
+    GamesAchievementSetStepsAtLeast
+    { _gassalKind = "games#GamesAchievementSetStepsAtLeast"
+    , _gassalSteps = Nothing
+    }
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#GamesAchievementSetStepsAtLeast.
+gassalKind :: Lens' GamesAchievementSetStepsAtLeast Text
+gassalKind
+  = lens _gassalKind (\ s a -> s{_gassalKind = a})
+
+-- | The minimum number of steps for the achievement to be set to.
+gassalSteps :: Lens' GamesAchievementSetStepsAtLeast (Maybe Int32)
+gassalSteps
+  = lens _gassalSteps (\ s a -> s{_gassalSteps = a})
+
+instance FromJSON GamesAchievementSetStepsAtLeast
+         where
+        parseJSON
+          = withObject "GamesAchievementSetStepsAtLeast"
+              (\ o ->
+                 GamesAchievementSetStepsAtLeast <$>
+                   (o .:? "kind" .!=
+                      "games#GamesAchievementSetStepsAtLeast")
+                     <*> (o .:? "steps"))
+
+instance ToJSON GamesAchievementSetStepsAtLeast where
+        toJSON GamesAchievementSetStepsAtLeast{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _gassalKind),
+                  ("steps" .=) <$> _gassalSteps])
 
 -- | This is a JSON template for a Player resource.
 --
@@ -7540,348 +7602,64 @@ instance ToJSON Player where
                   ("title" .=) <$> _plaTitle,
                   ("playerId" .=) <$> _plaPlayerId])
 
--- | This is a JSON template for a rematch response.
+-- | This is a JSON template for the payload to request to increment an
+-- achievement.
 --
--- /See:/ 'turnBasedMatchRematch' smart constructor.
-data TurnBasedMatchRematch = TurnBasedMatchRematch
-    { _tRematch       :: !(Maybe TurnBasedMatch)
-    , _tKind          :: !Text
-    , _tPreviousMatch :: !(Maybe TurnBasedMatch)
+-- /See:/ 'gamesAchievementIncrement' smart constructor.
+data GamesAchievementIncrement = GamesAchievementIncrement
+    { _gaiRequestId :: !(Maybe Int64)
+    , _gaiKind      :: !Text
+    , _gaiSteps     :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TurnBasedMatchRematch' with the minimum fields required to make a request.
+-- | Creates a value of 'GamesAchievementIncrement' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tRematch'
+-- * 'gaiRequestId'
 --
--- * 'tKind'
+-- * 'gaiKind'
 --
--- * 'tPreviousMatch'
-turnBasedMatchRematch
-    :: TurnBasedMatchRematch
-turnBasedMatchRematch =
-    TurnBasedMatchRematch
-    { _tRematch = Nothing
-    , _tKind = "games#turnBasedMatchRematch"
-    , _tPreviousMatch = Nothing
+-- * 'gaiSteps'
+gamesAchievementIncrement
+    :: GamesAchievementIncrement
+gamesAchievementIncrement =
+    GamesAchievementIncrement
+    { _gaiRequestId = Nothing
+    , _gaiKind = "games#GamesAchievementIncrement"
+    , _gaiSteps = Nothing
     }
 
--- | The newly created match; a rematch of the old match with the same
--- participants.
-tRematch :: Lens' TurnBasedMatchRematch (Maybe TurnBasedMatch)
-tRematch = lens _tRematch (\ s a -> s{_tRematch = a})
+-- | The requestId associated with an increment to an achievement.
+gaiRequestId :: Lens' GamesAchievementIncrement (Maybe Int64)
+gaiRequestId
+  = lens _gaiRequestId (\ s a -> s{_gaiRequestId = a})
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#turnBasedMatchRematch.
-tKind :: Lens' TurnBasedMatchRematch Text
-tKind = lens _tKind (\ s a -> s{_tKind = a})
+-- string games#GamesAchievementIncrement.
+gaiKind :: Lens' GamesAchievementIncrement Text
+gaiKind = lens _gaiKind (\ s a -> s{_gaiKind = a})
 
--- | The old match that the rematch was created from; will be updated such
--- that the rematchId field will point at the new match.
-tPreviousMatch :: Lens' TurnBasedMatchRematch (Maybe TurnBasedMatch)
-tPreviousMatch
-  = lens _tPreviousMatch
-      (\ s a -> s{_tPreviousMatch = a})
+-- | The number of steps to be incremented.
+gaiSteps :: Lens' GamesAchievementIncrement (Maybe Int32)
+gaiSteps = lens _gaiSteps (\ s a -> s{_gaiSteps = a})
 
-instance FromJSON TurnBasedMatchRematch where
+instance FromJSON GamesAchievementIncrement where
         parseJSON
-          = withObject "TurnBasedMatchRematch"
+          = withObject "GamesAchievementIncrement"
               (\ o ->
-                 TurnBasedMatchRematch <$>
-                   (o .:? "rematch") <*>
-                     (o .:? "kind" .!= "games#turnBasedMatchRematch")
-                     <*> (o .:? "previousMatch"))
+                 GamesAchievementIncrement <$>
+                   (o .:? "requestId") <*>
+                     (o .:? "kind" .!= "games#GamesAchievementIncrement")
+                     <*> (o .:? "steps"))
 
-instance ToJSON TurnBasedMatchRematch where
-        toJSON TurnBasedMatchRematch{..}
+instance ToJSON GamesAchievementIncrement where
+        toJSON GamesAchievementIncrement{..}
           = object
               (catMaybes
-                 [("rematch" .=) <$> _tRematch,
-                  Just ("kind" .= _tKind),
-                  ("previousMatch" .=) <$> _tPreviousMatch])
-
--- | This is a JSON template for the Web details resource.
---
--- /See:/ 'instanceWebDetails' smart constructor.
-data InstanceWebDetails = InstanceWebDetails
-    { _iwdPreferred :: !(Maybe Bool)
-    , _iwdKind      :: !Text
-    , _iwdLaunchURL :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'InstanceWebDetails' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'iwdPreferred'
---
--- * 'iwdKind'
---
--- * 'iwdLaunchURL'
-instanceWebDetails
-    :: InstanceWebDetails
-instanceWebDetails =
-    InstanceWebDetails
-    { _iwdPreferred = Nothing
-    , _iwdKind = "games#instanceWebDetails"
-    , _iwdLaunchURL = Nothing
-    }
-
--- | Indicates that this instance is the default for new installations.
-iwdPreferred :: Lens' InstanceWebDetails (Maybe Bool)
-iwdPreferred
-  = lens _iwdPreferred (\ s a -> s{_iwdPreferred = a})
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#instanceWebDetails.
-iwdKind :: Lens' InstanceWebDetails Text
-iwdKind = lens _iwdKind (\ s a -> s{_iwdKind = a})
-
--- | Launch URL for the game.
-iwdLaunchURL :: Lens' InstanceWebDetails (Maybe Text)
-iwdLaunchURL
-  = lens _iwdLaunchURL (\ s a -> s{_iwdLaunchURL = a})
-
-instance FromJSON InstanceWebDetails where
-        parseJSON
-          = withObject "InstanceWebDetails"
-              (\ o ->
-                 InstanceWebDetails <$>
-                   (o .:? "preferred") <*>
-                     (o .:? "kind" .!= "games#instanceWebDetails")
-                     <*> (o .:? "launchUrl"))
-
-instance ToJSON InstanceWebDetails where
-        toJSON InstanceWebDetails{..}
-          = object
-              (catMaybes
-                 [("preferred" .=) <$> _iwdPreferred,
-                  Just ("kind" .= _iwdKind),
-                  ("launchUrl" .=) <$> _iwdLaunchURL])
-
--- | This is a JSON template for an event child relationship resource.
---
--- /See:/ 'eventChild' smart constructor.
-data EventChild = EventChild
-    { _ecKind    :: !Text
-    , _ecChildId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'EventChild' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ecKind'
---
--- * 'ecChildId'
-eventChild
-    :: EventChild
-eventChild =
-    EventChild
-    { _ecKind = "games#eventChild"
-    , _ecChildId = Nothing
-    }
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#eventChild.
-ecKind :: Lens' EventChild Text
-ecKind = lens _ecKind (\ s a -> s{_ecKind = a})
-
--- | The ID of the child event.
-ecChildId :: Lens' EventChild (Maybe Text)
-ecChildId
-  = lens _ecChildId (\ s a -> s{_ecChildId = a})
-
-instance FromJSON EventChild where
-        parseJSON
-          = withObject "EventChild"
-              (\ o ->
-                 EventChild <$>
-                   (o .:? "kind" .!= "games#eventChild") <*>
-                     (o .:? "childId"))
-
-instance ToJSON EventChild where
-        toJSON EventChild{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _ecKind),
-                  ("childId" .=) <$> _ecChildId])
-
--- | This is a JSON template for sending a turn-based match data object.
---
--- /See:/ 'turnBasedMatchDataRequest' smart constructor.
-data TurnBasedMatchDataRequest = TurnBasedMatchDataRequest
-    { _tbmdrKind :: !Text
-    , _tbmdrData :: !(Maybe Word8)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'TurnBasedMatchDataRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'tbmdrKind'
---
--- * 'tbmdrData'
-turnBasedMatchDataRequest
-    :: TurnBasedMatchDataRequest
-turnBasedMatchDataRequest =
-    TurnBasedMatchDataRequest
-    { _tbmdrKind = "games#turnBasedMatchDataRequest"
-    , _tbmdrData = Nothing
-    }
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#turnBasedMatchDataRequest.
-tbmdrKind :: Lens' TurnBasedMatchDataRequest Text
-tbmdrKind
-  = lens _tbmdrKind (\ s a -> s{_tbmdrKind = a})
-
--- | The byte representation of the data (limited to 128 kB), as a
--- Base64-encoded string with the URL_SAFE encoding option.
-tbmdrData :: Lens' TurnBasedMatchDataRequest (Maybe Word8)
-tbmdrData
-  = lens _tbmdrData (\ s a -> s{_tbmdrData = a})
-
-instance FromJSON TurnBasedMatchDataRequest where
-        parseJSON
-          = withObject "TurnBasedMatchDataRequest"
-              (\ o ->
-                 TurnBasedMatchDataRequest <$>
-                   (o .:? "kind" .!= "games#turnBasedMatchDataRequest")
-                     <*> (o .:? "data"))
-
-instance ToJSON TurnBasedMatchDataRequest where
-        toJSON TurnBasedMatchDataRequest{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _tbmdrKind),
-                  ("data" .=) <$> _tbmdrData])
-
--- | This is a JSON template for a ListByPlayer response.
---
--- /See:/ 'playerEventListResponse' smart constructor.
-data PlayerEventListResponse = PlayerEventListResponse
-    { _pelrNextPageToken :: !(Maybe Text)
-    , _pelrKind          :: !Text
-    , _pelrItems         :: !(Maybe [PlayerEvent])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PlayerEventListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pelrNextPageToken'
---
--- * 'pelrKind'
---
--- * 'pelrItems'
-playerEventListResponse
-    :: PlayerEventListResponse
-playerEventListResponse =
-    PlayerEventListResponse
-    { _pelrNextPageToken = Nothing
-    , _pelrKind = "games#playerEventListResponse"
-    , _pelrItems = Nothing
-    }
-
--- | The pagination token for the next page of results.
-pelrNextPageToken :: Lens' PlayerEventListResponse (Maybe Text)
-pelrNextPageToken
-  = lens _pelrNextPageToken
-      (\ s a -> s{_pelrNextPageToken = a})
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#playerEventListResponse.
-pelrKind :: Lens' PlayerEventListResponse Text
-pelrKind = lens _pelrKind (\ s a -> s{_pelrKind = a})
-
--- | The player events.
-pelrItems :: Lens' PlayerEventListResponse [PlayerEvent]
-pelrItems
-  = lens _pelrItems (\ s a -> s{_pelrItems = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON PlayerEventListResponse where
-        parseJSON
-          = withObject "PlayerEventListResponse"
-              (\ o ->
-                 PlayerEventListResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "games#playerEventListResponse")
-                     <*> (o .:? "items" .!= mempty))
-
-instance ToJSON PlayerEventListResponse where
-        toJSON PlayerEventListResponse{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _pelrNextPageToken,
-                  Just ("kind" .= _pelrKind),
-                  ("items" .=) <$> _pelrItems])
-
--- | This is a JSON template for an event period time range.
---
--- /See:/ 'eventPeriodRange' smart constructor.
-data EventPeriodRange = EventPeriodRange
-    { _eprKind              :: !Text
-    , _eprPeriodStartMillis :: !(Maybe Int64)
-    , _eprPeriodEndMillis   :: !(Maybe Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'EventPeriodRange' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'eprKind'
---
--- * 'eprPeriodStartMillis'
---
--- * 'eprPeriodEndMillis'
-eventPeriodRange
-    :: EventPeriodRange
-eventPeriodRange =
-    EventPeriodRange
-    { _eprKind = "games#eventPeriodRange"
-    , _eprPeriodStartMillis = Nothing
-    , _eprPeriodEndMillis = Nothing
-    }
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#eventPeriodRange.
-eprKind :: Lens' EventPeriodRange Text
-eprKind = lens _eprKind (\ s a -> s{_eprKind = a})
-
--- | The time when this update period begins, in millis, since 1970 UTC (Unix
--- Epoch).
-eprPeriodStartMillis :: Lens' EventPeriodRange (Maybe Int64)
-eprPeriodStartMillis
-  = lens _eprPeriodStartMillis
-      (\ s a -> s{_eprPeriodStartMillis = a})
-
--- | The time when this update period ends, in millis, since 1970 UTC (Unix
--- Epoch).
-eprPeriodEndMillis :: Lens' EventPeriodRange (Maybe Int64)
-eprPeriodEndMillis
-  = lens _eprPeriodEndMillis
-      (\ s a -> s{_eprPeriodEndMillis = a})
-
-instance FromJSON EventPeriodRange where
-        parseJSON
-          = withObject "EventPeriodRange"
-              (\ o ->
-                 EventPeriodRange <$>
-                   (o .:? "kind" .!= "games#eventPeriodRange") <*>
-                     (o .:? "periodStartMillis")
-                     <*> (o .:? "periodEndMillis"))
-
-instance ToJSON EventPeriodRange where
-        toJSON EventPeriodRange{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _eprKind),
-                  ("periodStartMillis" .=) <$> _eprPeriodStartMillis,
-                  ("periodEndMillis" .=) <$> _eprPeriodEndMillis])
+                 [("requestId" .=) <$> _gaiRequestId,
+                  Just ("kind" .= _gaiKind),
+                  ("steps" .=) <$> _gaiSteps])
 
 -- | This is a JSON template for a Quest resource.
 --
@@ -8112,6 +7890,229 @@ instance ToJSON Quest where
                   ("acceptedTimestampMillis" .=) <$>
                     _queAcceptedTimestampMillis])
 
+-- | This is a JSON template for an event child relationship resource.
+--
+-- /See:/ 'eventChild' smart constructor.
+data EventChild = EventChild
+    { _ecKind    :: !Text
+    , _ecChildId :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EventChild' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ecKind'
+--
+-- * 'ecChildId'
+eventChild
+    :: EventChild
+eventChild =
+    EventChild
+    { _ecKind = "games#eventChild"
+    , _ecChildId = Nothing
+    }
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#eventChild.
+ecKind :: Lens' EventChild Text
+ecKind = lens _ecKind (\ s a -> s{_ecKind = a})
+
+-- | The ID of the child event.
+ecChildId :: Lens' EventChild (Maybe Text)
+ecChildId
+  = lens _ecChildId (\ s a -> s{_ecChildId = a})
+
+instance FromJSON EventChild where
+        parseJSON
+          = withObject "EventChild"
+              (\ o ->
+                 EventChild <$>
+                   (o .:? "kind" .!= "games#eventChild") <*>
+                     (o .:? "childId"))
+
+instance ToJSON EventChild where
+        toJSON EventChild{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _ecKind),
+                  ("childId" .=) <$> _ecChildId])
+
+-- | This is a JSON template for a ListByPlayer response.
+--
+-- /See:/ 'playerEventListResponse' smart constructor.
+data PlayerEventListResponse = PlayerEventListResponse
+    { _pelrNextPageToken :: !(Maybe Text)
+    , _pelrKind          :: !Text
+    , _pelrItems         :: !(Maybe [PlayerEvent])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PlayerEventListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pelrNextPageToken'
+--
+-- * 'pelrKind'
+--
+-- * 'pelrItems'
+playerEventListResponse
+    :: PlayerEventListResponse
+playerEventListResponse =
+    PlayerEventListResponse
+    { _pelrNextPageToken = Nothing
+    , _pelrKind = "games#playerEventListResponse"
+    , _pelrItems = Nothing
+    }
+
+-- | The pagination token for the next page of results.
+pelrNextPageToken :: Lens' PlayerEventListResponse (Maybe Text)
+pelrNextPageToken
+  = lens _pelrNextPageToken
+      (\ s a -> s{_pelrNextPageToken = a})
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#playerEventListResponse.
+pelrKind :: Lens' PlayerEventListResponse Text
+pelrKind = lens _pelrKind (\ s a -> s{_pelrKind = a})
+
+-- | The player events.
+pelrItems :: Lens' PlayerEventListResponse [PlayerEvent]
+pelrItems
+  = lens _pelrItems (\ s a -> s{_pelrItems = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON PlayerEventListResponse where
+        parseJSON
+          = withObject "PlayerEventListResponse"
+              (\ o ->
+                 PlayerEventListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "games#playerEventListResponse")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON PlayerEventListResponse where
+        toJSON PlayerEventListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _pelrNextPageToken,
+                  Just ("kind" .= _pelrKind),
+                  ("items" .=) <$> _pelrItems])
+
+-- | This is a JSON template for sending a turn-based match data object.
+--
+-- /See:/ 'turnBasedMatchDataRequest' smart constructor.
+data TurnBasedMatchDataRequest = TurnBasedMatchDataRequest
+    { _tbmdrKind :: !Text
+    , _tbmdrData :: !(Maybe Word8)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TurnBasedMatchDataRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tbmdrKind'
+--
+-- * 'tbmdrData'
+turnBasedMatchDataRequest
+    :: TurnBasedMatchDataRequest
+turnBasedMatchDataRequest =
+    TurnBasedMatchDataRequest
+    { _tbmdrKind = "games#turnBasedMatchDataRequest"
+    , _tbmdrData = Nothing
+    }
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#turnBasedMatchDataRequest.
+tbmdrKind :: Lens' TurnBasedMatchDataRequest Text
+tbmdrKind
+  = lens _tbmdrKind (\ s a -> s{_tbmdrKind = a})
+
+-- | The byte representation of the data (limited to 128 kB), as a
+-- Base64-encoded string with the URL_SAFE encoding option.
+tbmdrData :: Lens' TurnBasedMatchDataRequest (Maybe Word8)
+tbmdrData
+  = lens _tbmdrData (\ s a -> s{_tbmdrData = a})
+
+instance FromJSON TurnBasedMatchDataRequest where
+        parseJSON
+          = withObject "TurnBasedMatchDataRequest"
+              (\ o ->
+                 TurnBasedMatchDataRequest <$>
+                   (o .:? "kind" .!= "games#turnBasedMatchDataRequest")
+                     <*> (o .:? "data"))
+
+instance ToJSON TurnBasedMatchDataRequest where
+        toJSON TurnBasedMatchDataRequest{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _tbmdrKind),
+                  ("data" .=) <$> _tbmdrData])
+
+-- | This is a JSON template for an event period time range.
+--
+-- /See:/ 'eventPeriodRange' smart constructor.
+data EventPeriodRange = EventPeriodRange
+    { _eprKind              :: !Text
+    , _eprPeriodStartMillis :: !(Maybe Int64)
+    , _eprPeriodEndMillis   :: !(Maybe Int64)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EventPeriodRange' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eprKind'
+--
+-- * 'eprPeriodStartMillis'
+--
+-- * 'eprPeriodEndMillis'
+eventPeriodRange
+    :: EventPeriodRange
+eventPeriodRange =
+    EventPeriodRange
+    { _eprKind = "games#eventPeriodRange"
+    , _eprPeriodStartMillis = Nothing
+    , _eprPeriodEndMillis = Nothing
+    }
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#eventPeriodRange.
+eprKind :: Lens' EventPeriodRange Text
+eprKind = lens _eprKind (\ s a -> s{_eprKind = a})
+
+-- | The time when this update period begins, in millis, since 1970 UTC (Unix
+-- Epoch).
+eprPeriodStartMillis :: Lens' EventPeriodRange (Maybe Int64)
+eprPeriodStartMillis
+  = lens _eprPeriodStartMillis
+      (\ s a -> s{_eprPeriodStartMillis = a})
+
+-- | The time when this update period ends, in millis, since 1970 UTC (Unix
+-- Epoch).
+eprPeriodEndMillis :: Lens' EventPeriodRange (Maybe Int64)
+eprPeriodEndMillis
+  = lens _eprPeriodEndMillis
+      (\ s a -> s{_eprPeriodEndMillis = a})
+
+instance FromJSON EventPeriodRange where
+        parseJSON
+          = withObject "EventPeriodRange"
+              (\ o ->
+                 EventPeriodRange <$>
+                   (o .:? "kind" .!= "games#eventPeriodRange") <*>
+                     (o .:? "periodStartMillis")
+                     <*> (o .:? "periodEndMillis"))
+
+instance ToJSON EventPeriodRange where
+        toJSON EventPeriodRange{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _eprKind),
+                  ("periodStartMillis" .=) <$> _eprPeriodStartMillis,
+                  ("periodEndMillis" .=) <$> _eprPeriodEndMillis])
+
 -- | This is a JSON template for an event update failure resource.
 --
 -- /See:/ 'eventRecordFailure' smart constructor.
@@ -8174,6 +8175,56 @@ instance ToJSON EventRecordFailure where
                  [Just ("kind" .= _erfKind),
                   ("failureCause" .=) <$> _erfFailureCause,
                   ("eventId" .=) <$> _erfEventId])
+
+-- | This is a JSON template for a list of score submission requests
+--
+-- /See:/ 'playerScoreSubmissionList' smart constructor.
+data PlayerScoreSubmissionList = PlayerScoreSubmissionList
+    { _psslKind   :: !Text
+    , _psslScores :: !(Maybe [ScoreSubmission])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PlayerScoreSubmissionList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'psslKind'
+--
+-- * 'psslScores'
+playerScoreSubmissionList
+    :: PlayerScoreSubmissionList
+playerScoreSubmissionList =
+    PlayerScoreSubmissionList
+    { _psslKind = "games#playerScoreSubmissionList"
+    , _psslScores = Nothing
+    }
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#playerScoreSubmissionList.
+psslKind :: Lens' PlayerScoreSubmissionList Text
+psslKind = lens _psslKind (\ s a -> s{_psslKind = a})
+
+-- | The score submissions.
+psslScores :: Lens' PlayerScoreSubmissionList [ScoreSubmission]
+psslScores
+  = lens _psslScores (\ s a -> s{_psslScores = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON PlayerScoreSubmissionList where
+        parseJSON
+          = withObject "PlayerScoreSubmissionList"
+              (\ o ->
+                 PlayerScoreSubmissionList <$>
+                   (o .:? "kind" .!= "games#playerScoreSubmissionList")
+                     <*> (o .:? "scores" .!= mempty))
+
+instance ToJSON PlayerScoreSubmissionList where
+        toJSON PlayerScoreSubmissionList{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _psslKind),
+                  ("scores" .=) <$> _psslScores])
 
 -- | This is a JSON template for the Instance resource.
 --
@@ -8305,53 +8356,3 @@ instance ToJSON Instance where
                   ("platformType" .=) <$> _iPlatformType,
                   ("turnBasedPlay" .=) <$> _iTurnBasedPlay,
                   ("realtimePlay" .=) <$> _iRealtimePlay])
-
--- | This is a JSON template for a list of score submission requests
---
--- /See:/ 'playerScoreSubmissionList' smart constructor.
-data PlayerScoreSubmissionList = PlayerScoreSubmissionList
-    { _psslKind   :: !Text
-    , _psslScores :: !(Maybe [ScoreSubmission])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PlayerScoreSubmissionList' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'psslKind'
---
--- * 'psslScores'
-playerScoreSubmissionList
-    :: PlayerScoreSubmissionList
-playerScoreSubmissionList =
-    PlayerScoreSubmissionList
-    { _psslKind = "games#playerScoreSubmissionList"
-    , _psslScores = Nothing
-    }
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#playerScoreSubmissionList.
-psslKind :: Lens' PlayerScoreSubmissionList Text
-psslKind = lens _psslKind (\ s a -> s{_psslKind = a})
-
--- | The score submissions.
-psslScores :: Lens' PlayerScoreSubmissionList [ScoreSubmission]
-psslScores
-  = lens _psslScores (\ s a -> s{_psslScores = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON PlayerScoreSubmissionList where
-        parseJSON
-          = withObject "PlayerScoreSubmissionList"
-              (\ o ->
-                 PlayerScoreSubmissionList <$>
-                   (o .:? "kind" .!= "games#playerScoreSubmissionList")
-                     <*> (o .:? "scores" .!= mempty))
-
-instance ToJSON PlayerScoreSubmissionList where
-        toJSON PlayerScoreSubmissionList{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _psslKind),
-                  ("scores" .=) <$> _psslScores])

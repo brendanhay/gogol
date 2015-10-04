@@ -52,9 +52,13 @@ type RepresentativesRepresentativeInfoByDivisionResource
      =
      "representatives" :>
        Capture "ocdId" Text :>
-         QueryParams "roles" Roles :>
+         QueryParams "roles"
+           RepresentativesRepresentativeInfoByDivisionRoles
+           :>
            QueryParam "recursive" Bool :>
-             QueryParams "levels" Levels :>
+             QueryParams "levels"
+               RepresentativesRepresentativeInfoByDivisionLevels
+               :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -69,13 +73,13 @@ type RepresentativesRepresentativeInfoByDivisionResource
 -- /See:/ 'representativesRepresentativeInfoByDivision'' smart constructor.
 data RepresentativesRepresentativeInfoByDivision' = RepresentativesRepresentativeInfoByDivision'
     { _rribdQuotaUser   :: !(Maybe Text)
-    , _rribdRoles       :: !(Maybe [Roles])
+    , _rribdRoles       :: !(Maybe [RepresentativesRepresentativeInfoByDivisionRoles])
     , _rribdPrettyPrint :: !Bool
     , _rribdUserIP      :: !(Maybe Text)
     , _rribdKey         :: !(Maybe Key)
     , _rribdRecursive   :: !(Maybe Bool)
     , _rribdOcdId       :: !Text
-    , _rribdLevels      :: !(Maybe [Levels])
+    , _rribdLevels      :: !(Maybe [RepresentativesRepresentativeInfoByDivisionLevels])
     , _rribdOAuthToken  :: !(Maybe OAuthToken)
     , _rribdFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -131,7 +135,7 @@ rribdQuotaUser
 -- | A list of office roles to filter by. Only offices fulfilling one of
 -- these roles will be returned. Divisions that don\'t contain a matching
 -- office will not be returned.
-rribdRoles :: Lens' RepresentativesRepresentativeInfoByDivision' [Roles]
+rribdRoles :: Lens' RepresentativesRepresentativeInfoByDivision' [RepresentativesRepresentativeInfoByDivisionRoles]
 rribdRoles
   = lens _rribdRoles (\ s a -> s{_rribdRoles = a}) .
       _Default
@@ -172,7 +176,7 @@ rribdOcdId
 -- | A list of office levels to filter by. Only offices that serve at least
 -- one of these levels will be returned. Divisions that don\'t contain a
 -- matching office will not be returned.
-rribdLevels :: Lens' RepresentativesRepresentativeInfoByDivision' [Levels]
+rribdLevels :: Lens' RepresentativesRepresentativeInfoByDivision' [RepresentativesRepresentativeInfoByDivisionLevels]
 rribdLevels
   = lens _rribdLevels (\ s a -> s{_rribdLevels = a}) .
       _Default

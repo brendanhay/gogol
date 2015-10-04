@@ -54,7 +54,7 @@ type OffersListResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] ListOffersRequest :>
+                     ReqBody '[OctetStream] ListOffersRequest :>
                        Get '[JSON] ListOffersResponse
 
 -- | Lists all offers the authenticated user has access to.

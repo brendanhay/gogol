@@ -76,7 +76,7 @@ type CoursesPatchResource =
                                  QueryParam "key" Key :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
-                                       ReqBody '[JSON] Course :>
+                                       ReqBody '[OctetStream] Course :>
                                          Patch '[JSON] Course
 
 -- | Updates one or more fields in a course. This method returns the

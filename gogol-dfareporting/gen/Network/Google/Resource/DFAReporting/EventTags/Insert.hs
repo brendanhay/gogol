@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.EventTags.Insert
     , etiQuotaUser
     , etiPrettyPrint
     , etiUserIP
-    , etiProfileId
+    , etiProFileId
     , etiPayload
     , etiKey
     , etiOAuthToken
@@ -57,7 +57,8 @@ type EventTagsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] EventTag :> Post '[JSON] EventTag
+                         ReqBody '[OctetStream] EventTag :>
+                           Post '[JSON] EventTag
 
 -- | Inserts a new event tag.
 --
@@ -66,7 +67,7 @@ data EventTagsInsert' = EventTagsInsert'
     { _etiQuotaUser   :: !(Maybe Text)
     , _etiPrettyPrint :: !Bool
     , _etiUserIP      :: !(Maybe Text)
-    , _etiProfileId   :: !Int64
+    , _etiProFileId   :: !Int64
     , _etiPayload     :: !EventTag
     , _etiKey         :: !(Maybe Key)
     , _etiOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +84,7 @@ data EventTagsInsert' = EventTagsInsert'
 --
 -- * 'etiUserIP'
 --
--- * 'etiProfileId'
+-- * 'etiProFileId'
 --
 -- * 'etiPayload'
 --
@@ -96,12 +97,12 @@ eventTagsInsert'
     :: Int64 -- ^ 'profileId'
     -> EventTag -- ^ 'payload'
     -> EventTagsInsert'
-eventTagsInsert' pEtiProfileId_ pEtiPayload_ =
+eventTagsInsert' pEtiProFileId_ pEtiPayload_ =
     EventTagsInsert'
     { _etiQuotaUser = Nothing
     , _etiPrettyPrint = True
     , _etiUserIP = Nothing
-    , _etiProfileId = pEtiProfileId_
+    , _etiProFileId = pEtiProFileId_
     , _etiPayload = pEtiPayload_
     , _etiKey = Nothing
     , _etiOAuthToken = Nothing
@@ -128,9 +129,9 @@ etiUserIP
   = lens _etiUserIP (\ s a -> s{_etiUserIP = a})
 
 -- | User profile ID associated with this request.
-etiProfileId :: Lens' EventTagsInsert' Int64
-etiProfileId
-  = lens _etiProfileId (\ s a -> s{_etiProfileId = a})
+etiProFileId :: Lens' EventTagsInsert' Int64
+etiProFileId
+  = lens _etiProFileId (\ s a -> s{_etiProFileId = a})
 
 -- | Multipart request metadata.
 etiPayload :: Lens' EventTagsInsert' EventTag
@@ -162,7 +163,7 @@ instance GoogleRequest EventTagsInsert' where
         type Rs EventTagsInsert' = EventTag
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u EventTagsInsert'{..}
-          = go _etiProfileId _etiQuotaUser
+          = go _etiProFileId _etiQuotaUser
               (Just _etiPrettyPrint)
               _etiUserIP
               _etiFields

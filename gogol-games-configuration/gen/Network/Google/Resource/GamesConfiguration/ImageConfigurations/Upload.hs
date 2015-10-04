@@ -51,7 +51,9 @@ type ImageConfigurationsUploadResource =
      "images" :>
        Capture "resourceId" Text :>
          "imageType" :>
-           Capture "imageType" ImageType :>
+           Capture "imageType"
+             ImageConfigurationsUploadImageType
+             :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -59,7 +61,8 @@ type ImageConfigurationsUploadResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           Post '[JSON] ImageConfiguration
+                           ReqBody '[JSON] Body :>
+                             Post '[JSON] ImageConfiguration
 
 -- | Uploads an image for a resource with the given ID and image type.
 --
@@ -70,7 +73,7 @@ data ImageConfigurationsUpload' = ImageConfigurationsUpload'
     , _icuPrettyPrint :: !Bool
     , _icuUserIP      :: !(Maybe Text)
     , _icuMedia       :: !Body
-    , _icuImageType   :: !ImageType
+    , _icuImageType   :: !ImageConfigurationsUploadImageType
     , _icuKey         :: !(Maybe Key)
     , _icuOAuthToken  :: !(Maybe OAuthToken)
     , _icuFields      :: !(Maybe Text)
@@ -100,7 +103,7 @@ data ImageConfigurationsUpload' = ImageConfigurationsUpload'
 imageConfigurationsUpload'
     :: Text -- ^ 'resourceId'
     -> Body -- ^ 'media'
-    -> ImageType -- ^ 'imageType'
+    -> ImageConfigurationsUploadImageType -- ^ 'imageType'
     -> ImageConfigurationsUpload'
 imageConfigurationsUpload' pIcuResourceId_ pIcuMedia_ pIcuImageType_ =
     ImageConfigurationsUpload'
@@ -144,7 +147,7 @@ icuMedia :: Lens' ImageConfigurationsUpload' Body
 icuMedia = lens _icuMedia (\ s a -> s{_icuMedia = a})
 
 -- | Selects which image in a resource for this method.
-icuImageType :: Lens' ImageConfigurationsUpload' ImageType
+icuImageType :: Lens' ImageConfigurationsUpload' ImageConfigurationsUploadImageType
 icuImageType
   = lens _icuImageType (\ s a -> s{_icuImageType = a})
 

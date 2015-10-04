@@ -18,153 +18,6 @@ module Network.Google.MapsEngine.Types.Product where
 import           Network.Google.MapsEngine.Types.Sum
 import           Network.Google.Prelude
 
--- | A list of the parents of an asset.
---
--- /See:/ 'parent' smart constructor.
-newtype Parent = Parent
-    { _pId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Parent' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pId'
-parent
-    :: Parent
-parent =
-    Parent
-    { _pId = Nothing
-    }
-
--- | The ID of this parent.
-pId :: Lens' Parent (Maybe Text)
-pId = lens _pId (\ s a -> s{_pId = a})
-
-instance FromJSON Parent where
-        parseJSON
-          = withObject "Parent"
-              (\ o -> Parent <$> (o .:? "id"))
-
-instance ToJSON Parent where
-        toJSON Parent{..}
-          = object (catMaybes [("id" .=) <$> _pId])
-
--- | The request sent to mapsengine.permissions.batchUpdate.
---
--- /See:/ 'permissionsBatchUpdateRequest' smart constructor.
-newtype PermissionsBatchUpdateRequest = PermissionsBatchUpdateRequest
-    { _pburPermissions :: Maybe [Permission]
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PermissionsBatchUpdateRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pburPermissions'
-permissionsBatchUpdateRequest
-    :: PermissionsBatchUpdateRequest
-permissionsBatchUpdateRequest =
-    PermissionsBatchUpdateRequest
-    { _pburPermissions = Nothing
-    }
-
--- | The permissions to be inserted or updated.
-pburPermissions :: Lens' PermissionsBatchUpdateRequest [Permission]
-pburPermissions
-  = lens _pburPermissions
-      (\ s a -> s{_pburPermissions = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON PermissionsBatchUpdateRequest where
-        parseJSON
-          = withObject "PermissionsBatchUpdateRequest"
-              (\ o ->
-                 PermissionsBatchUpdateRequest <$>
-                   (o .:? "permissions" .!= mempty))
-
-instance ToJSON PermissionsBatchUpdateRequest where
-        toJSON PermissionsBatchUpdateRequest{..}
-          = object
-              (catMaybes [("permissions" .=) <$> _pburPermissions])
-
--- | The properties associated with a feature.
---
--- /See:/ 'geoJSONProperties' smart constructor.
-data GeoJSONProperties =
-    GeoJSONProperties
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'GeoJSONProperties' with the minimum fields required to make a request.
---
-geoJSONProperties
-    :: GeoJSONProperties
-geoJSONProperties = GeoJSONProperties
-
-instance FromJSON GeoJSONProperties where
-        parseJSON
-          = withObject "GeoJSONProperties"
-              (\ o -> pure GeoJSONProperties)
-
-instance ToJSON GeoJSONProperties where
-        toJSON = const (Object mempty)
-
--- | The request sent to features.BatchPatch.
---
--- /See:/ 'featuresBatchPatchRequest' smart constructor.
-data FeaturesBatchPatchRequest = FeaturesBatchPatchRequest
-    { _fbprFeatures            :: !(Maybe [Feature])
-    , _fbprNormalizeGeometries :: !Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'FeaturesBatchPatchRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'fbprFeatures'
---
--- * 'fbprNormalizeGeometries'
-featuresBatchPatchRequest
-    :: FeaturesBatchPatchRequest
-featuresBatchPatchRequest =
-    FeaturesBatchPatchRequest
-    { _fbprFeatures = Nothing
-    , _fbprNormalizeGeometries = True
-    }
-
-fbprFeatures :: Lens' FeaturesBatchPatchRequest [Feature]
-fbprFeatures
-  = lens _fbprFeatures (\ s a -> s{_fbprFeatures = a})
-      . _Default
-      . _Coerce
-
--- | If true, the server will normalize feature geometries. It is assumed
--- that the South Pole is exterior to any polygons given. See here for a
--- list of normalizations. If false, all feature geometries must be given
--- already normalized. The points in all LinearRings must be listed in
--- counter-clockwise order, and LinearRings may not intersect.
-fbprNormalizeGeometries :: Lens' FeaturesBatchPatchRequest Bool
-fbprNormalizeGeometries
-  = lens _fbprNormalizeGeometries
-      (\ s a -> s{_fbprNormalizeGeometries = a})
-
-instance FromJSON FeaturesBatchPatchRequest where
-        parseJSON
-          = withObject "FeaturesBatchPatchRequest"
-              (\ o ->
-                 FeaturesBatchPatchRequest <$>
-                   (o .:? "features" .!= mempty) <*>
-                     (o .:? "normalizeGeometries" .!= True))
-
-instance ToJSON FeaturesBatchPatchRequest where
-        toJSON FeaturesBatchPatchRequest{..}
-          = object
-              (catMaybes
-                 [("features" .=) <$> _fbprFeatures,
-                  Just
-                    ("normalizeGeometries" .= _fbprNormalizeGeometries)])
-
 -- | Range of values used for scaling shapes. The min\/max values will be
 -- drawn as shapes with the min\/max size.
 --
@@ -208,6 +61,27 @@ instance ToJSON ValueRange where
           = object
               (catMaybes
                  [("max" .=) <$> _vrMax, ("min" .=) <$> _vrMin])
+
+-- | The properties associated with a feature.
+--
+-- /See:/ 'geoJSONProperties' smart constructor.
+data GeoJSONProperties =
+    GeoJSONProperties
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GeoJSONProperties' with the minimum fields required to make a request.
+--
+geoJSONProperties
+    :: GeoJSONProperties
+geoJSONProperties = GeoJSONProperties
+
+instance FromJSON GeoJSONProperties where
+        parseJSON
+          = withObject "GeoJSONProperties"
+              (\ o -> pure GeoJSONProperties)
+
+instance ToJSON GeoJSONProperties where
+        toJSON = const (Object mempty)
 
 -- | A feature within a table.
 --
@@ -266,6 +140,132 @@ instance ToJSON Feature where
                   Just ("type" .= _fType),
                   ("properties" .=) <$> _fProperties])
 
+-- | A list of the parents of an asset.
+--
+-- /See:/ 'parent' smart constructor.
+newtype Parent = Parent
+    { _pId :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Parent' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pId'
+parent
+    :: Parent
+parent =
+    Parent
+    { _pId = Nothing
+    }
+
+-- | The ID of this parent.
+pId :: Lens' Parent (Maybe Text)
+pId = lens _pId (\ s a -> s{_pId = a})
+
+instance FromJSON Parent where
+        parseJSON
+          = withObject "Parent"
+              (\ o -> Parent <$> (o .:? "id"))
+
+instance ToJSON Parent where
+        toJSON Parent{..}
+          = object (catMaybes [("id" .=) <$> _pId])
+
+-- | The request sent to features.BatchPatch.
+--
+-- /See:/ 'featuresBatchPatchRequest' smart constructor.
+data FeaturesBatchPatchRequest = FeaturesBatchPatchRequest
+    { _fbprFeatures            :: !(Maybe [Feature])
+    , _fbprNormalizeGeometries :: !Bool
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'FeaturesBatchPatchRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fbprFeatures'
+--
+-- * 'fbprNormalizeGeometries'
+featuresBatchPatchRequest
+    :: FeaturesBatchPatchRequest
+featuresBatchPatchRequest =
+    FeaturesBatchPatchRequest
+    { _fbprFeatures = Nothing
+    , _fbprNormalizeGeometries = True
+    }
+
+fbprFeatures :: Lens' FeaturesBatchPatchRequest [Feature]
+fbprFeatures
+  = lens _fbprFeatures (\ s a -> s{_fbprFeatures = a})
+      . _Default
+      . _Coerce
+
+-- | If true, the server will normalize feature geometries. It is assumed
+-- that the South Pole is exterior to any polygons given. See here for a
+-- list of normalizations. If false, all feature geometries must be given
+-- already normalized. The points in all LinearRings must be listed in
+-- counter-clockwise order, and LinearRings may not intersect.
+fbprNormalizeGeometries :: Lens' FeaturesBatchPatchRequest Bool
+fbprNormalizeGeometries
+  = lens _fbprNormalizeGeometries
+      (\ s a -> s{_fbprNormalizeGeometries = a})
+
+instance FromJSON FeaturesBatchPatchRequest where
+        parseJSON
+          = withObject "FeaturesBatchPatchRequest"
+              (\ o ->
+                 FeaturesBatchPatchRequest <$>
+                   (o .:? "features" .!= mempty) <*>
+                     (o .:? "normalizeGeometries" .!= True))
+
+instance ToJSON FeaturesBatchPatchRequest where
+        toJSON FeaturesBatchPatchRequest{..}
+          = object
+              (catMaybes
+                 [("features" .=) <$> _fbprFeatures,
+                  Just
+                    ("normalizeGeometries" .= _fbprNormalizeGeometries)])
+
+-- | The request sent to mapsengine.permissions.batchUpdate.
+--
+-- /See:/ 'permissionsBatchUpdateRequest' smart constructor.
+newtype PermissionsBatchUpdateRequest = PermissionsBatchUpdateRequest
+    { _pburPermissions :: Maybe [Permission]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PermissionsBatchUpdateRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pburPermissions'
+permissionsBatchUpdateRequest
+    :: PermissionsBatchUpdateRequest
+permissionsBatchUpdateRequest =
+    PermissionsBatchUpdateRequest
+    { _pburPermissions = Nothing
+    }
+
+-- | The permissions to be inserted or updated.
+pburPermissions :: Lens' PermissionsBatchUpdateRequest [Permission]
+pburPermissions
+  = lens _pburPermissions
+      (\ s a -> s{_pburPermissions = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON PermissionsBatchUpdateRequest where
+        parseJSON
+          = withObject "PermissionsBatchUpdateRequest"
+              (\ o ->
+                 PermissionsBatchUpdateRequest <$>
+                   (o .:? "permissions" .!= mempty))
+
+instance ToJSON PermissionsBatchUpdateRequest where
+        toJSON PermissionsBatchUpdateRequest{..}
+          = object
+              (catMaybes [("permissions" .=) <$> _pburPermissions])
+
 -- | The request sent to mapsengine.permissions.batchDelete.
 --
 -- /See:/ 'permissionsBatchDeleteRequest' smart constructor.
@@ -303,6 +303,100 @@ instance FromJSON PermissionsBatchDeleteRequest where
 instance ToJSON PermissionsBatchDeleteRequest where
         toJSON PermissionsBatchDeleteRequest{..}
           = object (catMaybes [("ids" .=) <$> _pbdrIds])
+
+-- | The response returned by a call to raster_collections.List. Note: The
+-- list response does not include all the fields available in a raster
+-- collection. Refer to the RasterCollection resource description for
+-- details of the fields that are not included. You\'ll need to send a get
+-- request to retrieve the additional fields for each raster collection.
+--
+-- /See:/ 'rasterCollectionsListResponse' smart constructor.
+data RasterCollectionsListResponse = RasterCollectionsListResponse
+    { _rclrNextPageToken     :: !(Maybe Word8)
+    , _rclrRasterCollections :: !(Maybe [RasterCollection])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RasterCollectionsListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rclrNextPageToken'
+--
+-- * 'rclrRasterCollections'
+rasterCollectionsListResponse
+    :: RasterCollectionsListResponse
+rasterCollectionsListResponse =
+    RasterCollectionsListResponse
+    { _rclrNextPageToken = Nothing
+    , _rclrRasterCollections = Nothing
+    }
+
+-- | Next page token.
+rclrNextPageToken :: Lens' RasterCollectionsListResponse (Maybe Word8)
+rclrNextPageToken
+  = lens _rclrNextPageToken
+      (\ s a -> s{_rclrNextPageToken = a})
+
+-- | Resources returned.
+rclrRasterCollections :: Lens' RasterCollectionsListResponse [RasterCollection]
+rclrRasterCollections
+  = lens _rclrRasterCollections
+      (\ s a -> s{_rclrRasterCollections = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON RasterCollectionsListResponse where
+        parseJSON
+          = withObject "RasterCollectionsListResponse"
+              (\ o ->
+                 RasterCollectionsListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "rasterCollections" .!= mempty))
+
+instance ToJSON RasterCollectionsListResponse where
+        toJSON RasterCollectionsListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _rclrNextPageToken,
+                  ("rasterCollections" .=) <$> _rclrRasterCollections])
+
+-- | The response returned by a call to projects.List.
+--
+-- /See:/ 'projectsListResponse' smart constructor.
+newtype ProjectsListResponse = ProjectsListResponse
+    { _plrProjects :: Maybe [Project]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ProjectsListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'plrProjects'
+projectsListResponse
+    :: ProjectsListResponse
+projectsListResponse =
+    ProjectsListResponse
+    { _plrProjects = Nothing
+    }
+
+-- | Projects returned.
+plrProjects :: Lens' ProjectsListResponse [Project]
+plrProjects
+  = lens _plrProjects (\ s a -> s{_plrProjects = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ProjectsListResponse where
+        parseJSON
+          = withObject "ProjectsListResponse"
+              (\ o ->
+                 ProjectsListResponse <$>
+                   (o .:? "projects" .!= mempty))
+
+instance ToJSON ProjectsListResponse where
+        toJSON ProjectsListResponse{..}
+          = object
+              (catMaybes [("projects" .=) <$> _plrProjects])
 
 --
 -- /See:/ 'geoJSONGeometry' smart constructor.
@@ -415,100 +509,6 @@ instance ToJSON MapLayer where
                   ("visibility" .=) <$> _mlVisibility,
                   ("key" .=) <$> _mlKey, ("name" .=) <$> _mlName,
                   ("id" .=) <$> _mlId, ("type" .=) <$> _mlType])
-
--- | The response returned by a call to raster_collections.List. Note: The
--- list response does not include all the fields available in a raster
--- collection. Refer to the RasterCollection resource description for
--- details of the fields that are not included. You\'ll need to send a get
--- request to retrieve the additional fields for each raster collection.
---
--- /See:/ 'rasterCollectionsListResponse' smart constructor.
-data RasterCollectionsListResponse = RasterCollectionsListResponse
-    { _rclrNextPageToken     :: !(Maybe Word8)
-    , _rclrRasterCollections :: !(Maybe [RasterCollection])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'RasterCollectionsListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rclrNextPageToken'
---
--- * 'rclrRasterCollections'
-rasterCollectionsListResponse
-    :: RasterCollectionsListResponse
-rasterCollectionsListResponse =
-    RasterCollectionsListResponse
-    { _rclrNextPageToken = Nothing
-    , _rclrRasterCollections = Nothing
-    }
-
--- | Next page token.
-rclrNextPageToken :: Lens' RasterCollectionsListResponse (Maybe Word8)
-rclrNextPageToken
-  = lens _rclrNextPageToken
-      (\ s a -> s{_rclrNextPageToken = a})
-
--- | Resources returned.
-rclrRasterCollections :: Lens' RasterCollectionsListResponse [RasterCollection]
-rclrRasterCollections
-  = lens _rclrRasterCollections
-      (\ s a -> s{_rclrRasterCollections = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON RasterCollectionsListResponse where
-        parseJSON
-          = withObject "RasterCollectionsListResponse"
-              (\ o ->
-                 RasterCollectionsListResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "rasterCollections" .!= mempty))
-
-instance ToJSON RasterCollectionsListResponse where
-        toJSON RasterCollectionsListResponse{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _rclrNextPageToken,
-                  ("rasterCollections" .=) <$> _rclrRasterCollections])
-
--- | The response returned by a call to projects.List.
---
--- /See:/ 'projectsListResponse' smart constructor.
-newtype ProjectsListResponse = ProjectsListResponse
-    { _plrProjects :: Maybe [Project]
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ProjectsListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'plrProjects'
-projectsListResponse
-    :: ProjectsListResponse
-projectsListResponse =
-    ProjectsListResponse
-    { _plrProjects = Nothing
-    }
-
--- | Projects returned.
-plrProjects :: Lens' ProjectsListResponse [Project]
-plrProjects
-  = lens _plrProjects (\ s a -> s{_plrProjects = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON ProjectsListResponse where
-        parseJSON
-          = withObject "ProjectsListResponse"
-              (\ o ->
-                 ProjectsListResponse <$>
-                   (o .:? "projects" .!= mempty))
-
-instance ToJSON ProjectsListResponse where
-        toJSON ProjectsListResponse{..}
-          = object
-              (catMaybes [("projects" .=) <$> _plrProjects])
 
 -- | Zoom level range. Zoom levels are restricted between 0 and 24,
 -- inclusive.
@@ -738,6 +738,92 @@ instance ToJSON MapFolder where
                   ("key" .=) <$> _mfKey, ("name" .=) <$> _mfName,
                   ("type" .=) <$> _mfType])
 
+-- | A Maps Engine project groups a collection of resources.
+--
+-- /See:/ 'project' smart constructor.
+data Project = Project
+    { _proName :: !(Maybe Text)
+    , _proId   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Project' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'proName'
+--
+-- * 'proId'
+project
+    :: Project
+project =
+    Project
+    { _proName = Nothing
+    , _proId = Nothing
+    }
+
+-- | A user provided name for this Maps Engine project.
+proName :: Lens' Project (Maybe Text)
+proName = lens _proName (\ s a -> s{_proName = a})
+
+-- | An ID used to refer to this Maps Engine project.
+proId :: Lens' Project (Maybe Text)
+proId = lens _proId (\ s a -> s{_proId = a})
+
+instance FromJSON Project where
+        parseJSON
+          = withObject "Project"
+              (\ o -> Project <$> (o .:? "name") <*> (o .:? "id"))
+
+instance ToJSON Project where
+        toJSON Project{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _proName, ("id" .=) <$> _proId])
+
+-- | Basic color used in styling.
+--
+-- /See:/ 'color' smart constructor.
+data Color = Color
+    { _cColor   :: !(Maybe Text)
+    , _cOpacity :: !(Maybe Double)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Color' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cColor'
+--
+-- * 'cOpacity'
+color
+    :: Color
+color =
+    Color
+    { _cColor = Nothing
+    , _cOpacity = Nothing
+    }
+
+-- | The CSS style color, can be in format of \"red\" or \"#7733EE\".
+cColor :: Lens' Color (Maybe Text)
+cColor = lens _cColor (\ s a -> s{_cColor = a})
+
+-- | Opacity ranges from 0 to 1, inclusive. If not provided, default to 1.
+cOpacity :: Lens' Color (Maybe Double)
+cOpacity = lens _cOpacity (\ s a -> s{_cOpacity = a})
+
+instance FromJSON Color where
+        parseJSON
+          = withObject "Color"
+              (\ o ->
+                 Color <$> (o .:? "color") <*> (o .:? "opacity"))
+
+instance ToJSON Color where
+        toJSON Color{..}
+          = object
+              (catMaybes
+                 [("color" .=) <$> _cColor,
+                  ("opacity" .=) <$> _cOpacity])
+
 -- | A raster collection groups multiple Raster resources for inclusion in a
 -- Layer.
 --
@@ -747,7 +833,7 @@ data RasterCollection = RasterCollection
     , _rcWritersCanEditPermissions :: !(Maybe Bool)
     , _rcEtag                      :: !(Maybe Text)
     , _rcCreatorEmail              :: !(Maybe Text)
-    , _rcRasterType                :: !(Maybe RasterType)
+    , _rcRasterType                :: !(Maybe RasterCollectionRasterType)
     , _rcLastModifiedTime          :: !(Maybe DateTime')
     , _rcLastModifierEmail         :: !(Maybe Text)
     , _rcName                      :: !(Maybe Text)
@@ -848,7 +934,7 @@ rcCreatorEmail
       (\ s a -> s{_rcCreatorEmail = a})
 
 -- | The type of rasters contained within this RasterCollection.
-rcRasterType :: Lens' RasterCollection (Maybe RasterType)
+rcRasterType :: Lens' RasterCollection (Maybe RasterCollectionRasterType)
 rcRasterType
   = lens _rcRasterType (\ s a -> s{_rcRasterType = a})
 
@@ -1036,91 +1122,95 @@ instance ToJSON LineStyleStroke where
                   ("width" .=) <$> _lssWidth,
                   ("opacity" .=) <$> _lssOpacity])
 
--- | A Maps Engine project groups a collection of resources.
+-- | The response returned by a call to
+-- rasterCollections.rasters.batchDelete.
 --
--- /See:/ 'project' smart constructor.
-data Project = Project
-    { _proName :: !(Maybe Text)
-    , _proId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+-- /See:/ 'rasterCollectionsRastersBatchDeleteResponse' smart constructor.
+data RasterCollectionsRastersBatchDeleteResponse =
+    RasterCollectionsRastersBatchDeleteResponse
+    deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Project' with the minimum fields required to make a request.
+-- | Creates a value of 'RasterCollectionsRastersBatchDeleteResponse' with the minimum fields required to make a request.
 --
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'proName'
---
--- * 'proId'
-project
-    :: Project
-project =
-    Project
-    { _proName = Nothing
-    , _proId = Nothing
-    }
+rasterCollectionsRastersBatchDeleteResponse
+    :: RasterCollectionsRastersBatchDeleteResponse
+rasterCollectionsRastersBatchDeleteResponse =
+    RasterCollectionsRastersBatchDeleteResponse
 
--- | A user provided name for this Maps Engine project.
-proName :: Lens' Project (Maybe Text)
-proName = lens _proName (\ s a -> s{_proName = a})
-
--- | An ID used to refer to this Maps Engine project.
-proId :: Lens' Project (Maybe Text)
-proId = lens _proId (\ s a -> s{_proId = a})
-
-instance FromJSON Project where
+instance FromJSON
+         RasterCollectionsRastersBatchDeleteResponse where
         parseJSON
-          = withObject "Project"
-              (\ o -> Project <$> (o .:? "name") <*> (o .:? "id"))
-
-instance ToJSON Project where
-        toJSON Project{..}
-          = object
-              (catMaybes
-                 [("name" .=) <$> _proName, ("id" .=) <$> _proId])
-
--- | Basic color used in styling.
---
--- /See:/ 'color' smart constructor.
-data Color = Color
-    { _cColor   :: !(Maybe Text)
-    , _cOpacity :: !(Maybe Double)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Color' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cColor'
---
--- * 'cOpacity'
-color
-    :: Color
-color =
-    Color
-    { _cColor = Nothing
-    , _cOpacity = Nothing
-    }
-
--- | The CSS style color, can be in format of \"red\" or \"#7733EE\".
-cColor :: Lens' Color (Maybe Text)
-cColor = lens _cColor (\ s a -> s{_cColor = a})
-
--- | Opacity ranges from 0 to 1, inclusive. If not provided, default to 1.
-cOpacity :: Lens' Color (Maybe Double)
-cOpacity = lens _cOpacity (\ s a -> s{_cOpacity = a})
-
-instance FromJSON Color where
-        parseJSON
-          = withObject "Color"
+          = withObject
+              "RasterCollectionsRastersBatchDeleteResponse"
               (\ o ->
-                 Color <$> (o .:? "color") <*> (o .:? "opacity"))
+                 pure RasterCollectionsRastersBatchDeleteResponse)
 
-instance ToJSON Color where
-        toJSON Color{..}
+instance ToJSON
+         RasterCollectionsRastersBatchDeleteResponse where
+        toJSON = const (Object mempty)
+
+-- | The response returned by a call to any asset\'s Process method.
+--
+-- /See:/ 'processResponse' smart constructor.
+data ProcessResponse =
+    ProcessResponse
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ProcessResponse' with the minimum fields required to make a request.
+--
+processResponse
+    :: ProcessResponse
+processResponse = ProcessResponse
+
+instance FromJSON ProcessResponse where
+        parseJSON
+          = withObject "ProcessResponse"
+              (\ o -> pure ProcessResponse)
+
+instance ToJSON ProcessResponse where
+        toJSON = const (Object mempty)
+
+--
+-- /See:/ 'tableColumn' smart constructor.
+data TableColumn = TableColumn
+    { _tcName :: !(Maybe Text)
+    , _tcType :: !(Maybe TableColumnType)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TableColumn' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tcName'
+--
+-- * 'tcType'
+tableColumn
+    :: TableColumn
+tableColumn =
+    TableColumn
+    { _tcName = Nothing
+    , _tcType = Nothing
+    }
+
+-- | The column name.
+tcName :: Lens' TableColumn (Maybe Text)
+tcName = lens _tcName (\ s a -> s{_tcName = a})
+
+-- | The type of data stored in this column.
+tcType :: Lens' TableColumn (Maybe TableColumnType)
+tcType = lens _tcType (\ s a -> s{_tcType = a})
+
+instance FromJSON TableColumn where
+        parseJSON
+          = withObject "TableColumn"
+              (\ o ->
+                 TableColumn <$> (o .:? "name") <*> (o .:? "type"))
+
+instance ToJSON TableColumn where
+        toJSON TableColumn{..}
           = object
               (catMaybes
-                 [("color" .=) <$> _cColor,
-                  ("opacity" .=) <$> _cOpacity])
+                 [("name" .=) <$> _tcName, ("type" .=) <$> _tcType])
 
 -- | An asset is any Google Maps Engine resource that has a globally unique
 -- ID. Assets include maps, layers, vector tables, raster collections, and
@@ -1320,103 +1410,13 @@ instance ToJSON Asset where
                   ("description" .=) <$> _aDescription,
                   ("tags" .=) <$> _aTags])
 
--- | The response returned by a call to any asset\'s Process method.
---
--- /See:/ 'processResponse' smart constructor.
-data ProcessResponse =
-    ProcessResponse
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ProcessResponse' with the minimum fields required to make a request.
---
-processResponse
-    :: ProcessResponse
-processResponse = ProcessResponse
-
-instance FromJSON ProcessResponse where
-        parseJSON
-          = withObject "ProcessResponse"
-              (\ o -> pure ProcessResponse)
-
-instance ToJSON ProcessResponse where
-        toJSON = const (Object mempty)
-
---
--- /See:/ 'tableColumn' smart constructor.
-data TableColumn = TableColumn
-    { _tcName :: !(Maybe Text)
-    , _tcType :: !(Maybe TableColumnType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'TableColumn' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'tcName'
---
--- * 'tcType'
-tableColumn
-    :: TableColumn
-tableColumn =
-    TableColumn
-    { _tcName = Nothing
-    , _tcType = Nothing
-    }
-
--- | The column name.
-tcName :: Lens' TableColumn (Maybe Text)
-tcName = lens _tcName (\ s a -> s{_tcName = a})
-
--- | The type of data stored in this column.
-tcType :: Lens' TableColumn (Maybe TableColumnType)
-tcType = lens _tcType (\ s a -> s{_tcType = a})
-
-instance FromJSON TableColumn where
-        parseJSON
-          = withObject "TableColumn"
-              (\ o ->
-                 TableColumn <$> (o .:? "name") <*> (o .:? "type"))
-
-instance ToJSON TableColumn where
-        toJSON TableColumn{..}
-          = object
-              (catMaybes
-                 [("name" .=) <$> _tcName, ("type" .=) <$> _tcType])
-
--- | The response returned by a call to
--- rasterCollections.rasters.batchDelete.
---
--- /See:/ 'rasterCollectionsRastersBatchDeleteResponse' smart constructor.
-data RasterCollectionsRastersBatchDeleteResponse =
-    RasterCollectionsRastersBatchDeleteResponse
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'RasterCollectionsRastersBatchDeleteResponse' with the minimum fields required to make a request.
---
-rasterCollectionsRastersBatchDeleteResponse
-    :: RasterCollectionsRastersBatchDeleteResponse
-rasterCollectionsRastersBatchDeleteResponse =
-    RasterCollectionsRastersBatchDeleteResponse
-
-instance FromJSON
-         RasterCollectionsRastersBatchDeleteResponse where
-        parseJSON
-          = withObject
-              "RasterCollectionsRastersBatchDeleteResponse"
-              (\ o ->
-                 pure RasterCollectionsRastersBatchDeleteResponse)
-
-instance ToJSON
-         RasterCollectionsRastersBatchDeleteResponse where
-        toJSON = const (Object mempty)
-
 -- | Parameters for styling points as scaled shapes.
 --
 -- /See:/ 'scaledShape' smart constructor.
 data ScaledShape = ScaledShape
     { _ssBOrder :: !(Maybe BOrder)
     , _ssFill   :: !(Maybe Color)
-    , _ssShape  :: !(Maybe Shape)
+    , _ssShape  :: !(Maybe ScaledShapeShape)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScaledShape' with the minimum fields required to make a request.
@@ -1448,7 +1448,7 @@ ssFill :: Lens' ScaledShape (Maybe Color)
 ssFill = lens _ssFill (\ s a -> s{_ssFill = a})
 
 -- | Name of the shape.
-ssShape :: Lens' ScaledShape (Maybe Shape)
+ssShape :: Lens' ScaledShape (Maybe ScaledShapeShape)
 ssShape = lens _ssShape (\ s a -> s{_ssShape = a})
 
 instance FromJSON ScaledShape where
@@ -1465,6 +1465,57 @@ instance ToJSON ScaledShape where
               (catMaybes
                  [("border" .=) <$> _ssBOrder,
                   ("fill" .=) <$> _ssFill, ("shape" .=) <$> _ssShape])
+
+-- | The request sent to features.BatchDelete.
+--
+-- /See:/ 'featuresBatchDeleteRequest' smart constructor.
+data FeaturesBatchDeleteRequest = FeaturesBatchDeleteRequest
+    { _fbdrPrimaryKeys :: !(Maybe [Text])
+    , _fbdrGxIds       :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'FeaturesBatchDeleteRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fbdrPrimaryKeys'
+--
+-- * 'fbdrGxIds'
+featuresBatchDeleteRequest
+    :: FeaturesBatchDeleteRequest
+featuresBatchDeleteRequest =
+    FeaturesBatchDeleteRequest
+    { _fbdrPrimaryKeys = Nothing
+    , _fbdrGxIds = Nothing
+    }
+
+fbdrPrimaryKeys :: Lens' FeaturesBatchDeleteRequest [Text]
+fbdrPrimaryKeys
+  = lens _fbdrPrimaryKeys
+      (\ s a -> s{_fbdrPrimaryKeys = a})
+      . _Default
+      . _Coerce
+
+fbdrGxIds :: Lens' FeaturesBatchDeleteRequest [Text]
+fbdrGxIds
+  = lens _fbdrGxIds (\ s a -> s{_fbdrGxIds = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON FeaturesBatchDeleteRequest where
+        parseJSON
+          = withObject "FeaturesBatchDeleteRequest"
+              (\ o ->
+                 FeaturesBatchDeleteRequest <$>
+                   (o .:? "primaryKeys" .!= mempty) <*>
+                     (o .:? "gx_ids" .!= mempty))
+
+instance ToJSON FeaturesBatchDeleteRequest where
+        toJSON FeaturesBatchDeleteRequest{..}
+          = object
+              (catMaybes
+                 [("primaryKeys" .=) <$> _fbdrPrimaryKeys,
+                  ("gx_ids" .=) <$> _fbdrGxIds])
 
 -- | An icon is a user-uploaded image that can be used to style point
 -- geometries.
@@ -1522,83 +1573,56 @@ instance ToJSON Icon where
                  [("name" .=) <$> _iName, ("id" .=) <$> _iId,
                   ("description" .=) <$> _iDescription])
 
--- | The request sent to features.BatchDelete.
+-- | The response returned by a call to parents.List.
 --
--- /See:/ 'featuresBatchDeleteRequest' smart constructor.
-data FeaturesBatchDeleteRequest = FeaturesBatchDeleteRequest
-    { _fbdrPrimaryKeys :: !(Maybe [Text])
-    , _fbdrGxIds       :: !(Maybe [Text])
+-- /See:/ 'parentsListResponse' smart constructor.
+data ParentsListResponse = ParentsListResponse
+    { _plrNextPageToken :: !(Maybe Text)
+    , _plrParents       :: !(Maybe [Parent])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FeaturesBatchDeleteRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'ParentsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'fbdrPrimaryKeys'
+-- * 'plrNextPageToken'
 --
--- * 'fbdrGxIds'
-featuresBatchDeleteRequest
-    :: FeaturesBatchDeleteRequest
-featuresBatchDeleteRequest =
-    FeaturesBatchDeleteRequest
-    { _fbdrPrimaryKeys = Nothing
-    , _fbdrGxIds = Nothing
+-- * 'plrParents'
+parentsListResponse
+    :: ParentsListResponse
+parentsListResponse =
+    ParentsListResponse
+    { _plrNextPageToken = Nothing
+    , _plrParents = Nothing
     }
 
-fbdrPrimaryKeys :: Lens' FeaturesBatchDeleteRequest [Text]
-fbdrPrimaryKeys
-  = lens _fbdrPrimaryKeys
-      (\ s a -> s{_fbdrPrimaryKeys = a})
-      . _Default
-      . _Coerce
+-- | Next page token.
+plrNextPageToken :: Lens' ParentsListResponse (Maybe Text)
+plrNextPageToken
+  = lens _plrNextPageToken
+      (\ s a -> s{_plrNextPageToken = a})
 
-fbdrGxIds :: Lens' FeaturesBatchDeleteRequest [Text]
-fbdrGxIds
-  = lens _fbdrGxIds (\ s a -> s{_fbdrGxIds = a}) .
+-- | The parent assets.
+plrParents :: Lens' ParentsListResponse [Parent]
+plrParents
+  = lens _plrParents (\ s a -> s{_plrParents = a}) .
       _Default
       . _Coerce
 
-instance FromJSON FeaturesBatchDeleteRequest where
+instance FromJSON ParentsListResponse where
         parseJSON
-          = withObject "FeaturesBatchDeleteRequest"
+          = withObject "ParentsListResponse"
               (\ o ->
-                 FeaturesBatchDeleteRequest <$>
-                   (o .:? "primaryKeys" .!= mempty) <*>
-                     (o .:? "gx_ids" .!= mempty))
+                 ParentsListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "parents" .!= mempty))
 
-instance ToJSON FeaturesBatchDeleteRequest where
-        toJSON FeaturesBatchDeleteRequest{..}
+instance ToJSON ParentsListResponse where
+        toJSON ParentsListResponse{..}
           = object
               (catMaybes
-                 [("primaryKeys" .=) <$> _fbdrPrimaryKeys,
-                  ("gx_ids" .=) <$> _fbdrGxIds])
-
--- | The response returned by a call to
--- rasterCollections.rasters.batchInsert.
---
--- /See:/ 'rasterCollectionsRastersBatchInsertResponse' smart constructor.
-data RasterCollectionsRastersBatchInsertResponse =
-    RasterCollectionsRastersBatchInsertResponse
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'RasterCollectionsRastersBatchInsertResponse' with the minimum fields required to make a request.
---
-rasterCollectionsRastersBatchInsertResponse
-    :: RasterCollectionsRastersBatchInsertResponse
-rasterCollectionsRastersBatchInsertResponse =
-    RasterCollectionsRastersBatchInsertResponse
-
-instance FromJSON
-         RasterCollectionsRastersBatchInsertResponse where
-        parseJSON
-          = withObject
-              "RasterCollectionsRastersBatchInsertResponse"
-              (\ o ->
-                 pure RasterCollectionsRastersBatchInsertResponse)
-
-instance ToJSON
-         RasterCollectionsRastersBatchInsertResponse where
-        toJSON = const (Object mempty)
+                 [("nextPageToken" .=) <$> _plrNextPageToken,
+                  ("parents" .=) <$> _plrParents])
 
 -- | The response returned by a call to features.List.
 --
@@ -1685,213 +1709,31 @@ instance ToJSON FeaturesListResponse where
                   ("features" .=) <$> _flrFeatures,
                   Just ("type" .= _flrType)])
 
--- | The response returned by a call to parents.List.
+-- | The response returned by a call to
+-- rasterCollections.rasters.batchInsert.
 --
--- /See:/ 'parentsListResponse' smart constructor.
-data ParentsListResponse = ParentsListResponse
-    { _plrNextPageToken :: !(Maybe Text)
-    , _plrParents       :: !(Maybe [Parent])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ParentsListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'plrNextPageToken'
---
--- * 'plrParents'
-parentsListResponse
-    :: ParentsListResponse
-parentsListResponse =
-    ParentsListResponse
-    { _plrNextPageToken = Nothing
-    , _plrParents = Nothing
-    }
-
--- | Next page token.
-plrNextPageToken :: Lens' ParentsListResponse (Maybe Text)
-plrNextPageToken
-  = lens _plrNextPageToken
-      (\ s a -> s{_plrNextPageToken = a})
-
--- | The parent assets.
-plrParents :: Lens' ParentsListResponse [Parent]
-plrParents
-  = lens _plrParents (\ s a -> s{_plrParents = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON ParentsListResponse where
-        parseJSON
-          = withObject "ParentsListResponse"
-              (\ o ->
-                 ParentsListResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "parents" .!= mempty))
-
-instance ToJSON ParentsListResponse where
-        toJSON ParentsListResponse{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _plrNextPageToken,
-                  ("parents" .=) <$> _plrParents])
-
--- | The request sent to rasterCollections.Rasters.BatchDelete.
---
--- /See:/ 'rasterCollectionsRasterBatchDeleteRequest' smart constructor.
-newtype RasterCollectionsRasterBatchDeleteRequest = RasterCollectionsRasterBatchDeleteRequest
-    { _rcrbdrIds :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'RasterCollectionsRasterBatchDeleteRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rcrbdrIds'
-rasterCollectionsRasterBatchDeleteRequest
-    :: RasterCollectionsRasterBatchDeleteRequest
-rasterCollectionsRasterBatchDeleteRequest =
-    RasterCollectionsRasterBatchDeleteRequest
-    { _rcrbdrIds = Nothing
-    }
-
--- | An array of Raster asset IDs to be removed from this RasterCollection.
-rcrbdrIds :: Lens' RasterCollectionsRasterBatchDeleteRequest [Text]
-rcrbdrIds
-  = lens _rcrbdrIds (\ s a -> s{_rcrbdrIds = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON
-         RasterCollectionsRasterBatchDeleteRequest where
-        parseJSON
-          = withObject
-              "RasterCollectionsRasterBatchDeleteRequest"
-              (\ o ->
-                 RasterCollectionsRasterBatchDeleteRequest <$>
-                   (o .:? "ids" .!= mempty))
-
-instance ToJSON
-         RasterCollectionsRasterBatchDeleteRequest where
-        toJSON RasterCollectionsRasterBatchDeleteRequest{..}
-          = object (catMaybes [("ids" .=) <$> _rcrbdrIds])
-
--- | Text label style.
---
--- /See:/ 'labelStyle' smart constructor.
-data LabelStyle = LabelStyle
-    { _lsFontStyle  :: !(Maybe FontStyle)
-    , _lsColor      :: !(Maybe Text)
-    , _lsSize       :: !(Maybe Double)
-    , _lsOpacity    :: !(Maybe Double)
-    , _lsOutline    :: !(Maybe Color)
-    , _lsFontWeight :: !(Maybe FontWeight)
-    , _lsColumn     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'LabelStyle' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lsFontStyle'
---
--- * 'lsColor'
---
--- * 'lsSize'
---
--- * 'lsOpacity'
---
--- * 'lsOutline'
---
--- * 'lsFontWeight'
---
--- * 'lsColumn'
-labelStyle
-    :: LabelStyle
-labelStyle =
-    LabelStyle
-    { _lsFontStyle = Nothing
-    , _lsColor = Nothing
-    , _lsSize = Nothing
-    , _lsOpacity = Nothing
-    , _lsOutline = Nothing
-    , _lsFontWeight = Nothing
-    , _lsColumn = Nothing
-    }
-
--- | Font style of the label, defaults to \'normal\'.
-lsFontStyle :: Lens' LabelStyle (Maybe FontStyle)
-lsFontStyle
-  = lens _lsFontStyle (\ s a -> s{_lsFontStyle = a})
-
--- | Color of the text. If not provided, default to black.
-lsColor :: Lens' LabelStyle (Maybe Text)
-lsColor = lens _lsColor (\ s a -> s{_lsColor = a})
-
--- | Font size of the label, in pixels. 8 \<= size \<= 15. If not provided, a
--- default size will be provided.
-lsSize :: Lens' LabelStyle (Maybe Double)
-lsSize = lens _lsSize (\ s a -> s{_lsSize = a})
-
--- | Opacity of the text.
-lsOpacity :: Lens' LabelStyle (Maybe Double)
-lsOpacity
-  = lens _lsOpacity (\ s a -> s{_lsOpacity = a})
-
--- | Outline color of the text.
-lsOutline :: Lens' LabelStyle (Maybe Color)
-lsOutline
-  = lens _lsOutline (\ s a -> s{_lsOutline = a})
-
--- | Font weight of the label, defaults to \'normal\'.
-lsFontWeight :: Lens' LabelStyle (Maybe FontWeight)
-lsFontWeight
-  = lens _lsFontWeight (\ s a -> s{_lsFontWeight = a})
-
--- | The column value of the feature to be displayed.
-lsColumn :: Lens' LabelStyle (Maybe Text)
-lsColumn = lens _lsColumn (\ s a -> s{_lsColumn = a})
-
-instance FromJSON LabelStyle where
-        parseJSON
-          = withObject "LabelStyle"
-              (\ o ->
-                 LabelStyle <$>
-                   (o .:? "fontStyle") <*> (o .:? "color") <*>
-                     (o .:? "size")
-                     <*> (o .:? "opacity")
-                     <*> (o .:? "outline")
-                     <*> (o .:? "fontWeight")
-                     <*> (o .:? "column"))
-
-instance ToJSON LabelStyle where
-        toJSON LabelStyle{..}
-          = object
-              (catMaybes
-                 [("fontStyle" .=) <$> _lsFontStyle,
-                  ("color" .=) <$> _lsColor, ("size" .=) <$> _lsSize,
-                  ("opacity" .=) <$> _lsOpacity,
-                  ("outline" .=) <$> _lsOutline,
-                  ("fontWeight" .=) <$> _lsFontWeight,
-                  ("column" .=) <$> _lsColumn])
-
---
--- /See:/ 'mapItem' smart constructor.
-data MapItem =
-    MapItem
+-- /See:/ 'rasterCollectionsRastersBatchInsertResponse' smart constructor.
+data RasterCollectionsRastersBatchInsertResponse =
+    RasterCollectionsRastersBatchInsertResponse
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MapItem' with the minimum fields required to make a request.
+-- | Creates a value of 'RasterCollectionsRastersBatchInsertResponse' with the minimum fields required to make a request.
 --
-mapItem
-    :: MapItem
-mapItem = MapItem
+rasterCollectionsRastersBatchInsertResponse
+    :: RasterCollectionsRastersBatchInsertResponse
+rasterCollectionsRastersBatchInsertResponse =
+    RasterCollectionsRastersBatchInsertResponse
 
-instance FromJSON MapItem where
+instance FromJSON
+         RasterCollectionsRastersBatchInsertResponse where
         parseJSON
-          = withObject "MapItem" (\ o -> pure MapItem)
+          = withObject
+              "RasterCollectionsRastersBatchInsertResponse"
+              (\ o ->
+                 pure RasterCollectionsRastersBatchInsertResponse)
 
-instance ToJSON MapItem where
+instance ToJSON
+         RasterCollectionsRastersBatchInsertResponse where
         toJSON = const (Object mempty)
 
 -- | The response returned by a call to icons.List.
@@ -1944,6 +1786,145 @@ instance ToJSON IconsListResponse where
               (catMaybes
                  [("nextPageToken" .=) <$> _ilrNextPageToken,
                   ("icons" .=) <$> _ilrIcons])
+
+-- | Text label style.
+--
+-- /See:/ 'labelStyle' smart constructor.
+data LabelStyle = LabelStyle
+    { _lsFontStyle  :: !(Maybe LabelStyleFontStyle)
+    , _lsColor      :: !(Maybe Text)
+    , _lsSize       :: !(Maybe Double)
+    , _lsOpacity    :: !(Maybe Double)
+    , _lsOutline    :: !(Maybe Color)
+    , _lsFontWeight :: !(Maybe LabelStyleFontWeight)
+    , _lsColumn     :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LabelStyle' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lsFontStyle'
+--
+-- * 'lsColor'
+--
+-- * 'lsSize'
+--
+-- * 'lsOpacity'
+--
+-- * 'lsOutline'
+--
+-- * 'lsFontWeight'
+--
+-- * 'lsColumn'
+labelStyle
+    :: LabelStyle
+labelStyle =
+    LabelStyle
+    { _lsFontStyle = Nothing
+    , _lsColor = Nothing
+    , _lsSize = Nothing
+    , _lsOpacity = Nothing
+    , _lsOutline = Nothing
+    , _lsFontWeight = Nothing
+    , _lsColumn = Nothing
+    }
+
+-- | Font style of the label, defaults to \'normal\'.
+lsFontStyle :: Lens' LabelStyle (Maybe LabelStyleFontStyle)
+lsFontStyle
+  = lens _lsFontStyle (\ s a -> s{_lsFontStyle = a})
+
+-- | Color of the text. If not provided, default to black.
+lsColor :: Lens' LabelStyle (Maybe Text)
+lsColor = lens _lsColor (\ s a -> s{_lsColor = a})
+
+-- | Font size of the label, in pixels. 8 \<= size \<= 15. If not provided, a
+-- default size will be provided.
+lsSize :: Lens' LabelStyle (Maybe Double)
+lsSize = lens _lsSize (\ s a -> s{_lsSize = a})
+
+-- | Opacity of the text.
+lsOpacity :: Lens' LabelStyle (Maybe Double)
+lsOpacity
+  = lens _lsOpacity (\ s a -> s{_lsOpacity = a})
+
+-- | Outline color of the text.
+lsOutline :: Lens' LabelStyle (Maybe Color)
+lsOutline
+  = lens _lsOutline (\ s a -> s{_lsOutline = a})
+
+-- | Font weight of the label, defaults to \'normal\'.
+lsFontWeight :: Lens' LabelStyle (Maybe LabelStyleFontWeight)
+lsFontWeight
+  = lens _lsFontWeight (\ s a -> s{_lsFontWeight = a})
+
+-- | The column value of the feature to be displayed.
+lsColumn :: Lens' LabelStyle (Maybe Text)
+lsColumn = lens _lsColumn (\ s a -> s{_lsColumn = a})
+
+instance FromJSON LabelStyle where
+        parseJSON
+          = withObject "LabelStyle"
+              (\ o ->
+                 LabelStyle <$>
+                   (o .:? "fontStyle") <*> (o .:? "color") <*>
+                     (o .:? "size")
+                     <*> (o .:? "opacity")
+                     <*> (o .:? "outline")
+                     <*> (o .:? "fontWeight")
+                     <*> (o .:? "column"))
+
+instance ToJSON LabelStyle where
+        toJSON LabelStyle{..}
+          = object
+              (catMaybes
+                 [("fontStyle" .=) <$> _lsFontStyle,
+                  ("color" .=) <$> _lsColor, ("size" .=) <$> _lsSize,
+                  ("opacity" .=) <$> _lsOpacity,
+                  ("outline" .=) <$> _lsOutline,
+                  ("fontWeight" .=) <$> _lsFontWeight,
+                  ("column" .=) <$> _lsColumn])
+
+-- | The request sent to rasterCollections.Rasters.BatchDelete.
+--
+-- /See:/ 'rasterCollectionsRasterBatchDeleteRequest' smart constructor.
+newtype RasterCollectionsRasterBatchDeleteRequest = RasterCollectionsRasterBatchDeleteRequest
+    { _rcrbdrIds :: Maybe [Text]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RasterCollectionsRasterBatchDeleteRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rcrbdrIds'
+rasterCollectionsRasterBatchDeleteRequest
+    :: RasterCollectionsRasterBatchDeleteRequest
+rasterCollectionsRasterBatchDeleteRequest =
+    RasterCollectionsRasterBatchDeleteRequest
+    { _rcrbdrIds = Nothing
+    }
+
+-- | An array of Raster asset IDs to be removed from this RasterCollection.
+rcrbdrIds :: Lens' RasterCollectionsRasterBatchDeleteRequest [Text]
+rcrbdrIds
+  = lens _rcrbdrIds (\ s a -> s{_rcrbdrIds = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON
+         RasterCollectionsRasterBatchDeleteRequest where
+        parseJSON
+          = withObject
+              "RasterCollectionsRasterBatchDeleteRequest"
+              (\ o ->
+                 RasterCollectionsRasterBatchDeleteRequest <$>
+                   (o .:? "ids" .!= mempty))
+
+instance ToJSON
+         RasterCollectionsRasterBatchDeleteRequest where
+        toJSON RasterCollectionsRasterBatchDeleteRequest{..}
+          = object (catMaybes [("ids" .=) <$> _rcrbdrIds])
 
 -- | A schema indicating the properties which may be associated with features
 -- within a Table, and the types of those properties.
@@ -2012,12 +1993,167 @@ instance ToJSON Schema where
                   ("columns" .=) <$> _sColumns,
                   ("primaryGeometry" .=) <$> _sPrimaryGeometry])
 
+--
+-- /See:/ 'mapItem' smart constructor.
+data MapItem =
+    MapItem
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MapItem' with the minimum fields required to make a request.
+--
+mapItem
+    :: MapItem
+mapItem = MapItem
+
+instance FromJSON MapItem where
+        parseJSON
+          = withObject "MapItem" (\ o -> pure MapItem)
+
+instance ToJSON MapItem where
+        toJSON = const (Object mempty)
+
+-- | The request sent to rasterCollections.Rasters.BatchInsert.
+--
+-- /See:/ 'rasterCollectionsRastersBatchInsertRequest' smart constructor.
+newtype RasterCollectionsRastersBatchInsertRequest = RasterCollectionsRastersBatchInsertRequest
+    { _rcrbirIds :: Maybe [Text]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RasterCollectionsRastersBatchInsertRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rcrbirIds'
+rasterCollectionsRastersBatchInsertRequest
+    :: RasterCollectionsRastersBatchInsertRequest
+rasterCollectionsRastersBatchInsertRequest =
+    RasterCollectionsRastersBatchInsertRequest
+    { _rcrbirIds = Nothing
+    }
+
+-- | An array of Raster asset IDs to be added to this RasterCollection.
+rcrbirIds :: Lens' RasterCollectionsRastersBatchInsertRequest [Text]
+rcrbirIds
+  = lens _rcrbirIds (\ s a -> s{_rcrbirIds = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON
+         RasterCollectionsRastersBatchInsertRequest where
+        parseJSON
+          = withObject
+              "RasterCollectionsRastersBatchInsertRequest"
+              (\ o ->
+                 RasterCollectionsRastersBatchInsertRequest <$>
+                   (o .:? "ids" .!= mempty))
+
+instance ToJSON
+         RasterCollectionsRastersBatchInsertRequest where
+        toJSON RasterCollectionsRastersBatchInsertRequest{..}
+          = object (catMaybes [("ids" .=) <$> _rcrbirIds])
+
+-- | The published version of a map asset.
+--
+-- /See:/ 'publishedMap' smart constructor.
+data PublishedMap = PublishedMap
+    { _pmDefaultViewport :: !(Maybe [Double])
+    , _pmContents        :: !(Maybe [MapItem])
+    , _pmName            :: !(Maybe Text)
+    , _pmId              :: !(Maybe Text)
+    , _pmProjectId       :: !(Maybe Text)
+    , _pmDescription     :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PublishedMap' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pmDefaultViewport'
+--
+-- * 'pmContents'
+--
+-- * 'pmName'
+--
+-- * 'pmId'
+--
+-- * 'pmProjectId'
+--
+-- * 'pmDescription'
+publishedMap
+    :: PublishedMap
+publishedMap =
+    PublishedMap
+    { _pmDefaultViewport = Nothing
+    , _pmContents = Nothing
+    , _pmName = Nothing
+    , _pmId = Nothing
+    , _pmProjectId = Nothing
+    , _pmDescription = Nothing
+    }
+
+-- | An array of four numbers (west, south, east, north) which defines the
+-- rectangular bounding box of the default viewport. The numbers represent
+-- latitude and longitude in decimal degrees.
+pmDefaultViewport :: Lens' PublishedMap [Double]
+pmDefaultViewport
+  = lens _pmDefaultViewport
+      (\ s a -> s{_pmDefaultViewport = a})
+      . _Default
+      . _Coerce
+
+-- | The contents of this Map.
+pmContents :: Lens' PublishedMap [MapItem]
+pmContents
+  = lens _pmContents (\ s a -> s{_pmContents = a}) .
+      _Default
+      . _Coerce
+
+-- | The name of this Map, supplied by the author.
+pmName :: Lens' PublishedMap (Maybe Text)
+pmName = lens _pmName (\ s a -> s{_pmName = a})
+
+-- | A globally unique ID, used to refer to this Map.
+pmId :: Lens' PublishedMap (Maybe Text)
+pmId = lens _pmId (\ s a -> s{_pmId = a})
+
+-- | The ID of the project that this Map is in.
+pmProjectId :: Lens' PublishedMap (Maybe Text)
+pmProjectId
+  = lens _pmProjectId (\ s a -> s{_pmProjectId = a})
+
+-- | The description of this Map, supplied by the author.
+pmDescription :: Lens' PublishedMap (Maybe Text)
+pmDescription
+  = lens _pmDescription
+      (\ s a -> s{_pmDescription = a})
+
+instance FromJSON PublishedMap where
+        parseJSON
+          = withObject "PublishedMap"
+              (\ o ->
+                 PublishedMap <$>
+                   (o .:? "defaultViewport") <*> (o .:? "contents") <*>
+                     (o .:? "name")
+                     <*> (o .:? "id")
+                     <*> (o .:? "projectId")
+                     <*> (o .:? "description"))
+
+instance ToJSON PublishedMap where
+        toJSON PublishedMap{..}
+          = object
+              (catMaybes
+                 [("defaultViewport" .=) <$> _pmDefaultViewport,
+                  ("contents" .=) <$> _pmContents,
+                  ("name" .=) <$> _pmName, ("id" .=) <$> _pmId,
+                  ("projectId" .=) <$> _pmProjectId,
+                  ("description" .=) <$> _pmDescription])
+
 -- | Acquisition time represents acquired time of a raster.
 --
 -- /See:/ 'acquisitionTime' smart constructor.
 data AcquisitionTime = AcquisitionTime
     { _atStart     :: !(Maybe DateTime')
-    , _atPrecision :: !(Maybe Precision)
+    , _atPrecision :: !(Maybe AcquisitionTimePrecision)
     , _atEnd       :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2047,7 +2183,7 @@ atStart
       mapping _DateTime
 
 -- | The precision of acquisition time.
-atPrecision :: Lens' AcquisitionTime (Maybe Precision)
+atPrecision :: Lens' AcquisitionTime (Maybe AcquisitionTimePrecision)
 atPrecision
   = lens _atPrecision (\ s a -> s{_atPrecision = a})
 
@@ -2129,6 +2265,231 @@ instance ToJSON TablesListResponse where
                  [("nextPageToken" .=) <$> _tlrNextPageToken,
                   ("tables" .=) <$> _tlrTables])
 
+-- | Style for icon, this is part of point style.
+--
+-- /See:/ 'iconStyle' smart constructor.
+data IconStyle = IconStyle
+    { _isScaledShape     :: !(Maybe ScaledShape)
+    , _isScalingFunction :: !(Maybe ScalingFunction)
+    , _isName            :: !(Maybe Text)
+    , _isId              :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'IconStyle' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'isScaledShape'
+--
+-- * 'isScalingFunction'
+--
+-- * 'isName'
+--
+-- * 'isId'
+iconStyle
+    :: IconStyle
+iconStyle =
+    IconStyle
+    { _isScaledShape = Nothing
+    , _isScalingFunction = Nothing
+    , _isName = Nothing
+    , _isId = Nothing
+    }
+
+-- | A scalable shape.
+isScaledShape :: Lens' IconStyle (Maybe ScaledShape)
+isScaledShape
+  = lens _isScaledShape
+      (\ s a -> s{_isScaledShape = a})
+
+-- | The function used to scale shapes. Required when a scaledShape is
+-- specified.
+isScalingFunction :: Lens' IconStyle (Maybe ScalingFunction)
+isScalingFunction
+  = lens _isScalingFunction
+      (\ s a -> s{_isScalingFunction = a})
+
+-- | Stock icon name. To use a stock icon, prefix it with \'gx_\'. See Stock
+-- icon names for valid icon names. For example, to specify small_red, set
+-- name to \'gx_small_red\'.
+isName :: Lens' IconStyle (Maybe Text)
+isName = lens _isName (\ s a -> s{_isName = a})
+
+-- | Custom icon id.
+isId :: Lens' IconStyle (Maybe Text)
+isId = lens _isId (\ s a -> s{_isId = a})
+
+instance FromJSON IconStyle where
+        parseJSON
+          = withObject "IconStyle"
+              (\ o ->
+                 IconStyle <$>
+                   (o .:? "scaledShape") <*> (o .:? "scalingFunction")
+                     <*> (o .:? "name")
+                     <*> (o .:? "id"))
+
+instance ToJSON IconStyle where
+        toJSON IconStyle{..}
+          = object
+              (catMaybes
+                 [("scaledShape" .=) <$> _isScaledShape,
+                  ("scalingFunction" .=) <$> _isScalingFunction,
+                  ("name" .=) <$> _isName, ("id" .=) <$> _isId])
+
+-- | A display rule of the vector style.
+--
+-- /See:/ 'displayRule' smart constructor.
+data DisplayRule = DisplayRule
+    { _drPointOptions   :: !(Maybe PointStyle)
+    , _drPolygonOptions :: !(Maybe PolygonStyle)
+    , _drZoomLevels     :: !(Maybe ZoomLevels)
+    , _drFilters        :: !(Maybe [Filter])
+    , _drName           :: !(Maybe Text)
+    , _drLineOptions    :: !(Maybe LineStyle)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DisplayRule' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'drPointOptions'
+--
+-- * 'drPolygonOptions'
+--
+-- * 'drZoomLevels'
+--
+-- * 'drFilters'
+--
+-- * 'drName'
+--
+-- * 'drLineOptions'
+displayRule
+    :: DisplayRule
+displayRule =
+    DisplayRule
+    { _drPointOptions = Nothing
+    , _drPolygonOptions = Nothing
+    , _drZoomLevels = Nothing
+    , _drFilters = Nothing
+    , _drName = Nothing
+    , _drLineOptions = Nothing
+    }
+
+-- | Style applied to points. Required for Point Geometry.
+drPointOptions :: Lens' DisplayRule (Maybe PointStyle)
+drPointOptions
+  = lens _drPointOptions
+      (\ s a -> s{_drPointOptions = a})
+
+-- | Style applied to polygons. Required for Polygon Geometry.
+drPolygonOptions :: Lens' DisplayRule (Maybe PolygonStyle)
+drPolygonOptions
+  = lens _drPolygonOptions
+      (\ s a -> s{_drPolygonOptions = a})
+
+-- | The zoom levels that this display rule apply.
+drZoomLevels :: Lens' DisplayRule (Maybe ZoomLevels)
+drZoomLevels
+  = lens _drZoomLevels (\ s a -> s{_drZoomLevels = a})
+
+-- | This display rule will only be applied to features that match all of the
+-- filters here. If filters is empty, then the rule applies to all
+-- features.
+drFilters :: Lens' DisplayRule [Filter]
+drFilters
+  = lens _drFilters (\ s a -> s{_drFilters = a}) .
+      _Default
+      . _Coerce
+
+-- | Display rule name. Name is not unique and cannot be used for
+-- identification purpose.
+drName :: Lens' DisplayRule (Maybe Text)
+drName = lens _drName (\ s a -> s{_drName = a})
+
+-- | Style applied to lines. Required for LineString Geometry.
+drLineOptions :: Lens' DisplayRule (Maybe LineStyle)
+drLineOptions
+  = lens _drLineOptions
+      (\ s a -> s{_drLineOptions = a})
+
+instance FromJSON DisplayRule where
+        parseJSON
+          = withObject "DisplayRule"
+              (\ o ->
+                 DisplayRule <$>
+                   (o .:? "pointOptions") <*> (o .:? "polygonOptions")
+                     <*> (o .:? "zoomLevels")
+                     <*> (o .:? "filters" .!= mempty)
+                     <*> (o .:? "name")
+                     <*> (o .:? "lineOptions"))
+
+instance ToJSON DisplayRule where
+        toJSON DisplayRule{..}
+          = object
+              (catMaybes
+                 [("pointOptions" .=) <$> _drPointOptions,
+                  ("polygonOptions" .=) <$> _drPolygonOptions,
+                  ("zoomLevels" .=) <$> _drZoomLevels,
+                  ("filters" .=) <$> _drFilters,
+                  ("name" .=) <$> _drName,
+                  ("lineOptions" .=) <$> _drLineOptions])
+
+-- | Border in line style. Both color and width are required.
+--
+-- /See:/ 'bOrder' smart constructor.
+data BOrder = BOrder
+    { _boColor   :: !(Maybe Text)
+    , _boWidth   :: !(Maybe Double)
+    , _boOpacity :: !(Maybe Double)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BOrder' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'boColor'
+--
+-- * 'boWidth'
+--
+-- * 'boOpacity'
+bOrder
+    :: BOrder
+bOrder =
+    BOrder
+    { _boColor = Nothing
+    , _boWidth = Nothing
+    , _boOpacity = Nothing
+    }
+
+-- | Color of the border.
+boColor :: Lens' BOrder (Maybe Text)
+boColor = lens _boColor (\ s a -> s{_boColor = a})
+
+-- | Width of the border, in pixels.
+boWidth :: Lens' BOrder (Maybe Double)
+boWidth = lens _boWidth (\ s a -> s{_boWidth = a})
+
+-- | Opacity of the border.
+boOpacity :: Lens' BOrder (Maybe Double)
+boOpacity
+  = lens _boOpacity (\ s a -> s{_boOpacity = a})
+
+instance FromJSON BOrder where
+        parseJSON
+          = withObject "BOrder"
+              (\ o ->
+                 BOrder <$>
+                   (o .:? "color") <*> (o .:? "width") <*>
+                     (o .:? "opacity"))
+
+instance ToJSON BOrder where
+        toJSON BOrder{..}
+          = object
+              (catMaybes
+                 [("color" .=) <$> _boColor,
+                  ("width" .=) <$> _boWidth,
+                  ("opacity" .=) <$> _boOpacity])
+
 -- | A Map is a collection of Layers, optionally contained within folders.
 --
 -- /See:/ 'map'' smart constructor.
@@ -2138,7 +2499,7 @@ data Map = Map
     , _mapaEtag                      :: !(Maybe Text)
     , _mapaDefaultViewport           :: !(Maybe [Double])
     , _mapaContents                  :: !(Maybe [MapItem])
-    , _mapaPublishingStatus          :: !(Maybe PublishingStatus)
+    , _mapaPublishingStatus          :: !(Maybe MapPublishingStatus)
     , _mapaCreatorEmail              :: !(Maybe Text)
     , _mapaLastModifiedTime          :: !(Maybe DateTime')
     , _mapaLastModifierEmail         :: !(Maybe Text)
@@ -2256,7 +2617,7 @@ mapaContents
       . _Coerce
 
 -- | The publishing status of this map.
-mapaPublishingStatus :: Lens' Map (Maybe PublishingStatus)
+mapaPublishingStatus :: Lens' Map (Maybe MapPublishingStatus)
 mapaPublishingStatus
   = lens _mapaPublishingStatus
       (\ s a -> s{_mapaPublishingStatus = a})
@@ -2413,367 +2774,6 @@ instance ToJSON Map where
                   ("description" .=) <$> _mapaDescription,
                   ("tags" .=) <$> _mapaTags])
 
--- | Style for icon, this is part of point style.
---
--- /See:/ 'iconStyle' smart constructor.
-data IconStyle = IconStyle
-    { _isScaledShape     :: !(Maybe ScaledShape)
-    , _isScalingFunction :: !(Maybe ScalingFunction)
-    , _isName            :: !(Maybe Text)
-    , _isId              :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'IconStyle' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'isScaledShape'
---
--- * 'isScalingFunction'
---
--- * 'isName'
---
--- * 'isId'
-iconStyle
-    :: IconStyle
-iconStyle =
-    IconStyle
-    { _isScaledShape = Nothing
-    , _isScalingFunction = Nothing
-    , _isName = Nothing
-    , _isId = Nothing
-    }
-
--- | A scalable shape.
-isScaledShape :: Lens' IconStyle (Maybe ScaledShape)
-isScaledShape
-  = lens _isScaledShape
-      (\ s a -> s{_isScaledShape = a})
-
--- | The function used to scale shapes. Required when a scaledShape is
--- specified.
-isScalingFunction :: Lens' IconStyle (Maybe ScalingFunction)
-isScalingFunction
-  = lens _isScalingFunction
-      (\ s a -> s{_isScalingFunction = a})
-
--- | Stock icon name. To use a stock icon, prefix it with \'gx_\'. See Stock
--- icon names for valid icon names. For example, to specify small_red, set
--- name to \'gx_small_red\'.
-isName :: Lens' IconStyle (Maybe Text)
-isName = lens _isName (\ s a -> s{_isName = a})
-
--- | Custom icon id.
-isId :: Lens' IconStyle (Maybe Text)
-isId = lens _isId (\ s a -> s{_isId = a})
-
-instance FromJSON IconStyle where
-        parseJSON
-          = withObject "IconStyle"
-              (\ o ->
-                 IconStyle <$>
-                   (o .:? "scaledShape") <*> (o .:? "scalingFunction")
-                     <*> (o .:? "name")
-                     <*> (o .:? "id"))
-
-instance ToJSON IconStyle where
-        toJSON IconStyle{..}
-          = object
-              (catMaybes
-                 [("scaledShape" .=) <$> _isScaledShape,
-                  ("scalingFunction" .=) <$> _isScalingFunction,
-                  ("name" .=) <$> _isName, ("id" .=) <$> _isId])
-
--- | Border in line style. Both color and width are required.
---
--- /See:/ 'bOrder' smart constructor.
-data BOrder = BOrder
-    { _boColor   :: !(Maybe Text)
-    , _boWidth   :: !(Maybe Double)
-    , _boOpacity :: !(Maybe Double)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'BOrder' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'boColor'
---
--- * 'boWidth'
---
--- * 'boOpacity'
-bOrder
-    :: BOrder
-bOrder =
-    BOrder
-    { _boColor = Nothing
-    , _boWidth = Nothing
-    , _boOpacity = Nothing
-    }
-
--- | Color of the border.
-boColor :: Lens' BOrder (Maybe Text)
-boColor = lens _boColor (\ s a -> s{_boColor = a})
-
--- | Width of the border, in pixels.
-boWidth :: Lens' BOrder (Maybe Double)
-boWidth = lens _boWidth (\ s a -> s{_boWidth = a})
-
--- | Opacity of the border.
-boOpacity :: Lens' BOrder (Maybe Double)
-boOpacity
-  = lens _boOpacity (\ s a -> s{_boOpacity = a})
-
-instance FromJSON BOrder where
-        parseJSON
-          = withObject "BOrder"
-              (\ o ->
-                 BOrder <$>
-                   (o .:? "color") <*> (o .:? "width") <*>
-                     (o .:? "opacity"))
-
-instance ToJSON BOrder where
-        toJSON BOrder{..}
-          = object
-              (catMaybes
-                 [("color" .=) <$> _boColor,
-                  ("width" .=) <$> _boWidth,
-                  ("opacity" .=) <$> _boOpacity])
-
--- | A display rule of the vector style.
---
--- /See:/ 'displayRule' smart constructor.
-data DisplayRule = DisplayRule
-    { _drPointOptions   :: !(Maybe PointStyle)
-    , _drPolygonOptions :: !(Maybe PolygonStyle)
-    , _drZoomLevels     :: !(Maybe ZoomLevels)
-    , _drFilters        :: !(Maybe [Filter])
-    , _drName           :: !(Maybe Text)
-    , _drLineOptions    :: !(Maybe LineStyle)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'DisplayRule' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'drPointOptions'
---
--- * 'drPolygonOptions'
---
--- * 'drZoomLevels'
---
--- * 'drFilters'
---
--- * 'drName'
---
--- * 'drLineOptions'
-displayRule
-    :: DisplayRule
-displayRule =
-    DisplayRule
-    { _drPointOptions = Nothing
-    , _drPolygonOptions = Nothing
-    , _drZoomLevels = Nothing
-    , _drFilters = Nothing
-    , _drName = Nothing
-    , _drLineOptions = Nothing
-    }
-
--- | Style applied to points. Required for Point Geometry.
-drPointOptions :: Lens' DisplayRule (Maybe PointStyle)
-drPointOptions
-  = lens _drPointOptions
-      (\ s a -> s{_drPointOptions = a})
-
--- | Style applied to polygons. Required for Polygon Geometry.
-drPolygonOptions :: Lens' DisplayRule (Maybe PolygonStyle)
-drPolygonOptions
-  = lens _drPolygonOptions
-      (\ s a -> s{_drPolygonOptions = a})
-
--- | The zoom levels that this display rule apply.
-drZoomLevels :: Lens' DisplayRule (Maybe ZoomLevels)
-drZoomLevels
-  = lens _drZoomLevels (\ s a -> s{_drZoomLevels = a})
-
--- | This display rule will only be applied to features that match all of the
--- filters here. If filters is empty, then the rule applies to all
--- features.
-drFilters :: Lens' DisplayRule [Filter]
-drFilters
-  = lens _drFilters (\ s a -> s{_drFilters = a}) .
-      _Default
-      . _Coerce
-
--- | Display rule name. Name is not unique and cannot be used for
--- identification purpose.
-drName :: Lens' DisplayRule (Maybe Text)
-drName = lens _drName (\ s a -> s{_drName = a})
-
--- | Style applied to lines. Required for LineString Geometry.
-drLineOptions :: Lens' DisplayRule (Maybe LineStyle)
-drLineOptions
-  = lens _drLineOptions
-      (\ s a -> s{_drLineOptions = a})
-
-instance FromJSON DisplayRule where
-        parseJSON
-          = withObject "DisplayRule"
-              (\ o ->
-                 DisplayRule <$>
-                   (o .:? "pointOptions") <*> (o .:? "polygonOptions")
-                     <*> (o .:? "zoomLevels")
-                     <*> (o .:? "filters" .!= mempty)
-                     <*> (o .:? "name")
-                     <*> (o .:? "lineOptions"))
-
-instance ToJSON DisplayRule where
-        toJSON DisplayRule{..}
-          = object
-              (catMaybes
-                 [("pointOptions" .=) <$> _drPointOptions,
-                  ("polygonOptions" .=) <$> _drPolygonOptions,
-                  ("zoomLevels" .=) <$> _drZoomLevels,
-                  ("filters" .=) <$> _drFilters,
-                  ("name" .=) <$> _drName,
-                  ("lineOptions" .=) <$> _drLineOptions])
-
--- | The published version of a map asset.
---
--- /See:/ 'publishedMap' smart constructor.
-data PublishedMap = PublishedMap
-    { _pmDefaultViewport :: !(Maybe [Double])
-    , _pmContents        :: !(Maybe [MapItem])
-    , _pmName            :: !(Maybe Text)
-    , _pmId              :: !(Maybe Text)
-    , _pmProjectId       :: !(Maybe Text)
-    , _pmDescription     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PublishedMap' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pmDefaultViewport'
---
--- * 'pmContents'
---
--- * 'pmName'
---
--- * 'pmId'
---
--- * 'pmProjectId'
---
--- * 'pmDescription'
-publishedMap
-    :: PublishedMap
-publishedMap =
-    PublishedMap
-    { _pmDefaultViewport = Nothing
-    , _pmContents = Nothing
-    , _pmName = Nothing
-    , _pmId = Nothing
-    , _pmProjectId = Nothing
-    , _pmDescription = Nothing
-    }
-
--- | An array of four numbers (west, south, east, north) which defines the
--- rectangular bounding box of the default viewport. The numbers represent
--- latitude and longitude in decimal degrees.
-pmDefaultViewport :: Lens' PublishedMap [Double]
-pmDefaultViewport
-  = lens _pmDefaultViewport
-      (\ s a -> s{_pmDefaultViewport = a})
-      . _Default
-      . _Coerce
-
--- | The contents of this Map.
-pmContents :: Lens' PublishedMap [MapItem]
-pmContents
-  = lens _pmContents (\ s a -> s{_pmContents = a}) .
-      _Default
-      . _Coerce
-
--- | The name of this Map, supplied by the author.
-pmName :: Lens' PublishedMap (Maybe Text)
-pmName = lens _pmName (\ s a -> s{_pmName = a})
-
--- | A globally unique ID, used to refer to this Map.
-pmId :: Lens' PublishedMap (Maybe Text)
-pmId = lens _pmId (\ s a -> s{_pmId = a})
-
--- | The ID of the project that this Map is in.
-pmProjectId :: Lens' PublishedMap (Maybe Text)
-pmProjectId
-  = lens _pmProjectId (\ s a -> s{_pmProjectId = a})
-
--- | The description of this Map, supplied by the author.
-pmDescription :: Lens' PublishedMap (Maybe Text)
-pmDescription
-  = lens _pmDescription
-      (\ s a -> s{_pmDescription = a})
-
-instance FromJSON PublishedMap where
-        parseJSON
-          = withObject "PublishedMap"
-              (\ o ->
-                 PublishedMap <$>
-                   (o .:? "defaultViewport") <*> (o .:? "contents") <*>
-                     (o .:? "name")
-                     <*> (o .:? "id")
-                     <*> (o .:? "projectId")
-                     <*> (o .:? "description"))
-
-instance ToJSON PublishedMap where
-        toJSON PublishedMap{..}
-          = object
-              (catMaybes
-                 [("defaultViewport" .=) <$> _pmDefaultViewport,
-                  ("contents" .=) <$> _pmContents,
-                  ("name" .=) <$> _pmName, ("id" .=) <$> _pmId,
-                  ("projectId" .=) <$> _pmProjectId,
-                  ("description" .=) <$> _pmDescription])
-
--- | The request sent to rasterCollections.Rasters.BatchInsert.
---
--- /See:/ 'rasterCollectionsRastersBatchInsertRequest' smart constructor.
-newtype RasterCollectionsRastersBatchInsertRequest = RasterCollectionsRastersBatchInsertRequest
-    { _rcrbirIds :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'RasterCollectionsRastersBatchInsertRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rcrbirIds'
-rasterCollectionsRastersBatchInsertRequest
-    :: RasterCollectionsRastersBatchInsertRequest
-rasterCollectionsRastersBatchInsertRequest =
-    RasterCollectionsRastersBatchInsertRequest
-    { _rcrbirIds = Nothing
-    }
-
--- | An array of Raster asset IDs to be added to this RasterCollection.
-rcrbirIds :: Lens' RasterCollectionsRastersBatchInsertRequest [Text]
-rcrbirIds
-  = lens _rcrbirIds (\ s a -> s{_rcrbirIds = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON
-         RasterCollectionsRastersBatchInsertRequest where
-        parseJSON
-          = withObject
-              "RasterCollectionsRastersBatchInsertRequest"
-              (\ o ->
-                 RasterCollectionsRastersBatchInsertRequest <$>
-                   (o .:? "ids" .!= mempty))
-
-instance ToJSON
-         RasterCollectionsRastersBatchInsertRequest where
-        toJSON RasterCollectionsRastersBatchInsertRequest{..}
-          = object (catMaybes [("ids" .=) <$> _rcrbirIds])
-
 -- | The response returned by a call to rasterCollections.rasters.List.
 --
 -- /See:/ 'rasterCollectionsRastersListResponse' smart constructor.
@@ -2883,7 +2883,7 @@ instance ToJSON GeoJSONMultiLineString where
 data ScalingFunction = ScalingFunction
     { _sfValueRange  :: !(Maybe ValueRange)
     , _sfSizeRange   :: !(Maybe SizeRange)
-    , _sfScalingType :: !(Maybe ScalingType)
+    , _sfScalingType :: !(Maybe ScalingFunctionScalingType)
     , _sfColumn      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2921,7 +2921,7 @@ sfSizeRange
 
 -- | The type of scaling function to use. Defaults to SQRT. Currently only
 -- linear and square root scaling are supported.
-sfScalingType :: Lens' ScalingFunction (Maybe ScalingType)
+sfScalingType :: Lens' ScalingFunction (Maybe ScalingFunctionScalingType)
 sfScalingType
   = lens _sfScalingType
       (\ s a -> s{_sfScalingType = a})
@@ -3019,6 +3019,92 @@ instance FromJSON PublishResponse where
 
 instance ToJSON PublishResponse where
         toJSON = const (Object mempty)
+
+-- | The request sent to features.Insert.
+--
+-- /See:/ 'featuresBatchInsertRequest' smart constructor.
+data FeaturesBatchInsertRequest = FeaturesBatchInsertRequest
+    { _fbirFeatures            :: !(Maybe [Feature])
+    , _fbirNormalizeGeometries :: !Bool
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'FeaturesBatchInsertRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fbirFeatures'
+--
+-- * 'fbirNormalizeGeometries'
+featuresBatchInsertRequest
+    :: FeaturesBatchInsertRequest
+featuresBatchInsertRequest =
+    FeaturesBatchInsertRequest
+    { _fbirFeatures = Nothing
+    , _fbirNormalizeGeometries = True
+    }
+
+fbirFeatures :: Lens' FeaturesBatchInsertRequest [Feature]
+fbirFeatures
+  = lens _fbirFeatures (\ s a -> s{_fbirFeatures = a})
+      . _Default
+      . _Coerce
+
+-- | If true, the server will normalize feature geometries. It is assumed
+-- that the South Pole is exterior to any polygons given. See here for a
+-- list of normalizations. If false, all feature geometries must be given
+-- already normalized. The points in all LinearRings must be listed in
+-- counter-clockwise order, and LinearRings may not intersect.
+fbirNormalizeGeometries :: Lens' FeaturesBatchInsertRequest Bool
+fbirNormalizeGeometries
+  = lens _fbirNormalizeGeometries
+      (\ s a -> s{_fbirNormalizeGeometries = a})
+
+instance FromJSON FeaturesBatchInsertRequest where
+        parseJSON
+          = withObject "FeaturesBatchInsertRequest"
+              (\ o ->
+                 FeaturesBatchInsertRequest <$>
+                   (o .:? "features" .!= mempty) <*>
+                     (o .:? "normalizeGeometries" .!= True))
+
+instance ToJSON FeaturesBatchInsertRequest where
+        toJSON FeaturesBatchInsertRequest{..}
+          = object
+              (catMaybes
+                 [("features" .=) <$> _fbirFeatures,
+                  Just
+                    ("normalizeGeometries" .= _fbirNormalizeGeometries)])
+
+--
+-- /See:/ 'datasource' smart constructor.
+newtype Datasource = Datasource
+    { _dId :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Datasource' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dId'
+datasource
+    :: Datasource
+datasource =
+    Datasource
+    { _dId = Nothing
+    }
+
+-- | The ID of a datasource.
+dId :: Lens' Datasource (Maybe Text)
+dId = lens _dId (\ s a -> s{_dId = a})
+
+instance FromJSON Datasource where
+        parseJSON
+          = withObject "Datasource"
+              (\ o -> Datasource <$> (o .:? "id"))
+
+instance ToJSON Datasource where
+        toJSON Datasource{..}
+          = object (catMaybes [("id" .=) <$> _dId])
 
 -- | A raster resource.
 --
@@ -3154,97 +3240,11 @@ instance ToJSON RasterCollectionsRaster where
                   ("description" .=) <$> _rcrDescription,
                   ("tags" .=) <$> _rcrTags])
 
---
--- /See:/ 'datasource' smart constructor.
-newtype Datasource = Datasource
-    { _dId :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Datasource' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'dId'
-datasource
-    :: Datasource
-datasource =
-    Datasource
-    { _dId = Nothing
-    }
-
--- | The ID of a datasource.
-dId :: Lens' Datasource (Maybe Text)
-dId = lens _dId (\ s a -> s{_dId = a})
-
-instance FromJSON Datasource where
-        parseJSON
-          = withObject "Datasource"
-              (\ o -> Datasource <$> (o .:? "id"))
-
-instance ToJSON Datasource where
-        toJSON Datasource{..}
-          = object (catMaybes [("id" .=) <$> _dId])
-
--- | The request sent to features.Insert.
---
--- /See:/ 'featuresBatchInsertRequest' smart constructor.
-data FeaturesBatchInsertRequest = FeaturesBatchInsertRequest
-    { _fbirFeatures            :: !(Maybe [Feature])
-    , _fbirNormalizeGeometries :: !Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'FeaturesBatchInsertRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'fbirFeatures'
---
--- * 'fbirNormalizeGeometries'
-featuresBatchInsertRequest
-    :: FeaturesBatchInsertRequest
-featuresBatchInsertRequest =
-    FeaturesBatchInsertRequest
-    { _fbirFeatures = Nothing
-    , _fbirNormalizeGeometries = True
-    }
-
-fbirFeatures :: Lens' FeaturesBatchInsertRequest [Feature]
-fbirFeatures
-  = lens _fbirFeatures (\ s a -> s{_fbirFeatures = a})
-      . _Default
-      . _Coerce
-
--- | If true, the server will normalize feature geometries. It is assumed
--- that the South Pole is exterior to any polygons given. See here for a
--- list of normalizations. If false, all feature geometries must be given
--- already normalized. The points in all LinearRings must be listed in
--- counter-clockwise order, and LinearRings may not intersect.
-fbirNormalizeGeometries :: Lens' FeaturesBatchInsertRequest Bool
-fbirNormalizeGeometries
-  = lens _fbirNormalizeGeometries
-      (\ s a -> s{_fbirNormalizeGeometries = a})
-
-instance FromJSON FeaturesBatchInsertRequest where
-        parseJSON
-          = withObject "FeaturesBatchInsertRequest"
-              (\ o ->
-                 FeaturesBatchInsertRequest <$>
-                   (o .:? "features" .!= mempty) <*>
-                     (o .:? "normalizeGeometries" .!= True))
-
-instance ToJSON FeaturesBatchInsertRequest where
-        toJSON FeaturesBatchInsertRequest{..}
-          = object
-              (catMaybes
-                 [("features" .=) <$> _fbirFeatures,
-                  Just
-                    ("normalizeGeometries" .= _fbirNormalizeGeometries)])
-
 -- | Conditions for filtering features.
 --
 -- /See:/ 'filter'' smart constructor.
 data Filter = Filter
-    { _fOperator :: !(Maybe Operator)
+    { _fOperator :: !(Maybe FilterOperator)
     , _fValue    :: !(Maybe JSONValue)
     , _fColumn   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3268,7 +3268,7 @@ filter' =
     }
 
 -- | Operation used to evaluate the filter.
-fOperator :: Lens' Filter (Maybe Operator)
+fOperator :: Lens' Filter (Maybe FilterOperator)
 fOperator
   = lens _fOperator (\ s a -> s{_fOperator = a})
 
@@ -3297,87 +3297,38 @@ instance ToJSON Filter where
                   ("column" .=) <$> _fColumn])
 
 --
--- /See:/ 'geoJSONMultiPolygon' smart constructor.
-data GeoJSONMultiPolygon = GeoJSONMultiPolygon
-    { _gjmpCoordinates :: !(Maybe [[[[Double]]]])
-    , _gjmpType        :: !(Maybe GeoJSONMultiPolygonType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'GeoJSONMultiPolygon' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'gjmpCoordinates'
---
--- * 'gjmpType'
-geoJSONMultiPolygon
-    :: GeoJSONMultiPolygon
-geoJSONMultiPolygon =
-    GeoJSONMultiPolygon
-    { _gjmpCoordinates = Nothing
-    , _gjmpType = Nothing
-    }
-
--- | An array of at least two GeoJsonPolygon coordinate arrays.
-gjmpCoordinates :: Lens' GeoJSONMultiPolygon [[[[Double]]]]
-gjmpCoordinates
-  = lens _gjmpCoordinates
-      (\ s a -> s{_gjmpCoordinates = a})
-      . _Default
-      . _Coerce
-
--- | Identifies this object as a GeoJsonMultiPolygon.
-gjmpType :: Lens' GeoJSONMultiPolygon (Maybe GeoJSONMultiPolygonType)
-gjmpType = lens _gjmpType (\ s a -> s{_gjmpType = a})
-
-instance FromJSON GeoJSONMultiPolygon where
-        parseJSON
-          = withObject "GeoJSONMultiPolygon"
-              (\ o ->
-                 GeoJSONMultiPolygon <$>
-                   (o .:? "coordinates" .!= mempty) <*> (o .:? "type"))
-
-instance ToJSON GeoJSONMultiPolygon where
-        toJSON GeoJSONMultiPolygon{..}
-          = object
-              (catMaybes
-                 [("coordinates" .=) <$> _gjmpCoordinates,
-                  ("type" .=) <$> _gjmpType])
-
---
 -- /See:/ 'geoJSONMultiPoint' smart constructor.
 data GeoJSONMultiPoint = GeoJSONMultiPoint
-    { _gjsonmpCoordinates :: !(Maybe [[Double]])
-    , _gjsonmpType        :: !(Maybe GeoJSONMultiPointType)
+    { _gjmpCoordinates :: !(Maybe [[Double]])
+    , _gjmpType        :: !(Maybe GeoJSONMultiPointType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeoJSONMultiPoint' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gjsonmpCoordinates'
+-- * 'gjmpCoordinates'
 --
--- * 'gjsonmpType'
+-- * 'gjmpType'
 geoJSONMultiPoint
     :: GeoJSONMultiPoint
 geoJSONMultiPoint =
     GeoJSONMultiPoint
-    { _gjsonmpCoordinates = Nothing
-    , _gjsonmpType = Nothing
+    { _gjmpCoordinates = Nothing
+    , _gjmpType = Nothing
     }
 
 -- | An array of at least two GeoJsonPoint coordinate arrays.
-gjsonmpCoordinates :: Lens' GeoJSONMultiPoint [[Double]]
-gjsonmpCoordinates
-  = lens _gjsonmpCoordinates
-      (\ s a -> s{_gjsonmpCoordinates = a})
+gjmpCoordinates :: Lens' GeoJSONMultiPoint [[Double]]
+gjmpCoordinates
+  = lens _gjmpCoordinates
+      (\ s a -> s{_gjmpCoordinates = a})
       . _Default
       . _Coerce
 
 -- | Identifies this object as a GeoJsonMultiPoint.
-gjsonmpType :: Lens' GeoJSONMultiPoint (Maybe GeoJSONMultiPointType)
-gjsonmpType
-  = lens _gjsonmpType (\ s a -> s{_gjsonmpType = a})
+gjmpType :: Lens' GeoJSONMultiPoint (Maybe GeoJSONMultiPointType)
+gjmpType = lens _gjmpType (\ s a -> s{_gjmpType = a})
 
 instance FromJSON GeoJSONMultiPoint where
         parseJSON
@@ -3390,8 +3341,402 @@ instance ToJSON GeoJSONMultiPoint where
         toJSON GeoJSONMultiPoint{..}
           = object
               (catMaybes
+                 [("coordinates" .=) <$> _gjmpCoordinates,
+                  ("type" .=) <$> _gjmpType])
+
+--
+-- /See:/ 'geoJSONMultiPolygon' smart constructor.
+data GeoJSONMultiPolygon = GeoJSONMultiPolygon
+    { _gjsonmpCoordinates :: !(Maybe [[[[Double]]]])
+    , _gjsonmpType        :: !(Maybe GeoJSONMultiPolygonType)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GeoJSONMultiPolygon' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gjsonmpCoordinates'
+--
+-- * 'gjsonmpType'
+geoJSONMultiPolygon
+    :: GeoJSONMultiPolygon
+geoJSONMultiPolygon =
+    GeoJSONMultiPolygon
+    { _gjsonmpCoordinates = Nothing
+    , _gjsonmpType = Nothing
+    }
+
+-- | An array of at least two GeoJsonPolygon coordinate arrays.
+gjsonmpCoordinates :: Lens' GeoJSONMultiPolygon [[[[Double]]]]
+gjsonmpCoordinates
+  = lens _gjsonmpCoordinates
+      (\ s a -> s{_gjsonmpCoordinates = a})
+      . _Default
+      . _Coerce
+
+-- | Identifies this object as a GeoJsonMultiPolygon.
+gjsonmpType :: Lens' GeoJSONMultiPolygon (Maybe GeoJSONMultiPolygonType)
+gjsonmpType
+  = lens _gjsonmpType (\ s a -> s{_gjsonmpType = a})
+
+instance FromJSON GeoJSONMultiPolygon where
+        parseJSON
+          = withObject "GeoJSONMultiPolygon"
+              (\ o ->
+                 GeoJSONMultiPolygon <$>
+                   (o .:? "coordinates" .!= mempty) <*> (o .:? "type"))
+
+instance ToJSON GeoJSONMultiPolygon where
+        toJSON GeoJSONMultiPolygon{..}
+          = object
+              (catMaybes
                  [("coordinates" .=) <$> _gjsonmpCoordinates,
                   ("type" .=) <$> _gjsonmpType])
+
+-- | A Layer combines multiple datasources, with styling information, for
+-- presentation on a map.
+--
+-- /See:/ 'layer' smart constructor.
+data Layer = Layer
+    { _layaCreationTime              :: !(Maybe DateTime')
+    , _layaWritersCanEditPermissions :: !(Maybe Bool)
+    , _layaStyle                     :: !(Maybe VectorStyle)
+    , _layaEtag                      :: !(Maybe Text)
+    , _layaDatasourceType            :: !(Maybe LayerDatasourceType)
+    , _layaPublishingStatus          :: !(Maybe LayerPublishingStatus)
+    , _layaCreatorEmail              :: !(Maybe Text)
+    , _layaLayerType                 :: !(Maybe LayerLayerType)
+    , _layaLastModifiedTime          :: !(Maybe DateTime')
+    , _layaDatasources               :: !(Maybe [Datasource])
+    , _layaLastModifierEmail         :: !(Maybe Text)
+    , _layaName                      :: !(Maybe Text)
+    , _layaBbox                      :: !(Maybe [Double])
+    , _layaProcessingStatus          :: !(Maybe LayerProcessingStatus)
+    , _layaId                        :: !(Maybe Text)
+    , _layaProjectId                 :: !(Maybe Text)
+    , _layaDraftAccessList           :: !(Maybe Text)
+    , _layaPublishedAccessList       :: !(Maybe Text)
+    , _layaDescription               :: !(Maybe Text)
+    , _layaTags                      :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Layer' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'layaCreationTime'
+--
+-- * 'layaWritersCanEditPermissions'
+--
+-- * 'layaStyle'
+--
+-- * 'layaEtag'
+--
+-- * 'layaDatasourceType'
+--
+-- * 'layaPublishingStatus'
+--
+-- * 'layaCreatorEmail'
+--
+-- * 'layaLayerType'
+--
+-- * 'layaLastModifiedTime'
+--
+-- * 'layaDatasources'
+--
+-- * 'layaLastModifierEmail'
+--
+-- * 'layaName'
+--
+-- * 'layaBbox'
+--
+-- * 'layaProcessingStatus'
+--
+-- * 'layaId'
+--
+-- * 'layaProjectId'
+--
+-- * 'layaDraftAccessList'
+--
+-- * 'layaPublishedAccessList'
+--
+-- * 'layaDescription'
+--
+-- * 'layaTags'
+layer
+    :: Layer
+layer =
+    Layer
+    { _layaCreationTime = Nothing
+    , _layaWritersCanEditPermissions = Nothing
+    , _layaStyle = Nothing
+    , _layaEtag = Nothing
+    , _layaDatasourceType = Nothing
+    , _layaPublishingStatus = Nothing
+    , _layaCreatorEmail = Nothing
+    , _layaLayerType = Nothing
+    , _layaLastModifiedTime = Nothing
+    , _layaDatasources = Nothing
+    , _layaLastModifierEmail = Nothing
+    , _layaName = Nothing
+    , _layaBbox = Nothing
+    , _layaProcessingStatus = Nothing
+    , _layaId = Nothing
+    , _layaProjectId = Nothing
+    , _layaDraftAccessList = Nothing
+    , _layaPublishedAccessList = Nothing
+    , _layaDescription = Nothing
+    , _layaTags = Nothing
+    }
+
+-- | The creation time of this layer. The value is an RFC 3339 formatted
+-- date-time value (e.g. 1970-01-01T00:00:00Z).
+layaCreationTime :: Lens' Layer (Maybe UTCTime)
+layaCreationTime
+  = lens _layaCreationTime
+      (\ s a -> s{_layaCreationTime = a})
+      . mapping _DateTime
+
+-- | If true, WRITERs of the asset are able to edit the asset permissions.
+layaWritersCanEditPermissions :: Lens' Layer (Maybe Bool)
+layaWritersCanEditPermissions
+  = lens _layaWritersCanEditPermissions
+      (\ s a -> s{_layaWritersCanEditPermissions = a})
+
+-- | The styling information for a vector layer. Note: Style information is
+-- returned in response to a get request but not a list request. After
+-- requesting a list of layers, you\'ll need to send a get request to
+-- retrieve the VectorStyles for each layer.
+layaStyle :: Lens' Layer (Maybe VectorStyle)
+layaStyle
+  = lens _layaStyle (\ s a -> s{_layaStyle = a})
+
+-- | The ETag, used to refer to the current version of the asset.
+layaEtag :: Lens' Layer (Maybe Text)
+layaEtag = lens _layaEtag (\ s a -> s{_layaEtag = a})
+
+-- | Deprecated: The type of the datasources used to build this Layer. Note:
+-- This has been replaced by layerType, but is still available for now to
+-- maintain backward compatibility.
+layaDatasourceType :: Lens' Layer (Maybe LayerDatasourceType)
+layaDatasourceType
+  = lens _layaDatasourceType
+      (\ s a -> s{_layaDatasourceType = a})
+
+-- | The publishing status of this layer.
+layaPublishingStatus :: Lens' Layer (Maybe LayerPublishingStatus)
+layaPublishingStatus
+  = lens _layaPublishingStatus
+      (\ s a -> s{_layaPublishingStatus = a})
+
+-- | The email address of the creator of this layer. This is only returned on
+-- GET requests and not LIST requests.
+layaCreatorEmail :: Lens' Layer (Maybe Text)
+layaCreatorEmail
+  = lens _layaCreatorEmail
+      (\ s a -> s{_layaCreatorEmail = a})
+
+-- | The type of the datasources used to build this Layer. This should be
+-- used instead of datasourceType. At least one of layerType and
+-- datasourceType and must be specified, but layerType takes precedence.
+layaLayerType :: Lens' Layer (Maybe LayerLayerType)
+layaLayerType
+  = lens _layaLayerType
+      (\ s a -> s{_layaLayerType = a})
+
+-- | The last modified time of this layer. The value is an RFC 3339 formatted
+-- date-time value (e.g. 1970-01-01T00:00:00Z).
+layaLastModifiedTime :: Lens' Layer (Maybe UTCTime)
+layaLastModifiedTime
+  = lens _layaLastModifiedTime
+      (\ s a -> s{_layaLastModifiedTime = a})
+      . mapping _DateTime
+
+-- | An array of datasources used to build this layer. If layerType is
+-- \"image\", or layerType is not specified and datasourceType is
+-- \"image\", then each element in this array is a reference to an Image or
+-- RasterCollection. If layerType is \"vector\", or layerType is not
+-- specified and datasourceType is \"table\" then each element in this
+-- array is a reference to a Vector Table.
+layaDatasources :: Lens' Layer [Datasource]
+layaDatasources
+  = lens _layaDatasources
+      (\ s a -> s{_layaDatasources = a})
+      . _Default
+      . _Coerce
+
+-- | The email address of the last modifier of this layer. This is only
+-- returned on GET requests and not LIST requests.
+layaLastModifierEmail :: Lens' Layer (Maybe Text)
+layaLastModifierEmail
+  = lens _layaLastModifierEmail
+      (\ s a -> s{_layaLastModifierEmail = a})
+
+-- | The name of this Layer, supplied by the author.
+layaName :: Lens' Layer (Maybe Text)
+layaName = lens _layaName (\ s a -> s{_layaName = a})
+
+-- | A rectangular bounding box which contains all of the data in this Layer.
+-- The box is expressed as \\\"west, south, east, north\\\". The numbers
+-- represent latitude and longitude in decimal degrees.
+layaBbox :: Lens' Layer [Double]
+layaBbox
+  = lens _layaBbox (\ s a -> s{_layaBbox = a}) .
+      _Default
+      . _Coerce
+
+-- | The processing status of this layer.
+layaProcessingStatus :: Lens' Layer (Maybe LayerProcessingStatus)
+layaProcessingStatus
+  = lens _layaProcessingStatus
+      (\ s a -> s{_layaProcessingStatus = a})
+
+-- | A globally unique ID, used to refer to this Layer.
+layaId :: Lens' Layer (Maybe Text)
+layaId = lens _layaId (\ s a -> s{_layaId = a})
+
+-- | The ID of the project that this Layer is in.
+layaProjectId :: Lens' Layer (Maybe Text)
+layaProjectId
+  = lens _layaProjectId
+      (\ s a -> s{_layaProjectId = a})
+
+-- | Deprecated: The name of an access list of the Map Editor type. The user
+-- on whose behalf the request is being sent must be an editor on that
+-- access list. Note: Google Maps Engine no longer uses access lists.
+-- Instead, each asset has its own list of permissions. For backward
+-- compatibility, the API still accepts access lists for projects that are
+-- already using access lists. If you created a GME account\/project after
+-- July 14th, 2014, you will not be able to send API requests that include
+-- access lists. Note: This is an input field only. It is not returned in
+-- response to a list or get request.
+layaDraftAccessList :: Lens' Layer (Maybe Text)
+layaDraftAccessList
+  = lens _layaDraftAccessList
+      (\ s a -> s{_layaDraftAccessList = a})
+
+-- | Deprecated: The access list to whom view permissions are granted. The
+-- value must be the name of a Maps Engine access list of the Map Viewer
+-- type, and the user must be a viewer on that list. Note: Google Maps
+-- Engine no longer uses access lists. Instead, each asset has its own list
+-- of permissions. For backward compatibility, the API still accepts access
+-- lists for projects that are already using access lists. If you created a
+-- GME account\/project after July 14th, 2014, you will not be able to send
+-- API requests that include access lists. Note: This is an input field
+-- only. It is not returned in response to a list or get request.
+layaPublishedAccessList :: Lens' Layer (Maybe Text)
+layaPublishedAccessList
+  = lens _layaPublishedAccessList
+      (\ s a -> s{_layaPublishedAccessList = a})
+
+-- | The description of this Layer, supplied by the author.
+layaDescription :: Lens' Layer (Maybe Text)
+layaDescription
+  = lens _layaDescription
+      (\ s a -> s{_layaDescription = a})
+
+-- | Tags of this Layer.
+layaTags :: Lens' Layer [Text]
+layaTags
+  = lens _layaTags (\ s a -> s{_layaTags = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON Layer where
+        parseJSON
+          = withObject "Layer"
+              (\ o ->
+                 Layer <$>
+                   (o .:? "creationTime") <*>
+                     (o .:? "writersCanEditPermissions")
+                     <*> (o .:? "style")
+                     <*> (o .:? "etag")
+                     <*> (o .:? "datasourceType")
+                     <*> (o .:? "publishingStatus")
+                     <*> (o .:? "creatorEmail")
+                     <*> (o .:? "layerType")
+                     <*> (o .:? "lastModifiedTime")
+                     <*> (o .:? "datasources")
+                     <*> (o .:? "lastModifierEmail")
+                     <*> (o .:? "name")
+                     <*> (o .:? "bbox" .!= mempty)
+                     <*> (o .:? "processingStatus")
+                     <*> (o .:? "id")
+                     <*> (o .:? "projectId")
+                     <*> (o .:? "draftAccessList")
+                     <*> (o .:? "publishedAccessList")
+                     <*> (o .:? "description")
+                     <*> (o .:? "tags"))
+
+instance ToJSON Layer where
+        toJSON Layer{..}
+          = object
+              (catMaybes
+                 [("creationTime" .=) <$> _layaCreationTime,
+                  ("writersCanEditPermissions" .=) <$>
+                    _layaWritersCanEditPermissions,
+                  ("style" .=) <$> _layaStyle,
+                  ("etag" .=) <$> _layaEtag,
+                  ("datasourceType" .=) <$> _layaDatasourceType,
+                  ("publishingStatus" .=) <$> _layaPublishingStatus,
+                  ("creatorEmail" .=) <$> _layaCreatorEmail,
+                  ("layerType" .=) <$> _layaLayerType,
+                  ("lastModifiedTime" .=) <$> _layaLastModifiedTime,
+                  ("datasources" .=) <$> _layaDatasources,
+                  ("lastModifierEmail" .=) <$> _layaLastModifierEmail,
+                  ("name" .=) <$> _layaName, ("bbox" .=) <$> _layaBbox,
+                  ("processingStatus" .=) <$> _layaProcessingStatus,
+                  ("id" .=) <$> _layaId,
+                  ("projectId" .=) <$> _layaProjectId,
+                  ("draftAccessList" .=) <$> _layaDraftAccessList,
+                  ("publishedAccessList" .=) <$>
+                    _layaPublishedAccessList,
+                  ("description" .=) <$> _layaDescription,
+                  ("tags" .=) <$> _layaTags])
+
+-- | Style for points.
+--
+-- /See:/ 'pointStyle' smart constructor.
+data PointStyle = PointStyle
+    { _psIcon  :: !(Maybe IconStyle)
+    , _psLabel :: !(Maybe LabelStyle)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PointStyle' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'psIcon'
+--
+-- * 'psLabel'
+pointStyle
+    :: PointStyle
+pointStyle =
+    PointStyle
+    { _psIcon = Nothing
+    , _psLabel = Nothing
+    }
+
+-- | Icon for the point; if it isn\'t null, exactly one of \'name\', \'id\'
+-- or \'scaledShape\' must be set.
+psIcon :: Lens' PointStyle (Maybe IconStyle)
+psIcon = lens _psIcon (\ s a -> s{_psIcon = a})
+
+-- | Label style for the point.
+psLabel :: Lens' PointStyle (Maybe LabelStyle)
+psLabel = lens _psLabel (\ s a -> s{_psLabel = a})
+
+instance FromJSON PointStyle where
+        parseJSON
+          = withObject "PointStyle"
+              (\ o ->
+                 PointStyle <$> (o .:? "icon") <*> (o .:? "label"))
+
+instance ToJSON PointStyle where
+        toJSON PointStyle{..}
+          = object
+              (catMaybes
+                 [("icon" .=) <$> _psIcon, ("label" .=) <$> _psLabel])
 
 -- | A geo-referenced raster.
 --
@@ -3653,129 +3998,60 @@ instance ToJSON Raster where
                   ("attribution" .=) <$> _rrAttribution,
                   ("tags" .=) <$> _rrTags])
 
--- | The published version of a layer.
+-- | Style for polygons.
 --
--- /See:/ 'publishedLayer' smart constructor.
-data PublishedLayer = PublishedLayer
-    { _plLayerType   :: !(Maybe LayerType)
-    , _plName        :: !(Maybe Text)
-    , _plId          :: !(Maybe Text)
-    , _plProjectId   :: !(Maybe Text)
-    , _plDescription :: !(Maybe Text)
+-- /See:/ 'polygonStyle' smart constructor.
+data PolygonStyle = PolygonStyle
+    { _pStroke :: !(Maybe BOrder)
+    , _pFill   :: !(Maybe Color)
+    , _pLabel  :: !(Maybe LabelStyle)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PublishedLayer' with the minimum fields required to make a request.
+-- | Creates a value of 'PolygonStyle' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'plLayerType'
+-- * 'pStroke'
 --
--- * 'plName'
+-- * 'pFill'
 --
--- * 'plId'
---
--- * 'plProjectId'
---
--- * 'plDescription'
-publishedLayer
-    :: PublishedLayer
-publishedLayer =
-    PublishedLayer
-    { _plLayerType = Nothing
-    , _plName = Nothing
-    , _plId = Nothing
-    , _plProjectId = Nothing
-    , _plDescription = Nothing
+-- * 'pLabel'
+polygonStyle
+    :: PolygonStyle
+polygonStyle =
+    PolygonStyle
+    { _pStroke = Nothing
+    , _pFill = Nothing
+    , _pLabel = Nothing
     }
 
--- | The type of the datasources used to build this Layer. This should be
--- used instead of datasourceType. At least one of layerType and
--- datasourceType and must be specified, but layerType takes precedence.
-plLayerType :: Lens' PublishedLayer (Maybe LayerType)
-plLayerType
-  = lens _plLayerType (\ s a -> s{_plLayerType = a})
+-- | Border of the polygon. 0 \< border.width \<= 10.
+pStroke :: Lens' PolygonStyle (Maybe BOrder)
+pStroke = lens _pStroke (\ s a -> s{_pStroke = a})
 
--- | The name of this Layer, supplied by the author.
-plName :: Lens' PublishedLayer (Maybe Text)
-plName = lens _plName (\ s a -> s{_plName = a})
+-- | Fill color of the polygon. If not provided, the polygon will be
+-- transparent and not visible if there is no border.
+pFill :: Lens' PolygonStyle (Maybe Color)
+pFill = lens _pFill (\ s a -> s{_pFill = a})
 
--- | A globally unique ID, used to refer to this Layer.
-plId :: Lens' PublishedLayer (Maybe Text)
-plId = lens _plId (\ s a -> s{_plId = a})
+-- | Label style for the polygon.
+pLabel :: Lens' PolygonStyle (Maybe LabelStyle)
+pLabel = lens _pLabel (\ s a -> s{_pLabel = a})
 
--- | The ID of the project that this Layer is in.
-plProjectId :: Lens' PublishedLayer (Maybe Text)
-plProjectId
-  = lens _plProjectId (\ s a -> s{_plProjectId = a})
-
--- | The description of this Layer, supplied by the author.
-plDescription :: Lens' PublishedLayer (Maybe Text)
-plDescription
-  = lens _plDescription
-      (\ s a -> s{_plDescription = a})
-
-instance FromJSON PublishedLayer where
+instance FromJSON PolygonStyle where
         parseJSON
-          = withObject "PublishedLayer"
+          = withObject "PolygonStyle"
               (\ o ->
-                 PublishedLayer <$>
-                   (o .:? "layerType") <*> (o .:? "name") <*>
-                     (o .:? "id")
-                     <*> (o .:? "projectId")
-                     <*> (o .:? "description"))
+                 PolygonStyle <$>
+                   (o .:? "stroke") <*> (o .:? "fill") <*>
+                     (o .:? "label"))
 
-instance ToJSON PublishedLayer where
-        toJSON PublishedLayer{..}
+instance ToJSON PolygonStyle where
+        toJSON PolygonStyle{..}
           = object
               (catMaybes
-                 [("layerType" .=) <$> _plLayerType,
-                  ("name" .=) <$> _plName, ("id" .=) <$> _plId,
-                  ("projectId" .=) <$> _plProjectId,
-                  ("description" .=) <$> _plDescription])
-
--- | Style for points.
---
--- /See:/ 'pointStyle' smart constructor.
-data PointStyle = PointStyle
-    { _psIcon  :: !(Maybe IconStyle)
-    , _psLabel :: !(Maybe LabelStyle)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PointStyle' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'psIcon'
---
--- * 'psLabel'
-pointStyle
-    :: PointStyle
-pointStyle =
-    PointStyle
-    { _psIcon = Nothing
-    , _psLabel = Nothing
-    }
-
--- | Icon for the point; if it isn\'t null, exactly one of \'name\', \'id\'
--- or \'scaledShape\' must be set.
-psIcon :: Lens' PointStyle (Maybe IconStyle)
-psIcon = lens _psIcon (\ s a -> s{_psIcon = a})
-
--- | Label style for the point.
-psLabel :: Lens' PointStyle (Maybe LabelStyle)
-psLabel = lens _psLabel (\ s a -> s{_psLabel = a})
-
-instance FromJSON PointStyle where
-        parseJSON
-          = withObject "PointStyle"
-              (\ o ->
-                 PointStyle <$> (o .:? "icon") <*> (o .:? "label"))
-
-instance ToJSON PointStyle where
-        toJSON PointStyle{..}
-          = object
-              (catMaybes
-                 [("icon" .=) <$> _psIcon, ("label" .=) <$> _psLabel])
+                 [("stroke" .=) <$> _pStroke, ("fill" .=) <$> _pFill,
+                  ("label" .=) <$> _pLabel])
 
 -- | A permission defines the user or group that has access to an asset, and
 -- the type of access they have.
@@ -3847,603 +4123,85 @@ instance ToJSON Permission where
                   ("type" .=) <$> _perType,
                   ("discoverable" .=) <$> _perDiscoverable])
 
--- | A Layer combines multiple datasources, with styling information, for
--- presentation on a map.
+-- | The published version of a layer.
 --
--- /See:/ 'layer' smart constructor.
-data Layer = Layer
-    { _layaCreationTime              :: !(Maybe DateTime')
-    , _layaWritersCanEditPermissions :: !(Maybe Bool)
-    , _layaStyle                     :: !(Maybe VectorStyle)
-    , _layaEtag                      :: !(Maybe Text)
-    , _layaDatasourceType            :: !(Maybe DatasourceType)
-    , _layaPublishingStatus          :: !(Maybe LayerPublishingStatus)
-    , _layaCreatorEmail              :: !(Maybe Text)
-    , _layaLayerType                 :: !(Maybe LayerLayerType)
-    , _layaLastModifiedTime          :: !(Maybe DateTime')
-    , _layaDatasources               :: !(Maybe [Datasource])
-    , _layaLastModifierEmail         :: !(Maybe Text)
-    , _layaName                      :: !(Maybe Text)
-    , _layaBbox                      :: !(Maybe [Double])
-    , _layaProcessingStatus          :: !(Maybe LayerProcessingStatus)
-    , _layaId                        :: !(Maybe Text)
-    , _layaProjectId                 :: !(Maybe Text)
-    , _layaDraftAccessList           :: !(Maybe Text)
-    , _layaPublishedAccessList       :: !(Maybe Text)
-    , _layaDescription               :: !(Maybe Text)
-    , _layaTags                      :: !(Maybe [Text])
+-- /See:/ 'publishedLayer' smart constructor.
+data PublishedLayer = PublishedLayer
+    { _plLayerType   :: !(Maybe PublishedLayerLayerType)
+    , _plName        :: !(Maybe Text)
+    , _plId          :: !(Maybe Text)
+    , _plProjectId   :: !(Maybe Text)
+    , _plDescription :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Layer' with the minimum fields required to make a request.
+-- | Creates a value of 'PublishedLayer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'layaCreationTime'
+-- * 'plLayerType'
 --
--- * 'layaWritersCanEditPermissions'
+-- * 'plName'
 --
--- * 'layaStyle'
+-- * 'plId'
 --
--- * 'layaEtag'
+-- * 'plProjectId'
 --
--- * 'layaDatasourceType'
---
--- * 'layaPublishingStatus'
---
--- * 'layaCreatorEmail'
---
--- * 'layaLayerType'
---
--- * 'layaLastModifiedTime'
---
--- * 'layaDatasources'
---
--- * 'layaLastModifierEmail'
---
--- * 'layaName'
---
--- * 'layaBbox'
---
--- * 'layaProcessingStatus'
---
--- * 'layaId'
---
--- * 'layaProjectId'
---
--- * 'layaDraftAccessList'
---
--- * 'layaPublishedAccessList'
---
--- * 'layaDescription'
---
--- * 'layaTags'
-layer
-    :: Layer
-layer =
-    Layer
-    { _layaCreationTime = Nothing
-    , _layaWritersCanEditPermissions = Nothing
-    , _layaStyle = Nothing
-    , _layaEtag = Nothing
-    , _layaDatasourceType = Nothing
-    , _layaPublishingStatus = Nothing
-    , _layaCreatorEmail = Nothing
-    , _layaLayerType = Nothing
-    , _layaLastModifiedTime = Nothing
-    , _layaDatasources = Nothing
-    , _layaLastModifierEmail = Nothing
-    , _layaName = Nothing
-    , _layaBbox = Nothing
-    , _layaProcessingStatus = Nothing
-    , _layaId = Nothing
-    , _layaProjectId = Nothing
-    , _layaDraftAccessList = Nothing
-    , _layaPublishedAccessList = Nothing
-    , _layaDescription = Nothing
-    , _layaTags = Nothing
+-- * 'plDescription'
+publishedLayer
+    :: PublishedLayer
+publishedLayer =
+    PublishedLayer
+    { _plLayerType = Nothing
+    , _plName = Nothing
+    , _plId = Nothing
+    , _plProjectId = Nothing
+    , _plDescription = Nothing
     }
-
--- | The creation time of this layer. The value is an RFC 3339 formatted
--- date-time value (e.g. 1970-01-01T00:00:00Z).
-layaCreationTime :: Lens' Layer (Maybe UTCTime)
-layaCreationTime
-  = lens _layaCreationTime
-      (\ s a -> s{_layaCreationTime = a})
-      . mapping _DateTime
-
--- | If true, WRITERs of the asset are able to edit the asset permissions.
-layaWritersCanEditPermissions :: Lens' Layer (Maybe Bool)
-layaWritersCanEditPermissions
-  = lens _layaWritersCanEditPermissions
-      (\ s a -> s{_layaWritersCanEditPermissions = a})
-
--- | The styling information for a vector layer. Note: Style information is
--- returned in response to a get request but not a list request. After
--- requesting a list of layers, you\'ll need to send a get request to
--- retrieve the VectorStyles for each layer.
-layaStyle :: Lens' Layer (Maybe VectorStyle)
-layaStyle
-  = lens _layaStyle (\ s a -> s{_layaStyle = a})
-
--- | The ETag, used to refer to the current version of the asset.
-layaEtag :: Lens' Layer (Maybe Text)
-layaEtag = lens _layaEtag (\ s a -> s{_layaEtag = a})
-
--- | Deprecated: The type of the datasources used to build this Layer. Note:
--- This has been replaced by layerType, but is still available for now to
--- maintain backward compatibility.
-layaDatasourceType :: Lens' Layer (Maybe DatasourceType)
-layaDatasourceType
-  = lens _layaDatasourceType
-      (\ s a -> s{_layaDatasourceType = a})
-
--- | The publishing status of this layer.
-layaPublishingStatus :: Lens' Layer (Maybe LayerPublishingStatus)
-layaPublishingStatus
-  = lens _layaPublishingStatus
-      (\ s a -> s{_layaPublishingStatus = a})
-
--- | The email address of the creator of this layer. This is only returned on
--- GET requests and not LIST requests.
-layaCreatorEmail :: Lens' Layer (Maybe Text)
-layaCreatorEmail
-  = lens _layaCreatorEmail
-      (\ s a -> s{_layaCreatorEmail = a})
 
 -- | The type of the datasources used to build this Layer. This should be
 -- used instead of datasourceType. At least one of layerType and
 -- datasourceType and must be specified, but layerType takes precedence.
-layaLayerType :: Lens' Layer (Maybe LayerLayerType)
-layaLayerType
-  = lens _layaLayerType
-      (\ s a -> s{_layaLayerType = a})
-
--- | The last modified time of this layer. The value is an RFC 3339 formatted
--- date-time value (e.g. 1970-01-01T00:00:00Z).
-layaLastModifiedTime :: Lens' Layer (Maybe UTCTime)
-layaLastModifiedTime
-  = lens _layaLastModifiedTime
-      (\ s a -> s{_layaLastModifiedTime = a})
-      . mapping _DateTime
-
--- | An array of datasources used to build this layer. If layerType is
--- \"image\", or layerType is not specified and datasourceType is
--- \"image\", then each element in this array is a reference to an Image or
--- RasterCollection. If layerType is \"vector\", or layerType is not
--- specified and datasourceType is \"table\" then each element in this
--- array is a reference to a Vector Table.
-layaDatasources :: Lens' Layer [Datasource]
-layaDatasources
-  = lens _layaDatasources
-      (\ s a -> s{_layaDatasources = a})
-      . _Default
-      . _Coerce
-
--- | The email address of the last modifier of this layer. This is only
--- returned on GET requests and not LIST requests.
-layaLastModifierEmail :: Lens' Layer (Maybe Text)
-layaLastModifierEmail
-  = lens _layaLastModifierEmail
-      (\ s a -> s{_layaLastModifierEmail = a})
+plLayerType :: Lens' PublishedLayer (Maybe PublishedLayerLayerType)
+plLayerType
+  = lens _plLayerType (\ s a -> s{_plLayerType = a})
 
 -- | The name of this Layer, supplied by the author.
-layaName :: Lens' Layer (Maybe Text)
-layaName = lens _layaName (\ s a -> s{_layaName = a})
-
--- | A rectangular bounding box which contains all of the data in this Layer.
--- The box is expressed as \\\"west, south, east, north\\\". The numbers
--- represent latitude and longitude in decimal degrees.
-layaBbox :: Lens' Layer [Double]
-layaBbox
-  = lens _layaBbox (\ s a -> s{_layaBbox = a}) .
-      _Default
-      . _Coerce
-
--- | The processing status of this layer.
-layaProcessingStatus :: Lens' Layer (Maybe LayerProcessingStatus)
-layaProcessingStatus
-  = lens _layaProcessingStatus
-      (\ s a -> s{_layaProcessingStatus = a})
+plName :: Lens' PublishedLayer (Maybe Text)
+plName = lens _plName (\ s a -> s{_plName = a})
 
 -- | A globally unique ID, used to refer to this Layer.
-layaId :: Lens' Layer (Maybe Text)
-layaId = lens _layaId (\ s a -> s{_layaId = a})
+plId :: Lens' PublishedLayer (Maybe Text)
+plId = lens _plId (\ s a -> s{_plId = a})
 
 -- | The ID of the project that this Layer is in.
-layaProjectId :: Lens' Layer (Maybe Text)
-layaProjectId
-  = lens _layaProjectId
-      (\ s a -> s{_layaProjectId = a})
-
--- | Deprecated: The name of an access list of the Map Editor type. The user
--- on whose behalf the request is being sent must be an editor on that
--- access list. Note: Google Maps Engine no longer uses access lists.
--- Instead, each asset has its own list of permissions. For backward
--- compatibility, the API still accepts access lists for projects that are
--- already using access lists. If you created a GME account\/project after
--- July 14th, 2014, you will not be able to send API requests that include
--- access lists. Note: This is an input field only. It is not returned in
--- response to a list or get request.
-layaDraftAccessList :: Lens' Layer (Maybe Text)
-layaDraftAccessList
-  = lens _layaDraftAccessList
-      (\ s a -> s{_layaDraftAccessList = a})
-
--- | Deprecated: The access list to whom view permissions are granted. The
--- value must be the name of a Maps Engine access list of the Map Viewer
--- type, and the user must be a viewer on that list. Note: Google Maps
--- Engine no longer uses access lists. Instead, each asset has its own list
--- of permissions. For backward compatibility, the API still accepts access
--- lists for projects that are already using access lists. If you created a
--- GME account\/project after July 14th, 2014, you will not be able to send
--- API requests that include access lists. Note: This is an input field
--- only. It is not returned in response to a list or get request.
-layaPublishedAccessList :: Lens' Layer (Maybe Text)
-layaPublishedAccessList
-  = lens _layaPublishedAccessList
-      (\ s a -> s{_layaPublishedAccessList = a})
+plProjectId :: Lens' PublishedLayer (Maybe Text)
+plProjectId
+  = lens _plProjectId (\ s a -> s{_plProjectId = a})
 
 -- | The description of this Layer, supplied by the author.
-layaDescription :: Lens' Layer (Maybe Text)
-layaDescription
-  = lens _layaDescription
-      (\ s a -> s{_layaDescription = a})
+plDescription :: Lens' PublishedLayer (Maybe Text)
+plDescription
+  = lens _plDescription
+      (\ s a -> s{_plDescription = a})
 
--- | Tags of this Layer.
-layaTags :: Lens' Layer [Text]
-layaTags
-  = lens _layaTags (\ s a -> s{_layaTags = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON Layer where
+instance FromJSON PublishedLayer where
         parseJSON
-          = withObject "Layer"
+          = withObject "PublishedLayer"
               (\ o ->
-                 Layer <$>
-                   (o .:? "creationTime") <*>
-                     (o .:? "writersCanEditPermissions")
-                     <*> (o .:? "style")
-                     <*> (o .:? "etag")
-                     <*> (o .:? "datasourceType")
-                     <*> (o .:? "publishingStatus")
-                     <*> (o .:? "creatorEmail")
-                     <*> (o .:? "layerType")
-                     <*> (o .:? "lastModifiedTime")
-                     <*> (o .:? "datasources")
-                     <*> (o .:? "lastModifierEmail")
-                     <*> (o .:? "name")
-                     <*> (o .:? "bbox" .!= mempty)
-                     <*> (o .:? "processingStatus")
-                     <*> (o .:? "id")
+                 PublishedLayer <$>
+                   (o .:? "layerType") <*> (o .:? "name") <*>
+                     (o .:? "id")
                      <*> (o .:? "projectId")
-                     <*> (o .:? "draftAccessList")
-                     <*> (o .:? "publishedAccessList")
-                     <*> (o .:? "description")
-                     <*> (o .:? "tags"))
+                     <*> (o .:? "description"))
 
-instance ToJSON Layer where
-        toJSON Layer{..}
+instance ToJSON PublishedLayer where
+        toJSON PublishedLayer{..}
           = object
               (catMaybes
-                 [("creationTime" .=) <$> _layaCreationTime,
-                  ("writersCanEditPermissions" .=) <$>
-                    _layaWritersCanEditPermissions,
-                  ("style" .=) <$> _layaStyle,
-                  ("etag" .=) <$> _layaEtag,
-                  ("datasourceType" .=) <$> _layaDatasourceType,
-                  ("publishingStatus" .=) <$> _layaPublishingStatus,
-                  ("creatorEmail" .=) <$> _layaCreatorEmail,
-                  ("layerType" .=) <$> _layaLayerType,
-                  ("lastModifiedTime" .=) <$> _layaLastModifiedTime,
-                  ("datasources" .=) <$> _layaDatasources,
-                  ("lastModifierEmail" .=) <$> _layaLastModifierEmail,
-                  ("name" .=) <$> _layaName, ("bbox" .=) <$> _layaBbox,
-                  ("processingStatus" .=) <$> _layaProcessingStatus,
-                  ("id" .=) <$> _layaId,
-                  ("projectId" .=) <$> _layaProjectId,
-                  ("draftAccessList" .=) <$> _layaDraftAccessList,
-                  ("publishedAccessList" .=) <$>
-                    _layaPublishedAccessList,
-                  ("description" .=) <$> _layaDescription,
-                  ("tags" .=) <$> _layaTags])
-
--- | Style for polygons.
---
--- /See:/ 'polygonStyle' smart constructor.
-data PolygonStyle = PolygonStyle
-    { _pStroke :: !(Maybe BOrder)
-    , _pFill   :: !(Maybe Color)
-    , _pLabel  :: !(Maybe LabelStyle)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PolygonStyle' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pStroke'
---
--- * 'pFill'
---
--- * 'pLabel'
-polygonStyle
-    :: PolygonStyle
-polygonStyle =
-    PolygonStyle
-    { _pStroke = Nothing
-    , _pFill = Nothing
-    , _pLabel = Nothing
-    }
-
--- | Border of the polygon. 0 \< border.width \<= 10.
-pStroke :: Lens' PolygonStyle (Maybe BOrder)
-pStroke = lens _pStroke (\ s a -> s{_pStroke = a})
-
--- | Fill color of the polygon. If not provided, the polygon will be
--- transparent and not visible if there is no border.
-pFill :: Lens' PolygonStyle (Maybe Color)
-pFill = lens _pFill (\ s a -> s{_pFill = a})
-
--- | Label style for the polygon.
-pLabel :: Lens' PolygonStyle (Maybe LabelStyle)
-pLabel = lens _pLabel (\ s a -> s{_pLabel = a})
-
-instance FromJSON PolygonStyle where
-        parseJSON
-          = withObject "PolygonStyle"
-              (\ o ->
-                 PolygonStyle <$>
-                   (o .:? "stroke") <*> (o .:? "fill") <*>
-                     (o .:? "label"))
-
-instance ToJSON PolygonStyle where
-        toJSON PolygonStyle{..}
-          = object
-              (catMaybes
-                 [("stroke" .=) <$> _pStroke, ("fill" .=) <$> _pFill,
-                  ("label" .=) <$> _pLabel])
-
--- | The response returned by a call to mapsengine.permissions.batchUpdate.
---
--- /See:/ 'permissionsBatchUpdateResponse' smart constructor.
-data PermissionsBatchUpdateResponse =
-    PermissionsBatchUpdateResponse
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PermissionsBatchUpdateResponse' with the minimum fields required to make a request.
---
-permissionsBatchUpdateResponse
-    :: PermissionsBatchUpdateResponse
-permissionsBatchUpdateResponse = PermissionsBatchUpdateResponse
-
-instance FromJSON PermissionsBatchUpdateResponse
-         where
-        parseJSON
-          = withObject "PermissionsBatchUpdateResponse"
-              (\ o -> pure PermissionsBatchUpdateResponse)
-
-instance ToJSON PermissionsBatchUpdateResponse where
-        toJSON = const (Object mempty)
-
---
--- /See:/ 'mapKmlLink' smart constructor.
-data MapKmlLink = MapKmlLink
-    { _mklDefaultViewport :: !(Maybe [Double])
-    , _mklVisibility      :: !(Maybe Text)
-    , _mklName            :: !(Maybe Text)
-    , _mklType            :: !(Maybe MapKmlLinkType)
-    , _mklKmlURL          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'MapKmlLink' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'mklDefaultViewport'
---
--- * 'mklVisibility'
---
--- * 'mklName'
---
--- * 'mklType'
---
--- * 'mklKmlURL'
-mapKmlLink
-    :: MapKmlLink
-mapKmlLink =
-    MapKmlLink
-    { _mklDefaultViewport = Nothing
-    , _mklVisibility = Nothing
-    , _mklName = Nothing
-    , _mklType = Nothing
-    , _mklKmlURL = Nothing
-    }
-
--- | An array of four numbers (west, south, east, north) which defines the
--- rectangular bounding box of the default viewport. The numbers represent
--- latitude and longitude in decimal degrees.
-mklDefaultViewport :: Lens' MapKmlLink [Double]
-mklDefaultViewport
-  = lens _mklDefaultViewport
-      (\ s a -> s{_mklDefaultViewport = a})
-      . _Default
-      . _Coerce
-
--- | The visibility setting of this MapKmlLink. One of \"defaultOn\" or
--- \"defaultOff\".
-mklVisibility :: Lens' MapKmlLink (Maybe Text)
-mklVisibility
-  = lens _mklVisibility
-      (\ s a -> s{_mklVisibility = a})
-
--- | The name of this MapKmlLink.
-mklName :: Lens' MapKmlLink (Maybe Text)
-mklName = lens _mklName (\ s a -> s{_mklName = a})
-
--- | Identifies this object as a MapKmlLink.
-mklType :: Lens' MapKmlLink (Maybe MapKmlLinkType)
-mklType = lens _mklType (\ s a -> s{_mklType = a})
-
--- | The URL to the KML file represented by this MapKmlLink.
-mklKmlURL :: Lens' MapKmlLink (Maybe Text)
-mklKmlURL
-  = lens _mklKmlURL (\ s a -> s{_mklKmlURL = a})
-
-instance FromJSON MapKmlLink where
-        parseJSON
-          = withObject "MapKmlLink"
-              (\ o ->
-                 MapKmlLink <$>
-                   (o .:? "defaultViewport" .!= mempty) <*>
-                     (o .:? "visibility")
-                     <*> (o .:? "name")
-                     <*> (o .:? "type")
-                     <*> (o .:? "kmlUrl"))
-
-instance ToJSON MapKmlLink where
-        toJSON MapKmlLink{..}
-          = object
-              (catMaybes
-                 [("defaultViewport" .=) <$> _mklDefaultViewport,
-                  ("visibility" .=) <$> _mklVisibility,
-                  ("name" .=) <$> _mklName, ("type" .=) <$> _mklType,
-                  ("kmlUrl" .=) <$> _mklKmlURL])
-
--- | A vector style contains styling information for vector layer.
---
--- /See:/ 'vectorStyle' smart constructor.
-data VectorStyle = VectorStyle
-    { _vsDisplayRules :: !(Maybe [DisplayRule])
-    , _vsFeatureInfo  :: !(Maybe FeatureInfo)
-    , _vsType         :: !(Maybe VectorStyleType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'VectorStyle' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'vsDisplayRules'
---
--- * 'vsFeatureInfo'
---
--- * 'vsType'
-vectorStyle
-    :: VectorStyle
-vectorStyle =
-    VectorStyle
-    { _vsDisplayRules = Nothing
-    , _vsFeatureInfo = Nothing
-    , _vsType = Nothing
-    }
-
-vsDisplayRules :: Lens' VectorStyle [DisplayRule]
-vsDisplayRules
-  = lens _vsDisplayRules
-      (\ s a -> s{_vsDisplayRules = a})
-      . _Default
-      . _Coerce
-
--- | Individual feature info, this is called Info Window in Maps Engine UI.
--- If not provided, a default template with all attributes will be
--- generated.
-vsFeatureInfo :: Lens' VectorStyle (Maybe FeatureInfo)
-vsFeatureInfo
-  = lens _vsFeatureInfo
-      (\ s a -> s{_vsFeatureInfo = a})
-
--- | The type of the vector style. Currently, only displayRule is supported.
-vsType :: Lens' VectorStyle (Maybe VectorStyleType)
-vsType = lens _vsType (\ s a -> s{_vsType = a})
-
-instance FromJSON VectorStyle where
-        parseJSON
-          = withObject "VectorStyle"
-              (\ o ->
-                 VectorStyle <$>
-                   (o .:? "displayRules" .!= mempty) <*>
-                     (o .:? "featureInfo")
-                     <*> (o .:? "type"))
-
-instance ToJSON VectorStyle where
-        toJSON VectorStyle{..}
-          = object
-              (catMaybes
-                 [("displayRules" .=) <$> _vsDisplayRules,
-                  ("featureInfo" .=) <$> _vsFeatureInfo,
-                  ("type" .=) <$> _vsType])
-
--- | The response returned by a call to maps.List.published.
---
--- /See:/ 'publishedMapsListResponse' smart constructor.
-data PublishedMapsListResponse = PublishedMapsListResponse
-    { _pmlrMaps          :: !(Maybe [PublishedMap])
-    , _pmlrNextPageToken :: !(Maybe Word8)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PublishedMapsListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pmlrMaps'
---
--- * 'pmlrNextPageToken'
-publishedMapsListResponse
-    :: PublishedMapsListResponse
-publishedMapsListResponse =
-    PublishedMapsListResponse
-    { _pmlrMaps = Nothing
-    , _pmlrNextPageToken = Nothing
-    }
-
--- | Resources returned.
-pmlrMaps :: Lens' PublishedMapsListResponse [PublishedMap]
-pmlrMaps
-  = lens _pmlrMaps (\ s a -> s{_pmlrMaps = a}) .
-      _Default
-      . _Coerce
-
--- | Next page token.
-pmlrNextPageToken :: Lens' PublishedMapsListResponse (Maybe Word8)
-pmlrNextPageToken
-  = lens _pmlrNextPageToken
-      (\ s a -> s{_pmlrNextPageToken = a})
-
-instance FromJSON PublishedMapsListResponse where
-        parseJSON
-          = withObject "PublishedMapsListResponse"
-              (\ o ->
-                 PublishedMapsListResponse <$>
-                   (o .:? "maps" .!= mempty) <*>
-                     (o .:? "nextPageToken"))
-
-instance ToJSON PublishedMapsListResponse where
-        toJSON PublishedMapsListResponse{..}
-          = object
-              (catMaybes
-                 [("maps" .=) <$> _pmlrMaps,
-                  ("nextPageToken" .=) <$> _pmlrNextPageToken])
-
--- | The response returned by a call to mapsengine.permissions.batchDelete.
---
--- /See:/ 'permissionsBatchDeleteResponse' smart constructor.
-data PermissionsBatchDeleteResponse =
-    PermissionsBatchDeleteResponse
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PermissionsBatchDeleteResponse' with the minimum fields required to make a request.
---
-permissionsBatchDeleteResponse
-    :: PermissionsBatchDeleteResponse
-permissionsBatchDeleteResponse = PermissionsBatchDeleteResponse
-
-instance FromJSON PermissionsBatchDeleteResponse
-         where
-        parseJSON
-          = withObject "PermissionsBatchDeleteResponse"
-              (\ o -> pure PermissionsBatchDeleteResponse)
-
-instance ToJSON PermissionsBatchDeleteResponse where
-        toJSON = const (Object mempty)
+                 [("layerType" .=) <$> _plLayerType,
+                  ("name" .=) <$> _plName, ("id" .=) <$> _plId,
+                  ("projectId" .=) <$> _plProjectId,
+                  ("description" .=) <$> _plDescription])
 
 -- | A collection of geographic features, and associated metadata.
 --
@@ -4708,6 +4466,255 @@ instance ToJSON Table where
                   ("description" .=) <$> _ttDescription,
                   ("tags" .=) <$> _ttTags])
 
+-- | A single File, which is a component of an Asset.
+--
+-- /See:/ 'file' smart constructor.
+data File = File
+    { _fSize         :: !(Maybe Int64)
+    , _fUploadStatus :: !(Maybe FileUploadStatus)
+    , _fFilename     :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'File' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fSize'
+--
+-- * 'fUploadStatus'
+--
+-- * 'fFilename'
+file
+    :: File
+file =
+    File
+    { _fSize = Nothing
+    , _fUploadStatus = Nothing
+    , _fFilename = Nothing
+    }
+
+-- | The size of the file in bytes.
+fSize :: Lens' File (Maybe Int64)
+fSize = lens _fSize (\ s a -> s{_fSize = a})
+
+-- | The upload status of the file.
+fUploadStatus :: Lens' File (Maybe FileUploadStatus)
+fUploadStatus
+  = lens _fUploadStatus
+      (\ s a -> s{_fUploadStatus = a})
+
+-- | The name of the file.
+fFilename :: Lens' File (Maybe Text)
+fFilename
+  = lens _fFilename (\ s a -> s{_fFilename = a})
+
+instance FromJSON File where
+        parseJSON
+          = withObject "File"
+              (\ o ->
+                 File <$>
+                   (o .:? "size") <*> (o .:? "uploadStatus") <*>
+                     (o .:? "filename"))
+
+instance ToJSON File where
+        toJSON File{..}
+          = object
+              (catMaybes
+                 [("size" .=) <$> _fSize,
+                  ("uploadStatus" .=) <$> _fUploadStatus,
+                  ("filename" .=) <$> _fFilename])
+
+-- | A vector style contains styling information for vector layer.
+--
+-- /See:/ 'vectorStyle' smart constructor.
+data VectorStyle = VectorStyle
+    { _vsDisplayRules :: !(Maybe [DisplayRule])
+    , _vsFeatureInfo  :: !(Maybe FeatureInfo)
+    , _vsType         :: !(Maybe VectorStyleType)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VectorStyle' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vsDisplayRules'
+--
+-- * 'vsFeatureInfo'
+--
+-- * 'vsType'
+vectorStyle
+    :: VectorStyle
+vectorStyle =
+    VectorStyle
+    { _vsDisplayRules = Nothing
+    , _vsFeatureInfo = Nothing
+    , _vsType = Nothing
+    }
+
+vsDisplayRules :: Lens' VectorStyle [DisplayRule]
+vsDisplayRules
+  = lens _vsDisplayRules
+      (\ s a -> s{_vsDisplayRules = a})
+      . _Default
+      . _Coerce
+
+-- | Individual feature info, this is called Info Window in Maps Engine UI.
+-- If not provided, a default template with all attributes will be
+-- generated.
+vsFeatureInfo :: Lens' VectorStyle (Maybe FeatureInfo)
+vsFeatureInfo
+  = lens _vsFeatureInfo
+      (\ s a -> s{_vsFeatureInfo = a})
+
+-- | The type of the vector style. Currently, only displayRule is supported.
+vsType :: Lens' VectorStyle (Maybe VectorStyleType)
+vsType = lens _vsType (\ s a -> s{_vsType = a})
+
+instance FromJSON VectorStyle where
+        parseJSON
+          = withObject "VectorStyle"
+              (\ o ->
+                 VectorStyle <$>
+                   (o .:? "displayRules" .!= mempty) <*>
+                     (o .:? "featureInfo")
+                     <*> (o .:? "type"))
+
+instance ToJSON VectorStyle where
+        toJSON VectorStyle{..}
+          = object
+              (catMaybes
+                 [("displayRules" .=) <$> _vsDisplayRules,
+                  ("featureInfo" .=) <$> _vsFeatureInfo,
+                  ("type" .=) <$> _vsType])
+
+-- | The response returned by a call to mapsengine.permissions.batchDelete.
+--
+-- /See:/ 'permissionsBatchDeleteResponse' smart constructor.
+data PermissionsBatchDeleteResponse =
+    PermissionsBatchDeleteResponse
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PermissionsBatchDeleteResponse' with the minimum fields required to make a request.
+--
+permissionsBatchDeleteResponse
+    :: PermissionsBatchDeleteResponse
+permissionsBatchDeleteResponse = PermissionsBatchDeleteResponse
+
+instance FromJSON PermissionsBatchDeleteResponse
+         where
+        parseJSON
+          = withObject "PermissionsBatchDeleteResponse"
+              (\ o -> pure PermissionsBatchDeleteResponse)
+
+instance ToJSON PermissionsBatchDeleteResponse where
+        toJSON = const (Object mempty)
+
+--
+-- /See:/ 'mapKmlLink' smart constructor.
+data MapKmlLink = MapKmlLink
+    { _mklDefaultViewport :: !(Maybe [Double])
+    , _mklVisibility      :: !(Maybe Text)
+    , _mklName            :: !(Maybe Text)
+    , _mklType            :: !(Maybe MapKmlLinkType)
+    , _mklKmlURL          :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MapKmlLink' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mklDefaultViewport'
+--
+-- * 'mklVisibility'
+--
+-- * 'mklName'
+--
+-- * 'mklType'
+--
+-- * 'mklKmlURL'
+mapKmlLink
+    :: MapKmlLink
+mapKmlLink =
+    MapKmlLink
+    { _mklDefaultViewport = Nothing
+    , _mklVisibility = Nothing
+    , _mklName = Nothing
+    , _mklType = Nothing
+    , _mklKmlURL = Nothing
+    }
+
+-- | An array of four numbers (west, south, east, north) which defines the
+-- rectangular bounding box of the default viewport. The numbers represent
+-- latitude and longitude in decimal degrees.
+mklDefaultViewport :: Lens' MapKmlLink [Double]
+mklDefaultViewport
+  = lens _mklDefaultViewport
+      (\ s a -> s{_mklDefaultViewport = a})
+      . _Default
+      . _Coerce
+
+-- | The visibility setting of this MapKmlLink. One of \"defaultOn\" or
+-- \"defaultOff\".
+mklVisibility :: Lens' MapKmlLink (Maybe Text)
+mklVisibility
+  = lens _mklVisibility
+      (\ s a -> s{_mklVisibility = a})
+
+-- | The name of this MapKmlLink.
+mklName :: Lens' MapKmlLink (Maybe Text)
+mklName = lens _mklName (\ s a -> s{_mklName = a})
+
+-- | Identifies this object as a MapKmlLink.
+mklType :: Lens' MapKmlLink (Maybe MapKmlLinkType)
+mklType = lens _mklType (\ s a -> s{_mklType = a})
+
+-- | The URL to the KML file represented by this MapKmlLink.
+mklKmlURL :: Lens' MapKmlLink (Maybe Text)
+mklKmlURL
+  = lens _mklKmlURL (\ s a -> s{_mklKmlURL = a})
+
+instance FromJSON MapKmlLink where
+        parseJSON
+          = withObject "MapKmlLink"
+              (\ o ->
+                 MapKmlLink <$>
+                   (o .:? "defaultViewport" .!= mempty) <*>
+                     (o .:? "visibility")
+                     <*> (o .:? "name")
+                     <*> (o .:? "type")
+                     <*> (o .:? "kmlUrl"))
+
+instance ToJSON MapKmlLink where
+        toJSON MapKmlLink{..}
+          = object
+              (catMaybes
+                 [("defaultViewport" .=) <$> _mklDefaultViewport,
+                  ("visibility" .=) <$> _mklVisibility,
+                  ("name" .=) <$> _mklName, ("type" .=) <$> _mklType,
+                  ("kmlUrl" .=) <$> _mklKmlURL])
+
+-- | The response returned by a call to mapsengine.permissions.batchUpdate.
+--
+-- /See:/ 'permissionsBatchUpdateResponse' smart constructor.
+data PermissionsBatchUpdateResponse =
+    PermissionsBatchUpdateResponse
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PermissionsBatchUpdateResponse' with the minimum fields required to make a request.
+--
+permissionsBatchUpdateResponse
+    :: PermissionsBatchUpdateResponse
+permissionsBatchUpdateResponse = PermissionsBatchUpdateResponse
+
+instance FromJSON PermissionsBatchUpdateResponse
+         where
+        parseJSON
+          = withObject "PermissionsBatchUpdateResponse"
+              (\ o -> pure PermissionsBatchUpdateResponse)
+
+instance ToJSON PermissionsBatchUpdateResponse where
+        toJSON = const (Object mempty)
+
 --
 -- /See:/ 'geoJSONLineString' smart constructor.
 data GeoJSONLineString = GeoJSONLineString
@@ -4755,6 +4762,57 @@ instance ToJSON GeoJSONLineString where
               (catMaybes
                  [("coordinates" .=) <$> _gjlsCoordinates,
                   ("type" .=) <$> _gjlsType])
+
+-- | The response returned by a call to maps.List.published.
+--
+-- /See:/ 'publishedMapsListResponse' smart constructor.
+data PublishedMapsListResponse = PublishedMapsListResponse
+    { _pmlrMaps          :: !(Maybe [PublishedMap])
+    , _pmlrNextPageToken :: !(Maybe Word8)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PublishedMapsListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pmlrMaps'
+--
+-- * 'pmlrNextPageToken'
+publishedMapsListResponse
+    :: PublishedMapsListResponse
+publishedMapsListResponse =
+    PublishedMapsListResponse
+    { _pmlrMaps = Nothing
+    , _pmlrNextPageToken = Nothing
+    }
+
+-- | Resources returned.
+pmlrMaps :: Lens' PublishedMapsListResponse [PublishedMap]
+pmlrMaps
+  = lens _pmlrMaps (\ s a -> s{_pmlrMaps = a}) .
+      _Default
+      . _Coerce
+
+-- | Next page token.
+pmlrNextPageToken :: Lens' PublishedMapsListResponse (Maybe Word8)
+pmlrNextPageToken
+  = lens _pmlrNextPageToken
+      (\ s a -> s{_pmlrNextPageToken = a})
+
+instance FromJSON PublishedMapsListResponse where
+        parseJSON
+          = withObject "PublishedMapsListResponse"
+              (\ o ->
+                 PublishedMapsListResponse <$>
+                   (o .:? "maps" .!= mempty) <*>
+                     (o .:? "nextPageToken"))
+
+instance ToJSON PublishedMapsListResponse where
+        toJSON PublishedMapsListResponse{..}
+          = object
+              (catMaybes
+                 [("maps" .=) <$> _pmlrMaps,
+                  ("nextPageToken" .=) <$> _pmlrNextPageToken])
 
 -- | The response returned by a call to maps.List.
 --
@@ -4806,118 +4864,55 @@ instance ToJSON MapsListResponse where
                  [("maps" .=) <$> _mlrMaps,
                   ("nextPageToken" .=) <$> _mlrNextPageToken])
 
--- | A single File, which is a component of an Asset.
+-- | A heterogenous collection of GeoJsonGeometry objects.
 --
--- /See:/ 'file' smart constructor.
-data File = File
-    { _fSize         :: !(Maybe Int64)
-    , _fUploadStatus :: !(Maybe UploadStatus)
-    , _fFilename     :: !(Maybe Text)
+-- /See:/ 'geoJSONGeometryCollection' smart constructor.
+data GeoJSONGeometryCollection = GeoJSONGeometryCollection
+    { _gjgcGeometries :: !(Maybe [GeoJSONGeometry])
+    , _gjgcType       :: !(Maybe GeoJSONGeometryCollectionType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'File' with the minimum fields required to make a request.
+-- | Creates a value of 'GeoJSONGeometryCollection' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'fSize'
+-- * 'gjgcGeometries'
 --
--- * 'fUploadStatus'
---
--- * 'fFilename'
-file
-    :: File
-file =
-    File
-    { _fSize = Nothing
-    , _fUploadStatus = Nothing
-    , _fFilename = Nothing
+-- * 'gjgcType'
+geoJSONGeometryCollection
+    :: GeoJSONGeometryCollection
+geoJSONGeometryCollection =
+    GeoJSONGeometryCollection
+    { _gjgcGeometries = Nothing
+    , _gjgcType = Nothing
     }
 
--- | The size of the file in bytes.
-fSize :: Lens' File (Maybe Int64)
-fSize = lens _fSize (\ s a -> s{_fSize = a})
-
--- | The upload status of the file.
-fUploadStatus :: Lens' File (Maybe UploadStatus)
-fUploadStatus
-  = lens _fUploadStatus
-      (\ s a -> s{_fUploadStatus = a})
-
--- | The name of the file.
-fFilename :: Lens' File (Maybe Text)
-fFilename
-  = lens _fFilename (\ s a -> s{_fFilename = a})
-
-instance FromJSON File where
-        parseJSON
-          = withObject "File"
-              (\ o ->
-                 File <$>
-                   (o .:? "size") <*> (o .:? "uploadStatus") <*>
-                     (o .:? "filename"))
-
-instance ToJSON File where
-        toJSON File{..}
-          = object
-              (catMaybes
-                 [("size" .=) <$> _fSize,
-                  ("uploadStatus" .=) <$> _fUploadStatus,
-                  ("filename" .=) <$> _fFilename])
-
--- | The response returned by a call to layers.List. Note: The list response
--- does not include all the fields available in a layer. Refer to the layer
--- resource description for details of the fields that are not included.
--- You\'ll need to send a get request to retrieve the additional fields for
--- each layer.
---
--- /See:/ 'layersListResponse' smart constructor.
-data LayersListResponse = LayersListResponse
-    { _llrNextPageToken :: !(Maybe Word8)
-    , _llrLayers        :: !(Maybe [Layer])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'LayersListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'llrNextPageToken'
---
--- * 'llrLayers'
-layersListResponse
-    :: LayersListResponse
-layersListResponse =
-    LayersListResponse
-    { _llrNextPageToken = Nothing
-    , _llrLayers = Nothing
-    }
-
--- | Next page token.
-llrNextPageToken :: Lens' LayersListResponse (Maybe Word8)
-llrNextPageToken
-  = lens _llrNextPageToken
-      (\ s a -> s{_llrNextPageToken = a})
-
--- | Resources returned.
-llrLayers :: Lens' LayersListResponse [Layer]
-llrLayers
-  = lens _llrLayers (\ s a -> s{_llrLayers = a}) .
-      _Default
+-- | An array of geometry objects. There must be at least 2 different types
+-- of geometries in the array.
+gjgcGeometries :: Lens' GeoJSONGeometryCollection [GeoJSONGeometry]
+gjgcGeometries
+  = lens _gjgcGeometries
+      (\ s a -> s{_gjgcGeometries = a})
+      . _Default
       . _Coerce
 
-instance FromJSON LayersListResponse where
-        parseJSON
-          = withObject "LayersListResponse"
-              (\ o ->
-                 LayersListResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "layers" .!= mempty))
+-- | Identifies this object as a GeoJsonGeometryCollection.
+gjgcType :: Lens' GeoJSONGeometryCollection (Maybe GeoJSONGeometryCollectionType)
+gjgcType = lens _gjgcType (\ s a -> s{_gjgcType = a})
 
-instance ToJSON LayersListResponse where
-        toJSON LayersListResponse{..}
+instance FromJSON GeoJSONGeometryCollection where
+        parseJSON
+          = withObject "GeoJSONGeometryCollection"
+              (\ o ->
+                 GeoJSONGeometryCollection <$>
+                   (o .:? "geometries" .!= mempty) <*> (o .:? "type"))
+
+instance ToJSON GeoJSONGeometryCollection where
+        toJSON GeoJSONGeometryCollection{..}
           = object
               (catMaybes
-                 [("nextPageToken" .=) <$> _llrNextPageToken,
-                  ("layers" .=) <$> _llrLayers])
+                 [("geometries" .=) <$> _gjgcGeometries,
+                  ("type" .=) <$> _gjgcType])
 
 --
 -- /See:/ 'geoJSONPolygon' smart constructor.
@@ -5019,6 +5014,112 @@ instance ToJSON GeoJSONPoint where
               (catMaybes
                  [("coordinates" .=) <$> _gjsonpCoordinates,
                   ("type" .=) <$> _gjsonpType])
+
+-- | The response returned by a call to layers.List. Note: The list response
+-- does not include all the fields available in a layer. Refer to the layer
+-- resource description for details of the fields that are not included.
+-- You\'ll need to send a get request to retrieve the additional fields for
+-- each layer.
+--
+-- /See:/ 'layersListResponse' smart constructor.
+data LayersListResponse = LayersListResponse
+    { _llrNextPageToken :: !(Maybe Word8)
+    , _llrLayers        :: !(Maybe [Layer])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LayersListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'llrNextPageToken'
+--
+-- * 'llrLayers'
+layersListResponse
+    :: LayersListResponse
+layersListResponse =
+    LayersListResponse
+    { _llrNextPageToken = Nothing
+    , _llrLayers = Nothing
+    }
+
+-- | Next page token.
+llrNextPageToken :: Lens' LayersListResponse (Maybe Word8)
+llrNextPageToken
+  = lens _llrNextPageToken
+      (\ s a -> s{_llrNextPageToken = a})
+
+-- | Resources returned.
+llrLayers :: Lens' LayersListResponse [Layer]
+llrLayers
+  = lens _llrLayers (\ s a -> s{_llrLayers = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON LayersListResponse where
+        parseJSON
+          = withObject "LayersListResponse"
+              (\ o ->
+                 LayersListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "layers" .!= mempty))
+
+instance ToJSON LayersListResponse where
+        toJSON LayersListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _llrNextPageToken,
+                  ("layers" .=) <$> _llrLayers])
+
+-- | The response returned by a call to rasters.List.
+--
+-- /See:/ 'rastersListResponse' smart constructor.
+data RastersListResponse = RastersListResponse
+    { _rlrNextPageToken :: !(Maybe Text)
+    , _rlrRasters       :: !(Maybe [Raster])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RastersListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rlrNextPageToken'
+--
+-- * 'rlrRasters'
+rastersListResponse
+    :: RastersListResponse
+rastersListResponse =
+    RastersListResponse
+    { _rlrNextPageToken = Nothing
+    , _rlrRasters = Nothing
+    }
+
+-- | Next page token.
+rlrNextPageToken :: Lens' RastersListResponse (Maybe Text)
+rlrNextPageToken
+  = lens _rlrNextPageToken
+      (\ s a -> s{_rlrNextPageToken = a})
+
+-- | Resources returned.
+rlrRasters :: Lens' RastersListResponse [Raster]
+rlrRasters
+  = lens _rlrRasters (\ s a -> s{_rlrRasters = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON RastersListResponse where
+        parseJSON
+          = withObject "RastersListResponse"
+              (\ o ->
+                 RastersListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "rasters" .!= mempty))
+
+instance ToJSON RastersListResponse where
+        toJSON RastersListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _rlrNextPageToken,
+                  ("rasters" .=) <$> _rlrRasters])
 
 --
 -- /See:/ 'permissionsListResponse' smart constructor.
@@ -5177,104 +5278,3 @@ instance ToJSON PublishedLayersListResponse where
               (catMaybes
                  [("nextPageToken" .=) <$> _pllrNextPageToken,
                   ("layers" .=) <$> _pllrLayers])
-
--- | A heterogenous collection of GeoJsonGeometry objects.
---
--- /See:/ 'geoJSONGeometryCollection' smart constructor.
-data GeoJSONGeometryCollection = GeoJSONGeometryCollection
-    { _gjgcGeometries :: !(Maybe [GeoJSONGeometry])
-    , _gjgcType       :: !(Maybe GeoJSONGeometryCollectionType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'GeoJSONGeometryCollection' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'gjgcGeometries'
---
--- * 'gjgcType'
-geoJSONGeometryCollection
-    :: GeoJSONGeometryCollection
-geoJSONGeometryCollection =
-    GeoJSONGeometryCollection
-    { _gjgcGeometries = Nothing
-    , _gjgcType = Nothing
-    }
-
--- | An array of geometry objects. There must be at least 2 different types
--- of geometries in the array.
-gjgcGeometries :: Lens' GeoJSONGeometryCollection [GeoJSONGeometry]
-gjgcGeometries
-  = lens _gjgcGeometries
-      (\ s a -> s{_gjgcGeometries = a})
-      . _Default
-      . _Coerce
-
--- | Identifies this object as a GeoJsonGeometryCollection.
-gjgcType :: Lens' GeoJSONGeometryCollection (Maybe GeoJSONGeometryCollectionType)
-gjgcType = lens _gjgcType (\ s a -> s{_gjgcType = a})
-
-instance FromJSON GeoJSONGeometryCollection where
-        parseJSON
-          = withObject "GeoJSONGeometryCollection"
-              (\ o ->
-                 GeoJSONGeometryCollection <$>
-                   (o .:? "geometries" .!= mempty) <*> (o .:? "type"))
-
-instance ToJSON GeoJSONGeometryCollection where
-        toJSON GeoJSONGeometryCollection{..}
-          = object
-              (catMaybes
-                 [("geometries" .=) <$> _gjgcGeometries,
-                  ("type" .=) <$> _gjgcType])
-
--- | The response returned by a call to rasters.List.
---
--- /See:/ 'rastersListResponse' smart constructor.
-data RastersListResponse = RastersListResponse
-    { _rlrNextPageToken :: !(Maybe Text)
-    , _rlrRasters       :: !(Maybe [Raster])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'RastersListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rlrNextPageToken'
---
--- * 'rlrRasters'
-rastersListResponse
-    :: RastersListResponse
-rastersListResponse =
-    RastersListResponse
-    { _rlrNextPageToken = Nothing
-    , _rlrRasters = Nothing
-    }
-
--- | Next page token.
-rlrNextPageToken :: Lens' RastersListResponse (Maybe Text)
-rlrNextPageToken
-  = lens _rlrNextPageToken
-      (\ s a -> s{_rlrNextPageToken = a})
-
--- | Resources returned.
-rlrRasters :: Lens' RastersListResponse [Raster]
-rlrRasters
-  = lens _rlrRasters (\ s a -> s{_rlrRasters = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON RastersListResponse where
-        parseJSON
-          = withObject "RastersListResponse"
-              (\ o ->
-                 RastersListResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "rasters" .!= mempty))
-
-instance ToJSON RastersListResponse where
-        toJSON RastersListResponse{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _rlrNextPageToken,
-                  ("rasters" .=) <$> _rlrRasters])

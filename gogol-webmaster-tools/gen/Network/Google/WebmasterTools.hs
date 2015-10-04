@@ -74,6 +74,21 @@ module Network.Google.WebmasterTools
     , wscType
     , wscSubmitted
 
+    -- ** APIdimensionFilterGroup
+    , APIdimensionFilterGroup
+    , apidimensionFilterGroup
+    , afgFilters
+    , afgGroupType
+
+    -- ** URLSampleDetails
+    , URLSampleDetails
+    , urlSampleDetails
+    , usdLinkedFromURLs
+    , usdContainingSitemaps
+
+    -- ** URLCrawlErrorsSamplesMarkAsFixedCategory
+    , URLCrawlErrorsSamplesMarkAsFixedCategory (..)
+
     -- ** URLCrawlErrorCountsPerType
     , URLCrawlErrorCountsPerType
     , urlCrawlErrorCountsPerType
@@ -81,20 +96,8 @@ module Network.Google.WebmasterTools
     , ucecptEntries
     , ucecptCategory
 
-    -- ** APIdimensionFilterGroup
-    , APIdimensionFilterGroup
-    , apidimensionFilterGroup
-    , afgFilters
-    , afgGroupType
-
-    -- ** Platform
-    , Platform (..)
-
-    -- ** URLSampleDetails
-    , URLSampleDetails
-    , urlSampleDetails
-    , usdLinkedFromURLs
-    , usdContainingSitemaps
+    -- ** URLCrawlErrorsSamplesGetPlatform
+    , URLCrawlErrorsSamplesGetPlatform (..)
 
     -- ** APIdataRow
     , APIdataRow
@@ -112,8 +115,11 @@ module Network.Google.WebmasterTools
     , afDimension
     , afExpression
 
-    -- ** Category
-    , Category (..)
+    -- ** URLCrawlErrorsSamplesMarkAsFixedPlatform
+    , URLCrawlErrorsSamplesMarkAsFixedPlatform (..)
+
+    -- ** URLCrawlErrorsSamplesGetCategory
+    , URLCrawlErrorsSamplesGetCategory (..)
 
     -- ** URLCrawlErrorCount
     , URLCrawlErrorCount
@@ -121,8 +127,8 @@ module Network.Google.WebmasterTools
     , ucecCount
     , ucecTimestamp
 
-    -- ** WebmastersURLCrawlErrorscountsQueryCategory
-    , WebmastersURLCrawlErrorscountsQueryCategory (..)
+    -- ** URLCrawlErrorscountsQueryPlatform
+    , URLCrawlErrorscountsQueryPlatform (..)
 
     -- ** SearchAnalyticsQueryResponse
     , SearchAnalyticsQueryResponse
@@ -130,11 +136,8 @@ module Network.Google.WebmasterTools
     , saqrRows
     , saqrResponseAggregationType
 
-    -- ** WebmastersURLCrawlErrorsSamplesGetCategory
-    , WebmastersURLCrawlErrorsSamplesGetCategory (..)
-
-    -- ** WebmastersURLCrawlErrorsSamplesMarkAsFixedPlatform
-    , WebmastersURLCrawlErrorsSamplesMarkAsFixedPlatform (..)
+    -- ** URLCrawlErrorsSamplesListCategory
+    , URLCrawlErrorsSamplesListCategory (..)
 
     -- ** URLCrawlErrorsSamplesListResponse
     , URLCrawlErrorsSamplesListResponse
@@ -155,11 +158,6 @@ module Network.Google.WebmasterTools
     , ucesPageURL
     , ucesFirstDetected
 
-    -- ** SitemapsListResponse
-    , SitemapsListResponse
-    , sitemapsListResponse
-    , slrSitemap
-
     -- ** WmxSitemap
     , WmxSitemap
     , wmxSitemap
@@ -173,11 +171,10 @@ module Network.Google.WebmasterTools
     , wsType
     , wsErrors
 
-    -- ** WebmastersURLCrawlErrorsSamplesMarkAsFixedCategory
-    , WebmastersURLCrawlErrorsSamplesMarkAsFixedCategory (..)
-
-    -- ** WebmastersURLCrawlErrorsSamplesGetPlatform
-    , WebmastersURLCrawlErrorsSamplesGetPlatform (..)
+    -- ** SitemapsListResponse
+    , SitemapsListResponse
+    , sitemapsListResponse
+    , slrSitemap
 
     -- ** SearchAnalyticsQueryRequest
     , SearchAnalyticsQueryRequest
@@ -190,6 +187,9 @@ module Network.Google.WebmasterTools
     , saqrStartDate
     , saqrDimensions
 
+    -- ** URLCrawlErrorsSamplesListPlatform
+    , URLCrawlErrorsSamplesListPlatform (..)
+
     -- ** SitesListResponse
     , SitesListResponse
     , sitesListResponse
@@ -201,8 +201,8 @@ module Network.Google.WebmasterTools
     , wsPermissionLevel
     , wsSiteURL
 
-    -- ** WebmastersURLCrawlErrorscountsQueryPlatform
-    , WebmastersURLCrawlErrorscountsQueryPlatform (..)
+    -- ** URLCrawlErrorscountsQueryCategory
+    , URLCrawlErrorscountsQueryCategory (..)
     ) where
 
 import           Network.Google.Prelude

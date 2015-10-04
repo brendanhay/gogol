@@ -59,7 +59,7 @@ type MembersUpdateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Member :> Put '[JSON] Member
+                           ReqBody '[OctetStream] Member :> Put '[JSON] Member
 
 -- | Update membership of a user in the specified group.
 --

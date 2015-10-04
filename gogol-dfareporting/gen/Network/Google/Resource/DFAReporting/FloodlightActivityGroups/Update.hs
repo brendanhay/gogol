@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Update
     , faguQuotaUser
     , faguPrettyPrint
     , faguUserIP
-    , faguProfileId
+    , faguProFileId
     , faguPayload
     , faguKey
     , faguOAuthToken
@@ -57,7 +57,7 @@ type FloodlightActivityGroupsUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] FloodlightActivityGroup :>
+                         ReqBody '[OctetStream] FloodlightActivityGroup :>
                            Put '[JSON] FloodlightActivityGroup
 
 -- | Updates an existing floodlight activity group.
@@ -67,7 +67,7 @@ data FloodlightActivityGroupsUpdate' = FloodlightActivityGroupsUpdate'
     { _faguQuotaUser   :: !(Maybe Text)
     , _faguPrettyPrint :: !Bool
     , _faguUserIP      :: !(Maybe Text)
-    , _faguProfileId   :: !Int64
+    , _faguProFileId   :: !Int64
     , _faguPayload     :: !FloodlightActivityGroup
     , _faguKey         :: !(Maybe Key)
     , _faguOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data FloodlightActivityGroupsUpdate' = FloodlightActivityGroupsUpdate'
 --
 -- * 'faguUserIP'
 --
--- * 'faguProfileId'
+-- * 'faguProFileId'
 --
 -- * 'faguPayload'
 --
@@ -97,12 +97,12 @@ floodlightActivityGroupsUpdate'
     :: Int64 -- ^ 'profileId'
     -> FloodlightActivityGroup -- ^ 'payload'
     -> FloodlightActivityGroupsUpdate'
-floodlightActivityGroupsUpdate' pFaguProfileId_ pFaguPayload_ =
+floodlightActivityGroupsUpdate' pFaguProFileId_ pFaguPayload_ =
     FloodlightActivityGroupsUpdate'
     { _faguQuotaUser = Nothing
     , _faguPrettyPrint = True
     , _faguUserIP = Nothing
-    , _faguProfileId = pFaguProfileId_
+    , _faguProFileId = pFaguProFileId_
     , _faguPayload = pFaguPayload_
     , _faguKey = Nothing
     , _faguOAuthToken = Nothing
@@ -130,10 +130,10 @@ faguUserIP
   = lens _faguUserIP (\ s a -> s{_faguUserIP = a})
 
 -- | User profile ID associated with this request.
-faguProfileId :: Lens' FloodlightActivityGroupsUpdate' Int64
-faguProfileId
-  = lens _faguProfileId
-      (\ s a -> s{_faguProfileId = a})
+faguProFileId :: Lens' FloodlightActivityGroupsUpdate' Int64
+faguProFileId
+  = lens _faguProFileId
+      (\ s a -> s{_faguProFileId = a})
 
 -- | Multipart request metadata.
 faguPayload :: Lens' FloodlightActivityGroupsUpdate' FloodlightActivityGroup
@@ -169,7 +169,7 @@ instance GoogleRequest
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           FloodlightActivityGroupsUpdate'{..}
-          = go _faguProfileId _faguQuotaUser
+          = go _faguProFileId _faguQuotaUser
               (Just _faguPrettyPrint)
               _faguUserIP
               _faguFields

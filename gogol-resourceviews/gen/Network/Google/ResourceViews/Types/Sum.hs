@@ -17,37 +17,10 @@ module Network.Google.ResourceViews.Types.Sum where
 
 import           Network.Google.Prelude
 
--- | The state of the instance to list. By default, it lists all instances.
-data ListState
-    = All
-      -- ^ @ALL@
-    | Running
-      -- ^ @RUNNING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ListState
-
-instance FromText ListState where
-    fromText = \case
-        "ALL" -> Just All
-        "RUNNING" -> Just Running
-        _ -> Nothing
-
-instance ToText ListState where
-    toText = \case
-        All -> "ALL"
-        Running -> "RUNNING"
-
-instance FromJSON ListState where
-    parseJSON = parseJSONText "ListState"
-
-instance ToJSON ListState where
-    toJSON = toJSONText
-
 -- | The requested format of the return value. It can be URL or URL_PORT. A
 -- JSON object will be included in the response based on the format. The
 -- default format is NONE, which results in no JSON in the response.
-data Format
+data ZoneViewsListResourcesFormat
     = None
       -- ^ @NONE@
     | URL
@@ -56,23 +29,50 @@ data Format
       -- ^ @URL_PORT@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable Format
+instance Hashable ZoneViewsListResourcesFormat
 
-instance FromText Format where
+instance FromText ZoneViewsListResourcesFormat where
     fromText = \case
         "NONE" -> Just None
         "URL" -> Just URL
         "URL_PORT" -> Just URLPort
         _ -> Nothing
 
-instance ToText Format where
+instance ToText ZoneViewsListResourcesFormat where
     toText = \case
         None -> "NONE"
         URL -> "URL"
         URLPort -> "URL_PORT"
 
-instance FromJSON Format where
-    parseJSON = parseJSONText "Format"
+instance FromJSON ZoneViewsListResourcesFormat where
+    parseJSON = parseJSONText "ZoneViewsListResourcesFormat"
 
-instance ToJSON Format where
+instance ToJSON ZoneViewsListResourcesFormat where
+    toJSON = toJSONText
+
+-- | The state of the instance to list. By default, it lists all instances.
+data ZoneViewsListResourcesListState
+    = All
+      -- ^ @ALL@
+    | Running
+      -- ^ @RUNNING@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ZoneViewsListResourcesListState
+
+instance FromText ZoneViewsListResourcesListState where
+    fromText = \case
+        "ALL" -> Just All
+        "RUNNING" -> Just Running
+        _ -> Nothing
+
+instance ToText ZoneViewsListResourcesListState where
+    toText = \case
+        All -> "ALL"
+        Running -> "RUNNING"
+
+instance FromJSON ZoneViewsListResourcesListState where
+    parseJSON = parseJSONText "ZoneViewsListResourcesListState"
+
+instance ToJSON ZoneViewsListResourcesListState where
     toJSON = toJSONText

@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Creatives.Get
     , crerQuotaUser
     , crerPrettyPrint
     , crerUserIP
-    , crerProfileId
+    , crerProFileId
     , crerKey
     , crerId
     , crerOAuthToken
@@ -66,7 +66,7 @@ data CreativesGet' = CreativesGet'
     { _crerQuotaUser   :: !(Maybe Text)
     , _crerPrettyPrint :: !Bool
     , _crerUserIP      :: !(Maybe Text)
-    , _crerProfileId   :: !Int64
+    , _crerProFileId   :: !Int64
     , _crerKey         :: !(Maybe Key)
     , _crerId          :: !Int64
     , _crerOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +83,7 @@ data CreativesGet' = CreativesGet'
 --
 -- * 'crerUserIP'
 --
--- * 'crerProfileId'
+-- * 'crerProFileId'
 --
 -- * 'crerKey'
 --
@@ -96,12 +96,12 @@ creativesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> CreativesGet'
-creativesGet' pCrerProfileId_ pCrerId_ =
+creativesGet' pCrerProFileId_ pCrerId_ =
     CreativesGet'
     { _crerQuotaUser = Nothing
     , _crerPrettyPrint = True
     , _crerUserIP = Nothing
-    , _crerProfileId = pCrerProfileId_
+    , _crerProFileId = pCrerProFileId_
     , _crerKey = Nothing
     , _crerId = pCrerId_
     , _crerOAuthToken = Nothing
@@ -129,10 +129,10 @@ crerUserIP
   = lens _crerUserIP (\ s a -> s{_crerUserIP = a})
 
 -- | User profile ID associated with this request.
-crerProfileId :: Lens' CreativesGet' Int64
-crerProfileId
-  = lens _crerProfileId
-      (\ s a -> s{_crerProfileId = a})
+crerProFileId :: Lens' CreativesGet' Int64
+crerProFileId
+  = lens _crerProFileId
+      (\ s a -> s{_crerProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -163,7 +163,7 @@ instance GoogleRequest CreativesGet' where
         type Rs CreativesGet' = Creative
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativesGet'{..}
-          = go _crerProfileId _crerId _crerQuotaUser
+          = go _crerProFileId _crerId _crerQuotaUser
               (Just _crerPrettyPrint)
               _crerUserIP
               _crerFields

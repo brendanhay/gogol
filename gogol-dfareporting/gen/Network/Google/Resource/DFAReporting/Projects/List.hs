@@ -36,7 +36,7 @@ module Network.Google.Resource.DFAReporting.Projects.List
     , plUserIP
     , plSearchString
     , plIds
-    , plProfileId
+    , plProFileId
     , plSortOrder
     , plKey
     , plPageToken
@@ -58,13 +58,9 @@ type ProjectsListResource =
          "projects" :>
            QueryParam "searchString" Text :>
              QueryParams "ids" Int64 :>
-               QueryParam "sortOrder"
-                 DfareportingProjectsListSortOrder
-                 :>
+               QueryParam "sortOrder" ProjectsListSortOrder :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "sortField"
-                     DfareportingProjectsListSortField
-                     :>
+                   QueryParam "sortField" ProjectsListSortField :>
                      QueryParams "advertiserIds" Int64 :>
                        QueryParam "maxResults" Int32 :>
                          QueryParam "quotaUser" Text :>
@@ -85,11 +81,11 @@ data ProjectsList' = ProjectsList'
     , _plUserIP        :: !(Maybe Text)
     , _plSearchString  :: !(Maybe Text)
     , _plIds           :: !(Maybe [Int64])
-    , _plProfileId     :: !Int64
-    , _plSortOrder     :: !(Maybe DfareportingProjectsListSortOrder)
+    , _plProFileId     :: !Int64
+    , _plSortOrder     :: !(Maybe ProjectsListSortOrder)
     , _plKey           :: !(Maybe Key)
     , _plPageToken     :: !(Maybe Text)
-    , _plSortField     :: !(Maybe DfareportingProjectsListSortField)
+    , _plSortField     :: !(Maybe ProjectsListSortField)
     , _plOAuthToken    :: !(Maybe OAuthToken)
     , _plAdvertiserIds :: !(Maybe [Int64])
     , _plMaxResults    :: !(Maybe Int32)
@@ -110,7 +106,7 @@ data ProjectsList' = ProjectsList'
 --
 -- * 'plIds'
 --
--- * 'plProfileId'
+-- * 'plProFileId'
 --
 -- * 'plSortOrder'
 --
@@ -130,14 +126,14 @@ data ProjectsList' = ProjectsList'
 projectsList'
     :: Int64 -- ^ 'profileId'
     -> ProjectsList'
-projectsList' pPlProfileId_ =
+projectsList' pPlProFileId_ =
     ProjectsList'
     { _plQuotaUser = Nothing
     , _plPrettyPrint = True
     , _plUserIP = Nothing
     , _plSearchString = Nothing
     , _plIds = Nothing
-    , _plProfileId = pPlProfileId_
+    , _plProFileId = pPlProFileId_
     , _plSortOrder = Nothing
     , _plKey = Nothing
     , _plPageToken = Nothing
@@ -185,12 +181,12 @@ plIds
       _Coerce
 
 -- | User profile ID associated with this request.
-plProfileId :: Lens' ProjectsList' Int64
-plProfileId
-  = lens _plProfileId (\ s a -> s{_plProfileId = a})
+plProFileId :: Lens' ProjectsList' Int64
+plProFileId
+  = lens _plProFileId (\ s a -> s{_plProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-plSortOrder :: Lens' ProjectsList' (Maybe DfareportingProjectsListSortOrder)
+plSortOrder :: Lens' ProjectsList' (Maybe ProjectsListSortOrder)
 plSortOrder
   = lens _plSortOrder (\ s a -> s{_plSortOrder = a})
 
@@ -206,7 +202,7 @@ plPageToken
   = lens _plPageToken (\ s a -> s{_plPageToken = a})
 
 -- | Field by which to sort the list.
-plSortField :: Lens' ProjectsList' (Maybe DfareportingProjectsListSortField)
+plSortField :: Lens' ProjectsList' (Maybe ProjectsListSortField)
 plSortField
   = lens _plSortField (\ s a -> s{_plSortField = a})
 
@@ -240,7 +236,7 @@ instance GoogleRequest ProjectsList' where
         type Rs ProjectsList' = ProjectsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ProjectsList'{..}
-          = go _plProfileId _plSearchString
+          = go _plProFileId _plSearchString
               (_plIds ^. _Default)
               _plSortOrder
               _plPageToken

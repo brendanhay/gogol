@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.SubAccounts.Patch
     , sapQuotaUser
     , sapPrettyPrint
     , sapUserIP
-    , sapProfileId
+    , sapProFileId
     , sapPayload
     , sapKey
     , sapId
@@ -59,7 +59,7 @@ type SubAccountsPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] SubAccount :>
+                           ReqBody '[OctetStream] SubAccount :>
                              Patch '[JSON] SubAccount
 
 -- | Updates an existing subaccount. This method supports patch semantics.
@@ -69,7 +69,7 @@ data SubAccountsPatch' = SubAccountsPatch'
     { _sapQuotaUser   :: !(Maybe Text)
     , _sapPrettyPrint :: !Bool
     , _sapUserIP      :: !(Maybe Text)
-    , _sapProfileId   :: !Int64
+    , _sapProFileId   :: !Int64
     , _sapPayload     :: !SubAccount
     , _sapKey         :: !(Maybe Key)
     , _sapId          :: !Int64
@@ -87,7 +87,7 @@ data SubAccountsPatch' = SubAccountsPatch'
 --
 -- * 'sapUserIP'
 --
--- * 'sapProfileId'
+-- * 'sapProFileId'
 --
 -- * 'sapPayload'
 --
@@ -103,12 +103,12 @@ subAccountsPatch'
     -> SubAccount -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> SubAccountsPatch'
-subAccountsPatch' pSapProfileId_ pSapPayload_ pSapId_ =
+subAccountsPatch' pSapProFileId_ pSapPayload_ pSapId_ =
     SubAccountsPatch'
     { _sapQuotaUser = Nothing
     , _sapPrettyPrint = True
     , _sapUserIP = Nothing
-    , _sapProfileId = pSapProfileId_
+    , _sapProFileId = pSapProFileId_
     , _sapPayload = pSapPayload_
     , _sapKey = Nothing
     , _sapId = pSapId_
@@ -136,9 +136,9 @@ sapUserIP
   = lens _sapUserIP (\ s a -> s{_sapUserIP = a})
 
 -- | User profile ID associated with this request.
-sapProfileId :: Lens' SubAccountsPatch' Int64
-sapProfileId
-  = lens _sapProfileId (\ s a -> s{_sapProfileId = a})
+sapProFileId :: Lens' SubAccountsPatch' Int64
+sapProFileId
+  = lens _sapProFileId (\ s a -> s{_sapProFileId = a})
 
 -- | Multipart request metadata.
 sapPayload :: Lens' SubAccountsPatch' SubAccount
@@ -174,7 +174,7 @@ instance GoogleRequest SubAccountsPatch' where
         type Rs SubAccountsPatch' = SubAccount
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u SubAccountsPatch'{..}
-          = go _sapProfileId (Just _sapId) _sapQuotaUser
+          = go _sapProFileId (Just _sapId) _sapQuotaUser
               (Just _sapPrettyPrint)
               _sapUserIP
               _sapFields

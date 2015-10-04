@@ -62,7 +62,7 @@ type ReadgroupsetsImportResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] ImportReadGroupSetsRequest :>
+                       ReqBody '[OctetStream] ImportReadGroupSetsRequest :>
                          Post '[JSON] ImportReadGroupSetsResponse
 
 -- | Creates read group sets by asynchronously importing the provided

@@ -69,7 +69,7 @@ type FilesUpdateResource =
                QueryParam "updateViewedDate" Bool :>
                  QueryParam "removeParents" Text :>
                    QueryParam "modifiedDateBehavior"
-                     DriveFilesUpdateModifiedDateBehavior
+                     FilesUpdateModifiedDateBehavior
                      :>
                      QueryParam "useContentAsIndexableText" Bool :>
                        QueryParam "timedTextTrackName" Text :>
@@ -103,7 +103,7 @@ data FilesUpdate' = FilesUpdate'
     , _fuPayload                   :: !File
     , _fuUpdateViewedDate          :: !Bool
     , _fuRemoveParents             :: !(Maybe Text)
-    , _fuModifiedDateBehavior      :: !(Maybe DriveFilesUpdateModifiedDateBehavior)
+    , _fuModifiedDateBehavior      :: !(Maybe FilesUpdateModifiedDateBehavior)
     , _fuUseContentAsIndexableText :: !Bool
     , _fuMedia                     :: !Body
     , _fuTimedTextTrackName        :: !(Maybe Text)
@@ -256,7 +256,7 @@ fuRemoveParents
 
 -- | Determines the behavior in which modifiedDate is updated. This overrides
 -- setModifiedDate.
-fuModifiedDateBehavior :: Lens' FilesUpdate' (Maybe DriveFilesUpdateModifiedDateBehavior)
+fuModifiedDateBehavior :: Lens' FilesUpdate' (Maybe FilesUpdateModifiedDateBehavior)
 fuModifiedDateBehavior
   = lens _fuModifiedDateBehavior
       (\ s a -> s{_fuModifiedDateBehavior = a})

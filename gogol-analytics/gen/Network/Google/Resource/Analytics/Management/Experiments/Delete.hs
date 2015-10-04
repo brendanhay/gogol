@@ -35,7 +35,7 @@ module Network.Google.Resource.Analytics.Management.Experiments.Delete
     , medPrettyPrint
     , medWebPropertyId
     , medUserIP
-    , medProfileId
+    , medProFileId
     , medAccountId
     , medExperimentId
     , medKey
@@ -74,7 +74,7 @@ data ManagementExperimentsDelete' = ManagementExperimentsDelete'
     , _medPrettyPrint   :: !Bool
     , _medWebPropertyId :: !Text
     , _medUserIP        :: !(Maybe Text)
-    , _medProfileId     :: !Text
+    , _medProFileId     :: !Text
     , _medAccountId     :: !Text
     , _medExperimentId  :: !Text
     , _medKey           :: !(Maybe Key)
@@ -94,7 +94,7 @@ data ManagementExperimentsDelete' = ManagementExperimentsDelete'
 --
 -- * 'medUserIP'
 --
--- * 'medProfileId'
+-- * 'medProFileId'
 --
 -- * 'medAccountId'
 --
@@ -111,13 +111,13 @@ managementExperimentsDelete'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'experimentId'
     -> ManagementExperimentsDelete'
-managementExperimentsDelete' pMedWebPropertyId_ pMedProfileId_ pMedAccountId_ pMedExperimentId_ =
+managementExperimentsDelete' pMedWebPropertyId_ pMedProFileId_ pMedAccountId_ pMedExperimentId_ =
     ManagementExperimentsDelete'
     { _medQuotaUser = Nothing
     , _medPrettyPrint = False
     , _medWebPropertyId = pMedWebPropertyId_
     , _medUserIP = Nothing
-    , _medProfileId = pMedProfileId_
+    , _medProFileId = pMedProFileId_
     , _medAccountId = pMedAccountId_
     , _medExperimentId = pMedExperimentId_
     , _medKey = Nothing
@@ -151,9 +151,9 @@ medUserIP
   = lens _medUserIP (\ s a -> s{_medUserIP = a})
 
 -- | View (Profile) ID to which the experiment belongs
-medProfileId :: Lens' ManagementExperimentsDelete' Text
-medProfileId
-  = lens _medProfileId (\ s a -> s{_medProfileId = a})
+medProFileId :: Lens' ManagementExperimentsDelete' Text
+medProFileId
+  = lens _medProFileId (\ s a -> s{_medProFileId = a})
 
 -- | Account ID to which the experiment belongs
 medAccountId :: Lens' ManagementExperimentsDelete' Text
@@ -193,7 +193,7 @@ instance GoogleRequest ManagementExperimentsDelete'
         type Rs ManagementExperimentsDelete' = ()
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementExperimentsDelete'{..}
-          = go _medAccountId _medWebPropertyId _medProfileId
+          = go _medAccountId _medWebPropertyId _medProFileId
               _medExperimentId
               _medQuotaUser
               (Just _medPrettyPrint)

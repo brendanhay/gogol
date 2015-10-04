@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.FloodlightActivities.Update
     , fauQuotaUser
     , fauPrettyPrint
     , fauUserIP
-    , fauProfileId
+    , fauProFileId
     , fauPayload
     , fauKey
     , fauOAuthToken
@@ -57,7 +57,7 @@ type FloodlightActivitiesUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] FloodlightActivity :>
+                         ReqBody '[OctetStream] FloodlightActivity :>
                            Put '[JSON] FloodlightActivity
 
 -- | Updates an existing floodlight activity.
@@ -67,7 +67,7 @@ data FloodlightActivitiesUpdate' = FloodlightActivitiesUpdate'
     { _fauQuotaUser   :: !(Maybe Text)
     , _fauPrettyPrint :: !Bool
     , _fauUserIP      :: !(Maybe Text)
-    , _fauProfileId   :: !Int64
+    , _fauProFileId   :: !Int64
     , _fauPayload     :: !FloodlightActivity
     , _fauKey         :: !(Maybe Key)
     , _fauOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data FloodlightActivitiesUpdate' = FloodlightActivitiesUpdate'
 --
 -- * 'fauUserIP'
 --
--- * 'fauProfileId'
+-- * 'fauProFileId'
 --
 -- * 'fauPayload'
 --
@@ -97,12 +97,12 @@ floodlightActivitiesUpdate'
     :: Int64 -- ^ 'profileId'
     -> FloodlightActivity -- ^ 'payload'
     -> FloodlightActivitiesUpdate'
-floodlightActivitiesUpdate' pFauProfileId_ pFauPayload_ =
+floodlightActivitiesUpdate' pFauProFileId_ pFauPayload_ =
     FloodlightActivitiesUpdate'
     { _fauQuotaUser = Nothing
     , _fauPrettyPrint = True
     , _fauUserIP = Nothing
-    , _fauProfileId = pFauProfileId_
+    , _fauProFileId = pFauProFileId_
     , _fauPayload = pFauPayload_
     , _fauKey = Nothing
     , _fauOAuthToken = Nothing
@@ -129,9 +129,9 @@ fauUserIP
   = lens _fauUserIP (\ s a -> s{_fauUserIP = a})
 
 -- | User profile ID associated with this request.
-fauProfileId :: Lens' FloodlightActivitiesUpdate' Int64
-fauProfileId
-  = lens _fauProfileId (\ s a -> s{_fauProfileId = a})
+fauProFileId :: Lens' FloodlightActivitiesUpdate' Int64
+fauProFileId
+  = lens _fauProFileId (\ s a -> s{_fauProFileId = a})
 
 -- | Multipart request metadata.
 fauPayload :: Lens' FloodlightActivitiesUpdate' FloodlightActivity
@@ -165,7 +165,7 @@ instance GoogleRequest FloodlightActivitiesUpdate'
              FloodlightActivity
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u FloodlightActivitiesUpdate'{..}
-          = go _fauProfileId _fauQuotaUser
+          = go _fauProFileId _fauQuotaUser
               (Just _fauPrettyPrint)
               _fauUserIP
               _fauFields

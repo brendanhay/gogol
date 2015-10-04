@@ -64,7 +64,8 @@ type AccountsContainersMacrosUpdateResource =
                            QueryParam "key" Key :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
-                                 ReqBody '[JSON] Macro :> Put '[JSON] Macro
+                                 ReqBody '[OctetStream] Macro :>
+                                   Put '[JSON] Macro
 
 -- | Updates a GTM Macro.
 --

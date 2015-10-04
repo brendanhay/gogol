@@ -23,11 +23,6 @@ module Network.Google.LatencyTest.Types
     , ivValue
     , ivLabel
 
-    -- * AggregatedStatsReply
-    , AggregatedStatsReply
-    , aggregatedStatsReply
-    , asrTestValue
-
     -- * DoubleValue
     , DoubleValue
     , doubleValue
@@ -39,6 +34,11 @@ module Network.Google.LatencyTest.Types
     , stringValue
     , svValue
     , svLabel
+
+    -- * AggregatedStatsReply
+    , AggregatedStatsReply
+    , aggregatedStatsReply
+    , asrTestValue
 
     -- * Stats
     , Stats

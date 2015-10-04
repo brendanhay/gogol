@@ -119,7 +119,7 @@ instance ToJSON ErrorSummary where
 --
 -- /See:/ 'status' smart constructor.
 data Status = Status
-    { _sDetails :: !(Maybe [DetailsItem])
+    { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe Int32)
     , _sMessage :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -144,7 +144,7 @@ status =
 
 -- | A list of messages that carry the error details. There will be a common
 -- set of message types for APIs to use.
-sDetails :: Lens' Status [DetailsItem]
+sDetails :: Lens' Status [StatusDetailsItem]
 sDetails
   = lens _sDetails (\ s a -> s{_sDetails = a}) .
       _Default
@@ -231,82 +231,71 @@ instance ToJSON ListOperationsResponse where
                  [("nextPageToken" .=) <$> _lorNextPageToken,
                   ("operations" .=) <$> _lorOperations])
 
+-- | Transfers can be scheduled to recur or to run just once.
 --
--- /See:/ 'detailsItem' smart constructor.
-data DetailsItem =
-    DetailsItem
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'DetailsItem' with the minimum fields required to make a request.
---
-detailsItem
-    :: DetailsItem
-detailsItem = DetailsItem
-
-instance FromJSON DetailsItem where
-        parseJSON
-          = withObject "DetailsItem" (\ o -> pure DetailsItem)
-
-instance ToJSON DetailsItem where
-        toJSON = const (Object mempty)
-
--- | Request passed to PauseTransferOperation.
---
--- /See:/ 'pauseTransferOperationRequest' smart constructor.
-data PauseTransferOperationRequest =
-    PauseTransferOperationRequest
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PauseTransferOperationRequest' with the minimum fields required to make a request.
---
-pauseTransferOperationRequest
-    :: PauseTransferOperationRequest
-pauseTransferOperationRequest = PauseTransferOperationRequest
-
-instance FromJSON PauseTransferOperationRequest where
-        parseJSON
-          = withObject "PauseTransferOperationRequest"
-              (\ o -> pure PauseTransferOperationRequest)
-
-instance ToJSON PauseTransferOperationRequest where
-        toJSON = const (Object mempty)
-
--- | Google service account
---
--- /See:/ 'googleServiceAccount' smart constructor.
-newtype GoogleServiceAccount = GoogleServiceAccount
-    { _gsaAccountEmail :: Maybe Text
+-- /See:/ 'schedule' smart constructor.
+data Schedule = Schedule
+    { _sScheduleEndDate   :: !(Maybe Date)
+    , _sScheduleStartDate :: !(Maybe Date)
+    , _sStartTimeOfDay    :: !(Maybe TimeOfDay)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GoogleServiceAccount' with the minimum fields required to make a request.
+-- | Creates a value of 'Schedule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gsaAccountEmail'
-googleServiceAccount
-    :: GoogleServiceAccount
-googleServiceAccount =
-    GoogleServiceAccount
-    { _gsaAccountEmail = Nothing
+-- * 'sScheduleEndDate'
+--
+-- * 'sScheduleStartDate'
+--
+-- * 'sStartTimeOfDay'
+schedule
+    :: Schedule
+schedule =
+    Schedule
+    { _sScheduleEndDate = Nothing
+    , _sScheduleStartDate = Nothing
+    , _sStartTimeOfDay = Nothing
     }
 
--- | Required.
-gsaAccountEmail :: Lens' GoogleServiceAccount (Maybe Text)
-gsaAccountEmail
-  = lens _gsaAccountEmail
-      (\ s a -> s{_gsaAccountEmail = a})
+-- | The last day the recurring transfer will be run. If \`scheduleEndDate\`
+-- is the same as \`scheduleStartDate\`, the transfer will be executed only
+-- once.
+sScheduleEndDate :: Lens' Schedule (Maybe Date)
+sScheduleEndDate
+  = lens _sScheduleEndDate
+      (\ s a -> s{_sScheduleEndDate = a})
 
-instance FromJSON GoogleServiceAccount where
+-- | The first day the recurring transfer is scheduled to run. Required.
+sScheduleStartDate :: Lens' Schedule (Maybe Date)
+sScheduleStartDate
+  = lens _sScheduleStartDate
+      (\ s a -> s{_sScheduleStartDate = a})
+
+-- | The time in UTC at which the transfer will be scheduled to start in a
+-- day. Transfers may start later than this time. If not specified,
+-- transfers are scheduled to start at midnight UTC.
+sStartTimeOfDay :: Lens' Schedule (Maybe TimeOfDay)
+sStartTimeOfDay
+  = lens _sStartTimeOfDay
+      (\ s a -> s{_sStartTimeOfDay = a})
+
+instance FromJSON Schedule where
         parseJSON
-          = withObject "GoogleServiceAccount"
+          = withObject "Schedule"
               (\ o ->
-                 GoogleServiceAccount <$> (o .:? "accountEmail"))
+                 Schedule <$>
+                   (o .:? "scheduleEndDate") <*>
+                     (o .:? "scheduleStartDate")
+                     <*> (o .:? "startTimeOfDay"))
 
-instance ToJSON GoogleServiceAccount where
-        toJSON GoogleServiceAccount{..}
+instance ToJSON Schedule where
+        toJSON Schedule{..}
           = object
               (catMaybes
-                 [("accountEmail" .=) <$> _gsaAccountEmail])
+                 [("scheduleEndDate" .=) <$> _sScheduleEndDate,
+                  ("scheduleStartDate" .=) <$> _sScheduleStartDate,
+                  ("startTimeOfDay" .=) <$> _sStartTimeOfDay])
 
 -- | Conditions that determine which objects will be transferred.
 --
@@ -422,9 +411,9 @@ instance ToJSON ObjectConditions where
 data Operation = Operation
     { _oDone     :: !(Maybe Bool)
     , _oError    :: !(Maybe Status)
-    , _oResponse :: !(Maybe Response)
+    , _oResponse :: !(Maybe OperationResponse)
     , _oName     :: !(Maybe Text)
-    , _oMetadata :: !(Maybe Metadata)
+    , _oMetadata :: !(Maybe OperationMetadata)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
@@ -468,7 +457,7 @@ oError = lens _oError (\ s a -> s{_oError = a})
 -- where \`Xxx\` is the original method name. For example, if the original
 -- method name is \`TakeSnapshot()\`, the inferred response type is
 -- \`TakeSnapshotResponse\`.
-oResponse :: Lens' Operation (Maybe Response)
+oResponse :: Lens' Operation (Maybe OperationResponse)
 oResponse
   = lens _oResponse (\ s a -> s{_oResponse = a})
 
@@ -480,7 +469,7 @@ oName :: Lens' Operation (Maybe Text)
 oName = lens _oName (\ s a -> s{_oName = a})
 
 -- | Represents the transfer operation object.
-oMetadata :: Lens' Operation (Maybe Metadata)
+oMetadata :: Lens' Operation (Maybe OperationMetadata)
 oMetadata
   = lens _oMetadata (\ s a -> s{_oMetadata = a})
 
@@ -502,72 +491,6 @@ instance ToJSON Operation where
                   ("response" .=) <$> _oResponse,
                   ("name" .=) <$> _oName,
                   ("metadata" .=) <$> _oMetadata])
-
--- | Transfers can be scheduled to recur or to run just once.
---
--- /See:/ 'schedule' smart constructor.
-data Schedule = Schedule
-    { _sScheduleEndDate   :: !(Maybe Date)
-    , _sScheduleStartDate :: !(Maybe Date)
-    , _sStartTimeOfDay    :: !(Maybe TimeOfDay)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Schedule' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'sScheduleEndDate'
---
--- * 'sScheduleStartDate'
---
--- * 'sStartTimeOfDay'
-schedule
-    :: Schedule
-schedule =
-    Schedule
-    { _sScheduleEndDate = Nothing
-    , _sScheduleStartDate = Nothing
-    , _sStartTimeOfDay = Nothing
-    }
-
--- | The last day the recurring transfer will be run. If \`scheduleEndDate\`
--- is the same as \`scheduleStartDate\`, the transfer will be executed only
--- once.
-sScheduleEndDate :: Lens' Schedule (Maybe Date)
-sScheduleEndDate
-  = lens _sScheduleEndDate
-      (\ s a -> s{_sScheduleEndDate = a})
-
--- | The first day the recurring transfer is scheduled to run. Required.
-sScheduleStartDate :: Lens' Schedule (Maybe Date)
-sScheduleStartDate
-  = lens _sScheduleStartDate
-      (\ s a -> s{_sScheduleStartDate = a})
-
--- | The time in UTC at which the transfer will be scheduled to start in a
--- day. Transfers may start later than this time. If not specified,
--- transfers are scheduled to start at midnight UTC.
-sStartTimeOfDay :: Lens' Schedule (Maybe TimeOfDay)
-sStartTimeOfDay
-  = lens _sStartTimeOfDay
-      (\ s a -> s{_sStartTimeOfDay = a})
-
-instance FromJSON Schedule where
-        parseJSON
-          = withObject "Schedule"
-              (\ o ->
-                 Schedule <$>
-                   (o .:? "scheduleEndDate") <*>
-                     (o .:? "scheduleStartDate")
-                     <*> (o .:? "startTimeOfDay"))
-
-instance ToJSON Schedule where
-        toJSON Schedule{..}
-          = object
-              (catMaybes
-                 [("scheduleEndDate" .=) <$> _sScheduleEndDate,
-                  ("scheduleStartDate" .=) <$> _sScheduleStartDate,
-                  ("startTimeOfDay" .=) <$> _sStartTimeOfDay])
 
 -- | A generic empty message that you can re-use to avoid defining duplicated
 -- empty messages in your APIs. A typical example is to use it as the
@@ -592,31 +515,82 @@ instance FromJSON Empty where
 instance ToJSON Empty where
         toJSON = const (Object mempty)
 
--- | The normal response of the operation in case of success. If the original
--- method returns no data on success, such as \`Delete\`, the response is
--- \`google.protobuf.Empty\`. If the original method is standard
--- \`Get\`\/\`Create\`\/\`Update\`, the response should be the resource.
--- For other methods, the response should have the type \`XxxResponse\`,
--- where \`Xxx\` is the original method name. For example, if the original
--- method name is \`TakeSnapshot()\`, the inferred response type is
--- \`TakeSnapshotResponse\`.
+-- | Request passed to PauseTransferOperation.
 --
--- /See:/ 'response' smart constructor.
-data Response =
-    Response
+-- /See:/ 'pauseTransferOperationRequest' smart constructor.
+data PauseTransferOperationRequest =
+    PauseTransferOperationRequest
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Response' with the minimum fields required to make a request.
+-- | Creates a value of 'PauseTransferOperationRequest' with the minimum fields required to make a request.
 --
-response
-    :: Response
-response = Response
+pauseTransferOperationRequest
+    :: PauseTransferOperationRequest
+pauseTransferOperationRequest = PauseTransferOperationRequest
 
-instance FromJSON Response where
+instance FromJSON PauseTransferOperationRequest where
         parseJSON
-          = withObject "Response" (\ o -> pure Response)
+          = withObject "PauseTransferOperationRequest"
+              (\ o -> pure PauseTransferOperationRequest)
 
-instance ToJSON Response where
+instance ToJSON PauseTransferOperationRequest where
+        toJSON = const (Object mempty)
+
+-- | Google service account
+--
+-- /See:/ 'googleServiceAccount' smart constructor.
+newtype GoogleServiceAccount = GoogleServiceAccount
+    { _gsaAccountEmail :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoogleServiceAccount' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gsaAccountEmail'
+googleServiceAccount
+    :: GoogleServiceAccount
+googleServiceAccount =
+    GoogleServiceAccount
+    { _gsaAccountEmail = Nothing
+    }
+
+-- | Required.
+gsaAccountEmail :: Lens' GoogleServiceAccount (Maybe Text)
+gsaAccountEmail
+  = lens _gsaAccountEmail
+      (\ s a -> s{_gsaAccountEmail = a})
+
+instance FromJSON GoogleServiceAccount where
+        parseJSON
+          = withObject "GoogleServiceAccount"
+              (\ o ->
+                 GoogleServiceAccount <$> (o .:? "accountEmail"))
+
+instance ToJSON GoogleServiceAccount where
+        toJSON GoogleServiceAccount{..}
+          = object
+              (catMaybes
+                 [("accountEmail" .=) <$> _gsaAccountEmail])
+
+--
+-- /See:/ 'statusDetailsItem' smart constructor.
+data StatusDetailsItem =
+    StatusDetailsItem
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
+--
+statusDetailsItem
+    :: StatusDetailsItem
+statusDetailsItem = StatusDetailsItem
+
+instance FromJSON StatusDetailsItem where
+        parseJSON
+          = withObject "StatusDetailsItem"
+              (\ o -> pure StatusDetailsItem)
+
+instance ToJSON StatusDetailsItem where
         toJSON = const (Object mempty)
 
 -- | Represents a whole calendar date, e.g. date of birth. The time of day
@@ -1167,26 +1141,6 @@ instance ToJSON GcsData where
           = object
               (catMaybes [("bucketName" .=) <$> _gdBucketName])
 
--- | Represents the transfer operation object.
---
--- /See:/ 'metadata' smart constructor.
-data Metadata =
-    Metadata
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Metadata' with the minimum fields required to make a request.
---
-metadata
-    :: Metadata
-metadata = Metadata
-
-instance FromJSON Metadata where
-        parseJSON
-          = withObject "Metadata" (\ o -> pure Metadata)
-
-instance ToJSON Metadata where
-        toJSON = const (Object mempty)
-
 -- | An AwsS3Data can be a data source, but not a data sink. In an AwsS3Data,
 -- an object\'s name is the S3 object\'s key name.
 --
@@ -1296,56 +1250,6 @@ instance ToJSON HTTPData where
           = object
               (catMaybes [("listUrl" .=) <$> _httpdListURL])
 
--- | An entry describing an error that has occurred.
---
--- /See:/ 'errorLogEntry' smart constructor.
-data ErrorLogEntry = ErrorLogEntry
-    { _eleURL          :: !(Maybe Text)
-    , _eleErrorDetails :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ErrorLogEntry' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'eleURL'
---
--- * 'eleErrorDetails'
-errorLogEntry
-    :: ErrorLogEntry
-errorLogEntry =
-    ErrorLogEntry
-    { _eleURL = Nothing
-    , _eleErrorDetails = Nothing
-    }
-
--- | A URL that refers to the target (a data source, a data sink, or an
--- object) with which the error is associated. Required.
-eleURL :: Lens' ErrorLogEntry (Maybe Text)
-eleURL = lens _eleURL (\ s a -> s{_eleURL = a})
-
--- | A list of messages that carry the error details.
-eleErrorDetails :: Lens' ErrorLogEntry [Text]
-eleErrorDetails
-  = lens _eleErrorDetails
-      (\ s a -> s{_eleErrorDetails = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON ErrorLogEntry where
-        parseJSON
-          = withObject "ErrorLogEntry"
-              (\ o ->
-                 ErrorLogEntry <$>
-                   (o .:? "url") <*> (o .:? "errorDetails" .!= mempty))
-
-instance ToJSON ErrorLogEntry where
-        toJSON ErrorLogEntry{..}
-          = object
-              (catMaybes
-                 [("url" .=) <$> _eleURL,
-                  ("errorDetails" .=) <$> _eleErrorDetails])
-
 -- | Represents a time of day. The date and time zone are either not
 -- significant or are specified elsewhere. An API may chose to allow leap
 -- seconds. Related types are [google.type.Date][google.type.Date] and
@@ -1418,6 +1322,77 @@ instance ToJSON TimeOfDay where
                   ("hours" .=) <$> _todHours,
                   ("minutes" .=) <$> _todMinutes,
                   ("seconds" .=) <$> _todSeconds])
+
+-- | An entry describing an error that has occurred.
+--
+-- /See:/ 'errorLogEntry' smart constructor.
+data ErrorLogEntry = ErrorLogEntry
+    { _eleURL          :: !(Maybe Text)
+    , _eleErrorDetails :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ErrorLogEntry' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eleURL'
+--
+-- * 'eleErrorDetails'
+errorLogEntry
+    :: ErrorLogEntry
+errorLogEntry =
+    ErrorLogEntry
+    { _eleURL = Nothing
+    , _eleErrorDetails = Nothing
+    }
+
+-- | A URL that refers to the target (a data source, a data sink, or an
+-- object) with which the error is associated. Required.
+eleURL :: Lens' ErrorLogEntry (Maybe Text)
+eleURL = lens _eleURL (\ s a -> s{_eleURL = a})
+
+-- | A list of messages that carry the error details.
+eleErrorDetails :: Lens' ErrorLogEntry [Text]
+eleErrorDetails
+  = lens _eleErrorDetails
+      (\ s a -> s{_eleErrorDetails = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ErrorLogEntry where
+        parseJSON
+          = withObject "ErrorLogEntry"
+              (\ o ->
+                 ErrorLogEntry <$>
+                   (o .:? "url") <*> (o .:? "errorDetails" .!= mempty))
+
+instance ToJSON ErrorLogEntry where
+        toJSON ErrorLogEntry{..}
+          = object
+              (catMaybes
+                 [("url" .=) <$> _eleURL,
+                  ("errorDetails" .=) <$> _eleErrorDetails])
+
+-- | Represents the transfer operation object.
+--
+-- /See:/ 'operationMetadata' smart constructor.
+data OperationMetadata =
+    OperationMetadata
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
+--
+operationMetadata
+    :: OperationMetadata
+operationMetadata = OperationMetadata
+
+instance FromJSON OperationMetadata where
+        parseJSON
+          = withObject "OperationMetadata"
+              (\ o -> pure OperationMetadata)
+
+instance ToJSON OperationMetadata where
+        toJSON = const (Object mempty)
 
 -- | TransferOptions uses three boolean parameters to define the actions to
 -- be performed on objects in a transfer.
@@ -1771,6 +1746,56 @@ instance ToJSON ListTransferJobsResponse where
                  [("nextPageToken" .=) <$> _ltjrNextPageToken,
                   ("transferJobs" .=) <$> _ltjrTransferJobs])
 
+-- | The normal response of the operation in case of success. If the original
+-- method returns no data on success, such as \`Delete\`, the response is
+-- \`google.protobuf.Empty\`. If the original method is standard
+-- \`Get\`\/\`Create\`\/\`Update\`, the response should be the resource.
+-- For other methods, the response should have the type \`XxxResponse\`,
+-- where \`Xxx\` is the original method name. For example, if the original
+-- method name is \`TakeSnapshot()\`, the inferred response type is
+-- \`TakeSnapshotResponse\`.
+--
+-- /See:/ 'operationResponse' smart constructor.
+data OperationResponse =
+    OperationResponse
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
+--
+operationResponse
+    :: OperationResponse
+operationResponse = OperationResponse
+
+instance FromJSON OperationResponse where
+        parseJSON
+          = withObject "OperationResponse"
+              (\ o -> pure OperationResponse)
+
+instance ToJSON OperationResponse where
+        toJSON = const (Object mempty)
+
+-- | Request passed to ResumeTransferOperation.
+--
+-- /See:/ 'resumeTransferOperationRequest' smart constructor.
+data ResumeTransferOperationRequest =
+    ResumeTransferOperationRequest
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ResumeTransferOperationRequest' with the minimum fields required to make a request.
+--
+resumeTransferOperationRequest
+    :: ResumeTransferOperationRequest
+resumeTransferOperationRequest = ResumeTransferOperationRequest
+
+instance FromJSON ResumeTransferOperationRequest
+         where
+        parseJSON
+          = withObject "ResumeTransferOperationRequest"
+              (\ o -> pure ResumeTransferOperationRequest)
+
+instance ToJSON ResumeTransferOperationRequest where
+        toJSON = const (Object mempty)
+
 -- | AWS access key (see [AWS Security
 -- Credentials](http:\/\/docs.aws.amazon.com\/general\/latest\/gr\/aws-security-credentials.html)).
 --
@@ -1821,25 +1846,3 @@ instance ToJSON AwsAccessKey where
               (catMaybes
                  [("secretAccessKey" .=) <$> _aakSecretAccessKey,
                   ("accessKeyId" .=) <$> _aakAccessKeyId])
-
--- | Request passed to ResumeTransferOperation.
---
--- /See:/ 'resumeTransferOperationRequest' smart constructor.
-data ResumeTransferOperationRequest =
-    ResumeTransferOperationRequest
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ResumeTransferOperationRequest' with the minimum fields required to make a request.
---
-resumeTransferOperationRequest
-    :: ResumeTransferOperationRequest
-resumeTransferOperationRequest = ResumeTransferOperationRequest
-
-instance FromJSON ResumeTransferOperationRequest
-         where
-        parseJSON
-          = withObject "ResumeTransferOperationRequest"
-              (\ o -> pure ResumeTransferOperationRequest)
-
-instance ToJSON ResumeTransferOperationRequest where
-        toJSON = const (Object mempty)

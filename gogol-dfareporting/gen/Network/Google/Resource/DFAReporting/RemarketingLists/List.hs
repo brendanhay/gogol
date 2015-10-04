@@ -36,7 +36,7 @@ module Network.Google.Resource.DFAReporting.RemarketingLists.List
     , rllUserIP
     , rllFloodlightActivityId
     , rllAdvertiserId
-    , rllProfileId
+    , rllProFileId
     , rllSortOrder
     , rllActive
     , rllKey
@@ -59,14 +59,12 @@ type RemarketingListsListResource =
          "remarketingLists" :>
            QueryParam "advertiserId" Int64 :>
              QueryParam "floodlightActivityId" Int64 :>
-               QueryParam "sortOrder"
-                 DfareportingRemarketingListsListSortOrder
+               QueryParam "sortOrder" RemarketingListsListSortOrder
                  :>
                  QueryParam "active" Bool :>
                    QueryParam "name" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "sortField"
-                         DfareportingRemarketingListsListSortField
+                       QueryParam "sortField" RemarketingListsListSortField
                          :>
                          QueryParam "maxResults" Int32 :>
                            QueryParam "quotaUser" Text :>
@@ -88,13 +86,13 @@ data RemarketingListsList' = RemarketingListsList'
     , _rllUserIP               :: !(Maybe Text)
     , _rllFloodlightActivityId :: !(Maybe Int64)
     , _rllAdvertiserId         :: !Int64
-    , _rllProfileId            :: !Int64
-    , _rllSortOrder            :: !(Maybe DfareportingRemarketingListsListSortOrder)
+    , _rllProFileId            :: !Int64
+    , _rllSortOrder            :: !(Maybe RemarketingListsListSortOrder)
     , _rllActive               :: !(Maybe Bool)
     , _rllKey                  :: !(Maybe Key)
     , _rllName                 :: !(Maybe Text)
     , _rllPageToken            :: !(Maybe Text)
-    , _rllSortField            :: !(Maybe DfareportingRemarketingListsListSortField)
+    , _rllSortField            :: !(Maybe RemarketingListsListSortField)
     , _rllOAuthToken           :: !(Maybe OAuthToken)
     , _rllMaxResults           :: !(Maybe Int32)
     , _rllFields               :: !(Maybe Text)
@@ -114,7 +112,7 @@ data RemarketingListsList' = RemarketingListsList'
 --
 -- * 'rllAdvertiserId'
 --
--- * 'rllProfileId'
+-- * 'rllProFileId'
 --
 -- * 'rllSortOrder'
 --
@@ -137,14 +135,14 @@ remarketingListsList'
     :: Int64 -- ^ 'advertiserId'
     -> Int64 -- ^ 'profileId'
     -> RemarketingListsList'
-remarketingListsList' pRllAdvertiserId_ pRllProfileId_ =
+remarketingListsList' pRllAdvertiserId_ pRllProFileId_ =
     RemarketingListsList'
     { _rllQuotaUser = Nothing
     , _rllPrettyPrint = True
     , _rllUserIP = Nothing
     , _rllFloodlightActivityId = Nothing
     , _rllAdvertiserId = pRllAdvertiserId_
-    , _rllProfileId = pRllProfileId_
+    , _rllProFileId = pRllProFileId_
     , _rllSortOrder = Nothing
     , _rllActive = Nothing
     , _rllKey = Nothing
@@ -188,12 +186,12 @@ rllAdvertiserId
       (\ s a -> s{_rllAdvertiserId = a})
 
 -- | User profile ID associated with this request.
-rllProfileId :: Lens' RemarketingListsList' Int64
-rllProfileId
-  = lens _rllProfileId (\ s a -> s{_rllProfileId = a})
+rllProFileId :: Lens' RemarketingListsList' Int64
+rllProFileId
+  = lens _rllProFileId (\ s a -> s{_rllProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-rllSortOrder :: Lens' RemarketingListsList' (Maybe DfareportingRemarketingListsListSortOrder)
+rllSortOrder :: Lens' RemarketingListsList' (Maybe RemarketingListsListSortOrder)
 rllSortOrder
   = lens _rllSortOrder (\ s a -> s{_rllSortOrder = a})
 
@@ -225,7 +223,7 @@ rllPageToken
   = lens _rllPageToken (\ s a -> s{_rllPageToken = a})
 
 -- | Field by which to sort the list.
-rllSortField :: Lens' RemarketingListsList' (Maybe DfareportingRemarketingListsListSortField)
+rllSortField :: Lens' RemarketingListsList' (Maybe RemarketingListsListSortField)
 rllSortField
   = lens _rllSortField (\ s a -> s{_rllSortField = a})
 
@@ -255,7 +253,7 @@ instance GoogleRequest RemarketingListsList' where
              RemarketingListsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u RemarketingListsList'{..}
-          = go _rllProfileId (Just _rllAdvertiserId)
+          = go _rllProFileId (Just _rllAdvertiserId)
               _rllFloodlightActivityId
               _rllSortOrder
               _rllActive

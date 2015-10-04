@@ -53,7 +53,7 @@ type MomentsInsertResource =
      "people" :>
        Capture "userId" Text :>
          "moments" :>
-           Capture "collection" PlusMomentsInsertCollection :>
+           Capture "collection" MomentsInsertCollection :>
              QueryParam "debug" Bool :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
@@ -62,7 +62,8 @@ type MomentsInsertResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Moment :> Post '[JSON] Moment
+                             ReqBody '[OctetStream] Moment :>
+                               Post '[JSON] Moment
 
 -- | Record a moment representing a user\'s action such as making a purchase
 -- or commenting on a blog.
@@ -72,7 +73,7 @@ data MomentsInsert' = MomentsInsert'
     { _miQuotaUser   :: !(Maybe Text)
     , _miPrettyPrint :: !Bool
     , _miUserIP      :: !(Maybe Text)
-    , _miCollection  :: !PlusMomentsInsertCollection
+    , _miCollection  :: !MomentsInsertCollection
     , _miPayload     :: !Moment
     , _miDebug       :: !(Maybe Bool)
     , _miUserId      :: !Text
@@ -105,7 +106,7 @@ data MomentsInsert' = MomentsInsert'
 --
 -- * 'miFields'
 momentsInsert'
-    :: PlusMomentsInsertCollection -- ^ 'collection'
+    :: MomentsInsertCollection -- ^ 'collection'
     -> Moment -- ^ 'payload'
     -> Text -- ^ 'userId'
     -> MomentsInsert'
@@ -142,7 +143,7 @@ miUserIP :: Lens' MomentsInsert' (Maybe Text)
 miUserIP = lens _miUserIP (\ s a -> s{_miUserIP = a})
 
 -- | The collection to which to write moments.
-miCollection :: Lens' MomentsInsert' PlusMomentsInsertCollection
+miCollection :: Lens' MomentsInsert' MomentsInsertCollection
 miCollection
   = lens _miCollection (\ s a -> s{_miCollection = a})
 

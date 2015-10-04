@@ -35,7 +35,7 @@ module Network.Google.Resource.DFAReporting.FloodlightActivities.Generatetag
     , fagPrettyPrint
     , fagUserIP
     , fagFloodlightActivityId
-    , fagProfileId
+    , fagProFileId
     , fagKey
     , fagOAuthToken
     , fagFields
@@ -70,7 +70,7 @@ data FloodlightActivitiesGeneratetag' = FloodlightActivitiesGeneratetag'
     , _fagPrettyPrint          :: !Bool
     , _fagUserIP               :: !(Maybe Text)
     , _fagFloodlightActivityId :: !(Maybe Int64)
-    , _fagProfileId            :: !Int64
+    , _fagProFileId            :: !Int64
     , _fagKey                  :: !(Maybe Key)
     , _fagOAuthToken           :: !(Maybe OAuthToken)
     , _fagFields               :: !(Maybe Text)
@@ -88,7 +88,7 @@ data FloodlightActivitiesGeneratetag' = FloodlightActivitiesGeneratetag'
 --
 -- * 'fagFloodlightActivityId'
 --
--- * 'fagProfileId'
+-- * 'fagProFileId'
 --
 -- * 'fagKey'
 --
@@ -98,13 +98,13 @@ data FloodlightActivitiesGeneratetag' = FloodlightActivitiesGeneratetag'
 floodlightActivitiesGeneratetag'
     :: Int64 -- ^ 'profileId'
     -> FloodlightActivitiesGeneratetag'
-floodlightActivitiesGeneratetag' pFagProfileId_ =
+floodlightActivitiesGeneratetag' pFagProFileId_ =
     FloodlightActivitiesGeneratetag'
     { _fagQuotaUser = Nothing
     , _fagPrettyPrint = True
     , _fagUserIP = Nothing
     , _fagFloodlightActivityId = Nothing
-    , _fagProfileId = pFagProfileId_
+    , _fagProFileId = pFagProFileId_
     , _fagKey = Nothing
     , _fagOAuthToken = Nothing
     , _fagFields = Nothing
@@ -136,9 +136,9 @@ fagFloodlightActivityId
       (\ s a -> s{_fagFloodlightActivityId = a})
 
 -- | User profile ID associated with this request.
-fagProfileId :: Lens' FloodlightActivitiesGeneratetag' Int64
-fagProfileId
-  = lens _fagProfileId (\ s a -> s{_fagProfileId = a})
+fagProFileId :: Lens' FloodlightActivitiesGeneratetag' Int64
+fagProFileId
+  = lens _fagProFileId (\ s a -> s{_fagProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -169,7 +169,7 @@ instance GoogleRequest
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           FloodlightActivitiesGeneratetag'{..}
-          = go _fagProfileId _fagFloodlightActivityId
+          = go _fagProFileId _fagFloodlightActivityId
               _fagQuotaUser
               (Just _fagPrettyPrint)
               _fagUserIP

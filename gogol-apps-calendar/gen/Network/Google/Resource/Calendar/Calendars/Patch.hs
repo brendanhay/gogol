@@ -56,7 +56,8 @@ type CalendarsPatchResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Calendar :> Patch '[JSON] Calendar
+                       ReqBody '[OctetStream] Calendar :>
+                         Patch '[JSON] Calendar
 
 -- | Updates metadata for a calendar. This method supports patch semantics.
 --

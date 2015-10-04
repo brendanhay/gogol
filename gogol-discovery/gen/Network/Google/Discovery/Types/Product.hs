@@ -18,41 +18,37 @@ module Network.Google.Discovery.Types.Product where
 import           Network.Google.Discovery.Types.Sum
 import           Network.Google.Prelude
 
--- | Additional information about this property.
+-- | The schema for the response.
 --
--- /See:/ 'annotations' smart constructor.
-newtype Annotations = Annotations
-    { _aRequired :: Maybe [Text]
+-- /See:/ 'restMethodResponse' smart constructor.
+newtype RestMethodResponse = RestMethodResponse
+    { _rmrRef :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Annotations' with the minimum fields required to make a request.
+-- | Creates a value of 'RestMethodResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aRequired'
-annotations
-    :: Annotations
-annotations =
-    Annotations
-    { _aRequired = Nothing
+-- * 'rmrRef'
+restMethodResponse
+    :: RestMethodResponse
+restMethodResponse =
+    RestMethodResponse
+    { _rmrRef = Nothing
     }
 
--- | A list of methods for which this property is required on requests.
-aRequired :: Lens' Annotations [Text]
-aRequired
-  = lens _aRequired (\ s a -> s{_aRequired = a}) .
-      _Default
-      . _Coerce
+-- | Schema ID for the response schema.
+rmrRef :: Lens' RestMethodResponse (Maybe Text)
+rmrRef = lens _rmrRef (\ s a -> s{_rmrRef = a})
 
-instance FromJSON Annotations where
+instance FromJSON RestMethodResponse where
         parseJSON
-          = withObject "Annotations"
-              (\ o ->
-                 Annotations <$> (o .:? "required" .!= mempty))
+          = withObject "RestMethodResponse"
+              (\ o -> RestMethodResponse <$> (o .:? "$ref"))
 
-instance ToJSON Annotations where
-        toJSON Annotations{..}
-          = object (catMaybes [("required" .=) <$> _aRequired])
+instance ToJSON RestMethodResponse where
+        toJSON RestMethodResponse{..}
+          = object (catMaybes [("$ref" .=) <$> _rmrRef])
 
 -- | Common parameters that apply across all apis.
 --
@@ -80,19 +76,19 @@ instance ToJSON RestDescriptionParameters where
 data RestMethod = RestMethod
     { _rmSupportsMediaDownload   :: !(Maybe Bool)
     , _rmParameterOrder          :: !(Maybe [Text])
-    , _rmMediaUpload             :: !(Maybe MediaUpload)
+    , _rmMediaUpload             :: !(Maybe RestMethodMediaUpload)
     , _rmHTTPMethod              :: !(Maybe Text)
     , _rmPath                    :: !(Maybe Text)
-    , _rmResponse                :: !(Maybe Response)
+    , _rmResponse                :: !(Maybe RestMethodResponse)
     , _rmSupportsMediaUpload     :: !(Maybe Bool)
     , _rmScopes                  :: !(Maybe [Text])
     , _rmSupportsSubscription    :: !(Maybe Bool)
-    , _rmParameters              :: !(Maybe Parameters)
+    , _rmParameters              :: !(Maybe RestMethodParameters)
     , _rmId                      :: !(Maybe Text)
     , _rmEtagRequired            :: !(Maybe Bool)
     , _rmUseMediaDownloadService :: !(Maybe Bool)
     , _rmDescription             :: !(Maybe Text)
-    , _rmRequest                 :: !(Maybe Request)
+    , _rmRequest                 :: !(Maybe RestMethodRequest)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RestMethod' with the minimum fields required to make a request.
@@ -166,7 +162,7 @@ rmParameterOrder
       . _Coerce
 
 -- | Media upload parameters.
-rmMediaUpload :: Lens' RestMethod (Maybe MediaUpload)
+rmMediaUpload :: Lens' RestMethod (Maybe RestMethodMediaUpload)
 rmMediaUpload
   = lens _rmMediaUpload
       (\ s a -> s{_rmMediaUpload = a})
@@ -182,7 +178,7 @@ rmPath :: Lens' RestMethod (Maybe Text)
 rmPath = lens _rmPath (\ s a -> s{_rmPath = a})
 
 -- | The schema for the response.
-rmResponse :: Lens' RestMethod (Maybe Response)
+rmResponse :: Lens' RestMethod (Maybe RestMethodResponse)
 rmResponse
   = lens _rmResponse (\ s a -> s{_rmResponse = a})
 
@@ -206,7 +202,7 @@ rmSupportsSubscription
       (\ s a -> s{_rmSupportsSubscription = a})
 
 -- | Details for all parameters in this method.
-rmParameters :: Lens' RestMethod (Maybe Parameters)
+rmParameters :: Lens' RestMethod (Maybe RestMethodParameters)
 rmParameters
   = lens _rmParameters (\ s a -> s{_rmParameters = a})
 
@@ -237,7 +233,7 @@ rmDescription
       (\ s a -> s{_rmDescription = a})
 
 -- | The schema for the request.
-rmRequest :: Lens' RestMethod (Maybe Request)
+rmRequest :: Lens' RestMethod (Maybe RestMethodRequest)
 rmRequest
   = lens _rmRequest (\ s a -> s{_rmRequest = a})
 
@@ -286,116 +282,73 @@ instance ToJSON RestMethod where
                   ("description" .=) <$> _rmDescription,
                   ("request" .=) <$> _rmRequest])
 
--- | In a variant data type, the value of one property is used to determine
--- how to interpret the entire entity. Its value must exist in a map of
--- descriminant values to schema names.
 --
--- /See:/ 'variant' smart constructor.
-data Variant = Variant
-    { _vDiscriminant :: !(Maybe Text)
-    , _vMap          :: !(Maybe [MapItem])
+-- /See:/ 'restResource' smart constructor.
+data RestResource = RestResource
+    { _rrResources :: !(Maybe RestResourceResources)
+    , _rrMethods   :: !(Maybe RestResourceMethods)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Variant' with the minimum fields required to make a request.
+-- | Creates a value of 'RestResource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vDiscriminant'
+-- * 'rrResources'
 --
--- * 'vMap'
-variant
-    :: Variant
-variant =
-    Variant
-    { _vDiscriminant = Nothing
-    , _vMap = Nothing
+-- * 'rrMethods'
+restResource
+    :: RestResource
+restResource =
+    RestResource
+    { _rrResources = Nothing
+    , _rrMethods = Nothing
     }
 
--- | The name of the type discriminant property.
-vDiscriminant :: Lens' Variant (Maybe Text)
-vDiscriminant
-  = lens _vDiscriminant
-      (\ s a -> s{_vDiscriminant = a})
+-- | Sub-resources on this resource.
+rrResources :: Lens' RestResource (Maybe RestResourceResources)
+rrResources
+  = lens _rrResources (\ s a -> s{_rrResources = a})
 
--- | The map of discriminant value to schema to use for parsing..
-vMap :: Lens' Variant [MapItem]
-vMap
-  = lens _vMap (\ s a -> s{_vMap = a}) . _Default .
-      _Coerce
+-- | Methods on this resource.
+rrMethods :: Lens' RestResource (Maybe RestResourceMethods)
+rrMethods
+  = lens _rrMethods (\ s a -> s{_rrMethods = a})
 
-instance FromJSON Variant where
+instance FromJSON RestResource where
         parseJSON
-          = withObject "Variant"
+          = withObject "RestResource"
               (\ o ->
-                 Variant <$>
-                   (o .:? "discriminant") <*> (o .:? "map" .!= mempty))
+                 RestResource <$>
+                   (o .:? "resources") <*> (o .:? "methods"))
 
-instance ToJSON Variant where
-        toJSON Variant{..}
+instance ToJSON RestResource where
+        toJSON RestResource{..}
           = object
               (catMaybes
-                 [("discriminant" .=) <$> _vDiscriminant,
-                  ("map" .=) <$> _vMap])
+                 [("resources" .=) <$> _rrResources,
+                  ("methods" .=) <$> _rrMethods])
 
--- | Media upload parameters.
+-- | Available OAuth 2.0 scopes.
 --
--- /See:/ 'mediaUpload' smart constructor.
-data MediaUpload = MediaUpload
-    { _muProtocols :: !(Maybe Protocols)
-    , _muAccept    :: !(Maybe [Text])
-    , _muMaxSize   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+-- /See:/ 'restDescriptionAuthOAuth2Scopes' smart constructor.
+data RestDescriptionAuthOAuth2Scopes =
+    RestDescriptionAuthOAuth2Scopes
+    deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MediaUpload' with the minimum fields required to make a request.
+-- | Creates a value of 'RestDescriptionAuthOAuth2Scopes' with the minimum fields required to make a request.
 --
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'muProtocols'
---
--- * 'muAccept'
---
--- * 'muMaxSize'
-mediaUpload
-    :: MediaUpload
-mediaUpload =
-    MediaUpload
-    { _muProtocols = Nothing
-    , _muAccept = Nothing
-    , _muMaxSize = Nothing
-    }
+restDescriptionAuthOAuth2Scopes
+    :: RestDescriptionAuthOAuth2Scopes
+restDescriptionAuthOAuth2Scopes = RestDescriptionAuthOAuth2Scopes
 
--- | Supported upload protocols.
-muProtocols :: Lens' MediaUpload (Maybe Protocols)
-muProtocols
-  = lens _muProtocols (\ s a -> s{_muProtocols = a})
-
--- | MIME Media Ranges for acceptable media uploads to this method.
-muAccept :: Lens' MediaUpload [Text]
-muAccept
-  = lens _muAccept (\ s a -> s{_muAccept = a}) .
-      _Default
-      . _Coerce
-
--- | Maximum size of a media upload, such as \"1MB\", \"2GB\" or \"3TB\".
-muMaxSize :: Lens' MediaUpload (Maybe Text)
-muMaxSize
-  = lens _muMaxSize (\ s a -> s{_muMaxSize = a})
-
-instance FromJSON MediaUpload where
+instance FromJSON RestDescriptionAuthOAuth2Scopes
+         where
         parseJSON
-          = withObject "MediaUpload"
-              (\ o ->
-                 MediaUpload <$>
-                   (o .:? "protocols") <*> (o .:? "accept" .!= mempty)
-                     <*> (o .:? "maxSize"))
+          = withObject "RestDescriptionAuthOAuth2Scopes"
+              (\ o -> pure RestDescriptionAuthOAuth2Scopes)
 
-instance ToJSON MediaUpload where
-        toJSON MediaUpload{..}
-          = object
-              (catMaybes
-                 [("protocols" .=) <$> _muProtocols,
-                  ("accept" .=) <$> _muAccept,
-                  ("maxSize" .=) <$> _muMaxSize])
+instance ToJSON RestDescriptionAuthOAuth2Scopes where
+        toJSON = const (Object mempty)
 
 -- | API-level methods for this API.
 --
@@ -417,118 +370,6 @@ instance FromJSON RestDescriptionMethods where
 
 instance ToJSON RestDescriptionMethods where
         toJSON = const (Object mempty)
-
---
--- /See:/ 'restResource' smart constructor.
-data RestResource = RestResource
-    { _rrResources :: !(Maybe Resources)
-    , _rrMethods   :: !(Maybe Methods)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'RestResource' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rrResources'
---
--- * 'rrMethods'
-restResource
-    :: RestResource
-restResource =
-    RestResource
-    { _rrResources = Nothing
-    , _rrMethods = Nothing
-    }
-
--- | Sub-resources on this resource.
-rrResources :: Lens' RestResource (Maybe Resources)
-rrResources
-  = lens _rrResources (\ s a -> s{_rrResources = a})
-
--- | Methods on this resource.
-rrMethods :: Lens' RestResource (Maybe Methods)
-rrMethods
-  = lens _rrMethods (\ s a -> s{_rrMethods = a})
-
-instance FromJSON RestResource where
-        parseJSON
-          = withObject "RestResource"
-              (\ o ->
-                 RestResource <$>
-                   (o .:? "resources") <*> (o .:? "methods"))
-
-instance ToJSON RestResource where
-        toJSON RestResource{..}
-          = object
-              (catMaybes
-                 [("resources" .=) <$> _rrResources,
-                  ("methods" .=) <$> _rrMethods])
-
--- | The schemas for this API.
---
--- /See:/ 'schemas' smart constructor.
-data Schemas =
-    Schemas
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Schemas' with the minimum fields required to make a request.
---
-schemas
-    :: Schemas
-schemas = Schemas
-
-instance FromJSON Schemas where
-        parseJSON
-          = withObject "Schemas" (\ o -> pure Schemas)
-
-instance ToJSON Schemas where
-        toJSON = const (Object mempty)
-
--- | Supported upload protocols.
---
--- /See:/ 'protocols' smart constructor.
-data Protocols = Protocols
-    { _pSimple    :: !(Maybe Simple)
-    , _pResumable :: !(Maybe Resumable)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Protocols' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pSimple'
---
--- * 'pResumable'
-protocols
-    :: Protocols
-protocols =
-    Protocols
-    { _pSimple = Nothing
-    , _pResumable = Nothing
-    }
-
--- | Supports uploading as a single HTTP request.
-pSimple :: Lens' Protocols (Maybe Simple)
-pSimple = lens _pSimple (\ s a -> s{_pSimple = a})
-
--- | Supports the Resumable Media Upload protocol.
-pResumable :: Lens' Protocols (Maybe Resumable)
-pResumable
-  = lens _pResumable (\ s a -> s{_pResumable = a})
-
-instance FromJSON Protocols where
-        parseJSON
-          = withObject "Protocols"
-              (\ o ->
-                 Protocols <$>
-                   (o .:? "simple") <*> (o .:? "resumable"))
-
-instance ToJSON Protocols where
-        toJSON Protocols{..}
-          = object
-              (catMaybes
-                 [("simple" .=) <$> _pSimple,
-                  ("resumable" .=) <$> _pResumable])
 
 --
 -- /See:/ 'directoryListItemsItem' smart constructor.
@@ -689,80 +530,6 @@ instance ToJSON DirectoryListItemsItem where
                   ("description" .=) <$> _dliiDescription,
                   ("discoveryRestUrl" .=) <$> _dliiDiscoveryRestURL])
 
--- | Authentication information.
---
--- /See:/ 'auth' smart constructor.
-newtype Auth = Auth
-    { _aOAuth2 :: Maybe OAuth2
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Auth' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aOAuth2'
-auth
-    :: Auth
-auth =
-    Auth
-    { _aOAuth2 = Nothing
-    }
-
--- | OAuth 2.0 authentication information.
-aOAuth2 :: Lens' Auth (Maybe OAuth2)
-aOAuth2 = lens _aOAuth2 (\ s a -> s{_aOAuth2 = a})
-
-instance FromJSON Auth where
-        parseJSON
-          = withObject "Auth"
-              (\ o -> Auth <$> (o .:? "oauth2"))
-
-instance ToJSON Auth where
-        toJSON Auth{..}
-          = object (catMaybes [("oauth2" .=) <$> _aOAuth2])
-
--- | Links to 16x16 and 32x32 icons representing the API.
---
--- /See:/ 'icons' smart constructor.
-data Icons = Icons
-    { _iX16 :: !(Maybe Text)
-    , _iX32 :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Icons' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'iX16'
---
--- * 'iX32'
-icons
-    :: Icons
-icons =
-    Icons
-    { _iX16 = Nothing
-    , _iX32 = Nothing
-    }
-
--- | The URL of the 16x16 icon.
-iX16 :: Lens' Icons (Maybe Text)
-iX16 = lens _iX16 (\ s a -> s{_iX16 = a})
-
--- | The URL of the 32x32 icon.
-iX32 :: Lens' Icons (Maybe Text)
-iX32 = lens _iX32 (\ s a -> s{_iX32 = a})
-
-instance FromJSON Icons where
-        parseJSON
-          = withObject "Icons"
-              (\ o -> Icons <$> (o .:? "x16") <*> (o .:? "x32"))
-
-instance ToJSON Icons where
-        toJSON Icons{..}
-          = object
-              (catMaybes
-                 [("x16" .=) <$> _iX16, ("x32" .=) <$> _iX32])
-
 -- | Links to 16x16 and 32x32 icons representing the API.
 --
 -- /See:/ 'directoryListItemsItemIcons' smart constructor.
@@ -807,96 +574,272 @@ instance ToJSON DirectoryListItemsItemIcons where
               (catMaybes
                  [("x16" .=) <$> _dliiiX16, ("x32" .=) <$> _dliiiX32])
 
--- | The schema for the response.
+-- | Sub-resources on this resource.
 --
--- /See:/ 'response' smart constructor.
-newtype Response = Response
-    { _rRef :: Maybe Text
+-- /See:/ 'restResourceResources' smart constructor.
+data RestResourceResources =
+    RestResourceResources
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RestResourceResources' with the minimum fields required to make a request.
+--
+restResourceResources
+    :: RestResourceResources
+restResourceResources = RestResourceResources
+
+instance FromJSON RestResourceResources where
+        parseJSON
+          = withObject "RestResourceResources"
+              (\ o -> pure RestResourceResources)
+
+instance ToJSON RestResourceResources where
+        toJSON = const (Object mempty)
+
+-- | OAuth 2.0 authentication information.
+--
+-- /See:/ 'restDescriptionAuthOAuth2' smart constructor.
+newtype RestDescriptionAuthOAuth2 = RestDescriptionAuthOAuth2
+    { _rdaoaScopes :: Maybe RestDescriptionAuthOAuth2Scopes
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Response' with the minimum fields required to make a request.
+-- | Creates a value of 'RestDescriptionAuthOAuth2' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rRef'
-response
-    :: Response
-response =
-    Response
-    { _rRef = Nothing
+-- * 'rdaoaScopes'
+restDescriptionAuthOAuth2
+    :: RestDescriptionAuthOAuth2
+restDescriptionAuthOAuth2 =
+    RestDescriptionAuthOAuth2
+    { _rdaoaScopes = Nothing
     }
 
--- | Schema ID for the response schema.
-rRef :: Lens' Response (Maybe Text)
-rRef = lens _rRef (\ s a -> s{_rRef = a})
+-- | Available OAuth 2.0 scopes.
+rdaoaScopes :: Lens' RestDescriptionAuthOAuth2 (Maybe RestDescriptionAuthOAuth2Scopes)
+rdaoaScopes
+  = lens _rdaoaScopes (\ s a -> s{_rdaoaScopes = a})
 
-instance FromJSON Response where
+instance FromJSON RestDescriptionAuthOAuth2 where
         parseJSON
-          = withObject "Response"
-              (\ o -> Response <$> (o .:? "$ref"))
+          = withObject "RestDescriptionAuthOAuth2"
+              (\ o ->
+                 RestDescriptionAuthOAuth2 <$> (o .:? "scopes"))
 
-instance ToJSON Response where
-        toJSON Response{..}
-          = object (catMaybes [("$ref" .=) <$> _rRef])
+instance ToJSON RestDescriptionAuthOAuth2 where
+        toJSON RestDescriptionAuthOAuth2{..}
+          = object (catMaybes [("scopes" .=) <$> _rdaoaScopes])
 
 -- | Supports uploading as a single HTTP request.
 --
--- /See:/ 'simple' smart constructor.
-data Simple = Simple
-    { _sPath      :: !(Maybe Text)
-    , _sMultiPart :: !Bool
+-- /See:/ 'restMethodMediaUploadProtocolsSimple' smart constructor.
+data RestMethodMediaUploadProtocolsSimple = RestMethodMediaUploadProtocolsSimple
+    { _rmmupsPath      :: !(Maybe Text)
+    , _rmmupsMultiPart :: !Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Simple' with the minimum fields required to make a request.
+-- | Creates a value of 'RestMethodMediaUploadProtocolsSimple' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sPath'
+-- * 'rmmupsPath'
 --
--- * 'sMultiPart'
-simple
-    :: Simple
-simple =
-    Simple
-    { _sPath = Nothing
-    , _sMultiPart = True
+-- * 'rmmupsMultiPart'
+restMethodMediaUploadProtocolsSimple
+    :: RestMethodMediaUploadProtocolsSimple
+restMethodMediaUploadProtocolsSimple =
+    RestMethodMediaUploadProtocolsSimple
+    { _rmmupsPath = Nothing
+    , _rmmupsMultiPart = True
     }
 
 -- | The URI path to be used for upload. Should be used in conjunction with
 -- the basePath property at the api-level.
-sPath :: Lens' Simple (Maybe Text)
-sPath = lens _sPath (\ s a -> s{_sPath = a})
+rmmupsPath :: Lens' RestMethodMediaUploadProtocolsSimple (Maybe Text)
+rmmupsPath
+  = lens _rmmupsPath (\ s a -> s{_rmmupsPath = a})
 
 -- | True if this endpoint supports upload multipart media.
-sMultiPart :: Lens' Simple Bool
-sMultiPart
-  = lens _sMultiPart (\ s a -> s{_sMultiPart = a})
+rmmupsMultiPart :: Lens' RestMethodMediaUploadProtocolsSimple Bool
+rmmupsMultiPart
+  = lens _rmmupsMultiPart
+      (\ s a -> s{_rmmupsMultiPart = a})
 
-instance FromJSON Simple where
+instance FromJSON
+         RestMethodMediaUploadProtocolsSimple where
         parseJSON
-          = withObject "Simple"
+          = withObject "RestMethodMediaUploadProtocolsSimple"
               (\ o ->
-                 Simple <$>
+                 RestMethodMediaUploadProtocolsSimple <$>
                    (o .:? "path") <*> (o .:? "multipart" .!= True))
 
-instance ToJSON Simple where
-        toJSON Simple{..}
+instance ToJSON RestMethodMediaUploadProtocolsSimple
+         where
+        toJSON RestMethodMediaUploadProtocolsSimple{..}
           = object
               (catMaybes
-                 [("path" .=) <$> _sPath,
-                  Just ("multipart" .= _sMultiPart)])
+                 [("path" .=) <$> _rmmupsPath,
+                  Just ("multipart" .= _rmmupsMultiPart)])
+
+-- | Links to 16x16 and 32x32 icons representing the API.
+--
+-- /See:/ 'restDescriptionIcons' smart constructor.
+data RestDescriptionIcons = RestDescriptionIcons
+    { _rdiX16 :: !(Maybe Text)
+    , _rdiX32 :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RestDescriptionIcons' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rdiX16'
+--
+-- * 'rdiX32'
+restDescriptionIcons
+    :: RestDescriptionIcons
+restDescriptionIcons =
+    RestDescriptionIcons
+    { _rdiX16 = Nothing
+    , _rdiX32 = Nothing
+    }
+
+-- | The URL of the 16x16 icon.
+rdiX16 :: Lens' RestDescriptionIcons (Maybe Text)
+rdiX16 = lens _rdiX16 (\ s a -> s{_rdiX16 = a})
+
+-- | The URL of the 32x32 icon.
+rdiX32 :: Lens' RestDescriptionIcons (Maybe Text)
+rdiX32 = lens _rdiX32 (\ s a -> s{_rdiX32 = a})
+
+instance FromJSON RestDescriptionIcons where
+        parseJSON
+          = withObject "RestDescriptionIcons"
+              (\ o ->
+                 RestDescriptionIcons <$>
+                   (o .:? "x16") <*> (o .:? "x32"))
+
+instance ToJSON RestDescriptionIcons where
+        toJSON RestDescriptionIcons{..}
+          = object
+              (catMaybes
+                 [("x16" .=) <$> _rdiX16, ("x32" .=) <$> _rdiX32])
+
+-- | In a variant data type, the value of one property is used to determine
+-- how to interpret the entire entity. Its value must exist in a map of
+-- descriminant values to schema names.
+--
+-- /See:/ 'jsonSchemaVariant' smart constructor.
+data JSONSchemaVariant = JSONSchemaVariant
+    { _jsvDiscriminant :: !(Maybe Text)
+    , _jsvMap          :: !(Maybe [JSONSchemaVariantMapItem])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'JSONSchemaVariant' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'jsvDiscriminant'
+--
+-- * 'jsvMap'
+jsonSchemaVariant
+    :: JSONSchemaVariant
+jsonSchemaVariant =
+    JSONSchemaVariant
+    { _jsvDiscriminant = Nothing
+    , _jsvMap = Nothing
+    }
+
+-- | The name of the type discriminant property.
+jsvDiscriminant :: Lens' JSONSchemaVariant (Maybe Text)
+jsvDiscriminant
+  = lens _jsvDiscriminant
+      (\ s a -> s{_jsvDiscriminant = a})
+
+-- | The map of discriminant value to schema to use for parsing..
+jsvMap :: Lens' JSONSchemaVariant [JSONSchemaVariantMapItem]
+jsvMap
+  = lens _jsvMap (\ s a -> s{_jsvMap = a}) . _Default .
+      _Coerce
+
+instance FromJSON JSONSchemaVariant where
+        parseJSON
+          = withObject "JSONSchemaVariant"
+              (\ o ->
+                 JSONSchemaVariant <$>
+                   (o .:? "discriminant") <*> (o .:? "map" .!= mempty))
+
+instance ToJSON JSONSchemaVariant where
+        toJSON JSONSchemaVariant{..}
+          = object
+              (catMaybes
+                 [("discriminant" .=) <$> _jsvDiscriminant,
+                  ("map" .=) <$> _jsvMap])
+
+-- | Methods on this resource.
+--
+-- /See:/ 'restResourceMethods' smart constructor.
+data RestResourceMethods =
+    RestResourceMethods
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RestResourceMethods' with the minimum fields required to make a request.
+--
+restResourceMethods
+    :: RestResourceMethods
+restResourceMethods = RestResourceMethods
+
+instance FromJSON RestResourceMethods where
+        parseJSON
+          = withObject "RestResourceMethods"
+              (\ o -> pure RestResourceMethods)
+
+instance ToJSON RestResourceMethods where
+        toJSON = const (Object mempty)
+
+-- | Authentication information.
+--
+-- /See:/ 'restDescriptionAuth' smart constructor.
+newtype RestDescriptionAuth = RestDescriptionAuth
+    { _rdaOAuth2 :: Maybe RestDescriptionAuthOAuth2
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RestDescriptionAuth' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rdaOAuth2'
+restDescriptionAuth
+    :: RestDescriptionAuth
+restDescriptionAuth =
+    RestDescriptionAuth
+    { _rdaOAuth2 = Nothing
+    }
+
+-- | OAuth 2.0 authentication information.
+rdaOAuth2 :: Lens' RestDescriptionAuth (Maybe RestDescriptionAuthOAuth2)
+rdaOAuth2
+  = lens _rdaOAuth2 (\ s a -> s{_rdaOAuth2 = a})
+
+instance FromJSON RestDescriptionAuth where
+        parseJSON
+          = withObject "RestDescriptionAuth"
+              (\ o -> RestDescriptionAuth <$> (o .:? "oauth2"))
+
+instance ToJSON RestDescriptionAuth where
+        toJSON RestDescriptionAuth{..}
+          = object (catMaybes [("oauth2" .=) <$> _rdaOAuth2])
 
 --
 -- /See:/ 'restDescription' smart constructor.
 data RestDescription = RestDescription
     { _rdEtag                      :: !(Maybe Text)
-    , _rdSchemas                   :: !(Maybe Schemas)
+    , _rdSchemas                   :: !(Maybe RestDescriptionSchemas)
     , _rdServicePath               :: !(Maybe Text)
     , _rdBasePath                  :: !(Maybe Text)
     , _rdKind                      :: !Text
     , _rdExponentialBackoffDefault :: !(Maybe Bool)
-    , _rdAuth                      :: !(Maybe Auth)
-    , _rdIcons                     :: !(Maybe Icons)
+    , _rdAuth                      :: !(Maybe RestDescriptionAuth)
+    , _rdIcons                     :: !(Maybe RestDescriptionIcons)
     , _rdBaseURL                   :: !(Maybe Text)
     , _rdProtocol                  :: !Text
     , _rdOwnerName                 :: !(Maybe Text)
@@ -1021,7 +964,7 @@ rdEtag :: Lens' RestDescription (Maybe Text)
 rdEtag = lens _rdEtag (\ s a -> s{_rdEtag = a})
 
 -- | The schemas for this API.
-rdSchemas :: Lens' RestDescription (Maybe Schemas)
+rdSchemas :: Lens' RestDescription (Maybe RestDescriptionSchemas)
 rdSchemas
   = lens _rdSchemas (\ s a -> s{_rdSchemas = a})
 
@@ -1048,11 +991,11 @@ rdExponentialBackoffDefault
       (\ s a -> s{_rdExponentialBackoffDefault = a})
 
 -- | Authentication information.
-rdAuth :: Lens' RestDescription (Maybe Auth)
+rdAuth :: Lens' RestDescription (Maybe RestDescriptionAuth)
 rdAuth = lens _rdAuth (\ s a -> s{_rdAuth = a})
 
 -- | Links to 16x16 and 32x32 icons representing the API.
-rdIcons :: Lens' RestDescription (Maybe Icons)
+rdIcons :: Lens' RestDescription (Maybe RestDescriptionIcons)
 rdIcons = lens _rdIcons (\ s a -> s{_rdIcons = a})
 
 -- | [DEPRECATED] The base URL for REST requests.
@@ -1237,78 +1180,11 @@ instance ToJSON RestDescription where
                   ("revision" .=) <$> _rdRevision,
                   ("description" .=) <$> _rdDescription])
 
--- | Supports the Resumable Media Upload protocol.
---
--- /See:/ 'resumable' smart constructor.
-data Resumable = Resumable
-    { _rPath      :: !(Maybe Text)
-    , _rMultiPart :: !Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Resumable' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rPath'
---
--- * 'rMultiPart'
-resumable
-    :: Resumable
-resumable =
-    Resumable
-    { _rPath = Nothing
-    , _rMultiPart = True
-    }
-
--- | The URI path to be used for upload. Should be used in conjunction with
--- the basePath property at the api-level.
-rPath :: Lens' Resumable (Maybe Text)
-rPath = lens _rPath (\ s a -> s{_rPath = a})
-
--- | True if this endpoint supports uploading multipart media.
-rMultiPart :: Lens' Resumable Bool
-rMultiPart
-  = lens _rMultiPart (\ s a -> s{_rMultiPart = a})
-
-instance FromJSON Resumable where
-        parseJSON
-          = withObject "Resumable"
-              (\ o ->
-                 Resumable <$>
-                   (o .:? "path") <*> (o .:? "multipart" .!= True))
-
-instance ToJSON Resumable where
-        toJSON Resumable{..}
-          = object
-              (catMaybes
-                 [("path" .=) <$> _rPath,
-                  Just ("multipart" .= _rMultiPart)])
-
--- | Sub-resources on this resource.
---
--- /See:/ 'resources' smart constructor.
-data Resources =
-    Resources
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Resources' with the minimum fields required to make a request.
---
-resources
-    :: Resources
-resources = Resources
-
-instance FromJSON Resources where
-        parseJSON
-          = withObject "Resources" (\ o -> pure Resources)
-
-instance ToJSON Resources where
-        toJSON = const (Object mempty)
-
 --
 -- /See:/ 'jsonSchema' smart constructor.
 data JSONSchema = JSONSchema
-    { _jsAnnotations          :: !(Maybe Annotations)
-    , _jsVariant              :: !(Maybe Variant)
+    { _jsAnnotations          :: !(Maybe JSONSchemaAnnotations)
+    , _jsVariant              :: !(Maybe JSONSchemaVariant)
     , _jsLocation             :: !(Maybe Text)
     , _jsRef                  :: !(Maybe Text)
     , _jsPattern              :: !(Maybe Text)
@@ -1326,7 +1202,7 @@ data JSONSchema = JSONSchema
     , _jsReadOnly             :: !(Maybe Bool)
     , _jsEnumDescriptions     :: !(Maybe [Text])
     , _jsDescription          :: !(Maybe Text)
-    , _jsProperties           :: !(Maybe Properties)
+    , _jsProperties           :: !(Maybe JSONSchemaProperties)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JSONSchema' with the minimum fields required to make a request.
@@ -1399,7 +1275,7 @@ jsonSchema =
     }
 
 -- | Additional information about this property.
-jsAnnotations :: Lens' JSONSchema (Maybe Annotations)
+jsAnnotations :: Lens' JSONSchema (Maybe JSONSchemaAnnotations)
 jsAnnotations
   = lens _jsAnnotations
       (\ s a -> s{_jsAnnotations = a})
@@ -1407,7 +1283,7 @@ jsAnnotations
 -- | In a variant data type, the value of one property is used to determine
 -- how to interpret the entire entity. Its value must exist in a map of
 -- descriminant values to schema names.
-jsVariant :: Lens' JSONSchema (Maybe Variant)
+jsVariant :: Lens' JSONSchema (Maybe JSONSchemaVariant)
 jsVariant
   = lens _jsVariant (\ s a -> s{_jsVariant = a})
 
@@ -1510,7 +1386,7 @@ jsDescription
 
 -- | If this is a schema for an object, list the schema for each property of
 -- this object.
-jsProperties :: Lens' JSONSchema (Maybe Properties)
+jsProperties :: Lens' JSONSchema (Maybe JSONSchemaProperties)
 jsProperties
   = lens _jsProperties (\ s a -> s{_jsProperties = a})
 
@@ -1563,88 +1439,70 @@ instance ToJSON JSONSchema where
                   ("description" .=) <$> _jsDescription,
                   ("properties" .=) <$> _jsProperties])
 
+-- | The schemas for this API.
 --
--- /See:/ 'mapItem' smart constructor.
-data MapItem = MapItem
-    { _miRef       :: !(Maybe Text)
-    , _miTypeValue :: !(Maybe Text)
+-- /See:/ 'restDescriptionSchemas' smart constructor.
+data RestDescriptionSchemas =
+    RestDescriptionSchemas
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RestDescriptionSchemas' with the minimum fields required to make a request.
+--
+restDescriptionSchemas
+    :: RestDescriptionSchemas
+restDescriptionSchemas = RestDescriptionSchemas
+
+instance FromJSON RestDescriptionSchemas where
+        parseJSON
+          = withObject "RestDescriptionSchemas"
+              (\ o -> pure RestDescriptionSchemas)
+
+instance ToJSON RestDescriptionSchemas where
+        toJSON = const (Object mempty)
+
+--
+-- /See:/ 'jsonSchemaVariantMapItem' smart constructor.
+data JSONSchemaVariantMapItem = JSONSchemaVariantMapItem
+    { _jsvmiRef       :: !(Maybe Text)
+    , _jsvmiTypeValue :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MapItem' with the minimum fields required to make a request.
+-- | Creates a value of 'JSONSchemaVariantMapItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'miRef'
+-- * 'jsvmiRef'
 --
--- * 'miTypeValue'
-mapItem
-    :: MapItem
-mapItem =
-    MapItem
-    { _miRef = Nothing
-    , _miTypeValue = Nothing
+-- * 'jsvmiTypeValue'
+jsonSchemaVariantMapItem
+    :: JSONSchemaVariantMapItem
+jsonSchemaVariantMapItem =
+    JSONSchemaVariantMapItem
+    { _jsvmiRef = Nothing
+    , _jsvmiTypeValue = Nothing
     }
 
-miRef :: Lens' MapItem (Maybe Text)
-miRef = lens _miRef (\ s a -> s{_miRef = a})
+jsvmiRef :: Lens' JSONSchemaVariantMapItem (Maybe Text)
+jsvmiRef = lens _jsvmiRef (\ s a -> s{_jsvmiRef = a})
 
-miTypeValue :: Lens' MapItem (Maybe Text)
-miTypeValue
-  = lens _miTypeValue (\ s a -> s{_miTypeValue = a})
+jsvmiTypeValue :: Lens' JSONSchemaVariantMapItem (Maybe Text)
+jsvmiTypeValue
+  = lens _jsvmiTypeValue
+      (\ s a -> s{_jsvmiTypeValue = a})
 
-instance FromJSON MapItem where
+instance FromJSON JSONSchemaVariantMapItem where
         parseJSON
-          = withObject "MapItem"
+          = withObject "JSONSchemaVariantMapItem"
               (\ o ->
-                 MapItem <$> (o .:? "$ref") <*> (o .:? "type_value"))
+                 JSONSchemaVariantMapItem <$>
+                   (o .:? "$ref") <*> (o .:? "type_value"))
 
-instance ToJSON MapItem where
-        toJSON MapItem{..}
+instance ToJSON JSONSchemaVariantMapItem where
+        toJSON JSONSchemaVariantMapItem{..}
           = object
               (catMaybes
-                 [("$ref" .=) <$> _miRef,
-                  ("type_value" .=) <$> _miTypeValue])
-
--- | Methods on this resource.
---
--- /See:/ 'methods' smart constructor.
-data Methods =
-    Methods
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Methods' with the minimum fields required to make a request.
---
-methods
-    :: Methods
-methods = Methods
-
-instance FromJSON Methods where
-        parseJSON
-          = withObject "Methods" (\ o -> pure Methods)
-
-instance ToJSON Methods where
-        toJSON = const (Object mempty)
-
--- | Available OAuth 2.0 scopes.
---
--- /See:/ 'oAuth2Scopes' smart constructor.
-data OAuth2Scopes =
-    OAuth2Scopes
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'OAuth2Scopes' with the minimum fields required to make a request.
---
-oAuth2Scopes
-    :: OAuth2Scopes
-oAuth2Scopes = OAuth2Scopes
-
-instance FromJSON OAuth2Scopes where
-        parseJSON
-          = withObject "OAuth2Scopes"
-              (\ o -> pure OAuth2Scopes)
-
-instance ToJSON OAuth2Scopes where
-        toJSON = const (Object mempty)
+                 [("$ref" .=) <$> _jsvmiRef,
+                  ("type_value" .=) <$> _jsvmiTypeValue])
 
 -- | The resources in this API.
 --
@@ -1667,57 +1525,248 @@ instance FromJSON RestDescriptionResources where
 instance ToJSON RestDescriptionResources where
         toJSON = const (Object mempty)
 
--- | Details for all parameters in this method.
+-- | Supported upload protocols.
 --
--- /See:/ 'parameters' smart constructor.
-data Parameters =
-    Parameters
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Parameters' with the minimum fields required to make a request.
---
-parameters
-    :: Parameters
-parameters = Parameters
-
-instance FromJSON Parameters where
-        parseJSON
-          = withObject "Parameters" (\ o -> pure Parameters)
-
-instance ToJSON Parameters where
-        toJSON = const (Object mempty)
-
--- | OAuth 2.0 authentication information.
---
--- /See:/ 'oAuth2' smart constructor.
-newtype OAuth2 = OAuth2
-    { _oaScopes :: Maybe OAuth2Scopes
+-- /See:/ 'restMethodMediaUploadProtocols' smart constructor.
+data RestMethodMediaUploadProtocols = RestMethodMediaUploadProtocols
+    { _rmmupSimple    :: !(Maybe RestMethodMediaUploadProtocolsSimple)
+    , _rmmupResumable :: !(Maybe RestMethodMediaUploadProtocolsResumable)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OAuth2' with the minimum fields required to make a request.
+-- | Creates a value of 'RestMethodMediaUploadProtocols' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'oaScopes'
-oAuth2
-    :: OAuth2
-oAuth2 =
-    OAuth2
-    { _oaScopes = Nothing
+-- * 'rmmupSimple'
+--
+-- * 'rmmupResumable'
+restMethodMediaUploadProtocols
+    :: RestMethodMediaUploadProtocols
+restMethodMediaUploadProtocols =
+    RestMethodMediaUploadProtocols
+    { _rmmupSimple = Nothing
+    , _rmmupResumable = Nothing
     }
 
--- | Available OAuth 2.0 scopes.
-oaScopes :: Lens' OAuth2 (Maybe OAuth2Scopes)
-oaScopes = lens _oaScopes (\ s a -> s{_oaScopes = a})
+-- | Supports uploading as a single HTTP request.
+rmmupSimple :: Lens' RestMethodMediaUploadProtocols (Maybe RestMethodMediaUploadProtocolsSimple)
+rmmupSimple
+  = lens _rmmupSimple (\ s a -> s{_rmmupSimple = a})
 
-instance FromJSON OAuth2 where
+-- | Supports the Resumable Media Upload protocol.
+rmmupResumable :: Lens' RestMethodMediaUploadProtocols (Maybe RestMethodMediaUploadProtocolsResumable)
+rmmupResumable
+  = lens _rmmupResumable
+      (\ s a -> s{_rmmupResumable = a})
+
+instance FromJSON RestMethodMediaUploadProtocols
+         where
         parseJSON
-          = withObject "OAuth2"
-              (\ o -> OAuth2 <$> (o .:? "scopes"))
+          = withObject "RestMethodMediaUploadProtocols"
+              (\ o ->
+                 RestMethodMediaUploadProtocols <$>
+                   (o .:? "simple") <*> (o .:? "resumable"))
 
-instance ToJSON OAuth2 where
-        toJSON OAuth2{..}
-          = object (catMaybes [("scopes" .=) <$> _oaScopes])
+instance ToJSON RestMethodMediaUploadProtocols where
+        toJSON RestMethodMediaUploadProtocols{..}
+          = object
+              (catMaybes
+                 [("simple" .=) <$> _rmmupSimple,
+                  ("resumable" .=) <$> _rmmupResumable])
+
+-- | Additional information about this property.
+--
+-- /See:/ 'jsonSchemaAnnotations' smart constructor.
+newtype JSONSchemaAnnotations = JSONSchemaAnnotations
+    { _jsaRequired :: Maybe [Text]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'JSONSchemaAnnotations' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'jsaRequired'
+jsonSchemaAnnotations
+    :: JSONSchemaAnnotations
+jsonSchemaAnnotations =
+    JSONSchemaAnnotations
+    { _jsaRequired = Nothing
+    }
+
+-- | A list of methods for which this property is required on requests.
+jsaRequired :: Lens' JSONSchemaAnnotations [Text]
+jsaRequired
+  = lens _jsaRequired (\ s a -> s{_jsaRequired = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON JSONSchemaAnnotations where
+        parseJSON
+          = withObject "JSONSchemaAnnotations"
+              (\ o ->
+                 JSONSchemaAnnotations <$>
+                   (o .:? "required" .!= mempty))
+
+instance ToJSON JSONSchemaAnnotations where
+        toJSON JSONSchemaAnnotations{..}
+          = object
+              (catMaybes [("required" .=) <$> _jsaRequired])
+
+-- | Details for all parameters in this method.
+--
+-- /See:/ 'restMethodParameters' smart constructor.
+data RestMethodParameters =
+    RestMethodParameters
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RestMethodParameters' with the minimum fields required to make a request.
+--
+restMethodParameters
+    :: RestMethodParameters
+restMethodParameters = RestMethodParameters
+
+instance FromJSON RestMethodParameters where
+        parseJSON
+          = withObject "RestMethodParameters"
+              (\ o -> pure RestMethodParameters)
+
+instance ToJSON RestMethodParameters where
+        toJSON = const (Object mempty)
+
+-- | Media upload parameters.
+--
+-- /See:/ 'restMethodMediaUpload' smart constructor.
+data RestMethodMediaUpload = RestMethodMediaUpload
+    { _rmmuProtocols :: !(Maybe RestMethodMediaUploadProtocols)
+    , _rmmuAccept    :: !(Maybe [Text])
+    , _rmmuMaxSize   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RestMethodMediaUpload' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rmmuProtocols'
+--
+-- * 'rmmuAccept'
+--
+-- * 'rmmuMaxSize'
+restMethodMediaUpload
+    :: RestMethodMediaUpload
+restMethodMediaUpload =
+    RestMethodMediaUpload
+    { _rmmuProtocols = Nothing
+    , _rmmuAccept = Nothing
+    , _rmmuMaxSize = Nothing
+    }
+
+-- | Supported upload protocols.
+rmmuProtocols :: Lens' RestMethodMediaUpload (Maybe RestMethodMediaUploadProtocols)
+rmmuProtocols
+  = lens _rmmuProtocols
+      (\ s a -> s{_rmmuProtocols = a})
+
+-- | MIME Media Ranges for acceptable media uploads to this method.
+rmmuAccept :: Lens' RestMethodMediaUpload [Text]
+rmmuAccept
+  = lens _rmmuAccept (\ s a -> s{_rmmuAccept = a}) .
+      _Default
+      . _Coerce
+
+-- | Maximum size of a media upload, such as \"1MB\", \"2GB\" or \"3TB\".
+rmmuMaxSize :: Lens' RestMethodMediaUpload (Maybe Text)
+rmmuMaxSize
+  = lens _rmmuMaxSize (\ s a -> s{_rmmuMaxSize = a})
+
+instance FromJSON RestMethodMediaUpload where
+        parseJSON
+          = withObject "RestMethodMediaUpload"
+              (\ o ->
+                 RestMethodMediaUpload <$>
+                   (o .:? "protocols") <*> (o .:? "accept" .!= mempty)
+                     <*> (o .:? "maxSize"))
+
+instance ToJSON RestMethodMediaUpload where
+        toJSON RestMethodMediaUpload{..}
+          = object
+              (catMaybes
+                 [("protocols" .=) <$> _rmmuProtocols,
+                  ("accept" .=) <$> _rmmuAccept,
+                  ("maxSize" .=) <$> _rmmuMaxSize])
+
+-- | If this is a schema for an object, list the schema for each property of
+-- this object.
+--
+-- /See:/ 'jsonSchemaProperties' smart constructor.
+data JSONSchemaProperties =
+    JSONSchemaProperties
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'JSONSchemaProperties' with the minimum fields required to make a request.
+--
+jsonSchemaProperties
+    :: JSONSchemaProperties
+jsonSchemaProperties = JSONSchemaProperties
+
+instance FromJSON JSONSchemaProperties where
+        parseJSON
+          = withObject "JSONSchemaProperties"
+              (\ o -> pure JSONSchemaProperties)
+
+instance ToJSON JSONSchemaProperties where
+        toJSON = const (Object mempty)
+
+-- | Supports the Resumable Media Upload protocol.
+--
+-- /See:/ 'restMethodMediaUploadProtocolsResumable' smart constructor.
+data RestMethodMediaUploadProtocolsResumable = RestMethodMediaUploadProtocolsResumable
+    { _rmmuprPath      :: !(Maybe Text)
+    , _rmmuprMultiPart :: !Bool
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RestMethodMediaUploadProtocolsResumable' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rmmuprPath'
+--
+-- * 'rmmuprMultiPart'
+restMethodMediaUploadProtocolsResumable
+    :: RestMethodMediaUploadProtocolsResumable
+restMethodMediaUploadProtocolsResumable =
+    RestMethodMediaUploadProtocolsResumable
+    { _rmmuprPath = Nothing
+    , _rmmuprMultiPart = True
+    }
+
+-- | The URI path to be used for upload. Should be used in conjunction with
+-- the basePath property at the api-level.
+rmmuprPath :: Lens' RestMethodMediaUploadProtocolsResumable (Maybe Text)
+rmmuprPath
+  = lens _rmmuprPath (\ s a -> s{_rmmuprPath = a})
+
+-- | True if this endpoint supports uploading multipart media.
+rmmuprMultiPart :: Lens' RestMethodMediaUploadProtocolsResumable Bool
+rmmuprMultiPart
+  = lens _rmmuprMultiPart
+      (\ s a -> s{_rmmuprMultiPart = a})
+
+instance FromJSON
+         RestMethodMediaUploadProtocolsResumable where
+        parseJSON
+          = withObject
+              "RestMethodMediaUploadProtocolsResumable"
+              (\ o ->
+                 RestMethodMediaUploadProtocolsResumable <$>
+                   (o .:? "path") <*> (o .:? "multipart" .!= True))
+
+instance ToJSON
+         RestMethodMediaUploadProtocolsResumable where
+        toJSON RestMethodMediaUploadProtocolsResumable{..}
+          = object
+              (catMaybes
+                 [("path" .=) <$> _rmmuprPath,
+                  Just ("multipart" .= _rmmuprMultiPart)])
 
 --
 -- /See:/ 'directoryList' smart constructor.
@@ -1777,70 +1826,49 @@ instance ToJSON DirectoryList where
                  [Just ("kind" .= _dlKind), ("items" .=) <$> _dlItems,
                   Just ("discoveryVersion" .= _dlDiscoveryVersion)])
 
--- | If this is a schema for an object, list the schema for each property of
--- this object.
---
--- /See:/ 'properties' smart constructor.
-data Properties =
-    Properties
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Properties' with the minimum fields required to make a request.
---
-properties
-    :: Properties
-properties = Properties
-
-instance FromJSON Properties where
-        parseJSON
-          = withObject "Properties" (\ o -> pure Properties)
-
-instance ToJSON Properties where
-        toJSON = const (Object mempty)
-
 -- | The schema for the request.
 --
--- /See:/ 'request'' smart constructor.
-data Request = Request
-    { _reqRef           :: !(Maybe Text)
-    , _reqParameterName :: !(Maybe Text)
+-- /See:/ 'restMethodRequest' smart constructor.
+data RestMethodRequest = RestMethodRequest
+    { _rRef           :: !(Maybe Text)
+    , _rParameterName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Request' with the minimum fields required to make a request.
+-- | Creates a value of 'RestMethodRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'reqRef'
+-- * 'rRef'
 --
--- * 'reqParameterName'
-request'
-    :: Request
-request' =
-    Request
-    { _reqRef = Nothing
-    , _reqParameterName = Nothing
+-- * 'rParameterName'
+restMethodRequest
+    :: RestMethodRequest
+restMethodRequest =
+    RestMethodRequest
+    { _rRef = Nothing
+    , _rParameterName = Nothing
     }
 
 -- | Schema ID for the request schema.
-reqRef :: Lens' Request (Maybe Text)
-reqRef = lens _reqRef (\ s a -> s{_reqRef = a})
+rRef :: Lens' RestMethodRequest (Maybe Text)
+rRef = lens _rRef (\ s a -> s{_rRef = a})
 
 -- | parameter name.
-reqParameterName :: Lens' Request (Maybe Text)
-reqParameterName
-  = lens _reqParameterName
-      (\ s a -> s{_reqParameterName = a})
+rParameterName :: Lens' RestMethodRequest (Maybe Text)
+rParameterName
+  = lens _rParameterName
+      (\ s a -> s{_rParameterName = a})
 
-instance FromJSON Request where
+instance FromJSON RestMethodRequest where
         parseJSON
-          = withObject "Request"
+          = withObject "RestMethodRequest"
               (\ o ->
-                 Request <$>
+                 RestMethodRequest <$>
                    (o .:? "$ref") <*> (o .:? "parameterName"))
 
-instance ToJSON Request where
-        toJSON Request{..}
+instance ToJSON RestMethodRequest where
+        toJSON RestMethodRequest{..}
           = object
               (catMaybes
-                 [("$ref" .=) <$> _reqRef,
-                  ("parameterName" .=) <$> _reqParameterName])
+                 [("$ref" .=) <$> _rRef,
+                  ("parameterName" .=) <$> _rParameterName])

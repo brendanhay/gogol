@@ -58,7 +58,7 @@ type CaptionsDownloadResource =
          QueryParam "onBehalfOf" Text :>
            QueryParam "tlang" Text :>
              QueryParam "onBehalfOfContentOwner" Text :>
-               QueryParam "tfmt" Tfmt :>
+               QueryParam "tfmt" CaptionsDownloadTfmt :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -72,7 +72,7 @@ type CaptionsDownloadResource =
            QueryParam "onBehalfOf" Text :>
              QueryParam "tlang" Text :>
                QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "tfmt" Tfmt :>
+                 QueryParam "tfmt" CaptionsDownloadTfmt :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -97,7 +97,7 @@ data CaptionsDownload' = CaptionsDownload'
     , _capaOnBehalfOfContentOwner :: !(Maybe Text)
     , _capaKey                    :: !(Maybe Key)
     , _capaId                     :: !Text
-    , _capaTfmt                   :: !(Maybe Tfmt)
+    , _capaTfmt                   :: !(Maybe CaptionsDownloadTfmt)
     , _capaOAuthToken             :: !(Maybe OAuthToken)
     , _capaFields                 :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -211,7 +211,7 @@ capaId = lens _capaId (\ s a -> s{_capaId = a})
 -- | The tfmt parameter specifies that the caption track should be returned
 -- in a specific format. If the parameter is not included in the request,
 -- the track is returned in its original format.
-capaTfmt :: Lens' CaptionsDownload' (Maybe Tfmt)
+capaTfmt :: Lens' CaptionsDownload' (Maybe CaptionsDownloadTfmt)
 capaTfmt = lens _capaTfmt (\ s a -> s{_capaTfmt = a})
 
 -- | OAuth 2.0 token for the current user.

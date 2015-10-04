@@ -18,6 +18,135 @@ module Network.Google.QPXExpress.Types.Product where
 import           Network.Google.Prelude
 import           Network.Google.QPXExpress.Types.Sum
 
+-- | A QPX Express search response.
+--
+-- /See:/ 'tripOptionsResponse' smart constructor.
+data TripOptionsResponse = TripOptionsResponse
+    { _torRequestId  :: !(Maybe Text)
+    , _torKind       :: !Text
+    , _torData       :: !(Maybe Data)
+    , _torTripOption :: !(Maybe [TripOption])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TripOptionsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'torRequestId'
+--
+-- * 'torKind'
+--
+-- * 'torData'
+--
+-- * 'torTripOption'
+tripOptionsResponse
+    :: TripOptionsResponse
+tripOptionsResponse =
+    TripOptionsResponse
+    { _torRequestId = Nothing
+    , _torKind = "qpxexpress#tripOptions"
+    , _torData = Nothing
+    , _torTripOption = Nothing
+    }
+
+-- | An identifier uniquely identifying this response.
+torRequestId :: Lens' TripOptionsResponse (Maybe Text)
+torRequestId
+  = lens _torRequestId (\ s a -> s{_torRequestId = a})
+
+-- | Identifies this as a QPX Express trip response object, which consists of
+-- zero or more solutions. Value: the fixed string qpxexpress#tripOptions.
+torKind :: Lens' TripOptionsResponse Text
+torKind = lens _torKind (\ s a -> s{_torKind = a})
+
+-- | Informational data global to list of solutions.
+torData :: Lens' TripOptionsResponse (Maybe Data)
+torData = lens _torData (\ s a -> s{_torData = a})
+
+-- | A list of priced itinerary solutions to the QPX Express query.
+torTripOption :: Lens' TripOptionsResponse [TripOption]
+torTripOption
+  = lens _torTripOption
+      (\ s a -> s{_torTripOption = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON TripOptionsResponse where
+        parseJSON
+          = withObject "TripOptionsResponse"
+              (\ o ->
+                 TripOptionsResponse <$>
+                   (o .:? "requestId") <*>
+                     (o .:? "kind" .!= "qpxexpress#tripOptions")
+                     <*> (o .:? "data")
+                     <*> (o .:? "tripOption" .!= mempty))
+
+instance ToJSON TripOptionsResponse where
+        toJSON TripOptionsResponse{..}
+          = object
+              (catMaybes
+                 [("requestId" .=) <$> _torRequestId,
+                  Just ("kind" .= _torKind), ("data" .=) <$> _torData,
+                  ("tripOption" .=) <$> _torTripOption])
+
+-- | Information about a carrier (ie. an airline, bus line, railroad, etc)
+-- that might be useful to display to an end-user.
+--
+-- /See:/ 'carrierData' smart constructor.
+data CarrierData = CarrierData
+    { _cdKind :: !Text
+    , _cdName :: !(Maybe Text)
+    , _cdCode :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CarrierData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cdKind'
+--
+-- * 'cdName'
+--
+-- * 'cdCode'
+carrierData
+    :: CarrierData
+carrierData =
+    CarrierData
+    { _cdKind = "qpxexpress#carrierData"
+    , _cdName = Nothing
+    , _cdCode = Nothing
+    }
+
+-- | Identifies this as a kind of carrier (ie. an airline, bus line,
+-- railroad, etc). Value: the fixed string qpxexpress#carrierData.
+cdKind :: Lens' CarrierData Text
+cdKind = lens _cdKind (\ s a -> s{_cdKind = a})
+
+-- | The long, full name of a carrier. For example: American Airlines.
+cdName :: Lens' CarrierData (Maybe Text)
+cdName = lens _cdName (\ s a -> s{_cdName = a})
+
+-- | The IATA designator of a carrier (airline, etc). For example, for
+-- American Airlines, the code is AA.
+cdCode :: Lens' CarrierData (Maybe Text)
+cdCode = lens _cdCode (\ s a -> s{_cdCode = a})
+
+instance FromJSON CarrierData where
+        parseJSON
+          = withObject "CarrierData"
+              (\ o ->
+                 CarrierData <$>
+                   (o .:? "kind" .!= "qpxexpress#carrierData") <*>
+                     (o .:? "name")
+                     <*> (o .:? "code"))
+
+instance ToJSON CarrierData where
+        toJSON CarrierData{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _cdKind), ("name" .=) <$> _cdName,
+                  ("code" .=) <$> _cdCode])
+
 -- | Information about free baggage allowed on one segment of a trip.
 --
 -- /See:/ 'freeBaggageAllowance' smart constructor.
@@ -113,135 +242,6 @@ instance ToJSON FreeBaggageAllowance where
                   ("kilosPerPiece" .=) <$> _fbaKilosPerPiece,
                   ("kilos" .=) <$> _fbaKilos,
                   ("pieces" .=) <$> _fbaPieces])
-
--- | Information about a carrier (ie. an airline, bus line, railroad, etc)
--- that might be useful to display to an end-user.
---
--- /See:/ 'carrierData' smart constructor.
-data CarrierData = CarrierData
-    { _cdKind :: !Text
-    , _cdName :: !(Maybe Text)
-    , _cdCode :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CarrierData' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cdKind'
---
--- * 'cdName'
---
--- * 'cdCode'
-carrierData
-    :: CarrierData
-carrierData =
-    CarrierData
-    { _cdKind = "qpxexpress#carrierData"
-    , _cdName = Nothing
-    , _cdCode = Nothing
-    }
-
--- | Identifies this as a kind of carrier (ie. an airline, bus line,
--- railroad, etc). Value: the fixed string qpxexpress#carrierData.
-cdKind :: Lens' CarrierData Text
-cdKind = lens _cdKind (\ s a -> s{_cdKind = a})
-
--- | The long, full name of a carrier. For example: American Airlines.
-cdName :: Lens' CarrierData (Maybe Text)
-cdName = lens _cdName (\ s a -> s{_cdName = a})
-
--- | The IATA designator of a carrier (airline, etc). For example, for
--- American Airlines, the code is AA.
-cdCode :: Lens' CarrierData (Maybe Text)
-cdCode = lens _cdCode (\ s a -> s{_cdCode = a})
-
-instance FromJSON CarrierData where
-        parseJSON
-          = withObject "CarrierData"
-              (\ o ->
-                 CarrierData <$>
-                   (o .:? "kind" .!= "qpxexpress#carrierData") <*>
-                     (o .:? "name")
-                     <*> (o .:? "code"))
-
-instance ToJSON CarrierData where
-        toJSON CarrierData{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _cdKind), ("name" .=) <$> _cdName,
-                  ("code" .=) <$> _cdCode])
-
--- | A QPX Express search response.
---
--- /See:/ 'tripOptionsResponse' smart constructor.
-data TripOptionsResponse = TripOptionsResponse
-    { _torRequestId  :: !(Maybe Text)
-    , _torKind       :: !Text
-    , _torData       :: !(Maybe Data)
-    , _torTripOption :: !(Maybe [TripOption])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'TripOptionsResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'torRequestId'
---
--- * 'torKind'
---
--- * 'torData'
---
--- * 'torTripOption'
-tripOptionsResponse
-    :: TripOptionsResponse
-tripOptionsResponse =
-    TripOptionsResponse
-    { _torRequestId = Nothing
-    , _torKind = "qpxexpress#tripOptions"
-    , _torData = Nothing
-    , _torTripOption = Nothing
-    }
-
--- | An identifier uniquely identifying this response.
-torRequestId :: Lens' TripOptionsResponse (Maybe Text)
-torRequestId
-  = lens _torRequestId (\ s a -> s{_torRequestId = a})
-
--- | Identifies this as a QPX Express trip response object, which consists of
--- zero or more solutions. Value: the fixed string qpxexpress#tripOptions.
-torKind :: Lens' TripOptionsResponse Text
-torKind = lens _torKind (\ s a -> s{_torKind = a})
-
--- | Informational data global to list of solutions.
-torData :: Lens' TripOptionsResponse (Maybe Data)
-torData = lens _torData (\ s a -> s{_torData = a})
-
--- | A list of priced itinerary solutions to the QPX Express query.
-torTripOption :: Lens' TripOptionsResponse [TripOption]
-torTripOption
-  = lens _torTripOption
-      (\ s a -> s{_torTripOption = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON TripOptionsResponse where
-        parseJSON
-          = withObject "TripOptionsResponse"
-              (\ o ->
-                 TripOptionsResponse <$>
-                   (o .:? "requestId") <*>
-                     (o .:? "kind" .!= "qpxexpress#tripOptions")
-                     <*> (o .:? "data")
-                     <*> (o .:? "tripOption" .!= mempty))
-
-instance ToJSON TripOptionsResponse where
-        toJSON TripOptionsResponse{..}
-          = object
-              (catMaybes
-                 [("requestId" .=) <$> _torRequestId,
-                  Just ("kind" .= _torKind), ("data" .=) <$> _torData,
-                  ("tripOption" .=) <$> _torTripOption])
 
 -- | Two times in a single day defining a time range.
 --
@@ -1036,74 +1036,6 @@ instance ToJSON TripOption where
                   ("slice" .=) <$> _toSlice,
                   ("saleTotal" .=) <$> _toSaleTotal])
 
--- | Information about a city that might be useful to an end-user; typically
--- the city of an airport.
---
--- /See:/ 'cityData' smart constructor.
-data CityData = CityData
-    { _cCountry :: !(Maybe Text)
-    , _cKind    :: !Text
-    , _cName    :: !(Maybe Text)
-    , _cCode    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CityData' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cCountry'
---
--- * 'cKind'
---
--- * 'cName'
---
--- * 'cCode'
-cityData
-    :: CityData
-cityData =
-    CityData
-    { _cCountry = Nothing
-    , _cKind = "qpxexpress#cityData"
-    , _cName = Nothing
-    , _cCode = Nothing
-    }
-
--- | The two-character country code of the country the city is located in.
--- For example, US for the United States of America.
-cCountry :: Lens' CityData (Maybe Text)
-cCountry = lens _cCountry (\ s a -> s{_cCountry = a})
-
--- | Identifies this as a city, typically with one or more airports. Value:
--- the fixed string qpxexpress#cityData.
-cKind :: Lens' CityData Text
-cKind = lens _cKind (\ s a -> s{_cKind = a})
-
--- | The full name of a city. An example would be: New York.
-cName :: Lens' CityData (Maybe Text)
-cName = lens _cName (\ s a -> s{_cName = a})
-
--- | The IATA character ID of a city. For example, for Boston this is BOS.
-cCode :: Lens' CityData (Maybe Text)
-cCode = lens _cCode (\ s a -> s{_cCode = a})
-
-instance FromJSON CityData where
-        parseJSON
-          = withObject "CityData"
-              (\ o ->
-                 CityData <$>
-                   (o .:? "country") <*>
-                     (o .:? "kind" .!= "qpxexpress#cityData")
-                     <*> (o .:? "name")
-                     <*> (o .:? "code"))
-
-instance ToJSON CityData where
-        toJSON CityData{..}
-          = object
-              (catMaybes
-                 [("country" .=) <$> _cCountry,
-                  Just ("kind" .= _cKind), ("name" .=) <$> _cName,
-                  ("code" .=) <$> _cCode])
-
 -- | Information about an item of baggage.
 --
 -- /See:/ 'bagDescriptor' smart constructor.
@@ -1187,6 +1119,74 @@ instance ToJSON BagDescriptor where
                   ("count" .=) <$> _bdCount,
                   ("description" .=) <$> _bdDescription,
                   ("subcode" .=) <$> _bdSubcode])
+
+-- | Information about a city that might be useful to an end-user; typically
+-- the city of an airport.
+--
+-- /See:/ 'cityData' smart constructor.
+data CityData = CityData
+    { _cCountry :: !(Maybe Text)
+    , _cKind    :: !Text
+    , _cName    :: !(Maybe Text)
+    , _cCode    :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CityData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cCountry'
+--
+-- * 'cKind'
+--
+-- * 'cName'
+--
+-- * 'cCode'
+cityData
+    :: CityData
+cityData =
+    CityData
+    { _cCountry = Nothing
+    , _cKind = "qpxexpress#cityData"
+    , _cName = Nothing
+    , _cCode = Nothing
+    }
+
+-- | The two-character country code of the country the city is located in.
+-- For example, US for the United States of America.
+cCountry :: Lens' CityData (Maybe Text)
+cCountry = lens _cCountry (\ s a -> s{_cCountry = a})
+
+-- | Identifies this as a city, typically with one or more airports. Value:
+-- the fixed string qpxexpress#cityData.
+cKind :: Lens' CityData Text
+cKind = lens _cKind (\ s a -> s{_cKind = a})
+
+-- | The full name of a city. An example would be: New York.
+cName :: Lens' CityData (Maybe Text)
+cName = lens _cName (\ s a -> s{_cName = a})
+
+-- | The IATA character ID of a city. For example, for Boston this is BOS.
+cCode :: Lens' CityData (Maybe Text)
+cCode = lens _cCode (\ s a -> s{_cCode = a})
+
+instance FromJSON CityData where
+        parseJSON
+          = withObject "CityData"
+              (\ o ->
+                 CityData <$>
+                   (o .:? "country") <*>
+                     (o .:? "kind" .!= "qpxexpress#cityData")
+                     <*> (o .:? "name")
+                     <*> (o .:? "code"))
+
+instance ToJSON CityData where
+        toJSON CityData{..}
+          = object
+              (catMaybes
+                 [("country" .=) <$> _cCountry,
+                  Just ("kind" .= _cKind), ("name" .=) <$> _cName,
+                  ("code" .=) <$> _cCode])
 
 -- | The number and type of passengers. Unfortunately the definition of an
 -- infant, child, adult, and senior citizen varies across carriers and
@@ -1506,6 +1506,40 @@ instance ToJSON TaxData where
                  [Just ("kind" .= _tdKind), ("name" .=) <$> _tdName,
                   ("id" .=) <$> _tdId])
 
+-- | A QPX Express search request.
+--
+-- /See:/ 'tripsSearchRequest' smart constructor.
+newtype TripsSearchRequest = TripsSearchRequest
+    { _tsrRequest :: Maybe TripOptionsRequest
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TripsSearchRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tsrRequest'
+tripsSearchRequest
+    :: TripsSearchRequest
+tripsSearchRequest =
+    TripsSearchRequest
+    { _tsrRequest = Nothing
+    }
+
+-- | A QPX Express search request. Required values are at least one adult or
+-- senior passenger, an origin, a destination, and a date.
+tsrRequest :: Lens' TripsSearchRequest (Maybe TripOptionsRequest)
+tsrRequest
+  = lens _tsrRequest (\ s a -> s{_tsrRequest = a})
+
+instance FromJSON TripsSearchRequest where
+        parseJSON
+          = withObject "TripsSearchRequest"
+              (\ o -> TripsSearchRequest <$> (o .:? "request"))
+
+instance ToJSON TripsSearchRequest where
+        toJSON TripsSearchRequest{..}
+          = object (catMaybes [("request" .=) <$> _tsrRequest])
+
 -- | Tax information.
 --
 -- /See:/ 'taxInfo' smart constructor.
@@ -1594,40 +1628,6 @@ instance ToJSON TaxInfo where
                   Just ("kind" .= _tiKind),
                   ("salePrice" .=) <$> _tiSalePrice,
                   ("code" .=) <$> _tiCode, ("id" .=) <$> _tiId])
-
--- | A QPX Express search request.
---
--- /See:/ 'tripsSearchRequest' smart constructor.
-newtype TripsSearchRequest = TripsSearchRequest
-    { _tsrRequest :: Maybe TripOptionsRequest
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'TripsSearchRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'tsrRequest'
-tripsSearchRequest
-    :: TripsSearchRequest
-tripsSearchRequest =
-    TripsSearchRequest
-    { _tsrRequest = Nothing
-    }
-
--- | A QPX Express search request. Required values are at least one adult or
--- senior passenger, an origin, a destination, and a date.
-tsrRequest :: Lens' TripsSearchRequest (Maybe TripOptionsRequest)
-tsrRequest
-  = lens _tsrRequest (\ s a -> s{_tsrRequest = a})
-
-instance FromJSON TripsSearchRequest where
-        parseJSON
-          = withObject "TripsSearchRequest"
-              (\ o -> TripsSearchRequest <$> (o .:? "request"))
-
-instance ToJSON TripsSearchRequest where
-        toJSON TripsSearchRequest{..}
-          = object (catMaybes [("request" .=) <$> _tsrRequest])
 
 -- | The price of one or more travel segments. The currency used to purchase
 -- tickets is usually determined by the sale\/ticketing city or the
@@ -1972,6 +1972,111 @@ instance ToJSON FareInfo where
                   ("basisCode" .=) <$> _fBasisCode,
                   ("id" .=) <$> _fId])
 
+-- | A QPX Express search request, which will yield one or more solutions.
+--
+-- /See:/ 'tripOptionsRequest' smart constructor.
+data TripOptionsRequest = TripOptionsRequest
+    { _torRefundable  :: !(Maybe Bool)
+    , _torSaleCountry :: !(Maybe Text)
+    , _torPassengers  :: !(Maybe PassengerCounts)
+    , _torSolutions   :: !(Maybe Int32)
+    , _torSlice       :: !(Maybe [SliceInput])
+    , _torMaxPrice    :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TripOptionsRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'torRefundable'
+--
+-- * 'torSaleCountry'
+--
+-- * 'torPassengers'
+--
+-- * 'torSolutions'
+--
+-- * 'torSlice'
+--
+-- * 'torMaxPrice'
+tripOptionsRequest
+    :: TripOptionsRequest
+tripOptionsRequest =
+    TripOptionsRequest
+    { _torRefundable = Nothing
+    , _torSaleCountry = Nothing
+    , _torPassengers = Nothing
+    , _torSolutions = Nothing
+    , _torSlice = Nothing
+    , _torMaxPrice = Nothing
+    }
+
+-- | Return only solutions with refundable fares.
+torRefundable :: Lens' TripOptionsRequest (Maybe Bool)
+torRefundable
+  = lens _torRefundable
+      (\ s a -> s{_torRefundable = a})
+
+-- | IATA country code representing the point of sale. This determines the
+-- \"equivalent amount paid\" currency for the ticket.
+torSaleCountry :: Lens' TripOptionsRequest (Maybe Text)
+torSaleCountry
+  = lens _torSaleCountry
+      (\ s a -> s{_torSaleCountry = a})
+
+-- | Counts for each passenger type in the request.
+torPassengers :: Lens' TripOptionsRequest (Maybe PassengerCounts)
+torPassengers
+  = lens _torPassengers
+      (\ s a -> s{_torPassengers = a})
+
+-- | The number of solutions to return, maximum 500.
+torSolutions :: Lens' TripOptionsRequest (Maybe Int32)
+torSolutions
+  = lens _torSolutions (\ s a -> s{_torSolutions = a})
+
+-- | The slices that make up the itinerary of this trip. A slice represents a
+-- traveler\'s intent, the portion of a low-fare search corresponding to a
+-- traveler\'s request to get between two points. One-way journeys are
+-- generally expressed using one slice, round-trips using two. An example
+-- of a one slice trip with three segments might be BOS-SYD, SYD-LAX,
+-- LAX-BOS if the traveler only stopped in SYD and LAX just long enough to
+-- change planes.
+torSlice :: Lens' TripOptionsRequest [SliceInput]
+torSlice
+  = lens _torSlice (\ s a -> s{_torSlice = a}) .
+      _Default
+      . _Coerce
+
+-- | Do not return solutions that cost more than this price. The alphabetical
+-- part of the price is in ISO 4217. The format, in regex, is
+-- [A-Z]{3}\\d+(\\.\\d+)? Example: $102.07
+torMaxPrice :: Lens' TripOptionsRequest (Maybe Text)
+torMaxPrice
+  = lens _torMaxPrice (\ s a -> s{_torMaxPrice = a})
+
+instance FromJSON TripOptionsRequest where
+        parseJSON
+          = withObject "TripOptionsRequest"
+              (\ o ->
+                 TripOptionsRequest <$>
+                   (o .:? "refundable") <*> (o .:? "saleCountry") <*>
+                     (o .:? "passengers")
+                     <*> (o .:? "solutions")
+                     <*> (o .:? "slice" .!= mempty)
+                     <*> (o .:? "maxPrice"))
+
+instance ToJSON TripOptionsRequest where
+        toJSON TripOptionsRequest{..}
+          = object
+              (catMaybes
+                 [("refundable" .=) <$> _torRefundable,
+                  ("saleCountry" .=) <$> _torSaleCountry,
+                  ("passengers" .=) <$> _torPassengers,
+                  ("solutions" .=) <$> _torSolutions,
+                  ("slice" .=) <$> _torSlice,
+                  ("maxPrice" .=) <$> _torMaxPrice])
+
 -- | Criteria a desired slice must satisfy.
 --
 -- /See:/ 'sliceInput' smart constructor.
@@ -2136,108 +2241,3 @@ instance ToJSON SliceInput where
                     _sliPermittedDePartureTime,
                   ("permittedCarrier" .=) <$> _sliPermittedCarrier,
                   ("alliance" .=) <$> _sliAlliance])
-
--- | A QPX Express search request, which will yield one or more solutions.
---
--- /See:/ 'tripOptionsRequest' smart constructor.
-data TripOptionsRequest = TripOptionsRequest
-    { _torRefundable  :: !(Maybe Bool)
-    , _torSaleCountry :: !(Maybe Text)
-    , _torPassengers  :: !(Maybe PassengerCounts)
-    , _torSolutions   :: !(Maybe Int32)
-    , _torSlice       :: !(Maybe [SliceInput])
-    , _torMaxPrice    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'TripOptionsRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'torRefundable'
---
--- * 'torSaleCountry'
---
--- * 'torPassengers'
---
--- * 'torSolutions'
---
--- * 'torSlice'
---
--- * 'torMaxPrice'
-tripOptionsRequest
-    :: TripOptionsRequest
-tripOptionsRequest =
-    TripOptionsRequest
-    { _torRefundable = Nothing
-    , _torSaleCountry = Nothing
-    , _torPassengers = Nothing
-    , _torSolutions = Nothing
-    , _torSlice = Nothing
-    , _torMaxPrice = Nothing
-    }
-
--- | Return only solutions with refundable fares.
-torRefundable :: Lens' TripOptionsRequest (Maybe Bool)
-torRefundable
-  = lens _torRefundable
-      (\ s a -> s{_torRefundable = a})
-
--- | IATA country code representing the point of sale. This determines the
--- \"equivalent amount paid\" currency for the ticket.
-torSaleCountry :: Lens' TripOptionsRequest (Maybe Text)
-torSaleCountry
-  = lens _torSaleCountry
-      (\ s a -> s{_torSaleCountry = a})
-
--- | Counts for each passenger type in the request.
-torPassengers :: Lens' TripOptionsRequest (Maybe PassengerCounts)
-torPassengers
-  = lens _torPassengers
-      (\ s a -> s{_torPassengers = a})
-
--- | The number of solutions to return, maximum 500.
-torSolutions :: Lens' TripOptionsRequest (Maybe Int32)
-torSolutions
-  = lens _torSolutions (\ s a -> s{_torSolutions = a})
-
--- | The slices that make up the itinerary of this trip. A slice represents a
--- traveler\'s intent, the portion of a low-fare search corresponding to a
--- traveler\'s request to get between two points. One-way journeys are
--- generally expressed using one slice, round-trips using two. An example
--- of a one slice trip with three segments might be BOS-SYD, SYD-LAX,
--- LAX-BOS if the traveler only stopped in SYD and LAX just long enough to
--- change planes.
-torSlice :: Lens' TripOptionsRequest [SliceInput]
-torSlice
-  = lens _torSlice (\ s a -> s{_torSlice = a}) .
-      _Default
-      . _Coerce
-
--- | Do not return solutions that cost more than this price. The alphabetical
--- part of the price is in ISO 4217. The format, in regex, is
--- [A-Z]{3}\\d+(\\.\\d+)? Example: $102.07
-torMaxPrice :: Lens' TripOptionsRequest (Maybe Text)
-torMaxPrice
-  = lens _torMaxPrice (\ s a -> s{_torMaxPrice = a})
-
-instance FromJSON TripOptionsRequest where
-        parseJSON
-          = withObject "TripOptionsRequest"
-              (\ o ->
-                 TripOptionsRequest <$>
-                   (o .:? "refundable") <*> (o .:? "saleCountry") <*>
-                     (o .:? "passengers")
-                     <*> (o .:? "solutions")
-                     <*> (o .:? "slice" .!= mempty)
-                     <*> (o .:? "maxPrice"))
-
-instance ToJSON TripOptionsRequest where
-        toJSON TripOptionsRequest{..}
-          = object
-              (catMaybes
-                 [("refundable" .=) <$> _torRefundable,
-                  ("saleCountry" .=) <$> _torSaleCountry,
-                  ("passengers" .=) <$> _torPassengers,
-                  ("solutions" .=) <$> _torSolutions,
-                  ("slice" .=) <$> _torSlice,
-                  ("maxPrice" .=) <$> _torMaxPrice])

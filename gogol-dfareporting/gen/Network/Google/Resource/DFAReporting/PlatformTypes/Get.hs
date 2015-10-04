@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.PlatformTypes.Get
     , ptgQuotaUser
     , ptgPrettyPrint
     , ptgUserIP
-    , ptgProfileId
+    , ptgProFileId
     , ptgKey
     , ptgId
     , ptgOAuthToken
@@ -66,7 +66,7 @@ data PlatformTypesGet' = PlatformTypesGet'
     { _ptgQuotaUser   :: !(Maybe Text)
     , _ptgPrettyPrint :: !Bool
     , _ptgUserIP      :: !(Maybe Text)
-    , _ptgProfileId   :: !Int64
+    , _ptgProFileId   :: !Int64
     , _ptgKey         :: !(Maybe Key)
     , _ptgId          :: !Int64
     , _ptgOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +83,7 @@ data PlatformTypesGet' = PlatformTypesGet'
 --
 -- * 'ptgUserIP'
 --
--- * 'ptgProfileId'
+-- * 'ptgProFileId'
 --
 -- * 'ptgKey'
 --
@@ -96,12 +96,12 @@ platformTypesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> PlatformTypesGet'
-platformTypesGet' pPtgProfileId_ pPtgId_ =
+platformTypesGet' pPtgProFileId_ pPtgId_ =
     PlatformTypesGet'
     { _ptgQuotaUser = Nothing
     , _ptgPrettyPrint = True
     , _ptgUserIP = Nothing
-    , _ptgProfileId = pPtgProfileId_
+    , _ptgProFileId = pPtgProFileId_
     , _ptgKey = Nothing
     , _ptgId = pPtgId_
     , _ptgOAuthToken = Nothing
@@ -128,9 +128,9 @@ ptgUserIP
   = lens _ptgUserIP (\ s a -> s{_ptgUserIP = a})
 
 -- | User profile ID associated with this request.
-ptgProfileId :: Lens' PlatformTypesGet' Int64
-ptgProfileId
-  = lens _ptgProfileId (\ s a -> s{_ptgProfileId = a})
+ptgProFileId :: Lens' PlatformTypesGet' Int64
+ptgProFileId
+  = lens _ptgProFileId (\ s a -> s{_ptgProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -161,7 +161,7 @@ instance GoogleRequest PlatformTypesGet' where
         type Rs PlatformTypesGet' = PlatformType
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlatformTypesGet'{..}
-          = go _ptgProfileId _ptgId _ptgQuotaUser
+          = go _ptgProFileId _ptgId _ptgQuotaUser
               (Just _ptgPrettyPrint)
               _ptgUserIP
               _ptgFields

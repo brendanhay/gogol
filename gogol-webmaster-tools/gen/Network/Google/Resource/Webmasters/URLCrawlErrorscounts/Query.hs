@@ -55,10 +55,10 @@ type URLCrawlErrorscountsQueryResource =
          "urlCrawlErrorsCounts" :>
            "query" :>
              QueryParam "platform"
-               WebmastersURLCrawlErrorscountsQueryPlatform
+               URLCrawlErrorscountsQueryPlatform
                :>
                QueryParam "category"
-                 WebmastersURLCrawlErrorscountsQueryCategory
+                 URLCrawlErrorscountsQueryCategory
                  :>
                  QueryParam "latestCountsOnly" Bool :>
                    QueryParam "quotaUser" Text :>
@@ -77,9 +77,9 @@ type URLCrawlErrorscountsQueryResource =
 data URLCrawlErrorscountsQuery' = URLCrawlErrorscountsQuery'
     { _uceqQuotaUser        :: !(Maybe Text)
     , _uceqPrettyPrint      :: !Bool
-    , _uceqPlatform         :: !(Maybe WebmastersURLCrawlErrorscountsQueryPlatform)
+    , _uceqPlatform         :: !(Maybe URLCrawlErrorscountsQueryPlatform)
     , _uceqUserIP           :: !(Maybe Text)
-    , _uceqCategory         :: !(Maybe WebmastersURLCrawlErrorscountsQueryCategory)
+    , _uceqCategory         :: !(Maybe URLCrawlErrorscountsQueryCategory)
     , _uceqSiteURL          :: !Text
     , _uceqKey              :: !(Maybe Key)
     , _uceqLatestCountsOnly :: !Bool
@@ -143,7 +143,7 @@ uceqPrettyPrint
 
 -- | The user agent type (platform) that made the request. For example: web.
 -- If not specified, returns results for all platforms.
-uceqPlatform :: Lens' URLCrawlErrorscountsQuery' (Maybe WebmastersURLCrawlErrorscountsQueryPlatform)
+uceqPlatform :: Lens' URLCrawlErrorscountsQuery' (Maybe URLCrawlErrorscountsQueryPlatform)
 uceqPlatform
   = lens _uceqPlatform (\ s a -> s{_uceqPlatform = a})
 
@@ -155,7 +155,7 @@ uceqUserIP
 
 -- | The crawl error category. For example: serverError. If not specified,
 -- returns results for all categories.
-uceqCategory :: Lens' URLCrawlErrorscountsQuery' (Maybe WebmastersURLCrawlErrorscountsQueryCategory)
+uceqCategory :: Lens' URLCrawlErrorscountsQuery' (Maybe URLCrawlErrorscountsQueryCategory)
 uceqCategory
   = lens _uceqCategory (\ s a -> s{_uceqCategory = a})
 

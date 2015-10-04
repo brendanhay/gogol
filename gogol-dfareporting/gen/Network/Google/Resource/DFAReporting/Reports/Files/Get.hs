@@ -35,7 +35,7 @@ module Network.Google.Resource.DFAReporting.Reports.Files.Get
     , rfgPrettyPrint
     , rfgUserIP
     , rfgReportId
-    , rfgProfileId
+    , rfgProFileId
     , rfgKey
     , rfgFileId
     , rfgOAuthToken
@@ -85,7 +85,7 @@ data ReportsFilesGet' = ReportsFilesGet'
     , _rfgPrettyPrint :: !Bool
     , _rfgUserIP      :: !(Maybe Text)
     , _rfgReportId    :: !Int64
-    , _rfgProfileId   :: !Int64
+    , _rfgProFileId   :: !Int64
     , _rfgKey         :: !(Maybe Key)
     , _rfgFileId      :: !Int64
     , _rfgOAuthToken  :: !(Maybe OAuthToken)
@@ -104,7 +104,7 @@ data ReportsFilesGet' = ReportsFilesGet'
 --
 -- * 'rfgReportId'
 --
--- * 'rfgProfileId'
+-- * 'rfgProFileId'
 --
 -- * 'rfgKey'
 --
@@ -118,13 +118,13 @@ reportsFilesGet'
     -> Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'fileId'
     -> ReportsFilesGet'
-reportsFilesGet' pRfgReportId_ pRfgProfileId_ pRfgFileId_ =
+reportsFilesGet' pRfgReportId_ pRfgProFileId_ pRfgFileId_ =
     ReportsFilesGet'
     { _rfgQuotaUser = Nothing
     , _rfgPrettyPrint = True
     , _rfgUserIP = Nothing
     , _rfgReportId = pRfgReportId_
-    , _rfgProfileId = pRfgProfileId_
+    , _rfgProFileId = pRfgProFileId_
     , _rfgKey = Nothing
     , _rfgFileId = pRfgFileId_
     , _rfgOAuthToken = Nothing
@@ -156,9 +156,9 @@ rfgReportId
   = lens _rfgReportId (\ s a -> s{_rfgReportId = a})
 
 -- | The DFA profile ID.
-rfgProfileId :: Lens' ReportsFilesGet' Int64
-rfgProfileId
-  = lens _rfgProfileId (\ s a -> s{_rfgProfileId = a})
+rfgProFileId :: Lens' ReportsFilesGet' Int64
+rfgProFileId
+  = lens _rfgProFileId (\ s a -> s{_rfgProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -190,7 +190,7 @@ instance GoogleRequest ReportsFilesGet' where
         type Rs ReportsFilesGet' = File
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ReportsFilesGet'{..}
-          = go _rfgProfileId _rfgReportId _rfgFileId
+          = go _rfgProFileId _rfgReportId _rfgFileId
               _rfgQuotaUser
               (Just _rfgPrettyPrint)
               _rfgUserIP
@@ -209,7 +209,7 @@ instance GoogleRequest (Download ReportsFilesGet')
         type Rs (Download ReportsFilesGet') = Body
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u (Download ReportsFilesGet'{..})
-          = go _rfgProfileId _rfgReportId _rfgFileId
+          = go _rfgProFileId _rfgReportId _rfgFileId
               _rfgQuotaUser
               (Just _rfgPrettyPrint)
               _rfgUserIP

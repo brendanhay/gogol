@@ -60,7 +60,7 @@ type ColumnPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Column :> Patch '[JSON] Column
+                           ReqBody '[OctetStream] Column :> Patch '[JSON] Column
 
 -- | Updates the name or type of an existing column. This method supports
 -- patch semantics.

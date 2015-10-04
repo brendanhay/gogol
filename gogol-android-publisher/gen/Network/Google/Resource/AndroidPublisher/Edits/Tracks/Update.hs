@@ -55,9 +55,7 @@ type EditsTracksUpdateResource =
        "edits" :>
          Capture "editId" Text :>
            "tracks" :>
-             Capture "track"
-               AndroidPublisherEditsTracksUpdateTrack
-               :>
+             Capture "track" EditsTracksUpdateTrack :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -65,7 +63,7 @@ type EditsTracksUpdateResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Track :> Put '[JSON] Track
+                             ReqBody '[OctetStream] Track :> Put '[JSON] Track
 
 -- | Updates the track configuration for the specified track type. When
 -- halted, the rollout track cannot be updated without adding new APKs, and
@@ -74,7 +72,7 @@ type EditsTracksUpdateResource =
 -- /See:/ 'editsTracksUpdate'' smart constructor.
 data EditsTracksUpdate' = EditsTracksUpdate'
     { _etuQuotaUser   :: !(Maybe Text)
-    , _etuTrack       :: !AndroidPublisherEditsTracksUpdateTrack
+    , _etuTrack       :: !EditsTracksUpdateTrack
     , _etuPrettyPrint :: !Bool
     , _etuPackageName :: !Text
     , _etuUserIP      :: !(Maybe Text)
@@ -109,7 +107,7 @@ data EditsTracksUpdate' = EditsTracksUpdate'
 --
 -- * 'etuFields'
 editsTracksUpdate'
-    :: AndroidPublisherEditsTracksUpdateTrack -- ^ 'track'
+    :: EditsTracksUpdateTrack -- ^ 'track'
     -> Text -- ^ 'packageName'
     -> Track -- ^ 'payload'
     -> Text -- ^ 'editId'
@@ -136,7 +134,7 @@ etuQuotaUser
   = lens _etuQuotaUser (\ s a -> s{_etuQuotaUser = a})
 
 -- | The track type to read or modify.
-etuTrack :: Lens' EditsTracksUpdate' AndroidPublisherEditsTracksUpdateTrack
+etuTrack :: Lens' EditsTracksUpdate' EditsTracksUpdateTrack
 etuTrack = lens _etuTrack (\ s a -> s{_etuTrack = a})
 
 -- | Returns response with indentations and line breaks.

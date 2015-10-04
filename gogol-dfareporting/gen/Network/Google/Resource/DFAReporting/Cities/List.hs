@@ -35,7 +35,7 @@ module Network.Google.Resource.DFAReporting.Cities.List
     , cPrettyPrint
     , cRegionDartIds
     , cUserIP
-    , cProfileId
+    , cProFileId
     , cNamePrefix
     , cKey
     , cCountryDartIds
@@ -74,7 +74,7 @@ data CitiesList' = CitiesList'
     , _cPrettyPrint    :: !Bool
     , _cRegionDartIds  :: !(Maybe [Int64])
     , _cUserIP         :: !(Maybe Text)
-    , _cProfileId      :: !Int64
+    , _cProFileId      :: !Int64
     , _cNamePrefix     :: !(Maybe Text)
     , _cKey            :: !(Maybe Key)
     , _cCountryDartIds :: !(Maybe [Int64])
@@ -95,7 +95,7 @@ data CitiesList' = CitiesList'
 --
 -- * 'cUserIP'
 --
--- * 'cProfileId'
+-- * 'cProFileId'
 --
 -- * 'cNamePrefix'
 --
@@ -111,13 +111,13 @@ data CitiesList' = CitiesList'
 citiesList'
     :: Int64 -- ^ 'profileId'
     -> CitiesList'
-citiesList' pCProfileId_ =
+citiesList' pCProFileId_ =
     CitiesList'
     { _cQuotaUser = Nothing
     , _cPrettyPrint = True
     , _cRegionDartIds = Nothing
     , _cUserIP = Nothing
-    , _cProfileId = pCProfileId_
+    , _cProFileId = pCProFileId_
     , _cNamePrefix = Nothing
     , _cKey = Nothing
     , _cCountryDartIds = Nothing
@@ -152,9 +152,9 @@ cUserIP :: Lens' CitiesList' (Maybe Text)
 cUserIP = lens _cUserIP (\ s a -> s{_cUserIP = a})
 
 -- | User profile ID associated with this request.
-cProfileId :: Lens' CitiesList' Int64
-cProfileId
-  = lens _cProfileId (\ s a -> s{_cProfileId = a})
+cProFileId :: Lens' CitiesList' Int64
+cProFileId
+  = lens _cProFileId (\ s a -> s{_cProFileId = a})
 
 -- | Select only cities with names starting with this prefix.
 cNamePrefix :: Lens' CitiesList' (Maybe Text)
@@ -199,7 +199,7 @@ instance GoogleRequest CitiesList' where
         type Rs CitiesList' = CitiesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CitiesList'{..}
-          = go _cProfileId (_cRegionDartIds ^. _Default)
+          = go _cProFileId (_cRegionDartIds ^. _Default)
               _cNamePrefix
               (_cCountryDartIds ^. _Default)
               (_cDartIds ^. _Default)

@@ -66,9 +66,7 @@ type TimeseriesListResource =
            QueryParam "youngest" Text :>
              QueryParam "window" Text :>
                QueryParam "count" Int32 :>
-                 QueryParam "aggregator"
-                   CloudMonitoringTimeseriesListAggregator
-                   :>
+                 QueryParam "aggregator" TimeseriesListAggregator :>
                    QueryParam "timespan" Text :>
                      QueryParam "oldest" Text :>
                        QueryParams "labels" Text :>
@@ -80,7 +78,8 @@ type TimeseriesListResource =
                                    QueryParam "key" Key :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
-                                         ReqBody '[JSON] ListTimeseriesRequest
+                                         ReqBody '[OctetStream]
+                                           ListTimeseriesRequest
                                            :> Get '[JSON] ListTimeseriesResponse
 
 -- | List the data points of the time series that match the metric and labels
@@ -98,7 +97,7 @@ data TimeseriesList' = TimeseriesList'
     , _tlUserIP      :: !(Maybe Text)
     , _tlCount       :: !Int32
     , _tlPayload     :: !ListTimeseriesRequest
-    , _tlAggregator  :: !(Maybe CloudMonitoringTimeseriesListAggregator)
+    , _tlAggregator  :: !(Maybe TimeseriesListAggregator)
     , _tlTimespan    :: !(Maybe Text)
     , _tlMetric      :: !Text
     , _tlKey         :: !(Maybe Key)
@@ -219,7 +218,7 @@ tlPayload
 -- | The aggregation function that will reduce the data points in each window
 -- to a single point. This parameter is only valid for non-cumulative
 -- metrics with a value type of INT64 or DOUBLE.
-tlAggregator :: Lens' TimeseriesList' (Maybe CloudMonitoringTimeseriesListAggregator)
+tlAggregator :: Lens' TimeseriesList' (Maybe TimeseriesListAggregator)
 tlAggregator
   = lens _tlAggregator (\ s a -> s{_tlAggregator = a})
 

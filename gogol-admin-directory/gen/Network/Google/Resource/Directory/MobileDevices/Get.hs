@@ -53,9 +53,7 @@ type MobileDevicesGetResource =
          "devices" :>
            "mobile" :>
              Capture "resourceId" Text :>
-               QueryParam "projection"
-                 DirectoryMobileDevicesGetProjection
-                 :>
+               QueryParam "projection" MobileDevicesGetProjection :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -75,7 +73,7 @@ data MobileDevicesGet' = MobileDevicesGet'
     , _mdgUserIP      :: !(Maybe Text)
     , _mdgCustomerId  :: !Text
     , _mdgKey         :: !(Maybe Key)
-    , _mdgProjection  :: !(Maybe DirectoryMobileDevicesGetProjection)
+    , _mdgProjection  :: !(Maybe MobileDevicesGetProjection)
     , _mdgOAuthToken  :: !(Maybe OAuthToken)
     , _mdgFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -156,7 +154,7 @@ mdgKey :: Lens' MobileDevicesGet' (Maybe Key)
 mdgKey = lens _mdgKey (\ s a -> s{_mdgKey = a})
 
 -- | Restrict information returned to a set of selected fields.
-mdgProjection :: Lens' MobileDevicesGet' (Maybe DirectoryMobileDevicesGetProjection)
+mdgProjection :: Lens' MobileDevicesGet' (Maybe MobileDevicesGetProjection)
 mdgProjection
   = lens _mdgProjection
       (\ s a -> s{_mdgProjection = a})

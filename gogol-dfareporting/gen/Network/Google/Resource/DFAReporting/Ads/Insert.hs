@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Ads.Insert
     , aiQuotaUser
     , aiPrettyPrint
     , aiUserIP
-    , aiProfileId
+    , aiProFileId
     , aiPayload
     , aiKey
     , aiOAuthToken
@@ -57,7 +57,7 @@ type AdsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Ad :> Post '[JSON] Ad
+                         ReqBody '[OctetStream] Ad :> Post '[JSON] Ad
 
 -- | Inserts a new ad.
 --
@@ -66,7 +66,7 @@ data AdsInsert' = AdsInsert'
     { _aiQuotaUser   :: !(Maybe Text)
     , _aiPrettyPrint :: !Bool
     , _aiUserIP      :: !(Maybe Text)
-    , _aiProfileId   :: !Int64
+    , _aiProFileId   :: !Int64
     , _aiPayload     :: !Ad
     , _aiKey         :: !(Maybe Key)
     , _aiOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +83,7 @@ data AdsInsert' = AdsInsert'
 --
 -- * 'aiUserIP'
 --
--- * 'aiProfileId'
+-- * 'aiProFileId'
 --
 -- * 'aiPayload'
 --
@@ -96,12 +96,12 @@ adsInsert'
     :: Int64 -- ^ 'profileId'
     -> Ad -- ^ 'payload'
     -> AdsInsert'
-adsInsert' pAiProfileId_ pAiPayload_ =
+adsInsert' pAiProFileId_ pAiPayload_ =
     AdsInsert'
     { _aiQuotaUser = Nothing
     , _aiPrettyPrint = True
     , _aiUserIP = Nothing
-    , _aiProfileId = pAiProfileId_
+    , _aiProFileId = pAiProFileId_
     , _aiPayload = pAiPayload_
     , _aiKey = Nothing
     , _aiOAuthToken = Nothing
@@ -127,9 +127,9 @@ aiUserIP :: Lens' AdsInsert' (Maybe Text)
 aiUserIP = lens _aiUserIP (\ s a -> s{_aiUserIP = a})
 
 -- | User profile ID associated with this request.
-aiProfileId :: Lens' AdsInsert' Int64
-aiProfileId
-  = lens _aiProfileId (\ s a -> s{_aiProfileId = a})
+aiProFileId :: Lens' AdsInsert' Int64
+aiProFileId
+  = lens _aiProFileId (\ s a -> s{_aiProFileId = a})
 
 -- | Multipart request metadata.
 aiPayload :: Lens' AdsInsert' Ad
@@ -159,7 +159,7 @@ instance GoogleRequest AdsInsert' where
         type Rs AdsInsert' = Ad
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdsInsert'{..}
-          = go _aiProfileId _aiQuotaUser (Just _aiPrettyPrint)
+          = go _aiProFileId _aiQuotaUser (Just _aiPrettyPrint)
               _aiUserIP
               _aiFields
               _aiKey

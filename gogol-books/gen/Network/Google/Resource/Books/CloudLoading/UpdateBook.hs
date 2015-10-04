@@ -55,7 +55,7 @@ type CloudLoadingUpdateBookResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] BooksCloudLoadingResource :>
+                       ReqBody '[OctetStream] BooksCloudLoadingResource :>
                          Post '[JSON] BooksCloudLoadingResource
 
 -- |

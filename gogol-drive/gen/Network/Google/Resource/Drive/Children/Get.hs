@@ -31,14 +31,14 @@ module Network.Google.Resource.Drive.Children.Get
     , ChildrenGet'
 
     -- * Request Lenses
-    , chiQuotaUser
-    , chiPrettyPrint
-    , chiUserIP
-    , chiFolderId
-    , chiKey
-    , chiChildId
-    , chiOAuthToken
-    , chiFields
+    , cggQuotaUser
+    , cggPrettyPrint
+    , cggUserIP
+    , cggFolderId
+    , cggKey
+    , cggChildId
+    , cggOAuthToken
+    , cggFields
     ) where
 
 import           Network.Google.Drive.Types
@@ -64,111 +64,111 @@ type ChildrenGetResource =
 --
 -- /See:/ 'childrenGet'' smart constructor.
 data ChildrenGet' = ChildrenGet'
-    { _chiQuotaUser   :: !(Maybe Text)
-    , _chiPrettyPrint :: !Bool
-    , _chiUserIP      :: !(Maybe Text)
-    , _chiFolderId    :: !Text
-    , _chiKey         :: !(Maybe Key)
-    , _chiChildId     :: !Text
-    , _chiOAuthToken  :: !(Maybe OAuthToken)
-    , _chiFields      :: !(Maybe Text)
+    { _cggQuotaUser   :: !(Maybe Text)
+    , _cggPrettyPrint :: !Bool
+    , _cggUserIP      :: !(Maybe Text)
+    , _cggFolderId    :: !Text
+    , _cggKey         :: !(Maybe Key)
+    , _cggChildId     :: !Text
+    , _cggOAuthToken  :: !(Maybe OAuthToken)
+    , _cggFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChildrenGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'chiQuotaUser'
+-- * 'cggQuotaUser'
 --
--- * 'chiPrettyPrint'
+-- * 'cggPrettyPrint'
 --
--- * 'chiUserIP'
+-- * 'cggUserIP'
 --
--- * 'chiFolderId'
+-- * 'cggFolderId'
 --
--- * 'chiKey'
+-- * 'cggKey'
 --
--- * 'chiChildId'
+-- * 'cggChildId'
 --
--- * 'chiOAuthToken'
+-- * 'cggOAuthToken'
 --
--- * 'chiFields'
+-- * 'cggFields'
 childrenGet'
     :: Text -- ^ 'folderId'
     -> Text -- ^ 'childId'
     -> ChildrenGet'
-childrenGet' pChiFolderId_ pChiChildId_ =
+childrenGet' pCggFolderId_ pCggChildId_ =
     ChildrenGet'
-    { _chiQuotaUser = Nothing
-    , _chiPrettyPrint = True
-    , _chiUserIP = Nothing
-    , _chiFolderId = pChiFolderId_
-    , _chiKey = Nothing
-    , _chiChildId = pChiChildId_
-    , _chiOAuthToken = Nothing
-    , _chiFields = Nothing
+    { _cggQuotaUser = Nothing
+    , _cggPrettyPrint = True
+    , _cggUserIP = Nothing
+    , _cggFolderId = pCggFolderId_
+    , _cggKey = Nothing
+    , _cggChildId = pCggChildId_
+    , _cggOAuthToken = Nothing
+    , _cggFields = Nothing
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-chiQuotaUser :: Lens' ChildrenGet' (Maybe Text)
-chiQuotaUser
-  = lens _chiQuotaUser (\ s a -> s{_chiQuotaUser = a})
+cggQuotaUser :: Lens' ChildrenGet' (Maybe Text)
+cggQuotaUser
+  = lens _cggQuotaUser (\ s a -> s{_cggQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-chiPrettyPrint :: Lens' ChildrenGet' Bool
-chiPrettyPrint
-  = lens _chiPrettyPrint
-      (\ s a -> s{_chiPrettyPrint = a})
+cggPrettyPrint :: Lens' ChildrenGet' Bool
+cggPrettyPrint
+  = lens _cggPrettyPrint
+      (\ s a -> s{_cggPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-chiUserIP :: Lens' ChildrenGet' (Maybe Text)
-chiUserIP
-  = lens _chiUserIP (\ s a -> s{_chiUserIP = a})
+cggUserIP :: Lens' ChildrenGet' (Maybe Text)
+cggUserIP
+  = lens _cggUserIP (\ s a -> s{_cggUserIP = a})
 
 -- | The ID of the folder.
-chiFolderId :: Lens' ChildrenGet' Text
-chiFolderId
-  = lens _chiFolderId (\ s a -> s{_chiFolderId = a})
+cggFolderId :: Lens' ChildrenGet' Text
+cggFolderId
+  = lens _cggFolderId (\ s a -> s{_cggFolderId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-chiKey :: Lens' ChildrenGet' (Maybe Key)
-chiKey = lens _chiKey (\ s a -> s{_chiKey = a})
+cggKey :: Lens' ChildrenGet' (Maybe Key)
+cggKey = lens _cggKey (\ s a -> s{_cggKey = a})
 
 -- | The ID of the child.
-chiChildId :: Lens' ChildrenGet' Text
-chiChildId
-  = lens _chiChildId (\ s a -> s{_chiChildId = a})
+cggChildId :: Lens' ChildrenGet' Text
+cggChildId
+  = lens _cggChildId (\ s a -> s{_cggChildId = a})
 
 -- | OAuth 2.0 token for the current user.
-chiOAuthToken :: Lens' ChildrenGet' (Maybe OAuthToken)
-chiOAuthToken
-  = lens _chiOAuthToken
-      (\ s a -> s{_chiOAuthToken = a})
+cggOAuthToken :: Lens' ChildrenGet' (Maybe OAuthToken)
+cggOAuthToken
+  = lens _cggOAuthToken
+      (\ s a -> s{_cggOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-chiFields :: Lens' ChildrenGet' (Maybe Text)
-chiFields
-  = lens _chiFields (\ s a -> s{_chiFields = a})
+cggFields :: Lens' ChildrenGet' (Maybe Text)
+cggFields
+  = lens _cggFields (\ s a -> s{_cggFields = a})
 
 instance GoogleAuth ChildrenGet' where
-        authKey = chiKey . _Just
-        authToken = chiOAuthToken . _Just
+        authKey = cggKey . _Just
+        authToken = cggOAuthToken . _Just
 
 instance GoogleRequest ChildrenGet' where
         type Rs ChildrenGet' = ChildReference
         request = requestWithRoute defReq driveURL
         requestWithRoute r u ChildrenGet'{..}
-          = go _chiFolderId _chiChildId _chiQuotaUser
-              (Just _chiPrettyPrint)
-              _chiUserIP
-              _chiFields
-              _chiKey
-              _chiOAuthToken
+          = go _cggFolderId _cggChildId _cggQuotaUser
+              (Just _cggPrettyPrint)
+              _cggUserIP
+              _cggFields
+              _cggKey
+              _cggOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

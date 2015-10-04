@@ -35,7 +35,7 @@ module Network.Google.Resource.Analytics.Management.UnSampledReports.List
     , musrlPrettyPrint
     , musrlWebPropertyId
     , musrlUserIP
-    , musrlProfileId
+    , musrlProFileId
     , musrlAccountId
     , musrlKey
     , musrlOAuthToken
@@ -77,7 +77,7 @@ data ManagementUnSampledReportsList' = ManagementUnSampledReportsList'
     , _musrlPrettyPrint   :: !Bool
     , _musrlWebPropertyId :: !Text
     , _musrlUserIP        :: !(Maybe Text)
-    , _musrlProfileId     :: !Text
+    , _musrlProFileId     :: !Text
     , _musrlAccountId     :: !Text
     , _musrlKey           :: !(Maybe Key)
     , _musrlOAuthToken    :: !(Maybe OAuthToken)
@@ -98,7 +98,7 @@ data ManagementUnSampledReportsList' = ManagementUnSampledReportsList'
 --
 -- * 'musrlUserIP'
 --
--- * 'musrlProfileId'
+-- * 'musrlProFileId'
 --
 -- * 'musrlAccountId'
 --
@@ -116,13 +116,13 @@ managementUnSampledReportsList'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
     -> ManagementUnSampledReportsList'
-managementUnSampledReportsList' pMusrlWebPropertyId_ pMusrlProfileId_ pMusrlAccountId_ =
+managementUnSampledReportsList' pMusrlWebPropertyId_ pMusrlProFileId_ pMusrlAccountId_ =
     ManagementUnSampledReportsList'
     { _musrlQuotaUser = Nothing
     , _musrlPrettyPrint = False
     , _musrlWebPropertyId = pMusrlWebPropertyId_
     , _musrlUserIP = Nothing
-    , _musrlProfileId = pMusrlProfileId_
+    , _musrlProFileId = pMusrlProFileId_
     , _musrlAccountId = pMusrlAccountId_
     , _musrlKey = Nothing
     , _musrlOAuthToken = Nothing
@@ -160,10 +160,10 @@ musrlUserIP
 
 -- | View (Profile) ID to retrieve unsampled reports for. Must be a specific
 -- view (profile) ID, ~all is not supported.
-musrlProfileId :: Lens' ManagementUnSampledReportsList' Text
-musrlProfileId
-  = lens _musrlProfileId
-      (\ s a -> s{_musrlProfileId = a})
+musrlProFileId :: Lens' ManagementUnSampledReportsList' Text
+musrlProFileId
+  = lens _musrlProFileId
+      (\ s a -> s{_musrlProFileId = a})
 
 -- | Account ID to retrieve unsampled reports for. Must be a specific account
 -- ID, ~all is not supported.
@@ -215,7 +215,7 @@ instance GoogleRequest
         requestWithRoute r u
           ManagementUnSampledReportsList'{..}
           = go _musrlAccountId _musrlWebPropertyId
-              _musrlProfileId
+              _musrlProFileId
               _musrlStartIndex
               _musrlMaxResults
               _musrlQuotaUser

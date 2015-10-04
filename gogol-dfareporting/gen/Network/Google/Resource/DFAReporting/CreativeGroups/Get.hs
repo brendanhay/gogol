@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.CreativeGroups.Get
     , cggQuotaUser
     , cggPrettyPrint
     , cggUserIP
-    , cggProfileId
+    , cggProFileId
     , cggKey
     , cggId
     , cggOAuthToken
@@ -66,7 +66,7 @@ data CreativeGroupsGet' = CreativeGroupsGet'
     { _cggQuotaUser   :: !(Maybe Text)
     , _cggPrettyPrint :: !Bool
     , _cggUserIP      :: !(Maybe Text)
-    , _cggProfileId   :: !Int64
+    , _cggProFileId   :: !Int64
     , _cggKey         :: !(Maybe Key)
     , _cggId          :: !Int64
     , _cggOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +83,7 @@ data CreativeGroupsGet' = CreativeGroupsGet'
 --
 -- * 'cggUserIP'
 --
--- * 'cggProfileId'
+-- * 'cggProFileId'
 --
 -- * 'cggKey'
 --
@@ -96,12 +96,12 @@ creativeGroupsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> CreativeGroupsGet'
-creativeGroupsGet' pCggProfileId_ pCggId_ =
+creativeGroupsGet' pCggProFileId_ pCggId_ =
     CreativeGroupsGet'
     { _cggQuotaUser = Nothing
     , _cggPrettyPrint = True
     , _cggUserIP = Nothing
-    , _cggProfileId = pCggProfileId_
+    , _cggProFileId = pCggProFileId_
     , _cggKey = Nothing
     , _cggId = pCggId_
     , _cggOAuthToken = Nothing
@@ -128,9 +128,9 @@ cggUserIP
   = lens _cggUserIP (\ s a -> s{_cggUserIP = a})
 
 -- | User profile ID associated with this request.
-cggProfileId :: Lens' CreativeGroupsGet' Int64
-cggProfileId
-  = lens _cggProfileId (\ s a -> s{_cggProfileId = a})
+cggProFileId :: Lens' CreativeGroupsGet' Int64
+cggProFileId
+  = lens _cggProFileId (\ s a -> s{_cggProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -161,7 +161,7 @@ instance GoogleRequest CreativeGroupsGet' where
         type Rs CreativeGroupsGet' = CreativeGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeGroupsGet'{..}
-          = go _cggProfileId _cggId _cggQuotaUser
+          = go _cggProFileId _cggId _cggQuotaUser
               (Just _cggPrettyPrint)
               _cggUserIP
               _cggFields

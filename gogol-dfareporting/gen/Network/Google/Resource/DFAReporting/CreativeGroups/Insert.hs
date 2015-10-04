@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.CreativeGroups.Insert
     , cgiQuotaUser
     , cgiPrettyPrint
     , cgiUserIP
-    , cgiProfileId
+    , cgiProFileId
     , cgiPayload
     , cgiKey
     , cgiOAuthToken
@@ -57,7 +57,7 @@ type CreativeGroupsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] CreativeGroup :>
+                         ReqBody '[OctetStream] CreativeGroup :>
                            Post '[JSON] CreativeGroup
 
 -- | Inserts a new creative group.
@@ -67,7 +67,7 @@ data CreativeGroupsInsert' = CreativeGroupsInsert'
     { _cgiQuotaUser   :: !(Maybe Text)
     , _cgiPrettyPrint :: !Bool
     , _cgiUserIP      :: !(Maybe Text)
-    , _cgiProfileId   :: !Int64
+    , _cgiProFileId   :: !Int64
     , _cgiPayload     :: !CreativeGroup
     , _cgiKey         :: !(Maybe Key)
     , _cgiOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data CreativeGroupsInsert' = CreativeGroupsInsert'
 --
 -- * 'cgiUserIP'
 --
--- * 'cgiProfileId'
+-- * 'cgiProFileId'
 --
 -- * 'cgiPayload'
 --
@@ -97,12 +97,12 @@ creativeGroupsInsert'
     :: Int64 -- ^ 'profileId'
     -> CreativeGroup -- ^ 'payload'
     -> CreativeGroupsInsert'
-creativeGroupsInsert' pCgiProfileId_ pCgiPayload_ =
+creativeGroupsInsert' pCgiProFileId_ pCgiPayload_ =
     CreativeGroupsInsert'
     { _cgiQuotaUser = Nothing
     , _cgiPrettyPrint = True
     , _cgiUserIP = Nothing
-    , _cgiProfileId = pCgiProfileId_
+    , _cgiProFileId = pCgiProFileId_
     , _cgiPayload = pCgiPayload_
     , _cgiKey = Nothing
     , _cgiOAuthToken = Nothing
@@ -129,9 +129,9 @@ cgiUserIP
   = lens _cgiUserIP (\ s a -> s{_cgiUserIP = a})
 
 -- | User profile ID associated with this request.
-cgiProfileId :: Lens' CreativeGroupsInsert' Int64
-cgiProfileId
-  = lens _cgiProfileId (\ s a -> s{_cgiProfileId = a})
+cgiProFileId :: Lens' CreativeGroupsInsert' Int64
+cgiProFileId
+  = lens _cgiProFileId (\ s a -> s{_cgiProFileId = a})
 
 -- | Multipart request metadata.
 cgiPayload :: Lens' CreativeGroupsInsert' CreativeGroup
@@ -163,7 +163,7 @@ instance GoogleRequest CreativeGroupsInsert' where
         type Rs CreativeGroupsInsert' = CreativeGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeGroupsInsert'{..}
-          = go _cgiProfileId _cgiQuotaUser
+          = go _cgiProFileId _cgiQuotaUser
               (Just _cgiPrettyPrint)
               _cgiUserIP
               _cgiFields

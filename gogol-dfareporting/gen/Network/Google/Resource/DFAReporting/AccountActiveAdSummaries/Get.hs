@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.AccountActiveAdSummaries.Get
     , aaasgQuotaUser
     , aaasgPrettyPrint
     , aaasgUserIP
-    , aaasgProfileId
+    , aaasgProFileId
     , aaasgKey
     , aaasgSummaryAccountId
     , aaasgOAuthToken
@@ -67,7 +67,7 @@ data AccountActiveAdSummariesGet' = AccountActiveAdSummariesGet'
     { _aaasgQuotaUser        :: !(Maybe Text)
     , _aaasgPrettyPrint      :: !Bool
     , _aaasgUserIP           :: !(Maybe Text)
-    , _aaasgProfileId        :: !Int64
+    , _aaasgProFileId        :: !Int64
     , _aaasgKey              :: !(Maybe Key)
     , _aaasgSummaryAccountId :: !Int64
     , _aaasgOAuthToken       :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data AccountActiveAdSummariesGet' = AccountActiveAdSummariesGet'
 --
 -- * 'aaasgUserIP'
 --
--- * 'aaasgProfileId'
+-- * 'aaasgProFileId'
 --
 -- * 'aaasgKey'
 --
@@ -97,12 +97,12 @@ accountActiveAdSummariesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'summaryAccountId'
     -> AccountActiveAdSummariesGet'
-accountActiveAdSummariesGet' pAaasgProfileId_ pAaasgSummaryAccountId_ =
+accountActiveAdSummariesGet' pAaasgProFileId_ pAaasgSummaryAccountId_ =
     AccountActiveAdSummariesGet'
     { _aaasgQuotaUser = Nothing
     , _aaasgPrettyPrint = True
     , _aaasgUserIP = Nothing
-    , _aaasgProfileId = pAaasgProfileId_
+    , _aaasgProFileId = pAaasgProFileId_
     , _aaasgKey = Nothing
     , _aaasgSummaryAccountId = pAaasgSummaryAccountId_
     , _aaasgOAuthToken = Nothing
@@ -130,10 +130,10 @@ aaasgUserIP
   = lens _aaasgUserIP (\ s a -> s{_aaasgUserIP = a})
 
 -- | User profile ID associated with this request.
-aaasgProfileId :: Lens' AccountActiveAdSummariesGet' Int64
-aaasgProfileId
-  = lens _aaasgProfileId
-      (\ s a -> s{_aaasgProfileId = a})
+aaasgProFileId :: Lens' AccountActiveAdSummariesGet' Int64
+aaasgProFileId
+  = lens _aaasgProFileId
+      (\ s a -> s{_aaasgProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -169,7 +169,7 @@ instance GoogleRequest AccountActiveAdSummariesGet'
              AccountActiveAdSummary
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AccountActiveAdSummariesGet'{..}
-          = go _aaasgProfileId _aaasgSummaryAccountId
+          = go _aaasgProFileId _aaasgSummaryAccountId
               _aaasgQuotaUser
               (Just _aaasgPrettyPrint)
               _aaasgUserIP

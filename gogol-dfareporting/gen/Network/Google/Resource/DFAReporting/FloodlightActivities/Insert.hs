@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.FloodlightActivities.Insert
     , faiQuotaUser
     , faiPrettyPrint
     , faiUserIP
-    , faiProfileId
+    , faiProFileId
     , faiPayload
     , faiKey
     , faiOAuthToken
@@ -57,7 +57,7 @@ type FloodlightActivitiesInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] FloodlightActivity :>
+                         ReqBody '[OctetStream] FloodlightActivity :>
                            Post '[JSON] FloodlightActivity
 
 -- | Inserts a new floodlight activity.
@@ -67,7 +67,7 @@ data FloodlightActivitiesInsert' = FloodlightActivitiesInsert'
     { _faiQuotaUser   :: !(Maybe Text)
     , _faiPrettyPrint :: !Bool
     , _faiUserIP      :: !(Maybe Text)
-    , _faiProfileId   :: !Int64
+    , _faiProFileId   :: !Int64
     , _faiPayload     :: !FloodlightActivity
     , _faiKey         :: !(Maybe Key)
     , _faiOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data FloodlightActivitiesInsert' = FloodlightActivitiesInsert'
 --
 -- * 'faiUserIP'
 --
--- * 'faiProfileId'
+-- * 'faiProFileId'
 --
 -- * 'faiPayload'
 --
@@ -97,12 +97,12 @@ floodlightActivitiesInsert'
     :: Int64 -- ^ 'profileId'
     -> FloodlightActivity -- ^ 'payload'
     -> FloodlightActivitiesInsert'
-floodlightActivitiesInsert' pFaiProfileId_ pFaiPayload_ =
+floodlightActivitiesInsert' pFaiProFileId_ pFaiPayload_ =
     FloodlightActivitiesInsert'
     { _faiQuotaUser = Nothing
     , _faiPrettyPrint = True
     , _faiUserIP = Nothing
-    , _faiProfileId = pFaiProfileId_
+    , _faiProFileId = pFaiProFileId_
     , _faiPayload = pFaiPayload_
     , _faiKey = Nothing
     , _faiOAuthToken = Nothing
@@ -129,9 +129,9 @@ faiUserIP
   = lens _faiUserIP (\ s a -> s{_faiUserIP = a})
 
 -- | User profile ID associated with this request.
-faiProfileId :: Lens' FloodlightActivitiesInsert' Int64
-faiProfileId
-  = lens _faiProfileId (\ s a -> s{_faiProfileId = a})
+faiProFileId :: Lens' FloodlightActivitiesInsert' Int64
+faiProFileId
+  = lens _faiProFileId (\ s a -> s{_faiProFileId = a})
 
 -- | Multipart request metadata.
 faiPayload :: Lens' FloodlightActivitiesInsert' FloodlightActivity
@@ -165,7 +165,7 @@ instance GoogleRequest FloodlightActivitiesInsert'
              FloodlightActivity
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u FloodlightActivitiesInsert'{..}
-          = go _faiProfileId _faiQuotaUser
+          = go _faiProFileId _faiQuotaUser
               (Just _faiPrettyPrint)
               _faiUserIP
               _faiFields

@@ -50,14 +50,8 @@ module Network.Google.Classroom.Types
     , Teacher
     , teacher
     , tCourseId
-    , tProfile
+    , tProFile
     , tUserId
-
-    -- * ListCoursesResponse
-    , ListCoursesResponse
-    , listCoursesResponse
-    , lcrNextPageToken
-    , lcrCourses
 
     -- * Name
     , Name
@@ -66,14 +60,20 @@ module Network.Google.Classroom.Types
     , nFullName
     , nFamilyName
 
-    -- * UserProfile
-    , UserProfile
-    , userProfile
-    , upPhotoURL
-    , upName
-    , upEmailAddress
-    , upId
-    , upPermissions
+    -- * ListCoursesResponse
+    , ListCoursesResponse
+    , listCoursesResponse
+    , lcrNextPageToken
+    , lcrCourses
+
+    -- * UserProFile
+    , UserProFile
+    , userProFile
+    , upfPhotoURL
+    , upfName
+    , upfEmailAddress
+    , upfId
+    , upfPermissions
 
     -- * Course
     , Course
@@ -112,7 +112,7 @@ module Network.Google.Classroom.Types
     , Student
     , student
     , sCourseId
-    , sProfile
+    , sProFile
     , sUserId
     ) where
 

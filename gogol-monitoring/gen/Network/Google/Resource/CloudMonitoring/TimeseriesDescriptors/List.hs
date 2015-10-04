@@ -66,7 +66,9 @@ type TimeseriesDescriptorsListResource =
            QueryParam "youngest" Text :>
              QueryParam "window" Text :>
                QueryParam "count" Int32 :>
-                 QueryParam "aggregator" Aggregator :>
+                 QueryParam "aggregator"
+                   TimeseriesDescriptorsListAggregator
+                   :>
                    QueryParam "timespan" Text :>
                      QueryParam "oldest" Text :>
                        QueryParams "labels" Text :>
@@ -78,7 +80,7 @@ type TimeseriesDescriptorsListResource =
                                    QueryParam "key" Key :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
-                                         ReqBody '[JSON]
+                                         ReqBody '[OctetStream]
                                            ListTimeseriesDescriptorsRequest
                                            :>
                                            Get '[JSON]
@@ -99,7 +101,7 @@ data TimeseriesDescriptorsList' = TimeseriesDescriptorsList'
     , _tUserIP      :: !(Maybe Text)
     , _tCount       :: !Int32
     , _tPayload     :: !ListTimeseriesDescriptorsRequest
-    , _tAggregator  :: !(Maybe Aggregator)
+    , _tAggregator  :: !(Maybe TimeseriesDescriptorsListAggregator)
     , _tTimespan    :: !(Maybe Text)
     , _tMetric      :: !Text
     , _tKey         :: !(Maybe Key)
@@ -217,7 +219,7 @@ tPayload = lens _tPayload (\ s a -> s{_tPayload = a})
 -- | The aggregation function that will reduce the data points in each window
 -- to a single point. This parameter is only valid for non-cumulative
 -- metrics with a value type of INT64 or DOUBLE.
-tAggregator :: Lens' TimeseriesDescriptorsList' (Maybe Aggregator)
+tAggregator :: Lens' TimeseriesDescriptorsList' (Maybe TimeseriesDescriptorsListAggregator)
 tAggregator
   = lens _tAggregator (\ s a -> s{_tAggregator = a})
 

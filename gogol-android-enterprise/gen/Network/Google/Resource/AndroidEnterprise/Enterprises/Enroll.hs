@@ -57,7 +57,8 @@ type EnterprisesEnrollResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Enterprise :> Post '[JSON] Enterprise
+                         ReqBody '[OctetStream] Enterprise :>
+                           Post '[JSON] Enterprise
 
 -- | Enrolls an enterprise with the calling MDM.
 --

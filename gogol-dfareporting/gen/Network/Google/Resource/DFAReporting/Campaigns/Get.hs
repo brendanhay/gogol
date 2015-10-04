@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Campaigns.Get
     , camaQuotaUser
     , camaPrettyPrint
     , camaUserIP
-    , camaProfileId
+    , camaProFileId
     , camaKey
     , camaId
     , camaOAuthToken
@@ -66,7 +66,7 @@ data CampaignsGet' = CampaignsGet'
     { _camaQuotaUser   :: !(Maybe Text)
     , _camaPrettyPrint :: !Bool
     , _camaUserIP      :: !(Maybe Text)
-    , _camaProfileId   :: !Int64
+    , _camaProFileId   :: !Int64
     , _camaKey         :: !(Maybe Key)
     , _camaId          :: !Int64
     , _camaOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +83,7 @@ data CampaignsGet' = CampaignsGet'
 --
 -- * 'camaUserIP'
 --
--- * 'camaProfileId'
+-- * 'camaProFileId'
 --
 -- * 'camaKey'
 --
@@ -96,12 +96,12 @@ campaignsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> CampaignsGet'
-campaignsGet' pCamaProfileId_ pCamaId_ =
+campaignsGet' pCamaProFileId_ pCamaId_ =
     CampaignsGet'
     { _camaQuotaUser = Nothing
     , _camaPrettyPrint = True
     , _camaUserIP = Nothing
-    , _camaProfileId = pCamaProfileId_
+    , _camaProFileId = pCamaProFileId_
     , _camaKey = Nothing
     , _camaId = pCamaId_
     , _camaOAuthToken = Nothing
@@ -129,10 +129,10 @@ camaUserIP
   = lens _camaUserIP (\ s a -> s{_camaUserIP = a})
 
 -- | User profile ID associated with this request.
-camaProfileId :: Lens' CampaignsGet' Int64
-camaProfileId
-  = lens _camaProfileId
-      (\ s a -> s{_camaProfileId = a})
+camaProFileId :: Lens' CampaignsGet' Int64
+camaProFileId
+  = lens _camaProFileId
+      (\ s a -> s{_camaProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -163,7 +163,7 @@ instance GoogleRequest CampaignsGet' where
         type Rs CampaignsGet' = Campaign
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CampaignsGet'{..}
-          = go _camaProfileId _camaId _camaQuotaUser
+          = go _camaProFileId _camaId _camaQuotaUser
               (Just _camaPrettyPrint)
               _camaUserIP
               _camaFields

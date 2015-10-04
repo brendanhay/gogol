@@ -53,12 +53,12 @@ type RepresentativesRepresentativeInfoByAddressResource
      =
      "representatives" :>
        QueryParams "roles"
-         CivicInfoRepresentativesRepresentativeInfoByAddressRoles
+         RepresentativesRepresentativeInfoByAddressRoles
          :>
          QueryParam "address" Text :>
            QueryParam "includeOffices" Bool :>
              QueryParams "levels"
-               CivicInfoRepresentativesRepresentativeInfoByAddressLevels
+               RepresentativesRepresentativeInfoByAddressLevels
                :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
@@ -75,13 +75,13 @@ type RepresentativesRepresentativeInfoByAddressResource
 -- /See:/ 'representativesRepresentativeInfoByAddress'' smart constructor.
 data RepresentativesRepresentativeInfoByAddress' = RepresentativesRepresentativeInfoByAddress'
     { _rribaQuotaUser      :: !(Maybe Text)
-    , _rribaRoles          :: !(Maybe [CivicInfoRepresentativesRepresentativeInfoByAddressRoles])
+    , _rribaRoles          :: !(Maybe [RepresentativesRepresentativeInfoByAddressRoles])
     , _rribaPrettyPrint    :: !Bool
     , _rribaUserIP         :: !(Maybe Text)
     , _rribaAddress        :: !(Maybe Text)
     , _rribaKey            :: !(Maybe Key)
     , _rribaIncludeOffices :: !Bool
-    , _rribaLevels         :: !(Maybe [CivicInfoRepresentativesRepresentativeInfoByAddressLevels])
+    , _rribaLevels         :: !(Maybe [RepresentativesRepresentativeInfoByAddressLevels])
     , _rribaOAuthToken     :: !(Maybe OAuthToken)
     , _rribaFields         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -136,7 +136,7 @@ rribaQuotaUser
 -- | A list of office roles to filter by. Only offices fulfilling one of
 -- these roles will be returned. Divisions that don\'t contain a matching
 -- office will not be returned.
-rribaRoles :: Lens' RepresentativesRepresentativeInfoByAddress' [CivicInfoRepresentativesRepresentativeInfoByAddressRoles]
+rribaRoles :: Lens' RepresentativesRepresentativeInfoByAddress' [RepresentativesRepresentativeInfoByAddressRoles]
 rribaRoles
   = lens _rribaRoles (\ s a -> s{_rribaRoles = a}) .
       _Default
@@ -176,7 +176,7 @@ rribaIncludeOffices
 -- | A list of office levels to filter by. Only offices that serve at least
 -- one of these levels will be returned. Divisions that don\'t contain a
 -- matching office will not be returned.
-rribaLevels :: Lens' RepresentativesRepresentativeInfoByAddress' [CivicInfoRepresentativesRepresentativeInfoByAddressLevels]
+rribaLevels :: Lens' RepresentativesRepresentativeInfoByAddress' [RepresentativesRepresentativeInfoByAddressLevels]
 rribaLevels
   = lens _rribaLevels (\ s a -> s{_rribaLevels = a}) .
       _Default

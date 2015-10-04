@@ -35,7 +35,7 @@ module Network.Google.Resource.DFAReporting.FloodlightConfigurations.List
     , fclPrettyPrint
     , fclUserIP
     , fclIds
-    , fclProfileId
+    , fclProFileId
     , fclKey
     , fclOAuthToken
     , fclFields
@@ -68,7 +68,7 @@ data FloodlightConfigurationsList' = FloodlightConfigurationsList'
     , _fclPrettyPrint :: !Bool
     , _fclUserIP      :: !(Maybe Text)
     , _fclIds         :: !(Maybe [Int64])
-    , _fclProfileId   :: !Int64
+    , _fclProFileId   :: !Int64
     , _fclKey         :: !(Maybe Key)
     , _fclOAuthToken  :: !(Maybe OAuthToken)
     , _fclFields      :: !(Maybe Text)
@@ -86,7 +86,7 @@ data FloodlightConfigurationsList' = FloodlightConfigurationsList'
 --
 -- * 'fclIds'
 --
--- * 'fclProfileId'
+-- * 'fclProFileId'
 --
 -- * 'fclKey'
 --
@@ -96,13 +96,13 @@ data FloodlightConfigurationsList' = FloodlightConfigurationsList'
 floodlightConfigurationsList'
     :: Int64 -- ^ 'profileId'
     -> FloodlightConfigurationsList'
-floodlightConfigurationsList' pFclProfileId_ =
+floodlightConfigurationsList' pFclProFileId_ =
     FloodlightConfigurationsList'
     { _fclQuotaUser = Nothing
     , _fclPrettyPrint = True
     , _fclUserIP = Nothing
     , _fclIds = Nothing
-    , _fclProfileId = pFclProfileId_
+    , _fclProFileId = pFclProFileId_
     , _fclKey = Nothing
     , _fclOAuthToken = Nothing
     , _fclFields = Nothing
@@ -135,9 +135,9 @@ fclIds
       _Coerce
 
 -- | User profile ID associated with this request.
-fclProfileId :: Lens' FloodlightConfigurationsList' Int64
-fclProfileId
-  = lens _fclProfileId (\ s a -> s{_fclProfileId = a})
+fclProFileId :: Lens' FloodlightConfigurationsList' Int64
+fclProFileId
+  = lens _fclProFileId (\ s a -> s{_fclProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -168,7 +168,7 @@ instance GoogleRequest FloodlightConfigurationsList'
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           FloodlightConfigurationsList'{..}
-          = go _fclProfileId (_fclIds ^. _Default)
+          = go _fclProFileId (_fclIds ^. _Default)
               _fclQuotaUser
               (Just _fclPrettyPrint)
               _fclUserIP

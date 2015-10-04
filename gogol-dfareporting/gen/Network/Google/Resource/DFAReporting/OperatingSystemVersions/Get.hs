@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.OperatingSystemVersions.Get
     , osvgQuotaUser
     , osvgPrettyPrint
     , osvgUserIP
-    , osvgProfileId
+    , osvgProFileId
     , osvgKey
     , osvgId
     , osvgOAuthToken
@@ -67,7 +67,7 @@ data OperatingSystemVersionsGet' = OperatingSystemVersionsGet'
     { _osvgQuotaUser   :: !(Maybe Text)
     , _osvgPrettyPrint :: !Bool
     , _osvgUserIP      :: !(Maybe Text)
-    , _osvgProfileId   :: !Int64
+    , _osvgProFileId   :: !Int64
     , _osvgKey         :: !(Maybe Key)
     , _osvgId          :: !Int64
     , _osvgOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data OperatingSystemVersionsGet' = OperatingSystemVersionsGet'
 --
 -- * 'osvgUserIP'
 --
--- * 'osvgProfileId'
+-- * 'osvgProFileId'
 --
 -- * 'osvgKey'
 --
@@ -97,12 +97,12 @@ operatingSystemVersionsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> OperatingSystemVersionsGet'
-operatingSystemVersionsGet' pOsvgProfileId_ pOsvgId_ =
+operatingSystemVersionsGet' pOsvgProFileId_ pOsvgId_ =
     OperatingSystemVersionsGet'
     { _osvgQuotaUser = Nothing
     , _osvgPrettyPrint = True
     , _osvgUserIP = Nothing
-    , _osvgProfileId = pOsvgProfileId_
+    , _osvgProFileId = pOsvgProFileId_
     , _osvgKey = Nothing
     , _osvgId = pOsvgId_
     , _osvgOAuthToken = Nothing
@@ -130,10 +130,10 @@ osvgUserIP
   = lens _osvgUserIP (\ s a -> s{_osvgUserIP = a})
 
 -- | User profile ID associated with this request.
-osvgProfileId :: Lens' OperatingSystemVersionsGet' Int64
-osvgProfileId
-  = lens _osvgProfileId
-      (\ s a -> s{_osvgProfileId = a})
+osvgProFileId :: Lens' OperatingSystemVersionsGet' Int64
+osvgProFileId
+  = lens _osvgProFileId
+      (\ s a -> s{_osvgProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -166,7 +166,7 @@ instance GoogleRequest OperatingSystemVersionsGet'
              OperatingSystemVersion
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u OperatingSystemVersionsGet'{..}
-          = go _osvgProfileId _osvgId _osvgQuotaUser
+          = go _osvgProFileId _osvgId _osvgQuotaUser
               (Just _osvgPrettyPrint)
               _osvgUserIP
               _osvgFields

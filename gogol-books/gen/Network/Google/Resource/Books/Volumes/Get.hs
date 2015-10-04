@@ -56,7 +56,7 @@ type VolumesGetResource =
          QueryParam "country" Text :>
            QueryParam "partner" Text :>
              QueryParam "source" Text :>
-               QueryParam "projection" BooksVolumesGetProjection :>
+               QueryParam "projection" VolumesGetProjection :>
                  QueryParam "user_library_consistent_read" Bool :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
@@ -78,7 +78,7 @@ data VolumesGet' = VolumesGet'
     , _vgKey                       :: !(Maybe Key)
     , _vgVolumeId                  :: !Text
     , _vgSource                    :: !(Maybe Text)
-    , _vgProjection                :: !(Maybe BooksVolumesGetProjection)
+    , _vgProjection                :: !(Maybe VolumesGetProjection)
     , _vgOAuthToken                :: !(Maybe OAuthToken)
     , _vgUserLibraryConsistentRead :: !(Maybe Bool)
     , _vgFields                    :: !(Maybe Text)
@@ -174,7 +174,7 @@ vgSource :: Lens' VolumesGet' (Maybe Text)
 vgSource = lens _vgSource (\ s a -> s{_vgSource = a})
 
 -- | Restrict information returned to a set of selected fields.
-vgProjection :: Lens' VolumesGet' (Maybe BooksVolumesGetProjection)
+vgProjection :: Lens' VolumesGet' (Maybe VolumesGetProjection)
 vgProjection
   = lens _vgProjection (\ s a -> s{_vgProjection = a})
 

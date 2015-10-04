@@ -36,7 +36,7 @@ module Network.Google.Resource.DFAReporting.Orders.List
     , olUserIP
     , olSearchString
     , olIds
-    , olProfileId
+    , olProFileId
     , olSortOrder
     , olKey
     , olPageToken
@@ -61,13 +61,9 @@ type OrdersListResource =
              "orders" :>
                QueryParam "searchString" Text :>
                  QueryParams "ids" Int64 :>
-                   QueryParam "sortOrder"
-                     DfareportingOrdersListSortOrder
-                     :>
+                   QueryParam "sortOrder" OrdersListSortOrder :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "sortField"
-                         DfareportingOrdersListSortField
-                         :>
+                       QueryParam "sortField" OrdersListSortField :>
                          QueryParams "siteId" Int64 :>
                            QueryParam "maxResults" Int32 :>
                              QueryParam "quotaUser" Text :>
@@ -88,12 +84,12 @@ data OrdersList' = OrdersList'
     , _olUserIP       :: !(Maybe Text)
     , _olSearchString :: !(Maybe Text)
     , _olIds          :: !(Maybe [Int64])
-    , _olProfileId    :: !Int64
-    , _olSortOrder    :: !(Maybe DfareportingOrdersListSortOrder)
+    , _olProFileId    :: !Int64
+    , _olSortOrder    :: !(Maybe OrdersListSortOrder)
     , _olKey          :: !(Maybe Key)
     , _olPageToken    :: !(Maybe Text)
     , _olProjectId    :: !Int64
-    , _olSortField    :: !(Maybe DfareportingOrdersListSortField)
+    , _olSortField    :: !(Maybe OrdersListSortField)
     , _olOAuthToken   :: !(Maybe OAuthToken)
     , _olSiteId       :: !(Maybe [Int64])
     , _olMaxResults   :: !(Maybe Int32)
@@ -114,7 +110,7 @@ data OrdersList' = OrdersList'
 --
 -- * 'olIds'
 --
--- * 'olProfileId'
+-- * 'olProFileId'
 --
 -- * 'olSortOrder'
 --
@@ -137,14 +133,14 @@ ordersList'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'projectId'
     -> OrdersList'
-ordersList' pOlProfileId_ pOlProjectId_ =
+ordersList' pOlProFileId_ pOlProjectId_ =
     OrdersList'
     { _olQuotaUser = Nothing
     , _olPrettyPrint = True
     , _olUserIP = Nothing
     , _olSearchString = Nothing
     , _olIds = Nothing
-    , _olProfileId = pOlProfileId_
+    , _olProFileId = pOlProFileId_
     , _olSortOrder = Nothing
     , _olKey = Nothing
     , _olPageToken = Nothing
@@ -192,12 +188,12 @@ olIds
       _Coerce
 
 -- | User profile ID associated with this request.
-olProfileId :: Lens' OrdersList' Int64
-olProfileId
-  = lens _olProfileId (\ s a -> s{_olProfileId = a})
+olProFileId :: Lens' OrdersList' Int64
+olProFileId
+  = lens _olProFileId (\ s a -> s{_olProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-olSortOrder :: Lens' OrdersList' (Maybe DfareportingOrdersListSortOrder)
+olSortOrder :: Lens' OrdersList' (Maybe OrdersListSortOrder)
 olSortOrder
   = lens _olSortOrder (\ s a -> s{_olSortOrder = a})
 
@@ -218,7 +214,7 @@ olProjectId
   = lens _olProjectId (\ s a -> s{_olProjectId = a})
 
 -- | Field by which to sort the list.
-olSortField :: Lens' OrdersList' (Maybe DfareportingOrdersListSortField)
+olSortField :: Lens' OrdersList' (Maybe OrdersListSortField)
 olSortField
   = lens _olSortField (\ s a -> s{_olSortField = a})
 
@@ -251,7 +247,7 @@ instance GoogleRequest OrdersList' where
         type Rs OrdersList' = OrdersListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u OrdersList'{..}
-          = go _olProfileId _olProjectId _olSearchString
+          = go _olProFileId _olProjectId _olSearchString
               (_olIds ^. _Default)
               _olSortOrder
               _olPageToken

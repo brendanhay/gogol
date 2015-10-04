@@ -18,163 +18,163 @@ module Network.Google.DeploymentManager.Types.Sum where
 import           Network.Google.Prelude
 
 -- | Sets the policy to use for creating new resources.
-data CreatePolicy
+data DeploymentsUpdateCreatePolicy
     = Acquire
       -- ^ @ACQUIRE@
     | CreateOrAcquire
       -- ^ @CREATE_OR_ACQUIRE@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable CreatePolicy
+instance Hashable DeploymentsUpdateCreatePolicy
 
-instance FromText CreatePolicy where
+instance FromText DeploymentsUpdateCreatePolicy where
     fromText = \case
         "ACQUIRE" -> Just Acquire
         "CREATE_OR_ACQUIRE" -> Just CreateOrAcquire
         _ -> Nothing
 
-instance ToText CreatePolicy where
+instance ToText DeploymentsUpdateCreatePolicy where
     toText = \case
         Acquire -> "ACQUIRE"
         CreateOrAcquire -> "CREATE_OR_ACQUIRE"
 
-instance FromJSON CreatePolicy where
-    parseJSON = parseJSONText "CreatePolicy"
+instance FromJSON DeploymentsUpdateCreatePolicy where
+    parseJSON = parseJSONText "DeploymentsUpdateCreatePolicy"
 
-instance ToJSON CreatePolicy where
-    toJSON = toJSONText
-
--- | Sets the policy to use for creating new resources.
-data DeploymentManagerDeploymentsUpdateCreatePolicy
-    = DMDUCPAcquire
-      -- ^ @ACQUIRE@
-    | DMDUCPCreateOrAcquire
-      -- ^ @CREATE_OR_ACQUIRE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DeploymentManagerDeploymentsUpdateCreatePolicy
-
-instance FromText DeploymentManagerDeploymentsUpdateCreatePolicy where
-    fromText = \case
-        "ACQUIRE" -> Just DMDUCPAcquire
-        "CREATE_OR_ACQUIRE" -> Just DMDUCPCreateOrAcquire
-        _ -> Nothing
-
-instance ToText DeploymentManagerDeploymentsUpdateCreatePolicy where
-    toText = \case
-        DMDUCPAcquire -> "ACQUIRE"
-        DMDUCPCreateOrAcquire -> "CREATE_OR_ACQUIRE"
-
-instance FromJSON DeploymentManagerDeploymentsUpdateCreatePolicy where
-    parseJSON = parseJSONText "DeploymentManagerDeploymentsUpdateCreatePolicy"
-
-instance ToJSON DeploymentManagerDeploymentsUpdateCreatePolicy where
+instance ToJSON DeploymentsUpdateCreatePolicy where
     toJSON = toJSONText
 
 -- | Sets the policy to use for updating resources.
-data DeploymentManagerDeploymentsUpdateUpdatePolicy
-    = DMDUUPPatch
+data DeploymentsUpdateUpdatePolicy
+    = Patch
       -- ^ @PATCH@
-    | DMDUUPUpdate
+    | Update
       -- ^ @UPDATE@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DeploymentManagerDeploymentsUpdateUpdatePolicy
+instance Hashable DeploymentsUpdateUpdatePolicy
 
-instance FromText DeploymentManagerDeploymentsUpdateUpdatePolicy where
+instance FromText DeploymentsUpdateUpdatePolicy where
     fromText = \case
-        "PATCH" -> Just DMDUUPPatch
-        "UPDATE" -> Just DMDUUPUpdate
+        "PATCH" -> Just Patch
+        "UPDATE" -> Just Update
         _ -> Nothing
 
-instance ToText DeploymentManagerDeploymentsUpdateUpdatePolicy where
+instance ToText DeploymentsUpdateUpdatePolicy where
     toText = \case
-        DMDUUPPatch -> "PATCH"
-        DMDUUPUpdate -> "UPDATE"
+        Patch -> "PATCH"
+        Update -> "UPDATE"
 
-instance FromJSON DeploymentManagerDeploymentsUpdateUpdatePolicy where
-    parseJSON = parseJSONText "DeploymentManagerDeploymentsUpdateUpdatePolicy"
+instance FromJSON DeploymentsUpdateUpdatePolicy where
+    parseJSON = parseJSONText "DeploymentsUpdateUpdatePolicy"
 
-instance ToJSON DeploymentManagerDeploymentsUpdateUpdatePolicy where
+instance ToJSON DeploymentsUpdateUpdatePolicy where
     toJSON = toJSONText
 
 -- | Sets the policy to use for deleting resources.
-data DeploymentManagerDeploymentsUpdateDeletePolicy
+data DeploymentsUpdateDeletePolicy
     = Abandon
       -- ^ @ABANDON@
     | Delete
       -- ^ @DELETE@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DeploymentManagerDeploymentsUpdateDeletePolicy
+instance Hashable DeploymentsUpdateDeletePolicy
 
-instance FromText DeploymentManagerDeploymentsUpdateDeletePolicy where
+instance FromText DeploymentsUpdateDeletePolicy where
     fromText = \case
         "ABANDON" -> Just Abandon
         "DELETE" -> Just Delete
         _ -> Nothing
 
-instance ToText DeploymentManagerDeploymentsUpdateDeletePolicy where
+instance ToText DeploymentsUpdateDeletePolicy where
     toText = \case
         Abandon -> "ABANDON"
         Delete -> "DELETE"
 
-instance FromJSON DeploymentManagerDeploymentsUpdateDeletePolicy where
-    parseJSON = parseJSONText "DeploymentManagerDeploymentsUpdateDeletePolicy"
+instance FromJSON DeploymentsUpdateDeletePolicy where
+    parseJSON = parseJSONText "DeploymentsUpdateDeletePolicy"
 
-instance ToJSON DeploymentManagerDeploymentsUpdateDeletePolicy where
-    toJSON = toJSONText
-
--- | Sets the policy to use for updating resources.
-data UpdatePolicy
-    = UPPatch
-      -- ^ @PATCH@
-    | UPUpdate
-      -- ^ @UPDATE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable UpdatePolicy
-
-instance FromText UpdatePolicy where
-    fromText = \case
-        "PATCH" -> Just UPPatch
-        "UPDATE" -> Just UPUpdate
-        _ -> Nothing
-
-instance ToText UpdatePolicy where
-    toText = \case
-        UPPatch -> "PATCH"
-        UPUpdate -> "UPDATE"
-
-instance FromJSON UpdatePolicy where
-    parseJSON = parseJSONText "UpdatePolicy"
-
-instance ToJSON UpdatePolicy where
+instance ToJSON DeploymentsUpdateDeletePolicy where
     toJSON = toJSONText
 
 -- | Sets the policy to use for deleting resources.
-data DeletePolicy
-    = DPAbandon
+data DeploymentsPatchDeletePolicy
+    = DPDPAbandon
       -- ^ @ABANDON@
-    | DPDelete
+    | DPDPDelete
       -- ^ @DELETE@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DeletePolicy
+instance Hashable DeploymentsPatchDeletePolicy
 
-instance FromText DeletePolicy where
+instance FromText DeploymentsPatchDeletePolicy where
     fromText = \case
-        "ABANDON" -> Just DPAbandon
-        "DELETE" -> Just DPDelete
+        "ABANDON" -> Just DPDPAbandon
+        "DELETE" -> Just DPDPDelete
         _ -> Nothing
 
-instance ToText DeletePolicy where
+instance ToText DeploymentsPatchDeletePolicy where
     toText = \case
-        DPAbandon -> "ABANDON"
-        DPDelete -> "DELETE"
+        DPDPAbandon -> "ABANDON"
+        DPDPDelete -> "DELETE"
 
-instance FromJSON DeletePolicy where
-    parseJSON = parseJSONText "DeletePolicy"
+instance FromJSON DeploymentsPatchDeletePolicy where
+    parseJSON = parseJSONText "DeploymentsPatchDeletePolicy"
 
-instance ToJSON DeletePolicy where
+instance ToJSON DeploymentsPatchDeletePolicy where
+    toJSON = toJSONText
+
+-- | Sets the policy to use for updating resources.
+data DeploymentsPatchUpdatePolicy
+    = DPUPPatch
+      -- ^ @PATCH@
+    | DPUPUpdate
+      -- ^ @UPDATE@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable DeploymentsPatchUpdatePolicy
+
+instance FromText DeploymentsPatchUpdatePolicy where
+    fromText = \case
+        "PATCH" -> Just DPUPPatch
+        "UPDATE" -> Just DPUPUpdate
+        _ -> Nothing
+
+instance ToText DeploymentsPatchUpdatePolicy where
+    toText = \case
+        DPUPPatch -> "PATCH"
+        DPUPUpdate -> "UPDATE"
+
+instance FromJSON DeploymentsPatchUpdatePolicy where
+    parseJSON = parseJSONText "DeploymentsPatchUpdatePolicy"
+
+instance ToJSON DeploymentsPatchUpdatePolicy where
+    toJSON = toJSONText
+
+-- | Sets the policy to use for creating new resources.
+data DeploymentsPatchCreatePolicy
+    = DPCPAcquire
+      -- ^ @ACQUIRE@
+    | DPCPCreateOrAcquire
+      -- ^ @CREATE_OR_ACQUIRE@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable DeploymentsPatchCreatePolicy
+
+instance FromText DeploymentsPatchCreatePolicy where
+    fromText = \case
+        "ACQUIRE" -> Just DPCPAcquire
+        "CREATE_OR_ACQUIRE" -> Just DPCPCreateOrAcquire
+        _ -> Nothing
+
+instance ToText DeploymentsPatchCreatePolicy where
+    toText = \case
+        DPCPAcquire -> "ACQUIRE"
+        DPCPCreateOrAcquire -> "CREATE_OR_ACQUIRE"
+
+instance FromJSON DeploymentsPatchCreatePolicy where
+    parseJSON = parseJSONText "DeploymentsPatchCreatePolicy"
+
+instance ToJSON DeploymentsPatchCreatePolicy where
     toJSON = toJSONText

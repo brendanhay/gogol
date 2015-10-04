@@ -63,11 +63,9 @@ type DataGaGetResource =
            QueryParam "start-date" Text :>
              QueryParam "end-date" Text :>
                QueryParam "metrics" Text :>
-                 QueryParam "samplingLevel"
-                   AnalyticsDataGaGetSamplingLevel
-                   :>
+                 QueryParam "samplingLevel" DataGaGetSamplingLevel :>
                    QueryParam "filters" Text :>
-                     QueryParam "output" Output :>
+                     QueryParam "output" DataGaGetOutput :>
                        QueryParam "sort" Text :>
                          QueryParam "dimensions" Text :>
                            QueryParam "start-index" Int32 :>
@@ -90,13 +88,13 @@ data DataGaGet' = DataGaGet'
     { _dggQuotaUser     :: !(Maybe Text)
     , _dggMetrics       :: !Text
     , _dggPrettyPrint   :: !Bool
-    , _dggSamplingLevel :: !(Maybe AnalyticsDataGaGetSamplingLevel)
+    , _dggSamplingLevel :: !(Maybe DataGaGetSamplingLevel)
     , _dggUserIP        :: !(Maybe Text)
     , _dggFilters       :: !(Maybe Text)
     , _dggIds           :: !Text
     , _dggEndDate       :: !Text
     , _dggKey           :: !(Maybe Key)
-    , _dggOutput        :: !(Maybe Output)
+    , _dggOutput        :: !(Maybe DataGaGetOutput)
     , _dggSort          :: !(Maybe Text)
     , _dggDimensions    :: !(Maybe Text)
     , _dggOAuthToken    :: !(Maybe OAuthToken)
@@ -194,7 +192,7 @@ dggPrettyPrint
       (\ s a -> s{_dggPrettyPrint = a})
 
 -- | The desired sampling level.
-dggSamplingLevel :: Lens' DataGaGet' (Maybe AnalyticsDataGaGetSamplingLevel)
+dggSamplingLevel :: Lens' DataGaGet' (Maybe DataGaGetSamplingLevel)
 dggSamplingLevel
   = lens _dggSamplingLevel
       (\ s a -> s{_dggSamplingLevel = a})
@@ -230,7 +228,7 @@ dggKey :: Lens' DataGaGet' (Maybe Key)
 dggKey = lens _dggKey (\ s a -> s{_dggKey = a})
 
 -- | The selected format for the response. Default format is JSON.
-dggOutput :: Lens' DataGaGet' (Maybe Output)
+dggOutput :: Lens' DataGaGet' (Maybe DataGaGetOutput)
 dggOutput
   = lens _dggOutput (\ s a -> s{_dggOutput = a})
 

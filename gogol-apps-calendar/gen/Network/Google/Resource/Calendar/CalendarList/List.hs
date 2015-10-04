@@ -55,7 +55,9 @@ type CalendarListListResource =
        "me" :>
          "calendarList" :>
            QueryParam "syncToken" Text :>
-             QueryParam "minAccessRole" MinAccessRole :>
+             QueryParam "minAccessRole"
+               CalendarListListMinAccessRole
+               :>
                QueryParam "showDeleted" Bool :>
                  QueryParam "showHidden" Bool :>
                    QueryParam "pageToken" Text :>
@@ -76,7 +78,7 @@ data CalendarListList' = CalendarListList'
     { _cllSyncToken     :: !(Maybe Text)
     , _cllQuotaUser     :: !(Maybe Text)
     , _cllPrettyPrint   :: !Bool
-    , _cllMinAccessRole :: !(Maybe MinAccessRole)
+    , _cllMinAccessRole :: !(Maybe CalendarListListMinAccessRole)
     , _cllUserIP        :: !(Maybe Text)
     , _cllShowDeleted   :: !(Maybe Bool)
     , _cllShowHidden    :: !(Maybe Bool)
@@ -164,7 +166,7 @@ cllPrettyPrint
 
 -- | The minimum access role for the user in the returned entries. Optional.
 -- The default is no restriction.
-cllMinAccessRole :: Lens' CalendarListList' (Maybe MinAccessRole)
+cllMinAccessRole :: Lens' CalendarListList' (Maybe CalendarListListMinAccessRole)
 cllMinAccessRole
   = lens _cllMinAccessRole
       (\ s a -> s{_cllMinAccessRole = a})

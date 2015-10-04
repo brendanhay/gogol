@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.AdvertiserGroups.Insert
     , agiQuotaUser
     , agiPrettyPrint
     , agiUserIP
-    , agiProfileId
+    , agiProFileId
     , agiPayload
     , agiKey
     , agiOAuthToken
@@ -57,7 +57,7 @@ type AdvertiserGroupsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] AdvertiserGroup :>
+                         ReqBody '[OctetStream] AdvertiserGroup :>
                            Post '[JSON] AdvertiserGroup
 
 -- | Inserts a new advertiser group.
@@ -67,7 +67,7 @@ data AdvertiserGroupsInsert' = AdvertiserGroupsInsert'
     { _agiQuotaUser   :: !(Maybe Text)
     , _agiPrettyPrint :: !Bool
     , _agiUserIP      :: !(Maybe Text)
-    , _agiProfileId   :: !Int64
+    , _agiProFileId   :: !Int64
     , _agiPayload     :: !AdvertiserGroup
     , _agiKey         :: !(Maybe Key)
     , _agiOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data AdvertiserGroupsInsert' = AdvertiserGroupsInsert'
 --
 -- * 'agiUserIP'
 --
--- * 'agiProfileId'
+-- * 'agiProFileId'
 --
 -- * 'agiPayload'
 --
@@ -97,12 +97,12 @@ advertiserGroupsInsert'
     :: Int64 -- ^ 'profileId'
     -> AdvertiserGroup -- ^ 'payload'
     -> AdvertiserGroupsInsert'
-advertiserGroupsInsert' pAgiProfileId_ pAgiPayload_ =
+advertiserGroupsInsert' pAgiProFileId_ pAgiPayload_ =
     AdvertiserGroupsInsert'
     { _agiQuotaUser = Nothing
     , _agiPrettyPrint = True
     , _agiUserIP = Nothing
-    , _agiProfileId = pAgiProfileId_
+    , _agiProFileId = pAgiProFileId_
     , _agiPayload = pAgiPayload_
     , _agiKey = Nothing
     , _agiOAuthToken = Nothing
@@ -129,9 +129,9 @@ agiUserIP
   = lens _agiUserIP (\ s a -> s{_agiUserIP = a})
 
 -- | User profile ID associated with this request.
-agiProfileId :: Lens' AdvertiserGroupsInsert' Int64
-agiProfileId
-  = lens _agiProfileId (\ s a -> s{_agiProfileId = a})
+agiProFileId :: Lens' AdvertiserGroupsInsert' Int64
+agiProFileId
+  = lens _agiProFileId (\ s a -> s{_agiProFileId = a})
 
 -- | Multipart request metadata.
 agiPayload :: Lens' AdvertiserGroupsInsert' AdvertiserGroup
@@ -163,7 +163,7 @@ instance GoogleRequest AdvertiserGroupsInsert' where
         type Rs AdvertiserGroupsInsert' = AdvertiserGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdvertiserGroupsInsert'{..}
-          = go _agiProfileId _agiQuotaUser
+          = go _agiProFileId _agiQuotaUser
               (Just _agiPrettyPrint)
               _agiUserIP
               _agiFields

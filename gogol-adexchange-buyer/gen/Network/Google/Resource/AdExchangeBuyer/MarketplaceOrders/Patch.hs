@@ -52,7 +52,9 @@ type MarketplaceOrdersPatchResource =
      "marketplaceOrders" :>
        Capture "orderId" Text :>
          Capture "revisionNumber" Int64 :>
-           Capture "updateAction" UpdateAction :>
+           Capture "updateAction"
+             MarketplaceOrdersPatchUpdateAction
+             :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -60,7 +62,7 @@ type MarketplaceOrdersPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] MarketplaceOrder :>
+                           ReqBody '[OctetStream] MarketplaceOrder :>
                              Patch '[JSON] MarketplaceOrder
 
 -- | Update the given order. This method supports patch semantics.
@@ -68,7 +70,7 @@ type MarketplaceOrdersPatchResource =
 -- /See:/ 'marketplaceOrdersPatch'' smart constructor.
 data MarketplaceOrdersPatch' = MarketplaceOrdersPatch'
     { _mopQuotaUser      :: !(Maybe Text)
-    , _mopUpdateAction   :: !UpdateAction
+    , _mopUpdateAction   :: !MarketplaceOrdersPatchUpdateAction
     , _mopPrettyPrint    :: !Bool
     , _mopUserIP         :: !(Maybe Text)
     , _mopRevisionNumber :: !Int64
@@ -103,7 +105,7 @@ data MarketplaceOrdersPatch' = MarketplaceOrdersPatch'
 --
 -- * 'mopFields'
 marketplaceOrdersPatch'
-    :: UpdateAction -- ^ 'updateAction'
+    :: MarketplaceOrdersPatchUpdateAction -- ^ 'updateAction'
     -> Int64 -- ^ 'revisionNumber'
     -> MarketplaceOrder -- ^ 'payload'
     -> Text -- ^ 'orderId'
@@ -130,7 +132,7 @@ mopQuotaUser
   = lens _mopQuotaUser (\ s a -> s{_mopQuotaUser = a})
 
 -- | The proposed action to take on the order.
-mopUpdateAction :: Lens' MarketplaceOrdersPatch' UpdateAction
+mopUpdateAction :: Lens' MarketplaceOrdersPatch' MarketplaceOrdersPatchUpdateAction
 mopUpdateAction
   = lens _mopUpdateAction
       (\ s a -> s{_mopUpdateAction = a})

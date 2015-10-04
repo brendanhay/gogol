@@ -60,7 +60,7 @@ type ChannelsUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Channel :> Put '[JSON] Channel
+                         ReqBody '[OctetStream] Channel :> Put '[JSON] Channel
 
 -- | Updates a channel\'s metadata. Note that this method currently only
 -- supports updates to the channel resource\'s brandingSettings and

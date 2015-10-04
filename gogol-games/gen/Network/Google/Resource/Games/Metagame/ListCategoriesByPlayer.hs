@@ -54,7 +54,9 @@ type MetagameListCategoriesByPlayerResource =
      "players" :>
        Capture "playerId" Text :>
          "categories" :>
-           Capture "collection" Collection :>
+           Capture "collection"
+             MetagameListCategoriesByPlayerCollection
+             :>
              QueryParam "language" Text :>
                QueryParam "pageToken" Text :>
                  QueryParam "maxResults" Int32 :>
@@ -75,7 +77,7 @@ data MetagameListCategoriesByPlayer' = MetagameListCategoriesByPlayer'
     { _mlcbpQuotaUser   :: !(Maybe Text)
     , _mlcbpPrettyPrint :: !Bool
     , _mlcbpUserIP      :: !(Maybe Text)
-    , _mlcbpCollection  :: !Collection
+    , _mlcbpCollection  :: !MetagameListCategoriesByPlayerCollection
     , _mlcbpKey         :: !(Maybe Key)
     , _mlcbpLanguage    :: !(Maybe Text)
     , _mlcbpPageToken   :: !(Maybe Text)
@@ -111,7 +113,7 @@ data MetagameListCategoriesByPlayer' = MetagameListCategoriesByPlayer'
 --
 -- * 'mlcbpFields'
 metagameListCategoriesByPlayer'
-    :: Collection -- ^ 'collection'
+    :: MetagameListCategoriesByPlayerCollection -- ^ 'collection'
     -> Text -- ^ 'playerId'
     -> MetagameListCategoriesByPlayer'
 metagameListCategoriesByPlayer' pMlcbpCollection_ pMlcbpPlayerId_ =
@@ -150,7 +152,7 @@ mlcbpUserIP
   = lens _mlcbpUserIP (\ s a -> s{_mlcbpUserIP = a})
 
 -- | The collection of categories for which data will be returned.
-mlcbpCollection :: Lens' MetagameListCategoriesByPlayer' Collection
+mlcbpCollection :: Lens' MetagameListCategoriesByPlayer' MetagameListCategoriesByPlayerCollection
 mlcbpCollection
   = lens _mlcbpCollection
       (\ s a -> s{_mlcbpCollection = a})

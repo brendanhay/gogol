@@ -35,7 +35,7 @@ module Network.Google.Resource.DFAReporting.TargetableRemarketingLists.List
     , trllPrettyPrint
     , trllUserIP
     , trllAdvertiserId
-    , trllProfileId
+    , trllProFileId
     , trllSortOrder
     , trllActive
     , trllKey
@@ -58,13 +58,13 @@ type TargetableRemarketingListsListResource =
          "targetableRemarketingLists" :>
            QueryParam "advertiserId" Int64 :>
              QueryParam "sortOrder"
-               DfareportingTargetableRemarketingListsListSortOrder
+               TargetableRemarketingListsListSortOrder
                :>
                QueryParam "active" Bool :>
                  QueryParam "name" Text :>
                    QueryParam "pageToken" Text :>
                      QueryParam "sortField"
-                       DfareportingTargetableRemarketingListsListSortField
+                       TargetableRemarketingListsListSortField
                        :>
                        QueryParam "maxResults" Int32 :>
                          QueryParam "quotaUser" Text :>
@@ -85,13 +85,13 @@ data TargetableRemarketingListsList' = TargetableRemarketingListsList'
     , _trllPrettyPrint  :: !Bool
     , _trllUserIP       :: !(Maybe Text)
     , _trllAdvertiserId :: !Int64
-    , _trllProfileId    :: !Int64
-    , _trllSortOrder    :: !(Maybe DfareportingTargetableRemarketingListsListSortOrder)
+    , _trllProFileId    :: !Int64
+    , _trllSortOrder    :: !(Maybe TargetableRemarketingListsListSortOrder)
     , _trllActive       :: !(Maybe Bool)
     , _trllKey          :: !(Maybe Key)
     , _trllName         :: !(Maybe Text)
     , _trllPageToken    :: !(Maybe Text)
-    , _trllSortField    :: !(Maybe DfareportingTargetableRemarketingListsListSortField)
+    , _trllSortField    :: !(Maybe TargetableRemarketingListsListSortField)
     , _trllOAuthToken   :: !(Maybe OAuthToken)
     , _trllMaxResults   :: !(Maybe Int32)
     , _trllFields       :: !(Maybe Text)
@@ -109,7 +109,7 @@ data TargetableRemarketingListsList' = TargetableRemarketingListsList'
 --
 -- * 'trllAdvertiserId'
 --
--- * 'trllProfileId'
+-- * 'trllProFileId'
 --
 -- * 'trllSortOrder'
 --
@@ -132,13 +132,13 @@ targetableRemarketingListsList'
     :: Int64 -- ^ 'advertiserId'
     -> Int64 -- ^ 'profileId'
     -> TargetableRemarketingListsList'
-targetableRemarketingListsList' pTrllAdvertiserId_ pTrllProfileId_ =
+targetableRemarketingListsList' pTrllAdvertiserId_ pTrllProFileId_ =
     TargetableRemarketingListsList'
     { _trllQuotaUser = Nothing
     , _trllPrettyPrint = True
     , _trllUserIP = Nothing
     , _trllAdvertiserId = pTrllAdvertiserId_
-    , _trllProfileId = pTrllProfileId_
+    , _trllProFileId = pTrllProFileId_
     , _trllSortOrder = Nothing
     , _trllActive = Nothing
     , _trllKey = Nothing
@@ -178,13 +178,13 @@ trllAdvertiserId
       (\ s a -> s{_trllAdvertiserId = a})
 
 -- | User profile ID associated with this request.
-trllProfileId :: Lens' TargetableRemarketingListsList' Int64
-trllProfileId
-  = lens _trllProfileId
-      (\ s a -> s{_trllProfileId = a})
+trllProFileId :: Lens' TargetableRemarketingListsList' Int64
+trllProFileId
+  = lens _trllProFileId
+      (\ s a -> s{_trllProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-trllSortOrder :: Lens' TargetableRemarketingListsList' (Maybe DfareportingTargetableRemarketingListsListSortOrder)
+trllSortOrder :: Lens' TargetableRemarketingListsList' (Maybe TargetableRemarketingListsListSortOrder)
 trllSortOrder
   = lens _trllSortOrder
       (\ s a -> s{_trllSortOrder = a})
@@ -218,7 +218,7 @@ trllPageToken
       (\ s a -> s{_trllPageToken = a})
 
 -- | Field by which to sort the list.
-trllSortField :: Lens' TargetableRemarketingListsList' (Maybe DfareportingTargetableRemarketingListsListSortField)
+trllSortField :: Lens' TargetableRemarketingListsList' (Maybe TargetableRemarketingListsListSortField)
 trllSortField
   = lens _trllSortField
       (\ s a -> s{_trllSortField = a})
@@ -252,7 +252,7 @@ instance GoogleRequest
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           TargetableRemarketingListsList'{..}
-          = go _trllProfileId (Just _trllAdvertiserId)
+          = go _trllProFileId (Just _trllAdvertiserId)
               _trllSortOrder
               _trllActive
               _trllName

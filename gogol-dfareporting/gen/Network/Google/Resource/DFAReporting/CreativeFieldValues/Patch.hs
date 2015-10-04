@@ -36,7 +36,7 @@ module Network.Google.Resource.DFAReporting.CreativeFieldValues.Patch
     , cfvpQuotaUser
     , cfvpPrettyPrint
     , cfvpUserIP
-    , cfvpProfileId
+    , cfvpProFileId
     , cfvpPayload
     , cfvpKey
     , cfvpId
@@ -63,7 +63,7 @@ type CreativeFieldValuesPatchResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] CreativeFieldValue :>
+                               ReqBody '[OctetStream] CreativeFieldValue :>
                                  Patch '[JSON] CreativeFieldValue
 
 -- | Updates an existing creative field value. This method supports patch
@@ -75,7 +75,7 @@ data CreativeFieldValuesPatch' = CreativeFieldValuesPatch'
     , _cfvpQuotaUser       :: !(Maybe Text)
     , _cfvpPrettyPrint     :: !Bool
     , _cfvpUserIP          :: !(Maybe Text)
-    , _cfvpProfileId       :: !Int64
+    , _cfvpProFileId       :: !Int64
     , _cfvpPayload         :: !CreativeFieldValue
     , _cfvpKey             :: !(Maybe Key)
     , _cfvpId              :: !Int64
@@ -95,7 +95,7 @@ data CreativeFieldValuesPatch' = CreativeFieldValuesPatch'
 --
 -- * 'cfvpUserIP'
 --
--- * 'cfvpProfileId'
+-- * 'cfvpProFileId'
 --
 -- * 'cfvpPayload'
 --
@@ -112,13 +112,13 @@ creativeFieldValuesPatch'
     -> CreativeFieldValue -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> CreativeFieldValuesPatch'
-creativeFieldValuesPatch' pCfvpCreativeFieldId_ pCfvpProfileId_ pCfvpPayload_ pCfvpId_ =
+creativeFieldValuesPatch' pCfvpCreativeFieldId_ pCfvpProFileId_ pCfvpPayload_ pCfvpId_ =
     CreativeFieldValuesPatch'
     { _cfvpCreativeFieldId = pCfvpCreativeFieldId_
     , _cfvpQuotaUser = Nothing
     , _cfvpPrettyPrint = True
     , _cfvpUserIP = Nothing
-    , _cfvpProfileId = pCfvpProfileId_
+    , _cfvpProFileId = pCfvpProFileId_
     , _cfvpPayload = pCfvpPayload_
     , _cfvpKey = Nothing
     , _cfvpId = pCfvpId_
@@ -153,10 +153,10 @@ cfvpUserIP
   = lens _cfvpUserIP (\ s a -> s{_cfvpUserIP = a})
 
 -- | User profile ID associated with this request.
-cfvpProfileId :: Lens' CreativeFieldValuesPatch' Int64
-cfvpProfileId
-  = lens _cfvpProfileId
-      (\ s a -> s{_cfvpProfileId = a})
+cfvpProFileId :: Lens' CreativeFieldValuesPatch' Int64
+cfvpProFileId
+  = lens _cfvpProFileId
+      (\ s a -> s{_cfvpProFileId = a})
 
 -- | Multipart request metadata.
 cfvpPayload :: Lens' CreativeFieldValuesPatch' CreativeFieldValue
@@ -194,7 +194,7 @@ instance GoogleRequest CreativeFieldValuesPatch'
              CreativeFieldValue
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeFieldValuesPatch'{..}
-          = go _cfvpProfileId _cfvpCreativeFieldId
+          = go _cfvpProFileId _cfvpCreativeFieldId
               (Just _cfvpId)
               _cfvpQuotaUser
               (Just _cfvpPrettyPrint)

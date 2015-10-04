@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.ConnectionTypes.Get
     , ctgQuotaUser
     , ctgPrettyPrint
     , ctgUserIP
-    , ctgProfileId
+    , ctgProFileId
     , ctgKey
     , ctgId
     , ctgOAuthToken
@@ -67,7 +67,7 @@ data ConnectionTypesGet' = ConnectionTypesGet'
     { _ctgQuotaUser   :: !(Maybe Text)
     , _ctgPrettyPrint :: !Bool
     , _ctgUserIP      :: !(Maybe Text)
-    , _ctgProfileId   :: !Int64
+    , _ctgProFileId   :: !Int64
     , _ctgKey         :: !(Maybe Key)
     , _ctgId          :: !Int64
     , _ctgOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data ConnectionTypesGet' = ConnectionTypesGet'
 --
 -- * 'ctgUserIP'
 --
--- * 'ctgProfileId'
+-- * 'ctgProFileId'
 --
 -- * 'ctgKey'
 --
@@ -97,12 +97,12 @@ connectionTypesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> ConnectionTypesGet'
-connectionTypesGet' pCtgProfileId_ pCtgId_ =
+connectionTypesGet' pCtgProFileId_ pCtgId_ =
     ConnectionTypesGet'
     { _ctgQuotaUser = Nothing
     , _ctgPrettyPrint = True
     , _ctgUserIP = Nothing
-    , _ctgProfileId = pCtgProfileId_
+    , _ctgProFileId = pCtgProFileId_
     , _ctgKey = Nothing
     , _ctgId = pCtgId_
     , _ctgOAuthToken = Nothing
@@ -129,9 +129,9 @@ ctgUserIP
   = lens _ctgUserIP (\ s a -> s{_ctgUserIP = a})
 
 -- | User profile ID associated with this request.
-ctgProfileId :: Lens' ConnectionTypesGet' Int64
-ctgProfileId
-  = lens _ctgProfileId (\ s a -> s{_ctgProfileId = a})
+ctgProFileId :: Lens' ConnectionTypesGet' Int64
+ctgProFileId
+  = lens _ctgProFileId (\ s a -> s{_ctgProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -162,7 +162,7 @@ instance GoogleRequest ConnectionTypesGet' where
         type Rs ConnectionTypesGet' = ConnectionType
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ConnectionTypesGet'{..}
-          = go _ctgProfileId _ctgId _ctgQuotaUser
+          = go _ctgProFileId _ctgId _ctgQuotaUser
               (Just _ctgPrettyPrint)
               _ctgUserIP
               _ctgFields

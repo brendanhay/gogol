@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.ContentCategories.Insert
     , cciQuotaUser
     , cciPrettyPrint
     , cciUserIP
-    , cciProfileId
+    , cciProFileId
     , cciPayload
     , cciKey
     , cciOAuthToken
@@ -57,7 +57,7 @@ type ContentCategoriesInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] ContentCategory :>
+                         ReqBody '[OctetStream] ContentCategory :>
                            Post '[JSON] ContentCategory
 
 -- | Inserts a new content category.
@@ -67,7 +67,7 @@ data ContentCategoriesInsert' = ContentCategoriesInsert'
     { _cciQuotaUser   :: !(Maybe Text)
     , _cciPrettyPrint :: !Bool
     , _cciUserIP      :: !(Maybe Text)
-    , _cciProfileId   :: !Int64
+    , _cciProFileId   :: !Int64
     , _cciPayload     :: !ContentCategory
     , _cciKey         :: !(Maybe Key)
     , _cciOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data ContentCategoriesInsert' = ContentCategoriesInsert'
 --
 -- * 'cciUserIP'
 --
--- * 'cciProfileId'
+-- * 'cciProFileId'
 --
 -- * 'cciPayload'
 --
@@ -97,12 +97,12 @@ contentCategoriesInsert'
     :: Int64 -- ^ 'profileId'
     -> ContentCategory -- ^ 'payload'
     -> ContentCategoriesInsert'
-contentCategoriesInsert' pCciProfileId_ pCciPayload_ =
+contentCategoriesInsert' pCciProFileId_ pCciPayload_ =
     ContentCategoriesInsert'
     { _cciQuotaUser = Nothing
     , _cciPrettyPrint = True
     , _cciUserIP = Nothing
-    , _cciProfileId = pCciProfileId_
+    , _cciProFileId = pCciProFileId_
     , _cciPayload = pCciPayload_
     , _cciKey = Nothing
     , _cciOAuthToken = Nothing
@@ -129,9 +129,9 @@ cciUserIP
   = lens _cciUserIP (\ s a -> s{_cciUserIP = a})
 
 -- | User profile ID associated with this request.
-cciProfileId :: Lens' ContentCategoriesInsert' Int64
-cciProfileId
-  = lens _cciProfileId (\ s a -> s{_cciProfileId = a})
+cciProFileId :: Lens' ContentCategoriesInsert' Int64
+cciProFileId
+  = lens _cciProFileId (\ s a -> s{_cciProFileId = a})
 
 -- | Multipart request metadata.
 cciPayload :: Lens' ContentCategoriesInsert' ContentCategory
@@ -163,7 +163,7 @@ instance GoogleRequest ContentCategoriesInsert' where
         type Rs ContentCategoriesInsert' = ContentCategory
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ContentCategoriesInsert'{..}
-          = go _cciProfileId _cciQuotaUser
+          = go _cciProFileId _cciQuotaUser
               (Just _cciPrettyPrint)
               _cciUserIP
               _cciFields

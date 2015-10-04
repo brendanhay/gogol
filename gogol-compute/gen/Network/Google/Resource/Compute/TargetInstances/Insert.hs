@@ -60,7 +60,7 @@ type TargetInstancesInsertResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] TargetInstance :>
+                           ReqBody '[OctetStream] TargetInstance :>
                              Post '[JSON] Operation
 
 -- | Creates a TargetInstance resource in the specified project and zone

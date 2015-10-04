@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.DirectorySiteContacts.Get
     , dscgQuotaUser
     , dscgPrettyPrint
     , dscgUserIP
-    , dscgProfileId
+    , dscgProFileId
     , dscgKey
     , dscgId
     , dscgOAuthToken
@@ -67,7 +67,7 @@ data DirectorySiteContactsGet' = DirectorySiteContactsGet'
     { _dscgQuotaUser   :: !(Maybe Text)
     , _dscgPrettyPrint :: !Bool
     , _dscgUserIP      :: !(Maybe Text)
-    , _dscgProfileId   :: !Int64
+    , _dscgProFileId   :: !Int64
     , _dscgKey         :: !(Maybe Key)
     , _dscgId          :: !Int64
     , _dscgOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data DirectorySiteContactsGet' = DirectorySiteContactsGet'
 --
 -- * 'dscgUserIP'
 --
--- * 'dscgProfileId'
+-- * 'dscgProFileId'
 --
 -- * 'dscgKey'
 --
@@ -97,12 +97,12 @@ directorySiteContactsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> DirectorySiteContactsGet'
-directorySiteContactsGet' pDscgProfileId_ pDscgId_ =
+directorySiteContactsGet' pDscgProFileId_ pDscgId_ =
     DirectorySiteContactsGet'
     { _dscgQuotaUser = Nothing
     , _dscgPrettyPrint = True
     , _dscgUserIP = Nothing
-    , _dscgProfileId = pDscgProfileId_
+    , _dscgProFileId = pDscgProFileId_
     , _dscgKey = Nothing
     , _dscgId = pDscgId_
     , _dscgOAuthToken = Nothing
@@ -130,10 +130,10 @@ dscgUserIP
   = lens _dscgUserIP (\ s a -> s{_dscgUserIP = a})
 
 -- | User profile ID associated with this request.
-dscgProfileId :: Lens' DirectorySiteContactsGet' Int64
-dscgProfileId
-  = lens _dscgProfileId
-      (\ s a -> s{_dscgProfileId = a})
+dscgProFileId :: Lens' DirectorySiteContactsGet' Int64
+dscgProFileId
+  = lens _dscgProFileId
+      (\ s a -> s{_dscgProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -166,7 +166,7 @@ instance GoogleRequest DirectorySiteContactsGet'
              DirectorySiteContact
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u DirectorySiteContactsGet'{..}
-          = go _dscgProfileId _dscgId _dscgQuotaUser
+          = go _dscgProFileId _dscgId _dscgQuotaUser
               (Just _dscgPrettyPrint)
               _dscgUserIP
               _dscgFields

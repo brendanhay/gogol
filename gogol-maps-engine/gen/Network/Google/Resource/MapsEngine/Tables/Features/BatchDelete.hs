@@ -58,7 +58,7 @@ type TablesFeaturesBatchDeleteResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] FeaturesBatchDeleteRequest :>
+                           ReqBody '[OctetStream] FeaturesBatchDeleteRequest :>
                              Post '[JSON] ()
 
 -- | Delete all features matching the given IDs.

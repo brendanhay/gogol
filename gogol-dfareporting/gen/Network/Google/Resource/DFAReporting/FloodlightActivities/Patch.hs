@@ -35,7 +35,7 @@ module Network.Google.Resource.DFAReporting.FloodlightActivities.Patch
     , fapQuotaUser
     , fapPrettyPrint
     , fapUserIP
-    , fapProfileId
+    , fapProFileId
     , fapPayload
     , fapKey
     , fapId
@@ -60,7 +60,7 @@ type FloodlightActivitiesPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] FloodlightActivity :>
+                           ReqBody '[OctetStream] FloodlightActivity :>
                              Patch '[JSON] FloodlightActivity
 
 -- | Updates an existing floodlight activity. This method supports patch
@@ -71,7 +71,7 @@ data FloodlightActivitiesPatch' = FloodlightActivitiesPatch'
     { _fapQuotaUser   :: !(Maybe Text)
     , _fapPrettyPrint :: !Bool
     , _fapUserIP      :: !(Maybe Text)
-    , _fapProfileId   :: !Int64
+    , _fapProFileId   :: !Int64
     , _fapPayload     :: !FloodlightActivity
     , _fapKey         :: !(Maybe Key)
     , _fapId          :: !Int64
@@ -89,7 +89,7 @@ data FloodlightActivitiesPatch' = FloodlightActivitiesPatch'
 --
 -- * 'fapUserIP'
 --
--- * 'fapProfileId'
+-- * 'fapProFileId'
 --
 -- * 'fapPayload'
 --
@@ -105,12 +105,12 @@ floodlightActivitiesPatch'
     -> FloodlightActivity -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> FloodlightActivitiesPatch'
-floodlightActivitiesPatch' pFapProfileId_ pFapPayload_ pFapId_ =
+floodlightActivitiesPatch' pFapProFileId_ pFapPayload_ pFapId_ =
     FloodlightActivitiesPatch'
     { _fapQuotaUser = Nothing
     , _fapPrettyPrint = True
     , _fapUserIP = Nothing
-    , _fapProfileId = pFapProfileId_
+    , _fapProFileId = pFapProFileId_
     , _fapPayload = pFapPayload_
     , _fapKey = Nothing
     , _fapId = pFapId_
@@ -138,9 +138,9 @@ fapUserIP
   = lens _fapUserIP (\ s a -> s{_fapUserIP = a})
 
 -- | User profile ID associated with this request.
-fapProfileId :: Lens' FloodlightActivitiesPatch' Int64
-fapProfileId
-  = lens _fapProfileId (\ s a -> s{_fapProfileId = a})
+fapProFileId :: Lens' FloodlightActivitiesPatch' Int64
+fapProFileId
+  = lens _fapProFileId (\ s a -> s{_fapProFileId = a})
 
 -- | Multipart request metadata.
 fapPayload :: Lens' FloodlightActivitiesPatch' FloodlightActivity
@@ -178,7 +178,7 @@ instance GoogleRequest FloodlightActivitiesPatch'
              FloodlightActivity
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u FloodlightActivitiesPatch'{..}
-          = go _fapProfileId (Just _fapId) _fapQuotaUser
+          = go _fapProFileId (Just _fapId) _fapQuotaUser
               (Just _fapPrettyPrint)
               _fapUserIP
               _fapFields

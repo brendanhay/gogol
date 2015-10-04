@@ -63,7 +63,8 @@ type DatabasesUpdateResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] Database :> Put '[JSON] Operation
+                               ReqBody '[OctetStream] Database :>
+                                 Put '[JSON] Operation
 
 -- | Updates a resource containing information about a database inside a
 -- Cloud SQL instance.

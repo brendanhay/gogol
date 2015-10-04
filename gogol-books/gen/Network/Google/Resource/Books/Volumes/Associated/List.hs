@@ -55,10 +55,12 @@ type VolumesAssociatedListResource =
          "associated" :>
            QueryParam "locale" Text :>
              QueryParam "maxAllowedMaturityRating"
-               BooksVolumesAssociatedListMaxAllowedMaturityRating
+               VolumesAssociatedListMaxAllowedMaturityRating
                :>
                QueryParam "source" Text :>
-                 QueryParam "association" Association :>
+                 QueryParam "association"
+                   VolumesAssociatedListAssociation
+                   :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -75,13 +77,13 @@ data VolumesAssociatedList' = VolumesAssociatedList'
     , _valPrettyPrint              :: !Bool
     , _valUserIP                   :: !(Maybe Text)
     , _valLocale                   :: !(Maybe Text)
-    , _valMaxAllowedMaturityRating :: !(Maybe BooksVolumesAssociatedListMaxAllowedMaturityRating)
+    , _valMaxAllowedMaturityRating :: !(Maybe VolumesAssociatedListMaxAllowedMaturityRating)
     , _valKey                      :: !(Maybe Key)
     , _valVolumeId                 :: !Text
     , _valSource                   :: !(Maybe Text)
     , _valOAuthToken               :: !(Maybe OAuthToken)
     , _valFields                   :: !(Maybe Text)
-    , _valAssociation              :: !(Maybe Association)
+    , _valAssociation              :: !(Maybe VolumesAssociatedListAssociation)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VolumesAssociatedList'' with the minimum fields required to make a request.
@@ -154,7 +156,7 @@ valLocale
 
 -- | The maximum allowed maturity rating of returned recommendations. Books
 -- with a higher maturity rating are filtered out.
-valMaxAllowedMaturityRating :: Lens' VolumesAssociatedList' (Maybe BooksVolumesAssociatedListMaxAllowedMaturityRating)
+valMaxAllowedMaturityRating :: Lens' VolumesAssociatedList' (Maybe VolumesAssociatedListMaxAllowedMaturityRating)
 valMaxAllowedMaturityRating
   = lens _valMaxAllowedMaturityRating
       (\ s a -> s{_valMaxAllowedMaturityRating = a})
@@ -187,7 +189,7 @@ valFields
   = lens _valFields (\ s a -> s{_valFields = a})
 
 -- | Association type.
-valAssociation :: Lens' VolumesAssociatedList' (Maybe Association)
+valAssociation :: Lens' VolumesAssociatedList' (Maybe VolumesAssociatedListAssociation)
 valAssociation
   = lens _valAssociation
       (\ s a -> s{_valAssociation = a})

@@ -54,7 +54,7 @@ type PostsSearchResource =
          "posts" :>
            "search" :>
              QueryParam "q" Text :>
-               QueryParam "orderBy" BloggerPostsSearchOrderBy :>
+               QueryParam "orderBy" PostsSearchOrderBy :>
                  QueryParam "fetchBodies" Bool :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
@@ -70,7 +70,7 @@ type PostsSearchResource =
 data PostsSearch' = PostsSearch'
     { _psQuotaUser   :: !(Maybe Text)
     , _psPrettyPrint :: !Bool
-    , _psOrderBy     :: !BloggerPostsSearchOrderBy
+    , _psOrderBy     :: !PostsSearchOrderBy
     , _psUserIP      :: !(Maybe Text)
     , _psBlogId      :: !Text
     , _psQ           :: !Text
@@ -111,7 +111,7 @@ postsSearch' pPsBlogId_ pPsQ_ =
     PostsSearch'
     { _psQuotaUser = Nothing
     , _psPrettyPrint = True
-    , _psOrderBy = BPSOBPublished
+    , _psOrderBy = PSOBPublished
     , _psUserIP = Nothing
     , _psBlogId = pPsBlogId_
     , _psQ = pPsQ_
@@ -135,7 +135,7 @@ psPrettyPrint
       (\ s a -> s{_psPrettyPrint = a})
 
 -- | Sort search results
-psOrderBy :: Lens' PostsSearch' BloggerPostsSearchOrderBy
+psOrderBy :: Lens' PostsSearch' PostsSearchOrderBy
 psOrderBy
   = lens _psOrderBy (\ s a -> s{_psOrderBy = a})
 

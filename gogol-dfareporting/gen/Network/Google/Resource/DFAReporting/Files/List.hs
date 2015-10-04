@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Files.List
     , flQuotaUser
     , flPrettyPrint
     , flUserIP
-    , flProfileId
+    , flProFileId
     , flSortOrder
     , flKey
     , flScope
@@ -54,12 +54,10 @@ type FilesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "files" :>
-           QueryParam "sortOrder" DfareportingFilesListSortOrder
-             :>
-             QueryParam "scope" DfareportingFilesListScope :>
+           QueryParam "sortOrder" FilesListSortOrder :>
+             QueryParam "scope" FilesListScope :>
                QueryParam "pageToken" Text :>
-                 QueryParam "sortField" DfareportingFilesListSortField
-                   :>
+                 QueryParam "sortField" FilesListSortField :>
                    QueryParam "maxResults" Int32 :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
@@ -77,12 +75,12 @@ data FilesList' = FilesList'
     { _flQuotaUser   :: !(Maybe Text)
     , _flPrettyPrint :: !Bool
     , _flUserIP      :: !(Maybe Text)
-    , _flProfileId   :: !Int64
-    , _flSortOrder   :: !DfareportingFilesListSortOrder
+    , _flProFileId   :: !Int64
+    , _flSortOrder   :: !FilesListSortOrder
     , _flKey         :: !(Maybe Key)
-    , _flScope       :: !DfareportingFilesListScope
+    , _flScope       :: !FilesListScope
     , _flPageToken   :: !(Maybe Text)
-    , _flSortField   :: !DfareportingFilesListSortField
+    , _flSortField   :: !FilesListSortField
     , _flOAuthToken  :: !(Maybe OAuthToken)
     , _flMaxResults  :: !(Maybe Int32)
     , _flFields      :: !(Maybe Text)
@@ -98,7 +96,7 @@ data FilesList' = FilesList'
 --
 -- * 'flUserIP'
 --
--- * 'flProfileId'
+-- * 'flProFileId'
 --
 -- * 'flSortOrder'
 --
@@ -118,17 +116,17 @@ data FilesList' = FilesList'
 filesList'
     :: Int64 -- ^ 'profileId'
     -> FilesList'
-filesList' pFlProfileId_ =
+filesList' pFlProFileId_ =
     FilesList'
     { _flQuotaUser = Nothing
     , _flPrettyPrint = True
     , _flUserIP = Nothing
-    , _flProfileId = pFlProfileId_
-    , _flSortOrder = DFLSODescending
+    , _flProFileId = pFlProFileId_
+    , _flSortOrder = FLSODescending
     , _flKey = Nothing
-    , _flScope = Mine
+    , _flScope = FLSMine
     , _flPageToken = Nothing
-    , _flSortField = DFLSFLastModifiedTime
+    , _flSortField = FLSFLastModifiedTime
     , _flOAuthToken = Nothing
     , _flMaxResults = Nothing
     , _flFields = Nothing
@@ -153,12 +151,12 @@ flUserIP :: Lens' FilesList' (Maybe Text)
 flUserIP = lens _flUserIP (\ s a -> s{_flUserIP = a})
 
 -- | The DFA profile ID.
-flProfileId :: Lens' FilesList' Int64
-flProfileId
-  = lens _flProfileId (\ s a -> s{_flProfileId = a})
+flProFileId :: Lens' FilesList' Int64
+flProFileId
+  = lens _flProFileId (\ s a -> s{_flProFileId = a})
 
 -- | Order of sorted results, default is \'DESCENDING\'.
-flSortOrder :: Lens' FilesList' DfareportingFilesListSortOrder
+flSortOrder :: Lens' FilesList' FilesListSortOrder
 flSortOrder
   = lens _flSortOrder (\ s a -> s{_flSortOrder = a})
 
@@ -169,7 +167,7 @@ flKey :: Lens' FilesList' (Maybe Key)
 flKey = lens _flKey (\ s a -> s{_flKey = a})
 
 -- | The scope that defines which results are returned, default is \'MINE\'.
-flScope :: Lens' FilesList' DfareportingFilesListScope
+flScope :: Lens' FilesList' FilesListScope
 flScope = lens _flScope (\ s a -> s{_flScope = a})
 
 -- | The value of the nextToken from the previous result page.
@@ -178,7 +176,7 @@ flPageToken
   = lens _flPageToken (\ s a -> s{_flPageToken = a})
 
 -- | The field by which to sort the list.
-flSortField :: Lens' FilesList' DfareportingFilesListSortField
+flSortField :: Lens' FilesList' FilesListSortField
 flSortField
   = lens _flSortField (\ s a -> s{_flSortField = a})
 
@@ -204,7 +202,7 @@ instance GoogleRequest FilesList' where
         type Rs FilesList' = FileList
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u FilesList'{..}
-          = go _flProfileId (Just _flSortOrder) (Just _flScope)
+          = go _flProFileId (Just _flSortOrder) (Just _flScope)
               _flPageToken
               (Just _flSortField)
               _flMaxResults

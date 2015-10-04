@@ -36,7 +36,7 @@ module Network.Google.Resource.DFAReporting.LandingPages.Patch
     , lppPrettyPrint
     , lppUserIP
     , lppCampaignId
-    , lppProfileId
+    , lppProFileId
     , lppPayload
     , lppKey
     , lppId
@@ -63,7 +63,7 @@ type LandingPagesPatchResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] LandingPage :>
+                               ReqBody '[OctetStream] LandingPage :>
                                  Patch '[JSON] LandingPage
 
 -- | Updates an existing campaign landing page. This method supports patch
@@ -75,7 +75,7 @@ data LandingPagesPatch' = LandingPagesPatch'
     , _lppPrettyPrint :: !Bool
     , _lppUserIP      :: !(Maybe Text)
     , _lppCampaignId  :: !Int64
-    , _lppProfileId   :: !Int64
+    , _lppProFileId   :: !Int64
     , _lppPayload     :: !LandingPage
     , _lppKey         :: !(Maybe Key)
     , _lppId          :: !Int64
@@ -95,7 +95,7 @@ data LandingPagesPatch' = LandingPagesPatch'
 --
 -- * 'lppCampaignId'
 --
--- * 'lppProfileId'
+-- * 'lppProFileId'
 --
 -- * 'lppPayload'
 --
@@ -112,13 +112,13 @@ landingPagesPatch'
     -> LandingPage -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> LandingPagesPatch'
-landingPagesPatch' pLppCampaignId_ pLppProfileId_ pLppPayload_ pLppId_ =
+landingPagesPatch' pLppCampaignId_ pLppProFileId_ pLppPayload_ pLppId_ =
     LandingPagesPatch'
     { _lppQuotaUser = Nothing
     , _lppPrettyPrint = True
     , _lppUserIP = Nothing
     , _lppCampaignId = pLppCampaignId_
-    , _lppProfileId = pLppProfileId_
+    , _lppProFileId = pLppProFileId_
     , _lppPayload = pLppPayload_
     , _lppKey = Nothing
     , _lppId = pLppId_
@@ -152,9 +152,9 @@ lppCampaignId
       (\ s a -> s{_lppCampaignId = a})
 
 -- | User profile ID associated with this request.
-lppProfileId :: Lens' LandingPagesPatch' Int64
-lppProfileId
-  = lens _lppProfileId (\ s a -> s{_lppProfileId = a})
+lppProFileId :: Lens' LandingPagesPatch' Int64
+lppProFileId
+  = lens _lppProFileId (\ s a -> s{_lppProFileId = a})
 
 -- | Multipart request metadata.
 lppPayload :: Lens' LandingPagesPatch' LandingPage
@@ -190,7 +190,7 @@ instance GoogleRequest LandingPagesPatch' where
         type Rs LandingPagesPatch' = LandingPage
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u LandingPagesPatch'{..}
-          = go _lppProfileId _lppCampaignId (Just _lppId)
+          = go _lppProFileId _lppCampaignId (Just _lppId)
               _lppQuotaUser
               (Just _lppPrettyPrint)
               _lppUserIP

@@ -51,7 +51,7 @@ type BlogsGetResource =
      "blogs" :>
        Capture "blogId" Text :>
          QueryParam "maxPosts" Word32 :>
-           QueryParam "view" BloggerBlogsGetView :>
+           QueryParam "view" BlogsGetView :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -70,7 +70,7 @@ data BlogsGet' = BlogsGet'
     , _bgBlogId      :: !Text
     , _bgKey         :: !(Maybe Key)
     , _bgMaxPosts    :: !(Maybe Word32)
-    , _bgView        :: !(Maybe BloggerBlogsGetView)
+    , _bgView        :: !(Maybe BlogsGetView)
     , _bgOAuthToken  :: !(Maybe OAuthToken)
     , _bgFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -147,7 +147,7 @@ bgMaxPosts
 
 -- | Access level with which to view the blog. Note that some fields require
 -- elevated access.
-bgView :: Lens' BlogsGet' (Maybe BloggerBlogsGetView)
+bgView :: Lens' BlogsGet' (Maybe BlogsGetView)
 bgView = lens _bgView (\ s a -> s{_bgView = a})
 
 -- | OAuth 2.0 token for the current user.

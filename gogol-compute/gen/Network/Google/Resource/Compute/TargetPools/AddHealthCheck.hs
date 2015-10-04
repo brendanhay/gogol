@@ -62,7 +62,8 @@ type TargetPoolsAddHealthCheckResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] TargetPoolsAddHealthCheckRequest
+                               ReqBody '[OctetStream]
+                                 TargetPoolsAddHealthCheckRequest
                                  :> Post '[JSON] Operation
 
 -- | Adds health check URL to targetPool.

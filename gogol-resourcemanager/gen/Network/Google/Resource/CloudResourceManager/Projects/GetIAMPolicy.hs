@@ -69,8 +69,8 @@ type ProjectsGetIAMPolicyResource =
                                QueryParam "key" Key :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
-                                     ReqBody '[JSON] GetIAMPolicyRequest :>
-                                       Post '[JSON] Policy
+                                     ReqBody '[OctetStream] GetIAMPolicyRequest
+                                       :> Post '[JSON] Policy
 
 -- | Returns the IAM access control policy for specified project.
 --

@@ -52,7 +52,9 @@ type SubscriptionsDeleteResource =
        Capture "customerId" Text :>
          "subscriptions" :>
            Capture "subscriptionId" Text :>
-             QueryParam "deletionType" DeletionType :>
+             QueryParam "deletionType"
+               SubscriptionsDeleteDeletionType
+               :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -69,7 +71,7 @@ data SubscriptionsDelete' = SubscriptionsDelete'
     , _sdPrettyPrint    :: !Bool
     , _sdUserIP         :: !(Maybe Text)
     , _sdCustomerId     :: !Text
-    , _sdDeletionType   :: !DeletionType
+    , _sdDeletionType   :: !SubscriptionsDeleteDeletionType
     , _sdKey            :: !(Maybe Key)
     , _sdOAuthToken     :: !(Maybe OAuthToken)
     , _sdSubscriptionId :: !Text
@@ -99,7 +101,7 @@ data SubscriptionsDelete' = SubscriptionsDelete'
 -- * 'sdFields'
 subscriptionsDelete'
     :: Text -- ^ 'customerId'
-    -> DeletionType -- ^ 'deletionType'
+    -> SubscriptionsDeleteDeletionType -- ^ 'deletionType'
     -> Text -- ^ 'subscriptionId'
     -> SubscriptionsDelete'
 subscriptionsDelete' pSdCustomerId_ pSdDeletionType_ pSdSubscriptionId_ =
@@ -139,7 +141,7 @@ sdCustomerId
   = lens _sdCustomerId (\ s a -> s{_sdCustomerId = a})
 
 -- | Whether the subscription is to be fully cancelled or downgraded
-sdDeletionType :: Lens' SubscriptionsDelete' DeletionType
+sdDeletionType :: Lens' SubscriptionsDelete' SubscriptionsDeleteDeletionType
 sdDeletionType
   = lens _sdDeletionType
       (\ s a -> s{_sdDeletionType = a})

@@ -62,7 +62,8 @@ type TargetPoolsRemoveInstanceResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] TargetPoolsRemoveInstanceRequest
+                               ReqBody '[OctetStream]
+                                 TargetPoolsRemoveInstanceRequest
                                  :> Post '[JSON] Operation
 
 -- | Removes instance URL from targetPool.

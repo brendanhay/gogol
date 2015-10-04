@@ -59,7 +59,7 @@ type AnnotationsPatchResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Annotation :>
+                       ReqBody '[OctetStream] Annotation :>
                          Patch '[JSON] Annotation
 
 -- | Updates an annotation. The update must respect all mutability

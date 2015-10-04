@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.OperatingSystems.List
     , oslQuotaUser
     , oslPrettyPrint
     , oslUserIP
-    , oslProfileId
+    , oslProFileId
     , oslKey
     , oslOAuthToken
     , oslFields
@@ -65,7 +65,7 @@ data OperatingSystemsList' = OperatingSystemsList'
     { _oslQuotaUser   :: !(Maybe Text)
     , _oslPrettyPrint :: !Bool
     , _oslUserIP      :: !(Maybe Text)
-    , _oslProfileId   :: !Int64
+    , _oslProFileId   :: !Int64
     , _oslKey         :: !(Maybe Key)
     , _oslOAuthToken  :: !(Maybe OAuthToken)
     , _oslFields      :: !(Maybe Text)
@@ -81,7 +81,7 @@ data OperatingSystemsList' = OperatingSystemsList'
 --
 -- * 'oslUserIP'
 --
--- * 'oslProfileId'
+-- * 'oslProFileId'
 --
 -- * 'oslKey'
 --
@@ -91,12 +91,12 @@ data OperatingSystemsList' = OperatingSystemsList'
 operatingSystemsList'
     :: Int64 -- ^ 'profileId'
     -> OperatingSystemsList'
-operatingSystemsList' pOslProfileId_ =
+operatingSystemsList' pOslProFileId_ =
     OperatingSystemsList'
     { _oslQuotaUser = Nothing
     , _oslPrettyPrint = True
     , _oslUserIP = Nothing
-    , _oslProfileId = pOslProfileId_
+    , _oslProFileId = pOslProFileId_
     , _oslKey = Nothing
     , _oslOAuthToken = Nothing
     , _oslFields = Nothing
@@ -122,9 +122,9 @@ oslUserIP
   = lens _oslUserIP (\ s a -> s{_oslUserIP = a})
 
 -- | User profile ID associated with this request.
-oslProfileId :: Lens' OperatingSystemsList' Int64
-oslProfileId
-  = lens _oslProfileId (\ s a -> s{_oslProfileId = a})
+oslProFileId :: Lens' OperatingSystemsList' Int64
+oslProFileId
+  = lens _oslProFileId (\ s a -> s{_oslProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -152,7 +152,7 @@ instance GoogleRequest OperatingSystemsList' where
              OperatingSystemsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u OperatingSystemsList'{..}
-          = go _oslProfileId _oslQuotaUser
+          = go _oslProFileId _oslQuotaUser
               (Just _oslPrettyPrint)
               _oslUserIP
               _oslFields

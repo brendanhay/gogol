@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 type MapsGetResource =
      "maps" :>
        Capture "id" Text :>
-         QueryParam "version" Version :>
+         QueryParam "version" MapsGetVersion :>
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
@@ -66,7 +66,7 @@ data MapsGet' = MapsGet'
     , _mgPrettyPrint :: !Bool
     , _mgUserIP      :: !(Maybe Text)
     , _mgKey         :: !(Maybe Key)
-    , _mgVersion     :: !(Maybe Version)
+    , _mgVersion     :: !(Maybe MapsGetVersion)
     , _mgId          :: !Text
     , _mgOAuthToken  :: !(Maybe OAuthToken)
     , _mgFields      :: !(Maybe Text)
@@ -134,7 +134,7 @@ mgKey = lens _mgKey (\ s a -> s{_mgKey = a})
 -- should be returned. When version is set to published, the published
 -- version of the map will be returned. Please use the maps.getPublished
 -- endpoint instead.
-mgVersion :: Lens' MapsGet' (Maybe Version)
+mgVersion :: Lens' MapsGet' (Maybe MapsGetVersion)
 mgVersion
   = lens _mgVersion (\ s a -> s{_mgVersion = a})
 

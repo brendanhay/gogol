@@ -59,7 +59,8 @@ type ActivitiesInsertResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Activity :> Post '[JSON] Activity
+                           ReqBody '[OctetStream] Activity :>
+                             Post '[JSON] Activity
 
 -- | Create a new activity for the authenticated user.
 --

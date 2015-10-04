@@ -64,7 +64,7 @@ type AccountsContainersVersionsUpdateResource =
                            QueryParam "key" Key :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
-                                 ReqBody '[JSON] ContainerVersion :>
+                                 ReqBody '[OctetStream] ContainerVersion :>
                                    Put '[JSON] ContainerVersion
 
 -- | Updates a Container Version.

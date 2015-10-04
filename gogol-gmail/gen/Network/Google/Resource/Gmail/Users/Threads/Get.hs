@@ -52,7 +52,7 @@ type UsersThreadsGetResource =
      Capture "userId" Text :>
        "threads" :>
          Capture "id" Text :>
-           QueryParam "format" GmailUsersThreadsGetFormat :>
+           QueryParam "format" UsersThreadsGetFormat :>
              QueryParams "metadataHeaders" Text :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
@@ -69,7 +69,7 @@ data UsersThreadsGet' = UsersThreadsGet'
     { _utgQuotaUser       :: !(Maybe Text)
     , _utgPrettyPrint     :: !Bool
     , _utgUserIP          :: !(Maybe Text)
-    , _utgFormat          :: !GmailUsersThreadsGetFormat
+    , _utgFormat          :: !UsersThreadsGetFormat
     , _utgUserId          :: !Text
     , _utgKey             :: !(Maybe Key)
     , _utgId              :: !Text
@@ -110,7 +110,7 @@ usersThreadsGet' pUtgUserId_ pUtgId_ =
     { _utgQuotaUser = Nothing
     , _utgPrettyPrint = True
     , _utgUserIP = Nothing
-    , _utgFormat = Full
+    , _utgFormat = UTGFFull
     , _utgUserId = pUtgUserId_
     , _utgKey = Nothing
     , _utgId = pUtgId_
@@ -139,7 +139,7 @@ utgUserIP
   = lens _utgUserIP (\ s a -> s{_utgUserIP = a})
 
 -- | The format to return the messages in.
-utgFormat :: Lens' UsersThreadsGet' GmailUsersThreadsGetFormat
+utgFormat :: Lens' UsersThreadsGet' UsersThreadsGetFormat
 utgFormat
   = lens _utgFormat (\ s a -> s{_utgFormat = a})
 

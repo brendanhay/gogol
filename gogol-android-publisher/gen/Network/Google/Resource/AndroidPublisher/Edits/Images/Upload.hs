@@ -56,9 +56,7 @@ type EditsImagesUploadResource =
          Capture "editId" Text :>
            "listings" :>
              Capture "language" Text :>
-               Capture "imageType"
-                 AndroidPublisherEditsImagesUploadImageType
-                 :>
+               Capture "imageType" EditsImagesUploadImageType :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -66,7 +64,8 @@ type EditsImagesUploadResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               Post '[JSON] ImagesUploadResponse
+                               ReqBody '[JSON] Body :>
+                                 Post '[JSON] ImagesUploadResponse
 
 -- | Uploads a new image and adds it to the list of images for the specified
 -- language and image type.
@@ -78,7 +77,7 @@ data EditsImagesUpload' = EditsImagesUpload'
     , _eiuPackageName :: !Text
     , _eiuUserIP      :: !(Maybe Text)
     , _eiuMedia       :: !Body
-    , _eiuImageType   :: !AndroidPublisherEditsImagesUploadImageType
+    , _eiuImageType   :: !EditsImagesUploadImageType
     , _eiuKey         :: !(Maybe Key)
     , _eiuLanguage    :: !Text
     , _eiuOAuthToken  :: !(Maybe OAuthToken)
@@ -114,7 +113,7 @@ data EditsImagesUpload' = EditsImagesUpload'
 editsImagesUpload'
     :: Text -- ^ 'packageName'
     -> Body -- ^ 'media'
-    -> AndroidPublisherEditsImagesUploadImageType -- ^ 'imageType'
+    -> EditsImagesUploadImageType -- ^ 'imageType'
     -> Text -- ^ 'language'
     -> Text -- ^ 'editId'
     -> EditsImagesUpload'
@@ -162,7 +161,7 @@ eiuUserIP
 eiuMedia :: Lens' EditsImagesUpload' Body
 eiuMedia = lens _eiuMedia (\ s a -> s{_eiuMedia = a})
 
-eiuImageType :: Lens' EditsImagesUpload' AndroidPublisherEditsImagesUploadImageType
+eiuImageType :: Lens' EditsImagesUpload' EditsImagesUploadImageType
 eiuImageType
   = lens _eiuImageType (\ s a -> s{_eiuImageType = a})
 

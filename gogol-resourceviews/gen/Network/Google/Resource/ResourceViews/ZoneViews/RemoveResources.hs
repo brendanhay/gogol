@@ -62,7 +62,8 @@ type ZoneViewsRemoveResourcesResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] ZoneViewsRemoveResourcesRequest
+                               ReqBody '[OctetStream]
+                                 ZoneViewsRemoveResourcesRequest
                                  :> Post '[JSON] Operation
 
 -- | Remove resources from the view.

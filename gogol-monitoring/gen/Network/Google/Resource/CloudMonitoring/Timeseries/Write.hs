@@ -62,7 +62,7 @@ type TimeseriesWriteResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] WriteTimeseriesRequest :>
+                       ReqBody '[OctetStream] WriteTimeseriesRequest :>
                          Post '[JSON] WriteTimeseriesResponse
 
 -- | Put data points to one or more time series for one or more metrics. If a

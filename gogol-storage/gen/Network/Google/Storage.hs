@@ -136,6 +136,14 @@ module Network.Google.Storage
     , ooEntity
     , ooEntityId
 
+    -- ** ObjectsInsertProjection
+    , ObjectsInsertProjection (..)
+
+    -- ** BucketVersioning
+    , BucketVersioning
+    , bucketVersioning
+    , bvEnabled
+
     -- ** Buckets
     , Buckets
     , buckets
@@ -143,31 +151,28 @@ module Network.Google.Storage
     , bKind
     , bItems
 
-    -- ** CORSItem
-    , CORSItem
-    , corsItem
-    , ciMaxAgeSeconds
-    , ciOrigin
-    , ciResponseHeader
-    , ciMethod
+    -- ** BucketLogging
+    , BucketLogging
+    , bucketLogging
+    , blLogBucket
+    , blLogObjectPrefix
 
-    -- ** StorageBucketsListProjection
-    , StorageBucketsListProjection (..)
+    -- ** ObjectMetadata
+    , ObjectMetadata
+    , objectMetadata
 
-    -- ** StorageObjectsUpdateProjection
-    , StorageObjectsUpdateProjection (..)
+    -- ** BucketLifecycleRuleItemCondition
+    , BucketLifecycleRuleItemCondition
+    , bucketLifecycleRuleItemCondition
+    , blricAge
+    , blricIsLive
+    , blricNumNewerVersions
+    , blricCreatedBefore
 
-    -- ** Website
-    , Website
-    , website
-    , wMainPageSuffix
-    , wNotFoundPage
-
-    -- ** RuleItem
-    , RuleItem
-    , ruleItem
-    , riAction
-    , riCondition
+    -- ** BucketLifecycle
+    , BucketLifecycle
+    , bucketLifecycle
+    , blRule
 
     -- ** Channel
     , Channel
@@ -182,6 +187,23 @@ module Network.Google.Storage
     , cParams
     , cId
     , cType
+
+    -- ** BucketLifecycleRuleItem
+    , BucketLifecycleRuleItem
+    , bucketLifecycleRuleItem
+    , blriAction
+    , blriCondition
+
+    -- ** ObjectsWatchAllProjection
+    , ObjectsWatchAllProjection (..)
+
+    -- ** BucketCORSItem
+    , BucketCORSItem
+    , bucketCORSItem
+    , bciMaxAgeSeconds
+    , bciOrigin
+    , bciResponseHeader
+    , bciMethod
 
     -- ** Bucket
     , Bucket
@@ -204,16 +226,8 @@ module Network.Google.Storage
     , bucLogging
     , bucACL
 
-    -- ** BucketAccessControls
-    , BucketAccessControls
-    , bucketAccessControls
-    , bacKind
-    , bacItems
-
-    -- ** Action
-    , Action
-    , action
-    , aType
+    -- ** BucketsGetProjection
+    , BucketsGetProjection (..)
 
     -- ** Objects
     , Objects
@@ -223,16 +237,17 @@ module Network.Google.Storage
     , oItems
     , oPrefixes
 
-    -- ** Lifecycle
-    , Lifecycle
-    , lifecycle
-    , lRule
+    -- ** BucketsPatchProjection
+    , BucketsPatchProjection (..)
 
-    -- ** Owner
-    , Owner
-    , owner
-    , oEntity
-    , oEntityId
+    -- ** BucketAccessControls
+    , BucketAccessControls
+    , bucketAccessControls
+    , bacKind
+    , bacItems
+
+    -- ** BucketsUpdateProjection
+    , BucketsUpdateProjection (..)
 
     -- ** ComposeRequest
     , ComposeRequest
@@ -241,64 +256,34 @@ module Network.Google.Storage
     , crKind
     , crSourceObjects
 
-    -- ** Params
-    , Params
-    , params
+    -- ** ObjectsListProjection
+    , ObjectsListProjection (..)
 
-    -- ** StorageObjectsPatchProjection
-    , StorageObjectsPatchProjection (..)
+    -- ** BucketOwner
+    , BucketOwner
+    , bucketOwner
+    , boEntity
+    , boEntityId
 
-    -- ** StorageObjectsGetProjection
-    , StorageObjectsGetProjection (..)
+    -- ** ComposeRequestSourceObjectsItem
+    , ComposeRequestSourceObjectsItem
+    , composeRequestSourceObjectsItem
+    , crsoiName
+    , crsoiObjectPreconditions
+    , crsoiGeneration
 
-    -- ** StorageBucketsGetProjection
-    , StorageBucketsGetProjection (..)
+    -- ** BucketsInsertProjection
+    , BucketsInsertProjection (..)
 
-    -- ** StorageObjectsCopyProjection
-    , StorageObjectsCopyProjection (..)
+    -- ** ChannelParams
+    , ChannelParams
+    , channelParams
 
-    -- ** StorageBucketsPatchProjection
-    , StorageBucketsPatchProjection (..)
+    -- ** BucketsListProjection
+    , BucketsListProjection (..)
 
-    -- ** Versioning
-    , Versioning
-    , versioning
-    , vEnabled
-
-    -- ** StorageObjectsWatchAllProjection
-    , StorageObjectsWatchAllProjection (..)
-
-    -- ** ObjectPreconditions
-    , ObjectPreconditions
-    , objectPreconditions
-    , opsIfGenerationMatch
-
-    -- ** Metadata
-    , Metadata
-    , metadata
-
-    -- ** BucketAccessControl
-    , BucketAccessControl
-    , bucketAccessControl
-    , bacaEmail
-    , bacaEtag
-    , bacaKind
-    , bacaDomain
-    , bacaBucket
-    , bacaRole
-    , bacaSelfLink
-    , bacaId
-    , bacaEntity
-    , bacaEntityId
-
-    -- ** ObjectAccessControls
-    , ObjectAccessControls
-    , objectAccessControls
-    , oacKind
-    , oacItems
-
-    -- ** StorageObjectsInsertProjection
-    , StorageObjectsInsertProjection (..)
+    -- ** ObjectsUpdateProjection
+    , ObjectsUpdateProjection (..)
 
     -- ** Object
     , Object
@@ -328,28 +313,47 @@ module Network.Google.Storage
     , objMD5Hash
     , objContentType
 
-    -- ** Projection
-    , Projection (..)
+    -- ** ObjectsPatchProjection
+    , ObjectsPatchProjection (..)
 
-    -- ** StorageBucketsUpdateProjection
-    , StorageBucketsUpdateProjection (..)
+    -- ** ComposeRequestSourceObjectsItemObjectPreconditions
+    , ComposeRequestSourceObjectsItemObjectPreconditions
+    , composeRequestSourceObjectsItemObjectPreconditions
+    , crsoiopIfGenerationMatch
 
-    -- ** StorageObjectsListProjection
-    , StorageObjectsListProjection (..)
+    -- ** ObjectAccessControls
+    , ObjectAccessControls
+    , objectAccessControls
+    , oacKind
+    , oacItems
 
-    -- ** Condition
-    , Condition
-    , condition
-    , cAge
-    , cIsLive
-    , cNumNewerVersions
-    , cCreatedBefore
+    -- ** BucketWebsite
+    , BucketWebsite
+    , bucketWebsite
+    , bwMainPageSuffix
+    , bwNotFoundPage
 
-    -- ** Logging
-    , Logging
-    , logging
-    , lLogBucket
-    , lLogObjectPrefix
+    -- ** BucketAccessControl
+    , BucketAccessControl
+    , bucketAccessControl
+    , bacaEmail
+    , bacaEtag
+    , bacaKind
+    , bacaDomain
+    , bacaBucket
+    , bacaRole
+    , bacaSelfLink
+    , bacaId
+    , bacaEntity
+    , bacaEntityId
+
+    -- ** BucketLifecycleRuleItemAction
+    , BucketLifecycleRuleItemAction
+    , bucketLifecycleRuleItemAction
+    , blriaType
+
+    -- ** ObjectsGetProjection
+    , ObjectsGetProjection (..)
 
     -- ** ObjectAccessControl
     , ObjectAccessControl
@@ -367,12 +371,8 @@ module Network.Google.Storage
     , oacaGeneration
     , oacaEntityId
 
-    -- ** SourceObjectsItem
-    , SourceObjectsItem
-    , sourceObjectsItem
-    , soiName
-    , soiObjectPreconditions
-    , soiGeneration
+    -- ** ObjectsCopyProjection
+    , ObjectsCopyProjection (..)
     ) where
 
 import           Network.Google.Prelude
@@ -423,12 +423,12 @@ type StorageAPI =
        :<|> BucketsDeleteResource
        :<|> BucketsUpdateResource
        :<|> ChannelsStopResource
-       :<|> BucketAccessControlsInsertResource
-       :<|> BucketAccessControlsListResource
-       :<|> BucketAccessControlsPatchResource
-       :<|> BucketAccessControlsGetResource
-       :<|> BucketAccessControlsDeleteResource
-       :<|> BucketAccessControlsUpdateResource
+       :<|> DefaultObjectAccessControlsInsertResource
+       :<|> DefaultObjectAccessControlsListResource
+       :<|> DefaultObjectAccessControlsPatchResource
+       :<|> DefaultObjectAccessControlsGetResource
+       :<|> DefaultObjectAccessControlsDeleteResource
+       :<|> DefaultObjectAccessControlsUpdateResource
        :<|> ObjectsInsertResource
        :<|> ObjectsListResource
        :<|> ObjectsCopyResource
@@ -438,12 +438,12 @@ type StorageAPI =
        :<|> ObjectsComposeResource
        :<|> ObjectsDeleteResource
        :<|> ObjectsUpdateResource
-       :<|> DefaultObjectAccessControlsInsertResource
-       :<|> DefaultObjectAccessControlsListResource
-       :<|> DefaultObjectAccessControlsPatchResource
-       :<|> DefaultObjectAccessControlsGetResource
-       :<|> DefaultObjectAccessControlsDeleteResource
-       :<|> DefaultObjectAccessControlsUpdateResource
+       :<|> BucketAccessControlsInsertResource
+       :<|> BucketAccessControlsListResource
+       :<|> BucketAccessControlsPatchResource
+       :<|> BucketAccessControlsGetResource
+       :<|> BucketAccessControlsDeleteResource
+       :<|> BucketAccessControlsUpdateResource
        :<|> ObjectAccessControlsInsertResource
        :<|> ObjectAccessControlsListResource
        :<|> ObjectAccessControlsPatchResource

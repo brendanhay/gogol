@@ -57,7 +57,8 @@ type UsersMakeAdminResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] UserMakeAdmin :> Post '[JSON] ()
+                         ReqBody '[OctetStream] UserMakeAdmin :>
+                           Post '[JSON] ()
 
 -- | change admin status of a user
 --

@@ -55,10 +55,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @GANAdvertisersList@ which the
 -- 'AdvertisersList'' request conforms to.
 type AdvertisersListResource =
-     Capture "role" GANAdvertisersListRole :>
+     Capture "role" AdvertisersListRole :>
        Capture "roleId" Text :>
          "advertisers" :>
-           QueryParam "relationshipStatus" RelationshipStatus :>
+           QueryParam "relationshipStatus"
+             AdvertisersListRelationshipStatus
+             :>
              QueryParam "minSevenDayEpc" Double :>
                QueryParam "minNinetyDayEpc" Double :>
                  QueryParam "minPayoutRank" Int32 :>
@@ -82,11 +84,11 @@ data AdvertisersList' = AdvertisersList'
     { _alQuotaUser          :: !(Maybe Text)
     , _alPrettyPrint        :: !Bool
     , _alUserIP             :: !(Maybe Text)
-    , _alRelationshipStatus :: !(Maybe RelationshipStatus)
+    , _alRelationshipStatus :: !(Maybe AdvertisersListRelationshipStatus)
     , _alMinSevenDayEpc     :: !(Maybe Double)
     , _alRoleId             :: !Text
     , _alMinNinetyDayEpc    :: !(Maybe Double)
-    , _alRole               :: !GANAdvertisersListRole
+    , _alRole               :: !AdvertisersListRole
     , _alKey                :: !(Maybe Key)
     , _alMinPayoutRank      :: !(Maybe Int32)
     , _alAdvertiserCategory :: !(Maybe Text)
@@ -131,7 +133,7 @@ data AdvertisersList' = AdvertisersList'
 -- * 'alFields'
 advertisersList'
     :: Text -- ^ 'roleId'
-    -> GANAdvertisersListRole -- ^ 'role'
+    -> AdvertisersListRole -- ^ 'role'
     -> AdvertisersList'
 advertisersList' pAlRoleId_ pAlRole_ =
     AdvertisersList'
@@ -172,7 +174,7 @@ alUserIP = lens _alUserIP (\ s a -> s{_alUserIP = a})
 
 -- | Filters out all advertisers for which do not have the given relationship
 -- status with the requesting publisher.
-alRelationshipStatus :: Lens' AdvertisersList' (Maybe RelationshipStatus)
+alRelationshipStatus :: Lens' AdvertisersList' (Maybe AdvertisersListRelationshipStatus)
 alRelationshipStatus
   = lens _alRelationshipStatus
       (\ s a -> s{_alRelationshipStatus = a})
@@ -197,7 +199,7 @@ alMinNinetyDayEpc
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-alRole :: Lens' AdvertisersList' GANAdvertisersListRole
+alRole :: Lens' AdvertisersList' AdvertisersListRole
 alRole = lens _alRole (\ s a -> s{_alRole = a})
 
 -- | API key. Your API key identifies your project and provides you with API

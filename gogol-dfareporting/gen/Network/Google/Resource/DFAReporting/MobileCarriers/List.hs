@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.MobileCarriers.List
     , mclQuotaUser
     , mclPrettyPrint
     , mclUserIP
-    , mclProfileId
+    , mclProFileId
     , mclKey
     , mclOAuthToken
     , mclFields
@@ -65,7 +65,7 @@ data MobileCarriersList' = MobileCarriersList'
     { _mclQuotaUser   :: !(Maybe Text)
     , _mclPrettyPrint :: !Bool
     , _mclUserIP      :: !(Maybe Text)
-    , _mclProfileId   :: !Int64
+    , _mclProFileId   :: !Int64
     , _mclKey         :: !(Maybe Key)
     , _mclOAuthToken  :: !(Maybe OAuthToken)
     , _mclFields      :: !(Maybe Text)
@@ -81,7 +81,7 @@ data MobileCarriersList' = MobileCarriersList'
 --
 -- * 'mclUserIP'
 --
--- * 'mclProfileId'
+-- * 'mclProFileId'
 --
 -- * 'mclKey'
 --
@@ -91,12 +91,12 @@ data MobileCarriersList' = MobileCarriersList'
 mobileCarriersList'
     :: Int64 -- ^ 'profileId'
     -> MobileCarriersList'
-mobileCarriersList' pMclProfileId_ =
+mobileCarriersList' pMclProFileId_ =
     MobileCarriersList'
     { _mclQuotaUser = Nothing
     , _mclPrettyPrint = True
     , _mclUserIP = Nothing
-    , _mclProfileId = pMclProfileId_
+    , _mclProFileId = pMclProFileId_
     , _mclKey = Nothing
     , _mclOAuthToken = Nothing
     , _mclFields = Nothing
@@ -122,9 +122,9 @@ mclUserIP
   = lens _mclUserIP (\ s a -> s{_mclUserIP = a})
 
 -- | User profile ID associated with this request.
-mclProfileId :: Lens' MobileCarriersList' Int64
-mclProfileId
-  = lens _mclProfileId (\ s a -> s{_mclProfileId = a})
+mclProFileId :: Lens' MobileCarriersList' Int64
+mclProFileId
+  = lens _mclProFileId (\ s a -> s{_mclProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -152,7 +152,7 @@ instance GoogleRequest MobileCarriersList' where
              MobileCarriersListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u MobileCarriersList'{..}
-          = go _mclProfileId _mclQuotaUser
+          = go _mclProFileId _mclQuotaUser
               (Just _mclPrettyPrint)
               _mclUserIP
               _mclFields

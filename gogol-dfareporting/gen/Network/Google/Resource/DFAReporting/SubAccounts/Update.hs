@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.SubAccounts.Update
     , sauQuotaUser
     , sauPrettyPrint
     , sauUserIP
-    , sauProfileId
+    , sauProFileId
     , sauPayload
     , sauKey
     , sauOAuthToken
@@ -57,7 +57,8 @@ type SubAccountsUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] SubAccount :> Put '[JSON] SubAccount
+                         ReqBody '[OctetStream] SubAccount :>
+                           Put '[JSON] SubAccount
 
 -- | Updates an existing subaccount.
 --
@@ -66,7 +67,7 @@ data SubAccountsUpdate' = SubAccountsUpdate'
     { _sauQuotaUser   :: !(Maybe Text)
     , _sauPrettyPrint :: !Bool
     , _sauUserIP      :: !(Maybe Text)
-    , _sauProfileId   :: !Int64
+    , _sauProFileId   :: !Int64
     , _sauPayload     :: !SubAccount
     , _sauKey         :: !(Maybe Key)
     , _sauOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +84,7 @@ data SubAccountsUpdate' = SubAccountsUpdate'
 --
 -- * 'sauUserIP'
 --
--- * 'sauProfileId'
+-- * 'sauProFileId'
 --
 -- * 'sauPayload'
 --
@@ -96,12 +97,12 @@ subAccountsUpdate'
     :: Int64 -- ^ 'profileId'
     -> SubAccount -- ^ 'payload'
     -> SubAccountsUpdate'
-subAccountsUpdate' pSauProfileId_ pSauPayload_ =
+subAccountsUpdate' pSauProFileId_ pSauPayload_ =
     SubAccountsUpdate'
     { _sauQuotaUser = Nothing
     , _sauPrettyPrint = True
     , _sauUserIP = Nothing
-    , _sauProfileId = pSauProfileId_
+    , _sauProFileId = pSauProFileId_
     , _sauPayload = pSauPayload_
     , _sauKey = Nothing
     , _sauOAuthToken = Nothing
@@ -128,9 +129,9 @@ sauUserIP
   = lens _sauUserIP (\ s a -> s{_sauUserIP = a})
 
 -- | User profile ID associated with this request.
-sauProfileId :: Lens' SubAccountsUpdate' Int64
-sauProfileId
-  = lens _sauProfileId (\ s a -> s{_sauProfileId = a})
+sauProFileId :: Lens' SubAccountsUpdate' Int64
+sauProFileId
+  = lens _sauProFileId (\ s a -> s{_sauProFileId = a})
 
 -- | Multipart request metadata.
 sauPayload :: Lens' SubAccountsUpdate' SubAccount
@@ -162,7 +163,7 @@ instance GoogleRequest SubAccountsUpdate' where
         type Rs SubAccountsUpdate' = SubAccount
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u SubAccountsUpdate'{..}
-          = go _sauProfileId _sauQuotaUser
+          = go _sauProFileId _sauQuotaUser
               (Just _sauPrettyPrint)
               _sauUserIP
               _sauFields

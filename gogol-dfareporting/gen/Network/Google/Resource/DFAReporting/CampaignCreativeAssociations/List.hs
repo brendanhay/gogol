@@ -36,7 +36,7 @@ module Network.Google.Resource.DFAReporting.CampaignCreativeAssociations.List
     , ccalPrettyPrint
     , ccalUserIP
     , ccalCampaignId
-    , ccalProfileId
+    , ccalProFileId
     , ccalSortOrder
     , ccalKey
     , ccalPageToken
@@ -57,7 +57,7 @@ type CampaignCreativeAssociationsListResource =
            Capture "campaignId" Int64 :>
              "campaignCreativeAssociations" :>
                QueryParam "sortOrder"
-                 DfareportingCampaignCreativeAssociationsListSortOrder
+                 CampaignCreativeAssociationsListSortOrder
                  :>
                  QueryParam "pageToken" Text :>
                    QueryParam "maxResults" Int32 :>
@@ -80,8 +80,8 @@ data CampaignCreativeAssociationsList' = CampaignCreativeAssociationsList'
     , _ccalPrettyPrint :: !Bool
     , _ccalUserIP      :: !(Maybe Text)
     , _ccalCampaignId  :: !Int64
-    , _ccalProfileId   :: !Int64
-    , _ccalSortOrder   :: !(Maybe DfareportingCampaignCreativeAssociationsListSortOrder)
+    , _ccalProFileId   :: !Int64
+    , _ccalSortOrder   :: !(Maybe CampaignCreativeAssociationsListSortOrder)
     , _ccalKey         :: !(Maybe Key)
     , _ccalPageToken   :: !(Maybe Text)
     , _ccalOAuthToken  :: !(Maybe OAuthToken)
@@ -101,7 +101,7 @@ data CampaignCreativeAssociationsList' = CampaignCreativeAssociationsList'
 --
 -- * 'ccalCampaignId'
 --
--- * 'ccalProfileId'
+-- * 'ccalProFileId'
 --
 -- * 'ccalSortOrder'
 --
@@ -118,13 +118,13 @@ campaignCreativeAssociationsList'
     :: Int64 -- ^ 'campaignId'
     -> Int64 -- ^ 'profileId'
     -> CampaignCreativeAssociationsList'
-campaignCreativeAssociationsList' pCcalCampaignId_ pCcalProfileId_ =
+campaignCreativeAssociationsList' pCcalCampaignId_ pCcalProFileId_ =
     CampaignCreativeAssociationsList'
     { _ccalQuotaUser = Nothing
     , _ccalPrettyPrint = True
     , _ccalUserIP = Nothing
     , _ccalCampaignId = pCcalCampaignId_
-    , _ccalProfileId = pCcalProfileId_
+    , _ccalProFileId = pCcalProFileId_
     , _ccalSortOrder = Nothing
     , _ccalKey = Nothing
     , _ccalPageToken = Nothing
@@ -160,13 +160,13 @@ ccalCampaignId
       (\ s a -> s{_ccalCampaignId = a})
 
 -- | User profile ID associated with this request.
-ccalProfileId :: Lens' CampaignCreativeAssociationsList' Int64
-ccalProfileId
-  = lens _ccalProfileId
-      (\ s a -> s{_ccalProfileId = a})
+ccalProFileId :: Lens' CampaignCreativeAssociationsList' Int64
+ccalProFileId
+  = lens _ccalProFileId
+      (\ s a -> s{_ccalProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-ccalSortOrder :: Lens' CampaignCreativeAssociationsList' (Maybe DfareportingCampaignCreativeAssociationsListSortOrder)
+ccalSortOrder :: Lens' CampaignCreativeAssociationsList' (Maybe CampaignCreativeAssociationsListSortOrder)
 ccalSortOrder
   = lens _ccalSortOrder
       (\ s a -> s{_ccalSortOrder = a})
@@ -212,7 +212,7 @@ instance GoogleRequest
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           CampaignCreativeAssociationsList'{..}
-          = go _ccalProfileId _ccalCampaignId _ccalSortOrder
+          = go _ccalProFileId _ccalCampaignId _ccalSortOrder
               _ccalPageToken
               _ccalMaxResults
               _ccalQuotaUser

@@ -17,354 +17,354 @@ module Network.Google.Storage.Types.Sum where
 
 import           Network.Google.Prelude
 
--- | Set of properties to return. Defaults to noAcl.
-data StorageBucketsListProjection
+-- | Set of properties to return. Defaults to noAcl, unless the object
+-- resource specifies the acl property, when it defaults to full.
+data ObjectsInsertProjection
     = Full
       -- ^ @full@
       -- Include all properties.
     | NoACL
       -- ^ @noAcl@
-      -- Omit acl and defaultObjectAcl properties.
+      -- Omit the acl property.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable StorageBucketsListProjection
+instance Hashable ObjectsInsertProjection
 
-instance FromText StorageBucketsListProjection where
+instance FromText ObjectsInsertProjection where
     fromText = \case
         "full" -> Just Full
         "noAcl" -> Just NoACL
         _ -> Nothing
 
-instance ToText StorageBucketsListProjection where
+instance ToText ObjectsInsertProjection where
     toText = \case
         Full -> "full"
         NoACL -> "noAcl"
 
-instance FromJSON StorageBucketsListProjection where
-    parseJSON = parseJSONText "StorageBucketsListProjection"
+instance FromJSON ObjectsInsertProjection where
+    parseJSON = parseJSONText "ObjectsInsertProjection"
 
-instance ToJSON StorageBucketsListProjection where
-    toJSON = toJSONText
-
--- | Set of properties to return. Defaults to full.
-data StorageObjectsUpdateProjection
-    = SOUPFull
-      -- ^ @full@
-      -- Include all properties.
-    | SOUPNoACL
-      -- ^ @noAcl@
-      -- Omit the acl property.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable StorageObjectsUpdateProjection
-
-instance FromText StorageObjectsUpdateProjection where
-    fromText = \case
-        "full" -> Just SOUPFull
-        "noAcl" -> Just SOUPNoACL
-        _ -> Nothing
-
-instance ToText StorageObjectsUpdateProjection where
-    toText = \case
-        SOUPFull -> "full"
-        SOUPNoACL -> "noAcl"
-
-instance FromJSON StorageObjectsUpdateProjection where
-    parseJSON = parseJSONText "StorageObjectsUpdateProjection"
-
-instance ToJSON StorageObjectsUpdateProjection where
-    toJSON = toJSONText
-
--- | Set of properties to return. Defaults to full.
-data StorageObjectsPatchProjection
-    = SOPPFull
-      -- ^ @full@
-      -- Include all properties.
-    | SOPPNoACL
-      -- ^ @noAcl@
-      -- Omit the acl property.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable StorageObjectsPatchProjection
-
-instance FromText StorageObjectsPatchProjection where
-    fromText = \case
-        "full" -> Just SOPPFull
-        "noAcl" -> Just SOPPNoACL
-        _ -> Nothing
-
-instance ToText StorageObjectsPatchProjection where
-    toText = \case
-        SOPPFull -> "full"
-        SOPPNoACL -> "noAcl"
-
-instance FromJSON StorageObjectsPatchProjection where
-    parseJSON = parseJSONText "StorageObjectsPatchProjection"
-
-instance ToJSON StorageObjectsPatchProjection where
+instance ToJSON ObjectsInsertProjection where
     toJSON = toJSONText
 
 -- | Set of properties to return. Defaults to noAcl.
-data StorageObjectsGetProjection
-    = SOGPFull
+data ObjectsWatchAllProjection
+    = OWAPFull
       -- ^ @full@
       -- Include all properties.
-    | SOGPNoACL
+    | OWAPNoACL
       -- ^ @noAcl@
       -- Omit the acl property.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable StorageObjectsGetProjection
+instance Hashable ObjectsWatchAllProjection
 
-instance FromText StorageObjectsGetProjection where
+instance FromText ObjectsWatchAllProjection where
     fromText = \case
-        "full" -> Just SOGPFull
-        "noAcl" -> Just SOGPNoACL
+        "full" -> Just OWAPFull
+        "noAcl" -> Just OWAPNoACL
         _ -> Nothing
 
-instance ToText StorageObjectsGetProjection where
+instance ToText ObjectsWatchAllProjection where
     toText = \case
-        SOGPFull -> "full"
-        SOGPNoACL -> "noAcl"
+        OWAPFull -> "full"
+        OWAPNoACL -> "noAcl"
 
-instance FromJSON StorageObjectsGetProjection where
-    parseJSON = parseJSONText "StorageObjectsGetProjection"
+instance FromJSON ObjectsWatchAllProjection where
+    parseJSON = parseJSONText "ObjectsWatchAllProjection"
 
-instance ToJSON StorageObjectsGetProjection where
+instance ToJSON ObjectsWatchAllProjection where
     toJSON = toJSONText
 
 -- | Set of properties to return. Defaults to noAcl.
-data StorageBucketsGetProjection
-    = SBGPFull
+data BucketsGetProjection
+    = BGPFull
       -- ^ @full@
       -- Include all properties.
-    | SBGPNoACL
+    | BGPNoACL
       -- ^ @noAcl@
       -- Omit acl and defaultObjectAcl properties.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable StorageBucketsGetProjection
+instance Hashable BucketsGetProjection
 
-instance FromText StorageBucketsGetProjection where
+instance FromText BucketsGetProjection where
     fromText = \case
-        "full" -> Just SBGPFull
-        "noAcl" -> Just SBGPNoACL
+        "full" -> Just BGPFull
+        "noAcl" -> Just BGPNoACL
         _ -> Nothing
 
-instance ToText StorageBucketsGetProjection where
+instance ToText BucketsGetProjection where
     toText = \case
-        SBGPFull -> "full"
-        SBGPNoACL -> "noAcl"
+        BGPFull -> "full"
+        BGPNoACL -> "noAcl"
 
-instance FromJSON StorageBucketsGetProjection where
-    parseJSON = parseJSONText "StorageBucketsGetProjection"
+instance FromJSON BucketsGetProjection where
+    parseJSON = parseJSONText "BucketsGetProjection"
 
-instance ToJSON StorageBucketsGetProjection where
-    toJSON = toJSONText
-
--- | Set of properties to return. Defaults to noAcl, unless the object
--- resource specifies the acl property, when it defaults to full.
-data StorageObjectsCopyProjection
-    = SOCPFull
-      -- ^ @full@
-      -- Include all properties.
-    | SOCPNoACL
-      -- ^ @noAcl@
-      -- Omit the acl property.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable StorageObjectsCopyProjection
-
-instance FromText StorageObjectsCopyProjection where
-    fromText = \case
-        "full" -> Just SOCPFull
-        "noAcl" -> Just SOCPNoACL
-        _ -> Nothing
-
-instance ToText StorageObjectsCopyProjection where
-    toText = \case
-        SOCPFull -> "full"
-        SOCPNoACL -> "noAcl"
-
-instance FromJSON StorageObjectsCopyProjection where
-    parseJSON = parseJSONText "StorageObjectsCopyProjection"
-
-instance ToJSON StorageObjectsCopyProjection where
+instance ToJSON BucketsGetProjection where
     toJSON = toJSONText
 
 -- | Set of properties to return. Defaults to full.
-data StorageBucketsPatchProjection
-    = SBPPFull
+data BucketsPatchProjection
+    = BPPFull
       -- ^ @full@
       -- Include all properties.
-    | SBPPNoACL
+    | BPPNoACL
       -- ^ @noAcl@
       -- Omit acl and defaultObjectAcl properties.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable StorageBucketsPatchProjection
+instance Hashable BucketsPatchProjection
 
-instance FromText StorageBucketsPatchProjection where
+instance FromText BucketsPatchProjection where
     fromText = \case
-        "full" -> Just SBPPFull
-        "noAcl" -> Just SBPPNoACL
+        "full" -> Just BPPFull
+        "noAcl" -> Just BPPNoACL
         _ -> Nothing
 
-instance ToText StorageBucketsPatchProjection where
+instance ToText BucketsPatchProjection where
     toText = \case
-        SBPPFull -> "full"
-        SBPPNoACL -> "noAcl"
+        BPPFull -> "full"
+        BPPNoACL -> "noAcl"
 
-instance FromJSON StorageBucketsPatchProjection where
-    parseJSON = parseJSONText "StorageBucketsPatchProjection"
+instance FromJSON BucketsPatchProjection where
+    parseJSON = parseJSONText "BucketsPatchProjection"
 
-instance ToJSON StorageBucketsPatchProjection where
+instance ToJSON BucketsPatchProjection where
+    toJSON = toJSONText
+
+-- | Set of properties to return. Defaults to full.
+data BucketsUpdateProjection
+    = BUPFull
+      -- ^ @full@
+      -- Include all properties.
+    | BUPNoACL
+      -- ^ @noAcl@
+      -- Omit acl and defaultObjectAcl properties.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable BucketsUpdateProjection
+
+instance FromText BucketsUpdateProjection where
+    fromText = \case
+        "full" -> Just BUPFull
+        "noAcl" -> Just BUPNoACL
+        _ -> Nothing
+
+instance ToText BucketsUpdateProjection where
+    toText = \case
+        BUPFull -> "full"
+        BUPNoACL -> "noAcl"
+
+instance FromJSON BucketsUpdateProjection where
+    parseJSON = parseJSONText "BucketsUpdateProjection"
+
+instance ToJSON BucketsUpdateProjection where
     toJSON = toJSONText
 
 -- | Set of properties to return. Defaults to noAcl.
-data StorageObjectsWatchAllProjection
-    = SOWAPFull
+data ObjectsListProjection
+    = OLPFull
       -- ^ @full@
       -- Include all properties.
-    | SOWAPNoACL
+    | OLPNoACL
       -- ^ @noAcl@
       -- Omit the acl property.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable StorageObjectsWatchAllProjection
+instance Hashable ObjectsListProjection
 
-instance FromText StorageObjectsWatchAllProjection where
+instance FromText ObjectsListProjection where
     fromText = \case
-        "full" -> Just SOWAPFull
-        "noAcl" -> Just SOWAPNoACL
+        "full" -> Just OLPFull
+        "noAcl" -> Just OLPNoACL
         _ -> Nothing
 
-instance ToText StorageObjectsWatchAllProjection where
+instance ToText ObjectsListProjection where
     toText = \case
-        SOWAPFull -> "full"
-        SOWAPNoACL -> "noAcl"
+        OLPFull -> "full"
+        OLPNoACL -> "noAcl"
 
-instance FromJSON StorageObjectsWatchAllProjection where
-    parseJSON = parseJSONText "StorageObjectsWatchAllProjection"
+instance FromJSON ObjectsListProjection where
+    parseJSON = parseJSONText "ObjectsListProjection"
 
-instance ToJSON StorageObjectsWatchAllProjection where
-    toJSON = toJSONText
-
--- | Set of properties to return. Defaults to noAcl, unless the object
--- resource specifies the acl property, when it defaults to full.
-data StorageObjectsInsertProjection
-    = SOIPFull
-      -- ^ @full@
-      -- Include all properties.
-    | SOIPNoACL
-      -- ^ @noAcl@
-      -- Omit the acl property.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable StorageObjectsInsertProjection
-
-instance FromText StorageObjectsInsertProjection where
-    fromText = \case
-        "full" -> Just SOIPFull
-        "noAcl" -> Just SOIPNoACL
-        _ -> Nothing
-
-instance ToText StorageObjectsInsertProjection where
-    toText = \case
-        SOIPFull -> "full"
-        SOIPNoACL -> "noAcl"
-
-instance FromJSON StorageObjectsInsertProjection where
-    parseJSON = parseJSONText "StorageObjectsInsertProjection"
-
-instance ToJSON StorageObjectsInsertProjection where
+instance ToJSON ObjectsListProjection where
     toJSON = toJSONText
 
 -- | Set of properties to return. Defaults to noAcl, unless the bucket
 -- resource specifies acl or defaultObjectAcl properties, when it defaults
 -- to full.
-data Projection
-    = PFull
+data BucketsInsertProjection
+    = BIPFull
       -- ^ @full@
       -- Include all properties.
-    | PNoACL
+    | BIPNoACL
       -- ^ @noAcl@
       -- Omit acl and defaultObjectAcl properties.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable Projection
+instance Hashable BucketsInsertProjection
 
-instance FromText Projection where
+instance FromText BucketsInsertProjection where
     fromText = \case
-        "full" -> Just PFull
-        "noAcl" -> Just PNoACL
+        "full" -> Just BIPFull
+        "noAcl" -> Just BIPNoACL
         _ -> Nothing
 
-instance ToText Projection where
+instance ToText BucketsInsertProjection where
     toText = \case
-        PFull -> "full"
-        PNoACL -> "noAcl"
+        BIPFull -> "full"
+        BIPNoACL -> "noAcl"
 
-instance FromJSON Projection where
-    parseJSON = parseJSONText "Projection"
+instance FromJSON BucketsInsertProjection where
+    parseJSON = parseJSONText "BucketsInsertProjection"
 
-instance ToJSON Projection where
-    toJSON = toJSONText
-
--- | Set of properties to return. Defaults to full.
-data StorageBucketsUpdateProjection
-    = SBUPFull
-      -- ^ @full@
-      -- Include all properties.
-    | SBUPNoACL
-      -- ^ @noAcl@
-      -- Omit acl and defaultObjectAcl properties.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable StorageBucketsUpdateProjection
-
-instance FromText StorageBucketsUpdateProjection where
-    fromText = \case
-        "full" -> Just SBUPFull
-        "noAcl" -> Just SBUPNoACL
-        _ -> Nothing
-
-instance ToText StorageBucketsUpdateProjection where
-    toText = \case
-        SBUPFull -> "full"
-        SBUPNoACL -> "noAcl"
-
-instance FromJSON StorageBucketsUpdateProjection where
-    parseJSON = parseJSONText "StorageBucketsUpdateProjection"
-
-instance ToJSON StorageBucketsUpdateProjection where
+instance ToJSON BucketsInsertProjection where
     toJSON = toJSONText
 
 -- | Set of properties to return. Defaults to noAcl.
-data StorageObjectsListProjection
-    = SOLPFull
+data BucketsListProjection
+    = BLPFull
       -- ^ @full@
       -- Include all properties.
-    | SOLPNoACL
+    | BLPNoACL
+      -- ^ @noAcl@
+      -- Omit acl and defaultObjectAcl properties.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable BucketsListProjection
+
+instance FromText BucketsListProjection where
+    fromText = \case
+        "full" -> Just BLPFull
+        "noAcl" -> Just BLPNoACL
+        _ -> Nothing
+
+instance ToText BucketsListProjection where
+    toText = \case
+        BLPFull -> "full"
+        BLPNoACL -> "noAcl"
+
+instance FromJSON BucketsListProjection where
+    parseJSON = parseJSONText "BucketsListProjection"
+
+instance ToJSON BucketsListProjection where
+    toJSON = toJSONText
+
+-- | Set of properties to return. Defaults to full.
+data ObjectsUpdateProjection
+    = OUPFull
+      -- ^ @full@
+      -- Include all properties.
+    | OUPNoACL
       -- ^ @noAcl@
       -- Omit the acl property.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable StorageObjectsListProjection
+instance Hashable ObjectsUpdateProjection
 
-instance FromText StorageObjectsListProjection where
+instance FromText ObjectsUpdateProjection where
     fromText = \case
-        "full" -> Just SOLPFull
-        "noAcl" -> Just SOLPNoACL
+        "full" -> Just OUPFull
+        "noAcl" -> Just OUPNoACL
         _ -> Nothing
 
-instance ToText StorageObjectsListProjection where
+instance ToText ObjectsUpdateProjection where
     toText = \case
-        SOLPFull -> "full"
-        SOLPNoACL -> "noAcl"
+        OUPFull -> "full"
+        OUPNoACL -> "noAcl"
 
-instance FromJSON StorageObjectsListProjection where
-    parseJSON = parseJSONText "StorageObjectsListProjection"
+instance FromJSON ObjectsUpdateProjection where
+    parseJSON = parseJSONText "ObjectsUpdateProjection"
 
-instance ToJSON StorageObjectsListProjection where
+instance ToJSON ObjectsUpdateProjection where
+    toJSON = toJSONText
+
+-- | Set of properties to return. Defaults to full.
+data ObjectsPatchProjection
+    = OPPFull
+      -- ^ @full@
+      -- Include all properties.
+    | OPPNoACL
+      -- ^ @noAcl@
+      -- Omit the acl property.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ObjectsPatchProjection
+
+instance FromText ObjectsPatchProjection where
+    fromText = \case
+        "full" -> Just OPPFull
+        "noAcl" -> Just OPPNoACL
+        _ -> Nothing
+
+instance ToText ObjectsPatchProjection where
+    toText = \case
+        OPPFull -> "full"
+        OPPNoACL -> "noAcl"
+
+instance FromJSON ObjectsPatchProjection where
+    parseJSON = parseJSONText "ObjectsPatchProjection"
+
+instance ToJSON ObjectsPatchProjection where
+    toJSON = toJSONText
+
+-- | Set of properties to return. Defaults to noAcl.
+data ObjectsGetProjection
+    = OGPFull
+      -- ^ @full@
+      -- Include all properties.
+    | OGPNoACL
+      -- ^ @noAcl@
+      -- Omit the acl property.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ObjectsGetProjection
+
+instance FromText ObjectsGetProjection where
+    fromText = \case
+        "full" -> Just OGPFull
+        "noAcl" -> Just OGPNoACL
+        _ -> Nothing
+
+instance ToText ObjectsGetProjection where
+    toText = \case
+        OGPFull -> "full"
+        OGPNoACL -> "noAcl"
+
+instance FromJSON ObjectsGetProjection where
+    parseJSON = parseJSONText "ObjectsGetProjection"
+
+instance ToJSON ObjectsGetProjection where
+    toJSON = toJSONText
+
+-- | Set of properties to return. Defaults to noAcl, unless the object
+-- resource specifies the acl property, when it defaults to full.
+data ObjectsCopyProjection
+    = OCPFull
+      -- ^ @full@
+      -- Include all properties.
+    | OCPNoACL
+      -- ^ @noAcl@
+      -- Omit the acl property.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ObjectsCopyProjection
+
+instance FromText ObjectsCopyProjection where
+    fromText = \case
+        "full" -> Just OCPFull
+        "noAcl" -> Just OCPNoACL
+        _ -> Nothing
+
+instance ToText ObjectsCopyProjection where
+    toText = \case
+        OCPFull -> "full"
+        OCPNoACL -> "noAcl"
+
+instance FromJSON ObjectsCopyProjection where
+    parseJSON = parseJSONText "ObjectsCopyProjection"
+
+instance ToJSON ObjectsCopyProjection where
     toJSON = toJSONText

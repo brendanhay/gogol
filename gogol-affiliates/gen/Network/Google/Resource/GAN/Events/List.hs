@@ -63,12 +63,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @GANEventsList@ which the
 -- 'EventsList'' request conforms to.
 type EventsListResource =
-     Capture "role" GANEventsListRole :>
+     Capture "role" EventsListRole :>
        Capture "roleId" Text :>
          "events" :>
-           QueryParam "status" GANEventsListStatus :>
+           QueryParam "status" EventsListStatus :>
              QueryParam "eventDateMin" Text :>
-               QueryParam "chargeType" ChargeType :>
+               QueryParam "chargeType" EventsListChargeType :>
                  QueryParam "memberId" Text :>
                    QueryParam "modifyDateMax" Text :>
                      QueryParam "advertiserId" Text :>
@@ -77,7 +77,7 @@ type EventsListResource =
                            QueryParam "sku" Text :>
                              QueryParam "linkId" Text :>
                                QueryParam "pageToken" Text :>
-                                 QueryParam "type" Type :>
+                                 QueryParam "type" EventsListType :>
                                    QueryParam "orderId" Text :>
                                      QueryParam "publisherId" Text :>
                                        QueryParam "productCategory" Text :>
@@ -97,24 +97,24 @@ type EventsListResource =
 --
 -- /See:/ 'eventsList'' smart constructor.
 data EventsList' = EventsList'
-    { _elStatus          :: !(Maybe GANEventsListStatus)
+    { _elStatus          :: !(Maybe EventsListStatus)
     , _elQuotaUser       :: !(Maybe Text)
     , _elPrettyPrint     :: !Bool
     , _elEventDateMin    :: !(Maybe Text)
-    , _elChargeType      :: !(Maybe ChargeType)
+    , _elChargeType      :: !(Maybe EventsListChargeType)
     , _elMemberId        :: !(Maybe Text)
     , _elUserIP          :: !(Maybe Text)
     , _elModifyDateMax   :: !(Maybe Text)
     , _elAdvertiserId    :: !(Maybe Text)
     , _elModifyDateMin   :: !(Maybe Text)
     , _elRoleId          :: !Text
-    , _elRole            :: !GANEventsListRole
+    , _elRole            :: !EventsListRole
     , _elEventDateMax    :: !(Maybe Text)
     , _elKey             :: !(Maybe Key)
     , _elSKU             :: !(Maybe Text)
     , _elLinkId          :: !(Maybe Text)
     , _elPageToken       :: !(Maybe Text)
-    , _elType            :: !(Maybe Type)
+    , _elType            :: !(Maybe EventsListType)
     , _elOAuthToken      :: !(Maybe OAuthToken)
     , _elOrderId         :: !(Maybe Text)
     , _elPublisherId     :: !(Maybe Text)
@@ -176,7 +176,7 @@ data EventsList' = EventsList'
 -- * 'elFields'
 eventsList'
     :: Text -- ^ 'roleId'
-    -> GANEventsListRole -- ^ 'role'
+    -> EventsListRole -- ^ 'role'
     -> EventsList'
 eventsList' pElRoleId_ pElRole_ =
     EventsList'
@@ -208,7 +208,7 @@ eventsList' pElRoleId_ pElRole_ =
 
 -- | Filters out all events that do not have the given status. Valid values:
 -- \'active\', \'canceled\'. Optional.
-elStatus :: Lens' EventsList' (Maybe GANEventsListStatus)
+elStatus :: Lens' EventsList' (Maybe EventsListStatus)
 elStatus = lens _elStatus (\ s a -> s{_elStatus = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -234,7 +234,7 @@ elEventDateMin
 -- | Filters out all charge events that are not of the given charge type.
 -- Valid values: \'other\', \'slotting_fee\', \'monthly_minimum\',
 -- \'tier_bonus\', \'credit\', \'debit\'. Optional.
-elChargeType :: Lens' EventsList' (Maybe ChargeType)
+elChargeType :: Lens' EventsList' (Maybe EventsListChargeType)
 elChargeType
   = lens _elChargeType (\ s a -> s{_elChargeType = a})
 
@@ -279,7 +279,7 @@ elRoleId = lens _elRoleId (\ s a -> s{_elRoleId = a})
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-elRole :: Lens' EventsList' GANEventsListRole
+elRole :: Lens' EventsList' EventsListRole
 elRole = lens _elRole (\ s a -> s{_elRole = a})
 
 -- | Filters out all events later than given date. Optional. Defaults to 24
@@ -312,7 +312,7 @@ elPageToken
 
 -- | Filters out all events that are not of the given type. Valid values:
 -- \'action\', \'transaction\', \'charge\'. Optional.
-elType :: Lens' EventsList' (Maybe Type)
+elType :: Lens' EventsList' (Maybe EventsListType)
 elType = lens _elType (\ s a -> s{_elType = a})
 
 -- | OAuth 2.0 token for the current user.

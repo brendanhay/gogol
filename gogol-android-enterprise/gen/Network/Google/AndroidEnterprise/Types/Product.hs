@@ -18,110 +18,6 @@ module Network.Google.AndroidEnterprise.Types.Product where
 import           Network.Google.AndroidEnterprise.Types.Sum
 import           Network.Google.Prelude
 
--- | The collection resources for the enterprise.
---
--- /See:/ 'collectionsListResponse' smart constructor.
-data CollectionsListResponse = CollectionsListResponse
-    { _clrKind       :: !Text
-    , _clrCollection :: !(Maybe [Collection])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CollectionsListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'clrKind'
---
--- * 'clrCollection'
-collectionsListResponse
-    :: CollectionsListResponse
-collectionsListResponse =
-    CollectionsListResponse
-    { _clrKind = "androidenterprise#collectionsListResponse"
-    , _clrCollection = Nothing
-    }
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"androidenterprise#collectionsListResponse\".
-clrKind :: Lens' CollectionsListResponse Text
-clrKind = lens _clrKind (\ s a -> s{_clrKind = a})
-
--- | An ordered collection of products which can be made visible on the
--- Google Play Store to a selected group of users.
-clrCollection :: Lens' CollectionsListResponse [Collection]
-clrCollection
-  = lens _clrCollection
-      (\ s a -> s{_clrCollection = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON CollectionsListResponse where
-        parseJSON
-          = withObject "CollectionsListResponse"
-              (\ o ->
-                 CollectionsListResponse <$>
-                   (o .:? "kind" .!=
-                      "androidenterprise#collectionsListResponse")
-                     <*> (o .:? "collection" .!= mempty))
-
-instance ToJSON CollectionsListResponse where
-        toJSON CollectionsListResponse{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _clrKind),
-                  ("collection" .=) <$> _clrCollection])
-
--- | A service account that can be used to authenticate as the enterprise to
--- API calls that require such authentication.
---
--- /See:/ 'enterpriseAccount' smart constructor.
-data EnterpriseAccount = EnterpriseAccount
-    { _eaKind         :: !Text
-    , _eaAccountEmail :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'EnterpriseAccount' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'eaKind'
---
--- * 'eaAccountEmail'
-enterpriseAccount
-    :: EnterpriseAccount
-enterpriseAccount =
-    EnterpriseAccount
-    { _eaKind = "androidenterprise#enterpriseAccount"
-    , _eaAccountEmail = Nothing
-    }
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"androidenterprise#enterpriseAccount\".
-eaKind :: Lens' EnterpriseAccount Text
-eaKind = lens _eaKind (\ s a -> s{_eaKind = a})
-
--- | The email address of the service account.
-eaAccountEmail :: Lens' EnterpriseAccount (Maybe Text)
-eaAccountEmail
-  = lens _eaAccountEmail
-      (\ s a -> s{_eaAccountEmail = a})
-
-instance FromJSON EnterpriseAccount where
-        parseJSON
-          = withObject "EnterpriseAccount"
-              (\ o ->
-                 EnterpriseAccount <$>
-                   (o .:? "kind" .!=
-                      "androidenterprise#enterpriseAccount")
-                     <*> (o .:? "accountEmail"))
-
-instance ToJSON EnterpriseAccount where
-        toJSON EnterpriseAccount{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _eaKind),
-                  ("accountEmail" .=) <$> _eaAccountEmail])
-
 -- | A group license object indicates a product that an enterprise admin has
 -- approved for use in the enterprise. The product may be free or paid. For
 -- free products, a group license object is created in these cases: if the
@@ -245,6 +141,110 @@ instance ToJSON GroupLicense where
                   ("productId" .=) <$> _glProductId,
                   ("acquisitionKind" .=) <$> _glAcquisitionKind])
 
+-- | A service account that can be used to authenticate as the enterprise to
+-- API calls that require such authentication.
+--
+-- /See:/ 'enterpriseAccount' smart constructor.
+data EnterpriseAccount = EnterpriseAccount
+    { _eaKind         :: !Text
+    , _eaAccountEmail :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EnterpriseAccount' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eaKind'
+--
+-- * 'eaAccountEmail'
+enterpriseAccount
+    :: EnterpriseAccount
+enterpriseAccount =
+    EnterpriseAccount
+    { _eaKind = "androidenterprise#enterpriseAccount"
+    , _eaAccountEmail = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"androidenterprise#enterpriseAccount\".
+eaKind :: Lens' EnterpriseAccount Text
+eaKind = lens _eaKind (\ s a -> s{_eaKind = a})
+
+-- | The email address of the service account.
+eaAccountEmail :: Lens' EnterpriseAccount (Maybe Text)
+eaAccountEmail
+  = lens _eaAccountEmail
+      (\ s a -> s{_eaAccountEmail = a})
+
+instance FromJSON EnterpriseAccount where
+        parseJSON
+          = withObject "EnterpriseAccount"
+              (\ o ->
+                 EnterpriseAccount <$>
+                   (o .:? "kind" .!=
+                      "androidenterprise#enterpriseAccount")
+                     <*> (o .:? "accountEmail"))
+
+instance ToJSON EnterpriseAccount where
+        toJSON EnterpriseAccount{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _eaKind),
+                  ("accountEmail" .=) <$> _eaAccountEmail])
+
+-- | The collection resources for the enterprise.
+--
+-- /See:/ 'collectionsListResponse' smart constructor.
+data CollectionsListResponse = CollectionsListResponse
+    { _clrKind       :: !Text
+    , _clrCollection :: !(Maybe [Collection])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CollectionsListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'clrKind'
+--
+-- * 'clrCollection'
+collectionsListResponse
+    :: CollectionsListResponse
+collectionsListResponse =
+    CollectionsListResponse
+    { _clrKind = "androidenterprise#collectionsListResponse"
+    , _clrCollection = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"androidenterprise#collectionsListResponse\".
+clrKind :: Lens' CollectionsListResponse Text
+clrKind = lens _clrKind (\ s a -> s{_clrKind = a})
+
+-- | An ordered collection of products which can be made visible on the
+-- Google Play Store to a selected group of users.
+clrCollection :: Lens' CollectionsListResponse [Collection]
+clrCollection
+  = lens _clrCollection
+      (\ s a -> s{_clrCollection = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON CollectionsListResponse where
+        parseJSON
+          = withObject "CollectionsListResponse"
+              (\ o ->
+                 CollectionsListResponse <$>
+                   (o .:? "kind" .!=
+                      "androidenterprise#collectionsListResponse")
+                     <*> (o .:? "collection" .!= mempty))
+
+instance ToJSON CollectionsListResponse where
+        toJSON CollectionsListResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _clrKind),
+                  ("collection" .=) <$> _clrCollection])
+
 -- | A typed value for the restriction.
 --
 -- /See:/ 'appRestrictionsSchemaRestrictionRestrictionValue' smart constructor.
@@ -340,58 +340,6 @@ instance ToJSON
                   ("type" .=) <$> _arsrrvType,
                   ("valueString" .=) <$> _arsrrvValueString])
 
--- | The user resources for the group license.
---
--- /See:/ 'groupLicenseUsersListResponse' smart constructor.
-data GroupLicenseUsersListResponse = GroupLicenseUsersListResponse
-    { _glulrKind :: !Text
-    , _glulrUser :: !(Maybe [User])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'GroupLicenseUsersListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'glulrKind'
---
--- * 'glulrUser'
-groupLicenseUsersListResponse
-    :: GroupLicenseUsersListResponse
-groupLicenseUsersListResponse =
-    GroupLicenseUsersListResponse
-    { _glulrKind = "androidenterprise#groupLicenseUsersListResponse"
-    , _glulrUser = Nothing
-    }
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"androidenterprise#groupLicenseUsersListResponse\".
-glulrKind :: Lens' GroupLicenseUsersListResponse Text
-glulrKind
-  = lens _glulrKind (\ s a -> s{_glulrKind = a})
-
--- | A user of an enterprise.
-glulrUser :: Lens' GroupLicenseUsersListResponse [User]
-glulrUser
-  = lens _glulrUser (\ s a -> s{_glulrUser = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON GroupLicenseUsersListResponse where
-        parseJSON
-          = withObject "GroupLicenseUsersListResponse"
-              (\ o ->
-                 GroupLicenseUsersListResponse <$>
-                   (o .:? "kind" .!=
-                      "androidenterprise#groupLicenseUsersListResponse")
-                     <*> (o .:? "user" .!= mempty))
-
-instance ToJSON GroupLicenseUsersListResponse where
-        toJSON GroupLicenseUsersListResponse{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _glulrKind),
-                  ("user" .=) <$> _glulrUser])
-
 -- | The state of a user\'s device, as accessed by the getState and setState
 -- methods on device resources.
 --
@@ -445,6 +393,58 @@ instance ToJSON DeviceState where
                  [Just ("kind" .= _dsKind),
                   ("accountState" .=) <$> _dsAccountState])
 
+-- | The user resources for the group license.
+--
+-- /See:/ 'groupLicenseUsersListResponse' smart constructor.
+data GroupLicenseUsersListResponse = GroupLicenseUsersListResponse
+    { _glulrKind :: !Text
+    , _glulrUser :: !(Maybe [User])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GroupLicenseUsersListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'glulrKind'
+--
+-- * 'glulrUser'
+groupLicenseUsersListResponse
+    :: GroupLicenseUsersListResponse
+groupLicenseUsersListResponse =
+    GroupLicenseUsersListResponse
+    { _glulrKind = "androidenterprise#groupLicenseUsersListResponse"
+    , _glulrUser = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"androidenterprise#groupLicenseUsersListResponse\".
+glulrKind :: Lens' GroupLicenseUsersListResponse Text
+glulrKind
+  = lens _glulrKind (\ s a -> s{_glulrKind = a})
+
+-- | A user of an enterprise.
+glulrUser :: Lens' GroupLicenseUsersListResponse [User]
+glulrUser
+  = lens _glulrUser (\ s a -> s{_glulrUser = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON GroupLicenseUsersListResponse where
+        parseJSON
+          = withObject "GroupLicenseUsersListResponse"
+              (\ o ->
+                 GroupLicenseUsersListResponse <$>
+                   (o .:? "kind" .!=
+                      "androidenterprise#groupLicenseUsersListResponse")
+                     <*> (o .:? "user" .!= mempty))
+
+instance ToJSON GroupLicenseUsersListResponse where
+        toJSON GroupLicenseUsersListResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _glulrKind),
+                  ("user" .=) <$> _glulrUser])
+
 -- | Information on an approval URL.
 --
 -- /See:/ 'approvalURLInfo' smart constructor.
@@ -495,6 +495,57 @@ instance ToJSON ApprovalURLInfo where
               (catMaybes
                  [("approvalUrl" .=) <$> _auiApprovalURL,
                   Just ("kind" .= _auiKind)])
+
+-- | A product permissions resource represents the set of permissions
+-- required by a specific app and whether or not they have been accepted by
+-- an enterprise admin. The API can be used to read the set of permissions,
+-- and also to update the set to indicate that permissions have been
+-- accepted.
+--
+-- /See:/ 'productPermission' smart constructor.
+data ProductPermission = ProductPermission
+    { _ppState        :: !(Maybe Text)
+    , _ppPermissionId :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ProductPermission' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ppState'
+--
+-- * 'ppPermissionId'
+productPermission
+    :: ProductPermission
+productPermission =
+    ProductPermission
+    { _ppState = Nothing
+    , _ppPermissionId = Nothing
+    }
+
+-- | Whether the permission has been accepted or not.
+ppState :: Lens' ProductPermission (Maybe Text)
+ppState = lens _ppState (\ s a -> s{_ppState = a})
+
+-- | An opaque string uniquely identifying the permission.
+ppPermissionId :: Lens' ProductPermission (Maybe Text)
+ppPermissionId
+  = lens _ppPermissionId
+      (\ s a -> s{_ppPermissionId = a})
+
+instance FromJSON ProductPermission where
+        parseJSON
+          = withObject "ProductPermission"
+              (\ o ->
+                 ProductPermission <$>
+                   (o .:? "state") <*> (o .:? "permissionId"))
+
+instance ToJSON ProductPermission where
+        toJSON ProductPermission{..}
+          = object
+              (catMaybes
+                 [("state" .=) <$> _ppState,
+                  ("permissionId" .=) <$> _ppPermissionId])
 
 -- | A device resource represents a mobile device managed by the MDM and
 -- belonging to a specific enterprise user. This collection cannot be
@@ -565,107 +616,57 @@ instance ToJSON Device where
                   ("managementType" .=) <$> _dManagementType,
                   ("androidId" .=) <$> _dAndroidId])
 
--- | A product permissions resource represents the set of permissions
--- required by a specific app and whether or not they have been accepted by
--- an enterprise admin. The API can be used to read the set of permissions,
--- and also to update the set to indicate that permissions have been
--- accepted.
+-- | The install resources for the device.
 --
--- /See:/ 'productPermission' smart constructor.
-data ProductPermission = ProductPermission
-    { _ppState        :: !(Maybe Text)
-    , _ppPermissionId :: !(Maybe Text)
+-- /See:/ 'installsListResponse' smart constructor.
+data InstallsListResponse = InstallsListResponse
+    { _ilrKind    :: !Text
+    , _ilrInstall :: !(Maybe [Install])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProductPermission' with the minimum fields required to make a request.
+-- | Creates a value of 'InstallsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ppState'
+-- * 'ilrKind'
 --
--- * 'ppPermissionId'
-productPermission
-    :: ProductPermission
-productPermission =
-    ProductPermission
-    { _ppState = Nothing
-    , _ppPermissionId = Nothing
+-- * 'ilrInstall'
+installsListResponse
+    :: InstallsListResponse
+installsListResponse =
+    InstallsListResponse
+    { _ilrKind = "androidenterprise#installsListResponse"
+    , _ilrInstall = Nothing
     }
 
--- | Whether the permission has been accepted or not.
-ppState :: Lens' ProductPermission (Maybe Text)
-ppState = lens _ppState (\ s a -> s{_ppState = a})
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"androidenterprise#installsListResponse\".
+ilrKind :: Lens' InstallsListResponse Text
+ilrKind = lens _ilrKind (\ s a -> s{_ilrKind = a})
 
--- | An opaque string uniquely identifying the permission.
-ppPermissionId :: Lens' ProductPermission (Maybe Text)
-ppPermissionId
-  = lens _ppPermissionId
-      (\ s a -> s{_ppPermissionId = a})
+-- | An installation of an app for a user on a specific device. The existence
+-- of an install implies that the user must have an entitlement to the app.
+ilrInstall :: Lens' InstallsListResponse [Install]
+ilrInstall
+  = lens _ilrInstall (\ s a -> s{_ilrInstall = a}) .
+      _Default
+      . _Coerce
 
-instance FromJSON ProductPermission where
+instance FromJSON InstallsListResponse where
         parseJSON
-          = withObject "ProductPermission"
+          = withObject "InstallsListResponse"
               (\ o ->
-                 ProductPermission <$>
-                   (o .:? "state") <*> (o .:? "permissionId"))
+                 InstallsListResponse <$>
+                   (o .:? "kind" .!=
+                      "androidenterprise#installsListResponse")
+                     <*> (o .:? "install" .!= mempty))
 
-instance ToJSON ProductPermission where
-        toJSON ProductPermission{..}
+instance ToJSON InstallsListResponse where
+        toJSON InstallsListResponse{..}
           = object
               (catMaybes
-                 [("state" .=) <$> _ppState,
-                  ("permissionId" .=) <$> _ppPermissionId])
-
--- | This represents a single version of the app.
---
--- /See:/ 'appVersion' smart constructor.
-data AppVersion = AppVersion
-    { _avVersionCode   :: !(Maybe Int32)
-    , _avVersionString :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AppVersion' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'avVersionCode'
---
--- * 'avVersionString'
-appVersion
-    :: AppVersion
-appVersion =
-    AppVersion
-    { _avVersionCode = Nothing
-    , _avVersionString = Nothing
-    }
-
--- | Unique increasing identifier for the app version.
-avVersionCode :: Lens' AppVersion (Maybe Int32)
-avVersionCode
-  = lens _avVersionCode
-      (\ s a -> s{_avVersionCode = a})
-
--- | The string used in the Play Store by the app developer to identify the
--- version. The string is not necessarily unique or localized (for example,
--- the string could be \"1.4\").
-avVersionString :: Lens' AppVersion (Maybe Text)
-avVersionString
-  = lens _avVersionString
-      (\ s a -> s{_avVersionString = a})
-
-instance FromJSON AppVersion where
-        parseJSON
-          = withObject "AppVersion"
-              (\ o ->
-                 AppVersion <$>
-                   (o .:? "versionCode") <*> (o .:? "versionString"))
-
-instance ToJSON AppVersion where
-        toJSON AppVersion{..}
-          = object
-              (catMaybes
-                 [("versionCode" .=) <$> _avVersionCode,
-                  ("versionString" .=) <$> _avVersionString])
+                 [Just ("kind" .= _ilrKind),
+                  ("install" .=) <$> _ilrInstall])
 
 -- | A restriction in the App Restriction Schema represents a piece of
 -- configuration that may be pre-applied.
@@ -833,57 +834,108 @@ instance ToJSON UsersListResponse where
                  [Just ("kind" .= _ulrKind),
                   ("user" .=) <$> _ulrUser])
 
--- | The install resources for the device.
+-- | This represents a single version of the app.
 --
--- /See:/ 'installsListResponse' smart constructor.
-data InstallsListResponse = InstallsListResponse
-    { _ilrKind    :: !Text
-    , _ilrInstall :: !(Maybe [Install])
+-- /See:/ 'appVersion' smart constructor.
+data AppVersion = AppVersion
+    { _avVersionCode   :: !(Maybe Int32)
+    , _avVersionString :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstallsListResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'AppVersion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ilrKind'
+-- * 'avVersionCode'
 --
--- * 'ilrInstall'
-installsListResponse
-    :: InstallsListResponse
-installsListResponse =
-    InstallsListResponse
-    { _ilrKind = "androidenterprise#installsListResponse"
-    , _ilrInstall = Nothing
+-- * 'avVersionString'
+appVersion
+    :: AppVersion
+appVersion =
+    AppVersion
+    { _avVersionCode = Nothing
+    , _avVersionString = Nothing
     }
 
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"androidenterprise#installsListResponse\".
-ilrKind :: Lens' InstallsListResponse Text
-ilrKind = lens _ilrKind (\ s a -> s{_ilrKind = a})
+-- | Unique increasing identifier for the app version.
+avVersionCode :: Lens' AppVersion (Maybe Int32)
+avVersionCode
+  = lens _avVersionCode
+      (\ s a -> s{_avVersionCode = a})
 
--- | An installation of an app for a user on a specific device. The existence
--- of an install implies that the user must have an entitlement to the app.
-ilrInstall :: Lens' InstallsListResponse [Install]
-ilrInstall
-  = lens _ilrInstall (\ s a -> s{_ilrInstall = a}) .
-      _Default
-      . _Coerce
+-- | The string used in the Play Store by the app developer to identify the
+-- version. The string is not necessarily unique or localized (for example,
+-- the string could be \"1.4\").
+avVersionString :: Lens' AppVersion (Maybe Text)
+avVersionString
+  = lens _avVersionString
+      (\ s a -> s{_avVersionString = a})
 
-instance FromJSON InstallsListResponse where
+instance FromJSON AppVersion where
         parseJSON
-          = withObject "InstallsListResponse"
+          = withObject "AppVersion"
               (\ o ->
-                 InstallsListResponse <$>
-                   (o .:? "kind" .!=
-                      "androidenterprise#installsListResponse")
-                     <*> (o .:? "install" .!= mempty))
+                 AppVersion <$>
+                   (o .:? "versionCode") <*> (o .:? "versionString"))
 
-instance ToJSON InstallsListResponse where
-        toJSON InstallsListResponse{..}
+instance ToJSON AppVersion where
+        toJSON AppVersion{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _ilrKind),
-                  ("install" .=) <$> _ilrInstall])
+                 [("versionCode" .=) <$> _avVersionCode,
+                  ("versionString" .=) <$> _avVersionString])
+
+-- | The grouplicense resources for the enterprise.
+--
+-- /See:/ 'groupLicensesListResponse' smart constructor.
+data GroupLicensesListResponse = GroupLicensesListResponse
+    { _gllrGroupLicense :: !(Maybe [GroupLicense])
+    , _gllrKind         :: !Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GroupLicensesListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gllrGroupLicense'
+--
+-- * 'gllrKind'
+groupLicensesListResponse
+    :: GroupLicensesListResponse
+groupLicensesListResponse =
+    GroupLicensesListResponse
+    { _gllrGroupLicense = Nothing
+    , _gllrKind = "androidenterprise#groupLicensesListResponse"
+    }
+
+-- | A group license for a product approved for use in the enterprise.
+gllrGroupLicense :: Lens' GroupLicensesListResponse [GroupLicense]
+gllrGroupLicense
+  = lens _gllrGroupLicense
+      (\ s a -> s{_gllrGroupLicense = a})
+      . _Default
+      . _Coerce
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"androidenterprise#groupLicensesListResponse\".
+gllrKind :: Lens' GroupLicensesListResponse Text
+gllrKind = lens _gllrKind (\ s a -> s{_gllrKind = a})
+
+instance FromJSON GroupLicensesListResponse where
+        parseJSON
+          = withObject "GroupLicensesListResponse"
+              (\ o ->
+                 GroupLicensesListResponse <$>
+                   (o .:? "groupLicense" .!= mempty) <*>
+                     (o .:? "kind" .!=
+                        "androidenterprise#groupLicensesListResponse"))
+
+instance ToJSON GroupLicensesListResponse where
+        toJSON GroupLicensesListResponse{..}
+          = object
+              (catMaybes
+                 [("groupLicense" .=) <$> _gllrGroupLicense,
+                  Just ("kind" .= _gllrKind)])
 
 -- | A collection resource defines a named set of apps that is visible to a
 -- set of users in the Google Play Store app running on those users\'
@@ -984,124 +1036,6 @@ instance ToJSON Collection where
                   ("visibility" .=) <$> _cVisibility,
                   ("name" .=) <$> _cName,
                   ("productId" .=) <$> _cProductId])
-
--- | The grouplicense resources for the enterprise.
---
--- /See:/ 'groupLicensesListResponse' smart constructor.
-data GroupLicensesListResponse = GroupLicensesListResponse
-    { _gllrGroupLicense :: !(Maybe [GroupLicense])
-    , _gllrKind         :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'GroupLicensesListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'gllrGroupLicense'
---
--- * 'gllrKind'
-groupLicensesListResponse
-    :: GroupLicensesListResponse
-groupLicensesListResponse =
-    GroupLicensesListResponse
-    { _gllrGroupLicense = Nothing
-    , _gllrKind = "androidenterprise#groupLicensesListResponse"
-    }
-
--- | A group license for a product approved for use in the enterprise.
-gllrGroupLicense :: Lens' GroupLicensesListResponse [GroupLicense]
-gllrGroupLicense
-  = lens _gllrGroupLicense
-      (\ s a -> s{_gllrGroupLicense = a})
-      . _Default
-      . _Coerce
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"androidenterprise#groupLicensesListResponse\".
-gllrKind :: Lens' GroupLicensesListResponse Text
-gllrKind = lens _gllrKind (\ s a -> s{_gllrKind = a})
-
-instance FromJSON GroupLicensesListResponse where
-        parseJSON
-          = withObject "GroupLicensesListResponse"
-              (\ o ->
-                 GroupLicensesListResponse <$>
-                   (o .:? "groupLicense" .!= mempty) <*>
-                     (o .:? "kind" .!=
-                        "androidenterprise#groupLicensesListResponse"))
-
-instance ToJSON GroupLicensesListResponse where
-        toJSON GroupLicensesListResponse{..}
-          = object
-              (catMaybes
-                 [("groupLicense" .=) <$> _gllrGroupLicense,
-                  Just ("kind" .= _gllrKind)])
-
--- | A user resource represents an individual user within the enterprise\'s
--- domain. Note that each user is associated with a Google account based on
--- the user\'s corporate email address (which must be in one of the
--- enterprise\'s domains). As part of installing an MDM app to manage a
--- device the Google account must be provisioned to the device, and so the
--- user resource must be created before that. This can be done using the
--- Google Admin SDK Directory API. The ID for a user is an opaque string.
--- It can be retrieved using the list method queried by the user\'s primary
--- email address.
---
--- /See:/ 'user' smart constructor.
-data User = User
-    { _uKind         :: !Text
-    , _uId           :: !(Maybe Text)
-    , _uPrimaryEmail :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'User' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'uKind'
---
--- * 'uId'
---
--- * 'uPrimaryEmail'
-user
-    :: User
-user =
-    User
-    { _uKind = "androidenterprise#user"
-    , _uId = Nothing
-    , _uPrimaryEmail = Nothing
-    }
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"androidenterprise#user\".
-uKind :: Lens' User Text
-uKind = lens _uKind (\ s a -> s{_uKind = a})
-
--- | The unique ID for the user.
-uId :: Lens' User (Maybe Text)
-uId = lens _uId (\ s a -> s{_uId = a})
-
--- | The user\'s primary email, e.g. \"jsmith\'example.com\".
-uPrimaryEmail :: Lens' User (Maybe Text)
-uPrimaryEmail
-  = lens _uPrimaryEmail
-      (\ s a -> s{_uPrimaryEmail = a})
-
-instance FromJSON User where
-        parseJSON
-          = withObject "User"
-              (\ o ->
-                 User <$>
-                   (o .:? "kind" .!= "androidenterprise#user") <*>
-                     (o .:? "id")
-                     <*> (o .:? "primaryEmail"))
-
-instance ToJSON User where
-        toJSON User{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _uKind), ("id" .=) <$> _uId,
-                  ("primaryEmail" .=) <$> _uPrimaryEmail])
 
 -- | A set of products.
 --
@@ -1247,6 +1181,114 @@ instance ToJSON Install where
                   ("installState" .=) <$> _iInstallState,
                   ("productId" .=) <$> _iProductId])
 
+-- | A user resource represents an individual user within the enterprise\'s
+-- domain. Note that each user is associated with a Google account based on
+-- the user\'s corporate email address (which must be in one of the
+-- enterprise\'s domains). As part of installing an MDM app to manage a
+-- device the Google account must be provisioned to the device, and so the
+-- user resource must be created before that. This can be done using the
+-- Google Admin SDK Directory API. The ID for a user is an opaque string.
+-- It can be retrieved using the list method queried by the user\'s primary
+-- email address.
+--
+-- /See:/ 'user' smart constructor.
+data User = User
+    { _uKind         :: !Text
+    , _uId           :: !(Maybe Text)
+    , _uPrimaryEmail :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'User' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'uKind'
+--
+-- * 'uId'
+--
+-- * 'uPrimaryEmail'
+user
+    :: User
+user =
+    User
+    { _uKind = "androidenterprise#user"
+    , _uId = Nothing
+    , _uPrimaryEmail = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"androidenterprise#user\".
+uKind :: Lens' User Text
+uKind = lens _uKind (\ s a -> s{_uKind = a})
+
+-- | The unique ID for the user.
+uId :: Lens' User (Maybe Text)
+uId = lens _uId (\ s a -> s{_uId = a})
+
+-- | The user\'s primary email, e.g. \"jsmith\'example.com\".
+uPrimaryEmail :: Lens' User (Maybe Text)
+uPrimaryEmail
+  = lens _uPrimaryEmail
+      (\ s a -> s{_uPrimaryEmail = a})
+
+instance FromJSON User where
+        parseJSON
+          = withObject "User"
+              (\ o ->
+                 User <$>
+                   (o .:? "kind" .!= "androidenterprise#user") <*>
+                     (o .:? "id")
+                     <*> (o .:? "primaryEmail"))
+
+instance ToJSON User where
+        toJSON User{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _uKind), ("id" .=) <$> _uId,
+                  ("primaryEmail" .=) <$> _uPrimaryEmail])
+
+--
+-- /See:/ 'productsGenerateApprovalURLResponse' smart constructor.
+newtype ProductsGenerateApprovalURLResponse = ProductsGenerateApprovalURLResponse
+    { _pgaurURL :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ProductsGenerateApprovalURLResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pgaurURL'
+productsGenerateApprovalURLResponse
+    :: ProductsGenerateApprovalURLResponse
+productsGenerateApprovalURLResponse =
+    ProductsGenerateApprovalURLResponse
+    { _pgaurURL = Nothing
+    }
+
+-- | A URL that can be rendered in an iframe to display the permissions (if
+-- any) of a product. This URL can be used to approve the product only once
+-- and only within 24 hours of being generated, using the Products.approve
+-- call. If the product is currently unapproved and has no permissions,
+-- this URL will point to an empty page. If the product is currently
+-- approved, a URL will only be generated if that product has added
+-- permissions since it was last approved, and the URL will only display
+-- those new permissions that have not yet been accepted.
+pgaurURL :: Lens' ProductsGenerateApprovalURLResponse (Maybe Text)
+pgaurURL = lens _pgaurURL (\ s a -> s{_pgaurURL = a})
+
+instance FromJSON ProductsGenerateApprovalURLResponse
+         where
+        parseJSON
+          = withObject "ProductsGenerateApprovalURLResponse"
+              (\ o ->
+                 ProductsGenerateApprovalURLResponse <$>
+                   (o .:? "url"))
+
+instance ToJSON ProductsGenerateApprovalURLResponse
+         where
+        toJSON ProductsGenerateApprovalURLResponse{..}
+          = object (catMaybes [("url" .=) <$> _pgaurURL])
+
 --
 -- /See:/ 'enterprisesSendTestPushNotificationResponse' smart constructor.
 data EnterprisesSendTestPushNotificationResponse = EnterprisesSendTestPushNotificationResponse
@@ -1300,47 +1342,57 @@ instance ToJSON
                  [("topicName" .=) <$> _estpnrTopicName,
                   ("messageId" .=) <$> _estpnrMessageId])
 
+-- | The matching enterprise resources.
 --
--- /See:/ 'productsGenerateApprovalURLResponse' smart constructor.
-newtype ProductsGenerateApprovalURLResponse = ProductsGenerateApprovalURLResponse
-    { _pgaurURL :: Maybe Text
+-- /See:/ 'enterprisesListResponse' smart constructor.
+data EnterprisesListResponse = EnterprisesListResponse
+    { _elrKind       :: !Text
+    , _elrEnterprise :: !(Maybe [Enterprise])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProductsGenerateApprovalURLResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'EnterprisesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pgaurURL'
-productsGenerateApprovalURLResponse
-    :: ProductsGenerateApprovalURLResponse
-productsGenerateApprovalURLResponse =
-    ProductsGenerateApprovalURLResponse
-    { _pgaurURL = Nothing
+-- * 'elrKind'
+--
+-- * 'elrEnterprise'
+enterprisesListResponse
+    :: EnterprisesListResponse
+enterprisesListResponse =
+    EnterprisesListResponse
+    { _elrKind = "androidenterprise#enterprisesListResponse"
+    , _elrEnterprise = Nothing
     }
 
--- | A URL that can be rendered in an iframe to display the permissions (if
--- any) of a product. This URL can be used to approve the product only once
--- and only within 24 hours of being generated, using the Products.approve
--- call. If the product is currently unapproved and has no permissions,
--- this URL will point to an empty page. If the product is currently
--- approved, a URL will only be generated if that product has added
--- permissions since it was last approved, and the URL will only display
--- those new permissions that have not yet been accepted.
-pgaurURL :: Lens' ProductsGenerateApprovalURLResponse (Maybe Text)
-pgaurURL = lens _pgaurURL (\ s a -> s{_pgaurURL = a})
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"androidenterprise#enterprisesListResponse\".
+elrKind :: Lens' EnterprisesListResponse Text
+elrKind = lens _elrKind (\ s a -> s{_elrKind = a})
 
-instance FromJSON ProductsGenerateApprovalURLResponse
-         where
+-- | An enterprise.
+elrEnterprise :: Lens' EnterprisesListResponse [Enterprise]
+elrEnterprise
+  = lens _elrEnterprise
+      (\ s a -> s{_elrEnterprise = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON EnterprisesListResponse where
         parseJSON
-          = withObject "ProductsGenerateApprovalURLResponse"
+          = withObject "EnterprisesListResponse"
               (\ o ->
-                 ProductsGenerateApprovalURLResponse <$>
-                   (o .:? "url"))
+                 EnterprisesListResponse <$>
+                   (o .:? "kind" .!=
+                      "androidenterprise#enterprisesListResponse")
+                     <*> (o .:? "enterprise" .!= mempty))
 
-instance ToJSON ProductsGenerateApprovalURLResponse
-         where
-        toJSON ProductsGenerateApprovalURLResponse{..}
-          = object (catMaybes [("url" .=) <$> _pgaurURL])
+instance ToJSON EnterprisesListResponse where
+        toJSON EnterprisesListResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _elrKind),
+                  ("enterprise" .=) <$> _elrEnterprise])
 
 -- | Represents the list of app restrictions available to be pre-configured
 -- for the product.
@@ -1394,109 +1446,6 @@ instance ToJSON AppRestrictionsSchema where
               (catMaybes
                  [Just ("kind" .= _arsKind),
                   ("restrictions" .=) <$> _arsRestrictions])
-
--- | The matching enterprise resources.
---
--- /See:/ 'enterprisesListResponse' smart constructor.
-data EnterprisesListResponse = EnterprisesListResponse
-    { _elrKind       :: !Text
-    , _elrEnterprise :: !(Maybe [Enterprise])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'EnterprisesListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'elrKind'
---
--- * 'elrEnterprise'
-enterprisesListResponse
-    :: EnterprisesListResponse
-enterprisesListResponse =
-    EnterprisesListResponse
-    { _elrKind = "androidenterprise#enterprisesListResponse"
-    , _elrEnterprise = Nothing
-    }
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"androidenterprise#enterprisesListResponse\".
-elrKind :: Lens' EnterprisesListResponse Text
-elrKind = lens _elrKind (\ s a -> s{_elrKind = a})
-
--- | An enterprise.
-elrEnterprise :: Lens' EnterprisesListResponse [Enterprise]
-elrEnterprise
-  = lens _elrEnterprise
-      (\ s a -> s{_elrEnterprise = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON EnterprisesListResponse where
-        parseJSON
-          = withObject "EnterprisesListResponse"
-              (\ o ->
-                 EnterprisesListResponse <$>
-                   (o .:? "kind" .!=
-                      "androidenterprise#enterprisesListResponse")
-                     <*> (o .:? "enterprise" .!= mempty))
-
-instance ToJSON EnterprisesListResponse where
-        toJSON EnterprisesListResponse{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _elrKind),
-                  ("enterprise" .=) <$> _elrEnterprise])
-
--- | The device resources for the user.
---
--- /See:/ 'devicesListResponse' smart constructor.
-data DevicesListResponse = DevicesListResponse
-    { _dlrKind   :: !Text
-    , _dlrDevice :: !(Maybe [Device])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'DevicesListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'dlrKind'
---
--- * 'dlrDevice'
-devicesListResponse
-    :: DevicesListResponse
-devicesListResponse =
-    DevicesListResponse
-    { _dlrKind = "androidenterprise#devicesListResponse"
-    , _dlrDevice = Nothing
-    }
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"androidenterprise#devicesListResponse\".
-dlrKind :: Lens' DevicesListResponse Text
-dlrKind = lens _dlrKind (\ s a -> s{_dlrKind = a})
-
--- | A managed device.
-dlrDevice :: Lens' DevicesListResponse [Device]
-dlrDevice
-  = lens _dlrDevice (\ s a -> s{_dlrDevice = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON DevicesListResponse where
-        parseJSON
-          = withObject "DevicesListResponse"
-              (\ o ->
-                 DevicesListResponse <$>
-                   (o .:? "kind" .!=
-                      "androidenterprise#devicesListResponse")
-                     <*> (o .:? "device" .!= mempty))
-
-instance ToJSON DevicesListResponse where
-        toJSON DevicesListResponse{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _dlrKind),
-                  ("device" .=) <$> _dlrDevice])
 
 -- | A UserToken is used by a user when setting up a managed device or
 -- profile with their work account on a device. When the user enters their
@@ -1557,6 +1506,57 @@ instance ToJSON UserToken where
               (catMaybes
                  [Just ("kind" .= _utKind), ("token" .=) <$> _utToken,
                   ("userId" .=) <$> _utUserId])
+
+-- | The device resources for the user.
+--
+-- /See:/ 'devicesListResponse' smart constructor.
+data DevicesListResponse = DevicesListResponse
+    { _dlrKind   :: !Text
+    , _dlrDevice :: !(Maybe [Device])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DevicesListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dlrKind'
+--
+-- * 'dlrDevice'
+devicesListResponse
+    :: DevicesListResponse
+devicesListResponse =
+    DevicesListResponse
+    { _dlrKind = "androidenterprise#devicesListResponse"
+    , _dlrDevice = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"androidenterprise#devicesListResponse\".
+dlrKind :: Lens' DevicesListResponse Text
+dlrKind = lens _dlrKind (\ s a -> s{_dlrKind = a})
+
+-- | A managed device.
+dlrDevice :: Lens' DevicesListResponse [Device]
+dlrDevice
+  = lens _dlrDevice (\ s a -> s{_dlrDevice = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON DevicesListResponse where
+        parseJSON
+          = withObject "DevicesListResponse"
+              (\ o ->
+                 DevicesListResponse <$>
+                   (o .:? "kind" .!=
+                      "androidenterprise#devicesListResponse")
+                     <*> (o .:? "device" .!= mempty))
+
+instance ToJSON DevicesListResponse where
+        toJSON DevicesListResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _dlrKind),
+                  ("device" .=) <$> _dlrDevice])
 
 -- | An enterprise resource represents a binding between an organisation and
 -- their MDM. To create an enterprise, an admin of the enterprise must
@@ -1647,82 +1647,6 @@ instance ToJSON Enterprise where
                  [Just ("kind" .= _eKind),
                   ("primaryDomain" .=) <$> _ePrimaryDomain,
                   ("name" .=) <$> _eName, ("id" .=) <$> _eId])
-
--- | A permission represents some extra capability, to be granted to an
--- Android app, which requires explicit consent. An enterprise admin must
--- consent to these permissions on behalf of their users before an
--- entitlement for the app can be created. The permissions collection is
--- read-only. The information provided for each permission (localized name
--- and description) is intended to be used in the MDM user interface when
--- obtaining consent from the enterprise.
---
--- /See:/ 'permission' smart constructor.
-data Permission = Permission
-    { _pKind         :: !Text
-    , _pName         :: !(Maybe Text)
-    , _pDescription  :: !(Maybe Text)
-    , _pPermissionId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Permission' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pKind'
---
--- * 'pName'
---
--- * 'pDescription'
---
--- * 'pPermissionId'
-permission
-    :: Permission
-permission =
-    Permission
-    { _pKind = "androidenterprise#permission"
-    , _pName = Nothing
-    , _pDescription = Nothing
-    , _pPermissionId = Nothing
-    }
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"androidenterprise#permission\".
-pKind :: Lens' Permission Text
-pKind = lens _pKind (\ s a -> s{_pKind = a})
-
--- | The name of the permission.
-pName :: Lens' Permission (Maybe Text)
-pName = lens _pName (\ s a -> s{_pName = a})
-
--- | A longer description of the permissions giving more details of what it
--- affects.
-pDescription :: Lens' Permission (Maybe Text)
-pDescription
-  = lens _pDescription (\ s a -> s{_pDescription = a})
-
--- | An opaque string uniquely identifying the permission.
-pPermissionId :: Lens' Permission (Maybe Text)
-pPermissionId
-  = lens _pPermissionId
-      (\ s a -> s{_pPermissionId = a})
-
-instance FromJSON Permission where
-        parseJSON
-          = withObject "Permission"
-              (\ o ->
-                 Permission <$>
-                   (o .:? "kind" .!= "androidenterprise#permission") <*>
-                     (o .:? "name")
-                     <*> (o .:? "description")
-                     <*> (o .:? "permissionId"))
-
-instance ToJSON Permission where
-        toJSON Permission{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _pKind), ("name" .=) <$> _pName,
-                  ("description" .=) <$> _pDescription,
-                  ("permissionId" .=) <$> _pPermissionId])
 
 -- | A product represents an app in the Google Play Store that is available
 -- to at least some users in the enterprise. (Some apps are restricted to a
@@ -2003,6 +1927,123 @@ instance ToJSON ProductPermissions where
                   ("permission" .=) <$> _ppPermission,
                   ("productId" .=) <$> _ppProductId])
 
+-- | A permission represents some extra capability, to be granted to an
+-- Android app, which requires explicit consent. An enterprise admin must
+-- consent to these permissions on behalf of their users before an
+-- entitlement for the app can be created. The permissions collection is
+-- read-only. The information provided for each permission (localized name
+-- and description) is intended to be used in the MDM user interface when
+-- obtaining consent from the enterprise.
+--
+-- /See:/ 'permission' smart constructor.
+data Permission = Permission
+    { _pKind         :: !Text
+    , _pName         :: !(Maybe Text)
+    , _pDescription  :: !(Maybe Text)
+    , _pPermissionId :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Permission' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pKind'
+--
+-- * 'pName'
+--
+-- * 'pDescription'
+--
+-- * 'pPermissionId'
+permission
+    :: Permission
+permission =
+    Permission
+    { _pKind = "androidenterprise#permission"
+    , _pName = Nothing
+    , _pDescription = Nothing
+    , _pPermissionId = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"androidenterprise#permission\".
+pKind :: Lens' Permission Text
+pKind = lens _pKind (\ s a -> s{_pKind = a})
+
+-- | The name of the permission.
+pName :: Lens' Permission (Maybe Text)
+pName = lens _pName (\ s a -> s{_pName = a})
+
+-- | A longer description of the permissions giving more details of what it
+-- affects.
+pDescription :: Lens' Permission (Maybe Text)
+pDescription
+  = lens _pDescription (\ s a -> s{_pDescription = a})
+
+-- | An opaque string uniquely identifying the permission.
+pPermissionId :: Lens' Permission (Maybe Text)
+pPermissionId
+  = lens _pPermissionId
+      (\ s a -> s{_pPermissionId = a})
+
+instance FromJSON Permission where
+        parseJSON
+          = withObject "Permission"
+              (\ o ->
+                 Permission <$>
+                   (o .:? "kind" .!= "androidenterprise#permission") <*>
+                     (o .:? "name")
+                     <*> (o .:? "description")
+                     <*> (o .:? "permissionId"))
+
+instance ToJSON Permission where
+        toJSON Permission{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _pKind), ("name" .=) <$> _pName,
+                  ("description" .=) <$> _pDescription,
+                  ("permissionId" .=) <$> _pPermissionId])
+
+--
+-- /See:/ 'productsApproveRequest' smart constructor.
+newtype ProductsApproveRequest = ProductsApproveRequest
+    { _parApprovalURLInfo :: Maybe ApprovalURLInfo
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ProductsApproveRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'parApprovalURLInfo'
+productsApproveRequest
+    :: ProductsApproveRequest
+productsApproveRequest =
+    ProductsApproveRequest
+    { _parApprovalURLInfo = Nothing
+    }
+
+-- | The approval URL that was shown to the user. Only the permissions shown
+-- to the user with that URL will be accepted, which may not be the
+-- product\'s entire set of permissions. For example, the URL may only
+-- display new permissions from an update after the product was approved,
+-- or not include new permissions if the product was updated since the URL
+-- was generated.
+parApprovalURLInfo :: Lens' ProductsApproveRequest (Maybe ApprovalURLInfo)
+parApprovalURLInfo
+  = lens _parApprovalURLInfo
+      (\ s a -> s{_parApprovalURLInfo = a})
+
+instance FromJSON ProductsApproveRequest where
+        parseJSON
+          = withObject "ProductsApproveRequest"
+              (\ o ->
+                 ProductsApproveRequest <$> (o .:? "approvalUrlInfo"))
+
+instance ToJSON ProductsApproveRequest where
+        toJSON ProductsApproveRequest{..}
+          = object
+              (catMaybes
+                 [("approvalUrlInfo" .=) <$> _parApprovalURLInfo])
+
 -- | The user resources for the collection.
 --
 -- /See:/ 'collectionViewersListResponse' smart constructor.
@@ -2053,47 +2094,6 @@ instance ToJSON CollectionViewersListResponse where
               (catMaybes
                  [Just ("kind" .= _cvlrKind),
                   ("user" .=) <$> _cvlrUser])
-
---
--- /See:/ 'productsApproveRequest' smart constructor.
-newtype ProductsApproveRequest = ProductsApproveRequest
-    { _parApprovalURLInfo :: Maybe ApprovalURLInfo
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ProductsApproveRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'parApprovalURLInfo'
-productsApproveRequest
-    :: ProductsApproveRequest
-productsApproveRequest =
-    ProductsApproveRequest
-    { _parApprovalURLInfo = Nothing
-    }
-
--- | The approval URL that was shown to the user. Only the permissions shown
--- to the user with that URL will be accepted, which may not be the
--- product\'s entire set of permissions. For example, the URL may only
--- display new permissions from an update after the product was approved,
--- or not include new permissions if the product was updated since the URL
--- was generated.
-parApprovalURLInfo :: Lens' ProductsApproveRequest (Maybe ApprovalURLInfo)
-parApprovalURLInfo
-  = lens _parApprovalURLInfo
-      (\ s a -> s{_parApprovalURLInfo = a})
-
-instance FromJSON ProductsApproveRequest where
-        parseJSON
-          = withObject "ProductsApproveRequest"
-              (\ o ->
-                 ProductsApproveRequest <$> (o .:? "approvalUrlInfo"))
-
-instance ToJSON ProductsApproveRequest where
-        toJSON ProductsApproveRequest{..}
-          = object
-              (catMaybes
-                 [("approvalUrlInfo" .=) <$> _parApprovalURLInfo])
 
 -- | The existence of an entitlement resource means that a user has the right
 -- to use a particular app on any of their devices. This might be because

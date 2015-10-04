@@ -62,7 +62,8 @@ type ActivitiesInsertResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Activity :> Post '[JSON] Activity
+                       ReqBody '[OctetStream] Activity :>
+                         Post '[JSON] Activity
 
 -- | Posts a bulletin for a specific channel. (The user submitting the
 -- request must be authorized to act on the channel\'s behalf.) Note: Even

@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Advertisers.Get
     , agQuotaUser
     , agPrettyPrint
     , agUserIP
-    , agProfileId
+    , agProFileId
     , agKey
     , agId
     , agOAuthToken
@@ -66,7 +66,7 @@ data AdvertisersGet' = AdvertisersGet'
     { _agQuotaUser   :: !(Maybe Text)
     , _agPrettyPrint :: !Bool
     , _agUserIP      :: !(Maybe Text)
-    , _agProfileId   :: !Int64
+    , _agProFileId   :: !Int64
     , _agKey         :: !(Maybe Key)
     , _agId          :: !Int64
     , _agOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +83,7 @@ data AdvertisersGet' = AdvertisersGet'
 --
 -- * 'agUserIP'
 --
--- * 'agProfileId'
+-- * 'agProFileId'
 --
 -- * 'agKey'
 --
@@ -96,12 +96,12 @@ advertisersGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> AdvertisersGet'
-advertisersGet' pAgProfileId_ pAgId_ =
+advertisersGet' pAgProFileId_ pAgId_ =
     AdvertisersGet'
     { _agQuotaUser = Nothing
     , _agPrettyPrint = True
     , _agUserIP = Nothing
-    , _agProfileId = pAgProfileId_
+    , _agProFileId = pAgProFileId_
     , _agKey = Nothing
     , _agId = pAgId_
     , _agOAuthToken = Nothing
@@ -127,9 +127,9 @@ agUserIP :: Lens' AdvertisersGet' (Maybe Text)
 agUserIP = lens _agUserIP (\ s a -> s{_agUserIP = a})
 
 -- | User profile ID associated with this request.
-agProfileId :: Lens' AdvertisersGet' Int64
-agProfileId
-  = lens _agProfileId (\ s a -> s{_agProfileId = a})
+agProFileId :: Lens' AdvertisersGet' Int64
+agProFileId
+  = lens _agProFileId (\ s a -> s{_agProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -158,7 +158,7 @@ instance GoogleRequest AdvertisersGet' where
         type Rs AdvertisersGet' = Advertiser
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdvertisersGet'{..}
-          = go _agProfileId _agId _agQuotaUser
+          = go _agProFileId _agId _agQuotaUser
               (Just _agPrettyPrint)
               _agUserIP
               _agFields

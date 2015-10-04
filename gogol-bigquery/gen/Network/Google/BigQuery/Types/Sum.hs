@@ -17,8 +17,37 @@ module Network.Google.BigQuery.Types.Sum where
 
 import           Network.Google.Prelude
 
+-- | Restrict information returned to a set of selected fields
+data JobsListProjection
+    = Full
+      -- ^ @full@
+      -- Includes all job data
+    | Minimal
+      -- ^ @minimal@
+      -- Does not include the job configuration
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable JobsListProjection
+
+instance FromText JobsListProjection where
+    fromText = \case
+        "full" -> Just Full
+        "minimal" -> Just Minimal
+        _ -> Nothing
+
+instance ToText JobsListProjection where
+    toText = \case
+        Full -> "full"
+        Minimal -> "minimal"
+
+instance FromJSON JobsListProjection where
+    parseJSON = parseJSONText "JobsListProjection"
+
+instance ToJSON JobsListProjection where
+    toJSON = toJSONText
+
 -- | Filter for job state
-data StateFilter
+data JobsListStateFilter
     = Done
       -- ^ @done@
       -- Finished jobs
@@ -30,52 +59,23 @@ data StateFilter
       -- Running jobs
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable StateFilter
+instance Hashable JobsListStateFilter
 
-instance FromText StateFilter where
+instance FromText JobsListStateFilter where
     fromText = \case
         "done" -> Just Done
         "pending" -> Just Pending
         "running" -> Just Running
         _ -> Nothing
 
-instance ToText StateFilter where
+instance ToText JobsListStateFilter where
     toText = \case
         Done -> "done"
         Pending -> "pending"
         Running -> "running"
 
-instance FromJSON StateFilter where
-    parseJSON = parseJSONText "StateFilter"
+instance FromJSON JobsListStateFilter where
+    parseJSON = parseJSONText "JobsListStateFilter"
 
-instance ToJSON StateFilter where
-    toJSON = toJSONText
-
--- | Restrict information returned to a set of selected fields
-data Projection
-    = Full
-      -- ^ @full@
-      -- Includes all job data
-    | Minimal
-      -- ^ @minimal@
-      -- Does not include the job configuration
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Projection
-
-instance FromText Projection where
-    fromText = \case
-        "full" -> Just Full
-        "minimal" -> Just Minimal
-        _ -> Nothing
-
-instance ToText Projection where
-    toText = \case
-        Full -> "full"
-        Minimal -> "minimal"
-
-instance FromJSON Projection where
-    parseJSON = parseJSONText "Projection"
-
-instance ToJSON Projection where
+instance ToJSON JobsListStateFilter where
     toJSON = toJSONText

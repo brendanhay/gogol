@@ -77,7 +77,7 @@ module Network.Google.PlayMoviesPartner
     , aSeriesTitleInternalAlias
     , aDisplayName
     , aReleaseDate
-    , aFormatProfile
+    , aFormatProFile
     , aRatingReason
     , aEncodeId
     , aPriceValue
@@ -92,50 +92,23 @@ module Network.Google.PlayMoviesPartner
     , larNextPageToken
     , larAvails
 
-    -- ** ListOrdersResponse
-    , ListOrdersResponse
-    , listOrdersResponse
-    , lorNextPageToken
-    , lorOrders
-
     -- ** ListExperienceLocalesResponse
     , ListExperienceLocalesResponse
     , listExperienceLocalesResponse
     , lelrNextPageToken
     , lelrExperienceLocales
 
+    -- ** ListOrdersResponse
+    , ListOrdersResponse
+    , listOrdersResponse
+    , lorNextPageToken
+    , lorOrders
+
     -- ** ListStoreInfosResponse
     , ListStoreInfosResponse
     , listStoreInfosResponse
     , lsirNextPageToken
     , lsirStoreInfos
-
-    -- ** ExperienceLocale
-    , ExperienceLocale
-    , experienceLocale
-    , elTitleLevelEidr
-    , elStatus
-    , elPphNames
-    , elInventoryId
-    , elEarliestAvailStartTime
-    , elStudioName
-    , elPriority
-    , elCustomIds
-    , elCreatedTime
-    , elCountry
-    , elTrailerId
-    , elPresentationId
-    , elAltCutId
-    , elChannelId
-    , elApprovedTime
-    , elPlayableSequenceId
-    , elElId
-    , elVideoId
-    , elName
-    , elLanguage
-    , elEditLevelEidr
-    , elType
-    , elNormalizedPriority
 
     -- ** Order
     , Order
@@ -163,6 +136,33 @@ module Network.Google.PlayMoviesPartner
     , oNormalizedPriority
     , oOrderId
     , oEpisodeName
+
+    -- ** ExperienceLocale
+    , ExperienceLocale
+    , experienceLocale
+    , elTitleLevelEidr
+    , elStatus
+    , elPphNames
+    , elInventoryId
+    , elEarliestAvailStartTime
+    , elStudioName
+    , elPriority
+    , elCustomIds
+    , elCreatedTime
+    , elCountry
+    , elTrailerId
+    , elPresentationId
+    , elAltCutId
+    , elChannelId
+    , elApprovedTime
+    , elPlayableSequenceId
+    , elElId
+    , elVideoId
+    , elName
+    , elLanguage
+    , elEditLevelEidr
+    , elType
+    , elNormalizedPriority
 
     -- ** StoreInfo
     , StoreInfo

@@ -67,7 +67,8 @@ type TableReplaceRowsResource =
                            QueryParam "fields" Text :>
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "alt" AltJSON :> Post '[JSON] Task
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] Body :> Post '[JSON] Task
 
 -- | Replaces rows of an existing table. Current rows remain visible until
 -- all replacement rows are ready.

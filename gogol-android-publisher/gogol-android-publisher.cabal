@@ -46,10 +46,10 @@ library
         , Network.Google.Resource.AndroidPublisher.Edits.Details.Get
         , Network.Google.Resource.AndroidPublisher.Edits.Details.Patch
         , Network.Google.Resource.AndroidPublisher.Edits.Details.Update
-        , Network.Google.Resource.AndroidPublisher.Edits.Expansionfiles.Get
-        , Network.Google.Resource.AndroidPublisher.Edits.Expansionfiles.Patch
-        , Network.Google.Resource.AndroidPublisher.Edits.Expansionfiles.Update
-        , Network.Google.Resource.AndroidPublisher.Edits.Expansionfiles.Upload
+        , Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Get
+        , Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Patch
+        , Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Update
+        , Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Upload
         , Network.Google.Resource.AndroidPublisher.Edits.Get
         , Network.Google.Resource.AndroidPublisher.Edits.Images.Delete
         , Network.Google.Resource.AndroidPublisher.Edits.Images.Deleteall
@@ -71,13 +71,13 @@ library
         , Network.Google.Resource.AndroidPublisher.Edits.Tracks.Update
         , Network.Google.Resource.AndroidPublisher.Edits.Validate
         , Network.Google.Resource.AndroidPublisher.Entitlements.List
-        , Network.Google.Resource.AndroidPublisher.Inappproducts.Batch
-        , Network.Google.Resource.AndroidPublisher.Inappproducts.Delete
-        , Network.Google.Resource.AndroidPublisher.Inappproducts.Get
-        , Network.Google.Resource.AndroidPublisher.Inappproducts.Insert
-        , Network.Google.Resource.AndroidPublisher.Inappproducts.List
-        , Network.Google.Resource.AndroidPublisher.Inappproducts.Patch
-        , Network.Google.Resource.AndroidPublisher.Inappproducts.Update
+        , Network.Google.Resource.AndroidPublisher.InAppProducts.Batch
+        , Network.Google.Resource.AndroidPublisher.InAppProducts.Delete
+        , Network.Google.Resource.AndroidPublisher.InAppProducts.Get
+        , Network.Google.Resource.AndroidPublisher.InAppProducts.Insert
+        , Network.Google.Resource.AndroidPublisher.InAppProducts.List
+        , Network.Google.Resource.AndroidPublisher.InAppProducts.Patch
+        , Network.Google.Resource.AndroidPublisher.InAppProducts.Update
         , Network.Google.Resource.AndroidPublisher.Purchases.Products.Get
         , Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Cancel
         , Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Defer

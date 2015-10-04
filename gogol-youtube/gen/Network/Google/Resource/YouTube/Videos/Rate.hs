@@ -50,7 +50,7 @@ type VideosRateResource =
      "videos" :>
        "rate" :>
          QueryParam "id" Text :>
-           QueryParam "rating" Rating :>
+           QueryParam "rating" VideosRateRating :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -64,7 +64,7 @@ type VideosRateResource =
 -- /See:/ 'videosRate'' smart constructor.
 data VideosRate' = VideosRate'
     { _vrQuotaUser   :: !(Maybe Text)
-    , _vrRating      :: !Rating
+    , _vrRating      :: !VideosRateRating
     , _vrPrettyPrint :: !Bool
     , _vrUserIP      :: !(Maybe Text)
     , _vrKey         :: !(Maybe Key)
@@ -93,7 +93,7 @@ data VideosRate' = VideosRate'
 --
 -- * 'vrFields'
 videosRate'
-    :: Rating -- ^ 'rating'
+    :: VideosRateRating -- ^ 'rating'
     -> Text -- ^ 'id'
     -> VideosRate'
 videosRate' pVrRating_ pVrId_ =
@@ -116,7 +116,7 @@ vrQuotaUser
   = lens _vrQuotaUser (\ s a -> s{_vrQuotaUser = a})
 
 -- | Specifies the rating to record.
-vrRating :: Lens' VideosRate' Rating
+vrRating :: Lens' VideosRate' VideosRateRating
 vrRating = lens _vrRating (\ s a -> s{_vrRating = a})
 
 -- | Returns response with indentations and line breaks.

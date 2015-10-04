@@ -57,7 +57,7 @@ import           Network.Google.Prelude
 type FilesInsertResource =
      "files" :>
        QueryParam "pinned" Bool :>
-         QueryParam "visibility" Visibility :>
+         QueryParam "visibility" FilesInsertVisibility :>
            QueryParam "timedTextLanguage" Text :>
              QueryParam "useContentAsIndexableText" Bool :>
                QueryParam "timedTextTrackName" Text :>
@@ -82,7 +82,7 @@ data FilesInsert' = FilesInsert'
     , _fiPrettyPrint               :: !Bool
     , _fiUserIP                    :: !(Maybe Text)
     , _fiPinned                    :: !Bool
-    , _fiVisibility                :: !Visibility
+    , _fiVisibility                :: !FilesInsertVisibility
     , _fiTimedTextLanguage         :: !(Maybe Text)
     , _fiPayload                   :: !File
     , _fiUseContentAsIndexableText :: !Bool
@@ -141,7 +141,7 @@ filesInsert' pFiPayload_ pFiMedia_ =
     , _fiPrettyPrint = True
     , _fiUserIP = Nothing
     , _fiPinned = False
-    , _fiVisibility = VDefault
+    , _fiVisibility = Default
     , _fiTimedTextLanguage = Nothing
     , _fiPayload = pFiPayload_
     , _fiUseContentAsIndexableText = False
@@ -180,7 +180,7 @@ fiPinned = lens _fiPinned (\ s a -> s{_fiPinned = a})
 
 -- | The visibility of the new file. This parameter is only relevant when
 -- convert=false.
-fiVisibility :: Lens' FilesInsert' Visibility
+fiVisibility :: Lens' FilesInsert' FilesInsertVisibility
 fiVisibility
   = lens _fiVisibility (\ s a -> s{_fiVisibility = a})
 

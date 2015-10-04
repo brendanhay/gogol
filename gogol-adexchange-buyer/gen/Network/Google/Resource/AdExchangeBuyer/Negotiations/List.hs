@@ -54,7 +54,7 @@ type NegotiationsListResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] GetNegotiationsRequest :>
+                     ReqBody '[OctetStream] GetNegotiationsRequest :>
                        Get '[JSON] GetNegotiationsResponse
 
 -- | Lists all negotiations the authenticated user has access to.

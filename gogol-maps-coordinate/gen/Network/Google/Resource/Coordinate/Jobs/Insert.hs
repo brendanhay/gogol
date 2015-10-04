@@ -75,7 +75,7 @@ type JobsInsertResource =
                                      QueryParam "key" Key :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
-                                           ReqBody '[JSON] Job :>
+                                           ReqBody '[OctetStream] Job :>
                                              Post '[JSON] Job
 
 -- | Inserts a new job. Only the state field of the job should be set.

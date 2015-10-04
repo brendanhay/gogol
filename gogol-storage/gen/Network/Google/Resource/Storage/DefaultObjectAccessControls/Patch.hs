@@ -60,7 +60,7 @@ type DefaultObjectAccessControlsPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] ObjectAccessControl :>
+                           ReqBody '[OctetStream] ObjectAccessControl :>
                              Patch '[JSON] ObjectAccessControl
 
 -- | Updates a default object ACL entry on the specified bucket. This method

@@ -92,8 +92,8 @@ module Network.Google.Classroom
     -- ** ClassroomInvitationsList
     , module Network.Google.Resource.Classroom.Invitations.List
 
-    -- ** ClassroomUserProfilesGet
-    , module Network.Google.Resource.Classroom.UserProfiles.Get
+    -- ** ClassroomUserProFilesGet
+    , module Network.Google.Resource.Classroom.UserProFiles.Get
 
     -- * Types
 
@@ -130,14 +130,8 @@ module Network.Google.Classroom
     , Teacher
     , teacher
     , tCourseId
-    , tProfile
+    , tProFile
     , tUserId
-
-    -- ** ListCoursesResponse
-    , ListCoursesResponse
-    , listCoursesResponse
-    , lcrNextPageToken
-    , lcrCourses
 
     -- ** Name
     , Name
@@ -146,14 +140,20 @@ module Network.Google.Classroom
     , nFullName
     , nFamilyName
 
-    -- ** UserProfile
-    , UserProfile
-    , userProfile
-    , upPhotoURL
-    , upName
-    , upEmailAddress
-    , upId
-    , upPermissions
+    -- ** ListCoursesResponse
+    , ListCoursesResponse
+    , listCoursesResponse
+    , lcrNextPageToken
+    , lcrCourses
+
+    -- ** UserProFile
+    , UserProFile
+    , userProFile
+    , upfPhotoURL
+    , upfName
+    , upfEmailAddress
+    , upfId
+    , upfPermissions
 
     -- ** Course
     , Course
@@ -192,7 +192,7 @@ module Network.Google.Classroom
     , Student
     , student
     , sCourseId
-    , sProfile
+    , sProFile
     , sUserId
     ) where
 
@@ -220,7 +220,7 @@ import           Network.Google.Resource.Classroom.Invitations.Create
 import           Network.Google.Resource.Classroom.Invitations.Delete
 import           Network.Google.Resource.Classroom.Invitations.Get
 import           Network.Google.Resource.Classroom.Invitations.List
-import           Network.Google.Resource.Classroom.UserProfiles.Get
+import           Network.Google.Resource.Classroom.UserProFiles.Get
 
 {- $resources
 TODO
@@ -249,7 +249,7 @@ type ClassroomAPI =
        :<|> CoursesCreateResource
        :<|> CoursesDeleteResource
        :<|> CoursesUpdateResource
-       :<|> UserProfilesGetResource
+       :<|> UserProFilesGetResource
 
 classroomAPI :: Proxy ClassroomAPI
 classroomAPI = Proxy

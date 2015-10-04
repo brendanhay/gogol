@@ -17,39 +17,8 @@ module Network.Google.ReplicaPool.Types.Sum where
 
 import           Network.Google.Prelude
 
--- | [Output Only] Status of the operation.
-data Status
-    = Done
-      -- ^ @DONE@
-    | Pending
-      -- ^ @PENDING@
-    | Running
-      -- ^ @RUNNING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Status
-
-instance FromText Status where
-    fromText = \case
-        "DONE" -> Just Done
-        "PENDING" -> Just Pending
-        "RUNNING" -> Just Running
-        _ -> Nothing
-
-instance ToText Status where
-    toText = \case
-        Done -> "DONE"
-        Pending -> "PENDING"
-        Running -> "RUNNING"
-
-instance FromJSON Status where
-    parseJSON = parseJSONText "Status"
-
-instance ToJSON Status where
-    toJSON = toJSONText
-
 -- | [Output only] The warning type identifier for this warning.
-data WarningsItemCode
+data OperationWarningsItemCode
     = DeprecatedResourceUsed
       -- ^ @DEPRECATED_RESOURCE_USED@
     | DiskSizeLargerThanImageSize
@@ -78,9 +47,9 @@ data WarningsItemCode
       -- ^ @UNREACHABLE@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable WarningsItemCode
+instance Hashable OperationWarningsItemCode
 
-instance FromText WarningsItemCode where
+instance FromText OperationWarningsItemCode where
     fromText = \case
         "DEPRECATED_RESOURCE_USED" -> Just DeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just DiskSizeLargerThanImageSize
@@ -97,7 +66,7 @@ instance FromText WarningsItemCode where
         "UNREACHABLE" -> Just Unreachable
         _ -> Nothing
 
-instance ToText WarningsItemCode where
+instance ToText OperationWarningsItemCode where
     toText = \case
         DeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         DiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
@@ -113,10 +82,10 @@ instance ToText WarningsItemCode where
         SingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
         Unreachable -> "UNREACHABLE"
 
-instance FromJSON WarningsItemCode where
-    parseJSON = parseJSONText "WarningsItemCode"
+instance FromJSON OperationWarningsItemCode where
+    parseJSON = parseJSONText "OperationWarningsItemCode"
 
-instance ToJSON WarningsItemCode where
+instance ToJSON OperationWarningsItemCode where
     toJSON = toJSONText
 
 -- | The action to perform when an instance becomes unhealthy. Possible
@@ -124,28 +93,59 @@ instance ToJSON WarningsItemCode where
 -- with a new instance that is based on the instance template for this
 -- managed instance group. REBOOT performs a soft reboot on an instance. If
 -- the instance cannot reboot, the instance performs a hard restart.
-data ActionType
+data ReplicaPoolAutoHealingPolicyActionType
     = Reboot
       -- ^ @REBOOT@
     | Recreate
       -- ^ @RECREATE@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable ActionType
+instance Hashable ReplicaPoolAutoHealingPolicyActionType
 
-instance FromText ActionType where
+instance FromText ReplicaPoolAutoHealingPolicyActionType where
     fromText = \case
         "REBOOT" -> Just Reboot
         "RECREATE" -> Just Recreate
         _ -> Nothing
 
-instance ToText ActionType where
+instance ToText ReplicaPoolAutoHealingPolicyActionType where
     toText = \case
         Reboot -> "REBOOT"
         Recreate -> "RECREATE"
 
-instance FromJSON ActionType where
-    parseJSON = parseJSONText "ActionType"
+instance FromJSON ReplicaPoolAutoHealingPolicyActionType where
+    parseJSON = parseJSONText "ReplicaPoolAutoHealingPolicyActionType"
 
-instance ToJSON ActionType where
+instance ToJSON ReplicaPoolAutoHealingPolicyActionType where
+    toJSON = toJSONText
+
+-- | [Output Only] Status of the operation.
+data OperationStatus
+    = Done
+      -- ^ @DONE@
+    | Pending
+      -- ^ @PENDING@
+    | Running
+      -- ^ @RUNNING@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable OperationStatus
+
+instance FromText OperationStatus where
+    fromText = \case
+        "DONE" -> Just Done
+        "PENDING" -> Just Pending
+        "RUNNING" -> Just Running
+        _ -> Nothing
+
+instance ToText OperationStatus where
+    toText = \case
+        Done -> "DONE"
+        Pending -> "PENDING"
+        Running -> "RUNNING"
+
+instance FromJSON OperationStatus where
+    parseJSON = parseJSONText "OperationStatus"
+
+instance ToJSON OperationStatus where
     toJSON = toJSONText

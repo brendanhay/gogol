@@ -72,7 +72,7 @@ type DebuggerDebuggeesBreakpointsSetResource =
                                      QueryParam "key" Key :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
-                                           ReqBody '[JSON] Breakpoint :>
+                                           ReqBody '[OctetStream] Breakpoint :>
                                              Post '[JSON] SetBreakpointResponse
 
 -- | Sets the breakpoint to the debuggee.

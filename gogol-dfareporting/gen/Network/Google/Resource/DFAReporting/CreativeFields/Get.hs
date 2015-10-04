@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.CreativeFields.Get
     , cfgQuotaUser
     , cfgPrettyPrint
     , cfgUserIP
-    , cfgProfileId
+    , cfgProFileId
     , cfgKey
     , cfgId
     , cfgOAuthToken
@@ -66,7 +66,7 @@ data CreativeFieldsGet' = CreativeFieldsGet'
     { _cfgQuotaUser   :: !(Maybe Text)
     , _cfgPrettyPrint :: !Bool
     , _cfgUserIP      :: !(Maybe Text)
-    , _cfgProfileId   :: !Int64
+    , _cfgProFileId   :: !Int64
     , _cfgKey         :: !(Maybe Key)
     , _cfgId          :: !Int64
     , _cfgOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +83,7 @@ data CreativeFieldsGet' = CreativeFieldsGet'
 --
 -- * 'cfgUserIP'
 --
--- * 'cfgProfileId'
+-- * 'cfgProFileId'
 --
 -- * 'cfgKey'
 --
@@ -96,12 +96,12 @@ creativeFieldsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> CreativeFieldsGet'
-creativeFieldsGet' pCfgProfileId_ pCfgId_ =
+creativeFieldsGet' pCfgProFileId_ pCfgId_ =
     CreativeFieldsGet'
     { _cfgQuotaUser = Nothing
     , _cfgPrettyPrint = True
     , _cfgUserIP = Nothing
-    , _cfgProfileId = pCfgProfileId_
+    , _cfgProFileId = pCfgProFileId_
     , _cfgKey = Nothing
     , _cfgId = pCfgId_
     , _cfgOAuthToken = Nothing
@@ -128,9 +128,9 @@ cfgUserIP
   = lens _cfgUserIP (\ s a -> s{_cfgUserIP = a})
 
 -- | User profile ID associated with this request.
-cfgProfileId :: Lens' CreativeFieldsGet' Int64
-cfgProfileId
-  = lens _cfgProfileId (\ s a -> s{_cfgProfileId = a})
+cfgProFileId :: Lens' CreativeFieldsGet' Int64
+cfgProFileId
+  = lens _cfgProFileId (\ s a -> s{_cfgProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -161,7 +161,7 @@ instance GoogleRequest CreativeFieldsGet' where
         type Rs CreativeFieldsGet' = CreativeField
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeFieldsGet'{..}
-          = go _cfgProfileId _cfgId _cfgQuotaUser
+          = go _cfgProFileId _cfgId _cfgQuotaUser
               (Just _cfgPrettyPrint)
               _cfgUserIP
               _cfgFields

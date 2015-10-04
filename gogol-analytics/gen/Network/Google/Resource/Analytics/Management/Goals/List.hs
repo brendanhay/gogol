@@ -35,7 +35,7 @@ module Network.Google.Resource.Analytics.Management.Goals.List
     , mglPrettyPrint
     , mglWebPropertyId
     , mglUserIP
-    , mglProfileId
+    , mglProFileId
     , mglAccountId
     , mglKey
     , mglOAuthToken
@@ -77,7 +77,7 @@ data ManagementGoalsList' = ManagementGoalsList'
     , _mglPrettyPrint   :: !Bool
     , _mglWebPropertyId :: !Text
     , _mglUserIP        :: !(Maybe Text)
-    , _mglProfileId     :: !Text
+    , _mglProFileId     :: !Text
     , _mglAccountId     :: !Text
     , _mglKey           :: !(Maybe Key)
     , _mglOAuthToken    :: !(Maybe OAuthToken)
@@ -98,7 +98,7 @@ data ManagementGoalsList' = ManagementGoalsList'
 --
 -- * 'mglUserIP'
 --
--- * 'mglProfileId'
+-- * 'mglProFileId'
 --
 -- * 'mglAccountId'
 --
@@ -116,13 +116,13 @@ managementGoalsList'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
     -> ManagementGoalsList'
-managementGoalsList' pMglWebPropertyId_ pMglProfileId_ pMglAccountId_ =
+managementGoalsList' pMglWebPropertyId_ pMglProFileId_ pMglAccountId_ =
     ManagementGoalsList'
     { _mglQuotaUser = Nothing
     , _mglPrettyPrint = False
     , _mglWebPropertyId = pMglWebPropertyId_
     , _mglUserIP = Nothing
-    , _mglProfileId = pMglProfileId_
+    , _mglProFileId = pMglProFileId_
     , _mglAccountId = pMglAccountId_
     , _mglKey = Nothing
     , _mglOAuthToken = Nothing
@@ -161,9 +161,9 @@ mglUserIP
 -- | View (Profile) ID to retrieve goals for. Can either be a specific view
 -- (profile) ID or \'~all\', which refers to all the views (profiles) that
 -- user has access to.
-mglProfileId :: Lens' ManagementGoalsList' Text
-mglProfileId
-  = lens _mglProfileId (\ s a -> s{_mglProfileId = a})
+mglProFileId :: Lens' ManagementGoalsList' Text
+mglProFileId
+  = lens _mglProFileId (\ s a -> s{_mglProFileId = a})
 
 -- | Account ID to retrieve goals for. Can either be a specific account ID or
 -- \'~all\', which refers to all the accounts that user has access to.
@@ -209,7 +209,7 @@ instance GoogleRequest ManagementGoalsList' where
         type Rs ManagementGoalsList' = Goals
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementGoalsList'{..}
-          = go _mglAccountId _mglWebPropertyId _mglProfileId
+          = go _mglAccountId _mglWebPropertyId _mglProFileId
               _mglStartIndex
               _mglMaxResults
               _mglQuotaUser

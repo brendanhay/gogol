@@ -57,7 +57,7 @@ type CirclesInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Circle :> Post '[JSON] Circle
+                         ReqBody '[OctetStream] Circle :> Post '[JSON] Circle
 
 -- | Create a new circle for the authenticated user.
 --

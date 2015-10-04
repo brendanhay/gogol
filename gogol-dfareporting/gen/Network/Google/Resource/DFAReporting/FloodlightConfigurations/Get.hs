@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.FloodlightConfigurations.Get
     , fcgQuotaUser
     , fcgPrettyPrint
     , fcgUserIP
-    , fcgProfileId
+    , fcgProFileId
     , fcgKey
     , fcgId
     , fcgOAuthToken
@@ -67,7 +67,7 @@ data FloodlightConfigurationsGet' = FloodlightConfigurationsGet'
     { _fcgQuotaUser   :: !(Maybe Text)
     , _fcgPrettyPrint :: !Bool
     , _fcgUserIP      :: !(Maybe Text)
-    , _fcgProfileId   :: !Int64
+    , _fcgProFileId   :: !Int64
     , _fcgKey         :: !(Maybe Key)
     , _fcgId          :: !Int64
     , _fcgOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data FloodlightConfigurationsGet' = FloodlightConfigurationsGet'
 --
 -- * 'fcgUserIP'
 --
--- * 'fcgProfileId'
+-- * 'fcgProFileId'
 --
 -- * 'fcgKey'
 --
@@ -97,12 +97,12 @@ floodlightConfigurationsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> FloodlightConfigurationsGet'
-floodlightConfigurationsGet' pFcgProfileId_ pFcgId_ =
+floodlightConfigurationsGet' pFcgProFileId_ pFcgId_ =
     FloodlightConfigurationsGet'
     { _fcgQuotaUser = Nothing
     , _fcgPrettyPrint = True
     , _fcgUserIP = Nothing
-    , _fcgProfileId = pFcgProfileId_
+    , _fcgProFileId = pFcgProFileId_
     , _fcgKey = Nothing
     , _fcgId = pFcgId_
     , _fcgOAuthToken = Nothing
@@ -129,9 +129,9 @@ fcgUserIP
   = lens _fcgUserIP (\ s a -> s{_fcgUserIP = a})
 
 -- | User profile ID associated with this request.
-fcgProfileId :: Lens' FloodlightConfigurationsGet' Int64
-fcgProfileId
-  = lens _fcgProfileId (\ s a -> s{_fcgProfileId = a})
+fcgProFileId :: Lens' FloodlightConfigurationsGet' Int64
+fcgProFileId
+  = lens _fcgProFileId (\ s a -> s{_fcgProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -165,7 +165,7 @@ instance GoogleRequest FloodlightConfigurationsGet'
              FloodlightConfiguration
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u FloodlightConfigurationsGet'{..}
-          = go _fcgProfileId _fcgId _fcgQuotaUser
+          = go _fcgProFileId _fcgId _fcgQuotaUser
               (Just _fcgPrettyPrint)
               _fcgUserIP
               _fcgFields

@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.EventTags.Update
     , etuQuotaUser
     , etuPrettyPrint
     , etuUserIP
-    , etuProfileId
+    , etuProFileId
     , etuPayload
     , etuKey
     , etuOAuthToken
@@ -57,7 +57,8 @@ type EventTagsUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] EventTag :> Put '[JSON] EventTag
+                         ReqBody '[OctetStream] EventTag :>
+                           Put '[JSON] EventTag
 
 -- | Updates an existing event tag.
 --
@@ -66,7 +67,7 @@ data EventTagsUpdate' = EventTagsUpdate'
     { _etuQuotaUser   :: !(Maybe Text)
     , _etuPrettyPrint :: !Bool
     , _etuUserIP      :: !(Maybe Text)
-    , _etuProfileId   :: !Int64
+    , _etuProFileId   :: !Int64
     , _etuPayload     :: !EventTag
     , _etuKey         :: !(Maybe Key)
     , _etuOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +84,7 @@ data EventTagsUpdate' = EventTagsUpdate'
 --
 -- * 'etuUserIP'
 --
--- * 'etuProfileId'
+-- * 'etuProFileId'
 --
 -- * 'etuPayload'
 --
@@ -96,12 +97,12 @@ eventTagsUpdate'
     :: Int64 -- ^ 'profileId'
     -> EventTag -- ^ 'payload'
     -> EventTagsUpdate'
-eventTagsUpdate' pEtuProfileId_ pEtuPayload_ =
+eventTagsUpdate' pEtuProFileId_ pEtuPayload_ =
     EventTagsUpdate'
     { _etuQuotaUser = Nothing
     , _etuPrettyPrint = True
     , _etuUserIP = Nothing
-    , _etuProfileId = pEtuProfileId_
+    , _etuProFileId = pEtuProFileId_
     , _etuPayload = pEtuPayload_
     , _etuKey = Nothing
     , _etuOAuthToken = Nothing
@@ -128,9 +129,9 @@ etuUserIP
   = lens _etuUserIP (\ s a -> s{_etuUserIP = a})
 
 -- | User profile ID associated with this request.
-etuProfileId :: Lens' EventTagsUpdate' Int64
-etuProfileId
-  = lens _etuProfileId (\ s a -> s{_etuProfileId = a})
+etuProFileId :: Lens' EventTagsUpdate' Int64
+etuProFileId
+  = lens _etuProFileId (\ s a -> s{_etuProFileId = a})
 
 -- | Multipart request metadata.
 etuPayload :: Lens' EventTagsUpdate' EventTag
@@ -162,7 +163,7 @@ instance GoogleRequest EventTagsUpdate' where
         type Rs EventTagsUpdate' = EventTag
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u EventTagsUpdate'{..}
-          = go _etuProfileId _etuQuotaUser
+          = go _etuProFileId _etuQuotaUser
               (Just _etuPrettyPrint)
               _etuUserIP
               _etuFields

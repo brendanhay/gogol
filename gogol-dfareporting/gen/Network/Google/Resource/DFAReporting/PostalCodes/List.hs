@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.PostalCodes.List
     , pclQuotaUser
     , pclPrettyPrint
     , pclUserIP
-    , pclProfileId
+    , pclProFileId
     , pclKey
     , pclOAuthToken
     , pclFields
@@ -65,7 +65,7 @@ data PostalCodesList' = PostalCodesList'
     { _pclQuotaUser   :: !(Maybe Text)
     , _pclPrettyPrint :: !Bool
     , _pclUserIP      :: !(Maybe Text)
-    , _pclProfileId   :: !Int64
+    , _pclProFileId   :: !Int64
     , _pclKey         :: !(Maybe Key)
     , _pclOAuthToken  :: !(Maybe OAuthToken)
     , _pclFields      :: !(Maybe Text)
@@ -81,7 +81,7 @@ data PostalCodesList' = PostalCodesList'
 --
 -- * 'pclUserIP'
 --
--- * 'pclProfileId'
+-- * 'pclProFileId'
 --
 -- * 'pclKey'
 --
@@ -91,12 +91,12 @@ data PostalCodesList' = PostalCodesList'
 postalCodesList'
     :: Int64 -- ^ 'profileId'
     -> PostalCodesList'
-postalCodesList' pPclProfileId_ =
+postalCodesList' pPclProFileId_ =
     PostalCodesList'
     { _pclQuotaUser = Nothing
     , _pclPrettyPrint = True
     , _pclUserIP = Nothing
-    , _pclProfileId = pPclProfileId_
+    , _pclProFileId = pPclProFileId_
     , _pclKey = Nothing
     , _pclOAuthToken = Nothing
     , _pclFields = Nothing
@@ -122,9 +122,9 @@ pclUserIP
   = lens _pclUserIP (\ s a -> s{_pclUserIP = a})
 
 -- | User profile ID associated with this request.
-pclProfileId :: Lens' PostalCodesList' Int64
-pclProfileId
-  = lens _pclProfileId (\ s a -> s{_pclProfileId = a})
+pclProFileId :: Lens' PostalCodesList' Int64
+pclProFileId
+  = lens _pclProFileId (\ s a -> s{_pclProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -151,7 +151,7 @@ instance GoogleRequest PostalCodesList' where
         type Rs PostalCodesList' = PostalCodesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PostalCodesList'{..}
-          = go _pclProfileId _pclQuotaUser
+          = go _pclProFileId _pclQuotaUser
               (Just _pclPrettyPrint)
               _pclUserIP
               _pclFields

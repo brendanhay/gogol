@@ -59,7 +59,7 @@ type PagesInsertResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Page :> Post '[JSON] Page
+                           ReqBody '[OctetStream] Page :> Post '[JSON] Page
 
 -- | Add a page.
 --

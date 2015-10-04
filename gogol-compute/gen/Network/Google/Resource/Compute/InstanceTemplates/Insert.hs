@@ -58,7 +58,7 @@ type InstanceTemplatesInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] InstanceTemplate :>
+                         ReqBody '[OctetStream] InstanceTemplate :>
                            Post '[JSON] Operation
 
 -- | Creates an instance template in the specified project using the data

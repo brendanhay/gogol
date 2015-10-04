@@ -65,7 +65,7 @@ type EditsAPKListingsPatchResource =
                            QueryParam "key" Key :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
-                                 ReqBody '[JSON] APKListing :>
+                                 ReqBody '[OctetStream] APKListing :>
                                    Patch '[JSON] APKListing
 
 -- | Updates or creates the APK-specific localized listing for a specified

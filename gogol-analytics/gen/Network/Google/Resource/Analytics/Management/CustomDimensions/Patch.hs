@@ -66,7 +66,7 @@ type ManagementCustomDimensionsPatchResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] CustomDimension :>
+                                   ReqBody '[OctetStream] CustomDimension :>
                                      Patch '[JSON] CustomDimension
 
 -- | Updates an existing custom dimension. This method supports patch

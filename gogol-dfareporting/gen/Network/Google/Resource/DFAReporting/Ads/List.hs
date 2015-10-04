@@ -43,7 +43,7 @@ module Network.Google.Resource.DFAReporting.Ads.List
     , adsSizeIds
     , adsSSLCompliant
     , adsIds
-    , adsProfileId
+    , adsProFileId
     , adsSortOrder
     , adsActive
     , adsCreativeOptimizationConfigurationIds
@@ -82,8 +82,7 @@ type AdsListResource =
                        QueryParams "sizeIds" Int64 :>
                          QueryParam "sslCompliant" Bool :>
                            QueryParams "ids" Int64 :>
-                             QueryParam "sortOrder" DfareportingAdsListSortOrder
-                               :>
+                             QueryParam "sortOrder" AdsListSortOrder :>
                                QueryParam "active" Bool :>
                                  QueryParams
                                    "creativeOptimizationConfigurationIds"
@@ -95,18 +94,18 @@ type AdsListResource =
                                          :>
                                          QueryParam "pageToken" Text :>
                                            QueryParam "sortField"
-                                             DfareportingAdsListSortField
+                                             AdsListSortField
                                              :>
-                                             QueryParams "type" Type :>
+                                             QueryParams "type" AdsListType :>
                                                QueryParam "creativeType"
-                                                 CreativeType
+                                                 AdsListCreativeType
                                                  :>
                                                  QueryParam
                                                    "dynamicClickTracker"
                                                    Bool
                                                    :>
                                                    QueryParam "compatibility"
-                                                     Compatibility
+                                                     AdsListCompatibility
                                                      :>
                                                      QueryParam "archived" Bool
                                                        :>
@@ -165,8 +164,8 @@ data AdsList' = AdsList'
     , _adsSizeIds                              :: !(Maybe [Int64])
     , _adsSSLCompliant                         :: !(Maybe Bool)
     , _adsIds                                  :: !(Maybe [Int64])
-    , _adsProfileId                            :: !Int64
-    , _adsSortOrder                            :: !(Maybe DfareportingAdsListSortOrder)
+    , _adsProFileId                            :: !Int64
+    , _adsSortOrder                            :: !(Maybe AdsListSortOrder)
     , _adsActive                               :: !(Maybe Bool)
     , _adsCreativeOptimizationConfigurationIds :: !(Maybe [Int64])
     , _adsKey                                  :: !(Maybe Key)
@@ -174,12 +173,12 @@ data AdsList' = AdsList'
     , _adsSSLRequired                          :: !(Maybe Bool)
     , _adsOverriddenEventTagId                 :: !(Maybe Int64)
     , _adsPageToken                            :: !(Maybe Text)
-    , _adsSortField                            :: !(Maybe DfareportingAdsListSortField)
-    , _adsType                                 :: !(Maybe [Type])
+    , _adsSortField                            :: !(Maybe AdsListSortField)
+    , _adsType                                 :: !(Maybe [AdsListType])
     , _adsOAuthToken                           :: !(Maybe OAuthToken)
-    , _adsCreativeType                         :: !(Maybe CreativeType)
+    , _adsCreativeType                         :: !(Maybe AdsListCreativeType)
     , _adsDynamicClickTracker                  :: !(Maybe Bool)
-    , _adsCompatibility                        :: !(Maybe Compatibility)
+    , _adsCompatibility                        :: !(Maybe AdsListCompatibility)
     , _adsArchived                             :: !(Maybe Bool)
     , _adsMaxResults                           :: !(Maybe Int32)
     , _adsFields                               :: !(Maybe Text)
@@ -214,7 +213,7 @@ data AdsList' = AdsList'
 --
 -- * 'adsIds'
 --
--- * 'adsProfileId'
+-- * 'adsProFileId'
 --
 -- * 'adsSortOrder'
 --
@@ -254,7 +253,7 @@ data AdsList' = AdsList'
 adsList'
     :: Int64 -- ^ 'profileId'
     -> AdsList'
-adsList' pAdsProfileId_ =
+adsList' pAdsProFileId_ =
     AdsList'
     { _adsQuotaUser = Nothing
     , _adsPrettyPrint = True
@@ -268,7 +267,7 @@ adsList' pAdsProfileId_ =
     , _adsSizeIds = Nothing
     , _adsSSLCompliant = Nothing
     , _adsIds = Nothing
-    , _adsProfileId = pAdsProfileId_
+    , _adsProFileId = pAdsProFileId_
     , _adsSortOrder = Nothing
     , _adsActive = Nothing
     , _adsCreativeOptimizationConfigurationIds = Nothing
@@ -378,12 +377,12 @@ adsIds
       _Coerce
 
 -- | User profile ID associated with this request.
-adsProfileId :: Lens' AdsList' Int64
-adsProfileId
-  = lens _adsProfileId (\ s a -> s{_adsProfileId = a})
+adsProFileId :: Lens' AdsList' Int64
+adsProFileId
+  = lens _adsProFileId (\ s a -> s{_adsProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-adsSortOrder :: Lens' AdsList' (Maybe DfareportingAdsListSortOrder)
+adsSortOrder :: Lens' AdsList' (Maybe AdsListSortOrder)
 adsSortOrder
   = lens _adsSortOrder (\ s a -> s{_adsSortOrder = a})
 
@@ -433,12 +432,12 @@ adsPageToken
   = lens _adsPageToken (\ s a -> s{_adsPageToken = a})
 
 -- | Field by which to sort the list.
-adsSortField :: Lens' AdsList' (Maybe DfareportingAdsListSortField)
+adsSortField :: Lens' AdsList' (Maybe AdsListSortField)
 adsSortField
   = lens _adsSortField (\ s a -> s{_adsSortField = a})
 
 -- | Select only ads with these types.
-adsType :: Lens' AdsList' [Type]
+adsType :: Lens' AdsList' [AdsListType]
 adsType
   = lens _adsType (\ s a -> s{_adsType = a}) . _Default
       . _Coerce
@@ -450,7 +449,7 @@ adsOAuthToken
       (\ s a -> s{_adsOAuthToken = a})
 
 -- | Select only ads with the specified creativeType.
-adsCreativeType :: Lens' AdsList' (Maybe CreativeType)
+adsCreativeType :: Lens' AdsList' (Maybe AdsListCreativeType)
 adsCreativeType
   = lens _adsCreativeType
       (\ s a -> s{_adsCreativeType = a})
@@ -469,7 +468,7 @@ adsDynamicClickTracker
 -- interstitial ads, respectively. APP and APP_INTERSTITIAL are for
 -- rendering in mobile apps. IN_STREAM_VIDEO refers to rendering an
 -- in-stream video ads developed with the VAST standard.
-adsCompatibility :: Lens' AdsList' (Maybe Compatibility)
+adsCompatibility :: Lens' AdsList' (Maybe AdsListCompatibility)
 adsCompatibility
   = lens _adsCompatibility
       (\ s a -> s{_adsCompatibility = a})
@@ -506,7 +505,7 @@ instance GoogleRequest AdsList' where
         type Rs AdsList' = AdsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdsList'{..}
-          = go _adsProfileId
+          = go _adsProFileId
               (_adsRemarketingListIds ^. _Default)
               (_adsLandingPageIds ^. _Default)
               (_adsCreativeIds ^. _Default)

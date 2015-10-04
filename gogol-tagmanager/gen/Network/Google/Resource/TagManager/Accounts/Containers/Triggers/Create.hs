@@ -60,7 +60,8 @@ type AccountsContainersTriggersCreateResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Trigger :> Post '[JSON] Trigger
+                             ReqBody '[OctetStream] Trigger :>
+                               Post '[JSON] Trigger
 
 -- | Creates a GTM Trigger.
 --

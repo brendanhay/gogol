@@ -73,13 +73,13 @@ type SearchMethod =
          QueryParam "cursor" Int32 :>
            QueryParams "with" Text :>
              QueryParams "domain" Text :>
-               QueryParam "format" Format :>
-                 QueryParam "help" Help :>
+               QueryParam "format" FreebaseSearchFormat :>
+                 QueryParam "help" FreebaseSearchHelp :>
                    QueryParams "lang" Text :>
                      QueryParam "indent" Bool :>
                        QueryParam "output" Text :>
                          QueryParam "query" Text :>
-                           QueryParam "scoring" Scoring :>
+                           QueryParam "scoring" FreebaseSearchScoring :>
                              QueryParam "limit" Int32 :>
                                QueryParams "filter" Text :>
                                  QueryParam "mql_output" Text :>
@@ -87,9 +87,13 @@ type SearchMethod =
                                      QueryParams "type" Text :>
                                        QueryParam "stemmed" Bool :>
                                          QueryParam "exact" Bool :>
-                                           QueryParam "spell" Spell :>
+                                           QueryParam "spell"
+                                             FreebaseSearchSpell
+                                             :>
                                              QueryParam "as_of_time" Text :>
-                                               QueryParam "encode" Encode :>
+                                               QueryParam "encode"
+                                                 FreebaseSearchEncode
+                                                 :>
                                                  QueryParam "prefixed" Bool :>
                                                    QueryParam "callback" Text :>
                                                      QueryParam "quotaUser" Text
@@ -122,13 +126,13 @@ type SearchMethod =
            QueryParam "cursor" Int32 :>
              QueryParams "with" Text :>
                QueryParams "domain" Text :>
-                 QueryParam "format" Format :>
-                   QueryParam "help" Help :>
+                 QueryParam "format" FreebaseSearchFormat :>
+                   QueryParam "help" FreebaseSearchHelp :>
                      QueryParams "lang" Text :>
                        QueryParam "indent" Bool :>
                          QueryParam "output" Text :>
                            QueryParam "query" Text :>
-                             QueryParam "scoring" Scoring :>
+                             QueryParam "scoring" FreebaseSearchScoring :>
                                QueryParam "limit" Int32 :>
                                  QueryParams "filter" Text :>
                                    QueryParam "mql_output" Text :>
@@ -136,9 +140,13 @@ type SearchMethod =
                                        QueryParams "type" Text :>
                                          QueryParam "stemmed" Bool :>
                                            QueryParam "exact" Bool :>
-                                             QueryParam "spell" Spell :>
+                                             QueryParam "spell"
+                                               FreebaseSearchSpell
+                                               :>
                                                QueryParam "as_of_time" Text :>
-                                                 QueryParam "encode" Encode :>
+                                                 QueryParam "encode"
+                                                   FreebaseSearchEncode
+                                                   :>
                                                    QueryParam "prefixed" Bool :>
                                                      QueryParam "callback" Text
                                                        :>
@@ -181,14 +189,14 @@ data Search' = Search'
     , _sWith        :: !(Maybe [Text])
     , _sUserIP      :: !(Maybe Text)
     , _sDomain      :: !(Maybe [Text])
-    , _sFormat      :: !Format
-    , _sHelp        :: !(Maybe Help)
+    , _sFormat      :: !FreebaseSearchFormat
+    , _sHelp        :: !(Maybe FreebaseSearchHelp)
     , _sLang        :: !(Maybe [Text])
     , _sIndent      :: !(Maybe Bool)
     , _sKey         :: !(Maybe Key)
     , _sOutput      :: !(Maybe Text)
     , _sQuery       :: !(Maybe Text)
-    , _sScoring     :: !Scoring
+    , _sScoring     :: !FreebaseSearchScoring
     , _sLimit       :: !Int32
     , _sFilter      :: !(Maybe [Text])
     , _sMqlOutput   :: !(Maybe Text)
@@ -197,9 +205,9 @@ data Search' = Search'
     , _sStemmed     :: !(Maybe Bool)
     , _sOAuthToken  :: !(Maybe OAuthToken)
     , _sExact       :: !(Maybe Bool)
-    , _sSpell       :: !Spell
+    , _sSpell       :: !FreebaseSearchSpell
     , _sAsOfTime    :: !(Maybe Text)
-    , _sEncode      :: !Encode
+    , _sEncode      :: !FreebaseSearchEncode
     , _sPrefixed    :: !(Maybe Bool)
     , _sFields      :: !(Maybe Text)
     , _sCallback    :: !(Maybe Text)
@@ -284,7 +292,7 @@ search' =
     , _sKey = Nothing
     , _sOutput = Nothing
     , _sQuery = Nothing
-    , _sScoring = SEntity
+    , _sScoring = FSSEntity
     , _sLimit = 20
     , _sFilter = Nothing
     , _sMqlOutput = Nothing
@@ -342,11 +350,11 @@ sDomain
       . _Coerce
 
 -- | Structural format of the json response.
-sFormat :: Lens' Search' Format
+sFormat :: Lens' Search' FreebaseSearchFormat
 sFormat = lens _sFormat (\ s a -> s{_sFormat = a})
 
 -- | The keyword to request help on.
-sHelp :: Lens' Search' (Maybe Help)
+sHelp :: Lens' Search' (Maybe FreebaseSearchHelp)
 sHelp = lens _sHelp (\ s a -> s{_sHelp = a})
 
 -- | The code of the language to run the query with. Default is \'en\'.
@@ -374,7 +382,7 @@ sQuery :: Lens' Search' (Maybe Text)
 sQuery = lens _sQuery (\ s a -> s{_sQuery = a})
 
 -- | Relevance scoring algorithm to use.
-sScoring :: Lens' Search' Scoring
+sScoring :: Lens' Search' FreebaseSearchScoring
 sScoring = lens _sScoring (\ s a -> s{_sScoring = a})
 
 -- | Maximum number of results to return.
@@ -418,7 +426,7 @@ sExact :: Lens' Search' (Maybe Bool)
 sExact = lens _sExact (\ s a -> s{_sExact = a})
 
 -- | Request \'did you mean\' suggestions
-sSpell :: Lens' Search' Spell
+sSpell :: Lens' Search' FreebaseSearchSpell
 sSpell = lens _sSpell (\ s a -> s{_sSpell = a})
 
 -- | A mql as_of_time value to use with mql_output queries.
@@ -428,7 +436,7 @@ sAsOfTime
 
 -- | The encoding of the response. You can use this parameter to enable html
 -- encoding.
-sEncode :: Lens' Search' Encode
+sEncode :: Lens' Search' FreebaseSearchEncode
 sEncode = lens _sEncode (\ s a -> s{_sEncode = a})
 
 -- | Prefix match against names and aliases.

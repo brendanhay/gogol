@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.UserRoles.Update
     , uruQuotaUser
     , uruPrettyPrint
     , uruUserIP
-    , uruProfileId
+    , uruProFileId
     , uruPayload
     , uruKey
     , uruOAuthToken
@@ -57,7 +57,8 @@ type UserRolesUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] UserRole :> Put '[JSON] UserRole
+                         ReqBody '[OctetStream] UserRole :>
+                           Put '[JSON] UserRole
 
 -- | Updates an existing user role.
 --
@@ -66,7 +67,7 @@ data UserRolesUpdate' = UserRolesUpdate'
     { _uruQuotaUser   :: !(Maybe Text)
     , _uruPrettyPrint :: !Bool
     , _uruUserIP      :: !(Maybe Text)
-    , _uruProfileId   :: !Int64
+    , _uruProFileId   :: !Int64
     , _uruPayload     :: !UserRole
     , _uruKey         :: !(Maybe Key)
     , _uruOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +84,7 @@ data UserRolesUpdate' = UserRolesUpdate'
 --
 -- * 'uruUserIP'
 --
--- * 'uruProfileId'
+-- * 'uruProFileId'
 --
 -- * 'uruPayload'
 --
@@ -96,12 +97,12 @@ userRolesUpdate'
     :: Int64 -- ^ 'profileId'
     -> UserRole -- ^ 'payload'
     -> UserRolesUpdate'
-userRolesUpdate' pUruProfileId_ pUruPayload_ =
+userRolesUpdate' pUruProFileId_ pUruPayload_ =
     UserRolesUpdate'
     { _uruQuotaUser = Nothing
     , _uruPrettyPrint = True
     , _uruUserIP = Nothing
-    , _uruProfileId = pUruProfileId_
+    , _uruProFileId = pUruProFileId_
     , _uruPayload = pUruPayload_
     , _uruKey = Nothing
     , _uruOAuthToken = Nothing
@@ -128,9 +129,9 @@ uruUserIP
   = lens _uruUserIP (\ s a -> s{_uruUserIP = a})
 
 -- | User profile ID associated with this request.
-uruProfileId :: Lens' UserRolesUpdate' Int64
-uruProfileId
-  = lens _uruProfileId (\ s a -> s{_uruProfileId = a})
+uruProFileId :: Lens' UserRolesUpdate' Int64
+uruProFileId
+  = lens _uruProFileId (\ s a -> s{_uruProFileId = a})
 
 -- | Multipart request metadata.
 uruPayload :: Lens' UserRolesUpdate' UserRole
@@ -162,7 +163,7 @@ instance GoogleRequest UserRolesUpdate' where
         type Rs UserRolesUpdate' = UserRole
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u UserRolesUpdate'{..}
-          = go _uruProfileId _uruQuotaUser
+          = go _uruProFileId _uruQuotaUser
               (Just _uruPrettyPrint)
               _uruUserIP
               _uruFields

@@ -58,7 +58,7 @@ type LiveBroadcastsListResource =
        QueryParam "part" Text :>
          QueryParam "mine" Bool :>
            QueryParam "broadcastStatus"
-             YouTubeLiveBroadcastsListBroadcastStatus
+             LiveBroadcastsListBroadcastStatus
              :>
              QueryParam "onBehalfOfContentOwner" Text :>
                QueryParam "onBehalfOfContentOwnerChannel" Text :>
@@ -84,7 +84,7 @@ data LiveBroadcastsList' = LiveBroadcastsList'
     , _lblPrettyPrint                   :: !Bool
     , _lblMine                          :: !(Maybe Bool)
     , _lblUserIP                        :: !(Maybe Text)
-    , _lblBroadcastStatus               :: !(Maybe YouTubeLiveBroadcastsListBroadcastStatus)
+    , _lblBroadcastStatus               :: !(Maybe LiveBroadcastsListBroadcastStatus)
     , _lblOnBehalfOfContentOwner        :: !(Maybe Text)
     , _lblKey                           :: !(Maybe Key)
     , _lblOnBehalfOfContentOwnerChannel :: !(Maybe Text)
@@ -181,7 +181,7 @@ lblUserIP
 
 -- | The broadcastStatus parameter filters the API response to only include
 -- broadcasts with the specified status.
-lblBroadcastStatus :: Lens' LiveBroadcastsList' (Maybe YouTubeLiveBroadcastsListBroadcastStatus)
+lblBroadcastStatus :: Lens' LiveBroadcastsList' (Maybe LiveBroadcastsListBroadcastStatus)
 lblBroadcastStatus
   = lens _lblBroadcastStatus
       (\ s a -> s{_lblBroadcastStatus = a})

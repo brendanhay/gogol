@@ -56,7 +56,7 @@ type EditsTracksPatchResource =
        "edits" :>
          Capture "editId" Text :>
            "tracks" :>
-             Capture "track" Track :>
+             Capture "track" EditsTracksPatchTrack :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -64,7 +64,7 @@ type EditsTracksPatchResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Track :> Patch '[JSON] Track
+                             ReqBody '[OctetStream] Track :> Patch '[JSON] Track
 
 -- | Updates the track configuration for the specified track type. When
 -- halted, the rollout track cannot be updated without adding new APKs, and
@@ -74,7 +74,7 @@ type EditsTracksPatchResource =
 -- /See:/ 'editsTracksPatch'' smart constructor.
 data EditsTracksPatch' = EditsTracksPatch'
     { _etpQuotaUser   :: !(Maybe Text)
-    , _etpTrack       :: !Track
+    , _etpTrack       :: !EditsTracksPatchTrack
     , _etpPrettyPrint :: !Bool
     , _etpPackageName :: !Text
     , _etpUserIP      :: !(Maybe Text)
@@ -109,7 +109,7 @@ data EditsTracksPatch' = EditsTracksPatch'
 --
 -- * 'etpFields'
 editsTracksPatch'
-    :: Track -- ^ 'track'
+    :: EditsTracksPatchTrack -- ^ 'track'
     -> Text -- ^ 'packageName'
     -> Track -- ^ 'payload'
     -> Text -- ^ 'editId'
@@ -136,7 +136,7 @@ etpQuotaUser
   = lens _etpQuotaUser (\ s a -> s{_etpQuotaUser = a})
 
 -- | The track type to read or modify.
-etpTrack :: Lens' EditsTracksPatch' Track
+etpTrack :: Lens' EditsTracksPatch' EditsTracksPatchTrack
 etpTrack = lens _etpTrack (\ s a -> s{_etpTrack = a})
 
 -- | Returns response with indentations and line breaks.

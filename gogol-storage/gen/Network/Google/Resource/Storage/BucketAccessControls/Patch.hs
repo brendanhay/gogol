@@ -60,7 +60,7 @@ type BucketAccessControlsPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] BucketAccessControl :>
+                           ReqBody '[OctetStream] BucketAccessControl :>
                              Patch '[JSON] BucketAccessControl
 
 -- | Updates an ACL entry on the specified bucket. This method supports patch

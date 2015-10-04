@@ -55,8 +55,7 @@ type CommentsListByBlogResource =
      "blogs" :>
        Capture "blogId" Text :>
          "comments" :>
-           QueryParams "status" BloggerCommentsListByBlogStatus
-             :>
+           QueryParams "status" CommentsListByBlogStatus :>
              QueryParam "endDate" DateTime' :>
                QueryParam "startDate" DateTime' :>
                  QueryParam "fetchBodies" Bool :>
@@ -75,7 +74,7 @@ type CommentsListByBlogResource =
 --
 -- /See:/ 'commentsListByBlog'' smart constructor.
 data CommentsListByBlog' = CommentsListByBlog'
-    { _clbbStatus      :: !(Maybe [BloggerCommentsListByBlogStatus])
+    { _clbbStatus      :: !(Maybe [CommentsListByBlogStatus])
     , _clbbQuotaUser   :: !(Maybe Text)
     , _clbbPrettyPrint :: !Bool
     , _clbbUserIP      :: !(Maybe Text)
@@ -139,7 +138,7 @@ commentsListByBlog' pClbbBlogId_ =
     , _clbbFields = Nothing
     }
 
-clbbStatus :: Lens' CommentsListByBlog' [BloggerCommentsListByBlogStatus]
+clbbStatus :: Lens' CommentsListByBlog' [CommentsListByBlogStatus]
 clbbStatus
   = lens _clbbStatus (\ s a -> s{_clbbStatus = a}) .
       _Default

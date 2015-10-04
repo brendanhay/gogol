@@ -17,103 +17,7 @@ module Network.Google.AndroidPublisher.Types.Sum where
 
 import           Network.Google.Prelude
 
--- | The track type to read or modify.
-data Track
-    = Alpha
-      -- ^ @alpha@
-    | Beta
-      -- ^ @beta@
-    | Production
-      -- ^ @production@
-    | Rollout
-      -- ^ @rollout@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Track
-
-instance FromText Track where
-    fromText = \case
-        "alpha" -> Just Alpha
-        "beta" -> Just Beta
-        "production" -> Just Production
-        "rollout" -> Just Rollout
-        _ -> Nothing
-
-instance ToText Track where
-    toText = \case
-        Alpha -> "alpha"
-        Beta -> "beta"
-        Production -> "production"
-        Rollout -> "rollout"
-
-instance FromJSON Track where
-    parseJSON = parseJSONText "Track"
-
-instance ToJSON Track where
-    toJSON = toJSONText
-
-data AndroidPublisherEditsExpansionfilesGetExpansionFileType
-    = Main
-      -- ^ @main@
-    | Patch
-      -- ^ @patch@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable AndroidPublisherEditsExpansionfilesGetExpansionFileType
-
-instance FromText AndroidPublisherEditsExpansionfilesGetExpansionFileType where
-    fromText = \case
-        "main" -> Just Main
-        "patch" -> Just Patch
-        _ -> Nothing
-
-instance ToText AndroidPublisherEditsExpansionfilesGetExpansionFileType where
-    toText = \case
-        Main -> "main"
-        Patch -> "patch"
-
-instance FromJSON AndroidPublisherEditsExpansionfilesGetExpansionFileType where
-    parseJSON = parseJSONText "AndroidPublisherEditsExpansionfilesGetExpansionFileType"
-
-instance ToJSON AndroidPublisherEditsExpansionfilesGetExpansionFileType where
-    toJSON = toJSONText
-
--- | The track type to read or modify.
-data AndroidPublisherEditsTracksUpdateTrack
-    = APETUTAlpha
-      -- ^ @alpha@
-    | APETUTBeta
-      -- ^ @beta@
-    | APETUTProduction
-      -- ^ @production@
-    | APETUTRollout
-      -- ^ @rollout@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable AndroidPublisherEditsTracksUpdateTrack
-
-instance FromText AndroidPublisherEditsTracksUpdateTrack where
-    fromText = \case
-        "alpha" -> Just APETUTAlpha
-        "beta" -> Just APETUTBeta
-        "production" -> Just APETUTProduction
-        "rollout" -> Just APETUTRollout
-        _ -> Nothing
-
-instance ToText AndroidPublisherEditsTracksUpdateTrack where
-    toText = \case
-        APETUTAlpha -> "alpha"
-        APETUTBeta -> "beta"
-        APETUTProduction -> "production"
-        APETUTRollout -> "rollout"
-
-instance FromJSON AndroidPublisherEditsTracksUpdateTrack where
-    parseJSON = parseJSONText "AndroidPublisherEditsTracksUpdateTrack"
-
-instance ToJSON AndroidPublisherEditsTracksUpdateTrack where
-    toJSON = toJSONText
-
-data ImageType
+data EditsImagesDeleteallImageType
     = FeatureGraphic
       -- ^ @featureGraphic@
     | Icon
@@ -134,9 +38,9 @@ data ImageType
       -- ^ @wearScreenshots@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable ImageType
+instance Hashable EditsImagesDeleteallImageType
 
-instance FromText ImageType where
+instance FromText EditsImagesDeleteallImageType where
     fromText = \case
         "featureGraphic" -> Just FeatureGraphic
         "icon" -> Just Icon
@@ -149,7 +53,7 @@ instance FromText ImageType where
         "wearScreenshots" -> Just WearScreenshots
         _ -> Nothing
 
-instance ToText ImageType where
+instance ToText EditsImagesDeleteallImageType where
     toText = \case
         FeatureGraphic -> "featureGraphic"
         Icon -> "icon"
@@ -161,385 +65,481 @@ instance ToText ImageType where
         TvScreenshots -> "tvScreenshots"
         WearScreenshots -> "wearScreenshots"
 
-instance FromJSON ImageType where
-    parseJSON = parseJSONText "ImageType"
+instance FromJSON EditsImagesDeleteallImageType where
+    parseJSON = parseJSONText "EditsImagesDeleteallImageType"
 
-instance ToJSON ImageType where
+instance ToJSON EditsImagesDeleteallImageType where
     toJSON = toJSONText
 
 -- | The track type to read or modify.
-data AndroidPublisherEditsTracksGetTrack
-    = APETGTAlpha
+data EditsTracksPatchTrack
+    = Alpha
       -- ^ @alpha@
-    | APETGTBeta
+    | Beta
       -- ^ @beta@
-    | APETGTProduction
+    | Production
       -- ^ @production@
-    | APETGTRollout
+    | Rollout
       -- ^ @rollout@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable AndroidPublisherEditsTracksGetTrack
+instance Hashable EditsTracksPatchTrack
 
-instance FromText AndroidPublisherEditsTracksGetTrack where
+instance FromText EditsTracksPatchTrack where
     fromText = \case
-        "alpha" -> Just APETGTAlpha
-        "beta" -> Just APETGTBeta
-        "production" -> Just APETGTProduction
-        "rollout" -> Just APETGTRollout
+        "alpha" -> Just Alpha
+        "beta" -> Just Beta
+        "production" -> Just Production
+        "rollout" -> Just Rollout
         _ -> Nothing
 
-instance ToText AndroidPublisherEditsTracksGetTrack where
+instance ToText EditsTracksPatchTrack where
     toText = \case
-        APETGTAlpha -> "alpha"
-        APETGTBeta -> "beta"
-        APETGTProduction -> "production"
-        APETGTRollout -> "rollout"
+        Alpha -> "alpha"
+        Beta -> "beta"
+        Production -> "production"
+        Rollout -> "rollout"
 
-instance FromJSON AndroidPublisherEditsTracksGetTrack where
-    parseJSON = parseJSONText "AndroidPublisherEditsTracksGetTrack"
+instance FromJSON EditsTracksPatchTrack where
+    parseJSON = parseJSONText "EditsTracksPatchTrack"
 
-instance ToJSON AndroidPublisherEditsTracksGetTrack where
+instance ToJSON EditsTracksPatchTrack where
     toJSON = toJSONText
 
-data ExpansionFileType
-    = EFTMain
-      -- ^ @main@
-    | EFTPatch
-      -- ^ @patch@
+-- | The track type to read or modify.
+data EditsTracksGetTrack
+    = ETGTAlpha
+      -- ^ @alpha@
+    | ETGTBeta
+      -- ^ @beta@
+    | ETGTProduction
+      -- ^ @production@
+    | ETGTRollout
+      -- ^ @rollout@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable ExpansionFileType
+instance Hashable EditsTracksGetTrack
 
-instance FromText ExpansionFileType where
+instance FromText EditsTracksGetTrack where
     fromText = \case
-        "main" -> Just EFTMain
-        "patch" -> Just EFTPatch
+        "alpha" -> Just ETGTAlpha
+        "beta" -> Just ETGTBeta
+        "production" -> Just ETGTProduction
+        "rollout" -> Just ETGTRollout
         _ -> Nothing
 
-instance ToText ExpansionFileType where
+instance ToText EditsTracksGetTrack where
     toText = \case
-        EFTMain -> "main"
-        EFTPatch -> "patch"
+        ETGTAlpha -> "alpha"
+        ETGTBeta -> "beta"
+        ETGTProduction -> "production"
+        ETGTRollout -> "rollout"
 
-instance FromJSON ExpansionFileType where
-    parseJSON = parseJSONText "ExpansionFileType"
+instance FromJSON EditsTracksGetTrack where
+    parseJSON = parseJSONText "EditsTracksGetTrack"
 
-instance ToJSON ExpansionFileType where
+instance ToJSON EditsTracksGetTrack where
     toJSON = toJSONText
 
-data AndroidPublisherEditsExpansionfilesUploadExpansionFileType
-    = APEEUEFTMain
-      -- ^ @main@
-    | APEEUEFTPatch
-      -- ^ @patch@
+-- | The track type to read or modify.
+data EditsTracksUpdateTrack
+    = ETUTAlpha
+      -- ^ @alpha@
+    | ETUTBeta
+      -- ^ @beta@
+    | ETUTProduction
+      -- ^ @production@
+    | ETUTRollout
+      -- ^ @rollout@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable AndroidPublisherEditsExpansionfilesUploadExpansionFileType
+instance Hashable EditsTracksUpdateTrack
 
-instance FromText AndroidPublisherEditsExpansionfilesUploadExpansionFileType where
+instance FromText EditsTracksUpdateTrack where
     fromText = \case
-        "main" -> Just APEEUEFTMain
-        "patch" -> Just APEEUEFTPatch
+        "alpha" -> Just ETUTAlpha
+        "beta" -> Just ETUTBeta
+        "production" -> Just ETUTProduction
+        "rollout" -> Just ETUTRollout
         _ -> Nothing
 
-instance ToText AndroidPublisherEditsExpansionfilesUploadExpansionFileType where
+instance ToText EditsTracksUpdateTrack where
     toText = \case
-        APEEUEFTMain -> "main"
-        APEEUEFTPatch -> "patch"
+        ETUTAlpha -> "alpha"
+        ETUTBeta -> "beta"
+        ETUTProduction -> "production"
+        ETUTRollout -> "rollout"
 
-instance FromJSON AndroidPublisherEditsExpansionfilesUploadExpansionFileType where
-    parseJSON = parseJSONText "AndroidPublisherEditsExpansionfilesUploadExpansionFileType"
+instance FromJSON EditsTracksUpdateTrack where
+    parseJSON = parseJSONText "EditsTracksUpdateTrack"
 
-instance ToJSON AndroidPublisherEditsExpansionfilesUploadExpansionFileType where
+instance ToJSON EditsTracksUpdateTrack where
     toJSON = toJSONText
 
-data AndroidPublisherEditsImagesUploadImageType
-    = APEIUITFeatureGraphic
+data EditsImagesListImageType
+    = EILITFeatureGraphic
       -- ^ @featureGraphic@
-    | APEIUITIcon
+    | EILITIcon
       -- ^ @icon@
-    | APEIUITPhoneScreenshots
+    | EILITPhoneScreenshots
       -- ^ @phoneScreenshots@
-    | APEIUITPromoGraphic
+    | EILITPromoGraphic
       -- ^ @promoGraphic@
-    | APEIUITSevenInchScreenshots
+    | EILITSevenInchScreenshots
       -- ^ @sevenInchScreenshots@
-    | APEIUITTenInchScreenshots
+    | EILITTenInchScreenshots
       -- ^ @tenInchScreenshots@
-    | APEIUITTvBanner
+    | EILITTvBanner
       -- ^ @tvBanner@
-    | APEIUITTvScreenshots
+    | EILITTvScreenshots
       -- ^ @tvScreenshots@
-    | APEIUITWearScreenshots
+    | EILITWearScreenshots
       -- ^ @wearScreenshots@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable AndroidPublisherEditsImagesUploadImageType
+instance Hashable EditsImagesListImageType
 
-instance FromText AndroidPublisherEditsImagesUploadImageType where
+instance FromText EditsImagesListImageType where
     fromText = \case
-        "featureGraphic" -> Just APEIUITFeatureGraphic
-        "icon" -> Just APEIUITIcon
-        "phoneScreenshots" -> Just APEIUITPhoneScreenshots
-        "promoGraphic" -> Just APEIUITPromoGraphic
-        "sevenInchScreenshots" -> Just APEIUITSevenInchScreenshots
-        "tenInchScreenshots" -> Just APEIUITTenInchScreenshots
-        "tvBanner" -> Just APEIUITTvBanner
-        "tvScreenshots" -> Just APEIUITTvScreenshots
-        "wearScreenshots" -> Just APEIUITWearScreenshots
+        "featureGraphic" -> Just EILITFeatureGraphic
+        "icon" -> Just EILITIcon
+        "phoneScreenshots" -> Just EILITPhoneScreenshots
+        "promoGraphic" -> Just EILITPromoGraphic
+        "sevenInchScreenshots" -> Just EILITSevenInchScreenshots
+        "tenInchScreenshots" -> Just EILITTenInchScreenshots
+        "tvBanner" -> Just EILITTvBanner
+        "tvScreenshots" -> Just EILITTvScreenshots
+        "wearScreenshots" -> Just EILITWearScreenshots
         _ -> Nothing
 
-instance ToText AndroidPublisherEditsImagesUploadImageType where
+instance ToText EditsImagesListImageType where
     toText = \case
-        APEIUITFeatureGraphic -> "featureGraphic"
-        APEIUITIcon -> "icon"
-        APEIUITPhoneScreenshots -> "phoneScreenshots"
-        APEIUITPromoGraphic -> "promoGraphic"
-        APEIUITSevenInchScreenshots -> "sevenInchScreenshots"
-        APEIUITTenInchScreenshots -> "tenInchScreenshots"
-        APEIUITTvBanner -> "tvBanner"
-        APEIUITTvScreenshots -> "tvScreenshots"
-        APEIUITWearScreenshots -> "wearScreenshots"
+        EILITFeatureGraphic -> "featureGraphic"
+        EILITIcon -> "icon"
+        EILITPhoneScreenshots -> "phoneScreenshots"
+        EILITPromoGraphic -> "promoGraphic"
+        EILITSevenInchScreenshots -> "sevenInchScreenshots"
+        EILITTenInchScreenshots -> "tenInchScreenshots"
+        EILITTvBanner -> "tvBanner"
+        EILITTvScreenshots -> "tvScreenshots"
+        EILITWearScreenshots -> "wearScreenshots"
 
-instance FromJSON AndroidPublisherEditsImagesUploadImageType where
-    parseJSON = parseJSONText "AndroidPublisherEditsImagesUploadImageType"
+instance FromJSON EditsImagesListImageType where
+    parseJSON = parseJSONText "EditsImagesListImageType"
 
-instance ToJSON AndroidPublisherEditsImagesUploadImageType where
+instance ToJSON EditsImagesListImageType where
     toJSON = toJSONText
 
-data AndroidPublisherEditsImagesDeleteImageType
-    = APEIDITFeatureGraphic
+data EditsTestersPatchTrack
+    = ETPTAlpha
+      -- ^ @alpha@
+    | ETPTBeta
+      -- ^ @beta@
+    | ETPTProduction
+      -- ^ @production@
+    | ETPTRollout
+      -- ^ @rollout@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable EditsTestersPatchTrack
+
+instance FromText EditsTestersPatchTrack where
+    fromText = \case
+        "alpha" -> Just ETPTAlpha
+        "beta" -> Just ETPTBeta
+        "production" -> Just ETPTProduction
+        "rollout" -> Just ETPTRollout
+        _ -> Nothing
+
+instance ToText EditsTestersPatchTrack where
+    toText = \case
+        ETPTAlpha -> "alpha"
+        ETPTBeta -> "beta"
+        ETPTProduction -> "production"
+        ETPTRollout -> "rollout"
+
+instance FromJSON EditsTestersPatchTrack where
+    parseJSON = parseJSONText "EditsTestersPatchTrack"
+
+instance ToJSON EditsTestersPatchTrack where
+    toJSON = toJSONText
+
+data EditsTestersGetTrack
+    = EAlpha
+      -- ^ @alpha@
+    | EBeta
+      -- ^ @beta@
+    | EProduction
+      -- ^ @production@
+    | ERollout
+      -- ^ @rollout@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable EditsTestersGetTrack
+
+instance FromText EditsTestersGetTrack where
+    fromText = \case
+        "alpha" -> Just EAlpha
+        "beta" -> Just EBeta
+        "production" -> Just EProduction
+        "rollout" -> Just ERollout
+        _ -> Nothing
+
+instance ToText EditsTestersGetTrack where
+    toText = \case
+        EAlpha -> "alpha"
+        EBeta -> "beta"
+        EProduction -> "production"
+        ERollout -> "rollout"
+
+instance FromJSON EditsTestersGetTrack where
+    parseJSON = parseJSONText "EditsTestersGetTrack"
+
+instance ToJSON EditsTestersGetTrack where
+    toJSON = toJSONText
+
+data EditsImagesUploadImageType
+    = EIUITFeatureGraphic
       -- ^ @featureGraphic@
-    | APEIDITIcon
+    | EIUITIcon
       -- ^ @icon@
-    | APEIDITPhoneScreenshots
+    | EIUITPhoneScreenshots
       -- ^ @phoneScreenshots@
-    | APEIDITPromoGraphic
+    | EIUITPromoGraphic
       -- ^ @promoGraphic@
-    | APEIDITSevenInchScreenshots
+    | EIUITSevenInchScreenshots
       -- ^ @sevenInchScreenshots@
-    | APEIDITTenInchScreenshots
+    | EIUITTenInchScreenshots
       -- ^ @tenInchScreenshots@
-    | APEIDITTvBanner
+    | EIUITTvBanner
       -- ^ @tvBanner@
-    | APEIDITTvScreenshots
+    | EIUITTvScreenshots
       -- ^ @tvScreenshots@
-    | APEIDITWearScreenshots
+    | EIUITWearScreenshots
       -- ^ @wearScreenshots@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable AndroidPublisherEditsImagesDeleteImageType
+instance Hashable EditsImagesUploadImageType
 
-instance FromText AndroidPublisherEditsImagesDeleteImageType where
+instance FromText EditsImagesUploadImageType where
     fromText = \case
-        "featureGraphic" -> Just APEIDITFeatureGraphic
-        "icon" -> Just APEIDITIcon
-        "phoneScreenshots" -> Just APEIDITPhoneScreenshots
-        "promoGraphic" -> Just APEIDITPromoGraphic
-        "sevenInchScreenshots" -> Just APEIDITSevenInchScreenshots
-        "tenInchScreenshots" -> Just APEIDITTenInchScreenshots
-        "tvBanner" -> Just APEIDITTvBanner
-        "tvScreenshots" -> Just APEIDITTvScreenshots
-        "wearScreenshots" -> Just APEIDITWearScreenshots
+        "featureGraphic" -> Just EIUITFeatureGraphic
+        "icon" -> Just EIUITIcon
+        "phoneScreenshots" -> Just EIUITPhoneScreenshots
+        "promoGraphic" -> Just EIUITPromoGraphic
+        "sevenInchScreenshots" -> Just EIUITSevenInchScreenshots
+        "tenInchScreenshots" -> Just EIUITTenInchScreenshots
+        "tvBanner" -> Just EIUITTvBanner
+        "tvScreenshots" -> Just EIUITTvScreenshots
+        "wearScreenshots" -> Just EIUITWearScreenshots
         _ -> Nothing
 
-instance ToText AndroidPublisherEditsImagesDeleteImageType where
+instance ToText EditsImagesUploadImageType where
     toText = \case
-        APEIDITFeatureGraphic -> "featureGraphic"
-        APEIDITIcon -> "icon"
-        APEIDITPhoneScreenshots -> "phoneScreenshots"
-        APEIDITPromoGraphic -> "promoGraphic"
-        APEIDITSevenInchScreenshots -> "sevenInchScreenshots"
-        APEIDITTenInchScreenshots -> "tenInchScreenshots"
-        APEIDITTvBanner -> "tvBanner"
-        APEIDITTvScreenshots -> "tvScreenshots"
-        APEIDITWearScreenshots -> "wearScreenshots"
+        EIUITFeatureGraphic -> "featureGraphic"
+        EIUITIcon -> "icon"
+        EIUITPhoneScreenshots -> "phoneScreenshots"
+        EIUITPromoGraphic -> "promoGraphic"
+        EIUITSevenInchScreenshots -> "sevenInchScreenshots"
+        EIUITTenInchScreenshots -> "tenInchScreenshots"
+        EIUITTvBanner -> "tvBanner"
+        EIUITTvScreenshots -> "tvScreenshots"
+        EIUITWearScreenshots -> "wearScreenshots"
 
-instance FromJSON AndroidPublisherEditsImagesDeleteImageType where
-    parseJSON = parseJSONText "AndroidPublisherEditsImagesDeleteImageType"
+instance FromJSON EditsImagesUploadImageType where
+    parseJSON = parseJSONText "EditsImagesUploadImageType"
 
-instance ToJSON AndroidPublisherEditsImagesDeleteImageType where
+instance ToJSON EditsImagesUploadImageType where
     toJSON = toJSONText
 
-data AndroidPublisherEditsExpansionfilesUpdateExpansionFileType
-    = AMain
+data EditsExpansionFilesUploadExpansionFileType
+    = Main
       -- ^ @main@
-    | APatch
+    | Patch
       -- ^ @patch@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable AndroidPublisherEditsExpansionfilesUpdateExpansionFileType
+instance Hashable EditsExpansionFilesUploadExpansionFileType
 
-instance FromText AndroidPublisherEditsExpansionfilesUpdateExpansionFileType where
+instance FromText EditsExpansionFilesUploadExpansionFileType where
     fromText = \case
-        "main" -> Just AMain
-        "patch" -> Just APatch
+        "main" -> Just Main
+        "patch" -> Just Patch
         _ -> Nothing
 
-instance ToText AndroidPublisherEditsExpansionfilesUpdateExpansionFileType where
+instance ToText EditsExpansionFilesUploadExpansionFileType where
     toText = \case
-        AMain -> "main"
-        APatch -> "patch"
+        Main -> "main"
+        Patch -> "patch"
 
-instance FromJSON AndroidPublisherEditsExpansionfilesUpdateExpansionFileType where
-    parseJSON = parseJSONText "AndroidPublisherEditsExpansionfilesUpdateExpansionFileType"
+instance FromJSON EditsExpansionFilesUploadExpansionFileType where
+    parseJSON = parseJSONText "EditsExpansionFilesUploadExpansionFileType"
 
-instance ToJSON AndroidPublisherEditsExpansionfilesUpdateExpansionFileType where
+instance ToJSON EditsExpansionFilesUploadExpansionFileType where
     toJSON = toJSONText
 
-data AndroidPublisherEditsTestersUpdateTrack
-    = AAlpha
-      -- ^ @alpha@
-    | ABeta
-      -- ^ @beta@
-    | AProduction
-      -- ^ @production@
-    | ARollout
-      -- ^ @rollout@
+data EditsExpansionFilesGetExpansionFileType
+    = EEFGEFTMain
+      -- ^ @main@
+    | EEFGEFTPatch
+      -- ^ @patch@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable AndroidPublisherEditsTestersUpdateTrack
+instance Hashable EditsExpansionFilesGetExpansionFileType
 
-instance FromText AndroidPublisherEditsTestersUpdateTrack where
+instance FromText EditsExpansionFilesGetExpansionFileType where
     fromText = \case
-        "alpha" -> Just AAlpha
-        "beta" -> Just ABeta
-        "production" -> Just AProduction
-        "rollout" -> Just ARollout
+        "main" -> Just EEFGEFTMain
+        "patch" -> Just EEFGEFTPatch
         _ -> Nothing
 
-instance ToText AndroidPublisherEditsTestersUpdateTrack where
+instance ToText EditsExpansionFilesGetExpansionFileType where
     toText = \case
-        AAlpha -> "alpha"
-        ABeta -> "beta"
-        AProduction -> "production"
-        ARollout -> "rollout"
+        EEFGEFTMain -> "main"
+        EEFGEFTPatch -> "patch"
 
-instance FromJSON AndroidPublisherEditsTestersUpdateTrack where
-    parseJSON = parseJSONText "AndroidPublisherEditsTestersUpdateTrack"
+instance FromJSON EditsExpansionFilesGetExpansionFileType where
+    parseJSON = parseJSONText "EditsExpansionFilesGetExpansionFileType"
 
-instance ToJSON AndroidPublisherEditsTestersUpdateTrack where
+instance ToJSON EditsExpansionFilesGetExpansionFileType where
     toJSON = toJSONText
 
-data AndroidPublisherEditsImagesDeleteallImageType
-    = AFeatureGraphic
+data EditsExpansionFilesPatchExpansionFileType
+    = EEFPEFTMain
+      -- ^ @main@
+    | EEFPEFTPatch
+      -- ^ @patch@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable EditsExpansionFilesPatchExpansionFileType
+
+instance FromText EditsExpansionFilesPatchExpansionFileType where
+    fromText = \case
+        "main" -> Just EEFPEFTMain
+        "patch" -> Just EEFPEFTPatch
+        _ -> Nothing
+
+instance ToText EditsExpansionFilesPatchExpansionFileType where
+    toText = \case
+        EEFPEFTMain -> "main"
+        EEFPEFTPatch -> "patch"
+
+instance FromJSON EditsExpansionFilesPatchExpansionFileType where
+    parseJSON = parseJSONText "EditsExpansionFilesPatchExpansionFileType"
+
+instance ToJSON EditsExpansionFilesPatchExpansionFileType where
+    toJSON = toJSONText
+
+data EditsExpansionFilesUpdateExpansionFileType
+    = EEFUEFTMain
+      -- ^ @main@
+    | EEFUEFTPatch
+      -- ^ @patch@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable EditsExpansionFilesUpdateExpansionFileType
+
+instance FromText EditsExpansionFilesUpdateExpansionFileType where
+    fromText = \case
+        "main" -> Just EEFUEFTMain
+        "patch" -> Just EEFUEFTPatch
+        _ -> Nothing
+
+instance ToText EditsExpansionFilesUpdateExpansionFileType where
+    toText = \case
+        EEFUEFTMain -> "main"
+        EEFUEFTPatch -> "patch"
+
+instance FromJSON EditsExpansionFilesUpdateExpansionFileType where
+    parseJSON = parseJSONText "EditsExpansionFilesUpdateExpansionFileType"
+
+instance ToJSON EditsExpansionFilesUpdateExpansionFileType where
+    toJSON = toJSONText
+
+data EditsImagesDeleteImageType
+    = EIDITFeatureGraphic
       -- ^ @featureGraphic@
-    | AIcon
+    | EIDITIcon
       -- ^ @icon@
-    | APhoneScreenshots
+    | EIDITPhoneScreenshots
       -- ^ @phoneScreenshots@
-    | APromoGraphic
+    | EIDITPromoGraphic
       -- ^ @promoGraphic@
-    | ASevenInchScreenshots
+    | EIDITSevenInchScreenshots
       -- ^ @sevenInchScreenshots@
-    | ATenInchScreenshots
+    | EIDITTenInchScreenshots
       -- ^ @tenInchScreenshots@
-    | ATvBanner
+    | EIDITTvBanner
       -- ^ @tvBanner@
-    | ATvScreenshots
+    | EIDITTvScreenshots
       -- ^ @tvScreenshots@
-    | AWearScreenshots
+    | EIDITWearScreenshots
       -- ^ @wearScreenshots@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable AndroidPublisherEditsImagesDeleteallImageType
+instance Hashable EditsImagesDeleteImageType
 
-instance FromText AndroidPublisherEditsImagesDeleteallImageType where
+instance FromText EditsImagesDeleteImageType where
     fromText = \case
-        "featureGraphic" -> Just AFeatureGraphic
-        "icon" -> Just AIcon
-        "phoneScreenshots" -> Just APhoneScreenshots
-        "promoGraphic" -> Just APromoGraphic
-        "sevenInchScreenshots" -> Just ASevenInchScreenshots
-        "tenInchScreenshots" -> Just ATenInchScreenshots
-        "tvBanner" -> Just ATvBanner
-        "tvScreenshots" -> Just ATvScreenshots
-        "wearScreenshots" -> Just AWearScreenshots
+        "featureGraphic" -> Just EIDITFeatureGraphic
+        "icon" -> Just EIDITIcon
+        "phoneScreenshots" -> Just EIDITPhoneScreenshots
+        "promoGraphic" -> Just EIDITPromoGraphic
+        "sevenInchScreenshots" -> Just EIDITSevenInchScreenshots
+        "tenInchScreenshots" -> Just EIDITTenInchScreenshots
+        "tvBanner" -> Just EIDITTvBanner
+        "tvScreenshots" -> Just EIDITTvScreenshots
+        "wearScreenshots" -> Just EIDITWearScreenshots
         _ -> Nothing
 
-instance ToText AndroidPublisherEditsImagesDeleteallImageType where
+instance ToText EditsImagesDeleteImageType where
     toText = \case
-        AFeatureGraphic -> "featureGraphic"
-        AIcon -> "icon"
-        APhoneScreenshots -> "phoneScreenshots"
-        APromoGraphic -> "promoGraphic"
-        ASevenInchScreenshots -> "sevenInchScreenshots"
-        ATenInchScreenshots -> "tenInchScreenshots"
-        ATvBanner -> "tvBanner"
-        ATvScreenshots -> "tvScreenshots"
-        AWearScreenshots -> "wearScreenshots"
+        EIDITFeatureGraphic -> "featureGraphic"
+        EIDITIcon -> "icon"
+        EIDITPhoneScreenshots -> "phoneScreenshots"
+        EIDITPromoGraphic -> "promoGraphic"
+        EIDITSevenInchScreenshots -> "sevenInchScreenshots"
+        EIDITTenInchScreenshots -> "tenInchScreenshots"
+        EIDITTvBanner -> "tvBanner"
+        EIDITTvScreenshots -> "tvScreenshots"
+        EIDITWearScreenshots -> "wearScreenshots"
 
-instance FromJSON AndroidPublisherEditsImagesDeleteallImageType where
-    parseJSON = parseJSONText "AndroidPublisherEditsImagesDeleteallImageType"
+instance FromJSON EditsImagesDeleteImageType where
+    parseJSON = parseJSONText "EditsImagesDeleteImageType"
 
-instance ToJSON AndroidPublisherEditsImagesDeleteallImageType where
+instance ToJSON EditsImagesDeleteImageType where
     toJSON = toJSONText
 
-data AndroidPublisherEditsTestersGetTrack
-    = ANDAlpha
+data EditsTestersUpdateTrack
+    = EDIAlpha
       -- ^ @alpha@
-    | ANDBeta
+    | EDIBeta
       -- ^ @beta@
-    | ANDProduction
+    | EDIProduction
       -- ^ @production@
-    | ANDRollout
+    | EDIRollout
       -- ^ @rollout@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable AndroidPublisherEditsTestersGetTrack
+instance Hashable EditsTestersUpdateTrack
 
-instance FromText AndroidPublisherEditsTestersGetTrack where
+instance FromText EditsTestersUpdateTrack where
     fromText = \case
-        "alpha" -> Just ANDAlpha
-        "beta" -> Just ANDBeta
-        "production" -> Just ANDProduction
-        "rollout" -> Just ANDRollout
+        "alpha" -> Just EDIAlpha
+        "beta" -> Just EDIBeta
+        "production" -> Just EDIProduction
+        "rollout" -> Just EDIRollout
         _ -> Nothing
 
-instance ToText AndroidPublisherEditsTestersGetTrack where
+instance ToText EditsTestersUpdateTrack where
     toText = \case
-        ANDAlpha -> "alpha"
-        ANDBeta -> "beta"
-        ANDProduction -> "production"
-        ANDRollout -> "rollout"
+        EDIAlpha -> "alpha"
+        EDIBeta -> "beta"
+        EDIProduction -> "production"
+        EDIRollout -> "rollout"
 
-instance FromJSON AndroidPublisherEditsTestersGetTrack where
-    parseJSON = parseJSONText "AndroidPublisherEditsTestersGetTrack"
+instance FromJSON EditsTestersUpdateTrack where
+    parseJSON = parseJSONText "EditsTestersUpdateTrack"
 
-instance ToJSON AndroidPublisherEditsTestersGetTrack where
-    toJSON = toJSONText
-
-data AndroidPublisherEditsTestersPatchTrack
-    = APETPTAlpha
-      -- ^ @alpha@
-    | APETPTBeta
-      -- ^ @beta@
-    | APETPTProduction
-      -- ^ @production@
-    | APETPTRollout
-      -- ^ @rollout@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable AndroidPublisherEditsTestersPatchTrack
-
-instance FromText AndroidPublisherEditsTestersPatchTrack where
-    fromText = \case
-        "alpha" -> Just APETPTAlpha
-        "beta" -> Just APETPTBeta
-        "production" -> Just APETPTProduction
-        "rollout" -> Just APETPTRollout
-        _ -> Nothing
-
-instance ToText AndroidPublisherEditsTestersPatchTrack where
-    toText = \case
-        APETPTAlpha -> "alpha"
-        APETPTBeta -> "beta"
-        APETPTProduction -> "production"
-        APETPTRollout -> "rollout"
-
-instance FromJSON AndroidPublisherEditsTestersPatchTrack where
-    parseJSON = parseJSONText "AndroidPublisherEditsTestersPatchTrack"
-
-instance ToJSON AndroidPublisherEditsTestersPatchTrack where
+instance ToJSON EditsTestersUpdateTrack where
     toJSON = toJSONText

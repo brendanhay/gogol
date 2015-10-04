@@ -59,7 +59,8 @@ type TaskListsPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] TaskList :> Patch '[JSON] TaskList
+                           ReqBody '[OctetStream] TaskList :>
+                             Patch '[JSON] TaskList
 
 -- | Updates the authenticated user\'s specified task list. This method
 -- supports patch semantics.

@@ -72,7 +72,7 @@ type ProjectsSubscriptionsCreateResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] Subscription :>
+                                   ReqBody '[OctetStream] Subscription :>
                                      Put '[JSON] Subscription
 
 -- | Creates a subscription to a given topic for a given subscriber. If the

@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Ads.Update
     , aQuotaUser
     , aPrettyPrint
     , aUserIP
-    , aProfileId
+    , aProFileId
     , aPayload
     , aKey
     , aOAuthToken
@@ -57,7 +57,7 @@ type AdsUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Ad :> Put '[JSON] Ad
+                         ReqBody '[OctetStream] Ad :> Put '[JSON] Ad
 
 -- | Updates an existing ad.
 --
@@ -66,7 +66,7 @@ data AdsUpdate' = AdsUpdate'
     { _aQuotaUser   :: !(Maybe Text)
     , _aPrettyPrint :: !Bool
     , _aUserIP      :: !(Maybe Text)
-    , _aProfileId   :: !Int64
+    , _aProFileId   :: !Int64
     , _aPayload     :: !Ad
     , _aKey         :: !(Maybe Key)
     , _aOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +83,7 @@ data AdsUpdate' = AdsUpdate'
 --
 -- * 'aUserIP'
 --
--- * 'aProfileId'
+-- * 'aProFileId'
 --
 -- * 'aPayload'
 --
@@ -96,12 +96,12 @@ adsUpdate'
     :: Int64 -- ^ 'profileId'
     -> Ad -- ^ 'payload'
     -> AdsUpdate'
-adsUpdate' pAProfileId_ pAPayload_ =
+adsUpdate' pAProFileId_ pAPayload_ =
     AdsUpdate'
     { _aQuotaUser = Nothing
     , _aPrettyPrint = True
     , _aUserIP = Nothing
-    , _aProfileId = pAProfileId_
+    , _aProFileId = pAProFileId_
     , _aPayload = pAPayload_
     , _aKey = Nothing
     , _aOAuthToken = Nothing
@@ -126,9 +126,9 @@ aUserIP :: Lens' AdsUpdate' (Maybe Text)
 aUserIP = lens _aUserIP (\ s a -> s{_aUserIP = a})
 
 -- | User profile ID associated with this request.
-aProfileId :: Lens' AdsUpdate' Int64
-aProfileId
-  = lens _aProfileId (\ s a -> s{_aProfileId = a})
+aProFileId :: Lens' AdsUpdate' Int64
+aProFileId
+  = lens _aProFileId (\ s a -> s{_aProFileId = a})
 
 -- | Multipart request metadata.
 aPayload :: Lens' AdsUpdate' Ad
@@ -157,7 +157,7 @@ instance GoogleRequest AdsUpdate' where
         type Rs AdsUpdate' = Ad
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdsUpdate'{..}
-          = go _aProfileId _aQuotaUser (Just _aPrettyPrint)
+          = go _aProFileId _aQuotaUser (Just _aPrettyPrint)
               _aUserIP
               _aFields
               _aKey

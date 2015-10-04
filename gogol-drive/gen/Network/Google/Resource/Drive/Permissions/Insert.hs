@@ -61,7 +61,7 @@ type PermissionsInsertResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Permission :>
+                             ReqBody '[OctetStream] Permission :>
                                Post '[JSON] Permission
 
 -- | Inserts a permission for a file.

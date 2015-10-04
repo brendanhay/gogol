@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @GANLinksInsert@ which the
 -- 'LinksInsert'' request conforms to.
 type LinksInsertResource =
-     Capture "role" GANLinksInsertRole :>
+     Capture "role" LinksInsertRole :>
        Capture "roleId" Text :>
          "link" :>
            QueryParam "quotaUser" Text :>
@@ -58,7 +58,7 @@ type LinksInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Link :> Post '[JSON] Link
+                         ReqBody '[OctetStream] Link :> Post '[JSON] Link
 
 -- | Inserts a new link.
 --
@@ -69,7 +69,7 @@ data LinksInsert' = LinksInsert'
     , _liUserIP      :: !(Maybe Text)
     , _liPayload     :: !Link
     , _liRoleId      :: !Text
-    , _liRole        :: !GANLinksInsertRole
+    , _liRole        :: !LinksInsertRole
     , _liKey         :: !(Maybe Key)
     , _liOAuthToken  :: !(Maybe OAuthToken)
     , _liFields      :: !(Maybe Text)
@@ -99,7 +99,7 @@ data LinksInsert' = LinksInsert'
 linksInsert'
     :: Link -- ^ 'payload'
     -> Text -- ^ 'roleId'
-    -> GANLinksInsertRole -- ^ 'role'
+    -> LinksInsertRole -- ^ 'role'
     -> LinksInsert'
 linksInsert' pLiPayload_ pLiRoleId_ pLiRole_ =
     LinksInsert'
@@ -143,7 +143,7 @@ liRoleId = lens _liRoleId (\ s a -> s{_liRoleId = a})
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-liRole :: Lens' LinksInsert' GANLinksInsertRole
+liRole :: Lens' LinksInsert' LinksInsertRole
 liRole = lens _liRole (\ s a -> s{_liRole = a})
 
 -- | API key. Your API key identifies your project and provides you with API

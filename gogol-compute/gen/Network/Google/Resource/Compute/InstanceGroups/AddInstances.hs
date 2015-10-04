@@ -63,7 +63,8 @@ type InstanceGroupsAddInstancesResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] InstanceGroupsAddInstancesRequest
+                               ReqBody '[OctetStream]
+                                 InstanceGroupsAddInstancesRequest
                                  :> Post '[JSON] Operation
 
 -- | Adds a list of instances to an instance group. All of the instances in

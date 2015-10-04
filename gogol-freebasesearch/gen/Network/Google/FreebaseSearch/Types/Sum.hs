@@ -18,7 +18,7 @@ module Network.Google.FreebaseSearch.Types.Sum where
 import           Network.Google.Prelude
 
 -- | Structural format of the json response.
-data Format
+data FreebaseSearchFormat
     = AC
       -- ^ @ac@
       -- Compact format useful for autocomplete\/suggest UIs.
@@ -39,9 +39,9 @@ data Format
       -- Ordered list of freebase mids.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable Format
+instance Hashable FreebaseSearchFormat
 
-instance FromText Format where
+instance FromText FreebaseSearchFormat where
     fromText = \case
         "ac" -> Just AC
         "classic" -> Just Classic
@@ -51,7 +51,7 @@ instance FromText Format where
         "mids" -> Just Mids
         _ -> Nothing
 
-instance ToText Format where
+instance ToText FreebaseSearchFormat where
     toText = \case
         AC -> "ac"
         Classic -> "classic"
@@ -60,18 +60,84 @@ instance ToText Format where
         Ids -> "ids"
         Mids -> "mids"
 
-instance FromJSON Format where
-    parseJSON = parseJSONText "Format"
+instance FromJSON FreebaseSearchFormat where
+    parseJSON = parseJSONText "FreebaseSearchFormat"
 
-instance ToJSON Format where
+instance ToJSON FreebaseSearchFormat where
+    toJSON = toJSONText
+
+-- | Relevance scoring algorithm to use.
+data FreebaseSearchScoring
+    = FSSEntity
+      -- ^ @entity@
+      -- Use freebase and popularity entity ranking.
+    | FSSFreebase
+      -- ^ @freebase@
+      -- Use freebase entity ranking.
+    | FSSSchema
+      -- ^ @schema@
+      -- Use schema ranking for properties and types.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable FreebaseSearchScoring
+
+instance FromText FreebaseSearchScoring where
+    fromText = \case
+        "entity" -> Just FSSEntity
+        "freebase" -> Just FSSFreebase
+        "schema" -> Just FSSSchema
+        _ -> Nothing
+
+instance ToText FreebaseSearchScoring where
+    toText = \case
+        FSSEntity -> "entity"
+        FSSFreebase -> "freebase"
+        FSSSchema -> "schema"
+
+instance FromJSON FreebaseSearchScoring where
+    parseJSON = parseJSONText "FreebaseSearchScoring"
+
+instance ToJSON FreebaseSearchScoring where
+    toJSON = toJSONText
+
+-- | The encoding of the response. You can use this parameter to enable html
+-- encoding.
+data FreebaseSearchEncode
+    = HTML
+      -- ^ @html@
+      -- Encode certain characters in the response (such as tags and ambersands)
+      -- using html encoding.
+    | Off
+      -- ^ @off@
+      -- No encoding of the response. You should not print the results directly
+      -- on an web page without html-escaping the content first.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable FreebaseSearchEncode
+
+instance FromText FreebaseSearchEncode where
+    fromText = \case
+        "html" -> Just HTML
+        "off" -> Just Off
+        _ -> Nothing
+
+instance ToText FreebaseSearchEncode where
+    toText = \case
+        HTML -> "html"
+        Off -> "off"
+
+instance FromJSON FreebaseSearchEncode where
+    parseJSON = parseJSONText "FreebaseSearchEncode"
+
+instance ToJSON FreebaseSearchEncode where
     toJSON = toJSONText
 
 -- | The keyword to request help on.
-data Help
+data FreebaseSearchHelp
     = Langs
       -- ^ @langs@
       -- The language codes served by the service.
-    | Mappings
+    | MAppings
       -- ^ @mappings@
       -- The property\/path mappings supported by the filter and output request
       -- parameters.
@@ -81,63 +147,29 @@ data Help
       -- and output request parameters.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable Help
+instance Hashable FreebaseSearchHelp
 
-instance FromText Help where
+instance FromText FreebaseSearchHelp where
     fromText = \case
         "langs" -> Just Langs
-        "mappings" -> Just Mappings
+        "mappings" -> Just MAppings
         "predicates" -> Just Predicates
         _ -> Nothing
 
-instance ToText Help where
+instance ToText FreebaseSearchHelp where
     toText = \case
         Langs -> "langs"
-        Mappings -> "mappings"
+        MAppings -> "mappings"
         Predicates -> "predicates"
 
-instance FromJSON Help where
-    parseJSON = parseJSONText "Help"
+instance FromJSON FreebaseSearchHelp where
+    parseJSON = parseJSONText "FreebaseSearchHelp"
 
-instance ToJSON Help where
-    toJSON = toJSONText
-
--- | Relevance scoring algorithm to use.
-data Scoring
-    = SEntity
-      -- ^ @entity@
-      -- Use freebase and popularity entity ranking.
-    | SFreebase
-      -- ^ @freebase@
-      -- Use freebase entity ranking.
-    | SSchema
-      -- ^ @schema@
-      -- Use schema ranking for properties and types.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Scoring
-
-instance FromText Scoring where
-    fromText = \case
-        "entity" -> Just SEntity
-        "freebase" -> Just SFreebase
-        "schema" -> Just SSchema
-        _ -> Nothing
-
-instance ToText Scoring where
-    toText = \case
-        SEntity -> "entity"
-        SFreebase -> "freebase"
-        SSchema -> "schema"
-
-instance FromJSON Scoring where
-    parseJSON = parseJSONText "Scoring"
-
-instance ToJSON Scoring where
+instance ToJSON FreebaseSearchHelp where
     toJSON = toJSONText
 
 -- | Request \'did you mean\' suggestions
-data Spell
+data FreebaseSearchSpell
     = Always
       -- ^ @always@
       -- Request spelling suggestions for any query at least three characters
@@ -150,55 +182,23 @@ data Spell
       -- Don\'t request spelling suggestions.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable Spell
+instance Hashable FreebaseSearchSpell
 
-instance FromText Spell where
+instance FromText FreebaseSearchSpell where
     fromText = \case
         "always" -> Just Always
         "no_results" -> Just NoResults
         "no_spelling" -> Just NoSpelling
         _ -> Nothing
 
-instance ToText Spell where
+instance ToText FreebaseSearchSpell where
     toText = \case
         Always -> "always"
         NoResults -> "no_results"
         NoSpelling -> "no_spelling"
 
-instance FromJSON Spell where
-    parseJSON = parseJSONText "Spell"
+instance FromJSON FreebaseSearchSpell where
+    parseJSON = parseJSONText "FreebaseSearchSpell"
 
-instance ToJSON Spell where
-    toJSON = toJSONText
-
--- | The encoding of the response. You can use this parameter to enable html
--- encoding.
-data Encode
-    = HTML
-      -- ^ @html@
-      -- Encode certain characters in the response (such as tags and ambersands)
-      -- using html encoding.
-    | Off
-      -- ^ @off@
-      -- No encoding of the response. You should not print the results directly
-      -- on an web page without html-escaping the content first.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Encode
-
-instance FromText Encode where
-    fromText = \case
-        "html" -> Just HTML
-        "off" -> Just Off
-        _ -> Nothing
-
-instance ToText Encode where
-    toText = \case
-        HTML -> "html"
-        Off -> "off"
-
-instance FromJSON Encode where
-    parseJSON = parseJSONText "Encode"
-
-instance ToJSON Encode where
+instance ToJSON FreebaseSearchSpell where
     toJSON = toJSONText

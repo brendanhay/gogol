@@ -97,14 +97,6 @@ module Network.Google.BigQuery
     , jrJobId
     , jrProjectId
 
-    -- ** DatasetsItem
-    , DatasetsItem
-    , datasetsItem
-    , diFriendlyName
-    , diKind
-    , diDatasetReference
-    , diId
-
     -- ** TableList
     , TableList
     , tableList
@@ -113,6 +105,14 @@ module Network.Google.BigQuery
     , tlNextPageToken
     , tlKind
     , tlTables
+
+    -- ** DatasetListDatasetsItem
+    , DatasetListDatasetsItem
+    , datasetListDatasetsItem
+    , dldiFriendlyName
+    , dldiKind
+    , dldiDatasetReference
+    , dldiId
 
     -- ** TableDataList
     , TableDataList
@@ -131,6 +131,15 @@ module Network.Google.BigQuery
     , jctcSourceTables
     , jctcCreateDisPosition
     , jctcSourceTable
+
+    -- ** TableListTablesItem
+    , TableListTablesItem
+    , tableListTablesItem
+    , tltiTableReference
+    , tltiFriendlyName
+    , tltiKind
+    , tltiId
+    , tltiType
 
     -- ** TableSchema
     , TableSchema
@@ -173,6 +182,17 @@ module Network.Google.BigQuery
     , dDefaultTableExpirationMs
     , dDescription
 
+    -- ** ExternalDataConfiguration
+    , ExternalDataConfiguration
+    , externalDataConfiguration
+    , edcIgnoreUnknownValues
+    , edcCompression
+    , edcSourceFormat
+    , edcSchema
+    , edcMaxBadRecords
+    , edcSourceURIs
+    , edcCSVOptions
+
     -- ** TableReference
     , TableReference
     , tableReference
@@ -189,17 +209,6 @@ module Network.Google.BigQuery
     , tfsDescription
     , tfsFields
 
-    -- ** ExternalDataConfiguration
-    , ExternalDataConfiguration
-    , externalDataConfiguration
-    , edcIgnoreUnknownValues
-    , edcCompression
-    , edcSourceFormat
-    , edcSchema
-    , edcMaxBadRecords
-    , edcSourceURIs
-    , edcCSVOptions
-
     -- ** GetQueryResultsResponse
     , GetQueryResultsResponse
     , getQueryResultsResponse
@@ -214,19 +223,6 @@ module Network.Google.BigQuery
     , gqrrErrors
     , gqrrJobComplete
     , gqrrCacheHit
-
-    -- ** TablesItem
-    , TablesItem
-    , tablesItem
-    , tiTableReference
-    , tiFriendlyName
-    , tiKind
-    , tiId
-    , tiType
-
-    -- ** TableDefinitions
-    , TableDefinitions
-    , tableDefinitions
 
     -- ** DatasetList
     , DatasetList
@@ -248,6 +244,9 @@ module Network.Google.BigQuery
     , qrMaxResults
     , qrDefaultDataset
 
+    -- ** JobsListProjection
+    , JobsListProjection (..)
+
     -- ** JobStatistics4
     , JobStatistics4
     , jobStatistics4
@@ -257,33 +256,6 @@ module Network.Google.BigQuery
     , ProjectReference
     , projectReference
     , prProjectId
-
-    -- ** JobsItem
-    , JobsItem
-    , jobsItem
-    , jiJobReference
-    , jiStatus
-    , jiState
-    , jiUserEmail
-    , jiKind
-    , jiErrorResult
-    , jiId
-    , jiStatistics
-    , jiConfiguration
-
-    -- ** InsertErrorsItem
-    , InsertErrorsItem
-    , insertErrorsItem
-    , ieiErrors
-    , ieiIndex
-
-    -- ** TableDataInsertAllRequest
-    , TableDataInsertAllRequest
-    , tableDataInsertAllRequest
-    , tdiarKind
-    , tdiarIgnoreUnknownValues
-    , tdiarRows
-    , tdiarSkipInvalidRows
 
     -- ** JobConfigurationLoad
     , JobConfigurationLoad
@@ -306,16 +278,31 @@ module Network.Google.BigQuery
     , jclEncoding
     , jclFieldDelimiter
 
+    -- ** JobsListStateFilter
+    , JobsListStateFilter (..)
+
     -- ** DatasetReference
     , DatasetReference
     , datasetReference
     , drDatasetId
     , drProjectId
 
-    -- ** TableRow
-    , TableRow
-    , tableRow
-    , trF
+    -- ** TableDataInsertAllRequest
+    , TableDataInsertAllRequest
+    , tableDataInsertAllRequest
+    , tdiarKind
+    , tdiarIgnoreUnknownValues
+    , tdiarRows
+    , tdiarSkipInvalidRows
+
+    -- ** ProjectListProjectsItem
+    , ProjectListProjectsItem
+    , projectListProjectsItem
+    , plpiFriendlyName
+    , plpiKind
+    , plpiProjectReference
+    , plpiId
+    , plpiNumericId
 
     -- ** Streamingbuffer
     , Streamingbuffer
@@ -323,6 +310,34 @@ module Network.Google.BigQuery
     , sEstimatedBytes
     , sOldestEntryTime
     , sEstimatedRows
+
+    -- ** TableRow
+    , TableRow
+    , tableRow
+    , trF
+
+    -- ** JobListJobsItem
+    , JobListJobsItem
+    , jobListJobsItem
+    , jljiJobReference
+    , jljiStatus
+    , jljiState
+    , jljiUserEmail
+    , jljiKind
+    , jljiErrorResult
+    , jljiId
+    , jljiStatistics
+    , jljiConfiguration
+
+    -- ** JobConfiguration
+    , JobConfiguration
+    , jobConfiguration
+    , jcCopy
+    , jcLink
+    , jcLoad
+    , jcQuery
+    , jcExtract
+    , jcDryRun
 
     -- ** Job
     , Job
@@ -345,24 +360,11 @@ module Network.Google.BigQuery
     , jCreateDisPosition
     , jSourceURI
 
-    -- ** JobConfiguration
-    , JobConfiguration
-    , jobConfiguration
-    , jcCopy
-    , jcLink
-    , jcLoad
-    , jcQuery
-    , jcExtract
-    , jcDryRun
-
-    -- ** StateFilter
-    , StateFilter (..)
-
-    -- ** JobCancelResponse
-    , JobCancelResponse
-    , jobCancelResponse
-    , jcrKind
-    , jcrJob
+    -- ** TableDataInsertAllResponseInsertErrorsItem
+    , TableDataInsertAllResponseInsertErrorsItem
+    , tableDataInsertAllResponseInsertErrorsItem
+    , tdiarieiErrors
+    , tdiarieiIndex
 
     -- ** JobConfigurationExtract
     , JobConfigurationExtract
@@ -375,15 +377,15 @@ module Network.Google.BigQuery
     , jceDestinationURI
     , jceFieldDelimiter
 
+    -- ** JobCancelResponse
+    , JobCancelResponse
+    , jobCancelResponse
+    , jcrKind
+    , jcrJob
+
     -- ** JSONObject
     , JSONObject
     , jsonObject
-
-    -- ** TableDataInsertAllRequestRowsItem
-    , TableDataInsertAllRequestRowsItem
-    , tableDataInsertAllRequestRowsItem
-    , tdiarriJSON
-    , tdiarriInsertId
 
     -- ** JobConfigurationQuery
     , JobConfigurationQuery
@@ -401,6 +403,12 @@ module Network.Google.BigQuery
     , jcqFlattenResults
     , jcqDefaultDataset
 
+    -- ** TableDataInsertAllRequestRowsItem
+    , TableDataInsertAllRequestRowsItem
+    , tableDataInsertAllRequestRowsItem
+    , tdiarriJSON
+    , tdiarriInsertId
+
     -- ** JobList
     , JobList
     , jobList
@@ -409,24 +417,25 @@ module Network.Google.BigQuery
     , jlKind
     , jlJobs
 
-    -- ** Projection
-    , Projection (..)
+    -- ** JobConfigurationQueryTableDefinitions
+    , JobConfigurationQueryTableDefinitions
+    , jobConfigurationQueryTableDefinitions
 
     -- ** TableCell
     , TableCell
     , tableCell
     , tcV
 
+    -- ** ViewDefinition
+    , ViewDefinition
+    , viewDefinition
+    , vdQuery
+
     -- ** UserDefinedFunctionResource
     , UserDefinedFunctionResource
     , userDefinedFunctionResource
     , udfrResourceURI
     , udfrInlineCode
-
-    -- ** ViewDefinition
-    , ViewDefinition
-    , viewDefinition
-    , vdQuery
 
     -- ** JobStatistics2
     , JobStatistics2
@@ -443,20 +452,21 @@ module Network.Google.BigQuery
     , jsErrorResult
     , jsErrors
 
+    -- ** DatasetAccessItem
+    , DatasetAccessItem
+    , datasetAccessItem
+    , daiGroupByEmail
+    , daiDomain
+    , daiSpecialGroup
+    , daiRole
+    , daiView
+    , daiUserByEmail
+
     -- ** TableDataInsertAllResponse
     , TableDataInsertAllResponse
     , tableDataInsertAllResponse
     , tKind
     , tInsertErrors
-
-    -- ** ProjectsItem
-    , ProjectsItem
-    , projectsItem
-    , piFriendlyName
-    , piKind
-    , piProjectReference
-    , piId
-    , piNumericId
 
     -- ** Table
     , Table
@@ -519,16 +529,6 @@ module Network.Google.BigQuery
     , qErrors
     , qJobComplete
     , qCacheHit
-
-    -- ** AccessItem
-    , AccessItem
-    , accessItem
-    , aiGroupByEmail
-    , aiDomain
-    , aiSpecialGroup
-    , aiRole
-    , aiView
-    , aiUserByEmail
     ) where
 
 import           Network.Google.BigQuery.Types

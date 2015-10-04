@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.ContentCategories.Delete
     , ccdQuotaUser
     , ccdPrettyPrint
     , ccdUserIP
-    , ccdProfileId
+    , ccdProFileId
     , ccdKey
     , ccdId
     , ccdOAuthToken
@@ -66,7 +66,7 @@ data ContentCategoriesDelete' = ContentCategoriesDelete'
     { _ccdQuotaUser   :: !(Maybe Text)
     , _ccdPrettyPrint :: !Bool
     , _ccdUserIP      :: !(Maybe Text)
-    , _ccdProfileId   :: !Int64
+    , _ccdProFileId   :: !Int64
     , _ccdKey         :: !(Maybe Key)
     , _ccdId          :: !Int64
     , _ccdOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +83,7 @@ data ContentCategoriesDelete' = ContentCategoriesDelete'
 --
 -- * 'ccdUserIP'
 --
--- * 'ccdProfileId'
+-- * 'ccdProFileId'
 --
 -- * 'ccdKey'
 --
@@ -96,12 +96,12 @@ contentCategoriesDelete'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> ContentCategoriesDelete'
-contentCategoriesDelete' pCcdProfileId_ pCcdId_ =
+contentCategoriesDelete' pCcdProFileId_ pCcdId_ =
     ContentCategoriesDelete'
     { _ccdQuotaUser = Nothing
     , _ccdPrettyPrint = True
     , _ccdUserIP = Nothing
-    , _ccdProfileId = pCcdProfileId_
+    , _ccdProFileId = pCcdProFileId_
     , _ccdKey = Nothing
     , _ccdId = pCcdId_
     , _ccdOAuthToken = Nothing
@@ -128,9 +128,9 @@ ccdUserIP
   = lens _ccdUserIP (\ s a -> s{_ccdUserIP = a})
 
 -- | User profile ID associated with this request.
-ccdProfileId :: Lens' ContentCategoriesDelete' Int64
-ccdProfileId
-  = lens _ccdProfileId (\ s a -> s{_ccdProfileId = a})
+ccdProFileId :: Lens' ContentCategoriesDelete' Int64
+ccdProFileId
+  = lens _ccdProFileId (\ s a -> s{_ccdProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -161,7 +161,7 @@ instance GoogleRequest ContentCategoriesDelete' where
         type Rs ContentCategoriesDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ContentCategoriesDelete'{..}
-          = go _ccdProfileId _ccdId _ccdQuotaUser
+          = go _ccdProFileId _ccdId _ccdQuotaUser
               (Just _ccdPrettyPrint)
               _ccdUserIP
               _ccdFields

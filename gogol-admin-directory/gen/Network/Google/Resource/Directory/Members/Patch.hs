@@ -60,7 +60,7 @@ type MembersPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Member :> Patch '[JSON] Member
+                           ReqBody '[OctetStream] Member :> Patch '[JSON] Member
 
 -- | Update membership of a user in the specified group. This method supports
 -- patch semantics.

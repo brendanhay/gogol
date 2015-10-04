@@ -54,7 +54,7 @@ type RelyingPartyVerifyAssertionResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON]
+                     ReqBody '[OctetStream]
                        IdentitytoolkitRelyingPartyVerifyAssertionRequest
                        :> Post '[JSON] VerifyAssertionResponse
 

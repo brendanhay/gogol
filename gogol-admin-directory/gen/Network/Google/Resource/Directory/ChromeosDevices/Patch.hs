@@ -55,7 +55,7 @@ type ChromeosDevicesPatchResource =
            "chromeos" :>
              Capture "deviceId" Text :>
                QueryParam "projection"
-                 DirectoryChromeosDevicesPatchProjection
+                 ChromeosDevicesPatchProjection
                  :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
@@ -64,7 +64,7 @@ type ChromeosDevicesPatchResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] ChromeOSDevice :>
+                               ReqBody '[OctetStream] ChromeOSDevice :>
                                  Patch '[JSON] ChromeOSDevice
 
 -- | Update Chrome OS Device. This method supports patch semantics.
@@ -78,7 +78,7 @@ data ChromeosDevicesPatch' = ChromeosDevicesPatch'
     , _cdpCustomerId  :: !Text
     , _cdpKey         :: !(Maybe Key)
     , _cdpDeviceId    :: !Text
-    , _cdpProjection  :: !(Maybe DirectoryChromeosDevicesPatchProjection)
+    , _cdpProjection  :: !(Maybe ChromeosDevicesPatchProjection)
     , _cdpOAuthToken  :: !(Maybe OAuthToken)
     , _cdpFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -167,7 +167,7 @@ cdpDeviceId
   = lens _cdpDeviceId (\ s a -> s{_cdpDeviceId = a})
 
 -- | Restrict information returned to a set of selected fields.
-cdpProjection :: Lens' ChromeosDevicesPatch' (Maybe DirectoryChromeosDevicesPatchProjection)
+cdpProjection :: Lens' ChromeosDevicesPatch' (Maybe ChromeosDevicesPatchProjection)
 cdpProjection
   = lens _cdpProjection
       (\ s a -> s{_cdpProjection = a})

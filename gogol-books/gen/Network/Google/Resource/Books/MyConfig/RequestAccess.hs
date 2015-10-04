@@ -58,7 +58,9 @@ type MyConfigRequestAccessResource =
              QueryParam "nonce" Text :>
                QueryParam "cpksver" Text :>
                  QueryParam "locale" Text :>
-                   QueryParam "licenseTypes" LicenseTypes :>
+                   QueryParam "licenseTypes"
+                     MyConfigRequestAccessLicenseTypes
+                     :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -77,7 +79,7 @@ data MyConfigRequestAccess' = MyConfigRequestAccess'
     , _mcraCpksver      :: !Text
     , _mcraUserIP       :: !(Maybe Text)
     , _mcraLocale       :: !(Maybe Text)
-    , _mcraLicenseTypes :: !(Maybe LicenseTypes)
+    , _mcraLicenseTypes :: !(Maybe MyConfigRequestAccessLicenseTypes)
     , _mcraKey          :: !(Maybe Key)
     , _mcraVolumeId     :: !Text
     , _mcraSource       :: !Text
@@ -167,7 +169,7 @@ mcraLocale
 
 -- | The type of access license to request. If not specified, the default is
 -- BOTH.
-mcraLicenseTypes :: Lens' MyConfigRequestAccess' (Maybe LicenseTypes)
+mcraLicenseTypes :: Lens' MyConfigRequestAccess' (Maybe MyConfigRequestAccessLicenseTypes)
 mcraLicenseTypes
   = lens _mcraLicenseTypes
       (\ s a -> s{_mcraLicenseTypes = a})

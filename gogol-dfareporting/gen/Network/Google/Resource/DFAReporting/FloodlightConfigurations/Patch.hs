@@ -35,7 +35,7 @@ module Network.Google.Resource.DFAReporting.FloodlightConfigurations.Patch
     , fcpQuotaUser
     , fcpPrettyPrint
     , fcpUserIP
-    , fcpProfileId
+    , fcpProFileId
     , fcpPayload
     , fcpKey
     , fcpId
@@ -60,7 +60,7 @@ type FloodlightConfigurationsPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] FloodlightConfiguration :>
+                           ReqBody '[OctetStream] FloodlightConfiguration :>
                              Patch '[JSON] FloodlightConfiguration
 
 -- | Updates an existing floodlight configuration. This method supports patch
@@ -71,7 +71,7 @@ data FloodlightConfigurationsPatch' = FloodlightConfigurationsPatch'
     { _fcpQuotaUser   :: !(Maybe Text)
     , _fcpPrettyPrint :: !Bool
     , _fcpUserIP      :: !(Maybe Text)
-    , _fcpProfileId   :: !Int64
+    , _fcpProFileId   :: !Int64
     , _fcpPayload     :: !FloodlightConfiguration
     , _fcpKey         :: !(Maybe Key)
     , _fcpId          :: !Int64
@@ -89,7 +89,7 @@ data FloodlightConfigurationsPatch' = FloodlightConfigurationsPatch'
 --
 -- * 'fcpUserIP'
 --
--- * 'fcpProfileId'
+-- * 'fcpProFileId'
 --
 -- * 'fcpPayload'
 --
@@ -105,12 +105,12 @@ floodlightConfigurationsPatch'
     -> FloodlightConfiguration -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> FloodlightConfigurationsPatch'
-floodlightConfigurationsPatch' pFcpProfileId_ pFcpPayload_ pFcpId_ =
+floodlightConfigurationsPatch' pFcpProFileId_ pFcpPayload_ pFcpId_ =
     FloodlightConfigurationsPatch'
     { _fcpQuotaUser = Nothing
     , _fcpPrettyPrint = True
     , _fcpUserIP = Nothing
-    , _fcpProfileId = pFcpProfileId_
+    , _fcpProFileId = pFcpProFileId_
     , _fcpPayload = pFcpPayload_
     , _fcpKey = Nothing
     , _fcpId = pFcpId_
@@ -138,9 +138,9 @@ fcpUserIP
   = lens _fcpUserIP (\ s a -> s{_fcpUserIP = a})
 
 -- | User profile ID associated with this request.
-fcpProfileId :: Lens' FloodlightConfigurationsPatch' Int64
-fcpProfileId
-  = lens _fcpProfileId (\ s a -> s{_fcpProfileId = a})
+fcpProFileId :: Lens' FloodlightConfigurationsPatch' Int64
+fcpProFileId
+  = lens _fcpProFileId (\ s a -> s{_fcpProFileId = a})
 
 -- | Multipart request metadata.
 fcpPayload :: Lens' FloodlightConfigurationsPatch' FloodlightConfiguration
@@ -180,7 +180,7 @@ instance GoogleRequest FloodlightConfigurationsPatch'
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           FloodlightConfigurationsPatch'{..}
-          = go _fcpProfileId (Just _fcpId) _fcpQuotaUser
+          = go _fcpProFileId (Just _fcpId) _fcpQuotaUser
               (Just _fcpPrettyPrint)
               _fcpUserIP
               _fcpFields

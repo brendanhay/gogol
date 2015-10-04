@@ -40,11 +40,6 @@ module Network.Google.LatencyTest
     , ivValue
     , ivLabel
 
-    -- ** AggregatedStatsReply
-    , AggregatedStatsReply
-    , aggregatedStatsReply
-    , asrTestValue
-
     -- ** DoubleValue
     , DoubleValue
     , doubleValue
@@ -56,6 +51,11 @@ module Network.Google.LatencyTest
     , stringValue
     , svValue
     , svLabel
+
+    -- ** AggregatedStatsReply
+    , AggregatedStatsReply
+    , aggregatedStatsReply
+    , asrTestValue
 
     -- ** Stats
     , Stats

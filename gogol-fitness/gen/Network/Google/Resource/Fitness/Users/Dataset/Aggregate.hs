@@ -59,7 +59,7 @@ type UsersDatasetAggregateResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] AggregateRequest :>
+                       ReqBody '[OctetStream] AggregateRequest :>
                          Post '[JSON] AggregateResponse
 
 -- | Aggregates data of a certain type or stream into buckets divided by a

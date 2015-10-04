@@ -18,6 +18,105 @@ module Network.Google.Spectrum.Types.Product where
 import           Network.Google.Prelude
 import           Network.Google.Spectrum.Types.Sum
 
+-- | A region is represented using the polygonal shape.
+--
+-- /See:/ 'geoLocationPolygon' smart constructor.
+newtype GeoLocationPolygon = GeoLocationPolygon
+    { _glpExterior :: Maybe [GeoLocationPoint]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GeoLocationPolygon' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'glpExterior'
+geoLocationPolygon
+    :: GeoLocationPolygon
+geoLocationPolygon =
+    GeoLocationPolygon
+    { _glpExterior = Nothing
+    }
+
+-- | When the geolocation describes a region, the exterior field refers to a
+-- list of latitude\/longitude points that represent the vertices of a
+-- polygon. The first and last points must be the same. Thus, a minimum of
+-- four points is required. The following polygon restrictions from RFC5491
+-- apply: - A connecting line shall not cross another connecting line of
+-- the same polygon. - The vertices must be defined in a counterclockwise
+-- order. - The edges of a polygon are defined by the shortest path between
+-- two points in space (not a geodesic curve). Consequently, the length
+-- between two adjacent vertices should be restricted to a maximum of 130
+-- km. - All vertices are assumed to be at the same altitude. - Polygon
+-- shapes should be restricted to a maximum of 15 vertices (16 points that
+-- include the repeated vertex).
+glpExterior :: Lens' GeoLocationPolygon [GeoLocationPoint]
+glpExterior
+  = lens _glpExterior (\ s a -> s{_glpExterior = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON GeoLocationPolygon where
+        parseJSON
+          = withObject "GeoLocationPolygon"
+              (\ o ->
+                 GeoLocationPolygon <$> (o .:? "exterior" .!= mempty))
+
+instance ToJSON GeoLocationPolygon where
+        toJSON GeoLocationPolygon{..}
+          = object
+              (catMaybes [("exterior" .=) <$> _glpExterior])
+
+-- | A single geolocation on the globe.
+--
+-- /See:/ 'geoLocationPoint' smart constructor.
+data GeoLocationPoint = GeoLocationPoint
+    { _glpLatitude  :: !(Maybe Double)
+    , _glpLongitude :: !(Maybe Double)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GeoLocationPoint' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'glpLatitude'
+--
+-- * 'glpLongitude'
+geoLocationPoint
+    :: GeoLocationPoint
+geoLocationPoint =
+    GeoLocationPoint
+    { _glpLatitude = Nothing
+    , _glpLongitude = Nothing
+    }
+
+-- | A required floating-point number that expresses the latitude in degrees
+-- using the WGS84 datum. For details on this encoding, see the National
+-- Imagery and Mapping Agency\'s Technical Report TR8350.2.
+glpLatitude :: Lens' GeoLocationPoint (Maybe Double)
+glpLatitude
+  = lens _glpLatitude (\ s a -> s{_glpLatitude = a})
+
+-- | A required floating-point number that expresses the longitude in degrees
+-- using the WGS84 datum. For details on this encoding, see the National
+-- Imagery and Mapping Agency\'s Technical Report TR8350.2.
+glpLongitude :: Lens' GeoLocationPoint (Maybe Double)
+glpLongitude
+  = lens _glpLongitude (\ s a -> s{_glpLongitude = a})
+
+instance FromJSON GeoLocationPoint where
+        parseJSON
+          = withObject "GeoLocationPoint"
+              (\ o ->
+                 GeoLocationPoint <$>
+                   (o .:? "latitude") <*> (o .:? "longitude"))
+
+instance ToJSON GeoLocationPoint where
+        toJSON GeoLocationPoint{..}
+          = object
+              (catMaybes
+                 [("latitude" .=) <$> _glpLatitude,
+                  ("longitude" .=) <$> _glpLongitude])
+
 -- | The initialization response message communicates database parameters to
 -- the requesting device.
 --
@@ -109,105 +208,6 @@ instance ToJSON PawsInitResponse where
                   ("rulesetInfo" .=) <$> _pirRulesetInfo,
                   ("type" .=) <$> _pirType,
                   ("databaseChange" .=) <$> _pirDatabaseChange])
-
--- | A single geolocation on the globe.
---
--- /See:/ 'geoLocationPoint' smart constructor.
-data GeoLocationPoint = GeoLocationPoint
-    { _glpLatitude  :: !(Maybe Double)
-    , _glpLongitude :: !(Maybe Double)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'GeoLocationPoint' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'glpLatitude'
---
--- * 'glpLongitude'
-geoLocationPoint
-    :: GeoLocationPoint
-geoLocationPoint =
-    GeoLocationPoint
-    { _glpLatitude = Nothing
-    , _glpLongitude = Nothing
-    }
-
--- | A required floating-point number that expresses the latitude in degrees
--- using the WGS84 datum. For details on this encoding, see the National
--- Imagery and Mapping Agency\'s Technical Report TR8350.2.
-glpLatitude :: Lens' GeoLocationPoint (Maybe Double)
-glpLatitude
-  = lens _glpLatitude (\ s a -> s{_glpLatitude = a})
-
--- | A required floating-point number that expresses the longitude in degrees
--- using the WGS84 datum. For details on this encoding, see the National
--- Imagery and Mapping Agency\'s Technical Report TR8350.2.
-glpLongitude :: Lens' GeoLocationPoint (Maybe Double)
-glpLongitude
-  = lens _glpLongitude (\ s a -> s{_glpLongitude = a})
-
-instance FromJSON GeoLocationPoint where
-        parseJSON
-          = withObject "GeoLocationPoint"
-              (\ o ->
-                 GeoLocationPoint <$>
-                   (o .:? "latitude") <*> (o .:? "longitude"))
-
-instance ToJSON GeoLocationPoint where
-        toJSON GeoLocationPoint{..}
-          = object
-              (catMaybes
-                 [("latitude" .=) <$> _glpLatitude,
-                  ("longitude" .=) <$> _glpLongitude])
-
--- | A region is represented using the polygonal shape.
---
--- /See:/ 'geoLocationPolygon' smart constructor.
-newtype GeoLocationPolygon = GeoLocationPolygon
-    { _glpExterior :: Maybe [GeoLocationPoint]
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'GeoLocationPolygon' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'glpExterior'
-geoLocationPolygon
-    :: GeoLocationPolygon
-geoLocationPolygon =
-    GeoLocationPolygon
-    { _glpExterior = Nothing
-    }
-
--- | When the geolocation describes a region, the exterior field refers to a
--- list of latitude\/longitude points that represent the vertices of a
--- polygon. The first and last points must be the same. Thus, a minimum of
--- four points is required. The following polygon restrictions from RFC5491
--- apply: - A connecting line shall not cross another connecting line of
--- the same polygon. - The vertices must be defined in a counterclockwise
--- order. - The edges of a polygon are defined by the shortest path between
--- two points in space (not a geodesic curve). Consequently, the length
--- between two adjacent vertices should be restricted to a maximum of 130
--- km. - All vertices are assumed to be at the same altitude. - Polygon
--- shapes should be restricted to a maximum of 15 vertices (16 points that
--- include the repeated vertex).
-glpExterior :: Lens' GeoLocationPolygon [GeoLocationPoint]
-glpExterior
-  = lens _glpExterior (\ s a -> s{_glpExterior = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON GeoLocationPolygon where
-        parseJSON
-          = withObject "GeoLocationPolygon"
-              (\ o ->
-                 GeoLocationPolygon <$> (o .:? "exterior" .!= mempty))
-
-instance ToJSON GeoLocationPolygon where
-        toJSON GeoLocationPolygon{..}
-          = object
-              (catMaybes [("exterior" .=) <$> _glpExterior])
 
 -- | The registration response message simply acknowledges receipt of the
 -- request and is otherwise empty.
@@ -670,39 +670,6 @@ instance ToJSON PawsGetSpectrumBatchRequest where
                   ("capabilities" .=) <$> _pgsbrCapabilities,
                   ("deviceDesc" .=) <$> _pgsbrDeviceDesc])
 
--- | The structure used to represent an organization and an email address.
---
--- /See:/ 'vcardTypedText' smart constructor.
-newtype VcardTypedText = VcardTypedText
-    { _vttText :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'VcardTypedText' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'vttText'
-vcardTypedText
-    :: VcardTypedText
-vcardTypedText =
-    VcardTypedText
-    { _vttText = Nothing
-    }
-
--- | The text string associated with this item. For example, for an org
--- field: ACME, inc. For an email field: smith\'example.com.
-vttText :: Lens' VcardTypedText (Maybe Text)
-vttText = lens _vttText (\ s a -> s{_vttText = a})
-
-instance FromJSON VcardTypedText where
-        parseJSON
-          = withObject "VcardTypedText"
-              (\ o -> VcardTypedText <$> (o .:? "text"))
-
-instance ToJSON VcardTypedText where
-        toJSON VcardTypedText{..}
-          = object (catMaybes [("text" .=) <$> _vttText])
-
 -- | The schedule of spectrum profiles available at a particular geolocation.
 --
 -- /See:/ 'geoSpectrumSchedule' smart constructor.
@@ -757,6 +724,39 @@ instance ToJSON GeoSpectrumSchedule where
               (catMaybes
                  [("location" .=) <$> _gssLocation,
                   ("spectrumSchedules" .=) <$> _gssSpectrumSchedules])
+
+-- | The structure used to represent an organization and an email address.
+--
+-- /See:/ 'vcardTypedText' smart constructor.
+newtype VcardTypedText = VcardTypedText
+    { _vttText :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VcardTypedText' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vttText'
+vcardTypedText
+    :: VcardTypedText
+vcardTypedText =
+    VcardTypedText
+    { _vttText = Nothing
+    }
+
+-- | The text string associated with this item. For example, for an org
+-- field: ACME, inc. For an email field: smith\'example.com.
+vttText :: Lens' VcardTypedText (Maybe Text)
+vttText = lens _vttText (\ s a -> s{_vttText = a})
+
+instance FromJSON VcardTypedText where
+        parseJSON
+          = withObject "VcardTypedText"
+              (\ o -> VcardTypedText <$> (o .:? "text"))
+
+instance ToJSON VcardTypedText where
+        toJSON VcardTypedText{..}
+          = object (catMaybes [("text" .=) <$> _vttText])
 
 -- | The spectrum schedule element combines an event time with spectrum
 -- profile to define a time period in which the profile is valid.
@@ -897,164 +897,55 @@ instance ToJSON DeviceOwner where
                  [("operator" .=) <$> _doOperator,
                   ("owner" .=) <$> _doOwner])
 
--- | Antenna characteristics provide additional information, such as the
--- antenna height, antenna type, etc. Whether antenna characteristics must
--- be provided in a request depends on the device type and regulatory
--- domain.
+-- | The start and stop times of an event. This is used to indicate the time
+-- period for which a spectrum profile is valid. Both times are expressed
+-- using the format, YYYY-MM-DDThh:mm:ssZ, as defined in RFC3339. The times
+-- must be expressed using UTC.
 --
--- /See:/ 'antennaCharacteristics' smart constructor.
-data AntennaCharacteristics = AntennaCharacteristics
-    { _acHeight            :: !(Maybe Double)
-    , _acHeightType        :: !(Maybe Text)
-    , _acHeightUncertainty :: !(Maybe Double)
+-- /See:/ 'eventTime' smart constructor.
+data EventTime = EventTime
+    { _etStartTime :: !(Maybe Text)
+    , _etStopTime  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AntennaCharacteristics' with the minimum fields required to make a request.
+-- | Creates a value of 'EventTime' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acHeight'
+-- * 'etStartTime'
 --
--- * 'acHeightType'
---
--- * 'acHeightUncertainty'
-antennaCharacteristics
-    :: AntennaCharacteristics
-antennaCharacteristics =
-    AntennaCharacteristics
-    { _acHeight = Nothing
-    , _acHeightType = Nothing
-    , _acHeightUncertainty = Nothing
+-- * 'etStopTime'
+eventTime
+    :: EventTime
+eventTime =
+    EventTime
+    { _etStartTime = Nothing
+    , _etStopTime = Nothing
     }
 
--- | The antenna height in meters. Whether the antenna height is required
--- depends on the device type and the regulatory domain. Note that the
--- height may be negative.
-acHeight :: Lens' AntennaCharacteristics (Maybe Double)
-acHeight = lens _acHeight (\ s a -> s{_acHeight = a})
+-- | The inclusive start of the event. It will be present.
+etStartTime :: Lens' EventTime (Maybe Text)
+etStartTime
+  = lens _etStartTime (\ s a -> s{_etStartTime = a})
 
--- | If the height is required, then the height type (AGL for above ground
--- level or AMSL for above mean sea level) is also required. The default is
--- AGL.
-acHeightType :: Lens' AntennaCharacteristics (Maybe Text)
-acHeightType
-  = lens _acHeightType (\ s a -> s{_acHeightType = a})
+-- | The exclusive end of the event. It will be present.
+etStopTime :: Lens' EventTime (Maybe Text)
+etStopTime
+  = lens _etStopTime (\ s a -> s{_etStopTime = a})
 
--- | The height uncertainty in meters. Whether this is required depends on
--- the regulatory domain.
-acHeightUncertainty :: Lens' AntennaCharacteristics (Maybe Double)
-acHeightUncertainty
-  = lens _acHeightUncertainty
-      (\ s a -> s{_acHeightUncertainty = a})
-
-instance FromJSON AntennaCharacteristics where
+instance FromJSON EventTime where
         parseJSON
-          = withObject "AntennaCharacteristics"
+          = withObject "EventTime"
               (\ o ->
-                 AntennaCharacteristics <$>
-                   (o .:? "height") <*> (o .:? "heightType") <*>
-                     (o .:? "heightUncertainty"))
+                 EventTime <$>
+                   (o .:? "startTime") <*> (o .:? "stopTime"))
 
-instance ToJSON AntennaCharacteristics where
-        toJSON AntennaCharacteristics{..}
+instance ToJSON EventTime where
+        toJSON EventTime{..}
           = object
               (catMaybes
-                 [("height" .=) <$> _acHeight,
-                  ("heightType" .=) <$> _acHeightType,
-                  ("heightUncertainty" .=) <$> _acHeightUncertainty])
-
--- | The device validation response message.
---
--- /See:/ 'pawsVerifyDeviceResponse' smart constructor.
-data PawsVerifyDeviceResponse = PawsVerifyDeviceResponse
-    { _pvdrDeviceValidities :: !(Maybe [DeviceValidity])
-    , _pvdrKind             :: !Text
-    , _pvdrVersion          :: !(Maybe Text)
-    , _pvdrType             :: !(Maybe Text)
-    , _pvdrDatabaseChange   :: !(Maybe DBUpdateSpec)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PawsVerifyDeviceResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pvdrDeviceValidities'
---
--- * 'pvdrKind'
---
--- * 'pvdrVersion'
---
--- * 'pvdrType'
---
--- * 'pvdrDatabaseChange'
-pawsVerifyDeviceResponse
-    :: PawsVerifyDeviceResponse
-pawsVerifyDeviceResponse =
-    PawsVerifyDeviceResponse
-    { _pvdrDeviceValidities = Nothing
-    , _pvdrKind = "spectrum#pawsVerifyDeviceResponse"
-    , _pvdrVersion = Nothing
-    , _pvdrType = Nothing
-    , _pvdrDatabaseChange = Nothing
-    }
-
--- | A device validities list is required in the device validation response
--- to report whether each slave device listed in a previous device
--- validation request is valid. The number of entries must match the number
--- of device descriptors listed in the previous device validation request.
-pvdrDeviceValidities :: Lens' PawsVerifyDeviceResponse [DeviceValidity]
-pvdrDeviceValidities
-  = lens _pvdrDeviceValidities
-      (\ s a -> s{_pvdrDeviceValidities = a})
-      . _Default
-      . _Coerce
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"spectrum#pawsVerifyDeviceResponse\".
-pvdrKind :: Lens' PawsVerifyDeviceResponse Text
-pvdrKind = lens _pvdrKind (\ s a -> s{_pvdrKind = a})
-
--- | The PAWS version. Must be exactly 1.0. Required field.
-pvdrVersion :: Lens' PawsVerifyDeviceResponse (Maybe Text)
-pvdrVersion
-  = lens _pvdrVersion (\ s a -> s{_pvdrVersion = a})
-
--- | The message type (e.g., INIT_REQ, AVAIL_SPECTRUM_REQ, ...). Required
--- field.
-pvdrType :: Lens' PawsVerifyDeviceResponse (Maybe Text)
-pvdrType = lens _pvdrType (\ s a -> s{_pvdrType = a})
-
--- | A database may include the databaseChange parameter to notify a device
--- of a change to its database URI, providing one or more alternate
--- database URIs. The device should use this information to update its list
--- of pre-configured databases by (only) replacing its entry for the
--- responding database with the list of alternate URIs.
-pvdrDatabaseChange :: Lens' PawsVerifyDeviceResponse (Maybe DBUpdateSpec)
-pvdrDatabaseChange
-  = lens _pvdrDatabaseChange
-      (\ s a -> s{_pvdrDatabaseChange = a})
-
-instance FromJSON PawsVerifyDeviceResponse where
-        parseJSON
-          = withObject "PawsVerifyDeviceResponse"
-              (\ o ->
-                 PawsVerifyDeviceResponse <$>
-                   (o .:? "deviceValidities" .!= mempty) <*>
-                     (o .:? "kind" .!=
-                        "spectrum#pawsVerifyDeviceResponse")
-                     <*> (o .:? "version")
-                     <*> (o .:? "type")
-                     <*> (o .:? "databaseChange"))
-
-instance ToJSON PawsVerifyDeviceResponse where
-        toJSON PawsVerifyDeviceResponse{..}
-          = object
-              (catMaybes
-                 [("deviceValidities" .=) <$> _pvdrDeviceValidities,
-                  Just ("kind" .= _pvdrKind),
-                  ("version" .=) <$> _pvdrVersion,
-                  ("type" .=) <$> _pvdrType,
-                  ("databaseChange" .=) <$> _pvdrDatabaseChange])
+                 [("startTime" .=) <$> _etStartTime,
+                  ("stopTime" .=) <$> _etStopTime])
 
 -- | The request message for the available spectrum query protocol which must
 -- include the device\'s geolocation.
@@ -1218,55 +1109,164 @@ instance ToJSON PawsGetSpectrumRequest where
                   ("capabilities" .=) <$> _pgsrCapabilities,
                   ("deviceDesc" .=) <$> _pgsrDeviceDesc])
 
--- | The start and stop times of an event. This is used to indicate the time
--- period for which a spectrum profile is valid. Both times are expressed
--- using the format, YYYY-MM-DDThh:mm:ssZ, as defined in RFC3339. The times
--- must be expressed using UTC.
+-- | Antenna characteristics provide additional information, such as the
+-- antenna height, antenna type, etc. Whether antenna characteristics must
+-- be provided in a request depends on the device type and regulatory
+-- domain.
 --
--- /See:/ 'eventTime' smart constructor.
-data EventTime = EventTime
-    { _etStartTime :: !(Maybe Text)
-    , _etStopTime  :: !(Maybe Text)
+-- /See:/ 'antennaCharacteristics' smart constructor.
+data AntennaCharacteristics = AntennaCharacteristics
+    { _acHeight            :: !(Maybe Double)
+    , _acHeightType        :: !(Maybe Text)
+    , _acHeightUncertainty :: !(Maybe Double)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EventTime' with the minimum fields required to make a request.
+-- | Creates a value of 'AntennaCharacteristics' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'etStartTime'
+-- * 'acHeight'
 --
--- * 'etStopTime'
-eventTime
-    :: EventTime
-eventTime =
-    EventTime
-    { _etStartTime = Nothing
-    , _etStopTime = Nothing
+-- * 'acHeightType'
+--
+-- * 'acHeightUncertainty'
+antennaCharacteristics
+    :: AntennaCharacteristics
+antennaCharacteristics =
+    AntennaCharacteristics
+    { _acHeight = Nothing
+    , _acHeightType = Nothing
+    , _acHeightUncertainty = Nothing
     }
 
--- | The inclusive start of the event. It will be present.
-etStartTime :: Lens' EventTime (Maybe Text)
-etStartTime
-  = lens _etStartTime (\ s a -> s{_etStartTime = a})
+-- | The antenna height in meters. Whether the antenna height is required
+-- depends on the device type and the regulatory domain. Note that the
+-- height may be negative.
+acHeight :: Lens' AntennaCharacteristics (Maybe Double)
+acHeight = lens _acHeight (\ s a -> s{_acHeight = a})
 
--- | The exclusive end of the event. It will be present.
-etStopTime :: Lens' EventTime (Maybe Text)
-etStopTime
-  = lens _etStopTime (\ s a -> s{_etStopTime = a})
+-- | If the height is required, then the height type (AGL for above ground
+-- level or AMSL for above mean sea level) is also required. The default is
+-- AGL.
+acHeightType :: Lens' AntennaCharacteristics (Maybe Text)
+acHeightType
+  = lens _acHeightType (\ s a -> s{_acHeightType = a})
 
-instance FromJSON EventTime where
+-- | The height uncertainty in meters. Whether this is required depends on
+-- the regulatory domain.
+acHeightUncertainty :: Lens' AntennaCharacteristics (Maybe Double)
+acHeightUncertainty
+  = lens _acHeightUncertainty
+      (\ s a -> s{_acHeightUncertainty = a})
+
+instance FromJSON AntennaCharacteristics where
         parseJSON
-          = withObject "EventTime"
+          = withObject "AntennaCharacteristics"
               (\ o ->
-                 EventTime <$>
-                   (o .:? "startTime") <*> (o .:? "stopTime"))
+                 AntennaCharacteristics <$>
+                   (o .:? "height") <*> (o .:? "heightType") <*>
+                     (o .:? "heightUncertainty"))
 
-instance ToJSON EventTime where
-        toJSON EventTime{..}
+instance ToJSON AntennaCharacteristics where
+        toJSON AntennaCharacteristics{..}
           = object
               (catMaybes
-                 [("startTime" .=) <$> _etStartTime,
-                  ("stopTime" .=) <$> _etStopTime])
+                 [("height" .=) <$> _acHeight,
+                  ("heightType" .=) <$> _acHeightType,
+                  ("heightUncertainty" .=) <$> _acHeightUncertainty])
+
+-- | The device validation response message.
+--
+-- /See:/ 'pawsVerifyDeviceResponse' smart constructor.
+data PawsVerifyDeviceResponse = PawsVerifyDeviceResponse
+    { _pvdrDeviceValidities :: !(Maybe [DeviceValidity])
+    , _pvdrKind             :: !Text
+    , _pvdrVersion          :: !(Maybe Text)
+    , _pvdrType             :: !(Maybe Text)
+    , _pvdrDatabaseChange   :: !(Maybe DBUpdateSpec)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PawsVerifyDeviceResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pvdrDeviceValidities'
+--
+-- * 'pvdrKind'
+--
+-- * 'pvdrVersion'
+--
+-- * 'pvdrType'
+--
+-- * 'pvdrDatabaseChange'
+pawsVerifyDeviceResponse
+    :: PawsVerifyDeviceResponse
+pawsVerifyDeviceResponse =
+    PawsVerifyDeviceResponse
+    { _pvdrDeviceValidities = Nothing
+    , _pvdrKind = "spectrum#pawsVerifyDeviceResponse"
+    , _pvdrVersion = Nothing
+    , _pvdrType = Nothing
+    , _pvdrDatabaseChange = Nothing
+    }
+
+-- | A device validities list is required in the device validation response
+-- to report whether each slave device listed in a previous device
+-- validation request is valid. The number of entries must match the number
+-- of device descriptors listed in the previous device validation request.
+pvdrDeviceValidities :: Lens' PawsVerifyDeviceResponse [DeviceValidity]
+pvdrDeviceValidities
+  = lens _pvdrDeviceValidities
+      (\ s a -> s{_pvdrDeviceValidities = a})
+      . _Default
+      . _Coerce
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"spectrum#pawsVerifyDeviceResponse\".
+pvdrKind :: Lens' PawsVerifyDeviceResponse Text
+pvdrKind = lens _pvdrKind (\ s a -> s{_pvdrKind = a})
+
+-- | The PAWS version. Must be exactly 1.0. Required field.
+pvdrVersion :: Lens' PawsVerifyDeviceResponse (Maybe Text)
+pvdrVersion
+  = lens _pvdrVersion (\ s a -> s{_pvdrVersion = a})
+
+-- | The message type (e.g., INIT_REQ, AVAIL_SPECTRUM_REQ, ...). Required
+-- field.
+pvdrType :: Lens' PawsVerifyDeviceResponse (Maybe Text)
+pvdrType = lens _pvdrType (\ s a -> s{_pvdrType = a})
+
+-- | A database may include the databaseChange parameter to notify a device
+-- of a change to its database URI, providing one or more alternate
+-- database URIs. The device should use this information to update its list
+-- of pre-configured databases by (only) replacing its entry for the
+-- responding database with the list of alternate URIs.
+pvdrDatabaseChange :: Lens' PawsVerifyDeviceResponse (Maybe DBUpdateSpec)
+pvdrDatabaseChange
+  = lens _pvdrDatabaseChange
+      (\ s a -> s{_pvdrDatabaseChange = a})
+
+instance FromJSON PawsVerifyDeviceResponse where
+        parseJSON
+          = withObject "PawsVerifyDeviceResponse"
+              (\ o ->
+                 PawsVerifyDeviceResponse <$>
+                   (o .:? "deviceValidities" .!= mempty) <*>
+                     (o .:? "kind" .!=
+                        "spectrum#pawsVerifyDeviceResponse")
+                     <*> (o .:? "version")
+                     <*> (o .:? "type")
+                     <*> (o .:? "databaseChange"))
+
+instance ToJSON PawsVerifyDeviceResponse where
+        toJSON PawsVerifyDeviceResponse{..}
+          = object
+              (catMaybes
+                 [("deviceValidities" .=) <$> _pvdrDeviceValidities,
+                  Just ("kind" .= _pvdrKind),
+                  ("version" .=) <$> _pvdrVersion,
+                  ("type" .=) <$> _pvdrType,
+                  ("databaseChange" .=) <$> _pvdrDatabaseChange])
 
 -- | The structure used to represent a street address.
 --
@@ -1552,6 +1552,68 @@ instance ToJSON PawsGetSpectrumBatchResponse where
                   ("deviceDesc" .=) <$> _pDeviceDesc,
                   ("maxTotalBwHz" .=) <$> _pMaxTotalBwHz])
 
+-- | The device validity element describes whether a particular device is
+-- valid to operate in the regulatory domain.
+--
+-- /See:/ 'deviceValidity' smart constructor.
+data DeviceValidity = DeviceValidity
+    { _dvIsValid    :: !(Maybe Bool)
+    , _dvReason     :: !(Maybe Text)
+    , _dvDeviceDesc :: !(Maybe DeviceDescriptor)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DeviceValidity' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dvIsValid'
+--
+-- * 'dvReason'
+--
+-- * 'dvDeviceDesc'
+deviceValidity
+    :: DeviceValidity
+deviceValidity =
+    DeviceValidity
+    { _dvIsValid = Nothing
+    , _dvReason = Nothing
+    , _dvDeviceDesc = Nothing
+    }
+
+-- | The validity status: true if the device is valid for operation, false
+-- otherwise. It will always be present.
+dvIsValid :: Lens' DeviceValidity (Maybe Bool)
+dvIsValid
+  = lens _dvIsValid (\ s a -> s{_dvIsValid = a})
+
+-- | If the device identifier is not valid, the database may include a
+-- reason. The reason may be in any language. The length of the value
+-- should not exceed 128 characters.
+dvReason :: Lens' DeviceValidity (Maybe Text)
+dvReason = lens _dvReason (\ s a -> s{_dvReason = a})
+
+-- | The descriptor of the device for which the validity check was requested.
+-- It will always be present.
+dvDeviceDesc :: Lens' DeviceValidity (Maybe DeviceDescriptor)
+dvDeviceDesc
+  = lens _dvDeviceDesc (\ s a -> s{_dvDeviceDesc = a})
+
+instance FromJSON DeviceValidity where
+        parseJSON
+          = withObject "DeviceValidity"
+              (\ o ->
+                 DeviceValidity <$>
+                   (o .:? "isValid") <*> (o .:? "reason") <*>
+                     (o .:? "deviceDesc"))
+
+instance ToJSON DeviceValidity where
+        toJSON DeviceValidity{..}
+          = object
+              (catMaybes
+                 [("isValid" .=) <$> _dvIsValid,
+                  ("reason" .=) <$> _dvReason,
+                  ("deviceDesc" .=) <$> _dvDeviceDesc])
+
 -- | A \"point\" with uncertainty is represented using the Ellipse shape.
 --
 -- /See:/ 'geoLocationEllipse' smart constructor.
@@ -1633,68 +1695,6 @@ instance ToJSON GeoLocationEllipse where
                   ("center" .=) <$> _gleCenter,
                   ("orientation" .=) <$> _gleOrientation,
                   ("semiMinorAxis" .=) <$> _gleSemiMinorAxis])
-
--- | The device validity element describes whether a particular device is
--- valid to operate in the regulatory domain.
---
--- /See:/ 'deviceValidity' smart constructor.
-data DeviceValidity = DeviceValidity
-    { _dvIsValid    :: !(Maybe Bool)
-    , _dvReason     :: !(Maybe Text)
-    , _dvDeviceDesc :: !(Maybe DeviceDescriptor)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'DeviceValidity' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'dvIsValid'
---
--- * 'dvReason'
---
--- * 'dvDeviceDesc'
-deviceValidity
-    :: DeviceValidity
-deviceValidity =
-    DeviceValidity
-    { _dvIsValid = Nothing
-    , _dvReason = Nothing
-    , _dvDeviceDesc = Nothing
-    }
-
--- | The validity status: true if the device is valid for operation, false
--- otherwise. It will always be present.
-dvIsValid :: Lens' DeviceValidity (Maybe Bool)
-dvIsValid
-  = lens _dvIsValid (\ s a -> s{_dvIsValid = a})
-
--- | If the device identifier is not valid, the database may include a
--- reason. The reason may be in any language. The length of the value
--- should not exceed 128 characters.
-dvReason :: Lens' DeviceValidity (Maybe Text)
-dvReason = lens _dvReason (\ s a -> s{_dvReason = a})
-
--- | The descriptor of the device for which the validity check was requested.
--- It will always be present.
-dvDeviceDesc :: Lens' DeviceValidity (Maybe DeviceDescriptor)
-dvDeviceDesc
-  = lens _dvDeviceDesc (\ s a -> s{_dvDeviceDesc = a})
-
-instance FromJSON DeviceValidity where
-        parseJSON
-          = withObject "DeviceValidity"
-              (\ o ->
-                 DeviceValidity <$>
-                   (o .:? "isValid") <*> (o .:? "reason") <*>
-                     (o .:? "deviceDesc"))
-
-instance ToJSON DeviceValidity where
-        toJSON DeviceValidity{..}
-          = object
-              (catMaybes
-                 [("isValid" .=) <$> _dvIsValid,
-                  ("reason" .=) <$> _dvReason,
-                  ("deviceDesc" .=) <$> _dvDeviceDesc])
 
 -- | This contains parameters for the ruleset of a regulatory domain that is
 -- communicated using the initialization and available-spectrum processes.
@@ -1797,137 +1797,77 @@ instance ToJSON RulesetInfo where
                   ("maxLocationChange" .=) <$> _riMaxLocationChange,
                   ("authority" .=) <$> _riAuthority])
 
--- | An empty response to the notification.
---
--- /See:/ 'pawsNotifySpectrumUseResponse' smart constructor.
-data PawsNotifySpectrumUseResponse = PawsNotifySpectrumUseResponse
-    { _pawKind    :: !Text
-    , _pawVersion :: !(Maybe Text)
-    , _pawType    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PawsNotifySpectrumUseResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pawKind'
---
--- * 'pawVersion'
---
--- * 'pawType'
-pawsNotifySpectrumUseResponse
-    :: PawsNotifySpectrumUseResponse
-pawsNotifySpectrumUseResponse =
-    PawsNotifySpectrumUseResponse
-    { _pawKind = "spectrum#pawsNotifySpectrumUseResponse"
-    , _pawVersion = Nothing
-    , _pawType = Nothing
-    }
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"spectrum#pawsNotifySpectrumUseResponse\".
-pawKind :: Lens' PawsNotifySpectrumUseResponse Text
-pawKind = lens _pawKind (\ s a -> s{_pawKind = a})
-
--- | The PAWS version. Must be exactly 1.0. Required field.
-pawVersion :: Lens' PawsNotifySpectrumUseResponse (Maybe Text)
-pawVersion
-  = lens _pawVersion (\ s a -> s{_pawVersion = a})
-
--- | The message type (e.g., INIT_REQ, AVAIL_SPECTRUM_REQ, ...). Required
--- field.
-pawType :: Lens' PawsNotifySpectrumUseResponse (Maybe Text)
-pawType = lens _pawType (\ s a -> s{_pawType = a})
-
-instance FromJSON PawsNotifySpectrumUseResponse where
-        parseJSON
-          = withObject "PawsNotifySpectrumUseResponse"
-              (\ o ->
-                 PawsNotifySpectrumUseResponse <$>
-                   (o .:? "kind" .!=
-                      "spectrum#pawsNotifySpectrumUseResponse")
-                     <*> (o .:? "version")
-                     <*> (o .:? "type"))
-
-instance ToJSON PawsNotifySpectrumUseResponse where
-        toJSON PawsNotifySpectrumUseResponse{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _pawKind),
-                  ("version" .=) <$> _pawVersion,
-                  ("type" .=) <$> _pawType])
-
 -- | The registration request message contains the required registration
 -- parameters.
 --
 -- /See:/ 'pawsRegisterRequest' smart constructor.
 data PawsRegisterRequest = PawsRegisterRequest
-    { _prrrAntenna     :: !(Maybe AntennaCharacteristics)
-    , _prrrLocation    :: !(Maybe GeoLocation)
-    , _prrrDeviceOwner :: !(Maybe DeviceOwner)
-    , _prrrVersion     :: !(Maybe Text)
-    , _prrrType        :: !(Maybe Text)
-    , _prrrDeviceDesc  :: !(Maybe DeviceDescriptor)
+    { _pawAntenna     :: !(Maybe AntennaCharacteristics)
+    , _pawLocation    :: !(Maybe GeoLocation)
+    , _pawDeviceOwner :: !(Maybe DeviceOwner)
+    , _pawVersion     :: !(Maybe Text)
+    , _pawType        :: !(Maybe Text)
+    , _pawDeviceDesc  :: !(Maybe DeviceDescriptor)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsRegisterRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'prrrAntenna'
+-- * 'pawAntenna'
 --
--- * 'prrrLocation'
+-- * 'pawLocation'
 --
--- * 'prrrDeviceOwner'
+-- * 'pawDeviceOwner'
 --
--- * 'prrrVersion'
+-- * 'pawVersion'
 --
--- * 'prrrType'
+-- * 'pawType'
 --
--- * 'prrrDeviceDesc'
+-- * 'pawDeviceDesc'
 pawsRegisterRequest
     :: PawsRegisterRequest
 pawsRegisterRequest =
     PawsRegisterRequest
-    { _prrrAntenna = Nothing
-    , _prrrLocation = Nothing
-    , _prrrDeviceOwner = Nothing
-    , _prrrVersion = Nothing
-    , _prrrType = Nothing
-    , _prrrDeviceDesc = Nothing
+    { _pawAntenna = Nothing
+    , _pawLocation = Nothing
+    , _pawDeviceOwner = Nothing
+    , _pawVersion = Nothing
+    , _pawType = Nothing
+    , _pawDeviceDesc = Nothing
     }
 
 -- | Antenna characteristics, including its height and height type.
-prrrAntenna :: Lens' PawsRegisterRequest (Maybe AntennaCharacteristics)
-prrrAntenna
-  = lens _prrrAntenna (\ s a -> s{_prrrAntenna = a})
+pawAntenna :: Lens' PawsRegisterRequest (Maybe AntennaCharacteristics)
+pawAntenna
+  = lens _pawAntenna (\ s a -> s{_pawAntenna = a})
 
 -- | A device\'s geolocation is required.
-prrrLocation :: Lens' PawsRegisterRequest (Maybe GeoLocation)
-prrrLocation
-  = lens _prrrLocation (\ s a -> s{_prrrLocation = a})
+pawLocation :: Lens' PawsRegisterRequest (Maybe GeoLocation)
+pawLocation
+  = lens _pawLocation (\ s a -> s{_pawLocation = a})
 
 -- | Device owner information is required.
-prrrDeviceOwner :: Lens' PawsRegisterRequest (Maybe DeviceOwner)
-prrrDeviceOwner
-  = lens _prrrDeviceOwner
-      (\ s a -> s{_prrrDeviceOwner = a})
+pawDeviceOwner :: Lens' PawsRegisterRequest (Maybe DeviceOwner)
+pawDeviceOwner
+  = lens _pawDeviceOwner
+      (\ s a -> s{_pawDeviceOwner = a})
 
 -- | The PAWS version. Must be exactly 1.0. Required field.
-prrrVersion :: Lens' PawsRegisterRequest (Maybe Text)
-prrrVersion
-  = lens _prrrVersion (\ s a -> s{_prrrVersion = a})
+pawVersion :: Lens' PawsRegisterRequest (Maybe Text)
+pawVersion
+  = lens _pawVersion (\ s a -> s{_pawVersion = a})
 
 -- | The message type (e.g., INIT_REQ, AVAIL_SPECTRUM_REQ, ...). Required
 -- field.
-prrrType :: Lens' PawsRegisterRequest (Maybe Text)
-prrrType = lens _prrrType (\ s a -> s{_prrrType = a})
+pawType :: Lens' PawsRegisterRequest (Maybe Text)
+pawType = lens _pawType (\ s a -> s{_pawType = a})
 
 -- | A DeviceDescriptor is required.
-prrrDeviceDesc :: Lens' PawsRegisterRequest (Maybe DeviceDescriptor)
-prrrDeviceDesc
-  = lens _prrrDeviceDesc
-      (\ s a -> s{_prrrDeviceDesc = a})
+pawDeviceDesc :: Lens' PawsRegisterRequest (Maybe DeviceDescriptor)
+pawDeviceDesc
+  = lens _pawDeviceDesc
+      (\ s a -> s{_pawDeviceDesc = a})
 
 instance FromJSON PawsRegisterRequest where
         parseJSON
@@ -1944,12 +1884,75 @@ instance ToJSON PawsRegisterRequest where
         toJSON PawsRegisterRequest{..}
           = object
               (catMaybes
-                 [("antenna" .=) <$> _prrrAntenna,
-                  ("location" .=) <$> _prrrLocation,
-                  ("deviceOwner" .=) <$> _prrrDeviceOwner,
-                  ("version" .=) <$> _prrrVersion,
-                  ("type" .=) <$> _prrrType,
-                  ("deviceDesc" .=) <$> _prrrDeviceDesc])
+                 [("antenna" .=) <$> _pawAntenna,
+                  ("location" .=) <$> _pawLocation,
+                  ("deviceOwner" .=) <$> _pawDeviceOwner,
+                  ("version" .=) <$> _pawVersion,
+                  ("type" .=) <$> _pawType,
+                  ("deviceDesc" .=) <$> _pawDeviceDesc])
+
+-- | An empty response to the notification.
+--
+-- /See:/ 'pawsNotifySpectrumUseResponse' smart constructor.
+data PawsNotifySpectrumUseResponse = PawsNotifySpectrumUseResponse
+    { _pnsurnKind    :: !Text
+    , _pnsurnVersion :: !(Maybe Text)
+    , _pnsurnType    :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PawsNotifySpectrumUseResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pnsurnKind'
+--
+-- * 'pnsurnVersion'
+--
+-- * 'pnsurnType'
+pawsNotifySpectrumUseResponse
+    :: PawsNotifySpectrumUseResponse
+pawsNotifySpectrumUseResponse =
+    PawsNotifySpectrumUseResponse
+    { _pnsurnKind = "spectrum#pawsNotifySpectrumUseResponse"
+    , _pnsurnVersion = Nothing
+    , _pnsurnType = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"spectrum#pawsNotifySpectrumUseResponse\".
+pnsurnKind :: Lens' PawsNotifySpectrumUseResponse Text
+pnsurnKind
+  = lens _pnsurnKind (\ s a -> s{_pnsurnKind = a})
+
+-- | The PAWS version. Must be exactly 1.0. Required field.
+pnsurnVersion :: Lens' PawsNotifySpectrumUseResponse (Maybe Text)
+pnsurnVersion
+  = lens _pnsurnVersion
+      (\ s a -> s{_pnsurnVersion = a})
+
+-- | The message type (e.g., INIT_REQ, AVAIL_SPECTRUM_REQ, ...). Required
+-- field.
+pnsurnType :: Lens' PawsNotifySpectrumUseResponse (Maybe Text)
+pnsurnType
+  = lens _pnsurnType (\ s a -> s{_pnsurnType = a})
+
+instance FromJSON PawsNotifySpectrumUseResponse where
+        parseJSON
+          = withObject "PawsNotifySpectrumUseResponse"
+              (\ o ->
+                 PawsNotifySpectrumUseResponse <$>
+                   (o .:? "kind" .!=
+                      "spectrum#pawsNotifySpectrumUseResponse")
+                     <*> (o .:? "version")
+                     <*> (o .:? "type"))
+
+instance ToJSON PawsNotifySpectrumUseResponse where
+        toJSON PawsNotifySpectrumUseResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _pnsurnKind),
+                  ("version" .=) <$> _pnsurnVersion,
+                  ("type" .=) <$> _pnsurnType])
 
 -- | This message contains the name and URI of a database.
 --
@@ -2197,6 +2200,202 @@ instance ToJSON FrequencyRange where
                   ("channelId" .=) <$> _frChannelId,
                   ("startHz" .=) <$> _frStartHz])
 
+-- | The response message for the available spectrum query which contains a
+-- schedule of available spectrum for the device.
+--
+-- /See:/ 'pawsGetSpectrumResponse' smart constructor.
+data PawsGetSpectrumResponse = PawsGetSpectrumResponse
+    { _pgsrgNeedsSpectrumReport :: !(Maybe Bool)
+    , _pgsrgSpectrumSchedules   :: !(Maybe [SpectrumSchedule])
+    , _pgsrgKind                :: !Text
+    , _pgsrgMaxContiguousBwHz   :: !(Maybe Double)
+    , _pgsrgVersion             :: !(Maybe Text)
+    , _pgsrgRulesetInfo         :: !(Maybe RulesetInfo)
+    , _pgsrgType                :: !(Maybe Text)
+    , _pgsrgDatabaseChange      :: !(Maybe DBUpdateSpec)
+    , _pgsrgTimestamp           :: !(Maybe Text)
+    , _pgsrgDeviceDesc          :: !(Maybe DeviceDescriptor)
+    , _pgsrgMaxTotalBwHz        :: !(Maybe Double)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PawsGetSpectrumResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pgsrgNeedsSpectrumReport'
+--
+-- * 'pgsrgSpectrumSchedules'
+--
+-- * 'pgsrgKind'
+--
+-- * 'pgsrgMaxContiguousBwHz'
+--
+-- * 'pgsrgVersion'
+--
+-- * 'pgsrgRulesetInfo'
+--
+-- * 'pgsrgType'
+--
+-- * 'pgsrgDatabaseChange'
+--
+-- * 'pgsrgTimestamp'
+--
+-- * 'pgsrgDeviceDesc'
+--
+-- * 'pgsrgMaxTotalBwHz'
+pawsGetSpectrumResponse
+    :: PawsGetSpectrumResponse
+pawsGetSpectrumResponse =
+    PawsGetSpectrumResponse
+    { _pgsrgNeedsSpectrumReport = Nothing
+    , _pgsrgSpectrumSchedules = Nothing
+    , _pgsrgKind = "spectrum#pawsGetSpectrumResponse"
+    , _pgsrgMaxContiguousBwHz = Nothing
+    , _pgsrgVersion = Nothing
+    , _pgsrgRulesetInfo = Nothing
+    , _pgsrgType = Nothing
+    , _pgsrgDatabaseChange = Nothing
+    , _pgsrgTimestamp = Nothing
+    , _pgsrgDeviceDesc = Nothing
+    , _pgsrgMaxTotalBwHz = Nothing
+    }
+
+-- | For regulatory domains that require a spectrum-usage report from
+-- devices, the database must return true for this parameter if the
+-- spectrum schedule list is not empty; otherwise, the database will either
+-- return false or omit this parameter. If this parameter is present and
+-- its value is true, the device must send a spectrum use notify message to
+-- the database; otherwise, the device must not send the notification.
+pgsrgNeedsSpectrumReport :: Lens' PawsGetSpectrumResponse (Maybe Bool)
+pgsrgNeedsSpectrumReport
+  = lens _pgsrgNeedsSpectrumReport
+      (\ s a -> s{_pgsrgNeedsSpectrumReport = a})
+
+-- | The available spectrum response must contain a spectrum schedule list.
+-- The list may be empty if spectrum is not available. The database may
+-- return more than one spectrum schedule to represent future changes to
+-- the available spectrum. How far in advance a schedule may be provided
+-- depends on the applicable regulatory domain.
+pgsrgSpectrumSchedules :: Lens' PawsGetSpectrumResponse [SpectrumSchedule]
+pgsrgSpectrumSchedules
+  = lens _pgsrgSpectrumSchedules
+      (\ s a -> s{_pgsrgSpectrumSchedules = a})
+      . _Default
+      . _Coerce
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"spectrum#pawsGetSpectrumResponse\".
+pgsrgKind :: Lens' PawsGetSpectrumResponse Text
+pgsrgKind
+  = lens _pgsrgKind (\ s a -> s{_pgsrgKind = a})
+
+-- | The database may return a constraint on the allowed maximum contiguous
+-- bandwidth (in Hertz). A regulatory domain may require the database to
+-- return this parameter. When this parameter is present in the response,
+-- the device must apply this constraint to its spectrum-selection logic to
+-- ensure that no single block of spectrum has bandwidth that exceeds this
+-- value.
+pgsrgMaxContiguousBwHz :: Lens' PawsGetSpectrumResponse (Maybe Double)
+pgsrgMaxContiguousBwHz
+  = lens _pgsrgMaxContiguousBwHz
+      (\ s a -> s{_pgsrgMaxContiguousBwHz = a})
+
+-- | The PAWS version. Must be exactly 1.0. Required field.
+pgsrgVersion :: Lens' PawsGetSpectrumResponse (Maybe Text)
+pgsrgVersion
+  = lens _pgsrgVersion (\ s a -> s{_pgsrgVersion = a})
+
+-- | The database should return ruleset information, which identifies the
+-- applicable regulatory authority and ruleset for the available spectrum
+-- response. If included, the device must use the corresponding ruleset to
+-- interpret the response. Values provided in the returned ruleset
+-- information, such as maxLocationChange, take precedence over any
+-- conflicting values provided in the ruleset information returned in a
+-- prior initialization response sent by the database to the device.
+pgsrgRulesetInfo :: Lens' PawsGetSpectrumResponse (Maybe RulesetInfo)
+pgsrgRulesetInfo
+  = lens _pgsrgRulesetInfo
+      (\ s a -> s{_pgsrgRulesetInfo = a})
+
+-- | The message type (e.g., INIT_REQ, AVAIL_SPECTRUM_REQ, ...). Required
+-- field.
+pgsrgType :: Lens' PawsGetSpectrumResponse (Maybe Text)
+pgsrgType
+  = lens _pgsrgType (\ s a -> s{_pgsrgType = a})
+
+-- | A database may include the databaseChange parameter to notify a device
+-- of a change to its database URI, providing one or more alternate
+-- database URIs. The device should use this information to update its list
+-- of pre-configured databases by (only) replacing its entry for the
+-- responding database with the list of alternate URIs.
+pgsrgDatabaseChange :: Lens' PawsGetSpectrumResponse (Maybe DBUpdateSpec)
+pgsrgDatabaseChange
+  = lens _pgsrgDatabaseChange
+      (\ s a -> s{_pgsrgDatabaseChange = a})
+
+-- | The database includes a timestamp of the form YYYY-MM-DDThh:mm:ssZ
+-- (Internet timestamp format per RFC3339) in its available spectrum
+-- response. The timestamp should be used by the device as a reference for
+-- the start and stop times specified in the response spectrum schedules.
+pgsrgTimestamp :: Lens' PawsGetSpectrumResponse (Maybe Text)
+pgsrgTimestamp
+  = lens _pgsrgTimestamp
+      (\ s a -> s{_pgsrgTimestamp = a})
+
+-- | The database must return, in its available spectrum response, the device
+-- descriptor information it received in the master device\'s available
+-- spectrum request.
+pgsrgDeviceDesc :: Lens' PawsGetSpectrumResponse (Maybe DeviceDescriptor)
+pgsrgDeviceDesc
+  = lens _pgsrgDeviceDesc
+      (\ s a -> s{_pgsrgDeviceDesc = a})
+
+-- | The database may return a constraint on the allowed maximum total
+-- bandwidth (in Hertz), which need not be contiguous. A regulatory domain
+-- may require the database to return this parameter. When this parameter
+-- is present in the available spectrum response, the device must apply
+-- this constraint to its spectrum-selection logic to ensure that total
+-- bandwidth does not exceed this value.
+pgsrgMaxTotalBwHz :: Lens' PawsGetSpectrumResponse (Maybe Double)
+pgsrgMaxTotalBwHz
+  = lens _pgsrgMaxTotalBwHz
+      (\ s a -> s{_pgsrgMaxTotalBwHz = a})
+
+instance FromJSON PawsGetSpectrumResponse where
+        parseJSON
+          = withObject "PawsGetSpectrumResponse"
+              (\ o ->
+                 PawsGetSpectrumResponse <$>
+                   (o .:? "needsSpectrumReport") <*>
+                     (o .:? "spectrumSchedules" .!= mempty)
+                     <*>
+                     (o .:? "kind" .!= "spectrum#pawsGetSpectrumResponse")
+                     <*> (o .:? "maxContiguousBwHz")
+                     <*> (o .:? "version")
+                     <*> (o .:? "rulesetInfo")
+                     <*> (o .:? "type")
+                     <*> (o .:? "databaseChange")
+                     <*> (o .:? "timestamp")
+                     <*> (o .:? "deviceDesc")
+                     <*> (o .:? "maxTotalBwHz"))
+
+instance ToJSON PawsGetSpectrumResponse where
+        toJSON PawsGetSpectrumResponse{..}
+          = object
+              (catMaybes
+                 [("needsSpectrumReport" .=) <$>
+                    _pgsrgNeedsSpectrumReport,
+                  ("spectrumSchedules" .=) <$> _pgsrgSpectrumSchedules,
+                  Just ("kind" .= _pgsrgKind),
+                  ("maxContiguousBwHz" .=) <$> _pgsrgMaxContiguousBwHz,
+                  ("version" .=) <$> _pgsrgVersion,
+                  ("rulesetInfo" .=) <$> _pgsrgRulesetInfo,
+                  ("type" .=) <$> _pgsrgType,
+                  ("databaseChange" .=) <$> _pgsrgDatabaseChange,
+                  ("timestamp" .=) <$> _pgsrgTimestamp,
+                  ("deviceDesc" .=) <$> _pgsrgDeviceDesc,
+                  ("maxTotalBwHz" .=) <$> _pgsrgMaxTotalBwHz])
+
 -- | The device validation request message.
 --
 -- /See:/ 'pawsVerifyDeviceRequest' smart constructor.
@@ -2434,202 +2633,6 @@ instance ToJSON DeviceDescriptor where
                   ("etsiEnDeviceCategory" .=) <$>
                     _ddEtsiEnDeviceCategory,
                   ("serialNumber" .=) <$> _ddSerialNumber])
-
--- | The response message for the available spectrum query which contains a
--- schedule of available spectrum for the device.
---
--- /See:/ 'pawsGetSpectrumResponse' smart constructor.
-data PawsGetSpectrumResponse = PawsGetSpectrumResponse
-    { _pgsrgNeedsSpectrumReport :: !(Maybe Bool)
-    , _pgsrgSpectrumSchedules   :: !(Maybe [SpectrumSchedule])
-    , _pgsrgKind                :: !Text
-    , _pgsrgMaxContiguousBwHz   :: !(Maybe Double)
-    , _pgsrgVersion             :: !(Maybe Text)
-    , _pgsrgRulesetInfo         :: !(Maybe RulesetInfo)
-    , _pgsrgType                :: !(Maybe Text)
-    , _pgsrgDatabaseChange      :: !(Maybe DBUpdateSpec)
-    , _pgsrgTimestamp           :: !(Maybe Text)
-    , _pgsrgDeviceDesc          :: !(Maybe DeviceDescriptor)
-    , _pgsrgMaxTotalBwHz        :: !(Maybe Double)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PawsGetSpectrumResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pgsrgNeedsSpectrumReport'
---
--- * 'pgsrgSpectrumSchedules'
---
--- * 'pgsrgKind'
---
--- * 'pgsrgMaxContiguousBwHz'
---
--- * 'pgsrgVersion'
---
--- * 'pgsrgRulesetInfo'
---
--- * 'pgsrgType'
---
--- * 'pgsrgDatabaseChange'
---
--- * 'pgsrgTimestamp'
---
--- * 'pgsrgDeviceDesc'
---
--- * 'pgsrgMaxTotalBwHz'
-pawsGetSpectrumResponse
-    :: PawsGetSpectrumResponse
-pawsGetSpectrumResponse =
-    PawsGetSpectrumResponse
-    { _pgsrgNeedsSpectrumReport = Nothing
-    , _pgsrgSpectrumSchedules = Nothing
-    , _pgsrgKind = "spectrum#pawsGetSpectrumResponse"
-    , _pgsrgMaxContiguousBwHz = Nothing
-    , _pgsrgVersion = Nothing
-    , _pgsrgRulesetInfo = Nothing
-    , _pgsrgType = Nothing
-    , _pgsrgDatabaseChange = Nothing
-    , _pgsrgTimestamp = Nothing
-    , _pgsrgDeviceDesc = Nothing
-    , _pgsrgMaxTotalBwHz = Nothing
-    }
-
--- | For regulatory domains that require a spectrum-usage report from
--- devices, the database must return true for this parameter if the
--- spectrum schedule list is not empty; otherwise, the database will either
--- return false or omit this parameter. If this parameter is present and
--- its value is true, the device must send a spectrum use notify message to
--- the database; otherwise, the device must not send the notification.
-pgsrgNeedsSpectrumReport :: Lens' PawsGetSpectrumResponse (Maybe Bool)
-pgsrgNeedsSpectrumReport
-  = lens _pgsrgNeedsSpectrumReport
-      (\ s a -> s{_pgsrgNeedsSpectrumReport = a})
-
--- | The available spectrum response must contain a spectrum schedule list.
--- The list may be empty if spectrum is not available. The database may
--- return more than one spectrum schedule to represent future changes to
--- the available spectrum. How far in advance a schedule may be provided
--- depends on the applicable regulatory domain.
-pgsrgSpectrumSchedules :: Lens' PawsGetSpectrumResponse [SpectrumSchedule]
-pgsrgSpectrumSchedules
-  = lens _pgsrgSpectrumSchedules
-      (\ s a -> s{_pgsrgSpectrumSchedules = a})
-      . _Default
-      . _Coerce
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"spectrum#pawsGetSpectrumResponse\".
-pgsrgKind :: Lens' PawsGetSpectrumResponse Text
-pgsrgKind
-  = lens _pgsrgKind (\ s a -> s{_pgsrgKind = a})
-
--- | The database may return a constraint on the allowed maximum contiguous
--- bandwidth (in Hertz). A regulatory domain may require the database to
--- return this parameter. When this parameter is present in the response,
--- the device must apply this constraint to its spectrum-selection logic to
--- ensure that no single block of spectrum has bandwidth that exceeds this
--- value.
-pgsrgMaxContiguousBwHz :: Lens' PawsGetSpectrumResponse (Maybe Double)
-pgsrgMaxContiguousBwHz
-  = lens _pgsrgMaxContiguousBwHz
-      (\ s a -> s{_pgsrgMaxContiguousBwHz = a})
-
--- | The PAWS version. Must be exactly 1.0. Required field.
-pgsrgVersion :: Lens' PawsGetSpectrumResponse (Maybe Text)
-pgsrgVersion
-  = lens _pgsrgVersion (\ s a -> s{_pgsrgVersion = a})
-
--- | The database should return ruleset information, which identifies the
--- applicable regulatory authority and ruleset for the available spectrum
--- response. If included, the device must use the corresponding ruleset to
--- interpret the response. Values provided in the returned ruleset
--- information, such as maxLocationChange, take precedence over any
--- conflicting values provided in the ruleset information returned in a
--- prior initialization response sent by the database to the device.
-pgsrgRulesetInfo :: Lens' PawsGetSpectrumResponse (Maybe RulesetInfo)
-pgsrgRulesetInfo
-  = lens _pgsrgRulesetInfo
-      (\ s a -> s{_pgsrgRulesetInfo = a})
-
--- | The message type (e.g., INIT_REQ, AVAIL_SPECTRUM_REQ, ...). Required
--- field.
-pgsrgType :: Lens' PawsGetSpectrumResponse (Maybe Text)
-pgsrgType
-  = lens _pgsrgType (\ s a -> s{_pgsrgType = a})
-
--- | A database may include the databaseChange parameter to notify a device
--- of a change to its database URI, providing one or more alternate
--- database URIs. The device should use this information to update its list
--- of pre-configured databases by (only) replacing its entry for the
--- responding database with the list of alternate URIs.
-pgsrgDatabaseChange :: Lens' PawsGetSpectrumResponse (Maybe DBUpdateSpec)
-pgsrgDatabaseChange
-  = lens _pgsrgDatabaseChange
-      (\ s a -> s{_pgsrgDatabaseChange = a})
-
--- | The database includes a timestamp of the form YYYY-MM-DDThh:mm:ssZ
--- (Internet timestamp format per RFC3339) in its available spectrum
--- response. The timestamp should be used by the device as a reference for
--- the start and stop times specified in the response spectrum schedules.
-pgsrgTimestamp :: Lens' PawsGetSpectrumResponse (Maybe Text)
-pgsrgTimestamp
-  = lens _pgsrgTimestamp
-      (\ s a -> s{_pgsrgTimestamp = a})
-
--- | The database must return, in its available spectrum response, the device
--- descriptor information it received in the master device\'s available
--- spectrum request.
-pgsrgDeviceDesc :: Lens' PawsGetSpectrumResponse (Maybe DeviceDescriptor)
-pgsrgDeviceDesc
-  = lens _pgsrgDeviceDesc
-      (\ s a -> s{_pgsrgDeviceDesc = a})
-
--- | The database may return a constraint on the allowed maximum total
--- bandwidth (in Hertz), which need not be contiguous. A regulatory domain
--- may require the database to return this parameter. When this parameter
--- is present in the available spectrum response, the device must apply
--- this constraint to its spectrum-selection logic to ensure that total
--- bandwidth does not exceed this value.
-pgsrgMaxTotalBwHz :: Lens' PawsGetSpectrumResponse (Maybe Double)
-pgsrgMaxTotalBwHz
-  = lens _pgsrgMaxTotalBwHz
-      (\ s a -> s{_pgsrgMaxTotalBwHz = a})
-
-instance FromJSON PawsGetSpectrumResponse where
-        parseJSON
-          = withObject "PawsGetSpectrumResponse"
-              (\ o ->
-                 PawsGetSpectrumResponse <$>
-                   (o .:? "needsSpectrumReport") <*>
-                     (o .:? "spectrumSchedules" .!= mempty)
-                     <*>
-                     (o .:? "kind" .!= "spectrum#pawsGetSpectrumResponse")
-                     <*> (o .:? "maxContiguousBwHz")
-                     <*> (o .:? "version")
-                     <*> (o .:? "rulesetInfo")
-                     <*> (o .:? "type")
-                     <*> (o .:? "databaseChange")
-                     <*> (o .:? "timestamp")
-                     <*> (o .:? "deviceDesc")
-                     <*> (o .:? "maxTotalBwHz"))
-
-instance ToJSON PawsGetSpectrumResponse where
-        toJSON PawsGetSpectrumResponse{..}
-          = object
-              (catMaybes
-                 [("needsSpectrumReport" .=) <$>
-                    _pgsrgNeedsSpectrumReport,
-                  ("spectrumSchedules" .=) <$> _pgsrgSpectrumSchedules,
-                  Just ("kind" .= _pgsrgKind),
-                  ("maxContiguousBwHz" .=) <$> _pgsrgMaxContiguousBwHz,
-                  ("version" .=) <$> _pgsrgVersion,
-                  ("rulesetInfo" .=) <$> _pgsrgRulesetInfo,
-                  ("type" .=) <$> _pgsrgType,
-                  ("databaseChange" .=) <$> _pgsrgDatabaseChange,
-                  ("timestamp" .=) <$> _pgsrgTimestamp,
-                  ("deviceDesc" .=) <$> _pgsrgDeviceDesc,
-                  ("maxTotalBwHz" .=) <$> _pgsrgMaxTotalBwHz])
 
 -- | The initialization request message allows the master device to initiate
 -- exchange of capabilities with the database.

@@ -71,7 +71,7 @@ type ProjectsUpdateResource =
                                QueryParam "key" Key :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
-                                     ReqBody '[JSON] Project :>
+                                     ReqBody '[OctetStream] Project :>
                                        Put '[JSON] Project
 
 -- | Updates the attributes of the project identified by the specified

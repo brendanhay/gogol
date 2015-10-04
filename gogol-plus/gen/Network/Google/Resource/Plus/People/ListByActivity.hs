@@ -53,8 +53,7 @@ type PeopleListByActivityResource =
      "activities" :>
        Capture "activityId" Text :>
          "people" :>
-           Capture "collection"
-             PlusPeopleListByActivityCollection
+           Capture "collection" PeopleListByActivityCollection
              :>
              QueryParam "pageToken" Text :>
                QueryParam "maxResults" Word32 :>
@@ -75,7 +74,7 @@ data PeopleListByActivity' = PeopleListByActivity'
     , _plbaPrettyPrint :: !Bool
     , _plbaUserIP      :: !(Maybe Text)
     , _plbaActivityId  :: !Text
-    , _plbaCollection  :: !PlusPeopleListByActivityCollection
+    , _plbaCollection  :: !PeopleListByActivityCollection
     , _plbaKey         :: !(Maybe Key)
     , _plbaPageToken   :: !(Maybe Text)
     , _plbaOAuthToken  :: !(Maybe OAuthToken)
@@ -108,7 +107,7 @@ data PeopleListByActivity' = PeopleListByActivity'
 -- * 'plbaFields'
 peopleListByActivity'
     :: Text -- ^ 'activityId'
-    -> PlusPeopleListByActivityCollection -- ^ 'collection'
+    -> PeopleListByActivityCollection -- ^ 'collection'
     -> PeopleListByActivity'
 peopleListByActivity' pPlbaActivityId_ pPlbaCollection_ =
     PeopleListByActivity'
@@ -151,7 +150,7 @@ plbaActivityId
       (\ s a -> s{_plbaActivityId = a})
 
 -- | The collection of people to list.
-plbaCollection :: Lens' PeopleListByActivity' PlusPeopleListByActivityCollection
+plbaCollection :: Lens' PeopleListByActivity' PeopleListByActivityCollection
 plbaCollection
   = lens _plbaCollection
       (\ s a -> s{_plbaCollection = a})

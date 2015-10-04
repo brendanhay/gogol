@@ -64,7 +64,7 @@ type InstancesAddAccessConfigResource =
                            QueryParam "key" Key :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
-                                 ReqBody '[JSON] AccessConfig :>
+                                 ReqBody '[OctetStream] AccessConfig :>
                                    Post '[JSON] Operation
 
 -- | Adds an access config to an instance\'s network interface.

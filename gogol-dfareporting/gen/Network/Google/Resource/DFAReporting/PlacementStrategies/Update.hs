@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.PlacementStrategies.Update
     , psuQuotaUser
     , psuPrettyPrint
     , psuUserIP
-    , psuProfileId
+    , psuProFileId
     , psuPayload
     , psuKey
     , psuOAuthToken
@@ -57,7 +57,7 @@ type PlacementStrategiesUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] PlacementStrategy :>
+                         ReqBody '[OctetStream] PlacementStrategy :>
                            Put '[JSON] PlacementStrategy
 
 -- | Updates an existing placement strategy.
@@ -67,7 +67,7 @@ data PlacementStrategiesUpdate' = PlacementStrategiesUpdate'
     { _psuQuotaUser   :: !(Maybe Text)
     , _psuPrettyPrint :: !Bool
     , _psuUserIP      :: !(Maybe Text)
-    , _psuProfileId   :: !Int64
+    , _psuProFileId   :: !Int64
     , _psuPayload     :: !PlacementStrategy
     , _psuKey         :: !(Maybe Key)
     , _psuOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data PlacementStrategiesUpdate' = PlacementStrategiesUpdate'
 --
 -- * 'psuUserIP'
 --
--- * 'psuProfileId'
+-- * 'psuProFileId'
 --
 -- * 'psuPayload'
 --
@@ -97,12 +97,12 @@ placementStrategiesUpdate'
     :: Int64 -- ^ 'profileId'
     -> PlacementStrategy -- ^ 'payload'
     -> PlacementStrategiesUpdate'
-placementStrategiesUpdate' pPsuProfileId_ pPsuPayload_ =
+placementStrategiesUpdate' pPsuProFileId_ pPsuPayload_ =
     PlacementStrategiesUpdate'
     { _psuQuotaUser = Nothing
     , _psuPrettyPrint = True
     , _psuUserIP = Nothing
-    , _psuProfileId = pPsuProfileId_
+    , _psuProFileId = pPsuProFileId_
     , _psuPayload = pPsuPayload_
     , _psuKey = Nothing
     , _psuOAuthToken = Nothing
@@ -129,9 +129,9 @@ psuUserIP
   = lens _psuUserIP (\ s a -> s{_psuUserIP = a})
 
 -- | User profile ID associated with this request.
-psuProfileId :: Lens' PlacementStrategiesUpdate' Int64
-psuProfileId
-  = lens _psuProfileId (\ s a -> s{_psuProfileId = a})
+psuProFileId :: Lens' PlacementStrategiesUpdate' Int64
+psuProFileId
+  = lens _psuProFileId (\ s a -> s{_psuProFileId = a})
 
 -- | Multipart request metadata.
 psuPayload :: Lens' PlacementStrategiesUpdate' PlacementStrategy
@@ -165,7 +165,7 @@ instance GoogleRequest PlacementStrategiesUpdate'
              PlacementStrategy
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementStrategiesUpdate'{..}
-          = go _psuProfileId _psuQuotaUser
+          = go _psuProFileId _psuQuotaUser
               (Just _psuPrettyPrint)
               _psuUserIP
               _psuFields

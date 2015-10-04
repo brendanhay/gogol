@@ -75,7 +75,7 @@ type ProjectsLogsSinksUpdateResource =
                                        QueryParam "key" Key :>
                                          QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
-                                             ReqBody '[JSON] LogSink :>
+                                             ReqBody '[OctetStream] LogSink :>
                                                Put '[JSON] LogSink
 
 -- | Updates a log sink. If the sink does not exist, it is created.

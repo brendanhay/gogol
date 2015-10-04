@@ -64,7 +64,7 @@ type ManagementUploadsDeleteUploadDataResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON]
+                                   ReqBody '[OctetStream]
                                      AnalyticsDataimportDeleteUploadDataRequest
                                      :> Post '[JSON] ()
 

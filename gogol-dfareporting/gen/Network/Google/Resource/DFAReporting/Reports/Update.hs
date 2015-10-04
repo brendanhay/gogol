@@ -35,7 +35,7 @@ module Network.Google.Resource.DFAReporting.Reports.Update
     , ruPrettyPrint
     , ruUserIP
     , ruReportId
-    , ruProfileId
+    , ruProFileId
     , ruPayload
     , ruKey
     , ruOAuthToken
@@ -59,7 +59,7 @@ type ReportsUpdateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Report :> Put '[JSON] Report
+                           ReqBody '[OctetStream] Report :> Put '[JSON] Report
 
 -- | Updates a report.
 --
@@ -69,7 +69,7 @@ data ReportsUpdate' = ReportsUpdate'
     , _ruPrettyPrint :: !Bool
     , _ruUserIP      :: !(Maybe Text)
     , _ruReportId    :: !Int64
-    , _ruProfileId   :: !Int64
+    , _ruProFileId   :: !Int64
     , _ruPayload     :: !Report
     , _ruKey         :: !(Maybe Key)
     , _ruOAuthToken  :: !(Maybe OAuthToken)
@@ -88,7 +88,7 @@ data ReportsUpdate' = ReportsUpdate'
 --
 -- * 'ruReportId'
 --
--- * 'ruProfileId'
+-- * 'ruProFileId'
 --
 -- * 'ruPayload'
 --
@@ -102,13 +102,13 @@ reportsUpdate'
     -> Int64 -- ^ 'profileId'
     -> Report -- ^ 'payload'
     -> ReportsUpdate'
-reportsUpdate' pRuReportId_ pRuProfileId_ pRuPayload_ =
+reportsUpdate' pRuReportId_ pRuProFileId_ pRuPayload_ =
     ReportsUpdate'
     { _ruQuotaUser = Nothing
     , _ruPrettyPrint = True
     , _ruUserIP = Nothing
     , _ruReportId = pRuReportId_
-    , _ruProfileId = pRuProfileId_
+    , _ruProFileId = pRuProFileId_
     , _ruPayload = pRuPayload_
     , _ruKey = Nothing
     , _ruOAuthToken = Nothing
@@ -139,9 +139,9 @@ ruReportId
   = lens _ruReportId (\ s a -> s{_ruReportId = a})
 
 -- | The DFA user profile ID.
-ruProfileId :: Lens' ReportsUpdate' Int64
-ruProfileId
-  = lens _ruProfileId (\ s a -> s{_ruProfileId = a})
+ruProFileId :: Lens' ReportsUpdate' Int64
+ruProFileId
+  = lens _ruProFileId (\ s a -> s{_ruProFileId = a})
 
 -- | Multipart request metadata.
 ruPayload :: Lens' ReportsUpdate' Report
@@ -171,7 +171,7 @@ instance GoogleRequest ReportsUpdate' where
         type Rs ReportsUpdate' = Report
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ReportsUpdate'{..}
-          = go _ruProfileId _ruReportId _ruQuotaUser
+          = go _ruProFileId _ruReportId _ruQuotaUser
               (Just _ruPrettyPrint)
               _ruUserIP
               _ruFields

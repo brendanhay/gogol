@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Ads.Get
     , adsdQuotaUser
     , adsdPrettyPrint
     , adsdUserIP
-    , adsdProfileId
+    , adsdProFileId
     , adsdKey
     , adsdId
     , adsdOAuthToken
@@ -66,7 +66,7 @@ data AdsGet' = AdsGet'
     { _adsdQuotaUser   :: !(Maybe Text)
     , _adsdPrettyPrint :: !Bool
     , _adsdUserIP      :: !(Maybe Text)
-    , _adsdProfileId   :: !Int64
+    , _adsdProFileId   :: !Int64
     , _adsdKey         :: !(Maybe Key)
     , _adsdId          :: !Int64
     , _adsdOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +83,7 @@ data AdsGet' = AdsGet'
 --
 -- * 'adsdUserIP'
 --
--- * 'adsdProfileId'
+-- * 'adsdProFileId'
 --
 -- * 'adsdKey'
 --
@@ -96,12 +96,12 @@ adsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> AdsGet'
-adsGet' pAdsdProfileId_ pAdsdId_ =
+adsGet' pAdsdProFileId_ pAdsdId_ =
     AdsGet'
     { _adsdQuotaUser = Nothing
     , _adsdPrettyPrint = True
     , _adsdUserIP = Nothing
-    , _adsdProfileId = pAdsdProfileId_
+    , _adsdProFileId = pAdsdProFileId_
     , _adsdKey = Nothing
     , _adsdId = pAdsdId_
     , _adsdOAuthToken = Nothing
@@ -129,10 +129,10 @@ adsdUserIP
   = lens _adsdUserIP (\ s a -> s{_adsdUserIP = a})
 
 -- | User profile ID associated with this request.
-adsdProfileId :: Lens' AdsGet' Int64
-adsdProfileId
-  = lens _adsdProfileId
-      (\ s a -> s{_adsdProfileId = a})
+adsdProFileId :: Lens' AdsGet' Int64
+adsdProFileId
+  = lens _adsdProFileId
+      (\ s a -> s{_adsdProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -163,7 +163,7 @@ instance GoogleRequest AdsGet' where
         type Rs AdsGet' = Ad
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdsGet'{..}
-          = go _adsdProfileId _adsdId _adsdQuotaUser
+          = go _adsdProFileId _adsdId _adsdQuotaUser
               (Just _adsdPrettyPrint)
               _adsdUserIP
               _adsdFields

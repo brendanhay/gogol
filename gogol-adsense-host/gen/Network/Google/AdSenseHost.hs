@@ -107,6 +107,14 @@ module Network.Google.AdSenseHost
 
     -- * Types
 
+    -- ** AdClients
+    , AdClients
+    , adClients
+    , acEtag
+    , acNextPageToken
+    , acKind
+    , acItems
+
     -- ** AssociationSession
     , AssociationSession
     , associationSession
@@ -120,21 +128,8 @@ module Network.Google.AdSenseHost
     , asWebsiteURL
     , asRedirectURL
 
-    -- ** AdClients
-    , AdClients
-    , adClients
-    , acEtag
-    , acNextPageToken
-    , acKind
-    , acItems
-
-    -- ** MobileContentAdsSettings
-    , MobileContentAdsSettings
-    , mobileContentAdsSettings
-    , mcasSize
-    , mcasScriptingLanguage
-    , mcasMarkupLanguage
-    , mcasType
+    -- ** AssociationSessionsStartProductCode
+    , AssociationSessionsStartProductCode (..)
 
     -- ** Accounts
     , Accounts
@@ -143,13 +138,6 @@ module Network.Google.AdSenseHost
     , aKind
     , aItems
 
-    -- ** BackupOption
-    , BackupOption
-    , backupOption
-    , boColor
-    , boURL
-    , boType
-
     -- ** AdUnits
     , AdUnits
     , adUnits
@@ -157,18 +145,6 @@ module Network.Google.AdSenseHost
     , auNextPageToken
     , auKind
     , auItems
-
-    -- ** AdUnit
-    , AdUnit
-    , adUnit
-    , auuStatus
-    , auuMobileContentAdsSettings
-    , auuKind
-    , auuCustomStyle
-    , auuName
-    , auuContentAdsSettings
-    , auuCode
-    , auuId
 
     -- ** URLChannels
     , URLChannels
@@ -186,6 +162,18 @@ module Network.Google.AdSenseHost
     , ccKind
     , ccItems
 
+    -- ** AdUnit
+    , AdUnit
+    , adUnit
+    , auuStatus
+    , auuMobileContentAdsSettings
+    , auuKind
+    , auuCustomStyle
+    , auuName
+    , auuContentAdsSettings
+    , auuCode
+    , auuId
+
     -- ** Report
     , Report
     , report
@@ -197,6 +185,12 @@ module Network.Google.AdSenseHost
     , rHeaders
     , rTotalMatchedRows
 
+    -- ** AdStyleFont
+    , AdStyleFont
+    , adStyleFont
+    , asfSize
+    , asfFamily
+
     -- ** Account
     , Account
     , account
@@ -205,12 +199,29 @@ module Network.Google.AdSenseHost
     , accName
     , accId
 
-    -- ** HeadersItem
-    , HeadersItem
-    , headersItem
-    , hiName
-    , hiCurrency
-    , hiType
+    -- ** AdUnitMobileContentAdsSettings
+    , AdUnitMobileContentAdsSettings
+    , adUnitMobileContentAdsSettings
+    , aumcasSize
+    , aumcasScriptingLanguage
+    , aumcasMarkupLanguage
+    , aumcasType
+
+    -- ** AdStyleColors
+    , AdStyleColors
+    , adStyleColors
+    , ascText
+    , ascURL
+    , ascBOrder
+    , ascTitle
+    , ascBackgRound
+
+    -- ** AdUnitContentAdsSettingsBackupOption
+    , AdUnitContentAdsSettingsBackupOption
+    , adUnitContentAdsSettingsBackupOption
+    , aucasboColor
+    , aucasboURL
+    , aucasboType
 
     -- ** AdClient
     , AdClient
@@ -221,6 +232,13 @@ module Network.Google.AdSenseHost
     , adId
     , adProductCode
 
+    -- ** ReportHeadersItem
+    , ReportHeadersItem
+    , reportHeadersItem
+    , rhiName
+    , rhiCurrency
+    , rhiType
+
     -- ** AdStyle
     , AdStyle
     , adStyle
@@ -228,13 +246,6 @@ module Network.Google.AdSenseHost
     , assKind
     , assFont
     , assColors
-
-    -- ** ContentAdsSettings
-    , ContentAdsSettings
-    , contentAdsSettings
-    , casBackupOption
-    , casSize
-    , casType
 
     -- ** CustomChannel
     , CustomChannel
@@ -257,23 +268,12 @@ module Network.Google.AdSenseHost
     , aaKind
     , aaAdCode
 
-    -- ** Font
-    , Font
-    , font
-    , fSize
-    , fFamily
-
-    -- ** Colors
-    , Colors
-    , colors
-    , cText
-    , cURL
-    , cBOrder
-    , cTitle
-    , cBackgRound
-
-    -- ** ProductCode
-    , ProductCode (..)
+    -- ** AdUnitContentAdsSettings
+    , AdUnitContentAdsSettings
+    , adUnitContentAdsSettings
+    , aucasBackupOption
+    , aucasSize
+    , aucasType
     ) where
 
 import           Network.Google.AdSenseHost.Types

@@ -35,7 +35,7 @@ module Network.Google.Resource.Analytics.Management.UnSampledReports.Insert
     , musriPrettyPrint
     , musriWebPropertyId
     , musriUserIP
-    , musriProfileId
+    , musriProFileId
     , musriPayload
     , musriAccountId
     , musriKey
@@ -64,7 +64,7 @@ type ManagementUnSampledReportsInsertResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] UnSampledReport :>
+                                   ReqBody '[OctetStream] UnSampledReport :>
                                      Post '[JSON] UnSampledReport
 
 -- | Create a new unsampled report.
@@ -75,7 +75,7 @@ data ManagementUnSampledReportsInsert' = ManagementUnSampledReportsInsert'
     , _musriPrettyPrint   :: !Bool
     , _musriWebPropertyId :: !Text
     , _musriUserIP        :: !(Maybe Text)
-    , _musriProfileId     :: !Text
+    , _musriProFileId     :: !Text
     , _musriPayload       :: !UnSampledReport
     , _musriAccountId     :: !Text
     , _musriKey           :: !(Maybe Key)
@@ -95,7 +95,7 @@ data ManagementUnSampledReportsInsert' = ManagementUnSampledReportsInsert'
 --
 -- * 'musriUserIP'
 --
--- * 'musriProfileId'
+-- * 'musriProFileId'
 --
 -- * 'musriPayload'
 --
@@ -112,13 +112,13 @@ managementUnSampledReportsInsert'
     -> UnSampledReport -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> ManagementUnSampledReportsInsert'
-managementUnSampledReportsInsert' pMusriWebPropertyId_ pMusriProfileId_ pMusriPayload_ pMusriAccountId_ =
+managementUnSampledReportsInsert' pMusriWebPropertyId_ pMusriProFileId_ pMusriPayload_ pMusriAccountId_ =
     ManagementUnSampledReportsInsert'
     { _musriQuotaUser = Nothing
     , _musriPrettyPrint = False
     , _musriWebPropertyId = pMusriWebPropertyId_
     , _musriUserIP = Nothing
-    , _musriProfileId = pMusriProfileId_
+    , _musriProFileId = pMusriProFileId_
     , _musriPayload = pMusriPayload_
     , _musriAccountId = pMusriAccountId_
     , _musriKey = Nothing
@@ -153,10 +153,10 @@ musriUserIP
   = lens _musriUserIP (\ s a -> s{_musriUserIP = a})
 
 -- | View (Profile) ID to create the unsampled report for.
-musriProfileId :: Lens' ManagementUnSampledReportsInsert' Text
-musriProfileId
-  = lens _musriProfileId
-      (\ s a -> s{_musriProfileId = a})
+musriProFileId :: Lens' ManagementUnSampledReportsInsert' Text
+musriProFileId
+  = lens _musriProFileId
+      (\ s a -> s{_musriProFileId = a})
 
 -- | Multipart request metadata.
 musriPayload :: Lens' ManagementUnSampledReportsInsert' UnSampledReport
@@ -199,7 +199,7 @@ instance GoogleRequest
         requestWithRoute r u
           ManagementUnSampledReportsInsert'{..}
           = go _musriAccountId _musriWebPropertyId
-              _musriProfileId
+              _musriProFileId
               _musriQuotaUser
               (Just _musriPrettyPrint)
               _musriUserIP

@@ -55,8 +55,7 @@ type MediaInsertResource =
      "people" :>
        Capture "userId" Text :>
          "media" :>
-           Capture "collection" PlusDomainsMediaInsertCollection
-             :>
+           Capture "collection" MediaInsertCollection :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -77,7 +76,7 @@ data MediaInsert' = MediaInsert'
     { _miQuotaUser   :: !(Maybe Text)
     , _miPrettyPrint :: !Bool
     , _miUserIP      :: !(Maybe Text)
-    , _miCollection  :: !PlusDomainsMediaInsertCollection
+    , _miCollection  :: !MediaInsertCollection
     , _miPayload     :: !Media
     , _miUserId      :: !Text
     , _miMedia       :: !Body
@@ -110,7 +109,7 @@ data MediaInsert' = MediaInsert'
 --
 -- * 'miFields'
 mediaInsert'
-    :: PlusDomainsMediaInsertCollection -- ^ 'collection'
+    :: MediaInsertCollection -- ^ 'collection'
     -> Media -- ^ 'payload'
     -> Text -- ^ 'userId'
     -> Body -- ^ 'media'
@@ -147,7 +146,7 @@ miPrettyPrint
 miUserIP :: Lens' MediaInsert' (Maybe Text)
 miUserIP = lens _miUserIP (\ s a -> s{_miUserIP = a})
 
-miCollection :: Lens' MediaInsert' PlusDomainsMediaInsertCollection
+miCollection :: Lens' MediaInsert' MediaInsertCollection
 miCollection
   = lens _miCollection (\ s a -> s{_miCollection = a})
 

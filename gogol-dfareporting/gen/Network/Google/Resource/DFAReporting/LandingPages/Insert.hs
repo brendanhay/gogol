@@ -35,7 +35,7 @@ module Network.Google.Resource.DFAReporting.LandingPages.Insert
     , lpiPrettyPrint
     , lpiUserIP
     , lpiCampaignId
-    , lpiProfileId
+    , lpiProFileId
     , lpiPayload
     , lpiKey
     , lpiOAuthToken
@@ -60,7 +60,7 @@ type LandingPagesInsertResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] LandingPage :>
+                             ReqBody '[OctetStream] LandingPage :>
                                Post '[JSON] LandingPage
 
 -- | Inserts a new landing page for the specified campaign.
@@ -71,7 +71,7 @@ data LandingPagesInsert' = LandingPagesInsert'
     , _lpiPrettyPrint :: !Bool
     , _lpiUserIP      :: !(Maybe Text)
     , _lpiCampaignId  :: !Int64
-    , _lpiProfileId   :: !Int64
+    , _lpiProFileId   :: !Int64
     , _lpiPayload     :: !LandingPage
     , _lpiKey         :: !(Maybe Key)
     , _lpiOAuthToken  :: !(Maybe OAuthToken)
@@ -90,7 +90,7 @@ data LandingPagesInsert' = LandingPagesInsert'
 --
 -- * 'lpiCampaignId'
 --
--- * 'lpiProfileId'
+-- * 'lpiProFileId'
 --
 -- * 'lpiPayload'
 --
@@ -104,13 +104,13 @@ landingPagesInsert'
     -> Int64 -- ^ 'profileId'
     -> LandingPage -- ^ 'payload'
     -> LandingPagesInsert'
-landingPagesInsert' pLpiCampaignId_ pLpiProfileId_ pLpiPayload_ =
+landingPagesInsert' pLpiCampaignId_ pLpiProFileId_ pLpiPayload_ =
     LandingPagesInsert'
     { _lpiQuotaUser = Nothing
     , _lpiPrettyPrint = True
     , _lpiUserIP = Nothing
     , _lpiCampaignId = pLpiCampaignId_
-    , _lpiProfileId = pLpiProfileId_
+    , _lpiProFileId = pLpiProFileId_
     , _lpiPayload = pLpiPayload_
     , _lpiKey = Nothing
     , _lpiOAuthToken = Nothing
@@ -143,9 +143,9 @@ lpiCampaignId
       (\ s a -> s{_lpiCampaignId = a})
 
 -- | User profile ID associated with this request.
-lpiProfileId :: Lens' LandingPagesInsert' Int64
-lpiProfileId
-  = lens _lpiProfileId (\ s a -> s{_lpiProfileId = a})
+lpiProFileId :: Lens' LandingPagesInsert' Int64
+lpiProFileId
+  = lens _lpiProFileId (\ s a -> s{_lpiProFileId = a})
 
 -- | Multipart request metadata.
 lpiPayload :: Lens' LandingPagesInsert' LandingPage
@@ -177,7 +177,7 @@ instance GoogleRequest LandingPagesInsert' where
         type Rs LandingPagesInsert' = LandingPage
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u LandingPagesInsert'{..}
-          = go _lpiProfileId _lpiCampaignId _lpiQuotaUser
+          = go _lpiProFileId _lpiCampaignId _lpiQuotaUser
               (Just _lpiPrettyPrint)
               _lpiUserIP
               _lpiFields

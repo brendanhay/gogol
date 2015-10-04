@@ -57,13 +57,13 @@ type DeploymentsUpdateResource =
          "deployments" :>
            Capture "deployment" Text :>
              QueryParam "createPolicy"
-               DeploymentManagerDeploymentsUpdateCreatePolicy
+               DeploymentsUpdateCreatePolicy
                :>
                QueryParam "updatePolicy"
-                 DeploymentManagerDeploymentsUpdateUpdatePolicy
+                 DeploymentsUpdateUpdatePolicy
                  :>
                  QueryParam "deletePolicy"
-                   DeploymentManagerDeploymentsUpdateDeletePolicy
+                   DeploymentsUpdateDeletePolicy
                    :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
@@ -72,7 +72,7 @@ type DeploymentsUpdateResource =
                            QueryParam "key" Key :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
-                                 ReqBody '[JSON] Deployment :>
+                                 ReqBody '[OctetStream] Deployment :>
                                    Put '[JSON] Operation
 
 -- | Updates a deployment and all of the resources described by the
@@ -80,14 +80,14 @@ type DeploymentsUpdateResource =
 --
 -- /See:/ 'deploymentsUpdate'' smart constructor.
 data DeploymentsUpdate' = DeploymentsUpdate'
-    { _duCreatePolicy :: !DeploymentManagerDeploymentsUpdateCreatePolicy
+    { _duCreatePolicy :: !DeploymentsUpdateCreatePolicy
     , _duQuotaUser    :: !(Maybe Text)
     , _duPrettyPrint  :: !Bool
     , _duProject      :: !Text
     , _duUserIP       :: !(Maybe Text)
     , _duPayload      :: !Deployment
-    , _duUpdatePolicy :: !DeploymentManagerDeploymentsUpdateUpdatePolicy
-    , _duDeletePolicy :: !DeploymentManagerDeploymentsUpdateDeletePolicy
+    , _duUpdatePolicy :: !DeploymentsUpdateUpdatePolicy
+    , _duDeletePolicy :: !DeploymentsUpdateDeletePolicy
     , _duKey          :: !(Maybe Key)
     , _duOAuthToken   :: !(Maybe OAuthToken)
     , _duFields       :: !(Maybe Text)
@@ -128,13 +128,13 @@ deploymentsUpdate'
     -> DeploymentsUpdate'
 deploymentsUpdate' pDuProject_ pDuPayload_ pDuDeployment_ =
     DeploymentsUpdate'
-    { _duCreatePolicy = DMDUCPCreateOrAcquire
+    { _duCreatePolicy = CreateOrAcquire
     , _duQuotaUser = Nothing
     , _duPrettyPrint = True
     , _duProject = pDuProject_
     , _duUserIP = Nothing
     , _duPayload = pDuPayload_
-    , _duUpdatePolicy = DMDUUPPatch
+    , _duUpdatePolicy = Patch
     , _duDeletePolicy = Delete
     , _duKey = Nothing
     , _duOAuthToken = Nothing
@@ -143,7 +143,7 @@ deploymentsUpdate' pDuProject_ pDuPayload_ pDuDeployment_ =
     }
 
 -- | Sets the policy to use for creating new resources.
-duCreatePolicy :: Lens' DeploymentsUpdate' DeploymentManagerDeploymentsUpdateCreatePolicy
+duCreatePolicy :: Lens' DeploymentsUpdate' DeploymentsUpdateCreatePolicy
 duCreatePolicy
   = lens _duCreatePolicy
       (\ s a -> s{_duCreatePolicy = a})
@@ -177,13 +177,13 @@ duPayload
   = lens _duPayload (\ s a -> s{_duPayload = a})
 
 -- | Sets the policy to use for updating resources.
-duUpdatePolicy :: Lens' DeploymentsUpdate' DeploymentManagerDeploymentsUpdateUpdatePolicy
+duUpdatePolicy :: Lens' DeploymentsUpdate' DeploymentsUpdateUpdatePolicy
 duUpdatePolicy
   = lens _duUpdatePolicy
       (\ s a -> s{_duUpdatePolicy = a})
 
 -- | Sets the policy to use for deleting resources.
-duDeletePolicy :: Lens' DeploymentsUpdate' DeploymentManagerDeploymentsUpdateDeletePolicy
+duDeletePolicy :: Lens' DeploymentsUpdate' DeploymentsUpdateDeletePolicy
 duDeletePolicy
   = lens _duDeletePolicy
       (\ s a -> s{_duDeletePolicy = a})

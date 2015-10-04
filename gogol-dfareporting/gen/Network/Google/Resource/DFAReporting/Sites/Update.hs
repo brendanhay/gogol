@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Sites.Update
     , suQuotaUser
     , suPrettyPrint
     , suUserIP
-    , suProfileId
+    , suProFileId
     , suPayload
     , suKey
     , suOAuthToken
@@ -57,7 +57,7 @@ type SitesUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Site :> Put '[JSON] Site
+                         ReqBody '[OctetStream] Site :> Put '[JSON] Site
 
 -- | Updates an existing site.
 --
@@ -66,7 +66,7 @@ data SitesUpdate' = SitesUpdate'
     { _suQuotaUser   :: !(Maybe Text)
     , _suPrettyPrint :: !Bool
     , _suUserIP      :: !(Maybe Text)
-    , _suProfileId   :: !Int64
+    , _suProFileId   :: !Int64
     , _suPayload     :: !Site
     , _suKey         :: !(Maybe Key)
     , _suOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +83,7 @@ data SitesUpdate' = SitesUpdate'
 --
 -- * 'suUserIP'
 --
--- * 'suProfileId'
+-- * 'suProFileId'
 --
 -- * 'suPayload'
 --
@@ -96,12 +96,12 @@ sitesUpdate'
     :: Int64 -- ^ 'profileId'
     -> Site -- ^ 'payload'
     -> SitesUpdate'
-sitesUpdate' pSuProfileId_ pSuPayload_ =
+sitesUpdate' pSuProFileId_ pSuPayload_ =
     SitesUpdate'
     { _suQuotaUser = Nothing
     , _suPrettyPrint = True
     , _suUserIP = Nothing
-    , _suProfileId = pSuProfileId_
+    , _suProFileId = pSuProFileId_
     , _suPayload = pSuPayload_
     , _suKey = Nothing
     , _suOAuthToken = Nothing
@@ -127,9 +127,9 @@ suUserIP :: Lens' SitesUpdate' (Maybe Text)
 suUserIP = lens _suUserIP (\ s a -> s{_suUserIP = a})
 
 -- | User profile ID associated with this request.
-suProfileId :: Lens' SitesUpdate' Int64
-suProfileId
-  = lens _suProfileId (\ s a -> s{_suProfileId = a})
+suProFileId :: Lens' SitesUpdate' Int64
+suProFileId
+  = lens _suProFileId (\ s a -> s{_suProFileId = a})
 
 -- | Multipart request metadata.
 suPayload :: Lens' SitesUpdate' Site
@@ -159,7 +159,7 @@ instance GoogleRequest SitesUpdate' where
         type Rs SitesUpdate' = Site
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u SitesUpdate'{..}
-          = go _suProfileId _suQuotaUser (Just _suPrettyPrint)
+          = go _suProFileId _suQuotaUser (Just _suPrettyPrint)
               _suUserIP
               _suFields
               _suKey

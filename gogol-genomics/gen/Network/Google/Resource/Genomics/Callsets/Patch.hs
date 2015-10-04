@@ -56,7 +56,8 @@ type CallsetsPatchResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] CallSet :> Patch '[JSON] CallSet
+                       ReqBody '[OctetStream] CallSet :>
+                         Patch '[JSON] CallSet
 
 -- | Updates a call set. This method supports patch semantics.
 --

@@ -64,7 +64,7 @@ type ObjectAccessControlsUpdateResource =
                            QueryParam "key" Key :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
-                                 ReqBody '[JSON] ObjectAccessControl :>
+                                 ReqBody '[OctetStream] ObjectAccessControl :>
                                    Put '[JSON] ObjectAccessControl
 
 -- | Updates an ACL entry on the specified object.

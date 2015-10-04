@@ -38,7 +38,7 @@ module Network.Google.Resource.DFAReporting.DirectorySites.List
     , dslAcceptsInterstitialPlacements
     , dslAcceptsPublisherPaidPlacements
     , dslIds
-    , dslProfileId
+    , dslProFileId
     , dslSortOrder
     , dslActive
     , dslKey
@@ -66,15 +66,11 @@ type DirectorySitesListResource =
              QueryParam "acceptsInterstitialPlacements" Bool :>
                QueryParam "acceptsPublisherPaidPlacements" Bool :>
                  QueryParams "ids" Int64 :>
-                   QueryParam "sortOrder"
-                     DfareportingDirectorySitesListSortOrder
-                     :>
+                   QueryParam "sortOrder" DirectorySitesListSortOrder :>
                      QueryParam "active" Bool :>
                        QueryParam "countryId" Int64 :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "sortField"
-                             DfareportingDirectorySitesListSortField
-                             :>
+                           QueryParam "sortField" DirectorySitesListSortField :>
                              QueryParam "acceptsInStreamVideoPlacements" Bool :>
                                QueryParam "maxResults" Int32 :>
                                  QueryParam "parentId" Int64 :>
@@ -102,13 +98,13 @@ data DirectorySitesList' = DirectorySitesList'
     , _dslAcceptsInterstitialPlacements  :: !(Maybe Bool)
     , _dslAcceptsPublisherPaidPlacements :: !(Maybe Bool)
     , _dslIds                            :: !(Maybe [Int64])
-    , _dslProfileId                      :: !Int64
-    , _dslSortOrder                      :: !(Maybe DfareportingDirectorySitesListSortOrder)
+    , _dslProFileId                      :: !Int64
+    , _dslSortOrder                      :: !(Maybe DirectorySitesListSortOrder)
     , _dslActive                         :: !(Maybe Bool)
     , _dslKey                            :: !(Maybe Key)
     , _dslCountryId                      :: !(Maybe Int64)
     , _dslPageToken                      :: !(Maybe Text)
-    , _dslSortField                      :: !(Maybe DfareportingDirectorySitesListSortField)
+    , _dslSortField                      :: !(Maybe DirectorySitesListSortField)
     , _dslAcceptsInStreamVideoPlacements :: !(Maybe Bool)
     , _dslOAuthToken                     :: !(Maybe OAuthToken)
     , _dslMaxResults                     :: !(Maybe Int32)
@@ -135,7 +131,7 @@ data DirectorySitesList' = DirectorySitesList'
 --
 -- * 'dslIds'
 --
--- * 'dslProfileId'
+-- * 'dslProFileId'
 --
 -- * 'dslSortOrder'
 --
@@ -163,7 +159,7 @@ data DirectorySitesList' = DirectorySitesList'
 directorySitesList'
     :: Int64 -- ^ 'profileId'
     -> DirectorySitesList'
-directorySitesList' pDslProfileId_ =
+directorySitesList' pDslProFileId_ =
     DirectorySitesList'
     { _dslQuotaUser = Nothing
     , _dslPrettyPrint = True
@@ -172,7 +168,7 @@ directorySitesList' pDslProfileId_ =
     , _dslAcceptsInterstitialPlacements = Nothing
     , _dslAcceptsPublisherPaidPlacements = Nothing
     , _dslIds = Nothing
-    , _dslProfileId = pDslProfileId_
+    , _dslProFileId = pDslProFileId_
     , _dslSortOrder = Nothing
     , _dslActive = Nothing
     , _dslKey = Nothing
@@ -240,12 +236,12 @@ dslIds
       _Coerce
 
 -- | User profile ID associated with this request.
-dslProfileId :: Lens' DirectorySitesList' Int64
-dslProfileId
-  = lens _dslProfileId (\ s a -> s{_dslProfileId = a})
+dslProFileId :: Lens' DirectorySitesList' Int64
+dslProFileId
+  = lens _dslProFileId (\ s a -> s{_dslProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-dslSortOrder :: Lens' DirectorySitesList' (Maybe DfareportingDirectorySitesListSortOrder)
+dslSortOrder :: Lens' DirectorySitesList' (Maybe DirectorySitesListSortOrder)
 dslSortOrder
   = lens _dslSortOrder (\ s a -> s{_dslSortOrder = a})
 
@@ -272,7 +268,7 @@ dslPageToken
   = lens _dslPageToken (\ s a -> s{_dslPageToken = a})
 
 -- | Field by which to sort the list.
-dslSortField :: Lens' DirectorySitesList' (Maybe DfareportingDirectorySitesListSortField)
+dslSortField :: Lens' DirectorySitesList' (Maybe DirectorySitesListSortField)
 dslSortField
   = lens _dslSortField (\ s a -> s{_dslSortField = a})
 
@@ -320,7 +316,7 @@ instance GoogleRequest DirectorySitesList' where
              DirectorySitesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u DirectorySitesList'{..}
-          = go _dslProfileId _dslSearchString
+          = go _dslProFileId _dslSearchString
               _dslAcceptsInterstitialPlacements
               _dslAcceptsPublisherPaidPlacements
               (_dslIds ^. _Default)

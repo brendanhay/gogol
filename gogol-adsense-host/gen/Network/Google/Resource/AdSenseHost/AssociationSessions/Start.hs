@@ -52,7 +52,9 @@ import           Network.Google.Prelude
 type AssociationSessionsStartResource =
      "associationsessions" :>
        "start" :>
-         QueryParams "productCode" ProductCode :>
+         QueryParams "productCode"
+           AssociationSessionsStartProductCode
+           :>
            QueryParam "websiteUrl" Text :>
              QueryParam "websiteLocale" Text :>
                QueryParam "userLocale" Text :>
@@ -78,7 +80,7 @@ data AssociationSessionsStart' = AssociationSessionsStart'
     , _assKey           :: !(Maybe Key)
     , _assWebsiteURL    :: !Text
     , _assOAuthToken    :: !(Maybe OAuthToken)
-    , _assProductCode   :: ![ProductCode]
+    , _assProductCode   :: ![AssociationSessionsStartProductCode]
     , _assFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -107,7 +109,7 @@ data AssociationSessionsStart' = AssociationSessionsStart'
 -- * 'assFields'
 associationSessionsStart'
     :: Text -- ^ 'websiteUrl'
-    -> [ProductCode] -- ^ 'productCode'
+    -> [AssociationSessionsStartProductCode] -- ^ 'productCode'
     -> AssociationSessionsStart'
 associationSessionsStart' pAssWebsiteURL_ pAssProductCode_ =
     AssociationSessionsStart'
@@ -173,7 +175,7 @@ assOAuthToken
       (\ s a -> s{_assOAuthToken = a})
 
 -- | Products to associate with the user.
-assProductCode :: Lens' AssociationSessionsStart' [ProductCode]
+assProductCode :: Lens' AssociationSessionsStart' [AssociationSessionsStartProductCode]
 assProductCode
   = lens _assProductCode
       (\ s a -> s{_assProductCode = a})

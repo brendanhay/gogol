@@ -58,7 +58,7 @@ type UsersLabelsUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Label :> Put '[JSON] Label
+                         ReqBody '[OctetStream] Label :> Put '[JSON] Label
 
 -- | Updates the specified label.
 --

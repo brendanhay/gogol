@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.RemarketingLists.Update
     , rluQuotaUser
     , rluPrettyPrint
     , rluUserIP
-    , rluProfileId
+    , rluProFileId
     , rluPayload
     , rluKey
     , rluOAuthToken
@@ -57,7 +57,7 @@ type RemarketingListsUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] RemarketingList :>
+                         ReqBody '[OctetStream] RemarketingList :>
                            Put '[JSON] RemarketingList
 
 -- | Updates an existing remarketing list.
@@ -67,7 +67,7 @@ data RemarketingListsUpdate' = RemarketingListsUpdate'
     { _rluQuotaUser   :: !(Maybe Text)
     , _rluPrettyPrint :: !Bool
     , _rluUserIP      :: !(Maybe Text)
-    , _rluProfileId   :: !Int64
+    , _rluProFileId   :: !Int64
     , _rluPayload     :: !RemarketingList
     , _rluKey         :: !(Maybe Key)
     , _rluOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data RemarketingListsUpdate' = RemarketingListsUpdate'
 --
 -- * 'rluUserIP'
 --
--- * 'rluProfileId'
+-- * 'rluProFileId'
 --
 -- * 'rluPayload'
 --
@@ -97,12 +97,12 @@ remarketingListsUpdate'
     :: Int64 -- ^ 'profileId'
     -> RemarketingList -- ^ 'payload'
     -> RemarketingListsUpdate'
-remarketingListsUpdate' pRluProfileId_ pRluPayload_ =
+remarketingListsUpdate' pRluProFileId_ pRluPayload_ =
     RemarketingListsUpdate'
     { _rluQuotaUser = Nothing
     , _rluPrettyPrint = True
     , _rluUserIP = Nothing
-    , _rluProfileId = pRluProfileId_
+    , _rluProFileId = pRluProFileId_
     , _rluPayload = pRluPayload_
     , _rluKey = Nothing
     , _rluOAuthToken = Nothing
@@ -129,9 +129,9 @@ rluUserIP
   = lens _rluUserIP (\ s a -> s{_rluUserIP = a})
 
 -- | User profile ID associated with this request.
-rluProfileId :: Lens' RemarketingListsUpdate' Int64
-rluProfileId
-  = lens _rluProfileId (\ s a -> s{_rluProfileId = a})
+rluProFileId :: Lens' RemarketingListsUpdate' Int64
+rluProFileId
+  = lens _rluProFileId (\ s a -> s{_rluProFileId = a})
 
 -- | Multipart request metadata.
 rluPayload :: Lens' RemarketingListsUpdate' RemarketingList
@@ -163,7 +163,7 @@ instance GoogleRequest RemarketingListsUpdate' where
         type Rs RemarketingListsUpdate' = RemarketingList
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u RemarketingListsUpdate'{..}
-          = go _rluProfileId _rluQuotaUser
+          = go _rluProFileId _rluQuotaUser
               (Just _rluPrettyPrint)
               _rluUserIP
               _rluFields

@@ -41,7 +41,7 @@ module Network.Google.Resource.DFAReporting.EventTags.List
     , etlSearchString
     , etlCampaignId
     , etlIds
-    , etlProfileId
+    , etlProFileId
     , etlSortOrder
     , etlKey
     , etlAdId
@@ -60,19 +60,17 @@ type EventTagsListResource =
        Capture "profileId" Int64 :>
          "eventTags" :>
            QueryParam "definitionsOnly" Bool :>
-             QueryParams "eventTagTypes" EventTagTypes :>
+             QueryParams "eventTagTypes"
+               EventTagsListEventTagTypes
+               :>
                QueryParam "enabled" Bool :>
                  QueryParam "advertiserId" Int64 :>
                    QueryParam "searchString" Text :>
                      QueryParam "campaignId" Int64 :>
                        QueryParams "ids" Int64 :>
-                         QueryParam "sortOrder"
-                           DfareportingEventTagsListSortOrder
-                           :>
+                         QueryParam "sortOrder" EventTagsListSortOrder :>
                            QueryParam "adId" Int64 :>
-                             QueryParam "sortField"
-                               DfareportingEventTagsListSortField
-                               :>
+                             QueryParam "sortField" EventTagsListSortField :>
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "userIp" Text :>
@@ -89,18 +87,18 @@ data EventTagsList' = EventTagsList'
     { _etlQuotaUser       :: !(Maybe Text)
     , _etlPrettyPrint     :: !Bool
     , _etlDefinitionsOnly :: !(Maybe Bool)
-    , _etlEventTagTypes   :: !(Maybe [EventTagTypes])
+    , _etlEventTagTypes   :: !(Maybe [EventTagsListEventTagTypes])
     , _etlEnabled         :: !(Maybe Bool)
     , _etlUserIP          :: !(Maybe Text)
     , _etlAdvertiserId    :: !(Maybe Int64)
     , _etlSearchString    :: !(Maybe Text)
     , _etlCampaignId      :: !(Maybe Int64)
     , _etlIds             :: !(Maybe [Int64])
-    , _etlProfileId       :: !Int64
-    , _etlSortOrder       :: !(Maybe DfareportingEventTagsListSortOrder)
+    , _etlProFileId       :: !Int64
+    , _etlSortOrder       :: !(Maybe EventTagsListSortOrder)
     , _etlKey             :: !(Maybe Key)
     , _etlAdId            :: !(Maybe Int64)
-    , _etlSortField       :: !(Maybe DfareportingEventTagsListSortField)
+    , _etlSortField       :: !(Maybe EventTagsListSortField)
     , _etlOAuthToken      :: !(Maybe OAuthToken)
     , _etlFields          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -129,7 +127,7 @@ data EventTagsList' = EventTagsList'
 --
 -- * 'etlIds'
 --
--- * 'etlProfileId'
+-- * 'etlProFileId'
 --
 -- * 'etlSortOrder'
 --
@@ -145,7 +143,7 @@ data EventTagsList' = EventTagsList'
 eventTagsList'
     :: Int64 -- ^ 'profileId'
     -> EventTagsList'
-eventTagsList' pEtlProfileId_ =
+eventTagsList' pEtlProFileId_ =
     EventTagsList'
     { _etlQuotaUser = Nothing
     , _etlPrettyPrint = True
@@ -157,7 +155,7 @@ eventTagsList' pEtlProfileId_ =
     , _etlSearchString = Nothing
     , _etlCampaignId = Nothing
     , _etlIds = Nothing
-    , _etlProfileId = pEtlProfileId_
+    , _etlProFileId = pEtlProFileId_
     , _etlSortOrder = Nothing
     , _etlKey = Nothing
     , _etlAdId = Nothing
@@ -194,7 +192,7 @@ etlDefinitionsOnly
 -- types can be used to specify whether to use a third-party pixel, a
 -- third-party JavaScript URL, or a third-party click-through URL for
 -- either impression or click tracking.
-etlEventTagTypes :: Lens' EventTagsList' [EventTagTypes]
+etlEventTagTypes :: Lens' EventTagsList' [EventTagsListEventTagTypes]
 etlEventTagTypes
   = lens _etlEventTagTypes
       (\ s a -> s{_etlEventTagTypes = a})
@@ -249,12 +247,12 @@ etlIds
       _Coerce
 
 -- | User profile ID associated with this request.
-etlProfileId :: Lens' EventTagsList' Int64
-etlProfileId
-  = lens _etlProfileId (\ s a -> s{_etlProfileId = a})
+etlProFileId :: Lens' EventTagsList' Int64
+etlProFileId
+  = lens _etlProFileId (\ s a -> s{_etlProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-etlSortOrder :: Lens' EventTagsList' (Maybe DfareportingEventTagsListSortOrder)
+etlSortOrder :: Lens' EventTagsList' (Maybe EventTagsListSortOrder)
 etlSortOrder
   = lens _etlSortOrder (\ s a -> s{_etlSortOrder = a})
 
@@ -269,7 +267,7 @@ etlAdId :: Lens' EventTagsList' (Maybe Int64)
 etlAdId = lens _etlAdId (\ s a -> s{_etlAdId = a})
 
 -- | Field by which to sort the list.
-etlSortField :: Lens' EventTagsList' (Maybe DfareportingEventTagsListSortField)
+etlSortField :: Lens' EventTagsList' (Maybe EventTagsListSortField)
 etlSortField
   = lens _etlSortField (\ s a -> s{_etlSortField = a})
 
@@ -292,7 +290,7 @@ instance GoogleRequest EventTagsList' where
         type Rs EventTagsList' = EventTagsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u EventTagsList'{..}
-          = go _etlProfileId _etlDefinitionsOnly
+          = go _etlProFileId _etlDefinitionsOnly
               (_etlEventTagTypes ^. _Default)
               _etlEnabled
               _etlAdvertiserId

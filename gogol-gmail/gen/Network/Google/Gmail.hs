@@ -44,8 +44,8 @@ module Network.Google.Gmail
     -- ** GmailUsersDraftsUpdate
     , module Network.Google.Resource.Gmail.Users.Drafts.Update
 
-    -- ** GmailUsersGetProfile
-    , module Network.Google.Resource.Gmail.Users.GetProfile
+    -- ** GmailUsersGetProFile
+    , module Network.Google.Resource.Gmail.Users.GetProFile
 
     -- ** GmailUsersHistoryList
     , module Network.Google.Resource.Gmail.Users.History.List
@@ -124,8 +124,8 @@ module Network.Google.Gmail
 
     -- * Types
 
-    -- ** GmailUsersThreadsGetFormat
-    , GmailUsersThreadsGetFormat (..)
+    -- ** UsersMessagesGetFormat
+    , UsersMessagesGetFormat (..)
 
     -- ** ModifyThreadRequest
     , ModifyThreadRequest
@@ -133,8 +133,11 @@ module Network.Google.Gmail
     , mtrRemoveLabelIds
     , mtrAddLabelIds
 
-    -- ** MessageListVisibility
-    , MessageListVisibility (..)
+    -- ** ModifyMessageRequest
+    , ModifyMessageRequest
+    , modifyMessageRequest
+    , mmrRemoveLabelIds
+    , mmrAddLabelIds
 
     -- ** History
     , History
@@ -146,14 +149,19 @@ module Network.Google.Gmail
     , hId
     , hMessages
 
-    -- ** ModifyMessageRequest
-    , ModifyMessageRequest
-    , modifyMessageRequest
-    , mmrRemoveLabelIds
-    , mmrAddLabelIds
+    -- ** ProFile
+    , ProFile
+    , proFile
+    , pfMessagesTotal
+    , pfThreadsTotal
+    , pfHistoryId
+    , pfEmailAddress
 
-    -- ** LabelFilterAction
-    , LabelFilterAction (..)
+    -- ** MessagePartHeader
+    , MessagePartHeader
+    , messagePartHeader
+    , mphValue
+    , mphName
 
     -- ** ListHistoryResponse
     , ListHistoryResponse
@@ -162,27 +170,17 @@ module Network.Google.Gmail
     , lhrHistory
     , lhrHistoryId
 
-    -- ** Format
-    , Format (..)
+    -- ** LabelType
+    , LabelType (..)
 
-    -- ** MessagePartHeader
-    , MessagePartHeader
-    , messagePartHeader
-    , mphValue
-    , mphName
+    -- ** UsersDraftsGetFormat
+    , UsersDraftsGetFormat (..)
 
-    -- ** Profile
-    , Profile
-    , profile
-    , pMessagesTotal
-    , pThreadsTotal
-    , pHistoryId
-    , pEmailAddress
+    -- ** UsersMessagesImportInternalDateSource
+    , UsersMessagesImportInternalDateSource (..)
 
-    -- ** HistoryMessageDeleted
-    , HistoryMessageDeleted
-    , historyMessageDeleted
-    , hmdMessage
+    -- ** LabelMessageListVisibility
+    , LabelMessageListVisibility (..)
 
     -- ** ListThreadsResponse
     , ListThreadsResponse
@@ -190,6 +188,16 @@ module Network.Google.Gmail
     , ltrNextPageToken
     , ltrResultSizeEstimate
     , ltrThreads
+
+    -- ** MessagePart
+    , MessagePart
+    , messagePart
+    , mpParts
+    , mpBody
+    , mpMimeType
+    , mpHeaders
+    , mpPartId
+    , mpFilename
 
     -- ** HistoryLabelAdded
     , HistoryLabelAdded
@@ -202,15 +210,13 @@ module Network.Google.Gmail
     , listLabelsResponse
     , llrLabels
 
-    -- ** MessagePart
-    , MessagePart
-    , messagePart
-    , mpParts
-    , mpBody
-    , mpMimeType
-    , mpHeaders
-    , mpPartId
-    , mpFilename
+    -- ** LabelLabelListVisibility
+    , LabelLabelListVisibility (..)
+
+    -- ** HistoryMessageDeleted
+    , HistoryMessageDeleted
+    , historyMessageDeleted
+    , hmdMessage
 
     -- ** MessagePartBody
     , MessagePartBody
@@ -226,17 +232,14 @@ module Network.Google.Gmail
     , ldrResultSizeEstimate
     , ldrDrafts
 
-    -- ** GmailUsersMessagesImportInternalDateSource
-    , GmailUsersMessagesImportInternalDateSource (..)
-
-    -- ** LabelListVisibility
-    , LabelListVisibility (..)
-
     -- ** WatchResponse
     , WatchResponse
     , watchResponse
     , wrExpiration
     , wrHistoryId
+
+    -- ** UsersThreadsGetFormat
+    , UsersThreadsGetFormat (..)
 
     -- ** Draft
     , Draft
@@ -251,8 +254,8 @@ module Network.Google.Gmail
     , wrTopicName
     , wrLabelIds
 
-    -- ** Type
-    , Type (..)
+    -- ** WatchRequestLabelFilterAction
+    , WatchRequestLabelFilterAction (..)
 
     -- ** Message
     , Message
@@ -267,8 +270,14 @@ module Network.Google.Gmail
     , mThreadId
     , mInternalDate
 
-    -- ** InternalDateSource
-    , InternalDateSource (..)
+    -- ** UsersMessagesInsertInternalDateSource
+    , UsersMessagesInsertInternalDateSource (..)
+
+    -- ** HistoryLabelRemoved
+    , HistoryLabelRemoved
+    , historyLabelRemoved
+    , hlrLabelIds
+    , hlrMessage
 
     -- ** Thread
     , Thread
@@ -291,17 +300,6 @@ module Network.Google.Gmail
     , lId
     , lType
 
-    -- ** HistoryLabelRemoved
-    , HistoryLabelRemoved
-    , historyLabelRemoved
-    , hlrLabelIds
-    , hlrMessage
-
-    -- ** HistoryMessageAdded
-    , HistoryMessageAdded
-    , historyMessageAdded
-    , hmaMessage
-
     -- ** ListMessagesResponse
     , ListMessagesResponse
     , listMessagesResponse
@@ -309,8 +307,10 @@ module Network.Google.Gmail
     , lmrResultSizeEstimate
     , lmrMessages
 
-    -- ** GmailUsersMessagesGetFormat
-    , GmailUsersMessagesGetFormat (..)
+    -- ** HistoryMessageAdded
+    , HistoryMessageAdded
+    , historyMessageAdded
+    , hmaMessage
     ) where
 
 import           Network.Google.Gmail.Types
@@ -321,7 +321,7 @@ import           Network.Google.Resource.Gmail.Users.Drafts.Get
 import           Network.Google.Resource.Gmail.Users.Drafts.List
 import           Network.Google.Resource.Gmail.Users.Drafts.Send
 import           Network.Google.Resource.Gmail.Users.Drafts.Update
-import           Network.Google.Resource.Gmail.Users.GetProfile
+import           Network.Google.Resource.Gmail.Users.GetProFile
 import           Network.Google.Resource.Gmail.Users.History.List
 import           Network.Google.Resource.Gmail.Users.Labels.Create
 import           Network.Google.Resource.Gmail.Users.Labels.Delete
@@ -381,7 +381,7 @@ type GmailAPI =
        :<|> UsersMessagesImportResource
        :<|> UsersMessagesModifyResource
        :<|> UsersMessagesDeleteResource
-       :<|> UsersGetProfileResource
+       :<|> UsersGetProFileResource
        :<|> UsersStopResource
        :<|> UsersWatchResource
 

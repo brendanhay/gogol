@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Insert
     , fagiQuotaUser
     , fagiPrettyPrint
     , fagiUserIP
-    , fagiProfileId
+    , fagiProFileId
     , fagiPayload
     , fagiKey
     , fagiOAuthToken
@@ -57,7 +57,7 @@ type FloodlightActivityGroupsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] FloodlightActivityGroup :>
+                         ReqBody '[OctetStream] FloodlightActivityGroup :>
                            Post '[JSON] FloodlightActivityGroup
 
 -- | Inserts a new floodlight activity group.
@@ -67,7 +67,7 @@ data FloodlightActivityGroupsInsert' = FloodlightActivityGroupsInsert'
     { _fagiQuotaUser   :: !(Maybe Text)
     , _fagiPrettyPrint :: !Bool
     , _fagiUserIP      :: !(Maybe Text)
-    , _fagiProfileId   :: !Int64
+    , _fagiProFileId   :: !Int64
     , _fagiPayload     :: !FloodlightActivityGroup
     , _fagiKey         :: !(Maybe Key)
     , _fagiOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data FloodlightActivityGroupsInsert' = FloodlightActivityGroupsInsert'
 --
 -- * 'fagiUserIP'
 --
--- * 'fagiProfileId'
+-- * 'fagiProFileId'
 --
 -- * 'fagiPayload'
 --
@@ -97,12 +97,12 @@ floodlightActivityGroupsInsert'
     :: Int64 -- ^ 'profileId'
     -> FloodlightActivityGroup -- ^ 'payload'
     -> FloodlightActivityGroupsInsert'
-floodlightActivityGroupsInsert' pFagiProfileId_ pFagiPayload_ =
+floodlightActivityGroupsInsert' pFagiProFileId_ pFagiPayload_ =
     FloodlightActivityGroupsInsert'
     { _fagiQuotaUser = Nothing
     , _fagiPrettyPrint = True
     , _fagiUserIP = Nothing
-    , _fagiProfileId = pFagiProfileId_
+    , _fagiProFileId = pFagiProFileId_
     , _fagiPayload = pFagiPayload_
     , _fagiKey = Nothing
     , _fagiOAuthToken = Nothing
@@ -130,10 +130,10 @@ fagiUserIP
   = lens _fagiUserIP (\ s a -> s{_fagiUserIP = a})
 
 -- | User profile ID associated with this request.
-fagiProfileId :: Lens' FloodlightActivityGroupsInsert' Int64
-fagiProfileId
-  = lens _fagiProfileId
-      (\ s a -> s{_fagiProfileId = a})
+fagiProFileId :: Lens' FloodlightActivityGroupsInsert' Int64
+fagiProFileId
+  = lens _fagiProFileId
+      (\ s a -> s{_fagiProFileId = a})
 
 -- | Multipart request metadata.
 fagiPayload :: Lens' FloodlightActivityGroupsInsert' FloodlightActivityGroup
@@ -169,7 +169,7 @@ instance GoogleRequest
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           FloodlightActivityGroupsInsert'{..}
-          = go _fagiProfileId _fagiQuotaUser
+          = go _fagiProFileId _fagiQuotaUser
               (Just _fagiPrettyPrint)
               _fagiUserIP
               _fagiFields

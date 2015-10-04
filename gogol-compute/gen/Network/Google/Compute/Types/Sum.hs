@@ -17,201 +17,69 @@ module Network.Google.Compute.Types.Sum where
 
 import           Network.Google.Prelude
 
--- | Sesssion affinity option, must be one of the following values: NONE:
--- Connections from the same client IP may go to any instance in the pool;
--- CLIENT_IP: Connections from the same client IP will go to the same
--- instance in the pool while that instance remains healthy.
--- CLIENT_IP_PROTO: Connections from the same client IP with the same IP
--- protocol will go to the same instance in the pool while that instance
--- remains healthy.
-data SessionAffinity
-    = SAClientIP
-      -- ^ @CLIENT_IP@
-    | SAClientIPProto
-      -- ^ @CLIENT_IP_PROTO@
-    | SANone
-      -- ^ @NONE@
+-- | Defines the maintenance behavior for this instance. For standard
+-- instances, the default behavior is MIGRATE. For preemptible instances,
+-- the default and only possible behavior is TERMINATE. For more
+-- information, see Setting maintenance behavior.
+data SchedulingOnHostMaintenance
+    = Migrate
+      -- ^ @MIGRATE@
+    | Terminate
+      -- ^ @TERMINATE@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable SessionAffinity
+instance Hashable SchedulingOnHostMaintenance
 
-instance FromText SessionAffinity where
+instance FromText SchedulingOnHostMaintenance where
     fromText = \case
-        "CLIENT_IP" -> Just SAClientIP
-        "CLIENT_IP_PROTO" -> Just SAClientIPProto
-        "NONE" -> Just SANone
+        "MIGRATE" -> Just Migrate
+        "TERMINATE" -> Just Terminate
         _ -> Nothing
 
-instance ToText SessionAffinity where
+instance ToText SchedulingOnHostMaintenance where
     toText = \case
-        SAClientIP -> "CLIENT_IP"
-        SAClientIPProto -> "CLIENT_IP_PROTO"
-        SANone -> "NONE"
+        Migrate -> "MIGRATE"
+        Terminate -> "TERMINATE"
 
-instance FromJSON SessionAffinity where
-    parseJSON = parseJSONText "SessionAffinity"
+instance FromJSON SchedulingOnHostMaintenance where
+    parseJSON = parseJSONText "SchedulingOnHostMaintenance"
 
-instance ToJSON SessionAffinity where
+instance ToJSON SchedulingOnHostMaintenance where
     toJSON = toJSONText
 
--- | [Output Only] An indicator whether storageBytes is in a stable state or
--- it is being adjusted as a result of shared storage reallocation.
-data StorageBytesStatus
-    = Updating
-      -- ^ @UPDATING@
-    | UpToDate
-      -- ^ @UP_TO_DATE@
+-- | Defines type in which utilization_target is expressed.
+data AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType
+    = DeltaPerMinute
+      -- ^ @DELTA_PER_MINUTE@
+    | DeltaPerSecond
+      -- ^ @DELTA_PER_SECOND@
+    | Gauge
+      -- ^ @GAUGE@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable StorageBytesStatus
+instance Hashable AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType
 
-instance FromText StorageBytesStatus where
+instance FromText AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType where
     fromText = \case
-        "UPDATING" -> Just Updating
-        "UP_TO_DATE" -> Just UpToDate
+        "DELTA_PER_MINUTE" -> Just DeltaPerMinute
+        "DELTA_PER_SECOND" -> Just DeltaPerSecond
+        "GAUGE" -> Just Gauge
         _ -> Nothing
 
-instance ToText StorageBytesStatus where
+instance ToText AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType where
     toText = \case
-        Updating -> "UPDATING"
-        UpToDate -> "UP_TO_DATE"
+        DeltaPerMinute -> "DELTA_PER_MINUTE"
+        DeltaPerSecond -> "DELTA_PER_SECOND"
+        Gauge -> "GAUGE"
 
-instance FromJSON StorageBytesStatus where
-    parseJSON = parseJSONText "StorageBytesStatus"
+instance FromJSON AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType where
+    parseJSON = parseJSONText "AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType"
 
-instance ToJSON StorageBytesStatus where
-    toJSON = toJSONText
-
--- | [Output Only] The status of the snapshot.
-data Status
-    = SCreating
-      -- ^ @CREATING@
-    | SDeleting
-      -- ^ @DELETING@
-    | SFailed
-      -- ^ @FAILED@
-    | SReady
-      -- ^ @READY@
-    | SUploading
-      -- ^ @UPLOADING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Status
-
-instance FromText Status where
-    fromText = \case
-        "CREATING" -> Just SCreating
-        "DELETING" -> Just SDeleting
-        "FAILED" -> Just SFailed
-        "READY" -> Just SReady
-        "UPLOADING" -> Just SUploading
-        _ -> Nothing
-
-instance ToText Status where
-    toText = \case
-        SCreating -> "CREATING"
-        SDeleting -> "DELETING"
-        SFailed -> "FAILED"
-        SReady -> "READY"
-        SUploading -> "UPLOADING"
-
-instance FromJSON Status where
-    parseJSON = parseJSONText "Status"
-
-instance ToJSON Status where
-    toJSON = toJSONText
-
--- | The format used to encode and transmit the block device, which should be
--- TAR. This is just a container and transmission format and not a runtime
--- format. Provided by the client when the disk image is created.
-data ContainerType
-    = TAR
-      -- ^ @TAR@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContainerType
-
-instance FromText ContainerType where
-    fromText = \case
-        "TAR" -> Just TAR
-        _ -> Nothing
-
-instance ToText ContainerType where
-    toText = \case
-        TAR -> "TAR"
-
-instance FromJSON ContainerType where
-    parseJSON = parseJSONText "ContainerType"
-
-instance ToJSON ContainerType where
-    toJSON = toJSONText
-
--- | Specifies the type of the disk, either SCRATCH or PERSISTENT. If not
--- specified, the default is PERSISTENT.
-data AttachedDiskType
-    = Persistent
-      -- ^ @PERSISTENT@
-    | Scratch
-      -- ^ @SCRATCH@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable AttachedDiskType
-
-instance FromText AttachedDiskType where
-    fromText = \case
-        "PERSISTENT" -> Just Persistent
-        "SCRATCH" -> Just Scratch
-        _ -> Nothing
-
-instance ToText AttachedDiskType where
-    toText = \case
-        Persistent -> "PERSISTENT"
-        Scratch -> "SCRATCH"
-
-instance FromJSON AttachedDiskType where
-    parseJSON = parseJSONText "AttachedDiskType"
-
-instance ToJSON AttachedDiskType where
-    toJSON = toJSONText
-
--- | The deprecation state of this resource. This can be DEPRECATED,
--- OBSOLETE, or DELETED. Operations which create a new resource using a
--- DEPRECATED resource will return successfully, but with a warning
--- indicating the deprecated resource and recommending its replacement.
--- Operations which use OBSOLETE or DELETED resources will be rejected and
--- result in an error.
-data State
-    = SDeleted
-      -- ^ @DELETED@
-    | SDeprecated
-      -- ^ @DEPRECATED@
-    | SObsolete
-      -- ^ @OBSOLETE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable State
-
-instance FromText State where
-    fromText = \case
-        "DELETED" -> Just SDeleted
-        "DEPRECATED" -> Just SDeprecated
-        "OBSOLETE" -> Just SObsolete
-        _ -> Nothing
-
-instance ToText State where
-    toText = \case
-        SDeleted -> "DELETED"
-        SDeprecated -> "DEPRECATED"
-        SObsolete -> "OBSOLETE"
-
-instance FromJSON State where
-    parseJSON = parseJSONText "State"
-
-instance ToJSON State where
+instance ToJSON AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType where
     toJSON = toJSONText
 
 -- | [Output Only] The warning type identifier for this warning.
-data DisksScopedListWarningCode
+data OperationWarningsItemCode
     = DeprecatedResourceUsed
       -- ^ @DEPRECATED_RESOURCE_USED@
     | DiskSizeLargerThanImageSize
@@ -242,9 +110,9 @@ data DisksScopedListWarningCode
       -- ^ @UNREACHABLE@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DisksScopedListWarningCode
+instance Hashable OperationWarningsItemCode
 
-instance FromText DisksScopedListWarningCode where
+instance FromText OperationWarningsItemCode where
     fromText = \case
         "DEPRECATED_RESOURCE_USED" -> Just DeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just DiskSizeLargerThanImageSize
@@ -262,7 +130,7 @@ instance FromText DisksScopedListWarningCode where
         "UNREACHABLE" -> Just Unreachable
         _ -> Nothing
 
-instance ToText DisksScopedListWarningCode where
+instance ToText OperationWarningsItemCode where
     toText = \case
         DeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         DiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
@@ -279,219 +147,84 @@ instance ToText DisksScopedListWarningCode where
         SingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
         Unreachable -> "UNREACHABLE"
 
-instance FromJSON DisksScopedListWarningCode where
-    parseJSON = parseJSONText "DisksScopedListWarningCode"
+instance FromJSON OperationWarningsItemCode where
+    parseJSON = parseJSONText "OperationWarningsItemCode"
 
-instance ToJSON DisksScopedListWarningCode where
+instance ToJSON OperationWarningsItemCode where
     toJSON = toJSONText
 
--- | [Output Only] The warning type identifier for this warning.
-data TargetPoolsScopedListWarningCode
-    = TPSLWCDeprecatedResourceUsed
-      -- ^ @DEPRECATED_RESOURCE_USED@
-    | TPSLWCDiskSizeLargerThanImageSize
-      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
-    | TPSLWCInjectedKernelsDeprecated
-      -- ^ @INJECTED_KERNELS_DEPRECATED@
-    | TPSLWCNextHopAddressNotAssigned
-      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
-    | TPSLWCNextHopCannotIPForward
-      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
-    | TPSLWCNextHopInstanceNotFound
-      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
-    | TPSLWCNextHopInstanceNotOnNetwork
-      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
-    | TPSLWCNextHopNotRunning
-      -- ^ @NEXT_HOP_NOT_RUNNING@
-    | TPSLWCNotCriticalError
-      -- ^ @NOT_CRITICAL_ERROR@
-    | TPSLWCNoResultsOnPage
-      -- ^ @NO_RESULTS_ON_PAGE@
-    | TPSLWCRequiredTosAgreement
-      -- ^ @REQUIRED_TOS_AGREEMENT@
-    | TPSLWCResourceNotDeleted
-      -- ^ @RESOURCE_NOT_DELETED@
-    | TPSLWCSingleInstancePropertyTemplate
-      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
-    | TPSLWCUnreachable
-      -- ^ @UNREACHABLE@
+data BackendServiceProtocol
+    = HTTP
+      -- ^ @HTTP@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable TargetPoolsScopedListWarningCode
+instance Hashable BackendServiceProtocol
 
-instance FromText TargetPoolsScopedListWarningCode where
+instance FromText BackendServiceProtocol where
     fromText = \case
-        "DEPRECATED_RESOURCE_USED" -> Just TPSLWCDeprecatedResourceUsed
-        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just TPSLWCDiskSizeLargerThanImageSize
-        "INJECTED_KERNELS_DEPRECATED" -> Just TPSLWCInjectedKernelsDeprecated
-        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Just TPSLWCNextHopAddressNotAssigned
-        "NEXT_HOP_CANNOT_IP_FORWARD" -> Just TPSLWCNextHopCannotIPForward
-        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Just TPSLWCNextHopInstanceNotFound
-        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Just TPSLWCNextHopInstanceNotOnNetwork
-        "NEXT_HOP_NOT_RUNNING" -> Just TPSLWCNextHopNotRunning
-        "NOT_CRITICAL_ERROR" -> Just TPSLWCNotCriticalError
-        "NO_RESULTS_ON_PAGE" -> Just TPSLWCNoResultsOnPage
-        "REQUIRED_TOS_AGREEMENT" -> Just TPSLWCRequiredTosAgreement
-        "RESOURCE_NOT_DELETED" -> Just TPSLWCResourceNotDeleted
-        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Just TPSLWCSingleInstancePropertyTemplate
-        "UNREACHABLE" -> Just TPSLWCUnreachable
+        "HTTP" -> Just HTTP
         _ -> Nothing
 
-instance ToText TargetPoolsScopedListWarningCode where
+instance ToText BackendServiceProtocol where
     toText = \case
-        TPSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
-        TPSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
-        TPSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
-        TPSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
-        TPSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
-        TPSLWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
-        TPSLWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
-        TPSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
-        TPSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
-        TPSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
-        TPSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
-        TPSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
-        TPSLWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
-        TPSLWCUnreachable -> "UNREACHABLE"
+        HTTP -> "HTTP"
 
-instance FromJSON TargetPoolsScopedListWarningCode where
-    parseJSON = parseJSONText "TargetPoolsScopedListWarningCode"
+instance FromJSON BackendServiceProtocol where
+    parseJSON = parseJSONText "BackendServiceProtocol"
 
-instance ToJSON TargetPoolsScopedListWarningCode where
+instance ToJSON BackendServiceProtocol where
+    toJSON = toJSONText
+
+-- | Specifies the type of the disk, either SCRATCH or PERSISTENT. If not
+-- specified, the default is PERSISTENT.
+data AttachedDiskType
+    = Persistent
+      -- ^ @PERSISTENT@
+    | Scratch
+      -- ^ @SCRATCH@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable AttachedDiskType
+
+instance FromText AttachedDiskType where
+    fromText = \case
+        "PERSISTENT" -> Just Persistent
+        "SCRATCH" -> Just Scratch
+        _ -> Nothing
+
+instance ToText AttachedDiskType where
+    toText = \case
+        Persistent -> "PERSISTENT"
+        Scratch -> "SCRATCH"
+
+instance FromJSON AttachedDiskType where
+    parseJSON = parseJSONText "AttachedDiskType"
+
+instance ToJSON AttachedDiskType where
     toJSON = toJSONText
 
 -- | The type of the image used to create this disk. The default and only
 -- value is RAW
-data SourceType
+data ImageSourceType
     = Raw
       -- ^ @RAW@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable SourceType
+instance Hashable ImageSourceType
 
-instance FromText SourceType where
+instance FromText ImageSourceType where
     fromText = \case
         "RAW" -> Just Raw
         _ -> Nothing
 
-instance ToText SourceType where
+instance ToText ImageSourceType where
     toText = \case
         Raw -> "RAW"
 
-instance FromJSON SourceType where
-    parseJSON = parseJSONText "SourceType"
+instance FromJSON ImageSourceType where
+    parseJSON = parseJSONText "ImageSourceType"
 
-instance ToJSON SourceType where
-    toJSON = toJSONText
-
--- | [Output Only] The status of the VPN gateway.
-data TargetVPNGatewayStatus
-    = TVGSCreating
-      -- ^ @CREATING@
-    | TVGSDeleting
-      -- ^ @DELETING@
-    | TVGSFailed
-      -- ^ @FAILED@
-    | TVGSReady
-      -- ^ @READY@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable TargetVPNGatewayStatus
-
-instance FromText TargetVPNGatewayStatus where
-    fromText = \case
-        "CREATING" -> Just TVGSCreating
-        "DELETING" -> Just TVGSDeleting
-        "FAILED" -> Just TVGSFailed
-        "READY" -> Just TVGSReady
-        _ -> Nothing
-
-instance ToText TargetVPNGatewayStatus where
-    toText = \case
-        TVGSCreating -> "CREATING"
-        TVGSDeleting -> "DELETING"
-        TVGSFailed -> "FAILED"
-        TVGSReady -> "READY"
-
-instance FromJSON TargetVPNGatewayStatus where
-    parseJSON = parseJSONText "TargetVPNGatewayStatus"
-
-instance ToJSON TargetVPNGatewayStatus where
-    toJSON = toJSONText
-
--- | [Output Only] The warning type identifier for this warning.
-data InstanceGroupManagersScopedListWarningCode
-    = IGMSLWCDeprecatedResourceUsed
-      -- ^ @DEPRECATED_RESOURCE_USED@
-    | IGMSLWCDiskSizeLargerThanImageSize
-      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
-    | IGMSLWCInjectedKernelsDeprecated
-      -- ^ @INJECTED_KERNELS_DEPRECATED@
-    | IGMSLWCNextHopAddressNotAssigned
-      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
-    | IGMSLWCNextHopCannotIPForward
-      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
-    | IGMSLWCNextHopInstanceNotFound
-      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
-    | IGMSLWCNextHopInstanceNotOnNetwork
-      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
-    | IGMSLWCNextHopNotRunning
-      -- ^ @NEXT_HOP_NOT_RUNNING@
-    | IGMSLWCNotCriticalError
-      -- ^ @NOT_CRITICAL_ERROR@
-    | IGMSLWCNoResultsOnPage
-      -- ^ @NO_RESULTS_ON_PAGE@
-    | IGMSLWCRequiredTosAgreement
-      -- ^ @REQUIRED_TOS_AGREEMENT@
-    | IGMSLWCResourceNotDeleted
-      -- ^ @RESOURCE_NOT_DELETED@
-    | IGMSLWCSingleInstancePropertyTemplate
-      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
-    | IGMSLWCUnreachable
-      -- ^ @UNREACHABLE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable InstanceGroupManagersScopedListWarningCode
-
-instance FromText InstanceGroupManagersScopedListWarningCode where
-    fromText = \case
-        "DEPRECATED_RESOURCE_USED" -> Just IGMSLWCDeprecatedResourceUsed
-        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just IGMSLWCDiskSizeLargerThanImageSize
-        "INJECTED_KERNELS_DEPRECATED" -> Just IGMSLWCInjectedKernelsDeprecated
-        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Just IGMSLWCNextHopAddressNotAssigned
-        "NEXT_HOP_CANNOT_IP_FORWARD" -> Just IGMSLWCNextHopCannotIPForward
-        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Just IGMSLWCNextHopInstanceNotFound
-        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Just IGMSLWCNextHopInstanceNotOnNetwork
-        "NEXT_HOP_NOT_RUNNING" -> Just IGMSLWCNextHopNotRunning
-        "NOT_CRITICAL_ERROR" -> Just IGMSLWCNotCriticalError
-        "NO_RESULTS_ON_PAGE" -> Just IGMSLWCNoResultsOnPage
-        "REQUIRED_TOS_AGREEMENT" -> Just IGMSLWCRequiredTosAgreement
-        "RESOURCE_NOT_DELETED" -> Just IGMSLWCResourceNotDeleted
-        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Just IGMSLWCSingleInstancePropertyTemplate
-        "UNREACHABLE" -> Just IGMSLWCUnreachable
-        _ -> Nothing
-
-instance ToText InstanceGroupManagersScopedListWarningCode where
-    toText = \case
-        IGMSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
-        IGMSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
-        IGMSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
-        IGMSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
-        IGMSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
-        IGMSLWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
-        IGMSLWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
-        IGMSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
-        IGMSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
-        IGMSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
-        IGMSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
-        IGMSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
-        IGMSLWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
-        IGMSLWCUnreachable -> "UNREACHABLE"
-
-instance FromJSON InstanceGroupManagersScopedListWarningCode where
-    parseJSON = parseJSONText "InstanceGroupManagersScopedListWarningCode"
-
-instance ToJSON InstanceGroupManagersScopedListWarningCode where
+instance ToJSON ImageSourceType where
     toJSON = toJSONText
 
 -- | [Output Only] The warning type identifier for this warning.
@@ -645,78 +378,302 @@ instance ToJSON OperationsScopedListWarningCode where
     toJSON = toJSONText
 
 -- | [Output Only] The warning type identifier for this warning.
-data RouteWarningsItemCode
-    = RWICDeprecatedResourceUsed
+data DisksScopedListWarningCode
+    = DSLWCDeprecatedResourceUsed
       -- ^ @DEPRECATED_RESOURCE_USED@
-    | RWICDiskSizeLargerThanImageSize
+    | DSLWCDiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
-    | RWICInjectedKernelsDeprecated
+    | DSLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
-    | RWICNextHopAddressNotAssigned
+    | DSLWCNextHopAddressNotAssigned
       -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
-    | RWICNextHopCannotIPForward
+    | DSLWCNextHopCannotIPForward
       -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
-    | RWICNextHopInstanceNotFound
+    | DSLWCNextHopInstanceNotFound
       -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
-    | RWICNextHopInstanceNotOnNetwork
+    | DSLWCNextHopInstanceNotOnNetwork
       -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
-    | RWICNextHopNotRunning
+    | DSLWCNextHopNotRunning
       -- ^ @NEXT_HOP_NOT_RUNNING@
-    | RWICNotCriticalError
+    | DSLWCNotCriticalError
       -- ^ @NOT_CRITICAL_ERROR@
-    | RWICNoResultsOnPage
+    | DSLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
-    | RWICRequiredTosAgreement
+    | DSLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
-    | RWICResourceNotDeleted
+    | DSLWCResourceNotDeleted
       -- ^ @RESOURCE_NOT_DELETED@
-    | RWICSingleInstancePropertyTemplate
+    | DSLWCSingleInstancePropertyTemplate
       -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
-    | RWICUnreachable
+    | DSLWCUnreachable
       -- ^ @UNREACHABLE@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable RouteWarningsItemCode
+instance Hashable DisksScopedListWarningCode
 
-instance FromText RouteWarningsItemCode where
+instance FromText DisksScopedListWarningCode where
     fromText = \case
-        "DEPRECATED_RESOURCE_USED" -> Just RWICDeprecatedResourceUsed
-        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just RWICDiskSizeLargerThanImageSize
-        "INJECTED_KERNELS_DEPRECATED" -> Just RWICInjectedKernelsDeprecated
-        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Just RWICNextHopAddressNotAssigned
-        "NEXT_HOP_CANNOT_IP_FORWARD" -> Just RWICNextHopCannotIPForward
-        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Just RWICNextHopInstanceNotFound
-        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Just RWICNextHopInstanceNotOnNetwork
-        "NEXT_HOP_NOT_RUNNING" -> Just RWICNextHopNotRunning
-        "NOT_CRITICAL_ERROR" -> Just RWICNotCriticalError
-        "NO_RESULTS_ON_PAGE" -> Just RWICNoResultsOnPage
-        "REQUIRED_TOS_AGREEMENT" -> Just RWICRequiredTosAgreement
-        "RESOURCE_NOT_DELETED" -> Just RWICResourceNotDeleted
-        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Just RWICSingleInstancePropertyTemplate
-        "UNREACHABLE" -> Just RWICUnreachable
+        "DEPRECATED_RESOURCE_USED" -> Just DSLWCDeprecatedResourceUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just DSLWCDiskSizeLargerThanImageSize
+        "INJECTED_KERNELS_DEPRECATED" -> Just DSLWCInjectedKernelsDeprecated
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Just DSLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Just DSLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Just DSLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Just DSLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Just DSLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Just DSLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Just DSLWCNoResultsOnPage
+        "REQUIRED_TOS_AGREEMENT" -> Just DSLWCRequiredTosAgreement
+        "RESOURCE_NOT_DELETED" -> Just DSLWCResourceNotDeleted
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Just DSLWCSingleInstancePropertyTemplate
+        "UNREACHABLE" -> Just DSLWCUnreachable
         _ -> Nothing
 
-instance ToText RouteWarningsItemCode where
+instance ToText DisksScopedListWarningCode where
     toText = \case
-        RWICDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
-        RWICDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
-        RWICInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
-        RWICNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
-        RWICNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
-        RWICNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
-        RWICNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
-        RWICNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
-        RWICNotCriticalError -> "NOT_CRITICAL_ERROR"
-        RWICNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
-        RWICRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
-        RWICResourceNotDeleted -> "RESOURCE_NOT_DELETED"
-        RWICSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
-        RWICUnreachable -> "UNREACHABLE"
+        DSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        DSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        DSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        DSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        DSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        DSLWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        DSLWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        DSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        DSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        DSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        DSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        DSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        DSLWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        DSLWCUnreachable -> "UNREACHABLE"
 
-instance FromJSON RouteWarningsItemCode where
-    parseJSON = parseJSONText "RouteWarningsItemCode"
+instance FromJSON DisksScopedListWarningCode where
+    parseJSON = parseJSONText "DisksScopedListWarningCode"
 
-instance ToJSON RouteWarningsItemCode where
+instance ToJSON DisksScopedListWarningCode where
+    toJSON = toJSONText
+
+-- | [Output Only] The warning type identifier for this warning.
+data InstanceGroupManagersScopedListWarningCode
+    = IGMSLWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | IGMSLWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | IGMSLWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | IGMSLWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | IGMSLWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | IGMSLWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | IGMSLWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | IGMSLWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | IGMSLWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | IGMSLWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | IGMSLWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | IGMSLWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | IGMSLWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | IGMSLWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable InstanceGroupManagersScopedListWarningCode
+
+instance FromText InstanceGroupManagersScopedListWarningCode where
+    fromText = \case
+        "DEPRECATED_RESOURCE_USED" -> Just IGMSLWCDeprecatedResourceUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just IGMSLWCDiskSizeLargerThanImageSize
+        "INJECTED_KERNELS_DEPRECATED" -> Just IGMSLWCInjectedKernelsDeprecated
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Just IGMSLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Just IGMSLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Just IGMSLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Just IGMSLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Just IGMSLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Just IGMSLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Just IGMSLWCNoResultsOnPage
+        "REQUIRED_TOS_AGREEMENT" -> Just IGMSLWCRequiredTosAgreement
+        "RESOURCE_NOT_DELETED" -> Just IGMSLWCResourceNotDeleted
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Just IGMSLWCSingleInstancePropertyTemplate
+        "UNREACHABLE" -> Just IGMSLWCUnreachable
+        _ -> Nothing
+
+instance ToText InstanceGroupManagersScopedListWarningCode where
+    toText = \case
+        IGMSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        IGMSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        IGMSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        IGMSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        IGMSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        IGMSLWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        IGMSLWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        IGMSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        IGMSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        IGMSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        IGMSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        IGMSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        IGMSLWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        IGMSLWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON InstanceGroupManagersScopedListWarningCode where
+    parseJSON = parseJSONText "InstanceGroupManagersScopedListWarningCode"
+
+instance ToJSON InstanceGroupManagersScopedListWarningCode where
+    toJSON = toJSONText
+
+-- | [Output Only] The warning type identifier for this warning.
+data TargetPoolsScopedListWarningCode
+    = TPSLWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | TPSLWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | TPSLWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | TPSLWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | TPSLWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | TPSLWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | TPSLWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | TPSLWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | TPSLWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | TPSLWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | TPSLWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | TPSLWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | TPSLWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | TPSLWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable TargetPoolsScopedListWarningCode
+
+instance FromText TargetPoolsScopedListWarningCode where
+    fromText = \case
+        "DEPRECATED_RESOURCE_USED" -> Just TPSLWCDeprecatedResourceUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just TPSLWCDiskSizeLargerThanImageSize
+        "INJECTED_KERNELS_DEPRECATED" -> Just TPSLWCInjectedKernelsDeprecated
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Just TPSLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Just TPSLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Just TPSLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Just TPSLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Just TPSLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Just TPSLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Just TPSLWCNoResultsOnPage
+        "REQUIRED_TOS_AGREEMENT" -> Just TPSLWCRequiredTosAgreement
+        "RESOURCE_NOT_DELETED" -> Just TPSLWCResourceNotDeleted
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Just TPSLWCSingleInstancePropertyTemplate
+        "UNREACHABLE" -> Just TPSLWCUnreachable
+        _ -> Nothing
+
+instance ToText TargetPoolsScopedListWarningCode where
+    toText = \case
+        TPSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        TPSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        TPSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        TPSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        TPSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        TPSLWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        TPSLWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        TPSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        TPSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        TPSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        TPSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        TPSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        TPSLWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        TPSLWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON TargetPoolsScopedListWarningCode where
+    parseJSON = parseJSONText "TargetPoolsScopedListWarningCode"
+
+instance ToJSON TargetPoolsScopedListWarningCode where
+    toJSON = toJSONText
+
+-- | [Output Only] The status of the VPN gateway.
+data TargetVPNGatewayStatus
+    = Creating
+      -- ^ @CREATING@
+    | Deleting
+      -- ^ @DELETING@
+    | Failed
+      -- ^ @FAILED@
+    | Ready
+      -- ^ @READY@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable TargetVPNGatewayStatus
+
+instance FromText TargetVPNGatewayStatus where
+    fromText = \case
+        "CREATING" -> Just Creating
+        "DELETING" -> Just Deleting
+        "FAILED" -> Just Failed
+        "READY" -> Just Ready
+        _ -> Nothing
+
+instance ToText TargetVPNGatewayStatus where
+    toText = \case
+        Creating -> "CREATING"
+        Deleting -> "DELETING"
+        Failed -> "FAILED"
+        Ready -> "READY"
+
+instance FromJSON TargetVPNGatewayStatus where
+    parseJSON = parseJSONText "TargetVPNGatewayStatus"
+
+instance ToJSON TargetVPNGatewayStatus where
+    toJSON = toJSONText
+
+-- | [Output Only] The status of the snapshot.
+data SnapshotStatus
+    = SSCreating
+      -- ^ @CREATING@
+    | SSDeleting
+      -- ^ @DELETING@
+    | SSFailed
+      -- ^ @FAILED@
+    | SSReady
+      -- ^ @READY@
+    | SSUploading
+      -- ^ @UPLOADING@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable SnapshotStatus
+
+instance FromText SnapshotStatus where
+    fromText = \case
+        "CREATING" -> Just SSCreating
+        "DELETING" -> Just SSDeleting
+        "FAILED" -> Just SSFailed
+        "READY" -> Just SSReady
+        "UPLOADING" -> Just SSUploading
+        _ -> Nothing
+
+instance ToText SnapshotStatus where
+    toText = \case
+        SSCreating -> "CREATING"
+        SSDeleting -> "DELETING"
+        SSFailed -> "FAILED"
+        SSReady -> "READY"
+        SSUploading -> "UPLOADING"
+
+instance FromJSON SnapshotStatus where
+    parseJSON = parseJSONText "SnapshotStatus"
+
+instance ToJSON SnapshotStatus where
     toJSON = toJSONText
 
 -- | [Output Only] The warning type identifier for this warning.
@@ -794,84 +751,182 @@ instance FromJSON TargetInstancesScopedListWarningCode where
 instance ToJSON TargetInstancesScopedListWarningCode where
     toJSON = toJSONText
 
--- | Specifies the balancing mode for this backend. The default is
--- UTILIZATION but available values are UTILIZATION and RATE.
-data BalancingMode
-    = Rate
-      -- ^ @RATE@
-    | Utilization
-      -- ^ @UTILIZATION@
+-- | [Output Only] The warning type identifier for this warning.
+data RouteWarningsItemCode
+    = RWICDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | RWICDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | RWICInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | RWICNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | RWICNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | RWICNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | RWICNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | RWICNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | RWICNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | RWICNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | RWICRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | RWICResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | RWICSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | RWICUnreachable
+      -- ^ @UNREACHABLE@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable BalancingMode
+instance Hashable RouteWarningsItemCode
 
-instance FromText BalancingMode where
+instance FromText RouteWarningsItemCode where
     fromText = \case
-        "RATE" -> Just Rate
-        "UTILIZATION" -> Just Utilization
+        "DEPRECATED_RESOURCE_USED" -> Just RWICDeprecatedResourceUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just RWICDiskSizeLargerThanImageSize
+        "INJECTED_KERNELS_DEPRECATED" -> Just RWICInjectedKernelsDeprecated
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Just RWICNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Just RWICNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Just RWICNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Just RWICNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Just RWICNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Just RWICNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Just RWICNoResultsOnPage
+        "REQUIRED_TOS_AGREEMENT" -> Just RWICRequiredTosAgreement
+        "RESOURCE_NOT_DELETED" -> Just RWICResourceNotDeleted
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Just RWICSingleInstancePropertyTemplate
+        "UNREACHABLE" -> Just RWICUnreachable
         _ -> Nothing
 
-instance ToText BalancingMode where
+instance ToText RouteWarningsItemCode where
     toText = \case
-        Rate -> "RATE"
-        Utilization -> "UTILIZATION"
+        RWICDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        RWICDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        RWICInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        RWICNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        RWICNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        RWICNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        RWICNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        RWICNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        RWICNotCriticalError -> "NOT_CRITICAL_ERROR"
+        RWICNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        RWICRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        RWICResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        RWICSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        RWICUnreachable -> "UNREACHABLE"
 
-instance FromJSON BalancingMode where
-    parseJSON = parseJSONText "BalancingMode"
+instance FromJSON RouteWarningsItemCode where
+    parseJSON = parseJSONText "RouteWarningsItemCode"
 
-instance ToJSON BalancingMode where
+instance ToJSON RouteWarningsItemCode where
     toJSON = toJSONText
 
--- | The mode in which to attach this disk, either READ_WRITE or READ_ONLY.
--- If not specified, the default is to attach the disk in READ_WRITE mode.
-data Mode
-    = ReadOnly
-      -- ^ @READ_ONLY@
-    | ReadWrite
-      -- ^ @READ_WRITE@
+-- | [Output Only] An indicator whether storageBytes is in a stable state or
+-- it is being adjusted as a result of shared storage reallocation.
+data SnapshotStorageBytesStatus
+    = Updating
+      -- ^ @UPDATING@
+    | UpToDate
+      -- ^ @UP_TO_DATE@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable Mode
+instance Hashable SnapshotStorageBytesStatus
 
-instance FromText Mode where
+instance FromText SnapshotStorageBytesStatus where
     fromText = \case
-        "READ_ONLY" -> Just ReadOnly
-        "READ_WRITE" -> Just ReadWrite
+        "UPDATING" -> Just Updating
+        "UP_TO_DATE" -> Just UpToDate
         _ -> Nothing
 
-instance ToText Mode where
+instance ToText SnapshotStorageBytesStatus where
     toText = \case
-        ReadOnly -> "READ_ONLY"
-        ReadWrite -> "READ_WRITE"
+        Updating -> "UPDATING"
+        UpToDate -> "UP_TO_DATE"
 
-instance FromJSON Mode where
-    parseJSON = parseJSONText "Mode"
+instance FromJSON SnapshotStorageBytesStatus where
+    parseJSON = parseJSONText "SnapshotStorageBytesStatus"
 
-instance ToJSON Mode where
+instance ToJSON SnapshotStorageBytesStatus where
     toJSON = toJSONText
 
--- | NAT option controlling how IPs are NAT\'ed to the instance. Currently
--- only NO_NAT (default value) is supported.
-data NATPolicy
-    = NoNAT
-      -- ^ @NO_NAT@
+-- | [Output Only] The warning type identifier for this warning.
+data AddressesScopedListWarningCode
+    = ASLWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | ASLWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | ASLWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | ASLWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | ASLWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | ASLWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | ASLWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | ASLWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | ASLWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | ASLWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | ASLWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | ASLWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | ASLWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | ASLWCUnreachable
+      -- ^ @UNREACHABLE@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable NATPolicy
+instance Hashable AddressesScopedListWarningCode
 
-instance FromText NATPolicy where
+instance FromText AddressesScopedListWarningCode where
     fromText = \case
-        "NO_NAT" -> Just NoNAT
+        "DEPRECATED_RESOURCE_USED" -> Just ASLWCDeprecatedResourceUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just ASLWCDiskSizeLargerThanImageSize
+        "INJECTED_KERNELS_DEPRECATED" -> Just ASLWCInjectedKernelsDeprecated
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Just ASLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Just ASLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Just ASLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Just ASLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Just ASLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Just ASLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Just ASLWCNoResultsOnPage
+        "REQUIRED_TOS_AGREEMENT" -> Just ASLWCRequiredTosAgreement
+        "RESOURCE_NOT_DELETED" -> Just ASLWCResourceNotDeleted
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Just ASLWCSingleInstancePropertyTemplate
+        "UNREACHABLE" -> Just ASLWCUnreachable
         _ -> Nothing
 
-instance ToText NATPolicy where
+instance ToText AddressesScopedListWarningCode where
     toText = \case
-        NoNAT -> "NO_NAT"
+        ASLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        ASLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        ASLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        ASLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        ASLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        ASLWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        ASLWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        ASLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        ASLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        ASLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        ASLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        ASLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        ASLWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        ASLWCUnreachable -> "UNREACHABLE"
 
-instance FromJSON NATPolicy where
-    parseJSON = parseJSONText "NATPolicy"
+instance FromJSON AddressesScopedListWarningCode where
+    parseJSON = parseJSONText "AddressesScopedListWarningCode"
 
-instance ToJSON NATPolicy where
+instance ToJSON AddressesScopedListWarningCode where
     toJSON = toJSONText
 
 -- | [Output Only] The status of the image. An image can be used to create
@@ -879,11 +934,11 @@ instance ToJSON NATPolicy where
 -- successfully created and the status is set to READY. Possible values are
 -- FAILED, PENDING, or READY.
 data ImageStatus
-    = Failed
+    = ISFailed
       -- ^ @FAILED@
-    | Pending
+    | ISPending
       -- ^ @PENDING@
-    | Ready
+    | ISReady
       -- ^ @READY@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -891,21 +946,156 @@ instance Hashable ImageStatus
 
 instance FromText ImageStatus where
     fromText = \case
-        "FAILED" -> Just Failed
-        "PENDING" -> Just Pending
-        "READY" -> Just Ready
+        "FAILED" -> Just ISFailed
+        "PENDING" -> Just ISPending
+        "READY" -> Just ISReady
         _ -> Nothing
 
 instance ToText ImageStatus where
     toText = \case
-        Failed -> "FAILED"
-        Pending -> "PENDING"
-        Ready -> "READY"
+        ISFailed -> "FAILED"
+        ISPending -> "PENDING"
+        ISReady -> "READY"
 
 instance FromJSON ImageStatus where
     parseJSON = parseJSONText "ImageStatus"
 
 instance ToJSON ImageStatus where
+    toJSON = toJSONText
+
+-- | Health state of the instance.
+data HealthStatusHealthState
+    = Healthy
+      -- ^ @HEALTHY@
+    | Unhealthy
+      -- ^ @UNHEALTHY@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable HealthStatusHealthState
+
+instance FromText HealthStatusHealthState where
+    fromText = \case
+        "HEALTHY" -> Just Healthy
+        "UNHEALTHY" -> Just Unhealthy
+        _ -> Nothing
+
+instance ToText HealthStatusHealthState where
+    toText = \case
+        Healthy -> "HEALTHY"
+        Unhealthy -> "UNHEALTHY"
+
+instance FromJSON HealthStatusHealthState where
+    parseJSON = parseJSONText "HealthStatusHealthState"
+
+instance ToJSON HealthStatusHealthState where
+    toJSON = toJSONText
+
+-- | The deprecation state of this resource. This can be DEPRECATED,
+-- OBSOLETE, or DELETED. Operations which create a new resource using a
+-- DEPRECATED resource will return successfully, but with a warning
+-- indicating the deprecated resource and recommending its replacement.
+-- Operations which use OBSOLETE or DELETED resources will be rejected and
+-- result in an error.
+data DeprecationStatusState
+    = Deleted
+      -- ^ @DELETED@
+    | Deprecated
+      -- ^ @DEPRECATED@
+    | Obsolete
+      -- ^ @OBSOLETE@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable DeprecationStatusState
+
+instance FromText DeprecationStatusState where
+    fromText = \case
+        "DELETED" -> Just Deleted
+        "DEPRECATED" -> Just Deprecated
+        "OBSOLETE" -> Just Obsolete
+        _ -> Nothing
+
+instance ToText DeprecationStatusState where
+    toText = \case
+        Deleted -> "DELETED"
+        Deprecated -> "DEPRECATED"
+        Obsolete -> "OBSOLETE"
+
+instance FromJSON DeprecationStatusState where
+    parseJSON = parseJSONText "DeprecationStatusState"
+
+instance ToJSON DeprecationStatusState where
+    toJSON = toJSONText
+
+-- | The current action that the managed instance group has scheduled for the
+-- instance.
+data ManagedInstanceCurrentAction
+    = MICAAbandoning
+      -- ^ @ABANDONING@
+    | MICACreating
+      -- ^ @CREATING@
+    | MICADeleting
+      -- ^ @DELETING@
+    | MICANone
+      -- ^ @NONE@
+    | MICARecreating
+      -- ^ @RECREATING@
+    | MICARefreshing
+      -- ^ @REFRESHING@
+    | MICARestarting
+      -- ^ @RESTARTING@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ManagedInstanceCurrentAction
+
+instance FromText ManagedInstanceCurrentAction where
+    fromText = \case
+        "ABANDONING" -> Just MICAAbandoning
+        "CREATING" -> Just MICACreating
+        "DELETING" -> Just MICADeleting
+        "NONE" -> Just MICANone
+        "RECREATING" -> Just MICARecreating
+        "REFRESHING" -> Just MICARefreshing
+        "RESTARTING" -> Just MICARestarting
+        _ -> Nothing
+
+instance ToText ManagedInstanceCurrentAction where
+    toText = \case
+        MICAAbandoning -> "ABANDONING"
+        MICACreating -> "CREATING"
+        MICADeleting -> "DELETING"
+        MICANone -> "NONE"
+        MICARecreating -> "RECREATING"
+        MICARefreshing -> "REFRESHING"
+        MICARestarting -> "RESTARTING"
+
+instance FromJSON ManagedInstanceCurrentAction where
+    parseJSON = parseJSONText "ManagedInstanceCurrentAction"
+
+instance ToJSON ManagedInstanceCurrentAction where
+    toJSON = toJSONText
+
+-- | NAT option controlling how IPs are NAT\'ed to the instance. Currently
+-- only NO_NAT (default value) is supported.
+data TargetInstanceNATPolicy
+    = NoNAT
+      -- ^ @NO_NAT@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable TargetInstanceNATPolicy
+
+instance FromText TargetInstanceNATPolicy where
+    fromText = \case
+        "NO_NAT" -> Just NoNAT
+        _ -> Nothing
+
+instance ToText TargetInstanceNATPolicy where
+    toText = \case
+        NoNAT -> "NO_NAT"
+
+instance FromJSON TargetInstanceNATPolicy where
+    parseJSON = parseJSONText "TargetInstanceNATPolicy"
+
+instance ToJSON TargetInstanceNATPolicy where
     toJSON = toJSONText
 
 -- | The type of configuration. The default and only option is
@@ -932,72 +1122,14 @@ instance FromJSON AccessConfigType where
 instance ToJSON AccessConfigType where
     toJSON = toJSONText
 
-data Protocol
-    = HTTP
-      -- ^ @HTTP@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Protocol
-
-instance FromText Protocol where
-    fromText = \case
-        "HTTP" -> Just HTTP
-        _ -> Nothing
-
-instance ToText Protocol where
-    toText = \case
-        HTTP -> "HTTP"
-
-instance FromJSON Protocol where
-    parseJSON = parseJSONText "Protocol"
-
-instance ToJSON Protocol where
-    toJSON = toJSONText
-
--- | [Output Only] The status of disk creation. Applicable statuses includes:
--- CREATING, FAILED, READY, RESTORING.
-data DiskStatus
-    = DSCreating
-      -- ^ @CREATING@
-    | DSFailed
-      -- ^ @FAILED@
-    | DSReady
-      -- ^ @READY@
-    | DSRestoring
-      -- ^ @RESTORING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DiskStatus
-
-instance FromText DiskStatus where
-    fromText = \case
-        "CREATING" -> Just DSCreating
-        "FAILED" -> Just DSFailed
-        "READY" -> Just DSReady
-        "RESTORING" -> Just DSRestoring
-        _ -> Nothing
-
-instance ToText DiskStatus where
-    toText = \case
-        DSCreating -> "CREATING"
-        DSFailed -> "FAILED"
-        DSReady -> "READY"
-        DSRestoring -> "RESTORING"
-
-instance FromJSON DiskStatus where
-    parseJSON = parseJSONText "DiskStatus"
-
-instance ToJSON DiskStatus where
-    toJSON = toJSONText
-
 -- | [Output Only] Status of the operation. Can be one of the following:
 -- PENDING, RUNNING, or DONE.
 data OperationStatus
-    = OSDone
+    = Done
       -- ^ @DONE@
-    | OSPending
+    | Pending
       -- ^ @PENDING@
-    | OSRunning
+    | Running
       -- ^ @RUNNING@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -1005,96 +1137,21 @@ instance Hashable OperationStatus
 
 instance FromText OperationStatus where
     fromText = \case
-        "DONE" -> Just OSDone
-        "PENDING" -> Just OSPending
-        "RUNNING" -> Just OSRunning
+        "DONE" -> Just Done
+        "PENDING" -> Just Pending
+        "RUNNING" -> Just Running
         _ -> Nothing
 
 instance ToText OperationStatus where
     toText = \case
-        OSDone -> "DONE"
-        OSPending -> "PENDING"
-        OSRunning -> "RUNNING"
+        Done -> "DONE"
+        Pending -> "PENDING"
+        Running -> "RUNNING"
 
 instance FromJSON OperationStatus where
     parseJSON = parseJSONText "OperationStatus"
 
 instance ToJSON OperationStatus where
-    toJSON = toJSONText
-
--- | [Output Only] The warning type identifier for this warning.
-data WarningsItemCode
-    = WICDeprecatedResourceUsed
-      -- ^ @DEPRECATED_RESOURCE_USED@
-    | WICDiskSizeLargerThanImageSize
-      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
-    | WICInjectedKernelsDeprecated
-      -- ^ @INJECTED_KERNELS_DEPRECATED@
-    | WICNextHopAddressNotAssigned
-      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
-    | WICNextHopCannotIPForward
-      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
-    | WICNextHopInstanceNotFound
-      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
-    | WICNextHopInstanceNotOnNetwork
-      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
-    | WICNextHopNotRunning
-      -- ^ @NEXT_HOP_NOT_RUNNING@
-    | WICNotCriticalError
-      -- ^ @NOT_CRITICAL_ERROR@
-    | WICNoResultsOnPage
-      -- ^ @NO_RESULTS_ON_PAGE@
-    | WICRequiredTosAgreement
-      -- ^ @REQUIRED_TOS_AGREEMENT@
-    | WICResourceNotDeleted
-      -- ^ @RESOURCE_NOT_DELETED@
-    | WICSingleInstancePropertyTemplate
-      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
-    | WICUnreachable
-      -- ^ @UNREACHABLE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable WarningsItemCode
-
-instance FromText WarningsItemCode where
-    fromText = \case
-        "DEPRECATED_RESOURCE_USED" -> Just WICDeprecatedResourceUsed
-        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just WICDiskSizeLargerThanImageSize
-        "INJECTED_KERNELS_DEPRECATED" -> Just WICInjectedKernelsDeprecated
-        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Just WICNextHopAddressNotAssigned
-        "NEXT_HOP_CANNOT_IP_FORWARD" -> Just WICNextHopCannotIPForward
-        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Just WICNextHopInstanceNotFound
-        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Just WICNextHopInstanceNotOnNetwork
-        "NEXT_HOP_NOT_RUNNING" -> Just WICNextHopNotRunning
-        "NOT_CRITICAL_ERROR" -> Just WICNotCriticalError
-        "NO_RESULTS_ON_PAGE" -> Just WICNoResultsOnPage
-        "REQUIRED_TOS_AGREEMENT" -> Just WICRequiredTosAgreement
-        "RESOURCE_NOT_DELETED" -> Just WICResourceNotDeleted
-        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Just WICSingleInstancePropertyTemplate
-        "UNREACHABLE" -> Just WICUnreachable
-        _ -> Nothing
-
-instance ToText WarningsItemCode where
-    toText = \case
-        WICDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
-        WICDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
-        WICInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
-        WICNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
-        WICNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
-        WICNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
-        WICNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
-        WICNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
-        WICNotCriticalError -> "NOT_CRITICAL_ERROR"
-        WICNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
-        WICRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
-        WICResourceNotDeleted -> "RESOURCE_NOT_DELETED"
-        WICSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
-        WICUnreachable -> "UNREACHABLE"
-
-instance FromJSON WarningsItemCode where
-    parseJSON = parseJSONText "WarningsItemCode"
-
-instance ToJSON WarningsItemCode where
     toJSON = toJSONText
 
 -- | [Output Only] The warning type identifier for this warning.
@@ -1172,6 +1229,148 @@ instance FromJSON TargetVPNGatewaysScopedListWarningCode where
 instance ToJSON TargetVPNGatewaysScopedListWarningCode where
     toJSON = toJSONText
 
+-- | [Output Only] The status of disk creation. Applicable statuses includes:
+-- CREATING, FAILED, READY, RESTORING.
+data DiskStatus
+    = DSCreating
+      -- ^ @CREATING@
+    | DSFailed
+      -- ^ @FAILED@
+    | DSReady
+      -- ^ @READY@
+    | DSRestoring
+      -- ^ @RESTORING@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable DiskStatus
+
+instance FromText DiskStatus where
+    fromText = \case
+        "CREATING" -> Just DSCreating
+        "FAILED" -> Just DSFailed
+        "READY" -> Just DSReady
+        "RESTORING" -> Just DSRestoring
+        _ -> Nothing
+
+instance ToText DiskStatus where
+    toText = \case
+        DSCreating -> "CREATING"
+        DSFailed -> "FAILED"
+        DSReady -> "READY"
+        DSRestoring -> "RESTORING"
+
+instance FromJSON DiskStatus where
+    parseJSON = parseJSONText "DiskStatus"
+
+instance ToJSON DiskStatus where
+    toJSON = toJSONText
+
+-- | The status of the instance (empty when instance does not exist).
+data ManagedInstanceInstanceStatus
+    = MIISProvisioning
+      -- ^ @PROVISIONING@
+    | MIISRunning
+      -- ^ @RUNNING@
+    | MIISStaging
+      -- ^ @STAGING@
+    | MIISStopped
+      -- ^ @STOPPED@
+    | MIISStopping
+      -- ^ @STOPPING@
+    | MIISSuspended
+      -- ^ @SUSPENDED@
+    | MIISSuspending
+      -- ^ @SUSPENDING@
+    | MIISTerminated
+      -- ^ @TERMINATED@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ManagedInstanceInstanceStatus
+
+instance FromText ManagedInstanceInstanceStatus where
+    fromText = \case
+        "PROVISIONING" -> Just MIISProvisioning
+        "RUNNING" -> Just MIISRunning
+        "STAGING" -> Just MIISStaging
+        "STOPPED" -> Just MIISStopped
+        "STOPPING" -> Just MIISStopping
+        "SUSPENDED" -> Just MIISSuspended
+        "SUSPENDING" -> Just MIISSuspending
+        "TERMINATED" -> Just MIISTerminated
+        _ -> Nothing
+
+instance ToText ManagedInstanceInstanceStatus where
+    toText = \case
+        MIISProvisioning -> "PROVISIONING"
+        MIISRunning -> "RUNNING"
+        MIISStaging -> "STAGING"
+        MIISStopped -> "STOPPED"
+        MIISStopping -> "STOPPING"
+        MIISSuspended -> "SUSPENDED"
+        MIISSuspending -> "SUSPENDING"
+        MIISTerminated -> "TERMINATED"
+
+instance FromJSON ManagedInstanceInstanceStatus where
+    parseJSON = parseJSONText "ManagedInstanceInstanceStatus"
+
+instance ToJSON ManagedInstanceInstanceStatus where
+    toJSON = toJSONText
+
+-- | The mode in which to attach this disk, either READ_WRITE or READ_ONLY.
+-- If not specified, the default is to attach the disk in READ_WRITE mode.
+data AttachedDiskMode
+    = ReadOnly
+      -- ^ @READ_ONLY@
+    | ReadWrite
+      -- ^ @READ_WRITE@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable AttachedDiskMode
+
+instance FromText AttachedDiskMode where
+    fromText = \case
+        "READ_ONLY" -> Just ReadOnly
+        "READ_WRITE" -> Just ReadWrite
+        _ -> Nothing
+
+instance ToText AttachedDiskMode where
+    toText = \case
+        ReadOnly -> "READ_ONLY"
+        ReadWrite -> "READ_WRITE"
+
+instance FromJSON AttachedDiskMode where
+    parseJSON = parseJSONText "AttachedDiskMode"
+
+instance ToJSON AttachedDiskMode where
+    toJSON = toJSONText
+
+-- | [Output Only] Status of the region, either UP or DOWN.
+data RegionStatus
+    = Down
+      -- ^ @DOWN@
+    | UP
+      -- ^ @UP@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable RegionStatus
+
+instance FromText RegionStatus where
+    fromText = \case
+        "DOWN" -> Just Down
+        "UP" -> Just UP
+        _ -> Nothing
+
+instance ToText RegionStatus where
+    toText = \case
+        Down -> "DOWN"
+        UP -> "UP"
+
+instance FromJSON RegionStatus where
+    parseJSON = parseJSONText "RegionStatus"
+
+instance ToJSON RegionStatus where
+    toJSON = toJSONText
+
 -- | [Output Only] The status of the VPN tunnel.
 data VPNTunnelStatus
     = VTSAuthorizationError
@@ -1235,66 +1434,37 @@ instance FromJSON VPNTunnelStatus where
 instance ToJSON VPNTunnelStatus where
     toJSON = toJSONText
 
--- | [Output Only] Status of the region, either UP or DOWN.
-data RegionStatus
-    = Down
-      -- ^ @DOWN@
-    | UP
-      -- ^ @UP@
+-- | Specifies the balancing mode for this backend. The default is
+-- UTILIZATION but available values are UTILIZATION and RATE.
+data BackendBalancingMode
+    = Rate
+      -- ^ @RATE@
+    | Utilization
+      -- ^ @UTILIZATION@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable RegionStatus
+instance Hashable BackendBalancingMode
 
-instance FromText RegionStatus where
+instance FromText BackendBalancingMode where
     fromText = \case
-        "DOWN" -> Just Down
-        "UP" -> Just UP
+        "RATE" -> Just Rate
+        "UTILIZATION" -> Just Utilization
         _ -> Nothing
 
-instance ToText RegionStatus where
+instance ToText BackendBalancingMode where
     toText = \case
-        Down -> "DOWN"
-        UP -> "UP"
+        Rate -> "RATE"
+        Utilization -> "UTILIZATION"
 
-instance FromJSON RegionStatus where
-    parseJSON = parseJSONText "RegionStatus"
+instance FromJSON BackendBalancingMode where
+    parseJSON = parseJSONText "BackendBalancingMode"
 
-instance ToJSON RegionStatus where
-    toJSON = toJSONText
-
--- | Defines the maintenance behavior for this instance. For standard
--- instances, the default behavior is MIGRATE. For preemptible instances,
--- the default and only possible behavior is TERMINATE. For more
--- information, see Setting maintenance behavior.
-data OnHostMaintenance
-    = Migrate
-      -- ^ @MIGRATE@
-    | Terminate
-      -- ^ @TERMINATE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable OnHostMaintenance
-
-instance FromText OnHostMaintenance where
-    fromText = \case
-        "MIGRATE" -> Just Migrate
-        "TERMINATE" -> Just Terminate
-        _ -> Nothing
-
-instance ToText OnHostMaintenance where
-    toText = \case
-        Migrate -> "MIGRATE"
-        Terminate -> "TERMINATE"
-
-instance FromJSON OnHostMaintenance where
-    parseJSON = parseJSONText "OnHostMaintenance"
-
-instance ToJSON OnHostMaintenance where
+instance ToJSON BackendBalancingMode where
     toJSON = toJSONText
 
 -- | The IP protocol to which this rule applies. Valid options are TCP, UDP,
 -- ESP, AH or SCTP.
-data IPProtocol
+data ForwardingRuleIPProtocol
     = AH
       -- ^ @AH@
     | Esp
@@ -1307,9 +1477,9 @@ data IPProtocol
       -- ^ @UDP@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable IPProtocol
+instance Hashable ForwardingRuleIPProtocol
 
-instance FromText IPProtocol where
+instance FromText ForwardingRuleIPProtocol where
     fromText = \case
         "AH" -> Just AH
         "ESP" -> Just Esp
@@ -1318,7 +1488,7 @@ instance FromText IPProtocol where
         "UDP" -> Just Udp
         _ -> Nothing
 
-instance ToText IPProtocol where
+instance ToText ForwardingRuleIPProtocol where
     toText = \case
         AH -> "AH"
         Esp -> "ESP"
@@ -1326,200 +1496,10 @@ instance ToText IPProtocol where
         TCP -> "TCP"
         Udp -> "UDP"
 
-instance FromJSON IPProtocol where
-    parseJSON = parseJSONText "IPProtocol"
+instance FromJSON ForwardingRuleIPProtocol where
+    parseJSON = parseJSONText "ForwardingRuleIPProtocol"
 
-instance ToJSON IPProtocol where
-    toJSON = toJSONText
-
--- | The current action that the managed instance group has scheduled for the
--- instance.
-data CurrentAction
-    = CAAbandoning
-      -- ^ @ABANDONING@
-    | CACreating
-      -- ^ @CREATING@
-    | CADeleting
-      -- ^ @DELETING@
-    | CANone
-      -- ^ @NONE@
-    | CARecreating
-      -- ^ @RECREATING@
-    | CARefreshing
-      -- ^ @REFRESHING@
-    | CARestarting
-      -- ^ @RESTARTING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable CurrentAction
-
-instance FromText CurrentAction where
-    fromText = \case
-        "ABANDONING" -> Just CAAbandoning
-        "CREATING" -> Just CACreating
-        "DELETING" -> Just CADeleting
-        "NONE" -> Just CANone
-        "RECREATING" -> Just CARecreating
-        "REFRESHING" -> Just CARefreshing
-        "RESTARTING" -> Just CARestarting
-        _ -> Nothing
-
-instance ToText CurrentAction where
-    toText = \case
-        CAAbandoning -> "ABANDONING"
-        CACreating -> "CREATING"
-        CADeleting -> "DELETING"
-        CANone -> "NONE"
-        CARecreating -> "RECREATING"
-        CARefreshing -> "REFRESHING"
-        CARestarting -> "RESTARTING"
-
-instance FromJSON CurrentAction where
-    parseJSON = parseJSONText "CurrentAction"
-
-instance ToJSON CurrentAction where
-    toJSON = toJSONText
-
--- | [Output Only] Name of the quota metric.
-data QuotaMetric
-    = QMBackendServices
-      -- ^ @BACKEND_SERVICES@
-    | QMCPUs
-      -- ^ @CPUS@
-    | QMDisksTotalGb
-      -- ^ @DISKS_TOTAL_GB@
-    | QMFirewalls
-      -- ^ @FIREWALLS@
-    | QMForwardingRules
-      -- ^ @FORWARDING_RULES@
-    | QMHealthChecks
-      -- ^ @HEALTH_CHECKS@
-    | QMImages
-      -- ^ @IMAGES@
-    | QMInstances
-      -- ^ @INSTANCES@
-    | QMInstanceGroups
-      -- ^ @INSTANCE_GROUPS@
-    | QMInstanceGroupManagers
-      -- ^ @INSTANCE_GROUP_MANAGERS@
-    | QMInstanceTemplates
-      -- ^ @INSTANCE_TEMPLATES@
-    | QMInUseAddresses
-      -- ^ @IN_USE_ADDRESSES@
-    | QMLocalSsdTotalGb
-      -- ^ @LOCAL_SSD_TOTAL_GB@
-    | QMNetworks
-      -- ^ @NETWORKS@
-    | QMRoutes
-      -- ^ @ROUTES@
-    | QMSnapshots
-      -- ^ @SNAPSHOTS@
-    | QMSsdTotalGb
-      -- ^ @SSD_TOTAL_GB@
-    | QMStaticAddresses
-      -- ^ @STATIC_ADDRESSES@
-    | QMTargetHTTPProxies
-      -- ^ @TARGET_HTTP_PROXIES@
-    | QMTargetInstances
-      -- ^ @TARGET_INSTANCES@
-    | QMTargetPools
-      -- ^ @TARGET_POOLS@
-    | QMTargetVPNGateways
-      -- ^ @TARGET_VPN_GATEWAYS@
-    | QMURLMaps
-      -- ^ @URL_MAPS@
-    | QMVPNTunnels
-      -- ^ @VPN_TUNNELS@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable QuotaMetric
-
-instance FromText QuotaMetric where
-    fromText = \case
-        "BACKEND_SERVICES" -> Just QMBackendServices
-        "CPUS" -> Just QMCPUs
-        "DISKS_TOTAL_GB" -> Just QMDisksTotalGb
-        "FIREWALLS" -> Just QMFirewalls
-        "FORWARDING_RULES" -> Just QMForwardingRules
-        "HEALTH_CHECKS" -> Just QMHealthChecks
-        "IMAGES" -> Just QMImages
-        "INSTANCES" -> Just QMInstances
-        "INSTANCE_GROUPS" -> Just QMInstanceGroups
-        "INSTANCE_GROUP_MANAGERS" -> Just QMInstanceGroupManagers
-        "INSTANCE_TEMPLATES" -> Just QMInstanceTemplates
-        "IN_USE_ADDRESSES" -> Just QMInUseAddresses
-        "LOCAL_SSD_TOTAL_GB" -> Just QMLocalSsdTotalGb
-        "NETWORKS" -> Just QMNetworks
-        "ROUTES" -> Just QMRoutes
-        "SNAPSHOTS" -> Just QMSnapshots
-        "SSD_TOTAL_GB" -> Just QMSsdTotalGb
-        "STATIC_ADDRESSES" -> Just QMStaticAddresses
-        "TARGET_HTTP_PROXIES" -> Just QMTargetHTTPProxies
-        "TARGET_INSTANCES" -> Just QMTargetInstances
-        "TARGET_POOLS" -> Just QMTargetPools
-        "TARGET_VPN_GATEWAYS" -> Just QMTargetVPNGateways
-        "URL_MAPS" -> Just QMURLMaps
-        "VPN_TUNNELS" -> Just QMVPNTunnels
-        _ -> Nothing
-
-instance ToText QuotaMetric where
-    toText = \case
-        QMBackendServices -> "BACKEND_SERVICES"
-        QMCPUs -> "CPUS"
-        QMDisksTotalGb -> "DISKS_TOTAL_GB"
-        QMFirewalls -> "FIREWALLS"
-        QMForwardingRules -> "FORWARDING_RULES"
-        QMHealthChecks -> "HEALTH_CHECKS"
-        QMImages -> "IMAGES"
-        QMInstances -> "INSTANCES"
-        QMInstanceGroups -> "INSTANCE_GROUPS"
-        QMInstanceGroupManagers -> "INSTANCE_GROUP_MANAGERS"
-        QMInstanceTemplates -> "INSTANCE_TEMPLATES"
-        QMInUseAddresses -> "IN_USE_ADDRESSES"
-        QMLocalSsdTotalGb -> "LOCAL_SSD_TOTAL_GB"
-        QMNetworks -> "NETWORKS"
-        QMRoutes -> "ROUTES"
-        QMSnapshots -> "SNAPSHOTS"
-        QMSsdTotalGb -> "SSD_TOTAL_GB"
-        QMStaticAddresses -> "STATIC_ADDRESSES"
-        QMTargetHTTPProxies -> "TARGET_HTTP_PROXIES"
-        QMTargetInstances -> "TARGET_INSTANCES"
-        QMTargetPools -> "TARGET_POOLS"
-        QMTargetVPNGateways -> "TARGET_VPN_GATEWAYS"
-        QMURLMaps -> "URL_MAPS"
-        QMVPNTunnels -> "VPN_TUNNELS"
-
-instance FromJSON QuotaMetric where
-    parseJSON = parseJSONText "QuotaMetric"
-
-instance ToJSON QuotaMetric where
-    toJSON = toJSONText
-
--- | [Output Only] Status of the zone, either UP or DOWN.
-data ZoneStatus
-    = ZSDown
-      -- ^ @DOWN@
-    | ZSUP
-      -- ^ @UP@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ZoneStatus
-
-instance FromText ZoneStatus where
-    fromText = \case
-        "DOWN" -> Just ZSDown
-        "UP" -> Just ZSUP
-        _ -> Nothing
-
-instance ToText ZoneStatus where
-    toText = \case
-        ZSDown -> "DOWN"
-        ZSUP -> "UP"
-
-instance FromJSON ZoneStatus where
-    parseJSON = parseJSONText "ZoneStatus"
-
-instance ToJSON ZoneStatus where
+instance ToJSON ForwardingRuleIPProtocol where
     toJSON = toJSONText
 
 -- | [Output Only] The status of the address, which can be either IN_USE or
@@ -1552,30 +1532,253 @@ instance FromJSON AddressStatus where
 instance ToJSON AddressStatus where
     toJSON = toJSONText
 
-data Interface
+-- | A filter for the state of the instances in the instance group. Valid
+-- options are ALL or RUNNING. If you do not specify this parameter the
+-- list includes all instances regardless of their state.
+data InstanceGroupsListInstancesRequestInstanceState
+    = IGLIRISAll
+      -- ^ @ALL@
+    | IGLIRISRunning
+      -- ^ @RUNNING@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable InstanceGroupsListInstancesRequestInstanceState
+
+instance FromText InstanceGroupsListInstancesRequestInstanceState where
+    fromText = \case
+        "ALL" -> Just IGLIRISAll
+        "RUNNING" -> Just IGLIRISRunning
+        _ -> Nothing
+
+instance ToText InstanceGroupsListInstancesRequestInstanceState where
+    toText = \case
+        IGLIRISAll -> "ALL"
+        IGLIRISRunning -> "RUNNING"
+
+instance FromJSON InstanceGroupsListInstancesRequestInstanceState where
+    parseJSON = parseJSONText "InstanceGroupsListInstancesRequestInstanceState"
+
+instance ToJSON InstanceGroupsListInstancesRequestInstanceState where
+    toJSON = toJSONText
+
+data AttachedDiskInterface
     = Nvme
       -- ^ @NVME@
     | Scsi
       -- ^ @SCSI@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable Interface
+instance Hashable AttachedDiskInterface
 
-instance FromText Interface where
+instance FromText AttachedDiskInterface where
     fromText = \case
         "NVME" -> Just Nvme
         "SCSI" -> Just Scsi
         _ -> Nothing
 
-instance ToText Interface where
+instance ToText AttachedDiskInterface where
     toText = \case
         Nvme -> "NVME"
         Scsi -> "SCSI"
 
-instance FromJSON Interface where
-    parseJSON = parseJSONText "Interface"
+instance FromJSON AttachedDiskInterface where
+    parseJSON = parseJSONText "AttachedDiskInterface"
 
-instance ToJSON Interface where
+instance ToJSON AttachedDiskInterface where
+    toJSON = toJSONText
+
+-- | [Output Only] Status of the zone, either UP or DOWN.
+data ZoneStatus
+    = ZSDown
+      -- ^ @DOWN@
+    | ZSUP
+      -- ^ @UP@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ZoneStatus
+
+instance FromText ZoneStatus where
+    fromText = \case
+        "DOWN" -> Just ZSDown
+        "UP" -> Just ZSUP
+        _ -> Nothing
+
+instance ToText ZoneStatus where
+    toText = \case
+        ZSDown -> "DOWN"
+        ZSUP -> "UP"
+
+instance FromJSON ZoneStatus where
+    parseJSON = parseJSONText "ZoneStatus"
+
+instance ToJSON ZoneStatus where
+    toJSON = toJSONText
+
+-- | [Output Only] Name of the quota metric.
+data QuotaMetric
+    = BackendServices
+      -- ^ @BACKEND_SERVICES@
+    | CPUs
+      -- ^ @CPUS@
+    | DisksTotalGb
+      -- ^ @DISKS_TOTAL_GB@
+    | Firewalls
+      -- ^ @FIREWALLS@
+    | ForwardingRules
+      -- ^ @FORWARDING_RULES@
+    | HealthChecks
+      -- ^ @HEALTH_CHECKS@
+    | Images
+      -- ^ @IMAGES@
+    | Instances
+      -- ^ @INSTANCES@
+    | InstanceGroups
+      -- ^ @INSTANCE_GROUPS@
+    | InstanceGroupManagers
+      -- ^ @INSTANCE_GROUP_MANAGERS@
+    | InstanceTemplates
+      -- ^ @INSTANCE_TEMPLATES@
+    | InUseAddresses
+      -- ^ @IN_USE_ADDRESSES@
+    | LocalSsdTotalGb
+      -- ^ @LOCAL_SSD_TOTAL_GB@
+    | Networks
+      -- ^ @NETWORKS@
+    | Routes
+      -- ^ @ROUTES@
+    | Snapshots
+      -- ^ @SNAPSHOTS@
+    | SsdTotalGb
+      -- ^ @SSD_TOTAL_GB@
+    | StaticAddresses
+      -- ^ @STATIC_ADDRESSES@
+    | TargetHTTPProxies
+      -- ^ @TARGET_HTTP_PROXIES@
+    | TargetInstances
+      -- ^ @TARGET_INSTANCES@
+    | TargetPools
+      -- ^ @TARGET_POOLS@
+    | TargetVPNGateways
+      -- ^ @TARGET_VPN_GATEWAYS@
+    | URLMaps
+      -- ^ @URL_MAPS@
+    | VPNTunnels
+      -- ^ @VPN_TUNNELS@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable QuotaMetric
+
+instance FromText QuotaMetric where
+    fromText = \case
+        "BACKEND_SERVICES" -> Just BackendServices
+        "CPUS" -> Just CPUs
+        "DISKS_TOTAL_GB" -> Just DisksTotalGb
+        "FIREWALLS" -> Just Firewalls
+        "FORWARDING_RULES" -> Just ForwardingRules
+        "HEALTH_CHECKS" -> Just HealthChecks
+        "IMAGES" -> Just Images
+        "INSTANCES" -> Just Instances
+        "INSTANCE_GROUPS" -> Just InstanceGroups
+        "INSTANCE_GROUP_MANAGERS" -> Just InstanceGroupManagers
+        "INSTANCE_TEMPLATES" -> Just InstanceTemplates
+        "IN_USE_ADDRESSES" -> Just InUseAddresses
+        "LOCAL_SSD_TOTAL_GB" -> Just LocalSsdTotalGb
+        "NETWORKS" -> Just Networks
+        "ROUTES" -> Just Routes
+        "SNAPSHOTS" -> Just Snapshots
+        "SSD_TOTAL_GB" -> Just SsdTotalGb
+        "STATIC_ADDRESSES" -> Just StaticAddresses
+        "TARGET_HTTP_PROXIES" -> Just TargetHTTPProxies
+        "TARGET_INSTANCES" -> Just TargetInstances
+        "TARGET_POOLS" -> Just TargetPools
+        "TARGET_VPN_GATEWAYS" -> Just TargetVPNGateways
+        "URL_MAPS" -> Just URLMaps
+        "VPN_TUNNELS" -> Just VPNTunnels
+        _ -> Nothing
+
+instance ToText QuotaMetric where
+    toText = \case
+        BackendServices -> "BACKEND_SERVICES"
+        CPUs -> "CPUS"
+        DisksTotalGb -> "DISKS_TOTAL_GB"
+        Firewalls -> "FIREWALLS"
+        ForwardingRules -> "FORWARDING_RULES"
+        HealthChecks -> "HEALTH_CHECKS"
+        Images -> "IMAGES"
+        Instances -> "INSTANCES"
+        InstanceGroups -> "INSTANCE_GROUPS"
+        InstanceGroupManagers -> "INSTANCE_GROUP_MANAGERS"
+        InstanceTemplates -> "INSTANCE_TEMPLATES"
+        InUseAddresses -> "IN_USE_ADDRESSES"
+        LocalSsdTotalGb -> "LOCAL_SSD_TOTAL_GB"
+        Networks -> "NETWORKS"
+        Routes -> "ROUTES"
+        Snapshots -> "SNAPSHOTS"
+        SsdTotalGb -> "SSD_TOTAL_GB"
+        StaticAddresses -> "STATIC_ADDRESSES"
+        TargetHTTPProxies -> "TARGET_HTTP_PROXIES"
+        TargetInstances -> "TARGET_INSTANCES"
+        TargetPools -> "TARGET_POOLS"
+        TargetVPNGateways -> "TARGET_VPN_GATEWAYS"
+        URLMaps -> "URL_MAPS"
+        VPNTunnels -> "VPN_TUNNELS"
+
+instance FromJSON QuotaMetric where
+    parseJSON = parseJSONText "QuotaMetric"
+
+instance ToJSON QuotaMetric where
+    toJSON = toJSONText
+
+-- | [Output Only] The status of the instance. One of the following values:
+-- PROVISIONING, STAGING, RUNNING, STOPPING, and TERMINATED.
+data InstanceStatus
+    = ISProvisioning
+      -- ^ @PROVISIONING@
+    | ISRunning
+      -- ^ @RUNNING@
+    | ISStaging
+      -- ^ @STAGING@
+    | ISStopped
+      -- ^ @STOPPED@
+    | ISStopping
+      -- ^ @STOPPING@
+    | ISSuspended
+      -- ^ @SUSPENDED@
+    | ISSuspending
+      -- ^ @SUSPENDING@
+    | ISTerminated
+      -- ^ @TERMINATED@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable InstanceStatus
+
+instance FromText InstanceStatus where
+    fromText = \case
+        "PROVISIONING" -> Just ISProvisioning
+        "RUNNING" -> Just ISRunning
+        "STAGING" -> Just ISStaging
+        "STOPPED" -> Just ISStopped
+        "STOPPING" -> Just ISStopping
+        "SUSPENDED" -> Just ISSuspended
+        "SUSPENDING" -> Just ISSuspending
+        "TERMINATED" -> Just ISTerminated
+        _ -> Nothing
+
+instance ToText InstanceStatus where
+    toText = \case
+        ISProvisioning -> "PROVISIONING"
+        ISRunning -> "RUNNING"
+        ISStaging -> "STAGING"
+        ISStopped -> "STOPPED"
+        ISStopping -> "STOPPING"
+        ISSuspended -> "SUSPENDED"
+        ISSuspending -> "SUSPENDING"
+        ISTerminated -> "TERMINATED"
+
+instance FromJSON InstanceStatus where
+    parseJSON = parseJSONText "InstanceStatus"
+
+instance ToJSON InstanceStatus where
     toJSON = toJSONText
 
 -- | [Output Only] The warning type identifier for this warning.
@@ -1654,207 +1857,6 @@ instance ToJSON MachineTypesScopedListWarningCode where
     toJSON = toJSONText
 
 -- | [Output Only] The warning type identifier for this warning.
-data Code
-    = CDeprecatedResourceUsed
-      -- ^ @DEPRECATED_RESOURCE_USED@
-    | CDiskSizeLargerThanImageSize
-      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
-    | CInjectedKernelsDeprecated
-      -- ^ @INJECTED_KERNELS_DEPRECATED@
-    | CNextHopAddressNotAssigned
-      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
-    | CNextHopCannotIPForward
-      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
-    | CNextHopInstanceNotFound
-      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
-    | CNextHopInstanceNotOnNetwork
-      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
-    | CNextHopNotRunning
-      -- ^ @NEXT_HOP_NOT_RUNNING@
-    | CNotCriticalError
-      -- ^ @NOT_CRITICAL_ERROR@
-    | CNoResultsOnPage
-      -- ^ @NO_RESULTS_ON_PAGE@
-    | CRequiredTosAgreement
-      -- ^ @REQUIRED_TOS_AGREEMENT@
-    | CResourceNotDeleted
-      -- ^ @RESOURCE_NOT_DELETED@
-    | CSingleInstancePropertyTemplate
-      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
-    | CUnreachable
-      -- ^ @UNREACHABLE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Code
-
-instance FromText Code where
-    fromText = \case
-        "DEPRECATED_RESOURCE_USED" -> Just CDeprecatedResourceUsed
-        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just CDiskSizeLargerThanImageSize
-        "INJECTED_KERNELS_DEPRECATED" -> Just CInjectedKernelsDeprecated
-        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Just CNextHopAddressNotAssigned
-        "NEXT_HOP_CANNOT_IP_FORWARD" -> Just CNextHopCannotIPForward
-        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Just CNextHopInstanceNotFound
-        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Just CNextHopInstanceNotOnNetwork
-        "NEXT_HOP_NOT_RUNNING" -> Just CNextHopNotRunning
-        "NOT_CRITICAL_ERROR" -> Just CNotCriticalError
-        "NO_RESULTS_ON_PAGE" -> Just CNoResultsOnPage
-        "REQUIRED_TOS_AGREEMENT" -> Just CRequiredTosAgreement
-        "RESOURCE_NOT_DELETED" -> Just CResourceNotDeleted
-        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Just CSingleInstancePropertyTemplate
-        "UNREACHABLE" -> Just CUnreachable
-        _ -> Nothing
-
-instance ToText Code where
-    toText = \case
-        CDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
-        CDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
-        CInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
-        CNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
-        CNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
-        CNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
-        CNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
-        CNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
-        CNotCriticalError -> "NOT_CRITICAL_ERROR"
-        CNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
-        CRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
-        CResourceNotDeleted -> "RESOURCE_NOT_DELETED"
-        CSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
-        CUnreachable -> "UNREACHABLE"
-
-instance FromJSON Code where
-    parseJSON = parseJSONText "Code"
-
-instance ToJSON Code where
-    toJSON = toJSONText
-
--- | [Output Only] The warning type identifier for this warning.
-data AutoscalersScopedListWarningCode
-    = ASLWCDeprecatedResourceUsed
-      -- ^ @DEPRECATED_RESOURCE_USED@
-    | ASLWCDiskSizeLargerThanImageSize
-      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
-    | ASLWCInjectedKernelsDeprecated
-      -- ^ @INJECTED_KERNELS_DEPRECATED@
-    | ASLWCNextHopAddressNotAssigned
-      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
-    | ASLWCNextHopCannotIPForward
-      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
-    | ASLWCNextHopInstanceNotFound
-      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
-    | ASLWCNextHopInstanceNotOnNetwork
-      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
-    | ASLWCNextHopNotRunning
-      -- ^ @NEXT_HOP_NOT_RUNNING@
-    | ASLWCNotCriticalError
-      -- ^ @NOT_CRITICAL_ERROR@
-    | ASLWCNoResultsOnPage
-      -- ^ @NO_RESULTS_ON_PAGE@
-    | ASLWCRequiredTosAgreement
-      -- ^ @REQUIRED_TOS_AGREEMENT@
-    | ASLWCResourceNotDeleted
-      -- ^ @RESOURCE_NOT_DELETED@
-    | ASLWCSingleInstancePropertyTemplate
-      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
-    | ASLWCUnreachable
-      -- ^ @UNREACHABLE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable AutoscalersScopedListWarningCode
-
-instance FromText AutoscalersScopedListWarningCode where
-    fromText = \case
-        "DEPRECATED_RESOURCE_USED" -> Just ASLWCDeprecatedResourceUsed
-        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just ASLWCDiskSizeLargerThanImageSize
-        "INJECTED_KERNELS_DEPRECATED" -> Just ASLWCInjectedKernelsDeprecated
-        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Just ASLWCNextHopAddressNotAssigned
-        "NEXT_HOP_CANNOT_IP_FORWARD" -> Just ASLWCNextHopCannotIPForward
-        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Just ASLWCNextHopInstanceNotFound
-        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Just ASLWCNextHopInstanceNotOnNetwork
-        "NEXT_HOP_NOT_RUNNING" -> Just ASLWCNextHopNotRunning
-        "NOT_CRITICAL_ERROR" -> Just ASLWCNotCriticalError
-        "NO_RESULTS_ON_PAGE" -> Just ASLWCNoResultsOnPage
-        "REQUIRED_TOS_AGREEMENT" -> Just ASLWCRequiredTosAgreement
-        "RESOURCE_NOT_DELETED" -> Just ASLWCResourceNotDeleted
-        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Just ASLWCSingleInstancePropertyTemplate
-        "UNREACHABLE" -> Just ASLWCUnreachable
-        _ -> Nothing
-
-instance ToText AutoscalersScopedListWarningCode where
-    toText = \case
-        ASLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
-        ASLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
-        ASLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
-        ASLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
-        ASLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
-        ASLWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
-        ASLWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
-        ASLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
-        ASLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
-        ASLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
-        ASLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
-        ASLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
-        ASLWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
-        ASLWCUnreachable -> "UNREACHABLE"
-
-instance FromJSON AutoscalersScopedListWarningCode where
-    parseJSON = parseJSONText "AutoscalersScopedListWarningCode"
-
-instance ToJSON AutoscalersScopedListWarningCode where
-    toJSON = toJSONText
-
--- | The status of the instance (empty when instance does not exist).
-data InstanceStatus
-    = Provisioning
-      -- ^ @PROVISIONING@
-    | Running
-      -- ^ @RUNNING@
-    | Staging
-      -- ^ @STAGING@
-    | Stopped
-      -- ^ @STOPPED@
-    | Stopping
-      -- ^ @STOPPING@
-    | Suspended
-      -- ^ @SUSPENDED@
-    | Suspending
-      -- ^ @SUSPENDING@
-    | Terminated
-      -- ^ @TERMINATED@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable InstanceStatus
-
-instance FromText InstanceStatus where
-    fromText = \case
-        "PROVISIONING" -> Just Provisioning
-        "RUNNING" -> Just Running
-        "STAGING" -> Just Staging
-        "STOPPED" -> Just Stopped
-        "STOPPING" -> Just Stopping
-        "SUSPENDED" -> Just Suspended
-        "SUSPENDING" -> Just Suspending
-        "TERMINATED" -> Just Terminated
-        _ -> Nothing
-
-instance ToText InstanceStatus where
-    toText = \case
-        Provisioning -> "PROVISIONING"
-        Running -> "RUNNING"
-        Staging -> "STAGING"
-        Stopped -> "STOPPED"
-        Stopping -> "STOPPING"
-        Suspended -> "SUSPENDED"
-        Suspending -> "SUSPENDING"
-        Terminated -> "TERMINATED"
-
-instance FromJSON InstanceStatus where
-    parseJSON = parseJSONText "InstanceStatus"
-
-instance ToJSON InstanceStatus where
-    toJSON = toJSONText
-
--- | [Output Only] The warning type identifier for this warning.
 data DiskTypesScopedListWarningCode
     = DTSLWCDeprecatedResourceUsed
       -- ^ @DEPRECATED_RESOURCE_USED@
@@ -1929,56 +1931,79 @@ instance FromJSON DiskTypesScopedListWarningCode where
 instance ToJSON DiskTypesScopedListWarningCode where
     toJSON = toJSONText
 
--- | [Output Only] The status of the instance. One of the following values:
--- PROVISIONING, STAGING, RUNNING, STOPPING, and TERMINATED.
-data InstanceStatus
-    = ISProvisioning
-      -- ^ @PROVISIONING@
-    | ISRunning
-      -- ^ @RUNNING@
-    | ISStaging
-      -- ^ @STAGING@
-    | ISStopped
-      -- ^ @STOPPED@
-    | ISStopping
-      -- ^ @STOPPING@
-    | ISSuspended
-      -- ^ @SUSPENDED@
-    | ISSuspending
-      -- ^ @SUSPENDING@
-    | ISTerminated
-      -- ^ @TERMINATED@
+-- | [Output Only] The warning type identifier for this warning.
+data AutoscalersScopedListWarningCode
+    = ADeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | ADiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | AInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | ANextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | ANextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | ANextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | ANextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | ANextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | ANotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | ANoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | ARequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | AResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | ASingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | AUnreachable
+      -- ^ @UNREACHABLE@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable InstanceStatus
+instance Hashable AutoscalersScopedListWarningCode
 
-instance FromText InstanceStatus where
+instance FromText AutoscalersScopedListWarningCode where
     fromText = \case
-        "PROVISIONING" -> Just ISProvisioning
-        "RUNNING" -> Just ISRunning
-        "STAGING" -> Just ISStaging
-        "STOPPED" -> Just ISStopped
-        "STOPPING" -> Just ISStopping
-        "SUSPENDED" -> Just ISSuspended
-        "SUSPENDING" -> Just ISSuspending
-        "TERMINATED" -> Just ISTerminated
+        "DEPRECATED_RESOURCE_USED" -> Just ADeprecatedResourceUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just ADiskSizeLargerThanImageSize
+        "INJECTED_KERNELS_DEPRECATED" -> Just AInjectedKernelsDeprecated
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Just ANextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Just ANextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Just ANextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Just ANextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Just ANextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Just ANotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Just ANoResultsOnPage
+        "REQUIRED_TOS_AGREEMENT" -> Just ARequiredTosAgreement
+        "RESOURCE_NOT_DELETED" -> Just AResourceNotDeleted
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Just ASingleInstancePropertyTemplate
+        "UNREACHABLE" -> Just AUnreachable
         _ -> Nothing
 
-instance ToText InstanceStatus where
+instance ToText AutoscalersScopedListWarningCode where
     toText = \case
-        ISProvisioning -> "PROVISIONING"
-        ISRunning -> "RUNNING"
-        ISStaging -> "STAGING"
-        ISStopped -> "STOPPED"
-        ISStopping -> "STOPPING"
-        ISSuspended -> "SUSPENDED"
-        ISSuspending -> "SUSPENDING"
-        ISTerminated -> "TERMINATED"
+        ADeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        ADiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        AInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        ANextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        ANextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        ANextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        ANextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        ANextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        ANotCriticalError -> "NOT_CRITICAL_ERROR"
+        ANoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        ARequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        AResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        ASingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        AUnreachable -> "UNREACHABLE"
 
-instance FromJSON InstanceStatus where
-    parseJSON = parseJSONText "InstanceStatus"
+instance FromJSON AutoscalersScopedListWarningCode where
+    parseJSON = parseJSONText "AutoscalersScopedListWarningCode"
 
-instance ToJSON InstanceStatus where
+instance ToJSON AutoscalersScopedListWarningCode where
     toJSON = toJSONText
 
 -- | [Output Only] The warning type identifier for this warning.
@@ -2056,115 +2081,6 @@ instance FromJSON VPNTunnelsScopedListWarningCode where
 instance ToJSON VPNTunnelsScopedListWarningCode where
     toJSON = toJSONText
 
--- | Health state of the instance.
-data HealthState
-    = Healthy
-      -- ^ @HEALTHY@
-    | Unhealthy
-      -- ^ @UNHEALTHY@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable HealthState
-
-instance FromText HealthState where
-    fromText = \case
-        "HEALTHY" -> Just Healthy
-        "UNHEALTHY" -> Just Unhealthy
-        _ -> Nothing
-
-instance ToText HealthState where
-    toText = \case
-        Healthy -> "HEALTHY"
-        Unhealthy -> "UNHEALTHY"
-
-instance FromJSON HealthState where
-    parseJSON = parseJSONText "HealthState"
-
-instance ToJSON HealthState where
-    toJSON = toJSONText
-
--- | Defines type in which utilization_target is expressed.
-data UtilizationTargetType
-    = DeltaPerMinute
-      -- ^ @DELTA_PER_MINUTE@
-    | DeltaPerSecond
-      -- ^ @DELTA_PER_SECOND@
-    | Gauge
-      -- ^ @GAUGE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable UtilizationTargetType
-
-instance FromText UtilizationTargetType where
-    fromText = \case
-        "DELTA_PER_MINUTE" -> Just DeltaPerMinute
-        "DELTA_PER_SECOND" -> Just DeltaPerSecond
-        "GAUGE" -> Just Gauge
-        _ -> Nothing
-
-instance ToText UtilizationTargetType where
-    toText = \case
-        DeltaPerMinute -> "DELTA_PER_MINUTE"
-        DeltaPerSecond -> "DELTA_PER_SECOND"
-        Gauge -> "GAUGE"
-
-instance FromJSON UtilizationTargetType where
-    parseJSON = parseJSONText "UtilizationTargetType"
-
-instance ToJSON UtilizationTargetType where
-    toJSON = toJSONText
-
--- | The status of the instance.
-data InstanceWithNamedPortsStatus
-    = IWNPSProvisioning
-      -- ^ @PROVISIONING@
-    | IWNPSRunning
-      -- ^ @RUNNING@
-    | IWNPSStaging
-      -- ^ @STAGING@
-    | IWNPSStopped
-      -- ^ @STOPPED@
-    | IWNPSStopping
-      -- ^ @STOPPING@
-    | IWNPSSuspended
-      -- ^ @SUSPENDED@
-    | IWNPSSuspending
-      -- ^ @SUSPENDING@
-    | IWNPSTerminated
-      -- ^ @TERMINATED@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable InstanceWithNamedPortsStatus
-
-instance FromText InstanceWithNamedPortsStatus where
-    fromText = \case
-        "PROVISIONING" -> Just IWNPSProvisioning
-        "RUNNING" -> Just IWNPSRunning
-        "STAGING" -> Just IWNPSStaging
-        "STOPPED" -> Just IWNPSStopped
-        "STOPPING" -> Just IWNPSStopping
-        "SUSPENDED" -> Just IWNPSSuspended
-        "SUSPENDING" -> Just IWNPSSuspending
-        "TERMINATED" -> Just IWNPSTerminated
-        _ -> Nothing
-
-instance ToText InstanceWithNamedPortsStatus where
-    toText = \case
-        IWNPSProvisioning -> "PROVISIONING"
-        IWNPSRunning -> "RUNNING"
-        IWNPSStaging -> "STAGING"
-        IWNPSStopped -> "STOPPED"
-        IWNPSStopping -> "STOPPING"
-        IWNPSSuspended -> "SUSPENDED"
-        IWNPSSuspending -> "SUSPENDING"
-        IWNPSTerminated -> "TERMINATED"
-
-instance FromJSON InstanceWithNamedPortsStatus where
-    parseJSON = parseJSONText "InstanceWithNamedPortsStatus"
-
-instance ToJSON InstanceWithNamedPortsStatus where
-    toJSON = toJSONText
-
 -- | [Output Only] The warning type identifier for this warning.
 data InstanceGroupsScopedListWarningCode
     = IGSLWCDeprecatedResourceUsed
@@ -2240,33 +2156,55 @@ instance FromJSON InstanceGroupsScopedListWarningCode where
 instance ToJSON InstanceGroupsScopedListWarningCode where
     toJSON = toJSONText
 
--- | A filter for the state of the instances in the instance group. Valid
--- options are ALL or RUNNING. If you do not specify this parameter the
--- list includes all instances regardless of their state.
-data InstanceState
-    = IAll
-      -- ^ @ALL@
-    | IRunning
+-- | The status of the instance.
+data InstanceWithNamedPortsStatus
+    = IWNPSProvisioning
+      -- ^ @PROVISIONING@
+    | IWNPSRunning
       -- ^ @RUNNING@
+    | IWNPSStaging
+      -- ^ @STAGING@
+    | IWNPSStopped
+      -- ^ @STOPPED@
+    | IWNPSStopping
+      -- ^ @STOPPING@
+    | IWNPSSuspended
+      -- ^ @SUSPENDED@
+    | IWNPSSuspending
+      -- ^ @SUSPENDING@
+    | IWNPSTerminated
+      -- ^ @TERMINATED@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable InstanceState
+instance Hashable InstanceWithNamedPortsStatus
 
-instance FromText InstanceState where
+instance FromText InstanceWithNamedPortsStatus where
     fromText = \case
-        "ALL" -> Just IAll
-        "RUNNING" -> Just IRunning
+        "PROVISIONING" -> Just IWNPSProvisioning
+        "RUNNING" -> Just IWNPSRunning
+        "STAGING" -> Just IWNPSStaging
+        "STOPPED" -> Just IWNPSStopped
+        "STOPPING" -> Just IWNPSStopping
+        "SUSPENDED" -> Just IWNPSSuspended
+        "SUSPENDING" -> Just IWNPSSuspending
+        "TERMINATED" -> Just IWNPSTerminated
         _ -> Nothing
 
-instance ToText InstanceState where
+instance ToText InstanceWithNamedPortsStatus where
     toText = \case
-        IAll -> "ALL"
-        IRunning -> "RUNNING"
+        IWNPSProvisioning -> "PROVISIONING"
+        IWNPSRunning -> "RUNNING"
+        IWNPSStaging -> "STAGING"
+        IWNPSStopped -> "STOPPED"
+        IWNPSStopping -> "STOPPING"
+        IWNPSSuspended -> "SUSPENDED"
+        IWNPSSuspending -> "SUSPENDING"
+        IWNPSTerminated -> "TERMINATED"
 
-instance FromJSON InstanceState where
-    parseJSON = parseJSONText "InstanceState"
+instance FromJSON InstanceWithNamedPortsStatus where
+    parseJSON = parseJSONText "InstanceWithNamedPortsStatus"
 
-instance ToJSON InstanceState where
+instance ToJSON InstanceWithNamedPortsStatus where
     toJSON = toJSONText
 
 -- | [Output Only] The warning type identifier for this warning.
@@ -2342,4 +2280,66 @@ instance FromJSON InstancesScopedListWarningCode where
     parseJSON = parseJSONText "InstancesScopedListWarningCode"
 
 instance ToJSON InstancesScopedListWarningCode where
+    toJSON = toJSONText
+
+-- | Sesssion affinity option, must be one of the following values: NONE:
+-- Connections from the same client IP may go to any instance in the pool;
+-- CLIENT_IP: Connections from the same client IP will go to the same
+-- instance in the pool while that instance remains healthy.
+-- CLIENT_IP_PROTO: Connections from the same client IP with the same IP
+-- protocol will go to the same instance in the pool while that instance
+-- remains healthy.
+data TargetPoolSessionAffinity
+    = ClientIP
+      -- ^ @CLIENT_IP@
+    | ClientIPProto
+      -- ^ @CLIENT_IP_PROTO@
+    | None
+      -- ^ @NONE@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable TargetPoolSessionAffinity
+
+instance FromText TargetPoolSessionAffinity where
+    fromText = \case
+        "CLIENT_IP" -> Just ClientIP
+        "CLIENT_IP_PROTO" -> Just ClientIPProto
+        "NONE" -> Just None
+        _ -> Nothing
+
+instance ToText TargetPoolSessionAffinity where
+    toText = \case
+        ClientIP -> "CLIENT_IP"
+        ClientIPProto -> "CLIENT_IP_PROTO"
+        None -> "NONE"
+
+instance FromJSON TargetPoolSessionAffinity where
+    parseJSON = parseJSONText "TargetPoolSessionAffinity"
+
+instance ToJSON TargetPoolSessionAffinity where
+    toJSON = toJSONText
+
+-- | The format used to encode and transmit the block device, which should be
+-- TAR. This is just a container and transmission format and not a runtime
+-- format. Provided by the client when the disk image is created.
+data ImageRawDiskContainerType
+    = TAR
+      -- ^ @TAR@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ImageRawDiskContainerType
+
+instance FromText ImageRawDiskContainerType where
+    fromText = \case
+        "TAR" -> Just TAR
+        _ -> Nothing
+
+instance ToText ImageRawDiskContainerType where
+    toText = \case
+        TAR -> "TAR"
+
+instance FromJSON ImageRawDiskContainerType where
+    parseJSON = parseJSONText "ImageRawDiskContainerType"
+
+instance ToJSON ImageRawDiskContainerType where
     toJSON = toJSONText

@@ -56,9 +56,15 @@ type DeploymentsPatchResource =
        "global" :>
          "deployments" :>
            Capture "deployment" Text :>
-             QueryParam "createPolicy" CreatePolicy :>
-               QueryParam "updatePolicy" UpdatePolicy :>
-                 QueryParam "deletePolicy" DeletePolicy :>
+             QueryParam "createPolicy"
+               DeploymentsPatchCreatePolicy
+               :>
+               QueryParam "updatePolicy"
+                 DeploymentsPatchUpdatePolicy
+                 :>
+                 QueryParam "deletePolicy"
+                   DeploymentsPatchDeletePolicy
+                   :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -66,7 +72,7 @@ type DeploymentsPatchResource =
                            QueryParam "key" Key :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
-                                 ReqBody '[JSON] Deployment :>
+                                 ReqBody '[OctetStream] Deployment :>
                                    Patch '[JSON] Operation
 
 -- | Updates a deployment and all of the resources described by the
@@ -74,14 +80,14 @@ type DeploymentsPatchResource =
 --
 -- /See:/ 'deploymentsPatch'' smart constructor.
 data DeploymentsPatch' = DeploymentsPatch'
-    { _dpCreatePolicy :: !CreatePolicy
+    { _dpCreatePolicy :: !DeploymentsPatchCreatePolicy
     , _dpQuotaUser    :: !(Maybe Text)
     , _dpPrettyPrint  :: !Bool
     , _dpProject      :: !Text
     , _dpUserIP       :: !(Maybe Text)
     , _dpPayload      :: !Deployment
-    , _dpUpdatePolicy :: !UpdatePolicy
-    , _dpDeletePolicy :: !DeletePolicy
+    , _dpUpdatePolicy :: !DeploymentsPatchUpdatePolicy
+    , _dpDeletePolicy :: !DeploymentsPatchDeletePolicy
     , _dpKey          :: !(Maybe Key)
     , _dpOAuthToken   :: !(Maybe OAuthToken)
     , _dpFields       :: !(Maybe Text)
@@ -122,14 +128,14 @@ deploymentsPatch'
     -> DeploymentsPatch'
 deploymentsPatch' pDpProject_ pDpPayload_ pDpDeployment_ =
     DeploymentsPatch'
-    { _dpCreatePolicy = CreateOrAcquire
+    { _dpCreatePolicy = DPCPCreateOrAcquire
     , _dpQuotaUser = Nothing
     , _dpPrettyPrint = True
     , _dpProject = pDpProject_
     , _dpUserIP = Nothing
     , _dpPayload = pDpPayload_
-    , _dpUpdatePolicy = UPPatch
-    , _dpDeletePolicy = DPDelete
+    , _dpUpdatePolicy = DPUPPatch
+    , _dpDeletePolicy = DPDPDelete
     , _dpKey = Nothing
     , _dpOAuthToken = Nothing
     , _dpFields = Nothing
@@ -137,7 +143,7 @@ deploymentsPatch' pDpProject_ pDpPayload_ pDpDeployment_ =
     }
 
 -- | Sets the policy to use for creating new resources.
-dpCreatePolicy :: Lens' DeploymentsPatch' CreatePolicy
+dpCreatePolicy :: Lens' DeploymentsPatch' DeploymentsPatchCreatePolicy
 dpCreatePolicy
   = lens _dpCreatePolicy
       (\ s a -> s{_dpCreatePolicy = a})
@@ -171,13 +177,13 @@ dpPayload
   = lens _dpPayload (\ s a -> s{_dpPayload = a})
 
 -- | Sets the policy to use for updating resources.
-dpUpdatePolicy :: Lens' DeploymentsPatch' UpdatePolicy
+dpUpdatePolicy :: Lens' DeploymentsPatch' DeploymentsPatchUpdatePolicy
 dpUpdatePolicy
   = lens _dpUpdatePolicy
       (\ s a -> s{_dpUpdatePolicy = a})
 
 -- | Sets the policy to use for deleting resources.
-dpDeletePolicy :: Lens' DeploymentsPatch' DeletePolicy
+dpDeletePolicy :: Lens' DeploymentsPatch' DeploymentsPatchDeletePolicy
 dpDeletePolicy
   = lens _dpDeletePolicy
       (\ s a -> s{_dpDeletePolicy = a})

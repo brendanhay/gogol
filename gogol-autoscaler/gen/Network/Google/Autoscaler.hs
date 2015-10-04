@@ -59,6 +59,12 @@ module Network.Google.Autoscaler
 
     -- * Types
 
+    -- ** OperationWarningsItemDataItem
+    , OperationWarningsItemDataItem
+    , operationWarningsItemDataItem
+    , owidiValue
+    , owidiKey
+
     -- ** DeprecationStatus
     , DeprecationStatus
     , deprecationStatus
@@ -68,6 +74,13 @@ module Network.Google.Autoscaler
     , dsObsolete
     , dsDeprecated
 
+    -- ** AutoscalingPolicyCustomMetricUtilization
+    , AutoscalingPolicyCustomMetricUtilization
+    , autoscalingPolicyCustomMetricUtilization
+    , apcmuUtilizationTarget
+    , apcmuMetric
+    , apcmuUtilizationTargetType
+
     -- ** OperationList
     , OperationList
     , operationList
@@ -76,18 +89,6 @@ module Network.Google.Autoscaler
     , olItems
     , olSelfLink
     , olId
-
-    -- ** AutoscalingPolicyCustomMetricUtilization
-    , AutoscalingPolicyCustomMetricUtilization
-    , autoscalingPolicyCustomMetricUtilization
-    , apcmuUtilizationTarget
-    , apcmuMetric
-    , apcmuUtilizationTargetType
-
-    -- ** AutoscalingPolicyLoadBalancingUtilization
-    , AutoscalingPolicyLoadBalancingUtilization
-    , autoscalingPolicyLoadBalancingUtilization
-    , aplbuUtilizationTarget
 
     -- ** Operation
     , Operation
@@ -115,10 +116,10 @@ module Network.Google.Autoscaler
     , oTargetLink
     , oClientOperationId
 
-    -- ** Error'
-    , Error'
-    , error'
-    , eErrors
+    -- ** AutoscalingPolicyLoadBalancingUtilization
+    , AutoscalingPolicyLoadBalancingUtilization
+    , autoscalingPolicyLoadBalancingUtilization
+    , aplbuUtilizationTarget
 
     -- ** Zone
     , Zone
@@ -134,12 +135,13 @@ module Network.Google.Autoscaler
     , zDescription
     , zDeprecated
 
-    -- ** AutoscalerListResponse
-    , AutoscalerListResponse
-    , autoscalerListResponse
-    , alrNextPageToken
-    , alrKind
-    , alrItems
+    -- ** ZoneMaintenanceWindowsItem
+    , ZoneMaintenanceWindowsItem
+    , zoneMaintenanceWindowsItem
+    , zmwiBeginTime
+    , zmwiName
+    , zmwiEndTime
+    , zmwiDescription
 
     -- ** ZoneList
     , ZoneList
@@ -150,20 +152,12 @@ module Network.Google.Autoscaler
     , zlSelfLink
     , zlId
 
-    -- ** WarningsItem
-    , WarningsItem
-    , warningsItem
-    , wiData
-    , wiCode
-    , wiMessage
-
-    -- ** MaintenanceWindowsItem
-    , MaintenanceWindowsItem
-    , maintenanceWindowsItem
-    , mwiBeginTime
-    , mwiName
-    , mwiEndTime
-    , mwiDescription
+    -- ** AutoscalerListResponse
+    , AutoscalerListResponse
+    , autoscalerListResponse
+    , alrNextPageToken
+    , alrKind
+    , alrItems
 
     -- ** AutoscalingPolicy
     , AutoscalingPolicy
@@ -175,11 +169,10 @@ module Network.Google.Autoscaler
     , apMinNumReplicas
     , apCoolDownPeriodSec
 
-    -- ** DataItem
-    , DataItem
-    , dataItem
-    , diValue
-    , diKey
+    -- ** OperationError
+    , OperationError
+    , operationError
+    , oeErrors
 
     -- ** Autoscaler
     , Autoscaler
@@ -193,17 +186,24 @@ module Network.Google.Autoscaler
     , aDescription
     , aTarget
 
-    -- ** ErrorsItem
-    , ErrorsItem
-    , errorsItem
-    , eiLocation
-    , eiCode
-    , eiMessage
+    -- ** OperationErrorErrorsItem
+    , OperationErrorErrorsItem
+    , operationErrorErrorsItem
+    , oeeiLocation
+    , oeeiCode
+    , oeeiMessage
 
     -- ** AutoscalingPolicyCPUUtilization
     , AutoscalingPolicyCPUUtilization
     , autoscalingPolicyCPUUtilization
     , apcuUtilizationTarget
+
+    -- ** OperationWarningsItem
+    , OperationWarningsItem
+    , operationWarningsItem
+    , owiData
+    , owiCode
+    , owiMessage
     ) where
 
 import           Network.Google.Autoscaler.Types

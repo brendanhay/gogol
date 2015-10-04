@@ -85,18 +85,12 @@ module Network.Google.StorageTransfer
     , lorNextPageToken
     , lorOperations
 
-    -- ** DetailsItem
-    , DetailsItem
-    , detailsItem
-
-    -- ** PauseTransferOperationRequest
-    , PauseTransferOperationRequest
-    , pauseTransferOperationRequest
-
-    -- ** GoogleServiceAccount
-    , GoogleServiceAccount
-    , googleServiceAccount
-    , gsaAccountEmail
+    -- ** Schedule
+    , Schedule
+    , schedule
+    , sScheduleEndDate
+    , sScheduleStartDate
+    , sStartTimeOfDay
 
     -- ** ObjectConditions
     , ObjectConditions
@@ -115,20 +109,22 @@ module Network.Google.StorageTransfer
     , oName
     , oMetadata
 
-    -- ** Schedule
-    , Schedule
-    , schedule
-    , sScheduleEndDate
-    , sScheduleStartDate
-    , sStartTimeOfDay
-
     -- ** Empty
     , Empty
     , empty
 
-    -- ** Response
-    , Response
-    , response
+    -- ** PauseTransferOperationRequest
+    , PauseTransferOperationRequest
+    , pauseTransferOperationRequest
+
+    -- ** GoogleServiceAccount
+    , GoogleServiceAccount
+    , googleServiceAccount
+    , gsaAccountEmail
+
+    -- ** StatusDetailsItem
+    , StatusDetailsItem
+    , statusDetailsItem
 
     -- ** Date
     , Date
@@ -182,10 +178,6 @@ module Network.Google.StorageTransfer
     , gcsData
     , gdBucketName
 
-    -- ** Metadata
-    , Metadata
-    , metadata
-
     -- ** AwsS3Data
     , AwsS3Data
     , awsS3Data
@@ -197,12 +189,6 @@ module Network.Google.StorageTransfer
     , hTTPData
     , httpdListURL
 
-    -- ** ErrorLogEntry
-    , ErrorLogEntry
-    , errorLogEntry
-    , eleURL
-    , eleErrorDetails
-
     -- ** TimeOfDay
     , TimeOfDay
     , timeOfDay
@@ -210,6 +196,16 @@ module Network.Google.StorageTransfer
     , todHours
     , todMinutes
     , todSeconds
+
+    -- ** ErrorLogEntry
+    , ErrorLogEntry
+    , errorLogEntry
+    , eleURL
+    , eleErrorDetails
+
+    -- ** OperationMetadata
+    , OperationMetadata
+    , operationMetadata
 
     -- ** TransferOptions
     , TransferOptions
@@ -247,15 +243,19 @@ module Network.Google.StorageTransfer
     , ltjrNextPageToken
     , ltjrTransferJobs
 
+    -- ** OperationResponse
+    , OperationResponse
+    , operationResponse
+
+    -- ** ResumeTransferOperationRequest
+    , ResumeTransferOperationRequest
+    , resumeTransferOperationRequest
+
     -- ** AwsAccessKey
     , AwsAccessKey
     , awsAccessKey
     , aakSecretAccessKey
     , aakAccessKeyId
-
-    -- ** ResumeTransferOperationRequest
-    , ResumeTransferOperationRequest
-    , resumeTransferOperationRequest
     ) where
 
 import           Network.Google.Prelude

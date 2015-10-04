@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @GANAdvertisersGet@ which the
 -- 'AdvertisersGet'' request conforms to.
 type AdvertisersGetResource =
-     Capture "role" GANAdvertisersGetRole :>
+     Capture "role" AdvertisersGetRole :>
        Capture "roleId" Text :>
          "advertiser" :>
            QueryParam "advertiserId" Text :>
@@ -75,7 +75,7 @@ data AdvertisersGet' = AdvertisersGet'
     , _agUserIP       :: !(Maybe Text)
     , _agAdvertiserId :: !(Maybe Text)
     , _agRoleId       :: !Text
-    , _agRole         :: !GANAdvertisersGetRole
+    , _agRole         :: !AdvertisersGetRole
     , _agKey          :: !(Maybe Key)
     , _agOAuthToken   :: !(Maybe OAuthToken)
     , _agFields       :: !(Maybe Text)
@@ -104,7 +104,7 @@ data AdvertisersGet' = AdvertisersGet'
 -- * 'agFields'
 advertisersGet'
     :: Text -- ^ 'roleId'
-    -> GANAdvertisersGetRole -- ^ 'role'
+    -> AdvertisersGetRole -- ^ 'role'
     -> AdvertisersGet'
 advertisersGet' pAgRoleId_ pAgRole_ =
     AdvertisersGet'
@@ -149,7 +149,7 @@ agRoleId = lens _agRoleId (\ s a -> s{_agRoleId = a})
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-agRole :: Lens' AdvertisersGet' GANAdvertisersGetRole
+agRole :: Lens' AdvertisersGet' AdvertisersGetRole
 agRole = lens _agRole (\ s a -> s{_agRole = a})
 
 -- | API key. Your API key identifies your project and provides you with API

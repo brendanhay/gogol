@@ -54,9 +54,11 @@ type VolumesMybooksListResource =
      "volumes" :>
        "mybooks" :>
          QueryParams "processingState"
-           BooksVolumesMybooksListProcessingState
+           VolumesMybooksListProcessingState
            :>
-           QueryParams "acquireMethod" AcquireMethod :>
+           QueryParams "acquireMethod"
+             VolumesMybooksListAcquireMethod
+             :>
              QueryParam "locale" Text :>
                QueryParam "source" Text :>
                  QueryParam "startIndex" Word32 :>
@@ -73,9 +75,9 @@ type VolumesMybooksListResource =
 --
 -- /See:/ 'volumesMybooksList'' smart constructor.
 data VolumesMybooksList' = VolumesMybooksList'
-    { _vmlProcessingState :: !(Maybe [BooksVolumesMybooksListProcessingState])
+    { _vmlProcessingState :: !(Maybe [VolumesMybooksListProcessingState])
     , _vmlQuotaUser       :: !(Maybe Text)
-    , _vmlAcquireMethod   :: !(Maybe [AcquireMethod])
+    , _vmlAcquireMethod   :: !(Maybe [VolumesMybooksListAcquireMethod])
     , _vmlPrettyPrint     :: !Bool
     , _vmlUserIP          :: !(Maybe Text)
     , _vmlLocale          :: !(Maybe Text)
@@ -134,7 +136,7 @@ volumesMybooksList' =
 
 -- | The processing state of the user uploaded volumes to be returned.
 -- Applicable only if the UPLOADED is specified in the acquireMethod.
-vmlProcessingState :: Lens' VolumesMybooksList' [BooksVolumesMybooksListProcessingState]
+vmlProcessingState :: Lens' VolumesMybooksList' [VolumesMybooksListProcessingState]
 vmlProcessingState
   = lens _vmlProcessingState
       (\ s a -> s{_vmlProcessingState = a})
@@ -149,7 +151,7 @@ vmlQuotaUser
   = lens _vmlQuotaUser (\ s a -> s{_vmlQuotaUser = a})
 
 -- | How the book was aquired
-vmlAcquireMethod :: Lens' VolumesMybooksList' [AcquireMethod]
+vmlAcquireMethod :: Lens' VolumesMybooksList' [VolumesMybooksListAcquireMethod]
 vmlAcquireMethod
   = lens _vmlAcquireMethod
       (\ s a -> s{_vmlAcquireMethod = a})

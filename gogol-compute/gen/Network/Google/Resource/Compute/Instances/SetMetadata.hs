@@ -63,7 +63,7 @@ type InstancesSetMetadataResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] Metadata :>
+                               ReqBody '[OctetStream] Metadata :>
                                  Post '[JSON] Operation
 
 -- | Sets metadata for the specified instance to the data included in the

@@ -19,6 +19,61 @@ import           Network.Google.AppsTasks.Types.Sum
 import           Network.Google.Prelude
 
 --
+-- /See:/ 'taskLinksItem' smart constructor.
+data TaskLinksItem = TaskLinksItem
+    { _tliLink        :: !(Maybe Text)
+    , _tliType        :: !(Maybe Text)
+    , _tliDescription :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TaskLinksItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tliLink'
+--
+-- * 'tliType'
+--
+-- * 'tliDescription'
+taskLinksItem
+    :: TaskLinksItem
+taskLinksItem =
+    TaskLinksItem
+    { _tliLink = Nothing
+    , _tliType = Nothing
+    , _tliDescription = Nothing
+    }
+
+-- | The URL.
+tliLink :: Lens' TaskLinksItem (Maybe Text)
+tliLink = lens _tliLink (\ s a -> s{_tliLink = a})
+
+-- | Type of the link, e.g. \"email\".
+tliType :: Lens' TaskLinksItem (Maybe Text)
+tliType = lens _tliType (\ s a -> s{_tliType = a})
+
+-- | The description. In HTML speak: Everything between and .
+tliDescription :: Lens' TaskLinksItem (Maybe Text)
+tliDescription
+  = lens _tliDescription
+      (\ s a -> s{_tliDescription = a})
+
+instance FromJSON TaskLinksItem where
+        parseJSON
+          = withObject "TaskLinksItem"
+              (\ o ->
+                 TaskLinksItem <$>
+                   (o .:? "link") <*> (o .:? "type") <*>
+                     (o .:? "description"))
+
+instance ToJSON TaskLinksItem where
+        toJSON TaskLinksItem{..}
+          = object
+              (catMaybes
+                 [("link" .=) <$> _tliLink, ("type" .=) <$> _tliType,
+                  ("description" .=) <$> _tliDescription])
+
+--
 -- /See:/ 'tasks' smart constructor.
 data Tasks = Tasks
     { _tEtag          :: !(Maybe Text)
@@ -254,7 +309,7 @@ data Task = Task
     , _ttDeleted   :: !(Maybe Bool)
     , _ttUpdated   :: !(Maybe DateTime')
     , _ttTitle     :: !(Maybe Text)
-    , _ttLinks     :: !(Maybe [LinksItem])
+    , _ttLinks     :: !(Maybe [TaskLinksItem])
     , _ttNotes     :: !(Maybe Text)
     , _ttPosition  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -376,7 +431,7 @@ ttTitle :: Lens' Task (Maybe Text)
 ttTitle = lens _ttTitle (\ s a -> s{_ttTitle = a})
 
 -- | Collection of links. This collection is read-only.
-ttLinks :: Lens' Task [LinksItem]
+ttLinks :: Lens' Task [TaskLinksItem]
 ttLinks
   = lens _ttLinks (\ s a -> s{_ttLinks = a}) . _Default
       . _Coerce
@@ -430,58 +485,3 @@ instance ToJSON Task where
                   ("title" .=) <$> _ttTitle, ("links" .=) <$> _ttLinks,
                   ("notes" .=) <$> _ttNotes,
                   ("position" .=) <$> _ttPosition])
-
---
--- /See:/ 'linksItem' smart constructor.
-data LinksItem = LinksItem
-    { _liLink        :: !(Maybe Text)
-    , _liType        :: !(Maybe Text)
-    , _liDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'LinksItem' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'liLink'
---
--- * 'liType'
---
--- * 'liDescription'
-linksItem
-    :: LinksItem
-linksItem =
-    LinksItem
-    { _liLink = Nothing
-    , _liType = Nothing
-    , _liDescription = Nothing
-    }
-
--- | The URL.
-liLink :: Lens' LinksItem (Maybe Text)
-liLink = lens _liLink (\ s a -> s{_liLink = a})
-
--- | Type of the link, e.g. \"email\".
-liType :: Lens' LinksItem (Maybe Text)
-liType = lens _liType (\ s a -> s{_liType = a})
-
--- | The description. In HTML speak: Everything between and .
-liDescription :: Lens' LinksItem (Maybe Text)
-liDescription
-  = lens _liDescription
-      (\ s a -> s{_liDescription = a})
-
-instance FromJSON LinksItem where
-        parseJSON
-          = withObject "LinksItem"
-              (\ o ->
-                 LinksItem <$>
-                   (o .:? "link") <*> (o .:? "type") <*>
-                     (o .:? "description"))
-
-instance ToJSON LinksItem where
-        toJSON LinksItem{..}
-          = object
-              (catMaybes
-                 [("link" .=) <$> _liLink, ("type" .=) <$> _liType,
-                  ("description" .=) <$> _liDescription])

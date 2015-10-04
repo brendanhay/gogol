@@ -50,7 +50,7 @@ import           Network.Google.Storage.Types
 type BucketsInsertResource =
      "b" :>
        QueryParam "project" Text :>
-         QueryParam "projection" Projection :>
+         QueryParam "projection" BucketsInsertProjection :>
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
@@ -58,7 +58,7 @@ type BucketsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Bucket :> Post '[JSON] Bucket
+                         ReqBody '[OctetStream] Bucket :> Post '[JSON] Bucket
 
 -- | Creates a new bucket.
 --
@@ -70,7 +70,7 @@ data BucketsInsert' = BucketsInsert'
     , _biUserIP      :: !(Maybe Text)
     , _biPayload     :: !Bucket
     , _biKey         :: !(Maybe Key)
-    , _biProjection  :: !(Maybe Projection)
+    , _biProjection  :: !(Maybe BucketsInsertProjection)
     , _biOAuthToken  :: !(Maybe OAuthToken)
     , _biFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -150,7 +150,7 @@ biKey = lens _biKey (\ s a -> s{_biKey = a})
 -- | Set of properties to return. Defaults to noAcl, unless the bucket
 -- resource specifies acl or defaultObjectAcl properties, when it defaults
 -- to full.
-biProjection :: Lens' BucketsInsert' (Maybe Projection)
+biProjection :: Lens' BucketsInsert' (Maybe BucketsInsertProjection)
 biProjection
   = lens _biProjection (\ s a -> s{_biProjection = a})
 

@@ -51,8 +51,7 @@ import           Network.Google.Storage.Types
 type BucketsListResource =
      "b" :>
        QueryParam "project" Text :>
-         QueryParam "projection" StorageBucketsListProjection
-           :>
+         QueryParam "projection" BucketsListProjection :>
            QueryParam "pageToken" Text :>
              QueryParam "maxResults" Word32 :>
                QueryParam "quotaUser" Text :>
@@ -72,7 +71,7 @@ data BucketsList' = BucketsList'
     , _blProject     :: !Text
     , _blUserIP      :: !(Maybe Text)
     , _blKey         :: !(Maybe Key)
-    , _blProjection  :: !(Maybe StorageBucketsListProjection)
+    , _blProjection  :: !(Maybe BucketsListProjection)
     , _blPageToken   :: !(Maybe Text)
     , _blOAuthToken  :: !(Maybe OAuthToken)
     , _blMaxResults  :: !(Maybe Word32)
@@ -149,7 +148,7 @@ blKey :: Lens' BucketsList' (Maybe Key)
 blKey = lens _blKey (\ s a -> s{_blKey = a})
 
 -- | Set of properties to return. Defaults to noAcl.
-blProjection :: Lens' BucketsList' (Maybe StorageBucketsListProjection)
+blProjection :: Lens' BucketsList' (Maybe BucketsListProjection)
 blProjection
   = lens _blProjection (\ s a -> s{_blProjection = a})
 

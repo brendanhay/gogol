@@ -57,7 +57,7 @@ import           Network.Google.Prelude
 --
 -- /See:/ 'status' smart constructor.
 data Status = Status
-    { _sDetails :: !(Maybe [DetailsItem])
+    { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe Int32)
     , _sMessage :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -82,7 +82,7 @@ status =
 
 -- | A list of messages that carry the error details. There will be a common
 -- set of message types for APIs to use.
-sDetails :: Lens' Status [DetailsItem]
+sDetails :: Lens' Status [StatusDetailsItem]
 sDetails
   = lens _sDetails (\ s a -> s{_sDetails = a}) .
       _Default
@@ -116,123 +116,6 @@ instance ToJSON Status where
                   ("code" .=) <$> _sCode,
                   ("message" .=) <$> _sMessage])
 
--- | HTTP headers to use for all responses from these URLs.
---
--- /See:/ 'hTTPHeaders' smart constructor.
-data HTTPHeaders =
-    HTTPHeaders
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'HTTPHeaders' with the minimum fields required to make a request.
---
-hTTPHeaders
-    :: HTTPHeaders
-hTTPHeaders = HTTPHeaders
-
-instance FromJSON HTTPHeaders where
-        parseJSON
-          = withObject "HTTPHeaders" (\ o -> pure HTTPHeaders)
-
-instance ToJSON HTTPHeaders where
-        toJSON = const (Object mempty)
-
--- | A Python runtime third-party library required by the application.
---
--- /See:/ 'library' smart constructor.
-data Library = Library
-    { _lName    :: !(Maybe Text)
-    , _lVersion :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Library' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lName'
---
--- * 'lVersion'
-library
-    :: Library
-library =
-    Library
-    { _lName = Nothing
-    , _lVersion = Nothing
-    }
-
--- | The name of the library, e.g. \"PIL\" or \"django\".
-lName :: Lens' Library (Maybe Text)
-lName = lens _lName (\ s a -> s{_lName = a})
-
--- | The version of the library to select, or \"latest\".
-lVersion :: Lens' Library (Maybe Text)
-lVersion = lens _lVersion (\ s a -> s{_lVersion = a})
-
-instance FromJSON Library where
-        parseJSON
-          = withObject "Library"
-              (\ o ->
-                 Library <$> (o .:? "name") <*> (o .:? "version"))
-
-instance ToJSON Library where
-        toJSON Library{..}
-          = object
-              (catMaybes
-                 [("name" .=) <$> _lName,
-                  ("version" .=) <$> _lVersion])
-
--- | The response message for
--- [Operations.ListOperations][google.longrunning.Operations.ListOperations].
---
--- /See:/ 'listOperationsResponse' smart constructor.
-data ListOperationsResponse = ListOperationsResponse
-    { _lorNextPageToken :: !(Maybe Text)
-    , _lorOperations    :: !(Maybe [Operation])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lorNextPageToken'
---
--- * 'lorOperations'
-listOperationsResponse
-    :: ListOperationsResponse
-listOperationsResponse =
-    ListOperationsResponse
-    { _lorNextPageToken = Nothing
-    , _lorOperations = Nothing
-    }
-
--- | The standard List next-page token.
-lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
-lorNextPageToken
-  = lens _lorNextPageToken
-      (\ s a -> s{_lorNextPageToken = a})
-
--- | A list of operations that matches the specified filter in the request.
-lorOperations :: Lens' ListOperationsResponse [Operation]
-lorOperations
-  = lens _lorOperations
-      (\ s a -> s{_lorOperations = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON ListOperationsResponse where
-        parseJSON
-          = withObject "ListOperationsResponse"
-              (\ o ->
-                 ListOperationsResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "operations" .!= mempty))
-
-instance ToJSON ListOperationsResponse where
-        toJSON ListOperationsResponse{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _lorNextPageToken,
-                  ("operations" .=) <$> _lorOperations])
-
 -- | Configuration for traffic splitting for versions within a single module.
 -- Traffic splitting allows traffic directed to the module to be assigned
 -- to one of several versions in a fractional way, enabling experiments and
@@ -241,7 +124,7 @@ instance ToJSON ListOperationsResponse where
 -- /See:/ 'trafficSplit' smart constructor.
 data TrafficSplit = TrafficSplit
     { _tsShardBy     :: !(Maybe Text)
-    , _tsAllocations :: !(Maybe Allocations)
+    , _tsAllocations :: !(Maybe TrafficSplitAllocations)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TrafficSplit' with the minimum fields required to make a request.
@@ -274,7 +157,7 @@ tsShardBy
 -- removed. Allocations must sum to 1. Supports precision up to two decimal
 -- places for IP-based splits and up to three decimal places for
 -- cookie-based splits.
-tsAllocations :: Lens' TrafficSplit (Maybe Allocations)
+tsAllocations :: Lens' TrafficSplit (Maybe TrafficSplitAllocations)
 tsAllocations
   = lens _tsAllocations
       (\ s a -> s{_tsAllocations = a})
@@ -326,25 +209,6 @@ instance ToJSON ScriptHandler where
         toJSON ScriptHandler{..}
           = object
               (catMaybes [("scriptPath" .=) <$> _shScriptPath])
-
---
--- /See:/ 'detailsItem' smart constructor.
-data DetailsItem =
-    DetailsItem
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'DetailsItem' with the minimum fields required to make a request.
---
-detailsItem
-    :: DetailsItem
-detailsItem = DetailsItem
-
-instance FromJSON DetailsItem where
-        parseJSON
-          = withObject "DetailsItem" (\ o -> pure DetailsItem)
-
-instance ToJSON DetailsItem where
-        toJSON = const (Object mempty)
 
 -- | A URL pattern and description of how it should be handled. App Engine
 -- can handle URLs by executing application code, or by serving static
@@ -485,179 +349,102 @@ instance ToJSON URLMap where
                   ("login" .=) <$> _umLogin,
                   ("staticDirectory" .=) <$> _umStaticDirectory])
 
--- | API Serving configuration for Cloud Endpoints.
+-- | A Python runtime third-party library required by the application.
 --
--- /See:/ 'apiConfigHandler' smart constructor.
-data APIConfigHandler = APIConfigHandler
-    { _achScript         :: !(Maybe Text)
-    , _achSecurityLevel  :: !(Maybe Text)
-    , _achURL            :: !(Maybe Text)
-    , _achAuthFailAction :: !(Maybe Text)
-    , _achLogin          :: !(Maybe Text)
+-- /See:/ 'library' smart constructor.
+data Library = Library
+    { _lName    :: !(Maybe Text)
+    , _lVersion :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'APIConfigHandler' with the minimum fields required to make a request.
+-- | Creates a value of 'Library' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'achScript'
+-- * 'lName'
 --
--- * 'achSecurityLevel'
---
--- * 'achURL'
---
--- * 'achAuthFailAction'
---
--- * 'achLogin'
-apiConfigHandler
-    :: APIConfigHandler
-apiConfigHandler =
-    APIConfigHandler
-    { _achScript = Nothing
-    , _achSecurityLevel = Nothing
-    , _achURL = Nothing
-    , _achAuthFailAction = Nothing
-    , _achLogin = Nothing
+-- * 'lVersion'
+library
+    :: Library
+library =
+    Library
+    { _lName = Nothing
+    , _lVersion = Nothing
     }
 
--- | Specifies the path to the script from the application root directory.
-achScript :: Lens' APIConfigHandler (Maybe Text)
-achScript
-  = lens _achScript (\ s a -> s{_achScript = a})
+-- | The name of the library, e.g. \"PIL\" or \"django\".
+lName :: Lens' Library (Maybe Text)
+lName = lens _lName (\ s a -> s{_lName = a})
 
--- | Configures whether security (HTTPS) should be enforced for this URL.
-achSecurityLevel :: Lens' APIConfigHandler (Maybe Text)
-achSecurityLevel
-  = lens _achSecurityLevel
-      (\ s a -> s{_achSecurityLevel = a})
+-- | The version of the library to select, or \"latest\".
+lVersion :: Lens' Library (Maybe Text)
+lVersion = lens _lVersion (\ s a -> s{_lVersion = a})
 
--- | URL to serve the endpoint at.
-achURL :: Lens' APIConfigHandler (Maybe Text)
-achURL = lens _achURL (\ s a -> s{_achURL = a})
-
--- | For users not logged in, how to handle access to resources with required
--- login. Defaults to \"redirect\".
-achAuthFailAction :: Lens' APIConfigHandler (Maybe Text)
-achAuthFailAction
-  = lens _achAuthFailAction
-      (\ s a -> s{_achAuthFailAction = a})
-
--- | What level of login is required to access this resource. Default is
--- \"optional\".
-achLogin :: Lens' APIConfigHandler (Maybe Text)
-achLogin = lens _achLogin (\ s a -> s{_achLogin = a})
-
-instance FromJSON APIConfigHandler where
+instance FromJSON Library where
         parseJSON
-          = withObject "APIConfigHandler"
+          = withObject "Library"
               (\ o ->
-                 APIConfigHandler <$>
-                   (o .:? "script") <*> (o .:? "securityLevel") <*>
-                     (o .:? "url")
-                     <*> (o .:? "authFailAction")
-                     <*> (o .:? "login"))
+                 Library <$> (o .:? "name") <*> (o .:? "version"))
 
-instance ToJSON APIConfigHandler where
-        toJSON APIConfigHandler{..}
+instance ToJSON Library where
+        toJSON Library{..}
           = object
               (catMaybes
-                 [("script" .=) <$> _achScript,
-                  ("securityLevel" .=) <$> _achSecurityLevel,
-                  ("url" .=) <$> _achURL,
-                  ("authFailAction" .=) <$> _achAuthFailAction,
-                  ("login" .=) <$> _achLogin])
+                 [("name" .=) <$> _lName,
+                  ("version" .=) <$> _lVersion])
 
--- | An Application contains the top-level configuration of an App Engine
--- application.
+-- | The response message for
+-- [Operations.ListOperations][google.longrunning.Operations.ListOperations].
 --
--- /See:/ 'application' smart constructor.
-data Application = Application
-    { _aLocation      :: !(Maybe Text)
-    , _aCodeBucket    :: !(Maybe Text)
-    , _aName          :: !(Maybe Text)
-    , _aDispatchRules :: !(Maybe [URLDispatchRule])
-    , _aId            :: !(Maybe Text)
+-- /See:/ 'listOperationsResponse' smart constructor.
+data ListOperationsResponse = ListOperationsResponse
+    { _lorNextPageToken :: !(Maybe Text)
+    , _lorOperations    :: !(Maybe [Operation])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Application' with the minimum fields required to make a request.
+-- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aLocation'
+-- * 'lorNextPageToken'
 --
--- * 'aCodeBucket'
---
--- * 'aName'
---
--- * 'aDispatchRules'
---
--- * 'aId'
-application
-    :: Application
-application =
-    Application
-    { _aLocation = Nothing
-    , _aCodeBucket = Nothing
-    , _aName = Nothing
-    , _aDispatchRules = Nothing
-    , _aId = Nothing
+-- * 'lorOperations'
+listOperationsResponse
+    :: ListOperationsResponse
+listOperationsResponse =
+    ListOperationsResponse
+    { _lorNextPageToken = Nothing
+    , _lorOperations = Nothing
     }
 
--- | The location from which the application will be run. Choices are
--- \"us-central\" for United States and \"europe-west\" for European Union.
--- Application instances will run out of data centers in the chosen
--- location and all of the application\'s End User Content will be stored
--- at rest in the chosen location. The default is \"us-central\".
-aLocation :: Lens' Application (Maybe Text)
-aLocation
-  = lens _aLocation (\ s a -> s{_aLocation = a})
+-- | The standard List next-page token.
+lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
+lorNextPageToken
+  = lens _lorNextPageToken
+      (\ s a -> s{_lorNextPageToken = a})
 
--- | A Google Cloud Storage bucket which can be used for storing files
--- associated with an application. This bucket is associated with the
--- application and can be used by the gcloud deployment commands.
--- \'OutputOnly
-aCodeBucket :: Lens' Application (Maybe Text)
-aCodeBucket
-  = lens _aCodeBucket (\ s a -> s{_aCodeBucket = a})
-
--- | The full path to the application in the API. Example: \"apps\/myapp\".
--- \'OutputOnly
-aName :: Lens' Application (Maybe Text)
-aName = lens _aName (\ s a -> s{_aName = a})
-
--- | HTTP path dispatch rules for requests to the app that do not explicitly
--- target a module or version. The rules are order-dependent.
-aDispatchRules :: Lens' Application [URLDispatchRule]
-aDispatchRules
-  = lens _aDispatchRules
-      (\ s a -> s{_aDispatchRules = a})
+-- | A list of operations that matches the specified filter in the request.
+lorOperations :: Lens' ListOperationsResponse [Operation]
+lorOperations
+  = lens _lorOperations
+      (\ s a -> s{_lorOperations = a})
       . _Default
       . _Coerce
 
--- | The relative name\/path of the application. Example: \"myapp\".
--- \'OutputOnly
-aId :: Lens' Application (Maybe Text)
-aId = lens _aId (\ s a -> s{_aId = a})
-
-instance FromJSON Application where
+instance FromJSON ListOperationsResponse where
         parseJSON
-          = withObject "Application"
+          = withObject "ListOperationsResponse"
               (\ o ->
-                 Application <$>
-                   (o .:? "location") <*> (o .:? "codeBucket") <*>
-                     (o .:? "name")
-                     <*> (o .:? "dispatchRules" .!= mempty)
-                     <*> (o .:? "id"))
+                 ListOperationsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "operations" .!= mempty))
 
-instance ToJSON Application where
-        toJSON Application{..}
+instance ToJSON ListOperationsResponse where
+        toJSON ListOperationsResponse{..}
           = object
               (catMaybes
-                 [("location" .=) <$> _aLocation,
-                  ("codeBucket" .=) <$> _aCodeBucket,
-                  ("name" .=) <$> _aName,
-                  ("dispatchRules" .=) <$> _aDispatchRules,
-                  ("id" .=) <$> _aId])
+                 [("nextPageToken" .=) <$> _lorNextPageToken,
+                  ("operations" .=) <$> _lorOperations])
 
 -- | Configure health checking for the VM instances. Unhealthy VM instances
 -- will be killed and replaced with new instances.
@@ -770,6 +557,316 @@ instance ToJSON HealthCheck where
                   ("timeout" .=) <$> _hcTimeout,
                   ("unhealthyThreshold" .=) <$> _hcUnhealthyThreshold])
 
+-- | API Serving configuration for Cloud Endpoints.
+--
+-- /See:/ 'apiConfigHandler' smart constructor.
+data APIConfigHandler = APIConfigHandler
+    { _achScript         :: !(Maybe Text)
+    , _achSecurityLevel  :: !(Maybe Text)
+    , _achURL            :: !(Maybe Text)
+    , _achAuthFailAction :: !(Maybe Text)
+    , _achLogin          :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'APIConfigHandler' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'achScript'
+--
+-- * 'achSecurityLevel'
+--
+-- * 'achURL'
+--
+-- * 'achAuthFailAction'
+--
+-- * 'achLogin'
+apiConfigHandler
+    :: APIConfigHandler
+apiConfigHandler =
+    APIConfigHandler
+    { _achScript = Nothing
+    , _achSecurityLevel = Nothing
+    , _achURL = Nothing
+    , _achAuthFailAction = Nothing
+    , _achLogin = Nothing
+    }
+
+-- | Specifies the path to the script from the application root directory.
+achScript :: Lens' APIConfigHandler (Maybe Text)
+achScript
+  = lens _achScript (\ s a -> s{_achScript = a})
+
+-- | Configures whether security (HTTPS) should be enforced for this URL.
+achSecurityLevel :: Lens' APIConfigHandler (Maybe Text)
+achSecurityLevel
+  = lens _achSecurityLevel
+      (\ s a -> s{_achSecurityLevel = a})
+
+-- | URL to serve the endpoint at.
+achURL :: Lens' APIConfigHandler (Maybe Text)
+achURL = lens _achURL (\ s a -> s{_achURL = a})
+
+-- | For users not logged in, how to handle access to resources with required
+-- login. Defaults to \"redirect\".
+achAuthFailAction :: Lens' APIConfigHandler (Maybe Text)
+achAuthFailAction
+  = lens _achAuthFailAction
+      (\ s a -> s{_achAuthFailAction = a})
+
+-- | What level of login is required to access this resource. Default is
+-- \"optional\".
+achLogin :: Lens' APIConfigHandler (Maybe Text)
+achLogin = lens _achLogin (\ s a -> s{_achLogin = a})
+
+instance FromJSON APIConfigHandler where
+        parseJSON
+          = withObject "APIConfigHandler"
+              (\ o ->
+                 APIConfigHandler <$>
+                   (o .:? "script") <*> (o .:? "securityLevel") <*>
+                     (o .:? "url")
+                     <*> (o .:? "authFailAction")
+                     <*> (o .:? "login"))
+
+instance ToJSON APIConfigHandler where
+        toJSON APIConfigHandler{..}
+          = object
+              (catMaybes
+                 [("script" .=) <$> _achScript,
+                  ("securityLevel" .=) <$> _achSecurityLevel,
+                  ("url" .=) <$> _achURL,
+                  ("authFailAction" .=) <$> _achAuthFailAction,
+                  ("login" .=) <$> _achLogin])
+
+-- | Environment variables made available to the application. Only returned
+-- in \`GET\` requests if \`view=FULL\` is set. May only be set on create
+-- requests; once created, is immutable.
+--
+-- /See:/ 'versionEnvVariables' smart constructor.
+data VersionEnvVariables =
+    VersionEnvVariables
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VersionEnvVariables' with the minimum fields required to make a request.
+--
+versionEnvVariables
+    :: VersionEnvVariables
+versionEnvVariables = VersionEnvVariables
+
+instance FromJSON VersionEnvVariables where
+        parseJSON
+          = withObject "VersionEnvVariables"
+              (\ o -> pure VersionEnvVariables)
+
+instance ToJSON VersionEnvVariables where
+        toJSON = const (Object mempty)
+
+-- | An Application contains the top-level configuration of an App Engine
+-- application.
+--
+-- /See:/ 'application' smart constructor.
+data Application = Application
+    { _aLocation      :: !(Maybe Text)
+    , _aCodeBucket    :: !(Maybe Text)
+    , _aName          :: !(Maybe Text)
+    , _aDispatchRules :: !(Maybe [URLDispatchRule])
+    , _aId            :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Application' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aLocation'
+--
+-- * 'aCodeBucket'
+--
+-- * 'aName'
+--
+-- * 'aDispatchRules'
+--
+-- * 'aId'
+application
+    :: Application
+application =
+    Application
+    { _aLocation = Nothing
+    , _aCodeBucket = Nothing
+    , _aName = Nothing
+    , _aDispatchRules = Nothing
+    , _aId = Nothing
+    }
+
+-- | The location from which the application will be run. Choices are
+-- \"us-central\" for United States and \"europe-west\" for European Union.
+-- Application instances will run out of data centers in the chosen
+-- location and all of the application\'s End User Content will be stored
+-- at rest in the chosen location. The default is \"us-central\".
+aLocation :: Lens' Application (Maybe Text)
+aLocation
+  = lens _aLocation (\ s a -> s{_aLocation = a})
+
+-- | A Google Cloud Storage bucket which can be used for storing files
+-- associated with an application. This bucket is associated with the
+-- application and can be used by the gcloud deployment commands.
+-- \'OutputOnly
+aCodeBucket :: Lens' Application (Maybe Text)
+aCodeBucket
+  = lens _aCodeBucket (\ s a -> s{_aCodeBucket = a})
+
+-- | The full path to the application in the API. Example: \"apps\/myapp\".
+-- \'OutputOnly
+aName :: Lens' Application (Maybe Text)
+aName = lens _aName (\ s a -> s{_aName = a})
+
+-- | HTTP path dispatch rules for requests to the app that do not explicitly
+-- target a module or version. The rules are order-dependent.
+aDispatchRules :: Lens' Application [URLDispatchRule]
+aDispatchRules
+  = lens _aDispatchRules
+      (\ s a -> s{_aDispatchRules = a})
+      . _Default
+      . _Coerce
+
+-- | The relative name\/path of the application. Example: \"myapp\".
+-- \'OutputOnly
+aId :: Lens' Application (Maybe Text)
+aId = lens _aId (\ s a -> s{_aId = a})
+
+instance FromJSON Application where
+        parseJSON
+          = withObject "Application"
+              (\ o ->
+                 Application <$>
+                   (o .:? "location") <*> (o .:? "codeBucket") <*>
+                     (o .:? "name")
+                     <*> (o .:? "dispatchRules" .!= mempty)
+                     <*> (o .:? "id"))
+
+instance ToJSON Application where
+        toJSON Application{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _aLocation,
+                  ("codeBucket" .=) <$> _aCodeBucket,
+                  ("name" .=) <$> _aName,
+                  ("dispatchRules" .=) <$> _aDispatchRules,
+                  ("id" .=) <$> _aId])
+
+-- | Beta settings supplied to the application via metadata.
+--
+-- /See:/ 'versionBetaSettings' smart constructor.
+data VersionBetaSettings =
+    VersionBetaSettings
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VersionBetaSettings' with the minimum fields required to make a request.
+--
+versionBetaSettings
+    :: VersionBetaSettings
+versionBetaSettings = VersionBetaSettings
+
+instance FromJSON VersionBetaSettings where
+        parseJSON
+          = withObject "VersionBetaSettings"
+              (\ o -> pure VersionBetaSettings)
+
+instance ToJSON VersionBetaSettings where
+        toJSON = const (Object mempty)
+
+-- | This resource represents a long-running operation that is the result of
+-- a network API call.
+--
+-- /See:/ 'operation' smart constructor.
+data Operation = Operation
+    { _oDone     :: !(Maybe Bool)
+    , _oError    :: !(Maybe Status)
+    , _oResponse :: !(Maybe OperationResponse)
+    , _oName     :: !(Maybe Text)
+    , _oMetadata :: !(Maybe OperationMetadata)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Operation' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oDone'
+--
+-- * 'oError'
+--
+-- * 'oResponse'
+--
+-- * 'oName'
+--
+-- * 'oMetadata'
+operation
+    :: Operation
+operation =
+    Operation
+    { _oDone = Nothing
+    , _oError = Nothing
+    , _oResponse = Nothing
+    , _oName = Nothing
+    , _oMetadata = Nothing
+    }
+
+-- | If the value is \`false\`, it means the operation is still in progress.
+-- If true, the operation is completed, and either \`error\` or
+-- \`response\` is available.
+oDone :: Lens' Operation (Maybe Bool)
+oDone = lens _oDone (\ s a -> s{_oDone = a})
+
+-- | The error result of the operation in case of failure.
+oError :: Lens' Operation (Maybe Status)
+oError = lens _oError (\ s a -> s{_oError = a})
+
+-- | The normal response of the operation in case of success. If the original
+-- method returns no data on success, such as \`Delete\`, the response is
+-- \`google.protobuf.Empty\`. If the original method is standard
+-- \`Get\`\/\`Create\`\/\`Update\`, the response should be the resource.
+-- For other methods, the response should have the type \`XxxResponse\`,
+-- where \`Xxx\` is the original method name. For example, if the original
+-- method name is \`TakeSnapshot()\`, the inferred response type is
+-- \`TakeSnapshotResponse\`.
+oResponse :: Lens' Operation (Maybe OperationResponse)
+oResponse
+  = lens _oResponse (\ s a -> s{_oResponse = a})
+
+-- | The server-assigned name, which is only unique within the same service
+-- that originally returns it. If you use the default HTTP mapping above,
+-- the \`name\` should have the format of
+-- \`operations\/some\/unique\/name\`.
+oName :: Lens' Operation (Maybe Text)
+oName = lens _oName (\ s a -> s{_oName = a})
+
+-- | Service-specific metadata associated with the operation. It typically
+-- contains progress information and common metadata such as create time.
+-- Some services might not provide such metadata. Any method that returns a
+-- long-running operation should document the metadata type, if any.
+oMetadata :: Lens' Operation (Maybe OperationMetadata)
+oMetadata
+  = lens _oMetadata (\ s a -> s{_oMetadata = a})
+
+instance FromJSON Operation where
+        parseJSON
+          = withObject "Operation"
+              (\ o ->
+                 Operation <$>
+                   (o .:? "done") <*> (o .:? "error") <*>
+                     (o .:? "response")
+                     <*> (o .:? "name")
+                     <*> (o .:? "metadata"))
+
+instance ToJSON Operation where
+        toJSON Operation{..}
+          = object
+              (catMaybes
+                 [("done" .=) <$> _oDone, ("error" .=) <$> _oError,
+                  ("response" .=) <$> _oResponse,
+                  ("name" .=) <$> _oName,
+                  ("metadata" .=) <$> _oMetadata])
+
 -- | Rules to match an HTTP request and dispatch that request to a module.
 --
 -- /See:/ 'urlDispatchRule' smart constructor.
@@ -831,98 +928,6 @@ instance ToJSON URLDispatchRule where
                  [("path" .=) <$> _udrPath,
                   ("domain" .=) <$> _udrDomain,
                   ("module" .=) <$> _udrModule])
-
--- | This resource represents a long-running operation that is the result of
--- a network API call.
---
--- /See:/ 'operation' smart constructor.
-data Operation = Operation
-    { _oDone     :: !(Maybe Bool)
-    , _oError    :: !(Maybe Status)
-    , _oResponse :: !(Maybe Response)
-    , _oName     :: !(Maybe Text)
-    , _oMetadata :: !(Maybe Metadata)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Operation' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'oDone'
---
--- * 'oError'
---
--- * 'oResponse'
---
--- * 'oName'
---
--- * 'oMetadata'
-operation
-    :: Operation
-operation =
-    Operation
-    { _oDone = Nothing
-    , _oError = Nothing
-    , _oResponse = Nothing
-    , _oName = Nothing
-    , _oMetadata = Nothing
-    }
-
--- | If the value is \`false\`, it means the operation is still in progress.
--- If true, the operation is completed, and either \`error\` or
--- \`response\` is available.
-oDone :: Lens' Operation (Maybe Bool)
-oDone = lens _oDone (\ s a -> s{_oDone = a})
-
--- | The error result of the operation in case of failure.
-oError :: Lens' Operation (Maybe Status)
-oError = lens _oError (\ s a -> s{_oError = a})
-
--- | The normal response of the operation in case of success. If the original
--- method returns no data on success, such as \`Delete\`, the response is
--- \`google.protobuf.Empty\`. If the original method is standard
--- \`Get\`\/\`Create\`\/\`Update\`, the response should be the resource.
--- For other methods, the response should have the type \`XxxResponse\`,
--- where \`Xxx\` is the original method name. For example, if the original
--- method name is \`TakeSnapshot()\`, the inferred response type is
--- \`TakeSnapshotResponse\`.
-oResponse :: Lens' Operation (Maybe Response)
-oResponse
-  = lens _oResponse (\ s a -> s{_oResponse = a})
-
--- | The server-assigned name, which is only unique within the same service
--- that originally returns it. If you use the default HTTP mapping above,
--- the \`name\` should have the format of
--- \`operations\/some\/unique\/name\`.
-oName :: Lens' Operation (Maybe Text)
-oName = lens _oName (\ s a -> s{_oName = a})
-
--- | Service-specific metadata associated with the operation. It typically
--- contains progress information and common metadata such as create time.
--- Some services might not provide such metadata. Any method that returns a
--- long-running operation should document the metadata type, if any.
-oMetadata :: Lens' Operation (Maybe Metadata)
-oMetadata
-  = lens _oMetadata (\ s a -> s{_oMetadata = a})
-
-instance FromJSON Operation where
-        parseJSON
-          = withObject "Operation"
-              (\ o ->
-                 Operation <$>
-                   (o .:? "done") <*> (o .:? "error") <*>
-                     (o .:? "response")
-                     <*> (o .:? "name")
-                     <*> (o .:? "metadata"))
-
-instance ToJSON Operation where
-        toJSON Operation{..}
-          = object
-              (catMaybes
-                 [("done" .=) <$> _oDone, ("error" .=) <$> _oError,
-                  ("response" .=) <$> _oResponse,
-                  ("name" .=) <$> _oName,
-                  ("metadata" .=) <$> _oMetadata])
 
 -- | HTTP headers to use for all responses from these URLs.
 --
@@ -997,57 +1002,6 @@ instance ToJSON ListVersionsResponse where
               (catMaybes
                  [("nextPageToken" .=) <$> _lvrNextPageToken,
                   ("versions" .=) <$> _lvrVersions])
-
--- | Response message for \`Modules.ListModules\`.
---
--- /See:/ 'listModulesResponse' smart constructor.
-data ListModulesResponse = ListModulesResponse
-    { _lmrNextPageToken :: !(Maybe Text)
-    , _lmrModules       :: !(Maybe [Module])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ListModulesResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lmrNextPageToken'
---
--- * 'lmrModules'
-listModulesResponse
-    :: ListModulesResponse
-listModulesResponse =
-    ListModulesResponse
-    { _lmrNextPageToken = Nothing
-    , _lmrModules = Nothing
-    }
-
--- | Continuation token for fetching the next page of results.
-lmrNextPageToken :: Lens' ListModulesResponse (Maybe Text)
-lmrNextPageToken
-  = lens _lmrNextPageToken
-      (\ s a -> s{_lmrNextPageToken = a})
-
--- | The modules belonging to the requested application.
-lmrModules :: Lens' ListModulesResponse [Module]
-lmrModules
-  = lens _lmrModules (\ s a -> s{_lmrModules = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON ListModulesResponse where
-        parseJSON
-          = withObject "ListModulesResponse"
-              (\ o ->
-                 ListModulesResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "modules" .!= mempty))
-
-instance ToJSON ListModulesResponse where
-        toJSON ListModulesResponse{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _lmrNextPageToken,
-                  ("modules" .=) <$> _lmrModules])
 
 -- | A single source file which is part of the application to be deployed.
 --
@@ -1256,59 +1210,56 @@ instance ToJSON AutomaticScaling where
                   ("coolDownPeriod" .=) <$> _asCoolDownPeriod,
                   ("maxPendingLatency" .=) <$> _asMaxPendingLatency])
 
--- | The normal response of the operation in case of success. If the original
--- method returns no data on success, such as \`Delete\`, the response is
--- \`google.protobuf.Empty\`. If the original method is standard
--- \`Get\`\/\`Create\`\/\`Update\`, the response should be the resource.
--- For other methods, the response should have the type \`XxxResponse\`,
--- where \`Xxx\` is the original method name. For example, if the original
--- method name is \`TakeSnapshot()\`, the inferred response type is
--- \`TakeSnapshotResponse\`.
+-- | Response message for \`Modules.ListModules\`.
 --
--- /See:/ 'response' smart constructor.
-data Response =
-    Response
-    deriving (Eq,Show,Data,Typeable,Generic)
+-- /See:/ 'listModulesResponse' smart constructor.
+data ListModulesResponse = ListModulesResponse
+    { _lmrNextPageToken :: !(Maybe Text)
+    , _lmrModules       :: !(Maybe [Module])
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Response' with the minimum fields required to make a request.
+-- | Creates a value of 'ListModulesResponse' with the minimum fields required to make a request.
 --
-response
-    :: Response
-response = Response
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lmrNextPageToken'
+--
+-- * 'lmrModules'
+listModulesResponse
+    :: ListModulesResponse
+listModulesResponse =
+    ListModulesResponse
+    { _lmrNextPageToken = Nothing
+    , _lmrModules = Nothing
+    }
 
-instance FromJSON Response where
+-- | Continuation token for fetching the next page of results.
+lmrNextPageToken :: Lens' ListModulesResponse (Maybe Text)
+lmrNextPageToken
+  = lens _lmrNextPageToken
+      (\ s a -> s{_lmrNextPageToken = a})
+
+-- | The modules belonging to the requested application.
+lmrModules :: Lens' ListModulesResponse [Module]
+lmrModules
+  = lens _lmrModules (\ s a -> s{_lmrModules = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ListModulesResponse where
         parseJSON
-          = withObject "Response" (\ o -> pure Response)
+          = withObject "ListModulesResponse"
+              (\ o ->
+                 ListModulesResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "modules" .!= mempty))
 
-instance ToJSON Response where
-        toJSON = const (Object mempty)
-
--- | Mapping from module version IDs within the module to fractional (0.000,
--- 1] allocations of traffic for that version. Each version may only be
--- specified once, but some versions in the module may not have any traffic
--- allocation. Modules that have traffic allocated in this field may not be
--- deleted until the module is deleted, or their traffic allocation is
--- removed. Allocations must sum to 1. Supports precision up to two decimal
--- places for IP-based splits and up to three decimal places for
--- cookie-based splits.
---
--- /See:/ 'allocations' smart constructor.
-data Allocations =
-    Allocations
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Allocations' with the minimum fields required to make a request.
---
-allocations
-    :: Allocations
-allocations = Allocations
-
-instance FromJSON Allocations where
-        parseJSON
-          = withObject "Allocations" (\ o -> pure Allocations)
-
-instance ToJSON Allocations where
-        toJSON = const (Object mempty)
+instance ToJSON ListModulesResponse where
+        toJSON ListModulesResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lmrNextPageToken,
+                  ("modules" .=) <$> _lmrModules])
 
 -- | Use Google Cloud Endpoints to handle requests.
 --
@@ -1344,6 +1295,26 @@ instance ToJSON APIEndpointHandler where
         toJSON APIEndpointHandler{..}
           = object
               (catMaybes [("scriptPath" .=) <$> _aehScriptPath])
+
+--
+-- /See:/ 'statusDetailsItem' smart constructor.
+data StatusDetailsItem =
+    StatusDetailsItem
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
+--
+statusDetailsItem
+    :: StatusDetailsItem
+statusDetailsItem = StatusDetailsItem
+
+instance FromJSON StatusDetailsItem where
+        parseJSON
+          = withObject "StatusDetailsItem"
+              (\ o -> pure StatusDetailsItem)
+
+instance ToJSON StatusDetailsItem where
+        toJSON = const (Object mempty)
 
 -- | Used to specify extra network settings (for VM runtimes only).
 --
@@ -1409,6 +1380,27 @@ instance ToJSON Network where
                   ("instanceTag" .=) <$> _nInstanceTag,
                   ("name" .=) <$> _nName])
 
+-- | HTTP headers to use for all responses from these URLs.
+--
+-- /See:/ 'staticFilesHandlerHTTPHeaders' smart constructor.
+data StaticFilesHandlerHTTPHeaders =
+    StaticFilesHandlerHTTPHeaders
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StaticFilesHandlerHTTPHeaders' with the minimum fields required to make a request.
+--
+staticFilesHandlerHTTPHeaders
+    :: StaticFilesHandlerHTTPHeaders
+staticFilesHandlerHTTPHeaders = StaticFilesHandlerHTTPHeaders
+
+instance FromJSON StaticFilesHandlerHTTPHeaders where
+        parseJSON
+          = withObject "StaticFilesHandlerHTTPHeaders"
+              (\ o -> pure StaticFilesHandlerHTTPHeaders)
+
+instance ToJSON StaticFilesHandlerHTTPHeaders where
+        toJSON = const (Object mempty)
+
 -- | Used to specify how many machine resources an app version needs.
 --
 -- /See:/ 'resources' smart constructor.
@@ -1464,6 +1456,29 @@ instance ToJSON Resources where
                  [("memoryGb" .=) <$> _rMemoryGb,
                   ("diskGb" .=) <$> _rDiskGb, ("cpu" .=) <$> _rCPU])
 
+-- | A manifest of files stored in Google Cloud Storage which should be
+-- included as part of this application. All files must be readable using
+-- the credentials supplied with this call.
+--
+-- /See:/ 'deploymentFiles' smart constructor.
+data DeploymentFiles =
+    DeploymentFiles
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DeploymentFiles' with the minimum fields required to make a request.
+--
+deploymentFiles
+    :: DeploymentFiles
+deploymentFiles = DeploymentFiles
+
+instance FromJSON DeploymentFiles where
+        parseJSON
+          = withObject "DeploymentFiles"
+              (\ o -> pure DeploymentFiles)
+
+instance ToJSON DeploymentFiles where
+        toJSON = const (Object mempty)
+
 -- | Target scaling by CPU usage.
 --
 -- /See:/ 'cpuUtilization' smart constructor.
@@ -1515,6 +1530,34 @@ instance ToJSON CPUUtilization where
                     _cuAggregationWindowLength,
                   ("targetUtilization" .=) <$> _cuTargetUtilization])
 
+-- | Mapping from module version IDs within the module to fractional (0.000,
+-- 1] allocations of traffic for that version. Each version may only be
+-- specified once, but some versions in the module may not have any traffic
+-- allocation. Modules that have traffic allocated in this field may not be
+-- deleted until the module is deleted, or their traffic allocation is
+-- removed. Allocations must sum to 1. Supports precision up to two decimal
+-- places for IP-based splits and up to three decimal places for
+-- cookie-based splits.
+--
+-- /See:/ 'trafficSplitAllocations' smart constructor.
+data TrafficSplitAllocations =
+    TrafficSplitAllocations
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TrafficSplitAllocations' with the minimum fields required to make a request.
+--
+trafficSplitAllocations
+    :: TrafficSplitAllocations
+trafficSplitAllocations = TrafficSplitAllocations
+
+instance FromJSON TrafficSplitAllocations where
+        parseJSON
+          = withObject "TrafficSplitAllocations"
+              (\ o -> pure TrafficSplitAllocations)
+
+instance ToJSON TrafficSplitAllocations where
+        toJSON = const (Object mempty)
+
 -- | A module with manual scaling runs continuously, allowing you to perform
 -- complex initialization and rely on the state of its memory over time.
 --
@@ -1552,27 +1595,6 @@ instance ToJSON ManualScaling where
         toJSON ManualScaling{..}
           = object
               (catMaybes [("instances" .=) <$> _msInstances])
-
--- | Beta settings supplied to the application via metadata.
---
--- /See:/ 'betaSettings' smart constructor.
-data BetaSettings =
-    BetaSettings
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'BetaSettings' with the minimum fields required to make a request.
---
-betaSettings
-    :: BetaSettings
-betaSettings = BetaSettings
-
-instance FromJSON BetaSettings where
-        parseJSON
-          = withObject "BetaSettings"
-              (\ o -> pure BetaSettings)
-
-instance ToJSON BetaSettings where
-        toJSON = const (Object mempty)
 
 -- | A module with basic scaling will create an instance when the application
 -- receives a request. The instance will be turned down when the app
@@ -1650,12 +1672,12 @@ data Version = Version
     , _vResources         :: !(Maybe Resources)
     , _vName              :: !(Maybe Text)
     , _vThreadsafe        :: !(Maybe Bool)
-    , _vBetaSettings      :: !(Maybe BetaSettings)
+    , _vBetaSettings      :: !(Maybe VersionBetaSettings)
     , _vBasicScaling      :: !(Maybe BasicScaling)
     , _vManualScaling     :: !(Maybe ManualScaling)
     , _vAPIConfig         :: !(Maybe APIConfigHandler)
     , _vId                :: !(Maybe Text)
-    , _vEnvVariables      :: !(Maybe EnvVariables)
+    , _vEnvVariables      :: !(Maybe VersionEnvVariables)
     , _vServingStatus     :: !(Maybe Text)
     , _vLibraries         :: !(Maybe [Library])
     , _vDeployment        :: !(Maybe Deployment)
@@ -1865,7 +1887,7 @@ vThreadsafe
   = lens _vThreadsafe (\ s a -> s{_vThreadsafe = a})
 
 -- | Beta settings supplied to the application via metadata.
-vBetaSettings :: Lens' Version (Maybe BetaSettings)
+vBetaSettings :: Lens' Version (Maybe VersionBetaSettings)
 vBetaSettings
   = lens _vBetaSettings
       (\ s a -> s{_vBetaSettings = a})
@@ -1903,7 +1925,7 @@ vId = lens _vId (\ s a -> s{_vId = a})
 -- | Environment variables made available to the application. Only returned
 -- in \`GET\` requests if \`view=FULL\` is set. May only be set on create
 -- requests; once created, is immutable.
-vEnvVariables :: Lens' Version (Maybe EnvVariables)
+vEnvVariables :: Lens' Version (Maybe VersionEnvVariables)
 vEnvVariables
   = lens _vEnvVariables
       (\ s a -> s{_vEnvVariables = a})
@@ -2051,50 +2073,6 @@ instance ToJSON Module where
                  [("split" .=) <$> _mSplit, ("name" .=) <$> _mName,
                   ("id" .=) <$> _mId])
 
--- | Service-specific metadata associated with the operation. It typically
--- contains progress information and common metadata such as create time.
--- Some services might not provide such metadata. Any method that returns a
--- long-running operation should document the metadata type, if any.
---
--- /See:/ 'metadata' smart constructor.
-data Metadata =
-    Metadata
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Metadata' with the minimum fields required to make a request.
---
-metadata
-    :: Metadata
-metadata = Metadata
-
-instance FromJSON Metadata where
-        parseJSON
-          = withObject "Metadata" (\ o -> pure Metadata)
-
-instance ToJSON Metadata where
-        toJSON = const (Object mempty)
-
--- | A manifest of files stored in Google Cloud Storage which should be
--- included as part of this application. All files must be readable using
--- the credentials supplied with this call.
---
--- /See:/ 'files' smart constructor.
-data Files =
-    Files
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Files' with the minimum fields required to make a request.
---
-files
-    :: Files
-files = Files
-
-instance FromJSON Files where
-        parseJSON = withObject "Files" (\ o -> pure Files)
-
-instance ToJSON Files where
-        toJSON = const (Object mempty)
-
 -- | Files served directly to the user for a given URL, such as images, CSS
 -- stylesheets, or JavaScript source files. Static file handlers describe
 -- which files in the application directory are static files, and which
@@ -2102,7 +2080,7 @@ instance ToJSON Files where
 --
 -- /See:/ 'staticFilesHandler' smart constructor.
 data StaticFilesHandler = StaticFilesHandler
-    { _sfhHTTPHeaders         :: !(Maybe HTTPHeaders)
+    { _sfhHTTPHeaders         :: !(Maybe StaticFilesHandlerHTTPHeaders)
     , _sfhPath                :: !(Maybe Text)
     , _sfhRequireMatchingFile :: !(Maybe Bool)
     , _sfhExpiration          :: !(Maybe Text)
@@ -2142,7 +2120,7 @@ staticFilesHandler =
     }
 
 -- | HTTP headers to use for all responses from these URLs.
-sfhHTTPHeaders :: Lens' StaticFilesHandler (Maybe HTTPHeaders)
+sfhHTTPHeaders :: Lens' StaticFilesHandler (Maybe StaticFilesHandlerHTTPHeaders)
 sfhHTTPHeaders
   = lens _sfhHTTPHeaders
       (\ s a -> s{_sfhHTTPHeaders = a})
@@ -2278,27 +2256,28 @@ instance ToJSON ErrorHandler where
                   ("errorCode" .=) <$> _ehErrorCode,
                   ("staticFile" .=) <$> _ehStaticFile])
 
--- | Environment variables made available to the application. Only returned
--- in \`GET\` requests if \`view=FULL\` is set. May only be set on create
--- requests; once created, is immutable.
+-- | Service-specific metadata associated with the operation. It typically
+-- contains progress information and common metadata such as create time.
+-- Some services might not provide such metadata. Any method that returns a
+-- long-running operation should document the metadata type, if any.
 --
--- /See:/ 'envVariables' smart constructor.
-data EnvVariables =
-    EnvVariables
+-- /See:/ 'operationMetadata' smart constructor.
+data OperationMetadata =
+    OperationMetadata
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EnvVariables' with the minimum fields required to make a request.
+-- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
-envVariables
-    :: EnvVariables
-envVariables = EnvVariables
+operationMetadata
+    :: OperationMetadata
+operationMetadata = OperationMetadata
 
-instance FromJSON EnvVariables where
+instance FromJSON OperationMetadata where
         parseJSON
-          = withObject "EnvVariables"
-              (\ o -> pure EnvVariables)
+          = withObject "OperationMetadata"
+              (\ o -> pure OperationMetadata)
 
-instance ToJSON EnvVariables where
+instance ToJSON OperationMetadata where
         toJSON = const (Object mempty)
 
 -- | Metadata for the given
@@ -2445,6 +2424,34 @@ instance ToJSON SourceReference where
                  [("repository" .=) <$> _srRepository,
                   ("revisionId" .=) <$> _srRevisionId])
 
+-- | The normal response of the operation in case of success. If the original
+-- method returns no data on success, such as \`Delete\`, the response is
+-- \`google.protobuf.Empty\`. If the original method is standard
+-- \`Get\`\/\`Create\`\/\`Update\`, the response should be the resource.
+-- For other methods, the response should have the type \`XxxResponse\`,
+-- where \`Xxx\` is the original method name. For example, if the original
+-- method name is \`TakeSnapshot()\`, the inferred response type is
+-- \`TakeSnapshotResponse\`.
+--
+-- /See:/ 'operationResponse' smart constructor.
+data OperationResponse =
+    OperationResponse
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
+--
+operationResponse
+    :: OperationResponse
+operationResponse = OperationResponse
+
+instance FromJSON OperationResponse where
+        parseJSON
+          = withObject "OperationResponse"
+              (\ o -> pure OperationResponse)
+
+instance ToJSON OperationResponse where
+        toJSON = const (Object mempty)
+
 -- | A Docker (container) image which should be used to start the
 -- application.
 --
@@ -2485,7 +2492,7 @@ instance ToJSON ContainerInfo where
 -- /See:/ 'deployment' smart constructor.
 data Deployment = Deployment
     { _dContainer        :: !(Maybe ContainerInfo)
-    , _dFiles            :: !(Maybe Files)
+    , _dFiles            :: !(Maybe DeploymentFiles)
     , _dSourceReferences :: !(Maybe [SourceReference])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2516,7 +2523,7 @@ dContainer
 -- | A manifest of files stored in Google Cloud Storage which should be
 -- included as part of this application. All files must be readable using
 -- the credentials supplied with this call.
-dFiles :: Lens' Deployment (Maybe Files)
+dFiles :: Lens' Deployment (Maybe DeploymentFiles)
 dFiles = lens _dFiles (\ s a -> s{_dFiles = a})
 
 -- | The origin of the source code for this deployment. There can be more

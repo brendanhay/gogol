@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.RemarketingListShares.Get
     , rlsgQuotaUser
     , rlsgPrettyPrint
     , rlsgUserIP
-    , rlsgProfileId
+    , rlsgProFileId
     , rlsgRemarketingListId
     , rlsgKey
     , rlsgOAuthToken
@@ -67,7 +67,7 @@ data RemarketingListSharesGet' = RemarketingListSharesGet'
     { _rlsgQuotaUser         :: !(Maybe Text)
     , _rlsgPrettyPrint       :: !Bool
     , _rlsgUserIP            :: !(Maybe Text)
-    , _rlsgProfileId         :: !Int64
+    , _rlsgProFileId         :: !Int64
     , _rlsgRemarketingListId :: !Int64
     , _rlsgKey               :: !(Maybe Key)
     , _rlsgOAuthToken        :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data RemarketingListSharesGet' = RemarketingListSharesGet'
 --
 -- * 'rlsgUserIP'
 --
--- * 'rlsgProfileId'
+-- * 'rlsgProFileId'
 --
 -- * 'rlsgRemarketingListId'
 --
@@ -97,12 +97,12 @@ remarketingListSharesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'remarketingListId'
     -> RemarketingListSharesGet'
-remarketingListSharesGet' pRlsgProfileId_ pRlsgRemarketingListId_ =
+remarketingListSharesGet' pRlsgProFileId_ pRlsgRemarketingListId_ =
     RemarketingListSharesGet'
     { _rlsgQuotaUser = Nothing
     , _rlsgPrettyPrint = True
     , _rlsgUserIP = Nothing
-    , _rlsgProfileId = pRlsgProfileId_
+    , _rlsgProFileId = pRlsgProFileId_
     , _rlsgRemarketingListId = pRlsgRemarketingListId_
     , _rlsgKey = Nothing
     , _rlsgOAuthToken = Nothing
@@ -130,10 +130,10 @@ rlsgUserIP
   = lens _rlsgUserIP (\ s a -> s{_rlsgUserIP = a})
 
 -- | User profile ID associated with this request.
-rlsgProfileId :: Lens' RemarketingListSharesGet' Int64
-rlsgProfileId
-  = lens _rlsgProfileId
-      (\ s a -> s{_rlsgProfileId = a})
+rlsgProFileId :: Lens' RemarketingListSharesGet' Int64
+rlsgProFileId
+  = lens _rlsgProFileId
+      (\ s a -> s{_rlsgProFileId = a})
 
 -- | Remarketing list ID.
 rlsgRemarketingListId :: Lens' RemarketingListSharesGet' Int64
@@ -168,7 +168,7 @@ instance GoogleRequest RemarketingListSharesGet'
              RemarketingListShare
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u RemarketingListSharesGet'{..}
-          = go _rlsgProfileId _rlsgRemarketingListId
+          = go _rlsgProFileId _rlsgRemarketingListId
               _rlsgQuotaUser
               (Just _rlsgPrettyPrint)
               _rlsgUserIP

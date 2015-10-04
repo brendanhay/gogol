@@ -61,9 +61,6 @@ module Network.Google.GamesConfiguration.Types
     , lcId
     , lcScoreOrder
 
-    -- * ImageType
-    , ImageType (..)
-
     -- * AchievementConfiguration
     , AchievementConfiguration
     , achievementConfiguration
@@ -91,6 +88,9 @@ module Network.Google.GamesConfiguration.Types
     , gnfcNumberFormatType
     , gnfcNumDecimalPlaces
 
+    -- * ImageConfigurationsUploadImageType
+    , ImageConfigurationsUploadImageType (..)
+
     -- * LeaderboardConfigurationDetail
     , LeaderboardConfigurationDetail
     , leaderboardConfigurationDetail
@@ -99,12 +99,6 @@ module Network.Google.GamesConfiguration.Types
     , lcdSortRank
     , lcdName
     , lcdIconURL
-
-    -- * LocalizedStringBundle
-    , LocalizedStringBundle
-    , localizedStringBundle
-    , lsbKind
-    , lsbTranslations
 
     -- * AchievementConfigurationDetail
     , AchievementConfigurationDetail
@@ -115,6 +109,12 @@ module Network.Google.GamesConfiguration.Types
     , acdPointValue
     , acdIconURL
     , acdDescription
+
+    -- * LocalizedStringBundle
+    , LocalizedStringBundle
+    , localizedStringBundle
+    , lsbKind
+    , lsbTranslations
     ) where
 
 import           Network.Google.GamesConfiguration.Types.Product

@@ -59,7 +59,7 @@ type OrdersCancellineitemResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] OrdersCancelLineItemRequest :>
+                           ReqBody '[OctetStream] OrdersCancelLineItemRequest :>
                              Post '[JSON] OrdersCancelLineItemResponse
 
 -- | Cancels a line item.

@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.PlacementStrategies.Get
     , psgQuotaUser
     , psgPrettyPrint
     , psgUserIP
-    , psgProfileId
+    , psgProFileId
     , psgKey
     , psgId
     , psgOAuthToken
@@ -67,7 +67,7 @@ data PlacementStrategiesGet' = PlacementStrategiesGet'
     { _psgQuotaUser   :: !(Maybe Text)
     , _psgPrettyPrint :: !Bool
     , _psgUserIP      :: !(Maybe Text)
-    , _psgProfileId   :: !Int64
+    , _psgProFileId   :: !Int64
     , _psgKey         :: !(Maybe Key)
     , _psgId          :: !Int64
     , _psgOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data PlacementStrategiesGet' = PlacementStrategiesGet'
 --
 -- * 'psgUserIP'
 --
--- * 'psgProfileId'
+-- * 'psgProFileId'
 --
 -- * 'psgKey'
 --
@@ -97,12 +97,12 @@ placementStrategiesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> PlacementStrategiesGet'
-placementStrategiesGet' pPsgProfileId_ pPsgId_ =
+placementStrategiesGet' pPsgProFileId_ pPsgId_ =
     PlacementStrategiesGet'
     { _psgQuotaUser = Nothing
     , _psgPrettyPrint = True
     , _psgUserIP = Nothing
-    , _psgProfileId = pPsgProfileId_
+    , _psgProFileId = pPsgProFileId_
     , _psgKey = Nothing
     , _psgId = pPsgId_
     , _psgOAuthToken = Nothing
@@ -129,9 +129,9 @@ psgUserIP
   = lens _psgUserIP (\ s a -> s{_psgUserIP = a})
 
 -- | User profile ID associated with this request.
-psgProfileId :: Lens' PlacementStrategiesGet' Int64
-psgProfileId
-  = lens _psgProfileId (\ s a -> s{_psgProfileId = a})
+psgProFileId :: Lens' PlacementStrategiesGet' Int64
+psgProFileId
+  = lens _psgProFileId (\ s a -> s{_psgProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -162,7 +162,7 @@ instance GoogleRequest PlacementStrategiesGet' where
         type Rs PlacementStrategiesGet' = PlacementStrategy
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementStrategiesGet'{..}
-          = go _psgProfileId _psgId _psgQuotaUser
+          = go _psgProFileId _psgId _psgQuotaUser
               (Just _psgPrettyPrint)
               _psgUserIP
               _psgFields

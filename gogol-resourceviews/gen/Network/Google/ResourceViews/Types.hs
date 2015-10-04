@@ -17,6 +17,21 @@ module Network.Google.ResourceViews.Types
     -- * Service URL
       resourceViewsURL
 
+    -- * OperationWarningsItemDataItem
+    , OperationWarningsItemDataItem
+    , operationWarningsItemDataItem
+    , owidiValue
+    , owidiKey
+
+    -- * OperationList
+    , OperationList
+    , operationList
+    , olNextPageToken
+    , olKind
+    , olItems
+    , olSelfLink
+    , olId
+
     -- * ResourceView
     , ResourceView
     , resourceView
@@ -33,15 +48,6 @@ module Network.Google.ResourceViews.Types
     , rvEndpoints
     , rvDescription
 
-    -- * OperationList
-    , OperationList
-    , operationList
-    , olNextPageToken
-    , olKind
-    , olItems
-    , olSelfLink
-    , olId
-
     -- * ZoneViewsList
     , ZoneViewsList
     , zoneViewsList
@@ -49,9 +55,6 @@ module Network.Google.ResourceViews.Types
     , zvlKind
     , zvlItems
     , zvlSelfLink
-
-    -- * ListState
-    , ListState (..)
 
     -- * Operation
     , Operation
@@ -79,6 +82,9 @@ module Network.Google.ResourceViews.Types
     , oTargetLink
     , oClientOperationId
 
+    -- * ZoneViewsListResourcesFormat
+    , ZoneViewsListResourcesFormat (..)
+
     -- * ZoneViewsListResourcesResponse
     , ZoneViewsListResourcesResponse
     , zoneViewsListResourcesResponse
@@ -86,46 +92,33 @@ module Network.Google.ResourceViews.Types
     , zvlrrItems
     , zvlrrNetwork
 
-    -- * Error'
-    , Error'
-    , error'
-    , eErrors
-
-    -- * Format
-    , Format (..)
-
     -- * ServiceEndpoint
     , ServiceEndpoint
     , serviceEndpoint
     , seName
     , sePort
 
-    -- * ListResourceResponseItemEndpoints
-    , ListResourceResponseItemEndpoints
-    , listResourceResponseItemEndpoints
+    -- * ZoneViewsListResourcesListState
+    , ZoneViewsListResourcesListState (..)
 
     -- * ZoneViewsRemoveResourcesRequest
     , ZoneViewsRemoveResourcesRequest
     , zoneViewsRemoveResourcesRequest
     , zvrrrResources
 
+    -- * ListResourceResponseItemEndpoints
+    , ListResourceResponseItemEndpoints
+    , listResourceResponseItemEndpoints
+
     -- * ZoneViewsAddResourcesRequest
     , ZoneViewsAddResourcesRequest
     , zoneViewsAddResourcesRequest
     , zvarrResources
 
-    -- * WarningsItem
-    , WarningsItem
-    , warningsItem
-    , wiData
-    , wiCode
-    , wiMessage
-
-    -- * DataItem
-    , DataItem
-    , dataItem
-    , diValue
-    , diKey
+    -- * OperationError
+    , OperationError
+    , operationError
+    , oeErrors
 
     -- * ZoneViewsGetServiceResponse
     , ZoneViewsGetServiceResponse
@@ -133,12 +126,19 @@ module Network.Google.ResourceViews.Types
     , zvgsrFingerprint
     , zvgsrEndpoints
 
-    -- * ErrorsItem
-    , ErrorsItem
-    , errorsItem
-    , eiLocation
-    , eiCode
-    , eiMessage
+    -- * OperationErrorErrorsItem
+    , OperationErrorErrorsItem
+    , operationErrorErrorsItem
+    , oeeiLocation
+    , oeeiCode
+    , oeeiMessage
+
+    -- * ZoneViewsSetServiceRequest
+    , ZoneViewsSetServiceRequest
+    , zoneViewsSetServiceRequest
+    , zvssrResourceName
+    , zvssrFingerprint
+    , zvssrEndpoints
 
     -- * ListResourceResponseItem
     , ListResourceResponseItem
@@ -152,12 +152,12 @@ module Network.Google.ResourceViews.Types
     , lValue
     , lKey
 
-    -- * ZoneViewsSetServiceRequest
-    , ZoneViewsSetServiceRequest
-    , zoneViewsSetServiceRequest
-    , zvssrResourceName
-    , zvssrFingerprint
-    , zvssrEndpoints
+    -- * OperationWarningsItem
+    , OperationWarningsItem
+    , operationWarningsItem
+    , owiData
+    , owiCode
+    , owiMessage
     ) where
 
 import           Network.Google.Prelude

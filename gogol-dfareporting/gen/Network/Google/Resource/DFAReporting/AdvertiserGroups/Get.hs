@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.AdvertiserGroups.Get
     , aggQuotaUser
     , aggPrettyPrint
     , aggUserIP
-    , aggProfileId
+    , aggProFileId
     , aggKey
     , aggId
     , aggOAuthToken
@@ -67,7 +67,7 @@ data AdvertiserGroupsGet' = AdvertiserGroupsGet'
     { _aggQuotaUser   :: !(Maybe Text)
     , _aggPrettyPrint :: !Bool
     , _aggUserIP      :: !(Maybe Text)
-    , _aggProfileId   :: !Int64
+    , _aggProFileId   :: !Int64
     , _aggKey         :: !(Maybe Key)
     , _aggId          :: !Int64
     , _aggOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data AdvertiserGroupsGet' = AdvertiserGroupsGet'
 --
 -- * 'aggUserIP'
 --
--- * 'aggProfileId'
+-- * 'aggProFileId'
 --
 -- * 'aggKey'
 --
@@ -97,12 +97,12 @@ advertiserGroupsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> AdvertiserGroupsGet'
-advertiserGroupsGet' pAggProfileId_ pAggId_ =
+advertiserGroupsGet' pAggProFileId_ pAggId_ =
     AdvertiserGroupsGet'
     { _aggQuotaUser = Nothing
     , _aggPrettyPrint = True
     , _aggUserIP = Nothing
-    , _aggProfileId = pAggProfileId_
+    , _aggProFileId = pAggProFileId_
     , _aggKey = Nothing
     , _aggId = pAggId_
     , _aggOAuthToken = Nothing
@@ -129,9 +129,9 @@ aggUserIP
   = lens _aggUserIP (\ s a -> s{_aggUserIP = a})
 
 -- | User profile ID associated with this request.
-aggProfileId :: Lens' AdvertiserGroupsGet' Int64
-aggProfileId
-  = lens _aggProfileId (\ s a -> s{_aggProfileId = a})
+aggProFileId :: Lens' AdvertiserGroupsGet' Int64
+aggProFileId
+  = lens _aggProFileId (\ s a -> s{_aggProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -162,7 +162,7 @@ instance GoogleRequest AdvertiserGroupsGet' where
         type Rs AdvertiserGroupsGet' = AdvertiserGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdvertiserGroupsGet'{..}
-          = go _aggProfileId _aggId _aggQuotaUser
+          = go _aggProFileId _aggId _aggQuotaUser
               (Just _aggPrettyPrint)
               _aggUserIP
               _aggFields

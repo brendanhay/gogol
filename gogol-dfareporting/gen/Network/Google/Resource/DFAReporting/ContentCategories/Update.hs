@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.ContentCategories.Update
     , ccuQuotaUser
     , ccuPrettyPrint
     , ccuUserIP
-    , ccuProfileId
+    , ccuProFileId
     , ccuPayload
     , ccuKey
     , ccuOAuthToken
@@ -57,7 +57,7 @@ type ContentCategoriesUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] ContentCategory :>
+                         ReqBody '[OctetStream] ContentCategory :>
                            Put '[JSON] ContentCategory
 
 -- | Updates an existing content category.
@@ -67,7 +67,7 @@ data ContentCategoriesUpdate' = ContentCategoriesUpdate'
     { _ccuQuotaUser   :: !(Maybe Text)
     , _ccuPrettyPrint :: !Bool
     , _ccuUserIP      :: !(Maybe Text)
-    , _ccuProfileId   :: !Int64
+    , _ccuProFileId   :: !Int64
     , _ccuPayload     :: !ContentCategory
     , _ccuKey         :: !(Maybe Key)
     , _ccuOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data ContentCategoriesUpdate' = ContentCategoriesUpdate'
 --
 -- * 'ccuUserIP'
 --
--- * 'ccuProfileId'
+-- * 'ccuProFileId'
 --
 -- * 'ccuPayload'
 --
@@ -97,12 +97,12 @@ contentCategoriesUpdate'
     :: Int64 -- ^ 'profileId'
     -> ContentCategory -- ^ 'payload'
     -> ContentCategoriesUpdate'
-contentCategoriesUpdate' pCcuProfileId_ pCcuPayload_ =
+contentCategoriesUpdate' pCcuProFileId_ pCcuPayload_ =
     ContentCategoriesUpdate'
     { _ccuQuotaUser = Nothing
     , _ccuPrettyPrint = True
     , _ccuUserIP = Nothing
-    , _ccuProfileId = pCcuProfileId_
+    , _ccuProFileId = pCcuProFileId_
     , _ccuPayload = pCcuPayload_
     , _ccuKey = Nothing
     , _ccuOAuthToken = Nothing
@@ -129,9 +129,9 @@ ccuUserIP
   = lens _ccuUserIP (\ s a -> s{_ccuUserIP = a})
 
 -- | User profile ID associated with this request.
-ccuProfileId :: Lens' ContentCategoriesUpdate' Int64
-ccuProfileId
-  = lens _ccuProfileId (\ s a -> s{_ccuProfileId = a})
+ccuProFileId :: Lens' ContentCategoriesUpdate' Int64
+ccuProFileId
+  = lens _ccuProFileId (\ s a -> s{_ccuProFileId = a})
 
 -- | Multipart request metadata.
 ccuPayload :: Lens' ContentCategoriesUpdate' ContentCategory
@@ -163,7 +163,7 @@ instance GoogleRequest ContentCategoriesUpdate' where
         type Rs ContentCategoriesUpdate' = ContentCategory
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ContentCategoriesUpdate'{..}
-          = go _ccuProfileId _ccuQuotaUser
+          = go _ccuProFileId _ccuQuotaUser
               (Just _ccuPrettyPrint)
               _ccuUserIP
               _ccuFields

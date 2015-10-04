@@ -36,7 +36,7 @@ module Network.Google.Resource.DFAReporting.SubAccounts.List
     , salUserIP
     , salSearchString
     , salIds
-    , salProfileId
+    , salProFileId
     , salSortOrder
     , salKey
     , salPageToken
@@ -57,13 +57,9 @@ type SubAccountsListResource =
          "subaccounts" :>
            QueryParam "searchString" Text :>
              QueryParams "ids" Int64 :>
-               QueryParam "sortOrder"
-                 DfareportingSubAccountsListSortOrder
-                 :>
+               QueryParam "sortOrder" SubAccountsListSortOrder :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "sortField"
-                     DfareportingSubAccountsListSortField
-                     :>
+                   QueryParam "sortField" SubAccountsListSortField :>
                      QueryParam "maxResults" Int32 :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
@@ -83,11 +79,11 @@ data SubAccountsList' = SubAccountsList'
     , _salUserIP       :: !(Maybe Text)
     , _salSearchString :: !(Maybe Text)
     , _salIds          :: !(Maybe [Int64])
-    , _salProfileId    :: !Int64
-    , _salSortOrder    :: !(Maybe DfareportingSubAccountsListSortOrder)
+    , _salProFileId    :: !Int64
+    , _salSortOrder    :: !(Maybe SubAccountsListSortOrder)
     , _salKey          :: !(Maybe Key)
     , _salPageToken    :: !(Maybe Text)
-    , _salSortField    :: !(Maybe DfareportingSubAccountsListSortField)
+    , _salSortField    :: !(Maybe SubAccountsListSortField)
     , _salOAuthToken   :: !(Maybe OAuthToken)
     , _salMaxResults   :: !(Maybe Int32)
     , _salFields       :: !(Maybe Text)
@@ -107,7 +103,7 @@ data SubAccountsList' = SubAccountsList'
 --
 -- * 'salIds'
 --
--- * 'salProfileId'
+-- * 'salProFileId'
 --
 -- * 'salSortOrder'
 --
@@ -125,14 +121,14 @@ data SubAccountsList' = SubAccountsList'
 subAccountsList'
     :: Int64 -- ^ 'profileId'
     -> SubAccountsList'
-subAccountsList' pSalProfileId_ =
+subAccountsList' pSalProFileId_ =
     SubAccountsList'
     { _salQuotaUser = Nothing
     , _salPrettyPrint = True
     , _salUserIP = Nothing
     , _salSearchString = Nothing
     , _salIds = Nothing
-    , _salProfileId = pSalProfileId_
+    , _salProFileId = pSalProFileId_
     , _salSortOrder = Nothing
     , _salKey = Nothing
     , _salPageToken = Nothing
@@ -180,12 +176,12 @@ salIds
       _Coerce
 
 -- | User profile ID associated with this request.
-salProfileId :: Lens' SubAccountsList' Int64
-salProfileId
-  = lens _salProfileId (\ s a -> s{_salProfileId = a})
+salProFileId :: Lens' SubAccountsList' Int64
+salProFileId
+  = lens _salProFileId (\ s a -> s{_salProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-salSortOrder :: Lens' SubAccountsList' (Maybe DfareportingSubAccountsListSortOrder)
+salSortOrder :: Lens' SubAccountsList' (Maybe SubAccountsListSortOrder)
 salSortOrder
   = lens _salSortOrder (\ s a -> s{_salSortOrder = a})
 
@@ -201,7 +197,7 @@ salPageToken
   = lens _salPageToken (\ s a -> s{_salPageToken = a})
 
 -- | Field by which to sort the list.
-salSortField :: Lens' SubAccountsList' (Maybe DfareportingSubAccountsListSortField)
+salSortField :: Lens' SubAccountsList' (Maybe SubAccountsListSortField)
 salSortField
   = lens _salSortField (\ s a -> s{_salSortField = a})
 
@@ -230,7 +226,7 @@ instance GoogleRequest SubAccountsList' where
         type Rs SubAccountsList' = SubAccountsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u SubAccountsList'{..}
-          = go _salProfileId _salSearchString
+          = go _salProFileId _salSearchString
               (_salIds ^. _Default)
               _salSortOrder
               _salPageToken

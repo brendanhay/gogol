@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @GANLinksGet@ which the
 -- 'LinksGet'' request conforms to.
 type LinksGetResource =
-     Capture "role" GANLinksGetRole :>
+     Capture "role" LinksGetRole :>
        Capture "roleId" Text :>
          "link" :>
            Capture "linkId" Int64 :>
@@ -74,7 +74,7 @@ data LinksGet' = LinksGet'
     , _lgPrettyPrint :: !Bool
     , _lgUserIP      :: !(Maybe Text)
     , _lgRoleId      :: !Text
-    , _lgRole        :: !GANLinksGetRole
+    , _lgRole        :: !LinksGetRole
     , _lgKey         :: !(Maybe Key)
     , _lgLinkId      :: !Int64
     , _lgOAuthToken  :: !(Maybe OAuthToken)
@@ -104,7 +104,7 @@ data LinksGet' = LinksGet'
 -- * 'lgFields'
 linksGet'
     :: Text -- ^ 'roleId'
-    -> GANLinksGetRole -- ^ 'role'
+    -> LinksGetRole -- ^ 'role'
     -> Int64 -- ^ 'linkId'
     -> LinksGet'
 linksGet' pLgRoleId_ pLgRole_ pLgLinkId_ =
@@ -144,7 +144,7 @@ lgRoleId = lens _lgRoleId (\ s a -> s{_lgRoleId = a})
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-lgRole :: Lens' LinksGet' GANLinksGetRole
+lgRole :: Lens' LinksGet' LinksGetRole
 lgRole = lens _lgRole (\ s a -> s{_lgRole = a})
 
 -- | API key. Your API key identifies your project and provides you with API

@@ -18,99 +18,71 @@ module Network.Google.AppsActivity.Types.Sum where
 import           Network.Google.Prelude
 
 -- | The main type of event that occurred.
-data PrimaryEventType
-    = PETComment
+data EventPrimaryEventType
+    = EPETComment
       -- ^ @comment@
-    | PETCreate
+    | EPETCreate
       -- ^ @create@
-    | PETEdit
+    | EPETEdit
       -- ^ @edit@
-    | PETEmptyTrash
+    | EPETEmptyTrash
       -- ^ @emptyTrash@
-    | PETMove
+    | EPETMove
       -- ^ @move@
-    | PETPermissionChange
+    | EPETPermissionChange
       -- ^ @permissionChange@
-    | PETRename
+    | EPETRename
       -- ^ @rename@
-    | PETTrash
+    | EPETTrash
       -- ^ @trash@
-    | PETUnknown
+    | EPETUnknown
       -- ^ @unknown@
-    | PETUntrash
+    | EPETUntrash
       -- ^ @untrash@
-    | PETUpload
+    | EPETUpload
       -- ^ @upload@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable PrimaryEventType
+instance Hashable EventPrimaryEventType
 
-instance FromText PrimaryEventType where
+instance FromText EventPrimaryEventType where
     fromText = \case
-        "comment" -> Just PETComment
-        "create" -> Just PETCreate
-        "edit" -> Just PETEdit
-        "emptyTrash" -> Just PETEmptyTrash
-        "move" -> Just PETMove
-        "permissionChange" -> Just PETPermissionChange
-        "rename" -> Just PETRename
-        "trash" -> Just PETTrash
-        "unknown" -> Just PETUnknown
-        "untrash" -> Just PETUntrash
-        "upload" -> Just PETUpload
+        "comment" -> Just EPETComment
+        "create" -> Just EPETCreate
+        "edit" -> Just EPETEdit
+        "emptyTrash" -> Just EPETEmptyTrash
+        "move" -> Just EPETMove
+        "permissionChange" -> Just EPETPermissionChange
+        "rename" -> Just EPETRename
+        "trash" -> Just EPETTrash
+        "unknown" -> Just EPETUnknown
+        "untrash" -> Just EPETUntrash
+        "upload" -> Just EPETUpload
         _ -> Nothing
 
-instance ToText PrimaryEventType where
+instance ToText EventPrimaryEventType where
     toText = \case
-        PETComment -> "comment"
-        PETCreate -> "create"
-        PETEdit -> "edit"
-        PETEmptyTrash -> "emptyTrash"
-        PETMove -> "move"
-        PETPermissionChange -> "permissionChange"
-        PETRename -> "rename"
-        PETTrash -> "trash"
-        PETUnknown -> "unknown"
-        PETUntrash -> "untrash"
-        PETUpload -> "upload"
+        EPETComment -> "comment"
+        EPETCreate -> "create"
+        EPETEdit -> "edit"
+        EPETEmptyTrash -> "emptyTrash"
+        EPETMove -> "move"
+        EPETPermissionChange -> "permissionChange"
+        EPETRename -> "rename"
+        EPETTrash -> "trash"
+        EPETUnknown -> "unknown"
+        EPETUntrash -> "untrash"
+        EPETUpload -> "upload"
 
-instance FromJSON PrimaryEventType where
-    parseJSON = parseJSONText "PrimaryEventType"
+instance FromJSON EventPrimaryEventType where
+    parseJSON = parseJSONText "EventPrimaryEventType"
 
-instance ToJSON PrimaryEventType where
-    toJSON = toJSONText
-
--- | Indicates the strategy to use when grouping singleEvents items in the
--- associated combinedEvent object.
-data GroupingStrategy
-    = DriveUi
-      -- ^ @driveUi@
-    | None
-      -- ^ @none@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable GroupingStrategy
-
-instance FromText GroupingStrategy where
-    fromText = \case
-        "driveUi" -> Just DriveUi
-        "none" -> Just None
-        _ -> Nothing
-
-instance ToText GroupingStrategy where
-    toText = \case
-        DriveUi -> "driveUi"
-        None -> "none"
-
-instance FromJSON GroupingStrategy where
-    parseJSON = parseJSONText "GroupingStrategy"
-
-instance ToJSON GroupingStrategy where
+instance ToJSON EventPrimaryEventType where
     toJSON = toJSONText
 
 -- | Indicates the Google Drive permissions role. The role determines a
 -- user\'s ability to read, write, or comment on the file.
-data Role
+data PermissionRole
     = Commenter
       -- ^ @commenter@
     | Owner
@@ -121,9 +93,9 @@ data Role
       -- ^ @writer@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable Role
+instance Hashable PermissionRole
 
-instance FromText Role where
+instance FromText PermissionRole where
     fromText = \case
         "commenter" -> Just Commenter
         "owner" -> Just Owner
@@ -131,112 +103,140 @@ instance FromText Role where
         "writer" -> Just Writer
         _ -> Nothing
 
-instance ToText Role where
+instance ToText PermissionRole where
     toText = \case
         Commenter -> "commenter"
         Owner -> "owner"
         Reader -> "reader"
         Writer -> "writer"
 
-instance FromJSON Role where
-    parseJSON = parseJSONText "Role"
+instance FromJSON PermissionRole where
+    parseJSON = parseJSONText "PermissionRole"
 
-instance ToJSON Role where
+instance ToJSON PermissionRole where
     toJSON = toJSONText
 
 -- | Indicates how widely permissions are granted.
-data Type
-    = TAnyone
+data PermissionType
+    = PTAnyone
       -- ^ @anyone@
-    | TDomain
+    | PTDomain
       -- ^ @domain@
-    | TGroup
+    | PTGroup
       -- ^ @group@
-    | TUser
+    | PTUser
       -- ^ @user@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable Type
+instance Hashable PermissionType
 
-instance FromText Type where
+instance FromText PermissionType where
     fromText = \case
-        "anyone" -> Just TAnyone
-        "domain" -> Just TDomain
-        "group" -> Just TGroup
-        "user" -> Just TUser
+        "anyone" -> Just PTAnyone
+        "domain" -> Just PTDomain
+        "group" -> Just PTGroup
+        "user" -> Just PTUser
         _ -> Nothing
 
-instance ToText Type where
+instance ToText PermissionType where
     toText = \case
-        TAnyone -> "anyone"
-        TDomain -> "domain"
-        TGroup -> "group"
-        TUser -> "user"
+        PTAnyone -> "anyone"
+        PTDomain -> "domain"
+        PTGroup -> "group"
+        PTUser -> "user"
 
-instance FromJSON Type where
-    parseJSON = parseJSONText "Type"
+instance FromJSON PermissionType where
+    parseJSON = parseJSONText "PermissionType"
 
-instance ToJSON Type where
+instance ToJSON PermissionType where
     toJSON = toJSONText
 
-data AdditionalEventTypesItem
-    = AETIComment
+data EventAdditionalEventTypesItem
+    = EAETIComment
       -- ^ @comment@
-    | AETICreate
+    | EAETICreate
       -- ^ @create@
-    | AETIEdit
+    | EAETIEdit
       -- ^ @edit@
-    | AETIEmptyTrash
+    | EAETIEmptyTrash
       -- ^ @emptyTrash@
-    | AETIMove
+    | EAETIMove
       -- ^ @move@
-    | AETIPermissionChange
+    | EAETIPermissionChange
       -- ^ @permissionChange@
-    | AETIRename
+    | EAETIRename
       -- ^ @rename@
-    | AETITrash
+    | EAETITrash
       -- ^ @trash@
-    | AETIUnknown
+    | EAETIUnknown
       -- ^ @unknown@
-    | AETIUntrash
+    | EAETIUntrash
       -- ^ @untrash@
-    | AETIUpload
+    | EAETIUpload
       -- ^ @upload@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable AdditionalEventTypesItem
+instance Hashable EventAdditionalEventTypesItem
 
-instance FromText AdditionalEventTypesItem where
+instance FromText EventAdditionalEventTypesItem where
     fromText = \case
-        "comment" -> Just AETIComment
-        "create" -> Just AETICreate
-        "edit" -> Just AETIEdit
-        "emptyTrash" -> Just AETIEmptyTrash
-        "move" -> Just AETIMove
-        "permissionChange" -> Just AETIPermissionChange
-        "rename" -> Just AETIRename
-        "trash" -> Just AETITrash
-        "unknown" -> Just AETIUnknown
-        "untrash" -> Just AETIUntrash
-        "upload" -> Just AETIUpload
+        "comment" -> Just EAETIComment
+        "create" -> Just EAETICreate
+        "edit" -> Just EAETIEdit
+        "emptyTrash" -> Just EAETIEmptyTrash
+        "move" -> Just EAETIMove
+        "permissionChange" -> Just EAETIPermissionChange
+        "rename" -> Just EAETIRename
+        "trash" -> Just EAETITrash
+        "unknown" -> Just EAETIUnknown
+        "untrash" -> Just EAETIUntrash
+        "upload" -> Just EAETIUpload
         _ -> Nothing
 
-instance ToText AdditionalEventTypesItem where
+instance ToText EventAdditionalEventTypesItem where
     toText = \case
-        AETIComment -> "comment"
-        AETICreate -> "create"
-        AETIEdit -> "edit"
-        AETIEmptyTrash -> "emptyTrash"
-        AETIMove -> "move"
-        AETIPermissionChange -> "permissionChange"
-        AETIRename -> "rename"
-        AETITrash -> "trash"
-        AETIUnknown -> "unknown"
-        AETIUntrash -> "untrash"
-        AETIUpload -> "upload"
+        EAETIComment -> "comment"
+        EAETICreate -> "create"
+        EAETIEdit -> "edit"
+        EAETIEmptyTrash -> "emptyTrash"
+        EAETIMove -> "move"
+        EAETIPermissionChange -> "permissionChange"
+        EAETIRename -> "rename"
+        EAETITrash -> "trash"
+        EAETIUnknown -> "unknown"
+        EAETIUntrash -> "untrash"
+        EAETIUpload -> "upload"
 
-instance FromJSON AdditionalEventTypesItem where
-    parseJSON = parseJSONText "AdditionalEventTypesItem"
+instance FromJSON EventAdditionalEventTypesItem where
+    parseJSON = parseJSONText "EventAdditionalEventTypesItem"
 
-instance ToJSON AdditionalEventTypesItem where
+instance ToJSON EventAdditionalEventTypesItem where
+    toJSON = toJSONText
+
+-- | Indicates the strategy to use when grouping singleEvents items in the
+-- associated combinedEvent object.
+data ActivitiesListGroupingStrategy
+    = DriveUi
+      -- ^ @driveUi@
+    | None
+      -- ^ @none@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ActivitiesListGroupingStrategy
+
+instance FromText ActivitiesListGroupingStrategy where
+    fromText = \case
+        "driveUi" -> Just DriveUi
+        "none" -> Just None
+        _ -> Nothing
+
+instance ToText ActivitiesListGroupingStrategy where
+    toText = \case
+        DriveUi -> "driveUi"
+        None -> "none"
+
+instance FromJSON ActivitiesListGroupingStrategy where
+    parseJSON = parseJSONText "ActivitiesListGroupingStrategy"
+
+instance ToJSON ActivitiesListGroupingStrategy where
     toJSON = toJSONText

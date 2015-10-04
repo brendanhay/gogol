@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Placements.Insert
     , piQuotaUser
     , piPrettyPrint
     , piUserIP
-    , piProfileId
+    , piProFileId
     , piPayload
     , piKey
     , piOAuthToken
@@ -57,7 +57,8 @@ type PlacementsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Placement :> Post '[JSON] Placement
+                         ReqBody '[OctetStream] Placement :>
+                           Post '[JSON] Placement
 
 -- | Inserts a new placement.
 --
@@ -66,7 +67,7 @@ data PlacementsInsert' = PlacementsInsert'
     { _piQuotaUser   :: !(Maybe Text)
     , _piPrettyPrint :: !Bool
     , _piUserIP      :: !(Maybe Text)
-    , _piProfileId   :: !Int64
+    , _piProFileId   :: !Int64
     , _piPayload     :: !Placement
     , _piKey         :: !(Maybe Key)
     , _piOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +84,7 @@ data PlacementsInsert' = PlacementsInsert'
 --
 -- * 'piUserIP'
 --
--- * 'piProfileId'
+-- * 'piProFileId'
 --
 -- * 'piPayload'
 --
@@ -96,12 +97,12 @@ placementsInsert'
     :: Int64 -- ^ 'profileId'
     -> Placement -- ^ 'payload'
     -> PlacementsInsert'
-placementsInsert' pPiProfileId_ pPiPayload_ =
+placementsInsert' pPiProFileId_ pPiPayload_ =
     PlacementsInsert'
     { _piQuotaUser = Nothing
     , _piPrettyPrint = True
     , _piUserIP = Nothing
-    , _piProfileId = pPiProfileId_
+    , _piProFileId = pPiProFileId_
     , _piPayload = pPiPayload_
     , _piKey = Nothing
     , _piOAuthToken = Nothing
@@ -127,9 +128,9 @@ piUserIP :: Lens' PlacementsInsert' (Maybe Text)
 piUserIP = lens _piUserIP (\ s a -> s{_piUserIP = a})
 
 -- | User profile ID associated with this request.
-piProfileId :: Lens' PlacementsInsert' Int64
-piProfileId
-  = lens _piProfileId (\ s a -> s{_piProfileId = a})
+piProFileId :: Lens' PlacementsInsert' Int64
+piProFileId
+  = lens _piProFileId (\ s a -> s{_piProFileId = a})
 
 -- | Multipart request metadata.
 piPayload :: Lens' PlacementsInsert' Placement
@@ -159,7 +160,7 @@ instance GoogleRequest PlacementsInsert' where
         type Rs PlacementsInsert' = Placement
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementsInsert'{..}
-          = go _piProfileId _piQuotaUser (Just _piPrettyPrint)
+          = go _piProFileId _piQuotaUser (Just _piPrettyPrint)
               _piUserIP
               _piFields
               _piKey

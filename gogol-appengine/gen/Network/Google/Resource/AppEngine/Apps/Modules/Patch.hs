@@ -76,7 +76,7 @@ type AppsModulesPatchResource =
                                        QueryParam "key" Key :>
                                          QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
-                                             ReqBody '[JSON] Module :>
+                                             ReqBody '[OctetStream] Module :>
                                                Patch '[JSON] Operation
 
 -- | Updates the configuration of the specified module.

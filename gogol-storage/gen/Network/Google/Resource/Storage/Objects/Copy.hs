@@ -84,7 +84,7 @@ type ObjectsCopyResource =
                                        Word64
                                        :>
                                        QueryParam "projection"
-                                         StorageObjectsCopyProjection
+                                         ObjectsCopyProjection
                                          :>
                                          QueryParam "sourceGeneration" Word64 :>
                                            QueryParam "quotaUser" Text :>
@@ -97,7 +97,8 @@ type ObjectsCopyResource =
                                                        :>
                                                        QueryParam "alt" AltJSON
                                                          :>
-                                                         ReqBody '[JSON] Object
+                                                         ReqBody '[OctetStream]
+                                                           Object
                                                            :>
                                                            Post '[JSON] Object
        :<|>
@@ -126,7 +127,7 @@ type ObjectsCopyResource =
                                          Word64
                                          :>
                                          QueryParam "projection"
-                                           StorageObjectsCopyProjection
+                                           ObjectsCopyProjection
                                            :>
                                            QueryParam "sourceGeneration" Word64
                                              :>
@@ -141,7 +142,8 @@ type ObjectsCopyResource =
                                                          QueryParam "alt"
                                                            AltMedia
                                                            :>
-                                                           ReqBody '[JSON]
+                                                           ReqBody
+                                                             '[OctetStream]
                                                              Object
                                                              :>
                                                              Post '[OctetStream]
@@ -168,7 +170,7 @@ data ObjectsCopy' = ObjectsCopy'
     , _ocDestinationBucket              :: !Text
     , _ocIfMetagenerationNotMatch       :: !(Maybe Word64)
     , _ocIfSourceGenerationNotMatch     :: !(Maybe Word64)
-    , _ocProjection                     :: !(Maybe StorageObjectsCopyProjection)
+    , _ocProjection                     :: !(Maybe ObjectsCopyProjection)
     , _ocOAuthToken                     :: !(Maybe OAuthToken)
     , _ocSourceGeneration               :: !(Maybe Word64)
     , _ocFields                         :: !(Maybe Text)
@@ -358,7 +360,7 @@ ocIfSourceGenerationNotMatch
 
 -- | Set of properties to return. Defaults to noAcl, unless the object
 -- resource specifies the acl property, when it defaults to full.
-ocProjection :: Lens' ObjectsCopy' (Maybe StorageObjectsCopyProjection)
+ocProjection :: Lens' ObjectsCopy' (Maybe ObjectsCopyProjection)
 ocProjection
   = lens _ocProjection (\ s a -> s{_ocProjection = a})
 

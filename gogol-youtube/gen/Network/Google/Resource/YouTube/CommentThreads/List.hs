@@ -58,15 +58,18 @@ import           Network.Google.YouTube.Types
 type CommentThreadsListResource =
      "commentThreads" :>
        QueryParam "part" Text :>
-         QueryParam "moderationStatus" ModerationStatus :>
+         QueryParam "moderationStatus"
+           CommentThreadsListModerationStatus
+           :>
            QueryParam "searchTerms" Text :>
              QueryParam "channelId" Text :>
                QueryParam "allThreadsRelatedToChannelId" Text :>
                  QueryParam "videoId" Text :>
                    QueryParam "id" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "order" Order :>
-                         QueryParam "textFormat" TextFormat :>
+                       QueryParam "order" CommentThreadsListOrder :>
+                         QueryParam "textFormat" CommentThreadsListTextFormat
+                           :>
                            QueryParam "maxResults" Word32 :>
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
@@ -84,7 +87,7 @@ data CommentThreadsList' = CommentThreadsList'
     { _ctlQuotaUser                    :: !(Maybe Text)
     , _ctlPart                         :: !Text
     , _ctlPrettyPrint                  :: !Bool
-    , _ctlModerationStatus             :: !ModerationStatus
+    , _ctlModerationStatus             :: !CommentThreadsListModerationStatus
     , _ctlUserIP                       :: !(Maybe Text)
     , _ctlSearchTerms                  :: !(Maybe Text)
     , _ctlChannelId                    :: !(Maybe Text)
@@ -94,8 +97,8 @@ data CommentThreadsList' = CommentThreadsList'
     , _ctlId                           :: !(Maybe Text)
     , _ctlPageToken                    :: !(Maybe Text)
     , _ctlOAuthToken                   :: !(Maybe OAuthToken)
-    , _ctlOrder                        :: !Order
-    , _ctlTextFormat                   :: !TextFormat
+    , _ctlOrder                        :: !CommentThreadsListOrder
+    , _ctlTextFormat                   :: !CommentThreadsListTextFormat
     , _ctlMaxResults                   :: !Word32
     , _ctlFields                       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -145,7 +148,7 @@ commentThreadsList' pCtlPart_ =
     { _ctlQuotaUser = Nothing
     , _ctlPart = pCtlPart_
     , _ctlPrettyPrint = True
-    , _ctlModerationStatus = MSModerationStatusPublished
+    , _ctlModerationStatus = ModerationStatusPublished
     , _ctlUserIP = Nothing
     , _ctlSearchTerms = Nothing
     , _ctlChannelId = Nothing
@@ -155,8 +158,8 @@ commentThreadsList' pCtlPart_ =
     , _ctlId = Nothing
     , _ctlPageToken = Nothing
     , _ctlOAuthToken = Nothing
-    , _ctlOrder = True'
-    , _ctlTextFormat = FormatHTML
+    , _ctlOrder = CTLOTrue'
+    , _ctlTextFormat = CTLTFFormatHTML
     , _ctlMaxResults = 20
     , _ctlFields = Nothing
     }
@@ -182,7 +185,7 @@ ctlPrettyPrint
 -- | Set this parameter to limit the returned comment threads to a particular
 -- moderation state. Note: This parameter is not supported for use in
 -- conjunction with the id parameter.
-ctlModerationStatus :: Lens' CommentThreadsList' ModerationStatus
+ctlModerationStatus :: Lens' CommentThreadsList' CommentThreadsListModerationStatus
 ctlModerationStatus
   = lens _ctlModerationStatus
       (\ s a -> s{_ctlModerationStatus = a})
@@ -253,12 +256,12 @@ ctlOAuthToken
 -- ordered by time. This is the default behavior. - relevance - Comment
 -- threads are ordered by relevance.Note: This parameter is not supported
 -- for use in conjunction with the id parameter.
-ctlOrder :: Lens' CommentThreadsList' Order
+ctlOrder :: Lens' CommentThreadsList' CommentThreadsListOrder
 ctlOrder = lens _ctlOrder (\ s a -> s{_ctlOrder = a})
 
 -- | Set this parameter\'s value to html or plainText to instruct the API to
 -- return the comments left by users in html formatted or in plain text.
-ctlTextFormat :: Lens' CommentThreadsList' TextFormat
+ctlTextFormat :: Lens' CommentThreadsList' CommentThreadsListTextFormat
 ctlTextFormat
   = lens _ctlTextFormat
       (\ s a -> s{_ctlTextFormat = a})

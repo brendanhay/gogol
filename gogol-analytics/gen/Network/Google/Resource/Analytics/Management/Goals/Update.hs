@@ -36,7 +36,7 @@ module Network.Google.Resource.Analytics.Management.Goals.Update
     , mguWebPropertyId
     , mguGoalId
     , mguUserIP
-    , mguProfileId
+    , mguProFileId
     , mguPayload
     , mguAccountId
     , mguKey
@@ -66,7 +66,8 @@ type ManagementGoalsUpdateResource =
                                QueryParam "key" Key :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
-                                     ReqBody '[JSON] Goal :> Put '[JSON] Goal
+                                     ReqBody '[OctetStream] Goal :>
+                                       Put '[JSON] Goal
 
 -- | Updates an existing view (profile).
 --
@@ -77,7 +78,7 @@ data ManagementGoalsUpdate' = ManagementGoalsUpdate'
     , _mguWebPropertyId :: !Text
     , _mguGoalId        :: !Text
     , _mguUserIP        :: !(Maybe Text)
-    , _mguProfileId     :: !Text
+    , _mguProFileId     :: !Text
     , _mguPayload       :: !Goal
     , _mguAccountId     :: !Text
     , _mguKey           :: !(Maybe Key)
@@ -99,7 +100,7 @@ data ManagementGoalsUpdate' = ManagementGoalsUpdate'
 --
 -- * 'mguUserIP'
 --
--- * 'mguProfileId'
+-- * 'mguProFileId'
 --
 -- * 'mguPayload'
 --
@@ -117,14 +118,14 @@ managementGoalsUpdate'
     -> Goal -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> ManagementGoalsUpdate'
-managementGoalsUpdate' pMguWebPropertyId_ pMguGoalId_ pMguProfileId_ pMguPayload_ pMguAccountId_ =
+managementGoalsUpdate' pMguWebPropertyId_ pMguGoalId_ pMguProFileId_ pMguPayload_ pMguAccountId_ =
     ManagementGoalsUpdate'
     { _mguQuotaUser = Nothing
     , _mguPrettyPrint = False
     , _mguWebPropertyId = pMguWebPropertyId_
     , _mguGoalId = pMguGoalId_
     , _mguUserIP = Nothing
-    , _mguProfileId = pMguProfileId_
+    , _mguProFileId = pMguProFileId_
     , _mguPayload = pMguPayload_
     , _mguAccountId = pMguAccountId_
     , _mguKey = Nothing
@@ -163,9 +164,9 @@ mguUserIP
   = lens _mguUserIP (\ s a -> s{_mguUserIP = a})
 
 -- | View (Profile) ID to update the goal.
-mguProfileId :: Lens' ManagementGoalsUpdate' Text
-mguProfileId
-  = lens _mguProfileId (\ s a -> s{_mguProfileId = a})
+mguProFileId :: Lens' ManagementGoalsUpdate' Text
+mguProFileId
+  = lens _mguProFileId (\ s a -> s{_mguProFileId = a})
 
 -- | Multipart request metadata.
 mguPayload :: Lens' ManagementGoalsUpdate' Goal
@@ -202,7 +203,7 @@ instance GoogleRequest ManagementGoalsUpdate' where
         type Rs ManagementGoalsUpdate' = Goal
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementGoalsUpdate'{..}
-          = go _mguAccountId _mguWebPropertyId _mguProfileId
+          = go _mguAccountId _mguWebPropertyId _mguProFileId
               _mguGoalId
               _mguQuotaUser
               (Just _mguPrettyPrint)

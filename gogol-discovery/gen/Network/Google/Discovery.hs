@@ -35,10 +35,10 @@ module Network.Google.Discovery
 
     -- * Types
 
-    -- ** Annotations
-    , Annotations
-    , annotations
-    , aRequired
+    -- ** RestMethodResponse
+    , RestMethodResponse
+    , restMethodResponse
+    , rmrRef
 
     -- ** RestDescriptionParameters
     , RestDescriptionParameters
@@ -63,38 +63,19 @@ module Network.Google.Discovery
     , rmDescription
     , rmRequest
 
-    -- ** Variant
-    , Variant
-    , variant
-    , vDiscriminant
-    , vMap
-
-    -- ** MediaUpload
-    , MediaUpload
-    , mediaUpload
-    , muProtocols
-    , muAccept
-    , muMaxSize
-
-    -- ** RestDescriptionMethods
-    , RestDescriptionMethods
-    , restDescriptionMethods
-
     -- ** RestResource
     , RestResource
     , restResource
     , rrResources
     , rrMethods
 
-    -- ** Schemas
-    , Schemas
-    , schemas
+    -- ** RestDescriptionAuthOAuth2Scopes
+    , RestDescriptionAuthOAuth2Scopes
+    , restDescriptionAuthOAuth2Scopes
 
-    -- ** Protocols
-    , Protocols
-    , protocols
-    , pSimple
-    , pResumable
+    -- ** RestDescriptionMethods
+    , RestDescriptionMethods
+    , restDescriptionMethods
 
     -- ** DirectoryListItemsItem
     , DirectoryListItemsItem
@@ -112,33 +93,47 @@ module Network.Google.Discovery
     , dliiDescription
     , dliiDiscoveryRestURL
 
-    -- ** Auth
-    , Auth
-    , auth
-    , aOAuth2
-
-    -- ** Icons
-    , Icons
-    , icons
-    , iX16
-    , iX32
-
     -- ** DirectoryListItemsItemIcons
     , DirectoryListItemsItemIcons
     , directoryListItemsItemIcons
     , dliiiX16
     , dliiiX32
 
-    -- ** Response
-    , Response
-    , response
-    , rRef
+    -- ** RestResourceResources
+    , RestResourceResources
+    , restResourceResources
 
-    -- ** Simple
-    , Simple
-    , simple
-    , sPath
-    , sMultiPart
+    -- ** RestDescriptionAuthOAuth2
+    , RestDescriptionAuthOAuth2
+    , restDescriptionAuthOAuth2
+    , rdaoaScopes
+
+    -- ** RestMethodMediaUploadProtocolsSimple
+    , RestMethodMediaUploadProtocolsSimple
+    , restMethodMediaUploadProtocolsSimple
+    , rmmupsPath
+    , rmmupsMultiPart
+
+    -- ** RestDescriptionIcons
+    , RestDescriptionIcons
+    , restDescriptionIcons
+    , rdiX16
+    , rdiX32
+
+    -- ** JSONSchemaVariant
+    , JSONSchemaVariant
+    , jsonSchemaVariant
+    , jsvDiscriminant
+    , jsvMap
+
+    -- ** RestResourceMethods
+    , RestResourceMethods
+    , restResourceMethods
+
+    -- ** RestDescriptionAuth
+    , RestDescriptionAuth
+    , restDescriptionAuth
+    , rdaOAuth2
 
     -- ** RestDescription
     , RestDescription
@@ -173,16 +168,6 @@ module Network.Google.Discovery
     , rdRevision
     , rdDescription
 
-    -- ** Resumable
-    , Resumable
-    , resumable
-    , rPath
-    , rMultiPart
-
-    -- ** Resources
-    , Resources
-    , resources
-
     -- ** JSONSchema
     , JSONSchema
     , jsonSchema
@@ -207,32 +192,51 @@ module Network.Google.Discovery
     , jsDescription
     , jsProperties
 
-    -- ** MapItem
-    , MapItem
-    , mapItem
-    , miRef
-    , miTypeValue
+    -- ** RestDescriptionSchemas
+    , RestDescriptionSchemas
+    , restDescriptionSchemas
 
-    -- ** Methods
-    , Methods
-    , methods
-
-    -- ** OAuth2Scopes
-    , OAuth2Scopes
-    , oAuth2Scopes
+    -- ** JSONSchemaVariantMapItem
+    , JSONSchemaVariantMapItem
+    , jsonSchemaVariantMapItem
+    , jsvmiRef
+    , jsvmiTypeValue
 
     -- ** RestDescriptionResources
     , RestDescriptionResources
     , restDescriptionResources
 
-    -- ** Parameters
-    , Parameters
-    , parameters
+    -- ** RestMethodMediaUploadProtocols
+    , RestMethodMediaUploadProtocols
+    , restMethodMediaUploadProtocols
+    , rmmupSimple
+    , rmmupResumable
 
-    -- ** OAuth2
-    , OAuth2
-    , oAuth2
-    , oaScopes
+    -- ** JSONSchemaAnnotations
+    , JSONSchemaAnnotations
+    , jsonSchemaAnnotations
+    , jsaRequired
+
+    -- ** RestMethodParameters
+    , RestMethodParameters
+    , restMethodParameters
+
+    -- ** RestMethodMediaUpload
+    , RestMethodMediaUpload
+    , restMethodMediaUpload
+    , rmmuProtocols
+    , rmmuAccept
+    , rmmuMaxSize
+
+    -- ** JSONSchemaProperties
+    , JSONSchemaProperties
+    , jsonSchemaProperties
+
+    -- ** RestMethodMediaUploadProtocolsResumable
+    , RestMethodMediaUploadProtocolsResumable
+    , restMethodMediaUploadProtocolsResumable
+    , rmmuprPath
+    , rmmuprMultiPart
 
     -- ** DirectoryList
     , DirectoryList
@@ -241,15 +245,11 @@ module Network.Google.Discovery
     , dlItems
     , dlDiscoveryVersion
 
-    -- ** Properties
-    , Properties
-    , properties
-
-    -- ** Request
-    , Request
-    , request'
-    , reqRef
-    , reqParameterName
+    -- ** RestMethodRequest
+    , RestMethodRequest
+    , restMethodRequest
+    , rRef
+    , rParameterName
     ) where
 
 import           Network.Google.Discovery.Types

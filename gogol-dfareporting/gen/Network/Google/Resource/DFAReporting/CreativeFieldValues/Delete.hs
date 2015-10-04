@@ -35,7 +35,7 @@ module Network.Google.Resource.DFAReporting.CreativeFieldValues.Delete
     , cfvdQuotaUser
     , cfvdPrettyPrint
     , cfvdUserIP
-    , cfvdProfileId
+    , cfvdProFileId
     , cfvdKey
     , cfvdId
     , cfvdOAuthToken
@@ -70,7 +70,7 @@ data CreativeFieldValuesDelete' = CreativeFieldValuesDelete'
     , _cfvdQuotaUser       :: !(Maybe Text)
     , _cfvdPrettyPrint     :: !Bool
     , _cfvdUserIP          :: !(Maybe Text)
-    , _cfvdProfileId       :: !Int64
+    , _cfvdProFileId       :: !Int64
     , _cfvdKey             :: !(Maybe Key)
     , _cfvdId              :: !Int64
     , _cfvdOAuthToken      :: !(Maybe OAuthToken)
@@ -89,7 +89,7 @@ data CreativeFieldValuesDelete' = CreativeFieldValuesDelete'
 --
 -- * 'cfvdUserIP'
 --
--- * 'cfvdProfileId'
+-- * 'cfvdProFileId'
 --
 -- * 'cfvdKey'
 --
@@ -103,13 +103,13 @@ creativeFieldValuesDelete'
     -> Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> CreativeFieldValuesDelete'
-creativeFieldValuesDelete' pCfvdCreativeFieldId_ pCfvdProfileId_ pCfvdId_ =
+creativeFieldValuesDelete' pCfvdCreativeFieldId_ pCfvdProFileId_ pCfvdId_ =
     CreativeFieldValuesDelete'
     { _cfvdCreativeFieldId = pCfvdCreativeFieldId_
     , _cfvdQuotaUser = Nothing
     , _cfvdPrettyPrint = True
     , _cfvdUserIP = Nothing
-    , _cfvdProfileId = pCfvdProfileId_
+    , _cfvdProFileId = pCfvdProFileId_
     , _cfvdKey = Nothing
     , _cfvdId = pCfvdId_
     , _cfvdOAuthToken = Nothing
@@ -143,10 +143,10 @@ cfvdUserIP
   = lens _cfvdUserIP (\ s a -> s{_cfvdUserIP = a})
 
 -- | User profile ID associated with this request.
-cfvdProfileId :: Lens' CreativeFieldValuesDelete' Int64
-cfvdProfileId
-  = lens _cfvdProfileId
-      (\ s a -> s{_cfvdProfileId = a})
+cfvdProFileId :: Lens' CreativeFieldValuesDelete' Int64
+cfvdProFileId
+  = lens _cfvdProFileId
+      (\ s a -> s{_cfvdProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -178,7 +178,7 @@ instance GoogleRequest CreativeFieldValuesDelete'
         type Rs CreativeFieldValuesDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeFieldValuesDelete'{..}
-          = go _cfvdProfileId _cfvdCreativeFieldId _cfvdId
+          = go _cfvdProFileId _cfvdCreativeFieldId _cfvdId
               _cfvdQuotaUser
               (Just _cfvdPrettyPrint)
               _cfvdUserIP

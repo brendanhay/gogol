@@ -63,8 +63,7 @@ type ObjectsPatchResource =
                QueryParam "ifGenerationNotMatch" Word64 :>
                  QueryParam "ifGenerationMatch" Word64 :>
                    QueryParam "ifMetagenerationNotMatch" Word64 :>
-                     QueryParam "projection" StorageObjectsPatchProjection
-                       :>
+                     QueryParam "projection" ObjectsPatchProjection :>
                        QueryParam "generation" Word64 :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
@@ -73,7 +72,7 @@ type ObjectsPatchResource =
                                  QueryParam "key" Key :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
-                                       ReqBody '[JSON] Object :>
+                                       ReqBody '[OctetStream] Object :>
                                          Patch '[JSON] Object
 
 -- | Updates a data blob\'s associated metadata. This method supports patch
@@ -92,7 +91,7 @@ data ObjectsPatch' = ObjectsPatch'
     , _opKey                      :: !(Maybe Key)
     , _opIfMetagenerationNotMatch :: !(Maybe Word64)
     , _opObject                   :: !Text
-    , _opProjection               :: !(Maybe StorageObjectsPatchProjection)
+    , _opProjection               :: !(Maybe ObjectsPatchProjection)
     , _opOAuthToken               :: !(Maybe OAuthToken)
     , _opGeneration               :: !(Maybe Word64)
     , _opFields                   :: !(Maybe Text)
@@ -221,7 +220,7 @@ opObject :: Lens' ObjectsPatch' Text
 opObject = lens _opObject (\ s a -> s{_opObject = a})
 
 -- | Set of properties to return. Defaults to full.
-opProjection :: Lens' ObjectsPatch' (Maybe StorageObjectsPatchProjection)
+opProjection :: Lens' ObjectsPatch' (Maybe ObjectsPatchProjection)
 opProjection
   = lens _opProjection (\ s a -> s{_opProjection = a})
 

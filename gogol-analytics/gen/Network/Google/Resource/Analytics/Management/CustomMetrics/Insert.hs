@@ -61,7 +61,7 @@ type ManagementCustomMetricsInsertResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] CustomMetric :>
+                               ReqBody '[OctetStream] CustomMetric :>
                                  Post '[JSON] CustomMetric
 
 -- | Create a new custom metric.

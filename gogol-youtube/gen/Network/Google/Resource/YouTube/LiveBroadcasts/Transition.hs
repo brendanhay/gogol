@@ -57,7 +57,9 @@ import           Network.Google.YouTube.Types
 type LiveBroadcastsTransitionResource =
      "liveBroadcasts" :>
        "transition" :>
-         QueryParam "broadcastStatus" BroadcastStatus :>
+         QueryParam "broadcastStatus"
+           LiveBroadcastsTransitionBroadcastStatus
+           :>
            QueryParam "id" Text :>
              QueryParam "part" Text :>
                QueryParam "onBehalfOfContentOwner" Text :>
@@ -84,7 +86,7 @@ data LiveBroadcastsTransition' = LiveBroadcastsTransition'
     , _lbtPart                          :: !Text
     , _lbtPrettyPrint                   :: !Bool
     , _lbtUserIP                        :: !(Maybe Text)
-    , _lbtBroadcastStatus               :: !BroadcastStatus
+    , _lbtBroadcastStatus               :: !LiveBroadcastsTransitionBroadcastStatus
     , _lbtOnBehalfOfContentOwner        :: !(Maybe Text)
     , _lbtKey                           :: !(Maybe Key)
     , _lbtOnBehalfOfContentOwnerChannel :: !(Maybe Text)
@@ -120,7 +122,7 @@ data LiveBroadcastsTransition' = LiveBroadcastsTransition'
 -- * 'lbtFields'
 liveBroadcastsTransition'
     :: Text -- ^ 'part'
-    -> BroadcastStatus -- ^ 'broadcastStatus'
+    -> LiveBroadcastsTransitionBroadcastStatus -- ^ 'broadcastStatus'
     -> Text -- ^ 'id'
     -> LiveBroadcastsTransition'
 liveBroadcastsTransition' pLbtPart_ pLbtBroadcastStatus_ pLbtId_ =
@@ -168,7 +170,7 @@ lbtUserIP
 -- broadcast is changing. Note that to transition a broadcast to either the
 -- testing or live state, the status.streamStatus must be active for the
 -- stream that the broadcast is bound to.
-lbtBroadcastStatus :: Lens' LiveBroadcastsTransition' BroadcastStatus
+lbtBroadcastStatus :: Lens' LiveBroadcastsTransition' LiveBroadcastsTransitionBroadcastStatus
 lbtBroadcastStatus
   = lens _lbtBroadcastStatus
       (\ s a -> s{_lbtBroadcastStatus = a})

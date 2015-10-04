@@ -35,7 +35,7 @@ module Network.Google.Resource.DFAReporting.CreativeFieldValues.Get
     , cfvgQuotaUser
     , cfvgPrettyPrint
     , cfvgUserIP
-    , cfvgProfileId
+    , cfvgProFileId
     , cfvgKey
     , cfvgId
     , cfvgOAuthToken
@@ -71,7 +71,7 @@ data CreativeFieldValuesGet' = CreativeFieldValuesGet'
     , _cfvgQuotaUser       :: !(Maybe Text)
     , _cfvgPrettyPrint     :: !Bool
     , _cfvgUserIP          :: !(Maybe Text)
-    , _cfvgProfileId       :: !Int64
+    , _cfvgProFileId       :: !Int64
     , _cfvgKey             :: !(Maybe Key)
     , _cfvgId              :: !Int64
     , _cfvgOAuthToken      :: !(Maybe OAuthToken)
@@ -90,7 +90,7 @@ data CreativeFieldValuesGet' = CreativeFieldValuesGet'
 --
 -- * 'cfvgUserIP'
 --
--- * 'cfvgProfileId'
+-- * 'cfvgProFileId'
 --
 -- * 'cfvgKey'
 --
@@ -104,13 +104,13 @@ creativeFieldValuesGet'
     -> Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> CreativeFieldValuesGet'
-creativeFieldValuesGet' pCfvgCreativeFieldId_ pCfvgProfileId_ pCfvgId_ =
+creativeFieldValuesGet' pCfvgCreativeFieldId_ pCfvgProFileId_ pCfvgId_ =
     CreativeFieldValuesGet'
     { _cfvgCreativeFieldId = pCfvgCreativeFieldId_
     , _cfvgQuotaUser = Nothing
     , _cfvgPrettyPrint = True
     , _cfvgUserIP = Nothing
-    , _cfvgProfileId = pCfvgProfileId_
+    , _cfvgProFileId = pCfvgProFileId_
     , _cfvgKey = Nothing
     , _cfvgId = pCfvgId_
     , _cfvgOAuthToken = Nothing
@@ -144,10 +144,10 @@ cfvgUserIP
   = lens _cfvgUserIP (\ s a -> s{_cfvgUserIP = a})
 
 -- | User profile ID associated with this request.
-cfvgProfileId :: Lens' CreativeFieldValuesGet' Int64
-cfvgProfileId
-  = lens _cfvgProfileId
-      (\ s a -> s{_cfvgProfileId = a})
+cfvgProFileId :: Lens' CreativeFieldValuesGet' Int64
+cfvgProFileId
+  = lens _cfvgProFileId
+      (\ s a -> s{_cfvgProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -178,7 +178,7 @@ instance GoogleRequest CreativeFieldValuesGet' where
         type Rs CreativeFieldValuesGet' = CreativeFieldValue
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeFieldValuesGet'{..}
-          = go _cfvgProfileId _cfvgCreativeFieldId _cfvgId
+          = go _cfvgProFileId _cfvgCreativeFieldId _cfvgId
               _cfvgQuotaUser
               (Just _cfvgPrettyPrint)
               _cfvgUserIP

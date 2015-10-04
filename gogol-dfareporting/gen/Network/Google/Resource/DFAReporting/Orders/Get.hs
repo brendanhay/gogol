@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Orders.Get
     , ogQuotaUser
     , ogPrettyPrint
     , ogUserIP
-    , ogProfileId
+    , ogProFileId
     , ogKey
     , ogId
     , ogProjectId
@@ -69,7 +69,7 @@ data OrdersGet' = OrdersGet'
     { _ogQuotaUser   :: !(Maybe Text)
     , _ogPrettyPrint :: !Bool
     , _ogUserIP      :: !(Maybe Text)
-    , _ogProfileId   :: !Int64
+    , _ogProFileId   :: !Int64
     , _ogKey         :: !(Maybe Key)
     , _ogId          :: !Int64
     , _ogProjectId   :: !Int64
@@ -87,7 +87,7 @@ data OrdersGet' = OrdersGet'
 --
 -- * 'ogUserIP'
 --
--- * 'ogProfileId'
+-- * 'ogProFileId'
 --
 -- * 'ogKey'
 --
@@ -103,12 +103,12 @@ ordersGet'
     -> Int64 -- ^ 'id'
     -> Int64 -- ^ 'projectId'
     -> OrdersGet'
-ordersGet' pOgProfileId_ pOgId_ pOgProjectId_ =
+ordersGet' pOgProFileId_ pOgId_ pOgProjectId_ =
     OrdersGet'
     { _ogQuotaUser = Nothing
     , _ogPrettyPrint = True
     , _ogUserIP = Nothing
-    , _ogProfileId = pOgProfileId_
+    , _ogProFileId = pOgProFileId_
     , _ogKey = Nothing
     , _ogId = pOgId_
     , _ogProjectId = pOgProjectId_
@@ -135,9 +135,9 @@ ogUserIP :: Lens' OrdersGet' (Maybe Text)
 ogUserIP = lens _ogUserIP (\ s a -> s{_ogUserIP = a})
 
 -- | User profile ID associated with this request.
-ogProfileId :: Lens' OrdersGet' Int64
-ogProfileId
-  = lens _ogProfileId (\ s a -> s{_ogProfileId = a})
+ogProFileId :: Lens' OrdersGet' Int64
+ogProFileId
+  = lens _ogProFileId (\ s a -> s{_ogProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -171,7 +171,7 @@ instance GoogleRequest OrdersGet' where
         type Rs OrdersGet' = Order
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u OrdersGet'{..}
-          = go _ogProfileId _ogProjectId _ogId _ogQuotaUser
+          = go _ogProFileId _ogProjectId _ogId _ogQuotaUser
               (Just _ogPrettyPrint)
               _ogUserIP
               _ogFields

@@ -52,8 +52,12 @@ type URLCrawlErrorsSamplesListResource =
      "sites" :>
        Capture "siteUrl" Text :>
          "urlCrawlErrorsSamples" :>
-           QueryParam "category" Category :>
-             QueryParam "platform" Platform :>
+           QueryParam "category"
+             URLCrawlErrorsSamplesListCategory
+             :>
+             QueryParam "platform"
+               URLCrawlErrorsSamplesListPlatform
+               :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -70,9 +74,9 @@ type URLCrawlErrorsSamplesListResource =
 data URLCrawlErrorsSamplesList' = URLCrawlErrorsSamplesList'
     { _uceslQuotaUser   :: !(Maybe Text)
     , _uceslPrettyPrint :: !Bool
-    , _uceslPlatform    :: !Platform
+    , _uceslPlatform    :: !URLCrawlErrorsSamplesListPlatform
     , _uceslUserIP      :: !(Maybe Text)
-    , _uceslCategory    :: !Category
+    , _uceslCategory    :: !URLCrawlErrorsSamplesListCategory
     , _uceslSiteURL     :: !Text
     , _uceslKey         :: !(Maybe Key)
     , _uceslOAuthToken  :: !(Maybe OAuthToken)
@@ -101,8 +105,8 @@ data URLCrawlErrorsSamplesList' = URLCrawlErrorsSamplesList'
 --
 -- * 'uceslFields'
 urlCrawlErrorsSamplesList'
-    :: Platform -- ^ 'platform'
-    -> Category -- ^ 'category'
+    :: URLCrawlErrorsSamplesListPlatform -- ^ 'platform'
+    -> URLCrawlErrorsSamplesListCategory -- ^ 'category'
     -> Text -- ^ 'siteUrl'
     -> URLCrawlErrorsSamplesList'
 urlCrawlErrorsSamplesList' pUceslPlatform_ pUceslCategory_ pUceslSiteURL_ =
@@ -133,7 +137,7 @@ uceslPrettyPrint
       (\ s a -> s{_uceslPrettyPrint = a})
 
 -- | The user agent type (platform) that made the request. For example: web
-uceslPlatform :: Lens' URLCrawlErrorsSamplesList' Platform
+uceslPlatform :: Lens' URLCrawlErrorsSamplesList' URLCrawlErrorsSamplesListPlatform
 uceslPlatform
   = lens _uceslPlatform
       (\ s a -> s{_uceslPlatform = a})
@@ -145,7 +149,7 @@ uceslUserIP
   = lens _uceslUserIP (\ s a -> s{_uceslUserIP = a})
 
 -- | The crawl error category. For example: authPermissions
-uceslCategory :: Lens' URLCrawlErrorsSamplesList' Category
+uceslCategory :: Lens' URLCrawlErrorsSamplesList' URLCrawlErrorsSamplesListCategory
 uceslCategory
   = lens _uceslCategory
       (\ s a -> s{_uceslCategory = a})

@@ -74,7 +74,7 @@ type CoursesAliasesCreateResource =
                                  QueryParam "key" Key :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
-                                       ReqBody '[JSON] CourseAlias :>
+                                       ReqBody '[OctetStream] CourseAlias :>
                                          Post '[JSON] CourseAlias
 
 -- | Creates an alias for a course. This method returns the following error

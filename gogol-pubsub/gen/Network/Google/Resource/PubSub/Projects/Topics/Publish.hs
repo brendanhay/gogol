@@ -70,7 +70,7 @@ type ProjectsTopicsPublishResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] PublishRequest :>
+                                   ReqBody '[OctetStream] PublishRequest :>
                                      Post '[JSON] PublishResponse
 
 -- | Adds one or more messages to the topic. Returns NOT_FOUND if the topic

@@ -60,7 +60,9 @@ type MyConfigSyncVolumeLicensesResource =
              QueryParam "cpksver" Text :>
                QueryParam "locale" Text :>
                  QueryParams "volumeIds" Text :>
-                   QueryParams "features" Features :>
+                   QueryParams "features"
+                     MyConfigSyncVolumeLicensesFeatures
+                     :>
                      QueryParam "showPreorders" Bool :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
@@ -83,7 +85,7 @@ data MyConfigSyncVolumeLicenses' = MyConfigSyncVolumeLicenses'
     , _mcsvlLocale        :: !(Maybe Text)
     , _mcsvlVolumeIds     :: !(Maybe [Text])
     , _mcsvlKey           :: !(Maybe Key)
-    , _mcsvlFeatures      :: !(Maybe [Features])
+    , _mcsvlFeatures      :: !(Maybe [MyConfigSyncVolumeLicensesFeatures])
     , _mcsvlSource        :: !Text
     , _mcsvlOAuthToken    :: !(Maybe OAuthToken)
     , _mcsvlShowPreOrders :: !(Maybe Bool)
@@ -187,7 +189,7 @@ mcsvlKey :: Lens' MyConfigSyncVolumeLicenses' (Maybe Key)
 mcsvlKey = lens _mcsvlKey (\ s a -> s{_mcsvlKey = a})
 
 -- | List of features supported by the client, i.e., \'RENTALS\'
-mcsvlFeatures :: Lens' MyConfigSyncVolumeLicenses' [Features]
+mcsvlFeatures :: Lens' MyConfigSyncVolumeLicenses' [MyConfigSyncVolumeLicensesFeatures]
 mcsvlFeatures
   = lens _mcsvlFeatures
       (\ s a -> s{_mcsvlFeatures = a})

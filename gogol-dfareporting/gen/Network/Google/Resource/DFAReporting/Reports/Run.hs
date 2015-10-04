@@ -36,7 +36,7 @@ module Network.Google.Resource.DFAReporting.Reports.Run
     , rrSynchronous
     , rrUserIP
     , rrReportId
-    , rrProfileId
+    , rrProFileId
     , rrKey
     , rrOAuthToken
     , rrFields
@@ -71,7 +71,7 @@ data ReportsRun' = ReportsRun'
     , _rrSynchronous :: !(Maybe Bool)
     , _rrUserIP      :: !(Maybe Text)
     , _rrReportId    :: !Int64
-    , _rrProfileId   :: !Int64
+    , _rrProFileId   :: !Int64
     , _rrKey         :: !(Maybe Key)
     , _rrOAuthToken  :: !(Maybe OAuthToken)
     , _rrFields      :: !(Maybe Text)
@@ -91,7 +91,7 @@ data ReportsRun' = ReportsRun'
 --
 -- * 'rrReportId'
 --
--- * 'rrProfileId'
+-- * 'rrProFileId'
 --
 -- * 'rrKey'
 --
@@ -102,14 +102,14 @@ reportsRun'
     :: Int64 -- ^ 'reportId'
     -> Int64 -- ^ 'profileId'
     -> ReportsRun'
-reportsRun' pRrReportId_ pRrProfileId_ =
+reportsRun' pRrReportId_ pRrProFileId_ =
     ReportsRun'
     { _rrQuotaUser = Nothing
     , _rrPrettyPrint = True
     , _rrSynchronous = Nothing
     , _rrUserIP = Nothing
     , _rrReportId = pRrReportId_
-    , _rrProfileId = pRrProfileId_
+    , _rrProFileId = pRrProFileId_
     , _rrKey = Nothing
     , _rrOAuthToken = Nothing
     , _rrFields = Nothing
@@ -145,9 +145,9 @@ rrReportId
   = lens _rrReportId (\ s a -> s{_rrReportId = a})
 
 -- | The DFA profile ID.
-rrProfileId :: Lens' ReportsRun' Int64
-rrProfileId
-  = lens _rrProfileId (\ s a -> s{_rrProfileId = a})
+rrProFileId :: Lens' ReportsRun' Int64
+rrProFileId
+  = lens _rrProFileId (\ s a -> s{_rrProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -172,7 +172,7 @@ instance GoogleRequest ReportsRun' where
         type Rs ReportsRun' = File
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ReportsRun'{..}
-          = go _rrProfileId _rrReportId _rrSynchronous
+          = go _rrProFileId _rrReportId _rrSynchronous
               _rrQuotaUser
               (Just _rrPrettyPrint)
               _rrUserIP

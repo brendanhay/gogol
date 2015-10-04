@@ -35,7 +35,7 @@ module Network.Google.Resource.DFAReporting.RemarketingListShares.Patch
     , rlspQuotaUser
     , rlspPrettyPrint
     , rlspUserIP
-    , rlspProfileId
+    , rlspProFileId
     , rlspPayload
     , rlspRemarketingListId
     , rlspKey
@@ -60,7 +60,7 @@ type RemarketingListSharesPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] RemarketingListShare :>
+                           ReqBody '[OctetStream] RemarketingListShare :>
                              Patch '[JSON] RemarketingListShare
 
 -- | Updates an existing remarketing list share. This method supports patch
@@ -71,7 +71,7 @@ data RemarketingListSharesPatch' = RemarketingListSharesPatch'
     { _rlspQuotaUser         :: !(Maybe Text)
     , _rlspPrettyPrint       :: !Bool
     , _rlspUserIP            :: !(Maybe Text)
-    , _rlspProfileId         :: !Int64
+    , _rlspProFileId         :: !Int64
     , _rlspPayload           :: !RemarketingListShare
     , _rlspRemarketingListId :: !Int64
     , _rlspKey               :: !(Maybe Key)
@@ -89,7 +89,7 @@ data RemarketingListSharesPatch' = RemarketingListSharesPatch'
 --
 -- * 'rlspUserIP'
 --
--- * 'rlspProfileId'
+-- * 'rlspProFileId'
 --
 -- * 'rlspPayload'
 --
@@ -105,12 +105,12 @@ remarketingListSharesPatch'
     -> RemarketingListShare -- ^ 'payload'
     -> Int64 -- ^ 'remarketingListId'
     -> RemarketingListSharesPatch'
-remarketingListSharesPatch' pRlspProfileId_ pRlspPayload_ pRlspRemarketingListId_ =
+remarketingListSharesPatch' pRlspProFileId_ pRlspPayload_ pRlspRemarketingListId_ =
     RemarketingListSharesPatch'
     { _rlspQuotaUser = Nothing
     , _rlspPrettyPrint = True
     , _rlspUserIP = Nothing
-    , _rlspProfileId = pRlspProfileId_
+    , _rlspProFileId = pRlspProFileId_
     , _rlspPayload = pRlspPayload_
     , _rlspRemarketingListId = pRlspRemarketingListId_
     , _rlspKey = Nothing
@@ -139,10 +139,10 @@ rlspUserIP
   = lens _rlspUserIP (\ s a -> s{_rlspUserIP = a})
 
 -- | User profile ID associated with this request.
-rlspProfileId :: Lens' RemarketingListSharesPatch' Int64
-rlspProfileId
-  = lens _rlspProfileId
-      (\ s a -> s{_rlspProfileId = a})
+rlspProFileId :: Lens' RemarketingListSharesPatch' Int64
+rlspProFileId
+  = lens _rlspProFileId
+      (\ s a -> s{_rlspProFileId = a})
 
 -- | Multipart request metadata.
 rlspPayload :: Lens' RemarketingListSharesPatch' RemarketingListShare
@@ -182,7 +182,7 @@ instance GoogleRequest RemarketingListSharesPatch'
              RemarketingListShare
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u RemarketingListSharesPatch'{..}
-          = go _rlspProfileId (Just _rlspRemarketingListId)
+          = go _rlspProFileId (Just _rlspRemarketingListId)
               _rlspQuotaUser
               (Just _rlspPrettyPrint)
               _rlspUserIP

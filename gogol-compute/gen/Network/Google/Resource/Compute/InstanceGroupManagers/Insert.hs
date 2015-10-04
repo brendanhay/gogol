@@ -60,7 +60,7 @@ type InstanceGroupManagersInsertResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] InstanceGroupManager :>
+                           ReqBody '[OctetStream] InstanceGroupManager :>
                              Post '[JSON] Operation
 
 -- | Creates a managed instance group resource in the specified project using

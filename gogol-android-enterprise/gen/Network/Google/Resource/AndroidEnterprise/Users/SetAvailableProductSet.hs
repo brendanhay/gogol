@@ -60,7 +60,7 @@ type UsersSetAvailableProductSetResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] ProductSet :>
+                             ReqBody '[OctetStream] ProductSet :>
                                Put '[JSON] ProductSet
 
 -- | Modifies the set of products a user is entitled to access.

@@ -55,7 +55,7 @@ type PawsInitResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] PawsInitRequest :>
+                     ReqBody '[OctetStream] PawsInitRequest :>
                        Post '[JSON] PawsInitResponse
 
 -- | Initializes the connection between a white space device and the

@@ -61,7 +61,7 @@ type TurnBasedMatchesFinishResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] TurnBasedMatchResults :>
+                           ReqBody '[OctetStream] TurnBasedMatchResults :>
                              Put '[JSON] TurnBasedMatch
 
 -- | Finish a turn-based match. Each player should make this call once, after

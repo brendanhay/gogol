@@ -60,7 +60,7 @@ type UsersThreadsModifyResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] ModifyThreadRequest :>
+                           ReqBody '[OctetStream] ModifyThreadRequest :>
                              Post '[JSON] Thread
 
 -- | Modifies the labels applied to the thread. This applies to all messages

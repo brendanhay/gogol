@@ -54,7 +54,7 @@ type RelyingPartyCreateAuthURIResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON]
+                     ReqBody '[OctetStream]
                        IdentitytoolkitRelyingPartyCreateAuthURIRequest
                        :> Post '[JSON] CreateAuthURIResponse
 

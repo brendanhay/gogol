@@ -52,7 +52,7 @@ type OrgUnitsListResource =
        Capture "customerId" Text :>
          "orgunits" :>
            QueryParam "orgUnitPath" Text :>
-             QueryParam "type" Type :>
+             QueryParam "type" OrgUnitsListType :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -71,7 +71,7 @@ data OrgUnitsList' = OrgUnitsList'
     , _oulOrgUnitPath :: !Text
     , _oulCustomerId  :: !Text
     , _oulKey         :: !(Maybe Key)
-    , _oulType        :: !(Maybe Type)
+    , _oulType        :: !(Maybe OrgUnitsListType)
     , _oulOAuthToken  :: !(Maybe OAuthToken)
     , _oulFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -151,7 +151,7 @@ oulKey :: Lens' OrgUnitsList' (Maybe Key)
 oulKey = lens _oulKey (\ s a -> s{_oulKey = a})
 
 -- | Whether to return all sub-organizations or just immediate children
-oulType :: Lens' OrgUnitsList' (Maybe Type)
+oulType :: Lens' OrgUnitsList' (Maybe OrgUnitsListType)
 oulType = lens _oulType (\ s a -> s{_oulType = a})
 
 -- | OAuth 2.0 token for the current user.

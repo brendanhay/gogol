@@ -60,7 +60,7 @@ type LiveBroadcastsInsertResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] LiveBroadcast :>
+                           ReqBody '[OctetStream] LiveBroadcast :>
                              Post '[JSON] LiveBroadcast
 
 -- | Creates a broadcast.

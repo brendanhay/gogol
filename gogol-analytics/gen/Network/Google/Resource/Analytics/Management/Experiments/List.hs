@@ -35,7 +35,7 @@ module Network.Google.Resource.Analytics.Management.Experiments.List
     , melPrettyPrint
     , melWebPropertyId
     , melUserIP
-    , melProfileId
+    , melProFileId
     , melAccountId
     , melKey
     , melOAuthToken
@@ -77,7 +77,7 @@ data ManagementExperimentsList' = ManagementExperimentsList'
     , _melPrettyPrint   :: !Bool
     , _melWebPropertyId :: !Text
     , _melUserIP        :: !(Maybe Text)
-    , _melProfileId     :: !Text
+    , _melProFileId     :: !Text
     , _melAccountId     :: !Text
     , _melKey           :: !(Maybe Key)
     , _melOAuthToken    :: !(Maybe OAuthToken)
@@ -98,7 +98,7 @@ data ManagementExperimentsList' = ManagementExperimentsList'
 --
 -- * 'melUserIP'
 --
--- * 'melProfileId'
+-- * 'melProFileId'
 --
 -- * 'melAccountId'
 --
@@ -116,13 +116,13 @@ managementExperimentsList'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
     -> ManagementExperimentsList'
-managementExperimentsList' pMelWebPropertyId_ pMelProfileId_ pMelAccountId_ =
+managementExperimentsList' pMelWebPropertyId_ pMelProFileId_ pMelAccountId_ =
     ManagementExperimentsList'
     { _melQuotaUser = Nothing
     , _melPrettyPrint = False
     , _melWebPropertyId = pMelWebPropertyId_
     , _melUserIP = Nothing
-    , _melProfileId = pMelProfileId_
+    , _melProFileId = pMelProFileId_
     , _melAccountId = pMelAccountId_
     , _melKey = Nothing
     , _melOAuthToken = Nothing
@@ -157,9 +157,9 @@ melUserIP
   = lens _melUserIP (\ s a -> s{_melUserIP = a})
 
 -- | View (Profile) ID to retrieve experiments for.
-melProfileId :: Lens' ManagementExperimentsList' Text
-melProfileId
-  = lens _melProfileId (\ s a -> s{_melProfileId = a})
+melProFileId :: Lens' ManagementExperimentsList' Text
+melProFileId
+  = lens _melProFileId (\ s a -> s{_melProFileId = a})
 
 -- | Account ID to retrieve experiments for.
 melAccountId :: Lens' ManagementExperimentsList' Text
@@ -205,7 +205,7 @@ instance GoogleRequest ManagementExperimentsList'
         type Rs ManagementExperimentsList' = Experiments
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementExperimentsList'{..}
-          = go _melAccountId _melWebPropertyId _melProfileId
+          = go _melAccountId _melWebPropertyId _melProFileId
               _melStartIndex
               _melMaxResults
               _melQuotaUser

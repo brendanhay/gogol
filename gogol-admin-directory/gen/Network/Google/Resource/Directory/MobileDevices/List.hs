@@ -56,15 +56,10 @@ type MobileDevicesListResource =
        Capture "customerId" Text :>
          "devices" :>
            "mobile" :>
-             QueryParam "orderBy"
-               DirectoryMobileDevicesListOrderBy
-               :>
-               QueryParam "sortOrder"
-                 DirectoryMobileDevicesListSortOrder
-                 :>
+             QueryParam "orderBy" MobileDevicesListOrderBy :>
+               QueryParam "sortOrder" MobileDevicesListSortOrder :>
                  QueryParam "query" Text :>
-                   QueryParam "projection"
-                     DirectoryMobileDevicesListProjection
+                   QueryParam "projection" MobileDevicesListProjection
                      :>
                      QueryParam "pageToken" Text :>
                        QueryParam "maxResults" Int32 :>
@@ -83,13 +78,13 @@ type MobileDevicesListResource =
 data MobileDevicesList' = MobileDevicesList'
     { _mdlQuotaUser   :: !(Maybe Text)
     , _mdlPrettyPrint :: !Bool
-    , _mdlOrderBy     :: !(Maybe DirectoryMobileDevicesListOrderBy)
+    , _mdlOrderBy     :: !(Maybe MobileDevicesListOrderBy)
     , _mdlUserIP      :: !(Maybe Text)
     , _mdlCustomerId  :: !Text
-    , _mdlSortOrder   :: !(Maybe DirectoryMobileDevicesListSortOrder)
+    , _mdlSortOrder   :: !(Maybe MobileDevicesListSortOrder)
     , _mdlKey         :: !(Maybe Key)
     , _mdlQuery       :: !(Maybe Text)
-    , _mdlProjection  :: !(Maybe DirectoryMobileDevicesListProjection)
+    , _mdlProjection  :: !(Maybe MobileDevicesListProjection)
     , _mdlPageToken   :: !(Maybe Text)
     , _mdlOAuthToken  :: !(Maybe OAuthToken)
     , _mdlMaxResults  :: !(Maybe Int32)
@@ -159,7 +154,7 @@ mdlPrettyPrint
       (\ s a -> s{_mdlPrettyPrint = a})
 
 -- | Column to use for sorting results
-mdlOrderBy :: Lens' MobileDevicesList' (Maybe DirectoryMobileDevicesListOrderBy)
+mdlOrderBy :: Lens' MobileDevicesList' (Maybe MobileDevicesListOrderBy)
 mdlOrderBy
   = lens _mdlOrderBy (\ s a -> s{_mdlOrderBy = a})
 
@@ -177,7 +172,7 @@ mdlCustomerId
 
 -- | Whether to return results in ascending or descending order. Only of use
 -- when orderBy is also used
-mdlSortOrder :: Lens' MobileDevicesList' (Maybe DirectoryMobileDevicesListSortOrder)
+mdlSortOrder :: Lens' MobileDevicesList' (Maybe MobileDevicesListSortOrder)
 mdlSortOrder
   = lens _mdlSortOrder (\ s a -> s{_mdlSortOrder = a})
 
@@ -193,7 +188,7 @@ mdlQuery :: Lens' MobileDevicesList' (Maybe Text)
 mdlQuery = lens _mdlQuery (\ s a -> s{_mdlQuery = a})
 
 -- | Restrict information returned to a set of selected fields.
-mdlProjection :: Lens' MobileDevicesList' (Maybe DirectoryMobileDevicesListProjection)
+mdlProjection :: Lens' MobileDevicesList' (Maybe MobileDevicesListProjection)
 mdlProjection
   = lens _mdlProjection
       (\ s a -> s{_mdlProjection = a})

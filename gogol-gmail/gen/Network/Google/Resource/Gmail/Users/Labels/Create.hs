@@ -56,7 +56,7 @@ type UsersLabelsCreateResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Label :> Post '[JSON] Label
+                       ReqBody '[OctetStream] Label :> Post '[JSON] Label
 
 -- | Creates a new label.
 --

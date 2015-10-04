@@ -59,11 +59,11 @@ type CommentsListResource =
          "posts" :>
            Capture "postId" Text :>
              "comments" :>
-               QueryParams "status" BloggerCommentsListStatus :>
+               QueryParams "status" CommentsListStatus :>
                  QueryParam "endDate" DateTime' :>
                    QueryParam "startDate" DateTime' :>
                      QueryParam "fetchBodies" Bool :>
-                       QueryParam "view" BloggerCommentsListView :>
+                       QueryParam "view" CommentsListView :>
                          QueryParam "pageToken" Text :>
                            QueryParam "maxResults" Word32 :>
                              QueryParam "quotaUser" Text :>
@@ -79,7 +79,7 @@ type CommentsListResource =
 --
 -- /See:/ 'commentsList'' smart constructor.
 data CommentsList' = CommentsList'
-    { _clStatus      :: !(Maybe [BloggerCommentsListStatus])
+    { _clStatus      :: !(Maybe [CommentsListStatus])
     , _clQuotaUser   :: !(Maybe Text)
     , _clPrettyPrint :: !Bool
     , _clUserIP      :: !(Maybe Text)
@@ -88,7 +88,7 @@ data CommentsList' = CommentsList'
     , _clStartDate   :: !(Maybe DateTime')
     , _clKey         :: !(Maybe Key)
     , _clFetchBodies :: !(Maybe Bool)
-    , _clView        :: !(Maybe BloggerCommentsListView)
+    , _clView        :: !(Maybe CommentsListView)
     , _clPostId      :: !Text
     , _clPageToken   :: !(Maybe Text)
     , _clOAuthToken  :: !(Maybe OAuthToken)
@@ -152,7 +152,7 @@ commentsList' pClBlogId_ pClPostId_ =
     , _clFields = Nothing
     }
 
-clStatus :: Lens' CommentsList' [BloggerCommentsListStatus]
+clStatus :: Lens' CommentsList' [CommentsListStatus]
 clStatus
   = lens _clStatus (\ s a -> s{_clStatus = a}) .
       _Default
@@ -206,7 +206,7 @@ clFetchBodies
 
 -- | Access level with which to view the returned result. Note that some
 -- fields require elevated access.
-clView :: Lens' CommentsList' (Maybe BloggerCommentsListView)
+clView :: Lens' CommentsList' (Maybe CommentsListView)
 clView = lens _clView (\ s a -> s{_clView = a})
 
 -- | ID of the post to fetch posts from.

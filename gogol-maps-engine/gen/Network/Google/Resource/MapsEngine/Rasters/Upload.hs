@@ -55,7 +55,7 @@ type RastersUploadResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Raster :> Post '[JSON] Raster
+                       ReqBody '[OctetStream] Raster :> Post '[JSON] Raster
 
 -- | Create a skeleton raster asset for upload.
 --

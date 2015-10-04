@@ -58,7 +58,8 @@ type RoutesInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Route :> Post '[JSON] Operation
+                         ReqBody '[OctetStream] Route :>
+                           Post '[JSON] Operation
 
 -- | Creates a route resource in the specified project using the data
 -- included in the request.

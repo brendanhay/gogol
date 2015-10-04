@@ -54,7 +54,7 @@ type AchievementsListResource =
      "players" :>
        Capture "playerId" Text :>
          "achievements" :>
-           QueryParam "state" State :>
+           QueryParam "state" AchievementsListState :>
              QueryParam "language" Text :>
                QueryParam "pageToken" Text :>
                  QueryParam "maxResults" Int32 :>
@@ -74,7 +74,7 @@ type AchievementsListResource =
 data AchievementsList' = AchievementsList'
     { _alQuotaUser   :: !(Maybe Text)
     , _alPrettyPrint :: !Bool
-    , _alState       :: !(Maybe State)
+    , _alState       :: !(Maybe AchievementsListState)
     , _alUserIP      :: !(Maybe Text)
     , _alKey         :: !(Maybe Key)
     , _alLanguage    :: !(Maybe Text)
@@ -143,7 +143,7 @@ alPrettyPrint
 
 -- | Tells the server to return only achievements with the specified state.
 -- If this parameter isn\'t specified, all achievements are returned.
-alState :: Lens' AchievementsList' (Maybe State)
+alState :: Lens' AchievementsList' (Maybe AchievementsListState)
 alState = lens _alState (\ s a -> s{_alState = a})
 
 -- | IP address of the site where the request originates. Use this if you

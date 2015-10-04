@@ -58,15 +58,6 @@ module Network.Google.Affiliates
 
     -- * Types
 
-    -- ** Status
-    , Status (..)
-
-    -- ** BonusRewardsItem
-    , BonusRewardsItem
-    , bonusRewardsItem
-    , briAmount
-    , briDetails
-
     -- ** Event
     , Event
     , event
@@ -89,30 +80,35 @@ module Network.Google.Affiliates
     , eEarnings
     , ePublisherName
 
-    -- ** Authorship
-    , Authorship (..)
+    -- ** PublishersGetRole
+    , PublishersGetRole (..)
 
-    -- ** GANPublishersGetRole
-    , GANPublishersGetRole (..)
+    -- ** ReportsGetEventType
+    , ReportsGetEventType (..)
 
-    -- ** ChargeType
-    , ChargeType (..)
+    -- ** ReportsGetStatus
+    , ReportsGetStatus (..)
 
-    -- ** GANLinksListRole
-    , GANLinksListRole (..)
+    -- ** LinksListPromotionType
+    , LinksListPromotionType (..)
 
-    -- ** ProductsItem
-    , ProductsItem
-    , productsItem
-    , piSKUName
-    , piNetworkFee
-    , piQuantity
-    , piCategoryName
-    , piCategoryId
-    , piSKU
-    , piPublisherFee
-    , piUnitPrice
-    , piEarnings
+    -- ** EventsListType
+    , EventsListType (..)
+
+    -- ** LinksListRole
+    , LinksListRole (..)
+
+    -- ** ReportsGetReportType
+    , ReportsGetReportType (..)
+
+    -- ** AdvertisersListRole
+    , AdvertisersListRole (..)
+
+    -- ** Money
+    , Money
+    , money
+    , mAmount
+    , mCurrencyCode
 
     -- ** Link
     , Link
@@ -139,23 +135,8 @@ module Network.Google.Affiliates
     , lDuration
     , lDescription
 
-    -- ** RelationshipStatus
-    , RelationshipStatus (..)
-
-    -- ** Money
-    , Money
-    , money
-    , mAmount
-    , mCurrencyCode
-
-    -- ** GANLinksInsertRole
-    , GANLinksInsertRole (..)
-
-    -- ** GANAdvertisersListRole
-    , GANAdvertisersListRole (..)
-
-    -- ** PromotionType
-    , PromotionType (..)
+    -- ** LinksInsertRole
+    , LinksInsertRole (..)
 
     -- ** CcOffers
     , CcOffers
@@ -163,15 +144,16 @@ module Network.Google.Affiliates
     , coKind
     , coItems
 
-    -- ** GANPublishersListRole
-    , GANPublishersListRole (..)
+    -- ** PublishersListRole
+    , PublishersListRole (..)
 
-    -- ** Advertisers
-    , Advertisers
-    , advertisers
-    , aNextPageToken
-    , aKind
-    , aItems
+    -- ** CcOfferDefaultFeesItem
+    , CcOfferDefaultFeesItem
+    , ccOfferDefaultFeesItem
+    , codfiRateType
+    , codfiMinRate
+    , codfiCategory
+    , codfiMaxRate
 
     -- ** Report
     , Report
@@ -185,30 +167,61 @@ module Network.Google.Affiliates
     , rColumnNames
     , rType
 
-    -- ** GANLinksGetRole
-    , GANLinksGetRole (..)
+    -- ** LinksListAuthorship
+    , LinksListAuthorship (..)
 
-    -- ** RewardsItem
-    , RewardsItem
-    , rewardsItem
-    , riAmount
-    , riExpirationMonths
-    , riCategory
-    , riAdditionalDetails
-    , riMaxRewardTier
-    , riMinRewardTier
+    -- ** Advertisers
+    , Advertisers
+    , advertisers
+    , aNextPageToken
+    , aKind
+    , aItems
 
-    -- ** GANEventsListRole
-    , GANEventsListRole (..)
+    -- ** LinksGetRole
+    , LinksGetRole (..)
 
-    -- ** Role
-    , Role (..)
+    -- ** LinksListLinkType
+    , LinksListLinkType (..)
 
-    -- ** GANAdvertisersGetRole
-    , GANAdvertisersGetRole (..)
+    -- ** EventsListRole
+    , EventsListRole (..)
 
-    -- ** EventType
-    , EventType (..)
+    -- ** EventProductsItem
+    , EventProductsItem
+    , eventProductsItem
+    , epiSKUName
+    , epiNetworkFee
+    , epiQuantity
+    , epiCategoryName
+    , epiCategoryId
+    , epiSKU
+    , epiPublisherFee
+    , epiUnitPrice
+    , epiEarnings
+
+    -- ** AdvertisersListRelationshipStatus
+    , AdvertisersListRelationshipStatus (..)
+
+    -- ** CcOffersListProjection
+    , CcOffersListProjection (..)
+
+    -- ** CcOfferBonusRewardsItem
+    , CcOfferBonusRewardsItem
+    , ccOfferBonusRewardsItem
+    , cobriAmount
+    , cobriDetails
+
+    -- ** AdvertisersGetRole
+    , AdvertisersGetRole (..)
+
+    -- ** EventsListChargeType
+    , EventsListChargeType (..)
+
+    -- ** PublishersListRelationshipStatus
+    , PublishersListRelationshipStatus (..)
+
+    -- ** ReportsGetRole
+    , ReportsGetRole (..)
 
     -- ** Events
     , Events
@@ -217,20 +230,17 @@ module Network.Google.Affiliates
     , eveKind
     , eveItems
 
-    -- ** GANPublishersListRelationshipStatus
-    , GANPublishersListRelationshipStatus (..)
-
-    -- ** SpecialOffers
-    , SpecialOffers
-    , specialOffers
-    , soFreeShippingMin
-    , soPercentOff
-    , soPriceCut
-    , soPriceCutMin
-    , soPercentOffMin
-    , soFreeShipping
-    , soPromotionCodes
-    , soFreeGift
+    -- ** LinkSpecialOffers
+    , LinkSpecialOffers
+    , linkSpecialOffers
+    , lsoFreeShippingMin
+    , lsoPercentOff
+    , lsoPriceCut
+    , lsoPriceCutMin
+    , lsoPercentOffMin
+    , lsoFreeShipping
+    , lsoPromotionCodes
+    , lsoFreeGift
 
     -- ** Publishers
     , Publishers
@@ -263,12 +273,6 @@ module Network.Google.Affiliates
     , advEpcNinetyDayAverage
     , advCommissionDuration
     , advDescription
-
-    -- ** Projection
-    , Projection (..)
-
-    -- ** LinkType
-    , LinkType (..)
 
     -- ** CcOffer
     , CcOffer
@@ -337,26 +341,12 @@ module Network.Google.Affiliates
     , cRewardPartner
     , cPurchaseRateType
 
-    -- ** Type
-    , Type (..)
-
-    -- ** DefaultFeesItem
-    , DefaultFeesItem
-    , defaultFeesItem
-    , dfiRateType
-    , dfiMinRate
-    , dfiCategory
-    , dfiMaxRate
-
     -- ** Links
     , Links
     , links
     , linNextPageToken
     , linKind
     , linItems
-
-    -- ** ReportType
-    , ReportType (..)
 
     -- ** Publisher
     , Publisher
@@ -373,11 +363,21 @@ module Network.Google.Affiliates
     , pubEpcNinetyDayAverage
     , pubSites
 
-    -- ** GANLinksListRelationshipStatus
-    , GANLinksListRelationshipStatus (..)
+    -- ** CcOfferRewardsItem
+    , CcOfferRewardsItem
+    , ccOfferRewardsItem
+    , coriAmount
+    , coriExpirationMonths
+    , coriCategory
+    , coriAdditionalDetails
+    , coriMaxRewardTier
+    , coriMinRewardTier
 
-    -- ** GANEventsListStatus
-    , GANEventsListStatus (..)
+    -- ** LinksListRelationshipStatus
+    , LinksListRelationshipStatus (..)
+
+    -- ** EventsListStatus
+    , EventsListStatus (..)
     ) where
 
 import           Network.Google.Affiliates.Types

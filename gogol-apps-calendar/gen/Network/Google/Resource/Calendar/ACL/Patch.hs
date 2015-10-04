@@ -59,7 +59,8 @@ type ACLPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] ACLRule :> Patch '[JSON] ACLRule
+                           ReqBody '[OctetStream] ACLRule :>
+                             Patch '[JSON] ACLRule
 
 -- | Updates an access control rule. This method supports patch semantics.
 --

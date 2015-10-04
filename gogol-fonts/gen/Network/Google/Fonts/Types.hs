@@ -35,12 +35,12 @@ module Network.Google.Fonts.Types
     , wlKind
     , wlItems
 
-    -- * Sort
-    , Sort (..)
+    -- * WebfontsListSort
+    , WebfontsListSort (..)
 
-    -- * Files
-    , Files
-    , files
+    -- * WebfontFiles
+    , WebfontFiles
+    , webfontFiles
     ) where
 
 import           Network.Google.Fonts.Types.Product

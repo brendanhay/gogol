@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.RemarketingLists.Get
     , rlgQuotaUser
     , rlgPrettyPrint
     , rlgUserIP
-    , rlgProfileId
+    , rlgProFileId
     , rlgKey
     , rlgId
     , rlgOAuthToken
@@ -67,7 +67,7 @@ data RemarketingListsGet' = RemarketingListsGet'
     { _rlgQuotaUser   :: !(Maybe Text)
     , _rlgPrettyPrint :: !Bool
     , _rlgUserIP      :: !(Maybe Text)
-    , _rlgProfileId   :: !Int64
+    , _rlgProFileId   :: !Int64
     , _rlgKey         :: !(Maybe Key)
     , _rlgId          :: !Int64
     , _rlgOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data RemarketingListsGet' = RemarketingListsGet'
 --
 -- * 'rlgUserIP'
 --
--- * 'rlgProfileId'
+-- * 'rlgProFileId'
 --
 -- * 'rlgKey'
 --
@@ -97,12 +97,12 @@ remarketingListsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> RemarketingListsGet'
-remarketingListsGet' pRlgProfileId_ pRlgId_ =
+remarketingListsGet' pRlgProFileId_ pRlgId_ =
     RemarketingListsGet'
     { _rlgQuotaUser = Nothing
     , _rlgPrettyPrint = True
     , _rlgUserIP = Nothing
-    , _rlgProfileId = pRlgProfileId_
+    , _rlgProFileId = pRlgProFileId_
     , _rlgKey = Nothing
     , _rlgId = pRlgId_
     , _rlgOAuthToken = Nothing
@@ -129,9 +129,9 @@ rlgUserIP
   = lens _rlgUserIP (\ s a -> s{_rlgUserIP = a})
 
 -- | User profile ID associated with this request.
-rlgProfileId :: Lens' RemarketingListsGet' Int64
-rlgProfileId
-  = lens _rlgProfileId (\ s a -> s{_rlgProfileId = a})
+rlgProFileId :: Lens' RemarketingListsGet' Int64
+rlgProFileId
+  = lens _rlgProFileId (\ s a -> s{_rlgProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -162,7 +162,7 @@ instance GoogleRequest RemarketingListsGet' where
         type Rs RemarketingListsGet' = RemarketingList
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u RemarketingListsGet'{..}
-          = go _rlgProfileId _rlgId _rlgQuotaUser
+          = go _rlgProFileId _rlgId _rlgQuotaUser
               (Just _rlgPrettyPrint)
               _rlgUserIP
               _rlgFields

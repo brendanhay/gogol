@@ -73,7 +73,7 @@ type CoursesUpdateResource =
                                QueryParam "key" Key :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
-                                     ReqBody '[JSON] Course :>
+                                     ReqBody '[OctetStream] Course :>
                                        Put '[JSON] Course
 
 -- | Updates a course. This method returns the following error codes: *

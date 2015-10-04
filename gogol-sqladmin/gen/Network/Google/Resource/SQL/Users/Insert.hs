@@ -60,7 +60,8 @@ type UsersInsertResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] User :> Post '[JSON] Operation
+                             ReqBody '[OctetStream] User :>
+                               Post '[JSON] Operation
 
 -- | Creates a new user in a Cloud SQL instance.
 --

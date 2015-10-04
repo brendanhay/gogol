@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Get
     , faggQuotaUser
     , faggPrettyPrint
     , faggUserIP
-    , faggProfileId
+    , faggProFileId
     , faggKey
     , faggId
     , faggOAuthToken
@@ -67,7 +67,7 @@ data FloodlightActivityGroupsGet' = FloodlightActivityGroupsGet'
     { _faggQuotaUser   :: !(Maybe Text)
     , _faggPrettyPrint :: !Bool
     , _faggUserIP      :: !(Maybe Text)
-    , _faggProfileId   :: !Int64
+    , _faggProFileId   :: !Int64
     , _faggKey         :: !(Maybe Key)
     , _faggId          :: !Int64
     , _faggOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data FloodlightActivityGroupsGet' = FloodlightActivityGroupsGet'
 --
 -- * 'faggUserIP'
 --
--- * 'faggProfileId'
+-- * 'faggProFileId'
 --
 -- * 'faggKey'
 --
@@ -97,12 +97,12 @@ floodlightActivityGroupsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> FloodlightActivityGroupsGet'
-floodlightActivityGroupsGet' pFaggProfileId_ pFaggId_ =
+floodlightActivityGroupsGet' pFaggProFileId_ pFaggId_ =
     FloodlightActivityGroupsGet'
     { _faggQuotaUser = Nothing
     , _faggPrettyPrint = True
     , _faggUserIP = Nothing
-    , _faggProfileId = pFaggProfileId_
+    , _faggProFileId = pFaggProFileId_
     , _faggKey = Nothing
     , _faggId = pFaggId_
     , _faggOAuthToken = Nothing
@@ -130,10 +130,10 @@ faggUserIP
   = lens _faggUserIP (\ s a -> s{_faggUserIP = a})
 
 -- | User profile ID associated with this request.
-faggProfileId :: Lens' FloodlightActivityGroupsGet' Int64
-faggProfileId
-  = lens _faggProfileId
-      (\ s a -> s{_faggProfileId = a})
+faggProFileId :: Lens' FloodlightActivityGroupsGet' Int64
+faggProFileId
+  = lens _faggProFileId
+      (\ s a -> s{_faggProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -167,7 +167,7 @@ instance GoogleRequest FloodlightActivityGroupsGet'
              FloodlightActivityGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u FloodlightActivityGroupsGet'{..}
-          = go _faggProfileId _faggId _faggQuotaUser
+          = go _faggProFileId _faggId _faggQuotaUser
               (Just _faggPrettyPrint)
               _faggUserIP
               _faggFields

@@ -36,7 +36,7 @@ module Network.Google.Resource.DFAReporting.OrderDocuments.List
     , odlUserIP
     , odlSearchString
     , odlIds
-    , odlProfileId
+    , odlProFileId
     , odlSortOrder
     , odlKey
     , odlPageToken
@@ -63,13 +63,9 @@ type OrderDocumentsListResource =
              "orderDocuments" :>
                QueryParam "searchString" Text :>
                  QueryParams "ids" Int64 :>
-                   QueryParam "sortOrder"
-                     DfareportingOrderDocumentsListSortOrder
-                     :>
+                   QueryParam "sortOrder" OrderDocumentsListSortOrder :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "sortField"
-                         DfareportingOrderDocumentsListSortField
-                         :>
+                       QueryParam "sortField" OrderDocumentsListSortField :>
                          QueryParams "orderId" Int64 :>
                            QueryParam "approved" Bool :>
                              QueryParams "siteId" Int64 :>
@@ -94,12 +90,12 @@ data OrderDocumentsList' = OrderDocumentsList'
     , _odlUserIP       :: !(Maybe Text)
     , _odlSearchString :: !(Maybe Text)
     , _odlIds          :: !(Maybe [Int64])
-    , _odlProfileId    :: !Int64
-    , _odlSortOrder    :: !(Maybe DfareportingOrderDocumentsListSortOrder)
+    , _odlProFileId    :: !Int64
+    , _odlSortOrder    :: !(Maybe OrderDocumentsListSortOrder)
     , _odlKey          :: !(Maybe Key)
     , _odlPageToken    :: !(Maybe Text)
     , _odlProjectId    :: !Int64
-    , _odlSortField    :: !(Maybe DfareportingOrderDocumentsListSortField)
+    , _odlSortField    :: !(Maybe OrderDocumentsListSortField)
     , _odlOAuthToken   :: !(Maybe OAuthToken)
     , _odlOrderId      :: !(Maybe [Int64])
     , _odlApproved     :: !(Maybe Bool)
@@ -122,7 +118,7 @@ data OrderDocumentsList' = OrderDocumentsList'
 --
 -- * 'odlIds'
 --
--- * 'odlProfileId'
+-- * 'odlProFileId'
 --
 -- * 'odlSortOrder'
 --
@@ -149,14 +145,14 @@ orderDocumentsList'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'projectId'
     -> OrderDocumentsList'
-orderDocumentsList' pOdlProfileId_ pOdlProjectId_ =
+orderDocumentsList' pOdlProFileId_ pOdlProjectId_ =
     OrderDocumentsList'
     { _odlQuotaUser = Nothing
     , _odlPrettyPrint = True
     , _odlUserIP = Nothing
     , _odlSearchString = Nothing
     , _odlIds = Nothing
-    , _odlProfileId = pOdlProfileId_
+    , _odlProFileId = pOdlProFileId_
     , _odlSortOrder = Nothing
     , _odlKey = Nothing
     , _odlPageToken = Nothing
@@ -209,12 +205,12 @@ odlIds
       _Coerce
 
 -- | User profile ID associated with this request.
-odlProfileId :: Lens' OrderDocumentsList' Int64
-odlProfileId
-  = lens _odlProfileId (\ s a -> s{_odlProfileId = a})
+odlProFileId :: Lens' OrderDocumentsList' Int64
+odlProFileId
+  = lens _odlProFileId (\ s a -> s{_odlProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-odlSortOrder :: Lens' OrderDocumentsList' (Maybe DfareportingOrderDocumentsListSortOrder)
+odlSortOrder :: Lens' OrderDocumentsList' (Maybe OrderDocumentsListSortOrder)
 odlSortOrder
   = lens _odlSortOrder (\ s a -> s{_odlSortOrder = a})
 
@@ -235,7 +231,7 @@ odlProjectId
   = lens _odlProjectId (\ s a -> s{_odlProjectId = a})
 
 -- | Field by which to sort the list.
-odlSortField :: Lens' OrderDocumentsList' (Maybe DfareportingOrderDocumentsListSortField)
+odlSortField :: Lens' OrderDocumentsList' (Maybe OrderDocumentsListSortField)
 odlSortField
   = lens _odlSortField (\ s a -> s{_odlSortField = a})
 
@@ -285,7 +281,7 @@ instance GoogleRequest OrderDocumentsList' where
              OrderDocumentsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u OrderDocumentsList'{..}
-          = go _odlProfileId _odlProjectId _odlSearchString
+          = go _odlProFileId _odlProjectId _odlSearchString
               (_odlIds ^. _Default)
               _odlSortOrder
               _odlPageToken

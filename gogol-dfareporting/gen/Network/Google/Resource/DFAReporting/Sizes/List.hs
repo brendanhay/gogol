@@ -37,7 +37,7 @@ module Network.Google.Resource.DFAReporting.Sizes.List
     , slUserIP
     , slIds
     , slWidth
-    , slProfileId
+    , slProFileId
     , slKey
     , slOAuthToken
     , slIabStandard
@@ -76,7 +76,7 @@ data SizesList' = SizesList'
     , _slUserIP      :: !(Maybe Text)
     , _slIds         :: !(Maybe [Int64])
     , _slWidth       :: !(Maybe Int32)
-    , _slProfileId   :: !Int64
+    , _slProFileId   :: !Int64
     , _slKey         :: !(Maybe Key)
     , _slOAuthToken  :: !(Maybe OAuthToken)
     , _slIabStandard :: !(Maybe Bool)
@@ -99,7 +99,7 @@ data SizesList' = SizesList'
 --
 -- * 'slWidth'
 --
--- * 'slProfileId'
+-- * 'slProFileId'
 --
 -- * 'slKey'
 --
@@ -111,7 +111,7 @@ data SizesList' = SizesList'
 sizesList'
     :: Int64 -- ^ 'profileId'
     -> SizesList'
-sizesList' pSlProfileId_ =
+sizesList' pSlProFileId_ =
     SizesList'
     { _slQuotaUser = Nothing
     , _slHeight = Nothing
@@ -119,7 +119,7 @@ sizesList' pSlProfileId_ =
     , _slUserIP = Nothing
     , _slIds = Nothing
     , _slWidth = Nothing
-    , _slProfileId = pSlProfileId_
+    , _slProFileId = pSlProFileId_
     , _slKey = Nothing
     , _slOAuthToken = Nothing
     , _slIabStandard = Nothing
@@ -159,9 +159,9 @@ slWidth :: Lens' SizesList' (Maybe Int32)
 slWidth = lens _slWidth (\ s a -> s{_slWidth = a})
 
 -- | User profile ID associated with this request.
-slProfileId :: Lens' SizesList' Int64
-slProfileId
-  = lens _slProfileId (\ s a -> s{_slProfileId = a})
+slProFileId :: Lens' SizesList' Int64
+slProFileId
+  = lens _slProFileId (\ s a -> s{_slProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -192,7 +192,7 @@ instance GoogleRequest SizesList' where
         type Rs SizesList' = SizesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u SizesList'{..}
-          = go _slProfileId _slHeight (_slIds ^. _Default)
+          = go _slProFileId _slHeight (_slIds ^. _Default)
               _slWidth
               _slIabStandard
               _slQuotaUser

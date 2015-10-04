@@ -56,8 +56,8 @@ type FilesListResource =
        QueryParam "orderBy" Text :>
          QueryParam "q" Text :>
            QueryParam "spaces" Text :>
-             QueryParam "projection" Projection :>
-               QueryParam "corpus" Corpus :>
+             QueryParam "projection" FilesListProjection :>
+               QueryParam "corpus" FilesListCorpus :>
                  QueryParam "pageToken" Text :>
                    QueryParam "maxResults" Int32 :>
                      QueryParam "quotaUser" Text :>
@@ -80,8 +80,8 @@ data FilesList' = FilesList'
     , _flQ           :: !(Maybe Text)
     , _flKey         :: !(Maybe Key)
     , _flSpaces      :: !(Maybe Text)
-    , _flProjection  :: !(Maybe Projection)
-    , _flCorpus      :: !(Maybe Corpus)
+    , _flProjection  :: !(Maybe FilesListProjection)
+    , _flCorpus      :: !(Maybe FilesListCorpus)
     , _flPageToken   :: !(Maybe Text)
     , _flOAuthToken  :: !(Maybe OAuthToken)
     , _flMaxResults  :: !Int32
@@ -182,12 +182,12 @@ flSpaces :: Lens' FilesList' (Maybe Text)
 flSpaces = lens _flSpaces (\ s a -> s{_flSpaces = a})
 
 -- | This parameter is deprecated and has no function.
-flProjection :: Lens' FilesList' (Maybe Projection)
+flProjection :: Lens' FilesList' (Maybe FilesListProjection)
 flProjection
   = lens _flProjection (\ s a -> s{_flProjection = a})
 
 -- | The body of items (files\/documents) to which the query applies.
-flCorpus :: Lens' FilesList' (Maybe Corpus)
+flCorpus :: Lens' FilesList' (Maybe FilesListCorpus)
 flCorpus = lens _flCorpus (\ s a -> s{_flCorpus = a})
 
 -- | Page token for files.

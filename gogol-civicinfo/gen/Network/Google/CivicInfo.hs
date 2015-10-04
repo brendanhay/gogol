@@ -43,8 +43,9 @@ module Network.Google.CivicInfo
 
     -- * Types
 
-    -- ** Roles
-    , Roles (..)
+    -- ** RepresentativeInfoResponseDivisions
+    , RepresentativeInfoResponseDivisions
+    , representativeInfoResponseDivisions
 
     -- ** VoterInfoResponse
     , VoterInfoResponse
@@ -74,15 +75,15 @@ module Network.Google.CivicInfo
     , plId
     , plNotes
 
+    -- ** RepresentativesRepresentativeInfoByDivisionLevels
+    , RepresentativesRepresentativeInfoByDivisionLevels (..)
+
     -- ** GeographicDivision
     , GeographicDivision
     , geographicDivision
     , gdName
     , gdOfficeIndices
     , gdAlsoKnownAs
-
-    -- ** CivicInfoRepresentativesRepresentativeInfoByAddressLevels
-    , CivicInfoRepresentativesRepresentativeInfoByAddressLevels (..)
 
     -- ** Candidate
     , Candidate
@@ -96,6 +97,9 @@ module Network.Google.CivicInfo
     , cName
     , cParty
 
+    -- ** RepresentativesRepresentativeInfoByAddressLevels
+    , RepresentativesRepresentativeInfoByAddressLevels (..)
+
     -- ** Office
     , Office
     , office
@@ -106,6 +110,15 @@ module Network.Google.CivicInfo
     , oName
     , oLevels
 
+    -- ** RepresentativesRepresentativeInfoByDivisionRoles
+    , RepresentativesRepresentativeInfoByDivisionRoles (..)
+
+    -- ** Channel
+    , Channel
+    , channel
+    , cId
+    , cType
+
     -- ** Election
     , Election
     , election
@@ -113,12 +126,6 @@ module Network.Google.CivicInfo
     , eElectionDay
     , eName
     , eId
-
-    -- ** Channel
-    , Channel
-    , channel
-    , cId
-    , cType
 
     -- ** RepresentativeInfoResponse
     , RepresentativeInfoResponse
@@ -191,12 +198,8 @@ module Network.Google.CivicInfo
     , RepresentativeInfoDataDivisions
     , representativeInfoDataDivisions
 
-    -- ** CivicInfoRepresentativesRepresentativeInfoByAddressRoles
-    , CivicInfoRepresentativesRepresentativeInfoByAddressRoles (..)
-
-    -- ** Divisions
-    , Divisions
-    , divisions
+    -- ** RepresentativesRepresentativeInfoByAddressRoles
+    , RepresentativesRepresentativeInfoByAddressRoles (..)
 
     -- ** ElectionOfficial
     , ElectionOfficial
@@ -219,9 +222,6 @@ module Network.Google.CivicInfo
     , source
     , sName
     , sOfficial
-
-    -- ** Levels
-    , Levels (..)
 
     -- ** ElectoralDistrict
     , ElectoralDistrict

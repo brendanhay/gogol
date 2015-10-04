@@ -63,7 +63,7 @@ type UsersDataSourcesPatchResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] DataSource :>
+                         ReqBody '[OctetStream] DataSource :>
                            Patch '[JSON] DataSource
 
 -- | Updates a given data source. It is an error to modify the data source\'s

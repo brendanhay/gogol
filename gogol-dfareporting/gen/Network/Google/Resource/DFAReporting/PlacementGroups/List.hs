@@ -41,7 +41,7 @@ module Network.Google.Resource.DFAReporting.PlacementGroups.List
     , pglPricingTypes
     , pglSearchString
     , pglIds
-    , pglProfileId
+    , pglProFileId
     , pglPlacementGroupType
     , pglDirectorySiteIds
     , pglSortOrder
@@ -73,19 +73,20 @@ type PlacementGroupsListResource =
                QueryParam "maxEndDate" Text :>
                  QueryParams "campaignIds" Int64 :>
                    QueryParams "pricingTypes"
-                     DfareportingPlacementGroupsListPricingTypes
+                     PlacementGroupsListPricingTypes
                      :>
                      QueryParam "searchString" Text :>
                        QueryParams "ids" Int64 :>
-                         QueryParam "placementGroupType" PlacementGroupType :>
+                         QueryParam "placementGroupType"
+                           PlacementGroupsListPlacementGroupType
+                           :>
                            QueryParams "directorySiteIds" Int64 :>
-                             QueryParam "sortOrder"
-                               DfareportingPlacementGroupsListSortOrder
+                             QueryParam "sortOrder" PlacementGroupsListSortOrder
                                :>
                                QueryParams "siteIds" Int64 :>
                                  QueryParam "pageToken" Text :>
                                    QueryParam "sortField"
-                                     DfareportingPlacementGroupsListSortField
+                                     PlacementGroupsListSortField
                                      :>
                                      QueryParam "maxStartDate" Text :>
                                        QueryParams "advertiserIds" Int64 :>
@@ -121,17 +122,17 @@ data PlacementGroupsList' = PlacementGroupsList'
     , _pglMaxEndDate           :: !(Maybe Text)
     , _pglUserIP               :: !(Maybe Text)
     , _pglCampaignIds          :: !(Maybe [Int64])
-    , _pglPricingTypes         :: !(Maybe [DfareportingPlacementGroupsListPricingTypes])
+    , _pglPricingTypes         :: !(Maybe [PlacementGroupsListPricingTypes])
     , _pglSearchString         :: !(Maybe Text)
     , _pglIds                  :: !(Maybe [Int64])
-    , _pglProfileId            :: !Int64
-    , _pglPlacementGroupType   :: !(Maybe PlacementGroupType)
+    , _pglProFileId            :: !Int64
+    , _pglPlacementGroupType   :: !(Maybe PlacementGroupsListPlacementGroupType)
     , _pglDirectorySiteIds     :: !(Maybe [Int64])
-    , _pglSortOrder            :: !(Maybe DfareportingPlacementGroupsListSortOrder)
+    , _pglSortOrder            :: !(Maybe PlacementGroupsListSortOrder)
     , _pglKey                  :: !(Maybe Key)
     , _pglSiteIds              :: !(Maybe [Int64])
     , _pglPageToken            :: !(Maybe Text)
-    , _pglSortField            :: !(Maybe DfareportingPlacementGroupsListSortField)
+    , _pglSortField            :: !(Maybe PlacementGroupsListSortField)
     , _pglMaxStartDate         :: !(Maybe Text)
     , _pglOAuthToken           :: !(Maybe OAuthToken)
     , _pglAdvertiserIds        :: !(Maybe [Int64])
@@ -166,7 +167,7 @@ data PlacementGroupsList' = PlacementGroupsList'
 --
 -- * 'pglIds'
 --
--- * 'pglProfileId'
+-- * 'pglProFileId'
 --
 -- * 'pglPlacementGroupType'
 --
@@ -200,7 +201,7 @@ data PlacementGroupsList' = PlacementGroupsList'
 placementGroupsList'
     :: Int64 -- ^ 'profileId'
     -> PlacementGroupsList'
-placementGroupsList' pPglProfileId_ =
+placementGroupsList' pPglProFileId_ =
     PlacementGroupsList'
     { _pglPlacementStrategyIds = Nothing
     , _pglQuotaUser = Nothing
@@ -212,7 +213,7 @@ placementGroupsList' pPglProfileId_ =
     , _pglPricingTypes = Nothing
     , _pglSearchString = Nothing
     , _pglIds = Nothing
-    , _pglProfileId = pPglProfileId_
+    , _pglProFileId = pPglProFileId_
     , _pglPlacementGroupType = Nothing
     , _pglDirectorySiteIds = Nothing
     , _pglSortOrder = Nothing
@@ -284,7 +285,7 @@ pglCampaignIds
       . _Coerce
 
 -- | Select only placement groups with these pricing types.
-pglPricingTypes :: Lens' PlacementGroupsList' [DfareportingPlacementGroupsListPricingTypes]
+pglPricingTypes :: Lens' PlacementGroupsList' [PlacementGroupsListPricingTypes]
 pglPricingTypes
   = lens _pglPricingTypes
       (\ s a -> s{_pglPricingTypes = a})
@@ -311,9 +312,9 @@ pglIds
       _Coerce
 
 -- | User profile ID associated with this request.
-pglProfileId :: Lens' PlacementGroupsList' Int64
-pglProfileId
-  = lens _pglProfileId (\ s a -> s{_pglProfileId = a})
+pglProFileId :: Lens' PlacementGroupsList' Int64
+pglProFileId
+  = lens _pglProFileId (\ s a -> s{_pglProFileId = a})
 
 -- | Select only placement groups belonging with this group type. A package
 -- is a simple group of placements that acts as a single pricing point for
@@ -321,7 +322,7 @@ pglProfileId
 -- as a single pricing point but also assumes that all the tags in it will
 -- be served at the same time. A roadblock requires one of its assigned
 -- placements to be marked as primary for reporting.
-pglPlacementGroupType :: Lens' PlacementGroupsList' (Maybe PlacementGroupType)
+pglPlacementGroupType :: Lens' PlacementGroupsList' (Maybe PlacementGroupsListPlacementGroupType)
 pglPlacementGroupType
   = lens _pglPlacementGroupType
       (\ s a -> s{_pglPlacementGroupType = a})
@@ -336,7 +337,7 @@ pglDirectorySiteIds
       . _Coerce
 
 -- | Order of sorted results, default is ASCENDING.
-pglSortOrder :: Lens' PlacementGroupsList' (Maybe DfareportingPlacementGroupsListSortOrder)
+pglSortOrder :: Lens' PlacementGroupsList' (Maybe PlacementGroupsListSortOrder)
 pglSortOrder
   = lens _pglSortOrder (\ s a -> s{_pglSortOrder = a})
 
@@ -359,7 +360,7 @@ pglPageToken
   = lens _pglPageToken (\ s a -> s{_pglPageToken = a})
 
 -- | Field by which to sort the list.
-pglSortField :: Lens' PlacementGroupsList' (Maybe DfareportingPlacementGroupsListSortField)
+pglSortField :: Lens' PlacementGroupsList' (Maybe PlacementGroupsListSortField)
 pglSortField
   = lens _pglSortField (\ s a -> s{_pglSortField = a})
 
@@ -427,7 +428,7 @@ instance GoogleRequest PlacementGroupsList' where
              PlacementGroupsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementGroupsList'{..}
-          = go _pglProfileId
+          = go _pglProFileId
               (_pglPlacementStrategyIds ^. _Default)
               (_pglContentCategoryIds ^. _Default)
               _pglMaxEndDate

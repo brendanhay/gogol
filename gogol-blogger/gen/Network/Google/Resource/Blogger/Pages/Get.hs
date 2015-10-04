@@ -52,7 +52,7 @@ type PagesGetResource =
        Capture "blogId" Text :>
          "pages" :>
            Capture "pageId" Text :>
-             QueryParam "view" BloggerPagesGetView :>
+             QueryParam "view" PagesGetView :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -71,7 +71,7 @@ data PagesGet' = PagesGet'
     , _pggBlogId      :: !Text
     , _pggPageId      :: !Text
     , _pggKey         :: !(Maybe Key)
-    , _pggView        :: !(Maybe BloggerPagesGetView)
+    , _pggView        :: !(Maybe PagesGetView)
     , _pggOAuthToken  :: !(Maybe OAuthToken)
     , _pggFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -149,7 +149,7 @@ pggPageId
 pggKey :: Lens' PagesGet' (Maybe Key)
 pggKey = lens _pggKey (\ s a -> s{_pggKey = a})
 
-pggView :: Lens' PagesGet' (Maybe BloggerPagesGetView)
+pggView :: Lens' PagesGet' (Maybe PagesGetView)
 pggView = lens _pggView (\ s a -> s{_pggView = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -18,6 +18,51 @@ module Network.Google.DeploymentManager.Types.Product where
 import           Network.Google.DeploymentManager.Types.Sum
 import           Network.Google.Prelude
 
+--
+-- /See:/ 'operationWarningsItemDataItem' smart constructor.
+data OperationWarningsItemDataItem = OperationWarningsItemDataItem
+    { _owidiValue :: !(Maybe Text)
+    , _owidiKey   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationWarningsItemDataItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'owidiValue'
+--
+-- * 'owidiKey'
+operationWarningsItemDataItem
+    :: OperationWarningsItemDataItem
+operationWarningsItemDataItem =
+    OperationWarningsItemDataItem
+    { _owidiValue = Nothing
+    , _owidiKey = Nothing
+    }
+
+-- | [Output Only] A warning data value corresponding to the key.
+owidiValue :: Lens' OperationWarningsItemDataItem (Maybe Text)
+owidiValue
+  = lens _owidiValue (\ s a -> s{_owidiValue = a})
+
+-- | [Output Only] A key for the warning data.
+owidiKey :: Lens' OperationWarningsItemDataItem (Maybe Text)
+owidiKey = lens _owidiKey (\ s a -> s{_owidiKey = a})
+
+instance FromJSON OperationWarningsItemDataItem where
+        parseJSON
+          = withObject "OperationWarningsItemDataItem"
+              (\ o ->
+                 OperationWarningsItemDataItem <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON OperationWarningsItemDataItem where
+        toJSON OperationWarningsItemDataItem{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _owidiValue,
+                  ("key" .=) <$> _owidiKey])
+
 -- | A response containing a partial list of operations and a page token used
 -- to build the next request if the request has been truncated.
 --
@@ -132,10 +177,10 @@ data Operation = Operation
     , _oProgress            :: !(Maybe Int32)
     , _oStartTime           :: !(Maybe Text)
     , _oKind                :: !Text
-    , _oError               :: !(Maybe Error')
+    , _oError               :: !(Maybe OperationError)
     , _oHTTPErrorMessage    :: !(Maybe Text)
     , _oZone                :: !(Maybe Text)
-    , _oWarnings            :: !(Maybe [WarningsItem])
+    , _oWarnings            :: !(Maybe [OperationWarningsItem])
     , _oHTTPErrorStatusCode :: !(Maybe Int32)
     , _oUser                :: !(Maybe Text)
     , _oSelfLink            :: !(Maybe Text)
@@ -264,7 +309,7 @@ oKind = lens _oKind (\ s a -> s{_oKind = a})
 
 -- | [Output Only] If errors are generated during processing of the
 -- operation, this field will be populated.
-oError :: Lens' Operation (Maybe Error')
+oError :: Lens' Operation (Maybe OperationError)
 oError = lens _oError (\ s a -> s{_oError = a})
 
 -- | [Output Only] If the operation fails, this field contains the HTTP error
@@ -280,7 +325,7 @@ oZone = lens _oZone (\ s a -> s{_oZone = a})
 
 -- | [Output Only] If warning messages are generated during processing of the
 -- operation, this field will be populated.
-oWarnings :: Lens' Operation [WarningsItem]
+oWarnings :: Lens' Operation [OperationWarningsItem]
 oWarnings
   = lens _oWarnings (\ s a -> s{_oWarnings = a}) .
       _Default
@@ -457,42 +502,6 @@ instance ToJSON ResourcesListResponse where
                  [("nextPageToken" .=) <$> _rlrNextPageToken,
                   ("resources" .=) <$> _rlrResources])
 
--- | [Output Only] If errors are generated during processing of the
--- operation, this field will be populated.
---
--- /See:/ 'error'' smart constructor.
-newtype Error' = Error'
-    { _eErrors :: Maybe [ErrorsItem]
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Error' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'eErrors'
-error'
-    :: Error'
-error' =
-    Error'
-    { _eErrors = Nothing
-    }
-
--- | [Output Only] The array of errors encountered while processing this
--- operation.
-eErrors :: Lens' Error' [ErrorsItem]
-eErrors
-  = lens _eErrors (\ s a -> s{_eErrors = a}) . _Default
-      . _Coerce
-
-instance FromJSON Error' where
-        parseJSON
-          = withObject "Error"
-              (\ o -> Error' <$> (o .:? "errors" .!= mempty))
-
-instance ToJSON Error' where
-        toJSON Error'{..}
-          = object (catMaybes [("errors" .=) <$> _eErrors])
-
 -- |
 --
 -- /See:/ 'deploymentUpdate' smart constructor.
@@ -639,62 +648,6 @@ instance ToJSON ResourceUpdate where
                   ("finalProperties" .=) <$> _ruFinalProperties,
                   ("errors" .=) <$> _ruErrors,
                   ("properties" .=) <$> _ruProperties])
-
---
--- /See:/ 'warningsItem' smart constructor.
-data WarningsItem = WarningsItem
-    { _wiData    :: !(Maybe [DataItem])
-    , _wiCode    :: !(Maybe Text)
-    , _wiMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'WarningsItem' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'wiData'
---
--- * 'wiCode'
---
--- * 'wiMessage'
-warningsItem
-    :: WarningsItem
-warningsItem =
-    WarningsItem
-    { _wiData = Nothing
-    , _wiCode = Nothing
-    , _wiMessage = Nothing
-    }
-
--- | [Output Only] Metadata for this warning in key: value format.
-wiData :: Lens' WarningsItem [DataItem]
-wiData
-  = lens _wiData (\ s a -> s{_wiData = a}) . _Default .
-      _Coerce
-
--- | [Output Only] The warning type identifier for this warning.
-wiCode :: Lens' WarningsItem (Maybe Text)
-wiCode = lens _wiCode (\ s a -> s{_wiCode = a})
-
--- | [Output Only] Optional human-readable details for this warning.
-wiMessage :: Lens' WarningsItem (Maybe Text)
-wiMessage
-  = lens _wiMessage (\ s a -> s{_wiMessage = a})
-
-instance FromJSON WarningsItem where
-        parseJSON
-          = withObject "WarningsItem"
-              (\ o ->
-                 WarningsItem <$>
-                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
-                     (o .:? "message"))
-
-instance ToJSON WarningsItem where
-        toJSON WarningsItem{..}
-          = object
-              (catMaybes
-                 [("data" .=) <$> _wiData, ("code" .=) <$> _wiCode,
-                  ("message" .=) <$> _wiMessage])
 
 -- |
 --
@@ -947,48 +900,6 @@ instance ToJSON Resource where
                   ("update" .=) <$> _rUpdate,
                   ("properties" .=) <$> _rProperties])
 
---
--- /See:/ 'dataItem' smart constructor.
-data DataItem = DataItem
-    { _dValue :: !(Maybe Text)
-    , _dKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'DataItem' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'dValue'
---
--- * 'dKey'
-dataItem
-    :: DataItem
-dataItem =
-    DataItem
-    { _dValue = Nothing
-    , _dKey = Nothing
-    }
-
--- | [Output Only] A warning data value corresponding to the key.
-dValue :: Lens' DataItem (Maybe Text)
-dValue = lens _dValue (\ s a -> s{_dValue = a})
-
--- | [Output Only] A key for the warning data.
-dKey :: Lens' DataItem (Maybe Text)
-dKey = lens _dKey (\ s a -> s{_dKey = a})
-
-instance FromJSON DataItem where
-        parseJSON
-          = withObject "DataItem"
-              (\ o ->
-                 DataItem <$> (o .:? "value") <*> (o .:? "key"))
-
-instance ToJSON DataItem where
-        toJSON DataItem{..}
-          = object
-              (catMaybes
-                 [("value" .=) <$> _dValue, ("key" .=) <$> _dKey])
-
 -- | A response containing a partial list of manifests and a page token used
 -- to build the next request if the request has been truncated.
 --
@@ -1040,6 +951,44 @@ instance ToJSON ManifestsListResponse where
               (catMaybes
                  [("nextPageToken" .=) <$> _mlrNextPageToken,
                   ("manifests" .=) <$> _mlrManifests])
+
+-- | [Output Only] If errors are generated during processing of the
+-- operation, this field will be populated.
+--
+-- /See:/ 'operationError' smart constructor.
+newtype OperationError = OperationError
+    { _oeErrors :: Maybe [OperationErrorErrorsItem]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationError' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oeErrors'
+operationError
+    :: OperationError
+operationError =
+    OperationError
+    { _oeErrors = Nothing
+    }
+
+-- | [Output Only] The array of errors encountered while processing this
+-- operation.
+oeErrors :: Lens' OperationError [OperationErrorErrorsItem]
+oeErrors
+  = lens _oeErrors (\ s a -> s{_oeErrors = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON OperationError where
+        parseJSON
+          = withObject "OperationError"
+              (\ o ->
+                 OperationError <$> (o .:? "errors" .!= mempty))
+
+instance ToJSON OperationError where
+        toJSON OperationError{..}
+          = object (catMaybes [("errors" .=) <$> _oeErrors])
 
 -- | A resource type supported by Deployment Manager.
 --
@@ -1153,6 +1102,63 @@ instance ToJSON ImportFile where
                  [("content" .=) <$> _ifContent,
                   ("name" .=) <$> _ifName])
 
+--
+-- /See:/ 'operationErrorErrorsItem' smart constructor.
+data OperationErrorErrorsItem = OperationErrorErrorsItem
+    { _oeeiLocation :: !(Maybe Text)
+    , _oeeiCode     :: !(Maybe Text)
+    , _oeeiMessage  :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationErrorErrorsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oeeiLocation'
+--
+-- * 'oeeiCode'
+--
+-- * 'oeeiMessage'
+operationErrorErrorsItem
+    :: OperationErrorErrorsItem
+operationErrorErrorsItem =
+    OperationErrorErrorsItem
+    { _oeeiLocation = Nothing
+    , _oeeiCode = Nothing
+    , _oeeiMessage = Nothing
+    }
+
+-- | [Output Only] Indicates the field in the request which caused the error.
+-- This property is optional.
+oeeiLocation :: Lens' OperationErrorErrorsItem (Maybe Text)
+oeeiLocation
+  = lens _oeeiLocation (\ s a -> s{_oeeiLocation = a})
+
+-- | [Output Only] The error type identifier for this error.
+oeeiCode :: Lens' OperationErrorErrorsItem (Maybe Text)
+oeeiCode = lens _oeeiCode (\ s a -> s{_oeeiCode = a})
+
+-- | [Output Only] An optional, human-readable error message.
+oeeiMessage :: Lens' OperationErrorErrorsItem (Maybe Text)
+oeeiMessage
+  = lens _oeeiMessage (\ s a -> s{_oeeiMessage = a})
+
+instance FromJSON OperationErrorErrorsItem where
+        parseJSON
+          = withObject "OperationErrorErrorsItem"
+              (\ o ->
+                 OperationErrorErrorsItem <$>
+                   (o .:? "location") <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON OperationErrorErrorsItem where
+        toJSON OperationErrorErrorsItem{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _oeeiLocation,
+                  ("code" .=) <$> _oeeiCode,
+                  ("message" .=) <$> _oeeiMessage])
+
 -- | A response containing a partial list of deployments and a page token
 -- used to build the next request if the request has been truncated.
 --
@@ -1206,62 +1212,111 @@ instance ToJSON DeploymentsListResponse where
                  [("nextPageToken" .=) <$> _dlrNextPageToken,
                   ("deployments" .=) <$> _dlrDeployments])
 
+-- |
 --
--- /See:/ 'errorsItem' smart constructor.
-data ErrorsItem = ErrorsItem
-    { _eiLocation :: !(Maybe Text)
-    , _eiCode     :: !(Maybe Text)
-    , _eiMessage  :: !(Maybe Text)
+-- /See:/ 'targetConfiguration' smart constructor.
+data TargetConfiguration = TargetConfiguration
+    { _tcConfig  :: !(Maybe Text)
+    , _tcImports :: !(Maybe [ImportFile])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ErrorsItem' with the minimum fields required to make a request.
+-- | Creates a value of 'TargetConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'eiLocation'
+-- * 'tcConfig'
 --
--- * 'eiCode'
---
--- * 'eiMessage'
-errorsItem
-    :: ErrorsItem
-errorsItem =
-    ErrorsItem
-    { _eiLocation = Nothing
-    , _eiCode = Nothing
-    , _eiMessage = Nothing
+-- * 'tcImports'
+targetConfiguration
+    :: TargetConfiguration
+targetConfiguration =
+    TargetConfiguration
+    { _tcConfig = Nothing
+    , _tcImports = Nothing
     }
 
--- | [Output Only] Indicates the field in the request which caused the error.
--- This property is optional.
-eiLocation :: Lens' ErrorsItem (Maybe Text)
-eiLocation
-  = lens _eiLocation (\ s a -> s{_eiLocation = a})
+-- | The configuration to use for this deployment.
+tcConfig :: Lens' TargetConfiguration (Maybe Text)
+tcConfig = lens _tcConfig (\ s a -> s{_tcConfig = a})
 
--- | [Output Only] The error type identifier for this error.
-eiCode :: Lens' ErrorsItem (Maybe Text)
-eiCode = lens _eiCode (\ s a -> s{_eiCode = a})
+-- | Specifies any files to import for this configuration. This can be used
+-- to import templates or other files. For example, you might import a text
+-- file in order to use the file in a template.
+tcImports :: Lens' TargetConfiguration [ImportFile]
+tcImports
+  = lens _tcImports (\ s a -> s{_tcImports = a}) .
+      _Default
+      . _Coerce
 
--- | [Output Only] An optional, human-readable error message.
-eiMessage :: Lens' ErrorsItem (Maybe Text)
-eiMessage
-  = lens _eiMessage (\ s a -> s{_eiMessage = a})
-
-instance FromJSON ErrorsItem where
+instance FromJSON TargetConfiguration where
         parseJSON
-          = withObject "ErrorsItem"
+          = withObject "TargetConfiguration"
               (\ o ->
-                 ErrorsItem <$>
-                   (o .:? "location") <*> (o .:? "code") <*>
-                     (o .:? "message"))
+                 TargetConfiguration <$>
+                   (o .:? "config") <*> (o .:? "imports" .!= mempty))
 
-instance ToJSON ErrorsItem where
-        toJSON ErrorsItem{..}
+instance ToJSON TargetConfiguration where
+        toJSON TargetConfiguration{..}
           = object
               (catMaybes
-                 [("location" .=) <$> _eiLocation,
-                  ("code" .=) <$> _eiCode,
-                  ("message" .=) <$> _eiMessage])
+                 [("config" .=) <$> _tcConfig,
+                  ("imports" .=) <$> _tcImports])
+
+--
+-- /See:/ 'operationWarningsItem' smart constructor.
+data OperationWarningsItem = OperationWarningsItem
+    { _owiData    :: !(Maybe [OperationWarningsItemDataItem])
+    , _owiCode    :: !(Maybe Text)
+    , _owiMessage :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationWarningsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'owiData'
+--
+-- * 'owiCode'
+--
+-- * 'owiMessage'
+operationWarningsItem
+    :: OperationWarningsItem
+operationWarningsItem =
+    OperationWarningsItem
+    { _owiData = Nothing
+    , _owiCode = Nothing
+    , _owiMessage = Nothing
+    }
+
+-- | [Output Only] Metadata for this warning in key: value format.
+owiData :: Lens' OperationWarningsItem [OperationWarningsItemDataItem]
+owiData
+  = lens _owiData (\ s a -> s{_owiData = a}) . _Default
+      . _Coerce
+
+-- | [Output Only] The warning type identifier for this warning.
+owiCode :: Lens' OperationWarningsItem (Maybe Text)
+owiCode = lens _owiCode (\ s a -> s{_owiCode = a})
+
+-- | [Output Only] Optional human-readable details for this warning.
+owiMessage :: Lens' OperationWarningsItem (Maybe Text)
+owiMessage
+  = lens _owiMessage (\ s a -> s{_owiMessage = a})
+
+instance FromJSON OperationWarningsItem where
+        parseJSON
+          = withObject "OperationWarningsItem"
+              (\ o ->
+                 OperationWarningsItem <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON OperationWarningsItem where
+        toJSON OperationWarningsItem{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _owiData, ("code" .=) <$> _owiCode,
+                  ("message" .=) <$> _owiMessage])
 
 -- |
 --
@@ -1436,53 +1491,3 @@ instance ToJSON Deployment where
                   ("description" .=) <$> _dDescription,
                   ("update" .=) <$> _dUpdate,
                   ("target" .=) <$> _dTarget])
-
--- |
---
--- /See:/ 'targetConfiguration' smart constructor.
-data TargetConfiguration = TargetConfiguration
-    { _tcConfig  :: !(Maybe Text)
-    , _tcImports :: !(Maybe [ImportFile])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'TargetConfiguration' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'tcConfig'
---
--- * 'tcImports'
-targetConfiguration
-    :: TargetConfiguration
-targetConfiguration =
-    TargetConfiguration
-    { _tcConfig = Nothing
-    , _tcImports = Nothing
-    }
-
--- | The configuration to use for this deployment.
-tcConfig :: Lens' TargetConfiguration (Maybe Text)
-tcConfig = lens _tcConfig (\ s a -> s{_tcConfig = a})
-
--- | Specifies any files to import for this configuration. This can be used
--- to import templates or other files. For example, you might import a text
--- file in order to use the file in a template.
-tcImports :: Lens' TargetConfiguration [ImportFile]
-tcImports
-  = lens _tcImports (\ s a -> s{_tcImports = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON TargetConfiguration where
-        parseJSON
-          = withObject "TargetConfiguration"
-              (\ o ->
-                 TargetConfiguration <$>
-                   (o .:? "config") <*> (o .:? "imports" .!= mempty))
-
-instance ToJSON TargetConfiguration where
-        toJSON TargetConfiguration{..}
-          = object
-              (catMaybes
-                 [("config" .=) <$> _tcConfig,
-                  ("imports" .=) <$> _tcImports])

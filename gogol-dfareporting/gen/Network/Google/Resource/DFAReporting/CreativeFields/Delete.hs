@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.CreativeFields.Delete
     , cfdQuotaUser
     , cfdPrettyPrint
     , cfdUserIP
-    , cfdProfileId
+    , cfdProFileId
     , cfdKey
     , cfdId
     , cfdOAuthToken
@@ -66,7 +66,7 @@ data CreativeFieldsDelete' = CreativeFieldsDelete'
     { _cfdQuotaUser   :: !(Maybe Text)
     , _cfdPrettyPrint :: !Bool
     , _cfdUserIP      :: !(Maybe Text)
-    , _cfdProfileId   :: !Int64
+    , _cfdProFileId   :: !Int64
     , _cfdKey         :: !(Maybe Key)
     , _cfdId          :: !Int64
     , _cfdOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +83,7 @@ data CreativeFieldsDelete' = CreativeFieldsDelete'
 --
 -- * 'cfdUserIP'
 --
--- * 'cfdProfileId'
+-- * 'cfdProFileId'
 --
 -- * 'cfdKey'
 --
@@ -96,12 +96,12 @@ creativeFieldsDelete'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> CreativeFieldsDelete'
-creativeFieldsDelete' pCfdProfileId_ pCfdId_ =
+creativeFieldsDelete' pCfdProFileId_ pCfdId_ =
     CreativeFieldsDelete'
     { _cfdQuotaUser = Nothing
     , _cfdPrettyPrint = True
     , _cfdUserIP = Nothing
-    , _cfdProfileId = pCfdProfileId_
+    , _cfdProFileId = pCfdProFileId_
     , _cfdKey = Nothing
     , _cfdId = pCfdId_
     , _cfdOAuthToken = Nothing
@@ -128,9 +128,9 @@ cfdUserIP
   = lens _cfdUserIP (\ s a -> s{_cfdUserIP = a})
 
 -- | User profile ID associated with this request.
-cfdProfileId :: Lens' CreativeFieldsDelete' Int64
-cfdProfileId
-  = lens _cfdProfileId (\ s a -> s{_cfdProfileId = a})
+cfdProFileId :: Lens' CreativeFieldsDelete' Int64
+cfdProFileId
+  = lens _cfdProFileId (\ s a -> s{_cfdProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -161,7 +161,7 @@ instance GoogleRequest CreativeFieldsDelete' where
         type Rs CreativeFieldsDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeFieldsDelete'{..}
-          = go _cfdProfileId _cfdId _cfdQuotaUser
+          = go _cfdProFileId _cfdId _cfdQuotaUser
               (Just _cfdPrettyPrint)
               _cfdUserIP
               _cfdFields

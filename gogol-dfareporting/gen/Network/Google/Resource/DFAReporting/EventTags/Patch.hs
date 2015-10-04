@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.EventTags.Patch
     , etpQuotaUser
     , etpPrettyPrint
     , etpUserIP
-    , etpProfileId
+    , etpProFileId
     , etpPayload
     , etpKey
     , etpId
@@ -59,7 +59,8 @@ type EventTagsPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] EventTag :> Patch '[JSON] EventTag
+                           ReqBody '[OctetStream] EventTag :>
+                             Patch '[JSON] EventTag
 
 -- | Updates an existing event tag. This method supports patch semantics.
 --
@@ -68,7 +69,7 @@ data EventTagsPatch' = EventTagsPatch'
     { _etpQuotaUser   :: !(Maybe Text)
     , _etpPrettyPrint :: !Bool
     , _etpUserIP      :: !(Maybe Text)
-    , _etpProfileId   :: !Int64
+    , _etpProFileId   :: !Int64
     , _etpPayload     :: !EventTag
     , _etpKey         :: !(Maybe Key)
     , _etpId          :: !Int64
@@ -86,7 +87,7 @@ data EventTagsPatch' = EventTagsPatch'
 --
 -- * 'etpUserIP'
 --
--- * 'etpProfileId'
+-- * 'etpProFileId'
 --
 -- * 'etpPayload'
 --
@@ -102,12 +103,12 @@ eventTagsPatch'
     -> EventTag -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> EventTagsPatch'
-eventTagsPatch' pEtpProfileId_ pEtpPayload_ pEtpId_ =
+eventTagsPatch' pEtpProFileId_ pEtpPayload_ pEtpId_ =
     EventTagsPatch'
     { _etpQuotaUser = Nothing
     , _etpPrettyPrint = True
     , _etpUserIP = Nothing
-    , _etpProfileId = pEtpProfileId_
+    , _etpProFileId = pEtpProFileId_
     , _etpPayload = pEtpPayload_
     , _etpKey = Nothing
     , _etpId = pEtpId_
@@ -135,9 +136,9 @@ etpUserIP
   = lens _etpUserIP (\ s a -> s{_etpUserIP = a})
 
 -- | User profile ID associated with this request.
-etpProfileId :: Lens' EventTagsPatch' Int64
-etpProfileId
-  = lens _etpProfileId (\ s a -> s{_etpProfileId = a})
+etpProFileId :: Lens' EventTagsPatch' Int64
+etpProFileId
+  = lens _etpProFileId (\ s a -> s{_etpProFileId = a})
 
 -- | Multipart request metadata.
 etpPayload :: Lens' EventTagsPatch' EventTag
@@ -173,7 +174,7 @@ instance GoogleRequest EventTagsPatch' where
         type Rs EventTagsPatch' = EventTag
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u EventTagsPatch'{..}
-          = go _etpProfileId (Just _etpId) _etpQuotaUser
+          = go _etpProFileId (Just _etpId) _etpQuotaUser
               (Just _etpPrettyPrint)
               _etpUserIP
               _etpFields

@@ -56,7 +56,7 @@ type SubscriptionsInsertResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Subscription :>
+                       ReqBody '[OctetStream] Subscription :>
                          Post '[JSON] Subscription
 
 -- | Adds a subscription for the authenticated user\'s channel.

@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.UserRolePermissionGroups.List
     , urpglQuotaUser
     , urpglPrettyPrint
     , urpglUserIP
-    , urpglProfileId
+    , urpglProFileId
     , urpglKey
     , urpglOAuthToken
     , urpglFields
@@ -65,7 +65,7 @@ data UserRolePermissionGroupsList' = UserRolePermissionGroupsList'
     { _urpglQuotaUser   :: !(Maybe Text)
     , _urpglPrettyPrint :: !Bool
     , _urpglUserIP      :: !(Maybe Text)
-    , _urpglProfileId   :: !Int64
+    , _urpglProFileId   :: !Int64
     , _urpglKey         :: !(Maybe Key)
     , _urpglOAuthToken  :: !(Maybe OAuthToken)
     , _urpglFields      :: !(Maybe Text)
@@ -81,7 +81,7 @@ data UserRolePermissionGroupsList' = UserRolePermissionGroupsList'
 --
 -- * 'urpglUserIP'
 --
--- * 'urpglProfileId'
+-- * 'urpglProFileId'
 --
 -- * 'urpglKey'
 --
@@ -91,12 +91,12 @@ data UserRolePermissionGroupsList' = UserRolePermissionGroupsList'
 userRolePermissionGroupsList'
     :: Int64 -- ^ 'profileId'
     -> UserRolePermissionGroupsList'
-userRolePermissionGroupsList' pUrpglProfileId_ =
+userRolePermissionGroupsList' pUrpglProFileId_ =
     UserRolePermissionGroupsList'
     { _urpglQuotaUser = Nothing
     , _urpglPrettyPrint = True
     , _urpglUserIP = Nothing
-    , _urpglProfileId = pUrpglProfileId_
+    , _urpglProFileId = pUrpglProFileId_
     , _urpglKey = Nothing
     , _urpglOAuthToken = Nothing
     , _urpglFields = Nothing
@@ -123,10 +123,10 @@ urpglUserIP
   = lens _urpglUserIP (\ s a -> s{_urpglUserIP = a})
 
 -- | User profile ID associated with this request.
-urpglProfileId :: Lens' UserRolePermissionGroupsList' Int64
-urpglProfileId
-  = lens _urpglProfileId
-      (\ s a -> s{_urpglProfileId = a})
+urpglProFileId :: Lens' UserRolePermissionGroupsList' Int64
+urpglProFileId
+  = lens _urpglProFileId
+      (\ s a -> s{_urpglProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -157,7 +157,7 @@ instance GoogleRequest UserRolePermissionGroupsList'
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           UserRolePermissionGroupsList'{..}
-          = go _urpglProfileId _urpglQuotaUser
+          = go _urpglProFileId _urpglQuotaUser
               (Just _urpglPrettyPrint)
               _urpglUserIP
               _urpglFields

@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Countries.List
     , couQuotaUser
     , couPrettyPrint
     , couUserIP
-    , couProfileId
+    , couProFileId
     , couKey
     , couOAuthToken
     , couFields
@@ -65,7 +65,7 @@ data CountriesList' = CountriesList'
     { _couQuotaUser   :: !(Maybe Text)
     , _couPrettyPrint :: !Bool
     , _couUserIP      :: !(Maybe Text)
-    , _couProfileId   :: !Int64
+    , _couProFileId   :: !Int64
     , _couKey         :: !(Maybe Key)
     , _couOAuthToken  :: !(Maybe OAuthToken)
     , _couFields      :: !(Maybe Text)
@@ -81,7 +81,7 @@ data CountriesList' = CountriesList'
 --
 -- * 'couUserIP'
 --
--- * 'couProfileId'
+-- * 'couProFileId'
 --
 -- * 'couKey'
 --
@@ -91,12 +91,12 @@ data CountriesList' = CountriesList'
 countriesList'
     :: Int64 -- ^ 'profileId'
     -> CountriesList'
-countriesList' pCouProfileId_ =
+countriesList' pCouProFileId_ =
     CountriesList'
     { _couQuotaUser = Nothing
     , _couPrettyPrint = True
     , _couUserIP = Nothing
-    , _couProfileId = pCouProfileId_
+    , _couProFileId = pCouProFileId_
     , _couKey = Nothing
     , _couOAuthToken = Nothing
     , _couFields = Nothing
@@ -122,9 +122,9 @@ couUserIP
   = lens _couUserIP (\ s a -> s{_couUserIP = a})
 
 -- | User profile ID associated with this request.
-couProfileId :: Lens' CountriesList' Int64
-couProfileId
-  = lens _couProfileId (\ s a -> s{_couProfileId = a})
+couProFileId :: Lens' CountriesList' Int64
+couProFileId
+  = lens _couProFileId (\ s a -> s{_couProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -151,7 +151,7 @@ instance GoogleRequest CountriesList' where
         type Rs CountriesList' = CountriesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CountriesList'{..}
-          = go _couProfileId _couQuotaUser
+          = go _couProFileId _couQuotaUser
               (Just _couPrettyPrint)
               _couUserIP
               _couFields

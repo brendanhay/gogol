@@ -58,7 +58,7 @@ type MarketplaceDealsInsertResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] AddOrderDealsRequest :>
+                           ReqBody '[OctetStream] AddOrderDealsRequest :>
                              Post '[JSON] AddOrderDealsResponse
 
 -- | Add new deals for the specified order

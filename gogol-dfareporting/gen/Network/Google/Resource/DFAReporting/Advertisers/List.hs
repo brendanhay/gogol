@@ -39,7 +39,7 @@ module Network.Google.Resource.DFAReporting.Advertisers.List
     , allSearchString
     , allIds
     , allIncludeAdvertisersWithoutGroupsOnly
-    , allProfileId
+    , allProFileId
     , allSortOrder
     , allAdvertiserGroupIds
     , allKey
@@ -61,20 +61,16 @@ type AdvertisersListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "advertisers" :>
-           QueryParam "status" Status :>
+           QueryParam "status" AdvertisersListStatus :>
              QueryParam "onlyParent" Bool :>
                QueryParam "searchString" Text :>
                  QueryParams "ids" Int64 :>
                    QueryParam "includeAdvertisersWithoutGroupsOnly" Bool
                      :>
-                     QueryParam "sortOrder"
-                       DfareportingAdvertisersListSortOrder
-                       :>
+                     QueryParam "sortOrder" AdvertisersListSortOrder :>
                        QueryParams "advertiserGroupIds" Int64 :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "sortField"
-                             DfareportingAdvertisersListSortField
-                             :>
+                           QueryParam "sortField" AdvertisersListSortField :>
                              QueryParam "subaccountId" Int64 :>
                                QueryParams "floodlightConfigurationIds" Int64 :>
                                  QueryParam "maxResults" Int32 :>
@@ -93,7 +89,7 @@ type AdvertisersListResource =
 --
 -- /See:/ 'advertisersList'' smart constructor.
 data AdvertisersList' = AdvertisersList'
-    { _allStatus                              :: !(Maybe Status)
+    { _allStatus                              :: !(Maybe AdvertisersListStatus)
     , _allQuotaUser                           :: !(Maybe Text)
     , _allPrettyPrint                         :: !Bool
     , _allUserIP                              :: !(Maybe Text)
@@ -101,12 +97,12 @@ data AdvertisersList' = AdvertisersList'
     , _allSearchString                        :: !(Maybe Text)
     , _allIds                                 :: !(Maybe [Int64])
     , _allIncludeAdvertisersWithoutGroupsOnly :: !(Maybe Bool)
-    , _allProfileId                           :: !Int64
-    , _allSortOrder                           :: !(Maybe DfareportingAdvertisersListSortOrder)
+    , _allProFileId                           :: !Int64
+    , _allSortOrder                           :: !(Maybe AdvertisersListSortOrder)
     , _allAdvertiserGroupIds                  :: !(Maybe [Int64])
     , _allKey                                 :: !(Maybe Key)
     , _allPageToken                           :: !(Maybe Text)
-    , _allSortField                           :: !(Maybe DfareportingAdvertisersListSortField)
+    , _allSortField                           :: !(Maybe AdvertisersListSortField)
     , _allSubAccountId                        :: !(Maybe Int64)
     , _allOAuthToken                          :: !(Maybe OAuthToken)
     , _allFloodlightConfigurationIds          :: !(Maybe [Int64])
@@ -134,7 +130,7 @@ data AdvertisersList' = AdvertisersList'
 --
 -- * 'allIncludeAdvertisersWithoutGroupsOnly'
 --
--- * 'allProfileId'
+-- * 'allProFileId'
 --
 -- * 'allSortOrder'
 --
@@ -158,7 +154,7 @@ data AdvertisersList' = AdvertisersList'
 advertisersList'
     :: Int64 -- ^ 'profileId'
     -> AdvertisersList'
-advertisersList' pAllProfileId_ =
+advertisersList' pAllProFileId_ =
     AdvertisersList'
     { _allStatus = Nothing
     , _allQuotaUser = Nothing
@@ -168,7 +164,7 @@ advertisersList' pAllProfileId_ =
     , _allSearchString = Nothing
     , _allIds = Nothing
     , _allIncludeAdvertisersWithoutGroupsOnly = Nothing
-    , _allProfileId = pAllProfileId_
+    , _allProFileId = pAllProFileId_
     , _allSortOrder = Nothing
     , _allAdvertiserGroupIds = Nothing
     , _allKey = Nothing
@@ -182,7 +178,7 @@ advertisersList' pAllProfileId_ =
     }
 
 -- | Select only advertisers with the specified status.
-allStatus :: Lens' AdvertisersList' (Maybe Status)
+allStatus :: Lens' AdvertisersList' (Maybe AdvertisersListStatus)
 allStatus
   = lens _allStatus (\ s a -> s{_allStatus = a})
 
@@ -238,12 +234,12 @@ allIncludeAdvertisersWithoutGroupsOnly
          s{_allIncludeAdvertisersWithoutGroupsOnly = a})
 
 -- | User profile ID associated with this request.
-allProfileId :: Lens' AdvertisersList' Int64
-allProfileId
-  = lens _allProfileId (\ s a -> s{_allProfileId = a})
+allProFileId :: Lens' AdvertisersList' Int64
+allProFileId
+  = lens _allProFileId (\ s a -> s{_allProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-allSortOrder :: Lens' AdvertisersList' (Maybe DfareportingAdvertisersListSortOrder)
+allSortOrder :: Lens' AdvertisersList' (Maybe AdvertisersListSortOrder)
 allSortOrder
   = lens _allSortOrder (\ s a -> s{_allSortOrder = a})
 
@@ -267,7 +263,7 @@ allPageToken
   = lens _allPageToken (\ s a -> s{_allPageToken = a})
 
 -- | Field by which to sort the list.
-allSortField :: Lens' AdvertisersList' (Maybe DfareportingAdvertisersListSortField)
+allSortField :: Lens' AdvertisersList' (Maybe AdvertisersListSortField)
 allSortField
   = lens _allSortField (\ s a -> s{_allSortField = a})
 
@@ -310,7 +306,7 @@ instance GoogleRequest AdvertisersList' where
         type Rs AdvertisersList' = AdvertisersListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdvertisersList'{..}
-          = go _allProfileId _allStatus _allOnlyParent
+          = go _allProFileId _allStatus _allOnlyParent
               _allSearchString
               (_allIds ^. _Default)
               _allIncludeAdvertisersWithoutGroupsOnly

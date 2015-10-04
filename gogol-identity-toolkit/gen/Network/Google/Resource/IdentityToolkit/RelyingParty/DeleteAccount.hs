@@ -54,7 +54,7 @@ type RelyingPartyDeleteAccountResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON]
+                     ReqBody '[OctetStream]
                        IdentitytoolkitRelyingPartyDeleteAccountRequest
                        :> Post '[JSON] DeleteAccountResponse
 

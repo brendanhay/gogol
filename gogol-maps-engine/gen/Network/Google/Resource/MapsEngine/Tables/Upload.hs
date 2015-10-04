@@ -59,7 +59,7 @@ type TablesUploadResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Table :> Post '[JSON] Table
+                       ReqBody '[OctetStream] Table :> Post '[JSON] Table
 
 -- | Create a placeholder table asset to which table files can be uploaded.
 -- Once the placeholder has been created, files are uploaded to the

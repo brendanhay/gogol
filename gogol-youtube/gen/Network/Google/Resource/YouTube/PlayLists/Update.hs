@@ -59,7 +59,8 @@ type PlayListsUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] PlayList :> Put '[JSON] PlayList
+                         ReqBody '[OctetStream] PlayList :>
+                           Put '[JSON] PlayList
 
 -- | Modifies a playlist. For example, you could change a playlist\'s title,
 -- description, or privacy status.

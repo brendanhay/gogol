@@ -60,7 +60,7 @@ type TargetVPNGatewaysInsertResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] TargetVPNGateway :>
+                           ReqBody '[OctetStream] TargetVPNGateway :>
                              Post '[JSON] Operation
 
 -- | Creates a TargetVpnGateway resource in the specified project and region

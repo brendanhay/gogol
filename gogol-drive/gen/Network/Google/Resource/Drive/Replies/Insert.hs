@@ -60,7 +60,7 @@ type RepliesInsertResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] CommentReply :>
+                             ReqBody '[OctetStream] CommentReply :>
                                Post '[JSON] CommentReply
 
 -- | Creates a new reply to the given comment.

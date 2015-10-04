@@ -67,7 +67,7 @@ type InstallsUpdateResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] Install :>
+                                   ReqBody '[OctetStream] Install :>
                                      Put '[JSON] Install
 
 -- | Requests to install the latest version of an app to a device. If the app

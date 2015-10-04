@@ -58,15 +58,15 @@ module Network.Google.OAuth2
     , jwk
     , jKeys
 
-    -- ** KeysItem
-    , KeysItem
-    , keysItem
-    , kiAlg
-    , kiUse
-    , kiKid
-    , kiN
-    , kiE
-    , kiKty
+    -- ** JWKKeysItem
+    , JWKKeysItem
+    , jwkKeysItem
+    , jkiAlg
+    , jkiUse
+    , jkiKid
+    , jkiN
+    , jkiE
+    , jkiKty
 
     -- ** UserInfoplus
     , UserInfoplus

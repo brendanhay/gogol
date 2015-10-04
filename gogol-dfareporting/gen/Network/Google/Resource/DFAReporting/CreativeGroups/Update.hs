@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.CreativeGroups.Update
     , cguQuotaUser
     , cguPrettyPrint
     , cguUserIP
-    , cguProfileId
+    , cguProFileId
     , cguPayload
     , cguKey
     , cguOAuthToken
@@ -57,7 +57,7 @@ type CreativeGroupsUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] CreativeGroup :>
+                         ReqBody '[OctetStream] CreativeGroup :>
                            Put '[JSON] CreativeGroup
 
 -- | Updates an existing creative group.
@@ -67,7 +67,7 @@ data CreativeGroupsUpdate' = CreativeGroupsUpdate'
     { _cguQuotaUser   :: !(Maybe Text)
     , _cguPrettyPrint :: !Bool
     , _cguUserIP      :: !(Maybe Text)
-    , _cguProfileId   :: !Int64
+    , _cguProFileId   :: !Int64
     , _cguPayload     :: !CreativeGroup
     , _cguKey         :: !(Maybe Key)
     , _cguOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data CreativeGroupsUpdate' = CreativeGroupsUpdate'
 --
 -- * 'cguUserIP'
 --
--- * 'cguProfileId'
+-- * 'cguProFileId'
 --
 -- * 'cguPayload'
 --
@@ -97,12 +97,12 @@ creativeGroupsUpdate'
     :: Int64 -- ^ 'profileId'
     -> CreativeGroup -- ^ 'payload'
     -> CreativeGroupsUpdate'
-creativeGroupsUpdate' pCguProfileId_ pCguPayload_ =
+creativeGroupsUpdate' pCguProFileId_ pCguPayload_ =
     CreativeGroupsUpdate'
     { _cguQuotaUser = Nothing
     , _cguPrettyPrint = True
     , _cguUserIP = Nothing
-    , _cguProfileId = pCguProfileId_
+    , _cguProFileId = pCguProFileId_
     , _cguPayload = pCguPayload_
     , _cguKey = Nothing
     , _cguOAuthToken = Nothing
@@ -129,9 +129,9 @@ cguUserIP
   = lens _cguUserIP (\ s a -> s{_cguUserIP = a})
 
 -- | User profile ID associated with this request.
-cguProfileId :: Lens' CreativeGroupsUpdate' Int64
-cguProfileId
-  = lens _cguProfileId (\ s a -> s{_cguProfileId = a})
+cguProFileId :: Lens' CreativeGroupsUpdate' Int64
+cguProFileId
+  = lens _cguProFileId (\ s a -> s{_cguProFileId = a})
 
 -- | Multipart request metadata.
 cguPayload :: Lens' CreativeGroupsUpdate' CreativeGroup
@@ -163,7 +163,7 @@ instance GoogleRequest CreativeGroupsUpdate' where
         type Rs CreativeGroupsUpdate' = CreativeGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeGroupsUpdate'{..}
-          = go _cguProfileId _cguQuotaUser
+          = go _cguProFileId _cguQuotaUser
               (Just _cguPrettyPrint)
               _cguUserIP
               _cguFields

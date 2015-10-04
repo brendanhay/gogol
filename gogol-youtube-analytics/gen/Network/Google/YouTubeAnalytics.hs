@@ -58,6 +58,12 @@ module Network.Google.YouTubeAnalytics
 
     -- * Types
 
+    -- ** GroupContentDetails
+    , GroupContentDetails
+    , groupContentDetails
+    , gcdItemType
+    , gcdItemCount
+
     -- ** Group
     , Group
     , group'
@@ -67,37 +73,18 @@ module Network.Google.YouTubeAnalytics
     , gContentDetails
     , gId
 
-    -- ** ColumnHeadersItem
-    , ColumnHeadersItem
-    , columnHeadersItem
-    , chiColumnType
-    , chiName
-    , chiDataType
+    -- ** GroupItemResource
+    , GroupItemResource
+    , groupItemResource
+    , girKind
+    , girId
 
-    -- ** Snippet
-    , Snippet
-    , snippet
-    , sPublishedAt
-    , sTitle
-
-    -- ** ContentDetails
-    , ContentDetails
-    , contentDetails
-    , cdItemType
-    , cdItemCount
-
-    -- ** TimeSpan
-    , TimeSpan
-    , timeSpan
-    , tsStartTime
-    , tsEndTime
-
-    -- ** OutputsItem
-    , OutputsItem
-    , outputsItem
-    , oiFormat
-    , oiDownloadURL
-    , oiType
+    -- ** ResultTableColumnHeadersItem
+    , ResultTableColumnHeadersItem
+    , resultTableColumnHeadersItem
+    , rtchiColumnType
+    , rtchiName
+    , rtchiDataType
 
     -- ** ResultTable
     , ResultTable
@@ -115,12 +102,6 @@ module Network.Google.YouTubeAnalytics
     , brdId
     , brdType
 
-    -- ** Resource
-    , Resource
-    , resource
-    , rKind
-    , rId
-
     -- ** BatchReport
     , BatchReport
     , batchReport
@@ -130,6 +111,12 @@ module Network.Google.YouTubeAnalytics
     , brTimeSpan
     , brOutputs
     , brId
+
+    -- ** GroupSnippet
+    , GroupSnippet
+    , groupSnippet
+    , gsPublishedAt
+    , gsTitle
 
     -- ** GroupItem
     , GroupItem
@@ -151,6 +138,19 @@ module Network.Google.YouTubeAnalytics
     , batchReportList
     , brlKind
     , brlItems
+
+    -- ** BatchReportOutputsItem
+    , BatchReportOutputsItem
+    , batchReportOutputsItem
+    , broiFormat
+    , broiDownloadURL
+    , broiType
+
+    -- ** BatchReportTimeSpan
+    , BatchReportTimeSpan
+    , batchReportTimeSpan
+    , brtsStartTime
+    , brtsEndTime
 
     -- ** GroupItemListResponse
     , GroupItemListResponse
@@ -189,10 +189,10 @@ type YouTubeAnalyticsAPI =
        GroupsDeleteResource
        :<|> GroupsUpdateResource
        :<|> ReportsQueryResource
+       :<|> BatchReportsListResource
        :<|> GroupItemsInsertResource
        :<|> GroupItemsListResource
        :<|> GroupItemsDeleteResource
-       :<|> BatchReportsListResource
        :<|> BatchReportDefinitionsListResource
 
 youTubeAnalyticsAPI :: Proxy YouTubeAnalyticsAPI

@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Placements.Update
     , puQuotaUser
     , puPrettyPrint
     , puUserIP
-    , puProfileId
+    , puProFileId
     , puPayload
     , puKey
     , puOAuthToken
@@ -57,7 +57,8 @@ type PlacementsUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Placement :> Put '[JSON] Placement
+                         ReqBody '[OctetStream] Placement :>
+                           Put '[JSON] Placement
 
 -- | Updates an existing placement.
 --
@@ -66,7 +67,7 @@ data PlacementsUpdate' = PlacementsUpdate'
     { _puQuotaUser   :: !(Maybe Text)
     , _puPrettyPrint :: !Bool
     , _puUserIP      :: !(Maybe Text)
-    , _puProfileId   :: !Int64
+    , _puProFileId   :: !Int64
     , _puPayload     :: !Placement
     , _puKey         :: !(Maybe Key)
     , _puOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +84,7 @@ data PlacementsUpdate' = PlacementsUpdate'
 --
 -- * 'puUserIP'
 --
--- * 'puProfileId'
+-- * 'puProFileId'
 --
 -- * 'puPayload'
 --
@@ -96,12 +97,12 @@ placementsUpdate'
     :: Int64 -- ^ 'profileId'
     -> Placement -- ^ 'payload'
     -> PlacementsUpdate'
-placementsUpdate' pPuProfileId_ pPuPayload_ =
+placementsUpdate' pPuProFileId_ pPuPayload_ =
     PlacementsUpdate'
     { _puQuotaUser = Nothing
     , _puPrettyPrint = True
     , _puUserIP = Nothing
-    , _puProfileId = pPuProfileId_
+    , _puProFileId = pPuProFileId_
     , _puPayload = pPuPayload_
     , _puKey = Nothing
     , _puOAuthToken = Nothing
@@ -127,9 +128,9 @@ puUserIP :: Lens' PlacementsUpdate' (Maybe Text)
 puUserIP = lens _puUserIP (\ s a -> s{_puUserIP = a})
 
 -- | User profile ID associated with this request.
-puProfileId :: Lens' PlacementsUpdate' Int64
-puProfileId
-  = lens _puProfileId (\ s a -> s{_puProfileId = a})
+puProFileId :: Lens' PlacementsUpdate' Int64
+puProFileId
+  = lens _puProFileId (\ s a -> s{_puProFileId = a})
 
 -- | Multipart request metadata.
 puPayload :: Lens' PlacementsUpdate' Placement
@@ -159,7 +160,7 @@ instance GoogleRequest PlacementsUpdate' where
         type Rs PlacementsUpdate' = Placement
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementsUpdate'{..}
-          = go _puProfileId _puQuotaUser (Just _puPrettyPrint)
+          = go _puProFileId _puQuotaUser (Just _puPrettyPrint)
               _puUserIP
               _puFields
               _puKey

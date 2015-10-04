@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Campaigns.Patch
     , cpQuotaUser
     , cpPrettyPrint
     , cpUserIP
-    , cpProfileId
+    , cpProFileId
     , cpPayload
     , cpKey
     , cpId
@@ -59,7 +59,8 @@ type CampaignsPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Campaign :> Patch '[JSON] Campaign
+                           ReqBody '[OctetStream] Campaign :>
+                             Patch '[JSON] Campaign
 
 -- | Updates an existing campaign. This method supports patch semantics.
 --
@@ -68,7 +69,7 @@ data CampaignsPatch' = CampaignsPatch'
     { _cpQuotaUser   :: !(Maybe Text)
     , _cpPrettyPrint :: !Bool
     , _cpUserIP      :: !(Maybe Text)
-    , _cpProfileId   :: !Int64
+    , _cpProFileId   :: !Int64
     , _cpPayload     :: !Campaign
     , _cpKey         :: !(Maybe Key)
     , _cpId          :: !Int64
@@ -86,7 +87,7 @@ data CampaignsPatch' = CampaignsPatch'
 --
 -- * 'cpUserIP'
 --
--- * 'cpProfileId'
+-- * 'cpProFileId'
 --
 -- * 'cpPayload'
 --
@@ -102,12 +103,12 @@ campaignsPatch'
     -> Campaign -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> CampaignsPatch'
-campaignsPatch' pCpProfileId_ pCpPayload_ pCpId_ =
+campaignsPatch' pCpProFileId_ pCpPayload_ pCpId_ =
     CampaignsPatch'
     { _cpQuotaUser = Nothing
     , _cpPrettyPrint = True
     , _cpUserIP = Nothing
-    , _cpProfileId = pCpProfileId_
+    , _cpProFileId = pCpProFileId_
     , _cpPayload = pCpPayload_
     , _cpKey = Nothing
     , _cpId = pCpId_
@@ -134,9 +135,9 @@ cpUserIP :: Lens' CampaignsPatch' (Maybe Text)
 cpUserIP = lens _cpUserIP (\ s a -> s{_cpUserIP = a})
 
 -- | User profile ID associated with this request.
-cpProfileId :: Lens' CampaignsPatch' Int64
-cpProfileId
-  = lens _cpProfileId (\ s a -> s{_cpProfileId = a})
+cpProFileId :: Lens' CampaignsPatch' Int64
+cpProFileId
+  = lens _cpProFileId (\ s a -> s{_cpProFileId = a})
 
 -- | Multipart request metadata.
 cpPayload :: Lens' CampaignsPatch' Campaign
@@ -170,7 +171,7 @@ instance GoogleRequest CampaignsPatch' where
         type Rs CampaignsPatch' = Campaign
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CampaignsPatch'{..}
-          = go _cpProfileId (Just _cpId) _cpQuotaUser
+          = go _cpProFileId (Just _cpId) _cpQuotaUser
               (Just _cpPrettyPrint)
               _cpUserIP
               _cpFields

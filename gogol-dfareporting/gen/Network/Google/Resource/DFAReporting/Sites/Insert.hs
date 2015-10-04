@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Sites.Insert
     , siQuotaUser
     , siPrettyPrint
     , siUserIP
-    , siProfileId
+    , siProFileId
     , siPayload
     , siKey
     , siOAuthToken
@@ -57,7 +57,7 @@ type SitesInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Site :> Post '[JSON] Site
+                         ReqBody '[OctetStream] Site :> Post '[JSON] Site
 
 -- | Inserts a new site.
 --
@@ -66,7 +66,7 @@ data SitesInsert' = SitesInsert'
     { _siQuotaUser   :: !(Maybe Text)
     , _siPrettyPrint :: !Bool
     , _siUserIP      :: !(Maybe Text)
-    , _siProfileId   :: !Int64
+    , _siProFileId   :: !Int64
     , _siPayload     :: !Site
     , _siKey         :: !(Maybe Key)
     , _siOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +83,7 @@ data SitesInsert' = SitesInsert'
 --
 -- * 'siUserIP'
 --
--- * 'siProfileId'
+-- * 'siProFileId'
 --
 -- * 'siPayload'
 --
@@ -96,12 +96,12 @@ sitesInsert'
     :: Int64 -- ^ 'profileId'
     -> Site -- ^ 'payload'
     -> SitesInsert'
-sitesInsert' pSiProfileId_ pSiPayload_ =
+sitesInsert' pSiProFileId_ pSiPayload_ =
     SitesInsert'
     { _siQuotaUser = Nothing
     , _siPrettyPrint = True
     , _siUserIP = Nothing
-    , _siProfileId = pSiProfileId_
+    , _siProFileId = pSiProFileId_
     , _siPayload = pSiPayload_
     , _siKey = Nothing
     , _siOAuthToken = Nothing
@@ -127,9 +127,9 @@ siUserIP :: Lens' SitesInsert' (Maybe Text)
 siUserIP = lens _siUserIP (\ s a -> s{_siUserIP = a})
 
 -- | User profile ID associated with this request.
-siProfileId :: Lens' SitesInsert' Int64
-siProfileId
-  = lens _siProfileId (\ s a -> s{_siProfileId = a})
+siProFileId :: Lens' SitesInsert' Int64
+siProFileId
+  = lens _siProFileId (\ s a -> s{_siProFileId = a})
 
 -- | Multipart request metadata.
 siPayload :: Lens' SitesInsert' Site
@@ -159,7 +159,7 @@ instance GoogleRequest SitesInsert' where
         type Rs SitesInsert' = Site
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u SitesInsert'{..}
-          = go _siProfileId _siQuotaUser (Just _siPrettyPrint)
+          = go _siProFileId _siQuotaUser (Just _siPrettyPrint)
               _siUserIP
               _siFields
               _siKey

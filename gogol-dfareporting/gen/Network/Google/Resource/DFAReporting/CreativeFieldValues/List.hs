@@ -37,7 +37,7 @@ module Network.Google.Resource.DFAReporting.CreativeFieldValues.List
     , cfvlUserIP
     , cfvlSearchString
     , cfvlIds
-    , cfvlProfileId
+    , cfvlProFileId
     , cfvlSortOrder
     , cfvlKey
     , cfvlPageToken
@@ -61,11 +61,11 @@ type CreativeFieldValuesListResource =
                QueryParam "searchString" Text :>
                  QueryParams "ids" Int64 :>
                    QueryParam "sortOrder"
-                     DfareportingCreativeFieldValuesListSortOrder
+                     CreativeFieldValuesListSortOrder
                      :>
                      QueryParam "pageToken" Text :>
                        QueryParam "sortField"
-                         DfareportingCreativeFieldValuesListSortField
+                         CreativeFieldValuesListSortField
                          :>
                          QueryParam "maxResults" Int32 :>
                            QueryParam "quotaUser" Text :>
@@ -88,11 +88,11 @@ data CreativeFieldValuesList' = CreativeFieldValuesList'
     , _cfvlUserIP          :: !(Maybe Text)
     , _cfvlSearchString    :: !(Maybe Text)
     , _cfvlIds             :: !(Maybe [Int64])
-    , _cfvlProfileId       :: !Int64
-    , _cfvlSortOrder       :: !(Maybe DfareportingCreativeFieldValuesListSortOrder)
+    , _cfvlProFileId       :: !Int64
+    , _cfvlSortOrder       :: !(Maybe CreativeFieldValuesListSortOrder)
     , _cfvlKey             :: !(Maybe Key)
     , _cfvlPageToken       :: !(Maybe Text)
-    , _cfvlSortField       :: !(Maybe DfareportingCreativeFieldValuesListSortField)
+    , _cfvlSortField       :: !(Maybe CreativeFieldValuesListSortField)
     , _cfvlOAuthToken      :: !(Maybe OAuthToken)
     , _cfvlMaxResults      :: !(Maybe Int32)
     , _cfvlFields          :: !(Maybe Text)
@@ -114,7 +114,7 @@ data CreativeFieldValuesList' = CreativeFieldValuesList'
 --
 -- * 'cfvlIds'
 --
--- * 'cfvlProfileId'
+-- * 'cfvlProFileId'
 --
 -- * 'cfvlSortOrder'
 --
@@ -133,7 +133,7 @@ creativeFieldValuesList'
     :: Int64 -- ^ 'creativeFieldId'
     -> Int64 -- ^ 'profileId'
     -> CreativeFieldValuesList'
-creativeFieldValuesList' pCfvlCreativeFieldId_ pCfvlProfileId_ =
+creativeFieldValuesList' pCfvlCreativeFieldId_ pCfvlProFileId_ =
     CreativeFieldValuesList'
     { _cfvlCreativeFieldId = pCfvlCreativeFieldId_
     , _cfvlQuotaUser = Nothing
@@ -141,7 +141,7 @@ creativeFieldValuesList' pCfvlCreativeFieldId_ pCfvlProfileId_ =
     , _cfvlUserIP = Nothing
     , _cfvlSearchString = Nothing
     , _cfvlIds = Nothing
-    , _cfvlProfileId = pCfvlProfileId_
+    , _cfvlProFileId = pCfvlProFileId_
     , _cfvlSortOrder = Nothing
     , _cfvlKey = Nothing
     , _cfvlPageToken = Nothing
@@ -191,13 +191,13 @@ cfvlIds
       . _Coerce
 
 -- | User profile ID associated with this request.
-cfvlProfileId :: Lens' CreativeFieldValuesList' Int64
-cfvlProfileId
-  = lens _cfvlProfileId
-      (\ s a -> s{_cfvlProfileId = a})
+cfvlProFileId :: Lens' CreativeFieldValuesList' Int64
+cfvlProFileId
+  = lens _cfvlProFileId
+      (\ s a -> s{_cfvlProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-cfvlSortOrder :: Lens' CreativeFieldValuesList' (Maybe DfareportingCreativeFieldValuesListSortOrder)
+cfvlSortOrder :: Lens' CreativeFieldValuesList' (Maybe CreativeFieldValuesListSortOrder)
 cfvlSortOrder
   = lens _cfvlSortOrder
       (\ s a -> s{_cfvlSortOrder = a})
@@ -215,7 +215,7 @@ cfvlPageToken
       (\ s a -> s{_cfvlPageToken = a})
 
 -- | Field by which to sort the list.
-cfvlSortField :: Lens' CreativeFieldValuesList' (Maybe DfareportingCreativeFieldValuesListSortField)
+cfvlSortField :: Lens' CreativeFieldValuesList' (Maybe CreativeFieldValuesListSortField)
 cfvlSortField
   = lens _cfvlSortField
       (\ s a -> s{_cfvlSortField = a})
@@ -246,7 +246,7 @@ instance GoogleRequest CreativeFieldValuesList' where
              CreativeFieldValuesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeFieldValuesList'{..}
-          = go _cfvlProfileId _cfvlCreativeFieldId
+          = go _cfvlProFileId _cfvlCreativeFieldId
               _cfvlSearchString
               (_cfvlIds ^. _Default)
               _cfvlSortOrder

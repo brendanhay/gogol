@@ -54,7 +54,7 @@ type RelyingPartyUploadAccountResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON]
+                     ReqBody '[OctetStream]
                        IdentitytoolkitRelyingPartyUploadAccountRequest
                        :> Post '[JSON] UploadAccountResponse
 

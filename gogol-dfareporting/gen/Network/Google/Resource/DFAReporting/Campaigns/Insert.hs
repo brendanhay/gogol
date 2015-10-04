@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Campaigns.Insert
     , ciQuotaUser
     , ciPrettyPrint
     , ciUserIP
-    , ciProfileId
+    , ciProFileId
     , ciPayload
     , ciDefaultLandingPageURL
     , ciKey
@@ -61,7 +61,8 @@ type CampaignsInsertResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Campaign :> Post '[JSON] Campaign
+                             ReqBody '[OctetStream] Campaign :>
+                               Post '[JSON] Campaign
 
 -- | Inserts a new campaign.
 --
@@ -70,7 +71,7 @@ data CampaignsInsert' = CampaignsInsert'
     { _ciQuotaUser              :: !(Maybe Text)
     , _ciPrettyPrint            :: !Bool
     , _ciUserIP                 :: !(Maybe Text)
-    , _ciProfileId              :: !Int64
+    , _ciProFileId              :: !Int64
     , _ciPayload                :: !Campaign
     , _ciDefaultLandingPageURL  :: !Text
     , _ciKey                    :: !(Maybe Key)
@@ -89,7 +90,7 @@ data CampaignsInsert' = CampaignsInsert'
 --
 -- * 'ciUserIP'
 --
--- * 'ciProfileId'
+-- * 'ciProFileId'
 --
 -- * 'ciPayload'
 --
@@ -108,12 +109,12 @@ campaignsInsert'
     -> Text -- ^ 'defaultLandingPageUrl'
     -> Text -- ^ 'defaultLandingPageName'
     -> CampaignsInsert'
-campaignsInsert' pCiProfileId_ pCiPayload_ pCiDefaultLandingPageURL_ pCiDefaultLandingPageName_ =
+campaignsInsert' pCiProFileId_ pCiPayload_ pCiDefaultLandingPageURL_ pCiDefaultLandingPageName_ =
     CampaignsInsert'
     { _ciQuotaUser = Nothing
     , _ciPrettyPrint = True
     , _ciUserIP = Nothing
-    , _ciProfileId = pCiProfileId_
+    , _ciProFileId = pCiProFileId_
     , _ciPayload = pCiPayload_
     , _ciDefaultLandingPageURL = pCiDefaultLandingPageURL_
     , _ciKey = Nothing
@@ -141,9 +142,9 @@ ciUserIP :: Lens' CampaignsInsert' (Maybe Text)
 ciUserIP = lens _ciUserIP (\ s a -> s{_ciUserIP = a})
 
 -- | User profile ID associated with this request.
-ciProfileId :: Lens' CampaignsInsert' Int64
-ciProfileId
-  = lens _ciProfileId (\ s a -> s{_ciProfileId = a})
+ciProFileId :: Lens' CampaignsInsert' Int64
+ciProFileId
+  = lens _ciProFileId (\ s a -> s{_ciProFileId = a})
 
 -- | Multipart request metadata.
 ciPayload :: Lens' CampaignsInsert' Campaign
@@ -186,7 +187,7 @@ instance GoogleRequest CampaignsInsert' where
         type Rs CampaignsInsert' = Campaign
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CampaignsInsert'{..}
-          = go _ciProfileId (Just _ciDefaultLandingPageName)
+          = go _ciProFileId (Just _ciDefaultLandingPageName)
               (Just _ciDefaultLandingPageURL)
               _ciQuotaUser
               (Just _ciPrettyPrint)

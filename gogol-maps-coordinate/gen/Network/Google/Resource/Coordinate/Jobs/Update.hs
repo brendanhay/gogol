@@ -62,7 +62,7 @@ type JobsUpdateResource =
        Capture "teamId" Text :>
          "jobs" :>
            Capture "jobId" Word64 :>
-             QueryParam "progress" CoordinateJobsUpdateProgress :>
+             QueryParam "progress" JobsUpdateProgress :>
                QueryParam "note" Text :>
                  QueryParam "customerPhoneNumber" Text :>
                    QueryParam "customerName" Text :>
@@ -80,7 +80,7 @@ type JobsUpdateResource =
                                            QueryParam "oauth_token" OAuthToken
                                              :>
                                              QueryParam "alt" AltJSON :>
-                                               ReqBody '[JSON] Job :>
+                                               ReqBody '[OctetStream] Job :>
                                                  Put '[JSON] Job
 
 -- | Updates a job. Fields that are set in the job state will be updated.
@@ -90,7 +90,7 @@ data JobsUpdate' = JobsUpdate'
     { _juQuotaUser           :: !(Maybe Text)
     , _juPrettyPrint         :: !Bool
     , _juJobId               :: !Word64
-    , _juProgress            :: !(Maybe CoordinateJobsUpdateProgress)
+    , _juProgress            :: !(Maybe JobsUpdateProgress)
     , _juNote                :: !(Maybe Text)
     , _juUserIP              :: !(Maybe Text)
     , _juTeamId              :: !Text
@@ -195,7 +195,7 @@ juJobId :: Lens' JobsUpdate' Word64
 juJobId = lens _juJobId (\ s a -> s{_juJobId = a})
 
 -- | Job progress
-juProgress :: Lens' JobsUpdate' (Maybe CoordinateJobsUpdateProgress)
+juProgress :: Lens' JobsUpdate' (Maybe JobsUpdateProgress)
 juProgress
   = lens _juProgress (\ s a -> s{_juProgress = a})
 

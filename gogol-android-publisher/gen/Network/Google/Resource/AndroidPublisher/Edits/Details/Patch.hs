@@ -59,7 +59,7 @@ type EditsDetailsPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] AppDetails :>
+                           ReqBody '[OctetStream] AppDetails :>
                              Patch '[JSON] AppDetails
 
 -- | Updates app details for this edit. This method supports patch semantics.

@@ -59,7 +59,7 @@ type BucketAccessControlsUpdateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] BucketAccessControl :>
+                           ReqBody '[OctetStream] BucketAccessControl :>
                              Put '[JSON] BucketAccessControl
 
 -- | Updates an ACL entry on the specified bucket.

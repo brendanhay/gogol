@@ -57,10 +57,8 @@ type ScoresListWindowResource =
      "leaderboards" :>
        Capture "leaderboardId" Text :>
          "window" :>
-           Capture "collection" GamesScoresListWindowCollection
-             :>
-             QueryParam "timeSpan" GamesScoresListWindowTimeSpan
-               :>
+           Capture "collection" ScoresListWindowCollection :>
+             QueryParam "timeSpan" ScoresListWindowTimeSpan :>
                QueryParam "returnTopIfAbsent" Bool :>
                  QueryParam "language" Text :>
                    QueryParam "resultsAbove" Int32 :>
@@ -83,8 +81,8 @@ data ScoresListWindow' = ScoresListWindow'
     { _slwQuotaUser         :: !(Maybe Text)
     , _slwPrettyPrint       :: !Bool
     , _slwUserIP            :: !(Maybe Text)
-    , _slwCollection        :: !GamesScoresListWindowCollection
-    , _slwTimeSpan          :: !GamesScoresListWindowTimeSpan
+    , _slwCollection        :: !ScoresListWindowCollection
+    , _slwTimeSpan          :: !ScoresListWindowTimeSpan
     , _slwReturnTopIfAbsent :: !(Maybe Bool)
     , _slwLeaderboardId     :: !Text
     , _slwKey               :: !(Maybe Key)
@@ -128,8 +126,8 @@ data ScoresListWindow' = ScoresListWindow'
 --
 -- * 'slwFields'
 scoresListWindow'
-    :: GamesScoresListWindowCollection -- ^ 'collection'
-    -> GamesScoresListWindowTimeSpan -- ^ 'timeSpan'
+    :: ScoresListWindowCollection -- ^ 'collection'
+    -> ScoresListWindowTimeSpan -- ^ 'timeSpan'
     -> Text -- ^ 'leaderboardId'
     -> ScoresListWindow'
 scoresListWindow' pSlwCollection_ pSlwTimeSpan_ pSlwLeaderboardId_ =
@@ -170,13 +168,13 @@ slwUserIP
   = lens _slwUserIP (\ s a -> s{_slwUserIP = a})
 
 -- | The collection of scores you\'re requesting.
-slwCollection :: Lens' ScoresListWindow' GamesScoresListWindowCollection
+slwCollection :: Lens' ScoresListWindow' ScoresListWindowCollection
 slwCollection
   = lens _slwCollection
       (\ s a -> s{_slwCollection = a})
 
 -- | The time span for the scores and ranks you\'re requesting.
-slwTimeSpan :: Lens' ScoresListWindow' GamesScoresListWindowTimeSpan
+slwTimeSpan :: Lens' ScoresListWindow' ScoresListWindowTimeSpan
 slwTimeSpan
   = lens _slwTimeSpan (\ s a -> s{_slwTimeSpan = a})
 

@@ -64,6 +64,39 @@ instance ToJSON ObjectOwner where
                  [("entity" .=) <$> _ooEntity,
                   ("entityId" .=) <$> _ooEntityId])
 
+-- | The bucket\'s versioning configuration.
+--
+-- /See:/ 'bucketVersioning' smart constructor.
+newtype BucketVersioning = BucketVersioning
+    { _bvEnabled :: Maybe Bool
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BucketVersioning' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bvEnabled'
+bucketVersioning
+    :: BucketVersioning
+bucketVersioning =
+    BucketVersioning
+    { _bvEnabled = Nothing
+    }
+
+-- | While set to true, versioning is fully enabled for this bucket.
+bvEnabled :: Lens' BucketVersioning (Maybe Bool)
+bvEnabled
+  = lens _bvEnabled (\ s a -> s{_bvEnabled = a})
+
+instance FromJSON BucketVersioning where
+        parseJSON
+          = withObject "BucketVersioning"
+              (\ o -> BucketVersioning <$> (o .:? "enabled"))
+
+instance ToJSON BucketVersioning where
+        toJSON BucketVersioning{..}
+          = object (catMaybes [("enabled" .=) <$> _bvEnabled])
+
 -- | A list of buckets.
 --
 -- /See:/ 'buckets' smart constructor.
@@ -125,182 +158,193 @@ instance ToJSON Buckets where
                  [("nextPageToken" .=) <$> _bNextPageToken,
                   Just ("kind" .= _bKind), ("items" .=) <$> _bItems])
 
+-- | The bucket\'s logging configuration, which defines the destination
+-- bucket and optional name prefix for the current bucket\'s logs.
 --
--- /See:/ 'corsItem' smart constructor.
-data CORSItem = CORSItem
-    { _ciMaxAgeSeconds  :: !(Maybe Int32)
-    , _ciOrigin         :: !(Maybe [Text])
-    , _ciResponseHeader :: !(Maybe [Text])
-    , _ciMethod         :: !(Maybe [Text])
+-- /See:/ 'bucketLogging' smart constructor.
+data BucketLogging = BucketLogging
+    { _blLogBucket       :: !(Maybe Text)
+    , _blLogObjectPrefix :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CORSItem' with the minimum fields required to make a request.
+-- | Creates a value of 'BucketLogging' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ciMaxAgeSeconds'
+-- * 'blLogBucket'
 --
--- * 'ciOrigin'
---
--- * 'ciResponseHeader'
---
--- * 'ciMethod'
-corsItem
-    :: CORSItem
-corsItem =
-    CORSItem
-    { _ciMaxAgeSeconds = Nothing
-    , _ciOrigin = Nothing
-    , _ciResponseHeader = Nothing
-    , _ciMethod = Nothing
+-- * 'blLogObjectPrefix'
+bucketLogging
+    :: BucketLogging
+bucketLogging =
+    BucketLogging
+    { _blLogBucket = Nothing
+    , _blLogObjectPrefix = Nothing
     }
 
--- | The value, in seconds, to return in the Access-Control-Max-Age header
--- used in preflight responses.
-ciMaxAgeSeconds :: Lens' CORSItem (Maybe Int32)
-ciMaxAgeSeconds
-  = lens _ciMaxAgeSeconds
-      (\ s a -> s{_ciMaxAgeSeconds = a})
+-- | The destination bucket where the current bucket\'s logs should be
+-- placed.
+blLogBucket :: Lens' BucketLogging (Maybe Text)
+blLogBucket
+  = lens _blLogBucket (\ s a -> s{_blLogBucket = a})
 
--- | The list of Origins eligible to receive CORS response headers. Note:
--- \"*\" is permitted in the list of origins, and means \"any Origin\".
-ciOrigin :: Lens' CORSItem [Text]
-ciOrigin
-  = lens _ciOrigin (\ s a -> s{_ciOrigin = a}) .
-      _Default
-      . _Coerce
+-- | A prefix for log object names.
+blLogObjectPrefix :: Lens' BucketLogging (Maybe Text)
+blLogObjectPrefix
+  = lens _blLogObjectPrefix
+      (\ s a -> s{_blLogObjectPrefix = a})
 
--- | The list of HTTP headers other than the simple response headers to give
--- permission for the user-agent to share across domains.
-ciResponseHeader :: Lens' CORSItem [Text]
-ciResponseHeader
-  = lens _ciResponseHeader
-      (\ s a -> s{_ciResponseHeader = a})
-      . _Default
-      . _Coerce
-
--- | The list of HTTP methods on which to include CORS response headers: GET,
--- OPTIONS, POST, etc. Note, \"*\" is permitted in the list of methods, and
--- means \"any method\".
-ciMethod :: Lens' CORSItem [Text]
-ciMethod
-  = lens _ciMethod (\ s a -> s{_ciMethod = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON CORSItem where
+instance FromJSON BucketLogging where
         parseJSON
-          = withObject "CORSItem"
+          = withObject "BucketLogging"
               (\ o ->
-                 CORSItem <$>
-                   (o .:? "maxAgeSeconds") <*>
-                     (o .:? "origin" .!= mempty)
-                     <*> (o .:? "responseHeader" .!= mempty)
-                     <*> (o .:? "method" .!= mempty))
+                 BucketLogging <$>
+                   (o .:? "logBucket") <*> (o .:? "logObjectPrefix"))
 
-instance ToJSON CORSItem where
-        toJSON CORSItem{..}
+instance ToJSON BucketLogging where
+        toJSON BucketLogging{..}
           = object
               (catMaybes
-                 [("maxAgeSeconds" .=) <$> _ciMaxAgeSeconds,
-                  ("origin" .=) <$> _ciOrigin,
-                  ("responseHeader" .=) <$> _ciResponseHeader,
-                  ("method" .=) <$> _ciMethod])
+                 [("logBucket" .=) <$> _blLogBucket,
+                  ("logObjectPrefix" .=) <$> _blLogObjectPrefix])
 
--- | The bucket\'s website configuration.
+-- | User-provided metadata, in key\/value pairs.
 --
--- /See:/ 'website' smart constructor.
-data Website = Website
-    { _wMainPageSuffix :: !(Maybe Text)
-    , _wNotFoundPage   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+-- /See:/ 'objectMetadata' smart constructor.
+data ObjectMetadata =
+    ObjectMetadata
+    deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Website' with the minimum fields required to make a request.
+-- | Creates a value of 'ObjectMetadata' with the minimum fields required to make a request.
 --
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'wMainPageSuffix'
---
--- * 'wNotFoundPage'
-website
-    :: Website
-website =
-    Website
-    { _wMainPageSuffix = Nothing
-    , _wNotFoundPage = Nothing
-    }
+objectMetadata
+    :: ObjectMetadata
+objectMetadata = ObjectMetadata
 
--- | Behaves as the bucket\'s directory index where missing objects are
--- treated as potential directories.
-wMainPageSuffix :: Lens' Website (Maybe Text)
-wMainPageSuffix
-  = lens _wMainPageSuffix
-      (\ s a -> s{_wMainPageSuffix = a})
-
--- | The custom object to return when a requested resource is not found.
-wNotFoundPage :: Lens' Website (Maybe Text)
-wNotFoundPage
-  = lens _wNotFoundPage
-      (\ s a -> s{_wNotFoundPage = a})
-
-instance FromJSON Website where
+instance FromJSON ObjectMetadata where
         parseJSON
-          = withObject "Website"
-              (\ o ->
-                 Website <$>
-                   (o .:? "mainPageSuffix") <*> (o .:? "notFoundPage"))
+          = withObject "ObjectMetadata"
+              (\ o -> pure ObjectMetadata)
 
-instance ToJSON Website where
-        toJSON Website{..}
-          = object
-              (catMaybes
-                 [("mainPageSuffix" .=) <$> _wMainPageSuffix,
-                  ("notFoundPage" .=) <$> _wNotFoundPage])
-
---
--- /See:/ 'ruleItem' smart constructor.
-data RuleItem = RuleItem
-    { _riAction    :: !(Maybe Action)
-    , _riCondition :: !(Maybe Condition)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'RuleItem' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'riAction'
---
--- * 'riCondition'
-ruleItem
-    :: RuleItem
-ruleItem =
-    RuleItem
-    { _riAction = Nothing
-    , _riCondition = Nothing
-    }
-
--- | The action to take.
-riAction :: Lens' RuleItem (Maybe Action)
-riAction = lens _riAction (\ s a -> s{_riAction = a})
+instance ToJSON ObjectMetadata where
+        toJSON = const (Object mempty)
 
 -- | The condition(s) under which the action will be taken.
-riCondition :: Lens' RuleItem (Maybe Condition)
-riCondition
-  = lens _riCondition (\ s a -> s{_riCondition = a})
+--
+-- /See:/ 'bucketLifecycleRuleItemCondition' smart constructor.
+data BucketLifecycleRuleItemCondition = BucketLifecycleRuleItemCondition
+    { _blricAge              :: !(Maybe Int32)
+    , _blricIsLive           :: !(Maybe Bool)
+    , _blricNumNewerVersions :: !(Maybe Int32)
+    , _blricCreatedBefore    :: !(Maybe Date')
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
-instance FromJSON RuleItem where
+-- | Creates a value of 'BucketLifecycleRuleItemCondition' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'blricAge'
+--
+-- * 'blricIsLive'
+--
+-- * 'blricNumNewerVersions'
+--
+-- * 'blricCreatedBefore'
+bucketLifecycleRuleItemCondition
+    :: BucketLifecycleRuleItemCondition
+bucketLifecycleRuleItemCondition =
+    BucketLifecycleRuleItemCondition
+    { _blricAge = Nothing
+    , _blricIsLive = Nothing
+    , _blricNumNewerVersions = Nothing
+    , _blricCreatedBefore = Nothing
+    }
+
+-- | Age of an object (in days). This condition is satisfied when an object
+-- reaches the specified age.
+blricAge :: Lens' BucketLifecycleRuleItemCondition (Maybe Int32)
+blricAge = lens _blricAge (\ s a -> s{_blricAge = a})
+
+-- | Relevant only for versioned objects. If the value is true, this
+-- condition matches live objects; if the value is false, it matches
+-- archived objects.
+blricIsLive :: Lens' BucketLifecycleRuleItemCondition (Maybe Bool)
+blricIsLive
+  = lens _blricIsLive (\ s a -> s{_blricIsLive = a})
+
+-- | Relevant only for versioned objects. If the value is N, this condition
+-- is satisfied when there are at least N versions (including the live
+-- version) newer than this version of the object.
+blricNumNewerVersions :: Lens' BucketLifecycleRuleItemCondition (Maybe Int32)
+blricNumNewerVersions
+  = lens _blricNumNewerVersions
+      (\ s a -> s{_blricNumNewerVersions = a})
+
+-- | A date in RFC 3339 format with only the date part, e.g. \"2013-01-15\".
+-- This condition is satisfied when an object is created before midnight of
+-- the specified date in UTC.
+blricCreatedBefore :: Lens' BucketLifecycleRuleItemCondition (Maybe LocalTime)
+blricCreatedBefore
+  = lens _blricCreatedBefore
+      (\ s a -> s{_blricCreatedBefore = a})
+      . mapping _Date
+
+instance FromJSON BucketLifecycleRuleItemCondition
+         where
         parseJSON
-          = withObject "RuleItem"
+          = withObject "BucketLifecycleRuleItemCondition"
               (\ o ->
-                 RuleItem <$>
-                   (o .:? "action") <*> (o .:? "condition"))
+                 BucketLifecycleRuleItemCondition <$>
+                   (o .:? "age") <*> (o .:? "isLive") <*>
+                     (o .:? "numNewerVersions")
+                     <*> (o .:? "createdBefore"))
 
-instance ToJSON RuleItem where
-        toJSON RuleItem{..}
+instance ToJSON BucketLifecycleRuleItemCondition
+         where
+        toJSON BucketLifecycleRuleItemCondition{..}
           = object
               (catMaybes
-                 [("action" .=) <$> _riAction,
-                  ("condition" .=) <$> _riCondition])
+                 [("age" .=) <$> _blricAge,
+                  ("isLive" .=) <$> _blricIsLive,
+                  ("numNewerVersions" .=) <$> _blricNumNewerVersions,
+                  ("createdBefore" .=) <$> _blricCreatedBefore])
+
+-- | The bucket\'s lifecycle configuration. See object lifecycle management
+-- for more information.
+--
+-- /See:/ 'bucketLifecycle' smart constructor.
+newtype BucketLifecycle = BucketLifecycle
+    { _blRule :: Maybe [BucketLifecycleRuleItem]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BucketLifecycle' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'blRule'
+bucketLifecycle
+    :: BucketLifecycle
+bucketLifecycle =
+    BucketLifecycle
+    { _blRule = Nothing
+    }
+
+-- | A lifecycle management rule, which is made of an action to take and the
+-- condition(s) under which the action will be taken.
+blRule :: Lens' BucketLifecycle [BucketLifecycleRuleItem]
+blRule
+  = lens _blRule (\ s a -> s{_blRule = a}) . _Default .
+      _Coerce
+
+instance FromJSON BucketLifecycle where
+        parseJSON
+          = withObject "BucketLifecycle"
+              (\ o ->
+                 BucketLifecycle <$> (o .:? "rule" .!= mempty))
+
+instance ToJSON BucketLifecycle where
+        toJSON BucketLifecycle{..}
+          = object (catMaybes [("rule" .=) <$> _blRule])
 
 -- | An notification channel used to watch for resource changes.
 --
@@ -313,7 +357,7 @@ data Channel = Channel
     , _cToken       :: !(Maybe Text)
     , _cAddress     :: !(Maybe Text)
     , _cPayload     :: !(Maybe Bool)
-    , _cParams      :: !(Maybe Params)
+    , _cParams      :: !(Maybe ChannelParams)
     , _cId          :: !(Maybe Text)
     , _cType        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -393,7 +437,7 @@ cPayload :: Lens' Channel (Maybe Bool)
 cPayload = lens _cPayload (\ s a -> s{_cPayload = a})
 
 -- | Additional parameters controlling delivery channel behavior. Optional.
-cParams :: Lens' Channel (Maybe Params)
+cParams :: Lens' Channel (Maybe ChannelParams)
 cParams = lens _cParams (\ s a -> s{_cParams = a})
 
 -- | A UUID or similar unique string that identifies this channel.
@@ -433,6 +477,135 @@ instance ToJSON Channel where
                   ("params" .=) <$> _cParams, ("id" .=) <$> _cId,
                   ("type" .=) <$> _cType])
 
+--
+-- /See:/ 'bucketLifecycleRuleItem' smart constructor.
+data BucketLifecycleRuleItem = BucketLifecycleRuleItem
+    { _blriAction    :: !(Maybe BucketLifecycleRuleItemAction)
+    , _blriCondition :: !(Maybe BucketLifecycleRuleItemCondition)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BucketLifecycleRuleItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'blriAction'
+--
+-- * 'blriCondition'
+bucketLifecycleRuleItem
+    :: BucketLifecycleRuleItem
+bucketLifecycleRuleItem =
+    BucketLifecycleRuleItem
+    { _blriAction = Nothing
+    , _blriCondition = Nothing
+    }
+
+-- | The action to take.
+blriAction :: Lens' BucketLifecycleRuleItem (Maybe BucketLifecycleRuleItemAction)
+blriAction
+  = lens _blriAction (\ s a -> s{_blriAction = a})
+
+-- | The condition(s) under which the action will be taken.
+blriCondition :: Lens' BucketLifecycleRuleItem (Maybe BucketLifecycleRuleItemCondition)
+blriCondition
+  = lens _blriCondition
+      (\ s a -> s{_blriCondition = a})
+
+instance FromJSON BucketLifecycleRuleItem where
+        parseJSON
+          = withObject "BucketLifecycleRuleItem"
+              (\ o ->
+                 BucketLifecycleRuleItem <$>
+                   (o .:? "action") <*> (o .:? "condition"))
+
+instance ToJSON BucketLifecycleRuleItem where
+        toJSON BucketLifecycleRuleItem{..}
+          = object
+              (catMaybes
+                 [("action" .=) <$> _blriAction,
+                  ("condition" .=) <$> _blriCondition])
+
+--
+-- /See:/ 'bucketCORSItem' smart constructor.
+data BucketCORSItem = BucketCORSItem
+    { _bciMaxAgeSeconds  :: !(Maybe Int32)
+    , _bciOrigin         :: !(Maybe [Text])
+    , _bciResponseHeader :: !(Maybe [Text])
+    , _bciMethod         :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BucketCORSItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bciMaxAgeSeconds'
+--
+-- * 'bciOrigin'
+--
+-- * 'bciResponseHeader'
+--
+-- * 'bciMethod'
+bucketCORSItem
+    :: BucketCORSItem
+bucketCORSItem =
+    BucketCORSItem
+    { _bciMaxAgeSeconds = Nothing
+    , _bciOrigin = Nothing
+    , _bciResponseHeader = Nothing
+    , _bciMethod = Nothing
+    }
+
+-- | The value, in seconds, to return in the Access-Control-Max-Age header
+-- used in preflight responses.
+bciMaxAgeSeconds :: Lens' BucketCORSItem (Maybe Int32)
+bciMaxAgeSeconds
+  = lens _bciMaxAgeSeconds
+      (\ s a -> s{_bciMaxAgeSeconds = a})
+
+-- | The list of Origins eligible to receive CORS response headers. Note:
+-- \"*\" is permitted in the list of origins, and means \"any Origin\".
+bciOrigin :: Lens' BucketCORSItem [Text]
+bciOrigin
+  = lens _bciOrigin (\ s a -> s{_bciOrigin = a}) .
+      _Default
+      . _Coerce
+
+-- | The list of HTTP headers other than the simple response headers to give
+-- permission for the user-agent to share across domains.
+bciResponseHeader :: Lens' BucketCORSItem [Text]
+bciResponseHeader
+  = lens _bciResponseHeader
+      (\ s a -> s{_bciResponseHeader = a})
+      . _Default
+      . _Coerce
+
+-- | The list of HTTP methods on which to include CORS response headers: GET,
+-- OPTIONS, POST, etc. Note, \"*\" is permitted in the list of methods, and
+-- means \"any method\".
+bciMethod :: Lens' BucketCORSItem [Text]
+bciMethod
+  = lens _bciMethod (\ s a -> s{_bciMethod = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON BucketCORSItem where
+        parseJSON
+          = withObject "BucketCORSItem"
+              (\ o ->
+                 BucketCORSItem <$>
+                   (o .:? "maxAgeSeconds") <*>
+                     (o .:? "origin" .!= mempty)
+                     <*> (o .:? "responseHeader" .!= mempty)
+                     <*> (o .:? "method" .!= mempty))
+
+instance ToJSON BucketCORSItem where
+        toJSON BucketCORSItem{..}
+          = object
+              (catMaybes
+                 [("maxAgeSeconds" .=) <$> _bciMaxAgeSeconds,
+                  ("origin" .=) <$> _bciOrigin,
+                  ("responseHeader" .=) <$> _bciResponseHeader,
+                  ("method" .=) <$> _bciMethod])
+
 -- | A bucket.
 --
 -- /See:/ 'bucket' smart constructor.
@@ -440,19 +613,19 @@ data Bucket = Bucket
     { _bucEtag             :: !(Maybe Text)
     , _bucLocation         :: !(Maybe Text)
     , _bucKind             :: !Text
-    , _bucWebsite          :: !(Maybe Website)
-    , _bucLifecycle        :: !(Maybe Lifecycle)
-    , _bucOwner            :: !(Maybe Owner)
+    , _bucWebsite          :: !(Maybe BucketWebsite)
+    , _bucLifecycle        :: !(Maybe BucketLifecycle)
+    , _bucOwner            :: !(Maybe BucketOwner)
     , _bucSelfLink         :: !(Maybe Text)
     , _bucName             :: !(Maybe Text)
     , _bucStorageClass     :: !(Maybe Text)
-    , _bucVersioning       :: !(Maybe Versioning)
-    , _bucCORS             :: !(Maybe [CORSItem])
+    , _bucVersioning       :: !(Maybe BucketVersioning)
+    , _bucCORS             :: !(Maybe [BucketCORSItem])
     , _bucTimeCreated      :: !(Maybe DateTime')
     , _bucId               :: !(Maybe Text)
     , _bucDefaultObjectACL :: !(Maybe [ObjectAccessControl])
     , _bucMetageneration   :: !(Maybe Int64)
-    , _bucLogging          :: !(Maybe Logging)
+    , _bucLogging          :: !(Maybe BucketLogging)
     , _bucACL              :: !(Maybe [BucketAccessControl])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -533,18 +706,18 @@ bucKind :: Lens' Bucket Text
 bucKind = lens _bucKind (\ s a -> s{_bucKind = a})
 
 -- | The bucket\'s website configuration.
-bucWebsite :: Lens' Bucket (Maybe Website)
+bucWebsite :: Lens' Bucket (Maybe BucketWebsite)
 bucWebsite
   = lens _bucWebsite (\ s a -> s{_bucWebsite = a})
 
 -- | The bucket\'s lifecycle configuration. See object lifecycle management
 -- for more information.
-bucLifecycle :: Lens' Bucket (Maybe Lifecycle)
+bucLifecycle :: Lens' Bucket (Maybe BucketLifecycle)
 bucLifecycle
   = lens _bucLifecycle (\ s a -> s{_bucLifecycle = a})
 
 -- | The owner of the bucket. This is always the project team\'s owner group.
-bucOwner :: Lens' Bucket (Maybe Owner)
+bucOwner :: Lens' Bucket (Maybe BucketOwner)
 bucOwner = lens _bucOwner (\ s a -> s{_bucOwner = a})
 
 -- | The URI of this bucket.
@@ -566,13 +739,13 @@ bucStorageClass
       (\ s a -> s{_bucStorageClass = a})
 
 -- | The bucket\'s versioning configuration.
-bucVersioning :: Lens' Bucket (Maybe Versioning)
+bucVersioning :: Lens' Bucket (Maybe BucketVersioning)
 bucVersioning
   = lens _bucVersioning
       (\ s a -> s{_bucVersioning = a})
 
 -- | The bucket\'s Cross-Origin Resource Sharing (CORS) configuration.
-bucCORS :: Lens' Bucket [CORSItem]
+bucCORS :: Lens' Bucket [BucketCORSItem]
 bucCORS
   = lens _bucCORS (\ s a -> s{_bucCORS = a}) . _Default
       . _Coerce
@@ -604,7 +777,7 @@ bucMetageneration
 
 -- | The bucket\'s logging configuration, which defines the destination
 -- bucket and optional name prefix for the current bucket\'s logs.
-bucLogging :: Lens' Bucket (Maybe Logging)
+bucLogging :: Lens' Bucket (Maybe BucketLogging)
 bucLogging
   = lens _bucLogging (\ s a -> s{_bucLogging = a})
 
@@ -657,88 +830,6 @@ instance ToJSON Bucket where
                   ("metageneration" .=) <$> _bucMetageneration,
                   ("logging" .=) <$> _bucLogging,
                   ("acl" .=) <$> _bucACL])
-
--- | An access-control list.
---
--- /See:/ 'bucketAccessControls' smart constructor.
-data BucketAccessControls = BucketAccessControls
-    { _bacKind  :: !Text
-    , _bacItems :: !(Maybe [BucketAccessControl])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'BucketAccessControls' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'bacKind'
---
--- * 'bacItems'
-bucketAccessControls
-    :: BucketAccessControls
-bucketAccessControls =
-    BucketAccessControls
-    { _bacKind = "storage#bucketAccessControls"
-    , _bacItems = Nothing
-    }
-
--- | The kind of item this is. For lists of bucket access control entries,
--- this is always storage#bucketAccessControls.
-bacKind :: Lens' BucketAccessControls Text
-bacKind = lens _bacKind (\ s a -> s{_bacKind = a})
-
--- | The list of items.
-bacItems :: Lens' BucketAccessControls [BucketAccessControl]
-bacItems
-  = lens _bacItems (\ s a -> s{_bacItems = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON BucketAccessControls where
-        parseJSON
-          = withObject "BucketAccessControls"
-              (\ o ->
-                 BucketAccessControls <$>
-                   (o .:? "kind" .!= "storage#bucketAccessControls") <*>
-                     (o .:? "items" .!= mempty))
-
-instance ToJSON BucketAccessControls where
-        toJSON BucketAccessControls{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _bacKind),
-                  ("items" .=) <$> _bacItems])
-
--- | The action to take.
---
--- /See:/ 'action' smart constructor.
-newtype Action = Action
-    { _aType :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Action' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aType'
-action
-    :: Action
-action =
-    Action
-    { _aType = Nothing
-    }
-
--- | Type of the action. Currently only Delete is supported.
-aType :: Lens' Action (Maybe Text)
-aType = lens _aType (\ s a -> s{_aType = a})
-
-instance FromJSON Action where
-        parseJSON
-          = withObject "Action"
-              (\ o -> Action <$> (o .:? "type"))
-
-instance ToJSON Action where
-        toJSON Action{..}
-          = object (catMaybes [("type" .=) <$> _aType])
 
 -- | A list of objects.
 --
@@ -815,86 +906,55 @@ instance ToJSON Objects where
                   Just ("kind" .= _oKind), ("items" .=) <$> _oItems,
                   ("prefixes" .=) <$> _oPrefixes])
 
--- | The bucket\'s lifecycle configuration. See object lifecycle management
--- for more information.
+-- | An access-control list.
 --
--- /See:/ 'lifecycle' smart constructor.
-newtype Lifecycle = Lifecycle
-    { _lRule :: Maybe [RuleItem]
+-- /See:/ 'bucketAccessControls' smart constructor.
+data BucketAccessControls = BucketAccessControls
+    { _bacKind  :: !Text
+    , _bacItems :: !(Maybe [BucketAccessControl])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Lifecycle' with the minimum fields required to make a request.
+-- | Creates a value of 'BucketAccessControls' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lRule'
-lifecycle
-    :: Lifecycle
-lifecycle =
-    Lifecycle
-    { _lRule = Nothing
+-- * 'bacKind'
+--
+-- * 'bacItems'
+bucketAccessControls
+    :: BucketAccessControls
+bucketAccessControls =
+    BucketAccessControls
+    { _bacKind = "storage#bucketAccessControls"
+    , _bacItems = Nothing
     }
 
--- | A lifecycle management rule, which is made of an action to take and the
--- condition(s) under which the action will be taken.
-lRule :: Lens' Lifecycle [RuleItem]
-lRule
-  = lens _lRule (\ s a -> s{_lRule = a}) . _Default .
-      _Coerce
+-- | The kind of item this is. For lists of bucket access control entries,
+-- this is always storage#bucketAccessControls.
+bacKind :: Lens' BucketAccessControls Text
+bacKind = lens _bacKind (\ s a -> s{_bacKind = a})
 
-instance FromJSON Lifecycle where
+-- | The list of items.
+bacItems :: Lens' BucketAccessControls [BucketAccessControl]
+bacItems
+  = lens _bacItems (\ s a -> s{_bacItems = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON BucketAccessControls where
         parseJSON
-          = withObject "Lifecycle"
-              (\ o -> Lifecycle <$> (o .:? "rule" .!= mempty))
-
-instance ToJSON Lifecycle where
-        toJSON Lifecycle{..}
-          = object (catMaybes [("rule" .=) <$> _lRule])
-
--- | The owner of the bucket. This is always the project team\'s owner group.
---
--- /See:/ 'owner' smart constructor.
-data Owner = Owner
-    { _oEntity   :: !(Maybe Text)
-    , _oEntityId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Owner' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'oEntity'
---
--- * 'oEntityId'
-owner
-    :: Owner
-owner =
-    Owner
-    { _oEntity = Nothing
-    , _oEntityId = Nothing
-    }
-
--- | The entity, in the form group-groupId.
-oEntity :: Lens' Owner (Maybe Text)
-oEntity = lens _oEntity (\ s a -> s{_oEntity = a})
-
--- | The ID for the entity.
-oEntityId :: Lens' Owner (Maybe Text)
-oEntityId
-  = lens _oEntityId (\ s a -> s{_oEntityId = a})
-
-instance FromJSON Owner where
-        parseJSON
-          = withObject "Owner"
+          = withObject "BucketAccessControls"
               (\ o ->
-                 Owner <$> (o .:? "entity") <*> (o .:? "entityId"))
+                 BucketAccessControls <$>
+                   (o .:? "kind" .!= "storage#bucketAccessControls") <*>
+                     (o .:? "items" .!= mempty))
 
-instance ToJSON Owner where
-        toJSON Owner{..}
+instance ToJSON BucketAccessControls where
+        toJSON BucketAccessControls{..}
           = object
               (catMaybes
-                 [("entity" .=) <$> _oEntity,
-                  ("entityId" .=) <$> _oEntityId])
+                 [Just ("kind" .= _bacKind),
+                  ("items" .=) <$> _bacItems])
 
 -- | A Compose request.
 --
@@ -902,7 +962,7 @@ instance ToJSON Owner where
 data ComposeRequest = ComposeRequest
     { _crDestination   :: !(Maybe Object)
     , _crKind          :: !Text
-    , _crSourceObjects :: !(Maybe [SourceObjectsItem])
+    , _crSourceObjects :: !(Maybe [ComposeRequestSourceObjectsItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ComposeRequest' with the minimum fields required to make a request.
@@ -935,7 +995,7 @@ crKind = lens _crKind (\ s a -> s{_crKind = a})
 
 -- | The list of source objects that will be concatenated into a single
 -- object.
-crSourceObjects :: Lens' ComposeRequest [SourceObjectsItem]
+crSourceObjects :: Lens' ComposeRequest [ComposeRequestSourceObjectsItem]
 crSourceObjects
   = lens _crSourceObjects
       (\ s a -> s{_crSourceObjects = a})
@@ -959,302 +1019,134 @@ instance ToJSON ComposeRequest where
                   Just ("kind" .= _crKind),
                   ("sourceObjects" .=) <$> _crSourceObjects])
 
--- | Additional parameters controlling delivery channel behavior. Optional.
+-- | The owner of the bucket. This is always the project team\'s owner group.
 --
--- /See:/ 'params' smart constructor.
-data Params =
-    Params
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Params' with the minimum fields required to make a request.
---
-params
-    :: Params
-params = Params
-
-instance FromJSON Params where
-        parseJSON = withObject "Params" (\ o -> pure Params)
-
-instance ToJSON Params where
-        toJSON = const (Object mempty)
-
--- | The bucket\'s versioning configuration.
---
--- /See:/ 'versioning' smart constructor.
-newtype Versioning = Versioning
-    { _vEnabled :: Maybe Bool
+-- /See:/ 'bucketOwner' smart constructor.
+data BucketOwner = BucketOwner
+    { _boEntity   :: !(Maybe Text)
+    , _boEntityId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Versioning' with the minimum fields required to make a request.
+-- | Creates a value of 'BucketOwner' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vEnabled'
-versioning
-    :: Versioning
-versioning =
-    Versioning
-    { _vEnabled = Nothing
+-- * 'boEntity'
+--
+-- * 'boEntityId'
+bucketOwner
+    :: BucketOwner
+bucketOwner =
+    BucketOwner
+    { _boEntity = Nothing
+    , _boEntityId = Nothing
     }
 
--- | While set to true, versioning is fully enabled for this bucket.
-vEnabled :: Lens' Versioning (Maybe Bool)
-vEnabled = lens _vEnabled (\ s a -> s{_vEnabled = a})
+-- | The entity, in the form group-groupId.
+boEntity :: Lens' BucketOwner (Maybe Text)
+boEntity = lens _boEntity (\ s a -> s{_boEntity = a})
 
-instance FromJSON Versioning where
+-- | The ID for the entity.
+boEntityId :: Lens' BucketOwner (Maybe Text)
+boEntityId
+  = lens _boEntityId (\ s a -> s{_boEntityId = a})
+
+instance FromJSON BucketOwner where
         parseJSON
-          = withObject "Versioning"
-              (\ o -> Versioning <$> (o .:? "enabled"))
+          = withObject "BucketOwner"
+              (\ o ->
+                 BucketOwner <$>
+                   (o .:? "entity") <*> (o .:? "entityId"))
 
-instance ToJSON Versioning where
-        toJSON Versioning{..}
-          = object (catMaybes [("enabled" .=) <$> _vEnabled])
+instance ToJSON BucketOwner where
+        toJSON BucketOwner{..}
+          = object
+              (catMaybes
+                 [("entity" .=) <$> _boEntity,
+                  ("entityId" .=) <$> _boEntityId])
+
+--
+-- /See:/ 'composeRequestSourceObjectsItem' smart constructor.
+data ComposeRequestSourceObjectsItem = ComposeRequestSourceObjectsItem
+    { _crsoiName                :: !(Maybe Text)
+    , _crsoiObjectPreconditions :: !(Maybe ComposeRequestSourceObjectsItemObjectPreconditions)
+    , _crsoiGeneration          :: !(Maybe Int64)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ComposeRequestSourceObjectsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'crsoiName'
+--
+-- * 'crsoiObjectPreconditions'
+--
+-- * 'crsoiGeneration'
+composeRequestSourceObjectsItem
+    :: ComposeRequestSourceObjectsItem
+composeRequestSourceObjectsItem =
+    ComposeRequestSourceObjectsItem
+    { _crsoiName = Nothing
+    , _crsoiObjectPreconditions = Nothing
+    , _crsoiGeneration = Nothing
+    }
+
+-- | The source object\'s name. The source object\'s bucket is implicitly the
+-- destination bucket.
+crsoiName :: Lens' ComposeRequestSourceObjectsItem (Maybe Text)
+crsoiName
+  = lens _crsoiName (\ s a -> s{_crsoiName = a})
 
 -- | Conditions that must be met for this operation to execute.
---
--- /See:/ 'objectPreconditions' smart constructor.
-newtype ObjectPreconditions = ObjectPreconditions
-    { _opsIfGenerationMatch :: Maybe Int64
-    } deriving (Eq,Show,Data,Typeable,Generic)
+crsoiObjectPreconditions :: Lens' ComposeRequestSourceObjectsItem (Maybe ComposeRequestSourceObjectsItemObjectPreconditions)
+crsoiObjectPreconditions
+  = lens _crsoiObjectPreconditions
+      (\ s a -> s{_crsoiObjectPreconditions = a})
 
--- | Creates a value of 'ObjectPreconditions' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'opsIfGenerationMatch'
-objectPreconditions
-    :: ObjectPreconditions
-objectPreconditions =
-    ObjectPreconditions
-    { _opsIfGenerationMatch = Nothing
-    }
+-- | The generation of this object to use as the source.
+crsoiGeneration :: Lens' ComposeRequestSourceObjectsItem (Maybe Int64)
+crsoiGeneration
+  = lens _crsoiGeneration
+      (\ s a -> s{_crsoiGeneration = a})
 
--- | Only perform the composition if the generation of the source object that
--- would be used matches this value. If this value and a generation are
--- both specified, they must be the same value or the call will fail.
-opsIfGenerationMatch :: Lens' ObjectPreconditions (Maybe Int64)
-opsIfGenerationMatch
-  = lens _opsIfGenerationMatch
-      (\ s a -> s{_opsIfGenerationMatch = a})
-
-instance FromJSON ObjectPreconditions where
+instance FromJSON ComposeRequestSourceObjectsItem
+         where
         parseJSON
-          = withObject "ObjectPreconditions"
+          = withObject "ComposeRequestSourceObjectsItem"
               (\ o ->
-                 ObjectPreconditions <$> (o .:? "ifGenerationMatch"))
+                 ComposeRequestSourceObjectsItem <$>
+                   (o .:? "name") <*> (o .:? "objectPreconditions") <*>
+                     (o .:? "generation"))
 
-instance ToJSON ObjectPreconditions where
-        toJSON ObjectPreconditions{..}
+instance ToJSON ComposeRequestSourceObjectsItem where
+        toJSON ComposeRequestSourceObjectsItem{..}
           = object
               (catMaybes
-                 [("ifGenerationMatch" .=) <$> _opsIfGenerationMatch])
+                 [("name" .=) <$> _crsoiName,
+                  ("objectPreconditions" .=) <$>
+                    _crsoiObjectPreconditions,
+                  ("generation" .=) <$> _crsoiGeneration])
 
--- | User-provided metadata, in key\/value pairs.
+-- | Additional parameters controlling delivery channel behavior. Optional.
 --
--- /See:/ 'metadata' smart constructor.
-data Metadata =
-    Metadata
+-- /See:/ 'channelParams' smart constructor.
+data ChannelParams =
+    ChannelParams
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Metadata' with the minimum fields required to make a request.
+-- | Creates a value of 'ChannelParams' with the minimum fields required to make a request.
 --
-metadata
-    :: Metadata
-metadata = Metadata
+channelParams
+    :: ChannelParams
+channelParams = ChannelParams
 
-instance FromJSON Metadata where
+instance FromJSON ChannelParams where
         parseJSON
-          = withObject "Metadata" (\ o -> pure Metadata)
+          = withObject "ChannelParams"
+              (\ o -> pure ChannelParams)
 
-instance ToJSON Metadata where
+instance ToJSON ChannelParams where
         toJSON = const (Object mempty)
-
--- | An access-control entry.
---
--- /See:/ 'bucketAccessControl' smart constructor.
-data BucketAccessControl = BucketAccessControl
-    { _bacaEmail    :: !(Maybe Text)
-    , _bacaEtag     :: !(Maybe Text)
-    , _bacaKind     :: !Text
-    , _bacaDomain   :: !(Maybe Text)
-    , _bacaBucket   :: !(Maybe Text)
-    , _bacaRole     :: !(Maybe Text)
-    , _bacaSelfLink :: !(Maybe Text)
-    , _bacaId       :: !(Maybe Text)
-    , _bacaEntity   :: !(Maybe Text)
-    , _bacaEntityId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'BucketAccessControl' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'bacaEmail'
---
--- * 'bacaEtag'
---
--- * 'bacaKind'
---
--- * 'bacaDomain'
---
--- * 'bacaBucket'
---
--- * 'bacaRole'
---
--- * 'bacaSelfLink'
---
--- * 'bacaId'
---
--- * 'bacaEntity'
---
--- * 'bacaEntityId'
-bucketAccessControl
-    :: BucketAccessControl
-bucketAccessControl =
-    BucketAccessControl
-    { _bacaEmail = Nothing
-    , _bacaEtag = Nothing
-    , _bacaKind = "storage#bucketAccessControl"
-    , _bacaDomain = Nothing
-    , _bacaBucket = Nothing
-    , _bacaRole = Nothing
-    , _bacaSelfLink = Nothing
-    , _bacaId = Nothing
-    , _bacaEntity = Nothing
-    , _bacaEntityId = Nothing
-    }
-
--- | The email address associated with the entity, if any.
-bacaEmail :: Lens' BucketAccessControl (Maybe Text)
-bacaEmail
-  = lens _bacaEmail (\ s a -> s{_bacaEmail = a})
-
--- | HTTP 1.1 Entity tag for the access-control entry.
-bacaEtag :: Lens' BucketAccessControl (Maybe Text)
-bacaEtag = lens _bacaEtag (\ s a -> s{_bacaEtag = a})
-
--- | The kind of item this is. For bucket access control entries, this is
--- always storage#bucketAccessControl.
-bacaKind :: Lens' BucketAccessControl Text
-bacaKind = lens _bacaKind (\ s a -> s{_bacaKind = a})
-
--- | The domain associated with the entity, if any.
-bacaDomain :: Lens' BucketAccessControl (Maybe Text)
-bacaDomain
-  = lens _bacaDomain (\ s a -> s{_bacaDomain = a})
-
--- | The name of the bucket.
-bacaBucket :: Lens' BucketAccessControl (Maybe Text)
-bacaBucket
-  = lens _bacaBucket (\ s a -> s{_bacaBucket = a})
-
--- | The access permission for the entity. Can be READER, WRITER, or OWNER.
-bacaRole :: Lens' BucketAccessControl (Maybe Text)
-bacaRole = lens _bacaRole (\ s a -> s{_bacaRole = a})
-
--- | The link to this access-control entry.
-bacaSelfLink :: Lens' BucketAccessControl (Maybe Text)
-bacaSelfLink
-  = lens _bacaSelfLink (\ s a -> s{_bacaSelfLink = a})
-
--- | The ID of the access-control entry.
-bacaId :: Lens' BucketAccessControl (Maybe Text)
-bacaId = lens _bacaId (\ s a -> s{_bacaId = a})
-
--- | The entity holding the permission, in one of the following forms: -
--- user-userId - user-email - group-groupId - group-email - domain-domain -
--- allUsers - allAuthenticatedUsers Examples: - The user liz\'example.com
--- would be user-liz\'example.com. - The group example\'googlegroups.com
--- would be group-example\'googlegroups.com. - To refer to all members of
--- the Google Apps for Business domain example.com, the entity would be
--- domain-example.com.
-bacaEntity :: Lens' BucketAccessControl (Maybe Text)
-bacaEntity
-  = lens _bacaEntity (\ s a -> s{_bacaEntity = a})
-
--- | The ID for the entity, if any.
-bacaEntityId :: Lens' BucketAccessControl (Maybe Text)
-bacaEntityId
-  = lens _bacaEntityId (\ s a -> s{_bacaEntityId = a})
-
-instance FromJSON BucketAccessControl where
-        parseJSON
-          = withObject "BucketAccessControl"
-              (\ o ->
-                 BucketAccessControl <$>
-                   (o .:? "email") <*> (o .:? "etag") <*>
-                     (o .:? "kind" .!= "storage#bucketAccessControl")
-                     <*> (o .:? "domain")
-                     <*> (o .:? "bucket")
-                     <*> (o .:? "role")
-                     <*> (o .:? "selfLink")
-                     <*> (o .:? "id")
-                     <*> (o .:? "entity")
-                     <*> (o .:? "entityId"))
-
-instance ToJSON BucketAccessControl where
-        toJSON BucketAccessControl{..}
-          = object
-              (catMaybes
-                 [("email" .=) <$> _bacaEmail,
-                  ("etag" .=) <$> _bacaEtag,
-                  Just ("kind" .= _bacaKind),
-                  ("domain" .=) <$> _bacaDomain,
-                  ("bucket" .=) <$> _bacaBucket,
-                  ("role" .=) <$> _bacaRole,
-                  ("selfLink" .=) <$> _bacaSelfLink,
-                  ("id" .=) <$> _bacaId, ("entity" .=) <$> _bacaEntity,
-                  ("entityId" .=) <$> _bacaEntityId])
-
--- | An access-control list.
---
--- /See:/ 'objectAccessControls' smart constructor.
-data ObjectAccessControls = ObjectAccessControls
-    { _oacKind  :: !Text
-    , _oacItems :: !(Maybe [JSONValue])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ObjectAccessControls' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'oacKind'
---
--- * 'oacItems'
-objectAccessControls
-    :: ObjectAccessControls
-objectAccessControls =
-    ObjectAccessControls
-    { _oacKind = "storage#objectAccessControls"
-    , _oacItems = Nothing
-    }
-
--- | The kind of item this is. For lists of object access control entries,
--- this is always storage#objectAccessControls.
-oacKind :: Lens' ObjectAccessControls Text
-oacKind = lens _oacKind (\ s a -> s{_oacKind = a})
-
--- | The list of items.
-oacItems :: Lens' ObjectAccessControls [JSONValue]
-oacItems
-  = lens _oacItems (\ s a -> s{_oacItems = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON ObjectAccessControls where
-        parseJSON
-          = withObject "ObjectAccessControls"
-              (\ o ->
-                 ObjectAccessControls <$>
-                   (o .:? "kind" .!= "storage#objectAccessControls") <*>
-                     (o .:? "items" .!= mempty))
-
-instance ToJSON ObjectAccessControls where
-        toJSON ObjectAccessControls{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _oacKind),
-                  ("items" .=) <$> _oacItems])
 
 -- | An object.
 --
@@ -1273,7 +1165,7 @@ data Object = Object
     , _objName               :: !(Maybe Text)
     , _objStorageClass       :: !(Maybe Text)
     , _objContentEncoding    :: !(Maybe Text)
-    , _objMetadata           :: !(Maybe Metadata)
+    , _objMetadata           :: !(Maybe ObjectMetadata)
     , _objId                 :: !(Maybe Text)
     , _objUpdated            :: !(Maybe DateTime')
     , _objContentLanguage    :: !(Maybe Text)
@@ -1436,7 +1328,7 @@ objContentEncoding
       (\ s a -> s{_objContentEncoding = a})
 
 -- | User-provided metadata, in key\/value pairs.
-objMetadata :: Lens' Object (Maybe Metadata)
+objMetadata :: Lens' Object (Maybe ObjectMetadata)
 objMetadata
   = lens _objMetadata (\ s a -> s{_objMetadata = a})
 
@@ -1555,131 +1447,323 @@ instance ToJSON Object where
                   ("md5Hash" .=) <$> _objMD5Hash,
                   ("contentType" .=) <$> _objContentType])
 
--- | The condition(s) under which the action will be taken.
+-- | Conditions that must be met for this operation to execute.
 --
--- /See:/ 'condition' smart constructor.
-data Condition = Condition
-    { _cAge              :: !(Maybe Int32)
-    , _cIsLive           :: !(Maybe Bool)
-    , _cNumNewerVersions :: !(Maybe Int32)
-    , _cCreatedBefore    :: !(Maybe Date')
+-- /See:/ 'composeRequestSourceObjectsItemObjectPreconditions' smart constructor.
+newtype ComposeRequestSourceObjectsItemObjectPreconditions = ComposeRequestSourceObjectsItemObjectPreconditions
+    { _crsoiopIfGenerationMatch :: Maybe Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Condition' with the minimum fields required to make a request.
+-- | Creates a value of 'ComposeRequestSourceObjectsItemObjectPreconditions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cAge'
---
--- * 'cIsLive'
---
--- * 'cNumNewerVersions'
---
--- * 'cCreatedBefore'
-condition
-    :: Condition
-condition =
-    Condition
-    { _cAge = Nothing
-    , _cIsLive = Nothing
-    , _cNumNewerVersions = Nothing
-    , _cCreatedBefore = Nothing
+-- * 'crsoiopIfGenerationMatch'
+composeRequestSourceObjectsItemObjectPreconditions
+    :: ComposeRequestSourceObjectsItemObjectPreconditions
+composeRequestSourceObjectsItemObjectPreconditions =
+    ComposeRequestSourceObjectsItemObjectPreconditions
+    { _crsoiopIfGenerationMatch = Nothing
     }
 
--- | Age of an object (in days). This condition is satisfied when an object
--- reaches the specified age.
-cAge :: Lens' Condition (Maybe Int32)
-cAge = lens _cAge (\ s a -> s{_cAge = a})
+-- | Only perform the composition if the generation of the source object that
+-- would be used matches this value. If this value and a generation are
+-- both specified, they must be the same value or the call will fail.
+crsoiopIfGenerationMatch :: Lens' ComposeRequestSourceObjectsItemObjectPreconditions (Maybe Int64)
+crsoiopIfGenerationMatch
+  = lens _crsoiopIfGenerationMatch
+      (\ s a -> s{_crsoiopIfGenerationMatch = a})
 
--- | Relevant only for versioned objects. If the value is true, this
--- condition matches live objects; if the value is false, it matches
--- archived objects.
-cIsLive :: Lens' Condition (Maybe Bool)
-cIsLive = lens _cIsLive (\ s a -> s{_cIsLive = a})
-
--- | Relevant only for versioned objects. If the value is N, this condition
--- is satisfied when there are at least N versions (including the live
--- version) newer than this version of the object.
-cNumNewerVersions :: Lens' Condition (Maybe Int32)
-cNumNewerVersions
-  = lens _cNumNewerVersions
-      (\ s a -> s{_cNumNewerVersions = a})
-
--- | A date in RFC 3339 format with only the date part, e.g. \"2013-01-15\".
--- This condition is satisfied when an object is created before midnight of
--- the specified date in UTC.
-cCreatedBefore :: Lens' Condition (Maybe LocalTime)
-cCreatedBefore
-  = lens _cCreatedBefore
-      (\ s a -> s{_cCreatedBefore = a})
-      . mapping _Date
-
-instance FromJSON Condition where
+instance FromJSON
+         ComposeRequestSourceObjectsItemObjectPreconditions
+         where
         parseJSON
-          = withObject "Condition"
+          = withObject
+              "ComposeRequestSourceObjectsItemObjectPreconditions"
               (\ o ->
-                 Condition <$>
-                   (o .:? "age") <*> (o .:? "isLive") <*>
-                     (o .:? "numNewerVersions")
-                     <*> (o .:? "createdBefore"))
+                 ComposeRequestSourceObjectsItemObjectPreconditions
+                   <$> (o .:? "ifGenerationMatch"))
 
-instance ToJSON Condition where
-        toJSON Condition{..}
+instance ToJSON
+         ComposeRequestSourceObjectsItemObjectPreconditions
+         where
+        toJSON
+          ComposeRequestSourceObjectsItemObjectPreconditions{..}
           = object
               (catMaybes
-                 [("age" .=) <$> _cAge, ("isLive" .=) <$> _cIsLive,
-                  ("numNewerVersions" .=) <$> _cNumNewerVersions,
-                  ("createdBefore" .=) <$> _cCreatedBefore])
+                 [("ifGenerationMatch" .=) <$>
+                    _crsoiopIfGenerationMatch])
 
--- | The bucket\'s logging configuration, which defines the destination
--- bucket and optional name prefix for the current bucket\'s logs.
+-- | An access-control list.
 --
--- /See:/ 'logging' smart constructor.
-data Logging = Logging
-    { _lLogBucket       :: !(Maybe Text)
-    , _lLogObjectPrefix :: !(Maybe Text)
+-- /See:/ 'objectAccessControls' smart constructor.
+data ObjectAccessControls = ObjectAccessControls
+    { _oacKind  :: !Text
+    , _oacItems :: !(Maybe [JSONValue])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Logging' with the minimum fields required to make a request.
+-- | Creates a value of 'ObjectAccessControls' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lLogBucket'
+-- * 'oacKind'
 --
--- * 'lLogObjectPrefix'
-logging
-    :: Logging
-logging =
-    Logging
-    { _lLogBucket = Nothing
-    , _lLogObjectPrefix = Nothing
+-- * 'oacItems'
+objectAccessControls
+    :: ObjectAccessControls
+objectAccessControls =
+    ObjectAccessControls
+    { _oacKind = "storage#objectAccessControls"
+    , _oacItems = Nothing
     }
 
--- | The destination bucket where the current bucket\'s logs should be
--- placed.
-lLogBucket :: Lens' Logging (Maybe Text)
-lLogBucket
-  = lens _lLogBucket (\ s a -> s{_lLogBucket = a})
+-- | The kind of item this is. For lists of object access control entries,
+-- this is always storage#objectAccessControls.
+oacKind :: Lens' ObjectAccessControls Text
+oacKind = lens _oacKind (\ s a -> s{_oacKind = a})
 
--- | A prefix for log object names.
-lLogObjectPrefix :: Lens' Logging (Maybe Text)
-lLogObjectPrefix
-  = lens _lLogObjectPrefix
-      (\ s a -> s{_lLogObjectPrefix = a})
+-- | The list of items.
+oacItems :: Lens' ObjectAccessControls [JSONValue]
+oacItems
+  = lens _oacItems (\ s a -> s{_oacItems = a}) .
+      _Default
+      . _Coerce
 
-instance FromJSON Logging where
+instance FromJSON ObjectAccessControls where
         parseJSON
-          = withObject "Logging"
+          = withObject "ObjectAccessControls"
               (\ o ->
-                 Logging <$>
-                   (o .:? "logBucket") <*> (o .:? "logObjectPrefix"))
+                 ObjectAccessControls <$>
+                   (o .:? "kind" .!= "storage#objectAccessControls") <*>
+                     (o .:? "items" .!= mempty))
 
-instance ToJSON Logging where
-        toJSON Logging{..}
+instance ToJSON ObjectAccessControls where
+        toJSON ObjectAccessControls{..}
           = object
               (catMaybes
-                 [("logBucket" .=) <$> _lLogBucket,
-                  ("logObjectPrefix" .=) <$> _lLogObjectPrefix])
+                 [Just ("kind" .= _oacKind),
+                  ("items" .=) <$> _oacItems])
+
+-- | The bucket\'s website configuration.
+--
+-- /See:/ 'bucketWebsite' smart constructor.
+data BucketWebsite = BucketWebsite
+    { _bwMainPageSuffix :: !(Maybe Text)
+    , _bwNotFoundPage   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BucketWebsite' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bwMainPageSuffix'
+--
+-- * 'bwNotFoundPage'
+bucketWebsite
+    :: BucketWebsite
+bucketWebsite =
+    BucketWebsite
+    { _bwMainPageSuffix = Nothing
+    , _bwNotFoundPage = Nothing
+    }
+
+-- | Behaves as the bucket\'s directory index where missing objects are
+-- treated as potential directories.
+bwMainPageSuffix :: Lens' BucketWebsite (Maybe Text)
+bwMainPageSuffix
+  = lens _bwMainPageSuffix
+      (\ s a -> s{_bwMainPageSuffix = a})
+
+-- | The custom object to return when a requested resource is not found.
+bwNotFoundPage :: Lens' BucketWebsite (Maybe Text)
+bwNotFoundPage
+  = lens _bwNotFoundPage
+      (\ s a -> s{_bwNotFoundPage = a})
+
+instance FromJSON BucketWebsite where
+        parseJSON
+          = withObject "BucketWebsite"
+              (\ o ->
+                 BucketWebsite <$>
+                   (o .:? "mainPageSuffix") <*> (o .:? "notFoundPage"))
+
+instance ToJSON BucketWebsite where
+        toJSON BucketWebsite{..}
+          = object
+              (catMaybes
+                 [("mainPageSuffix" .=) <$> _bwMainPageSuffix,
+                  ("notFoundPage" .=) <$> _bwNotFoundPage])
+
+-- | An access-control entry.
+--
+-- /See:/ 'bucketAccessControl' smart constructor.
+data BucketAccessControl = BucketAccessControl
+    { _bacaEmail    :: !(Maybe Text)
+    , _bacaEtag     :: !(Maybe Text)
+    , _bacaKind     :: !Text
+    , _bacaDomain   :: !(Maybe Text)
+    , _bacaBucket   :: !(Maybe Text)
+    , _bacaRole     :: !(Maybe Text)
+    , _bacaSelfLink :: !(Maybe Text)
+    , _bacaId       :: !(Maybe Text)
+    , _bacaEntity   :: !(Maybe Text)
+    , _bacaEntityId :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BucketAccessControl' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bacaEmail'
+--
+-- * 'bacaEtag'
+--
+-- * 'bacaKind'
+--
+-- * 'bacaDomain'
+--
+-- * 'bacaBucket'
+--
+-- * 'bacaRole'
+--
+-- * 'bacaSelfLink'
+--
+-- * 'bacaId'
+--
+-- * 'bacaEntity'
+--
+-- * 'bacaEntityId'
+bucketAccessControl
+    :: BucketAccessControl
+bucketAccessControl =
+    BucketAccessControl
+    { _bacaEmail = Nothing
+    , _bacaEtag = Nothing
+    , _bacaKind = "storage#bucketAccessControl"
+    , _bacaDomain = Nothing
+    , _bacaBucket = Nothing
+    , _bacaRole = Nothing
+    , _bacaSelfLink = Nothing
+    , _bacaId = Nothing
+    , _bacaEntity = Nothing
+    , _bacaEntityId = Nothing
+    }
+
+-- | The email address associated with the entity, if any.
+bacaEmail :: Lens' BucketAccessControl (Maybe Text)
+bacaEmail
+  = lens _bacaEmail (\ s a -> s{_bacaEmail = a})
+
+-- | HTTP 1.1 Entity tag for the access-control entry.
+bacaEtag :: Lens' BucketAccessControl (Maybe Text)
+bacaEtag = lens _bacaEtag (\ s a -> s{_bacaEtag = a})
+
+-- | The kind of item this is. For bucket access control entries, this is
+-- always storage#bucketAccessControl.
+bacaKind :: Lens' BucketAccessControl Text
+bacaKind = lens _bacaKind (\ s a -> s{_bacaKind = a})
+
+-- | The domain associated with the entity, if any.
+bacaDomain :: Lens' BucketAccessControl (Maybe Text)
+bacaDomain
+  = lens _bacaDomain (\ s a -> s{_bacaDomain = a})
+
+-- | The name of the bucket.
+bacaBucket :: Lens' BucketAccessControl (Maybe Text)
+bacaBucket
+  = lens _bacaBucket (\ s a -> s{_bacaBucket = a})
+
+-- | The access permission for the entity. Can be READER, WRITER, or OWNER.
+bacaRole :: Lens' BucketAccessControl (Maybe Text)
+bacaRole = lens _bacaRole (\ s a -> s{_bacaRole = a})
+
+-- | The link to this access-control entry.
+bacaSelfLink :: Lens' BucketAccessControl (Maybe Text)
+bacaSelfLink
+  = lens _bacaSelfLink (\ s a -> s{_bacaSelfLink = a})
+
+-- | The ID of the access-control entry.
+bacaId :: Lens' BucketAccessControl (Maybe Text)
+bacaId = lens _bacaId (\ s a -> s{_bacaId = a})
+
+-- | The entity holding the permission, in one of the following forms: -
+-- user-userId - user-email - group-groupId - group-email - domain-domain -
+-- allUsers - allAuthenticatedUsers Examples: - The user liz\'example.com
+-- would be user-liz\'example.com. - The group example\'googlegroups.com
+-- would be group-example\'googlegroups.com. - To refer to all members of
+-- the Google Apps for Business domain example.com, the entity would be
+-- domain-example.com.
+bacaEntity :: Lens' BucketAccessControl (Maybe Text)
+bacaEntity
+  = lens _bacaEntity (\ s a -> s{_bacaEntity = a})
+
+-- | The ID for the entity, if any.
+bacaEntityId :: Lens' BucketAccessControl (Maybe Text)
+bacaEntityId
+  = lens _bacaEntityId (\ s a -> s{_bacaEntityId = a})
+
+instance FromJSON BucketAccessControl where
+        parseJSON
+          = withObject "BucketAccessControl"
+              (\ o ->
+                 BucketAccessControl <$>
+                   (o .:? "email") <*> (o .:? "etag") <*>
+                     (o .:? "kind" .!= "storage#bucketAccessControl")
+                     <*> (o .:? "domain")
+                     <*> (o .:? "bucket")
+                     <*> (o .:? "role")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id")
+                     <*> (o .:? "entity")
+                     <*> (o .:? "entityId"))
+
+instance ToJSON BucketAccessControl where
+        toJSON BucketAccessControl{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _bacaEmail,
+                  ("etag" .=) <$> _bacaEtag,
+                  Just ("kind" .= _bacaKind),
+                  ("domain" .=) <$> _bacaDomain,
+                  ("bucket" .=) <$> _bacaBucket,
+                  ("role" .=) <$> _bacaRole,
+                  ("selfLink" .=) <$> _bacaSelfLink,
+                  ("id" .=) <$> _bacaId, ("entity" .=) <$> _bacaEntity,
+                  ("entityId" .=) <$> _bacaEntityId])
+
+-- | The action to take.
+--
+-- /See:/ 'bucketLifecycleRuleItemAction' smart constructor.
+newtype BucketLifecycleRuleItemAction = BucketLifecycleRuleItemAction
+    { _blriaType :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BucketLifecycleRuleItemAction' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'blriaType'
+bucketLifecycleRuleItemAction
+    :: BucketLifecycleRuleItemAction
+bucketLifecycleRuleItemAction =
+    BucketLifecycleRuleItemAction
+    { _blriaType = Nothing
+    }
+
+-- | Type of the action. Currently only Delete is supported.
+blriaType :: Lens' BucketLifecycleRuleItemAction (Maybe Text)
+blriaType
+  = lens _blriaType (\ s a -> s{_blriaType = a})
+
+instance FromJSON BucketLifecycleRuleItemAction where
+        parseJSON
+          = withObject "BucketLifecycleRuleItemAction"
+              (\ o ->
+                 BucketLifecycleRuleItemAction <$> (o .:? "type"))
+
+instance ToJSON BucketLifecycleRuleItemAction where
+        toJSON BucketLifecycleRuleItemAction{..}
+          = object (catMaybes [("type" .=) <$> _blriaType])
 
 -- | An access-control entry.
 --
@@ -1840,63 +1924,3 @@ instance ToJSON ObjectAccessControl where
                   ("entity" .=) <$> _oacaEntity,
                   ("generation" .=) <$> _oacaGeneration,
                   ("entityId" .=) <$> _oacaEntityId])
-
---
--- /See:/ 'sourceObjectsItem' smart constructor.
-data SourceObjectsItem = SourceObjectsItem
-    { _soiName                :: !(Maybe Text)
-    , _soiObjectPreconditions :: !(Maybe ObjectPreconditions)
-    , _soiGeneration          :: !(Maybe Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SourceObjectsItem' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'soiName'
---
--- * 'soiObjectPreconditions'
---
--- * 'soiGeneration'
-sourceObjectsItem
-    :: SourceObjectsItem
-sourceObjectsItem =
-    SourceObjectsItem
-    { _soiName = Nothing
-    , _soiObjectPreconditions = Nothing
-    , _soiGeneration = Nothing
-    }
-
--- | The source object\'s name. The source object\'s bucket is implicitly the
--- destination bucket.
-soiName :: Lens' SourceObjectsItem (Maybe Text)
-soiName = lens _soiName (\ s a -> s{_soiName = a})
-
--- | Conditions that must be met for this operation to execute.
-soiObjectPreconditions :: Lens' SourceObjectsItem (Maybe ObjectPreconditions)
-soiObjectPreconditions
-  = lens _soiObjectPreconditions
-      (\ s a -> s{_soiObjectPreconditions = a})
-
--- | The generation of this object to use as the source.
-soiGeneration :: Lens' SourceObjectsItem (Maybe Int64)
-soiGeneration
-  = lens _soiGeneration
-      (\ s a -> s{_soiGeneration = a})
-
-instance FromJSON SourceObjectsItem where
-        parseJSON
-          = withObject "SourceObjectsItem"
-              (\ o ->
-                 SourceObjectsItem <$>
-                   (o .:? "name") <*> (o .:? "objectPreconditions") <*>
-                     (o .:? "generation"))
-
-instance ToJSON SourceObjectsItem where
-        toJSON SourceObjectsItem{..}
-          = object
-              (catMaybes
-                 [("name" .=) <$> _soiName,
-                  ("objectPreconditions" .=) <$>
-                    _soiObjectPreconditions,
-                  ("generation" .=) <$> _soiGeneration])

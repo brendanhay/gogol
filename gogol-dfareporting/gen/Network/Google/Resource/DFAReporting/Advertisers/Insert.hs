@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Advertisers.Insert
     , aiiQuotaUser
     , aiiPrettyPrint
     , aiiUserIP
-    , aiiProfileId
+    , aiiProFileId
     , aiiPayload
     , aiiKey
     , aiiOAuthToken
@@ -57,7 +57,8 @@ type AdvertisersInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Advertiser :> Post '[JSON] Advertiser
+                         ReqBody '[OctetStream] Advertiser :>
+                           Post '[JSON] Advertiser
 
 -- | Inserts a new advertiser.
 --
@@ -66,7 +67,7 @@ data AdvertisersInsert' = AdvertisersInsert'
     { _aiiQuotaUser   :: !(Maybe Text)
     , _aiiPrettyPrint :: !Bool
     , _aiiUserIP      :: !(Maybe Text)
-    , _aiiProfileId   :: !Int64
+    , _aiiProFileId   :: !Int64
     , _aiiPayload     :: !Advertiser
     , _aiiKey         :: !(Maybe Key)
     , _aiiOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +84,7 @@ data AdvertisersInsert' = AdvertisersInsert'
 --
 -- * 'aiiUserIP'
 --
--- * 'aiiProfileId'
+-- * 'aiiProFileId'
 --
 -- * 'aiiPayload'
 --
@@ -96,12 +97,12 @@ advertisersInsert'
     :: Int64 -- ^ 'profileId'
     -> Advertiser -- ^ 'payload'
     -> AdvertisersInsert'
-advertisersInsert' pAiiProfileId_ pAiiPayload_ =
+advertisersInsert' pAiiProFileId_ pAiiPayload_ =
     AdvertisersInsert'
     { _aiiQuotaUser = Nothing
     , _aiiPrettyPrint = True
     , _aiiUserIP = Nothing
-    , _aiiProfileId = pAiiProfileId_
+    , _aiiProFileId = pAiiProFileId_
     , _aiiPayload = pAiiPayload_
     , _aiiKey = Nothing
     , _aiiOAuthToken = Nothing
@@ -128,9 +129,9 @@ aiiUserIP
   = lens _aiiUserIP (\ s a -> s{_aiiUserIP = a})
 
 -- | User profile ID associated with this request.
-aiiProfileId :: Lens' AdvertisersInsert' Int64
-aiiProfileId
-  = lens _aiiProfileId (\ s a -> s{_aiiProfileId = a})
+aiiProFileId :: Lens' AdvertisersInsert' Int64
+aiiProFileId
+  = lens _aiiProFileId (\ s a -> s{_aiiProFileId = a})
 
 -- | Multipart request metadata.
 aiiPayload :: Lens' AdvertisersInsert' Advertiser
@@ -162,7 +163,7 @@ instance GoogleRequest AdvertisersInsert' where
         type Rs AdvertisersInsert' = Advertiser
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdvertisersInsert'{..}
-          = go _aiiProfileId _aiiQuotaUser
+          = go _aiiProFileId _aiiQuotaUser
               (Just _aiiPrettyPrint)
               _aiiUserIP
               _aiiFields

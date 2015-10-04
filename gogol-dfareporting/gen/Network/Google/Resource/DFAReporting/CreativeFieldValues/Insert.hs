@@ -35,7 +35,7 @@ module Network.Google.Resource.DFAReporting.CreativeFieldValues.Insert
     , cfviQuotaUser
     , cfviPrettyPrint
     , cfviUserIP
-    , cfviProfileId
+    , cfviProFileId
     , cfviPayload
     , cfviKey
     , cfviOAuthToken
@@ -60,7 +60,7 @@ type CreativeFieldValuesInsertResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] CreativeFieldValue :>
+                             ReqBody '[OctetStream] CreativeFieldValue :>
                                Post '[JSON] CreativeFieldValue
 
 -- | Inserts a new creative field value.
@@ -71,7 +71,7 @@ data CreativeFieldValuesInsert' = CreativeFieldValuesInsert'
     , _cfviQuotaUser       :: !(Maybe Text)
     , _cfviPrettyPrint     :: !Bool
     , _cfviUserIP          :: !(Maybe Text)
-    , _cfviProfileId       :: !Int64
+    , _cfviProFileId       :: !Int64
     , _cfviPayload         :: !CreativeFieldValue
     , _cfviKey             :: !(Maybe Key)
     , _cfviOAuthToken      :: !(Maybe OAuthToken)
@@ -90,7 +90,7 @@ data CreativeFieldValuesInsert' = CreativeFieldValuesInsert'
 --
 -- * 'cfviUserIP'
 --
--- * 'cfviProfileId'
+-- * 'cfviProFileId'
 --
 -- * 'cfviPayload'
 --
@@ -104,13 +104,13 @@ creativeFieldValuesInsert'
     -> Int64 -- ^ 'profileId'
     -> CreativeFieldValue -- ^ 'payload'
     -> CreativeFieldValuesInsert'
-creativeFieldValuesInsert' pCfviCreativeFieldId_ pCfviProfileId_ pCfviPayload_ =
+creativeFieldValuesInsert' pCfviCreativeFieldId_ pCfviProFileId_ pCfviPayload_ =
     CreativeFieldValuesInsert'
     { _cfviCreativeFieldId = pCfviCreativeFieldId_
     , _cfviQuotaUser = Nothing
     , _cfviPrettyPrint = True
     , _cfviUserIP = Nothing
-    , _cfviProfileId = pCfviProfileId_
+    , _cfviProFileId = pCfviProFileId_
     , _cfviPayload = pCfviPayload_
     , _cfviKey = Nothing
     , _cfviOAuthToken = Nothing
@@ -144,10 +144,10 @@ cfviUserIP
   = lens _cfviUserIP (\ s a -> s{_cfviUserIP = a})
 
 -- | User profile ID associated with this request.
-cfviProfileId :: Lens' CreativeFieldValuesInsert' Int64
-cfviProfileId
-  = lens _cfviProfileId
-      (\ s a -> s{_cfviProfileId = a})
+cfviProFileId :: Lens' CreativeFieldValuesInsert' Int64
+cfviProFileId
+  = lens _cfviProFileId
+      (\ s a -> s{_cfviProFileId = a})
 
 -- | Multipart request metadata.
 cfviPayload :: Lens' CreativeFieldValuesInsert' CreativeFieldValue
@@ -181,7 +181,7 @@ instance GoogleRequest CreativeFieldValuesInsert'
              CreativeFieldValue
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeFieldValuesInsert'{..}
-          = go _cfviProfileId _cfviCreativeFieldId
+          = go _cfviProFileId _cfviCreativeFieldId
               _cfviQuotaUser
               (Just _cfviPrettyPrint)
               _cfviUserIP

@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 type TablesGetResource =
      "tables" :>
        Capture "id" Text :>
-         QueryParam "version" MapsEngineTablesGetVersion :>
+         QueryParam "version" TablesGetVersion :>
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
@@ -66,7 +66,7 @@ data TablesGet' = TablesGet'
     , _tgPrettyPrint :: !Bool
     , _tgUserIP      :: !(Maybe Text)
     , _tgKey         :: !(Maybe Key)
-    , _tgVersion     :: !(Maybe MapsEngineTablesGetVersion)
+    , _tgVersion     :: !(Maybe TablesGetVersion)
     , _tgId          :: !Text
     , _tgOAuthToken  :: !(Maybe OAuthToken)
     , _tgFields      :: !(Maybe Text)
@@ -130,7 +130,7 @@ tgUserIP = lens _tgUserIP (\ s a -> s{_tgUserIP = a})
 tgKey :: Lens' TablesGet' (Maybe Key)
 tgKey = lens _tgKey (\ s a -> s{_tgKey = a})
 
-tgVersion :: Lens' TablesGet' (Maybe MapsEngineTablesGetVersion)
+tgVersion :: Lens' TablesGet' (Maybe TablesGetVersion)
 tgVersion
   = lens _tgVersion (\ s a -> s{_tgVersion = a})
 

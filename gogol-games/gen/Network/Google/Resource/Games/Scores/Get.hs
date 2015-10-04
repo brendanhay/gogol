@@ -61,8 +61,9 @@ type ScoresGetResource =
          "leaderboards" :>
            Capture "leaderboardId" Text :>
              "scores" :>
-               Capture "timeSpan" GamesScoresGetTimeSpan :>
-                 QueryParam "includeRankType" IncludeRankType :>
+               Capture "timeSpan" ScoresGetTimeSpan :>
+                 QueryParam "includeRankType" ScoresGetIncludeRankType
+                   :>
                    QueryParam "language" Text :>
                      QueryParam "pageToken" Text :>
                        QueryParam "maxResults" Int32 :>
@@ -87,10 +88,10 @@ data ScoresGet' = ScoresGet'
     { _sgQuotaUser       :: !(Maybe Text)
     , _sgPrettyPrint     :: !Bool
     , _sgUserIP          :: !(Maybe Text)
-    , _sgTimeSpan        :: !GamesScoresGetTimeSpan
+    , _sgTimeSpan        :: !ScoresGetTimeSpan
     , _sgLeaderboardId   :: !Text
     , _sgKey             :: !(Maybe Key)
-    , _sgIncludeRankType :: !(Maybe IncludeRankType)
+    , _sgIncludeRankType :: !(Maybe ScoresGetIncludeRankType)
     , _sgLanguage        :: !(Maybe Text)
     , _sgPageToken       :: !(Maybe Text)
     , _sgOAuthToken      :: !(Maybe OAuthToken)
@@ -129,7 +130,7 @@ data ScoresGet' = ScoresGet'
 --
 -- * 'sgFields'
 scoresGet'
-    :: GamesScoresGetTimeSpan -- ^ 'timeSpan'
+    :: ScoresGetTimeSpan -- ^ 'timeSpan'
     -> Text -- ^ 'leaderboardId'
     -> Text -- ^ 'playerId'
     -> ScoresGet'
@@ -169,7 +170,7 @@ sgUserIP :: Lens' ScoresGet' (Maybe Text)
 sgUserIP = lens _sgUserIP (\ s a -> s{_sgUserIP = a})
 
 -- | The time span for the scores and ranks you\'re requesting.
-sgTimeSpan :: Lens' ScoresGet' GamesScoresGetTimeSpan
+sgTimeSpan :: Lens' ScoresGet' ScoresGetTimeSpan
 sgTimeSpan
   = lens _sgTimeSpan (\ s a -> s{_sgTimeSpan = a})
 
@@ -188,7 +189,7 @@ sgKey = lens _sgKey (\ s a -> s{_sgKey = a})
 
 -- | The types of ranks to return. If the parameter is omitted, no ranks will
 -- be returned.
-sgIncludeRankType :: Lens' ScoresGet' (Maybe IncludeRankType)
+sgIncludeRankType :: Lens' ScoresGet' (Maybe ScoresGetIncludeRankType)
 sgIncludeRankType
   = lens _sgIncludeRankType
       (\ s a -> s{_sgIncludeRankType = a})

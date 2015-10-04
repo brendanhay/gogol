@@ -61,7 +61,7 @@ type UsersMessagesImportResource =
              QueryParam "deleted" Bool :>
                QueryParam "neverMarkSpam" Bool :>
                  QueryParam "internalDateSource"
-                   GmailUsersMessagesImportInternalDateSource
+                   UsersMessagesImportInternalDateSource
                    :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
@@ -90,7 +90,7 @@ data UsersMessagesImport' = UsersMessagesImport'
     , _uDeleted            :: !Bool
     , _uNeverMarkSpam      :: !Bool
     , _uOAuthToken         :: !(Maybe OAuthToken)
-    , _uInternalDateSource :: !GmailUsersMessagesImportInternalDateSource
+    , _uInternalDateSource :: !UsersMessagesImportInternalDateSource
     , _uFields             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -206,7 +206,7 @@ uOAuthToken
   = lens _uOAuthToken (\ s a -> s{_uOAuthToken = a})
 
 -- | Source for Gmail\'s internal date of the message.
-uInternalDateSource :: Lens' UsersMessagesImport' GmailUsersMessagesImportInternalDateSource
+uInternalDateSource :: Lens' UsersMessagesImport' UsersMessagesImportInternalDateSource
 uInternalDateSource
   = lens _uInternalDateSource
       (\ s a -> s{_uInternalDateSource = a})

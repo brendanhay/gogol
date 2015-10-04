@@ -50,7 +50,9 @@ import           Network.Google.ShoppingContent.Types
 type OrdersGettestOrdertemplateResource =
      Capture "merchantId" Word64 :>
        "testordertemplates" :>
-         Capture "templateName" TemplateName :>
+         Capture "templateName"
+           OrdersGettestOrdertemplateTemplateName
+           :>
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
@@ -68,7 +70,7 @@ data OrdersGettestOrdertemplate' = OrdersGettestOrdertemplate'
     { _ogoQuotaUser    :: !(Maybe Text)
     , _ogoMerchantId   :: !Word64
     , _ogoPrettyPrint  :: !Bool
-    , _ogoTemplateName :: !TemplateName
+    , _ogoTemplateName :: !OrdersGettestOrdertemplateTemplateName
     , _ogoUserIP       :: !(Maybe Text)
     , _ogoKey          :: !(Maybe Key)
     , _ogoOAuthToken   :: !(Maybe OAuthToken)
@@ -96,7 +98,7 @@ data OrdersGettestOrdertemplate' = OrdersGettestOrdertemplate'
 -- * 'ogoFields'
 ordersGettestOrdertemplate'
     :: Word64 -- ^ 'merchantId'
-    -> TemplateName -- ^ 'templateName'
+    -> OrdersGettestOrdertemplateTemplateName -- ^ 'templateName'
     -> OrdersGettestOrdertemplate'
 ordersGettestOrdertemplate' pOgoMerchantId_ pOgoTemplateName_ =
     OrdersGettestOrdertemplate'
@@ -130,7 +132,7 @@ ogoPrettyPrint
       (\ s a -> s{_ogoPrettyPrint = a})
 
 -- | The name of the template to retrieve.
-ogoTemplateName :: Lens' OrdersGettestOrdertemplate' TemplateName
+ogoTemplateName :: Lens' OrdersGettestOrdertemplate' OrdersGettestOrdertemplateTemplateName
 ogoTemplateName
   = lens _ogoTemplateName
       (\ s a -> s{_ogoTemplateName = a})

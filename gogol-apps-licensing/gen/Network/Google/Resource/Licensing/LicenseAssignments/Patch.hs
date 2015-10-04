@@ -61,7 +61,7 @@ type LicenseAssignmentsPatchResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] LicenseAssignment :>
+                             ReqBody '[OctetStream] LicenseAssignment :>
                                Patch '[JSON] LicenseAssignment
 
 -- | Assign License. This method supports patch semantics.

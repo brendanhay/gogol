@@ -17,13 +17,6 @@ module Network.Google.Logging.Types
     -- * Service URL
       loggingURL
 
-    -- * Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
     -- * Log
     , Log
     , log
@@ -38,15 +31,31 @@ module Network.Google.Logging.Types
     , leResource
     , leTimeNanos
 
-    -- * DetailsItem
-    , DetailsItem
-    , detailsItem
+    -- * Status
+    , Status
+    , status
+    , sDetails
+    , sCode
+    , sMessage
 
     -- * WriteLogEntriesRequest
     , WriteLogEntriesRequest
     , writeLogEntriesRequest
     , wlerEntries
     , wlerCommonLabels
+
+    -- * WriteLogEntriesRequestCommonLabels
+    , WriteLogEntriesRequestCommonLabels
+    , writeLogEntriesRequestCommonLabels
+
+    -- * Empty
+    , Empty
+    , empty
+
+    -- * ListSinksResponse
+    , ListSinksResponse
+    , listSinksResponse
+    , lsrSinks
 
     -- * RequestLog
     , RequestLog
@@ -83,10 +92,6 @@ module Network.Google.Logging.Types
     , rlSourceReference
     , rlAppEngineRelease
 
-    -- * Empty
-    , Empty
-    , empty
-
     -- * LogEntryMetadata
     , LogEntryMetadata
     , logEntryMetadata
@@ -99,14 +104,9 @@ module Network.Google.Logging.Types
     , lemProjectId
     , lemTimestamp
 
-    -- * ListSinksResponse
-    , ListSinksResponse
-    , listSinksResponse
-    , lsrSinks
-
-    -- * CommonLabels
-    , CommonLabels
-    , commonLabels
+    -- * LogEntryProtoPayload
+    , LogEntryProtoPayload
+    , logEntryProtoPayload
 
     -- * ListLogServiceIndexesResponse
     , ListLogServiceIndexesResponse
@@ -132,6 +132,10 @@ module Network.Google.Logging.Types
     , llsrNextPageToken
     , llsrLogServices
 
+    -- * StatusDetailsItem
+    , StatusDetailsItem
+    , statusDetailsItem
+
     -- * ListLogsResponse
     , ListLogsResponse
     , listLogsResponse
@@ -150,10 +154,6 @@ module Network.Google.Logging.Types
     , httprRequestMethod
     , httprReferer
 
-    -- * StructPayload
-    , StructPayload
-    , structPayload
-
     -- * ListLogSinksResponse
     , ListLogSinksResponse
     , listLogSinksResponse
@@ -162,8 +162,8 @@ module Network.Google.Logging.Types
     -- * LogService
     , LogService
     , logService
-    , logName
-    , logIndexKeys
+    , lssName
+    , lssIndexKeys
 
     -- * ListLogServiceSinksResponse
     , ListLogServiceSinksResponse
@@ -178,14 +178,6 @@ module Network.Google.Logging.Types
     , llLogMessage
     , llSourceLocation
 
-    -- * Labels
-    , Labels
-    , labels
-
-    -- * ProtoPayload
-    , ProtoPayload
-    , protoPayload
-
     -- * LogEntry
     , LogEntry
     , logEntry
@@ -196,6 +188,10 @@ module Network.Google.Logging.Types
     , leInsertId
     , leMetadata
     , leProtoPayload
+
+    -- * LogEntryMetadataLabels
+    , LogEntryMetadataLabels
+    , logEntryMetadataLabels
 
     -- * SourceLocation
     , SourceLocation
@@ -209,6 +205,10 @@ module Network.Google.Logging.Types
     , sourceReference
     , srRepository
     , srRevisionId
+
+    -- * LogEntryStructPayload
+    , LogEntryStructPayload
+    , logEntryStructPayload
     ) where
 
 import           Network.Google.Logging.Types.Product

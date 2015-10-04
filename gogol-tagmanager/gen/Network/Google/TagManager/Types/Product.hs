@@ -18,42 +18,6 @@ module Network.Google.TagManager.Types.Product where
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types.Sum
 
--- | List Folders Response.
---
--- /See:/ 'listFoldersResponse' smart constructor.
-newtype ListFoldersResponse = ListFoldersResponse
-    { _lfrFolders :: Maybe [Folder]
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ListFoldersResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lfrFolders'
-listFoldersResponse
-    :: ListFoldersResponse
-listFoldersResponse =
-    ListFoldersResponse
-    { _lfrFolders = Nothing
-    }
-
--- | All GTM Folders of a GTM Container.
-lfrFolders :: Lens' ListFoldersResponse [Folder]
-lfrFolders
-  = lens _lfrFolders (\ s a -> s{_lfrFolders = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON ListFoldersResponse where
-        parseJSON
-          = withObject "ListFoldersResponse"
-              (\ o ->
-                 ListFoldersResponse <$> (o .:? "folders" .!= mempty))
-
-instance ToJSON ListFoldersResponse where
-        toJSON ListFoldersResponse{..}
-          = object (catMaybes [("folders" .=) <$> _lfrFolders])
-
 -- | List Variables Response.
 --
 -- /See:/ 'listVariablesResponse' smart constructor.
@@ -91,6 +55,42 @@ instance ToJSON ListVariablesResponse where
         toJSON ListVariablesResponse{..}
           = object
               (catMaybes [("variables" .=) <$> _lvrVariables])
+
+-- | List Folders Response.
+--
+-- /See:/ 'listFoldersResponse' smart constructor.
+newtype ListFoldersResponse = ListFoldersResponse
+    { _lfrFolders :: Maybe [Folder]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListFoldersResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lfrFolders'
+listFoldersResponse
+    :: ListFoldersResponse
+listFoldersResponse =
+    ListFoldersResponse
+    { _lfrFolders = Nothing
+    }
+
+-- | All GTM Folders of a GTM Container.
+lfrFolders :: Lens' ListFoldersResponse [Folder]
+lfrFolders
+  = lens _lfrFolders (\ s a -> s{_lfrFolders = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ListFoldersResponse where
+        parseJSON
+          = withObject "ListFoldersResponse"
+              (\ o ->
+                 ListFoldersResponse <$> (o .:? "folders" .!= mempty))
+
+instance ToJSON ListFoldersResponse where
+        toJSON ListFoldersResponse{..}
+          = object (catMaybes [("folders" .=) <$> _lfrFolders])
 
 -- | List Rules Response.
 --
@@ -178,6 +178,233 @@ instance ToJSON PublishContainerVersionResponse where
               (catMaybes
                  [("compilerError" .=) <$> _pcvrCompilerError,
                   ("containerVersion" .=) <$> _pcvrContainerVersion])
+
+-- | Represents a Google Tag Manager Container Version Header.
+--
+-- /See:/ 'containerVersionHeader' smart constructor.
+data ContainerVersionHeader = ContainerVersionHeader
+    { _cvhNumTags            :: !(Maybe Text)
+    , _cvhNumMacros          :: !(Maybe Text)
+    , _cvhContainerId        :: !(Maybe Text)
+    , _cvhContainerVersionId :: !(Maybe Text)
+    , _cvhAccountId          :: !(Maybe Text)
+    , _cvhName               :: !(Maybe Text)
+    , _cvhNumTriggers        :: !(Maybe Text)
+    , _cvhDeleted            :: !(Maybe Bool)
+    , _cvhNumRules           :: !(Maybe Text)
+    , _cvhNumVariables       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ContainerVersionHeader' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cvhNumTags'
+--
+-- * 'cvhNumMacros'
+--
+-- * 'cvhContainerId'
+--
+-- * 'cvhContainerVersionId'
+--
+-- * 'cvhAccountId'
+--
+-- * 'cvhName'
+--
+-- * 'cvhNumTriggers'
+--
+-- * 'cvhDeleted'
+--
+-- * 'cvhNumRules'
+--
+-- * 'cvhNumVariables'
+containerVersionHeader
+    :: ContainerVersionHeader
+containerVersionHeader =
+    ContainerVersionHeader
+    { _cvhNumTags = Nothing
+    , _cvhNumMacros = Nothing
+    , _cvhContainerId = Nothing
+    , _cvhContainerVersionId = Nothing
+    , _cvhAccountId = Nothing
+    , _cvhName = Nothing
+    , _cvhNumTriggers = Nothing
+    , _cvhDeleted = Nothing
+    , _cvhNumRules = Nothing
+    , _cvhNumVariables = Nothing
+    }
+
+-- | Number of tags in the container version.
+cvhNumTags :: Lens' ContainerVersionHeader (Maybe Text)
+cvhNumTags
+  = lens _cvhNumTags (\ s a -> s{_cvhNumTags = a})
+
+-- | Number of macros in the container version.
+cvhNumMacros :: Lens' ContainerVersionHeader (Maybe Text)
+cvhNumMacros
+  = lens _cvhNumMacros (\ s a -> s{_cvhNumMacros = a})
+
+-- | GTM Container ID.
+cvhContainerId :: Lens' ContainerVersionHeader (Maybe Text)
+cvhContainerId
+  = lens _cvhContainerId
+      (\ s a -> s{_cvhContainerId = a})
+
+-- | The Container Version ID uniquely identifies the GTM Container Version.
+cvhContainerVersionId :: Lens' ContainerVersionHeader (Maybe Text)
+cvhContainerVersionId
+  = lens _cvhContainerVersionId
+      (\ s a -> s{_cvhContainerVersionId = a})
+
+-- | GTM Account ID.
+cvhAccountId :: Lens' ContainerVersionHeader (Maybe Text)
+cvhAccountId
+  = lens _cvhAccountId (\ s a -> s{_cvhAccountId = a})
+
+-- | Container version display name.
+cvhName :: Lens' ContainerVersionHeader (Maybe Text)
+cvhName = lens _cvhName (\ s a -> s{_cvhName = a})
+
+-- | Number of triggers in the container version.
+cvhNumTriggers :: Lens' ContainerVersionHeader (Maybe Text)
+cvhNumTriggers
+  = lens _cvhNumTriggers
+      (\ s a -> s{_cvhNumTriggers = a})
+
+-- | A value of true indicates this container version has been deleted.
+cvhDeleted :: Lens' ContainerVersionHeader (Maybe Bool)
+cvhDeleted
+  = lens _cvhDeleted (\ s a -> s{_cvhDeleted = a})
+
+-- | Number of rules in the container version.
+cvhNumRules :: Lens' ContainerVersionHeader (Maybe Text)
+cvhNumRules
+  = lens _cvhNumRules (\ s a -> s{_cvhNumRules = a})
+
+-- | Number of variables in the container version.
+cvhNumVariables :: Lens' ContainerVersionHeader (Maybe Text)
+cvhNumVariables
+  = lens _cvhNumVariables
+      (\ s a -> s{_cvhNumVariables = a})
+
+instance FromJSON ContainerVersionHeader where
+        parseJSON
+          = withObject "ContainerVersionHeader"
+              (\ o ->
+                 ContainerVersionHeader <$>
+                   (o .:? "numTags") <*> (o .:? "numMacros") <*>
+                     (o .:? "containerId")
+                     <*> (o .:? "containerVersionId")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "name")
+                     <*> (o .:? "numTriggers")
+                     <*> (o .:? "deleted")
+                     <*> (o .:? "numRules")
+                     <*> (o .:? "numVariables"))
+
+instance ToJSON ContainerVersionHeader where
+        toJSON ContainerVersionHeader{..}
+          = object
+              (catMaybes
+                 [("numTags" .=) <$> _cvhNumTags,
+                  ("numMacros" .=) <$> _cvhNumMacros,
+                  ("containerId" .=) <$> _cvhContainerId,
+                  ("containerVersionId" .=) <$> _cvhContainerVersionId,
+                  ("accountId" .=) <$> _cvhAccountId,
+                  ("name" .=) <$> _cvhName,
+                  ("numTriggers" .=) <$> _cvhNumTriggers,
+                  ("deleted" .=) <$> _cvhDeleted,
+                  ("numRules" .=) <$> _cvhNumRules,
+                  ("numVariables" .=) <$> _cvhNumVariables])
+
+--
+-- /See:/ 'teardownTag' smart constructor.
+data TeardownTag = TeardownTag
+    { _ttStopTeardownOnFailure :: !(Maybe Bool)
+    , _ttTagName               :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TeardownTag' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ttStopTeardownOnFailure'
+--
+-- * 'ttTagName'
+teardownTag
+    :: TeardownTag
+teardownTag =
+    TeardownTag
+    { _ttStopTeardownOnFailure = Nothing
+    , _ttTagName = Nothing
+    }
+
+-- | If true, fire the teardown tag if and only if the main tag fires
+-- successfully. If false, fire the teardown tag regardless of main tag
+-- firing status.
+ttStopTeardownOnFailure :: Lens' TeardownTag (Maybe Bool)
+ttStopTeardownOnFailure
+  = lens _ttStopTeardownOnFailure
+      (\ s a -> s{_ttStopTeardownOnFailure = a})
+
+-- | The name of the teardown tag.
+ttTagName :: Lens' TeardownTag (Maybe Text)
+ttTagName
+  = lens _ttTagName (\ s a -> s{_ttTagName = a})
+
+instance FromJSON TeardownTag where
+        parseJSON
+          = withObject "TeardownTag"
+              (\ o ->
+                 TeardownTag <$>
+                   (o .:? "stopTeardownOnFailure") <*>
+                     (o .:? "tagName"))
+
+instance ToJSON TeardownTag where
+        toJSON TeardownTag{..}
+          = object
+              (catMaybes
+                 [("stopTeardownOnFailure" .=) <$>
+                    _ttStopTeardownOnFailure,
+                  ("tagName" .=) <$> _ttTagName])
+
+-- | List triggers response.
+--
+-- /See:/ 'listTriggersResponse' smart constructor.
+newtype ListTriggersResponse = ListTriggersResponse
+    { _ltrTriggers :: Maybe [Trigger]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListTriggersResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ltrTriggers'
+listTriggersResponse
+    :: ListTriggersResponse
+listTriggersResponse =
+    ListTriggersResponse
+    { _ltrTriggers = Nothing
+    }
+
+-- | All GTM Triggers of a GTM Container.
+ltrTriggers :: Lens' ListTriggersResponse [Trigger]
+ltrTriggers
+  = lens _ltrTriggers (\ s a -> s{_ltrTriggers = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ListTriggersResponse where
+        parseJSON
+          = withObject "ListTriggersResponse"
+              (\ o ->
+                 ListTriggersResponse <$>
+                   (o .:? "triggers" .!= mempty))
+
+instance ToJSON ListTriggersResponse where
+        toJSON ListTriggersResponse{..}
+          = object
+              (catMaybes [("triggers" .=) <$> _ltrTriggers])
 
 -- | Represents a Google Tag Manager Macro.
 --
@@ -370,7 +597,7 @@ data Tag = Tag
     , _tPriority          :: !(Maybe Parameter)
     , _tTeardownTag       :: !(Maybe [TeardownTag])
     , _tFingerprint       :: !(Maybe Text)
-    , _tTagFiringOption   :: !(Maybe TagFiringOption)
+    , _tTagFiringOption   :: !(Maybe TagTagFiringOption)
     , _tAccountId         :: !(Maybe Text)
     , _tTagId             :: !(Maybe Text)
     , _tName              :: !(Maybe Text)
@@ -507,7 +734,7 @@ tFingerprint
   = lens _tFingerprint (\ s a -> s{_tFingerprint = a})
 
 -- | Option to fire this tag.
-tTagFiringOption :: Lens' Tag (Maybe TagFiringOption)
+tTagFiringOption :: Lens' Tag (Maybe TagTagFiringOption)
 tTagFiringOption
   = lens _tTagFiringOption
       (\ s a -> s{_tTagFiringOption = a})
@@ -630,57 +857,6 @@ instance ToJSON Tag where
                   ("firingRuleId" .=) <$> _tFiringRuleId,
                   ("parameter" .=) <$> _tParameter])
 
---
--- /See:/ 'teardownTag' smart constructor.
-data TeardownTag = TeardownTag
-    { _ttStopTeardownOnFailure :: !(Maybe Bool)
-    , _ttTagName               :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'TeardownTag' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ttStopTeardownOnFailure'
---
--- * 'ttTagName'
-teardownTag
-    :: TeardownTag
-teardownTag =
-    TeardownTag
-    { _ttStopTeardownOnFailure = Nothing
-    , _ttTagName = Nothing
-    }
-
--- | If true, fire the teardown tag if and only if the main tag fires
--- successfully. If false, fire the teardown tag regardless of main tag
--- firing status.
-ttStopTeardownOnFailure :: Lens' TeardownTag (Maybe Bool)
-ttStopTeardownOnFailure
-  = lens _ttStopTeardownOnFailure
-      (\ s a -> s{_ttStopTeardownOnFailure = a})
-
--- | The name of the teardown tag.
-ttTagName :: Lens' TeardownTag (Maybe Text)
-ttTagName
-  = lens _ttTagName (\ s a -> s{_ttTagName = a})
-
-instance FromJSON TeardownTag where
-        parseJSON
-          = withObject "TeardownTag"
-              (\ o ->
-                 TeardownTag <$>
-                   (o .:? "stopTeardownOnFailure") <*>
-                     (o .:? "tagName"))
-
-instance ToJSON TeardownTag where
-        toJSON TeardownTag{..}
-          = object
-              (catMaybes
-                 [("stopTeardownOnFailure" .=) <$>
-                    _ttStopTeardownOnFailure,
-                  ("tagName" .=) <$> _ttTagName])
-
 -- | Create container versions response.
 --
 -- /See:/ 'createContainerVersionResponse' smart constructor.
@@ -731,44 +907,6 @@ instance ToJSON CreateContainerVersionResponse where
               (catMaybes
                  [("compilerError" .=) <$> _ccvrCompilerError,
                   ("containerVersion" .=) <$> _ccvrContainerVersion])
-
--- | List triggers response.
---
--- /See:/ 'listTriggersResponse' smart constructor.
-newtype ListTriggersResponse = ListTriggersResponse
-    { _ltrTriggers :: Maybe [Trigger]
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ListTriggersResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ltrTriggers'
-listTriggersResponse
-    :: ListTriggersResponse
-listTriggersResponse =
-    ListTriggersResponse
-    { _ltrTriggers = Nothing
-    }
-
--- | All GTM Triggers of a GTM Container.
-ltrTriggers :: Lens' ListTriggersResponse [Trigger]
-ltrTriggers
-  = lens _ltrTriggers (\ s a -> s{_ltrTriggers = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON ListTriggersResponse where
-        parseJSON
-          = withObject "ListTriggersResponse"
-              (\ o ->
-                 ListTriggersResponse <$>
-                   (o .:? "triggers" .!= mempty))
-
-instance ToJSON ListTriggersResponse where
-        toJSON ListTriggersResponse{..}
-          = object
-              (catMaybes [("triggers" .=) <$> _ltrTriggers])
 
 -- | Options for new container versions.
 --
@@ -833,182 +971,6 @@ instance ToJSON
                  [("name" .=) <$> _ccvrvoName,
                   ("quickPreview" .=) <$> _ccvrvoQuickPreview,
                   ("notes" .=) <$> _ccvrvoNotes])
-
--- | Represents a Google Tag Manager Container Version Header.
---
--- /See:/ 'containerVersionHeader' smart constructor.
-data ContainerVersionHeader = ContainerVersionHeader
-    { _cvhNumTags            :: !(Maybe Text)
-    , _cvhNumMacros          :: !(Maybe Text)
-    , _cvhContainerId        :: !(Maybe Text)
-    , _cvhContainerVersionId :: !(Maybe Text)
-    , _cvhAccountId          :: !(Maybe Text)
-    , _cvhName               :: !(Maybe Text)
-    , _cvhNumTriggers        :: !(Maybe Text)
-    , _cvhDeleted            :: !(Maybe Bool)
-    , _cvhNumRules           :: !(Maybe Text)
-    , _cvhNumVariables       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ContainerVersionHeader' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cvhNumTags'
---
--- * 'cvhNumMacros'
---
--- * 'cvhContainerId'
---
--- * 'cvhContainerVersionId'
---
--- * 'cvhAccountId'
---
--- * 'cvhName'
---
--- * 'cvhNumTriggers'
---
--- * 'cvhDeleted'
---
--- * 'cvhNumRules'
---
--- * 'cvhNumVariables'
-containerVersionHeader
-    :: ContainerVersionHeader
-containerVersionHeader =
-    ContainerVersionHeader
-    { _cvhNumTags = Nothing
-    , _cvhNumMacros = Nothing
-    , _cvhContainerId = Nothing
-    , _cvhContainerVersionId = Nothing
-    , _cvhAccountId = Nothing
-    , _cvhName = Nothing
-    , _cvhNumTriggers = Nothing
-    , _cvhDeleted = Nothing
-    , _cvhNumRules = Nothing
-    , _cvhNumVariables = Nothing
-    }
-
--- | Number of tags in the container version.
-cvhNumTags :: Lens' ContainerVersionHeader (Maybe Text)
-cvhNumTags
-  = lens _cvhNumTags (\ s a -> s{_cvhNumTags = a})
-
--- | Number of macros in the container version.
-cvhNumMacros :: Lens' ContainerVersionHeader (Maybe Text)
-cvhNumMacros
-  = lens _cvhNumMacros (\ s a -> s{_cvhNumMacros = a})
-
--- | GTM Container ID.
-cvhContainerId :: Lens' ContainerVersionHeader (Maybe Text)
-cvhContainerId
-  = lens _cvhContainerId
-      (\ s a -> s{_cvhContainerId = a})
-
--- | The Container Version ID uniquely identifies the GTM Container Version.
-cvhContainerVersionId :: Lens' ContainerVersionHeader (Maybe Text)
-cvhContainerVersionId
-  = lens _cvhContainerVersionId
-      (\ s a -> s{_cvhContainerVersionId = a})
-
--- | GTM Account ID.
-cvhAccountId :: Lens' ContainerVersionHeader (Maybe Text)
-cvhAccountId
-  = lens _cvhAccountId (\ s a -> s{_cvhAccountId = a})
-
--- | Container version display name.
-cvhName :: Lens' ContainerVersionHeader (Maybe Text)
-cvhName = lens _cvhName (\ s a -> s{_cvhName = a})
-
--- | Number of triggers in the container version.
-cvhNumTriggers :: Lens' ContainerVersionHeader (Maybe Text)
-cvhNumTriggers
-  = lens _cvhNumTriggers
-      (\ s a -> s{_cvhNumTriggers = a})
-
--- | A value of true indicates this container version has been deleted.
-cvhDeleted :: Lens' ContainerVersionHeader (Maybe Bool)
-cvhDeleted
-  = lens _cvhDeleted (\ s a -> s{_cvhDeleted = a})
-
--- | Number of rules in the container version.
-cvhNumRules :: Lens' ContainerVersionHeader (Maybe Text)
-cvhNumRules
-  = lens _cvhNumRules (\ s a -> s{_cvhNumRules = a})
-
--- | Number of variables in the container version.
-cvhNumVariables :: Lens' ContainerVersionHeader (Maybe Text)
-cvhNumVariables
-  = lens _cvhNumVariables
-      (\ s a -> s{_cvhNumVariables = a})
-
-instance FromJSON ContainerVersionHeader where
-        parseJSON
-          = withObject "ContainerVersionHeader"
-              (\ o ->
-                 ContainerVersionHeader <$>
-                   (o .:? "numTags") <*> (o .:? "numMacros") <*>
-                     (o .:? "containerId")
-                     <*> (o .:? "containerVersionId")
-                     <*> (o .:? "accountId")
-                     <*> (o .:? "name")
-                     <*> (o .:? "numTriggers")
-                     <*> (o .:? "deleted")
-                     <*> (o .:? "numRules")
-                     <*> (o .:? "numVariables"))
-
-instance ToJSON ContainerVersionHeader where
-        toJSON ContainerVersionHeader{..}
-          = object
-              (catMaybes
-                 [("numTags" .=) <$> _cvhNumTags,
-                  ("numMacros" .=) <$> _cvhNumMacros,
-                  ("containerId" .=) <$> _cvhContainerId,
-                  ("containerVersionId" .=) <$> _cvhContainerVersionId,
-                  ("accountId" .=) <$> _cvhAccountId,
-                  ("name" .=) <$> _cvhName,
-                  ("numTriggers" .=) <$> _cvhNumTriggers,
-                  ("deleted" .=) <$> _cvhDeleted,
-                  ("numRules" .=) <$> _cvhNumRules,
-                  ("numVariables" .=) <$> _cvhNumVariables])
-
--- | Defines the Google Tag Manager Account access permissions.
---
--- /See:/ 'accountAccess' smart constructor.
-newtype AccountAccess = AccountAccess
-    { _aaPermission :: Maybe [PermissionItem]
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AccountAccess' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aaPermission'
-accountAccess
-    :: AccountAccess
-accountAccess =
-    AccountAccess
-    { _aaPermission = Nothing
-    }
-
--- | List of Account permissions. Valid account permissions are read and
--- manage.
-aaPermission :: Lens' AccountAccess [PermissionItem]
-aaPermission
-  = lens _aaPermission (\ s a -> s{_aaPermission = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON AccountAccess where
-        parseJSON
-          = withObject "AccountAccess"
-              (\ o ->
-                 AccountAccess <$> (o .:? "permission" .!= mempty))
-
-instance ToJSON AccountAccess where
-        toJSON AccountAccess{..}
-          = object
-              (catMaybes [("permission" .=) <$> _aaPermission])
 
 -- | Represents a user\'s permissions to an account and its container.
 --
@@ -1096,6 +1058,44 @@ instance ToJSON UserAccess where
                   ("containerAccess" .=) <$> _uaContainerAccess,
                   ("permissionId" .=) <$> _uaPermissionId])
 
+-- | Defines the Google Tag Manager Account access permissions.
+--
+-- /See:/ 'accountAccess' smart constructor.
+newtype AccountAccess = AccountAccess
+    { _aaPermission :: Maybe [AccountAccessPermissionItem]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AccountAccess' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aaPermission'
+accountAccess
+    :: AccountAccess
+accountAccess =
+    AccountAccess
+    { _aaPermission = Nothing
+    }
+
+-- | List of Account permissions. Valid account permissions are read and
+-- manage.
+aaPermission :: Lens' AccountAccess [AccountAccessPermissionItem]
+aaPermission
+  = lens _aaPermission (\ s a -> s{_aaPermission = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON AccountAccess where
+        parseJSON
+          = withObject "AccountAccess"
+              (\ o ->
+                 AccountAccess <$> (o .:? "permission" .!= mempty))
+
+instance ToJSON AccountAccess where
+        toJSON AccountAccess{..}
+          = object
+              (catMaybes [("permission" .=) <$> _aaPermission])
+
 -- | List Accounts Response.
 --
 -- /See:/ 'listAccountsResponse' smart constructor.
@@ -1133,188 +1133,6 @@ instance ToJSON ListAccountsResponse where
         toJSON ListAccountsResponse{..}
           = object
               (catMaybes [("accounts" .=) <$> _larAccounts])
-
--- | Represents a Google Tag Manager Variable.
---
--- /See:/ 'variable' smart constructor.
-data Variable = Variable
-    { _vScheduleEndMs      :: !(Maybe Int64)
-    , _vParentFolderId     :: !(Maybe Text)
-    , _vContainerId        :: !(Maybe Text)
-    , _vFingerprint        :: !(Maybe Text)
-    , _vVariableId         :: !(Maybe Text)
-    , _vAccountId          :: !(Maybe Text)
-    , _vDisablingTriggerId :: !(Maybe [Text])
-    , _vName               :: !(Maybe Text)
-    , _vType               :: !(Maybe Text)
-    , _vScheduleStartMs    :: !(Maybe Int64)
-    , _vNotes              :: !(Maybe Text)
-    , _vEnablingTriggerId  :: !(Maybe [Text])
-    , _vParameter          :: !(Maybe [Parameter])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Variable' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'vScheduleEndMs'
---
--- * 'vParentFolderId'
---
--- * 'vContainerId'
---
--- * 'vFingerprint'
---
--- * 'vVariableId'
---
--- * 'vAccountId'
---
--- * 'vDisablingTriggerId'
---
--- * 'vName'
---
--- * 'vType'
---
--- * 'vScheduleStartMs'
---
--- * 'vNotes'
---
--- * 'vEnablingTriggerId'
---
--- * 'vParameter'
-variable
-    :: Variable
-variable =
-    Variable
-    { _vScheduleEndMs = Nothing
-    , _vParentFolderId = Nothing
-    , _vContainerId = Nothing
-    , _vFingerprint = Nothing
-    , _vVariableId = Nothing
-    , _vAccountId = Nothing
-    , _vDisablingTriggerId = Nothing
-    , _vName = Nothing
-    , _vType = Nothing
-    , _vScheduleStartMs = Nothing
-    , _vNotes = Nothing
-    , _vEnablingTriggerId = Nothing
-    , _vParameter = Nothing
-    }
-
--- | The end timestamp in milliseconds to schedule a variable.
-vScheduleEndMs :: Lens' Variable (Maybe Int64)
-vScheduleEndMs
-  = lens _vScheduleEndMs
-      (\ s a -> s{_vScheduleEndMs = a})
-
--- | Parent folder id.
-vParentFolderId :: Lens' Variable (Maybe Text)
-vParentFolderId
-  = lens _vParentFolderId
-      (\ s a -> s{_vParentFolderId = a})
-
--- | GTM Container ID.
-vContainerId :: Lens' Variable (Maybe Text)
-vContainerId
-  = lens _vContainerId (\ s a -> s{_vContainerId = a})
-
--- | The fingerprint of the GTM Variable as computed at storage time. This
--- value is recomputed whenever the variable is modified.
-vFingerprint :: Lens' Variable (Maybe Text)
-vFingerprint
-  = lens _vFingerprint (\ s a -> s{_vFingerprint = a})
-
--- | The Variable ID uniquely identifies the GTM Variable.
-vVariableId :: Lens' Variable (Maybe Text)
-vVariableId
-  = lens _vVariableId (\ s a -> s{_vVariableId = a})
-
--- | GTM Account ID.
-vAccountId :: Lens' Variable (Maybe Text)
-vAccountId
-  = lens _vAccountId (\ s a -> s{_vAccountId = a})
-
--- | For mobile containers only: A list of trigger IDs for disabling
--- conditional variables; the variable is enabled if one of the enabling
--- trigger is true while all the disabling trigger are false. Treated as an
--- unordered set.
-vDisablingTriggerId :: Lens' Variable [Text]
-vDisablingTriggerId
-  = lens _vDisablingTriggerId
-      (\ s a -> s{_vDisablingTriggerId = a})
-      . _Default
-      . _Coerce
-
--- | Variable display name.
-vName :: Lens' Variable (Maybe Text)
-vName = lens _vName (\ s a -> s{_vName = a})
-
--- | GTM Variable Type.
-vType :: Lens' Variable (Maybe Text)
-vType = lens _vType (\ s a -> s{_vType = a})
-
--- | The start timestamp in milliseconds to schedule a variable.
-vScheduleStartMs :: Lens' Variable (Maybe Int64)
-vScheduleStartMs
-  = lens _vScheduleStartMs
-      (\ s a -> s{_vScheduleStartMs = a})
-
--- | User notes on how to apply this variable in the container.
-vNotes :: Lens' Variable (Maybe Text)
-vNotes = lens _vNotes (\ s a -> s{_vNotes = a})
-
--- | For mobile containers only: A list of trigger IDs for enabling
--- conditional variables; the variable is enabled if one of the enabling
--- triggers is true while all the disabling triggers are false. Treated as
--- an unordered set.
-vEnablingTriggerId :: Lens' Variable [Text]
-vEnablingTriggerId
-  = lens _vEnablingTriggerId
-      (\ s a -> s{_vEnablingTriggerId = a})
-      . _Default
-      . _Coerce
-
--- | The variable\'s parameters.
-vParameter :: Lens' Variable [Parameter]
-vParameter
-  = lens _vParameter (\ s a -> s{_vParameter = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON Variable where
-        parseJSON
-          = withObject "Variable"
-              (\ o ->
-                 Variable <$>
-                   (o .:? "scheduleEndMs") <*> (o .:? "parentFolderId")
-                     <*> (o .:? "containerId")
-                     <*> (o .:? "fingerprint")
-                     <*> (o .:? "variableId")
-                     <*> (o .:? "accountId")
-                     <*> (o .:? "disablingTriggerId" .!= mempty)
-                     <*> (o .:? "name")
-                     <*> (o .:? "type")
-                     <*> (o .:? "scheduleStartMs")
-                     <*> (o .:? "notes")
-                     <*> (o .:? "enablingTriggerId" .!= mempty)
-                     <*> (o .:? "parameter" .!= mempty))
-
-instance ToJSON Variable where
-        toJSON Variable{..}
-          = object
-              (catMaybes
-                 [("scheduleEndMs" .=) <$> _vScheduleEndMs,
-                  ("parentFolderId" .=) <$> _vParentFolderId,
-                  ("containerId" .=) <$> _vContainerId,
-                  ("fingerprint" .=) <$> _vFingerprint,
-                  ("variableId" .=) <$> _vVariableId,
-                  ("accountId" .=) <$> _vAccountId,
-                  ("disablingTriggerId" .=) <$> _vDisablingTriggerId,
-                  ("name" .=) <$> _vName, ("type" .=) <$> _vType,
-                  ("scheduleStartMs" .=) <$> _vScheduleStartMs,
-                  ("notes" .=) <$> _vNotes,
-                  ("enablingTriggerId" .=) <$> _vEnablingTriggerId,
-                  ("parameter" .=) <$> _vParameter])
 
 -- | Represents a Google Tag Manager Rule.
 --
@@ -1498,6 +1316,188 @@ instance ToJSON Folder where
                   ("accountId" .=) <$> _fAccountId,
                   ("name" .=) <$> _fName])
 
+-- | Represents a Google Tag Manager Variable.
+--
+-- /See:/ 'variable' smart constructor.
+data Variable = Variable
+    { _vScheduleEndMs      :: !(Maybe Int64)
+    , _vParentFolderId     :: !(Maybe Text)
+    , _vContainerId        :: !(Maybe Text)
+    , _vFingerprint        :: !(Maybe Text)
+    , _vVariableId         :: !(Maybe Text)
+    , _vAccountId          :: !(Maybe Text)
+    , _vDisablingTriggerId :: !(Maybe [Text])
+    , _vName               :: !(Maybe Text)
+    , _vType               :: !(Maybe Text)
+    , _vScheduleStartMs    :: !(Maybe Int64)
+    , _vNotes              :: !(Maybe Text)
+    , _vEnablingTriggerId  :: !(Maybe [Text])
+    , _vParameter          :: !(Maybe [Parameter])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Variable' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vScheduleEndMs'
+--
+-- * 'vParentFolderId'
+--
+-- * 'vContainerId'
+--
+-- * 'vFingerprint'
+--
+-- * 'vVariableId'
+--
+-- * 'vAccountId'
+--
+-- * 'vDisablingTriggerId'
+--
+-- * 'vName'
+--
+-- * 'vType'
+--
+-- * 'vScheduleStartMs'
+--
+-- * 'vNotes'
+--
+-- * 'vEnablingTriggerId'
+--
+-- * 'vParameter'
+variable
+    :: Variable
+variable =
+    Variable
+    { _vScheduleEndMs = Nothing
+    , _vParentFolderId = Nothing
+    , _vContainerId = Nothing
+    , _vFingerprint = Nothing
+    , _vVariableId = Nothing
+    , _vAccountId = Nothing
+    , _vDisablingTriggerId = Nothing
+    , _vName = Nothing
+    , _vType = Nothing
+    , _vScheduleStartMs = Nothing
+    , _vNotes = Nothing
+    , _vEnablingTriggerId = Nothing
+    , _vParameter = Nothing
+    }
+
+-- | The end timestamp in milliseconds to schedule a variable.
+vScheduleEndMs :: Lens' Variable (Maybe Int64)
+vScheduleEndMs
+  = lens _vScheduleEndMs
+      (\ s a -> s{_vScheduleEndMs = a})
+
+-- | Parent folder id.
+vParentFolderId :: Lens' Variable (Maybe Text)
+vParentFolderId
+  = lens _vParentFolderId
+      (\ s a -> s{_vParentFolderId = a})
+
+-- | GTM Container ID.
+vContainerId :: Lens' Variable (Maybe Text)
+vContainerId
+  = lens _vContainerId (\ s a -> s{_vContainerId = a})
+
+-- | The fingerprint of the GTM Variable as computed at storage time. This
+-- value is recomputed whenever the variable is modified.
+vFingerprint :: Lens' Variable (Maybe Text)
+vFingerprint
+  = lens _vFingerprint (\ s a -> s{_vFingerprint = a})
+
+-- | The Variable ID uniquely identifies the GTM Variable.
+vVariableId :: Lens' Variable (Maybe Text)
+vVariableId
+  = lens _vVariableId (\ s a -> s{_vVariableId = a})
+
+-- | GTM Account ID.
+vAccountId :: Lens' Variable (Maybe Text)
+vAccountId
+  = lens _vAccountId (\ s a -> s{_vAccountId = a})
+
+-- | For mobile containers only: A list of trigger IDs for disabling
+-- conditional variables; the variable is enabled if one of the enabling
+-- trigger is true while all the disabling trigger are false. Treated as an
+-- unordered set.
+vDisablingTriggerId :: Lens' Variable [Text]
+vDisablingTriggerId
+  = lens _vDisablingTriggerId
+      (\ s a -> s{_vDisablingTriggerId = a})
+      . _Default
+      . _Coerce
+
+-- | Variable display name.
+vName :: Lens' Variable (Maybe Text)
+vName = lens _vName (\ s a -> s{_vName = a})
+
+-- | GTM Variable Type.
+vType :: Lens' Variable (Maybe Text)
+vType = lens _vType (\ s a -> s{_vType = a})
+
+-- | The start timestamp in milliseconds to schedule a variable.
+vScheduleStartMs :: Lens' Variable (Maybe Int64)
+vScheduleStartMs
+  = lens _vScheduleStartMs
+      (\ s a -> s{_vScheduleStartMs = a})
+
+-- | User notes on how to apply this variable in the container.
+vNotes :: Lens' Variable (Maybe Text)
+vNotes = lens _vNotes (\ s a -> s{_vNotes = a})
+
+-- | For mobile containers only: A list of trigger IDs for enabling
+-- conditional variables; the variable is enabled if one of the enabling
+-- triggers is true while all the disabling triggers are false. Treated as
+-- an unordered set.
+vEnablingTriggerId :: Lens' Variable [Text]
+vEnablingTriggerId
+  = lens _vEnablingTriggerId
+      (\ s a -> s{_vEnablingTriggerId = a})
+      . _Default
+      . _Coerce
+
+-- | The variable\'s parameters.
+vParameter :: Lens' Variable [Parameter]
+vParameter
+  = lens _vParameter (\ s a -> s{_vParameter = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON Variable where
+        parseJSON
+          = withObject "Variable"
+              (\ o ->
+                 Variable <$>
+                   (o .:? "scheduleEndMs") <*> (o .:? "parentFolderId")
+                     <*> (o .:? "containerId")
+                     <*> (o .:? "fingerprint")
+                     <*> (o .:? "variableId")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "disablingTriggerId" .!= mempty)
+                     <*> (o .:? "name")
+                     <*> (o .:? "type")
+                     <*> (o .:? "scheduleStartMs")
+                     <*> (o .:? "notes")
+                     <*> (o .:? "enablingTriggerId" .!= mempty)
+                     <*> (o .:? "parameter" .!= mempty))
+
+instance ToJSON Variable where
+        toJSON Variable{..}
+          = object
+              (catMaybes
+                 [("scheduleEndMs" .=) <$> _vScheduleEndMs,
+                  ("parentFolderId" .=) <$> _vParentFolderId,
+                  ("containerId" .=) <$> _vContainerId,
+                  ("fingerprint" .=) <$> _vFingerprint,
+                  ("variableId" .=) <$> _vVariableId,
+                  ("accountId" .=) <$> _vAccountId,
+                  ("disablingTriggerId" .=) <$> _vDisablingTriggerId,
+                  ("name" .=) <$> _vName, ("type" .=) <$> _vType,
+                  ("scheduleStartMs" .=) <$> _vScheduleStartMs,
+                  ("notes" .=) <$> _vNotes,
+                  ("enablingTriggerId" .=) <$> _vEnablingTriggerId,
+                  ("parameter" .=) <$> _vParameter])
+
 -- | Represents a Google Tag Manager Account.
 --
 -- /See:/ 'account' smart constructor.
@@ -1628,8 +1628,8 @@ instance ToJSON ListContainerVersionsResponse where
 -- /See:/ 'container' smart constructor.
 data Container = Container
     { _cPublicId               :: !(Maybe Text)
-    , _cUsageContext           :: !(Maybe [UsageContextItem])
-    , _cEnabledBuiltInVariable :: !(Maybe [EnabledBuiltInVariableItem])
+    , _cUsageContext           :: !(Maybe [ContainerUsageContextItem])
+    , _cEnabledBuiltInVariable :: !(Maybe [ContainerEnabledBuiltInVariableItem])
     , _cContainerId            :: !(Maybe Text)
     , _cFingerprint            :: !(Maybe Text)
     , _cTimeZoneCountryId      :: !(Maybe Text)
@@ -1689,7 +1689,7 @@ cPublicId
 
 -- | List of Usage Contexts for the Container. Valid values include: web,
 -- android, ios.
-cUsageContext :: Lens' Container [UsageContextItem]
+cUsageContext :: Lens' Container [ContainerUsageContextItem]
 cUsageContext
   = lens _cUsageContext
       (\ s a -> s{_cUsageContext = a})
@@ -1703,7 +1703,7 @@ cUsageContext
 -- errorLine, newHistoryFragment, oldHistoryFragment, newHistoryState,
 -- oldHistoryState, historySource, containerVersion, debugMode,
 -- randomNumber, containerId.
-cEnabledBuiltInVariable :: Lens' Container [EnabledBuiltInVariableItem]
+cEnabledBuiltInVariable :: Lens' Container [ContainerEnabledBuiltInVariableItem]
 cEnabledBuiltInVariable
   = lens _cEnabledBuiltInVariable
       (\ s a -> s{_cEnabledBuiltInVariable = a})
@@ -1823,94 +1823,6 @@ instance ToJSON ListAccountUsersResponse where
         toJSON ListAccountUsersResponse{..}
           = object
               (catMaybes [("userAccess" .=) <$> _laurUserAccess])
-
--- | List Containers Response.
---
--- /See:/ 'listContainersResponse' smart constructor.
-newtype ListContainersResponse = ListContainersResponse
-    { _lcrContainers :: Maybe [Container]
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ListContainersResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lcrContainers'
-listContainersResponse
-    :: ListContainersResponse
-listContainersResponse =
-    ListContainersResponse
-    { _lcrContainers = Nothing
-    }
-
--- | All Containers of a GTM Account.
-lcrContainers :: Lens' ListContainersResponse [Container]
-lcrContainers
-  = lens _lcrContainers
-      (\ s a -> s{_lcrContainers = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON ListContainersResponse where
-        parseJSON
-          = withObject "ListContainersResponse"
-              (\ o ->
-                 ListContainersResponse <$>
-                   (o .:? "containers" .!= mempty))
-
-instance ToJSON ListContainersResponse where
-        toJSON ListContainersResponse{..}
-          = object
-              (catMaybes [("containers" .=) <$> _lcrContainers])
-
---
--- /See:/ 'setupTag' smart constructor.
-data SetupTag = SetupTag
-    { _stTagName            :: !(Maybe Text)
-    , _stStopOnSetupFailure :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SetupTag' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'stTagName'
---
--- * 'stStopOnSetupFailure'
-setupTag
-    :: SetupTag
-setupTag =
-    SetupTag
-    { _stTagName = Nothing
-    , _stStopOnSetupFailure = Nothing
-    }
-
--- | The name of the setup tag.
-stTagName :: Lens' SetupTag (Maybe Text)
-stTagName
-  = lens _stTagName (\ s a -> s{_stTagName = a})
-
--- | If true, fire the main tag if and only if the setup tag fires
--- successfully. If false, fire the main tag regardless of setup tag firing
--- status.
-stStopOnSetupFailure :: Lens' SetupTag (Maybe Bool)
-stStopOnSetupFailure
-  = lens _stStopOnSetupFailure
-      (\ s a -> s{_stStopOnSetupFailure = a})
-
-instance FromJSON SetupTag where
-        parseJSON
-          = withObject "SetupTag"
-              (\ o ->
-                 SetupTag <$>
-                   (o .:? "tagName") <*> (o .:? "stopOnSetupFailure"))
-
-instance ToJSON SetupTag where
-        toJSON SetupTag{..}
-          = object
-              (catMaybes
-                 [("tagName" .=) <$> _stTagName,
-                  ("stopOnSetupFailure" .=) <$> _stStopOnSetupFailure])
 
 -- | Represents a Google Tag Manager Container Version.
 --
@@ -2102,76 +2014,93 @@ instance ToJSON ContainerVersion where
                   ("trigger" .=) <$> _cvTrigger,
                   ("notes" .=) <$> _cvNotes])
 
--- | List Tags Response.
 --
--- /See:/ 'listTagsResponse' smart constructor.
-newtype ListTagsResponse = ListTagsResponse
-    { _ltrTags :: Maybe [Tag]
+-- /See:/ 'setupTag' smart constructor.
+data SetupTag = SetupTag
+    { _stTagName            :: !(Maybe Text)
+    , _stStopOnSetupFailure :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ListTagsResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'SetupTag' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ltrTags'
-listTagsResponse
-    :: ListTagsResponse
-listTagsResponse =
-    ListTagsResponse
-    { _ltrTags = Nothing
+-- * 'stTagName'
+--
+-- * 'stStopOnSetupFailure'
+setupTag
+    :: SetupTag
+setupTag =
+    SetupTag
+    { _stTagName = Nothing
+    , _stStopOnSetupFailure = Nothing
     }
 
--- | All GTM Tags of a GTM Container.
-ltrTags :: Lens' ListTagsResponse [Tag]
-ltrTags
-  = lens _ltrTags (\ s a -> s{_ltrTags = a}) . _Default
-      . _Coerce
+-- | The name of the setup tag.
+stTagName :: Lens' SetupTag (Maybe Text)
+stTagName
+  = lens _stTagName (\ s a -> s{_stTagName = a})
 
-instance FromJSON ListTagsResponse where
+-- | If true, fire the main tag if and only if the setup tag fires
+-- successfully. If false, fire the main tag regardless of setup tag firing
+-- status.
+stStopOnSetupFailure :: Lens' SetupTag (Maybe Bool)
+stStopOnSetupFailure
+  = lens _stStopOnSetupFailure
+      (\ s a -> s{_stStopOnSetupFailure = a})
+
+instance FromJSON SetupTag where
         parseJSON
-          = withObject "ListTagsResponse"
+          = withObject "SetupTag"
               (\ o ->
-                 ListTagsResponse <$> (o .:? "tags" .!= mempty))
+                 SetupTag <$>
+                   (o .:? "tagName") <*> (o .:? "stopOnSetupFailure"))
 
-instance ToJSON ListTagsResponse where
-        toJSON ListTagsResponse{..}
-          = object (catMaybes [("tags" .=) <$> _ltrTags])
+instance ToJSON SetupTag where
+        toJSON SetupTag{..}
+          = object
+              (catMaybes
+                 [("tagName" .=) <$> _stTagName,
+                  ("stopOnSetupFailure" .=) <$> _stStopOnSetupFailure])
 
--- | List Macros Response.
+-- | List Containers Response.
 --
--- /See:/ 'listMacrosResponse' smart constructor.
-newtype ListMacrosResponse = ListMacrosResponse
-    { _lmrMacros :: Maybe [Macro]
+-- /See:/ 'listContainersResponse' smart constructor.
+newtype ListContainersResponse = ListContainersResponse
+    { _lcrContainers :: Maybe [Container]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ListMacrosResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'ListContainersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lmrMacros'
-listMacrosResponse
-    :: ListMacrosResponse
-listMacrosResponse =
-    ListMacrosResponse
-    { _lmrMacros = Nothing
+-- * 'lcrContainers'
+listContainersResponse
+    :: ListContainersResponse
+listContainersResponse =
+    ListContainersResponse
+    { _lcrContainers = Nothing
     }
 
--- | All GTM Macros of a GTM Container.
-lmrMacros :: Lens' ListMacrosResponse [Macro]
-lmrMacros
-  = lens _lmrMacros (\ s a -> s{_lmrMacros = a}) .
-      _Default
+-- | All Containers of a GTM Account.
+lcrContainers :: Lens' ListContainersResponse [Container]
+lcrContainers
+  = lens _lcrContainers
+      (\ s a -> s{_lcrContainers = a})
+      . _Default
       . _Coerce
 
-instance FromJSON ListMacrosResponse where
+instance FromJSON ListContainersResponse where
         parseJSON
-          = withObject "ListMacrosResponse"
+          = withObject "ListContainersResponse"
               (\ o ->
-                 ListMacrosResponse <$> (o .:? "macros" .!= mempty))
+                 ListContainersResponse <$>
+                   (o .:? "containers" .!= mempty))
 
-instance ToJSON ListMacrosResponse where
-        toJSON ListMacrosResponse{..}
-          = object (catMaybes [("macros" .=) <$> _lmrMacros])
+instance ToJSON ListContainersResponse where
+        toJSON ListContainersResponse{..}
+          = object
+              (catMaybes [("containers" .=) <$> _lcrContainers])
 
 -- | Represents a Google Tag Manager Trigger
 --
@@ -2444,61 +2373,76 @@ instance ToJSON Trigger where
                   ("eventName" .=) <$> _triEventName,
                   ("waitForTags" .=) <$> _triWaitForTags])
 
--- | Represents a predicate.
+-- | List Tags Response.
 --
--- /See:/ 'condition' smart constructor.
-data Condition = Condition
-    { _cType      :: !(Maybe ConditionType)
-    , _cParameter :: !(Maybe [Parameter])
+-- /See:/ 'listTagsResponse' smart constructor.
+newtype ListTagsResponse = ListTagsResponse
+    { _ltrTags :: Maybe [Tag]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Condition' with the minimum fields required to make a request.
+-- | Creates a value of 'ListTagsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cType'
---
--- * 'cParameter'
-condition
-    :: Condition
-condition =
-    Condition
-    { _cType = Nothing
-    , _cParameter = Nothing
+-- * 'ltrTags'
+listTagsResponse
+    :: ListTagsResponse
+listTagsResponse =
+    ListTagsResponse
+    { _ltrTags = Nothing
     }
 
--- | The type of operator for this condition.
-cType :: Lens' Condition (Maybe ConditionType)
-cType = lens _cType (\ s a -> s{_cType = a})
+-- | All GTM Tags of a GTM Container.
+ltrTags :: Lens' ListTagsResponse [Tag]
+ltrTags
+  = lens _ltrTags (\ s a -> s{_ltrTags = a}) . _Default
+      . _Coerce
 
--- | A list of named parameters (key\/value), depending on the condition\'s
--- type. Notes: - For binary operators, include parameters named arg0 and
--- arg1 for specifying the left and right operands, respectively. - At this
--- time, the left operand (arg0) must be a reference to a macro. - For
--- case-insensitive Regex matching, include a boolean parameter named
--- ignore_case that is set to true. If not specified or set to any other
--- value, the matching will be case sensitive. - To negate an operator,
--- include a boolean parameter named negate boolean parameter that is set
--- to true.
-cParameter :: Lens' Condition [Parameter]
-cParameter
-  = lens _cParameter (\ s a -> s{_cParameter = a}) .
+instance FromJSON ListTagsResponse where
+        parseJSON
+          = withObject "ListTagsResponse"
+              (\ o ->
+                 ListTagsResponse <$> (o .:? "tags" .!= mempty))
+
+instance ToJSON ListTagsResponse where
+        toJSON ListTagsResponse{..}
+          = object (catMaybes [("tags" .=) <$> _ltrTags])
+
+-- | List Macros Response.
+--
+-- /See:/ 'listMacrosResponse' smart constructor.
+newtype ListMacrosResponse = ListMacrosResponse
+    { _lmrMacros :: Maybe [Macro]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListMacrosResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lmrMacros'
+listMacrosResponse
+    :: ListMacrosResponse
+listMacrosResponse =
+    ListMacrosResponse
+    { _lmrMacros = Nothing
+    }
+
+-- | All GTM Macros of a GTM Container.
+lmrMacros :: Lens' ListMacrosResponse [Macro]
+lmrMacros
+  = lens _lmrMacros (\ s a -> s{_lmrMacros = a}) .
       _Default
       . _Coerce
 
-instance FromJSON Condition where
+instance FromJSON ListMacrosResponse where
         parseJSON
-          = withObject "Condition"
+          = withObject "ListMacrosResponse"
               (\ o ->
-                 Condition <$>
-                   (o .:? "type") <*> (o .:? "parameter" .!= mempty))
+                 ListMacrosResponse <$> (o .:? "macros" .!= mempty))
 
-instance ToJSON Condition where
-        toJSON Condition{..}
-          = object
-              (catMaybes
-                 [("type" .=) <$> _cType,
-                  ("parameter" .=) <$> _cParameter])
+instance ToJSON ListMacrosResponse where
+        toJSON ListMacrosResponse{..}
+          = object (catMaybes [("macros" .=) <$> _lmrMacros])
 
 -- | Represents a Google Tag Manager Folder\'s contents.
 --
@@ -2563,6 +2507,62 @@ instance ToJSON FolderEntities where
                  [("tag" .=) <$> _feTag,
                   ("variable" .=) <$> _feVariable,
                   ("trigger" .=) <$> _feTrigger])
+
+-- | Represents a predicate.
+--
+-- /See:/ 'condition' smart constructor.
+data Condition = Condition
+    { _cType      :: !(Maybe ConditionType)
+    , _cParameter :: !(Maybe [Parameter])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Condition' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cType'
+--
+-- * 'cParameter'
+condition
+    :: Condition
+condition =
+    Condition
+    { _cType = Nothing
+    , _cParameter = Nothing
+    }
+
+-- | The type of operator for this condition.
+cType :: Lens' Condition (Maybe ConditionType)
+cType = lens _cType (\ s a -> s{_cType = a})
+
+-- | A list of named parameters (key\/value), depending on the condition\'s
+-- type. Notes: - For binary operators, include parameters named arg0 and
+-- arg1 for specifying the left and right operands, respectively. - At this
+-- time, the left operand (arg0) must be a reference to a macro. - For
+-- case-insensitive Regex matching, include a boolean parameter named
+-- ignore_case that is set to true. If not specified or set to any other
+-- value, the matching will be case sensitive. - To negate an operator,
+-- include a boolean parameter named negate boolean parameter that is set
+-- to true.
+cParameter :: Lens' Condition [Parameter]
+cParameter
+  = lens _cParameter (\ s a -> s{_cParameter = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON Condition where
+        parseJSON
+          = withObject "Condition"
+              (\ o ->
+                 Condition <$>
+                   (o .:? "type") <*> (o .:? "parameter" .!= mempty))
+
+instance ToJSON Condition where
+        toJSON Condition{..}
+          = object
+              (catMaybes
+                 [("type" .=) <$> _cType,
+                  ("parameter" .=) <$> _cParameter])
 
 -- | Defines the Google Tag Manager Container access permissions.
 --

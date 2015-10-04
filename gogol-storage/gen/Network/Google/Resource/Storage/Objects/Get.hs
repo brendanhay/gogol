@@ -61,8 +61,7 @@ type ObjectsGetResource =
                QueryParam "ifGenerationNotMatch" Word64 :>
                  QueryParam "ifGenerationMatch" Word64 :>
                    QueryParam "ifMetagenerationNotMatch" Word64 :>
-                     QueryParam "projection" StorageObjectsGetProjection
-                       :>
+                     QueryParam "projection" ObjectsGetProjection :>
                        QueryParam "generation" Word64 :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
@@ -81,8 +80,7 @@ type ObjectsGetResource =
                  QueryParam "ifGenerationNotMatch" Word64 :>
                    QueryParam "ifGenerationMatch" Word64 :>
                      QueryParam "ifMetagenerationNotMatch" Word64 :>
-                       QueryParam "projection" StorageObjectsGetProjection
-                         :>
+                       QueryParam "projection" ObjectsGetProjection :>
                          QueryParam "generation" Word64 :>
                            QueryParam "quotaUser" Text :>
                              QueryParam "prettyPrint" Bool :>
@@ -107,7 +105,7 @@ data ObjectsGet' = ObjectsGet'
     , _ogKey                      :: !(Maybe Key)
     , _ogIfMetagenerationNotMatch :: !(Maybe Word64)
     , _ogObject                   :: !Text
-    , _ogProjection               :: !(Maybe StorageObjectsGetProjection)
+    , _ogProjection               :: !(Maybe ObjectsGetProjection)
     , _ogOAuthToken               :: !(Maybe OAuthToken)
     , _ogGeneration               :: !(Maybe Word64)
     , _ogFields                   :: !(Maybe Text)
@@ -227,7 +225,7 @@ ogObject :: Lens' ObjectsGet' Text
 ogObject = lens _ogObject (\ s a -> s{_ogObject = a})
 
 -- | Set of properties to return. Defaults to noAcl.
-ogProjection :: Lens' ObjectsGet' (Maybe StorageObjectsGetProjection)
+ogProjection :: Lens' ObjectsGet' (Maybe ObjectsGetProjection)
 ogProjection
   = lens _ogProjection (\ s a -> s{_ogProjection = a})
 

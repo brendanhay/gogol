@@ -56,7 +56,8 @@ type DatasetsPatchResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Dataset :> Patch '[JSON] Dataset
+                       ReqBody '[OctetStream] Dataset :>
+                         Patch '[JSON] Dataset
 
 -- | Updates a dataset. This method supports patch semantics.
 --

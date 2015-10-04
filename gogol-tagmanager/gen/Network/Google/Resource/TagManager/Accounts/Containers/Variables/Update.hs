@@ -64,7 +64,7 @@ type AccountsContainersVariablesUpdateResource =
                            QueryParam "key" Key :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
-                                 ReqBody '[JSON] Variable :>
+                                 ReqBody '[OctetStream] Variable :>
                                    Put '[JSON] Variable
 
 -- | Updates a GTM Variable.

@@ -17,7 +17,139 @@ module Network.Google.Blogger.Types.Sum where
 
 import           Network.Google.Prelude
 
-data Status
+-- | Sort search results
+data PostsListOrderBy
+    = Published
+      -- ^ @published@
+      -- Order by the date the post was published
+    | Updated
+      -- ^ @updated@
+      -- Order by the date the post was last updated
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable PostsListOrderBy
+
+instance FromText PostsListOrderBy where
+    fromText = \case
+        "published" -> Just Published
+        "updated" -> Just Updated
+        _ -> Nothing
+
+instance ToText PostsListOrderBy where
+    toText = \case
+        Published -> "published"
+        Updated -> "updated"
+
+instance FromJSON PostsListOrderBy where
+    parseJSON = parseJSONText "PostsListOrderBy"
+
+instance ToJSON PostsListOrderBy where
+    toJSON = toJSONText
+
+-- | Access level with which to view the returned result. Note that some
+-- fields require escalated access.
+data PostsListView
+    = Admin
+      -- ^ @ADMIN@
+      -- Admin level detail
+    | Author
+      -- ^ @AUTHOR@
+      -- Author level detail
+    | Reader
+      -- ^ @READER@
+      -- Reader level detail
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable PostsListView
+
+instance FromText PostsListView where
+    fromText = \case
+        "ADMIN" -> Just Admin
+        "AUTHOR" -> Just Author
+        "READER" -> Just Reader
+        _ -> Nothing
+
+instance ToText PostsListView where
+    toText = \case
+        Admin -> "ADMIN"
+        Author -> "AUTHOR"
+        Reader -> "READER"
+
+instance FromJSON PostsListView where
+    parseJSON = parseJSONText "PostsListView"
+
+instance ToJSON PostsListView where
+    toJSON = toJSONText
+
+data PageViewsGetRange
+    = PVGR30DAYS
+      -- ^ @30DAYS@
+      -- Page view counts from the last thirty days.
+    | PVGR7DAYS
+      -- ^ @7DAYS@
+      -- Page view counts from the last seven days.
+    | PVGRAll
+      -- ^ @all@
+      -- Total page view counts from all time.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable PageViewsGetRange
+
+instance FromText PageViewsGetRange where
+    fromText = \case
+        "30DAYS" -> Just PVGR30DAYS
+        "7DAYS" -> Just PVGR7DAYS
+        "all" -> Just PVGRAll
+        _ -> Nothing
+
+instance ToText PageViewsGetRange where
+    toText = \case
+        PVGR30DAYS -> "30DAYS"
+        PVGR7DAYS -> "7DAYS"
+        PVGRAll -> "all"
+
+instance FromJSON PageViewsGetRange where
+    parseJSON = parseJSONText "PageViewsGetRange"
+
+instance ToJSON PageViewsGetRange where
+    toJSON = toJSONText
+
+-- | Access level with which to view the returned result. Note that some
+-- fields require elevated access.
+data CommentsListView
+    = CLVAdmin
+      -- ^ @ADMIN@
+      -- Admin level detail
+    | CLVAuthor
+      -- ^ @AUTHOR@
+      -- Author level detail
+    | CLVReader
+      -- ^ @READER@
+      -- Reader level detail
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable CommentsListView
+
+instance FromText CommentsListView where
+    fromText = \case
+        "ADMIN" -> Just CLVAdmin
+        "AUTHOR" -> Just CLVAuthor
+        "READER" -> Just CLVReader
+        _ -> Nothing
+
+instance ToText CommentsListView where
+    toText = \case
+        CLVAdmin -> "ADMIN"
+        CLVAuthor -> "AUTHOR"
+        CLVReader -> "READER"
+
+instance FromJSON CommentsListView where
+    parseJSON = parseJSONText "CommentsListView"
+
+instance ToJSON CommentsListView where
+    toJSON = toJSONText
+
+data PostUserInfosListStatus
     = Draft
       -- ^ @draft@
       -- Draft posts
@@ -29,733 +161,601 @@ data Status
       -- Posts that are scheduled to publish in future.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable Status
+instance Hashable PostUserInfosListStatus
 
-instance FromText Status where
+instance FromText PostUserInfosListStatus where
     fromText = \case
         "draft" -> Just Draft
         "live" -> Just Live
         "scheduled" -> Just Scheduled
         _ -> Nothing
 
-instance ToText Status where
+instance ToText PostUserInfosListStatus where
     toText = \case
         Draft -> "draft"
         Live -> "live"
         Scheduled -> "scheduled"
 
-instance FromJSON Status where
-    parseJSON = parseJSONText "Status"
+instance FromJSON PostUserInfosListStatus where
+    parseJSON = parseJSONText "PostUserInfosListStatus"
 
-instance ToJSON Status where
-    toJSON = toJSONText
-
--- | Blog statuses to include in the result (default: Live blogs only). Note
--- that ADMIN access is required to view deleted blogs.
-data BloggerBlogsListByUserStatus
-    = BBLBUSDeleted
-      -- ^ @DELETED@
-      -- Blog has been deleted by an administrator.
-    | BBLBUSLive
-      -- ^ @LIVE@
-      -- Blog is currently live.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable BloggerBlogsListByUserStatus
-
-instance FromText BloggerBlogsListByUserStatus where
-    fromText = \case
-        "DELETED" -> Just BBLBUSDeleted
-        "LIVE" -> Just BBLBUSLive
-        _ -> Nothing
-
-instance ToText BloggerBlogsListByUserStatus where
-    toText = \case
-        BBLBUSDeleted -> "DELETED"
-        BBLBUSLive -> "LIVE"
-
-instance FromJSON BloggerBlogsListByUserStatus where
-    parseJSON = parseJSONText "BloggerBlogsListByUserStatus"
-
-instance ToJSON BloggerBlogsListByUserStatus where
+instance ToJSON PostUserInfosListStatus where
     toJSON = toJSONText
 
 -- | Access level with which to view the returned result. Note that some
--- fields require escalated access.
-data BloggerPostsListView
-    = BPLVAdmin
+-- fields require elevated access.
+data PostsGetView
+    = PGVAdmin
       -- ^ @ADMIN@
       -- Admin level detail
-    | BPLVAuthor
+    | PGVAuthor
       -- ^ @AUTHOR@
       -- Author level detail
-    | BPLVReader
+    | PGVReader
       -- ^ @READER@
       -- Reader level detail
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable BloggerPostsListView
+instance Hashable PostsGetView
 
-instance FromText BloggerPostsListView where
+instance FromText PostsGetView where
     fromText = \case
-        "ADMIN" -> Just BPLVAdmin
-        "AUTHOR" -> Just BPLVAuthor
-        "READER" -> Just BPLVReader
+        "ADMIN" -> Just PGVAdmin
+        "AUTHOR" -> Just PGVAuthor
+        "READER" -> Just PGVReader
         _ -> Nothing
 
-instance ToText BloggerPostsListView where
+instance ToText PostsGetView where
     toText = \case
-        BPLVAdmin -> "ADMIN"
-        BPLVAuthor -> "AUTHOR"
-        BPLVReader -> "READER"
+        PGVAdmin -> "ADMIN"
+        PGVAuthor -> "AUTHOR"
+        PGVReader -> "READER"
 
-instance FromJSON BloggerPostsListView where
-    parseJSON = parseJSONText "BloggerPostsListView"
+instance FromJSON PostsGetView where
+    parseJSON = parseJSONText "PostsGetView"
 
-instance ToJSON BloggerPostsListView where
+instance ToJSON PostsGetView where
     toJSON = toJSONText
 
 -- | Sort search results
-data BloggerPostsListOrderBy
-    = BPLOBPublished
+data PostsSearchOrderBy
+    = PSOBPublished
       -- ^ @published@
       -- Order by the date the post was published
-    | BPLOBUpdated
+    | PSOBUpdated
       -- ^ @updated@
       -- Order by the date the post was last updated
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable BloggerPostsListOrderBy
+instance Hashable PostsSearchOrderBy
 
-instance FromText BloggerPostsListOrderBy where
+instance FromText PostsSearchOrderBy where
     fromText = \case
-        "published" -> Just BPLOBPublished
-        "updated" -> Just BPLOBUpdated
+        "published" -> Just PSOBPublished
+        "updated" -> Just PSOBUpdated
         _ -> Nothing
 
-instance ToText BloggerPostsListOrderBy where
+instance ToText PostsSearchOrderBy where
     toText = \case
-        BPLOBPublished -> "published"
-        BPLOBUpdated -> "updated"
+        PSOBPublished -> "published"
+        PSOBUpdated -> "updated"
 
-instance FromJSON BloggerPostsListOrderBy where
-    parseJSON = parseJSONText "BloggerPostsListOrderBy"
+instance FromJSON PostsSearchOrderBy where
+    parseJSON = parseJSONText "PostsSearchOrderBy"
 
-instance ToJSON BloggerPostsListOrderBy where
+instance ToJSON PostsSearchOrderBy where
     toJSON = toJSONText
 
-data BloggerCommentsListByBlogStatus
-    = BCLBBSEmptied
+data CommentsListByBlogStatus
+    = CLBBSEmptied
       -- ^ @emptied@
       -- Comments that have had their content removed
-    | BCLBBSLive
+    | CLBBSLive
       -- ^ @live@
       -- Comments that are publicly visible
-    | BCLBBSPending
+    | CLBBSPending
       -- ^ @pending@
       -- Comments that are awaiting administrator approval
-    | BCLBBSSpam
+    | CLBBSSpam
       -- ^ @spam@
       -- Comments marked as spam by the administrator
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable BloggerCommentsListByBlogStatus
+instance Hashable CommentsListByBlogStatus
 
-instance FromText BloggerCommentsListByBlogStatus where
+instance FromText CommentsListByBlogStatus where
     fromText = \case
-        "emptied" -> Just BCLBBSEmptied
-        "live" -> Just BCLBBSLive
-        "pending" -> Just BCLBBSPending
-        "spam" -> Just BCLBBSSpam
+        "emptied" -> Just CLBBSEmptied
+        "live" -> Just CLBBSLive
+        "pending" -> Just CLBBSPending
+        "spam" -> Just CLBBSSpam
         _ -> Nothing
 
-instance ToText BloggerCommentsListByBlogStatus where
+instance ToText CommentsListByBlogStatus where
     toText = \case
-        BCLBBSEmptied -> "emptied"
-        BCLBBSLive -> "live"
-        BCLBBSPending -> "pending"
-        BCLBBSSpam -> "spam"
+        CLBBSEmptied -> "emptied"
+        CLBBSLive -> "live"
+        CLBBSPending -> "pending"
+        CLBBSSpam -> "spam"
 
-instance FromJSON BloggerCommentsListByBlogStatus where
-    parseJSON = parseJSONText "BloggerCommentsListByBlogStatus"
+instance FromJSON CommentsListByBlogStatus where
+    parseJSON = parseJSONText "CommentsListByBlogStatus"
 
-instance ToJSON BloggerCommentsListByBlogStatus where
+instance ToJSON CommentsListByBlogStatus where
+    toJSON = toJSONText
+
+data PagesGetView
+    = PAdmin
+      -- ^ @ADMIN@
+      -- Admin level detail
+    | PAuthor
+      -- ^ @AUTHOR@
+      -- Author level detail
+    | PReader
+      -- ^ @READER@
+      -- Reader level detail
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable PagesGetView
+
+instance FromText PagesGetView where
+    fromText = \case
+        "ADMIN" -> Just PAdmin
+        "AUTHOR" -> Just PAuthor
+        "READER" -> Just PReader
+        _ -> Nothing
+
+instance ToText PagesGetView where
+    toText = \case
+        PAdmin -> "ADMIN"
+        PAuthor -> "AUTHOR"
+        PReader -> "READER"
+
+instance FromJSON PagesGetView where
+    parseJSON = parseJSONText "PagesGetView"
+
+instance ToJSON PagesGetView where
     toJSON = toJSONText
 
 -- | Sort order applied to search results. Default is published.
-data OrderBy
-    = OBPublished
+data PostUserInfosListOrderBy
+    = PUILOBPublished
       -- ^ @published@
       -- Order by the date the post was published
-    | OBUpdated
+    | PUILOBUpdated
       -- ^ @updated@
       -- Order by the date the post was last updated
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable OrderBy
+instance Hashable PostUserInfosListOrderBy
 
-instance FromText OrderBy where
+instance FromText PostUserInfosListOrderBy where
     fromText = \case
-        "published" -> Just OBPublished
-        "updated" -> Just OBUpdated
+        "published" -> Just PUILOBPublished
+        "updated" -> Just PUILOBUpdated
         _ -> Nothing
 
-instance ToText OrderBy where
+instance ToText PostUserInfosListOrderBy where
     toText = \case
-        OBPublished -> "published"
-        OBUpdated -> "updated"
+        PUILOBPublished -> "published"
+        PUILOBUpdated -> "updated"
 
-instance FromJSON OrderBy where
-    parseJSON = parseJSONText "OrderBy"
+instance FromJSON PostUserInfosListOrderBy where
+    parseJSON = parseJSONText "PostUserInfosListOrderBy"
 
-instance ToJSON OrderBy where
+instance ToJSON PostUserInfosListOrderBy where
     toJSON = toJSONText
 
-data BloggerPagesGetView
-    = BPGVAdmin
-      -- ^ @ADMIN@
-      -- Admin level detail
-    | BPGVAuthor
-      -- ^ @AUTHOR@
-      -- Author level detail
-    | BPGVReader
-      -- ^ @READER@
-      -- Reader level detail
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable BloggerPagesGetView
-
-instance FromText BloggerPagesGetView where
-    fromText = \case
-        "ADMIN" -> Just BPGVAdmin
-        "AUTHOR" -> Just BPGVAuthor
-        "READER" -> Just BPGVReader
-        _ -> Nothing
-
-instance ToText BloggerPagesGetView where
-    toText = \case
-        BPGVAdmin -> "ADMIN"
-        BPGVAuthor -> "AUTHOR"
-        BPGVReader -> "READER"
-
-instance FromJSON BloggerPagesGetView where
-    parseJSON = parseJSONText "BloggerPagesGetView"
-
-instance ToJSON BloggerPagesGetView where
-    toJSON = toJSONText
-
-data BloggerPagesListStatus
-    = BPLSDraft
-      -- ^ @draft@
-      -- Draft (unpublished) Pages
-    | BPLSLive
-      -- ^ @live@
-      -- Pages that are publicly visible
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable BloggerPagesListStatus
-
-instance FromText BloggerPagesListStatus where
-    fromText = \case
-        "draft" -> Just BPLSDraft
-        "live" -> Just BPLSLive
-        _ -> Nothing
-
-instance ToText BloggerPagesListStatus where
-    toText = \case
-        BPLSDraft -> "draft"
-        BPLSLive -> "live"
-
-instance FromJSON BloggerPagesListStatus where
-    parseJSON = parseJSONText "BloggerPagesListStatus"
-
-instance ToJSON BloggerPagesListStatus where
-    toJSON = toJSONText
-
--- | Access level with which to view the returned result. Note that some
--- fields require elevated access.
-data BloggerPostsGetByPathView
-    = BPGBPVAdmin
-      -- ^ @ADMIN@
-      -- Admin level detail
-    | BPGBPVAuthor
-      -- ^ @AUTHOR@
-      -- Author level detail
-    | BPGBPVReader
-      -- ^ @READER@
-      -- Reader level detail
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable BloggerPostsGetByPathView
-
-instance FromText BloggerPostsGetByPathView where
-    fromText = \case
-        "ADMIN" -> Just BPGBPVAdmin
-        "AUTHOR" -> Just BPGBPVAuthor
-        "READER" -> Just BPGBPVReader
-        _ -> Nothing
-
-instance ToText BloggerPostsGetByPathView where
-    toText = \case
-        BPGBPVAdmin -> "ADMIN"
-        BPGBPVAuthor -> "AUTHOR"
-        BPGBPVReader -> "READER"
-
-instance FromJSON BloggerPostsGetByPathView where
-    parseJSON = parseJSONText "BloggerPostsGetByPathView"
-
-instance ToJSON BloggerPostsGetByPathView where
-    toJSON = toJSONText
-
--- | Access level with which to view the blogs. Note that some fields require
+-- | Access level with which to view the blog. Note that some fields require
 -- elevated access.
-data BloggerBlogsListByUserView
-    = BBLBUVAdmin
+data BlogsGetView
+    = BGVAdmin
       -- ^ @ADMIN@
       -- Admin level detail.
-    | BBLBUVAuthor
+    | BGVAuthor
       -- ^ @AUTHOR@
       -- Author level detail.
-    | BBLBUVReader
+    | BGVReader
       -- ^ @READER@
       -- Reader level detail.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable BloggerBlogsListByUserView
+instance Hashable BlogsGetView
 
-instance FromText BloggerBlogsListByUserView where
+instance FromText BlogsGetView where
     fromText = \case
-        "ADMIN" -> Just BBLBUVAdmin
-        "AUTHOR" -> Just BBLBUVAuthor
-        "READER" -> Just BBLBUVReader
+        "ADMIN" -> Just BGVAdmin
+        "AUTHOR" -> Just BGVAuthor
+        "READER" -> Just BGVReader
         _ -> Nothing
 
-instance ToText BloggerBlogsListByUserView where
+instance ToText BlogsGetView where
     toText = \case
-        BBLBUVAdmin -> "ADMIN"
-        BBLBUVAuthor -> "AUTHOR"
-        BBLBUVReader -> "READER"
+        BGVAdmin -> "ADMIN"
+        BGVAuthor -> "AUTHOR"
+        BGVReader -> "READER"
 
-instance FromJSON BloggerBlogsListByUserView where
-    parseJSON = parseJSONText "BloggerBlogsListByUserView"
+instance FromJSON BlogsGetView where
+    parseJSON = parseJSONText "BlogsGetView"
 
-instance ToJSON BloggerBlogsListByUserView where
+instance ToJSON BlogsGetView where
+    toJSON = toJSONText
+
+-- | Access level with which to view the blog. Note that some fields require
+-- elevated access.
+data BlogsGetByURLView
+    = BGBUVAdmin
+      -- ^ @ADMIN@
+      -- Admin level detail.
+    | BGBUVAuthor
+      -- ^ @AUTHOR@
+      -- Author level detail.
+    | BGBUVReader
+      -- ^ @READER@
+      -- Reader level detail.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable BlogsGetByURLView
+
+instance FromText BlogsGetByURLView where
+    fromText = \case
+        "ADMIN" -> Just BGBUVAdmin
+        "AUTHOR" -> Just BGBUVAuthor
+        "READER" -> Just BGBUVReader
+        _ -> Nothing
+
+instance ToText BlogsGetByURLView where
+    toText = \case
+        BGBUVAdmin -> "ADMIN"
+        BGBUVAuthor -> "AUTHOR"
+        BGBUVReader -> "READER"
+
+instance FromJSON BlogsGetByURLView where
+    parseJSON = parseJSONText "BlogsGetByURLView"
+
+instance ToJSON BlogsGetByURLView where
+    toJSON = toJSONText
+
+data CommentsListStatus
+    = CLSEmptied
+      -- ^ @emptied@
+      -- Comments that have had their content removed
+    | CLSLive
+      -- ^ @live@
+      -- Comments that are publicly visible
+    | CLSPending
+      -- ^ @pending@
+      -- Comments that are awaiting administrator approval
+    | CLSSpam
+      -- ^ @spam@
+      -- Comments marked as spam by the administrator
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable CommentsListStatus
+
+instance FromText CommentsListStatus where
+    fromText = \case
+        "emptied" -> Just CLSEmptied
+        "live" -> Just CLSLive
+        "pending" -> Just CLSPending
+        "spam" -> Just CLSSpam
+        _ -> Nothing
+
+instance ToText CommentsListStatus where
+    toText = \case
+        CLSEmptied -> "emptied"
+        CLSLive -> "live"
+        CLSPending -> "pending"
+        CLSSpam -> "spam"
+
+instance FromJSON CommentsListStatus where
+    parseJSON = parseJSONText "CommentsListStatus"
+
+instance ToJSON CommentsListStatus where
+    toJSON = toJSONText
+
+-- | Blog statuses to include in the result (default: Live blogs only). Note
+-- that ADMIN access is required to view deleted blogs.
+data BlogsListByUserStatus
+    = BLBUSDeleted
+      -- ^ @DELETED@
+      -- Blog has been deleted by an administrator.
+    | BLBUSLive
+      -- ^ @LIVE@
+      -- Blog is currently live.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable BlogsListByUserStatus
+
+instance FromText BlogsListByUserStatus where
+    fromText = \case
+        "DELETED" -> Just BLBUSDeleted
+        "LIVE" -> Just BLBUSLive
+        _ -> Nothing
+
+instance ToText BlogsListByUserStatus where
+    toText = \case
+        BLBUSDeleted -> "DELETED"
+        BLBUSLive -> "LIVE"
+
+instance FromJSON BlogsListByUserStatus where
+    parseJSON = parseJSONText "BlogsListByUserStatus"
+
+instance ToJSON BlogsListByUserStatus where
     toJSON = toJSONText
 
 -- | Access level with which to view the returned result. Note that some
 -- fields require elevated access.
-data BloggerCommentsListView
-    = BCLVAdmin
+data PagesListView
+    = PLVAdmin
       -- ^ @ADMIN@
       -- Admin level detail
-    | BCLVAuthor
+    | PLVAuthor
       -- ^ @AUTHOR@
       -- Author level detail
-    | BCLVReader
+    | PLVReader
       -- ^ @READER@
       -- Reader level detail
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable BloggerCommentsListView
+instance Hashable PagesListView
 
-instance FromText BloggerCommentsListView where
+instance FromText PagesListView where
     fromText = \case
-        "ADMIN" -> Just BCLVAdmin
-        "AUTHOR" -> Just BCLVAuthor
-        "READER" -> Just BCLVReader
+        "ADMIN" -> Just PLVAdmin
+        "AUTHOR" -> Just PLVAuthor
+        "READER" -> Just PLVReader
         _ -> Nothing
 
-instance ToText BloggerCommentsListView where
+instance ToText PagesListView where
     toText = \case
-        BCLVAdmin -> "ADMIN"
-        BCLVAuthor -> "AUTHOR"
-        BCLVReader -> "READER"
+        PLVAdmin -> "ADMIN"
+        PLVAuthor -> "AUTHOR"
+        PLVReader -> "READER"
 
-instance FromJSON BloggerCommentsListView where
-    parseJSON = parseJSONText "BloggerCommentsListView"
+instance FromJSON PagesListView where
+    parseJSON = parseJSONText "PagesListView"
 
-instance ToJSON BloggerCommentsListView where
+instance ToJSON PagesListView where
     toJSON = toJSONText
 
--- | User access types for blogs to include in the results, e.g. AUTHOR will
--- return blogs where the user has author level access. If no roles are
--- specified, defaults to ADMIN and AUTHOR roles.
-data Role
-    = RAdmin
+-- | Statuses to include in the results.
+data PostsListStatus
+    = PLSDraft
+      -- ^ @draft@
+      -- Draft (non-published) posts.
+    | PLSLive
+      -- ^ @live@
+      -- Published posts
+    | PLSScheduled
+      -- ^ @scheduled@
+      -- Posts that are scheduled to publish in the future.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable PostsListStatus
+
+instance FromText PostsListStatus where
+    fromText = \case
+        "draft" -> Just PLSDraft
+        "live" -> Just PLSLive
+        "scheduled" -> Just PLSScheduled
+        _ -> Nothing
+
+instance ToText PostsListStatus where
+    toText = \case
+        PLSDraft -> "draft"
+        PLSLive -> "live"
+        PLSScheduled -> "scheduled"
+
+instance FromJSON PostsListStatus where
+    parseJSON = parseJSONText "PostsListStatus"
+
+instance ToJSON PostsListStatus where
+    toJSON = toJSONText
+
+-- | Access level with which to view the blogs. Note that some fields require
+-- elevated access.
+data BlogsListByUserView
+    = BLBUVAdmin
       -- ^ @ADMIN@
-      -- Admin role - Blogs where the user has Admin level access.
-    | RAuthor
+      -- Admin level detail.
+    | BLBUVAuthor
       -- ^ @AUTHOR@
-      -- Author role - Blogs where the user has Author level access.
-    | RReader
+      -- Author level detail.
+    | BLBUVReader
       -- ^ @READER@
-      -- Reader role - Blogs where the user has Reader level access (to a private
-      -- blog).
+      -- Reader level detail.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable Role
+instance Hashable BlogsListByUserView
 
-instance FromText Role where
+instance FromText BlogsListByUserView where
     fromText = \case
-        "ADMIN" -> Just RAdmin
-        "AUTHOR" -> Just RAuthor
-        "READER" -> Just RReader
+        "ADMIN" -> Just BLBUVAdmin
+        "AUTHOR" -> Just BLBUVAuthor
+        "READER" -> Just BLBUVReader
         _ -> Nothing
 
-instance ToText Role where
+instance ToText BlogsListByUserView where
     toText = \case
-        RAdmin -> "ADMIN"
-        RAuthor -> "AUTHOR"
-        RReader -> "READER"
+        BLBUVAdmin -> "ADMIN"
+        BLBUVAuthor -> "AUTHOR"
+        BLBUVReader -> "READER"
 
-instance FromJSON Role where
-    parseJSON = parseJSONText "Role"
+instance FromJSON BlogsListByUserView where
+    parseJSON = parseJSONText "BlogsListByUserView"
 
-instance ToJSON Role where
-    toJSON = toJSONText
-
-data Range
-    = R30DAYS
-      -- ^ @30DAYS@
-      -- Page view counts from the last thirty days.
-    | R7DAYS
-      -- ^ @7DAYS@
-      -- Page view counts from the last seven days.
-    | RAll
-      -- ^ @all@
-      -- Total page view counts from all time.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Range
-
-instance FromText Range where
-    fromText = \case
-        "30DAYS" -> Just R30DAYS
-        "7DAYS" -> Just R7DAYS
-        "all" -> Just RAll
-        _ -> Nothing
-
-instance ToText Range where
-    toText = \case
-        R30DAYS -> "30DAYS"
-        R7DAYS -> "7DAYS"
-        RAll -> "all"
-
-instance FromJSON Range where
-    parseJSON = parseJSONText "Range"
-
-instance ToJSON Range where
+instance ToJSON BlogsListByUserView where
     toJSON = toJSONText
 
 -- | Access level with which to view the returned result. Note that some
 -- fields require elevated access.
-data View
-    = VAdmin
+data PostUserInfosListView
+    = PUILVAdmin
       -- ^ @ADMIN@
       -- Admin level detail
-    | VAuthor
+    | PUILVAuthor
       -- ^ @AUTHOR@
       -- Author level detail
-    | VReader
+    | PUILVReader
       -- ^ @READER@
       -- Reader level detail
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable View
+instance Hashable PostUserInfosListView
 
-instance FromText View where
+instance FromText PostUserInfosListView where
     fromText = \case
-        "ADMIN" -> Just VAdmin
-        "AUTHOR" -> Just VAuthor
-        "READER" -> Just VReader
+        "ADMIN" -> Just PUILVAdmin
+        "AUTHOR" -> Just PUILVAuthor
+        "READER" -> Just PUILVReader
         _ -> Nothing
 
-instance ToText View where
+instance ToText PostUserInfosListView where
     toText = \case
-        VAdmin -> "ADMIN"
-        VAuthor -> "AUTHOR"
-        VReader -> "READER"
+        PUILVAdmin -> "ADMIN"
+        PUILVAuthor -> "AUTHOR"
+        PUILVReader -> "READER"
 
-instance FromJSON View where
-    parseJSON = parseJSONText "View"
+instance FromJSON PostUserInfosListView where
+    parseJSON = parseJSONText "PostUserInfosListView"
 
-instance ToJSON View where
+instance ToJSON PostUserInfosListView where
     toJSON = toJSONText
 
 -- | Access level for the requested comment (default: READER). Note that some
 -- comments will require elevated permissions, for example comments where
 -- the parent posts which is in a draft state, or comments that are pending
 -- moderation.
-data BloggerCommentsGetView
-    = BCGVAdmin
+data CommentsGetView
+    = CGVAdmin
       -- ^ @ADMIN@
       -- Admin level detail
-    | BCGVAuthor
+    | CGVAuthor
       -- ^ @AUTHOR@
       -- Author level detail
-    | BCGVReader
+    | CGVReader
       -- ^ @READER@
       -- Admin level detail
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable BloggerCommentsGetView
+instance Hashable CommentsGetView
 
-instance FromText BloggerCommentsGetView where
+instance FromText CommentsGetView where
     fromText = \case
-        "ADMIN" -> Just BCGVAdmin
-        "AUTHOR" -> Just BCGVAuthor
-        "READER" -> Just BCGVReader
+        "ADMIN" -> Just CGVAdmin
+        "AUTHOR" -> Just CGVAuthor
+        "READER" -> Just CGVReader
         _ -> Nothing
 
-instance ToText BloggerCommentsGetView where
+instance ToText CommentsGetView where
     toText = \case
-        BCGVAdmin -> "ADMIN"
-        BCGVAuthor -> "AUTHOR"
-        BCGVReader -> "READER"
+        CGVAdmin -> "ADMIN"
+        CGVAuthor -> "AUTHOR"
+        CGVReader -> "READER"
 
-instance FromJSON BloggerCommentsGetView where
-    parseJSON = parseJSONText "BloggerCommentsGetView"
+instance FromJSON CommentsGetView where
+    parseJSON = parseJSONText "CommentsGetView"
 
-instance ToJSON BloggerCommentsGetView where
+instance ToJSON CommentsGetView where
     toJSON = toJSONText
 
--- | Access level with which to view the blog. Note that some fields require
--- elevated access.
-data BloggerBlogsGetByURLView
-    = BBGBUVAdmin
+-- | Access level with which to view the returned result. Note that some
+-- fields require elevated access.
+data PostsGetByPathView
+    = PGBPVAdmin
       -- ^ @ADMIN@
-      -- Admin level detail.
-    | BBGBUVAuthor
+      -- Admin level detail
+    | PGBPVAuthor
       -- ^ @AUTHOR@
-      -- Author level detail.
-    | BBGBUVReader
+      -- Author level detail
+    | PGBPVReader
       -- ^ @READER@
-      -- Reader level detail.
+      -- Reader level detail
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable BloggerBlogsGetByURLView
+instance Hashable PostsGetByPathView
 
-instance FromText BloggerBlogsGetByURLView where
+instance FromText PostsGetByPathView where
     fromText = \case
-        "ADMIN" -> Just BBGBUVAdmin
-        "AUTHOR" -> Just BBGBUVAuthor
-        "READER" -> Just BBGBUVReader
+        "ADMIN" -> Just PGBPVAdmin
+        "AUTHOR" -> Just PGBPVAuthor
+        "READER" -> Just PGBPVReader
         _ -> Nothing
 
-instance ToText BloggerBlogsGetByURLView where
+instance ToText PostsGetByPathView where
     toText = \case
-        BBGBUVAdmin -> "ADMIN"
-        BBGBUVAuthor -> "AUTHOR"
-        BBGBUVReader -> "READER"
+        PGBPVAdmin -> "ADMIN"
+        PGBPVAuthor -> "AUTHOR"
+        PGBPVReader -> "READER"
 
-instance FromJSON BloggerBlogsGetByURLView where
-    parseJSON = parseJSONText "BloggerBlogsGetByURLView"
+instance FromJSON PostsGetByPathView where
+    parseJSON = parseJSONText "PostsGetByPathView"
 
-instance ToJSON BloggerBlogsGetByURLView where
+instance ToJSON PostsGetByPathView where
     toJSON = toJSONText
 
-data BloggerCommentsListStatus
-    = BCLSEmptied
-      -- ^ @emptied@
-      -- Comments that have had their content removed
-    | BCLSLive
-      -- ^ @live@
-      -- Comments that are publicly visible
-    | BCLSPending
-      -- ^ @pending@
-      -- Comments that are awaiting administrator approval
-    | BCLSSpam
-      -- ^ @spam@
-      -- Comments marked as spam by the administrator
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable BloggerCommentsListStatus
-
-instance FromText BloggerCommentsListStatus where
-    fromText = \case
-        "emptied" -> Just BCLSEmptied
-        "live" -> Just BCLSLive
-        "pending" -> Just BCLSPending
-        "spam" -> Just BCLSSpam
-        _ -> Nothing
-
-instance ToText BloggerCommentsListStatus where
-    toText = \case
-        BCLSEmptied -> "emptied"
-        BCLSLive -> "live"
-        BCLSPending -> "pending"
-        BCLSSpam -> "spam"
-
-instance FromJSON BloggerCommentsListStatus where
-    parseJSON = parseJSONText "BloggerCommentsListStatus"
-
-instance ToJSON BloggerCommentsListStatus where
-    toJSON = toJSONText
-
--- | Access level with which to view the blog. Note that some fields require
--- elevated access.
-data BloggerBlogsGetView
-    = BBGVAdmin
-      -- ^ @ADMIN@
-      -- Admin level detail.
-    | BBGVAuthor
-      -- ^ @AUTHOR@
-      -- Author level detail.
-    | BBGVReader
-      -- ^ @READER@
-      -- Reader level detail.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable BloggerBlogsGetView
-
-instance FromText BloggerBlogsGetView where
-    fromText = \case
-        "ADMIN" -> Just BBGVAdmin
-        "AUTHOR" -> Just BBGVAuthor
-        "READER" -> Just BBGVReader
-        _ -> Nothing
-
-instance ToText BloggerBlogsGetView where
-    toText = \case
-        BBGVAdmin -> "ADMIN"
-        BBGVAuthor -> "AUTHOR"
-        BBGVReader -> "READER"
-
-instance FromJSON BloggerBlogsGetView where
-    parseJSON = parseJSONText "BloggerBlogsGetView"
-
-instance ToJSON BloggerBlogsGetView where
-    toJSON = toJSONText
-
--- | Statuses to include in the results.
-data BloggerPostsListStatus
-    = BDraft
+data PagesListStatus
+    = PDraft
       -- ^ @draft@
-      -- Draft (non-published) posts.
-    | BLive
+      -- Draft (unpublished) Pages
+    | PLive
       -- ^ @live@
-      -- Published posts
-    | BScheduled
-      -- ^ @scheduled@
-      -- Posts that are scheduled to publish in the future.
+      -- Pages that are publicly visible
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable BloggerPostsListStatus
+instance Hashable PagesListStatus
 
-instance FromText BloggerPostsListStatus where
+instance FromText PagesListStatus where
     fromText = \case
-        "draft" -> Just BDraft
-        "live" -> Just BLive
-        "scheduled" -> Just BScheduled
+        "draft" -> Just PDraft
+        "live" -> Just PLive
         _ -> Nothing
 
-instance ToText BloggerPostsListStatus where
+instance ToText PagesListStatus where
     toText = \case
-        BDraft -> "draft"
-        BLive -> "live"
-        BScheduled -> "scheduled"
+        PDraft -> "draft"
+        PLive -> "live"
 
-instance FromJSON BloggerPostsListStatus where
-    parseJSON = parseJSONText "BloggerPostsListStatus"
+instance FromJSON PagesListStatus where
+    parseJSON = parseJSONText "PagesListStatus"
 
-instance ToJSON BloggerPostsListStatus where
+instance ToJSON PagesListStatus where
     toJSON = toJSONText
 
--- | Access level with which to view the returned result. Note that some
--- fields require elevated access.
-data BloggerPostsGetView
-    = BAdmin
+-- | User access types for blogs to include in the results, e.g. AUTHOR will
+-- return blogs where the user has author level access. If no roles are
+-- specified, defaults to ADMIN and AUTHOR roles.
+data BlogsListByUserRole
+    = BLBURAdmin
       -- ^ @ADMIN@
-      -- Admin level detail
-    | BAuthor
+      -- Admin role - Blogs where the user has Admin level access.
+    | BLBURAuthor
       -- ^ @AUTHOR@
-      -- Author level detail
-    | BReader
+      -- Author role - Blogs where the user has Author level access.
+    | BLBURReader
       -- ^ @READER@
-      -- Reader level detail
+      -- Reader role - Blogs where the user has Reader level access (to a private
+      -- blog).
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable BloggerPostsGetView
+instance Hashable BlogsListByUserRole
 
-instance FromText BloggerPostsGetView where
+instance FromText BlogsListByUserRole where
     fromText = \case
-        "ADMIN" -> Just BAdmin
-        "AUTHOR" -> Just BAuthor
-        "READER" -> Just BReader
+        "ADMIN" -> Just BLBURAdmin
+        "AUTHOR" -> Just BLBURAuthor
+        "READER" -> Just BLBURReader
         _ -> Nothing
 
-instance ToText BloggerPostsGetView where
+instance ToText BlogsListByUserRole where
     toText = \case
-        BAdmin -> "ADMIN"
-        BAuthor -> "AUTHOR"
-        BReader -> "READER"
+        BLBURAdmin -> "ADMIN"
+        BLBURAuthor -> "AUTHOR"
+        BLBURReader -> "READER"
 
-instance FromJSON BloggerPostsGetView where
-    parseJSON = parseJSONText "BloggerPostsGetView"
+instance FromJSON BlogsListByUserRole where
+    parseJSON = parseJSONText "BlogsListByUserRole"
 
-instance ToJSON BloggerPostsGetView where
-    toJSON = toJSONText
-
--- | Sort search results
-data BloggerPostsSearchOrderBy
-    = BPSOBPublished
-      -- ^ @published@
-      -- Order by the date the post was published
-    | BPSOBUpdated
-      -- ^ @updated@
-      -- Order by the date the post was last updated
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable BloggerPostsSearchOrderBy
-
-instance FromText BloggerPostsSearchOrderBy where
-    fromText = \case
-        "published" -> Just BPSOBPublished
-        "updated" -> Just BPSOBUpdated
-        _ -> Nothing
-
-instance ToText BloggerPostsSearchOrderBy where
-    toText = \case
-        BPSOBPublished -> "published"
-        BPSOBUpdated -> "updated"
-
-instance FromJSON BloggerPostsSearchOrderBy where
-    parseJSON = parseJSONText "BloggerPostsSearchOrderBy"
-
-instance ToJSON BloggerPostsSearchOrderBy where
-    toJSON = toJSONText
-
--- | Access level with which to view the returned result. Note that some
--- fields require elevated access.
-data BloggerPagesListView
-    = BLOAdmin
-      -- ^ @ADMIN@
-      -- Admin level detail
-    | BLOAuthor
-      -- ^ @AUTHOR@
-      -- Author level detail
-    | BLOReader
-      -- ^ @READER@
-      -- Reader level detail
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable BloggerPagesListView
-
-instance FromText BloggerPagesListView where
-    fromText = \case
-        "ADMIN" -> Just BLOAdmin
-        "AUTHOR" -> Just BLOAuthor
-        "READER" -> Just BLOReader
-        _ -> Nothing
-
-instance ToText BloggerPagesListView where
-    toText = \case
-        BLOAdmin -> "ADMIN"
-        BLOAuthor -> "AUTHOR"
-        BLOReader -> "READER"
-
-instance FromJSON BloggerPagesListView where
-    parseJSON = parseJSONText "BloggerPagesListView"
-
-instance ToJSON BloggerPagesListView where
+instance ToJSON BlogsListByUserRole where
     toJSON = toJSONText

@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.SubAccounts.Get
     , sagQuotaUser
     , sagPrettyPrint
     , sagUserIP
-    , sagProfileId
+    , sagProFileId
     , sagKey
     , sagId
     , sagOAuthToken
@@ -66,7 +66,7 @@ data SubAccountsGet' = SubAccountsGet'
     { _sagQuotaUser   :: !(Maybe Text)
     , _sagPrettyPrint :: !Bool
     , _sagUserIP      :: !(Maybe Text)
-    , _sagProfileId   :: !Int64
+    , _sagProFileId   :: !Int64
     , _sagKey         :: !(Maybe Key)
     , _sagId          :: !Int64
     , _sagOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +83,7 @@ data SubAccountsGet' = SubAccountsGet'
 --
 -- * 'sagUserIP'
 --
--- * 'sagProfileId'
+-- * 'sagProFileId'
 --
 -- * 'sagKey'
 --
@@ -96,12 +96,12 @@ subAccountsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> SubAccountsGet'
-subAccountsGet' pSagProfileId_ pSagId_ =
+subAccountsGet' pSagProFileId_ pSagId_ =
     SubAccountsGet'
     { _sagQuotaUser = Nothing
     , _sagPrettyPrint = True
     , _sagUserIP = Nothing
-    , _sagProfileId = pSagProfileId_
+    , _sagProFileId = pSagProFileId_
     , _sagKey = Nothing
     , _sagId = pSagId_
     , _sagOAuthToken = Nothing
@@ -128,9 +128,9 @@ sagUserIP
   = lens _sagUserIP (\ s a -> s{_sagUserIP = a})
 
 -- | User profile ID associated with this request.
-sagProfileId :: Lens' SubAccountsGet' Int64
-sagProfileId
-  = lens _sagProfileId (\ s a -> s{_sagProfileId = a})
+sagProFileId :: Lens' SubAccountsGet' Int64
+sagProFileId
+  = lens _sagProFileId (\ s a -> s{_sagProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -161,7 +161,7 @@ instance GoogleRequest SubAccountsGet' where
         type Rs SubAccountsGet' = SubAccount
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u SubAccountsGet'{..}
-          = go _sagProfileId _sagId _sagQuotaUser
+          = go _sagProFileId _sagId _sagQuotaUser
               (Just _sagPrettyPrint)
               _sagUserIP
               _sagFields

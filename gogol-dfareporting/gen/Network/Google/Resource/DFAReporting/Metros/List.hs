@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Metros.List
     , mlQuotaUser
     , mlPrettyPrint
     , mlUserIP
-    , mlProfileId
+    , mlProFileId
     , mlKey
     , mlOAuthToken
     , mlFields
@@ -65,7 +65,7 @@ data MetrosList' = MetrosList'
     { _mlQuotaUser   :: !(Maybe Text)
     , _mlPrettyPrint :: !Bool
     , _mlUserIP      :: !(Maybe Text)
-    , _mlProfileId   :: !Int64
+    , _mlProFileId   :: !Int64
     , _mlKey         :: !(Maybe Key)
     , _mlOAuthToken  :: !(Maybe OAuthToken)
     , _mlFields      :: !(Maybe Text)
@@ -81,7 +81,7 @@ data MetrosList' = MetrosList'
 --
 -- * 'mlUserIP'
 --
--- * 'mlProfileId'
+-- * 'mlProFileId'
 --
 -- * 'mlKey'
 --
@@ -91,12 +91,12 @@ data MetrosList' = MetrosList'
 metrosList'
     :: Int64 -- ^ 'profileId'
     -> MetrosList'
-metrosList' pMlProfileId_ =
+metrosList' pMlProFileId_ =
     MetrosList'
     { _mlQuotaUser = Nothing
     , _mlPrettyPrint = True
     , _mlUserIP = Nothing
-    , _mlProfileId = pMlProfileId_
+    , _mlProFileId = pMlProFileId_
     , _mlKey = Nothing
     , _mlOAuthToken = Nothing
     , _mlFields = Nothing
@@ -121,9 +121,9 @@ mlUserIP :: Lens' MetrosList' (Maybe Text)
 mlUserIP = lens _mlUserIP (\ s a -> s{_mlUserIP = a})
 
 -- | User profile ID associated with this request.
-mlProfileId :: Lens' MetrosList' Int64
-mlProfileId
-  = lens _mlProfileId (\ s a -> s{_mlProfileId = a})
+mlProFileId :: Lens' MetrosList' Int64
+mlProFileId
+  = lens _mlProFileId (\ s a -> s{_mlProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -148,7 +148,7 @@ instance GoogleRequest MetrosList' where
         type Rs MetrosList' = MetrosListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u MetrosList'{..}
-          = go _mlProfileId _mlQuotaUser (Just _mlPrettyPrint)
+          = go _mlProFileId _mlQuotaUser (Just _mlPrettyPrint)
               _mlUserIP
               _mlFields
               _mlKey

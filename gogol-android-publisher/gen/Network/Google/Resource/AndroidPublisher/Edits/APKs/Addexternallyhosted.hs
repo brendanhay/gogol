@@ -63,8 +63,9 @@ type EditsAPKsAddexternallyhostedResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] APKsAddExternallyHostedRequest :>
-                               Post '[JSON] APKsAddExternallyHostedResponse
+                             ReqBody '[OctetStream]
+                               APKsAddExternallyHostedRequest
+                               :> Post '[JSON] APKsAddExternallyHostedResponse
 
 -- | Creates a new APK without uploading the APK itself to Google Play,
 -- instead hosting the APK at a specified URL. This function is only

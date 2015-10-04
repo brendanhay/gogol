@@ -57,7 +57,7 @@ type CustomChannelsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] CustomChannel :>
+                         ReqBody '[OctetStream] CustomChannel :>
                            Post '[JSON] CustomChannel
 
 -- | Add a new custom channel to the host AdSense account.

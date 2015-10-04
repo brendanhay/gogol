@@ -17,9 +17,9 @@ module Network.Google.Drive.Types.Sum where
 
 import           Network.Google.Prelude
 
--- | The visibility of the new file. This parameter is only relevant when the
--- source is not a native Google Doc and convert=false.
-data DriveFilesCopyVisibility
+-- | The visibility of the new file. This parameter is only relevant when
+-- convert=false.
+data FilesInsertVisibility
     = Default
       -- ^ @DEFAULT@
       -- The visibility of the new file is determined by the user\'s default
@@ -29,27 +29,56 @@ data DriveFilesCopyVisibility
       -- The new file will be visible to only the owner.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DriveFilesCopyVisibility
+instance Hashable FilesInsertVisibility
 
-instance FromText DriveFilesCopyVisibility where
+instance FromText FilesInsertVisibility where
     fromText = \case
         "DEFAULT" -> Just Default
         "PRIVATE" -> Just Private
         _ -> Nothing
 
-instance ToText DriveFilesCopyVisibility where
+instance ToText FilesInsertVisibility where
     toText = \case
         Default -> "DEFAULT"
         Private -> "PRIVATE"
 
-instance FromJSON DriveFilesCopyVisibility where
-    parseJSON = parseJSONText "DriveFilesCopyVisibility"
+instance FromJSON FilesInsertVisibility where
+    parseJSON = parseJSONText "FilesInsertVisibility"
 
-instance ToJSON DriveFilesCopyVisibility where
+instance ToJSON FilesInsertVisibility where
+    toJSON = toJSONText
+
+-- | The body of items (files\/documents) to which the query applies.
+data FilesListCorpus
+    = FLCDefault
+      -- ^ @DEFAULT@
+      -- The items that the user has accessed.
+    | FLCDomain
+      -- ^ @DOMAIN@
+      -- Items shared to the user\'s domain.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable FilesListCorpus
+
+instance FromText FilesListCorpus where
+    fromText = \case
+        "DEFAULT" -> Just FLCDefault
+        "DOMAIN" -> Just FLCDomain
+        _ -> Nothing
+
+instance ToText FilesListCorpus where
+    toText = \case
+        FLCDefault -> "DEFAULT"
+        FLCDomain -> "DOMAIN"
+
+instance FromJSON FilesListCorpus where
+    parseJSON = parseJSONText "FilesListCorpus"
+
+instance ToJSON FilesListCorpus where
     toJSON = toJSONText
 
 -- | This parameter is deprecated and has no function.
-data DriveFilesGetProjection
+data FilesListProjection
     = Basic
       -- ^ @BASIC@
       -- Deprecated
@@ -58,88 +87,28 @@ data DriveFilesGetProjection
       -- Deprecated
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DriveFilesGetProjection
+instance Hashable FilesListProjection
 
-instance FromText DriveFilesGetProjection where
+instance FromText FilesListProjection where
     fromText = \case
         "BASIC" -> Just Basic
         "FULL" -> Just Full
         _ -> Nothing
 
-instance ToText DriveFilesGetProjection where
+instance ToText FilesListProjection where
     toText = \case
         Basic -> "BASIC"
         Full -> "FULL"
 
-instance FromJSON DriveFilesGetProjection where
-    parseJSON = parseJSONText "DriveFilesGetProjection"
+instance FromJSON FilesListProjection where
+    parseJSON = parseJSONText "FilesListProjection"
 
-instance ToJSON DriveFilesGetProjection where
-    toJSON = toJSONText
-
--- | This parameter is deprecated and has no function.
-data DriveFilesWatchProjection
-    = DFWPBasic
-      -- ^ @BASIC@
-      -- Deprecated
-    | DFWPFull
-      -- ^ @FULL@
-      -- Deprecated
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DriveFilesWatchProjection
-
-instance FromText DriveFilesWatchProjection where
-    fromText = \case
-        "BASIC" -> Just DFWPBasic
-        "FULL" -> Just DFWPFull
-        _ -> Nothing
-
-instance ToText DriveFilesWatchProjection where
-    toText = \case
-        DFWPBasic -> "BASIC"
-        DFWPFull -> "FULL"
-
-instance FromJSON DriveFilesWatchProjection where
-    parseJSON = parseJSONText "DriveFilesWatchProjection"
-
-instance ToJSON DriveFilesWatchProjection where
-    toJSON = toJSONText
-
--- | The visibility of the new file. This parameter is only relevant when
--- convert=false.
-data Visibility
-    = VDefault
-      -- ^ @DEFAULT@
-      -- The visibility of the new file is determined by the user\'s default
-      -- visibility\/sharing policies.
-    | VPrivate
-      -- ^ @PRIVATE@
-      -- The new file will be visible to only the owner.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Visibility
-
-instance FromText Visibility where
-    fromText = \case
-        "DEFAULT" -> Just VDefault
-        "PRIVATE" -> Just VPrivate
-        _ -> Nothing
-
-instance ToText Visibility where
-    toText = \case
-        VDefault -> "DEFAULT"
-        VPrivate -> "PRIVATE"
-
-instance FromJSON Visibility where
-    parseJSON = parseJSONText "Visibility"
-
-instance ToJSON Visibility where
+instance ToJSON FilesListProjection where
     toJSON = toJSONText
 
 -- | Determines the behavior in which modifiedDate is updated. This overrides
 -- setModifiedDate.
-data DriveFilesUpdateModifiedDateBehavior
+data FilesUpdateModifiedDateBehavior
     = FromBody
       -- ^ @fromBody@
       -- Set modifiedDate to the value provided in the body of the request. No
@@ -164,9 +133,9 @@ data DriveFilesUpdateModifiedDateBehavior
       -- update.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DriveFilesUpdateModifiedDateBehavior
+instance Hashable FilesUpdateModifiedDateBehavior
 
-instance FromText DriveFilesUpdateModifiedDateBehavior where
+instance FromText FilesUpdateModifiedDateBehavior where
     fromText = \case
         "fromBody" -> Just FromBody
         "fromBodyIfNeeded" -> Just FromBodyIfNeeded
@@ -176,7 +145,7 @@ instance FromText DriveFilesUpdateModifiedDateBehavior where
         "nowIfNeeded" -> Just NowIfNeeded
         _ -> Nothing
 
-instance ToText DriveFilesUpdateModifiedDateBehavior where
+instance ToText FilesUpdateModifiedDateBehavior where
     toText = \case
         FromBody -> "fromBody"
         FromBodyIfNeeded -> "fromBodyIfNeeded"
@@ -185,120 +154,151 @@ instance ToText DriveFilesUpdateModifiedDateBehavior where
         Now -> "now"
         NowIfNeeded -> "nowIfNeeded"
 
-instance FromJSON DriveFilesUpdateModifiedDateBehavior where
-    parseJSON = parseJSONText "DriveFilesUpdateModifiedDateBehavior"
+instance FromJSON FilesUpdateModifiedDateBehavior where
+    parseJSON = parseJSONText "FilesUpdateModifiedDateBehavior"
 
-instance ToJSON DriveFilesUpdateModifiedDateBehavior where
+instance ToJSON FilesUpdateModifiedDateBehavior where
+    toJSON = toJSONText
+
+-- | This parameter is deprecated and has no function.
+data FilesWatchProjection
+    = FWPBasic
+      -- ^ @BASIC@
+      -- Deprecated
+    | FWPFull
+      -- ^ @FULL@
+      -- Deprecated
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable FilesWatchProjection
+
+instance FromText FilesWatchProjection where
+    fromText = \case
+        "BASIC" -> Just FWPBasic
+        "FULL" -> Just FWPFull
+        _ -> Nothing
+
+instance ToText FilesWatchProjection where
+    toText = \case
+        FWPBasic -> "BASIC"
+        FWPFull -> "FULL"
+
+instance FromJSON FilesWatchProjection where
+    parseJSON = parseJSONText "FilesWatchProjection"
+
+instance ToJSON FilesWatchProjection where
     toJSON = toJSONText
 
 -- | Determines the behavior in which modifiedDate is updated. This overrides
 -- setModifiedDate.
-data ModifiedDateBehavior
-    = MDBFromBody
+data FilesPatchModifiedDateBehavior
+    = FPMDBFromBody
       -- ^ @fromBody@
       -- Set modifiedDate to the value provided in the body of the request. No
       -- change if no value was provided.
-    | MDBFromBodyIfNeeded
+    | FPMDBFromBodyIfNeeded
       -- ^ @fromBodyIfNeeded@
       -- Set modifiedDate to the value provided in the body of the request
       -- depending on other contents of the update.
-    | MDBFromBodyOrNow
+    | FPMDBFromBodyOrNow
       -- ^ @fromBodyOrNow@
       -- Set modifiedDate to the value provided in the body of the request, or to
       -- the current time if no value was provided.
-    | MDBNoChange
+    | FPMDBNoChange
       -- ^ @noChange@
       -- Maintain the previous value of modifiedDate.
-    | MDBNow
+    | FPMDBNow
       -- ^ @now@
       -- Set modifiedDate to the current time.
-    | MDBNowIfNeeded
+    | FPMDBNowIfNeeded
       -- ^ @nowIfNeeded@
       -- Set modifiedDate to the current time depending on contents of the
       -- update.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable ModifiedDateBehavior
+instance Hashable FilesPatchModifiedDateBehavior
 
-instance FromText ModifiedDateBehavior where
+instance FromText FilesPatchModifiedDateBehavior where
     fromText = \case
-        "fromBody" -> Just MDBFromBody
-        "fromBodyIfNeeded" -> Just MDBFromBodyIfNeeded
-        "fromBodyOrNow" -> Just MDBFromBodyOrNow
-        "noChange" -> Just MDBNoChange
-        "now" -> Just MDBNow
-        "nowIfNeeded" -> Just MDBNowIfNeeded
+        "fromBody" -> Just FPMDBFromBody
+        "fromBodyIfNeeded" -> Just FPMDBFromBodyIfNeeded
+        "fromBodyOrNow" -> Just FPMDBFromBodyOrNow
+        "noChange" -> Just FPMDBNoChange
+        "now" -> Just FPMDBNow
+        "nowIfNeeded" -> Just FPMDBNowIfNeeded
         _ -> Nothing
 
-instance ToText ModifiedDateBehavior where
+instance ToText FilesPatchModifiedDateBehavior where
     toText = \case
-        MDBFromBody -> "fromBody"
-        MDBFromBodyIfNeeded -> "fromBodyIfNeeded"
-        MDBFromBodyOrNow -> "fromBodyOrNow"
-        MDBNoChange -> "noChange"
-        MDBNow -> "now"
-        MDBNowIfNeeded -> "nowIfNeeded"
+        FPMDBFromBody -> "fromBody"
+        FPMDBFromBodyIfNeeded -> "fromBodyIfNeeded"
+        FPMDBFromBodyOrNow -> "fromBodyOrNow"
+        FPMDBNoChange -> "noChange"
+        FPMDBNow -> "now"
+        FPMDBNowIfNeeded -> "nowIfNeeded"
 
-instance FromJSON ModifiedDateBehavior where
-    parseJSON = parseJSONText "ModifiedDateBehavior"
+instance FromJSON FilesPatchModifiedDateBehavior where
+    parseJSON = parseJSONText "FilesPatchModifiedDateBehavior"
 
-instance ToJSON ModifiedDateBehavior where
+instance ToJSON FilesPatchModifiedDateBehavior where
+    toJSON = toJSONText
+
+-- | The visibility of the new file. This parameter is only relevant when the
+-- source is not a native Google Doc and convert=false.
+data FilesCopyVisibility
+    = FCVDefault
+      -- ^ @DEFAULT@
+      -- The visibility of the new file is determined by the user\'s default
+      -- visibility\/sharing policies.
+    | FCVPrivate
+      -- ^ @PRIVATE@
+      -- The new file will be visible to only the owner.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable FilesCopyVisibility
+
+instance FromText FilesCopyVisibility where
+    fromText = \case
+        "DEFAULT" -> Just FCVDefault
+        "PRIVATE" -> Just FCVPrivate
+        _ -> Nothing
+
+instance ToText FilesCopyVisibility where
+    toText = \case
+        FCVDefault -> "DEFAULT"
+        FCVPrivate -> "PRIVATE"
+
+instance FromJSON FilesCopyVisibility where
+    parseJSON = parseJSONText "FilesCopyVisibility"
+
+instance ToJSON FilesCopyVisibility where
     toJSON = toJSONText
 
 -- | This parameter is deprecated and has no function.
-data Projection
-    = PBasic
+data FilesGetProjection
+    = FGPBasic
       -- ^ @BASIC@
       -- Deprecated
-    | PFull
+    | FGPFull
       -- ^ @FULL@
       -- Deprecated
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable Projection
+instance Hashable FilesGetProjection
 
-instance FromText Projection where
+instance FromText FilesGetProjection where
     fromText = \case
-        "BASIC" -> Just PBasic
-        "FULL" -> Just PFull
+        "BASIC" -> Just FGPBasic
+        "FULL" -> Just FGPFull
         _ -> Nothing
 
-instance ToText Projection where
+instance ToText FilesGetProjection where
     toText = \case
-        PBasic -> "BASIC"
-        PFull -> "FULL"
+        FGPBasic -> "BASIC"
+        FGPFull -> "FULL"
 
-instance FromJSON Projection where
-    parseJSON = parseJSONText "Projection"
+instance FromJSON FilesGetProjection where
+    parseJSON = parseJSONText "FilesGetProjection"
 
-instance ToJSON Projection where
-    toJSON = toJSONText
-
--- | The body of items (files\/documents) to which the query applies.
-data Corpus
-    = CDefault
-      -- ^ @DEFAULT@
-      -- The items that the user has accessed.
-    | CDomain
-      -- ^ @DOMAIN@
-      -- Items shared to the user\'s domain.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Corpus
-
-instance FromText Corpus where
-    fromText = \case
-        "DEFAULT" -> Just CDefault
-        "DOMAIN" -> Just CDomain
-        _ -> Nothing
-
-instance ToText Corpus where
-    toText = \case
-        CDefault -> "DEFAULT"
-        CDomain -> "DOMAIN"
-
-instance FromJSON Corpus where
-    parseJSON = parseJSONText "Corpus"
-
-instance ToJSON Corpus where
+instance ToJSON FilesGetProjection where
     toJSON = toJSONText

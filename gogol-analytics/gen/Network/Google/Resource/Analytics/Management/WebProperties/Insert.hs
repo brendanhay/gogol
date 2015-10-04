@@ -60,7 +60,7 @@ type ManagementWebPropertiesInsertResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] WebProperty :>
+                           ReqBody '[OctetStream] WebProperty :>
                              Post '[JSON] WebProperty
 
 -- | Create a new property if the account has fewer than 20 properties. Web

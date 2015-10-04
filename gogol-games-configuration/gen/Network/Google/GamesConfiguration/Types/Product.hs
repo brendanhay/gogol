@@ -760,58 +760,6 @@ instance ToJSON LeaderboardConfigurationDetail where
                   ("name" .=) <$> _lcdName,
                   ("iconUrl" .=) <$> _lcdIconURL])
 
--- | This is a JSON template for a localized string bundle resource.
---
--- /See:/ 'localizedStringBundle' smart constructor.
-data LocalizedStringBundle = LocalizedStringBundle
-    { _lsbKind         :: !Text
-    , _lsbTranslations :: !(Maybe [LocalizedString])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'LocalizedStringBundle' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lsbKind'
---
--- * 'lsbTranslations'
-localizedStringBundle
-    :: LocalizedStringBundle
-localizedStringBundle =
-    LocalizedStringBundle
-    { _lsbKind = "gamesConfiguration#localizedStringBundle"
-    , _lsbTranslations = Nothing
-    }
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string gamesConfiguration#localizedStringBundle.
-lsbKind :: Lens' LocalizedStringBundle Text
-lsbKind = lens _lsbKind (\ s a -> s{_lsbKind = a})
-
--- | The locale strings.
-lsbTranslations :: Lens' LocalizedStringBundle [LocalizedString]
-lsbTranslations
-  = lens _lsbTranslations
-      (\ s a -> s{_lsbTranslations = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON LocalizedStringBundle where
-        parseJSON
-          = withObject "LocalizedStringBundle"
-              (\ o ->
-                 LocalizedStringBundle <$>
-                   (o .:? "kind" .!=
-                      "gamesConfiguration#localizedStringBundle")
-                     <*> (o .:? "translations" .!= mempty))
-
-instance ToJSON LocalizedStringBundle where
-        toJSON LocalizedStringBundle{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _lsbKind),
-                  ("translations" .=) <$> _lsbTranslations])
-
 -- | This is a JSON template for an achievement configuration detail.
 --
 -- /See:/ 'achievementConfigurationDetail' smart constructor.
@@ -906,3 +854,55 @@ instance ToJSON AchievementConfigurationDetail where
                   ("pointValue" .=) <$> _acdPointValue,
                   ("iconUrl" .=) <$> _acdIconURL,
                   ("description" .=) <$> _acdDescription])
+
+-- | This is a JSON template for a localized string bundle resource.
+--
+-- /See:/ 'localizedStringBundle' smart constructor.
+data LocalizedStringBundle = LocalizedStringBundle
+    { _lsbKind         :: !Text
+    , _lsbTranslations :: !(Maybe [LocalizedString])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LocalizedStringBundle' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lsbKind'
+--
+-- * 'lsbTranslations'
+localizedStringBundle
+    :: LocalizedStringBundle
+localizedStringBundle =
+    LocalizedStringBundle
+    { _lsbKind = "gamesConfiguration#localizedStringBundle"
+    , _lsbTranslations = Nothing
+    }
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string gamesConfiguration#localizedStringBundle.
+lsbKind :: Lens' LocalizedStringBundle Text
+lsbKind = lens _lsbKind (\ s a -> s{_lsbKind = a})
+
+-- | The locale strings.
+lsbTranslations :: Lens' LocalizedStringBundle [LocalizedString]
+lsbTranslations
+  = lens _lsbTranslations
+      (\ s a -> s{_lsbTranslations = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON LocalizedStringBundle where
+        parseJSON
+          = withObject "LocalizedStringBundle"
+              (\ o ->
+                 LocalizedStringBundle <$>
+                   (o .:? "kind" .!=
+                      "gamesConfiguration#localizedStringBundle")
+                     <*> (o .:? "translations" .!= mempty))
+
+instance ToJSON LocalizedStringBundle where
+        toJSON LocalizedStringBundle{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _lsbKind),
+                  ("translations" .=) <$> _lsbTranslations])

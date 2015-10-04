@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Advertisers.Patch
     , apQuotaUser
     , apPrettyPrint
     , apUserIP
-    , apProfileId
+    , apProFileId
     , apPayload
     , apKey
     , apId
@@ -59,7 +59,7 @@ type AdvertisersPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Advertiser :>
+                           ReqBody '[OctetStream] Advertiser :>
                              Patch '[JSON] Advertiser
 
 -- | Updates an existing advertiser. This method supports patch semantics.
@@ -69,7 +69,7 @@ data AdvertisersPatch' = AdvertisersPatch'
     { _apQuotaUser   :: !(Maybe Text)
     , _apPrettyPrint :: !Bool
     , _apUserIP      :: !(Maybe Text)
-    , _apProfileId   :: !Int64
+    , _apProFileId   :: !Int64
     , _apPayload     :: !Advertiser
     , _apKey         :: !(Maybe Key)
     , _apId          :: !Int64
@@ -87,7 +87,7 @@ data AdvertisersPatch' = AdvertisersPatch'
 --
 -- * 'apUserIP'
 --
--- * 'apProfileId'
+-- * 'apProFileId'
 --
 -- * 'apPayload'
 --
@@ -103,12 +103,12 @@ advertisersPatch'
     -> Advertiser -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> AdvertisersPatch'
-advertisersPatch' pApProfileId_ pApPayload_ pApId_ =
+advertisersPatch' pApProFileId_ pApPayload_ pApId_ =
     AdvertisersPatch'
     { _apQuotaUser = Nothing
     , _apPrettyPrint = True
     , _apUserIP = Nothing
-    , _apProfileId = pApProfileId_
+    , _apProFileId = pApProFileId_
     , _apPayload = pApPayload_
     , _apKey = Nothing
     , _apId = pApId_
@@ -135,9 +135,9 @@ apUserIP :: Lens' AdvertisersPatch' (Maybe Text)
 apUserIP = lens _apUserIP (\ s a -> s{_apUserIP = a})
 
 -- | User profile ID associated with this request.
-apProfileId :: Lens' AdvertisersPatch' Int64
-apProfileId
-  = lens _apProfileId (\ s a -> s{_apProfileId = a})
+apProFileId :: Lens' AdvertisersPatch' Int64
+apProFileId
+  = lens _apProFileId (\ s a -> s{_apProFileId = a})
 
 -- | Multipart request metadata.
 apPayload :: Lens' AdvertisersPatch' Advertiser
@@ -171,7 +171,7 @@ instance GoogleRequest AdvertisersPatch' where
         type Rs AdvertisersPatch' = Advertiser
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdvertisersPatch'{..}
-          = go _apProfileId (Just _apId) _apQuotaUser
+          = go _apProFileId (Just _apId) _apQuotaUser
               (Just _apPrettyPrint)
               _apUserIP
               _apFields

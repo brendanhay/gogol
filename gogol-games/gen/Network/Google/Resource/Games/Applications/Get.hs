@@ -52,7 +52,8 @@ import           Network.Google.Prelude
 type ApplicationsGetResource =
      "applications" :>
        Capture "applicationId" Text :>
-         QueryParam "platformType" PlatformType :>
+         QueryParam "platformType" ApplicationsGetPlatformType
+           :>
            QueryParam "language" Text :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
@@ -73,7 +74,7 @@ data ApplicationsGet' = ApplicationsGet'
     , _agUserIP        :: !(Maybe Text)
     , _agApplicationId :: !Text
     , _agKey           :: !(Maybe Key)
-    , _agPlatformType  :: !(Maybe PlatformType)
+    , _agPlatformType  :: !(Maybe ApplicationsGetPlatformType)
     , _agLanguage      :: !(Maybe Text)
     , _agOAuthToken    :: !(Maybe OAuthToken)
     , _agFields        :: !(Maybe Text)
@@ -147,7 +148,7 @@ agKey :: Lens' ApplicationsGet' (Maybe Key)
 agKey = lens _agKey (\ s a -> s{_agKey = a})
 
 -- | Restrict application details returned to the specific platform.
-agPlatformType :: Lens' ApplicationsGet' (Maybe PlatformType)
+agPlatformType :: Lens' ApplicationsGet' (Maybe ApplicationsGetPlatformType)
 agPlatformType
   = lens _agPlatformType
       (\ s a -> s{_agPlatformType = a})

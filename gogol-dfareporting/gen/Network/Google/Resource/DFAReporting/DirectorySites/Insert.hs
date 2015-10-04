@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.DirectorySites.Insert
     , dsiQuotaUser
     , dsiPrettyPrint
     , dsiUserIP
-    , dsiProfileId
+    , dsiProFileId
     , dsiPayload
     , dsiKey
     , dsiOAuthToken
@@ -57,7 +57,7 @@ type DirectorySitesInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] DirectorySite :>
+                         ReqBody '[OctetStream] DirectorySite :>
                            Post '[JSON] DirectorySite
 
 -- | Inserts a new directory site.
@@ -67,7 +67,7 @@ data DirectorySitesInsert' = DirectorySitesInsert'
     { _dsiQuotaUser   :: !(Maybe Text)
     , _dsiPrettyPrint :: !Bool
     , _dsiUserIP      :: !(Maybe Text)
-    , _dsiProfileId   :: !Int64
+    , _dsiProFileId   :: !Int64
     , _dsiPayload     :: !DirectorySite
     , _dsiKey         :: !(Maybe Key)
     , _dsiOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data DirectorySitesInsert' = DirectorySitesInsert'
 --
 -- * 'dsiUserIP'
 --
--- * 'dsiProfileId'
+-- * 'dsiProFileId'
 --
 -- * 'dsiPayload'
 --
@@ -97,12 +97,12 @@ directorySitesInsert'
     :: Int64 -- ^ 'profileId'
     -> DirectorySite -- ^ 'payload'
     -> DirectorySitesInsert'
-directorySitesInsert' pDsiProfileId_ pDsiPayload_ =
+directorySitesInsert' pDsiProFileId_ pDsiPayload_ =
     DirectorySitesInsert'
     { _dsiQuotaUser = Nothing
     , _dsiPrettyPrint = True
     , _dsiUserIP = Nothing
-    , _dsiProfileId = pDsiProfileId_
+    , _dsiProFileId = pDsiProFileId_
     , _dsiPayload = pDsiPayload_
     , _dsiKey = Nothing
     , _dsiOAuthToken = Nothing
@@ -129,9 +129,9 @@ dsiUserIP
   = lens _dsiUserIP (\ s a -> s{_dsiUserIP = a})
 
 -- | User profile ID associated with this request.
-dsiProfileId :: Lens' DirectorySitesInsert' Int64
-dsiProfileId
-  = lens _dsiProfileId (\ s a -> s{_dsiProfileId = a})
+dsiProFileId :: Lens' DirectorySitesInsert' Int64
+dsiProFileId
+  = lens _dsiProFileId (\ s a -> s{_dsiProFileId = a})
 
 -- | Multipart request metadata.
 dsiPayload :: Lens' DirectorySitesInsert' DirectorySite
@@ -163,7 +163,7 @@ instance GoogleRequest DirectorySitesInsert' where
         type Rs DirectorySitesInsert' = DirectorySite
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u DirectorySitesInsert'{..}
-          = go _dsiProfileId _dsiQuotaUser
+          = go _dsiProFileId _dsiQuotaUser
               (Just _dsiPrettyPrint)
               _dsiUserIP
               _dsiFields

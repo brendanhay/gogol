@@ -64,7 +64,7 @@ type AccountsContainersTagsUpdateResource =
                            QueryParam "key" Key :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
-                                 ReqBody '[JSON] Tag :> Put '[JSON] Tag
+                                 ReqBody '[OctetStream] Tag :> Put '[JSON] Tag
 
 -- | Updates a GTM Tag.
 --

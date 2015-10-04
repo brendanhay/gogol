@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Reports.Insert
     , riQuotaUser
     , riPrettyPrint
     , riUserIP
-    , riProfileId
+    , riProFileId
     , riPayload
     , riKey
     , riOAuthToken
@@ -57,7 +57,7 @@ type ReportsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Report :> Post '[JSON] Report
+                         ReqBody '[OctetStream] Report :> Post '[JSON] Report
 
 -- | Creates a report.
 --
@@ -66,7 +66,7 @@ data ReportsInsert' = ReportsInsert'
     { _riQuotaUser   :: !(Maybe Text)
     , _riPrettyPrint :: !Bool
     , _riUserIP      :: !(Maybe Text)
-    , _riProfileId   :: !Int64
+    , _riProFileId   :: !Int64
     , _riPayload     :: !Report
     , _riKey         :: !(Maybe Key)
     , _riOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +83,7 @@ data ReportsInsert' = ReportsInsert'
 --
 -- * 'riUserIP'
 --
--- * 'riProfileId'
+-- * 'riProFileId'
 --
 -- * 'riPayload'
 --
@@ -96,12 +96,12 @@ reportsInsert'
     :: Int64 -- ^ 'profileId'
     -> Report -- ^ 'payload'
     -> ReportsInsert'
-reportsInsert' pRiProfileId_ pRiPayload_ =
+reportsInsert' pRiProFileId_ pRiPayload_ =
     ReportsInsert'
     { _riQuotaUser = Nothing
     , _riPrettyPrint = True
     , _riUserIP = Nothing
-    , _riProfileId = pRiProfileId_
+    , _riProFileId = pRiProFileId_
     , _riPayload = pRiPayload_
     , _riKey = Nothing
     , _riOAuthToken = Nothing
@@ -127,9 +127,9 @@ riUserIP :: Lens' ReportsInsert' (Maybe Text)
 riUserIP = lens _riUserIP (\ s a -> s{_riUserIP = a})
 
 -- | The DFA user profile ID.
-riProfileId :: Lens' ReportsInsert' Int64
-riProfileId
-  = lens _riProfileId (\ s a -> s{_riProfileId = a})
+riProFileId :: Lens' ReportsInsert' Int64
+riProFileId
+  = lens _riProFileId (\ s a -> s{_riProFileId = a})
 
 -- | Multipart request metadata.
 riPayload :: Lens' ReportsInsert' Report
@@ -159,7 +159,7 @@ instance GoogleRequest ReportsInsert' where
         type Rs ReportsInsert' = Report
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ReportsInsert'{..}
-          = go _riProfileId _riQuotaUser (Just _riPrettyPrint)
+          = go _riProFileId _riQuotaUser (Just _riPrettyPrint)
               _riUserIP
               _riFields
               _riKey

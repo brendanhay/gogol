@@ -58,7 +58,8 @@ type EditsAPKsUploadResource =
                    QueryParam "fields" Text :>
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "alt" AltJSON :> Post '[JSON] APK
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Body :> Post '[JSON] APK
 
 --
 -- /See:/ 'editsAPKsUpload'' smart constructor.

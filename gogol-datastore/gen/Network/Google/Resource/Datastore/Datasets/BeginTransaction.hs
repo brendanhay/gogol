@@ -56,7 +56,7 @@ type DatasetsBeginTransactionResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltPROTO :>
-                       ReqBody '[JSON] BeginTransactionRequest :>
+                       ReqBody '[OctetStream] BeginTransactionRequest :>
                          Post '[JSON] BeginTransactionResponse
 
 -- | Begin a new transaction.

@@ -82,10 +82,12 @@ type SearchListResource =
      "search" :>
        QueryParam "part" Text :>
          QueryParam "publishedAfter" DateTime' :>
-           QueryParam "videoDefinition" VideoDefinition :>
-             QueryParam "videoDuration" VideoDuration :>
-               QueryParam "videoCaption" VideoCaption :>
-                 QueryParam "videoLicense" VideoLicense :>
+           QueryParam "videoDefinition"
+             SearchListVideoDefinition
+             :>
+             QueryParam "videoDuration" SearchListVideoDuration :>
+               QueryParam "videoCaption" SearchListVideoCaption :>
+                 QueryParam "videoLicense" SearchListVideoLicense :>
                    QueryParam "regionCode" Text :>
                      QueryParam "forDeveloper" Bool :>
                        QueryParam "location" Text :>
@@ -94,17 +96,20 @@ type SearchListResource =
                              QueryParam "channelId" Text :>
                                QueryParam "q" Text :>
                                  QueryParam "forMine" Bool :>
-                                   QueryParam "videoEmbeddable" VideoEmbeddable
+                                   QueryParam "videoEmbeddable"
+                                     SearchListVideoEmbeddable
                                      :>
-                                     QueryParam "eventType" EventType :>
+                                     QueryParam "eventType" SearchListEventType
+                                       :>
                                        QueryParam "onBehalfOfContentOwner" Text
                                          :>
                                          QueryParam "videoCategoryId" Text :>
                                            QueryParam "topicId" Text :>
-                                             QueryParam "safeSearch" SafeSearch
+                                             QueryParam "safeSearch"
+                                               SearchListSafeSearch
                                                :>
                                                QueryParam "videoSyndicated"
-                                                 VideoSyndicated
+                                                 SearchListVideoSyndicated
                                                  :>
                                                  QueryParam "relatedToVideoId"
                                                    Text
@@ -113,14 +118,14 @@ type SearchListResource =
                                                      :>
                                                      QueryParam "type" Text :>
                                                        QueryParam "channelType"
-                                                         ChannelType
+                                                         SearchListChannelType
                                                          :>
                                                          QueryParam
                                                            "relevanceLanguage"
                                                            Text
                                                            :>
                                                            QueryParam "order"
-                                                             YouTubeSearchListOrder
+                                                             SearchListOrder
                                                              :>
                                                              QueryParam
                                                                "maxResults"
@@ -132,11 +137,11 @@ type SearchListResource =
                                                                  :>
                                                                  QueryParam
                                                                    "videoType"
-                                                                   VideoType
+                                                                   SearchListVideoType
                                                                    :>
                                                                    QueryParam
                                                                      "videoDimension"
-                                                                     VideoDimension
+                                                                     SearchListVideoDimension
                                                                      :>
                                                                      QueryParam
                                                                        "quotaUser"
@@ -178,13 +183,13 @@ type SearchListResource =
 -- /See:/ 'searchList'' smart constructor.
 data SearchList' = SearchList'
     { _slPublishedAfter         :: !(Maybe DateTime')
-    , _slVideoDefinition        :: !(Maybe VideoDefinition)
+    , _slVideoDefinition        :: !(Maybe SearchListVideoDefinition)
     , _slQuotaUser              :: !(Maybe Text)
     , _slPart                   :: !Text
-    , _slVideoDuration          :: !(Maybe VideoDuration)
+    , _slVideoDuration          :: !(Maybe SearchListVideoDuration)
     , _slPrettyPrint            :: !Bool
-    , _slVideoCaption           :: !(Maybe VideoCaption)
-    , _slVideoLicense           :: !(Maybe VideoLicense)
+    , _slVideoCaption           :: !(Maybe SearchListVideoCaption)
+    , _slVideoLicense           :: !(Maybe SearchListVideoLicense)
     , _slRegionCode             :: !(Maybe Text)
     , _slForDeveloper           :: !(Maybe Bool)
     , _slLocation               :: !(Maybe Text)
@@ -194,25 +199,25 @@ data SearchList' = SearchList'
     , _slChannelId              :: !(Maybe Text)
     , _slQ                      :: !(Maybe Text)
     , _slForMine                :: !(Maybe Bool)
-    , _slVideoEmbeddable        :: !(Maybe VideoEmbeddable)
-    , _slEventType              :: !(Maybe EventType)
+    , _slVideoEmbeddable        :: !(Maybe SearchListVideoEmbeddable)
+    , _slEventType              :: !(Maybe SearchListEventType)
     , _slOnBehalfOfContentOwner :: !(Maybe Text)
     , _slVideoCategoryId        :: !(Maybe Text)
     , _slTopicId                :: !(Maybe Text)
     , _slKey                    :: !(Maybe Key)
-    , _slSafeSearch             :: !(Maybe SafeSearch)
-    , _slVideoSyndicated        :: !(Maybe VideoSyndicated)
+    , _slSafeSearch             :: !(Maybe SearchListSafeSearch)
+    , _slVideoSyndicated        :: !(Maybe SearchListVideoSyndicated)
     , _slRelatedToVideoId       :: !(Maybe Text)
     , _slPageToken              :: !(Maybe Text)
     , _slType                   :: !Text
     , _slOAuthToken             :: !(Maybe OAuthToken)
-    , _slChannelType            :: !(Maybe ChannelType)
+    , _slChannelType            :: !(Maybe SearchListChannelType)
     , _slRelevanceLanguage      :: !(Maybe Text)
-    , _slOrder                  :: !YouTubeSearchListOrder
+    , _slOrder                  :: !SearchListOrder
     , _slMaxResults             :: !Word32
     , _slPublishedBefore        :: !(Maybe DateTime')
-    , _slVideoType              :: !(Maybe VideoType)
-    , _slVideoDimension         :: !(Maybe VideoDimension)
+    , _slVideoType              :: !(Maybe SearchListVideoType)
+    , _slVideoDimension         :: !(Maybe SearchListVideoDimension)
     , _slFields                 :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -329,7 +334,7 @@ searchList' pSlPart_ =
     , _slOAuthToken = Nothing
     , _slChannelType = Nothing
     , _slRelevanceLanguage = Nothing
-    , _slOrder = YTSLOSearchSortRelevance
+    , _slOrder = SearchSortRelevance
     , _slMaxResults = 5
     , _slPublishedBefore = Nothing
     , _slVideoType = Nothing
@@ -352,7 +357,7 @@ slPublishedAfter
 -- resolutions, like 1080p, might also be available. If you specify a value
 -- for this parameter, you must also set the type parameter\'s value to
 -- video.
-slVideoDefinition :: Lens' SearchList' (Maybe VideoDefinition)
+slVideoDefinition :: Lens' SearchList' (Maybe SearchListVideoDefinition)
 slVideoDefinition
   = lens _slVideoDefinition
       (\ s a -> s{_slVideoDefinition = a})
@@ -373,7 +378,7 @@ slPart = lens _slPart (\ s a -> s{_slPart = a})
 -- | The videoDuration parameter filters video search results based on their
 -- duration. If you specify a value for this parameter, you must also set
 -- the type parameter\'s value to video.
-slVideoDuration :: Lens' SearchList' (Maybe VideoDuration)
+slVideoDuration :: Lens' SearchList' (Maybe SearchListVideoDuration)
 slVideoDuration
   = lens _slVideoDuration
       (\ s a -> s{_slVideoDuration = a})
@@ -388,7 +393,7 @@ slPrettyPrint
 -- search results based on whether they have captions. If you specify a
 -- value for this parameter, you must also set the type parameter\'s value
 -- to video.
-slVideoCaption :: Lens' SearchList' (Maybe VideoCaption)
+slVideoCaption :: Lens' SearchList' (Maybe SearchListVideoCaption)
 slVideoCaption
   = lens _slVideoCaption
       (\ s a -> s{_slVideoCaption = a})
@@ -398,7 +403,7 @@ slVideoCaption
 -- either the Creative Commons license or the standard YouTube license to
 -- each of their videos. If you specify a value for this parameter, you
 -- must also set the type parameter\'s value to video.
-slVideoLicense :: Lens' SearchList' (Maybe VideoLicense)
+slVideoLicense :: Lens' SearchList' (Maybe SearchListVideoLicense)
 slVideoLicense
   = lens _slVideoLicense
       (\ s a -> s{_slVideoLicense = a})
@@ -492,7 +497,7 @@ slForMine
 -- | The videoEmbeddable parameter lets you to restrict a search to only
 -- videos that can be embedded into a webpage. If you specify a value for
 -- this parameter, you must also set the type parameter\'s value to video.
-slVideoEmbeddable :: Lens' SearchList' (Maybe VideoEmbeddable)
+slVideoEmbeddable :: Lens' SearchList' (Maybe SearchListVideoEmbeddable)
 slVideoEmbeddable
   = lens _slVideoEmbeddable
       (\ s a -> s{_slVideoEmbeddable = a})
@@ -500,7 +505,7 @@ slVideoEmbeddable
 -- | The eventType parameter restricts a search to broadcast events. If you
 -- specify a value for this parameter, you must also set the type
 -- parameter\'s value to video.
-slEventType :: Lens' SearchList' (Maybe EventType)
+slEventType :: Lens' SearchList' (Maybe SearchListEventType)
 slEventType
   = lens _slEventType (\ s a -> s{_slEventType = a})
 
@@ -542,7 +547,7 @@ slKey = lens _slKey (\ s a -> s{_slKey = a})
 
 -- | The safeSearch parameter indicates whether the search results should
 -- include restricted content as well as standard content.
-slSafeSearch :: Lens' SearchList' (Maybe SafeSearch)
+slSafeSearch :: Lens' SearchList' (Maybe SearchListSafeSearch)
 slSafeSearch
   = lens _slSafeSearch (\ s a -> s{_slSafeSearch = a})
 
@@ -550,7 +555,7 @@ slSafeSearch
 -- videos that can be played outside youtube.com. If you specify a value
 -- for this parameter, you must also set the type parameter\'s value to
 -- video.
-slVideoSyndicated :: Lens' SearchList' (Maybe VideoSyndicated)
+slVideoSyndicated :: Lens' SearchList' (Maybe SearchListVideoSyndicated)
 slVideoSyndicated
   = lens _slVideoSyndicated
       (\ s a -> s{_slVideoSyndicated = a})
@@ -584,7 +589,7 @@ slOAuthToken
 
 -- | The channelType parameter lets you restrict a search to a particular
 -- type of channel.
-slChannelType :: Lens' SearchList' (Maybe ChannelType)
+slChannelType :: Lens' SearchList' (Maybe SearchListChannelType)
 slChannelType
   = lens _slChannelType
       (\ s a -> s{_slChannelType = a})
@@ -602,7 +607,7 @@ slRelevanceLanguage
 
 -- | The order parameter specifies the method that will be used to order
 -- resources in the API response.
-slOrder :: Lens' SearchList' YouTubeSearchListOrder
+slOrder :: Lens' SearchList' SearchListOrder
 slOrder = lens _slOrder (\ s a -> s{_slOrder = a})
 
 -- | The maxResults parameter specifies the maximum number of items that
@@ -623,14 +628,14 @@ slPublishedBefore
 -- | The videoType parameter lets you restrict a search to a particular type
 -- of videos. If you specify a value for this parameter, you must also set
 -- the type parameter\'s value to video.
-slVideoType :: Lens' SearchList' (Maybe VideoType)
+slVideoType :: Lens' SearchList' (Maybe SearchListVideoType)
 slVideoType
   = lens _slVideoType (\ s a -> s{_slVideoType = a})
 
 -- | The videoDimension parameter lets you restrict a search to only retrieve
 -- 2D or 3D videos. If you specify a value for this parameter, you must
 -- also set the type parameter\'s value to video.
-slVideoDimension :: Lens' SearchList' (Maybe VideoDimension)
+slVideoDimension :: Lens' SearchList' (Maybe SearchListVideoDimension)
 slVideoDimension
   = lens _slVideoDimension
       (\ s a -> s{_slVideoDimension = a})

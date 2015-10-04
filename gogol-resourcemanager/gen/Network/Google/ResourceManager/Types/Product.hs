@@ -18,6 +18,54 @@ module Network.Google.ResourceManager.Types.Product where
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types.Sum
 
+-- | A container to reference an id for any resource type. A \'resource\' in
+-- Google Cloud Platform is a generic term for something you (a developer)
+-- may want to interact with through one of our API\'s. Some examples are
+-- an AppEngine app, a Compute Engine instance, Cloud SQL database, ...
+--
+-- /See:/ 'resourceId' smart constructor.
+data ResourceId = ResourceId
+    { _riId   :: !(Maybe Text)
+    , _riType :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ResourceId' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'riId'
+--
+-- * 'riType'
+resourceId
+    :: ResourceId
+resourceId =
+    ResourceId
+    { _riId = Nothing
+    , _riType = Nothing
+    }
+
+-- | Required field for the type-specific id. This should correspond to the
+-- id used in the type-specific API\'s.
+riId :: Lens' ResourceId (Maybe Text)
+riId = lens _riId (\ s a -> s{_riId = a})
+
+-- | Required field representing the resource type this id is for. At
+-- present, the only valid type is \"organization\".
+riType :: Lens' ResourceId (Maybe Text)
+riType = lens _riType (\ s a -> s{_riType = a})
+
+instance FromJSON ResourceId where
+        parseJSON
+          = withObject "ResourceId"
+              (\ o ->
+                 ResourceId <$> (o .:? "id") <*> (o .:? "type"))
+
+instance ToJSON ResourceId where
+        toJSON ResourceId{..}
+          = object
+              (catMaybes
+                 [("id" .=) <$> _riId, ("type" .=) <$> _riType])
+
 -- | A page of the response received from the
 -- [ListProjects][google.cloudresourcemanager.projects.v1beta1.DeveloperProjects.ListProjects]
 -- method. A paginated response where more pages are available has
@@ -80,54 +128,6 @@ instance ToJSON ListProjectsResponse where
               (catMaybes
                  [("nextPageToken" .=) <$> _lprNextPageToken,
                   ("projects" .=) <$> _lprProjects])
-
--- | A container to reference an id for any resource type. A \'resource\' in
--- Google Cloud Platform is a generic term for something you (a developer)
--- may want to interact with through one of our API\'s. Some examples are
--- an AppEngine app, a Compute Engine instance, Cloud SQL database, ...
---
--- /See:/ 'resourceId' smart constructor.
-data ResourceId = ResourceId
-    { _riId   :: !(Maybe Text)
-    , _riType :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ResourceId' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'riId'
---
--- * 'riType'
-resourceId
-    :: ResourceId
-resourceId =
-    ResourceId
-    { _riId = Nothing
-    , _riType = Nothing
-    }
-
--- | Required field for the type-specific id. This should correspond to the
--- id used in the type-specific API\'s.
-riId :: Lens' ResourceId (Maybe Text)
-riId = lens _riId (\ s a -> s{_riId = a})
-
--- | Required field representing the resource type this id is for. At
--- present, the only valid type is \"organization\".
-riType :: Lens' ResourceId (Maybe Text)
-riType = lens _riType (\ s a -> s{_riType = a})
-
-instance FromJSON ResourceId where
-        parseJSON
-          = withObject "ResourceId"
-              (\ o ->
-                 ResourceId <$> (o .:? "id") <*> (o .:? "type"))
-
-instance ToJSON ResourceId where
-        toJSON ResourceId{..}
-          = object
-              (catMaybes
-                 [("id" .=) <$> _riId, ("type" .=) <$> _riType])
 
 -- | Request message for \`GetIamPolicy\` method.
 --
@@ -200,7 +200,7 @@ data Project = Project
     { _pParent         :: !(Maybe ResourceId)
     , _pProjectNumber  :: !(Maybe Int64)
     , _pName           :: !(Maybe Text)
-    , _pLabels         :: !(Maybe Labels)
+    , _pLabels         :: !(Maybe ProjectLabels)
     , _pProjectId      :: !(Maybe Text)
     , _pLifecycleState :: !(Maybe Text)
     , _pCreateTime     :: !(Maybe Text)
@@ -265,7 +265,7 @@ pName = lens _pName (\ s a -> s{_pName = a})
 -- labels in a representation such as JSON that does not depend on specific
 -- characters being disallowed. Example: \"environment\" : \"dev\"
 -- Read-write.
-pLabels :: Lens' Project (Maybe Labels)
+pLabels :: Lens' Project (Maybe ProjectLabels)
 pLabels = lens _pLabels (\ s a -> s{_pLabels = a})
 
 -- | The unique, user-assigned ID of the project. It must be 6 to 30
@@ -409,33 +409,6 @@ instance ToJSON TestIAMPermissionsRequest where
           = object
               (catMaybes [("permissions" .=) <$> _tiprPermissions])
 
--- | The labels associated with this project. Label keys must be between 1
--- and 63 characters long and must conform to the following regular
--- expression: \\[a-z\\](\\[-a-z0-9\\]*\\[a-z0-9\\])?. Label values must be
--- between 0 and 63 characters long and must conform to the regular
--- expression (\\[a-z\\](\\[-a-z0-9\\]*\\[a-z0-9\\])?)?. No more than 256
--- labels can be associated with a given resource. Clients should store
--- labels in a representation such as JSON that does not depend on specific
--- characters being disallowed. Example: \"environment\" : \"dev\"
--- Read-write.
---
--- /See:/ 'labels' smart constructor.
-data Labels =
-    Labels
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Labels' with the minimum fields required to make a request.
---
-labels
-    :: Labels
-labels = Labels
-
-instance FromJSON Labels where
-        parseJSON = withObject "Labels" (\ o -> pure Labels)
-
-instance ToJSON Labels where
-        toJSON = const (Object mempty)
-
 -- | Response message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsResponse' smart constructor.
@@ -548,6 +521,35 @@ instance ToJSON Policy where
                  [("etag" .=) <$> _pEtag,
                   ("version" .=) <$> _pVersion,
                   ("bindings" .=) <$> _pBindings])
+
+-- | The labels associated with this project. Label keys must be between 1
+-- and 63 characters long and must conform to the following regular
+-- expression: \\[a-z\\](\\[-a-z0-9\\]*\\[a-z0-9\\])?. Label values must be
+-- between 0 and 63 characters long and must conform to the regular
+-- expression (\\[a-z\\](\\[-a-z0-9\\]*\\[a-z0-9\\])?)?. No more than 256
+-- labels can be associated with a given resource. Clients should store
+-- labels in a representation such as JSON that does not depend on specific
+-- characters being disallowed. Example: \"environment\" : \"dev\"
+-- Read-write.
+--
+-- /See:/ 'projectLabels' smart constructor.
+data ProjectLabels =
+    ProjectLabels
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ProjectLabels' with the minimum fields required to make a request.
+--
+projectLabels
+    :: ProjectLabels
+projectLabels = ProjectLabels
+
+instance FromJSON ProjectLabels where
+        parseJSON
+          = withObject "ProjectLabels"
+              (\ o -> pure ProjectLabels)
+
+instance ToJSON ProjectLabels where
+        toJSON = const (Object mempty)
 
 -- | The root node in the resource hierarchy to which a particular entity\'s
 -- (e.g., company) resources belong.

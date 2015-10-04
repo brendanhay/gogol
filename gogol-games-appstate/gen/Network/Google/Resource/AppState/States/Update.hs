@@ -60,7 +60,7 @@ type StatesUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] UpdateRequest :>
+                         ReqBody '[OctetStream] UpdateRequest :>
                            Put '[JSON] WriteResult
 
 -- | Update the data associated with the input key if and only if the passed

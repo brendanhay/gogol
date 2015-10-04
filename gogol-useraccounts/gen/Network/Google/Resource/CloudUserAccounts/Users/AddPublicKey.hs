@@ -61,7 +61,8 @@ type UsersAddPublicKeyResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] PublicKey :> Post '[JSON] Operation
+                             ReqBody '[OctetStream] PublicKey :>
+                               Post '[JSON] Operation
 
 -- | Adds a public key to the specified User resource with the data included
 -- in the request.

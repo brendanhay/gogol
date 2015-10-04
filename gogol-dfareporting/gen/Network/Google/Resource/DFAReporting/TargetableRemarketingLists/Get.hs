@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.TargetableRemarketingLists.Get
     , trlgQuotaUser
     , trlgPrettyPrint
     , trlgUserIP
-    , trlgProfileId
+    , trlgProFileId
     , trlgKey
     , trlgId
     , trlgOAuthToken
@@ -67,7 +67,7 @@ data TargetableRemarketingListsGet' = TargetableRemarketingListsGet'
     { _trlgQuotaUser   :: !(Maybe Text)
     , _trlgPrettyPrint :: !Bool
     , _trlgUserIP      :: !(Maybe Text)
-    , _trlgProfileId   :: !Int64
+    , _trlgProFileId   :: !Int64
     , _trlgKey         :: !(Maybe Key)
     , _trlgId          :: !Int64
     , _trlgOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data TargetableRemarketingListsGet' = TargetableRemarketingListsGet'
 --
 -- * 'trlgUserIP'
 --
--- * 'trlgProfileId'
+-- * 'trlgProFileId'
 --
 -- * 'trlgKey'
 --
@@ -97,12 +97,12 @@ targetableRemarketingListsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> TargetableRemarketingListsGet'
-targetableRemarketingListsGet' pTrlgProfileId_ pTrlgId_ =
+targetableRemarketingListsGet' pTrlgProFileId_ pTrlgId_ =
     TargetableRemarketingListsGet'
     { _trlgQuotaUser = Nothing
     , _trlgPrettyPrint = True
     , _trlgUserIP = Nothing
-    , _trlgProfileId = pTrlgProfileId_
+    , _trlgProFileId = pTrlgProFileId_
     , _trlgKey = Nothing
     , _trlgId = pTrlgId_
     , _trlgOAuthToken = Nothing
@@ -130,10 +130,10 @@ trlgUserIP
   = lens _trlgUserIP (\ s a -> s{_trlgUserIP = a})
 
 -- | User profile ID associated with this request.
-trlgProfileId :: Lens' TargetableRemarketingListsGet' Int64
-trlgProfileId
-  = lens _trlgProfileId
-      (\ s a -> s{_trlgProfileId = a})
+trlgProFileId :: Lens' TargetableRemarketingListsGet' Int64
+trlgProFileId
+  = lens _trlgProFileId
+      (\ s a -> s{_trlgProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -168,7 +168,7 @@ instance GoogleRequest TargetableRemarketingListsGet'
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           TargetableRemarketingListsGet'{..}
-          = go _trlgProfileId _trlgId _trlgQuotaUser
+          = go _trlgProFileId _trlgId _trlgQuotaUser
               (Just _trlgPrettyPrint)
               _trlgUserIP
               _trlgFields

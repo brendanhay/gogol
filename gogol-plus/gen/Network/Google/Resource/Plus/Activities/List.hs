@@ -53,7 +53,7 @@ type ActivitiesListResource =
      "people" :>
        Capture "userId" Text :>
          "activities" :>
-           Capture "collection" Collection :>
+           Capture "collection" ActivitiesListCollection :>
              QueryParam "pageToken" Text :>
                QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
@@ -73,7 +73,7 @@ data ActivitiesList' = ActivitiesList'
     { _alQuotaUser   :: !(Maybe Text)
     , _alPrettyPrint :: !Bool
     , _alUserIP      :: !(Maybe Text)
-    , _alCollection  :: !Collection
+    , _alCollection  :: !ActivitiesListCollection
     , _alUserId      :: !Text
     , _alKey         :: !(Maybe Key)
     , _alPageToken   :: !(Maybe Text)
@@ -106,7 +106,7 @@ data ActivitiesList' = ActivitiesList'
 --
 -- * 'alFields'
 activitiesList'
-    :: Collection -- ^ 'collection'
+    :: ActivitiesListCollection -- ^ 'collection'
     -> Text -- ^ 'userId'
     -> ActivitiesList'
 activitiesList' pAlCollection_ pAlUserId_ =
@@ -142,7 +142,7 @@ alUserIP :: Lens' ActivitiesList' (Maybe Text)
 alUserIP = lens _alUserIP (\ s a -> s{_alUserIP = a})
 
 -- | The collection of activities to list.
-alCollection :: Lens' ActivitiesList' Collection
+alCollection :: Lens' ActivitiesList' ActivitiesListCollection
 alCollection
   = lens _alCollection (\ s a -> s{_alCollection = a})
 

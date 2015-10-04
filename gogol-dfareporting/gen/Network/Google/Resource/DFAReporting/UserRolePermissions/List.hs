@@ -35,7 +35,7 @@ module Network.Google.Resource.DFAReporting.UserRolePermissions.List
     , urplPrettyPrint
     , urplUserIP
     , urplIds
-    , urplProfileId
+    , urplProFileId
     , urplKey
     , urplOAuthToken
     , urplFields
@@ -68,7 +68,7 @@ data UserRolePermissionsList' = UserRolePermissionsList'
     , _urplPrettyPrint :: !Bool
     , _urplUserIP      :: !(Maybe Text)
     , _urplIds         :: !(Maybe [Int64])
-    , _urplProfileId   :: !Int64
+    , _urplProFileId   :: !Int64
     , _urplKey         :: !(Maybe Key)
     , _urplOAuthToken  :: !(Maybe OAuthToken)
     , _urplFields      :: !(Maybe Text)
@@ -86,7 +86,7 @@ data UserRolePermissionsList' = UserRolePermissionsList'
 --
 -- * 'urplIds'
 --
--- * 'urplProfileId'
+-- * 'urplProFileId'
 --
 -- * 'urplKey'
 --
@@ -96,13 +96,13 @@ data UserRolePermissionsList' = UserRolePermissionsList'
 userRolePermissionsList'
     :: Int64 -- ^ 'profileId'
     -> UserRolePermissionsList'
-userRolePermissionsList' pUrplProfileId_ =
+userRolePermissionsList' pUrplProFileId_ =
     UserRolePermissionsList'
     { _urplQuotaUser = Nothing
     , _urplPrettyPrint = True
     , _urplUserIP = Nothing
     , _urplIds = Nothing
-    , _urplProfileId = pUrplProfileId_
+    , _urplProFileId = pUrplProFileId_
     , _urplKey = Nothing
     , _urplOAuthToken = Nothing
     , _urplFields = Nothing
@@ -135,10 +135,10 @@ urplIds
       . _Coerce
 
 -- | User profile ID associated with this request.
-urplProfileId :: Lens' UserRolePermissionsList' Int64
-urplProfileId
-  = lens _urplProfileId
-      (\ s a -> s{_urplProfileId = a})
+urplProFileId :: Lens' UserRolePermissionsList' Int64
+urplProFileId
+  = lens _urplProFileId
+      (\ s a -> s{_urplProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -166,7 +166,7 @@ instance GoogleRequest UserRolePermissionsList' where
              UserRolePermissionsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u UserRolePermissionsList'{..}
-          = go _urplProfileId (_urplIds ^. _Default)
+          = go _urplProFileId (_urplIds ^. _Default)
               _urplQuotaUser
               (Just _urplPrettyPrint)
               _urplUserIP

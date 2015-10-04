@@ -18,140 +18,6 @@ module Network.Google.AdminDirectory.Types.Product where
 import           Network.Google.AdminDirectory.Types.Sum
 import           Network.Google.Prelude
 
---
--- /See:/ 'applicationsItem' smart constructor.
-data ApplicationsItem = ApplicationsItem
-    { _aiVersionCode :: !(Maybe Int32)
-    , _aiVersionName :: !(Maybe Text)
-    , _aiPackageName :: !(Maybe Text)
-    , _aiDisplayName :: !(Maybe Text)
-    , _aiPermission  :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ApplicationsItem' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aiVersionCode'
---
--- * 'aiVersionName'
---
--- * 'aiPackageName'
---
--- * 'aiDisplayName'
---
--- * 'aiPermission'
-applicationsItem
-    :: ApplicationsItem
-applicationsItem =
-    ApplicationsItem
-    { _aiVersionCode = Nothing
-    , _aiVersionName = Nothing
-    , _aiPackageName = Nothing
-    , _aiDisplayName = Nothing
-    , _aiPermission = Nothing
-    }
-
--- | Version code of application
-aiVersionCode :: Lens' ApplicationsItem (Maybe Int32)
-aiVersionCode
-  = lens _aiVersionCode
-      (\ s a -> s{_aiVersionCode = a})
-
--- | Version name of application
-aiVersionName :: Lens' ApplicationsItem (Maybe Text)
-aiVersionName
-  = lens _aiVersionName
-      (\ s a -> s{_aiVersionName = a})
-
--- | Package name of application
-aiPackageName :: Lens' ApplicationsItem (Maybe Text)
-aiPackageName
-  = lens _aiPackageName
-      (\ s a -> s{_aiPackageName = a})
-
--- | Display name of application
-aiDisplayName :: Lens' ApplicationsItem (Maybe Text)
-aiDisplayName
-  = lens _aiDisplayName
-      (\ s a -> s{_aiDisplayName = a})
-
--- | List of Permissions for application
-aiPermission :: Lens' ApplicationsItem [Text]
-aiPermission
-  = lens _aiPermission (\ s a -> s{_aiPermission = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON ApplicationsItem where
-        parseJSON
-          = withObject "ApplicationsItem"
-              (\ o ->
-                 ApplicationsItem <$>
-                   (o .:? "versionCode") <*> (o .:? "versionName") <*>
-                     (o .:? "packageName")
-                     <*> (o .:? "displayName")
-                     <*> (o .:? "permission" .!= mempty))
-
-instance ToJSON ApplicationsItem where
-        toJSON ApplicationsItem{..}
-          = object
-              (catMaybes
-                 [("versionCode" .=) <$> _aiVersionCode,
-                  ("versionName" .=) <$> _aiVersionName,
-                  ("packageName" .=) <$> _aiPackageName,
-                  ("displayName" .=) <$> _aiDisplayName,
-                  ("permission" .=) <$> _aiPermission])
-
--- | JSON template for About (notes) of a user in Directory API.
---
--- /See:/ 'userAbout' smart constructor.
-data UserAbout = UserAbout
-    { _uaValue       :: !(Maybe Text)
-    , _uaContentType :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'UserAbout' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'uaValue'
---
--- * 'uaContentType'
-userAbout
-    :: UserAbout
-userAbout =
-    UserAbout
-    { _uaValue = Nothing
-    , _uaContentType = Nothing
-    }
-
--- | Actual value of notes.
-uaValue :: Lens' UserAbout (Maybe Text)
-uaValue = lens _uaValue (\ s a -> s{_uaValue = a})
-
--- | About entry can have a type which indicates the content type. It can
--- either be plain or html. By default, notes contents are assumed to
--- contain plain text.
-uaContentType :: Lens' UserAbout (Maybe Text)
-uaContentType
-  = lens _uaContentType
-      (\ s a -> s{_uaContentType = a})
-
-instance FromJSON UserAbout where
-        parseJSON
-          = withObject "UserAbout"
-              (\ o ->
-                 UserAbout <$>
-                   (o .:? "value") <*> (o .:? "contentType"))
-
-instance ToJSON UserAbout where
-        toJSON UserAbout{..}
-          = object
-              (catMaybes
-                 [("value" .=) <$> _uaValue,
-                  ("contentType" .=) <$> _uaContentType])
-
 -- | JSON template for verification codes in Directory API.
 --
 -- /See:/ 'verificationCode' smart constructor.
@@ -346,6 +212,89 @@ instance ToJSON OrgUnit where
                   ("description" .=) <$> _ouDescription,
                   ("orgUnitId" .=) <$> _ouOrgUnitId])
 
+-- | JSON request template for setting\/revoking admin status of a user in
+-- Directory API.
+--
+-- /See:/ 'userMakeAdmin' smart constructor.
+newtype UserMakeAdmin = UserMakeAdmin
+    { _umaStatus :: Maybe Bool
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UserMakeAdmin' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'umaStatus'
+userMakeAdmin
+    :: UserMakeAdmin
+userMakeAdmin =
+    UserMakeAdmin
+    { _umaStatus = Nothing
+    }
+
+-- | Boolean indicating new admin status of the user
+umaStatus :: Lens' UserMakeAdmin (Maybe Bool)
+umaStatus
+  = lens _umaStatus (\ s a -> s{_umaStatus = a})
+
+instance FromJSON UserMakeAdmin where
+        parseJSON
+          = withObject "UserMakeAdmin"
+              (\ o -> UserMakeAdmin <$> (o .:? "status"))
+
+instance ToJSON UserMakeAdmin where
+        toJSON UserMakeAdmin{..}
+          = object (catMaybes [("status" .=) <$> _umaStatus])
+
+-- | JSON template for About (notes) of a user in Directory API.
+--
+-- /See:/ 'userAbout' smart constructor.
+data UserAbout = UserAbout
+    { _uaValue       :: !(Maybe Text)
+    , _uaContentType :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UserAbout' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'uaValue'
+--
+-- * 'uaContentType'
+userAbout
+    :: UserAbout
+userAbout =
+    UserAbout
+    { _uaValue = Nothing
+    , _uaContentType = Nothing
+    }
+
+-- | Actual value of notes.
+uaValue :: Lens' UserAbout (Maybe Text)
+uaValue = lens _uaValue (\ s a -> s{_uaValue = a})
+
+-- | About entry can have a type which indicates the content type. It can
+-- either be plain or html. By default, notes contents are assumed to
+-- contain plain text.
+uaContentType :: Lens' UserAbout (Maybe Text)
+uaContentType
+  = lens _uaContentType
+      (\ s a -> s{_uaContentType = a})
+
+instance FromJSON UserAbout where
+        parseJSON
+          = withObject "UserAbout"
+              (\ o ->
+                 UserAbout <$>
+                   (o .:? "value") <*> (o .:? "contentType"))
+
+instance ToJSON UserAbout where
+        toJSON UserAbout{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _uaValue,
+                  ("contentType" .=) <$> _uaContentType])
+
 -- | JSON response template for List Groups operation in Directory API.
 --
 -- /See:/ 'groups' smart constructor.
@@ -413,40 +362,6 @@ instance ToJSON Groups where
                  [("groups" .=) <$> _gGroups, ("etag" .=) <$> _gEtag,
                   ("nextPageToken" .=) <$> _gNextPageToken,
                   Just ("kind" .= _gKind)])
-
--- | JSON request template for setting\/revoking admin status of a user in
--- Directory API.
---
--- /See:/ 'userMakeAdmin' smart constructor.
-newtype UserMakeAdmin = UserMakeAdmin
-    { _umaStatus :: Maybe Bool
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'UserMakeAdmin' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'umaStatus'
-userMakeAdmin
-    :: UserMakeAdmin
-userMakeAdmin =
-    UserMakeAdmin
-    { _umaStatus = Nothing
-    }
-
--- | Boolean indicating new admin status of the user
-umaStatus :: Lens' UserMakeAdmin (Maybe Bool)
-umaStatus
-  = lens _umaStatus (\ s a -> s{_umaStatus = a})
-
-instance FromJSON UserMakeAdmin where
-        parseJSON
-          = withObject "UserMakeAdmin"
-              (\ o -> UserMakeAdmin <$> (o .:? "status"))
-
-instance ToJSON UserMakeAdmin where
-        toJSON UserMakeAdmin{..}
-          = object (catMaybes [("status" .=) <$> _umaStatus])
 
 -- | JSON template for address.
 --
@@ -761,162 +676,6 @@ instance ToJSON Group where
                   ("id" .=) <$> _groId,
                   ("description" .=) <$> _groDescription])
 
--- | The template that returns individual ASP (Access Code) data.
---
--- /See:/ 'asp' smart constructor.
-data Asp = Asp
-    { _aCreationTime :: !(Maybe Int64)
-    , _aEtag         :: !(Maybe Text)
-    , _aCodeId       :: !(Maybe Int32)
-    , _aKind         :: !Text
-    , _aName         :: !(Maybe Text)
-    , _aLastTimeUsed :: !(Maybe Int64)
-    , _aUserKey      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Asp' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aCreationTime'
---
--- * 'aEtag'
---
--- * 'aCodeId'
---
--- * 'aKind'
---
--- * 'aName'
---
--- * 'aLastTimeUsed'
---
--- * 'aUserKey'
-asp
-    :: Asp
-asp =
-    Asp
-    { _aCreationTime = Nothing
-    , _aEtag = Nothing
-    , _aCodeId = Nothing
-    , _aKind = "admin#directory#asp"
-    , _aName = Nothing
-    , _aLastTimeUsed = Nothing
-    , _aUserKey = Nothing
-    }
-
--- | The time when the ASP was created. Expressed in Unix time format.
-aCreationTime :: Lens' Asp (Maybe Int64)
-aCreationTime
-  = lens _aCreationTime
-      (\ s a -> s{_aCreationTime = a})
-
--- | ETag of the ASP.
-aEtag :: Lens' Asp (Maybe Text)
-aEtag = lens _aEtag (\ s a -> s{_aEtag = a})
-
--- | The unique ID of the ASP.
-aCodeId :: Lens' Asp (Maybe Int32)
-aCodeId = lens _aCodeId (\ s a -> s{_aCodeId = a})
-
--- | The type of the API resource. This is always admin#directory#asp.
-aKind :: Lens' Asp Text
-aKind = lens _aKind (\ s a -> s{_aKind = a})
-
--- | The name of the application that the user, represented by their userId,
--- entered when the ASP was created.
-aName :: Lens' Asp (Maybe Text)
-aName = lens _aName (\ s a -> s{_aName = a})
-
--- | The time when the ASP was last used. Expressed in Unix time format.
-aLastTimeUsed :: Lens' Asp (Maybe Int64)
-aLastTimeUsed
-  = lens _aLastTimeUsed
-      (\ s a -> s{_aLastTimeUsed = a})
-
--- | The unique ID of the user who issued the ASP.
-aUserKey :: Lens' Asp (Maybe Text)
-aUserKey = lens _aUserKey (\ s a -> s{_aUserKey = a})
-
-instance FromJSON Asp where
-        parseJSON
-          = withObject "Asp"
-              (\ o ->
-                 Asp <$>
-                   (o .:? "creationTime") <*> (o .:? "etag") <*>
-                     (o .:? "codeId")
-                     <*> (o .:? "kind" .!= "admin#directory#asp")
-                     <*> (o .:? "name")
-                     <*> (o .:? "lastTimeUsed")
-                     <*> (o .:? "userKey"))
-
-instance ToJSON Asp where
-        toJSON Asp{..}
-          = object
-              (catMaybes
-                 [("creationTime" .=) <$> _aCreationTime,
-                  ("etag" .=) <$> _aEtag, ("codeId" .=) <$> _aCodeId,
-                  Just ("kind" .= _aKind), ("name" .=) <$> _aName,
-                  ("lastTimeUsed" .=) <$> _aLastTimeUsed,
-                  ("userKey" .=) <$> _aUserKey])
-
--- | JSON response template for List Schema operation in Directory API.
---
--- /See:/ 'schemas' smart constructor.
-data Schemas = Schemas
-    { _sEtag    :: !(Maybe Text)
-    , _sSchemas :: !(Maybe [Schema])
-    , _sKind    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Schemas' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'sEtag'
---
--- * 'sSchemas'
---
--- * 'sKind'
-schemas
-    :: Schemas
-schemas =
-    Schemas
-    { _sEtag = Nothing
-    , _sSchemas = Nothing
-    , _sKind = "admin#directory#schemas"
-    }
-
--- | ETag of the resource.
-sEtag :: Lens' Schemas (Maybe Text)
-sEtag = lens _sEtag (\ s a -> s{_sEtag = a})
-
--- | List of UserSchema objects.
-sSchemas :: Lens' Schemas [Schema]
-sSchemas
-  = lens _sSchemas (\ s a -> s{_sSchemas = a}) .
-      _Default
-      . _Coerce
-
--- | Kind of resource this is.
-sKind :: Lens' Schemas Text
-sKind = lens _sKind (\ s a -> s{_sKind = a})
-
-instance FromJSON Schemas where
-        parseJSON
-          = withObject "Schemas"
-              (\ o ->
-                 Schemas <$>
-                   (o .:? "etag") <*> (o .:? "schemas" .!= mempty) <*>
-                     (o .:? "kind" .!= "admin#directory#schemas"))
-
-instance ToJSON Schemas where
-        toJSON Schemas{..}
-          = object
-              (catMaybes
-                 [("etag" .=) <$> _sEtag,
-                  ("schemas" .=) <$> _sSchemas,
-                  Just ("kind" .= _sKind)])
-
 -- | JSON template for Chrome Os Device resource in Directory API.
 --
 -- /See:/ 'chromeOSDevice' smart constructor.
@@ -926,14 +685,14 @@ data ChromeOSDevice = ChromeOSDevice
     , _codAnnotatedUser      :: !(Maybe Text)
     , _codPlatformVersion    :: !(Maybe Text)
     , _codLastSync           :: !(Maybe DateTime')
-    , _codActiveTimeRanges   :: !(Maybe [ActiveTimeRangesItem])
+    , _codActiveTimeRanges   :: !(Maybe [ChromeOSDeviceActiveTimeRangesItem])
     , _codKind               :: !Text
     , _codEthernetMACAddress :: !(Maybe Text)
     , _codLastEnrollmentTime :: !(Maybe DateTime')
     , _codAnnotatedLocation  :: !(Maybe Text)
     , _codMACAddress         :: !(Maybe Text)
     , _codOrgUnitPath        :: !(Maybe Text)
-    , _codRecentUsers        :: !(Maybe [RecentUsersItem])
+    , _codRecentUsers        :: !(Maybe [ChromeOSDeviceRecentUsersItem])
     , _codSupportEndDate     :: !(Maybe DateTime')
     , _codModel              :: !(Maybe Text)
     , _codWillAutoRenew      :: !(Maybe Bool)
@@ -1061,7 +820,7 @@ codLastSync
       mapping _DateTime
 
 -- | List of active time ranges (Read-only)
-codActiveTimeRanges :: Lens' ChromeOSDevice [ActiveTimeRangesItem]
+codActiveTimeRanges :: Lens' ChromeOSDevice [ChromeOSDeviceActiveTimeRangesItem]
 codActiveTimeRanges
   = lens _codActiveTimeRanges
       (\ s a -> s{_codActiveTimeRanges = a})
@@ -1105,7 +864,7 @@ codOrgUnitPath
 
 -- | List of recent device users, in descending order by last login time
 -- (Read-only)
-codRecentUsers :: Lens' ChromeOSDevice [RecentUsersItem]
+codRecentUsers :: Lens' ChromeOSDevice [ChromeOSDeviceRecentUsersItem]
 codRecentUsers
   = lens _codRecentUsers
       (\ s a -> s{_codRecentUsers = a})
@@ -1318,102 +1077,161 @@ instance ToJSON Users where
                   ("users" .=) <$> _uUsers, Just ("kind" .= _uKind),
                   ("trigger_event" .=) <$> _uTriggerEvent])
 
--- | JSON template for instant messenger of an user.
+-- | The template that returns individual ASP (Access Code) data.
 --
--- /See:/ 'userIm' smart constructor.
-data UserIm = UserIm
-    { _uiIm             :: !(Maybe Text)
-    , _uiProtocol       :: !(Maybe Text)
-    , _uiPrimary        :: !(Maybe Bool)
-    , _uiCustomProtocol :: !(Maybe Text)
-    , _uiType           :: !(Maybe Text)
-    , _uiCustomType     :: !(Maybe Text)
+-- /See:/ 'asp' smart constructor.
+data Asp = Asp
+    { _aCreationTime :: !(Maybe Int64)
+    , _aEtag         :: !(Maybe Text)
+    , _aCodeId       :: !(Maybe Int32)
+    , _aKind         :: !Text
+    , _aName         :: !(Maybe Text)
+    , _aLastTimeUsed :: !(Maybe Int64)
+    , _aUserKey      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UserIm' with the minimum fields required to make a request.
+-- | Creates a value of 'Asp' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uiIm'
+-- * 'aCreationTime'
 --
--- * 'uiProtocol'
+-- * 'aEtag'
 --
--- * 'uiPrimary'
+-- * 'aCodeId'
 --
--- * 'uiCustomProtocol'
+-- * 'aKind'
 --
--- * 'uiType'
+-- * 'aName'
 --
--- * 'uiCustomType'
-userIm
-    :: UserIm
-userIm =
-    UserIm
-    { _uiIm = Nothing
-    , _uiProtocol = Nothing
-    , _uiPrimary = Nothing
-    , _uiCustomProtocol = Nothing
-    , _uiType = Nothing
-    , _uiCustomType = Nothing
+-- * 'aLastTimeUsed'
+--
+-- * 'aUserKey'
+asp
+    :: Asp
+asp =
+    Asp
+    { _aCreationTime = Nothing
+    , _aEtag = Nothing
+    , _aCodeId = Nothing
+    , _aKind = "admin#directory#asp"
+    , _aName = Nothing
+    , _aLastTimeUsed = Nothing
+    , _aUserKey = Nothing
     }
 
--- | Instant messenger id.
-uiIm :: Lens' UserIm (Maybe Text)
-uiIm = lens _uiIm (\ s a -> s{_uiIm = a})
+-- | The time when the ASP was created. Expressed in Unix time format.
+aCreationTime :: Lens' Asp (Maybe Int64)
+aCreationTime
+  = lens _aCreationTime
+      (\ s a -> s{_aCreationTime = a})
 
--- | Protocol used in the instant messenger. It should be one of the values
--- from ImProtocolTypes map. Similar to type, it can take a CUSTOM value
--- and specify the custom name in customProtocol field.
-uiProtocol :: Lens' UserIm (Maybe Text)
-uiProtocol
-  = lens _uiProtocol (\ s a -> s{_uiProtocol = a})
+-- | ETag of the ASP.
+aEtag :: Lens' Asp (Maybe Text)
+aEtag = lens _aEtag (\ s a -> s{_aEtag = a})
 
--- | If this is user\'s primary im. Only one entry could be marked as
--- primary.
-uiPrimary :: Lens' UserIm (Maybe Bool)
-uiPrimary
-  = lens _uiPrimary (\ s a -> s{_uiPrimary = a})
+-- | The unique ID of the ASP.
+aCodeId :: Lens' Asp (Maybe Int32)
+aCodeId = lens _aCodeId (\ s a -> s{_aCodeId = a})
 
--- | Custom protocol.
-uiCustomProtocol :: Lens' UserIm (Maybe Text)
-uiCustomProtocol
-  = lens _uiCustomProtocol
-      (\ s a -> s{_uiCustomProtocol = a})
+-- | The type of the API resource. This is always admin#directory#asp.
+aKind :: Lens' Asp Text
+aKind = lens _aKind (\ s a -> s{_aKind = a})
 
--- | Each entry can have a type which indicates standard types of that entry.
--- For example instant messengers could be of home, work etc. In addition
--- to the standard type, an entry can have a custom type and can take any
--- value. Such types should have the CUSTOM value as type and also have a
--- customType value.
-uiType :: Lens' UserIm (Maybe Text)
-uiType = lens _uiType (\ s a -> s{_uiType = a})
+-- | The name of the application that the user, represented by their userId,
+-- entered when the ASP was created.
+aName :: Lens' Asp (Maybe Text)
+aName = lens _aName (\ s a -> s{_aName = a})
 
--- | Custom type.
-uiCustomType :: Lens' UserIm (Maybe Text)
-uiCustomType
-  = lens _uiCustomType (\ s a -> s{_uiCustomType = a})
+-- | The time when the ASP was last used. Expressed in Unix time format.
+aLastTimeUsed :: Lens' Asp (Maybe Int64)
+aLastTimeUsed
+  = lens _aLastTimeUsed
+      (\ s a -> s{_aLastTimeUsed = a})
 
-instance FromJSON UserIm where
+-- | The unique ID of the user who issued the ASP.
+aUserKey :: Lens' Asp (Maybe Text)
+aUserKey = lens _aUserKey (\ s a -> s{_aUserKey = a})
+
+instance FromJSON Asp where
         parseJSON
-          = withObject "UserIm"
+          = withObject "Asp"
               (\ o ->
-                 UserIm <$>
-                   (o .:? "im") <*> (o .:? "protocol") <*>
-                     (o .:? "primary")
-                     <*> (o .:? "customProtocol")
-                     <*> (o .:? "type")
-                     <*> (o .:? "customType"))
+                 Asp <$>
+                   (o .:? "creationTime") <*> (o .:? "etag") <*>
+                     (o .:? "codeId")
+                     <*> (o .:? "kind" .!= "admin#directory#asp")
+                     <*> (o .:? "name")
+                     <*> (o .:? "lastTimeUsed")
+                     <*> (o .:? "userKey"))
 
-instance ToJSON UserIm where
-        toJSON UserIm{..}
+instance ToJSON Asp where
+        toJSON Asp{..}
           = object
               (catMaybes
-                 [("im" .=) <$> _uiIm,
-                  ("protocol" .=) <$> _uiProtocol,
-                  ("primary" .=) <$> _uiPrimary,
-                  ("customProtocol" .=) <$> _uiCustomProtocol,
-                  ("type" .=) <$> _uiType,
-                  ("customType" .=) <$> _uiCustomType])
+                 [("creationTime" .=) <$> _aCreationTime,
+                  ("etag" .=) <$> _aEtag, ("codeId" .=) <$> _aCodeId,
+                  Just ("kind" .= _aKind), ("name" .=) <$> _aName,
+                  ("lastTimeUsed" .=) <$> _aLastTimeUsed,
+                  ("userKey" .=) <$> _aUserKey])
+
+-- | JSON response template for List Schema operation in Directory API.
+--
+-- /See:/ 'schemas' smart constructor.
+data Schemas = Schemas
+    { _sEtag    :: !(Maybe Text)
+    , _sSchemas :: !(Maybe [Schema])
+    , _sKind    :: !Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Schemas' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sEtag'
+--
+-- * 'sSchemas'
+--
+-- * 'sKind'
+schemas
+    :: Schemas
+schemas =
+    Schemas
+    { _sEtag = Nothing
+    , _sSchemas = Nothing
+    , _sKind = "admin#directory#schemas"
+    }
+
+-- | ETag of the resource.
+sEtag :: Lens' Schemas (Maybe Text)
+sEtag = lens _sEtag (\ s a -> s{_sEtag = a})
+
+-- | List of UserSchema objects.
+sSchemas :: Lens' Schemas [Schema]
+sSchemas
+  = lens _sSchemas (\ s a -> s{_sSchemas = a}) .
+      _Default
+      . _Coerce
+
+-- | Kind of resource this is.
+sKind :: Lens' Schemas Text
+sKind = lens _sKind (\ s a -> s{_sKind = a})
+
+instance FromJSON Schemas where
+        parseJSON
+          = withObject "Schemas"
+              (\ o ->
+                 Schemas <$>
+                   (o .:? "etag") <*> (o .:? "schemas" .!= mempty) <*>
+                     (o .:? "kind" .!= "admin#directory#schemas"))
+
+instance ToJSON Schemas where
+        toJSON Schemas{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _sEtag,
+                  ("schemas" .=) <$> _sSchemas,
+                  Just ("kind" .= _sKind)])
 
 -- | Template for a notification resource.
 --
@@ -1524,6 +1342,181 @@ instance ToJSON Notification where
                   ("notificationId" .=) <$> _nNotificationId,
                   ("sendTime" .=) <$> _nSendTime])
 
+-- | JSON template for instant messenger of an user.
+--
+-- /See:/ 'userIm' smart constructor.
+data UserIm = UserIm
+    { _uiIm             :: !(Maybe Text)
+    , _uiProtocol       :: !(Maybe Text)
+    , _uiPrimary        :: !(Maybe Bool)
+    , _uiCustomProtocol :: !(Maybe Text)
+    , _uiType           :: !(Maybe Text)
+    , _uiCustomType     :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UserIm' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'uiIm'
+--
+-- * 'uiProtocol'
+--
+-- * 'uiPrimary'
+--
+-- * 'uiCustomProtocol'
+--
+-- * 'uiType'
+--
+-- * 'uiCustomType'
+userIm
+    :: UserIm
+userIm =
+    UserIm
+    { _uiIm = Nothing
+    , _uiProtocol = Nothing
+    , _uiPrimary = Nothing
+    , _uiCustomProtocol = Nothing
+    , _uiType = Nothing
+    , _uiCustomType = Nothing
+    }
+
+-- | Instant messenger id.
+uiIm :: Lens' UserIm (Maybe Text)
+uiIm = lens _uiIm (\ s a -> s{_uiIm = a})
+
+-- | Protocol used in the instant messenger. It should be one of the values
+-- from ImProtocolTypes map. Similar to type, it can take a CUSTOM value
+-- and specify the custom name in customProtocol field.
+uiProtocol :: Lens' UserIm (Maybe Text)
+uiProtocol
+  = lens _uiProtocol (\ s a -> s{_uiProtocol = a})
+
+-- | If this is user\'s primary im. Only one entry could be marked as
+-- primary.
+uiPrimary :: Lens' UserIm (Maybe Bool)
+uiPrimary
+  = lens _uiPrimary (\ s a -> s{_uiPrimary = a})
+
+-- | Custom protocol.
+uiCustomProtocol :: Lens' UserIm (Maybe Text)
+uiCustomProtocol
+  = lens _uiCustomProtocol
+      (\ s a -> s{_uiCustomProtocol = a})
+
+-- | Each entry can have a type which indicates standard types of that entry.
+-- For example instant messengers could be of home, work etc. In addition
+-- to the standard type, an entry can have a custom type and can take any
+-- value. Such types should have the CUSTOM value as type and also have a
+-- customType value.
+uiType :: Lens' UserIm (Maybe Text)
+uiType = lens _uiType (\ s a -> s{_uiType = a})
+
+-- | Custom type.
+uiCustomType :: Lens' UserIm (Maybe Text)
+uiCustomType
+  = lens _uiCustomType (\ s a -> s{_uiCustomType = a})
+
+instance FromJSON UserIm where
+        parseJSON
+          = withObject "UserIm"
+              (\ o ->
+                 UserIm <$>
+                   (o .:? "im") <*> (o .:? "protocol") <*>
+                     (o .:? "primary")
+                     <*> (o .:? "customProtocol")
+                     <*> (o .:? "type")
+                     <*> (o .:? "customType"))
+
+instance ToJSON UserIm where
+        toJSON UserIm{..}
+          = object
+              (catMaybes
+                 [("im" .=) <$> _uiIm,
+                  ("protocol" .=) <$> _uiProtocol,
+                  ("primary" .=) <$> _uiPrimary,
+                  ("customProtocol" .=) <$> _uiCustomProtocol,
+                  ("type" .=) <$> _uiType,
+                  ("customType" .=) <$> _uiCustomType])
+
+-- | JSON response template for List tokens operation in Directory API.
+--
+-- /See:/ 'tokens' smart constructor.
+data Tokens = Tokens
+    { _tEtag  :: !(Maybe Text)
+    , _tKind  :: !Text
+    , _tItems :: !(Maybe [Token])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Tokens' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tEtag'
+--
+-- * 'tKind'
+--
+-- * 'tItems'
+tokens
+    :: Tokens
+tokens =
+    Tokens
+    { _tEtag = Nothing
+    , _tKind = "admin#directory#tokenList"
+    , _tItems = Nothing
+    }
+
+-- | ETag of the resource.
+tEtag :: Lens' Tokens (Maybe Text)
+tEtag = lens _tEtag (\ s a -> s{_tEtag = a})
+
+-- | The type of the API resource. This is always admin#directory#tokenList.
+tKind :: Lens' Tokens Text
+tKind = lens _tKind (\ s a -> s{_tKind = a})
+
+-- | A list of Token resources.
+tItems :: Lens' Tokens [Token]
+tItems
+  = lens _tItems (\ s a -> s{_tItems = a}) . _Default .
+      _Coerce
+
+instance FromJSON Tokens where
+        parseJSON
+          = withObject "Tokens"
+              (\ o ->
+                 Tokens <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "admin#directory#tokenList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON Tokens where
+        toJSON Tokens{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _tEtag, Just ("kind" .= _tKind),
+                  ("items" .=) <$> _tItems])
+
+-- | Custom fields of the user.
+--
+-- /See:/ 'userCustomSchemas' smart constructor.
+data UserCustomSchemas =
+    UserCustomSchemas
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UserCustomSchemas' with the minimum fields required to make a request.
+--
+userCustomSchemas
+    :: UserCustomSchemas
+userCustomSchemas = UserCustomSchemas
+
+instance FromJSON UserCustomSchemas where
+        parseJSON
+          = withObject "UserCustomSchemas"
+              (\ o -> pure UserCustomSchemas)
+
+instance ToJSON UserCustomSchemas where
+        toJSON = const (Object mempty)
+
 -- | JSON response template to list aliases in Directory API.
 --
 -- /See:/ 'aliases' smart constructor.
@@ -1582,115 +1575,313 @@ instance ToJSON Aliases where
                  [("etag" .=) <$> _aliEtag, Just ("kind" .= _aliKind),
                   ("aliases" .=) <$> _aliAliases])
 
--- | Indexing spec for a numeric field. By default, only exact match queries
--- will be supported for numeric fields. Setting the numericIndexingSpec
--- allows range queries to be supported.
+-- | JSON request template to undelete a user in Directory API.
 --
--- /See:/ 'numericIndexingSpec' smart constructor.
-data NumericIndexingSpec = NumericIndexingSpec
-    { _nisMaxValue :: !(Maybe Double)
-    , _nisMinValue :: !(Maybe Double)
+-- /See:/ 'userUndelete' smart constructor.
+newtype UserUndelete = UserUndelete
+    { _uuOrgUnitPath :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'NumericIndexingSpec' with the minimum fields required to make a request.
+-- | Creates a value of 'UserUndelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'nisMaxValue'
---
--- * 'nisMinValue'
-numericIndexingSpec
-    :: NumericIndexingSpec
-numericIndexingSpec =
-    NumericIndexingSpec
-    { _nisMaxValue = Nothing
-    , _nisMinValue = Nothing
+-- * 'uuOrgUnitPath'
+userUndelete
+    :: UserUndelete
+userUndelete =
+    UserUndelete
+    { _uuOrgUnitPath = Nothing
     }
 
--- | Maximum value of this field. This is meant to be indicative rather than
--- enforced. Values outside this range will still be indexed, but search
--- may not be as performant.
-nisMaxValue :: Lens' NumericIndexingSpec (Maybe Double)
-nisMaxValue
-  = lens _nisMaxValue (\ s a -> s{_nisMaxValue = a})
+-- | OrgUnit of User
+uuOrgUnitPath :: Lens' UserUndelete (Maybe Text)
+uuOrgUnitPath
+  = lens _uuOrgUnitPath
+      (\ s a -> s{_uuOrgUnitPath = a})
 
--- | Minimum value of this field. This is meant to be indicative rather than
--- enforced. Values outside this range will still be indexed, but search
--- may not be as performant.
-nisMinValue :: Lens' NumericIndexingSpec (Maybe Double)
-nisMinValue
-  = lens _nisMinValue (\ s a -> s{_nisMinValue = a})
-
-instance FromJSON NumericIndexingSpec where
+instance FromJSON UserUndelete where
         parseJSON
-          = withObject "NumericIndexingSpec"
-              (\ o ->
-                 NumericIndexingSpec <$>
-                   (o .:? "maxValue") <*> (o .:? "minValue"))
+          = withObject "UserUndelete"
+              (\ o -> UserUndelete <$> (o .:? "orgUnitPath"))
 
-instance ToJSON NumericIndexingSpec where
-        toJSON NumericIndexingSpec{..}
+instance ToJSON UserUndelete where
+        toJSON UserUndelete{..}
           = object
-              (catMaybes
-                 [("maxValue" .=) <$> _nisMaxValue,
-                  ("minValue" .=) <$> _nisMinValue])
+              (catMaybes [("orgUnitPath" .=) <$> _uuOrgUnitPath])
 
--- | JSON response template for List tokens operation in Directory API.
+-- | JSON response template for List Members operation in Directory API.
 --
--- /See:/ 'tokens' smart constructor.
-data Tokens = Tokens
-    { _tEtag  :: !(Maybe Text)
-    , _tKind  :: !Text
-    , _tItems :: !(Maybe [Token])
+-- /See:/ 'members' smart constructor.
+data Members = Members
+    { _mEtag          :: !(Maybe Text)
+    , _mNextPageToken :: !(Maybe Text)
+    , _mKind          :: !Text
+    , _mMembers       :: !(Maybe [Member])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Tokens' with the minimum fields required to make a request.
+-- | Creates a value of 'Members' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tEtag'
+-- * 'mEtag'
 --
--- * 'tKind'
+-- * 'mNextPageToken'
 --
--- * 'tItems'
-tokens
-    :: Tokens
-tokens =
-    Tokens
-    { _tEtag = Nothing
-    , _tKind = "admin#directory#tokenList"
-    , _tItems = Nothing
+-- * 'mKind'
+--
+-- * 'mMembers'
+members
+    :: Members
+members =
+    Members
+    { _mEtag = Nothing
+    , _mNextPageToken = Nothing
+    , _mKind = "admin#directory#members"
+    , _mMembers = Nothing
     }
 
 -- | ETag of the resource.
-tEtag :: Lens' Tokens (Maybe Text)
-tEtag = lens _tEtag (\ s a -> s{_tEtag = a})
+mEtag :: Lens' Members (Maybe Text)
+mEtag = lens _mEtag (\ s a -> s{_mEtag = a})
 
--- | The type of the API resource. This is always admin#directory#tokenList.
-tKind :: Lens' Tokens Text
-tKind = lens _tKind (\ s a -> s{_tKind = a})
+-- | Token used to access next page of this result.
+mNextPageToken :: Lens' Members (Maybe Text)
+mNextPageToken
+  = lens _mNextPageToken
+      (\ s a -> s{_mNextPageToken = a})
 
--- | A list of Token resources.
-tItems :: Lens' Tokens [Token]
-tItems
-  = lens _tItems (\ s a -> s{_tItems = a}) . _Default .
-      _Coerce
+-- | Kind of resource this is.
+mKind :: Lens' Members Text
+mKind = lens _mKind (\ s a -> s{_mKind = a})
 
-instance FromJSON Tokens where
+-- | List of member objects.
+mMembers :: Lens' Members [Member]
+mMembers
+  = lens _mMembers (\ s a -> s{_mMembers = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON Members where
         parseJSON
-          = withObject "Tokens"
+          = withObject "Members"
               (\ o ->
-                 Tokens <$>
-                   (o .:? "etag") <*>
-                     (o .:? "kind" .!= "admin#directory#tokenList")
-                     <*> (o .:? "items" .!= mempty))
+                 Members <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "admin#directory#members")
+                     <*> (o .:? "members" .!= mempty))
 
-instance ToJSON Tokens where
-        toJSON Tokens{..}
+instance ToJSON Members where
+        toJSON Members{..}
           = object
               (catMaybes
-                 [("etag" .=) <$> _tEtag, Just ("kind" .= _tKind),
-                  ("items" .=) <$> _tItems])
+                 [("etag" .=) <$> _mEtag,
+                  ("nextPageToken" .=) <$> _mNextPageToken,
+                  Just ("kind" .= _mKind),
+                  ("members" .=) <$> _mMembers])
+
+-- | An notification channel used to watch for resource changes.
+--
+-- /See:/ 'channel' smart constructor.
+data Channel = Channel
+    { _cResourceURI :: !(Maybe Text)
+    , _cResourceId  :: !(Maybe Text)
+    , _cKind        :: !Text
+    , _cExpiration  :: !(Maybe Int64)
+    , _cToken       :: !(Maybe Text)
+    , _cAddress     :: !(Maybe Text)
+    , _cPayload     :: !(Maybe Bool)
+    , _cParams      :: !(Maybe ChannelParams)
+    , _cId          :: !(Maybe Text)
+    , _cType        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Channel' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cResourceURI'
+--
+-- * 'cResourceId'
+--
+-- * 'cKind'
+--
+-- * 'cExpiration'
+--
+-- * 'cToken'
+--
+-- * 'cAddress'
+--
+-- * 'cPayload'
+--
+-- * 'cParams'
+--
+-- * 'cId'
+--
+-- * 'cType'
+channel
+    :: Channel
+channel =
+    Channel
+    { _cResourceURI = Nothing
+    , _cResourceId = Nothing
+    , _cKind = "api#channel"
+    , _cExpiration = Nothing
+    , _cToken = Nothing
+    , _cAddress = Nothing
+    , _cPayload = Nothing
+    , _cParams = Nothing
+    , _cId = Nothing
+    , _cType = Nothing
+    }
+
+-- | A version-specific identifier for the watched resource.
+cResourceURI :: Lens' Channel (Maybe Text)
+cResourceURI
+  = lens _cResourceURI (\ s a -> s{_cResourceURI = a})
+
+-- | An opaque ID that identifies the resource being watched on this channel.
+-- Stable across different API versions.
+cResourceId :: Lens' Channel (Maybe Text)
+cResourceId
+  = lens _cResourceId (\ s a -> s{_cResourceId = a})
+
+-- | Identifies this as a notification channel used to watch for changes to a
+-- resource. Value: the fixed string \"api#channel\".
+cKind :: Lens' Channel Text
+cKind = lens _cKind (\ s a -> s{_cKind = a})
+
+-- | Date and time of notification channel expiration, expressed as a Unix
+-- timestamp, in milliseconds. Optional.
+cExpiration :: Lens' Channel (Maybe Int64)
+cExpiration
+  = lens _cExpiration (\ s a -> s{_cExpiration = a})
+
+-- | An arbitrary string delivered to the target address with each
+-- notification delivered over this channel. Optional.
+cToken :: Lens' Channel (Maybe Text)
+cToken = lens _cToken (\ s a -> s{_cToken = a})
+
+-- | The address where notifications are delivered for this channel.
+cAddress :: Lens' Channel (Maybe Text)
+cAddress = lens _cAddress (\ s a -> s{_cAddress = a})
+
+-- | A Boolean value to indicate whether payload is wanted. Optional.
+cPayload :: Lens' Channel (Maybe Bool)
+cPayload = lens _cPayload (\ s a -> s{_cPayload = a})
+
+-- | Additional parameters controlling delivery channel behavior. Optional.
+cParams :: Lens' Channel (Maybe ChannelParams)
+cParams = lens _cParams (\ s a -> s{_cParams = a})
+
+-- | A UUID or similar unique string that identifies this channel.
+cId :: Lens' Channel (Maybe Text)
+cId = lens _cId (\ s a -> s{_cId = a})
+
+-- | The type of delivery mechanism used for this channel.
+cType :: Lens' Channel (Maybe Text)
+cType = lens _cType (\ s a -> s{_cType = a})
+
+instance FromJSON Channel where
+        parseJSON
+          = withObject "Channel"
+              (\ o ->
+                 Channel <$>
+                   (o .:? "resourceUri") <*> (o .:? "resourceId") <*>
+                     (o .:? "kind" .!= "api#channel")
+                     <*> (o .:? "expiration")
+                     <*> (o .:? "token")
+                     <*> (o .:? "address")
+                     <*> (o .:? "payload")
+                     <*> (o .:? "params")
+                     <*> (o .:? "id")
+                     <*> (o .:? "type"))
+
+instance ToJSON Channel where
+        toJSON Channel{..}
+          = object
+              (catMaybes
+                 [("resourceUri" .=) <$> _cResourceURI,
+                  ("resourceId" .=) <$> _cResourceId,
+                  Just ("kind" .= _cKind),
+                  ("expiration" .=) <$> _cExpiration,
+                  ("token" .=) <$> _cToken,
+                  ("address" .=) <$> _cAddress,
+                  ("payload" .=) <$> _cPayload,
+                  ("params" .=) <$> _cParams, ("id" .=) <$> _cId,
+                  ("type" .=) <$> _cType])
+
+-- | JSON response template for List Mobile Devices operation in Directory
+-- API.
+--
+-- /See:/ 'mobileDevices' smart constructor.
+data MobileDevices = MobileDevices
+    { _mdEtag          :: !(Maybe Text)
+    , _mdNextPageToken :: !(Maybe Text)
+    , _mdKind          :: !Text
+    , _mdMobileDevices :: !(Maybe [MobileDevice])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MobileDevices' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mdEtag'
+--
+-- * 'mdNextPageToken'
+--
+-- * 'mdKind'
+--
+-- * 'mdMobileDevices'
+mobileDevices
+    :: MobileDevices
+mobileDevices =
+    MobileDevices
+    { _mdEtag = Nothing
+    , _mdNextPageToken = Nothing
+    , _mdKind = "admin#directory#mobiledevices"
+    , _mdMobileDevices = Nothing
+    }
+
+-- | ETag of the resource.
+mdEtag :: Lens' MobileDevices (Maybe Text)
+mdEtag = lens _mdEtag (\ s a -> s{_mdEtag = a})
+
+-- | Token used to access next page of this result.
+mdNextPageToken :: Lens' MobileDevices (Maybe Text)
+mdNextPageToken
+  = lens _mdNextPageToken
+      (\ s a -> s{_mdNextPageToken = a})
+
+-- | Kind of resource this is.
+mdKind :: Lens' MobileDevices Text
+mdKind = lens _mdKind (\ s a -> s{_mdKind = a})
+
+-- | List of Mobile Device objects.
+mdMobileDevices :: Lens' MobileDevices [MobileDevice]
+mdMobileDevices
+  = lens _mdMobileDevices
+      (\ s a -> s{_mdMobileDevices = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON MobileDevices where
+        parseJSON
+          = withObject "MobileDevices"
+              (\ o ->
+                 MobileDevices <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "admin#directory#mobiledevices")
+                     <*> (o .:? "mobiledevices" .!= mempty))
+
+instance ToJSON MobileDevices where
+        toJSON MobileDevices{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _mdEtag,
+                  ("nextPageToken" .=) <$> _mdNextPageToken,
+                  Just ("kind" .= _mdKind),
+                  ("mobiledevices" .=) <$> _mdMobileDevices])
 
 -- | JSON template for token resource in Directory API.
 --
@@ -1808,313 +1999,109 @@ instance ToJSON Token where
                   ("anonymous" .=) <$> _tokAnonymous,
                   ("userKey" .=) <$> _tokUserKey])
 
--- | JSON request template to undelete a user in Directory API.
+-- | JSON template for name of a user in Directory API.
 --
--- /See:/ 'userUndelete' smart constructor.
-newtype UserUndelete = UserUndelete
-    { _uuOrgUnitPath :: Maybe Text
+-- /See:/ 'userName' smart constructor.
+data UserName = UserName
+    { _unGivenName  :: !(Maybe Text)
+    , _unFullName   :: !(Maybe Text)
+    , _unFamilyName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UserUndelete' with the minimum fields required to make a request.
+-- | Creates a value of 'UserName' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uuOrgUnitPath'
-userUndelete
-    :: UserUndelete
-userUndelete =
-    UserUndelete
-    { _uuOrgUnitPath = Nothing
+-- * 'unGivenName'
+--
+-- * 'unFullName'
+--
+-- * 'unFamilyName'
+userName
+    :: UserName
+userName =
+    UserName
+    { _unGivenName = Nothing
+    , _unFullName = Nothing
+    , _unFamilyName = Nothing
     }
 
--- | OrgUnit of User
-uuOrgUnitPath :: Lens' UserUndelete (Maybe Text)
-uuOrgUnitPath
-  = lens _uuOrgUnitPath
-      (\ s a -> s{_uuOrgUnitPath = a})
+-- | First Name
+unGivenName :: Lens' UserName (Maybe Text)
+unGivenName
+  = lens _unGivenName (\ s a -> s{_unGivenName = a})
 
-instance FromJSON UserUndelete where
+-- | Full Name
+unFullName :: Lens' UserName (Maybe Text)
+unFullName
+  = lens _unFullName (\ s a -> s{_unFullName = a})
+
+-- | Last Name
+unFamilyName :: Lens' UserName (Maybe Text)
+unFamilyName
+  = lens _unFamilyName (\ s a -> s{_unFamilyName = a})
+
+instance FromJSON UserName where
         parseJSON
-          = withObject "UserUndelete"
-              (\ o -> UserUndelete <$> (o .:? "orgUnitPath"))
-
-instance ToJSON UserUndelete where
-        toJSON UserUndelete{..}
-          = object
-              (catMaybes [("orgUnitPath" .=) <$> _uuOrgUnitPath])
-
--- | JSON response template for List Mobile Devices operation in Directory
--- API.
---
--- /See:/ 'mobileDevices' smart constructor.
-data MobileDevices = MobileDevices
-    { _mdEtag          :: !(Maybe Text)
-    , _mdNextPageToken :: !(Maybe Text)
-    , _mdKind          :: !Text
-    , _mdMobileDevices :: !(Maybe [MobileDevice])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'MobileDevices' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'mdEtag'
---
--- * 'mdNextPageToken'
---
--- * 'mdKind'
---
--- * 'mdMobileDevices'
-mobileDevices
-    :: MobileDevices
-mobileDevices =
-    MobileDevices
-    { _mdEtag = Nothing
-    , _mdNextPageToken = Nothing
-    , _mdKind = "admin#directory#mobiledevices"
-    , _mdMobileDevices = Nothing
-    }
-
--- | ETag of the resource.
-mdEtag :: Lens' MobileDevices (Maybe Text)
-mdEtag = lens _mdEtag (\ s a -> s{_mdEtag = a})
-
--- | Token used to access next page of this result.
-mdNextPageToken :: Lens' MobileDevices (Maybe Text)
-mdNextPageToken
-  = lens _mdNextPageToken
-      (\ s a -> s{_mdNextPageToken = a})
-
--- | Kind of resource this is.
-mdKind :: Lens' MobileDevices Text
-mdKind = lens _mdKind (\ s a -> s{_mdKind = a})
-
--- | List of Mobile Device objects.
-mdMobileDevices :: Lens' MobileDevices [MobileDevice]
-mdMobileDevices
-  = lens _mdMobileDevices
-      (\ s a -> s{_mdMobileDevices = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON MobileDevices where
-        parseJSON
-          = withObject "MobileDevices"
+          = withObject "UserName"
               (\ o ->
-                 MobileDevices <$>
-                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "admin#directory#mobiledevices")
-                     <*> (o .:? "mobiledevices" .!= mempty))
+                 UserName <$>
+                   (o .:? "givenName") <*> (o .:? "fullName") <*>
+                     (o .:? "familyName"))
 
-instance ToJSON MobileDevices where
-        toJSON MobileDevices{..}
+instance ToJSON UserName where
+        toJSON UserName{..}
           = object
               (catMaybes
-                 [("etag" .=) <$> _mdEtag,
-                  ("nextPageToken" .=) <$> _mdNextPageToken,
-                  Just ("kind" .= _mdKind),
-                  ("mobiledevices" .=) <$> _mdMobileDevices])
+                 [("givenName" .=) <$> _unGivenName,
+                  ("fullName" .=) <$> _unFullName,
+                  ("familyName" .=) <$> _unFamilyName])
 
--- | JSON response template for List Members operation in Directory API.
 --
--- /See:/ 'members' smart constructor.
-data Members = Members
-    { _mEtag          :: !(Maybe Text)
-    , _mNextPageToken :: !(Maybe Text)
-    , _mKind          :: !Text
-    , _mMembers       :: !(Maybe [Member])
+-- /See:/ 'chromeOSDeviceRecentUsersItem' smart constructor.
+data ChromeOSDeviceRecentUsersItem = ChromeOSDeviceRecentUsersItem
+    { _codruiEmail :: !(Maybe Text)
+    , _codruiType  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Members' with the minimum fields required to make a request.
+-- | Creates a value of 'ChromeOSDeviceRecentUsersItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mEtag'
+-- * 'codruiEmail'
 --
--- * 'mNextPageToken'
---
--- * 'mKind'
---
--- * 'mMembers'
-members
-    :: Members
-members =
-    Members
-    { _mEtag = Nothing
-    , _mNextPageToken = Nothing
-    , _mKind = "admin#directory#members"
-    , _mMembers = Nothing
+-- * 'codruiType'
+chromeOSDeviceRecentUsersItem
+    :: ChromeOSDeviceRecentUsersItem
+chromeOSDeviceRecentUsersItem =
+    ChromeOSDeviceRecentUsersItem
+    { _codruiEmail = Nothing
+    , _codruiType = Nothing
     }
 
--- | ETag of the resource.
-mEtag :: Lens' Members (Maybe Text)
-mEtag = lens _mEtag (\ s a -> s{_mEtag = a})
+-- | Email address of the user. Present only if the user type is managed
+codruiEmail :: Lens' ChromeOSDeviceRecentUsersItem (Maybe Text)
+codruiEmail
+  = lens _codruiEmail (\ s a -> s{_codruiEmail = a})
 
--- | Token used to access next page of this result.
-mNextPageToken :: Lens' Members (Maybe Text)
-mNextPageToken
-  = lens _mNextPageToken
-      (\ s a -> s{_mNextPageToken = a})
+-- | The type of the user
+codruiType :: Lens' ChromeOSDeviceRecentUsersItem (Maybe Text)
+codruiType
+  = lens _codruiType (\ s a -> s{_codruiType = a})
 
--- | Kind of resource this is.
-mKind :: Lens' Members Text
-mKind = lens _mKind (\ s a -> s{_mKind = a})
-
--- | List of member objects.
-mMembers :: Lens' Members [Member]
-mMembers
-  = lens _mMembers (\ s a -> s{_mMembers = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON Members where
+instance FromJSON ChromeOSDeviceRecentUsersItem where
         parseJSON
-          = withObject "Members"
+          = withObject "ChromeOSDeviceRecentUsersItem"
               (\ o ->
-                 Members <$>
-                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "admin#directory#members")
-                     <*> (o .:? "members" .!= mempty))
+                 ChromeOSDeviceRecentUsersItem <$>
+                   (o .:? "email") <*> (o .:? "type"))
 
-instance ToJSON Members where
-        toJSON Members{..}
+instance ToJSON ChromeOSDeviceRecentUsersItem where
+        toJSON ChromeOSDeviceRecentUsersItem{..}
           = object
               (catMaybes
-                 [("etag" .=) <$> _mEtag,
-                  ("nextPageToken" .=) <$> _mNextPageToken,
-                  Just ("kind" .= _mKind),
-                  ("members" .=) <$> _mMembers])
-
--- | An notification channel used to watch for resource changes.
---
--- /See:/ 'channel' smart constructor.
-data Channel = Channel
-    { _cResourceURI :: !(Maybe Text)
-    , _cResourceId  :: !(Maybe Text)
-    , _cKind        :: !Text
-    , _cExpiration  :: !(Maybe Int64)
-    , _cToken       :: !(Maybe Text)
-    , _cAddress     :: !(Maybe Text)
-    , _cPayload     :: !(Maybe Bool)
-    , _cParams      :: !(Maybe Params)
-    , _cId          :: !(Maybe Text)
-    , _cType        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Channel' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cResourceURI'
---
--- * 'cResourceId'
---
--- * 'cKind'
---
--- * 'cExpiration'
---
--- * 'cToken'
---
--- * 'cAddress'
---
--- * 'cPayload'
---
--- * 'cParams'
---
--- * 'cId'
---
--- * 'cType'
-channel
-    :: Channel
-channel =
-    Channel
-    { _cResourceURI = Nothing
-    , _cResourceId = Nothing
-    , _cKind = "api#channel"
-    , _cExpiration = Nothing
-    , _cToken = Nothing
-    , _cAddress = Nothing
-    , _cPayload = Nothing
-    , _cParams = Nothing
-    , _cId = Nothing
-    , _cType = Nothing
-    }
-
--- | A version-specific identifier for the watched resource.
-cResourceURI :: Lens' Channel (Maybe Text)
-cResourceURI
-  = lens _cResourceURI (\ s a -> s{_cResourceURI = a})
-
--- | An opaque ID that identifies the resource being watched on this channel.
--- Stable across different API versions.
-cResourceId :: Lens' Channel (Maybe Text)
-cResourceId
-  = lens _cResourceId (\ s a -> s{_cResourceId = a})
-
--- | Identifies this as a notification channel used to watch for changes to a
--- resource. Value: the fixed string \"api#channel\".
-cKind :: Lens' Channel Text
-cKind = lens _cKind (\ s a -> s{_cKind = a})
-
--- | Date and time of notification channel expiration, expressed as a Unix
--- timestamp, in milliseconds. Optional.
-cExpiration :: Lens' Channel (Maybe Int64)
-cExpiration
-  = lens _cExpiration (\ s a -> s{_cExpiration = a})
-
--- | An arbitrary string delivered to the target address with each
--- notification delivered over this channel. Optional.
-cToken :: Lens' Channel (Maybe Text)
-cToken = lens _cToken (\ s a -> s{_cToken = a})
-
--- | The address where notifications are delivered for this channel.
-cAddress :: Lens' Channel (Maybe Text)
-cAddress = lens _cAddress (\ s a -> s{_cAddress = a})
-
--- | A Boolean value to indicate whether payload is wanted. Optional.
-cPayload :: Lens' Channel (Maybe Bool)
-cPayload = lens _cPayload (\ s a -> s{_cPayload = a})
-
--- | Additional parameters controlling delivery channel behavior. Optional.
-cParams :: Lens' Channel (Maybe Params)
-cParams = lens _cParams (\ s a -> s{_cParams = a})
-
--- | A UUID or similar unique string that identifies this channel.
-cId :: Lens' Channel (Maybe Text)
-cId = lens _cId (\ s a -> s{_cId = a})
-
--- | The type of delivery mechanism used for this channel.
-cType :: Lens' Channel (Maybe Text)
-cType = lens _cType (\ s a -> s{_cType = a})
-
-instance FromJSON Channel where
-        parseJSON
-          = withObject "Channel"
-              (\ o ->
-                 Channel <$>
-                   (o .:? "resourceUri") <*> (o .:? "resourceId") <*>
-                     (o .:? "kind" .!= "api#channel")
-                     <*> (o .:? "expiration")
-                     <*> (o .:? "token")
-                     <*> (o .:? "address")
-                     <*> (o .:? "payload")
-                     <*> (o .:? "params")
-                     <*> (o .:? "id")
-                     <*> (o .:? "type"))
-
-instance ToJSON Channel where
-        toJSON Channel{..}
-          = object
-              (catMaybes
-                 [("resourceUri" .=) <$> _cResourceURI,
-                  ("resourceId" .=) <$> _cResourceId,
-                  Just ("kind" .= _cKind),
-                  ("expiration" .=) <$> _cExpiration,
-                  ("token" .=) <$> _cToken,
-                  ("address" .=) <$> _cAddress,
-                  ("payload" .=) <$> _cPayload,
-                  ("params" .=) <$> _cParams, ("id" .=) <$> _cId,
-                  ("type" .=) <$> _cType])
+                 [("email" .=) <$> _codruiEmail,
+                  ("type" .=) <$> _codruiType])
 
 -- | JSON template for Alias object in Directory API.
 --
@@ -2192,63 +2179,86 @@ instance ToJSON Alias where
                   ("alias" .=) <$> _aaAlias, ("id" .=) <$> _aaId,
                   ("primaryEmail" .=) <$> _aaPrimaryEmail])
 
--- | JSON template for name of a user in Directory API.
+-- | JSON template for Schema resource in Directory API.
 --
--- /See:/ 'userName' smart constructor.
-data UserName = UserName
-    { _unGivenName  :: !(Maybe Text)
-    , _unFullName   :: !(Maybe Text)
-    , _unFamilyName :: !(Maybe Text)
+-- /See:/ 'schema' smart constructor.
+data Schema = Schema
+    { _schEtag       :: !(Maybe Text)
+    , _schKind       :: !Text
+    , _schSchemaName :: !(Maybe Text)
+    , _schSchemaId   :: !(Maybe Text)
+    , _schFields     :: !(Maybe [SchemaFieldSpec])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UserName' with the minimum fields required to make a request.
+-- | Creates a value of 'Schema' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'unGivenName'
+-- * 'schEtag'
 --
--- * 'unFullName'
+-- * 'schKind'
 --
--- * 'unFamilyName'
-userName
-    :: UserName
-userName =
-    UserName
-    { _unGivenName = Nothing
-    , _unFullName = Nothing
-    , _unFamilyName = Nothing
+-- * 'schSchemaName'
+--
+-- * 'schSchemaId'
+--
+-- * 'schFields'
+schema
+    :: Schema
+schema =
+    Schema
+    { _schEtag = Nothing
+    , _schKind = "admin#directory#schema"
+    , _schSchemaName = Nothing
+    , _schSchemaId = Nothing
+    , _schFields = Nothing
     }
 
--- | First Name
-unGivenName :: Lens' UserName (Maybe Text)
-unGivenName
-  = lens _unGivenName (\ s a -> s{_unGivenName = a})
+-- | ETag of the resource.
+schEtag :: Lens' Schema (Maybe Text)
+schEtag = lens _schEtag (\ s a -> s{_schEtag = a})
 
--- | Full Name
-unFullName :: Lens' UserName (Maybe Text)
-unFullName
-  = lens _unFullName (\ s a -> s{_unFullName = a})
+-- | Kind of resource this is.
+schKind :: Lens' Schema Text
+schKind = lens _schKind (\ s a -> s{_schKind = a})
 
--- | Last Name
-unFamilyName :: Lens' UserName (Maybe Text)
-unFamilyName
-  = lens _unFamilyName (\ s a -> s{_unFamilyName = a})
+-- | Schema name
+schSchemaName :: Lens' Schema (Maybe Text)
+schSchemaName
+  = lens _schSchemaName
+      (\ s a -> s{_schSchemaName = a})
 
-instance FromJSON UserName where
+-- | Unique identifier of Schema (Read-only)
+schSchemaId :: Lens' Schema (Maybe Text)
+schSchemaId
+  = lens _schSchemaId (\ s a -> s{_schSchemaId = a})
+
+-- | Fields of Schema
+schFields :: Lens' Schema [SchemaFieldSpec]
+schFields
+  = lens _schFields (\ s a -> s{_schFields = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON Schema where
         parseJSON
-          = withObject "UserName"
+          = withObject "Schema"
               (\ o ->
-                 UserName <$>
-                   (o .:? "givenName") <*> (o .:? "fullName") <*>
-                     (o .:? "familyName"))
+                 Schema <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "admin#directory#schema")
+                     <*> (o .:? "schemaName")
+                     <*> (o .:? "schemaId")
+                     <*> (o .:? "fields" .!= mempty))
 
-instance ToJSON UserName where
-        toJSON UserName{..}
+instance ToJSON Schema where
+        toJSON Schema{..}
           = object
               (catMaybes
-                 [("givenName" .=) <$> _unGivenName,
-                  ("fullName" .=) <$> _unFullName,
-                  ("familyName" .=) <$> _unFamilyName])
+                 [("etag" .=) <$> _schEtag, Just ("kind" .= _schKind),
+                  ("schemaName" .=) <$> _schSchemaName,
+                  ("schemaId" .=) <$> _schSchemaId,
+                  ("fields" .=) <$> _schFields])
 
 -- | JSON template for User object in Directory API.
 --
@@ -2287,7 +2297,7 @@ data User = User
     , _useNotes                      :: !(Maybe JSONValue)
     , _useIsDelegatedAdmin           :: !(Maybe Bool)
     , _useIsMailboxSetup             :: !(Maybe Bool)
-    , _useCustomSchemas              :: !(Maybe CustomSchemas)
+    , _useCustomSchemas              :: !(Maybe UserCustomSchemas)
     , _useSuspensionReason           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2580,7 +2590,7 @@ useIsMailboxSetup
       (\ s a -> s{_useIsMailboxSetup = a})
 
 -- | Custom fields of the user.
-useCustomSchemas :: Lens' User (Maybe CustomSchemas)
+useCustomSchemas :: Lens' User (Maybe UserCustomSchemas)
 useCustomSchemas
   = lens _useCustomSchemas
       (\ s a -> s{_useCustomSchemas = a})
@@ -2671,149 +2681,91 @@ instance ToJSON User where
                   ("customSchemas" .=) <$> _useCustomSchemas,
                   ("suspensionReason" .=) <$> _useSuspensionReason])
 
--- | JSON template for Schema resource in Directory API.
 --
--- /See:/ 'schema' smart constructor.
-data Schema = Schema
-    { _schEtag       :: !(Maybe Text)
-    , _schKind       :: !Text
-    , _schSchemaName :: !(Maybe Text)
-    , _schSchemaId   :: !(Maybe Text)
-    , _schFields     :: !(Maybe [SchemaFieldSpec])
+-- /See:/ 'mobileDeviceApplicationsItem' smart constructor.
+data MobileDeviceApplicationsItem = MobileDeviceApplicationsItem
+    { _mdaiVersionCode :: !(Maybe Int32)
+    , _mdaiVersionName :: !(Maybe Text)
+    , _mdaiPackageName :: !(Maybe Text)
+    , _mdaiDisplayName :: !(Maybe Text)
+    , _mdaiPermission  :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Schema' with the minimum fields required to make a request.
+-- | Creates a value of 'MobileDeviceApplicationsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'schEtag'
+-- * 'mdaiVersionCode'
 --
--- * 'schKind'
+-- * 'mdaiVersionName'
 --
--- * 'schSchemaName'
+-- * 'mdaiPackageName'
 --
--- * 'schSchemaId'
+-- * 'mdaiDisplayName'
 --
--- * 'schFields'
-schema
-    :: Schema
-schema =
-    Schema
-    { _schEtag = Nothing
-    , _schKind = "admin#directory#schema"
-    , _schSchemaName = Nothing
-    , _schSchemaId = Nothing
-    , _schFields = Nothing
+-- * 'mdaiPermission'
+mobileDeviceApplicationsItem
+    :: MobileDeviceApplicationsItem
+mobileDeviceApplicationsItem =
+    MobileDeviceApplicationsItem
+    { _mdaiVersionCode = Nothing
+    , _mdaiVersionName = Nothing
+    , _mdaiPackageName = Nothing
+    , _mdaiDisplayName = Nothing
+    , _mdaiPermission = Nothing
     }
 
--- | ETag of the resource.
-schEtag :: Lens' Schema (Maybe Text)
-schEtag = lens _schEtag (\ s a -> s{_schEtag = a})
+-- | Version code of application
+mdaiVersionCode :: Lens' MobileDeviceApplicationsItem (Maybe Int32)
+mdaiVersionCode
+  = lens _mdaiVersionCode
+      (\ s a -> s{_mdaiVersionCode = a})
 
--- | Kind of resource this is.
-schKind :: Lens' Schema Text
-schKind = lens _schKind (\ s a -> s{_schKind = a})
+-- | Version name of application
+mdaiVersionName :: Lens' MobileDeviceApplicationsItem (Maybe Text)
+mdaiVersionName
+  = lens _mdaiVersionName
+      (\ s a -> s{_mdaiVersionName = a})
 
--- | Schema name
-schSchemaName :: Lens' Schema (Maybe Text)
-schSchemaName
-  = lens _schSchemaName
-      (\ s a -> s{_schSchemaName = a})
+-- | Package name of application
+mdaiPackageName :: Lens' MobileDeviceApplicationsItem (Maybe Text)
+mdaiPackageName
+  = lens _mdaiPackageName
+      (\ s a -> s{_mdaiPackageName = a})
 
--- | Unique identifier of Schema (Read-only)
-schSchemaId :: Lens' Schema (Maybe Text)
-schSchemaId
-  = lens _schSchemaId (\ s a -> s{_schSchemaId = a})
+-- | Display name of application
+mdaiDisplayName :: Lens' MobileDeviceApplicationsItem (Maybe Text)
+mdaiDisplayName
+  = lens _mdaiDisplayName
+      (\ s a -> s{_mdaiDisplayName = a})
 
--- | Fields of Schema
-schFields :: Lens' Schema [SchemaFieldSpec]
-schFields
-  = lens _schFields (\ s a -> s{_schFields = a}) .
-      _Default
+-- | List of Permissions for application
+mdaiPermission :: Lens' MobileDeviceApplicationsItem [Text]
+mdaiPermission
+  = lens _mdaiPermission
+      (\ s a -> s{_mdaiPermission = a})
+      . _Default
       . _Coerce
 
-instance FromJSON Schema where
+instance FromJSON MobileDeviceApplicationsItem where
         parseJSON
-          = withObject "Schema"
+          = withObject "MobileDeviceApplicationsItem"
               (\ o ->
-                 Schema <$>
-                   (o .:? "etag") <*>
-                     (o .:? "kind" .!= "admin#directory#schema")
-                     <*> (o .:? "schemaName")
-                     <*> (o .:? "schemaId")
-                     <*> (o .:? "fields" .!= mempty))
+                 MobileDeviceApplicationsItem <$>
+                   (o .:? "versionCode") <*> (o .:? "versionName") <*>
+                     (o .:? "packageName")
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "permission" .!= mempty))
 
-instance ToJSON Schema where
-        toJSON Schema{..}
+instance ToJSON MobileDeviceApplicationsItem where
+        toJSON MobileDeviceApplicationsItem{..}
           = object
               (catMaybes
-                 [("etag" .=) <$> _schEtag, Just ("kind" .= _schKind),
-                  ("schemaName" .=) <$> _schSchemaName,
-                  ("schemaId" .=) <$> _schSchemaId,
-                  ("fields" .=) <$> _schFields])
-
--- | Additional parameters controlling delivery channel behavior. Optional.
---
--- /See:/ 'params' smart constructor.
-data Params =
-    Params
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Params' with the minimum fields required to make a request.
---
-params
-    :: Params
-params = Params
-
-instance FromJSON Params where
-        parseJSON = withObject "Params" (\ o -> pure Params)
-
-instance ToJSON Params where
-        toJSON = const (Object mempty)
-
---
--- /See:/ 'recentUsersItem' smart constructor.
-data RecentUsersItem = RecentUsersItem
-    { _ruiEmail :: !(Maybe Text)
-    , _ruiType  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'RecentUsersItem' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ruiEmail'
---
--- * 'ruiType'
-recentUsersItem
-    :: RecentUsersItem
-recentUsersItem =
-    RecentUsersItem
-    { _ruiEmail = Nothing
-    , _ruiType = Nothing
-    }
-
--- | Email address of the user. Present only if the user type is managed
-ruiEmail :: Lens' RecentUsersItem (Maybe Text)
-ruiEmail = lens _ruiEmail (\ s a -> s{_ruiEmail = a})
-
--- | The type of the user
-ruiType :: Lens' RecentUsersItem (Maybe Text)
-ruiType = lens _ruiType (\ s a -> s{_ruiType = a})
-
-instance FromJSON RecentUsersItem where
-        parseJSON
-          = withObject "RecentUsersItem"
-              (\ o ->
-                 RecentUsersItem <$>
-                   (o .:? "email") <*> (o .:? "type"))
-
-instance ToJSON RecentUsersItem where
-        toJSON RecentUsersItem{..}
-          = object
-              (catMaybes
-                 [("email" .=) <$> _ruiEmail,
-                  ("type" .=) <$> _ruiType])
+                 [("versionCode" .=) <$> _mdaiVersionCode,
+                  ("versionName" .=) <$> _mdaiVersionName,
+                  ("packageName" .=) <$> _mdaiPackageName,
+                  ("displayName" .=) <$> _mdaiDisplayName,
+                  ("permission" .=) <$> _mdaiPermission])
 
 -- | JSON response template for List Organization Units operation in
 -- Directory API.
@@ -2991,76 +2943,26 @@ instance ToJSON UserRelation where
                  [("value" .=) <$> _urValue, ("type" .=) <$> _urType,
                   ("customType" .=) <$> _urCustomType])
 
--- | JSON template for a website entry.
+-- | Additional parameters controlling delivery channel behavior. Optional.
 --
--- /See:/ 'userWebsite' smart constructor.
-data UserWebsite = UserWebsite
-    { _uwValue      :: !(Maybe Text)
-    , _uwPrimary    :: !(Maybe Bool)
-    , _uwType       :: !(Maybe Text)
-    , _uwCustomType :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+-- /See:/ 'channelParams' smart constructor.
+data ChannelParams =
+    ChannelParams
+    deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UserWebsite' with the minimum fields required to make a request.
+-- | Creates a value of 'ChannelParams' with the minimum fields required to make a request.
 --
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'uwValue'
---
--- * 'uwPrimary'
---
--- * 'uwType'
---
--- * 'uwCustomType'
-userWebsite
-    :: UserWebsite
-userWebsite =
-    UserWebsite
-    { _uwValue = Nothing
-    , _uwPrimary = Nothing
-    , _uwType = Nothing
-    , _uwCustomType = Nothing
-    }
+channelParams
+    :: ChannelParams
+channelParams = ChannelParams
 
--- | Website.
-uwValue :: Lens' UserWebsite (Maybe Text)
-uwValue = lens _uwValue (\ s a -> s{_uwValue = a})
-
--- | If this is user\'s primary website or not.
-uwPrimary :: Lens' UserWebsite (Maybe Bool)
-uwPrimary
-  = lens _uwPrimary (\ s a -> s{_uwPrimary = a})
-
--- | Each entry can have a type which indicates standard types of that entry.
--- For example website could be of home, work, blog etc. In addition to the
--- standard type, an entry can have a custom type and can give it any name.
--- Such types should have the CUSTOM value as type and also have a
--- customType value.
-uwType :: Lens' UserWebsite (Maybe Text)
-uwType = lens _uwType (\ s a -> s{_uwType = a})
-
--- | Custom Type.
-uwCustomType :: Lens' UserWebsite (Maybe Text)
-uwCustomType
-  = lens _uwCustomType (\ s a -> s{_uwCustomType = a})
-
-instance FromJSON UserWebsite where
+instance FromJSON ChannelParams where
         parseJSON
-          = withObject "UserWebsite"
-              (\ o ->
-                 UserWebsite <$>
-                   (o .:? "value") <*> (o .:? "primary") <*>
-                     (o .:? "type")
-                     <*> (o .:? "customType"))
+          = withObject "ChannelParams"
+              (\ o -> pure ChannelParams)
 
-instance ToJSON UserWebsite where
-        toJSON UserWebsite{..}
-          = object
-              (catMaybes
-                 [("value" .=) <$> _uwValue,
-                  ("primary" .=) <$> _uwPrimary,
-                  ("type" .=) <$> _uwType,
-                  ("customType" .=) <$> _uwCustomType])
+instance ToJSON ChannelParams where
+        toJSON = const (Object mempty)
 
 -- | JSON template for an organization entry.
 --
@@ -3206,6 +3108,200 @@ instance ToJSON UserOrganization where
                   ("type" .=) <$> _uoType,
                   ("customType" .=) <$> _uoCustomType,
                   ("description" .=) <$> _uoDescription])
+
+-- | JSON template for a website entry.
+--
+-- /See:/ 'userWebsite' smart constructor.
+data UserWebsite = UserWebsite
+    { _uwValue      :: !(Maybe Text)
+    , _uwPrimary    :: !(Maybe Bool)
+    , _uwType       :: !(Maybe Text)
+    , _uwCustomType :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UserWebsite' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'uwValue'
+--
+-- * 'uwPrimary'
+--
+-- * 'uwType'
+--
+-- * 'uwCustomType'
+userWebsite
+    :: UserWebsite
+userWebsite =
+    UserWebsite
+    { _uwValue = Nothing
+    , _uwPrimary = Nothing
+    , _uwType = Nothing
+    , _uwCustomType = Nothing
+    }
+
+-- | Website.
+uwValue :: Lens' UserWebsite (Maybe Text)
+uwValue = lens _uwValue (\ s a -> s{_uwValue = a})
+
+-- | If this is user\'s primary website or not.
+uwPrimary :: Lens' UserWebsite (Maybe Bool)
+uwPrimary
+  = lens _uwPrimary (\ s a -> s{_uwPrimary = a})
+
+-- | Each entry can have a type which indicates standard types of that entry.
+-- For example website could be of home, work, blog etc. In addition to the
+-- standard type, an entry can have a custom type and can give it any name.
+-- Such types should have the CUSTOM value as type and also have a
+-- customType value.
+uwType :: Lens' UserWebsite (Maybe Text)
+uwType = lens _uwType (\ s a -> s{_uwType = a})
+
+-- | Custom Type.
+uwCustomType :: Lens' UserWebsite (Maybe Text)
+uwCustomType
+  = lens _uwCustomType (\ s a -> s{_uwCustomType = a})
+
+instance FromJSON UserWebsite where
+        parseJSON
+          = withObject "UserWebsite"
+              (\ o ->
+                 UserWebsite <$>
+                   (o .:? "value") <*> (o .:? "primary") <*>
+                     (o .:? "type")
+                     <*> (o .:? "customType"))
+
+instance ToJSON UserWebsite where
+        toJSON UserWebsite{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _uwValue,
+                  ("primary" .=) <$> _uwPrimary,
+                  ("type" .=) <$> _uwType,
+                  ("customType" .=) <$> _uwCustomType])
+
+--
+-- /See:/ 'chromeOSDeviceActiveTimeRangesItem' smart constructor.
+data ChromeOSDeviceActiveTimeRangesItem = ChromeOSDeviceActiveTimeRangesItem
+    { _codatriDate       :: !(Maybe Date')
+    , _codatriActiveTime :: !(Maybe Int32)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ChromeOSDeviceActiveTimeRangesItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'codatriDate'
+--
+-- * 'codatriActiveTime'
+chromeOSDeviceActiveTimeRangesItem
+    :: ChromeOSDeviceActiveTimeRangesItem
+chromeOSDeviceActiveTimeRangesItem =
+    ChromeOSDeviceActiveTimeRangesItem
+    { _codatriDate = Nothing
+    , _codatriActiveTime = Nothing
+    }
+
+-- | Date of usage
+codatriDate :: Lens' ChromeOSDeviceActiveTimeRangesItem (Maybe LocalTime)
+codatriDate
+  = lens _codatriDate (\ s a -> s{_codatriDate = a}) .
+      mapping _Date
+
+-- | Duration in milliseconds
+codatriActiveTime :: Lens' ChromeOSDeviceActiveTimeRangesItem (Maybe Int32)
+codatriActiveTime
+  = lens _codatriActiveTime
+      (\ s a -> s{_codatriActiveTime = a})
+
+instance FromJSON ChromeOSDeviceActiveTimeRangesItem
+         where
+        parseJSON
+          = withObject "ChromeOSDeviceActiveTimeRangesItem"
+              (\ o ->
+                 ChromeOSDeviceActiveTimeRangesItem <$>
+                   (o .:? "date") <*> (o .:? "activeTime"))
+
+instance ToJSON ChromeOSDeviceActiveTimeRangesItem
+         where
+        toJSON ChromeOSDeviceActiveTimeRangesItem{..}
+          = object
+              (catMaybes
+                 [("date" .=) <$> _codatriDate,
+                  ("activeTime" .=) <$> _codatriActiveTime])
+
+-- | JSON template for an email.
+--
+-- /See:/ 'userEmail' smart constructor.
+data UserEmail = UserEmail
+    { _ueAddress    :: !(Maybe Text)
+    , _uePrimary    :: !(Maybe Bool)
+    , _ueType       :: !(Maybe Text)
+    , _ueCustomType :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UserEmail' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ueAddress'
+--
+-- * 'uePrimary'
+--
+-- * 'ueType'
+--
+-- * 'ueCustomType'
+userEmail
+    :: UserEmail
+userEmail =
+    UserEmail
+    { _ueAddress = Nothing
+    , _uePrimary = Nothing
+    , _ueType = Nothing
+    , _ueCustomType = Nothing
+    }
+
+-- | Email id of the user.
+ueAddress :: Lens' UserEmail (Maybe Text)
+ueAddress
+  = lens _ueAddress (\ s a -> s{_ueAddress = a})
+
+-- | If this is user\'s primary email. Only one entry could be marked as
+-- primary.
+uePrimary :: Lens' UserEmail (Maybe Bool)
+uePrimary
+  = lens _uePrimary (\ s a -> s{_uePrimary = a})
+
+-- | Each entry can have a type which indicates standard types of that entry.
+-- For example email could be of home, work etc. In addition to the
+-- standard type, an entry can have a custom type and can take any value
+-- Such types should have the CUSTOM value as type and also have a
+-- customType value.
+ueType :: Lens' UserEmail (Maybe Text)
+ueType = lens _ueType (\ s a -> s{_ueType = a})
+
+-- | Custom Type.
+ueCustomType :: Lens' UserEmail (Maybe Text)
+ueCustomType
+  = lens _ueCustomType (\ s a -> s{_ueCustomType = a})
+
+instance FromJSON UserEmail where
+        parseJSON
+          = withObject "UserEmail"
+              (\ o ->
+                 UserEmail <$>
+                   (o .:? "address") <*> (o .:? "primary") <*>
+                     (o .:? "type")
+                     <*> (o .:? "customType"))
+
+instance ToJSON UserEmail where
+        toJSON UserEmail{..}
+          = object
+              (catMaybes
+                 [("address" .=) <$> _ueAddress,
+                  ("primary" .=) <$> _uePrimary,
+                  ("type" .=) <$> _ueType,
+                  ("customType" .=) <$> _ueCustomType])
 
 -- | JSON template for a phone entry.
 --
@@ -3384,163 +3480,6 @@ instance ToJSON UserPhoto where
                   ("mimeType" .=) <$> _upMimeType, ("id" .=) <$> _upId,
                   ("primaryEmail" .=) <$> _upPrimaryEmail])
 
--- | JSON template for an email.
---
--- /See:/ 'userEmail' smart constructor.
-data UserEmail = UserEmail
-    { _ueAddress    :: !(Maybe Text)
-    , _uePrimary    :: !(Maybe Bool)
-    , _ueType       :: !(Maybe Text)
-    , _ueCustomType :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'UserEmail' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ueAddress'
---
--- * 'uePrimary'
---
--- * 'ueType'
---
--- * 'ueCustomType'
-userEmail
-    :: UserEmail
-userEmail =
-    UserEmail
-    { _ueAddress = Nothing
-    , _uePrimary = Nothing
-    , _ueType = Nothing
-    , _ueCustomType = Nothing
-    }
-
--- | Email id of the user.
-ueAddress :: Lens' UserEmail (Maybe Text)
-ueAddress
-  = lens _ueAddress (\ s a -> s{_ueAddress = a})
-
--- | If this is user\'s primary email. Only one entry could be marked as
--- primary.
-uePrimary :: Lens' UserEmail (Maybe Bool)
-uePrimary
-  = lens _uePrimary (\ s a -> s{_uePrimary = a})
-
--- | Each entry can have a type which indicates standard types of that entry.
--- For example email could be of home, work etc. In addition to the
--- standard type, an entry can have a custom type and can take any value
--- Such types should have the CUSTOM value as type and also have a
--- customType value.
-ueType :: Lens' UserEmail (Maybe Text)
-ueType = lens _ueType (\ s a -> s{_ueType = a})
-
--- | Custom Type.
-ueCustomType :: Lens' UserEmail (Maybe Text)
-ueCustomType
-  = lens _ueCustomType (\ s a -> s{_ueCustomType = a})
-
-instance FromJSON UserEmail where
-        parseJSON
-          = withObject "UserEmail"
-              (\ o ->
-                 UserEmail <$>
-                   (o .:? "address") <*> (o .:? "primary") <*>
-                     (o .:? "type")
-                     <*> (o .:? "customType"))
-
-instance ToJSON UserEmail where
-        toJSON UserEmail{..}
-          = object
-              (catMaybes
-                 [("address" .=) <$> _ueAddress,
-                  ("primary" .=) <$> _uePrimary,
-                  ("type" .=) <$> _ueType,
-                  ("customType" .=) <$> _ueCustomType])
-
--- | JSON template for Member resource in Directory API.
---
--- /See:/ 'member' smart constructor.
-data Member = Member
-    { _memEmail :: !(Maybe Text)
-    , _memEtag  :: !(Maybe Text)
-    , _memKind  :: !Text
-    , _memRole  :: !(Maybe Text)
-    , _memId    :: !(Maybe Text)
-    , _memType  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Member' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'memEmail'
---
--- * 'memEtag'
---
--- * 'memKind'
---
--- * 'memRole'
---
--- * 'memId'
---
--- * 'memType'
-member
-    :: Member
-member =
-    Member
-    { _memEmail = Nothing
-    , _memEtag = Nothing
-    , _memKind = "admin#directory#member"
-    , _memRole = Nothing
-    , _memId = Nothing
-    , _memType = Nothing
-    }
-
--- | Email of member (Read-only)
-memEmail :: Lens' Member (Maybe Text)
-memEmail = lens _memEmail (\ s a -> s{_memEmail = a})
-
--- | ETag of the resource.
-memEtag :: Lens' Member (Maybe Text)
-memEtag = lens _memEtag (\ s a -> s{_memEtag = a})
-
--- | Kind of resource this is.
-memKind :: Lens' Member Text
-memKind = lens _memKind (\ s a -> s{_memKind = a})
-
--- | Role of member
-memRole :: Lens' Member (Maybe Text)
-memRole = lens _memRole (\ s a -> s{_memRole = a})
-
--- | Unique identifier of customer member (Read-only) Unique identifier of
--- group (Read-only) Unique identifier of member (Read-only)
-memId :: Lens' Member (Maybe Text)
-memId = lens _memId (\ s a -> s{_memId = a})
-
--- | Type of member (Immutable)
-memType :: Lens' Member (Maybe Text)
-memType = lens _memType (\ s a -> s{_memType = a})
-
-instance FromJSON Member where
-        parseJSON
-          = withObject "Member"
-              (\ o ->
-                 Member <$>
-                   (o .:? "email") <*> (o .:? "etag") <*>
-                     (o .:? "kind" .!= "admin#directory#member")
-                     <*> (o .:? "role")
-                     <*> (o .:? "id")
-                     <*> (o .:? "type"))
-
-instance ToJSON Member where
-        toJSON Member{..}
-          = object
-              (catMaybes
-                 [("email" .=) <$> _memEmail,
-                  ("etag" .=) <$> _memEtag, Just ("kind" .= _memKind),
-                  ("role" .=) <$> _memRole, ("id" .=) <$> _memId,
-                  ("type" .=) <$> _memType])
-
 -- | JSON template for Mobile Device resource in Directory API.
 --
 -- /See:/ 'mobileDevice' smart constructor.
@@ -3550,7 +3489,7 @@ data MobileDevice = MobileDevice
     , _mobEtag                           :: !(Maybe Text)
     , _mobResourceId                     :: !(Maybe Text)
     , _mobBuildNumber                    :: !(Maybe Text)
-    , _mobManagedAccountIsOnOwnerProfile :: !(Maybe Bool)
+    , _mobManagedAccountIsOnOwnerProFile :: !(Maybe Bool)
     , _mobLastSync                       :: !(Maybe DateTime')
     , _mobOtherAccountsInfo              :: !(Maybe [Text])
     , _mobKind                           :: !Text
@@ -3572,9 +3511,9 @@ data MobileDevice = MobileDevice
     , _mobSerialNumber                   :: !(Maybe Text)
     , _mobHardwareId                     :: !(Maybe Text)
     , _mobBasebandVersion                :: !(Maybe Text)
-    , _mobSupportsWorkProfile            :: !(Maybe Bool)
+    , _mobSupportsWorkProFile            :: !(Maybe Bool)
     , _mobDeviceCompromisedStatus        :: !(Maybe Text)
-    , _mobApplications                   :: !(Maybe [ApplicationsItem])
+    , _mobApplications                   :: !(Maybe [MobileDeviceApplicationsItem])
     , _mobDefaultLanguage                :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3592,7 +3531,7 @@ data MobileDevice = MobileDevice
 --
 -- * 'mobBuildNumber'
 --
--- * 'mobManagedAccountIsOnOwnerProfile'
+-- * 'mobManagedAccountIsOnOwnerProFile'
 --
 -- * 'mobLastSync'
 --
@@ -3636,7 +3575,7 @@ data MobileDevice = MobileDevice
 --
 -- * 'mobBasebandVersion'
 --
--- * 'mobSupportsWorkProfile'
+-- * 'mobSupportsWorkProFile'
 --
 -- * 'mobDeviceCompromisedStatus'
 --
@@ -3652,7 +3591,7 @@ mobileDevice =
     , _mobEtag = Nothing
     , _mobResourceId = Nothing
     , _mobBuildNumber = Nothing
-    , _mobManagedAccountIsOnOwnerProfile = Nothing
+    , _mobManagedAccountIsOnOwnerProFile = Nothing
     , _mobLastSync = Nothing
     , _mobOtherAccountsInfo = Nothing
     , _mobKind = "admin#directory#mobiledevice"
@@ -3674,7 +3613,7 @@ mobileDevice =
     , _mobSerialNumber = Nothing
     , _mobHardwareId = Nothing
     , _mobBasebandVersion = Nothing
-    , _mobSupportsWorkProfile = Nothing
+    , _mobSupportsWorkProFile = Nothing
     , _mobDeviceCompromisedStatus = Nothing
     , _mobApplications = Nothing
     , _mobDefaultLanguage = Nothing
@@ -3710,10 +3649,10 @@ mobBuildNumber
 
 -- | Boolean indicating if this account is on owner\/primary profile or not
 -- (Read-only)
-mobManagedAccountIsOnOwnerProfile :: Lens' MobileDevice (Maybe Bool)
-mobManagedAccountIsOnOwnerProfile
-  = lens _mobManagedAccountIsOnOwnerProfile
-      (\ s a -> s{_mobManagedAccountIsOnOwnerProfile = a})
+mobManagedAccountIsOnOwnerProFile :: Lens' MobileDevice (Maybe Bool)
+mobManagedAccountIsOnOwnerProFile
+  = lens _mobManagedAccountIsOnOwnerProFile
+      (\ s a -> s{_mobManagedAccountIsOnOwnerProFile = a})
 
 -- | Date and time the device was last synchronized with the policy settings
 -- in the Google Apps administrator control panel (Read-only)
@@ -3831,10 +3770,10 @@ mobBasebandVersion
       (\ s a -> s{_mobBasebandVersion = a})
 
 -- | Work profile supported on device (Read-only)
-mobSupportsWorkProfile :: Lens' MobileDevice (Maybe Bool)
-mobSupportsWorkProfile
-  = lens _mobSupportsWorkProfile
-      (\ s a -> s{_mobSupportsWorkProfile = a})
+mobSupportsWorkProFile :: Lens' MobileDevice (Maybe Bool)
+mobSupportsWorkProFile
+  = lens _mobSupportsWorkProFile
+      (\ s a -> s{_mobSupportsWorkProFile = a})
 
 -- | Mobile Device compromised status (Read-only)
 mobDeviceCompromisedStatus :: Lens' MobileDevice (Maybe Text)
@@ -3843,7 +3782,7 @@ mobDeviceCompromisedStatus
       (\ s a -> s{_mobDeviceCompromisedStatus = a})
 
 -- | List of applications installed on Mobile Device
-mobApplications :: Lens' MobileDevice [ApplicationsItem]
+mobApplications :: Lens' MobileDevice [MobileDeviceApplicationsItem]
 mobApplications
   = lens _mobApplications
       (\ s a -> s{_mobApplications = a})
@@ -3902,7 +3841,7 @@ instance ToJSON MobileDevice where
                   ("resourceId" .=) <$> _mobResourceId,
                   ("buildNumber" .=) <$> _mobBuildNumber,
                   ("managedAccountIsOnOwnerProfile" .=) <$>
-                    _mobManagedAccountIsOnOwnerProfile,
+                    _mobManagedAccountIsOnOwnerProFile,
                   ("lastSync" .=) <$> _mobLastSync,
                   ("otherAccountsInfo" .=) <$> _mobOtherAccountsInfo,
                   Just ("kind" .= _mobKind),
@@ -3925,59 +3864,95 @@ instance ToJSON MobileDevice where
                   ("hardwareId" .=) <$> _mobHardwareId,
                   ("basebandVersion" .=) <$> _mobBasebandVersion,
                   ("supportsWorkProfile" .=) <$>
-                    _mobSupportsWorkProfile,
+                    _mobSupportsWorkProFile,
                   ("deviceCompromisedStatus" .=) <$>
                     _mobDeviceCompromisedStatus,
                   ("applications" .=) <$> _mobApplications,
                   ("defaultLanguage" .=) <$> _mobDefaultLanguage])
 
+-- | JSON template for Member resource in Directory API.
 --
--- /See:/ 'activeTimeRangesItem' smart constructor.
-data ActiveTimeRangesItem = ActiveTimeRangesItem
-    { _atriDate       :: !(Maybe Date')
-    , _atriActiveTime :: !(Maybe Int32)
+-- /See:/ 'member' smart constructor.
+data Member = Member
+    { _memEmail :: !(Maybe Text)
+    , _memEtag  :: !(Maybe Text)
+    , _memKind  :: !Text
+    , _memRole  :: !(Maybe Text)
+    , _memId    :: !(Maybe Text)
+    , _memType  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ActiveTimeRangesItem' with the minimum fields required to make a request.
+-- | Creates a value of 'Member' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'atriDate'
+-- * 'memEmail'
 --
--- * 'atriActiveTime'
-activeTimeRangesItem
-    :: ActiveTimeRangesItem
-activeTimeRangesItem =
-    ActiveTimeRangesItem
-    { _atriDate = Nothing
-    , _atriActiveTime = Nothing
+-- * 'memEtag'
+--
+-- * 'memKind'
+--
+-- * 'memRole'
+--
+-- * 'memId'
+--
+-- * 'memType'
+member
+    :: Member
+member =
+    Member
+    { _memEmail = Nothing
+    , _memEtag = Nothing
+    , _memKind = "admin#directory#member"
+    , _memRole = Nothing
+    , _memId = Nothing
+    , _memType = Nothing
     }
 
--- | Date of usage
-atriDate :: Lens' ActiveTimeRangesItem (Maybe LocalTime)
-atriDate
-  = lens _atriDate (\ s a -> s{_atriDate = a}) .
-      mapping _Date
+-- | Email of member (Read-only)
+memEmail :: Lens' Member (Maybe Text)
+memEmail = lens _memEmail (\ s a -> s{_memEmail = a})
 
--- | Duration in milliseconds
-atriActiveTime :: Lens' ActiveTimeRangesItem (Maybe Int32)
-atriActiveTime
-  = lens _atriActiveTime
-      (\ s a -> s{_atriActiveTime = a})
+-- | ETag of the resource.
+memEtag :: Lens' Member (Maybe Text)
+memEtag = lens _memEtag (\ s a -> s{_memEtag = a})
 
-instance FromJSON ActiveTimeRangesItem where
+-- | Kind of resource this is.
+memKind :: Lens' Member Text
+memKind = lens _memKind (\ s a -> s{_memKind = a})
+
+-- | Role of member
+memRole :: Lens' Member (Maybe Text)
+memRole = lens _memRole (\ s a -> s{_memRole = a})
+
+-- | Unique identifier of customer member (Read-only) Unique identifier of
+-- group (Read-only) Unique identifier of member (Read-only)
+memId :: Lens' Member (Maybe Text)
+memId = lens _memId (\ s a -> s{_memId = a})
+
+-- | Type of member (Immutable)
+memType :: Lens' Member (Maybe Text)
+memType = lens _memType (\ s a -> s{_memType = a})
+
+instance FromJSON Member where
         parseJSON
-          = withObject "ActiveTimeRangesItem"
+          = withObject "Member"
               (\ o ->
-                 ActiveTimeRangesItem <$>
-                   (o .:? "date") <*> (o .:? "activeTime"))
+                 Member <$>
+                   (o .:? "email") <*> (o .:? "etag") <*>
+                     (o .:? "kind" .!= "admin#directory#member")
+                     <*> (o .:? "role")
+                     <*> (o .:? "id")
+                     <*> (o .:? "type"))
 
-instance ToJSON ActiveTimeRangesItem where
-        toJSON ActiveTimeRangesItem{..}
+instance ToJSON Member where
+        toJSON Member{..}
           = object
               (catMaybes
-                 [("date" .=) <$> _atriDate,
-                  ("activeTime" .=) <$> _atriActiveTime])
+                 [("email" .=) <$> _memEmail,
+                  ("etag" .=) <$> _memEtag, Just ("kind" .= _memKind),
+                  ("role" .=) <$> _memRole, ("id" .=) <$> _memId,
+                  ("type" .=) <$> _memType])
 
 -- | JSON template for a set of custom properties (i.e. all fields in a
 -- particular schema)
@@ -4000,169 +3975,6 @@ instance FromJSON UserCustomProperties where
 
 instance ToJSON UserCustomProperties where
         toJSON = const (Object mempty)
-
--- | JSON request template for firing commands on Mobile Device in Directory
--- Devices API.
---
--- /See:/ 'mobileDeviceAction' smart constructor.
-newtype MobileDeviceAction = MobileDeviceAction
-    { _mdaAction :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'MobileDeviceAction' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'mdaAction'
-mobileDeviceAction
-    :: MobileDeviceAction
-mobileDeviceAction =
-    MobileDeviceAction
-    { _mdaAction = Nothing
-    }
-
--- | Action to be taken on the Mobile Device
-mdaAction :: Lens' MobileDeviceAction (Maybe Text)
-mdaAction
-  = lens _mdaAction (\ s a -> s{_mdaAction = a})
-
-instance FromJSON MobileDeviceAction where
-        parseJSON
-          = withObject "MobileDeviceAction"
-              (\ o -> MobileDeviceAction <$> (o .:? "action"))
-
-instance ToJSON MobileDeviceAction where
-        toJSON MobileDeviceAction{..}
-          = object (catMaybes [("action" .=) <$> _mdaAction])
-
--- | JSON template for FieldSpec resource for Schemas in Directory API.
---
--- /See:/ 'schemaFieldSpec' smart constructor.
-data SchemaFieldSpec = SchemaFieldSpec
-    { _sfsEtag                :: !(Maybe Text)
-    , _sfsKind                :: !Text
-    , _sfsNumericIndexingSpec :: !(Maybe NumericIndexingSpec)
-    , _sfsReadAccessType      :: !Text
-    , _sfsFieldId             :: !(Maybe Text)
-    , _sfsIndexed             :: !Bool
-    , _sfsFieldType           :: !(Maybe Text)
-    , _sfsFieldName           :: !(Maybe Text)
-    , _sfsMultiValued         :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SchemaFieldSpec' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'sfsEtag'
---
--- * 'sfsKind'
---
--- * 'sfsNumericIndexingSpec'
---
--- * 'sfsReadAccessType'
---
--- * 'sfsFieldId'
---
--- * 'sfsIndexed'
---
--- * 'sfsFieldType'
---
--- * 'sfsFieldName'
---
--- * 'sfsMultiValued'
-schemaFieldSpec
-    :: SchemaFieldSpec
-schemaFieldSpec =
-    SchemaFieldSpec
-    { _sfsEtag = Nothing
-    , _sfsKind = "admin#directory#schema#fieldspec"
-    , _sfsNumericIndexingSpec = Nothing
-    , _sfsReadAccessType = "ALL_DOMAIN_USERS"
-    , _sfsFieldId = Nothing
-    , _sfsIndexed = True
-    , _sfsFieldType = Nothing
-    , _sfsFieldName = Nothing
-    , _sfsMultiValued = Nothing
-    }
-
--- | ETag of the resource.
-sfsEtag :: Lens' SchemaFieldSpec (Maybe Text)
-sfsEtag = lens _sfsEtag (\ s a -> s{_sfsEtag = a})
-
--- | Kind of resource this is.
-sfsKind :: Lens' SchemaFieldSpec Text
-sfsKind = lens _sfsKind (\ s a -> s{_sfsKind = a})
-
--- | Indexing spec for a numeric field. By default, only exact match queries
--- will be supported for numeric fields. Setting the numericIndexingSpec
--- allows range queries to be supported.
-sfsNumericIndexingSpec :: Lens' SchemaFieldSpec (Maybe NumericIndexingSpec)
-sfsNumericIndexingSpec
-  = lens _sfsNumericIndexingSpec
-      (\ s a -> s{_sfsNumericIndexingSpec = a})
-
--- | Read ACLs on the field specifying who can view values of this field.
--- Valid values are \"ALL_DOMAIN_USERS\" and \"ADMINS_AND_SELF\".
-sfsReadAccessType :: Lens' SchemaFieldSpec Text
-sfsReadAccessType
-  = lens _sfsReadAccessType
-      (\ s a -> s{_sfsReadAccessType = a})
-
--- | Unique identifier of Field (Read-only)
-sfsFieldId :: Lens' SchemaFieldSpec (Maybe Text)
-sfsFieldId
-  = lens _sfsFieldId (\ s a -> s{_sfsFieldId = a})
-
--- | Boolean specifying whether the field is indexed or not.
-sfsIndexed :: Lens' SchemaFieldSpec Bool
-sfsIndexed
-  = lens _sfsIndexed (\ s a -> s{_sfsIndexed = a})
-
--- | Type of the field.
-sfsFieldType :: Lens' SchemaFieldSpec (Maybe Text)
-sfsFieldType
-  = lens _sfsFieldType (\ s a -> s{_sfsFieldType = a})
-
--- | Name of the field.
-sfsFieldName :: Lens' SchemaFieldSpec (Maybe Text)
-sfsFieldName
-  = lens _sfsFieldName (\ s a -> s{_sfsFieldName = a})
-
--- | Boolean specifying whether this is a multi-valued field or not.
-sfsMultiValued :: Lens' SchemaFieldSpec (Maybe Bool)
-sfsMultiValued
-  = lens _sfsMultiValued
-      (\ s a -> s{_sfsMultiValued = a})
-
-instance FromJSON SchemaFieldSpec where
-        parseJSON
-          = withObject "SchemaFieldSpec"
-              (\ o ->
-                 SchemaFieldSpec <$>
-                   (o .:? "etag") <*>
-                     (o .:? "kind" .!= "admin#directory#schema#fieldspec")
-                     <*> (o .:? "numericIndexingSpec")
-                     <*> (o .:? "readAccessType" .!= "ALL_DOMAIN_USERS")
-                     <*> (o .:? "fieldId")
-                     <*> (o .:? "indexed" .!= True)
-                     <*> (o .:? "fieldType")
-                     <*> (o .:? "fieldName")
-                     <*> (o .:? "multiValued"))
-
-instance ToJSON SchemaFieldSpec where
-        toJSON SchemaFieldSpec{..}
-          = object
-              (catMaybes
-                 [("etag" .=) <$> _sfsEtag, Just ("kind" .= _sfsKind),
-                  ("numericIndexingSpec" .=) <$>
-                    _sfsNumericIndexingSpec,
-                  Just ("readAccessType" .= _sfsReadAccessType),
-                  ("fieldId" .=) <$> _sfsFieldId,
-                  Just ("indexed" .= _sfsIndexed),
-                  ("fieldType" .=) <$> _sfsFieldType,
-                  ("fieldName" .=) <$> _sfsFieldName,
-                  ("multiValued" .=) <$> _sfsMultiValued])
 
 -- | Template for notifications list response.
 --
@@ -4246,6 +4058,298 @@ instance ToJSON Notifications where
                   ("items" .=) <$> _notItems,
                   ("unreadNotificationsCount" .=) <$>
                     _notUnreadNotificationsCount])
+
+-- | Indexing spec for a numeric field. By default, only exact match queries
+-- will be supported for numeric fields. Setting the numericIndexingSpec
+-- allows range queries to be supported.
+--
+-- /See:/ 'schemaFieldSpecNumericIndexingSpec' smart constructor.
+data SchemaFieldSpecNumericIndexingSpec = SchemaFieldSpecNumericIndexingSpec
+    { _sfsnisMaxValue :: !(Maybe Double)
+    , _sfsnisMinValue :: !(Maybe Double)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SchemaFieldSpecNumericIndexingSpec' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sfsnisMaxValue'
+--
+-- * 'sfsnisMinValue'
+schemaFieldSpecNumericIndexingSpec
+    :: SchemaFieldSpecNumericIndexingSpec
+schemaFieldSpecNumericIndexingSpec =
+    SchemaFieldSpecNumericIndexingSpec
+    { _sfsnisMaxValue = Nothing
+    , _sfsnisMinValue = Nothing
+    }
+
+-- | Maximum value of this field. This is meant to be indicative rather than
+-- enforced. Values outside this range will still be indexed, but search
+-- may not be as performant.
+sfsnisMaxValue :: Lens' SchemaFieldSpecNumericIndexingSpec (Maybe Double)
+sfsnisMaxValue
+  = lens _sfsnisMaxValue
+      (\ s a -> s{_sfsnisMaxValue = a})
+
+-- | Minimum value of this field. This is meant to be indicative rather than
+-- enforced. Values outside this range will still be indexed, but search
+-- may not be as performant.
+sfsnisMinValue :: Lens' SchemaFieldSpecNumericIndexingSpec (Maybe Double)
+sfsnisMinValue
+  = lens _sfsnisMinValue
+      (\ s a -> s{_sfsnisMinValue = a})
+
+instance FromJSON SchemaFieldSpecNumericIndexingSpec
+         where
+        parseJSON
+          = withObject "SchemaFieldSpecNumericIndexingSpec"
+              (\ o ->
+                 SchemaFieldSpecNumericIndexingSpec <$>
+                   (o .:? "maxValue") <*> (o .:? "minValue"))
+
+instance ToJSON SchemaFieldSpecNumericIndexingSpec
+         where
+        toJSON SchemaFieldSpecNumericIndexingSpec{..}
+          = object
+              (catMaybes
+                 [("maxValue" .=) <$> _sfsnisMaxValue,
+                  ("minValue" .=) <$> _sfsnisMinValue])
+
+-- | JSON request template for firing commands on Mobile Device in Directory
+-- Devices API.
+--
+-- /See:/ 'mobileDeviceAction' smart constructor.
+newtype MobileDeviceAction = MobileDeviceAction
+    { _mdaAction :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MobileDeviceAction' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mdaAction'
+mobileDeviceAction
+    :: MobileDeviceAction
+mobileDeviceAction =
+    MobileDeviceAction
+    { _mdaAction = Nothing
+    }
+
+-- | Action to be taken on the Mobile Device
+mdaAction :: Lens' MobileDeviceAction (Maybe Text)
+mdaAction
+  = lens _mdaAction (\ s a -> s{_mdaAction = a})
+
+instance FromJSON MobileDeviceAction where
+        parseJSON
+          = withObject "MobileDeviceAction"
+              (\ o -> MobileDeviceAction <$> (o .:? "action"))
+
+instance ToJSON MobileDeviceAction where
+        toJSON MobileDeviceAction{..}
+          = object (catMaybes [("action" .=) <$> _mdaAction])
+
+-- | JSON template for FieldSpec resource for Schemas in Directory API.
+--
+-- /See:/ 'schemaFieldSpec' smart constructor.
+data SchemaFieldSpec = SchemaFieldSpec
+    { _sfsEtag                :: !(Maybe Text)
+    , _sfsKind                :: !Text
+    , _sfsNumericIndexingSpec :: !(Maybe SchemaFieldSpecNumericIndexingSpec)
+    , _sfsReadAccessType      :: !Text
+    , _sfsFieldId             :: !(Maybe Text)
+    , _sfsIndexed             :: !Bool
+    , _sfsFieldType           :: !(Maybe Text)
+    , _sfsFieldName           :: !(Maybe Text)
+    , _sfsMultiValued         :: !(Maybe Bool)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SchemaFieldSpec' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sfsEtag'
+--
+-- * 'sfsKind'
+--
+-- * 'sfsNumericIndexingSpec'
+--
+-- * 'sfsReadAccessType'
+--
+-- * 'sfsFieldId'
+--
+-- * 'sfsIndexed'
+--
+-- * 'sfsFieldType'
+--
+-- * 'sfsFieldName'
+--
+-- * 'sfsMultiValued'
+schemaFieldSpec
+    :: SchemaFieldSpec
+schemaFieldSpec =
+    SchemaFieldSpec
+    { _sfsEtag = Nothing
+    , _sfsKind = "admin#directory#schema#fieldspec"
+    , _sfsNumericIndexingSpec = Nothing
+    , _sfsReadAccessType = "ALL_DOMAIN_USERS"
+    , _sfsFieldId = Nothing
+    , _sfsIndexed = True
+    , _sfsFieldType = Nothing
+    , _sfsFieldName = Nothing
+    , _sfsMultiValued = Nothing
+    }
+
+-- | ETag of the resource.
+sfsEtag :: Lens' SchemaFieldSpec (Maybe Text)
+sfsEtag = lens _sfsEtag (\ s a -> s{_sfsEtag = a})
+
+-- | Kind of resource this is.
+sfsKind :: Lens' SchemaFieldSpec Text
+sfsKind = lens _sfsKind (\ s a -> s{_sfsKind = a})
+
+-- | Indexing spec for a numeric field. By default, only exact match queries
+-- will be supported for numeric fields. Setting the numericIndexingSpec
+-- allows range queries to be supported.
+sfsNumericIndexingSpec :: Lens' SchemaFieldSpec (Maybe SchemaFieldSpecNumericIndexingSpec)
+sfsNumericIndexingSpec
+  = lens _sfsNumericIndexingSpec
+      (\ s a -> s{_sfsNumericIndexingSpec = a})
+
+-- | Read ACLs on the field specifying who can view values of this field.
+-- Valid values are \"ALL_DOMAIN_USERS\" and \"ADMINS_AND_SELF\".
+sfsReadAccessType :: Lens' SchemaFieldSpec Text
+sfsReadAccessType
+  = lens _sfsReadAccessType
+      (\ s a -> s{_sfsReadAccessType = a})
+
+-- | Unique identifier of Field (Read-only)
+sfsFieldId :: Lens' SchemaFieldSpec (Maybe Text)
+sfsFieldId
+  = lens _sfsFieldId (\ s a -> s{_sfsFieldId = a})
+
+-- | Boolean specifying whether the field is indexed or not.
+sfsIndexed :: Lens' SchemaFieldSpec Bool
+sfsIndexed
+  = lens _sfsIndexed (\ s a -> s{_sfsIndexed = a})
+
+-- | Type of the field.
+sfsFieldType :: Lens' SchemaFieldSpec (Maybe Text)
+sfsFieldType
+  = lens _sfsFieldType (\ s a -> s{_sfsFieldType = a})
+
+-- | Name of the field.
+sfsFieldName :: Lens' SchemaFieldSpec (Maybe Text)
+sfsFieldName
+  = lens _sfsFieldName (\ s a -> s{_sfsFieldName = a})
+
+-- | Boolean specifying whether this is a multi-valued field or not.
+sfsMultiValued :: Lens' SchemaFieldSpec (Maybe Bool)
+sfsMultiValued
+  = lens _sfsMultiValued
+      (\ s a -> s{_sfsMultiValued = a})
+
+instance FromJSON SchemaFieldSpec where
+        parseJSON
+          = withObject "SchemaFieldSpec"
+              (\ o ->
+                 SchemaFieldSpec <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "admin#directory#schema#fieldspec")
+                     <*> (o .:? "numericIndexingSpec")
+                     <*> (o .:? "readAccessType" .!= "ALL_DOMAIN_USERS")
+                     <*> (o .:? "fieldId")
+                     <*> (o .:? "indexed" .!= True)
+                     <*> (o .:? "fieldType")
+                     <*> (o .:? "fieldName")
+                     <*> (o .:? "multiValued"))
+
+instance ToJSON SchemaFieldSpec where
+        toJSON SchemaFieldSpec{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _sfsEtag, Just ("kind" .= _sfsKind),
+                  ("numericIndexingSpec" .=) <$>
+                    _sfsNumericIndexingSpec,
+                  Just ("readAccessType" .= _sfsReadAccessType),
+                  ("fieldId" .=) <$> _sfsFieldId,
+                  Just ("indexed" .= _sfsIndexed),
+                  ("fieldType" .=) <$> _sfsFieldType,
+                  ("fieldName" .=) <$> _sfsFieldName,
+                  ("multiValued" .=) <$> _sfsMultiValued])
+
+-- | JSON response template for List Chrome OS Devices operation in Directory
+-- API.
+--
+-- /See:/ 'chromeOSDevices' smart constructor.
+data ChromeOSDevices = ChromeOSDevices
+    { _cosdEtag            :: !(Maybe Text)
+    , _cosdNextPageToken   :: !(Maybe Text)
+    , _cosdKind            :: !Text
+    , _cosdChromeosDevices :: !(Maybe [ChromeOSDevice])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ChromeOSDevices' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cosdEtag'
+--
+-- * 'cosdNextPageToken'
+--
+-- * 'cosdKind'
+--
+-- * 'cosdChromeosDevices'
+chromeOSDevices
+    :: ChromeOSDevices
+chromeOSDevices =
+    ChromeOSDevices
+    { _cosdEtag = Nothing
+    , _cosdNextPageToken = Nothing
+    , _cosdKind = "admin#directory#chromeosdevices"
+    , _cosdChromeosDevices = Nothing
+    }
+
+-- | ETag of the resource.
+cosdEtag :: Lens' ChromeOSDevices (Maybe Text)
+cosdEtag = lens _cosdEtag (\ s a -> s{_cosdEtag = a})
+
+-- | Token used to access next page of this result.
+cosdNextPageToken :: Lens' ChromeOSDevices (Maybe Text)
+cosdNextPageToken
+  = lens _cosdNextPageToken
+      (\ s a -> s{_cosdNextPageToken = a})
+
+-- | Kind of resource this is.
+cosdKind :: Lens' ChromeOSDevices Text
+cosdKind = lens _cosdKind (\ s a -> s{_cosdKind = a})
+
+-- | List of Chrome OS Device objects.
+cosdChromeosDevices :: Lens' ChromeOSDevices [ChromeOSDevice]
+cosdChromeosDevices
+  = lens _cosdChromeosDevices
+      (\ s a -> s{_cosdChromeosDevices = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ChromeOSDevices where
+        parseJSON
+          = withObject "ChromeOSDevices"
+              (\ o ->
+                 ChromeOSDevices <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "admin#directory#chromeosdevices")
+                     <*> (o .:? "chromeosdevices" .!= mempty))
+
+instance ToJSON ChromeOSDevices where
+        toJSON ChromeOSDevices{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _cosdEtag,
+                  ("nextPageToken" .=) <$> _cosdNextPageToken,
+                  Just ("kind" .= _cosdKind),
+                  ("chromeosdevices" .=) <$> _cosdChromeosDevices])
 
 -- | JSON template for an externalId entry.
 --
@@ -4359,96 +4463,3 @@ instance ToJSON Asps where
               (catMaybes
                  [("etag" .=) <$> _a1Etag, Just ("kind" .= _a1Kind),
                   ("items" .=) <$> _a1Items])
-
--- | Custom fields of the user.
---
--- /See:/ 'customSchemas' smart constructor.
-data CustomSchemas =
-    CustomSchemas
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CustomSchemas' with the minimum fields required to make a request.
---
-customSchemas
-    :: CustomSchemas
-customSchemas = CustomSchemas
-
-instance FromJSON CustomSchemas where
-        parseJSON
-          = withObject "CustomSchemas"
-              (\ o -> pure CustomSchemas)
-
-instance ToJSON CustomSchemas where
-        toJSON = const (Object mempty)
-
--- | JSON response template for List Chrome OS Devices operation in Directory
--- API.
---
--- /See:/ 'chromeOSDevices' smart constructor.
-data ChromeOSDevices = ChromeOSDevices
-    { _cosdEtag            :: !(Maybe Text)
-    , _cosdNextPageToken   :: !(Maybe Text)
-    , _cosdKind            :: !Text
-    , _cosdChromeosDevices :: !(Maybe [ChromeOSDevice])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ChromeOSDevices' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cosdEtag'
---
--- * 'cosdNextPageToken'
---
--- * 'cosdKind'
---
--- * 'cosdChromeosDevices'
-chromeOSDevices
-    :: ChromeOSDevices
-chromeOSDevices =
-    ChromeOSDevices
-    { _cosdEtag = Nothing
-    , _cosdNextPageToken = Nothing
-    , _cosdKind = "admin#directory#chromeosdevices"
-    , _cosdChromeosDevices = Nothing
-    }
-
--- | ETag of the resource.
-cosdEtag :: Lens' ChromeOSDevices (Maybe Text)
-cosdEtag = lens _cosdEtag (\ s a -> s{_cosdEtag = a})
-
--- | Token used to access next page of this result.
-cosdNextPageToken :: Lens' ChromeOSDevices (Maybe Text)
-cosdNextPageToken
-  = lens _cosdNextPageToken
-      (\ s a -> s{_cosdNextPageToken = a})
-
--- | Kind of resource this is.
-cosdKind :: Lens' ChromeOSDevices Text
-cosdKind = lens _cosdKind (\ s a -> s{_cosdKind = a})
-
--- | List of Chrome OS Device objects.
-cosdChromeosDevices :: Lens' ChromeOSDevices [ChromeOSDevice]
-cosdChromeosDevices
-  = lens _cosdChromeosDevices
-      (\ s a -> s{_cosdChromeosDevices = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON ChromeOSDevices where
-        parseJSON
-          = withObject "ChromeOSDevices"
-              (\ o ->
-                 ChromeOSDevices <$>
-                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "admin#directory#chromeosdevices")
-                     <*> (o .:? "chromeosdevices" .!= mempty))
-
-instance ToJSON ChromeOSDevices where
-        toJSON ChromeOSDevices{..}
-          = object
-              (catMaybes
-                 [("etag" .=) <$> _cosdEtag,
-                  ("nextPageToken" .=) <$> _cosdNextPageToken,
-                  Just ("kind" .= _cosdKind),
-                  ("chromeosdevices" .=) <$> _cosdChromeosDevices])

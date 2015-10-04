@@ -17,8 +17,294 @@ module Network.Google.Books.Types.Sum where
 
 import           Network.Google.Prelude
 
+-- | Restrict information returned to a set of selected fields.
+data VolumesListProjection
+    = Full
+      -- ^ @full@
+      -- Includes all volume data.
+    | Lite
+      -- ^ @lite@
+      -- Includes a subset of fields in volumeInfo and accessInfo.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable VolumesListProjection
+
+instance FromText VolumesListProjection where
+    fromText = \case
+        "full" -> Just Full
+        "lite" -> Just Lite
+        _ -> Nothing
+
+instance ToText VolumesListProjection where
+    toText = \case
+        Full -> "full"
+        Lite -> "lite"
+
+instance FromJSON VolumesListProjection where
+    parseJSON = parseJSONText "VolumesListProjection"
+
+instance ToJSON VolumesListProjection where
+    toJSON = toJSONText
+
+-- | Restrict information returned to a set of selected fields.
+data MyLibraryBookshelvesVolumesListProjection
+    = MLBVLPFull
+      -- ^ @full@
+      -- Includes all volume data.
+    | MLBVLPLite
+      -- ^ @lite@
+      -- Includes a subset of fields in volumeInfo and accessInfo.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable MyLibraryBookshelvesVolumesListProjection
+
+instance FromText MyLibraryBookshelvesVolumesListProjection where
+    fromText = \case
+        "full" -> Just MLBVLPFull
+        "lite" -> Just MLBVLPLite
+        _ -> Nothing
+
+instance ToText MyLibraryBookshelvesVolumesListProjection where
+    toText = \case
+        MLBVLPFull -> "full"
+        MLBVLPLite -> "lite"
+
+instance FromJSON MyLibraryBookshelvesVolumesListProjection where
+    parseJSON = parseJSONText "MyLibraryBookshelvesVolumesListProjection"
+
+instance ToJSON MyLibraryBookshelvesVolumesListProjection where
+    toJSON = toJSONText
+
+-- | Sort search results.
+data VolumesListOrderBy
+    = Newest
+      -- ^ @newest@
+      -- Most recently published.
+    | Relevance
+      -- ^ @relevance@
+      -- Relevance to search terms.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable VolumesListOrderBy
+
+instance FromText VolumesListOrderBy where
+    fromText = \case
+        "newest" -> Just Newest
+        "relevance" -> Just Relevance
+        _ -> Nothing
+
+instance ToText VolumesListOrderBy where
+    toText = \case
+        Newest -> "newest"
+        Relevance -> "relevance"
+
+instance FromJSON VolumesListOrderBy where
+    parseJSON = parseJSONText "VolumesListOrderBy"
+
+instance ToJSON VolumesListOrderBy where
+    toJSON = toJSONText
+
+-- | Restrict search to this user\'s library.
+data VolumesListLibraryRestrict
+    = MyLibrary
+      -- ^ @my-library@
+      -- Restrict to the user\'s library, any shelf.
+    | NoRestrict
+      -- ^ @no-restrict@
+      -- Do not restrict based on user\'s library.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable VolumesListLibraryRestrict
+
+instance FromText VolumesListLibraryRestrict where
+    fromText = \case
+        "my-library" -> Just MyLibrary
+        "no-restrict" -> Just NoRestrict
+        _ -> Nothing
+
+instance ToText VolumesListLibraryRestrict where
+    toText = \case
+        MyLibrary -> "my-library"
+        NoRestrict -> "no-restrict"
+
+instance FromJSON VolumesListLibraryRestrict where
+    parseJSON = parseJSONText "VolumesListLibraryRestrict"
+
+instance ToJSON VolumesListLibraryRestrict where
+    toJSON = toJSONText
+
+-- | The reason for which the book is removed from the library.
+data MyLibraryBookshelvesRemoveVolumeReason
+    = Onboarding
+      -- ^ @ONBOARDING@
+      -- Samples removed from the Onboarding flow.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable MyLibraryBookshelvesRemoveVolumeReason
+
+instance FromText MyLibraryBookshelvesRemoveVolumeReason where
+    fromText = \case
+        "ONBOARDING" -> Just Onboarding
+        _ -> Nothing
+
+instance ToText MyLibraryBookshelvesRemoveVolumeReason where
+    toText = \case
+        Onboarding -> "ONBOARDING"
+
+instance FromJSON MyLibraryBookshelvesRemoveVolumeReason where
+    parseJSON = parseJSONText "MyLibraryBookshelvesRemoveVolumeReason"
+
+instance ToJSON MyLibraryBookshelvesRemoveVolumeReason where
+    toJSON = toJSONText
+
+-- | The maximum allowed maturity rating of returned volumes. Books with a
+-- higher maturity rating are filtered out.
+data OnboardingListCategoryVolumesMaxAllowedMaturityRating
+    = Mature
+      -- ^ @mature@
+      -- Show books which are rated mature or lower.
+    | NotMature
+      -- ^ @not-mature@
+      -- Show books which are rated not mature.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable OnboardingListCategoryVolumesMaxAllowedMaturityRating
+
+instance FromText OnboardingListCategoryVolumesMaxAllowedMaturityRating where
+    fromText = \case
+        "mature" -> Just Mature
+        "not-mature" -> Just NotMature
+        _ -> Nothing
+
+instance ToText OnboardingListCategoryVolumesMaxAllowedMaturityRating where
+    toText = \case
+        Mature -> "mature"
+        NotMature -> "not-mature"
+
+instance FromJSON OnboardingListCategoryVolumesMaxAllowedMaturityRating where
+    parseJSON = parseJSONText "OnboardingListCategoryVolumesMaxAllowedMaturityRating"
+
+instance ToJSON OnboardingListCategoryVolumesMaxAllowedMaturityRating where
+    toJSON = toJSONText
+
+-- | Restrict to volumes by download availability.
+data VolumesListDownload
+    = Epub
+      -- ^ @epub@
+      -- All volumes with epub.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable VolumesListDownload
+
+instance FromText VolumesListDownload where
+    fromText = \case
+        "epub" -> Just Epub
+        _ -> Nothing
+
+instance ToText VolumesListDownload where
+    toText = \case
+        Epub -> "epub"
+
+instance FromJSON VolumesListDownload where
+    parseJSON = parseJSONText "VolumesListDownload"
+
+instance ToJSON VolumesListDownload where
+    toJSON = toJSONText
+
+-- | Restrict information returned to a set of selected fields.
+data VolumesGetProjection
+    = VGPFull
+      -- ^ @full@
+      -- Includes all volume data.
+    | VGPLite
+      -- ^ @lite@
+      -- Includes a subset of fields in volumeInfo and accessInfo.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable VolumesGetProjection
+
+instance FromText VolumesGetProjection where
+    fromText = \case
+        "full" -> Just VGPFull
+        "lite" -> Just VGPLite
+        _ -> Nothing
+
+instance ToText VolumesGetProjection where
+    toText = \case
+        VGPFull -> "full"
+        VGPLite -> "lite"
+
+instance FromJSON VolumesGetProjection where
+    parseJSON = parseJSONText "VolumesGetProjection"
+
+instance ToJSON VolumesGetProjection where
+    toJSON = toJSONText
+
+-- | Association type.
+data VolumesAssociatedListAssociation
+    = EndOfSample
+      -- ^ @end-of-sample@
+      -- Recommendations for display end-of-sample.
+    | EndOfVolume
+      -- ^ @end-of-volume@
+      -- Recommendations for display end-of-volume.
+    | RelatedForPlay
+      -- ^ @related-for-play@
+      -- Related volumes for Play Store.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable VolumesAssociatedListAssociation
+
+instance FromText VolumesAssociatedListAssociation where
+    fromText = \case
+        "end-of-sample" -> Just EndOfSample
+        "end-of-volume" -> Just EndOfVolume
+        "related-for-play" -> Just RelatedForPlay
+        _ -> Nothing
+
+instance ToText VolumesAssociatedListAssociation where
+    toText = \case
+        EndOfSample -> "end-of-sample"
+        EndOfVolume -> "end-of-volume"
+        RelatedForPlay -> "related-for-play"
+
+instance FromJSON VolumesAssociatedListAssociation where
+    parseJSON = parseJSONText "VolumesAssociatedListAssociation"
+
+instance ToJSON VolumesAssociatedListAssociation where
+    toJSON = toJSONText
+
+-- | Rating to be given to the volume.
+data VolumesRecommendedRateRating
+    = HaveIt
+      -- ^ @HAVE_IT@
+      -- Rating indicating a dismissal due to ownership.
+    | NotInterested
+      -- ^ @NOT_INTERESTED@
+      -- Rating indicating a negative dismissal of a volume.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable VolumesRecommendedRateRating
+
+instance FromText VolumesRecommendedRateRating where
+    fromText = \case
+        "HAVE_IT" -> Just HaveIt
+        "NOT_INTERESTED" -> Just NotInterested
+        _ -> Nothing
+
+instance ToText VolumesRecommendedRateRating where
+    toText = \case
+        HaveIt -> "HAVE_IT"
+        NotInterested -> "NOT_INTERESTED"
+
+instance FromJSON VolumesRecommendedRateRating where
+    parseJSON = parseJSONText "VolumesRecommendedRateRating"
+
+instance ToJSON VolumesRecommendedRateRating where
+    toJSON = toJSONText
+
 -- | The processing state of the user uploaded volumes to be returned.
-data ProcessingState
+data VolumesUserUploadedListProcessingState
     = CompletedFailed
       -- ^ @COMPLETED_FAILED@
       -- The volume processing hase failed.
@@ -30,29 +316,191 @@ data ProcessingState
       -- The volume processing is not completed.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable ProcessingState
+instance Hashable VolumesUserUploadedListProcessingState
 
-instance FromText ProcessingState where
+instance FromText VolumesUserUploadedListProcessingState where
     fromText = \case
         "COMPLETED_FAILED" -> Just CompletedFailed
         "COMPLETED_SUCCESS" -> Just CompletedSuccess
         "RUNNING" -> Just Running
         _ -> Nothing
 
-instance ToText ProcessingState where
+instance ToText VolumesUserUploadedListProcessingState where
     toText = \case
         CompletedFailed -> "COMPLETED_FAILED"
         CompletedSuccess -> "COMPLETED_SUCCESS"
         Running -> "RUNNING"
 
-instance FromJSON ProcessingState where
-    parseJSON = parseJSONText "ProcessingState"
+instance FromJSON VolumesUserUploadedListProcessingState where
+    parseJSON = parseJSONText "VolumesUserUploadedListProcessingState"
 
-instance ToJSON ProcessingState where
+instance ToJSON VolumesUserUploadedListProcessingState where
+    toJSON = toJSONText
+
+-- | List of features supported by the client, i.e., \'RENTALS\'
+data MyConfigSyncVolumeLicensesFeatures
+    = Rentals
+      -- ^ @RENTALS@
+      -- Client supports rentals.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable MyConfigSyncVolumeLicensesFeatures
+
+instance FromText MyConfigSyncVolumeLicensesFeatures where
+    fromText = \case
+        "RENTALS" -> Just Rentals
+        _ -> Nothing
+
+instance ToText MyConfigSyncVolumeLicensesFeatures where
+    toText = \case
+        Rentals -> "RENTALS"
+
+instance FromJSON MyConfigSyncVolumeLicensesFeatures where
+    parseJSON = parseJSONText "MyConfigSyncVolumeLicensesFeatures"
+
+instance ToJSON MyConfigSyncVolumeLicensesFeatures where
+    toJSON = toJSONText
+
+-- | The maximum allowed maturity rating of returned recommendations. Books
+-- with a higher maturity rating are filtered out.
+data VolumesAssociatedListMaxAllowedMaturityRating
+    = VALMAMRMature
+      -- ^ @mature@
+      -- Show books which are rated mature or lower.
+    | VALMAMRNotMature
+      -- ^ @not-mature@
+      -- Show books which are rated not mature.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable VolumesAssociatedListMaxAllowedMaturityRating
+
+instance FromText VolumesAssociatedListMaxAllowedMaturityRating where
+    fromText = \case
+        "mature" -> Just VALMAMRMature
+        "not-mature" -> Just VALMAMRNotMature
+        _ -> Nothing
+
+instance ToText VolumesAssociatedListMaxAllowedMaturityRating where
+    toText = \case
+        VALMAMRMature -> "mature"
+        VALMAMRNotMature -> "not-mature"
+
+instance FromJSON VolumesAssociatedListMaxAllowedMaturityRating where
+    parseJSON = parseJSONText "VolumesAssociatedListMaxAllowedMaturityRating"
+
+instance ToJSON VolumesAssociatedListMaxAllowedMaturityRating where
+    toJSON = toJSONText
+
+-- | Filter search results.
+data VolumesListFilter
+    = VLFEbooks
+      -- ^ @ebooks@
+      -- All Google eBooks.
+    | VLFFreeEbooks
+      -- ^ @free-ebooks@
+      -- Google eBook with full volume text viewability.
+    | VLFFull
+      -- ^ @full@
+      -- Public can view entire volume text.
+    | VLFPaidEbooks
+      -- ^ @paid-ebooks@
+      -- Google eBook with a price.
+    | VLFPartial
+      -- ^ @partial@
+      -- Public able to see parts of text.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable VolumesListFilter
+
+instance FromText VolumesListFilter where
+    fromText = \case
+        "ebooks" -> Just VLFEbooks
+        "free-ebooks" -> Just VLFFreeEbooks
+        "full" -> Just VLFFull
+        "paid-ebooks" -> Just VLFPaidEbooks
+        "partial" -> Just VLFPartial
+        _ -> Nothing
+
+instance ToText VolumesListFilter where
+    toText = \case
+        VLFEbooks -> "ebooks"
+        VLFFreeEbooks -> "free-ebooks"
+        VLFFull -> "full"
+        VLFPaidEbooks -> "paid-ebooks"
+        VLFPartial -> "partial"
+
+instance FromJSON VolumesListFilter where
+    parseJSON = parseJSONText "VolumesListFilter"
+
+instance ToJSON VolumesListFilter where
+    toJSON = toJSONText
+
+-- | The maximum allowed maturity rating of returned recommendations. Books
+-- with a higher maturity rating are filtered out.
+data VolumesRecommendedListMaxAllowedMaturityRating
+    = VRLMAMRMature
+      -- ^ @mature@
+      -- Show books which are rated mature or lower.
+    | VRLMAMRNotMature
+      -- ^ @not-mature@
+      -- Show books which are rated not mature.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable VolumesRecommendedListMaxAllowedMaturityRating
+
+instance FromText VolumesRecommendedListMaxAllowedMaturityRating where
+    fromText = \case
+        "mature" -> Just VRLMAMRMature
+        "not-mature" -> Just VRLMAMRNotMature
+        _ -> Nothing
+
+instance ToText VolumesRecommendedListMaxAllowedMaturityRating where
+    toText = \case
+        VRLMAMRMature -> "mature"
+        VRLMAMRNotMature -> "not-mature"
+
+instance FromJSON VolumesRecommendedListMaxAllowedMaturityRating where
+    parseJSON = parseJSONText "VolumesRecommendedListMaxAllowedMaturityRating"
+
+instance ToJSON VolumesRecommendedListMaxAllowedMaturityRating where
+    toJSON = toJSONText
+
+-- | The reason for which the book is added to the library.
+data MyLibraryBookshelvesAddVolumeReason
+    = MLBAVRIosPrex
+      -- ^ @IOS_PREX@
+      -- Volumes added from the PREX flow on iOS.
+    | MLBAVRIosSearch
+      -- ^ @IOS_SEARCH@
+      -- Volumes added from the Search flow on iOS.
+    | MLBAVROnboarding
+      -- ^ @ONBOARDING@
+      -- Volumes added from the Onboarding flow.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable MyLibraryBookshelvesAddVolumeReason
+
+instance FromText MyLibraryBookshelvesAddVolumeReason where
+    fromText = \case
+        "IOS_PREX" -> Just MLBAVRIosPrex
+        "IOS_SEARCH" -> Just MLBAVRIosSearch
+        "ONBOARDING" -> Just MLBAVROnboarding
+        _ -> Nothing
+
+instance ToText MyLibraryBookshelvesAddVolumeReason where
+    toText = \case
+        MLBAVRIosPrex -> "IOS_PREX"
+        MLBAVRIosSearch -> "IOS_SEARCH"
+        MLBAVROnboarding -> "ONBOARDING"
+
+instance FromJSON MyLibraryBookshelvesAddVolumeReason where
+    parseJSON = parseJSONText "MyLibraryBookshelvesAddVolumeReason"
+
+instance ToJSON MyLibraryBookshelvesAddVolumeReason where
     toJSON = toJSONText
 
 -- | How the book was aquired
-data AcquireMethod
+data VolumesMybooksListAcquireMethod
     = PreOrdered
       -- ^ @PREORDERED@
       -- Preordered books (not yet available)
@@ -76,9 +524,9 @@ data AcquireMethod
       -- User uploaded books
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable AcquireMethod
+instance Hashable VolumesMybooksListAcquireMethod
 
-instance FromText AcquireMethod where
+instance FromText VolumesMybooksListAcquireMethod where
     fromText = \case
         "PREORDERED" -> Just PreOrdered
         "PREVIOUSLY_RENTED" -> Just PreviouslyRented
@@ -89,7 +537,7 @@ instance FromText AcquireMethod where
         "UPLOADED" -> Just Uploaded
         _ -> Nothing
 
-instance ToText AcquireMethod where
+instance ToText VolumesMybooksListAcquireMethod where
     toText = \case
         PreOrdered -> "PREORDERED"
         PreviouslyRented -> "PREVIOUSLY_RENTED"
@@ -99,255 +547,118 @@ instance ToText AcquireMethod where
         Sample -> "SAMPLE"
         Uploaded -> "UPLOADED"
 
-instance FromJSON AcquireMethod where
-    parseJSON = parseJSONText "AcquireMethod"
+instance FromJSON VolumesMybooksListAcquireMethod where
+    parseJSON = parseJSONText "VolumesMybooksListAcquireMethod"
 
-instance ToJSON AcquireMethod where
+instance ToJSON VolumesMybooksListAcquireMethod where
     toJSON = toJSONText
 
--- | Rating to be given to the volume.
-data Rating
-    = HaveIt
-      -- ^ @HAVE_IT@
-      -- Rating indicating a dismissal due to ownership.
-    | NotInterested
-      -- ^ @NOT_INTERESTED@
-      -- Rating indicating a negative dismissal of a volume.
+-- | Restrict to books or magazines.
+data VolumesListPrintType
+    = All
+      -- ^ @all@
+      -- All volume content types.
+    | Books
+      -- ^ @books@
+      -- Just books.
+    | Magazines
+      -- ^ @magazines@
+      -- Just magazines.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable Rating
+instance Hashable VolumesListPrintType
 
-instance FromText Rating where
+instance FromText VolumesListPrintType where
     fromText = \case
-        "HAVE_IT" -> Just HaveIt
-        "NOT_INTERESTED" -> Just NotInterested
+        "all" -> Just All
+        "books" -> Just Books
+        "magazines" -> Just Magazines
         _ -> Nothing
 
-instance ToText Rating where
+instance ToText VolumesListPrintType where
     toText = \case
-        HaveIt -> "HAVE_IT"
-        NotInterested -> "NOT_INTERESTED"
+        All -> "all"
+        Books -> "books"
+        Magazines -> "magazines"
 
-instance FromJSON Rating where
-    parseJSON = parseJSONText "Rating"
+instance FromJSON VolumesListPrintType where
+    parseJSON = parseJSONText "VolumesListPrintType"
 
-instance ToJSON Rating where
+instance ToJSON VolumesListPrintType where
     toJSON = toJSONText
 
--- | Restrict information returned to a set of selected fields.
-data BooksVolumesGetProjection
-    = Full
-      -- ^ @full@
-      -- Includes all volume data.
-    | Lite
-      -- ^ @lite@
-      -- Includes a subset of fields in volumeInfo and accessInfo.
+-- | The processing state of the user uploaded volumes to be returned.
+-- Applicable only if the UPLOADED is specified in the acquireMethod.
+data VolumesMybooksListProcessingState
+    = VMLPSCompletedFailed
+      -- ^ @COMPLETED_FAILED@
+      -- The volume processing hase failed.
+    | VMLPSCompletedSuccess
+      -- ^ @COMPLETED_SUCCESS@
+      -- The volume processing was completed.
+    | VMLPSRunning
+      -- ^ @RUNNING@
+      -- The volume processing is not completed.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable BooksVolumesGetProjection
+instance Hashable VolumesMybooksListProcessingState
 
-instance FromText BooksVolumesGetProjection where
+instance FromText VolumesMybooksListProcessingState where
     fromText = \case
-        "full" -> Just Full
-        "lite" -> Just Lite
+        "COMPLETED_FAILED" -> Just VMLPSCompletedFailed
+        "COMPLETED_SUCCESS" -> Just VMLPSCompletedSuccess
+        "RUNNING" -> Just VMLPSRunning
         _ -> Nothing
 
-instance ToText BooksVolumesGetProjection where
+instance ToText VolumesMybooksListProcessingState where
     toText = \case
-        Full -> "full"
-        Lite -> "lite"
+        VMLPSCompletedFailed -> "COMPLETED_FAILED"
+        VMLPSCompletedSuccess -> "COMPLETED_SUCCESS"
+        VMLPSRunning -> "RUNNING"
 
-instance FromJSON BooksVolumesGetProjection where
-    parseJSON = parseJSONText "BooksVolumesGetProjection"
+instance FromJSON VolumesMybooksListProcessingState where
+    parseJSON = parseJSONText "VolumesMybooksListProcessingState"
 
-instance ToJSON BooksVolumesGetProjection where
-    toJSON = toJSONText
-
--- | Sort search results.
-data OrderBy
-    = Newest
-      -- ^ @newest@
-      -- Most recently published.
-    | Relevance
-      -- ^ @relevance@
-      -- Relevance to search terms.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable OrderBy
-
-instance FromText OrderBy where
-    fromText = \case
-        "newest" -> Just Newest
-        "relevance" -> Just Relevance
-        _ -> Nothing
-
-instance ToText OrderBy where
-    toText = \case
-        Newest -> "newest"
-        Relevance -> "relevance"
-
-instance FromJSON OrderBy where
-    parseJSON = parseJSONText "OrderBy"
-
-instance ToJSON OrderBy where
+instance ToJSON VolumesMybooksListProcessingState where
     toJSON = toJSONText
 
 -- | The type of access license to request. If not specified, the default is
 -- BOTH.
-data LicenseTypes
-    = LTBoth
+data MyConfigRequestAccessLicenseTypes
+    = Both
       -- ^ @BOTH@
       -- Both concurrent and download licenses.
-    | LTConcurrent
+    | Concurrent
       -- ^ @CONCURRENT@
       -- Concurrent access license.
-    | LTDownload
+    | Download
       -- ^ @DOWNLOAD@
       -- Offline download access license.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable LicenseTypes
+instance Hashable MyConfigRequestAccessLicenseTypes
 
-instance FromText LicenseTypes where
+instance FromText MyConfigRequestAccessLicenseTypes where
     fromText = \case
-        "BOTH" -> Just LTBoth
-        "CONCURRENT" -> Just LTConcurrent
-        "DOWNLOAD" -> Just LTDownload
+        "BOTH" -> Just Both
+        "CONCURRENT" -> Just Concurrent
+        "DOWNLOAD" -> Just Download
         _ -> Nothing
 
-instance ToText LicenseTypes where
+instance ToText MyConfigRequestAccessLicenseTypes where
     toText = \case
-        LTBoth -> "BOTH"
-        LTConcurrent -> "CONCURRENT"
-        LTDownload -> "DOWNLOAD"
+        Both -> "BOTH"
+        Concurrent -> "CONCURRENT"
+        Download -> "DOWNLOAD"
 
-instance FromJSON LicenseTypes where
-    parseJSON = parseJSONText "LicenseTypes"
+instance FromJSON MyConfigRequestAccessLicenseTypes where
+    parseJSON = parseJSONText "MyConfigRequestAccessLicenseTypes"
 
-instance ToJSON LicenseTypes where
-    toJSON = toJSONText
-
--- | The maximum allowed maturity rating of returned volumes. Books with a
--- higher maturity rating are filtered out.
-data MaxAllowedMaturityRating
-    = Mature
-      -- ^ @mature@
-      -- Show books which are rated mature or lower.
-    | NotMature
-      -- ^ @not-mature@
-      -- Show books which are rated not mature.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable MaxAllowedMaturityRating
-
-instance FromText MaxAllowedMaturityRating where
-    fromText = \case
-        "mature" -> Just Mature
-        "not-mature" -> Just NotMature
-        _ -> Nothing
-
-instance ToText MaxAllowedMaturityRating where
-    toText = \case
-        Mature -> "mature"
-        NotMature -> "not-mature"
-
-instance FromJSON MaxAllowedMaturityRating where
-    parseJSON = parseJSONText "MaxAllowedMaturityRating"
-
-instance ToJSON MaxAllowedMaturityRating where
-    toJSON = toJSONText
-
--- | Restrict search to this user\'s library.
-data LibraryRestrict
-    = MyLibrary
-      -- ^ @my-library@
-      -- Restrict to the user\'s library, any shelf.
-    | NoRestrict
-      -- ^ @no-restrict@
-      -- Do not restrict based on user\'s library.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable LibraryRestrict
-
-instance FromText LibraryRestrict where
-    fromText = \case
-        "my-library" -> Just MyLibrary
-        "no-restrict" -> Just NoRestrict
-        _ -> Nothing
-
-instance ToText LibraryRestrict where
-    toText = \case
-        MyLibrary -> "my-library"
-        NoRestrict -> "no-restrict"
-
-instance FromJSON LibraryRestrict where
-    parseJSON = parseJSONText "LibraryRestrict"
-
-instance ToJSON LibraryRestrict where
-    toJSON = toJSONText
-
--- | The maximum allowed maturity rating of returned recommendations. Books
--- with a higher maturity rating are filtered out.
-data BooksVolumesAssociatedListMaxAllowedMaturityRating
-    = BVALMAMRMature
-      -- ^ @mature@
-      -- Show books which are rated mature or lower.
-    | BVALMAMRNotMature
-      -- ^ @not-mature@
-      -- Show books which are rated not mature.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable BooksVolumesAssociatedListMaxAllowedMaturityRating
-
-instance FromText BooksVolumesAssociatedListMaxAllowedMaturityRating where
-    fromText = \case
-        "mature" -> Just BVALMAMRMature
-        "not-mature" -> Just BVALMAMRNotMature
-        _ -> Nothing
-
-instance ToText BooksVolumesAssociatedListMaxAllowedMaturityRating where
-    toText = \case
-        BVALMAMRMature -> "mature"
-        BVALMAMRNotMature -> "not-mature"
-
-instance FromJSON BooksVolumesAssociatedListMaxAllowedMaturityRating where
-    parseJSON = parseJSONText "BooksVolumesAssociatedListMaxAllowedMaturityRating"
-
-instance ToJSON BooksVolumesAssociatedListMaxAllowedMaturityRating where
-    toJSON = toJSONText
-
--- | The maximum allowed maturity rating of returned recommendations. Books
--- with a higher maturity rating are filtered out.
-data BooksVolumesRecommendedListMaxAllowedMaturityRating
-    = BVRLMAMRMature
-      -- ^ @mature@
-      -- Show books which are rated mature or lower.
-    | BVRLMAMRNotMature
-      -- ^ @not-mature@
-      -- Show books which are rated not mature.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable BooksVolumesRecommendedListMaxAllowedMaturityRating
-
-instance FromText BooksVolumesRecommendedListMaxAllowedMaturityRating where
-    fromText = \case
-        "mature" -> Just BVRLMAMRMature
-        "not-mature" -> Just BVRLMAMRNotMature
-        _ -> Nothing
-
-instance ToText BooksVolumesRecommendedListMaxAllowedMaturityRating where
-    toText = \case
-        BVRLMAMRMature -> "mature"
-        BVRLMAMRNotMature -> "not-mature"
-
-instance FromJSON BooksVolumesRecommendedListMaxAllowedMaturityRating where
-    parseJSON = parseJSONText "BooksVolumesRecommendedListMaxAllowedMaturityRating"
-
-instance ToJSON BooksVolumesRecommendedListMaxAllowedMaturityRating where
+instance ToJSON MyConfigRequestAccessLicenseTypes where
     toJSON = toJSONText
 
 -- | Action that caused this reading position to be set.
-data Action
+data MyLibraryReadingPositionsSetPositionAction
     = Bookmark
       -- ^ @bookmark@
       -- User chose bookmark within volume.
@@ -368,9 +679,9 @@ data Action
       -- User chose search results within volume.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable Action
+instance Hashable MyLibraryReadingPositionsSetPositionAction
 
-instance FromText Action where
+instance FromText MyLibraryReadingPositionsSetPositionAction where
     fromText = \case
         "bookmark" -> Just Bookmark
         "chapter" -> Just Chapter
@@ -380,7 +691,7 @@ instance FromText Action where
         "search" -> Just Search
         _ -> Nothing
 
-instance ToText Action where
+instance ToText MyLibraryReadingPositionsSetPositionAction where
     toText = \case
         Bookmark -> "bookmark"
         Chapter -> "chapter"
@@ -389,319 +700,8 @@ instance ToText Action where
         Scroll -> "scroll"
         Search -> "search"
 
-instance FromJSON Action where
-    parseJSON = parseJSONText "Action"
+instance FromJSON MyLibraryReadingPositionsSetPositionAction where
+    parseJSON = parseJSONText "MyLibraryReadingPositionsSetPositionAction"
 
-instance ToJSON Action where
-    toJSON = toJSONText
-
--- | Restrict to volumes by download availability.
-data Download
-    = DEpub
-      -- ^ @epub@
-      -- All volumes with epub.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Download
-
-instance FromText Download where
-    fromText = \case
-        "epub" -> Just DEpub
-        _ -> Nothing
-
-instance ToText Download where
-    toText = \case
-        DEpub -> "epub"
-
-instance FromJSON Download where
-    parseJSON = parseJSONText "Download"
-
-instance ToJSON Download where
-    toJSON = toJSONText
-
--- | The reason for which the book is removed from the library.
-data Reason
-    = Onboarding
-      -- ^ @ONBOARDING@
-      -- Samples removed from the Onboarding flow.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Reason
-
-instance FromText Reason where
-    fromText = \case
-        "ONBOARDING" -> Just Onboarding
-        _ -> Nothing
-
-instance ToText Reason where
-    toText = \case
-        Onboarding -> "ONBOARDING"
-
-instance FromJSON Reason where
-    parseJSON = parseJSONText "Reason"
-
-instance ToJSON Reason where
-    toJSON = toJSONText
-
--- | The reason for which the book is added to the library.
-data BooksMyLibraryBookshelvesAddVolumeReason
-    = BMLBAVRIosPrex
-      -- ^ @IOS_PREX@
-      -- Volumes added from the PREX flow on iOS.
-    | BMLBAVRIosSearch
-      -- ^ @IOS_SEARCH@
-      -- Volumes added from the Search flow on iOS.
-    | BMLBAVROnboarding
-      -- ^ @ONBOARDING@
-      -- Volumes added from the Onboarding flow.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable BooksMyLibraryBookshelvesAddVolumeReason
-
-instance FromText BooksMyLibraryBookshelvesAddVolumeReason where
-    fromText = \case
-        "IOS_PREX" -> Just BMLBAVRIosPrex
-        "IOS_SEARCH" -> Just BMLBAVRIosSearch
-        "ONBOARDING" -> Just BMLBAVROnboarding
-        _ -> Nothing
-
-instance ToText BooksMyLibraryBookshelvesAddVolumeReason where
-    toText = \case
-        BMLBAVRIosPrex -> "IOS_PREX"
-        BMLBAVRIosSearch -> "IOS_SEARCH"
-        BMLBAVROnboarding -> "ONBOARDING"
-
-instance FromJSON BooksMyLibraryBookshelvesAddVolumeReason where
-    parseJSON = parseJSONText "BooksMyLibraryBookshelvesAddVolumeReason"
-
-instance ToJSON BooksMyLibraryBookshelvesAddVolumeReason where
-    toJSON = toJSONText
-
--- | List of features supported by the client, i.e., \'RENTALS\'
-data Features
-    = Rentals
-      -- ^ @RENTALS@
-      -- Client supports rentals.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Features
-
-instance FromText Features where
-    fromText = \case
-        "RENTALS" -> Just Rentals
-        _ -> Nothing
-
-instance ToText Features where
-    toText = \case
-        Rentals -> "RENTALS"
-
-instance FromJSON Features where
-    parseJSON = parseJSONText "Features"
-
-instance ToJSON Features where
-    toJSON = toJSONText
-
--- | Restrict information returned to a set of selected fields.
-data Projection
-    = PFull
-      -- ^ @full@
-      -- Includes all volume data.
-    | PLite
-      -- ^ @lite@
-      -- Includes a subset of fields in volumeInfo and accessInfo.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Projection
-
-instance FromText Projection where
-    fromText = \case
-        "full" -> Just PFull
-        "lite" -> Just PLite
-        _ -> Nothing
-
-instance ToText Projection where
-    toText = \case
-        PFull -> "full"
-        PLite -> "lite"
-
-instance FromJSON Projection where
-    parseJSON = parseJSONText "Projection"
-
-instance ToJSON Projection where
-    toJSON = toJSONText
-
--- | Filter search results.
-data Filter
-    = FEbooks
-      -- ^ @ebooks@
-      -- All Google eBooks.
-    | FFreeEbooks
-      -- ^ @free-ebooks@
-      -- Google eBook with full volume text viewability.
-    | FFull
-      -- ^ @full@
-      -- Public can view entire volume text.
-    | FPaidEbooks
-      -- ^ @paid-ebooks@
-      -- Google eBook with a price.
-    | FPartial
-      -- ^ @partial@
-      -- Public able to see parts of text.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Filter
-
-instance FromText Filter where
-    fromText = \case
-        "ebooks" -> Just FEbooks
-        "free-ebooks" -> Just FFreeEbooks
-        "full" -> Just FFull
-        "paid-ebooks" -> Just FPaidEbooks
-        "partial" -> Just FPartial
-        _ -> Nothing
-
-instance ToText Filter where
-    toText = \case
-        FEbooks -> "ebooks"
-        FFreeEbooks -> "free-ebooks"
-        FFull -> "full"
-        FPaidEbooks -> "paid-ebooks"
-        FPartial -> "partial"
-
-instance FromJSON Filter where
-    parseJSON = parseJSONText "Filter"
-
-instance ToJSON Filter where
-    toJSON = toJSONText
-
--- | Restrict information returned to a set of selected fields.
-data BooksVolumesListProjection
-    = BVLPFull
-      -- ^ @full@
-      -- Includes all volume data.
-    | BVLPLite
-      -- ^ @lite@
-      -- Includes a subset of fields in volumeInfo and accessInfo.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable BooksVolumesListProjection
-
-instance FromText BooksVolumesListProjection where
-    fromText = \case
-        "full" -> Just BVLPFull
-        "lite" -> Just BVLPLite
-        _ -> Nothing
-
-instance ToText BooksVolumesListProjection where
-    toText = \case
-        BVLPFull -> "full"
-        BVLPLite -> "lite"
-
-instance FromJSON BooksVolumesListProjection where
-    parseJSON = parseJSONText "BooksVolumesListProjection"
-
-instance ToJSON BooksVolumesListProjection where
-    toJSON = toJSONText
-
--- | The processing state of the user uploaded volumes to be returned.
--- Applicable only if the UPLOADED is specified in the acquireMethod.
-data BooksVolumesMybooksListProcessingState
-    = BVMLPSCompletedFailed
-      -- ^ @COMPLETED_FAILED@
-      -- The volume processing hase failed.
-    | BVMLPSCompletedSuccess
-      -- ^ @COMPLETED_SUCCESS@
-      -- The volume processing was completed.
-    | BVMLPSRunning
-      -- ^ @RUNNING@
-      -- The volume processing is not completed.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable BooksVolumesMybooksListProcessingState
-
-instance FromText BooksVolumesMybooksListProcessingState where
-    fromText = \case
-        "COMPLETED_FAILED" -> Just BVMLPSCompletedFailed
-        "COMPLETED_SUCCESS" -> Just BVMLPSCompletedSuccess
-        "RUNNING" -> Just BVMLPSRunning
-        _ -> Nothing
-
-instance ToText BooksVolumesMybooksListProcessingState where
-    toText = \case
-        BVMLPSCompletedFailed -> "COMPLETED_FAILED"
-        BVMLPSCompletedSuccess -> "COMPLETED_SUCCESS"
-        BVMLPSRunning -> "RUNNING"
-
-instance FromJSON BooksVolumesMybooksListProcessingState where
-    parseJSON = parseJSONText "BooksVolumesMybooksListProcessingState"
-
-instance ToJSON BooksVolumesMybooksListProcessingState where
-    toJSON = toJSONText
-
--- | Restrict to books or magazines.
-data PrintType
-    = All
-      -- ^ @all@
-      -- All volume content types.
-    | Books
-      -- ^ @books@
-      -- Just books.
-    | Magazines
-      -- ^ @magazines@
-      -- Just magazines.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable PrintType
-
-instance FromText PrintType where
-    fromText = \case
-        "all" -> Just All
-        "books" -> Just Books
-        "magazines" -> Just Magazines
-        _ -> Nothing
-
-instance ToText PrintType where
-    toText = \case
-        All -> "all"
-        Books -> "books"
-        Magazines -> "magazines"
-
-instance FromJSON PrintType where
-    parseJSON = parseJSONText "PrintType"
-
-instance ToJSON PrintType where
-    toJSON = toJSONText
-
--- | Association type.
-data Association
-    = EndOfSample
-      -- ^ @end-of-sample@
-      -- Recommendations for display end-of-sample.
-    | EndOfVolume
-      -- ^ @end-of-volume@
-      -- Recommendations for display end-of-volume.
-    | RelatedForPlay
-      -- ^ @related-for-play@
-      -- Related volumes for Play Store.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Association
-
-instance FromText Association where
-    fromText = \case
-        "end-of-sample" -> Just EndOfSample
-        "end-of-volume" -> Just EndOfVolume
-        "related-for-play" -> Just RelatedForPlay
-        _ -> Nothing
-
-instance ToText Association where
-    toText = \case
-        EndOfSample -> "end-of-sample"
-        EndOfVolume -> "end-of-volume"
-        RelatedForPlay -> "related-for-play"
-
-instance FromJSON Association where
-    parseJSON = parseJSONText "Association"
-
-instance ToJSON Association where
+instance ToJSON MyLibraryReadingPositionsSetPositionAction where
     toJSON = toJSONText

@@ -17,28 +17,13 @@ module Network.Google.Datastore.Types
     -- * Service URL
       datastoreURL
 
-    -- * ReadConsistency
-    , ReadConsistency (..)
+    -- * PropertyOrderDirection
+    , PropertyOrderDirection (..)
 
     -- * RollbackRequest
     , RollbackRequest
     , rollbackRequest
     , rrTransaction
-
-    -- * PartitionId
-    , PartitionId
-    , partitionId
-    , piNamespace
-    , piDatasetId
-
-    -- * QueryResultBatch
-    , QueryResultBatch
-    , queryResultBatch
-    , qrbSkippedResults
-    , qrbEntityResultType
-    , qrbEntityResults
-    , qrbMoreResults
-    , qrbEndCursor
 
     -- * Property
     , Property
@@ -56,18 +41,29 @@ module Network.Google.Datastore.Types
     , pMeaning
     , pBlobValue
 
-    -- * AllocateIdsRequest
-    , AllocateIdsRequest
-    , allocateIdsRequest
-    , airKeys
+    -- * PartitionId
+    , PartitionId
+    , partitionId
+    , piNamespace
+    , piDatasetId
+
+    -- * QueryResultBatch
+    , QueryResultBatch
+    , queryResultBatch
+    , qrbSkippedResults
+    , qrbEntityResultType
+    , qrbEntityResults
+    , qrbMoreResults
+    , qrbEndCursor
+
+    -- * EntityProperties
+    , EntityProperties
+    , entityProperties
 
     -- * BeginTransactionRequest
     , BeginTransactionRequest
     , beginTransactionRequest
     , btrIsolationLevel
-
-    -- * EntityResultType
-    , EntityResultType (..)
 
     -- * RunQueryRequest
     , RunQueryRequest
@@ -77,17 +73,25 @@ module Network.Google.Datastore.Types
     , rqrQuery
     , rqrReadOptions
 
+    -- * AllocateIdsRequest
+    , AllocateIdsRequest
+    , allocateIdsRequest
+    , airKeys
+
+    -- * QueryResultBatchEntityResultType
+    , QueryResultBatchEntityResultType (..)
+
     -- * CompositeFilter
     , CompositeFilter
     , compositeFilter
     , cfOperator
     , cfFilters
 
-    -- * Direction
-    , Direction (..)
+    -- * CompositeFilterOperator
+    , CompositeFilterOperator (..)
 
-    -- * Operator
-    , Operator (..)
+    -- * QueryResultBatchMoreResults
+    , QueryResultBatchMoreResults (..)
 
     -- * BeginTransactionResponse
     , BeginTransactionResponse
@@ -95,17 +99,17 @@ module Network.Google.Datastore.Types
     , btrTransaction
     , btrHeader
 
-    -- * RunQueryResponse
-    , RunQueryResponse
-    , runQueryResponse
-    , rqrBatch
-    , rqrHeader
-
     -- * MutationResult
     , MutationResult
     , mutationResult
     , mrInsertAutoIdKeys
     , mrIndexUpdates
+
+    -- * AllocateIdsResponse
+    , AllocateIdsResponse
+    , allocateIdsResponse
+    , aKeys
+    , aHeader
 
     -- * GqlQuery
     , GqlQuery
@@ -115,14 +119,11 @@ module Network.Google.Datastore.Types
     , gqQueryString
     , gqNameArgs
 
-    -- * AllocateIdsResponse
-    , AllocateIdsResponse
-    , allocateIdsResponse
-    , aKeys
-    , aHeader
-
-    -- * Mode
-    , Mode (..)
+    -- * RunQueryResponse
+    , RunQueryResponse
+    , runQueryResponse
+    , rqrBatch
+    , rqrHeader
 
     -- * Value
     , Value
@@ -146,8 +147,8 @@ module Network.Google.Datastore.Types
     , lrKeys
     , lrReadOptions
 
-    -- * AggregationFunction
-    , AggregationFunction (..)
+    -- * ReadOptionsReadConsistency
+    , ReadOptionsReadConsistency (..)
 
     -- * Mutation
     , Mutation
@@ -164,24 +165,24 @@ module Network.Google.Datastore.Types
     , responseHeader
     , rhKind
 
-    -- * GqlQueryArg
-    , GqlQueryArg
-    , gqlQueryArg
-    , gqaCursor
-    , gqaValue
-    , gqaName
-
-    -- * PropertyReference
-    , PropertyReference
-    , propertyReference
-    , prName
-
     -- * KeyPathElement
     , KeyPathElement
     , keyPathElement
     , kpeKind
     , kpeName
     , kpeId
+
+    -- * PropertyReference
+    , PropertyReference
+    , propertyReference
+    , prName
+
+    -- * GqlQueryArg
+    , GqlQueryArg
+    , gqlQueryArg
+    , gqaCursor
+    , gqaValue
+    , gqaName
 
     -- * Key
     , Key
@@ -192,29 +193,12 @@ module Network.Google.Datastore.Types
     -- * PropertyFilterOperator
     , PropertyFilterOperator (..)
 
-    -- * MoreResults
-    , MoreResults (..)
-
     -- * PropertyFilter
     , PropertyFilter
     , propertyFilter
     , pfProperty
     , pfOperator
     , pfValue
-
-    -- * IsolationLevel
-    , IsolationLevel (..)
-
-    -- * CommitResponse
-    , CommitResponse
-    , commitResponse
-    , crMutationResult
-    , crHeader
-
-    -- * EntityResult
-    , EntityResult
-    , entityResult
-    , erEntity
 
     -- * Query
     , Query
@@ -228,6 +212,17 @@ module Network.Google.Datastore.Types
     , qFilter
     , qKinds
     , qOrder
+
+    -- * EntityResult
+    , EntityResult
+    , entityResult
+    , erEntity
+
+    -- * CommitResponse
+    , CommitResponse
+    , commitResponse
+    , crMutationResult
+    , crHeader
 
     -- * KindExpression
     , KindExpression
@@ -257,6 +252,9 @@ module Network.Google.Datastore.Types
     , fCompositeFilter
     , fPropertyFilter
 
+    -- * BeginTransactionRequestIsolationLevel
+    , BeginTransactionRequestIsolationLevel (..)
+
     -- * CommitRequest
     , CommitRequest
     , commitRequest
@@ -264,6 +262,12 @@ module Network.Google.Datastore.Types
     , crMutation
     , crTransaction
     , crIgnoreReadOnly
+
+    -- * CommitRequestMode
+    , CommitRequestMode (..)
+
+    -- * PropertyExpressionAggregationFunction
+    , PropertyExpressionAggregationFunction (..)
 
     -- * Entity
     , Entity
@@ -284,10 +288,6 @@ module Network.Google.Datastore.Types
     , propertyOrder
     , poProperty
     , poDirection
-
-    -- * Properties
-    , Properties
-    , properties
     ) where
 
 import           Network.Google.Datastore.Types.Product

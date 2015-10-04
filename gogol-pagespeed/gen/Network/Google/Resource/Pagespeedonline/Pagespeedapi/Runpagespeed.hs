@@ -58,7 +58,9 @@ type PagespeedapiRunpagespeedResource =
          QueryParam "screenshot" Bool :>
            QueryParam "locale" Text :>
              QueryParam "filter_third_party_resources" Bool :>
-               QueryParam "strategy" Strategy :>
+               QueryParam "strategy"
+                 PagespeedapiRunpagespeedStrategy
+                 :>
                  QueryParams "rule" Text :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
@@ -81,7 +83,7 @@ data PagespeedapiRunpagespeed' = PagespeedapiRunpagespeed'
     , _prLocale                    :: !(Maybe Text)
     , _prURL                       :: !Text
     , _prFilterThirdPartyResources :: !Bool
-    , _prStrategy                  :: !(Maybe Strategy)
+    , _prStrategy                  :: !(Maybe PagespeedapiRunpagespeedStrategy)
     , _prRule                      :: !(Maybe [Text])
     , _prKey                       :: !(Maybe Key)
     , _prOAuthToken                :: !(Maybe OAuthToken)
@@ -173,7 +175,7 @@ prFilterThirdPartyResources
       (\ s a -> s{_prFilterThirdPartyResources = a})
 
 -- | The analysis strategy to use
-prStrategy :: Lens' PagespeedapiRunpagespeed' (Maybe Strategy)
+prStrategy :: Lens' PagespeedapiRunpagespeed' (Maybe PagespeedapiRunpagespeedStrategy)
 prStrategy
   = lens _prStrategy (\ s a -> s{_prStrategy = a})
 

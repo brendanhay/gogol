@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Creatives.Update
     , cuuQuotaUser
     , cuuPrettyPrint
     , cuuUserIP
-    , cuuProfileId
+    , cuuProFileId
     , cuuPayload
     , cuuKey
     , cuuOAuthToken
@@ -57,7 +57,8 @@ type CreativesUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Creative :> Put '[JSON] Creative
+                         ReqBody '[OctetStream] Creative :>
+                           Put '[JSON] Creative
 
 -- | Updates an existing creative.
 --
@@ -66,7 +67,7 @@ data CreativesUpdate' = CreativesUpdate'
     { _cuuQuotaUser   :: !(Maybe Text)
     , _cuuPrettyPrint :: !Bool
     , _cuuUserIP      :: !(Maybe Text)
-    , _cuuProfileId   :: !Int64
+    , _cuuProFileId   :: !Int64
     , _cuuPayload     :: !Creative
     , _cuuKey         :: !(Maybe Key)
     , _cuuOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +84,7 @@ data CreativesUpdate' = CreativesUpdate'
 --
 -- * 'cuuUserIP'
 --
--- * 'cuuProfileId'
+-- * 'cuuProFileId'
 --
 -- * 'cuuPayload'
 --
@@ -96,12 +97,12 @@ creativesUpdate'
     :: Int64 -- ^ 'profileId'
     -> Creative -- ^ 'payload'
     -> CreativesUpdate'
-creativesUpdate' pCuuProfileId_ pCuuPayload_ =
+creativesUpdate' pCuuProFileId_ pCuuPayload_ =
     CreativesUpdate'
     { _cuuQuotaUser = Nothing
     , _cuuPrettyPrint = True
     , _cuuUserIP = Nothing
-    , _cuuProfileId = pCuuProfileId_
+    , _cuuProFileId = pCuuProFileId_
     , _cuuPayload = pCuuPayload_
     , _cuuKey = Nothing
     , _cuuOAuthToken = Nothing
@@ -128,9 +129,9 @@ cuuUserIP
   = lens _cuuUserIP (\ s a -> s{_cuuUserIP = a})
 
 -- | User profile ID associated with this request.
-cuuProfileId :: Lens' CreativesUpdate' Int64
-cuuProfileId
-  = lens _cuuProfileId (\ s a -> s{_cuuProfileId = a})
+cuuProFileId :: Lens' CreativesUpdate' Int64
+cuuProFileId
+  = lens _cuuProFileId (\ s a -> s{_cuuProFileId = a})
 
 -- | Multipart request metadata.
 cuuPayload :: Lens' CreativesUpdate' Creative
@@ -162,7 +163,7 @@ instance GoogleRequest CreativesUpdate' where
         type Rs CreativesUpdate' = Creative
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativesUpdate'{..}
-          = go _cuuProfileId _cuuQuotaUser
+          = go _cuuProFileId _cuuQuotaUser
               (Just _cuuPrettyPrint)
               _cuuUserIP
               _cuuFields

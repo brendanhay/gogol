@@ -53,9 +53,7 @@ type EditsTestersPatchResource =
        "edits" :>
          Capture "editId" Text :>
            "testers" :>
-             Capture "track"
-               AndroidPublisherEditsTestersPatchTrack
-               :>
+             Capture "track" EditsTestersPatchTrack :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -63,13 +61,14 @@ type EditsTestersPatchResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Testers :> Patch '[JSON] Testers
+                             ReqBody '[OctetStream] Testers :>
+                               Patch '[JSON] Testers
 
 --
 -- /See:/ 'editsTestersPatch'' smart constructor.
 data EditsTestersPatch' = EditsTestersPatch'
     { _etptQuotaUser   :: !(Maybe Text)
-    , _etptTrack       :: !AndroidPublisherEditsTestersPatchTrack
+    , _etptTrack       :: !EditsTestersPatchTrack
     , _etptPrettyPrint :: !Bool
     , _etptPackageName :: !Text
     , _etptUserIP      :: !(Maybe Text)
@@ -104,7 +103,7 @@ data EditsTestersPatch' = EditsTestersPatch'
 --
 -- * 'etptFields'
 editsTestersPatch'
-    :: AndroidPublisherEditsTestersPatchTrack -- ^ 'track'
+    :: EditsTestersPatchTrack -- ^ 'track'
     -> Text -- ^ 'packageName'
     -> Testers -- ^ 'payload'
     -> Text -- ^ 'editId'
@@ -131,7 +130,7 @@ etptQuotaUser
   = lens _etptQuotaUser
       (\ s a -> s{_etptQuotaUser = a})
 
-etptTrack :: Lens' EditsTestersPatch' AndroidPublisherEditsTestersPatchTrack
+etptTrack :: Lens' EditsTestersPatch' EditsTestersPatchTrack
 etptTrack
   = lens _etptTrack (\ s a -> s{_etptTrack = a})
 

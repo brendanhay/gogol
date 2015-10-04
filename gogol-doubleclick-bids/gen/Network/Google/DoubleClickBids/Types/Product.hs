@@ -75,11 +75,11 @@ instance ToJSON ListReportsResponse where
 data QueryMetadata = QueryMetadata
     { _qmGoogleCloudStoragePathForLatestReport :: !(Maybe Text)
     , _qmLocale                                :: !(Maybe Text)
-    , _qmFormat                                :: !(Maybe Format)
+    , _qmFormat                                :: !(Maybe QueryMetadataFormat)
     , _qmGoogleDrivePathForLatestReport        :: !(Maybe Text)
     , _qmShareEmailAddress                     :: !(Maybe [Text])
     , _qmRunning                               :: !(Maybe Bool)
-    , _qmDataRange                             :: !(Maybe DataRange)
+    , _qmDataRange                             :: !(Maybe QueryMetadataDataRange)
     , _qmLatestReportRunTimeMs                 :: !(Maybe Int64)
     , _qmReportCount                           :: !(Maybe Int32)
     , _qmTitle                                 :: !(Maybe Text)
@@ -145,7 +145,7 @@ qmLocale :: Lens' QueryMetadata (Maybe Text)
 qmLocale = lens _qmLocale (\ s a -> s{_qmLocale = a})
 
 -- | Format of the generated report.
-qmFormat :: Lens' QueryMetadata (Maybe Format)
+qmFormat :: Lens' QueryMetadata (Maybe QueryMetadataFormat)
 qmFormat = lens _qmFormat (\ s a -> s{_qmFormat = a})
 
 -- | The path in Google Drive for the latest report.
@@ -169,7 +169,7 @@ qmRunning
   = lens _qmRunning (\ s a -> s{_qmRunning = a})
 
 -- | Range of report data.
-qmDataRange :: Lens' QueryMetadata (Maybe DataRange)
+qmDataRange :: Lens' QueryMetadata (Maybe QueryMetadataDataRange)
 qmDataRange
   = lens _qmDataRange (\ s a -> s{_qmDataRange = a})
 
@@ -231,110 +231,6 @@ instance ToJSON QueryMetadata where
                   ("reportCount" .=) <$> _qmReportCount,
                   ("title" .=) <$> _qmTitle,
                   ("sendNotification" .=) <$> _qmSendNotification])
-
--- | Request to upload line items.
---
--- /See:/ 'uploadLineItemsRequest' smart constructor.
-data UploadLineItemsRequest = UploadLineItemsRequest
-    { _ulirLineItems :: !(Maybe Text)
-    , _ulirFormat    :: !(Maybe UploadLineItemsRequestFormat)
-    , _ulirDryRun    :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'UploadLineItemsRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ulirLineItems'
---
--- * 'ulirFormat'
---
--- * 'ulirDryRun'
-uploadLineItemsRequest
-    :: UploadLineItemsRequest
-uploadLineItemsRequest =
-    UploadLineItemsRequest
-    { _ulirLineItems = Nothing
-    , _ulirFormat = Nothing
-    , _ulirDryRun = Nothing
-    }
-
--- | Line items in CSV to upload. Refer to Entity Write File Format for more
--- information on file format.
-ulirLineItems :: Lens' UploadLineItemsRequest (Maybe Text)
-ulirLineItems
-  = lens _ulirLineItems
-      (\ s a -> s{_ulirLineItems = a})
-
--- | Format the line items are in. Default to CSV.
-ulirFormat :: Lens' UploadLineItemsRequest (Maybe UploadLineItemsRequestFormat)
-ulirFormat
-  = lens _ulirFormat (\ s a -> s{_ulirFormat = a})
-
--- | Set to true to get upload status without actually persisting the line
--- items.
-ulirDryRun :: Lens' UploadLineItemsRequest (Maybe Bool)
-ulirDryRun
-  = lens _ulirDryRun (\ s a -> s{_ulirDryRun = a})
-
-instance FromJSON UploadLineItemsRequest where
-        parseJSON
-          = withObject "UploadLineItemsRequest"
-              (\ o ->
-                 UploadLineItemsRequest <$>
-                   (o .:? "lineItems") <*> (o .:? "format") <*>
-                     (o .:? "dryRun"))
-
-instance ToJSON UploadLineItemsRequest where
-        toJSON UploadLineItemsRequest{..}
-          = object
-              (catMaybes
-                 [("lineItems" .=) <$> _ulirLineItems,
-                  ("format" .=) <$> _ulirFormat,
-                  ("dryRun" .=) <$> _ulirDryRun])
-
--- | Filter used to match traffic data in your report.
---
--- /See:/ 'filterPair' smart constructor.
-data FilterPair = FilterPair
-    { _fpValue :: !(Maybe Text)
-    , _fpType  :: !(Maybe Type)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'FilterPair' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'fpValue'
---
--- * 'fpType'
-filterPair
-    :: FilterPair
-filterPair =
-    FilterPair
-    { _fpValue = Nothing
-    , _fpType = Nothing
-    }
-
--- | Filter value.
-fpValue :: Lens' FilterPair (Maybe Text)
-fpValue = lens _fpValue (\ s a -> s{_fpValue = a})
-
--- | Filter type.
-fpType :: Lens' FilterPair (Maybe Type)
-fpType = lens _fpType (\ s a -> s{_fpType = a})
-
-instance FromJSON FilterPair where
-        parseJSON
-          = withObject "FilterPair"
-              (\ o ->
-                 FilterPair <$> (o .:? "value") <*> (o .:? "type"))
-
-instance ToJSON FilterPair where
-        toJSON FilterPair{..}
-          = object
-              (catMaybes
-                 [("value" .=) <$> _fpValue, ("type" .=) <$> _fpType])
 
 -- | Request to run a stored query to generate a report.
 --
@@ -415,6 +311,173 @@ instance ToJSON RunQueryRequest where
                     _rqrReportDataStartTimeMs,
                   ("timezoneCode" .=) <$> _rqrTimezoneCode])
 
+-- | Filter used to match traffic data in your report.
+--
+-- /See:/ 'filterPair' smart constructor.
+data FilterPair = FilterPair
+    { _fpValue :: !(Maybe Text)
+    , _fpType  :: !(Maybe FilterPairType)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'FilterPair' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fpValue'
+--
+-- * 'fpType'
+filterPair
+    :: FilterPair
+filterPair =
+    FilterPair
+    { _fpValue = Nothing
+    , _fpType = Nothing
+    }
+
+-- | Filter value.
+fpValue :: Lens' FilterPair (Maybe Text)
+fpValue = lens _fpValue (\ s a -> s{_fpValue = a})
+
+-- | Filter type.
+fpType :: Lens' FilterPair (Maybe FilterPairType)
+fpType = lens _fpType (\ s a -> s{_fpType = a})
+
+instance FromJSON FilterPair where
+        parseJSON
+          = withObject "FilterPair"
+              (\ o ->
+                 FilterPair <$> (o .:? "value") <*> (o .:? "type"))
+
+instance ToJSON FilterPair where
+        toJSON FilterPair{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _fpValue, ("type" .=) <$> _fpType])
+
+-- | Request to upload line items.
+--
+-- /See:/ 'uploadLineItemsRequest' smart constructor.
+data UploadLineItemsRequest = UploadLineItemsRequest
+    { _ulirLineItems :: !(Maybe Text)
+    , _ulirFormat    :: !(Maybe UploadLineItemsRequestFormat)
+    , _ulirDryRun    :: !(Maybe Bool)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UploadLineItemsRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ulirLineItems'
+--
+-- * 'ulirFormat'
+--
+-- * 'ulirDryRun'
+uploadLineItemsRequest
+    :: UploadLineItemsRequest
+uploadLineItemsRequest =
+    UploadLineItemsRequest
+    { _ulirLineItems = Nothing
+    , _ulirFormat = Nothing
+    , _ulirDryRun = Nothing
+    }
+
+-- | Line items in CSV to upload. Refer to Entity Write File Format for more
+-- information on file format.
+ulirLineItems :: Lens' UploadLineItemsRequest (Maybe Text)
+ulirLineItems
+  = lens _ulirLineItems
+      (\ s a -> s{_ulirLineItems = a})
+
+-- | Format the line items are in. Default to CSV.
+ulirFormat :: Lens' UploadLineItemsRequest (Maybe UploadLineItemsRequestFormat)
+ulirFormat
+  = lens _ulirFormat (\ s a -> s{_ulirFormat = a})
+
+-- | Set to true to get upload status without actually persisting the line
+-- items.
+ulirDryRun :: Lens' UploadLineItemsRequest (Maybe Bool)
+ulirDryRun
+  = lens _ulirDryRun (\ s a -> s{_ulirDryRun = a})
+
+instance FromJSON UploadLineItemsRequest where
+        parseJSON
+          = withObject "UploadLineItemsRequest"
+              (\ o ->
+                 UploadLineItemsRequest <$>
+                   (o .:? "lineItems") <*> (o .:? "format") <*>
+                     (o .:? "dryRun"))
+
+instance ToJSON UploadLineItemsRequest where
+        toJSON UploadLineItemsRequest{..}
+          = object
+              (catMaybes
+                 [("lineItems" .=) <$> _ulirLineItems,
+                  ("format" .=) <$> _ulirFormat,
+                  ("dryRun" .=) <$> _ulirDryRun])
+
+-- | Request to fetch stored line items.
+--
+-- /See:/ 'downloadLineItemsRequest' smart constructor.
+data DownloadLineItemsRequest = DownloadLineItemsRequest
+    { _dlirFilterType :: !(Maybe DownloadLineItemsRequestFilterType)
+    , _dlirFormat     :: !(Maybe DownloadLineItemsRequestFormat)
+    , _dlirFilterIds  :: !(Maybe [Int64])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DownloadLineItemsRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dlirFilterType'
+--
+-- * 'dlirFormat'
+--
+-- * 'dlirFilterIds'
+downloadLineItemsRequest
+    :: DownloadLineItemsRequest
+downloadLineItemsRequest =
+    DownloadLineItemsRequest
+    { _dlirFilterType = Nothing
+    , _dlirFormat = Nothing
+    , _dlirFilterIds = Nothing
+    }
+
+-- | Filter type used to filter line items to fetch.
+dlirFilterType :: Lens' DownloadLineItemsRequest (Maybe DownloadLineItemsRequestFilterType)
+dlirFilterType
+  = lens _dlirFilterType
+      (\ s a -> s{_dlirFilterType = a})
+
+-- | Format in which the line items will be returned. Default to CSV.
+dlirFormat :: Lens' DownloadLineItemsRequest (Maybe DownloadLineItemsRequestFormat)
+dlirFormat
+  = lens _dlirFormat (\ s a -> s{_dlirFormat = a})
+
+-- | Ids of the specified filter type used to filter line items to fetch. If
+-- omitted, all the line items will be returned.
+dlirFilterIds :: Lens' DownloadLineItemsRequest [Int64]
+dlirFilterIds
+  = lens _dlirFilterIds
+      (\ s a -> s{_dlirFilterIds = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON DownloadLineItemsRequest where
+        parseJSON
+          = withObject "DownloadLineItemsRequest"
+              (\ o ->
+                 DownloadLineItemsRequest <$>
+                   (o .:? "filterType") <*> (o .:? "format") <*>
+                     (o .:? "filterIds" .!= mempty))
+
+instance ToJSON DownloadLineItemsRequest where
+        toJSON DownloadLineItemsRequest{..}
+          = object
+              (catMaybes
+                 [("filterType" .=) <$> _dlirFilterType,
+                  ("format" .=) <$> _dlirFormat,
+                  ("filterIds" .=) <$> _dlirFilterIds])
+
 -- | List queries response.
 --
 -- /See:/ 'listQueriesResponse' smart constructor.
@@ -465,69 +528,6 @@ instance ToJSON ListQueriesResponse where
               (catMaybes
                  [("queries" .=) <$> _lqrQueries,
                   Just ("kind" .= _lqrKind)])
-
--- | Request to fetch stored line items.
---
--- /See:/ 'downloadLineItemsRequest' smart constructor.
-data DownloadLineItemsRequest = DownloadLineItemsRequest
-    { _dlirFilterType :: !(Maybe FilterType)
-    , _dlirFormat     :: !(Maybe DownloadLineItemsRequestFormat)
-    , _dlirFilterIds  :: !(Maybe [Int64])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'DownloadLineItemsRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'dlirFilterType'
---
--- * 'dlirFormat'
---
--- * 'dlirFilterIds'
-downloadLineItemsRequest
-    :: DownloadLineItemsRequest
-downloadLineItemsRequest =
-    DownloadLineItemsRequest
-    { _dlirFilterType = Nothing
-    , _dlirFormat = Nothing
-    , _dlirFilterIds = Nothing
-    }
-
--- | Filter type used to filter line items to fetch.
-dlirFilterType :: Lens' DownloadLineItemsRequest (Maybe FilterType)
-dlirFilterType
-  = lens _dlirFilterType
-      (\ s a -> s{_dlirFilterType = a})
-
--- | Format in which the line items will be returned. Default to CSV.
-dlirFormat :: Lens' DownloadLineItemsRequest (Maybe DownloadLineItemsRequestFormat)
-dlirFormat
-  = lens _dlirFormat (\ s a -> s{_dlirFormat = a})
-
--- | Ids of the specified filter type used to filter line items to fetch. If
--- omitted, all the line items will be returned.
-dlirFilterIds :: Lens' DownloadLineItemsRequest [Int64]
-dlirFilterIds
-  = lens _dlirFilterIds
-      (\ s a -> s{_dlirFilterIds = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON DownloadLineItemsRequest where
-        parseJSON
-          = withObject "DownloadLineItemsRequest"
-              (\ o ->
-                 DownloadLineItemsRequest <$>
-                   (o .:? "filterType") <*> (o .:? "format") <*>
-                     (o .:? "filterIds" .!= mempty))
-
-instance ToJSON DownloadLineItemsRequest where
-        toJSON DownloadLineItemsRequest{..}
-          = object
-              (catMaybes
-                 [("filterType" .=) <$> _dlirFilterType,
-                  ("format" .=) <$> _dlirFormat,
-                  ("filterIds" .=) <$> _dlirFilterIds])
 
 -- | Upload line items response.
 --
@@ -888,48 +888,11 @@ instance ToJSON UploadStatus where
                  [("rowStatus" .=) <$> _usRowStatus,
                   ("errors" .=) <$> _usErrors])
 
--- | Download line items response.
---
--- /See:/ 'downloadLineItemsResponse' smart constructor.
-newtype DownloadLineItemsResponse = DownloadLineItemsResponse
-    { _dlirLineItems :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'DownloadLineItemsResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'dlirLineItems'
-downloadLineItemsResponse
-    :: DownloadLineItemsResponse
-downloadLineItemsResponse =
-    DownloadLineItemsResponse
-    { _dlirLineItems = Nothing
-    }
-
--- | Retrieved line items in CSV format. Refer to Entity Write File Format
--- for more information on file format.
-dlirLineItems :: Lens' DownloadLineItemsResponse (Maybe Text)
-dlirLineItems
-  = lens _dlirLineItems
-      (\ s a -> s{_dlirLineItems = a})
-
-instance FromJSON DownloadLineItemsResponse where
-        parseJSON
-          = withObject "DownloadLineItemsResponse"
-              (\ o ->
-                 DownloadLineItemsResponse <$> (o .:? "lineItems"))
-
-instance ToJSON DownloadLineItemsResponse where
-        toJSON DownloadLineItemsResponse{..}
-          = object
-              (catMaybes [("lineItems" .=) <$> _dlirLineItems])
-
 -- | Information on how frequently and when to run a query.
 --
 -- /See:/ 'querySchedule' smart constructor.
 data QuerySchedule = QuerySchedule
-    { _qsFrequency           :: !(Maybe Frequency)
+    { _qsFrequency           :: !(Maybe QueryScheduleFrequency)
     , _qsEndTimeMs           :: !(Maybe Int64)
     , _qsNextRunMinuteOfDay  :: !(Maybe Int32)
     , _qsNextRunTimezoneCode :: !(Maybe Text)
@@ -957,7 +920,7 @@ querySchedule =
     }
 
 -- | How often the query is run.
-qsFrequency :: Lens' QuerySchedule (Maybe Frequency)
+qsFrequency :: Lens' QuerySchedule (Maybe QueryScheduleFrequency)
 qsFrequency
   = lens _qsFrequency (\ s a -> s{_qsFrequency = a})
 
@@ -1000,11 +963,48 @@ instance ToJSON QuerySchedule where
                   ("nextRunTimezoneCode" .=) <$>
                     _qsNextRunTimezoneCode])
 
+-- | Download line items response.
+--
+-- /See:/ 'downloadLineItemsResponse' smart constructor.
+newtype DownloadLineItemsResponse = DownloadLineItemsResponse
+    { _dlirLineItems :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DownloadLineItemsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dlirLineItems'
+downloadLineItemsResponse
+    :: DownloadLineItemsResponse
+downloadLineItemsResponse =
+    DownloadLineItemsResponse
+    { _dlirLineItems = Nothing
+    }
+
+-- | Retrieved line items in CSV format. Refer to Entity Write File Format
+-- for more information on file format.
+dlirLineItems :: Lens' DownloadLineItemsResponse (Maybe Text)
+dlirLineItems
+  = lens _dlirLineItems
+      (\ s a -> s{_dlirLineItems = a})
+
+instance FromJSON DownloadLineItemsResponse where
+        parseJSON
+          = withObject "DownloadLineItemsResponse"
+              (\ o ->
+                 DownloadLineItemsResponse <$> (o .:? "lineItems"))
+
+instance ToJSON DownloadLineItemsResponse where
+        toJSON DownloadLineItemsResponse{..}
+          = object
+              (catMaybes [("lineItems" .=) <$> _dlirLineItems])
+
 -- | Report status.
 --
 -- /See:/ 'reportStatus' smart constructor.
 data ReportStatus = ReportStatus
-    { _rsState        :: !(Maybe State)
+    { _rsState        :: !(Maybe ReportStatusState)
     , _rsFinishTimeMs :: !(Maybe Int64)
     , _rsFormat       :: !(Maybe ReportStatusFormat)
     , _rsFailure      :: !(Maybe ReportFailure)
@@ -1032,7 +1032,7 @@ reportStatus =
     }
 
 -- | The state of the report.
-rsState :: Lens' ReportStatus (Maybe State)
+rsState :: Lens' ReportStatus (Maybe ReportStatusState)
 rsState = lens _rsState (\ s a -> s{_rsState = a})
 
 -- | The time when this report either completed successfully or failed.
@@ -1191,10 +1191,10 @@ instance ToJSON Query where
 --
 -- /See:/ 'parameters' smart constructor.
 data Parameters = Parameters
-    { _pMetrics           :: !(Maybe [MetricsItem])
+    { _pMetrics           :: !(Maybe [ParametersMetricsItem])
     , _pIncludeInviteData :: !(Maybe Bool)
     , _pFilters           :: !(Maybe [FilterPair])
-    , _pGroupBys          :: !(Maybe [GroupBysItem])
+    , _pGroupBys          :: !(Maybe [ParametersGroupBysItem])
     , _pType              :: !(Maybe ParametersType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1223,7 +1223,7 @@ parameters =
     }
 
 -- | Metrics to include as columns in your report.
-pMetrics :: Lens' Parameters [MetricsItem]
+pMetrics :: Lens' Parameters [ParametersMetricsItem]
 pMetrics
   = lens _pMetrics (\ s a -> s{_pMetrics = a}) .
       _Default
@@ -1243,7 +1243,7 @@ pFilters
       . _Coerce
 
 -- | Data is grouped by the filters listed in this field.
-pGroupBys :: Lens' Parameters [GroupBysItem]
+pGroupBys :: Lens' Parameters [ParametersGroupBysItem]
 pGroupBys
   = lens _pGroupBys (\ s a -> s{_pGroupBys = a}) .
       _Default
@@ -1278,7 +1278,7 @@ instance ToJSON Parameters where
 --
 -- /See:/ 'reportFailure' smart constructor.
 newtype ReportFailure = ReportFailure
-    { _rfErrorCode :: Maybe ErrorCode
+    { _rfErrorCode :: Maybe ReportFailureErrorCode
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportFailure' with the minimum fields required to make a request.
@@ -1294,7 +1294,7 @@ reportFailure =
     }
 
 -- | Error code that shows why the report was not created.
-rfErrorCode :: Lens' ReportFailure (Maybe ErrorCode)
+rfErrorCode :: Lens' ReportFailure (Maybe ReportFailureErrorCode)
 rfErrorCode
   = lens _rfErrorCode (\ s a -> s{_rfErrorCode = a})
 

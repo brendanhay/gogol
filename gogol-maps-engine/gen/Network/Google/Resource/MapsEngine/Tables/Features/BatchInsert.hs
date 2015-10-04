@@ -64,7 +64,7 @@ type TablesFeaturesBatchInsertResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] FeaturesBatchInsertRequest :>
+                           ReqBody '[OctetStream] FeaturesBatchInsertRequest :>
                              Post '[JSON] ()
 
 -- | Append features to an existing table. A single batchInsert request can

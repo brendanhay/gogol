@@ -35,7 +35,7 @@ module Network.Google.Resource.Analytics.Management.Experiments.Patch
     , mepPrettyPrint
     , mepWebPropertyId
     , mepUserIP
-    , mepProfileId
+    , mepProFileId
     , mepPayload
     , mepAccountId
     , mepExperimentId
@@ -66,7 +66,7 @@ type ManagementExperimentsPatchResource =
                                QueryParam "key" Key :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
-                                     ReqBody '[JSON] Experiment :>
+                                     ReqBody '[OctetStream] Experiment :>
                                        Patch '[JSON] Experiment
 
 -- | Update an existing experiment. This method supports patch semantics.
@@ -77,7 +77,7 @@ data ManagementExperimentsPatch' = ManagementExperimentsPatch'
     , _mepPrettyPrint   :: !Bool
     , _mepWebPropertyId :: !Text
     , _mepUserIP        :: !(Maybe Text)
-    , _mepProfileId     :: !Text
+    , _mepProFileId     :: !Text
     , _mepPayload       :: !Experiment
     , _mepAccountId     :: !Text
     , _mepExperimentId  :: !Text
@@ -98,7 +98,7 @@ data ManagementExperimentsPatch' = ManagementExperimentsPatch'
 --
 -- * 'mepUserIP'
 --
--- * 'mepProfileId'
+-- * 'mepProFileId'
 --
 -- * 'mepPayload'
 --
@@ -118,13 +118,13 @@ managementExperimentsPatch'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'experimentId'
     -> ManagementExperimentsPatch'
-managementExperimentsPatch' pMepWebPropertyId_ pMepProfileId_ pMepPayload_ pMepAccountId_ pMepExperimentId_ =
+managementExperimentsPatch' pMepWebPropertyId_ pMepProFileId_ pMepPayload_ pMepAccountId_ pMepExperimentId_ =
     ManagementExperimentsPatch'
     { _mepQuotaUser = Nothing
     , _mepPrettyPrint = False
     , _mepWebPropertyId = pMepWebPropertyId_
     , _mepUserIP = Nothing
-    , _mepProfileId = pMepProfileId_
+    , _mepProFileId = pMepProFileId_
     , _mepPayload = pMepPayload_
     , _mepAccountId = pMepAccountId_
     , _mepExperimentId = pMepExperimentId_
@@ -159,9 +159,9 @@ mepUserIP
   = lens _mepUserIP (\ s a -> s{_mepUserIP = a})
 
 -- | View (Profile) ID of the experiment to update.
-mepProfileId :: Lens' ManagementExperimentsPatch' Text
-mepProfileId
-  = lens _mepProfileId (\ s a -> s{_mepProfileId = a})
+mepProFileId :: Lens' ManagementExperimentsPatch' Text
+mepProFileId
+  = lens _mepProFileId (\ s a -> s{_mepProFileId = a})
 
 -- | Multipart request metadata.
 mepPayload :: Lens' ManagementExperimentsPatch' Experiment
@@ -205,7 +205,7 @@ instance GoogleRequest ManagementExperimentsPatch'
         type Rs ManagementExperimentsPatch' = Experiment
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementExperimentsPatch'{..}
-          = go _mepAccountId _mepWebPropertyId _mepProfileId
+          = go _mepAccountId _mepWebPropertyId _mepProFileId
               _mepExperimentId
               _mepQuotaUser
               (Just _mepPrettyPrint)

@@ -18,6 +18,27 @@ module Network.Google.Dataflow.Types.Product where
 import           Network.Google.Dataflow.Types.Sum
 import           Network.Google.Prelude
 
+-- | A mapping from each stage to the information about that stage.
+--
+-- /See:/ 'jobExecutionInfoStages' smart constructor.
+data JobExecutionInfoStages =
+    JobExecutionInfoStages
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'JobExecutionInfoStages' with the minimum fields required to make a request.
+--
+jobExecutionInfoStages
+    :: JobExecutionInfoStages
+jobExecutionInfoStages = JobExecutionInfoStages
+
+instance FromJSON JobExecutionInfoStages where
+        parseJSON
+          = withObject "JobExecutionInfoStages"
+              (\ o -> pure JobExecutionInfoStages)
+
+instance ToJSON JobExecutionInfoStages where
+        toJSON = const (Object mempty)
+
 -- | All configuration data for a particular Computation.
 --
 -- /See:/ 'computationTopology' smart constructor.
@@ -133,6 +154,75 @@ instance ToJSON ComputationTopology where
                   ("computationId" .=) <$> _ctComputationId,
                   ("systemStageName" .=) <$> _ctSystemStageName])
 
+-- | The response to a SourceSplitRequest.
+--
+-- /See:/ 'sourceSplitResponse' smart constructor.
+data SourceSplitResponse = SourceSplitResponse
+    { _ssrBundles :: !(Maybe [DerivedSource])
+    , _ssrShards  :: !(Maybe [SourceSplitShard])
+    , _ssrOutcome :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SourceSplitResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ssrBundles'
+--
+-- * 'ssrShards'
+--
+-- * 'ssrOutcome'
+sourceSplitResponse
+    :: SourceSplitResponse
+sourceSplitResponse =
+    SourceSplitResponse
+    { _ssrBundles = Nothing
+    , _ssrShards = Nothing
+    , _ssrOutcome = Nothing
+    }
+
+-- | If outcome is SPLITTING_HAPPENED, then this is a list of bundles into
+-- which the source was split. Otherwise this field is ignored. This list
+-- can be empty, which means the source represents an empty input.
+ssrBundles :: Lens' SourceSplitResponse [DerivedSource]
+ssrBundles
+  = lens _ssrBundles (\ s a -> s{_ssrBundles = a}) .
+      _Default
+      . _Coerce
+
+-- | DEPRECATED in favor of bundles.
+ssrShards :: Lens' SourceSplitResponse [SourceSplitShard]
+ssrShards
+  = lens _ssrShards (\ s a -> s{_ssrShards = a}) .
+      _Default
+      . _Coerce
+
+-- | Indicates whether splitting happened and produced a list of bundles. If
+-- this is USE_CURRENT_SOURCE_AS_IS, the current source should be processed
+-- \"as is\" without splitting. \"bundles\" is ignored in this case. If
+-- this is SPLITTING_HAPPENED, then \"bundles\" contains a list of bundles
+-- into which the source was split.
+ssrOutcome :: Lens' SourceSplitResponse (Maybe Text)
+ssrOutcome
+  = lens _ssrOutcome (\ s a -> s{_ssrOutcome = a})
+
+instance FromJSON SourceSplitResponse where
+        parseJSON
+          = withObject "SourceSplitResponse"
+              (\ o ->
+                 SourceSplitResponse <$>
+                   (o .:? "bundles" .!= mempty) <*>
+                     (o .:? "shards" .!= mempty)
+                     <*> (o .:? "outcome"))
+
+instance ToJSON SourceSplitResponse where
+        toJSON SourceSplitResponse{..}
+          = object
+              (catMaybes
+                 [("bundles" .=) <$> _ssrBundles,
+                  ("shards" .=) <$> _ssrShards,
+                  ("outcome" .=) <$> _ssrOutcome])
+
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
 -- is used by [gRPC](https:\/\/github.com\/grpc). The error model is
@@ -171,7 +261,7 @@ instance ToJSON ComputationTopology where
 --
 -- /See:/ 'status' smart constructor.
 data Status = Status
-    { _sDetails :: !(Maybe [DetailsItem])
+    { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe Int32)
     , _sMessage :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -196,7 +286,7 @@ status =
 
 -- | A list of messages that carry the error details. There will be a common
 -- set of message types for APIs to use.
-sDetails :: Lens' Status [DetailsItem]
+sDetails :: Lens' Status [StatusDetailsItem]
 sDetails
   = lens _sDetails (\ s a -> s{_sDetails = a}) .
       _Default
@@ -420,74 +510,59 @@ instance ToJSON WorkItem where
                   ("configuration" .=) <$> _wiConfiguration,
                   ("seqMapTask" .=) <$> _wiSeqMapTask])
 
--- | The response to a SourceSplitRequest.
+-- | Hints for splitting a Source into bundles (parts for parallel
+-- processing) using SourceSplitRequest.
 --
--- /See:/ 'sourceSplitResponse' smart constructor.
-data SourceSplitResponse = SourceSplitResponse
-    { _ssrBundles :: !(Maybe [DerivedSource])
-    , _ssrShards  :: !(Maybe [SourceSplitShard])
-    , _ssrOutcome :: !(Maybe Text)
+-- /See:/ 'sourceSplitOptions' smart constructor.
+data SourceSplitOptions = SourceSplitOptions
+    { _ssoDesiredShardSizeBytes  :: !(Maybe Int64)
+    , _ssoDesiredBundleSizeBytes :: !(Maybe Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SourceSplitResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'SourceSplitOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ssrBundles'
+-- * 'ssoDesiredShardSizeBytes'
 --
--- * 'ssrShards'
---
--- * 'ssrOutcome'
-sourceSplitResponse
-    :: SourceSplitResponse
-sourceSplitResponse =
-    SourceSplitResponse
-    { _ssrBundles = Nothing
-    , _ssrShards = Nothing
-    , _ssrOutcome = Nothing
+-- * 'ssoDesiredBundleSizeBytes'
+sourceSplitOptions
+    :: SourceSplitOptions
+sourceSplitOptions =
+    SourceSplitOptions
+    { _ssoDesiredShardSizeBytes = Nothing
+    , _ssoDesiredBundleSizeBytes = Nothing
     }
 
--- | If outcome is SPLITTING_HAPPENED, then this is a list of bundles into
--- which the source was split. Otherwise this field is ignored. This list
--- can be empty, which means the source represents an empty input.
-ssrBundles :: Lens' SourceSplitResponse [DerivedSource]
-ssrBundles
-  = lens _ssrBundles (\ s a -> s{_ssrBundles = a}) .
-      _Default
-      . _Coerce
+-- | DEPRECATED in favor of desired_bundle_size_bytes.
+ssoDesiredShardSizeBytes :: Lens' SourceSplitOptions (Maybe Int64)
+ssoDesiredShardSizeBytes
+  = lens _ssoDesiredShardSizeBytes
+      (\ s a -> s{_ssoDesiredShardSizeBytes = a})
 
--- | DEPRECATED in favor of bundles.
-ssrShards :: Lens' SourceSplitResponse [SourceSplitShard]
-ssrShards
-  = lens _ssrShards (\ s a -> s{_ssrShards = a}) .
-      _Default
-      . _Coerce
+-- | The source should be split into a set of bundles where the estimated
+-- size of each is approximately this many bytes.
+ssoDesiredBundleSizeBytes :: Lens' SourceSplitOptions (Maybe Int64)
+ssoDesiredBundleSizeBytes
+  = lens _ssoDesiredBundleSizeBytes
+      (\ s a -> s{_ssoDesiredBundleSizeBytes = a})
 
--- | Indicates whether splitting happened and produced a list of bundles. If
--- this is USE_CURRENT_SOURCE_AS_IS, the current source should be processed
--- \"as is\" without splitting. \"bundles\" is ignored in this case. If
--- this is SPLITTING_HAPPENED, then \"bundles\" contains a list of bundles
--- into which the source was split.
-ssrOutcome :: Lens' SourceSplitResponse (Maybe Text)
-ssrOutcome
-  = lens _ssrOutcome (\ s a -> s{_ssrOutcome = a})
-
-instance FromJSON SourceSplitResponse where
+instance FromJSON SourceSplitOptions where
         parseJSON
-          = withObject "SourceSplitResponse"
+          = withObject "SourceSplitOptions"
               (\ o ->
-                 SourceSplitResponse <$>
-                   (o .:? "bundles" .!= mempty) <*>
-                     (o .:? "shards" .!= mempty)
-                     <*> (o .:? "outcome"))
+                 SourceSplitOptions <$>
+                   (o .:? "desiredShardSizeBytes") <*>
+                     (o .:? "desiredBundleSizeBytes"))
 
-instance ToJSON SourceSplitResponse where
-        toJSON SourceSplitResponse{..}
+instance ToJSON SourceSplitOptions where
+        toJSON SourceSplitOptions{..}
           = object
               (catMaybes
-                 [("bundles" .=) <$> _ssrBundles,
-                  ("shards" .=) <$> _ssrShards,
-                  ("outcome" .=) <$> _ssrOutcome])
+                 [("desiredShardSizeBytes" .=) <$>
+                    _ssoDesiredShardSizeBytes,
+                  ("desiredBundleSizeBytes" .=) <$>
+                    _ssoDesiredBundleSizeBytes])
 
 -- | Metadata to set on the Google Compute Engine VMs.
 --
@@ -558,47 +633,47 @@ instance ToJSON AutoscalingSettings where
                  [("maxNumWorkers" .=) <$> _asMaxNumWorkers,
                   ("algorithm" .=) <$> _asAlgorithm])
 
--- | A sink that records can be encoded and written to.
+-- | Contains information about how a particular
+-- [google.dataflow.v1beta3.Step][google.dataflow.v1beta3.Step] will be
+-- executed.
 --
--- /See:/ 'sink' smart constructor.
-data Sink = Sink
-    { _sCodec :: !(Maybe Codec)
-    , _sSpec  :: !(Maybe Spec)
+-- /See:/ 'jobExecutionStageInfo' smart constructor.
+newtype JobExecutionStageInfo = JobExecutionStageInfo
+    { _jesiStepName :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Sink' with the minimum fields required to make a request.
+-- | Creates a value of 'JobExecutionStageInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sCodec'
---
--- * 'sSpec'
-sink
-    :: Sink
-sink =
-    Sink
-    { _sCodec = Nothing
-    , _sSpec = Nothing
+-- * 'jesiStepName'
+jobExecutionStageInfo
+    :: JobExecutionStageInfo
+jobExecutionStageInfo =
+    JobExecutionStageInfo
+    { _jesiStepName = Nothing
     }
 
--- | The codec to use to encode data written to the sink.
-sCodec :: Lens' Sink (Maybe Codec)
-sCodec = lens _sCodec (\ s a -> s{_sCodec = a})
+-- | The steps associated with the execution stage. Note that stages may have
+-- several steps, and that a given step might be run by more than one
+-- stage.
+jesiStepName :: Lens' JobExecutionStageInfo [Text]
+jesiStepName
+  = lens _jesiStepName (\ s a -> s{_jesiStepName = a})
+      . _Default
+      . _Coerce
 
--- | The sink to write to, plus its parameters.
-sSpec :: Lens' Sink (Maybe Spec)
-sSpec = lens _sSpec (\ s a -> s{_sSpec = a})
-
-instance FromJSON Sink where
+instance FromJSON JobExecutionStageInfo where
         parseJSON
-          = withObject "Sink"
-              (\ o -> Sink <$> (o .:? "codec") <*> (o .:? "spec"))
+          = withObject "JobExecutionStageInfo"
+              (\ o ->
+                 JobExecutionStageInfo <$>
+                   (o .:? "stepName" .!= mempty))
 
-instance ToJSON Sink where
-        toJSON Sink{..}
+instance ToJSON JobExecutionStageInfo where
+        toJSON JobExecutionStageInfo{..}
           = object
-              (catMaybes
-                 [("codec" .=) <$> _sCodec, ("spec" .=) <$> _sSpec])
+              (catMaybes [("stepName" .=) <$> _jesiStepName])
 
 -- | An output of an instruction.
 --
@@ -654,166 +729,6 @@ instance ToJSON InstructionOutput where
               (catMaybes
                  [("codec" .=) <$> _ioCodec, ("name" .=) <$> _ioName,
                   ("systemName" .=) <$> _ioSystemName])
-
--- | Contains information about how a particular
--- [google.dataflow.v1beta3.Step][google.dataflow.v1beta3.Step] will be
--- executed.
---
--- /See:/ 'jobExecutionStageInfo' smart constructor.
-newtype JobExecutionStageInfo = JobExecutionStageInfo
-    { _jesiStepName :: Maybe [Text]
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'JobExecutionStageInfo' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'jesiStepName'
-jobExecutionStageInfo
-    :: JobExecutionStageInfo
-jobExecutionStageInfo =
-    JobExecutionStageInfo
-    { _jesiStepName = Nothing
-    }
-
--- | The steps associated with the execution stage. Note that stages may have
--- several steps, and that a given step might be run by more than one
--- stage.
-jesiStepName :: Lens' JobExecutionStageInfo [Text]
-jesiStepName
-  = lens _jesiStepName (\ s a -> s{_jesiStepName = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON JobExecutionStageInfo where
-        parseJSON
-          = withObject "JobExecutionStageInfo"
-              (\ o ->
-                 JobExecutionStageInfo <$>
-                   (o .:? "stepName" .!= mempty))
-
-instance ToJSON JobExecutionStageInfo where
-        toJSON JobExecutionStageInfo{..}
-          = object
-              (catMaybes [("stepName" .=) <$> _jesiStepName])
-
--- | The value combining function to invoke.
---
--- /See:/ 'valueCombiningFn' smart constructor.
-data ValueCombiningFn =
-    ValueCombiningFn
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ValueCombiningFn' with the minimum fields required to make a request.
---
-valueCombiningFn
-    :: ValueCombiningFn
-valueCombiningFn = ValueCombiningFn
-
-instance FromJSON ValueCombiningFn where
-        parseJSON
-          = withObject "ValueCombiningFn"
-              (\ o -> pure ValueCombiningFn)
-
-instance ToJSON ValueCombiningFn where
-        toJSON = const (Object mempty)
-
--- | Hints for splitting a Source into bundles (parts for parallel
--- processing) using SourceSplitRequest.
---
--- /See:/ 'sourceSplitOptions' smart constructor.
-data SourceSplitOptions = SourceSplitOptions
-    { _ssoDesiredShardSizeBytes  :: !(Maybe Int64)
-    , _ssoDesiredBundleSizeBytes :: !(Maybe Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SourceSplitOptions' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ssoDesiredShardSizeBytes'
---
--- * 'ssoDesiredBundleSizeBytes'
-sourceSplitOptions
-    :: SourceSplitOptions
-sourceSplitOptions =
-    SourceSplitOptions
-    { _ssoDesiredShardSizeBytes = Nothing
-    , _ssoDesiredBundleSizeBytes = Nothing
-    }
-
--- | DEPRECATED in favor of desired_bundle_size_bytes.
-ssoDesiredShardSizeBytes :: Lens' SourceSplitOptions (Maybe Int64)
-ssoDesiredShardSizeBytes
-  = lens _ssoDesiredShardSizeBytes
-      (\ s a -> s{_ssoDesiredShardSizeBytes = a})
-
--- | The source should be split into a set of bundles where the estimated
--- size of each is approximately this many bytes.
-ssoDesiredBundleSizeBytes :: Lens' SourceSplitOptions (Maybe Int64)
-ssoDesiredBundleSizeBytes
-  = lens _ssoDesiredBundleSizeBytes
-      (\ s a -> s{_ssoDesiredBundleSizeBytes = a})
-
-instance FromJSON SourceSplitOptions where
-        parseJSON
-          = withObject "SourceSplitOptions"
-              (\ o ->
-                 SourceSplitOptions <$>
-                   (o .:? "desiredShardSizeBytes") <*>
-                     (o .:? "desiredBundleSizeBytes"))
-
-instance ToJSON SourceSplitOptions where
-        toJSON SourceSplitOptions{..}
-          = object
-              (catMaybes
-                 [("desiredShardSizeBytes" .=) <$>
-                    _ssoDesiredShardSizeBytes,
-                  ("desiredBundleSizeBytes" .=) <$>
-                    _ssoDesiredBundleSizeBytes])
-
---
--- /See:/ 'detailsItem' smart constructor.
-data DetailsItem =
-    DetailsItem
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'DetailsItem' with the minimum fields required to make a request.
---
-detailsItem
-    :: DetailsItem
-detailsItem = DetailsItem
-
-instance FromJSON DetailsItem where
-        parseJSON
-          = withObject "DetailsItem" (\ o -> pure DetailsItem)
-
-instance ToJSON DetailsItem where
-        toJSON = const (Object mempty)
-
--- | Zero or more labeled fields which identify the part of the job this
--- metric is associated with, such as the name of a step or collection. For
--- example, built-in counters associated with steps will have
--- context[\'step\'] = . Counters associated with PCollections in the SDK
--- will have context[\'pcollection\'] = .
---
--- /See:/ 'context' smart constructor.
-data Context =
-    Context
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Context' with the minimum fields required to make a request.
---
-context
-    :: Context
-context = Context
-
-instance FromJSON Context where
-        parseJSON
-          = withObject "Context" (\ o -> pure Context)
-
-instance ToJSON Context where
-        toJSON = const (Object mempty)
 
 -- | Request to report the status of WorkItems.
 --
@@ -885,13 +800,77 @@ instance ToJSON ReportWorkItemStatusRequest where
                   ("workItemStatuses" .=) <$> _rwisrWorkItemStatuses,
                   ("workerId" .=) <$> _rwisrWorkerId])
 
+-- | A structure describing which components and their versions of the
+-- service are required in order to run the job.
+--
+-- /See:/ 'environmentVersion' smart constructor.
+data EnvironmentVersion =
+    EnvironmentVersion
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EnvironmentVersion' with the minimum fields required to make a request.
+--
+environmentVersion
+    :: EnvironmentVersion
+environmentVersion = EnvironmentVersion
+
+instance FromJSON EnvironmentVersion where
+        parseJSON
+          = withObject "EnvironmentVersion"
+              (\ o -> pure EnvironmentVersion)
+
+instance ToJSON EnvironmentVersion where
+        toJSON = const (Object mempty)
+
+-- | A sink that records can be encoded and written to.
+--
+-- /See:/ 'sink' smart constructor.
+data Sink = Sink
+    { _sCodec :: !(Maybe SinkCodec)
+    , _sSpec  :: !(Maybe SinkSpec)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Sink' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sCodec'
+--
+-- * 'sSpec'
+sink
+    :: Sink
+sink =
+    Sink
+    { _sCodec = Nothing
+    , _sSpec = Nothing
+    }
+
+-- | The codec to use to encode data written to the sink.
+sCodec :: Lens' Sink (Maybe SinkCodec)
+sCodec = lens _sCodec (\ s a -> s{_sCodec = a})
+
+-- | The sink to write to, plus its parameters.
+sSpec :: Lens' Sink (Maybe SinkSpec)
+sSpec = lens _sSpec (\ s a -> s{_sSpec = a})
+
+instance FromJSON Sink where
+        parseJSON
+          = withObject "Sink"
+              (\ o -> Sink <$> (o .:? "codec") <*> (o .:? "spec"))
+
+instance ToJSON Sink where
+        toJSON Sink{..}
+          = object
+              (catMaybes
+                 [("codec" .=) <$> _sCodec, ("spec" .=) <$> _sSpec])
+
 -- | Identifies a metric, by describing the source which generated the
 -- metric.
 --
 -- /See:/ 'metricStructuredName' smart constructor.
 data MetricStructuredName = MetricStructuredName
     { _msnOrigin  :: !(Maybe Text)
-    , _msnContext :: !(Maybe Context)
+    , _msnContext :: !(Maybe MetricStructuredNameContext)
     , _msnName    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -924,7 +903,7 @@ msnOrigin
 -- example, built-in counters associated with steps will have
 -- context[\'step\'] = . Counters associated with PCollections in the SDK
 -- will have context[\'pcollection\'] = .
-msnContext :: Lens' MetricStructuredName (Maybe Context)
+msnContext :: Lens' MetricStructuredName (Maybe MetricStructuredNameContext)
 msnContext
   = lens _msnContext (\ s a -> s{_msnContext = a})
 
@@ -947,6 +926,72 @@ instance ToJSON MetricStructuredName where
                  [("origin" .=) <$> _msnOrigin,
                   ("context" .=) <$> _msnContext,
                   ("name" .=) <$> _msnName])
+
+-- | An instruction that writes records. Takes one input, produces no
+-- outputs.
+--
+-- /See:/ 'writeInstruction' smart constructor.
+data WriteInstruction = WriteInstruction
+    { _wiSink  :: !(Maybe Sink)
+    , _wiInput :: !(Maybe InstructionInput)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'WriteInstruction' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'wiSink'
+--
+-- * 'wiInput'
+writeInstruction
+    :: WriteInstruction
+writeInstruction =
+    WriteInstruction
+    { _wiSink = Nothing
+    , _wiInput = Nothing
+    }
+
+-- | The sink to write to.
+wiSink :: Lens' WriteInstruction (Maybe Sink)
+wiSink = lens _wiSink (\ s a -> s{_wiSink = a})
+
+-- | The input.
+wiInput :: Lens' WriteInstruction (Maybe InstructionInput)
+wiInput = lens _wiInput (\ s a -> s{_wiInput = a})
+
+instance FromJSON WriteInstruction where
+        parseJSON
+          = withObject "WriteInstruction"
+              (\ o ->
+                 WriteInstruction <$>
+                   (o .:? "sink") <*> (o .:? "input"))
+
+instance ToJSON WriteInstruction where
+        toJSON WriteInstruction{..}
+          = object
+              (catMaybes
+                 [("sink" .=) <$> _wiSink, ("input" .=) <$> _wiInput])
+
+-- | A description of the process that generated the request.
+--
+-- /See:/ 'environmentUserAgent' smart constructor.
+data EnvironmentUserAgent =
+    EnvironmentUserAgent
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EnvironmentUserAgent' with the minimum fields required to make a request.
+--
+environmentUserAgent
+    :: EnvironmentUserAgent
+environmentUserAgent = EnvironmentUserAgent
+
+instance FromJSON EnvironmentUserAgent where
+        parseJSON
+          = withObject "EnvironmentUserAgent"
+              (\ o -> pure EnvironmentUserAgent)
+
+instance ToJSON EnvironmentUserAgent where
+        toJSON = const (Object mempty)
 
 -- | Describes the data disk used by a workflow job.
 --
@@ -1017,283 +1062,6 @@ instance ToJSON Disk where
                  [("sizeGb" .=) <$> _dSizeGb,
                   ("diskType" .=) <$> _dDiskType,
                   ("mountPoint" .=) <$> _dMountPoint])
-
--- | A position that encapsulates an inner position and an index for the
--- inner position. A ConcatPosition can be used by a reader of a source
--- that encapsulates a set of other sources.
---
--- /See:/ 'concatPosition' smart constructor.
-data ConcatPosition = ConcatPosition
-    { _cpIndex    :: !(Maybe Int32)
-    , _cpPosition :: !(Maybe Position)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ConcatPosition' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cpIndex'
---
--- * 'cpPosition'
-concatPosition
-    :: ConcatPosition
-concatPosition =
-    ConcatPosition
-    { _cpIndex = Nothing
-    , _cpPosition = Nothing
-    }
-
--- | Index of the inner source.
-cpIndex :: Lens' ConcatPosition (Maybe Int32)
-cpIndex = lens _cpIndex (\ s a -> s{_cpIndex = a})
-
--- | Position within the inner source.
-cpPosition :: Lens' ConcatPosition (Maybe Position)
-cpPosition
-  = lens _cpPosition (\ s a -> s{_cpPosition = a})
-
-instance FromJSON ConcatPosition where
-        parseJSON
-          = withObject "ConcatPosition"
-              (\ o ->
-                 ConcatPosition <$>
-                   (o .:? "index") <*> (o .:? "position"))
-
-instance ToJSON ConcatPosition where
-        toJSON ConcatPosition{..}
-          = object
-              (catMaybes
-                 [("index" .=) <$> _cpIndex,
-                  ("position" .=) <$> _cpPosition])
-
--- | Describes the environment in which a Dataflow Job runs.
---
--- /See:/ 'environment' smart constructor.
-data Environment = Environment
-    { _eDataset                  :: !(Maybe Text)
-    , _eExperiments              :: !(Maybe [Text])
-    , _eWorkerPools              :: !(Maybe [WorkerPool])
-    , _eClusterManagerAPIService :: !(Maybe Text)
-    , _eVersion                  :: !(Maybe Version)
-    , _eInternalExperiments      :: !(Maybe InternalExperiments)
-    , _eTempStoragePrefix        :: !(Maybe Text)
-    , _eUserAgent                :: !(Maybe UserAgent)
-    , _eSdkPipelineOptions       :: !(Maybe SdkPipelineOptions)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Environment' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'eDataset'
---
--- * 'eExperiments'
---
--- * 'eWorkerPools'
---
--- * 'eClusterManagerAPIService'
---
--- * 'eVersion'
---
--- * 'eInternalExperiments'
---
--- * 'eTempStoragePrefix'
---
--- * 'eUserAgent'
---
--- * 'eSdkPipelineOptions'
-environment
-    :: Environment
-environment =
-    Environment
-    { _eDataset = Nothing
-    , _eExperiments = Nothing
-    , _eWorkerPools = Nothing
-    , _eClusterManagerAPIService = Nothing
-    , _eVersion = Nothing
-    , _eInternalExperiments = Nothing
-    , _eTempStoragePrefix = Nothing
-    , _eUserAgent = Nothing
-    , _eSdkPipelineOptions = Nothing
-    }
-
--- | The dataset for the current project where various workflow related
--- tables are stored. The supported resource type is: Google BigQuery:
--- bigquery.googleapis.com\/{dataset}
-eDataset :: Lens' Environment (Maybe Text)
-eDataset = lens _eDataset (\ s a -> s{_eDataset = a})
-
--- | The list of experiments to enable.
-eExperiments :: Lens' Environment [Text]
-eExperiments
-  = lens _eExperiments (\ s a -> s{_eExperiments = a})
-      . _Default
-      . _Coerce
-
--- | Worker pools. At least one \"harness\" worker pool must be specified in
--- order for the job to have workers.
-eWorkerPools :: Lens' Environment [WorkerPool]
-eWorkerPools
-  = lens _eWorkerPools (\ s a -> s{_eWorkerPools = a})
-      . _Default
-      . _Coerce
-
--- | The type of cluster manager API to use. If unknown or unspecified, the
--- service will attempt to choose a reasonable default. This should be in
--- the form of the API service name, e.g. \"compute.googleapis.com\".
-eClusterManagerAPIService :: Lens' Environment (Maybe Text)
-eClusterManagerAPIService
-  = lens _eClusterManagerAPIService
-      (\ s a -> s{_eClusterManagerAPIService = a})
-
--- | A structure describing which components and their versions of the
--- service are required in order to run the job.
-eVersion :: Lens' Environment (Maybe Version)
-eVersion = lens _eVersion (\ s a -> s{_eVersion = a})
-
--- | Experimental settings.
-eInternalExperiments :: Lens' Environment (Maybe InternalExperiments)
-eInternalExperiments
-  = lens _eInternalExperiments
-      (\ s a -> s{_eInternalExperiments = a})
-
--- | The prefix of the resources the system should use for temporary storage.
--- The system will append the suffix \"\/temp-{JOBNAME} to this resource
--- prefix, where {JOBNAME} is the value of the job_name field. The
--- resulting bucket and object prefix is used as the prefix of the
--- resources used to store temporary data needed during the job execution.
--- NOTE: This will override the value in taskrunner_settings. The supported
--- resource type is: Google Cloud Storage:
--- storage.googleapis.com\/{bucket}\/{object}
--- bucket.storage.googleapis.com\/{object}
-eTempStoragePrefix :: Lens' Environment (Maybe Text)
-eTempStoragePrefix
-  = lens _eTempStoragePrefix
-      (\ s a -> s{_eTempStoragePrefix = a})
-
--- | A description of the process that generated the request.
-eUserAgent :: Lens' Environment (Maybe UserAgent)
-eUserAgent
-  = lens _eUserAgent (\ s a -> s{_eUserAgent = a})
-
--- | The Dataflow SDK pipeline options specified by the user. These options
--- are passed through the service and are used to recreate the SDK pipeline
--- options on the worker in a language agnostic and platform independent
--- way.
-eSdkPipelineOptions :: Lens' Environment (Maybe SdkPipelineOptions)
-eSdkPipelineOptions
-  = lens _eSdkPipelineOptions
-      (\ s a -> s{_eSdkPipelineOptions = a})
-
-instance FromJSON Environment where
-        parseJSON
-          = withObject "Environment"
-              (\ o ->
-                 Environment <$>
-                   (o .:? "dataset") <*>
-                     (o .:? "experiments" .!= mempty)
-                     <*> (o .:? "workerPools" .!= mempty)
-                     <*> (o .:? "clusterManagerApiService")
-                     <*> (o .:? "version")
-                     <*> (o .:? "internalExperiments")
-                     <*> (o .:? "tempStoragePrefix")
-                     <*> (o .:? "userAgent")
-                     <*> (o .:? "sdkPipelineOptions"))
-
-instance ToJSON Environment where
-        toJSON Environment{..}
-          = object
-              (catMaybes
-                 [("dataset" .=) <$> _eDataset,
-                  ("experiments" .=) <$> _eExperiments,
-                  ("workerPools" .=) <$> _eWorkerPools,
-                  ("clusterManagerApiService" .=) <$>
-                    _eClusterManagerAPIService,
-                  ("version" .=) <$> _eVersion,
-                  ("internalExperiments" .=) <$> _eInternalExperiments,
-                  ("tempStoragePrefix" .=) <$> _eTempStoragePrefix,
-                  ("userAgent" .=) <$> _eUserAgent,
-                  ("sdkPipelineOptions" .=) <$> _eSdkPipelineOptions])
-
--- | An instruction that writes records. Takes one input, produces no
--- outputs.
---
--- /See:/ 'writeInstruction' smart constructor.
-data WriteInstruction = WriteInstruction
-    { _wiSink  :: !(Maybe Sink)
-    , _wiInput :: !(Maybe InstructionInput)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'WriteInstruction' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'wiSink'
---
--- * 'wiInput'
-writeInstruction
-    :: WriteInstruction
-writeInstruction =
-    WriteInstruction
-    { _wiSink = Nothing
-    , _wiInput = Nothing
-    }
-
--- | The sink to write to.
-wiSink :: Lens' WriteInstruction (Maybe Sink)
-wiSink = lens _wiSink (\ s a -> s{_wiSink = a})
-
--- | The input.
-wiInput :: Lens' WriteInstruction (Maybe InstructionInput)
-wiInput = lens _wiInput (\ s a -> s{_wiInput = a})
-
-instance FromJSON WriteInstruction where
-        parseJSON
-          = withObject "WriteInstruction"
-              (\ o ->
-                 WriteInstruction <$>
-                   (o .:? "sink") <*> (o .:? "input"))
-
-instance ToJSON WriteInstruction where
-        toJSON WriteInstruction{..}
-          = object
-              (catMaybes
-                 [("sink" .=) <$> _wiSink, ("input" .=) <$> _wiInput])
-
--- | The result of a SourceGetMetadataOperation.
---
--- /See:/ 'sourceGetMetadataResponse' smart constructor.
-newtype SourceGetMetadataResponse = SourceGetMetadataResponse
-    { _sgmrMetadata :: Maybe SourceMetadata
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SourceGetMetadataResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'sgmrMetadata'
-sourceGetMetadataResponse
-    :: SourceGetMetadataResponse
-sourceGetMetadataResponse =
-    SourceGetMetadataResponse
-    { _sgmrMetadata = Nothing
-    }
-
--- | The computed metadata.
-sgmrMetadata :: Lens' SourceGetMetadataResponse (Maybe SourceMetadata)
-sgmrMetadata
-  = lens _sgmrMetadata (\ s a -> s{_sgmrMetadata = a})
-
-instance FromJSON SourceGetMetadataResponse where
-        parseJSON
-          = withObject "SourceGetMetadataResponse"
-              (\ o ->
-                 SourceGetMetadataResponse <$> (o .:? "metadata"))
-
-instance ToJSON SourceGetMetadataResponse where
-        toJSON SourceGetMetadataResponse{..}
-          = object
-              (catMaybes [("metadata" .=) <$> _sgmrMetadata])
 
 -- | Describes the state of a metric.
 --
@@ -1435,6 +1203,263 @@ instance ToJSON MetricUpdate where
                   ("name" .=) <$> _muName,
                   ("scalar" .=) <$> _muScalar])
 
+-- | The result of a SourceGetMetadataOperation.
+--
+-- /See:/ 'sourceGetMetadataResponse' smart constructor.
+newtype SourceGetMetadataResponse = SourceGetMetadataResponse
+    { _sgmrMetadata :: Maybe SourceMetadata
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SourceGetMetadataResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sgmrMetadata'
+sourceGetMetadataResponse
+    :: SourceGetMetadataResponse
+sourceGetMetadataResponse =
+    SourceGetMetadataResponse
+    { _sgmrMetadata = Nothing
+    }
+
+-- | The computed metadata.
+sgmrMetadata :: Lens' SourceGetMetadataResponse (Maybe SourceMetadata)
+sgmrMetadata
+  = lens _sgmrMetadata (\ s a -> s{_sgmrMetadata = a})
+
+instance FromJSON SourceGetMetadataResponse where
+        parseJSON
+          = withObject "SourceGetMetadataResponse"
+              (\ o ->
+                 SourceGetMetadataResponse <$> (o .:? "metadata"))
+
+instance ToJSON SourceGetMetadataResponse where
+        toJSON SourceGetMetadataResponse{..}
+          = object
+              (catMaybes [("metadata" .=) <$> _sgmrMetadata])
+
+-- | Describes the environment in which a Dataflow Job runs.
+--
+-- /See:/ 'environment' smart constructor.
+data Environment = Environment
+    { _eDataset                  :: !(Maybe Text)
+    , _eExperiments              :: !(Maybe [Text])
+    , _eWorkerPools              :: !(Maybe [WorkerPool])
+    , _eClusterManagerAPIService :: !(Maybe Text)
+    , _eVersion                  :: !(Maybe EnvironmentVersion)
+    , _eInternalExperiments      :: !(Maybe EnvironmentInternalExperiments)
+    , _eTempStoragePrefix        :: !(Maybe Text)
+    , _eUserAgent                :: !(Maybe EnvironmentUserAgent)
+    , _eSdkPipelineOptions       :: !(Maybe EnvironmentSdkPipelineOptions)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Environment' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eDataset'
+--
+-- * 'eExperiments'
+--
+-- * 'eWorkerPools'
+--
+-- * 'eClusterManagerAPIService'
+--
+-- * 'eVersion'
+--
+-- * 'eInternalExperiments'
+--
+-- * 'eTempStoragePrefix'
+--
+-- * 'eUserAgent'
+--
+-- * 'eSdkPipelineOptions'
+environment
+    :: Environment
+environment =
+    Environment
+    { _eDataset = Nothing
+    , _eExperiments = Nothing
+    , _eWorkerPools = Nothing
+    , _eClusterManagerAPIService = Nothing
+    , _eVersion = Nothing
+    , _eInternalExperiments = Nothing
+    , _eTempStoragePrefix = Nothing
+    , _eUserAgent = Nothing
+    , _eSdkPipelineOptions = Nothing
+    }
+
+-- | The dataset for the current project where various workflow related
+-- tables are stored. The supported resource type is: Google BigQuery:
+-- bigquery.googleapis.com\/{dataset}
+eDataset :: Lens' Environment (Maybe Text)
+eDataset = lens _eDataset (\ s a -> s{_eDataset = a})
+
+-- | The list of experiments to enable.
+eExperiments :: Lens' Environment [Text]
+eExperiments
+  = lens _eExperiments (\ s a -> s{_eExperiments = a})
+      . _Default
+      . _Coerce
+
+-- | Worker pools. At least one \"harness\" worker pool must be specified in
+-- order for the job to have workers.
+eWorkerPools :: Lens' Environment [WorkerPool]
+eWorkerPools
+  = lens _eWorkerPools (\ s a -> s{_eWorkerPools = a})
+      . _Default
+      . _Coerce
+
+-- | The type of cluster manager API to use. If unknown or unspecified, the
+-- service will attempt to choose a reasonable default. This should be in
+-- the form of the API service name, e.g. \"compute.googleapis.com\".
+eClusterManagerAPIService :: Lens' Environment (Maybe Text)
+eClusterManagerAPIService
+  = lens _eClusterManagerAPIService
+      (\ s a -> s{_eClusterManagerAPIService = a})
+
+-- | A structure describing which components and their versions of the
+-- service are required in order to run the job.
+eVersion :: Lens' Environment (Maybe EnvironmentVersion)
+eVersion = lens _eVersion (\ s a -> s{_eVersion = a})
+
+-- | Experimental settings.
+eInternalExperiments :: Lens' Environment (Maybe EnvironmentInternalExperiments)
+eInternalExperiments
+  = lens _eInternalExperiments
+      (\ s a -> s{_eInternalExperiments = a})
+
+-- | The prefix of the resources the system should use for temporary storage.
+-- The system will append the suffix \"\/temp-{JOBNAME} to this resource
+-- prefix, where {JOBNAME} is the value of the job_name field. The
+-- resulting bucket and object prefix is used as the prefix of the
+-- resources used to store temporary data needed during the job execution.
+-- NOTE: This will override the value in taskrunner_settings. The supported
+-- resource type is: Google Cloud Storage:
+-- storage.googleapis.com\/{bucket}\/{object}
+-- bucket.storage.googleapis.com\/{object}
+eTempStoragePrefix :: Lens' Environment (Maybe Text)
+eTempStoragePrefix
+  = lens _eTempStoragePrefix
+      (\ s a -> s{_eTempStoragePrefix = a})
+
+-- | A description of the process that generated the request.
+eUserAgent :: Lens' Environment (Maybe EnvironmentUserAgent)
+eUserAgent
+  = lens _eUserAgent (\ s a -> s{_eUserAgent = a})
+
+-- | The Dataflow SDK pipeline options specified by the user. These options
+-- are passed through the service and are used to recreate the SDK pipeline
+-- options on the worker in a language agnostic and platform independent
+-- way.
+eSdkPipelineOptions :: Lens' Environment (Maybe EnvironmentSdkPipelineOptions)
+eSdkPipelineOptions
+  = lens _eSdkPipelineOptions
+      (\ s a -> s{_eSdkPipelineOptions = a})
+
+instance FromJSON Environment where
+        parseJSON
+          = withObject "Environment"
+              (\ o ->
+                 Environment <$>
+                   (o .:? "dataset") <*>
+                     (o .:? "experiments" .!= mempty)
+                     <*> (o .:? "workerPools" .!= mempty)
+                     <*> (o .:? "clusterManagerApiService")
+                     <*> (o .:? "version")
+                     <*> (o .:? "internalExperiments")
+                     <*> (o .:? "tempStoragePrefix")
+                     <*> (o .:? "userAgent")
+                     <*> (o .:? "sdkPipelineOptions"))
+
+instance ToJSON Environment where
+        toJSON Environment{..}
+          = object
+              (catMaybes
+                 [("dataset" .=) <$> _eDataset,
+                  ("experiments" .=) <$> _eExperiments,
+                  ("workerPools" .=) <$> _eWorkerPools,
+                  ("clusterManagerApiService" .=) <$>
+                    _eClusterManagerAPIService,
+                  ("version" .=) <$> _eVersion,
+                  ("internalExperiments" .=) <$> _eInternalExperiments,
+                  ("tempStoragePrefix" .=) <$> _eTempStoragePrefix,
+                  ("userAgent" .=) <$> _eUserAgent,
+                  ("sdkPipelineOptions" .=) <$> _eSdkPipelineOptions])
+
+-- | A position that encapsulates an inner position and an index for the
+-- inner position. A ConcatPosition can be used by a reader of a source
+-- that encapsulates a set of other sources.
+--
+-- /See:/ 'concatPosition' smart constructor.
+data ConcatPosition = ConcatPosition
+    { _cpIndex    :: !(Maybe Int32)
+    , _cpPosition :: !(Maybe Position)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ConcatPosition' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cpIndex'
+--
+-- * 'cpPosition'
+concatPosition
+    :: ConcatPosition
+concatPosition =
+    ConcatPosition
+    { _cpIndex = Nothing
+    , _cpPosition = Nothing
+    }
+
+-- | Index of the inner source.
+cpIndex :: Lens' ConcatPosition (Maybe Int32)
+cpIndex = lens _cpIndex (\ s a -> s{_cpIndex = a})
+
+-- | Position within the inner source.
+cpPosition :: Lens' ConcatPosition (Maybe Position)
+cpPosition
+  = lens _cpPosition (\ s a -> s{_cpPosition = a})
+
+instance FromJSON ConcatPosition where
+        parseJSON
+          = withObject "ConcatPosition"
+              (\ o ->
+                 ConcatPosition <$>
+                   (o .:? "index") <*> (o .:? "position"))
+
+instance ToJSON ConcatPosition where
+        toJSON ConcatPosition{..}
+          = object
+              (catMaybes
+                 [("index" .=) <$> _cpIndex,
+                  ("position" .=) <$> _cpPosition])
+
+-- | Zero or more labeled fields which identify the part of the job this
+-- metric is associated with, such as the name of a step or collection. For
+-- example, built-in counters associated with steps will have
+-- context[\'step\'] = . Counters associated with PCollections in the SDK
+-- will have context[\'pcollection\'] = .
+--
+-- /See:/ 'metricStructuredNameContext' smart constructor.
+data MetricStructuredNameContext =
+    MetricStructuredNameContext
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MetricStructuredNameContext' with the minimum fields required to make a request.
+--
+metricStructuredNameContext
+    :: MetricStructuredNameContext
+metricStructuredNameContext = MetricStructuredNameContext
+
+instance FromJSON MetricStructuredNameContext where
+        parseJSON
+          = withObject "MetricStructuredNameContext"
+              (\ o -> pure MetricStructuredNameContext)
+
+instance ToJSON MetricStructuredNameContext where
+        toJSON = const (Object mempty)
+
 -- | Identifies the location of a streaming computation stage, for
 -- stage-to-stage communication.
 --
@@ -1521,6 +1546,315 @@ instance ToJSON DerivedSource where
                  [("derivationMode" .=) <$> _dsDerivationMode,
                   ("source" .=) <$> _dsSource])
 
+-- | JobMetrics contains a collection of metrics descibing the detailed
+-- progress of a Dataflow job. Metrics correspond to user-defined and
+-- system-defined metrics in the job. This resource captures only the most
+-- recent values of each metric; time-series data can be queried for them
+-- (under the same metric names) from Cloud Monitoring.
+--
+-- /See:/ 'jobMetrics' smart constructor.
+data JobMetrics = JobMetrics
+    { _jmMetrics    :: !(Maybe [MetricUpdate])
+    , _jmMetricTime :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'JobMetrics' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'jmMetrics'
+--
+-- * 'jmMetricTime'
+jobMetrics
+    :: JobMetrics
+jobMetrics =
+    JobMetrics
+    { _jmMetrics = Nothing
+    , _jmMetricTime = Nothing
+    }
+
+-- | All metrics for this job.
+jmMetrics :: Lens' JobMetrics [MetricUpdate]
+jmMetrics
+  = lens _jmMetrics (\ s a -> s{_jmMetrics = a}) .
+      _Default
+      . _Coerce
+
+-- | Timestamp as of which metric values are current.
+jmMetricTime :: Lens' JobMetrics (Maybe Text)
+jmMetricTime
+  = lens _jmMetricTime (\ s a -> s{_jmMetricTime = a})
+
+instance FromJSON JobMetrics where
+        parseJSON
+          = withObject "JobMetrics"
+              (\ o ->
+                 JobMetrics <$>
+                   (o .:? "metrics" .!= mempty) <*>
+                     (o .:? "metricTime"))
+
+instance ToJSON JobMetrics where
+        toJSON JobMetrics{..}
+          = object
+              (catMaybes
+                 [("metrics" .=) <$> _jmMetrics,
+                  ("metricTime" .=) <$> _jmMetricTime])
+
+-- | Conveys a worker\'s progress through the work described by a WorkItem.
+--
+-- /See:/ 'workItemStatus' smart constructor.
+data WorkItemStatus = WorkItemStatus
+    { _wisProgress                :: !(Maybe ApproximateProgress)
+    , _wisSourceOperationResponse :: !(Maybe SourceOperationResponse)
+    , _wisStopPosition            :: !(Maybe Position)
+    , _wisDynamicSourceSplit      :: !(Maybe DynamicSourceSplit)
+    , _wisCompleted               :: !(Maybe Bool)
+    , _wisSourceFork              :: !(Maybe SourceFork)
+    , _wisReportIndex             :: !(Maybe Int64)
+    , _wisRequestedLeaseDuration  :: !(Maybe Text)
+    , _wisErrors                  :: !(Maybe [Status])
+    , _wisMetricUpdates           :: !(Maybe [MetricUpdate])
+    , _wisWorkItemId              :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'WorkItemStatus' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'wisProgress'
+--
+-- * 'wisSourceOperationResponse'
+--
+-- * 'wisStopPosition'
+--
+-- * 'wisDynamicSourceSplit'
+--
+-- * 'wisCompleted'
+--
+-- * 'wisSourceFork'
+--
+-- * 'wisReportIndex'
+--
+-- * 'wisRequestedLeaseDuration'
+--
+-- * 'wisErrors'
+--
+-- * 'wisMetricUpdates'
+--
+-- * 'wisWorkItemId'
+workItemStatus
+    :: WorkItemStatus
+workItemStatus =
+    WorkItemStatus
+    { _wisProgress = Nothing
+    , _wisSourceOperationResponse = Nothing
+    , _wisStopPosition = Nothing
+    , _wisDynamicSourceSplit = Nothing
+    , _wisCompleted = Nothing
+    , _wisSourceFork = Nothing
+    , _wisReportIndex = Nothing
+    , _wisRequestedLeaseDuration = Nothing
+    , _wisErrors = Nothing
+    , _wisMetricUpdates = Nothing
+    , _wisWorkItemId = Nothing
+    }
+
+-- | The WorkItem\'s approximate progress.
+wisProgress :: Lens' WorkItemStatus (Maybe ApproximateProgress)
+wisProgress
+  = lens _wisProgress (\ s a -> s{_wisProgress = a})
+
+-- | If the work item represented a SourceOperationRequest, and the work is
+-- completed, contains the result of the operation.
+wisSourceOperationResponse :: Lens' WorkItemStatus (Maybe SourceOperationResponse)
+wisSourceOperationResponse
+  = lens _wisSourceOperationResponse
+      (\ s a -> s{_wisSourceOperationResponse = a})
+
+-- | A worker may split an active map task in two parts, \"primary\" and
+-- \"residual\", continuing to process the primary part and returning the
+-- residual part into the pool of available work. This event is called a
+-- \"dynamic split\" and is critical to the dynamic work rebalancing
+-- feature. The two obtained sub-tasks are called \"parts\" of the split.
+-- The parts, if concatenated, must represent the same input as would be
+-- read by the current task if the split did not happen. The exact way in
+-- which the original task is decomposed into the two parts is specified
+-- either as a position demarcating them (stop_position), or explicitly as
+-- two DerivedSources, if this task consumes a user-defined source type
+-- (dynamic_source_split). The \"current\" task is adjusted as a result of
+-- the split: after a task with range [A, B) sends a stop_position update
+-- at C, its range is considered to be [A, C), e.g.: * Progress should be
+-- interpreted relative to the new range, e.g. \"75% completed\" means
+-- \"75% of [A, C) completed\" * The worker should interpret
+-- proposed_stop_position relative to the new range, e.g. \"split at 68%\"
+-- should be interpreted as \"split at 68% of [A, C)\". * If the worker
+-- chooses to split again using stop_position, only stop_positions in [A,
+-- C) will be accepted. * Etc. dynamic_source_split has similar semantics:
+-- e.g., if a task with source S splits using dynamic_source_split into {P,
+-- R} (where P and R must be together equivalent to S), then subsequent
+-- progress and proposed_stop_position should be interpreted relative to P,
+-- and in a potential subsequent dynamic_source_split into {P\', R\'}, P\'
+-- and R\' must be together equivalent to P, etc.
+wisStopPosition :: Lens' WorkItemStatus (Maybe Position)
+wisStopPosition
+  = lens _wisStopPosition
+      (\ s a -> s{_wisStopPosition = a})
+
+-- | See documentation of stop_position.
+wisDynamicSourceSplit :: Lens' WorkItemStatus (Maybe DynamicSourceSplit)
+wisDynamicSourceSplit
+  = lens _wisDynamicSourceSplit
+      (\ s a -> s{_wisDynamicSourceSplit = a})
+
+-- | True if the WorkItem was completed (successfully or unsuccessfully).
+wisCompleted :: Lens' WorkItemStatus (Maybe Bool)
+wisCompleted
+  = lens _wisCompleted (\ s a -> s{_wisCompleted = a})
+
+-- | DEPRECATED in favor of dynamic_source_split.
+wisSourceFork :: Lens' WorkItemStatus (Maybe SourceFork)
+wisSourceFork
+  = lens _wisSourceFork
+      (\ s a -> s{_wisSourceFork = a})
+
+-- | The report index. When a WorkItem is leased, the lease will contain an
+-- initial report index. When a WorkItem\'s status is reported to the
+-- system, the report should be sent with that report index, and the
+-- response will contain the index the worker should use for the next
+-- report. Reports received with unexpected index values will be rejected
+-- by the service. In order to preserve idempotency, the worker should not
+-- alter the contents of a report, even if the worker must submit the same
+-- report multiple times before getting back a response. The worker should
+-- not submit a subsequent report until the response for the previous
+-- report had been received from the service.
+wisReportIndex :: Lens' WorkItemStatus (Maybe Int64)
+wisReportIndex
+  = lens _wisReportIndex
+      (\ s a -> s{_wisReportIndex = a})
+
+-- | Amount of time the worker requests for its lease.
+wisRequestedLeaseDuration :: Lens' WorkItemStatus (Maybe Text)
+wisRequestedLeaseDuration
+  = lens _wisRequestedLeaseDuration
+      (\ s a -> s{_wisRequestedLeaseDuration = a})
+
+-- | Specifies errors which occurred during processing. If errors are
+-- provided, and completed = true, then the WorkItem is considered to have
+-- failed.
+wisErrors :: Lens' WorkItemStatus [Status]
+wisErrors
+  = lens _wisErrors (\ s a -> s{_wisErrors = a}) .
+      _Default
+      . _Coerce
+
+-- | Worker output metrics (counters) for this WorkItem.
+wisMetricUpdates :: Lens' WorkItemStatus [MetricUpdate]
+wisMetricUpdates
+  = lens _wisMetricUpdates
+      (\ s a -> s{_wisMetricUpdates = a})
+      . _Default
+      . _Coerce
+
+-- | Identifies the WorkItem.
+wisWorkItemId :: Lens' WorkItemStatus (Maybe Text)
+wisWorkItemId
+  = lens _wisWorkItemId
+      (\ s a -> s{_wisWorkItemId = a})
+
+instance FromJSON WorkItemStatus where
+        parseJSON
+          = withObject "WorkItemStatus"
+              (\ o ->
+                 WorkItemStatus <$>
+                   (o .:? "progress") <*>
+                     (o .:? "sourceOperationResponse")
+                     <*> (o .:? "stopPosition")
+                     <*> (o .:? "dynamicSourceSplit")
+                     <*> (o .:? "completed")
+                     <*> (o .:? "sourceFork")
+                     <*> (o .:? "reportIndex")
+                     <*> (o .:? "requestedLeaseDuration")
+                     <*> (o .:? "errors" .!= mempty)
+                     <*> (o .:? "metricUpdates" .!= mempty)
+                     <*> (o .:? "workItemId"))
+
+instance ToJSON WorkItemStatus where
+        toJSON WorkItemStatus{..}
+          = object
+              (catMaybes
+                 [("progress" .=) <$> _wisProgress,
+                  ("sourceOperationResponse" .=) <$>
+                    _wisSourceOperationResponse,
+                  ("stopPosition" .=) <$> _wisStopPosition,
+                  ("dynamicSourceSplit" .=) <$> _wisDynamicSourceSplit,
+                  ("completed" .=) <$> _wisCompleted,
+                  ("sourceFork" .=) <$> _wisSourceFork,
+                  ("reportIndex" .=) <$> _wisReportIndex,
+                  ("requestedLeaseDuration" .=) <$>
+                    _wisRequestedLeaseDuration,
+                  ("errors" .=) <$> _wisErrors,
+                  ("metricUpdates" .=) <$> _wisMetricUpdates,
+                  ("workItemId" .=) <$> _wisWorkItemId])
+
+-- | An instruction that copies its inputs (zero or more) to its (single)
+-- output.
+--
+-- /See:/ 'flattenInstruction' smart constructor.
+newtype FlattenInstruction = FlattenInstruction
+    { _fiInputs :: Maybe [InstructionInput]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'FlattenInstruction' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fiInputs'
+flattenInstruction
+    :: FlattenInstruction
+flattenInstruction =
+    FlattenInstruction
+    { _fiInputs = Nothing
+    }
+
+-- | Describes the inputs to the flatten instruction.
+fiInputs :: Lens' FlattenInstruction [InstructionInput]
+fiInputs
+  = lens _fiInputs (\ s a -> s{_fiInputs = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON FlattenInstruction where
+        parseJSON
+          = withObject "FlattenInstruction"
+              (\ o ->
+                 FlattenInstruction <$> (o .:? "inputs" .!= mempty))
+
+instance ToJSON FlattenInstruction where
+        toJSON FlattenInstruction{..}
+          = object (catMaybes [("inputs" .=) <$> _fiInputs])
+
+-- | Map of transform name prefixes of the job to be replaced to the
+-- corresponding name prefixes of the new job.
+--
+-- /See:/ 'jobTransformNameMApping' smart constructor.
+data JobTransformNameMApping =
+    JobTransformNameMApping
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'JobTransformNameMApping' with the minimum fields required to make a request.
+--
+jobTransformNameMApping
+    :: JobTransformNameMApping
+jobTransformNameMApping = JobTransformNameMApping
+
+instance FromJSON JobTransformNameMApping where
+        parseJSON
+          = withObject "JobTransformNameMApping"
+              (\ o -> pure JobTransformNameMApping)
+
+instance ToJSON JobTransformNameMApping where
+        toJSON = const (Object mempty)
+
 -- | The source to read from, plus its parameters.
 --
 -- /See:/ 'sourceSpec' smart constructor.
@@ -1539,6 +1873,94 @@ instance FromJSON SourceSpec where
           = withObject "SourceSpec" (\ o -> pure SourceSpec)
 
 instance ToJSON SourceSpec where
+        toJSON = const (Object mempty)
+
+-- | Metadata about a Source useful for automatically optimizing and tuning
+-- the pipeline, etc.
+--
+-- /See:/ 'sourceMetadata' smart constructor.
+data SourceMetadata = SourceMetadata
+    { _smEstimatedSizeBytes :: !(Maybe Int64)
+    , _smProducesSortedKeys :: !(Maybe Bool)
+    , _smInfinite           :: !(Maybe Bool)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SourceMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'smEstimatedSizeBytes'
+--
+-- * 'smProducesSortedKeys'
+--
+-- * 'smInfinite'
+sourceMetadata
+    :: SourceMetadata
+sourceMetadata =
+    SourceMetadata
+    { _smEstimatedSizeBytes = Nothing
+    , _smProducesSortedKeys = Nothing
+    , _smInfinite = Nothing
+    }
+
+-- | An estimate of the total size (in bytes) of the data that would be read
+-- from this source. This estimate is in terms of external storage size,
+-- before any decompression or other processing done by the reader.
+smEstimatedSizeBytes :: Lens' SourceMetadata (Maybe Int64)
+smEstimatedSizeBytes
+  = lens _smEstimatedSizeBytes
+      (\ s a -> s{_smEstimatedSizeBytes = a})
+
+-- | Whether this source is known to produce key\/value pairs with the
+-- (encoded) keys in lexicographically sorted order.
+smProducesSortedKeys :: Lens' SourceMetadata (Maybe Bool)
+smProducesSortedKeys
+  = lens _smProducesSortedKeys
+      (\ s a -> s{_smProducesSortedKeys = a})
+
+-- | Specifies that the size of this source is known to be infinite (this is
+-- a streaming source).
+smInfinite :: Lens' SourceMetadata (Maybe Bool)
+smInfinite
+  = lens _smInfinite (\ s a -> s{_smInfinite = a})
+
+instance FromJSON SourceMetadata where
+        parseJSON
+          = withObject "SourceMetadata"
+              (\ o ->
+                 SourceMetadata <$>
+                   (o .:? "estimatedSizeBytes") <*>
+                     (o .:? "producesSortedKeys")
+                     <*> (o .:? "infinite"))
+
+instance ToJSON SourceMetadata where
+        toJSON SourceMetadata{..}
+          = object
+              (catMaybes
+                 [("estimatedSizeBytes" .=) <$> _smEstimatedSizeBytes,
+                  ("producesSortedKeys" .=) <$> _smProducesSortedKeys,
+                  ("infinite" .=) <$> _smInfinite])
+
+-- | Experimental settings.
+--
+-- /See:/ 'environmentInternalExperiments' smart constructor.
+data EnvironmentInternalExperiments =
+    EnvironmentInternalExperiments
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EnvironmentInternalExperiments' with the minimum fields required to make a request.
+--
+environmentInternalExperiments
+    :: EnvironmentInternalExperiments
+environmentInternalExperiments = EnvironmentInternalExperiments
+
+instance FromJSON EnvironmentInternalExperiments
+         where
+        parseJSON
+          = withObject "EnvironmentInternalExperiments"
+              (\ o -> pure EnvironmentInternalExperiments)
+
+instance ToJSON EnvironmentInternalExperiments where
         toJSON = const (Object mempty)
 
 -- | Taskrunner configuration settings.
@@ -1809,426 +2231,29 @@ instance ToJSON TaskRunnerSettings where
                     _trsParallelWorkerSettings,
                   ("languageHint" .=) <$> _trsLanguageHint])
 
--- | Other data returned by the service, specific to the particular worker
--- harness.
+-- | The Dataflow SDK pipeline options specified by the user. These options
+-- are passed through the service and are used to recreate the SDK pipeline
+-- options on the worker in a language agnostic and platform independent
+-- way.
 --
--- /See:/ 'harnessData' smart constructor.
-data HarnessData =
-    HarnessData
+-- /See:/ 'environmentSdkPipelineOptions' smart constructor.
+data EnvironmentSdkPipelineOptions =
+    EnvironmentSdkPipelineOptions
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'HarnessData' with the minimum fields required to make a request.
+-- | Creates a value of 'EnvironmentSdkPipelineOptions' with the minimum fields required to make a request.
 --
-harnessData
-    :: HarnessData
-harnessData = HarnessData
+environmentSdkPipelineOptions
+    :: EnvironmentSdkPipelineOptions
+environmentSdkPipelineOptions = EnvironmentSdkPipelineOptions
 
-instance FromJSON HarnessData where
+instance FromJSON EnvironmentSdkPipelineOptions where
         parseJSON
-          = withObject "HarnessData" (\ o -> pure HarnessData)
+          = withObject "EnvironmentSdkPipelineOptions"
+              (\ o -> pure EnvironmentSdkPipelineOptions)
 
-instance ToJSON HarnessData where
+instance ToJSON EnvironmentSdkPipelineOptions where
         toJSON = const (Object mempty)
-
--- | JobMetrics contains a collection of metrics descibing the detailed
--- progress of a Dataflow job. Metrics correspond to user-defined and
--- system-defined metrics in the job. This resource captures only the most
--- recent values of each metric; time-series data can be queried for them
--- (under the same metric names) from Cloud Monitoring.
---
--- /See:/ 'jobMetrics' smart constructor.
-data JobMetrics = JobMetrics
-    { _jmMetrics    :: !(Maybe [MetricUpdate])
-    , _jmMetricTime :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'JobMetrics' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'jmMetrics'
---
--- * 'jmMetricTime'
-jobMetrics
-    :: JobMetrics
-jobMetrics =
-    JobMetrics
-    { _jmMetrics = Nothing
-    , _jmMetricTime = Nothing
-    }
-
--- | All metrics for this job.
-jmMetrics :: Lens' JobMetrics [MetricUpdate]
-jmMetrics
-  = lens _jmMetrics (\ s a -> s{_jmMetrics = a}) .
-      _Default
-      . _Coerce
-
--- | Timestamp as of which metric values are current.
-jmMetricTime :: Lens' JobMetrics (Maybe Text)
-jmMetricTime
-  = lens _jmMetricTime (\ s a -> s{_jmMetricTime = a})
-
-instance FromJSON JobMetrics where
-        parseJSON
-          = withObject "JobMetrics"
-              (\ o ->
-                 JobMetrics <$>
-                   (o .:? "metrics" .!= mempty) <*>
-                     (o .:? "metricTime"))
-
-instance ToJSON JobMetrics where
-        toJSON JobMetrics{..}
-          = object
-              (catMaybes
-                 [("metrics" .=) <$> _jmMetrics,
-                  ("metricTime" .=) <$> _jmMetricTime])
-
--- | An instruction that copies its inputs (zero or more) to its (single)
--- output.
---
--- /See:/ 'flattenInstruction' smart constructor.
-newtype FlattenInstruction = FlattenInstruction
-    { _fiInputs :: Maybe [InstructionInput]
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'FlattenInstruction' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'fiInputs'
-flattenInstruction
-    :: FlattenInstruction
-flattenInstruction =
-    FlattenInstruction
-    { _fiInputs = Nothing
-    }
-
--- | Describes the inputs to the flatten instruction.
-fiInputs :: Lens' FlattenInstruction [InstructionInput]
-fiInputs
-  = lens _fiInputs (\ s a -> s{_fiInputs = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON FlattenInstruction where
-        parseJSON
-          = withObject "FlattenInstruction"
-              (\ o ->
-                 FlattenInstruction <$> (o .:? "inputs" .!= mempty))
-
-instance ToJSON FlattenInstruction where
-        toJSON FlattenInstruction{..}
-          = object (catMaybes [("inputs" .=) <$> _fiInputs])
-
--- | Metadata about a Source useful for automatically optimizing and tuning
--- the pipeline, etc.
---
--- /See:/ 'sourceMetadata' smart constructor.
-data SourceMetadata = SourceMetadata
-    { _smEstimatedSizeBytes :: !(Maybe Int64)
-    , _smProducesSortedKeys :: !(Maybe Bool)
-    , _smInfinite           :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SourceMetadata' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'smEstimatedSizeBytes'
---
--- * 'smProducesSortedKeys'
---
--- * 'smInfinite'
-sourceMetadata
-    :: SourceMetadata
-sourceMetadata =
-    SourceMetadata
-    { _smEstimatedSizeBytes = Nothing
-    , _smProducesSortedKeys = Nothing
-    , _smInfinite = Nothing
-    }
-
--- | An estimate of the total size (in bytes) of the data that would be read
--- from this source. This estimate is in terms of external storage size,
--- before any decompression or other processing done by the reader.
-smEstimatedSizeBytes :: Lens' SourceMetadata (Maybe Int64)
-smEstimatedSizeBytes
-  = lens _smEstimatedSizeBytes
-      (\ s a -> s{_smEstimatedSizeBytes = a})
-
--- | Whether this source is known to produce key\/value pairs with the
--- (encoded) keys in lexicographically sorted order.
-smProducesSortedKeys :: Lens' SourceMetadata (Maybe Bool)
-smProducesSortedKeys
-  = lens _smProducesSortedKeys
-      (\ s a -> s{_smProducesSortedKeys = a})
-
--- | Specifies that the size of this source is known to be infinite (this is
--- a streaming source).
-smInfinite :: Lens' SourceMetadata (Maybe Bool)
-smInfinite
-  = lens _smInfinite (\ s a -> s{_smInfinite = a})
-
-instance FromJSON SourceMetadata where
-        parseJSON
-          = withObject "SourceMetadata"
-              (\ o ->
-                 SourceMetadata <$>
-                   (o .:? "estimatedSizeBytes") <*>
-                     (o .:? "producesSortedKeys")
-                     <*> (o .:? "infinite"))
-
-instance ToJSON SourceMetadata where
-        toJSON SourceMetadata{..}
-          = object
-              (catMaybes
-                 [("estimatedSizeBytes" .=) <$> _smEstimatedSizeBytes,
-                  ("producesSortedKeys" .=) <$> _smProducesSortedKeys,
-                  ("infinite" .=) <$> _smInfinite])
-
--- | Conveys a worker\'s progress through the work described by a WorkItem.
---
--- /See:/ 'workItemStatus' smart constructor.
-data WorkItemStatus = WorkItemStatus
-    { _wisProgress                :: !(Maybe ApproximateProgress)
-    , _wisSourceOperationResponse :: !(Maybe SourceOperationResponse)
-    , _wisStopPosition            :: !(Maybe Position)
-    , _wisDynamicSourceSplit      :: !(Maybe DynamicSourceSplit)
-    , _wisCompleted               :: !(Maybe Bool)
-    , _wisSourceFork              :: !(Maybe SourceFork)
-    , _wisReportIndex             :: !(Maybe Int64)
-    , _wisRequestedLeaseDuration  :: !(Maybe Text)
-    , _wisErrors                  :: !(Maybe [Status])
-    , _wisMetricUpdates           :: !(Maybe [MetricUpdate])
-    , _wisWorkItemId              :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'WorkItemStatus' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'wisProgress'
---
--- * 'wisSourceOperationResponse'
---
--- * 'wisStopPosition'
---
--- * 'wisDynamicSourceSplit'
---
--- * 'wisCompleted'
---
--- * 'wisSourceFork'
---
--- * 'wisReportIndex'
---
--- * 'wisRequestedLeaseDuration'
---
--- * 'wisErrors'
---
--- * 'wisMetricUpdates'
---
--- * 'wisWorkItemId'
-workItemStatus
-    :: WorkItemStatus
-workItemStatus =
-    WorkItemStatus
-    { _wisProgress = Nothing
-    , _wisSourceOperationResponse = Nothing
-    , _wisStopPosition = Nothing
-    , _wisDynamicSourceSplit = Nothing
-    , _wisCompleted = Nothing
-    , _wisSourceFork = Nothing
-    , _wisReportIndex = Nothing
-    , _wisRequestedLeaseDuration = Nothing
-    , _wisErrors = Nothing
-    , _wisMetricUpdates = Nothing
-    , _wisWorkItemId = Nothing
-    }
-
--- | The WorkItem\'s approximate progress.
-wisProgress :: Lens' WorkItemStatus (Maybe ApproximateProgress)
-wisProgress
-  = lens _wisProgress (\ s a -> s{_wisProgress = a})
-
--- | If the work item represented a SourceOperationRequest, and the work is
--- completed, contains the result of the operation.
-wisSourceOperationResponse :: Lens' WorkItemStatus (Maybe SourceOperationResponse)
-wisSourceOperationResponse
-  = lens _wisSourceOperationResponse
-      (\ s a -> s{_wisSourceOperationResponse = a})
-
--- | A worker may split an active map task in two parts, \"primary\" and
--- \"residual\", continuing to process the primary part and returning the
--- residual part into the pool of available work. This event is called a
--- \"dynamic split\" and is critical to the dynamic work rebalancing
--- feature. The two obtained sub-tasks are called \"parts\" of the split.
--- The parts, if concatenated, must represent the same input as would be
--- read by the current task if the split did not happen. The exact way in
--- which the original task is decomposed into the two parts is specified
--- either as a position demarcating them (stop_position), or explicitly as
--- two DerivedSources, if this task consumes a user-defined source type
--- (dynamic_source_split). The \"current\" task is adjusted as a result of
--- the split: after a task with range [A, B) sends a stop_position update
--- at C, its range is considered to be [A, C), e.g.: * Progress should be
--- interpreted relative to the new range, e.g. \"75% completed\" means
--- \"75% of [A, C) completed\" * The worker should interpret
--- proposed_stop_position relative to the new range, e.g. \"split at 68%\"
--- should be interpreted as \"split at 68% of [A, C)\". * If the worker
--- chooses to split again using stop_position, only stop_positions in [A,
--- C) will be accepted. * Etc. dynamic_source_split has similar semantics:
--- e.g., if a task with source S splits using dynamic_source_split into {P,
--- R} (where P and R must be together equivalent to S), then subsequent
--- progress and proposed_stop_position should be interpreted relative to P,
--- and in a potential subsequent dynamic_source_split into {P\', R\'}, P\'
--- and R\' must be together equivalent to P, etc.
-wisStopPosition :: Lens' WorkItemStatus (Maybe Position)
-wisStopPosition
-  = lens _wisStopPosition
-      (\ s a -> s{_wisStopPosition = a})
-
--- | See documentation of stop_position.
-wisDynamicSourceSplit :: Lens' WorkItemStatus (Maybe DynamicSourceSplit)
-wisDynamicSourceSplit
-  = lens _wisDynamicSourceSplit
-      (\ s a -> s{_wisDynamicSourceSplit = a})
-
--- | True if the WorkItem was completed (successfully or unsuccessfully).
-wisCompleted :: Lens' WorkItemStatus (Maybe Bool)
-wisCompleted
-  = lens _wisCompleted (\ s a -> s{_wisCompleted = a})
-
--- | DEPRECATED in favor of dynamic_source_split.
-wisSourceFork :: Lens' WorkItemStatus (Maybe SourceFork)
-wisSourceFork
-  = lens _wisSourceFork
-      (\ s a -> s{_wisSourceFork = a})
-
--- | The report index. When a WorkItem is leased, the lease will contain an
--- initial report index. When a WorkItem\'s status is reported to the
--- system, the report should be sent with that report index, and the
--- response will contain the index the worker should use for the next
--- report. Reports received with unexpected index values will be rejected
--- by the service. In order to preserve idempotency, the worker should not
--- alter the contents of a report, even if the worker must submit the same
--- report multiple times before getting back a response. The worker should
--- not submit a subsequent report until the response for the previous
--- report had been received from the service.
-wisReportIndex :: Lens' WorkItemStatus (Maybe Int64)
-wisReportIndex
-  = lens _wisReportIndex
-      (\ s a -> s{_wisReportIndex = a})
-
--- | Amount of time the worker requests for its lease.
-wisRequestedLeaseDuration :: Lens' WorkItemStatus (Maybe Text)
-wisRequestedLeaseDuration
-  = lens _wisRequestedLeaseDuration
-      (\ s a -> s{_wisRequestedLeaseDuration = a})
-
--- | Specifies errors which occurred during processing. If errors are
--- provided, and completed = true, then the WorkItem is considered to have
--- failed.
-wisErrors :: Lens' WorkItemStatus [Status]
-wisErrors
-  = lens _wisErrors (\ s a -> s{_wisErrors = a}) .
-      _Default
-      . _Coerce
-
--- | Worker output metrics (counters) for this WorkItem.
-wisMetricUpdates :: Lens' WorkItemStatus [MetricUpdate]
-wisMetricUpdates
-  = lens _wisMetricUpdates
-      (\ s a -> s{_wisMetricUpdates = a})
-      . _Default
-      . _Coerce
-
--- | Identifies the WorkItem.
-wisWorkItemId :: Lens' WorkItemStatus (Maybe Text)
-wisWorkItemId
-  = lens _wisWorkItemId
-      (\ s a -> s{_wisWorkItemId = a})
-
-instance FromJSON WorkItemStatus where
-        parseJSON
-          = withObject "WorkItemStatus"
-              (\ o ->
-                 WorkItemStatus <$>
-                   (o .:? "progress") <*>
-                     (o .:? "sourceOperationResponse")
-                     <*> (o .:? "stopPosition")
-                     <*> (o .:? "dynamicSourceSplit")
-                     <*> (o .:? "completed")
-                     <*> (o .:? "sourceFork")
-                     <*> (o .:? "reportIndex")
-                     <*> (o .:? "requestedLeaseDuration")
-                     <*> (o .:? "errors" .!= mempty)
-                     <*> (o .:? "metricUpdates" .!= mempty)
-                     <*> (o .:? "workItemId"))
-
-instance ToJSON WorkItemStatus where
-        toJSON WorkItemStatus{..}
-          = object
-              (catMaybes
-                 [("progress" .=) <$> _wisProgress,
-                  ("sourceOperationResponse" .=) <$>
-                    _wisSourceOperationResponse,
-                  ("stopPosition" .=) <$> _wisStopPosition,
-                  ("dynamicSourceSplit" .=) <$> _wisDynamicSourceSplit,
-                  ("completed" .=) <$> _wisCompleted,
-                  ("sourceFork" .=) <$> _wisSourceFork,
-                  ("reportIndex" .=) <$> _wisReportIndex,
-                  ("requestedLeaseDuration" .=) <$>
-                    _wisRequestedLeaseDuration,
-                  ("errors" .=) <$> _wisErrors,
-                  ("metricUpdates" .=) <$> _wisMetricUpdates,
-                  ("workItemId" .=) <$> _wisWorkItemId])
-
--- | A task which consists of a shell command for the worker to execute.
---
--- /See:/ 'shellTask' smart constructor.
-data ShellTask = ShellTask
-    { _stCommand  :: !(Maybe Text)
-    , _stExitCode :: !(Maybe Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ShellTask' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'stCommand'
---
--- * 'stExitCode'
-shellTask
-    :: ShellTask
-shellTask =
-    ShellTask
-    { _stCommand = Nothing
-    , _stExitCode = Nothing
-    }
-
--- | The shell command to run.
-stCommand :: Lens' ShellTask (Maybe Text)
-stCommand
-  = lens _stCommand (\ s a -> s{_stCommand = a})
-
--- | Exit code for the task.
-stExitCode :: Lens' ShellTask (Maybe Int32)
-stExitCode
-  = lens _stExitCode (\ s a -> s{_stExitCode = a})
-
-instance FromJSON ShellTask where
-        parseJSON
-          = withObject "ShellTask"
-              (\ o ->
-                 ShellTask <$>
-                   (o .:? "command") <*> (o .:? "exitCode"))
-
-instance ToJSON ShellTask where
-        toJSON ShellTask{..}
-          = object
-              (catMaybes
-                 [("command" .=) <$> _stCommand,
-                  ("exitCode" .=) <$> _stExitCode])
 
 -- | Request to lease WorkItems.
 --
@@ -2372,13 +2397,128 @@ instance ToJSON SourceOperationResponse where
                  [("split" .=) <$> _sorSplit,
                   ("getMetadata" .=) <$> _sorGetMetadata])
 
+-- | Maps user stage names to stable computation names.
+--
+-- /See:/ 'topologyConfigUserStageToComputationNameMap' smart constructor.
+data TopologyConfigUserStageToComputationNameMap =
+    TopologyConfigUserStageToComputationNameMap
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TopologyConfigUserStageToComputationNameMap' with the minimum fields required to make a request.
+--
+topologyConfigUserStageToComputationNameMap
+    :: TopologyConfigUserStageToComputationNameMap
+topologyConfigUserStageToComputationNameMap =
+    TopologyConfigUserStageToComputationNameMap
+
+instance FromJSON
+         TopologyConfigUserStageToComputationNameMap where
+        parseJSON
+          = withObject
+              "TopologyConfigUserStageToComputationNameMap"
+              (\ o ->
+                 pure TopologyConfigUserStageToComputationNameMap)
+
+instance ToJSON
+         TopologyConfigUserStageToComputationNameMap where
+        toJSON = const (Object mempty)
+
+-- | A task which consists of a shell command for the worker to execute.
+--
+-- /See:/ 'shellTask' smart constructor.
+data ShellTask = ShellTask
+    { _stCommand  :: !(Maybe Text)
+    , _stExitCode :: !(Maybe Int32)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ShellTask' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'stCommand'
+--
+-- * 'stExitCode'
+shellTask
+    :: ShellTask
+shellTask =
+    ShellTask
+    { _stCommand = Nothing
+    , _stExitCode = Nothing
+    }
+
+-- | The shell command to run.
+stCommand :: Lens' ShellTask (Maybe Text)
+stCommand
+  = lens _stCommand (\ s a -> s{_stCommand = a})
+
+-- | Exit code for the task.
+stExitCode :: Lens' ShellTask (Maybe Int32)
+stExitCode
+  = lens _stExitCode (\ s a -> s{_stExitCode = a})
+
+instance FromJSON ShellTask where
+        parseJSON
+          = withObject "ShellTask"
+              (\ o ->
+                 ShellTask <$>
+                   (o .:? "command") <*> (o .:? "exitCode"))
+
+instance ToJSON ShellTask where
+        toJSON ShellTask{..}
+          = object
+              (catMaybes
+                 [("command" .=) <$> _stCommand,
+                  ("exitCode" .=) <$> _stExitCode])
+
+--
+-- /See:/ 'statusDetailsItem' smart constructor.
+data StatusDetailsItem =
+    StatusDetailsItem
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
+--
+statusDetailsItem
+    :: StatusDetailsItem
+statusDetailsItem = StatusDetailsItem
+
+instance FromJSON StatusDetailsItem where
+        parseJSON
+          = withObject "StatusDetailsItem"
+              (\ o -> pure StatusDetailsItem)
+
+instance ToJSON StatusDetailsItem where
+        toJSON = const (Object mempty)
+
+-- | Named properties associated with the step. Each kind of predefined step
+-- has its own required set of properties.
+--
+-- /See:/ 'stepProperties' smart constructor.
+data StepProperties =
+    StepProperties
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StepProperties' with the minimum fields required to make a request.
+--
+stepProperties
+    :: StepProperties
+stepProperties = StepProperties
+
+instance FromJSON StepProperties where
+        parseJSON
+          = withObject "StepProperties"
+              (\ o -> pure StepProperties)
+
+instance ToJSON StepProperties where
+        toJSON = const (Object mempty)
+
 -- | Global topology of the streaming Dataflow job, including all
 -- computations and their sharded locations.
 --
 -- /See:/ 'topologyConfig' smart constructor.
 data TopologyConfig = TopologyConfig
     { _tcDataDiskAssignments           :: !(Maybe [DataDiskAssignment])
-    , _tcUserStageToComputationNameMap :: !(Maybe UserStageToComputationNameMap)
+    , _tcUserStageToComputationNameMap :: !(Maybe TopologyConfigUserStageToComputationNameMap)
     , _tcComputations                  :: !(Maybe [ComputationTopology])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2409,7 +2549,7 @@ tcDataDiskAssignments
       . _Coerce
 
 -- | Maps user stage names to stable computation names.
-tcUserStageToComputationNameMap :: Lens' TopologyConfig (Maybe UserStageToComputationNameMap)
+tcUserStageToComputationNameMap :: Lens' TopologyConfig (Maybe TopologyConfigUserStageToComputationNameMap)
 tcUserStageToComputationNameMap
   = lens _tcUserStageToComputationNameMap
       (\ s a -> s{_tcUserStageToComputationNameMap = a})
@@ -2546,149 +2686,27 @@ instance ToJSON WorkerSettings where
                   ("reportingEnabled" .=) <$> _wsReportingEnabled,
                   ("workerId" .=) <$> _wsWorkerId])
 
--- | The codec to use to encode data written to the sink.
---
--- /See:/ 'codec' smart constructor.
-data Codec =
-    Codec
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Codec' with the minimum fields required to make a request.
---
-codec
-    :: Codec
-codec = Codec
-
-instance FromJSON Codec where
-        parseJSON = withObject "Codec" (\ o -> pure Codec)
-
-instance ToJSON Codec where
-        toJSON = const (Object mempty)
-
--- | The Dataflow service\'s idea of the current state of a WorkItem being
--- processed by a worker.
---
--- /See:/ 'workItemServiceState' smart constructor.
-data WorkItemServiceState = WorkItemServiceState
-    { _wissNextReportIndex       :: !(Maybe Int64)
-    , _wissReportStatusInterval  :: !(Maybe Text)
-    , _wissHarnessData           :: !(Maybe HarnessData)
-    , _wissSuggestedStopPoint    :: !(Maybe ApproximateProgress)
-    , _wissSuggestedStopPosition :: !(Maybe Position)
-    , _wissLeaseExpireTime       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'WorkItemServiceState' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'wissNextReportIndex'
---
--- * 'wissReportStatusInterval'
---
--- * 'wissHarnessData'
---
--- * 'wissSuggestedStopPoint'
---
--- * 'wissSuggestedStopPosition'
---
--- * 'wissLeaseExpireTime'
-workItemServiceState
-    :: WorkItemServiceState
-workItemServiceState =
-    WorkItemServiceState
-    { _wissNextReportIndex = Nothing
-    , _wissReportStatusInterval = Nothing
-    , _wissHarnessData = Nothing
-    , _wissSuggestedStopPoint = Nothing
-    , _wissSuggestedStopPosition = Nothing
-    , _wissLeaseExpireTime = Nothing
-    }
-
--- | The index value to use for the next report sent by the worker. Note: If
--- the report call fails for whatever reason, the worker should reuse this
--- index for subsequent report attempts.
-wissNextReportIndex :: Lens' WorkItemServiceState (Maybe Int64)
-wissNextReportIndex
-  = lens _wissNextReportIndex
-      (\ s a -> s{_wissNextReportIndex = a})
-
--- | New recommended reporting interval.
-wissReportStatusInterval :: Lens' WorkItemServiceState (Maybe Text)
-wissReportStatusInterval
-  = lens _wissReportStatusInterval
-      (\ s a -> s{_wissReportStatusInterval = a})
-
 -- | Other data returned by the service, specific to the particular worker
 -- harness.
-wissHarnessData :: Lens' WorkItemServiceState (Maybe HarnessData)
-wissHarnessData
-  = lens _wissHarnessData
-      (\ s a -> s{_wissHarnessData = a})
-
--- | The progress point in the WorkItem where the Dataflow service suggests
--- that the worker truncate the task.
-wissSuggestedStopPoint :: Lens' WorkItemServiceState (Maybe ApproximateProgress)
-wissSuggestedStopPoint
-  = lens _wissSuggestedStopPoint
-      (\ s a -> s{_wissSuggestedStopPoint = a})
-
--- | Obsolete, always empty.
-wissSuggestedStopPosition :: Lens' WorkItemServiceState (Maybe Position)
-wissSuggestedStopPosition
-  = lens _wissSuggestedStopPosition
-      (\ s a -> s{_wissSuggestedStopPosition = a})
-
--- | Time at which the current lease will expire.
-wissLeaseExpireTime :: Lens' WorkItemServiceState (Maybe Text)
-wissLeaseExpireTime
-  = lens _wissLeaseExpireTime
-      (\ s a -> s{_wissLeaseExpireTime = a})
-
-instance FromJSON WorkItemServiceState where
-        parseJSON
-          = withObject "WorkItemServiceState"
-              (\ o ->
-                 WorkItemServiceState <$>
-                   (o .:? "nextReportIndex") <*>
-                     (o .:? "reportStatusInterval")
-                     <*> (o .:? "harnessData")
-                     <*> (o .:? "suggestedStopPoint")
-                     <*> (o .:? "suggestedStopPosition")
-                     <*> (o .:? "leaseExpireTime"))
-
-instance ToJSON WorkItemServiceState where
-        toJSON WorkItemServiceState{..}
-          = object
-              (catMaybes
-                 [("nextReportIndex" .=) <$> _wissNextReportIndex,
-                  ("reportStatusInterval" .=) <$>
-                    _wissReportStatusInterval,
-                  ("harnessData" .=) <$> _wissHarnessData,
-                  ("suggestedStopPoint" .=) <$>
-                    _wissSuggestedStopPoint,
-                  ("suggestedStopPosition" .=) <$>
-                    _wissSuggestedStopPosition,
-                  ("leaseExpireTime" .=) <$> _wissLeaseExpireTime])
-
 --
--- /See:/ 'baseSpecsItem' smart constructor.
-data BaseSpecsItem =
-    BaseSpecsItem
+-- /See:/ 'workItemServiceStateHarnessData' smart constructor.
+data WorkItemServiceStateHarnessData =
+    WorkItemServiceStateHarnessData
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BaseSpecsItem' with the minimum fields required to make a request.
+-- | Creates a value of 'WorkItemServiceStateHarnessData' with the minimum fields required to make a request.
 --
-baseSpecsItem
-    :: BaseSpecsItem
-baseSpecsItem = BaseSpecsItem
+workItemServiceStateHarnessData
+    :: WorkItemServiceStateHarnessData
+workItemServiceStateHarnessData = WorkItemServiceStateHarnessData
 
-instance FromJSON BaseSpecsItem where
+instance FromJSON WorkItemServiceStateHarnessData
+         where
         parseJSON
-          = withObject "BaseSpecsItem"
-              (\ o -> pure BaseSpecsItem)
+          = withObject "WorkItemServiceStateHarnessData"
+              (\ o -> pure WorkItemServiceStateHarnessData)
 
-instance ToJSON BaseSpecsItem where
+instance ToJSON WorkItemServiceStateHarnessData where
         toJSON = const (Object mempty)
 
 -- | Data disk assignment for a given VM instance.
@@ -2745,6 +2763,112 @@ instance ToJSON DataDiskAssignment where
               (catMaybes
                  [("vmInstance" .=) <$> _ddaVMInstance,
                   ("dataDisks" .=) <$> _ddaDataDisks])
+
+-- | The Dataflow service\'s idea of the current state of a WorkItem being
+-- processed by a worker.
+--
+-- /See:/ 'workItemServiceState' smart constructor.
+data WorkItemServiceState = WorkItemServiceState
+    { _wissNextReportIndex       :: !(Maybe Int64)
+    , _wissReportStatusInterval  :: !(Maybe Text)
+    , _wissHarnessData           :: !(Maybe WorkItemServiceStateHarnessData)
+    , _wissSuggestedStopPoint    :: !(Maybe ApproximateProgress)
+    , _wissSuggestedStopPosition :: !(Maybe Position)
+    , _wissLeaseExpireTime       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'WorkItemServiceState' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'wissNextReportIndex'
+--
+-- * 'wissReportStatusInterval'
+--
+-- * 'wissHarnessData'
+--
+-- * 'wissSuggestedStopPoint'
+--
+-- * 'wissSuggestedStopPosition'
+--
+-- * 'wissLeaseExpireTime'
+workItemServiceState
+    :: WorkItemServiceState
+workItemServiceState =
+    WorkItemServiceState
+    { _wissNextReportIndex = Nothing
+    , _wissReportStatusInterval = Nothing
+    , _wissHarnessData = Nothing
+    , _wissSuggestedStopPoint = Nothing
+    , _wissSuggestedStopPosition = Nothing
+    , _wissLeaseExpireTime = Nothing
+    }
+
+-- | The index value to use for the next report sent by the worker. Note: If
+-- the report call fails for whatever reason, the worker should reuse this
+-- index for subsequent report attempts.
+wissNextReportIndex :: Lens' WorkItemServiceState (Maybe Int64)
+wissNextReportIndex
+  = lens _wissNextReportIndex
+      (\ s a -> s{_wissNextReportIndex = a})
+
+-- | New recommended reporting interval.
+wissReportStatusInterval :: Lens' WorkItemServiceState (Maybe Text)
+wissReportStatusInterval
+  = lens _wissReportStatusInterval
+      (\ s a -> s{_wissReportStatusInterval = a})
+
+-- | Other data returned by the service, specific to the particular worker
+-- harness.
+wissHarnessData :: Lens' WorkItemServiceState (Maybe WorkItemServiceStateHarnessData)
+wissHarnessData
+  = lens _wissHarnessData
+      (\ s a -> s{_wissHarnessData = a})
+
+-- | The progress point in the WorkItem where the Dataflow service suggests
+-- that the worker truncate the task.
+wissSuggestedStopPoint :: Lens' WorkItemServiceState (Maybe ApproximateProgress)
+wissSuggestedStopPoint
+  = lens _wissSuggestedStopPoint
+      (\ s a -> s{_wissSuggestedStopPoint = a})
+
+-- | Obsolete, always empty.
+wissSuggestedStopPosition :: Lens' WorkItemServiceState (Maybe Position)
+wissSuggestedStopPosition
+  = lens _wissSuggestedStopPosition
+      (\ s a -> s{_wissSuggestedStopPosition = a})
+
+-- | Time at which the current lease will expire.
+wissLeaseExpireTime :: Lens' WorkItemServiceState (Maybe Text)
+wissLeaseExpireTime
+  = lens _wissLeaseExpireTime
+      (\ s a -> s{_wissLeaseExpireTime = a})
+
+instance FromJSON WorkItemServiceState where
+        parseJSON
+          = withObject "WorkItemServiceState"
+              (\ o ->
+                 WorkItemServiceState <$>
+                   (o .:? "nextReportIndex") <*>
+                     (o .:? "reportStatusInterval")
+                     <*> (o .:? "harnessData")
+                     <*> (o .:? "suggestedStopPoint")
+                     <*> (o .:? "suggestedStopPosition")
+                     <*> (o .:? "leaseExpireTime"))
+
+instance ToJSON WorkItemServiceState where
+        toJSON WorkItemServiceState{..}
+          = object
+              (catMaybes
+                 [("nextReportIndex" .=) <$> _wissNextReportIndex,
+                  ("reportStatusInterval" .=) <$>
+                    _wissReportStatusInterval,
+                  ("harnessData" .=) <$> _wissHarnessData,
+                  ("suggestedStopPoint" .=) <$>
+                    _wissSuggestedStopPoint,
+                  ("suggestedStopPosition" .=) <$>
+                    _wissSuggestedStopPosition,
+                  ("leaseExpireTime" .=) <$> _wissLeaseExpireTime])
 
 -- | A task which initializes part of a streaming Dataflow job.
 --
@@ -2810,6 +2934,196 @@ instance ToJSON StreamingSetupTask where
                     _sstStreamingComputationTopology,
                   ("receiveWorkPort" .=) <$> _sstReceiveWorkPort,
                   ("workerHarnessPort" .=) <$> _sstWorkerHarnessPort])
+
+-- | The codec to use for interpreting an element in the input PTable.
+--
+-- /See:/ 'partialGroupByKeyInstructionInputElementCodec' smart constructor.
+data PartialGroupByKeyInstructionInputElementCodec =
+    PartialGroupByKeyInstructionInputElementCodec
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PartialGroupByKeyInstructionInputElementCodec' with the minimum fields required to make a request.
+--
+partialGroupByKeyInstructionInputElementCodec
+    :: PartialGroupByKeyInstructionInputElementCodec
+partialGroupByKeyInstructionInputElementCodec =
+    PartialGroupByKeyInstructionInputElementCodec
+
+instance FromJSON
+         PartialGroupByKeyInstructionInputElementCodec where
+        parseJSON
+          = withObject
+              "PartialGroupByKeyInstructionInputElementCodec"
+              (\ o ->
+                 pure PartialGroupByKeyInstructionInputElementCodec)
+
+instance ToJSON
+         PartialGroupByKeyInstructionInputElementCodec where
+        toJSON = const (Object mempty)
+
+-- | MapTask consists of an ordered set of instructions, each of which
+-- describes one particular low-level operation for the worker to perform
+-- in order to accomplish the MapTask\'s WorkItem. Each instruction must
+-- appear in the list before any instructions which depends on its output.
+--
+-- /See:/ 'mapTask' smart constructor.
+data MapTask = MapTask
+    { _mtInstructions :: !(Maybe [ParallelInstruction])
+    , _mtSystemName   :: !(Maybe Text)
+    , _mtStageName    :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MapTask' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mtInstructions'
+--
+-- * 'mtSystemName'
+--
+-- * 'mtStageName'
+mapTask
+    :: MapTask
+mapTask =
+    MapTask
+    { _mtInstructions = Nothing
+    , _mtSystemName = Nothing
+    , _mtStageName = Nothing
+    }
+
+-- | The instructions in the MapTask.
+mtInstructions :: Lens' MapTask [ParallelInstruction]
+mtInstructions
+  = lens _mtInstructions
+      (\ s a -> s{_mtInstructions = a})
+      . _Default
+      . _Coerce
+
+-- | System-defined name of this MapTask. Unique across the workflow.
+mtSystemName :: Lens' MapTask (Maybe Text)
+mtSystemName
+  = lens _mtSystemName (\ s a -> s{_mtSystemName = a})
+
+-- | System-defined name of the stage containing this MapTask. Unique across
+-- the workflow.
+mtStageName :: Lens' MapTask (Maybe Text)
+mtStageName
+  = lens _mtStageName (\ s a -> s{_mtStageName = a})
+
+instance FromJSON MapTask where
+        parseJSON
+          = withObject "MapTask"
+              (\ o ->
+                 MapTask <$>
+                   (o .:? "instructions" .!= mempty) <*>
+                     (o .:? "systemName")
+                     <*> (o .:? "stageName"))
+
+instance ToJSON MapTask where
+        toJSON MapTask{..}
+          = object
+              (catMaybes
+                 [("instructions" .=) <$> _mtInstructions,
+                  ("systemName" .=) <$> _mtSystemName,
+                  ("stageName" .=) <$> _mtStageName])
+
+-- | Describes mounted data disk.
+--
+-- /See:/ 'mountedDataDisk' smart constructor.
+newtype MountedDataDisk = MountedDataDisk
+    { _mddDataDisk :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MountedDataDisk' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mddDataDisk'
+mountedDataDisk
+    :: MountedDataDisk
+mountedDataDisk =
+    MountedDataDisk
+    { _mddDataDisk = Nothing
+    }
+
+-- | The name of the data disk. This name is local to the Google Cloud
+-- Platform project and uniquely identifies the disk within that project,
+-- for example \"myproject-1014-104817-4c2-harness-0-disk-1\".
+mddDataDisk :: Lens' MountedDataDisk (Maybe Text)
+mddDataDisk
+  = lens _mddDataDisk (\ s a -> s{_mddDataDisk = a})
+
+instance FromJSON MountedDataDisk where
+        parseJSON
+          = withObject "MountedDataDisk"
+              (\ o -> MountedDataDisk <$> (o .:? "dataDisk"))
+
+instance ToJSON MountedDataDisk where
+        toJSON MountedDataDisk{..}
+          = object
+              (catMaybes [("dataDisk" .=) <$> _mddDataDisk])
+
+-- | The codec to use to encode data written to the sink.
+--
+-- /See:/ 'sinkCodec' smart constructor.
+data SinkCodec =
+    SinkCodec
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SinkCodec' with the minimum fields required to make a request.
+--
+sinkCodec
+    :: SinkCodec
+sinkCodec = SinkCodec
+
+instance FromJSON SinkCodec where
+        parseJSON
+          = withObject "SinkCodec" (\ o -> pure SinkCodec)
+
+instance ToJSON SinkCodec where
+        toJSON = const (Object mempty)
+
+-- | The user function to invoke.
+--
+-- /See:/ 'parDoInstructionUserFn' smart constructor.
+data ParDoInstructionUserFn =
+    ParDoInstructionUserFn
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ParDoInstructionUserFn' with the minimum fields required to make a request.
+--
+parDoInstructionUserFn
+    :: ParDoInstructionUserFn
+parDoInstructionUserFn = ParDoInstructionUserFn
+
+instance FromJSON ParDoInstructionUserFn where
+        parseJSON
+          = withObject "ParDoInstructionUserFn"
+              (\ o -> pure ParDoInstructionUserFn)
+
+instance ToJSON ParDoInstructionUserFn where
+        toJSON = const (Object mempty)
+
+-- | The codec to use to encode data being written via this output.
+--
+-- /See:/ 'instructionOutputCodec' smart constructor.
+data InstructionOutputCodec =
+    InstructionOutputCodec
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InstructionOutputCodec' with the minimum fields required to make a request.
+--
+instructionOutputCodec
+    :: InstructionOutputCodec
+instructionOutputCodec = InstructionOutputCodec
+
+instance FromJSON InstructionOutputCodec where
+        parseJSON
+          = withObject "InstructionOutputCodec"
+              (\ o -> pure InstructionOutputCodec)
+
+instance ToJSON InstructionOutputCodec where
+        toJSON = const (Object mempty)
 
 -- | Describes a stream of data, either as input to be processed or as output
 -- of a streaming Dataflow job.
@@ -2889,128 +3203,73 @@ instance ToJSON StreamLocation where
                     _slCustomSourceLocation,
                   ("pubsubLocation" .=) <$> _slPubsubLocation])
 
--- | Describes mounted data disk.
+-- | Extra arguments for this worker pool.
 --
--- /See:/ 'mountedDataDisk' smart constructor.
-newtype MountedDataDisk = MountedDataDisk
-    { _mddDataDisk :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'MountedDataDisk' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'mddDataDisk'
-mountedDataDisk
-    :: MountedDataDisk
-mountedDataDisk =
-    MountedDataDisk
-    { _mddDataDisk = Nothing
-    }
-
--- | The name of the data disk. This name is local to the Google Cloud
--- Platform project and uniquely identifies the disk within that project,
--- for example \"myproject-1014-104817-4c2-harness-0-disk-1\".
-mddDataDisk :: Lens' MountedDataDisk (Maybe Text)
-mddDataDisk
-  = lens _mddDataDisk (\ s a -> s{_mddDataDisk = a})
-
-instance FromJSON MountedDataDisk where
-        parseJSON
-          = withObject "MountedDataDisk"
-              (\ o -> MountedDataDisk <$> (o .:? "dataDisk"))
-
-instance ToJSON MountedDataDisk where
-        toJSON MountedDataDisk{..}
-          = object
-              (catMaybes [("dataDisk" .=) <$> _mddDataDisk])
-
--- | The codec to use to encode data being written via this output.
---
--- /See:/ 'instructionOutputCodec' smart constructor.
-data InstructionOutputCodec =
-    InstructionOutputCodec
+-- /See:/ 'workerPoolPoolArgs' smart constructor.
+data WorkerPoolPoolArgs =
+    WorkerPoolPoolArgs
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstructionOutputCodec' with the minimum fields required to make a request.
+-- | Creates a value of 'WorkerPoolPoolArgs' with the minimum fields required to make a request.
 --
-instructionOutputCodec
-    :: InstructionOutputCodec
-instructionOutputCodec = InstructionOutputCodec
+workerPoolPoolArgs
+    :: WorkerPoolPoolArgs
+workerPoolPoolArgs = WorkerPoolPoolArgs
 
-instance FromJSON InstructionOutputCodec where
+instance FromJSON WorkerPoolPoolArgs where
         parseJSON
-          = withObject "InstructionOutputCodec"
-              (\ o -> pure InstructionOutputCodec)
+          = withObject "WorkerPoolPoolArgs"
+              (\ o -> pure WorkerPoolPoolArgs)
 
-instance ToJSON InstructionOutputCodec where
+instance ToJSON WorkerPoolPoolArgs where
         toJSON = const (Object mempty)
 
--- | MapTask consists of an ordered set of instructions, each of which
--- describes one particular low-level operation for the worker to perform
--- in order to accomplish the MapTask\'s WorkItem. Each instruction must
--- appear in the list before any instructions which depends on its output.
+-- | Identifies the location of a streaming side input.
 --
--- /See:/ 'mapTask' smart constructor.
-data MapTask = MapTask
-    { _mtInstructions :: !(Maybe [ParallelInstruction])
-    , _mtSystemName   :: !(Maybe Text)
-    , _mtStageName    :: !(Maybe Text)
+-- /See:/ 'streamingSideInputLocation' smart constructor.
+data StreamingSideInputLocation = StreamingSideInputLocation
+    { _ssilTag         :: !(Maybe Text)
+    , _ssilStateFamily :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MapTask' with the minimum fields required to make a request.
+-- | Creates a value of 'StreamingSideInputLocation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mtInstructions'
+-- * 'ssilTag'
 --
--- * 'mtSystemName'
---
--- * 'mtStageName'
-mapTask
-    :: MapTask
-mapTask =
-    MapTask
-    { _mtInstructions = Nothing
-    , _mtSystemName = Nothing
-    , _mtStageName = Nothing
+-- * 'ssilStateFamily'
+streamingSideInputLocation
+    :: StreamingSideInputLocation
+streamingSideInputLocation =
+    StreamingSideInputLocation
+    { _ssilTag = Nothing
+    , _ssilStateFamily = Nothing
     }
 
--- | The instructions in the MapTask.
-mtInstructions :: Lens' MapTask [ParallelInstruction]
-mtInstructions
-  = lens _mtInstructions
-      (\ s a -> s{_mtInstructions = a})
-      . _Default
-      . _Coerce
+-- | Identifies the particular side input within the streaming Dataflow job.
+ssilTag :: Lens' StreamingSideInputLocation (Maybe Text)
+ssilTag = lens _ssilTag (\ s a -> s{_ssilTag = a})
 
--- | System-defined name of this MapTask. Unique across the workflow.
-mtSystemName :: Lens' MapTask (Maybe Text)
-mtSystemName
-  = lens _mtSystemName (\ s a -> s{_mtSystemName = a})
+-- | Identifies the state family where this side input is stored.
+ssilStateFamily :: Lens' StreamingSideInputLocation (Maybe Text)
+ssilStateFamily
+  = lens _ssilStateFamily
+      (\ s a -> s{_ssilStateFamily = a})
 
--- | System-defined name of the stage containing this MapTask. Unique across
--- the workflow.
-mtStageName :: Lens' MapTask (Maybe Text)
-mtStageName
-  = lens _mtStageName (\ s a -> s{_mtStageName = a})
-
-instance FromJSON MapTask where
+instance FromJSON StreamingSideInputLocation where
         parseJSON
-          = withObject "MapTask"
+          = withObject "StreamingSideInputLocation"
               (\ o ->
-                 MapTask <$>
-                   (o .:? "instructions" .!= mempty) <*>
-                     (o .:? "systemName")
-                     <*> (o .:? "stageName"))
+                 StreamingSideInputLocation <$>
+                   (o .:? "tag") <*> (o .:? "stateFamily"))
 
-instance ToJSON MapTask where
-        toJSON MapTask{..}
+instance ToJSON StreamingSideInputLocation where
+        toJSON StreamingSideInputLocation{..}
           = object
               (catMaybes
-                 [("instructions" .=) <$> _mtInstructions,
-                  ("systemName" .=) <$> _mtSystemName,
-                  ("stageName" .=) <$> _mtStageName])
+                 [("tag" .=) <$> _ssilTag,
+                  ("stateFamily" .=) <$> _ssilStateFamily])
 
 -- | A task which describes what action should be performed for the specified
 -- streaming computation ranges.
@@ -3075,53 +3334,6 @@ instance ToJSON StreamingComputationTask where
                  [("taskType" .=) <$> _sctTaskType,
                   ("dataDisks" .=) <$> _sctDataDisks,
                   ("computationRanges" .=) <$> _sctComputationRanges])
-
--- | Identifies the location of a streaming side input.
---
--- /See:/ 'streamingSideInputLocation' smart constructor.
-data StreamingSideInputLocation = StreamingSideInputLocation
-    { _ssilTag         :: !(Maybe Text)
-    , _ssilStateFamily :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'StreamingSideInputLocation' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ssilTag'
---
--- * 'ssilStateFamily'
-streamingSideInputLocation
-    :: StreamingSideInputLocation
-streamingSideInputLocation =
-    StreamingSideInputLocation
-    { _ssilTag = Nothing
-    , _ssilStateFamily = Nothing
-    }
-
--- | Identifies the particular side input within the streaming Dataflow job.
-ssilTag :: Lens' StreamingSideInputLocation (Maybe Text)
-ssilTag = lens _ssilTag (\ s a -> s{_ssilTag = a})
-
--- | Identifies the state family where this side input is stored.
-ssilStateFamily :: Lens' StreamingSideInputLocation (Maybe Text)
-ssilStateFamily
-  = lens _ssilStateFamily
-      (\ s a -> s{_ssilStateFamily = a})
-
-instance FromJSON StreamingSideInputLocation where
-        parseJSON
-          = withObject "StreamingSideInputLocation"
-              (\ o ->
-                 StreamingSideInputLocation <$>
-                   (o .:? "tag") <*> (o .:? "stateFamily"))
-
-instance ToJSON StreamingSideInputLocation where
-        toJSON StreamingSideInputLocation{..}
-          = object
-              (catMaybes
-                 [("tag" .=) <$> _ssilTag,
-                  ("stateFamily" .=) <$> _ssilStateFamily])
 
 -- | A particular message pertaining to a Dataflow job.
 --
@@ -3192,270 +3404,6 @@ instance ToJSON JobMessage where
                   ("messageText" .=) <$> _jmMessageText,
                   ("messageImportance" .=) <$> _jmMessageImportance,
                   ("id" .=) <$> _jmId])
-
--- | Defines a job to be run by the Dataflow service.
---
--- /See:/ 'job' smart constructor.
-data Job = Job
-    { _jRequestedState       :: !(Maybe Text)
-    , _jEnvironment          :: !(Maybe Environment)
-    , _jClientRequestId      :: !(Maybe Text)
-    , _jCurrentState         :: !(Maybe Text)
-    , _jReplacedByJobId      :: !(Maybe Text)
-    , _jSteps                :: !(Maybe [Step])
-    , _jExecutionInfo        :: !(Maybe JobExecutionInfo)
-    , _jName                 :: !(Maybe Text)
-    , _jTransformNameMapping :: !(Maybe TransformNameMapping)
-    , _jId                   :: !(Maybe Text)
-    , _jProjectId            :: !(Maybe Text)
-    , _jType                 :: !(Maybe Text)
-    , _jCurrentStateTime     :: !(Maybe Text)
-    , _jReplaceJobId         :: !(Maybe Text)
-    , _jCreateTime           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Job' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'jRequestedState'
---
--- * 'jEnvironment'
---
--- * 'jClientRequestId'
---
--- * 'jCurrentState'
---
--- * 'jReplacedByJobId'
---
--- * 'jSteps'
---
--- * 'jExecutionInfo'
---
--- * 'jName'
---
--- * 'jTransformNameMapping'
---
--- * 'jId'
---
--- * 'jProjectId'
---
--- * 'jType'
---
--- * 'jCurrentStateTime'
---
--- * 'jReplaceJobId'
---
--- * 'jCreateTime'
-job
-    :: Job
-job =
-    Job
-    { _jRequestedState = Nothing
-    , _jEnvironment = Nothing
-    , _jClientRequestId = Nothing
-    , _jCurrentState = Nothing
-    , _jReplacedByJobId = Nothing
-    , _jSteps = Nothing
-    , _jExecutionInfo = Nothing
-    , _jName = Nothing
-    , _jTransformNameMapping = Nothing
-    , _jId = Nothing
-    , _jProjectId = Nothing
-    , _jType = Nothing
-    , _jCurrentStateTime = Nothing
-    , _jReplaceJobId = Nothing
-    , _jCreateTime = Nothing
-    }
-
--- | The job\'s requested state. UpdateJob may be used to switch between the
--- JOB_STATE_STOPPED and JOB_STATE_RUNNING states, by setting
--- requested_state. UpdateJob may also be used to directly set a job\'s
--- requested state to JOB_STATE_CANCELLED or JOB_STATE_DONE, irrevocably
--- terminating the job if it has not already reached a terminal state.
-jRequestedState :: Lens' Job (Maybe Text)
-jRequestedState
-  = lens _jRequestedState
-      (\ s a -> s{_jRequestedState = a})
-
--- | Environment for the job.
-jEnvironment :: Lens' Job (Maybe Environment)
-jEnvironment
-  = lens _jEnvironment (\ s a -> s{_jEnvironment = a})
-
--- | Client\'s unique identifier of the job, re-used by SDK across retried
--- attempts. If this field is set, the service will ensure its uniqueness.
--- That is, the request to create a job will fail if the service has
--- knowledge of a previously submitted job with the same client\'s id and
--- job name. The caller may, for example, use this field to ensure
--- idempotence of job creation across retried attempts to create a job. By
--- default, the field is empty and, in that case, the service ignores it.
-jClientRequestId :: Lens' Job (Maybe Text)
-jClientRequestId
-  = lens _jClientRequestId
-      (\ s a -> s{_jClientRequestId = a})
-
--- | The current state of the job. Jobs are created in the JOB_STATE_STOPPED
--- state unless otherwise specified. A job in the JOB_STATE_RUNNING state
--- may asynchronously enter a terminal state. Once a job has reached a
--- terminal state, no further state updates may be made. This field may be
--- mutated by the Dataflow service; callers cannot mutate it.
-jCurrentState :: Lens' Job (Maybe Text)
-jCurrentState
-  = lens _jCurrentState
-      (\ s a -> s{_jCurrentState = a})
-
--- | If another job is an update of this job (and thus, this job is in
--- JOB_STATE_UPDATED), this field will contain the ID of that job.
-jReplacedByJobId :: Lens' Job (Maybe Text)
-jReplacedByJobId
-  = lens _jReplacedByJobId
-      (\ s a -> s{_jReplacedByJobId = a})
-
--- | The top-level steps that constitute the entire job.
-jSteps :: Lens' Job [Step]
-jSteps
-  = lens _jSteps (\ s a -> s{_jSteps = a}) . _Default .
-      _Coerce
-
--- | Information about how the Dataflow service will actually run the job.
-jExecutionInfo :: Lens' Job (Maybe JobExecutionInfo)
-jExecutionInfo
-  = lens _jExecutionInfo
-      (\ s a -> s{_jExecutionInfo = a})
-
--- | The user-specified Dataflow job name. Only one Job with a given name may
--- exist in a project at any given time. If a caller attempts to create a
--- Job with the same name as an already-existing Job, the attempt will
--- return the existing Job. The name must match the regular expression
--- [a-z]([-a-z0-9]{0,38}[a-z0-9])?
-jName :: Lens' Job (Maybe Text)
-jName = lens _jName (\ s a -> s{_jName = a})
-
--- | Map of transform name prefixes of the job to be replaced to the
--- corresponding name prefixes of the new job.
-jTransformNameMapping :: Lens' Job (Maybe TransformNameMapping)
-jTransformNameMapping
-  = lens _jTransformNameMapping
-      (\ s a -> s{_jTransformNameMapping = a})
-
--- | The unique ID of this job. This field is set by the Dataflow service
--- when the Job is created, and is immutable for the life of the Job.
-jId :: Lens' Job (Maybe Text)
-jId = lens _jId (\ s a -> s{_jId = a})
-
--- | The project which owns the job.
-jProjectId :: Lens' Job (Maybe Text)
-jProjectId
-  = lens _jProjectId (\ s a -> s{_jProjectId = a})
-
--- | The type of dataflow job.
-jType :: Lens' Job (Maybe Text)
-jType = lens _jType (\ s a -> s{_jType = a})
-
--- | The timestamp associated with the current state.
-jCurrentStateTime :: Lens' Job (Maybe Text)
-jCurrentStateTime
-  = lens _jCurrentStateTime
-      (\ s a -> s{_jCurrentStateTime = a})
-
--- | If this job is an update of an existing job, this field will be the ID
--- of the job it replaced. When sending a CreateJobRequest, you can update
--- a job by specifying it here. The job named here will be stopped, and its
--- intermediate state transferred to this job.
-jReplaceJobId :: Lens' Job (Maybe Text)
-jReplaceJobId
-  = lens _jReplaceJobId
-      (\ s a -> s{_jReplaceJobId = a})
-
--- | Timestamp when job was initially created. Immutable, set by the Dataflow
--- service.
-jCreateTime :: Lens' Job (Maybe Text)
-jCreateTime
-  = lens _jCreateTime (\ s a -> s{_jCreateTime = a})
-
-instance FromJSON Job where
-        parseJSON
-          = withObject "Job"
-              (\ o ->
-                 Job <$>
-                   (o .:? "requestedState") <*> (o .:? "environment")
-                     <*> (o .:? "clientRequestId")
-                     <*> (o .:? "currentState")
-                     <*> (o .:? "replacedByJobId")
-                     <*> (o .:? "steps" .!= mempty)
-                     <*> (o .:? "executionInfo")
-                     <*> (o .:? "name")
-                     <*> (o .:? "transformNameMapping")
-                     <*> (o .:? "id")
-                     <*> (o .:? "projectId")
-                     <*> (o .:? "type")
-                     <*> (o .:? "currentStateTime")
-                     <*> (o .:? "replaceJobId")
-                     <*> (o .:? "createTime"))
-
-instance ToJSON Job where
-        toJSON Job{..}
-          = object
-              (catMaybes
-                 [("requestedState" .=) <$> _jRequestedState,
-                  ("environment" .=) <$> _jEnvironment,
-                  ("clientRequestId" .=) <$> _jClientRequestId,
-                  ("currentState" .=) <$> _jCurrentState,
-                  ("replacedByJobId" .=) <$> _jReplacedByJobId,
-                  ("steps" .=) <$> _jSteps,
-                  ("executionInfo" .=) <$> _jExecutionInfo,
-                  ("name" .=) <$> _jName,
-                  ("transformNameMapping" .=) <$>
-                    _jTransformNameMapping,
-                  ("id" .=) <$> _jId, ("projectId" .=) <$> _jProjectId,
-                  ("type" .=) <$> _jType,
-                  ("currentStateTime" .=) <$> _jCurrentStateTime,
-                  ("replaceJobId" .=) <$> _jReplaceJobId,
-                  ("createTime" .=) <$> _jCreateTime])
-
--- | Map of transform name prefixes of the job to be replaced to the
--- corresponding name prefixes of the new job.
---
--- /See:/ 'transformNameMapping' smart constructor.
-data TransformNameMapping =
-    TransformNameMapping
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'TransformNameMapping' with the minimum fields required to make a request.
---
-transformNameMapping
-    :: TransformNameMapping
-transformNameMapping = TransformNameMapping
-
-instance FromJSON TransformNameMapping where
-        parseJSON
-          = withObject "TransformNameMapping"
-              (\ o -> pure TransformNameMapping)
-
-instance ToJSON TransformNameMapping where
-        toJSON = const (Object mempty)
-
--- | The user function to invoke.
---
--- /See:/ 'seqMapTaskUserFn' smart constructor.
-data SeqMapTaskUserFn =
-    SeqMapTaskUserFn
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SeqMapTaskUserFn' with the minimum fields required to make a request.
---
-seqMapTaskUserFn
-    :: SeqMapTaskUserFn
-seqMapTaskUserFn = SeqMapTaskUserFn
-
-instance FromJSON SeqMapTaskUserFn where
-        parseJSON
-          = withObject "SeqMapTaskUserFn"
-              (\ o -> pure SeqMapTaskUserFn)
-
-instance ToJSON SeqMapTaskUserFn where
-        toJSON = const (Object mempty)
 
 -- | Information about an output of a SeqMapTask.
 --
@@ -3537,96 +3485,273 @@ instance ToJSON SourceGetMetadataRequest where
         toJSON SourceGetMetadataRequest{..}
           = object (catMaybes [("source" .=) <$> _sgmrSource])
 
--- | A mapping from each stage to the information about that stage.
+-- | The user function to invoke.
 --
--- /See:/ 'stages' smart constructor.
-data Stages =
-    Stages
+-- /See:/ 'seqMapTaskUserFn' smart constructor.
+data SeqMapTaskUserFn =
+    SeqMapTaskUserFn
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Stages' with the minimum fields required to make a request.
+-- | Creates a value of 'SeqMapTaskUserFn' with the minimum fields required to make a request.
 --
-stages
-    :: Stages
-stages = Stages
+seqMapTaskUserFn
+    :: SeqMapTaskUserFn
+seqMapTaskUserFn = SeqMapTaskUserFn
 
-instance FromJSON Stages where
-        parseJSON = withObject "Stages" (\ o -> pure Stages)
-
-instance ToJSON Stages where
-        toJSON = const (Object mempty)
-
--- | A structure describing which components and their versions of the
--- service are required in order to run the job.
---
--- /See:/ 'version' smart constructor.
-data Version =
-    Version
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Version' with the minimum fields required to make a request.
---
-version
-    :: Version
-version = Version
-
-instance FromJSON Version where
+instance FromJSON SeqMapTaskUserFn where
         parseJSON
-          = withObject "Version" (\ o -> pure Version)
+          = withObject "SeqMapTaskUserFn"
+              (\ o -> pure SeqMapTaskUserFn)
 
-instance ToJSON Version where
+instance ToJSON SeqMapTaskUserFn where
         toJSON = const (Object mempty)
 
--- | When a task splits using WorkItemStatus.dynamic_source_split, this
--- message describes the two parts of the split relative to the description
--- of the current task\'s input.
+-- | The value combining function to invoke.
 --
--- /See:/ 'dynamicSourceSplit' smart constructor.
-data DynamicSourceSplit = DynamicSourceSplit
-    { _dssResidual :: !(Maybe DerivedSource)
-    , _dssPrimary  :: !(Maybe DerivedSource)
+-- /See:/ 'partialGroupByKeyInstructionValueCombiningFn' smart constructor.
+data PartialGroupByKeyInstructionValueCombiningFn =
+    PartialGroupByKeyInstructionValueCombiningFn
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PartialGroupByKeyInstructionValueCombiningFn' with the minimum fields required to make a request.
+--
+partialGroupByKeyInstructionValueCombiningFn
+    :: PartialGroupByKeyInstructionValueCombiningFn
+partialGroupByKeyInstructionValueCombiningFn =
+    PartialGroupByKeyInstructionValueCombiningFn
+
+instance FromJSON
+         PartialGroupByKeyInstructionValueCombiningFn where
+        parseJSON
+          = withObject
+              "PartialGroupByKeyInstructionValueCombiningFn"
+              (\ o ->
+                 pure PartialGroupByKeyInstructionValueCombiningFn)
+
+instance ToJSON
+         PartialGroupByKeyInstructionValueCombiningFn where
+        toJSON = const (Object mempty)
+
+-- | Defines a job to be run by the Dataflow service.
+--
+-- /See:/ 'job' smart constructor.
+data Job = Job
+    { _jRequestedState       :: !(Maybe Text)
+    , _jEnvironment          :: !(Maybe Environment)
+    , _jClientRequestId      :: !(Maybe Text)
+    , _jCurrentState         :: !(Maybe Text)
+    , _jReplacedByJobId      :: !(Maybe Text)
+    , _jSteps                :: !(Maybe [Step])
+    , _jExecutionInfo        :: !(Maybe JobExecutionInfo)
+    , _jName                 :: !(Maybe Text)
+    , _jTransformNameMApping :: !(Maybe JobTransformNameMApping)
+    , _jId                   :: !(Maybe Text)
+    , _jProjectId            :: !(Maybe Text)
+    , _jType                 :: !(Maybe Text)
+    , _jCurrentStateTime     :: !(Maybe Text)
+    , _jReplaceJobId         :: !(Maybe Text)
+    , _jCreateTime           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DynamicSourceSplit' with the minimum fields required to make a request.
+-- | Creates a value of 'Job' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dssResidual'
+-- * 'jRequestedState'
 --
--- * 'dssPrimary'
-dynamicSourceSplit
-    :: DynamicSourceSplit
-dynamicSourceSplit =
-    DynamicSourceSplit
-    { _dssResidual = Nothing
-    , _dssPrimary = Nothing
+-- * 'jEnvironment'
+--
+-- * 'jClientRequestId'
+--
+-- * 'jCurrentState'
+--
+-- * 'jReplacedByJobId'
+--
+-- * 'jSteps'
+--
+-- * 'jExecutionInfo'
+--
+-- * 'jName'
+--
+-- * 'jTransformNameMApping'
+--
+-- * 'jId'
+--
+-- * 'jProjectId'
+--
+-- * 'jType'
+--
+-- * 'jCurrentStateTime'
+--
+-- * 'jReplaceJobId'
+--
+-- * 'jCreateTime'
+job
+    :: Job
+job =
+    Job
+    { _jRequestedState = Nothing
+    , _jEnvironment = Nothing
+    , _jClientRequestId = Nothing
+    , _jCurrentState = Nothing
+    , _jReplacedByJobId = Nothing
+    , _jSteps = Nothing
+    , _jExecutionInfo = Nothing
+    , _jName = Nothing
+    , _jTransformNameMApping = Nothing
+    , _jId = Nothing
+    , _jProjectId = Nothing
+    , _jType = Nothing
+    , _jCurrentStateTime = Nothing
+    , _jReplaceJobId = Nothing
+    , _jCreateTime = Nothing
     }
 
--- | Residual part (returned to the pool of work). Specified relative to the
--- previously-current source.
-dssResidual :: Lens' DynamicSourceSplit (Maybe DerivedSource)
-dssResidual
-  = lens _dssResidual (\ s a -> s{_dssResidual = a})
+-- | The job\'s requested state. UpdateJob may be used to switch between the
+-- JOB_STATE_STOPPED and JOB_STATE_RUNNING states, by setting
+-- requested_state. UpdateJob may also be used to directly set a job\'s
+-- requested state to JOB_STATE_CANCELLED or JOB_STATE_DONE, irrevocably
+-- terminating the job if it has not already reached a terminal state.
+jRequestedState :: Lens' Job (Maybe Text)
+jRequestedState
+  = lens _jRequestedState
+      (\ s a -> s{_jRequestedState = a})
 
--- | Primary part (continued to be processed by worker). Specified relative
--- to the previously-current source. Becomes current.
-dssPrimary :: Lens' DynamicSourceSplit (Maybe DerivedSource)
-dssPrimary
-  = lens _dssPrimary (\ s a -> s{_dssPrimary = a})
+-- | Environment for the job.
+jEnvironment :: Lens' Job (Maybe Environment)
+jEnvironment
+  = lens _jEnvironment (\ s a -> s{_jEnvironment = a})
 
-instance FromJSON DynamicSourceSplit where
+-- | Client\'s unique identifier of the job, re-used by SDK across retried
+-- attempts. If this field is set, the service will ensure its uniqueness.
+-- That is, the request to create a job will fail if the service has
+-- knowledge of a previously submitted job with the same client\'s id and
+-- job name. The caller may, for example, use this field to ensure
+-- idempotence of job creation across retried attempts to create a job. By
+-- default, the field is empty and, in that case, the service ignores it.
+jClientRequestId :: Lens' Job (Maybe Text)
+jClientRequestId
+  = lens _jClientRequestId
+      (\ s a -> s{_jClientRequestId = a})
+
+-- | The current state of the job. Jobs are created in the JOB_STATE_STOPPED
+-- state unless otherwise specified. A job in the JOB_STATE_RUNNING state
+-- may asynchronously enter a terminal state. Once a job has reached a
+-- terminal state, no further state updates may be made. This field may be
+-- mutated by the Dataflow service; callers cannot mutate it.
+jCurrentState :: Lens' Job (Maybe Text)
+jCurrentState
+  = lens _jCurrentState
+      (\ s a -> s{_jCurrentState = a})
+
+-- | If another job is an update of this job (and thus, this job is in
+-- JOB_STATE_UPDATED), this field will contain the ID of that job.
+jReplacedByJobId :: Lens' Job (Maybe Text)
+jReplacedByJobId
+  = lens _jReplacedByJobId
+      (\ s a -> s{_jReplacedByJobId = a})
+
+-- | The top-level steps that constitute the entire job.
+jSteps :: Lens' Job [Step]
+jSteps
+  = lens _jSteps (\ s a -> s{_jSteps = a}) . _Default .
+      _Coerce
+
+-- | Information about how the Dataflow service will actually run the job.
+jExecutionInfo :: Lens' Job (Maybe JobExecutionInfo)
+jExecutionInfo
+  = lens _jExecutionInfo
+      (\ s a -> s{_jExecutionInfo = a})
+
+-- | The user-specified Dataflow job name. Only one Job with a given name may
+-- exist in a project at any given time. If a caller attempts to create a
+-- Job with the same name as an already-existing Job, the attempt will
+-- return the existing Job. The name must match the regular expression
+-- [a-z]([-a-z0-9]{0,38}[a-z0-9])?
+jName :: Lens' Job (Maybe Text)
+jName = lens _jName (\ s a -> s{_jName = a})
+
+-- | Map of transform name prefixes of the job to be replaced to the
+-- corresponding name prefixes of the new job.
+jTransformNameMApping :: Lens' Job (Maybe JobTransformNameMApping)
+jTransformNameMApping
+  = lens _jTransformNameMApping
+      (\ s a -> s{_jTransformNameMApping = a})
+
+-- | The unique ID of this job. This field is set by the Dataflow service
+-- when the Job is created, and is immutable for the life of the Job.
+jId :: Lens' Job (Maybe Text)
+jId = lens _jId (\ s a -> s{_jId = a})
+
+-- | The project which owns the job.
+jProjectId :: Lens' Job (Maybe Text)
+jProjectId
+  = lens _jProjectId (\ s a -> s{_jProjectId = a})
+
+-- | The type of dataflow job.
+jType :: Lens' Job (Maybe Text)
+jType = lens _jType (\ s a -> s{_jType = a})
+
+-- | The timestamp associated with the current state.
+jCurrentStateTime :: Lens' Job (Maybe Text)
+jCurrentStateTime
+  = lens _jCurrentStateTime
+      (\ s a -> s{_jCurrentStateTime = a})
+
+-- | If this job is an update of an existing job, this field will be the ID
+-- of the job it replaced. When sending a CreateJobRequest, you can update
+-- a job by specifying it here. The job named here will be stopped, and its
+-- intermediate state transferred to this job.
+jReplaceJobId :: Lens' Job (Maybe Text)
+jReplaceJobId
+  = lens _jReplaceJobId
+      (\ s a -> s{_jReplaceJobId = a})
+
+-- | Timestamp when job was initially created. Immutable, set by the Dataflow
+-- service.
+jCreateTime :: Lens' Job (Maybe Text)
+jCreateTime
+  = lens _jCreateTime (\ s a -> s{_jCreateTime = a})
+
+instance FromJSON Job where
         parseJSON
-          = withObject "DynamicSourceSplit"
+          = withObject "Job"
               (\ o ->
-                 DynamicSourceSplit <$>
-                   (o .:? "residual") <*> (o .:? "primary"))
+                 Job <$>
+                   (o .:? "requestedState") <*> (o .:? "environment")
+                     <*> (o .:? "clientRequestId")
+                     <*> (o .:? "currentState")
+                     <*> (o .:? "replacedByJobId")
+                     <*> (o .:? "steps" .!= mempty)
+                     <*> (o .:? "executionInfo")
+                     <*> (o .:? "name")
+                     <*> (o .:? "transformNameMapping")
+                     <*> (o .:? "id")
+                     <*> (o .:? "projectId")
+                     <*> (o .:? "type")
+                     <*> (o .:? "currentStateTime")
+                     <*> (o .:? "replaceJobId")
+                     <*> (o .:? "createTime"))
 
-instance ToJSON DynamicSourceSplit where
-        toJSON DynamicSourceSplit{..}
+instance ToJSON Job where
+        toJSON Job{..}
           = object
               (catMaybes
-                 [("residual" .=) <$> _dssResidual,
-                  ("primary" .=) <$> _dssPrimary])
+                 [("requestedState" .=) <$> _jRequestedState,
+                  ("environment" .=) <$> _jEnvironment,
+                  ("clientRequestId" .=) <$> _jClientRequestId,
+                  ("currentState" .=) <$> _jCurrentState,
+                  ("replacedByJobId" .=) <$> _jReplacedByJobId,
+                  ("steps" .=) <$> _jSteps,
+                  ("executionInfo" .=) <$> _jExecutionInfo,
+                  ("name" .=) <$> _jName,
+                  ("transformNameMapping" .=) <$>
+                    _jTransformNameMApping,
+                  ("id" .=) <$> _jId, ("projectId" .=) <$> _jProjectId,
+                  ("type" .=) <$> _jType,
+                  ("currentStateTime" .=) <$> _jCurrentStateTime,
+                  ("replaceJobId" .=) <$> _jReplaceJobId,
+                  ("createTime" .=) <$> _jCreateTime])
 
 -- | An instruction that reads records. Takes no inputs, produces one output.
 --
@@ -3660,6 +3785,26 @@ instance ToJSON ReadInstruction where
         toJSON ReadInstruction{..}
           = object (catMaybes [("source" .=) <$> _riSource])
 
+-- | The sink to write to, plus its parameters.
+--
+-- /See:/ 'sinkSpec' smart constructor.
+data SinkSpec =
+    SinkSpec
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SinkSpec' with the minimum fields required to make a request.
+--
+sinkSpec
+    :: SinkSpec
+sinkSpec = SinkSpec
+
+instance FromJSON SinkSpec where
+        parseJSON
+          = withObject "SinkSpec" (\ o -> pure SinkSpec)
+
+instance ToJSON SinkSpec where
+        toJSON = const (Object mempty)
+
 -- | Describes one particular pool of Dataflow workers to be instantiated by
 -- the Dataflow service in order to perform the computations required by a
 -- job. Note that a workflow job may use multiple pools, in order to match
@@ -3682,7 +3827,7 @@ data WorkerPool = WorkerPool
     , _wpDiskType            :: !(Maybe Text)
     , _wpTeardownPolicy      :: !(Maybe Text)
     , _wpDefaultPackageSet   :: !(Maybe Text)
-    , _wpPoolArgs            :: !(Maybe PoolArgs)
+    , _wpPoolArgs            :: !(Maybe WorkerPoolPoolArgs)
     , _wpDataDisks           :: !(Maybe [Disk])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3851,7 +3996,7 @@ wpDefaultPackageSet
       (\ s a -> s{_wpDefaultPackageSet = a})
 
 -- | Extra arguments for this worker pool.
-wpPoolArgs :: Lens' WorkerPool (Maybe PoolArgs)
+wpPoolArgs :: Lens' WorkerPool (Maybe WorkerPoolPoolArgs)
 wpPoolArgs
   = lens _wpPoolArgs (\ s a -> s{_wpPoolArgs = a})
 
@@ -3908,6 +4053,74 @@ instance ToJSON WorkerPool where
                   ("poolArgs" .=) <$> _wpPoolArgs,
                   ("dataDisks" .=) <$> _wpDataDisks])
 
+-- | Defines a particular step within a Dataflow job. A job consists of
+-- multiple steps, each of which performs some specific operation as part
+-- of the overall job. Data is typically passed from one step to another as
+-- part of the job. Here\'s an example of a sequence of steps which
+-- together implement a Map-Reduce job: * Read a collection of data from
+-- some source, parsing the collection\'s elements. * Validate the
+-- elements. * Apply a user-defined function to map each element to some
+-- value and extract an element-specific key value. * Group elements with
+-- the same key into a single element with that key, transforming a
+-- multiply-keyed collection into a uniquely-keyed collection. * Write the
+-- elements out to some data sink. (Note that the Dataflow service may be
+-- used to run many different types of jobs, not just Map-Reduce).
+--
+-- /See:/ 'step' smart constructor.
+data Step = Step
+    { _sKind       :: !(Maybe Text)
+    , _sName       :: !(Maybe Text)
+    , _sProperties :: !(Maybe StepProperties)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Step' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sKind'
+--
+-- * 'sName'
+--
+-- * 'sProperties'
+step
+    :: Step
+step =
+    Step
+    { _sKind = Nothing
+    , _sName = Nothing
+    , _sProperties = Nothing
+    }
+
+-- | The kind of step in the dataflow Job.
+sKind :: Lens' Step (Maybe Text)
+sKind = lens _sKind (\ s a -> s{_sKind = a})
+
+-- | Name identifying the step. This must be unique for each step with
+-- respect to all other steps in the dataflow Job.
+sName :: Lens' Step (Maybe Text)
+sName = lens _sName (\ s a -> s{_sName = a})
+
+-- | Named properties associated with the step. Each kind of predefined step
+-- has its own required set of properties.
+sProperties :: Lens' Step (Maybe StepProperties)
+sProperties
+  = lens _sProperties (\ s a -> s{_sProperties = a})
+
+instance FromJSON Step where
+        parseJSON
+          = withObject "Step"
+              (\ o ->
+                 Step <$>
+                   (o .:? "kind") <*> (o .:? "name") <*>
+                     (o .:? "properties"))
+
+instance ToJSON Step where
+        toJSON Step{..}
+          = object
+              (catMaybes
+                 [("kind" .=) <$> _sKind, ("name" .=) <$> _sName,
+                  ("properties" .=) <$> _sProperties])
+
 -- | Packages that need to be installed in order for a worker to run the
 -- steps of the Dataflow job which will be assigned to its worker pool.
 -- This is the mechanism by which the SDK causes code to be loaded onto the
@@ -3960,217 +4173,100 @@ instance ToJSON Package where
                  [("location" .=) <$> _pLocation,
                   ("name" .=) <$> _pName])
 
--- | Defines a particular step within a Dataflow job. A job consists of
--- multiple steps, each of which performs some specific operation as part
--- of the overall job. Data is typically passed from one step to another as
--- part of the job. Here\'s an example of a sequence of steps which
--- together implement a Map-Reduce job: * Read a collection of data from
--- some source, parsing the collection\'s elements. * Validate the
--- elements. * Apply a user-defined function to map each element to some
--- value and extract an element-specific key value. * Group elements with
--- the same key into a single element with that key, transforming a
--- multiply-keyed collection into a uniquely-keyed collection. * Write the
--- elements out to some data sink. (Note that the Dataflow service may be
--- used to run many different types of jobs, not just Map-Reduce).
+-- | When a task splits using WorkItemStatus.dynamic_source_split, this
+-- message describes the two parts of the split relative to the description
+-- of the current task\'s input.
 --
--- /See:/ 'step' smart constructor.
-data Step = Step
-    { _sKind       :: !(Maybe Text)
-    , _sName       :: !(Maybe Text)
-    , _sProperties :: !(Maybe Properties)
+-- /See:/ 'dynamicSourceSplit' smart constructor.
+data DynamicSourceSplit = DynamicSourceSplit
+    { _dssResidual :: !(Maybe DerivedSource)
+    , _dssPrimary  :: !(Maybe DerivedSource)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Step' with the minimum fields required to make a request.
+-- | Creates a value of 'DynamicSourceSplit' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sKind'
+-- * 'dssResidual'
 --
--- * 'sName'
---
--- * 'sProperties'
-step
-    :: Step
-step =
-    Step
-    { _sKind = Nothing
-    , _sName = Nothing
-    , _sProperties = Nothing
+-- * 'dssPrimary'
+dynamicSourceSplit
+    :: DynamicSourceSplit
+dynamicSourceSplit =
+    DynamicSourceSplit
+    { _dssResidual = Nothing
+    , _dssPrimary = Nothing
     }
 
--- | The kind of step in the dataflow Job.
-sKind :: Lens' Step (Maybe Text)
-sKind = lens _sKind (\ s a -> s{_sKind = a})
+-- | Residual part (returned to the pool of work). Specified relative to the
+-- previously-current source.
+dssResidual :: Lens' DynamicSourceSplit (Maybe DerivedSource)
+dssResidual
+  = lens _dssResidual (\ s a -> s{_dssResidual = a})
 
--- | Name identifying the step. This must be unique for each step with
--- respect to all other steps in the dataflow Job.
-sName :: Lens' Step (Maybe Text)
-sName = lens _sName (\ s a -> s{_sName = a})
+-- | Primary part (continued to be processed by worker). Specified relative
+-- to the previously-current source. Becomes current.
+dssPrimary :: Lens' DynamicSourceSplit (Maybe DerivedSource)
+dssPrimary
+  = lens _dssPrimary (\ s a -> s{_dssPrimary = a})
 
--- | Named properties associated with the step. Each kind of predefined step
--- has its own required set of properties.
-sProperties :: Lens' Step (Maybe Properties)
-sProperties
-  = lens _sProperties (\ s a -> s{_sProperties = a})
-
-instance FromJSON Step where
+instance FromJSON DynamicSourceSplit where
         parseJSON
-          = withObject "Step"
+          = withObject "DynamicSourceSplit"
               (\ o ->
-                 Step <$>
-                   (o .:? "kind") <*> (o .:? "name") <*>
-                     (o .:? "properties"))
+                 DynamicSourceSplit <$>
+                   (o .:? "residual") <*> (o .:? "primary"))
 
-instance ToJSON Step where
-        toJSON Step{..}
+instance ToJSON DynamicSourceSplit where
+        toJSON DynamicSourceSplit{..}
           = object
               (catMaybes
-                 [("kind" .=) <$> _sKind, ("name" .=) <$> _sName,
-                  ("properties" .=) <$> _sProperties])
+                 [("residual" .=) <$> _dssResidual,
+                  ("primary" .=) <$> _dssPrimary])
 
--- | The sink to write to, plus its parameters.
+-- | Response from a request to report the status of WorkItems.
 --
--- /See:/ 'spec' smart constructor.
-data Spec =
-    Spec
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Spec' with the minimum fields required to make a request.
---
-spec
-    :: Spec
-spec = Spec
-
-instance FromJSON Spec where
-        parseJSON = withObject "Spec" (\ o -> pure Spec)
-
-instance ToJSON Spec where
-        toJSON = const (Object mempty)
-
--- | A source that records can be read and decoded from.
---
--- /See:/ 'source' smart constructor.
-data Source = Source
-    { _souDoesNotNeedSplitting :: !(Maybe Bool)
-    , _souBaseSpecs            :: !(Maybe [BaseSpecsItem])
-    , _souCodec                :: !(Maybe SourceCodec)
-    , _souSpec                 :: !(Maybe SourceSpec)
-    , _souMetadata             :: !(Maybe SourceMetadata)
+-- /See:/ 'reportWorkItemStatusResponse' smart constructor.
+newtype ReportWorkItemStatusResponse = ReportWorkItemStatusResponse
+    { _rwisrWorkItemServiceStates :: Maybe [WorkItemServiceState]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Source' with the minimum fields required to make a request.
+-- | Creates a value of 'ReportWorkItemStatusResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'souDoesNotNeedSplitting'
---
--- * 'souBaseSpecs'
---
--- * 'souCodec'
---
--- * 'souSpec'
---
--- * 'souMetadata'
-source
-    :: Source
-source =
-    Source
-    { _souDoesNotNeedSplitting = Nothing
-    , _souBaseSpecs = Nothing
-    , _souCodec = Nothing
-    , _souSpec = Nothing
-    , _souMetadata = Nothing
+-- * 'rwisrWorkItemServiceStates'
+reportWorkItemStatusResponse
+    :: ReportWorkItemStatusResponse
+reportWorkItemStatusResponse =
+    ReportWorkItemStatusResponse
+    { _rwisrWorkItemServiceStates = Nothing
     }
 
--- | Setting this value to true hints to the framework that the source
--- doesn\'t need splitting, and using SourceSplitRequest on it would yield
--- SOURCE_SPLIT_OUTCOME_USE_CURRENT. E.g. a file splitter may set this to
--- true when splitting a single file into a set of byte ranges of
--- appropriate size, and set this to false when splitting a filepattern
--- into individual files. However, for efficiency, a file splitter may
--- decide to produce file subranges directly from the filepattern to avoid
--- a splitting round-trip. See SourceSplitRequest for an overview of the
--- splitting process. This field is meaningful only in the Source objects
--- populated by the user (e.g. when filling in a DerivedSource). Source
--- objects supplied by the framework to the user don\'t have this field
--- populated.
-souDoesNotNeedSplitting :: Lens' Source (Maybe Bool)
-souDoesNotNeedSplitting
-  = lens _souDoesNotNeedSplitting
-      (\ s a -> s{_souDoesNotNeedSplitting = a})
-
--- | While splitting, sources may specify the produced bundles as differences
--- against another source, in order to save backend-side memory and allow
--- bigger jobs. For details, see SourceSplitRequest. To support this use
--- case, the full set of parameters of the source is logically obtained by
--- taking the latest explicitly specified value of each parameter in the
--- order: base_specs (later items win), spec (overrides anything in
--- base_specs).
-souBaseSpecs :: Lens' Source [BaseSpecsItem]
-souBaseSpecs
-  = lens _souBaseSpecs (\ s a -> s{_souBaseSpecs = a})
+-- | A set of messages indicating the service-side state for each WorkItem
+-- whose status was reported, in the same order as the WorkItemStatus
+-- messages in the ReportWorkItemStatusRequest which resulting in this
+-- response.
+rwisrWorkItemServiceStates :: Lens' ReportWorkItemStatusResponse [WorkItemServiceState]
+rwisrWorkItemServiceStates
+  = lens _rwisrWorkItemServiceStates
+      (\ s a -> s{_rwisrWorkItemServiceStates = a})
       . _Default
       . _Coerce
 
--- | The codec to use to decode data read from the source.
-souCodec :: Lens' Source (Maybe SourceCodec)
-souCodec = lens _souCodec (\ s a -> s{_souCodec = a})
-
--- | The source to read from, plus its parameters.
-souSpec :: Lens' Source (Maybe SourceSpec)
-souSpec = lens _souSpec (\ s a -> s{_souSpec = a})
-
--- | Optionally, metadata for this source can be supplied right away,
--- avoiding a SourceGetMetadataOperation roundtrip (see
--- SourceOperationRequest). This field is meaningful only in the Source
--- objects populated by the user (e.g. when filling in a DerivedSource).
--- Source objects supplied by the framework to the user don\'t have this
--- field populated.
-souMetadata :: Lens' Source (Maybe SourceMetadata)
-souMetadata
-  = lens _souMetadata (\ s a -> s{_souMetadata = a})
-
-instance FromJSON Source where
+instance FromJSON ReportWorkItemStatusResponse where
         parseJSON
-          = withObject "Source"
+          = withObject "ReportWorkItemStatusResponse"
               (\ o ->
-                 Source <$>
-                   (o .:? "doesNotNeedSplitting") <*>
-                     (o .:? "baseSpecs" .!= mempty)
-                     <*> (o .:? "codec")
-                     <*> (o .:? "spec")
-                     <*> (o .:? "metadata"))
+                 ReportWorkItemStatusResponse <$>
+                   (o .:? "workItemServiceStates" .!= mempty))
 
-instance ToJSON Source where
-        toJSON Source{..}
+instance ToJSON ReportWorkItemStatusResponse where
+        toJSON ReportWorkItemStatusResponse{..}
           = object
               (catMaybes
-                 [("doesNotNeedSplitting" .=) <$>
-                    _souDoesNotNeedSplitting,
-                  ("baseSpecs" .=) <$> _souBaseSpecs,
-                  ("codec" .=) <$> _souCodec, ("spec" .=) <$> _souSpec,
-                  ("metadata" .=) <$> _souMetadata])
-
--- | Experimental settings.
---
--- /See:/ 'internalExperiments' smart constructor.
-data InternalExperiments =
-    InternalExperiments
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'InternalExperiments' with the minimum fields required to make a request.
---
-internalExperiments
-    :: InternalExperiments
-internalExperiments = InternalExperiments
-
-instance FromJSON InternalExperiments where
-        parseJSON
-          = withObject "InternalExperiments"
-              (\ o -> pure InternalExperiments)
-
-instance ToJSON InternalExperiments where
-        toJSON = const (Object mempty)
+                 [("workItemServiceStates" .=) <$>
+                    _rwisrWorkItemServiceStates])
 
 -- | DEPRECATED in favor of DynamicSourceSplit.
 --
@@ -4242,199 +4338,6 @@ instance ToJSON SourceFork where
                   ("primarySource" .=) <$> _sfPrimarySource,
                   ("primary" .=) <$> _sfPrimary,
                   ("residualSource" .=) <$> _sfResidualSource])
-
--- | Location information for a specific key-range of a sharded computation.
--- Currently we only support UTF-8 character splits to simplify encoding
--- into JSON.
---
--- /See:/ 'keyRangeLocation' smart constructor.
-data KeyRangeLocation = KeyRangeLocation
-    { _krlPersistentDirectory :: !(Maybe Text)
-    , _krlDataDisk            :: !(Maybe Text)
-    , _krlStart               :: !(Maybe Text)
-    , _krlDeliveryEndpoint    :: !(Maybe Text)
-    , _krlEnd                 :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'KeyRangeLocation' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'krlPersistentDirectory'
---
--- * 'krlDataDisk'
---
--- * 'krlStart'
---
--- * 'krlDeliveryEndpoint'
---
--- * 'krlEnd'
-keyRangeLocation
-    :: KeyRangeLocation
-keyRangeLocation =
-    KeyRangeLocation
-    { _krlPersistentDirectory = Nothing
-    , _krlDataDisk = Nothing
-    , _krlStart = Nothing
-    , _krlDeliveryEndpoint = Nothing
-    , _krlEnd = Nothing
-    }
-
--- | The location of the persistent state for this range, as a persistent
--- directory in the worker local filesystem.
-krlPersistentDirectory :: Lens' KeyRangeLocation (Maybe Text)
-krlPersistentDirectory
-  = lens _krlPersistentDirectory
-      (\ s a -> s{_krlPersistentDirectory = a})
-
--- | The name of the data disk where data for this range is stored. This name
--- is local to the Google Cloud Platform project and uniquely identifies
--- the disk within that project, for example
--- \"myproject-1014-104817-4c2-harness-0-disk-1\".
-krlDataDisk :: Lens' KeyRangeLocation (Maybe Text)
-krlDataDisk
-  = lens _krlDataDisk (\ s a -> s{_krlDataDisk = a})
-
--- | The start (inclusive) of the key range.
-krlStart :: Lens' KeyRangeLocation (Maybe Text)
-krlStart = lens _krlStart (\ s a -> s{_krlStart = a})
-
--- | The physical location of this range assignment to be used for streaming
--- computation cross-worker message delivery.
-krlDeliveryEndpoint :: Lens' KeyRangeLocation (Maybe Text)
-krlDeliveryEndpoint
-  = lens _krlDeliveryEndpoint
-      (\ s a -> s{_krlDeliveryEndpoint = a})
-
--- | The end (exclusive) of the key range.
-krlEnd :: Lens' KeyRangeLocation (Maybe Text)
-krlEnd = lens _krlEnd (\ s a -> s{_krlEnd = a})
-
-instance FromJSON KeyRangeLocation where
-        parseJSON
-          = withObject "KeyRangeLocation"
-              (\ o ->
-                 KeyRangeLocation <$>
-                   (o .:? "persistentDirectory") <*> (o .:? "dataDisk")
-                     <*> (o .:? "start")
-                     <*> (o .:? "deliveryEndpoint")
-                     <*> (o .:? "end"))
-
-instance ToJSON KeyRangeLocation where
-        toJSON KeyRangeLocation{..}
-          = object
-              (catMaybes
-                 [("persistentDirectory" .=) <$>
-                    _krlPersistentDirectory,
-                  ("dataDisk" .=) <$> _krlDataDisk,
-                  ("start" .=) <$> _krlStart,
-                  ("deliveryEndpoint" .=) <$> _krlDeliveryEndpoint,
-                  ("end" .=) <$> _krlEnd])
-
--- | Response from a request to report the status of WorkItems.
---
--- /See:/ 'reportWorkItemStatusResponse' smart constructor.
-newtype ReportWorkItemStatusResponse = ReportWorkItemStatusResponse
-    { _rwisrWorkItemServiceStates :: Maybe [WorkItemServiceState]
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ReportWorkItemStatusResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rwisrWorkItemServiceStates'
-reportWorkItemStatusResponse
-    :: ReportWorkItemStatusResponse
-reportWorkItemStatusResponse =
-    ReportWorkItemStatusResponse
-    { _rwisrWorkItemServiceStates = Nothing
-    }
-
--- | A set of messages indicating the service-side state for each WorkItem
--- whose status was reported, in the same order as the WorkItemStatus
--- messages in the ReportWorkItemStatusRequest which resulting in this
--- response.
-rwisrWorkItemServiceStates :: Lens' ReportWorkItemStatusResponse [WorkItemServiceState]
-rwisrWorkItemServiceStates
-  = lens _rwisrWorkItemServiceStates
-      (\ s a -> s{_rwisrWorkItemServiceStates = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON ReportWorkItemStatusResponse where
-        parseJSON
-          = withObject "ReportWorkItemStatusResponse"
-              (\ o ->
-                 ReportWorkItemStatusResponse <$>
-                   (o .:? "workItemServiceStates" .!= mempty))
-
-instance ToJSON ReportWorkItemStatusResponse where
-        toJSON ReportWorkItemStatusResponse{..}
-          = object
-              (catMaybes
-                 [("workItemServiceStates" .=) <$>
-                    _rwisrWorkItemServiceStates])
-
--- | A progress measurement of a WorkItem by a worker.
---
--- /See:/ 'approximateProgress' smart constructor.
-data ApproximateProgress = ApproximateProgress
-    { _apRemainingTime   :: !(Maybe Text)
-    , _apPercentComplete :: !(Maybe Float)
-    , _apPosition        :: !(Maybe Position)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ApproximateProgress' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'apRemainingTime'
---
--- * 'apPercentComplete'
---
--- * 'apPosition'
-approximateProgress
-    :: ApproximateProgress
-approximateProgress =
-    ApproximateProgress
-    { _apRemainingTime = Nothing
-    , _apPercentComplete = Nothing
-    , _apPosition = Nothing
-    }
-
--- | Completion as an estimated time remaining.
-apRemainingTime :: Lens' ApproximateProgress (Maybe Text)
-apRemainingTime
-  = lens _apRemainingTime
-      (\ s a -> s{_apRemainingTime = a})
-
--- | Completion as percentage of the work, from 0.0 (beginning, nothing
--- complete), to 1.0 (end of the work range, entire WorkItem complete).
-apPercentComplete :: Lens' ApproximateProgress (Maybe Float)
-apPercentComplete
-  = lens _apPercentComplete
-      (\ s a -> s{_apPercentComplete = a})
-
--- | A Position within the work to represent a progress.
-apPosition :: Lens' ApproximateProgress (Maybe Position)
-apPosition
-  = lens _apPosition (\ s a -> s{_apPosition = a})
-
-instance FromJSON ApproximateProgress where
-        parseJSON
-          = withObject "ApproximateProgress"
-              (\ o ->
-                 ApproximateProgress <$>
-                   (o .:? "remainingTime") <*> (o .:? "percentComplete")
-                     <*> (o .:? "position"))
-
-instance ToJSON ApproximateProgress where
-        toJSON ApproximateProgress{..}
-          = object
-              (catMaybes
-                 [("remainingTime" .=) <$> _apRemainingTime,
-                  ("percentComplete" .=) <$> _apPercentComplete,
-                  ("position" .=) <$> _apPosition])
 
 -- | Describes full or partial data disk assignment information of the
 -- computation ranges.
@@ -4540,6 +4443,259 @@ instance ToJSON ListJobsResponse where
                  [("nextPageToken" .=) <$> _ljrNextPageToken,
                   ("jobs" .=) <$> _ljrJobs])
 
+-- | A source that records can be read and decoded from.
+--
+-- /See:/ 'source' smart constructor.
+data Source = Source
+    { _souDoesNotNeedSplitting :: !(Maybe Bool)
+    , _souBaseSpecs            :: !(Maybe [SourceBaseSpecsItem])
+    , _souCodec                :: !(Maybe SourceCodec)
+    , _souSpec                 :: !(Maybe SourceSpec)
+    , _souMetadata             :: !(Maybe SourceMetadata)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Source' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'souDoesNotNeedSplitting'
+--
+-- * 'souBaseSpecs'
+--
+-- * 'souCodec'
+--
+-- * 'souSpec'
+--
+-- * 'souMetadata'
+source
+    :: Source
+source =
+    Source
+    { _souDoesNotNeedSplitting = Nothing
+    , _souBaseSpecs = Nothing
+    , _souCodec = Nothing
+    , _souSpec = Nothing
+    , _souMetadata = Nothing
+    }
+
+-- | Setting this value to true hints to the framework that the source
+-- doesn\'t need splitting, and using SourceSplitRequest on it would yield
+-- SOURCE_SPLIT_OUTCOME_USE_CURRENT. E.g. a file splitter may set this to
+-- true when splitting a single file into a set of byte ranges of
+-- appropriate size, and set this to false when splitting a filepattern
+-- into individual files. However, for efficiency, a file splitter may
+-- decide to produce file subranges directly from the filepattern to avoid
+-- a splitting round-trip. See SourceSplitRequest for an overview of the
+-- splitting process. This field is meaningful only in the Source objects
+-- populated by the user (e.g. when filling in a DerivedSource). Source
+-- objects supplied by the framework to the user don\'t have this field
+-- populated.
+souDoesNotNeedSplitting :: Lens' Source (Maybe Bool)
+souDoesNotNeedSplitting
+  = lens _souDoesNotNeedSplitting
+      (\ s a -> s{_souDoesNotNeedSplitting = a})
+
+-- | While splitting, sources may specify the produced bundles as differences
+-- against another source, in order to save backend-side memory and allow
+-- bigger jobs. For details, see SourceSplitRequest. To support this use
+-- case, the full set of parameters of the source is logically obtained by
+-- taking the latest explicitly specified value of each parameter in the
+-- order: base_specs (later items win), spec (overrides anything in
+-- base_specs).
+souBaseSpecs :: Lens' Source [SourceBaseSpecsItem]
+souBaseSpecs
+  = lens _souBaseSpecs (\ s a -> s{_souBaseSpecs = a})
+      . _Default
+      . _Coerce
+
+-- | The codec to use to decode data read from the source.
+souCodec :: Lens' Source (Maybe SourceCodec)
+souCodec = lens _souCodec (\ s a -> s{_souCodec = a})
+
+-- | The source to read from, plus its parameters.
+souSpec :: Lens' Source (Maybe SourceSpec)
+souSpec = lens _souSpec (\ s a -> s{_souSpec = a})
+
+-- | Optionally, metadata for this source can be supplied right away,
+-- avoiding a SourceGetMetadataOperation roundtrip (see
+-- SourceOperationRequest). This field is meaningful only in the Source
+-- objects populated by the user (e.g. when filling in a DerivedSource).
+-- Source objects supplied by the framework to the user don\'t have this
+-- field populated.
+souMetadata :: Lens' Source (Maybe SourceMetadata)
+souMetadata
+  = lens _souMetadata (\ s a -> s{_souMetadata = a})
+
+instance FromJSON Source where
+        parseJSON
+          = withObject "Source"
+              (\ o ->
+                 Source <$>
+                   (o .:? "doesNotNeedSplitting") <*>
+                     (o .:? "baseSpecs" .!= mempty)
+                     <*> (o .:? "codec")
+                     <*> (o .:? "spec")
+                     <*> (o .:? "metadata"))
+
+instance ToJSON Source where
+        toJSON Source{..}
+          = object
+              (catMaybes
+                 [("doesNotNeedSplitting" .=) <$>
+                    _souDoesNotNeedSplitting,
+                  ("baseSpecs" .=) <$> _souBaseSpecs,
+                  ("codec" .=) <$> _souCodec, ("spec" .=) <$> _souSpec,
+                  ("metadata" .=) <$> _souMetadata])
+
+-- | A progress measurement of a WorkItem by a worker.
+--
+-- /See:/ 'approximateProgress' smart constructor.
+data ApproximateProgress = ApproximateProgress
+    { _apRemainingTime   :: !(Maybe Text)
+    , _apPercentComplete :: !(Maybe Float)
+    , _apPosition        :: !(Maybe Position)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ApproximateProgress' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'apRemainingTime'
+--
+-- * 'apPercentComplete'
+--
+-- * 'apPosition'
+approximateProgress
+    :: ApproximateProgress
+approximateProgress =
+    ApproximateProgress
+    { _apRemainingTime = Nothing
+    , _apPercentComplete = Nothing
+    , _apPosition = Nothing
+    }
+
+-- | Completion as an estimated time remaining.
+apRemainingTime :: Lens' ApproximateProgress (Maybe Text)
+apRemainingTime
+  = lens _apRemainingTime
+      (\ s a -> s{_apRemainingTime = a})
+
+-- | Completion as percentage of the work, from 0.0 (beginning, nothing
+-- complete), to 1.0 (end of the work range, entire WorkItem complete).
+apPercentComplete :: Lens' ApproximateProgress (Maybe Float)
+apPercentComplete
+  = lens _apPercentComplete
+      (\ s a -> s{_apPercentComplete = a})
+
+-- | A Position within the work to represent a progress.
+apPosition :: Lens' ApproximateProgress (Maybe Position)
+apPosition
+  = lens _apPosition (\ s a -> s{_apPosition = a})
+
+instance FromJSON ApproximateProgress where
+        parseJSON
+          = withObject "ApproximateProgress"
+              (\ o ->
+                 ApproximateProgress <$>
+                   (o .:? "remainingTime") <*> (o .:? "percentComplete")
+                     <*> (o .:? "position"))
+
+instance ToJSON ApproximateProgress where
+        toJSON ApproximateProgress{..}
+          = object
+              (catMaybes
+                 [("remainingTime" .=) <$> _apRemainingTime,
+                  ("percentComplete" .=) <$> _apPercentComplete,
+                  ("position" .=) <$> _apPosition])
+
+-- | Location information for a specific key-range of a sharded computation.
+-- Currently we only support UTF-8 character splits to simplify encoding
+-- into JSON.
+--
+-- /See:/ 'keyRangeLocation' smart constructor.
+data KeyRangeLocation = KeyRangeLocation
+    { _krlPersistentDirectory :: !(Maybe Text)
+    , _krlDataDisk            :: !(Maybe Text)
+    , _krlStart               :: !(Maybe Text)
+    , _krlDeliveryEndpoint    :: !(Maybe Text)
+    , _krlEnd                 :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'KeyRangeLocation' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'krlPersistentDirectory'
+--
+-- * 'krlDataDisk'
+--
+-- * 'krlStart'
+--
+-- * 'krlDeliveryEndpoint'
+--
+-- * 'krlEnd'
+keyRangeLocation
+    :: KeyRangeLocation
+keyRangeLocation =
+    KeyRangeLocation
+    { _krlPersistentDirectory = Nothing
+    , _krlDataDisk = Nothing
+    , _krlStart = Nothing
+    , _krlDeliveryEndpoint = Nothing
+    , _krlEnd = Nothing
+    }
+
+-- | The location of the persistent state for this range, as a persistent
+-- directory in the worker local filesystem.
+krlPersistentDirectory :: Lens' KeyRangeLocation (Maybe Text)
+krlPersistentDirectory
+  = lens _krlPersistentDirectory
+      (\ s a -> s{_krlPersistentDirectory = a})
+
+-- | The name of the data disk where data for this range is stored. This name
+-- is local to the Google Cloud Platform project and uniquely identifies
+-- the disk within that project, for example
+-- \"myproject-1014-104817-4c2-harness-0-disk-1\".
+krlDataDisk :: Lens' KeyRangeLocation (Maybe Text)
+krlDataDisk
+  = lens _krlDataDisk (\ s a -> s{_krlDataDisk = a})
+
+-- | The start (inclusive) of the key range.
+krlStart :: Lens' KeyRangeLocation (Maybe Text)
+krlStart = lens _krlStart (\ s a -> s{_krlStart = a})
+
+-- | The physical location of this range assignment to be used for streaming
+-- computation cross-worker message delivery.
+krlDeliveryEndpoint :: Lens' KeyRangeLocation (Maybe Text)
+krlDeliveryEndpoint
+  = lens _krlDeliveryEndpoint
+      (\ s a -> s{_krlDeliveryEndpoint = a})
+
+-- | The end (exclusive) of the key range.
+krlEnd :: Lens' KeyRangeLocation (Maybe Text)
+krlEnd = lens _krlEnd (\ s a -> s{_krlEnd = a})
+
+instance FromJSON KeyRangeLocation where
+        parseJSON
+          = withObject "KeyRangeLocation"
+              (\ o ->
+                 KeyRangeLocation <$>
+                   (o .:? "persistentDirectory") <*> (o .:? "dataDisk")
+                     <*> (o .:? "start")
+                     <*> (o .:? "deliveryEndpoint")
+                     <*> (o .:? "end"))
+
+instance ToJSON KeyRangeLocation where
+        toJSON KeyRangeLocation{..}
+          = object
+              (catMaybes
+                 [("persistentDirectory" .=) <$>
+                    _krlPersistentDirectory,
+                  ("dataDisk" .=) <$> _krlDataDisk,
+                  ("start" .=) <$> _krlStart,
+                  ("deliveryEndpoint" .=) <$> _krlDeliveryEndpoint,
+                  ("end" .=) <$> _krlEnd])
+
 -- | Information about an output of a multi-output DoFn.
 --
 -- /See:/ 'multiOutputInfo' smart constructor.
@@ -4573,34 +4729,14 @@ instance ToJSON MultiOutputInfo where
         toJSON MultiOutputInfo{..}
           = object (catMaybes [("tag" .=) <$> _moiTag])
 
--- | A description of the process that generated the request.
---
--- /See:/ 'userAgent' smart constructor.
-data UserAgent =
-    UserAgent
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'UserAgent' with the minimum fields required to make a request.
---
-userAgent
-    :: UserAgent
-userAgent = UserAgent
-
-instance FromJSON UserAgent where
-        parseJSON
-          = withObject "UserAgent" (\ o -> pure UserAgent)
-
-instance ToJSON UserAgent where
-        toJSON = const (Object mempty)
-
 -- | An instruction that does a partial group-by-key. One input and one
 -- output.
 --
 -- /See:/ 'partialGroupByKeyInstruction' smart constructor.
 data PartialGroupByKeyInstruction = PartialGroupByKeyInstruction
-    { _pgbkiValueCombiningFn  :: !(Maybe ValueCombiningFn)
+    { _pgbkiValueCombiningFn  :: !(Maybe PartialGroupByKeyInstructionValueCombiningFn)
     , _pgbkiInput             :: !(Maybe InstructionInput)
-    , _pgbkiInputElementCodec :: !(Maybe InputElementCodec)
+    , _pgbkiInputElementCodec :: !(Maybe PartialGroupByKeyInstructionInputElementCodec)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PartialGroupByKeyInstruction' with the minimum fields required to make a request.
@@ -4622,7 +4758,7 @@ partialGroupByKeyInstruction =
     }
 
 -- | The value combining function to invoke.
-pgbkiValueCombiningFn :: Lens' PartialGroupByKeyInstruction (Maybe ValueCombiningFn)
+pgbkiValueCombiningFn :: Lens' PartialGroupByKeyInstruction (Maybe PartialGroupByKeyInstructionValueCombiningFn)
 pgbkiValueCombiningFn
   = lens _pgbkiValueCombiningFn
       (\ s a -> s{_pgbkiValueCombiningFn = a})
@@ -4633,7 +4769,7 @@ pgbkiInput
   = lens _pgbkiInput (\ s a -> s{_pgbkiInput = a})
 
 -- | The codec to use for interpreting an element in the input PTable.
-pgbkiInputElementCodec :: Lens' PartialGroupByKeyInstruction (Maybe InputElementCodec)
+pgbkiInputElementCodec :: Lens' PartialGroupByKeyInstruction (Maybe PartialGroupByKeyInstructionInputElementCodec)
 pgbkiInputElementCodec
   = lens _pgbkiInputElementCodec
       (\ s a -> s{_pgbkiInputElementCodec = a})
@@ -4665,7 +4801,7 @@ data ParDoInstruction = ParDoInstruction
     , _pdiMultiOutputInfos :: !(Maybe [MultiOutputInfo])
     , _pdiSideInputs       :: !(Maybe [SideInputInfo])
     , _pdiInput            :: !(Maybe InstructionInput)
-    , _pdiUserFn           :: !(Maybe UserFn)
+    , _pdiUserFn           :: !(Maybe ParDoInstructionUserFn)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ParDoInstruction' with the minimum fields required to make a request.
@@ -4719,7 +4855,7 @@ pdiInput :: Lens' ParDoInstruction (Maybe InstructionInput)
 pdiInput = lens _pdiInput (\ s a -> s{_pdiInput = a})
 
 -- | The user function to invoke.
-pdiUserFn :: Lens' ParDoInstruction (Maybe UserFn)
+pdiUserFn :: Lens' ParDoInstruction (Maybe ParDoInstructionUserFn)
 pdiUserFn
   = lens _pdiUserFn (\ s a -> s{_pdiUserFn = a})
 
@@ -4744,135 +4880,59 @@ instance ToJSON ParDoInstruction where
                   ("input" .=) <$> _pdiInput,
                   ("userFn" .=) <$> _pdiUserFn])
 
--- | Maps user stage names to stable computation names.
+-- | Identifies the location of a custom souce.
 --
--- /See:/ 'userStageToComputationNameMap' smart constructor.
-data UserStageToComputationNameMap =
-    UserStageToComputationNameMap
+-- /See:/ 'customSourceLocation' smart constructor.
+newtype CustomSourceLocation = CustomSourceLocation
+    { _cslStateful :: Maybe Bool
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CustomSourceLocation' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cslStateful'
+customSourceLocation
+    :: CustomSourceLocation
+customSourceLocation =
+    CustomSourceLocation
+    { _cslStateful = Nothing
+    }
+
+-- | Whether this source is stateful.
+cslStateful :: Lens' CustomSourceLocation (Maybe Bool)
+cslStateful
+  = lens _cslStateful (\ s a -> s{_cslStateful = a})
+
+instance FromJSON CustomSourceLocation where
+        parseJSON
+          = withObject "CustomSourceLocation"
+              (\ o -> CustomSourceLocation <$> (o .:? "stateful"))
+
+instance ToJSON CustomSourceLocation where
+        toJSON CustomSourceLocation{..}
+          = object
+              (catMaybes [("stateful" .=) <$> _cslStateful])
+
+--
+-- /See:/ 'sourceBaseSpecsItem' smart constructor.
+data SourceBaseSpecsItem =
+    SourceBaseSpecsItem
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UserStageToComputationNameMap' with the minimum fields required to make a request.
+-- | Creates a value of 'SourceBaseSpecsItem' with the minimum fields required to make a request.
 --
-userStageToComputationNameMap
-    :: UserStageToComputationNameMap
-userStageToComputationNameMap = UserStageToComputationNameMap
+sourceBaseSpecsItem
+    :: SourceBaseSpecsItem
+sourceBaseSpecsItem = SourceBaseSpecsItem
 
-instance FromJSON UserStageToComputationNameMap where
+instance FromJSON SourceBaseSpecsItem where
         parseJSON
-          = withObject "UserStageToComputationNameMap"
-              (\ o -> pure UserStageToComputationNameMap)
+          = withObject "SourceBaseSpecsItem"
+              (\ o -> pure SourceBaseSpecsItem)
 
-instance ToJSON UserStageToComputationNameMap where
+instance ToJSON SourceBaseSpecsItem where
         toJSON = const (Object mempty)
-
--- | Information about a side input of a DoFn or an input of a SeqDoFn.
---
--- /See:/ 'sideInputInfo' smart constructor.
-data SideInputInfo = SideInputInfo
-    { _siiTag     :: !(Maybe Text)
-    , _siiKind    :: !(Maybe SideInputInfoKind)
-    , _siiSources :: !(Maybe [Source])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SideInputInfo' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'siiTag'
---
--- * 'siiKind'
---
--- * 'siiSources'
-sideInputInfo
-    :: SideInputInfo
-sideInputInfo =
-    SideInputInfo
-    { _siiTag = Nothing
-    , _siiKind = Nothing
-    , _siiSources = Nothing
-    }
-
--- | The id of the tag the user code will access this side input by; this
--- should correspond to the tag of some MultiOutputInfo.
-siiTag :: Lens' SideInputInfo (Maybe Text)
-siiTag = lens _siiTag (\ s a -> s{_siiTag = a})
-
--- | How to interpret the source element(s) as a side input value.
-siiKind :: Lens' SideInputInfo (Maybe SideInputInfoKind)
-siiKind = lens _siiKind (\ s a -> s{_siiKind = a})
-
--- | The source(s) to read element(s) from to get the value of this side
--- input. If more than one source, then the elements are taken from the
--- sources, in the specified order if order matters. At least one source is
--- required.
-siiSources :: Lens' SideInputInfo [Source]
-siiSources
-  = lens _siiSources (\ s a -> s{_siiSources = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON SideInputInfo where
-        parseJSON
-          = withObject "SideInputInfo"
-              (\ o ->
-                 SideInputInfo <$>
-                   (o .:? "tag") <*> (o .:? "kind") <*>
-                     (o .:? "sources" .!= mempty))
-
-instance ToJSON SideInputInfo where
-        toJSON SideInputInfo{..}
-          = object
-              (catMaybes
-                 [("tag" .=) <$> _siiTag, ("kind" .=) <$> _siiKind,
-                  ("sources" .=) <$> _siiSources])
-
--- | State family configuration.
---
--- /See:/ 'stateFamilyConfig' smart constructor.
-data StateFamilyConfig = StateFamilyConfig
-    { _sfcIsRead      :: !(Maybe Bool)
-    , _sfcStateFamily :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'StateFamilyConfig' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'sfcIsRead'
---
--- * 'sfcStateFamily'
-stateFamilyConfig
-    :: StateFamilyConfig
-stateFamilyConfig =
-    StateFamilyConfig
-    { _sfcIsRead = Nothing
-    , _sfcStateFamily = Nothing
-    }
-
--- | If true, this family corresponds to a read operation.
-sfcIsRead :: Lens' StateFamilyConfig (Maybe Bool)
-sfcIsRead
-  = lens _sfcIsRead (\ s a -> s{_sfcIsRead = a})
-
--- | The state family value.
-sfcStateFamily :: Lens' StateFamilyConfig (Maybe Text)
-sfcStateFamily
-  = lens _sfcStateFamily
-      (\ s a -> s{_sfcStateFamily = a})
-
-instance FromJSON StateFamilyConfig where
-        parseJSON
-          = withObject "StateFamilyConfig"
-              (\ o ->
-                 StateFamilyConfig <$>
-                   (o .:? "isRead") <*> (o .:? "stateFamily"))
-
-instance ToJSON StateFamilyConfig where
-        toJSON StateFamilyConfig{..}
-          = object
-              (catMaybes
-                 [("isRead" .=) <$> _sfcIsRead,
-                  ("stateFamily" .=) <$> _sfcStateFamily])
 
 -- | Describes a particular operation comprising a MapTask.
 --
@@ -4985,6 +5045,27 @@ instance ToJSON ParallelInstruction where
                   ("systemName" .=) <$> _piSystemName,
                   ("flatten" .=) <$> _piFlatten])
 
+-- | How to interpret the source element(s) as a side input value.
+--
+-- /See:/ 'sideInputInfoKind' smart constructor.
+data SideInputInfoKind =
+    SideInputInfoKind
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SideInputInfoKind' with the minimum fields required to make a request.
+--
+sideInputInfoKind
+    :: SideInputInfoKind
+sideInputInfoKind = SideInputInfoKind
+
+instance FromJSON SideInputInfoKind where
+        parseJSON
+          = withObject "SideInputInfoKind"
+              (\ o -> pure SideInputInfoKind)
+
+instance ToJSON SideInputInfoKind where
+        toJSON = const (Object mempty)
+
 -- | DEPRECATED in favor of DerivedSource.
 --
 -- /See:/ 'sourceSplitShard' smart constructor.
@@ -5033,6 +5114,101 @@ instance ToJSON SourceSplitShard where
                  [("derivationMode" .=) <$> _sssDerivationMode,
                   ("source" .=) <$> _sssSource])
 
+-- | Information about a side input of a DoFn or an input of a SeqDoFn.
+--
+-- /See:/ 'sideInputInfo' smart constructor.
+data SideInputInfo = SideInputInfo
+    { _siiTag     :: !(Maybe Text)
+    , _siiKind    :: !(Maybe SideInputInfoKind)
+    , _siiSources :: !(Maybe [Source])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SideInputInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'siiTag'
+--
+-- * 'siiKind'
+--
+-- * 'siiSources'
+sideInputInfo
+    :: SideInputInfo
+sideInputInfo =
+    SideInputInfo
+    { _siiTag = Nothing
+    , _siiKind = Nothing
+    , _siiSources = Nothing
+    }
+
+-- | The id of the tag the user code will access this side input by; this
+-- should correspond to the tag of some MultiOutputInfo.
+siiTag :: Lens' SideInputInfo (Maybe Text)
+siiTag = lens _siiTag (\ s a -> s{_siiTag = a})
+
+-- | How to interpret the source element(s) as a side input value.
+siiKind :: Lens' SideInputInfo (Maybe SideInputInfoKind)
+siiKind = lens _siiKind (\ s a -> s{_siiKind = a})
+
+-- | The source(s) to read element(s) from to get the value of this side
+-- input. If more than one source, then the elements are taken from the
+-- sources, in the specified order if order matters. At least one source is
+-- required.
+siiSources :: Lens' SideInputInfo [Source]
+siiSources
+  = lens _siiSources (\ s a -> s{_siiSources = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON SideInputInfo where
+        parseJSON
+          = withObject "SideInputInfo"
+              (\ o ->
+                 SideInputInfo <$>
+                   (o .:? "tag") <*> (o .:? "kind") <*>
+                     (o .:? "sources" .!= mempty))
+
+instance ToJSON SideInputInfo where
+        toJSON SideInputInfo{..}
+          = object
+              (catMaybes
+                 [("tag" .=) <$> _siiTag, ("kind" .=) <$> _siiKind,
+                  ("sources" .=) <$> _siiSources])
+
+-- | Additional information about how a Dataflow job will be executed which
+-- isn’t contained in the submitted job.
+--
+-- /See:/ 'jobExecutionInfo' smart constructor.
+newtype JobExecutionInfo = JobExecutionInfo
+    { _jeiStages :: Maybe JobExecutionInfoStages
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'JobExecutionInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'jeiStages'
+jobExecutionInfo
+    :: JobExecutionInfo
+jobExecutionInfo =
+    JobExecutionInfo
+    { _jeiStages = Nothing
+    }
+
+-- | A mapping from each stage to the information about that stage.
+jeiStages :: Lens' JobExecutionInfo (Maybe JobExecutionInfoStages)
+jeiStages
+  = lens _jeiStages (\ s a -> s{_jeiStages = a})
+
+instance FromJSON JobExecutionInfo where
+        parseJSON
+          = withObject "JobExecutionInfo"
+              (\ o -> JobExecutionInfo <$> (o .:? "stages"))
+
+instance ToJSON JobExecutionInfo where
+        toJSON JobExecutionInfo{..}
+          = object (catMaybes [("stages" .=) <$> _jeiStages])
+
 -- | The codec to use to decode data read from the source.
 --
 -- /See:/ 'sourceCodec' smart constructor.
@@ -5053,308 +5229,53 @@ instance FromJSON SourceCodec where
 instance ToJSON SourceCodec where
         toJSON = const (Object mempty)
 
--- | Identifies the location of a custom souce.
+-- | State family configuration.
 --
--- /See:/ 'customSourceLocation' smart constructor.
-newtype CustomSourceLocation = CustomSourceLocation
-    { _cslStateful :: Maybe Bool
+-- /See:/ 'stateFamilyConfig' smart constructor.
+data StateFamilyConfig = StateFamilyConfig
+    { _sfcIsRead      :: !(Maybe Bool)
+    , _sfcStateFamily :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CustomSourceLocation' with the minimum fields required to make a request.
+-- | Creates a value of 'StateFamilyConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cslStateful'
-customSourceLocation
-    :: CustomSourceLocation
-customSourceLocation =
-    CustomSourceLocation
-    { _cslStateful = Nothing
+-- * 'sfcIsRead'
+--
+-- * 'sfcStateFamily'
+stateFamilyConfig
+    :: StateFamilyConfig
+stateFamilyConfig =
+    StateFamilyConfig
+    { _sfcIsRead = Nothing
+    , _sfcStateFamily = Nothing
     }
 
--- | Whether this source is stateful.
-cslStateful :: Lens' CustomSourceLocation (Maybe Bool)
-cslStateful
-  = lens _cslStateful (\ s a -> s{_cslStateful = a})
+-- | If true, this family corresponds to a read operation.
+sfcIsRead :: Lens' StateFamilyConfig (Maybe Bool)
+sfcIsRead
+  = lens _sfcIsRead (\ s a -> s{_sfcIsRead = a})
 
-instance FromJSON CustomSourceLocation where
+-- | The state family value.
+sfcStateFamily :: Lens' StateFamilyConfig (Maybe Text)
+sfcStateFamily
+  = lens _sfcStateFamily
+      (\ s a -> s{_sfcStateFamily = a})
+
+instance FromJSON StateFamilyConfig where
         parseJSON
-          = withObject "CustomSourceLocation"
-              (\ o -> CustomSourceLocation <$> (o .:? "stateful"))
-
-instance ToJSON CustomSourceLocation where
-        toJSON CustomSourceLocation{..}
-          = object
-              (catMaybes [("stateful" .=) <$> _cslStateful])
-
--- | Additional information about how a Dataflow job will be executed which
--- isn’t contained in the submitted job.
---
--- /See:/ 'jobExecutionInfo' smart constructor.
-newtype JobExecutionInfo = JobExecutionInfo
-    { _jeiStages :: Maybe Stages
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'JobExecutionInfo' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'jeiStages'
-jobExecutionInfo
-    :: JobExecutionInfo
-jobExecutionInfo =
-    JobExecutionInfo
-    { _jeiStages = Nothing
-    }
-
--- | A mapping from each stage to the information about that stage.
-jeiStages :: Lens' JobExecutionInfo (Maybe Stages)
-jeiStages
-  = lens _jeiStages (\ s a -> s{_jeiStages = a})
-
-instance FromJSON JobExecutionInfo where
-        parseJSON
-          = withObject "JobExecutionInfo"
-              (\ o -> JobExecutionInfo <$> (o .:? "stages"))
-
-instance ToJSON JobExecutionInfo where
-        toJSON JobExecutionInfo{..}
-          = object (catMaybes [("stages" .=) <$> _jeiStages])
-
--- | How to interpret the source element(s) as a side input value.
---
--- /See:/ 'sideInputInfoKind' smart constructor.
-data SideInputInfoKind =
-    SideInputInfoKind
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SideInputInfoKind' with the minimum fields required to make a request.
---
-sideInputInfoKind
-    :: SideInputInfoKind
-sideInputInfoKind = SideInputInfoKind
-
-instance FromJSON SideInputInfoKind where
-        parseJSON
-          = withObject "SideInputInfoKind"
-              (\ o -> pure SideInputInfoKind)
-
-instance ToJSON SideInputInfoKind where
-        toJSON = const (Object mempty)
-
--- | Extra arguments for this worker pool.
---
--- /See:/ 'poolArgs' smart constructor.
-data PoolArgs =
-    PoolArgs
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PoolArgs' with the minimum fields required to make a request.
---
-poolArgs
-    :: PoolArgs
-poolArgs = PoolArgs
-
-instance FromJSON PoolArgs where
-        parseJSON
-          = withObject "PoolArgs" (\ o -> pure PoolArgs)
-
-instance ToJSON PoolArgs where
-        toJSON = const (Object mempty)
-
--- | Describes a particular function to invoke.
---
--- /See:/ 'seqMapTask' smart constructor.
-data SeqMapTask = SeqMapTask
-    { _smtInputs      :: !(Maybe [SideInputInfo])
-    , _smtName        :: !(Maybe Text)
-    , _smtOutputInfos :: !(Maybe [SeqMapTaskOutputInfo])
-    , _smtSystemName  :: !(Maybe Text)
-    , _smtStageName   :: !(Maybe Text)
-    , _smtUserFn      :: !(Maybe SeqMapTaskUserFn)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SeqMapTask' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'smtInputs'
---
--- * 'smtName'
---
--- * 'smtOutputInfos'
---
--- * 'smtSystemName'
---
--- * 'smtStageName'
---
--- * 'smtUserFn'
-seqMapTask
-    :: SeqMapTask
-seqMapTask =
-    SeqMapTask
-    { _smtInputs = Nothing
-    , _smtName = Nothing
-    , _smtOutputInfos = Nothing
-    , _smtSystemName = Nothing
-    , _smtStageName = Nothing
-    , _smtUserFn = Nothing
-    }
-
--- | Information about each of the inputs.
-smtInputs :: Lens' SeqMapTask [SideInputInfo]
-smtInputs
-  = lens _smtInputs (\ s a -> s{_smtInputs = a}) .
-      _Default
-      . _Coerce
-
--- | The user-provided name of the SeqDo operation.
-smtName :: Lens' SeqMapTask (Maybe Text)
-smtName = lens _smtName (\ s a -> s{_smtName = a})
-
--- | Information about each of the outputs.
-smtOutputInfos :: Lens' SeqMapTask [SeqMapTaskOutputInfo]
-smtOutputInfos
-  = lens _smtOutputInfos
-      (\ s a -> s{_smtOutputInfos = a})
-      . _Default
-      . _Coerce
-
--- | System-defined name of the SeqDo operation. Unique across the workflow.
-smtSystemName :: Lens' SeqMapTask (Maybe Text)
-smtSystemName
-  = lens _smtSystemName
-      (\ s a -> s{_smtSystemName = a})
-
--- | System-defined name of the stage containing the SeqDo operation. Unique
--- across the workflow.
-smtStageName :: Lens' SeqMapTask (Maybe Text)
-smtStageName
-  = lens _smtStageName (\ s a -> s{_smtStageName = a})
-
--- | The user function to invoke.
-smtUserFn :: Lens' SeqMapTask (Maybe SeqMapTaskUserFn)
-smtUserFn
-  = lens _smtUserFn (\ s a -> s{_smtUserFn = a})
-
-instance FromJSON SeqMapTask where
-        parseJSON
-          = withObject "SeqMapTask"
+          = withObject "StateFamilyConfig"
               (\ o ->
-                 SeqMapTask <$>
-                   (o .:? "inputs" .!= mempty) <*> (o .:? "name") <*>
-                     (o .:? "outputInfos" .!= mempty)
-                     <*> (o .:? "systemName")
-                     <*> (o .:? "stageName")
-                     <*> (o .:? "userFn"))
+                 StateFamilyConfig <$>
+                   (o .:? "isRead") <*> (o .:? "stateFamily"))
 
-instance ToJSON SeqMapTask where
-        toJSON SeqMapTask{..}
+instance ToJSON StateFamilyConfig where
+        toJSON StateFamilyConfig{..}
           = object
               (catMaybes
-                 [("inputs" .=) <$> _smtInputs,
-                  ("name" .=) <$> _smtName,
-                  ("outputInfos" .=) <$> _smtOutputInfos,
-                  ("systemName" .=) <$> _smtSystemName,
-                  ("stageName" .=) <$> _smtStageName,
-                  ("userFn" .=) <$> _smtUserFn])
-
--- | Response to a request to list job messages.
---
--- /See:/ 'listJobMessagesResponse' smart constructor.
-data ListJobMessagesResponse = ListJobMessagesResponse
-    { _ljmrJobMessages   :: !(Maybe [JobMessage])
-    , _ljmrNextPageToken :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ListJobMessagesResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ljmrJobMessages'
---
--- * 'ljmrNextPageToken'
-listJobMessagesResponse
-    :: ListJobMessagesResponse
-listJobMessagesResponse =
-    ListJobMessagesResponse
-    { _ljmrJobMessages = Nothing
-    , _ljmrNextPageToken = Nothing
-    }
-
--- | Messages in ascending timestamp order.
-ljmrJobMessages :: Lens' ListJobMessagesResponse [JobMessage]
-ljmrJobMessages
-  = lens _ljmrJobMessages
-      (\ s a -> s{_ljmrJobMessages = a})
-      . _Default
-      . _Coerce
-
--- | The token to obtain the next page of results if there are more.
-ljmrNextPageToken :: Lens' ListJobMessagesResponse (Maybe Text)
-ljmrNextPageToken
-  = lens _ljmrNextPageToken
-      (\ s a -> s{_ljmrNextPageToken = a})
-
-instance FromJSON ListJobMessagesResponse where
-        parseJSON
-          = withObject "ListJobMessagesResponse"
-              (\ o ->
-                 ListJobMessagesResponse <$>
-                   (o .:? "jobMessages" .!= mempty) <*>
-                     (o .:? "nextPageToken"))
-
-instance ToJSON ListJobMessagesResponse where
-        toJSON ListJobMessagesResponse{..}
-          = object
-              (catMaybes
-                 [("jobMessages" .=) <$> _ljmrJobMessages,
-                  ("nextPageToken" .=) <$> _ljmrNextPageToken])
-
--- | The Dataflow SDK pipeline options specified by the user. These options
--- are passed through the service and are used to recreate the SDK pipeline
--- options on the worker in a language agnostic and platform independent
--- way.
---
--- /See:/ 'sdkPipelineOptions' smart constructor.
-data SdkPipelineOptions =
-    SdkPipelineOptions
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SdkPipelineOptions' with the minimum fields required to make a request.
---
-sdkPipelineOptions
-    :: SdkPipelineOptions
-sdkPipelineOptions = SdkPipelineOptions
-
-instance FromJSON SdkPipelineOptions where
-        parseJSON
-          = withObject "SdkPipelineOptions"
-              (\ o -> pure SdkPipelineOptions)
-
-instance ToJSON SdkPipelineOptions where
-        toJSON = const (Object mempty)
-
--- | The codec to use for interpreting an element in the input PTable.
---
--- /See:/ 'inputElementCodec' smart constructor.
-data InputElementCodec =
-    InputElementCodec
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'InputElementCodec' with the minimum fields required to make a request.
---
-inputElementCodec
-    :: InputElementCodec
-inputElementCodec = InputElementCodec
-
-instance FromJSON InputElementCodec where
-        parseJSON
-          = withObject "InputElementCodec"
-              (\ o -> pure InputElementCodec)
-
-instance ToJSON InputElementCodec where
-        toJSON = const (Object mempty)
+                 [("isRead" .=) <$> _sfcIsRead,
+                  ("stateFamily" .=) <$> _sfcStateFamily])
 
 -- | Data disk assignment information for a specific key-range of a sharded
 -- computation. Currently we only support UTF-8 character splits to
@@ -5418,6 +5339,115 @@ instance ToJSON KeyRangeDataDiskAssignment where
                  [("dataDisk" .=) <$> _krddaDataDisk,
                   ("start" .=) <$> _krddaStart,
                   ("end" .=) <$> _krddaEnd])
+
+-- | Represents the operation to split a high-level Source specification into
+-- bundles (parts for parallel processing). At a high level, splitting of a
+-- source into bundles happens as follows: SourceSplitRequest is applied to
+-- the source. If it returns SOURCE_SPLIT_OUTCOME_USE_CURRENT, no further
+-- splitting happens and the source is used \"as is\". Otherwise, splitting
+-- is applied recursively to each produced DerivedSource. As an
+-- optimization, for any Source, if its does_not_need_splitting is true,
+-- the framework assumes that splitting this source would return
+-- SOURCE_SPLIT_OUTCOME_USE_CURRENT, and doesn\'t initiate a
+-- SourceSplitRequest. This applies both to the initial source being split
+-- and to bundles produced from it.
+--
+-- /See:/ 'sourceSplitRequest' smart constructor.
+data SourceSplitRequest = SourceSplitRequest
+    { _ssrSource  :: !(Maybe Source)
+    , _ssrOptions :: !(Maybe SourceSplitOptions)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SourceSplitRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ssrSource'
+--
+-- * 'ssrOptions'
+sourceSplitRequest
+    :: SourceSplitRequest
+sourceSplitRequest =
+    SourceSplitRequest
+    { _ssrSource = Nothing
+    , _ssrOptions = Nothing
+    }
+
+-- | Specification of the source to be split.
+ssrSource :: Lens' SourceSplitRequest (Maybe Source)
+ssrSource
+  = lens _ssrSource (\ s a -> s{_ssrSource = a})
+
+-- | Hints for tuning the splitting process.
+ssrOptions :: Lens' SourceSplitRequest (Maybe SourceSplitOptions)
+ssrOptions
+  = lens _ssrOptions (\ s a -> s{_ssrOptions = a})
+
+instance FromJSON SourceSplitRequest where
+        parseJSON
+          = withObject "SourceSplitRequest"
+              (\ o ->
+                 SourceSplitRequest <$>
+                   (o .:? "source") <*> (o .:? "options"))
+
+instance ToJSON SourceSplitRequest where
+        toJSON SourceSplitRequest{..}
+          = object
+              (catMaybes
+                 [("source" .=) <$> _ssrSource,
+                  ("options" .=) <$> _ssrOptions])
+
+-- | Response to a request to list job messages.
+--
+-- /See:/ 'listJobMessagesResponse' smart constructor.
+data ListJobMessagesResponse = ListJobMessagesResponse
+    { _ljmrJobMessages   :: !(Maybe [JobMessage])
+    , _ljmrNextPageToken :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListJobMessagesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ljmrJobMessages'
+--
+-- * 'ljmrNextPageToken'
+listJobMessagesResponse
+    :: ListJobMessagesResponse
+listJobMessagesResponse =
+    ListJobMessagesResponse
+    { _ljmrJobMessages = Nothing
+    , _ljmrNextPageToken = Nothing
+    }
+
+-- | Messages in ascending timestamp order.
+ljmrJobMessages :: Lens' ListJobMessagesResponse [JobMessage]
+ljmrJobMessages
+  = lens _ljmrJobMessages
+      (\ s a -> s{_ljmrJobMessages = a})
+      . _Default
+      . _Coerce
+
+-- | The token to obtain the next page of results if there are more.
+ljmrNextPageToken :: Lens' ListJobMessagesResponse (Maybe Text)
+ljmrNextPageToken
+  = lens _ljmrNextPageToken
+      (\ s a -> s{_ljmrNextPageToken = a})
+
+instance FromJSON ListJobMessagesResponse where
+        parseJSON
+          = withObject "ListJobMessagesResponse"
+              (\ o ->
+                 ListJobMessagesResponse <$>
+                   (o .:? "jobMessages" .!= mempty) <*>
+                     (o .:? "nextPageToken"))
+
+instance ToJSON ListJobMessagesResponse where
+        toJSON ListJobMessagesResponse{..}
+          = object
+              (catMaybes
+                 [("jobMessages" .=) <$> _ljmrJobMessages,
+                  ("nextPageToken" .=) <$> _ljmrNextPageToken])
 
 -- | Identifies a pubsub location to use for transferring data into or out of
 -- a streaming Dataflow job.
@@ -5573,62 +5603,102 @@ instance ToJSON InstructionInput where
                     _iiProducerInstructionIndex,
                   ("outputNum" .=) <$> _iiOutputNum])
 
--- | Represents the operation to split a high-level Source specification into
--- bundles (parts for parallel processing). At a high level, splitting of a
--- source into bundles happens as follows: SourceSplitRequest is applied to
--- the source. If it returns SOURCE_SPLIT_OUTCOME_USE_CURRENT, no further
--- splitting happens and the source is used \"as is\". Otherwise, splitting
--- is applied recursively to each produced DerivedSource. As an
--- optimization, for any Source, if its does_not_need_splitting is true,
--- the framework assumes that splitting this source would return
--- SOURCE_SPLIT_OUTCOME_USE_CURRENT, and doesn\'t initiate a
--- SourceSplitRequest. This applies both to the initial source being split
--- and to bundles produced from it.
+-- | Describes a particular function to invoke.
 --
--- /See:/ 'sourceSplitRequest' smart constructor.
-data SourceSplitRequest = SourceSplitRequest
-    { _ssrSource  :: !(Maybe Source)
-    , _ssrOptions :: !(Maybe SourceSplitOptions)
+-- /See:/ 'seqMapTask' smart constructor.
+data SeqMapTask = SeqMapTask
+    { _smtInputs      :: !(Maybe [SideInputInfo])
+    , _smtName        :: !(Maybe Text)
+    , _smtOutputInfos :: !(Maybe [SeqMapTaskOutputInfo])
+    , _smtSystemName  :: !(Maybe Text)
+    , _smtStageName   :: !(Maybe Text)
+    , _smtUserFn      :: !(Maybe SeqMapTaskUserFn)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SourceSplitRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'SeqMapTask' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ssrSource'
+-- * 'smtInputs'
 --
--- * 'ssrOptions'
-sourceSplitRequest
-    :: SourceSplitRequest
-sourceSplitRequest =
-    SourceSplitRequest
-    { _ssrSource = Nothing
-    , _ssrOptions = Nothing
+-- * 'smtName'
+--
+-- * 'smtOutputInfos'
+--
+-- * 'smtSystemName'
+--
+-- * 'smtStageName'
+--
+-- * 'smtUserFn'
+seqMapTask
+    :: SeqMapTask
+seqMapTask =
+    SeqMapTask
+    { _smtInputs = Nothing
+    , _smtName = Nothing
+    , _smtOutputInfos = Nothing
+    , _smtSystemName = Nothing
+    , _smtStageName = Nothing
+    , _smtUserFn = Nothing
     }
 
--- | Specification of the source to be split.
-ssrSource :: Lens' SourceSplitRequest (Maybe Source)
-ssrSource
-  = lens _ssrSource (\ s a -> s{_ssrSource = a})
+-- | Information about each of the inputs.
+smtInputs :: Lens' SeqMapTask [SideInputInfo]
+smtInputs
+  = lens _smtInputs (\ s a -> s{_smtInputs = a}) .
+      _Default
+      . _Coerce
 
--- | Hints for tuning the splitting process.
-ssrOptions :: Lens' SourceSplitRequest (Maybe SourceSplitOptions)
-ssrOptions
-  = lens _ssrOptions (\ s a -> s{_ssrOptions = a})
+-- | The user-provided name of the SeqDo operation.
+smtName :: Lens' SeqMapTask (Maybe Text)
+smtName = lens _smtName (\ s a -> s{_smtName = a})
 
-instance FromJSON SourceSplitRequest where
+-- | Information about each of the outputs.
+smtOutputInfos :: Lens' SeqMapTask [SeqMapTaskOutputInfo]
+smtOutputInfos
+  = lens _smtOutputInfos
+      (\ s a -> s{_smtOutputInfos = a})
+      . _Default
+      . _Coerce
+
+-- | System-defined name of the SeqDo operation. Unique across the workflow.
+smtSystemName :: Lens' SeqMapTask (Maybe Text)
+smtSystemName
+  = lens _smtSystemName
+      (\ s a -> s{_smtSystemName = a})
+
+-- | System-defined name of the stage containing the SeqDo operation. Unique
+-- across the workflow.
+smtStageName :: Lens' SeqMapTask (Maybe Text)
+smtStageName
+  = lens _smtStageName (\ s a -> s{_smtStageName = a})
+
+-- | The user function to invoke.
+smtUserFn :: Lens' SeqMapTask (Maybe SeqMapTaskUserFn)
+smtUserFn
+  = lens _smtUserFn (\ s a -> s{_smtUserFn = a})
+
+instance FromJSON SeqMapTask where
         parseJSON
-          = withObject "SourceSplitRequest"
+          = withObject "SeqMapTask"
               (\ o ->
-                 SourceSplitRequest <$>
-                   (o .:? "source") <*> (o .:? "options"))
+                 SeqMapTask <$>
+                   (o .:? "inputs" .!= mempty) <*> (o .:? "name") <*>
+                     (o .:? "outputInfos" .!= mempty)
+                     <*> (o .:? "systemName")
+                     <*> (o .:? "stageName")
+                     <*> (o .:? "userFn"))
 
-instance ToJSON SourceSplitRequest where
-        toJSON SourceSplitRequest{..}
+instance ToJSON SeqMapTask where
+        toJSON SeqMapTask{..}
           = object
               (catMaybes
-                 [("source" .=) <$> _ssrSource,
-                  ("options" .=) <$> _ssrOptions])
+                 [("inputs" .=) <$> _smtInputs,
+                  ("name" .=) <$> _smtName,
+                  ("outputInfos" .=) <$> _smtOutputInfos,
+                  ("systemName" .=) <$> _smtSystemName,
+                  ("stageName" .=) <$> _smtStageName,
+                  ("userFn" .=) <$> _smtUserFn])
 
 -- | A work item that represents the different operations that can be
 -- performed on a user-defined Source specification.
@@ -5676,25 +5746,6 @@ instance ToJSON SourceOperationRequest where
               (catMaybes
                  [("split" .=) <$> _sSplit,
                   ("getMetadata" .=) <$> _sGetMetadata])
-
--- | The user function to invoke.
---
--- /See:/ 'userFn' smart constructor.
-data UserFn =
-    UserFn
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'UserFn' with the minimum fields required to make a request.
---
-userFn
-    :: UserFn
-userFn = UserFn
-
-instance FromJSON UserFn where
-        parseJSON = withObject "UserFn" (\ o -> pure UserFn)
-
-instance ToJSON UserFn where
-        toJSON = const (Object mempty)
 
 -- | Response to a request to lease WorkItems.
 --
@@ -5828,24 +5879,3 @@ instance ToJSON Position where
                   ("recordIndex" .=) <$> _pRecordIndex,
                   ("shufflePosition" .=) <$> _pShufflePosition,
                   ("key" .=) <$> _pKey, ("end" .=) <$> _pEnd])
-
--- | Named properties associated with the step. Each kind of predefined step
--- has its own required set of properties.
---
--- /See:/ 'properties' smart constructor.
-data Properties =
-    Properties
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Properties' with the minimum fields required to make a request.
---
-properties
-    :: Properties
-properties = Properties
-
-instance FromJSON Properties where
-        parseJSON
-          = withObject "Properties" (\ o -> pure Properties)
-
-instance ToJSON Properties where
-        toJSON = const (Object mempty)

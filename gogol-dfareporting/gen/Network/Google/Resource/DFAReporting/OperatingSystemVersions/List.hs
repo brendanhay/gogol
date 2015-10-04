@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.OperatingSystemVersions.List
     , osvlQuotaUser
     , osvlPrettyPrint
     , osvlUserIP
-    , osvlProfileId
+    , osvlProFileId
     , osvlKey
     , osvlOAuthToken
     , osvlFields
@@ -65,7 +65,7 @@ data OperatingSystemVersionsList' = OperatingSystemVersionsList'
     { _osvlQuotaUser   :: !(Maybe Text)
     , _osvlPrettyPrint :: !Bool
     , _osvlUserIP      :: !(Maybe Text)
-    , _osvlProfileId   :: !Int64
+    , _osvlProFileId   :: !Int64
     , _osvlKey         :: !(Maybe Key)
     , _osvlOAuthToken  :: !(Maybe OAuthToken)
     , _osvlFields      :: !(Maybe Text)
@@ -81,7 +81,7 @@ data OperatingSystemVersionsList' = OperatingSystemVersionsList'
 --
 -- * 'osvlUserIP'
 --
--- * 'osvlProfileId'
+-- * 'osvlProFileId'
 --
 -- * 'osvlKey'
 --
@@ -91,12 +91,12 @@ data OperatingSystemVersionsList' = OperatingSystemVersionsList'
 operatingSystemVersionsList'
     :: Int64 -- ^ 'profileId'
     -> OperatingSystemVersionsList'
-operatingSystemVersionsList' pOsvlProfileId_ =
+operatingSystemVersionsList' pOsvlProFileId_ =
     OperatingSystemVersionsList'
     { _osvlQuotaUser = Nothing
     , _osvlPrettyPrint = True
     , _osvlUserIP = Nothing
-    , _osvlProfileId = pOsvlProfileId_
+    , _osvlProFileId = pOsvlProFileId_
     , _osvlKey = Nothing
     , _osvlOAuthToken = Nothing
     , _osvlFields = Nothing
@@ -123,10 +123,10 @@ osvlUserIP
   = lens _osvlUserIP (\ s a -> s{_osvlUserIP = a})
 
 -- | User profile ID associated with this request.
-osvlProfileId :: Lens' OperatingSystemVersionsList' Int64
-osvlProfileId
-  = lens _osvlProfileId
-      (\ s a -> s{_osvlProfileId = a})
+osvlProFileId :: Lens' OperatingSystemVersionsList' Int64
+osvlProFileId
+  = lens _osvlProFileId
+      (\ s a -> s{_osvlProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -156,7 +156,7 @@ instance GoogleRequest OperatingSystemVersionsList'
              OperatingSystemVersionsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u OperatingSystemVersionsList'{..}
-          = go _osvlProfileId _osvlQuotaUser
+          = go _osvlProFileId _osvlQuotaUser
               (Just _osvlPrettyPrint)
               _osvlUserIP
               _osvlFields

@@ -54,7 +54,7 @@ library
         , Network.Google.Resource.Classroom.Invitations.Delete
         , Network.Google.Resource.Classroom.Invitations.Get
         , Network.Google.Resource.Classroom.Invitations.List
-        , Network.Google.Resource.Classroom.UserProfiles.Get
+        , Network.Google.Resource.Classroom.UserProFiles.Get
 
     other-modules:
           Network.Google.Classroom.Types.Product

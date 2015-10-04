@@ -61,7 +61,7 @@ type AssetsListResource =
      "assets" :>
        QueryParam "createdAfter" DateTime' :>
          QueryParam "creatorEmail" Text :>
-           QueryParam "role" MapsEngineAssetsListRole :>
+           QueryParam "role" AssetsListRole :>
              QueryParam "bbox" Text :>
                QueryParam "modifiedAfter" DateTime' :>
                  QueryParam "modifiedBefore" DateTime' :>
@@ -91,7 +91,7 @@ data AssetsList' = AssetsList'
     , _alPrettyPrint    :: !Bool
     , _alUserIP         :: !(Maybe Text)
     , _alCreatorEmail   :: !(Maybe Text)
-    , _alRole           :: !(Maybe MapsEngineAssetsListRole)
+    , _alRole           :: !(Maybe AssetsListRole)
     , _alKey            :: !(Maybe Key)
     , _alBbox           :: !(Maybe Text)
     , _alModifiedAfter  :: !(Maybe DateTime')
@@ -208,7 +208,7 @@ alCreatorEmail
 
 -- | The role parameter indicates that the response should only contain
 -- assets where the current user has the specified level of access.
-alRole :: Lens' AssetsList' (Maybe MapsEngineAssetsListRole)
+alRole :: Lens' AssetsList' (Maybe AssetsListRole)
 alRole = lens _alRole (\ s a -> s{_alRole = a})
 
 -- | API key. Your API key identifies your project and provides you with API

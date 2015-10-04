@@ -17,15 +17,15 @@ module Network.Google.TagManager.Types
     -- * Service URL
       tagManagerURL
 
-    -- * ListFoldersResponse
-    , ListFoldersResponse
-    , listFoldersResponse
-    , lfrFolders
-
     -- * ListVariablesResponse
     , ListVariablesResponse
     , listVariablesResponse
     , lvrVariables
+
+    -- * ListFoldersResponse
+    , ListFoldersResponse
+    , listFoldersResponse
+    , lfrFolders
 
     -- * ListRulesResponse
     , ListRulesResponse
@@ -37,6 +37,31 @@ module Network.Google.TagManager.Types
     , publishContainerVersionResponse
     , pcvrCompilerError
     , pcvrContainerVersion
+
+    -- * ContainerVersionHeader
+    , ContainerVersionHeader
+    , containerVersionHeader
+    , cvhNumTags
+    , cvhNumMacros
+    , cvhContainerId
+    , cvhContainerVersionId
+    , cvhAccountId
+    , cvhName
+    , cvhNumTriggers
+    , cvhDeleted
+    , cvhNumRules
+    , cvhNumVariables
+
+    -- * TeardownTag
+    , TeardownTag
+    , teardownTag
+    , ttStopTeardownOnFailure
+    , ttTagName
+
+    -- * ListTriggersResponse
+    , ListTriggersResponse
+    , listTriggersResponse
+    , ltrTriggers
 
     -- * Macro
     , Macro
@@ -79,22 +104,11 @@ module Network.Google.TagManager.Types
     , tFiringRuleId
     , tParameter
 
-    -- * TeardownTag
-    , TeardownTag
-    , teardownTag
-    , ttStopTeardownOnFailure
-    , ttTagName
-
     -- * CreateContainerVersionResponse
     , CreateContainerVersionResponse
     , createContainerVersionResponse
     , ccvrCompilerError
     , ccvrContainerVersion
-
-    -- * ListTriggersResponse
-    , ListTriggersResponse
-    , listTriggersResponse
-    , ltrTriggers
 
     -- * CreateContainerVersionRequestVersionOptions
     , CreateContainerVersionRequestVersionOptions
@@ -102,25 +116,6 @@ module Network.Google.TagManager.Types
     , ccvrvoName
     , ccvrvoQuickPreview
     , ccvrvoNotes
-
-    -- * ContainerVersionHeader
-    , ContainerVersionHeader
-    , containerVersionHeader
-    , cvhNumTags
-    , cvhNumMacros
-    , cvhContainerId
-    , cvhContainerVersionId
-    , cvhAccountId
-    , cvhName
-    , cvhNumTriggers
-    , cvhDeleted
-    , cvhNumRules
-    , cvhNumVariables
-
-    -- * AccountAccess
-    , AccountAccess
-    , accountAccess
-    , aaPermission
 
     -- * UserAccess
     , UserAccess
@@ -131,8 +126,19 @@ module Network.Google.TagManager.Types
     , uaContainerAccess
     , uaPermissionId
 
+    -- * AccountAccess
+    , AccountAccess
+    , accountAccess
+    , aaPermission
+
     -- * TriggerType
     , TriggerType (..)
+
+    -- * ContainerEnabledBuiltInVariableItem
+    , ContainerEnabledBuiltInVariableItem (..)
+
+    -- * ContainerUsageContextItem
+    , ContainerUsageContextItem (..)
 
     -- * ConditionType
     , ConditionType (..)
@@ -142,22 +148,11 @@ module Network.Google.TagManager.Types
     , listAccountsResponse
     , larAccounts
 
-    -- * Variable
-    , Variable
-    , variable
-    , vScheduleEndMs
-    , vParentFolderId
-    , vContainerId
-    , vFingerprint
-    , vVariableId
-    , vAccountId
-    , vDisablingTriggerId
-    , vName
-    , vType
-    , vScheduleStartMs
-    , vNotes
-    , vEnablingTriggerId
-    , vParameter
+    -- * AccountAccessPermissionItem
+    , AccountAccessPermissionItem (..)
+
+    -- * TagTagFiringOption
+    , TagTagFiringOption (..)
 
     -- * Rule
     , Rule
@@ -179,6 +174,23 @@ module Network.Google.TagManager.Types
     , fAccountId
     , fName
 
+    -- * Variable
+    , Variable
+    , variable
+    , vScheduleEndMs
+    , vParentFolderId
+    , vContainerId
+    , vFingerprint
+    , vVariableId
+    , vAccountId
+    , vDisablingTriggerId
+    , vName
+    , vType
+    , vScheduleStartMs
+    , vNotes
+    , vEnablingTriggerId
+    , vParameter
+
     -- * ParameterType
     , ParameterType (..)
 
@@ -190,20 +202,11 @@ module Network.Google.TagManager.Types
     , aaAccountId
     , aaName
 
-    -- * TagFiringOption
-    , TagFiringOption (..)
-
     -- * ListContainerVersionsResponse
     , ListContainerVersionsResponse
     , listContainerVersionsResponse
     , lcvrContainerVersionHeader
     , lcvrContainerVersion
-
-    -- * UsageContextItem
-    , UsageContextItem (..)
-
-    -- * EnabledBuiltInVariableItem
-    , EnabledBuiltInVariableItem (..)
 
     -- * Container
     , Container
@@ -225,16 +228,8 @@ module Network.Google.TagManager.Types
     , listAccountUsersResponse
     , laurUserAccess
 
-    -- * ListContainersResponse
-    , ListContainersResponse
-    , listContainersResponse
-    , lcrContainers
-
-    -- * SetupTag
-    , SetupTag
-    , setupTag
-    , stTagName
-    , stStopOnSetupFailure
+    -- * ContainerAccessPermissionItem
+    , ContainerAccessPermissionItem (..)
 
     -- * ContainerVersion
     , ContainerVersion
@@ -254,18 +249,16 @@ module Network.Google.TagManager.Types
     , cvTrigger
     , cvNotes
 
-    -- * ContainerAccessPermissionItem
-    , ContainerAccessPermissionItem (..)
+    -- * SetupTag
+    , SetupTag
+    , setupTag
+    , stTagName
+    , stStopOnSetupFailure
 
-    -- * ListTagsResponse
-    , ListTagsResponse
-    , listTagsResponse
-    , ltrTags
-
-    -- * ListMacrosResponse
-    , ListMacrosResponse
-    , listMacrosResponse
-    , lmrMacros
+    -- * ListContainersResponse
+    , ListContainersResponse
+    , listContainersResponse
+    , lcrContainers
 
     -- * Trigger
     , Trigger
@@ -290,11 +283,15 @@ module Network.Google.TagManager.Types
     , triEventName
     , triWaitForTags
 
-    -- * Condition
-    , Condition
-    , condition
-    , cType
-    , cParameter
+    -- * ListTagsResponse
+    , ListTagsResponse
+    , listTagsResponse
+    , ltrTags
+
+    -- * ListMacrosResponse
+    , ListMacrosResponse
+    , listMacrosResponse
+    , lmrMacros
 
     -- * FolderEntities
     , FolderEntities
@@ -303,14 +300,17 @@ module Network.Google.TagManager.Types
     , feVariable
     , feTrigger
 
+    -- * Condition
+    , Condition
+    , condition
+    , cType
+    , cParameter
+
     -- * ContainerAccess
     , ContainerAccess
     , containerAccess
     , caContainerId
     , caPermission
-
-    -- * PermissionItem
-    , PermissionItem (..)
 
     -- * Parameter
     , Parameter

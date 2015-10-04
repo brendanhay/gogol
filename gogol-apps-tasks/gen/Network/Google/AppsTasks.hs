@@ -70,6 +70,13 @@ module Network.Google.AppsTasks
 
     -- * Types
 
+    -- ** TaskLinksItem
+    , TaskLinksItem
+    , taskLinksItem
+    , tliLink
+    , tliType
+    , tliDescription
+
     -- ** Tasks
     , Tasks
     , tasks
@@ -114,13 +121,6 @@ module Network.Google.AppsTasks
     , ttLinks
     , ttNotes
     , ttPosition
-
-    -- ** LinksItem
-    , LinksItem
-    , linksItem
-    , liLink
-    , liType
-    , liDescription
     ) where
 
 import           Network.Google.AppsTasks.Types

@@ -18,7 +18,7 @@ module Network.Google.AdExchangeBuyer.Types.Sum where
 import           Network.Google.Prelude
 
 -- | The proposed action to take on the order.
-data UpdateAction
+data MarketplaceOrdersUpdateUpdateAction
     = Accept
       -- ^ @accept@
     | Cancel
@@ -31,9 +31,9 @@ data UpdateAction
       -- ^ @updateFinalized@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable UpdateAction
+instance Hashable MarketplaceOrdersUpdateUpdateAction
 
-instance FromText UpdateAction where
+instance FromText MarketplaceOrdersUpdateUpdateAction where
     fromText = \case
         "accept" -> Just Accept
         "cancel" -> Just Cancel
@@ -42,7 +42,7 @@ instance FromText UpdateAction where
         "updateFinalized" -> Just UpdateFinalized
         _ -> Nothing
 
-instance ToText UpdateAction where
+instance ToText MarketplaceOrdersUpdateUpdateAction where
     toText = \case
         Accept -> "accept"
         Cancel -> "cancel"
@@ -50,15 +50,54 @@ instance ToText UpdateAction where
         UnknownAction -> "unknownAction"
         UpdateFinalized -> "updateFinalized"
 
-instance FromJSON UpdateAction where
-    parseJSON = parseJSONText "UpdateAction"
+instance FromJSON MarketplaceOrdersUpdateUpdateAction where
+    parseJSON = parseJSONText "MarketplaceOrdersUpdateUpdateAction"
 
-instance ToJSON UpdateAction where
+instance ToJSON MarketplaceOrdersUpdateUpdateAction where
+    toJSON = toJSONText
+
+-- | The proposed action to take on the order.
+data MarketplaceOrdersPatchUpdateAction
+    = MOPUAAccept
+      -- ^ @accept@
+    | MOPUACancel
+      -- ^ @cancel@
+    | MOPUAPropose
+      -- ^ @propose@
+    | MOPUAUnknownAction
+      -- ^ @unknownAction@
+    | MOPUAUpdateFinalized
+      -- ^ @updateFinalized@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable MarketplaceOrdersPatchUpdateAction
+
+instance FromText MarketplaceOrdersPatchUpdateAction where
+    fromText = \case
+        "accept" -> Just MOPUAAccept
+        "cancel" -> Just MOPUACancel
+        "propose" -> Just MOPUAPropose
+        "unknownAction" -> Just MOPUAUnknownAction
+        "updateFinalized" -> Just MOPUAUpdateFinalized
+        _ -> Nothing
+
+instance ToText MarketplaceOrdersPatchUpdateAction where
+    toText = \case
+        MOPUAAccept -> "accept"
+        MOPUACancel -> "cancel"
+        MOPUAPropose -> "propose"
+        MOPUAUnknownAction -> "unknownAction"
+        MOPUAUpdateFinalized -> "updateFinalized"
+
+instance FromJSON MarketplaceOrdersPatchUpdateAction where
+    parseJSON = parseJSONText "MarketplaceOrdersPatchUpdateAction"
+
+instance ToJSON MarketplaceOrdersPatchUpdateAction where
     toJSON = toJSONText
 
 -- | When specified, only creatives having the given open auction status are
 -- returned.
-data OpenAuctionStatusFilter
+data CreativesListOpenAuctionStatusFilter
     = Approved
       -- ^ @approved@
       -- Creatives which have been approved for serving on the open auction.
@@ -66,7 +105,7 @@ data OpenAuctionStatusFilter
       -- ^ @conditionally_approved@
       -- Creatives which have been conditionally approved for serving on the open
       -- auction.
-    | Disapproved
+    | DisApproved
       -- ^ @disapproved@
       -- Creatives which have been disapproved for serving on the open auction.
     | NotChecked
@@ -74,105 +113,66 @@ data OpenAuctionStatusFilter
       -- Creatives whose open auction status is not yet checked.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable OpenAuctionStatusFilter
+instance Hashable CreativesListOpenAuctionStatusFilter
 
-instance FromText OpenAuctionStatusFilter where
+instance FromText CreativesListOpenAuctionStatusFilter where
     fromText = \case
         "approved" -> Just Approved
         "conditionally_approved" -> Just ConditionallyApproved
-        "disapproved" -> Just Disapproved
+        "disapproved" -> Just DisApproved
         "not_checked" -> Just NotChecked
         _ -> Nothing
 
-instance ToText OpenAuctionStatusFilter where
+instance ToText CreativesListOpenAuctionStatusFilter where
     toText = \case
         Approved -> "approved"
         ConditionallyApproved -> "conditionally_approved"
-        Disapproved -> "disapproved"
+        DisApproved -> "disapproved"
         NotChecked -> "not_checked"
 
-instance FromJSON OpenAuctionStatusFilter where
-    parseJSON = parseJSONText "OpenAuctionStatusFilter"
+instance FromJSON CreativesListOpenAuctionStatusFilter where
+    parseJSON = parseJSONText "CreativesListOpenAuctionStatusFilter"
 
-instance ToJSON OpenAuctionStatusFilter where
-    toJSON = toJSONText
-
--- | The proposed action to take on the order.
-data AdexchangebuyerMarketplaceOrdersUpdateUpdateAction
-    = AMOUUAAccept
-      -- ^ @accept@
-    | AMOUUACancel
-      -- ^ @cancel@
-    | AMOUUAPropose
-      -- ^ @propose@
-    | AMOUUAUnknownAction
-      -- ^ @unknownAction@
-    | AMOUUAUpdateFinalized
-      -- ^ @updateFinalized@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable AdexchangebuyerMarketplaceOrdersUpdateUpdateAction
-
-instance FromText AdexchangebuyerMarketplaceOrdersUpdateUpdateAction where
-    fromText = \case
-        "accept" -> Just AMOUUAAccept
-        "cancel" -> Just AMOUUACancel
-        "propose" -> Just AMOUUAPropose
-        "unknownAction" -> Just AMOUUAUnknownAction
-        "updateFinalized" -> Just AMOUUAUpdateFinalized
-        _ -> Nothing
-
-instance ToText AdexchangebuyerMarketplaceOrdersUpdateUpdateAction where
-    toText = \case
-        AMOUUAAccept -> "accept"
-        AMOUUACancel -> "cancel"
-        AMOUUAPropose -> "propose"
-        AMOUUAUnknownAction -> "unknownAction"
-        AMOUUAUpdateFinalized -> "updateFinalized"
-
-instance FromJSON AdexchangebuyerMarketplaceOrdersUpdateUpdateAction where
-    parseJSON = parseJSONText "AdexchangebuyerMarketplaceOrdersUpdateUpdateAction"
-
-instance ToJSON AdexchangebuyerMarketplaceOrdersUpdateUpdateAction where
+instance ToJSON CreativesListOpenAuctionStatusFilter where
     toJSON = toJSONText
 
 -- | When specified, only creatives having the given direct deals status are
 -- returned.
-data DealsStatusFilter
-    = DSFApproved
+data CreativesListDealsStatusFilter
+    = CLDSFApproved
       -- ^ @approved@
       -- Creatives which have been approved for serving on direct deals.
-    | DSFConditionallyApproved
+    | CLDSFConditionallyApproved
       -- ^ @conditionally_approved@
       -- Creatives which have been conditionally approved for serving on direct
       -- deals.
-    | DSFDisapproved
+    | CLDSFDisApproved
       -- ^ @disapproved@
       -- Creatives which have been disapproved for serving on direct deals.
-    | DSFNotChecked
+    | CLDSFNotChecked
       -- ^ @not_checked@
       -- Creatives whose direct deals status is not yet checked.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DealsStatusFilter
+instance Hashable CreativesListDealsStatusFilter
 
-instance FromText DealsStatusFilter where
+instance FromText CreativesListDealsStatusFilter where
     fromText = \case
-        "approved" -> Just DSFApproved
-        "conditionally_approved" -> Just DSFConditionallyApproved
-        "disapproved" -> Just DSFDisapproved
-        "not_checked" -> Just DSFNotChecked
+        "approved" -> Just CLDSFApproved
+        "conditionally_approved" -> Just CLDSFConditionallyApproved
+        "disapproved" -> Just CLDSFDisApproved
+        "not_checked" -> Just CLDSFNotChecked
         _ -> Nothing
 
-instance ToText DealsStatusFilter where
+instance ToText CreativesListDealsStatusFilter where
     toText = \case
-        DSFApproved -> "approved"
-        DSFConditionallyApproved -> "conditionally_approved"
-        DSFDisapproved -> "disapproved"
-        DSFNotChecked -> "not_checked"
+        CLDSFApproved -> "approved"
+        CLDSFConditionallyApproved -> "conditionally_approved"
+        CLDSFDisApproved -> "disapproved"
+        CLDSFNotChecked -> "not_checked"
 
-instance FromJSON DealsStatusFilter where
-    parseJSON = parseJSONText "DealsStatusFilter"
+instance FromJSON CreativesListDealsStatusFilter where
+    parseJSON = parseJSONText "CreativesListDealsStatusFilter"
 
-instance ToJSON DealsStatusFilter where
+instance ToJSON CreativesListDealsStatusFilter where
     toJSON = toJSONText

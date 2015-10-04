@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Regions.List
     , rlQuotaUser
     , rlPrettyPrint
     , rlUserIP
-    , rlProfileId
+    , rlProFileId
     , rlKey
     , rlOAuthToken
     , rlFields
@@ -65,7 +65,7 @@ data RegionsList' = RegionsList'
     { _rlQuotaUser   :: !(Maybe Text)
     , _rlPrettyPrint :: !Bool
     , _rlUserIP      :: !(Maybe Text)
-    , _rlProfileId   :: !Int64
+    , _rlProFileId   :: !Int64
     , _rlKey         :: !(Maybe Key)
     , _rlOAuthToken  :: !(Maybe OAuthToken)
     , _rlFields      :: !(Maybe Text)
@@ -81,7 +81,7 @@ data RegionsList' = RegionsList'
 --
 -- * 'rlUserIP'
 --
--- * 'rlProfileId'
+-- * 'rlProFileId'
 --
 -- * 'rlKey'
 --
@@ -91,12 +91,12 @@ data RegionsList' = RegionsList'
 regionsList'
     :: Int64 -- ^ 'profileId'
     -> RegionsList'
-regionsList' pRlProfileId_ =
+regionsList' pRlProFileId_ =
     RegionsList'
     { _rlQuotaUser = Nothing
     , _rlPrettyPrint = True
     , _rlUserIP = Nothing
-    , _rlProfileId = pRlProfileId_
+    , _rlProFileId = pRlProFileId_
     , _rlKey = Nothing
     , _rlOAuthToken = Nothing
     , _rlFields = Nothing
@@ -121,9 +121,9 @@ rlUserIP :: Lens' RegionsList' (Maybe Text)
 rlUserIP = lens _rlUserIP (\ s a -> s{_rlUserIP = a})
 
 -- | User profile ID associated with this request.
-rlProfileId :: Lens' RegionsList' Int64
-rlProfileId
-  = lens _rlProfileId (\ s a -> s{_rlProfileId = a})
+rlProFileId :: Lens' RegionsList' Int64
+rlProFileId
+  = lens _rlProFileId (\ s a -> s{_rlProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -148,7 +148,7 @@ instance GoogleRequest RegionsList' where
         type Rs RegionsList' = RegionsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u RegionsList'{..}
-          = go _rlProfileId _rlQuotaUser (Just _rlPrettyPrint)
+          = go _rlProFileId _rlQuotaUser (Just _rlPrettyPrint)
               _rlUserIP
               _rlFields
               _rlKey

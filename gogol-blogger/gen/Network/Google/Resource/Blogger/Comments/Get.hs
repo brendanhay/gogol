@@ -55,7 +55,7 @@ type CommentsGetResource =
            Capture "postId" Text :>
              "comments" :>
                Capture "commentId" Text :>
-                 QueryParam "view" BloggerCommentsGetView :>
+                 QueryParam "view" CommentsGetView :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -73,7 +73,7 @@ data CommentsGet' = CommentsGet'
     , _cgUserIP      :: !(Maybe Text)
     , _cgBlogId      :: !Text
     , _cgKey         :: !(Maybe Key)
-    , _cgView        :: !(Maybe BloggerCommentsGetView)
+    , _cgView        :: !(Maybe CommentsGetView)
     , _cgPostId      :: !Text
     , _cgOAuthToken  :: !(Maybe OAuthToken)
     , _cgCommentId   :: !Text
@@ -154,7 +154,7 @@ cgKey = lens _cgKey (\ s a -> s{_cgKey = a})
 -- comments will require elevated permissions, for example comments where
 -- the parent posts which is in a draft state, or comments that are pending
 -- moderation.
-cgView :: Lens' CommentsGet' (Maybe BloggerCommentsGetView)
+cgView :: Lens' CommentsGet' (Maybe CommentsGetView)
 cgView = lens _cgView (\ s a -> s{_cgView = a})
 
 -- | ID of the post to fetch posts from.

@@ -61,7 +61,7 @@ type MobileDevicesActionResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] MobileDeviceAction :>
+                               ReqBody '[OctetStream] MobileDeviceAction :>
                                  Post '[JSON] ()
 
 -- | Take action on Mobile Device

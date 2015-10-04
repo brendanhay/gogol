@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.PlacementGroups.Insert
     , pgiQuotaUser
     , pgiPrettyPrint
     , pgiUserIP
-    , pgiProfileId
+    , pgiProFileId
     , pgiPayload
     , pgiKey
     , pgiOAuthToken
@@ -57,7 +57,7 @@ type PlacementGroupsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] PlacementGroup :>
+                         ReqBody '[OctetStream] PlacementGroup :>
                            Post '[JSON] PlacementGroup
 
 -- | Inserts a new placement group.
@@ -67,7 +67,7 @@ data PlacementGroupsInsert' = PlacementGroupsInsert'
     { _pgiQuotaUser   :: !(Maybe Text)
     , _pgiPrettyPrint :: !Bool
     , _pgiUserIP      :: !(Maybe Text)
-    , _pgiProfileId   :: !Int64
+    , _pgiProFileId   :: !Int64
     , _pgiPayload     :: !PlacementGroup
     , _pgiKey         :: !(Maybe Key)
     , _pgiOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data PlacementGroupsInsert' = PlacementGroupsInsert'
 --
 -- * 'pgiUserIP'
 --
--- * 'pgiProfileId'
+-- * 'pgiProFileId'
 --
 -- * 'pgiPayload'
 --
@@ -97,12 +97,12 @@ placementGroupsInsert'
     :: Int64 -- ^ 'profileId'
     -> PlacementGroup -- ^ 'payload'
     -> PlacementGroupsInsert'
-placementGroupsInsert' pPgiProfileId_ pPgiPayload_ =
+placementGroupsInsert' pPgiProFileId_ pPgiPayload_ =
     PlacementGroupsInsert'
     { _pgiQuotaUser = Nothing
     , _pgiPrettyPrint = True
     , _pgiUserIP = Nothing
-    , _pgiProfileId = pPgiProfileId_
+    , _pgiProFileId = pPgiProFileId_
     , _pgiPayload = pPgiPayload_
     , _pgiKey = Nothing
     , _pgiOAuthToken = Nothing
@@ -129,9 +129,9 @@ pgiUserIP
   = lens _pgiUserIP (\ s a -> s{_pgiUserIP = a})
 
 -- | User profile ID associated with this request.
-pgiProfileId :: Lens' PlacementGroupsInsert' Int64
-pgiProfileId
-  = lens _pgiProfileId (\ s a -> s{_pgiProfileId = a})
+pgiProFileId :: Lens' PlacementGroupsInsert' Int64
+pgiProFileId
+  = lens _pgiProFileId (\ s a -> s{_pgiProFileId = a})
 
 -- | Multipart request metadata.
 pgiPayload :: Lens' PlacementGroupsInsert' PlacementGroup
@@ -163,7 +163,7 @@ instance GoogleRequest PlacementGroupsInsert' where
         type Rs PlacementGroupsInsert' = PlacementGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementGroupsInsert'{..}
-          = go _pgiProfileId _pgiQuotaUser
+          = go _pgiProFileId _pgiQuotaUser
               (Just _pgiPrettyPrint)
               _pgiUserIP
               _pgiFields

@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Ads.Patch
     , appQuotaUser
     , appPrettyPrint
     , appUserIP
-    , appProfileId
+    , appProFileId
     , appPayload
     , appKey
     , appId
@@ -59,7 +59,7 @@ type AdsPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Ad :> Patch '[JSON] Ad
+                           ReqBody '[OctetStream] Ad :> Patch '[JSON] Ad
 
 -- | Updates an existing ad. This method supports patch semantics.
 --
@@ -68,7 +68,7 @@ data AdsPatch' = AdsPatch'
     { _appQuotaUser   :: !(Maybe Text)
     , _appPrettyPrint :: !Bool
     , _appUserIP      :: !(Maybe Text)
-    , _appProfileId   :: !Int64
+    , _appProFileId   :: !Int64
     , _appPayload     :: !Ad
     , _appKey         :: !(Maybe Key)
     , _appId          :: !Int64
@@ -86,7 +86,7 @@ data AdsPatch' = AdsPatch'
 --
 -- * 'appUserIP'
 --
--- * 'appProfileId'
+-- * 'appProFileId'
 --
 -- * 'appPayload'
 --
@@ -102,12 +102,12 @@ adsPatch'
     -> Ad -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> AdsPatch'
-adsPatch' pAppProfileId_ pAppPayload_ pAppId_ =
+adsPatch' pAppProFileId_ pAppPayload_ pAppId_ =
     AdsPatch'
     { _appQuotaUser = Nothing
     , _appPrettyPrint = True
     , _appUserIP = Nothing
-    , _appProfileId = pAppProfileId_
+    , _appProFileId = pAppProFileId_
     , _appPayload = pAppPayload_
     , _appKey = Nothing
     , _appId = pAppId_
@@ -135,9 +135,9 @@ appUserIP
   = lens _appUserIP (\ s a -> s{_appUserIP = a})
 
 -- | User profile ID associated with this request.
-appProfileId :: Lens' AdsPatch' Int64
-appProfileId
-  = lens _appProfileId (\ s a -> s{_appProfileId = a})
+appProFileId :: Lens' AdsPatch' Int64
+appProFileId
+  = lens _appProFileId (\ s a -> s{_appProFileId = a})
 
 -- | Multipart request metadata.
 appPayload :: Lens' AdsPatch' Ad
@@ -173,7 +173,7 @@ instance GoogleRequest AdsPatch' where
         type Rs AdsPatch' = Ad
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdsPatch'{..}
-          = go _appProfileId (Just _appId) _appQuotaUser
+          = go _appProFileId (Just _appId) _appQuotaUser
               (Just _appPrettyPrint)
               _appUserIP
               _appFields

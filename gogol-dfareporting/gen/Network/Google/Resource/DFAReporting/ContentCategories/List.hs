@@ -36,7 +36,7 @@ module Network.Google.Resource.DFAReporting.ContentCategories.List
     , cclUserIP
     , cclSearchString
     , cclIds
-    , cclProfileId
+    , cclProFileId
     , cclSortOrder
     , cclKey
     , cclPageToken
@@ -57,12 +57,10 @@ type ContentCategoriesListResource =
          "contentCategories" :>
            QueryParam "searchString" Text :>
              QueryParams "ids" Int64 :>
-               QueryParam "sortOrder"
-                 DfareportingContentCategoriesListSortOrder
+               QueryParam "sortOrder" ContentCategoriesListSortOrder
                  :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "sortField"
-                     DfareportingContentCategoriesListSortField
+                   QueryParam "sortField" ContentCategoriesListSortField
                      :>
                      QueryParam "maxResults" Int32 :>
                        QueryParam "quotaUser" Text :>
@@ -83,11 +81,11 @@ data ContentCategoriesList' = ContentCategoriesList'
     , _cclUserIP       :: !(Maybe Text)
     , _cclSearchString :: !(Maybe Text)
     , _cclIds          :: !(Maybe [Int64])
-    , _cclProfileId    :: !Int64
-    , _cclSortOrder    :: !(Maybe DfareportingContentCategoriesListSortOrder)
+    , _cclProFileId    :: !Int64
+    , _cclSortOrder    :: !(Maybe ContentCategoriesListSortOrder)
     , _cclKey          :: !(Maybe Key)
     , _cclPageToken    :: !(Maybe Text)
-    , _cclSortField    :: !(Maybe DfareportingContentCategoriesListSortField)
+    , _cclSortField    :: !(Maybe ContentCategoriesListSortField)
     , _cclOAuthToken   :: !(Maybe OAuthToken)
     , _cclMaxResults   :: !(Maybe Int32)
     , _cclFields       :: !(Maybe Text)
@@ -107,7 +105,7 @@ data ContentCategoriesList' = ContentCategoriesList'
 --
 -- * 'cclIds'
 --
--- * 'cclProfileId'
+-- * 'cclProFileId'
 --
 -- * 'cclSortOrder'
 --
@@ -125,14 +123,14 @@ data ContentCategoriesList' = ContentCategoriesList'
 contentCategoriesList'
     :: Int64 -- ^ 'profileId'
     -> ContentCategoriesList'
-contentCategoriesList' pCclProfileId_ =
+contentCategoriesList' pCclProFileId_ =
     ContentCategoriesList'
     { _cclQuotaUser = Nothing
     , _cclPrettyPrint = True
     , _cclUserIP = Nothing
     , _cclSearchString = Nothing
     , _cclIds = Nothing
-    , _cclProfileId = pCclProfileId_
+    , _cclProFileId = pCclProFileId_
     , _cclSortOrder = Nothing
     , _cclKey = Nothing
     , _cclPageToken = Nothing
@@ -181,12 +179,12 @@ cclIds
       _Coerce
 
 -- | User profile ID associated with this request.
-cclProfileId :: Lens' ContentCategoriesList' Int64
-cclProfileId
-  = lens _cclProfileId (\ s a -> s{_cclProfileId = a})
+cclProFileId :: Lens' ContentCategoriesList' Int64
+cclProFileId
+  = lens _cclProFileId (\ s a -> s{_cclProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-cclSortOrder :: Lens' ContentCategoriesList' (Maybe DfareportingContentCategoriesListSortOrder)
+cclSortOrder :: Lens' ContentCategoriesList' (Maybe ContentCategoriesListSortOrder)
 cclSortOrder
   = lens _cclSortOrder (\ s a -> s{_cclSortOrder = a})
 
@@ -202,7 +200,7 @@ cclPageToken
   = lens _cclPageToken (\ s a -> s{_cclPageToken = a})
 
 -- | Field by which to sort the list.
-cclSortField :: Lens' ContentCategoriesList' (Maybe DfareportingContentCategoriesListSortField)
+cclSortField :: Lens' ContentCategoriesList' (Maybe ContentCategoriesListSortField)
 cclSortField
   = lens _cclSortField (\ s a -> s{_cclSortField = a})
 
@@ -232,7 +230,7 @@ instance GoogleRequest ContentCategoriesList' where
              ContentCategoriesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ContentCategoriesList'{..}
-          = go _cclProfileId _cclSearchString
+          = go _cclProFileId _cclSearchString
               (_cclIds ^. _Default)
               _cclSortOrder
               _cclPageToken

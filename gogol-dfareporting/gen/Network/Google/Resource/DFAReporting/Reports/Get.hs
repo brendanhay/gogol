@@ -35,7 +35,7 @@ module Network.Google.Resource.DFAReporting.Reports.Get
     , rgPrettyPrint
     , rgUserIP
     , rgReportId
-    , rgProfileId
+    , rgProFileId
     , rgKey
     , rgOAuthToken
     , rgFields
@@ -67,7 +67,7 @@ data ReportsGet' = ReportsGet'
     , _rgPrettyPrint :: !Bool
     , _rgUserIP      :: !(Maybe Text)
     , _rgReportId    :: !Int64
-    , _rgProfileId   :: !Int64
+    , _rgProFileId   :: !Int64
     , _rgKey         :: !(Maybe Key)
     , _rgOAuthToken  :: !(Maybe OAuthToken)
     , _rgFields      :: !(Maybe Text)
@@ -85,7 +85,7 @@ data ReportsGet' = ReportsGet'
 --
 -- * 'rgReportId'
 --
--- * 'rgProfileId'
+-- * 'rgProFileId'
 --
 -- * 'rgKey'
 --
@@ -96,13 +96,13 @@ reportsGet'
     :: Int64 -- ^ 'reportId'
     -> Int64 -- ^ 'profileId'
     -> ReportsGet'
-reportsGet' pRgReportId_ pRgProfileId_ =
+reportsGet' pRgReportId_ pRgProFileId_ =
     ReportsGet'
     { _rgQuotaUser = Nothing
     , _rgPrettyPrint = True
     , _rgUserIP = Nothing
     , _rgReportId = pRgReportId_
-    , _rgProfileId = pRgProfileId_
+    , _rgProFileId = pRgProFileId_
     , _rgKey = Nothing
     , _rgOAuthToken = Nothing
     , _rgFields = Nothing
@@ -132,9 +132,9 @@ rgReportId
   = lens _rgReportId (\ s a -> s{_rgReportId = a})
 
 -- | The DFA user profile ID.
-rgProfileId :: Lens' ReportsGet' Int64
-rgProfileId
-  = lens _rgProfileId (\ s a -> s{_rgProfileId = a})
+rgProFileId :: Lens' ReportsGet' Int64
+rgProFileId
+  = lens _rgProFileId (\ s a -> s{_rgProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -159,7 +159,7 @@ instance GoogleRequest ReportsGet' where
         type Rs ReportsGet' = Report
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ReportsGet'{..}
-          = go _rgProfileId _rgReportId _rgQuotaUser
+          = go _rgProFileId _rgReportId _rgQuotaUser
               (Just _rgPrettyPrint)
               _rgUserIP
               _rgFields

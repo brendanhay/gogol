@@ -36,7 +36,7 @@ module Network.Google.Resource.DFAReporting.Reports.CompatibleFields.Query
     , rcfqQuotaUser
     , rcfqPrettyPrint
     , rcfqUserIP
-    , rcfqProfileId
+    , rcfqProFileId
     , rcfqPayload
     , rcfqKey
     , rcfqOAuthToken
@@ -61,7 +61,7 @@ type ReportsCompatibleFieldsQueryResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Report :>
+                             ReqBody '[OctetStream] Report :>
                                Post '[JSON] CompatibleFields
 
 -- | Returns the fields that are compatible to be selected in the respective
@@ -73,7 +73,7 @@ data ReportsCompatibleFieldsQuery' = ReportsCompatibleFieldsQuery'
     { _rcfqQuotaUser   :: !(Maybe Text)
     , _rcfqPrettyPrint :: !Bool
     , _rcfqUserIP      :: !(Maybe Text)
-    , _rcfqProfileId   :: !Int64
+    , _rcfqProFileId   :: !Int64
     , _rcfqPayload     :: !Report
     , _rcfqKey         :: !(Maybe Key)
     , _rcfqOAuthToken  :: !(Maybe OAuthToken)
@@ -90,7 +90,7 @@ data ReportsCompatibleFieldsQuery' = ReportsCompatibleFieldsQuery'
 --
 -- * 'rcfqUserIP'
 --
--- * 'rcfqProfileId'
+-- * 'rcfqProFileId'
 --
 -- * 'rcfqPayload'
 --
@@ -103,12 +103,12 @@ reportsCompatibleFieldsQuery'
     :: Int64 -- ^ 'profileId'
     -> Report -- ^ 'payload'
     -> ReportsCompatibleFieldsQuery'
-reportsCompatibleFieldsQuery' pRcfqProfileId_ pRcfqPayload_ =
+reportsCompatibleFieldsQuery' pRcfqProFileId_ pRcfqPayload_ =
     ReportsCompatibleFieldsQuery'
     { _rcfqQuotaUser = Nothing
     , _rcfqPrettyPrint = True
     , _rcfqUserIP = Nothing
-    , _rcfqProfileId = pRcfqProfileId_
+    , _rcfqProFileId = pRcfqProFileId_
     , _rcfqPayload = pRcfqPayload_
     , _rcfqKey = Nothing
     , _rcfqOAuthToken = Nothing
@@ -136,10 +136,10 @@ rcfqUserIP
   = lens _rcfqUserIP (\ s a -> s{_rcfqUserIP = a})
 
 -- | The DFA user profile ID.
-rcfqProfileId :: Lens' ReportsCompatibleFieldsQuery' Int64
-rcfqProfileId
-  = lens _rcfqProfileId
-      (\ s a -> s{_rcfqProfileId = a})
+rcfqProFileId :: Lens' ReportsCompatibleFieldsQuery' Int64
+rcfqProFileId
+  = lens _rcfqProFileId
+      (\ s a -> s{_rcfqProFileId = a})
 
 -- | Multipart request metadata.
 rcfqPayload :: Lens' ReportsCompatibleFieldsQuery' Report
@@ -175,7 +175,7 @@ instance GoogleRequest ReportsCompatibleFieldsQuery'
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           ReportsCompatibleFieldsQuery'{..}
-          = go _rcfqProfileId _rcfqQuotaUser
+          = go _rcfqProFileId _rcfqQuotaUser
               (Just _rcfqPrettyPrint)
               _rcfqUserIP
               _rcfqFields

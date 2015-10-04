@@ -55,7 +55,9 @@ type UsersMessagesInsertResource =
      Capture "userId" Text :>
        "messages" :>
          QueryParam "deleted" Bool :>
-           QueryParam "internalDateSource" InternalDateSource :>
+           QueryParam "internalDateSource"
+             UsersMessagesInsertInternalDateSource
+             :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -81,7 +83,7 @@ data UsersMessagesInsert' = UsersMessagesInsert'
     , _umiKey                :: !(Maybe Key)
     , _umiDeleted            :: !Bool
     , _umiOAuthToken         :: !(Maybe OAuthToken)
-    , _umiInternalDateSource :: !InternalDateSource
+    , _umiInternalDateSource :: !UsersMessagesInsertInternalDateSource
     , _umiFields             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -126,7 +128,7 @@ usersMessagesInsert' pUmiPayload_ pUmiUserId_ pUmiMedia_ =
     , _umiKey = Nothing
     , _umiDeleted = False
     , _umiOAuthToken = Nothing
-    , _umiInternalDateSource = IDSReceivedTime
+    , _umiInternalDateSource = UMIIDSReceivedTime
     , _umiFields = Nothing
     }
 
@@ -183,7 +185,7 @@ umiOAuthToken
       (\ s a -> s{_umiOAuthToken = a})
 
 -- | Source for Gmail\'s internal date of the message.
-umiInternalDateSource :: Lens' UsersMessagesInsert' InternalDateSource
+umiInternalDateSource :: Lens' UsersMessagesInsert' UsersMessagesInsertInternalDateSource
 umiInternalDateSource
   = lens _umiInternalDateSource
       (\ s a -> s{_umiInternalDateSource = a})

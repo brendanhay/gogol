@@ -57,7 +57,7 @@ type UsersAliasesInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Alias :> Post '[JSON] Alias
+                         ReqBody '[OctetStream] Alias :> Post '[JSON] Alias
 
 -- | Add a alias for the user
 --

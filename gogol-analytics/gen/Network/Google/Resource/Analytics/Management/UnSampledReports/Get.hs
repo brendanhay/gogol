@@ -35,7 +35,7 @@ module Network.Google.Resource.Analytics.Management.UnSampledReports.Get
     , musrgPrettyPrint
     , musrgWebPropertyId
     , musrgUserIP
-    , musrgProfileId
+    , musrgProFileId
     , musrgAccountId
     , musrgKey
     , musrgUnSampledReportId
@@ -75,7 +75,7 @@ data ManagementUnSampledReportsGet' = ManagementUnSampledReportsGet'
     , _musrgPrettyPrint       :: !Bool
     , _musrgWebPropertyId     :: !Text
     , _musrgUserIP            :: !(Maybe Text)
-    , _musrgProfileId         :: !Text
+    , _musrgProFileId         :: !Text
     , _musrgAccountId         :: !Text
     , _musrgKey               :: !(Maybe Key)
     , _musrgUnSampledReportId :: !Text
@@ -95,7 +95,7 @@ data ManagementUnSampledReportsGet' = ManagementUnSampledReportsGet'
 --
 -- * 'musrgUserIP'
 --
--- * 'musrgProfileId'
+-- * 'musrgProFileId'
 --
 -- * 'musrgAccountId'
 --
@@ -112,13 +112,13 @@ managementUnSampledReportsGet'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'unsampledReportId'
     -> ManagementUnSampledReportsGet'
-managementUnSampledReportsGet' pMusrgWebPropertyId_ pMusrgProfileId_ pMusrgAccountId_ pMusrgUnSampledReportId_ =
+managementUnSampledReportsGet' pMusrgWebPropertyId_ pMusrgProFileId_ pMusrgAccountId_ pMusrgUnSampledReportId_ =
     ManagementUnSampledReportsGet'
     { _musrgQuotaUser = Nothing
     , _musrgPrettyPrint = False
     , _musrgWebPropertyId = pMusrgWebPropertyId_
     , _musrgUserIP = Nothing
-    , _musrgProfileId = pMusrgProfileId_
+    , _musrgProFileId = pMusrgProFileId_
     , _musrgAccountId = pMusrgAccountId_
     , _musrgKey = Nothing
     , _musrgUnSampledReportId = pMusrgUnSampledReportId_
@@ -153,10 +153,10 @@ musrgUserIP
   = lens _musrgUserIP (\ s a -> s{_musrgUserIP = a})
 
 -- | View (Profile) ID to retrieve unsampled report for.
-musrgProfileId :: Lens' ManagementUnSampledReportsGet' Text
-musrgProfileId
-  = lens _musrgProfileId
-      (\ s a -> s{_musrgProfileId = a})
+musrgProFileId :: Lens' ManagementUnSampledReportsGet' Text
+musrgProFileId
+  = lens _musrgProFileId
+      (\ s a -> s{_musrgProFileId = a})
 
 -- | Account ID to retrieve unsampled report for.
 musrgAccountId :: Lens' ManagementUnSampledReportsGet' Text
@@ -200,7 +200,7 @@ instance GoogleRequest ManagementUnSampledReportsGet'
         requestWithRoute r u
           ManagementUnSampledReportsGet'{..}
           = go _musrgAccountId _musrgWebPropertyId
-              _musrgProfileId
+              _musrgProFileId
               _musrgUnSampledReportId
               _musrgQuotaUser
               (Just _musrgPrettyPrint)

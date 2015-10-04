@@ -35,7 +35,7 @@ module Network.Google.Resource.DFAReporting.LandingPages.Get
     , lpgPrettyPrint
     , lpgUserIP
     , lpgCampaignId
-    , lpgProfileId
+    , lpgProFileId
     , lpgKey
     , lpgId
     , lpgOAuthToken
@@ -70,7 +70,7 @@ data LandingPagesGet' = LandingPagesGet'
     , _lpgPrettyPrint :: !Bool
     , _lpgUserIP      :: !(Maybe Text)
     , _lpgCampaignId  :: !Int64
-    , _lpgProfileId   :: !Int64
+    , _lpgProFileId   :: !Int64
     , _lpgKey         :: !(Maybe Key)
     , _lpgId          :: !Int64
     , _lpgOAuthToken  :: !(Maybe OAuthToken)
@@ -89,7 +89,7 @@ data LandingPagesGet' = LandingPagesGet'
 --
 -- * 'lpgCampaignId'
 --
--- * 'lpgProfileId'
+-- * 'lpgProFileId'
 --
 -- * 'lpgKey'
 --
@@ -103,13 +103,13 @@ landingPagesGet'
     -> Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> LandingPagesGet'
-landingPagesGet' pLpgCampaignId_ pLpgProfileId_ pLpgId_ =
+landingPagesGet' pLpgCampaignId_ pLpgProFileId_ pLpgId_ =
     LandingPagesGet'
     { _lpgQuotaUser = Nothing
     , _lpgPrettyPrint = True
     , _lpgUserIP = Nothing
     , _lpgCampaignId = pLpgCampaignId_
-    , _lpgProfileId = pLpgProfileId_
+    , _lpgProFileId = pLpgProFileId_
     , _lpgKey = Nothing
     , _lpgId = pLpgId_
     , _lpgOAuthToken = Nothing
@@ -142,9 +142,9 @@ lpgCampaignId
       (\ s a -> s{_lpgCampaignId = a})
 
 -- | User profile ID associated with this request.
-lpgProfileId :: Lens' LandingPagesGet' Int64
-lpgProfileId
-  = lens _lpgProfileId (\ s a -> s{_lpgProfileId = a})
+lpgProFileId :: Lens' LandingPagesGet' Int64
+lpgProFileId
+  = lens _lpgProFileId (\ s a -> s{_lpgProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -175,7 +175,7 @@ instance GoogleRequest LandingPagesGet' where
         type Rs LandingPagesGet' = LandingPage
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u LandingPagesGet'{..}
-          = go _lpgProfileId _lpgCampaignId _lpgId
+          = go _lpgProFileId _lpgCampaignId _lpgId
               _lpgQuotaUser
               (Just _lpgPrettyPrint)
               _lpgUserIP

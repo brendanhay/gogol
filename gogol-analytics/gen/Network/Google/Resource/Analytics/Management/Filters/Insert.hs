@@ -58,7 +58,7 @@ type ManagementFiltersInsertResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Filter :> Post '[JSON] Filter
+                           ReqBody '[OctetStream] Filter :> Post '[JSON] Filter
 
 -- | Create a new filter.
 --

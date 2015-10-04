@@ -60,7 +60,9 @@ type ActivitiesListResource =
      "activities" :>
        QueryParam "drive.fileId" Text :>
          QueryParam "drive.ancestorId" Text :>
-           QueryParam "groupingStrategy" GroupingStrategy :>
+           QueryParam "groupingStrategy"
+             ActivitiesListGroupingStrategy
+             :>
              QueryParam "userId" Text :>
                QueryParam "source" Text :>
                  QueryParam "pageToken" Text :>
@@ -88,7 +90,7 @@ data ActivitiesList' = ActivitiesList'
     , _alUserIP           :: !(Maybe Text)
     , _alDriveFileId      :: !(Maybe Text)
     , _alDriveAncestorId  :: !(Maybe Text)
-    , _alGroupingStrategy :: !GroupingStrategy
+    , _alGroupingStrategy :: !ActivitiesListGroupingStrategy
     , _alUserId           :: !Text
     , _alKey              :: !(Maybe Key)
     , _alSource           :: !(Maybe Text)
@@ -179,7 +181,7 @@ alDriveAncestorId
 
 -- | Indicates the strategy to use when grouping singleEvents items in the
 -- associated combinedEvent object.
-alGroupingStrategy :: Lens' ActivitiesList' GroupingStrategy
+alGroupingStrategy :: Lens' ActivitiesList' ActivitiesListGroupingStrategy
 alGroupingStrategy
   = lens _alGroupingStrategy
       (\ s a -> s{_alGroupingStrategy = a})

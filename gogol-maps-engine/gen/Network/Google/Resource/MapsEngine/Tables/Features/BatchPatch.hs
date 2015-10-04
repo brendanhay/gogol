@@ -69,7 +69,7 @@ type TablesFeaturesBatchPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] FeaturesBatchPatchRequest :>
+                           ReqBody '[OctetStream] FeaturesBatchPatchRequest :>
                              Post '[JSON] ()
 
 -- | Update the supplied features. A single batchPatch request can update: -

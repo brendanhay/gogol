@@ -62,7 +62,7 @@ type InstanceGroupsSetNamedPortsResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON]
+                               ReqBody '[OctetStream]
                                  InstanceGroupsSetNamedPortsRequest
                                  :> Post '[JSON] Operation
 

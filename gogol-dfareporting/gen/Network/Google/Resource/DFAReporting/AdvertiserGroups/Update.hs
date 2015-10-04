@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.AdvertiserGroups.Update
     , aguQuotaUser
     , aguPrettyPrint
     , aguUserIP
-    , aguProfileId
+    , aguProFileId
     , aguPayload
     , aguKey
     , aguOAuthToken
@@ -57,7 +57,7 @@ type AdvertiserGroupsUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] AdvertiserGroup :>
+                         ReqBody '[OctetStream] AdvertiserGroup :>
                            Put '[JSON] AdvertiserGroup
 
 -- | Updates an existing advertiser group.
@@ -67,7 +67,7 @@ data AdvertiserGroupsUpdate' = AdvertiserGroupsUpdate'
     { _aguQuotaUser   :: !(Maybe Text)
     , _aguPrettyPrint :: !Bool
     , _aguUserIP      :: !(Maybe Text)
-    , _aguProfileId   :: !Int64
+    , _aguProFileId   :: !Int64
     , _aguPayload     :: !AdvertiserGroup
     , _aguKey         :: !(Maybe Key)
     , _aguOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data AdvertiserGroupsUpdate' = AdvertiserGroupsUpdate'
 --
 -- * 'aguUserIP'
 --
--- * 'aguProfileId'
+-- * 'aguProFileId'
 --
 -- * 'aguPayload'
 --
@@ -97,12 +97,12 @@ advertiserGroupsUpdate'
     :: Int64 -- ^ 'profileId'
     -> AdvertiserGroup -- ^ 'payload'
     -> AdvertiserGroupsUpdate'
-advertiserGroupsUpdate' pAguProfileId_ pAguPayload_ =
+advertiserGroupsUpdate' pAguProFileId_ pAguPayload_ =
     AdvertiserGroupsUpdate'
     { _aguQuotaUser = Nothing
     , _aguPrettyPrint = True
     , _aguUserIP = Nothing
-    , _aguProfileId = pAguProfileId_
+    , _aguProFileId = pAguProFileId_
     , _aguPayload = pAguPayload_
     , _aguKey = Nothing
     , _aguOAuthToken = Nothing
@@ -129,9 +129,9 @@ aguUserIP
   = lens _aguUserIP (\ s a -> s{_aguUserIP = a})
 
 -- | User profile ID associated with this request.
-aguProfileId :: Lens' AdvertiserGroupsUpdate' Int64
-aguProfileId
-  = lens _aguProfileId (\ s a -> s{_aguProfileId = a})
+aguProFileId :: Lens' AdvertiserGroupsUpdate' Int64
+aguProFileId
+  = lens _aguProFileId (\ s a -> s{_aguProFileId = a})
 
 -- | Multipart request metadata.
 aguPayload :: Lens' AdvertiserGroupsUpdate' AdvertiserGroup
@@ -163,7 +163,7 @@ instance GoogleRequest AdvertiserGroupsUpdate' where
         type Rs AdvertiserGroupsUpdate' = AdvertiserGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdvertiserGroupsUpdate'{..}
-          = go _aguProfileId _aguQuotaUser
+          = go _aguProFileId _aguQuotaUser
               (Just _aguPrettyPrint)
               _aguUserIP
               _aguFields

@@ -53,8 +53,7 @@ type ChromeosDevicesGetResource =
          "devices" :>
            "chromeos" :>
              Capture "deviceId" Text :>
-               QueryParam "projection"
-                 DirectoryChromeosDevicesGetProjection
+               QueryParam "projection" ChromeosDevicesGetProjection
                  :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
@@ -75,7 +74,7 @@ data ChromeosDevicesGet' = ChromeosDevicesGet'
     , _cdgCustomerId  :: !Text
     , _cdgKey         :: !(Maybe Key)
     , _cdgDeviceId    :: !Text
-    , _cdgProjection  :: !(Maybe DirectoryChromeosDevicesGetProjection)
+    , _cdgProjection  :: !(Maybe ChromeosDevicesGetProjection)
     , _cdgOAuthToken  :: !(Maybe OAuthToken)
     , _cdgFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -155,7 +154,7 @@ cdgDeviceId
   = lens _cdgDeviceId (\ s a -> s{_cdgDeviceId = a})
 
 -- | Restrict information returned to a set of selected fields.
-cdgProjection :: Lens' ChromeosDevicesGet' (Maybe DirectoryChromeosDevicesGetProjection)
+cdgProjection :: Lens' ChromeosDevicesGet' (Maybe ChromeosDevicesGetProjection)
 cdgProjection
   = lens _cdgProjection
       (\ s a -> s{_cdgProjection = a})

@@ -55,8 +55,7 @@ type CommentsListResource =
        QueryParam "part" Text :>
          QueryParam "id" Text :>
            QueryParam "pageToken" Text :>
-             QueryParam "textFormat" YouTubeCommentsListTextFormat
-               :>
+             QueryParam "textFormat" CommentsListTextFormat :>
                QueryParam "maxResults" Word32 :>
                  QueryParam "parentId" Text :>
                    QueryParam "quotaUser" Text :>
@@ -80,7 +79,7 @@ data CommentsList' = CommentsList'
     , _comId          :: !(Maybe Text)
     , _comPageToken   :: !(Maybe Text)
     , _comOAuthToken  :: !(Maybe OAuthToken)
-    , _comTextFormat  :: !YouTubeCommentsListTextFormat
+    , _comTextFormat  :: !CommentsListTextFormat
     , _comMaxResults  :: !Word32
     , _comParentId    :: !(Maybe Text)
     , _comFields      :: !(Maybe Text)
@@ -126,7 +125,7 @@ commentsList' pComPart_ =
     , _comId = Nothing
     , _comPageToken = Nothing
     , _comOAuthToken = Nothing
-    , _comTextFormat = YTCLTFFormatHTML
+    , _comTextFormat = FormatHTML
     , _comMaxResults = 20
     , _comParentId = Nothing
     , _comFields = Nothing
@@ -184,7 +183,7 @@ comOAuthToken
 
 -- | This parameter indicates whether the API should return comments
 -- formatted as HTML or as plain text.
-comTextFormat :: Lens' CommentsList' YouTubeCommentsListTextFormat
+comTextFormat :: Lens' CommentsList' CommentsListTextFormat
 comTextFormat
   = lens _comTextFormat
       (\ s a -> s{_comTextFormat = a})

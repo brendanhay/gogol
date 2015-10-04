@@ -54,8 +54,7 @@ type BucketsPatchResource =
        Capture "bucket" Text :>
          QueryParam "ifMetagenerationMatch" Word64 :>
            QueryParam "ifMetagenerationNotMatch" Word64 :>
-             QueryParam "projection" StorageBucketsPatchProjection
-               :>
+             QueryParam "projection" BucketsPatchProjection :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -63,7 +62,8 @@ type BucketsPatchResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Bucket :> Patch '[JSON] Bucket
+                             ReqBody '[OctetStream] Bucket :>
+                               Patch '[JSON] Bucket
 
 -- | Updates a bucket. This method supports patch semantics.
 --
@@ -77,7 +77,7 @@ data BucketsPatch' = BucketsPatch'
     , _bpPayload                  :: !Bucket
     , _bpKey                      :: !(Maybe Key)
     , _bpIfMetagenerationNotMatch :: !(Maybe Word64)
-    , _bpProjection               :: !(Maybe StorageBucketsPatchProjection)
+    , _bpProjection               :: !(Maybe BucketsPatchProjection)
     , _bpOAuthToken               :: !(Maybe OAuthToken)
     , _bpFields                   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -174,7 +174,7 @@ bpIfMetagenerationNotMatch
       (\ s a -> s{_bpIfMetagenerationNotMatch = a})
 
 -- | Set of properties to return. Defaults to full.
-bpProjection :: Lens' BucketsPatch' (Maybe StorageBucketsPatchProjection)
+bpProjection :: Lens' BucketsPatch' (Maybe BucketsPatchProjection)
 bpProjection
   = lens _bpProjection (\ s a -> s{_bpProjection = a})
 

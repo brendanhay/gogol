@@ -54,7 +54,7 @@ type RelyingPartyDownloadAccountResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON]
+                     ReqBody '[OctetStream]
                        IdentitytoolkitRelyingPartyDownloadAccountRequest
                        :> Post '[JSON] DownloadAccountResponse
 

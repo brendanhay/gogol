@@ -56,7 +56,7 @@ type CommentThreadsUpdateResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] CommentThread :>
+                       ReqBody '[OctetStream] CommentThread :>
                          Put '[JSON] CommentThread
 
 -- | Modifies the top-level comment in a comment thread.

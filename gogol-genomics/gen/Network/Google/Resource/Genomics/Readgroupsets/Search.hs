@@ -56,7 +56,7 @@ type ReadgroupsetsSearchResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] SearchReadGroupSetsRequest :>
+                       ReqBody '[OctetStream] SearchReadGroupSetsRequest :>
                          Post '[JSON] SearchReadGroupSetsResponse
 
 -- | Searches for read group sets matching the criteria. Implements

@@ -35,7 +35,7 @@ module Network.Google.Resource.Analytics.Management.Experiments.Insert
     , meiPrettyPrint
     , meiWebPropertyId
     , meiUserIP
-    , meiProfileId
+    , meiProFileId
     , meiPayload
     , meiAccountId
     , meiKey
@@ -64,7 +64,7 @@ type ManagementExperimentsInsertResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] Experiment :>
+                                   ReqBody '[OctetStream] Experiment :>
                                      Post '[JSON] Experiment
 
 -- | Create a new experiment.
@@ -75,7 +75,7 @@ data ManagementExperimentsInsert' = ManagementExperimentsInsert'
     , _meiPrettyPrint   :: !Bool
     , _meiWebPropertyId :: !Text
     , _meiUserIP        :: !(Maybe Text)
-    , _meiProfileId     :: !Text
+    , _meiProFileId     :: !Text
     , _meiPayload       :: !Experiment
     , _meiAccountId     :: !Text
     , _meiKey           :: !(Maybe Key)
@@ -95,7 +95,7 @@ data ManagementExperimentsInsert' = ManagementExperimentsInsert'
 --
 -- * 'meiUserIP'
 --
--- * 'meiProfileId'
+-- * 'meiProFileId'
 --
 -- * 'meiPayload'
 --
@@ -112,13 +112,13 @@ managementExperimentsInsert'
     -> Experiment -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> ManagementExperimentsInsert'
-managementExperimentsInsert' pMeiWebPropertyId_ pMeiProfileId_ pMeiPayload_ pMeiAccountId_ =
+managementExperimentsInsert' pMeiWebPropertyId_ pMeiProFileId_ pMeiPayload_ pMeiAccountId_ =
     ManagementExperimentsInsert'
     { _meiQuotaUser = Nothing
     , _meiPrettyPrint = False
     , _meiWebPropertyId = pMeiWebPropertyId_
     , _meiUserIP = Nothing
-    , _meiProfileId = pMeiProfileId_
+    , _meiProFileId = pMeiProFileId_
     , _meiPayload = pMeiPayload_
     , _meiAccountId = pMeiAccountId_
     , _meiKey = Nothing
@@ -152,9 +152,9 @@ meiUserIP
   = lens _meiUserIP (\ s a -> s{_meiUserIP = a})
 
 -- | View (Profile) ID to create the experiment for.
-meiProfileId :: Lens' ManagementExperimentsInsert' Text
-meiProfileId
-  = lens _meiProfileId (\ s a -> s{_meiProfileId = a})
+meiProFileId :: Lens' ManagementExperimentsInsert' Text
+meiProFileId
+  = lens _meiProFileId (\ s a -> s{_meiProFileId = a})
 
 -- | Multipart request metadata.
 meiPayload :: Lens' ManagementExperimentsInsert' Experiment
@@ -193,7 +193,7 @@ instance GoogleRequest ManagementExperimentsInsert'
         type Rs ManagementExperimentsInsert' = Experiment
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementExperimentsInsert'{..}
-          = go _meiAccountId _meiWebPropertyId _meiProfileId
+          = go _meiAccountId _meiWebPropertyId _meiProFileId
               _meiQuotaUser
               (Just _meiPrettyPrint)
               _meiUserIP

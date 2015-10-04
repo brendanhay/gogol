@@ -53,7 +53,9 @@ import           Network.Google.Prelude
 type VolumesUserUploadedListResource =
      "volumes" :>
        "useruploaded" :>
-         QueryParams "processingState" ProcessingState :>
+         QueryParams "processingState"
+           VolumesUserUploadedListProcessingState
+           :>
            QueryParam "locale" Text :>
              QueryParams "volumeId" Text :>
                QueryParam "source" Text :>
@@ -71,7 +73,7 @@ type VolumesUserUploadedListResource =
 --
 -- /See:/ 'volumesUserUploadedList'' smart constructor.
 data VolumesUserUploadedList' = VolumesUserUploadedList'
-    { _vuulProcessingState :: !(Maybe [ProcessingState])
+    { _vuulProcessingState :: !(Maybe [VolumesUserUploadedListProcessingState])
     , _vuulQuotaUser       :: !(Maybe Text)
     , _vuulPrettyPrint     :: !Bool
     , _vuulUserIP          :: !(Maybe Text)
@@ -131,7 +133,7 @@ volumesUserUploadedList' =
     }
 
 -- | The processing state of the user uploaded volumes to be returned.
-vuulProcessingState :: Lens' VolumesUserUploadedList' [ProcessingState]
+vuulProcessingState :: Lens' VolumesUserUploadedList' [VolumesUserUploadedListProcessingState]
 vuulProcessingState
   = lens _vuulProcessingState
       (\ s a -> s{_vuulProcessingState = a})

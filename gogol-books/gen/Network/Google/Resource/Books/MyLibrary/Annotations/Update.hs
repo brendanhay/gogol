@@ -59,7 +59,8 @@ type MyLibraryAnnotationsUpdateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Annotation :> Put '[JSON] Annotation
+                           ReqBody '[OctetStream] Annotation :>
+                             Put '[JSON] Annotation
 
 -- | Updates an existing annotation.
 --

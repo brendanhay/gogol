@@ -61,7 +61,7 @@ type InstancesExportResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] InstancesExportRequest :>
+                             ReqBody '[OctetStream] InstancesExportRequest :>
                                Post '[JSON] Operation
 
 -- | Exports data from a Cloud SQL instance to a Google Cloud Storage bucket

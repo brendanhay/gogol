@@ -17,17 +17,17 @@ module Network.Google.ResourceManager.Types
     -- * Service URL
       resourceManagerURL
 
-    -- * ListProjectsResponse
-    , ListProjectsResponse
-    , listProjectsResponse
-    , lprNextPageToken
-    , lprProjects
-
     -- * ResourceId
     , ResourceId
     , resourceId
     , riId
     , riType
+
+    -- * ListProjectsResponse
+    , ListProjectsResponse
+    , listProjectsResponse
+    , lprNextPageToken
+    , lprProjects
 
     -- * GetIAMPolicyRequest
     , GetIAMPolicyRequest
@@ -63,10 +63,6 @@ module Network.Google.ResourceManager.Types
     , testIAMPermissionsRequest
     , tiprPermissions
 
-    -- * Labels
-    , Labels
-    , labels
-
     -- * TestIAMPermissionsResponse
     , TestIAMPermissionsResponse
     , testIAMPermissionsResponse
@@ -78,6 +74,10 @@ module Network.Google.ResourceManager.Types
     , pEtag
     , pVersion
     , pBindings
+
+    -- * ProjectLabels
+    , ProjectLabels
+    , projectLabels
 
     -- * Organization
     , Organization

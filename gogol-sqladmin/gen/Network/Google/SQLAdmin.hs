@@ -152,16 +152,22 @@ module Network.Google.SQLAdmin
     , scCreateTime
     , scInstance
 
-    -- ** InstancesExportRequest
-    , InstancesExportRequest
-    , instancesExportRequest
-    , ierExportContext
-
     -- ** DatabasesListResponse
     , DatabasesListResponse
     , databasesListResponse
     , dlrKind
     , dlrItems
+
+    -- ** InstancesExportRequest
+    , InstancesExportRequest
+    , instancesExportRequest
+    , ierExportContext
+
+    -- ** OnPremisesConfiguration
+    , OnPremisesConfiguration
+    , onPremisesConfiguration
+    , opcKind
+    , opcHostPort
 
     -- ** OperationsListResponse
     , OperationsListResponse
@@ -169,12 +175,6 @@ module Network.Google.SQLAdmin
     , olrNextPageToken
     , olrKind
     , olrItems
-
-    -- ** OnPremisesConfiguration
-    , OnPremisesConfiguration
-    , onPremisesConfiguration
-    , opcKind
-    , opcHostPort
 
     -- ** ImportContext
     , ImportContext
@@ -184,51 +184,6 @@ module Network.Google.SQLAdmin
     , icCSVImportOptions
     , icURI
     , icFileType
-
-    -- ** CSVExportOptions
-    , CSVExportOptions
-    , csvExportOptions
-    , ceoSelectQuery
-
-    -- ** Settings
-    , Settings
-    , settings
-    , sReplicationType
-    , sActivationPolicy
-    , sSettingsVersion
-    , sAuthorizedGaeApplications
-    , sKind
-    , sPricingPlan
-    , sIPConfiguration
-    , sDatabaseReplicationEnabled
-    , sTier
-    , sDatabaseFlags
-    , sCrashSafeReplicationEnabled
-    , sLocationPreference
-    , sBackupConfiguration
-
-    -- ** SSLCertsCreateEphemeralRequest
-    , SSLCertsCreateEphemeralRequest
-    , sslCertsCreateEphemeralRequest
-    , sccerPublicKey
-
-    -- ** Database
-    , Database
-    , database
-    , dEtag
-    , dProject
-    , dKind
-    , dCollation
-    , dSelfLink
-    , dName
-    , dCharset
-    , dInstance
-
-    -- ** IPMapping
-    , IPMapping
-    , ipMapping
-    , imIPAddress
-    , imTimeToRetire
 
     -- ** Operation
     , Operation
@@ -249,11 +204,45 @@ module Network.Google.SQLAdmin
     , oOperationType
     , oTargetLink
 
-    -- ** TiersListResponse
-    , TiersListResponse
-    , tiersListResponse
-    , tlrKind
-    , tlrItems
+    -- ** Settings
+    , Settings
+    , settings
+    , sReplicationType
+    , sActivationPolicy
+    , sSettingsVersion
+    , sAuthorizedGaeApplications
+    , sKind
+    , sPricingPlan
+    , sIPConfiguration
+    , sDatabaseReplicationEnabled
+    , sTier
+    , sDatabaseFlags
+    , sCrashSafeReplicationEnabled
+    , sLocationPreference
+    , sBackupConfiguration
+
+    -- ** IPMApping
+    , IPMApping
+    , ipMApping
+    , imaIPAddress
+    , imaTimeToRetire
+
+    -- ** Database
+    , Database
+    , database
+    , dEtag
+    , dProject
+    , dKind
+    , dCollation
+    , dSelfLink
+    , dName
+    , dCharset
+    , dInstance
+
+    -- ** SSLCertsCreateEphemeralRequest
+    , SSLCertsCreateEphemeralRequest
+    , sslCertsCreateEphemeralRequest
+    , sccerPublicKey
 
     -- ** BinLogCoordinates
     , BinLogCoordinates
@@ -261,6 +250,19 @@ module Network.Google.SQLAdmin
     , blcBinLogPosition
     , blcKind
     , blcBinLogFileName
+
+    -- ** TiersListResponse
+    , TiersListResponse
+    , tiersListResponse
+    , tlrKind
+    , tlrItems
+
+    -- ** UsersListResponse
+    , UsersListResponse
+    , usersListResponse
+    , ulrNextPageToken
+    , ulrKind
+    , ulrItems
 
     -- ** ExportContext
     , ExportContext
@@ -271,19 +273,6 @@ module Network.Google.SQLAdmin
     , ecFileType
     , ecSQLExportOptions
     , ecDatabases
-
-    -- ** CSVImportOptions
-    , CSVImportOptions
-    , csvImportOptions
-    , cioColumns
-    , cioTable
-
-    -- ** UsersListResponse
-    , UsersListResponse
-    , usersListResponse
-    , ulrNextPageToken
-    , ulrKind
-    , ulrItems
 
     -- ** OperationErrors
     , OperationErrors
@@ -297,6 +286,11 @@ module Network.Google.SQLAdmin
     , sclrKind
     , sclrItems
 
+    -- ** SSLCertsInsertRequest
+    , SSLCertsInsertRequest
+    , sslCertsInsertRequest
+    , scirCommonName
+
     -- ** IPConfiguration
     , IPConfiguration
     , ipConfiguration
@@ -304,10 +298,16 @@ module Network.Google.SQLAdmin
     , icRequireSSL
     , icIPv4Enabled
 
-    -- ** SSLCertsInsertRequest
-    , SSLCertsInsertRequest
-    , sslCertsInsertRequest
-    , scirCommonName
+    -- ** ImportContextCSVImportOptions
+    , ImportContextCSVImportOptions
+    , importContextCSVImportOptions
+    , iccioColumns
+    , iccioTable
+
+    -- ** ExportContextCSVExportOptions
+    , ExportContextCSVExportOptions
+    , exportContextCSVExportOptions
+    , ecceoSelectQuery
 
     -- ** User
     , User
@@ -344,6 +344,13 @@ module Network.Google.SQLAdmin
     , datServiceAccountEmailAddress
     , datIPAddresses
 
+    -- ** CloneContext
+    , CloneContext
+    , cloneContext
+    , ccDestinationInstanceName
+    , ccBinLogCoordinates
+    , ccKind
+
     -- ** Flag
     , Flag
     , flag
@@ -354,13 +361,6 @@ module Network.Google.SQLAdmin
     , fAllowedStringValues
     , fType
     , fMinValue
-
-    -- ** CloneContext
-    , CloneContext
-    , cloneContext
-    , ccDestinationInstanceName
-    , ccBinLogCoordinates
-    , ccKind
 
     -- ** BackupRun
     , BackupRun
@@ -384,11 +384,20 @@ module Network.Google.SQLAdmin
     , aeName
     , aeExpirationTime
 
-    -- ** SQLExportOptions
-    , SQLExportOptions
-    , sQLExportOptions
-    , sqleoSchemaOnly
-    , sqleoTables
+    -- ** DatabaseFlags
+    , DatabaseFlags
+    , databaseFlags
+    , dfValue
+    , dfName
+
+    -- ** Tier
+    , Tier
+    , tier
+    , tKind
+    , tTier
+    , tRegion
+    , tDiskQuota
+    , tRAM
 
     -- ** MySQLReplicaConfiguration
     , MySQLReplicaConfiguration
@@ -405,38 +414,16 @@ module Network.Google.SQLAdmin
     , msqlrcDumpFilePath
     , msqlrcPassword
 
-    -- ** Tier
-    , Tier
-    , tier
-    , tKind
-    , tTier
-    , tRegion
-    , tDiskQuota
-    , tRAM
-
-    -- ** DatabaseFlags
-    , DatabaseFlags
-    , databaseFlags
-    , dfValue
-    , dfName
-
-    -- ** InstancesRestoreBackupRequest
-    , InstancesRestoreBackupRequest
-    , instancesRestoreBackupRequest
-    , irbrRestoreBackupContext
-
-    -- ** OperationError
-    , OperationError
-    , operationError
-    , opeKind
-    , opeCode
-    , opeMessage
-
     -- ** SSLCertDetail
     , SSLCertDetail
     , sslCertDetail
     , scdCertInfo
     , scdCertPrivateKey
+
+    -- ** InstancesRestoreBackupRequest
+    , InstancesRestoreBackupRequest
+    , instancesRestoreBackupRequest
+    , irbrRestoreBackupContext
 
     -- ** BackupRunsListResponse
     , BackupRunsListResponse
@@ -444,6 +431,13 @@ module Network.Google.SQLAdmin
     , brlrNextPageToken
     , brlrKind
     , brlrItems
+
+    -- ** OperationError
+    , OperationError
+    , operationError
+    , opeKind
+    , opeCode
+    , opeMessage
 
     -- ** InstancesCloneRequest
     , InstancesCloneRequest
@@ -470,24 +464,6 @@ module Network.Google.SQLAdmin
     , ilrKind
     , ilrItems
 
-    -- ** LocationPreference
-    , LocationPreference
-    , locationPreference
-    , lpKind
-    , lpFollowGaeApplication
-    , lpZone
-
-    -- ** InstancesImportRequest
-    , InstancesImportRequest
-    , instancesImportRequest
-    , iirImportContext
-
-    -- ** FlagsListResponse
-    , FlagsListResponse
-    , flagsListResponse
-    , flrKind
-    , flrItems
-
     -- ** BackupConfiguration
     , BackupConfiguration
     , backupConfiguration
@@ -495,6 +471,30 @@ module Network.Google.SQLAdmin
     , bcStartTime
     , bcKind
     , bcBinaryLogEnabled
+
+    -- ** InstancesImportRequest
+    , InstancesImportRequest
+    , instancesImportRequest
+    , iirImportContext
+
+    -- ** LocationPreference
+    , LocationPreference
+    , locationPreference
+    , lpKind
+    , lpFollowGaeApplication
+    , lpZone
+
+    -- ** FlagsListResponse
+    , FlagsListResponse
+    , flagsListResponse
+    , flrKind
+    , flrItems
+
+    -- ** ExportContextSQLExportOptions
+    , ExportContextSQLExportOptions
+    , exportContextSQLExportOptions
+    , ecsqleoSchemaOnly
+    , ecsqleoTables
 
     -- ** RestoreBackupContext
     , RestoreBackupContext

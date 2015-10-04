@@ -58,7 +58,7 @@ type EnterprisesSetAccountResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] EnterpriseAccount :>
+                         ReqBody '[OctetStream] EnterpriseAccount :>
                            Put '[JSON] EnterpriseAccount
 
 -- | Set the account that will be used to authenticate to the API as the

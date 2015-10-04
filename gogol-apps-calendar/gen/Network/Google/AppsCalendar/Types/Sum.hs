@@ -17,9 +17,40 @@ module Network.Google.AppsCalendar.Types.Sum where
 
 import           Network.Google.Prelude
 
+-- | The order of the events returned in the result. Optional. The default is
+-- an unspecified, stable order.
+data EventsListOrderBy
+    = StartTime
+      -- ^ @startTime@
+      -- Order by the start date\/time (ascending). This is only available when
+      -- querying single events (i.e. the parameter singleEvents is True)
+    | Updated
+      -- ^ @updated@
+      -- Order by last modification time (ascending).
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable EventsListOrderBy
+
+instance FromText EventsListOrderBy where
+    fromText = \case
+        "startTime" -> Just StartTime
+        "updated" -> Just Updated
+        _ -> Nothing
+
+instance ToText EventsListOrderBy where
+    toText = \case
+        StartTime -> "startTime"
+        Updated -> "updated"
+
+instance FromJSON EventsListOrderBy where
+    parseJSON = parseJSONText "EventsListOrderBy"
+
+instance ToJSON EventsListOrderBy where
+    toJSON = toJSONText
+
 -- | The minimum access role for the user in the returned entries. Optional.
 -- The default is no restriction.
-data MinAccessRole
+data CalendarListListMinAccessRole
     = FreeBusyReader
       -- ^ @freeBusyReader@
       -- The user can read free\/busy information.
@@ -34,9 +65,9 @@ data MinAccessRole
       -- The user can read and modify events.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable MinAccessRole
+instance Hashable CalendarListListMinAccessRole
 
-instance FromText MinAccessRole where
+instance FromText CalendarListListMinAccessRole where
     fromText = \case
         "freeBusyReader" -> Just FreeBusyReader
         "owner" -> Just Owner
@@ -44,117 +75,86 @@ instance FromText MinAccessRole where
         "writer" -> Just Writer
         _ -> Nothing
 
-instance ToText MinAccessRole where
+instance ToText CalendarListListMinAccessRole where
     toText = \case
         FreeBusyReader -> "freeBusyReader"
         Owner -> "owner"
         Reader -> "reader"
         Writer -> "writer"
 
-instance FromJSON MinAccessRole where
-    parseJSON = parseJSONText "MinAccessRole"
+instance FromJSON CalendarListListMinAccessRole where
+    parseJSON = parseJSONText "CalendarListListMinAccessRole"
 
-instance ToJSON MinAccessRole where
+instance ToJSON CalendarListListMinAccessRole where
     toJSON = toJSONText
 
 -- | The order of the events returned in the result. Optional. The default is
 -- an unspecified, stable order.
-data OrderBy
-    = OBStartTime
+data EventsWatchOrderBy
+    = EWOBStartTime
       -- ^ @startTime@
       -- Order by the start date\/time (ascending). This is only available when
       -- querying single events (i.e. the parameter singleEvents is True)
-    | OBUpdated
+    | EWOBUpdated
       -- ^ @updated@
       -- Order by last modification time (ascending).
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable OrderBy
+instance Hashable EventsWatchOrderBy
 
-instance FromText OrderBy where
+instance FromText EventsWatchOrderBy where
     fromText = \case
-        "startTime" -> Just OBStartTime
-        "updated" -> Just OBUpdated
+        "startTime" -> Just EWOBStartTime
+        "updated" -> Just EWOBUpdated
         _ -> Nothing
 
-instance ToText OrderBy where
+instance ToText EventsWatchOrderBy where
     toText = \case
-        OBStartTime -> "startTime"
-        OBUpdated -> "updated"
+        EWOBStartTime -> "startTime"
+        EWOBUpdated -> "updated"
 
-instance FromJSON OrderBy where
-    parseJSON = parseJSONText "OrderBy"
+instance FromJSON EventsWatchOrderBy where
+    parseJSON = parseJSONText "EventsWatchOrderBy"
 
-instance ToJSON OrderBy where
+instance ToJSON EventsWatchOrderBy where
     toJSON = toJSONText
 
 -- | The minimum access role for the user in the returned entries. Optional.
 -- The default is no restriction.
-data CalendarCalendarListWatchMinAccessRole
-    = CCLWMARFreeBusyReader
+data CalendarListWatchMinAccessRole
+    = CLWMARFreeBusyReader
       -- ^ @freeBusyReader@
       -- The user can read free\/busy information.
-    | CCLWMAROwner
+    | CLWMAROwner
       -- ^ @owner@
       -- The user can read and modify events and access control lists.
-    | CCLWMARReader
+    | CLWMARReader
       -- ^ @reader@
       -- The user can read events that are not private.
-    | CCLWMARWriter
+    | CLWMARWriter
       -- ^ @writer@
       -- The user can read and modify events.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable CalendarCalendarListWatchMinAccessRole
+instance Hashable CalendarListWatchMinAccessRole
 
-instance FromText CalendarCalendarListWatchMinAccessRole where
+instance FromText CalendarListWatchMinAccessRole where
     fromText = \case
-        "freeBusyReader" -> Just CCLWMARFreeBusyReader
-        "owner" -> Just CCLWMAROwner
-        "reader" -> Just CCLWMARReader
-        "writer" -> Just CCLWMARWriter
+        "freeBusyReader" -> Just CLWMARFreeBusyReader
+        "owner" -> Just CLWMAROwner
+        "reader" -> Just CLWMARReader
+        "writer" -> Just CLWMARWriter
         _ -> Nothing
 
-instance ToText CalendarCalendarListWatchMinAccessRole where
+instance ToText CalendarListWatchMinAccessRole where
     toText = \case
-        CCLWMARFreeBusyReader -> "freeBusyReader"
-        CCLWMAROwner -> "owner"
-        CCLWMARReader -> "reader"
-        CCLWMARWriter -> "writer"
+        CLWMARFreeBusyReader -> "freeBusyReader"
+        CLWMAROwner -> "owner"
+        CLWMARReader -> "reader"
+        CLWMARWriter -> "writer"
 
-instance FromJSON CalendarCalendarListWatchMinAccessRole where
-    parseJSON = parseJSONText "CalendarCalendarListWatchMinAccessRole"
+instance FromJSON CalendarListWatchMinAccessRole where
+    parseJSON = parseJSONText "CalendarListWatchMinAccessRole"
 
-instance ToJSON CalendarCalendarListWatchMinAccessRole where
-    toJSON = toJSONText
-
--- | The order of the events returned in the result. Optional. The default is
--- an unspecified, stable order.
-data CalendarEventsWatchOrderBy
-    = CEWOBStartTime
-      -- ^ @startTime@
-      -- Order by the start date\/time (ascending). This is only available when
-      -- querying single events (i.e. the parameter singleEvents is True)
-    | CEWOBUpdated
-      -- ^ @updated@
-      -- Order by last modification time (ascending).
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable CalendarEventsWatchOrderBy
-
-instance FromText CalendarEventsWatchOrderBy where
-    fromText = \case
-        "startTime" -> Just CEWOBStartTime
-        "updated" -> Just CEWOBUpdated
-        _ -> Nothing
-
-instance ToText CalendarEventsWatchOrderBy where
-    toText = \case
-        CEWOBStartTime -> "startTime"
-        CEWOBUpdated -> "updated"
-
-instance FromJSON CalendarEventsWatchOrderBy where
-    parseJSON = parseJSONText "CalendarEventsWatchOrderBy"
-
-instance ToJSON CalendarEventsWatchOrderBy where
+instance ToJSON CalendarListWatchMinAccessRole where
     toJSON = toJSONText

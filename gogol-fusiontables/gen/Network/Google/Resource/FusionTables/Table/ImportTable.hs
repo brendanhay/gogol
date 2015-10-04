@@ -60,7 +60,8 @@ type TableImportTableResource =
                      QueryParam "fields" Text :>
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "alt" AltJSON :> Post '[JSON] Table
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Body :> Post '[JSON] Table
 
 -- | Imports a new table.
 --

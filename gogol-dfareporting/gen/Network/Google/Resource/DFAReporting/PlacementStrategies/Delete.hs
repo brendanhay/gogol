@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.PlacementStrategies.Delete
     , psdQuotaUser
     , psdPrettyPrint
     , psdUserIP
-    , psdProfileId
+    , psdProFileId
     , psdKey
     , psdId
     , psdOAuthToken
@@ -66,7 +66,7 @@ data PlacementStrategiesDelete' = PlacementStrategiesDelete'
     { _psdQuotaUser   :: !(Maybe Text)
     , _psdPrettyPrint :: !Bool
     , _psdUserIP      :: !(Maybe Text)
-    , _psdProfileId   :: !Int64
+    , _psdProFileId   :: !Int64
     , _psdKey         :: !(Maybe Key)
     , _psdId          :: !Int64
     , _psdOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +83,7 @@ data PlacementStrategiesDelete' = PlacementStrategiesDelete'
 --
 -- * 'psdUserIP'
 --
--- * 'psdProfileId'
+-- * 'psdProFileId'
 --
 -- * 'psdKey'
 --
@@ -96,12 +96,12 @@ placementStrategiesDelete'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> PlacementStrategiesDelete'
-placementStrategiesDelete' pPsdProfileId_ pPsdId_ =
+placementStrategiesDelete' pPsdProFileId_ pPsdId_ =
     PlacementStrategiesDelete'
     { _psdQuotaUser = Nothing
     , _psdPrettyPrint = True
     , _psdUserIP = Nothing
-    , _psdProfileId = pPsdProfileId_
+    , _psdProFileId = pPsdProFileId_
     , _psdKey = Nothing
     , _psdId = pPsdId_
     , _psdOAuthToken = Nothing
@@ -128,9 +128,9 @@ psdUserIP
   = lens _psdUserIP (\ s a -> s{_psdUserIP = a})
 
 -- | User profile ID associated with this request.
-psdProfileId :: Lens' PlacementStrategiesDelete' Int64
-psdProfileId
-  = lens _psdProfileId (\ s a -> s{_psdProfileId = a})
+psdProFileId :: Lens' PlacementStrategiesDelete' Int64
+psdProFileId
+  = lens _psdProFileId (\ s a -> s{_psdProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -162,7 +162,7 @@ instance GoogleRequest PlacementStrategiesDelete'
         type Rs PlacementStrategiesDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementStrategiesDelete'{..}
-          = go _psdProfileId _psdId _psdQuotaUser
+          = go _psdProFileId _psdId _psdQuotaUser
               (Just _psdPrettyPrint)
               _psdUserIP
               _psdFields

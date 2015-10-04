@@ -49,8 +49,7 @@ import           Network.Google.URLShortener.Types
 type URLGetResource =
      "url" :>
        QueryParam "shortUrl" Text :>
-         QueryParam "projection" URLshortenerURLGetProjection
-           :>
+         QueryParam "projection" URLGetProjection :>
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
@@ -67,7 +66,7 @@ data URLGet' = URLGet'
     , _ugPrettyPrint :: !Bool
     , _ugUserIP      :: !(Maybe Text)
     , _ugKey         :: !(Maybe Key)
-    , _ugProjection  :: !(Maybe URLshortenerURLGetProjection)
+    , _ugProjection  :: !(Maybe URLGetProjection)
     , _ugOAuthToken  :: !(Maybe OAuthToken)
     , _ugShortURL    :: !Text
     , _ugFields      :: !(Maybe Text)
@@ -132,7 +131,7 @@ ugKey :: Lens' URLGet' (Maybe Key)
 ugKey = lens _ugKey (\ s a -> s{_ugKey = a})
 
 -- | Additional information to return.
-ugProjection :: Lens' URLGet' (Maybe URLshortenerURLGetProjection)
+ugProjection :: Lens' URLGet' (Maybe URLGetProjection)
 ugProjection
   = lens _ugProjection (\ s a -> s{_ugProjection = a})
 

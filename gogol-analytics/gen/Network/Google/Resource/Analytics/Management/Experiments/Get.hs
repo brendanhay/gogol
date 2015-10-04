@@ -35,7 +35,7 @@ module Network.Google.Resource.Analytics.Management.Experiments.Get
     , megPrettyPrint
     , megWebPropertyId
     , megUserIP
-    , megProfileId
+    , megProFileId
     , megAccountId
     , megExperimentId
     , megKey
@@ -75,7 +75,7 @@ data ManagementExperimentsGet' = ManagementExperimentsGet'
     , _megPrettyPrint   :: !Bool
     , _megWebPropertyId :: !Text
     , _megUserIP        :: !(Maybe Text)
-    , _megProfileId     :: !Text
+    , _megProFileId     :: !Text
     , _megAccountId     :: !Text
     , _megExperimentId  :: !Text
     , _megKey           :: !(Maybe Key)
@@ -95,7 +95,7 @@ data ManagementExperimentsGet' = ManagementExperimentsGet'
 --
 -- * 'megUserIP'
 --
--- * 'megProfileId'
+-- * 'megProFileId'
 --
 -- * 'megAccountId'
 --
@@ -112,13 +112,13 @@ managementExperimentsGet'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'experimentId'
     -> ManagementExperimentsGet'
-managementExperimentsGet' pMegWebPropertyId_ pMegProfileId_ pMegAccountId_ pMegExperimentId_ =
+managementExperimentsGet' pMegWebPropertyId_ pMegProFileId_ pMegAccountId_ pMegExperimentId_ =
     ManagementExperimentsGet'
     { _megQuotaUser = Nothing
     , _megPrettyPrint = False
     , _megWebPropertyId = pMegWebPropertyId_
     , _megUserIP = Nothing
-    , _megProfileId = pMegProfileId_
+    , _megProFileId = pMegProFileId_
     , _megAccountId = pMegAccountId_
     , _megExperimentId = pMegExperimentId_
     , _megKey = Nothing
@@ -152,9 +152,9 @@ megUserIP
   = lens _megUserIP (\ s a -> s{_megUserIP = a})
 
 -- | View (Profile) ID to retrieve the experiment for.
-megProfileId :: Lens' ManagementExperimentsGet' Text
-megProfileId
-  = lens _megProfileId (\ s a -> s{_megProfileId = a})
+megProFileId :: Lens' ManagementExperimentsGet' Text
+megProFileId
+  = lens _megProFileId (\ s a -> s{_megProFileId = a})
 
 -- | Account ID to retrieve the experiment for.
 megAccountId :: Lens' ManagementExperimentsGet' Text
@@ -193,7 +193,7 @@ instance GoogleRequest ManagementExperimentsGet'
         type Rs ManagementExperimentsGet' = Experiment
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementExperimentsGet'{..}
-          = go _megAccountId _megWebPropertyId _megProfileId
+          = go _megAccountId _megWebPropertyId _megProFileId
               _megExperimentId
               _megQuotaUser
               (Just _megPrettyPrint)

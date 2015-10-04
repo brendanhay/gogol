@@ -74,12 +74,10 @@ module Network.Google.ShoppingContent
 
     -- * Types
 
-    -- ** TestOrderCustomer
-    , TestOrderCustomer
-    , testOrderCustomer
-    , tocFullName
-    , tocEmail
-    , tocExplicitMarketingPreference
+    -- ** OrdersAcknowledgeRequest
+    , OrdersAcknowledgeRequest
+    , ordersAcknowledgeRequest
+    , oarOperationId
 
     -- ** OrdersUpdateMerchantOrderIdRequest
     , OrdersUpdateMerchantOrderIdRequest
@@ -92,10 +90,15 @@ module Network.Google.ShoppingContent
     , ordersAdvanceTestOrderResponse
     , oatorKind
 
-    -- ** OrdersAcknowledgeRequest
-    , OrdersAcknowledgeRequest
-    , ordersAcknowledgeRequest
-    , oarOperationId
+    -- ** OrdersGettestOrdertemplateTemplateName
+    , OrdersGettestOrdertemplateTemplateName (..)
+
+    -- ** TestOrderCustomer
+    , TestOrderCustomer
+    , testOrderCustomer
+    , tocFullName
+    , tocEmail
+    , tocExplicitMarketingPreference
 
     -- ** OrderReturn
     , OrderReturn
@@ -122,23 +125,6 @@ module Network.Google.ShoppingContent
     , ocbreCancel
     , ocbreBatchId
 
-    -- ** TemplateName
-    , TemplateName (..)
-
-    -- ** OrderLineItemShippingDetailsMethod
-    , OrderLineItemShippingDetailsMethod
-    , orderLineItemShippingDetailsMethod
-    , olisdmCarrier
-    , olisdmMethodName
-    , olisdmMaxDaysInTransit
-    , olisdmMinDaysInTransit
-
-    -- ** OrdersCreateTestOrderResponse
-    , OrdersCreateTestOrderResponse
-    , ordersCreateTestOrderResponse
-    , octorKind
-    , octorOrderId
-
     -- ** OrdersRefundRequest
     , OrdersRefundRequest
     , ordersRefundRequest
@@ -155,14 +141,22 @@ module Network.Google.ShoppingContent
     , ocbrecliReason
     , ocbrecliReasonText
 
-    -- ** OrdersUpdateShipmentRequest
-    , OrdersUpdateShipmentRequest
-    , ordersUpdateShipmentRequest
-    , ousrCarrier
-    , ousrStatus
-    , ousrTrackingId
-    , ousrShipmentId
-    , ousrOperationId
+    -- ** OrderLineItemShippingDetailsMethod
+    , OrderLineItemShippingDetailsMethod
+    , orderLineItemShippingDetailsMethod
+    , olisdmCarrier
+    , olisdmMethodName
+    , olisdmMaxDaysInTransit
+    , olisdmMinDaysInTransit
+
+    -- ** OrdersCreateTestOrderResponse
+    , OrdersCreateTestOrderResponse
+    , ordersCreateTestOrderResponse
+    , octorKind
+    , octorOrderId
+
+    -- ** OrdersListOrderBy
+    , OrdersListOrderBy (..)
 
     -- ** TestOrderPaymentMethod
     , TestOrderPaymentMethod
@@ -172,26 +166,6 @@ module Network.Google.ShoppingContent
     , topmLastFourDigits
     , topmType
     , topmPredefinedBillingAddress
-
-    -- ** OrdersReturnLineItemRequest
-    , OrdersReturnLineItemRequest
-    , ordersReturnLineItemRequest
-    , orlirQuantity
-    , orlirLineItemId
-    , orlirReason
-    , orlirOperationId
-    , orlirReasonText
-
-    -- ** OrderBy
-    , OrderBy (..)
-
-    -- ** OrdersCustomBatchRequestEntryShipLineItems
-    , OrdersCustomBatchRequestEntryShipLineItems
-    , ordersCustomBatchRequestEntryShipLineItems
-    , ocbresliCarrier
-    , ocbresliTrackingId
-    , ocbresliShipmentId
-    , ocbresliLineItems
 
     -- ** OrderLineItem
     , OrderLineItem
@@ -211,23 +185,40 @@ module Network.Google.ShoppingContent
     , oliProduct
     , oliReturns
 
+    -- ** OrdersUpdateShipmentRequest
+    , OrdersUpdateShipmentRequest
+    , ordersUpdateShipmentRequest
+    , ousrCarrier
+    , ousrStatus
+    , ousrTrackingId
+    , ousrShipmentId
+    , ousrOperationId
+
     -- ** OrderShipmentLineItemShipment
     , OrderShipmentLineItemShipment
     , orderShipmentLineItemShipment
     , oslisQuantity
     , oslisLineItemId
 
-    -- ** OrdersRefundResponse
-    , OrdersRefundResponse
-    , ordersRefundResponse
-    , orrKind
-    , orrExecutionStatus
+    -- ** OrdersListStatuses
+    , OrdersListStatuses (..)
 
-    -- ** OrdersCreateTestOrderRequest
-    , OrdersCreateTestOrderRequest
-    , ordersCreateTestOrderRequest
-    , octorTemplateName
-    , octorTestOrder
+    -- ** OrdersCustomBatchRequestEntryShipLineItems
+    , OrdersCustomBatchRequestEntryShipLineItems
+    , ordersCustomBatchRequestEntryShipLineItems
+    , ocbresliCarrier
+    , ocbresliTrackingId
+    , ocbresliShipmentId
+    , ocbresliLineItems
+
+    -- ** OrdersReturnLineItemRequest
+    , OrdersReturnLineItemRequest
+    , ordersReturnLineItemRequest
+    , orlirQuantity
+    , orlirLineItemId
+    , orlirReason
+    , orlirOperationId
+    , orlirReasonText
 
     -- ** OrdersGetTestOrderTemplateResponse
     , OrdersGetTestOrderTemplateResponse
@@ -241,6 +232,18 @@ module Network.Google.ShoppingContent
     , eDomain
     , eReason
     , eMessage
+
+    -- ** OrdersRefundResponse
+    , OrdersRefundResponse
+    , ordersRefundResponse
+    , orrKind
+    , orrExecutionStatus
+
+    -- ** OrdersCreateTestOrderRequest
+    , OrdersCreateTestOrderRequest
+    , ordersCreateTestOrderRequest
+    , octorTemplateName
+    , octorTestOrder
 
     -- ** OrdersCustomBatchRequest
     , OrdersCustomBatchRequest
@@ -289,12 +292,6 @@ module Network.Google.ShoppingContent
     , ocbrecReason
     , ocbrecReasonText
 
-    -- ** OrdersShipLineItemsResponse
-    , OrdersShipLineItemsResponse
-    , ordersShipLineItemsResponse
-    , oslirKind
-    , oslirExecutionStatus
-
     -- ** OrdersListResponse
     , OrdersListResponse
     , ordersListResponse
@@ -302,11 +299,11 @@ module Network.Google.ShoppingContent
     , olrKind
     , olrResources
 
-    -- ** OrdersReturnLineItemResponse
-    , OrdersReturnLineItemResponse
-    , ordersReturnLineItemResponse
-    , orlirKind
-    , orlirExecutionStatus
+    -- ** OrdersShipLineItemsResponse
+    , OrdersShipLineItemsResponse
+    , ordersShipLineItemsResponse
+    , oslirKind
+    , oslirExecutionStatus
 
     -- ** OrdersUpdateShipmentResponse
     , OrdersUpdateShipmentResponse
@@ -314,12 +311,11 @@ module Network.Google.ShoppingContent
     , ousrKind
     , ousrExecutionStatus
 
-    -- ** OrdersCancelRequest
-    , OrdersCancelRequest
-    , ordersCancelRequest
-    , ocrReason
-    , ocrOperationId
-    , ocrReasonText
+    -- ** OrdersReturnLineItemResponse
+    , OrdersReturnLineItemResponse
+    , ordersReturnLineItemResponse
+    , orlirKind
+    , orlirExecutionStatus
 
     -- ** OrderCustomer
     , OrderCustomer
@@ -334,21 +330,12 @@ module Network.Google.ShoppingContent
     , ogbmoirKind
     , ogbmoirOrder
 
-    -- ** Statuses
-    , Statuses (..)
-
-    -- ** OrderLineItemShippingDetails
-    , OrderLineItemShippingDetails
-    , orderLineItemShippingDetails
-    , olisdShipByDate
-    , olisdMethod
-    , olisdDeliverByDate
-
-    -- ** Price
-    , Price
-    , price
-    , pValue
-    , pCurrency
+    -- ** OrdersCancelRequest
+    , OrdersCancelRequest
+    , ordersCancelRequest
+    , ocrReason
+    , ocrOperationId
+    , ocrReasonText
 
     -- ** OrderLineItemProductVariantAttribute
     , OrderLineItemProductVariantAttribute
@@ -365,22 +352,30 @@ module Network.Google.ShoppingContent
     , oOrder
     , oBatchId
 
-    -- ** TestOrderLineItemProduct
-    , TestOrderLineItemProduct
-    , testOrderLineItemProduct
-    , tolipImageLink
-    , tolipChannel
-    , tolipBrand
-    , tolipTargetCountry
-    , tolipGtin
-    , tolipItemGroupId
-    , tolipOfferId
-    , tolipPrice
-    , tolipVariantAttributes
-    , tolipTitle
-    , tolipContentLanguage
-    , tolipMpn
-    , tolipCondition
+    -- ** Price
+    , Price
+    , price
+    , pValue
+    , pCurrency
+
+    -- ** OrderLineItemShippingDetails
+    , OrderLineItemShippingDetails
+    , orderLineItemShippingDetails
+    , olisdShipByDate
+    , olisdMethod
+    , olisdDeliverByDate
+
+    -- ** OrderDeliveryDetails
+    , OrderDeliveryDetails
+    , orderDeliveryDetails
+    , oddAddress
+    , oddPhoneNumber
+
+    -- ** OrdersCancelResponse
+    , OrdersCancelResponse
+    , ordersCancelResponse
+    , ocrKind
+    , ocrExecutionStatus
 
     -- ** TestOrder
     , TestOrder
@@ -403,11 +398,22 @@ module Network.Google.ShoppingContent
     , oCreationDate
     , oReasonText
 
-    -- ** OrderDeliveryDetails
-    , OrderDeliveryDetails
-    , orderDeliveryDetails
-    , oddAddress
-    , oddPhoneNumber
+    -- ** TestOrderLineItemProduct
+    , TestOrderLineItemProduct
+    , testOrderLineItemProduct
+    , tolipImageLink
+    , tolipChannel
+    , tolipBrand
+    , tolipTargetCountry
+    , tolipGtin
+    , tolipItemGroupId
+    , tolipOfferId
+    , tolipPrice
+    , tolipVariantAttributes
+    , tolipTitle
+    , tolipContentLanguage
+    , tolipMpn
+    , tolipCondition
 
     -- ** OrderAddress
     , OrderAddress
@@ -420,21 +426,6 @@ module Network.Google.ShoppingContent
     , oaIsPostOfficeBox
     , oaFullAddress
     , oaRegion
-
-    -- ** OrdersCancelResponse
-    , OrdersCancelResponse
-    , ordersCancelResponse
-    , ocrKind
-    , ocrExecutionStatus
-
-    -- ** TestOrderLineItem
-    , TestOrderLineItem
-    , testOrderLineItem
-    , toliQuantityOrdered
-    , toliReturnInfo
-    , toliShippingDetails
-    , toliProduct
-    , toliUnitTax
 
     -- ** OrderPaymentMethod
     , OrderPaymentMethod
@@ -459,32 +450,20 @@ module Network.Google.ShoppingContent
     , oclirKind
     , oclirExecutionStatus
 
-    -- ** OrdersCustomBatchRequestEntryUpdateShipment
-    , OrdersCustomBatchRequestEntryUpdateShipment
-    , ordersCustomBatchRequestEntryUpdateShipment
-    , ocbreusCarrier
-    , ocbreusStatus
-    , ocbreusTrackingId
-    , ocbreusShipmentId
+    -- ** TestOrderLineItem
+    , TestOrderLineItem
+    , testOrderLineItem
+    , toliQuantityOrdered
+    , toliReturnInfo
+    , toliShippingDetails
+    , toliProduct
+    , toliUnitTax
 
-    -- ** OrderLineItemProduct
-    , OrderLineItemProduct
-    , orderLineItemProduct
-    , olipImageLink
-    , olipShownImage
-    , olipChannel
-    , olipBrand
-    , olipTargetCountry
-    , olipGtin
-    , olipItemGroupId
-    , olipOfferId
-    , olipId
-    , olipPrice
-    , olipVariantAttributes
-    , olipTitle
-    , olipContentLanguage
-    , olipMpn
-    , olipCondition
+    -- ** OrdersUpdateMerchantOrderIdResponse
+    , OrdersUpdateMerchantOrderIdResponse
+    , ordersUpdateMerchantOrderIdResponse
+    , oumoirKind
+    , oumoirExecutionStatus
 
     -- ** OrdersAcknowledgeResponse
     , OrdersAcknowledgeResponse
@@ -514,6 +493,25 @@ module Network.Google.ShoppingContent
     , ordPaymentStatus
     , ordShippingCost
 
+    -- ** OrderLineItemProduct
+    , OrderLineItemProduct
+    , orderLineItemProduct
+    , olipImageLink
+    , olipShownImage
+    , olipChannel
+    , olipBrand
+    , olipTargetCountry
+    , olipGtin
+    , olipItemGroupId
+    , olipOfferId
+    , olipId
+    , olipPrice
+    , olipVariantAttributes
+    , olipTitle
+    , olipContentLanguage
+    , olipMpn
+    , olipCondition
+
     -- ** OrdersCustomBatchRequestEntryReturnLineItem
     , OrdersCustomBatchRequestEntryReturnLineItem
     , ordersCustomBatchRequestEntryReturnLineItem
@@ -522,11 +520,13 @@ module Network.Google.ShoppingContent
     , ocbrerliReason
     , ocbrerliReasonText
 
-    -- ** OrdersUpdateMerchantOrderIdResponse
-    , OrdersUpdateMerchantOrderIdResponse
-    , ordersUpdateMerchantOrderIdResponse
-    , oumoirKind
-    , oumoirExecutionStatus
+    -- ** OrdersCustomBatchRequestEntryUpdateShipment
+    , OrdersCustomBatchRequestEntryUpdateShipment
+    , ordersCustomBatchRequestEntryUpdateShipment
+    , ocbreusCarrier
+    , ocbreusStatus
+    , ocbreusTrackingId
+    , ocbreusShipmentId
 
     -- ** OrdersCustomBatchRequestEntryRefund
     , OrdersCustomBatchRequestEntryRefund

@@ -54,7 +54,8 @@ type CalendarsInsertResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] Calendar :> Post '[JSON] Calendar
+                     ReqBody '[OctetStream] Calendar :>
+                       Post '[JSON] Calendar
 
 -- | Creates a secondary calendar.
 --

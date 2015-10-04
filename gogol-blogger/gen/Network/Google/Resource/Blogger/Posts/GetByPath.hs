@@ -55,7 +55,7 @@ type PostsGetByPathResource =
            "bypath" :>
              QueryParam "path" Text :>
                QueryParam "maxComments" Word32 :>
-                 QueryParam "view" BloggerPostsGetByPathView :>
+                 QueryParam "view" PostsGetByPathView :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -75,7 +75,7 @@ data PostsGetByPath' = PostsGetByPath'
     , _pgbpBlogId      :: !Text
     , _pgbpMaxComments :: !(Maybe Word32)
     , _pgbpKey         :: !(Maybe Key)
-    , _pgbpView        :: !(Maybe BloggerPostsGetByPathView)
+    , _pgbpView        :: !(Maybe PostsGetByPathView)
     , _pgbpOAuthToken  :: !(Maybe OAuthToken)
     , _pgbpFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -164,7 +164,7 @@ pgbpKey = lens _pgbpKey (\ s a -> s{_pgbpKey = a})
 
 -- | Access level with which to view the returned result. Note that some
 -- fields require elevated access.
-pgbpView :: Lens' PostsGetByPath' (Maybe BloggerPostsGetByPathView)
+pgbpView :: Lens' PostsGetByPath' (Maybe PostsGetByPathView)
 pgbpView = lens _pgbpView (\ s a -> s{_pgbpView = a})
 
 -- | OAuth 2.0 token for the current user.

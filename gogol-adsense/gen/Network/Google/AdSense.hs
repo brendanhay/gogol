@@ -143,6 +143,14 @@ module Network.Google.AdSense
 
     -- * Types
 
+    -- ** AdClients
+    , AdClients
+    , adClients
+    , acEtag
+    , acNextPageToken
+    , acKind
+    , acItems
+
     -- ** ReportingMetadataEntry
     , ReportingMetadataEntry
     , reportingMetadataEntry
@@ -154,37 +162,12 @@ module Network.Google.AdSense
     , rmeCompatibleDimensions
     , rmeSupportedProducts
 
-    -- ** TargetingInfo
-    , TargetingInfo
-    , targetingInfo
-    , tiLocation
-    , tiSiteLanguage
-    , tiAdsAppearOn
-    , tiDescription
-
-    -- ** AdClients
-    , AdClients
-    , adClients
-    , acEtag
-    , acNextPageToken
-    , acKind
-    , acItems
-
-    -- ** MobileContentAdsSettings
-    , MobileContentAdsSettings
-    , mobileContentAdsSettings
-    , mcasSize
-    , mcasScriptingLanguage
-    , mcasMarkupLanguage
-    , mcasType
-
-    -- ** Accounts
-    , Accounts
-    , accounts
-    , aEtag
-    , aNextPageToken
-    , aKind
-    , aItems
+    -- ** AdsenseReportsGenerateResponseHeadersItem
+    , AdsenseReportsGenerateResponseHeadersItem
+    , adsenseReportsGenerateResponseHeadersItem
+    , argrhiName
+    , argrhiCurrency
+    , argrhiType
 
     -- ** Payment
     , Payment
@@ -195,12 +178,13 @@ module Network.Google.AdSense
     , pId
     , pPaymentAmount
 
-    -- ** BackupOption
-    , BackupOption
-    , backupOption
-    , boColor
-    , boURL
-    , boType
+    -- ** Accounts
+    , Accounts
+    , accounts
+    , aEtag
+    , aNextPageToken
+    , aKind
+    , aItems
 
     -- ** Alerts
     , Alerts
@@ -223,20 +207,6 @@ module Network.Google.AdSense
     , auNextPageToken
     , auKind
     , auItems
-
-    -- ** AdUnit
-    , AdUnit
-    , adUnit
-    , auuStatus
-    , auuMobileContentAdsSettings
-    , auuKind
-    , auuFeedAdsSettings
-    , auuCustomStyle
-    , auuSavedStyleId
-    , auuName
-    , auuContentAdsSettings
-    , auuCode
-    , auuId
 
     -- ** SavedReport
     , SavedReport
@@ -261,6 +231,20 @@ module Network.Google.AdSense
     , ccKind
     , ccItems
 
+    -- ** AdUnit
+    , AdUnit
+    , adUnit
+    , auuStatus
+    , auuMobileContentAdsSettings
+    , auuKind
+    , auuFeedAdsSettings
+    , auuCustomStyle
+    , auuSavedStyleId
+    , auuName
+    , auuContentAdsSettings
+    , auuCode
+    , auuId
+
     -- ** Alert
     , Alert
     , alert
@@ -270,6 +254,12 @@ module Network.Google.AdSense
     , aaId
     , aaType
     , aaMessage
+
+    -- ** AdStyleFont
+    , AdStyleFont
+    , adStyleFont
+    , asfSize
+    , asfFamily
 
     -- ** Account
     , Account
@@ -281,20 +271,37 @@ module Network.Google.AdSense
     , accTimezone
     , accSubAccounts
 
-    -- ** FeedAdsSettings
-    , FeedAdsSettings
-    , feedAdsSettings
-    , fasFrequency
-    , fasAdPosition
-    , fasType
-    , fasMinimumWordCount
+    -- ** AdUnitMobileContentAdsSettings
+    , AdUnitMobileContentAdsSettings
+    , adUnitMobileContentAdsSettings
+    , aumcasSize
+    , aumcasScriptingLanguage
+    , aumcasMarkupLanguage
+    , aumcasType
 
-    -- ** HeadersItem
-    , HeadersItem
-    , headersItem
-    , hiName
-    , hiCurrency
-    , hiType
+    -- ** SavedAdStyles
+    , SavedAdStyles
+    , savedAdStyles
+    , sasEtag
+    , sasNextPageToken
+    , sasKind
+    , sasItems
+
+    -- ** AdStyleColors
+    , AdStyleColors
+    , adStyleColors
+    , ascText
+    , ascURL
+    , ascBOrder
+    , ascTitle
+    , ascBackgRound
+
+    -- ** AdUnitContentAdsSettingsBackupOption
+    , AdUnitContentAdsSettingsBackupOption
+    , adUnitContentAdsSettingsBackupOption
+    , aucasboColor
+    , aucasboURL
+    , aucasboType
 
     -- ** AdClient
     , AdClient
@@ -306,14 +313,6 @@ module Network.Google.AdSense
     , adProductCode
     , adArcReviewMode
 
-    -- ** SavedAdStyles
-    , SavedAdStyles
-    , savedAdStyles
-    , sasEtag
-    , sasNextPageToken
-    , sasKind
-    , sasItems
-
     -- ** SavedAdStyle
     , SavedAdStyle
     , savedAdStyle
@@ -321,6 +320,14 @@ module Network.Google.AdSense
     , savName
     , savAdStyle
     , savId
+
+    -- ** CustomChannelTargetingInfo
+    , CustomChannelTargetingInfo
+    , customChannelTargetingInfo
+    , cctiLocation
+    , cctiSiteLanguage
+    , cctiAdsAppearOn
+    , cctiDescription
 
     -- ** AdStyle
     , AdStyle
@@ -330,12 +337,13 @@ module Network.Google.AdSense
     , asFont
     , asColors
 
-    -- ** ContentAdsSettings
-    , ContentAdsSettings
-    , contentAdsSettings
-    , casBackupOption
-    , casSize
-    , casType
+    -- ** AdUnitFeedAdsSettings
+    , AdUnitFeedAdsSettings
+    , adUnitFeedAdsSettings
+    , aufasFrequency
+    , aufasAdPosition
+    , aufasType
+    , aufasMinimumWordCount
 
     -- ** Metadata
     , Metadata
@@ -365,12 +373,6 @@ module Network.Google.AdSense
     , addKind
     , addAdCode
 
-    -- ** Font
-    , Font
-    , font
-    , fSize
-    , fFamily
-
     -- ** AdsenseReportsGenerateResponse
     , AdsenseReportsGenerateResponse
     , adsenseReportsGenerateResponse
@@ -384,14 +386,12 @@ module Network.Google.AdSense
     , argrHeaders
     , argrTotalMatchedRows
 
-    -- ** Colors
-    , Colors
-    , colors
-    , cText
-    , cURL
-    , cBOrder
-    , cTitle
-    , cBackgRound
+    -- ** AdUnitContentAdsSettings
+    , AdUnitContentAdsSettings
+    , adUnitContentAdsSettings
+    , aucasBackupOption
+    , aucasSize
+    , aucasType
 
     -- ** Payments
     , Payments

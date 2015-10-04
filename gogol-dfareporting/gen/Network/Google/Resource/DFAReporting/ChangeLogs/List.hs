@@ -31,14 +31,14 @@ module Network.Google.Resource.DFAReporting.ChangeLogs.List
     , ChangeLogsList'
 
     -- * Request Lenses
-    , cllUserProfileIds
+    , cllUserProFileIds
     , cllQuotaUser
     , cllPrettyPrint
     , cllObjectType
     , cllUserIP
     , cllSearchString
     , cllIds
-    , cllProfileId
+    , cllProFileId
     , cllAction
     , cllMinChangeTime
     , cllKey
@@ -60,10 +60,10 @@ type ChangeLogsListResource =
        Capture "profileId" Int64 :>
          "changeLogs" :>
            QueryParams "userProfileIds" Int64 :>
-             QueryParam "objectType" ObjectType :>
+             QueryParam "objectType" ChangeLogsListObjectType :>
                QueryParam "searchString" Text :>
                  QueryParams "ids" Int64 :>
-                   QueryParam "action" Action :>
+                   QueryParam "action" ChangeLogsListAction :>
                      QueryParam "minChangeTime" Text :>
                        QueryParam "maxChangeTime" Text :>
                          QueryParam "pageToken" Text :>
@@ -82,15 +82,15 @@ type ChangeLogsListResource =
 --
 -- /See:/ 'changeLogsList'' smart constructor.
 data ChangeLogsList' = ChangeLogsList'
-    { _cllUserProfileIds :: !(Maybe [Int64])
+    { _cllUserProFileIds :: !(Maybe [Int64])
     , _cllQuotaUser      :: !(Maybe Text)
     , _cllPrettyPrint    :: !Bool
-    , _cllObjectType     :: !(Maybe ObjectType)
+    , _cllObjectType     :: !(Maybe ChangeLogsListObjectType)
     , _cllUserIP         :: !(Maybe Text)
     , _cllSearchString   :: !(Maybe Text)
     , _cllIds            :: !(Maybe [Int64])
-    , _cllProfileId      :: !Int64
-    , _cllAction         :: !(Maybe Action)
+    , _cllProFileId      :: !Int64
+    , _cllAction         :: !(Maybe ChangeLogsListAction)
     , _cllMinChangeTime  :: !(Maybe Text)
     , _cllKey            :: !(Maybe Key)
     , _cllMaxChangeTime  :: !(Maybe Text)
@@ -105,7 +105,7 @@ data ChangeLogsList' = ChangeLogsList'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cllUserProfileIds'
+-- * 'cllUserProFileIds'
 --
 -- * 'cllQuotaUser'
 --
@@ -119,7 +119,7 @@ data ChangeLogsList' = ChangeLogsList'
 --
 -- * 'cllIds'
 --
--- * 'cllProfileId'
+-- * 'cllProFileId'
 --
 -- * 'cllAction'
 --
@@ -141,16 +141,16 @@ data ChangeLogsList' = ChangeLogsList'
 changeLogsList'
     :: Int64 -- ^ 'profileId'
     -> ChangeLogsList'
-changeLogsList' pCllProfileId_ =
+changeLogsList' pCllProFileId_ =
     ChangeLogsList'
-    { _cllUserProfileIds = Nothing
+    { _cllUserProFileIds = Nothing
     , _cllQuotaUser = Nothing
     , _cllPrettyPrint = True
     , _cllObjectType = Nothing
     , _cllUserIP = Nothing
     , _cllSearchString = Nothing
     , _cllIds = Nothing
-    , _cllProfileId = pCllProfileId_
+    , _cllProFileId = pCllProFileId_
     , _cllAction = Nothing
     , _cllMinChangeTime = Nothing
     , _cllKey = Nothing
@@ -163,10 +163,10 @@ changeLogsList' pCllProfileId_ =
     }
 
 -- | Select only change logs with these user profile IDs.
-cllUserProfileIds :: Lens' ChangeLogsList' [Int64]
-cllUserProfileIds
-  = lens _cllUserProfileIds
-      (\ s a -> s{_cllUserProfileIds = a})
+cllUserProFileIds :: Lens' ChangeLogsList' [Int64]
+cllUserProFileIds
+  = lens _cllUserProFileIds
+      (\ s a -> s{_cllUserProFileIds = a})
       . _Default
       . _Coerce
 
@@ -184,7 +184,7 @@ cllPrettyPrint
       (\ s a -> s{_cllPrettyPrint = a})
 
 -- | Select only change logs with the specified object type.
-cllObjectType :: Lens' ChangeLogsList' (Maybe ObjectType)
+cllObjectType :: Lens' ChangeLogsList' (Maybe ChangeLogsListObjectType)
 cllObjectType
   = lens _cllObjectType
       (\ s a -> s{_cllObjectType = a})
@@ -209,12 +209,12 @@ cllIds
       _Coerce
 
 -- | User profile ID associated with this request.
-cllProfileId :: Lens' ChangeLogsList' Int64
-cllProfileId
-  = lens _cllProfileId (\ s a -> s{_cllProfileId = a})
+cllProFileId :: Lens' ChangeLogsList' Int64
+cllProFileId
+  = lens _cllProFileId (\ s a -> s{_cllProFileId = a})
 
 -- | Select only change logs with the specified action.
-cllAction :: Lens' ChangeLogsList' (Maybe Action)
+cllAction :: Lens' ChangeLogsList' (Maybe ChangeLogsListAction)
 cllAction
   = lens _cllAction (\ s a -> s{_cllAction = a})
 
@@ -285,7 +285,7 @@ instance GoogleRequest ChangeLogsList' where
         type Rs ChangeLogsList' = ChangeLogsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ChangeLogsList'{..}
-          = go _cllProfileId (_cllUserProfileIds ^. _Default)
+          = go _cllProFileId (_cllUserProFileIds ^. _Default)
               _cllObjectType
               _cllSearchString
               (_cllIds ^. _Default)

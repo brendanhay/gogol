@@ -53,8 +53,7 @@ type BucketsGetResource =
        Capture "bucket" Text :>
          QueryParam "ifMetagenerationMatch" Word64 :>
            QueryParam "ifMetagenerationNotMatch" Word64 :>
-             QueryParam "projection" StorageBucketsGetProjection
-               :>
+             QueryParam "projection" BucketsGetProjection :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -74,7 +73,7 @@ data BucketsGet' = BucketsGet'
     , _bgBucket                   :: !Text
     , _bgKey                      :: !(Maybe Key)
     , _bgIfMetagenerationNotMatch :: !(Maybe Word64)
-    , _bgProjection               :: !(Maybe StorageBucketsGetProjection)
+    , _bgProjection               :: !(Maybe BucketsGetProjection)
     , _bgOAuthToken               :: !(Maybe OAuthToken)
     , _bgFields                   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -162,7 +161,7 @@ bgIfMetagenerationNotMatch
       (\ s a -> s{_bgIfMetagenerationNotMatch = a})
 
 -- | Set of properties to return. Defaults to noAcl.
-bgProjection :: Lens' BucketsGet' (Maybe StorageBucketsGetProjection)
+bgProjection :: Lens' BucketsGet' (Maybe BucketsGetProjection)
 bgProjection
   = lens _bgProjection (\ s a -> s{_bgProjection = a})
 

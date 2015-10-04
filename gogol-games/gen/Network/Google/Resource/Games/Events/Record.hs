@@ -57,7 +57,7 @@ type EventsRecordResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] EventRecordRequest :>
+                       ReqBody '[OctetStream] EventRecordRequest :>
                          Post '[JSON] EventUpdateResponse
 
 -- | Records a batch of changes to the number of times events have occurred

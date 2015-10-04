@@ -59,7 +59,7 @@ type BudgetUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Budget :> Put '[JSON] Budget
+                         ReqBody '[OctetStream] Budget :> Put '[JSON] Budget
 
 -- | Updates the budget amount for the budget of the adgroup specified by the
 -- accountId and billingId, with the budget amount in the request.

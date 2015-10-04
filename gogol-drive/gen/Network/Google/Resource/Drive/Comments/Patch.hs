@@ -59,7 +59,8 @@ type CommentsPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Comment :> Patch '[JSON] Comment
+                           ReqBody '[OctetStream] Comment :>
+                             Patch '[JSON] Comment
 
 -- | Updates an existing comment. This method supports patch semantics.
 --

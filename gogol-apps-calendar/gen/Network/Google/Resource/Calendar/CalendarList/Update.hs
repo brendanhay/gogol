@@ -60,7 +60,7 @@ type CalendarListUpdateResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] CalendarListEntry :>
+                             ReqBody '[OctetStream] CalendarListEntry :>
                                Put '[JSON] CalendarListEntry
 
 -- | Updates an entry on the user\'s calendar list.

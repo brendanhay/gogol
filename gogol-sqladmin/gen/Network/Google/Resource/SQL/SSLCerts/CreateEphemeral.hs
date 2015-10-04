@@ -63,8 +63,9 @@ type SSLCertsCreateEphemeralResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] SSLCertsCreateEphemeralRequest :>
-                               Post '[JSON] SSLCert
+                             ReqBody '[OctetStream]
+                               SSLCertsCreateEphemeralRequest
+                               :> Post '[JSON] SSLCert
 
 -- | Generates a short-lived X509 certificate containing the provided public
 -- key and signed by a private key specific to the target instance. Users

@@ -54,7 +54,7 @@ type QueriesCreatequeryResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] Query :> Post '[JSON] Query
+                     ReqBody '[OctetStream] Query :> Post '[JSON] Query
 
 -- | Creates a query.
 --

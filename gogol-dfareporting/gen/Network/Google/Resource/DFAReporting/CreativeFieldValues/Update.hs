@@ -35,7 +35,7 @@ module Network.Google.Resource.DFAReporting.CreativeFieldValues.Update
     , cfvuQuotaUser
     , cfvuPrettyPrint
     , cfvuUserIP
-    , cfvuProfileId
+    , cfvuProFileId
     , cfvuPayload
     , cfvuKey
     , cfvuOAuthToken
@@ -60,7 +60,7 @@ type CreativeFieldValuesUpdateResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] CreativeFieldValue :>
+                             ReqBody '[OctetStream] CreativeFieldValue :>
                                Put '[JSON] CreativeFieldValue
 
 -- | Updates an existing creative field value.
@@ -71,7 +71,7 @@ data CreativeFieldValuesUpdate' = CreativeFieldValuesUpdate'
     , _cfvuQuotaUser       :: !(Maybe Text)
     , _cfvuPrettyPrint     :: !Bool
     , _cfvuUserIP          :: !(Maybe Text)
-    , _cfvuProfileId       :: !Int64
+    , _cfvuProFileId       :: !Int64
     , _cfvuPayload         :: !CreativeFieldValue
     , _cfvuKey             :: !(Maybe Key)
     , _cfvuOAuthToken      :: !(Maybe OAuthToken)
@@ -90,7 +90,7 @@ data CreativeFieldValuesUpdate' = CreativeFieldValuesUpdate'
 --
 -- * 'cfvuUserIP'
 --
--- * 'cfvuProfileId'
+-- * 'cfvuProFileId'
 --
 -- * 'cfvuPayload'
 --
@@ -104,13 +104,13 @@ creativeFieldValuesUpdate'
     -> Int64 -- ^ 'profileId'
     -> CreativeFieldValue -- ^ 'payload'
     -> CreativeFieldValuesUpdate'
-creativeFieldValuesUpdate' pCfvuCreativeFieldId_ pCfvuProfileId_ pCfvuPayload_ =
+creativeFieldValuesUpdate' pCfvuCreativeFieldId_ pCfvuProFileId_ pCfvuPayload_ =
     CreativeFieldValuesUpdate'
     { _cfvuCreativeFieldId = pCfvuCreativeFieldId_
     , _cfvuQuotaUser = Nothing
     , _cfvuPrettyPrint = True
     , _cfvuUserIP = Nothing
-    , _cfvuProfileId = pCfvuProfileId_
+    , _cfvuProFileId = pCfvuProFileId_
     , _cfvuPayload = pCfvuPayload_
     , _cfvuKey = Nothing
     , _cfvuOAuthToken = Nothing
@@ -144,10 +144,10 @@ cfvuUserIP
   = lens _cfvuUserIP (\ s a -> s{_cfvuUserIP = a})
 
 -- | User profile ID associated with this request.
-cfvuProfileId :: Lens' CreativeFieldValuesUpdate' Int64
-cfvuProfileId
-  = lens _cfvuProfileId
-      (\ s a -> s{_cfvuProfileId = a})
+cfvuProFileId :: Lens' CreativeFieldValuesUpdate' Int64
+cfvuProFileId
+  = lens _cfvuProFileId
+      (\ s a -> s{_cfvuProFileId = a})
 
 -- | Multipart request metadata.
 cfvuPayload :: Lens' CreativeFieldValuesUpdate' CreativeFieldValue
@@ -181,7 +181,7 @@ instance GoogleRequest CreativeFieldValuesUpdate'
              CreativeFieldValue
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeFieldValuesUpdate'{..}
-          = go _cfvuProfileId _cfvuCreativeFieldId
+          = go _cfvuProFileId _cfvuCreativeFieldId
               _cfvuQuotaUser
               (Just _cfvuPrettyPrint)
               _cfvuUserIP

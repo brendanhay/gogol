@@ -55,7 +55,7 @@ type LineitemsUploadlineitemsResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] UploadLineItemsRequest :>
+                       ReqBody '[OctetStream] UploadLineItemsRequest :>
                          Post '[JSON] UploadLineItemsResponse
 
 -- | Uploads line items in CSV format.

@@ -45,18 +45,18 @@ module Network.Google.PubSub.Types
     , Empty
     , empty
 
-    -- * ListTopicSubscriptionsResponse
-    , ListTopicSubscriptionsResponse
-    , listTopicSubscriptionsResponse
-    , ltsrNextPageToken
-    , ltsrSubscriptions
-
     -- * PubsubMessage
     , PubsubMessage
     , pubsubMessage
     , pmData
     , pmAttributes
     , pmMessageId
+
+    -- * ListTopicSubscriptionsResponse
+    , ListTopicSubscriptionsResponse
+    , listTopicSubscriptionsResponse
+    , ltsrNextPageToken
+    , ltsrSubscriptions
 
     -- * ListTopicsResponse
     , ListTopicsResponse
@@ -89,10 +89,6 @@ module Network.Google.PubSub.Types
     , PubsubMessageAttributes
     , pubsubMessageAttributes
 
-    -- * Attributes
-    , Attributes
-    , attributes
-
     -- * TestIAMPermissionsRequest
     , TestIAMPermissionsRequest
     , testIAMPermissionsRequest
@@ -103,15 +99,15 @@ module Network.Google.PubSub.Types
     , publishResponse
     , prMessageIds
 
-    -- * TestIAMPermissionsResponse
-    , TestIAMPermissionsResponse
-    , testIAMPermissionsResponse
-    , tiamprPermissions
-
     -- * PublishRequest
     , PublishRequest
     , publishRequest
     , prMessages
+
+    -- * TestIAMPermissionsResponse
+    , TestIAMPermissionsResponse
+    , testIAMPermissionsResponse
+    , tiamprPermissions
 
     -- * Policy
     , Policy
@@ -120,6 +116,10 @@ module Network.Google.PubSub.Types
     , pVersion
     , pBindings
 
+    -- * PushConfigAttributes
+    , PushConfigAttributes
+    , pushConfigAttributes
+
     -- * Subscription
     , Subscription
     , subscription
@@ -127,6 +127,12 @@ module Network.Google.PubSub.Types
     , sTopic
     , sName
     , sAckDeadlineSeconds
+
+    -- * ListSubscriptionsResponse
+    , ListSubscriptionsResponse
+    , listSubscriptionsResponse
+    , lsrNextPageToken
+    , lsrSubscriptions
 
     -- * Binding
     , Binding
@@ -138,12 +144,6 @@ module Network.Google.PubSub.Types
     , AcknowledgeRequest
     , acknowledgeRequest
     , arAckIds
-
-    -- * ListSubscriptionsResponse
-    , ListSubscriptionsResponse
-    , listSubscriptionsResponse
-    , lsrNextPageToken
-    , lsrSubscriptions
     ) where
 
 import           Network.Google.Prelude

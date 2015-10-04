@@ -19,47 +19,49 @@ import           Network.Google.Prelude
 import           Network.Google.ReplicaPool.Types.Sum
 
 --
--- /See:/ 'instanceGroupManagersSetInstanceTemplateRequest' smart constructor.
-newtype InstanceGroupManagersSetInstanceTemplateRequest = InstanceGroupManagersSetInstanceTemplateRequest
-    { _igmsitrInstanceTemplate :: Maybe Text
+-- /See:/ 'operationWarningsItemDataItem' smart constructor.
+data OperationWarningsItemDataItem = OperationWarningsItemDataItem
+    { _owidiValue :: !(Maybe Text)
+    , _owidiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstanceGroupManagersSetInstanceTemplateRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'OperationWarningsItemDataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'igmsitrInstanceTemplate'
-instanceGroupManagersSetInstanceTemplateRequest
-    :: InstanceGroupManagersSetInstanceTemplateRequest
-instanceGroupManagersSetInstanceTemplateRequest =
-    InstanceGroupManagersSetInstanceTemplateRequest
-    { _igmsitrInstanceTemplate = Nothing
+-- * 'owidiValue'
+--
+-- * 'owidiKey'
+operationWarningsItemDataItem
+    :: OperationWarningsItemDataItem
+operationWarningsItemDataItem =
+    OperationWarningsItemDataItem
+    { _owidiValue = Nothing
+    , _owidiKey = Nothing
     }
 
--- | The full URL to an Instance Template from which all new instances will
--- be created.
-igmsitrInstanceTemplate :: Lens' InstanceGroupManagersSetInstanceTemplateRequest (Maybe Text)
-igmsitrInstanceTemplate
-  = lens _igmsitrInstanceTemplate
-      (\ s a -> s{_igmsitrInstanceTemplate = a})
+-- | [Output Only] Metadata value for this warning.
+owidiValue :: Lens' OperationWarningsItemDataItem (Maybe Text)
+owidiValue
+  = lens _owidiValue (\ s a -> s{_owidiValue = a})
 
-instance FromJSON
-         InstanceGroupManagersSetInstanceTemplateRequest where
+-- | [Output Only] Metadata key for this warning.
+owidiKey :: Lens' OperationWarningsItemDataItem (Maybe Text)
+owidiKey = lens _owidiKey (\ s a -> s{_owidiKey = a})
+
+instance FromJSON OperationWarningsItemDataItem where
         parseJSON
-          = withObject
-              "InstanceGroupManagersSetInstanceTemplateRequest"
+          = withObject "OperationWarningsItemDataItem"
               (\ o ->
-                 InstanceGroupManagersSetInstanceTemplateRequest <$>
-                   (o .:? "instanceTemplate"))
+                 OperationWarningsItemDataItem <$>
+                   (o .:? "value") <*> (o .:? "key"))
 
-instance ToJSON
-         InstanceGroupManagersSetInstanceTemplateRequest where
-        toJSON
-          InstanceGroupManagersSetInstanceTemplateRequest{..}
+instance ToJSON OperationWarningsItemDataItem where
+        toJSON OperationWarningsItemDataItem{..}
           = object
               (catMaybes
-                 [("instanceTemplate" .=) <$>
-                    _igmsitrInstanceTemplate])
+                 [("value" .=) <$> _owidiValue,
+                  ("key" .=) <$> _owidiKey])
 
 --
 -- /See:/ 'instanceGroupManagersAbandonInstancesRequest' smart constructor.
@@ -103,6 +105,49 @@ instance ToJSON
           InstanceGroupManagersAbandonInstancesRequest{..}
           = object
               (catMaybes [("instances" .=) <$> _igmairInstances])
+
+--
+-- /See:/ 'instanceGroupManagersSetInstanceTemplateRequest' smart constructor.
+newtype InstanceGroupManagersSetInstanceTemplateRequest = InstanceGroupManagersSetInstanceTemplateRequest
+    { _igmsitrInstanceTemplate :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InstanceGroupManagersSetInstanceTemplateRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'igmsitrInstanceTemplate'
+instanceGroupManagersSetInstanceTemplateRequest
+    :: InstanceGroupManagersSetInstanceTemplateRequest
+instanceGroupManagersSetInstanceTemplateRequest =
+    InstanceGroupManagersSetInstanceTemplateRequest
+    { _igmsitrInstanceTemplate = Nothing
+    }
+
+-- | The full URL to an Instance Template from which all new instances will
+-- be created.
+igmsitrInstanceTemplate :: Lens' InstanceGroupManagersSetInstanceTemplateRequest (Maybe Text)
+igmsitrInstanceTemplate
+  = lens _igmsitrInstanceTemplate
+      (\ s a -> s{_igmsitrInstanceTemplate = a})
+
+instance FromJSON
+         InstanceGroupManagersSetInstanceTemplateRequest where
+        parseJSON
+          = withObject
+              "InstanceGroupManagersSetInstanceTemplateRequest"
+              (\ o ->
+                 InstanceGroupManagersSetInstanceTemplateRequest <$>
+                   (o .:? "instanceTemplate"))
+
+instance ToJSON
+         InstanceGroupManagersSetInstanceTemplateRequest where
+        toJSON
+          InstanceGroupManagersSetInstanceTemplateRequest{..}
+          = object
+              (catMaybes
+                 [("instanceTemplate" .=) <$>
+                    _igmsitrInstanceTemplate])
 
 --
 -- /See:/ 'operationList' smart constructor.
@@ -264,6 +309,289 @@ instance ToJSON InstanceGroupManagerList where
                   ("items" .=) <$> _igmlItems,
                   ("selfLink" .=) <$> _igmlSelfLink,
                   ("id" .=) <$> _igmlId])
+
+-- | An operation resource, used to manage asynchronous API requests.
+--
+-- /See:/ 'operation' smart constructor.
+data Operation = Operation
+    { _oTargetId            :: !(Maybe Word64)
+    , _oStatus              :: !(Maybe OperationStatus)
+    , _oInsertTime          :: !(Maybe Text)
+    , _oProgress            :: !(Maybe Int32)
+    , _oStartTime           :: !(Maybe Text)
+    , _oKind                :: !Text
+    , _oError               :: !(Maybe OperationError)
+    , _oHTTPErrorMessage    :: !(Maybe Text)
+    , _oZone                :: !(Maybe Text)
+    , _oWarnings            :: !(Maybe [OperationWarningsItem])
+    , _oHTTPErrorStatusCode :: !(Maybe Int32)
+    , _oUser                :: !(Maybe Text)
+    , _oSelfLink            :: !(Maybe Text)
+    , _oName                :: !(Maybe Text)
+    , _oStatusMessage       :: !(Maybe Text)
+    , _oCreationTimestamp   :: !(Maybe Text)
+    , _oEndTime             :: !(Maybe Text)
+    , _oId                  :: !(Maybe Word64)
+    , _oOperationType       :: !(Maybe Text)
+    , _oRegion              :: !(Maybe Text)
+    , _oTargetLink          :: !(Maybe Text)
+    , _oClientOperationId   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Operation' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oTargetId'
+--
+-- * 'oStatus'
+--
+-- * 'oInsertTime'
+--
+-- * 'oProgress'
+--
+-- * 'oStartTime'
+--
+-- * 'oKind'
+--
+-- * 'oError'
+--
+-- * 'oHTTPErrorMessage'
+--
+-- * 'oZone'
+--
+-- * 'oWarnings'
+--
+-- * 'oHTTPErrorStatusCode'
+--
+-- * 'oUser'
+--
+-- * 'oSelfLink'
+--
+-- * 'oName'
+--
+-- * 'oStatusMessage'
+--
+-- * 'oCreationTimestamp'
+--
+-- * 'oEndTime'
+--
+-- * 'oId'
+--
+-- * 'oOperationType'
+--
+-- * 'oRegion'
+--
+-- * 'oTargetLink'
+--
+-- * 'oClientOperationId'
+operation
+    :: Operation
+operation =
+    Operation
+    { _oTargetId = Nothing
+    , _oStatus = Nothing
+    , _oInsertTime = Nothing
+    , _oProgress = Nothing
+    , _oStartTime = Nothing
+    , _oKind = "replicapool#operation"
+    , _oError = Nothing
+    , _oHTTPErrorMessage = Nothing
+    , _oZone = Nothing
+    , _oWarnings = Nothing
+    , _oHTTPErrorStatusCode = Nothing
+    , _oUser = Nothing
+    , _oSelfLink = Nothing
+    , _oName = Nothing
+    , _oStatusMessage = Nothing
+    , _oCreationTimestamp = Nothing
+    , _oEndTime = Nothing
+    , _oId = Nothing
+    , _oOperationType = Nothing
+    , _oRegion = Nothing
+    , _oTargetLink = Nothing
+    , _oClientOperationId = Nothing
+    }
+
+-- | [Output Only] Unique target ID which identifies a particular incarnation
+-- of the target.
+oTargetId :: Lens' Operation (Maybe Word64)
+oTargetId
+  = lens _oTargetId (\ s a -> s{_oTargetId = a})
+
+-- | [Output Only] Status of the operation.
+oStatus :: Lens' Operation (Maybe OperationStatus)
+oStatus = lens _oStatus (\ s a -> s{_oStatus = a})
+
+-- | [Output Only] The time that this operation was requested, in RFC3339
+-- text format.
+oInsertTime :: Lens' Operation (Maybe Text)
+oInsertTime
+  = lens _oInsertTime (\ s a -> s{_oInsertTime = a})
+
+-- | [Output only] An optional progress indicator that ranges from 0 to 100.
+-- There is no requirement that this be linear or support any granularity
+-- of operations. This should not be used to guess at when the operation
+-- will be complete. This number should be monotonically increasing as the
+-- operation progresses.
+oProgress :: Lens' Operation (Maybe Int32)
+oProgress
+  = lens _oProgress (\ s a -> s{_oProgress = a})
+
+-- | [Output Only] The time that this operation was started by the server, in
+-- RFC3339 text format.
+oStartTime :: Lens' Operation (Maybe Text)
+oStartTime
+  = lens _oStartTime (\ s a -> s{_oStartTime = a})
+
+-- | [Output only] Type of the resource.
+oKind :: Lens' Operation Text
+oKind = lens _oKind (\ s a -> s{_oKind = a})
+
+-- | [Output Only] If errors occurred during processing of this operation,
+-- this field will be populated.
+oError :: Lens' Operation (Maybe OperationError)
+oError = lens _oError (\ s a -> s{_oError = a})
+
+-- | [Output only] If operation fails, the HTTP error message returned.
+oHTTPErrorMessage :: Lens' Operation (Maybe Text)
+oHTTPErrorMessage
+  = lens _oHTTPErrorMessage
+      (\ s a -> s{_oHTTPErrorMessage = a})
+
+-- | [Output Only] URL of the zone where the operation resides. Only
+-- available when performing per-zone operations.
+oZone :: Lens' Operation (Maybe Text)
+oZone = lens _oZone (\ s a -> s{_oZone = a})
+
+-- | [Output Only] If there are issues with this operation, a warning is
+-- returned.
+oWarnings :: Lens' Operation [OperationWarningsItem]
+oWarnings
+  = lens _oWarnings (\ s a -> s{_oWarnings = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output only] If operation fails, the HTTP error status code returned.
+oHTTPErrorStatusCode :: Lens' Operation (Maybe Int32)
+oHTTPErrorStatusCode
+  = lens _oHTTPErrorStatusCode
+      (\ s a -> s{_oHTTPErrorStatusCode = a})
+
+-- | [Output Only] User who requested the operation, for example:
+-- user\'example.com.
+oUser :: Lens' Operation (Maybe Text)
+oUser = lens _oUser (\ s a -> s{_oUser = a})
+
+-- | [Output Only] Server-defined fully-qualified URL for this resource.
+oSelfLink :: Lens' Operation (Maybe Text)
+oSelfLink
+  = lens _oSelfLink (\ s a -> s{_oSelfLink = a})
+
+-- | [Output Only] Name of the resource.
+oName :: Lens' Operation (Maybe Text)
+oName = lens _oName (\ s a -> s{_oName = a})
+
+-- | [Output Only] An optional textual description of the current status of
+-- the operation.
+oStatusMessage :: Lens' Operation (Maybe Text)
+oStatusMessage
+  = lens _oStatusMessage
+      (\ s a -> s{_oStatusMessage = a})
+
+-- | [Output Only] The time that this operation was requested, in RFC3339
+-- text format.
+oCreationTimestamp :: Lens' Operation (Maybe Text)
+oCreationTimestamp
+  = lens _oCreationTimestamp
+      (\ s a -> s{_oCreationTimestamp = a})
+
+-- | [Output Only] The time that this operation was completed, in RFC3339
+-- text format.
+oEndTime :: Lens' Operation (Maybe Text)
+oEndTime = lens _oEndTime (\ s a -> s{_oEndTime = a})
+
+-- | [Output Only] Unique identifier for the resource, generated by the
+-- server.
+oId :: Lens' Operation (Maybe Word64)
+oId = lens _oId (\ s a -> s{_oId = a})
+
+-- | [Output only] Type of the operation. Operations include insert, update,
+-- and delete.
+oOperationType :: Lens' Operation (Maybe Text)
+oOperationType
+  = lens _oOperationType
+      (\ s a -> s{_oOperationType = a})
+
+-- | [Output Only] URL of the region where the operation resides. Only
+-- available when performing regional operations.
+oRegion :: Lens' Operation (Maybe Text)
+oRegion = lens _oRegion (\ s a -> s{_oRegion = a})
+
+-- | [Output only] URL of the resource the operation is mutating.
+oTargetLink :: Lens' Operation (Maybe Text)
+oTargetLink
+  = lens _oTargetLink (\ s a -> s{_oTargetLink = a})
+
+-- | [Output only] An optional identifier specified by the client when the
+-- mutation was initiated. Must be unique for all operation resources in
+-- the project.
+oClientOperationId :: Lens' Operation (Maybe Text)
+oClientOperationId
+  = lens _oClientOperationId
+      (\ s a -> s{_oClientOperationId = a})
+
+instance FromJSON Operation where
+        parseJSON
+          = withObject "Operation"
+              (\ o ->
+                 Operation <$>
+                   (o .:? "targetId") <*> (o .:? "status") <*>
+                     (o .:? "insertTime")
+                     <*> (o .:? "progress")
+                     <*> (o .:? "startTime")
+                     <*> (o .:? "kind" .!= "replicapool#operation")
+                     <*> (o .:? "error")
+                     <*> (o .:? "httpErrorMessage")
+                     <*> (o .:? "zone")
+                     <*> (o .:? "warnings" .!= mempty)
+                     <*> (o .:? "httpErrorStatusCode")
+                     <*> (o .:? "user")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "statusMessage")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "endTime")
+                     <*> (o .:? "id")
+                     <*> (o .:? "operationType")
+                     <*> (o .:? "region")
+                     <*> (o .:? "targetLink")
+                     <*> (o .:? "clientOperationId"))
+
+instance ToJSON Operation where
+        toJSON Operation{..}
+          = object
+              (catMaybes
+                 [("targetId" .=) <$> _oTargetId,
+                  ("status" .=) <$> _oStatus,
+                  ("insertTime" .=) <$> _oInsertTime,
+                  ("progress" .=) <$> _oProgress,
+                  ("startTime" .=) <$> _oStartTime,
+                  Just ("kind" .= _oKind), ("error" .=) <$> _oError,
+                  ("httpErrorMessage" .=) <$> _oHTTPErrorMessage,
+                  ("zone" .=) <$> _oZone,
+                  ("warnings" .=) <$> _oWarnings,
+                  ("httpErrorStatusCode" .=) <$> _oHTTPErrorStatusCode,
+                  ("user" .=) <$> _oUser,
+                  ("selfLink" .=) <$> _oSelfLink,
+                  ("name" .=) <$> _oName,
+                  ("statusMessage" .=) <$> _oStatusMessage,
+                  ("creationTimestamp" .=) <$> _oCreationTimestamp,
+                  ("endTime" .=) <$> _oEndTime, ("id" .=) <$> _oId,
+                  ("operationType" .=) <$> _oOperationType,
+                  ("region" .=) <$> _oRegion,
+                  ("targetLink" .=) <$> _oTargetLink,
+                  ("clientOperationId" .=) <$> _oClientOperationId])
 
 -- | An Instance Group Manager resource.
 --
@@ -474,330 +802,11 @@ instance ToJSON InstanceGroupManager where
                   ("targetPools" .=) <$> _igmTargetPools,
                   ("description" .=) <$> _igmDescription])
 
--- | An operation resource, used to manage asynchronous API requests.
---
--- /See:/ 'operation' smart constructor.
-data Operation = Operation
-    { _oTargetId            :: !(Maybe Word64)
-    , _oStatus              :: !(Maybe Status)
-    , _oInsertTime          :: !(Maybe Text)
-    , _oProgress            :: !(Maybe Int32)
-    , _oStartTime           :: !(Maybe Text)
-    , _oKind                :: !Text
-    , _oError               :: !(Maybe Error')
-    , _oHTTPErrorMessage    :: !(Maybe Text)
-    , _oZone                :: !(Maybe Text)
-    , _oWarnings            :: !(Maybe [WarningsItem])
-    , _oHTTPErrorStatusCode :: !(Maybe Int32)
-    , _oUser                :: !(Maybe Text)
-    , _oSelfLink            :: !(Maybe Text)
-    , _oName                :: !(Maybe Text)
-    , _oStatusMessage       :: !(Maybe Text)
-    , _oCreationTimestamp   :: !(Maybe Text)
-    , _oEndTime             :: !(Maybe Text)
-    , _oId                  :: !(Maybe Word64)
-    , _oOperationType       :: !(Maybe Text)
-    , _oRegion              :: !(Maybe Text)
-    , _oTargetLink          :: !(Maybe Text)
-    , _oClientOperationId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Operation' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'oTargetId'
---
--- * 'oStatus'
---
--- * 'oInsertTime'
---
--- * 'oProgress'
---
--- * 'oStartTime'
---
--- * 'oKind'
---
--- * 'oError'
---
--- * 'oHTTPErrorMessage'
---
--- * 'oZone'
---
--- * 'oWarnings'
---
--- * 'oHTTPErrorStatusCode'
---
--- * 'oUser'
---
--- * 'oSelfLink'
---
--- * 'oName'
---
--- * 'oStatusMessage'
---
--- * 'oCreationTimestamp'
---
--- * 'oEndTime'
---
--- * 'oId'
---
--- * 'oOperationType'
---
--- * 'oRegion'
---
--- * 'oTargetLink'
---
--- * 'oClientOperationId'
-operation
-    :: Operation
-operation =
-    Operation
-    { _oTargetId = Nothing
-    , _oStatus = Nothing
-    , _oInsertTime = Nothing
-    , _oProgress = Nothing
-    , _oStartTime = Nothing
-    , _oKind = "replicapool#operation"
-    , _oError = Nothing
-    , _oHTTPErrorMessage = Nothing
-    , _oZone = Nothing
-    , _oWarnings = Nothing
-    , _oHTTPErrorStatusCode = Nothing
-    , _oUser = Nothing
-    , _oSelfLink = Nothing
-    , _oName = Nothing
-    , _oStatusMessage = Nothing
-    , _oCreationTimestamp = Nothing
-    , _oEndTime = Nothing
-    , _oId = Nothing
-    , _oOperationType = Nothing
-    , _oRegion = Nothing
-    , _oTargetLink = Nothing
-    , _oClientOperationId = Nothing
-    }
-
--- | [Output Only] Unique target ID which identifies a particular incarnation
--- of the target.
-oTargetId :: Lens' Operation (Maybe Word64)
-oTargetId
-  = lens _oTargetId (\ s a -> s{_oTargetId = a})
-
--- | [Output Only] Status of the operation.
-oStatus :: Lens' Operation (Maybe Status)
-oStatus = lens _oStatus (\ s a -> s{_oStatus = a})
-
--- | [Output Only] The time that this operation was requested, in RFC3339
--- text format.
-oInsertTime :: Lens' Operation (Maybe Text)
-oInsertTime
-  = lens _oInsertTime (\ s a -> s{_oInsertTime = a})
-
--- | [Output only] An optional progress indicator that ranges from 0 to 100.
--- There is no requirement that this be linear or support any granularity
--- of operations. This should not be used to guess at when the operation
--- will be complete. This number should be monotonically increasing as the
--- operation progresses.
-oProgress :: Lens' Operation (Maybe Int32)
-oProgress
-  = lens _oProgress (\ s a -> s{_oProgress = a})
-
--- | [Output Only] The time that this operation was started by the server, in
--- RFC3339 text format.
-oStartTime :: Lens' Operation (Maybe Text)
-oStartTime
-  = lens _oStartTime (\ s a -> s{_oStartTime = a})
-
--- | [Output only] Type of the resource.
-oKind :: Lens' Operation Text
-oKind = lens _oKind (\ s a -> s{_oKind = a})
-
--- | [Output Only] If errors occurred during processing of this operation,
--- this field will be populated.
-oError :: Lens' Operation (Maybe Error')
-oError = lens _oError (\ s a -> s{_oError = a})
-
--- | [Output only] If operation fails, the HTTP error message returned.
-oHTTPErrorMessage :: Lens' Operation (Maybe Text)
-oHTTPErrorMessage
-  = lens _oHTTPErrorMessage
-      (\ s a -> s{_oHTTPErrorMessage = a})
-
--- | [Output Only] URL of the zone where the operation resides. Only
--- available when performing per-zone operations.
-oZone :: Lens' Operation (Maybe Text)
-oZone = lens _oZone (\ s a -> s{_oZone = a})
-
--- | [Output Only] If there are issues with this operation, a warning is
--- returned.
-oWarnings :: Lens' Operation [WarningsItem]
-oWarnings
-  = lens _oWarnings (\ s a -> s{_oWarnings = a}) .
-      _Default
-      . _Coerce
-
--- | [Output only] If operation fails, the HTTP error status code returned.
-oHTTPErrorStatusCode :: Lens' Operation (Maybe Int32)
-oHTTPErrorStatusCode
-  = lens _oHTTPErrorStatusCode
-      (\ s a -> s{_oHTTPErrorStatusCode = a})
-
--- | [Output Only] User who requested the operation, for example:
--- user\'example.com.
-oUser :: Lens' Operation (Maybe Text)
-oUser = lens _oUser (\ s a -> s{_oUser = a})
-
--- | [Output Only] Server-defined fully-qualified URL for this resource.
-oSelfLink :: Lens' Operation (Maybe Text)
-oSelfLink
-  = lens _oSelfLink (\ s a -> s{_oSelfLink = a})
-
--- | [Output Only] Name of the resource.
-oName :: Lens' Operation (Maybe Text)
-oName = lens _oName (\ s a -> s{_oName = a})
-
--- | [Output Only] An optional textual description of the current status of
--- the operation.
-oStatusMessage :: Lens' Operation (Maybe Text)
-oStatusMessage
-  = lens _oStatusMessage
-      (\ s a -> s{_oStatusMessage = a})
-
--- | [Output Only] The time that this operation was requested, in RFC3339
--- text format.
-oCreationTimestamp :: Lens' Operation (Maybe Text)
-oCreationTimestamp
-  = lens _oCreationTimestamp
-      (\ s a -> s{_oCreationTimestamp = a})
-
--- | [Output Only] The time that this operation was completed, in RFC3339
--- text format.
-oEndTime :: Lens' Operation (Maybe Text)
-oEndTime = lens _oEndTime (\ s a -> s{_oEndTime = a})
-
--- | [Output Only] Unique identifier for the resource, generated by the
--- server.
-oId :: Lens' Operation (Maybe Word64)
-oId = lens _oId (\ s a -> s{_oId = a})
-
--- | [Output only] Type of the operation. Operations include insert, update,
--- and delete.
-oOperationType :: Lens' Operation (Maybe Text)
-oOperationType
-  = lens _oOperationType
-      (\ s a -> s{_oOperationType = a})
-
--- | [Output Only] URL of the region where the operation resides. Only
--- available when performing regional operations.
-oRegion :: Lens' Operation (Maybe Text)
-oRegion = lens _oRegion (\ s a -> s{_oRegion = a})
-
--- | [Output only] URL of the resource the operation is mutating.
-oTargetLink :: Lens' Operation (Maybe Text)
-oTargetLink
-  = lens _oTargetLink (\ s a -> s{_oTargetLink = a})
-
--- | [Output only] An optional identifier specified by the client when the
--- mutation was initiated. Must be unique for all operation resources in
--- the project.
-oClientOperationId :: Lens' Operation (Maybe Text)
-oClientOperationId
-  = lens _oClientOperationId
-      (\ s a -> s{_oClientOperationId = a})
-
-instance FromJSON Operation where
-        parseJSON
-          = withObject "Operation"
-              (\ o ->
-                 Operation <$>
-                   (o .:? "targetId") <*> (o .:? "status") <*>
-                     (o .:? "insertTime")
-                     <*> (o .:? "progress")
-                     <*> (o .:? "startTime")
-                     <*> (o .:? "kind" .!= "replicapool#operation")
-                     <*> (o .:? "error")
-                     <*> (o .:? "httpErrorMessage")
-                     <*> (o .:? "zone")
-                     <*> (o .:? "warnings" .!= mempty)
-                     <*> (o .:? "httpErrorStatusCode")
-                     <*> (o .:? "user")
-                     <*> (o .:? "selfLink")
-                     <*> (o .:? "name")
-                     <*> (o .:? "statusMessage")
-                     <*> (o .:? "creationTimestamp")
-                     <*> (o .:? "endTime")
-                     <*> (o .:? "id")
-                     <*> (o .:? "operationType")
-                     <*> (o .:? "region")
-                     <*> (o .:? "targetLink")
-                     <*> (o .:? "clientOperationId"))
-
-instance ToJSON Operation where
-        toJSON Operation{..}
-          = object
-              (catMaybes
-                 [("targetId" .=) <$> _oTargetId,
-                  ("status" .=) <$> _oStatus,
-                  ("insertTime" .=) <$> _oInsertTime,
-                  ("progress" .=) <$> _oProgress,
-                  ("startTime" .=) <$> _oStartTime,
-                  Just ("kind" .= _oKind), ("error" .=) <$> _oError,
-                  ("httpErrorMessage" .=) <$> _oHTTPErrorMessage,
-                  ("zone" .=) <$> _oZone,
-                  ("warnings" .=) <$> _oWarnings,
-                  ("httpErrorStatusCode" .=) <$> _oHTTPErrorStatusCode,
-                  ("user" .=) <$> _oUser,
-                  ("selfLink" .=) <$> _oSelfLink,
-                  ("name" .=) <$> _oName,
-                  ("statusMessage" .=) <$> _oStatusMessage,
-                  ("creationTimestamp" .=) <$> _oCreationTimestamp,
-                  ("endTime" .=) <$> _oEndTime, ("id" .=) <$> _oId,
-                  ("operationType" .=) <$> _oOperationType,
-                  ("region" .=) <$> _oRegion,
-                  ("targetLink" .=) <$> _oTargetLink,
-                  ("clientOperationId" .=) <$> _oClientOperationId])
-
--- | [Output Only] If errors occurred during processing of this operation,
--- this field will be populated.
---
--- /See:/ 'error'' smart constructor.
-newtype Error' = Error'
-    { _eErrors :: Maybe [ErrorsItem]
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Error' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'eErrors'
-error'
-    :: Error'
-error' =
-    Error'
-    { _eErrors = Nothing
-    }
-
--- | [Output Only] The array of errors encountered while processing this
--- operation.
-eErrors :: Lens' Error' [ErrorsItem]
-eErrors
-  = lens _eErrors (\ s a -> s{_eErrors = a}) . _Default
-      . _Coerce
-
-instance FromJSON Error' where
-        parseJSON
-          = withObject "Error"
-              (\ o -> Error' <$> (o .:? "errors" .!= mempty))
-
-instance ToJSON Error' where
-        toJSON Error'{..}
-          = object (catMaybes [("errors" .=) <$> _eErrors])
-
 --
 -- /See:/ 'replicaPoolAutoHealingPolicy' smart constructor.
 data ReplicaPoolAutoHealingPolicy = ReplicaPoolAutoHealingPolicy
     { _rpahpHealthCheck :: !(Maybe Text)
-    , _rpahpActionType  :: !(Maybe ActionType)
+    , _rpahpActionType  :: !(Maybe ReplicaPoolAutoHealingPolicyActionType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReplicaPoolAutoHealingPolicy' with the minimum fields required to make a request.
@@ -826,7 +835,7 @@ rpahpHealthCheck
 -- with a new instance that is based on the instance template for this
 -- managed instance group. REBOOT performs a soft reboot on an instance. If
 -- the instance cannot reboot, the instance performs a hard restart.
-rpahpActionType :: Lens' ReplicaPoolAutoHealingPolicy (Maybe ActionType)
+rpahpActionType :: Lens' ReplicaPoolAutoHealingPolicy (Maybe ReplicaPoolAutoHealingPolicyActionType)
 rpahpActionType
   = lens _rpahpActionType
       (\ s a -> s{_rpahpActionType = a})
@@ -931,103 +940,43 @@ instance ToJSON
           = object
               (catMaybes [("instances" .=) <$> _igmdirInstances])
 
+-- | [Output Only] If errors occurred during processing of this operation,
+-- this field will be populated.
 --
--- /See:/ 'warningsItem' smart constructor.
-data WarningsItem = WarningsItem
-    { _wiData    :: !(Maybe [DataItem])
-    , _wiCode    :: !(Maybe WarningsItemCode)
-    , _wiMessage :: !(Maybe Text)
+-- /See:/ 'operationError' smart constructor.
+newtype OperationError = OperationError
+    { _oeErrors :: Maybe [OperationErrorErrorsItem]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'WarningsItem' with the minimum fields required to make a request.
+-- | Creates a value of 'OperationError' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'wiData'
---
--- * 'wiCode'
---
--- * 'wiMessage'
-warningsItem
-    :: WarningsItem
-warningsItem =
-    WarningsItem
-    { _wiData = Nothing
-    , _wiCode = Nothing
-    , _wiMessage = Nothing
+-- * 'oeErrors'
+operationError
+    :: OperationError
+operationError =
+    OperationError
+    { _oeErrors = Nothing
     }
 
--- | [Output only] Metadata for this warning in key:value format.
-wiData :: Lens' WarningsItem [DataItem]
-wiData
-  = lens _wiData (\ s a -> s{_wiData = a}) . _Default .
-      _Coerce
+-- | [Output Only] The array of errors encountered while processing this
+-- operation.
+oeErrors :: Lens' OperationError [OperationErrorErrorsItem]
+oeErrors
+  = lens _oeErrors (\ s a -> s{_oeErrors = a}) .
+      _Default
+      . _Coerce
 
--- | [Output only] The warning type identifier for this warning.
-wiCode :: Lens' WarningsItem (Maybe WarningsItemCode)
-wiCode = lens _wiCode (\ s a -> s{_wiCode = a})
-
--- | [Output only] Optional human-readable details for this warning.
-wiMessage :: Lens' WarningsItem (Maybe Text)
-wiMessage
-  = lens _wiMessage (\ s a -> s{_wiMessage = a})
-
-instance FromJSON WarningsItem where
+instance FromJSON OperationError where
         parseJSON
-          = withObject "WarningsItem"
+          = withObject "OperationError"
               (\ o ->
-                 WarningsItem <$>
-                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
-                     (o .:? "message"))
+                 OperationError <$> (o .:? "errors" .!= mempty))
 
-instance ToJSON WarningsItem where
-        toJSON WarningsItem{..}
-          = object
-              (catMaybes
-                 [("data" .=) <$> _wiData, ("code" .=) <$> _wiCode,
-                  ("message" .=) <$> _wiMessage])
-
---
--- /See:/ 'dataItem' smart constructor.
-data DataItem = DataItem
-    { _diValue :: !(Maybe Text)
-    , _diKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'DataItem' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'diValue'
---
--- * 'diKey'
-dataItem
-    :: DataItem
-dataItem =
-    DataItem
-    { _diValue = Nothing
-    , _diKey = Nothing
-    }
-
--- | [Output Only] Metadata value for this warning.
-diValue :: Lens' DataItem (Maybe Text)
-diValue = lens _diValue (\ s a -> s{_diValue = a})
-
--- | [Output Only] Metadata key for this warning.
-diKey :: Lens' DataItem (Maybe Text)
-diKey = lens _diKey (\ s a -> s{_diKey = a})
-
-instance FromJSON DataItem where
-        parseJSON
-          = withObject "DataItem"
-              (\ o ->
-                 DataItem <$> (o .:? "value") <*> (o .:? "key"))
-
-instance ToJSON DataItem where
-        toJSON DataItem{..}
-          = object
-              (catMaybes
-                 [("value" .=) <$> _diValue, ("key" .=) <$> _diKey])
+instance ToJSON OperationError where
+        toJSON OperationError{..}
+          = object (catMaybes [("errors" .=) <$> _oeErrors])
 
 --
 -- /See:/ 'instanceGroupManagersSetTargetPoolsRequest' smart constructor.
@@ -1088,58 +1037,114 @@ instance ToJSON
                   ("targetPools" .=) <$> _igmstprTargetPools])
 
 --
--- /See:/ 'errorsItem' smart constructor.
-data ErrorsItem = ErrorsItem
-    { _eiLocation :: !(Maybe Text)
-    , _eiCode     :: !(Maybe Text)
-    , _eiMessage  :: !(Maybe Text)
+-- /See:/ 'operationErrorErrorsItem' smart constructor.
+data OperationErrorErrorsItem = OperationErrorErrorsItem
+    { _oeeiLocation :: !(Maybe Text)
+    , _oeeiCode     :: !(Maybe Text)
+    , _oeeiMessage  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ErrorsItem' with the minimum fields required to make a request.
+-- | Creates a value of 'OperationErrorErrorsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'eiLocation'
+-- * 'oeeiLocation'
 --
--- * 'eiCode'
+-- * 'oeeiCode'
 --
--- * 'eiMessage'
-errorsItem
-    :: ErrorsItem
-errorsItem =
-    ErrorsItem
-    { _eiLocation = Nothing
-    , _eiCode = Nothing
-    , _eiMessage = Nothing
+-- * 'oeeiMessage'
+operationErrorErrorsItem
+    :: OperationErrorErrorsItem
+operationErrorErrorsItem =
+    OperationErrorErrorsItem
+    { _oeeiLocation = Nothing
+    , _oeeiCode = Nothing
+    , _oeeiMessage = Nothing
     }
 
 -- | [Output Only] Indicates the field in the request which caused the error.
 -- This property is optional.
-eiLocation :: Lens' ErrorsItem (Maybe Text)
-eiLocation
-  = lens _eiLocation (\ s a -> s{_eiLocation = a})
+oeeiLocation :: Lens' OperationErrorErrorsItem (Maybe Text)
+oeeiLocation
+  = lens _oeeiLocation (\ s a -> s{_oeeiLocation = a})
 
 -- | [Output Only] The error type identifier for this error.
-eiCode :: Lens' ErrorsItem (Maybe Text)
-eiCode = lens _eiCode (\ s a -> s{_eiCode = a})
+oeeiCode :: Lens' OperationErrorErrorsItem (Maybe Text)
+oeeiCode = lens _oeeiCode (\ s a -> s{_oeeiCode = a})
 
 -- | [Output Only] An optional, human-readable error message.
-eiMessage :: Lens' ErrorsItem (Maybe Text)
-eiMessage
-  = lens _eiMessage (\ s a -> s{_eiMessage = a})
+oeeiMessage :: Lens' OperationErrorErrorsItem (Maybe Text)
+oeeiMessage
+  = lens _oeeiMessage (\ s a -> s{_oeeiMessage = a})
 
-instance FromJSON ErrorsItem where
+instance FromJSON OperationErrorErrorsItem where
         parseJSON
-          = withObject "ErrorsItem"
+          = withObject "OperationErrorErrorsItem"
               (\ o ->
-                 ErrorsItem <$>
+                 OperationErrorErrorsItem <$>
                    (o .:? "location") <*> (o .:? "code") <*>
                      (o .:? "message"))
 
-instance ToJSON ErrorsItem where
-        toJSON ErrorsItem{..}
+instance ToJSON OperationErrorErrorsItem where
+        toJSON OperationErrorErrorsItem{..}
           = object
               (catMaybes
-                 [("location" .=) <$> _eiLocation,
-                  ("code" .=) <$> _eiCode,
-                  ("message" .=) <$> _eiMessage])
+                 [("location" .=) <$> _oeeiLocation,
+                  ("code" .=) <$> _oeeiCode,
+                  ("message" .=) <$> _oeeiMessage])
+
+--
+-- /See:/ 'operationWarningsItem' smart constructor.
+data OperationWarningsItem = OperationWarningsItem
+    { _owiData    :: !(Maybe [OperationWarningsItemDataItem])
+    , _owiCode    :: !(Maybe OperationWarningsItemCode)
+    , _owiMessage :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationWarningsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'owiData'
+--
+-- * 'owiCode'
+--
+-- * 'owiMessage'
+operationWarningsItem
+    :: OperationWarningsItem
+operationWarningsItem =
+    OperationWarningsItem
+    { _owiData = Nothing
+    , _owiCode = Nothing
+    , _owiMessage = Nothing
+    }
+
+-- | [Output only] Metadata for this warning in key:value format.
+owiData :: Lens' OperationWarningsItem [OperationWarningsItemDataItem]
+owiData
+  = lens _owiData (\ s a -> s{_owiData = a}) . _Default
+      . _Coerce
+
+-- | [Output only] The warning type identifier for this warning.
+owiCode :: Lens' OperationWarningsItem (Maybe OperationWarningsItemCode)
+owiCode = lens _owiCode (\ s a -> s{_owiCode = a})
+
+-- | [Output only] Optional human-readable details for this warning.
+owiMessage :: Lens' OperationWarningsItem (Maybe Text)
+owiMessage
+  = lens _owiMessage (\ s a -> s{_owiMessage = a})
+
+instance FromJSON OperationWarningsItem where
+        parseJSON
+          = withObject "OperationWarningsItem"
+              (\ o ->
+                 OperationWarningsItem <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON OperationWarningsItem where
+        toJSON OperationWarningsItem{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _owiData, ("code" .=) <$> _owiCode,
+                  ("message" .=) <$> _owiMessage])

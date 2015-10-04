@@ -54,9 +54,7 @@ type BucketsUpdateResource =
        Capture "bucket" Text :>
          QueryParam "ifMetagenerationMatch" Word64 :>
            QueryParam "ifMetagenerationNotMatch" Word64 :>
-             QueryParam "projection"
-               StorageBucketsUpdateProjection
-               :>
+             QueryParam "projection" BucketsUpdateProjection :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -64,7 +62,7 @@ type BucketsUpdateResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Bucket :> Put '[JSON] Bucket
+                             ReqBody '[OctetStream] Bucket :> Put '[JSON] Bucket
 
 -- | Updates a bucket.
 --
@@ -78,7 +76,7 @@ data BucketsUpdate' = BucketsUpdate'
     , _buPayload                  :: !Bucket
     , _buKey                      :: !(Maybe Key)
     , _buIfMetagenerationNotMatch :: !(Maybe Word64)
-    , _buProjection               :: !(Maybe StorageBucketsUpdateProjection)
+    , _buProjection               :: !(Maybe BucketsUpdateProjection)
     , _buOAuthToken               :: !(Maybe OAuthToken)
     , _buFields                   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -175,7 +173,7 @@ buIfMetagenerationNotMatch
       (\ s a -> s{_buIfMetagenerationNotMatch = a})
 
 -- | Set of properties to return. Defaults to full.
-buProjection :: Lens' BucketsUpdate' (Maybe StorageBucketsUpdateProjection)
+buProjection :: Lens' BucketsUpdate' (Maybe BucketsUpdateProjection)
 buProjection
   = lens _buProjection (\ s a -> s{_buProjection = a})
 

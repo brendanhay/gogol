@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.AccountPermissions.Get
     , accQuotaUser
     , accPrettyPrint
     , accUserIP
-    , accProfileId
+    , accProFileId
     , accKey
     , accId
     , accOAuthToken
@@ -67,7 +67,7 @@ data AccountPermissionsGet' = AccountPermissionsGet'
     { _accQuotaUser   :: !(Maybe Text)
     , _accPrettyPrint :: !Bool
     , _accUserIP      :: !(Maybe Text)
-    , _accProfileId   :: !Int64
+    , _accProFileId   :: !Int64
     , _accKey         :: !(Maybe Key)
     , _accId          :: !Int64
     , _accOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data AccountPermissionsGet' = AccountPermissionsGet'
 --
 -- * 'accUserIP'
 --
--- * 'accProfileId'
+-- * 'accProFileId'
 --
 -- * 'accKey'
 --
@@ -97,12 +97,12 @@ accountPermissionsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> AccountPermissionsGet'
-accountPermissionsGet' pAccProfileId_ pAccId_ =
+accountPermissionsGet' pAccProFileId_ pAccId_ =
     AccountPermissionsGet'
     { _accQuotaUser = Nothing
     , _accPrettyPrint = True
     , _accUserIP = Nothing
-    , _accProfileId = pAccProfileId_
+    , _accProFileId = pAccProFileId_
     , _accKey = Nothing
     , _accId = pAccId_
     , _accOAuthToken = Nothing
@@ -129,9 +129,9 @@ accUserIP
   = lens _accUserIP (\ s a -> s{_accUserIP = a})
 
 -- | User profile ID associated with this request.
-accProfileId :: Lens' AccountPermissionsGet' Int64
-accProfileId
-  = lens _accProfileId (\ s a -> s{_accProfileId = a})
+accProFileId :: Lens' AccountPermissionsGet' Int64
+accProFileId
+  = lens _accProFileId (\ s a -> s{_accProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -162,7 +162,7 @@ instance GoogleRequest AccountPermissionsGet' where
         type Rs AccountPermissionsGet' = AccountPermission
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AccountPermissionsGet'{..}
-          = go _accProfileId _accId _accQuotaUser
+          = go _accProFileId _accId _accQuotaUser
               (Just _accPrettyPrint)
               _accUserIP
               _accFields

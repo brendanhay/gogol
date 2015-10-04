@@ -57,7 +57,8 @@ type UsersUndeleteResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] UserUndelete :> Post '[JSON] ()
+                         ReqBody '[OctetStream] UserUndelete :>
+                           Post '[JSON] ()
 
 -- | Undelete a deleted user
 --

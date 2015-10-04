@@ -42,7 +42,7 @@ module Network.Google.Resource.DFAReporting.Creatives.List
     , clCampaignId
     , clTypes
     , clIds
-    , clProfileId
+    , clProFileId
     , clSortOrder
     , clActive
     , clKey
@@ -71,16 +71,13 @@ type CreativesListResource =
                  QueryParams "sizeIds" Int64 :>
                    QueryParams "companionCreativeIds" Int64 :>
                      QueryParam "campaignId" Int64 :>
-                       QueryParams "types" Types :>
+                       QueryParams "types" CreativesListTypes :>
                          QueryParams "ids" Int64 :>
-                           QueryParam "sortOrder"
-                             DfareportingCreativesListSortOrder
-                             :>
+                           QueryParam "sortOrder" CreativesListSortOrder :>
                              QueryParam "active" Bool :>
                                QueryParams "creativeFieldIds" Int64 :>
                                  QueryParam "pageToken" Text :>
-                                   QueryParam "sortField"
-                                     DfareportingCreativesListSortField
+                                   QueryParam "sortField" CreativesListSortField
                                      :>
                                      QueryParam "studioCreativeId" Int64 :>
                                        QueryParam "archived" Bool :>
@@ -111,15 +108,15 @@ data CreativesList' = CreativesList'
     , _clSizeIds              :: !(Maybe [Int64])
     , _clCompanionCreativeIds :: !(Maybe [Int64])
     , _clCampaignId           :: !(Maybe Int64)
-    , _clTypes                :: !(Maybe [Types])
+    , _clTypes                :: !(Maybe [CreativesListTypes])
     , _clIds                  :: !(Maybe [Int64])
-    , _clProfileId            :: !Int64
-    , _clSortOrder            :: !(Maybe DfareportingCreativesListSortOrder)
+    , _clProFileId            :: !Int64
+    , _clSortOrder            :: !(Maybe CreativesListSortOrder)
     , _clActive               :: !(Maybe Bool)
     , _clKey                  :: !(Maybe Key)
     , _clCreativeFieldIds     :: !(Maybe [Int64])
     , _clPageToken            :: !(Maybe Text)
-    , _clSortField            :: !(Maybe DfareportingCreativesListSortField)
+    , _clSortField            :: !(Maybe CreativesListSortField)
     , _clOAuthToken           :: !(Maybe OAuthToken)
     , _clStudioCreativeId     :: !(Maybe Int64)
     , _clArchived             :: !(Maybe Bool)
@@ -153,7 +150,7 @@ data CreativesList' = CreativesList'
 --
 -- * 'clIds'
 --
--- * 'clProfileId'
+-- * 'clProFileId'
 --
 -- * 'clSortOrder'
 --
@@ -179,7 +176,7 @@ data CreativesList' = CreativesList'
 creativesList'
     :: Int64 -- ^ 'profileId'
     -> CreativesList'
-creativesList' pClProfileId_ =
+creativesList' pClProFileId_ =
     CreativesList'
     { _clRenderingIds = Nothing
     , _clQuotaUser = Nothing
@@ -192,7 +189,7 @@ creativesList' pClProfileId_ =
     , _clCampaignId = Nothing
     , _clTypes = Nothing
     , _clIds = Nothing
-    , _clProfileId = pClProfileId_
+    , _clProFileId = pClProFileId_
     , _clSortOrder = Nothing
     , _clActive = Nothing
     , _clKey = Nothing
@@ -271,7 +268,7 @@ clCampaignId
   = lens _clCampaignId (\ s a -> s{_clCampaignId = a})
 
 -- | Select only creatives with these creative types.
-clTypes :: Lens' CreativesList' [Types]
+clTypes :: Lens' CreativesList' [CreativesListTypes]
 clTypes
   = lens _clTypes (\ s a -> s{_clTypes = a}) . _Default
       . _Coerce
@@ -283,12 +280,12 @@ clIds
       _Coerce
 
 -- | User profile ID associated with this request.
-clProfileId :: Lens' CreativesList' Int64
-clProfileId
-  = lens _clProfileId (\ s a -> s{_clProfileId = a})
+clProFileId :: Lens' CreativesList' Int64
+clProFileId
+  = lens _clProFileId (\ s a -> s{_clProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-clSortOrder :: Lens' CreativesList' (Maybe DfareportingCreativesListSortOrder)
+clSortOrder :: Lens' CreativesList' (Maybe CreativesListSortOrder)
 clSortOrder
   = lens _clSortOrder (\ s a -> s{_clSortOrder = a})
 
@@ -317,7 +314,7 @@ clPageToken
   = lens _clPageToken (\ s a -> s{_clPageToken = a})
 
 -- | Field by which to sort the list.
-clSortField :: Lens' CreativesList' (Maybe DfareportingCreativesListSortField)
+clSortField :: Lens' CreativesList' (Maybe CreativesListSortField)
 clSortField
   = lens _clSortField (\ s a -> s{_clSortField = a})
 
@@ -355,7 +352,7 @@ instance GoogleRequest CreativesList' where
         type Rs CreativesList' = CreativesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativesList'{..}
-          = go _clProfileId (_clRenderingIds ^. _Default)
+          = go _clProFileId (_clRenderingIds ^. _Default)
               _clAdvertiserId
               _clSearchString
               (_clSizeIds ^. _Default)

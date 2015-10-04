@@ -247,6 +247,83 @@ instance ToJSON MetricDescriptor where
                   ("name" .=) <$> _mdName, ("labels" .=) <$> _mdLabels,
                   ("description" .=) <$> _mdDescription])
 
+-- | The request of cloudmonitoring.timeseries.write
+--
+-- /See:/ 'writeTimeseriesRequest' smart constructor.
+data WriteTimeseriesRequest = WriteTimeseriesRequest
+    { _wtrCommonLabels :: !(Maybe WriteTimeseriesRequestCommonLabels)
+    , _wtrTimeseries   :: !(Maybe [TimeseriesPoint])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'WriteTimeseriesRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'wtrCommonLabels'
+--
+-- * 'wtrTimeseries'
+writeTimeseriesRequest
+    :: WriteTimeseriesRequest
+writeTimeseriesRequest =
+    WriteTimeseriesRequest
+    { _wtrCommonLabels = Nothing
+    , _wtrTimeseries = Nothing
+    }
+
+-- | The label\'s name.
+wtrCommonLabels :: Lens' WriteTimeseriesRequest (Maybe WriteTimeseriesRequestCommonLabels)
+wtrCommonLabels
+  = lens _wtrCommonLabels
+      (\ s a -> s{_wtrCommonLabels = a})
+
+-- | Provide time series specific labels and the data points for each time
+-- series. The labels in timeseries and the common_labels should form a
+-- complete list of labels that required by the metric.
+wtrTimeseries :: Lens' WriteTimeseriesRequest [TimeseriesPoint]
+wtrTimeseries
+  = lens _wtrTimeseries
+      (\ s a -> s{_wtrTimeseries = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON WriteTimeseriesRequest where
+        parseJSON
+          = withObject "WriteTimeseriesRequest"
+              (\ o ->
+                 WriteTimeseriesRequest <$>
+                   (o .:? "commonLabels") <*>
+                     (o .:? "timeseries" .!= mempty))
+
+instance ToJSON WriteTimeseriesRequest where
+        toJSON WriteTimeseriesRequest{..}
+          = object
+              (catMaybes
+                 [("commonLabels" .=) <$> _wtrCommonLabels,
+                  ("timeseries" .=) <$> _wtrTimeseries])
+
+-- | The label\'s name.
+--
+-- /See:/ 'writeTimeseriesRequestCommonLabels' smart constructor.
+data WriteTimeseriesRequestCommonLabels =
+    WriteTimeseriesRequestCommonLabels
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'WriteTimeseriesRequestCommonLabels' with the minimum fields required to make a request.
+--
+writeTimeseriesRequestCommonLabels
+    :: WriteTimeseriesRequestCommonLabels
+writeTimeseriesRequestCommonLabels = WriteTimeseriesRequestCommonLabels
+
+instance FromJSON WriteTimeseriesRequestCommonLabels
+         where
+        parseJSON
+          = withObject "WriteTimeseriesRequestCommonLabels"
+              (\ o -> pure WriteTimeseriesRequestCommonLabels)
+
+instance ToJSON WriteTimeseriesRequestCommonLabels
+         where
+        toJSON = const (Object mempty)
+
 -- | A label in a metric is a description of this metric, including the key
 -- of this description (what the description is), and the value for this
 -- description.
@@ -349,60 +426,6 @@ instance ToJSON PointDistributionUnderflowBucket
               (catMaybes
                  [("upperBound" .=) <$> _pdubUpperBound,
                   ("count" .=) <$> _pdubCount])
-
--- | The request of cloudmonitoring.timeseries.write
---
--- /See:/ 'writeTimeseriesRequest' smart constructor.
-data WriteTimeseriesRequest = WriteTimeseriesRequest
-    { _wtrCommonLabels :: !(Maybe CommonLabels)
-    , _wtrTimeseries   :: !(Maybe [TimeseriesPoint])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'WriteTimeseriesRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'wtrCommonLabels'
---
--- * 'wtrTimeseries'
-writeTimeseriesRequest
-    :: WriteTimeseriesRequest
-writeTimeseriesRequest =
-    WriteTimeseriesRequest
-    { _wtrCommonLabels = Nothing
-    , _wtrTimeseries = Nothing
-    }
-
--- | The label\'s name.
-wtrCommonLabels :: Lens' WriteTimeseriesRequest (Maybe CommonLabels)
-wtrCommonLabels
-  = lens _wtrCommonLabels
-      (\ s a -> s{_wtrCommonLabels = a})
-
--- | Provide time series specific labels and the data points for each time
--- series. The labels in timeseries and the common_labels should form a
--- complete list of labels that required by the metric.
-wtrTimeseries :: Lens' WriteTimeseriesRequest [TimeseriesPoint]
-wtrTimeseries
-  = lens _wtrTimeseries
-      (\ s a -> s{_wtrTimeseries = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON WriteTimeseriesRequest where
-        parseJSON
-          = withObject "WriteTimeseriesRequest"
-              (\ o ->
-                 WriteTimeseriesRequest <$>
-                   (o .:? "commonLabels") <*>
-                     (o .:? "timeseries" .!= mempty))
-
-instance ToJSON WriteTimeseriesRequest where
-        toJSON WriteTimeseriesRequest{..}
-          = object
-              (catMaybes
-                 [("commonLabels" .=) <$> _wtrCommonLabels,
-                  ("timeseries" .=) <$> _wtrTimeseries])
 
 -- | The response of cloudmonitoring.metricDescriptors.list.
 --
@@ -508,42 +531,6 @@ instance ToJSON ListTimeseriesDescriptorsRequest
         toJSON ListTimeseriesDescriptorsRequest{..}
           = object (catMaybes [Just ("kind" .= _ltdrKind)])
 
--- | The response of cloudmonitoring.timeseries.write
---
--- /See:/ 'writeTimeseriesResponse' smart constructor.
-newtype WriteTimeseriesResponse = WriteTimeseriesResponse
-    { _wtrKind :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'WriteTimeseriesResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'wtrKind'
-writeTimeseriesResponse
-    :: WriteTimeseriesResponse
-writeTimeseriesResponse =
-    WriteTimeseriesResponse
-    { _wtrKind = "cloudmonitoring#writeTimeseriesResponse"
-    }
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"cloudmonitoring#writeTimeseriesResponse\".
-wtrKind :: Lens' WriteTimeseriesResponse Text
-wtrKind = lens _wtrKind (\ s a -> s{_wtrKind = a})
-
-instance FromJSON WriteTimeseriesResponse where
-        parseJSON
-          = withObject "WriteTimeseriesResponse"
-              (\ o ->
-                 WriteTimeseriesResponse <$>
-                   (o .:? "kind" .!=
-                      "cloudmonitoring#writeTimeseriesResponse"))
-
-instance ToJSON WriteTimeseriesResponse where
-        toJSON WriteTimeseriesResponse{..}
-          = object (catMaybes [Just ("kind" .= _wtrKind)])
-
 -- | The label\'s name.
 --
 -- /See:/ 'timeseriesDescriptorLabels' smart constructor.
@@ -563,27 +550,6 @@ instance FromJSON TimeseriesDescriptorLabels where
               (\ o -> pure TimeseriesDescriptorLabels)
 
 instance ToJSON TimeseriesDescriptorLabels where
-        toJSON = const (Object mempty)
-
--- | The label\'s name.
---
--- /See:/ 'commonLabels' smart constructor.
-data CommonLabels =
-    CommonLabels
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CommonLabels' with the minimum fields required to make a request.
---
-commonLabels
-    :: CommonLabels
-commonLabels = CommonLabels
-
-instance FromJSON CommonLabels where
-        parseJSON
-          = withObject "CommonLabels"
-              (\ o -> pure CommonLabels)
-
-instance ToJSON CommonLabels where
         toJSON = const (Object mempty)
 
 -- | The histogram\'s bucket. Buckets that form the histogram of a
@@ -648,6 +614,42 @@ instance ToJSON PointDistributionBucket where
                  [("upperBound" .=) <$> _pdbUpperBound,
                   ("count" .=) <$> _pdbCount,
                   ("lowerBound" .=) <$> _pdbLowerBound])
+
+-- | The response of cloudmonitoring.timeseries.write
+--
+-- /See:/ 'writeTimeseriesResponse' smart constructor.
+newtype WriteTimeseriesResponse = WriteTimeseriesResponse
+    { _wtrKind :: Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'WriteTimeseriesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'wtrKind'
+writeTimeseriesResponse
+    :: WriteTimeseriesResponse
+writeTimeseriesResponse =
+    WriteTimeseriesResponse
+    { _wtrKind = "cloudmonitoring#writeTimeseriesResponse"
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"cloudmonitoring#writeTimeseriesResponse\".
+wtrKind :: Lens' WriteTimeseriesResponse Text
+wtrKind = lens _wtrKind (\ s a -> s{_wtrKind = a})
+
+instance FromJSON WriteTimeseriesResponse where
+        parseJSON
+          = withObject "WriteTimeseriesResponse"
+              (\ o ->
+                 WriteTimeseriesResponse <$>
+                   (o .:? "kind" .!=
+                      "cloudmonitoring#writeTimeseriesResponse"))
+
+instance ToJSON WriteTimeseriesResponse where
+        toJSON WriteTimeseriesResponse{..}
+          = object (catMaybes [Just ("kind" .= _wtrKind)])
 
 --
 -- /See:/ 'timeseriesDescriptorLabel' smart constructor.
@@ -1105,6 +1107,79 @@ instance ToJSON TimeseriesPoint where
                  [("point" .=) <$> _tpPoint,
                   ("timeseriesDesc" .=) <$> _tpTimeseriesDesc])
 
+-- | The response of cloudmonitoring.metricDescriptors.delete.
+--
+-- /See:/ 'deleteMetricDescriptorResponse' smart constructor.
+newtype DeleteMetricDescriptorResponse = DeleteMetricDescriptorResponse
+    { _dmdrKind :: Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DeleteMetricDescriptorResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dmdrKind'
+deleteMetricDescriptorResponse
+    :: DeleteMetricDescriptorResponse
+deleteMetricDescriptorResponse =
+    DeleteMetricDescriptorResponse
+    { _dmdrKind = "cloudmonitoring#deleteMetricDescriptorResponse"
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"cloudmonitoring#deleteMetricDescriptorResponse\".
+dmdrKind :: Lens' DeleteMetricDescriptorResponse Text
+dmdrKind = lens _dmdrKind (\ s a -> s{_dmdrKind = a})
+
+instance FromJSON DeleteMetricDescriptorResponse
+         where
+        parseJSON
+          = withObject "DeleteMetricDescriptorResponse"
+              (\ o ->
+                 DeleteMetricDescriptorResponse <$>
+                   (o .:? "kind" .!=
+                      "cloudmonitoring#deleteMetricDescriptorResponse"))
+
+instance ToJSON DeleteMetricDescriptorResponse where
+        toJSON DeleteMetricDescriptorResponse{..}
+          = object (catMaybes [Just ("kind" .= _dmdrKind)])
+
+-- | The request of cloudmonitoring.timeseries.list
+--
+-- /See:/ 'listTimeseriesRequest' smart constructor.
+newtype ListTimeseriesRequest = ListTimeseriesRequest
+    { _ltrtKind :: Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListTimeseriesRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ltrtKind'
+listTimeseriesRequest
+    :: ListTimeseriesRequest
+listTimeseriesRequest =
+    ListTimeseriesRequest
+    { _ltrtKind = "cloudmonitoring#listTimeseriesRequest"
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"cloudmonitoring#listTimeseriesRequest\".
+ltrtKind :: Lens' ListTimeseriesRequest Text
+ltrtKind = lens _ltrtKind (\ s a -> s{_ltrtKind = a})
+
+instance FromJSON ListTimeseriesRequest where
+        parseJSON
+          = withObject "ListTimeseriesRequest"
+              (\ o ->
+                 ListTimeseriesRequest <$>
+                   (o .:? "kind" .!=
+                      "cloudmonitoring#listTimeseriesRequest"))
+
+instance ToJSON ListTimeseriesRequest where
+        toJSON ListTimeseriesRequest{..}
+          = object (catMaybes [Just ("kind" .= _ltrtKind)])
+
 -- | TimeseriesDescriptor identifies a single time series.
 --
 -- /See:/ 'timeseriesDescriptor' smart constructor.
@@ -1160,79 +1235,6 @@ instance ToJSON TimeseriesDescriptor where
                  [("project" .=) <$> _tdProject,
                   ("metric" .=) <$> _tdMetric,
                   ("labels" .=) <$> _tdLabels])
-
--- | The request of cloudmonitoring.timeseries.list
---
--- /See:/ 'listTimeseriesRequest' smart constructor.
-newtype ListTimeseriesRequest = ListTimeseriesRequest
-    { _ltrtKind :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ListTimeseriesRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ltrtKind'
-listTimeseriesRequest
-    :: ListTimeseriesRequest
-listTimeseriesRequest =
-    ListTimeseriesRequest
-    { _ltrtKind = "cloudmonitoring#listTimeseriesRequest"
-    }
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"cloudmonitoring#listTimeseriesRequest\".
-ltrtKind :: Lens' ListTimeseriesRequest Text
-ltrtKind = lens _ltrtKind (\ s a -> s{_ltrtKind = a})
-
-instance FromJSON ListTimeseriesRequest where
-        parseJSON
-          = withObject "ListTimeseriesRequest"
-              (\ o ->
-                 ListTimeseriesRequest <$>
-                   (o .:? "kind" .!=
-                      "cloudmonitoring#listTimeseriesRequest"))
-
-instance ToJSON ListTimeseriesRequest where
-        toJSON ListTimeseriesRequest{..}
-          = object (catMaybes [Just ("kind" .= _ltrtKind)])
-
--- | The response of cloudmonitoring.metricDescriptors.delete.
---
--- /See:/ 'deleteMetricDescriptorResponse' smart constructor.
-newtype DeleteMetricDescriptorResponse = DeleteMetricDescriptorResponse
-    { _dmdrKind :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'DeleteMetricDescriptorResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'dmdrKind'
-deleteMetricDescriptorResponse
-    :: DeleteMetricDescriptorResponse
-deleteMetricDescriptorResponse =
-    DeleteMetricDescriptorResponse
-    { _dmdrKind = "cloudmonitoring#deleteMetricDescriptorResponse"
-    }
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"cloudmonitoring#deleteMetricDescriptorResponse\".
-dmdrKind :: Lens' DeleteMetricDescriptorResponse Text
-dmdrKind = lens _dmdrKind (\ s a -> s{_dmdrKind = a})
-
-instance FromJSON DeleteMetricDescriptorResponse
-         where
-        parseJSON
-          = withObject "DeleteMetricDescriptorResponse"
-              (\ o ->
-                 DeleteMetricDescriptorResponse <$>
-                   (o .:? "kind" .!=
-                      "cloudmonitoring#deleteMetricDescriptorResponse"))
-
-instance ToJSON DeleteMetricDescriptorResponse where
-        toJSON DeleteMetricDescriptorResponse{..}
-          = object (catMaybes [Just ("kind" .= _dmdrKind)])
 
 -- | The monitoring data is organized as metrics and stored as data points
 -- that are recorded over time. Each data point represents information like

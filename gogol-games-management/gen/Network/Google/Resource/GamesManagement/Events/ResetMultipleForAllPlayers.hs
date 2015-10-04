@@ -57,8 +57,9 @@ type EventsResetMultipleForAllPlayersResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] EventsResetMultipleForAllRequest :>
-                         Post '[JSON] ()
+                       ReqBody '[OctetStream]
+                         EventsResetMultipleForAllRequest
+                         :> Post '[JSON] ()
 
 -- | Resets events with the given IDs for all players. This method is only
 -- available to user accounts for your developer console. Only draft events

@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.DirectorySites.Get
     , dsgQuotaUser
     , dsgPrettyPrint
     , dsgUserIP
-    , dsgProfileId
+    , dsgProFileId
     , dsgKey
     , dsgId
     , dsgOAuthToken
@@ -66,7 +66,7 @@ data DirectorySitesGet' = DirectorySitesGet'
     { _dsgQuotaUser   :: !(Maybe Text)
     , _dsgPrettyPrint :: !Bool
     , _dsgUserIP      :: !(Maybe Text)
-    , _dsgProfileId   :: !Int64
+    , _dsgProFileId   :: !Int64
     , _dsgKey         :: !(Maybe Key)
     , _dsgId          :: !Int64
     , _dsgOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +83,7 @@ data DirectorySitesGet' = DirectorySitesGet'
 --
 -- * 'dsgUserIP'
 --
--- * 'dsgProfileId'
+-- * 'dsgProFileId'
 --
 -- * 'dsgKey'
 --
@@ -96,12 +96,12 @@ directorySitesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> DirectorySitesGet'
-directorySitesGet' pDsgProfileId_ pDsgId_ =
+directorySitesGet' pDsgProFileId_ pDsgId_ =
     DirectorySitesGet'
     { _dsgQuotaUser = Nothing
     , _dsgPrettyPrint = True
     , _dsgUserIP = Nothing
-    , _dsgProfileId = pDsgProfileId_
+    , _dsgProFileId = pDsgProFileId_
     , _dsgKey = Nothing
     , _dsgId = pDsgId_
     , _dsgOAuthToken = Nothing
@@ -128,9 +128,9 @@ dsgUserIP
   = lens _dsgUserIP (\ s a -> s{_dsgUserIP = a})
 
 -- | User profile ID associated with this request.
-dsgProfileId :: Lens' DirectorySitesGet' Int64
-dsgProfileId
-  = lens _dsgProfileId (\ s a -> s{_dsgProfileId = a})
+dsgProFileId :: Lens' DirectorySitesGet' Int64
+dsgProFileId
+  = lens _dsgProFileId (\ s a -> s{_dsgProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -161,7 +161,7 @@ instance GoogleRequest DirectorySitesGet' where
         type Rs DirectorySitesGet' = DirectorySite
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u DirectorySitesGet'{..}
-          = go _dsgProfileId _dsgId _dsgQuotaUser
+          = go _dsgProFileId _dsgId _dsgQuotaUser
               (Just _dsgPrettyPrint)
               _dsgUserIP
               _dsgFields

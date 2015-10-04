@@ -57,7 +57,7 @@ type ReadgroupsetsAlignResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] AlignReadGroupSetsRequest :>
+                       ReqBody '[OctetStream] AlignReadGroupSetsRequest :>
                          Post '[JSON] AlignReadGroupSetsResponse
 
 -- | Aligns read data from existing read group sets or files from Google

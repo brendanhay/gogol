@@ -62,9 +62,7 @@ type ObjectsInsertResource =
                QueryParam "ifGenerationMatch" Word64 :>
                  QueryParam "name" Text :>
                    QueryParam "ifMetagenerationNotMatch" Word64 :>
-                     QueryParam "projection"
-                       StorageObjectsInsertProjection
-                       :>
+                     QueryParam "projection" ObjectsInsertProjection :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
@@ -83,9 +81,7 @@ type ObjectsInsertResource =
                  QueryParam "ifGenerationMatch" Word64 :>
                    QueryParam "name" Text :>
                      QueryParam "ifMetagenerationNotMatch" Word64 :>
-                       QueryParam "projection"
-                         StorageObjectsInsertProjection
-                         :>
+                       QueryParam "projection" ObjectsInsertProjection :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
@@ -112,7 +108,7 @@ data ObjectsInsert' = ObjectsInsert'
     , _oiKey                      :: !(Maybe Key)
     , _oiName                     :: !(Maybe Text)
     , _oiIfMetagenerationNotMatch :: !(Maybe Word64)
-    , _oiProjection               :: !(Maybe StorageObjectsInsertProjection)
+    , _oiProjection               :: !(Maybe ObjectsInsertProjection)
     , _oiOAuthToken               :: !(Maybe OAuthToken)
     , _oiFields                   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -246,7 +242,7 @@ oiIfMetagenerationNotMatch
 
 -- | Set of properties to return. Defaults to noAcl, unless the object
 -- resource specifies the acl property, when it defaults to full.
-oiProjection :: Lens' ObjectsInsert' (Maybe StorageObjectsInsertProjection)
+oiProjection :: Lens' ObjectsInsert' (Maybe ObjectsInsertProjection)
 oiProjection
   = lens _oiProjection (\ s a -> s{_oiProjection = a})
 

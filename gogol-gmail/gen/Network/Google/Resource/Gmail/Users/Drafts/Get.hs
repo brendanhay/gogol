@@ -51,7 +51,7 @@ type UsersDraftsGetResource =
      Capture "userId" Text :>
        "drafts" :>
          Capture "id" Text :>
-           QueryParam "format" Format :>
+           QueryParam "format" UsersDraftsGetFormat :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -67,7 +67,7 @@ data UsersDraftsGet' = UsersDraftsGet'
     { _udgQuotaUser   :: !(Maybe Text)
     , _udgPrettyPrint :: !Bool
     , _udgUserIP      :: !(Maybe Text)
-    , _udgFormat      :: !Format
+    , _udgFormat      :: !UsersDraftsGetFormat
     , _udgUserId      :: !Text
     , _udgKey         :: !(Maybe Key)
     , _udgId          :: !Text
@@ -105,7 +105,7 @@ usersDraftsGet' pUdgUserId_ pUdgId_ =
     { _udgQuotaUser = Nothing
     , _udgPrettyPrint = True
     , _udgUserIP = Nothing
-    , _udgFormat = FFull
+    , _udgFormat = UDGFFull
     , _udgUserId = pUdgUserId_
     , _udgKey = Nothing
     , _udgId = pUdgId_
@@ -133,7 +133,7 @@ udgUserIP
   = lens _udgUserIP (\ s a -> s{_udgUserIP = a})
 
 -- | The format to return the draft in.
-udgFormat :: Lens' UsersDraftsGet' Format
+udgFormat :: Lens' UsersDraftsGet' UsersDraftsGetFormat
 udgFormat
   = lens _udgFormat (\ s a -> s{_udgFormat = a})
 

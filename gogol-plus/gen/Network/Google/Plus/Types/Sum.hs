@@ -17,37 +17,139 @@ module Network.Google.Plus.Types.Sum where
 
 import           Network.Google.Prelude
 
--- | Specifies how to order search results.
-data OrderBy
-    = Best
-      -- ^ @best@
-      -- Sort activities by relevance to the user, most relevant first.
-    | Recent
-      -- ^ @recent@
-      -- Sort activities by published date, most recent first.
+-- | The collection of moments to list.
+data MomentsListCollection
+    = Vault
+      -- ^ @vault@
+      -- All moments created by the requesting application for the authenticated
+      -- user.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable OrderBy
+instance Hashable MomentsListCollection
 
-instance FromText OrderBy where
+instance FromText MomentsListCollection where
     fromText = \case
-        "best" -> Just Best
-        "recent" -> Just Recent
+        "vault" -> Just Vault
         _ -> Nothing
 
-instance ToText OrderBy where
+instance ToText MomentsListCollection where
     toText = \case
-        Best -> "best"
-        Recent -> "recent"
+        Vault -> "vault"
 
-instance FromJSON OrderBy where
-    parseJSON = parseJSONText "OrderBy"
+instance FromJSON MomentsListCollection where
+    parseJSON = parseJSONText "MomentsListCollection"
 
-instance ToJSON OrderBy where
+instance ToJSON MomentsListCollection where
+    toJSON = toJSONText
+
+-- | The collection to which to write moments.
+data MomentsInsertCollection
+    = MICVault
+      -- ^ @vault@
+      -- The default collection for writing new moments.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable MomentsInsertCollection
+
+instance FromText MomentsInsertCollection where
+    fromText = \case
+        "vault" -> Just MICVault
+        _ -> Nothing
+
+instance ToText MomentsInsertCollection where
+    toText = \case
+        MICVault -> "vault"
+
+instance FromJSON MomentsInsertCollection where
+    parseJSON = parseJSONText "MomentsInsertCollection"
+
+instance ToJSON MomentsInsertCollection where
     toJSON = toJSONText
 
 -- | The collection of people to list.
-data PlusPeopleListCollection
+data PeopleListByActivityCollection
+    = Plusoners
+      -- ^ @plusoners@
+      -- List all people who have +1\'d this activity.
+    | Resharers
+      -- ^ @resharers@
+      -- List all people who have reshared this activity.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable PeopleListByActivityCollection
+
+instance FromText PeopleListByActivityCollection where
+    fromText = \case
+        "plusoners" -> Just Plusoners
+        "resharers" -> Just Resharers
+        _ -> Nothing
+
+instance ToText PeopleListByActivityCollection where
+    toText = \case
+        Plusoners -> "plusoners"
+        Resharers -> "resharers"
+
+instance FromJSON PeopleListByActivityCollection where
+    parseJSON = parseJSONText "PeopleListByActivityCollection"
+
+instance ToJSON PeopleListByActivityCollection where
+    toJSON = toJSONText
+
+-- | The order to return people in.
+data PeopleListOrderBy
+    = Alphabetical
+      -- ^ @alphabetical@
+      -- Order the people by their display name.
+    | Best
+      -- ^ @best@
+      -- Order people based on the relevence to the viewer.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable PeopleListOrderBy
+
+instance FromText PeopleListOrderBy where
+    fromText = \case
+        "alphabetical" -> Just Alphabetical
+        "best" -> Just Best
+        _ -> Nothing
+
+instance ToText PeopleListOrderBy where
+    toText = \case
+        Alphabetical -> "alphabetical"
+        Best -> "best"
+
+instance FromJSON PeopleListOrderBy where
+    parseJSON = parseJSONText "PeopleListOrderBy"
+
+instance ToJSON PeopleListOrderBy where
+    toJSON = toJSONText
+
+-- | The collection of activities to list.
+data ActivitiesListCollection
+    = Public
+      -- ^ @public@
+      -- All public activities created by the specified user.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ActivitiesListCollection
+
+instance FromText ActivitiesListCollection where
+    fromText = \case
+        "public" -> Just Public
+        _ -> Nothing
+
+instance ToText ActivitiesListCollection where
+    toText = \case
+        Public -> "public"
+
+instance FromJSON ActivitiesListCollection where
+    parseJSON = parseJSONText "ActivitiesListCollection"
+
+instance ToJSON ActivitiesListCollection where
+    toJSON = toJSONText
+
+-- | The collection of people to list.
+data PeopleListCollection
     = Connected
       -- ^ @connected@
       -- The list of visible people in the authenticated user\'s circles who also
@@ -59,51 +161,56 @@ data PlusPeopleListCollection
       -- limited to the circles visible to the requesting application.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable PlusPeopleListCollection
+instance Hashable PeopleListCollection
 
-instance FromText PlusPeopleListCollection where
+instance FromText PeopleListCollection where
     fromText = \case
         "connected" -> Just Connected
         "visible" -> Just Visible
         _ -> Nothing
 
-instance ToText PlusPeopleListCollection where
+instance ToText PeopleListCollection where
     toText = \case
         Connected -> "connected"
         Visible -> "visible"
 
-instance FromJSON PlusPeopleListCollection where
-    parseJSON = parseJSONText "PlusPeopleListCollection"
+instance FromJSON PeopleListCollection where
+    parseJSON = parseJSONText "PeopleListCollection"
 
-instance ToJSON PlusPeopleListCollection where
+instance ToJSON PeopleListCollection where
     toJSON = toJSONText
 
--- | The collection of activities to list.
-data Collection
-    = Public
-      -- ^ @public@
-      -- All public activities created by the specified user.
+-- | Specifies how to order search results.
+data ActivitiesSearchOrderBy
+    = ASOBBest
+      -- ^ @best@
+      -- Sort activities by relevance to the user, most relevant first.
+    | ASOBRecent
+      -- ^ @recent@
+      -- Sort activities by published date, most recent first.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable Collection
+instance Hashable ActivitiesSearchOrderBy
 
-instance FromText Collection where
+instance FromText ActivitiesSearchOrderBy where
     fromText = \case
-        "public" -> Just Public
+        "best" -> Just ASOBBest
+        "recent" -> Just ASOBRecent
         _ -> Nothing
 
-instance ToText Collection where
+instance ToText ActivitiesSearchOrderBy where
     toText = \case
-        Public -> "public"
+        ASOBBest -> "best"
+        ASOBRecent -> "recent"
 
-instance FromJSON Collection where
-    parseJSON = parseJSONText "Collection"
+instance FromJSON ActivitiesSearchOrderBy where
+    parseJSON = parseJSONText "ActivitiesSearchOrderBy"
 
-instance ToJSON Collection where
+instance ToJSON ActivitiesSearchOrderBy where
     toJSON = toJSONText
 
 -- | The order in which to sort the list of comments.
-data SortOrder
+data CommentsListSortOrder
     = Ascending
       -- ^ @ascending@
       -- Sort oldest comments first.
@@ -112,128 +219,21 @@ data SortOrder
       -- Sort newest comments first.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable SortOrder
+instance Hashable CommentsListSortOrder
 
-instance FromText SortOrder where
+instance FromText CommentsListSortOrder where
     fromText = \case
         "ascending" -> Just Ascending
         "descending" -> Just Descending
         _ -> Nothing
 
-instance ToText SortOrder where
+instance ToText CommentsListSortOrder where
     toText = \case
         Ascending -> "ascending"
         Descending -> "descending"
 
-instance FromJSON SortOrder where
-    parseJSON = parseJSONText "SortOrder"
+instance FromJSON CommentsListSortOrder where
+    parseJSON = parseJSONText "CommentsListSortOrder"
 
-instance ToJSON SortOrder where
-    toJSON = toJSONText
-
--- | The collection of moments to list.
-data PlusMomentsListCollection
-    = Vault
-      -- ^ @vault@
-      -- All moments created by the requesting application for the authenticated
-      -- user.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable PlusMomentsListCollection
-
-instance FromText PlusMomentsListCollection where
-    fromText = \case
-        "vault" -> Just Vault
-        _ -> Nothing
-
-instance ToText PlusMomentsListCollection where
-    toText = \case
-        Vault -> "vault"
-
-instance FromJSON PlusMomentsListCollection where
-    parseJSON = parseJSONText "PlusMomentsListCollection"
-
-instance ToJSON PlusMomentsListCollection where
-    toJSON = toJSONText
-
--- | The collection to which to write moments.
-data PlusMomentsInsertCollection
-    = PMICVault
-      -- ^ @vault@
-      -- The default collection for writing new moments.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable PlusMomentsInsertCollection
-
-instance FromText PlusMomentsInsertCollection where
-    fromText = \case
-        "vault" -> Just PMICVault
-        _ -> Nothing
-
-instance ToText PlusMomentsInsertCollection where
-    toText = \case
-        PMICVault -> "vault"
-
-instance FromJSON PlusMomentsInsertCollection where
-    parseJSON = parseJSONText "PlusMomentsInsertCollection"
-
-instance ToJSON PlusMomentsInsertCollection where
-    toJSON = toJSONText
-
--- | The collection of people to list.
-data PlusPeopleListByActivityCollection
-    = PPLBACPlusoners
-      -- ^ @plusoners@
-      -- List all people who have +1\'d this activity.
-    | PPLBACResharers
-      -- ^ @resharers@
-      -- List all people who have reshared this activity.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable PlusPeopleListByActivityCollection
-
-instance FromText PlusPeopleListByActivityCollection where
-    fromText = \case
-        "plusoners" -> Just PPLBACPlusoners
-        "resharers" -> Just PPLBACResharers
-        _ -> Nothing
-
-instance ToText PlusPeopleListByActivityCollection where
-    toText = \case
-        PPLBACPlusoners -> "plusoners"
-        PPLBACResharers -> "resharers"
-
-instance FromJSON PlusPeopleListByActivityCollection where
-    parseJSON = parseJSONText "PlusPeopleListByActivityCollection"
-
-instance ToJSON PlusPeopleListByActivityCollection where
-    toJSON = toJSONText
-
--- | The order to return people in.
-data PlusPeopleListOrderBy
-    = PPLOBAlphabetical
-      -- ^ @alphabetical@
-      -- Order the people by their display name.
-    | PPLOBBest
-      -- ^ @best@
-      -- Order people based on the relevence to the viewer.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable PlusPeopleListOrderBy
-
-instance FromText PlusPeopleListOrderBy where
-    fromText = \case
-        "alphabetical" -> Just PPLOBAlphabetical
-        "best" -> Just PPLOBBest
-        _ -> Nothing
-
-instance ToText PlusPeopleListOrderBy where
-    toText = \case
-        PPLOBAlphabetical -> "alphabetical"
-        PPLOBBest -> "best"
-
-instance FromJSON PlusPeopleListOrderBy where
-    parseJSON = parseJSONText "PlusPeopleListOrderBy"
-
-instance ToJSON PlusPeopleListOrderBy where
+instance ToJSON CommentsListSortOrder where
     toJSON = toJSONText

@@ -58,7 +58,7 @@ type MarketplaceDealsUpdateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] EditAllOrderDealsRequest :>
+                           ReqBody '[OctetStream] EditAllOrderDealsRequest :>
                              Post '[JSON] EditAllOrderDealsResponse
 
 -- | Replaces all the deals in the order with the passed in deals

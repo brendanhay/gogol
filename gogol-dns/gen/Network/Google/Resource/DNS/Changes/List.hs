@@ -58,7 +58,7 @@ type ChangesListResource =
              QueryParam "sortOrder" Text :>
                QueryParam "pageToken" Text :>
                  QueryParam "maxResults" Int32 :>
-                   QueryParam "sortBy" SortBy :>
+                   QueryParam "sortBy" ChangesListSortBy :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -83,7 +83,7 @@ data ChangesList' = ChangesList'
     , _clManagedZone :: !Text
     , _clMaxResults  :: !(Maybe Int32)
     , _clFields      :: !(Maybe Text)
-    , _clSortBy      :: !SortBy
+    , _clSortBy      :: !ChangesListSortBy
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangesList'' with the minimum fields required to make a request.
@@ -196,7 +196,7 @@ clFields :: Lens' ChangesList' (Maybe Text)
 clFields = lens _clFields (\ s a -> s{_clFields = a})
 
 -- | Sorting criterion. The only supported value is change sequence.
-clSortBy :: Lens' ChangesList' SortBy
+clSortBy :: Lens' ChangesList' ChangesListSortBy
 clSortBy = lens _clSortBy (\ s a -> s{_clSortBy = a})
 
 instance GoogleAuth ChangesList' where

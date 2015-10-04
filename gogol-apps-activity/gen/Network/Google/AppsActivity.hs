@@ -43,6 +43,9 @@ module Network.Google.AppsActivity
     , photo
     , pURL
 
+    -- ** EventPrimaryEventType
+    , EventPrimaryEventType (..)
+
     -- ** Event
     , Event
     , event
@@ -56,6 +59,9 @@ module Network.Google.AppsActivity
     , eTarget
     , eMove
 
+    -- ** PermissionRole
+    , PermissionRole (..)
+
     -- ** ListActivitiesResponse
     , ListActivitiesResponse
     , listActivitiesResponse
@@ -68,8 +74,8 @@ module Network.Google.AppsActivity
     , pcAddedPermissions
     , pcRemovedPermissions
 
-    -- ** PrimaryEventType
-    , PrimaryEventType (..)
+    -- ** PermissionType
+    , PermissionType (..)
 
     -- ** User
     , User
@@ -77,11 +83,8 @@ module Network.Google.AppsActivity
     , uPhoto
     , uName
 
-    -- ** GroupingStrategy
-    , GroupingStrategy (..)
-
-    -- ** Role
-    , Role (..)
+    -- ** EventAdditionalEventTypesItem
+    , EventAdditionalEventTypesItem (..)
 
     -- ** Activity
     , Activity
@@ -89,17 +92,14 @@ module Network.Google.AppsActivity
     , aSingleEvents
     , aCombinedEvent
 
-    -- ** Type
-    , Type (..)
+    -- ** ActivitiesListGroupingStrategy
+    , ActivitiesListGroupingStrategy (..)
 
     -- ** Rename
     , Rename
     , rename
     , rNewTitle
     , rOldTitle
-
-    -- ** AdditionalEventTypesItem
-    , AdditionalEventTypesItem (..)
 
     -- ** Permission
     , Permission
@@ -111,18 +111,18 @@ module Network.Google.AppsActivity
     , pType
     , pPermissionId
 
-    -- ** Move
-    , Move
-    , move
-    , mAddedParents
-    , mRemovedParents
-
     -- ** Target
     , Target
     , target
     , tMimeType
     , tName
     , tId
+
+    -- ** Move
+    , Move
+    , move
+    , mAddedParents
+    , mRemovedParents
     ) where
 
 import           Network.Google.AppsActivity.Types

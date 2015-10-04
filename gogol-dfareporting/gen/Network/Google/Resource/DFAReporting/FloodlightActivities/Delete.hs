@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.FloodlightActivities.Delete
     , fadQuotaUser
     , fadPrettyPrint
     , fadUserIP
-    , fadProfileId
+    , fadProFileId
     , fadKey
     , fadId
     , fadOAuthToken
@@ -66,7 +66,7 @@ data FloodlightActivitiesDelete' = FloodlightActivitiesDelete'
     { _fadQuotaUser   :: !(Maybe Text)
     , _fadPrettyPrint :: !Bool
     , _fadUserIP      :: !(Maybe Text)
-    , _fadProfileId   :: !Int64
+    , _fadProFileId   :: !Int64
     , _fadKey         :: !(Maybe Key)
     , _fadId          :: !Int64
     , _fadOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +83,7 @@ data FloodlightActivitiesDelete' = FloodlightActivitiesDelete'
 --
 -- * 'fadUserIP'
 --
--- * 'fadProfileId'
+-- * 'fadProFileId'
 --
 -- * 'fadKey'
 --
@@ -96,12 +96,12 @@ floodlightActivitiesDelete'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> FloodlightActivitiesDelete'
-floodlightActivitiesDelete' pFadProfileId_ pFadId_ =
+floodlightActivitiesDelete' pFadProFileId_ pFadId_ =
     FloodlightActivitiesDelete'
     { _fadQuotaUser = Nothing
     , _fadPrettyPrint = True
     , _fadUserIP = Nothing
-    , _fadProfileId = pFadProfileId_
+    , _fadProFileId = pFadProFileId_
     , _fadKey = Nothing
     , _fadId = pFadId_
     , _fadOAuthToken = Nothing
@@ -128,9 +128,9 @@ fadUserIP
   = lens _fadUserIP (\ s a -> s{_fadUserIP = a})
 
 -- | User profile ID associated with this request.
-fadProfileId :: Lens' FloodlightActivitiesDelete' Int64
-fadProfileId
-  = lens _fadProfileId (\ s a -> s{_fadProfileId = a})
+fadProFileId :: Lens' FloodlightActivitiesDelete' Int64
+fadProFileId
+  = lens _fadProFileId (\ s a -> s{_fadProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -162,7 +162,7 @@ instance GoogleRequest FloodlightActivitiesDelete'
         type Rs FloodlightActivitiesDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u FloodlightActivitiesDelete'{..}
-          = go _fadProfileId _fadId _fadQuotaUser
+          = go _fadProFileId _fadId _fadQuotaUser
               (Just _fadPrettyPrint)
               _fadUserIP
               _fadFields

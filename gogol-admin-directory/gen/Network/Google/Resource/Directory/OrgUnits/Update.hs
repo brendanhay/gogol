@@ -59,7 +59,7 @@ type OrgUnitsUpdateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] OrgUnit :> Put '[JSON] OrgUnit
+                           ReqBody '[OctetStream] OrgUnit :> Put '[JSON] OrgUnit
 
 -- | Update Organization Unit
 --

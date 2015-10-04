@@ -35,7 +35,7 @@ module Network.Google.Resource.DFAReporting.CreativeFields.Patch
     , cfpQuotaUser
     , cfpPrettyPrint
     , cfpUserIP
-    , cfpProfileId
+    , cfpProFileId
     , cfpPayload
     , cfpKey
     , cfpId
@@ -60,7 +60,7 @@ type CreativeFieldsPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] CreativeField :>
+                           ReqBody '[OctetStream] CreativeField :>
                              Patch '[JSON] CreativeField
 
 -- | Updates an existing creative field. This method supports patch
@@ -71,7 +71,7 @@ data CreativeFieldsPatch' = CreativeFieldsPatch'
     { _cfpQuotaUser   :: !(Maybe Text)
     , _cfpPrettyPrint :: !Bool
     , _cfpUserIP      :: !(Maybe Text)
-    , _cfpProfileId   :: !Int64
+    , _cfpProFileId   :: !Int64
     , _cfpPayload     :: !CreativeField
     , _cfpKey         :: !(Maybe Key)
     , _cfpId          :: !Int64
@@ -89,7 +89,7 @@ data CreativeFieldsPatch' = CreativeFieldsPatch'
 --
 -- * 'cfpUserIP'
 --
--- * 'cfpProfileId'
+-- * 'cfpProFileId'
 --
 -- * 'cfpPayload'
 --
@@ -105,12 +105,12 @@ creativeFieldsPatch'
     -> CreativeField -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> CreativeFieldsPatch'
-creativeFieldsPatch' pCfpProfileId_ pCfpPayload_ pCfpId_ =
+creativeFieldsPatch' pCfpProFileId_ pCfpPayload_ pCfpId_ =
     CreativeFieldsPatch'
     { _cfpQuotaUser = Nothing
     , _cfpPrettyPrint = True
     , _cfpUserIP = Nothing
-    , _cfpProfileId = pCfpProfileId_
+    , _cfpProFileId = pCfpProFileId_
     , _cfpPayload = pCfpPayload_
     , _cfpKey = Nothing
     , _cfpId = pCfpId_
@@ -138,9 +138,9 @@ cfpUserIP
   = lens _cfpUserIP (\ s a -> s{_cfpUserIP = a})
 
 -- | User profile ID associated with this request.
-cfpProfileId :: Lens' CreativeFieldsPatch' Int64
-cfpProfileId
-  = lens _cfpProfileId (\ s a -> s{_cfpProfileId = a})
+cfpProFileId :: Lens' CreativeFieldsPatch' Int64
+cfpProFileId
+  = lens _cfpProFileId (\ s a -> s{_cfpProFileId = a})
 
 -- | Multipart request metadata.
 cfpPayload :: Lens' CreativeFieldsPatch' CreativeField
@@ -176,7 +176,7 @@ instance GoogleRequest CreativeFieldsPatch' where
         type Rs CreativeFieldsPatch' = CreativeField
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeFieldsPatch'{..}
-          = go _cfpProfileId (Just _cfpId) _cfpQuotaUser
+          = go _cfpProFileId (Just _cfpId) _cfpQuotaUser
               (Just _cfpPrettyPrint)
               _cfpUserIP
               _cfpFields

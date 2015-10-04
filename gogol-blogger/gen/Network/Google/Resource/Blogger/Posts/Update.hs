@@ -69,7 +69,8 @@ type PostsUpdateResource =
                                QueryParam "key" Key :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
-                                     ReqBody '[JSON] Post :> Put '[JSON] Post
+                                     ReqBody '[OctetStream] Post :>
+                                       Put '[JSON] Post
 
 -- | Update a post.
 --

@@ -17,17 +17,6 @@ module Network.Google.DoubleClickSearch.Types
     -- * Service URL
       doubleClickSearchURL
 
-    -- * ReportScope
-    , ReportScope
-    , reportScope
-    , rsKeywordId
-    , rsAdGroupId
-    , rsEngineAccountId
-    , rsAgencyId
-    , rsAdvertiserId
-    , rsCampaignId
-    , rsAdId
-
     -- * ReportRow
     , ReportRow
     , reportRow
@@ -50,19 +39,11 @@ module Network.Google.DoubleClickSearch.Types
     , rrVerifySingleTimeZone
     , rrRowCount
 
-    -- * TimeRange
-    , TimeRange
-    , timeRange
-    , trEndDate
-    , trChangedAttributesSinceTimestamp
-    , trStartDate
-    , trChangedMetricsSinceTimestamp
-
-    -- * FilesItem
-    , FilesItem
-    , filesItem
-    , fiURL
-    , fiByteCount
+    -- * ReportRequestOrderByItem
+    , ReportRequestOrderByItem
+    , reportRequestOrderByItem
+    , rrobiSortOrder
+    , rrobiColumn
 
     -- * Report
     , Report
@@ -77,17 +58,18 @@ module Network.Google.DoubleClickSearch.Types
     , rRowCount
     , rRequest
 
-    -- * FiltersItem
-    , FiltersItem
-    , filtersItem
-    , fiOperator
-    , fiValues
-    , fiColumn
+    -- * ReportFilesItem
+    , ReportFilesItem
+    , reportFilesItem
+    , rfiURL
+    , rfiByteCount
 
-    -- * UpdateAvailabilityRequest
-    , UpdateAvailabilityRequest
-    , updateAvailabilityRequest
-    , uarAvailabilities
+    -- * ReportRequestFiltersItem
+    , ReportRequestFiltersItem
+    , reportRequestFiltersItem
+    , rrfiOperator
+    , rrfiValues
+    , rrfiColumn
 
     -- * Availability
     , Availability
@@ -98,6 +80,11 @@ module Network.Google.DoubleClickSearch.Types
     , aSegmentationName
     , aAvailabilityTimestamp
     , aSegmentationType
+
+    -- * UpdateAvailabilityRequest
+    , UpdateAvailabilityRequest
+    , updateAvailabilityRequest
+    , uarAvailabilities
 
     -- * CustomMetric
     , CustomMetric
@@ -123,6 +110,14 @@ module Network.Google.DoubleClickSearch.Types
     , racsHeaderText
     , racsPlatformSource
     , racsColumnName
+
+    -- * ReportRequestTimeRange
+    , ReportRequestTimeRange
+    , reportRequestTimeRange
+    , rrtrEndDate
+    , rrtrChangedAttributesSinceTimestamp
+    , rrtrStartDate
+    , rrtrChangedMetricsSinceTimestamp
 
     -- * Conversion
     , Conversion
@@ -161,12 +156,6 @@ module Network.Google.DoubleClickSearch.Types
     , cProductId
     , cProductGroupId
 
-    -- * OrderByItem
-    , OrderByItem
-    , orderByItem
-    , obiSortOrder
-    , obiColumn
-
     -- * SavedColumn
     , SavedColumn
     , savedColumn
@@ -174,16 +163,27 @@ module Network.Google.DoubleClickSearch.Types
     , scKind
     , scType
 
-    -- * UpdateAvailabilityResponse
-    , UpdateAvailabilityResponse
-    , updateAvailabilityResponse
-    , uAvailabilities
-
     -- * CustomDimension
     , CustomDimension
     , customDimension
     , cdValue
     , cdName
+
+    -- * UpdateAvailabilityResponse
+    , UpdateAvailabilityResponse
+    , updateAvailabilityResponse
+    , uAvailabilities
+
+    -- * ReportRequestReportScope
+    , ReportRequestReportScope
+    , reportRequestReportScope
+    , rrrsKeywordId
+    , rrrsAdGroupId
+    , rrrsEngineAccountId
+    , rrrsAgencyId
+    , rrrsAdvertiserId
+    , rrrsCampaignId
+    , rrrsAdId
 
     -- * SavedColumnList
     , SavedColumnList

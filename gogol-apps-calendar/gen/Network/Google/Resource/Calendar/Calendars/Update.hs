@@ -56,7 +56,8 @@ type CalendarsUpdateResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Calendar :> Put '[JSON] Calendar
+                       ReqBody '[OctetStream] Calendar :>
+                         Put '[JSON] Calendar
 
 -- | Updates metadata for a calendar.
 --

@@ -59,7 +59,7 @@ type TrainedModelsPredictResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Input :> Post '[JSON] Output
+                           ReqBody '[OctetStream] Input :> Post '[JSON] Output
 
 -- | Submit model id and request a prediction.
 --

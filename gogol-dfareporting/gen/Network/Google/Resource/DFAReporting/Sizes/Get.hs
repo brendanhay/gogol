@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Sizes.Get
     , sizQuotaUser
     , sizPrettyPrint
     , sizUserIP
-    , sizProfileId
+    , sizProFileId
     , sizKey
     , sizId
     , sizOAuthToken
@@ -66,7 +66,7 @@ data SizesGet' = SizesGet'
     { _sizQuotaUser   :: !(Maybe Text)
     , _sizPrettyPrint :: !Bool
     , _sizUserIP      :: !(Maybe Text)
-    , _sizProfileId   :: !Int64
+    , _sizProFileId   :: !Int64
     , _sizKey         :: !(Maybe Key)
     , _sizId          :: !Int64
     , _sizOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +83,7 @@ data SizesGet' = SizesGet'
 --
 -- * 'sizUserIP'
 --
--- * 'sizProfileId'
+-- * 'sizProFileId'
 --
 -- * 'sizKey'
 --
@@ -96,12 +96,12 @@ sizesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> SizesGet'
-sizesGet' pSizProfileId_ pSizId_ =
+sizesGet' pSizProFileId_ pSizId_ =
     SizesGet'
     { _sizQuotaUser = Nothing
     , _sizPrettyPrint = True
     , _sizUserIP = Nothing
-    , _sizProfileId = pSizProfileId_
+    , _sizProFileId = pSizProFileId_
     , _sizKey = Nothing
     , _sizId = pSizId_
     , _sizOAuthToken = Nothing
@@ -128,9 +128,9 @@ sizUserIP
   = lens _sizUserIP (\ s a -> s{_sizUserIP = a})
 
 -- | User profile ID associated with this request.
-sizProfileId :: Lens' SizesGet' Int64
-sizProfileId
-  = lens _sizProfileId (\ s a -> s{_sizProfileId = a})
+sizProFileId :: Lens' SizesGet' Int64
+sizProFileId
+  = lens _sizProFileId (\ s a -> s{_sizProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -161,7 +161,7 @@ instance GoogleRequest SizesGet' where
         type Rs SizesGet' = Size
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u SizesGet'{..}
-          = go _sizProfileId _sizId _sizQuotaUser
+          = go _sizProFileId _sizId _sizQuotaUser
               (Just _sizPrettyPrint)
               _sizUserIP
               _sizFields

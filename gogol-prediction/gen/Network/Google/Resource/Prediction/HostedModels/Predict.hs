@@ -59,7 +59,7 @@ type HostedModelsPredictResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Input :> Post '[JSON] Output
+                           ReqBody '[OctetStream] Input :> Post '[JSON] Output
 
 -- | Submit input and request an output against a hosted model.
 --

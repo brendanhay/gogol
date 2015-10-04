@@ -54,7 +54,8 @@ type VariantsCreateResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] Variant :> Post '[JSON] Variant
+                     ReqBody '[OctetStream] Variant :>
+                       Post '[JSON] Variant
 
 -- | Creates a new variant.
 --

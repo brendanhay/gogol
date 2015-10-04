@@ -56,9 +56,9 @@ type OrdersListResource =
      Capture "merchantId" Word64 :>
        "orders" :>
          QueryParam "placedDateEnd" Text :>
-           QueryParam "orderBy" OrderBy :>
+           QueryParam "orderBy" OrdersListOrderBy :>
              QueryParam "acknowledged" Bool :>
-               QueryParams "statuses" Statuses :>
+               QueryParams "statuses" OrdersListStatuses :>
                  QueryParam "pageToken" Text :>
                    QueryParam "placedDateStart" Text :>
                      QueryParam "maxResults" Word32 :>
@@ -79,11 +79,11 @@ data OrdersList' = OrdersList'
     , _olQuotaUser       :: !(Maybe Text)
     , _olMerchantId      :: !Word64
     , _olPrettyPrint     :: !Bool
-    , _olOrderBy         :: !(Maybe OrderBy)
+    , _olOrderBy         :: !(Maybe OrdersListOrderBy)
     , _olUserIP          :: !(Maybe Text)
     , _olAcknowledged    :: !(Maybe Bool)
     , _olKey             :: !(Maybe Key)
-    , _olStatuses        :: !(Maybe [Statuses])
+    , _olStatuses        :: !(Maybe [OrdersListStatuses])
     , _olPageToken       :: !(Maybe Text)
     , _olOAuthToken      :: !(Maybe OAuthToken)
     , _olPlacedDateStart :: !(Maybe Text)
@@ -174,7 +174,7 @@ olPrettyPrint
 -- placement date, from oldest to most recent. \"placedDate asc\" stands
 -- for listing orders by placement date, from most recent to oldest. In
 -- future releases we\'ll support other sorting criteria.
-olOrderBy :: Lens' OrdersList' (Maybe OrderBy)
+olOrderBy :: Lens' OrdersList' (Maybe OrdersListOrderBy)
 olOrderBy
   = lens _olOrderBy (\ s a -> s{_olOrderBy = a})
 
@@ -204,7 +204,7 @@ olKey = lens _olKey (\ s a -> s{_olKey = a})
 -- active is a shortcut for pendingShipment and partiallyShipped, and
 -- completed is a shortcut for shipped , partiallyDelivered, delivered,
 -- partiallyReturned, returned, and canceled.
-olStatuses :: Lens' OrdersList' [Statuses]
+olStatuses :: Lens' OrdersList' [OrdersListStatuses]
 olStatuses
   = lens _olStatuses (\ s a -> s{_olStatuses = a}) .
       _Default

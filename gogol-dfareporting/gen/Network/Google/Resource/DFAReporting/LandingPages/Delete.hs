@@ -35,7 +35,7 @@ module Network.Google.Resource.DFAReporting.LandingPages.Delete
     , lpdPrettyPrint
     , lpdUserIP
     , lpdCampaignId
-    , lpdProfileId
+    , lpdProFileId
     , lpdKey
     , lpdId
     , lpdOAuthToken
@@ -70,7 +70,7 @@ data LandingPagesDelete' = LandingPagesDelete'
     , _lpdPrettyPrint :: !Bool
     , _lpdUserIP      :: !(Maybe Text)
     , _lpdCampaignId  :: !Int64
-    , _lpdProfileId   :: !Int64
+    , _lpdProFileId   :: !Int64
     , _lpdKey         :: !(Maybe Key)
     , _lpdId          :: !Int64
     , _lpdOAuthToken  :: !(Maybe OAuthToken)
@@ -89,7 +89,7 @@ data LandingPagesDelete' = LandingPagesDelete'
 --
 -- * 'lpdCampaignId'
 --
--- * 'lpdProfileId'
+-- * 'lpdProFileId'
 --
 -- * 'lpdKey'
 --
@@ -103,13 +103,13 @@ landingPagesDelete'
     -> Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> LandingPagesDelete'
-landingPagesDelete' pLpdCampaignId_ pLpdProfileId_ pLpdId_ =
+landingPagesDelete' pLpdCampaignId_ pLpdProFileId_ pLpdId_ =
     LandingPagesDelete'
     { _lpdQuotaUser = Nothing
     , _lpdPrettyPrint = True
     , _lpdUserIP = Nothing
     , _lpdCampaignId = pLpdCampaignId_
-    , _lpdProfileId = pLpdProfileId_
+    , _lpdProFileId = pLpdProFileId_
     , _lpdKey = Nothing
     , _lpdId = pLpdId_
     , _lpdOAuthToken = Nothing
@@ -142,9 +142,9 @@ lpdCampaignId
       (\ s a -> s{_lpdCampaignId = a})
 
 -- | User profile ID associated with this request.
-lpdProfileId :: Lens' LandingPagesDelete' Int64
-lpdProfileId
-  = lens _lpdProfileId (\ s a -> s{_lpdProfileId = a})
+lpdProFileId :: Lens' LandingPagesDelete' Int64
+lpdProFileId
+  = lens _lpdProFileId (\ s a -> s{_lpdProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -175,7 +175,7 @@ instance GoogleRequest LandingPagesDelete' where
         type Rs LandingPagesDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u LandingPagesDelete'{..}
-          = go _lpdProfileId _lpdCampaignId _lpdId
+          = go _lpdProFileId _lpdCampaignId _lpdId
               _lpdQuotaUser
               (Just _lpdPrettyPrint)
               _lpdUserIP

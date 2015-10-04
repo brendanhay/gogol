@@ -64,7 +64,7 @@ type InstanceGroupManagersSetInstanceTemplateResource
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON]
+                               ReqBody '[OctetStream]
                                  InstanceGroupManagersSetInstanceTemplateRequest
                                  :> Post '[JSON] Operation
 

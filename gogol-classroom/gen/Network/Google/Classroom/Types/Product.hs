@@ -254,7 +254,7 @@ instance ToJSON Invitation where
 -- /See:/ 'teacher' smart constructor.
 data Teacher = Teacher
     { _tCourseId :: !(Maybe Text)
-    , _tProfile  :: !(Maybe UserProfile)
+    , _tProFile  :: !(Maybe UserProFile)
     , _tUserId   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -264,7 +264,7 @@ data Teacher = Teacher
 --
 -- * 'tCourseId'
 --
--- * 'tProfile'
+-- * 'tProFile'
 --
 -- * 'tUserId'
 teacher
@@ -272,7 +272,7 @@ teacher
 teacher =
     Teacher
     { _tCourseId = Nothing
-    , _tProfile = Nothing
+    , _tProFile = Nothing
     , _tUserId = Nothing
     }
 
@@ -282,8 +282,8 @@ tCourseId
   = lens _tCourseId (\ s a -> s{_tCourseId = a})
 
 -- | Global user information for the teacher. Read-only.
-tProfile :: Lens' Teacher (Maybe UserProfile)
-tProfile = lens _tProfile (\ s a -> s{_tProfile = a})
+tProFile :: Lens' Teacher (Maybe UserProFile)
+tProFile = lens _tProFile (\ s a -> s{_tProFile = a})
 
 -- | Identifier of the user. When specified as a parameter of a request, this
 -- identifier can be one of the following: * the numeric identifier for the
@@ -305,60 +305,8 @@ instance ToJSON Teacher where
           = object
               (catMaybes
                  [("courseId" .=) <$> _tCourseId,
-                  ("profile" .=) <$> _tProfile,
+                  ("profile" .=) <$> _tProFile,
                   ("userId" .=) <$> _tUserId])
-
--- | Response when listing courses.
---
--- /See:/ 'listCoursesResponse' smart constructor.
-data ListCoursesResponse = ListCoursesResponse
-    { _lcrNextPageToken :: !(Maybe Text)
-    , _lcrCourses       :: !(Maybe [Course])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ListCoursesResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lcrNextPageToken'
---
--- * 'lcrCourses'
-listCoursesResponse
-    :: ListCoursesResponse
-listCoursesResponse =
-    ListCoursesResponse
-    { _lcrNextPageToken = Nothing
-    , _lcrCourses = Nothing
-    }
-
--- | Token identifying the next page of results to return. If empty, no
--- further results are available.
-lcrNextPageToken :: Lens' ListCoursesResponse (Maybe Text)
-lcrNextPageToken
-  = lens _lcrNextPageToken
-      (\ s a -> s{_lcrNextPageToken = a})
-
--- | Courses that match the list request.
-lcrCourses :: Lens' ListCoursesResponse [Course]
-lcrCourses
-  = lens _lcrCourses (\ s a -> s{_lcrCourses = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON ListCoursesResponse where
-        parseJSON
-          = withObject "ListCoursesResponse"
-              (\ o ->
-                 ListCoursesResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "courses" .!= mempty))
-
-instance ToJSON ListCoursesResponse where
-        toJSON ListCoursesResponse{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _lcrNextPageToken,
-                  ("courses" .=) <$> _lcrCourses])
 
 -- | Details of the user\'s name.
 --
@@ -419,87 +367,139 @@ instance ToJSON Name where
                   ("fullName" .=) <$> _nFullName,
                   ("familyName" .=) <$> _nFamilyName])
 
--- | Global information for a user.
+-- | Response when listing courses.
 --
--- /See:/ 'userProfile' smart constructor.
-data UserProfile = UserProfile
-    { _upPhotoURL     :: !(Maybe Text)
-    , _upName         :: !(Maybe Name)
-    , _upEmailAddress :: !(Maybe Text)
-    , _upId           :: !(Maybe Text)
-    , _upPermissions  :: !(Maybe [GlobalPermission])
+-- /See:/ 'listCoursesResponse' smart constructor.
+data ListCoursesResponse = ListCoursesResponse
+    { _lcrNextPageToken :: !(Maybe Text)
+    , _lcrCourses       :: !(Maybe [Course])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UserProfile' with the minimum fields required to make a request.
+-- | Creates a value of 'ListCoursesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'upPhotoURL'
+-- * 'lcrNextPageToken'
 --
--- * 'upName'
+-- * 'lcrCourses'
+listCoursesResponse
+    :: ListCoursesResponse
+listCoursesResponse =
+    ListCoursesResponse
+    { _lcrNextPageToken = Nothing
+    , _lcrCourses = Nothing
+    }
+
+-- | Token identifying the next page of results to return. If empty, no
+-- further results are available.
+lcrNextPageToken :: Lens' ListCoursesResponse (Maybe Text)
+lcrNextPageToken
+  = lens _lcrNextPageToken
+      (\ s a -> s{_lcrNextPageToken = a})
+
+-- | Courses that match the list request.
+lcrCourses :: Lens' ListCoursesResponse [Course]
+lcrCourses
+  = lens _lcrCourses (\ s a -> s{_lcrCourses = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ListCoursesResponse where
+        parseJSON
+          = withObject "ListCoursesResponse"
+              (\ o ->
+                 ListCoursesResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "courses" .!= mempty))
+
+instance ToJSON ListCoursesResponse where
+        toJSON ListCoursesResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lcrNextPageToken,
+                  ("courses" .=) <$> _lcrCourses])
+
+-- | Global information for a user.
 --
--- * 'upEmailAddress'
+-- /See:/ 'userProFile' smart constructor.
+data UserProFile = UserProFile
+    { _upfPhotoURL     :: !(Maybe Text)
+    , _upfName         :: !(Maybe Name)
+    , _upfEmailAddress :: !(Maybe Text)
+    , _upfId           :: !(Maybe Text)
+    , _upfPermissions  :: !(Maybe [GlobalPermission])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UserProFile' with the minimum fields required to make a request.
 --
--- * 'upId'
+-- Use one of the following lenses to modify other fields as desired:
 --
--- * 'upPermissions'
-userProfile
-    :: UserProfile
-userProfile =
-    UserProfile
-    { _upPhotoURL = Nothing
-    , _upName = Nothing
-    , _upEmailAddress = Nothing
-    , _upId = Nothing
-    , _upPermissions = Nothing
+-- * 'upfPhotoURL'
+--
+-- * 'upfName'
+--
+-- * 'upfEmailAddress'
+--
+-- * 'upfId'
+--
+-- * 'upfPermissions'
+userProFile
+    :: UserProFile
+userProFile =
+    UserProFile
+    { _upfPhotoURL = Nothing
+    , _upfName = Nothing
+    , _upfEmailAddress = Nothing
+    , _upfId = Nothing
+    , _upfPermissions = Nothing
     }
 
 -- | URL of user\'s profile photo. Read-only.
-upPhotoURL :: Lens' UserProfile (Maybe Text)
-upPhotoURL
-  = lens _upPhotoURL (\ s a -> s{_upPhotoURL = a})
+upfPhotoURL :: Lens' UserProFile (Maybe Text)
+upfPhotoURL
+  = lens _upfPhotoURL (\ s a -> s{_upfPhotoURL = a})
 
 -- | Name of the user. Read-only.
-upName :: Lens' UserProfile (Maybe Name)
-upName = lens _upName (\ s a -> s{_upName = a})
+upfName :: Lens' UserProFile (Maybe Name)
+upfName = lens _upfName (\ s a -> s{_upfName = a})
 
 -- | Email address of the user. Read-only.
-upEmailAddress :: Lens' UserProfile (Maybe Text)
-upEmailAddress
-  = lens _upEmailAddress
-      (\ s a -> s{_upEmailAddress = a})
+upfEmailAddress :: Lens' UserProFile (Maybe Text)
+upfEmailAddress
+  = lens _upfEmailAddress
+      (\ s a -> s{_upfEmailAddress = a})
 
 -- | Identifier of the user. Read-only.
-upId :: Lens' UserProfile (Maybe Text)
-upId = lens _upId (\ s a -> s{_upId = a})
+upfId :: Lens' UserProFile (Maybe Text)
+upfId = lens _upfId (\ s a -> s{_upfId = a})
 
 -- | Global permissions of the user. Read-only.
-upPermissions :: Lens' UserProfile [GlobalPermission]
-upPermissions
-  = lens _upPermissions
-      (\ s a -> s{_upPermissions = a})
+upfPermissions :: Lens' UserProFile [GlobalPermission]
+upfPermissions
+  = lens _upfPermissions
+      (\ s a -> s{_upfPermissions = a})
       . _Default
       . _Coerce
 
-instance FromJSON UserProfile where
+instance FromJSON UserProFile where
         parseJSON
-          = withObject "UserProfile"
+          = withObject "UserProFile"
               (\ o ->
-                 UserProfile <$>
+                 UserProFile <$>
                    (o .:? "photoUrl") <*> (o .:? "name") <*>
                      (o .:? "emailAddress")
                      <*> (o .:? "id")
                      <*> (o .:? "permissions" .!= mempty))
 
-instance ToJSON UserProfile where
-        toJSON UserProfile{..}
+instance ToJSON UserProFile where
+        toJSON UserProFile{..}
           = object
               (catMaybes
-                 [("photoUrl" .=) <$> _upPhotoURL,
-                  ("name" .=) <$> _upName,
-                  ("emailAddress" .=) <$> _upEmailAddress,
-                  ("id" .=) <$> _upId,
-                  ("permissions" .=) <$> _upPermissions])
+                 [("photoUrl" .=) <$> _upfPhotoURL,
+                  ("name" .=) <$> _upfName,
+                  ("emailAddress" .=) <$> _upfEmailAddress,
+                  ("id" .=) <$> _upfId,
+                  ("permissions" .=) <$> _upfPermissions])
 
 -- | A Course in Classroom.
 --
@@ -836,7 +836,7 @@ instance ToJSON ListTeachersResponse where
 -- /See:/ 'student' smart constructor.
 data Student = Student
     { _sCourseId :: !(Maybe Text)
-    , _sProfile  :: !(Maybe UserProfile)
+    , _sProFile  :: !(Maybe UserProFile)
     , _sUserId   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -846,7 +846,7 @@ data Student = Student
 --
 -- * 'sCourseId'
 --
--- * 'sProfile'
+-- * 'sProFile'
 --
 -- * 'sUserId'
 student
@@ -854,7 +854,7 @@ student
 student =
     Student
     { _sCourseId = Nothing
-    , _sProfile = Nothing
+    , _sProFile = Nothing
     , _sUserId = Nothing
     }
 
@@ -864,8 +864,8 @@ sCourseId
   = lens _sCourseId (\ s a -> s{_sCourseId = a})
 
 -- | Global user information for the student. Read-only.
-sProfile :: Lens' Student (Maybe UserProfile)
-sProfile = lens _sProfile (\ s a -> s{_sProfile = a})
+sProFile :: Lens' Student (Maybe UserProFile)
+sProFile = lens _sProFile (\ s a -> s{_sProFile = a})
 
 -- | Identifier of the user. When specified as a parameter of a request, this
 -- identifier can be one of the following: * the numeric identifier for the
@@ -887,5 +887,5 @@ instance ToJSON Student where
           = object
               (catMaybes
                  [("courseId" .=) <$> _sCourseId,
-                  ("profile" .=) <$> _sProfile,
+                  ("profile" .=) <$> _sProFile,
                   ("userId" .=) <$> _sUserId])

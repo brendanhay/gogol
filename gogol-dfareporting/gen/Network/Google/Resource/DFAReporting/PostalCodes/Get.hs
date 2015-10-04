@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.PostalCodes.Get
     , pcgQuotaUser
     , pcgPrettyPrint
     , pcgUserIP
-    , pcgProfileId
+    , pcgProFileId
     , pcgKey
     , pcgCode
     , pcgOAuthToken
@@ -66,7 +66,7 @@ data PostalCodesGet' = PostalCodesGet'
     { _pcgQuotaUser   :: !(Maybe Text)
     , _pcgPrettyPrint :: !Bool
     , _pcgUserIP      :: !(Maybe Text)
-    , _pcgProfileId   :: !Int64
+    , _pcgProFileId   :: !Int64
     , _pcgKey         :: !(Maybe Key)
     , _pcgCode        :: !Text
     , _pcgOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +83,7 @@ data PostalCodesGet' = PostalCodesGet'
 --
 -- * 'pcgUserIP'
 --
--- * 'pcgProfileId'
+-- * 'pcgProFileId'
 --
 -- * 'pcgKey'
 --
@@ -96,12 +96,12 @@ postalCodesGet'
     :: Int64 -- ^ 'profileId'
     -> Text -- ^ 'code'
     -> PostalCodesGet'
-postalCodesGet' pPcgProfileId_ pPcgCode_ =
+postalCodesGet' pPcgProFileId_ pPcgCode_ =
     PostalCodesGet'
     { _pcgQuotaUser = Nothing
     , _pcgPrettyPrint = True
     , _pcgUserIP = Nothing
-    , _pcgProfileId = pPcgProfileId_
+    , _pcgProFileId = pPcgProFileId_
     , _pcgKey = Nothing
     , _pcgCode = pPcgCode_
     , _pcgOAuthToken = Nothing
@@ -128,9 +128,9 @@ pcgUserIP
   = lens _pcgUserIP (\ s a -> s{_pcgUserIP = a})
 
 -- | User profile ID associated with this request.
-pcgProfileId :: Lens' PostalCodesGet' Int64
-pcgProfileId
-  = lens _pcgProfileId (\ s a -> s{_pcgProfileId = a})
+pcgProFileId :: Lens' PostalCodesGet' Int64
+pcgProFileId
+  = lens _pcgProFileId (\ s a -> s{_pcgProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -161,7 +161,7 @@ instance GoogleRequest PostalCodesGet' where
         type Rs PostalCodesGet' = PostalCode
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PostalCodesGet'{..}
-          = go _pcgProfileId _pcgCode _pcgQuotaUser
+          = go _pcgProFileId _pcgCode _pcgQuotaUser
               (Just _pcgPrettyPrint)
               _pcgUserIP
               _pcgFields

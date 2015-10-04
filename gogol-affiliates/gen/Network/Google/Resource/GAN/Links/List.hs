@@ -60,20 +60,20 @@ import           Network.Google.Prelude
 -- | A resource alias for @GANLinksList@ which the
 -- 'LinksList'' request conforms to.
 type LinksListResource =
-     Capture "role" GANLinksListRole :>
+     Capture "role" LinksListRole :>
        Capture "roleId" Text :>
          "links" :>
            QueryParam "createDateMax" Text :>
-             QueryParam "authorship" Authorship :>
+             QueryParam "authorship" LinksListAuthorship :>
                QueryParams "assetSize" Text :>
                  QueryParam "relationshipStatus"
-                   GANLinksListRelationshipStatus
+                   LinksListRelationshipStatus
                    :>
                    QueryParams "advertiserId" Int64 :>
                      QueryParam "searchText" Text :>
-                       QueryParams "promotionType" PromotionType :>
+                       QueryParams "promotionType" LinksListPromotionType :>
                          QueryParam "createDateMin" Text :>
-                           QueryParam "linkType" LinkType :>
+                           QueryParam "linkType" LinksListLinkType :>
                              QueryParam "pageToken" Text :>
                                QueryParam "startDateMax" Text :>
                                  QueryParam "startDateMin" Text :>
@@ -94,20 +94,20 @@ type LinksListResource =
 -- /See:/ 'linksList'' smart constructor.
 data LinksList' = LinksList'
     { _llCreateDateMax      :: !(Maybe Text)
-    , _llAuthorship         :: !(Maybe Authorship)
+    , _llAuthorship         :: !(Maybe LinksListAuthorship)
     , _llQuotaUser          :: !(Maybe Text)
     , _llPrettyPrint        :: !Bool
     , _llAssetSize          :: !(Maybe [Text])
     , _llUserIP             :: !(Maybe Text)
-    , _llRelationshipStatus :: !(Maybe GANLinksListRelationshipStatus)
+    , _llRelationshipStatus :: !(Maybe LinksListRelationshipStatus)
     , _llAdvertiserId       :: !(Maybe [Int64])
     , _llSearchText         :: !(Maybe Text)
-    , _llPromotionType      :: !(Maybe [PromotionType])
+    , _llPromotionType      :: !(Maybe [LinksListPromotionType])
     , _llRoleId             :: !Text
-    , _llRole               :: !GANLinksListRole
+    , _llRole               :: !LinksListRole
     , _llKey                :: !(Maybe Key)
     , _llCreateDateMin      :: !(Maybe Text)
-    , _llLinkType           :: !(Maybe LinkType)
+    , _llLinkType           :: !(Maybe LinksListLinkType)
     , _llPageToken          :: !(Maybe Text)
     , _llStartDateMax       :: !(Maybe Text)
     , _llOAuthToken         :: !(Maybe OAuthToken)
@@ -163,7 +163,7 @@ data LinksList' = LinksList'
 -- * 'llFields'
 linksList'
     :: Text -- ^ 'roleId'
-    -> GANLinksListRole -- ^ 'role'
+    -> LinksListRole -- ^ 'role'
     -> LinksList'
 linksList' pLlRoleId_ pLlRole_ =
     LinksList'
@@ -197,7 +197,7 @@ llCreateDateMax
       (\ s a -> s{_llCreateDateMax = a})
 
 -- | The role of the author of the link.
-llAuthorship :: Lens' LinksList' (Maybe Authorship)
+llAuthorship :: Lens' LinksList' (Maybe LinksListAuthorship)
 llAuthorship
   = lens _llAuthorship (\ s a -> s{_llAuthorship = a})
 
@@ -227,7 +227,7 @@ llUserIP :: Lens' LinksList' (Maybe Text)
 llUserIP = lens _llUserIP (\ s a -> s{_llUserIP = a})
 
 -- | The status of the relationship.
-llRelationshipStatus :: Lens' LinksList' (Maybe GANLinksListRelationshipStatus)
+llRelationshipStatus :: Lens' LinksList' (Maybe LinksListRelationshipStatus)
 llRelationshipStatus
   = lens _llRelationshipStatus
       (\ s a -> s{_llRelationshipStatus = a})
@@ -248,7 +248,7 @@ llSearchText
   = lens _llSearchText (\ s a -> s{_llSearchText = a})
 
 -- | The promotion type.
-llPromotionType :: Lens' LinksList' [PromotionType]
+llPromotionType :: Lens' LinksList' [LinksListPromotionType]
 llPromotionType
   = lens _llPromotionType
       (\ s a -> s{_llPromotionType = a})
@@ -261,7 +261,7 @@ llRoleId = lens _llRoleId (\ s a -> s{_llRoleId = a})
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-llRole :: Lens' LinksList' GANLinksListRole
+llRole :: Lens' LinksList' LinksListRole
 llRole = lens _llRole (\ s a -> s{_llRole = a})
 
 -- | API key. Your API key identifies your project and provides you with API
@@ -277,7 +277,7 @@ llCreateDateMin
       (\ s a -> s{_llCreateDateMin = a})
 
 -- | The type of the link.
-llLinkType :: Lens' LinksList' (Maybe LinkType)
+llLinkType :: Lens' LinksList' (Maybe LinksListLinkType)
 llLinkType
   = lens _llLinkType (\ s a -> s{_llLinkType = a})
 

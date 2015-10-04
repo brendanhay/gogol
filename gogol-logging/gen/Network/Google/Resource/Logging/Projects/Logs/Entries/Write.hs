@@ -78,7 +78,7 @@ type ProjectsLogsEntriesWriteResource =
                                      QueryParam "key" Key :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
-                                           ReqBody '[JSON]
+                                           ReqBody '[OctetStream]
                                              WriteLogEntriesRequest
                                              :>
                                              Post '[JSON]

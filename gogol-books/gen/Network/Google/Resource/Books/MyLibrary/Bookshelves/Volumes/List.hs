@@ -60,7 +60,9 @@ type MyLibraryBookshelvesVolumesListResource =
              QueryParam "country" Text :>
                QueryParam "q" Text :>
                  QueryParam "source" Text :>
-                   QueryParam "projection" Projection :>
+                   QueryParam "projection"
+                     MyLibraryBookshelvesVolumesListProjection
+                     :>
                      QueryParam "startIndex" Word32 :>
                        QueryParam "maxResults" Word32 :>
                          QueryParam "showPreorders" Bool :>
@@ -85,7 +87,7 @@ data MyLibraryBookshelvesVolumesList' = MyLibraryBookshelvesVolumesList'
     , _mlbvlShelf         :: !Text
     , _mlbvlKey           :: !(Maybe Key)
     , _mlbvlSource        :: !(Maybe Text)
-    , _mlbvlProjection    :: !(Maybe Projection)
+    , _mlbvlProjection    :: !(Maybe MyLibraryBookshelvesVolumesListProjection)
     , _mlbvlOAuthToken    :: !(Maybe OAuthToken)
     , _mlbvlStartIndex    :: !(Maybe Word32)
     , _mlbvlMaxResults    :: !(Maybe Word32)
@@ -191,7 +193,7 @@ mlbvlSource
   = lens _mlbvlSource (\ s a -> s{_mlbvlSource = a})
 
 -- | Restrict information returned to a set of selected fields.
-mlbvlProjection :: Lens' MyLibraryBookshelvesVolumesList' (Maybe Projection)
+mlbvlProjection :: Lens' MyLibraryBookshelvesVolumesList' (Maybe MyLibraryBookshelvesVolumesListProjection)
 mlbvlProjection
   = lens _mlbvlProjection
       (\ s a -> s{_mlbvlProjection = a})

@@ -69,22 +69,22 @@ library
         , Network.Google.Resource.Analytics.Management.Goals.List
         , Network.Google.Resource.Analytics.Management.Goals.Patch
         , Network.Google.Resource.Analytics.Management.Goals.Update
-        , Network.Google.Resource.Analytics.Management.ProfileFilterLinks.Delete
-        , Network.Google.Resource.Analytics.Management.ProfileFilterLinks.Get
-        , Network.Google.Resource.Analytics.Management.ProfileFilterLinks.Insert
-        , Network.Google.Resource.Analytics.Management.ProfileFilterLinks.List
-        , Network.Google.Resource.Analytics.Management.ProfileFilterLinks.Patch
-        , Network.Google.Resource.Analytics.Management.ProfileFilterLinks.Update
-        , Network.Google.Resource.Analytics.Management.ProfileUserLinks.Delete
-        , Network.Google.Resource.Analytics.Management.ProfileUserLinks.Insert
-        , Network.Google.Resource.Analytics.Management.ProfileUserLinks.List
-        , Network.Google.Resource.Analytics.Management.ProfileUserLinks.Update
-        , Network.Google.Resource.Analytics.Management.Profiles.Delete
-        , Network.Google.Resource.Analytics.Management.Profiles.Get
-        , Network.Google.Resource.Analytics.Management.Profiles.Insert
-        , Network.Google.Resource.Analytics.Management.Profiles.List
-        , Network.Google.Resource.Analytics.Management.Profiles.Patch
-        , Network.Google.Resource.Analytics.Management.Profiles.Update
+        , Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Delete
+        , Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Get
+        , Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Insert
+        , Network.Google.Resource.Analytics.Management.ProFileFilterLinks.List
+        , Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Patch
+        , Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Update
+        , Network.Google.Resource.Analytics.Management.ProFileUserLinks.Delete
+        , Network.Google.Resource.Analytics.Management.ProFileUserLinks.Insert
+        , Network.Google.Resource.Analytics.Management.ProFileUserLinks.List
+        , Network.Google.Resource.Analytics.Management.ProFileUserLinks.Update
+        , Network.Google.Resource.Analytics.Management.ProFiles.Delete
+        , Network.Google.Resource.Analytics.Management.ProFiles.Get
+        , Network.Google.Resource.Analytics.Management.ProFiles.Insert
+        , Network.Google.Resource.Analytics.Management.ProFiles.List
+        , Network.Google.Resource.Analytics.Management.ProFiles.Patch
+        , Network.Google.Resource.Analytics.Management.ProFiles.Update
         , Network.Google.Resource.Analytics.Management.Segments.List
         , Network.Google.Resource.Analytics.Management.UnSampledReports.Get
         , Network.Google.Resource.Analytics.Management.UnSampledReports.Insert

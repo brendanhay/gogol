@@ -56,15 +56,11 @@ type ChromeosDevicesListResource =
        Capture "customerId" Text :>
          "devices" :>
            "chromeos" :>
-             QueryParam "orderBy"
-               DirectoryChromeosDevicesListOrderBy
-               :>
-               QueryParam "sortOrder"
-                 DirectoryChromeosDevicesListSortOrder
+             QueryParam "orderBy" ChromeosDevicesListOrderBy :>
+               QueryParam "sortOrder" ChromeosDevicesListSortOrder
                  :>
                  QueryParam "query" Text :>
-                   QueryParam "projection"
-                     DirectoryChromeosDevicesListProjection
+                   QueryParam "projection" ChromeosDevicesListProjection
                      :>
                      QueryParam "pageToken" Text :>
                        QueryParam "maxResults" Int32 :>
@@ -83,13 +79,13 @@ type ChromeosDevicesListResource =
 data ChromeosDevicesList' = ChromeosDevicesList'
     { _cdlQuotaUser   :: !(Maybe Text)
     , _cdlPrettyPrint :: !Bool
-    , _cdlOrderBy     :: !(Maybe DirectoryChromeosDevicesListOrderBy)
+    , _cdlOrderBy     :: !(Maybe ChromeosDevicesListOrderBy)
     , _cdlUserIP      :: !(Maybe Text)
     , _cdlCustomerId  :: !Text
-    , _cdlSortOrder   :: !(Maybe DirectoryChromeosDevicesListSortOrder)
+    , _cdlSortOrder   :: !(Maybe ChromeosDevicesListSortOrder)
     , _cdlKey         :: !(Maybe Key)
     , _cdlQuery       :: !(Maybe Text)
-    , _cdlProjection  :: !(Maybe DirectoryChromeosDevicesListProjection)
+    , _cdlProjection  :: !(Maybe ChromeosDevicesListProjection)
     , _cdlPageToken   :: !(Maybe Text)
     , _cdlOAuthToken  :: !(Maybe OAuthToken)
     , _cdlMaxResults  :: !(Maybe Int32)
@@ -159,7 +155,7 @@ cdlPrettyPrint
       (\ s a -> s{_cdlPrettyPrint = a})
 
 -- | Column to use for sorting results
-cdlOrderBy :: Lens' ChromeosDevicesList' (Maybe DirectoryChromeosDevicesListOrderBy)
+cdlOrderBy :: Lens' ChromeosDevicesList' (Maybe ChromeosDevicesListOrderBy)
 cdlOrderBy
   = lens _cdlOrderBy (\ s a -> s{_cdlOrderBy = a})
 
@@ -177,7 +173,7 @@ cdlCustomerId
 
 -- | Whether to return results in ascending or descending order. Only of use
 -- when orderBy is also used
-cdlSortOrder :: Lens' ChromeosDevicesList' (Maybe DirectoryChromeosDevicesListSortOrder)
+cdlSortOrder :: Lens' ChromeosDevicesList' (Maybe ChromeosDevicesListSortOrder)
 cdlSortOrder
   = lens _cdlSortOrder (\ s a -> s{_cdlSortOrder = a})
 
@@ -193,7 +189,7 @@ cdlQuery :: Lens' ChromeosDevicesList' (Maybe Text)
 cdlQuery = lens _cdlQuery (\ s a -> s{_cdlQuery = a})
 
 -- | Restrict information returned to a set of selected fields.
-cdlProjection :: Lens' ChromeosDevicesList' (Maybe DirectoryChromeosDevicesListProjection)
+cdlProjection :: Lens' ChromeosDevicesList' (Maybe ChromeosDevicesListProjection)
 cdlProjection
   = lens _cdlProjection
       (\ s a -> s{_cdlProjection = a})

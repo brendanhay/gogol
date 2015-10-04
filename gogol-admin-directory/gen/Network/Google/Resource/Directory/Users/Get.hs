@@ -51,10 +51,9 @@ import           Network.Google.Prelude
 type UsersGetResource =
      "users" :>
        Capture "userKey" Text :>
-         QueryParam "viewType" DirectoryUsersGetViewType :>
+         QueryParam "viewType" UsersGetViewType :>
            QueryParam "customFieldMask" Text :>
-             QueryParam "projection" DirectoryUsersGetProjection
-               :>
+             QueryParam "projection" UsersGetProjection :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -69,11 +68,11 @@ type UsersGetResource =
 data UsersGet' = UsersGet'
     { _ugQuotaUser       :: !(Maybe Text)
     , _ugPrettyPrint     :: !Bool
-    , _ugViewType        :: !DirectoryUsersGetViewType
+    , _ugViewType        :: !UsersGetViewType
     , _ugCustomFieldMask :: !(Maybe Text)
     , _ugUserIP          :: !(Maybe Text)
     , _ugKey             :: !(Maybe Key)
-    , _ugProjection      :: !DirectoryUsersGetProjection
+    , _ugProjection      :: !UsersGetProjection
     , _ugOAuthToken      :: !(Maybe OAuthToken)
     , _ugUserKey         :: !Text
     , _ugFields          :: !(Maybe Text)
@@ -109,11 +108,11 @@ usersGet' pUgUserKey_ =
     UsersGet'
     { _ugQuotaUser = Nothing
     , _ugPrettyPrint = True
-    , _ugViewType = DUGVTAdminView
+    , _ugViewType = UGVTAdminView
     , _ugCustomFieldMask = Nothing
     , _ugUserIP = Nothing
     , _ugKey = Nothing
-    , _ugProjection = DUGPBasic
+    , _ugProjection = UGPBasic
     , _ugOAuthToken = Nothing
     , _ugUserKey = pUgUserKey_
     , _ugFields = Nothing
@@ -133,7 +132,7 @@ ugPrettyPrint
       (\ s a -> s{_ugPrettyPrint = a})
 
 -- | Whether to fetch the ADMIN_VIEW or DOMAIN_PUBLIC view of the user.
-ugViewType :: Lens' UsersGet' DirectoryUsersGetViewType
+ugViewType :: Lens' UsersGet' UsersGetViewType
 ugViewType
   = lens _ugViewType (\ s a -> s{_ugViewType = a})
 
@@ -156,7 +155,7 @@ ugKey :: Lens' UsersGet' (Maybe Key)
 ugKey = lens _ugKey (\ s a -> s{_ugKey = a})
 
 -- | What subset of fields to fetch for this user.
-ugProjection :: Lens' UsersGet' DirectoryUsersGetProjection
+ugProjection :: Lens' UsersGet' UsersGetProjection
 ugProjection
   = lens _ugProjection (\ s a -> s{_ugProjection = a})
 

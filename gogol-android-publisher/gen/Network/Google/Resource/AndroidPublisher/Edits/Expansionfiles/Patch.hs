@@ -58,7 +58,9 @@ type EditsExpansionfilesPatchResource =
            "apks" :>
              Capture "apkVersionCode" Int32 :>
                "expansionFiles" :>
-                 Capture "expansionFileType" ExpansionFileType :>
+                 Capture "expansionFileType"
+                   AndroidPublisherEditsExpansionfilesPatchExpansionFileType
+                   :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -82,7 +84,7 @@ data EditsExpansionfilesPatch' = EditsExpansionfilesPatch'
     , _eepUserIP            :: !(Maybe Text)
     , _eepPayload           :: !ExpansionFile
     , _eepKey               :: !(Maybe Key)
-    , _eepExpansionFileType :: !ExpansionFileType
+    , _eepExpansionFileType :: !AndroidPublisherEditsExpansionfilesPatchExpansionFileType
     , _eepOAuthToken        :: !(Maybe OAuthToken)
     , _eepEditId            :: !Text
     , _eepFields            :: !(Maybe Text)
@@ -117,7 +119,7 @@ editsExpansionfilesPatch'
     :: Text -- ^ 'packageName'
     -> Int32 -- ^ 'apkVersionCode'
     -> ExpansionFile -- ^ 'payload'
-    -> ExpansionFileType -- ^ 'expansionFileType'
+    -> AndroidPublisherEditsExpansionfilesPatchExpansionFileType -- ^ 'expansionFileType'
     -> Text -- ^ 'editId'
     -> EditsExpansionfilesPatch'
 editsExpansionfilesPatch' pEepPackageName_ pEepAPKVersionCode_ pEepPayload_ pEepExpansionFileType_ pEepEditId_ =
@@ -179,7 +181,7 @@ eepPayload
 eepKey :: Lens' EditsExpansionfilesPatch' (Maybe Key)
 eepKey = lens _eepKey (\ s a -> s{_eepKey = a})
 
-eepExpansionFileType :: Lens' EditsExpansionfilesPatch' ExpansionFileType
+eepExpansionFileType :: Lens' EditsExpansionfilesPatch' AndroidPublisherEditsExpansionfilesPatchExpansionFileType
 eepExpansionFileType
   = lens _eepExpansionFileType
       (\ s a -> s{_eepExpansionFileType = a})

@@ -57,7 +57,7 @@ type DatasetsCommitResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltPROTO :>
-                       ReqBody '[JSON] CommitRequest :>
+                       ReqBody '[OctetStream] CommitRequest :>
                          Post '[JSON] CommitResponse
 
 -- | Commit a transaction, optionally creating, deleting or modifying some

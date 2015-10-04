@@ -60,7 +60,7 @@ type BackendServicesGetHealthResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] ResourceGroupReference :>
+                             ReqBody '[OctetStream] ResourceGroupReference :>
                                Post '[JSON] BackendServiceGroupHealth
 
 -- | Gets the most recent health check results for this BackendService.

@@ -17,8 +17,8 @@ module Network.Google.CustomSearch.Types
     -- * Service URL
       customSearchURL
 
-    -- * ImgDominantColor
-    , ImgDominantColor (..)
+    -- * CSEListImgType
+    , CSEListImgType (..)
 
     -- * PromotionImage
     , PromotionImage
@@ -27,30 +27,18 @@ module Network.Google.CustomSearch.Types
     , piWidth
     , piSource
 
-    -- * Queries
-    , Queries
-    , queries
-
     -- * Context
     , Context
     , context
     , cFacets
     , cTitle
 
-    -- * Image
-    , Image
-    , image
-    , iThumbnailLink
-    , iHeight
-    , iByteSize
-    , iContextLink
-    , iThumbnailHeight
-    , iWidth
-    , iThumbnailWidth
+    -- * CSEListSiteSearchFilter
+    , CSEListSiteSearchFilter (..)
 
-    -- * Pagemap
-    , Pagemap
-    , pagemap
+    -- * SearchQueries
+    , SearchQueries
+    , searchQueries
 
     -- * SearchURL
     , SearchURL
@@ -58,28 +46,35 @@ module Network.Google.CustomSearch.Types
     , suType
     , suTemplate
 
-    -- * SiteSearchFilter
-    , SiteSearchFilter (..)
+    -- * SearchSpelling
+    , SearchSpelling
+    , searchSpelling
+    , ssCorrectedQuery
+    , ssHTMLCorrectedQuery
 
-    -- * LabelsItem
-    , LabelsItem
-    , labelsItem
-    , liName
-    , liDisplayName
-    , liLabelWithOp
+    -- * CSEListImgDominantColor
+    , CSEListImgDominantColor (..)
 
-    -- * SearchType
-    , SearchType (..)
+    -- * ResultImage
+    , ResultImage
+    , resultImage
+    , riThumbnailLink
+    , riHeight
+    , riByteSize
+    , riContextLink
+    , riThumbnailHeight
+    , riWidth
+    , riThumbnailWidth
 
-    -- * FacetsItemItem
-    , FacetsItemItem
-    , facetsItemItem
-    , fiiAnchor
-    , fiiLabelWithOp
-    , fiiLabel
+    -- * CSEListSafe
+    , CSEListSafe (..)
 
-    -- * Lr
-    , Lr (..)
+    -- * ResultPagemap
+    , ResultPagemap
+    , resultPagemap
+
+    -- * CSEListImgColorType
+    , CSEListImgColorType (..)
 
     -- * Result
     , Result
@@ -100,13 +95,23 @@ module Network.Google.CustomSearch.Types
     , rLabels
     , rTitle
 
-    -- * SearchInformation
-    , SearchInformation
-    , searchInformation
-    , siSearchTime
-    , siFormattedSearchTime
-    , siTotalResults
-    , siFormattedTotalResults
+    -- * ResultLabelsItem
+    , ResultLabelsItem
+    , resultLabelsItem
+    , rliName
+    , rliDisplayName
+    , rliLabelWithOp
+
+    -- * SearchSearchInformation
+    , SearchSearchInformation
+    , searchSearchInformation
+    , ssiSearchTime
+    , ssiFormattedSearchTime
+    , ssiTotalResults
+    , ssiFormattedTotalResults
+
+    -- * CSEListFilter
+    , CSEListFilter (..)
 
     -- * Query
     , Query
@@ -149,16 +154,13 @@ module Network.Google.CustomSearch.Types
     , qHq
     , qHighRange
 
-    -- * Filter
-    , Filter (..)
-
-    -- * BodyLinesItem
-    , BodyLinesItem
-    , bodyLinesItem
-    , bliLink
-    , bliURL
-    , bliHTMLTitle
-    , bliTitle
+    -- * PromotionBodyLinesItem
+    , PromotionBodyLinesItem
+    , promotionBodyLinesItem
+    , pbliLink
+    , pbliURL
+    , pbliHTMLTitle
+    , pbliTitle
 
     -- * Promotion
     , Promotion
@@ -169,12 +171,6 @@ module Network.Google.CustomSearch.Types
     , pLink
     , pHTMLTitle
     , pTitle
-
-    -- * ImgType
-    , ImgType (..)
-
-    -- * ImgColorType
-    , ImgColorType (..)
 
     -- * Search
     , Search
@@ -188,17 +184,21 @@ module Network.Google.CustomSearch.Types
     , sPromotions
     , sSpelling
 
-    -- * ImgSize
-    , ImgSize (..)
+    -- * CSEListLr
+    , CSEListLr (..)
 
-    -- * Spelling
-    , Spelling
-    , spelling
-    , sCorrectedQuery
-    , sHTMLCorrectedQuery
+    -- * ContextFacetsItemItem
+    , ContextFacetsItemItem
+    , contextFacetsItemItem
+    , cfiiAnchor
+    , cfiiLabelWithOp
+    , cfiiLabel
 
-    -- * Safe
-    , Safe (..)
+    -- * CSEListSearchType
+    , CSEListSearchType (..)
+
+    -- * CSEListImgSize
+    , CSEListImgSize (..)
     ) where
 
 import           Network.Google.CustomSearch.Types.Product

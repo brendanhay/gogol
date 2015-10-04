@@ -58,7 +58,7 @@ type CalendarListInsertResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] CalendarListEntry :>
+                           ReqBody '[OctetStream] CalendarListEntry :>
                              Post '[JSON] CalendarListEntry
 
 -- | Adds an entry to the user\'s calendar list.

@@ -60,7 +60,7 @@ type TablesInsertResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Table :> Post '[JSON] Table
+                             ReqBody '[OctetStream] Table :> Post '[JSON] Table
 
 -- | Creates a new, empty table in the dataset.
 --

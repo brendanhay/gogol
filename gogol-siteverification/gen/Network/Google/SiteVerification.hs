@@ -50,6 +50,12 @@ module Network.Google.SiteVerification
 
     -- * Types
 
+    -- ** SiteVerificationWebResourceGettokenRequestSite
+    , SiteVerificationWebResourceGettokenRequestSite
+    , siteVerificationWebResourceGettokenRequestSite
+    , svwrgrsIdentifier
+    , svwrgrsType
+
     -- ** SiteVerificationWebResourceGettokenResponse
     , SiteVerificationWebResourceGettokenResponse
     , siteVerificationWebResourceGettokenResponse
@@ -79,12 +85,6 @@ module Network.Google.SiteVerification
     , svwrrOwners
     , svwrrId
     , svwrrSite
-
-    -- ** Site
-    , Site
-    , site
-    , sIdentifier
-    , sType
     ) where
 
 import           Network.Google.Prelude

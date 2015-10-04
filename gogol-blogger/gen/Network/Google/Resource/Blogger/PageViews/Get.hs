@@ -50,7 +50,7 @@ type PageViewsGetResource =
      "blogs" :>
        Capture "blogId" Text :>
          "pageviews" :>
-           QueryParams "range" Range :>
+           QueryParams "range" PageViewsGetRange :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -68,7 +68,7 @@ data PageViewsGet' = PageViewsGet'
     , _pvgUserIP      :: !(Maybe Text)
     , _pvgBlogId      :: !Text
     , _pvgKey         :: !(Maybe Key)
-    , _pvgRange       :: !(Maybe [Range])
+    , _pvgRange       :: !(Maybe [PageViewsGetRange])
     , _pvgOAuthToken  :: !(Maybe OAuthToken)
     , _pvgFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -137,7 +137,7 @@ pvgBlogId
 pvgKey :: Lens' PageViewsGet' (Maybe Key)
 pvgKey = lens _pvgKey (\ s a -> s{_pvgKey = a})
 
-pvgRange :: Lens' PageViewsGet' [Range]
+pvgRange :: Lens' PageViewsGet' [PageViewsGetRange]
 pvgRange
   = lens _pvgRange (\ s a -> s{_pvgRange = a}) .
       _Default

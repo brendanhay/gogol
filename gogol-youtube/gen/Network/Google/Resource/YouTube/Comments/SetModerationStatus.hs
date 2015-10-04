@@ -54,7 +54,7 @@ type CommentsSetModerationStatusResource =
        "setModerationStatus" :>
          QueryParam "id" Text :>
            QueryParam "moderationStatus"
-             YouTubeCommentsSetModerationStatusModerationStatus
+             CommentsSetModerationStatusModerationStatus
              :>
              QueryParam "banAuthor" Bool :>
                QueryParam "quotaUser" Text :>
@@ -74,7 +74,7 @@ data CommentsSetModerationStatus' = CommentsSetModerationStatus'
     { _csmsQuotaUser        :: !(Maybe Text)
     , _csmsPrettyPrint      :: !Bool
     , _csmsBanAuthor        :: !Bool
-    , _csmsModerationStatus :: !YouTubeCommentsSetModerationStatusModerationStatus
+    , _csmsModerationStatus :: !CommentsSetModerationStatusModerationStatus
     , _csmsUserIP           :: !(Maybe Text)
     , _csmsKey              :: !(Maybe Key)
     , _csmsId               :: !Text
@@ -104,7 +104,7 @@ data CommentsSetModerationStatus' = CommentsSetModerationStatus'
 --
 -- * 'csmsFields'
 commentsSetModerationStatus'
-    :: YouTubeCommentsSetModerationStatusModerationStatus -- ^ 'moderationStatus'
+    :: CommentsSetModerationStatusModerationStatus -- ^ 'moderationStatus'
     -> Text -- ^ 'id'
     -> CommentsSetModerationStatus'
 commentsSetModerationStatus' pCsmsModerationStatus_ pCsmsId_ =
@@ -144,7 +144,7 @@ csmsBanAuthor
       (\ s a -> s{_csmsBanAuthor = a})
 
 -- | Identifies the new moderation status of the specified comments.
-csmsModerationStatus :: Lens' CommentsSetModerationStatus' YouTubeCommentsSetModerationStatusModerationStatus
+csmsModerationStatus :: Lens' CommentsSetModerationStatus' CommentsSetModerationStatusModerationStatus
 csmsModerationStatus
   = lens _csmsModerationStatus
       (\ s a -> s{_csmsModerationStatus = a})

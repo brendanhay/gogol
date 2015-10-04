@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.CreativeFields.Insert
     , cfiQuotaUser
     , cfiPrettyPrint
     , cfiUserIP
-    , cfiProfileId
+    , cfiProFileId
     , cfiPayload
     , cfiKey
     , cfiOAuthToken
@@ -57,7 +57,7 @@ type CreativeFieldsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] CreativeField :>
+                         ReqBody '[OctetStream] CreativeField :>
                            Post '[JSON] CreativeField
 
 -- | Inserts a new creative field.
@@ -67,7 +67,7 @@ data CreativeFieldsInsert' = CreativeFieldsInsert'
     { _cfiQuotaUser   :: !(Maybe Text)
     , _cfiPrettyPrint :: !Bool
     , _cfiUserIP      :: !(Maybe Text)
-    , _cfiProfileId   :: !Int64
+    , _cfiProFileId   :: !Int64
     , _cfiPayload     :: !CreativeField
     , _cfiKey         :: !(Maybe Key)
     , _cfiOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data CreativeFieldsInsert' = CreativeFieldsInsert'
 --
 -- * 'cfiUserIP'
 --
--- * 'cfiProfileId'
+-- * 'cfiProFileId'
 --
 -- * 'cfiPayload'
 --
@@ -97,12 +97,12 @@ creativeFieldsInsert'
     :: Int64 -- ^ 'profileId'
     -> CreativeField -- ^ 'payload'
     -> CreativeFieldsInsert'
-creativeFieldsInsert' pCfiProfileId_ pCfiPayload_ =
+creativeFieldsInsert' pCfiProFileId_ pCfiPayload_ =
     CreativeFieldsInsert'
     { _cfiQuotaUser = Nothing
     , _cfiPrettyPrint = True
     , _cfiUserIP = Nothing
-    , _cfiProfileId = pCfiProfileId_
+    , _cfiProFileId = pCfiProFileId_
     , _cfiPayload = pCfiPayload_
     , _cfiKey = Nothing
     , _cfiOAuthToken = Nothing
@@ -129,9 +129,9 @@ cfiUserIP
   = lens _cfiUserIP (\ s a -> s{_cfiUserIP = a})
 
 -- | User profile ID associated with this request.
-cfiProfileId :: Lens' CreativeFieldsInsert' Int64
-cfiProfileId
-  = lens _cfiProfileId (\ s a -> s{_cfiProfileId = a})
+cfiProFileId :: Lens' CreativeFieldsInsert' Int64
+cfiProFileId
+  = lens _cfiProFileId (\ s a -> s{_cfiProFileId = a})
 
 -- | Multipart request metadata.
 cfiPayload :: Lens' CreativeFieldsInsert' CreativeField
@@ -163,7 +163,7 @@ instance GoogleRequest CreativeFieldsInsert' where
         type Rs CreativeFieldsInsert' = CreativeField
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeFieldsInsert'{..}
-          = go _cfiProfileId _cfiQuotaUser
+          = go _cfiProFileId _cfiQuotaUser
               (Just _cfiPrettyPrint)
               _cfiUserIP
               _cfiFields

@@ -74,7 +74,7 @@ type ProjectsJobsCreateResource =
                                      QueryParam "key" Key :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
-                                           ReqBody '[JSON] Job :>
+                                           ReqBody '[OctetStream] Job :>
                                              Post '[JSON] Job
 
 -- | Creates a dataflow job.

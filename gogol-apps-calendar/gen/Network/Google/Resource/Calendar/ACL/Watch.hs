@@ -66,7 +66,7 @@ type ACLWatchResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] Channel :>
+                                   ReqBody '[OctetStream] Channel :>
                                      Post '[JSON] Channel
 
 -- | Watch for changes to ACL resources.

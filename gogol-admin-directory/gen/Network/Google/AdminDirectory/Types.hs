@@ -17,21 +17,6 @@ module Network.Google.AdminDirectory.Types
     -- * Service URL
       adminDirectoryURL
 
-    -- * ApplicationsItem
-    , ApplicationsItem
-    , applicationsItem
-    , aiVersionCode
-    , aiVersionName
-    , aiPackageName
-    , aiDisplayName
-    , aiPermission
-
-    -- * UserAbout
-    , UserAbout
-    , userAbout
-    , uaValue
-    , uaContentType
-
     -- * VerificationCode
     , VerificationCode
     , verificationCode
@@ -53,6 +38,20 @@ module Network.Google.AdminDirectory.Types
     , ouDescription
     , ouOrgUnitId
 
+    -- * UserMakeAdmin
+    , UserMakeAdmin
+    , userMakeAdmin
+    , umaStatus
+
+    -- * UserAbout
+    , UserAbout
+    , userAbout
+    , uaValue
+    , uaContentType
+
+    -- * UsersListEvent
+    , UsersListEvent (..)
+
     -- * Groups
     , Groups
     , groups
@@ -61,16 +60,14 @@ module Network.Google.AdminDirectory.Types
     , gNextPageToken
     , gKind
 
-    -- * UserMakeAdmin
-    , UserMakeAdmin
-    , userMakeAdmin
-    , umaStatus
+    -- * UsersAliasesListEvent
+    , UsersAliasesListEvent (..)
 
-    -- * Event
-    , Event (..)
+    -- * UsersAliasesWatchEvent
+    , UsersAliasesWatchEvent (..)
 
-    -- * DirectoryChromeosDevicesListProjection
-    , DirectoryChromeosDevicesListProjection (..)
+    -- * UsersWatchEvent
+    , UsersWatchEvent (..)
 
     -- * UserAddress
     , UserAddress
@@ -89,9 +86,6 @@ module Network.Google.AdminDirectory.Types
     , uaCustomType
     , uaSourceIsStructured
 
-    -- * DirectoryUsersWatchOrderBy
-    , DirectoryUsersWatchOrderBy (..)
-
     -- * Group
     , Group
     , group'
@@ -105,27 +99,6 @@ module Network.Google.AdminDirectory.Types
     , groAdminCreated
     , groId
     , groDescription
-
-    -- * DirectoryUsersWatchViewType
-    , DirectoryUsersWatchViewType (..)
-
-    -- * Asp
-    , Asp
-    , asp
-    , aCreationTime
-    , aEtag
-    , aCodeId
-    , aKind
-    , aName
-    , aLastTimeUsed
-    , aUserKey
-
-    -- * Schemas
-    , Schemas
-    , schemas
-    , sEtag
-    , sSchemas
-    , sKind
 
     -- * ChromeOSDevice
     , ChromeOSDevice
@@ -156,6 +129,12 @@ module Network.Google.AdminDirectory.Types
     , codFirmwareVersion
     , codOSVersion
 
+    -- * ChromeosDevicesPatchProjection
+    , ChromeosDevicesPatchProjection (..)
+
+    -- * ChromeosDevicesGetProjection
+    , ChromeosDevicesGetProjection (..)
+
     -- * Users
     , Users
     , users
@@ -165,24 +144,29 @@ module Network.Google.AdminDirectory.Types
     , uKind
     , uTriggerEvent
 
-    -- * UserIm
-    , UserIm
-    , userIm
-    , uiIm
-    , uiProtocol
-    , uiPrimary
-    , uiCustomProtocol
-    , uiType
-    , uiCustomType
+    -- * Asp
+    , Asp
+    , asp
+    , aCreationTime
+    , aEtag
+    , aCodeId
+    , aKind
+    , aName
+    , aLastTimeUsed
+    , aUserKey
 
-    -- * OrderBy
-    , OrderBy (..)
+    -- * Schemas
+    , Schemas
+    , schemas
+    , sEtag
+    , sSchemas
+    , sKind
 
-    -- * DirectoryMobileDevicesListOrderBy
-    , DirectoryMobileDevicesListOrderBy (..)
+    -- * UsersListViewType
+    , UsersListViewType (..)
 
-    -- * ViewType
-    , ViewType (..)
+    -- * OrgUnitsListType
+    , OrgUnitsListType (..)
 
     -- * Notification
     , Notification
@@ -196,21 +180,21 @@ module Network.Google.AdminDirectory.Types
     , nNotificationId
     , nSendTime
 
-    -- * DirectoryUsersGetViewType
-    , DirectoryUsersGetViewType (..)
+    -- * MobileDevicesListSortOrder
+    , MobileDevicesListSortOrder (..)
 
-    -- * Aliases
-    , Aliases
-    , aliases
-    , aliEtag
-    , aliKind
-    , aliAliases
+    -- * UserIm
+    , UserIm
+    , userIm
+    , uiIm
+    , uiProtocol
+    , uiPrimary
+    , uiCustomProtocol
+    , uiType
+    , uiCustomType
 
-    -- * NumericIndexingSpec
-    , NumericIndexingSpec
-    , numericIndexingSpec
-    , nisMaxValue
-    , nisMinValue
+    -- * UsersListOrderBy
+    , UsersListOrderBy (..)
 
     -- * Tokens
     , Tokens
@@ -219,30 +203,21 @@ module Network.Google.AdminDirectory.Types
     , tKind
     , tItems
 
-    -- * Token
-    , Token
-    , token
-    , tokClientId
-    , tokEtag
-    , tokDisplayText
-    , tokKind
-    , tokScopes
-    , tokNATiveApp
-    , tokAnonymous
-    , tokUserKey
+    -- * UserCustomSchemas
+    , UserCustomSchemas
+    , userCustomSchemas
+
+    -- * Aliases
+    , Aliases
+    , aliases
+    , aliEtag
+    , aliKind
+    , aliAliases
 
     -- * UserUndelete
     , UserUndelete
     , userUndelete
     , uuOrgUnitPath
-
-    -- * MobileDevices
-    , MobileDevices
-    , mobileDevices
-    , mdEtag
-    , mdNextPageToken
-    , mdKind
-    , mdMobileDevices
 
     -- * Members
     , Members
@@ -266,6 +241,42 @@ module Network.Google.AdminDirectory.Types
     , cId
     , cType
 
+    -- * MobileDevices
+    , MobileDevices
+    , mobileDevices
+    , mdEtag
+    , mdNextPageToken
+    , mdKind
+    , mdMobileDevices
+
+    -- * Token
+    , Token
+    , token
+    , tokClientId
+    , tokEtag
+    , tokDisplayText
+    , tokKind
+    , tokScopes
+    , tokNATiveApp
+    , tokAnonymous
+    , tokUserKey
+
+    -- * UserName
+    , UserName
+    , userName
+    , unGivenName
+    , unFullName
+    , unFamilyName
+
+    -- * UsersWatchViewType
+    , UsersWatchViewType (..)
+
+    -- * ChromeOSDeviceRecentUsersItem
+    , ChromeOSDeviceRecentUsersItem
+    , chromeOSDeviceRecentUsersItem
+    , codruiEmail
+    , codruiType
+
     -- * Alias
     , Alias
     , alias
@@ -275,21 +286,17 @@ module Network.Google.AdminDirectory.Types
     , aaId
     , aaPrimaryEmail
 
-    -- * DirectoryUsersAliasesWatchEvent
-    , DirectoryUsersAliasesWatchEvent (..)
+    -- * UsersGetProjection
+    , UsersGetProjection (..)
 
-    -- * UserName
-    , UserName
-    , userName
-    , unGivenName
-    , unFullName
-    , unFamilyName
-
-    -- * DirectoryUsersWatchSortOrder
-    , DirectoryUsersWatchSortOrder (..)
-
-    -- * DirectoryMobileDevicesGetProjection
-    , DirectoryMobileDevicesGetProjection (..)
+    -- * Schema
+    , Schema
+    , schema
+    , schEtag
+    , schKind
+    , schSchemaName
+    , schSchemaId
+    , schFields
 
     -- * User
     , User
@@ -330,36 +337,23 @@ module Network.Google.AdminDirectory.Types
     , useCustomSchemas
     , useSuspensionReason
 
-    -- * Schema
-    , Schema
-    , schema
-    , schEtag
-    , schKind
-    , schSchemaName
-    , schSchemaId
-    , schFields
+    -- * MobileDevicesListProjection
+    , MobileDevicesListProjection (..)
 
-    -- * Params
-    , Params
-    , params
+    -- * MobileDeviceApplicationsItem
+    , MobileDeviceApplicationsItem
+    , mobileDeviceApplicationsItem
+    , mdaiVersionCode
+    , mdaiVersionName
+    , mdaiPackageName
+    , mdaiDisplayName
+    , mdaiPermission
 
-    -- * SortOrder
-    , SortOrder (..)
+    -- * MobileDevicesListOrderBy
+    , MobileDevicesListOrderBy (..)
 
-    -- * DirectoryMobileDevicesListSortOrder
-    , DirectoryMobileDevicesListSortOrder (..)
-
-    -- * RecentUsersItem
-    , RecentUsersItem
-    , recentUsersItem
-    , ruiEmail
-    , ruiType
-
-    -- * DirectoryChromeosDevicesUpdateProjection
-    , DirectoryChromeosDevicesUpdateProjection (..)
-
-    -- * DirectoryUsersWatchProjection
-    , DirectoryUsersWatchProjection (..)
+    -- * UsersListSortOrder
+    , UsersListSortOrder (..)
 
     -- * OrgUnits
     , OrgUnits
@@ -375,6 +369,9 @@ module Network.Google.AdminDirectory.Types
     , vKind
     , vItems
 
+    -- * ChromeosDevicesListSortOrder
+    , ChromeosDevicesListSortOrder (..)
+
     -- * UserRelation
     , UserRelation
     , userRelation
@@ -382,16 +379,12 @@ module Network.Google.AdminDirectory.Types
     , urType
     , urCustomType
 
-    -- * DirectoryChromeosDevicesListOrderBy
-    , DirectoryChromeosDevicesListOrderBy (..)
+    -- * UsersWatchSortOrder
+    , UsersWatchSortOrder (..)
 
-    -- * UserWebsite
-    , UserWebsite
-    , userWebsite
-    , uwValue
-    , uwPrimary
-    , uwType
-    , uwCustomType
+    -- * ChannelParams
+    , ChannelParams
+    , channelParams
 
     -- * UserOrganization
     , UserOrganization
@@ -407,6 +400,28 @@ module Network.Google.AdminDirectory.Types
     , uoType
     , uoCustomType
     , uoDescription
+
+    -- * UserWebsite
+    , UserWebsite
+    , userWebsite
+    , uwValue
+    , uwPrimary
+    , uwType
+    , uwCustomType
+
+    -- * ChromeOSDeviceActiveTimeRangesItem
+    , ChromeOSDeviceActiveTimeRangesItem
+    , chromeOSDeviceActiveTimeRangesItem
+    , codatriDate
+    , codatriActiveTime
+
+    -- * UserEmail
+    , UserEmail
+    , userEmail
+    , ueAddress
+    , uePrimary
+    , ueType
+    , ueCustomType
 
     -- * UserPhone
     , UserPhone
@@ -428,35 +443,14 @@ module Network.Google.AdminDirectory.Types
     , upId
     , upPrimaryEmail
 
-    -- * DirectoryUsersListEvent
-    , DirectoryUsersListEvent (..)
+    -- * UsersListProjection
+    , UsersListProjection (..)
 
-    -- * DirectoryMobileDevicesListProjection
-    , DirectoryMobileDevicesListProjection (..)
+    -- * ChromeosDevicesUpdateProjection
+    , ChromeosDevicesUpdateProjection (..)
 
-    -- * Projection
-    , Projection (..)
-
-    -- * UserEmail
-    , UserEmail
-    , userEmail
-    , ueAddress
-    , uePrimary
-    , ueType
-    , ueCustomType
-
-    -- * Member
-    , Member
-    , member
-    , memEmail
-    , memEtag
-    , memKind
-    , memRole
-    , memId
-    , memType
-
-    -- * DirectoryUsersGetProjection
-    , DirectoryUsersGetProjection (..)
+    -- * MobileDevicesGetProjection
+    , MobileDevicesGetProjection (..)
 
     -- * MobileDevice
     , MobileDevice
@@ -466,7 +460,7 @@ module Network.Google.AdminDirectory.Types
     , mobEtag
     , mobResourceId
     , mobBuildNumber
-    , mobManagedAccountIsOnOwnerProfile
+    , mobManagedAccountIsOnOwnerProFile
     , mobLastSync
     , mobOtherAccountsInfo
     , mobKind
@@ -488,29 +482,51 @@ module Network.Google.AdminDirectory.Types
     , mobSerialNumber
     , mobHardwareId
     , mobBasebandVersion
-    , mobSupportsWorkProfile
+    , mobSupportsWorkProFile
     , mobDeviceCompromisedStatus
     , mobApplications
     , mobDefaultLanguage
 
-    -- * ActiveTimeRangesItem
-    , ActiveTimeRangesItem
-    , activeTimeRangesItem
-    , atriDate
-    , atriActiveTime
-
-    -- * Type
-    , Type (..)
-
-    -- * DirectoryChromeosDevicesGetProjection
-    , DirectoryChromeosDevicesGetProjection (..)
-
-    -- * DirectoryChromeosDevicesPatchProjection
-    , DirectoryChromeosDevicesPatchProjection (..)
+    -- * Member
+    , Member
+    , member
+    , memEmail
+    , memEtag
+    , memKind
+    , memRole
+    , memId
+    , memType
 
     -- * UserCustomProperties
     , UserCustomProperties
     , userCustomProperties
+
+    -- * ChromeosDevicesListOrderBy
+    , ChromeosDevicesListOrderBy (..)
+
+    -- * UsersWatchProjection
+    , UsersWatchProjection (..)
+
+    -- * UsersWatchOrderBy
+    , UsersWatchOrderBy (..)
+
+    -- * Notifications
+    , Notifications
+    , notifications
+    , notEtag
+    , notNextPageToken
+    , notKind
+    , notItems
+    , notUnreadNotificationsCount
+
+    -- * ChromeosDevicesListProjection
+    , ChromeosDevicesListProjection (..)
+
+    -- * SchemaFieldSpecNumericIndexingSpec
+    , SchemaFieldSpecNumericIndexingSpec
+    , schemaFieldSpecNumericIndexingSpec
+    , sfsnisMaxValue
+    , sfsnisMinValue
 
     -- * MobileDeviceAction
     , MobileDeviceAction
@@ -530,20 +546,13 @@ module Network.Google.AdminDirectory.Types
     , sfsFieldName
     , sfsMultiValued
 
-    -- * DirectoryUsersWatchEvent
-    , DirectoryUsersWatchEvent (..)
-
-    -- * Notifications
-    , Notifications
-    , notifications
-    , notEtag
-    , notNextPageToken
-    , notKind
-    , notItems
-    , notUnreadNotificationsCount
-
-    -- * DirectoryChromeosDevicesListSortOrder
-    , DirectoryChromeosDevicesListSortOrder (..)
+    -- * ChromeOSDevices
+    , ChromeOSDevices
+    , chromeOSDevices
+    , cosdEtag
+    , cosdNextPageToken
+    , cosdKind
+    , cosdChromeosDevices
 
     -- * UserExternalId
     , UserExternalId
@@ -559,17 +568,8 @@ module Network.Google.AdminDirectory.Types
     , a1Kind
     , a1Items
 
-    -- * CustomSchemas
-    , CustomSchemas
-    , customSchemas
-
-    -- * ChromeOSDevices
-    , ChromeOSDevices
-    , chromeOSDevices
-    , cosdEtag
-    , cosdNextPageToken
-    , cosdKind
-    , cosdChromeosDevices
+    -- * UsersGetViewType
+    , UsersGetViewType (..)
     ) where
 
 import           Network.Google.AdminDirectory.Types.Product

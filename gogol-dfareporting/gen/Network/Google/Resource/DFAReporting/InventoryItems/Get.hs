@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.InventoryItems.Get
     , iigQuotaUser
     , iigPrettyPrint
     , iigUserIP
-    , iigProfileId
+    , iigProFileId
     , iigKey
     , iigId
     , iigProjectId
@@ -70,7 +70,7 @@ data InventoryItemsGet' = InventoryItemsGet'
     { _iigQuotaUser   :: !(Maybe Text)
     , _iigPrettyPrint :: !Bool
     , _iigUserIP      :: !(Maybe Text)
-    , _iigProfileId   :: !Int64
+    , _iigProFileId   :: !Int64
     , _iigKey         :: !(Maybe Key)
     , _iigId          :: !Int64
     , _iigProjectId   :: !Int64
@@ -88,7 +88,7 @@ data InventoryItemsGet' = InventoryItemsGet'
 --
 -- * 'iigUserIP'
 --
--- * 'iigProfileId'
+-- * 'iigProFileId'
 --
 -- * 'iigKey'
 --
@@ -104,12 +104,12 @@ inventoryItemsGet'
     -> Int64 -- ^ 'id'
     -> Int64 -- ^ 'projectId'
     -> InventoryItemsGet'
-inventoryItemsGet' pIigProfileId_ pIigId_ pIigProjectId_ =
+inventoryItemsGet' pIigProFileId_ pIigId_ pIigProjectId_ =
     InventoryItemsGet'
     { _iigQuotaUser = Nothing
     , _iigPrettyPrint = True
     , _iigUserIP = Nothing
-    , _iigProfileId = pIigProfileId_
+    , _iigProFileId = pIigProFileId_
     , _iigKey = Nothing
     , _iigId = pIigId_
     , _iigProjectId = pIigProjectId_
@@ -137,9 +137,9 @@ iigUserIP
   = lens _iigUserIP (\ s a -> s{_iigUserIP = a})
 
 -- | User profile ID associated with this request.
-iigProfileId :: Lens' InventoryItemsGet' Int64
-iigProfileId
-  = lens _iigProfileId (\ s a -> s{_iigProfileId = a})
+iigProFileId :: Lens' InventoryItemsGet' Int64
+iigProFileId
+  = lens _iigProFileId (\ s a -> s{_iigProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -175,7 +175,7 @@ instance GoogleRequest InventoryItemsGet' where
         type Rs InventoryItemsGet' = InventoryItem
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u InventoryItemsGet'{..}
-          = go _iigProfileId _iigProjectId _iigId _iigQuotaUser
+          = go _iigProFileId _iigProjectId _iigId _iigQuotaUser
               (Just _iigPrettyPrint)
               _iigUserIP
               _iigFields

@@ -58,7 +58,7 @@ type PostsGetResource =
              QueryParam "fetchBody" Bool :>
                QueryParam "fetchImages" Bool :>
                  QueryParam "maxComments" Word32 :>
-                   QueryParam "view" BloggerPostsGetView :>
+                   QueryParam "view" PostsGetView :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -79,7 +79,7 @@ data PostsGet' = PostsGet'
     , _pgBlogId      :: !Text
     , _pgMaxComments :: !(Maybe Word32)
     , _pgKey         :: !(Maybe Key)
-    , _pgView        :: !(Maybe BloggerPostsGetView)
+    , _pgView        :: !(Maybe PostsGetView)
     , _pgPostId      :: !Text
     , _pgOAuthToken  :: !(Maybe OAuthToken)
     , _pgFields      :: !(Maybe Text)
@@ -181,7 +181,7 @@ pgKey = lens _pgKey (\ s a -> s{_pgKey = a})
 
 -- | Access level with which to view the returned result. Note that some
 -- fields require elevated access.
-pgView :: Lens' PostsGet' (Maybe BloggerPostsGetView)
+pgView :: Lens' PostsGet' (Maybe PostsGetView)
 pgView = lens _pgView (\ s a -> s{_pgView = a})
 
 -- | The ID of the post

@@ -54,7 +54,7 @@ type OnboardingListCategoryVolumesResource =
        "listCategoryVolumes" :>
          QueryParam "locale" Text :>
            QueryParam "maxAllowedMaturityRating"
-             MaxAllowedMaturityRating
+             OnboardingListCategoryVolumesMaxAllowedMaturityRating
              :>
              QueryParams "categoryId" Text :>
                QueryParam "pageToken" Text :>
@@ -75,7 +75,7 @@ data OnboardingListCategoryVolumes' = OnboardingListCategoryVolumes'
     , _olcvPrettyPrint              :: !Bool
     , _olcvUserIP                   :: !(Maybe Text)
     , _olcvLocale                   :: !(Maybe Text)
-    , _olcvMaxAllowedMaturityRating :: !(Maybe MaxAllowedMaturityRating)
+    , _olcvMaxAllowedMaturityRating :: !(Maybe OnboardingListCategoryVolumesMaxAllowedMaturityRating)
     , _olcvKey                      :: !(Maybe Key)
     , _olcvCategoryId               :: !(Maybe [Text])
     , _olcvPageToken                :: !(Maybe Text)
@@ -154,7 +154,7 @@ olcvLocale
 
 -- | The maximum allowed maturity rating of returned volumes. Books with a
 -- higher maturity rating are filtered out.
-olcvMaxAllowedMaturityRating :: Lens' OnboardingListCategoryVolumes' (Maybe MaxAllowedMaturityRating)
+olcvMaxAllowedMaturityRating :: Lens' OnboardingListCategoryVolumes' (Maybe OnboardingListCategoryVolumesMaxAllowedMaturityRating)
 olcvMaxAllowedMaturityRating
   = lens _olcvMaxAllowedMaturityRating
       (\ s a -> s{_olcvMaxAllowedMaturityRating = a})

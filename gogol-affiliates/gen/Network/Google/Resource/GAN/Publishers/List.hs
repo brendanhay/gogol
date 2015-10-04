@@ -55,11 +55,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @GANPublishersList@ which the
 -- 'PublishersList'' request conforms to.
 type PublishersListResource =
-     Capture "role" GANPublishersListRole :>
+     Capture "role" PublishersListRole :>
        Capture "roleId" Text :>
          "publishers" :>
            QueryParam "relationshipStatus"
-             GANPublishersListRelationshipStatus
+             PublishersListRelationshipStatus
              :>
              QueryParam "minSevenDayEpc" Double :>
                QueryParam "minNinetyDayEpc" Double :>
@@ -84,11 +84,11 @@ data PublishersList' = PublishersList'
     { _plQuotaUser          :: !(Maybe Text)
     , _plPrettyPrint        :: !Bool
     , _plUserIP             :: !(Maybe Text)
-    , _plRelationshipStatus :: !(Maybe GANPublishersListRelationshipStatus)
+    , _plRelationshipStatus :: !(Maybe PublishersListRelationshipStatus)
     , _plMinSevenDayEpc     :: !(Maybe Double)
     , _plRoleId             :: !Text
     , _plMinNinetyDayEpc    :: !(Maybe Double)
-    , _plRole               :: !GANPublishersListRole
+    , _plRole               :: !PublishersListRole
     , _plKey                :: !(Maybe Key)
     , _plMinPayoutRank      :: !(Maybe Int32)
     , _plPageToken          :: !(Maybe Text)
@@ -133,7 +133,7 @@ data PublishersList' = PublishersList'
 -- * 'plFields'
 publishersList'
     :: Text -- ^ 'roleId'
-    -> GANPublishersListRole -- ^ 'role'
+    -> PublishersListRole -- ^ 'role'
     -> PublishersList'
 publishersList' pPlRoleId_ pPlRole_ =
     PublishersList'
@@ -174,7 +174,7 @@ plUserIP = lens _plUserIP (\ s a -> s{_plUserIP = a})
 
 -- | Filters out all publishers for which do not have the given relationship
 -- status with the requesting publisher.
-plRelationshipStatus :: Lens' PublishersList' (Maybe GANPublishersListRelationshipStatus)
+plRelationshipStatus :: Lens' PublishersList' (Maybe PublishersListRelationshipStatus)
 plRelationshipStatus
   = lens _plRelationshipStatus
       (\ s a -> s{_plRelationshipStatus = a})
@@ -199,7 +199,7 @@ plMinNinetyDayEpc
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-plRole :: Lens' PublishersList' GANPublishersListRole
+plRole :: Lens' PublishersList' PublishersListRole
 plRole = lens _plRole (\ s a -> s{_plRole = a})
 
 -- | API key. Your API key identifies your project and provides you with API

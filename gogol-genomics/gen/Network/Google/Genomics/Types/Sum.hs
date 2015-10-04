@@ -17,8 +17,42 @@ module Network.Google.Genomics.Types.Sum where
 
 import           Network.Google.Prelude
 
+data SearchAnnotationSetsRequestTypesItem
+    = SASRTIGene
+      -- ^ @GENE@
+    | SASRTIGeneric
+      -- ^ @GENERIC@
+    | SASRTITranscript
+      -- ^ @TRANSCRIPT@
+    | SASRTIVariant
+      -- ^ @VARIANT@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable SearchAnnotationSetsRequestTypesItem
+
+instance FromText SearchAnnotationSetsRequestTypesItem where
+    fromText = \case
+        "GENE" -> Just SASRTIGene
+        "GENERIC" -> Just SASRTIGeneric
+        "TRANSCRIPT" -> Just SASRTITranscript
+        "VARIANT" -> Just SASRTIVariant
+        _ -> Nothing
+
+instance ToText SearchAnnotationSetsRequestTypesItem where
+    toText = \case
+        SASRTIGene -> "GENE"
+        SASRTIGeneric -> "GENERIC"
+        SASRTITranscript -> "TRANSCRIPT"
+        SASRTIVariant -> "VARIANT"
+
+instance FromJSON SearchAnnotationSetsRequestTypesItem where
+    parseJSON = parseJSONText "SearchAnnotationSetsRequestTypesItem"
+
+instance ToJSON SearchAnnotationSetsRequestTypesItem where
+    toJSON = toJSONText
+
 -- | Effect of the variant on the coding sequence.
-data Effect
+data VariantAnnotationEffect
     = EffectUnspecified
       -- ^ @EFFECT_UNSPECIFIED@
     | Frameshift
@@ -39,9 +73,9 @@ data Effect
       -- ^ @SYNONYMOUS_SNP@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable Effect
+instance Hashable VariantAnnotationEffect
 
-instance FromText Effect where
+instance FromText VariantAnnotationEffect where
     fromText = \case
         "EFFECT_UNSPECIFIED" -> Just EffectUnspecified
         "FRAMESHIFT" -> Just Frameshift
@@ -54,7 +88,7 @@ instance FromText Effect where
         "SYNONYMOUS_SNP" -> Just SynonymousSnp
         _ -> Nothing
 
-instance ToText Effect where
+instance ToText VariantAnnotationEffect where
     toText = \case
         EffectUnspecified -> "EFFECT_UNSPECIFIED"
         Frameshift -> "FRAMESHIFT"
@@ -66,103 +100,10 @@ instance ToText Effect where
         StopLoss -> "STOP_LOSS"
         SynonymousSnp -> "SYNONYMOUS_SNP"
 
-instance FromJSON Effect where
-    parseJSON = parseJSONText "Effect"
+instance FromJSON VariantAnnotationEffect where
+    parseJSON = parseJSONText "VariantAnnotationEffect"
 
-instance ToJSON Effect where
-    toJSON = toJSONText
-
-data Operation
-    = AlignmentMatch
-      -- ^ @ALIGNMENT_MATCH@
-    | ClipHard
-      -- ^ @CLIP_HARD@
-    | ClipSoft
-      -- ^ @CLIP_SOFT@
-    | Delete
-      -- ^ @DELETE@
-    | Insert
-      -- ^ @INSERT@
-    | OperationUnspecified
-      -- ^ @OPERATION_UNSPECIFIED@
-    | Pad
-      -- ^ @PAD@
-    | SequenceMatch
-      -- ^ @SEQUENCE_MATCH@
-    | SequenceMismatch
-      -- ^ @SEQUENCE_MISMATCH@
-    | Skip
-      -- ^ @SKIP@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Operation
-
-instance FromText Operation where
-    fromText = \case
-        "ALIGNMENT_MATCH" -> Just AlignmentMatch
-        "CLIP_HARD" -> Just ClipHard
-        "CLIP_SOFT" -> Just ClipSoft
-        "DELETE" -> Just Delete
-        "INSERT" -> Just Insert
-        "OPERATION_UNSPECIFIED" -> Just OperationUnspecified
-        "PAD" -> Just Pad
-        "SEQUENCE_MATCH" -> Just SequenceMatch
-        "SEQUENCE_MISMATCH" -> Just SequenceMismatch
-        "SKIP" -> Just Skip
-        _ -> Nothing
-
-instance ToText Operation where
-    toText = \case
-        AlignmentMatch -> "ALIGNMENT_MATCH"
-        ClipHard -> "CLIP_HARD"
-        ClipSoft -> "CLIP_SOFT"
-        Delete -> "DELETE"
-        Insert -> "INSERT"
-        OperationUnspecified -> "OPERATION_UNSPECIFIED"
-        Pad -> "PAD"
-        SequenceMatch -> "SEQUENCE_MATCH"
-        SequenceMismatch -> "SEQUENCE_MISMATCH"
-        Skip -> "SKIP"
-
-instance FromJSON Operation where
-    parseJSON = parseJSONText "Operation"
-
-instance ToJSON Operation where
-    toJSON = toJSONText
-
--- | The type of annotations contained within this set.
-data AnnotationSetType
-    = ASTGene
-      -- ^ @GENE@
-    | ASTGeneric
-      -- ^ @GENERIC@
-    | ASTTranscript
-      -- ^ @TRANSCRIPT@
-    | ASTVariant
-      -- ^ @VARIANT@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable AnnotationSetType
-
-instance FromText AnnotationSetType where
-    fromText = \case
-        "GENE" -> Just ASTGene
-        "GENERIC" -> Just ASTGeneric
-        "TRANSCRIPT" -> Just ASTTranscript
-        "VARIANT" -> Just ASTVariant
-        _ -> Nothing
-
-instance ToText AnnotationSetType where
-    toText = \case
-        ASTGene -> "GENE"
-        ASTGeneric -> "GENERIC"
-        ASTTranscript -> "TRANSCRIPT"
-        ASTVariant -> "VARIANT"
-
-instance FromJSON AnnotationSetType where
-    parseJSON = parseJSONText "AnnotationSetType"
-
-instance ToJSON AnnotationSetType where
+instance ToJSON VariantAnnotationEffect where
     toJSON = toJSONText
 
 -- | The type of data. Possible types include: Integer, Float, Flag,
@@ -209,138 +150,180 @@ instance FromJSON MetadataType where
 instance ToJSON MetadataType where
     toJSON = toJSONText
 
--- | Describes the clinical significance of a variant. It is adapted from the
--- ClinVar controlled vocabulary for clinical significance described at:
--- http:\/\/www.ncbi.nlm.nih.gov\/clinvar\/docs\/clinsig\/
-data ClinicalSignificance
-    = CSAssociation
-      -- ^ @ASSOCIATION@
-    | CSBenign
-      -- ^ @BENIGN@
-    | CSClinicalSignificanceUnspecified
-      -- ^ @CLINICAL_SIGNIFICANCE_UNSPECIFIED@
-    | CSConfersSensitivity
-      -- ^ @CONFERS_SENSITIVITY@
-    | CSDrugResponse
-      -- ^ @DRUG_RESPONSE@
-    | CSHistocompatibility
-      -- ^ @HISTOCOMPATIBILITY@
-    | CSLikelyBenign
-      -- ^ @LIKELY_BENIGN@
-    | CSLikelyPathogenic
-      -- ^ @LIKELY_PATHOGENIC@
-    | CSMultipleReported
-      -- ^ @MULTIPLE_REPORTED@
-    | CSOther
-      -- ^ @OTHER@
-    | CSPathogenic
-      -- ^ @PATHOGENIC@
-    | CSProtective
-      -- ^ @PROTECTIVE@
-    | CSRiskFactor
-      -- ^ @RISK_FACTOR@
-    | CSUncertain
-      -- ^ @UNCERTAIN@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ClinicalSignificance
-
-instance FromText ClinicalSignificance where
-    fromText = \case
-        "ASSOCIATION" -> Just CSAssociation
-        "BENIGN" -> Just CSBenign
-        "CLINICAL_SIGNIFICANCE_UNSPECIFIED" -> Just CSClinicalSignificanceUnspecified
-        "CONFERS_SENSITIVITY" -> Just CSConfersSensitivity
-        "DRUG_RESPONSE" -> Just CSDrugResponse
-        "HISTOCOMPATIBILITY" -> Just CSHistocompatibility
-        "LIKELY_BENIGN" -> Just CSLikelyBenign
-        "LIKELY_PATHOGENIC" -> Just CSLikelyPathogenic
-        "MULTIPLE_REPORTED" -> Just CSMultipleReported
-        "OTHER" -> Just CSOther
-        "PATHOGENIC" -> Just CSPathogenic
-        "PROTECTIVE" -> Just CSProtective
-        "RISK_FACTOR" -> Just CSRiskFactor
-        "UNCERTAIN" -> Just CSUncertain
-        _ -> Nothing
-
-instance ToText ClinicalSignificance where
-    toText = \case
-        CSAssociation -> "ASSOCIATION"
-        CSBenign -> "BENIGN"
-        CSClinicalSignificanceUnspecified -> "CLINICAL_SIGNIFICANCE_UNSPECIFIED"
-        CSConfersSensitivity -> "CONFERS_SENSITIVITY"
-        CSDrugResponse -> "DRUG_RESPONSE"
-        CSHistocompatibility -> "HISTOCOMPATIBILITY"
-        CSLikelyBenign -> "LIKELY_BENIGN"
-        CSLikelyPathogenic -> "LIKELY_PATHOGENIC"
-        CSMultipleReported -> "MULTIPLE_REPORTED"
-        CSOther -> "OTHER"
-        CSPathogenic -> "PATHOGENIC"
-        CSProtective -> "PROTECTIVE"
-        CSRiskFactor -> "RISK_FACTOR"
-        CSUncertain -> "UNCERTAIN"
-
-instance FromJSON ClinicalSignificance where
-    parseJSON = parseJSONText "ClinicalSignificance"
-
-instance ToJSON ClinicalSignificance where
-    toJSON = toJSONText
-
--- | The format for the exported data.
-data Format
-    = Bigquery
-      -- ^ @BIGQUERY@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Format
-
-instance FromText Format where
-    fromText = \case
-        "BIGQUERY" -> Just Bigquery
-        _ -> Nothing
-
-instance ToText Format where
-    toText = \case
-        Bigquery -> "BIGQUERY"
-
-instance FromJSON Format where
-    parseJSON = parseJSONText "Format"
-
-instance ToJSON Format where
-    toJSON = toJSONText
-
-data TypesItem
-    = TIGene
+-- | The type of annotations contained within this set.
+data AnnotationSetType
+    = ASTGene
       -- ^ @GENE@
-    | TIGeneric
+    | ASTGeneric
       -- ^ @GENERIC@
-    | TITranscript
+    | ASTTranscript
       -- ^ @TRANSCRIPT@
-    | TIVariant
+    | ASTVariant
       -- ^ @VARIANT@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable TypesItem
+instance Hashable AnnotationSetType
 
-instance FromText TypesItem where
+instance FromText AnnotationSetType where
     fromText = \case
-        "GENE" -> Just TIGene
-        "GENERIC" -> Just TIGeneric
-        "TRANSCRIPT" -> Just TITranscript
-        "VARIANT" -> Just TIVariant
+        "GENE" -> Just ASTGene
+        "GENERIC" -> Just ASTGeneric
+        "TRANSCRIPT" -> Just ASTTranscript
+        "VARIANT" -> Just ASTVariant
         _ -> Nothing
 
-instance ToText TypesItem where
+instance ToText AnnotationSetType where
     toText = \case
-        TIGene -> "GENE"
-        TIGeneric -> "GENERIC"
-        TITranscript -> "TRANSCRIPT"
-        TIVariant -> "VARIANT"
+        ASTGene -> "GENE"
+        ASTGeneric -> "GENERIC"
+        ASTTranscript -> "TRANSCRIPT"
+        ASTVariant -> "VARIANT"
 
-instance FromJSON TypesItem where
-    parseJSON = parseJSONText "TypesItem"
+instance FromJSON AnnotationSetType where
+    parseJSON = parseJSONText "AnnotationSetType"
 
-instance ToJSON TypesItem where
+instance ToJSON AnnotationSetType where
+    toJSON = toJSONText
+
+-- | Describes the clinical significance of a variant. It is adapted from the
+-- ClinVar controlled vocabulary for clinical significance described at:
+-- http:\/\/www.ncbi.nlm.nih.gov\/clinvar\/docs\/clinsig\/
+data VariantAnnotationClinicalSignificance
+    = VACSAssociation
+      -- ^ @ASSOCIATION@
+    | VACSBenign
+      -- ^ @BENIGN@
+    | VACSClinicalSignificanceUnspecified
+      -- ^ @CLINICAL_SIGNIFICANCE_UNSPECIFIED@
+    | VACSConfersSensitivity
+      -- ^ @CONFERS_SENSITIVITY@
+    | VACSDrugResponse
+      -- ^ @DRUG_RESPONSE@
+    | VACSHistocompatibility
+      -- ^ @HISTOCOMPATIBILITY@
+    | VACSLikelyBenign
+      -- ^ @LIKELY_BENIGN@
+    | VACSLikelyPathogenic
+      -- ^ @LIKELY_PATHOGENIC@
+    | VACSMultipleReported
+      -- ^ @MULTIPLE_REPORTED@
+    | VACSOther
+      -- ^ @OTHER@
+    | VACSPathogenic
+      -- ^ @PATHOGENIC@
+    | VACSProtective
+      -- ^ @PROTECTIVE@
+    | VACSRiskFactor
+      -- ^ @RISK_FACTOR@
+    | VACSUncertain
+      -- ^ @UNCERTAIN@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable VariantAnnotationClinicalSignificance
+
+instance FromText VariantAnnotationClinicalSignificance where
+    fromText = \case
+        "ASSOCIATION" -> Just VACSAssociation
+        "BENIGN" -> Just VACSBenign
+        "CLINICAL_SIGNIFICANCE_UNSPECIFIED" -> Just VACSClinicalSignificanceUnspecified
+        "CONFERS_SENSITIVITY" -> Just VACSConfersSensitivity
+        "DRUG_RESPONSE" -> Just VACSDrugResponse
+        "HISTOCOMPATIBILITY" -> Just VACSHistocompatibility
+        "LIKELY_BENIGN" -> Just VACSLikelyBenign
+        "LIKELY_PATHOGENIC" -> Just VACSLikelyPathogenic
+        "MULTIPLE_REPORTED" -> Just VACSMultipleReported
+        "OTHER" -> Just VACSOther
+        "PATHOGENIC" -> Just VACSPathogenic
+        "PROTECTIVE" -> Just VACSProtective
+        "RISK_FACTOR" -> Just VACSRiskFactor
+        "UNCERTAIN" -> Just VACSUncertain
+        _ -> Nothing
+
+instance ToText VariantAnnotationClinicalSignificance where
+    toText = \case
+        VACSAssociation -> "ASSOCIATION"
+        VACSBenign -> "BENIGN"
+        VACSClinicalSignificanceUnspecified -> "CLINICAL_SIGNIFICANCE_UNSPECIFIED"
+        VACSConfersSensitivity -> "CONFERS_SENSITIVITY"
+        VACSDrugResponse -> "DRUG_RESPONSE"
+        VACSHistocompatibility -> "HISTOCOMPATIBILITY"
+        VACSLikelyBenign -> "LIKELY_BENIGN"
+        VACSLikelyPathogenic -> "LIKELY_PATHOGENIC"
+        VACSMultipleReported -> "MULTIPLE_REPORTED"
+        VACSOther -> "OTHER"
+        VACSPathogenic -> "PATHOGENIC"
+        VACSProtective -> "PROTECTIVE"
+        VACSRiskFactor -> "RISK_FACTOR"
+        VACSUncertain -> "UNCERTAIN"
+
+instance FromJSON VariantAnnotationClinicalSignificance where
+    parseJSON = parseJSONText "VariantAnnotationClinicalSignificance"
+
+instance ToJSON VariantAnnotationClinicalSignificance where
+    toJSON = toJSONText
+
+-- | The partition strategy describes how read groups are partitioned into
+-- read group sets.
+data ImportReadGroupSetsRequestPartitionStrategy
+    = MergeAll
+      -- ^ @MERGE_ALL@
+    | PerFilePerSample
+      -- ^ @PER_FILE_PER_SAMPLE@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ImportReadGroupSetsRequestPartitionStrategy
+
+instance FromText ImportReadGroupSetsRequestPartitionStrategy where
+    fromText = \case
+        "MERGE_ALL" -> Just MergeAll
+        "PER_FILE_PER_SAMPLE" -> Just PerFilePerSample
+        _ -> Nothing
+
+instance ToText ImportReadGroupSetsRequestPartitionStrategy where
+    toText = \case
+        MergeAll -> "MERGE_ALL"
+        PerFilePerSample -> "PER_FILE_PER_SAMPLE"
+
+instance FromJSON ImportReadGroupSetsRequestPartitionStrategy where
+    parseJSON = parseJSONText "ImportReadGroupSetsRequestPartitionStrategy"
+
+instance ToJSON ImportReadGroupSetsRequestPartitionStrategy where
+    toJSON = toJSONText
+
+-- | The data type for this annotation. Must match the containing annotation
+-- set\'s type.
+data AnnotationType
+    = ATGene
+      -- ^ @GENE@
+    | ATGeneric
+      -- ^ @GENERIC@
+    | ATTranscript
+      -- ^ @TRANSCRIPT@
+    | ATVariant
+      -- ^ @VARIANT@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable AnnotationType
+
+instance FromText AnnotationType where
+    fromText = \case
+        "GENE" -> Just ATGene
+        "GENERIC" -> Just ATGeneric
+        "TRANSCRIPT" -> Just ATTranscript
+        "VARIANT" -> Just ATVariant
+        _ -> Nothing
+
+instance ToText AnnotationType where
+    toText = \case
+        ATGene -> "GENE"
+        ATGeneric -> "GENERIC"
+        ATTranscript -> "TRANSCRIPT"
+        ATVariant -> "VARIANT"
+
+instance FromJSON AnnotationType where
+    parseJSON = parseJSONText "AnnotationType"
+
+instance ToJSON AnnotationType where
     toJSON = toJSONText
 
 data SearchJobsRequestStatusItem
@@ -389,40 +372,62 @@ instance FromJSON SearchJobsRequestStatusItem where
 instance ToJSON SearchJobsRequestStatusItem where
     toJSON = toJSONText
 
--- | The data type for this annotation. Must match the containing annotation
--- set\'s type.
-data Type
-    = TGene
-      -- ^ @GENE@
-    | TGeneric
-      -- ^ @GENERIC@
-    | TTranscript
-      -- ^ @TRANSCRIPT@
-    | TVariant
-      -- ^ @VARIANT@
+data CigarUnitOperation
+    = AlignmentMatch
+      -- ^ @ALIGNMENT_MATCH@
+    | ClipHard
+      -- ^ @CLIP_HARD@
+    | ClipSoft
+      -- ^ @CLIP_SOFT@
+    | Delete
+      -- ^ @DELETE@
+    | Insert
+      -- ^ @INSERT@
+    | OperationUnspecified
+      -- ^ @OPERATION_UNSPECIFIED@
+    | Pad
+      -- ^ @PAD@
+    | SequenceMatch
+      -- ^ @SEQUENCE_MATCH@
+    | SequenceMismatch
+      -- ^ @SEQUENCE_MISMATCH@
+    | Skip
+      -- ^ @SKIP@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable Type
+instance Hashable CigarUnitOperation
 
-instance FromText Type where
+instance FromText CigarUnitOperation where
     fromText = \case
-        "GENE" -> Just TGene
-        "GENERIC" -> Just TGeneric
-        "TRANSCRIPT" -> Just TTranscript
-        "VARIANT" -> Just TVariant
+        "ALIGNMENT_MATCH" -> Just AlignmentMatch
+        "CLIP_HARD" -> Just ClipHard
+        "CLIP_SOFT" -> Just ClipSoft
+        "DELETE" -> Just Delete
+        "INSERT" -> Just Insert
+        "OPERATION_UNSPECIFIED" -> Just OperationUnspecified
+        "PAD" -> Just Pad
+        "SEQUENCE_MATCH" -> Just SequenceMatch
+        "SEQUENCE_MISMATCH" -> Just SequenceMismatch
+        "SKIP" -> Just Skip
         _ -> Nothing
 
-instance ToText Type where
+instance ToText CigarUnitOperation where
     toText = \case
-        TGene -> "GENE"
-        TGeneric -> "GENERIC"
-        TTranscript -> "TRANSCRIPT"
-        TVariant -> "VARIANT"
+        AlignmentMatch -> "ALIGNMENT_MATCH"
+        ClipHard -> "CLIP_HARD"
+        ClipSoft -> "CLIP_SOFT"
+        Delete -> "DELETE"
+        Insert -> "INSERT"
+        OperationUnspecified -> "OPERATION_UNSPECIFIED"
+        Pad -> "PAD"
+        SequenceMatch -> "SEQUENCE_MATCH"
+        SequenceMismatch -> "SEQUENCE_MISMATCH"
+        Skip -> "SKIP"
 
-instance FromJSON Type where
-    parseJSON = parseJSONText "Type"
+instance FromJSON CigarUnitOperation where
+    parseJSON = parseJSONText "CigarUnitOperation"
 
-instance ToJSON Type where
+instance ToJSON CigarUnitOperation where
     toJSON = toJSONText
 
 -- | Type has been adapted from ClinVar\'s list of variant types.
@@ -476,34 +481,6 @@ instance FromJSON VariantAnnotationType where
 instance ToJSON VariantAnnotationType where
     toJSON = toJSONText
 
--- | The format of the variant data being imported. If unspecified, defaults
--- to to \"VCF\".
-data ImportVariantsRequestFormat
-    = CompleteGenomics
-      -- ^ @COMPLETE_GENOMICS@
-    | Vcf
-      -- ^ @VCF@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ImportVariantsRequestFormat
-
-instance FromText ImportVariantsRequestFormat where
-    fromText = \case
-        "COMPLETE_GENOMICS" -> Just CompleteGenomics
-        "VCF" -> Just Vcf
-        _ -> Nothing
-
-instance ToText ImportVariantsRequestFormat where
-    toText = \case
-        CompleteGenomics -> "COMPLETE_GENOMICS"
-        Vcf -> "VCF"
-
-instance FromJSON ImportVariantsRequestFormat where
-    parseJSON = parseJSONText "ImportVariantsRequestFormat"
-
-instance ToJSON ImportVariantsRequestFormat where
-    toJSON = toJSONText
-
 -- | The status of this job.
 data JobStatus
     = JSCanceled
@@ -549,6 +526,57 @@ instance FromJSON JobStatus where
     parseJSON = parseJSONText "JobStatus"
 
 instance ToJSON JobStatus where
+    toJSON = toJSONText
+
+-- | The format of the variant data being imported. If unspecified, defaults
+-- to to \"VCF\".
+data ImportVariantsRequestFormat
+    = CompleteGenomics
+      -- ^ @COMPLETE_GENOMICS@
+    | Vcf
+      -- ^ @VCF@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ImportVariantsRequestFormat
+
+instance FromText ImportVariantsRequestFormat where
+    fromText = \case
+        "COMPLETE_GENOMICS" -> Just CompleteGenomics
+        "VCF" -> Just Vcf
+        _ -> Nothing
+
+instance ToText ImportVariantsRequestFormat where
+    toText = \case
+        CompleteGenomics -> "COMPLETE_GENOMICS"
+        Vcf -> "VCF"
+
+instance FromJSON ImportVariantsRequestFormat where
+    parseJSON = parseJSONText "ImportVariantsRequestFormat"
+
+instance ToJSON ImportVariantsRequestFormat where
+    toJSON = toJSONText
+
+-- | The format for the exported data.
+data ExportVariantSetRequestFormat
+    = Bigquery
+      -- ^ @BIGQUERY@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ExportVariantSetRequestFormat
+
+instance FromText ExportVariantSetRequestFormat where
+    fromText = \case
+        "BIGQUERY" -> Just Bigquery
+        _ -> Nothing
+
+instance ToText ExportVariantSetRequestFormat where
+    toText = \case
+        Bigquery -> "BIGQUERY"
+
+instance FromJSON ExportVariantSetRequestFormat where
+    parseJSON = parseJSONText "ExportVariantSetRequestFormat"
+
+instance ToJSON ExportVariantSetRequestFormat where
     toJSON = toJSONText
 
 -- | The original request type.
@@ -600,32 +628,4 @@ instance FromJSON JobRequestType where
     parseJSON = parseJSONText "JobRequestType"
 
 instance ToJSON JobRequestType where
-    toJSON = toJSONText
-
--- | The partition strategy describes how read groups are partitioned into
--- read group sets.
-data PartitionStrategy
-    = MergeAll
-      -- ^ @MERGE_ALL@
-    | PerFilePerSample
-      -- ^ @PER_FILE_PER_SAMPLE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable PartitionStrategy
-
-instance FromText PartitionStrategy where
-    fromText = \case
-        "MERGE_ALL" -> Just MergeAll
-        "PER_FILE_PER_SAMPLE" -> Just PerFilePerSample
-        _ -> Nothing
-
-instance ToText PartitionStrategy where
-    toText = \case
-        MergeAll -> "MERGE_ALL"
-        PerFilePerSample -> "PER_FILE_PER_SAMPLE"
-
-instance FromJSON PartitionStrategy where
-    parseJSON = parseJSONText "PartitionStrategy"
-
-instance ToJSON PartitionStrategy where
     toJSON = toJSONText

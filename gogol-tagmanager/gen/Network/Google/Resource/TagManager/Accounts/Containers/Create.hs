@@ -57,7 +57,8 @@ type AccountsContainersCreateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Container :> Post '[JSON] Container
+                         ReqBody '[OctetStream] Container :>
+                           Post '[JSON] Container
 
 -- | Creates a Container.
 --

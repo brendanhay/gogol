@@ -56,7 +56,8 @@ type WebResourceUpdateResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] SiteVerificationWebResourceResource
+                       ReqBody '[OctetStream]
+                         SiteVerificationWebResourceResource
                          :> Put '[JSON] SiteVerificationWebResourceResource
 
 -- | Modify the list of owners for your website or domain.

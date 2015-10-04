@@ -37,7 +37,7 @@ module Network.Google.Resource.DFAReporting.CampaignCreativeAssociations.Insert
     , ccaiPrettyPrint
     , ccaiUserIP
     , ccaiCampaignId
-    , ccaiProfileId
+    , ccaiProFileId
     , ccaiPayload
     , ccaiKey
     , ccaiOAuthToken
@@ -62,8 +62,8 @@ type CampaignCreativeAssociationsInsertResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] CampaignCreativeAssociation :>
-                               Post '[JSON] CampaignCreativeAssociation
+                             ReqBody '[OctetStream] CampaignCreativeAssociation
+                               :> Post '[JSON] CampaignCreativeAssociation
 
 -- | Associates a creative with the specified campaign. This method creates a
 -- default ad with dimensions matching the creative in the campaign if such
@@ -75,7 +75,7 @@ data CampaignCreativeAssociationsInsert' = CampaignCreativeAssociationsInsert'
     , _ccaiPrettyPrint :: !Bool
     , _ccaiUserIP      :: !(Maybe Text)
     , _ccaiCampaignId  :: !Int64
-    , _ccaiProfileId   :: !Int64
+    , _ccaiProFileId   :: !Int64
     , _ccaiPayload     :: !CampaignCreativeAssociation
     , _ccaiKey         :: !(Maybe Key)
     , _ccaiOAuthToken  :: !(Maybe OAuthToken)
@@ -94,7 +94,7 @@ data CampaignCreativeAssociationsInsert' = CampaignCreativeAssociationsInsert'
 --
 -- * 'ccaiCampaignId'
 --
--- * 'ccaiProfileId'
+-- * 'ccaiProFileId'
 --
 -- * 'ccaiPayload'
 --
@@ -108,13 +108,13 @@ campaignCreativeAssociationsInsert'
     -> Int64 -- ^ 'profileId'
     -> CampaignCreativeAssociation -- ^ 'payload'
     -> CampaignCreativeAssociationsInsert'
-campaignCreativeAssociationsInsert' pCcaiCampaignId_ pCcaiProfileId_ pCcaiPayload_ =
+campaignCreativeAssociationsInsert' pCcaiCampaignId_ pCcaiProFileId_ pCcaiPayload_ =
     CampaignCreativeAssociationsInsert'
     { _ccaiQuotaUser = Nothing
     , _ccaiPrettyPrint = True
     , _ccaiUserIP = Nothing
     , _ccaiCampaignId = pCcaiCampaignId_
-    , _ccaiProfileId = pCcaiProfileId_
+    , _ccaiProFileId = pCcaiProFileId_
     , _ccaiPayload = pCcaiPayload_
     , _ccaiKey = Nothing
     , _ccaiOAuthToken = Nothing
@@ -148,10 +148,10 @@ ccaiCampaignId
       (\ s a -> s{_ccaiCampaignId = a})
 
 -- | User profile ID associated with this request.
-ccaiProfileId :: Lens' CampaignCreativeAssociationsInsert' Int64
-ccaiProfileId
-  = lens _ccaiProfileId
-      (\ s a -> s{_ccaiProfileId = a})
+ccaiProFileId :: Lens' CampaignCreativeAssociationsInsert' Int64
+ccaiProFileId
+  = lens _ccaiProFileId
+      (\ s a -> s{_ccaiProFileId = a})
 
 -- | Multipart request metadata.
 ccaiPayload :: Lens' CampaignCreativeAssociationsInsert' CampaignCreativeAssociation
@@ -187,7 +187,7 @@ instance GoogleRequest
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           CampaignCreativeAssociationsInsert'{..}
-          = go _ccaiProfileId _ccaiCampaignId _ccaiQuotaUser
+          = go _ccaiProFileId _ccaiCampaignId _ccaiQuotaUser
               (Just _ccaiPrettyPrint)
               _ccaiUserIP
               _ccaiFields

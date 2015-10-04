@@ -138,6 +138,28 @@ instance ToJSON AttachmentInfo where
                  [("data" .=) <$> _aiData,
                   ("namespacedType" .=) <$> _aiNamespacedType])
 
+-- | Properties of the beacon device, for example battery type or firmware
+-- version. Optional.
+--
+-- /See:/ 'beaconProperties' smart constructor.
+data BeaconProperties =
+    BeaconProperties
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BeaconProperties' with the minimum fields required to make a request.
+--
+beaconProperties
+    :: BeaconProperties
+beaconProperties = BeaconProperties
+
+instance FromJSON BeaconProperties where
+        parseJSON
+          = withObject "BeaconProperties"
+              (\ o -> pure BeaconProperties)
+
+instance ToJSON BeaconProperties where
+        toJSON = const (Object mempty)
+
 -- | A generic empty message that you can re-use to avoid defining duplicated
 -- empty messages in your APIs. A typical example is to use it as the
 -- request or the response type of an API method. For instance: service Foo
@@ -196,61 +218,6 @@ instance ToJSON DeleteAttachmentsResponse where
         toJSON DeleteAttachmentsResponse{..}
           = object
               (catMaybes [("numDeleted" .=) <$> _darNumDeleted])
-
--- | An attachment namespace defines read and write access for all the
--- attachments created under it. Each namespace is globally unique, and
--- owned by one project which is the only project that can create
--- attachments under it.
---
--- /See:/ 'namespace' smart constructor.
-data Namespace = Namespace
-    { _nServingVisibility :: !(Maybe Text)
-    , _nNamespaceName     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Namespace' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'nServingVisibility'
---
--- * 'nNamespaceName'
-namespace
-    :: Namespace
-namespace =
-    Namespace
-    { _nServingVisibility = Nothing
-    , _nNamespaceName = Nothing
-    }
-
--- | Specifies what clients may receive attachments under this namespace via
--- \`beaconinfo.getforobserved\`.
-nServingVisibility :: Lens' Namespace (Maybe Text)
-nServingVisibility
-  = lens _nServingVisibility
-      (\ s a -> s{_nServingVisibility = a})
-
--- | Resource name of this namespace. Namespaces names have the format:
--- namespaces\/namespace.
-nNamespaceName :: Lens' Namespace (Maybe Text)
-nNamespaceName
-  = lens _nNamespaceName
-      (\ s a -> s{_nNamespaceName = a})
-
-instance FromJSON Namespace where
-        parseJSON
-          = withObject "Namespace"
-              (\ o ->
-                 Namespace <$>
-                   (o .:? "servingVisibility") <*>
-                     (o .:? "namespaceName"))
-
-instance ToJSON Namespace where
-        toJSON Namespace{..}
-          = object
-              (catMaybes
-                 [("servingVisibility" .=) <$> _nServingVisibility,
-                  ("namespaceName" .=) <$> _nNamespaceName])
 
 -- | Request for beacon and attachment information about beacons that a
 -- mobile client has encountered \"in the wild\".
@@ -313,6 +280,61 @@ instance ToJSON GetInfoForObservedBeaconsRequest
                  [("observations" .=) <$> _gifobrObservations,
                   ("namespacedTypes" .=) <$> _gifobrNamespacedTypes])
 
+-- | An attachment namespace defines read and write access for all the
+-- attachments created under it. Each namespace is globally unique, and
+-- owned by one project which is the only project that can create
+-- attachments under it.
+--
+-- /See:/ 'namespace' smart constructor.
+data Namespace = Namespace
+    { _nServingVisibility :: !(Maybe Text)
+    , _nNamespaceName     :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Namespace' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'nServingVisibility'
+--
+-- * 'nNamespaceName'
+namespace
+    :: Namespace
+namespace =
+    Namespace
+    { _nServingVisibility = Nothing
+    , _nNamespaceName = Nothing
+    }
+
+-- | Specifies what clients may receive attachments under this namespace via
+-- \`beaconinfo.getforobserved\`.
+nServingVisibility :: Lens' Namespace (Maybe Text)
+nServingVisibility
+  = lens _nServingVisibility
+      (\ s a -> s{_nServingVisibility = a})
+
+-- | Resource name of this namespace. Namespaces names have the format:
+-- namespaces\/namespace.
+nNamespaceName :: Lens' Namespace (Maybe Text)
+nNamespaceName
+  = lens _nNamespaceName
+      (\ s a -> s{_nNamespaceName = a})
+
+instance FromJSON Namespace where
+        parseJSON
+          = withObject "Namespace"
+              (\ o ->
+                 Namespace <$>
+                   (o .:? "servingVisibility") <*>
+                     (o .:? "namespaceName"))
+
+instance ToJSON Namespace where
+        toJSON Namespace{..}
+          = object
+              (catMaybes
+                 [("servingVisibility" .=) <$> _nServingVisibility,
+                  ("namespaceName" .=) <$> _nNamespaceName])
+
 -- | Response to ListNamespacesRequest that contains all the project\'s
 -- namespaces.
 --
@@ -352,69 +374,6 @@ instance ToJSON ListNamespacesResponse where
         toJSON ListNamespacesResponse{..}
           = object
               (catMaybes [("namespaces" .=) <$> _lnrNamespaces])
-
--- | Diagnostics for a single beacon.
---
--- /See:/ 'diagnostics' smart constructor.
-data Diagnostics = Diagnostics
-    { _dAlerts                  :: !(Maybe [Text])
-    , _dBeaconName              :: !(Maybe Text)
-    , _dEstimatedLowBatteryDate :: !(Maybe Date)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Diagnostics' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'dAlerts'
---
--- * 'dBeaconName'
---
--- * 'dEstimatedLowBatteryDate'
-diagnostics
-    :: Diagnostics
-diagnostics =
-    Diagnostics
-    { _dAlerts = Nothing
-    , _dBeaconName = Nothing
-    , _dEstimatedLowBatteryDate = Nothing
-    }
-
--- | An unordered list of Alerts that the beacon has.
-dAlerts :: Lens' Diagnostics [Text]
-dAlerts
-  = lens _dAlerts (\ s a -> s{_dAlerts = a}) . _Default
-      . _Coerce
-
--- | Resource name of the beacon.
-dBeaconName :: Lens' Diagnostics (Maybe Text)
-dBeaconName
-  = lens _dBeaconName (\ s a -> s{_dBeaconName = a})
-
--- | The date when the battery is expected to be low. If the value is missing
--- then there is no estimate for when the battery will be low. This value
--- is only an estimate, not an exact date.
-dEstimatedLowBatteryDate :: Lens' Diagnostics (Maybe Date)
-dEstimatedLowBatteryDate
-  = lens _dEstimatedLowBatteryDate
-      (\ s a -> s{_dEstimatedLowBatteryDate = a})
-
-instance FromJSON Diagnostics where
-        parseJSON
-          = withObject "Diagnostics"
-              (\ o ->
-                 Diagnostics <$>
-                   (o .:? "alerts" .!= mempty) <*> (o .:? "beaconName")
-                     <*> (o .:? "estimatedLowBatteryDate"))
-
-instance ToJSON Diagnostics where
-        toJSON Diagnostics{..}
-          = object
-              (catMaybes
-                 [("alerts" .=) <$> _dAlerts,
-                  ("beaconName" .=) <$> _dBeaconName,
-                  ("estimatedLowBatteryDate" .=) <$>
-                    _dEstimatedLowBatteryDate])
 
 -- | Represents a whole calendar date, e.g. date of birth. The time of day
 -- and time zone are either specified elsewhere or are not significant. The
@@ -489,7 +448,7 @@ data Beacon = Beacon
     , _bDescription       :: !(Maybe Text)
     , _bPlaceId           :: !(Maybe Text)
     , _bAdvertisedId      :: !(Maybe AdvertisedId)
-    , _bProperties        :: !(Maybe Properties)
+    , _bProperties        :: !(Maybe BeaconProperties)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Beacon' with the minimum fields required to make a request.
@@ -584,7 +543,7 @@ bAdvertisedId
 
 -- | Properties of the beacon device, for example battery type or firmware
 -- version. Optional.
-bProperties :: Lens' Beacon (Maybe Properties)
+bProperties :: Lens' Beacon (Maybe BeaconProperties)
 bProperties
   = lens _bProperties (\ s a -> s{_bProperties = a})
 
@@ -615,6 +574,69 @@ instance ToJSON Beacon where
                   ("placeId" .=) <$> _bPlaceId,
                   ("advertisedId" .=) <$> _bAdvertisedId,
                   ("properties" .=) <$> _bProperties])
+
+-- | Diagnostics for a single beacon.
+--
+-- /See:/ 'diagnostics' smart constructor.
+data Diagnostics = Diagnostics
+    { _dAlerts                  :: !(Maybe [Text])
+    , _dBeaconName              :: !(Maybe Text)
+    , _dEstimatedLowBatteryDate :: !(Maybe Date)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Diagnostics' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dAlerts'
+--
+-- * 'dBeaconName'
+--
+-- * 'dEstimatedLowBatteryDate'
+diagnostics
+    :: Diagnostics
+diagnostics =
+    Diagnostics
+    { _dAlerts = Nothing
+    , _dBeaconName = Nothing
+    , _dEstimatedLowBatteryDate = Nothing
+    }
+
+-- | An unordered list of Alerts that the beacon has.
+dAlerts :: Lens' Diagnostics [Text]
+dAlerts
+  = lens _dAlerts (\ s a -> s{_dAlerts = a}) . _Default
+      . _Coerce
+
+-- | Resource name of the beacon.
+dBeaconName :: Lens' Diagnostics (Maybe Text)
+dBeaconName
+  = lens _dBeaconName (\ s a -> s{_dBeaconName = a})
+
+-- | The date when the battery is expected to be low. If the value is missing
+-- then there is no estimate for when the battery will be low. This value
+-- is only an estimate, not an exact date.
+dEstimatedLowBatteryDate :: Lens' Diagnostics (Maybe Date)
+dEstimatedLowBatteryDate
+  = lens _dEstimatedLowBatteryDate
+      (\ s a -> s{_dEstimatedLowBatteryDate = a})
+
+instance FromJSON Diagnostics where
+        parseJSON
+          = withObject "Diagnostics"
+              (\ o ->
+                 Diagnostics <$>
+                   (o .:? "alerts" .!= mempty) <*> (o .:? "beaconName")
+                     <*> (o .:? "estimatedLowBatteryDate"))
+
+instance ToJSON Diagnostics where
+        toJSON Diagnostics{..}
+          = object
+              (catMaybes
+                 [("alerts" .=) <$> _dAlerts,
+                  ("beaconName" .=) <$> _dBeaconName,
+                  ("estimatedLowBatteryDate" .=) <$>
+                    _dEstimatedLowBatteryDate])
 
 -- | Response to ListBeaconAttachments that contains the requested
 -- attachments.
@@ -688,68 +710,6 @@ instance FromJSON IndoorLevel where
 instance ToJSON IndoorLevel where
         toJSON IndoorLevel{..}
           = object (catMaybes [("name" .=) <$> _ilName])
-
--- | Represents one beacon observed once.
---
--- /See:/ 'observation' smart constructor.
-data Observation = Observation
-    { _oTelemetry    :: !(Maybe Word8)
-    , _oTimestampMs  :: !(Maybe Text)
-    , _oAdvertisedId :: !(Maybe AdvertisedId)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Observation' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'oTelemetry'
---
--- * 'oTimestampMs'
---
--- * 'oAdvertisedId'
-observation
-    :: Observation
-observation =
-    Observation
-    { _oTelemetry = Nothing
-    , _oTimestampMs = Nothing
-    , _oAdvertisedId = Nothing
-    }
-
--- | The array of telemetry bytes received from the beacon. The server is
--- responsible for parsing it. This field may frequently be empty, as with
--- a beacon that transmits telemetry only occasionally.
-oTelemetry :: Lens' Observation (Maybe Word8)
-oTelemetry
-  = lens _oTelemetry (\ s a -> s{_oTelemetry = a})
-
--- | Time when the beacon was observed. Being sourced from a mobile device,
--- this time may be suspect.
-oTimestampMs :: Lens' Observation (Maybe Text)
-oTimestampMs
-  = lens _oTimestampMs (\ s a -> s{_oTimestampMs = a})
-
--- | The ID advertised by the beacon the client has encountered. Required.
-oAdvertisedId :: Lens' Observation (Maybe AdvertisedId)
-oAdvertisedId
-  = lens _oAdvertisedId
-      (\ s a -> s{_oAdvertisedId = a})
-
-instance FromJSON Observation where
-        parseJSON
-          = withObject "Observation"
-              (\ o ->
-                 Observation <$>
-                   (o .:? "telemetry") <*> (o .:? "timestampMs") <*>
-                     (o .:? "advertisedId"))
-
-instance ToJSON Observation where
-        toJSON Observation{..}
-          = object
-              (catMaybes
-                 [("telemetry" .=) <$> _oTelemetry,
-                  ("timestampMs" .=) <$> _oTimestampMs,
-                  ("advertisedId" .=) <$> _oAdvertisedId])
 
 -- | A subset of beacon information served via the
 -- \`beaconinfo.getforobserved\` method, which you call when users of your
@@ -830,6 +790,68 @@ instance ToJSON BeaconInfo where
                   ("beaconName" .=) <$> _biBeaconName,
                   ("description" .=) <$> _biDescription,
                   ("advertisedId" .=) <$> _biAdvertisedId])
+
+-- | Represents one beacon observed once.
+--
+-- /See:/ 'observation' smart constructor.
+data Observation = Observation
+    { _oTelemetry    :: !(Maybe Word8)
+    , _oTimestampMs  :: !(Maybe Text)
+    , _oAdvertisedId :: !(Maybe AdvertisedId)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Observation' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oTelemetry'
+--
+-- * 'oTimestampMs'
+--
+-- * 'oAdvertisedId'
+observation
+    :: Observation
+observation =
+    Observation
+    { _oTelemetry = Nothing
+    , _oTimestampMs = Nothing
+    , _oAdvertisedId = Nothing
+    }
+
+-- | The array of telemetry bytes received from the beacon. The server is
+-- responsible for parsing it. This field may frequently be empty, as with
+-- a beacon that transmits telemetry only occasionally.
+oTelemetry :: Lens' Observation (Maybe Word8)
+oTelemetry
+  = lens _oTelemetry (\ s a -> s{_oTelemetry = a})
+
+-- | Time when the beacon was observed. Being sourced from a mobile device,
+-- this time may be suspect.
+oTimestampMs :: Lens' Observation (Maybe Text)
+oTimestampMs
+  = lens _oTimestampMs (\ s a -> s{_oTimestampMs = a})
+
+-- | The ID advertised by the beacon the client has encountered. Required.
+oAdvertisedId :: Lens' Observation (Maybe AdvertisedId)
+oAdvertisedId
+  = lens _oAdvertisedId
+      (\ s a -> s{_oAdvertisedId = a})
+
+instance FromJSON Observation where
+        parseJSON
+          = withObject "Observation"
+              (\ o ->
+                 Observation <$>
+                   (o .:? "telemetry") <*> (o .:? "timestampMs") <*>
+                     (o .:? "advertisedId"))
+
+instance ToJSON Observation where
+        toJSON Observation{..}
+          = object
+              (catMaybes
+                 [("telemetry" .=) <$> _oTelemetry,
+                  ("timestampMs" .=) <$> _oTimestampMs,
+                  ("advertisedId" .=) <$> _oAdvertisedId])
 
 -- | Project-specific data associated with a beacon.
 --
@@ -1106,24 +1128,3 @@ instance ToJSON GetInfoForObservedBeaconsResponse
         toJSON GetInfoForObservedBeaconsResponse{..}
           = object
               (catMaybes [("beacons" .=) <$> _gifobrBeacons])
-
--- | Properties of the beacon device, for example battery type or firmware
--- version. Optional.
---
--- /See:/ 'properties' smart constructor.
-data Properties =
-    Properties
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Properties' with the minimum fields required to make a request.
---
-properties
-    :: Properties
-properties = Properties
-
-instance FromJSON Properties where
-        parseJSON
-          = withObject "Properties" (\ o -> pure Properties)
-
-instance ToJSON Properties where
-        toJSON = const (Object mempty)

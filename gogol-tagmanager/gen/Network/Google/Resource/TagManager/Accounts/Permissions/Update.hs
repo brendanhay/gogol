@@ -59,7 +59,8 @@ type AccountsPermissionsUpdateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] UserAccess :> Put '[JSON] UserAccess
+                           ReqBody '[OctetStream] UserAccess :>
+                             Put '[JSON] UserAccess
 
 -- | Updates a user\'s Account & Container Permissions.
 --

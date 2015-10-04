@@ -52,7 +52,7 @@ type VolumesRecommendedListResource =
        "recommended" :>
          QueryParam "locale" Text :>
            QueryParam "maxAllowedMaturityRating"
-             BooksVolumesRecommendedListMaxAllowedMaturityRating
+             VolumesRecommendedListMaxAllowedMaturityRating
              :>
              QueryParam "source" Text :>
                QueryParam "quotaUser" Text :>
@@ -71,7 +71,7 @@ data VolumesRecommendedList' = VolumesRecommendedList'
     , _vrlPrettyPrint              :: !Bool
     , _vrlUserIP                   :: !(Maybe Text)
     , _vrlLocale                   :: !(Maybe Text)
-    , _vrlMaxAllowedMaturityRating :: !(Maybe BooksVolumesRecommendedListMaxAllowedMaturityRating)
+    , _vrlMaxAllowedMaturityRating :: !(Maybe VolumesRecommendedListMaxAllowedMaturityRating)
     , _vrlKey                      :: !(Maybe Key)
     , _vrlSource                   :: !(Maybe Text)
     , _vrlOAuthToken               :: !(Maybe OAuthToken)
@@ -141,7 +141,7 @@ vrlLocale
 
 -- | The maximum allowed maturity rating of returned recommendations. Books
 -- with a higher maturity rating are filtered out.
-vrlMaxAllowedMaturityRating :: Lens' VolumesRecommendedList' (Maybe BooksVolumesRecommendedListMaxAllowedMaturityRating)
+vrlMaxAllowedMaturityRating :: Lens' VolumesRecommendedList' (Maybe VolumesRecommendedListMaxAllowedMaturityRating)
 vrlMaxAllowedMaturityRating
   = lens _vrlMaxAllowedMaturityRating
       (\ s a -> s{_vrlMaxAllowedMaturityRating = a})

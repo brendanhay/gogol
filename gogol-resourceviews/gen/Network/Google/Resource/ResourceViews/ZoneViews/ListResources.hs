@@ -59,8 +59,10 @@ type ZoneViewsListResourcesResource =
            "resourceViews" :>
              Capture "resourceView" Text :>
                "resources" :>
-                 QueryParam "listState" ListState :>
-                   QueryParam "format" Format :>
+                 QueryParam "listState"
+                   ZoneViewsListResourcesListState
+                   :>
+                   QueryParam "format" ZoneViewsListResourcesFormat :>
                      QueryParam "serviceName" Text :>
                        QueryParam "pageToken" Text :>
                          QueryParam "maxResults" Int32 :>
@@ -81,10 +83,10 @@ data ZoneViewsListResources' = ZoneViewsListResources'
     { _zvlrQuotaUser    :: !(Maybe Text)
     , _zvlrPrettyPrint  :: !Bool
     , _zvlrResourceView :: !Text
-    , _zvlrListState    :: !ListState
+    , _zvlrListState    :: !ZoneViewsListResourcesListState
     , _zvlrProject      :: !Text
     , _zvlrUserIP       :: !(Maybe Text)
-    , _zvlrFormat       :: !(Maybe Format)
+    , _zvlrFormat       :: !(Maybe ZoneViewsListResourcesFormat)
     , _zvlrZone         :: !Text
     , _zvlrKey          :: !(Maybe Key)
     , _zvlrServiceName  :: !(Maybe Text)
@@ -169,7 +171,7 @@ zvlrResourceView
       (\ s a -> s{_zvlrResourceView = a})
 
 -- | The state of the instance to list. By default, it lists all instances.
-zvlrListState :: Lens' ZoneViewsListResources' ListState
+zvlrListState :: Lens' ZoneViewsListResources' ZoneViewsListResourcesListState
 zvlrListState
   = lens _zvlrListState
       (\ s a -> s{_zvlrListState = a})
@@ -188,7 +190,7 @@ zvlrUserIP
 -- | The requested format of the return value. It can be URL or URL_PORT. A
 -- JSON object will be included in the response based on the format. The
 -- default format is NONE, which results in no JSON in the response.
-zvlrFormat :: Lens' ZoneViewsListResources' (Maybe Format)
+zvlrFormat :: Lens' ZoneViewsListResources' (Maybe ZoneViewsListResourcesFormat)
 zvlrFormat
   = lens _zvlrFormat (\ s a -> s{_zvlrFormat = a})
 

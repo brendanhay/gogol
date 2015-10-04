@@ -64,7 +64,8 @@ type UsersUpdateResource =
                            QueryParam "key" Key :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
-                                 ReqBody '[JSON] User :> Put '[JSON] Operation
+                                 ReqBody '[OctetStream] User :>
+                                   Put '[JSON] Operation
 
 -- | Updates an existing user in a Cloud SQL instance.
 --

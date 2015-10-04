@@ -63,12 +63,12 @@ type PostUserInfosListResource =
          "blogs" :>
            Capture "blogId" Text :>
              "posts" :>
-               QueryParams "status" Status :>
-                 QueryParam "orderBy" OrderBy :>
+               QueryParams "status" PostUserInfosListStatus :>
+                 QueryParam "orderBy" PostUserInfosListOrderBy :>
                    QueryParam "endDate" DateTime' :>
                      QueryParam "startDate" DateTime' :>
                        QueryParam "fetchBodies" Bool :>
-                         QueryParam "view" View :>
+                         QueryParam "view" PostUserInfosListView :>
                            QueryParam "labels" Text :>
                              QueryParam "pageToken" Text :>
                                QueryParam "maxResults" Word32 :>
@@ -88,10 +88,10 @@ type PostUserInfosListResource =
 --
 -- /See:/ 'postUserInfosList'' smart constructor.
 data PostUserInfosList' = PostUserInfosList'
-    { _puilStatus      :: !(Maybe [Status])
+    { _puilStatus      :: !(Maybe [PostUserInfosListStatus])
     , _puilQuotaUser   :: !(Maybe Text)
     , _puilPrettyPrint :: !Bool
-    , _puilOrderBy     :: !OrderBy
+    , _puilOrderBy     :: !PostUserInfosListOrderBy
     , _puilUserIP      :: !(Maybe Text)
     , _puilEndDate     :: !(Maybe DateTime')
     , _puilBlogId      :: !Text
@@ -99,7 +99,7 @@ data PostUserInfosList' = PostUserInfosList'
     , _puilStartDate   :: !(Maybe DateTime')
     , _puilKey         :: !(Maybe Key)
     , _puilFetchBodies :: !Bool
-    , _puilView        :: !(Maybe View)
+    , _puilView        :: !(Maybe PostUserInfosListView)
     , _puilLabels      :: !(Maybe Text)
     , _puilPageToken   :: !(Maybe Text)
     , _puilOAuthToken  :: !(Maybe OAuthToken)
@@ -153,7 +153,7 @@ postUserInfosList' pPuilBlogId_ pPuilUserId_ =
     { _puilStatus = Nothing
     , _puilQuotaUser = Nothing
     , _puilPrettyPrint = True
-    , _puilOrderBy = OBPublished
+    , _puilOrderBy = PUILOBPublished
     , _puilUserIP = Nothing
     , _puilEndDate = Nothing
     , _puilBlogId = pPuilBlogId_
@@ -169,7 +169,7 @@ postUserInfosList' pPuilBlogId_ pPuilUserId_ =
     , _puilFields = Nothing
     }
 
-puilStatus :: Lens' PostUserInfosList' [Status]
+puilStatus :: Lens' PostUserInfosList' [PostUserInfosListStatus]
 puilStatus
   = lens _puilStatus (\ s a -> s{_puilStatus = a}) .
       _Default
@@ -190,7 +190,7 @@ puilPrettyPrint
       (\ s a -> s{_puilPrettyPrint = a})
 
 -- | Sort order applied to search results. Default is published.
-puilOrderBy :: Lens' PostUserInfosList' OrderBy
+puilOrderBy :: Lens' PostUserInfosList' PostUserInfosListOrderBy
 puilOrderBy
   = lens _puilOrderBy (\ s a -> s{_puilOrderBy = a})
 
@@ -238,7 +238,7 @@ puilFetchBodies
 
 -- | Access level with which to view the returned result. Note that some
 -- fields require elevated access.
-puilView :: Lens' PostUserInfosList' (Maybe View)
+puilView :: Lens' PostUserInfosList' (Maybe PostUserInfosListView)
 puilView = lens _puilView (\ s a -> s{_puilView = a})
 
 -- | Comma-separated list of labels to search for.

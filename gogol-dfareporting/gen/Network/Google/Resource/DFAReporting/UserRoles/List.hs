@@ -36,7 +36,7 @@ module Network.Google.Resource.DFAReporting.UserRoles.List
     , urlUserIP
     , urlSearchString
     , urlIds
-    , urlProfileId
+    , urlProFileId
     , urlSortOrder
     , urlKey
     , urlAccountUserRoleOnly
@@ -59,14 +59,10 @@ type UserRolesListResource =
          "userRoles" :>
            QueryParam "searchString" Text :>
              QueryParams "ids" Int64 :>
-               QueryParam "sortOrder"
-                 DfareportingUserRolesListSortOrder
-                 :>
+               QueryParam "sortOrder" UserRolesListSortOrder :>
                  QueryParam "accountUserRoleOnly" Bool :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "sortField"
-                       DfareportingUserRolesListSortField
-                       :>
+                     QueryParam "sortField" UserRolesListSortField :>
                        QueryParam "subaccountId" Int64 :>
                          QueryParam "maxResults" Int32 :>
                            QueryParam "quotaUser" Text :>
@@ -87,12 +83,12 @@ data UserRolesList' = UserRolesList'
     , _urlUserIP              :: !(Maybe Text)
     , _urlSearchString        :: !(Maybe Text)
     , _urlIds                 :: !(Maybe [Int64])
-    , _urlProfileId           :: !Int64
-    , _urlSortOrder           :: !(Maybe DfareportingUserRolesListSortOrder)
+    , _urlProFileId           :: !Int64
+    , _urlSortOrder           :: !(Maybe UserRolesListSortOrder)
     , _urlKey                 :: !(Maybe Key)
     , _urlAccountUserRoleOnly :: !(Maybe Bool)
     , _urlPageToken           :: !(Maybe Text)
-    , _urlSortField           :: !(Maybe DfareportingUserRolesListSortField)
+    , _urlSortField           :: !(Maybe UserRolesListSortField)
     , _urlSubAccountId        :: !(Maybe Int64)
     , _urlOAuthToken          :: !(Maybe OAuthToken)
     , _urlMaxResults          :: !(Maybe Int32)
@@ -113,7 +109,7 @@ data UserRolesList' = UserRolesList'
 --
 -- * 'urlIds'
 --
--- * 'urlProfileId'
+-- * 'urlProFileId'
 --
 -- * 'urlSortOrder'
 --
@@ -135,14 +131,14 @@ data UserRolesList' = UserRolesList'
 userRolesList'
     :: Int64 -- ^ 'profileId'
     -> UserRolesList'
-userRolesList' pUrlProfileId_ =
+userRolesList' pUrlProFileId_ =
     UserRolesList'
     { _urlQuotaUser = Nothing
     , _urlPrettyPrint = True
     , _urlUserIP = Nothing
     , _urlSearchString = Nothing
     , _urlIds = Nothing
-    , _urlProfileId = pUrlProfileId_
+    , _urlProFileId = pUrlProFileId_
     , _urlSortOrder = Nothing
     , _urlKey = Nothing
     , _urlAccountUserRoleOnly = Nothing
@@ -192,12 +188,12 @@ urlIds
       _Coerce
 
 -- | User profile ID associated with this request.
-urlProfileId :: Lens' UserRolesList' Int64
-urlProfileId
-  = lens _urlProfileId (\ s a -> s{_urlProfileId = a})
+urlProFileId :: Lens' UserRolesList' Int64
+urlProFileId
+  = lens _urlProFileId (\ s a -> s{_urlProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-urlSortOrder :: Lens' UserRolesList' (Maybe DfareportingUserRolesListSortOrder)
+urlSortOrder :: Lens' UserRolesList' (Maybe UserRolesListSortOrder)
 urlSortOrder
   = lens _urlSortOrder (\ s a -> s{_urlSortOrder = a})
 
@@ -220,7 +216,7 @@ urlPageToken
   = lens _urlPageToken (\ s a -> s{_urlPageToken = a})
 
 -- | Field by which to sort the list.
-urlSortField :: Lens' UserRolesList' (Maybe DfareportingUserRolesListSortField)
+urlSortField :: Lens' UserRolesList' (Maybe UserRolesListSortField)
 urlSortField
   = lens _urlSortField (\ s a -> s{_urlSortField = a})
 
@@ -255,7 +251,7 @@ instance GoogleRequest UserRolesList' where
         type Rs UserRolesList' = UserRolesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u UserRolesList'{..}
-          = go _urlProfileId _urlSearchString
+          = go _urlProFileId _urlSearchString
               (_urlIds ^. _Default)
               _urlSortOrder
               _urlAccountUserRoleOnly

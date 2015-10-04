@@ -55,10 +55,10 @@ type URLCrawlErrorsSamplesMarkAsFixedResource =
          "urlCrawlErrorsSamples" :>
            Capture "url" Text :>
              QueryParam "category"
-               WebmastersURLCrawlErrorsSamplesMarkAsFixedCategory
+               URLCrawlErrorsSamplesMarkAsFixedCategory
                :>
                QueryParam "platform"
-                 WebmastersURLCrawlErrorsSamplesMarkAsFixedPlatform
+                 URLCrawlErrorsSamplesMarkAsFixedPlatform
                  :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
@@ -75,9 +75,9 @@ type URLCrawlErrorsSamplesMarkAsFixedResource =
 data URLCrawlErrorsSamplesMarkAsFixed' = URLCrawlErrorsSamplesMarkAsFixed'
     { _ucesmafQuotaUser   :: !(Maybe Text)
     , _ucesmafPrettyPrint :: !Bool
-    , _ucesmafPlatform    :: !WebmastersURLCrawlErrorsSamplesMarkAsFixedPlatform
+    , _ucesmafPlatform    :: !URLCrawlErrorsSamplesMarkAsFixedPlatform
     , _ucesmafUserIP      :: !(Maybe Text)
-    , _ucesmafCategory    :: !WebmastersURLCrawlErrorsSamplesMarkAsFixedCategory
+    , _ucesmafCategory    :: !URLCrawlErrorsSamplesMarkAsFixedCategory
     , _ucesmafSiteURL     :: !Text
     , _ucesmafURL         :: !Text
     , _ucesmafKey         :: !(Maybe Key)
@@ -109,8 +109,8 @@ data URLCrawlErrorsSamplesMarkAsFixed' = URLCrawlErrorsSamplesMarkAsFixed'
 --
 -- * 'ucesmafFields'
 urlCrawlErrorsSamplesMarkAsFixed'
-    :: WebmastersURLCrawlErrorsSamplesMarkAsFixedPlatform -- ^ 'platform'
-    -> WebmastersURLCrawlErrorsSamplesMarkAsFixedCategory -- ^ 'category'
+    :: URLCrawlErrorsSamplesMarkAsFixedPlatform -- ^ 'platform'
+    -> URLCrawlErrorsSamplesMarkAsFixedCategory -- ^ 'category'
     -> Text -- ^ 'siteUrl'
     -> Text -- ^ 'url'
     -> URLCrawlErrorsSamplesMarkAsFixed'
@@ -143,7 +143,7 @@ ucesmafPrettyPrint
       (\ s a -> s{_ucesmafPrettyPrint = a})
 
 -- | The user agent type (platform) that made the request. For example: web
-ucesmafPlatform :: Lens' URLCrawlErrorsSamplesMarkAsFixed' WebmastersURLCrawlErrorsSamplesMarkAsFixedPlatform
+ucesmafPlatform :: Lens' URLCrawlErrorsSamplesMarkAsFixed' URLCrawlErrorsSamplesMarkAsFixedPlatform
 ucesmafPlatform
   = lens _ucesmafPlatform
       (\ s a -> s{_ucesmafPlatform = a})
@@ -156,7 +156,7 @@ ucesmafUserIP
       (\ s a -> s{_ucesmafUserIP = a})
 
 -- | The crawl error category. For example: authPermissions
-ucesmafCategory :: Lens' URLCrawlErrorsSamplesMarkAsFixed' WebmastersURLCrawlErrorsSamplesMarkAsFixedCategory
+ucesmafCategory :: Lens' URLCrawlErrorsSamplesMarkAsFixed' URLCrawlErrorsSamplesMarkAsFixedCategory
 ucesmafCategory
   = lens _ucesmafCategory
       (\ s a -> s{_ucesmafCategory = a})

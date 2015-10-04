@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Accounts.Patch
     , ap1QuotaUser
     , ap1PrettyPrint
     , ap1UserIP
-    , ap1ProfileId
+    , ap1ProFileId
     , ap1Payload
     , ap1Key
     , ap1Id
@@ -59,7 +59,8 @@ type AccountsPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Account :> Patch '[JSON] Account
+                           ReqBody '[OctetStream] Account :>
+                             Patch '[JSON] Account
 
 -- | Updates an existing account. This method supports patch semantics.
 --
@@ -68,7 +69,7 @@ data AccountsPatch' = AccountsPatch'
     { _ap1QuotaUser   :: !(Maybe Text)
     , _ap1PrettyPrint :: !Bool
     , _ap1UserIP      :: !(Maybe Text)
-    , _ap1ProfileId   :: !Int64
+    , _ap1ProFileId   :: !Int64
     , _ap1Payload     :: !Account
     , _ap1Key         :: !(Maybe Key)
     , _ap1Id          :: !Int64
@@ -86,7 +87,7 @@ data AccountsPatch' = AccountsPatch'
 --
 -- * 'ap1UserIP'
 --
--- * 'ap1ProfileId'
+-- * 'ap1ProFileId'
 --
 -- * 'ap1Payload'
 --
@@ -102,12 +103,12 @@ accountsPatch'
     -> Account -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> AccountsPatch'
-accountsPatch' pAp1ProfileId_ pAp1Payload_ pAp1Id_ =
+accountsPatch' pAp1ProFileId_ pAp1Payload_ pAp1Id_ =
     AccountsPatch'
     { _ap1QuotaUser = Nothing
     , _ap1PrettyPrint = True
     , _ap1UserIP = Nothing
-    , _ap1ProfileId = pAp1ProfileId_
+    , _ap1ProFileId = pAp1ProFileId_
     , _ap1Payload = pAp1Payload_
     , _ap1Key = Nothing
     , _ap1Id = pAp1Id_
@@ -135,9 +136,9 @@ ap1UserIP
   = lens _ap1UserIP (\ s a -> s{_ap1UserIP = a})
 
 -- | User profile ID associated with this request.
-ap1ProfileId :: Lens' AccountsPatch' Int64
-ap1ProfileId
-  = lens _ap1ProfileId (\ s a -> s{_ap1ProfileId = a})
+ap1ProFileId :: Lens' AccountsPatch' Int64
+ap1ProFileId
+  = lens _ap1ProFileId (\ s a -> s{_ap1ProFileId = a})
 
 -- | Multipart request metadata.
 ap1Payload :: Lens' AccountsPatch' Account
@@ -173,7 +174,7 @@ instance GoogleRequest AccountsPatch' where
         type Rs AccountsPatch' = Account
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AccountsPatch'{..}
-          = go _ap1ProfileId (Just _ap1Id) _ap1QuotaUser
+          = go _ap1ProFileId (Just _ap1Id) _ap1QuotaUser
               (Just _ap1PrettyPrint)
               _ap1UserIP
               _ap1Fields

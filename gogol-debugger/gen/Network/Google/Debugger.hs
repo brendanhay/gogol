@@ -58,11 +58,6 @@ module Network.Google.Debugger
     , registerDebuggeeResponse
     , rdrDebuggee
 
-    -- ** SetBreakpointResponse
-    , SetBreakpointResponse
-    , setBreakpointResponse
-    , sbrBreakpoint
-
     -- ** SourceContext
     , SourceContext
     , sourceContext
@@ -71,19 +66,18 @@ module Network.Google.Debugger
     , scGerrit
     , scGit
 
-    -- ** RepoId
-    , RepoId
-    , repoId
-    , riUid
-    , riProjectRepoId
-
-    -- ** UpdateActiveBreakpointResponse
-    , UpdateActiveBreakpointResponse
-    , updateActiveBreakpointResponse
+    -- ** SetBreakpointResponse
+    , SetBreakpointResponse
+    , setBreakpointResponse
+    , sbrBreakpoint
 
     -- ** Empty
     , Empty
     , empty
+
+    -- ** UpdateActiveBreakpointResponse
+    , UpdateActiveBreakpointResponse
+    , updateActiveBreakpointResponse
 
     -- ** GerritSourceContext
     , GerritSourceContext
@@ -92,6 +86,12 @@ module Network.Google.Debugger
     , gscAliasName
     , gscRevisionId
     , gscHostURI
+
+    -- ** RepoId
+    , RepoId
+    , repoId
+    , riUid
+    , riProjectRepoId
 
     -- ** ProjectRepoId
     , ProjectRepoId
@@ -167,10 +167,6 @@ module Network.Google.Debugger
     , labrNextWaitToken
     , labrBreakpoints
 
-    -- ** Labels
-    , Labels
-    , labels
-
     -- ** GitSourceContext
     , GitSourceContext
     , gitSourceContext
@@ -198,16 +194,9 @@ module Network.Google.Debugger
     , crscAliasName
     , crscRevisionId
 
-    -- ** RegisterDebuggeeRequest
-    , RegisterDebuggeeRequest
-    , registerDebuggeeRequest
-    , rDebuggee
-
-    -- ** CloudWorkspaceSourceContext
-    , CloudWorkspaceSourceContext
-    , cloudWorkspaceSourceContext
-    , cwscWorkspaceId
-    , cwscSnapshotId
+    -- ** DebuggeeLabels
+    , DebuggeeLabels
+    , debuggeeLabels
 
     -- ** Debuggee
     , Debuggee
@@ -222,6 +211,17 @@ module Network.Google.Debugger
     , dDescription
     , dIsInactive
     , dSourceContexts
+
+    -- ** CloudWorkspaceSourceContext
+    , CloudWorkspaceSourceContext
+    , cloudWorkspaceSourceContext
+    , cwscWorkspaceId
+    , cwscSnapshotId
+
+    -- ** RegisterDebuggeeRequest
+    , RegisterDebuggeeRequest
+    , registerDebuggeeRequest
+    , rDebuggee
 
     -- ** CloudWorkspaceId
     , CloudWorkspaceId

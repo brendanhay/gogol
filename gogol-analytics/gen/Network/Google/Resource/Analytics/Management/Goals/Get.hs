@@ -36,7 +36,7 @@ module Network.Google.Resource.Analytics.Management.Goals.Get
     , mggWebPropertyId
     , mggGoalId
     , mggUserIP
-    , mggProfileId
+    , mggProFileId
     , mggAccountId
     , mggKey
     , mggOAuthToken
@@ -75,7 +75,7 @@ data ManagementGoalsGet' = ManagementGoalsGet'
     , _mggWebPropertyId :: !Text
     , _mggGoalId        :: !Text
     , _mggUserIP        :: !(Maybe Text)
-    , _mggProfileId     :: !Text
+    , _mggProFileId     :: !Text
     , _mggAccountId     :: !Text
     , _mggKey           :: !(Maybe Key)
     , _mggOAuthToken    :: !(Maybe OAuthToken)
@@ -96,7 +96,7 @@ data ManagementGoalsGet' = ManagementGoalsGet'
 --
 -- * 'mggUserIP'
 --
--- * 'mggProfileId'
+-- * 'mggProFileId'
 --
 -- * 'mggAccountId'
 --
@@ -111,14 +111,14 @@ managementGoalsGet'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
     -> ManagementGoalsGet'
-managementGoalsGet' pMggWebPropertyId_ pMggGoalId_ pMggProfileId_ pMggAccountId_ =
+managementGoalsGet' pMggWebPropertyId_ pMggGoalId_ pMggProFileId_ pMggAccountId_ =
     ManagementGoalsGet'
     { _mggQuotaUser = Nothing
     , _mggPrettyPrint = False
     , _mggWebPropertyId = pMggWebPropertyId_
     , _mggGoalId = pMggGoalId_
     , _mggUserIP = Nothing
-    , _mggProfileId = pMggProfileId_
+    , _mggProFileId = pMggProFileId_
     , _mggAccountId = pMggAccountId_
     , _mggKey = Nothing
     , _mggOAuthToken = Nothing
@@ -156,9 +156,9 @@ mggUserIP
   = lens _mggUserIP (\ s a -> s{_mggUserIP = a})
 
 -- | View (Profile) ID to retrieve the goal for.
-mggProfileId :: Lens' ManagementGoalsGet' Text
-mggProfileId
-  = lens _mggProfileId (\ s a -> s{_mggProfileId = a})
+mggProFileId :: Lens' ManagementGoalsGet' Text
+mggProFileId
+  = lens _mggProFileId (\ s a -> s{_mggProFileId = a})
 
 -- | Account ID to retrieve the goal for.
 mggAccountId :: Lens' ManagementGoalsGet' Text
@@ -190,7 +190,7 @@ instance GoogleRequest ManagementGoalsGet' where
         type Rs ManagementGoalsGet' = Goal
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementGoalsGet'{..}
-          = go _mggAccountId _mggWebPropertyId _mggProfileId
+          = go _mggAccountId _mggWebPropertyId _mggProFileId
               _mggGoalId
               _mggQuotaUser
               (Just _mggPrettyPrint)

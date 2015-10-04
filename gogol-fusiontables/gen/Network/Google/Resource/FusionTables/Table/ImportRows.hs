@@ -66,7 +66,8 @@ type TableImportRowsResource =
                            QueryParam "fields" Text :>
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "alt" AltJSON :> Post '[JSON] Import
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] Body :> Post '[JSON] Import
 
 -- | Imports more rows into a table.
 --

@@ -22,7 +22,7 @@ import           Network.Google.PubSub.Types.Sum
 --
 -- /See:/ 'pushConfig' smart constructor.
 data PushConfig = PushConfig
-    { _pcAttributes   :: !(Maybe Attributes)
+    { _pcAttributes   :: !(Maybe PushConfigAttributes)
     , _pcPushEndpoint :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -56,7 +56,7 @@ pushConfig =
 -- this attribute are: * \`v1beta1\`: uses the push format defined in the
 -- v1beta1 Pub\/Sub API. * \`v1\` or \`v1beta2\`: uses the push format
 -- defined in the v1 Pub\/Sub API.
-pcAttributes :: Lens' PushConfig (Maybe Attributes)
+pcAttributes :: Lens' PushConfig (Maybe PushConfigAttributes)
 pcAttributes
   = lens _pcAttributes (\ s a -> s{_pcAttributes = a})
 
@@ -256,61 +256,6 @@ instance FromJSON Empty where
 instance ToJSON Empty where
         toJSON = const (Object mempty)
 
--- | Response for the ListTopicSubscriptions method.
---
--- /See:/ 'listTopicSubscriptionsResponse' smart constructor.
-data ListTopicSubscriptionsResponse = ListTopicSubscriptionsResponse
-    { _ltsrNextPageToken :: !(Maybe Text)
-    , _ltsrSubscriptions :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ListTopicSubscriptionsResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ltsrNextPageToken'
---
--- * 'ltsrSubscriptions'
-listTopicSubscriptionsResponse
-    :: ListTopicSubscriptionsResponse
-listTopicSubscriptionsResponse =
-    ListTopicSubscriptionsResponse
-    { _ltsrNextPageToken = Nothing
-    , _ltsrSubscriptions = Nothing
-    }
-
--- | If not empty, indicates that there may be more subscriptions that match
--- the request; this value should be passed in a new
--- ListTopicSubscriptionsRequest to get more subscriptions.
-ltsrNextPageToken :: Lens' ListTopicSubscriptionsResponse (Maybe Text)
-ltsrNextPageToken
-  = lens _ltsrNextPageToken
-      (\ s a -> s{_ltsrNextPageToken = a})
-
--- | The names of the subscriptions that match the request.
-ltsrSubscriptions :: Lens' ListTopicSubscriptionsResponse [Text]
-ltsrSubscriptions
-  = lens _ltsrSubscriptions
-      (\ s a -> s{_ltsrSubscriptions = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON ListTopicSubscriptionsResponse
-         where
-        parseJSON
-          = withObject "ListTopicSubscriptionsResponse"
-              (\ o ->
-                 ListTopicSubscriptionsResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "subscriptions" .!= mempty))
-
-instance ToJSON ListTopicSubscriptionsResponse where
-        toJSON ListTopicSubscriptionsResponse{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _ltsrNextPageToken,
-                  ("subscriptions" .=) <$> _ltsrSubscriptions])
-
 -- | A message data and its attributes. The message payload must not be
 -- empty; it must contain either a non-empty data field, or at least one
 -- attribute.
@@ -373,6 +318,61 @@ instance ToJSON PubsubMessage where
                  [("data" .=) <$> _pmData,
                   ("attributes" .=) <$> _pmAttributes,
                   ("messageId" .=) <$> _pmMessageId])
+
+-- | Response for the ListTopicSubscriptions method.
+--
+-- /See:/ 'listTopicSubscriptionsResponse' smart constructor.
+data ListTopicSubscriptionsResponse = ListTopicSubscriptionsResponse
+    { _ltsrNextPageToken :: !(Maybe Text)
+    , _ltsrSubscriptions :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListTopicSubscriptionsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ltsrNextPageToken'
+--
+-- * 'ltsrSubscriptions'
+listTopicSubscriptionsResponse
+    :: ListTopicSubscriptionsResponse
+listTopicSubscriptionsResponse =
+    ListTopicSubscriptionsResponse
+    { _ltsrNextPageToken = Nothing
+    , _ltsrSubscriptions = Nothing
+    }
+
+-- | If not empty, indicates that there may be more subscriptions that match
+-- the request; this value should be passed in a new
+-- ListTopicSubscriptionsRequest to get more subscriptions.
+ltsrNextPageToken :: Lens' ListTopicSubscriptionsResponse (Maybe Text)
+ltsrNextPageToken
+  = lens _ltsrNextPageToken
+      (\ s a -> s{_ltsrNextPageToken = a})
+
+-- | The names of the subscriptions that match the request.
+ltsrSubscriptions :: Lens' ListTopicSubscriptionsResponse [Text]
+ltsrSubscriptions
+  = lens _ltsrSubscriptions
+      (\ s a -> s{_ltsrSubscriptions = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListTopicSubscriptionsResponse
+         where
+        parseJSON
+          = withObject "ListTopicSubscriptionsResponse"
+              (\ o ->
+                 ListTopicSubscriptionsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "subscriptions" .!= mempty))
+
+instance ToJSON ListTopicSubscriptionsResponse where
+        toJSON ListTopicSubscriptionsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _ltsrNextPageToken,
+                  ("subscriptions" .=) <$> _ltsrSubscriptions])
 
 -- | Response for the ListTopics method.
 --
@@ -619,40 +619,6 @@ instance FromJSON PubsubMessageAttributes where
 instance ToJSON PubsubMessageAttributes where
         toJSON = const (Object mempty)
 
--- | Endpoint configuration attributes. Every endpoint has a set of API
--- supported attributes that can be used to control different aspects of
--- the message delivery. The currently supported attribute is
--- \`x-goog-version\`, which you can use to change the format of the push
--- message. This attribute indicates the version of the data expected by
--- the endpoint. This controls the shape of the envelope (i.e. its fields
--- and metadata). The endpoint version is based on the version of the
--- Pub\/Sub API. If not present during the CreateSubscription call, it will
--- default to the version of the API used to make such call. If not present
--- during a ModifyPushConfig call, its value will not be changed.
--- GetSubscription calls will always return a valid version, even if the
--- subscription was created without this attribute. The possible values for
--- this attribute are: * \`v1beta1\`: uses the push format defined in the
--- v1beta1 Pub\/Sub API. * \`v1\` or \`v1beta2\`: uses the push format
--- defined in the v1 Pub\/Sub API.
---
--- /See:/ 'attributes' smart constructor.
-data Attributes =
-    Attributes
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Attributes' with the minimum fields required to make a request.
---
-attributes
-    :: Attributes
-attributes = Attributes
-
-instance FromJSON Attributes where
-        parseJSON
-          = withObject "Attributes" (\ o -> pure Attributes)
-
-instance ToJSON Attributes where
-        toJSON = const (Object mempty)
-
 -- | Request message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsRequest' smart constructor.
@@ -732,6 +698,43 @@ instance ToJSON PublishResponse where
           = object
               (catMaybes [("messageIds" .=) <$> _prMessageIds])
 
+-- | Request for the Publish method.
+--
+-- /See:/ 'publishRequest' smart constructor.
+newtype PublishRequest = PublishRequest
+    { _prMessages :: Maybe [PubsubMessage]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PublishRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'prMessages'
+publishRequest
+    :: PublishRequest
+publishRequest =
+    PublishRequest
+    { _prMessages = Nothing
+    }
+
+-- | The messages to publish.
+prMessages :: Lens' PublishRequest [PubsubMessage]
+prMessages
+  = lens _prMessages (\ s a -> s{_prMessages = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON PublishRequest where
+        parseJSON
+          = withObject "PublishRequest"
+              (\ o ->
+                 PublishRequest <$> (o .:? "messages" .!= mempty))
+
+instance ToJSON PublishRequest where
+        toJSON PublishRequest{..}
+          = object
+              (catMaybes [("messages" .=) <$> _prMessages])
+
 -- | Response message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsResponse' smart constructor.
@@ -772,43 +775,6 @@ instance ToJSON TestIAMPermissionsResponse where
           = object
               (catMaybes
                  [("permissions" .=) <$> _tiamprPermissions])
-
--- | Request for the Publish method.
---
--- /See:/ 'publishRequest' smart constructor.
-newtype PublishRequest = PublishRequest
-    { _prMessages :: Maybe [PubsubMessage]
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PublishRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'prMessages'
-publishRequest
-    :: PublishRequest
-publishRequest =
-    PublishRequest
-    { _prMessages = Nothing
-    }
-
--- | The messages to publish.
-prMessages :: Lens' PublishRequest [PubsubMessage]
-prMessages
-  = lens _prMessages (\ s a -> s{_prMessages = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON PublishRequest where
-        parseJSON
-          = withObject "PublishRequest"
-              (\ o ->
-                 PublishRequest <$> (o .:? "messages" .!= mempty))
-
-instance ToJSON PublishRequest where
-        toJSON PublishRequest{..}
-          = object
-              (catMaybes [("messages" .=) <$> _prMessages])
 
 -- | # Overview The \`Policy\` defines an access control policy language. It
 -- is used to define policies that are attached to resources like files,
@@ -884,6 +850,41 @@ instance ToJSON Policy where
                  [("etag" .=) <$> _pEtag,
                   ("version" .=) <$> _pVersion,
                   ("bindings" .=) <$> _pBindings])
+
+-- | Endpoint configuration attributes. Every endpoint has a set of API
+-- supported attributes that can be used to control different aspects of
+-- the message delivery. The currently supported attribute is
+-- \`x-goog-version\`, which you can use to change the format of the push
+-- message. This attribute indicates the version of the data expected by
+-- the endpoint. This controls the shape of the envelope (i.e. its fields
+-- and metadata). The endpoint version is based on the version of the
+-- Pub\/Sub API. If not present during the CreateSubscription call, it will
+-- default to the version of the API used to make such call. If not present
+-- during a ModifyPushConfig call, its value will not be changed.
+-- GetSubscription calls will always return a valid version, even if the
+-- subscription was created without this attribute. The possible values for
+-- this attribute are: * \`v1beta1\`: uses the push format defined in the
+-- v1beta1 Pub\/Sub API. * \`v1\` or \`v1beta2\`: uses the push format
+-- defined in the v1 Pub\/Sub API.
+--
+-- /See:/ 'pushConfigAttributes' smart constructor.
+data PushConfigAttributes =
+    PushConfigAttributes
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PushConfigAttributes' with the minimum fields required to make a request.
+--
+pushConfigAttributes
+    :: PushConfigAttributes
+pushConfigAttributes = PushConfigAttributes
+
+instance FromJSON PushConfigAttributes where
+        parseJSON
+          = withObject "PushConfigAttributes"
+              (\ o -> pure PushConfigAttributes)
+
+instance ToJSON PushConfigAttributes where
+        toJSON = const (Object mempty)
 
 -- | A subscription resource.
 --
@@ -972,6 +973,60 @@ instance ToJSON Subscription where
                  [("pushConfig" .=) <$> _sPushConfig,
                   ("topic" .=) <$> _sTopic, ("name" .=) <$> _sName,
                   ("ackDeadlineSeconds" .=) <$> _sAckDeadlineSeconds])
+
+-- | Response for the ListSubscriptions method.
+--
+-- /See:/ 'listSubscriptionsResponse' smart constructor.
+data ListSubscriptionsResponse = ListSubscriptionsResponse
+    { _lsrNextPageToken :: !(Maybe Text)
+    , _lsrSubscriptions :: !(Maybe [Subscription])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListSubscriptionsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lsrNextPageToken'
+--
+-- * 'lsrSubscriptions'
+listSubscriptionsResponse
+    :: ListSubscriptionsResponse
+listSubscriptionsResponse =
+    ListSubscriptionsResponse
+    { _lsrNextPageToken = Nothing
+    , _lsrSubscriptions = Nothing
+    }
+
+-- | If not empty, indicates that there may be more subscriptions that match
+-- the request; this value should be passed in a new
+-- ListSubscriptionsRequest to get more subscriptions.
+lsrNextPageToken :: Lens' ListSubscriptionsResponse (Maybe Text)
+lsrNextPageToken
+  = lens _lsrNextPageToken
+      (\ s a -> s{_lsrNextPageToken = a})
+
+-- | The subscriptions that match the request.
+lsrSubscriptions :: Lens' ListSubscriptionsResponse [Subscription]
+lsrSubscriptions
+  = lens _lsrSubscriptions
+      (\ s a -> s{_lsrSubscriptions = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListSubscriptionsResponse where
+        parseJSON
+          = withObject "ListSubscriptionsResponse"
+              (\ o ->
+                 ListSubscriptionsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "subscriptions" .!= mempty))
+
+instance ToJSON ListSubscriptionsResponse where
+        toJSON ListSubscriptionsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lsrNextPageToken,
+                  ("subscriptions" .=) <$> _lsrSubscriptions])
 
 -- | Associates members with roles. See below for allowed formats of members.
 --
@@ -1065,57 +1120,3 @@ instance FromJSON AcknowledgeRequest where
 instance ToJSON AcknowledgeRequest where
         toJSON AcknowledgeRequest{..}
           = object (catMaybes [("ackIds" .=) <$> _arAckIds])
-
--- | Response for the ListSubscriptions method.
---
--- /See:/ 'listSubscriptionsResponse' smart constructor.
-data ListSubscriptionsResponse = ListSubscriptionsResponse
-    { _lsrNextPageToken :: !(Maybe Text)
-    , _lsrSubscriptions :: !(Maybe [Subscription])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ListSubscriptionsResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lsrNextPageToken'
---
--- * 'lsrSubscriptions'
-listSubscriptionsResponse
-    :: ListSubscriptionsResponse
-listSubscriptionsResponse =
-    ListSubscriptionsResponse
-    { _lsrNextPageToken = Nothing
-    , _lsrSubscriptions = Nothing
-    }
-
--- | If not empty, indicates that there may be more subscriptions that match
--- the request; this value should be passed in a new
--- ListSubscriptionsRequest to get more subscriptions.
-lsrNextPageToken :: Lens' ListSubscriptionsResponse (Maybe Text)
-lsrNextPageToken
-  = lens _lsrNextPageToken
-      (\ s a -> s{_lsrNextPageToken = a})
-
--- | The subscriptions that match the request.
-lsrSubscriptions :: Lens' ListSubscriptionsResponse [Subscription]
-lsrSubscriptions
-  = lens _lsrSubscriptions
-      (\ s a -> s{_lsrSubscriptions = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON ListSubscriptionsResponse where
-        parseJSON
-          = withObject "ListSubscriptionsResponse"
-              (\ o ->
-                 ListSubscriptionsResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "subscriptions" .!= mempty))
-
-instance ToJSON ListSubscriptionsResponse where
-        toJSON ListSubscriptionsResponse{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _lsrNextPageToken,
-                  ("subscriptions" .=) <$> _lsrSubscriptions])

@@ -52,8 +52,7 @@ type EditsTestersGetResource =
        "edits" :>
          Capture "editId" Text :>
            "testers" :>
-             Capture "track" AndroidPublisherEditsTestersGetTrack
-               :>
+             Capture "track" EditsTestersGetTrack :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -66,7 +65,7 @@ type EditsTestersGetResource =
 -- /See:/ 'editsTestersGet'' smart constructor.
 data EditsTestersGet' = EditsTestersGet'
     { _etgtQuotaUser   :: !(Maybe Text)
-    , _etgtTrack       :: !AndroidPublisherEditsTestersGetTrack
+    , _etgtTrack       :: !EditsTestersGetTrack
     , _etgtPrettyPrint :: !Bool
     , _etgtPackageName :: !Text
     , _etgtUserIP      :: !(Maybe Text)
@@ -98,7 +97,7 @@ data EditsTestersGet' = EditsTestersGet'
 --
 -- * 'etgtFields'
 editsTestersGet'
-    :: AndroidPublisherEditsTestersGetTrack -- ^ 'track'
+    :: EditsTestersGetTrack -- ^ 'track'
     -> Text -- ^ 'packageName'
     -> Text -- ^ 'editId'
     -> EditsTestersGet'
@@ -123,7 +122,7 @@ etgtQuotaUser
   = lens _etgtQuotaUser
       (\ s a -> s{_etgtQuotaUser = a})
 
-etgtTrack :: Lens' EditsTestersGet' AndroidPublisherEditsTestersGetTrack
+etgtTrack :: Lens' EditsTestersGet' EditsTestersGetTrack
 etgtTrack
   = lens _etgtTrack (\ s a -> s{_etgtTrack = a})
 

@@ -56,7 +56,7 @@ type GroupsInsertResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Group :> Post '[JSON] Group
+                       ReqBody '[OctetStream] Group :> Post '[JSON] Group
 
 -- | Creates a group.
 --

@@ -68,7 +68,7 @@ type EventsListResource =
          "events" :>
            QueryParam "syncToken" Text :>
              QueryParam "timeMin" DateTime' :>
-               QueryParam "orderBy" OrderBy :>
+               QueryParam "orderBy" EventsListOrderBy :>
                  QueryParam "singleEvents" Bool :>
                    QueryParams "privateExtendedProperty" Text :>
                      QueryParam "showDeleted" Bool :>
@@ -104,7 +104,7 @@ data EventsList' = EventsList'
     , _elCalendarId              :: !Text
     , _elPrettyPrint             :: !Bool
     , _elTimeMin                 :: !(Maybe DateTime')
-    , _elOrderBy                 :: !(Maybe OrderBy)
+    , _elOrderBy                 :: !(Maybe EventsListOrderBy)
     , _elSingleEvents            :: !(Maybe Bool)
     , _elPrivateExtendedProperty :: !(Maybe [Text])
     , _elUserIP                  :: !(Maybe Text)
@@ -255,7 +255,7 @@ elTimeMin
 
 -- | The order of the events returned in the result. Optional. The default is
 -- an unspecified, stable order.
-elOrderBy :: Lens' EventsList' (Maybe OrderBy)
+elOrderBy :: Lens' EventsList' (Maybe EventsListOrderBy)
 elOrderBy
   = lens _elOrderBy (\ s a -> s{_elOrderBy = a})
 

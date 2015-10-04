@@ -60,38 +60,6 @@ instance ToJSON IntValue where
                   ("label" .=) <$> _ivLabel])
 
 --
--- /See:/ 'aggregatedStatsReply' smart constructor.
-newtype AggregatedStatsReply = AggregatedStatsReply
-    { _asrTestValue :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AggregatedStatsReply' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'asrTestValue'
-aggregatedStatsReply
-    :: AggregatedStatsReply
-aggregatedStatsReply =
-    AggregatedStatsReply
-    { _asrTestValue = Nothing
-    }
-
-asrTestValue :: Lens' AggregatedStatsReply (Maybe Text)
-asrTestValue
-  = lens _asrTestValue (\ s a -> s{_asrTestValue = a})
-
-instance FromJSON AggregatedStatsReply where
-        parseJSON
-          = withObject "AggregatedStatsReply"
-              (\ o -> AggregatedStatsReply <$> (o .:? "testValue"))
-
-instance ToJSON AggregatedStatsReply where
-        toJSON AggregatedStatsReply{..}
-          = object
-              (catMaybes [("testValue" .=) <$> _asrTestValue])
-
---
 -- /See:/ 'doubleValue' smart constructor.
 data DoubleValue = DoubleValue
     { _dvValue :: !(Maybe Float)
@@ -172,6 +140,38 @@ instance ToJSON StringValue where
               (catMaybes
                  [("value" .=) <$> _svValue,
                   ("label" .=) <$> _svLabel])
+
+--
+-- /See:/ 'aggregatedStatsReply' smart constructor.
+newtype AggregatedStatsReply = AggregatedStatsReply
+    { _asrTestValue :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AggregatedStatsReply' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'asrTestValue'
+aggregatedStatsReply
+    :: AggregatedStatsReply
+aggregatedStatsReply =
+    AggregatedStatsReply
+    { _asrTestValue = Nothing
+    }
+
+asrTestValue :: Lens' AggregatedStatsReply (Maybe Text)
+asrTestValue
+  = lens _asrTestValue (\ s a -> s{_asrTestValue = a})
+
+instance FromJSON AggregatedStatsReply where
+        parseJSON
+          = withObject "AggregatedStatsReply"
+              (\ o -> AggregatedStatsReply <$> (o .:? "testValue"))
+
+instance ToJSON AggregatedStatsReply where
+        toJSON AggregatedStatsReply{..}
+          = object
+              (catMaybes [("testValue" .=) <$> _asrTestValue])
 
 --
 -- /See:/ 'stats' smart constructor.

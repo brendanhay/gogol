@@ -36,7 +36,7 @@ module Network.Google.Resource.DFAReporting.AdvertiserGroups.List
     , aglUserIP
     , aglSearchString
     , aglIds
-    , aglProfileId
+    , aglProFileId
     , aglSortOrder
     , aglKey
     , aglPageToken
@@ -57,12 +57,10 @@ type AdvertiserGroupsListResource =
          "advertiserGroups" :>
            QueryParam "searchString" Text :>
              QueryParams "ids" Int64 :>
-               QueryParam "sortOrder"
-                 DfareportingAdvertiserGroupsListSortOrder
+               QueryParam "sortOrder" AdvertiserGroupsListSortOrder
                  :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "sortField"
-                     DfareportingAdvertiserGroupsListSortField
+                   QueryParam "sortField" AdvertiserGroupsListSortField
                      :>
                      QueryParam "maxResults" Int32 :>
                        QueryParam "quotaUser" Text :>
@@ -83,11 +81,11 @@ data AdvertiserGroupsList' = AdvertiserGroupsList'
     , _aglUserIP       :: !(Maybe Text)
     , _aglSearchString :: !(Maybe Text)
     , _aglIds          :: !(Maybe [Int64])
-    , _aglProfileId    :: !Int64
-    , _aglSortOrder    :: !(Maybe DfareportingAdvertiserGroupsListSortOrder)
+    , _aglProFileId    :: !Int64
+    , _aglSortOrder    :: !(Maybe AdvertiserGroupsListSortOrder)
     , _aglKey          :: !(Maybe Key)
     , _aglPageToken    :: !(Maybe Text)
-    , _aglSortField    :: !(Maybe DfareportingAdvertiserGroupsListSortField)
+    , _aglSortField    :: !(Maybe AdvertiserGroupsListSortField)
     , _aglOAuthToken   :: !(Maybe OAuthToken)
     , _aglMaxResults   :: !(Maybe Int32)
     , _aglFields       :: !(Maybe Text)
@@ -107,7 +105,7 @@ data AdvertiserGroupsList' = AdvertiserGroupsList'
 --
 -- * 'aglIds'
 --
--- * 'aglProfileId'
+-- * 'aglProFileId'
 --
 -- * 'aglSortOrder'
 --
@@ -125,14 +123,14 @@ data AdvertiserGroupsList' = AdvertiserGroupsList'
 advertiserGroupsList'
     :: Int64 -- ^ 'profileId'
     -> AdvertiserGroupsList'
-advertiserGroupsList' pAglProfileId_ =
+advertiserGroupsList' pAglProFileId_ =
     AdvertiserGroupsList'
     { _aglQuotaUser = Nothing
     , _aglPrettyPrint = True
     , _aglUserIP = Nothing
     , _aglSearchString = Nothing
     , _aglIds = Nothing
-    , _aglProfileId = pAglProfileId_
+    , _aglProFileId = pAglProFileId_
     , _aglSortOrder = Nothing
     , _aglKey = Nothing
     , _aglPageToken = Nothing
@@ -181,12 +179,12 @@ aglIds
       _Coerce
 
 -- | User profile ID associated with this request.
-aglProfileId :: Lens' AdvertiserGroupsList' Int64
-aglProfileId
-  = lens _aglProfileId (\ s a -> s{_aglProfileId = a})
+aglProFileId :: Lens' AdvertiserGroupsList' Int64
+aglProFileId
+  = lens _aglProFileId (\ s a -> s{_aglProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-aglSortOrder :: Lens' AdvertiserGroupsList' (Maybe DfareportingAdvertiserGroupsListSortOrder)
+aglSortOrder :: Lens' AdvertiserGroupsList' (Maybe AdvertiserGroupsListSortOrder)
 aglSortOrder
   = lens _aglSortOrder (\ s a -> s{_aglSortOrder = a})
 
@@ -202,7 +200,7 @@ aglPageToken
   = lens _aglPageToken (\ s a -> s{_aglPageToken = a})
 
 -- | Field by which to sort the list.
-aglSortField :: Lens' AdvertiserGroupsList' (Maybe DfareportingAdvertiserGroupsListSortField)
+aglSortField :: Lens' AdvertiserGroupsList' (Maybe AdvertiserGroupsListSortField)
 aglSortField
   = lens _aglSortField (\ s a -> s{_aglSortField = a})
 
@@ -232,7 +230,7 @@ instance GoogleRequest AdvertiserGroupsList' where
              AdvertiserGroupsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdvertiserGroupsList'{..}
-          = go _aglProfileId _aglSearchString
+          = go _aglProFileId _aglSearchString
               (_aglIds ^. _Default)
               _aglSortOrder
               _aglPageToken

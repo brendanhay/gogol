@@ -164,22 +164,6 @@ module Network.Google.AppsCalendar
     -- ** Event
     , Event
     , event
-
-    -- ** Creator
-    , Creator
-    , creator
-    , cEmail
-    , cSelf
-    , cDisplayName
-    , cId
-
-    -- ** Groups
-    , Groups
-    , groups
-
-    -- ** Event
-    , Event
-    , event
     , eSummary
     , eOriginalStartTime
     , eCreator
@@ -218,16 +202,20 @@ module Network.Google.AppsCalendar
     , eDescription
     , eOrganizer
 
-    -- ** MinAccessRole
-    , MinAccessRole (..)
+    -- ** CalendarListEntryNotificationSettings
+    , CalendarListEntryNotificationSettings
+    , calendarListEntryNotificationSettings
+    , clensNotifications
 
-    -- ** FreeBusyRequestItem
-    , FreeBusyRequestItem
-    , freeBusyRequestItem
-    , fbriId
+    -- ** ACLRuleScope
+    , ACLRuleScope
+    , aclRuleScope
+    , arsValue
+    , arsType
 
-    -- ** OrderBy
-    , OrderBy (..)
+    -- ** ColorsEvent
+    , ColorsEvent
+    , colorsEvent
 
     -- ** Settings
     , Settings
@@ -238,6 +226,11 @@ module Network.Google.AppsCalendar
     , sItems
     , sNextSyncToken
 
+    -- ** FreeBusyRequestItem
+    , FreeBusyRequestItem
+    , freeBusyRequestItem
+    , fbriId
+
     -- ** EventAttachment
     , EventAttachment
     , eventAttachment
@@ -247,36 +240,19 @@ module Network.Google.AppsCalendar
     , eaTitle
     , eaFileId
 
-    -- ** Private
-    , Private
-    , private
-
-    -- ** Reminders
-    , Reminders
-    , reminders
-    , rOverrides
-    , rUseDefault
-
-    -- ** Preferences
-    , Preferences
-    , preferences
-
     -- ** TimePeriod
     , TimePeriod
     , timePeriod
     , tpStart
     , tpEnd
 
-    -- ** NotificationSettings
-    , NotificationSettings
-    , notificationSettings
-    , nsNotifications
-
-    -- ** ColorDefinition
-    , ColorDefinition
-    , colorDefinition
-    , cdForegRound
-    , cdBackgRound
+    -- ** EventCreator
+    , EventCreator
+    , eventCreator
+    , ecEmail
+    , ecSelf
+    , ecDisplayName
+    , ecId
 
     -- ** Error'
     , Error'
@@ -284,31 +260,34 @@ module Network.Google.AppsCalendar
     , eDomain
     , eReason
 
+    -- ** ColorDefinition
+    , ColorDefinition
+    , colorDefinition
+    , cdForegRound
+    , cdBackgRound
+
+    -- ** EventsListOrderBy
+    , EventsListOrderBy (..)
+
+    -- ** Channel
+    , Channel
+    , channel
+    , cResourceURI
+    , cResourceId
+    , cKind
+    , cExpiration
+    , cToken
+    , cAddress
+    , cPayload
+    , cParams
+    , cId
+    , cType
+
     -- ** FreeBusyCalendar
     , FreeBusyCalendar
     , freeBusyCalendar
     , fbcBusy
     , fbcErrors
-
-    -- ** Channel
-    , Channel
-    , channel
-    , chaResourceURI
-    , chaResourceId
-    , chaKind
-    , chaExpiration
-    , chaToken
-    , chaAddress
-    , chaPayload
-    , chaParams
-    , chaId
-    , chaType
-
-    -- ** ExtendedProperties
-    , ExtendedProperties
-    , extendedProperties
-    , epPrivate
-    , epShared
 
     -- ** Setting
     , Setting
@@ -318,41 +297,33 @@ module Network.Google.AppsCalendar
     , setValue
     , setId
 
-    -- ** CalendarCalendarListWatchMinAccessRole
-    , CalendarCalendarListWatchMinAccessRole (..)
+    -- ** FreeBusyResponseGroups
+    , FreeBusyResponseGroups
+    , freeBusyResponseGroups
 
-    -- ** CalendarEventsWatchOrderBy
-    , CalendarEventsWatchOrderBy (..)
+    -- ** EventReminders
+    , EventReminders
+    , eventReminders
+    , erOverrides
+    , erUseDefault
 
-    -- ** Calendars
-    , Calendars
-    , calendars
-
-    -- ** Shared
-    , Shared
-    , shared
-
-    -- ** Params
-    , Params
-    , params
-
-    -- ** Gadget
-    , Gadget
-    , gadget
-    , gHeight
-    , gDisplay
-    , gPreferences
-    , gLink
-    , gIconLink
-    , gWidth
-    , gTitle
-    , gType
+    -- ** ColorsCalendar
+    , ColorsCalendar
+    , colorsCalendar
 
     -- ** CalendarNotification
     , CalendarNotification
     , calendarNotification
     , cnMethod
     , cnType
+
+    -- ** EventExtendedPropertiesPrivate
+    , EventExtendedPropertiesPrivate
+    , eventExtendedPropertiesPrivate
+
+    -- ** ChannelParams
+    , ChannelParams
+    , channelParams
 
     -- ** Events
     , Events
@@ -369,42 +340,6 @@ module Network.Google.AppsCalendar
     , eveNextSyncToken
     , eveDescription
 
-    -- ** Scope
-    , Scope
-    , scope
-    , sValue
-    , sType
-
-    -- ** Calendar
-    , Calendar
-    , calendar
-
-    -- ** EventReminder
-    , EventReminder
-    , eventReminder
-    , erMethod
-    , erMinutes
-
-    -- ** FreeBusyResponse
-    , FreeBusyResponse
-    , freeBusyResponse
-    , fbrGroups
-    , fbrTimeMin
-    , fbrKind
-    , fbrCalendars
-    , fbrTimeMax
-
-    -- ** Calendar
-    , Calendar
-    , calendar
-    , calSummary
-    , calEtag
-    , calLocation
-    , calKind
-    , calId
-    , calTimeZone
-    , calDescription
-
     -- ** EventAttendee
     , EventAttendee
     , eventAttendee
@@ -419,11 +354,37 @@ module Network.Google.AppsCalendar
     , eaOptional
     , eaOrganizer
 
-    -- ** Source
-    , Source
-    , source
-    , sURL
-    , sTitle
+    -- ** Calendar
+    , Calendar
+    , calendar
+    , calSummary
+    , calEtag
+    , calLocation
+    , calKind
+    , calId
+    , calTimeZone
+    , calDescription
+
+    -- ** FreeBusyResponse
+    , FreeBusyResponse
+    , freeBusyResponse
+    , fbrGroups
+    , fbrTimeMin
+    , fbrKind
+    , fbrCalendars
+    , fbrTimeMax
+
+    -- ** EventReminder
+    , EventReminder
+    , eventReminder
+    , erMethod
+    , erMinutes
+
+    -- ** EventExtendedProperties
+    , EventExtendedProperties
+    , eventExtendedProperties
+    , eepPrivate
+    , eepShared
 
     -- ** EventDateTime
     , EventDateTime
@@ -431,6 +392,14 @@ module Network.Google.AppsCalendar
     , edtDate
     , edtTimeZone
     , edtDateTime
+
+    -- ** EventOrganizer
+    , EventOrganizer
+    , eventOrganizer
+    , eoEmail
+    , eoSelf
+    , eoDisplayName
+    , eoId
 
     -- ** CalendarList
     , CalendarList
@@ -440,6 +409,25 @@ module Network.Google.AppsCalendar
     , clKind
     , clItems
     , clNextSyncToken
+
+    -- ** CalendarListListMinAccessRole
+    , CalendarListListMinAccessRole (..)
+
+    -- ** EventGadget
+    , EventGadget
+    , eventGadget
+    , egHeight
+    , egDisplay
+    , egPreferences
+    , egLink
+    , egIconLink
+    , egWidth
+    , egTitle
+    , egType
+
+    -- ** EventGadgetPreferences
+    , EventGadgetPreferences
+    , eventGadgetPreferences
 
     -- ** FreeBusyRequest
     , FreeBusyRequest
@@ -460,19 +448,19 @@ module Network.Google.AppsCalendar
     , arScope
     , arId
 
-    -- ** Colors
-    , Colors
-    , colors
-    , cEvent
-    , cKind
-    , cCalendar
-    , cUpdated
+    -- ** EventsWatchOrderBy
+    , EventsWatchOrderBy (..)
 
-    -- ** FreeBusyGroup
-    , FreeBusyGroup
-    , freeBusyGroup
-    , fbgCalendars
-    , fbgErrors
+    -- ** EventExtendedPropertiesShared
+    , EventExtendedPropertiesShared
+    , eventExtendedPropertiesShared
+
+    -- ** CalendarListWatchMinAccessRole
+    , CalendarListWatchMinAccessRole (..)
+
+    -- ** FreeBusyResponseCalendars
+    , FreeBusyResponseCalendars
+    , freeBusyResponseCalendars
 
     -- ** ACL
     , ACL
@@ -483,13 +471,25 @@ module Network.Google.AppsCalendar
     , aItems
     , aNextSyncToken
 
-    -- ** Organizer
-    , Organizer
-    , organizer
-    , oEmail
-    , oSelf
-    , oDisplayName
-    , oId
+    -- ** Colors
+    , Colors
+    , colors
+    , colEvent
+    , colKind
+    , colCalendar
+    , colUpdated
+
+    -- ** FreeBusyGroup
+    , FreeBusyGroup
+    , freeBusyGroup
+    , fbgCalendars
+    , fbgErrors
+
+    -- ** EventSource
+    , EventSource
+    , eventSource
+    , esURL
+    , esTitle
     ) where
 
 import           Network.Google.AppsCalendar.Types

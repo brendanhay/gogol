@@ -58,7 +58,7 @@ type CalendarListWatchResource =
            "watch" :>
              QueryParam "syncToken" Text :>
                QueryParam "minAccessRole"
-                 CalendarCalendarListWatchMinAccessRole
+                 CalendarListWatchMinAccessRole
                  :>
                  QueryParam "showDeleted" Bool :>
                    QueryParam "showHidden" Bool :>
@@ -71,7 +71,7 @@ type CalendarListWatchResource =
                                  QueryParam "key" Key :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
-                                       ReqBody '[JSON] Channel :>
+                                       ReqBody '[OctetStream] Channel :>
                                          Post '[JSON] Channel
 
 -- | Watch for changes to CalendarList resources.
@@ -81,7 +81,7 @@ data CalendarListWatch' = CalendarListWatch'
     { _clwSyncToken     :: !(Maybe Text)
     , _clwQuotaUser     :: !(Maybe Text)
     , _clwPrettyPrint   :: !Bool
-    , _clwMinAccessRole :: !(Maybe CalendarCalendarListWatchMinAccessRole)
+    , _clwMinAccessRole :: !(Maybe CalendarListWatchMinAccessRole)
     , _clwUserIP        :: !(Maybe Text)
     , _clwShowDeleted   :: !(Maybe Bool)
     , _clwPayload       :: !Channel
@@ -174,7 +174,7 @@ clwPrettyPrint
 
 -- | The minimum access role for the user in the returned entries. Optional.
 -- The default is no restriction.
-clwMinAccessRole :: Lens' CalendarListWatch' (Maybe CalendarCalendarListWatchMinAccessRole)
+clwMinAccessRole :: Lens' CalendarListWatch' (Maybe CalendarListWatchMinAccessRole)
 clwMinAccessRole
   = lens _clwMinAccessRole
       (\ s a -> s{_clwMinAccessRole = a})

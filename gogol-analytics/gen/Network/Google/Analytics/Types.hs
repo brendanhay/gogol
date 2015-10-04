@@ -17,12 +17,6 @@ module Network.Google.Analytics.Types
     -- * Service URL
       analyticsURL
 
-    -- * ParentLink
-    , ParentLink
-    , parentLink
-    , plHref
-    , plType
-
     -- * UnSampledReports
     , UnSampledReports
     , unSampledReports
@@ -35,28 +29,12 @@ module Network.Google.Analytics.Types
     , usrStartIndex
     , usrPreviousLink
 
-    -- * AdvancedDetails
-    , AdvancedDetails
-    , advancedDetails
-    , adExtractA
-    , adFieldARequired
-    , adFieldA
-    , adFieldBIndex
-    , adOutputToField
-    , adOutputConstructor
-    , adExtractB
-    , adFieldAIndex
-    , adCaseSensitive
-    , adOutputToFieldIndex
-    , adFieldB
-    , adFieldBRequired
-    , adOverrideOutputField
-
-    -- * UppercaseDetails
-    , UppercaseDetails
-    , uppercaseDetails
-    , udFieldIndex
-    , udField
+    -- * GoalURLDestinationDetailsStepsItem
+    , GoalURLDestinationDetailsStepsItem
+    , goalURLDestinationDetailsStepsItem
+    , guddsiURL
+    , guddsiName
+    , guddsiNumber
 
     -- * GaDataQuery
     , GaDataQuery
@@ -73,6 +51,11 @@ module Network.Google.Analytics.Types
     , gdqSegment
     , gdqStartDate
 
+    -- * GaDataDataTableRowsItem
+    , GaDataDataTableRowsItem
+    , gaDataDataTableRowsItem
+    , gddtriC
+
     -- * UnSampledReport
     , UnSampledReport
     , unSampledReport
@@ -84,7 +67,7 @@ module Network.Google.Analytics.Types
     , uKind
     , uCreated
     , uFilters
-    , uProfileId
+    , uProFileId
     , uEndDate
     , uSelfLink
     , uAccountId
@@ -96,54 +79,70 @@ module Network.Google.Analytics.Types
     , uCloudStorageDownloadDetails
     , uStartDate
 
-    -- * VariationsItem
-    , VariationsItem
-    , variationsItem
-    , viStatus
-    , viWeight
-    , viURL
-    , viWon
-    , viName
+    -- * McfDataColumnHeadersItem
+    , McfDataColumnHeadersItem
+    , mcfDataColumnHeadersItem
+    , mdchiColumnType
+    , mdchiName
+    , mdchiDataType
 
     -- * GaDataTotalsForAllResults
     , GaDataTotalsForAllResults
     , gaDataTotalsForAllResults
 
-    -- * ColumnHeadersItem
-    , ColumnHeadersItem
-    , columnHeadersItem
-    , chiColumnType
-    , chiName
-    , chiDataType
+    -- * ProFileParentLink
+    , ProFileParentLink
+    , proFileParentLink
+    , pfplHref
+    , pfplType
 
-    -- * ProfileRef
-    , ProfileRef
-    , profileRef
-    , prWebPropertyId
-    , prKind
-    , prHref
-    , prAccountId
-    , prName
-    , prInternalWebPropertyId
-    , prId
-
-    -- * Experiments
-    , Experiments
-    , experiments
-    , eNextLink
-    , eItemsPerPage
-    , eKind
-    , eUsername
-    , eItems
-    , eTotalResults
-    , eStartIndex
-    , ePreviousLink
+    -- * GaDataDataTableRowsItemCItem
+    , GaDataDataTableRowsItemCItem
+    , gaDataDataTableRowsItemCItem
+    , gddtriciV
 
     -- * EntityUserLinkPermissions
     , EntityUserLinkPermissions
     , entityUserLinkPermissions
     , eulpLocal
     , eulpEffective
+
+    -- * RealtimeDataProFileInfo
+    , RealtimeDataProFileInfo
+    , realtimeDataProFileInfo
+    , rdpfiWebPropertyId
+    , rdpfiProFileId
+    , rdpfiProFileName
+    , rdpfiAccountId
+    , rdpfiInternalWebPropertyId
+    , rdpfiTableId
+
+    -- * McfDataRowsItemItemConversionPathValueItem
+    , McfDataRowsItemItemConversionPathValueItem
+    , mcfDataRowsItemItemConversionPathValueItem
+    , mdriicpviInteractionType
+    , mdriicpviNodeValue
+
+    -- * FilterExpression
+    , FilterExpression
+    , filterExpression
+    , feFieldIndex
+    , feField
+    , feKind
+    , feMatchType
+    , feCaseSensitive
+    , feExpressionValue
+
+    -- * ProFileRef
+    , ProFileRef
+    , proFileRef
+    , pfrWebPropertyId
+    , pfrKind
+    , pfrHref
+    , pfrAccountId
+    , pfrName
+    , pfrInternalWebPropertyId
+    , pfrId
 
     -- * Accounts
     , Accounts
@@ -157,36 +156,17 @@ module Network.Google.Analytics.Types
     , aStartIndex
     , aPreviousLink
 
-    -- * FilterExpression
-    , FilterExpression
-    , filterExpression
-    , feFieldIndex
-    , feField
-    , feKind
-    , feMatchType
-    , feCaseSensitive
-    , feExpressionValue
-
-    -- * DriveDownloadDetails
-    , DriveDownloadDetails
-    , driveDownloadDetails
-    , dddDocumentId
-
-    -- * RealtimeDataProfileInfo
-    , RealtimeDataProfileInfo
-    , realtimeDataProfileInfo
-    , rdpiWebPropertyId
-    , rdpiProfileId
-    , rdpiProfileName
-    , rdpiAccountId
-    , rdpiInternalWebPropertyId
-    , rdpiTableId
-
-    -- * ChildLink
-    , ChildLink
-    , childLink
-    , clHref
-    , clType
+    -- * Experiments
+    , Experiments
+    , experiments
+    , eNextLink
+    , eItemsPerPage
+    , eKind
+    , eUsername
+    , eItems
+    , eTotalResults
+    , eStartIndex
+    , ePreviousLink
 
     -- * ExperimentParentLink
     , ExperimentParentLink
@@ -194,20 +174,20 @@ module Network.Google.Analytics.Types
     , eplHref
     , eplType
 
-    -- * LowercaseDetails
-    , LowercaseDetails
-    , lowercaseDetails
-    , ldFieldIndex
-    , ldField
+    -- * UnSampledReportDriveDownloadDetails
+    , UnSampledReportDriveDownloadDetails
+    , unSampledReportDriveDownloadDetails
+    , usrdddDocumentId
 
-    -- * WebPropertyChildLink
-    , WebPropertyChildLink
-    , webPropertyChildLink
-    , wpclHref
-    , wpclType
-
-    -- * SamplingLevel
-    , SamplingLevel (..)
+    -- * McfDataProFileInfo
+    , McfDataProFileInfo
+    , mcfDataProFileInfo
+    , mdpfiWebPropertyId
+    , mdpfiProFileId
+    , mdpfiProFileName
+    , mdpfiAccountId
+    , mdpfiInternalWebPropertyId
+    , mdpfiTableId
 
     -- * CustomDataSources
     , CustomDataSources
@@ -221,15 +201,53 @@ module Network.Google.Analytics.Types
     , cdsStartIndex
     , cdsPreviousLink
 
-    -- * ProfileInfo
-    , ProfileInfo
-    , profileInfo
-    , piWebPropertyId
-    , piProfileId
-    , piProfileName
-    , piAccountId
-    , piInternalWebPropertyId
-    , piTableId
+    -- * WebPropertyChildLink
+    , WebPropertyChildLink
+    , webPropertyChildLink
+    , wpclHref
+    , wpclType
+
+    -- * DataGaGetSamplingLevel
+    , DataGaGetSamplingLevel (..)
+
+    -- * McfData
+    , McfData
+    , mcfData
+    , mdNextLink
+    , mdSampleSpace
+    , mdItemsPerPage
+    , mdProFileInfo
+    , mdKind
+    , mdSampleSize
+    , mdRows
+    , mdSelfLink
+    , mdQuery
+    , mdColumnHeaders
+    , mdId
+    , mdTotalResults
+    , mdContainsSampledData
+    , mdTotalsForAllResults
+    , mdPreviousLink
+
+    -- * UserRef
+    , UserRef
+    , userRef
+    , urEmail
+    , urKind
+    , urId
+
+    -- * GoalVisitNumPagesDetails
+    , GoalVisitNumPagesDetails
+    , goalVisitNumPagesDetails
+    , gvnpdComparisonValue
+    , gvnpdComparisonType
+
+    -- * RealtimeDataColumnHeadersItem
+    , RealtimeDataColumnHeadersItem
+    , realtimeDataColumnHeadersItem
+    , rdchiColumnType
+    , rdchiName
+    , rdchiDataType
 
     -- * AccountRef
     , AccountRef
@@ -250,78 +268,75 @@ module Network.Google.Analytics.Types
     , eawlStartIndex
     , eawlPreviousLink
 
-    -- * McfData
-    , McfData
-    , mcfData
-    , mdNextLink
-    , mdSampleSpace
-    , mdItemsPerPage
-    , mdProfileInfo
-    , mdKind
-    , mdSampleSize
-    , mdRows
-    , mdSelfLink
-    , mdQuery
-    , mdColumnHeaders
-    , mdId
-    , mdTotalResults
-    , mdContainsSampledData
-    , mdTotalsForAllResults
-    , mdPreviousLink
+    -- * ProFiles
+    , ProFiles
+    , proFiles
+    , pfNextLink
+    , pfItemsPerPage
+    , pfKind
+    , pfUsername
+    , pfItems
+    , pfTotalResults
+    , pfStartIndex
+    , pfPreviousLink
 
     -- * AnalyticsDataimportDeleteUploadDataRequest
     , AnalyticsDataimportDeleteUploadDataRequest
     , analyticsDataimportDeleteUploadDataRequest
     , addudrCustomDataImportUids
 
-    -- * Profiles
-    , Profiles
-    , profiles
-    , pNextLink
-    , pItemsPerPage
+    -- * EntityAdWordsLink
+    , EntityAdWordsLink
+    , entityAdWordsLink
+    , entAdWordsAccounts
+    , entProFileIds
+    , entKind
+    , entSelfLink
+    , entName
+    , entId
+    , entEntity
+
+    -- * FilterSearchAndReplaceDetails
+    , FilterSearchAndReplaceDetails
+    , filterSearchAndReplaceDetails
+    , fsardFieldIndex
+    , fsardField
+    , fsardSearchString
+    , fsardReplaceString
+    , fsardCaseSensitive
+
+    -- * ProFilePermissions
+    , ProFilePermissions
+    , proFilePermissions
+    , pfpEffective
+
+    -- * ProFile
+    , ProFile
+    , proFile
+    , pParentLink
+    , pECommerceTracking
+    , pSiteSearchCategoryParameters
+    , pWebPropertyId
+    , pChildLink
+    , pSiteSearchQueryParameters
     , pKind
-    , pUsername
-    , pItems
-    , pTotalResults
-    , pStartIndex
-    , pPreviousLink
-
-    -- * RealtimeDataColumnHeadersItem
-    , RealtimeDataColumnHeadersItem
-    , realtimeDataColumnHeadersItem
-    , rdchiColumnType
-    , rdchiName
-    , rdchiDataType
-
-    -- * UserRef
-    , UserRef
-    , userRef
-    , urEmail
-    , urKind
-    , urId
-
-    -- * Filters
-    , Filters
-    , filters
-    , fNextLink
-    , fItemsPerPage
-    , fKind
-    , fUsername
-    , fItems
-    , fTotalResults
-    , fStartIndex
-    , fPreviousLink
-
-    -- * WebPropertySummary
-    , WebPropertySummary
-    , webPropertySummary
-    , wpsKind
-    , wpsProfiles
-    , wpsName
-    , wpsInternalWebPropertyId
-    , wpsId
-    , wpsWebsiteURL
-    , wpsLevel
+    , pDefaultPage
+    , pCreated
+    , pSelfLink
+    , pAccountId
+    , pName
+    , pCurrency
+    , pInternalWebPropertyId
+    , pId
+    , pUpdated
+    , pPermissions
+    , pWebsiteURL
+    , pType
+    , pStripSiteSearchCategoryParameters
+    , pTimezone
+    , pExcludeQueryParameters
+    , pEnhancedECommerceTracking
+    , pStripSiteSearchQueryParameters
 
     -- * AccountSummaries
     , AccountSummaries
@@ -335,44 +350,34 @@ module Network.Google.Analytics.Types
     , asStartIndex
     , asPreviousLink
 
-    -- * EntityAdWordsLink
-    , EntityAdWordsLink
-    , entityAdWordsLink
-    , entAdWordsAccounts
-    , entProfileIds
-    , entKind
-    , entSelfLink
-    , entName
-    , entId
-    , entEntity
+    -- * GoalEventDetails
+    , GoalEventDetails
+    , goalEventDetails
+    , gedUseEventValue
+    , gedEventConditions
 
-    -- * Profile
-    , Profile
-    , profile
-    , proParentLink
-    , proECommerceTracking
-    , proSiteSearchCategoryParameters
-    , proWebPropertyId
-    , proChildLink
-    , proSiteSearchQueryParameters
-    , proKind
-    , proDefaultPage
-    , proCreated
-    , proSelfLink
-    , proAccountId
-    , proName
-    , proCurrency
-    , proInternalWebPropertyId
-    , proId
-    , proUpdated
-    , proPermissions
-    , proWebsiteURL
-    , proType
-    , proStripSiteSearchCategoryParameters
-    , proTimezone
-    , proExcludeQueryParameters
-    , proEnhancedECommerceTracking
-    , proStripSiteSearchQueryParameters
+    -- * WebPropertySummary
+    , WebPropertySummary
+    , webPropertySummary
+    , wpsKind
+    , wpsProFiles
+    , wpsName
+    , wpsInternalWebPropertyId
+    , wpsId
+    , wpsWebsiteURL
+    , wpsLevel
+
+    -- * Filters
+    , Filters
+    , filters
+    , fNextLink
+    , fItemsPerPage
+    , fKind
+    , fUsername
+    , fItems
+    , fTotalResults
+    , fStartIndex
+    , fPreviousLink
 
     -- * GaData
     , GaData
@@ -380,7 +385,7 @@ module Network.Google.Analytics.Types
     , gdNextLink
     , gdSampleSpace
     , gdItemsPerPage
-    , gdProfileInfo
+    , gdProFileInfo
     , gdKind
     , gdSampleSize
     , gdRows
@@ -394,12 +399,28 @@ module Network.Google.Analytics.Types
     , gdTotalsForAllResults
     , gdPreviousLink
 
-    -- * ColsItem
-    , ColsItem
-    , colsItem
-    , ciId
-    , ciType
-    , ciLabel
+    -- * RealtimeDataTotalsForAllResults
+    , RealtimeDataTotalsForAllResults
+    , realtimeDataTotalsForAllResults
+
+    -- * CustomDataSource
+    , CustomDataSource
+    , customDataSource
+    , cParentLink
+    , cWebPropertyId
+    , cChildLink
+    , cKind
+    , cCreated
+    , cUploadType
+    , cImportBehavior
+    , cSelfLink
+    , cAccountId
+    , cName
+    , cId
+    , cUpdated
+    , cType
+    , cDescription
+    , cProFilesLinked
 
     -- * WebPropertyRef
     , WebPropertyRef
@@ -423,59 +444,23 @@ module Network.Google.Analytics.Types
     , gStartIndex
     , gPreviousLink
 
-    -- * RealtimeDataTotalsForAllResults
-    , RealtimeDataTotalsForAllResults
-    , realtimeDataTotalsForAllResults
+    -- * McfDataRowsItemItem
+    , McfDataRowsItemItem
+    , mcfDataRowsItemItem
+    , mdriiPrimitiveValue
+    , mdriiConversionPathValue
 
-    -- * CustomDataSource
-    , CustomDataSource
-    , customDataSource
-    , cParentLink
-    , cWebPropertyId
-    , cChildLink
-    , cKind
-    , cCreated
-    , cUploadType
-    , cImportBehavior
-    , cSelfLink
-    , cAccountId
-    , cName
-    , cId
-    , cUpdated
-    , cType
-    , cDescription
-    , cProfilesLinked
+    -- * AccountPermissions
+    , AccountPermissions
+    , accountPermissions
+    , apEffective
 
-    -- * EventDetails
-    , EventDetails
-    , eventDetails
-    , edUseEventValue
-    , edEventConditions
-
-    -- * WebProperties
-    , WebProperties
-    , webProperties
-    , wpNextLink
-    , wpItemsPerPage
-    , wpKind
-    , wpUsername
-    , wpItems
-    , wpTotalResults
-    , wpStartIndex
-    , wpPreviousLink
-
-    -- * RowsItemItem
-    , RowsItemItem
-    , rowsItemItem
-    , riiPrimitiveValue
-    , riiConversionPathValue
-
-    -- * AdWordsAccount
-    , AdWordsAccount
-    , adWordsAccount
-    , awaAutoTaggingEnabled
-    , awaKind
-    , awaCustomerId
+    -- * EntityUserLinkEntity
+    , EntityUserLinkEntity
+    , entityUserLinkEntity
+    , euleProFileRef
+    , euleAccountRef
+    , euleWebPropertyRef
 
     -- * Account
     , Account
@@ -488,36 +473,6 @@ module Network.Google.Analytics.Types
     , accId
     , accUpdated
     , accPermissions
-
-    -- * FilterRef
-    , FilterRef
-    , filterRef
-    , frKind
-    , frHref
-    , frAccountId
-    , frName
-    , frId
-
-    -- * AccountPermissions
-    , AccountPermissions
-    , accountPermissions
-    , apEffective
-
-    -- * EntityUserLinkEntity
-    , EntityUserLinkEntity
-    , entityUserLinkEntity
-    , euleProfileRef
-    , euleAccountRef
-    , euleWebPropertyRef
-
-    -- * EventConditionsItem
-    , EventConditionsItem
-    , eventConditionsItem
-    , eciMatchType
-    , eciExpression
-    , eciComparisonValue
-    , eciType
-    , eciComparisonType
 
     -- * Experiment
     , Experiment
@@ -534,7 +489,7 @@ module Network.Google.Analytics.Types
     , expTrafficCoverage
     , expEditableInGaUi
     , expMinimumExperimentLengthInDays
-    , expProfileId
+    , expProFileId
     , expOptimizationType
     , expSelfLink
     , expAccountId
@@ -562,11 +517,39 @@ module Network.Google.Analytics.Types
     , eulStartIndex
     , eulPreviousLink
 
-    -- * FilterParentLink
-    , FilterParentLink
-    , filterParentLink
-    , fplHref
-    , fplType
+    -- * AdWordsAccount
+    , AdWordsAccount
+    , adWordsAccount
+    , awaAutoTaggingEnabled
+    , awaKind
+    , awaCustomerId
+
+    -- * FilterRef
+    , FilterRef
+    , filterRef
+    , frKind
+    , frHref
+    , frAccountId
+    , frName
+    , frId
+
+    -- * GoalVisitTimeOnSiteDetails
+    , GoalVisitTimeOnSiteDetails
+    , goalVisitTimeOnSiteDetails
+    , gvtosdComparisonValue
+    , gvtosdComparisonType
+
+    -- * WebProperties
+    , WebProperties
+    , webProperties
+    , wpNextLink
+    , wpItemsPerPage
+    , wpKind
+    , wpUsername
+    , wpItems
+    , wpTotalResults
+    , wpStartIndex
+    , wpPreviousLink
 
     -- * CustomMetrics
     , CustomMetrics
@@ -580,12 +563,28 @@ module Network.Google.Analytics.Types
     , cmStartIndex
     , cmPreviousLink
 
-    -- * StepsItem
-    , StepsItem
-    , stepsItem
-    , siURL
-    , siName
-    , siNumber
+    -- * FilterAdvancedDetails
+    , FilterAdvancedDetails
+    , filterAdvancedDetails
+    , fadExtractA
+    , fadFieldARequired
+    , fadFieldA
+    , fadFieldBIndex
+    , fadOutputToField
+    , fadOutputConstructor
+    , fadExtractB
+    , fadFieldAIndex
+    , fadCaseSensitive
+    , fadOutputToFieldIndex
+    , fadFieldB
+    , fadFieldBRequired
+    , fadOverrideOutputField
+
+    -- * FilterUppercaseDetails
+    , FilterUppercaseDetails
+    , filterUppercaseDetails
+    , fudFieldIndex
+    , fudField
 
     -- * CustomDataSourceChildLink
     , CustomDataSourceChildLink
@@ -593,37 +592,27 @@ module Network.Google.Analytics.Types
     , cdsclHref
     , cdsclType
 
-    -- * VisitTimeOnSiteDetails
-    , VisitTimeOnSiteDetails
-    , visitTimeOnSiteDetails
-    , vtosdComparisonValue
-    , vtosdComparisonType
+    -- * FilterParentLink
+    , FilterParentLink
+    , filterParentLink
+    , fplHref
+    , fplType
 
-    -- * CustomDimensionParentLink
-    , CustomDimensionParentLink
-    , customDimensionParentLink
-    , cdplHref
-    , cdplType
+    -- * DataGaGetOutput
+    , DataGaGetOutput (..)
 
-    -- * WebProperty
-    , WebProperty
-    , webProperty
-    , wParentLink
-    , wChildLink
-    , wDefaultProfileId
-    , wKind
-    , wCreated
-    , wSelfLink
-    , wAccountId
-    , wName
-    , wInternalWebPropertyId
-    , wId
-    , wUpdated
-    , wProfileCount
-    , wPermissions
-    , wWebsiteURL
-    , wIndustryVertical
-    , wLevel
+    -- * RealtimeData
+    , RealtimeData
+    , realtimeData
+    , rdProFileInfo
+    , rdKind
+    , rdRows
+    , rdSelfLink
+    , rdQuery
+    , rdColumnHeaders
+    , rdId
+    , rdTotalResults
+    , rdTotalsForAllResults
 
     -- * CustomMetric
     , CustomMetric
@@ -644,58 +633,44 @@ module Network.Google.Analytics.Types
     , cusType
     , cusIndex
 
+    -- * ProFileSummary
+    , ProFileSummary
+    , proFileSummary
+    , pfsKind
+    , pfsName
+    , pfsId
+    , pfsType
+
+    -- * CustomDimensionParentLink
+    , CustomDimensionParentLink
+    , customDimensionParentLink
+    , cdplHref
+    , cdplType
+
+    -- * WebProperty
+    , WebProperty
+    , webProperty
+    , wParentLink
+    , wChildLink
+    , wDefaultProFileId
+    , wKind
+    , wCreated
+    , wSelfLink
+    , wAccountId
+    , wName
+    , wInternalWebPropertyId
+    , wId
+    , wUpdated
+    , wProFileCount
+    , wPermissions
+    , wWebsiteURL
+    , wIndustryVertical
+    , wLevel
+
     -- * WebPropertyPermissions
     , WebPropertyPermissions
     , webPropertyPermissions
     , wppEffective
-
-    -- * Output
-    , Output (..)
-
-    -- * RealtimeData
-    , RealtimeData
-    , realtimeData
-    , rdProfileInfo
-    , rdKind
-    , rdRows
-    , rdSelfLink
-    , rdQuery
-    , rdColumnHeaders
-    , rdId
-    , rdTotalResults
-    , rdTotalsForAllResults
-
-    -- * ProfileSummary
-    , ProfileSummary
-    , profileSummary
-    , psKind
-    , psName
-    , psId
-    , psType
-
-    -- * Attributes
-    , Attributes
-    , attributes
-
-    -- * Query
-    , Query
-    , query
-    , qMetrics
-    , qSamplingLevel
-    , qFilters
-    , qIds
-    , qEndDate
-    , qSort
-    , qDimensions
-    , qStartIndex
-    , qMaxResults
-    , qSegment
-    , qStartDate
-
-    -- * DataTableRowsItem
-    , DataTableRowsItem
-    , dataTableRowsItem
-    , dtriC
 
     -- * EntityUserLink
     , EntityUserLink
@@ -713,48 +688,29 @@ module Network.Google.Analytics.Types
     , cdsplHref
     , cdsplType
 
-    -- * AccountTicket
-    , AccountTicket
-    , accountTicket
-    , atRedirectURI
-    , atKind
-    , atProfile
-    , atAccount
-    , atWebProperty
-    , atId
+    -- * GoalEventDetailsEventConditionsItem
+    , GoalEventDetailsEventConditionsItem
+    , goalEventDetailsEventConditionsItem
+    , gedeciMatchType
+    , gedeciExpression
+    , gedeciComparisonValue
+    , gedeciType
+    , gedeciComparisonType
 
-    -- * RealtimeDataQuery
-    , RealtimeDataQuery
-    , realtimeDataQuery
-    , rdqMetrics
-    , rdqFilters
-    , rdqIds
-    , rdqSort
-    , rdqDimensions
-    , rdqMaxResults
-
-    -- * URLDestinationDetails
-    , URLDestinationDetails
-    , urlDestinationDetails
-    , uddURL
-    , uddMatchType
-    , uddSteps
-    , uddCaseSensitive
-    , uddFirstStepRequired
-
-    -- * VisitNumPagesDetails
-    , VisitNumPagesDetails
-    , visitNumPagesDetails
-    , vnpdComparisonValue
-    , vnpdComparisonType
-
-    -- * AccountSummary
-    , AccountSummary
-    , accountSummary
-    , assKind
-    , assWebProperties
-    , assName
-    , assId
+    -- * McfDataQuery
+    , McfDataQuery
+    , mcfDataQuery
+    , mdqMetrics
+    , mdqSamplingLevel
+    , mdqFilters
+    , mdqIds
+    , mdqEndDate
+    , mdqSort
+    , mdqDimensions
+    , mdqStartIndex
+    , mdqMaxResults
+    , mdqSegment
+    , mdqStartDate
 
     -- * Goal
     , Goal
@@ -764,7 +720,7 @@ module Network.Google.Analytics.Types
     , goaKind
     , goaCreated
     , goaValue
-    , goaProfileId
+    , goaProFileId
     , goaEventDetails
     , goaActive
     , goaSelfLink
@@ -778,6 +734,34 @@ module Network.Google.Analytics.Types
     , goaUpdated
     , goaType
 
+    -- * AccountTicket
+    , AccountTicket
+    , accountTicket
+    , atRedirectURI
+    , atKind
+    , atProFile
+    , atAccount
+    , atWebProperty
+    , atId
+
+    -- * AccountSummary
+    , AccountSummary
+    , accountSummary
+    , assKind
+    , assWebProperties
+    , assName
+    , assId
+
+    -- * RealtimeDataQuery
+    , RealtimeDataQuery
+    , realtimeDataQuery
+    , rdqMetrics
+    , rdqFilters
+    , rdqIds
+    , rdqSort
+    , rdqDimensions
+    , rdqMaxResults
+
     -- * Columns
     , Columns
     , columns
@@ -787,33 +771,11 @@ module Network.Google.Analytics.Types
     , colTotalResults
     , colAttributeNames
 
-    -- * CustomDimensions
-    , CustomDimensions
-    , customDimensions
-    , cdNextLink
-    , cdItemsPerPage
-    , cdKind
-    , cdUsername
-    , cdItems
-    , cdTotalResults
-    , cdStartIndex
-    , cdPreviousLink
-
-    -- * Permissions
-    , Permissions
-    , permissions
-    , pEffective
-
-    -- * Uploads
-    , Uploads
-    , uploads
-    , uplNextLink
-    , uplItemsPerPage
-    , uplKind
-    , uplItems
-    , uplTotalResults
-    , uplStartIndex
-    , uplPreviousLink
+    -- * FilterLowercaseDetails
+    , FilterLowercaseDetails
+    , filterLowercaseDetails
+    , fldFieldIndex
+    , fldField
 
     -- * Filter
     , Filter
@@ -834,6 +796,29 @@ module Network.Google.Analytics.Types
     , filType
     , filSearchAndReplaceDetails
 
+    -- * Uploads
+    , Uploads
+    , uploads
+    , uplNextLink
+    , uplItemsPerPage
+    , uplKind
+    , uplItems
+    , uplTotalResults
+    , uplStartIndex
+    , uplPreviousLink
+
+    -- * CustomDimensions
+    , CustomDimensions
+    , customDimensions
+    , cdNextLink
+    , cdItemsPerPage
+    , cdKind
+    , cdUsername
+    , cdItems
+    , cdTotalResults
+    , cdStartIndex
+    , cdPreviousLink
+
     -- * Segments
     , Segments
     , segments
@@ -846,23 +831,82 @@ module Network.Google.Analytics.Types
     , sStartIndex
     , sPreviousLink
 
-    -- * ProfileFilterLinks
-    , ProfileFilterLinks
-    , profileFilterLinks
-    , pflNextLink
-    , pflItemsPerPage
-    , pflKind
-    , pflUsername
-    , pflItems
-    , pflTotalResults
-    , pflStartIndex
-    , pflPreviousLink
+    -- * GaDataDataTable
+    , GaDataDataTable
+    , gaDataDataTable
+    , gddtCols
+    , gddtRows
 
-    -- * ConversionPathValueItem
-    , ConversionPathValueItem
-    , conversionPathValueItem
-    , cpviInteractionType
-    , cpviNodeValue
+    -- * EntityAdWordsLinkEntity
+    , EntityAdWordsLinkEntity
+    , entityAdWordsLinkEntity
+    , eawleWebPropertyRef
+
+    -- * GoalURLDestinationDetails
+    , GoalURLDestinationDetails
+    , goalURLDestinationDetails
+    , guddURL
+    , guddMatchType
+    , guddSteps
+    , guddCaseSensitive
+    , guddFirstStepRequired
+
+    -- * ProFileFilterLinks
+    , ProFileFilterLinks
+    , proFileFilterLinks
+    , pfflNextLink
+    , pfflItemsPerPage
+    , pfflKind
+    , pfflUsername
+    , pfflItems
+    , pfflTotalResults
+    , pfflStartIndex
+    , pfflPreviousLink
+
+    -- * WebPropertyParentLink
+    , WebPropertyParentLink
+    , webPropertyParentLink
+    , wpplHref
+    , wpplType
+
+    -- * GaDataProFileInfo
+    , GaDataProFileInfo
+    , gaDataProFileInfo
+    , gdpfiWebPropertyId
+    , gdpfiProFileId
+    , gdpfiProFileName
+    , gdpfiAccountId
+    , gdpfiInternalWebPropertyId
+    , gdpfiTableId
+
+    -- * Upload
+    , Upload
+    , upload
+    , uuStatus
+    , uuKind
+    , uuCustomDataSourceId
+    , uuAccountId
+    , uuId
+    , uuErrors
+
+    -- * DataMcfGetSamplingLevel
+    , DataMcfGetSamplingLevel (..)
+
+    -- * CustomDimension
+    , CustomDimension
+    , customDimension
+    , cddParentLink
+    , cddWebPropertyId
+    , cddKind
+    , cddCreated
+    , cddActive
+    , cddSelfLink
+    , cddAccountId
+    , cddName
+    , cddScope
+    , cddId
+    , cddUpdated
+    , cddIndex
 
     -- * Segment
     , Segment
@@ -883,91 +927,21 @@ module Network.Google.Analytics.Types
     , aclHref
     , aclType
 
-    -- * GaDataProfileInfo
-    , GaDataProfileInfo
-    , gaDataProfileInfo
-    , gdpiWebPropertyId
-    , gdpiProfileId
-    , gdpiProfileName
-    , gdpiAccountId
-    , gdpiInternalWebPropertyId
-    , gdpiTableId
+    -- * ProFileFilterLink
+    , ProFileFilterLink
+    , proFileFilterLink
+    , proProFileRef
+    , proKind
+    , proFilterRef
+    , proSelfLink
+    , proId
+    , proRank
 
     -- * CustomMetricParentLink
     , CustomMetricParentLink
     , customMetricParentLink
     , cmplHref
     , cmplType
-
-    -- * CustomDimension
-    , CustomDimension
-    , customDimension
-    , cddParentLink
-    , cddWebPropertyId
-    , cddKind
-    , cddCreated
-    , cddActive
-    , cddSelfLink
-    , cddAccountId
-    , cddName
-    , cddScope
-    , cddId
-    , cddUpdated
-    , cddIndex
-
-    -- * AnalyticsDataGaGetSamplingLevel
-    , AnalyticsDataGaGetSamplingLevel (..)
-
-    -- * WebPropertyParentLink
-    , WebPropertyParentLink
-    , webPropertyParentLink
-    , wpplHref
-    , wpplType
-
-    -- * Entity
-    , Entity
-    , entity
-    , eWebPropertyRef
-
-    -- * Upload
-    , Upload
-    , upload
-    , uuStatus
-    , uuKind
-    , uuCustomDataSourceId
-    , uuAccountId
-    , uuId
-    , uuErrors
-
-    -- * SearchAndReplaceDetails
-    , SearchAndReplaceDetails
-    , searchAndReplaceDetails
-    , sardFieldIndex
-    , sardField
-    , sardSearchString
-    , sardReplaceString
-    , sardCaseSensitive
-
-    -- * ProfileFilterLink
-    , ProfileFilterLink
-    , profileFilterLink
-    , pflfProfileRef
-    , pflfKind
-    , pflfFilterRef
-    , pflfSelfLink
-    , pflfId
-    , pflfRank
-
-    -- * CItem
-    , CItem
-    , cItem
-    , ciV
-
-    -- * CloudStorageDownloadDetails
-    , CloudStorageDownloadDetails
-    , cloudStorageDownloadDetails
-    , csddObjectId
-    , csddBucketId
 
     -- * Column
     , Column
@@ -976,11 +950,37 @@ module Network.Google.Analytics.Types
     , ccAttributes
     , ccId
 
-    -- * DataTable
-    , DataTable
-    , dataTable
-    , dtCols
-    , dtRows
+    -- * GaDataDataTableColsItem
+    , GaDataDataTableColsItem
+    , gaDataDataTableColsItem
+    , gddtciId
+    , gddtciType
+    , gddtciLabel
+
+    -- * ExperimentVariationsItem
+    , ExperimentVariationsItem
+    , experimentVariationsItem
+    , eviStatus
+    , eviWeight
+    , eviURL
+    , eviWon
+    , eviName
+
+    -- * McfDataTotalsForAllResults
+    , McfDataTotalsForAllResults
+    , mcfDataTotalsForAllResults
+
+    -- * UnSampledReportCloudStorageDownloadDetails
+    , UnSampledReportCloudStorageDownloadDetails
+    , unSampledReportCloudStorageDownloadDetails
+    , usrcsddObjectId
+    , usrcsddBucketId
+
+    -- * ProFileChildLink
+    , ProFileChildLink
+    , proFileChildLink
+    , pfclHref
+    , pfclType
 
     -- * GaDataColumnHeadersItem
     , GaDataColumnHeadersItem
@@ -989,15 +989,15 @@ module Network.Google.Analytics.Types
     , gdchiName
     , gdchiDataType
 
-    -- * TotalsForAllResults
-    , TotalsForAllResults
-    , totalsForAllResults
-
     -- * GoalParentLink
     , GoalParentLink
     , goalParentLink
     , gplHref
     , gplType
+
+    -- * ColumnAttributes
+    , ColumnAttributes
+    , columnAttributes
     ) where
 
 import           Network.Google.Analytics.Types.Product

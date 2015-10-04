@@ -63,7 +63,7 @@ type TargetPoolsGetHealthResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] InstanceReference :>
+                               ReqBody '[OctetStream] InstanceReference :>
                                  Post '[JSON] TargetPoolInstanceHealth
 
 -- | Gets the most recent health check results for each IP for the given

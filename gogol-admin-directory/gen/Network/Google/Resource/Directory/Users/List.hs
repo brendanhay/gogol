@@ -58,16 +58,16 @@ import           Network.Google.Prelude
 -- 'UsersList'' request conforms to.
 type UsersListResource =
      "users" :>
-       QueryParam "event" DirectoryUsersListEvent :>
-         QueryParam "orderBy" OrderBy :>
-           QueryParam "viewType" ViewType :>
+       QueryParam "event" UsersListEvent :>
+         QueryParam "orderBy" UsersListOrderBy :>
+           QueryParam "viewType" UsersListViewType :>
              QueryParam "customFieldMask" Text :>
                QueryParam "domain" Text :>
                  QueryParam "showDeleted" Text :>
-                   QueryParam "sortOrder" SortOrder :>
+                   QueryParam "sortOrder" UsersListSortOrder :>
                      QueryParam "customer" Text :>
                        QueryParam "query" Text :>
-                         QueryParam "projection" Projection :>
+                         QueryParam "projection" UsersListProjection :>
                            QueryParam "pageToken" Text :>
                              QueryParam "maxResults" Int32 :>
                                QueryParam "quotaUser" Text :>
@@ -83,20 +83,20 @@ type UsersListResource =
 --
 -- /See:/ 'usersList'' smart constructor.
 data UsersList' = UsersList'
-    { _ulEvent           :: !(Maybe DirectoryUsersListEvent)
+    { _ulEvent           :: !(Maybe UsersListEvent)
     , _ulQuotaUser       :: !(Maybe Text)
     , _ulPrettyPrint     :: !Bool
-    , _ulOrderBy         :: !(Maybe OrderBy)
-    , _ulViewType        :: !ViewType
+    , _ulOrderBy         :: !(Maybe UsersListOrderBy)
+    , _ulViewType        :: !UsersListViewType
     , _ulCustomFieldMask :: !(Maybe Text)
     , _ulUserIP          :: !(Maybe Text)
     , _ulDomain          :: !(Maybe Text)
     , _ulShowDeleted     :: !(Maybe Text)
-    , _ulSortOrder       :: !(Maybe SortOrder)
+    , _ulSortOrder       :: !(Maybe UsersListSortOrder)
     , _ulCustomer        :: !(Maybe Text)
     , _ulKey             :: !(Maybe Key)
     , _ulQuery           :: !(Maybe Text)
-    , _ulProjection      :: !Projection
+    , _ulProjection      :: !UsersListProjection
     , _ulPageToken       :: !(Maybe Text)
     , _ulOAuthToken      :: !(Maybe OAuthToken)
     , _ulMaxResults      :: !(Maybe Int32)
@@ -150,7 +150,7 @@ usersList' =
     , _ulQuotaUser = Nothing
     , _ulPrettyPrint = True
     , _ulOrderBy = Nothing
-    , _ulViewType = VTAdminView
+    , _ulViewType = AdminView
     , _ulCustomFieldMask = Nothing
     , _ulUserIP = Nothing
     , _ulDomain = Nothing
@@ -159,7 +159,7 @@ usersList' =
     , _ulCustomer = Nothing
     , _ulKey = Nothing
     , _ulQuery = Nothing
-    , _ulProjection = PBasic
+    , _ulProjection = ULPBasic
     , _ulPageToken = Nothing
     , _ulOAuthToken = Nothing
     , _ulMaxResults = Nothing
@@ -167,7 +167,7 @@ usersList' =
     }
 
 -- | Event on which subscription is intended (if subscribing)
-ulEvent :: Lens' UsersList' (Maybe DirectoryUsersListEvent)
+ulEvent :: Lens' UsersList' (Maybe UsersListEvent)
 ulEvent = lens _ulEvent (\ s a -> s{_ulEvent = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -184,12 +184,12 @@ ulPrettyPrint
       (\ s a -> s{_ulPrettyPrint = a})
 
 -- | Column to use for sorting results
-ulOrderBy :: Lens' UsersList' (Maybe OrderBy)
+ulOrderBy :: Lens' UsersList' (Maybe UsersListOrderBy)
 ulOrderBy
   = lens _ulOrderBy (\ s a -> s{_ulOrderBy = a})
 
 -- | Whether to fetch the ADMIN_VIEW or DOMAIN_PUBLIC view of the user.
-ulViewType :: Lens' UsersList' ViewType
+ulViewType :: Lens' UsersList' UsersListViewType
 ulViewType
   = lens _ulViewType (\ s a -> s{_ulViewType = a})
 
@@ -217,7 +217,7 @@ ulShowDeleted
       (\ s a -> s{_ulShowDeleted = a})
 
 -- | Whether to return results in ascending or descending order.
-ulSortOrder :: Lens' UsersList' (Maybe SortOrder)
+ulSortOrder :: Lens' UsersList' (Maybe UsersListSortOrder)
 ulSortOrder
   = lens _ulSortOrder (\ s a -> s{_ulSortOrder = a})
 
@@ -240,7 +240,7 @@ ulQuery :: Lens' UsersList' (Maybe Text)
 ulQuery = lens _ulQuery (\ s a -> s{_ulQuery = a})
 
 -- | What subset of fields to fetch for this user.
-ulProjection :: Lens' UsersList' Projection
+ulProjection :: Lens' UsersList' UsersListProjection
 ulProjection
   = lens _ulProjection (\ s a -> s{_ulProjection = a})
 

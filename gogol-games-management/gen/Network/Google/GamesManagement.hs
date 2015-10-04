@@ -117,6 +117,12 @@ module Network.Google.GamesManagement
     , gpeirNextLevel
     , gpeirLastLevelUpTimestampMillis
 
+    -- ** PlayerName
+    , PlayerName
+    , playerName
+    , pnGivenName
+    , pnFamilyName
+
     -- ** PlayerScoreResetAllResponse
     , PlayerScoreResetAllResponse
     , playerScoreResetAllResponse
@@ -149,18 +155,18 @@ module Network.Google.GamesManagement
     , srmfarKind
     , srmfarLeaderboardIds
 
+    -- ** QuestsResetMultipleForAllRequest
+    , QuestsResetMultipleForAllRequest
+    , questsResetMultipleForAllRequest
+    , qrmfarKind
+    , qrmfarQuestIds
+
     -- ** HiddenPlayerList
     , HiddenPlayerList
     , hiddenPlayerList
     , hplNextPageToken
     , hplKind
     , hplItems
-
-    -- ** QuestsResetMultipleForAllRequest
-    , QuestsResetMultipleForAllRequest
-    , questsResetMultipleForAllRequest
-    , qrmfarKind
-    , qrmfarQuestIds
 
     -- ** EventsResetMultipleForAllRequest
     , EventsResetMultipleForAllRequest
@@ -180,12 +186,6 @@ module Network.Google.GamesManagement
     , hpKind
     , hpHiddenTimeMillis
     , hpPlayer
-
-    -- ** Name
-    , Name
-    , name
-    , nGivenName
-    , nFamilyName
 
     -- ** AchievementResetAllResponse
     , AchievementResetAllResponse

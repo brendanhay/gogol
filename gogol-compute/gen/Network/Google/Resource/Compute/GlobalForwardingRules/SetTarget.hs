@@ -60,7 +60,7 @@ type GlobalForwardingRulesSetTargetResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] TargetReference :>
+                             ReqBody '[OctetStream] TargetReference :>
                                Post '[JSON] Operation
 
 -- | Changes target url for forwarding rule.

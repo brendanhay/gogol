@@ -63,7 +63,7 @@ type SearchanalyticsQueryResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] SearchAnalyticsQueryRequest :>
+                           ReqBody '[OctetStream] SearchAnalyticsQueryRequest :>
                              Post '[JSON] SearchAnalyticsQueryResponse
 
 -- | Query your data with filters and parameters that you define. Returns

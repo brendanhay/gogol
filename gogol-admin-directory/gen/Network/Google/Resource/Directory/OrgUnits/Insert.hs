@@ -57,7 +57,8 @@ type OrgUnitsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] OrgUnit :> Post '[JSON] OrgUnit
+                         ReqBody '[OctetStream] OrgUnit :>
+                           Post '[JSON] OrgUnit
 
 -- | Add Organization Unit
 --

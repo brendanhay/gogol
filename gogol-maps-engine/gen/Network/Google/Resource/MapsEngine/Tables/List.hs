@@ -61,10 +61,10 @@ type TablesListResource =
      "tables" :>
        QueryParam "createdAfter" DateTime' :>
          QueryParam "creatorEmail" Text :>
-           QueryParam "role" MapsEngineTablesListRole :>
+           QueryParam "role" TablesListRole :>
              QueryParam "bbox" Text :>
                QueryParam "processingStatus"
-                 MapsEngineTablesListProcessingStatus
+                 TablesListProcessingStatus
                  :>
                  QueryParam "modifiedAfter" DateTime' :>
                    QueryParam "modifiedBefore" DateTime' :>
@@ -93,10 +93,10 @@ data TablesList' = TablesList'
     , _tlPrettyPrint      :: !Bool
     , _tlUserIP           :: !(Maybe Text)
     , _tlCreatorEmail     :: !(Maybe Text)
-    , _tlRole             :: !(Maybe MapsEngineTablesListRole)
+    , _tlRole             :: !(Maybe TablesListRole)
     , _tlKey              :: !(Maybe Key)
     , _tlBbox             :: !(Maybe Text)
-    , _tlProcessingStatus :: !(Maybe MapsEngineTablesListProcessingStatus)
+    , _tlProcessingStatus :: !(Maybe TablesListProcessingStatus)
     , _tlModifiedAfter    :: !(Maybe DateTime')
     , _tlModifiedBefore   :: !(Maybe DateTime')
     , _tlPageToken        :: !(Maybe Text)
@@ -210,7 +210,7 @@ tlCreatorEmail
 
 -- | The role parameter indicates that the response should only contain
 -- assets where the current user has the specified level of access.
-tlRole :: Lens' TablesList' (Maybe MapsEngineTablesListRole)
+tlRole :: Lens' TablesList' (Maybe TablesListRole)
 tlRole = lens _tlRole (\ s a -> s{_tlRole = a})
 
 -- | API key. Your API key identifies your project and provides you with API
@@ -224,7 +224,7 @@ tlKey = lens _tlKey (\ s a -> s{_tlKey = a})
 tlBbox :: Lens' TablesList' (Maybe Text)
 tlBbox = lens _tlBbox (\ s a -> s{_tlBbox = a})
 
-tlProcessingStatus :: Lens' TablesList' (Maybe MapsEngineTablesListProcessingStatus)
+tlProcessingStatus :: Lens' TablesList' (Maybe TablesListProcessingStatus)
 tlProcessingStatus
   = lens _tlProcessingStatus
       (\ s a -> s{_tlProcessingStatus = a})

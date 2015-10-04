@@ -19,6 +19,49 @@ import           Network.Google.Autoscaler.Types.Sum
 import           Network.Google.Prelude
 
 --
+-- /See:/ 'operationWarningsItemDataItem' smart constructor.
+data OperationWarningsItemDataItem = OperationWarningsItemDataItem
+    { _owidiValue :: !(Maybe Text)
+    , _owidiKey   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationWarningsItemDataItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'owidiValue'
+--
+-- * 'owidiKey'
+operationWarningsItemDataItem
+    :: OperationWarningsItemDataItem
+operationWarningsItemDataItem =
+    OperationWarningsItemDataItem
+    { _owidiValue = Nothing
+    , _owidiKey = Nothing
+    }
+
+owidiValue :: Lens' OperationWarningsItemDataItem (Maybe Text)
+owidiValue
+  = lens _owidiValue (\ s a -> s{_owidiValue = a})
+
+owidiKey :: Lens' OperationWarningsItemDataItem (Maybe Text)
+owidiKey = lens _owidiKey (\ s a -> s{_owidiKey = a})
+
+instance FromJSON OperationWarningsItemDataItem where
+        parseJSON
+          = withObject "OperationWarningsItemDataItem"
+              (\ o ->
+                 OperationWarningsItemDataItem <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON OperationWarningsItemDataItem where
+        toJSON OperationWarningsItemDataItem{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _owidiValue,
+                  ("key" .=) <$> _owidiKey])
+
+--
 -- /See:/ 'deprecationStatus' smart constructor.
 data DeprecationStatus = DeprecationStatus
     { _dsState       :: !(Maybe Text)
@@ -91,6 +134,76 @@ instance ToJSON DeprecationStatus where
                   ("replacement" .=) <$> _dsReplacement,
                   ("obsolete" .=) <$> _dsObsolete,
                   ("deprecated" .=) <$> _dsDeprecated])
+
+-- | Custom utilization metric policy.
+--
+-- /See:/ 'autoscalingPolicyCustomMetricUtilization' smart constructor.
+data AutoscalingPolicyCustomMetricUtilization = AutoscalingPolicyCustomMetricUtilization
+    { _apcmuUtilizationTarget     :: !(Maybe Double)
+    , _apcmuMetric                :: !(Maybe Text)
+    , _apcmuUtilizationTargetType :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AutoscalingPolicyCustomMetricUtilization' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'apcmuUtilizationTarget'
+--
+-- * 'apcmuMetric'
+--
+-- * 'apcmuUtilizationTargetType'
+autoscalingPolicyCustomMetricUtilization
+    :: AutoscalingPolicyCustomMetricUtilization
+autoscalingPolicyCustomMetricUtilization =
+    AutoscalingPolicyCustomMetricUtilization
+    { _apcmuUtilizationTarget = Nothing
+    , _apcmuMetric = Nothing
+    , _apcmuUtilizationTargetType = Nothing
+    }
+
+-- | Target value of the metric which Autoscaler should maintain. Must be a
+-- positive value.
+apcmuUtilizationTarget :: Lens' AutoscalingPolicyCustomMetricUtilization (Maybe Double)
+apcmuUtilizationTarget
+  = lens _apcmuUtilizationTarget
+      (\ s a -> s{_apcmuUtilizationTarget = a})
+
+-- | Identifier of the metric. It should be a Cloud Monitoring metric. The
+-- metric can not have negative values. The metric should be an utilization
+-- metric (increasing number of VMs handling requests x times should reduce
+-- average value of the metric roughly x times). For example you could use:
+-- compute.googleapis.com\/instance\/network\/received_bytes_count.
+apcmuMetric :: Lens' AutoscalingPolicyCustomMetricUtilization (Maybe Text)
+apcmuMetric
+  = lens _apcmuMetric (\ s a -> s{_apcmuMetric = a})
+
+-- | Defines type in which utilization_target is expressed.
+apcmuUtilizationTargetType :: Lens' AutoscalingPolicyCustomMetricUtilization (Maybe Text)
+apcmuUtilizationTargetType
+  = lens _apcmuUtilizationTargetType
+      (\ s a -> s{_apcmuUtilizationTargetType = a})
+
+instance FromJSON
+         AutoscalingPolicyCustomMetricUtilization where
+        parseJSON
+          = withObject
+              "AutoscalingPolicyCustomMetricUtilization"
+              (\ o ->
+                 AutoscalingPolicyCustomMetricUtilization <$>
+                   (o .:? "utilizationTarget") <*> (o .:? "metric") <*>
+                     (o .:? "utilizationTargetType"))
+
+instance ToJSON
+         AutoscalingPolicyCustomMetricUtilization where
+        toJSON AutoscalingPolicyCustomMetricUtilization{..}
+          = object
+              (catMaybes
+                 [("utilizationTarget" .=) <$>
+                    _apcmuUtilizationTarget,
+                  ("metric" .=) <$> _apcmuMetric,
+                  ("utilizationTargetType" .=) <$>
+                    _apcmuUtilizationTargetType])
 
 --
 -- /See:/ 'operationList' smart constructor.
@@ -168,123 +281,6 @@ instance ToJSON OperationList where
                   ("selfLink" .=) <$> _olSelfLink,
                   ("id" .=) <$> _olId])
 
--- | Custom utilization metric policy.
---
--- /See:/ 'autoscalingPolicyCustomMetricUtilization' smart constructor.
-data AutoscalingPolicyCustomMetricUtilization = AutoscalingPolicyCustomMetricUtilization
-    { _apcmuUtilizationTarget     :: !(Maybe Double)
-    , _apcmuMetric                :: !(Maybe Text)
-    , _apcmuUtilizationTargetType :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AutoscalingPolicyCustomMetricUtilization' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'apcmuUtilizationTarget'
---
--- * 'apcmuMetric'
---
--- * 'apcmuUtilizationTargetType'
-autoscalingPolicyCustomMetricUtilization
-    :: AutoscalingPolicyCustomMetricUtilization
-autoscalingPolicyCustomMetricUtilization =
-    AutoscalingPolicyCustomMetricUtilization
-    { _apcmuUtilizationTarget = Nothing
-    , _apcmuMetric = Nothing
-    , _apcmuUtilizationTargetType = Nothing
-    }
-
--- | Target value of the metric which Autoscaler should maintain. Must be a
--- positive value.
-apcmuUtilizationTarget :: Lens' AutoscalingPolicyCustomMetricUtilization (Maybe Double)
-apcmuUtilizationTarget
-  = lens _apcmuUtilizationTarget
-      (\ s a -> s{_apcmuUtilizationTarget = a})
-
--- | Identifier of the metric. It should be a Cloud Monitoring metric. The
--- metric can not have negative values. The metric should be an utilization
--- metric (increasing number of VMs handling requests x times should reduce
--- average value of the metric roughly x times). For example you could use:
--- compute.googleapis.com\/instance\/network\/received_bytes_count.
-apcmuMetric :: Lens' AutoscalingPolicyCustomMetricUtilization (Maybe Text)
-apcmuMetric
-  = lens _apcmuMetric (\ s a -> s{_apcmuMetric = a})
-
--- | Defines type in which utilization_target is expressed.
-apcmuUtilizationTargetType :: Lens' AutoscalingPolicyCustomMetricUtilization (Maybe Text)
-apcmuUtilizationTargetType
-  = lens _apcmuUtilizationTargetType
-      (\ s a -> s{_apcmuUtilizationTargetType = a})
-
-instance FromJSON
-         AutoscalingPolicyCustomMetricUtilization where
-        parseJSON
-          = withObject
-              "AutoscalingPolicyCustomMetricUtilization"
-              (\ o ->
-                 AutoscalingPolicyCustomMetricUtilization <$>
-                   (o .:? "utilizationTarget") <*> (o .:? "metric") <*>
-                     (o .:? "utilizationTargetType"))
-
-instance ToJSON
-         AutoscalingPolicyCustomMetricUtilization where
-        toJSON AutoscalingPolicyCustomMetricUtilization{..}
-          = object
-              (catMaybes
-                 [("utilizationTarget" .=) <$>
-                    _apcmuUtilizationTarget,
-                  ("metric" .=) <$> _apcmuMetric,
-                  ("utilizationTargetType" .=) <$>
-                    _apcmuUtilizationTargetType])
-
--- | Load balancing utilization policy.
---
--- /See:/ 'autoscalingPolicyLoadBalancingUtilization' smart constructor.
-newtype AutoscalingPolicyLoadBalancingUtilization = AutoscalingPolicyLoadBalancingUtilization
-    { _aplbuUtilizationTarget :: Maybe Double
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AutoscalingPolicyLoadBalancingUtilization' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aplbuUtilizationTarget'
-autoscalingPolicyLoadBalancingUtilization
-    :: AutoscalingPolicyLoadBalancingUtilization
-autoscalingPolicyLoadBalancingUtilization =
-    AutoscalingPolicyLoadBalancingUtilization
-    { _aplbuUtilizationTarget = Nothing
-    }
-
--- | Fraction of backend capacity utilization (set in HTTP load balancing
--- configuration) that Autoscaler should maintain. Must be a positive float
--- value. If not defined, the default is 0.8. For example if your
--- maxRatePerInstance capacity (in HTTP Load Balancing configuration) is
--- set at 10 and you would like to keep number of instances such that each
--- instance receives 7 QPS on average, set this to 0.7.
-aplbuUtilizationTarget :: Lens' AutoscalingPolicyLoadBalancingUtilization (Maybe Double)
-aplbuUtilizationTarget
-  = lens _aplbuUtilizationTarget
-      (\ s a -> s{_aplbuUtilizationTarget = a})
-
-instance FromJSON
-         AutoscalingPolicyLoadBalancingUtilization where
-        parseJSON
-          = withObject
-              "AutoscalingPolicyLoadBalancingUtilization"
-              (\ o ->
-                 AutoscalingPolicyLoadBalancingUtilization <$>
-                   (o .:? "utilizationTarget"))
-
-instance ToJSON
-         AutoscalingPolicyLoadBalancingUtilization where
-        toJSON AutoscalingPolicyLoadBalancingUtilization{..}
-          = object
-              (catMaybes
-                 [("utilizationTarget" .=) <$>
-                    _aplbuUtilizationTarget])
-
 --
 -- /See:/ 'operation' smart constructor.
 data Operation = Operation
@@ -294,10 +290,10 @@ data Operation = Operation
     , _oProgress            :: !(Maybe Int32)
     , _oStartTime           :: !(Maybe Text)
     , _oKind                :: !Text
-    , _oError               :: !(Maybe Error')
+    , _oError               :: !(Maybe OperationError)
     , _oHTTPErrorMessage    :: !(Maybe Text)
     , _oZone                :: !(Maybe Text)
-    , _oWarnings            :: !(Maybe [WarningsItem])
+    , _oWarnings            :: !(Maybe [OperationWarningsItem])
     , _oHTTPErrorStatusCode :: !(Maybe Int32)
     , _oUser                :: !(Maybe Text)
     , _oSelfLink            :: !(Maybe Text)
@@ -411,7 +407,7 @@ oStartTime
 oKind :: Lens' Operation Text
 oKind = lens _oKind (\ s a -> s{_oKind = a})
 
-oError :: Lens' Operation (Maybe Error')
+oError :: Lens' Operation (Maybe OperationError)
 oError = lens _oError (\ s a -> s{_oError = a})
 
 oHTTPErrorMessage :: Lens' Operation (Maybe Text)
@@ -422,7 +418,7 @@ oHTTPErrorMessage
 oZone :: Lens' Operation (Maybe Text)
 oZone = lens _oZone (\ s a -> s{_oZone = a})
 
-oWarnings :: Lens' Operation [WarningsItem]
+oWarnings :: Lens' Operation [OperationWarningsItem]
 oWarnings
   = lens _oWarnings (\ s a -> s{_oWarnings = a}) .
       _Default
@@ -528,43 +524,58 @@ instance ToJSON Operation where
                   ("targetLink" .=) <$> _oTargetLink,
                   ("clientOperationId" .=) <$> _oClientOperationId])
 
+-- | Load balancing utilization policy.
 --
--- /See:/ 'error'' smart constructor.
-newtype Error' = Error'
-    { _eErrors :: Maybe [ErrorsItem]
+-- /See:/ 'autoscalingPolicyLoadBalancingUtilization' smart constructor.
+newtype AutoscalingPolicyLoadBalancingUtilization = AutoscalingPolicyLoadBalancingUtilization
+    { _aplbuUtilizationTarget :: Maybe Double
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Error' with the minimum fields required to make a request.
+-- | Creates a value of 'AutoscalingPolicyLoadBalancingUtilization' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'eErrors'
-error'
-    :: Error'
-error' =
-    Error'
-    { _eErrors = Nothing
+-- * 'aplbuUtilizationTarget'
+autoscalingPolicyLoadBalancingUtilization
+    :: AutoscalingPolicyLoadBalancingUtilization
+autoscalingPolicyLoadBalancingUtilization =
+    AutoscalingPolicyLoadBalancingUtilization
+    { _aplbuUtilizationTarget = Nothing
     }
 
-eErrors :: Lens' Error' [ErrorsItem]
-eErrors
-  = lens _eErrors (\ s a -> s{_eErrors = a}) . _Default
-      . _Coerce
+-- | Fraction of backend capacity utilization (set in HTTP load balancing
+-- configuration) that Autoscaler should maintain. Must be a positive float
+-- value. If not defined, the default is 0.8. For example if your
+-- maxRatePerInstance capacity (in HTTP Load Balancing configuration) is
+-- set at 10 and you would like to keep number of instances such that each
+-- instance receives 7 QPS on average, set this to 0.7.
+aplbuUtilizationTarget :: Lens' AutoscalingPolicyLoadBalancingUtilization (Maybe Double)
+aplbuUtilizationTarget
+  = lens _aplbuUtilizationTarget
+      (\ s a -> s{_aplbuUtilizationTarget = a})
 
-instance FromJSON Error' where
+instance FromJSON
+         AutoscalingPolicyLoadBalancingUtilization where
         parseJSON
-          = withObject "Error"
-              (\ o -> Error' <$> (o .:? "errors" .!= mempty))
+          = withObject
+              "AutoscalingPolicyLoadBalancingUtilization"
+              (\ o ->
+                 AutoscalingPolicyLoadBalancingUtilization <$>
+                   (o .:? "utilizationTarget"))
 
-instance ToJSON Error' where
-        toJSON Error'{..}
-          = object (catMaybes [("errors" .=) <$> _eErrors])
+instance ToJSON
+         AutoscalingPolicyLoadBalancingUtilization where
+        toJSON AutoscalingPolicyLoadBalancingUtilization{..}
+          = object
+              (catMaybes
+                 [("utilizationTarget" .=) <$>
+                    _aplbuUtilizationTarget])
 
 --
 -- /See:/ 'zone' smart constructor.
 data Zone = Zone
     { _zStatus             :: !(Maybe Text)
-    , _zMaintenanceWindows :: !(Maybe [MaintenanceWindowsItem])
+    , _zMaintenanceWindows :: !(Maybe [ZoneMaintenanceWindowsItem])
     , _zKind               :: !Text
     , _zSelfLink           :: !(Maybe Text)
     , _zName               :: !(Maybe Text)
@@ -617,7 +628,7 @@ zone =
 zStatus :: Lens' Zone (Maybe Text)
 zStatus = lens _zStatus (\ s a -> s{_zStatus = a})
 
-zMaintenanceWindows :: Lens' Zone [MaintenanceWindowsItem]
+zMaintenanceWindows :: Lens' Zone [ZoneMaintenanceWindowsItem]
 zMaintenanceWindows
   = lens _zMaintenanceWindows
       (\ s a -> s{_zMaintenanceWindows = a})
@@ -686,64 +697,69 @@ instance ToJSON Zone where
                   ("deprecated" .=) <$> _zDeprecated])
 
 --
--- /See:/ 'autoscalerListResponse' smart constructor.
-data AutoscalerListResponse = AutoscalerListResponse
-    { _alrNextPageToken :: !(Maybe Text)
-    , _alrKind          :: !Text
-    , _alrItems         :: !(Maybe [Autoscaler])
+-- /See:/ 'zoneMaintenanceWindowsItem' smart constructor.
+data ZoneMaintenanceWindowsItem = ZoneMaintenanceWindowsItem
+    { _zmwiBeginTime   :: !(Maybe Text)
+    , _zmwiName        :: !(Maybe Text)
+    , _zmwiEndTime     :: !(Maybe Text)
+    , _zmwiDescription :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AutoscalerListResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'ZoneMaintenanceWindowsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'alrNextPageToken'
+-- * 'zmwiBeginTime'
 --
--- * 'alrKind'
+-- * 'zmwiName'
 --
--- * 'alrItems'
-autoscalerListResponse
-    :: AutoscalerListResponse
-autoscalerListResponse =
-    AutoscalerListResponse
-    { _alrNextPageToken = Nothing
-    , _alrKind = "compute#autoscalerList"
-    , _alrItems = Nothing
+-- * 'zmwiEndTime'
+--
+-- * 'zmwiDescription'
+zoneMaintenanceWindowsItem
+    :: ZoneMaintenanceWindowsItem
+zoneMaintenanceWindowsItem =
+    ZoneMaintenanceWindowsItem
+    { _zmwiBeginTime = Nothing
+    , _zmwiName = Nothing
+    , _zmwiEndTime = Nothing
+    , _zmwiDescription = Nothing
     }
 
--- | [Output only] A token used to continue a truncated list request.
-alrNextPageToken :: Lens' AutoscalerListResponse (Maybe Text)
-alrNextPageToken
-  = lens _alrNextPageToken
-      (\ s a -> s{_alrNextPageToken = a})
+zmwiBeginTime :: Lens' ZoneMaintenanceWindowsItem (Maybe Text)
+zmwiBeginTime
+  = lens _zmwiBeginTime
+      (\ s a -> s{_zmwiBeginTime = a})
 
--- | Type of resource.
-alrKind :: Lens' AutoscalerListResponse Text
-alrKind = lens _alrKind (\ s a -> s{_alrKind = a})
+zmwiName :: Lens' ZoneMaintenanceWindowsItem (Maybe Text)
+zmwiName = lens _zmwiName (\ s a -> s{_zmwiName = a})
 
--- | Autoscaler resources.
-alrItems :: Lens' AutoscalerListResponse [Autoscaler]
-alrItems
-  = lens _alrItems (\ s a -> s{_alrItems = a}) .
-      _Default
-      . _Coerce
+zmwiEndTime :: Lens' ZoneMaintenanceWindowsItem (Maybe Text)
+zmwiEndTime
+  = lens _zmwiEndTime (\ s a -> s{_zmwiEndTime = a})
 
-instance FromJSON AutoscalerListResponse where
+zmwiDescription :: Lens' ZoneMaintenanceWindowsItem (Maybe Text)
+zmwiDescription
+  = lens _zmwiDescription
+      (\ s a -> s{_zmwiDescription = a})
+
+instance FromJSON ZoneMaintenanceWindowsItem where
         parseJSON
-          = withObject "AutoscalerListResponse"
+          = withObject "ZoneMaintenanceWindowsItem"
               (\ o ->
-                 AutoscalerListResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "compute#autoscalerList")
-                     <*> (o .:? "items" .!= mempty))
+                 ZoneMaintenanceWindowsItem <$>
+                   (o .:? "beginTime") <*> (o .:? "name") <*>
+                     (o .:? "endTime")
+                     <*> (o .:? "description"))
 
-instance ToJSON AutoscalerListResponse where
-        toJSON AutoscalerListResponse{..}
+instance ToJSON ZoneMaintenanceWindowsItem where
+        toJSON ZoneMaintenanceWindowsItem{..}
           = object
               (catMaybes
-                 [("nextPageToken" .=) <$> _alrNextPageToken,
-                  Just ("kind" .= _alrKind),
-                  ("items" .=) <$> _alrItems])
+                 [("beginTime" .=) <$> _zmwiBeginTime,
+                  ("name" .=) <$> _zmwiName,
+                  ("endTime" .=) <$> _zmwiEndTime,
+                  ("description" .=) <$> _zmwiDescription])
 
 --
 -- /See:/ 'zoneList' smart constructor.
@@ -822,121 +838,64 @@ instance ToJSON ZoneList where
                   ("id" .=) <$> _zlId])
 
 --
--- /See:/ 'warningsItem' smart constructor.
-data WarningsItem = WarningsItem
-    { _wiData    :: !(Maybe [DataItem])
-    , _wiCode    :: !(Maybe Text)
-    , _wiMessage :: !(Maybe Text)
+-- /See:/ 'autoscalerListResponse' smart constructor.
+data AutoscalerListResponse = AutoscalerListResponse
+    { _alrNextPageToken :: !(Maybe Text)
+    , _alrKind          :: !Text
+    , _alrItems         :: !(Maybe [Autoscaler])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'WarningsItem' with the minimum fields required to make a request.
+-- | Creates a value of 'AutoscalerListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'wiData'
+-- * 'alrNextPageToken'
 --
--- * 'wiCode'
+-- * 'alrKind'
 --
--- * 'wiMessage'
-warningsItem
-    :: WarningsItem
-warningsItem =
-    WarningsItem
-    { _wiData = Nothing
-    , _wiCode = Nothing
-    , _wiMessage = Nothing
+-- * 'alrItems'
+autoscalerListResponse
+    :: AutoscalerListResponse
+autoscalerListResponse =
+    AutoscalerListResponse
+    { _alrNextPageToken = Nothing
+    , _alrKind = "compute#autoscalerList"
+    , _alrItems = Nothing
     }
 
-wiData :: Lens' WarningsItem [DataItem]
-wiData
-  = lens _wiData (\ s a -> s{_wiData = a}) . _Default .
-      _Coerce
+-- | [Output only] A token used to continue a truncated list request.
+alrNextPageToken :: Lens' AutoscalerListResponse (Maybe Text)
+alrNextPageToken
+  = lens _alrNextPageToken
+      (\ s a -> s{_alrNextPageToken = a})
 
-wiCode :: Lens' WarningsItem (Maybe Text)
-wiCode = lens _wiCode (\ s a -> s{_wiCode = a})
+-- | Type of resource.
+alrKind :: Lens' AutoscalerListResponse Text
+alrKind = lens _alrKind (\ s a -> s{_alrKind = a})
 
-wiMessage :: Lens' WarningsItem (Maybe Text)
-wiMessage
-  = lens _wiMessage (\ s a -> s{_wiMessage = a})
+-- | Autoscaler resources.
+alrItems :: Lens' AutoscalerListResponse [Autoscaler]
+alrItems
+  = lens _alrItems (\ s a -> s{_alrItems = a}) .
+      _Default
+      . _Coerce
 
-instance FromJSON WarningsItem where
+instance FromJSON AutoscalerListResponse where
         parseJSON
-          = withObject "WarningsItem"
+          = withObject "AutoscalerListResponse"
               (\ o ->
-                 WarningsItem <$>
-                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
-                     (o .:? "message"))
+                 AutoscalerListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#autoscalerList")
+                     <*> (o .:? "items" .!= mempty))
 
-instance ToJSON WarningsItem where
-        toJSON WarningsItem{..}
+instance ToJSON AutoscalerListResponse where
+        toJSON AutoscalerListResponse{..}
           = object
               (catMaybes
-                 [("data" .=) <$> _wiData, ("code" .=) <$> _wiCode,
-                  ("message" .=) <$> _wiMessage])
-
---
--- /See:/ 'maintenanceWindowsItem' smart constructor.
-data MaintenanceWindowsItem = MaintenanceWindowsItem
-    { _mwiBeginTime   :: !(Maybe Text)
-    , _mwiName        :: !(Maybe Text)
-    , _mwiEndTime     :: !(Maybe Text)
-    , _mwiDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'MaintenanceWindowsItem' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'mwiBeginTime'
---
--- * 'mwiName'
---
--- * 'mwiEndTime'
---
--- * 'mwiDescription'
-maintenanceWindowsItem
-    :: MaintenanceWindowsItem
-maintenanceWindowsItem =
-    MaintenanceWindowsItem
-    { _mwiBeginTime = Nothing
-    , _mwiName = Nothing
-    , _mwiEndTime = Nothing
-    , _mwiDescription = Nothing
-    }
-
-mwiBeginTime :: Lens' MaintenanceWindowsItem (Maybe Text)
-mwiBeginTime
-  = lens _mwiBeginTime (\ s a -> s{_mwiBeginTime = a})
-
-mwiName :: Lens' MaintenanceWindowsItem (Maybe Text)
-mwiName = lens _mwiName (\ s a -> s{_mwiName = a})
-
-mwiEndTime :: Lens' MaintenanceWindowsItem (Maybe Text)
-mwiEndTime
-  = lens _mwiEndTime (\ s a -> s{_mwiEndTime = a})
-
-mwiDescription :: Lens' MaintenanceWindowsItem (Maybe Text)
-mwiDescription
-  = lens _mwiDescription
-      (\ s a -> s{_mwiDescription = a})
-
-instance FromJSON MaintenanceWindowsItem where
-        parseJSON
-          = withObject "MaintenanceWindowsItem"
-              (\ o ->
-                 MaintenanceWindowsItem <$>
-                   (o .:? "beginTime") <*> (o .:? "name") <*>
-                     (o .:? "endTime")
-                     <*> (o .:? "description"))
-
-instance ToJSON MaintenanceWindowsItem where
-        toJSON MaintenanceWindowsItem{..}
-          = object
-              (catMaybes
-                 [("beginTime" .=) <$> _mwiBeginTime,
-                  ("name" .=) <$> _mwiName,
-                  ("endTime" .=) <$> _mwiEndTime,
-                  ("description" .=) <$> _mwiDescription])
+                 [("nextPageToken" .=) <$> _alrNextPageToken,
+                  Just ("kind" .= _alrKind),
+                  ("items" .=) <$> _alrItems])
 
 -- | Cloud Autoscaler policy.
 --
@@ -1046,44 +1005,38 @@ instance ToJSON AutoscalingPolicy where
                   ("coolDownPeriodSec" .=) <$> _apCoolDownPeriodSec])
 
 --
--- /See:/ 'dataItem' smart constructor.
-data DataItem = DataItem
-    { _diValue :: !(Maybe Text)
-    , _diKey   :: !(Maybe Text)
+-- /See:/ 'operationError' smart constructor.
+newtype OperationError = OperationError
+    { _oeErrors :: Maybe [OperationErrorErrorsItem]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DataItem' with the minimum fields required to make a request.
+-- | Creates a value of 'OperationError' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'diValue'
---
--- * 'diKey'
-dataItem
-    :: DataItem
-dataItem =
-    DataItem
-    { _diValue = Nothing
-    , _diKey = Nothing
+-- * 'oeErrors'
+operationError
+    :: OperationError
+operationError =
+    OperationError
+    { _oeErrors = Nothing
     }
 
-diValue :: Lens' DataItem (Maybe Text)
-diValue = lens _diValue (\ s a -> s{_diValue = a})
+oeErrors :: Lens' OperationError [OperationErrorErrorsItem]
+oeErrors
+  = lens _oeErrors (\ s a -> s{_oeErrors = a}) .
+      _Default
+      . _Coerce
 
-diKey :: Lens' DataItem (Maybe Text)
-diKey = lens _diKey (\ s a -> s{_diKey = a})
-
-instance FromJSON DataItem where
+instance FromJSON OperationError where
         parseJSON
-          = withObject "DataItem"
+          = withObject "OperationError"
               (\ o ->
-                 DataItem <$> (o .:? "value") <*> (o .:? "key"))
+                 OperationError <$> (o .:? "errors" .!= mempty))
 
-instance ToJSON DataItem where
-        toJSON DataItem{..}
-          = object
-              (catMaybes
-                 [("value" .=) <$> _diValue, ("key" .=) <$> _diKey])
+instance ToJSON OperationError where
+        toJSON OperationError{..}
+          = object (catMaybes [("errors" .=) <$> _oeErrors])
 
 -- | Cloud Autoscaler resource.
 --
@@ -1200,57 +1153,57 @@ instance ToJSON Autoscaler where
                   ("target" .=) <$> _aTarget])
 
 --
--- /See:/ 'errorsItem' smart constructor.
-data ErrorsItem = ErrorsItem
-    { _eiLocation :: !(Maybe Text)
-    , _eiCode     :: !(Maybe Text)
-    , _eiMessage  :: !(Maybe Text)
+-- /See:/ 'operationErrorErrorsItem' smart constructor.
+data OperationErrorErrorsItem = OperationErrorErrorsItem
+    { _oeeiLocation :: !(Maybe Text)
+    , _oeeiCode     :: !(Maybe Text)
+    , _oeeiMessage  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ErrorsItem' with the minimum fields required to make a request.
+-- | Creates a value of 'OperationErrorErrorsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'eiLocation'
+-- * 'oeeiLocation'
 --
--- * 'eiCode'
+-- * 'oeeiCode'
 --
--- * 'eiMessage'
-errorsItem
-    :: ErrorsItem
-errorsItem =
-    ErrorsItem
-    { _eiLocation = Nothing
-    , _eiCode = Nothing
-    , _eiMessage = Nothing
+-- * 'oeeiMessage'
+operationErrorErrorsItem
+    :: OperationErrorErrorsItem
+operationErrorErrorsItem =
+    OperationErrorErrorsItem
+    { _oeeiLocation = Nothing
+    , _oeeiCode = Nothing
+    , _oeeiMessage = Nothing
     }
 
-eiLocation :: Lens' ErrorsItem (Maybe Text)
-eiLocation
-  = lens _eiLocation (\ s a -> s{_eiLocation = a})
+oeeiLocation :: Lens' OperationErrorErrorsItem (Maybe Text)
+oeeiLocation
+  = lens _oeeiLocation (\ s a -> s{_oeeiLocation = a})
 
-eiCode :: Lens' ErrorsItem (Maybe Text)
-eiCode = lens _eiCode (\ s a -> s{_eiCode = a})
+oeeiCode :: Lens' OperationErrorErrorsItem (Maybe Text)
+oeeiCode = lens _oeeiCode (\ s a -> s{_oeeiCode = a})
 
-eiMessage :: Lens' ErrorsItem (Maybe Text)
-eiMessage
-  = lens _eiMessage (\ s a -> s{_eiMessage = a})
+oeeiMessage :: Lens' OperationErrorErrorsItem (Maybe Text)
+oeeiMessage
+  = lens _oeeiMessage (\ s a -> s{_oeeiMessage = a})
 
-instance FromJSON ErrorsItem where
+instance FromJSON OperationErrorErrorsItem where
         parseJSON
-          = withObject "ErrorsItem"
+          = withObject "OperationErrorErrorsItem"
               (\ o ->
-                 ErrorsItem <$>
+                 OperationErrorErrorsItem <$>
                    (o .:? "location") <*> (o .:? "code") <*>
                      (o .:? "message"))
 
-instance ToJSON ErrorsItem where
-        toJSON ErrorsItem{..}
+instance ToJSON OperationErrorErrorsItem where
+        toJSON OperationErrorErrorsItem{..}
           = object
               (catMaybes
-                 [("location" .=) <$> _eiLocation,
-                  ("code" .=) <$> _eiCode,
-                  ("message" .=) <$> _eiMessage])
+                 [("location" .=) <$> _oeeiLocation,
+                  ("code" .=) <$> _oeeiCode,
+                  ("message" .=) <$> _oeeiMessage])
 
 -- | CPU utilization policy.
 --
@@ -1294,3 +1247,56 @@ instance ToJSON AutoscalingPolicyCPUUtilization where
               (catMaybes
                  [("utilizationTarget" .=) <$>
                     _apcuUtilizationTarget])
+
+--
+-- /See:/ 'operationWarningsItem' smart constructor.
+data OperationWarningsItem = OperationWarningsItem
+    { _owiData    :: !(Maybe [OperationWarningsItemDataItem])
+    , _owiCode    :: !(Maybe Text)
+    , _owiMessage :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationWarningsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'owiData'
+--
+-- * 'owiCode'
+--
+-- * 'owiMessage'
+operationWarningsItem
+    :: OperationWarningsItem
+operationWarningsItem =
+    OperationWarningsItem
+    { _owiData = Nothing
+    , _owiCode = Nothing
+    , _owiMessage = Nothing
+    }
+
+owiData :: Lens' OperationWarningsItem [OperationWarningsItemDataItem]
+owiData
+  = lens _owiData (\ s a -> s{_owiData = a}) . _Default
+      . _Coerce
+
+owiCode :: Lens' OperationWarningsItem (Maybe Text)
+owiCode = lens _owiCode (\ s a -> s{_owiCode = a})
+
+owiMessage :: Lens' OperationWarningsItem (Maybe Text)
+owiMessage
+  = lens _owiMessage (\ s a -> s{_owiMessage = a})
+
+instance FromJSON OperationWarningsItem where
+        parseJSON
+          = withObject "OperationWarningsItem"
+              (\ o ->
+                 OperationWarningsItem <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON OperationWarningsItem where
+        toJSON OperationWarningsItem{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _owiData, ("code" .=) <$> _owiCode,
+                  ("message" .=) <$> _owiMessage])

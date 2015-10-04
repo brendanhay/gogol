@@ -80,8 +80,10 @@ import           Network.Google.Prelude
 type CSEListResource =
      "v1" :>
        QueryParam "q" Text :>
-         QueryParam "imgDominantColor" ImgDominantColor :>
-           QueryParam "siteSearchFilter" SiteSearchFilter :>
+         QueryParam "imgDominantColor" CSEListImgDominantColor
+           :>
+           QueryParam "siteSearchFilter" CSEListSiteSearchFilter
+             :>
              QueryParam "c2coff" Text :>
                QueryParam "orTerms" Text :>
                  QueryParam "start" Word32 :>
@@ -89,28 +91,29 @@ type CSEListResource =
                      QueryParam "excludeTerms" Text :>
                        QueryParam "num" Word32 :>
                          QueryParam "fileType" Text :>
-                           QueryParam "searchType" SearchType :>
-                             QueryParam "lr" Lr :>
+                           QueryParam "searchType" CSEListSearchType :>
+                             QueryParam "lr" CSEListLr :>
                                QueryParam "googlehost" Text :>
                                  QueryParam "relatedSite" Text :>
                                    QueryParam "hl" Text :>
                                      QueryParam "cref" Text :>
                                        QueryParam "sort" Text :>
                                          QueryParam "siteSearch" Text :>
-                                           QueryParam "filter" Filter :>
+                                           QueryParam "filter" CSEListFilter :>
                                              QueryParam "dateRestrict" Text :>
                                                QueryParam "linkSite" Text :>
                                                  QueryParam "lowRange" Text :>
-                                                   QueryParam "imgType" ImgType
+                                                   QueryParam "imgType"
+                                                     CSEListImgType
                                                      :>
                                                      QueryParam "gl" Text :>
                                                        QueryParam "cx" Text :>
                                                          QueryParam
                                                            "imgColorType"
-                                                           ImgColorType
+                                                           CSEListImgColorType
                                                            :>
                                                            QueryParam "imgSize"
-                                                             ImgSize
+                                                             CSEListImgSize
                                                              :>
                                                              QueryParam
                                                                "exactTerms"
@@ -121,7 +124,7 @@ type CSEListResource =
                                                                  :>
                                                                  QueryParam
                                                                    "safe"
-                                                                   Safe
+                                                                   CSEListSafe
                                                                    :>
                                                                    QueryParam
                                                                      "hq"
@@ -168,10 +171,10 @@ type CSEListResource =
 --
 -- /See:/ 'cSEList'' smart constructor.
 data CSEList' = CSEList'
-    { _cselImgDominantColor :: !(Maybe ImgDominantColor)
+    { _cselImgDominantColor :: !(Maybe CSEListImgDominantColor)
     , _cselQuotaUser        :: !(Maybe Text)
     , _cselPrettyPrint      :: !Bool
-    , _cselSiteSearchFilter :: !(Maybe SiteSearchFilter)
+    , _cselSiteSearchFilter :: !(Maybe CSEListSiteSearchFilter)
     , _cselC2coff           :: !(Maybe Text)
     , _cselOrTerms          :: !(Maybe Text)
     , _cselUserIP           :: !(Maybe Text)
@@ -180,8 +183,8 @@ data CSEList' = CSEList'
     , _cselExcludeTerms     :: !(Maybe Text)
     , _cselNum              :: !Word32
     , _cselFileType         :: !(Maybe Text)
-    , _cselSearchType       :: !(Maybe SearchType)
-    , _cselLr               :: !(Maybe Lr)
+    , _cselSearchType       :: !(Maybe CSEListSearchType)
+    , _cselLr               :: !(Maybe CSEListLr)
     , _cselQ                :: !Text
     , _cselGooglehost       :: !(Maybe Text)
     , _cselRelatedSite      :: !(Maybe Text)
@@ -190,19 +193,19 @@ data CSEList' = CSEList'
     , _cselCref             :: !(Maybe Text)
     , _cselSort             :: !(Maybe Text)
     , _cselSiteSearch       :: !(Maybe Text)
-    , _cselFilter           :: !(Maybe Filter)
+    , _cselFilter           :: !(Maybe CSEListFilter)
     , _cselDateRestrict     :: !(Maybe Text)
     , _cselLinkSite         :: !(Maybe Text)
     , _cselOAuthToken       :: !(Maybe OAuthToken)
     , _cselLowRange         :: !(Maybe Text)
-    , _cselImgType          :: !(Maybe ImgType)
+    , _cselImgType          :: !(Maybe CSEListImgType)
     , _cselGl               :: !(Maybe Text)
     , _cselCx               :: !(Maybe Text)
-    , _cselImgColorType     :: !(Maybe ImgColorType)
-    , _cselImgSize          :: !(Maybe ImgSize)
+    , _cselImgColorType     :: !(Maybe CSEListImgColorType)
+    , _cselImgSize          :: !(Maybe CSEListImgSize)
     , _cselExactTerms       :: !(Maybe Text)
     , _cselCr               :: !(Maybe Text)
-    , _cselSafe             :: !Safe
+    , _cselSafe             :: !CSEListSafe
     , _cselHq               :: !(Maybe Text)
     , _cselFields           :: !(Maybe Text)
     , _cselHighRange        :: !(Maybe Text)
@@ -326,7 +329,7 @@ cSEList' pCselQ_ =
     , _cselImgSize = Nothing
     , _cselExactTerms = Nothing
     , _cselCr = Nothing
-    , _cselSafe = SOff
+    , _cselSafe = Off
     , _cselHq = Nothing
     , _cselFields = Nothing
     , _cselHighRange = Nothing
@@ -334,7 +337,7 @@ cSEList' pCselQ_ =
 
 -- | Returns images of a specific dominant color: yellow, green, teal, blue,
 -- purple, pink, white, gray, black and brown.
-cselImgDominantColor :: Lens' CSEList' (Maybe ImgDominantColor)
+cselImgDominantColor :: Lens' CSEList' (Maybe CSEListImgDominantColor)
 cselImgDominantColor
   = lens _cselImgDominantColor
       (\ s a -> s{_cselImgDominantColor = a})
@@ -355,7 +358,7 @@ cselPrettyPrint
 
 -- | Controls whether to include or exclude results from the site named in
 -- the as_sitesearch parameter
-cselSiteSearchFilter :: Lens' CSEList' (Maybe SiteSearchFilter)
+cselSiteSearchFilter :: Lens' CSEList' (Maybe CSEListSiteSearchFilter)
 cselSiteSearchFilter
   = lens _cselSiteSearchFilter
       (\ s a -> s{_cselSiteSearchFilter = a})
@@ -408,13 +411,13 @@ cselFileType
   = lens _cselFileType (\ s a -> s{_cselFileType = a})
 
 -- | Specifies the search type: image.
-cselSearchType :: Lens' CSEList' (Maybe SearchType)
+cselSearchType :: Lens' CSEList' (Maybe CSEListSearchType)
 cselSearchType
   = lens _cselSearchType
       (\ s a -> s{_cselSearchType = a})
 
 -- | The language restriction for the search results
-cselLr :: Lens' CSEList' (Maybe Lr)
+cselLr :: Lens' CSEList' (Maybe CSEListLr)
 cselLr = lens _cselLr (\ s a -> s{_cselLr = a})
 
 -- | Query
@@ -459,7 +462,7 @@ cselSiteSearch
       (\ s a -> s{_cselSiteSearch = a})
 
 -- | Controls turning on or off the duplicate content filter.
-cselFilter :: Lens' CSEList' (Maybe Filter)
+cselFilter :: Lens' CSEList' (Maybe CSEListFilter)
 cselFilter
   = lens _cselFilter (\ s a -> s{_cselFilter = a})
 
@@ -489,7 +492,7 @@ cselLowRange
 
 -- | Returns images of a type, which can be one of: clipart, face, lineart,
 -- news, and photo.
-cselImgType :: Lens' CSEList' (Maybe ImgType)
+cselImgType :: Lens' CSEList' (Maybe CSEListImgType)
 cselImgType
   = lens _cselImgType (\ s a -> s{_cselImgType = a})
 
@@ -503,14 +506,14 @@ cselCx = lens _cselCx (\ s a -> s{_cselCx = a})
 
 -- | Returns black and white, grayscale, or color images: mono, gray, and
 -- color.
-cselImgColorType :: Lens' CSEList' (Maybe ImgColorType)
+cselImgColorType :: Lens' CSEList' (Maybe CSEListImgColorType)
 cselImgColorType
   = lens _cselImgColorType
       (\ s a -> s{_cselImgColorType = a})
 
 -- | Returns images of a specified size, where size can be one of: icon,
 -- small, medium, large, xlarge, xxlarge, and huge.
-cselImgSize :: Lens' CSEList' (Maybe ImgSize)
+cselImgSize :: Lens' CSEList' (Maybe CSEListImgSize)
 cselImgSize
   = lens _cselImgSize (\ s a -> s{_cselImgSize = a})
 
@@ -526,7 +529,7 @@ cselCr :: Lens' CSEList' (Maybe Text)
 cselCr = lens _cselCr (\ s a -> s{_cselCr = a})
 
 -- | Search safety level
-cselSafe :: Lens' CSEList' Safe
+cselSafe :: Lens' CSEList' CSEListSafe
 cselSafe = lens _cselSafe (\ s a -> s{_cselSafe = a})
 
 -- | Appends the extra query terms to the query.

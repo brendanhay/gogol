@@ -54,9 +54,7 @@ type EditsImagesDeleteallResource =
          Capture "editId" Text :>
            "listings" :>
              Capture "language" Text :>
-               Capture "imageType"
-                 AndroidPublisherEditsImagesDeleteallImageType
-                 :>
+               Capture "imageType" EditsImagesDeleteallImageType :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -74,7 +72,7 @@ data EditsImagesDeleteall' = EditsImagesDeleteall'
     , _eidiPrettyPrint :: !Bool
     , _eidiPackageName :: !Text
     , _eidiUserIP      :: !(Maybe Text)
-    , _eidiImageType   :: !AndroidPublisherEditsImagesDeleteallImageType
+    , _eidiImageType   :: !EditsImagesDeleteallImageType
     , _eidiKey         :: !(Maybe Key)
     , _eidiLanguage    :: !Text
     , _eidiOAuthToken  :: !(Maybe OAuthToken)
@@ -107,7 +105,7 @@ data EditsImagesDeleteall' = EditsImagesDeleteall'
 -- * 'eidiFields'
 editsImagesDeleteall'
     :: Text -- ^ 'packageName'
-    -> AndroidPublisherEditsImagesDeleteallImageType -- ^ 'imageType'
+    -> EditsImagesDeleteallImageType -- ^ 'imageType'
     -> Text -- ^ 'language'
     -> Text -- ^ 'editId'
     -> EditsImagesDeleteall'
@@ -152,7 +150,7 @@ eidiUserIP :: Lens' EditsImagesDeleteall' (Maybe Text)
 eidiUserIP
   = lens _eidiUserIP (\ s a -> s{_eidiUserIP = a})
 
-eidiImageType :: Lens' EditsImagesDeleteall' AndroidPublisherEditsImagesDeleteallImageType
+eidiImageType :: Lens' EditsImagesDeleteall' EditsImagesDeleteallImageType
 eidiImageType
   = lens _eidiImageType
       (\ s a -> s{_eidiImageType = a})

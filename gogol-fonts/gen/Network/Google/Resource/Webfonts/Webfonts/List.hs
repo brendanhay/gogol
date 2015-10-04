@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 -- 'WebfontsList'' request conforms to.
 type WebfontsListResource =
      "webfonts" :>
-       QueryParam "sort" Sort :>
+       QueryParam "sort" WebfontsListSort :>
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
@@ -66,7 +66,7 @@ data WebfontsList' = WebfontsList'
     , _wlPrettyPrint :: !Bool
     , _wlUserIP      :: !(Maybe Text)
     , _wlKey         :: !(Maybe Key)
-    , _wlSort        :: !(Maybe Sort)
+    , _wlSort        :: !(Maybe WebfontsListSort)
     , _wlOAuthToken  :: !(Maybe OAuthToken)
     , _wlFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -126,7 +126,7 @@ wlKey :: Lens' WebfontsList' (Maybe Key)
 wlKey = lens _wlKey (\ s a -> s{_wlKey = a})
 
 -- | Enables sorting of the list
-wlSort :: Lens' WebfontsList' (Maybe Sort)
+wlSort :: Lens' WebfontsList' (Maybe WebfontsListSort)
 wlSort = lens _wlSort (\ s a -> s{_wlSort = a})
 
 -- | OAuth 2.0 token for the current user.

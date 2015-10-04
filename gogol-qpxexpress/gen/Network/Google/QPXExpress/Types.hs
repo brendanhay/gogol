@@ -17,6 +17,21 @@ module Network.Google.QPXExpress.Types
     -- * Service URL
       qPXExpressURL
 
+    -- * TripOptionsResponse
+    , TripOptionsResponse
+    , tripOptionsResponse
+    , torRequestId
+    , torKind
+    , torData
+    , torTripOption
+
+    -- * CarrierData
+    , CarrierData
+    , carrierData
+    , cdKind
+    , cdName
+    , cdCode
+
     -- * FreeBaggageAllowance
     , FreeBaggageAllowance
     , freeBaggageAllowance
@@ -26,21 +41,6 @@ module Network.Google.QPXExpress.Types
     , fbaKilosPerPiece
     , fbaKilos
     , fbaPieces
-
-    -- * CarrierData
-    , CarrierData
-    , carrierData
-    , cdKind
-    , cdName
-    , cdCode
-
-    -- * TripOptionsResponse
-    , TripOptionsResponse
-    , tripOptionsResponse
-    , torRequestId
-    , torKind
-    , torData
-    , torTripOption
 
     -- * TimeOfDayRange
     , TimeOfDayRange
@@ -125,14 +125,6 @@ module Network.Google.QPXExpress.Types
     , toSlice
     , toSaleTotal
 
-    -- * CityData
-    , CityData
-    , cityData
-    , cCountry
-    , cKind
-    , cName
-    , cCode
-
     -- * BagDescriptor
     , BagDescriptor
     , bagDescriptor
@@ -141,6 +133,14 @@ module Network.Google.QPXExpress.Types
     , bdCount
     , bdDescription
     , bdSubcode
+
+    -- * CityData
+    , CityData
+    , cityData
+    , cCountry
+    , cKind
+    , cName
+    , cCode
 
     -- * PassengerCounts
     , PassengerCounts
@@ -174,6 +174,11 @@ module Network.Google.QPXExpress.Types
     , tdName
     , tdId
 
+    -- * TripsSearchRequest
+    , TripsSearchRequest
+    , tripsSearchRequest
+    , tsrRequest
+
     -- * TaxInfo
     , TaxInfo
     , taxInfo
@@ -183,11 +188,6 @@ module Network.Google.QPXExpress.Types
     , tiSalePrice
     , tiCode
     , tiId
-
-    -- * TripsSearchRequest
-    , TripsSearchRequest
-    , tripsSearchRequest
-    , tsrRequest
 
     -- * PricingInfo
     , PricingInfo
@@ -223,6 +223,16 @@ module Network.Google.QPXExpress.Types
     , fBasisCode
     , fId
 
+    -- * TripOptionsRequest
+    , TripOptionsRequest
+    , tripOptionsRequest
+    , torRefundable
+    , torSaleCountry
+    , torPassengers
+    , torSolutions
+    , torSlice
+    , torMaxPrice
+
     -- * SliceInput
     , SliceInput
     , sliceInput
@@ -237,16 +247,6 @@ module Network.Google.QPXExpress.Types
     , sliPermittedDePartureTime
     , sliPermittedCarrier
     , sliAlliance
-
-    -- * TripOptionsRequest
-    , TripOptionsRequest
-    , tripOptionsRequest
-    , torRefundable
-    , torSaleCountry
-    , torPassengers
-    , torSolutions
-    , torSlice
-    , torMaxPrice
     ) where
 
 import           Network.Google.Prelude

@@ -65,7 +65,7 @@ type CollectionviewersPatchResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] User :> Patch '[JSON] User
+                               ReqBody '[OctetStream] User :> Patch '[JSON] User
 
 -- | Adds the user to the list of those specifically allowed to see the
 -- collection. If the collection\'s visibility is set to viewersOnly then

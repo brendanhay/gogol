@@ -72,11 +72,8 @@ module Network.Google.MapsCoordinate
     , llrKind
     , llrItems
 
-    -- ** WorkerListResponse
-    , WorkerListResponse
-    , workerListResponse
-    , wlrKind
-    , wlrItems
+    -- ** JobsPatchProgress
+    , JobsPatchProgress (..)
 
     -- ** TokenPagination
     , TokenPagination
@@ -85,16 +82,11 @@ module Network.Google.MapsCoordinate
     , tpKind
     , tpPreviousPageToken
 
-    -- ** Location
-    , Location
-    , location
-    , lAddressLine
-    , lKind
-    , lLat
-    , lLng
-
-    -- ** Progress
-    , Progress (..)
+    -- ** WorkerListResponse
+    , WorkerListResponse
+    , workerListResponse
+    , wlrKind
+    , wlrItems
 
     -- ** Schedule
     , Schedule
@@ -104,6 +96,17 @@ module Network.Google.MapsCoordinate
     , sKind
     , sEndTime
     , sDuration
+
+    -- ** Location
+    , Location
+    , location
+    , lAddressLine
+    , lKind
+    , lLat
+    , lLng
+
+    -- ** JobsUpdateProgress
+    , JobsUpdateProgress (..)
 
     -- ** JobState
     , JobState
@@ -162,9 +165,6 @@ module Network.Google.MapsCoordinate
     , jKind
     , jJobChange
     , jId
-
-    -- ** CoordinateJobsUpdateProgress
-    , CoordinateJobsUpdateProgress (..)
 
     -- ** CustomFields
     , CustomFields

@@ -36,7 +36,7 @@ module Network.Google.Resource.DFAReporting.PlacementStrategies.List
     , pslUserIP
     , pslSearchString
     , pslIds
-    , pslProfileId
+    , pslProFileId
     , pslSortOrder
     , pslKey
     , pslPageToken
@@ -58,11 +58,11 @@ type PlacementStrategiesListResource =
            QueryParam "searchString" Text :>
              QueryParams "ids" Int64 :>
                QueryParam "sortOrder"
-                 DfareportingPlacementStrategiesListSortOrder
+                 PlacementStrategiesListSortOrder
                  :>
                  QueryParam "pageToken" Text :>
                    QueryParam "sortField"
-                     DfareportingPlacementStrategiesListSortField
+                     PlacementStrategiesListSortField
                      :>
                      QueryParam "maxResults" Int32 :>
                        QueryParam "quotaUser" Text :>
@@ -83,11 +83,11 @@ data PlacementStrategiesList' = PlacementStrategiesList'
     , _pslUserIP       :: !(Maybe Text)
     , _pslSearchString :: !(Maybe Text)
     , _pslIds          :: !(Maybe [Int64])
-    , _pslProfileId    :: !Int64
-    , _pslSortOrder    :: !(Maybe DfareportingPlacementStrategiesListSortOrder)
+    , _pslProFileId    :: !Int64
+    , _pslSortOrder    :: !(Maybe PlacementStrategiesListSortOrder)
     , _pslKey          :: !(Maybe Key)
     , _pslPageToken    :: !(Maybe Text)
-    , _pslSortField    :: !(Maybe DfareportingPlacementStrategiesListSortField)
+    , _pslSortField    :: !(Maybe PlacementStrategiesListSortField)
     , _pslOAuthToken   :: !(Maybe OAuthToken)
     , _pslMaxResults   :: !(Maybe Int32)
     , _pslFields       :: !(Maybe Text)
@@ -107,7 +107,7 @@ data PlacementStrategiesList' = PlacementStrategiesList'
 --
 -- * 'pslIds'
 --
--- * 'pslProfileId'
+-- * 'pslProFileId'
 --
 -- * 'pslSortOrder'
 --
@@ -125,14 +125,14 @@ data PlacementStrategiesList' = PlacementStrategiesList'
 placementStrategiesList'
     :: Int64 -- ^ 'profileId'
     -> PlacementStrategiesList'
-placementStrategiesList' pPslProfileId_ =
+placementStrategiesList' pPslProFileId_ =
     PlacementStrategiesList'
     { _pslQuotaUser = Nothing
     , _pslPrettyPrint = True
     , _pslUserIP = Nothing
     , _pslSearchString = Nothing
     , _pslIds = Nothing
-    , _pslProfileId = pPslProfileId_
+    , _pslProFileId = pPslProFileId_
     , _pslSortOrder = Nothing
     , _pslKey = Nothing
     , _pslPageToken = Nothing
@@ -181,12 +181,12 @@ pslIds
       _Coerce
 
 -- | User profile ID associated with this request.
-pslProfileId :: Lens' PlacementStrategiesList' Int64
-pslProfileId
-  = lens _pslProfileId (\ s a -> s{_pslProfileId = a})
+pslProFileId :: Lens' PlacementStrategiesList' Int64
+pslProFileId
+  = lens _pslProFileId (\ s a -> s{_pslProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-pslSortOrder :: Lens' PlacementStrategiesList' (Maybe DfareportingPlacementStrategiesListSortOrder)
+pslSortOrder :: Lens' PlacementStrategiesList' (Maybe PlacementStrategiesListSortOrder)
 pslSortOrder
   = lens _pslSortOrder (\ s a -> s{_pslSortOrder = a})
 
@@ -202,7 +202,7 @@ pslPageToken
   = lens _pslPageToken (\ s a -> s{_pslPageToken = a})
 
 -- | Field by which to sort the list.
-pslSortField :: Lens' PlacementStrategiesList' (Maybe DfareportingPlacementStrategiesListSortField)
+pslSortField :: Lens' PlacementStrategiesList' (Maybe PlacementStrategiesListSortField)
 pslSortField
   = lens _pslSortField (\ s a -> s{_pslSortField = a})
 
@@ -232,7 +232,7 @@ instance GoogleRequest PlacementStrategiesList' where
              PlacementStrategiesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementStrategiesList'{..}
-          = go _pslProfileId _pslSearchString
+          = go _pslProFileId _pslSearchString
               (_pslIds ^. _Default)
               _pslSortOrder
               _pslPageToken

@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Creatives.Insert
     , creQuotaUser
     , crePrettyPrint
     , creUserIP
-    , creProfileId
+    , creProFileId
     , crePayload
     , creKey
     , creOAuthToken
@@ -57,7 +57,8 @@ type CreativesInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Creative :> Post '[JSON] Creative
+                         ReqBody '[OctetStream] Creative :>
+                           Post '[JSON] Creative
 
 -- | Inserts a new creative.
 --
@@ -66,7 +67,7 @@ data CreativesInsert' = CreativesInsert'
     { _creQuotaUser   :: !(Maybe Text)
     , _crePrettyPrint :: !Bool
     , _creUserIP      :: !(Maybe Text)
-    , _creProfileId   :: !Int64
+    , _creProFileId   :: !Int64
     , _crePayload     :: !Creative
     , _creKey         :: !(Maybe Key)
     , _creOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +84,7 @@ data CreativesInsert' = CreativesInsert'
 --
 -- * 'creUserIP'
 --
--- * 'creProfileId'
+-- * 'creProFileId'
 --
 -- * 'crePayload'
 --
@@ -96,12 +97,12 @@ creativesInsert'
     :: Int64 -- ^ 'profileId'
     -> Creative -- ^ 'payload'
     -> CreativesInsert'
-creativesInsert' pCreProfileId_ pCrePayload_ =
+creativesInsert' pCreProFileId_ pCrePayload_ =
     CreativesInsert'
     { _creQuotaUser = Nothing
     , _crePrettyPrint = True
     , _creUserIP = Nothing
-    , _creProfileId = pCreProfileId_
+    , _creProFileId = pCreProFileId_
     , _crePayload = pCrePayload_
     , _creKey = Nothing
     , _creOAuthToken = Nothing
@@ -128,9 +129,9 @@ creUserIP
   = lens _creUserIP (\ s a -> s{_creUserIP = a})
 
 -- | User profile ID associated with this request.
-creProfileId :: Lens' CreativesInsert' Int64
-creProfileId
-  = lens _creProfileId (\ s a -> s{_creProfileId = a})
+creProFileId :: Lens' CreativesInsert' Int64
+creProFileId
+  = lens _creProFileId (\ s a -> s{_creProFileId = a})
 
 -- | Multipart request metadata.
 crePayload :: Lens' CreativesInsert' Creative
@@ -162,7 +163,7 @@ instance GoogleRequest CreativesInsert' where
         type Rs CreativesInsert' = Creative
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativesInsert'{..}
-          = go _creProfileId _creQuotaUser
+          = go _creProFileId _creQuotaUser
               (Just _crePrettyPrint)
               _creUserIP
               _creFields

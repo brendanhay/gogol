@@ -70,8 +70,8 @@ type OrganizationsSetIAMPolicyResource =
                                QueryParam "key" Key :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
-                                     ReqBody '[JSON] SetIAMPolicyRequest :>
-                                       Post '[JSON] Policy
+                                     ReqBody '[OctetStream] SetIAMPolicyRequest
+                                       :> Post '[JSON] Policy
 
 -- | Sets the access control policy on a Organization resource. Replaces any
 -- existing policy.

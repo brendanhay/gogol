@@ -62,7 +62,8 @@ type AutoscalersUpdateResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Autoscaler :> Put '[JSON] Operation
+                             ReqBody '[OctetStream] Autoscaler :>
+                               Put '[JSON] Operation
 
 -- | Updates an autoscaler resource in the specified project using the data
 -- included in the request.

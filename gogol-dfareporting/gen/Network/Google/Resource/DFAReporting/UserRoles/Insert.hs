@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.UserRoles.Insert
     , uriQuotaUser
     , uriPrettyPrint
     , uriUserIP
-    , uriProfileId
+    , uriProFileId
     , uriPayload
     , uriKey
     , uriOAuthToken
@@ -57,7 +57,8 @@ type UserRolesInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] UserRole :> Post '[JSON] UserRole
+                         ReqBody '[OctetStream] UserRole :>
+                           Post '[JSON] UserRole
 
 -- | Inserts a new user role.
 --
@@ -66,7 +67,7 @@ data UserRolesInsert' = UserRolesInsert'
     { _uriQuotaUser   :: !(Maybe Text)
     , _uriPrettyPrint :: !Bool
     , _uriUserIP      :: !(Maybe Text)
-    , _uriProfileId   :: !Int64
+    , _uriProFileId   :: !Int64
     , _uriPayload     :: !UserRole
     , _uriKey         :: !(Maybe Key)
     , _uriOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +84,7 @@ data UserRolesInsert' = UserRolesInsert'
 --
 -- * 'uriUserIP'
 --
--- * 'uriProfileId'
+-- * 'uriProFileId'
 --
 -- * 'uriPayload'
 --
@@ -96,12 +97,12 @@ userRolesInsert'
     :: Int64 -- ^ 'profileId'
     -> UserRole -- ^ 'payload'
     -> UserRolesInsert'
-userRolesInsert' pUriProfileId_ pUriPayload_ =
+userRolesInsert' pUriProFileId_ pUriPayload_ =
     UserRolesInsert'
     { _uriQuotaUser = Nothing
     , _uriPrettyPrint = True
     , _uriUserIP = Nothing
-    , _uriProfileId = pUriProfileId_
+    , _uriProFileId = pUriProFileId_
     , _uriPayload = pUriPayload_
     , _uriKey = Nothing
     , _uriOAuthToken = Nothing
@@ -128,9 +129,9 @@ uriUserIP
   = lens _uriUserIP (\ s a -> s{_uriUserIP = a})
 
 -- | User profile ID associated with this request.
-uriProfileId :: Lens' UserRolesInsert' Int64
-uriProfileId
-  = lens _uriProfileId (\ s a -> s{_uriProfileId = a})
+uriProFileId :: Lens' UserRolesInsert' Int64
+uriProFileId
+  = lens _uriProFileId (\ s a -> s{_uriProFileId = a})
 
 -- | Multipart request metadata.
 uriPayload :: Lens' UserRolesInsert' UserRole
@@ -162,7 +163,7 @@ instance GoogleRequest UserRolesInsert' where
         type Rs UserRolesInsert' = UserRole
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u UserRolesInsert'{..}
-          = go _uriProfileId _uriQuotaUser
+          = go _uriProFileId _uriQuotaUser
               (Just _uriPrettyPrint)
               _uriUserIP
               _uriFields

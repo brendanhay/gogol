@@ -56,7 +56,7 @@ type ReadgroupsetsPatchResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] ReadGroupSet :>
+                       ReqBody '[OctetStream] ReadGroupSet :>
                          Patch '[JSON] ReadGroupSet
 
 -- | Updates a read group set. This method supports patch semantics.

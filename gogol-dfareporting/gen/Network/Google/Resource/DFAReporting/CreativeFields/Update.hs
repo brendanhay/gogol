@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.CreativeFields.Update
     , cfuQuotaUser
     , cfuPrettyPrint
     , cfuUserIP
-    , cfuProfileId
+    , cfuProFileId
     , cfuPayload
     , cfuKey
     , cfuOAuthToken
@@ -57,7 +57,7 @@ type CreativeFieldsUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] CreativeField :>
+                         ReqBody '[OctetStream] CreativeField :>
                            Put '[JSON] CreativeField
 
 -- | Updates an existing creative field.
@@ -67,7 +67,7 @@ data CreativeFieldsUpdate' = CreativeFieldsUpdate'
     { _cfuQuotaUser   :: !(Maybe Text)
     , _cfuPrettyPrint :: !Bool
     , _cfuUserIP      :: !(Maybe Text)
-    , _cfuProfileId   :: !Int64
+    , _cfuProFileId   :: !Int64
     , _cfuPayload     :: !CreativeField
     , _cfuKey         :: !(Maybe Key)
     , _cfuOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data CreativeFieldsUpdate' = CreativeFieldsUpdate'
 --
 -- * 'cfuUserIP'
 --
--- * 'cfuProfileId'
+-- * 'cfuProFileId'
 --
 -- * 'cfuPayload'
 --
@@ -97,12 +97,12 @@ creativeFieldsUpdate'
     :: Int64 -- ^ 'profileId'
     -> CreativeField -- ^ 'payload'
     -> CreativeFieldsUpdate'
-creativeFieldsUpdate' pCfuProfileId_ pCfuPayload_ =
+creativeFieldsUpdate' pCfuProFileId_ pCfuPayload_ =
     CreativeFieldsUpdate'
     { _cfuQuotaUser = Nothing
     , _cfuPrettyPrint = True
     , _cfuUserIP = Nothing
-    , _cfuProfileId = pCfuProfileId_
+    , _cfuProFileId = pCfuProFileId_
     , _cfuPayload = pCfuPayload_
     , _cfuKey = Nothing
     , _cfuOAuthToken = Nothing
@@ -129,9 +129,9 @@ cfuUserIP
   = lens _cfuUserIP (\ s a -> s{_cfuUserIP = a})
 
 -- | User profile ID associated with this request.
-cfuProfileId :: Lens' CreativeFieldsUpdate' Int64
-cfuProfileId
-  = lens _cfuProfileId (\ s a -> s{_cfuProfileId = a})
+cfuProFileId :: Lens' CreativeFieldsUpdate' Int64
+cfuProFileId
+  = lens _cfuProFileId (\ s a -> s{_cfuProFileId = a})
 
 -- | Multipart request metadata.
 cfuPayload :: Lens' CreativeFieldsUpdate' CreativeField
@@ -163,7 +163,7 @@ instance GoogleRequest CreativeFieldsUpdate' where
         type Rs CreativeFieldsUpdate' = CreativeField
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeFieldsUpdate'{..}
-          = go _cfuProfileId _cfuQuotaUser
+          = go _cfuProFileId _cfuQuotaUser
               (Just _cfuPrettyPrint)
               _cfuUserIP
               _cfuFields

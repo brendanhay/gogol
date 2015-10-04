@@ -26,7 +26,7 @@ data Webfont = Webfont
     , _wCategory     :: !(Maybe Text)
     , _wFamily       :: !(Maybe Text)
     , _wVersion      :: !(Maybe Text)
-    , _wFiles        :: !(Maybe Files)
+    , _wFiles        :: !(Maybe WebfontFiles)
     , _wSubsets      :: !(Maybe [Text])
     , _wLastModified :: !(Maybe Date')
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -90,7 +90,7 @@ wVersion = lens _wVersion (\ s a -> s{_wVersion = a})
 
 -- | The font files (with all supported scripts) for each one of the
 -- available variants, as a key : value map.
-wFiles :: Lens' Webfont (Maybe Files)
+wFiles :: Lens' Webfont (Maybe WebfontFiles)
 wFiles = lens _wFiles (\ s a -> s{_wFiles = a})
 
 -- | The scripts supported by the font.
@@ -185,19 +185,21 @@ instance ToJSON WebfontList where
 -- | The font files (with all supported scripts) for each one of the
 -- available variants, as a key : value map.
 --
--- /See:/ 'files' smart constructor.
-data Files =
-    Files
+-- /See:/ 'webfontFiles' smart constructor.
+data WebfontFiles =
+    WebfontFiles
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Files' with the minimum fields required to make a request.
+-- | Creates a value of 'WebfontFiles' with the minimum fields required to make a request.
 --
-files
-    :: Files
-files = Files
+webfontFiles
+    :: WebfontFiles
+webfontFiles = WebfontFiles
 
-instance FromJSON Files where
-        parseJSON = withObject "Files" (\ o -> pure Files)
+instance FromJSON WebfontFiles where
+        parseJSON
+          = withObject "WebfontFiles"
+              (\ o -> pure WebfontFiles)
 
-instance ToJSON Files where
+instance ToJSON WebfontFiles where
         toJSON = const (Object mempty)

@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Placements.Patch
     , ppQuotaUser
     , ppPrettyPrint
     , ppUserIP
-    , ppProfileId
+    , ppProFileId
     , ppPayload
     , ppKey
     , ppId
@@ -59,7 +59,8 @@ type PlacementsPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Placement :> Patch '[JSON] Placement
+                           ReqBody '[OctetStream] Placement :>
+                             Patch '[JSON] Placement
 
 -- | Updates an existing placement. This method supports patch semantics.
 --
@@ -68,7 +69,7 @@ data PlacementsPatch' = PlacementsPatch'
     { _ppQuotaUser   :: !(Maybe Text)
     , _ppPrettyPrint :: !Bool
     , _ppUserIP      :: !(Maybe Text)
-    , _ppProfileId   :: !Int64
+    , _ppProFileId   :: !Int64
     , _ppPayload     :: !Placement
     , _ppKey         :: !(Maybe Key)
     , _ppId          :: !Int64
@@ -86,7 +87,7 @@ data PlacementsPatch' = PlacementsPatch'
 --
 -- * 'ppUserIP'
 --
--- * 'ppProfileId'
+-- * 'ppProFileId'
 --
 -- * 'ppPayload'
 --
@@ -102,12 +103,12 @@ placementsPatch'
     -> Placement -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> PlacementsPatch'
-placementsPatch' pPpProfileId_ pPpPayload_ pPpId_ =
+placementsPatch' pPpProFileId_ pPpPayload_ pPpId_ =
     PlacementsPatch'
     { _ppQuotaUser = Nothing
     , _ppPrettyPrint = True
     , _ppUserIP = Nothing
-    , _ppProfileId = pPpProfileId_
+    , _ppProFileId = pPpProFileId_
     , _ppPayload = pPpPayload_
     , _ppKey = Nothing
     , _ppId = pPpId_
@@ -134,9 +135,9 @@ ppUserIP :: Lens' PlacementsPatch' (Maybe Text)
 ppUserIP = lens _ppUserIP (\ s a -> s{_ppUserIP = a})
 
 -- | User profile ID associated with this request.
-ppProfileId :: Lens' PlacementsPatch' Int64
-ppProfileId
-  = lens _ppProfileId (\ s a -> s{_ppProfileId = a})
+ppProFileId :: Lens' PlacementsPatch' Int64
+ppProFileId
+  = lens _ppProFileId (\ s a -> s{_ppProFileId = a})
 
 -- | Multipart request metadata.
 ppPayload :: Lens' PlacementsPatch' Placement
@@ -170,7 +171,7 @@ instance GoogleRequest PlacementsPatch' where
         type Rs PlacementsPatch' = Placement
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementsPatch'{..}
-          = go _ppProfileId (Just _ppId) _ppQuotaUser
+          = go _ppProFileId (Just _ppId) _ppQuotaUser
               (Just _ppPrettyPrint)
               _ppUserIP
               _ppFields

@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.AccountPermissionGroups.Get
     , apggQuotaUser
     , apggPrettyPrint
     , apggUserIP
-    , apggProfileId
+    , apggProFileId
     , apggKey
     , apggId
     , apggOAuthToken
@@ -67,7 +67,7 @@ data AccountPermissionGroupsGet' = AccountPermissionGroupsGet'
     { _apggQuotaUser   :: !(Maybe Text)
     , _apggPrettyPrint :: !Bool
     , _apggUserIP      :: !(Maybe Text)
-    , _apggProfileId   :: !Int64
+    , _apggProFileId   :: !Int64
     , _apggKey         :: !(Maybe Key)
     , _apggId          :: !Int64
     , _apggOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data AccountPermissionGroupsGet' = AccountPermissionGroupsGet'
 --
 -- * 'apggUserIP'
 --
--- * 'apggProfileId'
+-- * 'apggProFileId'
 --
 -- * 'apggKey'
 --
@@ -97,12 +97,12 @@ accountPermissionGroupsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> AccountPermissionGroupsGet'
-accountPermissionGroupsGet' pApggProfileId_ pApggId_ =
+accountPermissionGroupsGet' pApggProFileId_ pApggId_ =
     AccountPermissionGroupsGet'
     { _apggQuotaUser = Nothing
     , _apggPrettyPrint = True
     , _apggUserIP = Nothing
-    , _apggProfileId = pApggProfileId_
+    , _apggProFileId = pApggProFileId_
     , _apggKey = Nothing
     , _apggId = pApggId_
     , _apggOAuthToken = Nothing
@@ -130,10 +130,10 @@ apggUserIP
   = lens _apggUserIP (\ s a -> s{_apggUserIP = a})
 
 -- | User profile ID associated with this request.
-apggProfileId :: Lens' AccountPermissionGroupsGet' Int64
-apggProfileId
-  = lens _apggProfileId
-      (\ s a -> s{_apggProfileId = a})
+apggProFileId :: Lens' AccountPermissionGroupsGet' Int64
+apggProFileId
+  = lens _apggProFileId
+      (\ s a -> s{_apggProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -166,7 +166,7 @@ instance GoogleRequest AccountPermissionGroupsGet'
              AccountPermissionGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AccountPermissionGroupsGet'{..}
-          = go _apggProfileId _apggId _apggQuotaUser
+          = go _apggProFileId _apggId _apggQuotaUser
               (Just _apggPrettyPrint)
               _apggUserIP
               _apggFields

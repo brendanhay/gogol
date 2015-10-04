@@ -17,6 +17,15 @@ module Network.Google.Mirror.Types
     -- * Service URL
       mirrorURL
 
+    -- * TimelineListOrderBy
+    , TimelineListOrderBy (..)
+
+    -- * NotificationConfig
+    , NotificationConfig
+    , notificationConfig
+    , ncDeliveryTime
+    , ncLevel
+
     -- * Command
     , Command
     , command
@@ -27,12 +36,6 @@ module Network.Google.Mirror.Types
     , locationsListResponse
     , llrKind
     , llrItems
-
-    -- * NotificationConfig
-    , NotificationConfig
-    , notificationConfig
-    , ncDeliveryTime
-    , ncLevel
 
     -- * Location
     , Location
@@ -45,9 +48,6 @@ module Network.Google.Mirror.Types
     , lAccuracy
     , lLongitude
     , lTimestamp
-
-    -- * OrderBy
-    , OrderBy (..)
 
     -- * Notification
     , Notification
@@ -104,14 +104,6 @@ module Network.Google.Mirror.Types
     , sValue
     , sId
 
-    -- * Account
-    , Account
-    , account
-    , aAuthTokens
-    , aUserData
-    , aPassword
-    , aFeatures
-
     -- * Attachment
     , Attachment
     , attachment
@@ -119,6 +111,14 @@ module Network.Google.Mirror.Types
     , aId
     , aIsProcessingContent
     , aContentType
+
+    -- * Account
+    , Account
+    , account
+    , aAuthTokens
+    , aUserData
+    , aPassword
+    , aFeatures
 
     -- * UserData
     , UserData
@@ -132,18 +132,18 @@ module Network.Google.Mirror.Types
     , uaPayload
     , uaType
 
-    -- * ContactsListResponse
-    , ContactsListResponse
-    , contactsListResponse
-    , clrKind
-    , clrItems
-
     -- * TimelineListResponse
     , TimelineListResponse
     , timelineListResponse
     , tlrNextPageToken
     , tlrKind
     , tlrItems
+
+    -- * ContactsListResponse
+    , ContactsListResponse
+    , contactsListResponse
+    , clrKind
+    , clrItems
 
     -- * MenuValue
     , MenuValue

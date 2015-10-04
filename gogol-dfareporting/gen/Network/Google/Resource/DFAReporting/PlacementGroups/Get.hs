@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.PlacementGroups.Get
     , pggQuotaUser
     , pggPrettyPrint
     , pggUserIP
-    , pggProfileId
+    , pggProFileId
     , pggKey
     , pggId
     , pggOAuthToken
@@ -67,7 +67,7 @@ data PlacementGroupsGet' = PlacementGroupsGet'
     { _pggQuotaUser   :: !(Maybe Text)
     , _pggPrettyPrint :: !Bool
     , _pggUserIP      :: !(Maybe Text)
-    , _pggProfileId   :: !Int64
+    , _pggProFileId   :: !Int64
     , _pggKey         :: !(Maybe Key)
     , _pggId          :: !Int64
     , _pggOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data PlacementGroupsGet' = PlacementGroupsGet'
 --
 -- * 'pggUserIP'
 --
--- * 'pggProfileId'
+-- * 'pggProFileId'
 --
 -- * 'pggKey'
 --
@@ -97,12 +97,12 @@ placementGroupsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> PlacementGroupsGet'
-placementGroupsGet' pPggProfileId_ pPggId_ =
+placementGroupsGet' pPggProFileId_ pPggId_ =
     PlacementGroupsGet'
     { _pggQuotaUser = Nothing
     , _pggPrettyPrint = True
     , _pggUserIP = Nothing
-    , _pggProfileId = pPggProfileId_
+    , _pggProFileId = pPggProFileId_
     , _pggKey = Nothing
     , _pggId = pPggId_
     , _pggOAuthToken = Nothing
@@ -129,9 +129,9 @@ pggUserIP
   = lens _pggUserIP (\ s a -> s{_pggUserIP = a})
 
 -- | User profile ID associated with this request.
-pggProfileId :: Lens' PlacementGroupsGet' Int64
-pggProfileId
-  = lens _pggProfileId (\ s a -> s{_pggProfileId = a})
+pggProFileId :: Lens' PlacementGroupsGet' Int64
+pggProFileId
+  = lens _pggProFileId (\ s a -> s{_pggProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -162,7 +162,7 @@ instance GoogleRequest PlacementGroupsGet' where
         type Rs PlacementGroupsGet' = PlacementGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementGroupsGet'{..}
-          = go _pggProfileId _pggId _pggQuotaUser
+          = go _pggProFileId _pggId _pggQuotaUser
               (Just _pggPrettyPrint)
               _pggUserIP
               _pggFields

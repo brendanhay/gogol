@@ -35,7 +35,7 @@ module Network.Google.Resource.DFAReporting.LandingPages.Update
     , lpuPrettyPrint
     , lpuUserIP
     , lpuCampaignId
-    , lpuProfileId
+    , lpuProFileId
     , lpuPayload
     , lpuKey
     , lpuOAuthToken
@@ -60,7 +60,7 @@ type LandingPagesUpdateResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] LandingPage :>
+                             ReqBody '[OctetStream] LandingPage :>
                                Put '[JSON] LandingPage
 
 -- | Updates an existing campaign landing page.
@@ -71,7 +71,7 @@ data LandingPagesUpdate' = LandingPagesUpdate'
     , _lpuPrettyPrint :: !Bool
     , _lpuUserIP      :: !(Maybe Text)
     , _lpuCampaignId  :: !Int64
-    , _lpuProfileId   :: !Int64
+    , _lpuProFileId   :: !Int64
     , _lpuPayload     :: !LandingPage
     , _lpuKey         :: !(Maybe Key)
     , _lpuOAuthToken  :: !(Maybe OAuthToken)
@@ -90,7 +90,7 @@ data LandingPagesUpdate' = LandingPagesUpdate'
 --
 -- * 'lpuCampaignId'
 --
--- * 'lpuProfileId'
+-- * 'lpuProFileId'
 --
 -- * 'lpuPayload'
 --
@@ -104,13 +104,13 @@ landingPagesUpdate'
     -> Int64 -- ^ 'profileId'
     -> LandingPage -- ^ 'payload'
     -> LandingPagesUpdate'
-landingPagesUpdate' pLpuCampaignId_ pLpuProfileId_ pLpuPayload_ =
+landingPagesUpdate' pLpuCampaignId_ pLpuProFileId_ pLpuPayload_ =
     LandingPagesUpdate'
     { _lpuQuotaUser = Nothing
     , _lpuPrettyPrint = True
     , _lpuUserIP = Nothing
     , _lpuCampaignId = pLpuCampaignId_
-    , _lpuProfileId = pLpuProfileId_
+    , _lpuProFileId = pLpuProFileId_
     , _lpuPayload = pLpuPayload_
     , _lpuKey = Nothing
     , _lpuOAuthToken = Nothing
@@ -143,9 +143,9 @@ lpuCampaignId
       (\ s a -> s{_lpuCampaignId = a})
 
 -- | User profile ID associated with this request.
-lpuProfileId :: Lens' LandingPagesUpdate' Int64
-lpuProfileId
-  = lens _lpuProfileId (\ s a -> s{_lpuProfileId = a})
+lpuProFileId :: Lens' LandingPagesUpdate' Int64
+lpuProFileId
+  = lens _lpuProFileId (\ s a -> s{_lpuProFileId = a})
 
 -- | Multipart request metadata.
 lpuPayload :: Lens' LandingPagesUpdate' LandingPage
@@ -177,7 +177,7 @@ instance GoogleRequest LandingPagesUpdate' where
         type Rs LandingPagesUpdate' = LandingPage
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u LandingPagesUpdate'{..}
-          = go _lpuProfileId _lpuCampaignId _lpuQuotaUser
+          = go _lpuProFileId _lpuCampaignId _lpuQuotaUser
               (Just _lpuPrettyPrint)
               _lpuUserIP
               _lpuFields

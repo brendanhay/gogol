@@ -156,7 +156,7 @@ instance ToJSON TableList where
 data StyleFunction = StyleFunction
     { _sfBuckets    :: !(Maybe [Bucket])
     , _sfKind       :: !(Maybe Text)
-    , _sfGradient   :: !(Maybe Gradient)
+    , _sfGradient   :: !(Maybe StyleFunctionGradient)
     , _sfColumnName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -201,7 +201,7 @@ sfKind = lens _sfKind (\ s a -> s{_sfKind = a})
 
 -- | Gradient function that interpolates a range of colors based on column
 -- value.
-sfGradient :: Lens' StyleFunction (Maybe Gradient)
+sfGradient :: Lens' StyleFunction (Maybe StyleFunctionGradient)
 sfGradient
   = lens _sfGradient (\ s a -> s{_sfGradient = a})
 
@@ -227,6 +227,56 @@ instance ToJSON StyleFunction where
                   ("kind" .=) <$> _sfKind,
                   ("gradient" .=) <$> _sfGradient,
                   ("columnName" .=) <$> _sfColumnName])
+
+-- | Identifier of the base column. If present, this column is derived from
+-- the specified base column.
+--
+-- /See:/ 'columnBaseColumn' smart constructor.
+data ColumnBaseColumn = ColumnBaseColumn
+    { _cbcTableIndex :: !(Maybe Int32)
+    , _cbcColumnId   :: !(Maybe Int32)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ColumnBaseColumn' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cbcTableIndex'
+--
+-- * 'cbcColumnId'
+columnBaseColumn
+    :: ColumnBaseColumn
+columnBaseColumn =
+    ColumnBaseColumn
+    { _cbcTableIndex = Nothing
+    , _cbcColumnId = Nothing
+    }
+
+-- | Offset to the entry in the list of base tables in the table definition.
+cbcTableIndex :: Lens' ColumnBaseColumn (Maybe Int32)
+cbcTableIndex
+  = lens _cbcTableIndex
+      (\ s a -> s{_cbcTableIndex = a})
+
+-- | The id of the column in the base table from which this column is
+-- derived.
+cbcColumnId :: Lens' ColumnBaseColumn (Maybe Int32)
+cbcColumnId
+  = lens _cbcColumnId (\ s a -> s{_cbcColumnId = a})
+
+instance FromJSON ColumnBaseColumn where
+        parseJSON
+          = withObject "ColumnBaseColumn"
+              (\ o ->
+                 ColumnBaseColumn <$>
+                   (o .:? "tableIndex") <*> (o .:? "columnId"))
+
+instance ToJSON ColumnBaseColumn where
+        toJSON ColumnBaseColumn{..}
+          = object
+              (catMaybes
+                 [("tableIndex" .=) <$> _cbcTableIndex,
+                  ("columnId" .=) <$> _cbcColumnId])
 
 -- | Represents a response to a SQL statement.
 --
@@ -291,54 +341,52 @@ instance ToJSON SQLresponse where
                  [Just ("kind" .= _sqlKind), ("rows" .=) <$> _sqlRows,
                   ("columns" .=) <$> _sqlColumns])
 
--- | Identifier of the base column. If present, this column is derived from
--- the specified base column.
 --
--- /See:/ 'baseColumn' smart constructor.
-data BaseColumn = BaseColumn
-    { _bcTableIndex :: !(Maybe Int32)
-    , _bcColumnId   :: !(Maybe Int32)
+-- /See:/ 'styleFunctionGradientColorsItem' smart constructor.
+data StyleFunctionGradientColorsItem = StyleFunctionGradientColorsItem
+    { _sfgciColor   :: !(Maybe Text)
+    , _sfgciOpacity :: !(Maybe Double)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BaseColumn' with the minimum fields required to make a request.
+-- | Creates a value of 'StyleFunctionGradientColorsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'bcTableIndex'
+-- * 'sfgciColor'
 --
--- * 'bcColumnId'
-baseColumn
-    :: BaseColumn
-baseColumn =
-    BaseColumn
-    { _bcTableIndex = Nothing
-    , _bcColumnId = Nothing
+-- * 'sfgciOpacity'
+styleFunctionGradientColorsItem
+    :: StyleFunctionGradientColorsItem
+styleFunctionGradientColorsItem =
+    StyleFunctionGradientColorsItem
+    { _sfgciColor = Nothing
+    , _sfgciOpacity = Nothing
     }
 
--- | Offset to the entry in the list of base tables in the table definition.
-bcTableIndex :: Lens' BaseColumn (Maybe Int32)
-bcTableIndex
-  = lens _bcTableIndex (\ s a -> s{_bcTableIndex = a})
+-- | Color in #RRGGBB format.
+sfgciColor :: Lens' StyleFunctionGradientColorsItem (Maybe Text)
+sfgciColor
+  = lens _sfgciColor (\ s a -> s{_sfgciColor = a})
 
--- | The id of the column in the base table from which this column is
--- derived.
-bcColumnId :: Lens' BaseColumn (Maybe Int32)
-bcColumnId
-  = lens _bcColumnId (\ s a -> s{_bcColumnId = a})
+-- | Opacity of the color: 0.0 (transparent) to 1.0 (opaque).
+sfgciOpacity :: Lens' StyleFunctionGradientColorsItem (Maybe Double)
+sfgciOpacity
+  = lens _sfgciOpacity (\ s a -> s{_sfgciOpacity = a})
 
-instance FromJSON BaseColumn where
+instance FromJSON StyleFunctionGradientColorsItem
+         where
         parseJSON
-          = withObject "BaseColumn"
+          = withObject "StyleFunctionGradientColorsItem"
               (\ o ->
-                 BaseColumn <$>
-                   (o .:? "tableIndex") <*> (o .:? "columnId"))
+                 StyleFunctionGradientColorsItem <$>
+                   (o .:? "color") <*> (o .:? "opacity"))
 
-instance ToJSON BaseColumn where
-        toJSON BaseColumn{..}
+instance ToJSON StyleFunctionGradientColorsItem where
+        toJSON StyleFunctionGradientColorsItem{..}
           = object
               (catMaybes
-                 [("tableIndex" .=) <$> _bcTableIndex,
-                  ("columnId" .=) <$> _bcColumnId])
+                 [("color" .=) <$> _sfgciColor,
+                  ("opacity" .=) <$> _sfgciOpacity])
 
 -- | Represents a list of styles for a given table.
 --
@@ -548,65 +596,6 @@ instance ToJSON Line where
                  [("coordinates" .=) <$> _lCoordinates,
                   Just ("type" .= _lType)])
 
--- | Gradient function that interpolates a range of colors based on column
--- value.
---
--- /See:/ 'gradient' smart constructor.
-data Gradient = Gradient
-    { _gMax    :: !(Maybe Double)
-    , _gMin    :: !(Maybe Double)
-    , _gColors :: !(Maybe [ColorsItem])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Gradient' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'gMax'
---
--- * 'gMin'
---
--- * 'gColors'
-gradient
-    :: Gradient
-gradient =
-    Gradient
-    { _gMax = Nothing
-    , _gMin = Nothing
-    , _gColors = Nothing
-    }
-
--- | Higher-end of the interpolation range: rows with this value will be
--- assigned to colors[n-1].
-gMax :: Lens' Gradient (Maybe Double)
-gMax = lens _gMax (\ s a -> s{_gMax = a})
-
--- | Lower-end of the interpolation range: rows with this value will be
--- assigned to colors[0].
-gMin :: Lens' Gradient (Maybe Double)
-gMin = lens _gMin (\ s a -> s{_gMin = a})
-
--- | Array with two or more colors.
-gColors :: Lens' Gradient [ColorsItem]
-gColors
-  = lens _gColors (\ s a -> s{_gColors = a}) . _Default
-      . _Coerce
-
-instance FromJSON Gradient where
-        parseJSON
-          = withObject "Gradient"
-              (\ o ->
-                 Gradient <$>
-                   (o .:? "max") <*> (o .:? "min") <*>
-                     (o .:? "colors" .!= mempty))
-
-instance ToJSON Gradient where
-        toJSON Gradient{..}
-          = object
-              (catMaybes
-                 [("max" .=) <$> _gMax, ("min" .=) <$> _gMin,
-                  ("colors" .=) <$> _gColors])
-
 -- | Represents a complete StyleSettings object. The primary key is a
 -- combination of the tableId and a styleId.
 --
@@ -714,89 +703,39 @@ instance ToJSON StyleSetting where
                   ("styleId" .=) <$> _ssStyleId,
                   ("tableId" .=) <$> _ssTableId])
 
--- | Represents a polygon object.
---
--- /See:/ 'polygon' smart constructor.
-data Polygon = Polygon
-    { _pCoordinates :: !(Maybe [[[Double]]])
-    , _pType        :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Polygon' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pCoordinates'
---
--- * 'pType'
-polygon
-    :: Polygon
-polygon =
-    Polygon
-    { _pCoordinates = Nothing
-    , _pType = "Polygon"
-    }
-
--- | The coordinates that define the polygon.
-pCoordinates :: Lens' Polygon [[[Double]]]
-pCoordinates
-  = lens _pCoordinates (\ s a -> s{_pCoordinates = a})
-      . _Default
-      . _Coerce
-
--- | Type: A polygon geometry.
-pType :: Lens' Polygon Text
-pType = lens _pType (\ s a -> s{_pType = a})
-
-instance FromJSON Polygon where
-        parseJSON
-          = withObject "Polygon"
-              (\ o ->
-                 Polygon <$>
-                   (o .:? "coordinates" .!= mempty) <*>
-                     (o .:? "type" .!= "Polygon"))
-
-instance ToJSON Polygon where
-        toJSON Polygon{..}
-          = object
-              (catMaybes
-                 [("coordinates" .=) <$> _pCoordinates,
-                  Just ("type" .= _pType)])
-
 -- | Represents a point object.
 --
 -- /See:/ 'point' smart constructor.
 data Point = Point
-    { _poiCoordinates :: !(Maybe [Double])
-    , _poiType        :: !Text
+    { _pCoordinates :: !(Maybe [Double])
+    , _pType        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Point' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'poiCoordinates'
+-- * 'pCoordinates'
 --
--- * 'poiType'
+-- * 'pType'
 point
     :: Point
 point =
     Point
-    { _poiCoordinates = Nothing
-    , _poiType = "Point"
+    { _pCoordinates = Nothing
+    , _pType = "Point"
     }
 
 -- | The coordinates that define the point.
-poiCoordinates :: Lens' Point [Double]
-poiCoordinates
-  = lens _poiCoordinates
-      (\ s a -> s{_poiCoordinates = a})
+pCoordinates :: Lens' Point [Double]
+pCoordinates
+  = lens _pCoordinates (\ s a -> s{_pCoordinates = a})
       . _Default
       . _Coerce
 
 -- | Point: A point geometry.
-poiType :: Lens' Point Text
-poiType = lens _poiType (\ s a -> s{_poiType = a})
+pType :: Lens' Point Text
+pType = lens _pType (\ s a -> s{_pType = a})
 
 instance FromJSON Point where
         parseJSON
@@ -810,8 +749,58 @@ instance ToJSON Point where
         toJSON Point{..}
           = object
               (catMaybes
-                 [("coordinates" .=) <$> _poiCoordinates,
-                  Just ("type" .= _poiType)])
+                 [("coordinates" .=) <$> _pCoordinates,
+                  Just ("type" .= _pType)])
+
+-- | Represents a polygon object.
+--
+-- /See:/ 'polygon' smart constructor.
+data Polygon = Polygon
+    { _polCoordinates :: !(Maybe [[[Double]]])
+    , _polType        :: !Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Polygon' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'polCoordinates'
+--
+-- * 'polType'
+polygon
+    :: Polygon
+polygon =
+    Polygon
+    { _polCoordinates = Nothing
+    , _polType = "Polygon"
+    }
+
+-- | The coordinates that define the polygon.
+polCoordinates :: Lens' Polygon [[[Double]]]
+polCoordinates
+  = lens _polCoordinates
+      (\ s a -> s{_polCoordinates = a})
+      . _Default
+      . _Coerce
+
+-- | Type: A polygon geometry.
+polType :: Lens' Polygon Text
+polType = lens _polType (\ s a -> s{_polType = a})
+
+instance FromJSON Polygon where
+        parseJSON
+          = withObject "Polygon"
+              (\ o ->
+                 Polygon <$>
+                   (o .:? "coordinates" .!= mempty) <*>
+                     (o .:? "type" .!= "Polygon"))
+
+instance ToJSON Polygon where
+        toJSON Polygon{..}
+          = object
+              (catMaybes
+                 [("coordinates" .=) <$> _polCoordinates,
+                  Just ("type" .= _polType)])
 
 -- | Represents a list of tasks for a table.
 --
@@ -882,6 +871,65 @@ instance ToJSON TaskList where
                  [("totalItems" .=) <$> _tTotalItems,
                   ("nextPageToken" .=) <$> _tNextPageToken,
                   Just ("kind" .= _tKind), ("items" .=) <$> _tItems])
+
+-- | Represents a Geometry object.
+--
+-- /See:/ 'geometry' smart constructor.
+data Geometry = Geometry
+    { _gGeometries :: !(Maybe [JSONValue])
+    , _gGeometry   :: !(Maybe JSONValue)
+    , _gType       :: !Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Geometry' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gGeometries'
+--
+-- * 'gGeometry'
+--
+-- * 'gType'
+geometry
+    :: Geometry
+geometry =
+    Geometry
+    { _gGeometries = Nothing
+    , _gGeometry = Nothing
+    , _gType = "GeometryCollection"
+    }
+
+-- | The list of geometries in this geometry collection.
+gGeometries :: Lens' Geometry [JSONValue]
+gGeometries
+  = lens _gGeometries (\ s a -> s{_gGeometries = a}) .
+      _Default
+      . _Coerce
+
+gGeometry :: Lens' Geometry (Maybe JSONValue)
+gGeometry
+  = lens _gGeometry (\ s a -> s{_gGeometry = a})
+
+-- | Type: A collection of geometries.
+gType :: Lens' Geometry Text
+gType = lens _gType (\ s a -> s{_gType = a})
+
+instance FromJSON Geometry where
+        parseJSON
+          = withObject "Geometry"
+              (\ o ->
+                 Geometry <$>
+                   (o .:? "geometries" .!= mempty) <*>
+                     (o .:? "geometry")
+                     <*> (o .:? "type" .!= "GeometryCollection"))
+
+instance ToJSON Geometry where
+        toJSON Geometry{..}
+          = object
+              (catMaybes
+                 [("geometries" .=) <$> _gGeometries,
+                  ("geometry" .=) <$> _gGeometry,
+                  Just ("type" .= _gType)])
 
 -- | Represents a list of templates for a given table.
 --
@@ -957,64 +1005,54 @@ instance ToJSON TemplateList where
                   Just ("kind" .= _temKind),
                   ("items" .=) <$> _temItems])
 
--- | Represents a Geometry object.
+-- | Represents an import request.
 --
--- /See:/ 'geometry' smart constructor.
-data Geometry = Geometry
-    { _gGeometries :: !(Maybe [JSONValue])
-    , _gGeometry   :: !(Maybe JSONValue)
-    , _gType       :: !Text
+-- /See:/ 'import'' smart constructor.
+data Import = Import
+    { _iKind            :: !Text
+    , _iNumRowsReceived :: !(Maybe Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Geometry' with the minimum fields required to make a request.
+-- | Creates a value of 'Import' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gGeometries'
+-- * 'iKind'
 --
--- * 'gGeometry'
---
--- * 'gType'
-geometry
-    :: Geometry
-geometry =
-    Geometry
-    { _gGeometries = Nothing
-    , _gGeometry = Nothing
-    , _gType = "GeometryCollection"
+-- * 'iNumRowsReceived'
+import'
+    :: Import
+import' =
+    Import
+    { _iKind = "fusiontables#import"
+    , _iNumRowsReceived = Nothing
     }
 
--- | The list of geometries in this geometry collection.
-gGeometries :: Lens' Geometry [JSONValue]
-gGeometries
-  = lens _gGeometries (\ s a -> s{_gGeometries = a}) .
-      _Default
-      . _Coerce
+-- | The kind of item this is. For an import, this is always
+-- fusiontables#import.
+iKind :: Lens' Import Text
+iKind = lens _iKind (\ s a -> s{_iKind = a})
 
-gGeometry :: Lens' Geometry (Maybe JSONValue)
-gGeometry
-  = lens _gGeometry (\ s a -> s{_gGeometry = a})
+-- | The number of rows received from the import request.
+iNumRowsReceived :: Lens' Import (Maybe Int64)
+iNumRowsReceived
+  = lens _iNumRowsReceived
+      (\ s a -> s{_iNumRowsReceived = a})
 
--- | Type: A collection of geometries.
-gType :: Lens' Geometry Text
-gType = lens _gType (\ s a -> s{_gType = a})
-
-instance FromJSON Geometry where
+instance FromJSON Import where
         parseJSON
-          = withObject "Geometry"
+          = withObject "Import"
               (\ o ->
-                 Geometry <$>
-                   (o .:? "geometries" .!= mempty) <*>
-                     (o .:? "geometry")
-                     <*> (o .:? "type" .!= "GeometryCollection"))
+                 Import <$>
+                   (o .:? "kind" .!= "fusiontables#import") <*>
+                     (o .:? "numRowsReceived"))
 
-instance ToJSON Geometry where
-        toJSON Geometry{..}
+instance ToJSON Import where
+        toJSON Import{..}
           = object
               (catMaybes
-                 [("geometries" .=) <$> _gGeometries,
-                  ("geometry" .=) <$> _gGeometry,
-                  Just ("type" .= _gType)])
+                 [Just ("kind" .= _iKind),
+                  ("numRowsReceived" .=) <$> _iNumRowsReceived])
 
 -- | A background task on a table, initiated for time- or resource-consuming
 -- operations such as changing column types or deleting all rows.
@@ -1094,55 +1132,6 @@ instance ToJSON Task where
                   ("taskId" .=) <$> _tasTaskId,
                   Just ("kind" .= _tasKind), ("type" .=) <$> _tasType,
                   ("started" .=) <$> _tasStarted])
-
--- | Represents an import request.
---
--- /See:/ 'import'' smart constructor.
-data Import = Import
-    { _iKind            :: !Text
-    , _iNumRowsReceived :: !(Maybe Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Import' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'iKind'
---
--- * 'iNumRowsReceived'
-import'
-    :: Import
-import' =
-    Import
-    { _iKind = "fusiontables#import"
-    , _iNumRowsReceived = Nothing
-    }
-
--- | The kind of item this is. For an import, this is always
--- fusiontables#import.
-iKind :: Lens' Import Text
-iKind = lens _iKind (\ s a -> s{_iKind = a})
-
--- | The number of rows received from the import request.
-iNumRowsReceived :: Lens' Import (Maybe Int64)
-iNumRowsReceived
-  = lens _iNumRowsReceived
-      (\ s a -> s{_iNumRowsReceived = a})
-
-instance FromJSON Import where
-        parseJSON
-          = withObject "Import"
-              (\ o ->
-                 Import <$>
-                   (o .:? "kind" .!= "fusiontables#import") <*>
-                     (o .:? "numRowsReceived"))
-
-instance ToJSON Import where
-        toJSON Import{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _iKind),
-                  ("numRowsReceived" .=) <$> _iNumRowsReceived])
 
 -- | Represents the contents of InfoWindow templates.
 --
@@ -1415,49 +1404,255 @@ instance ToJSON PolygonStyle where
                   ("strokeWeightStyler" .=) <$> _psStrokeWeightStyler,
                   ("strokeColor" .=) <$> _psStrokeColor])
 
+-- | Gradient function that interpolates a range of colors based on column
+-- value.
 --
--- /See:/ 'colorsItem' smart constructor.
-data ColorsItem = ColorsItem
-    { _ciColor   :: !(Maybe Text)
-    , _ciOpacity :: !(Maybe Double)
+-- /See:/ 'styleFunctionGradient' smart constructor.
+data StyleFunctionGradient = StyleFunctionGradient
+    { _sfgMax    :: !(Maybe Double)
+    , _sfgMin    :: !(Maybe Double)
+    , _sfgColors :: !(Maybe [StyleFunctionGradientColorsItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ColorsItem' with the minimum fields required to make a request.
+-- | Creates a value of 'StyleFunctionGradient' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ciColor'
+-- * 'sfgMax'
 --
--- * 'ciOpacity'
-colorsItem
-    :: ColorsItem
-colorsItem =
-    ColorsItem
-    { _ciColor = Nothing
-    , _ciOpacity = Nothing
+-- * 'sfgMin'
+--
+-- * 'sfgColors'
+styleFunctionGradient
+    :: StyleFunctionGradient
+styleFunctionGradient =
+    StyleFunctionGradient
+    { _sfgMax = Nothing
+    , _sfgMin = Nothing
+    , _sfgColors = Nothing
     }
 
--- | Color in #RRGGBB format.
-ciColor :: Lens' ColorsItem (Maybe Text)
-ciColor = lens _ciColor (\ s a -> s{_ciColor = a})
+-- | Higher-end of the interpolation range: rows with this value will be
+-- assigned to colors[n-1].
+sfgMax :: Lens' StyleFunctionGradient (Maybe Double)
+sfgMax = lens _sfgMax (\ s a -> s{_sfgMax = a})
 
--- | Opacity of the color: 0.0 (transparent) to 1.0 (opaque).
-ciOpacity :: Lens' ColorsItem (Maybe Double)
-ciOpacity
-  = lens _ciOpacity (\ s a -> s{_ciOpacity = a})
+-- | Lower-end of the interpolation range: rows with this value will be
+-- assigned to colors[0].
+sfgMin :: Lens' StyleFunctionGradient (Maybe Double)
+sfgMin = lens _sfgMin (\ s a -> s{_sfgMin = a})
 
-instance FromJSON ColorsItem where
+-- | Array with two or more colors.
+sfgColors :: Lens' StyleFunctionGradient [StyleFunctionGradientColorsItem]
+sfgColors
+  = lens _sfgColors (\ s a -> s{_sfgColors = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON StyleFunctionGradient where
         parseJSON
-          = withObject "ColorsItem"
+          = withObject "StyleFunctionGradient"
               (\ o ->
-                 ColorsItem <$> (o .:? "color") <*> (o .:? "opacity"))
+                 StyleFunctionGradient <$>
+                   (o .:? "max") <*> (o .:? "min") <*>
+                     (o .:? "colors" .!= mempty))
 
-instance ToJSON ColorsItem where
-        toJSON ColorsItem{..}
+instance ToJSON StyleFunctionGradient where
+        toJSON StyleFunctionGradient{..}
           = object
               (catMaybes
-                 [("color" .=) <$> _ciColor,
-                  ("opacity" .=) <$> _ciOpacity])
+                 [("max" .=) <$> _sfgMax, ("min" .=) <$> _sfgMin,
+                  ("colors" .=) <$> _sfgColors])
+
+-- | Specifies the details of a column in a table.
+--
+-- /See:/ 'column' smart constructor.
+data Column = Column
+    { _cColumnJSONSchema     :: !(Maybe Text)
+    , _cGraphPredicate       :: !(Maybe Text)
+    , _cKind                 :: !Text
+    , _cBaseColumn           :: !(Maybe ColumnBaseColumn)
+    , _cColumnPropertiesJSON :: !(Maybe Text)
+    , _cName                 :: !(Maybe Text)
+    , _cType                 :: !(Maybe Text)
+    , _cFormatPattern        :: !(Maybe Text)
+    , _cColumnId             :: !(Maybe Int32)
+    , _cValidValues          :: !(Maybe [Text])
+    , _cValidateData         :: !(Maybe Bool)
+    , _cDescription          :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Column' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cColumnJSONSchema'
+--
+-- * 'cGraphPredicate'
+--
+-- * 'cKind'
+--
+-- * 'cBaseColumn'
+--
+-- * 'cColumnPropertiesJSON'
+--
+-- * 'cName'
+--
+-- * 'cType'
+--
+-- * 'cFormatPattern'
+--
+-- * 'cColumnId'
+--
+-- * 'cValidValues'
+--
+-- * 'cValidateData'
+--
+-- * 'cDescription'
+column
+    :: Column
+column =
+    Column
+    { _cColumnJSONSchema = Nothing
+    , _cGraphPredicate = Nothing
+    , _cKind = "fusiontables#column"
+    , _cBaseColumn = Nothing
+    , _cColumnPropertiesJSON = Nothing
+    , _cName = Nothing
+    , _cType = Nothing
+    , _cFormatPattern = Nothing
+    , _cColumnId = Nothing
+    , _cValidValues = Nothing
+    , _cValidateData = Nothing
+    , _cDescription = Nothing
+    }
+
+-- | JSON schema for interpreting JSON in this column.
+cColumnJSONSchema :: Lens' Column (Maybe Text)
+cColumnJSONSchema
+  = lens _cColumnJSONSchema
+      (\ s a -> s{_cColumnJSONSchema = a})
+
+-- | Column graph predicate. Used to map table to graph data model
+-- (subject,predicate,object) See W3C Graph-based Data Model.
+cGraphPredicate :: Lens' Column (Maybe Text)
+cGraphPredicate
+  = lens _cGraphPredicate
+      (\ s a -> s{_cGraphPredicate = a})
+
+-- | The kind of item this is. For a column, this is always
+-- fusiontables#column.
+cKind :: Lens' Column Text
+cKind = lens _cKind (\ s a -> s{_cKind = a})
+
+-- | Identifier of the base column. If present, this column is derived from
+-- the specified base column.
+cBaseColumn :: Lens' Column (Maybe ColumnBaseColumn)
+cBaseColumn
+  = lens _cBaseColumn (\ s a -> s{_cBaseColumn = a})
+
+-- | JSON object containing custom column properties.
+cColumnPropertiesJSON :: Lens' Column (Maybe Text)
+cColumnPropertiesJSON
+  = lens _cColumnPropertiesJSON
+      (\ s a -> s{_cColumnPropertiesJSON = a})
+
+-- | Name of the column.
+cName :: Lens' Column (Maybe Text)
+cName = lens _cName (\ s a -> s{_cName = a})
+
+-- | Type of the column.
+cType :: Lens' Column (Maybe Text)
+cType = lens _cType (\ s a -> s{_cType = a})
+
+-- | Format pattern. Acceptable values are DT_DATE_MEDIUMe.g Dec 24, 2008
+-- DT_DATE_SHORTfor example 12\/24\/08 DT_DATE_TIME_MEDIUMfor example Dec
+-- 24, 2008 8:30:45 PM DT_DATE_TIME_SHORTfor example 12\/24\/08 8:30 PM
+-- DT_DAY_MONTH_2_DIGIT_YEARfor example 24\/12\/08
+-- DT_DAY_MONTH_2_DIGIT_YEAR_TIMEfor example 24\/12\/08 20:30
+-- DT_DAY_MONTH_2_DIGIT_YEAR_TIME_MERIDIANfor example 24\/12\/08 8:30 PM
+-- DT_DAY_MONTH_4_DIGIT_YEARfor example 24\/12\/2008
+-- DT_DAY_MONTH_4_DIGIT_YEAR_TIMEfor example 24\/12\/2008 20:30
+-- DT_DAY_MONTH_4_DIGIT_YEAR_TIME_MERIDIANfor example 24\/12\/2008 8:30 PM
+-- DT_ISO_YEAR_MONTH_DAYfor example 2008-12-24
+-- DT_ISO_YEAR_MONTH_DAY_TIMEfor example 2008-12-24 20:30:45
+-- DT_MONTH_DAY_4_DIGIT_YEARfor example 12\/24\/2008 DT_TIME_LONGfor
+-- example 8:30:45 PM UTC-6 DT_TIME_MEDIUMfor example 8:30:45 PM
+-- DT_TIME_SHORTfor example 8:30 PM DT_YEAR_ONLYfor example 2008
+-- HIGHLIGHT_UNTYPED_CELLSHighlight cell data that does not match the data
+-- type NONENo formatting (default) NUMBER_CURRENCYfor example $1234.56
+-- NUMBER_DEFAULTfor example 1,234.56 NUMBER_INTEGERfor example 1235
+-- NUMBER_NO_SEPARATORfor example 1234.56 NUMBER_PERCENTfor example
+-- 123,456% NUMBER_SCIENTIFICfor example 1E3
+-- STRING_EIGHT_LINE_IMAGEDisplays thumbnail images as tall as eight lines
+-- of text STRING_FOUR_LINE_IMAGEDisplays thumbnail images as tall as four
+-- lines of text STRING_JSON_TEXTAllows JSON editing of text in UI
+-- STRING_LINKTreats cell as a link (must start with http:\/\/ or
+-- https:\/\/) STRING_ONE_LINE_IMAGEDisplays thumbnail images as tall as
+-- one line of text STRING_VIDEO_OR_MAPDisplay a video or map thumbnail
+cFormatPattern :: Lens' Column (Maybe Text)
+cFormatPattern
+  = lens _cFormatPattern
+      (\ s a -> s{_cFormatPattern = a})
+
+-- | Identifier for the column.
+cColumnId :: Lens' Column (Maybe Int32)
+cColumnId
+  = lens _cColumnId (\ s a -> s{_cColumnId = a})
+
+-- | List of valid values used to validate data and supply a drop-down list
+-- of values in the web application.
+cValidValues :: Lens' Column [Text]
+cValidValues
+  = lens _cValidValues (\ s a -> s{_cValidValues = a})
+      . _Default
+      . _Coerce
+
+-- | If true, data entered via the web application is validated.
+cValidateData :: Lens' Column (Maybe Bool)
+cValidateData
+  = lens _cValidateData
+      (\ s a -> s{_cValidateData = a})
+
+-- | Column description.
+cDescription :: Lens' Column (Maybe Text)
+cDescription
+  = lens _cDescription (\ s a -> s{_cDescription = a})
+
+instance FromJSON Column where
+        parseJSON
+          = withObject "Column"
+              (\ o ->
+                 Column <$>
+                   (o .:? "columnJsonSchema") <*>
+                     (o .:? "graphPredicate")
+                     <*> (o .:? "kind" .!= "fusiontables#column")
+                     <*> (o .:? "baseColumn")
+                     <*> (o .:? "columnPropertiesJson")
+                     <*> (o .:? "name")
+                     <*> (o .:? "type")
+                     <*> (o .:? "formatPattern")
+                     <*> (o .:? "columnId")
+                     <*> (o .:? "validValues" .!= mempty)
+                     <*> (o .:? "validateData")
+                     <*> (o .:? "description"))
+
+instance ToJSON Column where
+        toJSON Column{..}
+          = object
+              (catMaybes
+                 [("columnJsonSchema" .=) <$> _cColumnJSONSchema,
+                  ("graphPredicate" .=) <$> _cGraphPredicate,
+                  Just ("kind" .= _cKind),
+                  ("baseColumn" .=) <$> _cBaseColumn,
+                  ("columnPropertiesJson" .=) <$>
+                    _cColumnPropertiesJSON,
+                  ("name" .=) <$> _cName, ("type" .=) <$> _cType,
+                  ("formatPattern" .=) <$> _cFormatPattern,
+                  ("columnId" .=) <$> _cColumnId,
+                  ("validValues" .=) <$> _cValidValues,
+                  ("validateData" .=) <$> _cValidateData,
+                  ("description" .=) <$> _cDescription])
 
 -- | Represents a table.
 --
@@ -1640,196 +1835,6 @@ instance ToJSON Table where
                   ("description" .=) <$> _tabDescription,
                   ("attribution" .=) <$> _tabAttribution,
                   ("attributionLink" .=) <$> _tabAttributionLink])
-
--- | Specifies the details of a column in a table.
---
--- /See:/ 'column' smart constructor.
-data Column = Column
-    { _cColumnJSONSchema     :: !(Maybe Text)
-    , _cGraphPredicate       :: !(Maybe Text)
-    , _cKind                 :: !Text
-    , _cBaseColumn           :: !(Maybe BaseColumn)
-    , _cColumnPropertiesJSON :: !(Maybe Text)
-    , _cName                 :: !(Maybe Text)
-    , _cType                 :: !(Maybe Text)
-    , _cFormatPattern        :: !(Maybe Text)
-    , _cColumnId             :: !(Maybe Int32)
-    , _cValidValues          :: !(Maybe [Text])
-    , _cValidateData         :: !(Maybe Bool)
-    , _cDescription          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Column' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cColumnJSONSchema'
---
--- * 'cGraphPredicate'
---
--- * 'cKind'
---
--- * 'cBaseColumn'
---
--- * 'cColumnPropertiesJSON'
---
--- * 'cName'
---
--- * 'cType'
---
--- * 'cFormatPattern'
---
--- * 'cColumnId'
---
--- * 'cValidValues'
---
--- * 'cValidateData'
---
--- * 'cDescription'
-column
-    :: Column
-column =
-    Column
-    { _cColumnJSONSchema = Nothing
-    , _cGraphPredicate = Nothing
-    , _cKind = "fusiontables#column"
-    , _cBaseColumn = Nothing
-    , _cColumnPropertiesJSON = Nothing
-    , _cName = Nothing
-    , _cType = Nothing
-    , _cFormatPattern = Nothing
-    , _cColumnId = Nothing
-    , _cValidValues = Nothing
-    , _cValidateData = Nothing
-    , _cDescription = Nothing
-    }
-
--- | JSON schema for interpreting JSON in this column.
-cColumnJSONSchema :: Lens' Column (Maybe Text)
-cColumnJSONSchema
-  = lens _cColumnJSONSchema
-      (\ s a -> s{_cColumnJSONSchema = a})
-
--- | Column graph predicate. Used to map table to graph data model
--- (subject,predicate,object) See W3C Graph-based Data Model.
-cGraphPredicate :: Lens' Column (Maybe Text)
-cGraphPredicate
-  = lens _cGraphPredicate
-      (\ s a -> s{_cGraphPredicate = a})
-
--- | The kind of item this is. For a column, this is always
--- fusiontables#column.
-cKind :: Lens' Column Text
-cKind = lens _cKind (\ s a -> s{_cKind = a})
-
--- | Identifier of the base column. If present, this column is derived from
--- the specified base column.
-cBaseColumn :: Lens' Column (Maybe BaseColumn)
-cBaseColumn
-  = lens _cBaseColumn (\ s a -> s{_cBaseColumn = a})
-
--- | JSON object containing custom column properties.
-cColumnPropertiesJSON :: Lens' Column (Maybe Text)
-cColumnPropertiesJSON
-  = lens _cColumnPropertiesJSON
-      (\ s a -> s{_cColumnPropertiesJSON = a})
-
--- | Name of the column.
-cName :: Lens' Column (Maybe Text)
-cName = lens _cName (\ s a -> s{_cName = a})
-
--- | Type of the column.
-cType :: Lens' Column (Maybe Text)
-cType = lens _cType (\ s a -> s{_cType = a})
-
--- | Format pattern. Acceptable values are DT_DATE_MEDIUMe.g Dec 24, 2008
--- DT_DATE_SHORTfor example 12\/24\/08 DT_DATE_TIME_MEDIUMfor example Dec
--- 24, 2008 8:30:45 PM DT_DATE_TIME_SHORTfor example 12\/24\/08 8:30 PM
--- DT_DAY_MONTH_2_DIGIT_YEARfor example 24\/12\/08
--- DT_DAY_MONTH_2_DIGIT_YEAR_TIMEfor example 24\/12\/08 20:30
--- DT_DAY_MONTH_2_DIGIT_YEAR_TIME_MERIDIANfor example 24\/12\/08 8:30 PM
--- DT_DAY_MONTH_4_DIGIT_YEARfor example 24\/12\/2008
--- DT_DAY_MONTH_4_DIGIT_YEAR_TIMEfor example 24\/12\/2008 20:30
--- DT_DAY_MONTH_4_DIGIT_YEAR_TIME_MERIDIANfor example 24\/12\/2008 8:30 PM
--- DT_ISO_YEAR_MONTH_DAYfor example 2008-12-24
--- DT_ISO_YEAR_MONTH_DAY_TIMEfor example 2008-12-24 20:30:45
--- DT_MONTH_DAY_4_DIGIT_YEARfor example 12\/24\/2008 DT_TIME_LONGfor
--- example 8:30:45 PM UTC-6 DT_TIME_MEDIUMfor example 8:30:45 PM
--- DT_TIME_SHORTfor example 8:30 PM DT_YEAR_ONLYfor example 2008
--- HIGHLIGHT_UNTYPED_CELLSHighlight cell data that does not match the data
--- type NONENo formatting (default) NUMBER_CURRENCYfor example $1234.56
--- NUMBER_DEFAULTfor example 1,234.56 NUMBER_INTEGERfor example 1235
--- NUMBER_NO_SEPARATORfor example 1234.56 NUMBER_PERCENTfor example
--- 123,456% NUMBER_SCIENTIFICfor example 1E3
--- STRING_EIGHT_LINE_IMAGEDisplays thumbnail images as tall as eight lines
--- of text STRING_FOUR_LINE_IMAGEDisplays thumbnail images as tall as four
--- lines of text STRING_JSON_TEXTAllows JSON editing of text in UI
--- STRING_LINKTreats cell as a link (must start with http:\/\/ or
--- https:\/\/) STRING_ONE_LINE_IMAGEDisplays thumbnail images as tall as
--- one line of text STRING_VIDEO_OR_MAPDisplay a video or map thumbnail
-cFormatPattern :: Lens' Column (Maybe Text)
-cFormatPattern
-  = lens _cFormatPattern
-      (\ s a -> s{_cFormatPattern = a})
-
--- | Identifier for the column.
-cColumnId :: Lens' Column (Maybe Int32)
-cColumnId
-  = lens _cColumnId (\ s a -> s{_cColumnId = a})
-
--- | List of valid values used to validate data and supply a drop-down list
--- of values in the web application.
-cValidValues :: Lens' Column [Text]
-cValidValues
-  = lens _cValidValues (\ s a -> s{_cValidValues = a})
-      . _Default
-      . _Coerce
-
--- | If true, data entered via the web application is validated.
-cValidateData :: Lens' Column (Maybe Bool)
-cValidateData
-  = lens _cValidateData
-      (\ s a -> s{_cValidateData = a})
-
--- | Column description.
-cDescription :: Lens' Column (Maybe Text)
-cDescription
-  = lens _cDescription (\ s a -> s{_cDescription = a})
-
-instance FromJSON Column where
-        parseJSON
-          = withObject "Column"
-              (\ o ->
-                 Column <$>
-                   (o .:? "columnJsonSchema") <*>
-                     (o .:? "graphPredicate")
-                     <*> (o .:? "kind" .!= "fusiontables#column")
-                     <*> (o .:? "baseColumn")
-                     <*> (o .:? "columnPropertiesJson")
-                     <*> (o .:? "name")
-                     <*> (o .:? "type")
-                     <*> (o .:? "formatPattern")
-                     <*> (o .:? "columnId")
-                     <*> (o .:? "validValues" .!= mempty)
-                     <*> (o .:? "validateData")
-                     <*> (o .:? "description"))
-
-instance ToJSON Column where
-        toJSON Column{..}
-          = object
-              (catMaybes
-                 [("columnJsonSchema" .=) <$> _cColumnJSONSchema,
-                  ("graphPredicate" .=) <$> _cGraphPredicate,
-                  Just ("kind" .= _cKind),
-                  ("baseColumn" .=) <$> _cBaseColumn,
-                  ("columnPropertiesJson" .=) <$>
-                    _cColumnPropertiesJSON,
-                  ("name" .=) <$> _cName, ("type" .=) <$> _cType,
-                  ("formatPattern" .=) <$> _cFormatPattern,
-                  ("columnId" .=) <$> _cColumnId,
-                  ("validValues" .=) <$> _cValidValues,
-                  ("validateData" .=) <$> _cValidateData,
-                  ("description" .=) <$> _cDescription])
 
 -- | Represents a LineStyle within a StyleSetting
 --

@@ -52,7 +52,7 @@ type UsersAliasesWatchResource =
        Capture "userKey" Text :>
          "aliases" :>
            "watch" :>
-             QueryParam "event" DirectoryUsersAliasesWatchEvent :>
+             QueryParam "event" UsersAliasesWatchEvent :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -60,13 +60,14 @@ type UsersAliasesWatchResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Channel :> Post '[JSON] Channel
+                             ReqBody '[OctetStream] Channel :>
+                               Post '[JSON] Channel
 
 -- | Watch for changes in user aliases list
 --
 -- /See:/ 'usersAliasesWatch'' smart constructor.
 data UsersAliasesWatch' = UsersAliasesWatch'
-    { _uawEvent       :: !(Maybe DirectoryUsersAliasesWatchEvent)
+    { _uawEvent       :: !(Maybe UsersAliasesWatchEvent)
     , _uawQuotaUser   :: !(Maybe Text)
     , _uawPrettyPrint :: !Bool
     , _uawUserIP      :: !(Maybe Text)
@@ -116,7 +117,7 @@ usersAliasesWatch' pUawPayload_ pUawUserKey_ =
     }
 
 -- | Event on which subscription is intended (if subscribing)
-uawEvent :: Lens' UsersAliasesWatch' (Maybe DirectoryUsersAliasesWatchEvent)
+uawEvent :: Lens' UsersAliasesWatch' (Maybe UsersAliasesWatchEvent)
 uawEvent = lens _uawEvent (\ s a -> s{_uawEvent = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be

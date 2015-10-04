@@ -37,11 +37,11 @@ library
         , Network.Google.Resource.DFAReporting.AccountPermissionGroups.List
         , Network.Google.Resource.DFAReporting.AccountPermissions.Get
         , Network.Google.Resource.DFAReporting.AccountPermissions.List
-        , Network.Google.Resource.DFAReporting.AccountUserProfiles.Get
-        , Network.Google.Resource.DFAReporting.AccountUserProfiles.Insert
-        , Network.Google.Resource.DFAReporting.AccountUserProfiles.List
-        , Network.Google.Resource.DFAReporting.AccountUserProfiles.Patch
-        , Network.Google.Resource.DFAReporting.AccountUserProfiles.Update
+        , Network.Google.Resource.DFAReporting.AccountUserProFiles.Get
+        , Network.Google.Resource.DFAReporting.AccountUserProFiles.Insert
+        , Network.Google.Resource.DFAReporting.AccountUserProFiles.List
+        , Network.Google.Resource.DFAReporting.AccountUserProFiles.Patch
+        , Network.Google.Resource.DFAReporting.AccountUserProFiles.Update
         , Network.Google.Resource.DFAReporting.Accounts.Get
         , Network.Google.Resource.DFAReporting.Accounts.List
         , Network.Google.Resource.DFAReporting.Accounts.Patch
@@ -213,8 +213,8 @@ library
         , Network.Google.Resource.DFAReporting.SubAccounts.Update
         , Network.Google.Resource.DFAReporting.TargetableRemarketingLists.Get
         , Network.Google.Resource.DFAReporting.TargetableRemarketingLists.List
-        , Network.Google.Resource.DFAReporting.UserProfiles.Get
-        , Network.Google.Resource.DFAReporting.UserProfiles.List
+        , Network.Google.Resource.DFAReporting.UserProFiles.Get
+        , Network.Google.Resource.DFAReporting.UserProFiles.List
         , Network.Google.Resource.DFAReporting.UserRolePermissionGroups.Get
         , Network.Google.Resource.DFAReporting.UserRolePermissionGroups.List
         , Network.Google.Resource.DFAReporting.UserRolePermissions.Get

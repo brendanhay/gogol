@@ -70,8 +70,8 @@ type CompaniesLeadsCreateResource =
                                  QueryParam "key" Key :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
-                                       ReqBody '[JSON] CreateLeadRequest :>
-                                         Post '[JSON] CreateLeadResponse
+                                       ReqBody '[OctetStream] CreateLeadRequest
+                                         :> Post '[JSON] CreateLeadResponse
 
 -- | Creates an advertiser lead for the given company ID.
 --

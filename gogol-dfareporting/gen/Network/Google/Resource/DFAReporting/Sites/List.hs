@@ -33,14 +33,14 @@ module Network.Google.Resource.DFAReporting.Sites.List
     -- * Request Lenses
     , sitQuotaUser
     , sitPrettyPrint
-    , sitUnmappedSite
+    , sitUnmAppedSite
     , sitUserIP
     , sitCampaignIds
     , sitSearchString
     , sitAcceptsInterstitialPlacements
     , sitAcceptsPublisherPaidPlacements
     , sitIds
-    , sitProfileId
+    , sitProFileId
     , sitDirectorySiteIds
     , sitSortOrder
     , sitKey
@@ -71,12 +71,9 @@ type SitesListResource =
                    QueryParam "acceptsPublisherPaidPlacements" Bool :>
                      QueryParams "ids" Int64 :>
                        QueryParams "directorySiteIds" Int64 :>
-                         QueryParam "sortOrder" DfareportingSitesListSortOrder
-                           :>
+                         QueryParam "sortOrder" SitesListSortOrder :>
                            QueryParam "pageToken" Text :>
-                             QueryParam "sortField"
-                               DfareportingSitesListSortField
-                               :>
+                             QueryParam "sortField" SitesListSortField :>
                                QueryParam "subaccountId" Int64 :>
                                  QueryParam "acceptsInStreamVideoPlacements"
                                    Bool
@@ -102,19 +99,19 @@ type SitesListResource =
 data SitesList' = SitesList'
     { _sitQuotaUser                      :: !(Maybe Text)
     , _sitPrettyPrint                    :: !Bool
-    , _sitUnmappedSite                   :: !(Maybe Bool)
+    , _sitUnmAppedSite                   :: !(Maybe Bool)
     , _sitUserIP                         :: !(Maybe Text)
     , _sitCampaignIds                    :: !(Maybe [Int64])
     , _sitSearchString                   :: !(Maybe Text)
     , _sitAcceptsInterstitialPlacements  :: !(Maybe Bool)
     , _sitAcceptsPublisherPaidPlacements :: !(Maybe Bool)
     , _sitIds                            :: !(Maybe [Int64])
-    , _sitProfileId                      :: !Int64
+    , _sitProFileId                      :: !Int64
     , _sitDirectorySiteIds               :: !(Maybe [Int64])
-    , _sitSortOrder                      :: !(Maybe DfareportingSitesListSortOrder)
+    , _sitSortOrder                      :: !(Maybe SitesListSortOrder)
     , _sitKey                            :: !(Maybe Key)
     , _sitPageToken                      :: !(Maybe Text)
-    , _sitSortField                      :: !(Maybe DfareportingSitesListSortField)
+    , _sitSortField                      :: !(Maybe SitesListSortField)
     , _sitSubAccountId                   :: !(Maybe Int64)
     , _sitAcceptsInStreamVideoPlacements :: !(Maybe Bool)
     , _sitOAuthToken                     :: !(Maybe OAuthToken)
@@ -132,7 +129,7 @@ data SitesList' = SitesList'
 --
 -- * 'sitPrettyPrint'
 --
--- * 'sitUnmappedSite'
+-- * 'sitUnmAppedSite'
 --
 -- * 'sitUserIP'
 --
@@ -146,7 +143,7 @@ data SitesList' = SitesList'
 --
 -- * 'sitIds'
 --
--- * 'sitProfileId'
+-- * 'sitProFileId'
 --
 -- * 'sitDirectorySiteIds'
 --
@@ -174,18 +171,18 @@ data SitesList' = SitesList'
 sitesList'
     :: Int64 -- ^ 'profileId'
     -> SitesList'
-sitesList' pSitProfileId_ =
+sitesList' pSitProFileId_ =
     SitesList'
     { _sitQuotaUser = Nothing
     , _sitPrettyPrint = True
-    , _sitUnmappedSite = Nothing
+    , _sitUnmAppedSite = Nothing
     , _sitUserIP = Nothing
     , _sitCampaignIds = Nothing
     , _sitSearchString = Nothing
     , _sitAcceptsInterstitialPlacements = Nothing
     , _sitAcceptsPublisherPaidPlacements = Nothing
     , _sitIds = Nothing
-    , _sitProfileId = pSitProfileId_
+    , _sitProFileId = pSitProFileId_
     , _sitDirectorySiteIds = Nothing
     , _sitSortOrder = Nothing
     , _sitKey = Nothing
@@ -214,10 +211,10 @@ sitPrettyPrint
       (\ s a -> s{_sitPrettyPrint = a})
 
 -- | Select only sites that have not been mapped to a directory site.
-sitUnmappedSite :: Lens' SitesList' (Maybe Bool)
-sitUnmappedSite
-  = lens _sitUnmappedSite
-      (\ s a -> s{_sitUnmappedSite = a})
+sitUnmAppedSite :: Lens' SitesList' (Maybe Bool)
+sitUnmAppedSite
+  = lens _sitUnmAppedSite
+      (\ s a -> s{_sitUnmAppedSite = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
@@ -264,9 +261,9 @@ sitIds
       _Coerce
 
 -- | User profile ID associated with this request.
-sitProfileId :: Lens' SitesList' Int64
-sitProfileId
-  = lens _sitProfileId (\ s a -> s{_sitProfileId = a})
+sitProFileId :: Lens' SitesList' Int64
+sitProFileId
+  = lens _sitProFileId (\ s a -> s{_sitProFileId = a})
 
 -- | Select only sites with these directory site IDs.
 sitDirectorySiteIds :: Lens' SitesList' [Int64]
@@ -277,7 +274,7 @@ sitDirectorySiteIds
       . _Coerce
 
 -- | Order of sorted results, default is ASCENDING.
-sitSortOrder :: Lens' SitesList' (Maybe DfareportingSitesListSortOrder)
+sitSortOrder :: Lens' SitesList' (Maybe SitesListSortOrder)
 sitSortOrder
   = lens _sitSortOrder (\ s a -> s{_sitSortOrder = a})
 
@@ -293,7 +290,7 @@ sitPageToken
   = lens _sitPageToken (\ s a -> s{_sitPageToken = a})
 
 -- | Field by which to sort the list.
-sitSortField :: Lens' SitesList' (Maybe DfareportingSitesListSortField)
+sitSortField :: Lens' SitesList' (Maybe SitesListSortField)
 sitSortField
   = lens _sitSortField (\ s a -> s{_sitSortField = a})
 
@@ -346,7 +343,7 @@ instance GoogleRequest SitesList' where
         type Rs SitesList' = SitesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u SitesList'{..}
-          = go _sitProfileId _sitUnmappedSite
+          = go _sitProFileId _sitUnmAppedSite
               (_sitCampaignIds ^. _Default)
               _sitSearchString
               _sitAcceptsInterstitialPlacements

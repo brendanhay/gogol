@@ -72,7 +72,7 @@ type ProjectsSubscriptionsAcknowledgeResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] AcknowledgeRequest :>
+                                   ReqBody '[OctetStream] AcknowledgeRequest :>
                                      Post '[JSON] Empty
 
 -- | Acknowledges the messages associated with the ack tokens in the

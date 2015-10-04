@@ -58,7 +58,7 @@ type BackendServicesInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] BackendService :>
+                         ReqBody '[OctetStream] BackendService :>
                            Post '[JSON] Operation
 
 -- | Creates a BackendService resource in the specified project using the

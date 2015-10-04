@@ -36,7 +36,7 @@ module Network.Google.Resource.DFAReporting.CreativeFields.List
     , cflUserIP
     , cflSearchString
     , cflIds
-    , cflProfileId
+    , cflProFileId
     , cflSortOrder
     , cflKey
     , cflPageToken
@@ -58,13 +58,9 @@ type CreativeFieldsListResource =
          "creativeFields" :>
            QueryParam "searchString" Text :>
              QueryParams "ids" Int64 :>
-               QueryParam "sortOrder"
-                 DfareportingCreativeFieldsListSortOrder
-                 :>
+               QueryParam "sortOrder" CreativeFieldsListSortOrder :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "sortField"
-                     DfareportingCreativeFieldsListSortField
-                     :>
+                   QueryParam "sortField" CreativeFieldsListSortField :>
                      QueryParams "advertiserIds" Int64 :>
                        QueryParam "maxResults" Int32 :>
                          QueryParam "quotaUser" Text :>
@@ -85,11 +81,11 @@ data CreativeFieldsList' = CreativeFieldsList'
     , _cflUserIP        :: !(Maybe Text)
     , _cflSearchString  :: !(Maybe Text)
     , _cflIds           :: !(Maybe [Int64])
-    , _cflProfileId     :: !Int64
-    , _cflSortOrder     :: !(Maybe DfareportingCreativeFieldsListSortOrder)
+    , _cflProFileId     :: !Int64
+    , _cflSortOrder     :: !(Maybe CreativeFieldsListSortOrder)
     , _cflKey           :: !(Maybe Key)
     , _cflPageToken     :: !(Maybe Text)
-    , _cflSortField     :: !(Maybe DfareportingCreativeFieldsListSortField)
+    , _cflSortField     :: !(Maybe CreativeFieldsListSortField)
     , _cflOAuthToken    :: !(Maybe OAuthToken)
     , _cflAdvertiserIds :: !(Maybe [Int64])
     , _cflMaxResults    :: !(Maybe Int32)
@@ -110,7 +106,7 @@ data CreativeFieldsList' = CreativeFieldsList'
 --
 -- * 'cflIds'
 --
--- * 'cflProfileId'
+-- * 'cflProFileId'
 --
 -- * 'cflSortOrder'
 --
@@ -130,14 +126,14 @@ data CreativeFieldsList' = CreativeFieldsList'
 creativeFieldsList'
     :: Int64 -- ^ 'profileId'
     -> CreativeFieldsList'
-creativeFieldsList' pCflProfileId_ =
+creativeFieldsList' pCflProFileId_ =
     CreativeFieldsList'
     { _cflQuotaUser = Nothing
     , _cflPrettyPrint = True
     , _cflUserIP = Nothing
     , _cflSearchString = Nothing
     , _cflIds = Nothing
-    , _cflProfileId = pCflProfileId_
+    , _cflProFileId = pCflProFileId_
     , _cflSortOrder = Nothing
     , _cflKey = Nothing
     , _cflPageToken = Nothing
@@ -187,12 +183,12 @@ cflIds
       _Coerce
 
 -- | User profile ID associated with this request.
-cflProfileId :: Lens' CreativeFieldsList' Int64
-cflProfileId
-  = lens _cflProfileId (\ s a -> s{_cflProfileId = a})
+cflProFileId :: Lens' CreativeFieldsList' Int64
+cflProFileId
+  = lens _cflProFileId (\ s a -> s{_cflProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-cflSortOrder :: Lens' CreativeFieldsList' (Maybe DfareportingCreativeFieldsListSortOrder)
+cflSortOrder :: Lens' CreativeFieldsList' (Maybe CreativeFieldsListSortOrder)
 cflSortOrder
   = lens _cflSortOrder (\ s a -> s{_cflSortOrder = a})
 
@@ -208,7 +204,7 @@ cflPageToken
   = lens _cflPageToken (\ s a -> s{_cflPageToken = a})
 
 -- | Field by which to sort the list.
-cflSortField :: Lens' CreativeFieldsList' (Maybe DfareportingCreativeFieldsListSortField)
+cflSortField :: Lens' CreativeFieldsList' (Maybe CreativeFieldsListSortField)
 cflSortField
   = lens _cflSortField (\ s a -> s{_cflSortField = a})
 
@@ -246,7 +242,7 @@ instance GoogleRequest CreativeFieldsList' where
              CreativeFieldsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeFieldsList'{..}
-          = go _cflProfileId _cflSearchString
+          = go _cflProFileId _cflSearchString
               (_cflIds ^. _Default)
               _cflSortOrder
               _cflPageToken

@@ -57,7 +57,7 @@ type AchievementConfigurationsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] AchievementConfiguration :>
+                         ReqBody '[OctetStream] AchievementConfiguration :>
                            Post '[JSON] AchievementConfiguration
 
 -- | Insert a new achievement configuration in this application.

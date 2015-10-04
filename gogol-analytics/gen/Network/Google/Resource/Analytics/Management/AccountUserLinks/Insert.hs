@@ -58,7 +58,7 @@ type ManagementAccountUserLinksInsertResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] EntityUserLink :>
+                           ReqBody '[OctetStream] EntityUserLink :>
                              Post '[JSON] EntityUserLink
 
 -- | Adds a new user to the given account.

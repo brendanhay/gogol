@@ -62,7 +62,7 @@ type TargetPoolsRemoveHealthCheckResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON]
+                               ReqBody '[OctetStream]
                                  TargetPoolsRemoveHealthCheckRequest
                                  :> Post '[JSON] Operation
 

@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.PlatformTypes.List
     , ptlQuotaUser
     , ptlPrettyPrint
     , ptlUserIP
-    , ptlProfileId
+    , ptlProFileId
     , ptlKey
     , ptlOAuthToken
     , ptlFields
@@ -65,7 +65,7 @@ data PlatformTypesList' = PlatformTypesList'
     { _ptlQuotaUser   :: !(Maybe Text)
     , _ptlPrettyPrint :: !Bool
     , _ptlUserIP      :: !(Maybe Text)
-    , _ptlProfileId   :: !Int64
+    , _ptlProFileId   :: !Int64
     , _ptlKey         :: !(Maybe Key)
     , _ptlOAuthToken  :: !(Maybe OAuthToken)
     , _ptlFields      :: !(Maybe Text)
@@ -81,7 +81,7 @@ data PlatformTypesList' = PlatformTypesList'
 --
 -- * 'ptlUserIP'
 --
--- * 'ptlProfileId'
+-- * 'ptlProFileId'
 --
 -- * 'ptlKey'
 --
@@ -91,12 +91,12 @@ data PlatformTypesList' = PlatformTypesList'
 platformTypesList'
     :: Int64 -- ^ 'profileId'
     -> PlatformTypesList'
-platformTypesList' pPtlProfileId_ =
+platformTypesList' pPtlProFileId_ =
     PlatformTypesList'
     { _ptlQuotaUser = Nothing
     , _ptlPrettyPrint = True
     , _ptlUserIP = Nothing
-    , _ptlProfileId = pPtlProfileId_
+    , _ptlProFileId = pPtlProFileId_
     , _ptlKey = Nothing
     , _ptlOAuthToken = Nothing
     , _ptlFields = Nothing
@@ -122,9 +122,9 @@ ptlUserIP
   = lens _ptlUserIP (\ s a -> s{_ptlUserIP = a})
 
 -- | User profile ID associated with this request.
-ptlProfileId :: Lens' PlatformTypesList' Int64
-ptlProfileId
-  = lens _ptlProfileId (\ s a -> s{_ptlProfileId = a})
+ptlProFileId :: Lens' PlatformTypesList' Int64
+ptlProFileId
+  = lens _ptlProFileId (\ s a -> s{_ptlProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -152,7 +152,7 @@ instance GoogleRequest PlatformTypesList' where
              PlatformTypesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlatformTypesList'{..}
-          = go _ptlProfileId _ptlQuotaUser
+          = go _ptlProFileId _ptlQuotaUser
               (Just _ptlPrettyPrint)
               _ptlUserIP
               _ptlFields

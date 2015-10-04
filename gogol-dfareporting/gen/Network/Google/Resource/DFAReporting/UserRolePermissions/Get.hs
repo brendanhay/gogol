@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.UserRolePermissions.Get
     , urpgQuotaUser
     , urpgPrettyPrint
     , urpgUserIP
-    , urpgProfileId
+    , urpgProFileId
     , urpgKey
     , urpgId
     , urpgOAuthToken
@@ -67,7 +67,7 @@ data UserRolePermissionsGet' = UserRolePermissionsGet'
     { _urpgQuotaUser   :: !(Maybe Text)
     , _urpgPrettyPrint :: !Bool
     , _urpgUserIP      :: !(Maybe Text)
-    , _urpgProfileId   :: !Int64
+    , _urpgProFileId   :: !Int64
     , _urpgKey         :: !(Maybe Key)
     , _urpgId          :: !Int64
     , _urpgOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data UserRolePermissionsGet' = UserRolePermissionsGet'
 --
 -- * 'urpgUserIP'
 --
--- * 'urpgProfileId'
+-- * 'urpgProFileId'
 --
 -- * 'urpgKey'
 --
@@ -97,12 +97,12 @@ userRolePermissionsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> UserRolePermissionsGet'
-userRolePermissionsGet' pUrpgProfileId_ pUrpgId_ =
+userRolePermissionsGet' pUrpgProFileId_ pUrpgId_ =
     UserRolePermissionsGet'
     { _urpgQuotaUser = Nothing
     , _urpgPrettyPrint = True
     , _urpgUserIP = Nothing
-    , _urpgProfileId = pUrpgProfileId_
+    , _urpgProFileId = pUrpgProFileId_
     , _urpgKey = Nothing
     , _urpgId = pUrpgId_
     , _urpgOAuthToken = Nothing
@@ -130,10 +130,10 @@ urpgUserIP
   = lens _urpgUserIP (\ s a -> s{_urpgUserIP = a})
 
 -- | User profile ID associated with this request.
-urpgProfileId :: Lens' UserRolePermissionsGet' Int64
-urpgProfileId
-  = lens _urpgProfileId
-      (\ s a -> s{_urpgProfileId = a})
+urpgProFileId :: Lens' UserRolePermissionsGet' Int64
+urpgProFileId
+  = lens _urpgProFileId
+      (\ s a -> s{_urpgProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -164,7 +164,7 @@ instance GoogleRequest UserRolePermissionsGet' where
         type Rs UserRolePermissionsGet' = UserRolePermission
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u UserRolePermissionsGet'{..}
-          = go _urpgProfileId _urpgId _urpgQuotaUser
+          = go _urpgProFileId _urpgId _urpgQuotaUser
               (Just _urpgPrettyPrint)
               _urpgUserIP
               _urpgFields

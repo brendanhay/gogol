@@ -60,7 +60,7 @@ type InstanceGroupsInsertResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] InstanceGroup :>
+                           ReqBody '[OctetStream] InstanceGroup :>
                              Post '[JSON] Operation
 
 -- | Creates an instance group in the specified project using the parameters

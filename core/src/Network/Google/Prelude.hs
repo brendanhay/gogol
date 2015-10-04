@@ -140,6 +140,7 @@ instance (KnownSymbol capture, KnownSymbol mode, ToText a, HasClient sublayout)
         p = Text.unpack (toText val) <> m
         m = symbolVal (Proxy :: Proxy mode)
 
+instance MimeRender   OctetStream Body
 instance MimeUnrender OctetStream Body
 
 data MultipartRelated (metatypes :: [*]) meta media

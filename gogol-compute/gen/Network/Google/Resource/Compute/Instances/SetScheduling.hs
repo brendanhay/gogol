@@ -62,7 +62,7 @@ type InstancesSetSchedulingResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] Scheduling :>
+                               ReqBody '[OctetStream] Scheduling :>
                                  Post '[JSON] Operation
 
 -- | Sets an instance\'s scheduling options.

@@ -55,7 +55,7 @@ type PawsGetSpectrumBatchResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] PawsGetSpectrumBatchRequest :>
+                     ReqBody '[OctetStream] PawsGetSpectrumBatchRequest :>
                        Post '[JSON] PawsGetSpectrumBatchResponse
 
 -- | The Google Spectrum Database does not support batch requests, so this

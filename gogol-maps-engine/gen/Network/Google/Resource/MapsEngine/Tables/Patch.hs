@@ -56,7 +56,7 @@ type TablesPatchResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Table :> Patch '[JSON] ()
+                       ReqBody '[OctetStream] Table :> Patch '[JSON] ()
 
 -- | Mutate a table asset.
 --

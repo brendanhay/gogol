@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.SubAccounts.Insert
     , saiQuotaUser
     , saiPrettyPrint
     , saiUserIP
-    , saiProfileId
+    , saiProFileId
     , saiPayload
     , saiKey
     , saiOAuthToken
@@ -57,7 +57,8 @@ type SubAccountsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] SubAccount :> Post '[JSON] SubAccount
+                         ReqBody '[OctetStream] SubAccount :>
+                           Post '[JSON] SubAccount
 
 -- | Inserts a new subaccount.
 --
@@ -66,7 +67,7 @@ data SubAccountsInsert' = SubAccountsInsert'
     { _saiQuotaUser   :: !(Maybe Text)
     , _saiPrettyPrint :: !Bool
     , _saiUserIP      :: !(Maybe Text)
-    , _saiProfileId   :: !Int64
+    , _saiProFileId   :: !Int64
     , _saiPayload     :: !SubAccount
     , _saiKey         :: !(Maybe Key)
     , _saiOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +84,7 @@ data SubAccountsInsert' = SubAccountsInsert'
 --
 -- * 'saiUserIP'
 --
--- * 'saiProfileId'
+-- * 'saiProFileId'
 --
 -- * 'saiPayload'
 --
@@ -96,12 +97,12 @@ subAccountsInsert'
     :: Int64 -- ^ 'profileId'
     -> SubAccount -- ^ 'payload'
     -> SubAccountsInsert'
-subAccountsInsert' pSaiProfileId_ pSaiPayload_ =
+subAccountsInsert' pSaiProFileId_ pSaiPayload_ =
     SubAccountsInsert'
     { _saiQuotaUser = Nothing
     , _saiPrettyPrint = True
     , _saiUserIP = Nothing
-    , _saiProfileId = pSaiProfileId_
+    , _saiProFileId = pSaiProFileId_
     , _saiPayload = pSaiPayload_
     , _saiKey = Nothing
     , _saiOAuthToken = Nothing
@@ -128,9 +129,9 @@ saiUserIP
   = lens _saiUserIP (\ s a -> s{_saiUserIP = a})
 
 -- | User profile ID associated with this request.
-saiProfileId :: Lens' SubAccountsInsert' Int64
-saiProfileId
-  = lens _saiProfileId (\ s a -> s{_saiProfileId = a})
+saiProFileId :: Lens' SubAccountsInsert' Int64
+saiProFileId
+  = lens _saiProFileId (\ s a -> s{_saiProFileId = a})
 
 -- | Multipart request metadata.
 saiPayload :: Lens' SubAccountsInsert' SubAccount
@@ -162,7 +163,7 @@ instance GoogleRequest SubAccountsInsert' where
         type Rs SubAccountsInsert' = SubAccount
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u SubAccountsInsert'{..}
-          = go _saiProfileId _saiQuotaUser
+          = go _saiProFileId _saiQuotaUser
               (Just _saiPrettyPrint)
               _saiUserIP
               _saiFields

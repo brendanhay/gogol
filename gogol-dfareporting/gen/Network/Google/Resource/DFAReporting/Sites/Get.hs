@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Sites.Get
     , sgQuotaUser
     , sgPrettyPrint
     , sgUserIP
-    , sgProfileId
+    , sgProFileId
     , sgKey
     , sgId
     , sgOAuthToken
@@ -66,7 +66,7 @@ data SitesGet' = SitesGet'
     { _sgQuotaUser   :: !(Maybe Text)
     , _sgPrettyPrint :: !Bool
     , _sgUserIP      :: !(Maybe Text)
-    , _sgProfileId   :: !Int64
+    , _sgProFileId   :: !Int64
     , _sgKey         :: !(Maybe Key)
     , _sgId          :: !Int64
     , _sgOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +83,7 @@ data SitesGet' = SitesGet'
 --
 -- * 'sgUserIP'
 --
--- * 'sgProfileId'
+-- * 'sgProFileId'
 --
 -- * 'sgKey'
 --
@@ -96,12 +96,12 @@ sitesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> SitesGet'
-sitesGet' pSgProfileId_ pSgId_ =
+sitesGet' pSgProFileId_ pSgId_ =
     SitesGet'
     { _sgQuotaUser = Nothing
     , _sgPrettyPrint = True
     , _sgUserIP = Nothing
-    , _sgProfileId = pSgProfileId_
+    , _sgProFileId = pSgProFileId_
     , _sgKey = Nothing
     , _sgId = pSgId_
     , _sgOAuthToken = Nothing
@@ -127,9 +127,9 @@ sgUserIP :: Lens' SitesGet' (Maybe Text)
 sgUserIP = lens _sgUserIP (\ s a -> s{_sgUserIP = a})
 
 -- | User profile ID associated with this request.
-sgProfileId :: Lens' SitesGet' Int64
-sgProfileId
-  = lens _sgProfileId (\ s a -> s{_sgProfileId = a})
+sgProFileId :: Lens' SitesGet' Int64
+sgProFileId
+  = lens _sgProFileId (\ s a -> s{_sgProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -158,7 +158,7 @@ instance GoogleRequest SitesGet' where
         type Rs SitesGet' = Site
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u SitesGet'{..}
-          = go _sgProfileId _sgId _sgQuotaUser
+          = go _sgProFileId _sgId _sgQuotaUser
               (Just _sgPrettyPrint)
               _sgUserIP
               _sgFields

@@ -53,9 +53,8 @@ type PeopleListResource =
      "people" :>
        Capture "userId" Text :>
          "people" :>
-           Capture "collection" PlusDomainsPeopleListCollection
-             :>
-             QueryParam "orderBy" OrderBy :>
+           Capture "collection" PeopleListCollection :>
+             QueryParam "orderBy" PeopleListOrderBy :>
                QueryParam "pageToken" Text :>
                  QueryParam "maxResults" Word32 :>
                    QueryParam "quotaUser" Text :>
@@ -73,9 +72,9 @@ type PeopleListResource =
 data PeopleList' = PeopleList'
     { _plQuotaUser   :: !(Maybe Text)
     , _plPrettyPrint :: !Bool
-    , _plOrderBy     :: !(Maybe OrderBy)
+    , _plOrderBy     :: !(Maybe PeopleListOrderBy)
     , _plUserIP      :: !(Maybe Text)
-    , _plCollection  :: !PlusDomainsPeopleListCollection
+    , _plCollection  :: !PeopleListCollection
     , _plUserId      :: !Text
     , _plKey         :: !(Maybe Key)
     , _plPageToken   :: !(Maybe Text)
@@ -110,7 +109,7 @@ data PeopleList' = PeopleList'
 --
 -- * 'plFields'
 peopleList'
-    :: PlusDomainsPeopleListCollection -- ^ 'collection'
+    :: PeopleListCollection -- ^ 'collection'
     -> Text -- ^ 'userId'
     -> PeopleList'
 peopleList' pPlCollection_ pPlUserId_ =
@@ -142,7 +141,7 @@ plPrettyPrint
       (\ s a -> s{_plPrettyPrint = a})
 
 -- | The order to return people in.
-plOrderBy :: Lens' PeopleList' (Maybe OrderBy)
+plOrderBy :: Lens' PeopleList' (Maybe PeopleListOrderBy)
 plOrderBy
   = lens _plOrderBy (\ s a -> s{_plOrderBy = a})
 
@@ -152,7 +151,7 @@ plUserIP :: Lens' PeopleList' (Maybe Text)
 plUserIP = lens _plUserIP (\ s a -> s{_plUserIP = a})
 
 -- | The collection of people to list.
-plCollection :: Lens' PeopleList' PlusDomainsPeopleListCollection
+plCollection :: Lens' PeopleList' PeopleListCollection
 plCollection
   = lens _plCollection (\ s a -> s{_plCollection = a})
 

@@ -61,9 +61,7 @@ type TablesFeaturesListResource =
            QueryParam "include" Text :>
              QueryParam "where" Text :>
                QueryParam "orderBy" Text :>
-                 QueryParam "version"
-                   MapsEngineTablesFeaturesListVersion
-                   :>
+                 QueryParam "version" TablesFeaturesListVersion :>
                    QueryParam "limit" Word32 :>
                      QueryParam "pageToken" Text :>
                        QueryParam "select" Text :>
@@ -89,7 +87,7 @@ data TablesFeaturesList' = TablesFeaturesList'
     , _tflOrderBy     :: !(Maybe Text)
     , _tflUserIP      :: !(Maybe Text)
     , _tflKey         :: !(Maybe Key)
-    , _tflVersion     :: !(Maybe MapsEngineTablesFeaturesListVersion)
+    , _tflVersion     :: !(Maybe TablesFeaturesListVersion)
     , _tflId          :: !Text
     , _tflLimit       :: !(Maybe Word32)
     , _tflPageToken   :: !(Maybe Text)
@@ -200,7 +198,7 @@ tflKey :: Lens' TablesFeaturesList' (Maybe Key)
 tflKey = lens _tflKey (\ s a -> s{_tflKey = a})
 
 -- | The table version to access. See Accessing Public Data for information.
-tflVersion :: Lens' TablesFeaturesList' (Maybe MapsEngineTablesFeaturesListVersion)
+tflVersion :: Lens' TablesFeaturesList' (Maybe TablesFeaturesListVersion)
 tflVersion
   = lens _tflVersion (\ s a -> s{_tflVersion = a})
 

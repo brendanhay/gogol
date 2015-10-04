@@ -54,9 +54,9 @@ type PagesListResource =
      "blogs" :>
        Capture "blogId" Text :>
          "pages" :>
-           QueryParams "status" BloggerPagesListStatus :>
+           QueryParams "status" PagesListStatus :>
              QueryParam "fetchBodies" Bool :>
-               QueryParam "view" BloggerPagesListView :>
+               QueryParam "view" PagesListView :>
                  QueryParam "pageToken" Text :>
                    QueryParam "maxResults" Word32 :>
                      QueryParam "quotaUser" Text :>
@@ -72,14 +72,14 @@ type PagesListResource =
 --
 -- /See:/ 'pagesList'' smart constructor.
 data PagesList' = PagesList'
-    { _plStatus      :: !(Maybe [BloggerPagesListStatus])
+    { _plStatus      :: !(Maybe [PagesListStatus])
     , _plQuotaUser   :: !(Maybe Text)
     , _plPrettyPrint :: !Bool
     , _plUserIP      :: !(Maybe Text)
     , _plBlogId      :: !Text
     , _plKey         :: !(Maybe Key)
     , _plFetchBodies :: !(Maybe Bool)
-    , _plView        :: !(Maybe BloggerPagesListView)
+    , _plView        :: !(Maybe PagesListView)
     , _plPageToken   :: !(Maybe Text)
     , _plOAuthToken  :: !(Maybe OAuthToken)
     , _plMaxResults  :: !(Maybe Word32)
@@ -132,7 +132,7 @@ pagesList' pPlBlogId_ =
     , _plFields = Nothing
     }
 
-plStatus :: Lens' PagesList' [BloggerPagesListStatus]
+plStatus :: Lens' PagesList' [PagesListStatus]
 plStatus
   = lens _plStatus (\ s a -> s{_plStatus = a}) .
       _Default
@@ -174,7 +174,7 @@ plFetchBodies
 
 -- | Access level with which to view the returned result. Note that some
 -- fields require elevated access.
-plView :: Lens' PagesList' (Maybe BloggerPagesListView)
+plView :: Lens' PagesList' (Maybe PagesListView)
 plView = lens _plView (\ s a -> s{_plView = a})
 
 -- | Continuation token if the request is paged.

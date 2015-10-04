@@ -58,7 +58,7 @@ type AccountsUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Account :> Put '[JSON] Account
+                         ReqBody '[OctetStream] Account :> Put '[JSON] Account
 
 -- | Updates a GTM Account.
 --

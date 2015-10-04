@@ -74,7 +74,7 @@ type ProjectsLogServicesSinksCreateResource =
                                      QueryParam "key" Key :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
-                                           ReqBody '[JSON] LogSink :>
+                                           ReqBody '[OctetStream] LogSink :>
                                              Post '[JSON] LogSink
 
 -- | Creates a log service sink. All log entries from a specified log service

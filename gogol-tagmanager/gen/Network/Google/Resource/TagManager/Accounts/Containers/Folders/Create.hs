@@ -60,7 +60,8 @@ type AccountsContainersFoldersCreateResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Folder :> Post '[JSON] Folder
+                             ReqBody '[OctetStream] Folder :>
+                               Post '[JSON] Folder
 
 -- | Creates a GTM Folder.
 --

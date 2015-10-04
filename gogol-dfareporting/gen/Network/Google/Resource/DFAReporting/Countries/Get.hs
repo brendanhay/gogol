@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Countries.Get
     , cgQuotaUser
     , cgPrettyPrint
     , cgUserIP
-    , cgProfileId
+    , cgProFileId
     , cgKey
     , cgOAuthToken
     , cgDartId
@@ -66,7 +66,7 @@ data CountriesGet' = CountriesGet'
     { _cgQuotaUser   :: !(Maybe Text)
     , _cgPrettyPrint :: !Bool
     , _cgUserIP      :: !(Maybe Text)
-    , _cgProfileId   :: !Int64
+    , _cgProFileId   :: !Int64
     , _cgKey         :: !(Maybe Key)
     , _cgOAuthToken  :: !(Maybe OAuthToken)
     , _cgDartId      :: !Int64
@@ -83,7 +83,7 @@ data CountriesGet' = CountriesGet'
 --
 -- * 'cgUserIP'
 --
--- * 'cgProfileId'
+-- * 'cgProFileId'
 --
 -- * 'cgKey'
 --
@@ -96,12 +96,12 @@ countriesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'dartId'
     -> CountriesGet'
-countriesGet' pCgProfileId_ pCgDartId_ =
+countriesGet' pCgProFileId_ pCgDartId_ =
     CountriesGet'
     { _cgQuotaUser = Nothing
     , _cgPrettyPrint = True
     , _cgUserIP = Nothing
-    , _cgProfileId = pCgProfileId_
+    , _cgProFileId = pCgProFileId_
     , _cgKey = Nothing
     , _cgOAuthToken = Nothing
     , _cgDartId = pCgDartId_
@@ -127,9 +127,9 @@ cgUserIP :: Lens' CountriesGet' (Maybe Text)
 cgUserIP = lens _cgUserIP (\ s a -> s{_cgUserIP = a})
 
 -- | User profile ID associated with this request.
-cgProfileId :: Lens' CountriesGet' Int64
-cgProfileId
-  = lens _cgProfileId (\ s a -> s{_cgProfileId = a})
+cgProFileId :: Lens' CountriesGet' Int64
+cgProFileId
+  = lens _cgProFileId (\ s a -> s{_cgProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -158,7 +158,7 @@ instance GoogleRequest CountriesGet' where
         type Rs CountriesGet' = Country
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CountriesGet'{..}
-          = go _cgProfileId _cgDartId _cgQuotaUser
+          = go _cgProFileId _cgDartId _cgQuotaUser
               (Just _cgPrettyPrint)
               _cgUserIP
               _cgFields

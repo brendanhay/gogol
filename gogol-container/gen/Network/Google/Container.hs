@@ -54,9 +54,6 @@ module Network.Google.Container
 
     -- * Types
 
-    -- ** Status
-    , Status (..)
-
     -- ** ListOperationsResponse
     , ListOperationsResponse
     , listOperationsResponse
@@ -114,6 +111,9 @@ module Network.Google.Container
     , oTargetLink
     , oTarget
 
+    -- ** OperationOperationType
+    , OperationOperationType (..)
+
     -- ** OperationStatus
     , OperationStatus (..)
 
@@ -138,13 +138,13 @@ module Network.Google.Container
     , listAggregatedClustersResponse
     , lacrClusters
 
-    -- ** OperationType
-    , OperationType (..)
-
     -- ** ListClustersResponse
     , ListClustersResponse
     , listClustersResponse
     , lcrClusters
+
+    -- ** ClusterStatus
+    , ClusterStatus (..)
     ) where
 
 import           Network.Google.Container.Types

@@ -57,7 +57,7 @@ type StyleInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] StyleSetting :>
+                         ReqBody '[OctetStream] StyleSetting :>
                            Post '[JSON] StyleSetting
 
 -- | Adds a new style for the table.

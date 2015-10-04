@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.FloodlightActivities.List
     , falAdvertiserId
     , falSearchString
     , falIds
-    , falProfileId
+    , falProFileId
     , falFloodlightActivityGroupIds
     , falSortOrder
     , falKey
@@ -70,15 +70,15 @@ type FloodlightActivitiesListResource =
                      QueryParams "ids" Int64 :>
                        QueryParams "floodlightActivityGroupIds" Int64 :>
                          QueryParam "sortOrder"
-                           DfareportingFloodlightActivitiesListSortOrder
+                           FloodlightActivitiesListSortOrder
                            :>
                            QueryParam "floodlightActivityGroupType"
-                             FloodlightActivityGroupType
+                             FloodlightActivitiesListFloodlightActivityGroupType
                              :>
                              QueryParam "floodlightActivityGroupName" Text :>
                                QueryParam "pageToken" Text :>
                                  QueryParam "sortField"
-                                   DfareportingFloodlightActivitiesListSortField
+                                   FloodlightActivitiesListSortField
                                    :>
                                    QueryParam "maxResults" Int32 :>
                                      QueryParam "quotaUser" Text :>
@@ -106,14 +106,14 @@ data FloodlightActivitiesList' = FloodlightActivitiesList'
     , _falAdvertiserId                     :: !(Maybe Int64)
     , _falSearchString                     :: !(Maybe Text)
     , _falIds                              :: !(Maybe [Int64])
-    , _falProfileId                        :: !Int64
+    , _falProFileId                        :: !Int64
     , _falFloodlightActivityGroupIds       :: !(Maybe [Int64])
-    , _falSortOrder                        :: !(Maybe DfareportingFloodlightActivitiesListSortOrder)
+    , _falSortOrder                        :: !(Maybe FloodlightActivitiesListSortOrder)
     , _falKey                              :: !(Maybe Key)
-    , _falFloodlightActivityGroupType      :: !(Maybe FloodlightActivityGroupType)
+    , _falFloodlightActivityGroupType      :: !(Maybe FloodlightActivitiesListFloodlightActivityGroupType)
     , _falFloodlightActivityGroupName      :: !(Maybe Text)
     , _falPageToken                        :: !(Maybe Text)
-    , _falSortField                        :: !(Maybe DfareportingFloodlightActivitiesListSortField)
+    , _falSortField                        :: !(Maybe FloodlightActivitiesListSortField)
     , _falOAuthToken                       :: !(Maybe OAuthToken)
     , _falMaxResults                       :: !(Maybe Int32)
     , _falFields                           :: !(Maybe Text)
@@ -141,7 +141,7 @@ data FloodlightActivitiesList' = FloodlightActivitiesList'
 --
 -- * 'falIds'
 --
--- * 'falProfileId'
+-- * 'falProFileId'
 --
 -- * 'falFloodlightActivityGroupIds'
 --
@@ -165,7 +165,7 @@ data FloodlightActivitiesList' = FloodlightActivitiesList'
 floodlightActivitiesList'
     :: Int64 -- ^ 'profileId'
     -> FloodlightActivitiesList'
-floodlightActivitiesList' pFalProfileId_ =
+floodlightActivitiesList' pFalProFileId_ =
     FloodlightActivitiesList'
     { _falQuotaUser = Nothing
     , _falTagString = Nothing
@@ -176,7 +176,7 @@ floodlightActivitiesList' pFalProfileId_ =
     , _falAdvertiserId = Nothing
     , _falSearchString = Nothing
     , _falIds = Nothing
-    , _falProfileId = pFalProfileId_
+    , _falProFileId = pFalProFileId_
     , _falFloodlightActivityGroupIds = Nothing
     , _falSortOrder = Nothing
     , _falKey = Nothing
@@ -259,9 +259,9 @@ falIds
       _Coerce
 
 -- | User profile ID associated with this request.
-falProfileId :: Lens' FloodlightActivitiesList' Int64
-falProfileId
-  = lens _falProfileId (\ s a -> s{_falProfileId = a})
+falProFileId :: Lens' FloodlightActivitiesList' Int64
+falProFileId
+  = lens _falProFileId (\ s a -> s{_falProFileId = a})
 
 -- | Select only floodlight activities with the specified floodlight activity
 -- group IDs.
@@ -273,7 +273,7 @@ falFloodlightActivityGroupIds
       . _Coerce
 
 -- | Order of sorted results, default is ASCENDING.
-falSortOrder :: Lens' FloodlightActivitiesList' (Maybe DfareportingFloodlightActivitiesListSortOrder)
+falSortOrder :: Lens' FloodlightActivitiesList' (Maybe FloodlightActivitiesListSortOrder)
 falSortOrder
   = lens _falSortOrder (\ s a -> s{_falSortOrder = a})
 
@@ -285,7 +285,7 @@ falKey = lens _falKey (\ s a -> s{_falKey = a})
 
 -- | Select only floodlight activities with the specified floodlight activity
 -- group type.
-falFloodlightActivityGroupType :: Lens' FloodlightActivitiesList' (Maybe FloodlightActivityGroupType)
+falFloodlightActivityGroupType :: Lens' FloodlightActivitiesList' (Maybe FloodlightActivitiesListFloodlightActivityGroupType)
 falFloodlightActivityGroupType
   = lens _falFloodlightActivityGroupType
       (\ s a -> s{_falFloodlightActivityGroupType = a})
@@ -303,7 +303,7 @@ falPageToken
   = lens _falPageToken (\ s a -> s{_falPageToken = a})
 
 -- | Field by which to sort the list.
-falSortField :: Lens' FloodlightActivitiesList' (Maybe DfareportingFloodlightActivitiesListSortField)
+falSortField :: Lens' FloodlightActivitiesList' (Maybe FloodlightActivitiesListSortField)
 falSortField
   = lens _falSortField (\ s a -> s{_falSortField = a})
 
@@ -334,7 +334,7 @@ instance GoogleRequest FloodlightActivitiesList'
              FloodlightActivitiesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u FloodlightActivitiesList'{..}
-          = go _falProfileId _falTagString
+          = go _falProFileId _falTagString
               _falFloodlightActivityGroupTagString
               _falFloodlightConfigurationId
               _falAdvertiserId

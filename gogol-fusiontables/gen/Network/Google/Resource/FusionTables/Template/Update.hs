@@ -59,7 +59,8 @@ type TemplateUpdateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Template :> Put '[JSON] Template
+                           ReqBody '[OctetStream] Template :>
+                             Put '[JSON] Template
 
 -- | Updates an existing template
 --

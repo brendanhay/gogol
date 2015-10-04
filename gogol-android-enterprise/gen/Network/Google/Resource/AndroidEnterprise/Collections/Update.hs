@@ -59,7 +59,8 @@ type CollectionsUpdateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Collection :> Put '[JSON] Collection
+                           ReqBody '[OctetStream] Collection :>
+                             Put '[JSON] Collection
 
 -- | Updates a collection.
 --

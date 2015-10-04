@@ -60,7 +60,8 @@ type FirewallsPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Firewall :> Patch '[JSON] Operation
+                           ReqBody '[OctetStream] Firewall :>
+                             Patch '[JSON] Operation
 
 -- | Updates the specified firewall resource with the data included in the
 -- request. This method supports patch semantics.

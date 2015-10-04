@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Reports.List
     , rQuotaUser
     , rPrettyPrint
     , rUserIP
-    , rProfileId
+    , rProFileId
     , rSortOrder
     , rKey
     , rScope
@@ -54,14 +54,10 @@ type ReportsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "reports" :>
-           QueryParam "sortOrder"
-             DfareportingReportsListSortOrder
-             :>
-             QueryParam "scope" Scope :>
+           QueryParam "sortOrder" ReportsListSortOrder :>
+             QueryParam "scope" ReportsListScope :>
                QueryParam "pageToken" Text :>
-                 QueryParam "sortField"
-                   DfareportingReportsListSortField
-                   :>
+                 QueryParam "sortField" ReportsListSortField :>
                    QueryParam "maxResults" Int32 :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
@@ -79,12 +75,12 @@ data ReportsList' = ReportsList'
     { _rQuotaUser   :: !(Maybe Text)
     , _rPrettyPrint :: !Bool
     , _rUserIP      :: !(Maybe Text)
-    , _rProfileId   :: !Int64
-    , _rSortOrder   :: !DfareportingReportsListSortOrder
+    , _rProFileId   :: !Int64
+    , _rSortOrder   :: !ReportsListSortOrder
     , _rKey         :: !(Maybe Key)
-    , _rScope       :: !Scope
+    , _rScope       :: !ReportsListScope
     , _rPageToken   :: !(Maybe Text)
-    , _rSortField   :: !DfareportingReportsListSortField
+    , _rSortField   :: !ReportsListSortField
     , _rOAuthToken  :: !(Maybe OAuthToken)
     , _rMaxResults  :: !(Maybe Int32)
     , _rFields      :: !(Maybe Text)
@@ -100,7 +96,7 @@ data ReportsList' = ReportsList'
 --
 -- * 'rUserIP'
 --
--- * 'rProfileId'
+-- * 'rProFileId'
 --
 -- * 'rSortOrder'
 --
@@ -120,17 +116,17 @@ data ReportsList' = ReportsList'
 reportsList'
     :: Int64 -- ^ 'profileId'
     -> ReportsList'
-reportsList' pRProfileId_ =
+reportsList' pRProFileId_ =
     ReportsList'
     { _rQuotaUser = Nothing
     , _rPrettyPrint = True
     , _rUserIP = Nothing
-    , _rProfileId = pRProfileId_
-    , _rSortOrder = DRLSODescending
+    , _rProFileId = pRProFileId_
+    , _rSortOrder = RLSODescending
     , _rKey = Nothing
-    , _rScope = SMine
+    , _rScope = Mine
     , _rPageToken = Nothing
-    , _rSortField = DRLSFLastModifiedTime
+    , _rSortField = RLSFLastModifiedTime
     , _rOAuthToken = Nothing
     , _rMaxResults = Nothing
     , _rFields = Nothing
@@ -154,12 +150,12 @@ rUserIP :: Lens' ReportsList' (Maybe Text)
 rUserIP = lens _rUserIP (\ s a -> s{_rUserIP = a})
 
 -- | The DFA user profile ID.
-rProfileId :: Lens' ReportsList' Int64
-rProfileId
-  = lens _rProfileId (\ s a -> s{_rProfileId = a})
+rProFileId :: Lens' ReportsList' Int64
+rProFileId
+  = lens _rProFileId (\ s a -> s{_rProFileId = a})
 
 -- | Order of sorted results, default is \'DESCENDING\'.
-rSortOrder :: Lens' ReportsList' DfareportingReportsListSortOrder
+rSortOrder :: Lens' ReportsList' ReportsListSortOrder
 rSortOrder
   = lens _rSortOrder (\ s a -> s{_rSortOrder = a})
 
@@ -170,7 +166,7 @@ rKey :: Lens' ReportsList' (Maybe Key)
 rKey = lens _rKey (\ s a -> s{_rKey = a})
 
 -- | The scope that defines which results are returned, default is \'MINE\'.
-rScope :: Lens' ReportsList' Scope
+rScope :: Lens' ReportsList' ReportsListScope
 rScope = lens _rScope (\ s a -> s{_rScope = a})
 
 -- | The value of the nextToken from the previous result page.
@@ -179,7 +175,7 @@ rPageToken
   = lens _rPageToken (\ s a -> s{_rPageToken = a})
 
 -- | The field by which to sort the list.
-rSortField :: Lens' ReportsList' DfareportingReportsListSortField
+rSortField :: Lens' ReportsList' ReportsListSortField
 rSortField
   = lens _rSortField (\ s a -> s{_rSortField = a})
 
@@ -205,7 +201,7 @@ instance GoogleRequest ReportsList' where
         type Rs ReportsList' = ReportList
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ReportsList'{..}
-          = go _rProfileId (Just _rSortOrder) (Just _rScope)
+          = go _rProFileId (Just _rSortOrder) (Just _rScope)
               _rPageToken
               (Just _rSortField)
               _rMaxResults

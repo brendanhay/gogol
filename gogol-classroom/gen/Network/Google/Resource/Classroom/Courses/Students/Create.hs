@@ -78,7 +78,7 @@ type CoursesStudentsCreateResource =
                                    QueryParam "key" Key :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
-                                         ReqBody '[JSON] Student :>
+                                         ReqBody '[OctetStream] Student :>
                                            Post '[JSON] Student
 
 -- | Adds a user as a student of a course. This method returns the following

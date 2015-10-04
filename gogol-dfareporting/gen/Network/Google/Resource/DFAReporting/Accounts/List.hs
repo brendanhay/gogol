@@ -36,7 +36,7 @@ module Network.Google.Resource.DFAReporting.Accounts.List
     , alUserIP
     , alSearchString
     , alIds
-    , alProfileId
+    , alProFileId
     , alSortOrder
     , alActive
     , alKey
@@ -58,14 +58,10 @@ type AccountsListResource =
          "accounts" :>
            QueryParam "searchString" Text :>
              QueryParams "ids" Int64 :>
-               QueryParam "sortOrder"
-                 DfareportingAccountsListSortOrder
-                 :>
+               QueryParam "sortOrder" AccountsListSortOrder :>
                  QueryParam "active" Bool :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "sortField"
-                       DfareportingAccountsListSortField
-                       :>
+                     QueryParam "sortField" AccountsListSortField :>
                        QueryParam "maxResults" Int32 :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
@@ -85,12 +81,12 @@ data AccountsList' = AccountsList'
     , _alUserIP       :: !(Maybe Text)
     , _alSearchString :: !(Maybe Text)
     , _alIds          :: !(Maybe [Int64])
-    , _alProfileId    :: !Int64
-    , _alSortOrder    :: !(Maybe DfareportingAccountsListSortOrder)
+    , _alProFileId    :: !Int64
+    , _alSortOrder    :: !(Maybe AccountsListSortOrder)
     , _alActive       :: !(Maybe Bool)
     , _alKey          :: !(Maybe Key)
     , _alPageToken    :: !(Maybe Text)
-    , _alSortField    :: !(Maybe DfareportingAccountsListSortField)
+    , _alSortField    :: !(Maybe AccountsListSortField)
     , _alOAuthToken   :: !(Maybe OAuthToken)
     , _alMaxResults   :: !(Maybe Int32)
     , _alFields       :: !(Maybe Text)
@@ -110,7 +106,7 @@ data AccountsList' = AccountsList'
 --
 -- * 'alIds'
 --
--- * 'alProfileId'
+-- * 'alProFileId'
 --
 -- * 'alSortOrder'
 --
@@ -130,14 +126,14 @@ data AccountsList' = AccountsList'
 accountsList'
     :: Int64 -- ^ 'profileId'
     -> AccountsList'
-accountsList' pAlProfileId_ =
+accountsList' pAlProFileId_ =
     AccountsList'
     { _alQuotaUser = Nothing
     , _alPrettyPrint = True
     , _alUserIP = Nothing
     , _alSearchString = Nothing
     , _alIds = Nothing
-    , _alProfileId = pAlProfileId_
+    , _alProFileId = pAlProFileId_
     , _alSortOrder = Nothing
     , _alActive = Nothing
     , _alKey = Nothing
@@ -185,12 +181,12 @@ alIds
       _Coerce
 
 -- | User profile ID associated with this request.
-alProfileId :: Lens' AccountsList' Int64
-alProfileId
-  = lens _alProfileId (\ s a -> s{_alProfileId = a})
+alProFileId :: Lens' AccountsList' Int64
+alProFileId
+  = lens _alProFileId (\ s a -> s{_alProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-alSortOrder :: Lens' AccountsList' (Maybe DfareportingAccountsListSortOrder)
+alSortOrder :: Lens' AccountsList' (Maybe AccountsListSortOrder)
 alSortOrder
   = lens _alSortOrder (\ s a -> s{_alSortOrder = a})
 
@@ -211,7 +207,7 @@ alPageToken
   = lens _alPageToken (\ s a -> s{_alPageToken = a})
 
 -- | Field by which to sort the list.
-alSortField :: Lens' AccountsList' (Maybe DfareportingAccountsListSortField)
+alSortField :: Lens' AccountsList' (Maybe AccountsListSortField)
 alSortField
   = lens _alSortField (\ s a -> s{_alSortField = a})
 
@@ -237,7 +233,7 @@ instance GoogleRequest AccountsList' where
         type Rs AccountsList' = AccountsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AccountsList'{..}
-          = go _alProfileId _alSearchString
+          = go _alProFileId _alSearchString
               (_alIds ^. _Default)
               _alSortOrder
               _alActive

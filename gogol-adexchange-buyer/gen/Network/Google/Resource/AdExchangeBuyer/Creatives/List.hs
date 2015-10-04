@@ -55,11 +55,13 @@ type CreativesListResource =
      "creatives" :>
        QueryParams "buyerCreativeId" Text :>
          QueryParam "openAuctionStatusFilter"
-           OpenAuctionStatusFilter
+           CreativesListOpenAuctionStatusFilter
            :>
            QueryParams "accountId" Int32 :>
              QueryParam "pageToken" Text :>
-               QueryParam "dealsStatusFilter" DealsStatusFilter :>
+               QueryParam "dealsStatusFilter"
+                 CreativesListDealsStatusFilter
+                 :>
                  QueryParam "maxResults" Word32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
@@ -79,11 +81,11 @@ data CreativesList' = CreativesList'
     , _clPrettyPrint             :: !Bool
     , _clBuyerCreativeId         :: !(Maybe [Text])
     , _clUserIP                  :: !(Maybe Text)
-    , _clOpenAuctionStatusFilter :: !(Maybe OpenAuctionStatusFilter)
+    , _clOpenAuctionStatusFilter :: !(Maybe CreativesListOpenAuctionStatusFilter)
     , _clAccountId               :: !(Maybe [Int32])
     , _clKey                     :: !(Maybe Key)
     , _clPageToken               :: !(Maybe Text)
-    , _clDealsStatusFilter       :: !(Maybe DealsStatusFilter)
+    , _clDealsStatusFilter       :: !(Maybe CreativesListDealsStatusFilter)
     , _clOAuthToken              :: !(Maybe OAuthToken)
     , _clMaxResults              :: !(Maybe Word32)
     , _clFields                  :: !(Maybe Text)
@@ -163,7 +165,7 @@ clUserIP = lens _clUserIP (\ s a -> s{_clUserIP = a})
 
 -- | When specified, only creatives having the given open auction status are
 -- returned.
-clOpenAuctionStatusFilter :: Lens' CreativesList' (Maybe OpenAuctionStatusFilter)
+clOpenAuctionStatusFilter :: Lens' CreativesList' (Maybe CreativesListOpenAuctionStatusFilter)
 clOpenAuctionStatusFilter
   = lens _clOpenAuctionStatusFilter
       (\ s a -> s{_clOpenAuctionStatusFilter = a})
@@ -190,7 +192,7 @@ clPageToken
 
 -- | When specified, only creatives having the given direct deals status are
 -- returned.
-clDealsStatusFilter :: Lens' CreativesList' (Maybe DealsStatusFilter)
+clDealsStatusFilter :: Lens' CreativesList' (Maybe CreativesListDealsStatusFilter)
 clDealsStatusFilter
   = lens _clDealsStatusFilter
       (\ s a -> s{_clDealsStatusFilter = a})

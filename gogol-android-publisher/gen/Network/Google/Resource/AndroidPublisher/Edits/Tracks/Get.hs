@@ -53,8 +53,7 @@ type EditsTracksGetResource =
        "edits" :>
          Capture "editId" Text :>
            "tracks" :>
-             Capture "track" AndroidPublisherEditsTracksGetTrack
-               :>
+             Capture "track" EditsTracksGetTrack :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -69,7 +68,7 @@ type EditsTracksGetResource =
 -- /See:/ 'editsTracksGet'' smart constructor.
 data EditsTracksGet' = EditsTracksGet'
     { _etgQuotaUser   :: !(Maybe Text)
-    , _etgTrack       :: !AndroidPublisherEditsTracksGetTrack
+    , _etgTrack       :: !EditsTracksGetTrack
     , _etgPrettyPrint :: !Bool
     , _etgPackageName :: !Text
     , _etgUserIP      :: !(Maybe Text)
@@ -101,7 +100,7 @@ data EditsTracksGet' = EditsTracksGet'
 --
 -- * 'etgFields'
 editsTracksGet'
-    :: AndroidPublisherEditsTracksGetTrack -- ^ 'track'
+    :: EditsTracksGetTrack -- ^ 'track'
     -> Text -- ^ 'packageName'
     -> Text -- ^ 'editId'
     -> EditsTracksGet'
@@ -126,7 +125,7 @@ etgQuotaUser
   = lens _etgQuotaUser (\ s a -> s{_etgQuotaUser = a})
 
 -- | The track type to read or modify.
-etgTrack :: Lens' EditsTracksGet' AndroidPublisherEditsTracksGetTrack
+etgTrack :: Lens' EditsTracksGet' EditsTracksGetTrack
 etgTrack = lens _etgTrack (\ s a -> s{_etgTrack = a})
 
 -- | Returns response with indentations and line breaks.

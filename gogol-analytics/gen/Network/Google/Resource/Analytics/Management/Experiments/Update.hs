@@ -35,7 +35,7 @@ module Network.Google.Resource.Analytics.Management.Experiments.Update
     , meuPrettyPrint
     , meuWebPropertyId
     , meuUserIP
-    , meuProfileId
+    , meuProFileId
     , meuPayload
     , meuAccountId
     , meuExperimentId
@@ -66,7 +66,7 @@ type ManagementExperimentsUpdateResource =
                                QueryParam "key" Key :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
-                                     ReqBody '[JSON] Experiment :>
+                                     ReqBody '[OctetStream] Experiment :>
                                        Put '[JSON] Experiment
 
 -- | Update an existing experiment.
@@ -77,7 +77,7 @@ data ManagementExperimentsUpdate' = ManagementExperimentsUpdate'
     , _meuPrettyPrint   :: !Bool
     , _meuWebPropertyId :: !Text
     , _meuUserIP        :: !(Maybe Text)
-    , _meuProfileId     :: !Text
+    , _meuProFileId     :: !Text
     , _meuPayload       :: !Experiment
     , _meuAccountId     :: !Text
     , _meuExperimentId  :: !Text
@@ -98,7 +98,7 @@ data ManagementExperimentsUpdate' = ManagementExperimentsUpdate'
 --
 -- * 'meuUserIP'
 --
--- * 'meuProfileId'
+-- * 'meuProFileId'
 --
 -- * 'meuPayload'
 --
@@ -118,13 +118,13 @@ managementExperimentsUpdate'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'experimentId'
     -> ManagementExperimentsUpdate'
-managementExperimentsUpdate' pMeuWebPropertyId_ pMeuProfileId_ pMeuPayload_ pMeuAccountId_ pMeuExperimentId_ =
+managementExperimentsUpdate' pMeuWebPropertyId_ pMeuProFileId_ pMeuPayload_ pMeuAccountId_ pMeuExperimentId_ =
     ManagementExperimentsUpdate'
     { _meuQuotaUser = Nothing
     , _meuPrettyPrint = False
     , _meuWebPropertyId = pMeuWebPropertyId_
     , _meuUserIP = Nothing
-    , _meuProfileId = pMeuProfileId_
+    , _meuProFileId = pMeuProFileId_
     , _meuPayload = pMeuPayload_
     , _meuAccountId = pMeuAccountId_
     , _meuExperimentId = pMeuExperimentId_
@@ -159,9 +159,9 @@ meuUserIP
   = lens _meuUserIP (\ s a -> s{_meuUserIP = a})
 
 -- | View (Profile) ID of the experiment to update.
-meuProfileId :: Lens' ManagementExperimentsUpdate' Text
-meuProfileId
-  = lens _meuProfileId (\ s a -> s{_meuProfileId = a})
+meuProFileId :: Lens' ManagementExperimentsUpdate' Text
+meuProFileId
+  = lens _meuProFileId (\ s a -> s{_meuProFileId = a})
 
 -- | Multipart request metadata.
 meuPayload :: Lens' ManagementExperimentsUpdate' Experiment
@@ -206,7 +206,7 @@ instance GoogleRequest ManagementExperimentsUpdate'
         type Rs ManagementExperimentsUpdate' = Experiment
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementExperimentsUpdate'{..}
-          = go _meuAccountId _meuWebPropertyId _meuProfileId
+          = go _meuAccountId _meuWebPropertyId _meuProFileId
               _meuExperimentId
               _meuQuotaUser
               (Just _meuPrettyPrint)

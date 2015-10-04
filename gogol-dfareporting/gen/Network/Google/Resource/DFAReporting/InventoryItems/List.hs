@@ -35,7 +35,7 @@ module Network.Google.Resource.DFAReporting.InventoryItems.List
     , iilPrettyPrint
     , iilUserIP
     , iilIds
-    , iilProfileId
+    , iilProFileId
     , iilSortOrder
     , iilInPlan
     , iilKey
@@ -61,10 +61,10 @@ type InventoryItemsListResource =
            Capture "projectId" Int64 :>
              "inventoryItems" :>
                QueryParams "ids" Int64 :>
-                 QueryParam "sortOrder" SortOrder :>
+                 QueryParam "sortOrder" InventoryItemsListSortOrder :>
                    QueryParam "inPlan" Bool :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "sortField" SortField :>
+                       QueryParam "sortField" InventoryItemsListSortField :>
                          QueryParams "orderId" Int64 :>
                            QueryParams "siteId" Int64 :>
                              QueryParam "maxResults" Int32 :>
@@ -86,13 +86,13 @@ data InventoryItemsList' = InventoryItemsList'
     , _iilPrettyPrint :: !Bool
     , _iilUserIP      :: !(Maybe Text)
     , _iilIds         :: !(Maybe [Int64])
-    , _iilProfileId   :: !Int64
-    , _iilSortOrder   :: !(Maybe SortOrder)
+    , _iilProFileId   :: !Int64
+    , _iilSortOrder   :: !(Maybe InventoryItemsListSortOrder)
     , _iilInPlan      :: !(Maybe Bool)
     , _iilKey         :: !(Maybe Key)
     , _iilPageToken   :: !(Maybe Text)
     , _iilProjectId   :: !Int64
-    , _iilSortField   :: !(Maybe SortField)
+    , _iilSortField   :: !(Maybe InventoryItemsListSortField)
     , _iilOAuthToken  :: !(Maybe OAuthToken)
     , _iilOrderId     :: !(Maybe [Int64])
     , _iilSiteId      :: !(Maybe [Int64])
@@ -112,7 +112,7 @@ data InventoryItemsList' = InventoryItemsList'
 --
 -- * 'iilIds'
 --
--- * 'iilProfileId'
+-- * 'iilProFileId'
 --
 -- * 'iilSortOrder'
 --
@@ -139,13 +139,13 @@ inventoryItemsList'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'projectId'
     -> InventoryItemsList'
-inventoryItemsList' pIilProfileId_ pIilProjectId_ =
+inventoryItemsList' pIilProFileId_ pIilProjectId_ =
     InventoryItemsList'
     { _iilQuotaUser = Nothing
     , _iilPrettyPrint = True
     , _iilUserIP = Nothing
     , _iilIds = Nothing
-    , _iilProfileId = pIilProfileId_
+    , _iilProFileId = pIilProFileId_
     , _iilSortOrder = Nothing
     , _iilInPlan = Nothing
     , _iilKey = Nothing
@@ -185,12 +185,12 @@ iilIds
       _Coerce
 
 -- | User profile ID associated with this request.
-iilProfileId :: Lens' InventoryItemsList' Int64
-iilProfileId
-  = lens _iilProfileId (\ s a -> s{_iilProfileId = a})
+iilProFileId :: Lens' InventoryItemsList' Int64
+iilProFileId
+  = lens _iilProFileId (\ s a -> s{_iilProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-iilSortOrder :: Lens' InventoryItemsList' (Maybe SortOrder)
+iilSortOrder :: Lens' InventoryItemsList' (Maybe InventoryItemsListSortOrder)
 iilSortOrder
   = lens _iilSortOrder (\ s a -> s{_iilSortOrder = a})
 
@@ -216,7 +216,7 @@ iilProjectId
   = lens _iilProjectId (\ s a -> s{_iilProjectId = a})
 
 -- | Field by which to sort the list.
-iilSortField :: Lens' InventoryItemsList' (Maybe SortField)
+iilSortField :: Lens' InventoryItemsList' (Maybe InventoryItemsListSortField)
 iilSortField
   = lens _iilSortField (\ s a -> s{_iilSortField = a})
 
@@ -260,7 +260,7 @@ instance GoogleRequest InventoryItemsList' where
              InventoryItemsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u InventoryItemsList'{..}
-          = go _iilProfileId _iilProjectId
+          = go _iilProFileId _iilProjectId
               (_iilIds ^. _Default)
               _iilSortOrder
               _iilInPlan

@@ -17,24 +17,23 @@ module Network.Google.Partners.Types
     -- * Service URL
       partnersURL
 
-    -- * EventData
-    , EventData
-    , eventData
-    , edValues
-    , edKey
-
     -- * LatLng
     , LatLng
     , latLng
     , llLatitude
     , llLongitude
 
-    -- * CertificationStatus
-    , CertificationStatus
-    , certificationStatus
-    , csIsCertified
-    , csType
-    , csExamStatuses
+    -- * ListUserStatesResponse
+    , ListUserStatesResponse
+    , listUserStatesResponse
+    , lusrUserStates
+    , lusrResponseMetadata
+
+    -- * EventData
+    , EventData
+    , eventData
+    , edValues
+    , edKey
 
     -- * RequestMetadata
     , RequestMetadata
@@ -45,11 +44,12 @@ module Network.Google.Partners.Types
     , rmUserOverrides
     , rmPartnersSessionId
 
-    -- * ListUserStatesResponse
-    , ListUserStatesResponse
-    , listUserStatesResponse
-    , lusrUserStates
-    , lusrResponseMetadata
+    -- * CertificationStatus
+    , CertificationStatus
+    , certificationStatus
+    , csIsCertified
+    , csType
+    , csExamStatuses
 
     -- * DebugInfo
     , DebugInfo
@@ -64,25 +64,25 @@ module Network.Google.Partners.Types
     , gcrResponseMetadata
     , gcrCompany
 
-    -- * PublicProfile
-    , PublicProfile
-    , publicProfile
-    , ppURL
-    , ppDisplayImageURL
-    , ppDisplayName
-    , ppId
-
-    -- * Location
-    , Location
-    , location
-    , lLatLng
-    , lAddress
+    -- * PublicProFile
+    , PublicProFile
+    , publicProFile
+    , ppfURL
+    , ppfDisplayImageURL
+    , ppfDisplayName
+    , ppfId
 
     -- * CertificationExamStatus
     , CertificationExamStatus
     , certificationExamStatus
     , cesNumberUsersPass
     , cesType
+
+    -- * Location
+    , Location
+    , location
+    , lLatLng
+    , lAddress
 
     -- * TrafficSource
     , TrafficSource
@@ -97,18 +97,18 @@ module Network.Google.Partners.Types
     , mNanos
     , mUnits
 
-    -- * RecaptchaChallenge
-    , RecaptchaChallenge
-    , recaptchaChallenge
-    , rcResponse
-    , rcId
-
     -- * ListCompaniesResponse
     , ListCompaniesResponse
     , listCompaniesResponse
     , lcrNextPageToken
     , lcrResponseMetadata
     , lcrCompanies
+
+    -- * RecaptchaChallenge
+    , RecaptchaChallenge
+    , recaptchaChallenge
+    , rcResponse
+    , rcId
 
     -- * CreateLeadResponse
     , CreateLeadResponse
@@ -117,13 +117,11 @@ module Network.Google.Partners.Types
     , clrResponseMetadata
     , clrLead
 
-    -- * LocalizedCompanyInfo
-    , LocalizedCompanyInfo
-    , localizedCompanyInfo
-    , lciLanguageCode
-    , lciOverview
-    , lciCountryCodes
-    , lciDisplayName
+    -- * UserOverrides
+    , UserOverrides
+    , userOverrides
+    , uoIPAddress
+    , uoUserId
 
     -- * ResponseMetadata
     , ResponseMetadata
@@ -138,16 +136,17 @@ module Network.Google.Partners.Types
     , lmrDetails
     , lmrLevel
 
-    -- * UserOverrides
-    , UserOverrides
-    , userOverrides
-    , uoIPAddress
-    , uoUserId
+    -- * LocalizedCompanyInfo
+    , LocalizedCompanyInfo
+    , localizedCompanyInfo
+    , lciLanguageCode
+    , lciOverview
+    , lciCountryCodes
+    , lciDisplayName
 
-    -- * LogMessageResponse
-    , LogMessageResponse
-    , logMessageResponse
-    , lmrResponseMetadata
+    -- * LogMessageRequestClientInfo
+    , LogMessageRequestClientInfo
+    , logMessageRequestClientInfo
 
     -- * Lead
     , Lead
@@ -163,14 +162,15 @@ module Network.Google.Partners.Types
     , lType
     , lGpsMotivations
 
-    -- * ClientInfo
-    , ClientInfo
-    , clientInfo
+    -- * LogMessageResponse
+    , LogMessageResponse
+    , logMessageResponse
+    , lmrResponseMetadata
 
     -- * Company
     , Company
     , company
-    , cPublicProfile
+    , cPublicProFile
     , cOriginalMinMonthlyBudget
     , cIndustries
     , cConvertedMinMonthlyBudget

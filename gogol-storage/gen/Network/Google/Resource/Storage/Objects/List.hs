@@ -57,8 +57,7 @@ type ObjectsListResource =
          "o" :>
            QueryParam "prefix" Text :>
              QueryParam "versions" Bool :>
-               QueryParam "projection" StorageObjectsListProjection
-                 :>
+               QueryParam "projection" ObjectsListProjection :>
                  QueryParam "pageToken" Text :>
                    QueryParam "delimiter" Text :>
                      QueryParam "maxResults" Word32 :>
@@ -82,7 +81,7 @@ data ObjectsList' = ObjectsList'
     , _olBucket      :: !Text
     , _olVersions    :: !(Maybe Bool)
     , _olKey         :: !(Maybe Key)
-    , _olProjection  :: !(Maybe StorageObjectsListProjection)
+    , _olProjection  :: !(Maybe ObjectsListProjection)
     , _olPageToken   :: !(Maybe Text)
     , _olOAuthToken  :: !(Maybe OAuthToken)
     , _olDelimiter   :: !(Maybe Text)
@@ -177,7 +176,7 @@ olKey :: Lens' ObjectsList' (Maybe Key)
 olKey = lens _olKey (\ s a -> s{_olKey = a})
 
 -- | Set of properties to return. Defaults to noAcl.
-olProjection :: Lens' ObjectsList' (Maybe StorageObjectsListProjection)
+olProjection :: Lens' ObjectsList' (Maybe ObjectsListProjection)
 olProjection
   = lens _olProjection (\ s a -> s{_olProjection = a})
 

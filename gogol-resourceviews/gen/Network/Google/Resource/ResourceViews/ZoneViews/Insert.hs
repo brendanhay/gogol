@@ -59,7 +59,7 @@ type ZoneViewsInsertResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] ResourceView :>
+                           ReqBody '[OctetStream] ResourceView :>
                              Post '[JSON] Operation
 
 -- | Create a resource view.

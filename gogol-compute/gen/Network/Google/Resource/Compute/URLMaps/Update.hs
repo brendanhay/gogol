@@ -59,7 +59,8 @@ type URLMapsUpdateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] URLMap :> Put '[JSON] Operation
+                           ReqBody '[OctetStream] URLMap :>
+                             Put '[JSON] Operation
 
 -- | Update the entire content of the UrlMap resource.
 --

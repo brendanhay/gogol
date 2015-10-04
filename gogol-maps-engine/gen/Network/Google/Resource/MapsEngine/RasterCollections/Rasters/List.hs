@@ -62,9 +62,7 @@ type RasterCollectionsRastersListResource =
          "rasters" :>
            QueryParam "createdAfter" DateTime' :>
              QueryParam "creatorEmail" Text :>
-               QueryParam "role"
-                 MapsEngineRasterCollectionsRastersListRole
-                 :>
+               QueryParam "role" RasterCollectionsRastersListRole :>
                  QueryParam "bbox" Text :>
                    QueryParam "modifiedAfter" DateTime' :>
                      QueryParam "modifiedBefore" DateTime' :>
@@ -93,7 +91,7 @@ data RasterCollectionsRastersList' = RasterCollectionsRastersList'
     , _rcrlPrettyPrint    :: !Bool
     , _rcrlUserIP         :: !(Maybe Text)
     , _rcrlCreatorEmail   :: !(Maybe Text)
-    , _rcrlRole           :: !(Maybe MapsEngineRasterCollectionsRastersListRole)
+    , _rcrlRole           :: !(Maybe RasterCollectionsRastersListRole)
     , _rcrlKey            :: !(Maybe Key)
     , _rcrlBbox           :: !(Maybe Text)
     , _rcrlId             :: !Text
@@ -209,7 +207,7 @@ rcrlCreatorEmail
 
 -- | The role parameter indicates that the response should only contain
 -- assets where the current user has the specified level of access.
-rcrlRole :: Lens' RasterCollectionsRastersList' (Maybe MapsEngineRasterCollectionsRastersListRole)
+rcrlRole :: Lens' RasterCollectionsRastersList' (Maybe RasterCollectionsRastersListRole)
 rcrlRole = lens _rcrlRole (\ s a -> s{_rcrlRole = a})
 
 -- | API key. Your API key identifies your project and provides you with API

@@ -56,7 +56,8 @@ type RasterCollectionsPatchResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] RasterCollection :> Patch '[JSON] ()
+                       ReqBody '[OctetStream] RasterCollection :>
+                         Patch '[JSON] ()
 
 -- | Mutate a raster collection asset.
 --

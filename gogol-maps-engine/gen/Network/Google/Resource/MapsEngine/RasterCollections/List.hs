@@ -61,11 +61,10 @@ type RasterCollectionsListResource =
      "rasterCollections" :>
        QueryParam "createdAfter" DateTime' :>
          QueryParam "creatorEmail" Text :>
-           QueryParam "role" MapsEngineRasterCollectionsListRole
-             :>
+           QueryParam "role" RasterCollectionsListRole :>
              QueryParam "bbox" Text :>
                QueryParam "processingStatus"
-                 MapsEngineRasterCollectionsListProcessingStatus
+                 RasterCollectionsListProcessingStatus
                  :>
                  QueryParam "modifiedAfter" DateTime' :>
                    QueryParam "modifiedBefore" DateTime' :>
@@ -95,10 +94,10 @@ data RasterCollectionsList' = RasterCollectionsList'
     , _rclPrettyPrint      :: !Bool
     , _rclUserIP           :: !(Maybe Text)
     , _rclCreatorEmail     :: !(Maybe Text)
-    , _rclRole             :: !(Maybe MapsEngineRasterCollectionsListRole)
+    , _rclRole             :: !(Maybe RasterCollectionsListRole)
     , _rclKey              :: !(Maybe Key)
     , _rclBbox             :: !(Maybe Text)
-    , _rclProcessingStatus :: !(Maybe MapsEngineRasterCollectionsListProcessingStatus)
+    , _rclProcessingStatus :: !(Maybe RasterCollectionsListProcessingStatus)
     , _rclModifiedAfter    :: !(Maybe DateTime')
     , _rclModifiedBefore   :: !(Maybe DateTime')
     , _rclPageToken        :: !(Maybe Text)
@@ -213,7 +212,7 @@ rclCreatorEmail
 
 -- | The role parameter indicates that the response should only contain
 -- assets where the current user has the specified level of access.
-rclRole :: Lens' RasterCollectionsList' (Maybe MapsEngineRasterCollectionsListRole)
+rclRole :: Lens' RasterCollectionsList' (Maybe RasterCollectionsListRole)
 rclRole = lens _rclRole (\ s a -> s{_rclRole = a})
 
 -- | API key. Your API key identifies your project and provides you with API
@@ -227,7 +226,7 @@ rclKey = lens _rclKey (\ s a -> s{_rclKey = a})
 rclBbox :: Lens' RasterCollectionsList' (Maybe Text)
 rclBbox = lens _rclBbox (\ s a -> s{_rclBbox = a})
 
-rclProcessingStatus :: Lens' RasterCollectionsList' (Maybe MapsEngineRasterCollectionsListProcessingStatus)
+rclProcessingStatus :: Lens' RasterCollectionsList' (Maybe RasterCollectionsListProcessingStatus)
 rclProcessingStatus
   = lens _rclProcessingStatus
       (\ s a -> s{_rclProcessingStatus = a})

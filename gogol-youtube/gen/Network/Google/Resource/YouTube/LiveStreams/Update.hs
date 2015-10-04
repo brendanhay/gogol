@@ -62,7 +62,8 @@ type LiveStreamsUpdateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] LiveStream :> Put '[JSON] LiveStream
+                           ReqBody '[OctetStream] LiveStream :>
+                             Put '[JSON] LiveStream
 
 -- | Updates a video stream. If the properties that you want to change cannot
 -- be updated, then you need to create a new stream with the proper

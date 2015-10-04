@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.AccountPermissions.List
     , aplQuotaUser
     , aplPrettyPrint
     , aplUserIP
-    , aplProfileId
+    , aplProFileId
     , aplKey
     , aplOAuthToken
     , aplFields
@@ -65,7 +65,7 @@ data AccountPermissionsList' = AccountPermissionsList'
     { _aplQuotaUser   :: !(Maybe Text)
     , _aplPrettyPrint :: !Bool
     , _aplUserIP      :: !(Maybe Text)
-    , _aplProfileId   :: !Int64
+    , _aplProFileId   :: !Int64
     , _aplKey         :: !(Maybe Key)
     , _aplOAuthToken  :: !(Maybe OAuthToken)
     , _aplFields      :: !(Maybe Text)
@@ -81,7 +81,7 @@ data AccountPermissionsList' = AccountPermissionsList'
 --
 -- * 'aplUserIP'
 --
--- * 'aplProfileId'
+-- * 'aplProFileId'
 --
 -- * 'aplKey'
 --
@@ -91,12 +91,12 @@ data AccountPermissionsList' = AccountPermissionsList'
 accountPermissionsList'
     :: Int64 -- ^ 'profileId'
     -> AccountPermissionsList'
-accountPermissionsList' pAplProfileId_ =
+accountPermissionsList' pAplProFileId_ =
     AccountPermissionsList'
     { _aplQuotaUser = Nothing
     , _aplPrettyPrint = True
     , _aplUserIP = Nothing
-    , _aplProfileId = pAplProfileId_
+    , _aplProFileId = pAplProFileId_
     , _aplKey = Nothing
     , _aplOAuthToken = Nothing
     , _aplFields = Nothing
@@ -122,9 +122,9 @@ aplUserIP
   = lens _aplUserIP (\ s a -> s{_aplUserIP = a})
 
 -- | User profile ID associated with this request.
-aplProfileId :: Lens' AccountPermissionsList' Int64
-aplProfileId
-  = lens _aplProfileId (\ s a -> s{_aplProfileId = a})
+aplProFileId :: Lens' AccountPermissionsList' Int64
+aplProFileId
+  = lens _aplProFileId (\ s a -> s{_aplProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -152,7 +152,7 @@ instance GoogleRequest AccountPermissionsList' where
              AccountPermissionsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AccountPermissionsList'{..}
-          = go _aplProfileId _aplQuotaUser
+          = go _aplProFileId _aplQuotaUser
               (Just _aplPrettyPrint)
               _aplUserIP
               _aplFields

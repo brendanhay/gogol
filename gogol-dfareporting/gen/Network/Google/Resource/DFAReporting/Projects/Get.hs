@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Projects.Get
     , proQuotaUser
     , proPrettyPrint
     , proUserIP
-    , proProfileId
+    , proProFileId
     , proKey
     , proId
     , proOAuthToken
@@ -66,7 +66,7 @@ data ProjectsGet' = ProjectsGet'
     { _proQuotaUser   :: !(Maybe Text)
     , _proPrettyPrint :: !Bool
     , _proUserIP      :: !(Maybe Text)
-    , _proProfileId   :: !Int64
+    , _proProFileId   :: !Int64
     , _proKey         :: !(Maybe Key)
     , _proId          :: !Int64
     , _proOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +83,7 @@ data ProjectsGet' = ProjectsGet'
 --
 -- * 'proUserIP'
 --
--- * 'proProfileId'
+-- * 'proProFileId'
 --
 -- * 'proKey'
 --
@@ -96,12 +96,12 @@ projectsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> ProjectsGet'
-projectsGet' pProProfileId_ pProId_ =
+projectsGet' pProProFileId_ pProId_ =
     ProjectsGet'
     { _proQuotaUser = Nothing
     , _proPrettyPrint = True
     , _proUserIP = Nothing
-    , _proProfileId = pProProfileId_
+    , _proProFileId = pProProFileId_
     , _proKey = Nothing
     , _proId = pProId_
     , _proOAuthToken = Nothing
@@ -128,9 +128,9 @@ proUserIP
   = lens _proUserIP (\ s a -> s{_proUserIP = a})
 
 -- | User profile ID associated with this request.
-proProfileId :: Lens' ProjectsGet' Int64
-proProfileId
-  = lens _proProfileId (\ s a -> s{_proProfileId = a})
+proProFileId :: Lens' ProjectsGet' Int64
+proProFileId
+  = lens _proProFileId (\ s a -> s{_proProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -161,7 +161,7 @@ instance GoogleRequest ProjectsGet' where
         type Rs ProjectsGet' = Project
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ProjectsGet'{..}
-          = go _proProfileId _proId _proQuotaUser
+          = go _proProFileId _proId _proQuotaUser
               (Just _proPrettyPrint)
               _proUserIP
               _proFields

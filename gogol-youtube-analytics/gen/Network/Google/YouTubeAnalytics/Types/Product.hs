@@ -19,12 +19,56 @@ import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types.Sum
 
 --
+-- /See:/ 'groupContentDetails' smart constructor.
+data GroupContentDetails = GroupContentDetails
+    { _gcdItemType  :: !(Maybe Text)
+    , _gcdItemCount :: !(Maybe Word64)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GroupContentDetails' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcdItemType'
+--
+-- * 'gcdItemCount'
+groupContentDetails
+    :: GroupContentDetails
+groupContentDetails =
+    GroupContentDetails
+    { _gcdItemType = Nothing
+    , _gcdItemCount = Nothing
+    }
+
+gcdItemType :: Lens' GroupContentDetails (Maybe Text)
+gcdItemType
+  = lens _gcdItemType (\ s a -> s{_gcdItemType = a})
+
+gcdItemCount :: Lens' GroupContentDetails (Maybe Word64)
+gcdItemCount
+  = lens _gcdItemCount (\ s a -> s{_gcdItemCount = a})
+
+instance FromJSON GroupContentDetails where
+        parseJSON
+          = withObject "GroupContentDetails"
+              (\ o ->
+                 GroupContentDetails <$>
+                   (o .:? "itemType") <*> (o .:? "itemCount"))
+
+instance ToJSON GroupContentDetails where
+        toJSON GroupContentDetails{..}
+          = object
+              (catMaybes
+                 [("itemType" .=) <$> _gcdItemType,
+                  ("itemCount" .=) <$> _gcdItemCount])
+
+--
 -- /See:/ 'group'' smart constructor.
 data Group = Group
     { _gEtag           :: !(Maybe Text)
-    , _gSnippet        :: !(Maybe Snippet)
+    , _gSnippet        :: !(Maybe GroupSnippet)
     , _gKind           :: !Text
-    , _gContentDetails :: !(Maybe ContentDetails)
+    , _gContentDetails :: !(Maybe GroupContentDetails)
     , _gId             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -55,13 +99,13 @@ group' =
 gEtag :: Lens' Group (Maybe Text)
 gEtag = lens _gEtag (\ s a -> s{_gEtag = a})
 
-gSnippet :: Lens' Group (Maybe Snippet)
+gSnippet :: Lens' Group (Maybe GroupSnippet)
 gSnippet = lens _gSnippet (\ s a -> s{_gSnippet = a})
 
 gKind :: Lens' Group Text
 gKind = lens _gKind (\ s a -> s{_gKind = a})
 
-gContentDetails :: Lens' Group (Maybe ContentDetails)
+gContentDetails :: Lens' Group (Maybe GroupContentDetails)
 gContentDetails
   = lens _gContentDetails
       (\ s a -> s{_gContentDetails = a})
@@ -90,257 +134,104 @@ instance ToJSON Group where
                   ("id" .=) <$> _gId])
 
 --
--- /See:/ 'columnHeadersItem' smart constructor.
-data ColumnHeadersItem = ColumnHeadersItem
-    { _chiColumnType :: !(Maybe Text)
-    , _chiName       :: !(Maybe Text)
-    , _chiDataType   :: !(Maybe Text)
+-- /See:/ 'groupItemResource' smart constructor.
+data GroupItemResource = GroupItemResource
+    { _girKind :: !(Maybe Text)
+    , _girId   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ColumnHeadersItem' with the minimum fields required to make a request.
+-- | Creates a value of 'GroupItemResource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'chiColumnType'
+-- * 'girKind'
 --
--- * 'chiName'
+-- * 'girId'
+groupItemResource
+    :: GroupItemResource
+groupItemResource =
+    GroupItemResource
+    { _girKind = Nothing
+    , _girId = Nothing
+    }
+
+girKind :: Lens' GroupItemResource (Maybe Text)
+girKind = lens _girKind (\ s a -> s{_girKind = a})
+
+girId :: Lens' GroupItemResource (Maybe Text)
+girId = lens _girId (\ s a -> s{_girId = a})
+
+instance FromJSON GroupItemResource where
+        parseJSON
+          = withObject "GroupItemResource"
+              (\ o ->
+                 GroupItemResource <$>
+                   (o .:? "kind") <*> (o .:? "id"))
+
+instance ToJSON GroupItemResource where
+        toJSON GroupItemResource{..}
+          = object
+              (catMaybes
+                 [("kind" .=) <$> _girKind, ("id" .=) <$> _girId])
+
 --
--- * 'chiDataType'
-columnHeadersItem
-    :: ColumnHeadersItem
-columnHeadersItem =
-    ColumnHeadersItem
-    { _chiColumnType = Nothing
-    , _chiName = Nothing
-    , _chiDataType = Nothing
+-- /See:/ 'resultTableColumnHeadersItem' smart constructor.
+data ResultTableColumnHeadersItem = ResultTableColumnHeadersItem
+    { _rtchiColumnType :: !(Maybe Text)
+    , _rtchiName       :: !(Maybe Text)
+    , _rtchiDataType   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ResultTableColumnHeadersItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rtchiColumnType'
+--
+-- * 'rtchiName'
+--
+-- * 'rtchiDataType'
+resultTableColumnHeadersItem
+    :: ResultTableColumnHeadersItem
+resultTableColumnHeadersItem =
+    ResultTableColumnHeadersItem
+    { _rtchiColumnType = Nothing
+    , _rtchiName = Nothing
+    , _rtchiDataType = Nothing
     }
 
 -- | The type of the column (DIMENSION or METRIC).
-chiColumnType :: Lens' ColumnHeadersItem (Maybe Text)
-chiColumnType
-  = lens _chiColumnType
-      (\ s a -> s{_chiColumnType = a})
+rtchiColumnType :: Lens' ResultTableColumnHeadersItem (Maybe Text)
+rtchiColumnType
+  = lens _rtchiColumnType
+      (\ s a -> s{_rtchiColumnType = a})
 
 -- | The name of the dimension or metric.
-chiName :: Lens' ColumnHeadersItem (Maybe Text)
-chiName = lens _chiName (\ s a -> s{_chiName = a})
+rtchiName :: Lens' ResultTableColumnHeadersItem (Maybe Text)
+rtchiName
+  = lens _rtchiName (\ s a -> s{_rtchiName = a})
 
 -- | The type of the data in the column (STRING, INTEGER, FLOAT, etc.).
-chiDataType :: Lens' ColumnHeadersItem (Maybe Text)
-chiDataType
-  = lens _chiDataType (\ s a -> s{_chiDataType = a})
+rtchiDataType :: Lens' ResultTableColumnHeadersItem (Maybe Text)
+rtchiDataType
+  = lens _rtchiDataType
+      (\ s a -> s{_rtchiDataType = a})
 
-instance FromJSON ColumnHeadersItem where
+instance FromJSON ResultTableColumnHeadersItem where
         parseJSON
-          = withObject "ColumnHeadersItem"
+          = withObject "ResultTableColumnHeadersItem"
               (\ o ->
-                 ColumnHeadersItem <$>
+                 ResultTableColumnHeadersItem <$>
                    (o .:? "columnType") <*> (o .:? "name") <*>
                      (o .:? "dataType"))
 
-instance ToJSON ColumnHeadersItem where
-        toJSON ColumnHeadersItem{..}
+instance ToJSON ResultTableColumnHeadersItem where
+        toJSON ResultTableColumnHeadersItem{..}
           = object
               (catMaybes
-                 [("columnType" .=) <$> _chiColumnType,
-                  ("name" .=) <$> _chiName,
-                  ("dataType" .=) <$> _chiDataType])
-
---
--- /See:/ 'snippet' smart constructor.
-data Snippet = Snippet
-    { _sPublishedAt :: !(Maybe DateTime')
-    , _sTitle       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Snippet' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'sPublishedAt'
---
--- * 'sTitle'
-snippet
-    :: Snippet
-snippet =
-    Snippet
-    { _sPublishedAt = Nothing
-    , _sTitle = Nothing
-    }
-
-sPublishedAt :: Lens' Snippet (Maybe UTCTime)
-sPublishedAt
-  = lens _sPublishedAt (\ s a -> s{_sPublishedAt = a})
-      . mapping _DateTime
-
-sTitle :: Lens' Snippet (Maybe Text)
-sTitle = lens _sTitle (\ s a -> s{_sTitle = a})
-
-instance FromJSON Snippet where
-        parseJSON
-          = withObject "Snippet"
-              (\ o ->
-                 Snippet <$>
-                   (o .:? "publishedAt") <*> (o .:? "title"))
-
-instance ToJSON Snippet where
-        toJSON Snippet{..}
-          = object
-              (catMaybes
-                 [("publishedAt" .=) <$> _sPublishedAt,
-                  ("title" .=) <$> _sTitle])
-
---
--- /See:/ 'contentDetails' smart constructor.
-data ContentDetails = ContentDetails
-    { _cdItemType  :: !(Maybe Text)
-    , _cdItemCount :: !(Maybe Word64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ContentDetails' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cdItemType'
---
--- * 'cdItemCount'
-contentDetails
-    :: ContentDetails
-contentDetails =
-    ContentDetails
-    { _cdItemType = Nothing
-    , _cdItemCount = Nothing
-    }
-
-cdItemType :: Lens' ContentDetails (Maybe Text)
-cdItemType
-  = lens _cdItemType (\ s a -> s{_cdItemType = a})
-
-cdItemCount :: Lens' ContentDetails (Maybe Word64)
-cdItemCount
-  = lens _cdItemCount (\ s a -> s{_cdItemCount = a})
-
-instance FromJSON ContentDetails where
-        parseJSON
-          = withObject "ContentDetails"
-              (\ o ->
-                 ContentDetails <$>
-                   (o .:? "itemType") <*> (o .:? "itemCount"))
-
-instance ToJSON ContentDetails where
-        toJSON ContentDetails{..}
-          = object
-              (catMaybes
-                 [("itemType" .=) <$> _cdItemType,
-                  ("itemCount" .=) <$> _cdItemCount])
-
--- | Period included in the report. For reports containing all entities
--- endTime is not set. Both startTime and endTime are inclusive.
---
--- /See:/ 'timeSpan' smart constructor.
-data TimeSpan = TimeSpan
-    { _tsStartTime :: !(Maybe DateTime')
-    , _tsEndTime   :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'TimeSpan' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'tsStartTime'
---
--- * 'tsEndTime'
-timeSpan
-    :: TimeSpan
-timeSpan =
-    TimeSpan
-    { _tsStartTime = Nothing
-    , _tsEndTime = Nothing
-    }
-
--- | Start of the period included in the report. Inclusive.
-tsStartTime :: Lens' TimeSpan (Maybe UTCTime)
-tsStartTime
-  = lens _tsStartTime (\ s a -> s{_tsStartTime = a}) .
-      mapping _DateTime
-
--- | End of the period included in the report. Inclusive. For reports
--- containing all entities endTime is not set.
-tsEndTime :: Lens' TimeSpan (Maybe UTCTime)
-tsEndTime
-  = lens _tsEndTime (\ s a -> s{_tsEndTime = a}) .
-      mapping _DateTime
-
-instance FromJSON TimeSpan where
-        parseJSON
-          = withObject "TimeSpan"
-              (\ o ->
-                 TimeSpan <$>
-                   (o .:? "startTime") <*> (o .:? "endTime"))
-
-instance ToJSON TimeSpan where
-        toJSON TimeSpan{..}
-          = object
-              (catMaybes
-                 [("startTime" .=) <$> _tsStartTime,
-                  ("endTime" .=) <$> _tsEndTime])
-
---
--- /See:/ 'outputsItem' smart constructor.
-data OutputsItem = OutputsItem
-    { _oiFormat      :: !(Maybe Text)
-    , _oiDownloadURL :: !(Maybe Text)
-    , _oiType        :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'OutputsItem' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'oiFormat'
---
--- * 'oiDownloadURL'
---
--- * 'oiType'
-outputsItem
-    :: OutputsItem
-outputsItem =
-    OutputsItem
-    { _oiFormat = Nothing
-    , _oiDownloadURL = Nothing
-    , _oiType = "cloudStorageOutput"
-    }
-
--- | Format of the output.
-oiFormat :: Lens' OutputsItem (Maybe Text)
-oiFormat = lens _oiFormat (\ s a -> s{_oiFormat = a})
-
--- | Cloud storage URL to download this report. This URL is valid for 30
--- minutes.
-oiDownloadURL :: Lens' OutputsItem (Maybe Text)
-oiDownloadURL
-  = lens _oiDownloadURL
-      (\ s a -> s{_oiDownloadURL = a})
-
--- | Type of the output.
-oiType :: Lens' OutputsItem Text
-oiType = lens _oiType (\ s a -> s{_oiType = a})
-
-instance FromJSON OutputsItem where
-        parseJSON
-          = withObject "OutputsItem"
-              (\ o ->
-                 OutputsItem <$>
-                   (o .:? "format") <*> (o .:? "downloadUrl") <*>
-                     (o .:? "type" .!= "cloudStorageOutput"))
-
-instance ToJSON OutputsItem where
-        toJSON OutputsItem{..}
-          = object
-              (catMaybes
-                 [("format" .=) <$> _oiFormat,
-                  ("downloadUrl" .=) <$> _oiDownloadURL,
-                  Just ("type" .= _oiType)])
+                 [("columnType" .=) <$> _rtchiColumnType,
+                  ("name" .=) <$> _rtchiName,
+                  ("dataType" .=) <$> _rtchiDataType])
 
 -- | Contains a single result table. The table is returned as an array of
 -- rows that contain the values for the cells of the table. Depending on
@@ -351,7 +242,7 @@ instance ToJSON OutputsItem where
 data ResultTable = ResultTable
     { _rtKind          :: !Text
     , _rtRows          :: !(Maybe [[JSONValue]])
-    , _rtColumnHeaders :: !(Maybe [ColumnHeadersItem])
+    , _rtColumnHeaders :: !(Maybe [ResultTableColumnHeadersItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResultTable' with the minimum fields required to make a request.
@@ -400,7 +291,7 @@ rtRows
 -- the parameters dimensions=ageGroup,gender&metrics=viewerPercentage, the
 -- API response will return columns in this order:
 -- ageGroup,gender,viewerPercentage.
-rtColumnHeaders :: Lens' ResultTable [ColumnHeadersItem]
+rtColumnHeaders :: Lens' ResultTable [ResultTableColumnHeadersItem]
 rtColumnHeaders
   = lens _rtColumnHeaders
       (\ s a -> s{_rtColumnHeaders = a})
@@ -502,45 +393,6 @@ instance ToJSON BatchReportDefinition where
                   Just ("kind" .= _brdKind), ("name" .=) <$> _brdName,
                   ("id" .=) <$> _brdId, ("type" .=) <$> _brdType])
 
---
--- /See:/ 'resource' smart constructor.
-data Resource = Resource
-    { _rKind :: !(Maybe Text)
-    , _rId   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Resource' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rKind'
---
--- * 'rId'
-resource
-    :: Resource
-resource =
-    Resource
-    { _rKind = Nothing
-    , _rId = Nothing
-    }
-
-rKind :: Lens' Resource (Maybe Text)
-rKind = lens _rKind (\ s a -> s{_rKind = a})
-
-rId :: Lens' Resource (Maybe Text)
-rId = lens _rId (\ s a -> s{_rId = a})
-
-instance FromJSON Resource where
-        parseJSON
-          = withObject "Resource"
-              (\ o -> Resource <$> (o .:? "kind") <*> (o .:? "id"))
-
-instance ToJSON Resource where
-        toJSON Resource{..}
-          = object
-              (catMaybes
-                 [("kind" .=) <$> _rKind, ("id" .=) <$> _rId])
-
 -- | Contains single batchReport resource.
 --
 -- /See:/ 'batchReport' smart constructor.
@@ -548,8 +400,8 @@ data BatchReport = BatchReport
     { _brTimeUpdated :: !(Maybe DateTime')
     , _brKind        :: !Text
     , _brReportId    :: !(Maybe Text)
-    , _brTimeSpan    :: !(Maybe TimeSpan)
-    , _brOutputs     :: !(Maybe [OutputsItem])
+    , _brTimeSpan    :: !(Maybe BatchReportTimeSpan)
+    , _brOutputs     :: !(Maybe [BatchReportOutputsItem])
     , _brId          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -599,12 +451,12 @@ brReportId
 
 -- | Period included in the report. For reports containing all entities
 -- endTime is not set. Both startTime and endTime are inclusive.
-brTimeSpan :: Lens' BatchReport (Maybe TimeSpan)
+brTimeSpan :: Lens' BatchReport (Maybe BatchReportTimeSpan)
 brTimeSpan
   = lens _brTimeSpan (\ s a -> s{_brTimeSpan = a})
 
 -- | Report outputs.
-brOutputs :: Lens' BatchReport [OutputsItem]
+brOutputs :: Lens' BatchReport [BatchReportOutputsItem]
 brOutputs
   = lens _brOutputs (\ s a -> s{_brOutputs = a}) .
       _Default
@@ -637,11 +489,56 @@ instance ToJSON BatchReport where
                   ("outputs" .=) <$> _brOutputs, ("id" .=) <$> _brId])
 
 --
+-- /See:/ 'groupSnippet' smart constructor.
+data GroupSnippet = GroupSnippet
+    { _gsPublishedAt :: !(Maybe DateTime')
+    , _gsTitle       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GroupSnippet' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gsPublishedAt'
+--
+-- * 'gsTitle'
+groupSnippet
+    :: GroupSnippet
+groupSnippet =
+    GroupSnippet
+    { _gsPublishedAt = Nothing
+    , _gsTitle = Nothing
+    }
+
+gsPublishedAt :: Lens' GroupSnippet (Maybe UTCTime)
+gsPublishedAt
+  = lens _gsPublishedAt
+      (\ s a -> s{_gsPublishedAt = a})
+      . mapping _DateTime
+
+gsTitle :: Lens' GroupSnippet (Maybe Text)
+gsTitle = lens _gsTitle (\ s a -> s{_gsTitle = a})
+
+instance FromJSON GroupSnippet where
+        parseJSON
+          = withObject "GroupSnippet"
+              (\ o ->
+                 GroupSnippet <$>
+                   (o .:? "publishedAt") <*> (o .:? "title"))
+
+instance ToJSON GroupSnippet where
+        toJSON GroupSnippet{..}
+          = object
+              (catMaybes
+                 [("publishedAt" .=) <$> _gsPublishedAt,
+                  ("title" .=) <$> _gsTitle])
+
+--
 -- /See:/ 'groupItem' smart constructor.
 data GroupItem = GroupItem
     { _giEtag     :: !(Maybe Text)
     , _giKind     :: !Text
-    , _giResource :: !(Maybe Resource)
+    , _giResource :: !(Maybe GroupItemResource)
     , _giGroupId  :: !(Maybe Text)
     , _giId       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -676,7 +573,7 @@ giEtag = lens _giEtag (\ s a -> s{_giEtag = a})
 giKind :: Lens' GroupItem Text
 giKind = lens _giKind (\ s a -> s{_giKind = a})
 
-giResource :: Lens' GroupItem (Maybe Resource)
+giResource :: Lens' GroupItem (Maybe GroupItemResource)
 giResource
   = lens _giResource (\ s a -> s{_giResource = a})
 
@@ -811,6 +708,116 @@ instance ToJSON BatchReportList where
               (catMaybes
                  [Just ("kind" .= _brlKind),
                   ("items" .=) <$> _brlItems])
+
+--
+-- /See:/ 'batchReportOutputsItem' smart constructor.
+data BatchReportOutputsItem = BatchReportOutputsItem
+    { _broiFormat      :: !(Maybe Text)
+    , _broiDownloadURL :: !(Maybe Text)
+    , _broiType        :: !Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BatchReportOutputsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'broiFormat'
+--
+-- * 'broiDownloadURL'
+--
+-- * 'broiType'
+batchReportOutputsItem
+    :: BatchReportOutputsItem
+batchReportOutputsItem =
+    BatchReportOutputsItem
+    { _broiFormat = Nothing
+    , _broiDownloadURL = Nothing
+    , _broiType = "cloudStorageOutput"
+    }
+
+-- | Format of the output.
+broiFormat :: Lens' BatchReportOutputsItem (Maybe Text)
+broiFormat
+  = lens _broiFormat (\ s a -> s{_broiFormat = a})
+
+-- | Cloud storage URL to download this report. This URL is valid for 30
+-- minutes.
+broiDownloadURL :: Lens' BatchReportOutputsItem (Maybe Text)
+broiDownloadURL
+  = lens _broiDownloadURL
+      (\ s a -> s{_broiDownloadURL = a})
+
+-- | Type of the output.
+broiType :: Lens' BatchReportOutputsItem Text
+broiType = lens _broiType (\ s a -> s{_broiType = a})
+
+instance FromJSON BatchReportOutputsItem where
+        parseJSON
+          = withObject "BatchReportOutputsItem"
+              (\ o ->
+                 BatchReportOutputsItem <$>
+                   (o .:? "format") <*> (o .:? "downloadUrl") <*>
+                     (o .:? "type" .!= "cloudStorageOutput"))
+
+instance ToJSON BatchReportOutputsItem where
+        toJSON BatchReportOutputsItem{..}
+          = object
+              (catMaybes
+                 [("format" .=) <$> _broiFormat,
+                  ("downloadUrl" .=) <$> _broiDownloadURL,
+                  Just ("type" .= _broiType)])
+
+-- | Period included in the report. For reports containing all entities
+-- endTime is not set. Both startTime and endTime are inclusive.
+--
+-- /See:/ 'batchReportTimeSpan' smart constructor.
+data BatchReportTimeSpan = BatchReportTimeSpan
+    { _brtsStartTime :: !(Maybe DateTime')
+    , _brtsEndTime   :: !(Maybe DateTime')
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BatchReportTimeSpan' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'brtsStartTime'
+--
+-- * 'brtsEndTime'
+batchReportTimeSpan
+    :: BatchReportTimeSpan
+batchReportTimeSpan =
+    BatchReportTimeSpan
+    { _brtsStartTime = Nothing
+    , _brtsEndTime = Nothing
+    }
+
+-- | Start of the period included in the report. Inclusive.
+brtsStartTime :: Lens' BatchReportTimeSpan (Maybe UTCTime)
+brtsStartTime
+  = lens _brtsStartTime
+      (\ s a -> s{_brtsStartTime = a})
+      . mapping _DateTime
+
+-- | End of the period included in the report. Inclusive. For reports
+-- containing all entities endTime is not set.
+brtsEndTime :: Lens' BatchReportTimeSpan (Maybe UTCTime)
+brtsEndTime
+  = lens _brtsEndTime (\ s a -> s{_brtsEndTime = a}) .
+      mapping _DateTime
+
+instance FromJSON BatchReportTimeSpan where
+        parseJSON
+          = withObject "BatchReportTimeSpan"
+              (\ o ->
+                 BatchReportTimeSpan <$>
+                   (o .:? "startTime") <*> (o .:? "endTime"))
+
+instance ToJSON BatchReportTimeSpan where
+        toJSON BatchReportTimeSpan{..}
+          = object
+              (catMaybes
+                 [("startTime" .=) <$> _brtsStartTime,
+                  ("endTime" .=) <$> _brtsEndTime])
 
 -- | A paginated list of grouList resources returned in response to a
 -- youtubeAnalytics.groupApi.list request.

@@ -54,10 +54,10 @@ type URLCrawlErrorsSamplesGetResource =
          "urlCrawlErrorsSamples" :>
            Capture "url" Text :>
              QueryParam "category"
-               WebmastersURLCrawlErrorsSamplesGetCategory
+               URLCrawlErrorsSamplesGetCategory
                :>
                QueryParam "platform"
-                 WebmastersURLCrawlErrorsSamplesGetPlatform
+                 URLCrawlErrorsSamplesGetPlatform
                  :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
@@ -74,9 +74,9 @@ type URLCrawlErrorsSamplesGetResource =
 data URLCrawlErrorsSamplesGet' = URLCrawlErrorsSamplesGet'
     { _ucesgQuotaUser   :: !(Maybe Text)
     , _ucesgPrettyPrint :: !Bool
-    , _ucesgPlatform    :: !WebmastersURLCrawlErrorsSamplesGetPlatform
+    , _ucesgPlatform    :: !URLCrawlErrorsSamplesGetPlatform
     , _ucesgUserIP      :: !(Maybe Text)
-    , _ucesgCategory    :: !WebmastersURLCrawlErrorsSamplesGetCategory
+    , _ucesgCategory    :: !URLCrawlErrorsSamplesGetCategory
     , _ucesgSiteURL     :: !Text
     , _ucesgURL         :: !Text
     , _ucesgKey         :: !(Maybe Key)
@@ -108,8 +108,8 @@ data URLCrawlErrorsSamplesGet' = URLCrawlErrorsSamplesGet'
 --
 -- * 'ucesgFields'
 urlCrawlErrorsSamplesGet'
-    :: WebmastersURLCrawlErrorsSamplesGetPlatform -- ^ 'platform'
-    -> WebmastersURLCrawlErrorsSamplesGetCategory -- ^ 'category'
+    :: URLCrawlErrorsSamplesGetPlatform -- ^ 'platform'
+    -> URLCrawlErrorsSamplesGetCategory -- ^ 'category'
     -> Text -- ^ 'siteUrl'
     -> Text -- ^ 'url'
     -> URLCrawlErrorsSamplesGet'
@@ -142,7 +142,7 @@ ucesgPrettyPrint
       (\ s a -> s{_ucesgPrettyPrint = a})
 
 -- | The user agent type (platform) that made the request. For example: web
-ucesgPlatform :: Lens' URLCrawlErrorsSamplesGet' WebmastersURLCrawlErrorsSamplesGetPlatform
+ucesgPlatform :: Lens' URLCrawlErrorsSamplesGet' URLCrawlErrorsSamplesGetPlatform
 ucesgPlatform
   = lens _ucesgPlatform
       (\ s a -> s{_ucesgPlatform = a})
@@ -154,7 +154,7 @@ ucesgUserIP
   = lens _ucesgUserIP (\ s a -> s{_ucesgUserIP = a})
 
 -- | The crawl error category. For example: authPermissions
-ucesgCategory :: Lens' URLCrawlErrorsSamplesGet' WebmastersURLCrawlErrorsSamplesGetCategory
+ucesgCategory :: Lens' URLCrawlErrorsSamplesGet' URLCrawlErrorsSamplesGetCategory
 ucesgCategory
   = lens _ucesgCategory
       (\ s a -> s{_ucesgCategory = a})

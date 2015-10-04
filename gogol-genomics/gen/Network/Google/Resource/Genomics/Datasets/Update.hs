@@ -56,7 +56,7 @@ type DatasetsUpdateResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Dataset :> Put '[JSON] Dataset
+                       ReqBody '[OctetStream] Dataset :> Put '[JSON] Dataset
 
 -- | Updates a dataset.
 --

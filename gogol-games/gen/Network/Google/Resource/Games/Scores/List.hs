@@ -31,18 +31,18 @@ module Network.Google.Resource.Games.Scores.List
     , ScoresList'
 
     -- * Request Lenses
-    , scoQuotaUser
-    , scoPrettyPrint
-    , scoUserIP
-    , scoCollection
-    , scoTimeSpan
-    , scoLeaderboardId
-    , scoKey
-    , scoLanguage
-    , scoPageToken
-    , scoOAuthToken
-    , scoMaxResults
-    , scoFields
+    , sllQuotaUser
+    , sllPrettyPrint
+    , sllUserIP
+    , sllCollection
+    , sllTimeSpan
+    , sllLeaderboardId
+    , sllKey
+    , sllLanguage
+    , sllPageToken
+    , sllOAuthToken
+    , sllMaxResults
+    , sllFields
     ) where
 
 import           Network.Google.Games.Types
@@ -54,8 +54,8 @@ type ScoresListResource =
      "leaderboards" :>
        Capture "leaderboardId" Text :>
          "scores" :>
-           Capture "collection" GamesScoresListCollection :>
-             QueryParam "timeSpan" TimeSpan :>
+           Capture "collection" ScoresListCollection :>
+             QueryParam "timeSpan" ScoresListTimeSpan :>
                QueryParam "language" Text :>
                  QueryParam "pageToken" Text :>
                    QueryParam "maxResults" Int32 :>
@@ -72,158 +72,158 @@ type ScoresListResource =
 --
 -- /See:/ 'scoresList'' smart constructor.
 data ScoresList' = ScoresList'
-    { _scoQuotaUser     :: !(Maybe Text)
-    , _scoPrettyPrint   :: !Bool
-    , _scoUserIP        :: !(Maybe Text)
-    , _scoCollection    :: !GamesScoresListCollection
-    , _scoTimeSpan      :: !TimeSpan
-    , _scoLeaderboardId :: !Text
-    , _scoKey           :: !(Maybe Key)
-    , _scoLanguage      :: !(Maybe Text)
-    , _scoPageToken     :: !(Maybe Text)
-    , _scoOAuthToken    :: !(Maybe OAuthToken)
-    , _scoMaxResults    :: !(Maybe Int32)
-    , _scoFields        :: !(Maybe Text)
+    { _sllQuotaUser     :: !(Maybe Text)
+    , _sllPrettyPrint   :: !Bool
+    , _sllUserIP        :: !(Maybe Text)
+    , _sllCollection    :: !ScoresListCollection
+    , _sllTimeSpan      :: !ScoresListTimeSpan
+    , _sllLeaderboardId :: !Text
+    , _sllKey           :: !(Maybe Key)
+    , _sllLanguage      :: !(Maybe Text)
+    , _sllPageToken     :: !(Maybe Text)
+    , _sllOAuthToken    :: !(Maybe OAuthToken)
+    , _sllMaxResults    :: !(Maybe Int32)
+    , _sllFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScoresList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'scoQuotaUser'
+-- * 'sllQuotaUser'
 --
--- * 'scoPrettyPrint'
+-- * 'sllPrettyPrint'
 --
--- * 'scoUserIP'
+-- * 'sllUserIP'
 --
--- * 'scoCollection'
+-- * 'sllCollection'
 --
--- * 'scoTimeSpan'
+-- * 'sllTimeSpan'
 --
--- * 'scoLeaderboardId'
+-- * 'sllLeaderboardId'
 --
--- * 'scoKey'
+-- * 'sllKey'
 --
--- * 'scoLanguage'
+-- * 'sllLanguage'
 --
--- * 'scoPageToken'
+-- * 'sllPageToken'
 --
--- * 'scoOAuthToken'
+-- * 'sllOAuthToken'
 --
--- * 'scoMaxResults'
+-- * 'sllMaxResults'
 --
--- * 'scoFields'
+-- * 'sllFields'
 scoresList'
-    :: GamesScoresListCollection -- ^ 'collection'
-    -> TimeSpan -- ^ 'timeSpan'
+    :: ScoresListCollection -- ^ 'collection'
+    -> ScoresListTimeSpan -- ^ 'timeSpan'
     -> Text -- ^ 'leaderboardId'
     -> ScoresList'
-scoresList' pScoCollection_ pScoTimeSpan_ pScoLeaderboardId_ =
+scoresList' pSllCollection_ pSllTimeSpan_ pSllLeaderboardId_ =
     ScoresList'
-    { _scoQuotaUser = Nothing
-    , _scoPrettyPrint = True
-    , _scoUserIP = Nothing
-    , _scoCollection = pScoCollection_
-    , _scoTimeSpan = pScoTimeSpan_
-    , _scoLeaderboardId = pScoLeaderboardId_
-    , _scoKey = Nothing
-    , _scoLanguage = Nothing
-    , _scoPageToken = Nothing
-    , _scoOAuthToken = Nothing
-    , _scoMaxResults = Nothing
-    , _scoFields = Nothing
+    { _sllQuotaUser = Nothing
+    , _sllPrettyPrint = True
+    , _sllUserIP = Nothing
+    , _sllCollection = pSllCollection_
+    , _sllTimeSpan = pSllTimeSpan_
+    , _sllLeaderboardId = pSllLeaderboardId_
+    , _sllKey = Nothing
+    , _sllLanguage = Nothing
+    , _sllPageToken = Nothing
+    , _sllOAuthToken = Nothing
+    , _sllMaxResults = Nothing
+    , _sllFields = Nothing
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-scoQuotaUser :: Lens' ScoresList' (Maybe Text)
-scoQuotaUser
-  = lens _scoQuotaUser (\ s a -> s{_scoQuotaUser = a})
+sllQuotaUser :: Lens' ScoresList' (Maybe Text)
+sllQuotaUser
+  = lens _sllQuotaUser (\ s a -> s{_sllQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-scoPrettyPrint :: Lens' ScoresList' Bool
-scoPrettyPrint
-  = lens _scoPrettyPrint
-      (\ s a -> s{_scoPrettyPrint = a})
+sllPrettyPrint :: Lens' ScoresList' Bool
+sllPrettyPrint
+  = lens _sllPrettyPrint
+      (\ s a -> s{_sllPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-scoUserIP :: Lens' ScoresList' (Maybe Text)
-scoUserIP
-  = lens _scoUserIP (\ s a -> s{_scoUserIP = a})
+sllUserIP :: Lens' ScoresList' (Maybe Text)
+sllUserIP
+  = lens _sllUserIP (\ s a -> s{_sllUserIP = a})
 
 -- | The collection of scores you\'re requesting.
-scoCollection :: Lens' ScoresList' GamesScoresListCollection
-scoCollection
-  = lens _scoCollection
-      (\ s a -> s{_scoCollection = a})
+sllCollection :: Lens' ScoresList' ScoresListCollection
+sllCollection
+  = lens _sllCollection
+      (\ s a -> s{_sllCollection = a})
 
 -- | The time span for the scores and ranks you\'re requesting.
-scoTimeSpan :: Lens' ScoresList' TimeSpan
-scoTimeSpan
-  = lens _scoTimeSpan (\ s a -> s{_scoTimeSpan = a})
+sllTimeSpan :: Lens' ScoresList' ScoresListTimeSpan
+sllTimeSpan
+  = lens _sllTimeSpan (\ s a -> s{_sllTimeSpan = a})
 
 -- | The ID of the leaderboard.
-scoLeaderboardId :: Lens' ScoresList' Text
-scoLeaderboardId
-  = lens _scoLeaderboardId
-      (\ s a -> s{_scoLeaderboardId = a})
+sllLeaderboardId :: Lens' ScoresList' Text
+sllLeaderboardId
+  = lens _sllLeaderboardId
+      (\ s a -> s{_sllLeaderboardId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-scoKey :: Lens' ScoresList' (Maybe Key)
-scoKey = lens _scoKey (\ s a -> s{_scoKey = a})
+sllKey :: Lens' ScoresList' (Maybe Key)
+sllKey = lens _sllKey (\ s a -> s{_sllKey = a})
 
 -- | The preferred language to use for strings returned by this method.
-scoLanguage :: Lens' ScoresList' (Maybe Text)
-scoLanguage
-  = lens _scoLanguage (\ s a -> s{_scoLanguage = a})
+sllLanguage :: Lens' ScoresList' (Maybe Text)
+sllLanguage
+  = lens _sllLanguage (\ s a -> s{_sllLanguage = a})
 
 -- | The token returned by the previous request.
-scoPageToken :: Lens' ScoresList' (Maybe Text)
-scoPageToken
-  = lens _scoPageToken (\ s a -> s{_scoPageToken = a})
+sllPageToken :: Lens' ScoresList' (Maybe Text)
+sllPageToken
+  = lens _sllPageToken (\ s a -> s{_sllPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-scoOAuthToken :: Lens' ScoresList' (Maybe OAuthToken)
-scoOAuthToken
-  = lens _scoOAuthToken
-      (\ s a -> s{_scoOAuthToken = a})
+sllOAuthToken :: Lens' ScoresList' (Maybe OAuthToken)
+sllOAuthToken
+  = lens _sllOAuthToken
+      (\ s a -> s{_sllOAuthToken = a})
 
 -- | The maximum number of leaderboard scores to return in the response. For
 -- any response, the actual number of leaderboard scores returned may be
 -- less than the specified maxResults.
-scoMaxResults :: Lens' ScoresList' (Maybe Int32)
-scoMaxResults
-  = lens _scoMaxResults
-      (\ s a -> s{_scoMaxResults = a})
+sllMaxResults :: Lens' ScoresList' (Maybe Int32)
+sllMaxResults
+  = lens _sllMaxResults
+      (\ s a -> s{_sllMaxResults = a})
 
 -- | Selector specifying which fields to include in a partial response.
-scoFields :: Lens' ScoresList' (Maybe Text)
-scoFields
-  = lens _scoFields (\ s a -> s{_scoFields = a})
+sllFields :: Lens' ScoresList' (Maybe Text)
+sllFields
+  = lens _sllFields (\ s a -> s{_sllFields = a})
 
 instance GoogleAuth ScoresList' where
-        authKey = scoKey . _Just
-        authToken = scoOAuthToken . _Just
+        authKey = sllKey . _Just
+        authToken = sllOAuthToken . _Just
 
 instance GoogleRequest ScoresList' where
         type Rs ScoresList' = LeaderboardScores
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u ScoresList'{..}
-          = go _scoLeaderboardId _scoCollection
-              (Just _scoTimeSpan)
-              _scoLanguage
-              _scoPageToken
-              _scoMaxResults
-              _scoQuotaUser
-              (Just _scoPrettyPrint)
-              _scoUserIP
-              _scoFields
-              _scoKey
-              _scoOAuthToken
+          = go _sllLeaderboardId _sllCollection
+              (Just _sllTimeSpan)
+              _sllLanguage
+              _sllPageToken
+              _sllMaxResults
+              _sllQuotaUser
+              (Just _sllPrettyPrint)
+              _sllUserIP
+              _sllFields
+              _sllKey
+              _sllOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy ScoresListResource)

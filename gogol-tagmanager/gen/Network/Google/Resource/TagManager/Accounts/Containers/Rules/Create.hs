@@ -60,7 +60,7 @@ type AccountsContainersRulesCreateResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Rule :> Post '[JSON] Rule
+                             ReqBody '[OctetStream] Rule :> Post '[JSON] Rule
 
 -- | Creates a GTM Rule.
 --

@@ -75,7 +75,7 @@ type BeaconsAttachmentsCreateResource =
                                QueryParam "key" Key :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
-                                     ReqBody '[JSON] BeaconAttachment :>
+                                     ReqBody '[OctetStream] BeaconAttachment :>
                                        Post '[JSON] BeaconAttachment
 
 -- | Associates the given data with the specified beacon. Attachment data

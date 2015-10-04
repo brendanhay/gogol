@@ -56,7 +56,7 @@ type CirclesUpdateResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Circle :> Put '[JSON] Circle
+                       ReqBody '[OctetStream] Circle :> Put '[JSON] Circle
 
 -- | Update a circle\'s description.
 --

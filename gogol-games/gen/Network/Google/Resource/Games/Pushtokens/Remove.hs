@@ -56,7 +56,7 @@ type PushtokensRemoveResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] PushTokenId :> Post '[JSON] ()
+                       ReqBody '[OctetStream] PushTokenId :> Post '[JSON] ()
 
 -- | Removes a push token for the current user and application. Removing a
 -- non-existent push token will report success.

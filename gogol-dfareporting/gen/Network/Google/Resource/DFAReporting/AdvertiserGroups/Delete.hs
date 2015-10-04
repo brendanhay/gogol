@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.AdvertiserGroups.Delete
     , agdQuotaUser
     , agdPrettyPrint
     , agdUserIP
-    , agdProfileId
+    , agdProFileId
     , agdKey
     , agdId
     , agdOAuthToken
@@ -66,7 +66,7 @@ data AdvertiserGroupsDelete' = AdvertiserGroupsDelete'
     { _agdQuotaUser   :: !(Maybe Text)
     , _agdPrettyPrint :: !Bool
     , _agdUserIP      :: !(Maybe Text)
-    , _agdProfileId   :: !Int64
+    , _agdProFileId   :: !Int64
     , _agdKey         :: !(Maybe Key)
     , _agdId          :: !Int64
     , _agdOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +83,7 @@ data AdvertiserGroupsDelete' = AdvertiserGroupsDelete'
 --
 -- * 'agdUserIP'
 --
--- * 'agdProfileId'
+-- * 'agdProFileId'
 --
 -- * 'agdKey'
 --
@@ -96,12 +96,12 @@ advertiserGroupsDelete'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> AdvertiserGroupsDelete'
-advertiserGroupsDelete' pAgdProfileId_ pAgdId_ =
+advertiserGroupsDelete' pAgdProFileId_ pAgdId_ =
     AdvertiserGroupsDelete'
     { _agdQuotaUser = Nothing
     , _agdPrettyPrint = True
     , _agdUserIP = Nothing
-    , _agdProfileId = pAgdProfileId_
+    , _agdProFileId = pAgdProFileId_
     , _agdKey = Nothing
     , _agdId = pAgdId_
     , _agdOAuthToken = Nothing
@@ -128,9 +128,9 @@ agdUserIP
   = lens _agdUserIP (\ s a -> s{_agdUserIP = a})
 
 -- | User profile ID associated with this request.
-agdProfileId :: Lens' AdvertiserGroupsDelete' Int64
-agdProfileId
-  = lens _agdProfileId (\ s a -> s{_agdProfileId = a})
+agdProFileId :: Lens' AdvertiserGroupsDelete' Int64
+agdProFileId
+  = lens _agdProFileId (\ s a -> s{_agdProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -161,7 +161,7 @@ instance GoogleRequest AdvertiserGroupsDelete' where
         type Rs AdvertiserGroupsDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdvertiserGroupsDelete'{..}
-          = go _agdProfileId _agdId _agdQuotaUser
+          = go _agdProFileId _agdId _agdQuotaUser
               (Just _agdPrettyPrint)
               _agdUserIP
               _agdFields

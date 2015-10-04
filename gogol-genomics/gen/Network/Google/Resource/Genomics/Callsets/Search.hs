@@ -56,7 +56,7 @@ type CallsetsSearchResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] SearchCallSetsRequest :>
+                       ReqBody '[OctetStream] SearchCallSetsRequest :>
                          Post '[JSON] SearchCallSetsResponse
 
 -- | Gets a list of call sets matching the criteria. Implements

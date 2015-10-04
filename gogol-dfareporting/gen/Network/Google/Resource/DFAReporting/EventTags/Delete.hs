@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.EventTags.Delete
     , etdQuotaUser
     , etdPrettyPrint
     , etdUserIP
-    , etdProfileId
+    , etdProFileId
     , etdKey
     , etdId
     , etdOAuthToken
@@ -66,7 +66,7 @@ data EventTagsDelete' = EventTagsDelete'
     { _etdQuotaUser   :: !(Maybe Text)
     , _etdPrettyPrint :: !Bool
     , _etdUserIP      :: !(Maybe Text)
-    , _etdProfileId   :: !Int64
+    , _etdProFileId   :: !Int64
     , _etdKey         :: !(Maybe Key)
     , _etdId          :: !Int64
     , _etdOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +83,7 @@ data EventTagsDelete' = EventTagsDelete'
 --
 -- * 'etdUserIP'
 --
--- * 'etdProfileId'
+-- * 'etdProFileId'
 --
 -- * 'etdKey'
 --
@@ -96,12 +96,12 @@ eventTagsDelete'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> EventTagsDelete'
-eventTagsDelete' pEtdProfileId_ pEtdId_ =
+eventTagsDelete' pEtdProFileId_ pEtdId_ =
     EventTagsDelete'
     { _etdQuotaUser = Nothing
     , _etdPrettyPrint = True
     , _etdUserIP = Nothing
-    , _etdProfileId = pEtdProfileId_
+    , _etdProFileId = pEtdProFileId_
     , _etdKey = Nothing
     , _etdId = pEtdId_
     , _etdOAuthToken = Nothing
@@ -128,9 +128,9 @@ etdUserIP
   = lens _etdUserIP (\ s a -> s{_etdUserIP = a})
 
 -- | User profile ID associated with this request.
-etdProfileId :: Lens' EventTagsDelete' Int64
-etdProfileId
-  = lens _etdProfileId (\ s a -> s{_etdProfileId = a})
+etdProFileId :: Lens' EventTagsDelete' Int64
+etdProFileId
+  = lens _etdProFileId (\ s a -> s{_etdProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -161,7 +161,7 @@ instance GoogleRequest EventTagsDelete' where
         type Rs EventTagsDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u EventTagsDelete'{..}
-          = go _etdProfileId _etdId _etdQuotaUser
+          = go _etdProFileId _etdId _etdQuotaUser
               (Just _etdPrettyPrint)
               _etdUserIP
               _etdFields

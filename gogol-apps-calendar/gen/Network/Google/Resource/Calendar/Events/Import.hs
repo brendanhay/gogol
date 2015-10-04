@@ -61,7 +61,7 @@ type EventsImportResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Event :> Post '[JSON] Event
+                             ReqBody '[OctetStream] Event :> Post '[JSON] Event
 
 -- | Imports an event. This operation is used to add a private copy of an
 -- existing event to a calendar.

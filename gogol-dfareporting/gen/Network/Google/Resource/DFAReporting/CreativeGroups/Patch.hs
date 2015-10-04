@@ -35,7 +35,7 @@ module Network.Google.Resource.DFAReporting.CreativeGroups.Patch
     , cgpQuotaUser
     , cgpPrettyPrint
     , cgpUserIP
-    , cgpProfileId
+    , cgpProFileId
     , cgpPayload
     , cgpKey
     , cgpId
@@ -60,7 +60,7 @@ type CreativeGroupsPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] CreativeGroup :>
+                           ReqBody '[OctetStream] CreativeGroup :>
                              Patch '[JSON] CreativeGroup
 
 -- | Updates an existing creative group. This method supports patch
@@ -71,7 +71,7 @@ data CreativeGroupsPatch' = CreativeGroupsPatch'
     { _cgpQuotaUser   :: !(Maybe Text)
     , _cgpPrettyPrint :: !Bool
     , _cgpUserIP      :: !(Maybe Text)
-    , _cgpProfileId   :: !Int64
+    , _cgpProFileId   :: !Int64
     , _cgpPayload     :: !CreativeGroup
     , _cgpKey         :: !(Maybe Key)
     , _cgpId          :: !Int64
@@ -89,7 +89,7 @@ data CreativeGroupsPatch' = CreativeGroupsPatch'
 --
 -- * 'cgpUserIP'
 --
--- * 'cgpProfileId'
+-- * 'cgpProFileId'
 --
 -- * 'cgpPayload'
 --
@@ -105,12 +105,12 @@ creativeGroupsPatch'
     -> CreativeGroup -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> CreativeGroupsPatch'
-creativeGroupsPatch' pCgpProfileId_ pCgpPayload_ pCgpId_ =
+creativeGroupsPatch' pCgpProFileId_ pCgpPayload_ pCgpId_ =
     CreativeGroupsPatch'
     { _cgpQuotaUser = Nothing
     , _cgpPrettyPrint = True
     , _cgpUserIP = Nothing
-    , _cgpProfileId = pCgpProfileId_
+    , _cgpProFileId = pCgpProFileId_
     , _cgpPayload = pCgpPayload_
     , _cgpKey = Nothing
     , _cgpId = pCgpId_
@@ -138,9 +138,9 @@ cgpUserIP
   = lens _cgpUserIP (\ s a -> s{_cgpUserIP = a})
 
 -- | User profile ID associated with this request.
-cgpProfileId :: Lens' CreativeGroupsPatch' Int64
-cgpProfileId
-  = lens _cgpProfileId (\ s a -> s{_cgpProfileId = a})
+cgpProFileId :: Lens' CreativeGroupsPatch' Int64
+cgpProFileId
+  = lens _cgpProFileId (\ s a -> s{_cgpProFileId = a})
 
 -- | Multipart request metadata.
 cgpPayload :: Lens' CreativeGroupsPatch' CreativeGroup
@@ -176,7 +176,7 @@ instance GoogleRequest CreativeGroupsPatch' where
         type Rs CreativeGroupsPatch' = CreativeGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeGroupsPatch'{..}
-          = go _cgpProfileId (Just _cgpId) _cgpQuotaUser
+          = go _cgpProFileId (Just _cgpId) _cgpQuotaUser
               (Just _cgpPrettyPrint)
               _cgpUserIP
               _cgpFields

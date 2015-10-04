@@ -55,7 +55,7 @@ type ProvisioningCreateAccountTicketResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] AccountTicket :>
+                       ReqBody '[OctetStream] AccountTicket :>
                          Post '[JSON] AccountTicket
 
 -- | Creates an account ticket.

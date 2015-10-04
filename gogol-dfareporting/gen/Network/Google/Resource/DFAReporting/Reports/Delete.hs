@@ -35,7 +35,7 @@ module Network.Google.Resource.DFAReporting.Reports.Delete
     , rdPrettyPrint
     , rdUserIP
     , rdReportId
-    , rdProfileId
+    , rdProFileId
     , rdKey
     , rdOAuthToken
     , rdFields
@@ -67,7 +67,7 @@ data ReportsDelete' = ReportsDelete'
     , _rdPrettyPrint :: !Bool
     , _rdUserIP      :: !(Maybe Text)
     , _rdReportId    :: !Int64
-    , _rdProfileId   :: !Int64
+    , _rdProFileId   :: !Int64
     , _rdKey         :: !(Maybe Key)
     , _rdOAuthToken  :: !(Maybe OAuthToken)
     , _rdFields      :: !(Maybe Text)
@@ -85,7 +85,7 @@ data ReportsDelete' = ReportsDelete'
 --
 -- * 'rdReportId'
 --
--- * 'rdProfileId'
+-- * 'rdProFileId'
 --
 -- * 'rdKey'
 --
@@ -96,13 +96,13 @@ reportsDelete'
     :: Int64 -- ^ 'reportId'
     -> Int64 -- ^ 'profileId'
     -> ReportsDelete'
-reportsDelete' pRdReportId_ pRdProfileId_ =
+reportsDelete' pRdReportId_ pRdProFileId_ =
     ReportsDelete'
     { _rdQuotaUser = Nothing
     , _rdPrettyPrint = True
     , _rdUserIP = Nothing
     , _rdReportId = pRdReportId_
-    , _rdProfileId = pRdProfileId_
+    , _rdProFileId = pRdProFileId_
     , _rdKey = Nothing
     , _rdOAuthToken = Nothing
     , _rdFields = Nothing
@@ -132,9 +132,9 @@ rdReportId
   = lens _rdReportId (\ s a -> s{_rdReportId = a})
 
 -- | The DFA user profile ID.
-rdProfileId :: Lens' ReportsDelete' Int64
-rdProfileId
-  = lens _rdProfileId (\ s a -> s{_rdProfileId = a})
+rdProFileId :: Lens' ReportsDelete' Int64
+rdProFileId
+  = lens _rdProFileId (\ s a -> s{_rdProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -159,7 +159,7 @@ instance GoogleRequest ReportsDelete' where
         type Rs ReportsDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ReportsDelete'{..}
-          = go _rdProfileId _rdReportId _rdQuotaUser
+          = go _rdProFileId _rdReportId _rdQuotaUser
               (Just _rdPrettyPrint)
               _rdUserIP
               _rdFields

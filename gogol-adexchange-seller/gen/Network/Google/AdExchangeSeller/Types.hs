@@ -17,6 +17,14 @@ module Network.Google.AdExchangeSeller.Types
     -- * Service URL
       adExchangeSellerURL
 
+    -- * AdClients
+    , AdClients
+    , adClients
+    , acEtag
+    , acNextPageToken
+    , acKind
+    , acItems
+
     -- * ReportingMetadataEntry
     , ReportingMetadataEntry
     , reportingMetadataEntry
@@ -27,22 +35,6 @@ module Network.Google.AdExchangeSeller.Types
     , rmeId
     , rmeCompatibleDimensions
     , rmeSupportedProducts
-
-    -- * TargetingInfo
-    , TargetingInfo
-    , targetingInfo
-    , tiLocation
-    , tiSiteLanguage
-    , tiAdsAppearOn
-    , tiDescription
-
-    -- * AdClients
-    , AdClients
-    , adClients
-    , acEtag
-    , acNextPageToken
-    , acKind
-    , acItems
 
     -- * Accounts
     , Accounts
@@ -89,15 +81,6 @@ module Network.Google.AdExchangeSeller.Types
     , ccKind
     , ccItems
 
-    -- * Alert
-    , Alert
-    , alert
-    , aaKind
-    , aaSeverity
-    , aaId
-    , aaType
-    , aaMessage
-
     -- * Report
     , Report
     , report
@@ -109,19 +92,21 @@ module Network.Google.AdExchangeSeller.Types
     , rHeaders
     , rTotalMatchedRows
 
+    -- * Alert
+    , Alert
+    , alert
+    , aaKind
+    , aaSeverity
+    , aaId
+    , aaType
+    , aaMessage
+
     -- * Account
     , Account
     , account
     , accKind
     , accName
     , accId
-
-    -- * HeadersItem
-    , HeadersItem
-    , headersItem
-    , hiName
-    , hiCurrency
-    , hiType
 
     -- * AdClient
     , AdClient
@@ -131,6 +116,21 @@ module Network.Google.AdExchangeSeller.Types
     , adSupportsReporting
     , adId
     , adProductCode
+
+    -- * ReportHeadersItem
+    , ReportHeadersItem
+    , reportHeadersItem
+    , rhiName
+    , rhiCurrency
+    , rhiType
+
+    -- * CustomChannelTargetingInfo
+    , CustomChannelTargetingInfo
+    , customChannelTargetingInfo
+    , cctiLocation
+    , cctiSiteLanguage
+    , cctiAdsAppearOn
+    , cctiDescription
 
     -- * PreferredDeals
     , PreferredDeals

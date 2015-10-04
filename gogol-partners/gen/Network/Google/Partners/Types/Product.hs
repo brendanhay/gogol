@@ -18,53 +18,6 @@ module Network.Google.Partners.Types.Product where
 import           Network.Google.Partners.Types.Sum
 import           Network.Google.Prelude
 
--- | Key value data pair for an event.
---
--- /See:/ 'eventData' smart constructor.
-data EventData = EventData
-    { _edValues :: !(Maybe [Text])
-    , _edKey    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'EventData' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'edValues'
---
--- * 'edKey'
-eventData
-    :: EventData
-eventData =
-    EventData
-    { _edValues = Nothing
-    , _edKey = Nothing
-    }
-
--- | Data values.
-edValues :: Lens' EventData [Text]
-edValues
-  = lens _edValues (\ s a -> s{_edValues = a}) .
-      _Default
-      . _Coerce
-
--- | Data type.
-edKey :: Lens' EventData (Maybe Text)
-edKey = lens _edKey (\ s a -> s{_edKey = a})
-
-instance FromJSON EventData where
-        parseJSON
-          = withObject "EventData"
-              (\ o ->
-                 EventData <$>
-                   (o .:? "values" .!= mempty) <*> (o .:? "key"))
-
-instance ToJSON EventData where
-        toJSON EventData{..}
-          = object
-              (catMaybes
-                 [("values" .=) <$> _edValues, ("key" .=) <$> _edKey])
-
 -- | An object representing a latitude\/longitude pair. This is expressed as
 -- a pair of doubles representing degrees latitude and degrees longitude.
 -- Unless specified otherwise, this must conform to the WGS84 standard.
@@ -134,66 +87,104 @@ instance ToJSON LatLng where
                  [("latitude" .=) <$> _llLatitude,
                   ("longitude" .=) <$> _llLongitude])
 
--- | Google Partners certification status.
+-- | Response message for ListUserStates.
 --
--- /See:/ 'certificationStatus' smart constructor.
-data CertificationStatus = CertificationStatus
-    { _csIsCertified  :: !(Maybe Bool)
-    , _csType         :: !(Maybe Text)
-    , _csExamStatuses :: !(Maybe [CertificationExamStatus])
+-- /See:/ 'listUserStatesResponse' smart constructor.
+data ListUserStatesResponse = ListUserStatesResponse
+    { _lusrUserStates       :: !(Maybe [Text])
+    , _lusrResponseMetadata :: !(Maybe ResponseMetadata)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CertificationStatus' with the minimum fields required to make a request.
+-- | Creates a value of 'ListUserStatesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'csIsCertified'
+-- * 'lusrUserStates'
 --
--- * 'csType'
---
--- * 'csExamStatuses'
-certificationStatus
-    :: CertificationStatus
-certificationStatus =
-    CertificationStatus
-    { _csIsCertified = Nothing
-    , _csType = Nothing
-    , _csExamStatuses = Nothing
+-- * 'lusrResponseMetadata'
+listUserStatesResponse
+    :: ListUserStatesResponse
+listUserStatesResponse =
+    ListUserStatesResponse
+    { _lusrUserStates = Nothing
+    , _lusrResponseMetadata = Nothing
     }
 
--- | Whether certification is passing.
-csIsCertified :: Lens' CertificationStatus (Maybe Bool)
-csIsCertified
-  = lens _csIsCertified
-      (\ s a -> s{_csIsCertified = a})
-
--- | The type of the certification.
-csType :: Lens' CertificationStatus (Maybe Text)
-csType = lens _csType (\ s a -> s{_csType = a})
-
--- | List of certification exam statuses.
-csExamStatuses :: Lens' CertificationStatus [CertificationExamStatus]
-csExamStatuses
-  = lens _csExamStatuses
-      (\ s a -> s{_csExamStatuses = a})
+-- | User\'s states.
+lusrUserStates :: Lens' ListUserStatesResponse [Text]
+lusrUserStates
+  = lens _lusrUserStates
+      (\ s a -> s{_lusrUserStates = a})
       . _Default
       . _Coerce
 
-instance FromJSON CertificationStatus where
-        parseJSON
-          = withObject "CertificationStatus"
-              (\ o ->
-                 CertificationStatus <$>
-                   (o .:? "isCertified") <*> (o .:? "type") <*>
-                     (o .:? "examStatuses" .!= mempty))
+-- | Current response metadata.
+lusrResponseMetadata :: Lens' ListUserStatesResponse (Maybe ResponseMetadata)
+lusrResponseMetadata
+  = lens _lusrResponseMetadata
+      (\ s a -> s{_lusrResponseMetadata = a})
 
-instance ToJSON CertificationStatus where
-        toJSON CertificationStatus{..}
+instance FromJSON ListUserStatesResponse where
+        parseJSON
+          = withObject "ListUserStatesResponse"
+              (\ o ->
+                 ListUserStatesResponse <$>
+                   (o .:? "userStates" .!= mempty) <*>
+                     (o .:? "responseMetadata"))
+
+instance ToJSON ListUserStatesResponse where
+        toJSON ListUserStatesResponse{..}
           = object
               (catMaybes
-                 [("isCertified" .=) <$> _csIsCertified,
-                  ("type" .=) <$> _csType,
-                  ("examStatuses" .=) <$> _csExamStatuses])
+                 [("userStates" .=) <$> _lusrUserStates,
+                  ("responseMetadata" .=) <$> _lusrResponseMetadata])
+
+-- | Key value data pair for an event.
+--
+-- /See:/ 'eventData' smart constructor.
+data EventData = EventData
+    { _edValues :: !(Maybe [Text])
+    , _edKey    :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EventData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'edValues'
+--
+-- * 'edKey'
+eventData
+    :: EventData
+eventData =
+    EventData
+    { _edValues = Nothing
+    , _edKey = Nothing
+    }
+
+-- | Data values.
+edValues :: Lens' EventData [Text]
+edValues
+  = lens _edValues (\ s a -> s{_edValues = a}) .
+      _Default
+      . _Coerce
+
+-- | Data type.
+edKey :: Lens' EventData (Maybe Text)
+edKey = lens _edKey (\ s a -> s{_edKey = a})
+
+instance FromJSON EventData where
+        parseJSON
+          = withObject "EventData"
+              (\ o ->
+                 EventData <$>
+                   (o .:? "values" .!= mempty) <*> (o .:? "key"))
+
+instance ToJSON EventData where
+        toJSON EventData{..}
+          = object
+              (catMaybes
+                 [("values" .=) <$> _edValues, ("key" .=) <$> _edKey])
 
 -- | Common data that is in each API request.
 --
@@ -282,57 +273,66 @@ instance ToJSON RequestMetadata where
                   ("userOverrides" .=) <$> _rmUserOverrides,
                   ("partnersSessionId" .=) <$> _rmPartnersSessionId])
 
--- | Response message for ListUserStates.
+-- | Google Partners certification status.
 --
--- /See:/ 'listUserStatesResponse' smart constructor.
-data ListUserStatesResponse = ListUserStatesResponse
-    { _lusrUserStates       :: !(Maybe [Text])
-    , _lusrResponseMetadata :: !(Maybe ResponseMetadata)
+-- /See:/ 'certificationStatus' smart constructor.
+data CertificationStatus = CertificationStatus
+    { _csIsCertified  :: !(Maybe Bool)
+    , _csType         :: !(Maybe Text)
+    , _csExamStatuses :: !(Maybe [CertificationExamStatus])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ListUserStatesResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'CertificationStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lusrUserStates'
+-- * 'csIsCertified'
 --
--- * 'lusrResponseMetadata'
-listUserStatesResponse
-    :: ListUserStatesResponse
-listUserStatesResponse =
-    ListUserStatesResponse
-    { _lusrUserStates = Nothing
-    , _lusrResponseMetadata = Nothing
+-- * 'csType'
+--
+-- * 'csExamStatuses'
+certificationStatus
+    :: CertificationStatus
+certificationStatus =
+    CertificationStatus
+    { _csIsCertified = Nothing
+    , _csType = Nothing
+    , _csExamStatuses = Nothing
     }
 
--- | User\'s states.
-lusrUserStates :: Lens' ListUserStatesResponse [Text]
-lusrUserStates
-  = lens _lusrUserStates
-      (\ s a -> s{_lusrUserStates = a})
+-- | Whether certification is passing.
+csIsCertified :: Lens' CertificationStatus (Maybe Bool)
+csIsCertified
+  = lens _csIsCertified
+      (\ s a -> s{_csIsCertified = a})
+
+-- | The type of the certification.
+csType :: Lens' CertificationStatus (Maybe Text)
+csType = lens _csType (\ s a -> s{_csType = a})
+
+-- | List of certification exam statuses.
+csExamStatuses :: Lens' CertificationStatus [CertificationExamStatus]
+csExamStatuses
+  = lens _csExamStatuses
+      (\ s a -> s{_csExamStatuses = a})
       . _Default
       . _Coerce
 
--- | Current response metadata.
-lusrResponseMetadata :: Lens' ListUserStatesResponse (Maybe ResponseMetadata)
-lusrResponseMetadata
-  = lens _lusrResponseMetadata
-      (\ s a -> s{_lusrResponseMetadata = a})
-
-instance FromJSON ListUserStatesResponse where
+instance FromJSON CertificationStatus where
         parseJSON
-          = withObject "ListUserStatesResponse"
+          = withObject "CertificationStatus"
               (\ o ->
-                 ListUserStatesResponse <$>
-                   (o .:? "userStates" .!= mempty) <*>
-                     (o .:? "responseMetadata"))
+                 CertificationStatus <$>
+                   (o .:? "isCertified") <*> (o .:? "type") <*>
+                     (o .:? "examStatuses" .!= mempty))
 
-instance ToJSON ListUserStatesResponse where
-        toJSON ListUserStatesResponse{..}
+instance ToJSON CertificationStatus where
+        toJSON CertificationStatus{..}
           = object
               (catMaybes
-                 [("userStates" .=) <$> _lusrUserStates,
-                  ("responseMetadata" .=) <$> _lusrResponseMetadata])
+                 [("isCertified" .=) <$> _csIsCertified,
+                  ("type" .=) <$> _csType,
+                  ("examStatuses" .=) <$> _csExamStatuses])
 
 -- | Debug information about this request.
 --
@@ -443,117 +443,73 @@ instance ToJSON GetCompanyResponse where
 
 -- | Basic information from a public profile.
 --
--- /See:/ 'publicProfile' smart constructor.
-data PublicProfile = PublicProfile
-    { _ppURL             :: !(Maybe Text)
-    , _ppDisplayImageURL :: !(Maybe Text)
-    , _ppDisplayName     :: !(Maybe Text)
-    , _ppId              :: !(Maybe Text)
+-- /See:/ 'publicProFile' smart constructor.
+data PublicProFile = PublicProFile
+    { _ppfURL             :: !(Maybe Text)
+    , _ppfDisplayImageURL :: !(Maybe Text)
+    , _ppfDisplayName     :: !(Maybe Text)
+    , _ppfId              :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PublicProfile' with the minimum fields required to make a request.
+-- | Creates a value of 'PublicProFile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ppURL'
+-- * 'ppfURL'
 --
--- * 'ppDisplayImageURL'
+-- * 'ppfDisplayImageURL'
 --
--- * 'ppDisplayName'
+-- * 'ppfDisplayName'
 --
--- * 'ppId'
-publicProfile
-    :: PublicProfile
-publicProfile =
-    PublicProfile
-    { _ppURL = Nothing
-    , _ppDisplayImageURL = Nothing
-    , _ppDisplayName = Nothing
-    , _ppId = Nothing
+-- * 'ppfId'
+publicProFile
+    :: PublicProFile
+publicProFile =
+    PublicProFile
+    { _ppfURL = Nothing
+    , _ppfDisplayImageURL = Nothing
+    , _ppfDisplayName = Nothing
+    , _ppfId = Nothing
     }
 
 -- | The URL of the public profile.
-ppURL :: Lens' PublicProfile (Maybe Text)
-ppURL = lens _ppURL (\ s a -> s{_ppURL = a})
+ppfURL :: Lens' PublicProFile (Maybe Text)
+ppfURL = lens _ppfURL (\ s a -> s{_ppfURL = a})
 
 -- | The URL to the main display image of the public profile.
-ppDisplayImageURL :: Lens' PublicProfile (Maybe Text)
-ppDisplayImageURL
-  = lens _ppDisplayImageURL
-      (\ s a -> s{_ppDisplayImageURL = a})
+ppfDisplayImageURL :: Lens' PublicProFile (Maybe Text)
+ppfDisplayImageURL
+  = lens _ppfDisplayImageURL
+      (\ s a -> s{_ppfDisplayImageURL = a})
 
 -- | The display name of the public profile.
-ppDisplayName :: Lens' PublicProfile (Maybe Text)
-ppDisplayName
-  = lens _ppDisplayName
-      (\ s a -> s{_ppDisplayName = a})
+ppfDisplayName :: Lens' PublicProFile (Maybe Text)
+ppfDisplayName
+  = lens _ppfDisplayName
+      (\ s a -> s{_ppfDisplayName = a})
 
 -- | The ID which can be used to retrieve more details about the public
 -- profile.
-ppId :: Lens' PublicProfile (Maybe Text)
-ppId = lens _ppId (\ s a -> s{_ppId = a})
+ppfId :: Lens' PublicProFile (Maybe Text)
+ppfId = lens _ppfId (\ s a -> s{_ppfId = a})
 
-instance FromJSON PublicProfile where
+instance FromJSON PublicProFile where
         parseJSON
-          = withObject "PublicProfile"
+          = withObject "PublicProFile"
               (\ o ->
-                 PublicProfile <$>
+                 PublicProFile <$>
                    (o .:? "url") <*> (o .:? "displayImageUrl") <*>
                      (o .:? "displayName")
                      <*> (o .:? "id"))
 
-instance ToJSON PublicProfile where
-        toJSON PublicProfile{..}
+instance ToJSON PublicProFile where
+        toJSON PublicProFile{..}
           = object
               (catMaybes
-                 [("url" .=) <$> _ppURL,
-                  ("displayImageUrl" .=) <$> _ppDisplayImageURL,
-                  ("displayName" .=) <$> _ppDisplayName,
-                  ("id" .=) <$> _ppId])
-
--- | A location with address and geographic coordinates.
---
--- /See:/ 'location' smart constructor.
-data Location = Location
-    { _lLatLng  :: !(Maybe LatLng)
-    , _lAddress :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Location' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lLatLng'
---
--- * 'lAddress'
-location
-    :: Location
-location =
-    Location
-    { _lLatLng = Nothing
-    , _lAddress = Nothing
-    }
-
--- | The latitude and longitude of the location, in degrees.
-lLatLng :: Lens' Location (Maybe LatLng)
-lLatLng = lens _lLatLng (\ s a -> s{_lLatLng = a})
-
--- | The complete address of the location.
-lAddress :: Lens' Location (Maybe Text)
-lAddress = lens _lAddress (\ s a -> s{_lAddress = a})
-
-instance FromJSON Location where
-        parseJSON
-          = withObject "Location"
-              (\ o ->
-                 Location <$> (o .:? "latLng") <*> (o .:? "address"))
-
-instance ToJSON Location where
-        toJSON Location{..}
-          = object
-              (catMaybes
-                 [("latLng" .=) <$> _lLatLng,
-                  ("address" .=) <$> _lAddress])
+                 [("url" .=) <$> _ppfURL,
+                  ("displayImageUrl" .=) <$> _ppfDisplayImageURL,
+                  ("displayName" .=) <$> _ppfDisplayName,
+                  ("id" .=) <$> _ppfId])
 
 -- | Status for a Google Partners certification exam.
 --
@@ -601,6 +557,50 @@ instance ToJSON CertificationExamStatus where
               (catMaybes
                  [("numberUsersPass" .=) <$> _cesNumberUsersPass,
                   ("type" .=) <$> _cesType])
+
+-- | A location with address and geographic coordinates.
+--
+-- /See:/ 'location' smart constructor.
+data Location = Location
+    { _lLatLng  :: !(Maybe LatLng)
+    , _lAddress :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Location' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lLatLng'
+--
+-- * 'lAddress'
+location
+    :: Location
+location =
+    Location
+    { _lLatLng = Nothing
+    , _lAddress = Nothing
+    }
+
+-- | The latitude and longitude of the location, in degrees.
+lLatLng :: Lens' Location (Maybe LatLng)
+lLatLng = lens _lLatLng (\ s a -> s{_lLatLng = a})
+
+-- | The complete address of the location.
+lAddress :: Lens' Location (Maybe Text)
+lAddress = lens _lAddress (\ s a -> s{_lAddress = a})
+
+instance FromJSON Location where
+        parseJSON
+          = withObject "Location"
+              (\ o ->
+                 Location <$> (o .:? "latLng") <*> (o .:? "address"))
+
+instance ToJSON Location where
+        toJSON Location{..}
+          = object
+              (catMaybes
+                 [("latLng" .=) <$> _lLatLng,
+                  ("address" .=) <$> _lAddress])
 
 -- | Source of traffic for the current request.
 --
@@ -716,52 +716,6 @@ instance ToJSON Money where
                  [("currencyCode" .=) <$> _mCurrencyCode,
                   ("nanos" .=) <$> _mNanos, ("units" .=) <$> _mUnits])
 
--- | reCaptcha challenge info.
---
--- /See:/ 'recaptchaChallenge' smart constructor.
-data RecaptchaChallenge = RecaptchaChallenge
-    { _rcResponse :: !(Maybe Text)
-    , _rcId       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'RecaptchaChallenge' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rcResponse'
---
--- * 'rcId'
-recaptchaChallenge
-    :: RecaptchaChallenge
-recaptchaChallenge =
-    RecaptchaChallenge
-    { _rcResponse = Nothing
-    , _rcId = Nothing
-    }
-
--- | The response to the reCaptcha challenge.
-rcResponse :: Lens' RecaptchaChallenge (Maybe Text)
-rcResponse
-  = lens _rcResponse (\ s a -> s{_rcResponse = a})
-
--- | The ID of the reCaptcha challenge.
-rcId :: Lens' RecaptchaChallenge (Maybe Text)
-rcId = lens _rcId (\ s a -> s{_rcId = a})
-
-instance FromJSON RecaptchaChallenge where
-        parseJSON
-          = withObject "RecaptchaChallenge"
-              (\ o ->
-                 RecaptchaChallenge <$>
-                   (o .:? "response") <*> (o .:? "id"))
-
-instance ToJSON RecaptchaChallenge where
-        toJSON RecaptchaChallenge{..}
-          = object
-              (catMaybes
-                 [("response" .=) <$> _rcResponse,
-                  ("id" .=) <$> _rcId])
-
 -- | Response message for ListCompanies.
 --
 -- /See:/ 'listCompaniesResponse' smart constructor.
@@ -827,6 +781,52 @@ instance ToJSON ListCompaniesResponse where
                   ("responseMetadata" .=) <$> _lcrResponseMetadata,
                   ("companies" .=) <$> _lcrCompanies])
 
+-- | reCaptcha challenge info.
+--
+-- /See:/ 'recaptchaChallenge' smart constructor.
+data RecaptchaChallenge = RecaptchaChallenge
+    { _rcResponse :: !(Maybe Text)
+    , _rcId       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RecaptchaChallenge' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rcResponse'
+--
+-- * 'rcId'
+recaptchaChallenge
+    :: RecaptchaChallenge
+recaptchaChallenge =
+    RecaptchaChallenge
+    { _rcResponse = Nothing
+    , _rcId = Nothing
+    }
+
+-- | The response to the reCaptcha challenge.
+rcResponse :: Lens' RecaptchaChallenge (Maybe Text)
+rcResponse
+  = lens _rcResponse (\ s a -> s{_rcResponse = a})
+
+-- | The ID of the reCaptcha challenge.
+rcId :: Lens' RecaptchaChallenge (Maybe Text)
+rcId = lens _rcId (\ s a -> s{_rcId = a})
+
+instance FromJSON RecaptchaChallenge where
+        parseJSON
+          = withObject "RecaptchaChallenge"
+              (\ o ->
+                 RecaptchaChallenge <$>
+                   (o .:? "response") <*> (o .:? "id"))
+
+instance ToJSON RecaptchaChallenge where
+        toJSON RecaptchaChallenge{..}
+          = object
+              (catMaybes
+                 [("response" .=) <$> _rcResponse,
+                  ("id" .=) <$> _rcId])
+
 -- | Response message for CreateLead. Debug information about this request.
 --
 -- /See:/ 'createLeadResponse' smart constructor.
@@ -886,6 +886,158 @@ instance ToJSON CreateLeadResponse where
                  [("recaptchaStatus" .=) <$> _clrRecaptchaStatus,
                   ("responseMetadata" .=) <$> _clrResponseMetadata,
                   ("lead" .=) <$> _clrLead])
+
+-- | Values to use instead of the user\'s respective defaults. These are only
+-- honored by whitelisted products.
+--
+-- /See:/ 'userOverrides' smart constructor.
+data UserOverrides = UserOverrides
+    { _uoIPAddress :: !(Maybe Text)
+    , _uoUserId    :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UserOverrides' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'uoIPAddress'
+--
+-- * 'uoUserId'
+userOverrides
+    :: UserOverrides
+userOverrides =
+    UserOverrides
+    { _uoIPAddress = Nothing
+    , _uoUserId = Nothing
+    }
+
+-- | IP address to use instead of the user\'s geo-located IP address.
+uoIPAddress :: Lens' UserOverrides (Maybe Text)
+uoIPAddress
+  = lens _uoIPAddress (\ s a -> s{_uoIPAddress = a})
+
+-- | Logged-in user ID to impersonate instead of the user\'s ID.
+uoUserId :: Lens' UserOverrides (Maybe Text)
+uoUserId = lens _uoUserId (\ s a -> s{_uoUserId = a})
+
+instance FromJSON UserOverrides where
+        parseJSON
+          = withObject "UserOverrides"
+              (\ o ->
+                 UserOverrides <$>
+                   (o .:? "ipAddress") <*> (o .:? "userId"))
+
+instance ToJSON UserOverrides where
+        toJSON UserOverrides{..}
+          = object
+              (catMaybes
+                 [("ipAddress" .=) <$> _uoIPAddress,
+                  ("userId" .=) <$> _uoUserId])
+
+-- | Common data that is in each API response.
+--
+-- /See:/ 'responseMetadata' smart constructor.
+newtype ResponseMetadata = ResponseMetadata
+    { _rmDebugInfo :: Maybe DebugInfo
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ResponseMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rmDebugInfo'
+responseMetadata
+    :: ResponseMetadata
+responseMetadata =
+    ResponseMetadata
+    { _rmDebugInfo = Nothing
+    }
+
+-- | Debug information about this request.
+rmDebugInfo :: Lens' ResponseMetadata (Maybe DebugInfo)
+rmDebugInfo
+  = lens _rmDebugInfo (\ s a -> s{_rmDebugInfo = a})
+
+instance FromJSON ResponseMetadata where
+        parseJSON
+          = withObject "ResponseMetadata"
+              (\ o -> ResponseMetadata <$> (o .:? "debugInfo"))
+
+instance ToJSON ResponseMetadata where
+        toJSON ResponseMetadata{..}
+          = object
+              (catMaybes [("debugInfo" .=) <$> _rmDebugInfo])
+
+-- | Request message for LogClientMessage.
+--
+-- /See:/ 'logMessageRequest' smart constructor.
+data LogMessageRequest = LogMessageRequest
+    { _lmrRequestMetadata :: !(Maybe RequestMetadata)
+    , _lmrClientInfo      :: !(Maybe LogMessageRequestClientInfo)
+    , _lmrDetails         :: !(Maybe Text)
+    , _lmrLevel           :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LogMessageRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lmrRequestMetadata'
+--
+-- * 'lmrClientInfo'
+--
+-- * 'lmrDetails'
+--
+-- * 'lmrLevel'
+logMessageRequest
+    :: LogMessageRequest
+logMessageRequest =
+    LogMessageRequest
+    { _lmrRequestMetadata = Nothing
+    , _lmrClientInfo = Nothing
+    , _lmrDetails = Nothing
+    , _lmrLevel = Nothing
+    }
+
+-- | Current request metadata.
+lmrRequestMetadata :: Lens' LogMessageRequest (Maybe RequestMetadata)
+lmrRequestMetadata
+  = lens _lmrRequestMetadata
+      (\ s a -> s{_lmrRequestMetadata = a})
+
+-- | Map of client info, such as URL, browser navigator, browser platform,
+-- etc.
+lmrClientInfo :: Lens' LogMessageRequest (Maybe LogMessageRequestClientInfo)
+lmrClientInfo
+  = lens _lmrClientInfo
+      (\ s a -> s{_lmrClientInfo = a})
+
+-- | Details about the client message.
+lmrDetails :: Lens' LogMessageRequest (Maybe Text)
+lmrDetails
+  = lens _lmrDetails (\ s a -> s{_lmrDetails = a})
+
+-- | Message level of client message.
+lmrLevel :: Lens' LogMessageRequest (Maybe Text)
+lmrLevel = lens _lmrLevel (\ s a -> s{_lmrLevel = a})
+
+instance FromJSON LogMessageRequest where
+        parseJSON
+          = withObject "LogMessageRequest"
+              (\ o ->
+                 LogMessageRequest <$>
+                   (o .:? "requestMetadata") <*> (o .:? "clientInfo")
+                     <*> (o .:? "details")
+                     <*> (o .:? "level"))
+
+instance ToJSON LogMessageRequest where
+        toJSON LogMessageRequest{..}
+          = object
+              (catMaybes
+                 [("requestMetadata" .=) <$> _lmrRequestMetadata,
+                  ("clientInfo" .=) <$> _lmrClientInfo,
+                  ("details" .=) <$> _lmrDetails,
+                  ("level" .=) <$> _lmrLevel])
 
 -- | The localized company information.
 --
@@ -963,194 +1115,27 @@ instance ToJSON LocalizedCompanyInfo where
                   ("countryCodes" .=) <$> _lciCountryCodes,
                   ("displayName" .=) <$> _lciDisplayName])
 
--- | Common data that is in each API response.
---
--- /See:/ 'responseMetadata' smart constructor.
-newtype ResponseMetadata = ResponseMetadata
-    { _rmDebugInfo :: Maybe DebugInfo
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ResponseMetadata' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rmDebugInfo'
-responseMetadata
-    :: ResponseMetadata
-responseMetadata =
-    ResponseMetadata
-    { _rmDebugInfo = Nothing
-    }
-
--- | Debug information about this request.
-rmDebugInfo :: Lens' ResponseMetadata (Maybe DebugInfo)
-rmDebugInfo
-  = lens _rmDebugInfo (\ s a -> s{_rmDebugInfo = a})
-
-instance FromJSON ResponseMetadata where
-        parseJSON
-          = withObject "ResponseMetadata"
-              (\ o -> ResponseMetadata <$> (o .:? "debugInfo"))
-
-instance ToJSON ResponseMetadata where
-        toJSON ResponseMetadata{..}
-          = object
-              (catMaybes [("debugInfo" .=) <$> _rmDebugInfo])
-
--- | Request message for LogClientMessage.
---
--- /See:/ 'logMessageRequest' smart constructor.
-data LogMessageRequest = LogMessageRequest
-    { _lmrRequestMetadata :: !(Maybe RequestMetadata)
-    , _lmrClientInfo      :: !(Maybe ClientInfo)
-    , _lmrDetails         :: !(Maybe Text)
-    , _lmrLevel           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'LogMessageRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lmrRequestMetadata'
---
--- * 'lmrClientInfo'
---
--- * 'lmrDetails'
---
--- * 'lmrLevel'
-logMessageRequest
-    :: LogMessageRequest
-logMessageRequest =
-    LogMessageRequest
-    { _lmrRequestMetadata = Nothing
-    , _lmrClientInfo = Nothing
-    , _lmrDetails = Nothing
-    , _lmrLevel = Nothing
-    }
-
--- | Current request metadata.
-lmrRequestMetadata :: Lens' LogMessageRequest (Maybe RequestMetadata)
-lmrRequestMetadata
-  = lens _lmrRequestMetadata
-      (\ s a -> s{_lmrRequestMetadata = a})
-
 -- | Map of client info, such as URL, browser navigator, browser platform,
 -- etc.
-lmrClientInfo :: Lens' LogMessageRequest (Maybe ClientInfo)
-lmrClientInfo
-  = lens _lmrClientInfo
-      (\ s a -> s{_lmrClientInfo = a})
+--
+-- /See:/ 'logMessageRequestClientInfo' smart constructor.
+data LogMessageRequestClientInfo =
+    LogMessageRequestClientInfo
+    deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Details about the client message.
-lmrDetails :: Lens' LogMessageRequest (Maybe Text)
-lmrDetails
-  = lens _lmrDetails (\ s a -> s{_lmrDetails = a})
+-- | Creates a value of 'LogMessageRequestClientInfo' with the minimum fields required to make a request.
+--
+logMessageRequestClientInfo
+    :: LogMessageRequestClientInfo
+logMessageRequestClientInfo = LogMessageRequestClientInfo
 
--- | Message level of client message.
-lmrLevel :: Lens' LogMessageRequest (Maybe Text)
-lmrLevel = lens _lmrLevel (\ s a -> s{_lmrLevel = a})
-
-instance FromJSON LogMessageRequest where
+instance FromJSON LogMessageRequestClientInfo where
         parseJSON
-          = withObject "LogMessageRequest"
-              (\ o ->
-                 LogMessageRequest <$>
-                   (o .:? "requestMetadata") <*> (o .:? "clientInfo")
-                     <*> (o .:? "details")
-                     <*> (o .:? "level"))
+          = withObject "LogMessageRequestClientInfo"
+              (\ o -> pure LogMessageRequestClientInfo)
 
-instance ToJSON LogMessageRequest where
-        toJSON LogMessageRequest{..}
-          = object
-              (catMaybes
-                 [("requestMetadata" .=) <$> _lmrRequestMetadata,
-                  ("clientInfo" .=) <$> _lmrClientInfo,
-                  ("details" .=) <$> _lmrDetails,
-                  ("level" .=) <$> _lmrLevel])
-
--- | Values to use instead of the user\'s respective defaults. These are only
--- honored by whitelisted products.
---
--- /See:/ 'userOverrides' smart constructor.
-data UserOverrides = UserOverrides
-    { _uoIPAddress :: !(Maybe Text)
-    , _uoUserId    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'UserOverrides' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'uoIPAddress'
---
--- * 'uoUserId'
-userOverrides
-    :: UserOverrides
-userOverrides =
-    UserOverrides
-    { _uoIPAddress = Nothing
-    , _uoUserId = Nothing
-    }
-
--- | IP address to use instead of the user\'s geo-located IP address.
-uoIPAddress :: Lens' UserOverrides (Maybe Text)
-uoIPAddress
-  = lens _uoIPAddress (\ s a -> s{_uoIPAddress = a})
-
--- | Logged-in user ID to impersonate instead of the user\'s ID.
-uoUserId :: Lens' UserOverrides (Maybe Text)
-uoUserId = lens _uoUserId (\ s a -> s{_uoUserId = a})
-
-instance FromJSON UserOverrides where
-        parseJSON
-          = withObject "UserOverrides"
-              (\ o ->
-                 UserOverrides <$>
-                   (o .:? "ipAddress") <*> (o .:? "userId"))
-
-instance ToJSON UserOverrides where
-        toJSON UserOverrides{..}
-          = object
-              (catMaybes
-                 [("ipAddress" .=) <$> _uoIPAddress,
-                  ("userId" .=) <$> _uoUserId])
-
--- | Response message for LogClientMessage.
---
--- /See:/ 'logMessageResponse' smart constructor.
-newtype LogMessageResponse = LogMessageResponse
-    { _lmrResponseMetadata :: Maybe ResponseMetadata
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'LogMessageResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lmrResponseMetadata'
-logMessageResponse
-    :: LogMessageResponse
-logMessageResponse =
-    LogMessageResponse
-    { _lmrResponseMetadata = Nothing
-    }
-
--- | Current response metadata.
-lmrResponseMetadata :: Lens' LogMessageResponse (Maybe ResponseMetadata)
-lmrResponseMetadata
-  = lens _lmrResponseMetadata
-      (\ s a -> s{_lmrResponseMetadata = a})
-
-instance FromJSON LogMessageResponse where
-        parseJSON
-          = withObject "LogMessageResponse"
-              (\ o ->
-                 LogMessageResponse <$> (o .:? "responseMetadata"))
-
-instance ToJSON LogMessageResponse where
-        toJSON LogMessageResponse{..}
-          = object
-              (catMaybes
-                 [("responseMetadata" .=) <$> _lmrResponseMetadata])
+instance ToJSON LogMessageRequestClientInfo where
+        toJSON = const (Object mempty)
 
 -- | A lead resource that represents an advertiser contact for a \`Company\`.
 -- These are usually generated via Google Partner Search (the advertiser
@@ -1289,33 +1274,49 @@ instance ToJSON Lead where
                   ("type" .=) <$> _lType,
                   ("gpsMotivations" .=) <$> _lGpsMotivations])
 
--- | Map of client info, such as URL, browser navigator, browser platform,
--- etc.
+-- | Response message for LogClientMessage.
 --
--- /See:/ 'clientInfo' smart constructor.
-data ClientInfo =
-    ClientInfo
-    deriving (Eq,Show,Data,Typeable,Generic)
+-- /See:/ 'logMessageResponse' smart constructor.
+newtype LogMessageResponse = LogMessageResponse
+    { _lmrResponseMetadata :: Maybe ResponseMetadata
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ClientInfo' with the minimum fields required to make a request.
+-- | Creates a value of 'LogMessageResponse' with the minimum fields required to make a request.
 --
-clientInfo
-    :: ClientInfo
-clientInfo = ClientInfo
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lmrResponseMetadata'
+logMessageResponse
+    :: LogMessageResponse
+logMessageResponse =
+    LogMessageResponse
+    { _lmrResponseMetadata = Nothing
+    }
 
-instance FromJSON ClientInfo where
+-- | Current response metadata.
+lmrResponseMetadata :: Lens' LogMessageResponse (Maybe ResponseMetadata)
+lmrResponseMetadata
+  = lens _lmrResponseMetadata
+      (\ s a -> s{_lmrResponseMetadata = a})
+
+instance FromJSON LogMessageResponse where
         parseJSON
-          = withObject "ClientInfo" (\ o -> pure ClientInfo)
+          = withObject "LogMessageResponse"
+              (\ o ->
+                 LogMessageResponse <$> (o .:? "responseMetadata"))
 
-instance ToJSON ClientInfo where
-        toJSON = const (Object mempty)
+instance ToJSON LogMessageResponse where
+        toJSON LogMessageResponse{..}
+          = object
+              (catMaybes
+                 [("responseMetadata" .=) <$> _lmrResponseMetadata])
 
 -- | A company resource in the Google Partners API. Once certified, it
 -- qualifies for being searched by advertisers.
 --
 -- /See:/ 'company' smart constructor.
 data Company = Company
-    { _cPublicProfile             :: !(Maybe PublicProfile)
+    { _cPublicProFile             :: !(Maybe PublicProFile)
     , _cOriginalMinMonthlyBudget  :: !(Maybe Money)
     , _cIndustries                :: !(Maybe [Text])
     , _cConvertedMinMonthlyBudget :: !(Maybe Money)
@@ -1333,7 +1334,7 @@ data Company = Company
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cPublicProfile'
+-- * 'cPublicProFile'
 --
 -- * 'cOriginalMinMonthlyBudget'
 --
@@ -1360,7 +1361,7 @@ company
     :: Company
 company =
     Company
-    { _cPublicProfile = Nothing
+    { _cPublicProFile = Nothing
     , _cOriginalMinMonthlyBudget = Nothing
     , _cIndustries = Nothing
     , _cConvertedMinMonthlyBudget = Nothing
@@ -1375,10 +1376,10 @@ company =
     }
 
 -- | Basic information from the company\'s public profile.
-cPublicProfile :: Lens' Company (Maybe PublicProfile)
-cPublicProfile
-  = lens _cPublicProfile
-      (\ s a -> s{_cPublicProfile = a})
+cPublicProFile :: Lens' Company (Maybe PublicProFile)
+cPublicProFile
+  = lens _cPublicProFile
+      (\ s a -> s{_cPublicProFile = a})
 
 -- | The unconverted minimum monthly budget that the company accepts for
 -- partner business.
@@ -1473,7 +1474,7 @@ instance ToJSON Company where
         toJSON Company{..}
           = object
               (catMaybes
-                 [("publicProfile" .=) <$> _cPublicProfile,
+                 [("publicProfile" .=) <$> _cPublicProFile,
                   ("originalMinMonthlyBudget" .=) <$>
                     _cOriginalMinMonthlyBudget,
                   ("industries" .=) <$> _cIndustries,

@@ -54,7 +54,9 @@ type MyLibraryBookshelvesRemoveVolumeResource =
          Capture "shelf" Text :>
            "removeVolume" :>
              QueryParam "volumeId" Text :>
-               QueryParam "reason" Reason :>
+               QueryParam "reason"
+                 MyLibraryBookshelvesRemoveVolumeReason
+                 :>
                  QueryParam "source" Text :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
@@ -71,7 +73,7 @@ data MyLibraryBookshelvesRemoveVolume' = MyLibraryBookshelvesRemoveVolume'
     { _mlbrvQuotaUser   :: !(Maybe Text)
     , _mlbrvPrettyPrint :: !Bool
     , _mlbrvUserIP      :: !(Maybe Text)
-    , _mlbrvReason      :: !(Maybe Reason)
+    , _mlbrvReason      :: !(Maybe MyLibraryBookshelvesRemoveVolumeReason)
     , _mlbrvShelf       :: !Text
     , _mlbrvKey         :: !(Maybe Key)
     , _mlbrvVolumeId    :: !Text
@@ -142,7 +144,7 @@ mlbrvUserIP
   = lens _mlbrvUserIP (\ s a -> s{_mlbrvUserIP = a})
 
 -- | The reason for which the book is removed from the library.
-mlbrvReason :: Lens' MyLibraryBookshelvesRemoveVolume' (Maybe Reason)
+mlbrvReason :: Lens' MyLibraryBookshelvesRemoveVolume' (Maybe MyLibraryBookshelvesRemoveVolumeReason)
 mlbrvReason
   = lens _mlbrvReason (\ s a -> s{_mlbrvReason = a})
 

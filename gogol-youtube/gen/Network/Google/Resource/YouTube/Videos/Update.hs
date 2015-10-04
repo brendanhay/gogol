@@ -58,7 +58,7 @@ type VideosUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Video :> Put '[JSON] Video
+                         ReqBody '[OctetStream] Video :> Put '[JSON] Video
 
 -- | Updates a video\'s metadata.
 --

@@ -61,10 +61,10 @@ type LayersListResource =
      "layers" :>
        QueryParam "createdAfter" DateTime' :>
          QueryParam "creatorEmail" Text :>
-           QueryParam "role" MapsEngineLayersListRole :>
+           QueryParam "role" LayersListRole :>
              QueryParam "bbox" Text :>
                QueryParam "processingStatus"
-                 MapsEngineLayersListProcessingStatus
+                 LayersListProcessingStatus
                  :>
                  QueryParam "modifiedAfter" DateTime' :>
                    QueryParam "modifiedBefore" DateTime' :>
@@ -93,10 +93,10 @@ data LayersList' = LayersList'
     , _llPrettyPrint      :: !Bool
     , _llUserIP           :: !(Maybe Text)
     , _llCreatorEmail     :: !(Maybe Text)
-    , _llRole             :: !(Maybe MapsEngineLayersListRole)
+    , _llRole             :: !(Maybe LayersListRole)
     , _llKey              :: !(Maybe Key)
     , _llBbox             :: !(Maybe Text)
-    , _llProcessingStatus :: !(Maybe MapsEngineLayersListProcessingStatus)
+    , _llProcessingStatus :: !(Maybe LayersListProcessingStatus)
     , _llModifiedAfter    :: !(Maybe DateTime')
     , _llModifiedBefore   :: !(Maybe DateTime')
     , _llPageToken        :: !(Maybe Text)
@@ -210,7 +210,7 @@ llCreatorEmail
 
 -- | The role parameter indicates that the response should only contain
 -- assets where the current user has the specified level of access.
-llRole :: Lens' LayersList' (Maybe MapsEngineLayersListRole)
+llRole :: Lens' LayersList' (Maybe LayersListRole)
 llRole = lens _llRole (\ s a -> s{_llRole = a})
 
 -- | API key. Your API key identifies your project and provides you with API
@@ -224,7 +224,7 @@ llKey = lens _llKey (\ s a -> s{_llKey = a})
 llBbox :: Lens' LayersList' (Maybe Text)
 llBbox = lens _llBbox (\ s a -> s{_llBbox = a})
 
-llProcessingStatus :: Lens' LayersList' (Maybe MapsEngineLayersListProcessingStatus)
+llProcessingStatus :: Lens' LayersList' (Maybe LayersListProcessingStatus)
 llProcessingStatus
   = lens _llProcessingStatus
       (\ s a -> s{_llProcessingStatus = a})

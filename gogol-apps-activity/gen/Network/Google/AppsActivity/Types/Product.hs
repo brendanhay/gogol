@@ -108,12 +108,12 @@ instance ToJSON Photo where
 --
 -- /See:/ 'event' smart constructor.
 data Event = Event
-    { _ePrimaryEventType     :: !(Maybe PrimaryEventType)
+    { _ePrimaryEventType     :: !(Maybe EventPrimaryEventType)
     , _eUser                 :: !(Maybe User)
     , _eEventTimeMillis      :: !(Maybe Word64)
     , _eRename               :: !(Maybe Rename)
     , _eFromUserDeletion     :: !(Maybe Bool)
-    , _eAdditionalEventTypes :: !(Maybe [AdditionalEventTypesItem])
+    , _eAdditionalEventTypes :: !(Maybe [EventAdditionalEventTypesItem])
     , _ePermissionChanges    :: !(Maybe [PermissionChange])
     , _eTarget               :: !(Maybe Target)
     , _eMove                 :: !(Maybe Move)
@@ -156,7 +156,7 @@ event =
     }
 
 -- | The main type of event that occurred.
-ePrimaryEventType :: Lens' Event (Maybe PrimaryEventType)
+ePrimaryEventType :: Lens' Event (Maybe EventPrimaryEventType)
 ePrimaryEventType
   = lens _ePrimaryEventType
       (\ s a -> s{_ePrimaryEventType = a})
@@ -186,7 +186,7 @@ eFromUserDeletion
 -- multiple actions are part of a single event. For example, creating a
 -- document, renaming it, and sharing it may be part of a single
 -- file-creation event.
-eAdditionalEventTypes :: Lens' Event [AdditionalEventTypesItem]
+eAdditionalEventTypes :: Lens' Event [EventAdditionalEventTypesItem]
 eAdditionalEventTypes
   = lens _eAdditionalEventTypes
       (\ s a -> s{_eAdditionalEventTypes = a})
@@ -497,9 +497,9 @@ instance ToJSON Rename where
 data Permission = Permission
     { _pWithLink     :: !(Maybe Bool)
     , _pUser         :: !(Maybe User)
-    , _pRole         :: !(Maybe Role)
+    , _pRole         :: !(Maybe PermissionRole)
     , _pName         :: !(Maybe Text)
-    , _pType         :: !(Maybe Type)
+    , _pType         :: !(Maybe PermissionType)
     , _pPermissionId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -541,7 +541,7 @@ pUser = lens _pUser (\ s a -> s{_pUser = a})
 
 -- | Indicates the Google Drive permissions role. The role determines a
 -- user\'s ability to read, write, or comment on the file.
-pRole :: Lens' Permission (Maybe Role)
+pRole :: Lens' Permission (Maybe PermissionRole)
 pRole = lens _pRole (\ s a -> s{_pRole = a})
 
 -- | The name of the user or group the permission applies to.
@@ -549,7 +549,7 @@ pName :: Lens' Permission (Maybe Text)
 pName = lens _pName (\ s a -> s{_pName = a})
 
 -- | Indicates how widely permissions are granted.
-pType :: Lens' Permission (Maybe Type)
+pType :: Lens' Permission (Maybe PermissionType)
 pType = lens _pType (\ s a -> s{_pType = a})
 
 -- | The ID for this permission. Corresponds to the Drive API\'s permission
@@ -578,61 +578,6 @@ instance ToJSON Permission where
                   ("user" .=) <$> _pUser, ("role" .=) <$> _pRole,
                   ("name" .=) <$> _pName, ("type" .=) <$> _pType,
                   ("permissionId" .=) <$> _pPermissionId])
-
--- | Contains information about changes in an object\'s parents as a result
--- of a move type event.
---
--- /See:/ 'move' smart constructor.
-data Move = Move
-    { _mAddedParents   :: !(Maybe [Parent])
-    , _mRemovedParents :: !(Maybe [Parent])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Move' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'mAddedParents'
---
--- * 'mRemovedParents'
-move
-    :: Move
-move =
-    Move
-    { _mAddedParents = Nothing
-    , _mRemovedParents = Nothing
-    }
-
--- | The added parent(s).
-mAddedParents :: Lens' Move [Parent]
-mAddedParents
-  = lens _mAddedParents
-      (\ s a -> s{_mAddedParents = a})
-      . _Default
-      . _Coerce
-
--- | The removed parent(s).
-mRemovedParents :: Lens' Move [Parent]
-mRemovedParents
-  = lens _mRemovedParents
-      (\ s a -> s{_mRemovedParents = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON Move where
-        parseJSON
-          = withObject "Move"
-              (\ o ->
-                 Move <$>
-                   (o .:? "addedParents" .!= mempty) <*>
-                     (o .:? "removedParents" .!= mempty))
-
-instance ToJSON Move where
-        toJSON Move{..}
-          = object
-              (catMaybes
-                 [("addedParents" .=) <$> _mAddedParents,
-                  ("removedParents" .=) <$> _mRemovedParents])
 
 -- | Information about the object modified by the event.
 --
@@ -690,3 +635,58 @@ instance ToJSON Target where
               (catMaybes
                  [("mimeType" .=) <$> _tMimeType,
                   ("name" .=) <$> _tName, ("id" .=) <$> _tId])
+
+-- | Contains information about changes in an object\'s parents as a result
+-- of a move type event.
+--
+-- /See:/ 'move' smart constructor.
+data Move = Move
+    { _mAddedParents   :: !(Maybe [Parent])
+    , _mRemovedParents :: !(Maybe [Parent])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Move' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mAddedParents'
+--
+-- * 'mRemovedParents'
+move
+    :: Move
+move =
+    Move
+    { _mAddedParents = Nothing
+    , _mRemovedParents = Nothing
+    }
+
+-- | The added parent(s).
+mAddedParents :: Lens' Move [Parent]
+mAddedParents
+  = lens _mAddedParents
+      (\ s a -> s{_mAddedParents = a})
+      . _Default
+      . _Coerce
+
+-- | The removed parent(s).
+mRemovedParents :: Lens' Move [Parent]
+mRemovedParents
+  = lens _mRemovedParents
+      (\ s a -> s{_mRemovedParents = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON Move where
+        parseJSON
+          = withObject "Move"
+              (\ o ->
+                 Move <$>
+                   (o .:? "addedParents" .!= mempty) <*>
+                     (o .:? "removedParents" .!= mempty))
+
+instance ToJSON Move where
+        toJSON Move{..}
+          = object
+              (catMaybes
+                 [("addedParents" .=) <$> _mAddedParents,
+                  ("removedParents" .=) <$> _mRemovedParents])

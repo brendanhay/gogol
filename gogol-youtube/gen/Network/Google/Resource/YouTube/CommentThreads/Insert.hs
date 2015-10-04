@@ -57,7 +57,7 @@ type CommentThreadsInsertResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] CommentThread :>
+                       ReqBody '[OctetStream] CommentThread :>
                          Post '[JSON] CommentThread
 
 -- | Creates a new top-level comment. To add a reply to an existing comment,

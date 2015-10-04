@@ -35,7 +35,7 @@ module Network.Google.Resource.DFAReporting.RemarketingLists.Patch
     , rlpQuotaUser
     , rlpPrettyPrint
     , rlpUserIP
-    , rlpProfileId
+    , rlpProFileId
     , rlpPayload
     , rlpKey
     , rlpId
@@ -60,7 +60,7 @@ type RemarketingListsPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] RemarketingList :>
+                           ReqBody '[OctetStream] RemarketingList :>
                              Patch '[JSON] RemarketingList
 
 -- | Updates an existing remarketing list. This method supports patch
@@ -71,7 +71,7 @@ data RemarketingListsPatch' = RemarketingListsPatch'
     { _rlpQuotaUser   :: !(Maybe Text)
     , _rlpPrettyPrint :: !Bool
     , _rlpUserIP      :: !(Maybe Text)
-    , _rlpProfileId   :: !Int64
+    , _rlpProFileId   :: !Int64
     , _rlpPayload     :: !RemarketingList
     , _rlpKey         :: !(Maybe Key)
     , _rlpId          :: !Int64
@@ -89,7 +89,7 @@ data RemarketingListsPatch' = RemarketingListsPatch'
 --
 -- * 'rlpUserIP'
 --
--- * 'rlpProfileId'
+-- * 'rlpProFileId'
 --
 -- * 'rlpPayload'
 --
@@ -105,12 +105,12 @@ remarketingListsPatch'
     -> RemarketingList -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> RemarketingListsPatch'
-remarketingListsPatch' pRlpProfileId_ pRlpPayload_ pRlpId_ =
+remarketingListsPatch' pRlpProFileId_ pRlpPayload_ pRlpId_ =
     RemarketingListsPatch'
     { _rlpQuotaUser = Nothing
     , _rlpPrettyPrint = True
     , _rlpUserIP = Nothing
-    , _rlpProfileId = pRlpProfileId_
+    , _rlpProFileId = pRlpProFileId_
     , _rlpPayload = pRlpPayload_
     , _rlpKey = Nothing
     , _rlpId = pRlpId_
@@ -138,9 +138,9 @@ rlpUserIP
   = lens _rlpUserIP (\ s a -> s{_rlpUserIP = a})
 
 -- | User profile ID associated with this request.
-rlpProfileId :: Lens' RemarketingListsPatch' Int64
-rlpProfileId
-  = lens _rlpProfileId (\ s a -> s{_rlpProfileId = a})
+rlpProFileId :: Lens' RemarketingListsPatch' Int64
+rlpProFileId
+  = lens _rlpProFileId (\ s a -> s{_rlpProFileId = a})
 
 -- | Multipart request metadata.
 rlpPayload :: Lens' RemarketingListsPatch' RemarketingList
@@ -176,7 +176,7 @@ instance GoogleRequest RemarketingListsPatch' where
         type Rs RemarketingListsPatch' = RemarketingList
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u RemarketingListsPatch'{..}
-          = go _rlpProfileId (Just _rlpId) _rlpQuotaUser
+          = go _rlpProFileId (Just _rlpId) _rlpQuotaUser
               (Just _rlpPrettyPrint)
               _rlpUserIP
               _rlpFields

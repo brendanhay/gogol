@@ -60,7 +60,8 @@ type RoomsLeaveResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] RoomLeaveRequest :> Post '[JSON] Room
+                           ReqBody '[OctetStream] RoomLeaveRequest :>
+                             Post '[JSON] Room
 
 -- | Leave a room. For internal use by the Games SDK only. Calling this
 -- method directly is unsupported.

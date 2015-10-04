@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.ChangeLogs.Get
     , clgQuotaUser
     , clgPrettyPrint
     , clgUserIP
-    , clgProfileId
+    , clgProFileId
     , clgKey
     , clgId
     , clgOAuthToken
@@ -66,7 +66,7 @@ data ChangeLogsGet' = ChangeLogsGet'
     { _clgQuotaUser   :: !(Maybe Text)
     , _clgPrettyPrint :: !Bool
     , _clgUserIP      :: !(Maybe Text)
-    , _clgProfileId   :: !Int64
+    , _clgProFileId   :: !Int64
     , _clgKey         :: !(Maybe Key)
     , _clgId          :: !Int64
     , _clgOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +83,7 @@ data ChangeLogsGet' = ChangeLogsGet'
 --
 -- * 'clgUserIP'
 --
--- * 'clgProfileId'
+-- * 'clgProFileId'
 --
 -- * 'clgKey'
 --
@@ -96,12 +96,12 @@ changeLogsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> ChangeLogsGet'
-changeLogsGet' pClgProfileId_ pClgId_ =
+changeLogsGet' pClgProFileId_ pClgId_ =
     ChangeLogsGet'
     { _clgQuotaUser = Nothing
     , _clgPrettyPrint = True
     , _clgUserIP = Nothing
-    , _clgProfileId = pClgProfileId_
+    , _clgProFileId = pClgProFileId_
     , _clgKey = Nothing
     , _clgId = pClgId_
     , _clgOAuthToken = Nothing
@@ -128,9 +128,9 @@ clgUserIP
   = lens _clgUserIP (\ s a -> s{_clgUserIP = a})
 
 -- | User profile ID associated with this request.
-clgProfileId :: Lens' ChangeLogsGet' Int64
-clgProfileId
-  = lens _clgProfileId (\ s a -> s{_clgProfileId = a})
+clgProFileId :: Lens' ChangeLogsGet' Int64
+clgProFileId
+  = lens _clgProFileId (\ s a -> s{_clgProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -161,7 +161,7 @@ instance GoogleRequest ChangeLogsGet' where
         type Rs ChangeLogsGet' = ChangeLog
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ChangeLogsGet'{..}
-          = go _clgProfileId _clgId _clgQuotaUser
+          = go _clgProFileId _clgId _clgQuotaUser
               (Just _clgPrettyPrint)
               _clgUserIP
               _clgFields

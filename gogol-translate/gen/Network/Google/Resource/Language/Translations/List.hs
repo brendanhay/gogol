@@ -53,7 +53,7 @@ type TranslationsListResource =
      "v2" :>
        QueryParams "q" Text :>
          QueryParam "target" Text :>
-           QueryParam "format" Format :>
+           QueryParam "format" TranslationsListFormat :>
              QueryParam "source" Text :>
                QueryParams "cid" Text :>
                  QueryParam "quotaUser" Text :>
@@ -72,7 +72,7 @@ data TranslationsList' = TranslationsList'
     { _tlQuotaUser   :: !(Maybe Text)
     , _tlPrettyPrint :: !Bool
     , _tlUserIP      :: !(Maybe Text)
-    , _tlFormat      :: !(Maybe Format)
+    , _tlFormat      :: !(Maybe TranslationsListFormat)
     , _tlQ           :: ![Text]
     , _tlKey         :: !(Maybe Key)
     , _tlSource      :: !(Maybe Text)
@@ -145,7 +145,7 @@ tlUserIP :: Lens' TranslationsList' (Maybe Text)
 tlUserIP = lens _tlUserIP (\ s a -> s{_tlUserIP = a})
 
 -- | The format of the text
-tlFormat :: Lens' TranslationsList' (Maybe Format)
+tlFormat :: Lens' TranslationsList' (Maybe TranslationsListFormat)
 tlFormat = lens _tlFormat (\ s a -> s{_tlFormat = a})
 
 -- | The text to translate

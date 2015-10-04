@@ -31,14 +31,14 @@ module Network.Google.Resource.Games.Snapshots.Get
     , SnapshotsGet'
 
     -- * Request Lenses
-    , snaQuotaUser
-    , snaPrettyPrint
-    , snaUserIP
-    , snaKey
-    , snaLanguage
-    , snaOAuthToken
-    , snaFields
-    , snaSnapshotId
+    , sQuotaUser
+    , sPrettyPrint
+    , sUserIP
+    , sKey
+    , sLanguage
+    , sOAuthToken
+    , sFields
+    , sSnapshotId
     ) where
 
 import           Network.Google.Games.Types
@@ -62,111 +62,106 @@ type SnapshotsGetResource =
 --
 -- /See:/ 'snapshotsGet'' smart constructor.
 data SnapshotsGet' = SnapshotsGet'
-    { _snaQuotaUser   :: !(Maybe Text)
-    , _snaPrettyPrint :: !Bool
-    , _snaUserIP      :: !(Maybe Text)
-    , _snaKey         :: !(Maybe Key)
-    , _snaLanguage    :: !(Maybe Text)
-    , _snaOAuthToken  :: !(Maybe OAuthToken)
-    , _snaFields      :: !(Maybe Text)
-    , _snaSnapshotId  :: !Text
+    { _sQuotaUser   :: !(Maybe Text)
+    , _sPrettyPrint :: !Bool
+    , _sUserIP      :: !(Maybe Text)
+    , _sKey         :: !(Maybe Key)
+    , _sLanguage    :: !(Maybe Text)
+    , _sOAuthToken  :: !(Maybe OAuthToken)
+    , _sFields      :: !(Maybe Text)
+    , _sSnapshotId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SnapshotsGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'snaQuotaUser'
+-- * 'sQuotaUser'
 --
--- * 'snaPrettyPrint'
+-- * 'sPrettyPrint'
 --
--- * 'snaUserIP'
+-- * 'sUserIP'
 --
--- * 'snaKey'
+-- * 'sKey'
 --
--- * 'snaLanguage'
+-- * 'sLanguage'
 --
--- * 'snaOAuthToken'
+-- * 'sOAuthToken'
 --
--- * 'snaFields'
+-- * 'sFields'
 --
--- * 'snaSnapshotId'
+-- * 'sSnapshotId'
 snapshotsGet'
     :: Text -- ^ 'snapshotId'
     -> SnapshotsGet'
-snapshotsGet' pSnaSnapshotId_ =
+snapshotsGet' pSSnapshotId_ =
     SnapshotsGet'
-    { _snaQuotaUser = Nothing
-    , _snaPrettyPrint = True
-    , _snaUserIP = Nothing
-    , _snaKey = Nothing
-    , _snaLanguage = Nothing
-    , _snaOAuthToken = Nothing
-    , _snaFields = Nothing
-    , _snaSnapshotId = pSnaSnapshotId_
+    { _sQuotaUser = Nothing
+    , _sPrettyPrint = True
+    , _sUserIP = Nothing
+    , _sKey = Nothing
+    , _sLanguage = Nothing
+    , _sOAuthToken = Nothing
+    , _sFields = Nothing
+    , _sSnapshotId = pSSnapshotId_
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-snaQuotaUser :: Lens' SnapshotsGet' (Maybe Text)
-snaQuotaUser
-  = lens _snaQuotaUser (\ s a -> s{_snaQuotaUser = a})
+sQuotaUser :: Lens' SnapshotsGet' (Maybe Text)
+sQuotaUser
+  = lens _sQuotaUser (\ s a -> s{_sQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-snaPrettyPrint :: Lens' SnapshotsGet' Bool
-snaPrettyPrint
-  = lens _snaPrettyPrint
-      (\ s a -> s{_snaPrettyPrint = a})
+sPrettyPrint :: Lens' SnapshotsGet' Bool
+sPrettyPrint
+  = lens _sPrettyPrint (\ s a -> s{_sPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-snaUserIP :: Lens' SnapshotsGet' (Maybe Text)
-snaUserIP
-  = lens _snaUserIP (\ s a -> s{_snaUserIP = a})
+sUserIP :: Lens' SnapshotsGet' (Maybe Text)
+sUserIP = lens _sUserIP (\ s a -> s{_sUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-snaKey :: Lens' SnapshotsGet' (Maybe Key)
-snaKey = lens _snaKey (\ s a -> s{_snaKey = a})
+sKey :: Lens' SnapshotsGet' (Maybe Key)
+sKey = lens _sKey (\ s a -> s{_sKey = a})
 
 -- | The preferred language to use for strings returned by this method.
-snaLanguage :: Lens' SnapshotsGet' (Maybe Text)
-snaLanguage
-  = lens _snaLanguage (\ s a -> s{_snaLanguage = a})
+sLanguage :: Lens' SnapshotsGet' (Maybe Text)
+sLanguage
+  = lens _sLanguage (\ s a -> s{_sLanguage = a})
 
 -- | OAuth 2.0 token for the current user.
-snaOAuthToken :: Lens' SnapshotsGet' (Maybe OAuthToken)
-snaOAuthToken
-  = lens _snaOAuthToken
-      (\ s a -> s{_snaOAuthToken = a})
+sOAuthToken :: Lens' SnapshotsGet' (Maybe OAuthToken)
+sOAuthToken
+  = lens _sOAuthToken (\ s a -> s{_sOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-snaFields :: Lens' SnapshotsGet' (Maybe Text)
-snaFields
-  = lens _snaFields (\ s a -> s{_snaFields = a})
+sFields :: Lens' SnapshotsGet' (Maybe Text)
+sFields = lens _sFields (\ s a -> s{_sFields = a})
 
 -- | The ID of the snapshot.
-snaSnapshotId :: Lens' SnapshotsGet' Text
-snaSnapshotId
-  = lens _snaSnapshotId
-      (\ s a -> s{_snaSnapshotId = a})
+sSnapshotId :: Lens' SnapshotsGet' Text
+sSnapshotId
+  = lens _sSnapshotId (\ s a -> s{_sSnapshotId = a})
 
 instance GoogleAuth SnapshotsGet' where
-        authKey = snaKey . _Just
-        authToken = snaOAuthToken . _Just
+        authKey = sKey . _Just
+        authToken = sOAuthToken . _Just
 
 instance GoogleRequest SnapshotsGet' where
         type Rs SnapshotsGet' = Snapshot
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u SnapshotsGet'{..}
-          = go _snaSnapshotId _snaLanguage _snaQuotaUser
-              (Just _snaPrettyPrint)
-              _snaUserIP
-              _snaFields
-              _snaKey
-              _snaOAuthToken
+          = go _sSnapshotId _sLanguage _sQuotaUser
+              (Just _sPrettyPrint)
+              _sUserIP
+              _sFields
+              _sKey
+              _sOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

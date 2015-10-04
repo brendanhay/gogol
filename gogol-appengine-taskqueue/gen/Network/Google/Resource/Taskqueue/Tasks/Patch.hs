@@ -64,7 +64,7 @@ type TasksPatchResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] Task :> Patch '[JSON] Task
+                               ReqBody '[OctetStream] Task :> Patch '[JSON] Task
 
 -- | Update tasks that are leased out of a TaskQueue. This method supports
 -- patch semantics.

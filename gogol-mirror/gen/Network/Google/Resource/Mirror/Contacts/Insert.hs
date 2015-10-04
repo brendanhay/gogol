@@ -54,7 +54,8 @@ type ContactsInsertResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] Contact :> Post '[JSON] Contact
+                     ReqBody '[OctetStream] Contact :>
+                       Post '[JSON] Contact
 
 -- | Inserts a new contact.
 --

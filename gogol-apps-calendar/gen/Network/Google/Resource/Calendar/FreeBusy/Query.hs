@@ -54,7 +54,7 @@ type FreeBusyQueryResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] FreeBusyRequest :>
+                     ReqBody '[OctetStream] FreeBusyRequest :>
                        Post '[JSON] FreeBusyResponse
 
 -- | Returns free\/busy information for a set of calendars.

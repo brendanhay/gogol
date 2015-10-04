@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.RemarketingLists.Insert
     , rliQuotaUser
     , rliPrettyPrint
     , rliUserIP
-    , rliProfileId
+    , rliProFileId
     , rliPayload
     , rliKey
     , rliOAuthToken
@@ -57,7 +57,7 @@ type RemarketingListsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] RemarketingList :>
+                         ReqBody '[OctetStream] RemarketingList :>
                            Post '[JSON] RemarketingList
 
 -- | Inserts a new remarketing list.
@@ -67,7 +67,7 @@ data RemarketingListsInsert' = RemarketingListsInsert'
     { _rliQuotaUser   :: !(Maybe Text)
     , _rliPrettyPrint :: !Bool
     , _rliUserIP      :: !(Maybe Text)
-    , _rliProfileId   :: !Int64
+    , _rliProFileId   :: !Int64
     , _rliPayload     :: !RemarketingList
     , _rliKey         :: !(Maybe Key)
     , _rliOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data RemarketingListsInsert' = RemarketingListsInsert'
 --
 -- * 'rliUserIP'
 --
--- * 'rliProfileId'
+-- * 'rliProFileId'
 --
 -- * 'rliPayload'
 --
@@ -97,12 +97,12 @@ remarketingListsInsert'
     :: Int64 -- ^ 'profileId'
     -> RemarketingList -- ^ 'payload'
     -> RemarketingListsInsert'
-remarketingListsInsert' pRliProfileId_ pRliPayload_ =
+remarketingListsInsert' pRliProFileId_ pRliPayload_ =
     RemarketingListsInsert'
     { _rliQuotaUser = Nothing
     , _rliPrettyPrint = True
     , _rliUserIP = Nothing
-    , _rliProfileId = pRliProfileId_
+    , _rliProFileId = pRliProFileId_
     , _rliPayload = pRliPayload_
     , _rliKey = Nothing
     , _rliOAuthToken = Nothing
@@ -129,9 +129,9 @@ rliUserIP
   = lens _rliUserIP (\ s a -> s{_rliUserIP = a})
 
 -- | User profile ID associated with this request.
-rliProfileId :: Lens' RemarketingListsInsert' Int64
-rliProfileId
-  = lens _rliProfileId (\ s a -> s{_rliProfileId = a})
+rliProFileId :: Lens' RemarketingListsInsert' Int64
+rliProFileId
+  = lens _rliProFileId (\ s a -> s{_rliProFileId = a})
 
 -- | Multipart request metadata.
 rliPayload :: Lens' RemarketingListsInsert' RemarketingList
@@ -163,7 +163,7 @@ instance GoogleRequest RemarketingListsInsert' where
         type Rs RemarketingListsInsert' = RemarketingList
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u RemarketingListsInsert'{..}
-          = go _rliProfileId _rliQuotaUser
+          = go _rliProFileId _rliQuotaUser
               (Just _rliPrettyPrint)
               _rliUserIP
               _rliFields

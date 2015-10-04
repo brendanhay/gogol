@@ -54,7 +54,7 @@ type EditsImagesListResource =
          Capture "editId" Text :>
            "listings" :>
              Capture "language" Text :>
-               Capture "imageType" ImageType :>
+               Capture "imageType" EditsImagesListImageType :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -72,7 +72,7 @@ data EditsImagesList' = EditsImagesList'
     , _eilPrettyPrint :: !Bool
     , _eilPackageName :: !Text
     , _eilUserIP      :: !(Maybe Text)
-    , _eilImageType   :: !ImageType
+    , _eilImageType   :: !EditsImagesListImageType
     , _eilKey         :: !(Maybe Key)
     , _eilLanguage    :: !Text
     , _eilOAuthToken  :: !(Maybe OAuthToken)
@@ -105,7 +105,7 @@ data EditsImagesList' = EditsImagesList'
 -- * 'eilFields'
 editsImagesList'
     :: Text -- ^ 'packageName'
-    -> ImageType -- ^ 'imageType'
+    -> EditsImagesListImageType -- ^ 'imageType'
     -> Text -- ^ 'language'
     -> Text -- ^ 'editId'
     -> EditsImagesList'
@@ -149,7 +149,7 @@ eilUserIP :: Lens' EditsImagesList' (Maybe Text)
 eilUserIP
   = lens _eilUserIP (\ s a -> s{_eilUserIP = a})
 
-eilImageType :: Lens' EditsImagesList' ImageType
+eilImageType :: Lens' EditsImagesList' EditsImagesListImageType
 eilImageType
   = lens _eilImageType (\ s a -> s{_eilImageType = a})
 

@@ -35,7 +35,7 @@ module Network.Google.Resource.DFAReporting.Reports.Files.List
     , rflPrettyPrint
     , rflUserIP
     , rflReportId
-    , rflProfileId
+    , rflProFileId
     , rflSortOrder
     , rflKey
     , rflPageToken
@@ -56,13 +56,9 @@ type ReportsFilesListResource =
          "reports" :>
            Capture "reportId" Int64 :>
              "files" :>
-               QueryParam "sortOrder"
-                 DfareportingReportsFilesListSortOrder
-                 :>
+               QueryParam "sortOrder" ReportsFilesListSortOrder :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "sortField"
-                     DfareportingReportsFilesListSortField
-                     :>
+                   QueryParam "sortField" ReportsFilesListSortField :>
                      QueryParam "maxResults" Int32 :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
@@ -81,11 +77,11 @@ data ReportsFilesList' = ReportsFilesList'
     , _rflPrettyPrint :: !Bool
     , _rflUserIP      :: !(Maybe Text)
     , _rflReportId    :: !Int64
-    , _rflProfileId   :: !Int64
-    , _rflSortOrder   :: !DfareportingReportsFilesListSortOrder
+    , _rflProFileId   :: !Int64
+    , _rflSortOrder   :: !ReportsFilesListSortOrder
     , _rflKey         :: !(Maybe Key)
     , _rflPageToken   :: !(Maybe Text)
-    , _rflSortField   :: !DfareportingReportsFilesListSortField
+    , _rflSortField   :: !ReportsFilesListSortField
     , _rflOAuthToken  :: !(Maybe OAuthToken)
     , _rflMaxResults  :: !(Maybe Int32)
     , _rflFields      :: !(Maybe Text)
@@ -103,7 +99,7 @@ data ReportsFilesList' = ReportsFilesList'
 --
 -- * 'rflReportId'
 --
--- * 'rflProfileId'
+-- * 'rflProFileId'
 --
 -- * 'rflSortOrder'
 --
@@ -122,17 +118,17 @@ reportsFilesList'
     :: Int64 -- ^ 'reportId'
     -> Int64 -- ^ 'profileId'
     -> ReportsFilesList'
-reportsFilesList' pRflReportId_ pRflProfileId_ =
+reportsFilesList' pRflReportId_ pRflProFileId_ =
     ReportsFilesList'
     { _rflQuotaUser = Nothing
     , _rflPrettyPrint = True
     , _rflUserIP = Nothing
     , _rflReportId = pRflReportId_
-    , _rflProfileId = pRflProfileId_
-    , _rflSortOrder = DRFLSODescending
+    , _rflProFileId = pRflProFileId_
+    , _rflSortOrder = RFLSODescending
     , _rflKey = Nothing
     , _rflPageToken = Nothing
-    , _rflSortField = DRFLSFLastModifiedTime
+    , _rflSortField = RFLSFLastModifiedTime
     , _rflOAuthToken = Nothing
     , _rflMaxResults = Nothing
     , _rflFields = Nothing
@@ -163,12 +159,12 @@ rflReportId
   = lens _rflReportId (\ s a -> s{_rflReportId = a})
 
 -- | The DFA profile ID.
-rflProfileId :: Lens' ReportsFilesList' Int64
-rflProfileId
-  = lens _rflProfileId (\ s a -> s{_rflProfileId = a})
+rflProFileId :: Lens' ReportsFilesList' Int64
+rflProFileId
+  = lens _rflProFileId (\ s a -> s{_rflProFileId = a})
 
 -- | Order of sorted results, default is \'DESCENDING\'.
-rflSortOrder :: Lens' ReportsFilesList' DfareportingReportsFilesListSortOrder
+rflSortOrder :: Lens' ReportsFilesList' ReportsFilesListSortOrder
 rflSortOrder
   = lens _rflSortOrder (\ s a -> s{_rflSortOrder = a})
 
@@ -184,7 +180,7 @@ rflPageToken
   = lens _rflPageToken (\ s a -> s{_rflPageToken = a})
 
 -- | The field by which to sort the list.
-rflSortField :: Lens' ReportsFilesList' DfareportingReportsFilesListSortField
+rflSortField :: Lens' ReportsFilesList' ReportsFilesListSortField
 rflSortField
   = lens _rflSortField (\ s a -> s{_rflSortField = a})
 
@@ -213,7 +209,7 @@ instance GoogleRequest ReportsFilesList' where
         type Rs ReportsFilesList' = FileList
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ReportsFilesList'{..}
-          = go _rflProfileId _rflReportId (Just _rflSortOrder)
+          = go _rflProFileId _rflReportId (Just _rflSortOrder)
               _rflPageToken
               (Just _rflSortField)
               _rflMaxResults

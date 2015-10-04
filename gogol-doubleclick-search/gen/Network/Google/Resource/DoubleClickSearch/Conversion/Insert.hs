@@ -54,7 +54,7 @@ type ConversionInsertResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] ConversionList :>
+                     ReqBody '[OctetStream] ConversionList :>
                        Post '[JSON] ConversionList
 
 -- | Inserts a batch of new conversions into DoubleClick Search.

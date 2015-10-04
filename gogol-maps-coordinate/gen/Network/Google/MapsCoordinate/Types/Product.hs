@@ -90,55 +90,6 @@ instance ToJSON LocationListResponse where
                   Just ("kind" .= _llrKind),
                   ("items" .=) <$> _llrItems])
 
--- | Response from a List Workers request.
---
--- /See:/ 'workerListResponse' smart constructor.
-data WorkerListResponse = WorkerListResponse
-    { _wlrKind  :: !Text
-    , _wlrItems :: !(Maybe [Worker])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'WorkerListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'wlrKind'
---
--- * 'wlrItems'
-workerListResponse
-    :: WorkerListResponse
-workerListResponse =
-    WorkerListResponse
-    { _wlrKind = "coordinate#workerList"
-    , _wlrItems = Nothing
-    }
-
--- | Identifies this object as a list of workers.
-wlrKind :: Lens' WorkerListResponse Text
-wlrKind = lens _wlrKind (\ s a -> s{_wlrKind = a})
-
--- | Workers in the collection.
-wlrItems :: Lens' WorkerListResponse [Worker]
-wlrItems
-  = lens _wlrItems (\ s a -> s{_wlrItems = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON WorkerListResponse where
-        parseJSON
-          = withObject "WorkerListResponse"
-              (\ o ->
-                 WorkerListResponse <$>
-                   (o .:? "kind" .!= "coordinate#workerList") <*>
-                     (o .:? "items" .!= mempty))
-
-instance ToJSON WorkerListResponse where
-        toJSON WorkerListResponse{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _wlrKind),
-                  ("items" .=) <$> _wlrItems])
-
 -- | Pagination information.
 --
 -- /See:/ 'tokenPagination' smart constructor.
@@ -199,73 +150,54 @@ instance ToJSON TokenPagination where
                   Just ("kind" .= _tpKind),
                   ("previousPageToken" .=) <$> _tpPreviousPageToken])
 
--- | Location of a job.
+-- | Response from a List Workers request.
 --
--- /See:/ 'location' smart constructor.
-data Location = Location
-    { _lAddressLine :: !(Maybe [Text])
-    , _lKind        :: !Text
-    , _lLat         :: !(Maybe Double)
-    , _lLng         :: !(Maybe Double)
+-- /See:/ 'workerListResponse' smart constructor.
+data WorkerListResponse = WorkerListResponse
+    { _wlrKind  :: !Text
+    , _wlrItems :: !(Maybe [Worker])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Location' with the minimum fields required to make a request.
+-- | Creates a value of 'WorkerListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lAddressLine'
+-- * 'wlrKind'
 --
--- * 'lKind'
---
--- * 'lLat'
---
--- * 'lLng'
-location
-    :: Location
-location =
-    Location
-    { _lAddressLine = Nothing
-    , _lKind = "coordinate#location"
-    , _lLat = Nothing
-    , _lLng = Nothing
+-- * 'wlrItems'
+workerListResponse
+    :: WorkerListResponse
+workerListResponse =
+    WorkerListResponse
+    { _wlrKind = "coordinate#workerList"
+    , _wlrItems = Nothing
     }
 
--- | Address.
-lAddressLine :: Lens' Location [Text]
-lAddressLine
-  = lens _lAddressLine (\ s a -> s{_lAddressLine = a})
-      . _Default
+-- | Identifies this object as a list of workers.
+wlrKind :: Lens' WorkerListResponse Text
+wlrKind = lens _wlrKind (\ s a -> s{_wlrKind = a})
+
+-- | Workers in the collection.
+wlrItems :: Lens' WorkerListResponse [Worker]
+wlrItems
+  = lens _wlrItems (\ s a -> s{_wlrItems = a}) .
+      _Default
       . _Coerce
 
--- | Identifies this object as a location.
-lKind :: Lens' Location Text
-lKind = lens _lKind (\ s a -> s{_lKind = a})
-
--- | Latitude.
-lLat :: Lens' Location (Maybe Double)
-lLat = lens _lLat (\ s a -> s{_lLat = a})
-
--- | Longitude.
-lLng :: Lens' Location (Maybe Double)
-lLng = lens _lLng (\ s a -> s{_lLng = a})
-
-instance FromJSON Location where
+instance FromJSON WorkerListResponse where
         parseJSON
-          = withObject "Location"
+          = withObject "WorkerListResponse"
               (\ o ->
-                 Location <$>
-                   (o .:? "addressLine" .!= mempty) <*>
-                     (o .:? "kind" .!= "coordinate#location")
-                     <*> (o .:? "lat")
-                     <*> (o .:? "lng"))
+                 WorkerListResponse <$>
+                   (o .:? "kind" .!= "coordinate#workerList") <*>
+                     (o .:? "items" .!= mempty))
 
-instance ToJSON Location where
-        toJSON Location{..}
+instance ToJSON WorkerListResponse where
+        toJSON WorkerListResponse{..}
           = object
               (catMaybes
-                 [("addressLine" .=) <$> _lAddressLine,
-                  Just ("kind" .= _lKind), ("lat" .=) <$> _lLat,
-                  ("lng" .=) <$> _lLng])
+                 [Just ("kind" .= _wlrKind),
+                  ("items" .=) <$> _wlrItems])
 
 -- | Job schedule.
 --
@@ -344,6 +276,74 @@ instance ToJSON Schedule where
                   Just ("kind" .= _sKind),
                   ("endTime" .=) <$> _sEndTime,
                   ("duration" .=) <$> _sDuration])
+
+-- | Location of a job.
+--
+-- /See:/ 'location' smart constructor.
+data Location = Location
+    { _lAddressLine :: !(Maybe [Text])
+    , _lKind        :: !Text
+    , _lLat         :: !(Maybe Double)
+    , _lLng         :: !(Maybe Double)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Location' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lAddressLine'
+--
+-- * 'lKind'
+--
+-- * 'lLat'
+--
+-- * 'lLng'
+location
+    :: Location
+location =
+    Location
+    { _lAddressLine = Nothing
+    , _lKind = "coordinate#location"
+    , _lLat = Nothing
+    , _lLng = Nothing
+    }
+
+-- | Address.
+lAddressLine :: Lens' Location [Text]
+lAddressLine
+  = lens _lAddressLine (\ s a -> s{_lAddressLine = a})
+      . _Default
+      . _Coerce
+
+-- | Identifies this object as a location.
+lKind :: Lens' Location Text
+lKind = lens _lKind (\ s a -> s{_lKind = a})
+
+-- | Latitude.
+lLat :: Lens' Location (Maybe Double)
+lLat = lens _lLat (\ s a -> s{_lLat = a})
+
+-- | Longitude.
+lLng :: Lens' Location (Maybe Double)
+lLng = lens _lLng (\ s a -> s{_lLng = a})
+
+instance FromJSON Location where
+        parseJSON
+          = withObject "Location"
+              (\ o ->
+                 Location <$>
+                   (o .:? "addressLine" .!= mempty) <*>
+                     (o .:? "kind" .!= "coordinate#location")
+                     <*> (o .:? "lat")
+                     <*> (o .:? "lng"))
+
+instance ToJSON Location where
+        toJSON Location{..}
+          = object
+              (catMaybes
+                 [("addressLine" .=) <$> _lAddressLine,
+                  Just ("kind" .= _lKind), ("lat" .=) <$> _lLat,
+                  ("lng" .=) <$> _lLng])
 
 -- | Current state of a job.
 --

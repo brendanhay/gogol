@@ -17,18 +17,6 @@ module Network.Google.AndroidEnterprise.Types
     -- * Service URL
       androidEnterpriseURL
 
-    -- * CollectionsListResponse
-    , CollectionsListResponse
-    , collectionsListResponse
-    , clrKind
-    , clrCollection
-
-    -- * EnterpriseAccount
-    , EnterpriseAccount
-    , enterpriseAccount
-    , eaKind
-    , eaAccountEmail
-
     -- * GroupLicense
     , GroupLicense
     , groupLicense
@@ -39,6 +27,18 @@ module Network.Google.AndroidEnterprise.Types
     , glProductId
     , glAcquisitionKind
 
+    -- * EnterpriseAccount
+    , EnterpriseAccount
+    , enterpriseAccount
+    , eaKind
+    , eaAccountEmail
+
+    -- * CollectionsListResponse
+    , CollectionsListResponse
+    , collectionsListResponse
+    , clrKind
+    , clrCollection
+
     -- * AppRestrictionsSchemaRestrictionRestrictionValue
     , AppRestrictionsSchemaRestrictionRestrictionValue
     , appRestrictionsSchemaRestrictionRestrictionValue
@@ -48,23 +48,29 @@ module Network.Google.AndroidEnterprise.Types
     , arsrrvType
     , arsrrvValueString
 
-    -- * GroupLicenseUsersListResponse
-    , GroupLicenseUsersListResponse
-    , groupLicenseUsersListResponse
-    , glulrKind
-    , glulrUser
-
     -- * DeviceState
     , DeviceState
     , deviceState
     , dsKind
     , dsAccountState
 
+    -- * GroupLicenseUsersListResponse
+    , GroupLicenseUsersListResponse
+    , groupLicenseUsersListResponse
+    , glulrKind
+    , glulrUser
+
     -- * ApprovalURLInfo
     , ApprovalURLInfo
     , approvalURLInfo
     , auiApprovalURL
     , auiKind
+
+    -- * ProductPermission
+    , ProductPermission
+    , productPermission
+    , ppState
+    , ppPermissionId
 
     -- * Device
     , Device
@@ -73,17 +79,11 @@ module Network.Google.AndroidEnterprise.Types
     , dManagementType
     , dAndroidId
 
-    -- * ProductPermission
-    , ProductPermission
-    , productPermission
-    , ppState
-    , ppPermissionId
-
-    -- * AppVersion
-    , AppVersion
-    , appVersion
-    , avVersionCode
-    , avVersionString
+    -- * InstallsListResponse
+    , InstallsListResponse
+    , installsListResponse
+    , ilrKind
+    , ilrInstall
 
     -- * AppRestrictionsSchemaRestriction
     , AppRestrictionsSchemaRestriction
@@ -102,11 +102,17 @@ module Network.Google.AndroidEnterprise.Types
     , ulrKind
     , ulrUser
 
-    -- * InstallsListResponse
-    , InstallsListResponse
-    , installsListResponse
-    , ilrKind
-    , ilrInstall
+    -- * AppVersion
+    , AppVersion
+    , appVersion
+    , avVersionCode
+    , avVersionString
+
+    -- * GroupLicensesListResponse
+    , GroupLicensesListResponse
+    , groupLicensesListResponse
+    , gllrGroupLicense
+    , gllrKind
 
     -- * Collection
     , Collection
@@ -116,19 +122,6 @@ module Network.Google.AndroidEnterprise.Types
     , cVisibility
     , cName
     , cProductId
-
-    -- * GroupLicensesListResponse
-    , GroupLicensesListResponse
-    , groupLicensesListResponse
-    , gllrGroupLicense
-    , gllrKind
-
-    -- * User
-    , User
-    , user
-    , uKind
-    , uId
-    , uPrimaryEmail
 
     -- * ProductSet
     , ProductSet
@@ -144,22 +137,23 @@ module Network.Google.AndroidEnterprise.Types
     , iInstallState
     , iProductId
 
-    -- * EnterprisesSendTestPushNotificationResponse
-    , EnterprisesSendTestPushNotificationResponse
-    , enterprisesSendTestPushNotificationResponse
-    , estpnrTopicName
-    , estpnrMessageId
+    -- * User
+    , User
+    , user
+    , uKind
+    , uId
+    , uPrimaryEmail
 
     -- * ProductsGenerateApprovalURLResponse
     , ProductsGenerateApprovalURLResponse
     , productsGenerateApprovalURLResponse
     , pgaurURL
 
-    -- * AppRestrictionsSchema
-    , AppRestrictionsSchema
-    , appRestrictionsSchema
-    , arsKind
-    , arsRestrictions
+    -- * EnterprisesSendTestPushNotificationResponse
+    , EnterprisesSendTestPushNotificationResponse
+    , enterprisesSendTestPushNotificationResponse
+    , estpnrTopicName
+    , estpnrMessageId
 
     -- * EnterprisesListResponse
     , EnterprisesListResponse
@@ -167,11 +161,11 @@ module Network.Google.AndroidEnterprise.Types
     , elrKind
     , elrEnterprise
 
-    -- * DevicesListResponse
-    , DevicesListResponse
-    , devicesListResponse
-    , dlrKind
-    , dlrDevice
+    -- * AppRestrictionsSchema
+    , AppRestrictionsSchema
+    , appRestrictionsSchema
+    , arsKind
+    , arsRestrictions
 
     -- * UserToken
     , UserToken
@@ -180,6 +174,12 @@ module Network.Google.AndroidEnterprise.Types
     , utToken
     , utUserId
 
+    -- * DevicesListResponse
+    , DevicesListResponse
+    , devicesListResponse
+    , dlrKind
+    , dlrDevice
+
     -- * Enterprise
     , Enterprise
     , enterprise
@@ -187,14 +187,6 @@ module Network.Google.AndroidEnterprise.Types
     , ePrimaryDomain
     , eName
     , eId
-
-    -- * Permission
-    , Permission
-    , permission
-    , pKind
-    , pName
-    , pDescription
-    , pPermissionId
 
     -- * Product
     , Product
@@ -223,16 +215,24 @@ module Network.Google.AndroidEnterprise.Types
     , ppPermission
     , ppProductId
 
-    -- * CollectionViewersListResponse
-    , CollectionViewersListResponse
-    , collectionViewersListResponse
-    , cvlrKind
-    , cvlrUser
+    -- * Permission
+    , Permission
+    , permission
+    , pKind
+    , pName
+    , pDescription
+    , pPermissionId
 
     -- * ProductsApproveRequest
     , ProductsApproveRequest
     , productsApproveRequest
     , parApprovalURLInfo
+
+    -- * CollectionViewersListResponse
+    , CollectionViewersListResponse
+    , collectionViewersListResponse
+    , cvlrKind
+    , cvlrUser
 
     -- * Entitlement
     , Entitlement

@@ -59,7 +59,7 @@ type SchemasUpdateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Schema :> Put '[JSON] Schema
+                           ReqBody '[OctetStream] Schema :> Put '[JSON] Schema
 
 -- | Update schema
 --

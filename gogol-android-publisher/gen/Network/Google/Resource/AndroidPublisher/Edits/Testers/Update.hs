@@ -53,9 +53,7 @@ type EditsTestersUpdateResource =
        "edits" :>
          Capture "editId" Text :>
            "testers" :>
-             Capture "track"
-               AndroidPublisherEditsTestersUpdateTrack
-               :>
+             Capture "track" EditsTestersUpdateTrack :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -63,13 +61,14 @@ type EditsTestersUpdateResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Testers :> Put '[JSON] Testers
+                             ReqBody '[OctetStream] Testers :>
+                               Put '[JSON] Testers
 
 --
 -- /See:/ 'editsTestersUpdate'' smart constructor.
 data EditsTestersUpdate' = EditsTestersUpdate'
     { _etutQuotaUser   :: !(Maybe Text)
-    , _etutTrack       :: !AndroidPublisherEditsTestersUpdateTrack
+    , _etutTrack       :: !EditsTestersUpdateTrack
     , _etutPrettyPrint :: !Bool
     , _etutPackageName :: !Text
     , _etutUserIP      :: !(Maybe Text)
@@ -104,7 +103,7 @@ data EditsTestersUpdate' = EditsTestersUpdate'
 --
 -- * 'etutFields'
 editsTestersUpdate'
-    :: AndroidPublisherEditsTestersUpdateTrack -- ^ 'track'
+    :: EditsTestersUpdateTrack -- ^ 'track'
     -> Text -- ^ 'packageName'
     -> Testers -- ^ 'payload'
     -> Text -- ^ 'editId'
@@ -131,7 +130,7 @@ etutQuotaUser
   = lens _etutQuotaUser
       (\ s a -> s{_etutQuotaUser = a})
 
-etutTrack :: Lens' EditsTestersUpdate' AndroidPublisherEditsTestersUpdateTrack
+etutTrack :: Lens' EditsTestersUpdate' EditsTestersUpdateTrack
 etutTrack
   = lens _etutTrack (\ s a -> s{_etutTrack = a})
 

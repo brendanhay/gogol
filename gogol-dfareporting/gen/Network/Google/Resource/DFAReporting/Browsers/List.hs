@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Browsers.List
     , blQuotaUser
     , blPrettyPrint
     , blUserIP
-    , blProfileId
+    , blProFileId
     , blKey
     , blOAuthToken
     , blFields
@@ -65,7 +65,7 @@ data BrowsersList' = BrowsersList'
     { _blQuotaUser   :: !(Maybe Text)
     , _blPrettyPrint :: !Bool
     , _blUserIP      :: !(Maybe Text)
-    , _blProfileId   :: !Int64
+    , _blProFileId   :: !Int64
     , _blKey         :: !(Maybe Key)
     , _blOAuthToken  :: !(Maybe OAuthToken)
     , _blFields      :: !(Maybe Text)
@@ -81,7 +81,7 @@ data BrowsersList' = BrowsersList'
 --
 -- * 'blUserIP'
 --
--- * 'blProfileId'
+-- * 'blProFileId'
 --
 -- * 'blKey'
 --
@@ -91,12 +91,12 @@ data BrowsersList' = BrowsersList'
 browsersList'
     :: Int64 -- ^ 'profileId'
     -> BrowsersList'
-browsersList' pBlProfileId_ =
+browsersList' pBlProFileId_ =
     BrowsersList'
     { _blQuotaUser = Nothing
     , _blPrettyPrint = True
     , _blUserIP = Nothing
-    , _blProfileId = pBlProfileId_
+    , _blProFileId = pBlProFileId_
     , _blKey = Nothing
     , _blOAuthToken = Nothing
     , _blFields = Nothing
@@ -121,9 +121,9 @@ blUserIP :: Lens' BrowsersList' (Maybe Text)
 blUserIP = lens _blUserIP (\ s a -> s{_blUserIP = a})
 
 -- | User profile ID associated with this request.
-blProfileId :: Lens' BrowsersList' Int64
-blProfileId
-  = lens _blProfileId (\ s a -> s{_blProfileId = a})
+blProFileId :: Lens' BrowsersList' Int64
+blProFileId
+  = lens _blProFileId (\ s a -> s{_blProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -148,7 +148,7 @@ instance GoogleRequest BrowsersList' where
         type Rs BrowsersList' = BrowsersListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u BrowsersList'{..}
-          = go _blProfileId _blQuotaUser (Just _blPrettyPrint)
+          = go _blProFileId _blQuotaUser (Just _blPrettyPrint)
               _blUserIP
               _blFields
               _blKey

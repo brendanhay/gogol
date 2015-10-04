@@ -225,12 +225,6 @@ module Network.Google.Genomics
     , ReadInfo
     , readInfo
 
-    -- ** KeyValue
-    , KeyValue
-    , keyValue
-    , kvValue
-    , kvKey
-
     -- ** ReadGroupExperiment
     , ReadGroupExperiment
     , readGroupExperiment
@@ -239,39 +233,17 @@ module Network.Google.Genomics
     , rgeSequencingCenter
     , rgeLibraryId
 
-    -- ** ListBasesResponse
-    , ListBasesResponse
-    , listBasesResponse
-    , lbrNextPageToken
-    , lbrOffset
-    , lbrSequence
+    -- ** KeyValue
+    , KeyValue
+    , keyValue
+    , kvValue
+    , kvKey
 
-    -- ** InterleavedFastqSource
-    , InterleavedFastqSource
-    , interleavedFastqSource
-    , ifsMetadata
-    , ifsSourceURIs
+    -- ** SearchAnnotationSetsRequestTypesItem
+    , SearchAnnotationSetsRequestTypesItem (..)
 
-    -- ** Annotation
-    , Annotation
-    , annotation
-    , aVariant
-    , aAnnotationSetId
-    , aName
-    , aId
-    , aType
-    , aTranscript
-    , aInfo
-    , aPosition
-
-    -- ** BatchAnnotationsResponseEntry
-    , BatchAnnotationsResponseEntry
-    , batchAnnotationsResponseEntry
-    , bareStatus
-    , bareAnnotation
-
-    -- ** Effect
-    , Effect (..)
+    -- ** VariantAnnotationEffect
+    , VariantAnnotationEffect (..)
 
     -- ** Variant
     , Variant
@@ -290,12 +262,52 @@ module Network.Google.Genomics
     , vInfo
     , vCalls
 
+    -- ** Annotation
+    , Annotation
+    , annotation
+    , aVariant
+    , aAnnotationSetId
+    , aName
+    , aId
+    , aType
+    , aTranscript
+    , aInfo
+    , aPosition
+
+    -- ** InterleavedFastqSource
+    , InterleavedFastqSource
+    , interleavedFastqSource
+    , ifsMetadata
+    , ifsSourceURIs
+
     -- ** CallReadGroupSetsRequest
     , CallReadGroupSetsRequest
     , callReadGroupSetsRequest
     , crgsrReadGroupSetId
     , crgsrDatasetId
     , crgsrSourceURIs
+
+    -- ** BatchAnnotationsResponseEntry
+    , BatchAnnotationsResponseEntry
+    , batchAnnotationsResponseEntry
+    , bareStatus
+    , bareAnnotation
+
+    -- ** ListBasesResponse
+    , ListBasesResponse
+    , listBasesResponse
+    , lbrNextPageToken
+    , lbrOffset
+    , lbrSequence
+
+    -- ** Dataset
+    , Dataset
+    , dataset
+    , dIsPublic
+    , dProjectNumber
+    , dName
+    , dId
+    , dCreateTime
 
     -- ** Read'
     , Read'
@@ -318,6 +330,13 @@ module Network.Google.Genomics
     , rReadNumber
     , rAlignedQuality
 
+    -- ** TranscriptExon
+    , TranscriptExon
+    , transcriptExon
+    , teStart
+    , teEnd
+    , teFrame
+
     -- ** Call
     , Call
     , call
@@ -328,22 +347,6 @@ module Network.Google.Genomics
     , cGenotype
     , cInfo
 
-    -- ** Dataset
-    , Dataset
-    , dataset
-    , dIsPublic
-    , dProjectNumber
-    , dName
-    , dId
-    , dCreateTime
-
-    -- ** TranscriptExon
-    , TranscriptExon
-    , transcriptExon
-    , teStart
-    , teEnd
-    , teFrame
-
     -- ** QueryRange
     , QueryRange
     , queryRange
@@ -351,6 +354,16 @@ module Network.Google.Genomics
     , qrReferenceId
     , qrReferenceName
     , qrEnd
+
+    -- ** BatchCreateAnnotationsRequest
+    , BatchCreateAnnotationsRequest
+    , batchCreateAnnotationsRequest
+    , bcarAnnotations
+
+    -- ** MergeVariantsRequest
+    , MergeVariantsRequest
+    , mergeVariantsRequest
+    , mvrVariants
 
     -- ** ReadGroup
     , ReadGroup
@@ -366,22 +379,8 @@ module Network.Google.Genomics
     , rgDescription
     , rgInfo
 
-    -- ** SearchReferencesResponse
-    , SearchReferencesResponse
-    , searchReferencesResponse
-    , srrNextPageToken
-    , srrReferences
-
-    -- ** Operation
-    , Operation (..)
-
-    -- ** AnnotationSetType
-    , AnnotationSetType (..)
-
-    -- ** MergeVariantsRequest
-    , MergeVariantsRequest
-    , mergeVariantsRequest
-    , mvrVariants
+    -- ** MetadataType
+    , MetadataType (..)
 
     -- ** SearchReferenceSetsRequest
     , SearchReferenceSetsRequest
@@ -392,13 +391,14 @@ module Network.Google.Genomics
     , srsrAssemblyId
     , srsrPageSize
 
-    -- ** BatchCreateAnnotationsRequest
-    , BatchCreateAnnotationsRequest
-    , batchCreateAnnotationsRequest
-    , bcarAnnotations
+    -- ** AnnotationSetType
+    , AnnotationSetType (..)
 
-    -- ** MetadataType
-    , MetadataType (..)
+    -- ** SearchReferencesResponse
+    , SearchReferencesResponse
+    , searchReferencesResponse
+    , srrNextPageToken
+    , srrReferences
 
     -- ** CallSet
     , CallSet
@@ -427,26 +427,22 @@ module Network.Google.Genomics
     , vaType
     , vaTranscriptIds
 
-    -- ** ClinicalSignificance
-    , ClinicalSignificance (..)
+    -- ** VariantAnnotationClinicalSignificance
+    , VariantAnnotationClinicalSignificance (..)
+
+    -- ** SearchReadGroupSetsRequest
+    , SearchReadGroupSetsRequest
+    , searchReadGroupSetsRequest
+    , srgsrDatasetIds
+    , srgsrName
+    , srgsrPageToken
+    , srgsrPageSize
 
     -- ** BatchAnnotationsResponseEntryStatus
     , BatchAnnotationsResponseEntryStatus
     , batchAnnotationsResponseEntryStatus
     , baresCode
     , baresMessage
-
-    -- ** BatchAnnotationsResponse
-    , BatchAnnotationsResponse
-    , batchAnnotationsResponse
-    , barEntries
-
-    -- ** Format
-    , Format (..)
-
-    -- ** ReadGroupInfo
-    , ReadGroupInfo
-    , readGroupInfo
 
     -- ** Reference
     , Reference
@@ -459,13 +455,14 @@ module Network.Google.Genomics
     , refId
     , refSourceURI
 
-    -- ** SearchReadGroupSetsRequest
-    , SearchReadGroupSetsRequest
-    , searchReadGroupSetsRequest
-    , srgsrDatasetIds
-    , srgsrName
-    , srgsrPageToken
-    , srgsrPageSize
+    -- ** BatchAnnotationsResponse
+    , BatchAnnotationsResponse
+    , batchAnnotationsResponse
+    , barEntries
+
+    -- ** ReadGroupInfo
+    , ReadGroupInfo
+    , readGroupInfo
 
     -- ** SearchJobsRequest
     , SearchJobsRequest
@@ -477,8 +474,28 @@ module Network.Google.Genomics
     , sjrPageSize
     , sjrCreatedBefore
 
-    -- ** TypesItem
-    , TypesItem (..)
+    -- ** SearchCallSetsResponse
+    , SearchCallSetsResponse
+    , searchCallSetsResponse
+    , scsrNextPageToken
+    , scsrCallSets
+
+    -- ** ExperimentalCreateJobRequest
+    , ExperimentalCreateJobRequest
+    , experimentalCreateJobRequest
+    , ecjrGcsOutputPath
+    , ecjrProjectNumber
+    , ecjrAlign
+    , ecjrSourceURIs
+    , ecjrPairedSourceURIs
+    , ecjrCallVariants
+
+    -- ** JobRequest
+    , JobRequest
+    , jobRequest
+    , jrDestination
+    , jrSource
+    , jrType
 
     -- ** SearchReadsRequest
     , SearchReadsRequest
@@ -491,28 +508,16 @@ module Network.Google.Genomics
     , srrPageSize
     , srrReadGroupSetIds
 
-    -- ** SearchCallSetsResponse
-    , SearchCallSetsResponse
-    , searchCallSetsResponse
-    , scsrNextPageToken
-    , scsrCallSets
+    -- ** VariantInfo
+    , VariantInfo
+    , variantInfo
 
-    -- ** JobRequest
-    , JobRequest
-    , jobRequest
-    , jrDestination
-    , jrSource
-    , jrType
-
-    -- ** ExperimentalCreateJobRequest
-    , ExperimentalCreateJobRequest
-    , experimentalCreateJobRequest
-    , ecjrGcsOutputPath
-    , ecjrProjectNumber
-    , ecjrAlign
-    , ecjrSourceURIs
-    , ecjrPairedSourceURIs
-    , ecjrCallVariants
+    -- ** SearchVariantSetsRequest
+    , SearchVariantSetsRequest
+    , searchVariantSetsRequest
+    , svsrDatasetIds
+    , svsrPageToken
+    , svsrPageSize
 
     -- ** ReadGroupProgram
     , ReadGroupProgram
@@ -523,22 +528,28 @@ module Network.Google.Genomics
     , rgpId
     , rgpCommandLine
 
+    -- ** Int32Value
+    , Int32Value
+    , int32Value
+    , ivValue
+
+    -- ** AnnotationInfo
+    , AnnotationInfo
+    , annotationInfo
+
+    -- ** ExportReadGroupSetsRequest
+    , ExportReadGroupSetsRequest
+    , exportReadGroupSetsRequest
+    , ergsrReferenceNames
+    , ergsrProjectNumber
+    , ergsrExportURI
+    , ergsrReadGroupSetIds
+
     -- ** SearchAnnotationsResponse
     , SearchAnnotationsResponse
     , searchAnnotationsResponse
     , sarAnnotations
     , sarNextPageToken
-
-    -- ** SearchVariantSetsRequest
-    , SearchVariantSetsRequest
-    , searchVariantSetsRequest
-    , svsrDatasetIds
-    , svsrPageToken
-    , svsrPageSize
-
-    -- ** VariantInfo
-    , VariantInfo
-    , variantInfo
 
     -- ** SearchAnnotationSetsRequest
     , SearchAnnotationSetsRequest
@@ -550,30 +561,19 @@ module Network.Google.Genomics
     , sasrPageToken
     , sasrPageSize
 
+    -- ** ImportReadGroupSetsRequestPartitionStrategy
+    , ImportReadGroupSetsRequestPartitionStrategy (..)
+
     -- ** SearchVariantsResponse
     , SearchVariantsResponse
     , searchVariantsResponse
     , svrVariants
     , svrNextPageToken
 
-    -- ** ExportReadGroupSetsRequest
-    , ExportReadGroupSetsRequest
-    , exportReadGroupSetsRequest
-    , ergsrReferenceNames
-    , ergsrProjectNumber
-    , ergsrExportURI
-    , ergsrReadGroupSetIds
-
-    -- ** Int32Value
-    , Int32Value
-    , int32Value
-    , ivValue
-
-    -- ** SearchReadsResponse
-    , SearchReadsResponse
-    , searchReadsResponse
-    , sNextPageToken
-    , sAlignments
+    -- ** ExperimentalCreateJobResponse
+    , ExperimentalCreateJobResponse
+    , experimentalCreateJobResponse
+    , ecjrJobId
 
     -- ** SearchCallSetsRequest
     , SearchCallSetsRequest
@@ -583,47 +583,11 @@ module Network.Google.Genomics
     , scsrVariantSetIds
     , scsrPageSize
 
-    -- ** ExperimentalCreateJobResponse
-    , ExperimentalCreateJobResponse
-    , experimentalCreateJobResponse
-    , ecjrJobId
-
-    -- ** Range
-    , Range
-    , range
-    , rStart
-    , rReferenceName
-    , rEnd
-
-    -- ** Job
-    , Job
-    , job
-    , jDetailedStatus
-    , jStatus
-    , jCreated
-    , jProjectNumber
-    , jWarnings
-    , jImportedIds
-    , jId
-    , jErrors
-    , jRequest
-
-    -- ** SearchReferenceSetsResponse
-    , SearchReferenceSetsResponse
-    , searchReferenceSetsResponse
-    , srsrNextPageToken
-    , srsrReferenceSets
-
-    -- ** ReadGroupSet
-    , ReadGroupSet
-    , readGroupSet
-    , rgsReferenceSetId
-    , rgsName
-    , rgsDatasetId
-    , rgsId
-    , rgsInfo
-    , rgsReadGroups
-    , rgsFilename
+    -- ** SearchReadsResponse
+    , SearchReadsResponse
+    , searchReadsResponse
+    , sNextPageToken
+    , sAlignments
 
     -- ** PairedFastqSource
     , PairedFastqSource
@@ -641,27 +605,50 @@ module Network.Google.Genomics
     , sPageToken
     , sPageSize
 
-    -- ** ImportReadGroupSetsResponse
-    , ImportReadGroupSetsResponse
-    , importReadGroupSetsResponse
-    , irgsrJobId
+    -- ** AnnotationType
+    , AnnotationType (..)
+
+    -- ** SearchReferenceSetsResponse
+    , SearchReferenceSetsResponse
+    , searchReferenceSetsResponse
+    , srsrNextPageToken
+    , srsrReferenceSets
+
+    -- ** Range
+    , Range
+    , range
+    , rStart
+    , rReferenceName
+    , rEnd
+
+    -- ** ReadGroupSet
+    , ReadGroupSet
+    , readGroupSet
+    , rgsReferenceSetId
+    , rgsName
+    , rgsDatasetId
+    , rgsId
+    , rgsInfo
+    , rgsReadGroups
+    , rgsFilename
+
+    -- ** Job
+    , Job
+    , job
+    , jDetailedStatus
+    , jStatus
+    , jCreated
+    , jProjectNumber
+    , jWarnings
+    , jImportedIds
+    , jId
+    , jErrors
+    , jRequest
 
     -- ** ExportVariantSetResponse
     , ExportVariantSetResponse
     , exportVariantSetResponse
     , evsrJobId
-
-    -- ** ImportVariantsResponse
-    , ImportVariantsResponse
-    , importVariantsResponse
-    , ivrJobId
-
-    -- ** LinearAlignment
-    , LinearAlignment
-    , linearAlignment
-    , laCigar
-    , laMappingQuality
-    , laPosition
 
     -- ** AlignReadGroupSetsResponse
     , AlignReadGroupSetsResponse
@@ -671,12 +658,40 @@ module Network.Google.Genomics
     -- ** SearchJobsRequestStatusItem
     , SearchJobsRequestStatusItem (..)
 
+    -- ** ImportVariantsResponse
+    , ImportVariantsResponse
+    , importVariantsResponse
+    , ivrJobId
+
     -- ** ListCoverageBucketsResponse
     , ListCoverageBucketsResponse
     , listCoverageBucketsResponse
     , lcbrNextPageToken
     , lcbrBucketWidth
     , lcbrCoverageBuckets
+
+    -- ** ImportReadGroupSetsResponse
+    , ImportReadGroupSetsResponse
+    , importReadGroupSetsResponse
+    , irgsrJobId
+
+    -- ** LinearAlignment
+    , LinearAlignment
+    , linearAlignment
+    , laCigar
+    , laMAppingQuality
+    , laPosition
+
+    -- ** Metadata
+    , Metadata
+    , metadata
+    , mValue
+    , mKey
+    , mId
+    , mType
+    , mNumber
+    , mDescription
+    , mInfo
 
     -- ** CallReadGroupSetsResponse
     , CallReadGroupSetsResponse
@@ -694,17 +709,6 @@ module Network.Google.Genomics
     , asSourceURI
     , asInfo
 
-    -- ** Metadata
-    , Metadata
-    , metadata
-    , mValue
-    , mKey
-    , mId
-    , mType
-    , mNumber
-    , mDescription
-    , mInfo
-
     -- ** VariantSet
     , VariantSet
     , variantSet
@@ -712,6 +716,36 @@ module Network.Google.Genomics
     , vsReferenceBounds
     , vsMetadata
     , vsId
+
+    -- ** CigarUnitOperation
+    , CigarUnitOperation (..)
+
+    -- ** ListDatasetsResponse
+    , ListDatasetsResponse
+    , listDatasetsResponse
+    , ldrNextPageToken
+    , ldrDatasets
+
+    -- ** ImportReadGroupSetsRequest
+    , ImportReadGroupSetsRequest
+    , importReadGroupSetsRequest
+    , irgsrReferenceSetId
+    , irgsrDatasetId
+    , irgsrSourceURIs
+    , irgsrPartitionStrategy
+
+    -- ** ImportVariantsRequest
+    , ImportVariantsRequest
+    , importVariantsRequest
+    , ivrFormat
+    , ivrNormalizeReferenceNames
+    , ivrSourceURIs
+
+    -- ** ExternalId
+    , ExternalId
+    , externalId
+    , eiSourceName
+    , eiId
 
     -- ** CigarUnit
     , CigarUnit
@@ -738,62 +772,37 @@ module Network.Google.Genomics
     , evsrProjectNumber
     , evsrCallSetIds
 
-    -- ** ImportVariantsRequest
-    , ImportVariantsRequest
-    , importVariantsRequest
-    , ivrFormat
-    , ivrNormalizeReferenceNames
-    , ivrSourceURIs
-
-    -- ** ExternalId
-    , ExternalId
-    , externalId
-    , eiSourceName
-    , eiId
-
-    -- ** Type
-    , Type (..)
-
-    -- ** ImportReadGroupSetsRequest
-    , ImportReadGroupSetsRequest
-    , importReadGroupSetsRequest
-    , irgsrReferenceSetId
-    , irgsrDatasetId
-    , irgsrSourceURIs
-    , irgsrPartitionStrategy
-
     -- ** VariantAnnotationType
     , VariantAnnotationType (..)
 
-    -- ** ListDatasetsResponse
-    , ListDatasetsResponse
-    , listDatasetsResponse
-    , ldrNextPageToken
-    , ldrDatasets
+    -- ** ExportReadGroupSetsResponse
+    , ExportReadGroupSetsResponse
+    , exportReadGroupSetsResponse
+    , ergsrJobId
+
+    -- ** JobStatus
+    , JobStatus (..)
 
     -- ** ImportVariantsRequestFormat
     , ImportVariantsRequestFormat (..)
 
-    -- ** VariantAnnotationCondition
-    , VariantAnnotationCondition
-    , variantAnnotationCondition
-    , vacExternalIds
-    , vacNames
-    , vacConceptId
-    , vacOmimId
+    -- ** SearchAnnotationsRequest
+    , SearchAnnotationsRequest
+    , searchAnnotationsRequest
+    , sarRange
+    , sarPageToken
+    , sarAnnotationSetIds
+    , sarPageSize
 
-    -- ** AnnotationSetInfo
-    , AnnotationSetInfo
-    , annotationSetInfo
+    -- ** MetadataInfo
+    , MetadataInfo
+    , metadataInfo
 
     -- ** SearchVariantSetsResponse
     , SearchVariantSetsResponse
     , searchVariantSetsResponse
     , svsrNextPageToken
     , svsrVariantSets
-
-    -- ** JobStatus
-    , JobStatus (..)
 
     -- ** SearchVariantsRequest
     , SearchVariantsRequest
@@ -808,22 +817,20 @@ module Network.Google.Genomics
     , svrVariantSetIds
     , svrPageSize
 
-    -- ** MetadataInfo
-    , MetadataInfo
-    , metadataInfo
+    -- ** ExportVariantSetRequestFormat
+    , ExportVariantSetRequestFormat (..)
 
-    -- ** SearchAnnotationsRequest
-    , SearchAnnotationsRequest
-    , searchAnnotationsRequest
-    , sarRange
-    , sarPageToken
-    , sarAnnotationSetIds
-    , sarPageSize
+    -- ** AnnotationSetInfo
+    , AnnotationSetInfo
+    , annotationSetInfo
 
-    -- ** ExportReadGroupSetsResponse
-    , ExportReadGroupSetsResponse
-    , exportReadGroupSetsResponse
-    , ergsrJobId
+    -- ** VariantAnnotationCondition
+    , VariantAnnotationCondition
+    , variantAnnotationCondition
+    , vacExternalIds
+    , vacNames
+    , vacConceptId
+    , vacOmimId
 
     -- ** SearchAnnotationSetsResponse
     , SearchAnnotationSetsResponse
@@ -854,15 +861,11 @@ module Network.Google.Genomics
     , tCodingSequence
     , tExons
 
-    -- ** Info
-    , Info
-    , info
-
-    -- ** SearchReadGroupSetsResponse
-    , SearchReadGroupSetsResponse
-    , searchReadGroupSetsResponse
-    , srgsrNextPageToken
-    , srgsrReadGroupSets
+    -- ** TranscriptCodingSequence
+    , TranscriptCodingSequence
+    , transcriptCodingSequence
+    , tcsStart
+    , tcsEnd
 
     -- ** SearchJobsResponse
     , SearchJobsResponse
@@ -870,11 +873,11 @@ module Network.Google.Genomics
     , sjrNextPageToken
     , sjrJobs
 
-    -- ** TranscriptCodingSequence
-    , TranscriptCodingSequence
-    , transcriptCodingSequence
-    , tcsStart
-    , tcsEnd
+    -- ** ReferenceBound
+    , ReferenceBound
+    , referenceBound
+    , rbUpperBound
+    , rbReferenceName
 
     -- ** Position
     , Position
@@ -883,18 +886,15 @@ module Network.Google.Genomics
     , pReferenceName
     , pPosition
 
-    -- ** ReferenceBound
-    , ReferenceBound
-    , referenceBound
-    , rbUpperBound
-    , rbReferenceName
+    -- ** SearchReadGroupSetsResponse
+    , SearchReadGroupSetsResponse
+    , searchReadGroupSetsResponse
+    , srgsrNextPageToken
+    , srgsrReadGroupSets
 
     -- ** ReadGroupSetInfo
     , ReadGroupSetInfo
     , readGroupSetInfo
-
-    -- ** PartitionStrategy
-    , PartitionStrategy (..)
 
     -- ** ReferenceSet
     , ReferenceSet

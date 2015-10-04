@@ -56,7 +56,8 @@ type ContactsPatchResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Contact :> Patch '[JSON] Contact
+                       ReqBody '[OctetStream] Contact :>
+                         Patch '[JSON] Contact
 
 -- | Updates a contact in place. This method supports patch semantics.
 --

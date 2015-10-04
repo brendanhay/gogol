@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Sites.Patch
     , spQuotaUser
     , spPrettyPrint
     , spUserIP
-    , spProfileId
+    , spProFileId
     , spPayload
     , spKey
     , spId
@@ -59,7 +59,7 @@ type SitesPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Site :> Patch '[JSON] Site
+                           ReqBody '[OctetStream] Site :> Patch '[JSON] Site
 
 -- | Updates an existing site. This method supports patch semantics.
 --
@@ -68,7 +68,7 @@ data SitesPatch' = SitesPatch'
     { _spQuotaUser   :: !(Maybe Text)
     , _spPrettyPrint :: !Bool
     , _spUserIP      :: !(Maybe Text)
-    , _spProfileId   :: !Int64
+    , _spProFileId   :: !Int64
     , _spPayload     :: !Site
     , _spKey         :: !(Maybe Key)
     , _spId          :: !Int64
@@ -86,7 +86,7 @@ data SitesPatch' = SitesPatch'
 --
 -- * 'spUserIP'
 --
--- * 'spProfileId'
+-- * 'spProFileId'
 --
 -- * 'spPayload'
 --
@@ -102,12 +102,12 @@ sitesPatch'
     -> Site -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> SitesPatch'
-sitesPatch' pSpProfileId_ pSpPayload_ pSpId_ =
+sitesPatch' pSpProFileId_ pSpPayload_ pSpId_ =
     SitesPatch'
     { _spQuotaUser = Nothing
     , _spPrettyPrint = True
     , _spUserIP = Nothing
-    , _spProfileId = pSpProfileId_
+    , _spProFileId = pSpProFileId_
     , _spPayload = pSpPayload_
     , _spKey = Nothing
     , _spId = pSpId_
@@ -134,9 +134,9 @@ spUserIP :: Lens' SitesPatch' (Maybe Text)
 spUserIP = lens _spUserIP (\ s a -> s{_spUserIP = a})
 
 -- | User profile ID associated with this request.
-spProfileId :: Lens' SitesPatch' Int64
-spProfileId
-  = lens _spProfileId (\ s a -> s{_spProfileId = a})
+spProFileId :: Lens' SitesPatch' Int64
+spProFileId
+  = lens _spProFileId (\ s a -> s{_spProFileId = a})
 
 -- | Multipart request metadata.
 spPayload :: Lens' SitesPatch' Site
@@ -170,7 +170,7 @@ instance GoogleRequest SitesPatch' where
         type Rs SitesPatch' = Site
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u SitesPatch'{..}
-          = go _spProfileId (Just _spId) _spQuotaUser
+          = go _spProFileId (Just _spId) _spQuotaUser
               (Just _spPrettyPrint)
               _spUserIP
               _spFields

@@ -60,7 +60,7 @@ type ChannelSectionsInsertResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] ChannelSection :>
+                           ReqBody '[OctetStream] ChannelSection :>
                              Post '[JSON] ChannelSection
 
 -- | Adds a channelSection for the authenticated user\'s channel.

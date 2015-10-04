@@ -55,9 +55,7 @@ type EditsImagesDeleteResource =
          Capture "editId" Text :>
            "listings" :>
              Capture "language" Text :>
-               Capture "imageType"
-                 AndroidPublisherEditsImagesDeleteImageType
-                 :>
+               Capture "imageType" EditsImagesDeleteImageType :>
                  Capture "imageId" Text :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
@@ -75,7 +73,7 @@ data EditsImagesDelete' = EditsImagesDelete'
     , _eidPrettyPrint :: !Bool
     , _eidPackageName :: !Text
     , _eidUserIP      :: !(Maybe Text)
-    , _eidImageType   :: !AndroidPublisherEditsImagesDeleteImageType
+    , _eidImageType   :: !EditsImagesDeleteImageType
     , _eidKey         :: !(Maybe Key)
     , _eidImageId     :: !Text
     , _eidLanguage    :: !Text
@@ -111,7 +109,7 @@ data EditsImagesDelete' = EditsImagesDelete'
 -- * 'eidFields'
 editsImagesDelete'
     :: Text -- ^ 'packageName'
-    -> AndroidPublisherEditsImagesDeleteImageType -- ^ 'imageType'
+    -> EditsImagesDeleteImageType -- ^ 'imageType'
     -> Text -- ^ 'imageId'
     -> Text -- ^ 'language'
     -> Text -- ^ 'editId'
@@ -157,7 +155,7 @@ eidUserIP :: Lens' EditsImagesDelete' (Maybe Text)
 eidUserIP
   = lens _eidUserIP (\ s a -> s{_eidUserIP = a})
 
-eidImageType :: Lens' EditsImagesDelete' AndroidPublisherEditsImagesDeleteImageType
+eidImageType :: Lens' EditsImagesDelete' EditsImagesDeleteImageType
 eidImageType
   = lens _eidImageType (\ s a -> s{_eidImageType = a})
 

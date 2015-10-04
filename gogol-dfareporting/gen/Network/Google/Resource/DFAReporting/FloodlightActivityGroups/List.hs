@@ -38,7 +38,7 @@ module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.List
     , faglAdvertiserId
     , faglSearchString
     , faglIds
-    , faglProfileId
+    , faglProFileId
     , faglSortOrder
     , faglKey
     , faglPageToken
@@ -63,15 +63,13 @@ type FloodlightActivityGroupsListResource =
                QueryParam "searchString" Text :>
                  QueryParams "ids" Int64 :>
                    QueryParam "sortOrder"
-                     DfareportingFloodlightActivityGroupsListSortOrder
+                     FloodlightActivityGroupsListSortOrder
                      :>
                      QueryParam "pageToken" Text :>
                        QueryParam "sortField"
-                         DfareportingFloodlightActivityGroupsListSortField
+                         FloodlightActivityGroupsListSortField
                          :>
-                         QueryParam "type"
-                           DfareportingFloodlightActivityGroupsListType
-                           :>
+                         QueryParam "type" FloodlightActivityGroupsListType :>
                            QueryParam "maxResults" Int32 :>
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
@@ -94,12 +92,12 @@ data FloodlightActivityGroupsList' = FloodlightActivityGroupsList'
     , _faglAdvertiserId              :: !(Maybe Int64)
     , _faglSearchString              :: !(Maybe Text)
     , _faglIds                       :: !(Maybe [Int64])
-    , _faglProfileId                 :: !Int64
-    , _faglSortOrder                 :: !(Maybe DfareportingFloodlightActivityGroupsListSortOrder)
+    , _faglProFileId                 :: !Int64
+    , _faglSortOrder                 :: !(Maybe FloodlightActivityGroupsListSortOrder)
     , _faglKey                       :: !(Maybe Key)
     , _faglPageToken                 :: !(Maybe Text)
-    , _faglSortField                 :: !(Maybe DfareportingFloodlightActivityGroupsListSortField)
-    , _faglType                      :: !(Maybe DfareportingFloodlightActivityGroupsListType)
+    , _faglSortField                 :: !(Maybe FloodlightActivityGroupsListSortField)
+    , _faglType                      :: !(Maybe FloodlightActivityGroupsListType)
     , _faglOAuthToken                :: !(Maybe OAuthToken)
     , _faglMaxResults                :: !(Maybe Int32)
     , _faglFields                    :: !(Maybe Text)
@@ -123,7 +121,7 @@ data FloodlightActivityGroupsList' = FloodlightActivityGroupsList'
 --
 -- * 'faglIds'
 --
--- * 'faglProfileId'
+-- * 'faglProFileId'
 --
 -- * 'faglSortOrder'
 --
@@ -143,7 +141,7 @@ data FloodlightActivityGroupsList' = FloodlightActivityGroupsList'
 floodlightActivityGroupsList'
     :: Int64 -- ^ 'profileId'
     -> FloodlightActivityGroupsList'
-floodlightActivityGroupsList' pFaglProfileId_ =
+floodlightActivityGroupsList' pFaglProFileId_ =
     FloodlightActivityGroupsList'
     { _faglQuotaUser = Nothing
     , _faglPrettyPrint = True
@@ -152,7 +150,7 @@ floodlightActivityGroupsList' pFaglProfileId_ =
     , _faglAdvertiserId = Nothing
     , _faglSearchString = Nothing
     , _faglIds = Nothing
-    , _faglProfileId = pFaglProfileId_
+    , _faglProFileId = pFaglProFileId_
     , _faglSortOrder = Nothing
     , _faglKey = Nothing
     , _faglPageToken = Nothing
@@ -222,13 +220,13 @@ faglIds
       . _Coerce
 
 -- | User profile ID associated with this request.
-faglProfileId :: Lens' FloodlightActivityGroupsList' Int64
-faglProfileId
-  = lens _faglProfileId
-      (\ s a -> s{_faglProfileId = a})
+faglProFileId :: Lens' FloodlightActivityGroupsList' Int64
+faglProFileId
+  = lens _faglProFileId
+      (\ s a -> s{_faglProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-faglSortOrder :: Lens' FloodlightActivityGroupsList' (Maybe DfareportingFloodlightActivityGroupsListSortOrder)
+faglSortOrder :: Lens' FloodlightActivityGroupsList' (Maybe FloodlightActivityGroupsListSortOrder)
 faglSortOrder
   = lens _faglSortOrder
       (\ s a -> s{_faglSortOrder = a})
@@ -246,14 +244,14 @@ faglPageToken
       (\ s a -> s{_faglPageToken = a})
 
 -- | Field by which to sort the list.
-faglSortField :: Lens' FloodlightActivityGroupsList' (Maybe DfareportingFloodlightActivityGroupsListSortField)
+faglSortField :: Lens' FloodlightActivityGroupsList' (Maybe FloodlightActivityGroupsListSortField)
 faglSortField
   = lens _faglSortField
       (\ s a -> s{_faglSortField = a})
 
 -- | Select only floodlight activity groups with the specified floodlight
 -- activity group type.
-faglType :: Lens' FloodlightActivityGroupsList' (Maybe DfareportingFloodlightActivityGroupsListType)
+faglType :: Lens' FloodlightActivityGroupsList' (Maybe FloodlightActivityGroupsListType)
 faglType = lens _faglType (\ s a -> s{_faglType = a})
 
 -- | OAuth 2.0 token for the current user.
@@ -285,7 +283,7 @@ instance GoogleRequest FloodlightActivityGroupsList'
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           FloodlightActivityGroupsList'{..}
-          = go _faglProfileId _faglFloodlightConfigurationId
+          = go _faglProFileId _faglFloodlightConfigurationId
               _faglAdvertiserId
               _faglSearchString
               (_faglIds ^. _Default)

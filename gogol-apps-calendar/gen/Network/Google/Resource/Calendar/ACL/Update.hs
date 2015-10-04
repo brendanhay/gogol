@@ -59,7 +59,7 @@ type ACLUpdateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] ACLRule :> Put '[JSON] ACLRule
+                           ReqBody '[OctetStream] ACLRule :> Put '[JSON] ACLRule
 
 -- | Updates an access control rule.
 --

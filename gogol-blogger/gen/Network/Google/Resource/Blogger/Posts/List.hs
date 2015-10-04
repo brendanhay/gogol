@@ -59,13 +59,13 @@ type PostsListResource =
      "blogs" :>
        Capture "blogId" Text :>
          "posts" :>
-           QueryParams "status" BloggerPostsListStatus :>
-             QueryParam "orderBy" BloggerPostsListOrderBy :>
+           QueryParams "status" PostsListStatus :>
+             QueryParam "orderBy" PostsListOrderBy :>
                QueryParam "fetchImages" Bool :>
                  QueryParam "endDate" DateTime' :>
                    QueryParam "startDate" DateTime' :>
                      QueryParam "fetchBodies" Bool :>
-                       QueryParam "view" BloggerPostsListView :>
+                       QueryParam "view" PostsListView :>
                          QueryParam "labels" Text :>
                            QueryParam "pageToken" Text :>
                              QueryParam "maxResults" Word32 :>
@@ -82,10 +82,10 @@ type PostsListResource =
 --
 -- /See:/ 'postsList'' smart constructor.
 data PostsList' = PostsList'
-    { _pllStatus      :: !(Maybe [BloggerPostsListStatus])
+    { _pllStatus      :: !(Maybe [PostsListStatus])
     , _pllQuotaUser   :: !(Maybe Text)
     , _pllPrettyPrint :: !Bool
-    , _pllOrderBy     :: !BloggerPostsListOrderBy
+    , _pllOrderBy     :: !PostsListOrderBy
     , _pllUserIP      :: !(Maybe Text)
     , _pllFetchImages :: !(Maybe Bool)
     , _pllEndDate     :: !(Maybe DateTime')
@@ -93,7 +93,7 @@ data PostsList' = PostsList'
     , _pllStartDate   :: !(Maybe DateTime')
     , _pllKey         :: !(Maybe Key)
     , _pllFetchBodies :: !Bool
-    , _pllView        :: !(Maybe BloggerPostsListView)
+    , _pllView        :: !(Maybe PostsListView)
     , _pllLabels      :: !(Maybe Text)
     , _pllPageToken   :: !(Maybe Text)
     , _pllOAuthToken  :: !(Maybe OAuthToken)
@@ -146,7 +146,7 @@ postsList' pPllBlogId_ =
     { _pllStatus = Nothing
     , _pllQuotaUser = Nothing
     , _pllPrettyPrint = True
-    , _pllOrderBy = BPLOBPublished
+    , _pllOrderBy = Published
     , _pllUserIP = Nothing
     , _pllFetchImages = Nothing
     , _pllEndDate = Nothing
@@ -163,7 +163,7 @@ postsList' pPllBlogId_ =
     }
 
 -- | Statuses to include in the results.
-pllStatus :: Lens' PostsList' [BloggerPostsListStatus]
+pllStatus :: Lens' PostsList' [PostsListStatus]
 pllStatus
   = lens _pllStatus (\ s a -> s{_pllStatus = a}) .
       _Default
@@ -183,7 +183,7 @@ pllPrettyPrint
       (\ s a -> s{_pllPrettyPrint = a})
 
 -- | Sort search results
-pllOrderBy :: Lens' PostsList' BloggerPostsListOrderBy
+pllOrderBy :: Lens' PostsList' PostsListOrderBy
 pllOrderBy
   = lens _pllOrderBy (\ s a -> s{_pllOrderBy = a})
 
@@ -232,7 +232,7 @@ pllFetchBodies
 
 -- | Access level with which to view the returned result. Note that some
 -- fields require escalated access.
-pllView :: Lens' PostsList' (Maybe BloggerPostsListView)
+pllView :: Lens' PostsList' (Maybe PostsListView)
 pllView = lens _pllView (\ s a -> s{_pllView = a})
 
 -- | Comma-separated list of labels to search for.

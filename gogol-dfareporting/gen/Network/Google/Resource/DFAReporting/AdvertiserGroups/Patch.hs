@@ -35,7 +35,7 @@ module Network.Google.Resource.DFAReporting.AdvertiserGroups.Patch
     , agpQuotaUser
     , agpPrettyPrint
     , agpUserIP
-    , agpProfileId
+    , agpProFileId
     , agpPayload
     , agpKey
     , agpId
@@ -60,7 +60,7 @@ type AdvertiserGroupsPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] AdvertiserGroup :>
+                           ReqBody '[OctetStream] AdvertiserGroup :>
                              Patch '[JSON] AdvertiserGroup
 
 -- | Updates an existing advertiser group. This method supports patch
@@ -71,7 +71,7 @@ data AdvertiserGroupsPatch' = AdvertiserGroupsPatch'
     { _agpQuotaUser   :: !(Maybe Text)
     , _agpPrettyPrint :: !Bool
     , _agpUserIP      :: !(Maybe Text)
-    , _agpProfileId   :: !Int64
+    , _agpProFileId   :: !Int64
     , _agpPayload     :: !AdvertiserGroup
     , _agpKey         :: !(Maybe Key)
     , _agpId          :: !Int64
@@ -89,7 +89,7 @@ data AdvertiserGroupsPatch' = AdvertiserGroupsPatch'
 --
 -- * 'agpUserIP'
 --
--- * 'agpProfileId'
+-- * 'agpProFileId'
 --
 -- * 'agpPayload'
 --
@@ -105,12 +105,12 @@ advertiserGroupsPatch'
     -> AdvertiserGroup -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> AdvertiserGroupsPatch'
-advertiserGroupsPatch' pAgpProfileId_ pAgpPayload_ pAgpId_ =
+advertiserGroupsPatch' pAgpProFileId_ pAgpPayload_ pAgpId_ =
     AdvertiserGroupsPatch'
     { _agpQuotaUser = Nothing
     , _agpPrettyPrint = True
     , _agpUserIP = Nothing
-    , _agpProfileId = pAgpProfileId_
+    , _agpProFileId = pAgpProFileId_
     , _agpPayload = pAgpPayload_
     , _agpKey = Nothing
     , _agpId = pAgpId_
@@ -138,9 +138,9 @@ agpUserIP
   = lens _agpUserIP (\ s a -> s{_agpUserIP = a})
 
 -- | User profile ID associated with this request.
-agpProfileId :: Lens' AdvertiserGroupsPatch' Int64
-agpProfileId
-  = lens _agpProfileId (\ s a -> s{_agpProfileId = a})
+agpProFileId :: Lens' AdvertiserGroupsPatch' Int64
+agpProFileId
+  = lens _agpProFileId (\ s a -> s{_agpProFileId = a})
 
 -- | Multipart request metadata.
 agpPayload :: Lens' AdvertiserGroupsPatch' AdvertiserGroup
@@ -176,7 +176,7 @@ instance GoogleRequest AdvertiserGroupsPatch' where
         type Rs AdvertiserGroupsPatch' = AdvertiserGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdvertiserGroupsPatch'{..}
-          = go _agpProfileId (Just _agpId) _agpQuotaUser
+          = go _agpProFileId (Just _agpId) _agpQuotaUser
               (Just _agpPrettyPrint)
               _agpUserIP
               _agpFields

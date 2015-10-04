@@ -58,10 +58,10 @@ import           Network.Google.YouTube.Types
 type VideosListResource =
      "videos" :>
        QueryParam "part" Text :>
-         QueryParam "chart" Chart :>
+         QueryParam "chart" VideosListChart :>
            QueryParam "regionCode" Text :>
              QueryParam "locale" Text :>
-               QueryParam "myRating" MyRating :>
+               QueryParam "myRating" VideosListMyRating :>
                  QueryParam "hl" Text :>
                    QueryParam "onBehalfOfContentOwner" Text :>
                      QueryParam "videoCategoryId" Text :>
@@ -81,14 +81,14 @@ type VideosListResource =
 --
 -- /See:/ 'videosList'' smart constructor.
 data VideosList' = VideosList'
-    { _vlChart                  :: !(Maybe Chart)
+    { _vlChart                  :: !(Maybe VideosListChart)
     , _vlQuotaUser              :: !(Maybe Text)
     , _vlPart                   :: !Text
     , _vlPrettyPrint            :: !Bool
     , _vlRegionCode             :: !(Maybe Text)
     , _vlUserIP                 :: !(Maybe Text)
     , _vlLocale                 :: !(Maybe Text)
-    , _vlMyRating               :: !(Maybe MyRating)
+    , _vlMyRating               :: !(Maybe VideosListMyRating)
     , _vlHl                     :: !(Maybe Text)
     , _vlOnBehalfOfContentOwner :: !(Maybe Text)
     , _vlVideoCategoryId        :: !Text
@@ -162,7 +162,7 @@ videosList' pVlPart_ =
     }
 
 -- | The chart parameter identifies the chart that you want to retrieve.
-vlChart :: Lens' VideosList' (Maybe Chart)
+vlChart :: Lens' VideosList' (Maybe VideosListChart)
 vlChart = lens _vlChart (\ s a -> s{_vlChart = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -207,7 +207,7 @@ vlLocale = lens _vlLocale (\ s a -> s{_vlLocale = a})
 
 -- | Set this parameter\'s value to like or dislike to instruct the API to
 -- only return videos liked or disliked by the authenticated user.
-vlMyRating :: Lens' VideosList' (Maybe MyRating)
+vlMyRating :: Lens' VideosList' (Maybe VideosListMyRating)
 vlMyRating
   = lens _vlMyRating (\ s a -> s{_vlMyRating = a})
 

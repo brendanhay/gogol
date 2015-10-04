@@ -18,7 +18,7 @@ module Network.Google.AppsReseller.Types.Sum where
 import           Network.Google.Prelude
 
 -- | Whether the subscription is to be fully cancelled or downgraded
-data DeletionType
+data SubscriptionsDeleteDeletionType
     = Cancel
       -- ^ @cancel@
       -- Cancels the subscription immediately
@@ -33,9 +33,9 @@ data DeletionType
       -- Transfers a subscription directly to Google
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DeletionType
+instance Hashable SubscriptionsDeleteDeletionType
 
-instance FromText DeletionType where
+instance FromText SubscriptionsDeleteDeletionType where
     fromText = \case
         "cancel" -> Just Cancel
         "downgrade" -> Just Downgrade
@@ -43,15 +43,15 @@ instance FromText DeletionType where
         "transfer_to_direct" -> Just TransferToDirect
         _ -> Nothing
 
-instance ToText DeletionType where
+instance ToText SubscriptionsDeleteDeletionType where
     toText = \case
         Cancel -> "cancel"
         Downgrade -> "downgrade"
         Suspend -> "suspend"
         TransferToDirect -> "transfer_to_direct"
 
-instance FromJSON DeletionType where
-    parseJSON = parseJSONText "DeletionType"
+instance FromJSON SubscriptionsDeleteDeletionType where
+    parseJSON = parseJSONText "SubscriptionsDeleteDeletionType"
 
-instance ToJSON DeletionType where
+instance ToJSON SubscriptionsDeleteDeletionType where
     toJSON = toJSONText

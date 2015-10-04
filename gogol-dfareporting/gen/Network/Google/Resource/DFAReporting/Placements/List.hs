@@ -42,7 +42,7 @@ module Network.Google.Resource.DFAReporting.Placements.List
     , plaSearchString
     , plaSizeIds
     , plaIds
-    , plaProfileId
+    , plaProFileId
     , plaGroupIds
     , plaDirectorySiteIds
     , plaSortOrder
@@ -75,23 +75,24 @@ type PlacementsListResource =
              QueryParams "contentCategoryIds" Int64 :>
                QueryParam "maxEndDate" Text :>
                  QueryParams "campaignIds" Int64 :>
-                   QueryParams "pricingTypes" PricingTypes :>
+                   QueryParams "pricingTypes" PlacementsListPricingTypes
+                     :>
                      QueryParam "searchString" Text :>
                        QueryParams "sizeIds" Int64 :>
                          QueryParams "ids" Int64 :>
                            QueryParams "groupIds" Int64 :>
                              QueryParams "directorySiteIds" Int64 :>
-                               QueryParam "sortOrder"
-                                 DfareportingPlacementsListSortOrder
-                                 :>
-                                 QueryParam "paymentSource" PaymentSource :>
+                               QueryParam "sortOrder" PlacementsListSortOrder :>
+                                 QueryParam "paymentSource"
+                                   PlacementsListPaymentSource
+                                   :>
                                    QueryParams "siteIds" Int64 :>
                                      QueryParam "pageToken" Text :>
                                        QueryParam "sortField"
-                                         DfareportingPlacementsListSortField
+                                         PlacementsListSortField
                                          :>
                                          QueryParams "compatibilities"
-                                           Compatibilities
+                                           PlacementsListCompatibilities
                                            :>
                                            QueryParam "maxStartDate" Text :>
                                              QueryParams "advertiserIds" Int64
@@ -141,20 +142,20 @@ data PlacementsList' = PlacementsList'
     , _plaMaxEndDate           :: !(Maybe Text)
     , _plaUserIP               :: !(Maybe Text)
     , _plaCampaignIds          :: !(Maybe [Int64])
-    , _plaPricingTypes         :: !(Maybe [PricingTypes])
+    , _plaPricingTypes         :: !(Maybe [PlacementsListPricingTypes])
     , _plaSearchString         :: !(Maybe Text)
     , _plaSizeIds              :: !(Maybe [Int64])
     , _plaIds                  :: !(Maybe [Int64])
-    , _plaProfileId            :: !Int64
+    , _plaProFileId            :: !Int64
     , _plaGroupIds             :: !(Maybe [Int64])
     , _plaDirectorySiteIds     :: !(Maybe [Int64])
-    , _plaSortOrder            :: !(Maybe DfareportingPlacementsListSortOrder)
-    , _plaPaymentSource        :: !(Maybe PaymentSource)
+    , _plaSortOrder            :: !(Maybe PlacementsListSortOrder)
+    , _plaPaymentSource        :: !(Maybe PlacementsListPaymentSource)
     , _plaKey                  :: !(Maybe Key)
     , _plaSiteIds              :: !(Maybe [Int64])
     , _plaPageToken            :: !(Maybe Text)
-    , _plaSortField            :: !(Maybe DfareportingPlacementsListSortField)
-    , _plaCompatibilities      :: !(Maybe [Compatibilities])
+    , _plaSortField            :: !(Maybe PlacementsListSortField)
+    , _plaCompatibilities      :: !(Maybe [PlacementsListCompatibilities])
     , _plaMaxStartDate         :: !(Maybe Text)
     , _plaOAuthToken           :: !(Maybe OAuthToken)
     , _plaAdvertiserIds        :: !(Maybe [Int64])
@@ -191,7 +192,7 @@ data PlacementsList' = PlacementsList'
 --
 -- * 'plaIds'
 --
--- * 'plaProfileId'
+-- * 'plaProFileId'
 --
 -- * 'plaGroupIds'
 --
@@ -229,7 +230,7 @@ data PlacementsList' = PlacementsList'
 placementsList'
     :: Int64 -- ^ 'profileId'
     -> PlacementsList'
-placementsList' pPlaProfileId_ =
+placementsList' pPlaProFileId_ =
     PlacementsList'
     { _plaPlacementStrategyIds = Nothing
     , _plaQuotaUser = Nothing
@@ -242,7 +243,7 @@ placementsList' pPlaProfileId_ =
     , _plaSearchString = Nothing
     , _plaSizeIds = Nothing
     , _plaIds = Nothing
-    , _plaProfileId = pPlaProfileId_
+    , _plaProFileId = pPlaProFileId_
     , _plaGroupIds = Nothing
     , _plaDirectorySiteIds = Nothing
     , _plaSortOrder = Nothing
@@ -316,7 +317,7 @@ plaCampaignIds
       . _Coerce
 
 -- | Select only placements with these pricing types.
-plaPricingTypes :: Lens' PlacementsList' [PricingTypes]
+plaPricingTypes :: Lens' PlacementsList' [PlacementsListPricingTypes]
 plaPricingTypes
   = lens _plaPricingTypes
       (\ s a -> s{_plaPricingTypes = a})
@@ -349,9 +350,9 @@ plaIds
       _Coerce
 
 -- | User profile ID associated with this request.
-plaProfileId :: Lens' PlacementsList' Int64
-plaProfileId
-  = lens _plaProfileId (\ s a -> s{_plaProfileId = a})
+plaProFileId :: Lens' PlacementsList' Int64
+plaProFileId
+  = lens _plaProFileId (\ s a -> s{_plaProFileId = a})
 
 -- | Select only placements that belong to these placement groups.
 plaGroupIds :: Lens' PlacementsList' [Int64]
@@ -369,12 +370,12 @@ plaDirectorySiteIds
       . _Coerce
 
 -- | Order of sorted results, default is ASCENDING.
-plaSortOrder :: Lens' PlacementsList' (Maybe DfareportingPlacementsListSortOrder)
+plaSortOrder :: Lens' PlacementsList' (Maybe PlacementsListSortOrder)
 plaSortOrder
   = lens _plaSortOrder (\ s a -> s{_plaSortOrder = a})
 
 -- | Select only placements with this payment source.
-plaPaymentSource :: Lens' PlacementsList' (Maybe PaymentSource)
+plaPaymentSource :: Lens' PlacementsList' (Maybe PlacementsListPaymentSource)
 plaPaymentSource
   = lens _plaPaymentSource
       (\ s a -> s{_plaPaymentSource = a})
@@ -398,7 +399,7 @@ plaPageToken
   = lens _plaPageToken (\ s a -> s{_plaPageToken = a})
 
 -- | Field by which to sort the list.
-plaSortField :: Lens' PlacementsList' (Maybe DfareportingPlacementsListSortField)
+plaSortField :: Lens' PlacementsList' (Maybe PlacementsListSortField)
 plaSortField
   = lens _plaSortField (\ s a -> s{_plaSortField = a})
 
@@ -407,7 +408,7 @@ plaSortField
 -- mobile devices for regular or interstitial ads respectively. APP and
 -- APP_INTERSTITIAL are for rendering in mobile apps.IN_STREAM_VIDEO refers
 -- to rendering in in-stream video ads developed with the VAST standard.
-plaCompatibilities :: Lens' PlacementsList' [Compatibilities]
+plaCompatibilities :: Lens' PlacementsList' [PlacementsListCompatibilities]
 plaCompatibilities
   = lens _plaCompatibilities
       (\ s a -> s{_plaCompatibilities = a})
@@ -477,7 +478,7 @@ instance GoogleRequest PlacementsList' where
         type Rs PlacementsList' = PlacementsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementsList'{..}
-          = go _plaProfileId
+          = go _plaProFileId
               (_plaPlacementStrategyIds ^. _Default)
               (_plaContentCategoryIds ^. _Default)
               _plaMaxEndDate

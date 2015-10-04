@@ -54,7 +54,7 @@ type TripsSearchResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] TripsSearchRequest :>
+                     ReqBody '[OctetStream] TripsSearchRequest :>
                        Post '[JSON] TripsSearchResponse
 
 -- | Returns a list of flights.

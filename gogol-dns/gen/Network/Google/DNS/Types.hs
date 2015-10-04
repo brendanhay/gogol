@@ -32,6 +32,9 @@ module Network.Google.DNS.Types
     , pNumber
     , pQuota
 
+    -- * ChangesListSortBy
+    , ChangesListSortBy (..)
+
     -- * Change
     , Change
     , change
@@ -87,9 +90,6 @@ module Network.Google.DNS.Types
     , mzlrNextPageToken
     , mzlrKind
     , mzlrManagedZones
-
-    -- * SortBy
-    , SortBy (..)
     ) where
 
 import           Network.Google.DNS.Types.Product

@@ -52,147 +52,6 @@ instance ToJSON RollbackRequest where
           = object
               (catMaybes [("transaction" .=) <$> _rrTransaction])
 
--- | An identifier for a particular subset of entities. Entities are
--- partitioned into various subsets, each used by different datasets and
--- different namespaces within a dataset and so forth.
---
--- /See:/ 'partitionId' smart constructor.
-data PartitionId = PartitionId
-    { _piNamespace :: !(Maybe Text)
-    , _piDatasetId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PartitionId' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'piNamespace'
---
--- * 'piDatasetId'
-partitionId
-    :: PartitionId
-partitionId =
-    PartitionId
-    { _piNamespace = Nothing
-    , _piDatasetId = Nothing
-    }
-
--- | The namespace.
-piNamespace :: Lens' PartitionId (Maybe Text)
-piNamespace
-  = lens _piNamespace (\ s a -> s{_piNamespace = a})
-
--- | The dataset ID.
-piDatasetId :: Lens' PartitionId (Maybe Text)
-piDatasetId
-  = lens _piDatasetId (\ s a -> s{_piDatasetId = a})
-
-instance FromJSON PartitionId where
-        parseJSON
-          = withObject "PartitionId"
-              (\ o ->
-                 PartitionId <$>
-                   (o .:? "namespace") <*> (o .:? "datasetId"))
-
-instance ToJSON PartitionId where
-        toJSON PartitionId{..}
-          = object
-              (catMaybes
-                 [("namespace" .=) <$> _piNamespace,
-                  ("datasetId" .=) <$> _piDatasetId])
-
--- | A batch of results produced by a query.
---
--- /See:/ 'queryResultBatch' smart constructor.
-data QueryResultBatch = QueryResultBatch
-    { _qrbSkippedResults   :: !(Maybe Int32)
-    , _qrbEntityResultType :: !(Maybe EntityResultType)
-    , _qrbEntityResults    :: !(Maybe [EntityResult])
-    , _qrbMoreResults      :: !(Maybe MoreResults)
-    , _qrbEndCursor        :: !(Maybe Word8)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'QueryResultBatch' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'qrbSkippedResults'
---
--- * 'qrbEntityResultType'
---
--- * 'qrbEntityResults'
---
--- * 'qrbMoreResults'
---
--- * 'qrbEndCursor'
-queryResultBatch
-    :: QueryResultBatch
-queryResultBatch =
-    QueryResultBatch
-    { _qrbSkippedResults = Nothing
-    , _qrbEntityResultType = Nothing
-    , _qrbEntityResults = Nothing
-    , _qrbMoreResults = Nothing
-    , _qrbEndCursor = Nothing
-    }
-
--- | The number of results skipped because of Query.offset.
-qrbSkippedResults :: Lens' QueryResultBatch (Maybe Int32)
-qrbSkippedResults
-  = lens _qrbSkippedResults
-      (\ s a -> s{_qrbSkippedResults = a})
-
--- | The result type for every entity in entityResults. full for full
--- entities, projection for entities with only projected properties,
--- keyOnly for entities with only a key.
-qrbEntityResultType :: Lens' QueryResultBatch (Maybe EntityResultType)
-qrbEntityResultType
-  = lens _qrbEntityResultType
-      (\ s a -> s{_qrbEntityResultType = a})
-
--- | The results for this batch.
-qrbEntityResults :: Lens' QueryResultBatch [EntityResult]
-qrbEntityResults
-  = lens _qrbEntityResults
-      (\ s a -> s{_qrbEntityResults = a})
-      . _Default
-      . _Coerce
-
--- | The state of the query after the current batch. One of notFinished,
--- moreResultsAfterLimit, noMoreResults.
-qrbMoreResults :: Lens' QueryResultBatch (Maybe MoreResults)
-qrbMoreResults
-  = lens _qrbMoreResults
-      (\ s a -> s{_qrbMoreResults = a})
-
--- | A cursor that points to the position after the last result in the batch.
--- May be absent. TODO(arfuller): Once all plans produce cursors update
--- documentation here.
-qrbEndCursor :: Lens' QueryResultBatch (Maybe Word8)
-qrbEndCursor
-  = lens _qrbEndCursor (\ s a -> s{_qrbEndCursor = a})
-
-instance FromJSON QueryResultBatch where
-        parseJSON
-          = withObject "QueryResultBatch"
-              (\ o ->
-                 QueryResultBatch <$>
-                   (o .:? "skippedResults") <*>
-                     (o .:? "entityResultType")
-                     <*> (o .:? "entityResults" .!= mempty)
-                     <*> (o .:? "moreResults")
-                     <*> (o .:? "endCursor"))
-
-instance ToJSON QueryResultBatch where
-        toJSON QueryResultBatch{..}
-          = object
-              (catMaybes
-                 [("skippedResults" .=) <$> _qrbSkippedResults,
-                  ("entityResultType" .=) <$> _qrbEntityResultType,
-                  ("entityResults" .=) <$> _qrbEntityResults,
-                  ("moreResults" .=) <$> _qrbMoreResults,
-                  ("endCursor" .=) <$> _qrbEndCursor])
-
 -- | An entity property.
 --
 -- /See:/ 'property' smart constructor.
@@ -365,45 +224,172 @@ instance ToJSON Property where
                   ("meaning" .=) <$> _pMeaning,
                   ("blobValue" .=) <$> _pBlobValue])
 
+-- | An identifier for a particular subset of entities. Entities are
+-- partitioned into various subsets, each used by different datasets and
+-- different namespaces within a dataset and so forth.
 --
--- /See:/ 'allocateIdsRequest' smart constructor.
-newtype AllocateIdsRequest = AllocateIdsRequest
-    { _airKeys :: Maybe [Key]
+-- /See:/ 'partitionId' smart constructor.
+data PartitionId = PartitionId
+    { _piNamespace :: !(Maybe Text)
+    , _piDatasetId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AllocateIdsRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'PartitionId' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'airKeys'
-allocateIdsRequest
-    :: AllocateIdsRequest
-allocateIdsRequest =
-    AllocateIdsRequest
-    { _airKeys = Nothing
+-- * 'piNamespace'
+--
+-- * 'piDatasetId'
+partitionId
+    :: PartitionId
+partitionId =
+    PartitionId
+    { _piNamespace = Nothing
+    , _piDatasetId = Nothing
     }
 
--- | A list of keys with incomplete key paths to allocate IDs for. No key may
--- be reserved\/read-only.
-airKeys :: Lens' AllocateIdsRequest [Key]
-airKeys
-  = lens _airKeys (\ s a -> s{_airKeys = a}) . _Default
+-- | The namespace.
+piNamespace :: Lens' PartitionId (Maybe Text)
+piNamespace
+  = lens _piNamespace (\ s a -> s{_piNamespace = a})
+
+-- | The dataset ID.
+piDatasetId :: Lens' PartitionId (Maybe Text)
+piDatasetId
+  = lens _piDatasetId (\ s a -> s{_piDatasetId = a})
+
+instance FromJSON PartitionId where
+        parseJSON
+          = withObject "PartitionId"
+              (\ o ->
+                 PartitionId <$>
+                   (o .:? "namespace") <*> (o .:? "datasetId"))
+
+instance ToJSON PartitionId where
+        toJSON PartitionId{..}
+          = object
+              (catMaybes
+                 [("namespace" .=) <$> _piNamespace,
+                  ("datasetId" .=) <$> _piDatasetId])
+
+-- | A batch of results produced by a query.
+--
+-- /See:/ 'queryResultBatch' smart constructor.
+data QueryResultBatch = QueryResultBatch
+    { _qrbSkippedResults   :: !(Maybe Int32)
+    , _qrbEntityResultType :: !(Maybe QueryResultBatchEntityResultType)
+    , _qrbEntityResults    :: !(Maybe [EntityResult])
+    , _qrbMoreResults      :: !(Maybe QueryResultBatchMoreResults)
+    , _qrbEndCursor        :: !(Maybe Word8)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'QueryResultBatch' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'qrbSkippedResults'
+--
+-- * 'qrbEntityResultType'
+--
+-- * 'qrbEntityResults'
+--
+-- * 'qrbMoreResults'
+--
+-- * 'qrbEndCursor'
+queryResultBatch
+    :: QueryResultBatch
+queryResultBatch =
+    QueryResultBatch
+    { _qrbSkippedResults = Nothing
+    , _qrbEntityResultType = Nothing
+    , _qrbEntityResults = Nothing
+    , _qrbMoreResults = Nothing
+    , _qrbEndCursor = Nothing
+    }
+
+-- | The number of results skipped because of Query.offset.
+qrbSkippedResults :: Lens' QueryResultBatch (Maybe Int32)
+qrbSkippedResults
+  = lens _qrbSkippedResults
+      (\ s a -> s{_qrbSkippedResults = a})
+
+-- | The result type for every entity in entityResults. full for full
+-- entities, projection for entities with only projected properties,
+-- keyOnly for entities with only a key.
+qrbEntityResultType :: Lens' QueryResultBatch (Maybe QueryResultBatchEntityResultType)
+qrbEntityResultType
+  = lens _qrbEntityResultType
+      (\ s a -> s{_qrbEntityResultType = a})
+
+-- | The results for this batch.
+qrbEntityResults :: Lens' QueryResultBatch [EntityResult]
+qrbEntityResults
+  = lens _qrbEntityResults
+      (\ s a -> s{_qrbEntityResults = a})
+      . _Default
       . _Coerce
 
-instance FromJSON AllocateIdsRequest where
-        parseJSON
-          = withObject "AllocateIdsRequest"
-              (\ o ->
-                 AllocateIdsRequest <$> (o .:? "keys" .!= mempty))
+-- | The state of the query after the current batch. One of notFinished,
+-- moreResultsAfterLimit, noMoreResults.
+qrbMoreResults :: Lens' QueryResultBatch (Maybe QueryResultBatchMoreResults)
+qrbMoreResults
+  = lens _qrbMoreResults
+      (\ s a -> s{_qrbMoreResults = a})
 
-instance ToJSON AllocateIdsRequest where
-        toJSON AllocateIdsRequest{..}
-          = object (catMaybes [("keys" .=) <$> _airKeys])
+-- | A cursor that points to the position after the last result in the batch.
+-- May be absent. TODO(arfuller): Once all plans produce cursors update
+-- documentation here.
+qrbEndCursor :: Lens' QueryResultBatch (Maybe Word8)
+qrbEndCursor
+  = lens _qrbEndCursor (\ s a -> s{_qrbEndCursor = a})
+
+instance FromJSON QueryResultBatch where
+        parseJSON
+          = withObject "QueryResultBatch"
+              (\ o ->
+                 QueryResultBatch <$>
+                   (o .:? "skippedResults") <*>
+                     (o .:? "entityResultType")
+                     <*> (o .:? "entityResults" .!= mempty)
+                     <*> (o .:? "moreResults")
+                     <*> (o .:? "endCursor"))
+
+instance ToJSON QueryResultBatch where
+        toJSON QueryResultBatch{..}
+          = object
+              (catMaybes
+                 [("skippedResults" .=) <$> _qrbSkippedResults,
+                  ("entityResultType" .=) <$> _qrbEntityResultType,
+                  ("entityResults" .=) <$> _qrbEntityResults,
+                  ("moreResults" .=) <$> _qrbMoreResults,
+                  ("endCursor" .=) <$> _qrbEndCursor])
+
+-- | The entity\'s properties.
+--
+-- /See:/ 'entityProperties' smart constructor.
+data EntityProperties =
+    EntityProperties
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EntityProperties' with the minimum fields required to make a request.
+--
+entityProperties
+    :: EntityProperties
+entityProperties = EntityProperties
+
+instance FromJSON EntityProperties where
+        parseJSON
+          = withObject "EntityProperties"
+              (\ o -> pure EntityProperties)
+
+instance ToJSON EntityProperties where
+        toJSON = const (Object mempty)
 
 --
 -- /See:/ 'beginTransactionRequest' smart constructor.
 newtype BeginTransactionRequest = BeginTransactionRequest
-    { _btrIsolationLevel :: Maybe IsolationLevel
+    { _btrIsolationLevel :: Maybe BeginTransactionRequestIsolationLevel
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeginTransactionRequest' with the minimum fields required to make a request.
@@ -424,7 +410,7 @@ beginTransactionRequest =
 -- this transaction. Optionally, a transaction can request to be made
 -- serializable which means that another transaction cannot concurrently
 -- modify the data that is read or modified by this transaction.
-btrIsolationLevel :: Lens' BeginTransactionRequest (Maybe IsolationLevel)
+btrIsolationLevel :: Lens' BeginTransactionRequest (Maybe BeginTransactionRequestIsolationLevel)
 btrIsolationLevel
   = lens _btrIsolationLevel
       (\ s a -> s{_btrIsolationLevel = a})
@@ -517,12 +503,47 @@ instance ToJSON RunQueryRequest where
                   ("query" .=) <$> _rqrQuery,
                   ("readOptions" .=) <$> _rqrReadOptions])
 
+--
+-- /See:/ 'allocateIdsRequest' smart constructor.
+newtype AllocateIdsRequest = AllocateIdsRequest
+    { _airKeys :: Maybe [Key]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AllocateIdsRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'airKeys'
+allocateIdsRequest
+    :: AllocateIdsRequest
+allocateIdsRequest =
+    AllocateIdsRequest
+    { _airKeys = Nothing
+    }
+
+-- | A list of keys with incomplete key paths to allocate IDs for. No key may
+-- be reserved\/read-only.
+airKeys :: Lens' AllocateIdsRequest [Key]
+airKeys
+  = lens _airKeys (\ s a -> s{_airKeys = a}) . _Default
+      . _Coerce
+
+instance FromJSON AllocateIdsRequest where
+        parseJSON
+          = withObject "AllocateIdsRequest"
+              (\ o ->
+                 AllocateIdsRequest <$> (o .:? "keys" .!= mempty))
+
+instance ToJSON AllocateIdsRequest where
+        toJSON AllocateIdsRequest{..}
+          = object (catMaybes [("keys" .=) <$> _airKeys])
+
 -- | A filter that merges the multiple other filters using the given
 -- operation.
 --
 -- /See:/ 'compositeFilter' smart constructor.
 data CompositeFilter = CompositeFilter
-    { _cfOperator :: !(Maybe Operator)
+    { _cfOperator :: !(Maybe CompositeFilterOperator)
     , _cfFilters  :: !(Maybe [Filter])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -543,7 +564,7 @@ compositeFilter =
 
 -- | The operator for combining multiple filters. Only \"and\" is currently
 -- supported.
-cfOperator :: Lens' CompositeFilter (Maybe Operator)
+cfOperator :: Lens' CompositeFilter (Maybe CompositeFilterOperator)
 cfOperator
   = lens _cfOperator (\ s a -> s{_cfOperator = a})
 
@@ -615,50 +636,6 @@ instance ToJSON BeginTransactionResponse where
                   ("header" .=) <$> _btrHeader])
 
 --
--- /See:/ 'runQueryResponse' smart constructor.
-data RunQueryResponse = RunQueryResponse
-    { _rqrBatch  :: !(Maybe QueryResultBatch)
-    , _rqrHeader :: !(Maybe ResponseHeader)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'RunQueryResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rqrBatch'
---
--- * 'rqrHeader'
-runQueryResponse
-    :: RunQueryResponse
-runQueryResponse =
-    RunQueryResponse
-    { _rqrBatch = Nothing
-    , _rqrHeader = Nothing
-    }
-
--- | A batch of query results (always present).
-rqrBatch :: Lens' RunQueryResponse (Maybe QueryResultBatch)
-rqrBatch = lens _rqrBatch (\ s a -> s{_rqrBatch = a})
-
-rqrHeader :: Lens' RunQueryResponse (Maybe ResponseHeader)
-rqrHeader
-  = lens _rqrHeader (\ s a -> s{_rqrHeader = a})
-
-instance FromJSON RunQueryResponse where
-        parseJSON
-          = withObject "RunQueryResponse"
-              (\ o ->
-                 RunQueryResponse <$>
-                   (o .:? "batch") <*> (o .:? "header"))
-
-instance ToJSON RunQueryResponse where
-        toJSON RunQueryResponse{..}
-          = object
-              (catMaybes
-                 [("batch" .=) <$> _rqrBatch,
-                  ("header" .=) <$> _rqrHeader])
-
---
 -- /See:/ 'mutationResult' smart constructor.
 data MutationResult = MutationResult
     { _mrInsertAutoIdKeys :: !(Maybe [Key])
@@ -709,6 +686,51 @@ instance ToJSON MutationResult where
               (catMaybes
                  [("insertAutoIdKeys" .=) <$> _mrInsertAutoIdKeys,
                   ("indexUpdates" .=) <$> _mrIndexUpdates])
+
+--
+-- /See:/ 'allocateIdsResponse' smart constructor.
+data AllocateIdsResponse = AllocateIdsResponse
+    { _aKeys   :: !(Maybe [Key])
+    , _aHeader :: !(Maybe ResponseHeader)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AllocateIdsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aKeys'
+--
+-- * 'aHeader'
+allocateIdsResponse
+    :: AllocateIdsResponse
+allocateIdsResponse =
+    AllocateIdsResponse
+    { _aKeys = Nothing
+    , _aHeader = Nothing
+    }
+
+-- | The keys specified in the request (in the same order), each with its key
+-- path completed with a newly allocated ID.
+aKeys :: Lens' AllocateIdsResponse [Key]
+aKeys
+  = lens _aKeys (\ s a -> s{_aKeys = a}) . _Default .
+      _Coerce
+
+aHeader :: Lens' AllocateIdsResponse (Maybe ResponseHeader)
+aHeader = lens _aHeader (\ s a -> s{_aHeader = a})
+
+instance FromJSON AllocateIdsResponse where
+        parseJSON
+          = withObject "AllocateIdsResponse"
+              (\ o ->
+                 AllocateIdsResponse <$>
+                   (o .:? "keys" .!= mempty) <*> (o .:? "header"))
+
+instance ToJSON AllocateIdsResponse where
+        toJSON AllocateIdsResponse{..}
+          = object
+              (catMaybes
+                 [("keys" .=) <$> _aKeys, ("header" .=) <$> _aHeader])
 
 -- | A GQL query.
 --
@@ -794,49 +816,48 @@ instance ToJSON GqlQuery where
                   ("nameArgs" .=) <$> _gqNameArgs])
 
 --
--- /See:/ 'allocateIdsResponse' smart constructor.
-data AllocateIdsResponse = AllocateIdsResponse
-    { _aKeys   :: !(Maybe [Key])
-    , _aHeader :: !(Maybe ResponseHeader)
+-- /See:/ 'runQueryResponse' smart constructor.
+data RunQueryResponse = RunQueryResponse
+    { _rqrBatch  :: !(Maybe QueryResultBatch)
+    , _rqrHeader :: !(Maybe ResponseHeader)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AllocateIdsResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'RunQueryResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aKeys'
+-- * 'rqrBatch'
 --
--- * 'aHeader'
-allocateIdsResponse
-    :: AllocateIdsResponse
-allocateIdsResponse =
-    AllocateIdsResponse
-    { _aKeys = Nothing
-    , _aHeader = Nothing
+-- * 'rqrHeader'
+runQueryResponse
+    :: RunQueryResponse
+runQueryResponse =
+    RunQueryResponse
+    { _rqrBatch = Nothing
+    , _rqrHeader = Nothing
     }
 
--- | The keys specified in the request (in the same order), each with its key
--- path completed with a newly allocated ID.
-aKeys :: Lens' AllocateIdsResponse [Key]
-aKeys
-  = lens _aKeys (\ s a -> s{_aKeys = a}) . _Default .
-      _Coerce
+-- | A batch of query results (always present).
+rqrBatch :: Lens' RunQueryResponse (Maybe QueryResultBatch)
+rqrBatch = lens _rqrBatch (\ s a -> s{_rqrBatch = a})
 
-aHeader :: Lens' AllocateIdsResponse (Maybe ResponseHeader)
-aHeader = lens _aHeader (\ s a -> s{_aHeader = a})
+rqrHeader :: Lens' RunQueryResponse (Maybe ResponseHeader)
+rqrHeader
+  = lens _rqrHeader (\ s a -> s{_rqrHeader = a})
 
-instance FromJSON AllocateIdsResponse where
+instance FromJSON RunQueryResponse where
         parseJSON
-          = withObject "AllocateIdsResponse"
+          = withObject "RunQueryResponse"
               (\ o ->
-                 AllocateIdsResponse <$>
-                   (o .:? "keys" .!= mempty) <*> (o .:? "header"))
+                 RunQueryResponse <$>
+                   (o .:? "batch") <*> (o .:? "header"))
 
-instance ToJSON AllocateIdsResponse where
-        toJSON AllocateIdsResponse{..}
+instance ToJSON RunQueryResponse where
+        toJSON RunQueryResponse{..}
           = object
               (catMaybes
-                 [("keys" .=) <$> _aKeys, ("header" .=) <$> _aHeader])
+                 [("batch" .=) <$> _rqrBatch,
+                  ("header" .=) <$> _rqrHeader])
 
 -- | A message that can hold any of the supported value types and associated
 -- metadata.
@@ -1196,93 +1217,6 @@ instance ToJSON ResponseHeader where
         toJSON ResponseHeader{..}
           = object (catMaybes [Just ("kind" .= _rhKind)])
 
--- | A binding argument for a GQL query.
---
--- /See:/ 'gqlQueryArg' smart constructor.
-data GqlQueryArg = GqlQueryArg
-    { _gqaCursor :: !(Maybe Word8)
-    , _gqaValue  :: !(Maybe Value)
-    , _gqaName   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'GqlQueryArg' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'gqaCursor'
---
--- * 'gqaValue'
---
--- * 'gqaName'
-gqlQueryArg
-    :: GqlQueryArg
-gqlQueryArg =
-    GqlQueryArg
-    { _gqaCursor = Nothing
-    , _gqaValue = Nothing
-    , _gqaName = Nothing
-    }
-
-gqaCursor :: Lens' GqlQueryArg (Maybe Word8)
-gqaCursor
-  = lens _gqaCursor (\ s a -> s{_gqaCursor = a})
-
-gqaValue :: Lens' GqlQueryArg (Maybe Value)
-gqaValue = lens _gqaValue (\ s a -> s{_gqaValue = a})
-
--- | Must match regex \"[A-Za-z_$][A-Za-z_$0-9]*\". Must not match regex
--- \"__.*__\". Must not be \"\".
-gqaName :: Lens' GqlQueryArg (Maybe Text)
-gqaName = lens _gqaName (\ s a -> s{_gqaName = a})
-
-instance FromJSON GqlQueryArg where
-        parseJSON
-          = withObject "GqlQueryArg"
-              (\ o ->
-                 GqlQueryArg <$>
-                   (o .:? "cursor") <*> (o .:? "value") <*>
-                     (o .:? "name"))
-
-instance ToJSON GqlQueryArg where
-        toJSON GqlQueryArg{..}
-          = object
-              (catMaybes
-                 [("cursor" .=) <$> _gqaCursor,
-                  ("value" .=) <$> _gqaValue,
-                  ("name" .=) <$> _gqaName])
-
--- | A reference to a property relative to the kind expressions.
---
--- /See:/ 'propertyReference' smart constructor.
-newtype PropertyReference = PropertyReference
-    { _prName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PropertyReference' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'prName'
-propertyReference
-    :: PropertyReference
-propertyReference =
-    PropertyReference
-    { _prName = Nothing
-    }
-
--- | The name of the property.
-prName :: Lens' PropertyReference (Maybe Text)
-prName = lens _prName (\ s a -> s{_prName = a})
-
-instance FromJSON PropertyReference where
-        parseJSON
-          = withObject "PropertyReference"
-              (\ o -> PropertyReference <$> (o .:? "name"))
-
-instance ToJSON PropertyReference where
-        toJSON PropertyReference{..}
-          = object (catMaybes [("name" .=) <$> _prName])
-
 -- | A (kind, ID\/name) pair used to construct a key path. At most one of
 -- name or ID may be set. If either is set, the element is complete. If
 -- neither is set, the element is incomplete.
@@ -1342,6 +1276,93 @@ instance ToJSON KeyPathElement where
               (catMaybes
                  [("kind" .=) <$> _kpeKind, ("name" .=) <$> _kpeName,
                   ("id" .=) <$> _kpeId])
+
+-- | A reference to a property relative to the kind expressions.
+--
+-- /See:/ 'propertyReference' smart constructor.
+newtype PropertyReference = PropertyReference
+    { _prName :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PropertyReference' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'prName'
+propertyReference
+    :: PropertyReference
+propertyReference =
+    PropertyReference
+    { _prName = Nothing
+    }
+
+-- | The name of the property.
+prName :: Lens' PropertyReference (Maybe Text)
+prName = lens _prName (\ s a -> s{_prName = a})
+
+instance FromJSON PropertyReference where
+        parseJSON
+          = withObject "PropertyReference"
+              (\ o -> PropertyReference <$> (o .:? "name"))
+
+instance ToJSON PropertyReference where
+        toJSON PropertyReference{..}
+          = object (catMaybes [("name" .=) <$> _prName])
+
+-- | A binding argument for a GQL query.
+--
+-- /See:/ 'gqlQueryArg' smart constructor.
+data GqlQueryArg = GqlQueryArg
+    { _gqaCursor :: !(Maybe Word8)
+    , _gqaValue  :: !(Maybe Value)
+    , _gqaName   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GqlQueryArg' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gqaCursor'
+--
+-- * 'gqaValue'
+--
+-- * 'gqaName'
+gqlQueryArg
+    :: GqlQueryArg
+gqlQueryArg =
+    GqlQueryArg
+    { _gqaCursor = Nothing
+    , _gqaValue = Nothing
+    , _gqaName = Nothing
+    }
+
+gqaCursor :: Lens' GqlQueryArg (Maybe Word8)
+gqaCursor
+  = lens _gqaCursor (\ s a -> s{_gqaCursor = a})
+
+gqaValue :: Lens' GqlQueryArg (Maybe Value)
+gqaValue = lens _gqaValue (\ s a -> s{_gqaValue = a})
+
+-- | Must match regex \"[A-Za-z_$][A-Za-z_$0-9]*\". Must not match regex
+-- \"__.*__\". Must not be \"\".
+gqaName :: Lens' GqlQueryArg (Maybe Text)
+gqaName = lens _gqaName (\ s a -> s{_gqaName = a})
+
+instance FromJSON GqlQueryArg where
+        parseJSON
+          = withObject "GqlQueryArg"
+              (\ o ->
+                 GqlQueryArg <$>
+                   (o .:? "cursor") <*> (o .:? "value") <*>
+                     (o .:? "name"))
+
+instance ToJSON GqlQueryArg where
+        toJSON GqlQueryArg{..}
+          = object
+              (catMaybes
+                 [("cursor" .=) <$> _gqaCursor,
+                  ("value" .=) <$> _gqaValue,
+                  ("name" .=) <$> _gqaName])
 
 -- | A unique identifier for an entity.
 --
@@ -1460,83 +1481,6 @@ instance ToJSON PropertyFilter where
                  [("property" .=) <$> _pfProperty,
                   ("operator" .=) <$> _pfOperator,
                   ("value" .=) <$> _pfValue])
-
---
--- /See:/ 'commitResponse' smart constructor.
-data CommitResponse = CommitResponse
-    { _crMutationResult :: !(Maybe MutationResult)
-    , _crHeader         :: !(Maybe ResponseHeader)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CommitResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'crMutationResult'
---
--- * 'crHeader'
-commitResponse
-    :: CommitResponse
-commitResponse =
-    CommitResponse
-    { _crMutationResult = Nothing
-    , _crHeader = Nothing
-    }
-
--- | The result of performing the mutation (if any).
-crMutationResult :: Lens' CommitResponse (Maybe MutationResult)
-crMutationResult
-  = lens _crMutationResult
-      (\ s a -> s{_crMutationResult = a})
-
-crHeader :: Lens' CommitResponse (Maybe ResponseHeader)
-crHeader = lens _crHeader (\ s a -> s{_crHeader = a})
-
-instance FromJSON CommitResponse where
-        parseJSON
-          = withObject "CommitResponse"
-              (\ o ->
-                 CommitResponse <$>
-                   (o .:? "mutationResult") <*> (o .:? "header"))
-
-instance ToJSON CommitResponse where
-        toJSON CommitResponse{..}
-          = object
-              (catMaybes
-                 [("mutationResult" .=) <$> _crMutationResult,
-                  ("header" .=) <$> _crHeader])
-
--- | The result of fetching an entity from the datastore.
---
--- /See:/ 'entityResult' smart constructor.
-newtype EntityResult = EntityResult
-    { _erEntity :: Maybe Entity
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'EntityResult' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'erEntity'
-entityResult
-    :: EntityResult
-entityResult =
-    EntityResult
-    { _erEntity = Nothing
-    }
-
--- | The resulting entity.
-erEntity :: Lens' EntityResult (Maybe Entity)
-erEntity = lens _erEntity (\ s a -> s{_erEntity = a})
-
-instance FromJSON EntityResult where
-        parseJSON
-          = withObject "EntityResult"
-              (\ o -> EntityResult <$> (o .:? "entity"))
-
-instance ToJSON EntityResult where
-        toJSON EntityResult{..}
-          = object (catMaybes [("entity" .=) <$> _erEntity])
 
 -- | A query.
 --
@@ -1671,6 +1615,83 @@ instance ToJSON Query where
                   ("filter" .=) <$> _qFilter, ("kinds" .=) <$> _qKinds,
                   ("order" .=) <$> _qOrder])
 
+-- | The result of fetching an entity from the datastore.
+--
+-- /See:/ 'entityResult' smart constructor.
+newtype EntityResult = EntityResult
+    { _erEntity :: Maybe Entity
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EntityResult' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'erEntity'
+entityResult
+    :: EntityResult
+entityResult =
+    EntityResult
+    { _erEntity = Nothing
+    }
+
+-- | The resulting entity.
+erEntity :: Lens' EntityResult (Maybe Entity)
+erEntity = lens _erEntity (\ s a -> s{_erEntity = a})
+
+instance FromJSON EntityResult where
+        parseJSON
+          = withObject "EntityResult"
+              (\ o -> EntityResult <$> (o .:? "entity"))
+
+instance ToJSON EntityResult where
+        toJSON EntityResult{..}
+          = object (catMaybes [("entity" .=) <$> _erEntity])
+
+--
+-- /See:/ 'commitResponse' smart constructor.
+data CommitResponse = CommitResponse
+    { _crMutationResult :: !(Maybe MutationResult)
+    , _crHeader         :: !(Maybe ResponseHeader)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CommitResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'crMutationResult'
+--
+-- * 'crHeader'
+commitResponse
+    :: CommitResponse
+commitResponse =
+    CommitResponse
+    { _crMutationResult = Nothing
+    , _crHeader = Nothing
+    }
+
+-- | The result of performing the mutation (if any).
+crMutationResult :: Lens' CommitResponse (Maybe MutationResult)
+crMutationResult
+  = lens _crMutationResult
+      (\ s a -> s{_crMutationResult = a})
+
+crHeader :: Lens' CommitResponse (Maybe ResponseHeader)
+crHeader = lens _crHeader (\ s a -> s{_crHeader = a})
+
+instance FromJSON CommitResponse where
+        parseJSON
+          = withObject "CommitResponse"
+              (\ o ->
+                 CommitResponse <$>
+                   (o .:? "mutationResult") <*> (o .:? "header"))
+
+instance ToJSON CommitResponse where
+        toJSON CommitResponse{..}
+          = object
+              (catMaybes
+                 [("mutationResult" .=) <$> _crMutationResult,
+                  ("header" .=) <$> _crHeader])
+
 -- | A representation of a kind.
 --
 -- /See:/ 'kindExpression' smart constructor.
@@ -1706,7 +1727,7 @@ instance ToJSON KindExpression where
 --
 -- /See:/ 'readOptions' smart constructor.
 data ReadOptions = ReadOptions
-    { _roReadConsistency :: !(Maybe ReadConsistency)
+    { _roReadConsistency :: !(Maybe ReadOptionsReadConsistency)
     , _roTransaction     :: !(Maybe Word8)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1729,7 +1750,7 @@ readOptions =
 -- be set when transaction is set. Lookup and ancestor queries default to
 -- strong, global queries default to eventual and cannot be set to strong.
 -- Optional. Default is default.
-roReadConsistency :: Lens' ReadOptions (Maybe ReadConsistency)
+roReadConsistency :: Lens' ReadOptions (Maybe ReadOptionsReadConsistency)
 roReadConsistency
   = lens _roReadConsistency
       (\ s a -> s{_roReadConsistency = a})
@@ -1789,7 +1810,7 @@ instance ToJSON RollbackResponse where
 -- /See:/ 'propertyExpression' smart constructor.
 data PropertyExpression = PropertyExpression
     { _peProperty            :: !(Maybe PropertyReference)
-    , _peAggregationFunction :: !(Maybe AggregationFunction)
+    , _peAggregationFunction :: !(Maybe PropertyExpressionAggregationFunction)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PropertyExpression' with the minimum fields required to make a request.
@@ -1817,7 +1838,7 @@ peProperty
 -- properties in the projection that are not being grouped by. Aggregation
 -- functions: first selects the first result as determined by the query\'s
 -- order.
-peAggregationFunction :: Lens' PropertyExpression (Maybe AggregationFunction)
+peAggregationFunction :: Lens' PropertyExpression (Maybe PropertyExpressionAggregationFunction)
 peAggregationFunction
   = lens _peAggregationFunction
       (\ s a -> s{_peAggregationFunction = a})
@@ -1890,7 +1911,7 @@ instance ToJSON Filter where
 --
 -- /See:/ 'commitRequest' smart constructor.
 data CommitRequest = CommitRequest
-    { _crMode           :: !(Maybe Mode)
+    { _crMode           :: !(Maybe CommitRequestMode)
     , _crMutation       :: !(Maybe Mutation)
     , _crTransaction    :: !(Maybe Word8)
     , _crIgnoreReadOnly :: !(Maybe Bool)
@@ -1919,7 +1940,7 @@ commitRequest =
 
 -- | The type of commit to perform. Either TRANSACTIONAL or
 -- NON_TRANSACTIONAL.
-crMode :: Lens' CommitRequest (Maybe Mode)
+crMode :: Lens' CommitRequest (Maybe CommitRequestMode)
 crMode = lens _crMode (\ s a -> s{_crMode = a})
 
 -- | The mutation to perform. Optional.
@@ -1962,7 +1983,7 @@ instance ToJSON CommitRequest where
 -- /See:/ 'entity' smart constructor.
 data Entity = Entity
     { _eKey        :: !(Maybe Key)
-    , _eProperties :: !(Maybe Properties)
+    , _eProperties :: !(Maybe EntityProperties)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Entity' with the minimum fields required to make a request.
@@ -1988,7 +2009,7 @@ eKey :: Lens' Entity (Maybe Key)
 eKey = lens _eKey (\ s a -> s{_eKey = a})
 
 -- | The entity\'s properties.
-eProperties :: Lens' Entity (Maybe Properties)
+eProperties :: Lens' Entity (Maybe EntityProperties)
 eProperties
   = lens _eProperties (\ s a -> s{_eProperties = a})
 
@@ -2082,7 +2103,7 @@ instance ToJSON LookupResponse where
 -- /See:/ 'propertyOrder' smart constructor.
 data PropertyOrder = PropertyOrder
     { _poProperty  :: !(Maybe PropertyReference)
-    , _poDirection :: !(Maybe Direction)
+    , _poDirection :: !(Maybe PropertyOrderDirection)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PropertyOrder' with the minimum fields required to make a request.
@@ -2107,7 +2128,7 @@ poProperty
 
 -- | The direction to order by. One of ascending or descending. Optional,
 -- defaults to ascending.
-poDirection :: Lens' PropertyOrder (Maybe Direction)
+poDirection :: Lens' PropertyOrder (Maybe PropertyOrderDirection)
 poDirection
   = lens _poDirection (\ s a -> s{_poDirection = a})
 
@@ -2124,23 +2145,3 @@ instance ToJSON PropertyOrder where
               (catMaybes
                  [("property" .=) <$> _poProperty,
                   ("direction" .=) <$> _poDirection])
-
--- | The entity\'s properties.
---
--- /See:/ 'properties' smart constructor.
-data Properties =
-    Properties
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Properties' with the minimum fields required to make a request.
---
-properties
-    :: Properties
-properties = Properties
-
-instance FromJSON Properties where
-        parseJSON
-          = withObject "Properties" (\ o -> pure Properties)
-
-instance ToJSON Properties where
-        toJSON = const (Object mempty)

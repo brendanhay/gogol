@@ -58,7 +58,8 @@ type FirewallsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Firewall :> Post '[JSON] Operation
+                         ReqBody '[OctetStream] Firewall :>
+                           Post '[JSON] Operation
 
 -- | Creates a firewall resource in the specified project using the data
 -- included in the request.

@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.UserRoles.Delete
     , urdQuotaUser
     , urdPrettyPrint
     , urdUserIP
-    , urdProfileId
+    , urdProFileId
     , urdKey
     , urdId
     , urdOAuthToken
@@ -66,7 +66,7 @@ data UserRolesDelete' = UserRolesDelete'
     { _urdQuotaUser   :: !(Maybe Text)
     , _urdPrettyPrint :: !Bool
     , _urdUserIP      :: !(Maybe Text)
-    , _urdProfileId   :: !Int64
+    , _urdProFileId   :: !Int64
     , _urdKey         :: !(Maybe Key)
     , _urdId          :: !Int64
     , _urdOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +83,7 @@ data UserRolesDelete' = UserRolesDelete'
 --
 -- * 'urdUserIP'
 --
--- * 'urdProfileId'
+-- * 'urdProFileId'
 --
 -- * 'urdKey'
 --
@@ -96,12 +96,12 @@ userRolesDelete'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> UserRolesDelete'
-userRolesDelete' pUrdProfileId_ pUrdId_ =
+userRolesDelete' pUrdProFileId_ pUrdId_ =
     UserRolesDelete'
     { _urdQuotaUser = Nothing
     , _urdPrettyPrint = True
     , _urdUserIP = Nothing
-    , _urdProfileId = pUrdProfileId_
+    , _urdProFileId = pUrdProFileId_
     , _urdKey = Nothing
     , _urdId = pUrdId_
     , _urdOAuthToken = Nothing
@@ -128,9 +128,9 @@ urdUserIP
   = lens _urdUserIP (\ s a -> s{_urdUserIP = a})
 
 -- | User profile ID associated with this request.
-urdProfileId :: Lens' UserRolesDelete' Int64
-urdProfileId
-  = lens _urdProfileId (\ s a -> s{_urdProfileId = a})
+urdProFileId :: Lens' UserRolesDelete' Int64
+urdProFileId
+  = lens _urdProFileId (\ s a -> s{_urdProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -161,7 +161,7 @@ instance GoogleRequest UserRolesDelete' where
         type Rs UserRolesDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u UserRolesDelete'{..}
-          = go _urdProfileId _urdId _urdQuotaUser
+          = go _urdProFileId _urdId _urdQuotaUser
               (Just _urdPrettyPrint)
               _urdUserIP
               _urdFields

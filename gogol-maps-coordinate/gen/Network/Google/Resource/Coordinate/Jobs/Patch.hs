@@ -63,7 +63,7 @@ type JobsPatchResource =
        Capture "teamId" Text :>
          "jobs" :>
            Capture "jobId" Word64 :>
-             QueryParam "progress" Progress :>
+             QueryParam "progress" JobsPatchProgress :>
                QueryParam "note" Text :>
                  QueryParam "customerPhoneNumber" Text :>
                    QueryParam "customerName" Text :>
@@ -81,7 +81,7 @@ type JobsPatchResource =
                                            QueryParam "oauth_token" OAuthToken
                                              :>
                                              QueryParam "alt" AltJSON :>
-                                               ReqBody '[JSON] Job :>
+                                               ReqBody '[OctetStream] Job :>
                                                  Patch '[JSON] Job
 
 -- | Updates a job. Fields that are set in the job state will be updated.
@@ -92,7 +92,7 @@ data JobsPatch' = JobsPatch'
     { _jpQuotaUser           :: !(Maybe Text)
     , _jpPrettyPrint         :: !Bool
     , _jpJobId               :: !Word64
-    , _jpProgress            :: !(Maybe Progress)
+    , _jpProgress            :: !(Maybe JobsPatchProgress)
     , _jpNote                :: !(Maybe Text)
     , _jpUserIP              :: !(Maybe Text)
     , _jpTeamId              :: !Text
@@ -197,7 +197,7 @@ jpJobId :: Lens' JobsPatch' Word64
 jpJobId = lens _jpJobId (\ s a -> s{_jpJobId = a})
 
 -- | Job progress
-jpProgress :: Lens' JobsPatch' (Maybe Progress)
+jpProgress :: Lens' JobsPatch' (Maybe JobsPatchProgress)
 jpProgress
   = lens _jpProgress (\ s a -> s{_jpProgress = a})
 

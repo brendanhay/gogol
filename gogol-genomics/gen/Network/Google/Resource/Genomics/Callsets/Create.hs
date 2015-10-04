@@ -54,7 +54,8 @@ type CallsetsCreateResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] CallSet :> Post '[JSON] CallSet
+                     ReqBody '[OctetStream] CallSet :>
+                       Post '[JSON] CallSet
 
 -- | Creates a new call set.
 --

@@ -52,7 +52,7 @@ type VolumesRecommendedRateResource =
      "volumes" :>
        "recommended" :>
          "rate" :>
-           QueryParam "rating" Rating :>
+           QueryParam "rating" VolumesRecommendedRateRating :>
              QueryParam "volumeId" Text :>
                QueryParam "locale" Text :>
                  QueryParam "source" Text :>
@@ -71,7 +71,7 @@ type VolumesRecommendedRateResource =
 -- /See:/ 'volumesRecommendedRate'' smart constructor.
 data VolumesRecommendedRate' = VolumesRecommendedRate'
     { _vrrQuotaUser   :: !(Maybe Text)
-    , _vrrRating      :: !Rating
+    , _vrrRating      :: !VolumesRecommendedRateRating
     , _vrrPrettyPrint :: !Bool
     , _vrrUserIP      :: !(Maybe Text)
     , _vrrLocale      :: !(Maybe Text)
@@ -106,7 +106,7 @@ data VolumesRecommendedRate' = VolumesRecommendedRate'
 --
 -- * 'vrrFields'
 volumesRecommendedRate'
-    :: Rating -- ^ 'rating'
+    :: VolumesRecommendedRateRating -- ^ 'rating'
     -> Text -- ^ 'volumeId'
     -> VolumesRecommendedRate'
 volumesRecommendedRate' pVrrRating_ pVrrVolumeId_ =
@@ -131,7 +131,7 @@ vrrQuotaUser
   = lens _vrrQuotaUser (\ s a -> s{_vrrQuotaUser = a})
 
 -- | Rating to be given to the volume.
-vrrRating :: Lens' VolumesRecommendedRate' Rating
+vrrRating :: Lens' VolumesRecommendedRate' VolumesRecommendedRateRating
 vrrRating
   = lens _vrrRating (\ s a -> s{_vrrRating = a})
 

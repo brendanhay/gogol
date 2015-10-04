@@ -35,7 +35,7 @@ module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Patch
     , fagpQuotaUser
     , fagpPrettyPrint
     , fagpUserIP
-    , fagpProfileId
+    , fagpProFileId
     , fagpPayload
     , fagpKey
     , fagpId
@@ -60,7 +60,7 @@ type FloodlightActivityGroupsPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] FloodlightActivityGroup :>
+                           ReqBody '[OctetStream] FloodlightActivityGroup :>
                              Patch '[JSON] FloodlightActivityGroup
 
 -- | Updates an existing floodlight activity group. This method supports
@@ -71,7 +71,7 @@ data FloodlightActivityGroupsPatch' = FloodlightActivityGroupsPatch'
     { _fagpQuotaUser   :: !(Maybe Text)
     , _fagpPrettyPrint :: !Bool
     , _fagpUserIP      :: !(Maybe Text)
-    , _fagpProfileId   :: !Int64
+    , _fagpProFileId   :: !Int64
     , _fagpPayload     :: !FloodlightActivityGroup
     , _fagpKey         :: !(Maybe Key)
     , _fagpId          :: !Int64
@@ -89,7 +89,7 @@ data FloodlightActivityGroupsPatch' = FloodlightActivityGroupsPatch'
 --
 -- * 'fagpUserIP'
 --
--- * 'fagpProfileId'
+-- * 'fagpProFileId'
 --
 -- * 'fagpPayload'
 --
@@ -105,12 +105,12 @@ floodlightActivityGroupsPatch'
     -> FloodlightActivityGroup -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> FloodlightActivityGroupsPatch'
-floodlightActivityGroupsPatch' pFagpProfileId_ pFagpPayload_ pFagpId_ =
+floodlightActivityGroupsPatch' pFagpProFileId_ pFagpPayload_ pFagpId_ =
     FloodlightActivityGroupsPatch'
     { _fagpQuotaUser = Nothing
     , _fagpPrettyPrint = True
     , _fagpUserIP = Nothing
-    , _fagpProfileId = pFagpProfileId_
+    , _fagpProFileId = pFagpProFileId_
     , _fagpPayload = pFagpPayload_
     , _fagpKey = Nothing
     , _fagpId = pFagpId_
@@ -139,10 +139,10 @@ fagpUserIP
   = lens _fagpUserIP (\ s a -> s{_fagpUserIP = a})
 
 -- | User profile ID associated with this request.
-fagpProfileId :: Lens' FloodlightActivityGroupsPatch' Int64
-fagpProfileId
-  = lens _fagpProfileId
-      (\ s a -> s{_fagpProfileId = a})
+fagpProFileId :: Lens' FloodlightActivityGroupsPatch' Int64
+fagpProFileId
+  = lens _fagpProFileId
+      (\ s a -> s{_fagpProFileId = a})
 
 -- | Multipart request metadata.
 fagpPayload :: Lens' FloodlightActivityGroupsPatch' FloodlightActivityGroup
@@ -182,7 +182,7 @@ instance GoogleRequest FloodlightActivityGroupsPatch'
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           FloodlightActivityGroupsPatch'{..}
-          = go _fagpProfileId (Just _fagpId) _fagpQuotaUser
+          = go _fagpProFileId (Just _fagpId) _fagpQuotaUser
               (Just _fagpPrettyPrint)
               _fagpUserIP
               _fagpFields

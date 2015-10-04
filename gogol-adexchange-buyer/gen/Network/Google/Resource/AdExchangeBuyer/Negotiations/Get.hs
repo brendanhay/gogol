@@ -56,7 +56,7 @@ type NegotiationsGetResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] GetNegotiationByIdRequest :>
+                       ReqBody '[OctetStream] GetNegotiationByIdRequest :>
                          Get '[JSON] NegotiationDTO
 
 -- | Gets the requested negotiation.

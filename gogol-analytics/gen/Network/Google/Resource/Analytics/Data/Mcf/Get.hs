@@ -61,7 +61,7 @@ type DataMcfGetResource =
            QueryParam "start-date" Text :>
              QueryParam "end-date" Text :>
                QueryParam "metrics" Text :>
-                 QueryParam "samplingLevel" SamplingLevel :>
+                 QueryParam "samplingLevel" DataMcfGetSamplingLevel :>
                    QueryParam "filters" Text :>
                      QueryParam "sort" Text :>
                        QueryParam "dimensions" Text :>
@@ -83,7 +83,7 @@ data DataMcfGet' = DataMcfGet'
     { _dmgQuotaUser     :: !(Maybe Text)
     , _dmgMetrics       :: !Text
     , _dmgPrettyPrint   :: !Bool
-    , _dmgSamplingLevel :: !(Maybe SamplingLevel)
+    , _dmgSamplingLevel :: !(Maybe DataMcfGetSamplingLevel)
     , _dmgUserIP        :: !(Maybe Text)
     , _dmgFilters       :: !(Maybe Text)
     , _dmgIds           :: !Text
@@ -180,7 +180,7 @@ dmgPrettyPrint
       (\ s a -> s{_dmgPrettyPrint = a})
 
 -- | The desired sampling level.
-dmgSamplingLevel :: Lens' DataMcfGet' (Maybe SamplingLevel)
+dmgSamplingLevel :: Lens' DataMcfGet' (Maybe DataMcfGetSamplingLevel)
 dmgSamplingLevel
   = lens _dmgSamplingLevel
       (\ s a -> s{_dmgSamplingLevel = a})

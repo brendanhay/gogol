@@ -54,7 +54,7 @@ type MomentsListResource =
      "people" :>
        Capture "userId" Text :>
          "moments" :>
-           Capture "collection" PlusMomentsListCollection :>
+           Capture "collection" MomentsListCollection :>
              QueryParam "targetUrl" Text :>
                QueryParam "pageToken" Text :>
                  QueryParam "type" Text :>
@@ -76,7 +76,7 @@ data MomentsList' = MomentsList'
     , _mlPrettyPrint :: !Bool
     , _mlTargetURL   :: !(Maybe Text)
     , _mlUserIP      :: !(Maybe Text)
-    , _mlCollection  :: !PlusMomentsListCollection
+    , _mlCollection  :: !MomentsListCollection
     , _mlUserId      :: !Text
     , _mlKey         :: !(Maybe Key)
     , _mlPageToken   :: !(Maybe Text)
@@ -114,7 +114,7 @@ data MomentsList' = MomentsList'
 --
 -- * 'mlFields'
 momentsList'
-    :: PlusMomentsListCollection -- ^ 'collection'
+    :: MomentsListCollection -- ^ 'collection'
     -> Text -- ^ 'userId'
     -> MomentsList'
 momentsList' pMlCollection_ pMlUserId_ =
@@ -157,7 +157,7 @@ mlUserIP :: Lens' MomentsList' (Maybe Text)
 mlUserIP = lens _mlUserIP (\ s a -> s{_mlUserIP = a})
 
 -- | The collection of moments to list.
-mlCollection :: Lens' MomentsList' PlusMomentsListCollection
+mlCollection :: Lens' MomentsList' MomentsListCollection
 mlCollection
   = lens _mlCollection (\ s a -> s{_mlCollection = a})
 

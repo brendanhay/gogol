@@ -17,184 +17,39 @@ module Network.Google.Gmail.Types.Sum where
 
 import           Network.Google.Prelude
 
--- | The format to return the messages in.
-data GmailUsersThreadsGetFormat
+-- | The format to return the message in.
+data UsersMessagesGetFormat
     = Full
       -- ^ @full@
     | Metadata
       -- ^ @metadata@
     | Minimal
       -- ^ @minimal@
+    | Raw
+      -- ^ @raw@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable GmailUsersThreadsGetFormat
+instance Hashable UsersMessagesGetFormat
 
-instance FromText GmailUsersThreadsGetFormat where
+instance FromText UsersMessagesGetFormat where
     fromText = \case
         "full" -> Just Full
         "metadata" -> Just Metadata
         "minimal" -> Just Minimal
+        "raw" -> Just Raw
         _ -> Nothing
 
-instance ToText GmailUsersThreadsGetFormat where
+instance ToText UsersMessagesGetFormat where
     toText = \case
         Full -> "full"
         Metadata -> "metadata"
         Minimal -> "minimal"
+        Raw -> "raw"
 
-instance FromJSON GmailUsersThreadsGetFormat where
-    parseJSON = parseJSONText "GmailUsersThreadsGetFormat"
+instance FromJSON UsersMessagesGetFormat where
+    parseJSON = parseJSONText "UsersMessagesGetFormat"
 
-instance ToJSON GmailUsersThreadsGetFormat where
-    toJSON = toJSONText
-
--- | The visibility of the label in the message list in the Gmail web
--- interface.
-data MessageListVisibility
-    = Hide
-      -- ^ @hide@
-    | Show
-      -- ^ @show@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable MessageListVisibility
-
-instance FromText MessageListVisibility where
-    fromText = \case
-        "hide" -> Just Hide
-        "show" -> Just Show
-        _ -> Nothing
-
-instance ToText MessageListVisibility where
-    toText = \case
-        Hide -> "hide"
-        Show -> "show"
-
-instance FromJSON MessageListVisibility where
-    parseJSON = parseJSONText "MessageListVisibility"
-
-instance ToJSON MessageListVisibility where
-    toJSON = toJSONText
-
--- | Filtering behavior of labelIds list specified.
-data LabelFilterAction
-    = Exclude
-      -- ^ @exclude@
-    | Include
-      -- ^ @include@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable LabelFilterAction
-
-instance FromText LabelFilterAction where
-    fromText = \case
-        "exclude" -> Just Exclude
-        "include" -> Just Include
-        _ -> Nothing
-
-instance ToText LabelFilterAction where
-    toText = \case
-        Exclude -> "exclude"
-        Include -> "include"
-
-instance FromJSON LabelFilterAction where
-    parseJSON = parseJSONText "LabelFilterAction"
-
-instance ToJSON LabelFilterAction where
-    toJSON = toJSONText
-
--- | The format to return the draft in.
-data Format
-    = FFull
-      -- ^ @full@
-    | FMetadata
-      -- ^ @metadata@
-    | FMinimal
-      -- ^ @minimal@
-    | FRaw
-      -- ^ @raw@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Format
-
-instance FromText Format where
-    fromText = \case
-        "full" -> Just FFull
-        "metadata" -> Just FMetadata
-        "minimal" -> Just FMinimal
-        "raw" -> Just FRaw
-        _ -> Nothing
-
-instance ToText Format where
-    toText = \case
-        FFull -> "full"
-        FMetadata -> "metadata"
-        FMinimal -> "minimal"
-        FRaw -> "raw"
-
-instance FromJSON Format where
-    parseJSON = parseJSONText "Format"
-
-instance ToJSON Format where
-    toJSON = toJSONText
-
--- | Source for Gmail\'s internal date of the message.
-data GmailUsersMessagesImportInternalDateSource
-    = DateHeader
-      -- ^ @dateHeader@
-    | ReceivedTime
-      -- ^ @receivedTime@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable GmailUsersMessagesImportInternalDateSource
-
-instance FromText GmailUsersMessagesImportInternalDateSource where
-    fromText = \case
-        "dateHeader" -> Just DateHeader
-        "receivedTime" -> Just ReceivedTime
-        _ -> Nothing
-
-instance ToText GmailUsersMessagesImportInternalDateSource where
-    toText = \case
-        DateHeader -> "dateHeader"
-        ReceivedTime -> "receivedTime"
-
-instance FromJSON GmailUsersMessagesImportInternalDateSource where
-    parseJSON = parseJSONText "GmailUsersMessagesImportInternalDateSource"
-
-instance ToJSON GmailUsersMessagesImportInternalDateSource where
-    toJSON = toJSONText
-
--- | The visibility of the label in the label list in the Gmail web
--- interface.
-data LabelListVisibility
-    = LabelHide
-      -- ^ @labelHide@
-    | LabelShow
-      -- ^ @labelShow@
-    | LabelShowIfUnread
-      -- ^ @labelShowIfUnread@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable LabelListVisibility
-
-instance FromText LabelListVisibility where
-    fromText = \case
-        "labelHide" -> Just LabelHide
-        "labelShow" -> Just LabelShow
-        "labelShowIfUnread" -> Just LabelShowIfUnread
-        _ -> Nothing
-
-instance ToText LabelListVisibility where
-    toText = \case
-        LabelHide -> "labelHide"
-        LabelShow -> "labelShow"
-        LabelShowIfUnread -> "labelShowIfUnread"
-
-instance FromJSON LabelListVisibility where
-    parseJSON = parseJSONText "LabelListVisibility"
-
-instance ToJSON LabelListVisibility where
+instance ToJSON UsersMessagesGetFormat where
     toJSON = toJSONText
 
 -- | The owner type for the label. User labels are created by the user and
@@ -205,90 +60,235 @@ instance ToJSON LabelListVisibility where
 -- is not guaranteed. For example, users can apply and remove the INBOX and
 -- UNREAD labels from messages and threads, but cannot apply or remove the
 -- DRAFTS or SENT labels from messages or threads.
-data Type
+data LabelType
     = System
       -- ^ @system@
     | User
       -- ^ @user@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable Type
+instance Hashable LabelType
 
-instance FromText Type where
+instance FromText LabelType where
     fromText = \case
         "system" -> Just System
         "user" -> Just User
         _ -> Nothing
 
-instance ToText Type where
+instance ToText LabelType where
     toText = \case
         System -> "system"
         User -> "user"
 
-instance FromJSON Type where
-    parseJSON = parseJSONText "Type"
+instance FromJSON LabelType where
+    parseJSON = parseJSONText "LabelType"
 
-instance ToJSON Type where
+instance ToJSON LabelType where
     toJSON = toJSONText
 
--- | Source for Gmail\'s internal date of the message.
-data InternalDateSource
-    = IDSDateHeader
-      -- ^ @dateHeader@
-    | IDSReceivedTime
-      -- ^ @receivedTime@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable InternalDateSource
-
-instance FromText InternalDateSource where
-    fromText = \case
-        "dateHeader" -> Just IDSDateHeader
-        "receivedTime" -> Just IDSReceivedTime
-        _ -> Nothing
-
-instance ToText InternalDateSource where
-    toText = \case
-        IDSDateHeader -> "dateHeader"
-        IDSReceivedTime -> "receivedTime"
-
-instance FromJSON InternalDateSource where
-    parseJSON = parseJSONText "InternalDateSource"
-
-instance ToJSON InternalDateSource where
-    toJSON = toJSONText
-
--- | The format to return the message in.
-data GmailUsersMessagesGetFormat
-    = GUMGFFull
+-- | The format to return the draft in.
+data UsersDraftsGetFormat
+    = UDGFFull
       -- ^ @full@
-    | GUMGFMetadata
+    | UDGFMetadata
       -- ^ @metadata@
-    | GUMGFMinimal
+    | UDGFMinimal
       -- ^ @minimal@
-    | GUMGFRaw
+    | UDGFRaw
       -- ^ @raw@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable GmailUsersMessagesGetFormat
+instance Hashable UsersDraftsGetFormat
 
-instance FromText GmailUsersMessagesGetFormat where
+instance FromText UsersDraftsGetFormat where
     fromText = \case
-        "full" -> Just GUMGFFull
-        "metadata" -> Just GUMGFMetadata
-        "minimal" -> Just GUMGFMinimal
-        "raw" -> Just GUMGFRaw
+        "full" -> Just UDGFFull
+        "metadata" -> Just UDGFMetadata
+        "minimal" -> Just UDGFMinimal
+        "raw" -> Just UDGFRaw
         _ -> Nothing
 
-instance ToText GmailUsersMessagesGetFormat where
+instance ToText UsersDraftsGetFormat where
     toText = \case
-        GUMGFFull -> "full"
-        GUMGFMetadata -> "metadata"
-        GUMGFMinimal -> "minimal"
-        GUMGFRaw -> "raw"
+        UDGFFull -> "full"
+        UDGFMetadata -> "metadata"
+        UDGFMinimal -> "minimal"
+        UDGFRaw -> "raw"
 
-instance FromJSON GmailUsersMessagesGetFormat where
-    parseJSON = parseJSONText "GmailUsersMessagesGetFormat"
+instance FromJSON UsersDraftsGetFormat where
+    parseJSON = parseJSONText "UsersDraftsGetFormat"
 
-instance ToJSON GmailUsersMessagesGetFormat where
+instance ToJSON UsersDraftsGetFormat where
+    toJSON = toJSONText
+
+-- | Source for Gmail\'s internal date of the message.
+data UsersMessagesImportInternalDateSource
+    = DateHeader
+      -- ^ @dateHeader@
+    | ReceivedTime
+      -- ^ @receivedTime@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable UsersMessagesImportInternalDateSource
+
+instance FromText UsersMessagesImportInternalDateSource where
+    fromText = \case
+        "dateHeader" -> Just DateHeader
+        "receivedTime" -> Just ReceivedTime
+        _ -> Nothing
+
+instance ToText UsersMessagesImportInternalDateSource where
+    toText = \case
+        DateHeader -> "dateHeader"
+        ReceivedTime -> "receivedTime"
+
+instance FromJSON UsersMessagesImportInternalDateSource where
+    parseJSON = parseJSONText "UsersMessagesImportInternalDateSource"
+
+instance ToJSON UsersMessagesImportInternalDateSource where
+    toJSON = toJSONText
+
+-- | The visibility of the label in the message list in the Gmail web
+-- interface.
+data LabelMessageListVisibility
+    = Hide
+      -- ^ @hide@
+    | Show
+      -- ^ @show@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable LabelMessageListVisibility
+
+instance FromText LabelMessageListVisibility where
+    fromText = \case
+        "hide" -> Just Hide
+        "show" -> Just Show
+        _ -> Nothing
+
+instance ToText LabelMessageListVisibility where
+    toText = \case
+        Hide -> "hide"
+        Show -> "show"
+
+instance FromJSON LabelMessageListVisibility where
+    parseJSON = parseJSONText "LabelMessageListVisibility"
+
+instance ToJSON LabelMessageListVisibility where
+    toJSON = toJSONText
+
+-- | The visibility of the label in the label list in the Gmail web
+-- interface.
+data LabelLabelListVisibility
+    = LabelHide
+      -- ^ @labelHide@
+    | LabelShow
+      -- ^ @labelShow@
+    | LabelShowIfUnread
+      -- ^ @labelShowIfUnread@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable LabelLabelListVisibility
+
+instance FromText LabelLabelListVisibility where
+    fromText = \case
+        "labelHide" -> Just LabelHide
+        "labelShow" -> Just LabelShow
+        "labelShowIfUnread" -> Just LabelShowIfUnread
+        _ -> Nothing
+
+instance ToText LabelLabelListVisibility where
+    toText = \case
+        LabelHide -> "labelHide"
+        LabelShow -> "labelShow"
+        LabelShowIfUnread -> "labelShowIfUnread"
+
+instance FromJSON LabelLabelListVisibility where
+    parseJSON = parseJSONText "LabelLabelListVisibility"
+
+instance ToJSON LabelLabelListVisibility where
+    toJSON = toJSONText
+
+-- | The format to return the messages in.
+data UsersThreadsGetFormat
+    = UTGFFull
+      -- ^ @full@
+    | UTGFMetadata
+      -- ^ @metadata@
+    | UTGFMinimal
+      -- ^ @minimal@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable UsersThreadsGetFormat
+
+instance FromText UsersThreadsGetFormat where
+    fromText = \case
+        "full" -> Just UTGFFull
+        "metadata" -> Just UTGFMetadata
+        "minimal" -> Just UTGFMinimal
+        _ -> Nothing
+
+instance ToText UsersThreadsGetFormat where
+    toText = \case
+        UTGFFull -> "full"
+        UTGFMetadata -> "metadata"
+        UTGFMinimal -> "minimal"
+
+instance FromJSON UsersThreadsGetFormat where
+    parseJSON = parseJSONText "UsersThreadsGetFormat"
+
+instance ToJSON UsersThreadsGetFormat where
+    toJSON = toJSONText
+
+-- | Filtering behavior of labelIds list specified.
+data WatchRequestLabelFilterAction
+    = Exclude
+      -- ^ @exclude@
+    | Include
+      -- ^ @include@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable WatchRequestLabelFilterAction
+
+instance FromText WatchRequestLabelFilterAction where
+    fromText = \case
+        "exclude" -> Just Exclude
+        "include" -> Just Include
+        _ -> Nothing
+
+instance ToText WatchRequestLabelFilterAction where
+    toText = \case
+        Exclude -> "exclude"
+        Include -> "include"
+
+instance FromJSON WatchRequestLabelFilterAction where
+    parseJSON = parseJSONText "WatchRequestLabelFilterAction"
+
+instance ToJSON WatchRequestLabelFilterAction where
+    toJSON = toJSONText
+
+-- | Source for Gmail\'s internal date of the message.
+data UsersMessagesInsertInternalDateSource
+    = UMIIDSDateHeader
+      -- ^ @dateHeader@
+    | UMIIDSReceivedTime
+      -- ^ @receivedTime@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable UsersMessagesInsertInternalDateSource
+
+instance FromText UsersMessagesInsertInternalDateSource where
+    fromText = \case
+        "dateHeader" -> Just UMIIDSDateHeader
+        "receivedTime" -> Just UMIIDSReceivedTime
+        _ -> Nothing
+
+instance ToText UsersMessagesInsertInternalDateSource where
+    toText = \case
+        UMIIDSDateHeader -> "dateHeader"
+        UMIIDSReceivedTime -> "receivedTime"
+
+instance FromJSON UsersMessagesInsertInternalDateSource where
+    parseJSON = parseJSONText "UsersMessagesInsertInternalDateSource"
+
+instance ToJSON UsersMessagesInsertInternalDateSource where
     toJSON = toJSONText

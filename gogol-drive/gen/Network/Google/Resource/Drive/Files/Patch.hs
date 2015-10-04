@@ -69,7 +69,7 @@ type FilesPatchResource =
                QueryParam "updateViewedDate" Bool :>
                  QueryParam "removeParents" Text :>
                    QueryParam "modifiedDateBehavior"
-                     ModifiedDateBehavior
+                     FilesPatchModifiedDateBehavior
                      :>
                      QueryParam "useContentAsIndexableText" Bool :>
                        QueryParam "timedTextTrackName" Text :>
@@ -86,7 +86,7 @@ type FilesPatchResource =
                                              QueryParam "oauth_token" OAuthToken
                                                :>
                                                QueryParam "alt" AltJSON :>
-                                                 ReqBody '[JSON] File :>
+                                                 ReqBody '[OctetStream] File :>
                                                    Patch '[JSON] File
 
 -- | Updates file metadata and\/or content. This method supports patch
@@ -103,7 +103,7 @@ data FilesPatch' = FilesPatch'
     , _fpPayload                   :: !File
     , _fpUpdateViewedDate          :: !Bool
     , _fpRemoveParents             :: !(Maybe Text)
-    , _fpModifiedDateBehavior      :: !(Maybe ModifiedDateBehavior)
+    , _fpModifiedDateBehavior      :: !(Maybe FilesPatchModifiedDateBehavior)
     , _fpUseContentAsIndexableText :: !Bool
     , _fpTimedTextTrackName        :: !(Maybe Text)
     , _fpOCRLanguage               :: !(Maybe Text)
@@ -251,7 +251,7 @@ fpRemoveParents
 
 -- | Determines the behavior in which modifiedDate is updated. This overrides
 -- setModifiedDate.
-fpModifiedDateBehavior :: Lens' FilesPatch' (Maybe ModifiedDateBehavior)
+fpModifiedDateBehavior :: Lens' FilesPatch' (Maybe FilesPatchModifiedDateBehavior)
 fpModifiedDateBehavior
   = lens _fpModifiedDateBehavior
       (\ s a -> s{_fpModifiedDateBehavior = a})

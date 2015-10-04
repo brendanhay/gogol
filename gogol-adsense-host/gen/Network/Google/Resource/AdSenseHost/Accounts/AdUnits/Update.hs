@@ -60,7 +60,7 @@ type AccountsAdUnitsUpdateResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] AdUnit :> Put '[JSON] AdUnit
+                             ReqBody '[OctetStream] AdUnit :> Put '[JSON] AdUnit
 
 -- | Update the supplied ad unit in the specified publisher AdSense account.
 --

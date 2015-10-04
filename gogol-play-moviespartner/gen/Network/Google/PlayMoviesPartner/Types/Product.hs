@@ -50,7 +50,7 @@ data Avail = Avail
     , _aSeriesTitleInternalAlias  :: !(Maybe Text)
     , _aDisplayName               :: !(Maybe Text)
     , _aReleaseDate               :: !(Maybe Text)
-    , _aFormatProfile             :: !(Maybe Text)
+    , _aFormatProFile             :: !(Maybe Text)
     , _aRatingReason              :: !(Maybe Text)
     , _aEncodeId                  :: !(Maybe Text)
     , _aPriceValue                :: !(Maybe Text)
@@ -112,7 +112,7 @@ data Avail = Avail
 --
 -- * 'aReleaseDate'
 --
--- * 'aFormatProfile'
+-- * 'aFormatProFile'
 --
 -- * 'aRatingReason'
 --
@@ -155,7 +155,7 @@ avail =
     , _aSeriesTitleInternalAlias = Nothing
     , _aDisplayName = Nothing
     , _aReleaseDate = Nothing
-    , _aFormatProfile = Nothing
+    , _aFormatProFile = Nothing
     , _aRatingReason = Nothing
     , _aEncodeId = Nothing
     , _aPriceValue = Nothing
@@ -324,10 +324,10 @@ aReleaseDate
   = lens _aReleaseDate (\ s a -> s{_aReleaseDate = a})
 
 -- | Indicates the format profile covered by the transaction.
-aFormatProfile :: Lens' Avail (Maybe Text)
-aFormatProfile
-  = lens _aFormatProfile
-      (\ s a -> s{_aFormatProfile = a})
+aFormatProFile :: Lens' Avail (Maybe Text)
+aFormatProFile
+  = lens _aFormatProFile
+      (\ s a -> s{_aFormatProFile = a})
 
 -- | Value representing the rating reason. Rating reasons should be formatted
 -- as per [EMA ratings spec](http:\/\/www.movielabs.com\/md\/ratings\/) and
@@ -441,7 +441,7 @@ instance ToJSON Avail where
                     _aSeriesTitleInternalAlias,
                   ("displayName" .=) <$> _aDisplayName,
                   ("releaseDate" .=) <$> _aReleaseDate,
-                  ("formatProfile" .=) <$> _aFormatProfile,
+                  ("formatProfile" .=) <$> _aFormatProFile,
                   ("ratingReason" .=) <$> _aRatingReason,
                   ("encodeId" .=) <$> _aEncodeId,
                   ("priceValue" .=) <$> _aPriceValue,
@@ -501,57 +501,6 @@ instance ToJSON ListAvailsResponse where
                  [("nextPageToken" .=) <$> _larNextPageToken,
                   ("avails" .=) <$> _larAvails])
 
--- | Response to the \'ListOrders\' method.
---
--- /See:/ 'listOrdersResponse' smart constructor.
-data ListOrdersResponse = ListOrdersResponse
-    { _lorNextPageToken :: !(Maybe Text)
-    , _lorOrders        :: !(Maybe [Order])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ListOrdersResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lorNextPageToken'
---
--- * 'lorOrders'
-listOrdersResponse
-    :: ListOrdersResponse
-listOrdersResponse =
-    ListOrdersResponse
-    { _lorNextPageToken = Nothing
-    , _lorOrders = Nothing
-    }
-
--- | See _List methods rules_ for info about this field.
-lorNextPageToken :: Lens' ListOrdersResponse (Maybe Text)
-lorNextPageToken
-  = lens _lorNextPageToken
-      (\ s a -> s{_lorNextPageToken = a})
-
--- | List of Orders that match the request criteria.
-lorOrders :: Lens' ListOrdersResponse [Order]
-lorOrders
-  = lens _lorOrders (\ s a -> s{_lorOrders = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON ListOrdersResponse where
-        parseJSON
-          = withObject "ListOrdersResponse"
-              (\ o ->
-                 ListOrdersResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "orders" .!= mempty))
-
-instance ToJSON ListOrdersResponse where
-        toJSON ListOrdersResponse{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _lorNextPageToken,
-                  ("orders" .=) <$> _lorOrders])
-
 -- | Response to the \'ListExperienceLocales\' method.
 --
 -- /See:/ 'listExperienceLocalesResponse' smart constructor.
@@ -604,6 +553,57 @@ instance ToJSON ListExperienceLocalesResponse where
                  [("nextPageToken" .=) <$> _lelrNextPageToken,
                   ("experienceLocales" .=) <$> _lelrExperienceLocales])
 
+-- | Response to the \'ListOrders\' method.
+--
+-- /See:/ 'listOrdersResponse' smart constructor.
+data ListOrdersResponse = ListOrdersResponse
+    { _lorNextPageToken :: !(Maybe Text)
+    , _lorOrders        :: !(Maybe [Order])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListOrdersResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lorNextPageToken'
+--
+-- * 'lorOrders'
+listOrdersResponse
+    :: ListOrdersResponse
+listOrdersResponse =
+    ListOrdersResponse
+    { _lorNextPageToken = Nothing
+    , _lorOrders = Nothing
+    }
+
+-- | See _List methods rules_ for info about this field.
+lorNextPageToken :: Lens' ListOrdersResponse (Maybe Text)
+lorNextPageToken
+  = lens _lorNextPageToken
+      (\ s a -> s{_lorNextPageToken = a})
+
+-- | List of Orders that match the request criteria.
+lorOrders :: Lens' ListOrdersResponse [Order]
+lorOrders
+  = lens _lorOrders (\ s a -> s{_lorOrders = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ListOrdersResponse where
+        parseJSON
+          = withObject "ListOrdersResponse"
+              (\ o ->
+                 ListOrdersResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "orders" .!= mempty))
+
+instance ToJSON ListOrdersResponse where
+        toJSON ListOrdersResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lorNextPageToken,
+                  ("orders" .=) <$> _lorOrders])
+
 -- | Response to the \'ListStoreInfos\' method.
 --
 -- /See:/ 'listStoreInfosResponse' smart constructor.
@@ -655,6 +655,304 @@ instance ToJSON ListStoreInfosResponse where
               (catMaybes
                  [("nextPageToken" .=) <$> _lsirNextPageToken,
                   ("storeInfos" .=) <$> _lsirStoreInfos])
+
+-- | An Order tracks the fulfillment of an Edit when delivered using the
+-- legacy, non-component-based delivery. Each Order is uniquely identified
+-- by an \`order_id\`, which is generated by Google. Externally, Orders can
+-- also be identified by partners using its \`custom_id\` (when provided).
+--
+-- /See:/ 'order' smart constructor.
+data Order = Order
+    { _oStatus                 :: !(Maybe Text)
+    , _oShowName               :: !(Maybe Text)
+    , _oPphName                :: !(Maybe Text)
+    , _oEarliestAvailStartTime :: !(Maybe Text)
+    , _oStudioName             :: !(Maybe Text)
+    , _oReceivedTime           :: !(Maybe Text)
+    , _oPriority               :: !(Maybe Double)
+    , _oChannelId              :: !(Maybe Text)
+    , _oCustomId               :: !(Maybe Text)
+    , _oApprovedTime           :: !(Maybe Text)
+    , _oCountries              :: !(Maybe [Text])
+    , _oChannelName            :: !(Maybe Text)
+    , _oVideoId                :: !(Maybe Text)
+    , _oLegacyPriority         :: !(Maybe Text)
+    , _oName                   :: !(Maybe Text)
+    , _oRejectionNote          :: !(Maybe Text)
+    , _oOrderedTime            :: !(Maybe Text)
+    , _oSeasonName             :: !(Maybe Text)
+    , _oStatusDetail           :: !(Maybe Text)
+    , _oType                   :: !(Maybe Text)
+    , _oNormalizedPriority     :: !(Maybe Text)
+    , _oOrderId                :: !(Maybe Text)
+    , _oEpisodeName            :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Order' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oStatus'
+--
+-- * 'oShowName'
+--
+-- * 'oPphName'
+--
+-- * 'oEarliestAvailStartTime'
+--
+-- * 'oStudioName'
+--
+-- * 'oReceivedTime'
+--
+-- * 'oPriority'
+--
+-- * 'oChannelId'
+--
+-- * 'oCustomId'
+--
+-- * 'oApprovedTime'
+--
+-- * 'oCountries'
+--
+-- * 'oChannelName'
+--
+-- * 'oVideoId'
+--
+-- * 'oLegacyPriority'
+--
+-- * 'oName'
+--
+-- * 'oRejectionNote'
+--
+-- * 'oOrderedTime'
+--
+-- * 'oSeasonName'
+--
+-- * 'oStatusDetail'
+--
+-- * 'oType'
+--
+-- * 'oNormalizedPriority'
+--
+-- * 'oOrderId'
+--
+-- * 'oEpisodeName'
+order
+    :: Order
+order =
+    Order
+    { _oStatus = Nothing
+    , _oShowName = Nothing
+    , _oPphName = Nothing
+    , _oEarliestAvailStartTime = Nothing
+    , _oStudioName = Nothing
+    , _oReceivedTime = Nothing
+    , _oPriority = Nothing
+    , _oChannelId = Nothing
+    , _oCustomId = Nothing
+    , _oApprovedTime = Nothing
+    , _oCountries = Nothing
+    , _oChannelName = Nothing
+    , _oVideoId = Nothing
+    , _oLegacyPriority = Nothing
+    , _oName = Nothing
+    , _oRejectionNote = Nothing
+    , _oOrderedTime = Nothing
+    , _oSeasonName = Nothing
+    , _oStatusDetail = Nothing
+    , _oType = Nothing
+    , _oNormalizedPriority = Nothing
+    , _oOrderId = Nothing
+    , _oEpisodeName = Nothing
+    }
+
+-- | High-level status of the order.
+oStatus :: Lens' Order (Maybe Text)
+oStatus = lens _oStatus (\ s a -> s{_oStatus = a})
+
+-- | Default Show name, usually in the language of the country of origin.
+-- Only available for TV Edits Example: \"Googlers, The\".
+oShowName :: Lens' Order (Maybe Text)
+oShowName
+  = lens _oShowName (\ s a -> s{_oShowName = a})
+
+-- | Name of the post-production house that manages the Edit ordered.
+oPphName :: Lens' Order (Maybe Text)
+oPphName = lens _oPphName (\ s a -> s{_oPphName = a})
+
+-- | Timestamp of the earliest start date of the Avails linked to this Order.
+oEarliestAvailStartTime :: Lens' Order (Maybe Text)
+oEarliestAvailStartTime
+  = lens _oEarliestAvailStartTime
+      (\ s a -> s{_oEarliestAvailStartTime = a})
+
+-- | Name of the studio that owns the Edit ordered.
+oStudioName :: Lens' Order (Maybe Text)
+oStudioName
+  = lens _oStudioName (\ s a -> s{_oStudioName = a})
+
+-- | Timestamp when the Order was fulfilled.
+oReceivedTime :: Lens' Order (Maybe Text)
+oReceivedTime
+  = lens _oReceivedTime
+      (\ s a -> s{_oReceivedTime = a})
+
+-- | Order priority, as defined by Google. The higher the value, the higher
+-- the priority. Example: 90
+oPriority :: Lens' Order (Maybe Double)
+oPriority
+  = lens _oPriority (\ s a -> s{_oPriority = a})
+
+-- | YouTube Channel ID that should be used to fulfill the Order. Example:
+-- \"UCRG64darCZhb\".
+oChannelId :: Lens' Order (Maybe Text)
+oChannelId
+  = lens _oChannelId (\ s a -> s{_oChannelId = a})
+
+-- | ID that can be used to externally identify an Order. This ID is provided
+-- by partners when submitting the Avails. Example: \'GOOGLER_2006\'
+oCustomId :: Lens' Order (Maybe Text)
+oCustomId
+  = lens _oCustomId (\ s a -> s{_oCustomId = a})
+
+-- | Timestamp when the Order was approved.
+oApprovedTime :: Lens' Order (Maybe Text)
+oApprovedTime
+  = lens _oApprovedTime
+      (\ s a -> s{_oApprovedTime = a})
+
+-- | Countries where the Order is available, using the \"ISO 3166-1 alpha-2\"
+-- format (example: \"US\").
+oCountries :: Lens' Order [Text]
+oCountries
+  = lens _oCountries (\ s a -> s{_oCountries = a}) .
+      _Default
+      . _Coerce
+
+-- | YouTube Channel Name that should be used to fulfill the Order. Example:
+-- \"Google_channel\".
+oChannelName :: Lens' Order (Maybe Text)
+oChannelName
+  = lens _oChannelName (\ s a -> s{_oChannelName = a})
+
+-- | Google-generated ID identifying the video linked to this Order, once
+-- delivered. Example: \'gtry456_xc\'.
+oVideoId :: Lens' Order (Maybe Text)
+oVideoId = lens _oVideoId (\ s a -> s{_oVideoId = a})
+
+-- | Legacy Order priority, as defined by Google. Example: \'P0\'
+oLegacyPriority :: Lens' Order (Maybe Text)
+oLegacyPriority
+  = lens _oLegacyPriority
+      (\ s a -> s{_oLegacyPriority = a})
+
+-- | Default Edit name, usually in the language of the country of origin.
+-- Example: \"Googlers, The\".
+oName :: Lens' Order (Maybe Text)
+oName = lens _oName (\ s a -> s{_oName = a})
+
+-- | Field explaining why an Order has been rejected. Example: \"Trailer
+-- audio is 2ch mono, please re-deliver in stereo\".
+oRejectionNote :: Lens' Order (Maybe Text)
+oRejectionNote
+  = lens _oRejectionNote
+      (\ s a -> s{_oRejectionNote = a})
+
+-- | Timestamp when the Order was created.
+oOrderedTime :: Lens' Order (Maybe Text)
+oOrderedTime
+  = lens _oOrderedTime (\ s a -> s{_oOrderedTime = a})
+
+-- | Default Season name, usually in the language of the country of origin.
+-- Only available for TV Edits Example: \"Googlers, The - A Brave New
+-- World\".
+oSeasonName :: Lens' Order (Maybe Text)
+oSeasonName
+  = lens _oSeasonName (\ s a -> s{_oSeasonName = a})
+
+-- | Detailed status of the order
+oStatusDetail :: Lens' Order (Maybe Text)
+oStatusDetail
+  = lens _oStatusDetail
+      (\ s a -> s{_oStatusDetail = a})
+
+-- | Type of the Edit linked to the Order.
+oType :: Lens' Order (Maybe Text)
+oType = lens _oType (\ s a -> s{_oType = a})
+
+-- | A simpler representation of the priority.
+oNormalizedPriority :: Lens' Order (Maybe Text)
+oNormalizedPriority
+  = lens _oNormalizedPriority
+      (\ s a -> s{_oNormalizedPriority = a})
+
+-- | ID internally generated by Google to uniquely identify an Order.
+-- Example: \'abcde12_x\'
+oOrderId :: Lens' Order (Maybe Text)
+oOrderId = lens _oOrderId (\ s a -> s{_oOrderId = a})
+
+-- | Default Episode name, usually in the language of the country of origin.
+-- Only available for TV Edits Example: \"Googlers, The - Pilot\".
+oEpisodeName :: Lens' Order (Maybe Text)
+oEpisodeName
+  = lens _oEpisodeName (\ s a -> s{_oEpisodeName = a})
+
+instance FromJSON Order where
+        parseJSON
+          = withObject "Order"
+              (\ o ->
+                 Order <$>
+                   (o .:? "status") <*> (o .:? "showName") <*>
+                     (o .:? "pphName")
+                     <*> (o .:? "earliestAvailStartTime")
+                     <*> (o .:? "studioName")
+                     <*> (o .:? "receivedTime")
+                     <*> (o .:? "priority")
+                     <*> (o .:? "channelId")
+                     <*> (o .:? "customId")
+                     <*> (o .:? "approvedTime")
+                     <*> (o .:? "countries" .!= mempty)
+                     <*> (o .:? "channelName")
+                     <*> (o .:? "videoId")
+                     <*> (o .:? "legacyPriority")
+                     <*> (o .:? "name")
+                     <*> (o .:? "rejectionNote")
+                     <*> (o .:? "orderedTime")
+                     <*> (o .:? "seasonName")
+                     <*> (o .:? "statusDetail")
+                     <*> (o .:? "type")
+                     <*> (o .:? "normalizedPriority")
+                     <*> (o .:? "orderId")
+                     <*> (o .:? "episodeName"))
+
+instance ToJSON Order where
+        toJSON Order{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _oStatus,
+                  ("showName" .=) <$> _oShowName,
+                  ("pphName" .=) <$> _oPphName,
+                  ("earliestAvailStartTime" .=) <$>
+                    _oEarliestAvailStartTime,
+                  ("studioName" .=) <$> _oStudioName,
+                  ("receivedTime" .=) <$> _oReceivedTime,
+                  ("priority" .=) <$> _oPriority,
+                  ("channelId" .=) <$> _oChannelId,
+                  ("customId" .=) <$> _oCustomId,
+                  ("approvedTime" .=) <$> _oApprovedTime,
+                  ("countries" .=) <$> _oCountries,
+                  ("channelName" .=) <$> _oChannelName,
+                  ("videoId" .=) <$> _oVideoId,
+                  ("legacyPriority" .=) <$> _oLegacyPriority,
+                  ("name" .=) <$> _oName,
+                  ("rejectionNote" .=) <$> _oRejectionNote,
+                  ("orderedTime" .=) <$> _oOrderedTime,
+                  ("seasonName" .=) <$> _oSeasonName,
+                  ("statusDetail" .=) <$> _oStatusDetail,
+                  ("type" .=) <$> _oType,
+                  ("normalizedPriority" .=) <$> _oNormalizedPriority,
+                  ("orderId" .=) <$> _oOrderId,
+                  ("episodeName" .=) <$> _oEpisodeName])
 
 -- | An ExperienceLocale tracks the fulfillment of a Title in a country using
 -- a specific language, when delivered using component-based delivery. For
@@ -962,304 +1260,6 @@ instance ToJSON ExperienceLocale where
                   ("editLevelEidr" .=) <$> _elEditLevelEidr,
                   ("type" .=) <$> _elType,
                   ("normalizedPriority" .=) <$> _elNormalizedPriority])
-
--- | An Order tracks the fulfillment of an Edit when delivered using the
--- legacy, non-component-based delivery. Each Order is uniquely identified
--- by an \`order_id\`, which is generated by Google. Externally, Orders can
--- also be identified by partners using its \`custom_id\` (when provided).
---
--- /See:/ 'order' smart constructor.
-data Order = Order
-    { _oStatus                 :: !(Maybe Text)
-    , _oShowName               :: !(Maybe Text)
-    , _oPphName                :: !(Maybe Text)
-    , _oEarliestAvailStartTime :: !(Maybe Text)
-    , _oStudioName             :: !(Maybe Text)
-    , _oReceivedTime           :: !(Maybe Text)
-    , _oPriority               :: !(Maybe Double)
-    , _oChannelId              :: !(Maybe Text)
-    , _oCustomId               :: !(Maybe Text)
-    , _oApprovedTime           :: !(Maybe Text)
-    , _oCountries              :: !(Maybe [Text])
-    , _oChannelName            :: !(Maybe Text)
-    , _oVideoId                :: !(Maybe Text)
-    , _oLegacyPriority         :: !(Maybe Text)
-    , _oName                   :: !(Maybe Text)
-    , _oRejectionNote          :: !(Maybe Text)
-    , _oOrderedTime            :: !(Maybe Text)
-    , _oSeasonName             :: !(Maybe Text)
-    , _oStatusDetail           :: !(Maybe Text)
-    , _oType                   :: !(Maybe Text)
-    , _oNormalizedPriority     :: !(Maybe Text)
-    , _oOrderId                :: !(Maybe Text)
-    , _oEpisodeName            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Order' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'oStatus'
---
--- * 'oShowName'
---
--- * 'oPphName'
---
--- * 'oEarliestAvailStartTime'
---
--- * 'oStudioName'
---
--- * 'oReceivedTime'
---
--- * 'oPriority'
---
--- * 'oChannelId'
---
--- * 'oCustomId'
---
--- * 'oApprovedTime'
---
--- * 'oCountries'
---
--- * 'oChannelName'
---
--- * 'oVideoId'
---
--- * 'oLegacyPriority'
---
--- * 'oName'
---
--- * 'oRejectionNote'
---
--- * 'oOrderedTime'
---
--- * 'oSeasonName'
---
--- * 'oStatusDetail'
---
--- * 'oType'
---
--- * 'oNormalizedPriority'
---
--- * 'oOrderId'
---
--- * 'oEpisodeName'
-order
-    :: Order
-order =
-    Order
-    { _oStatus = Nothing
-    , _oShowName = Nothing
-    , _oPphName = Nothing
-    , _oEarliestAvailStartTime = Nothing
-    , _oStudioName = Nothing
-    , _oReceivedTime = Nothing
-    , _oPriority = Nothing
-    , _oChannelId = Nothing
-    , _oCustomId = Nothing
-    , _oApprovedTime = Nothing
-    , _oCountries = Nothing
-    , _oChannelName = Nothing
-    , _oVideoId = Nothing
-    , _oLegacyPriority = Nothing
-    , _oName = Nothing
-    , _oRejectionNote = Nothing
-    , _oOrderedTime = Nothing
-    , _oSeasonName = Nothing
-    , _oStatusDetail = Nothing
-    , _oType = Nothing
-    , _oNormalizedPriority = Nothing
-    , _oOrderId = Nothing
-    , _oEpisodeName = Nothing
-    }
-
--- | High-level status of the order.
-oStatus :: Lens' Order (Maybe Text)
-oStatus = lens _oStatus (\ s a -> s{_oStatus = a})
-
--- | Default Show name, usually in the language of the country of origin.
--- Only available for TV Edits Example: \"Googlers, The\".
-oShowName :: Lens' Order (Maybe Text)
-oShowName
-  = lens _oShowName (\ s a -> s{_oShowName = a})
-
--- | Name of the post-production house that manages the Edit ordered.
-oPphName :: Lens' Order (Maybe Text)
-oPphName = lens _oPphName (\ s a -> s{_oPphName = a})
-
--- | Timestamp of the earliest start date of the Avails linked to this Order.
-oEarliestAvailStartTime :: Lens' Order (Maybe Text)
-oEarliestAvailStartTime
-  = lens _oEarliestAvailStartTime
-      (\ s a -> s{_oEarliestAvailStartTime = a})
-
--- | Name of the studio that owns the Edit ordered.
-oStudioName :: Lens' Order (Maybe Text)
-oStudioName
-  = lens _oStudioName (\ s a -> s{_oStudioName = a})
-
--- | Timestamp when the Order was fulfilled.
-oReceivedTime :: Lens' Order (Maybe Text)
-oReceivedTime
-  = lens _oReceivedTime
-      (\ s a -> s{_oReceivedTime = a})
-
--- | Order priority, as defined by Google. The higher the value, the higher
--- the priority. Example: 90
-oPriority :: Lens' Order (Maybe Double)
-oPriority
-  = lens _oPriority (\ s a -> s{_oPriority = a})
-
--- | YouTube Channel ID that should be used to fulfill the Order. Example:
--- \"UCRG64darCZhb\".
-oChannelId :: Lens' Order (Maybe Text)
-oChannelId
-  = lens _oChannelId (\ s a -> s{_oChannelId = a})
-
--- | ID that can be used to externally identify an Order. This ID is provided
--- by partners when submitting the Avails. Example: \'GOOGLER_2006\'
-oCustomId :: Lens' Order (Maybe Text)
-oCustomId
-  = lens _oCustomId (\ s a -> s{_oCustomId = a})
-
--- | Timestamp when the Order was approved.
-oApprovedTime :: Lens' Order (Maybe Text)
-oApprovedTime
-  = lens _oApprovedTime
-      (\ s a -> s{_oApprovedTime = a})
-
--- | Countries where the Order is available, using the \"ISO 3166-1 alpha-2\"
--- format (example: \"US\").
-oCountries :: Lens' Order [Text]
-oCountries
-  = lens _oCountries (\ s a -> s{_oCountries = a}) .
-      _Default
-      . _Coerce
-
--- | YouTube Channel Name that should be used to fulfill the Order. Example:
--- \"Google_channel\".
-oChannelName :: Lens' Order (Maybe Text)
-oChannelName
-  = lens _oChannelName (\ s a -> s{_oChannelName = a})
-
--- | Google-generated ID identifying the video linked to this Order, once
--- delivered. Example: \'gtry456_xc\'.
-oVideoId :: Lens' Order (Maybe Text)
-oVideoId = lens _oVideoId (\ s a -> s{_oVideoId = a})
-
--- | Legacy Order priority, as defined by Google. Example: \'P0\'
-oLegacyPriority :: Lens' Order (Maybe Text)
-oLegacyPriority
-  = lens _oLegacyPriority
-      (\ s a -> s{_oLegacyPriority = a})
-
--- | Default Edit name, usually in the language of the country of origin.
--- Example: \"Googlers, The\".
-oName :: Lens' Order (Maybe Text)
-oName = lens _oName (\ s a -> s{_oName = a})
-
--- | Field explaining why an Order has been rejected. Example: \"Trailer
--- audio is 2ch mono, please re-deliver in stereo\".
-oRejectionNote :: Lens' Order (Maybe Text)
-oRejectionNote
-  = lens _oRejectionNote
-      (\ s a -> s{_oRejectionNote = a})
-
--- | Timestamp when the Order was created.
-oOrderedTime :: Lens' Order (Maybe Text)
-oOrderedTime
-  = lens _oOrderedTime (\ s a -> s{_oOrderedTime = a})
-
--- | Default Season name, usually in the language of the country of origin.
--- Only available for TV Edits Example: \"Googlers, The - A Brave New
--- World\".
-oSeasonName :: Lens' Order (Maybe Text)
-oSeasonName
-  = lens _oSeasonName (\ s a -> s{_oSeasonName = a})
-
--- | Detailed status of the order
-oStatusDetail :: Lens' Order (Maybe Text)
-oStatusDetail
-  = lens _oStatusDetail
-      (\ s a -> s{_oStatusDetail = a})
-
--- | Type of the Edit linked to the Order.
-oType :: Lens' Order (Maybe Text)
-oType = lens _oType (\ s a -> s{_oType = a})
-
--- | A simpler representation of the priority.
-oNormalizedPriority :: Lens' Order (Maybe Text)
-oNormalizedPriority
-  = lens _oNormalizedPriority
-      (\ s a -> s{_oNormalizedPriority = a})
-
--- | ID internally generated by Google to uniquely identify an Order.
--- Example: \'abcde12_x\'
-oOrderId :: Lens' Order (Maybe Text)
-oOrderId = lens _oOrderId (\ s a -> s{_oOrderId = a})
-
--- | Default Episode name, usually in the language of the country of origin.
--- Only available for TV Edits Example: \"Googlers, The - Pilot\".
-oEpisodeName :: Lens' Order (Maybe Text)
-oEpisodeName
-  = lens _oEpisodeName (\ s a -> s{_oEpisodeName = a})
-
-instance FromJSON Order where
-        parseJSON
-          = withObject "Order"
-              (\ o ->
-                 Order <$>
-                   (o .:? "status") <*> (o .:? "showName") <*>
-                     (o .:? "pphName")
-                     <*> (o .:? "earliestAvailStartTime")
-                     <*> (o .:? "studioName")
-                     <*> (o .:? "receivedTime")
-                     <*> (o .:? "priority")
-                     <*> (o .:? "channelId")
-                     <*> (o .:? "customId")
-                     <*> (o .:? "approvedTime")
-                     <*> (o .:? "countries" .!= mempty)
-                     <*> (o .:? "channelName")
-                     <*> (o .:? "videoId")
-                     <*> (o .:? "legacyPriority")
-                     <*> (o .:? "name")
-                     <*> (o .:? "rejectionNote")
-                     <*> (o .:? "orderedTime")
-                     <*> (o .:? "seasonName")
-                     <*> (o .:? "statusDetail")
-                     <*> (o .:? "type")
-                     <*> (o .:? "normalizedPriority")
-                     <*> (o .:? "orderId")
-                     <*> (o .:? "episodeName"))
-
-instance ToJSON Order where
-        toJSON Order{..}
-          = object
-              (catMaybes
-                 [("status" .=) <$> _oStatus,
-                  ("showName" .=) <$> _oShowName,
-                  ("pphName" .=) <$> _oPphName,
-                  ("earliestAvailStartTime" .=) <$>
-                    _oEarliestAvailStartTime,
-                  ("studioName" .=) <$> _oStudioName,
-                  ("receivedTime" .=) <$> _oReceivedTime,
-                  ("priority" .=) <$> _oPriority,
-                  ("channelId" .=) <$> _oChannelId,
-                  ("customId" .=) <$> _oCustomId,
-                  ("approvedTime" .=) <$> _oApprovedTime,
-                  ("countries" .=) <$> _oCountries,
-                  ("channelName" .=) <$> _oChannelName,
-                  ("videoId" .=) <$> _oVideoId,
-                  ("legacyPriority" .=) <$> _oLegacyPriority,
-                  ("name" .=) <$> _oName,
-                  ("rejectionNote" .=) <$> _oRejectionNote,
-                  ("orderedTime" .=) <$> _oOrderedTime,
-                  ("seasonName" .=) <$> _oSeasonName,
-                  ("statusDetail" .=) <$> _oStatusDetail,
-                  ("type" .=) <$> _oType,
-                  ("normalizedPriority" .=) <$> _oNormalizedPriority,
-                  ("orderId" .=) <$> _oOrderId,
-                  ("episodeName" .=) <$> _oEpisodeName])
 
 -- | Information about a playable sequence (video) associated with an Edit
 -- and available at the Google Play Store. Internally, each StoreInfo is

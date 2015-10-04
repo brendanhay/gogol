@@ -31,14 +31,14 @@ module Network.Google.Resource.Drive.Children.Insert
     , ChildrenInsert'
 
     -- * Request Lenses
-    , cQuotaUser
-    , cPrettyPrint
-    , cUserIP
-    , cFolderId
-    , cPayload
-    , cKey
-    , cOAuthToken
-    , cFields
+    , chiQuotaUser
+    , chiPrettyPrint
+    , chiUserIP
+    , chiFolderId
+    , chiPayload
+    , chiKey
+    , chiOAuthToken
+    , chiFields
     ) where
 
 import           Network.Google.Drive.Types
@@ -57,114 +57,120 @@ type ChildrenInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] ChildReference :>
+                         ReqBody '[OctetStream] ChildReference :>
                            Post '[JSON] ChildReference
 
 -- | Inserts a file into a folder.
 --
 -- /See:/ 'childrenInsert'' smart constructor.
 data ChildrenInsert' = ChildrenInsert'
-    { _cQuotaUser   :: !(Maybe Text)
-    , _cPrettyPrint :: !Bool
-    , _cUserIP      :: !(Maybe Text)
-    , _cFolderId    :: !Text
-    , _cPayload     :: !ChildReference
-    , _cKey         :: !(Maybe Key)
-    , _cOAuthToken  :: !(Maybe OAuthToken)
-    , _cFields      :: !(Maybe Text)
+    { _chiQuotaUser   :: !(Maybe Text)
+    , _chiPrettyPrint :: !Bool
+    , _chiUserIP      :: !(Maybe Text)
+    , _chiFolderId    :: !Text
+    , _chiPayload     :: !ChildReference
+    , _chiKey         :: !(Maybe Key)
+    , _chiOAuthToken  :: !(Maybe OAuthToken)
+    , _chiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChildrenInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cQuotaUser'
+-- * 'chiQuotaUser'
 --
--- * 'cPrettyPrint'
+-- * 'chiPrettyPrint'
 --
--- * 'cUserIP'
+-- * 'chiUserIP'
 --
--- * 'cFolderId'
+-- * 'chiFolderId'
 --
--- * 'cPayload'
+-- * 'chiPayload'
 --
--- * 'cKey'
+-- * 'chiKey'
 --
--- * 'cOAuthToken'
+-- * 'chiOAuthToken'
 --
--- * 'cFields'
+-- * 'chiFields'
 childrenInsert'
     :: Text -- ^ 'folderId'
     -> ChildReference -- ^ 'payload'
     -> ChildrenInsert'
-childrenInsert' pCFolderId_ pCPayload_ =
+childrenInsert' pChiFolderId_ pChiPayload_ =
     ChildrenInsert'
-    { _cQuotaUser = Nothing
-    , _cPrettyPrint = True
-    , _cUserIP = Nothing
-    , _cFolderId = pCFolderId_
-    , _cPayload = pCPayload_
-    , _cKey = Nothing
-    , _cOAuthToken = Nothing
-    , _cFields = Nothing
+    { _chiQuotaUser = Nothing
+    , _chiPrettyPrint = True
+    , _chiUserIP = Nothing
+    , _chiFolderId = pChiFolderId_
+    , _chiPayload = pChiPayload_
+    , _chiKey = Nothing
+    , _chiOAuthToken = Nothing
+    , _chiFields = Nothing
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-cQuotaUser :: Lens' ChildrenInsert' (Maybe Text)
-cQuotaUser
-  = lens _cQuotaUser (\ s a -> s{_cQuotaUser = a})
+chiQuotaUser :: Lens' ChildrenInsert' (Maybe Text)
+chiQuotaUser
+  = lens _chiQuotaUser (\ s a -> s{_chiQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-cPrettyPrint :: Lens' ChildrenInsert' Bool
-cPrettyPrint
-  = lens _cPrettyPrint (\ s a -> s{_cPrettyPrint = a})
+chiPrettyPrint :: Lens' ChildrenInsert' Bool
+chiPrettyPrint
+  = lens _chiPrettyPrint
+      (\ s a -> s{_chiPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cUserIP :: Lens' ChildrenInsert' (Maybe Text)
-cUserIP = lens _cUserIP (\ s a -> s{_cUserIP = a})
+chiUserIP :: Lens' ChildrenInsert' (Maybe Text)
+chiUserIP
+  = lens _chiUserIP (\ s a -> s{_chiUserIP = a})
 
 -- | The ID of the folder.
-cFolderId :: Lens' ChildrenInsert' Text
-cFolderId
-  = lens _cFolderId (\ s a -> s{_cFolderId = a})
+chiFolderId :: Lens' ChildrenInsert' Text
+chiFolderId
+  = lens _chiFolderId (\ s a -> s{_chiFolderId = a})
 
 -- | Multipart request metadata.
-cPayload :: Lens' ChildrenInsert' ChildReference
-cPayload = lens _cPayload (\ s a -> s{_cPayload = a})
+chiPayload :: Lens' ChildrenInsert' ChildReference
+chiPayload
+  = lens _chiPayload (\ s a -> s{_chiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cKey :: Lens' ChildrenInsert' (Maybe Key)
-cKey = lens _cKey (\ s a -> s{_cKey = a})
+chiKey :: Lens' ChildrenInsert' (Maybe Key)
+chiKey = lens _chiKey (\ s a -> s{_chiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-cOAuthToken :: Lens' ChildrenInsert' (Maybe OAuthToken)
-cOAuthToken
-  = lens _cOAuthToken (\ s a -> s{_cOAuthToken = a})
+chiOAuthToken :: Lens' ChildrenInsert' (Maybe OAuthToken)
+chiOAuthToken
+  = lens _chiOAuthToken
+      (\ s a -> s{_chiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-cFields :: Lens' ChildrenInsert' (Maybe Text)
-cFields = lens _cFields (\ s a -> s{_cFields = a})
+chiFields :: Lens' ChildrenInsert' (Maybe Text)
+chiFields
+  = lens _chiFields (\ s a -> s{_chiFields = a})
 
 instance GoogleAuth ChildrenInsert' where
-        authKey = cKey . _Just
-        authToken = cOAuthToken . _Just
+        authKey = chiKey . _Just
+        authToken = chiOAuthToken . _Just
 
 instance GoogleRequest ChildrenInsert' where
         type Rs ChildrenInsert' = ChildReference
         request = requestWithRoute defReq driveURL
         requestWithRoute r u ChildrenInsert'{..}
-          = go _cFolderId _cQuotaUser (Just _cPrettyPrint)
-              _cUserIP
-              _cFields
-              _cKey
-              _cOAuthToken
+          = go _chiFolderId _chiQuotaUser
+              (Just _chiPrettyPrint)
+              _chiUserIP
+              _chiFields
+              _chiKey
+              _chiOAuthToken
               (Just AltJSON)
-              _cPayload
+              _chiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ChildrenInsertResource)

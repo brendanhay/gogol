@@ -69,7 +69,8 @@ type PostsPatchResource =
                                QueryParam "key" Key :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
-                                     ReqBody '[JSON] Post :> Patch '[JSON] Post
+                                     ReqBody '[OctetStream] Post :>
+                                       Patch '[JSON] Post
 
 -- | Update a post. This method supports patch semantics.
 --

@@ -53,10 +53,10 @@ type BlogsListByUserResource =
      "users" :>
        Capture "userId" Text :>
          "blogs" :>
-           QueryParams "status" BloggerBlogsListByUserStatus :>
+           QueryParams "status" BlogsListByUserStatus :>
              QueryParam "fetchUserInfo" Bool :>
-               QueryParams "role" Role :>
-                 QueryParam "view" BloggerBlogsListByUserView :>
+               QueryParams "role" BlogsListByUserRole :>
+                 QueryParam "view" BlogsListByUserView :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -69,15 +69,15 @@ type BlogsListByUserResource =
 --
 -- /See:/ 'blogsListByUser'' smart constructor.
 data BlogsListByUser' = BlogsListByUser'
-    { _blbuStatus        :: ![BloggerBlogsListByUserStatus]
+    { _blbuStatus        :: ![BlogsListByUserStatus]
     , _blbuQuotaUser     :: !(Maybe Text)
     , _blbuPrettyPrint   :: !Bool
     , _blbuUserIP        :: !(Maybe Text)
     , _blbuFetchUserInfo :: !(Maybe Bool)
     , _blbuUserId        :: !Text
-    , _blbuRole          :: !(Maybe [Role])
+    , _blbuRole          :: !(Maybe [BlogsListByUserRole])
     , _blbuKey           :: !(Maybe Key)
-    , _blbuView          :: !(Maybe BloggerBlogsListByUserView)
+    , _blbuView          :: !(Maybe BlogsListByUserView)
     , _blbuOAuthToken    :: !(Maybe OAuthToken)
     , _blbuFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -112,7 +112,7 @@ blogsListByUser'
     -> BlogsListByUser'
 blogsListByUser' pBlbuUserId_ =
     BlogsListByUser'
-    { _blbuStatus = BBLBUSLive
+    { _blbuStatus = BLBUSLive
     , _blbuQuotaUser = Nothing
     , _blbuPrettyPrint = True
     , _blbuUserIP = Nothing
@@ -127,7 +127,7 @@ blogsListByUser' pBlbuUserId_ =
 
 -- | Blog statuses to include in the result (default: Live blogs only). Note
 -- that ADMIN access is required to view deleted blogs.
-blbuStatus :: Lens' BlogsListByUser' [BloggerBlogsListByUserStatus]
+blbuStatus :: Lens' BlogsListByUser' [BlogsListByUserStatus]
 blbuStatus
   = lens _blbuStatus (\ s a -> s{_blbuStatus = a}) .
       _Coerce
@@ -168,7 +168,7 @@ blbuUserId
 -- | User access types for blogs to include in the results, e.g. AUTHOR will
 -- return blogs where the user has author level access. If no roles are
 -- specified, defaults to ADMIN and AUTHOR roles.
-blbuRole :: Lens' BlogsListByUser' [Role]
+blbuRole :: Lens' BlogsListByUser' [BlogsListByUserRole]
 blbuRole
   = lens _blbuRole (\ s a -> s{_blbuRole = a}) .
       _Default
@@ -182,7 +182,7 @@ blbuKey = lens _blbuKey (\ s a -> s{_blbuKey = a})
 
 -- | Access level with which to view the blogs. Note that some fields require
 -- elevated access.
-blbuView :: Lens' BlogsListByUser' (Maybe BloggerBlogsListByUserView)
+blbuView :: Lens' BlogsListByUser' (Maybe BlogsListByUserView)
 blbuView = lens _blbuView (\ s a -> s{_blbuView = a})
 
 -- | OAuth 2.0 token for the current user.

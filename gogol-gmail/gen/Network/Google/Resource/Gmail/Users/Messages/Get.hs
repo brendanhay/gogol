@@ -52,7 +52,7 @@ type UsersMessagesGetResource =
      Capture "userId" Text :>
        "messages" :>
          Capture "id" Text :>
-           QueryParam "format" GmailUsersMessagesGetFormat :>
+           QueryParam "format" UsersMessagesGetFormat :>
              QueryParams "metadataHeaders" Text :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
@@ -69,7 +69,7 @@ data UsersMessagesGet' = UsersMessagesGet'
     { _umgQuotaUser       :: !(Maybe Text)
     , _umgPrettyPrint     :: !Bool
     , _umgUserIP          :: !(Maybe Text)
-    , _umgFormat          :: !GmailUsersMessagesGetFormat
+    , _umgFormat          :: !UsersMessagesGetFormat
     , _umgUserId          :: !Text
     , _umgKey             :: !(Maybe Key)
     , _umgId              :: !Text
@@ -110,7 +110,7 @@ usersMessagesGet' pUmgUserId_ pUmgId_ =
     { _umgQuotaUser = Nothing
     , _umgPrettyPrint = True
     , _umgUserIP = Nothing
-    , _umgFormat = GUMGFFull
+    , _umgFormat = Full
     , _umgUserId = pUmgUserId_
     , _umgKey = Nothing
     , _umgId = pUmgId_
@@ -139,7 +139,7 @@ umgUserIP
   = lens _umgUserIP (\ s a -> s{_umgUserIP = a})
 
 -- | The format to return the message in.
-umgFormat :: Lens' UsersMessagesGet' GmailUsersMessagesGetFormat
+umgFormat :: Lens' UsersMessagesGet' UsersMessagesGetFormat
 umgFormat
   = lens _umgFormat (\ s a -> s{_umgFormat = a})
 

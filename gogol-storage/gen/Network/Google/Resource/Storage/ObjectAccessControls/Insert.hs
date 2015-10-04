@@ -62,7 +62,7 @@ type ObjectAccessControlsInsertResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] ObjectAccessControl :>
+                               ReqBody '[OctetStream] ObjectAccessControl :>
                                  Post '[JSON] ObjectAccessControl
 
 -- | Creates a new ACL entry on the specified object.

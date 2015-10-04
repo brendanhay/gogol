@@ -60,7 +60,8 @@ type AccountsInsertResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Account :> Post '[JSON] Account
+                           ReqBody '[OctetStream] Account :>
+                             Post '[JSON] Account
 
 -- | Inserts a new account for a user
 --

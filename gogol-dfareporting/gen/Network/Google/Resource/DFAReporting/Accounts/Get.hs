@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Accounts.Get
     , ag1QuotaUser
     , ag1PrettyPrint
     , ag1UserIP
-    , ag1ProfileId
+    , ag1ProFileId
     , ag1Key
     , ag1Id
     , ag1OAuthToken
@@ -66,7 +66,7 @@ data AccountsGet' = AccountsGet'
     { _ag1QuotaUser   :: !(Maybe Text)
     , _ag1PrettyPrint :: !Bool
     , _ag1UserIP      :: !(Maybe Text)
-    , _ag1ProfileId   :: !Int64
+    , _ag1ProFileId   :: !Int64
     , _ag1Key         :: !(Maybe Key)
     , _ag1Id          :: !Int64
     , _ag1OAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +83,7 @@ data AccountsGet' = AccountsGet'
 --
 -- * 'ag1UserIP'
 --
--- * 'ag1ProfileId'
+-- * 'ag1ProFileId'
 --
 -- * 'ag1Key'
 --
@@ -96,12 +96,12 @@ accountsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> AccountsGet'
-accountsGet' pAg1ProfileId_ pAg1Id_ =
+accountsGet' pAg1ProFileId_ pAg1Id_ =
     AccountsGet'
     { _ag1QuotaUser = Nothing
     , _ag1PrettyPrint = True
     , _ag1UserIP = Nothing
-    , _ag1ProfileId = pAg1ProfileId_
+    , _ag1ProFileId = pAg1ProFileId_
     , _ag1Key = Nothing
     , _ag1Id = pAg1Id_
     , _ag1OAuthToken = Nothing
@@ -128,9 +128,9 @@ ag1UserIP
   = lens _ag1UserIP (\ s a -> s{_ag1UserIP = a})
 
 -- | User profile ID associated with this request.
-ag1ProfileId :: Lens' AccountsGet' Int64
-ag1ProfileId
-  = lens _ag1ProfileId (\ s a -> s{_ag1ProfileId = a})
+ag1ProFileId :: Lens' AccountsGet' Int64
+ag1ProFileId
+  = lens _ag1ProFileId (\ s a -> s{_ag1ProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -161,7 +161,7 @@ instance GoogleRequest AccountsGet' where
         type Rs AccountsGet' = Account
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AccountsGet'{..}
-          = go _ag1ProfileId _ag1Id _ag1QuotaUser
+          = go _ag1ProFileId _ag1Id _ag1QuotaUser
               (Just _ag1PrettyPrint)
               _ag1UserIP
               _ag1Fields

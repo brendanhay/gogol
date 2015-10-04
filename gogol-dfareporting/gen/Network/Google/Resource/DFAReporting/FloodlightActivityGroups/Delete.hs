@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Delete
     , fagdQuotaUser
     , fagdPrettyPrint
     , fagdUserIP
-    , fagdProfileId
+    , fagdProFileId
     , fagdKey
     , fagdId
     , fagdOAuthToken
@@ -66,7 +66,7 @@ data FloodlightActivityGroupsDelete' = FloodlightActivityGroupsDelete'
     { _fagdQuotaUser   :: !(Maybe Text)
     , _fagdPrettyPrint :: !Bool
     , _fagdUserIP      :: !(Maybe Text)
-    , _fagdProfileId   :: !Int64
+    , _fagdProFileId   :: !Int64
     , _fagdKey         :: !(Maybe Key)
     , _fagdId          :: !Int64
     , _fagdOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +83,7 @@ data FloodlightActivityGroupsDelete' = FloodlightActivityGroupsDelete'
 --
 -- * 'fagdUserIP'
 --
--- * 'fagdProfileId'
+-- * 'fagdProFileId'
 --
 -- * 'fagdKey'
 --
@@ -96,12 +96,12 @@ floodlightActivityGroupsDelete'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> FloodlightActivityGroupsDelete'
-floodlightActivityGroupsDelete' pFagdProfileId_ pFagdId_ =
+floodlightActivityGroupsDelete' pFagdProFileId_ pFagdId_ =
     FloodlightActivityGroupsDelete'
     { _fagdQuotaUser = Nothing
     , _fagdPrettyPrint = True
     , _fagdUserIP = Nothing
-    , _fagdProfileId = pFagdProfileId_
+    , _fagdProFileId = pFagdProFileId_
     , _fagdKey = Nothing
     , _fagdId = pFagdId_
     , _fagdOAuthToken = Nothing
@@ -129,10 +129,10 @@ fagdUserIP
   = lens _fagdUserIP (\ s a -> s{_fagdUserIP = a})
 
 -- | User profile ID associated with this request.
-fagdProfileId :: Lens' FloodlightActivityGroupsDelete' Int64
-fagdProfileId
-  = lens _fagdProfileId
-      (\ s a -> s{_fagdProfileId = a})
+fagdProFileId :: Lens' FloodlightActivityGroupsDelete' Int64
+fagdProFileId
+  = lens _fagdProFileId
+      (\ s a -> s{_fagdProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -166,7 +166,7 @@ instance GoogleRequest
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           FloodlightActivityGroupsDelete'{..}
-          = go _fagdProfileId _fagdId _fagdQuotaUser
+          = go _fagdProFileId _fagdId _fagdQuotaUser
               (Just _fagdPrettyPrint)
               _fagdUserIP
               _fagdFields

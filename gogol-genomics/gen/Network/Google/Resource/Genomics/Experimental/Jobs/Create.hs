@@ -57,8 +57,8 @@ type ExperimentalJobsCreateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] ExperimentalCreateJobRequest :>
-                           Post '[JSON] ExperimentalCreateJobResponse
+                         ReqBody '[OctetStream] ExperimentalCreateJobRequest
+                           :> Post '[JSON] ExperimentalCreateJobResponse
 
 -- | Creates and asynchronously runs an ad-hoc job. This is an experimental
 -- call and may be removed or changed at any time.

@@ -59,7 +59,7 @@ type OrdersUpdateshipmentResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] OrdersUpdateShipmentRequest :>
+                           ReqBody '[OctetStream] OrdersUpdateShipmentRequest :>
                              Post '[JSON] OrdersUpdateShipmentResponse
 
 -- | Updates a shipment\'s status, carrier, and\/or tracking ID.

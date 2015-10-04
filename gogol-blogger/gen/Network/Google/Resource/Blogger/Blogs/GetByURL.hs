@@ -50,7 +50,7 @@ type BlogsGetByURLResource =
      "blogs" :>
        "byurl" :>
          QueryParam "url" Text :>
-           QueryParam "view" BloggerBlogsGetByURLView :>
+           QueryParam "view" BlogsGetByURLView :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -68,7 +68,7 @@ data BlogsGetByURL' = BlogsGetByURL'
     , _bgbuUserIP      :: !(Maybe Text)
     , _bgbuURL         :: !Text
     , _bgbuKey         :: !(Maybe Key)
-    , _bgbuView        :: !(Maybe BloggerBlogsGetByURLView)
+    , _bgbuView        :: !(Maybe BlogsGetByURLView)
     , _bgbuOAuthToken  :: !(Maybe OAuthToken)
     , _bgbuFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -139,7 +139,7 @@ bgbuKey = lens _bgbuKey (\ s a -> s{_bgbuKey = a})
 
 -- | Access level with which to view the blog. Note that some fields require
 -- elevated access.
-bgbuView :: Lens' BlogsGetByURL' (Maybe BloggerBlogsGetByURLView)
+bgbuView :: Lens' BlogsGetByURL' (Maybe BlogsGetByURLView)
 bgbuView = lens _bgbuView (\ s a -> s{_bgbuView = a})
 
 -- | OAuth 2.0 token for the current user.

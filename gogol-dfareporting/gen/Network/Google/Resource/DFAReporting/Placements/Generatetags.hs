@@ -36,7 +36,7 @@ module Network.Google.Resource.DFAReporting.Placements.Generatetags
     , pTagFormats
     , pUserIP
     , pCampaignId
-    , pProfileId
+    , pProFileId
     , pKey
     , pPlacementIds
     , pOAuthToken
@@ -53,7 +53,9 @@ type PlacementsGeneratetagsResource =
        Capture "profileId" Int64 :>
          "placements" :>
            "generatetags" :>
-             QueryParams "tagFormats" TagFormats :>
+             QueryParams "tagFormats"
+               PlacementsGeneratetagsTagFormats
+               :>
                QueryParam "campaignId" Int64 :>
                  QueryParams "placementIds" Int64 :>
                    QueryParam "quotaUser" Text :>
@@ -71,10 +73,10 @@ type PlacementsGeneratetagsResource =
 data PlacementsGeneratetags' = PlacementsGeneratetags'
     { _pQuotaUser    :: !(Maybe Text)
     , _pPrettyPrint  :: !Bool
-    , _pTagFormats   :: !(Maybe [TagFormats])
+    , _pTagFormats   :: !(Maybe [PlacementsGeneratetagsTagFormats])
     , _pUserIP       :: !(Maybe Text)
     , _pCampaignId   :: !(Maybe Int64)
-    , _pProfileId    :: !Int64
+    , _pProFileId    :: !Int64
     , _pKey          :: !(Maybe Key)
     , _pPlacementIds :: !(Maybe [Int64])
     , _pOAuthToken   :: !(Maybe OAuthToken)
@@ -95,7 +97,7 @@ data PlacementsGeneratetags' = PlacementsGeneratetags'
 --
 -- * 'pCampaignId'
 --
--- * 'pProfileId'
+-- * 'pProFileId'
 --
 -- * 'pKey'
 --
@@ -107,14 +109,14 @@ data PlacementsGeneratetags' = PlacementsGeneratetags'
 placementsGeneratetags'
     :: Int64 -- ^ 'profileId'
     -> PlacementsGeneratetags'
-placementsGeneratetags' pPProfileId_ =
+placementsGeneratetags' pPProFileId_ =
     PlacementsGeneratetags'
     { _pQuotaUser = Nothing
     , _pPrettyPrint = True
     , _pTagFormats = Nothing
     , _pUserIP = Nothing
     , _pCampaignId = Nothing
-    , _pProfileId = pPProfileId_
+    , _pProFileId = pPProFileId_
     , _pKey = Nothing
     , _pPlacementIds = Nothing
     , _pOAuthToken = Nothing
@@ -134,7 +136,7 @@ pPrettyPrint
   = lens _pPrettyPrint (\ s a -> s{_pPrettyPrint = a})
 
 -- | Tag formats to generate for these placements.
-pTagFormats :: Lens' PlacementsGeneratetags' [TagFormats]
+pTagFormats :: Lens' PlacementsGeneratetags' [PlacementsGeneratetagsTagFormats]
 pTagFormats
   = lens _pTagFormats (\ s a -> s{_pTagFormats = a}) .
       _Default
@@ -152,9 +154,9 @@ pCampaignId
   = lens _pCampaignId (\ s a -> s{_pCampaignId = a})
 
 -- | User profile ID associated with this request.
-pProfileId :: Lens' PlacementsGeneratetags' Int64
-pProfileId
-  = lens _pProfileId (\ s a -> s{_pProfileId = a})
+pProFileId :: Lens' PlacementsGeneratetags' Int64
+pProFileId
+  = lens _pProFileId (\ s a -> s{_pProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -188,7 +190,7 @@ instance GoogleRequest PlacementsGeneratetags' where
              PlacementsGenerateTagsResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementsGeneratetags'{..}
-          = go _pProfileId (_pTagFormats ^. _Default)
+          = go _pProFileId (_pTagFormats ^. _Default)
               _pCampaignId
               (_pPlacementIds ^. _Default)
               _pQuotaUser

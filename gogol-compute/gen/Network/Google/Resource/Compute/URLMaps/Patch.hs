@@ -60,7 +60,8 @@ type URLMapsPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] URLMap :> Patch '[JSON] Operation
+                           ReqBody '[OctetStream] URLMap :>
+                             Patch '[JSON] Operation
 
 -- | Update the entire content of the UrlMap resource. This method supports
 -- patch semantics.

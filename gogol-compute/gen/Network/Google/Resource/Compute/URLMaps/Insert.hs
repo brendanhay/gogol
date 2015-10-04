@@ -58,7 +58,8 @@ type URLMapsInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] URLMap :> Post '[JSON] Operation
+                         ReqBody '[OctetStream] URLMap :>
+                           Post '[JSON] Operation
 
 -- | Creates a UrlMap resource in the specified project using the data
 -- included in the request.

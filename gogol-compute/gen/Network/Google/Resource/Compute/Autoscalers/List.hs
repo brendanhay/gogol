@@ -32,17 +32,17 @@ module Network.Google.Resource.Compute.Autoscalers.List
     , AutoscalersList'
 
     -- * Request Lenses
-    , aQuotaUser
-    , aPrettyPrint
-    , aProject
-    , aUserIP
-    , aZone
-    , aKey
-    , aFilter
-    , aPageToken
-    , aOAuthToken
-    , aMaxResults
-    , aFields
+    , autQuotaUser
+    , autPrettyPrint
+    , autProject
+    , autUserIP
+    , autZone
+    , autKey
+    , autFilter
+    , autPageToken
+    , autOAuthToken
+    , autMaxResults
+    , autFields
     ) where
 
 import           Network.Google.Compute.Types
@@ -72,93 +72,96 @@ type AutoscalersListResource =
 --
 -- /See:/ 'autoscalersList'' smart constructor.
 data AutoscalersList' = AutoscalersList'
-    { _aQuotaUser   :: !(Maybe Text)
-    , _aPrettyPrint :: !Bool
-    , _aProject     :: !Text
-    , _aUserIP      :: !(Maybe Text)
-    , _aZone        :: !Text
-    , _aKey         :: !(Maybe Key)
-    , _aFilter      :: !(Maybe Text)
-    , _aPageToken   :: !(Maybe Text)
-    , _aOAuthToken  :: !(Maybe OAuthToken)
-    , _aMaxResults  :: !Word32
-    , _aFields      :: !(Maybe Text)
+    { _autQuotaUser   :: !(Maybe Text)
+    , _autPrettyPrint :: !Bool
+    , _autProject     :: !Text
+    , _autUserIP      :: !(Maybe Text)
+    , _autZone        :: !Text
+    , _autKey         :: !(Maybe Key)
+    , _autFilter      :: !(Maybe Text)
+    , _autPageToken   :: !(Maybe Text)
+    , _autOAuthToken  :: !(Maybe OAuthToken)
+    , _autMaxResults  :: !Word32
+    , _autFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalersList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aQuotaUser'
+-- * 'autQuotaUser'
 --
--- * 'aPrettyPrint'
+-- * 'autPrettyPrint'
 --
--- * 'aProject'
+-- * 'autProject'
 --
--- * 'aUserIP'
+-- * 'autUserIP'
 --
--- * 'aZone'
+-- * 'autZone'
 --
--- * 'aKey'
+-- * 'autKey'
 --
--- * 'aFilter'
+-- * 'autFilter'
 --
--- * 'aPageToken'
+-- * 'autPageToken'
 --
--- * 'aOAuthToken'
+-- * 'autOAuthToken'
 --
--- * 'aMaxResults'
+-- * 'autMaxResults'
 --
--- * 'aFields'
+-- * 'autFields'
 autoscalersList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> AutoscalersList'
-autoscalersList' pAProject_ pAZone_ =
+autoscalersList' pAutProject_ pAutZone_ =
     AutoscalersList'
-    { _aQuotaUser = Nothing
-    , _aPrettyPrint = True
-    , _aProject = pAProject_
-    , _aUserIP = Nothing
-    , _aZone = pAZone_
-    , _aKey = Nothing
-    , _aFilter = Nothing
-    , _aPageToken = Nothing
-    , _aOAuthToken = Nothing
-    , _aMaxResults = 500
-    , _aFields = Nothing
+    { _autQuotaUser = Nothing
+    , _autPrettyPrint = True
+    , _autProject = pAutProject_
+    , _autUserIP = Nothing
+    , _autZone = pAutZone_
+    , _autKey = Nothing
+    , _autFilter = Nothing
+    , _autPageToken = Nothing
+    , _autOAuthToken = Nothing
+    , _autMaxResults = 500
+    , _autFields = Nothing
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-aQuotaUser :: Lens' AutoscalersList' (Maybe Text)
-aQuotaUser
-  = lens _aQuotaUser (\ s a -> s{_aQuotaUser = a})
+autQuotaUser :: Lens' AutoscalersList' (Maybe Text)
+autQuotaUser
+  = lens _autQuotaUser (\ s a -> s{_autQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-aPrettyPrint :: Lens' AutoscalersList' Bool
-aPrettyPrint
-  = lens _aPrettyPrint (\ s a -> s{_aPrettyPrint = a})
+autPrettyPrint :: Lens' AutoscalersList' Bool
+autPrettyPrint
+  = lens _autPrettyPrint
+      (\ s a -> s{_autPrettyPrint = a})
 
 -- | Name of the project scoping this request.
-aProject :: Lens' AutoscalersList' Text
-aProject = lens _aProject (\ s a -> s{_aProject = a})
+autProject :: Lens' AutoscalersList' Text
+autProject
+  = lens _autProject (\ s a -> s{_autProject = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aUserIP :: Lens' AutoscalersList' (Maybe Text)
-aUserIP = lens _aUserIP (\ s a -> s{_aUserIP = a})
+autUserIP :: Lens' AutoscalersList' (Maybe Text)
+autUserIP
+  = lens _autUserIP (\ s a -> s{_autUserIP = a})
 
 -- | Name of the zone scoping this request.
-aZone :: Lens' AutoscalersList' Text
-aZone = lens _aZone (\ s a -> s{_aZone = a})
+autZone :: Lens' AutoscalersList' Text
+autZone = lens _autZone (\ s a -> s{_autZone = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aKey :: Lens' AutoscalersList' (Maybe Key)
-aKey = lens _aKey (\ s a -> s{_aKey = a})
+autKey :: Lens' AutoscalersList' (Maybe Key)
+autKey = lens _autKey (\ s a -> s{_autKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
 -- filter={expression}. Your {expression} must be in the format: FIELD_NAME
@@ -171,46 +174,50 @@ aKey = lens _aKey (\ s a -> s{_aKey = a})
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-aFilter :: Lens' AutoscalersList' (Maybe Text)
-aFilter = lens _aFilter (\ s a -> s{_aFilter = a})
+autFilter :: Lens' AutoscalersList' (Maybe Text)
+autFilter
+  = lens _autFilter (\ s a -> s{_autFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-aPageToken :: Lens' AutoscalersList' (Maybe Text)
-aPageToken
-  = lens _aPageToken (\ s a -> s{_aPageToken = a})
+autPageToken :: Lens' AutoscalersList' (Maybe Text)
+autPageToken
+  = lens _autPageToken (\ s a -> s{_autPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-aOAuthToken :: Lens' AutoscalersList' (Maybe OAuthToken)
-aOAuthToken
-  = lens _aOAuthToken (\ s a -> s{_aOAuthToken = a})
+autOAuthToken :: Lens' AutoscalersList' (Maybe OAuthToken)
+autOAuthToken
+  = lens _autOAuthToken
+      (\ s a -> s{_autOAuthToken = a})
 
 -- | Maximum count of results to be returned.
-aMaxResults :: Lens' AutoscalersList' Word32
-aMaxResults
-  = lens _aMaxResults (\ s a -> s{_aMaxResults = a})
+autMaxResults :: Lens' AutoscalersList' Word32
+autMaxResults
+  = lens _autMaxResults
+      (\ s a -> s{_autMaxResults = a})
 
 -- | Selector specifying which fields to include in a partial response.
-aFields :: Lens' AutoscalersList' (Maybe Text)
-aFields = lens _aFields (\ s a -> s{_aFields = a})
+autFields :: Lens' AutoscalersList' (Maybe Text)
+autFields
+  = lens _autFields (\ s a -> s{_autFields = a})
 
 instance GoogleAuth AutoscalersList' where
-        authKey = aKey . _Just
-        authToken = aOAuthToken . _Just
+        authKey = autKey . _Just
+        authToken = autOAuthToken . _Just
 
 instance GoogleRequest AutoscalersList' where
         type Rs AutoscalersList' = AutoscalerList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u AutoscalersList'{..}
-          = go _aProject _aZone _aFilter _aPageToken
-              (Just _aMaxResults)
-              _aQuotaUser
-              (Just _aPrettyPrint)
-              _aUserIP
-              _aFields
-              _aKey
-              _aOAuthToken
+          = go _autProject _autZone _autFilter _autPageToken
+              (Just _autMaxResults)
+              _autQuotaUser
+              (Just _autPrettyPrint)
+              _autUserIP
+              _autFields
+              _autKey
+              _autOAuthToken
               (Just AltJSON)
           where go
                   = clientWithRoute

@@ -61,7 +61,8 @@ type TablesFilesInsertResource =
                    QueryParam "fields" Text :>
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
-                         QueryParam "alt" AltJSON :> Post '[JSON] ()
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Body :> Post '[JSON] ()
 
 -- | Upload a file to a placeholder table asset. See Table Upload in the
 -- Developer\'s Guide for more information. Supported file types are listed

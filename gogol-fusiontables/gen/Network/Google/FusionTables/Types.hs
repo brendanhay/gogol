@@ -40,6 +40,12 @@ module Network.Google.FusionTables.Types
     , sfGradient
     , sfColumnName
 
+    -- * ColumnBaseColumn
+    , ColumnBaseColumn
+    , columnBaseColumn
+    , cbcTableIndex
+    , cbcColumnId
+
     -- * SQLresponse
     , SQLresponse
     , sQLresponse
@@ -47,11 +53,11 @@ module Network.Google.FusionTables.Types
     , sqlRows
     , sqlColumns
 
-    -- * BaseColumn
-    , BaseColumn
-    , baseColumn
-    , bcTableIndex
-    , bcColumnId
+    -- * StyleFunctionGradientColorsItem
+    , StyleFunctionGradientColorsItem
+    , styleFunctionGradientColorsItem
+    , sfgciColor
+    , sfgciOpacity
 
     -- * StyleSettingList
     , StyleSettingList
@@ -77,13 +83,6 @@ module Network.Google.FusionTables.Types
     , lCoordinates
     , lType
 
-    -- * Gradient
-    , Gradient
-    , gradient
-    , gMax
-    , gMin
-    , gColors
-
     -- * StyleSetting
     , StyleSetting
     , styleSetting
@@ -95,17 +94,17 @@ module Network.Google.FusionTables.Types
     , ssStyleId
     , ssTableId
 
-    -- * Polygon
-    , Polygon
-    , polygon
-    , pCoordinates
-    , pType
-
     -- * Point
     , Point
     , point
-    , poiCoordinates
-    , poiType
+    , pCoordinates
+    , pType
+
+    -- * Polygon
+    , Polygon
+    , polygon
+    , polCoordinates
+    , polType
 
     -- * TaskList
     , TaskList
@@ -115,6 +114,13 @@ module Network.Google.FusionTables.Types
     , tKind
     , tItems
 
+    -- * Geometry
+    , Geometry
+    , geometry
+    , gGeometries
+    , gGeometry
+    , gType
+
     -- * TemplateList
     , TemplateList
     , templateList
@@ -123,12 +129,11 @@ module Network.Google.FusionTables.Types
     , temKind
     , temItems
 
-    -- * Geometry
-    , Geometry
-    , geometry
-    , gGeometries
-    , gGeometry
-    , gType
+    -- * Import
+    , Import
+    , import'
+    , iKind
+    , iNumRowsReceived
 
     -- * Task
     , Task
@@ -138,12 +143,6 @@ module Network.Google.FusionTables.Types
     , tasKind
     , tasType
     , tasStarted
-
-    -- * Import
-    , Import
-    , import'
-    , iKind
-    , iNumRowsReceived
 
     -- * Template
     , Template
@@ -173,11 +172,28 @@ module Network.Google.FusionTables.Types
     , psStrokeWeightStyler
     , psStrokeColor
 
-    -- * ColorsItem
-    , ColorsItem
-    , colorsItem
-    , ciColor
-    , ciOpacity
+    -- * StyleFunctionGradient
+    , StyleFunctionGradient
+    , styleFunctionGradient
+    , sfgMax
+    , sfgMin
+    , sfgColors
+
+    -- * Column
+    , Column
+    , column
+    , cColumnJSONSchema
+    , cGraphPredicate
+    , cKind
+    , cBaseColumn
+    , cColumnPropertiesJSON
+    , cName
+    , cType
+    , cFormatPattern
+    , cColumnId
+    , cValidValues
+    , cValidateData
+    , cDescription
 
     -- * Table
     , Table
@@ -195,22 +211,6 @@ module Network.Google.FusionTables.Types
     , tabDescription
     , tabAttribution
     , tabAttributionLink
-
-    -- * Column
-    , Column
-    , column
-    , cColumnJSONSchema
-    , cGraphPredicate
-    , cKind
-    , cBaseColumn
-    , cColumnPropertiesJSON
-    , cName
-    , cType
-    , cFormatPattern
-    , cColumnId
-    , cValidValues
-    , cValidateData
-    , cDescription
 
     -- * LineStyle
     , LineStyle

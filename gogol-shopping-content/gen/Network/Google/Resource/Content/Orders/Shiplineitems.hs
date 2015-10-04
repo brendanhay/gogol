@@ -59,7 +59,7 @@ type OrdersShiplineitemsResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] OrdersShipLineItemsRequest :>
+                           ReqBody '[OctetStream] OrdersShipLineItemsRequest :>
                              Post '[JSON] OrdersShipLineItemsResponse
 
 -- | Marks line item(s) as shipped.

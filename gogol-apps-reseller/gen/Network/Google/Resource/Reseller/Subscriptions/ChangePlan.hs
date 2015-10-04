@@ -60,7 +60,7 @@ type SubscriptionsChangePlanResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] ChangePlanRequest :>
+                             ReqBody '[OctetStream] ChangePlanRequest :>
                                Post '[JSON] Subscription
 
 -- | Changes the plan of a subscription

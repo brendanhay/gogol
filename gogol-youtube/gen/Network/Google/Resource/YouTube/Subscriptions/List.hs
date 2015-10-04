@@ -66,7 +66,7 @@ type SubscriptionsListResource =
                    QueryParam "mySubscribers" Bool :>
                      QueryParam "forChannelId" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "order" YouTubeSubscriptionsListOrder :>
+                         QueryParam "order" SubscriptionsListOrder :>
                            QueryParam "maxResults" Word32 :>
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
@@ -95,7 +95,7 @@ data SubscriptionsList' = SubscriptionsList'
     , _sForChannelId                  :: !(Maybe Text)
     , _sPageToken                     :: !(Maybe Text)
     , _sOAuthToken                    :: !(Maybe OAuthToken)
-    , _sOrder                         :: !YouTubeSubscriptionsListOrder
+    , _sOrder                         :: !SubscriptionsListOrder
     , _sMaxResults                    :: !Word32
     , _sFields                        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -156,7 +156,7 @@ subscriptionsList' pSPart_ =
     , _sForChannelId = Nothing
     , _sPageToken = Nothing
     , _sOAuthToken = Nothing
-    , _sOrder = YSubscriptionOrderRelevance
+    , _sOrder = SLOSubscriptionOrderRelevance
     , _sMaxResults = 5
     , _sFields = Nothing
     }
@@ -277,7 +277,7 @@ sOAuthToken
 
 -- | The order parameter specifies the method that will be used to sort
 -- resources in the API response.
-sOrder :: Lens' SubscriptionsList' YouTubeSubscriptionsListOrder
+sOrder :: Lens' SubscriptionsList' SubscriptionsListOrder
 sOrder = lens _sOrder (\ s a -> s{_sOrder = a})
 
 -- | The maxResults parameter specifies the maximum number of items that

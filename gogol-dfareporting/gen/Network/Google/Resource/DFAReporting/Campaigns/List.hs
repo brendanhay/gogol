@@ -37,7 +37,7 @@ module Network.Google.Resource.DFAReporting.Campaigns.List
     , ccUserIP
     , ccSearchString
     , ccIds
-    , ccProfileId
+    , ccProFileId
     , ccSortOrder
     , ccAdvertiserGroupIds
     , ccKey
@@ -65,16 +65,12 @@ type CampaignsListResource =
            QueryParams "excludedIds" Int64 :>
              QueryParam "searchString" Text :>
                QueryParams "ids" Int64 :>
-                 QueryParam "sortOrder"
-                   DfareportingCampaignsListSortOrder
-                   :>
+                 QueryParam "sortOrder" CampaignsListSortOrder :>
                    QueryParams "advertiserGroupIds" Int64 :>
                      QueryParam "atLeastOneOptimizationActivity" Bool :>
                        QueryParam "overriddenEventTagId" Int64 :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "sortField"
-                             DfareportingCampaignsListSortField
-                             :>
+                           QueryParam "sortField" CampaignsListSortField :>
                              QueryParam "subaccountId" Int64 :>
                                QueryParams "advertiserIds" Int64 :>
                                  QueryParam "archived" Bool :>
@@ -101,14 +97,14 @@ data CampaignsList' = CampaignsList'
     , _ccUserIP                         :: !(Maybe Text)
     , _ccSearchString                   :: !(Maybe Text)
     , _ccIds                            :: !(Maybe [Int64])
-    , _ccProfileId                      :: !Int64
-    , _ccSortOrder                      :: !(Maybe DfareportingCampaignsListSortOrder)
+    , _ccProFileId                      :: !Int64
+    , _ccSortOrder                      :: !(Maybe CampaignsListSortOrder)
     , _ccAdvertiserGroupIds             :: !(Maybe [Int64])
     , _ccKey                            :: !(Maybe Key)
     , _ccAtLeastOneOptimizationActivity :: !(Maybe Bool)
     , _ccOverriddenEventTagId           :: !(Maybe Int64)
     , _ccPageToken                      :: !(Maybe Text)
-    , _ccSortField                      :: !(Maybe DfareportingCampaignsListSortField)
+    , _ccSortField                      :: !(Maybe CampaignsListSortField)
     , _ccSubAccountId                   :: !(Maybe Int64)
     , _ccOAuthToken                     :: !(Maybe OAuthToken)
     , _ccAdvertiserIds                  :: !(Maybe [Int64])
@@ -133,7 +129,7 @@ data CampaignsList' = CampaignsList'
 --
 -- * 'ccIds'
 --
--- * 'ccProfileId'
+-- * 'ccProFileId'
 --
 -- * 'ccSortOrder'
 --
@@ -163,7 +159,7 @@ data CampaignsList' = CampaignsList'
 campaignsList'
     :: Int64 -- ^ 'profileId'
     -> CampaignsList'
-campaignsList' pCcProfileId_ =
+campaignsList' pCcProFileId_ =
     CampaignsList'
     { _ccExcludedIds = Nothing
     , _ccQuotaUser = Nothing
@@ -171,7 +167,7 @@ campaignsList' pCcProfileId_ =
     , _ccUserIP = Nothing
     , _ccSearchString = Nothing
     , _ccIds = Nothing
-    , _ccProfileId = pCcProfileId_
+    , _ccProFileId = pCcProFileId_
     , _ccSortOrder = Nothing
     , _ccAdvertiserGroupIds = Nothing
     , _ccKey = Nothing
@@ -232,12 +228,12 @@ ccIds
       _Coerce
 
 -- | User profile ID associated with this request.
-ccProfileId :: Lens' CampaignsList' Int64
-ccProfileId
-  = lens _ccProfileId (\ s a -> s{_ccProfileId = a})
+ccProFileId :: Lens' CampaignsList' Int64
+ccProFileId
+  = lens _ccProFileId (\ s a -> s{_ccProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-ccSortOrder :: Lens' CampaignsList' (Maybe DfareportingCampaignsListSortOrder)
+ccSortOrder :: Lens' CampaignsList' (Maybe CampaignsListSortOrder)
 ccSortOrder
   = lens _ccSortOrder (\ s a -> s{_ccSortOrder = a})
 
@@ -274,7 +270,7 @@ ccPageToken
   = lens _ccPageToken (\ s a -> s{_ccPageToken = a})
 
 -- | Field by which to sort the list.
-ccSortField :: Lens' CampaignsList' (Maybe DfareportingCampaignsListSortField)
+ccSortField :: Lens' CampaignsList' (Maybe CampaignsListSortField)
 ccSortField
   = lens _ccSortField (\ s a -> s{_ccSortField = a})
 
@@ -320,7 +316,7 @@ instance GoogleRequest CampaignsList' where
         type Rs CampaignsList' = CampaignsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CampaignsList'{..}
-          = go _ccProfileId (_ccExcludedIds ^. _Default)
+          = go _ccProFileId (_ccExcludedIds ^. _Default)
               _ccSearchString
               (_ccIds ^. _Default)
               _ccSortOrder

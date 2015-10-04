@@ -37,7 +37,7 @@ module Network.Google.Resource.Analytics.Management.Goals.Patch
     , mgpWebPropertyId
     , mgpGoalId
     , mgpUserIP
-    , mgpProfileId
+    , mgpProFileId
     , mgpPayload
     , mgpAccountId
     , mgpKey
@@ -67,7 +67,8 @@ type ManagementGoalsPatchResource =
                                QueryParam "key" Key :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
-                                     ReqBody '[JSON] Goal :> Patch '[JSON] Goal
+                                     ReqBody '[OctetStream] Goal :>
+                                       Patch '[JSON] Goal
 
 -- | Updates an existing view (profile). This method supports patch
 -- semantics.
@@ -79,7 +80,7 @@ data ManagementGoalsPatch' = ManagementGoalsPatch'
     , _mgpWebPropertyId :: !Text
     , _mgpGoalId        :: !Text
     , _mgpUserIP        :: !(Maybe Text)
-    , _mgpProfileId     :: !Text
+    , _mgpProFileId     :: !Text
     , _mgpPayload       :: !Goal
     , _mgpAccountId     :: !Text
     , _mgpKey           :: !(Maybe Key)
@@ -101,7 +102,7 @@ data ManagementGoalsPatch' = ManagementGoalsPatch'
 --
 -- * 'mgpUserIP'
 --
--- * 'mgpProfileId'
+-- * 'mgpProFileId'
 --
 -- * 'mgpPayload'
 --
@@ -119,14 +120,14 @@ managementGoalsPatch'
     -> Goal -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> ManagementGoalsPatch'
-managementGoalsPatch' pMgpWebPropertyId_ pMgpGoalId_ pMgpProfileId_ pMgpPayload_ pMgpAccountId_ =
+managementGoalsPatch' pMgpWebPropertyId_ pMgpGoalId_ pMgpProFileId_ pMgpPayload_ pMgpAccountId_ =
     ManagementGoalsPatch'
     { _mgpQuotaUser = Nothing
     , _mgpPrettyPrint = False
     , _mgpWebPropertyId = pMgpWebPropertyId_
     , _mgpGoalId = pMgpGoalId_
     , _mgpUserIP = Nothing
-    , _mgpProfileId = pMgpProfileId_
+    , _mgpProFileId = pMgpProFileId_
     , _mgpPayload = pMgpPayload_
     , _mgpAccountId = pMgpAccountId_
     , _mgpKey = Nothing
@@ -165,9 +166,9 @@ mgpUserIP
   = lens _mgpUserIP (\ s a -> s{_mgpUserIP = a})
 
 -- | View (Profile) ID to update the goal.
-mgpProfileId :: Lens' ManagementGoalsPatch' Text
-mgpProfileId
-  = lens _mgpProfileId (\ s a -> s{_mgpProfileId = a})
+mgpProFileId :: Lens' ManagementGoalsPatch' Text
+mgpProFileId
+  = lens _mgpProFileId (\ s a -> s{_mgpProFileId = a})
 
 -- | Multipart request metadata.
 mgpPayload :: Lens' ManagementGoalsPatch' Goal
@@ -204,7 +205,7 @@ instance GoogleRequest ManagementGoalsPatch' where
         type Rs ManagementGoalsPatch' = Goal
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementGoalsPatch'{..}
-          = go _mgpAccountId _mgpWebPropertyId _mgpProfileId
+          = go _mgpAccountId _mgpWebPropertyId _mgpProFileId
               _mgpGoalId
               _mgpQuotaUser
               (Just _mgpPrettyPrint)

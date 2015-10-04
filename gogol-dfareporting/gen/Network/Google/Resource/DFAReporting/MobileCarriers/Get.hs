@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.MobileCarriers.Get
     , mcgQuotaUser
     , mcgPrettyPrint
     , mcgUserIP
-    , mcgProfileId
+    , mcgProFileId
     , mcgKey
     , mcgId
     , mcgOAuthToken
@@ -66,7 +66,7 @@ data MobileCarriersGet' = MobileCarriersGet'
     { _mcgQuotaUser   :: !(Maybe Text)
     , _mcgPrettyPrint :: !Bool
     , _mcgUserIP      :: !(Maybe Text)
-    , _mcgProfileId   :: !Int64
+    , _mcgProFileId   :: !Int64
     , _mcgKey         :: !(Maybe Key)
     , _mcgId          :: !Int64
     , _mcgOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +83,7 @@ data MobileCarriersGet' = MobileCarriersGet'
 --
 -- * 'mcgUserIP'
 --
--- * 'mcgProfileId'
+-- * 'mcgProFileId'
 --
 -- * 'mcgKey'
 --
@@ -96,12 +96,12 @@ mobileCarriersGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> MobileCarriersGet'
-mobileCarriersGet' pMcgProfileId_ pMcgId_ =
+mobileCarriersGet' pMcgProFileId_ pMcgId_ =
     MobileCarriersGet'
     { _mcgQuotaUser = Nothing
     , _mcgPrettyPrint = True
     , _mcgUserIP = Nothing
-    , _mcgProfileId = pMcgProfileId_
+    , _mcgProFileId = pMcgProFileId_
     , _mcgKey = Nothing
     , _mcgId = pMcgId_
     , _mcgOAuthToken = Nothing
@@ -128,9 +128,9 @@ mcgUserIP
   = lens _mcgUserIP (\ s a -> s{_mcgUserIP = a})
 
 -- | User profile ID associated with this request.
-mcgProfileId :: Lens' MobileCarriersGet' Int64
-mcgProfileId
-  = lens _mcgProfileId (\ s a -> s{_mcgProfileId = a})
+mcgProFileId :: Lens' MobileCarriersGet' Int64
+mcgProFileId
+  = lens _mcgProFileId (\ s a -> s{_mcgProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -161,7 +161,7 @@ instance GoogleRequest MobileCarriersGet' where
         type Rs MobileCarriersGet' = MobileCarrier
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u MobileCarriersGet'{..}
-          = go _mcgProfileId _mcgId _mcgQuotaUser
+          = go _mcgProFileId _mcgId _mcgQuotaUser
               (Just _mcgPrettyPrint)
               _mcgUserIP
               _mcgFields

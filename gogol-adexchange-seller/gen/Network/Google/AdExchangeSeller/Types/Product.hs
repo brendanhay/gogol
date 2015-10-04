@@ -19,6 +19,74 @@ import           Network.Google.AdExchangeSeller.Types.Sum
 import           Network.Google.Prelude
 
 --
+-- /See:/ 'adClients' smart constructor.
+data AdClients = AdClients
+    { _acEtag          :: !(Maybe Text)
+    , _acNextPageToken :: !(Maybe Text)
+    , _acKind          :: !Text
+    , _acItems         :: !(Maybe [AdClient])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AdClients' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'acEtag'
+--
+-- * 'acNextPageToken'
+--
+-- * 'acKind'
+--
+-- * 'acItems'
+adClients
+    :: AdClients
+adClients =
+    AdClients
+    { _acEtag = Nothing
+    , _acNextPageToken = Nothing
+    , _acKind = "adexchangeseller#adClients"
+    , _acItems = Nothing
+    }
+
+-- | ETag of this response for caching purposes.
+acEtag :: Lens' AdClients (Maybe Text)
+acEtag = lens _acEtag (\ s a -> s{_acEtag = a})
+
+-- | Continuation token used to page through ad clients. To retrieve the next
+-- page of results, set the next request\'s \"pageToken\" value to this.
+acNextPageToken :: Lens' AdClients (Maybe Text)
+acNextPageToken
+  = lens _acNextPageToken
+      (\ s a -> s{_acNextPageToken = a})
+
+-- | Kind of list this is, in this case adexchangeseller#adClients.
+acKind :: Lens' AdClients Text
+acKind = lens _acKind (\ s a -> s{_acKind = a})
+
+-- | The ad clients returned in this list response.
+acItems :: Lens' AdClients [AdClient]
+acItems
+  = lens _acItems (\ s a -> s{_acItems = a}) . _Default
+      . _Coerce
+
+instance FromJSON AdClients where
+        parseJSON
+          = withObject "AdClients"
+              (\ o ->
+                 AdClients <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "adexchangeseller#adClients")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON AdClients where
+        toJSON AdClients{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _acEtag,
+                  ("nextPageToken" .=) <$> _acNextPageToken,
+                  Just ("kind" .= _acKind), ("items" .=) <$> _acItems])
+
+--
 -- /See:/ 'reportingMetadataEntry' smart constructor.
 data ReportingMetadataEntry = ReportingMetadataEntry
     { _rmeKind                 :: !Text
@@ -146,151 +214,6 @@ instance ToJSON ReportingMetadataEntry where
                   ("compatibleDimensions" .=) <$>
                     _rmeCompatibleDimensions,
                   ("supportedProducts" .=) <$> _rmeSupportedProducts])
-
--- | The targeting information of this custom channel, if activated.
---
--- /See:/ 'targetingInfo' smart constructor.
-data TargetingInfo = TargetingInfo
-    { _tiLocation     :: !(Maybe Text)
-    , _tiSiteLanguage :: !(Maybe Text)
-    , _tiAdsAppearOn  :: !(Maybe Text)
-    , _tiDescription  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'TargetingInfo' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'tiLocation'
---
--- * 'tiSiteLanguage'
---
--- * 'tiAdsAppearOn'
---
--- * 'tiDescription'
-targetingInfo
-    :: TargetingInfo
-targetingInfo =
-    TargetingInfo
-    { _tiLocation = Nothing
-    , _tiSiteLanguage = Nothing
-    , _tiAdsAppearOn = Nothing
-    , _tiDescription = Nothing
-    }
-
--- | The locations in which ads appear. (Only valid for content and mobile
--- content ads). Acceptable values for content ads are: TOP_LEFT,
--- TOP_CENTER, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT,
--- BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT, MULTIPLE_LOCATIONS. Acceptable
--- values for mobile content ads are: TOP, MIDDLE, BOTTOM,
--- MULTIPLE_LOCATIONS.
-tiLocation :: Lens' TargetingInfo (Maybe Text)
-tiLocation
-  = lens _tiLocation (\ s a -> s{_tiLocation = a})
-
--- | The language of the sites ads will be displayed on.
-tiSiteLanguage :: Lens' TargetingInfo (Maybe Text)
-tiSiteLanguage
-  = lens _tiSiteLanguage
-      (\ s a -> s{_tiSiteLanguage = a})
-
--- | The name used to describe this channel externally.
-tiAdsAppearOn :: Lens' TargetingInfo (Maybe Text)
-tiAdsAppearOn
-  = lens _tiAdsAppearOn
-      (\ s a -> s{_tiAdsAppearOn = a})
-
--- | The external description of the channel.
-tiDescription :: Lens' TargetingInfo (Maybe Text)
-tiDescription
-  = lens _tiDescription
-      (\ s a -> s{_tiDescription = a})
-
-instance FromJSON TargetingInfo where
-        parseJSON
-          = withObject "TargetingInfo"
-              (\ o ->
-                 TargetingInfo <$>
-                   (o .:? "location") <*> (o .:? "siteLanguage") <*>
-                     (o .:? "adsAppearOn")
-                     <*> (o .:? "description"))
-
-instance ToJSON TargetingInfo where
-        toJSON TargetingInfo{..}
-          = object
-              (catMaybes
-                 [("location" .=) <$> _tiLocation,
-                  ("siteLanguage" .=) <$> _tiSiteLanguage,
-                  ("adsAppearOn" .=) <$> _tiAdsAppearOn,
-                  ("description" .=) <$> _tiDescription])
-
---
--- /See:/ 'adClients' smart constructor.
-data AdClients = AdClients
-    { _acEtag          :: !(Maybe Text)
-    , _acNextPageToken :: !(Maybe Text)
-    , _acKind          :: !Text
-    , _acItems         :: !(Maybe [AdClient])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AdClients' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'acEtag'
---
--- * 'acNextPageToken'
---
--- * 'acKind'
---
--- * 'acItems'
-adClients
-    :: AdClients
-adClients =
-    AdClients
-    { _acEtag = Nothing
-    , _acNextPageToken = Nothing
-    , _acKind = "adexchangeseller#adClients"
-    , _acItems = Nothing
-    }
-
--- | ETag of this response for caching purposes.
-acEtag :: Lens' AdClients (Maybe Text)
-acEtag = lens _acEtag (\ s a -> s{_acEtag = a})
-
--- | Continuation token used to page through ad clients. To retrieve the next
--- page of results, set the next request\'s \"pageToken\" value to this.
-acNextPageToken :: Lens' AdClients (Maybe Text)
-acNextPageToken
-  = lens _acNextPageToken
-      (\ s a -> s{_acNextPageToken = a})
-
--- | Kind of list this is, in this case adexchangeseller#adClients.
-acKind :: Lens' AdClients Text
-acKind = lens _acKind (\ s a -> s{_acKind = a})
-
--- | The ad clients returned in this list response.
-acItems :: Lens' AdClients [AdClient]
-acItems
-  = lens _acItems (\ s a -> s{_acItems = a}) . _Default
-      . _Coerce
-
-instance FromJSON AdClients where
-        parseJSON
-          = withObject "AdClients"
-              (\ o ->
-                 AdClients <$>
-                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "adexchangeseller#adClients")
-                     <*> (o .:? "items" .!= mempty))
-
-instance ToJSON AdClients where
-        toJSON AdClients{..}
-          = object
-              (catMaybes
-                 [("etag" .=) <$> _acEtag,
-                  ("nextPageToken" .=) <$> _acNextPageToken,
-                  Just ("kind" .= _acKind), ("items" .=) <$> _acItems])
 
 --
 -- /See:/ 'accounts' smart constructor.
@@ -670,6 +593,124 @@ instance ToJSON CustomChannels where
                   Just ("kind" .= _ccKind), ("items" .=) <$> _ccItems])
 
 --
+-- /See:/ 'report' smart constructor.
+data Report = Report
+    { _rKind             :: !Text
+    , _rAverages         :: !(Maybe [Text])
+    , _rWarnings         :: !(Maybe [Text])
+    , _rRows             :: !(Maybe [[Text]])
+    , _rTotals           :: !(Maybe [Text])
+    , _rHeaders          :: !(Maybe [ReportHeadersItem])
+    , _rTotalMatchedRows :: !(Maybe Int64)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Report' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rKind'
+--
+-- * 'rAverages'
+--
+-- * 'rWarnings'
+--
+-- * 'rRows'
+--
+-- * 'rTotals'
+--
+-- * 'rHeaders'
+--
+-- * 'rTotalMatchedRows'
+report
+    :: Report
+report =
+    Report
+    { _rKind = "adexchangeseller#report"
+    , _rAverages = Nothing
+    , _rWarnings = Nothing
+    , _rRows = Nothing
+    , _rTotals = Nothing
+    , _rHeaders = Nothing
+    , _rTotalMatchedRows = Nothing
+    }
+
+-- | Kind this is, in this case adexchangeseller#report.
+rKind :: Lens' Report Text
+rKind = lens _rKind (\ s a -> s{_rKind = a})
+
+-- | The averages of the report. This is the same length as any other row in
+-- the report; cells corresponding to dimension columns are empty.
+rAverages :: Lens' Report [Text]
+rAverages
+  = lens _rAverages (\ s a -> s{_rAverages = a}) .
+      _Default
+      . _Coerce
+
+-- | Any warnings associated with generation of the report.
+rWarnings :: Lens' Report [Text]
+rWarnings
+  = lens _rWarnings (\ s a -> s{_rWarnings = a}) .
+      _Default
+      . _Coerce
+
+-- | The output rows of the report. Each row is a list of cells; one for each
+-- dimension in the request, followed by one for each metric in the
+-- request. The dimension cells contain strings, and the metric cells
+-- contain numbers.
+rRows :: Lens' Report [[Text]]
+rRows
+  = lens _rRows (\ s a -> s{_rRows = a}) . _Default .
+      _Coerce
+
+-- | The totals of the report. This is the same length as any other row in
+-- the report; cells corresponding to dimension columns are empty.
+rTotals :: Lens' Report [Text]
+rTotals
+  = lens _rTotals (\ s a -> s{_rTotals = a}) . _Default
+      . _Coerce
+
+-- | The header information of the columns requested in the report. This is a
+-- list of headers; one for each dimension in the request, followed by one
+-- for each metric in the request.
+rHeaders :: Lens' Report [ReportHeadersItem]
+rHeaders
+  = lens _rHeaders (\ s a -> s{_rHeaders = a}) .
+      _Default
+      . _Coerce
+
+-- | The total number of rows matched by the report request. Fewer rows may
+-- be returned in the response due to being limited by the row count
+-- requested or the report row limit.
+rTotalMatchedRows :: Lens' Report (Maybe Int64)
+rTotalMatchedRows
+  = lens _rTotalMatchedRows
+      (\ s a -> s{_rTotalMatchedRows = a})
+
+instance FromJSON Report where
+        parseJSON
+          = withObject "Report"
+              (\ o ->
+                 Report <$>
+                   (o .:? "kind" .!= "adexchangeseller#report") <*>
+                     (o .:? "averages" .!= mempty)
+                     <*> (o .:? "warnings" .!= mempty)
+                     <*> (o .:? "rows" .!= mempty)
+                     <*> (o .:? "totals" .!= mempty)
+                     <*> (o .:? "headers" .!= mempty)
+                     <*> (o .:? "totalMatchedRows"))
+
+instance ToJSON Report where
+        toJSON Report{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _rKind),
+                  ("averages" .=) <$> _rAverages,
+                  ("warnings" .=) <$> _rWarnings,
+                  ("rows" .=) <$> _rRows, ("totals" .=) <$> _rTotals,
+                  ("headers" .=) <$> _rHeaders,
+                  ("totalMatchedRows" .=) <$> _rTotalMatchedRows])
+
+--
 -- /See:/ 'alert' smart constructor.
 data Alert = Alert
     { _aaKind     :: !Text
@@ -749,124 +790,6 @@ instance ToJSON Alert where
                   ("message" .=) <$> _aaMessage])
 
 --
--- /See:/ 'report' smart constructor.
-data Report = Report
-    { _rKind             :: !Text
-    , _rAverages         :: !(Maybe [Text])
-    , _rWarnings         :: !(Maybe [Text])
-    , _rRows             :: !(Maybe [[Text]])
-    , _rTotals           :: !(Maybe [Text])
-    , _rHeaders          :: !(Maybe [HeadersItem])
-    , _rTotalMatchedRows :: !(Maybe Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Report' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rKind'
---
--- * 'rAverages'
---
--- * 'rWarnings'
---
--- * 'rRows'
---
--- * 'rTotals'
---
--- * 'rHeaders'
---
--- * 'rTotalMatchedRows'
-report
-    :: Report
-report =
-    Report
-    { _rKind = "adexchangeseller#report"
-    , _rAverages = Nothing
-    , _rWarnings = Nothing
-    , _rRows = Nothing
-    , _rTotals = Nothing
-    , _rHeaders = Nothing
-    , _rTotalMatchedRows = Nothing
-    }
-
--- | Kind this is, in this case adexchangeseller#report.
-rKind :: Lens' Report Text
-rKind = lens _rKind (\ s a -> s{_rKind = a})
-
--- | The averages of the report. This is the same length as any other row in
--- the report; cells corresponding to dimension columns are empty.
-rAverages :: Lens' Report [Text]
-rAverages
-  = lens _rAverages (\ s a -> s{_rAverages = a}) .
-      _Default
-      . _Coerce
-
--- | Any warnings associated with generation of the report.
-rWarnings :: Lens' Report [Text]
-rWarnings
-  = lens _rWarnings (\ s a -> s{_rWarnings = a}) .
-      _Default
-      . _Coerce
-
--- | The output rows of the report. Each row is a list of cells; one for each
--- dimension in the request, followed by one for each metric in the
--- request. The dimension cells contain strings, and the metric cells
--- contain numbers.
-rRows :: Lens' Report [[Text]]
-rRows
-  = lens _rRows (\ s a -> s{_rRows = a}) . _Default .
-      _Coerce
-
--- | The totals of the report. This is the same length as any other row in
--- the report; cells corresponding to dimension columns are empty.
-rTotals :: Lens' Report [Text]
-rTotals
-  = lens _rTotals (\ s a -> s{_rTotals = a}) . _Default
-      . _Coerce
-
--- | The header information of the columns requested in the report. This is a
--- list of headers; one for each dimension in the request, followed by one
--- for each metric in the request.
-rHeaders :: Lens' Report [HeadersItem]
-rHeaders
-  = lens _rHeaders (\ s a -> s{_rHeaders = a}) .
-      _Default
-      . _Coerce
-
--- | The total number of rows matched by the report request. Fewer rows may
--- be returned in the response due to being limited by the row count
--- requested or the report row limit.
-rTotalMatchedRows :: Lens' Report (Maybe Int64)
-rTotalMatchedRows
-  = lens _rTotalMatchedRows
-      (\ s a -> s{_rTotalMatchedRows = a})
-
-instance FromJSON Report where
-        parseJSON
-          = withObject "Report"
-              (\ o ->
-                 Report <$>
-                   (o .:? "kind" .!= "adexchangeseller#report") <*>
-                     (o .:? "averages" .!= mempty)
-                     <*> (o .:? "warnings" .!= mempty)
-                     <*> (o .:? "rows" .!= mempty)
-                     <*> (o .:? "totals" .!= mempty)
-                     <*> (o .:? "headers" .!= mempty)
-                     <*> (o .:? "totalMatchedRows"))
-
-instance ToJSON Report where
-        toJSON Report{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _rKind),
-                  ("averages" .=) <$> _rAverages,
-                  ("warnings" .=) <$> _rWarnings,
-                  ("rows" .=) <$> _rRows, ("totals" .=) <$> _rTotals,
-                  ("headers" .=) <$> _rHeaders,
-                  ("totalMatchedRows" .=) <$> _rTotalMatchedRows])
-
---
 -- /See:/ 'account' smart constructor.
 data Account = Account
     { _accKind :: !Text
@@ -919,63 +842,6 @@ instance ToJSON Account where
               (catMaybes
                  [Just ("kind" .= _accKind), ("name" .=) <$> _accName,
                   ("id" .=) <$> _accId])
-
---
--- /See:/ 'headersItem' smart constructor.
-data HeadersItem = HeadersItem
-    { _hiName     :: !(Maybe Text)
-    , _hiCurrency :: !(Maybe Text)
-    , _hiType     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'HeadersItem' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'hiName'
---
--- * 'hiCurrency'
---
--- * 'hiType'
-headersItem
-    :: HeadersItem
-headersItem =
-    HeadersItem
-    { _hiName = Nothing
-    , _hiCurrency = Nothing
-    , _hiType = Nothing
-    }
-
--- | The name of the header.
-hiName :: Lens' HeadersItem (Maybe Text)
-hiName = lens _hiName (\ s a -> s{_hiName = a})
-
--- | The currency of this column. Only present if the header type is
--- METRIC_CURRENCY.
-hiCurrency :: Lens' HeadersItem (Maybe Text)
-hiCurrency
-  = lens _hiCurrency (\ s a -> s{_hiCurrency = a})
-
--- | The type of the header; one of DIMENSION, METRIC_TALLY, METRIC_RATIO, or
--- METRIC_CURRENCY.
-hiType :: Lens' HeadersItem (Maybe Text)
-hiType = lens _hiType (\ s a -> s{_hiType = a})
-
-instance FromJSON HeadersItem where
-        parseJSON
-          = withObject "HeadersItem"
-              (\ o ->
-                 HeadersItem <$>
-                   (o .:? "name") <*> (o .:? "currency") <*>
-                     (o .:? "type"))
-
-instance ToJSON HeadersItem where
-        toJSON HeadersItem{..}
-          = object
-              (catMaybes
-                 [("name" .=) <$> _hiName,
-                  ("currency" .=) <$> _hiCurrency,
-                  ("type" .=) <$> _hiType])
 
 --
 -- /See:/ 'adClient' smart constructor.
@@ -1057,6 +923,140 @@ instance ToJSON AdClient where
                   ("supportsReporting" .=) <$> _adSupportsReporting,
                   ("id" .=) <$> _adId,
                   ("productCode" .=) <$> _adProductCode])
+
+--
+-- /See:/ 'reportHeadersItem' smart constructor.
+data ReportHeadersItem = ReportHeadersItem
+    { _rhiName     :: !(Maybe Text)
+    , _rhiCurrency :: !(Maybe Text)
+    , _rhiType     :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ReportHeadersItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rhiName'
+--
+-- * 'rhiCurrency'
+--
+-- * 'rhiType'
+reportHeadersItem
+    :: ReportHeadersItem
+reportHeadersItem =
+    ReportHeadersItem
+    { _rhiName = Nothing
+    , _rhiCurrency = Nothing
+    , _rhiType = Nothing
+    }
+
+-- | The name of the header.
+rhiName :: Lens' ReportHeadersItem (Maybe Text)
+rhiName = lens _rhiName (\ s a -> s{_rhiName = a})
+
+-- | The currency of this column. Only present if the header type is
+-- METRIC_CURRENCY.
+rhiCurrency :: Lens' ReportHeadersItem (Maybe Text)
+rhiCurrency
+  = lens _rhiCurrency (\ s a -> s{_rhiCurrency = a})
+
+-- | The type of the header; one of DIMENSION, METRIC_TALLY, METRIC_RATIO, or
+-- METRIC_CURRENCY.
+rhiType :: Lens' ReportHeadersItem (Maybe Text)
+rhiType = lens _rhiType (\ s a -> s{_rhiType = a})
+
+instance FromJSON ReportHeadersItem where
+        parseJSON
+          = withObject "ReportHeadersItem"
+              (\ o ->
+                 ReportHeadersItem <$>
+                   (o .:? "name") <*> (o .:? "currency") <*>
+                     (o .:? "type"))
+
+instance ToJSON ReportHeadersItem where
+        toJSON ReportHeadersItem{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _rhiName,
+                  ("currency" .=) <$> _rhiCurrency,
+                  ("type" .=) <$> _rhiType])
+
+-- | The targeting information of this custom channel, if activated.
+--
+-- /See:/ 'customChannelTargetingInfo' smart constructor.
+data CustomChannelTargetingInfo = CustomChannelTargetingInfo
+    { _cctiLocation     :: !(Maybe Text)
+    , _cctiSiteLanguage :: !(Maybe Text)
+    , _cctiAdsAppearOn  :: !(Maybe Text)
+    , _cctiDescription  :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CustomChannelTargetingInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cctiLocation'
+--
+-- * 'cctiSiteLanguage'
+--
+-- * 'cctiAdsAppearOn'
+--
+-- * 'cctiDescription'
+customChannelTargetingInfo
+    :: CustomChannelTargetingInfo
+customChannelTargetingInfo =
+    CustomChannelTargetingInfo
+    { _cctiLocation = Nothing
+    , _cctiSiteLanguage = Nothing
+    , _cctiAdsAppearOn = Nothing
+    , _cctiDescription = Nothing
+    }
+
+-- | The locations in which ads appear. (Only valid for content and mobile
+-- content ads). Acceptable values for content ads are: TOP_LEFT,
+-- TOP_CENTER, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT,
+-- BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT, MULTIPLE_LOCATIONS. Acceptable
+-- values for mobile content ads are: TOP, MIDDLE, BOTTOM,
+-- MULTIPLE_LOCATIONS.
+cctiLocation :: Lens' CustomChannelTargetingInfo (Maybe Text)
+cctiLocation
+  = lens _cctiLocation (\ s a -> s{_cctiLocation = a})
+
+-- | The language of the sites ads will be displayed on.
+cctiSiteLanguage :: Lens' CustomChannelTargetingInfo (Maybe Text)
+cctiSiteLanguage
+  = lens _cctiSiteLanguage
+      (\ s a -> s{_cctiSiteLanguage = a})
+
+-- | The name used to describe this channel externally.
+cctiAdsAppearOn :: Lens' CustomChannelTargetingInfo (Maybe Text)
+cctiAdsAppearOn
+  = lens _cctiAdsAppearOn
+      (\ s a -> s{_cctiAdsAppearOn = a})
+
+-- | The external description of the channel.
+cctiDescription :: Lens' CustomChannelTargetingInfo (Maybe Text)
+cctiDescription
+  = lens _cctiDescription
+      (\ s a -> s{_cctiDescription = a})
+
+instance FromJSON CustomChannelTargetingInfo where
+        parseJSON
+          = withObject "CustomChannelTargetingInfo"
+              (\ o ->
+                 CustomChannelTargetingInfo <$>
+                   (o .:? "location") <*> (o .:? "siteLanguage") <*>
+                     (o .:? "adsAppearOn")
+                     <*> (o .:? "description"))
+
+instance ToJSON CustomChannelTargetingInfo where
+        toJSON CustomChannelTargetingInfo{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _cctiLocation,
+                  ("siteLanguage" .=) <$> _cctiSiteLanguage,
+                  ("adsAppearOn" .=) <$> _cctiAdsAppearOn,
+                  ("description" .=) <$> _cctiDescription])
 
 --
 -- /See:/ 'preferredDeals' smart constructor.
@@ -1153,7 +1153,7 @@ instance ToJSON Metadata where
 --
 -- /See:/ 'customChannel' smart constructor.
 data CustomChannel = CustomChannel
-    { _cTargetingInfo :: !(Maybe TargetingInfo)
+    { _cTargetingInfo :: !(Maybe CustomChannelTargetingInfo)
     , _cKind          :: !Text
     , _cName          :: !(Maybe Text)
     , _cCode          :: !(Maybe Text)
@@ -1185,7 +1185,7 @@ customChannel =
     }
 
 -- | The targeting information of this custom channel, if activated.
-cTargetingInfo :: Lens' CustomChannel (Maybe TargetingInfo)
+cTargetingInfo :: Lens' CustomChannel (Maybe CustomChannelTargetingInfo)
 cTargetingInfo
   = lens _cTargetingInfo
       (\ s a -> s{_cTargetingInfo = a})

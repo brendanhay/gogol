@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.OperatingSystems.Get
     , osgQuotaUser
     , osgPrettyPrint
     , osgUserIP
-    , osgProfileId
+    , osgProFileId
     , osgKey
     , osgOAuthToken
     , osgDartId
@@ -67,7 +67,7 @@ data OperatingSystemsGet' = OperatingSystemsGet'
     { _osgQuotaUser   :: !(Maybe Text)
     , _osgPrettyPrint :: !Bool
     , _osgUserIP      :: !(Maybe Text)
-    , _osgProfileId   :: !Int64
+    , _osgProFileId   :: !Int64
     , _osgKey         :: !(Maybe Key)
     , _osgOAuthToken  :: !(Maybe OAuthToken)
     , _osgDartId      :: !Int64
@@ -84,7 +84,7 @@ data OperatingSystemsGet' = OperatingSystemsGet'
 --
 -- * 'osgUserIP'
 --
--- * 'osgProfileId'
+-- * 'osgProFileId'
 --
 -- * 'osgKey'
 --
@@ -97,12 +97,12 @@ operatingSystemsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'dartId'
     -> OperatingSystemsGet'
-operatingSystemsGet' pOsgProfileId_ pOsgDartId_ =
+operatingSystemsGet' pOsgProFileId_ pOsgDartId_ =
     OperatingSystemsGet'
     { _osgQuotaUser = Nothing
     , _osgPrettyPrint = True
     , _osgUserIP = Nothing
-    , _osgProfileId = pOsgProfileId_
+    , _osgProFileId = pOsgProFileId_
     , _osgKey = Nothing
     , _osgOAuthToken = Nothing
     , _osgDartId = pOsgDartId_
@@ -129,9 +129,9 @@ osgUserIP
   = lens _osgUserIP (\ s a -> s{_osgUserIP = a})
 
 -- | User profile ID associated with this request.
-osgProfileId :: Lens' OperatingSystemsGet' Int64
-osgProfileId
-  = lens _osgProfileId (\ s a -> s{_osgProfileId = a})
+osgProFileId :: Lens' OperatingSystemsGet' Int64
+osgProFileId
+  = lens _osgProFileId (\ s a -> s{_osgProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -163,7 +163,7 @@ instance GoogleRequest OperatingSystemsGet' where
         type Rs OperatingSystemsGet' = OperatingSystem
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u OperatingSystemsGet'{..}
-          = go _osgProfileId _osgDartId _osgQuotaUser
+          = go _osgProFileId _osgDartId _osgQuotaUser
               (Just _osgPrettyPrint)
               _osgUserIP
               _osgFields

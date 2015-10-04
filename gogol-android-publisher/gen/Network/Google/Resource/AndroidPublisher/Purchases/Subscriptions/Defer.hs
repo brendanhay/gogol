@@ -63,7 +63,8 @@ type PurchasesSubscriptionsDeferResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] SubscriptionPurchasesDeferRequest
+                               ReqBody '[OctetStream]
+                                 SubscriptionPurchasesDeferRequest
                                  :>
                                  Post '[JSON] SubscriptionPurchasesDeferResponse
 

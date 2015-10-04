@@ -63,7 +63,7 @@ type ManagementWebPropertyUserLinksUpdateResource =
                            QueryParam "key" Key :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
-                                 ReqBody '[JSON] EntityUserLink :>
+                                 ReqBody '[OctetStream] EntityUserLink :>
                                    Put '[JSON] EntityUserLink
 
 -- | Updates permissions for an existing user on the given web property.

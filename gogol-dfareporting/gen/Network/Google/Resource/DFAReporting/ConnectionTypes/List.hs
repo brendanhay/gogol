@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.ConnectionTypes.List
     , ctlQuotaUser
     , ctlPrettyPrint
     , ctlUserIP
-    , ctlProfileId
+    , ctlProFileId
     , ctlKey
     , ctlOAuthToken
     , ctlFields
@@ -65,7 +65,7 @@ data ConnectionTypesList' = ConnectionTypesList'
     { _ctlQuotaUser   :: !(Maybe Text)
     , _ctlPrettyPrint :: !Bool
     , _ctlUserIP      :: !(Maybe Text)
-    , _ctlProfileId   :: !Int64
+    , _ctlProFileId   :: !Int64
     , _ctlKey         :: !(Maybe Key)
     , _ctlOAuthToken  :: !(Maybe OAuthToken)
     , _ctlFields      :: !(Maybe Text)
@@ -81,7 +81,7 @@ data ConnectionTypesList' = ConnectionTypesList'
 --
 -- * 'ctlUserIP'
 --
--- * 'ctlProfileId'
+-- * 'ctlProFileId'
 --
 -- * 'ctlKey'
 --
@@ -91,12 +91,12 @@ data ConnectionTypesList' = ConnectionTypesList'
 connectionTypesList'
     :: Int64 -- ^ 'profileId'
     -> ConnectionTypesList'
-connectionTypesList' pCtlProfileId_ =
+connectionTypesList' pCtlProFileId_ =
     ConnectionTypesList'
     { _ctlQuotaUser = Nothing
     , _ctlPrettyPrint = True
     , _ctlUserIP = Nothing
-    , _ctlProfileId = pCtlProfileId_
+    , _ctlProFileId = pCtlProFileId_
     , _ctlKey = Nothing
     , _ctlOAuthToken = Nothing
     , _ctlFields = Nothing
@@ -122,9 +122,9 @@ ctlUserIP
   = lens _ctlUserIP (\ s a -> s{_ctlUserIP = a})
 
 -- | User profile ID associated with this request.
-ctlProfileId :: Lens' ConnectionTypesList' Int64
-ctlProfileId
-  = lens _ctlProfileId (\ s a -> s{_ctlProfileId = a})
+ctlProFileId :: Lens' ConnectionTypesList' Int64
+ctlProFileId
+  = lens _ctlProFileId (\ s a -> s{_ctlProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -152,7 +152,7 @@ instance GoogleRequest ConnectionTypesList' where
              ConnectionTypesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ConnectionTypesList'{..}
-          = go _ctlProfileId _ctlQuotaUser
+          = go _ctlProFileId _ctlQuotaUser
               (Just _ctlPrettyPrint)
               _ctlUserIP
               _ctlFields

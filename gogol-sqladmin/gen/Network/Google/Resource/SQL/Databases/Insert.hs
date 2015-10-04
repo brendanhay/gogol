@@ -61,7 +61,8 @@ type DatabasesInsertResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Database :> Post '[JSON] Operation
+                             ReqBody '[OctetStream] Database :>
+                               Post '[JSON] Operation
 
 -- | Inserts a resource containing information about a database inside a
 -- Cloud SQL instance.

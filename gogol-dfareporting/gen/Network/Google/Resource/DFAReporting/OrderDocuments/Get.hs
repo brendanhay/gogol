@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.OrderDocuments.Get
     , odgQuotaUser
     , odgPrettyPrint
     , odgUserIP
-    , odgProfileId
+    , odgProFileId
     , odgKey
     , odgId
     , odgProjectId
@@ -70,7 +70,7 @@ data OrderDocumentsGet' = OrderDocumentsGet'
     { _odgQuotaUser   :: !(Maybe Text)
     , _odgPrettyPrint :: !Bool
     , _odgUserIP      :: !(Maybe Text)
-    , _odgProfileId   :: !Int64
+    , _odgProFileId   :: !Int64
     , _odgKey         :: !(Maybe Key)
     , _odgId          :: !Int64
     , _odgProjectId   :: !Int64
@@ -88,7 +88,7 @@ data OrderDocumentsGet' = OrderDocumentsGet'
 --
 -- * 'odgUserIP'
 --
--- * 'odgProfileId'
+-- * 'odgProFileId'
 --
 -- * 'odgKey'
 --
@@ -104,12 +104,12 @@ orderDocumentsGet'
     -> Int64 -- ^ 'id'
     -> Int64 -- ^ 'projectId'
     -> OrderDocumentsGet'
-orderDocumentsGet' pOdgProfileId_ pOdgId_ pOdgProjectId_ =
+orderDocumentsGet' pOdgProFileId_ pOdgId_ pOdgProjectId_ =
     OrderDocumentsGet'
     { _odgQuotaUser = Nothing
     , _odgPrettyPrint = True
     , _odgUserIP = Nothing
-    , _odgProfileId = pOdgProfileId_
+    , _odgProFileId = pOdgProFileId_
     , _odgKey = Nothing
     , _odgId = pOdgId_
     , _odgProjectId = pOdgProjectId_
@@ -137,9 +137,9 @@ odgUserIP
   = lens _odgUserIP (\ s a -> s{_odgUserIP = a})
 
 -- | User profile ID associated with this request.
-odgProfileId :: Lens' OrderDocumentsGet' Int64
-odgProfileId
-  = lens _odgProfileId (\ s a -> s{_odgProfileId = a})
+odgProFileId :: Lens' OrderDocumentsGet' Int64
+odgProFileId
+  = lens _odgProFileId (\ s a -> s{_odgProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -175,7 +175,7 @@ instance GoogleRequest OrderDocumentsGet' where
         type Rs OrderDocumentsGet' = OrderDocument
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u OrderDocumentsGet'{..}
-          = go _odgProfileId _odgProjectId _odgId _odgQuotaUser
+          = go _odgProFileId _odgProjectId _odgId _odgQuotaUser
               (Just _odgPrettyPrint)
               _odgUserIP
               _odgFields

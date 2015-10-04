@@ -53,7 +53,7 @@ type FilesGetResource =
      "files" :>
        Capture "fileId" Text :>
          QueryParam "updateViewedDate" Bool :>
-           QueryParam "projection" DriveFilesGetProjection :>
+           QueryParam "projection" FilesGetProjection :>
              QueryParam "acknowledgeAbuse" Bool :>
                QueryParam "revisionId" Text :>
                  QueryParam "quotaUser" Text :>
@@ -67,7 +67,7 @@ type FilesGetResource =
        "files" :>
          Capture "fileId" Text :>
            QueryParam "updateViewedDate" Bool :>
-             QueryParam "projection" DriveFilesGetProjection :>
+             QueryParam "projection" FilesGetProjection :>
                QueryParam "acknowledgeAbuse" Bool :>
                  QueryParam "revisionId" Text :>
                    QueryParam "quotaUser" Text :>
@@ -88,7 +88,7 @@ data FilesGet' = FilesGet'
     , _fgUserIP           :: !(Maybe Text)
     , _fgUpdateViewedDate :: !Bool
     , _fgKey              :: !(Maybe Key)
-    , _fgProjection       :: !(Maybe DriveFilesGetProjection)
+    , _fgProjection       :: !(Maybe FilesGetProjection)
     , _fgAcknowledgeAbuse :: !Bool
     , _fgFileId           :: !Text
     , _fgOAuthToken       :: !(Maybe OAuthToken)
@@ -171,7 +171,7 @@ fgKey :: Lens' FilesGet' (Maybe Key)
 fgKey = lens _fgKey (\ s a -> s{_fgKey = a})
 
 -- | This parameter is deprecated and has no function.
-fgProjection :: Lens' FilesGet' (Maybe DriveFilesGetProjection)
+fgProjection :: Lens' FilesGet' (Maybe FilesGetProjection)
 fgProjection
   = lens _fgProjection (\ s a -> s{_fgProjection = a})
 

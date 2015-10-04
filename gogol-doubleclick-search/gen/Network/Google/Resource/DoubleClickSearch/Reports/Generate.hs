@@ -55,7 +55,8 @@ type ReportsGenerateResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] ReportRequest :> Post '[JSON] Report
+                       ReqBody '[OctetStream] ReportRequest :>
+                         Post '[JSON] Report
 
 -- | Generates and returns a report immediately.
 --

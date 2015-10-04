@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.UserRoles.Get
     , urgQuotaUser
     , urgPrettyPrint
     , urgUserIP
-    , urgProfileId
+    , urgProFileId
     , urgKey
     , urgId
     , urgOAuthToken
@@ -66,7 +66,7 @@ data UserRolesGet' = UserRolesGet'
     { _urgQuotaUser   :: !(Maybe Text)
     , _urgPrettyPrint :: !Bool
     , _urgUserIP      :: !(Maybe Text)
-    , _urgProfileId   :: !Int64
+    , _urgProFileId   :: !Int64
     , _urgKey         :: !(Maybe Key)
     , _urgId          :: !Int64
     , _urgOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +83,7 @@ data UserRolesGet' = UserRolesGet'
 --
 -- * 'urgUserIP'
 --
--- * 'urgProfileId'
+-- * 'urgProFileId'
 --
 -- * 'urgKey'
 --
@@ -96,12 +96,12 @@ userRolesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> UserRolesGet'
-userRolesGet' pUrgProfileId_ pUrgId_ =
+userRolesGet' pUrgProFileId_ pUrgId_ =
     UserRolesGet'
     { _urgQuotaUser = Nothing
     , _urgPrettyPrint = True
     , _urgUserIP = Nothing
-    , _urgProfileId = pUrgProfileId_
+    , _urgProFileId = pUrgProFileId_
     , _urgKey = Nothing
     , _urgId = pUrgId_
     , _urgOAuthToken = Nothing
@@ -128,9 +128,9 @@ urgUserIP
   = lens _urgUserIP (\ s a -> s{_urgUserIP = a})
 
 -- | User profile ID associated with this request.
-urgProfileId :: Lens' UserRolesGet' Int64
-urgProfileId
-  = lens _urgProfileId (\ s a -> s{_urgProfileId = a})
+urgProFileId :: Lens' UserRolesGet' Int64
+urgProFileId
+  = lens _urgProFileId (\ s a -> s{_urgProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -161,7 +161,7 @@ instance GoogleRequest UserRolesGet' where
         type Rs UserRolesGet' = UserRole
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u UserRolesGet'{..}
-          = go _urgProfileId _urgId _urgQuotaUser
+          = go _urgProFileId _urgId _urgQuotaUser
               (Just _urgPrettyPrint)
               _urgUserIP
               _urgFields

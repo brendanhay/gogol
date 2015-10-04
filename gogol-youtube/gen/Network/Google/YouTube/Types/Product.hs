@@ -18,128 +18,6 @@ module Network.Google.YouTube.Types.Product where
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types.Sum
 
--- | A thumbnail is an image representing a YouTube resource.
---
--- /See:/ 'thumbnail' smart constructor.
-data Thumbnail = Thumbnail
-    { _tHeight :: !(Maybe Word32)
-    , _tURL    :: !(Maybe Text)
-    , _tWidth  :: !(Maybe Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Thumbnail' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'tHeight'
---
--- * 'tURL'
---
--- * 'tWidth'
-thumbnail
-    :: Thumbnail
-thumbnail =
-    Thumbnail
-    { _tHeight = Nothing
-    , _tURL = Nothing
-    , _tWidth = Nothing
-    }
-
--- | (Optional) Height of the thumbnail image.
-tHeight :: Lens' Thumbnail (Maybe Word32)
-tHeight = lens _tHeight (\ s a -> s{_tHeight = a})
-
--- | The thumbnail image\'s URL.
-tURL :: Lens' Thumbnail (Maybe Text)
-tURL = lens _tURL (\ s a -> s{_tURL = a})
-
--- | (Optional) Width of the thumbnail image.
-tWidth :: Lens' Thumbnail (Maybe Word32)
-tWidth = lens _tWidth (\ s a -> s{_tWidth = a})
-
-instance FromJSON Thumbnail where
-        parseJSON
-          = withObject "Thumbnail"
-              (\ o ->
-                 Thumbnail <$>
-                   (o .:? "height") <*> (o .:? "url") <*>
-                     (o .:? "width"))
-
-instance ToJSON Thumbnail where
-        toJSON Thumbnail{..}
-          = object
-              (catMaybes
-                 [("height" .=) <$> _tHeight, ("url" .=) <$> _tURL,
-                  ("width" .=) <$> _tWidth])
-
--- | Describes information necessary for ingesting an RTMP or an HTTP stream.
---
--- /See:/ 'ingestionInfo' smart constructor.
-data IngestionInfo = IngestionInfo
-    { _iiBackupIngestionAddress :: !(Maybe Text)
-    , _iiIngestionAddress       :: !(Maybe Text)
-    , _iiStreamName             :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'IngestionInfo' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'iiBackupIngestionAddress'
---
--- * 'iiIngestionAddress'
---
--- * 'iiStreamName'
-ingestionInfo
-    :: IngestionInfo
-ingestionInfo =
-    IngestionInfo
-    { _iiBackupIngestionAddress = Nothing
-    , _iiIngestionAddress = Nothing
-    , _iiStreamName = Nothing
-    }
-
--- | The backup ingestion URL that you should use to stream video to YouTube.
--- You have the option of simultaneously streaming the content that you are
--- sending to the ingestionAddress to this URL.
-iiBackupIngestionAddress :: Lens' IngestionInfo (Maybe Text)
-iiBackupIngestionAddress
-  = lens _iiBackupIngestionAddress
-      (\ s a -> s{_iiBackupIngestionAddress = a})
-
--- | The primary ingestion URL that you should use to stream video to
--- YouTube. You must stream video to this URL. Depending on which
--- application or tool you use to encode your video stream, you may need to
--- enter the stream URL and stream name separately or you may need to
--- concatenate them in the following format: STREAM_URL\/STREAM_NAME
-iiIngestionAddress :: Lens' IngestionInfo (Maybe Text)
-iiIngestionAddress
-  = lens _iiIngestionAddress
-      (\ s a -> s{_iiIngestionAddress = a})
-
--- | The HTTP or RTMP stream name that YouTube assigns to the video stream.
-iiStreamName :: Lens' IngestionInfo (Maybe Text)
-iiStreamName
-  = lens _iiStreamName (\ s a -> s{_iiStreamName = a})
-
-instance FromJSON IngestionInfo where
-        parseJSON
-          = withObject "IngestionInfo"
-              (\ o ->
-                 IngestionInfo <$>
-                   (o .:? "backupIngestionAddress") <*>
-                     (o .:? "ingestionAddress")
-                     <*> (o .:? "streamName"))
-
-instance ToJSON IngestionInfo where
-        toJSON IngestionInfo{..}
-          = object
-              (catMaybes
-                 [("backupIngestionAddress" .=) <$>
-                    _iiBackupIngestionAddress,
-                  ("ingestionAddress" .=) <$> _iiIngestionAddress,
-                  ("streamName" .=) <$> _iiStreamName])
-
 -- | Basic details about a subscription\'s subscriber including title,
 -- description, channel ID and thumbnails.
 --
@@ -210,6 +88,74 @@ instance ToJSON SubscriptionSubscriberSnippet where
                   ("thumbnails" .=) <$> _sssThumbnails,
                   ("title" .=) <$> _sssTitle,
                   ("description" .=) <$> _sssDescription])
+
+-- | Describes information necessary for ingesting an RTMP or an HTTP stream.
+--
+-- /See:/ 'ingestionInfo' smart constructor.
+data IngestionInfo = IngestionInfo
+    { _iiBackupIngestionAddress :: !(Maybe Text)
+    , _iiIngestionAddress       :: !(Maybe Text)
+    , _iiStreamName             :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'IngestionInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'iiBackupIngestionAddress'
+--
+-- * 'iiIngestionAddress'
+--
+-- * 'iiStreamName'
+ingestionInfo
+    :: IngestionInfo
+ingestionInfo =
+    IngestionInfo
+    { _iiBackupIngestionAddress = Nothing
+    , _iiIngestionAddress = Nothing
+    , _iiStreamName = Nothing
+    }
+
+-- | The backup ingestion URL that you should use to stream video to YouTube.
+-- You have the option of simultaneously streaming the content that you are
+-- sending to the ingestionAddress to this URL.
+iiBackupIngestionAddress :: Lens' IngestionInfo (Maybe Text)
+iiBackupIngestionAddress
+  = lens _iiBackupIngestionAddress
+      (\ s a -> s{_iiBackupIngestionAddress = a})
+
+-- | The primary ingestion URL that you should use to stream video to
+-- YouTube. You must stream video to this URL. Depending on which
+-- application or tool you use to encode your video stream, you may need to
+-- enter the stream URL and stream name separately or you may need to
+-- concatenate them in the following format: STREAM_URL\/STREAM_NAME
+iiIngestionAddress :: Lens' IngestionInfo (Maybe Text)
+iiIngestionAddress
+  = lens _iiIngestionAddress
+      (\ s a -> s{_iiIngestionAddress = a})
+
+-- | The HTTP or RTMP stream name that YouTube assigns to the video stream.
+iiStreamName :: Lens' IngestionInfo (Maybe Text)
+iiStreamName
+  = lens _iiStreamName (\ s a -> s{_iiStreamName = a})
+
+instance FromJSON IngestionInfo where
+        parseJSON
+          = withObject "IngestionInfo"
+              (\ o ->
+                 IngestionInfo <$>
+                   (o .:? "backupIngestionAddress") <*>
+                     (o .:? "ingestionAddress")
+                     <*> (o .:? "streamName"))
+
+instance ToJSON IngestionInfo where
+        toJSON IngestionInfo{..}
+          = object
+              (catMaybes
+                 [("backupIngestionAddress" .=) <$>
+                    _iiBackupIngestionAddress,
+                  ("ingestionAddress" .=) <$> _iiIngestionAddress,
+                  ("streamName" .=) <$> _iiStreamName])
 
 -- | The auditDetails object encapsulates channel data that is relevant for
 -- YouTube Partners during the audit process.
@@ -295,181 +241,123 @@ instance ToJSON ChannelAuditDetails where
                   ("communityGuidelinesGoodStanding" .=) <$>
                     _cadCommUnityGuidelinesGoodStanding])
 
--- | Basic details about a channel section, including title, style and
--- position.
+-- | A thumbnail is an image representing a YouTube resource.
 --
--- /See:/ 'channelSectionSnippet' smart constructor.
-data ChannelSectionSnippet = ChannelSectionSnippet
-    { _cssStyle           :: !(Maybe Style)
-    , _cssChannelId       :: !(Maybe Text)
-    , _cssLocalized       :: !(Maybe ChannelSectionLocalization)
-    , _cssTitle           :: !(Maybe Text)
-    , _cssType            :: !(Maybe ChannelSectionSnippetType)
-    , _cssPosition        :: !(Maybe Word32)
-    , _cssDefaultLanguage :: !(Maybe Text)
+-- /See:/ 'thumbnail' smart constructor.
+data Thumbnail = Thumbnail
+    { _tHeight :: !(Maybe Word32)
+    , _tURL    :: !(Maybe Text)
+    , _tWidth  :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ChannelSectionSnippet' with the minimum fields required to make a request.
+-- | Creates a value of 'Thumbnail' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cssStyle'
+-- * 'tHeight'
 --
--- * 'cssChannelId'
+-- * 'tURL'
 --
--- * 'cssLocalized'
---
--- * 'cssTitle'
---
--- * 'cssType'
---
--- * 'cssPosition'
---
--- * 'cssDefaultLanguage'
-channelSectionSnippet
-    :: ChannelSectionSnippet
-channelSectionSnippet =
-    ChannelSectionSnippet
-    { _cssStyle = Nothing
-    , _cssChannelId = Nothing
-    , _cssLocalized = Nothing
-    , _cssTitle = Nothing
-    , _cssType = Nothing
-    , _cssPosition = Nothing
-    , _cssDefaultLanguage = Nothing
+-- * 'tWidth'
+thumbnail
+    :: Thumbnail
+thumbnail =
+    Thumbnail
+    { _tHeight = Nothing
+    , _tURL = Nothing
+    , _tWidth = Nothing
     }
 
--- | The style of the channel section.
-cssStyle :: Lens' ChannelSectionSnippet (Maybe Style)
-cssStyle = lens _cssStyle (\ s a -> s{_cssStyle = a})
+-- | (Optional) Height of the thumbnail image.
+tHeight :: Lens' Thumbnail (Maybe Word32)
+tHeight = lens _tHeight (\ s a -> s{_tHeight = a})
 
--- | The ID that YouTube uses to uniquely identify the channel that published
--- the channel section.
-cssChannelId :: Lens' ChannelSectionSnippet (Maybe Text)
-cssChannelId
-  = lens _cssChannelId (\ s a -> s{_cssChannelId = a})
+-- | The thumbnail image\'s URL.
+tURL :: Lens' Thumbnail (Maybe Text)
+tURL = lens _tURL (\ s a -> s{_tURL = a})
 
--- | Localized title, read-only.
-cssLocalized :: Lens' ChannelSectionSnippet (Maybe ChannelSectionLocalization)
-cssLocalized
-  = lens _cssLocalized (\ s a -> s{_cssLocalized = a})
+-- | (Optional) Width of the thumbnail image.
+tWidth :: Lens' Thumbnail (Maybe Word32)
+tWidth = lens _tWidth (\ s a -> s{_tWidth = a})
 
--- | The channel section\'s title for multiple_playlists and
--- multiple_channels.
-cssTitle :: Lens' ChannelSectionSnippet (Maybe Text)
-cssTitle = lens _cssTitle (\ s a -> s{_cssTitle = a})
-
--- | The type of the channel section.
-cssType :: Lens' ChannelSectionSnippet (Maybe ChannelSectionSnippetType)
-cssType = lens _cssType (\ s a -> s{_cssType = a})
-
--- | The position of the channel section in the channel.
-cssPosition :: Lens' ChannelSectionSnippet (Maybe Word32)
-cssPosition
-  = lens _cssPosition (\ s a -> s{_cssPosition = a})
-
--- | The language of the channel section\'s default title and description.
-cssDefaultLanguage :: Lens' ChannelSectionSnippet (Maybe Text)
-cssDefaultLanguage
-  = lens _cssDefaultLanguage
-      (\ s a -> s{_cssDefaultLanguage = a})
-
-instance FromJSON ChannelSectionSnippet where
+instance FromJSON Thumbnail where
         parseJSON
-          = withObject "ChannelSectionSnippet"
+          = withObject "Thumbnail"
               (\ o ->
-                 ChannelSectionSnippet <$>
-                   (o .:? "style") <*> (o .:? "channelId") <*>
-                     (o .:? "localized")
-                     <*> (o .:? "title")
-                     <*> (o .:? "type")
-                     <*> (o .:? "position")
-                     <*> (o .:? "defaultLanguage"))
+                 Thumbnail <$>
+                   (o .:? "height") <*> (o .:? "url") <*>
+                     (o .:? "width"))
 
-instance ToJSON ChannelSectionSnippet where
-        toJSON ChannelSectionSnippet{..}
+instance ToJSON Thumbnail where
+        toJSON Thumbnail{..}
           = object
               (catMaybes
-                 [("style" .=) <$> _cssStyle,
-                  ("channelId" .=) <$> _cssChannelId,
-                  ("localized" .=) <$> _cssLocalized,
-                  ("title" .=) <$> _cssTitle, ("type" .=) <$> _cssType,
-                  ("position" .=) <$> _cssPosition,
-                  ("defaultLanguage" .=) <$> _cssDefaultLanguage])
+                 [("height" .=) <$> _tHeight, ("url" .=) <$> _tURL,
+                  ("width" .=) <$> _tWidth])
 
--- | Describes a single promoted item.
+-- | Information that identifies the recommended resource.
 --
--- /See:/ 'promotedItem' smart constructor.
-data PromotedItem = PromotedItem
-    { _piCustomMessage          :: !(Maybe Text)
-    , _piPromotedByContentOwner :: !(Maybe Bool)
-    , _piId                     :: !(Maybe PromotedItemId)
-    , _piTiming                 :: !(Maybe InvideoTiming)
+-- /See:/ 'activityContentDetailsRecommendation' smart constructor.
+data ActivityContentDetailsRecommendation = ActivityContentDetailsRecommendation
+    { _acdrResourceId     :: !(Maybe ResourceId)
+    , _acdrSeedResourceId :: !(Maybe ResourceId)
+    , _acdrReason         :: !(Maybe ActivityContentDetailsRecommendationReason)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PromotedItem' with the minimum fields required to make a request.
+-- | Creates a value of 'ActivityContentDetailsRecommendation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'piCustomMessage'
+-- * 'acdrResourceId'
 --
--- * 'piPromotedByContentOwner'
+-- * 'acdrSeedResourceId'
 --
--- * 'piId'
---
--- * 'piTiming'
-promotedItem
-    :: PromotedItem
-promotedItem =
-    PromotedItem
-    { _piCustomMessage = Nothing
-    , _piPromotedByContentOwner = Nothing
-    , _piId = Nothing
-    , _piTiming = Nothing
+-- * 'acdrReason'
+activityContentDetailsRecommendation
+    :: ActivityContentDetailsRecommendation
+activityContentDetailsRecommendation =
+    ActivityContentDetailsRecommendation
+    { _acdrResourceId = Nothing
+    , _acdrSeedResourceId = Nothing
+    , _acdrReason = Nothing
     }
 
--- | A custom message to display for this promotion. This field is currently
--- ignored unless the promoted item is a website.
-piCustomMessage :: Lens' PromotedItem (Maybe Text)
-piCustomMessage
-  = lens _piCustomMessage
-      (\ s a -> s{_piCustomMessage = a})
+-- | The resourceId object contains information that identifies the
+-- recommended resource.
+acdrResourceId :: Lens' ActivityContentDetailsRecommendation (Maybe ResourceId)
+acdrResourceId
+  = lens _acdrResourceId
+      (\ s a -> s{_acdrResourceId = a})
 
--- | If true, the content owner\'s name will be used when displaying the
--- promotion. This field can only be set when the update is made on behalf
--- of the content owner.
-piPromotedByContentOwner :: Lens' PromotedItem (Maybe Bool)
-piPromotedByContentOwner
-  = lens _piPromotedByContentOwner
-      (\ s a -> s{_piPromotedByContentOwner = a})
+-- | The seedResourceId object contains information about the resource that
+-- caused the recommendation.
+acdrSeedResourceId :: Lens' ActivityContentDetailsRecommendation (Maybe ResourceId)
+acdrSeedResourceId
+  = lens _acdrSeedResourceId
+      (\ s a -> s{_acdrSeedResourceId = a})
 
--- | Identifies the promoted item.
-piId :: Lens' PromotedItem (Maybe PromotedItemId)
-piId = lens _piId (\ s a -> s{_piId = a})
+-- | The reason that the resource is recommended to the user.
+acdrReason :: Lens' ActivityContentDetailsRecommendation (Maybe ActivityContentDetailsRecommendationReason)
+acdrReason
+  = lens _acdrReason (\ s a -> s{_acdrReason = a})
 
--- | The temporal position within the video where the promoted item will be
--- displayed. If present, it overrides the default timing.
-piTiming :: Lens' PromotedItem (Maybe InvideoTiming)
-piTiming = lens _piTiming (\ s a -> s{_piTiming = a})
-
-instance FromJSON PromotedItem where
+instance FromJSON
+         ActivityContentDetailsRecommendation where
         parseJSON
-          = withObject "PromotedItem"
+          = withObject "ActivityContentDetailsRecommendation"
               (\ o ->
-                 PromotedItem <$>
-                   (o .:? "customMessage") <*>
-                     (o .:? "promotedByContentOwner")
-                     <*> (o .:? "id")
-                     <*> (o .:? "timing"))
+                 ActivityContentDetailsRecommendation <$>
+                   (o .:? "resourceId") <*> (o .:? "seedResourceId") <*>
+                     (o .:? "reason"))
 
-instance ToJSON PromotedItem where
-        toJSON PromotedItem{..}
+instance ToJSON ActivityContentDetailsRecommendation
+         where
+        toJSON ActivityContentDetailsRecommendation{..}
           = object
               (catMaybes
-                 [("customMessage" .=) <$> _piCustomMessage,
-                  ("promotedByContentOwner" .=) <$>
-                    _piPromotedByContentOwner,
-                  ("id" .=) <$> _piId, ("timing" .=) <$> _piTiming])
+                 [("resourceId" .=) <$> _acdrResourceId,
+                  ("seedResourceId" .=) <$> _acdrSeedResourceId,
+                  ("reason" .=) <$> _acdrReason])
 
 --
 -- /See:/ 'playListListResponse' smart constructor.
@@ -599,6 +487,497 @@ instance ToJSON PlayListListResponse where
                   ("eventId" .=) <$> _pllrEventId,
                   ("prevPageToken" .=) <$> _pllrPrevPageToken])
 
+-- | Basic details about a channel section, including title, style and
+-- position.
+--
+-- /See:/ 'channelSectionSnippet' smart constructor.
+data ChannelSectionSnippet = ChannelSectionSnippet
+    { _cssStyle           :: !(Maybe ChannelSectionSnippetStyle)
+    , _cssChannelId       :: !(Maybe Text)
+    , _cssLocalized       :: !(Maybe ChannelSectionLocalization)
+    , _cssTitle           :: !(Maybe Text)
+    , _cssType            :: !(Maybe ChannelSectionSnippetType)
+    , _cssPosition        :: !(Maybe Word32)
+    , _cssDefaultLanguage :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ChannelSectionSnippet' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cssStyle'
+--
+-- * 'cssChannelId'
+--
+-- * 'cssLocalized'
+--
+-- * 'cssTitle'
+--
+-- * 'cssType'
+--
+-- * 'cssPosition'
+--
+-- * 'cssDefaultLanguage'
+channelSectionSnippet
+    :: ChannelSectionSnippet
+channelSectionSnippet =
+    ChannelSectionSnippet
+    { _cssStyle = Nothing
+    , _cssChannelId = Nothing
+    , _cssLocalized = Nothing
+    , _cssTitle = Nothing
+    , _cssType = Nothing
+    , _cssPosition = Nothing
+    , _cssDefaultLanguage = Nothing
+    }
+
+-- | The style of the channel section.
+cssStyle :: Lens' ChannelSectionSnippet (Maybe ChannelSectionSnippetStyle)
+cssStyle = lens _cssStyle (\ s a -> s{_cssStyle = a})
+
+-- | The ID that YouTube uses to uniquely identify the channel that published
+-- the channel section.
+cssChannelId :: Lens' ChannelSectionSnippet (Maybe Text)
+cssChannelId
+  = lens _cssChannelId (\ s a -> s{_cssChannelId = a})
+
+-- | Localized title, read-only.
+cssLocalized :: Lens' ChannelSectionSnippet (Maybe ChannelSectionLocalization)
+cssLocalized
+  = lens _cssLocalized (\ s a -> s{_cssLocalized = a})
+
+-- | The channel section\'s title for multiple_playlists and
+-- multiple_channels.
+cssTitle :: Lens' ChannelSectionSnippet (Maybe Text)
+cssTitle = lens _cssTitle (\ s a -> s{_cssTitle = a})
+
+-- | The type of the channel section.
+cssType :: Lens' ChannelSectionSnippet (Maybe ChannelSectionSnippetType)
+cssType = lens _cssType (\ s a -> s{_cssType = a})
+
+-- | The position of the channel section in the channel.
+cssPosition :: Lens' ChannelSectionSnippet (Maybe Word32)
+cssPosition
+  = lens _cssPosition (\ s a -> s{_cssPosition = a})
+
+-- | The language of the channel section\'s default title and description.
+cssDefaultLanguage :: Lens' ChannelSectionSnippet (Maybe Text)
+cssDefaultLanguage
+  = lens _cssDefaultLanguage
+      (\ s a -> s{_cssDefaultLanguage = a})
+
+instance FromJSON ChannelSectionSnippet where
+        parseJSON
+          = withObject "ChannelSectionSnippet"
+              (\ o ->
+                 ChannelSectionSnippet <$>
+                   (o .:? "style") <*> (o .:? "channelId") <*>
+                     (o .:? "localized")
+                     <*> (o .:? "title")
+                     <*> (o .:? "type")
+                     <*> (o .:? "position")
+                     <*> (o .:? "defaultLanguage"))
+
+instance ToJSON ChannelSectionSnippet where
+        toJSON ChannelSectionSnippet{..}
+          = object
+              (catMaybes
+                 [("style" .=) <$> _cssStyle,
+                  ("channelId" .=) <$> _cssChannelId,
+                  ("localized" .=) <$> _cssLocalized,
+                  ("title" .=) <$> _cssTitle, ("type" .=) <$> _cssType,
+                  ("position" .=) <$> _cssPosition,
+                  ("defaultLanguage" .=) <$> _cssDefaultLanguage])
+
+-- | JSON template for the status part of a channel.
+--
+-- /See:/ 'channelStatus' smart constructor.
+data ChannelStatus = ChannelStatus
+    { _csIsLinked          :: !(Maybe Bool)
+    , _csLongUploadsStatus :: !(Maybe ChannelStatusLongUploadsStatus)
+    , _csPrivacyStatus     :: !(Maybe ChannelStatusPrivacyStatus)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ChannelStatus' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'csIsLinked'
+--
+-- * 'csLongUploadsStatus'
+--
+-- * 'csPrivacyStatus'
+channelStatus
+    :: ChannelStatus
+channelStatus =
+    ChannelStatus
+    { _csIsLinked = Nothing
+    , _csLongUploadsStatus = Nothing
+    , _csPrivacyStatus = Nothing
+    }
+
+-- | If true, then the user is linked to either a YouTube username or G+
+-- account. Otherwise, the user doesn\'t have a public YouTube identity.
+csIsLinked :: Lens' ChannelStatus (Maybe Bool)
+csIsLinked
+  = lens _csIsLinked (\ s a -> s{_csIsLinked = a})
+
+-- | The long uploads status of this channel. See
+csLongUploadsStatus :: Lens' ChannelStatus (Maybe ChannelStatusLongUploadsStatus)
+csLongUploadsStatus
+  = lens _csLongUploadsStatus
+      (\ s a -> s{_csLongUploadsStatus = a})
+
+-- | Privacy status of the channel.
+csPrivacyStatus :: Lens' ChannelStatus (Maybe ChannelStatusPrivacyStatus)
+csPrivacyStatus
+  = lens _csPrivacyStatus
+      (\ s a -> s{_csPrivacyStatus = a})
+
+instance FromJSON ChannelStatus where
+        parseJSON
+          = withObject "ChannelStatus"
+              (\ o ->
+                 ChannelStatus <$>
+                   (o .:? "isLinked") <*> (o .:? "longUploadsStatus")
+                     <*> (o .:? "privacyStatus"))
+
+instance ToJSON ChannelStatus where
+        toJSON ChannelStatus{..}
+          = object
+              (catMaybes
+                 [("isLinked" .=) <$> _csIsLinked,
+                  ("longUploadsStatus" .=) <$> _csLongUploadsStatus,
+                  ("privacyStatus" .=) <$> _csPrivacyStatus])
+
+-- | Describes a single promoted item.
+--
+-- /See:/ 'promotedItem' smart constructor.
+data PromotedItem = PromotedItem
+    { _piCustomMessage          :: !(Maybe Text)
+    , _piPromotedByContentOwner :: !(Maybe Bool)
+    , _piId                     :: !(Maybe PromotedItemId)
+    , _piTiming                 :: !(Maybe InvideoTiming)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PromotedItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'piCustomMessage'
+--
+-- * 'piPromotedByContentOwner'
+--
+-- * 'piId'
+--
+-- * 'piTiming'
+promotedItem
+    :: PromotedItem
+promotedItem =
+    PromotedItem
+    { _piCustomMessage = Nothing
+    , _piPromotedByContentOwner = Nothing
+    , _piId = Nothing
+    , _piTiming = Nothing
+    }
+
+-- | A custom message to display for this promotion. This field is currently
+-- ignored unless the promoted item is a website.
+piCustomMessage :: Lens' PromotedItem (Maybe Text)
+piCustomMessage
+  = lens _piCustomMessage
+      (\ s a -> s{_piCustomMessage = a})
+
+-- | If true, the content owner\'s name will be used when displaying the
+-- promotion. This field can only be set when the update is made on behalf
+-- of the content owner.
+piPromotedByContentOwner :: Lens' PromotedItem (Maybe Bool)
+piPromotedByContentOwner
+  = lens _piPromotedByContentOwner
+      (\ s a -> s{_piPromotedByContentOwner = a})
+
+-- | Identifies the promoted item.
+piId :: Lens' PromotedItem (Maybe PromotedItemId)
+piId = lens _piId (\ s a -> s{_piId = a})
+
+-- | The temporal position within the video where the promoted item will be
+-- displayed. If present, it overrides the default timing.
+piTiming :: Lens' PromotedItem (Maybe InvideoTiming)
+piTiming = lens _piTiming (\ s a -> s{_piTiming = a})
+
+instance FromJSON PromotedItem where
+        parseJSON
+          = withObject "PromotedItem"
+              (\ o ->
+                 PromotedItem <$>
+                   (o .:? "customMessage") <*>
+                     (o .:? "promotedByContentOwner")
+                     <*> (o .:? "id")
+                     <*> (o .:? "timing"))
+
+instance ToJSON PromotedItem where
+        toJSON PromotedItem{..}
+          = object
+              (catMaybes
+                 [("customMessage" .=) <$> _piCustomMessage,
+                  ("promotedByContentOwner" .=) <$>
+                    _piPromotedByContentOwner,
+                  ("id" .=) <$> _piId, ("timing" .=) <$> _piTiming])
+
+--
+-- /See:/ 'liveStreamSnippet' smart constructor.
+data LiveStreamSnippet = LiveStreamSnippet
+    { _lssPublishedAt     :: !(Maybe DateTime')
+    , _lssChannelId       :: !(Maybe Text)
+    , _lssIsDefaultStream :: !(Maybe Bool)
+    , _lssTitle           :: !(Maybe Text)
+    , _lssDescription     :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LiveStreamSnippet' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lssPublishedAt'
+--
+-- * 'lssChannelId'
+--
+-- * 'lssIsDefaultStream'
+--
+-- * 'lssTitle'
+--
+-- * 'lssDescription'
+liveStreamSnippet
+    :: LiveStreamSnippet
+liveStreamSnippet =
+    LiveStreamSnippet
+    { _lssPublishedAt = Nothing
+    , _lssChannelId = Nothing
+    , _lssIsDefaultStream = Nothing
+    , _lssTitle = Nothing
+    , _lssDescription = Nothing
+    }
+
+-- | The date and time that the stream was created. The value is specified in
+-- ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
+lssPublishedAt :: Lens' LiveStreamSnippet (Maybe UTCTime)
+lssPublishedAt
+  = lens _lssPublishedAt
+      (\ s a -> s{_lssPublishedAt = a})
+      . mapping _DateTime
+
+-- | The ID that YouTube uses to uniquely identify the channel that is
+-- transmitting the stream.
+lssChannelId :: Lens' LiveStreamSnippet (Maybe Text)
+lssChannelId
+  = lens _lssChannelId (\ s a -> s{_lssChannelId = a})
+
+lssIsDefaultStream :: Lens' LiveStreamSnippet (Maybe Bool)
+lssIsDefaultStream
+  = lens _lssIsDefaultStream
+      (\ s a -> s{_lssIsDefaultStream = a})
+
+-- | The stream\'s title. The value must be between 1 and 128 characters
+-- long.
+lssTitle :: Lens' LiveStreamSnippet (Maybe Text)
+lssTitle = lens _lssTitle (\ s a -> s{_lssTitle = a})
+
+-- | The stream\'s description. The value cannot be longer than 10000
+-- characters.
+lssDescription :: Lens' LiveStreamSnippet (Maybe Text)
+lssDescription
+  = lens _lssDescription
+      (\ s a -> s{_lssDescription = a})
+
+instance FromJSON LiveStreamSnippet where
+        parseJSON
+          = withObject "LiveStreamSnippet"
+              (\ o ->
+                 LiveStreamSnippet <$>
+                   (o .:? "publishedAt") <*> (o .:? "channelId") <*>
+                     (o .:? "isDefaultStream")
+                     <*> (o .:? "title")
+                     <*> (o .:? "description"))
+
+instance ToJSON LiveStreamSnippet where
+        toJSON LiveStreamSnippet{..}
+          = object
+              (catMaybes
+                 [("publishedAt" .=) <$> _lssPublishedAt,
+                  ("channelId" .=) <$> _lssChannelId,
+                  ("isDefaultStream" .=) <$> _lssIsDefaultStream,
+                  ("title" .=) <$> _lssTitle,
+                  ("description" .=) <$> _lssDescription])
+
+-- | A search result contains information about a YouTube video, channel, or
+-- playlist that matches the search parameters specified in an API request.
+-- While a search result points to a uniquely identifiable resource, like a
+-- video, it does not have its own persistent data.
+--
+-- /See:/ 'searchResult' smart constructor.
+data SearchResult = SearchResult
+    { _srEtag    :: !(Maybe Text)
+    , _srSnippet :: !(Maybe SearchResultSnippet)
+    , _srKind    :: !Text
+    , _srId      :: !(Maybe ResourceId)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SearchResult' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'srEtag'
+--
+-- * 'srSnippet'
+--
+-- * 'srKind'
+--
+-- * 'srId'
+searchResult
+    :: SearchResult
+searchResult =
+    SearchResult
+    { _srEtag = Nothing
+    , _srSnippet = Nothing
+    , _srKind = "youtube#searchResult"
+    , _srId = Nothing
+    }
+
+-- | Etag of this resource.
+srEtag :: Lens' SearchResult (Maybe Text)
+srEtag = lens _srEtag (\ s a -> s{_srEtag = a})
+
+-- | The snippet object contains basic details about a search result, such as
+-- its title or description. For example, if the search result is a video,
+-- then the title will be the video\'s title and the description will be
+-- the video\'s description.
+srSnippet :: Lens' SearchResult (Maybe SearchResultSnippet)
+srSnippet
+  = lens _srSnippet (\ s a -> s{_srSnippet = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"youtube#searchResult\".
+srKind :: Lens' SearchResult Text
+srKind = lens _srKind (\ s a -> s{_srKind = a})
+
+-- | The id object contains information that can be used to uniquely identify
+-- the resource that matches the search request.
+srId :: Lens' SearchResult (Maybe ResourceId)
+srId = lens _srId (\ s a -> s{_srId = a})
+
+instance FromJSON SearchResult where
+        parseJSON
+          = withObject "SearchResult"
+              (\ o ->
+                 SearchResult <$>
+                   (o .:? "etag") <*> (o .:? "snippet") <*>
+                     (o .:? "kind" .!= "youtube#searchResult")
+                     <*> (o .:? "id"))
+
+instance ToJSON SearchResult where
+        toJSON SearchResult{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _srEtag,
+                  ("snippet" .=) <$> _srSnippet,
+                  Just ("kind" .= _srKind), ("id" .=) <$> _srId])
+
+-- | Stub token pagination template to suppress results.
+--
+-- /See:/ 'tokenPagination' smart constructor.
+data TokenPagination =
+    TokenPagination
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TokenPagination' with the minimum fields required to make a request.
+--
+tokenPagination
+    :: TokenPagination
+tokenPagination = TokenPagination
+
+instance FromJSON TokenPagination where
+        parseJSON
+          = withObject "TokenPagination"
+              (\ o -> pure TokenPagination)
+
+instance ToJSON TokenPagination where
+        toJSON = const (Object mempty)
+
+-- | A resource id is a generic reference that points to another YouTube
+-- resource.
+--
+-- /See:/ 'resourceId' smart constructor.
+data ResourceId = ResourceId
+    { _riKind       :: !(Maybe Text)
+    , _riChannelId  :: !(Maybe Text)
+    , _riVideoId    :: !(Maybe Text)
+    , _riPlayListId :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ResourceId' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'riKind'
+--
+-- * 'riChannelId'
+--
+-- * 'riVideoId'
+--
+-- * 'riPlayListId'
+resourceId
+    :: ResourceId
+resourceId =
+    ResourceId
+    { _riKind = Nothing
+    , _riChannelId = Nothing
+    , _riVideoId = Nothing
+    , _riPlayListId = Nothing
+    }
+
+-- | The type of the API resource.
+riKind :: Lens' ResourceId (Maybe Text)
+riKind = lens _riKind (\ s a -> s{_riKind = a})
+
+-- | The ID that YouTube uses to uniquely identify the referred resource, if
+-- that resource is a channel. This property is only present if the
+-- resourceId.kind value is youtube#channel.
+riChannelId :: Lens' ResourceId (Maybe Text)
+riChannelId
+  = lens _riChannelId (\ s a -> s{_riChannelId = a})
+
+-- | The ID that YouTube uses to uniquely identify the referred resource, if
+-- that resource is a video. This property is only present if the
+-- resourceId.kind value is youtube#video.
+riVideoId :: Lens' ResourceId (Maybe Text)
+riVideoId
+  = lens _riVideoId (\ s a -> s{_riVideoId = a})
+
+-- | The ID that YouTube uses to uniquely identify the referred resource, if
+-- that resource is a playlist. This property is only present if the
+-- resourceId.kind value is youtube#playlist.
+riPlayListId :: Lens' ResourceId (Maybe Text)
+riPlayListId
+  = lens _riPlayListId (\ s a -> s{_riPlayListId = a})
+
+instance FromJSON ResourceId where
+        parseJSON
+          = withObject "ResourceId"
+              (\ o ->
+                 ResourceId <$>
+                   (o .:? "kind") <*> (o .:? "channelId") <*>
+                     (o .:? "videoId")
+                     <*> (o .:? "playlistId"))
+
+instance ToJSON ResourceId where
+        toJSON ResourceId{..}
+          = object
+              (catMaybes
+                 [("kind" .=) <$> _riKind,
+                  ("channelId" .=) <$> _riChannelId,
+                  ("videoId" .=) <$> _riVideoId,
+                  ("playlistId" .=) <$> _riPlayListId])
+
 --
 -- /See:/ 'searchListResponse' smart constructor.
 data SearchListResponse = SearchListResponse
@@ -726,384 +1105,40 @@ instance ToJSON SearchListResponse where
                   ("eventId" .=) <$> _slrEventId,
                   ("prevPageToken" .=) <$> _slrPrevPageToken])
 
--- | Stub token pagination template to suppress results.
 --
--- /See:/ 'tokenPagination' smart constructor.
-data TokenPagination =
-    TokenPagination
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'TokenPagination' with the minimum fields required to make a request.
---
-tokenPagination
-    :: TokenPagination
-tokenPagination = TokenPagination
-
-instance FromJSON TokenPagination where
-        parseJSON
-          = withObject "TokenPagination"
-              (\ o -> pure TokenPagination)
-
-instance ToJSON TokenPagination where
-        toJSON = const (Object mempty)
-
--- | Information that identifies the recommended resource.
---
--- /See:/ 'activityContentDetailsRecommendation' smart constructor.
-data ActivityContentDetailsRecommendation = ActivityContentDetailsRecommendation
-    { _acdrResourceId     :: !(Maybe ResourceId)
-    , _acdrSeedResourceId :: !(Maybe ResourceId)
-    , _acdrReason         :: !(Maybe Reason)
+-- /See:/ 'liveBroadcastTopicDetails' smart constructor.
+newtype LiveBroadcastTopicDetails = LiveBroadcastTopicDetails
+    { _lbtdTopics :: Maybe [LiveBroadcastTopic]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ActivityContentDetailsRecommendation' with the minimum fields required to make a request.
+-- | Creates a value of 'LiveBroadcastTopicDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acdrResourceId'
---
--- * 'acdrSeedResourceId'
---
--- * 'acdrReason'
-activityContentDetailsRecommendation
-    :: ActivityContentDetailsRecommendation
-activityContentDetailsRecommendation =
-    ActivityContentDetailsRecommendation
-    { _acdrResourceId = Nothing
-    , _acdrSeedResourceId = Nothing
-    , _acdrReason = Nothing
+-- * 'lbtdTopics'
+liveBroadcastTopicDetails
+    :: LiveBroadcastTopicDetails
+liveBroadcastTopicDetails =
+    LiveBroadcastTopicDetails
+    { _lbtdTopics = Nothing
     }
 
--- | The resourceId object contains information that identifies the
--- recommended resource.
-acdrResourceId :: Lens' ActivityContentDetailsRecommendation (Maybe ResourceId)
-acdrResourceId
-  = lens _acdrResourceId
-      (\ s a -> s{_acdrResourceId = a})
+lbtdTopics :: Lens' LiveBroadcastTopicDetails [LiveBroadcastTopic]
+lbtdTopics
+  = lens _lbtdTopics (\ s a -> s{_lbtdTopics = a}) .
+      _Default
+      . _Coerce
 
--- | The seedResourceId object contains information about the resource that
--- caused the recommendation.
-acdrSeedResourceId :: Lens' ActivityContentDetailsRecommendation (Maybe ResourceId)
-acdrSeedResourceId
-  = lens _acdrSeedResourceId
-      (\ s a -> s{_acdrSeedResourceId = a})
-
--- | The reason that the resource is recommended to the user.
-acdrReason :: Lens' ActivityContentDetailsRecommendation (Maybe Reason)
-acdrReason
-  = lens _acdrReason (\ s a -> s{_acdrReason = a})
-
-instance FromJSON
-         ActivityContentDetailsRecommendation where
+instance FromJSON LiveBroadcastTopicDetails where
         parseJSON
-          = withObject "ActivityContentDetailsRecommendation"
+          = withObject "LiveBroadcastTopicDetails"
               (\ o ->
-                 ActivityContentDetailsRecommendation <$>
-                   (o .:? "resourceId") <*> (o .:? "seedResourceId") <*>
-                     (o .:? "reason"))
+                 LiveBroadcastTopicDetails <$>
+                   (o .:? "topics" .!= mempty))
 
-instance ToJSON ActivityContentDetailsRecommendation
-         where
-        toJSON ActivityContentDetailsRecommendation{..}
-          = object
-              (catMaybes
-                 [("resourceId" .=) <$> _acdrResourceId,
-                  ("seedResourceId" .=) <$> _acdrSeedResourceId,
-                  ("reason" .=) <$> _acdrReason])
-
--- | A resource id is a generic reference that points to another YouTube
--- resource.
---
--- /See:/ 'resourceId' smart constructor.
-data ResourceId = ResourceId
-    { _riKind       :: !(Maybe Text)
-    , _riChannelId  :: !(Maybe Text)
-    , _riVideoId    :: !(Maybe Text)
-    , _riPlayListId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ResourceId' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'riKind'
---
--- * 'riChannelId'
---
--- * 'riVideoId'
---
--- * 'riPlayListId'
-resourceId
-    :: ResourceId
-resourceId =
-    ResourceId
-    { _riKind = Nothing
-    , _riChannelId = Nothing
-    , _riVideoId = Nothing
-    , _riPlayListId = Nothing
-    }
-
--- | The type of the API resource.
-riKind :: Lens' ResourceId (Maybe Text)
-riKind = lens _riKind (\ s a -> s{_riKind = a})
-
--- | The ID that YouTube uses to uniquely identify the referred resource, if
--- that resource is a channel. This property is only present if the
--- resourceId.kind value is youtube#channel.
-riChannelId :: Lens' ResourceId (Maybe Text)
-riChannelId
-  = lens _riChannelId (\ s a -> s{_riChannelId = a})
-
--- | The ID that YouTube uses to uniquely identify the referred resource, if
--- that resource is a video. This property is only present if the
--- resourceId.kind value is youtube#video.
-riVideoId :: Lens' ResourceId (Maybe Text)
-riVideoId
-  = lens _riVideoId (\ s a -> s{_riVideoId = a})
-
--- | The ID that YouTube uses to uniquely identify the referred resource, if
--- that resource is a playlist. This property is only present if the
--- resourceId.kind value is youtube#playlist.
-riPlayListId :: Lens' ResourceId (Maybe Text)
-riPlayListId
-  = lens _riPlayListId (\ s a -> s{_riPlayListId = a})
-
-instance FromJSON ResourceId where
-        parseJSON
-          = withObject "ResourceId"
-              (\ o ->
-                 ResourceId <$>
-                   (o .:? "kind") <*> (o .:? "channelId") <*>
-                     (o .:? "videoId")
-                     <*> (o .:? "playlistId"))
-
-instance ToJSON ResourceId where
-        toJSON ResourceId{..}
-          = object
-              (catMaybes
-                 [("kind" .=) <$> _riKind,
-                  ("channelId" .=) <$> _riChannelId,
-                  ("videoId" .=) <$> _riVideoId,
-                  ("playlistId" .=) <$> _riPlayListId])
-
--- | A search result contains information about a YouTube video, channel, or
--- playlist that matches the search parameters specified in an API request.
--- While a search result points to a uniquely identifiable resource, like a
--- video, it does not have its own persistent data.
---
--- /See:/ 'searchResult' smart constructor.
-data SearchResult = SearchResult
-    { _srEtag    :: !(Maybe Text)
-    , _srSnippet :: !(Maybe SearchResultSnippet)
-    , _srKind    :: !Text
-    , _srId      :: !(Maybe ResourceId)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SearchResult' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'srEtag'
---
--- * 'srSnippet'
---
--- * 'srKind'
---
--- * 'srId'
-searchResult
-    :: SearchResult
-searchResult =
-    SearchResult
-    { _srEtag = Nothing
-    , _srSnippet = Nothing
-    , _srKind = "youtube#searchResult"
-    , _srId = Nothing
-    }
-
--- | Etag of this resource.
-srEtag :: Lens' SearchResult (Maybe Text)
-srEtag = lens _srEtag (\ s a -> s{_srEtag = a})
-
--- | The snippet object contains basic details about a search result, such as
--- its title or description. For example, if the search result is a video,
--- then the title will be the video\'s title and the description will be
--- the video\'s description.
-srSnippet :: Lens' SearchResult (Maybe SearchResultSnippet)
-srSnippet
-  = lens _srSnippet (\ s a -> s{_srSnippet = a})
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"youtube#searchResult\".
-srKind :: Lens' SearchResult Text
-srKind = lens _srKind (\ s a -> s{_srKind = a})
-
--- | The id object contains information that can be used to uniquely identify
--- the resource that matches the search request.
-srId :: Lens' SearchResult (Maybe ResourceId)
-srId = lens _srId (\ s a -> s{_srId = a})
-
-instance FromJSON SearchResult where
-        parseJSON
-          = withObject "SearchResult"
-              (\ o ->
-                 SearchResult <$>
-                   (o .:? "etag") <*> (o .:? "snippet") <*>
-                     (o .:? "kind" .!= "youtube#searchResult")
-                     <*> (o .:? "id"))
-
-instance ToJSON SearchResult where
-        toJSON SearchResult{..}
-          = object
-              (catMaybes
-                 [("etag" .=) <$> _srEtag,
-                  ("snippet" .=) <$> _srSnippet,
-                  Just ("kind" .= _srKind), ("id" .=) <$> _srId])
-
--- | JSON template for the status part of a channel.
---
--- /See:/ 'channelStatus' smart constructor.
-data ChannelStatus = ChannelStatus
-    { _csIsLinked          :: !(Maybe Bool)
-    , _csLongUploadsStatus :: !(Maybe LongUploadsStatus)
-    , _csPrivacyStatus     :: !(Maybe PrivacyStatus)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ChannelStatus' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'csIsLinked'
---
--- * 'csLongUploadsStatus'
---
--- * 'csPrivacyStatus'
-channelStatus
-    :: ChannelStatus
-channelStatus =
-    ChannelStatus
-    { _csIsLinked = Nothing
-    , _csLongUploadsStatus = Nothing
-    , _csPrivacyStatus = Nothing
-    }
-
--- | If true, then the user is linked to either a YouTube username or G+
--- account. Otherwise, the user doesn\'t have a public YouTube identity.
-csIsLinked :: Lens' ChannelStatus (Maybe Bool)
-csIsLinked
-  = lens _csIsLinked (\ s a -> s{_csIsLinked = a})
-
--- | The long uploads status of this channel. See
-csLongUploadsStatus :: Lens' ChannelStatus (Maybe LongUploadsStatus)
-csLongUploadsStatus
-  = lens _csLongUploadsStatus
-      (\ s a -> s{_csLongUploadsStatus = a})
-
--- | Privacy status of the channel.
-csPrivacyStatus :: Lens' ChannelStatus (Maybe PrivacyStatus)
-csPrivacyStatus
-  = lens _csPrivacyStatus
-      (\ s a -> s{_csPrivacyStatus = a})
-
-instance FromJSON ChannelStatus where
-        parseJSON
-          = withObject "ChannelStatus"
-              (\ o ->
-                 ChannelStatus <$>
-                   (o .:? "isLinked") <*> (o .:? "longUploadsStatus")
-                     <*> (o .:? "privacyStatus"))
-
-instance ToJSON ChannelStatus where
-        toJSON ChannelStatus{..}
-          = object
-              (catMaybes
-                 [("isLinked" .=) <$> _csIsLinked,
-                  ("longUploadsStatus" .=) <$> _csLongUploadsStatus,
-                  ("privacyStatus" .=) <$> _csPrivacyStatus])
-
---
--- /See:/ 'liveStreamSnippet' smart constructor.
-data LiveStreamSnippet = LiveStreamSnippet
-    { _lssPublishedAt     :: !(Maybe DateTime')
-    , _lssChannelId       :: !(Maybe Text)
-    , _lssIsDefaultStream :: !(Maybe Bool)
-    , _lssTitle           :: !(Maybe Text)
-    , _lssDescription     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'LiveStreamSnippet' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lssPublishedAt'
---
--- * 'lssChannelId'
---
--- * 'lssIsDefaultStream'
---
--- * 'lssTitle'
---
--- * 'lssDescription'
-liveStreamSnippet
-    :: LiveStreamSnippet
-liveStreamSnippet =
-    LiveStreamSnippet
-    { _lssPublishedAt = Nothing
-    , _lssChannelId = Nothing
-    , _lssIsDefaultStream = Nothing
-    , _lssTitle = Nothing
-    , _lssDescription = Nothing
-    }
-
--- | The date and time that the stream was created. The value is specified in
--- ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
-lssPublishedAt :: Lens' LiveStreamSnippet (Maybe UTCTime)
-lssPublishedAt
-  = lens _lssPublishedAt
-      (\ s a -> s{_lssPublishedAt = a})
-      . mapping _DateTime
-
--- | The ID that YouTube uses to uniquely identify the channel that is
--- transmitting the stream.
-lssChannelId :: Lens' LiveStreamSnippet (Maybe Text)
-lssChannelId
-  = lens _lssChannelId (\ s a -> s{_lssChannelId = a})
-
-lssIsDefaultStream :: Lens' LiveStreamSnippet (Maybe Bool)
-lssIsDefaultStream
-  = lens _lssIsDefaultStream
-      (\ s a -> s{_lssIsDefaultStream = a})
-
--- | The stream\'s title. The value must be between 1 and 128 characters
--- long.
-lssTitle :: Lens' LiveStreamSnippet (Maybe Text)
-lssTitle = lens _lssTitle (\ s a -> s{_lssTitle = a})
-
--- | The stream\'s description. The value cannot be longer than 10000
--- characters.
-lssDescription :: Lens' LiveStreamSnippet (Maybe Text)
-lssDescription
-  = lens _lssDescription
-      (\ s a -> s{_lssDescription = a})
-
-instance FromJSON LiveStreamSnippet where
-        parseJSON
-          = withObject "LiveStreamSnippet"
-              (\ o ->
-                 LiveStreamSnippet <$>
-                   (o .:? "publishedAt") <*> (o .:? "channelId") <*>
-                     (o .:? "isDefaultStream")
-                     <*> (o .:? "title")
-                     <*> (o .:? "description"))
-
-instance ToJSON LiveStreamSnippet where
-        toJSON LiveStreamSnippet{..}
-          = object
-              (catMaybes
-                 [("publishedAt" .=) <$> _lssPublishedAt,
-                  ("channelId" .=) <$> _lssChannelId,
-                  ("isDefaultStream" .=) <$> _lssIsDefaultStream,
-                  ("title" .=) <$> _lssTitle,
-                  ("description" .=) <$> _lssDescription])
+instance ToJSON LiveBroadcastTopicDetails where
+        toJSON LiveBroadcastTopicDetails{..}
+          = object (catMaybes [("topics" .=) <$> _lbtdTopics])
 
 --
 -- /See:/ 'playListStatus' smart constructor.
@@ -1139,139 +1174,6 @@ instance ToJSON PlayListStatus where
           = object
               (catMaybes
                  [("privacyStatus" .=) <$> _plsPrivacyStatus])
-
--- | Details about the content of a YouTube Video.
---
--- /See:/ 'videoContentDetails' smart constructor.
-data VideoContentDetails = VideoContentDetails
-    { _vcdCountryRestriction :: !(Maybe AccessPolicy)
-    , _vcdDefinition         :: !(Maybe Definition)
-    , _vcdDimension          :: !(Maybe Text)
-    , _vcdCaption            :: !(Maybe Caption)
-    , _vcdRegionRestriction  :: !(Maybe VideoContentDetailsRegionRestriction)
-    , _vcdDuration           :: !(Maybe Text)
-    , _vcdContentRating      :: !(Maybe ContentRating)
-    , _vcdLicensedContent    :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'VideoContentDetails' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'vcdCountryRestriction'
---
--- * 'vcdDefinition'
---
--- * 'vcdDimension'
---
--- * 'vcdCaption'
---
--- * 'vcdRegionRestriction'
---
--- * 'vcdDuration'
---
--- * 'vcdContentRating'
---
--- * 'vcdLicensedContent'
-videoContentDetails
-    :: VideoContentDetails
-videoContentDetails =
-    VideoContentDetails
-    { _vcdCountryRestriction = Nothing
-    , _vcdDefinition = Nothing
-    , _vcdDimension = Nothing
-    , _vcdCaption = Nothing
-    , _vcdRegionRestriction = Nothing
-    , _vcdDuration = Nothing
-    , _vcdContentRating = Nothing
-    , _vcdLicensedContent = Nothing
-    }
-
--- | The countryRestriction object contains information about the countries
--- where a video is (or is not) viewable.
-vcdCountryRestriction :: Lens' VideoContentDetails (Maybe AccessPolicy)
-vcdCountryRestriction
-  = lens _vcdCountryRestriction
-      (\ s a -> s{_vcdCountryRestriction = a})
-
--- | The value of definition indicates whether the video is available in high
--- definition or only in standard definition.
-vcdDefinition :: Lens' VideoContentDetails (Maybe Definition)
-vcdDefinition
-  = lens _vcdDefinition
-      (\ s a -> s{_vcdDefinition = a})
-
--- | The value of dimension indicates whether the video is available in 3D or
--- in 2D.
-vcdDimension :: Lens' VideoContentDetails (Maybe Text)
-vcdDimension
-  = lens _vcdDimension (\ s a -> s{_vcdDimension = a})
-
--- | The value of captions indicates whether the video has captions or not.
-vcdCaption :: Lens' VideoContentDetails (Maybe Caption)
-vcdCaption
-  = lens _vcdCaption (\ s a -> s{_vcdCaption = a})
-
--- | The regionRestriction object contains information about the countries
--- where a video is (or is not) viewable. The object will contain either
--- the contentDetails.regionRestriction.allowed property or the
--- contentDetails.regionRestriction.blocked property.
-vcdRegionRestriction :: Lens' VideoContentDetails (Maybe VideoContentDetailsRegionRestriction)
-vcdRegionRestriction
-  = lens _vcdRegionRestriction
-      (\ s a -> s{_vcdRegionRestriction = a})
-
--- | The length of the video. The tag value is an ISO 8601 duration in the
--- format PT#M#S, in which the letters PT indicate that the value specifies
--- a period of time, and the letters M and S refer to length in minutes and
--- seconds, respectively. The # characters preceding the M and S letters
--- are both integers that specify the number of minutes (or seconds) of the
--- video. For example, a value of PT15M51S indicates that the video is 15
--- minutes and 51 seconds long.
-vcdDuration :: Lens' VideoContentDetails (Maybe Text)
-vcdDuration
-  = lens _vcdDuration (\ s a -> s{_vcdDuration = a})
-
--- | Specifies the ratings that the video received under various rating
--- schemes.
-vcdContentRating :: Lens' VideoContentDetails (Maybe ContentRating)
-vcdContentRating
-  = lens _vcdContentRating
-      (\ s a -> s{_vcdContentRating = a})
-
--- | The value of is_license_content indicates whether the video is licensed
--- content.
-vcdLicensedContent :: Lens' VideoContentDetails (Maybe Bool)
-vcdLicensedContent
-  = lens _vcdLicensedContent
-      (\ s a -> s{_vcdLicensedContent = a})
-
-instance FromJSON VideoContentDetails where
-        parseJSON
-          = withObject "VideoContentDetails"
-              (\ o ->
-                 VideoContentDetails <$>
-                   (o .:? "countryRestriction") <*> (o .:? "definition")
-                     <*> (o .:? "dimension")
-                     <*> (o .:? "caption")
-                     <*> (o .:? "regionRestriction")
-                     <*> (o .:? "duration")
-                     <*> (o .:? "contentRating")
-                     <*> (o .:? "licensedContent"))
-
-instance ToJSON VideoContentDetails where
-        toJSON VideoContentDetails{..}
-          = object
-              (catMaybes
-                 [("countryRestriction" .=) <$>
-                    _vcdCountryRestriction,
-                  ("definition" .=) <$> _vcdDefinition,
-                  ("dimension" .=) <$> _vcdDimension,
-                  ("caption" .=) <$> _vcdCaption,
-                  ("regionRestriction" .=) <$> _vcdRegionRestriction,
-                  ("duration" .=) <$> _vcdDuration,
-                  ("contentRating" .=) <$> _vcdContentRating,
-                  ("licensedContent" .=) <$> _vcdLicensedContent])
 
 --
 -- /See:/ 'channelListResponse' smart constructor.
@@ -1647,103 +1549,205 @@ instance ToJSON LiveBroadcastContentDetails where
                     _lbcdEnableClosedCaptions,
                   ("enableDvr" .=) <$> _lbcdEnableDvr])
 
--- | Information about a video that was marked as a favorite video.
 --
--- /See:/ 'activityContentDetailsFavorite' smart constructor.
-newtype ActivityContentDetailsFavorite = ActivityContentDetailsFavorite
-    { _acdfResourceId :: Maybe ResourceId
+-- /See:/ 'channelSection' smart constructor.
+data ChannelSection = ChannelSection
+    { _csEtag           :: !(Maybe Text)
+    , _csSnippet        :: !(Maybe ChannelSectionSnippet)
+    , _csKind           :: !Text
+    , _csContentDetails :: !(Maybe ChannelSectionContentDetails)
+    , _csTargeting      :: !(Maybe ChannelSectionTargeting)
+    , _csId             :: !(Maybe Text)
+    , _csLocalizations  :: !(Maybe ChannelSectionLocalizations)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ActivityContentDetailsFavorite' with the minimum fields required to make a request.
+-- | Creates a value of 'ChannelSection' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acdfResourceId'
-activityContentDetailsFavorite
-    :: ActivityContentDetailsFavorite
-activityContentDetailsFavorite =
-    ActivityContentDetailsFavorite
-    { _acdfResourceId = Nothing
+-- * 'csEtag'
+--
+-- * 'csSnippet'
+--
+-- * 'csKind'
+--
+-- * 'csContentDetails'
+--
+-- * 'csTargeting'
+--
+-- * 'csId'
+--
+-- * 'csLocalizations'
+channelSection
+    :: ChannelSection
+channelSection =
+    ChannelSection
+    { _csEtag = Nothing
+    , _csSnippet = Nothing
+    , _csKind = "youtube#channelSection"
+    , _csContentDetails = Nothing
+    , _csTargeting = Nothing
+    , _csId = Nothing
+    , _csLocalizations = Nothing
     }
 
--- | The resourceId object contains information that identifies the resource
--- that was marked as a favorite.
-acdfResourceId :: Lens' ActivityContentDetailsFavorite (Maybe ResourceId)
-acdfResourceId
-  = lens _acdfResourceId
-      (\ s a -> s{_acdfResourceId = a})
+-- | Etag of this resource.
+csEtag :: Lens' ChannelSection (Maybe Text)
+csEtag = lens _csEtag (\ s a -> s{_csEtag = a})
 
-instance FromJSON ActivityContentDetailsFavorite
-         where
+-- | The snippet object contains basic details about the channel section,
+-- such as its type, style and title.
+csSnippet :: Lens' ChannelSection (Maybe ChannelSectionSnippet)
+csSnippet
+  = lens _csSnippet (\ s a -> s{_csSnippet = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"youtube#channelSection\".
+csKind :: Lens' ChannelSection Text
+csKind = lens _csKind (\ s a -> s{_csKind = a})
+
+-- | The contentDetails object contains details about the channel section
+-- content, such as a list of playlists or channels featured in the
+-- section.
+csContentDetails :: Lens' ChannelSection (Maybe ChannelSectionContentDetails)
+csContentDetails
+  = lens _csContentDetails
+      (\ s a -> s{_csContentDetails = a})
+
+-- | The targeting object contains basic targeting settings about the channel
+-- section.
+csTargeting :: Lens' ChannelSection (Maybe ChannelSectionTargeting)
+csTargeting
+  = lens _csTargeting (\ s a -> s{_csTargeting = a})
+
+-- | The ID that YouTube uses to uniquely identify the channel section.
+csId :: Lens' ChannelSection (Maybe Text)
+csId = lens _csId (\ s a -> s{_csId = a})
+
+-- | Localizations for different languages
+csLocalizations :: Lens' ChannelSection (Maybe ChannelSectionLocalizations)
+csLocalizations
+  = lens _csLocalizations
+      (\ s a -> s{_csLocalizations = a})
+
+instance FromJSON ChannelSection where
         parseJSON
-          = withObject "ActivityContentDetailsFavorite"
+          = withObject "ChannelSection"
               (\ o ->
-                 ActivityContentDetailsFavorite <$>
-                   (o .:? "resourceId"))
+                 ChannelSection <$>
+                   (o .:? "etag") <*> (o .:? "snippet") <*>
+                     (o .:? "kind" .!= "youtube#channelSection")
+                     <*> (o .:? "contentDetails")
+                     <*> (o .:? "targeting")
+                     <*> (o .:? "id")
+                     <*> (o .:? "localizations"))
 
-instance ToJSON ActivityContentDetailsFavorite where
-        toJSON ActivityContentDetailsFavorite{..}
-          = object
-              (catMaybes [("resourceId" .=) <$> _acdfResourceId])
-
--- | Freebase topic information related to the video.
---
--- /See:/ 'videoTopicDetails' smart constructor.
-data VideoTopicDetails = VideoTopicDetails
-    { _vtdTopicIds         :: !(Maybe [Text])
-    , _vtdRelevantTopicIds :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'VideoTopicDetails' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'vtdTopicIds'
---
--- * 'vtdRelevantTopicIds'
-videoTopicDetails
-    :: VideoTopicDetails
-videoTopicDetails =
-    VideoTopicDetails
-    { _vtdTopicIds = Nothing
-    , _vtdRelevantTopicIds = Nothing
-    }
-
--- | A list of Freebase topic IDs that are centrally associated with the
--- video. These are topics that are centrally featured in the video, and it
--- can be said that the video is mainly about each of these. You can
--- retrieve information about each topic using the Freebase Topic API.
-vtdTopicIds :: Lens' VideoTopicDetails [Text]
-vtdTopicIds
-  = lens _vtdTopicIds (\ s a -> s{_vtdTopicIds = a}) .
-      _Default
-      . _Coerce
-
--- | Similar to topic_id, except that these topics are merely relevant to the
--- video. These are topics that may be mentioned in, or appear in the
--- video. You can retrieve information about each topic using Freebase
--- Topic API.
-vtdRelevantTopicIds :: Lens' VideoTopicDetails [Text]
-vtdRelevantTopicIds
-  = lens _vtdRelevantTopicIds
-      (\ s a -> s{_vtdRelevantTopicIds = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON VideoTopicDetails where
-        parseJSON
-          = withObject "VideoTopicDetails"
-              (\ o ->
-                 VideoTopicDetails <$>
-                   (o .:? "topicIds" .!= mempty) <*>
-                     (o .:? "relevantTopicIds" .!= mempty))
-
-instance ToJSON VideoTopicDetails where
-        toJSON VideoTopicDetails{..}
+instance ToJSON ChannelSection where
+        toJSON ChannelSection{..}
           = object
               (catMaybes
-                 [("topicIds" .=) <$> _vtdTopicIds,
-                  ("relevantTopicIds" .=) <$> _vtdRelevantTopicIds])
+                 [("etag" .=) <$> _csEtag,
+                  ("snippet" .=) <$> _csSnippet,
+                  Just ("kind" .= _csKind),
+                  ("contentDetails" .=) <$> _csContentDetails,
+                  ("targeting" .=) <$> _csTargeting,
+                  ("id" .=) <$> _csId,
+                  ("localizations" .=) <$> _csLocalizations])
+
+--
+-- /See:/ 'channelContentDetailsRelatedPlayLists' smart constructor.
+data ChannelContentDetailsRelatedPlayLists = ChannelContentDetailsRelatedPlayLists
+    { _ccdrplFavorites    :: !(Maybe Text)
+    , _ccdrplWatchHistory :: !(Maybe Text)
+    , _ccdrplWatchLater   :: !(Maybe Text)
+    , _ccdrplUploads      :: !(Maybe Text)
+    , _ccdrplLikes        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ChannelContentDetailsRelatedPlayLists' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ccdrplFavorites'
+--
+-- * 'ccdrplWatchHistory'
+--
+-- * 'ccdrplWatchLater'
+--
+-- * 'ccdrplUploads'
+--
+-- * 'ccdrplLikes'
+channelContentDetailsRelatedPlayLists
+    :: ChannelContentDetailsRelatedPlayLists
+channelContentDetailsRelatedPlayLists =
+    ChannelContentDetailsRelatedPlayLists
+    { _ccdrplFavorites = Nothing
+    , _ccdrplWatchHistory = Nothing
+    , _ccdrplWatchLater = Nothing
+    , _ccdrplUploads = Nothing
+    , _ccdrplLikes = Nothing
+    }
+
+-- | The ID of the playlist that contains the channel\"s favorite videos. Use
+-- the playlistItems.insert and playlistItems.delete to add or remove items
+-- from that list.
+ccdrplFavorites :: Lens' ChannelContentDetailsRelatedPlayLists (Maybe Text)
+ccdrplFavorites
+  = lens _ccdrplFavorites
+      (\ s a -> s{_ccdrplFavorites = a})
+
+-- | The ID of the playlist that contains the channel\"s watch history. Use
+-- the playlistItems.insert and playlistItems.delete to add or remove items
+-- from that list.
+ccdrplWatchHistory :: Lens' ChannelContentDetailsRelatedPlayLists (Maybe Text)
+ccdrplWatchHistory
+  = lens _ccdrplWatchHistory
+      (\ s a -> s{_ccdrplWatchHistory = a})
+
+-- | The ID of the playlist that contains the channel\"s watch later
+-- playlist. Use the playlistItems.insert and playlistItems.delete to add
+-- or remove items from that list.
+ccdrplWatchLater :: Lens' ChannelContentDetailsRelatedPlayLists (Maybe Text)
+ccdrplWatchLater
+  = lens _ccdrplWatchLater
+      (\ s a -> s{_ccdrplWatchLater = a})
+
+-- | The ID of the playlist that contains the channel\"s uploaded videos. Use
+-- the videos.insert method to upload new videos and the videos.delete
+-- method to delete previously uploaded videos.
+ccdrplUploads :: Lens' ChannelContentDetailsRelatedPlayLists (Maybe Text)
+ccdrplUploads
+  = lens _ccdrplUploads
+      (\ s a -> s{_ccdrplUploads = a})
+
+-- | The ID of the playlist that contains the channel\"s liked videos. Use
+-- the playlistItems.insert and playlistItems.delete to add or remove items
+-- from that list.
+ccdrplLikes :: Lens' ChannelContentDetailsRelatedPlayLists (Maybe Text)
+ccdrplLikes
+  = lens _ccdrplLikes (\ s a -> s{_ccdrplLikes = a})
+
+instance FromJSON
+         ChannelContentDetailsRelatedPlayLists where
+        parseJSON
+          = withObject "ChannelContentDetailsRelatedPlayLists"
+              (\ o ->
+                 ChannelContentDetailsRelatedPlayLists <$>
+                   (o .:? "favorites") <*> (o .:? "watchHistory") <*>
+                     (o .:? "watchLater")
+                     <*> (o .:? "uploads")
+                     <*> (o .:? "likes"))
+
+instance ToJSON ChannelContentDetailsRelatedPlayLists
+         where
+        toJSON ChannelContentDetailsRelatedPlayLists{..}
+          = object
+              (catMaybes
+                 [("favorites" .=) <$> _ccdrplFavorites,
+                  ("watchHistory" .=) <$> _ccdrplWatchHistory,
+                  ("watchLater" .=) <$> _ccdrplWatchLater,
+                  ("uploads" .=) <$> _ccdrplUploads,
+                  ("likes" .=) <$> _ccdrplLikes])
 
 -- | A live stream describes a live ingestion point.
 --
@@ -1847,235 +1851,177 @@ instance ToJSON LiveStream where
                   ("contentDetails" .=) <$> _lsContentDetails,
                   ("id" .=) <$> _lsId, ("cdn" .=) <$> _lsCdn])
 
+-- | Information about a video that was marked as a favorite video.
 --
--- /See:/ 'channelSection' smart constructor.
-data ChannelSection = ChannelSection
-    { _csEtag           :: !(Maybe Text)
-    , _csSnippet        :: !(Maybe ChannelSectionSnippet)
-    , _csKind           :: !Text
-    , _csContentDetails :: !(Maybe ChannelSectionContentDetails)
-    , _csTargeting      :: !(Maybe ChannelSectionTargeting)
-    , _csId             :: !(Maybe Text)
-    , _csLocalizations  :: !(Maybe Localizations)
+-- /See:/ 'activityContentDetailsFavorite' smart constructor.
+newtype ActivityContentDetailsFavorite = ActivityContentDetailsFavorite
+    { _acdfResourceId :: Maybe ResourceId
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ChannelSection' with the minimum fields required to make a request.
+-- | Creates a value of 'ActivityContentDetailsFavorite' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'csEtag'
---
--- * 'csSnippet'
---
--- * 'csKind'
---
--- * 'csContentDetails'
---
--- * 'csTargeting'
---
--- * 'csId'
---
--- * 'csLocalizations'
-channelSection
-    :: ChannelSection
-channelSection =
-    ChannelSection
-    { _csEtag = Nothing
-    , _csSnippet = Nothing
-    , _csKind = "youtube#channelSection"
-    , _csContentDetails = Nothing
-    , _csTargeting = Nothing
-    , _csId = Nothing
-    , _csLocalizations = Nothing
+-- * 'acdfResourceId'
+activityContentDetailsFavorite
+    :: ActivityContentDetailsFavorite
+activityContentDetailsFavorite =
+    ActivityContentDetailsFavorite
+    { _acdfResourceId = Nothing
     }
 
--- | Etag of this resource.
-csEtag :: Lens' ChannelSection (Maybe Text)
-csEtag = lens _csEtag (\ s a -> s{_csEtag = a})
+-- | The resourceId object contains information that identifies the resource
+-- that was marked as a favorite.
+acdfResourceId :: Lens' ActivityContentDetailsFavorite (Maybe ResourceId)
+acdfResourceId
+  = lens _acdfResourceId
+      (\ s a -> s{_acdfResourceId = a})
 
--- | The snippet object contains basic details about the channel section,
--- such as its type, style and title.
-csSnippet :: Lens' ChannelSection (Maybe ChannelSectionSnippet)
-csSnippet
-  = lens _csSnippet (\ s a -> s{_csSnippet = a})
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"youtube#channelSection\".
-csKind :: Lens' ChannelSection Text
-csKind = lens _csKind (\ s a -> s{_csKind = a})
-
--- | The contentDetails object contains details about the channel section
--- content, such as a list of playlists or channels featured in the
--- section.
-csContentDetails :: Lens' ChannelSection (Maybe ChannelSectionContentDetails)
-csContentDetails
-  = lens _csContentDetails
-      (\ s a -> s{_csContentDetails = a})
-
--- | The targeting object contains basic targeting settings about the channel
--- section.
-csTargeting :: Lens' ChannelSection (Maybe ChannelSectionTargeting)
-csTargeting
-  = lens _csTargeting (\ s a -> s{_csTargeting = a})
-
--- | The ID that YouTube uses to uniquely identify the channel section.
-csId :: Lens' ChannelSection (Maybe Text)
-csId = lens _csId (\ s a -> s{_csId = a})
-
--- | Localizations for different languages
-csLocalizations :: Lens' ChannelSection (Maybe Localizations)
-csLocalizations
-  = lens _csLocalizations
-      (\ s a -> s{_csLocalizations = a})
-
-instance FromJSON ChannelSection where
+instance FromJSON ActivityContentDetailsFavorite
+         where
         parseJSON
-          = withObject "ChannelSection"
+          = withObject "ActivityContentDetailsFavorite"
               (\ o ->
-                 ChannelSection <$>
-                   (o .:? "etag") <*> (o .:? "snippet") <*>
-                     (o .:? "kind" .!= "youtube#channelSection")
-                     <*> (o .:? "contentDetails")
-                     <*> (o .:? "targeting")
-                     <*> (o .:? "id")
-                     <*> (o .:? "localizations"))
+                 ActivityContentDetailsFavorite <$>
+                   (o .:? "resourceId"))
 
-instance ToJSON ChannelSection where
-        toJSON ChannelSection{..}
+instance ToJSON ActivityContentDetailsFavorite where
+        toJSON ActivityContentDetailsFavorite{..}
+          = object
+              (catMaybes [("resourceId" .=) <$> _acdfResourceId])
+
+-- | Details about the content of a YouTube Video.
+--
+-- /See:/ 'videoContentDetails' smart constructor.
+data VideoContentDetails = VideoContentDetails
+    { _vcdCountryRestriction :: !(Maybe AccessPolicy)
+    , _vcdDefinition         :: !(Maybe VideoContentDetailsDefinition)
+    , _vcdDimension          :: !(Maybe Text)
+    , _vcdCaption            :: !(Maybe VideoContentDetailsCaption)
+    , _vcdRegionRestriction  :: !(Maybe VideoContentDetailsRegionRestriction)
+    , _vcdDuration           :: !(Maybe Text)
+    , _vcdContentRating      :: !(Maybe ContentRating)
+    , _vcdLicensedContent    :: !(Maybe Bool)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VideoContentDetails' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vcdCountryRestriction'
+--
+-- * 'vcdDefinition'
+--
+-- * 'vcdDimension'
+--
+-- * 'vcdCaption'
+--
+-- * 'vcdRegionRestriction'
+--
+-- * 'vcdDuration'
+--
+-- * 'vcdContentRating'
+--
+-- * 'vcdLicensedContent'
+videoContentDetails
+    :: VideoContentDetails
+videoContentDetails =
+    VideoContentDetails
+    { _vcdCountryRestriction = Nothing
+    , _vcdDefinition = Nothing
+    , _vcdDimension = Nothing
+    , _vcdCaption = Nothing
+    , _vcdRegionRestriction = Nothing
+    , _vcdDuration = Nothing
+    , _vcdContentRating = Nothing
+    , _vcdLicensedContent = Nothing
+    }
+
+-- | The countryRestriction object contains information about the countries
+-- where a video is (or is not) viewable.
+vcdCountryRestriction :: Lens' VideoContentDetails (Maybe AccessPolicy)
+vcdCountryRestriction
+  = lens _vcdCountryRestriction
+      (\ s a -> s{_vcdCountryRestriction = a})
+
+-- | The value of definition indicates whether the video is available in high
+-- definition or only in standard definition.
+vcdDefinition :: Lens' VideoContentDetails (Maybe VideoContentDetailsDefinition)
+vcdDefinition
+  = lens _vcdDefinition
+      (\ s a -> s{_vcdDefinition = a})
+
+-- | The value of dimension indicates whether the video is available in 3D or
+-- in 2D.
+vcdDimension :: Lens' VideoContentDetails (Maybe Text)
+vcdDimension
+  = lens _vcdDimension (\ s a -> s{_vcdDimension = a})
+
+-- | The value of captions indicates whether the video has captions or not.
+vcdCaption :: Lens' VideoContentDetails (Maybe VideoContentDetailsCaption)
+vcdCaption
+  = lens _vcdCaption (\ s a -> s{_vcdCaption = a})
+
+-- | The regionRestriction object contains information about the countries
+-- where a video is (or is not) viewable. The object will contain either
+-- the contentDetails.regionRestriction.allowed property or the
+-- contentDetails.regionRestriction.blocked property.
+vcdRegionRestriction :: Lens' VideoContentDetails (Maybe VideoContentDetailsRegionRestriction)
+vcdRegionRestriction
+  = lens _vcdRegionRestriction
+      (\ s a -> s{_vcdRegionRestriction = a})
+
+-- | The length of the video. The tag value is an ISO 8601 duration in the
+-- format PT#M#S, in which the letters PT indicate that the value specifies
+-- a period of time, and the letters M and S refer to length in minutes and
+-- seconds, respectively. The # characters preceding the M and S letters
+-- are both integers that specify the number of minutes (or seconds) of the
+-- video. For example, a value of PT15M51S indicates that the video is 15
+-- minutes and 51 seconds long.
+vcdDuration :: Lens' VideoContentDetails (Maybe Text)
+vcdDuration
+  = lens _vcdDuration (\ s a -> s{_vcdDuration = a})
+
+-- | Specifies the ratings that the video received under various rating
+-- schemes.
+vcdContentRating :: Lens' VideoContentDetails (Maybe ContentRating)
+vcdContentRating
+  = lens _vcdContentRating
+      (\ s a -> s{_vcdContentRating = a})
+
+-- | The value of is_license_content indicates whether the video is licensed
+-- content.
+vcdLicensedContent :: Lens' VideoContentDetails (Maybe Bool)
+vcdLicensedContent
+  = lens _vcdLicensedContent
+      (\ s a -> s{_vcdLicensedContent = a})
+
+instance FromJSON VideoContentDetails where
+        parseJSON
+          = withObject "VideoContentDetails"
+              (\ o ->
+                 VideoContentDetails <$>
+                   (o .:? "countryRestriction") <*> (o .:? "definition")
+                     <*> (o .:? "dimension")
+                     <*> (o .:? "caption")
+                     <*> (o .:? "regionRestriction")
+                     <*> (o .:? "duration")
+                     <*> (o .:? "contentRating")
+                     <*> (o .:? "licensedContent"))
+
+instance ToJSON VideoContentDetails where
+        toJSON VideoContentDetails{..}
           = object
               (catMaybes
-                 [("etag" .=) <$> _csEtag,
-                  ("snippet" .=) <$> _csSnippet,
-                  Just ("kind" .= _csKind),
-                  ("contentDetails" .=) <$> _csContentDetails,
-                  ("targeting" .=) <$> _csTargeting,
-                  ("id" .=) <$> _csId,
-                  ("localizations" .=) <$> _csLocalizations])
-
---
--- /See:/ 'liveBroadcastTopicDetails' smart constructor.
-newtype LiveBroadcastTopicDetails = LiveBroadcastTopicDetails
-    { _lbtdTopics :: Maybe [LiveBroadcastTopic]
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'LiveBroadcastTopicDetails' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lbtdTopics'
-liveBroadcastTopicDetails
-    :: LiveBroadcastTopicDetails
-liveBroadcastTopicDetails =
-    LiveBroadcastTopicDetails
-    { _lbtdTopics = Nothing
-    }
-
-lbtdTopics :: Lens' LiveBroadcastTopicDetails [LiveBroadcastTopic]
-lbtdTopics
-  = lens _lbtdTopics (\ s a -> s{_lbtdTopics = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON LiveBroadcastTopicDetails where
-        parseJSON
-          = withObject "LiveBroadcastTopicDetails"
-              (\ o ->
-                 LiveBroadcastTopicDetails <$>
-                   (o .:? "topics" .!= mempty))
-
-instance ToJSON LiveBroadcastTopicDetails where
-        toJSON LiveBroadcastTopicDetails{..}
-          = object (catMaybes [("topics" .=) <$> _lbtdTopics])
-
---
--- /See:/ 'relatedPlayLists' smart constructor.
-data RelatedPlayLists = RelatedPlayLists
-    { _rplFavorites    :: !(Maybe Text)
-    , _rplWatchHistory :: !(Maybe Text)
-    , _rplWatchLater   :: !(Maybe Text)
-    , _rplUploads      :: !(Maybe Text)
-    , _rplLikes        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'RelatedPlayLists' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rplFavorites'
---
--- * 'rplWatchHistory'
---
--- * 'rplWatchLater'
---
--- * 'rplUploads'
---
--- * 'rplLikes'
-relatedPlayLists
-    :: RelatedPlayLists
-relatedPlayLists =
-    RelatedPlayLists
-    { _rplFavorites = Nothing
-    , _rplWatchHistory = Nothing
-    , _rplWatchLater = Nothing
-    , _rplUploads = Nothing
-    , _rplLikes = Nothing
-    }
-
--- | The ID of the playlist that contains the channel\"s favorite videos. Use
--- the playlistItems.insert and playlistItems.delete to add or remove items
--- from that list.
-rplFavorites :: Lens' RelatedPlayLists (Maybe Text)
-rplFavorites
-  = lens _rplFavorites (\ s a -> s{_rplFavorites = a})
-
--- | The ID of the playlist that contains the channel\"s watch history. Use
--- the playlistItems.insert and playlistItems.delete to add or remove items
--- from that list.
-rplWatchHistory :: Lens' RelatedPlayLists (Maybe Text)
-rplWatchHistory
-  = lens _rplWatchHistory
-      (\ s a -> s{_rplWatchHistory = a})
-
--- | The ID of the playlist that contains the channel\"s watch later
--- playlist. Use the playlistItems.insert and playlistItems.delete to add
--- or remove items from that list.
-rplWatchLater :: Lens' RelatedPlayLists (Maybe Text)
-rplWatchLater
-  = lens _rplWatchLater
-      (\ s a -> s{_rplWatchLater = a})
-
--- | The ID of the playlist that contains the channel\"s uploaded videos. Use
--- the videos.insert method to upload new videos and the videos.delete
--- method to delete previously uploaded videos.
-rplUploads :: Lens' RelatedPlayLists (Maybe Text)
-rplUploads
-  = lens _rplUploads (\ s a -> s{_rplUploads = a})
-
--- | The ID of the playlist that contains the channel\"s liked videos. Use
--- the playlistItems.insert and playlistItems.delete to add or remove items
--- from that list.
-rplLikes :: Lens' RelatedPlayLists (Maybe Text)
-rplLikes = lens _rplLikes (\ s a -> s{_rplLikes = a})
-
-instance FromJSON RelatedPlayLists where
-        parseJSON
-          = withObject "RelatedPlayLists"
-              (\ o ->
-                 RelatedPlayLists <$>
-                   (o .:? "favorites") <*> (o .:? "watchHistory") <*>
-                     (o .:? "watchLater")
-                     <*> (o .:? "uploads")
-                     <*> (o .:? "likes"))
-
-instance ToJSON RelatedPlayLists where
-        toJSON RelatedPlayLists{..}
-          = object
-              (catMaybes
-                 [("favorites" .=) <$> _rplFavorites,
-                  ("watchHistory" .=) <$> _rplWatchHistory,
-                  ("watchLater" .=) <$> _rplWatchLater,
-                  ("uploads" .=) <$> _rplUploads,
-                  ("likes" .=) <$> _rplLikes])
+                 [("countryRestriction" .=) <$>
+                    _vcdCountryRestriction,
+                  ("definition" .=) <$> _vcdDefinition,
+                  ("dimension" .=) <$> _vcdDimension,
+                  ("caption" .=) <$> _vcdCaption,
+                  ("regionRestriction" .=) <$> _vcdRegionRestriction,
+                  ("duration" .=) <$> _vcdDuration,
+                  ("contentRating" .=) <$> _vcdContentRating,
+                  ("licensedContent" .=) <$> _vcdLicensedContent])
 
 -- | Branding properties for images associated with the channel.
 --
@@ -2392,6 +2338,182 @@ instance ToJSON ImageSettings where
                   ("bannerTabletHdImageUrl" .=) <$>
                     _isBannerTabletHdImageURL])
 
+-- | Freebase topic information related to the video.
+--
+-- /See:/ 'videoTopicDetails' smart constructor.
+data VideoTopicDetails = VideoTopicDetails
+    { _vtdTopicIds         :: !(Maybe [Text])
+    , _vtdRelevantTopicIds :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VideoTopicDetails' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vtdTopicIds'
+--
+-- * 'vtdRelevantTopicIds'
+videoTopicDetails
+    :: VideoTopicDetails
+videoTopicDetails =
+    VideoTopicDetails
+    { _vtdTopicIds = Nothing
+    , _vtdRelevantTopicIds = Nothing
+    }
+
+-- | A list of Freebase topic IDs that are centrally associated with the
+-- video. These are topics that are centrally featured in the video, and it
+-- can be said that the video is mainly about each of these. You can
+-- retrieve information about each topic using the Freebase Topic API.
+vtdTopicIds :: Lens' VideoTopicDetails [Text]
+vtdTopicIds
+  = lens _vtdTopicIds (\ s a -> s{_vtdTopicIds = a}) .
+      _Default
+      . _Coerce
+
+-- | Similar to topic_id, except that these topics are merely relevant to the
+-- video. These are topics that may be mentioned in, or appear in the
+-- video. You can retrieve information about each topic using Freebase
+-- Topic API.
+vtdRelevantTopicIds :: Lens' VideoTopicDetails [Text]
+vtdRelevantTopicIds
+  = lens _vtdRelevantTopicIds
+      (\ s a -> s{_vtdRelevantTopicIds = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON VideoTopicDetails where
+        parseJSON
+          = withObject "VideoTopicDetails"
+              (\ o ->
+                 VideoTopicDetails <$>
+                   (o .:? "topicIds" .!= mempty) <*>
+                     (o .:? "relevantTopicIds" .!= mempty))
+
+instance ToJSON VideoTopicDetails where
+        toJSON VideoTopicDetails{..}
+          = object
+              (catMaybes
+                 [("topicIds" .=) <$> _vtdTopicIds,
+                  ("relevantTopicIds" .=) <$> _vtdRelevantTopicIds])
+
+-- | Information about a resource that received a comment.
+--
+-- /See:/ 'activityContentDetailsComment' smart constructor.
+newtype ActivityContentDetailsComment = ActivityContentDetailsComment
+    { _acdcResourceId :: Maybe ResourceId
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ActivityContentDetailsComment' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'acdcResourceId'
+activityContentDetailsComment
+    :: ActivityContentDetailsComment
+activityContentDetailsComment =
+    ActivityContentDetailsComment
+    { _acdcResourceId = Nothing
+    }
+
+-- | The resourceId object contains information that identifies the resource
+-- associated with the comment.
+acdcResourceId :: Lens' ActivityContentDetailsComment (Maybe ResourceId)
+acdcResourceId
+  = lens _acdcResourceId
+      (\ s a -> s{_acdcResourceId = a})
+
+instance FromJSON ActivityContentDetailsComment where
+        parseJSON
+          = withObject "ActivityContentDetailsComment"
+              (\ o ->
+                 ActivityContentDetailsComment <$>
+                   (o .:? "resourceId"))
+
+instance ToJSON ActivityContentDetailsComment where
+        toJSON ActivityContentDetailsComment{..}
+          = object
+              (catMaybes [("resourceId" .=) <$> _acdcResourceId])
+
+--
+-- /See:/ 'liveBroadcastStatus' smart constructor.
+data LiveBroadcastStatus = LiveBroadcastStatus
+    { _lbsLiveBroadcastPriority :: !(Maybe LiveBroadcastStatusLiveBroadcastPriority)
+    , _lbsRecordingStatus       :: !(Maybe LiveBroadcastStatusRecordingStatus)
+    , _lbsLifeCycleStatus       :: !(Maybe LiveBroadcastStatusLifeCycleStatus)
+    , _lbsPrivacyStatus         :: !(Maybe LiveBroadcastStatusPrivacyStatus)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LiveBroadcastStatus' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lbsLiveBroadcastPriority'
+--
+-- * 'lbsRecordingStatus'
+--
+-- * 'lbsLifeCycleStatus'
+--
+-- * 'lbsPrivacyStatus'
+liveBroadcastStatus
+    :: LiveBroadcastStatus
+liveBroadcastStatus =
+    LiveBroadcastStatus
+    { _lbsLiveBroadcastPriority = Nothing
+    , _lbsRecordingStatus = Nothing
+    , _lbsLifeCycleStatus = Nothing
+    , _lbsPrivacyStatus = Nothing
+    }
+
+-- | Priority of the live broadcast event (internal state).
+lbsLiveBroadcastPriority :: Lens' LiveBroadcastStatus (Maybe LiveBroadcastStatusLiveBroadcastPriority)
+lbsLiveBroadcastPriority
+  = lens _lbsLiveBroadcastPriority
+      (\ s a -> s{_lbsLiveBroadcastPriority = a})
+
+-- | The broadcast\'s recording status.
+lbsRecordingStatus :: Lens' LiveBroadcastStatus (Maybe LiveBroadcastStatusRecordingStatus)
+lbsRecordingStatus
+  = lens _lbsRecordingStatus
+      (\ s a -> s{_lbsRecordingStatus = a})
+
+-- | The broadcast\'s status. The status can be updated using the API\'s
+-- liveBroadcasts.transition method.
+lbsLifeCycleStatus :: Lens' LiveBroadcastStatus (Maybe LiveBroadcastStatusLifeCycleStatus)
+lbsLifeCycleStatus
+  = lens _lbsLifeCycleStatus
+      (\ s a -> s{_lbsLifeCycleStatus = a})
+
+-- | The broadcast\'s privacy status. Note that the broadcast represents
+-- exactly one YouTube video, so the privacy settings are identical to
+-- those supported for videos. In addition, you can set this field by
+-- modifying the broadcast resource or by setting the privacyStatus field
+-- of the corresponding video resource.
+lbsPrivacyStatus :: Lens' LiveBroadcastStatus (Maybe LiveBroadcastStatusPrivacyStatus)
+lbsPrivacyStatus
+  = lens _lbsPrivacyStatus
+      (\ s a -> s{_lbsPrivacyStatus = a})
+
+instance FromJSON LiveBroadcastStatus where
+        parseJSON
+          = withObject "LiveBroadcastStatus"
+              (\ o ->
+                 LiveBroadcastStatus <$>
+                   (o .:? "liveBroadcastPriority") <*>
+                     (o .:? "recordingStatus")
+                     <*> (o .:? "lifeCycleStatus")
+                     <*> (o .:? "privacyStatus"))
+
+instance ToJSON LiveBroadcastStatus where
+        toJSON LiveBroadcastStatus{..}
+          = object
+              (catMaybes
+                 [("liveBroadcastPriority" .=) <$>
+                    _lbsLiveBroadcastPriority,
+                  ("recordingStatus" .=) <$> _lbsRecordingStatus,
+                  ("lifeCycleStatus" .=) <$> _lbsLifeCycleStatus,
+                  ("privacyStatus" .=) <$> _lbsPrivacyStatus])
+
 -- | Information about the uploaded video.
 --
 -- /See:/ 'activityContentDetailsUpload' smart constructor.
@@ -2427,40 +2549,69 @@ instance ToJSON ActivityContentDetailsUpload where
           = object
               (catMaybes [("videoId" .=) <$> _acduVideoId])
 
+-- | Information about a new playlist item.
 --
--- /See:/ 'playListContentDetails' smart constructor.
-newtype PlayListContentDetails = PlayListContentDetails
-    { _plcdItemCount :: Maybe Word32
+-- /See:/ 'activityContentDetailsPlayListItem' smart constructor.
+data ActivityContentDetailsPlayListItem = ActivityContentDetailsPlayListItem
+    { _acdpliResourceId     :: !(Maybe ResourceId)
+    , _acdpliPlayListId     :: !(Maybe Text)
+    , _acdpliPlayListItemId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PlayListContentDetails' with the minimum fields required to make a request.
+-- | Creates a value of 'ActivityContentDetailsPlayListItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'plcdItemCount'
-playListContentDetails
-    :: PlayListContentDetails
-playListContentDetails =
-    PlayListContentDetails
-    { _plcdItemCount = Nothing
+-- * 'acdpliResourceId'
+--
+-- * 'acdpliPlayListId'
+--
+-- * 'acdpliPlayListItemId'
+activityContentDetailsPlayListItem
+    :: ActivityContentDetailsPlayListItem
+activityContentDetailsPlayListItem =
+    ActivityContentDetailsPlayListItem
+    { _acdpliResourceId = Nothing
+    , _acdpliPlayListId = Nothing
+    , _acdpliPlayListItemId = Nothing
     }
 
--- | The number of videos in the playlist.
-plcdItemCount :: Lens' PlayListContentDetails (Maybe Word32)
-plcdItemCount
-  = lens _plcdItemCount
-      (\ s a -> s{_plcdItemCount = a})
+-- | The resourceId object contains information about the resource that was
+-- added to the playlist.
+acdpliResourceId :: Lens' ActivityContentDetailsPlayListItem (Maybe ResourceId)
+acdpliResourceId
+  = lens _acdpliResourceId
+      (\ s a -> s{_acdpliResourceId = a})
 
-instance FromJSON PlayListContentDetails where
+-- | The value that YouTube uses to uniquely identify the playlist.
+acdpliPlayListId :: Lens' ActivityContentDetailsPlayListItem (Maybe Text)
+acdpliPlayListId
+  = lens _acdpliPlayListId
+      (\ s a -> s{_acdpliPlayListId = a})
+
+-- | ID of the item within the playlist.
+acdpliPlayListItemId :: Lens' ActivityContentDetailsPlayListItem (Maybe Text)
+acdpliPlayListItemId
+  = lens _acdpliPlayListItemId
+      (\ s a -> s{_acdpliPlayListItemId = a})
+
+instance FromJSON ActivityContentDetailsPlayListItem
+         where
         parseJSON
-          = withObject "PlayListContentDetails"
+          = withObject "ActivityContentDetailsPlayListItem"
               (\ o ->
-                 PlayListContentDetails <$> (o .:? "itemCount"))
+                 ActivityContentDetailsPlayListItem <$>
+                   (o .:? "resourceId") <*> (o .:? "playlistId") <*>
+                     (o .:? "playlistItemId"))
 
-instance ToJSON PlayListContentDetails where
-        toJSON PlayListContentDetails{..}
+instance ToJSON ActivityContentDetailsPlayListItem
+         where
+        toJSON ActivityContentDetailsPlayListItem{..}
           = object
-              (catMaybes [("itemCount" .=) <$> _plcdItemCount])
+              (catMaybes
+                 [("resourceId" .=) <$> _acdpliResourceId,
+                  ("playlistId" .=) <$> _acdpliPlayListId,
+                  ("playlistItemId" .=) <$> _acdpliPlayListItemId])
 
 -- | Details about a social network post.
 --
@@ -2583,44 +2734,6 @@ instance ToJSON ActivityContentDetailsSubscription
           = object
               (catMaybes [("resourceId" .=) <$> _aResourceId])
 
--- | Information about a resource that received a comment.
---
--- /See:/ 'activityContentDetailsComment' smart constructor.
-newtype ActivityContentDetailsComment = ActivityContentDetailsComment
-    { _acdcResourceId :: Maybe ResourceId
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ActivityContentDetailsComment' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'acdcResourceId'
-activityContentDetailsComment
-    :: ActivityContentDetailsComment
-activityContentDetailsComment =
-    ActivityContentDetailsComment
-    { _acdcResourceId = Nothing
-    }
-
--- | The resourceId object contains information that identifies the resource
--- associated with the comment.
-acdcResourceId :: Lens' ActivityContentDetailsComment (Maybe ResourceId)
-acdcResourceId
-  = lens _acdcResourceId
-      (\ s a -> s{_acdcResourceId = a})
-
-instance FromJSON ActivityContentDetailsComment where
-        parseJSON
-          = withObject "ActivityContentDetailsComment"
-              (\ o ->
-                 ActivityContentDetailsComment <$>
-                   (o .:? "resourceId"))
-
-instance ToJSON ActivityContentDetailsComment where
-        toJSON ActivityContentDetailsComment{..}
-          = object
-              (catMaybes [("resourceId" .=) <$> _acdcResourceId])
-
 -- | Information about a resource that received a positive (like) rating.
 --
 -- /See:/ 'activityContentDetailsLike' smart constructor.
@@ -2658,6 +2771,219 @@ instance ToJSON ActivityContentDetailsLike where
           = object
               (catMaybes [("resourceId" .=) <$> _acdlResourceId])
 
+--
+-- /See:/ 'playListContentDetails' smart constructor.
+newtype PlayListContentDetails = PlayListContentDetails
+    { _plcdItemCount :: Maybe Word32
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PlayListContentDetails' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'plcdItemCount'
+playListContentDetails
+    :: PlayListContentDetails
+playListContentDetails =
+    PlayListContentDetails
+    { _plcdItemCount = Nothing
+    }
+
+-- | The number of videos in the playlist.
+plcdItemCount :: Lens' PlayListContentDetails (Maybe Word32)
+plcdItemCount
+  = lens _plcdItemCount
+      (\ s a -> s{_plcdItemCount = a})
+
+instance FromJSON PlayListContentDetails where
+        parseJSON
+          = withObject "PlayListContentDetails"
+              (\ o ->
+                 PlayListContentDetails <$> (o .:? "itemCount"))
+
+instance ToJSON PlayListContentDetails where
+        toJSON PlayListContentDetails{..}
+          = object
+              (catMaybes [("itemCount" .=) <$> _plcdItemCount])
+
+-- | Paging details for lists of resources, including total number of items
+-- available and number of resources returned in a single page.
+--
+-- /See:/ 'pageInfo' smart constructor.
+data PageInfo = PageInfo
+    { _piResultsPerPage :: !(Maybe Int32)
+    , _piTotalResults   :: !(Maybe Int32)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PageInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'piResultsPerPage'
+--
+-- * 'piTotalResults'
+pageInfo
+    :: PageInfo
+pageInfo =
+    PageInfo
+    { _piResultsPerPage = Nothing
+    , _piTotalResults = Nothing
+    }
+
+-- | The number of results included in the API response.
+piResultsPerPage :: Lens' PageInfo (Maybe Int32)
+piResultsPerPage
+  = lens _piResultsPerPage
+      (\ s a -> s{_piResultsPerPage = a})
+
+-- | The total number of results in the result set.
+piTotalResults :: Lens' PageInfo (Maybe Int32)
+piTotalResults
+  = lens _piTotalResults
+      (\ s a -> s{_piTotalResults = a})
+
+instance FromJSON PageInfo where
+        parseJSON
+          = withObject "PageInfo"
+              (\ o ->
+                 PageInfo <$>
+                   (o .:? "resultsPerPage") <*> (o .:? "totalResults"))
+
+instance ToJSON PageInfo where
+        toJSON PageInfo{..}
+          = object
+              (catMaybes
+                 [("resultsPerPage" .=) <$> _piResultsPerPage,
+                  ("totalResults" .=) <$> _piTotalResults])
+
+-- | Basic details about a video category, such as its localized title.
+--
+-- /See:/ 'videoStatus' smart constructor.
+data VideoStatus = VideoStatus
+    { _vsFailureReason       :: !(Maybe VideoStatusFailureReason)
+    , _vsPublicStatsViewable :: !(Maybe Bool)
+    , _vsRejectionReason     :: !(Maybe VideoStatusRejectionReason)
+    , _vsPublishAt           :: !(Maybe DateTime')
+    , _vsUploadStatus        :: !(Maybe VideoStatusUploadStatus)
+    , _vsPrivacyStatus       :: !(Maybe VideoStatusPrivacyStatus)
+    , _vsEmbeddable          :: !(Maybe Bool)
+    , _vsLicense             :: !(Maybe VideoStatusLicense)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VideoStatus' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vsFailureReason'
+--
+-- * 'vsPublicStatsViewable'
+--
+-- * 'vsRejectionReason'
+--
+-- * 'vsPublishAt'
+--
+-- * 'vsUploadStatus'
+--
+-- * 'vsPrivacyStatus'
+--
+-- * 'vsEmbeddable'
+--
+-- * 'vsLicense'
+videoStatus
+    :: VideoStatus
+videoStatus =
+    VideoStatus
+    { _vsFailureReason = Nothing
+    , _vsPublicStatsViewable = Nothing
+    , _vsRejectionReason = Nothing
+    , _vsPublishAt = Nothing
+    , _vsUploadStatus = Nothing
+    , _vsPrivacyStatus = Nothing
+    , _vsEmbeddable = Nothing
+    , _vsLicense = Nothing
+    }
+
+-- | This value explains why a video failed to upload. This property is only
+-- present if the uploadStatus property indicates that the upload failed.
+vsFailureReason :: Lens' VideoStatus (Maybe VideoStatusFailureReason)
+vsFailureReason
+  = lens _vsFailureReason
+      (\ s a -> s{_vsFailureReason = a})
+
+-- | This value indicates if the extended video statistics on the watch page
+-- can be viewed by everyone. Note that the view count, likes, etc will
+-- still be visible if this is disabled.
+vsPublicStatsViewable :: Lens' VideoStatus (Maybe Bool)
+vsPublicStatsViewable
+  = lens _vsPublicStatsViewable
+      (\ s a -> s{_vsPublicStatsViewable = a})
+
+-- | This value explains why YouTube rejected an uploaded video. This
+-- property is only present if the uploadStatus property indicates that the
+-- upload was rejected.
+vsRejectionReason :: Lens' VideoStatus (Maybe VideoStatusRejectionReason)
+vsRejectionReason
+  = lens _vsRejectionReason
+      (\ s a -> s{_vsRejectionReason = a})
+
+-- | The date and time when the video is scheduled to publish. It can be set
+-- only if the privacy status of the video is private. The value is
+-- specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
+vsPublishAt :: Lens' VideoStatus (Maybe UTCTime)
+vsPublishAt
+  = lens _vsPublishAt (\ s a -> s{_vsPublishAt = a}) .
+      mapping _DateTime
+
+-- | The status of the uploaded video.
+vsUploadStatus :: Lens' VideoStatus (Maybe VideoStatusUploadStatus)
+vsUploadStatus
+  = lens _vsUploadStatus
+      (\ s a -> s{_vsUploadStatus = a})
+
+-- | The video\'s privacy status.
+vsPrivacyStatus :: Lens' VideoStatus (Maybe VideoStatusPrivacyStatus)
+vsPrivacyStatus
+  = lens _vsPrivacyStatus
+      (\ s a -> s{_vsPrivacyStatus = a})
+
+-- | This value indicates if the video can be embedded on another website.
+vsEmbeddable :: Lens' VideoStatus (Maybe Bool)
+vsEmbeddable
+  = lens _vsEmbeddable (\ s a -> s{_vsEmbeddable = a})
+
+-- | The video\'s license.
+vsLicense :: Lens' VideoStatus (Maybe VideoStatusLicense)
+vsLicense
+  = lens _vsLicense (\ s a -> s{_vsLicense = a})
+
+instance FromJSON VideoStatus where
+        parseJSON
+          = withObject "VideoStatus"
+              (\ o ->
+                 VideoStatus <$>
+                   (o .:? "failureReason") <*>
+                     (o .:? "publicStatsViewable")
+                     <*> (o .:? "rejectionReason")
+                     <*> (o .:? "publishAt")
+                     <*> (o .:? "uploadStatus")
+                     <*> (o .:? "privacyStatus")
+                     <*> (o .:? "embeddable")
+                     <*> (o .:? "license"))
+
+instance ToJSON VideoStatus where
+        toJSON VideoStatus{..}
+          = object
+              (catMaybes
+                 [("failureReason" .=) <$> _vsFailureReason,
+                  ("publicStatsViewable" .=) <$>
+                    _vsPublicStatsViewable,
+                  ("rejectionReason" .=) <$> _vsRejectionReason,
+                  ("publishAt" .=) <$> _vsPublishAt,
+                  ("uploadStatus" .=) <$> _vsUploadStatus,
+                  ("privacyStatus" .=) <$> _vsPrivacyStatus,
+                  ("embeddable" .=) <$> _vsEmbeddable,
+                  ("license" .=) <$> _vsLicense])
+
 -- | Describes original video file properties, including technical details
 -- about audio and video streams, but also metadata information like
 -- content length, digitization time, or geotagging information.
@@ -2669,7 +2995,7 @@ data VideoFileDetails = VideoFileDetails
     , _vfdRecordingLocation :: !(Maybe GeoPoint)
     , _vfdDurationMs        :: !(Maybe Word64)
     , _vfdFileSize          :: !(Maybe Word64)
-    , _vfdFileType          :: !(Maybe FileType)
+    , _vfdFileType          :: !(Maybe VideoFileDetailsFileType)
     , _vfdContainer         :: !(Maybe Text)
     , _vfdVideoStreams      :: !(Maybe [VideoFileDetailsVideoStream])
     , _vfdAudioStreams      :: !(Maybe [VideoFileDetailsAudioStream])
@@ -2753,7 +3079,7 @@ vfdFileSize
 -- | The uploaded file\'s type as detected by YouTube\'s video processing
 -- engine. Currently, YouTube only processes video files, but this field is
 -- present whether a video file or another type of file was uploaded.
-vfdFileType :: Lens' VideoFileDetails (Maybe FileType)
+vfdFileType :: Lens' VideoFileDetails (Maybe VideoFileDetailsFileType)
 vfdFileType
   = lens _vfdFileType (\ s a -> s{_vfdFileType = a})
 
@@ -2815,85 +3141,6 @@ instance ToJSON VideoFileDetails where
                   ("videoStreams" .=) <$> _vfdVideoStreams,
                   ("audioStreams" .=) <$> _vfdAudioStreams,
                   ("fileName" .=) <$> _vfdFileName])
-
---
--- /See:/ 'liveBroadcastStatus' smart constructor.
-data LiveBroadcastStatus = LiveBroadcastStatus
-    { _lbsLiveBroadcastPriority :: !(Maybe LiveBroadcastPriority)
-    , _lbsRecordingStatus       :: !(Maybe RecordingStatus)
-    , _lbsLifeCycleStatus       :: !(Maybe LifeCycleStatus)
-    , _lbsPrivacyStatus         :: !(Maybe LiveBroadcastStatusPrivacyStatus)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'LiveBroadcastStatus' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lbsLiveBroadcastPriority'
---
--- * 'lbsRecordingStatus'
---
--- * 'lbsLifeCycleStatus'
---
--- * 'lbsPrivacyStatus'
-liveBroadcastStatus
-    :: LiveBroadcastStatus
-liveBroadcastStatus =
-    LiveBroadcastStatus
-    { _lbsLiveBroadcastPriority = Nothing
-    , _lbsRecordingStatus = Nothing
-    , _lbsLifeCycleStatus = Nothing
-    , _lbsPrivacyStatus = Nothing
-    }
-
--- | Priority of the live broadcast event (internal state).
-lbsLiveBroadcastPriority :: Lens' LiveBroadcastStatus (Maybe LiveBroadcastPriority)
-lbsLiveBroadcastPriority
-  = lens _lbsLiveBroadcastPriority
-      (\ s a -> s{_lbsLiveBroadcastPriority = a})
-
--- | The broadcast\'s recording status.
-lbsRecordingStatus :: Lens' LiveBroadcastStatus (Maybe RecordingStatus)
-lbsRecordingStatus
-  = lens _lbsRecordingStatus
-      (\ s a -> s{_lbsRecordingStatus = a})
-
--- | The broadcast\'s status. The status can be updated using the API\'s
--- liveBroadcasts.transition method.
-lbsLifeCycleStatus :: Lens' LiveBroadcastStatus (Maybe LifeCycleStatus)
-lbsLifeCycleStatus
-  = lens _lbsLifeCycleStatus
-      (\ s a -> s{_lbsLifeCycleStatus = a})
-
--- | The broadcast\'s privacy status. Note that the broadcast represents
--- exactly one YouTube video, so the privacy settings are identical to
--- those supported for videos. In addition, you can set this field by
--- modifying the broadcast resource or by setting the privacyStatus field
--- of the corresponding video resource.
-lbsPrivacyStatus :: Lens' LiveBroadcastStatus (Maybe LiveBroadcastStatusPrivacyStatus)
-lbsPrivacyStatus
-  = lens _lbsPrivacyStatus
-      (\ s a -> s{_lbsPrivacyStatus = a})
-
-instance FromJSON LiveBroadcastStatus where
-        parseJSON
-          = withObject "LiveBroadcastStatus"
-              (\ o ->
-                 LiveBroadcastStatus <$>
-                   (o .:? "liveBroadcastPriority") <*>
-                     (o .:? "recordingStatus")
-                     <*> (o .:? "lifeCycleStatus")
-                     <*> (o .:? "privacyStatus"))
-
-instance ToJSON LiveBroadcastStatus where
-        toJSON LiveBroadcastStatus{..}
-          = object
-              (catMaybes
-                 [("liveBroadcastPriority" .=) <$>
-                    _lbsLiveBroadcastPriority,
-                  ("recordingStatus" .=) <$> _lbsRecordingStatus,
-                  ("lifeCycleStatus" .=) <$> _lbsLifeCycleStatus,
-                  ("privacyStatus" .=) <$> _lbsPrivacyStatus])
 
 --
 -- /See:/ 'thumbnailSetResponse' smart constructor.
@@ -2974,288 +3221,6 @@ instance ToJSON ThumbnailSetResponse where
                   ("items" .=) <$> _tsrItems,
                   ("visitorId" .=) <$> _tsrVisitorId,
                   ("eventId" .=) <$> _tsrEventId])
-
--- | Information about a new playlist item.
---
--- /See:/ 'activityContentDetailsPlayListItem' smart constructor.
-data ActivityContentDetailsPlayListItem = ActivityContentDetailsPlayListItem
-    { _acdpliResourceId     :: !(Maybe ResourceId)
-    , _acdpliPlayListId     :: !(Maybe Text)
-    , _acdpliPlayListItemId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ActivityContentDetailsPlayListItem' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'acdpliResourceId'
---
--- * 'acdpliPlayListId'
---
--- * 'acdpliPlayListItemId'
-activityContentDetailsPlayListItem
-    :: ActivityContentDetailsPlayListItem
-activityContentDetailsPlayListItem =
-    ActivityContentDetailsPlayListItem
-    { _acdpliResourceId = Nothing
-    , _acdpliPlayListId = Nothing
-    , _acdpliPlayListItemId = Nothing
-    }
-
--- | The resourceId object contains information about the resource that was
--- added to the playlist.
-acdpliResourceId :: Lens' ActivityContentDetailsPlayListItem (Maybe ResourceId)
-acdpliResourceId
-  = lens _acdpliResourceId
-      (\ s a -> s{_acdpliResourceId = a})
-
--- | The value that YouTube uses to uniquely identify the playlist.
-acdpliPlayListId :: Lens' ActivityContentDetailsPlayListItem (Maybe Text)
-acdpliPlayListId
-  = lens _acdpliPlayListId
-      (\ s a -> s{_acdpliPlayListId = a})
-
--- | ID of the item within the playlist.
-acdpliPlayListItemId :: Lens' ActivityContentDetailsPlayListItem (Maybe Text)
-acdpliPlayListItemId
-  = lens _acdpliPlayListItemId
-      (\ s a -> s{_acdpliPlayListItemId = a})
-
-instance FromJSON ActivityContentDetailsPlayListItem
-         where
-        parseJSON
-          = withObject "ActivityContentDetailsPlayListItem"
-              (\ o ->
-                 ActivityContentDetailsPlayListItem <$>
-                   (o .:? "resourceId") <*> (o .:? "playlistId") <*>
-                     (o .:? "playlistItemId"))
-
-instance ToJSON ActivityContentDetailsPlayListItem
-         where
-        toJSON ActivityContentDetailsPlayListItem{..}
-          = object
-              (catMaybes
-                 [("resourceId" .=) <$> _acdpliResourceId,
-                  ("playlistId" .=) <$> _acdpliPlayListId,
-                  ("playlistItemId" .=) <$> _acdpliPlayListItemId])
-
--- | Basic details about a video category, such as its localized title.
---
--- /See:/ 'videoStatus' smart constructor.
-data VideoStatus = VideoStatus
-    { _vsFailureReason       :: !(Maybe FailureReason)
-    , _vsPublicStatsViewable :: !(Maybe Bool)
-    , _vsRejectionReason     :: !(Maybe RejectionReason)
-    , _vsPublishAt           :: !(Maybe DateTime')
-    , _vsUploadStatus        :: !(Maybe UploadStatus)
-    , _vsPrivacyStatus       :: !(Maybe VideoStatusPrivacyStatus)
-    , _vsEmbeddable          :: !(Maybe Bool)
-    , _vsLicense             :: !(Maybe License)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'VideoStatus' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'vsFailureReason'
---
--- * 'vsPublicStatsViewable'
---
--- * 'vsRejectionReason'
---
--- * 'vsPublishAt'
---
--- * 'vsUploadStatus'
---
--- * 'vsPrivacyStatus'
---
--- * 'vsEmbeddable'
---
--- * 'vsLicense'
-videoStatus
-    :: VideoStatus
-videoStatus =
-    VideoStatus
-    { _vsFailureReason = Nothing
-    , _vsPublicStatsViewable = Nothing
-    , _vsRejectionReason = Nothing
-    , _vsPublishAt = Nothing
-    , _vsUploadStatus = Nothing
-    , _vsPrivacyStatus = Nothing
-    , _vsEmbeddable = Nothing
-    , _vsLicense = Nothing
-    }
-
--- | This value explains why a video failed to upload. This property is only
--- present if the uploadStatus property indicates that the upload failed.
-vsFailureReason :: Lens' VideoStatus (Maybe FailureReason)
-vsFailureReason
-  = lens _vsFailureReason
-      (\ s a -> s{_vsFailureReason = a})
-
--- | This value indicates if the extended video statistics on the watch page
--- can be viewed by everyone. Note that the view count, likes, etc will
--- still be visible if this is disabled.
-vsPublicStatsViewable :: Lens' VideoStatus (Maybe Bool)
-vsPublicStatsViewable
-  = lens _vsPublicStatsViewable
-      (\ s a -> s{_vsPublicStatsViewable = a})
-
--- | This value explains why YouTube rejected an uploaded video. This
--- property is only present if the uploadStatus property indicates that the
--- upload was rejected.
-vsRejectionReason :: Lens' VideoStatus (Maybe RejectionReason)
-vsRejectionReason
-  = lens _vsRejectionReason
-      (\ s a -> s{_vsRejectionReason = a})
-
--- | The date and time when the video is scheduled to publish. It can be set
--- only if the privacy status of the video is private. The value is
--- specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
-vsPublishAt :: Lens' VideoStatus (Maybe UTCTime)
-vsPublishAt
-  = lens _vsPublishAt (\ s a -> s{_vsPublishAt = a}) .
-      mapping _DateTime
-
--- | The status of the uploaded video.
-vsUploadStatus :: Lens' VideoStatus (Maybe UploadStatus)
-vsUploadStatus
-  = lens _vsUploadStatus
-      (\ s a -> s{_vsUploadStatus = a})
-
--- | The video\'s privacy status.
-vsPrivacyStatus :: Lens' VideoStatus (Maybe VideoStatusPrivacyStatus)
-vsPrivacyStatus
-  = lens _vsPrivacyStatus
-      (\ s a -> s{_vsPrivacyStatus = a})
-
--- | This value indicates if the video can be embedded on another website.
-vsEmbeddable :: Lens' VideoStatus (Maybe Bool)
-vsEmbeddable
-  = lens _vsEmbeddable (\ s a -> s{_vsEmbeddable = a})
-
--- | The video\'s license.
-vsLicense :: Lens' VideoStatus (Maybe License)
-vsLicense
-  = lens _vsLicense (\ s a -> s{_vsLicense = a})
-
-instance FromJSON VideoStatus where
-        parseJSON
-          = withObject "VideoStatus"
-              (\ o ->
-                 VideoStatus <$>
-                   (o .:? "failureReason") <*>
-                     (o .:? "publicStatsViewable")
-                     <*> (o .:? "rejectionReason")
-                     <*> (o .:? "publishAt")
-                     <*> (o .:? "uploadStatus")
-                     <*> (o .:? "privacyStatus")
-                     <*> (o .:? "embeddable")
-                     <*> (o .:? "license"))
-
-instance ToJSON VideoStatus where
-        toJSON VideoStatus{..}
-          = object
-              (catMaybes
-                 [("failureReason" .=) <$> _vsFailureReason,
-                  ("publicStatsViewable" .=) <$>
-                    _vsPublicStatsViewable,
-                  ("rejectionReason" .=) <$> _vsRejectionReason,
-                  ("publishAt" .=) <$> _vsPublishAt,
-                  ("uploadStatus" .=) <$> _vsUploadStatus,
-                  ("privacyStatus" .=) <$> _vsPrivacyStatus,
-                  ("embeddable" .=) <$> _vsEmbeddable,
-                  ("license" .=) <$> _vsLicense])
-
--- | Paging details for lists of resources, including total number of items
--- available and number of resources returned in a single page.
---
--- /See:/ 'pageInfo' smart constructor.
-data PageInfo = PageInfo
-    { _piResultsPerPage :: !(Maybe Int32)
-    , _piTotalResults   :: !(Maybe Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PageInfo' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'piResultsPerPage'
---
--- * 'piTotalResults'
-pageInfo
-    :: PageInfo
-pageInfo =
-    PageInfo
-    { _piResultsPerPage = Nothing
-    , _piTotalResults = Nothing
-    }
-
--- | The number of results included in the API response.
-piResultsPerPage :: Lens' PageInfo (Maybe Int32)
-piResultsPerPage
-  = lens _piResultsPerPage
-      (\ s a -> s{_piResultsPerPage = a})
-
--- | The total number of results in the result set.
-piTotalResults :: Lens' PageInfo (Maybe Int32)
-piTotalResults
-  = lens _piTotalResults
-      (\ s a -> s{_piTotalResults = a})
-
-instance FromJSON PageInfo where
-        parseJSON
-          = withObject "PageInfo"
-              (\ o ->
-                 PageInfo <$>
-                   (o .:? "resultsPerPage") <*> (o .:? "totalResults"))
-
-instance ToJSON PageInfo where
-        toJSON PageInfo{..}
-          = object
-              (catMaybes
-                 [("resultsPerPage" .=) <$> _piResultsPerPage,
-                  ("totalResults" .=) <$> _piTotalResults])
-
--- | Details about a resource which was added to a channel.
---
--- /See:/ 'activityContentDetailsChannelItem' smart constructor.
-newtype ActivityContentDetailsChannelItem = ActivityContentDetailsChannelItem
-    { _acdciResourceId :: Maybe ResourceId
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ActivityContentDetailsChannelItem' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'acdciResourceId'
-activityContentDetailsChannelItem
-    :: ActivityContentDetailsChannelItem
-activityContentDetailsChannelItem =
-    ActivityContentDetailsChannelItem
-    { _acdciResourceId = Nothing
-    }
-
--- | The resourceId object contains information that identifies the resource
--- that was added to the channel.
-acdciResourceId :: Lens' ActivityContentDetailsChannelItem (Maybe ResourceId)
-acdciResourceId
-  = lens _acdciResourceId
-      (\ s a -> s{_acdciResourceId = a})
-
-instance FromJSON ActivityContentDetailsChannelItem
-         where
-        parseJSON
-          = withObject "ActivityContentDetailsChannelItem"
-              (\ o ->
-                 ActivityContentDetailsChannelItem <$>
-                   (o .:? "resourceId"))
-
-instance ToJSON ActivityContentDetailsChannelItem
-         where
-        toJSON ActivityContentDetailsChannelItem{..}
-          = object
-              (catMaybes [("resourceId" .=) <$> _acdciResourceId])
 
 --
 -- /See:/ 'liveBroadcastListResponse' smart constructor.
@@ -3387,157 +3352,11 @@ instance ToJSON LiveBroadcastListResponse where
                   ("eventId" .=) <$> _lblrEventId,
                   ("prevPageToken" .=) <$> _lblrPrevPageToken])
 
--- | Describes processing status and progress and availability of some other
--- Video resource parts.
---
--- /See:/ 'videoProcessingDetails' smart constructor.
-data VideoProcessingDetails = VideoProcessingDetails
-    { _vpdProcessingFailureReason       :: !(Maybe ProcessingFailureReason)
-    , _vpdProcessingIssuesAvailability  :: !(Maybe Text)
-    , _vpdProcessingProgress            :: !(Maybe VideoProcessingDetailsProcessingProgress)
-    , _vpdThumbnailsAvailability        :: !(Maybe Text)
-    , _vpdTagSuggestionsAvailability    :: !(Maybe Text)
-    , _vpdProcessingStatus              :: !(Maybe ProcessingStatus)
-    , _vpdEditorSuggestionsAvailability :: !(Maybe Text)
-    , _vpdFileDetailsAvailability       :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'VideoProcessingDetails' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'vpdProcessingFailureReason'
---
--- * 'vpdProcessingIssuesAvailability'
---
--- * 'vpdProcessingProgress'
---
--- * 'vpdThumbnailsAvailability'
---
--- * 'vpdTagSuggestionsAvailability'
---
--- * 'vpdProcessingStatus'
---
--- * 'vpdEditorSuggestionsAvailability'
---
--- * 'vpdFileDetailsAvailability'
-videoProcessingDetails
-    :: VideoProcessingDetails
-videoProcessingDetails =
-    VideoProcessingDetails
-    { _vpdProcessingFailureReason = Nothing
-    , _vpdProcessingIssuesAvailability = Nothing
-    , _vpdProcessingProgress = Nothing
-    , _vpdThumbnailsAvailability = Nothing
-    , _vpdTagSuggestionsAvailability = Nothing
-    , _vpdProcessingStatus = Nothing
-    , _vpdEditorSuggestionsAvailability = Nothing
-    , _vpdFileDetailsAvailability = Nothing
-    }
-
--- | The reason that YouTube failed to process the video. This property will
--- only have a value if the processingStatus property\'s value is failed.
-vpdProcessingFailureReason :: Lens' VideoProcessingDetails (Maybe ProcessingFailureReason)
-vpdProcessingFailureReason
-  = lens _vpdProcessingFailureReason
-      (\ s a -> s{_vpdProcessingFailureReason = a})
-
--- | This value indicates whether the video processing engine has generated
--- suggestions that might improve YouTube\'s ability to process the the
--- video, warnings that explain video processing problems, or errors that
--- cause video processing problems. You can retrieve these suggestions by
--- requesting the suggestions part in your videos.list() request.
-vpdProcessingIssuesAvailability :: Lens' VideoProcessingDetails (Maybe Text)
-vpdProcessingIssuesAvailability
-  = lens _vpdProcessingIssuesAvailability
-      (\ s a -> s{_vpdProcessingIssuesAvailability = a})
-
--- | The processingProgress object contains information about the progress
--- YouTube has made in processing the video. The values are really only
--- relevant if the video\'s processing status is processing.
-vpdProcessingProgress :: Lens' VideoProcessingDetails (Maybe VideoProcessingDetailsProcessingProgress)
-vpdProcessingProgress
-  = lens _vpdProcessingProgress
-      (\ s a -> s{_vpdProcessingProgress = a})
-
--- | This value indicates whether thumbnail images have been generated for
--- the video.
-vpdThumbnailsAvailability :: Lens' VideoProcessingDetails (Maybe Text)
-vpdThumbnailsAvailability
-  = lens _vpdThumbnailsAvailability
-      (\ s a -> s{_vpdThumbnailsAvailability = a})
-
--- | This value indicates whether keyword (tag) suggestions are available for
--- the video. Tags can be added to a video\'s metadata to make it easier
--- for other users to find the video. You can retrieve these suggestions by
--- requesting the suggestions part in your videos.list() request.
-vpdTagSuggestionsAvailability :: Lens' VideoProcessingDetails (Maybe Text)
-vpdTagSuggestionsAvailability
-  = lens _vpdTagSuggestionsAvailability
-      (\ s a -> s{_vpdTagSuggestionsAvailability = a})
-
--- | The video\'s processing status. This value indicates whether YouTube was
--- able to process the video or if the video is still being processed.
-vpdProcessingStatus :: Lens' VideoProcessingDetails (Maybe ProcessingStatus)
-vpdProcessingStatus
-  = lens _vpdProcessingStatus
-      (\ s a -> s{_vpdProcessingStatus = a})
-
--- | This value indicates whether video editing suggestions, which might
--- improve video quality or the playback experience, are available for the
--- video. You can retrieve these suggestions by requesting the suggestions
--- part in your videos.list() request.
-vpdEditorSuggestionsAvailability :: Lens' VideoProcessingDetails (Maybe Text)
-vpdEditorSuggestionsAvailability
-  = lens _vpdEditorSuggestionsAvailability
-      (\ s a -> s{_vpdEditorSuggestionsAvailability = a})
-
--- | This value indicates whether file details are available for the uploaded
--- video. You can retrieve a video\'s file details by requesting the
--- fileDetails part in your videos.list() request.
-vpdFileDetailsAvailability :: Lens' VideoProcessingDetails (Maybe Text)
-vpdFileDetailsAvailability
-  = lens _vpdFileDetailsAvailability
-      (\ s a -> s{_vpdFileDetailsAvailability = a})
-
-instance FromJSON VideoProcessingDetails where
-        parseJSON
-          = withObject "VideoProcessingDetails"
-              (\ o ->
-                 VideoProcessingDetails <$>
-                   (o .:? "processingFailureReason") <*>
-                     (o .:? "processingIssuesAvailability")
-                     <*> (o .:? "processingProgress")
-                     <*> (o .:? "thumbnailsAvailability")
-                     <*> (o .:? "tagSuggestionsAvailability")
-                     <*> (o .:? "processingStatus")
-                     <*> (o .:? "editorSuggestionsAvailability")
-                     <*> (o .:? "fileDetailsAvailability"))
-
-instance ToJSON VideoProcessingDetails where
-        toJSON VideoProcessingDetails{..}
-          = object
-              (catMaybes
-                 [("processingFailureReason" .=) <$>
-                    _vpdProcessingFailureReason,
-                  ("processingIssuesAvailability" .=) <$>
-                    _vpdProcessingIssuesAvailability,
-                  ("processingProgress" .=) <$> _vpdProcessingProgress,
-                  ("thumbnailsAvailability" .=) <$>
-                    _vpdThumbnailsAvailability,
-                  ("tagSuggestionsAvailability" .=) <$>
-                    _vpdTagSuggestionsAvailability,
-                  ("processingStatus" .=) <$> _vpdProcessingStatus,
-                  ("editorSuggestionsAvailability" .=) <$>
-                    _vpdEditorSuggestionsAvailability,
-                  ("fileDetailsAvailability" .=) <$>
-                    _vpdFileDetailsAvailability])
-
 -- | Details about the content of a channel.
 --
 -- /See:/ 'channelContentDetails' smart constructor.
 data ChannelContentDetails = ChannelContentDetails
-    { _ccdRelatedPlayLists :: !(Maybe RelatedPlayLists)
+    { _ccdRelatedPlayLists :: !(Maybe ChannelContentDetailsRelatedPlayLists)
     , _ccdGooglePlusUserId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3556,7 +3375,7 @@ channelContentDetails =
     , _ccdGooglePlusUserId = Nothing
     }
 
-ccdRelatedPlayLists :: Lens' ChannelContentDetails (Maybe RelatedPlayLists)
+ccdRelatedPlayLists :: Lens' ChannelContentDetails (Maybe ChannelContentDetailsRelatedPlayLists)
 ccdRelatedPlayLists
   = lens _ccdRelatedPlayLists
       (\ s a -> s{_ccdRelatedPlayLists = a})
@@ -3583,130 +3402,45 @@ instance ToJSON ChannelContentDetails where
                  [("relatedPlaylists" .=) <$> _ccdRelatedPlayLists,
                   ("googlePlusUserId" .=) <$> _ccdGooglePlusUserId])
 
--- | Basic details about an activity, including title, description,
--- thumbnails, activity type and group.
+-- | Details about a resource which was added to a channel.
 --
--- /See:/ 'activitySnippet' smart constructor.
-data ActivitySnippet = ActivitySnippet
-    { _asPublishedAt  :: !(Maybe DateTime')
-    , _asChannelTitle :: !(Maybe Text)
-    , _asChannelId    :: !(Maybe Text)
-    , _asThumbnails   :: !(Maybe ThumbnailDetails)
-    , _asGroupId      :: !(Maybe Text)
-    , _asTitle        :: !(Maybe Text)
-    , _asType         :: !(Maybe ActivitySnippetType)
-    , _asDescription  :: !(Maybe Text)
+-- /See:/ 'activityContentDetailsChannelItem' smart constructor.
+newtype ActivityContentDetailsChannelItem = ActivityContentDetailsChannelItem
+    { _acdciResourceId :: Maybe ResourceId
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ActivitySnippet' with the minimum fields required to make a request.
+-- | Creates a value of 'ActivityContentDetailsChannelItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'asPublishedAt'
---
--- * 'asChannelTitle'
---
--- * 'asChannelId'
---
--- * 'asThumbnails'
---
--- * 'asGroupId'
---
--- * 'asTitle'
---
--- * 'asType'
---
--- * 'asDescription'
-activitySnippet
-    :: ActivitySnippet
-activitySnippet =
-    ActivitySnippet
-    { _asPublishedAt = Nothing
-    , _asChannelTitle = Nothing
-    , _asChannelId = Nothing
-    , _asThumbnails = Nothing
-    , _asGroupId = Nothing
-    , _asTitle = Nothing
-    , _asType = Nothing
-    , _asDescription = Nothing
+-- * 'acdciResourceId'
+activityContentDetailsChannelItem
+    :: ActivityContentDetailsChannelItem
+activityContentDetailsChannelItem =
+    ActivityContentDetailsChannelItem
+    { _acdciResourceId = Nothing
     }
 
--- | The date and time that the video was uploaded. The value is specified in
--- ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
-asPublishedAt :: Lens' ActivitySnippet (Maybe UTCTime)
-asPublishedAt
-  = lens _asPublishedAt
-      (\ s a -> s{_asPublishedAt = a})
-      . mapping _DateTime
+-- | The resourceId object contains information that identifies the resource
+-- that was added to the channel.
+acdciResourceId :: Lens' ActivityContentDetailsChannelItem (Maybe ResourceId)
+acdciResourceId
+  = lens _acdciResourceId
+      (\ s a -> s{_acdciResourceId = a})
 
--- | Channel title for the channel responsible for this activity
-asChannelTitle :: Lens' ActivitySnippet (Maybe Text)
-asChannelTitle
-  = lens _asChannelTitle
-      (\ s a -> s{_asChannelTitle = a})
-
--- | The ID that YouTube uses to uniquely identify the channel associated
--- with the activity.
-asChannelId :: Lens' ActivitySnippet (Maybe Text)
-asChannelId
-  = lens _asChannelId (\ s a -> s{_asChannelId = a})
-
--- | A map of thumbnail images associated with the resource that is primarily
--- associated with the activity. For each object in the map, the key is the
--- name of the thumbnail image, and the value is an object that contains
--- other information about the thumbnail.
-asThumbnails :: Lens' ActivitySnippet (Maybe ThumbnailDetails)
-asThumbnails
-  = lens _asThumbnails (\ s a -> s{_asThumbnails = a})
-
--- | The group ID associated with the activity. A group ID identifies user
--- events that are associated with the same user and resource. For example,
--- if a user rates a video and marks the same video as a favorite, the
--- entries for those events would have the same group ID in the user\'s
--- activity feed. In your user interface, you can avoid repetition by
--- grouping events with the same groupId value.
-asGroupId :: Lens' ActivitySnippet (Maybe Text)
-asGroupId
-  = lens _asGroupId (\ s a -> s{_asGroupId = a})
-
--- | The title of the resource primarily associated with the activity.
-asTitle :: Lens' ActivitySnippet (Maybe Text)
-asTitle = lens _asTitle (\ s a -> s{_asTitle = a})
-
--- | The type of activity that the resource describes.
-asType :: Lens' ActivitySnippet (Maybe ActivitySnippetType)
-asType = lens _asType (\ s a -> s{_asType = a})
-
--- | The description of the resource primarily associated with the activity.
-asDescription :: Lens' ActivitySnippet (Maybe Text)
-asDescription
-  = lens _asDescription
-      (\ s a -> s{_asDescription = a})
-
-instance FromJSON ActivitySnippet where
+instance FromJSON ActivityContentDetailsChannelItem
+         where
         parseJSON
-          = withObject "ActivitySnippet"
+          = withObject "ActivityContentDetailsChannelItem"
               (\ o ->
-                 ActivitySnippet <$>
-                   (o .:? "publishedAt") <*> (o .:? "channelTitle") <*>
-                     (o .:? "channelId")
-                     <*> (o .:? "thumbnails")
-                     <*> (o .:? "groupId")
-                     <*> (o .:? "title")
-                     <*> (o .:? "type")
-                     <*> (o .:? "description"))
+                 ActivityContentDetailsChannelItem <$>
+                   (o .:? "resourceId"))
 
-instance ToJSON ActivitySnippet where
-        toJSON ActivitySnippet{..}
+instance ToJSON ActivityContentDetailsChannelItem
+         where
+        toJSON ActivityContentDetailsChannelItem{..}
           = object
-              (catMaybes
-                 [("publishedAt" .=) <$> _asPublishedAt,
-                  ("channelTitle" .=) <$> _asChannelTitle,
-                  ("channelId" .=) <$> _asChannelId,
-                  ("thumbnails" .=) <$> _asThumbnails,
-                  ("groupId" .=) <$> _asGroupId,
-                  ("title" .=) <$> _asTitle, ("type" .=) <$> _asType,
-                  ("description" .=) <$> _asDescription])
+              (catMaybes [("resourceId" .=) <$> _acdciResourceId])
 
 --
 -- /See:/ 'videoListResponse' smart constructor.
@@ -3835,6 +3569,40 @@ instance ToJSON VideoListResponse where
                   ("eventId" .=) <$> _vlrEventId,
                   ("prevPageToken" .=) <$> _vlrPrevPageToken])
 
+-- | Details about monetization of a YouTube Video.
+--
+-- /See:/ 'videoMonetizationDetails' smart constructor.
+newtype VideoMonetizationDetails = VideoMonetizationDetails
+    { _vmdAccess :: Maybe AccessPolicy
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VideoMonetizationDetails' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vmdAccess'
+videoMonetizationDetails
+    :: VideoMonetizationDetails
+videoMonetizationDetails =
+    VideoMonetizationDetails
+    { _vmdAccess = Nothing
+    }
+
+-- | The value of access indicates whether the video can be monetized or not.
+vmdAccess :: Lens' VideoMonetizationDetails (Maybe AccessPolicy)
+vmdAccess
+  = lens _vmdAccess (\ s a -> s{_vmdAccess = a})
+
+instance FromJSON VideoMonetizationDetails where
+        parseJSON
+          = withObject "VideoMonetizationDetails"
+              (\ o ->
+                 VideoMonetizationDetails <$> (o .:? "access"))
+
+instance ToJSON VideoMonetizationDetails where
+        toJSON VideoMonetizationDetails{..}
+          = object (catMaybes [("access" .=) <$> _vmdAccess])
+
 -- | A single tag suggestion with it\'s relevance information.
 --
 -- /See:/ 'videoSuggestionsTagSuggestion' smart constructor.
@@ -3889,103 +3657,130 @@ instance ToJSON VideoSuggestionsTagSuggestion where
                  [("tag" .=) <$> _vstsTag,
                   ("categoryRestricts" .=) <$> _vstsCategoryRestricts])
 
--- | Basic details about a comment thread.
+-- | Basic details about an activity, including title, description,
+-- thumbnails, activity type and group.
 --
--- /See:/ 'commentThreadSnippet' smart constructor.
-data CommentThreadSnippet = CommentThreadSnippet
-    { _ctsIsPublic        :: !(Maybe Bool)
-    , _ctsChannelId       :: !(Maybe Text)
-    , _ctsCanReply        :: !(Maybe Bool)
-    , _ctsVideoId         :: !(Maybe Text)
-    , _ctsTotalReplyCount :: !(Maybe Word32)
-    , _ctsTopLevelComment :: !(Maybe Comment)
+-- /See:/ 'activitySnippet' smart constructor.
+data ActivitySnippet = ActivitySnippet
+    { _asPublishedAt  :: !(Maybe DateTime')
+    , _asChannelTitle :: !(Maybe Text)
+    , _asChannelId    :: !(Maybe Text)
+    , _asThumbnails   :: !(Maybe ThumbnailDetails)
+    , _asGroupId      :: !(Maybe Text)
+    , _asTitle        :: !(Maybe Text)
+    , _asType         :: !(Maybe ActivitySnippetType)
+    , _asDescription  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CommentThreadSnippet' with the minimum fields required to make a request.
+-- | Creates a value of 'ActivitySnippet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ctsIsPublic'
+-- * 'asPublishedAt'
 --
--- * 'ctsChannelId'
+-- * 'asChannelTitle'
 --
--- * 'ctsCanReply'
+-- * 'asChannelId'
 --
--- * 'ctsVideoId'
+-- * 'asThumbnails'
 --
--- * 'ctsTotalReplyCount'
+-- * 'asGroupId'
 --
--- * 'ctsTopLevelComment'
-commentThreadSnippet
-    :: CommentThreadSnippet
-commentThreadSnippet =
-    CommentThreadSnippet
-    { _ctsIsPublic = Nothing
-    , _ctsChannelId = Nothing
-    , _ctsCanReply = Nothing
-    , _ctsVideoId = Nothing
-    , _ctsTotalReplyCount = Nothing
-    , _ctsTopLevelComment = Nothing
+-- * 'asTitle'
+--
+-- * 'asType'
+--
+-- * 'asDescription'
+activitySnippet
+    :: ActivitySnippet
+activitySnippet =
+    ActivitySnippet
+    { _asPublishedAt = Nothing
+    , _asChannelTitle = Nothing
+    , _asChannelId = Nothing
+    , _asThumbnails = Nothing
+    , _asGroupId = Nothing
+    , _asTitle = Nothing
+    , _asType = Nothing
+    , _asDescription = Nothing
     }
 
--- | Whether the thread (and therefore all its comments) is visible to all
--- YouTube users.
-ctsIsPublic :: Lens' CommentThreadSnippet (Maybe Bool)
-ctsIsPublic
-  = lens _ctsIsPublic (\ s a -> s{_ctsIsPublic = a})
+-- | The date and time that the video was uploaded. The value is specified in
+-- ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
+asPublishedAt :: Lens' ActivitySnippet (Maybe UTCTime)
+asPublishedAt
+  = lens _asPublishedAt
+      (\ s a -> s{_asPublishedAt = a})
+      . mapping _DateTime
 
--- | The YouTube channel the comments in the thread refer to or the channel
--- with the video the comments refer to. If video_id isn\'t set the
--- comments refer to the channel itself.
-ctsChannelId :: Lens' CommentThreadSnippet (Maybe Text)
-ctsChannelId
-  = lens _ctsChannelId (\ s a -> s{_ctsChannelId = a})
+-- | Channel title for the channel responsible for this activity
+asChannelTitle :: Lens' ActivitySnippet (Maybe Text)
+asChannelTitle
+  = lens _asChannelTitle
+      (\ s a -> s{_asChannelTitle = a})
 
--- | Whether the current viewer of the thread can reply to it. This is viewer
--- specific - other viewers may see a different value for this field.
-ctsCanReply :: Lens' CommentThreadSnippet (Maybe Bool)
-ctsCanReply
-  = lens _ctsCanReply (\ s a -> s{_ctsCanReply = a})
+-- | The ID that YouTube uses to uniquely identify the channel associated
+-- with the activity.
+asChannelId :: Lens' ActivitySnippet (Maybe Text)
+asChannelId
+  = lens _asChannelId (\ s a -> s{_asChannelId = a})
 
--- | The ID of the video the comments refer to, if any. No video_id implies a
--- channel discussion comment.
-ctsVideoId :: Lens' CommentThreadSnippet (Maybe Text)
-ctsVideoId
-  = lens _ctsVideoId (\ s a -> s{_ctsVideoId = a})
+-- | A map of thumbnail images associated with the resource that is primarily
+-- associated with the activity. For each object in the map, the key is the
+-- name of the thumbnail image, and the value is an object that contains
+-- other information about the thumbnail.
+asThumbnails :: Lens' ActivitySnippet (Maybe ThumbnailDetails)
+asThumbnails
+  = lens _asThumbnails (\ s a -> s{_asThumbnails = a})
 
--- | The total number of replies (not including the top level comment).
-ctsTotalReplyCount :: Lens' CommentThreadSnippet (Maybe Word32)
-ctsTotalReplyCount
-  = lens _ctsTotalReplyCount
-      (\ s a -> s{_ctsTotalReplyCount = a})
+-- | The group ID associated with the activity. A group ID identifies user
+-- events that are associated with the same user and resource. For example,
+-- if a user rates a video and marks the same video as a favorite, the
+-- entries for those events would have the same group ID in the user\'s
+-- activity feed. In your user interface, you can avoid repetition by
+-- grouping events with the same groupId value.
+asGroupId :: Lens' ActivitySnippet (Maybe Text)
+asGroupId
+  = lens _asGroupId (\ s a -> s{_asGroupId = a})
 
--- | The top level comment of this thread.
-ctsTopLevelComment :: Lens' CommentThreadSnippet (Maybe Comment)
-ctsTopLevelComment
-  = lens _ctsTopLevelComment
-      (\ s a -> s{_ctsTopLevelComment = a})
+-- | The title of the resource primarily associated with the activity.
+asTitle :: Lens' ActivitySnippet (Maybe Text)
+asTitle = lens _asTitle (\ s a -> s{_asTitle = a})
 
-instance FromJSON CommentThreadSnippet where
+-- | The type of activity that the resource describes.
+asType :: Lens' ActivitySnippet (Maybe ActivitySnippetType)
+asType = lens _asType (\ s a -> s{_asType = a})
+
+-- | The description of the resource primarily associated with the activity.
+asDescription :: Lens' ActivitySnippet (Maybe Text)
+asDescription
+  = lens _asDescription
+      (\ s a -> s{_asDescription = a})
+
+instance FromJSON ActivitySnippet where
         parseJSON
-          = withObject "CommentThreadSnippet"
+          = withObject "ActivitySnippet"
               (\ o ->
-                 CommentThreadSnippet <$>
-                   (o .:? "isPublic") <*> (o .:? "channelId") <*>
-                     (o .:? "canReply")
-                     <*> (o .:? "videoId")
-                     <*> (o .:? "totalReplyCount")
-                     <*> (o .:? "topLevelComment"))
+                 ActivitySnippet <$>
+                   (o .:? "publishedAt") <*> (o .:? "channelTitle") <*>
+                     (o .:? "channelId")
+                     <*> (o .:? "thumbnails")
+                     <*> (o .:? "groupId")
+                     <*> (o .:? "title")
+                     <*> (o .:? "type")
+                     <*> (o .:? "description"))
 
-instance ToJSON CommentThreadSnippet where
-        toJSON CommentThreadSnippet{..}
+instance ToJSON ActivitySnippet where
+        toJSON ActivitySnippet{..}
           = object
               (catMaybes
-                 [("isPublic" .=) <$> _ctsIsPublic,
-                  ("channelId" .=) <$> _ctsChannelId,
-                  ("canReply" .=) <$> _ctsCanReply,
-                  ("videoId" .=) <$> _ctsVideoId,
-                  ("totalReplyCount" .=) <$> _ctsTotalReplyCount,
-                  ("topLevelComment" .=) <$> _ctsTopLevelComment])
+                 [("publishedAt" .=) <$> _asPublishedAt,
+                  ("channelTitle" .=) <$> _asChannelTitle,
+                  ("channelId" .=) <$> _asChannelId,
+                  ("thumbnails" .=) <$> _asThumbnails,
+                  ("groupId" .=) <$> _asGroupId,
+                  ("title" .=) <$> _asTitle, ("type" .=) <$> _asType,
+                  ("description" .=) <$> _asDescription])
 
 -- | Freebase topic information related to the channel.
 --
@@ -4158,261 +3953,249 @@ instance ToJSON VideoCategoryListResponse where
                   ("eventId" .=) <$> _vclrEventId,
                   ("prevPageToken" .=) <$> _vclrPrevPageToken])
 
--- | Details about monetization of a YouTube Video.
+-- | Describes processing status and progress and availability of some other
+-- Video resource parts.
 --
--- /See:/ 'videoMonetizationDetails' smart constructor.
-newtype VideoMonetizationDetails = VideoMonetizationDetails
-    { _vmdAccess :: Maybe AccessPolicy
+-- /See:/ 'videoProcessingDetails' smart constructor.
+data VideoProcessingDetails = VideoProcessingDetails
+    { _vpdProcessingFailureReason       :: !(Maybe VideoProcessingDetailsProcessingFailureReason)
+    , _vpdProcessingIssuesAvailability  :: !(Maybe Text)
+    , _vpdProcessingProgress            :: !(Maybe VideoProcessingDetailsProcessingProgress)
+    , _vpdThumbnailsAvailability        :: !(Maybe Text)
+    , _vpdTagSuggestionsAvailability    :: !(Maybe Text)
+    , _vpdProcessingStatus              :: !(Maybe VideoProcessingDetailsProcessingStatus)
+    , _vpdEditorSuggestionsAvailability :: !(Maybe Text)
+    , _vpdFileDetailsAvailability       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VideoMonetizationDetails' with the minimum fields required to make a request.
+-- | Creates a value of 'VideoProcessingDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vmdAccess'
-videoMonetizationDetails
-    :: VideoMonetizationDetails
-videoMonetizationDetails =
-    VideoMonetizationDetails
-    { _vmdAccess = Nothing
+-- * 'vpdProcessingFailureReason'
+--
+-- * 'vpdProcessingIssuesAvailability'
+--
+-- * 'vpdProcessingProgress'
+--
+-- * 'vpdThumbnailsAvailability'
+--
+-- * 'vpdTagSuggestionsAvailability'
+--
+-- * 'vpdProcessingStatus'
+--
+-- * 'vpdEditorSuggestionsAvailability'
+--
+-- * 'vpdFileDetailsAvailability'
+videoProcessingDetails
+    :: VideoProcessingDetails
+videoProcessingDetails =
+    VideoProcessingDetails
+    { _vpdProcessingFailureReason = Nothing
+    , _vpdProcessingIssuesAvailability = Nothing
+    , _vpdProcessingProgress = Nothing
+    , _vpdThumbnailsAvailability = Nothing
+    , _vpdTagSuggestionsAvailability = Nothing
+    , _vpdProcessingStatus = Nothing
+    , _vpdEditorSuggestionsAvailability = Nothing
+    , _vpdFileDetailsAvailability = Nothing
     }
 
--- | The value of access indicates whether the video can be monetized or not.
-vmdAccess :: Lens' VideoMonetizationDetails (Maybe AccessPolicy)
-vmdAccess
-  = lens _vmdAccess (\ s a -> s{_vmdAccess = a})
+-- | The reason that YouTube failed to process the video. This property will
+-- only have a value if the processingStatus property\'s value is failed.
+vpdProcessingFailureReason :: Lens' VideoProcessingDetails (Maybe VideoProcessingDetailsProcessingFailureReason)
+vpdProcessingFailureReason
+  = lens _vpdProcessingFailureReason
+      (\ s a -> s{_vpdProcessingFailureReason = a})
 
-instance FromJSON VideoMonetizationDetails where
+-- | This value indicates whether the video processing engine has generated
+-- suggestions that might improve YouTube\'s ability to process the the
+-- video, warnings that explain video processing problems, or errors that
+-- cause video processing problems. You can retrieve these suggestions by
+-- requesting the suggestions part in your videos.list() request.
+vpdProcessingIssuesAvailability :: Lens' VideoProcessingDetails (Maybe Text)
+vpdProcessingIssuesAvailability
+  = lens _vpdProcessingIssuesAvailability
+      (\ s a -> s{_vpdProcessingIssuesAvailability = a})
+
+-- | The processingProgress object contains information about the progress
+-- YouTube has made in processing the video. The values are really only
+-- relevant if the video\'s processing status is processing.
+vpdProcessingProgress :: Lens' VideoProcessingDetails (Maybe VideoProcessingDetailsProcessingProgress)
+vpdProcessingProgress
+  = lens _vpdProcessingProgress
+      (\ s a -> s{_vpdProcessingProgress = a})
+
+-- | This value indicates whether thumbnail images have been generated for
+-- the video.
+vpdThumbnailsAvailability :: Lens' VideoProcessingDetails (Maybe Text)
+vpdThumbnailsAvailability
+  = lens _vpdThumbnailsAvailability
+      (\ s a -> s{_vpdThumbnailsAvailability = a})
+
+-- | This value indicates whether keyword (tag) suggestions are available for
+-- the video. Tags can be added to a video\'s metadata to make it easier
+-- for other users to find the video. You can retrieve these suggestions by
+-- requesting the suggestions part in your videos.list() request.
+vpdTagSuggestionsAvailability :: Lens' VideoProcessingDetails (Maybe Text)
+vpdTagSuggestionsAvailability
+  = lens _vpdTagSuggestionsAvailability
+      (\ s a -> s{_vpdTagSuggestionsAvailability = a})
+
+-- | The video\'s processing status. This value indicates whether YouTube was
+-- able to process the video or if the video is still being processed.
+vpdProcessingStatus :: Lens' VideoProcessingDetails (Maybe VideoProcessingDetailsProcessingStatus)
+vpdProcessingStatus
+  = lens _vpdProcessingStatus
+      (\ s a -> s{_vpdProcessingStatus = a})
+
+-- | This value indicates whether video editing suggestions, which might
+-- improve video quality or the playback experience, are available for the
+-- video. You can retrieve these suggestions by requesting the suggestions
+-- part in your videos.list() request.
+vpdEditorSuggestionsAvailability :: Lens' VideoProcessingDetails (Maybe Text)
+vpdEditorSuggestionsAvailability
+  = lens _vpdEditorSuggestionsAvailability
+      (\ s a -> s{_vpdEditorSuggestionsAvailability = a})
+
+-- | This value indicates whether file details are available for the uploaded
+-- video. You can retrieve a video\'s file details by requesting the
+-- fileDetails part in your videos.list() request.
+vpdFileDetailsAvailability :: Lens' VideoProcessingDetails (Maybe Text)
+vpdFileDetailsAvailability
+  = lens _vpdFileDetailsAvailability
+      (\ s a -> s{_vpdFileDetailsAvailability = a})
+
+instance FromJSON VideoProcessingDetails where
         parseJSON
-          = withObject "VideoMonetizationDetails"
+          = withObject "VideoProcessingDetails"
               (\ o ->
-                 VideoMonetizationDetails <$> (o .:? "access"))
+                 VideoProcessingDetails <$>
+                   (o .:? "processingFailureReason") <*>
+                     (o .:? "processingIssuesAvailability")
+                     <*> (o .:? "processingProgress")
+                     <*> (o .:? "thumbnailsAvailability")
+                     <*> (o .:? "tagSuggestionsAvailability")
+                     <*> (o .:? "processingStatus")
+                     <*> (o .:? "editorSuggestionsAvailability")
+                     <*> (o .:? "fileDetailsAvailability"))
 
-instance ToJSON VideoMonetizationDetails where
-        toJSON VideoMonetizationDetails{..}
-          = object (catMaybes [("access" .=) <$> _vmdAccess])
-
---
--- /See:/ 'liveStreamConfigurationIssue' smart constructor.
-data LiveStreamConfigurationIssue = LiveStreamConfigurationIssue
-    { _lsciSeverity    :: !(Maybe Severity)
-    , _lsciReason      :: !(Maybe Text)
-    , _lsciType        :: !(Maybe LiveStreamConfigurationIssueType)
-    , _lsciDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'LiveStreamConfigurationIssue' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lsciSeverity'
---
--- * 'lsciReason'
---
--- * 'lsciType'
---
--- * 'lsciDescription'
-liveStreamConfigurationIssue
-    :: LiveStreamConfigurationIssue
-liveStreamConfigurationIssue =
-    LiveStreamConfigurationIssue
-    { _lsciSeverity = Nothing
-    , _lsciReason = Nothing
-    , _lsciType = Nothing
-    , _lsciDescription = Nothing
-    }
-
--- | How severe this issue is to the stream.
-lsciSeverity :: Lens' LiveStreamConfigurationIssue (Maybe Severity)
-lsciSeverity
-  = lens _lsciSeverity (\ s a -> s{_lsciSeverity = a})
-
--- | The short-form reason for this issue.
-lsciReason :: Lens' LiveStreamConfigurationIssue (Maybe Text)
-lsciReason
-  = lens _lsciReason (\ s a -> s{_lsciReason = a})
-
--- | The kind of error happening.
-lsciType :: Lens' LiveStreamConfigurationIssue (Maybe LiveStreamConfigurationIssueType)
-lsciType = lens _lsciType (\ s a -> s{_lsciType = a})
-
--- | The long-form description of the issue and how to resolve it.
-lsciDescription :: Lens' LiveStreamConfigurationIssue (Maybe Text)
-lsciDescription
-  = lens _lsciDescription
-      (\ s a -> s{_lsciDescription = a})
-
-instance FromJSON LiveStreamConfigurationIssue where
-        parseJSON
-          = withObject "LiveStreamConfigurationIssue"
-              (\ o ->
-                 LiveStreamConfigurationIssue <$>
-                   (o .:? "severity") <*> (o .:? "reason") <*>
-                     (o .:? "type")
-                     <*> (o .:? "description"))
-
-instance ToJSON LiveStreamConfigurationIssue where
-        toJSON LiveStreamConfigurationIssue{..}
+instance ToJSON VideoProcessingDetails where
+        toJSON VideoProcessingDetails{..}
           = object
               (catMaybes
-                 [("severity" .=) <$> _lsciSeverity,
-                  ("reason" .=) <$> _lsciReason,
-                  ("type" .=) <$> _lsciType,
-                  ("description" .=) <$> _lsciDescription])
+                 [("processingFailureReason" .=) <$>
+                    _vpdProcessingFailureReason,
+                  ("processingIssuesAvailability" .=) <$>
+                    _vpdProcessingIssuesAvailability,
+                  ("processingProgress" .=) <$> _vpdProcessingProgress,
+                  ("thumbnailsAvailability" .=) <$>
+                    _vpdThumbnailsAvailability,
+                  ("tagSuggestionsAvailability" .=) <$>
+                    _vpdTagSuggestionsAvailability,
+                  ("processingStatus" .=) <$> _vpdProcessingStatus,
+                  ("editorSuggestionsAvailability" .=) <$>
+                    _vpdEditorSuggestionsAvailability,
+                  ("fileDetailsAvailability" .=) <$>
+                    _vpdFileDetailsAvailability])
 
--- | Localizations for different languages
+-- | Basic details about a comment thread.
 --
--- /See:/ 'channelLocalizations' smart constructor.
-data ChannelLocalizations =
-    ChannelLocalizations
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ChannelLocalizations' with the minimum fields required to make a request.
---
-channelLocalizations
-    :: ChannelLocalizations
-channelLocalizations = ChannelLocalizations
-
-instance FromJSON ChannelLocalizations where
-        parseJSON
-          = withObject "ChannelLocalizations"
-              (\ o -> pure ChannelLocalizations)
-
-instance ToJSON ChannelLocalizations where
-        toJSON = const (Object mempty)
-
--- | A videoAbuseReportReason resource identifies a reason that a video could
--- be reported as abusive. Video abuse report reasons are used with
--- video.ReportAbuse.
---
--- /See:/ 'videoAbuseReportReason' smart constructor.
-data VideoAbuseReportReason = VideoAbuseReportReason
-    { _varrEtag    :: !(Maybe Text)
-    , _varrSnippet :: !(Maybe VideoAbuseReportReasonSnippet)
-    , _varrKind    :: !Text
-    , _varrId      :: !(Maybe Text)
+-- /See:/ 'commentThreadSnippet' smart constructor.
+data CommentThreadSnippet = CommentThreadSnippet
+    { _ctsIsPublic        :: !(Maybe Bool)
+    , _ctsChannelId       :: !(Maybe Text)
+    , _ctsCanReply        :: !(Maybe Bool)
+    , _ctsVideoId         :: !(Maybe Text)
+    , _ctsTotalReplyCount :: !(Maybe Word32)
+    , _ctsTopLevelComment :: !(Maybe Comment)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VideoAbuseReportReason' with the minimum fields required to make a request.
+-- | Creates a value of 'CommentThreadSnippet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'varrEtag'
+-- * 'ctsIsPublic'
 --
--- * 'varrSnippet'
+-- * 'ctsChannelId'
 --
--- * 'varrKind'
+-- * 'ctsCanReply'
 --
--- * 'varrId'
-videoAbuseReportReason
-    :: VideoAbuseReportReason
-videoAbuseReportReason =
-    VideoAbuseReportReason
-    { _varrEtag = Nothing
-    , _varrSnippet = Nothing
-    , _varrKind = "youtube#videoAbuseReportReason"
-    , _varrId = Nothing
+-- * 'ctsVideoId'
+--
+-- * 'ctsTotalReplyCount'
+--
+-- * 'ctsTopLevelComment'
+commentThreadSnippet
+    :: CommentThreadSnippet
+commentThreadSnippet =
+    CommentThreadSnippet
+    { _ctsIsPublic = Nothing
+    , _ctsChannelId = Nothing
+    , _ctsCanReply = Nothing
+    , _ctsVideoId = Nothing
+    , _ctsTotalReplyCount = Nothing
+    , _ctsTopLevelComment = Nothing
     }
 
--- | Etag of this resource.
-varrEtag :: Lens' VideoAbuseReportReason (Maybe Text)
-varrEtag = lens _varrEtag (\ s a -> s{_varrEtag = a})
+-- | Whether the thread (and therefore all its comments) is visible to all
+-- YouTube users.
+ctsIsPublic :: Lens' CommentThreadSnippet (Maybe Bool)
+ctsIsPublic
+  = lens _ctsIsPublic (\ s a -> s{_ctsIsPublic = a})
 
--- | The snippet object contains basic details about the abuse report reason.
-varrSnippet :: Lens' VideoAbuseReportReason (Maybe VideoAbuseReportReasonSnippet)
-varrSnippet
-  = lens _varrSnippet (\ s a -> s{_varrSnippet = a})
+-- | The YouTube channel the comments in the thread refer to or the channel
+-- with the video the comments refer to. If video_id isn\'t set the
+-- comments refer to the channel itself.
+ctsChannelId :: Lens' CommentThreadSnippet (Maybe Text)
+ctsChannelId
+  = lens _ctsChannelId (\ s a -> s{_ctsChannelId = a})
 
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"youtube#videoAbuseReportReason\".
-varrKind :: Lens' VideoAbuseReportReason Text
-varrKind = lens _varrKind (\ s a -> s{_varrKind = a})
+-- | Whether the current viewer of the thread can reply to it. This is viewer
+-- specific - other viewers may see a different value for this field.
+ctsCanReply :: Lens' CommentThreadSnippet (Maybe Bool)
+ctsCanReply
+  = lens _ctsCanReply (\ s a -> s{_ctsCanReply = a})
 
--- | The ID of this abuse report reason.
-varrId :: Lens' VideoAbuseReportReason (Maybe Text)
-varrId = lens _varrId (\ s a -> s{_varrId = a})
+-- | The ID of the video the comments refer to, if any. No video_id implies a
+-- channel discussion comment.
+ctsVideoId :: Lens' CommentThreadSnippet (Maybe Text)
+ctsVideoId
+  = lens _ctsVideoId (\ s a -> s{_ctsVideoId = a})
 
-instance FromJSON VideoAbuseReportReason where
+-- | The total number of replies (not including the top level comment).
+ctsTotalReplyCount :: Lens' CommentThreadSnippet (Maybe Word32)
+ctsTotalReplyCount
+  = lens _ctsTotalReplyCount
+      (\ s a -> s{_ctsTotalReplyCount = a})
+
+-- | The top level comment of this thread.
+ctsTopLevelComment :: Lens' CommentThreadSnippet (Maybe Comment)
+ctsTopLevelComment
+  = lens _ctsTopLevelComment
+      (\ s a -> s{_ctsTopLevelComment = a})
+
+instance FromJSON CommentThreadSnippet where
         parseJSON
-          = withObject "VideoAbuseReportReason"
+          = withObject "CommentThreadSnippet"
               (\ o ->
-                 VideoAbuseReportReason <$>
-                   (o .:? "etag") <*> (o .:? "snippet") <*>
-                     (o .:? "kind" .!= "youtube#videoAbuseReportReason")
-                     <*> (o .:? "id"))
+                 CommentThreadSnippet <$>
+                   (o .:? "isPublic") <*> (o .:? "channelId") <*>
+                     (o .:? "canReply")
+                     <*> (o .:? "videoId")
+                     <*> (o .:? "totalReplyCount")
+                     <*> (o .:? "topLevelComment"))
 
-instance ToJSON VideoAbuseReportReason where
-        toJSON VideoAbuseReportReason{..}
+instance ToJSON CommentThreadSnippet where
+        toJSON CommentThreadSnippet{..}
           = object
               (catMaybes
-                 [("etag" .=) <$> _varrEtag,
-                  ("snippet" .=) <$> _varrSnippet,
-                  Just ("kind" .= _varrKind), ("id" .=) <$> _varrId])
-
--- | ChannelSection targeting setting.
---
--- /See:/ 'channelSectionTargeting' smart constructor.
-data ChannelSectionTargeting = ChannelSectionTargeting
-    { _cstRegions   :: !(Maybe [Text])
-    , _cstCountries :: !(Maybe [Text])
-    , _cstLanguages :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ChannelSectionTargeting' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cstRegions'
---
--- * 'cstCountries'
---
--- * 'cstLanguages'
-channelSectionTargeting
-    :: ChannelSectionTargeting
-channelSectionTargeting =
-    ChannelSectionTargeting
-    { _cstRegions = Nothing
-    , _cstCountries = Nothing
-    , _cstLanguages = Nothing
-    }
-
--- | The region the channel section is targeting.
-cstRegions :: Lens' ChannelSectionTargeting [Text]
-cstRegions
-  = lens _cstRegions (\ s a -> s{_cstRegions = a}) .
-      _Default
-      . _Coerce
-
--- | The country the channel section is targeting.
-cstCountries :: Lens' ChannelSectionTargeting [Text]
-cstCountries
-  = lens _cstCountries (\ s a -> s{_cstCountries = a})
-      . _Default
-      . _Coerce
-
--- | The language the channel section is targeting.
-cstLanguages :: Lens' ChannelSectionTargeting [Text]
-cstLanguages
-  = lens _cstLanguages (\ s a -> s{_cstLanguages = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON ChannelSectionTargeting where
-        parseJSON
-          = withObject "ChannelSectionTargeting"
-              (\ o ->
-                 ChannelSectionTargeting <$>
-                   (o .:? "regions" .!= mempty) <*>
-                     (o .:? "countries" .!= mempty)
-                     <*> (o .:? "languages" .!= mempty))
-
-instance ToJSON ChannelSectionTargeting where
-        toJSON ChannelSectionTargeting{..}
-          = object
-              (catMaybes
-                 [("regions" .=) <$> _cstRegions,
-                  ("countries" .=) <$> _cstCountries,
-                  ("languages" .=) <$> _cstLanguages])
+                 [("isPublic" .=) <$> _ctsIsPublic,
+                  ("channelId" .=) <$> _ctsChannelId,
+                  ("canReply" .=) <$> _ctsCanReply,
+                  ("videoId" .=) <$> _ctsVideoId,
+                  ("totalReplyCount" .=) <$> _ctsTotalReplyCount,
+                  ("topLevelComment" .=) <$> _ctsTopLevelComment])
 
 --
 -- /See:/ 'channelSectionListResponse' smart constructor.
@@ -4497,140 +4280,141 @@ instance ToJSON ChannelSectionListResponse where
                   ("visitorId" .=) <$> _cslrVisitorId,
                   ("eventId" .=) <$> _cslrEventId])
 
--- | Basic details about a playlist, including title, description and
--- thumbnails.
+-- | A videoAbuseReportReason resource identifies a reason that a video could
+-- be reported as abusive. Video abuse report reasons are used with
+-- video.ReportAbuse.
 --
--- /See:/ 'playListSnippet' smart constructor.
-data PlayListSnippet = PlayListSnippet
-    { _plsPublishedAt     :: !(Maybe DateTime')
-    , _plsChannelTitle    :: !(Maybe Text)
-    , _plsChannelId       :: !(Maybe Text)
-    , _plsThumbnails      :: !(Maybe ThumbnailDetails)
-    , _plsLocalized       :: !(Maybe PlayListLocalization)
-    , _plsTitle           :: !(Maybe Text)
-    , _plsDescription     :: !(Maybe Text)
-    , _plsTags            :: !(Maybe [Text])
-    , _plsDefaultLanguage :: !(Maybe Text)
+-- /See:/ 'videoAbuseReportReason' smart constructor.
+data VideoAbuseReportReason = VideoAbuseReportReason
+    { _varrEtag    :: !(Maybe Text)
+    , _varrSnippet :: !(Maybe VideoAbuseReportReasonSnippet)
+    , _varrKind    :: !Text
+    , _varrId      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PlayListSnippet' with the minimum fields required to make a request.
+-- | Creates a value of 'VideoAbuseReportReason' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'plsPublishedAt'
+-- * 'varrEtag'
 --
--- * 'plsChannelTitle'
+-- * 'varrSnippet'
 --
--- * 'plsChannelId'
+-- * 'varrKind'
 --
--- * 'plsThumbnails'
---
--- * 'plsLocalized'
---
--- * 'plsTitle'
---
--- * 'plsDescription'
---
--- * 'plsTags'
---
--- * 'plsDefaultLanguage'
-playListSnippet
-    :: PlayListSnippet
-playListSnippet =
-    PlayListSnippet
-    { _plsPublishedAt = Nothing
-    , _plsChannelTitle = Nothing
-    , _plsChannelId = Nothing
-    , _plsThumbnails = Nothing
-    , _plsLocalized = Nothing
-    , _plsTitle = Nothing
-    , _plsDescription = Nothing
-    , _plsTags = Nothing
-    , _plsDefaultLanguage = Nothing
+-- * 'varrId'
+videoAbuseReportReason
+    :: VideoAbuseReportReason
+videoAbuseReportReason =
+    VideoAbuseReportReason
+    { _varrEtag = Nothing
+    , _varrSnippet = Nothing
+    , _varrKind = "youtube#videoAbuseReportReason"
+    , _varrId = Nothing
     }
 
--- | The date and time that the playlist was created. The value is specified
--- in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
-plsPublishedAt :: Lens' PlayListSnippet (Maybe UTCTime)
-plsPublishedAt
-  = lens _plsPublishedAt
-      (\ s a -> s{_plsPublishedAt = a})
-      . mapping _DateTime
+-- | Etag of this resource.
+varrEtag :: Lens' VideoAbuseReportReason (Maybe Text)
+varrEtag = lens _varrEtag (\ s a -> s{_varrEtag = a})
 
--- | The channel title of the channel that the video belongs to.
-plsChannelTitle :: Lens' PlayListSnippet (Maybe Text)
-plsChannelTitle
-  = lens _plsChannelTitle
-      (\ s a -> s{_plsChannelTitle = a})
+-- | The snippet object contains basic details about the abuse report reason.
+varrSnippet :: Lens' VideoAbuseReportReason (Maybe VideoAbuseReportReasonSnippet)
+varrSnippet
+  = lens _varrSnippet (\ s a -> s{_varrSnippet = a})
 
--- | The ID that YouTube uses to uniquely identify the channel that published
--- the playlist.
-plsChannelId :: Lens' PlayListSnippet (Maybe Text)
-plsChannelId
-  = lens _plsChannelId (\ s a -> s{_plsChannelId = a})
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"youtube#videoAbuseReportReason\".
+varrKind :: Lens' VideoAbuseReportReason Text
+varrKind = lens _varrKind (\ s a -> s{_varrKind = a})
 
--- | A map of thumbnail images associated with the playlist. For each object
--- in the map, the key is the name of the thumbnail image, and the value is
--- an object that contains other information about the thumbnail.
-plsThumbnails :: Lens' PlayListSnippet (Maybe ThumbnailDetails)
-plsThumbnails
-  = lens _plsThumbnails
-      (\ s a -> s{_plsThumbnails = a})
+-- | The ID of this abuse report reason.
+varrId :: Lens' VideoAbuseReportReason (Maybe Text)
+varrId = lens _varrId (\ s a -> s{_varrId = a})
 
--- | Localized title and description, read-only.
-plsLocalized :: Lens' PlayListSnippet (Maybe PlayListLocalization)
-plsLocalized
-  = lens _plsLocalized (\ s a -> s{_plsLocalized = a})
-
--- | The playlist\'s title.
-plsTitle :: Lens' PlayListSnippet (Maybe Text)
-plsTitle = lens _plsTitle (\ s a -> s{_plsTitle = a})
-
--- | The playlist\'s description.
-plsDescription :: Lens' PlayListSnippet (Maybe Text)
-plsDescription
-  = lens _plsDescription
-      (\ s a -> s{_plsDescription = a})
-
--- | Keyword tags associated with the playlist.
-plsTags :: Lens' PlayListSnippet [Text]
-plsTags
-  = lens _plsTags (\ s a -> s{_plsTags = a}) . _Default
-      . _Coerce
-
--- | The language of the playlist\'s default title and description.
-plsDefaultLanguage :: Lens' PlayListSnippet (Maybe Text)
-plsDefaultLanguage
-  = lens _plsDefaultLanguage
-      (\ s a -> s{_plsDefaultLanguage = a})
-
-instance FromJSON PlayListSnippet where
+instance FromJSON VideoAbuseReportReason where
         parseJSON
-          = withObject "PlayListSnippet"
+          = withObject "VideoAbuseReportReason"
               (\ o ->
-                 PlayListSnippet <$>
-                   (o .:? "publishedAt") <*> (o .:? "channelTitle") <*>
-                     (o .:? "channelId")
-                     <*> (o .:? "thumbnails")
-                     <*> (o .:? "localized")
-                     <*> (o .:? "title")
-                     <*> (o .:? "description")
-                     <*> (o .:? "tags" .!= mempty)
-                     <*> (o .:? "defaultLanguage"))
+                 VideoAbuseReportReason <$>
+                   (o .:? "etag") <*> (o .:? "snippet") <*>
+                     (o .:? "kind" .!= "youtube#videoAbuseReportReason")
+                     <*> (o .:? "id"))
 
-instance ToJSON PlayListSnippet where
-        toJSON PlayListSnippet{..}
+instance ToJSON VideoAbuseReportReason where
+        toJSON VideoAbuseReportReason{..}
           = object
               (catMaybes
-                 [("publishedAt" .=) <$> _plsPublishedAt,
-                  ("channelTitle" .=) <$> _plsChannelTitle,
-                  ("channelId" .=) <$> _plsChannelId,
-                  ("thumbnails" .=) <$> _plsThumbnails,
-                  ("localized" .=) <$> _plsLocalized,
-                  ("title" .=) <$> _plsTitle,
-                  ("description" .=) <$> _plsDescription,
-                  ("tags" .=) <$> _plsTags,
-                  ("defaultLanguage" .=) <$> _plsDefaultLanguage])
+                 [("etag" .=) <$> _varrEtag,
+                  ("snippet" .=) <$> _varrSnippet,
+                  Just ("kind" .= _varrKind), ("id" .=) <$> _varrId])
+
+--
+-- /See:/ 'liveStreamConfigurationIssue' smart constructor.
+data LiveStreamConfigurationIssue = LiveStreamConfigurationIssue
+    { _lsciSeverity    :: !(Maybe LiveStreamConfigurationIssueSeverity)
+    , _lsciReason      :: !(Maybe Text)
+    , _lsciType        :: !(Maybe LiveStreamConfigurationIssueType)
+    , _lsciDescription :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LiveStreamConfigurationIssue' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lsciSeverity'
+--
+-- * 'lsciReason'
+--
+-- * 'lsciType'
+--
+-- * 'lsciDescription'
+liveStreamConfigurationIssue
+    :: LiveStreamConfigurationIssue
+liveStreamConfigurationIssue =
+    LiveStreamConfigurationIssue
+    { _lsciSeverity = Nothing
+    , _lsciReason = Nothing
+    , _lsciType = Nothing
+    , _lsciDescription = Nothing
+    }
+
+-- | How severe this issue is to the stream.
+lsciSeverity :: Lens' LiveStreamConfigurationIssue (Maybe LiveStreamConfigurationIssueSeverity)
+lsciSeverity
+  = lens _lsciSeverity (\ s a -> s{_lsciSeverity = a})
+
+-- | The short-form reason for this issue.
+lsciReason :: Lens' LiveStreamConfigurationIssue (Maybe Text)
+lsciReason
+  = lens _lsciReason (\ s a -> s{_lsciReason = a})
+
+-- | The kind of error happening.
+lsciType :: Lens' LiveStreamConfigurationIssue (Maybe LiveStreamConfigurationIssueType)
+lsciType = lens _lsciType (\ s a -> s{_lsciType = a})
+
+-- | The long-form description of the issue and how to resolve it.
+lsciDescription :: Lens' LiveStreamConfigurationIssue (Maybe Text)
+lsciDescription
+  = lens _lsciDescription
+      (\ s a -> s{_lsciDescription = a})
+
+instance FromJSON LiveStreamConfigurationIssue where
+        parseJSON
+          = withObject "LiveStreamConfigurationIssue"
+              (\ o ->
+                 LiveStreamConfigurationIssue <$>
+                   (o .:? "severity") <*> (o .:? "reason") <*>
+                     (o .:? "type")
+                     <*> (o .:? "description"))
+
+instance ToJSON LiveStreamConfigurationIssue where
+        toJSON LiveStreamConfigurationIssue{..}
+          = object
+              (catMaybes
+                 [("severity" .=) <$> _lsciSeverity,
+                  ("reason" .=) <$> _lsciReason,
+                  ("type" .=) <$> _lsciType,
+                  ("description" .=) <$> _lsciDescription])
 
 -- | A channel resource contains information about a YouTube channel.
 --
@@ -4823,87 +4607,70 @@ instance ToJSON Channel where
                   ("statistics" .=) <$> _cStatistics,
                   ("localizations" .=) <$> _cLocalizations])
 
+-- | ChannelSection targeting setting.
 --
--- /See:/ 'videoGetRatingResponse' smart constructor.
-data VideoGetRatingResponse = VideoGetRatingResponse
-    { _vgrrEtag      :: !(Maybe Text)
-    , _vgrrKind      :: !Text
-    , _vgrrItems     :: !(Maybe [VideoRating])
-    , _vgrrVisitorId :: !(Maybe Text)
-    , _vgrrEventId   :: !(Maybe Text)
+-- /See:/ 'channelSectionTargeting' smart constructor.
+data ChannelSectionTargeting = ChannelSectionTargeting
+    { _cstRegions   :: !(Maybe [Text])
+    , _cstCountries :: !(Maybe [Text])
+    , _cstLanguages :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VideoGetRatingResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'ChannelSectionTargeting' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vgrrEtag'
+-- * 'cstRegions'
 --
--- * 'vgrrKind'
+-- * 'cstCountries'
 --
--- * 'vgrrItems'
---
--- * 'vgrrVisitorId'
---
--- * 'vgrrEventId'
-videoGetRatingResponse
-    :: VideoGetRatingResponse
-videoGetRatingResponse =
-    VideoGetRatingResponse
-    { _vgrrEtag = Nothing
-    , _vgrrKind = "youtube#videoGetRatingResponse"
-    , _vgrrItems = Nothing
-    , _vgrrVisitorId = Nothing
-    , _vgrrEventId = Nothing
+-- * 'cstLanguages'
+channelSectionTargeting
+    :: ChannelSectionTargeting
+channelSectionTargeting =
+    ChannelSectionTargeting
+    { _cstRegions = Nothing
+    , _cstCountries = Nothing
+    , _cstLanguages = Nothing
     }
 
--- | Etag of this resource.
-vgrrEtag :: Lens' VideoGetRatingResponse (Maybe Text)
-vgrrEtag = lens _vgrrEtag (\ s a -> s{_vgrrEtag = a})
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"youtube#videoGetRatingResponse\".
-vgrrKind :: Lens' VideoGetRatingResponse Text
-vgrrKind = lens _vgrrKind (\ s a -> s{_vgrrKind = a})
-
--- | A list of ratings that match the request criteria.
-vgrrItems :: Lens' VideoGetRatingResponse [VideoRating]
-vgrrItems
-  = lens _vgrrItems (\ s a -> s{_vgrrItems = a}) .
+-- | The region the channel section is targeting.
+cstRegions :: Lens' ChannelSectionTargeting [Text]
+cstRegions
+  = lens _cstRegions (\ s a -> s{_cstRegions = a}) .
       _Default
       . _Coerce
 
--- | The visitorId identifies the visitor.
-vgrrVisitorId :: Lens' VideoGetRatingResponse (Maybe Text)
-vgrrVisitorId
-  = lens _vgrrVisitorId
-      (\ s a -> s{_vgrrVisitorId = a})
+-- | The country the channel section is targeting.
+cstCountries :: Lens' ChannelSectionTargeting [Text]
+cstCountries
+  = lens _cstCountries (\ s a -> s{_cstCountries = a})
+      . _Default
+      . _Coerce
 
--- | Serialized EventId of the request which produced this response.
-vgrrEventId :: Lens' VideoGetRatingResponse (Maybe Text)
-vgrrEventId
-  = lens _vgrrEventId (\ s a -> s{_vgrrEventId = a})
+-- | The language the channel section is targeting.
+cstLanguages :: Lens' ChannelSectionTargeting [Text]
+cstLanguages
+  = lens _cstLanguages (\ s a -> s{_cstLanguages = a})
+      . _Default
+      . _Coerce
 
-instance FromJSON VideoGetRatingResponse where
+instance FromJSON ChannelSectionTargeting where
         parseJSON
-          = withObject "VideoGetRatingResponse"
+          = withObject "ChannelSectionTargeting"
               (\ o ->
-                 VideoGetRatingResponse <$>
-                   (o .:? "etag") <*>
-                     (o .:? "kind" .!= "youtube#videoGetRatingResponse")
-                     <*> (o .:? "items" .!= mempty)
-                     <*> (o .:? "visitorId")
-                     <*> (o .:? "eventId"))
+                 ChannelSectionTargeting <$>
+                   (o .:? "regions" .!= mempty) <*>
+                     (o .:? "countries" .!= mempty)
+                     <*> (o .:? "languages" .!= mempty))
 
-instance ToJSON VideoGetRatingResponse where
-        toJSON VideoGetRatingResponse{..}
+instance ToJSON ChannelSectionTargeting where
+        toJSON ChannelSectionTargeting{..}
           = object
               (catMaybes
-                 [("etag" .=) <$> _vgrrEtag,
-                  Just ("kind" .= _vgrrKind),
-                  ("items" .=) <$> _vgrrItems,
-                  ("visitorId" .=) <$> _vgrrVisitorId,
-                  ("eventId" .=) <$> _vgrrEventId])
+                 [("regions" .=) <$> _cstRegions,
+                  ("countries" .=) <$> _cstCountries,
+                  ("languages" .=) <$> _cstLanguages])
 
 --
 -- /See:/ 'liveStreamListResponse' smart constructor.
@@ -5034,6 +4801,840 @@ instance ToJSON LiveStreamListResponse where
                   ("eventId" .=) <$> _lslrEventId,
                   ("prevPageToken" .=) <$> _lslrPrevPageToken])
 
+-- | Localizations for different languages
+--
+-- /See:/ 'channelLocalizations' smart constructor.
+data ChannelLocalizations =
+    ChannelLocalizations
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ChannelLocalizations' with the minimum fields required to make a request.
+--
+channelLocalizations
+    :: ChannelLocalizations
+channelLocalizations = ChannelLocalizations
+
+instance FromJSON ChannelLocalizations where
+        parseJSON
+          = withObject "ChannelLocalizations"
+              (\ o -> pure ChannelLocalizations)
+
+instance ToJSON ChannelLocalizations where
+        toJSON = const (Object mempty)
+
+-- | Basic details about a playlist, including title, description and
+-- thumbnails.
+--
+-- /See:/ 'playListSnippet' smart constructor.
+data PlayListSnippet = PlayListSnippet
+    { _plsPublishedAt     :: !(Maybe DateTime')
+    , _plsChannelTitle    :: !(Maybe Text)
+    , _plsChannelId       :: !(Maybe Text)
+    , _plsThumbnails      :: !(Maybe ThumbnailDetails)
+    , _plsLocalized       :: !(Maybe PlayListLocalization)
+    , _plsTitle           :: !(Maybe Text)
+    , _plsDescription     :: !(Maybe Text)
+    , _plsTags            :: !(Maybe [Text])
+    , _plsDefaultLanguage :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PlayListSnippet' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'plsPublishedAt'
+--
+-- * 'plsChannelTitle'
+--
+-- * 'plsChannelId'
+--
+-- * 'plsThumbnails'
+--
+-- * 'plsLocalized'
+--
+-- * 'plsTitle'
+--
+-- * 'plsDescription'
+--
+-- * 'plsTags'
+--
+-- * 'plsDefaultLanguage'
+playListSnippet
+    :: PlayListSnippet
+playListSnippet =
+    PlayListSnippet
+    { _plsPublishedAt = Nothing
+    , _plsChannelTitle = Nothing
+    , _plsChannelId = Nothing
+    , _plsThumbnails = Nothing
+    , _plsLocalized = Nothing
+    , _plsTitle = Nothing
+    , _plsDescription = Nothing
+    , _plsTags = Nothing
+    , _plsDefaultLanguage = Nothing
+    }
+
+-- | The date and time that the playlist was created. The value is specified
+-- in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
+plsPublishedAt :: Lens' PlayListSnippet (Maybe UTCTime)
+plsPublishedAt
+  = lens _plsPublishedAt
+      (\ s a -> s{_plsPublishedAt = a})
+      . mapping _DateTime
+
+-- | The channel title of the channel that the video belongs to.
+plsChannelTitle :: Lens' PlayListSnippet (Maybe Text)
+plsChannelTitle
+  = lens _plsChannelTitle
+      (\ s a -> s{_plsChannelTitle = a})
+
+-- | The ID that YouTube uses to uniquely identify the channel that published
+-- the playlist.
+plsChannelId :: Lens' PlayListSnippet (Maybe Text)
+plsChannelId
+  = lens _plsChannelId (\ s a -> s{_plsChannelId = a})
+
+-- | A map of thumbnail images associated with the playlist. For each object
+-- in the map, the key is the name of the thumbnail image, and the value is
+-- an object that contains other information about the thumbnail.
+plsThumbnails :: Lens' PlayListSnippet (Maybe ThumbnailDetails)
+plsThumbnails
+  = lens _plsThumbnails
+      (\ s a -> s{_plsThumbnails = a})
+
+-- | Localized title and description, read-only.
+plsLocalized :: Lens' PlayListSnippet (Maybe PlayListLocalization)
+plsLocalized
+  = lens _plsLocalized (\ s a -> s{_plsLocalized = a})
+
+-- | The playlist\'s title.
+plsTitle :: Lens' PlayListSnippet (Maybe Text)
+plsTitle = lens _plsTitle (\ s a -> s{_plsTitle = a})
+
+-- | The playlist\'s description.
+plsDescription :: Lens' PlayListSnippet (Maybe Text)
+plsDescription
+  = lens _plsDescription
+      (\ s a -> s{_plsDescription = a})
+
+-- | Keyword tags associated with the playlist.
+plsTags :: Lens' PlayListSnippet [Text]
+plsTags
+  = lens _plsTags (\ s a -> s{_plsTags = a}) . _Default
+      . _Coerce
+
+-- | The language of the playlist\'s default title and description.
+plsDefaultLanguage :: Lens' PlayListSnippet (Maybe Text)
+plsDefaultLanguage
+  = lens _plsDefaultLanguage
+      (\ s a -> s{_plsDefaultLanguage = a})
+
+instance FromJSON PlayListSnippet where
+        parseJSON
+          = withObject "PlayListSnippet"
+              (\ o ->
+                 PlayListSnippet <$>
+                   (o .:? "publishedAt") <*> (o .:? "channelTitle") <*>
+                     (o .:? "channelId")
+                     <*> (o .:? "thumbnails")
+                     <*> (o .:? "localized")
+                     <*> (o .:? "title")
+                     <*> (o .:? "description")
+                     <*> (o .:? "tags" .!= mempty)
+                     <*> (o .:? "defaultLanguage"))
+
+instance ToJSON PlayListSnippet where
+        toJSON PlayListSnippet{..}
+          = object
+              (catMaybes
+                 [("publishedAt" .=) <$> _plsPublishedAt,
+                  ("channelTitle" .=) <$> _plsChannelTitle,
+                  ("channelId" .=) <$> _plsChannelId,
+                  ("thumbnails" .=) <$> _plsThumbnails,
+                  ("localized" .=) <$> _plsLocalized,
+                  ("title" .=) <$> _plsTitle,
+                  ("description" .=) <$> _plsDescription,
+                  ("tags" .=) <$> _plsTags,
+                  ("defaultLanguage" .=) <$> _plsDefaultLanguage])
+
+--
+-- /See:/ 'videoGetRatingResponse' smart constructor.
+data VideoGetRatingResponse = VideoGetRatingResponse
+    { _vgrrEtag      :: !(Maybe Text)
+    , _vgrrKind      :: !Text
+    , _vgrrItems     :: !(Maybe [VideoRating])
+    , _vgrrVisitorId :: !(Maybe Text)
+    , _vgrrEventId   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VideoGetRatingResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vgrrEtag'
+--
+-- * 'vgrrKind'
+--
+-- * 'vgrrItems'
+--
+-- * 'vgrrVisitorId'
+--
+-- * 'vgrrEventId'
+videoGetRatingResponse
+    :: VideoGetRatingResponse
+videoGetRatingResponse =
+    VideoGetRatingResponse
+    { _vgrrEtag = Nothing
+    , _vgrrKind = "youtube#videoGetRatingResponse"
+    , _vgrrItems = Nothing
+    , _vgrrVisitorId = Nothing
+    , _vgrrEventId = Nothing
+    }
+
+-- | Etag of this resource.
+vgrrEtag :: Lens' VideoGetRatingResponse (Maybe Text)
+vgrrEtag = lens _vgrrEtag (\ s a -> s{_vgrrEtag = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"youtube#videoGetRatingResponse\".
+vgrrKind :: Lens' VideoGetRatingResponse Text
+vgrrKind = lens _vgrrKind (\ s a -> s{_vgrrKind = a})
+
+-- | A list of ratings that match the request criteria.
+vgrrItems :: Lens' VideoGetRatingResponse [VideoRating]
+vgrrItems
+  = lens _vgrrItems (\ s a -> s{_vgrrItems = a}) .
+      _Default
+      . _Coerce
+
+-- | The visitorId identifies the visitor.
+vgrrVisitorId :: Lens' VideoGetRatingResponse (Maybe Text)
+vgrrVisitorId
+  = lens _vgrrVisitorId
+      (\ s a -> s{_vgrrVisitorId = a})
+
+-- | Serialized EventId of the request which produced this response.
+vgrrEventId :: Lens' VideoGetRatingResponse (Maybe Text)
+vgrrEventId
+  = lens _vgrrEventId (\ s a -> s{_vgrrEventId = a})
+
+instance FromJSON VideoGetRatingResponse where
+        parseJSON
+          = withObject "VideoGetRatingResponse"
+              (\ o ->
+                 VideoGetRatingResponse <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "youtube#videoGetRatingResponse")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "visitorId")
+                     <*> (o .:? "eventId"))
+
+instance ToJSON VideoGetRatingResponse where
+        toJSON VideoGetRatingResponse{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _vgrrEtag,
+                  Just ("kind" .= _vgrrKind),
+                  ("items" .=) <$> _vgrrItems,
+                  ("visitorId" .=) <$> _vgrrVisitorId,
+                  ("eventId" .=) <$> _vgrrEventId])
+
+-- | Basic details about a video category, such as its localized title.
+--
+-- /See:/ 'videoAbuseReportReasonSnippet' smart constructor.
+data VideoAbuseReportReasonSnippet = VideoAbuseReportReasonSnippet
+    { _varrsSecondaryReasons :: !(Maybe [VideoAbuseReportSecondaryReason])
+    , _varrsLabel            :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VideoAbuseReportReasonSnippet' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'varrsSecondaryReasons'
+--
+-- * 'varrsLabel'
+videoAbuseReportReasonSnippet
+    :: VideoAbuseReportReasonSnippet
+videoAbuseReportReasonSnippet =
+    VideoAbuseReportReasonSnippet
+    { _varrsSecondaryReasons = Nothing
+    , _varrsLabel = Nothing
+    }
+
+-- | The secondary reasons associated with this reason, if any are available.
+-- (There might be 0 or more.)
+varrsSecondaryReasons :: Lens' VideoAbuseReportReasonSnippet [VideoAbuseReportSecondaryReason]
+varrsSecondaryReasons
+  = lens _varrsSecondaryReasons
+      (\ s a -> s{_varrsSecondaryReasons = a})
+      . _Default
+      . _Coerce
+
+-- | The localized label belonging to this abuse report reason.
+varrsLabel :: Lens' VideoAbuseReportReasonSnippet (Maybe Text)
+varrsLabel
+  = lens _varrsLabel (\ s a -> s{_varrsLabel = a})
+
+instance FromJSON VideoAbuseReportReasonSnippet where
+        parseJSON
+          = withObject "VideoAbuseReportReasonSnippet"
+              (\ o ->
+                 VideoAbuseReportReasonSnippet <$>
+                   (o .:? "secondaryReasons" .!= mempty) <*>
+                     (o .:? "label"))
+
+instance ToJSON VideoAbuseReportReasonSnippet where
+        toJSON VideoAbuseReportReasonSnippet{..}
+          = object
+              (catMaybes
+                 [("secondaryReasons" .=) <$> _varrsSecondaryReasons,
+                  ("label" .=) <$> _varrsLabel])
+
+-- | A caption resource represents a YouTube caption track. A caption track
+-- is associated with exactly one YouTube video.
+--
+-- /See:/ 'caption' smart constructor.
+data Caption = Caption
+    { _capEtag    :: !(Maybe Text)
+    , _capSnippet :: !(Maybe CaptionSnippet)
+    , _capKind    :: !Text
+    , _capId      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Caption' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'capEtag'
+--
+-- * 'capSnippet'
+--
+-- * 'capKind'
+--
+-- * 'capId'
+caption
+    :: Caption
+caption =
+    Caption
+    { _capEtag = Nothing
+    , _capSnippet = Nothing
+    , _capKind = "youtube#caption"
+    , _capId = Nothing
+    }
+
+-- | Etag of this resource.
+capEtag :: Lens' Caption (Maybe Text)
+capEtag = lens _capEtag (\ s a -> s{_capEtag = a})
+
+-- | The snippet object contains basic details about the caption.
+capSnippet :: Lens' Caption (Maybe CaptionSnippet)
+capSnippet
+  = lens _capSnippet (\ s a -> s{_capSnippet = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"youtube#caption\".
+capKind :: Lens' Caption Text
+capKind = lens _capKind (\ s a -> s{_capKind = a})
+
+-- | The ID that YouTube uses to uniquely identify the caption track.
+capId :: Lens' Caption (Maybe Text)
+capId = lens _capId (\ s a -> s{_capId = a})
+
+instance FromJSON Caption where
+        parseJSON
+          = withObject "Caption"
+              (\ o ->
+                 Caption <$>
+                   (o .:? "etag") <*> (o .:? "snippet") <*>
+                     (o .:? "kind" .!= "youtube#caption")
+                     <*> (o .:? "id"))
+
+instance ToJSON Caption where
+        toJSON Caption{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _capEtag,
+                  ("snippet" .=) <$> _capSnippet,
+                  Just ("kind" .= _capKind), ("id" .=) <$> _capId])
+
+-- | DEPRECATED Region restriction of the video.
+--
+-- /See:/ 'videoContentDetailsRegionRestriction' smart constructor.
+data VideoContentDetailsRegionRestriction = VideoContentDetailsRegionRestriction
+    { _vcdrrAllowed :: !(Maybe [Text])
+    , _vcdrrBlocked :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VideoContentDetailsRegionRestriction' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vcdrrAllowed'
+--
+-- * 'vcdrrBlocked'
+videoContentDetailsRegionRestriction
+    :: VideoContentDetailsRegionRestriction
+videoContentDetailsRegionRestriction =
+    VideoContentDetailsRegionRestriction
+    { _vcdrrAllowed = Nothing
+    , _vcdrrBlocked = Nothing
+    }
+
+-- | A list of region codes that identify countries where the video is
+-- viewable. If this property is present and a country is not listed in its
+-- value, then the video is blocked from appearing in that country. If this
+-- property is present and contains an empty list, the video is blocked in
+-- all countries.
+vcdrrAllowed :: Lens' VideoContentDetailsRegionRestriction [Text]
+vcdrrAllowed
+  = lens _vcdrrAllowed (\ s a -> s{_vcdrrAllowed = a})
+      . _Default
+      . _Coerce
+
+-- | A list of region codes that identify countries where the video is
+-- blocked. If this property is present and a country is not listed in its
+-- value, then the video is viewable in that country. If this property is
+-- present and contains an empty list, the video is viewable in all
+-- countries.
+vcdrrBlocked :: Lens' VideoContentDetailsRegionRestriction [Text]
+vcdrrBlocked
+  = lens _vcdrrBlocked (\ s a -> s{_vcdrrBlocked = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON
+         VideoContentDetailsRegionRestriction where
+        parseJSON
+          = withObject "VideoContentDetailsRegionRestriction"
+              (\ o ->
+                 VideoContentDetailsRegionRestriction <$>
+                   (o .:? "allowed" .!= mempty) <*>
+                     (o .:? "blocked" .!= mempty))
+
+instance ToJSON VideoContentDetailsRegionRestriction
+         where
+        toJSON VideoContentDetailsRegionRestriction{..}
+          = object
+              (catMaybes
+                 [("allowed" .=) <$> _vcdrrAllowed,
+                  ("blocked" .=) <$> _vcdrrBlocked])
+
+-- | Describes a temporal position of a visual widget inside a video.
+--
+-- /See:/ 'invideoTiming' smart constructor.
+data InvideoTiming = InvideoTiming
+    { _itDurationMs :: !(Maybe Word64)
+    , _itOffsetMs   :: !(Maybe Word64)
+    , _itType       :: !(Maybe InvideoTimingType)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InvideoTiming' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'itDurationMs'
+--
+-- * 'itOffsetMs'
+--
+-- * 'itType'
+invideoTiming
+    :: InvideoTiming
+invideoTiming =
+    InvideoTiming
+    { _itDurationMs = Nothing
+    , _itOffsetMs = Nothing
+    , _itType = Nothing
+    }
+
+-- | Defines the duration in milliseconds for which the promotion should be
+-- displayed. If missing, the client should use the default.
+itDurationMs :: Lens' InvideoTiming (Maybe Word64)
+itDurationMs
+  = lens _itDurationMs (\ s a -> s{_itDurationMs = a})
+
+-- | Defines the time at which the promotion will appear. Depending on the
+-- value of type the value of the offsetMs field will represent a time
+-- offset from the start or from the end of the video, expressed in
+-- milliseconds.
+itOffsetMs :: Lens' InvideoTiming (Maybe Word64)
+itOffsetMs
+  = lens _itOffsetMs (\ s a -> s{_itOffsetMs = a})
+
+-- | Describes a timing type. If the value is offsetFromStart, then the
+-- offsetMs field represents an offset from the start of the video. If the
+-- value is offsetFromEnd, then the offsetMs field represents an offset
+-- from the end of the video.
+itType :: Lens' InvideoTiming (Maybe InvideoTimingType)
+itType = lens _itType (\ s a -> s{_itType = a})
+
+instance FromJSON InvideoTiming where
+        parseJSON
+          = withObject "InvideoTiming"
+              (\ o ->
+                 InvideoTiming <$>
+                   (o .:? "durationMs") <*> (o .:? "offsetMs") <*>
+                     (o .:? "type"))
+
+instance ToJSON InvideoTiming where
+        toJSON InvideoTiming{..}
+          = object
+              (catMaybes
+                 [("durationMs" .=) <$> _itDurationMs,
+                  ("offsetMs" .=) <$> _itOffsetMs,
+                  ("type" .=) <$> _itType])
+
+-- | Localizations for different languages
+--
+-- /See:/ 'playListLocalizations' smart constructor.
+data PlayListLocalizations =
+    PlayListLocalizations
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PlayListLocalizations' with the minimum fields required to make a request.
+--
+playListLocalizations
+    :: PlayListLocalizations
+playListLocalizations = PlayListLocalizations
+
+instance FromJSON PlayListLocalizations where
+        parseJSON
+          = withObject "PlayListLocalizations"
+              (\ o -> pure PlayListLocalizations)
+
+instance ToJSON PlayListLocalizations where
+        toJSON = const (Object mempty)
+
+-- | Video processing progress and completion time estimate.
+--
+-- /See:/ 'videoProcessingDetailsProcessingProgress' smart constructor.
+data VideoProcessingDetailsProcessingProgress = VideoProcessingDetailsProcessingProgress
+    { _vpdppTimeLeftMs     :: !(Maybe Word64)
+    , _vpdppPartsTotal     :: !(Maybe Word64)
+    , _vpdppPartsProcessed :: !(Maybe Word64)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VideoProcessingDetailsProcessingProgress' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vpdppTimeLeftMs'
+--
+-- * 'vpdppPartsTotal'
+--
+-- * 'vpdppPartsProcessed'
+videoProcessingDetailsProcessingProgress
+    :: VideoProcessingDetailsProcessingProgress
+videoProcessingDetailsProcessingProgress =
+    VideoProcessingDetailsProcessingProgress
+    { _vpdppTimeLeftMs = Nothing
+    , _vpdppPartsTotal = Nothing
+    , _vpdppPartsProcessed = Nothing
+    }
+
+-- | An estimate of the amount of time, in millseconds, that YouTube needs to
+-- finish processing the video.
+vpdppTimeLeftMs :: Lens' VideoProcessingDetailsProcessingProgress (Maybe Word64)
+vpdppTimeLeftMs
+  = lens _vpdppTimeLeftMs
+      (\ s a -> s{_vpdppTimeLeftMs = a})
+
+-- | An estimate of the total number of parts that need to be processed for
+-- the video. The number may be updated with more precise estimates while
+-- YouTube processes the video.
+vpdppPartsTotal :: Lens' VideoProcessingDetailsProcessingProgress (Maybe Word64)
+vpdppPartsTotal
+  = lens _vpdppPartsTotal
+      (\ s a -> s{_vpdppPartsTotal = a})
+
+-- | The number of parts of the video that YouTube has already processed. You
+-- can estimate the percentage of the video that YouTube has already
+-- processed by calculating: 100 * parts_processed \/ parts_total Note that
+-- since the estimated number of parts could increase without a
+-- corresponding increase in the number of parts that have already been
+-- processed, it is possible that the calculated progress could
+-- periodically decrease while YouTube processes a video.
+vpdppPartsProcessed :: Lens' VideoProcessingDetailsProcessingProgress (Maybe Word64)
+vpdppPartsProcessed
+  = lens _vpdppPartsProcessed
+      (\ s a -> s{_vpdppPartsProcessed = a})
+
+instance FromJSON
+         VideoProcessingDetailsProcessingProgress where
+        parseJSON
+          = withObject
+              "VideoProcessingDetailsProcessingProgress"
+              (\ o ->
+                 VideoProcessingDetailsProcessingProgress <$>
+                   (o .:? "timeLeftMs") <*> (o .:? "partsTotal") <*>
+                     (o .:? "partsProcessed"))
+
+instance ToJSON
+         VideoProcessingDetailsProcessingProgress where
+        toJSON VideoProcessingDetailsProcessingProgress{..}
+          = object
+              (catMaybes
+                 [("timeLeftMs" .=) <$> _vpdppTimeLeftMs,
+                  ("partsTotal" .=) <$> _vpdppPartsTotal,
+                  ("partsProcessed" .=) <$> _vpdppPartsProcessed])
+
+-- | Basic details about a channel, including title, description and
+-- thumbnails.
+--
+-- /See:/ 'channelSnippet' smart constructor.
+data ChannelSnippet = ChannelSnippet
+    { _csPublishedAt     :: !(Maybe DateTime')
+    , _csCountry         :: !(Maybe Text)
+    , _csThumbnails      :: !(Maybe ThumbnailDetails)
+    , _csLocalized       :: !(Maybe ChannelLocalization)
+    , _csTitle           :: !(Maybe Text)
+    , _csDescription     :: !(Maybe Text)
+    , _csDefaultLanguage :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ChannelSnippet' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'csPublishedAt'
+--
+-- * 'csCountry'
+--
+-- * 'csThumbnails'
+--
+-- * 'csLocalized'
+--
+-- * 'csTitle'
+--
+-- * 'csDescription'
+--
+-- * 'csDefaultLanguage'
+channelSnippet
+    :: ChannelSnippet
+channelSnippet =
+    ChannelSnippet
+    { _csPublishedAt = Nothing
+    , _csCountry = Nothing
+    , _csThumbnails = Nothing
+    , _csLocalized = Nothing
+    , _csTitle = Nothing
+    , _csDescription = Nothing
+    , _csDefaultLanguage = Nothing
+    }
+
+-- | The date and time that the channel was created. The value is specified
+-- in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
+csPublishedAt :: Lens' ChannelSnippet (Maybe UTCTime)
+csPublishedAt
+  = lens _csPublishedAt
+      (\ s a -> s{_csPublishedAt = a})
+      . mapping _DateTime
+
+-- | The country of the channel.
+csCountry :: Lens' ChannelSnippet (Maybe Text)
+csCountry
+  = lens _csCountry (\ s a -> s{_csCountry = a})
+
+-- | A map of thumbnail images associated with the channel. For each object
+-- in the map, the key is the name of the thumbnail image, and the value is
+-- an object that contains other information about the thumbnail.
+csThumbnails :: Lens' ChannelSnippet (Maybe ThumbnailDetails)
+csThumbnails
+  = lens _csThumbnails (\ s a -> s{_csThumbnails = a})
+
+-- | Localized title and description, read-only.
+csLocalized :: Lens' ChannelSnippet (Maybe ChannelLocalization)
+csLocalized
+  = lens _csLocalized (\ s a -> s{_csLocalized = a})
+
+-- | The channel\'s title.
+csTitle :: Lens' ChannelSnippet (Maybe Text)
+csTitle = lens _csTitle (\ s a -> s{_csTitle = a})
+
+-- | The description of the channel.
+csDescription :: Lens' ChannelSnippet (Maybe Text)
+csDescription
+  = lens _csDescription
+      (\ s a -> s{_csDescription = a})
+
+-- | The language of the channel\'s default title and description.
+csDefaultLanguage :: Lens' ChannelSnippet (Maybe Text)
+csDefaultLanguage
+  = lens _csDefaultLanguage
+      (\ s a -> s{_csDefaultLanguage = a})
+
+instance FromJSON ChannelSnippet where
+        parseJSON
+          = withObject "ChannelSnippet"
+              (\ o ->
+                 ChannelSnippet <$>
+                   (o .:? "publishedAt") <*> (o .:? "country") <*>
+                     (o .:? "thumbnails")
+                     <*> (o .:? "localized")
+                     <*> (o .:? "title")
+                     <*> (o .:? "description")
+                     <*> (o .:? "defaultLanguage"))
+
+instance ToJSON ChannelSnippet where
+        toJSON ChannelSnippet{..}
+          = object
+              (catMaybes
+                 [("publishedAt" .=) <$> _csPublishedAt,
+                  ("country" .=) <$> _csCountry,
+                  ("thumbnails" .=) <$> _csThumbnails,
+                  ("localized" .=) <$> _csLocalized,
+                  ("title" .=) <$> _csTitle,
+                  ("description" .=) <$> _csDescription,
+                  ("defaultLanguage" .=) <$> _csDefaultLanguage])
+
+-- | Internal representation of thumbnails for a YouTube resource.
+--
+-- /See:/ 'thumbnailDetails' smart constructor.
+data ThumbnailDetails = ThumbnailDetails
+    { _tdMedium   :: !(Maybe Thumbnail)
+    , _tdMaxres   :: !(Maybe Thumbnail)
+    , _tdDefault  :: !(Maybe Thumbnail)
+    , _tdStandard :: !(Maybe Thumbnail)
+    , _tdHigh     :: !(Maybe Thumbnail)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ThumbnailDetails' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tdMedium'
+--
+-- * 'tdMaxres'
+--
+-- * 'tdDefault'
+--
+-- * 'tdStandard'
+--
+-- * 'tdHigh'
+thumbnailDetails
+    :: ThumbnailDetails
+thumbnailDetails =
+    ThumbnailDetails
+    { _tdMedium = Nothing
+    , _tdMaxres = Nothing
+    , _tdDefault = Nothing
+    , _tdStandard = Nothing
+    , _tdHigh = Nothing
+    }
+
+-- | The medium quality image for this resource.
+tdMedium :: Lens' ThumbnailDetails (Maybe Thumbnail)
+tdMedium = lens _tdMedium (\ s a -> s{_tdMedium = a})
+
+-- | The maximum resolution quality image for this resource.
+tdMaxres :: Lens' ThumbnailDetails (Maybe Thumbnail)
+tdMaxres = lens _tdMaxres (\ s a -> s{_tdMaxres = a})
+
+-- | The default image for this resource.
+tdDefault :: Lens' ThumbnailDetails (Maybe Thumbnail)
+tdDefault
+  = lens _tdDefault (\ s a -> s{_tdDefault = a})
+
+-- | The standard quality image for this resource.
+tdStandard :: Lens' ThumbnailDetails (Maybe Thumbnail)
+tdStandard
+  = lens _tdStandard (\ s a -> s{_tdStandard = a})
+
+-- | The high quality image for this resource.
+tdHigh :: Lens' ThumbnailDetails (Maybe Thumbnail)
+tdHigh = lens _tdHigh (\ s a -> s{_tdHigh = a})
+
+instance FromJSON ThumbnailDetails where
+        parseJSON
+          = withObject "ThumbnailDetails"
+              (\ o ->
+                 ThumbnailDetails <$>
+                   (o .:? "medium") <*> (o .:? "maxres") <*>
+                     (o .:? "default")
+                     <*> (o .:? "standard")
+                     <*> (o .:? "high"))
+
+instance ToJSON ThumbnailDetails where
+        toJSON ThumbnailDetails{..}
+          = object
+              (catMaybes
+                 [("medium" .=) <$> _tdMedium,
+                  ("maxres" .=) <$> _tdMaxres,
+                  ("default" .=) <$> _tdDefault,
+                  ("standard" .=) <$> _tdStandard,
+                  ("high" .=) <$> _tdHigh])
+
+-- | Settings and Info of the monitor stream
+--
+-- /See:/ 'monitorStreamInfo' smart constructor.
+data MonitorStreamInfo = MonitorStreamInfo
+    { _msiBroadcastStreamDelayMs :: !(Maybe Word32)
+    , _msiEmbedHTML              :: !(Maybe Text)
+    , _msiEnableMonitorStream    :: !(Maybe Bool)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MonitorStreamInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'msiBroadcastStreamDelayMs'
+--
+-- * 'msiEmbedHTML'
+--
+-- * 'msiEnableMonitorStream'
+monitorStreamInfo
+    :: MonitorStreamInfo
+monitorStreamInfo =
+    MonitorStreamInfo
+    { _msiBroadcastStreamDelayMs = Nothing
+    , _msiEmbedHTML = Nothing
+    , _msiEnableMonitorStream = Nothing
+    }
+
+-- | If you have set the enableMonitorStream property to true, then this
+-- property determines the length of the live broadcast delay.
+msiBroadcastStreamDelayMs :: Lens' MonitorStreamInfo (Maybe Word32)
+msiBroadcastStreamDelayMs
+  = lens _msiBroadcastStreamDelayMs
+      (\ s a -> s{_msiBroadcastStreamDelayMs = a})
+
+-- | HTML code that embeds a player that plays the monitor stream.
+msiEmbedHTML :: Lens' MonitorStreamInfo (Maybe Text)
+msiEmbedHTML
+  = lens _msiEmbedHTML (\ s a -> s{_msiEmbedHTML = a})
+
+-- | This value determines whether the monitor stream is enabled for the
+-- broadcast. If the monitor stream is enabled, then YouTube will broadcast
+-- the event content on a special stream intended only for the
+-- broadcaster\'s consumption. The broadcaster can use the stream to review
+-- the event content and also to identify the optimal times to insert
+-- cuepoints. You need to set this value to true if you intend to have a
+-- broadcast delay for your event. Note: This property cannot be updated
+-- once the broadcast is in the testing or live state.
+msiEnableMonitorStream :: Lens' MonitorStreamInfo (Maybe Bool)
+msiEnableMonitorStream
+  = lens _msiEnableMonitorStream
+      (\ s a -> s{_msiEnableMonitorStream = a})
+
+instance FromJSON MonitorStreamInfo where
+        parseJSON
+          = withObject "MonitorStreamInfo"
+              (\ o ->
+                 MonitorStreamInfo <$>
+                   (o .:? "broadcastStreamDelayMs") <*>
+                     (o .:? "embedHtml")
+                     <*> (o .:? "enableMonitorStream"))
+
+instance ToJSON MonitorStreamInfo where
+        toJSON MonitorStreamInfo{..}
+          = object
+              (catMaybes
+                 [("broadcastStreamDelayMs" .=) <$>
+                    _msiBroadcastStreamDelayMs,
+                  ("embedHtml" .=) <$> _msiEmbedHTML,
+                  ("enableMonitorStream" .=) <$>
+                    _msiEnableMonitorStream])
+
 -- | A i18nRegion resource identifies a region where YouTube is available.
 --
 -- /See:/ 'i18nRegion' smart constructor.
@@ -5100,6 +5701,121 @@ instance ToJSON I18nRegion where
                  [("etag" .=) <$> _irEtag,
                   ("snippet" .=) <$> _irSnippet,
                   Just ("kind" .= _irKind), ("id" .=) <$> _irId])
+
+-- | Statistics about a channel: number of subscribers, number of videos in
+-- the channel, etc.
+--
+-- /See:/ 'channelStatistics' smart constructor.
+data ChannelStatistics = ChannelStatistics
+    { _csCommentCount          :: !(Maybe Word64)
+    , _csSubscriberCount       :: !(Maybe Word64)
+    , _csVideoCount            :: !(Maybe Word64)
+    , _csHiddenSubscriberCount :: !(Maybe Bool)
+    , _csViewCount             :: !(Maybe Word64)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ChannelStatistics' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'csCommentCount'
+--
+-- * 'csSubscriberCount'
+--
+-- * 'csVideoCount'
+--
+-- * 'csHiddenSubscriberCount'
+--
+-- * 'csViewCount'
+channelStatistics
+    :: ChannelStatistics
+channelStatistics =
+    ChannelStatistics
+    { _csCommentCount = Nothing
+    , _csSubscriberCount = Nothing
+    , _csVideoCount = Nothing
+    , _csHiddenSubscriberCount = Nothing
+    , _csViewCount = Nothing
+    }
+
+-- | The number of comments for the channel.
+csCommentCount :: Lens' ChannelStatistics (Maybe Word64)
+csCommentCount
+  = lens _csCommentCount
+      (\ s a -> s{_csCommentCount = a})
+
+-- | The number of subscribers that the channel has.
+csSubscriberCount :: Lens' ChannelStatistics (Maybe Word64)
+csSubscriberCount
+  = lens _csSubscriberCount
+      (\ s a -> s{_csSubscriberCount = a})
+
+-- | The number of videos uploaded to the channel.
+csVideoCount :: Lens' ChannelStatistics (Maybe Word64)
+csVideoCount
+  = lens _csVideoCount (\ s a -> s{_csVideoCount = a})
+
+-- | Whether or not the number of subscribers is shown for this user.
+csHiddenSubscriberCount :: Lens' ChannelStatistics (Maybe Bool)
+csHiddenSubscriberCount
+  = lens _csHiddenSubscriberCount
+      (\ s a -> s{_csHiddenSubscriberCount = a})
+
+-- | The number of times the channel has been viewed.
+csViewCount :: Lens' ChannelStatistics (Maybe Word64)
+csViewCount
+  = lens _csViewCount (\ s a -> s{_csViewCount = a})
+
+instance FromJSON ChannelStatistics where
+        parseJSON
+          = withObject "ChannelStatistics"
+              (\ o ->
+                 ChannelStatistics <$>
+                   (o .:? "commentCount") <*> (o .:? "subscriberCount")
+                     <*> (o .:? "videoCount")
+                     <*> (o .:? "hiddenSubscriberCount")
+                     <*> (o .:? "viewCount"))
+
+instance ToJSON ChannelStatistics where
+        toJSON ChannelStatistics{..}
+          = object
+              (catMaybes
+                 [("commentCount" .=) <$> _csCommentCount,
+                  ("subscriberCount" .=) <$> _csSubscriberCount,
+                  ("videoCount" .=) <$> _csVideoCount,
+                  ("hiddenSubscriberCount" .=) <$>
+                    _csHiddenSubscriberCount,
+                  ("viewCount" .=) <$> _csViewCount])
+
+--
+-- /See:/ 'channelId' smart constructor.
+newtype ChannelId = ChannelId
+    { _ciValue :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ChannelId' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ciValue'
+channelId
+    :: ChannelId
+channelId =
+    ChannelId
+    { _ciValue = Nothing
+    }
+
+ciValue :: Lens' ChannelId (Maybe Text)
+ciValue = lens _ciValue (\ s a -> s{_ciValue = a})
+
+instance FromJSON ChannelId where
+        parseJSON
+          = withObject "ChannelId"
+              (\ o -> ChannelId <$> (o .:? "value"))
+
+instance ToJSON ChannelId where
+        toJSON ChannelId{..}
+          = object (catMaybes [("value" .=) <$> _ciValue])
 
 -- | Details about the content of an activity: the video that was shared, the
 -- channel that was subscribed to, etc.
@@ -5269,717 +5985,6 @@ instance ToJSON ActivityContentDetails where
                   ("like" .=) <$> _acdLike,
                   ("recommendation" .=) <$> _acdRecommendation])
 
--- | Statistics about a channel: number of subscribers, number of videos in
--- the channel, etc.
---
--- /See:/ 'channelStatistics' smart constructor.
-data ChannelStatistics = ChannelStatistics
-    { _csCommentCount          :: !(Maybe Word64)
-    , _csSubscriberCount       :: !(Maybe Word64)
-    , _csVideoCount            :: !(Maybe Word64)
-    , _csHiddenSubscriberCount :: !(Maybe Bool)
-    , _csViewCount             :: !(Maybe Word64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ChannelStatistics' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'csCommentCount'
---
--- * 'csSubscriberCount'
---
--- * 'csVideoCount'
---
--- * 'csHiddenSubscriberCount'
---
--- * 'csViewCount'
-channelStatistics
-    :: ChannelStatistics
-channelStatistics =
-    ChannelStatistics
-    { _csCommentCount = Nothing
-    , _csSubscriberCount = Nothing
-    , _csVideoCount = Nothing
-    , _csHiddenSubscriberCount = Nothing
-    , _csViewCount = Nothing
-    }
-
--- | The number of comments for the channel.
-csCommentCount :: Lens' ChannelStatistics (Maybe Word64)
-csCommentCount
-  = lens _csCommentCount
-      (\ s a -> s{_csCommentCount = a})
-
--- | The number of subscribers that the channel has.
-csSubscriberCount :: Lens' ChannelStatistics (Maybe Word64)
-csSubscriberCount
-  = lens _csSubscriberCount
-      (\ s a -> s{_csSubscriberCount = a})
-
--- | The number of videos uploaded to the channel.
-csVideoCount :: Lens' ChannelStatistics (Maybe Word64)
-csVideoCount
-  = lens _csVideoCount (\ s a -> s{_csVideoCount = a})
-
--- | Whether or not the number of subscribers is shown for this user.
-csHiddenSubscriberCount :: Lens' ChannelStatistics (Maybe Bool)
-csHiddenSubscriberCount
-  = lens _csHiddenSubscriberCount
-      (\ s a -> s{_csHiddenSubscriberCount = a})
-
--- | The number of times the channel has been viewed.
-csViewCount :: Lens' ChannelStatistics (Maybe Word64)
-csViewCount
-  = lens _csViewCount (\ s a -> s{_csViewCount = a})
-
-instance FromJSON ChannelStatistics where
-        parseJSON
-          = withObject "ChannelStatistics"
-              (\ o ->
-                 ChannelStatistics <$>
-                   (o .:? "commentCount") <*> (o .:? "subscriberCount")
-                     <*> (o .:? "videoCount")
-                     <*> (o .:? "hiddenSubscriberCount")
-                     <*> (o .:? "viewCount"))
-
-instance ToJSON ChannelStatistics where
-        toJSON ChannelStatistics{..}
-          = object
-              (catMaybes
-                 [("commentCount" .=) <$> _csCommentCount,
-                  ("subscriberCount" .=) <$> _csSubscriberCount,
-                  ("videoCount" .=) <$> _csVideoCount,
-                  ("hiddenSubscriberCount" .=) <$>
-                    _csHiddenSubscriberCount,
-                  ("viewCount" .=) <$> _csViewCount])
-
---
--- /See:/ 'channelId' smart constructor.
-newtype ChannelId = ChannelId
-    { _ciValue :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ChannelId' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ciValue'
-channelId
-    :: ChannelId
-channelId =
-    ChannelId
-    { _ciValue = Nothing
-    }
-
-ciValue :: Lens' ChannelId (Maybe Text)
-ciValue = lens _ciValue (\ s a -> s{_ciValue = a})
-
-instance FromJSON ChannelId where
-        parseJSON
-          = withObject "ChannelId"
-              (\ o -> ChannelId <$> (o .:? "value"))
-
-instance ToJSON ChannelId where
-        toJSON ChannelId{..}
-          = object (catMaybes [("value" .=) <$> _ciValue])
-
--- | Basic details about a video category, such as its localized title.
---
--- /See:/ 'videoAbuseReportReasonSnippet' smart constructor.
-data VideoAbuseReportReasonSnippet = VideoAbuseReportReasonSnippet
-    { _varrsSecondaryReasons :: !(Maybe [VideoAbuseReportSecondaryReason])
-    , _varrsLabel            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'VideoAbuseReportReasonSnippet' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'varrsSecondaryReasons'
---
--- * 'varrsLabel'
-videoAbuseReportReasonSnippet
-    :: VideoAbuseReportReasonSnippet
-videoAbuseReportReasonSnippet =
-    VideoAbuseReportReasonSnippet
-    { _varrsSecondaryReasons = Nothing
-    , _varrsLabel = Nothing
-    }
-
--- | The secondary reasons associated with this reason, if any are available.
--- (There might be 0 or more.)
-varrsSecondaryReasons :: Lens' VideoAbuseReportReasonSnippet [VideoAbuseReportSecondaryReason]
-varrsSecondaryReasons
-  = lens _varrsSecondaryReasons
-      (\ s a -> s{_varrsSecondaryReasons = a})
-      . _Default
-      . _Coerce
-
--- | The localized label belonging to this abuse report reason.
-varrsLabel :: Lens' VideoAbuseReportReasonSnippet (Maybe Text)
-varrsLabel
-  = lens _varrsLabel (\ s a -> s{_varrsLabel = a})
-
-instance FromJSON VideoAbuseReportReasonSnippet where
-        parseJSON
-          = withObject "VideoAbuseReportReasonSnippet"
-              (\ o ->
-                 VideoAbuseReportReasonSnippet <$>
-                   (o .:? "secondaryReasons" .!= mempty) <*>
-                     (o .:? "label"))
-
-instance ToJSON VideoAbuseReportReasonSnippet where
-        toJSON VideoAbuseReportReasonSnippet{..}
-          = object
-              (catMaybes
-                 [("secondaryReasons" .=) <$> _varrsSecondaryReasons,
-                  ("label" .=) <$> _varrsLabel])
-
--- | Video processing progress and completion time estimate.
---
--- /See:/ 'videoProcessingDetailsProcessingProgress' smart constructor.
-data VideoProcessingDetailsProcessingProgress = VideoProcessingDetailsProcessingProgress
-    { _vpdppTimeLeftMs     :: !(Maybe Word64)
-    , _vpdppPartsTotal     :: !(Maybe Word64)
-    , _vpdppPartsProcessed :: !(Maybe Word64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'VideoProcessingDetailsProcessingProgress' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'vpdppTimeLeftMs'
---
--- * 'vpdppPartsTotal'
---
--- * 'vpdppPartsProcessed'
-videoProcessingDetailsProcessingProgress
-    :: VideoProcessingDetailsProcessingProgress
-videoProcessingDetailsProcessingProgress =
-    VideoProcessingDetailsProcessingProgress
-    { _vpdppTimeLeftMs = Nothing
-    , _vpdppPartsTotal = Nothing
-    , _vpdppPartsProcessed = Nothing
-    }
-
--- | An estimate of the amount of time, in millseconds, that YouTube needs to
--- finish processing the video.
-vpdppTimeLeftMs :: Lens' VideoProcessingDetailsProcessingProgress (Maybe Word64)
-vpdppTimeLeftMs
-  = lens _vpdppTimeLeftMs
-      (\ s a -> s{_vpdppTimeLeftMs = a})
-
--- | An estimate of the total number of parts that need to be processed for
--- the video. The number may be updated with more precise estimates while
--- YouTube processes the video.
-vpdppPartsTotal :: Lens' VideoProcessingDetailsProcessingProgress (Maybe Word64)
-vpdppPartsTotal
-  = lens _vpdppPartsTotal
-      (\ s a -> s{_vpdppPartsTotal = a})
-
--- | The number of parts of the video that YouTube has already processed. You
--- can estimate the percentage of the video that YouTube has already
--- processed by calculating: 100 * parts_processed \/ parts_total Note that
--- since the estimated number of parts could increase without a
--- corresponding increase in the number of parts that have already been
--- processed, it is possible that the calculated progress could
--- periodically decrease while YouTube processes a video.
-vpdppPartsProcessed :: Lens' VideoProcessingDetailsProcessingProgress (Maybe Word64)
-vpdppPartsProcessed
-  = lens _vpdppPartsProcessed
-      (\ s a -> s{_vpdppPartsProcessed = a})
-
-instance FromJSON
-         VideoProcessingDetailsProcessingProgress where
-        parseJSON
-          = withObject
-              "VideoProcessingDetailsProcessingProgress"
-              (\ o ->
-                 VideoProcessingDetailsProcessingProgress <$>
-                   (o .:? "timeLeftMs") <*> (o .:? "partsTotal") <*>
-                     (o .:? "partsProcessed"))
-
-instance ToJSON
-         VideoProcessingDetailsProcessingProgress where
-        toJSON VideoProcessingDetailsProcessingProgress{..}
-          = object
-              (catMaybes
-                 [("timeLeftMs" .=) <$> _vpdppTimeLeftMs,
-                  ("partsTotal" .=) <$> _vpdppPartsTotal,
-                  ("partsProcessed" .=) <$> _vpdppPartsProcessed])
-
--- | A caption resource represents a YouTube caption track. A caption track
--- is associated with exactly one YouTube video.
---
--- /See:/ 'caption' smart constructor.
-data Caption = Caption
-    { _capEtag    :: !(Maybe Text)
-    , _capSnippet :: !(Maybe CaptionSnippet)
-    , _capKind    :: !Text
-    , _capId      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Caption' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'capEtag'
---
--- * 'capSnippet'
---
--- * 'capKind'
---
--- * 'capId'
-caption
-    :: Caption
-caption =
-    Caption
-    { _capEtag = Nothing
-    , _capSnippet = Nothing
-    , _capKind = "youtube#caption"
-    , _capId = Nothing
-    }
-
--- | Etag of this resource.
-capEtag :: Lens' Caption (Maybe Text)
-capEtag = lens _capEtag (\ s a -> s{_capEtag = a})
-
--- | The snippet object contains basic details about the caption.
-capSnippet :: Lens' Caption (Maybe CaptionSnippet)
-capSnippet
-  = lens _capSnippet (\ s a -> s{_capSnippet = a})
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"youtube#caption\".
-capKind :: Lens' Caption Text
-capKind = lens _capKind (\ s a -> s{_capKind = a})
-
--- | The ID that YouTube uses to uniquely identify the caption track.
-capId :: Lens' Caption (Maybe Text)
-capId = lens _capId (\ s a -> s{_capId = a})
-
-instance FromJSON Caption where
-        parseJSON
-          = withObject "Caption"
-              (\ o ->
-                 Caption <$>
-                   (o .:? "etag") <*> (o .:? "snippet") <*>
-                     (o .:? "kind" .!= "youtube#caption")
-                     <*> (o .:? "id"))
-
-instance ToJSON Caption where
-        toJSON Caption{..}
-          = object
-              (catMaybes
-                 [("etag" .=) <$> _capEtag,
-                  ("snippet" .=) <$> _capSnippet,
-                  Just ("kind" .= _capKind), ("id" .=) <$> _capId])
-
--- | DEPRECATED Region restriction of the video.
---
--- /See:/ 'videoContentDetailsRegionRestriction' smart constructor.
-data VideoContentDetailsRegionRestriction = VideoContentDetailsRegionRestriction
-    { _vcdrrAllowed :: !(Maybe [Text])
-    , _vcdrrBlocked :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'VideoContentDetailsRegionRestriction' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'vcdrrAllowed'
---
--- * 'vcdrrBlocked'
-videoContentDetailsRegionRestriction
-    :: VideoContentDetailsRegionRestriction
-videoContentDetailsRegionRestriction =
-    VideoContentDetailsRegionRestriction
-    { _vcdrrAllowed = Nothing
-    , _vcdrrBlocked = Nothing
-    }
-
--- | A list of region codes that identify countries where the video is
--- viewable. If this property is present and a country is not listed in its
--- value, then the video is blocked from appearing in that country. If this
--- property is present and contains an empty list, the video is blocked in
--- all countries.
-vcdrrAllowed :: Lens' VideoContentDetailsRegionRestriction [Text]
-vcdrrAllowed
-  = lens _vcdrrAllowed (\ s a -> s{_vcdrrAllowed = a})
-      . _Default
-      . _Coerce
-
--- | A list of region codes that identify countries where the video is
--- blocked. If this property is present and a country is not listed in its
--- value, then the video is viewable in that country. If this property is
--- present and contains an empty list, the video is viewable in all
--- countries.
-vcdrrBlocked :: Lens' VideoContentDetailsRegionRestriction [Text]
-vcdrrBlocked
-  = lens _vcdrrBlocked (\ s a -> s{_vcdrrBlocked = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON
-         VideoContentDetailsRegionRestriction where
-        parseJSON
-          = withObject "VideoContentDetailsRegionRestriction"
-              (\ o ->
-                 VideoContentDetailsRegionRestriction <$>
-                   (o .:? "allowed" .!= mempty) <*>
-                     (o .:? "blocked" .!= mempty))
-
-instance ToJSON VideoContentDetailsRegionRestriction
-         where
-        toJSON VideoContentDetailsRegionRestriction{..}
-          = object
-              (catMaybes
-                 [("allowed" .=) <$> _vcdrrAllowed,
-                  ("blocked" .=) <$> _vcdrrBlocked])
-
--- | Internal representation of thumbnails for a YouTube resource.
---
--- /See:/ 'thumbnailDetails' smart constructor.
-data ThumbnailDetails = ThumbnailDetails
-    { _tdMedium   :: !(Maybe Thumbnail)
-    , _tdMaxres   :: !(Maybe Thumbnail)
-    , _tdDefault  :: !(Maybe Thumbnail)
-    , _tdStandard :: !(Maybe Thumbnail)
-    , _tdHigh     :: !(Maybe Thumbnail)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ThumbnailDetails' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'tdMedium'
---
--- * 'tdMaxres'
---
--- * 'tdDefault'
---
--- * 'tdStandard'
---
--- * 'tdHigh'
-thumbnailDetails
-    :: ThumbnailDetails
-thumbnailDetails =
-    ThumbnailDetails
-    { _tdMedium = Nothing
-    , _tdMaxres = Nothing
-    , _tdDefault = Nothing
-    , _tdStandard = Nothing
-    , _tdHigh = Nothing
-    }
-
--- | The medium quality image for this resource.
-tdMedium :: Lens' ThumbnailDetails (Maybe Thumbnail)
-tdMedium = lens _tdMedium (\ s a -> s{_tdMedium = a})
-
--- | The maximum resolution quality image for this resource.
-tdMaxres :: Lens' ThumbnailDetails (Maybe Thumbnail)
-tdMaxres = lens _tdMaxres (\ s a -> s{_tdMaxres = a})
-
--- | The default image for this resource.
-tdDefault :: Lens' ThumbnailDetails (Maybe Thumbnail)
-tdDefault
-  = lens _tdDefault (\ s a -> s{_tdDefault = a})
-
--- | The standard quality image for this resource.
-tdStandard :: Lens' ThumbnailDetails (Maybe Thumbnail)
-tdStandard
-  = lens _tdStandard (\ s a -> s{_tdStandard = a})
-
--- | The high quality image for this resource.
-tdHigh :: Lens' ThumbnailDetails (Maybe Thumbnail)
-tdHigh = lens _tdHigh (\ s a -> s{_tdHigh = a})
-
-instance FromJSON ThumbnailDetails where
-        parseJSON
-          = withObject "ThumbnailDetails"
-              (\ o ->
-                 ThumbnailDetails <$>
-                   (o .:? "medium") <*> (o .:? "maxres") <*>
-                     (o .:? "default")
-                     <*> (o .:? "standard")
-                     <*> (o .:? "high"))
-
-instance ToJSON ThumbnailDetails where
-        toJSON ThumbnailDetails{..}
-          = object
-              (catMaybes
-                 [("medium" .=) <$> _tdMedium,
-                  ("maxres" .=) <$> _tdMaxres,
-                  ("default" .=) <$> _tdDefault,
-                  ("standard" .=) <$> _tdStandard,
-                  ("high" .=) <$> _tdHigh])
-
--- | Basic details about a channel, including title, description and
--- thumbnails.
---
--- /See:/ 'channelSnippet' smart constructor.
-data ChannelSnippet = ChannelSnippet
-    { _csPublishedAt     :: !(Maybe DateTime')
-    , _csCountry         :: !(Maybe Text)
-    , _csThumbnails      :: !(Maybe ThumbnailDetails)
-    , _csLocalized       :: !(Maybe ChannelLocalization)
-    , _csTitle           :: !(Maybe Text)
-    , _csDescription     :: !(Maybe Text)
-    , _csDefaultLanguage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ChannelSnippet' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'csPublishedAt'
---
--- * 'csCountry'
---
--- * 'csThumbnails'
---
--- * 'csLocalized'
---
--- * 'csTitle'
---
--- * 'csDescription'
---
--- * 'csDefaultLanguage'
-channelSnippet
-    :: ChannelSnippet
-channelSnippet =
-    ChannelSnippet
-    { _csPublishedAt = Nothing
-    , _csCountry = Nothing
-    , _csThumbnails = Nothing
-    , _csLocalized = Nothing
-    , _csTitle = Nothing
-    , _csDescription = Nothing
-    , _csDefaultLanguage = Nothing
-    }
-
--- | The date and time that the channel was created. The value is specified
--- in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
-csPublishedAt :: Lens' ChannelSnippet (Maybe UTCTime)
-csPublishedAt
-  = lens _csPublishedAt
-      (\ s a -> s{_csPublishedAt = a})
-      . mapping _DateTime
-
--- | The country of the channel.
-csCountry :: Lens' ChannelSnippet (Maybe Text)
-csCountry
-  = lens _csCountry (\ s a -> s{_csCountry = a})
-
--- | A map of thumbnail images associated with the channel. For each object
--- in the map, the key is the name of the thumbnail image, and the value is
--- an object that contains other information about the thumbnail.
-csThumbnails :: Lens' ChannelSnippet (Maybe ThumbnailDetails)
-csThumbnails
-  = lens _csThumbnails (\ s a -> s{_csThumbnails = a})
-
--- | Localized title and description, read-only.
-csLocalized :: Lens' ChannelSnippet (Maybe ChannelLocalization)
-csLocalized
-  = lens _csLocalized (\ s a -> s{_csLocalized = a})
-
--- | The channel\'s title.
-csTitle :: Lens' ChannelSnippet (Maybe Text)
-csTitle = lens _csTitle (\ s a -> s{_csTitle = a})
-
--- | The description of the channel.
-csDescription :: Lens' ChannelSnippet (Maybe Text)
-csDescription
-  = lens _csDescription
-      (\ s a -> s{_csDescription = a})
-
--- | The language of the channel\'s default title and description.
-csDefaultLanguage :: Lens' ChannelSnippet (Maybe Text)
-csDefaultLanguage
-  = lens _csDefaultLanguage
-      (\ s a -> s{_csDefaultLanguage = a})
-
-instance FromJSON ChannelSnippet where
-        parseJSON
-          = withObject "ChannelSnippet"
-              (\ o ->
-                 ChannelSnippet <$>
-                   (o .:? "publishedAt") <*> (o .:? "country") <*>
-                     (o .:? "thumbnails")
-                     <*> (o .:? "localized")
-                     <*> (o .:? "title")
-                     <*> (o .:? "description")
-                     <*> (o .:? "defaultLanguage"))
-
-instance ToJSON ChannelSnippet where
-        toJSON ChannelSnippet{..}
-          = object
-              (catMaybes
-                 [("publishedAt" .=) <$> _csPublishedAt,
-                  ("country" .=) <$> _csCountry,
-                  ("thumbnails" .=) <$> _csThumbnails,
-                  ("localized" .=) <$> _csLocalized,
-                  ("title" .=) <$> _csTitle,
-                  ("description" .=) <$> _csDescription,
-                  ("defaultLanguage" .=) <$> _csDefaultLanguage])
-
--- | Localizations for different languages
---
--- /See:/ 'playListLocalizations' smart constructor.
-data PlayListLocalizations =
-    PlayListLocalizations
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PlayListLocalizations' with the minimum fields required to make a request.
---
-playListLocalizations
-    :: PlayListLocalizations
-playListLocalizations = PlayListLocalizations
-
-instance FromJSON PlayListLocalizations where
-        parseJSON
-          = withObject "PlayListLocalizations"
-              (\ o -> pure PlayListLocalizations)
-
-instance ToJSON PlayListLocalizations where
-        toJSON = const (Object mempty)
-
--- | Settings and Info of the monitor stream
---
--- /See:/ 'monitorStreamInfo' smart constructor.
-data MonitorStreamInfo = MonitorStreamInfo
-    { _msiBroadcastStreamDelayMs :: !(Maybe Word32)
-    , _msiEmbedHTML              :: !(Maybe Text)
-    , _msiEnableMonitorStream    :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'MonitorStreamInfo' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'msiBroadcastStreamDelayMs'
---
--- * 'msiEmbedHTML'
---
--- * 'msiEnableMonitorStream'
-monitorStreamInfo
-    :: MonitorStreamInfo
-monitorStreamInfo =
-    MonitorStreamInfo
-    { _msiBroadcastStreamDelayMs = Nothing
-    , _msiEmbedHTML = Nothing
-    , _msiEnableMonitorStream = Nothing
-    }
-
--- | If you have set the enableMonitorStream property to true, then this
--- property determines the length of the live broadcast delay.
-msiBroadcastStreamDelayMs :: Lens' MonitorStreamInfo (Maybe Word32)
-msiBroadcastStreamDelayMs
-  = lens _msiBroadcastStreamDelayMs
-      (\ s a -> s{_msiBroadcastStreamDelayMs = a})
-
--- | HTML code that embeds a player that plays the monitor stream.
-msiEmbedHTML :: Lens' MonitorStreamInfo (Maybe Text)
-msiEmbedHTML
-  = lens _msiEmbedHTML (\ s a -> s{_msiEmbedHTML = a})
-
--- | This value determines whether the monitor stream is enabled for the
--- broadcast. If the monitor stream is enabled, then YouTube will broadcast
--- the event content on a special stream intended only for the
--- broadcaster\'s consumption. The broadcaster can use the stream to review
--- the event content and also to identify the optimal times to insert
--- cuepoints. You need to set this value to true if you intend to have a
--- broadcast delay for your event. Note: This property cannot be updated
--- once the broadcast is in the testing or live state.
-msiEnableMonitorStream :: Lens' MonitorStreamInfo (Maybe Bool)
-msiEnableMonitorStream
-  = lens _msiEnableMonitorStream
-      (\ s a -> s{_msiEnableMonitorStream = a})
-
-instance FromJSON MonitorStreamInfo where
-        parseJSON
-          = withObject "MonitorStreamInfo"
-              (\ o ->
-                 MonitorStreamInfo <$>
-                   (o .:? "broadcastStreamDelayMs") <*>
-                     (o .:? "embedHtml")
-                     <*> (o .:? "enableMonitorStream"))
-
-instance ToJSON MonitorStreamInfo where
-        toJSON MonitorStreamInfo{..}
-          = object
-              (catMaybes
-                 [("broadcastStreamDelayMs" .=) <$>
-                    _msiBroadcastStreamDelayMs,
-                  ("embedHtml" .=) <$> _msiEmbedHTML,
-                  ("enableMonitorStream" .=) <$>
-                    _msiEnableMonitorStream])
-
--- | Describes a temporal position of a visual widget inside a video.
---
--- /See:/ 'invideoTiming' smart constructor.
-data InvideoTiming = InvideoTiming
-    { _itDurationMs :: !(Maybe Word64)
-    , _itOffsetMs   :: !(Maybe Word64)
-    , _itType       :: !(Maybe InvideoTimingType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'InvideoTiming' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'itDurationMs'
---
--- * 'itOffsetMs'
---
--- * 'itType'
-invideoTiming
-    :: InvideoTiming
-invideoTiming =
-    InvideoTiming
-    { _itDurationMs = Nothing
-    , _itOffsetMs = Nothing
-    , _itType = Nothing
-    }
-
--- | Defines the duration in milliseconds for which the promotion should be
--- displayed. If missing, the client should use the default.
-itDurationMs :: Lens' InvideoTiming (Maybe Word64)
-itDurationMs
-  = lens _itDurationMs (\ s a -> s{_itDurationMs = a})
-
--- | Defines the time at which the promotion will appear. Depending on the
--- value of type the value of the offsetMs field will represent a time
--- offset from the start or from the end of the video, expressed in
--- milliseconds.
-itOffsetMs :: Lens' InvideoTiming (Maybe Word64)
-itOffsetMs
-  = lens _itOffsetMs (\ s a -> s{_itOffsetMs = a})
-
--- | Describes a timing type. If the value is offsetFromStart, then the
--- offsetMs field represents an offset from the start of the video. If the
--- value is offsetFromEnd, then the offsetMs field represents an offset
--- from the end of the video.
-itType :: Lens' InvideoTiming (Maybe InvideoTimingType)
-itType = lens _itType (\ s a -> s{_itType = a})
-
-instance FromJSON InvideoTiming where
-        parseJSON
-          = withObject "InvideoTiming"
-              (\ o ->
-                 InvideoTiming <$>
-                   (o .:? "durationMs") <*> (o .:? "offsetMs") <*>
-                     (o .:? "type"))
-
-instance ToJSON InvideoTiming where
-        toJSON InvideoTiming{..}
-          = object
-              (catMaybes
-                 [("durationMs" .=) <$> _itDurationMs,
-                  ("offsetMs" .=) <$> _itOffsetMs,
-                  ("type" .=) <$> _itType])
-
 -- | A videoCategory resource identifies a category that has been or could be
 -- associated with uploaded videos.
 --
@@ -6048,124 +6053,26 @@ instance ToJSON VideoCategory where
                   ("snippet" .=) <$> _vcSnippet,
                   Just ("kind" .= _vcKind), ("id" .=) <$> _vcId])
 
--- | A liveBroadcast resource represents an event that will be streamed, via
--- live video, on YouTube.
+-- | List with all localizations.
 --
--- /See:/ 'liveBroadcast' smart constructor.
-data LiveBroadcast = LiveBroadcast
-    { _lbStatus         :: !(Maybe LiveBroadcastStatus)
-    , _lbEtag           :: !(Maybe Text)
-    , _lbSnippet        :: !(Maybe LiveBroadcastSnippet)
-    , _lbKind           :: !Text
-    , _lbTopicDetails   :: !(Maybe LiveBroadcastTopicDetails)
-    , _lbContentDetails :: !(Maybe LiveBroadcastContentDetails)
-    , _lbId             :: !(Maybe Text)
-    , _lbStatistics     :: !(Maybe LiveBroadcastStatistics)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+-- /See:/ 'videoLocalizations' smart constructor.
+data VideoLocalizations =
+    VideoLocalizations
+    deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LiveBroadcast' with the minimum fields required to make a request.
+-- | Creates a value of 'VideoLocalizations' with the minimum fields required to make a request.
 --
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lbStatus'
---
--- * 'lbEtag'
---
--- * 'lbSnippet'
---
--- * 'lbKind'
---
--- * 'lbTopicDetails'
---
--- * 'lbContentDetails'
---
--- * 'lbId'
---
--- * 'lbStatistics'
-liveBroadcast
-    :: LiveBroadcast
-liveBroadcast =
-    LiveBroadcast
-    { _lbStatus = Nothing
-    , _lbEtag = Nothing
-    , _lbSnippet = Nothing
-    , _lbKind = "youtube#liveBroadcast"
-    , _lbTopicDetails = Nothing
-    , _lbContentDetails = Nothing
-    , _lbId = Nothing
-    , _lbStatistics = Nothing
-    }
+videoLocalizations
+    :: VideoLocalizations
+videoLocalizations = VideoLocalizations
 
--- | The status object contains information about the event\'s status.
-lbStatus :: Lens' LiveBroadcast (Maybe LiveBroadcastStatus)
-lbStatus = lens _lbStatus (\ s a -> s{_lbStatus = a})
-
--- | Etag of this resource.
-lbEtag :: Lens' LiveBroadcast (Maybe Text)
-lbEtag = lens _lbEtag (\ s a -> s{_lbEtag = a})
-
--- | The snippet object contains basic details about the event, including its
--- title, description, start time, and end time.
-lbSnippet :: Lens' LiveBroadcast (Maybe LiveBroadcastSnippet)
-lbSnippet
-  = lens _lbSnippet (\ s a -> s{_lbSnippet = a})
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"youtube#liveBroadcast\".
-lbKind :: Lens' LiveBroadcast Text
-lbKind = lens _lbKind (\ s a -> s{_lbKind = a})
-
-lbTopicDetails :: Lens' LiveBroadcast (Maybe LiveBroadcastTopicDetails)
-lbTopicDetails
-  = lens _lbTopicDetails
-      (\ s a -> s{_lbTopicDetails = a})
-
--- | The contentDetails object contains information about the event\'s video
--- content, such as whether the content can be shown in an embedded video
--- player or if it will be archived and therefore available for viewing
--- after the event has concluded.
-lbContentDetails :: Lens' LiveBroadcast (Maybe LiveBroadcastContentDetails)
-lbContentDetails
-  = lens _lbContentDetails
-      (\ s a -> s{_lbContentDetails = a})
-
--- | The ID that YouTube assigns to uniquely identify the broadcast.
-lbId :: Lens' LiveBroadcast (Maybe Text)
-lbId = lens _lbId (\ s a -> s{_lbId = a})
-
--- | The statistics object contains info about the event\'s current stats.
--- These include concurrent viewers and total chat count. Statistics can
--- change (in either direction) during the lifetime of an event. Statistics
--- are only returned while the event is live.
-lbStatistics :: Lens' LiveBroadcast (Maybe LiveBroadcastStatistics)
-lbStatistics
-  = lens _lbStatistics (\ s a -> s{_lbStatistics = a})
-
-instance FromJSON LiveBroadcast where
+instance FromJSON VideoLocalizations where
         parseJSON
-          = withObject "LiveBroadcast"
-              (\ o ->
-                 LiveBroadcast <$>
-                   (o .:? "status") <*> (o .:? "etag") <*>
-                     (o .:? "snippet")
-                     <*> (o .:? "kind" .!= "youtube#liveBroadcast")
-                     <*> (o .:? "topicDetails")
-                     <*> (o .:? "contentDetails")
-                     <*> (o .:? "id")
-                     <*> (o .:? "statistics"))
+          = withObject "VideoLocalizations"
+              (\ o -> pure VideoLocalizations)
 
-instance ToJSON LiveBroadcast where
-        toJSON LiveBroadcast{..}
-          = object
-              (catMaybes
-                 [("status" .=) <$> _lbStatus,
-                  ("etag" .=) <$> _lbEtag,
-                  ("snippet" .=) <$> _lbSnippet,
-                  Just ("kind" .= _lbKind),
-                  ("topicDetails" .=) <$> _lbTopicDetails,
-                  ("contentDetails" .=) <$> _lbContentDetails,
-                  ("id" .=) <$> _lbId,
-                  ("statistics" .=) <$> _lbStatistics])
+instance ToJSON VideoLocalizations where
+        toJSON = const (Object mempty)
 
 -- | Details about a channelsection, including playlists and channels.
 --
@@ -6220,27 +6127,6 @@ instance ToJSON ChannelSectionContentDetails where
               (catMaybes
                  [("channels" .=) <$> _cscdChannels,
                   ("playlists" .=) <$> _cscdPlayLists])
-
--- | List with all localizations.
---
--- /See:/ 'videoLocalizations' smart constructor.
-data VideoLocalizations =
-    VideoLocalizations
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'VideoLocalizations' with the minimum fields required to make a request.
---
-videoLocalizations
-    :: VideoLocalizations
-videoLocalizations = VideoLocalizations
-
-instance FromJSON VideoLocalizations where
-        parseJSON
-          = withObject "VideoLocalizations"
-              (\ o -> pure VideoLocalizations)
-
-instance ToJSON VideoLocalizations where
-        toJSON = const (Object mempty)
 
 -- | A video resource represents a YouTube video.
 --
@@ -6505,6 +6391,125 @@ instance ToJSON Video where
                   ("monetizationDetails" .=) <$>
                     _vMonetizationDetails])
 
+-- | A liveBroadcast resource represents an event that will be streamed, via
+-- live video, on YouTube.
+--
+-- /See:/ 'liveBroadcast' smart constructor.
+data LiveBroadcast = LiveBroadcast
+    { _lbStatus         :: !(Maybe LiveBroadcastStatus)
+    , _lbEtag           :: !(Maybe Text)
+    , _lbSnippet        :: !(Maybe LiveBroadcastSnippet)
+    , _lbKind           :: !Text
+    , _lbTopicDetails   :: !(Maybe LiveBroadcastTopicDetails)
+    , _lbContentDetails :: !(Maybe LiveBroadcastContentDetails)
+    , _lbId             :: !(Maybe Text)
+    , _lbStatistics     :: !(Maybe LiveBroadcastStatistics)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LiveBroadcast' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lbStatus'
+--
+-- * 'lbEtag'
+--
+-- * 'lbSnippet'
+--
+-- * 'lbKind'
+--
+-- * 'lbTopicDetails'
+--
+-- * 'lbContentDetails'
+--
+-- * 'lbId'
+--
+-- * 'lbStatistics'
+liveBroadcast
+    :: LiveBroadcast
+liveBroadcast =
+    LiveBroadcast
+    { _lbStatus = Nothing
+    , _lbEtag = Nothing
+    , _lbSnippet = Nothing
+    , _lbKind = "youtube#liveBroadcast"
+    , _lbTopicDetails = Nothing
+    , _lbContentDetails = Nothing
+    , _lbId = Nothing
+    , _lbStatistics = Nothing
+    }
+
+-- | The status object contains information about the event\'s status.
+lbStatus :: Lens' LiveBroadcast (Maybe LiveBroadcastStatus)
+lbStatus = lens _lbStatus (\ s a -> s{_lbStatus = a})
+
+-- | Etag of this resource.
+lbEtag :: Lens' LiveBroadcast (Maybe Text)
+lbEtag = lens _lbEtag (\ s a -> s{_lbEtag = a})
+
+-- | The snippet object contains basic details about the event, including its
+-- title, description, start time, and end time.
+lbSnippet :: Lens' LiveBroadcast (Maybe LiveBroadcastSnippet)
+lbSnippet
+  = lens _lbSnippet (\ s a -> s{_lbSnippet = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"youtube#liveBroadcast\".
+lbKind :: Lens' LiveBroadcast Text
+lbKind = lens _lbKind (\ s a -> s{_lbKind = a})
+
+lbTopicDetails :: Lens' LiveBroadcast (Maybe LiveBroadcastTopicDetails)
+lbTopicDetails
+  = lens _lbTopicDetails
+      (\ s a -> s{_lbTopicDetails = a})
+
+-- | The contentDetails object contains information about the event\'s video
+-- content, such as whether the content can be shown in an embedded video
+-- player or if it will be archived and therefore available for viewing
+-- after the event has concluded.
+lbContentDetails :: Lens' LiveBroadcast (Maybe LiveBroadcastContentDetails)
+lbContentDetails
+  = lens _lbContentDetails
+      (\ s a -> s{_lbContentDetails = a})
+
+-- | The ID that YouTube assigns to uniquely identify the broadcast.
+lbId :: Lens' LiveBroadcast (Maybe Text)
+lbId = lens _lbId (\ s a -> s{_lbId = a})
+
+-- | The statistics object contains info about the event\'s current stats.
+-- These include concurrent viewers and total chat count. Statistics can
+-- change (in either direction) during the lifetime of an event. Statistics
+-- are only returned while the event is live.
+lbStatistics :: Lens' LiveBroadcast (Maybe LiveBroadcastStatistics)
+lbStatistics
+  = lens _lbStatistics (\ s a -> s{_lbStatistics = a})
+
+instance FromJSON LiveBroadcast where
+        parseJSON
+          = withObject "LiveBroadcast"
+              (\ o ->
+                 LiveBroadcast <$>
+                   (o .:? "status") <*> (o .:? "etag") <*>
+                     (o .:? "snippet")
+                     <*> (o .:? "kind" .!= "youtube#liveBroadcast")
+                     <*> (o .:? "topicDetails")
+                     <*> (o .:? "contentDetails")
+                     <*> (o .:? "id")
+                     <*> (o .:? "statistics"))
+
+instance ToJSON LiveBroadcast where
+        toJSON LiveBroadcast{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _lbStatus,
+                  ("etag" .=) <$> _lbEtag,
+                  ("snippet" .=) <$> _lbSnippet,
+                  Just ("kind" .= _lbKind),
+                  ("topicDetails" .=) <$> _lbTopicDetails,
+                  ("contentDetails" .=) <$> _lbContentDetails,
+                  ("id" .=) <$> _lbId,
+                  ("statistics" .=) <$> _lbStatistics])
+
 -- | Detailed settings of a stream.
 --
 -- /See:/ 'liveStreamContentDetails' smart constructor.
@@ -6567,181 +6572,6 @@ instance ToJSON LiveStreamContentDetails where
                     _lscdClosedCaptionsIngestionURL,
                   ("isReusable" .=) <$> _lscdIsReusable])
 
--- | Basic details about a video category, such as its localized title.
---
--- /See:/ 'videoCategorySnippet' smart constructor.
-data VideoCategorySnippet = VideoCategorySnippet
-    { _vcsAssignable :: !(Maybe Bool)
-    , _vcsChannelId  :: !Text
-    , _vcsTitle      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'VideoCategorySnippet' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'vcsAssignable'
---
--- * 'vcsChannelId'
---
--- * 'vcsTitle'
-videoCategorySnippet
-    :: VideoCategorySnippet
-videoCategorySnippet =
-    VideoCategorySnippet
-    { _vcsAssignable = Nothing
-    , _vcsChannelId = "UCBR8-60-B28hp2BmDPdntcQ"
-    , _vcsTitle = Nothing
-    }
-
-vcsAssignable :: Lens' VideoCategorySnippet (Maybe Bool)
-vcsAssignable
-  = lens _vcsAssignable
-      (\ s a -> s{_vcsAssignable = a})
-
--- | The YouTube channel that created the video category.
-vcsChannelId :: Lens' VideoCategorySnippet Text
-vcsChannelId
-  = lens _vcsChannelId (\ s a -> s{_vcsChannelId = a})
-
--- | The video category\'s title.
-vcsTitle :: Lens' VideoCategorySnippet (Maybe Text)
-vcsTitle = lens _vcsTitle (\ s a -> s{_vcsTitle = a})
-
-instance FromJSON VideoCategorySnippet where
-        parseJSON
-          = withObject "VideoCategorySnippet"
-              (\ o ->
-                 VideoCategorySnippet <$>
-                   (o .:? "assignable") <*>
-                     (o .:? "channelId" .!= "UCBR8-60-B28hp2BmDPdntcQ")
-                     <*> (o .:? "title"))
-
-instance ToJSON VideoCategorySnippet where
-        toJSON VideoCategorySnippet{..}
-          = object
-              (catMaybes
-                 [("assignable" .=) <$> _vcsAssignable,
-                  Just ("channelId" .= _vcsChannelId),
-                  ("title" .=) <$> _vcsTitle])
-
---
--- /See:/ 'commentThreadListResponse' smart constructor.
-data CommentThreadListResponse = CommentThreadListResponse
-    { _ctlrEtag            :: !(Maybe Text)
-    , _ctlrTokenPagination :: !(Maybe TokenPagination)
-    , _ctlrNextPageToken   :: !(Maybe Text)
-    , _ctlrPageInfo        :: !(Maybe PageInfo)
-    , _ctlrKind            :: !Text
-    , _ctlrItems           :: !(Maybe [CommentThread])
-    , _ctlrVisitorId       :: !(Maybe Text)
-    , _ctlrEventId         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CommentThreadListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ctlrEtag'
---
--- * 'ctlrTokenPagination'
---
--- * 'ctlrNextPageToken'
---
--- * 'ctlrPageInfo'
---
--- * 'ctlrKind'
---
--- * 'ctlrItems'
---
--- * 'ctlrVisitorId'
---
--- * 'ctlrEventId'
-commentThreadListResponse
-    :: CommentThreadListResponse
-commentThreadListResponse =
-    CommentThreadListResponse
-    { _ctlrEtag = Nothing
-    , _ctlrTokenPagination = Nothing
-    , _ctlrNextPageToken = Nothing
-    , _ctlrPageInfo = Nothing
-    , _ctlrKind = "youtube#commentThreadListResponse"
-    , _ctlrItems = Nothing
-    , _ctlrVisitorId = Nothing
-    , _ctlrEventId = Nothing
-    }
-
--- | Etag of this resource.
-ctlrEtag :: Lens' CommentThreadListResponse (Maybe Text)
-ctlrEtag = lens _ctlrEtag (\ s a -> s{_ctlrEtag = a})
-
-ctlrTokenPagination :: Lens' CommentThreadListResponse (Maybe TokenPagination)
-ctlrTokenPagination
-  = lens _ctlrTokenPagination
-      (\ s a -> s{_ctlrTokenPagination = a})
-
--- | The token that can be used as the value of the pageToken parameter to
--- retrieve the next page in the result set.
-ctlrNextPageToken :: Lens' CommentThreadListResponse (Maybe Text)
-ctlrNextPageToken
-  = lens _ctlrNextPageToken
-      (\ s a -> s{_ctlrNextPageToken = a})
-
-ctlrPageInfo :: Lens' CommentThreadListResponse (Maybe PageInfo)
-ctlrPageInfo
-  = lens _ctlrPageInfo (\ s a -> s{_ctlrPageInfo = a})
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"youtube#commentThreadListResponse\".
-ctlrKind :: Lens' CommentThreadListResponse Text
-ctlrKind = lens _ctlrKind (\ s a -> s{_ctlrKind = a})
-
--- | A list of comment threads that match the request criteria.
-ctlrItems :: Lens' CommentThreadListResponse [CommentThread]
-ctlrItems
-  = lens _ctlrItems (\ s a -> s{_ctlrItems = a}) .
-      _Default
-      . _Coerce
-
--- | The visitorId identifies the visitor.
-ctlrVisitorId :: Lens' CommentThreadListResponse (Maybe Text)
-ctlrVisitorId
-  = lens _ctlrVisitorId
-      (\ s a -> s{_ctlrVisitorId = a})
-
--- | Serialized EventId of the request which produced this response.
-ctlrEventId :: Lens' CommentThreadListResponse (Maybe Text)
-ctlrEventId
-  = lens _ctlrEventId (\ s a -> s{_ctlrEventId = a})
-
-instance FromJSON CommentThreadListResponse where
-        parseJSON
-          = withObject "CommentThreadListResponse"
-              (\ o ->
-                 CommentThreadListResponse <$>
-                   (o .:? "etag") <*> (o .:? "tokenPagination") <*>
-                     (o .:? "nextPageToken")
-                     <*> (o .:? "pageInfo")
-                     <*>
-                     (o .:? "kind" .!=
-                        "youtube#commentThreadListResponse")
-                     <*> (o .:? "items" .!= mempty)
-                     <*> (o .:? "visitorId")
-                     <*> (o .:? "eventId"))
-
-instance ToJSON CommentThreadListResponse where
-        toJSON CommentThreadListResponse{..}
-          = object
-              (catMaybes
-                 [("etag" .=) <$> _ctlrEtag,
-                  ("tokenPagination" .=) <$> _ctlrTokenPagination,
-                  ("nextPageToken" .=) <$> _ctlrNextPageToken,
-                  ("pageInfo" .=) <$> _ctlrPageInfo,
-                  Just ("kind" .= _ctlrKind),
-                  ("items" .=) <$> _ctlrItems,
-                  ("visitorId" .=) <$> _ctlrVisitorId,
-                  ("eventId" .=) <$> _ctlrEventId])
-
 -- | A pair Property \/ Value.
 --
 -- /See:/ 'propertyValue' smart constructor.
@@ -6788,136 +6618,6 @@ instance ToJSON PropertyValue where
                  [("property" .=) <$> _pvProperty,
                   ("value" .=) <$> _pvValue])
 
--- | An i18nLanguage resource identifies a UI language currently supported by
--- YouTube.
---
--- /See:/ 'i18nLanguage' smart constructor.
-data I18nLanguage = I18nLanguage
-    { _ilEtag    :: !(Maybe Text)
-    , _ilSnippet :: !(Maybe I18nLanguageSnippet)
-    , _ilKind    :: !Text
-    , _ilId      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'I18nLanguage' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ilEtag'
---
--- * 'ilSnippet'
---
--- * 'ilKind'
---
--- * 'ilId'
-i18nLanguage
-    :: I18nLanguage
-i18nLanguage =
-    I18nLanguage
-    { _ilEtag = Nothing
-    , _ilSnippet = Nothing
-    , _ilKind = "youtube#i18nLanguage"
-    , _ilId = Nothing
-    }
-
--- | Etag of this resource.
-ilEtag :: Lens' I18nLanguage (Maybe Text)
-ilEtag = lens _ilEtag (\ s a -> s{_ilEtag = a})
-
--- | The snippet object contains basic details about the i18n language, such
--- as language code and human-readable name.
-ilSnippet :: Lens' I18nLanguage (Maybe I18nLanguageSnippet)
-ilSnippet
-  = lens _ilSnippet (\ s a -> s{_ilSnippet = a})
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"youtube#i18nLanguage\".
-ilKind :: Lens' I18nLanguage Text
-ilKind = lens _ilKind (\ s a -> s{_ilKind = a})
-
--- | The ID that YouTube uses to uniquely identify the i18n language.
-ilId :: Lens' I18nLanguage (Maybe Text)
-ilId = lens _ilId (\ s a -> s{_ilId = a})
-
-instance FromJSON I18nLanguage where
-        parseJSON
-          = withObject "I18nLanguage"
-              (\ o ->
-                 I18nLanguage <$>
-                   (o .:? "etag") <*> (o .:? "snippet") <*>
-                     (o .:? "kind" .!= "youtube#i18nLanguage")
-                     <*> (o .:? "id"))
-
-instance ToJSON I18nLanguage where
-        toJSON I18nLanguage{..}
-          = object
-              (catMaybes
-                 [("etag" .=) <$> _ilEtag,
-                  ("snippet" .=) <$> _ilSnippet,
-                  Just ("kind" .= _ilKind), ("id" .=) <$> _ilId])
-
--- | Branding properties for the watch.
---
--- /See:/ 'watchSettings' smart constructor.
-data WatchSettings = WatchSettings
-    { _wsFeaturedPlayListId :: !(Maybe Text)
-    , _wsBackgRoundColor    :: !(Maybe Text)
-    , _wsTextColor          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'WatchSettings' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'wsFeaturedPlayListId'
---
--- * 'wsBackgRoundColor'
---
--- * 'wsTextColor'
-watchSettings
-    :: WatchSettings
-watchSettings =
-    WatchSettings
-    { _wsFeaturedPlayListId = Nothing
-    , _wsBackgRoundColor = Nothing
-    , _wsTextColor = Nothing
-    }
-
--- | An ID that uniquely identifies a playlist that displays next to the
--- video player.
-wsFeaturedPlayListId :: Lens' WatchSettings (Maybe Text)
-wsFeaturedPlayListId
-  = lens _wsFeaturedPlayListId
-      (\ s a -> s{_wsFeaturedPlayListId = a})
-
--- | The text color for the video watch page\'s branded area.
-wsBackgRoundColor :: Lens' WatchSettings (Maybe Text)
-wsBackgRoundColor
-  = lens _wsBackgRoundColor
-      (\ s a -> s{_wsBackgRoundColor = a})
-
--- | The background color for the video watch page\'s branded area.
-wsTextColor :: Lens' WatchSettings (Maybe Text)
-wsTextColor
-  = lens _wsTextColor (\ s a -> s{_wsTextColor = a})
-
-instance FromJSON WatchSettings where
-        parseJSON
-          = withObject "WatchSettings"
-              (\ o ->
-                 WatchSettings <$>
-                   (o .:? "featuredPlaylistId") <*>
-                     (o .:? "backgroundColor")
-                     <*> (o .:? "textColor"))
-
-instance ToJSON WatchSettings where
-        toJSON WatchSettings{..}
-          = object
-              (catMaybes
-                 [("featuredPlaylistId" .=) <$> _wsFeaturedPlayListId,
-                  ("backgroundColor" .=) <$> _wsBackgRoundColor,
-                  ("textColor" .=) <$> _wsTextColor])
-
 -- | Basic details about a video, including title, description, uploader,
 -- thumbnails and category.
 --
@@ -6931,7 +6631,7 @@ data VideoSnippet = VideoSnippet
     , _vsLocalized            :: !(Maybe VideoLocalization)
     , _vsCategoryId           :: !(Maybe Text)
     , _vsTitle                :: !(Maybe Text)
-    , _vsLiveBroadcastContent :: !(Maybe LiveBroadcastContent)
+    , _vsLiveBroadcastContent :: !(Maybe VideoSnippetLiveBroadcastContent)
     , _vsDescription          :: !(Maybe Text)
     , _vsTags                 :: !(Maybe [Text])
     , _vsDefaultLanguage      :: !(Maybe Text)
@@ -7034,7 +6734,7 @@ vsTitle = lens _vsTitle (\ s a -> s{_vsTitle = a})
 
 -- | Indicates if the video is an upcoming\/active live broadcast. Or it\'s
 -- \"none\" if the video is not an upcoming\/active live broadcast.
-vsLiveBroadcastContent :: Lens' VideoSnippet (Maybe LiveBroadcastContent)
+vsLiveBroadcastContent :: Lens' VideoSnippet (Maybe VideoSnippetLiveBroadcastContent)
 vsLiveBroadcastContent
   = lens _vsLiveBroadcastContent
       (\ s a -> s{_vsLiveBroadcastContent = a})
@@ -7094,331 +6794,6 @@ instance ToJSON VideoSnippet where
                   ("description" .=) <$> _vsDescription,
                   ("tags" .=) <$> _vsTags,
                   ("defaultLanguage" .=) <$> _vsDefaultLanguage])
-
--- | Rights management policy for YouTube resources.
---
--- /See:/ 'accessPolicy' smart constructor.
-data AccessPolicy = AccessPolicy
-    { _apException :: !(Maybe [Text])
-    , _apAllowed   :: !(Maybe Bool)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AccessPolicy' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'apException'
---
--- * 'apAllowed'
-accessPolicy
-    :: AccessPolicy
-accessPolicy =
-    AccessPolicy
-    { _apException = Nothing
-    , _apAllowed = Nothing
-    }
-
--- | A list of region codes that identify countries where the default policy
--- do not apply.
-apException :: Lens' AccessPolicy [Text]
-apException
-  = lens _apException (\ s a -> s{_apException = a}) .
-      _Default
-      . _Coerce
-
--- | The value of allowed indicates whether the access to the policy is
--- allowed or denied by default.
-apAllowed :: Lens' AccessPolicy (Maybe Bool)
-apAllowed
-  = lens _apAllowed (\ s a -> s{_apAllowed = a})
-
-instance FromJSON AccessPolicy where
-        parseJSON
-          = withObject "AccessPolicy"
-              (\ o ->
-                 AccessPolicy <$>
-                   (o .:? "exception" .!= mempty) <*> (o .:? "allowed"))
-
-instance ToJSON AccessPolicy where
-        toJSON AccessPolicy{..}
-          = object
-              (catMaybes
-                 [("exception" .=) <$> _apException,
-                  ("allowed" .=) <$> _apAllowed])
-
---
--- /See:/ 'activityListResponse' smart constructor.
-data ActivityListResponse = ActivityListResponse
-    { _alrEtag            :: !(Maybe Text)
-    , _alrTokenPagination :: !(Maybe TokenPagination)
-    , _alrNextPageToken   :: !(Maybe Text)
-    , _alrPageInfo        :: !(Maybe PageInfo)
-    , _alrKind            :: !Text
-    , _alrItems           :: !(Maybe [Activity])
-    , _alrVisitorId       :: !(Maybe Text)
-    , _alrEventId         :: !(Maybe Text)
-    , _alrPrevPageToken   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ActivityListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'alrEtag'
---
--- * 'alrTokenPagination'
---
--- * 'alrNextPageToken'
---
--- * 'alrPageInfo'
---
--- * 'alrKind'
---
--- * 'alrItems'
---
--- * 'alrVisitorId'
---
--- * 'alrEventId'
---
--- * 'alrPrevPageToken'
-activityListResponse
-    :: ActivityListResponse
-activityListResponse =
-    ActivityListResponse
-    { _alrEtag = Nothing
-    , _alrTokenPagination = Nothing
-    , _alrNextPageToken = Nothing
-    , _alrPageInfo = Nothing
-    , _alrKind = "youtube#activityListResponse"
-    , _alrItems = Nothing
-    , _alrVisitorId = Nothing
-    , _alrEventId = Nothing
-    , _alrPrevPageToken = Nothing
-    }
-
--- | Etag of this resource.
-alrEtag :: Lens' ActivityListResponse (Maybe Text)
-alrEtag = lens _alrEtag (\ s a -> s{_alrEtag = a})
-
-alrTokenPagination :: Lens' ActivityListResponse (Maybe TokenPagination)
-alrTokenPagination
-  = lens _alrTokenPagination
-      (\ s a -> s{_alrTokenPagination = a})
-
--- | The token that can be used as the value of the pageToken parameter to
--- retrieve the next page in the result set.
-alrNextPageToken :: Lens' ActivityListResponse (Maybe Text)
-alrNextPageToken
-  = lens _alrNextPageToken
-      (\ s a -> s{_alrNextPageToken = a})
-
-alrPageInfo :: Lens' ActivityListResponse (Maybe PageInfo)
-alrPageInfo
-  = lens _alrPageInfo (\ s a -> s{_alrPageInfo = a})
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"youtube#activityListResponse\".
-alrKind :: Lens' ActivityListResponse Text
-alrKind = lens _alrKind (\ s a -> s{_alrKind = a})
-
--- | A list of activities, or events, that match the request criteria.
-alrItems :: Lens' ActivityListResponse [Activity]
-alrItems
-  = lens _alrItems (\ s a -> s{_alrItems = a}) .
-      _Default
-      . _Coerce
-
--- | The visitorId identifies the visitor.
-alrVisitorId :: Lens' ActivityListResponse (Maybe Text)
-alrVisitorId
-  = lens _alrVisitorId (\ s a -> s{_alrVisitorId = a})
-
--- | Serialized EventId of the request which produced this response.
-alrEventId :: Lens' ActivityListResponse (Maybe Text)
-alrEventId
-  = lens _alrEventId (\ s a -> s{_alrEventId = a})
-
--- | The token that can be used as the value of the pageToken parameter to
--- retrieve the previous page in the result set.
-alrPrevPageToken :: Lens' ActivityListResponse (Maybe Text)
-alrPrevPageToken
-  = lens _alrPrevPageToken
-      (\ s a -> s{_alrPrevPageToken = a})
-
-instance FromJSON ActivityListResponse where
-        parseJSON
-          = withObject "ActivityListResponse"
-              (\ o ->
-                 ActivityListResponse <$>
-                   (o .:? "etag") <*> (o .:? "tokenPagination") <*>
-                     (o .:? "nextPageToken")
-                     <*> (o .:? "pageInfo")
-                     <*> (o .:? "kind" .!= "youtube#activityListResponse")
-                     <*> (o .:? "items" .!= mempty)
-                     <*> (o .:? "visitorId")
-                     <*> (o .:? "eventId")
-                     <*> (o .:? "prevPageToken"))
-
-instance ToJSON ActivityListResponse where
-        toJSON ActivityListResponse{..}
-          = object
-              (catMaybes
-                 [("etag" .=) <$> _alrEtag,
-                  ("tokenPagination" .=) <$> _alrTokenPagination,
-                  ("nextPageToken" .=) <$> _alrNextPageToken,
-                  ("pageInfo" .=) <$> _alrPageInfo,
-                  Just ("kind" .= _alrKind),
-                  ("items" .=) <$> _alrItems,
-                  ("visitorId" .=) <$> _alrVisitorId,
-                  ("eventId" .=) <$> _alrEventId,
-                  ("prevPageToken" .=) <$> _alrPrevPageToken])
-
--- | Brief description of the live stream cdn settings.
---
--- /See:/ 'cdnSettings' smart constructor.
-data CdnSettings = CdnSettings
-    { _csIngestionInfo :: !(Maybe IngestionInfo)
-    , _csFormat        :: !(Maybe Text)
-    , _csIngestionType :: !(Maybe IngestionType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CdnSettings' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'csIngestionInfo'
---
--- * 'csFormat'
---
--- * 'csIngestionType'
-cdnSettings
-    :: CdnSettings
-cdnSettings =
-    CdnSettings
-    { _csIngestionInfo = Nothing
-    , _csFormat = Nothing
-    , _csIngestionType = Nothing
-    }
-
--- | The ingestionInfo object contains information that YouTube provides that
--- you need to transmit your RTMP or HTTP stream to YouTube.
-csIngestionInfo :: Lens' CdnSettings (Maybe IngestionInfo)
-csIngestionInfo
-  = lens _csIngestionInfo
-      (\ s a -> s{_csIngestionInfo = a})
-
--- | The format of the video stream that you are sending to Youtube.
-csFormat :: Lens' CdnSettings (Maybe Text)
-csFormat = lens _csFormat (\ s a -> s{_csFormat = a})
-
--- | The method or protocol used to transmit the video stream.
-csIngestionType :: Lens' CdnSettings (Maybe IngestionType)
-csIngestionType
-  = lens _csIngestionType
-      (\ s a -> s{_csIngestionType = a})
-
-instance FromJSON CdnSettings where
-        parseJSON
-          = withObject "CdnSettings"
-              (\ o ->
-                 CdnSettings <$>
-                   (o .:? "ingestionInfo") <*> (o .:? "format") <*>
-                     (o .:? "ingestionType"))
-
-instance ToJSON CdnSettings where
-        toJSON CdnSettings{..}
-          = object
-              (catMaybes
-                 [("ingestionInfo" .=) <$> _csIngestionInfo,
-                  ("format" .=) <$> _csFormat,
-                  ("ingestionType" .=) <$> _csIngestionType])
-
--- | Statistics about the video, such as the number of times the video was
--- viewed or liked.
---
--- /See:/ 'videoStatistics' smart constructor.
-data VideoStatistics = VideoStatistics
-    { _vsLikeCount     :: !(Maybe Word64)
-    , _vsCommentCount  :: !(Maybe Word64)
-    , _vsFavoriteCount :: !(Maybe Word64)
-    , _vsDislikeCount  :: !(Maybe Word64)
-    , _vsViewCount     :: !(Maybe Word64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'VideoStatistics' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'vsLikeCount'
---
--- * 'vsCommentCount'
---
--- * 'vsFavoriteCount'
---
--- * 'vsDislikeCount'
---
--- * 'vsViewCount'
-videoStatistics
-    :: VideoStatistics
-videoStatistics =
-    VideoStatistics
-    { _vsLikeCount = Nothing
-    , _vsCommentCount = Nothing
-    , _vsFavoriteCount = Nothing
-    , _vsDislikeCount = Nothing
-    , _vsViewCount = Nothing
-    }
-
--- | The number of users who have indicated that they liked the video by
--- giving it a positive rating.
-vsLikeCount :: Lens' VideoStatistics (Maybe Word64)
-vsLikeCount
-  = lens _vsLikeCount (\ s a -> s{_vsLikeCount = a})
-
--- | The number of comments for the video.
-vsCommentCount :: Lens' VideoStatistics (Maybe Word64)
-vsCommentCount
-  = lens _vsCommentCount
-      (\ s a -> s{_vsCommentCount = a})
-
--- | The number of users who currently have the video marked as a favorite
--- video.
-vsFavoriteCount :: Lens' VideoStatistics (Maybe Word64)
-vsFavoriteCount
-  = lens _vsFavoriteCount
-      (\ s a -> s{_vsFavoriteCount = a})
-
--- | The number of users who have indicated that they disliked the video by
--- giving it a negative rating.
-vsDislikeCount :: Lens' VideoStatistics (Maybe Word64)
-vsDislikeCount
-  = lens _vsDislikeCount
-      (\ s a -> s{_vsDislikeCount = a})
-
--- | The number of times the video has been viewed.
-vsViewCount :: Lens' VideoStatistics (Maybe Word64)
-vsViewCount
-  = lens _vsViewCount (\ s a -> s{_vsViewCount = a})
-
-instance FromJSON VideoStatistics where
-        parseJSON
-          = withObject "VideoStatistics"
-              (\ o ->
-                 VideoStatistics <$>
-                   (o .:? "likeCount") <*> (o .:? "commentCount") <*>
-                     (o .:? "favoriteCount")
-                     <*> (o .:? "dislikeCount")
-                     <*> (o .:? "viewCount"))
-
-instance ToJSON VideoStatistics where
-        toJSON VideoStatistics{..}
-          = object
-              (catMaybes
-                 [("likeCount" .=) <$> _vsLikeCount,
-                  ("commentCount" .=) <$> _vsCommentCount,
-                  ("favoriteCount" .=) <$> _vsFavoriteCount,
-                  ("dislikeCount" .=) <$> _vsDislikeCount,
-                  ("viewCount" .=) <$> _vsViewCount])
 
 --
 -- /See:/ 'liveBroadcastSnippet' smart constructor.
@@ -7594,6 +6969,296 @@ instance ToJSON LiveBroadcastSnippet where
                   ("isDefaultBroadcast" .=) <$> _lbsIsDefaultBroadcast,
                   ("description" .=) <$> _lbsDescription])
 
+-- | Rights management policy for YouTube resources.
+--
+-- /See:/ 'accessPolicy' smart constructor.
+data AccessPolicy = AccessPolicy
+    { _apException :: !(Maybe [Text])
+    , _apAllowed   :: !(Maybe Bool)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AccessPolicy' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'apException'
+--
+-- * 'apAllowed'
+accessPolicy
+    :: AccessPolicy
+accessPolicy =
+    AccessPolicy
+    { _apException = Nothing
+    , _apAllowed = Nothing
+    }
+
+-- | A list of region codes that identify countries where the default policy
+-- do not apply.
+apException :: Lens' AccessPolicy [Text]
+apException
+  = lens _apException (\ s a -> s{_apException = a}) .
+      _Default
+      . _Coerce
+
+-- | The value of allowed indicates whether the access to the policy is
+-- allowed or denied by default.
+apAllowed :: Lens' AccessPolicy (Maybe Bool)
+apAllowed
+  = lens _apAllowed (\ s a -> s{_apAllowed = a})
+
+instance FromJSON AccessPolicy where
+        parseJSON
+          = withObject "AccessPolicy"
+              (\ o ->
+                 AccessPolicy <$>
+                   (o .:? "exception" .!= mempty) <*> (o .:? "allowed"))
+
+instance ToJSON AccessPolicy where
+        toJSON AccessPolicy{..}
+          = object
+              (catMaybes
+                 [("exception" .=) <$> _apException,
+                  ("allowed" .=) <$> _apAllowed])
+
+--
+-- /See:/ 'commentThreadListResponse' smart constructor.
+data CommentThreadListResponse = CommentThreadListResponse
+    { _ctlrEtag            :: !(Maybe Text)
+    , _ctlrTokenPagination :: !(Maybe TokenPagination)
+    , _ctlrNextPageToken   :: !(Maybe Text)
+    , _ctlrPageInfo        :: !(Maybe PageInfo)
+    , _ctlrKind            :: !Text
+    , _ctlrItems           :: !(Maybe [CommentThread])
+    , _ctlrVisitorId       :: !(Maybe Text)
+    , _ctlrEventId         :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CommentThreadListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ctlrEtag'
+--
+-- * 'ctlrTokenPagination'
+--
+-- * 'ctlrNextPageToken'
+--
+-- * 'ctlrPageInfo'
+--
+-- * 'ctlrKind'
+--
+-- * 'ctlrItems'
+--
+-- * 'ctlrVisitorId'
+--
+-- * 'ctlrEventId'
+commentThreadListResponse
+    :: CommentThreadListResponse
+commentThreadListResponse =
+    CommentThreadListResponse
+    { _ctlrEtag = Nothing
+    , _ctlrTokenPagination = Nothing
+    , _ctlrNextPageToken = Nothing
+    , _ctlrPageInfo = Nothing
+    , _ctlrKind = "youtube#commentThreadListResponse"
+    , _ctlrItems = Nothing
+    , _ctlrVisitorId = Nothing
+    , _ctlrEventId = Nothing
+    }
+
+-- | Etag of this resource.
+ctlrEtag :: Lens' CommentThreadListResponse (Maybe Text)
+ctlrEtag = lens _ctlrEtag (\ s a -> s{_ctlrEtag = a})
+
+ctlrTokenPagination :: Lens' CommentThreadListResponse (Maybe TokenPagination)
+ctlrTokenPagination
+  = lens _ctlrTokenPagination
+      (\ s a -> s{_ctlrTokenPagination = a})
+
+-- | The token that can be used as the value of the pageToken parameter to
+-- retrieve the next page in the result set.
+ctlrNextPageToken :: Lens' CommentThreadListResponse (Maybe Text)
+ctlrNextPageToken
+  = lens _ctlrNextPageToken
+      (\ s a -> s{_ctlrNextPageToken = a})
+
+ctlrPageInfo :: Lens' CommentThreadListResponse (Maybe PageInfo)
+ctlrPageInfo
+  = lens _ctlrPageInfo (\ s a -> s{_ctlrPageInfo = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"youtube#commentThreadListResponse\".
+ctlrKind :: Lens' CommentThreadListResponse Text
+ctlrKind = lens _ctlrKind (\ s a -> s{_ctlrKind = a})
+
+-- | A list of comment threads that match the request criteria.
+ctlrItems :: Lens' CommentThreadListResponse [CommentThread]
+ctlrItems
+  = lens _ctlrItems (\ s a -> s{_ctlrItems = a}) .
+      _Default
+      . _Coerce
+
+-- | The visitorId identifies the visitor.
+ctlrVisitorId :: Lens' CommentThreadListResponse (Maybe Text)
+ctlrVisitorId
+  = lens _ctlrVisitorId
+      (\ s a -> s{_ctlrVisitorId = a})
+
+-- | Serialized EventId of the request which produced this response.
+ctlrEventId :: Lens' CommentThreadListResponse (Maybe Text)
+ctlrEventId
+  = lens _ctlrEventId (\ s a -> s{_ctlrEventId = a})
+
+instance FromJSON CommentThreadListResponse where
+        parseJSON
+          = withObject "CommentThreadListResponse"
+              (\ o ->
+                 CommentThreadListResponse <$>
+                   (o .:? "etag") <*> (o .:? "tokenPagination") <*>
+                     (o .:? "nextPageToken")
+                     <*> (o .:? "pageInfo")
+                     <*>
+                     (o .:? "kind" .!=
+                        "youtube#commentThreadListResponse")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "visitorId")
+                     <*> (o .:? "eventId"))
+
+instance ToJSON CommentThreadListResponse where
+        toJSON CommentThreadListResponse{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _ctlrEtag,
+                  ("tokenPagination" .=) <$> _ctlrTokenPagination,
+                  ("nextPageToken" .=) <$> _ctlrNextPageToken,
+                  ("pageInfo" .=) <$> _ctlrPageInfo,
+                  Just ("kind" .= _ctlrKind),
+                  ("items" .=) <$> _ctlrItems,
+                  ("visitorId" .=) <$> _ctlrVisitorId,
+                  ("eventId" .=) <$> _ctlrEventId])
+
+-- | Branding properties for the watch.
+--
+-- /See:/ 'watchSettings' smart constructor.
+data WatchSettings = WatchSettings
+    { _wsFeaturedPlayListId :: !(Maybe Text)
+    , _wsBackgRoundColor    :: !(Maybe Text)
+    , _wsTextColor          :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'WatchSettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'wsFeaturedPlayListId'
+--
+-- * 'wsBackgRoundColor'
+--
+-- * 'wsTextColor'
+watchSettings
+    :: WatchSettings
+watchSettings =
+    WatchSettings
+    { _wsFeaturedPlayListId = Nothing
+    , _wsBackgRoundColor = Nothing
+    , _wsTextColor = Nothing
+    }
+
+-- | An ID that uniquely identifies a playlist that displays next to the
+-- video player.
+wsFeaturedPlayListId :: Lens' WatchSettings (Maybe Text)
+wsFeaturedPlayListId
+  = lens _wsFeaturedPlayListId
+      (\ s a -> s{_wsFeaturedPlayListId = a})
+
+-- | The text color for the video watch page\'s branded area.
+wsBackgRoundColor :: Lens' WatchSettings (Maybe Text)
+wsBackgRoundColor
+  = lens _wsBackgRoundColor
+      (\ s a -> s{_wsBackgRoundColor = a})
+
+-- | The background color for the video watch page\'s branded area.
+wsTextColor :: Lens' WatchSettings (Maybe Text)
+wsTextColor
+  = lens _wsTextColor (\ s a -> s{_wsTextColor = a})
+
+instance FromJSON WatchSettings where
+        parseJSON
+          = withObject "WatchSettings"
+              (\ o ->
+                 WatchSettings <$>
+                   (o .:? "featuredPlaylistId") <*>
+                     (o .:? "backgroundColor")
+                     <*> (o .:? "textColor"))
+
+instance ToJSON WatchSettings where
+        toJSON WatchSettings{..}
+          = object
+              (catMaybes
+                 [("featuredPlaylistId" .=) <$> _wsFeaturedPlayListId,
+                  ("backgroundColor" .=) <$> _wsBackgRoundColor,
+                  ("textColor" .=) <$> _wsTextColor])
+
+-- | Brief description of the live stream cdn settings.
+--
+-- /See:/ 'cdnSettings' smart constructor.
+data CdnSettings = CdnSettings
+    { _csIngestionInfo :: !(Maybe IngestionInfo)
+    , _csFormat        :: !(Maybe Text)
+    , _csIngestionType :: !(Maybe CdnSettingsIngestionType)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CdnSettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'csIngestionInfo'
+--
+-- * 'csFormat'
+--
+-- * 'csIngestionType'
+cdnSettings
+    :: CdnSettings
+cdnSettings =
+    CdnSettings
+    { _csIngestionInfo = Nothing
+    , _csFormat = Nothing
+    , _csIngestionType = Nothing
+    }
+
+-- | The ingestionInfo object contains information that YouTube provides that
+-- you need to transmit your RTMP or HTTP stream to YouTube.
+csIngestionInfo :: Lens' CdnSettings (Maybe IngestionInfo)
+csIngestionInfo
+  = lens _csIngestionInfo
+      (\ s a -> s{_csIngestionInfo = a})
+
+-- | The format of the video stream that you are sending to Youtube.
+csFormat :: Lens' CdnSettings (Maybe Text)
+csFormat = lens _csFormat (\ s a -> s{_csFormat = a})
+
+-- | The method or protocol used to transmit the video stream.
+csIngestionType :: Lens' CdnSettings (Maybe CdnSettingsIngestionType)
+csIngestionType
+  = lens _csIngestionType
+      (\ s a -> s{_csIngestionType = a})
+
+instance FromJSON CdnSettings where
+        parseJSON
+          = withObject "CdnSettings"
+              (\ o ->
+                 CdnSettings <$>
+                   (o .:? "ingestionInfo") <*> (o .:? "format") <*>
+                     (o .:? "ingestionType"))
+
+instance ToJSON CdnSettings where
+        toJSON CdnSettings{..}
+          = object
+              (catMaybes
+                 [("ingestionInfo" .=) <$> _csIngestionInfo,
+                  ("format" .=) <$> _csFormat,
+                  ("ingestionType" .=) <$> _csIngestionType])
+
 -- | Statistics about the live broadcast. These represent a snapshot of the
 -- values at the time of the request. Statistics are only returned for live
 -- broadcasts.
@@ -7657,292 +7322,345 @@ instance ToJSON LiveBroadcastStatistics where
                  [("totalChatCount" .=) <$> _lbsTotalChatCount,
                   ("concurrentViewers" .=) <$> _lbsConcurrentViewers])
 
--- | Basic details about a guide category.
+-- | Basic details about a video category, such as its localized title.
 --
--- /See:/ 'guideCategorySnippet' smart constructor.
-data GuideCategorySnippet = GuideCategorySnippet
-    { _gcsChannelId :: !Text
-    , _gcsTitle     :: !(Maybe Text)
+-- /See:/ 'videoCategorySnippet' smart constructor.
+data VideoCategorySnippet = VideoCategorySnippet
+    { _vcsAssignable :: !(Maybe Bool)
+    , _vcsChannelId  :: !Text
+    , _vcsTitle      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GuideCategorySnippet' with the minimum fields required to make a request.
+-- | Creates a value of 'VideoCategorySnippet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gcsChannelId'
+-- * 'vcsAssignable'
 --
--- * 'gcsTitle'
-guideCategorySnippet
-    :: GuideCategorySnippet
-guideCategorySnippet =
-    GuideCategorySnippet
-    { _gcsChannelId = "UCBR8-60-B28hp2BmDPdntcQ"
-    , _gcsTitle = Nothing
+-- * 'vcsChannelId'
+--
+-- * 'vcsTitle'
+videoCategorySnippet
+    :: VideoCategorySnippet
+videoCategorySnippet =
+    VideoCategorySnippet
+    { _vcsAssignable = Nothing
+    , _vcsChannelId = "UCBR8-60-B28hp2BmDPdntcQ"
+    , _vcsTitle = Nothing
     }
 
-gcsChannelId :: Lens' GuideCategorySnippet Text
-gcsChannelId
-  = lens _gcsChannelId (\ s a -> s{_gcsChannelId = a})
+vcsAssignable :: Lens' VideoCategorySnippet (Maybe Bool)
+vcsAssignable
+  = lens _vcsAssignable
+      (\ s a -> s{_vcsAssignable = a})
 
--- | Description of the guide category.
-gcsTitle :: Lens' GuideCategorySnippet (Maybe Text)
-gcsTitle = lens _gcsTitle (\ s a -> s{_gcsTitle = a})
+-- | The YouTube channel that created the video category.
+vcsChannelId :: Lens' VideoCategorySnippet Text
+vcsChannelId
+  = lens _vcsChannelId (\ s a -> s{_vcsChannelId = a})
 
-instance FromJSON GuideCategorySnippet where
+-- | The video category\'s title.
+vcsTitle :: Lens' VideoCategorySnippet (Maybe Text)
+vcsTitle = lens _vcsTitle (\ s a -> s{_vcsTitle = a})
+
+instance FromJSON VideoCategorySnippet where
         parseJSON
-          = withObject "GuideCategorySnippet"
+          = withObject "VideoCategorySnippet"
               (\ o ->
-                 GuideCategorySnippet <$>
-                   (o .:? "channelId" .!= "UCBR8-60-B28hp2BmDPdntcQ")
+                 VideoCategorySnippet <$>
+                   (o .:? "assignable") <*>
+                     (o .:? "channelId" .!= "UCBR8-60-B28hp2BmDPdntcQ")
                      <*> (o .:? "title"))
 
-instance ToJSON GuideCategorySnippet where
-        toJSON GuideCategorySnippet{..}
+instance ToJSON VideoCategorySnippet where
+        toJSON VideoCategorySnippet{..}
           = object
               (catMaybes
-                 [Just ("channelId" .= _gcsChannelId),
-                  ("title" .=) <$> _gcsTitle])
+                 [("assignable" .=) <$> _vcsAssignable,
+                  Just ("channelId" .= _vcsChannelId),
+                  ("title" .=) <$> _vcsTitle])
 
+-- | An i18nLanguage resource identifies a UI language currently supported by
+-- YouTube.
 --
--- /See:/ 'i18nRegionListResponse' smart constructor.
-data I18nRegionListResponse = I18nRegionListResponse
-    { _irlrEtag      :: !(Maybe Text)
-    , _irlrKind      :: !Text
-    , _irlrItems     :: !(Maybe [I18nRegion])
-    , _irlrVisitorId :: !(Maybe Text)
-    , _irlrEventId   :: !(Maybe Text)
+-- /See:/ 'i18nLanguage' smart constructor.
+data I18nLanguage = I18nLanguage
+    { _ilEtag    :: !(Maybe Text)
+    , _ilSnippet :: !(Maybe I18nLanguageSnippet)
+    , _ilKind    :: !Text
+    , _ilId      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'I18nRegionListResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'I18nLanguage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'irlrEtag'
+-- * 'ilEtag'
 --
--- * 'irlrKind'
+-- * 'ilSnippet'
 --
--- * 'irlrItems'
+-- * 'ilKind'
 --
--- * 'irlrVisitorId'
---
--- * 'irlrEventId'
-i18nRegionListResponse
-    :: I18nRegionListResponse
-i18nRegionListResponse =
-    I18nRegionListResponse
-    { _irlrEtag = Nothing
-    , _irlrKind = "youtube#i18nRegionListResponse"
-    , _irlrItems = Nothing
-    , _irlrVisitorId = Nothing
-    , _irlrEventId = Nothing
+-- * 'ilId'
+i18nLanguage
+    :: I18nLanguage
+i18nLanguage =
+    I18nLanguage
+    { _ilEtag = Nothing
+    , _ilSnippet = Nothing
+    , _ilKind = "youtube#i18nLanguage"
+    , _ilId = Nothing
     }
 
 -- | Etag of this resource.
-irlrEtag :: Lens' I18nRegionListResponse (Maybe Text)
-irlrEtag = lens _irlrEtag (\ s a -> s{_irlrEtag = a})
+ilEtag :: Lens' I18nLanguage (Maybe Text)
+ilEtag = lens _ilEtag (\ s a -> s{_ilEtag = a})
+
+-- | The snippet object contains basic details about the i18n language, such
+-- as language code and human-readable name.
+ilSnippet :: Lens' I18nLanguage (Maybe I18nLanguageSnippet)
+ilSnippet
+  = lens _ilSnippet (\ s a -> s{_ilSnippet = a})
 
 -- | Identifies what kind of resource this is. Value: the fixed string
--- \"youtube#i18nRegionListResponse\".
-irlrKind :: Lens' I18nRegionListResponse Text
-irlrKind = lens _irlrKind (\ s a -> s{_irlrKind = a})
+-- \"youtube#i18nLanguage\".
+ilKind :: Lens' I18nLanguage Text
+ilKind = lens _ilKind (\ s a -> s{_ilKind = a})
 
--- | A list of regions where YouTube is available. In this map, the i18n
--- region ID is the map key, and its value is the corresponding i18nRegion
--- resource.
-irlrItems :: Lens' I18nRegionListResponse [I18nRegion]
-irlrItems
-  = lens _irlrItems (\ s a -> s{_irlrItems = a}) .
+-- | The ID that YouTube uses to uniquely identify the i18n language.
+ilId :: Lens' I18nLanguage (Maybe Text)
+ilId = lens _ilId (\ s a -> s{_ilId = a})
+
+instance FromJSON I18nLanguage where
+        parseJSON
+          = withObject "I18nLanguage"
+              (\ o ->
+                 I18nLanguage <$>
+                   (o .:? "etag") <*> (o .:? "snippet") <*>
+                     (o .:? "kind" .!= "youtube#i18nLanguage")
+                     <*> (o .:? "id"))
+
+instance ToJSON I18nLanguage where
+        toJSON I18nLanguage{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _ilEtag,
+                  ("snippet" .=) <$> _ilSnippet,
+                  Just ("kind" .= _ilKind), ("id" .=) <$> _ilId])
+
+-- | Statistics about the video, such as the number of times the video was
+-- viewed or liked.
+--
+-- /See:/ 'videoStatistics' smart constructor.
+data VideoStatistics = VideoStatistics
+    { _vsLikeCount     :: !(Maybe Word64)
+    , _vsCommentCount  :: !(Maybe Word64)
+    , _vsFavoriteCount :: !(Maybe Word64)
+    , _vsDislikeCount  :: !(Maybe Word64)
+    , _vsViewCount     :: !(Maybe Word64)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VideoStatistics' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vsLikeCount'
+--
+-- * 'vsCommentCount'
+--
+-- * 'vsFavoriteCount'
+--
+-- * 'vsDislikeCount'
+--
+-- * 'vsViewCount'
+videoStatistics
+    :: VideoStatistics
+videoStatistics =
+    VideoStatistics
+    { _vsLikeCount = Nothing
+    , _vsCommentCount = Nothing
+    , _vsFavoriteCount = Nothing
+    , _vsDislikeCount = Nothing
+    , _vsViewCount = Nothing
+    }
+
+-- | The number of users who have indicated that they liked the video by
+-- giving it a positive rating.
+vsLikeCount :: Lens' VideoStatistics (Maybe Word64)
+vsLikeCount
+  = lens _vsLikeCount (\ s a -> s{_vsLikeCount = a})
+
+-- | The number of comments for the video.
+vsCommentCount :: Lens' VideoStatistics (Maybe Word64)
+vsCommentCount
+  = lens _vsCommentCount
+      (\ s a -> s{_vsCommentCount = a})
+
+-- | The number of users who currently have the video marked as a favorite
+-- video.
+vsFavoriteCount :: Lens' VideoStatistics (Maybe Word64)
+vsFavoriteCount
+  = lens _vsFavoriteCount
+      (\ s a -> s{_vsFavoriteCount = a})
+
+-- | The number of users who have indicated that they disliked the video by
+-- giving it a negative rating.
+vsDislikeCount :: Lens' VideoStatistics (Maybe Word64)
+vsDislikeCount
+  = lens _vsDislikeCount
+      (\ s a -> s{_vsDislikeCount = a})
+
+-- | The number of times the video has been viewed.
+vsViewCount :: Lens' VideoStatistics (Maybe Word64)
+vsViewCount
+  = lens _vsViewCount (\ s a -> s{_vsViewCount = a})
+
+instance FromJSON VideoStatistics where
+        parseJSON
+          = withObject "VideoStatistics"
+              (\ o ->
+                 VideoStatistics <$>
+                   (o .:? "likeCount") <*> (o .:? "commentCount") <*>
+                     (o .:? "favoriteCount")
+                     <*> (o .:? "dislikeCount")
+                     <*> (o .:? "viewCount"))
+
+instance ToJSON VideoStatistics where
+        toJSON VideoStatistics{..}
+          = object
+              (catMaybes
+                 [("likeCount" .=) <$> _vsLikeCount,
+                  ("commentCount" .=) <$> _vsCommentCount,
+                  ("favoriteCount" .=) <$> _vsFavoriteCount,
+                  ("dislikeCount" .=) <$> _vsDislikeCount,
+                  ("viewCount" .=) <$> _vsViewCount])
+
+--
+-- /See:/ 'activityListResponse' smart constructor.
+data ActivityListResponse = ActivityListResponse
+    { _alrEtag            :: !(Maybe Text)
+    , _alrTokenPagination :: !(Maybe TokenPagination)
+    , _alrNextPageToken   :: !(Maybe Text)
+    , _alrPageInfo        :: !(Maybe PageInfo)
+    , _alrKind            :: !Text
+    , _alrItems           :: !(Maybe [Activity])
+    , _alrVisitorId       :: !(Maybe Text)
+    , _alrEventId         :: !(Maybe Text)
+    , _alrPrevPageToken   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ActivityListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'alrEtag'
+--
+-- * 'alrTokenPagination'
+--
+-- * 'alrNextPageToken'
+--
+-- * 'alrPageInfo'
+--
+-- * 'alrKind'
+--
+-- * 'alrItems'
+--
+-- * 'alrVisitorId'
+--
+-- * 'alrEventId'
+--
+-- * 'alrPrevPageToken'
+activityListResponse
+    :: ActivityListResponse
+activityListResponse =
+    ActivityListResponse
+    { _alrEtag = Nothing
+    , _alrTokenPagination = Nothing
+    , _alrNextPageToken = Nothing
+    , _alrPageInfo = Nothing
+    , _alrKind = "youtube#activityListResponse"
+    , _alrItems = Nothing
+    , _alrVisitorId = Nothing
+    , _alrEventId = Nothing
+    , _alrPrevPageToken = Nothing
+    }
+
+-- | Etag of this resource.
+alrEtag :: Lens' ActivityListResponse (Maybe Text)
+alrEtag = lens _alrEtag (\ s a -> s{_alrEtag = a})
+
+alrTokenPagination :: Lens' ActivityListResponse (Maybe TokenPagination)
+alrTokenPagination
+  = lens _alrTokenPagination
+      (\ s a -> s{_alrTokenPagination = a})
+
+-- | The token that can be used as the value of the pageToken parameter to
+-- retrieve the next page in the result set.
+alrNextPageToken :: Lens' ActivityListResponse (Maybe Text)
+alrNextPageToken
+  = lens _alrNextPageToken
+      (\ s a -> s{_alrNextPageToken = a})
+
+alrPageInfo :: Lens' ActivityListResponse (Maybe PageInfo)
+alrPageInfo
+  = lens _alrPageInfo (\ s a -> s{_alrPageInfo = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"youtube#activityListResponse\".
+alrKind :: Lens' ActivityListResponse Text
+alrKind = lens _alrKind (\ s a -> s{_alrKind = a})
+
+-- | A list of activities, or events, that match the request criteria.
+alrItems :: Lens' ActivityListResponse [Activity]
+alrItems
+  = lens _alrItems (\ s a -> s{_alrItems = a}) .
       _Default
       . _Coerce
 
 -- | The visitorId identifies the visitor.
-irlrVisitorId :: Lens' I18nRegionListResponse (Maybe Text)
-irlrVisitorId
-  = lens _irlrVisitorId
-      (\ s a -> s{_irlrVisitorId = a})
+alrVisitorId :: Lens' ActivityListResponse (Maybe Text)
+alrVisitorId
+  = lens _alrVisitorId (\ s a -> s{_alrVisitorId = a})
 
 -- | Serialized EventId of the request which produced this response.
-irlrEventId :: Lens' I18nRegionListResponse (Maybe Text)
-irlrEventId
-  = lens _irlrEventId (\ s a -> s{_irlrEventId = a})
+alrEventId :: Lens' ActivityListResponse (Maybe Text)
+alrEventId
+  = lens _alrEventId (\ s a -> s{_alrEventId = a})
 
-instance FromJSON I18nRegionListResponse where
+-- | The token that can be used as the value of the pageToken parameter to
+-- retrieve the previous page in the result set.
+alrPrevPageToken :: Lens' ActivityListResponse (Maybe Text)
+alrPrevPageToken
+  = lens _alrPrevPageToken
+      (\ s a -> s{_alrPrevPageToken = a})
+
+instance FromJSON ActivityListResponse where
         parseJSON
-          = withObject "I18nRegionListResponse"
+          = withObject "ActivityListResponse"
               (\ o ->
-                 I18nRegionListResponse <$>
-                   (o .:? "etag") <*>
-                     (o .:? "kind" .!= "youtube#i18nRegionListResponse")
+                 ActivityListResponse <$>
+                   (o .:? "etag") <*> (o .:? "tokenPagination") <*>
+                     (o .:? "nextPageToken")
+                     <*> (o .:? "pageInfo")
+                     <*> (o .:? "kind" .!= "youtube#activityListResponse")
                      <*> (o .:? "items" .!= mempty)
                      <*> (o .:? "visitorId")
-                     <*> (o .:? "eventId"))
+                     <*> (o .:? "eventId")
+                     <*> (o .:? "prevPageToken"))
 
-instance ToJSON I18nRegionListResponse where
-        toJSON I18nRegionListResponse{..}
+instance ToJSON ActivityListResponse where
+        toJSON ActivityListResponse{..}
           = object
               (catMaybes
-                 [("etag" .=) <$> _irlrEtag,
-                  Just ("kind" .= _irlrKind),
-                  ("items" .=) <$> _irlrItems,
-                  ("visitorId" .=) <$> _irlrVisitorId,
-                  ("eventId" .=) <$> _irlrEventId])
-
--- | Information about the playlist item\'s privacy status.
---
--- /See:/ 'playListItemStatus' smart constructor.
-newtype PlayListItemStatus = PlayListItemStatus
-    { _plisPrivacyStatus :: Maybe PlayListItemStatusPrivacyStatus
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PlayListItemStatus' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'plisPrivacyStatus'
-playListItemStatus
-    :: PlayListItemStatus
-playListItemStatus =
-    PlayListItemStatus
-    { _plisPrivacyStatus = Nothing
-    }
-
--- | This resource\'s privacy status.
-plisPrivacyStatus :: Lens' PlayListItemStatus (Maybe PlayListItemStatusPrivacyStatus)
-plisPrivacyStatus
-  = lens _plisPrivacyStatus
-      (\ s a -> s{_plisPrivacyStatus = a})
-
-instance FromJSON PlayListItemStatus where
-        parseJSON
-          = withObject "PlayListItemStatus"
-              (\ o ->
-                 PlayListItemStatus <$> (o .:? "privacyStatus"))
-
-instance ToJSON PlayListItemStatus where
-        toJSON PlayListItemStatus{..}
-          = object
-              (catMaybes
-                 [("privacyStatus" .=) <$> _plisPrivacyStatus])
-
--- | Describes the spatial position of a visual widget inside a video. It is
--- a union of various position types, out of which only will be set one.
---
--- /See:/ 'invideoPosition' smart constructor.
-data InvideoPosition = InvideoPosition
-    { _ipCornerPosition :: !(Maybe CornerPosition)
-    , _ipType           :: !(Maybe InvideoPositionType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'InvideoPosition' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ipCornerPosition'
---
--- * 'ipType'
-invideoPosition
-    :: InvideoPosition
-invideoPosition =
-    InvideoPosition
-    { _ipCornerPosition = Nothing
-    , _ipType = Nothing
-    }
-
--- | Describes in which corner of the video the visual widget will appear.
-ipCornerPosition :: Lens' InvideoPosition (Maybe CornerPosition)
-ipCornerPosition
-  = lens _ipCornerPosition
-      (\ s a -> s{_ipCornerPosition = a})
-
--- | Defines the position type.
-ipType :: Lens' InvideoPosition (Maybe InvideoPositionType)
-ipType = lens _ipType (\ s a -> s{_ipType = a})
-
-instance FromJSON InvideoPosition where
-        parseJSON
-          = withObject "InvideoPosition"
-              (\ o ->
-                 InvideoPosition <$>
-                   (o .:? "cornerPosition") <*> (o .:? "type"))
-
-instance ToJSON InvideoPosition where
-        toJSON InvideoPosition{..}
-          = object
-              (catMaybes
-                 [("cornerPosition" .=) <$> _ipCornerPosition,
-                  ("type" .=) <$> _ipType])
-
--- | Information about an audio stream.
---
--- /See:/ 'videoFileDetailsAudioStream' smart constructor.
-data VideoFileDetailsAudioStream = VideoFileDetailsAudioStream
-    { _vfdasBitrateBps   :: !(Maybe Word64)
-    , _vfdasVendor       :: !(Maybe Text)
-    , _vfdasCodec        :: !(Maybe Text)
-    , _vfdasChannelCount :: !(Maybe Word32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'VideoFileDetailsAudioStream' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'vfdasBitrateBps'
---
--- * 'vfdasVendor'
---
--- * 'vfdasCodec'
---
--- * 'vfdasChannelCount'
-videoFileDetailsAudioStream
-    :: VideoFileDetailsAudioStream
-videoFileDetailsAudioStream =
-    VideoFileDetailsAudioStream
-    { _vfdasBitrateBps = Nothing
-    , _vfdasVendor = Nothing
-    , _vfdasCodec = Nothing
-    , _vfdasChannelCount = Nothing
-    }
-
--- | The audio stream\'s bitrate, in bits per second.
-vfdasBitrateBps :: Lens' VideoFileDetailsAudioStream (Maybe Word64)
-vfdasBitrateBps
-  = lens _vfdasBitrateBps
-      (\ s a -> s{_vfdasBitrateBps = a})
-
--- | A value that uniquely identifies a video vendor. Typically, the value is
--- a four-letter vendor code.
-vfdasVendor :: Lens' VideoFileDetailsAudioStream (Maybe Text)
-vfdasVendor
-  = lens _vfdasVendor (\ s a -> s{_vfdasVendor = a})
-
--- | The audio codec that the stream uses.
-vfdasCodec :: Lens' VideoFileDetailsAudioStream (Maybe Text)
-vfdasCodec
-  = lens _vfdasCodec (\ s a -> s{_vfdasCodec = a})
-
--- | The number of audio channels that the stream contains.
-vfdasChannelCount :: Lens' VideoFileDetailsAudioStream (Maybe Word32)
-vfdasChannelCount
-  = lens _vfdasChannelCount
-      (\ s a -> s{_vfdasChannelCount = a})
-
-instance FromJSON VideoFileDetailsAudioStream where
-        parseJSON
-          = withObject "VideoFileDetailsAudioStream"
-              (\ o ->
-                 VideoFileDetailsAudioStream <$>
-                   (o .:? "bitrateBps") <*> (o .:? "vendor") <*>
-                     (o .:? "codec")
-                     <*> (o .:? "channelCount"))
-
-instance ToJSON VideoFileDetailsAudioStream where
-        toJSON VideoFileDetailsAudioStream{..}
-          = object
-              (catMaybes
-                 [("bitrateBps" .=) <$> _vfdasBitrateBps,
-                  ("vendor" .=) <$> _vfdasVendor,
-                  ("codec" .=) <$> _vfdasCodec,
-                  ("channelCount" .=) <$> _vfdasChannelCount])
+                 [("etag" .=) <$> _alrEtag,
+                  ("tokenPagination" .=) <$> _alrTokenPagination,
+                  ("nextPageToken" .=) <$> _alrNextPageToken,
+                  ("pageInfo" .=) <$> _alrPageInfo,
+                  Just ("kind" .= _alrKind),
+                  ("items" .=) <$> _alrItems,
+                  ("visitorId" .=) <$> _alrVisitorId,
+                  ("eventId" .=) <$> _alrEventId,
+                  ("prevPageToken" .=) <$> _alrPrevPageToken])
 
 -- | Details about a channel bulletin post.
 --
@@ -8066,6 +7784,208 @@ instance ToJSON VideoAbuseReport where
                   ("language" .=) <$> _varLanguage,
                   ("comments" .=) <$> _varComments])
 
+-- | Information about an audio stream.
+--
+-- /See:/ 'videoFileDetailsAudioStream' smart constructor.
+data VideoFileDetailsAudioStream = VideoFileDetailsAudioStream
+    { _vfdasBitrateBps   :: !(Maybe Word64)
+    , _vfdasVendor       :: !(Maybe Text)
+    , _vfdasCodec        :: !(Maybe Text)
+    , _vfdasChannelCount :: !(Maybe Word32)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VideoFileDetailsAudioStream' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vfdasBitrateBps'
+--
+-- * 'vfdasVendor'
+--
+-- * 'vfdasCodec'
+--
+-- * 'vfdasChannelCount'
+videoFileDetailsAudioStream
+    :: VideoFileDetailsAudioStream
+videoFileDetailsAudioStream =
+    VideoFileDetailsAudioStream
+    { _vfdasBitrateBps = Nothing
+    , _vfdasVendor = Nothing
+    , _vfdasCodec = Nothing
+    , _vfdasChannelCount = Nothing
+    }
+
+-- | The audio stream\'s bitrate, in bits per second.
+vfdasBitrateBps :: Lens' VideoFileDetailsAudioStream (Maybe Word64)
+vfdasBitrateBps
+  = lens _vfdasBitrateBps
+      (\ s a -> s{_vfdasBitrateBps = a})
+
+-- | A value that uniquely identifies a video vendor. Typically, the value is
+-- a four-letter vendor code.
+vfdasVendor :: Lens' VideoFileDetailsAudioStream (Maybe Text)
+vfdasVendor
+  = lens _vfdasVendor (\ s a -> s{_vfdasVendor = a})
+
+-- | The audio codec that the stream uses.
+vfdasCodec :: Lens' VideoFileDetailsAudioStream (Maybe Text)
+vfdasCodec
+  = lens _vfdasCodec (\ s a -> s{_vfdasCodec = a})
+
+-- | The number of audio channels that the stream contains.
+vfdasChannelCount :: Lens' VideoFileDetailsAudioStream (Maybe Word32)
+vfdasChannelCount
+  = lens _vfdasChannelCount
+      (\ s a -> s{_vfdasChannelCount = a})
+
+instance FromJSON VideoFileDetailsAudioStream where
+        parseJSON
+          = withObject "VideoFileDetailsAudioStream"
+              (\ o ->
+                 VideoFileDetailsAudioStream <$>
+                   (o .:? "bitrateBps") <*> (o .:? "vendor") <*>
+                     (o .:? "codec")
+                     <*> (o .:? "channelCount"))
+
+instance ToJSON VideoFileDetailsAudioStream where
+        toJSON VideoFileDetailsAudioStream{..}
+          = object
+              (catMaybes
+                 [("bitrateBps" .=) <$> _vfdasBitrateBps,
+                  ("vendor" .=) <$> _vfdasVendor,
+                  ("codec" .=) <$> _vfdasCodec,
+                  ("channelCount" .=) <$> _vfdasChannelCount])
+
+--
+-- /See:/ 'i18nRegionListResponse' smart constructor.
+data I18nRegionListResponse = I18nRegionListResponse
+    { _irlrEtag      :: !(Maybe Text)
+    , _irlrKind      :: !Text
+    , _irlrItems     :: !(Maybe [I18nRegion])
+    , _irlrVisitorId :: !(Maybe Text)
+    , _irlrEventId   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'I18nRegionListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'irlrEtag'
+--
+-- * 'irlrKind'
+--
+-- * 'irlrItems'
+--
+-- * 'irlrVisitorId'
+--
+-- * 'irlrEventId'
+i18nRegionListResponse
+    :: I18nRegionListResponse
+i18nRegionListResponse =
+    I18nRegionListResponse
+    { _irlrEtag = Nothing
+    , _irlrKind = "youtube#i18nRegionListResponse"
+    , _irlrItems = Nothing
+    , _irlrVisitorId = Nothing
+    , _irlrEventId = Nothing
+    }
+
+-- | Etag of this resource.
+irlrEtag :: Lens' I18nRegionListResponse (Maybe Text)
+irlrEtag = lens _irlrEtag (\ s a -> s{_irlrEtag = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"youtube#i18nRegionListResponse\".
+irlrKind :: Lens' I18nRegionListResponse Text
+irlrKind = lens _irlrKind (\ s a -> s{_irlrKind = a})
+
+-- | A list of regions where YouTube is available. In this map, the i18n
+-- region ID is the map key, and its value is the corresponding i18nRegion
+-- resource.
+irlrItems :: Lens' I18nRegionListResponse [I18nRegion]
+irlrItems
+  = lens _irlrItems (\ s a -> s{_irlrItems = a}) .
+      _Default
+      . _Coerce
+
+-- | The visitorId identifies the visitor.
+irlrVisitorId :: Lens' I18nRegionListResponse (Maybe Text)
+irlrVisitorId
+  = lens _irlrVisitorId
+      (\ s a -> s{_irlrVisitorId = a})
+
+-- | Serialized EventId of the request which produced this response.
+irlrEventId :: Lens' I18nRegionListResponse (Maybe Text)
+irlrEventId
+  = lens _irlrEventId (\ s a -> s{_irlrEventId = a})
+
+instance FromJSON I18nRegionListResponse where
+        parseJSON
+          = withObject "I18nRegionListResponse"
+              (\ o ->
+                 I18nRegionListResponse <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "youtube#i18nRegionListResponse")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "visitorId")
+                     <*> (o .:? "eventId"))
+
+instance ToJSON I18nRegionListResponse where
+        toJSON I18nRegionListResponse{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _irlrEtag,
+                  Just ("kind" .= _irlrKind),
+                  ("items" .=) <$> _irlrItems,
+                  ("visitorId" .=) <$> _irlrVisitorId,
+                  ("eventId" .=) <$> _irlrEventId])
+
+-- | Basic details about a guide category.
+--
+-- /See:/ 'guideCategorySnippet' smart constructor.
+data GuideCategorySnippet = GuideCategorySnippet
+    { _gcsChannelId :: !Text
+    , _gcsTitle     :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GuideCategorySnippet' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcsChannelId'
+--
+-- * 'gcsTitle'
+guideCategorySnippet
+    :: GuideCategorySnippet
+guideCategorySnippet =
+    GuideCategorySnippet
+    { _gcsChannelId = "UCBR8-60-B28hp2BmDPdntcQ"
+    , _gcsTitle = Nothing
+    }
+
+gcsChannelId :: Lens' GuideCategorySnippet Text
+gcsChannelId
+  = lens _gcsChannelId (\ s a -> s{_gcsChannelId = a})
+
+-- | Description of the guide category.
+gcsTitle :: Lens' GuideCategorySnippet (Maybe Text)
+gcsTitle = lens _gcsTitle (\ s a -> s{_gcsTitle = a})
+
+instance FromJSON GuideCategorySnippet where
+        parseJSON
+          = withObject "GuideCategorySnippet"
+              (\ o ->
+                 GuideCategorySnippet <$>
+                   (o .:? "channelId" .!= "UCBR8-60-B28hp2BmDPdntcQ")
+                     <*> (o .:? "title"))
+
+instance ToJSON GuideCategorySnippet where
+        toJSON GuideCategorySnippet{..}
+          = object
+              (catMaybes
+                 [Just ("channelId" .= _gcsChannelId),
+                  ("title" .=) <$> _gcsTitle])
+
 --
 -- /See:/ 'captionListResponse' smart constructor.
 data CaptionListResponse = CaptionListResponse
@@ -8148,416 +8068,90 @@ instance ToJSON CaptionListResponse where
                   ("visitorId" .=) <$> _clrlVisitorId,
                   ("eventId" .=) <$> _clrlEventId])
 
--- | Describes a single promoted item id. It is a union of various possible
--- types.
+-- | Information about the playlist item\'s privacy status.
 --
--- /See:/ 'promotedItemId' smart constructor.
-data PromotedItemId = PromotedItemId
-    { _piiRecentlyUploadedBy :: !(Maybe Text)
-    , _piiVideoId            :: !(Maybe Text)
-    , _piiWebsiteURL         :: !(Maybe Text)
-    , _piiType               :: !(Maybe PromotedItemIdType)
+-- /See:/ 'playListItemStatus' smart constructor.
+newtype PlayListItemStatus = PlayListItemStatus
+    { _plisPrivacyStatus :: Maybe PlayListItemStatusPrivacyStatus
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PromotedItemId' with the minimum fields required to make a request.
+-- | Creates a value of 'PlayListItemStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'piiRecentlyUploadedBy'
---
--- * 'piiVideoId'
---
--- * 'piiWebsiteURL'
---
--- * 'piiType'
-promotedItemId
-    :: PromotedItemId
-promotedItemId =
-    PromotedItemId
-    { _piiRecentlyUploadedBy = Nothing
-    , _piiVideoId = Nothing
-    , _piiWebsiteURL = Nothing
-    , _piiType = Nothing
+-- * 'plisPrivacyStatus'
+playListItemStatus
+    :: PlayListItemStatus
+playListItemStatus =
+    PlayListItemStatus
+    { _plisPrivacyStatus = Nothing
     }
 
--- | If type is recentUpload, this field identifies the channel from which to
--- take the recent upload. If missing, the channel is assumed to be the
--- same channel for which the invideoPromotion is set.
-piiRecentlyUploadedBy :: Lens' PromotedItemId (Maybe Text)
-piiRecentlyUploadedBy
-  = lens _piiRecentlyUploadedBy
-      (\ s a -> s{_piiRecentlyUploadedBy = a})
+-- | This resource\'s privacy status.
+plisPrivacyStatus :: Lens' PlayListItemStatus (Maybe PlayListItemStatusPrivacyStatus)
+plisPrivacyStatus
+  = lens _plisPrivacyStatus
+      (\ s a -> s{_plisPrivacyStatus = a})
 
--- | If the promoted item represents a video, this field represents the
--- unique YouTube ID identifying it. This field will be present only if
--- type has the value video.
-piiVideoId :: Lens' PromotedItemId (Maybe Text)
-piiVideoId
-  = lens _piiVideoId (\ s a -> s{_piiVideoId = a})
-
--- | If the promoted item represents a website, this field represents the url
--- pointing to the website. This field will be present only if type has the
--- value website.
-piiWebsiteURL :: Lens' PromotedItemId (Maybe Text)
-piiWebsiteURL
-  = lens _piiWebsiteURL
-      (\ s a -> s{_piiWebsiteURL = a})
-
--- | Describes the type of the promoted item.
-piiType :: Lens' PromotedItemId (Maybe PromotedItemIdType)
-piiType = lens _piiType (\ s a -> s{_piiType = a})
-
-instance FromJSON PromotedItemId where
+instance FromJSON PlayListItemStatus where
         parseJSON
-          = withObject "PromotedItemId"
+          = withObject "PlayListItemStatus"
               (\ o ->
-                 PromotedItemId <$>
-                   (o .:? "recentlyUploadedBy") <*> (o .:? "videoId")
-                     <*> (o .:? "websiteUrl")
-                     <*> (o .:? "type"))
+                 PlayListItemStatus <$> (o .:? "privacyStatus"))
 
-instance ToJSON PromotedItemId where
-        toJSON PromotedItemId{..}
+instance ToJSON PlayListItemStatus where
+        toJSON PlayListItemStatus{..}
           = object
               (catMaybes
-                 [("recentlyUploadedBy" .=) <$>
-                    _piiRecentlyUploadedBy,
-                  ("videoId" .=) <$> _piiVideoId,
-                  ("websiteUrl" .=) <$> _piiWebsiteURL,
-                  ("type" .=) <$> _piiType])
+                 [("privacyStatus" .=) <$> _plisPrivacyStatus])
 
--- | Basic details about a search result, including title, description and
--- thumbnails of the item referenced by the search result.
+-- | Describes the spatial position of a visual widget inside a video. It is
+-- a union of various position types, out of which only will be set one.
 --
--- /See:/ 'searchResultSnippet' smart constructor.
-data SearchResultSnippet = SearchResultSnippet
-    { _srsPublishedAt          :: !(Maybe DateTime')
-    , _srsChannelTitle         :: !(Maybe Text)
-    , _srsChannelId            :: !(Maybe Text)
-    , _srsThumbnails           :: !(Maybe ThumbnailDetails)
-    , _srsTitle                :: !(Maybe Text)
-    , _srsLiveBroadcastContent :: !(Maybe SearchResultSnippetLiveBroadcastContent)
-    , _srsDescription          :: !(Maybe Text)
+-- /See:/ 'invideoPosition' smart constructor.
+data InvideoPosition = InvideoPosition
+    { _ipCornerPosition :: !(Maybe InvideoPositionCornerPosition)
+    , _ipType           :: !(Maybe InvideoPositionType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SearchResultSnippet' with the minimum fields required to make a request.
+-- | Creates a value of 'InvideoPosition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'srsPublishedAt'
+-- * 'ipCornerPosition'
 --
--- * 'srsChannelTitle'
---
--- * 'srsChannelId'
---
--- * 'srsThumbnails'
---
--- * 'srsTitle'
---
--- * 'srsLiveBroadcastContent'
---
--- * 'srsDescription'
-searchResultSnippet
-    :: SearchResultSnippet
-searchResultSnippet =
-    SearchResultSnippet
-    { _srsPublishedAt = Nothing
-    , _srsChannelTitle = Nothing
-    , _srsChannelId = Nothing
-    , _srsThumbnails = Nothing
-    , _srsTitle = Nothing
-    , _srsLiveBroadcastContent = Nothing
-    , _srsDescription = Nothing
+-- * 'ipType'
+invideoPosition
+    :: InvideoPosition
+invideoPosition =
+    InvideoPosition
+    { _ipCornerPosition = Nothing
+    , _ipType = Nothing
     }
 
--- | The creation date and time of the resource that the search result
--- identifies. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ)
--- format.
-srsPublishedAt :: Lens' SearchResultSnippet (Maybe UTCTime)
-srsPublishedAt
-  = lens _srsPublishedAt
-      (\ s a -> s{_srsPublishedAt = a})
-      . mapping _DateTime
+-- | Describes in which corner of the video the visual widget will appear.
+ipCornerPosition :: Lens' InvideoPosition (Maybe InvideoPositionCornerPosition)
+ipCornerPosition
+  = lens _ipCornerPosition
+      (\ s a -> s{_ipCornerPosition = a})
 
--- | The title of the channel that published the resource that the search
--- result identifies.
-srsChannelTitle :: Lens' SearchResultSnippet (Maybe Text)
-srsChannelTitle
-  = lens _srsChannelTitle
-      (\ s a -> s{_srsChannelTitle = a})
+-- | Defines the position type.
+ipType :: Lens' InvideoPosition (Maybe InvideoPositionType)
+ipType = lens _ipType (\ s a -> s{_ipType = a})
 
--- | The value that YouTube uses to uniquely identify the channel that
--- published the resource that the search result identifies.
-srsChannelId :: Lens' SearchResultSnippet (Maybe Text)
-srsChannelId
-  = lens _srsChannelId (\ s a -> s{_srsChannelId = a})
-
--- | A map of thumbnail images associated with the search result. For each
--- object in the map, the key is the name of the thumbnail image, and the
--- value is an object that contains other information about the thumbnail.
-srsThumbnails :: Lens' SearchResultSnippet (Maybe ThumbnailDetails)
-srsThumbnails
-  = lens _srsThumbnails
-      (\ s a -> s{_srsThumbnails = a})
-
--- | The title of the search result.
-srsTitle :: Lens' SearchResultSnippet (Maybe Text)
-srsTitle = lens _srsTitle (\ s a -> s{_srsTitle = a})
-
--- | It indicates if the resource (video or channel) has upcoming\/active
--- live broadcast content. Or it\'s \"none\" if there is not any
--- upcoming\/active live broadcasts.
-srsLiveBroadcastContent :: Lens' SearchResultSnippet (Maybe SearchResultSnippetLiveBroadcastContent)
-srsLiveBroadcastContent
-  = lens _srsLiveBroadcastContent
-      (\ s a -> s{_srsLiveBroadcastContent = a})
-
--- | A description of the search result.
-srsDescription :: Lens' SearchResultSnippet (Maybe Text)
-srsDescription
-  = lens _srsDescription
-      (\ s a -> s{_srsDescription = a})
-
-instance FromJSON SearchResultSnippet where
+instance FromJSON InvideoPosition where
         parseJSON
-          = withObject "SearchResultSnippet"
+          = withObject "InvideoPosition"
               (\ o ->
-                 SearchResultSnippet <$>
-                   (o .:? "publishedAt") <*> (o .:? "channelTitle") <*>
-                     (o .:? "channelId")
-                     <*> (o .:? "thumbnails")
-                     <*> (o .:? "title")
-                     <*> (o .:? "liveBroadcastContent")
-                     <*> (o .:? "description"))
+                 InvideoPosition <$>
+                   (o .:? "cornerPosition") <*> (o .:? "type"))
 
-instance ToJSON SearchResultSnippet where
-        toJSON SearchResultSnippet{..}
+instance ToJSON InvideoPosition where
+        toJSON InvideoPosition{..}
           = object
               (catMaybes
-                 [("publishedAt" .=) <$> _srsPublishedAt,
-                  ("channelTitle" .=) <$> _srsChannelTitle,
-                  ("channelId" .=) <$> _srsChannelId,
-                  ("thumbnails" .=) <$> _srsThumbnails,
-                  ("title" .=) <$> _srsTitle,
-                  ("liveBroadcastContent" .=) <$>
-                    _srsLiveBroadcastContent,
-                  ("description" .=) <$> _srsDescription])
-
---
--- /See:/ 'videoConversionPings' smart constructor.
-newtype VideoConversionPings = VideoConversionPings
-    { _vcpPings :: Maybe [VideoConversionPing]
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'VideoConversionPings' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'vcpPings'
-videoConversionPings
-    :: VideoConversionPings
-videoConversionPings =
-    VideoConversionPings
-    { _vcpPings = Nothing
-    }
-
--- | Pings that the app shall fire for a video (authenticated by biscotti
--- cookie). Each ping has a context, in which the app must fire the ping,
--- and a url identifying the ping.
-vcpPings :: Lens' VideoConversionPings [VideoConversionPing]
-vcpPings
-  = lens _vcpPings (\ s a -> s{_vcpPings = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON VideoConversionPings where
-        parseJSON
-          = withObject "VideoConversionPings"
-              (\ o ->
-                 VideoConversionPings <$> (o .:? "pings" .!= mempty))
-
-instance ToJSON VideoConversionPings where
-        toJSON VideoConversionPings{..}
-          = object (catMaybes [("pings" .=) <$> _vcpPings])
-
--- | Localized versions of certain video properties (e.g. title).
---
--- /See:/ 'videoLocalization' smart constructor.
-data VideoLocalization = VideoLocalization
-    { _vlTitle       :: !(Maybe Text)
-    , _vlDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'VideoLocalization' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'vlTitle'
---
--- * 'vlDescription'
-videoLocalization
-    :: VideoLocalization
-videoLocalization =
-    VideoLocalization
-    { _vlTitle = Nothing
-    , _vlDescription = Nothing
-    }
-
--- | Localized version of the video\'s title.
-vlTitle :: Lens' VideoLocalization (Maybe Text)
-vlTitle = lens _vlTitle (\ s a -> s{_vlTitle = a})
-
--- | Localized version of the video\'s description.
-vlDescription :: Lens' VideoLocalization (Maybe Text)
-vlDescription
-  = lens _vlDescription
-      (\ s a -> s{_vlDescription = a})
-
-instance FromJSON VideoLocalization where
-        parseJSON
-          = withObject "VideoLocalization"
-              (\ o ->
-                 VideoLocalization <$>
-                   (o .:? "title") <*> (o .:? "description"))
-
-instance ToJSON VideoLocalization where
-        toJSON VideoLocalization{..}
-          = object
-              (catMaybes
-                 [("title" .=) <$> _vlTitle,
-                  ("description" .=) <$> _vlDescription])
-
---
--- /See:/ 'playListItemListResponse' smart constructor.
-data PlayListItemListResponse = PlayListItemListResponse
-    { _plilrEtag            :: !(Maybe Text)
-    , _plilrTokenPagination :: !(Maybe TokenPagination)
-    , _plilrNextPageToken   :: !(Maybe Text)
-    , _plilrPageInfo        :: !(Maybe PageInfo)
-    , _plilrKind            :: !Text
-    , _plilrItems           :: !(Maybe [PlayListItem])
-    , _plilrVisitorId       :: !(Maybe Text)
-    , _plilrEventId         :: !(Maybe Text)
-    , _plilrPrevPageToken   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PlayListItemListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'plilrEtag'
---
--- * 'plilrTokenPagination'
---
--- * 'plilrNextPageToken'
---
--- * 'plilrPageInfo'
---
--- * 'plilrKind'
---
--- * 'plilrItems'
---
--- * 'plilrVisitorId'
---
--- * 'plilrEventId'
---
--- * 'plilrPrevPageToken'
-playListItemListResponse
-    :: PlayListItemListResponse
-playListItemListResponse =
-    PlayListItemListResponse
-    { _plilrEtag = Nothing
-    , _plilrTokenPagination = Nothing
-    , _plilrNextPageToken = Nothing
-    , _plilrPageInfo = Nothing
-    , _plilrKind = "youtube#playlistItemListResponse"
-    , _plilrItems = Nothing
-    , _plilrVisitorId = Nothing
-    , _plilrEventId = Nothing
-    , _plilrPrevPageToken = Nothing
-    }
-
--- | Etag of this resource.
-plilrEtag :: Lens' PlayListItemListResponse (Maybe Text)
-plilrEtag
-  = lens _plilrEtag (\ s a -> s{_plilrEtag = a})
-
-plilrTokenPagination :: Lens' PlayListItemListResponse (Maybe TokenPagination)
-plilrTokenPagination
-  = lens _plilrTokenPagination
-      (\ s a -> s{_plilrTokenPagination = a})
-
--- | The token that can be used as the value of the pageToken parameter to
--- retrieve the next page in the result set.
-plilrNextPageToken :: Lens' PlayListItemListResponse (Maybe Text)
-plilrNextPageToken
-  = lens _plilrNextPageToken
-      (\ s a -> s{_plilrNextPageToken = a})
-
-plilrPageInfo :: Lens' PlayListItemListResponse (Maybe PageInfo)
-plilrPageInfo
-  = lens _plilrPageInfo
-      (\ s a -> s{_plilrPageInfo = a})
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"youtube#playlistItemListResponse\".
-plilrKind :: Lens' PlayListItemListResponse Text
-plilrKind
-  = lens _plilrKind (\ s a -> s{_plilrKind = a})
-
--- | A list of playlist items that match the request criteria.
-plilrItems :: Lens' PlayListItemListResponse [PlayListItem]
-plilrItems
-  = lens _plilrItems (\ s a -> s{_plilrItems = a}) .
-      _Default
-      . _Coerce
-
--- | The visitorId identifies the visitor.
-plilrVisitorId :: Lens' PlayListItemListResponse (Maybe Text)
-plilrVisitorId
-  = lens _plilrVisitorId
-      (\ s a -> s{_plilrVisitorId = a})
-
--- | Serialized EventId of the request which produced this response.
-plilrEventId :: Lens' PlayListItemListResponse (Maybe Text)
-plilrEventId
-  = lens _plilrEventId (\ s a -> s{_plilrEventId = a})
-
--- | The token that can be used as the value of the pageToken parameter to
--- retrieve the previous page in the result set.
-plilrPrevPageToken :: Lens' PlayListItemListResponse (Maybe Text)
-plilrPrevPageToken
-  = lens _plilrPrevPageToken
-      (\ s a -> s{_plilrPrevPageToken = a})
-
-instance FromJSON PlayListItemListResponse where
-        parseJSON
-          = withObject "PlayListItemListResponse"
-              (\ o ->
-                 PlayListItemListResponse <$>
-                   (o .:? "etag") <*> (o .:? "tokenPagination") <*>
-                     (o .:? "nextPageToken")
-                     <*> (o .:? "pageInfo")
-                     <*>
-                     (o .:? "kind" .!= "youtube#playlistItemListResponse")
-                     <*> (o .:? "items" .!= mempty)
-                     <*> (o .:? "visitorId")
-                     <*> (o .:? "eventId")
-                     <*> (o .:? "prevPageToken"))
-
-instance ToJSON PlayListItemListResponse where
-        toJSON PlayListItemListResponse{..}
-          = object
-              (catMaybes
-                 [("etag" .=) <$> _plilrEtag,
-                  ("tokenPagination" .=) <$> _plilrTokenPagination,
-                  ("nextPageToken" .=) <$> _plilrNextPageToken,
-                  ("pageInfo" .=) <$> _plilrPageInfo,
-                  Just ("kind" .= _plilrKind),
-                  ("items" .=) <$> _plilrItems,
-                  ("visitorId" .=) <$> _plilrVisitorId,
-                  ("eventId" .=) <$> _plilrEventId,
-                  ("prevPageToken" .=) <$> _plilrPrevPageToken])
+                 [("cornerPosition" .=) <$> _ipCornerPosition,
+                  ("type" .=) <$> _ipType])
 
 --
 -- /See:/ 'liveStreamHealthStatus' smart constructor.
@@ -8622,6 +8216,199 @@ instance ToJSON LiveStreamHealthStatus where
                     _lshsConfigurationIssues,
                   ("lastUpdateTimeSeconds" .=) <$>
                     _lshsLastUpdateTimeSeconds])
+
+-- | Localizations for different languages
+--
+-- /See:/ 'channelSectionLocalizations' smart constructor.
+data ChannelSectionLocalizations =
+    ChannelSectionLocalizations
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ChannelSectionLocalizations' with the minimum fields required to make a request.
+--
+channelSectionLocalizations
+    :: ChannelSectionLocalizations
+channelSectionLocalizations = ChannelSectionLocalizations
+
+instance FromJSON ChannelSectionLocalizations where
+        parseJSON
+          = withObject "ChannelSectionLocalizations"
+              (\ o -> pure ChannelSectionLocalizations)
+
+instance ToJSON ChannelSectionLocalizations where
+        toJSON = const (Object mempty)
+
+--
+-- /See:/ 'subscriptionListResponse' smart constructor.
+data SubscriptionListResponse = SubscriptionListResponse
+    { _sEtag            :: !(Maybe Text)
+    , _sTokenPagination :: !(Maybe TokenPagination)
+    , _sNextPageToken   :: !(Maybe Text)
+    , _sPageInfo        :: !(Maybe PageInfo)
+    , _sKind            :: !Text
+    , _sItems           :: !(Maybe [Subscription])
+    , _sVisitorId       :: !(Maybe Text)
+    , _sEventId         :: !(Maybe Text)
+    , _sPrevPageToken   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SubscriptionListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sEtag'
+--
+-- * 'sTokenPagination'
+--
+-- * 'sNextPageToken'
+--
+-- * 'sPageInfo'
+--
+-- * 'sKind'
+--
+-- * 'sItems'
+--
+-- * 'sVisitorId'
+--
+-- * 'sEventId'
+--
+-- * 'sPrevPageToken'
+subscriptionListResponse
+    :: SubscriptionListResponse
+subscriptionListResponse =
+    SubscriptionListResponse
+    { _sEtag = Nothing
+    , _sTokenPagination = Nothing
+    , _sNextPageToken = Nothing
+    , _sPageInfo = Nothing
+    , _sKind = "youtube#subscriptionListResponse"
+    , _sItems = Nothing
+    , _sVisitorId = Nothing
+    , _sEventId = Nothing
+    , _sPrevPageToken = Nothing
+    }
+
+-- | Etag of this resource.
+sEtag :: Lens' SubscriptionListResponse (Maybe Text)
+sEtag = lens _sEtag (\ s a -> s{_sEtag = a})
+
+sTokenPagination :: Lens' SubscriptionListResponse (Maybe TokenPagination)
+sTokenPagination
+  = lens _sTokenPagination
+      (\ s a -> s{_sTokenPagination = a})
+
+-- | The token that can be used as the value of the pageToken parameter to
+-- retrieve the next page in the result set.
+sNextPageToken :: Lens' SubscriptionListResponse (Maybe Text)
+sNextPageToken
+  = lens _sNextPageToken
+      (\ s a -> s{_sNextPageToken = a})
+
+sPageInfo :: Lens' SubscriptionListResponse (Maybe PageInfo)
+sPageInfo
+  = lens _sPageInfo (\ s a -> s{_sPageInfo = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"youtube#subscriptionListResponse\".
+sKind :: Lens' SubscriptionListResponse Text
+sKind = lens _sKind (\ s a -> s{_sKind = a})
+
+-- | A list of subscriptions that match the request criteria.
+sItems :: Lens' SubscriptionListResponse [Subscription]
+sItems
+  = lens _sItems (\ s a -> s{_sItems = a}) . _Default .
+      _Coerce
+
+-- | The visitorId identifies the visitor.
+sVisitorId :: Lens' SubscriptionListResponse (Maybe Text)
+sVisitorId
+  = lens _sVisitorId (\ s a -> s{_sVisitorId = a})
+
+-- | Serialized EventId of the request which produced this response.
+sEventId :: Lens' SubscriptionListResponse (Maybe Text)
+sEventId = lens _sEventId (\ s a -> s{_sEventId = a})
+
+-- | The token that can be used as the value of the pageToken parameter to
+-- retrieve the previous page in the result set.
+sPrevPageToken :: Lens' SubscriptionListResponse (Maybe Text)
+sPrevPageToken
+  = lens _sPrevPageToken
+      (\ s a -> s{_sPrevPageToken = a})
+
+instance FromJSON SubscriptionListResponse where
+        parseJSON
+          = withObject "SubscriptionListResponse"
+              (\ o ->
+                 SubscriptionListResponse <$>
+                   (o .:? "etag") <*> (o .:? "tokenPagination") <*>
+                     (o .:? "nextPageToken")
+                     <*> (o .:? "pageInfo")
+                     <*>
+                     (o .:? "kind" .!= "youtube#subscriptionListResponse")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "visitorId")
+                     <*> (o .:? "eventId")
+                     <*> (o .:? "prevPageToken"))
+
+instance ToJSON SubscriptionListResponse where
+        toJSON SubscriptionListResponse{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _sEtag,
+                  ("tokenPagination" .=) <$> _sTokenPagination,
+                  ("nextPageToken" .=) <$> _sNextPageToken,
+                  ("pageInfo" .=) <$> _sPageInfo,
+                  Just ("kind" .= _sKind), ("items" .=) <$> _sItems,
+                  ("visitorId" .=) <$> _sVisitorId,
+                  ("eventId" .=) <$> _sEventId,
+                  ("prevPageToken" .=) <$> _sPrevPageToken])
+
+-- | Localized versions of certain video properties (e.g. title).
+--
+-- /See:/ 'videoLocalization' smart constructor.
+data VideoLocalization = VideoLocalization
+    { _vlTitle       :: !(Maybe Text)
+    , _vlDescription :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VideoLocalization' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vlTitle'
+--
+-- * 'vlDescription'
+videoLocalization
+    :: VideoLocalization
+videoLocalization =
+    VideoLocalization
+    { _vlTitle = Nothing
+    , _vlDescription = Nothing
+    }
+
+-- | Localized version of the video\'s title.
+vlTitle :: Lens' VideoLocalization (Maybe Text)
+vlTitle = lens _vlTitle (\ s a -> s{_vlTitle = a})
+
+-- | Localized version of the video\'s description.
+vlDescription :: Lens' VideoLocalization (Maybe Text)
+vlDescription
+  = lens _vlDescription
+      (\ s a -> s{_vlDescription = a})
+
+instance FromJSON VideoLocalization where
+        parseJSON
+          = withObject "VideoLocalization"
+              (\ o ->
+                 VideoLocalization <$>
+                   (o .:? "title") <*> (o .:? "description"))
+
+instance ToJSON VideoLocalization where
+        toJSON VideoLocalization{..}
+          = object
+              (catMaybes
+                 [("title" .=) <$> _vlTitle,
+                  ("description" .=) <$> _vlDescription])
 
 --
 -- /See:/ 'commentListResponse' smart constructor.
@@ -8772,6 +8559,84 @@ instance ToJSON VideoPlayer where
           = object
               (catMaybes [("embedHtml" .=) <$> _vpEmbedHTML])
 
+-- | Describes a single promoted item id. It is a union of various possible
+-- types.
+--
+-- /See:/ 'promotedItemId' smart constructor.
+data PromotedItemId = PromotedItemId
+    { _piiRecentlyUploadedBy :: !(Maybe Text)
+    , _piiVideoId            :: !(Maybe Text)
+    , _piiWebsiteURL         :: !(Maybe Text)
+    , _piiType               :: !(Maybe PromotedItemIdType)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PromotedItemId' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'piiRecentlyUploadedBy'
+--
+-- * 'piiVideoId'
+--
+-- * 'piiWebsiteURL'
+--
+-- * 'piiType'
+promotedItemId
+    :: PromotedItemId
+promotedItemId =
+    PromotedItemId
+    { _piiRecentlyUploadedBy = Nothing
+    , _piiVideoId = Nothing
+    , _piiWebsiteURL = Nothing
+    , _piiType = Nothing
+    }
+
+-- | If type is recentUpload, this field identifies the channel from which to
+-- take the recent upload. If missing, the channel is assumed to be the
+-- same channel for which the invideoPromotion is set.
+piiRecentlyUploadedBy :: Lens' PromotedItemId (Maybe Text)
+piiRecentlyUploadedBy
+  = lens _piiRecentlyUploadedBy
+      (\ s a -> s{_piiRecentlyUploadedBy = a})
+
+-- | If the promoted item represents a video, this field represents the
+-- unique YouTube ID identifying it. This field will be present only if
+-- type has the value video.
+piiVideoId :: Lens' PromotedItemId (Maybe Text)
+piiVideoId
+  = lens _piiVideoId (\ s a -> s{_piiVideoId = a})
+
+-- | If the promoted item represents a website, this field represents the url
+-- pointing to the website. This field will be present only if type has the
+-- value website.
+piiWebsiteURL :: Lens' PromotedItemId (Maybe Text)
+piiWebsiteURL
+  = lens _piiWebsiteURL
+      (\ s a -> s{_piiWebsiteURL = a})
+
+-- | Describes the type of the promoted item.
+piiType :: Lens' PromotedItemId (Maybe PromotedItemIdType)
+piiType = lens _piiType (\ s a -> s{_piiType = a})
+
+instance FromJSON PromotedItemId where
+        parseJSON
+          = withObject "PromotedItemId"
+              (\ o ->
+                 PromotedItemId <$>
+                   (o .:? "recentlyUploadedBy") <*> (o .:? "videoId")
+                     <*> (o .:? "websiteUrl")
+                     <*> (o .:? "type"))
+
+instance ToJSON PromotedItemId where
+        toJSON PromotedItemId{..}
+          = object
+              (catMaybes
+                 [("recentlyUploadedBy" .=) <$>
+                    _piiRecentlyUploadedBy,
+                  ("videoId" .=) <$> _piiVideoId,
+                  ("websiteUrl" .=) <$> _piiWebsiteURL,
+                  ("type" .=) <$> _piiType])
+
 --
 -- /See:/ 'localizedString' smart constructor.
 data LocalizedString = LocalizedString
@@ -8816,129 +8681,136 @@ instance ToJSON LocalizedString where
                   ("language" .=) <$> _lsLanguage])
 
 --
--- /See:/ 'subscriptionListResponse' smart constructor.
-data SubscriptionListResponse = SubscriptionListResponse
-    { _sEtag            :: !(Maybe Text)
-    , _sTokenPagination :: !(Maybe TokenPagination)
-    , _sNextPageToken   :: !(Maybe Text)
-    , _sPageInfo        :: !(Maybe PageInfo)
-    , _sKind            :: !Text
-    , _sItems           :: !(Maybe [Subscription])
-    , _sVisitorId       :: !(Maybe Text)
-    , _sEventId         :: !(Maybe Text)
-    , _sPrevPageToken   :: !(Maybe Text)
+-- /See:/ 'playListItemListResponse' smart constructor.
+data PlayListItemListResponse = PlayListItemListResponse
+    { _plilrEtag            :: !(Maybe Text)
+    , _plilrTokenPagination :: !(Maybe TokenPagination)
+    , _plilrNextPageToken   :: !(Maybe Text)
+    , _plilrPageInfo        :: !(Maybe PageInfo)
+    , _plilrKind            :: !Text
+    , _plilrItems           :: !(Maybe [PlayListItem])
+    , _plilrVisitorId       :: !(Maybe Text)
+    , _plilrEventId         :: !(Maybe Text)
+    , _plilrPrevPageToken   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SubscriptionListResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'PlayListItemListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sEtag'
+-- * 'plilrEtag'
 --
--- * 'sTokenPagination'
+-- * 'plilrTokenPagination'
 --
--- * 'sNextPageToken'
+-- * 'plilrNextPageToken'
 --
--- * 'sPageInfo'
+-- * 'plilrPageInfo'
 --
--- * 'sKind'
+-- * 'plilrKind'
 --
--- * 'sItems'
+-- * 'plilrItems'
 --
--- * 'sVisitorId'
+-- * 'plilrVisitorId'
 --
--- * 'sEventId'
+-- * 'plilrEventId'
 --
--- * 'sPrevPageToken'
-subscriptionListResponse
-    :: SubscriptionListResponse
-subscriptionListResponse =
-    SubscriptionListResponse
-    { _sEtag = Nothing
-    , _sTokenPagination = Nothing
-    , _sNextPageToken = Nothing
-    , _sPageInfo = Nothing
-    , _sKind = "youtube#subscriptionListResponse"
-    , _sItems = Nothing
-    , _sVisitorId = Nothing
-    , _sEventId = Nothing
-    , _sPrevPageToken = Nothing
+-- * 'plilrPrevPageToken'
+playListItemListResponse
+    :: PlayListItemListResponse
+playListItemListResponse =
+    PlayListItemListResponse
+    { _plilrEtag = Nothing
+    , _plilrTokenPagination = Nothing
+    , _plilrNextPageToken = Nothing
+    , _plilrPageInfo = Nothing
+    , _plilrKind = "youtube#playlistItemListResponse"
+    , _plilrItems = Nothing
+    , _plilrVisitorId = Nothing
+    , _plilrEventId = Nothing
+    , _plilrPrevPageToken = Nothing
     }
 
 -- | Etag of this resource.
-sEtag :: Lens' SubscriptionListResponse (Maybe Text)
-sEtag = lens _sEtag (\ s a -> s{_sEtag = a})
+plilrEtag :: Lens' PlayListItemListResponse (Maybe Text)
+plilrEtag
+  = lens _plilrEtag (\ s a -> s{_plilrEtag = a})
 
-sTokenPagination :: Lens' SubscriptionListResponse (Maybe TokenPagination)
-sTokenPagination
-  = lens _sTokenPagination
-      (\ s a -> s{_sTokenPagination = a})
+plilrTokenPagination :: Lens' PlayListItemListResponse (Maybe TokenPagination)
+plilrTokenPagination
+  = lens _plilrTokenPagination
+      (\ s a -> s{_plilrTokenPagination = a})
 
 -- | The token that can be used as the value of the pageToken parameter to
 -- retrieve the next page in the result set.
-sNextPageToken :: Lens' SubscriptionListResponse (Maybe Text)
-sNextPageToken
-  = lens _sNextPageToken
-      (\ s a -> s{_sNextPageToken = a})
+plilrNextPageToken :: Lens' PlayListItemListResponse (Maybe Text)
+plilrNextPageToken
+  = lens _plilrNextPageToken
+      (\ s a -> s{_plilrNextPageToken = a})
 
-sPageInfo :: Lens' SubscriptionListResponse (Maybe PageInfo)
-sPageInfo
-  = lens _sPageInfo (\ s a -> s{_sPageInfo = a})
+plilrPageInfo :: Lens' PlayListItemListResponse (Maybe PageInfo)
+plilrPageInfo
+  = lens _plilrPageInfo
+      (\ s a -> s{_plilrPageInfo = a})
 
 -- | Identifies what kind of resource this is. Value: the fixed string
--- \"youtube#subscriptionListResponse\".
-sKind :: Lens' SubscriptionListResponse Text
-sKind = lens _sKind (\ s a -> s{_sKind = a})
+-- \"youtube#playlistItemListResponse\".
+plilrKind :: Lens' PlayListItemListResponse Text
+plilrKind
+  = lens _plilrKind (\ s a -> s{_plilrKind = a})
 
--- | A list of subscriptions that match the request criteria.
-sItems :: Lens' SubscriptionListResponse [Subscription]
-sItems
-  = lens _sItems (\ s a -> s{_sItems = a}) . _Default .
-      _Coerce
+-- | A list of playlist items that match the request criteria.
+plilrItems :: Lens' PlayListItemListResponse [PlayListItem]
+plilrItems
+  = lens _plilrItems (\ s a -> s{_plilrItems = a}) .
+      _Default
+      . _Coerce
 
 -- | The visitorId identifies the visitor.
-sVisitorId :: Lens' SubscriptionListResponse (Maybe Text)
-sVisitorId
-  = lens _sVisitorId (\ s a -> s{_sVisitorId = a})
+plilrVisitorId :: Lens' PlayListItemListResponse (Maybe Text)
+plilrVisitorId
+  = lens _plilrVisitorId
+      (\ s a -> s{_plilrVisitorId = a})
 
 -- | Serialized EventId of the request which produced this response.
-sEventId :: Lens' SubscriptionListResponse (Maybe Text)
-sEventId = lens _sEventId (\ s a -> s{_sEventId = a})
+plilrEventId :: Lens' PlayListItemListResponse (Maybe Text)
+plilrEventId
+  = lens _plilrEventId (\ s a -> s{_plilrEventId = a})
 
 -- | The token that can be used as the value of the pageToken parameter to
 -- retrieve the previous page in the result set.
-sPrevPageToken :: Lens' SubscriptionListResponse (Maybe Text)
-sPrevPageToken
-  = lens _sPrevPageToken
-      (\ s a -> s{_sPrevPageToken = a})
+plilrPrevPageToken :: Lens' PlayListItemListResponse (Maybe Text)
+plilrPrevPageToken
+  = lens _plilrPrevPageToken
+      (\ s a -> s{_plilrPrevPageToken = a})
 
-instance FromJSON SubscriptionListResponse where
+instance FromJSON PlayListItemListResponse where
         parseJSON
-          = withObject "SubscriptionListResponse"
+          = withObject "PlayListItemListResponse"
               (\ o ->
-                 SubscriptionListResponse <$>
+                 PlayListItemListResponse <$>
                    (o .:? "etag") <*> (o .:? "tokenPagination") <*>
                      (o .:? "nextPageToken")
                      <*> (o .:? "pageInfo")
                      <*>
-                     (o .:? "kind" .!= "youtube#subscriptionListResponse")
+                     (o .:? "kind" .!= "youtube#playlistItemListResponse")
                      <*> (o .:? "items" .!= mempty)
                      <*> (o .:? "visitorId")
                      <*> (o .:? "eventId")
                      <*> (o .:? "prevPageToken"))
 
-instance ToJSON SubscriptionListResponse where
-        toJSON SubscriptionListResponse{..}
+instance ToJSON PlayListItemListResponse where
+        toJSON PlayListItemListResponse{..}
           = object
               (catMaybes
-                 [("etag" .=) <$> _sEtag,
-                  ("tokenPagination" .=) <$> _sTokenPagination,
-                  ("nextPageToken" .=) <$> _sNextPageToken,
-                  ("pageInfo" .=) <$> _sPageInfo,
-                  Just ("kind" .= _sKind), ("items" .=) <$> _sItems,
-                  ("visitorId" .=) <$> _sVisitorId,
-                  ("eventId" .=) <$> _sEventId,
-                  ("prevPageToken" .=) <$> _sPrevPageToken])
+                 [("etag" .=) <$> _plilrEtag,
+                  ("tokenPagination" .=) <$> _plilrTokenPagination,
+                  ("nextPageToken" .=) <$> _plilrNextPageToken,
+                  ("pageInfo" .=) <$> _plilrPageInfo,
+                  Just ("kind" .= _plilrKind),
+                  ("items" .=) <$> _plilrItems,
+                  ("visitorId" .=) <$> _plilrVisitorId,
+                  ("eventId" .=) <$> _plilrEventId,
+                  ("prevPageToken" .=) <$> _plilrPrevPageToken])
 
 -- | A guideCategory resource identifies a category that YouTube
 -- algorithmically assigns based on a channel\'s content or other
@@ -9010,6 +8882,505 @@ instance ToJSON GuideCategory where
                  [("etag" .=) <$> _gcEtag,
                   ("snippet" .=) <$> _gcSnippet,
                   Just ("kind" .= _gcKind), ("id" .=) <$> _gcId])
+
+--
+-- /See:/ 'videoConversionPings' smart constructor.
+newtype VideoConversionPings = VideoConversionPings
+    { _vcpPings :: Maybe [VideoConversionPing]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VideoConversionPings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vcpPings'
+videoConversionPings
+    :: VideoConversionPings
+videoConversionPings =
+    VideoConversionPings
+    { _vcpPings = Nothing
+    }
+
+-- | Pings that the app shall fire for a video (authenticated by biscotti
+-- cookie). Each ping has a context, in which the app must fire the ping,
+-- and a url identifying the ping.
+vcpPings :: Lens' VideoConversionPings [VideoConversionPing]
+vcpPings
+  = lens _vcpPings (\ s a -> s{_vcpPings = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON VideoConversionPings where
+        parseJSON
+          = withObject "VideoConversionPings"
+              (\ o ->
+                 VideoConversionPings <$> (o .:? "pings" .!= mempty))
+
+instance ToJSON VideoConversionPings where
+        toJSON VideoConversionPings{..}
+          = object (catMaybes [("pings" .=) <$> _vcpPings])
+
+-- | Basic details about a search result, including title, description and
+-- thumbnails of the item referenced by the search result.
+--
+-- /See:/ 'searchResultSnippet' smart constructor.
+data SearchResultSnippet = SearchResultSnippet
+    { _srsPublishedAt          :: !(Maybe DateTime')
+    , _srsChannelTitle         :: !(Maybe Text)
+    , _srsChannelId            :: !(Maybe Text)
+    , _srsThumbnails           :: !(Maybe ThumbnailDetails)
+    , _srsTitle                :: !(Maybe Text)
+    , _srsLiveBroadcastContent :: !(Maybe SearchResultSnippetLiveBroadcastContent)
+    , _srsDescription          :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SearchResultSnippet' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'srsPublishedAt'
+--
+-- * 'srsChannelTitle'
+--
+-- * 'srsChannelId'
+--
+-- * 'srsThumbnails'
+--
+-- * 'srsTitle'
+--
+-- * 'srsLiveBroadcastContent'
+--
+-- * 'srsDescription'
+searchResultSnippet
+    :: SearchResultSnippet
+searchResultSnippet =
+    SearchResultSnippet
+    { _srsPublishedAt = Nothing
+    , _srsChannelTitle = Nothing
+    , _srsChannelId = Nothing
+    , _srsThumbnails = Nothing
+    , _srsTitle = Nothing
+    , _srsLiveBroadcastContent = Nothing
+    , _srsDescription = Nothing
+    }
+
+-- | The creation date and time of the resource that the search result
+-- identifies. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ)
+-- format.
+srsPublishedAt :: Lens' SearchResultSnippet (Maybe UTCTime)
+srsPublishedAt
+  = lens _srsPublishedAt
+      (\ s a -> s{_srsPublishedAt = a})
+      . mapping _DateTime
+
+-- | The title of the channel that published the resource that the search
+-- result identifies.
+srsChannelTitle :: Lens' SearchResultSnippet (Maybe Text)
+srsChannelTitle
+  = lens _srsChannelTitle
+      (\ s a -> s{_srsChannelTitle = a})
+
+-- | The value that YouTube uses to uniquely identify the channel that
+-- published the resource that the search result identifies.
+srsChannelId :: Lens' SearchResultSnippet (Maybe Text)
+srsChannelId
+  = lens _srsChannelId (\ s a -> s{_srsChannelId = a})
+
+-- | A map of thumbnail images associated with the search result. For each
+-- object in the map, the key is the name of the thumbnail image, and the
+-- value is an object that contains other information about the thumbnail.
+srsThumbnails :: Lens' SearchResultSnippet (Maybe ThumbnailDetails)
+srsThumbnails
+  = lens _srsThumbnails
+      (\ s a -> s{_srsThumbnails = a})
+
+-- | The title of the search result.
+srsTitle :: Lens' SearchResultSnippet (Maybe Text)
+srsTitle = lens _srsTitle (\ s a -> s{_srsTitle = a})
+
+-- | It indicates if the resource (video or channel) has upcoming\/active
+-- live broadcast content. Or it\'s \"none\" if there is not any
+-- upcoming\/active live broadcasts.
+srsLiveBroadcastContent :: Lens' SearchResultSnippet (Maybe SearchResultSnippetLiveBroadcastContent)
+srsLiveBroadcastContent
+  = lens _srsLiveBroadcastContent
+      (\ s a -> s{_srsLiveBroadcastContent = a})
+
+-- | A description of the search result.
+srsDescription :: Lens' SearchResultSnippet (Maybe Text)
+srsDescription
+  = lens _srsDescription
+      (\ s a -> s{_srsDescription = a})
+
+instance FromJSON SearchResultSnippet where
+        parseJSON
+          = withObject "SearchResultSnippet"
+              (\ o ->
+                 SearchResultSnippet <$>
+                   (o .:? "publishedAt") <*> (o .:? "channelTitle") <*>
+                     (o .:? "channelId")
+                     <*> (o .:? "thumbnails")
+                     <*> (o .:? "title")
+                     <*> (o .:? "liveBroadcastContent")
+                     <*> (o .:? "description"))
+
+instance ToJSON SearchResultSnippet where
+        toJSON SearchResultSnippet{..}
+          = object
+              (catMaybes
+                 [("publishedAt" .=) <$> _srsPublishedAt,
+                  ("channelTitle" .=) <$> _srsChannelTitle,
+                  ("channelId" .=) <$> _srsChannelId,
+                  ("thumbnails" .=) <$> _srsThumbnails,
+                  ("title" .=) <$> _srsTitle,
+                  ("liveBroadcastContent" .=) <$>
+                    _srsLiveBroadcastContent,
+                  ("description" .=) <$> _srsDescription])
+
+--
+-- /See:/ 'liveBroadcastTopicSnippet' smart constructor.
+data LiveBroadcastTopicSnippet = LiveBroadcastTopicSnippet
+    { _lbtsName        :: !(Maybe Text)
+    , _lbtsReleaseDate :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LiveBroadcastTopicSnippet' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lbtsName'
+--
+-- * 'lbtsReleaseDate'
+liveBroadcastTopicSnippet
+    :: LiveBroadcastTopicSnippet
+liveBroadcastTopicSnippet =
+    LiveBroadcastTopicSnippet
+    { _lbtsName = Nothing
+    , _lbtsReleaseDate = Nothing
+    }
+
+-- | The name of the topic.
+lbtsName :: Lens' LiveBroadcastTopicSnippet (Maybe Text)
+lbtsName = lens _lbtsName (\ s a -> s{_lbtsName = a})
+
+-- | The date at which the topic was released. Filled for types: videoGame
+lbtsReleaseDate :: Lens' LiveBroadcastTopicSnippet (Maybe Text)
+lbtsReleaseDate
+  = lens _lbtsReleaseDate
+      (\ s a -> s{_lbtsReleaseDate = a})
+
+instance FromJSON LiveBroadcastTopicSnippet where
+        parseJSON
+          = withObject "LiveBroadcastTopicSnippet"
+              (\ o ->
+                 LiveBroadcastTopicSnippet <$>
+                   (o .:? "name") <*> (o .:? "releaseDate"))
+
+instance ToJSON LiveBroadcastTopicSnippet where
+        toJSON LiveBroadcastTopicSnippet{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _lbtsName,
+                  ("releaseDate" .=) <$> _lbtsReleaseDate])
+
+-- | An activity resource contains information about an action that a
+-- particular channel, or user, has taken on YouTube.The actions reported
+-- in activity feeds include rating a video, sharing a video, marking a
+-- video as a favorite, commenting on a video, uploading a video, and so
+-- forth. Each activity resource identifies the type of action, the channel
+-- associated with the action, and the resource(s) associated with the
+-- action, such as the video that was rated or uploaded.
+--
+-- /See:/ 'activity' smart constructor.
+data Activity = Activity
+    { _aEtag           :: !(Maybe Text)
+    , _aSnippet        :: !(Maybe ActivitySnippet)
+    , _aKind           :: !Text
+    , _aContentDetails :: !(Maybe ActivityContentDetails)
+    , _aId             :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Activity' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aEtag'
+--
+-- * 'aSnippet'
+--
+-- * 'aKind'
+--
+-- * 'aContentDetails'
+--
+-- * 'aId'
+activity
+    :: Activity
+activity =
+    Activity
+    { _aEtag = Nothing
+    , _aSnippet = Nothing
+    , _aKind = "youtube#activity"
+    , _aContentDetails = Nothing
+    , _aId = Nothing
+    }
+
+-- | Etag of this resource.
+aEtag :: Lens' Activity (Maybe Text)
+aEtag = lens _aEtag (\ s a -> s{_aEtag = a})
+
+-- | The snippet object contains basic details about the activity, including
+-- the activity\'s type and group ID.
+aSnippet :: Lens' Activity (Maybe ActivitySnippet)
+aSnippet = lens _aSnippet (\ s a -> s{_aSnippet = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"youtube#activity\".
+aKind :: Lens' Activity Text
+aKind = lens _aKind (\ s a -> s{_aKind = a})
+
+-- | The contentDetails object contains information about the content
+-- associated with the activity. For example, if the snippet.type value is
+-- videoRated, then the contentDetails object\'s content identifies the
+-- rated video.
+aContentDetails :: Lens' Activity (Maybe ActivityContentDetails)
+aContentDetails
+  = lens _aContentDetails
+      (\ s a -> s{_aContentDetails = a})
+
+-- | The ID that YouTube uses to uniquely identify the activity.
+aId :: Lens' Activity (Maybe Text)
+aId = lens _aId (\ s a -> s{_aId = a})
+
+instance FromJSON Activity where
+        parseJSON
+          = withObject "Activity"
+              (\ o ->
+                 Activity <$>
+                   (o .:? "etag") <*> (o .:? "snippet") <*>
+                     (o .:? "kind" .!= "youtube#activity")
+                     <*> (o .:? "contentDetails")
+                     <*> (o .:? "id"))
+
+instance ToJSON Activity where
+        toJSON Activity{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _aEtag,
+                  ("snippet" .=) <$> _aSnippet,
+                  Just ("kind" .= _aKind),
+                  ("contentDetails" .=) <$> _aContentDetails,
+                  ("id" .=) <$> _aId])
+
+-- | Describes an invideo promotion campaign consisting of multiple promoted
+-- items. A campaign belongs to a single channel_id.
+--
+-- /See:/ 'invideoPromotion' smart constructor.
+data InvideoPromotion = InvideoPromotion
+    { _ipUseSmartTiming :: !(Maybe Bool)
+    , _ipItems          :: !(Maybe [PromotedItem])
+    , _ipDefaultTiming  :: !(Maybe InvideoTiming)
+    , _ipPosition       :: !(Maybe InvideoPosition)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InvideoPromotion' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ipUseSmartTiming'
+--
+-- * 'ipItems'
+--
+-- * 'ipDefaultTiming'
+--
+-- * 'ipPosition'
+invideoPromotion
+    :: InvideoPromotion
+invideoPromotion =
+    InvideoPromotion
+    { _ipUseSmartTiming = Nothing
+    , _ipItems = Nothing
+    , _ipDefaultTiming = Nothing
+    , _ipPosition = Nothing
+    }
+
+-- | Indicates whether the channel\'s promotional campaign uses \"smart
+-- timing.\" This feature attempts to show promotions at a point in the
+-- video when they are more likely to be clicked and less likely to disrupt
+-- the viewing experience. This feature also picks up a single promotion to
+-- show on each video.
+ipUseSmartTiming :: Lens' InvideoPromotion (Maybe Bool)
+ipUseSmartTiming
+  = lens _ipUseSmartTiming
+      (\ s a -> s{_ipUseSmartTiming = a})
+
+-- | List of promoted items in decreasing priority.
+ipItems :: Lens' InvideoPromotion [PromotedItem]
+ipItems
+  = lens _ipItems (\ s a -> s{_ipItems = a}) . _Default
+      . _Coerce
+
+-- | The default temporal position within the video where the promoted item
+-- will be displayed. Can be overriden by more specific timing in the item.
+ipDefaultTiming :: Lens' InvideoPromotion (Maybe InvideoTiming)
+ipDefaultTiming
+  = lens _ipDefaultTiming
+      (\ s a -> s{_ipDefaultTiming = a})
+
+-- | The spatial position within the video where the promoted item will be
+-- displayed.
+ipPosition :: Lens' InvideoPromotion (Maybe InvideoPosition)
+ipPosition
+  = lens _ipPosition (\ s a -> s{_ipPosition = a})
+
+instance FromJSON InvideoPromotion where
+        parseJSON
+          = withObject "InvideoPromotion"
+              (\ o ->
+                 InvideoPromotion <$>
+                   (o .:? "useSmartTiming") <*>
+                     (o .:? "items" .!= mempty)
+                     <*> (o .:? "defaultTiming")
+                     <*> (o .:? "position"))
+
+instance ToJSON InvideoPromotion where
+        toJSON InvideoPromotion{..}
+          = object
+              (catMaybes
+                 [("useSmartTiming" .=) <$> _ipUseSmartTiming,
+                  ("items" .=) <$> _ipItems,
+                  ("defaultTiming" .=) <$> _ipDefaultTiming,
+                  ("position" .=) <$> _ipPosition])
+
+--
+-- /See:/ 'invideoBranding' smart constructor.
+data InvideoBranding = InvideoBranding
+    { _ibImageURL        :: !(Maybe Text)
+    , _ibTargetChannelId :: !(Maybe Text)
+    , _ibTiming          :: !(Maybe InvideoTiming)
+    , _ibImageBytes      :: !(Maybe Word8)
+    , _ibPosition        :: !(Maybe InvideoPosition)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InvideoBranding' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ibImageURL'
+--
+-- * 'ibTargetChannelId'
+--
+-- * 'ibTiming'
+--
+-- * 'ibImageBytes'
+--
+-- * 'ibPosition'
+invideoBranding
+    :: InvideoBranding
+invideoBranding =
+    InvideoBranding
+    { _ibImageURL = Nothing
+    , _ibTargetChannelId = Nothing
+    , _ibTiming = Nothing
+    , _ibImageBytes = Nothing
+    , _ibPosition = Nothing
+    }
+
+ibImageURL :: Lens' InvideoBranding (Maybe Text)
+ibImageURL
+  = lens _ibImageURL (\ s a -> s{_ibImageURL = a})
+
+ibTargetChannelId :: Lens' InvideoBranding (Maybe Text)
+ibTargetChannelId
+  = lens _ibTargetChannelId
+      (\ s a -> s{_ibTargetChannelId = a})
+
+ibTiming :: Lens' InvideoBranding (Maybe InvideoTiming)
+ibTiming = lens _ibTiming (\ s a -> s{_ibTiming = a})
+
+ibImageBytes :: Lens' InvideoBranding (Maybe Word8)
+ibImageBytes
+  = lens _ibImageBytes (\ s a -> s{_ibImageBytes = a})
+
+ibPosition :: Lens' InvideoBranding (Maybe InvideoPosition)
+ibPosition
+  = lens _ibPosition (\ s a -> s{_ibPosition = a})
+
+instance FromJSON InvideoBranding where
+        parseJSON
+          = withObject "InvideoBranding"
+              (\ o ->
+                 InvideoBranding <$>
+                   (o .:? "imageUrl") <*> (o .:? "targetChannelId") <*>
+                     (o .:? "timing")
+                     <*> (o .:? "imageBytes")
+                     <*> (o .:? "position"))
+
+instance ToJSON InvideoBranding where
+        toJSON InvideoBranding{..}
+          = object
+              (catMaybes
+                 [("imageUrl" .=) <$> _ibImageURL,
+                  ("targetChannelId" .=) <$> _ibTargetChannelId,
+                  ("timing" .=) <$> _ibTiming,
+                  ("imageBytes" .=) <$> _ibImageBytes,
+                  ("position" .=) <$> _ibPosition])
+
+-- | A channel banner returned as the response to a channel_banner.insert
+-- call.
+--
+-- /See:/ 'channelBannerResource' smart constructor.
+data ChannelBannerResource = ChannelBannerResource
+    { _cbrEtag :: !(Maybe Text)
+    , _cbrKind :: !Text
+    , _cbrURL  :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ChannelBannerResource' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cbrEtag'
+--
+-- * 'cbrKind'
+--
+-- * 'cbrURL'
+channelBannerResource
+    :: ChannelBannerResource
+channelBannerResource =
+    ChannelBannerResource
+    { _cbrEtag = Nothing
+    , _cbrKind = "youtube#channelBannerResource"
+    , _cbrURL = Nothing
+    }
+
+-- | Etag of this resource.
+cbrEtag :: Lens' ChannelBannerResource (Maybe Text)
+cbrEtag = lens _cbrEtag (\ s a -> s{_cbrEtag = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"youtube#channelBannerResource\".
+cbrKind :: Lens' ChannelBannerResource Text
+cbrKind = lens _cbrKind (\ s a -> s{_cbrKind = a})
+
+-- | The URL of this banner image.
+cbrURL :: Lens' ChannelBannerResource (Maybe Text)
+cbrURL = lens _cbrURL (\ s a -> s{_cbrURL = a})
+
+instance FromJSON ChannelBannerResource where
+        parseJSON
+          = withObject "ChannelBannerResource"
+              (\ o ->
+                 ChannelBannerResource <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "youtube#channelBannerResource")
+                     <*> (o .:? "url"))
+
+instance ToJSON ChannelBannerResource where
+        toJSON ChannelBannerResource{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _cbrEtag, Just ("kind" .= _cbrKind),
+                  ("url" .=) <$> _cbrURL])
 
 --
 -- /See:/ 'i18nLanguageListResponse' smart constructor.
@@ -9095,78 +9466,38 @@ instance ToJSON I18nLanguageListResponse where
                   ("eventId" .=) <$> _illrEventId])
 
 --
--- /See:/ 'invideoBranding' smart constructor.
-data InvideoBranding = InvideoBranding
-    { _ibImageURL        :: !(Maybe Text)
-    , _ibTargetChannelId :: !(Maybe Text)
-    , _ibTiming          :: !(Maybe InvideoTiming)
-    , _ibImageBytes      :: !(Maybe Word8)
-    , _ibPosition        :: !(Maybe InvideoPosition)
+-- /See:/ 'playListPlayer' smart constructor.
+newtype PlayListPlayer = PlayListPlayer
+    { _plpEmbedHTML :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InvideoBranding' with the minimum fields required to make a request.
+-- | Creates a value of 'PlayListPlayer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ibImageURL'
---
--- * 'ibTargetChannelId'
---
--- * 'ibTiming'
---
--- * 'ibImageBytes'
---
--- * 'ibPosition'
-invideoBranding
-    :: InvideoBranding
-invideoBranding =
-    InvideoBranding
-    { _ibImageURL = Nothing
-    , _ibTargetChannelId = Nothing
-    , _ibTiming = Nothing
-    , _ibImageBytes = Nothing
-    , _ibPosition = Nothing
+-- * 'plpEmbedHTML'
+playListPlayer
+    :: PlayListPlayer
+playListPlayer =
+    PlayListPlayer
+    { _plpEmbedHTML = Nothing
     }
 
-ibImageURL :: Lens' InvideoBranding (Maybe Text)
-ibImageURL
-  = lens _ibImageURL (\ s a -> s{_ibImageURL = a})
+-- | An
+-- tag that embeds a player that will play the playlist.
+plpEmbedHTML :: Lens' PlayListPlayer (Maybe Text)
+plpEmbedHTML
+  = lens _plpEmbedHTML (\ s a -> s{_plpEmbedHTML = a})
 
-ibTargetChannelId :: Lens' InvideoBranding (Maybe Text)
-ibTargetChannelId
-  = lens _ibTargetChannelId
-      (\ s a -> s{_ibTargetChannelId = a})
-
-ibTiming :: Lens' InvideoBranding (Maybe InvideoTiming)
-ibTiming = lens _ibTiming (\ s a -> s{_ibTiming = a})
-
-ibImageBytes :: Lens' InvideoBranding (Maybe Word8)
-ibImageBytes
-  = lens _ibImageBytes (\ s a -> s{_ibImageBytes = a})
-
-ibPosition :: Lens' InvideoBranding (Maybe InvideoPosition)
-ibPosition
-  = lens _ibPosition (\ s a -> s{_ibPosition = a})
-
-instance FromJSON InvideoBranding where
+instance FromJSON PlayListPlayer where
         parseJSON
-          = withObject "InvideoBranding"
-              (\ o ->
-                 InvideoBranding <$>
-                   (o .:? "imageUrl") <*> (o .:? "targetChannelId") <*>
-                     (o .:? "timing")
-                     <*> (o .:? "imageBytes")
-                     <*> (o .:? "position"))
+          = withObject "PlayListPlayer"
+              (\ o -> PlayListPlayer <$> (o .:? "embedHtml"))
 
-instance ToJSON InvideoBranding where
-        toJSON InvideoBranding{..}
+instance ToJSON PlayListPlayer where
+        toJSON PlayListPlayer{..}
           = object
-              (catMaybes
-                 [("imageUrl" .=) <$> _ibImageURL,
-                  ("targetChannelId" .=) <$> _ibTargetChannelId,
-                  ("timing" .=) <$> _ibTiming,
-                  ("imageBytes" .=) <$> _ibImageBytes,
-                  ("position" .=) <$> _ibPosition])
+              (catMaybes [("embedHtml" .=) <$> _plpEmbedHTML])
 
 -- | Branding properties of a YouTube channel.
 --
@@ -9236,120 +9567,6 @@ instance ToJSON ChannelBrandingSettings where
                   ("hints" .=) <$> _cbsHints,
                   ("channel" .=) <$> _cbsChannel,
                   ("watch" .=) <$> _cbsWatch])
-
--- | Describes an invideo promotion campaign consisting of multiple promoted
--- items. A campaign belongs to a single channel_id.
---
--- /See:/ 'invideoPromotion' smart constructor.
-data InvideoPromotion = InvideoPromotion
-    { _ipUseSmartTiming :: !(Maybe Bool)
-    , _ipItems          :: !(Maybe [PromotedItem])
-    , _ipDefaultTiming  :: !(Maybe InvideoTiming)
-    , _ipPosition       :: !(Maybe InvideoPosition)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'InvideoPromotion' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ipUseSmartTiming'
---
--- * 'ipItems'
---
--- * 'ipDefaultTiming'
---
--- * 'ipPosition'
-invideoPromotion
-    :: InvideoPromotion
-invideoPromotion =
-    InvideoPromotion
-    { _ipUseSmartTiming = Nothing
-    , _ipItems = Nothing
-    , _ipDefaultTiming = Nothing
-    , _ipPosition = Nothing
-    }
-
--- | Indicates whether the channel\'s promotional campaign uses \"smart
--- timing.\" This feature attempts to show promotions at a point in the
--- video when they are more likely to be clicked and less likely to disrupt
--- the viewing experience. This feature also picks up a single promotion to
--- show on each video.
-ipUseSmartTiming :: Lens' InvideoPromotion (Maybe Bool)
-ipUseSmartTiming
-  = lens _ipUseSmartTiming
-      (\ s a -> s{_ipUseSmartTiming = a})
-
--- | List of promoted items in decreasing priority.
-ipItems :: Lens' InvideoPromotion [PromotedItem]
-ipItems
-  = lens _ipItems (\ s a -> s{_ipItems = a}) . _Default
-      . _Coerce
-
--- | The default temporal position within the video where the promoted item
--- will be displayed. Can be overriden by more specific timing in the item.
-ipDefaultTiming :: Lens' InvideoPromotion (Maybe InvideoTiming)
-ipDefaultTiming
-  = lens _ipDefaultTiming
-      (\ s a -> s{_ipDefaultTiming = a})
-
--- | The spatial position within the video where the promoted item will be
--- displayed.
-ipPosition :: Lens' InvideoPromotion (Maybe InvideoPosition)
-ipPosition
-  = lens _ipPosition (\ s a -> s{_ipPosition = a})
-
-instance FromJSON InvideoPromotion where
-        parseJSON
-          = withObject "InvideoPromotion"
-              (\ o ->
-                 InvideoPromotion <$>
-                   (o .:? "useSmartTiming") <*>
-                     (o .:? "items" .!= mempty)
-                     <*> (o .:? "defaultTiming")
-                     <*> (o .:? "position"))
-
-instance ToJSON InvideoPromotion where
-        toJSON InvideoPromotion{..}
-          = object
-              (catMaybes
-                 [("useSmartTiming" .=) <$> _ipUseSmartTiming,
-                  ("items" .=) <$> _ipItems,
-                  ("defaultTiming" .=) <$> _ipDefaultTiming,
-                  ("position" .=) <$> _ipPosition])
-
---
--- /See:/ 'playListPlayer' smart constructor.
-newtype PlayListPlayer = PlayListPlayer
-    { _plpEmbedHTML :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PlayListPlayer' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'plpEmbedHTML'
-playListPlayer
-    :: PlayListPlayer
-playListPlayer =
-    PlayListPlayer
-    { _plpEmbedHTML = Nothing
-    }
-
--- | An
--- tag that embeds a player that will play the playlist.
-plpEmbedHTML :: Lens' PlayListPlayer (Maybe Text)
-plpEmbedHTML
-  = lens _plpEmbedHTML (\ s a -> s{_plpEmbedHTML = a})
-
-instance FromJSON PlayListPlayer where
-        parseJSON
-          = withObject "PlayListPlayer"
-              (\ o -> PlayListPlayer <$> (o .:? "embedHtml"))
-
-instance ToJSON PlayListPlayer where
-        toJSON PlayListPlayer{..}
-          = object
-              (catMaybes [("embedHtml" .=) <$> _plpEmbedHTML])
 
 -- | A comment thread represents information that applies to a top level
 -- comment and all its replies. It can also include the top level comment
@@ -9479,196 +9696,125 @@ instance ToJSON PlayListLocalization where
                  [("title" .=) <$> _pllTitle,
                   ("description" .=) <$> _pllDescription])
 
--- | An activity resource contains information about an action that a
--- particular channel, or user, has taken on YouTube.The actions reported
--- in activity feeds include rating a video, sharing a video, marking a
--- video as a favorite, commenting on a video, uploading a video, and so
--- forth. Each activity resource identifies the type of action, the channel
--- associated with the action, and the resource(s) associated with the
--- action, such as the video that was rated or uploaded.
+-- | Details about the content to witch a subscription refers.
 --
--- /See:/ 'activity' smart constructor.
-data Activity = Activity
-    { _aEtag           :: !(Maybe Text)
-    , _aSnippet        :: !(Maybe ActivitySnippet)
-    , _aKind           :: !Text
-    , _aContentDetails :: !(Maybe ActivityContentDetails)
-    , _aId             :: !(Maybe Text)
+-- /See:/ 'subscriptionContentDetails' smart constructor.
+data SubscriptionContentDetails = SubscriptionContentDetails
+    { _scdActivityType   :: !(Maybe SubscriptionContentDetailsActivityType)
+    , _scdTotalItemCount :: !(Maybe Word32)
+    , _scdNewItemCount   :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Activity' with the minimum fields required to make a request.
+-- | Creates a value of 'SubscriptionContentDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aEtag'
+-- * 'scdActivityType'
 --
--- * 'aSnippet'
+-- * 'scdTotalItemCount'
 --
--- * 'aKind'
---
--- * 'aContentDetails'
---
--- * 'aId'
-activity
-    :: Activity
-activity =
-    Activity
-    { _aEtag = Nothing
-    , _aSnippet = Nothing
-    , _aKind = "youtube#activity"
-    , _aContentDetails = Nothing
-    , _aId = Nothing
+-- * 'scdNewItemCount'
+subscriptionContentDetails
+    :: SubscriptionContentDetails
+subscriptionContentDetails =
+    SubscriptionContentDetails
+    { _scdActivityType = Nothing
+    , _scdTotalItemCount = Nothing
+    , _scdNewItemCount = Nothing
     }
 
--- | Etag of this resource.
-aEtag :: Lens' Activity (Maybe Text)
-aEtag = lens _aEtag (\ s a -> s{_aEtag = a})
+-- | The type of activity this subscription is for (only uploads,
+-- everything).
+scdActivityType :: Lens' SubscriptionContentDetails (Maybe SubscriptionContentDetailsActivityType)
+scdActivityType
+  = lens _scdActivityType
+      (\ s a -> s{_scdActivityType = a})
 
--- | The snippet object contains basic details about the activity, including
--- the activity\'s type and group ID.
-aSnippet :: Lens' Activity (Maybe ActivitySnippet)
-aSnippet = lens _aSnippet (\ s a -> s{_aSnippet = a})
+-- | The approximate number of items that the subscription points to.
+scdTotalItemCount :: Lens' SubscriptionContentDetails (Maybe Word32)
+scdTotalItemCount
+  = lens _scdTotalItemCount
+      (\ s a -> s{_scdTotalItemCount = a})
 
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"youtube#activity\".
-aKind :: Lens' Activity Text
-aKind = lens _aKind (\ s a -> s{_aKind = a})
+-- | The number of new items in the subscription since its content was last
+-- read.
+scdNewItemCount :: Lens' SubscriptionContentDetails (Maybe Word32)
+scdNewItemCount
+  = lens _scdNewItemCount
+      (\ s a -> s{_scdNewItemCount = a})
 
--- | The contentDetails object contains information about the content
--- associated with the activity. For example, if the snippet.type value is
--- videoRated, then the contentDetails object\'s content identifies the
--- rated video.
-aContentDetails :: Lens' Activity (Maybe ActivityContentDetails)
-aContentDetails
-  = lens _aContentDetails
-      (\ s a -> s{_aContentDetails = a})
-
--- | The ID that YouTube uses to uniquely identify the activity.
-aId :: Lens' Activity (Maybe Text)
-aId = lens _aId (\ s a -> s{_aId = a})
-
-instance FromJSON Activity where
+instance FromJSON SubscriptionContentDetails where
         parseJSON
-          = withObject "Activity"
+          = withObject "SubscriptionContentDetails"
               (\ o ->
-                 Activity <$>
-                   (o .:? "etag") <*> (o .:? "snippet") <*>
-                     (o .:? "kind" .!= "youtube#activity")
-                     <*> (o .:? "contentDetails")
-                     <*> (o .:? "id"))
+                 SubscriptionContentDetails <$>
+                   (o .:? "activityType") <*> (o .:? "totalItemCount")
+                     <*> (o .:? "newItemCount"))
 
-instance ToJSON Activity where
-        toJSON Activity{..}
+instance ToJSON SubscriptionContentDetails where
+        toJSON SubscriptionContentDetails{..}
           = object
               (catMaybes
-                 [("etag" .=) <$> _aEtag,
-                  ("snippet" .=) <$> _aSnippet,
-                  Just ("kind" .= _aKind),
-                  ("contentDetails" .=) <$> _aContentDetails,
-                  ("id" .=) <$> _aId])
+                 [("activityType" .=) <$> _scdActivityType,
+                  ("totalItemCount" .=) <$> _scdTotalItemCount,
+                  ("newItemCount" .=) <$> _scdNewItemCount])
 
--- | A channel banner returned as the response to a channel_banner.insert
--- call.
 --
--- /See:/ 'channelBannerResource' smart constructor.
-data ChannelBannerResource = ChannelBannerResource
-    { _cbrEtag :: !(Maybe Text)
-    , _cbrKind :: !Text
-    , _cbrURL  :: !(Maybe Text)
+-- /See:/ 'liveBroadcastTopic' smart constructor.
+data LiveBroadcastTopic = LiveBroadcastTopic
+    { _lbtSnippet   :: !(Maybe LiveBroadcastTopicSnippet)
+    , _lbtUnmatched :: !(Maybe Bool)
+    , _lbtType      :: !(Maybe LiveBroadcastTopicType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ChannelBannerResource' with the minimum fields required to make a request.
+-- | Creates a value of 'LiveBroadcastTopic' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cbrEtag'
+-- * 'lbtSnippet'
 --
--- * 'cbrKind'
+-- * 'lbtUnmatched'
 --
--- * 'cbrURL'
-channelBannerResource
-    :: ChannelBannerResource
-channelBannerResource =
-    ChannelBannerResource
-    { _cbrEtag = Nothing
-    , _cbrKind = "youtube#channelBannerResource"
-    , _cbrURL = Nothing
+-- * 'lbtType'
+liveBroadcastTopic
+    :: LiveBroadcastTopic
+liveBroadcastTopic =
+    LiveBroadcastTopic
+    { _lbtSnippet = Nothing
+    , _lbtUnmatched = Nothing
+    , _lbtType = Nothing
     }
 
--- | Etag of this resource.
-cbrEtag :: Lens' ChannelBannerResource (Maybe Text)
-cbrEtag = lens _cbrEtag (\ s a -> s{_cbrEtag = a})
+-- | Information about the topic matched.
+lbtSnippet :: Lens' LiveBroadcastTopic (Maybe LiveBroadcastTopicSnippet)
+lbtSnippet
+  = lens _lbtSnippet (\ s a -> s{_lbtSnippet = a})
 
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"youtube#channelBannerResource\".
-cbrKind :: Lens' ChannelBannerResource Text
-cbrKind = lens _cbrKind (\ s a -> s{_cbrKind = a})
+-- | If this flag is set it means that we have not been able to match the
+-- topic title and type provided to a known entity.
+lbtUnmatched :: Lens' LiveBroadcastTopic (Maybe Bool)
+lbtUnmatched
+  = lens _lbtUnmatched (\ s a -> s{_lbtUnmatched = a})
 
--- | The URL of this banner image.
-cbrURL :: Lens' ChannelBannerResource (Maybe Text)
-cbrURL = lens _cbrURL (\ s a -> s{_cbrURL = a})
+-- | The type of the topic.
+lbtType :: Lens' LiveBroadcastTopic (Maybe LiveBroadcastTopicType)
+lbtType = lens _lbtType (\ s a -> s{_lbtType = a})
 
-instance FromJSON ChannelBannerResource where
+instance FromJSON LiveBroadcastTopic where
         parseJSON
-          = withObject "ChannelBannerResource"
+          = withObject "LiveBroadcastTopic"
               (\ o ->
-                 ChannelBannerResource <$>
-                   (o .:? "etag") <*>
-                     (o .:? "kind" .!= "youtube#channelBannerResource")
-                     <*> (o .:? "url"))
+                 LiveBroadcastTopic <$>
+                   (o .:? "snippet") <*> (o .:? "unmatched") <*>
+                     (o .:? "type"))
 
-instance ToJSON ChannelBannerResource where
-        toJSON ChannelBannerResource{..}
+instance ToJSON LiveBroadcastTopic where
+        toJSON LiveBroadcastTopic{..}
           = object
               (catMaybes
-                 [("etag" .=) <$> _cbrEtag, Just ("kind" .= _cbrKind),
-                  ("url" .=) <$> _cbrURL])
-
---
--- /See:/ 'liveBroadcastTopicSnippet' smart constructor.
-data LiveBroadcastTopicSnippet = LiveBroadcastTopicSnippet
-    { _lbtsName        :: !(Maybe Text)
-    , _lbtsReleaseDate :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'LiveBroadcastTopicSnippet' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lbtsName'
---
--- * 'lbtsReleaseDate'
-liveBroadcastTopicSnippet
-    :: LiveBroadcastTopicSnippet
-liveBroadcastTopicSnippet =
-    LiveBroadcastTopicSnippet
-    { _lbtsName = Nothing
-    , _lbtsReleaseDate = Nothing
-    }
-
--- | The name of the topic.
-lbtsName :: Lens' LiveBroadcastTopicSnippet (Maybe Text)
-lbtsName = lens _lbtsName (\ s a -> s{_lbtsName = a})
-
--- | The date at which the topic was released. Filled for types: videoGame
-lbtsReleaseDate :: Lens' LiveBroadcastTopicSnippet (Maybe Text)
-lbtsReleaseDate
-  = lens _lbtsReleaseDate
-      (\ s a -> s{_lbtsReleaseDate = a})
-
-instance FromJSON LiveBroadcastTopicSnippet where
-        parseJSON
-          = withObject "LiveBroadcastTopicSnippet"
-              (\ o ->
-                 LiveBroadcastTopicSnippet <$>
-                   (o .:? "name") <*> (o .:? "releaseDate"))
-
-instance ToJSON LiveBroadcastTopicSnippet where
-        toJSON LiveBroadcastTopicSnippet{..}
-          = object
-              (catMaybes
-                 [("name" .=) <$> _lbtsName,
-                  ("releaseDate" .=) <$> _lbtsReleaseDate])
+                 [("snippet" .=) <$> _lbtSnippet,
+                  ("unmatched" .=) <$> _lbtUnmatched,
+                  ("type" .=) <$> _lbtType])
 
 -- | The conversionPings object encapsulates information about conversion
 -- pings that need to be respected by the channel.
@@ -9709,6 +9855,111 @@ instance FromJSON ChannelConversionPings where
 instance ToJSON ChannelConversionPings where
         toJSON ChannelConversionPings{..}
           = object (catMaybes [("pings" .=) <$> _ccpPings])
+
+--
+-- /See:/ 'localizedProperty' smart constructor.
+data LocalizedProperty = LocalizedProperty
+    { _lpDefault         :: !(Maybe Text)
+    , _lpLocalized       :: !(Maybe [LocalizedString])
+    , _lpDefaultLanguage :: !(Maybe LanguageTag)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LocalizedProperty' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lpDefault'
+--
+-- * 'lpLocalized'
+--
+-- * 'lpDefaultLanguage'
+localizedProperty
+    :: LocalizedProperty
+localizedProperty =
+    LocalizedProperty
+    { _lpDefault = Nothing
+    , _lpLocalized = Nothing
+    , _lpDefaultLanguage = Nothing
+    }
+
+lpDefault :: Lens' LocalizedProperty (Maybe Text)
+lpDefault
+  = lens _lpDefault (\ s a -> s{_lpDefault = a})
+
+lpLocalized :: Lens' LocalizedProperty [LocalizedString]
+lpLocalized
+  = lens _lpLocalized (\ s a -> s{_lpLocalized = a}) .
+      _Default
+      . _Coerce
+
+-- | The language of the default property.
+lpDefaultLanguage :: Lens' LocalizedProperty (Maybe LanguageTag)
+lpDefaultLanguage
+  = lens _lpDefaultLanguage
+      (\ s a -> s{_lpDefaultLanguage = a})
+
+instance FromJSON LocalizedProperty where
+        parseJSON
+          = withObject "LocalizedProperty"
+              (\ o ->
+                 LocalizedProperty <$>
+                   (o .:? "default") <*> (o .:? "localized" .!= mempty)
+                     <*> (o .:? "defaultLanguage"))
+
+instance ToJSON LocalizedProperty where
+        toJSON LocalizedProperty{..}
+          = object
+              (catMaybes
+                 [("default" .=) <$> _lpDefault,
+                  ("localized" .=) <$> _lpLocalized,
+                  ("defaultLanguage" .=) <$> _lpDefaultLanguage])
+
+-- | Channel localization setting
+--
+-- /See:/ 'channelLocalization' smart constructor.
+data ChannelLocalization = ChannelLocalization
+    { _clTitle       :: !(Maybe Text)
+    , _clDescription :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ChannelLocalization' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'clTitle'
+--
+-- * 'clDescription'
+channelLocalization
+    :: ChannelLocalization
+channelLocalization =
+    ChannelLocalization
+    { _clTitle = Nothing
+    , _clDescription = Nothing
+    }
+
+-- | The localized strings for channel\'s title.
+clTitle :: Lens' ChannelLocalization (Maybe Text)
+clTitle = lens _clTitle (\ s a -> s{_clTitle = a})
+
+-- | The localized strings for channel\'s description.
+clDescription :: Lens' ChannelLocalization (Maybe Text)
+clDescription
+  = lens _clDescription
+      (\ s a -> s{_clDescription = a})
+
+instance FromJSON ChannelLocalization where
+        parseJSON
+          = withObject "ChannelLocalization"
+              (\ o ->
+                 ChannelLocalization <$>
+                   (o .:? "title") <*> (o .:? "description"))
+
+instance ToJSON ChannelLocalization where
+        toJSON ChannelLocalization{..}
+          = object
+              (catMaybes
+                 [("title" .=) <$> _clTitle,
+                  ("description" .=) <$> _clDescription])
 
 --
 -- /See:/ 'playListItemContentDetails' smart constructor.
@@ -9787,59 +10038,12 @@ instance ToJSON PlayListItemContentDetails where
                   ("videoId" .=) <$> _plicdVideoId,
                   ("endAt" .=) <$> _plicdEndAt])
 
--- | Channel localization setting
---
--- /See:/ 'channelLocalization' smart constructor.
-data ChannelLocalization = ChannelLocalization
-    { _clTitle       :: !(Maybe Text)
-    , _clDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ChannelLocalization' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'clTitle'
---
--- * 'clDescription'
-channelLocalization
-    :: ChannelLocalization
-channelLocalization =
-    ChannelLocalization
-    { _clTitle = Nothing
-    , _clDescription = Nothing
-    }
-
--- | The localized strings for channel\'s title.
-clTitle :: Lens' ChannelLocalization (Maybe Text)
-clTitle = lens _clTitle (\ s a -> s{_clTitle = a})
-
--- | The localized strings for channel\'s description.
-clDescription :: Lens' ChannelLocalization (Maybe Text)
-clDescription
-  = lens _clDescription
-      (\ s a -> s{_clDescription = a})
-
-instance FromJSON ChannelLocalization where
-        parseJSON
-          = withObject "ChannelLocalization"
-              (\ o ->
-                 ChannelLocalization <$>
-                   (o .:? "title") <*> (o .:? "description"))
-
-instance ToJSON ChannelLocalization where
-        toJSON ChannelLocalization{..}
-          = object
-              (catMaybes
-                 [("title" .=) <$> _clTitle,
-                  ("description" .=) <$> _clDescription])
-
 --
 -- /See:/ 'videoAgeGating' smart constructor.
 data VideoAgeGating = VideoAgeGating
     { _vagAlcoholContent  :: !(Maybe Bool)
     , _vagRestricted      :: !(Maybe Bool)
-    , _vagVideoGameRating :: !(Maybe VideoGameRating)
+    , _vagVideoGameRating :: !(Maybe VideoAgeGatingVideoGameRating)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideoAgeGating' with the minimum fields required to make a request.
@@ -9878,7 +10082,7 @@ vagRestricted
       (\ s a -> s{_vagRestricted = a})
 
 -- | Video game rating, if any.
-vagVideoGameRating :: Lens' VideoAgeGating (Maybe VideoGameRating)
+vagVideoGameRating :: Lens' VideoAgeGating (Maybe VideoAgeGatingVideoGameRating)
 vagVideoGameRating
   = lens _vagVideoGameRating
       (\ s a -> s{_vagVideoGameRating = a})
@@ -9900,62 +10104,34 @@ instance ToJSON VideoAgeGating where
                   ("videoGameRating" .=) <$> _vagVideoGameRating])
 
 --
--- /See:/ 'localizedProperty' smart constructor.
-data LocalizedProperty = LocalizedProperty
-    { _lpDefault         :: !(Maybe Text)
-    , _lpLocalized       :: !(Maybe [LocalizedString])
-    , _lpDefaultLanguage :: !(Maybe LanguageTag)
+-- /See:/ 'languageTag' smart constructor.
+newtype LanguageTag = LanguageTag
+    { _ltValue :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LocalizedProperty' with the minimum fields required to make a request.
+-- | Creates a value of 'LanguageTag' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lpDefault'
---
--- * 'lpLocalized'
---
--- * 'lpDefaultLanguage'
-localizedProperty
-    :: LocalizedProperty
-localizedProperty =
-    LocalizedProperty
-    { _lpDefault = Nothing
-    , _lpLocalized = Nothing
-    , _lpDefaultLanguage = Nothing
+-- * 'ltValue'
+languageTag
+    :: LanguageTag
+languageTag =
+    LanguageTag
+    { _ltValue = Nothing
     }
 
-lpDefault :: Lens' LocalizedProperty (Maybe Text)
-lpDefault
-  = lens _lpDefault (\ s a -> s{_lpDefault = a})
+ltValue :: Lens' LanguageTag (Maybe Text)
+ltValue = lens _ltValue (\ s a -> s{_ltValue = a})
 
-lpLocalized :: Lens' LocalizedProperty [LocalizedString]
-lpLocalized
-  = lens _lpLocalized (\ s a -> s{_lpLocalized = a}) .
-      _Default
-      . _Coerce
-
--- | The language of the default property.
-lpDefaultLanguage :: Lens' LocalizedProperty (Maybe LanguageTag)
-lpDefaultLanguage
-  = lens _lpDefaultLanguage
-      (\ s a -> s{_lpDefaultLanguage = a})
-
-instance FromJSON LocalizedProperty where
+instance FromJSON LanguageTag where
         parseJSON
-          = withObject "LocalizedProperty"
-              (\ o ->
-                 LocalizedProperty <$>
-                   (o .:? "default") <*> (o .:? "localized" .!= mempty)
-                     <*> (o .:? "defaultLanguage"))
+          = withObject "LanguageTag"
+              (\ o -> LanguageTag <$> (o .:? "value"))
 
-instance ToJSON LocalizedProperty where
-        toJSON LocalizedProperty{..}
-          = object
-              (catMaybes
-                 [("default" .=) <$> _lpDefault,
-                  ("localized" .=) <$> _lpLocalized,
-                  ("defaultLanguage" .=) <$> _lpDefaultLanguage])
+instance ToJSON LanguageTag where
+        toJSON LanguageTag{..}
+          = object (catMaybes [("value" .=) <$> _ltValue])
 
 -- | Information about a video stream.
 --
@@ -9964,7 +10140,7 @@ data VideoFileDetailsVideoStream = VideoFileDetailsVideoStream
     { _vfdvsHeightPixels :: !(Maybe Word32)
     , _vfdvsBitrateBps   :: !(Maybe Word64)
     , _vfdvsVendor       :: !(Maybe Text)
-    , _vfdvsRotation     :: !(Maybe Rotation)
+    , _vfdvsRotation     :: !(Maybe VideoFileDetailsVideoStreamRotation)
     , _vfdvsFrameRateFps :: !(Maybe Double)
     , _vfdvsCodec        :: !(Maybe Text)
     , _vfdvsAspectRatio  :: !(Maybe Double)
@@ -10024,7 +10200,7 @@ vfdvsVendor
 
 -- | The amount that YouTube needs to rotate the original source content to
 -- properly display the video.
-vfdvsRotation :: Lens' VideoFileDetailsVideoStream (Maybe Rotation)
+vfdvsRotation :: Lens' VideoFileDetailsVideoStream (Maybe VideoFileDetailsVideoStreamRotation)
 vfdvsRotation
   = lens _vfdvsRotation
       (\ s a -> s{_vfdvsRotation = a})
@@ -10080,176 +10256,62 @@ instance ToJSON VideoFileDetailsVideoStream where
                   ("aspectRatio" .=) <$> _vfdvsAspectRatio,
                   ("widthPixels" .=) <$> _vfdvsWidthPixels])
 
--- | Details about the content to witch a subscription refers.
+-- | Pings that the app shall fire (authenticated by biscotti cookie). Each
+-- ping has a context, in which the app must fire the ping, and a url
+-- identifying the ping.
 --
--- /See:/ 'subscriptionContentDetails' smart constructor.
-data SubscriptionContentDetails = SubscriptionContentDetails
-    { _scdActivityType   :: !(Maybe ActivityType)
-    , _scdTotalItemCount :: !(Maybe Word32)
-    , _scdNewItemCount   :: !(Maybe Word32)
+-- /See:/ 'channelConversionPing' smart constructor.
+data ChannelConversionPing = ChannelConversionPing
+    { _ccpContext       :: !(Maybe ChannelConversionPingContext)
+    , _ccpConversionURL :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SubscriptionContentDetails' with the minimum fields required to make a request.
+-- | Creates a value of 'ChannelConversionPing' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'scdActivityType'
+-- * 'ccpContext'
 --
--- * 'scdTotalItemCount'
---
--- * 'scdNewItemCount'
-subscriptionContentDetails
-    :: SubscriptionContentDetails
-subscriptionContentDetails =
-    SubscriptionContentDetails
-    { _scdActivityType = Nothing
-    , _scdTotalItemCount = Nothing
-    , _scdNewItemCount = Nothing
+-- * 'ccpConversionURL'
+channelConversionPing
+    :: ChannelConversionPing
+channelConversionPing =
+    ChannelConversionPing
+    { _ccpContext = Nothing
+    , _ccpConversionURL = Nothing
     }
 
--- | The type of activity this subscription is for (only uploads,
--- everything).
-scdActivityType :: Lens' SubscriptionContentDetails (Maybe ActivityType)
-scdActivityType
-  = lens _scdActivityType
-      (\ s a -> s{_scdActivityType = a})
+-- | Defines the context of the ping.
+ccpContext :: Lens' ChannelConversionPing (Maybe ChannelConversionPingContext)
+ccpContext
+  = lens _ccpContext (\ s a -> s{_ccpContext = a})
 
--- | The approximate number of items that the subscription points to.
-scdTotalItemCount :: Lens' SubscriptionContentDetails (Maybe Word32)
-scdTotalItemCount
-  = lens _scdTotalItemCount
-      (\ s a -> s{_scdTotalItemCount = a})
+-- | The url (without the schema) that the player shall send the ping to.
+-- It\'s at caller\'s descretion to decide which schema to use (http vs
+-- https) Example of a returned url:
+-- \/\/googleads.g.doubleclick.net\/pagead\/
+-- viewthroughconversion\/962985656\/?data=path%3DtHe_path%3Btype%3D
+-- cview%3Butuid%3DGISQtTNGYqaYl4sKxoVvKA&labe=default The caller must
+-- append biscotti authentication (ms param in case of mobile, for example)
+-- to this ping.
+ccpConversionURL :: Lens' ChannelConversionPing (Maybe Text)
+ccpConversionURL
+  = lens _ccpConversionURL
+      (\ s a -> s{_ccpConversionURL = a})
 
--- | The number of new items in the subscription since its content was last
--- read.
-scdNewItemCount :: Lens' SubscriptionContentDetails (Maybe Word32)
-scdNewItemCount
-  = lens _scdNewItemCount
-      (\ s a -> s{_scdNewItemCount = a})
-
-instance FromJSON SubscriptionContentDetails where
+instance FromJSON ChannelConversionPing where
         parseJSON
-          = withObject "SubscriptionContentDetails"
+          = withObject "ChannelConversionPing"
               (\ o ->
-                 SubscriptionContentDetails <$>
-                   (o .:? "activityType") <*> (o .:? "totalItemCount")
-                     <*> (o .:? "newItemCount"))
+                 ChannelConversionPing <$>
+                   (o .:? "context") <*> (o .:? "conversionUrl"))
 
-instance ToJSON SubscriptionContentDetails where
-        toJSON SubscriptionContentDetails{..}
+instance ToJSON ChannelConversionPing where
+        toJSON ChannelConversionPing{..}
           = object
               (catMaybes
-                 [("activityType" .=) <$> _scdActivityType,
-                  ("totalItemCount" .=) <$> _scdTotalItemCount,
-                  ("newItemCount" .=) <$> _scdNewItemCount])
-
--- | Localizations for different languages
---
--- /See:/ 'localizations' smart constructor.
-data Localizations =
-    Localizations
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Localizations' with the minimum fields required to make a request.
---
-localizations
-    :: Localizations
-localizations = Localizations
-
-instance FromJSON Localizations where
-        parseJSON
-          = withObject "Localizations"
-              (\ o -> pure Localizations)
-
-instance ToJSON Localizations where
-        toJSON = const (Object mempty)
-
---
--- /See:/ 'languageTag' smart constructor.
-newtype LanguageTag = LanguageTag
-    { _ltValue :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'LanguageTag' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ltValue'
-languageTag
-    :: LanguageTag
-languageTag =
-    LanguageTag
-    { _ltValue = Nothing
-    }
-
-ltValue :: Lens' LanguageTag (Maybe Text)
-ltValue = lens _ltValue (\ s a -> s{_ltValue = a})
-
-instance FromJSON LanguageTag where
-        parseJSON
-          = withObject "LanguageTag"
-              (\ o -> LanguageTag <$> (o .:? "value"))
-
-instance ToJSON LanguageTag where
-        toJSON LanguageTag{..}
-          = object (catMaybes [("value" .=) <$> _ltValue])
-
---
--- /See:/ 'liveBroadcastTopic' smart constructor.
-data LiveBroadcastTopic = LiveBroadcastTopic
-    { _lbtSnippet   :: !(Maybe LiveBroadcastTopicSnippet)
-    , _lbtUnmatched :: !(Maybe Bool)
-    , _lbtType      :: !(Maybe LiveBroadcastTopicType)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'LiveBroadcastTopic' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lbtSnippet'
---
--- * 'lbtUnmatched'
---
--- * 'lbtType'
-liveBroadcastTopic
-    :: LiveBroadcastTopic
-liveBroadcastTopic =
-    LiveBroadcastTopic
-    { _lbtSnippet = Nothing
-    , _lbtUnmatched = Nothing
-    , _lbtType = Nothing
-    }
-
--- | Information about the topic matched.
-lbtSnippet :: Lens' LiveBroadcastTopic (Maybe LiveBroadcastTopicSnippet)
-lbtSnippet
-  = lens _lbtSnippet (\ s a -> s{_lbtSnippet = a})
-
--- | If this flag is set it means that we have not been able to match the
--- topic title and type provided to a known entity.
-lbtUnmatched :: Lens' LiveBroadcastTopic (Maybe Bool)
-lbtUnmatched
-  = lens _lbtUnmatched (\ s a -> s{_lbtUnmatched = a})
-
--- | The type of the topic.
-lbtType :: Lens' LiveBroadcastTopic (Maybe LiveBroadcastTopicType)
-lbtType = lens _lbtType (\ s a -> s{_lbtType = a})
-
-instance FromJSON LiveBroadcastTopic where
-        parseJSON
-          = withObject "LiveBroadcastTopic"
-              (\ o ->
-                 LiveBroadcastTopic <$>
-                   (o .:? "snippet") <*> (o .:? "unmatched") <*>
-                     (o .:? "type"))
-
-instance ToJSON LiveBroadcastTopic where
-        toJSON LiveBroadcastTopic{..}
-          = object
-              (catMaybes
-                 [("snippet" .=) <$> _lbtSnippet,
-                  ("unmatched" .=) <$> _lbtUnmatched,
-                  ("type" .=) <$> _lbtType])
+                 [("context" .=) <$> _ccpContext,
+                  ("conversionUrl" .=) <$> _ccpConversionURL])
 
 -- | A playlistItem resource identifies another resource, such as a video,
 -- that is included in a playlist. In addition, the playlistItem resource
@@ -10359,63 +10421,6 @@ instance ToJSON PlayListItem where
                   Just ("kind" .= _pliKind),
                   ("contentDetails" .=) <$> _pliContentDetails,
                   ("id" .=) <$> _pliId])
-
--- | Pings that the app shall fire (authenticated by biscotti cookie). Each
--- ping has a context, in which the app must fire the ping, and a url
--- identifying the ping.
---
--- /See:/ 'channelConversionPing' smart constructor.
-data ChannelConversionPing = ChannelConversionPing
-    { _ccpContext       :: !(Maybe Context)
-    , _ccpConversionURL :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ChannelConversionPing' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ccpContext'
---
--- * 'ccpConversionURL'
-channelConversionPing
-    :: ChannelConversionPing
-channelConversionPing =
-    ChannelConversionPing
-    { _ccpContext = Nothing
-    , _ccpConversionURL = Nothing
-    }
-
--- | Defines the context of the ping.
-ccpContext :: Lens' ChannelConversionPing (Maybe Context)
-ccpContext
-  = lens _ccpContext (\ s a -> s{_ccpContext = a})
-
--- | The url (without the schema) that the player shall send the ping to.
--- It\'s at caller\'s descretion to decide which schema to use (http vs
--- https) Example of a returned url:
--- \/\/googleads.g.doubleclick.net\/pagead\/
--- viewthroughconversion\/962985656\/?data=path%3DtHe_path%3Btype%3D
--- cview%3Butuid%3DGISQtTNGYqaYl4sKxoVvKA&labe=default The caller must
--- append biscotti authentication (ms param in case of mobile, for example)
--- to this ping.
-ccpConversionURL :: Lens' ChannelConversionPing (Maybe Text)
-ccpConversionURL
-  = lens _ccpConversionURL
-      (\ s a -> s{_ccpConversionURL = a})
-
-instance FromJSON ChannelConversionPing where
-        parseJSON
-          = withObject "ChannelConversionPing"
-              (\ o ->
-                 ChannelConversionPing <$>
-                   (o .:? "context") <*> (o .:? "conversionUrl"))
-
-instance ToJSON ChannelConversionPing where
-        toJSON ChannelConversionPing{..}
-          = object
-              (catMaybes
-                 [("context" .=) <$> _ccpContext,
-                  ("conversionUrl" .=) <$> _ccpConversionURL])
 
 --
 -- /See:/ 'guideCategoryListResponse' smart constructor.
@@ -10549,149 +10554,6 @@ instance ToJSON GuideCategoryListResponse where
                   ("eventId" .=) <$> _gclrEventId,
                   ("prevPageToken" .=) <$> _gclrPrevPageToken])
 
--- | A subscription resource contains information about a YouTube user
--- subscription. A subscription notifies a user when new videos are added
--- to a channel or when another user takes one of several actions on
--- YouTube, such as uploading a video, rating a video, or commenting on a
--- video.
---
--- /See:/ 'subscription' smart constructor.
-data Subscription = Subscription
-    { _subEtag              :: !(Maybe Text)
-    , _subSubscriberSnippet :: !(Maybe SubscriptionSubscriberSnippet)
-    , _subSnippet           :: !(Maybe SubscriptionSnippet)
-    , _subKind              :: !Text
-    , _subContentDetails    :: !(Maybe SubscriptionContentDetails)
-    , _subId                :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Subscription' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'subEtag'
---
--- * 'subSubscriberSnippet'
---
--- * 'subSnippet'
---
--- * 'subKind'
---
--- * 'subContentDetails'
---
--- * 'subId'
-subscription
-    :: Subscription
-subscription =
-    Subscription
-    { _subEtag = Nothing
-    , _subSubscriberSnippet = Nothing
-    , _subSnippet = Nothing
-    , _subKind = "youtube#subscription"
-    , _subContentDetails = Nothing
-    , _subId = Nothing
-    }
-
--- | Etag of this resource.
-subEtag :: Lens' Subscription (Maybe Text)
-subEtag = lens _subEtag (\ s a -> s{_subEtag = a})
-
--- | The subscriberSnippet object contains basic details about the
--- sbuscriber.
-subSubscriberSnippet :: Lens' Subscription (Maybe SubscriptionSubscriberSnippet)
-subSubscriberSnippet
-  = lens _subSubscriberSnippet
-      (\ s a -> s{_subSubscriberSnippet = a})
-
--- | The snippet object contains basic details about the subscription,
--- including its title and the channel that the user subscribed to.
-subSnippet :: Lens' Subscription (Maybe SubscriptionSnippet)
-subSnippet
-  = lens _subSnippet (\ s a -> s{_subSnippet = a})
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"youtube#subscription\".
-subKind :: Lens' Subscription Text
-subKind = lens _subKind (\ s a -> s{_subKind = a})
-
--- | The contentDetails object contains basic statistics about the
--- subscription.
-subContentDetails :: Lens' Subscription (Maybe SubscriptionContentDetails)
-subContentDetails
-  = lens _subContentDetails
-      (\ s a -> s{_subContentDetails = a})
-
--- | The ID that YouTube uses to uniquely identify the subscription.
-subId :: Lens' Subscription (Maybe Text)
-subId = lens _subId (\ s a -> s{_subId = a})
-
-instance FromJSON Subscription where
-        parseJSON
-          = withObject "Subscription"
-              (\ o ->
-                 Subscription <$>
-                   (o .:? "etag") <*> (o .:? "subscriberSnippet") <*>
-                     (o .:? "snippet")
-                     <*> (o .:? "kind" .!= "youtube#subscription")
-                     <*> (o .:? "contentDetails")
-                     <*> (o .:? "id"))
-
-instance ToJSON Subscription where
-        toJSON Subscription{..}
-          = object
-              (catMaybes
-                 [("etag" .=) <$> _subEtag,
-                  ("subscriberSnippet" .=) <$> _subSubscriberSnippet,
-                  ("snippet" .=) <$> _subSnippet,
-                  Just ("kind" .= _subKind),
-                  ("contentDetails" .=) <$> _subContentDetails,
-                  ("id" .=) <$> _subId])
-
--- | Basic details about an i18n region, such as region code and
--- human-readable name.
---
--- /See:/ 'i18nRegionSnippet' smart constructor.
-data I18nRegionSnippet = I18nRegionSnippet
-    { _irsName :: !(Maybe Text)
-    , _irsGl   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'I18nRegionSnippet' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'irsName'
---
--- * 'irsGl'
-i18nRegionSnippet
-    :: I18nRegionSnippet
-i18nRegionSnippet =
-    I18nRegionSnippet
-    { _irsName = Nothing
-    , _irsGl = Nothing
-    }
-
--- | The human-readable name of the region.
-irsName :: Lens' I18nRegionSnippet (Maybe Text)
-irsName = lens _irsName (\ s a -> s{_irsName = a})
-
--- | The region code as a 2-letter ISO country code.
-irsGl :: Lens' I18nRegionSnippet (Maybe Text)
-irsGl = lens _irsGl (\ s a -> s{_irsGl = a})
-
-instance FromJSON I18nRegionSnippet where
-        parseJSON
-          = withObject "I18nRegionSnippet"
-              (\ o ->
-                 I18nRegionSnippet <$>
-                   (o .:? "name") <*> (o .:? "gl"))
-
-instance ToJSON I18nRegionSnippet where
-        toJSON I18nRegionSnippet{..}
-          = object
-              (catMaybes
-                 [("name" .=) <$> _irsName, ("gl" .=) <$> _irsGl])
-
 -- | Basic details about a caption track, such as its language and name.
 --
 -- /See:/ 'captionSnippet' smart constructor.
@@ -10699,7 +10561,7 @@ data CaptionSnippet = CaptionSnippet
     { _csFailureReason  :: !(Maybe CaptionSnippetFailureReason)
     , _csStatus         :: !(Maybe CaptionSnippetStatus)
     , _csLastUpdated    :: !(Maybe DateTime')
-    , _csTrackKind      :: !(Maybe TrackKind)
+    , _csTrackKind      :: !(Maybe CaptionSnippetTrackKind)
     , _csIsDraft        :: !(Maybe Bool)
     , _csIsCC           :: !(Maybe Bool)
     , _csVideoId        :: !(Maybe Text)
@@ -10708,7 +10570,7 @@ data CaptionSnippet = CaptionSnippet
     , _csLanguage       :: !(Maybe Text)
     , _csIsAutoSynced   :: !(Maybe Bool)
     , _csIsEasyReader   :: !(Maybe Bool)
-    , _csAudioTrackType :: !(Maybe AudioTrackType)
+    , _csAudioTrackType :: !(Maybe CaptionSnippetAudioTrackType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CaptionSnippet' with the minimum fields required to make a request.
@@ -10779,7 +10641,7 @@ csLastUpdated
       . mapping _DateTime
 
 -- | The caption track\'s type.
-csTrackKind :: Lens' CaptionSnippet (Maybe TrackKind)
+csTrackKind :: Lens' CaptionSnippet (Maybe CaptionSnippetTrackKind)
 csTrackKind
   = lens _csTrackKind (\ s a -> s{_csTrackKind = a})
 
@@ -10838,7 +10700,7 @@ csIsEasyReader
       (\ s a -> s{_csIsEasyReader = a})
 
 -- | The type of audio track associated with the caption track.
-csAudioTrackType :: Lens' CaptionSnippet (Maybe AudioTrackType)
+csAudioTrackType :: Lens' CaptionSnippet (Maybe CaptionSnippetAudioTrackType)
 csAudioTrackType
   = lens _csAudioTrackType
       (\ s a -> s{_csAudioTrackType = a})
@@ -10944,6 +10806,634 @@ instance ToJSON Comment where
                  [("etag" .=) <$> _ccEtag,
                   ("snippet" .=) <$> _ccSnippet,
                   Just ("kind" .= _ccKind), ("id" .=) <$> _ccId])
+
+-- | Basic details about an i18n region, such as region code and
+-- human-readable name.
+--
+-- /See:/ 'i18nRegionSnippet' smart constructor.
+data I18nRegionSnippet = I18nRegionSnippet
+    { _irsName :: !(Maybe Text)
+    , _irsGl   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'I18nRegionSnippet' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'irsName'
+--
+-- * 'irsGl'
+i18nRegionSnippet
+    :: I18nRegionSnippet
+i18nRegionSnippet =
+    I18nRegionSnippet
+    { _irsName = Nothing
+    , _irsGl = Nothing
+    }
+
+-- | The human-readable name of the region.
+irsName :: Lens' I18nRegionSnippet (Maybe Text)
+irsName = lens _irsName (\ s a -> s{_irsName = a})
+
+-- | The region code as a 2-letter ISO country code.
+irsGl :: Lens' I18nRegionSnippet (Maybe Text)
+irsGl = lens _irsGl (\ s a -> s{_irsGl = a})
+
+instance FromJSON I18nRegionSnippet where
+        parseJSON
+          = withObject "I18nRegionSnippet"
+              (\ o ->
+                 I18nRegionSnippet <$>
+                   (o .:? "name") <*> (o .:? "gl"))
+
+instance ToJSON I18nRegionSnippet where
+        toJSON I18nRegionSnippet{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _irsName, ("gl" .=) <$> _irsGl])
+
+-- | A subscription resource contains information about a YouTube user
+-- subscription. A subscription notifies a user when new videos are added
+-- to a channel or when another user takes one of several actions on
+-- YouTube, such as uploading a video, rating a video, or commenting on a
+-- video.
+--
+-- /See:/ 'subscription' smart constructor.
+data Subscription = Subscription
+    { _subEtag              :: !(Maybe Text)
+    , _subSubscriberSnippet :: !(Maybe SubscriptionSubscriberSnippet)
+    , _subSnippet           :: !(Maybe SubscriptionSnippet)
+    , _subKind              :: !Text
+    , _subContentDetails    :: !(Maybe SubscriptionContentDetails)
+    , _subId                :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Subscription' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'subEtag'
+--
+-- * 'subSubscriberSnippet'
+--
+-- * 'subSnippet'
+--
+-- * 'subKind'
+--
+-- * 'subContentDetails'
+--
+-- * 'subId'
+subscription
+    :: Subscription
+subscription =
+    Subscription
+    { _subEtag = Nothing
+    , _subSubscriberSnippet = Nothing
+    , _subSnippet = Nothing
+    , _subKind = "youtube#subscription"
+    , _subContentDetails = Nothing
+    , _subId = Nothing
+    }
+
+-- | Etag of this resource.
+subEtag :: Lens' Subscription (Maybe Text)
+subEtag = lens _subEtag (\ s a -> s{_subEtag = a})
+
+-- | The subscriberSnippet object contains basic details about the
+-- sbuscriber.
+subSubscriberSnippet :: Lens' Subscription (Maybe SubscriptionSubscriberSnippet)
+subSubscriberSnippet
+  = lens _subSubscriberSnippet
+      (\ s a -> s{_subSubscriberSnippet = a})
+
+-- | The snippet object contains basic details about the subscription,
+-- including its title and the channel that the user subscribed to.
+subSnippet :: Lens' Subscription (Maybe SubscriptionSnippet)
+subSnippet
+  = lens _subSnippet (\ s a -> s{_subSnippet = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"youtube#subscription\".
+subKind :: Lens' Subscription Text
+subKind = lens _subKind (\ s a -> s{_subKind = a})
+
+-- | The contentDetails object contains basic statistics about the
+-- subscription.
+subContentDetails :: Lens' Subscription (Maybe SubscriptionContentDetails)
+subContentDetails
+  = lens _subContentDetails
+      (\ s a -> s{_subContentDetails = a})
+
+-- | The ID that YouTube uses to uniquely identify the subscription.
+subId :: Lens' Subscription (Maybe Text)
+subId = lens _subId (\ s a -> s{_subId = a})
+
+instance FromJSON Subscription where
+        parseJSON
+          = withObject "Subscription"
+              (\ o ->
+                 Subscription <$>
+                   (o .:? "etag") <*> (o .:? "subscriberSnippet") <*>
+                     (o .:? "snippet")
+                     <*> (o .:? "kind" .!= "youtube#subscription")
+                     <*> (o .:? "contentDetails")
+                     <*> (o .:? "id"))
+
+instance ToJSON Subscription where
+        toJSON Subscription{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _subEtag,
+                  ("subscriberSnippet" .=) <$> _subSubscriberSnippet,
+                  ("snippet" .=) <$> _subSnippet,
+                  Just ("kind" .= _subKind),
+                  ("contentDetails" .=) <$> _subContentDetails,
+                  ("id" .=) <$> _subId])
+
+-- | Recording information associated with the video.
+--
+-- /See:/ 'videoRecordingDetails' smart constructor.
+data VideoRecordingDetails = VideoRecordingDetails
+    { _vrdLocation            :: !(Maybe GeoPoint)
+    , _vrdLocationDescription :: !(Maybe Text)
+    , _vrdRecordingDate       :: !(Maybe DateTime')
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VideoRecordingDetails' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vrdLocation'
+--
+-- * 'vrdLocationDescription'
+--
+-- * 'vrdRecordingDate'
+videoRecordingDetails
+    :: VideoRecordingDetails
+videoRecordingDetails =
+    VideoRecordingDetails
+    { _vrdLocation = Nothing
+    , _vrdLocationDescription = Nothing
+    , _vrdRecordingDate = Nothing
+    }
+
+-- | The geolocation information associated with the video.
+vrdLocation :: Lens' VideoRecordingDetails (Maybe GeoPoint)
+vrdLocation
+  = lens _vrdLocation (\ s a -> s{_vrdLocation = a})
+
+-- | The text description of the location where the video was recorded.
+vrdLocationDescription :: Lens' VideoRecordingDetails (Maybe Text)
+vrdLocationDescription
+  = lens _vrdLocationDescription
+      (\ s a -> s{_vrdLocationDescription = a})
+
+-- | The date and time when the video was recorded. The value is specified in
+-- ISO 8601 (YYYY-MM-DDThh:mm:ss.sssZ) format.
+vrdRecordingDate :: Lens' VideoRecordingDetails (Maybe UTCTime)
+vrdRecordingDate
+  = lens _vrdRecordingDate
+      (\ s a -> s{_vrdRecordingDate = a})
+      . mapping _DateTime
+
+instance FromJSON VideoRecordingDetails where
+        parseJSON
+          = withObject "VideoRecordingDetails"
+              (\ o ->
+                 VideoRecordingDetails <$>
+                   (o .:? "location") <*> (o .:? "locationDescription")
+                     <*> (o .:? "recordingDate"))
+
+instance ToJSON VideoRecordingDetails where
+        toJSON VideoRecordingDetails{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _vrdLocation,
+                  ("locationDescription" .=) <$>
+                    _vrdLocationDescription,
+                  ("recordingDate" .=) <$> _vrdRecordingDate])
+
+--
+-- /See:/ 'videoRating' smart constructor.
+data VideoRating = VideoRating
+    { _vRating  :: !(Maybe VideoRatingRating)
+    , _vVideoId :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VideoRating' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vRating'
+--
+-- * 'vVideoId'
+videoRating
+    :: VideoRating
+videoRating =
+    VideoRating
+    { _vRating = Nothing
+    , _vVideoId = Nothing
+    }
+
+vRating :: Lens' VideoRating (Maybe VideoRatingRating)
+vRating = lens _vRating (\ s a -> s{_vRating = a})
+
+vVideoId :: Lens' VideoRating (Maybe Text)
+vVideoId = lens _vVideoId (\ s a -> s{_vVideoId = a})
+
+instance FromJSON VideoRating where
+        parseJSON
+          = withObject "VideoRating"
+              (\ o ->
+                 VideoRating <$>
+                   (o .:? "rating") <*> (o .:? "videoId"))
+
+instance ToJSON VideoRating where
+        toJSON VideoRating{..}
+          = object
+              (catMaybes
+                 [("rating" .=) <$> _vRating,
+                  ("videoId" .=) <$> _vVideoId])
+
+-- | Basic details about a comment, such as its author and text.
+--
+-- /See:/ 'commentSnippet' smart constructor.
+data CommentSnippet = CommentSnippet
+    { _cViewerRating               :: !(Maybe CommentSnippetViewerRating)
+    , _cPublishedAt                :: !(Maybe DateTime')
+    , _cAuthorChannelURL           :: !(Maybe Text)
+    , _cModerationStatus           :: !(Maybe CommentSnippetModerationStatus)
+    , _cLikeCount                  :: !(Maybe Word32)
+    , _cChannelId                  :: !(Maybe Text)
+    , _cTextOriginal               :: !(Maybe Text)
+    , _cVideoId                    :: !(Maybe Text)
+    , _cTextDisplay                :: !(Maybe Text)
+    , _cAuthorProFileImageURL      :: !(Maybe Text)
+    , _cAuthorDisplayName          :: !(Maybe Text)
+    , _cUpdatedAt                  :: !(Maybe DateTime')
+    , _cAuthorChannelId            :: !(Maybe ChannelId)
+    , _cCanRate                    :: !(Maybe Bool)
+    , _cAuthorGoogleplusProFileURL :: !(Maybe Text)
+    , _cParentId                   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CommentSnippet' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cViewerRating'
+--
+-- * 'cPublishedAt'
+--
+-- * 'cAuthorChannelURL'
+--
+-- * 'cModerationStatus'
+--
+-- * 'cLikeCount'
+--
+-- * 'cChannelId'
+--
+-- * 'cTextOriginal'
+--
+-- * 'cVideoId'
+--
+-- * 'cTextDisplay'
+--
+-- * 'cAuthorProFileImageURL'
+--
+-- * 'cAuthorDisplayName'
+--
+-- * 'cUpdatedAt'
+--
+-- * 'cAuthorChannelId'
+--
+-- * 'cCanRate'
+--
+-- * 'cAuthorGoogleplusProFileURL'
+--
+-- * 'cParentId'
+commentSnippet
+    :: CommentSnippet
+commentSnippet =
+    CommentSnippet
+    { _cViewerRating = Nothing
+    , _cPublishedAt = Nothing
+    , _cAuthorChannelURL = Nothing
+    , _cModerationStatus = Nothing
+    , _cLikeCount = Nothing
+    , _cChannelId = Nothing
+    , _cTextOriginal = Nothing
+    , _cVideoId = Nothing
+    , _cTextDisplay = Nothing
+    , _cAuthorProFileImageURL = Nothing
+    , _cAuthorDisplayName = Nothing
+    , _cUpdatedAt = Nothing
+    , _cAuthorChannelId = Nothing
+    , _cCanRate = Nothing
+    , _cAuthorGoogleplusProFileURL = Nothing
+    , _cParentId = Nothing
+    }
+
+-- | The rating the viewer has given to this comment. For the time being this
+-- will never return RATE_TYPE_DISLIKE and instead return RATE_TYPE_NONE.
+-- This may change in the future.
+cViewerRating :: Lens' CommentSnippet (Maybe CommentSnippetViewerRating)
+cViewerRating
+  = lens _cViewerRating
+      (\ s a -> s{_cViewerRating = a})
+
+-- | The date and time when the comment was orignally published. The value is
+-- specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
+cPublishedAt :: Lens' CommentSnippet (Maybe UTCTime)
+cPublishedAt
+  = lens _cPublishedAt (\ s a -> s{_cPublishedAt = a})
+      . mapping _DateTime
+
+-- | Link to the author\'s YouTube channel, if any.
+cAuthorChannelURL :: Lens' CommentSnippet (Maybe Text)
+cAuthorChannelURL
+  = lens _cAuthorChannelURL
+      (\ s a -> s{_cAuthorChannelURL = a})
+
+-- | The comment\'s moderation status. Will not be set if the comments were
+-- requested through the id filter.
+cModerationStatus :: Lens' CommentSnippet (Maybe CommentSnippetModerationStatus)
+cModerationStatus
+  = lens _cModerationStatus
+      (\ s a -> s{_cModerationStatus = a})
+
+-- | The total number of likes this comment has received.
+cLikeCount :: Lens' CommentSnippet (Maybe Word32)
+cLikeCount
+  = lens _cLikeCount (\ s a -> s{_cLikeCount = a})
+
+-- | The id of the corresponding YouTube channel. In case of a channel
+-- comment this is the channel the comment refers to. In case of a video
+-- comment it\'s the video\'s channel.
+cChannelId :: Lens' CommentSnippet (Maybe Text)
+cChannelId
+  = lens _cChannelId (\ s a -> s{_cChannelId = a})
+
+-- | The comment\'s original raw text as initially posted or last updated.
+-- The original text will only be returned if it is accessible to the
+-- viewer, which is only guaranteed if the viewer is the comment\'s author.
+cTextOriginal :: Lens' CommentSnippet (Maybe Text)
+cTextOriginal
+  = lens _cTextOriginal
+      (\ s a -> s{_cTextOriginal = a})
+
+-- | The ID of the video the comment refers to, if any.
+cVideoId :: Lens' CommentSnippet (Maybe Text)
+cVideoId = lens _cVideoId (\ s a -> s{_cVideoId = a})
+
+-- | The comment\'s text. The format is either plain text or HTML dependent
+-- on what has been requested. Even the plain text representation may
+-- differ from the text originally posted in that it may replace video
+-- links with video titles etc.
+cTextDisplay :: Lens' CommentSnippet (Maybe Text)
+cTextDisplay
+  = lens _cTextDisplay (\ s a -> s{_cTextDisplay = a})
+
+-- | The URL for the avatar of the user who posted the comment.
+cAuthorProFileImageURL :: Lens' CommentSnippet (Maybe Text)
+cAuthorProFileImageURL
+  = lens _cAuthorProFileImageURL
+      (\ s a -> s{_cAuthorProFileImageURL = a})
+
+-- | The name of the user who posted the comment.
+cAuthorDisplayName :: Lens' CommentSnippet (Maybe Text)
+cAuthorDisplayName
+  = lens _cAuthorDisplayName
+      (\ s a -> s{_cAuthorDisplayName = a})
+
+-- | The date and time when was last updated . The value is specified in ISO
+-- 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
+cUpdatedAt :: Lens' CommentSnippet (Maybe UTCTime)
+cUpdatedAt
+  = lens _cUpdatedAt (\ s a -> s{_cUpdatedAt = a}) .
+      mapping _DateTime
+
+-- | The id of the author\'s YouTube channel, if any.
+cAuthorChannelId :: Lens' CommentSnippet (Maybe ChannelId)
+cAuthorChannelId
+  = lens _cAuthorChannelId
+      (\ s a -> s{_cAuthorChannelId = a})
+
+-- | Whether the current viewer can rate this comment.
+cCanRate :: Lens' CommentSnippet (Maybe Bool)
+cCanRate = lens _cCanRate (\ s a -> s{_cCanRate = a})
+
+-- | Link to the author\'s Google+ profile, if any.
+cAuthorGoogleplusProFileURL :: Lens' CommentSnippet (Maybe Text)
+cAuthorGoogleplusProFileURL
+  = lens _cAuthorGoogleplusProFileURL
+      (\ s a -> s{_cAuthorGoogleplusProFileURL = a})
+
+-- | The unique id of the parent comment, only set for replies.
+cParentId :: Lens' CommentSnippet (Maybe Text)
+cParentId
+  = lens _cParentId (\ s a -> s{_cParentId = a})
+
+instance FromJSON CommentSnippet where
+        parseJSON
+          = withObject "CommentSnippet"
+              (\ o ->
+                 CommentSnippet <$>
+                   (o .:? "viewerRating") <*> (o .:? "publishedAt") <*>
+                     (o .:? "authorChannelUrl")
+                     <*> (o .:? "moderationStatus")
+                     <*> (o .:? "likeCount")
+                     <*> (o .:? "channelId")
+                     <*> (o .:? "textOriginal")
+                     <*> (o .:? "videoId")
+                     <*> (o .:? "textDisplay")
+                     <*> (o .:? "authorProfileImageUrl")
+                     <*> (o .:? "authorDisplayName")
+                     <*> (o .:? "updatedAt")
+                     <*> (o .:? "authorChannelId")
+                     <*> (o .:? "canRate")
+                     <*> (o .:? "authorGoogleplusProfileUrl")
+                     <*> (o .:? "parentId"))
+
+instance ToJSON CommentSnippet where
+        toJSON CommentSnippet{..}
+          = object
+              (catMaybes
+                 [("viewerRating" .=) <$> _cViewerRating,
+                  ("publishedAt" .=) <$> _cPublishedAt,
+                  ("authorChannelUrl" .=) <$> _cAuthorChannelURL,
+                  ("moderationStatus" .=) <$> _cModerationStatus,
+                  ("likeCount" .=) <$> _cLikeCount,
+                  ("channelId" .=) <$> _cChannelId,
+                  ("textOriginal" .=) <$> _cTextOriginal,
+                  ("videoId" .=) <$> _cVideoId,
+                  ("textDisplay" .=) <$> _cTextDisplay,
+                  ("authorProfileImageUrl" .=) <$>
+                    _cAuthorProFileImageURL,
+                  ("authorDisplayName" .=) <$> _cAuthorDisplayName,
+                  ("updatedAt" .=) <$> _cUpdatedAt,
+                  ("authorChannelId" .=) <$> _cAuthorChannelId,
+                  ("canRate" .=) <$> _cCanRate,
+                  ("authorGoogleplusProfileUrl" .=) <$>
+                    _cAuthorGoogleplusProFileURL,
+                  ("parentId" .=) <$> _cParentId])
+
+-- | Brief description of the live stream status.
+--
+-- /See:/ 'liveStreamStatus' smart constructor.
+data LiveStreamStatus = LiveStreamStatus
+    { _lssStreamStatus :: !(Maybe LiveStreamStatusStreamStatus)
+    , _lssHealthStatus :: !(Maybe LiveStreamHealthStatus)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LiveStreamStatus' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lssStreamStatus'
+--
+-- * 'lssHealthStatus'
+liveStreamStatus
+    :: LiveStreamStatus
+liveStreamStatus =
+    LiveStreamStatus
+    { _lssStreamStatus = Nothing
+    , _lssHealthStatus = Nothing
+    }
+
+lssStreamStatus :: Lens' LiveStreamStatus (Maybe LiveStreamStatusStreamStatus)
+lssStreamStatus
+  = lens _lssStreamStatus
+      (\ s a -> s{_lssStreamStatus = a})
+
+-- | The health status of the stream.
+lssHealthStatus :: Lens' LiveStreamStatus (Maybe LiveStreamHealthStatus)
+lssHealthStatus
+  = lens _lssHealthStatus
+      (\ s a -> s{_lssHealthStatus = a})
+
+instance FromJSON LiveStreamStatus where
+        parseJSON
+          = withObject "LiveStreamStatus"
+              (\ o ->
+                 LiveStreamStatus <$>
+                   (o .:? "streamStatus") <*> (o .:? "healthStatus"))
+
+instance ToJSON LiveStreamStatus where
+        toJSON LiveStreamStatus{..}
+          = object
+              (catMaybes
+                 [("streamStatus" .=) <$> _lssStreamStatus,
+                  ("healthStatus" .=) <$> _lssHealthStatus])
+
+-- | Specifies suggestions on how to improve video content, including
+-- encoding hints, tag suggestions, and editor suggestions.
+--
+-- /See:/ 'videoSuggestions' smart constructor.
+data VideoSuggestions = VideoSuggestions
+    { _vsProcessingErrors   :: !(Maybe [VideoSuggestionsProcessingErrorsItem])
+    , _vsProcessingHints    :: !(Maybe [VideoSuggestionsProcessingHintsItem])
+    , _vsEditorSuggestions  :: !(Maybe [VideoSuggestionsEditorSuggestionsItem])
+    , _vsProcessingWarnings :: !(Maybe [VideoSuggestionsProcessingWarningsItem])
+    , _vsTagSuggestions     :: !(Maybe [VideoSuggestionsTagSuggestion])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VideoSuggestions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vsProcessingErrors'
+--
+-- * 'vsProcessingHints'
+--
+-- * 'vsEditorSuggestions'
+--
+-- * 'vsProcessingWarnings'
+--
+-- * 'vsTagSuggestions'
+videoSuggestions
+    :: VideoSuggestions
+videoSuggestions =
+    VideoSuggestions
+    { _vsProcessingErrors = Nothing
+    , _vsProcessingHints = Nothing
+    , _vsEditorSuggestions = Nothing
+    , _vsProcessingWarnings = Nothing
+    , _vsTagSuggestions = Nothing
+    }
+
+-- | A list of errors that will prevent YouTube from successfully processing
+-- the uploaded video video. These errors indicate that, regardless of the
+-- video\'s current processing status, eventually, that status will almost
+-- certainly be failed.
+vsProcessingErrors :: Lens' VideoSuggestions [VideoSuggestionsProcessingErrorsItem]
+vsProcessingErrors
+  = lens _vsProcessingErrors
+      (\ s a -> s{_vsProcessingErrors = a})
+      . _Default
+      . _Coerce
+
+-- | A list of suggestions that may improve YouTube\'s ability to process the
+-- video.
+vsProcessingHints :: Lens' VideoSuggestions [VideoSuggestionsProcessingHintsItem]
+vsProcessingHints
+  = lens _vsProcessingHints
+      (\ s a -> s{_vsProcessingHints = a})
+      . _Default
+      . _Coerce
+
+-- | A list of video editing operations that might improve the video quality
+-- or playback experience of the uploaded video.
+vsEditorSuggestions :: Lens' VideoSuggestions [VideoSuggestionsEditorSuggestionsItem]
+vsEditorSuggestions
+  = lens _vsEditorSuggestions
+      (\ s a -> s{_vsEditorSuggestions = a})
+      . _Default
+      . _Coerce
+
+-- | A list of reasons why YouTube may have difficulty transcoding the
+-- uploaded video or that might result in an erroneous transcoding. These
+-- warnings are generated before YouTube actually processes the uploaded
+-- video file. In addition, they identify issues that are unlikely to cause
+-- the video processing to fail but that might cause problems such as sync
+-- issues, video artifacts, or a missing audio track.
+vsProcessingWarnings :: Lens' VideoSuggestions [VideoSuggestionsProcessingWarningsItem]
+vsProcessingWarnings
+  = lens _vsProcessingWarnings
+      (\ s a -> s{_vsProcessingWarnings = a})
+      . _Default
+      . _Coerce
+
+-- | A list of keyword tags that could be added to the video\'s metadata to
+-- increase the likelihood that users will locate your video when searching
+-- or browsing on YouTube.
+vsTagSuggestions :: Lens' VideoSuggestions [VideoSuggestionsTagSuggestion]
+vsTagSuggestions
+  = lens _vsTagSuggestions
+      (\ s a -> s{_vsTagSuggestions = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON VideoSuggestions where
+        parseJSON
+          = withObject "VideoSuggestions"
+              (\ o ->
+                 VideoSuggestions <$>
+                   (o .:? "processingErrors" .!= mempty) <*>
+                     (o .:? "processingHints" .!= mempty)
+                     <*> (o .:? "editorSuggestions" .!= mempty)
+                     <*> (o .:? "processingWarnings" .!= mempty)
+                     <*> (o .:? "tagSuggestions" .!= mempty))
+
+instance ToJSON VideoSuggestions where
+        toJSON VideoSuggestions{..}
+          = object
+              (catMaybes
+                 [("processingErrors" .=) <$> _vsProcessingErrors,
+                  ("processingHints" .=) <$> _vsProcessingHints,
+                  ("editorSuggestions" .=) <$> _vsEditorSuggestions,
+                  ("processingWarnings" .=) <$> _vsProcessingWarnings,
+                  ("tagSuggestions" .=) <$> _vsTagSuggestions])
 
 -- | Basic details about a playlist, including title, description and
 -- thumbnails.
@@ -11086,48 +11576,6 @@ instance ToJSON PlayListItemSnippet where
                   ("description" .=) <$> _plisDescription,
                   ("position" .=) <$> _plisPosition])
 
---
--- /See:/ 'videoRating' smart constructor.
-data VideoRating = VideoRating
-    { _vRating  :: !(Maybe VideoRatingRating)
-    , _vVideoId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'VideoRating' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'vRating'
---
--- * 'vVideoId'
-videoRating
-    :: VideoRating
-videoRating =
-    VideoRating
-    { _vRating = Nothing
-    , _vVideoId = Nothing
-    }
-
-vRating :: Lens' VideoRating (Maybe VideoRatingRating)
-vRating = lens _vRating (\ s a -> s{_vRating = a})
-
-vVideoId :: Lens' VideoRating (Maybe Text)
-vVideoId = lens _vVideoId (\ s a -> s{_vVideoId = a})
-
-instance FromJSON VideoRating where
-        parseJSON
-          = withObject "VideoRating"
-              (\ o ->
-                 VideoRating <$>
-                   (o .:? "rating") <*> (o .:? "videoId"))
-
-instance ToJSON VideoRating where
-        toJSON VideoRating{..}
-          = object
-              (catMaybes
-                 [("rating" .=) <$> _vRating,
-                  ("videoId" .=) <$> _vVideoId])
-
 -- | Project specific details about the content of a YouTube Video.
 --
 -- /See:/ 'videoProjectDetails' smart constructor.
@@ -11163,312 +11611,76 @@ instance ToJSON VideoProjectDetails where
         toJSON VideoProjectDetails{..}
           = object (catMaybes [("tags" .=) <$> _vpdTags])
 
--- | Specifies suggestions on how to improve video content, including
--- encoding hints, tag suggestions, and editor suggestions.
---
--- /See:/ 'videoSuggestions' smart constructor.
-data VideoSuggestions = VideoSuggestions
-    { _vsProcessingErrors   :: !(Maybe [ProcessingErrorsItem])
-    , _vsProcessingHints    :: !(Maybe [ProcessingHintsItem])
-    , _vsEditorSuggestions  :: !(Maybe [EditorSuggestionsItem])
-    , _vsProcessingWarnings :: !(Maybe [ProcessingWarningsItem])
-    , _vsTagSuggestions     :: !(Maybe [VideoSuggestionsTagSuggestion])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'VideoSuggestions' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'vsProcessingErrors'
---
--- * 'vsProcessingHints'
---
--- * 'vsEditorSuggestions'
---
--- * 'vsProcessingWarnings'
---
--- * 'vsTagSuggestions'
-videoSuggestions
-    :: VideoSuggestions
-videoSuggestions =
-    VideoSuggestions
-    { _vsProcessingErrors = Nothing
-    , _vsProcessingHints = Nothing
-    , _vsEditorSuggestions = Nothing
-    , _vsProcessingWarnings = Nothing
-    , _vsTagSuggestions = Nothing
-    }
-
--- | A list of errors that will prevent YouTube from successfully processing
--- the uploaded video video. These errors indicate that, regardless of the
--- video\'s current processing status, eventually, that status will almost
--- certainly be failed.
-vsProcessingErrors :: Lens' VideoSuggestions [ProcessingErrorsItem]
-vsProcessingErrors
-  = lens _vsProcessingErrors
-      (\ s a -> s{_vsProcessingErrors = a})
-      . _Default
-      . _Coerce
-
--- | A list of suggestions that may improve YouTube\'s ability to process the
--- video.
-vsProcessingHints :: Lens' VideoSuggestions [ProcessingHintsItem]
-vsProcessingHints
-  = lens _vsProcessingHints
-      (\ s a -> s{_vsProcessingHints = a})
-      . _Default
-      . _Coerce
-
--- | A list of video editing operations that might improve the video quality
--- or playback experience of the uploaded video.
-vsEditorSuggestions :: Lens' VideoSuggestions [EditorSuggestionsItem]
-vsEditorSuggestions
-  = lens _vsEditorSuggestions
-      (\ s a -> s{_vsEditorSuggestions = a})
-      . _Default
-      . _Coerce
-
--- | A list of reasons why YouTube may have difficulty transcoding the
--- uploaded video or that might result in an erroneous transcoding. These
--- warnings are generated before YouTube actually processes the uploaded
--- video file. In addition, they identify issues that are unlikely to cause
--- the video processing to fail but that might cause problems such as sync
--- issues, video artifacts, or a missing audio track.
-vsProcessingWarnings :: Lens' VideoSuggestions [ProcessingWarningsItem]
-vsProcessingWarnings
-  = lens _vsProcessingWarnings
-      (\ s a -> s{_vsProcessingWarnings = a})
-      . _Default
-      . _Coerce
-
--- | A list of keyword tags that could be added to the video\'s metadata to
--- increase the likelihood that users will locate your video when searching
--- or browsing on YouTube.
-vsTagSuggestions :: Lens' VideoSuggestions [VideoSuggestionsTagSuggestion]
-vsTagSuggestions
-  = lens _vsTagSuggestions
-      (\ s a -> s{_vsTagSuggestions = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON VideoSuggestions where
-        parseJSON
-          = withObject "VideoSuggestions"
-              (\ o ->
-                 VideoSuggestions <$>
-                   (o .:? "processingErrors" .!= mempty) <*>
-                     (o .:? "processingHints" .!= mempty)
-                     <*> (o .:? "editorSuggestions" .!= mempty)
-                     <*> (o .:? "processingWarnings" .!= mempty)
-                     <*> (o .:? "tagSuggestions" .!= mempty))
-
-instance ToJSON VideoSuggestions where
-        toJSON VideoSuggestions{..}
-          = object
-              (catMaybes
-                 [("processingErrors" .=) <$> _vsProcessingErrors,
-                  ("processingHints" .=) <$> _vsProcessingHints,
-                  ("editorSuggestions" .=) <$> _vsEditorSuggestions,
-                  ("processingWarnings" .=) <$> _vsProcessingWarnings,
-                  ("tagSuggestions" .=) <$> _vsTagSuggestions])
-
--- | A playlist resource represents a YouTube playlist. A playlist is a
--- collection of videos that can be viewed sequentially and shared with
--- other users. A playlist can contain up to 200 videos, and YouTube does
--- not limit the number of playlists that each user creates. By default,
--- playlists are publicly visible to other users, but playlists can be
--- public or private. YouTube also uses playlists to identify special
--- collections of videos for a channel, such as: - uploaded videos -
--- favorite videos - positively rated (liked) videos - watch history -
--- watch later To be more specific, these lists are associated with a
--- channel, which is a collection of a person, group, or company\'s videos,
--- playlists, and other YouTube information. You can retrieve the playlist
--- IDs for each of these lists from the channel resource for a given
--- channel. You can then use the playlistItems.list method to retrieve any
--- of those lists. You can also add or remove items from those lists by
--- calling the playlistItems.insert and playlistItems.delete methods.
---
--- /See:/ 'playList' smart constructor.
-data PlayList = PlayList
-    { _plStatus         :: !(Maybe PlayListStatus)
-    , _plEtag           :: !(Maybe Text)
-    , _plSnippet        :: !(Maybe PlayListSnippet)
-    , _plKind           :: !Text
-    , _plContentDetails :: !(Maybe PlayListContentDetails)
-    , _plId             :: !(Maybe Text)
-    , _plLocalizations  :: !(Maybe PlayListLocalizations)
-    , _plPlayer         :: !(Maybe PlayListPlayer)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PlayList' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'plStatus'
---
--- * 'plEtag'
---
--- * 'plSnippet'
---
--- * 'plKind'
---
--- * 'plContentDetails'
---
--- * 'plId'
---
--- * 'plLocalizations'
---
--- * 'plPlayer'
-playList
-    :: PlayList
-playList =
-    PlayList
-    { _plStatus = Nothing
-    , _plEtag = Nothing
-    , _plSnippet = Nothing
-    , _plKind = "youtube#playlist"
-    , _plContentDetails = Nothing
-    , _plId = Nothing
-    , _plLocalizations = Nothing
-    , _plPlayer = Nothing
-    }
-
--- | The status object contains status information for the playlist.
-plStatus :: Lens' PlayList (Maybe PlayListStatus)
-plStatus = lens _plStatus (\ s a -> s{_plStatus = a})
-
--- | Etag of this resource.
-plEtag :: Lens' PlayList (Maybe Text)
-plEtag = lens _plEtag (\ s a -> s{_plEtag = a})
-
--- | The snippet object contains basic details about the playlist, such as
--- its title and description.
-plSnippet :: Lens' PlayList (Maybe PlayListSnippet)
-plSnippet
-  = lens _plSnippet (\ s a -> s{_plSnippet = a})
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"youtube#playlist\".
-plKind :: Lens' PlayList Text
-plKind = lens _plKind (\ s a -> s{_plKind = a})
-
--- | The contentDetails object contains information like video count.
-plContentDetails :: Lens' PlayList (Maybe PlayListContentDetails)
-plContentDetails
-  = lens _plContentDetails
-      (\ s a -> s{_plContentDetails = a})
-
--- | The ID that YouTube uses to uniquely identify the playlist.
-plId :: Lens' PlayList (Maybe Text)
-plId = lens _plId (\ s a -> s{_plId = a})
-
--- | Localizations for different languages
-plLocalizations :: Lens' PlayList (Maybe PlayListLocalizations)
-plLocalizations
-  = lens _plLocalizations
-      (\ s a -> s{_plLocalizations = a})
-
--- | The player object contains information that you would use to play the
--- playlist in an embedded player.
-plPlayer :: Lens' PlayList (Maybe PlayListPlayer)
-plPlayer = lens _plPlayer (\ s a -> s{_plPlayer = a})
-
-instance FromJSON PlayList where
-        parseJSON
-          = withObject "PlayList"
-              (\ o ->
-                 PlayList <$>
-                   (o .:? "status") <*> (o .:? "etag") <*>
-                     (o .:? "snippet")
-                     <*> (o .:? "kind" .!= "youtube#playlist")
-                     <*> (o .:? "contentDetails")
-                     <*> (o .:? "id")
-                     <*> (o .:? "localizations")
-                     <*> (o .:? "player"))
-
-instance ToJSON PlayList where
-        toJSON PlayList{..}
-          = object
-              (catMaybes
-                 [("status" .=) <$> _plStatus,
-                  ("etag" .=) <$> _plEtag,
-                  ("snippet" .=) <$> _plSnippet,
-                  Just ("kind" .= _plKind),
-                  ("contentDetails" .=) <$> _plContentDetails,
-                  ("id" .=) <$> _plId,
-                  ("localizations" .=) <$> _plLocalizations,
-                  ("player" .=) <$> _plPlayer])
-
 -- | Ratings schemes. The country-specific ratings are mostly for movies and
 -- shows. NEXT_ID: 66
 --
 -- /See:/ 'contentRating' smart constructor.
 data ContentRating = ContentRating
-    { _crPefilmRating           :: !(Maybe PefilmRating)
-    , _crCccRating              :: !(Maybe CccRating)
-    , _crAnatelRating           :: !(Maybe AnatelRating)
-    , _crMpaaRating             :: !(Maybe MpaaRating)
-    , _crCceRating              :: !(Maybe CceRating)
-    , _crMccaaRating            :: !(Maybe MccaaRating)
-    , _crChfilmRating           :: !(Maybe ChfilmRating)
-    , _crIcaaRating             :: !(Maybe IcaaRating)
-    , _crFcbmRating             :: !(Maybe FcbmRating)
-    , _crBmukkRating            :: !(Maybe BmukkRating)
-    , _crMoctwRating            :: !(Maybe MoctwRating)
-    , _crNfvcbRating            :: !(Maybe NfvcbRating)
-    , _crDjctqRatingReasons     :: !(Maybe [DjctqRatingReasonsItem])
-    , _crAgcomRating            :: !(Maybe AgcomRating)
-    , _crCnaRating              :: !(Maybe CnaRating)
-    , _crCatvfrRating           :: !(Maybe CatvfrRating)
-    , _crCbfcRating             :: !(Maybe CbfcRating)
-    , _crKfcbRating             :: !(Maybe KfcbRating)
-    , _crSmsaRating             :: !(Maybe SmsaRating)
-    , _crChvrsRating            :: !(Maybe ChvrsRating)
-    , _crIncaaRating            :: !(Maybe IncaaRating)
-    , _crNfrcRating             :: !(Maybe NfrcRating)
-    , _crCsaRating              :: !(Maybe CsaRating)
-    , _crMocRating              :: !(Maybe MocRating)
-    , _crEirinRating            :: !(Maybe EirinRating)
-    , _crFskRating              :: !(Maybe FskRating)
-    , _crEefilmRating           :: !(Maybe EefilmRating)
-    , _crRcnofRating            :: !(Maybe RcnofRating)
-    , _crMekuRating             :: !(Maybe MekuRating)
-    , _crIlfilmRating           :: !(Maybe IlfilmRating)
-    , _crIfcoRating             :: !(Maybe IfcoRating)
-    , _crNbcplRating            :: !(Maybe NbcplRating)
-    , _crGrfilmRating           :: !(Maybe GrfilmRating)
-    , _crRteRating              :: !(Maybe RteRating)
-    , _crAcbRating              :: !(Maybe AcbRating)
-    , _crCatvRating             :: !(Maybe CatvRating)
-    , _crMdaRating              :: !(Maybe MdaRating)
-    , _crDjctqRating            :: !(Maybe DjctqRating)
-    , _crSmaisRating            :: !(Maybe SmaisRating)
-    , _crCscfRating             :: !(Maybe CscfRating)
-    , _crTvpgRating             :: !(Maybe TvpgRating)
-    , _crRtcRating              :: !(Maybe RtcRating)
-    , _crYtRating               :: !(Maybe YtRating)
-    , _crBbfcRating             :: !(Maybe BbfcRating)
-    , _crKijkwijzerRating       :: !(Maybe KijkwijzerRating)
-    , _crMtrcbRating            :: !(Maybe MtrcbRating)
-    , _crFcoRating              :: !(Maybe FcoRating)
-    , _crCicfRating             :: !(Maybe CicfRating)
-    , _crCzfilmRating           :: !(Maybe CzfilmRating)
-    , _crNbcRating              :: !(Maybe NbcRating)
-    , _crFmocRating             :: !(Maybe FmocRating)
-    , _crRussiaRating           :: !(Maybe RussiaRating)
-    , _crEgfilmRating           :: !(Maybe EgfilmRating)
-    , _crResorteviolenciaRating :: !(Maybe ResorteviolenciaRating)
-    , _crMibacRating            :: !(Maybe MibacRating)
-    , _crMedietilsynetRating    :: !(Maybe MedietilsynetRating)
-    , _crMccypRating            :: !(Maybe MccypRating)
-    , _crNkclvRating            :: !(Maybe NkclvRating)
-    , _crFpbRating              :: !(Maybe FpbRating)
-    , _crLsfRating              :: !(Maybe LsfRating)
-    , _crBfvcRating             :: !(Maybe BfvcRating)
-    , _crCNCRating              :: !(Maybe CNCRating)
-    , _crSkfilmRating           :: !(Maybe SkfilmRating)
-    , _crOflcRating             :: !(Maybe OflcRating)
-    , _crKmrbRating             :: !(Maybe KmrbRating)
+    { _crPefilmRating           :: !(Maybe ContentRatingPefilmRating)
+    , _crCccRating              :: !(Maybe ContentRatingCccRating)
+    , _crAnatelRating           :: !(Maybe ContentRatingAnatelRating)
+    , _crMpaaRating             :: !(Maybe ContentRatingMpaaRating)
+    , _crCceRating              :: !(Maybe ContentRatingCceRating)
+    , _crMccaaRating            :: !(Maybe ContentRatingMccaaRating)
+    , _crChfilmRating           :: !(Maybe ContentRatingChfilmRating)
+    , _crIcaaRating             :: !(Maybe ContentRatingIcaaRating)
+    , _crFcbmRating             :: !(Maybe ContentRatingFcbmRating)
+    , _crBmukkRating            :: !(Maybe ContentRatingBmukkRating)
+    , _crMoctwRating            :: !(Maybe ContentRatingMoctwRating)
+    , _crNfvcbRating            :: !(Maybe ContentRatingNfvcbRating)
+    , _crDjctqRatingReasons     :: !(Maybe [ContentRatingDjctqRatingReasonsItem])
+    , _crAgcomRating            :: !(Maybe ContentRatingAgcomRating)
+    , _crCnaRating              :: !(Maybe ContentRatingCnaRating)
+    , _crCatvfrRating           :: !(Maybe ContentRatingCatvfrRating)
+    , _crCbfcRating             :: !(Maybe ContentRatingCbfcRating)
+    , _crKfcbRating             :: !(Maybe ContentRatingKfcbRating)
+    , _crSmsaRating             :: !(Maybe ContentRatingSmsaRating)
+    , _crChvrsRating            :: !(Maybe ContentRatingChvrsRating)
+    , _crIncaaRating            :: !(Maybe ContentRatingIncaaRating)
+    , _crNfrcRating             :: !(Maybe ContentRatingNfrcRating)
+    , _crCsaRating              :: !(Maybe ContentRatingCsaRating)
+    , _crMocRating              :: !(Maybe ContentRatingMocRating)
+    , _crEirinRating            :: !(Maybe ContentRatingEirinRating)
+    , _crFskRating              :: !(Maybe ContentRatingFskRating)
+    , _crEefilmRating           :: !(Maybe ContentRatingEefilmRating)
+    , _crRcnofRating            :: !(Maybe ContentRatingRcnofRating)
+    , _crMekuRating             :: !(Maybe ContentRatingMekuRating)
+    , _crIlfilmRating           :: !(Maybe ContentRatingIlfilmRating)
+    , _crIfcoRating             :: !(Maybe ContentRatingIfcoRating)
+    , _crNbcplRating            :: !(Maybe ContentRatingNbcplRating)
+    , _crGrfilmRating           :: !(Maybe ContentRatingGrfilmRating)
+    , _crRteRating              :: !(Maybe ContentRatingRteRating)
+    , _crAcbRating              :: !(Maybe ContentRatingAcbRating)
+    , _crCatvRating             :: !(Maybe ContentRatingCatvRating)
+    , _crMdaRating              :: !(Maybe ContentRatingMdaRating)
+    , _crDjctqRating            :: !(Maybe ContentRatingDjctqRating)
+    , _crSmaisRating            :: !(Maybe ContentRatingSmaisRating)
+    , _crCscfRating             :: !(Maybe ContentRatingCscfRating)
+    , _crTvpgRating             :: !(Maybe ContentRatingTvpgRating)
+    , _crRtcRating              :: !(Maybe ContentRatingRtcRating)
+    , _crYtRating               :: !(Maybe ContentRatingYtRating)
+    , _crBbfcRating             :: !(Maybe ContentRatingBbfcRating)
+    , _crKijkwijzerRating       :: !(Maybe ContentRatingKijkwijzerRating)
+    , _crMtrcbRating            :: !(Maybe ContentRatingMtrcbRating)
+    , _crFcoRating              :: !(Maybe ContentRatingFcoRating)
+    , _crCicfRating             :: !(Maybe ContentRatingCicfRating)
+    , _crCzfilmRating           :: !(Maybe ContentRatingCzfilmRating)
+    , _crNbcRating              :: !(Maybe ContentRatingNbcRating)
+    , _crFmocRating             :: !(Maybe ContentRatingFmocRating)
+    , _crRussiaRating           :: !(Maybe ContentRatingRussiaRating)
+    , _crEgfilmRating           :: !(Maybe ContentRatingEgfilmRating)
+    , _crResorteviolenciaRating :: !(Maybe ContentRatingResorteviolenciaRating)
+    , _crMibacRating            :: !(Maybe ContentRatingMibacRating)
+    , _crMedietilsynetRating    :: !(Maybe ContentRatingMedietilsynetRating)
+    , _crMccypRating            :: !(Maybe ContentRatingMccypRating)
+    , _crNkclvRating            :: !(Maybe ContentRatingNkclvRating)
+    , _crFpbRating              :: !(Maybe ContentRatingFpbRating)
+    , _crLsfRating              :: !(Maybe ContentRatingLsfRating)
+    , _crBfvcRating             :: !(Maybe ContentRatingBfvcRating)
+    , _crCNCRating              :: !(Maybe ContentRatingCNCRating)
+    , _crSkfilmRating           :: !(Maybe ContentRatingSkfilmRating)
+    , _crOflcRating             :: !(Maybe ContentRatingOflcRating)
+    , _crKmrbRating             :: !(Maybe ContentRatingKmrbRating)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContentRating' with the minimum fields required to make a request.
@@ -11676,79 +11888,79 @@ contentRating =
     }
 
 -- | The video\'s rating in Peru.
-crPefilmRating :: Lens' ContentRating (Maybe PefilmRating)
+crPefilmRating :: Lens' ContentRating (Maybe ContentRatingPefilmRating)
 crPefilmRating
   = lens _crPefilmRating
       (\ s a -> s{_crPefilmRating = a})
 
 -- | The video\'s Consejo de Calificación Cinematográfica (Chile) rating.
-crCccRating :: Lens' ContentRating (Maybe CccRating)
+crCccRating :: Lens' ContentRating (Maybe ContentRatingCccRating)
 crCccRating
   = lens _crCccRating (\ s a -> s{_crCccRating = a})
 
 -- | The video\'s Anatel (Asociación Nacional de Televisión) rating for
 -- Chilean television.
-crAnatelRating :: Lens' ContentRating (Maybe AnatelRating)
+crAnatelRating :: Lens' ContentRating (Maybe ContentRatingAnatelRating)
 crAnatelRating
   = lens _crAnatelRating
       (\ s a -> s{_crAnatelRating = a})
 
 -- | The video\'s Motion Picture Association of America (MPAA) rating.
-crMpaaRating :: Lens' ContentRating (Maybe MpaaRating)
+crMpaaRating :: Lens' ContentRating (Maybe ContentRatingMpaaRating)
 crMpaaRating
   = lens _crMpaaRating (\ s a -> s{_crMpaaRating = a})
 
 -- | The video\'s rating from Portugal\'s Comissão de Classificação de
 -- Espect´culos.
-crCceRating :: Lens' ContentRating (Maybe CceRating)
+crCceRating :: Lens' ContentRating (Maybe ContentRatingCceRating)
 crCceRating
   = lens _crCceRating (\ s a -> s{_crCceRating = a})
 
 -- | The video\'s rating from Malta\'s Film Age-Classification Board.
-crMccaaRating :: Lens' ContentRating (Maybe MccaaRating)
+crMccaaRating :: Lens' ContentRating (Maybe ContentRatingMccaaRating)
 crMccaaRating
   = lens _crMccaaRating
       (\ s a -> s{_crMccaaRating = a})
 
 -- | The video\'s rating in Switzerland.
-crChfilmRating :: Lens' ContentRating (Maybe ChfilmRating)
+crChfilmRating :: Lens' ContentRating (Maybe ContentRatingChfilmRating)
 crChfilmRating
   = lens _crChfilmRating
       (\ s a -> s{_crChfilmRating = a})
 
 -- | The video\'s Instituto de la Cinematografía y de las Artes Audiovisuales
 -- (ICAA - Spain) rating.
-crIcaaRating :: Lens' ContentRating (Maybe IcaaRating)
+crIcaaRating :: Lens' ContentRating (Maybe ContentRatingIcaaRating)
 crIcaaRating
   = lens _crIcaaRating (\ s a -> s{_crIcaaRating = a})
 
 -- | The video\'s rating from Malaysia\'s Film Censorship Board.
-crFcbmRating :: Lens' ContentRating (Maybe FcbmRating)
+crFcbmRating :: Lens' ContentRating (Maybe ContentRatingFcbmRating)
 crFcbmRating
   = lens _crFcbmRating (\ s a -> s{_crFcbmRating = a})
 
 -- | The video\'s rating from the Austrian Board of Media Classification
 -- (Bundesministerium für Unterricht, Kunst und Kultur).
-crBmukkRating :: Lens' ContentRating (Maybe BmukkRating)
+crBmukkRating :: Lens' ContentRating (Maybe ContentRatingBmukkRating)
 crBmukkRating
   = lens _crBmukkRating
       (\ s a -> s{_crBmukkRating = a})
 
 -- | The video\'s rating from Taiwan\'s Ministry of Culture (文化部).
-crMoctwRating :: Lens' ContentRating (Maybe MoctwRating)
+crMoctwRating :: Lens' ContentRating (Maybe ContentRatingMoctwRating)
 crMoctwRating
   = lens _crMoctwRating
       (\ s a -> s{_crMoctwRating = a})
 
 -- | The video\'s rating from Nigeria\'s National Film and Video Censors
 -- Board.
-crNfvcbRating :: Lens' ContentRating (Maybe NfvcbRating)
+crNfvcbRating :: Lens' ContentRating (Maybe ContentRatingNfvcbRating)
 crNfvcbRating
   = lens _crNfvcbRating
       (\ s a -> s{_crNfvcbRating = a})
 
 -- | Reasons that explain why the video received its DJCQT (Brazil) rating.
-crDjctqRatingReasons :: Lens' ContentRating [DjctqRatingReasonsItem]
+crDjctqRatingReasons :: Lens' ContentRating [ContentRatingDjctqRatingReasonsItem]
 crDjctqRatingReasons
   = lens _crDjctqRatingReasons
       (\ s a -> s{_crDjctqRatingReasons = a})
@@ -11757,14 +11969,14 @@ crDjctqRatingReasons
 
 -- | The video\'s rating from Italy\'s Autorità per le Garanzie nelle
 -- Comunicazioni (AGCOM).
-crAgcomRating :: Lens' ContentRating (Maybe AgcomRating)
+crAgcomRating :: Lens' ContentRating (Maybe ContentRatingAgcomRating)
 crAgcomRating
   = lens _crAgcomRating
       (\ s a -> s{_crAgcomRating = a})
 
 -- | The video\'s rating from Romania\'s CONSILIUL NATIONAL AL
 -- AUDIOVIZUALULUI (CNA).
-crCnaRating :: Lens' ContentRating (Maybe CnaRating)
+crCnaRating :: Lens' ContentRating (Maybe ContentRatingCnaRating)
 crCnaRating
   = lens _crCnaRating (\ s a -> s{_crCnaRating = a})
 
@@ -11772,120 +11984,120 @@ crCnaRating
 -- Telecommunications Commission (CRTC) for Canadian French-language
 -- broadcasts. For more information, see the Canadian Broadcast Standards
 -- Council website.
-crCatvfrRating :: Lens' ContentRating (Maybe CatvfrRating)
+crCatvfrRating :: Lens' ContentRating (Maybe ContentRatingCatvfrRating)
 crCatvfrRating
   = lens _crCatvfrRating
       (\ s a -> s{_crCatvfrRating = a})
 
 -- | The video\'s Central Board of Film Certification (CBFC - India) rating.
-crCbfcRating :: Lens' ContentRating (Maybe CbfcRating)
+crCbfcRating :: Lens' ContentRating (Maybe ContentRatingCbfcRating)
 crCbfcRating
   = lens _crCbfcRating (\ s a -> s{_crCbfcRating = a})
 
 -- | The video\'s rating from the Kenya Film Classification Board.
-crKfcbRating :: Lens' ContentRating (Maybe KfcbRating)
+crKfcbRating :: Lens' ContentRating (Maybe ContentRatingKfcbRating)
 crKfcbRating
   = lens _crKfcbRating (\ s a -> s{_crKfcbRating = a})
 
 -- | The video\'s rating from Statens medieråd (Sweden\'s National Media
 -- Council).
-crSmsaRating :: Lens' ContentRating (Maybe SmsaRating)
+crSmsaRating :: Lens' ContentRating (Maybe ContentRatingSmsaRating)
 crSmsaRating
   = lens _crSmsaRating (\ s a -> s{_crSmsaRating = a})
 
 -- | The video\'s Canadian Home Video Rating System (CHVRS) rating.
-crChvrsRating :: Lens' ContentRating (Maybe ChvrsRating)
+crChvrsRating :: Lens' ContentRating (Maybe ContentRatingChvrsRating)
 crChvrsRating
   = lens _crChvrsRating
       (\ s a -> s{_crChvrsRating = a})
 
 -- | The video\'s INCAA (Instituto Nacional de Cine y Artes Audiovisuales -
 -- Argentina) rating.
-crIncaaRating :: Lens' ContentRating (Maybe IncaaRating)
+crIncaaRating :: Lens' ContentRating (Maybe ContentRatingIncaaRating)
 crIncaaRating
   = lens _crIncaaRating
       (\ s a -> s{_crIncaaRating = a})
 
 -- | The video\'s rating from the Bulgarian National Film Center.
-crNfrcRating :: Lens' ContentRating (Maybe NfrcRating)
+crNfrcRating :: Lens' ContentRating (Maybe ContentRatingNfrcRating)
 crNfrcRating
   = lens _crNfrcRating (\ s a -> s{_crNfrcRating = a})
 
 -- | The video\'s rating from France\'s Conseil supérieur de l?audiovisuel,
 -- which rates broadcast content.
-crCsaRating :: Lens' ContentRating (Maybe CsaRating)
+crCsaRating :: Lens' ContentRating (Maybe ContentRatingCsaRating)
 crCsaRating
   = lens _crCsaRating (\ s a -> s{_crCsaRating = a})
 
 -- | The video\'s Ministerio de Cultura (Colombia) rating.
-crMocRating :: Lens' ContentRating (Maybe MocRating)
+crMocRating :: Lens' ContentRating (Maybe ContentRatingMocRating)
 crMocRating
   = lens _crMocRating (\ s a -> s{_crMocRating = a})
 
 -- | The video\'s Eirin (映倫) rating. Eirin is the Japanese rating system.
-crEirinRating :: Lens' ContentRating (Maybe EirinRating)
+crEirinRating :: Lens' ContentRating (Maybe ContentRatingEirinRating)
 crEirinRating
   = lens _crEirinRating
       (\ s a -> s{_crEirinRating = a})
 
 -- | The video\'s Freiwillige Selbstkontrolle der Filmwirtschaft (FSK -
 -- Germany) rating.
-crFskRating :: Lens' ContentRating (Maybe FskRating)
+crFskRating :: Lens' ContentRating (Maybe ContentRatingFskRating)
 crFskRating
   = lens _crFskRating (\ s a -> s{_crFskRating = a})
 
 -- | The video\'s rating in Estonia.
-crEefilmRating :: Lens' ContentRating (Maybe EefilmRating)
+crEefilmRating :: Lens' ContentRating (Maybe ContentRatingEefilmRating)
 crEefilmRating
   = lens _crEefilmRating
       (\ s a -> s{_crEefilmRating = a})
 
 -- | The video\'s rating from the Hungarian Nemzeti Filmiroda, the Rating
 -- Committee of the National Office of Film.
-crRcnofRating :: Lens' ContentRating (Maybe RcnofRating)
+crRcnofRating :: Lens' ContentRating (Maybe ContentRatingRcnofRating)
 crRcnofRating
   = lens _crRcnofRating
       (\ s a -> s{_crRcnofRating = a})
 
 -- | The video\'s rating from Finland\'s Kansallinen Audiovisuaalinen
 -- Instituutti (National Audiovisual Institute).
-crMekuRating :: Lens' ContentRating (Maybe MekuRating)
+crMekuRating :: Lens' ContentRating (Maybe ContentRatingMekuRating)
 crMekuRating
   = lens _crMekuRating (\ s a -> s{_crMekuRating = a})
 
 -- | The video\'s rating in Israel.
-crIlfilmRating :: Lens' ContentRating (Maybe IlfilmRating)
+crIlfilmRating :: Lens' ContentRating (Maybe ContentRatingIlfilmRating)
 crIlfilmRating
   = lens _crIlfilmRating
       (\ s a -> s{_crIlfilmRating = a})
 
 -- | The video\'s Irish Film Classification Office (IFCO - Ireland) rating.
 -- See the IFCO website for more information.
-crIfcoRating :: Lens' ContentRating (Maybe IfcoRating)
+crIfcoRating :: Lens' ContentRating (Maybe ContentRatingIfcoRating)
 crIfcoRating
   = lens _crIfcoRating (\ s a -> s{_crIfcoRating = a})
 
 -- | The video\'s rating in Poland.
-crNbcplRating :: Lens' ContentRating (Maybe NbcplRating)
+crNbcplRating :: Lens' ContentRating (Maybe ContentRatingNbcplRating)
 crNbcplRating
   = lens _crNbcplRating
       (\ s a -> s{_crNbcplRating = a})
 
 -- | The video\'s rating in Greece.
-crGrfilmRating :: Lens' ContentRating (Maybe GrfilmRating)
+crGrfilmRating :: Lens' ContentRating (Maybe ContentRatingGrfilmRating)
 crGrfilmRating
   = lens _crGrfilmRating
       (\ s a -> s{_crGrfilmRating = a})
 
 -- | The video\'s rating from Ireland\'s Raidió Teilifís Éireann.
-crRteRating :: Lens' ContentRating (Maybe RteRating)
+crRteRating :: Lens' ContentRating (Maybe ContentRatingRteRating)
 crRteRating
   = lens _crRteRating (\ s a -> s{_crRteRating = a})
 
 -- | The video\'s Australian Classification Board (ACB) or Australian
 -- Communications and Media Authority (ACMA) rating. ACMA ratings are used
 -- to classify children\'s television programming.
-crAcbRating :: Lens' ContentRating (Maybe AcbRating)
+crAcbRating :: Lens' ContentRating (Maybe ContentRatingAcbRating)
 crAcbRating
   = lens _crAcbRating (\ s a -> s{_crAcbRating = a})
 
@@ -11894,178 +12106,178 @@ crAcbRating
 -- Telecommunications Commission (CRTC) for Canadian English-language
 -- broadcasts. For more information, see the Canadian Broadcast Standards
 -- Council website.
-crCatvRating :: Lens' ContentRating (Maybe CatvRating)
+crCatvRating :: Lens' ContentRating (Maybe ContentRatingCatvRating)
 crCatvRating
   = lens _crCatvRating (\ s a -> s{_crCatvRating = a})
 
 -- | The video\'s rating from Singapore\'s Media Development Authority (MDA)
 -- and, specifically, it\'s Board of Film Censors (BFC).
-crMdaRating :: Lens' ContentRating (Maybe MdaRating)
+crMdaRating :: Lens' ContentRating (Maybe ContentRatingMdaRating)
 crMdaRating
   = lens _crMdaRating (\ s a -> s{_crMdaRating = a})
 
 -- | The video\'s Departamento de Justiça, Classificação, Qualificação e
 -- Títulos (DJCQT - Brazil) rating.
-crDjctqRating :: Lens' ContentRating (Maybe DjctqRating)
+crDjctqRating :: Lens' ContentRating (Maybe ContentRatingDjctqRating)
 crDjctqRating
   = lens _crDjctqRating
       (\ s a -> s{_crDjctqRating = a})
 
 -- | The video\'s rating in Iceland.
-crSmaisRating :: Lens' ContentRating (Maybe SmaisRating)
+crSmaisRating :: Lens' ContentRating (Maybe ContentRatingSmaisRating)
 crSmaisRating
   = lens _crSmaisRating
       (\ s a -> s{_crSmaisRating = a})
 
 -- | The video\'s rating from Luxembourg\'s Commission de surveillance de la
 -- classification des films (CSCF).
-crCscfRating :: Lens' ContentRating (Maybe CscfRating)
+crCscfRating :: Lens' ContentRating (Maybe ContentRatingCscfRating)
 crCscfRating
   = lens _crCscfRating (\ s a -> s{_crCscfRating = a})
 
 -- | The video\'s TV Parental Guidelines (TVPG) rating.
-crTvpgRating :: Lens' ContentRating (Maybe TvpgRating)
+crTvpgRating :: Lens' ContentRating (Maybe ContentRatingTvpgRating)
 crTvpgRating
   = lens _crTvpgRating (\ s a -> s{_crTvpgRating = a})
 
 -- | The video\'s General Directorate of Radio, Television and Cinematography
 -- (Mexico) rating.
-crRtcRating :: Lens' ContentRating (Maybe RtcRating)
+crRtcRating :: Lens' ContentRating (Maybe ContentRatingRtcRating)
 crRtcRating
   = lens _crRtcRating (\ s a -> s{_crRtcRating = a})
 
 -- | A rating that YouTube uses to identify age-restricted content.
-crYtRating :: Lens' ContentRating (Maybe YtRating)
+crYtRating :: Lens' ContentRating (Maybe ContentRatingYtRating)
 crYtRating
   = lens _crYtRating (\ s a -> s{_crYtRating = a})
 
 -- | The video\'s British Board of Film Classification (BBFC) rating.
-crBbfcRating :: Lens' ContentRating (Maybe BbfcRating)
+crBbfcRating :: Lens' ContentRating (Maybe ContentRatingBbfcRating)
 crBbfcRating
   = lens _crBbfcRating (\ s a -> s{_crBbfcRating = a})
 
 -- | voor de Classificatie van Audiovisuele Media (Netherlands).
-crKijkwijzerRating :: Lens' ContentRating (Maybe KijkwijzerRating)
+crKijkwijzerRating :: Lens' ContentRating (Maybe ContentRatingKijkwijzerRating)
 crKijkwijzerRating
   = lens _crKijkwijzerRating
       (\ s a -> s{_crKijkwijzerRating = a})
 
 -- | The video\'s rating from the Movie and Television Review and
 -- Classification Board (Philippines).
-crMtrcbRating :: Lens' ContentRating (Maybe MtrcbRating)
+crMtrcbRating :: Lens' ContentRating (Maybe ContentRatingMtrcbRating)
 crMtrcbRating
   = lens _crMtrcbRating
       (\ s a -> s{_crMtrcbRating = a})
 
 -- | The video\'s rating from Hong Kong\'s Office for Film, Newspaper and
 -- Article Administration.
-crFcoRating :: Lens' ContentRating (Maybe FcoRating)
+crFcoRating :: Lens' ContentRating (Maybe ContentRatingFcoRating)
 crFcoRating
   = lens _crFcoRating (\ s a -> s{_crFcoRating = a})
 
 -- | The video\'s rating from the Commission de Contrôle des Films (Belgium).
-crCicfRating :: Lens' ContentRating (Maybe CicfRating)
+crCicfRating :: Lens' ContentRating (Maybe ContentRatingCicfRating)
 crCicfRating
   = lens _crCicfRating (\ s a -> s{_crCicfRating = a})
 
 -- | The video\'s rating in the Czech Republic.
-crCzfilmRating :: Lens' ContentRating (Maybe CzfilmRating)
+crCzfilmRating :: Lens' ContentRating (Maybe ContentRatingCzfilmRating)
 crCzfilmRating
   = lens _crCzfilmRating
       (\ s a -> s{_crCzfilmRating = a})
 
 -- | The video\'s rating from the Maldives National Bureau of Classification.
-crNbcRating :: Lens' ContentRating (Maybe NbcRating)
+crNbcRating :: Lens' ContentRating (Maybe ContentRatingNbcRating)
 crNbcRating
   = lens _crNbcRating (\ s a -> s{_crNbcRating = a})
 
 -- | This property has been deprecated. Use the
 -- contentDetails.contentRating.cncRating instead.
-crFmocRating :: Lens' ContentRating (Maybe FmocRating)
+crFmocRating :: Lens' ContentRating (Maybe ContentRatingFmocRating)
 crFmocRating
   = lens _crFmocRating (\ s a -> s{_crFmocRating = a})
 
 -- | The video\'s National Film Registry of the Russian Federation (MKRF -
 -- Russia) rating.
-crRussiaRating :: Lens' ContentRating (Maybe RussiaRating)
+crRussiaRating :: Lens' ContentRating (Maybe ContentRatingRussiaRating)
 crRussiaRating
   = lens _crRussiaRating
       (\ s a -> s{_crRussiaRating = a})
 
 -- | The video\'s rating in Egypt.
-crEgfilmRating :: Lens' ContentRating (Maybe EgfilmRating)
+crEgfilmRating :: Lens' ContentRating (Maybe ContentRatingEgfilmRating)
 crEgfilmRating
   = lens _crEgfilmRating
       (\ s a -> s{_crEgfilmRating = a})
 
 -- | The video\'s rating in Venezuela.
-crResorteviolenciaRating :: Lens' ContentRating (Maybe ResorteviolenciaRating)
+crResorteviolenciaRating :: Lens' ContentRating (Maybe ContentRatingResorteviolenciaRating)
 crResorteviolenciaRating
   = lens _crResorteviolenciaRating
       (\ s a -> s{_crResorteviolenciaRating = a})
 
 -- | The video\'s rating from the Ministero dei Beni e delle Attività
 -- Culturali e del Turismo (Italy).
-crMibacRating :: Lens' ContentRating (Maybe MibacRating)
+crMibacRating :: Lens' ContentRating (Maybe ContentRatingMibacRating)
 crMibacRating
   = lens _crMibacRating
       (\ s a -> s{_crMibacRating = a})
 
 -- | The video\'s rating from Medietilsynet, the Norwegian Media Authority.
-crMedietilsynetRating :: Lens' ContentRating (Maybe MedietilsynetRating)
+crMedietilsynetRating :: Lens' ContentRating (Maybe ContentRatingMedietilsynetRating)
 crMedietilsynetRating
   = lens _crMedietilsynetRating
       (\ s a -> s{_crMedietilsynetRating = a})
 
 -- | The video\'s rating from the Danish Film Institute\'s (Det Danske
 -- Filminstitut) Media Council for Children and Young People.
-crMccypRating :: Lens' ContentRating (Maybe MccypRating)
+crMccypRating :: Lens' ContentRating (Maybe ContentRatingMccypRating)
 crMccypRating
   = lens _crMccypRating
       (\ s a -> s{_crMccypRating = a})
 
 -- | The video\'s rating from the Nacionãlais Kino centrs (National Film
 -- Centre of Latvia).
-crNkclvRating :: Lens' ContentRating (Maybe NkclvRating)
+crNkclvRating :: Lens' ContentRating (Maybe ContentRatingNkclvRating)
 crNkclvRating
   = lens _crNkclvRating
       (\ s a -> s{_crNkclvRating = a})
 
 -- | The video\'s rating from South Africa\'s Film and Publication Board.
-crFpbRating :: Lens' ContentRating (Maybe FpbRating)
+crFpbRating :: Lens' ContentRating (Maybe ContentRatingFpbRating)
 crFpbRating
   = lens _crFpbRating (\ s a -> s{_crFpbRating = a})
 
 -- | The video\'s rating from Indonesia\'s Lembaga Sensor Film.
-crLsfRating :: Lens' ContentRating (Maybe LsfRating)
+crLsfRating :: Lens' ContentRating (Maybe ContentRatingLsfRating)
 crLsfRating
   = lens _crLsfRating (\ s a -> s{_crLsfRating = a})
 
 -- | The video\'s rating from Thailand\'s Board of Film and Video Censors.
-crBfvcRating :: Lens' ContentRating (Maybe BfvcRating)
+crBfvcRating :: Lens' ContentRating (Maybe ContentRatingBfvcRating)
 crBfvcRating
   = lens _crBfvcRating (\ s a -> s{_crBfvcRating = a})
 
 -- | Rating system in France - Commission de classification cinematographique
-crCNCRating :: Lens' ContentRating (Maybe CNCRating)
+crCNCRating :: Lens' ContentRating (Maybe ContentRatingCNCRating)
 crCNCRating
   = lens _crCNCRating (\ s a -> s{_crCNCRating = a})
 
 -- | The video\'s rating in Slovakia.
-crSkfilmRating :: Lens' ContentRating (Maybe SkfilmRating)
+crSkfilmRating :: Lens' ContentRating (Maybe ContentRatingSkfilmRating)
 crSkfilmRating
   = lens _crSkfilmRating
       (\ s a -> s{_crSkfilmRating = a})
 
 -- | The video\'s Office of Film and Literature Classification (OFLC - New
 -- Zealand) rating.
-crOflcRating :: Lens' ContentRating (Maybe OflcRating)
+crOflcRating :: Lens' ContentRating (Maybe ContentRatingOflcRating)
 crOflcRating
   = lens _crOflcRating (\ s a -> s{_crOflcRating = a})
 
 -- | The video\'s Korea Media Rating Board (영상물등급위원회) rating. The
 -- KMRB rates videos in South Korea.
-crKmrbRating :: Lens' ContentRating (Maybe KmrbRating)
+crKmrbRating :: Lens' ContentRating (Maybe ContentRatingKmrbRating)
 crKmrbRating
   = lens _crKmrbRating (\ s a -> s{_crKmrbRating = a})
 
@@ -12211,291 +12423,132 @@ instance ToJSON ContentRating where
                   ("oflcRating" .=) <$> _crOflcRating,
                   ("kmrbRating" .=) <$> _crKmrbRating])
 
--- | Basic details about a comment, such as its author and text.
+-- | A playlist resource represents a YouTube playlist. A playlist is a
+-- collection of videos that can be viewed sequentially and shared with
+-- other users. A playlist can contain up to 200 videos, and YouTube does
+-- not limit the number of playlists that each user creates. By default,
+-- playlists are publicly visible to other users, but playlists can be
+-- public or private. YouTube also uses playlists to identify special
+-- collections of videos for a channel, such as: - uploaded videos -
+-- favorite videos - positively rated (liked) videos - watch history -
+-- watch later To be more specific, these lists are associated with a
+-- channel, which is a collection of a person, group, or company\'s videos,
+-- playlists, and other YouTube information. You can retrieve the playlist
+-- IDs for each of these lists from the channel resource for a given
+-- channel. You can then use the playlistItems.list method to retrieve any
+-- of those lists. You can also add or remove items from those lists by
+-- calling the playlistItems.insert and playlistItems.delete methods.
 --
--- /See:/ 'commentSnippet' smart constructor.
-data CommentSnippet = CommentSnippet
-    { _cViewerRating               :: !(Maybe ViewerRating)
-    , _cPublishedAt                :: !(Maybe DateTime')
-    , _cAuthorChannelURL           :: !(Maybe Text)
-    , _cModerationStatus           :: !(Maybe CommentSnippetModerationStatus)
-    , _cLikeCount                  :: !(Maybe Word32)
-    , _cChannelId                  :: !(Maybe Text)
-    , _cTextOriginal               :: !(Maybe Text)
-    , _cVideoId                    :: !(Maybe Text)
-    , _cTextDisplay                :: !(Maybe Text)
-    , _cAuthorProfileImageURL      :: !(Maybe Text)
-    , _cAuthorDisplayName          :: !(Maybe Text)
-    , _cUpdatedAt                  :: !(Maybe DateTime')
-    , _cAuthorChannelId            :: !(Maybe ChannelId)
-    , _cCanRate                    :: !(Maybe Bool)
-    , _cAuthorGoogleplusProfileURL :: !(Maybe Text)
-    , _cParentId                   :: !(Maybe Text)
+-- /See:/ 'playList' smart constructor.
+data PlayList = PlayList
+    { _plStatus         :: !(Maybe PlayListStatus)
+    , _plEtag           :: !(Maybe Text)
+    , _plSnippet        :: !(Maybe PlayListSnippet)
+    , _plKind           :: !Text
+    , _plContentDetails :: !(Maybe PlayListContentDetails)
+    , _plId             :: !(Maybe Text)
+    , _plLocalizations  :: !(Maybe PlayListLocalizations)
+    , _plPlayer         :: !(Maybe PlayListPlayer)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CommentSnippet' with the minimum fields required to make a request.
+-- | Creates a value of 'PlayList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cViewerRating'
+-- * 'plStatus'
 --
--- * 'cPublishedAt'
+-- * 'plEtag'
 --
--- * 'cAuthorChannelURL'
+-- * 'plSnippet'
 --
--- * 'cModerationStatus'
+-- * 'plKind'
 --
--- * 'cLikeCount'
+-- * 'plContentDetails'
 --
--- * 'cChannelId'
+-- * 'plId'
 --
--- * 'cTextOriginal'
+-- * 'plLocalizations'
 --
--- * 'cVideoId'
---
--- * 'cTextDisplay'
---
--- * 'cAuthorProfileImageURL'
---
--- * 'cAuthorDisplayName'
---
--- * 'cUpdatedAt'
---
--- * 'cAuthorChannelId'
---
--- * 'cCanRate'
---
--- * 'cAuthorGoogleplusProfileURL'
---
--- * 'cParentId'
-commentSnippet
-    :: CommentSnippet
-commentSnippet =
-    CommentSnippet
-    { _cViewerRating = Nothing
-    , _cPublishedAt = Nothing
-    , _cAuthorChannelURL = Nothing
-    , _cModerationStatus = Nothing
-    , _cLikeCount = Nothing
-    , _cChannelId = Nothing
-    , _cTextOriginal = Nothing
-    , _cVideoId = Nothing
-    , _cTextDisplay = Nothing
-    , _cAuthorProfileImageURL = Nothing
-    , _cAuthorDisplayName = Nothing
-    , _cUpdatedAt = Nothing
-    , _cAuthorChannelId = Nothing
-    , _cCanRate = Nothing
-    , _cAuthorGoogleplusProfileURL = Nothing
-    , _cParentId = Nothing
+-- * 'plPlayer'
+playList
+    :: PlayList
+playList =
+    PlayList
+    { _plStatus = Nothing
+    , _plEtag = Nothing
+    , _plSnippet = Nothing
+    , _plKind = "youtube#playlist"
+    , _plContentDetails = Nothing
+    , _plId = Nothing
+    , _plLocalizations = Nothing
+    , _plPlayer = Nothing
     }
 
--- | The rating the viewer has given to this comment. For the time being this
--- will never return RATE_TYPE_DISLIKE and instead return RATE_TYPE_NONE.
--- This may change in the future.
-cViewerRating :: Lens' CommentSnippet (Maybe ViewerRating)
-cViewerRating
-  = lens _cViewerRating
-      (\ s a -> s{_cViewerRating = a})
+-- | The status object contains status information for the playlist.
+plStatus :: Lens' PlayList (Maybe PlayListStatus)
+plStatus = lens _plStatus (\ s a -> s{_plStatus = a})
 
--- | The date and time when the comment was orignally published. The value is
--- specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
-cPublishedAt :: Lens' CommentSnippet (Maybe UTCTime)
-cPublishedAt
-  = lens _cPublishedAt (\ s a -> s{_cPublishedAt = a})
-      . mapping _DateTime
+-- | Etag of this resource.
+plEtag :: Lens' PlayList (Maybe Text)
+plEtag = lens _plEtag (\ s a -> s{_plEtag = a})
 
--- | Link to the author\'s YouTube channel, if any.
-cAuthorChannelURL :: Lens' CommentSnippet (Maybe Text)
-cAuthorChannelURL
-  = lens _cAuthorChannelURL
-      (\ s a -> s{_cAuthorChannelURL = a})
+-- | The snippet object contains basic details about the playlist, such as
+-- its title and description.
+plSnippet :: Lens' PlayList (Maybe PlayListSnippet)
+plSnippet
+  = lens _plSnippet (\ s a -> s{_plSnippet = a})
 
--- | The comment\'s moderation status. Will not be set if the comments were
--- requested through the id filter.
-cModerationStatus :: Lens' CommentSnippet (Maybe CommentSnippetModerationStatus)
-cModerationStatus
-  = lens _cModerationStatus
-      (\ s a -> s{_cModerationStatus = a})
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"youtube#playlist\".
+plKind :: Lens' PlayList Text
+plKind = lens _plKind (\ s a -> s{_plKind = a})
 
--- | The total number of likes this comment has received.
-cLikeCount :: Lens' CommentSnippet (Maybe Word32)
-cLikeCount
-  = lens _cLikeCount (\ s a -> s{_cLikeCount = a})
+-- | The contentDetails object contains information like video count.
+plContentDetails :: Lens' PlayList (Maybe PlayListContentDetails)
+plContentDetails
+  = lens _plContentDetails
+      (\ s a -> s{_plContentDetails = a})
 
--- | The id of the corresponding YouTube channel. In case of a channel
--- comment this is the channel the comment refers to. In case of a video
--- comment it\'s the video\'s channel.
-cChannelId :: Lens' CommentSnippet (Maybe Text)
-cChannelId
-  = lens _cChannelId (\ s a -> s{_cChannelId = a})
+-- | The ID that YouTube uses to uniquely identify the playlist.
+plId :: Lens' PlayList (Maybe Text)
+plId = lens _plId (\ s a -> s{_plId = a})
 
--- | The comment\'s original raw text as initially posted or last updated.
--- The original text will only be returned if it is accessible to the
--- viewer, which is only guaranteed if the viewer is the comment\'s author.
-cTextOriginal :: Lens' CommentSnippet (Maybe Text)
-cTextOriginal
-  = lens _cTextOriginal
-      (\ s a -> s{_cTextOriginal = a})
+-- | Localizations for different languages
+plLocalizations :: Lens' PlayList (Maybe PlayListLocalizations)
+plLocalizations
+  = lens _plLocalizations
+      (\ s a -> s{_plLocalizations = a})
 
--- | The ID of the video the comment refers to, if any.
-cVideoId :: Lens' CommentSnippet (Maybe Text)
-cVideoId = lens _cVideoId (\ s a -> s{_cVideoId = a})
+-- | The player object contains information that you would use to play the
+-- playlist in an embedded player.
+plPlayer :: Lens' PlayList (Maybe PlayListPlayer)
+plPlayer = lens _plPlayer (\ s a -> s{_plPlayer = a})
 
--- | The comment\'s text. The format is either plain text or HTML dependent
--- on what has been requested. Even the plain text representation may
--- differ from the text originally posted in that it may replace video
--- links with video titles etc.
-cTextDisplay :: Lens' CommentSnippet (Maybe Text)
-cTextDisplay
-  = lens _cTextDisplay (\ s a -> s{_cTextDisplay = a})
-
--- | The URL for the avatar of the user who posted the comment.
-cAuthorProfileImageURL :: Lens' CommentSnippet (Maybe Text)
-cAuthorProfileImageURL
-  = lens _cAuthorProfileImageURL
-      (\ s a -> s{_cAuthorProfileImageURL = a})
-
--- | The name of the user who posted the comment.
-cAuthorDisplayName :: Lens' CommentSnippet (Maybe Text)
-cAuthorDisplayName
-  = lens _cAuthorDisplayName
-      (\ s a -> s{_cAuthorDisplayName = a})
-
--- | The date and time when was last updated . The value is specified in ISO
--- 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
-cUpdatedAt :: Lens' CommentSnippet (Maybe UTCTime)
-cUpdatedAt
-  = lens _cUpdatedAt (\ s a -> s{_cUpdatedAt = a}) .
-      mapping _DateTime
-
--- | The id of the author\'s YouTube channel, if any.
-cAuthorChannelId :: Lens' CommentSnippet (Maybe ChannelId)
-cAuthorChannelId
-  = lens _cAuthorChannelId
-      (\ s a -> s{_cAuthorChannelId = a})
-
--- | Whether the current viewer can rate this comment.
-cCanRate :: Lens' CommentSnippet (Maybe Bool)
-cCanRate = lens _cCanRate (\ s a -> s{_cCanRate = a})
-
--- | Link to the author\'s Google+ profile, if any.
-cAuthorGoogleplusProfileURL :: Lens' CommentSnippet (Maybe Text)
-cAuthorGoogleplusProfileURL
-  = lens _cAuthorGoogleplusProfileURL
-      (\ s a -> s{_cAuthorGoogleplusProfileURL = a})
-
--- | The unique id of the parent comment, only set for replies.
-cParentId :: Lens' CommentSnippet (Maybe Text)
-cParentId
-  = lens _cParentId (\ s a -> s{_cParentId = a})
-
-instance FromJSON CommentSnippet where
+instance FromJSON PlayList where
         parseJSON
-          = withObject "CommentSnippet"
+          = withObject "PlayList"
               (\ o ->
-                 CommentSnippet <$>
-                   (o .:? "viewerRating") <*> (o .:? "publishedAt") <*>
-                     (o .:? "authorChannelUrl")
-                     <*> (o .:? "moderationStatus")
-                     <*> (o .:? "likeCount")
-                     <*> (o .:? "channelId")
-                     <*> (o .:? "textOriginal")
-                     <*> (o .:? "videoId")
-                     <*> (o .:? "textDisplay")
-                     <*> (o .:? "authorProfileImageUrl")
-                     <*> (o .:? "authorDisplayName")
-                     <*> (o .:? "updatedAt")
-                     <*> (o .:? "authorChannelId")
-                     <*> (o .:? "canRate")
-                     <*> (o .:? "authorGoogleplusProfileUrl")
-                     <*> (o .:? "parentId"))
+                 PlayList <$>
+                   (o .:? "status") <*> (o .:? "etag") <*>
+                     (o .:? "snippet")
+                     <*> (o .:? "kind" .!= "youtube#playlist")
+                     <*> (o .:? "contentDetails")
+                     <*> (o .:? "id")
+                     <*> (o .:? "localizations")
+                     <*> (o .:? "player"))
 
-instance ToJSON CommentSnippet where
-        toJSON CommentSnippet{..}
+instance ToJSON PlayList where
+        toJSON PlayList{..}
           = object
               (catMaybes
-                 [("viewerRating" .=) <$> _cViewerRating,
-                  ("publishedAt" .=) <$> _cPublishedAt,
-                  ("authorChannelUrl" .=) <$> _cAuthorChannelURL,
-                  ("moderationStatus" .=) <$> _cModerationStatus,
-                  ("likeCount" .=) <$> _cLikeCount,
-                  ("channelId" .=) <$> _cChannelId,
-                  ("textOriginal" .=) <$> _cTextOriginal,
-                  ("videoId" .=) <$> _cVideoId,
-                  ("textDisplay" .=) <$> _cTextDisplay,
-                  ("authorProfileImageUrl" .=) <$>
-                    _cAuthorProfileImageURL,
-                  ("authorDisplayName" .=) <$> _cAuthorDisplayName,
-                  ("updatedAt" .=) <$> _cUpdatedAt,
-                  ("authorChannelId" .=) <$> _cAuthorChannelId,
-                  ("canRate" .=) <$> _cCanRate,
-                  ("authorGoogleplusProfileUrl" .=) <$>
-                    _cAuthorGoogleplusProfileURL,
-                  ("parentId" .=) <$> _cParentId])
-
--- | Recording information associated with the video.
---
--- /See:/ 'videoRecordingDetails' smart constructor.
-data VideoRecordingDetails = VideoRecordingDetails
-    { _vrdLocation            :: !(Maybe GeoPoint)
-    , _vrdLocationDescription :: !(Maybe Text)
-    , _vrdRecordingDate       :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'VideoRecordingDetails' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'vrdLocation'
---
--- * 'vrdLocationDescription'
---
--- * 'vrdRecordingDate'
-videoRecordingDetails
-    :: VideoRecordingDetails
-videoRecordingDetails =
-    VideoRecordingDetails
-    { _vrdLocation = Nothing
-    , _vrdLocationDescription = Nothing
-    , _vrdRecordingDate = Nothing
-    }
-
--- | The geolocation information associated with the video.
-vrdLocation :: Lens' VideoRecordingDetails (Maybe GeoPoint)
-vrdLocation
-  = lens _vrdLocation (\ s a -> s{_vrdLocation = a})
-
--- | The text description of the location where the video was recorded.
-vrdLocationDescription :: Lens' VideoRecordingDetails (Maybe Text)
-vrdLocationDescription
-  = lens _vrdLocationDescription
-      (\ s a -> s{_vrdLocationDescription = a})
-
--- | The date and time when the video was recorded. The value is specified in
--- ISO 8601 (YYYY-MM-DDThh:mm:ss.sssZ) format.
-vrdRecordingDate :: Lens' VideoRecordingDetails (Maybe UTCTime)
-vrdRecordingDate
-  = lens _vrdRecordingDate
-      (\ s a -> s{_vrdRecordingDate = a})
-      . mapping _DateTime
-
-instance FromJSON VideoRecordingDetails where
-        parseJSON
-          = withObject "VideoRecordingDetails"
-              (\ o ->
-                 VideoRecordingDetails <$>
-                   (o .:? "location") <*> (o .:? "locationDescription")
-                     <*> (o .:? "recordingDate"))
-
-instance ToJSON VideoRecordingDetails where
-        toJSON VideoRecordingDetails{..}
-          = object
-              (catMaybes
-                 [("location" .=) <$> _vrdLocation,
-                  ("locationDescription" .=) <$>
-                    _vrdLocationDescription,
-                  ("recordingDate" .=) <$> _vrdRecordingDate])
+                 [("status" .=) <$> _plStatus,
+                  ("etag" .=) <$> _plEtag,
+                  ("snippet" .=) <$> _plSnippet,
+                  Just ("kind" .= _plKind),
+                  ("contentDetails" .=) <$> _plContentDetails,
+                  ("id" .=) <$> _plId,
+                  ("localizations" .=) <$> _plLocalizations,
+                  ("player" .=) <$> _plPlayer])
 
 -- | Branding properties for the channel view.
 --
@@ -12505,7 +12558,7 @@ data ChannelSettings = ChannelSettings
     , _cDefaultTab                 :: !(Maybe Text)
     , _cFeaturedChannelsTitle      :: !(Maybe Text)
     , _cCountry                    :: !(Maybe Text)
-    , _cProfileColor               :: !(Maybe Text)
+    , _cProFileColor               :: !(Maybe Text)
     , _cModerateComments           :: !(Maybe Bool)
     , _cKeywords                   :: !(Maybe Text)
     , _cUnsubscribedTrailer        :: !(Maybe Text)
@@ -12529,7 +12582,7 @@ data ChannelSettings = ChannelSettings
 --
 -- * 'cCountry'
 --
--- * 'cProfileColor'
+-- * 'cProFileColor'
 --
 -- * 'cModerateComments'
 --
@@ -12556,7 +12609,7 @@ channelSettings =
     , _cDefaultTab = Nothing
     , _cFeaturedChannelsTitle = Nothing
     , _cCountry = Nothing
-    , _cProfileColor = Nothing
+    , _cProFileColor = Nothing
     , _cModerateComments = Nothing
     , _cKeywords = Nothing
     , _cUnsubscribedTrailer = Nothing
@@ -12590,10 +12643,10 @@ cCountry :: Lens' ChannelSettings (Maybe Text)
 cCountry = lens _cCountry (\ s a -> s{_cCountry = a})
 
 -- | A prominent color that can be rendered on this channel page.
-cProfileColor :: Lens' ChannelSettings (Maybe Text)
-cProfileColor
-  = lens _cProfileColor
-      (\ s a -> s{_cProfileColor = a})
+cProFileColor :: Lens' ChannelSettings (Maybe Text)
+cProFileColor
+  = lens _cProFileColor
+      (\ s a -> s{_cProFileColor = a})
 
 -- | Whether user-submitted comments left on the channel page need to be
 -- approved by the channel owner to be publicly visible.
@@ -12678,7 +12731,7 @@ instance ToJSON ChannelSettings where
                   ("featuredChannelsTitle" .=) <$>
                     _cFeaturedChannelsTitle,
                   ("country" .=) <$> _cCountry,
-                  ("profileColor" .=) <$> _cProfileColor,
+                  ("profileColor" .=) <$> _cProFileColor,
                   ("moderateComments" .=) <$> _cModerateComments,
                   ("keywords" .=) <$> _cKeywords,
                   ("unsubscribedTrailer" .=) <$> _cUnsubscribedTrailer,
@@ -12801,54 +12854,6 @@ instance ToJSON SubscriptionSnippet where
                   ("title" .=) <$> _ssTitle,
                   ("description" .=) <$> _ssDescription])
 
--- | Brief description of the live stream status.
---
--- /See:/ 'liveStreamStatus' smart constructor.
-data LiveStreamStatus = LiveStreamStatus
-    { _lssStreamStatus :: !(Maybe StreamStatus)
-    , _lssHealthStatus :: !(Maybe LiveStreamHealthStatus)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'LiveStreamStatus' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lssStreamStatus'
---
--- * 'lssHealthStatus'
-liveStreamStatus
-    :: LiveStreamStatus
-liveStreamStatus =
-    LiveStreamStatus
-    { _lssStreamStatus = Nothing
-    , _lssHealthStatus = Nothing
-    }
-
-lssStreamStatus :: Lens' LiveStreamStatus (Maybe StreamStatus)
-lssStreamStatus
-  = lens _lssStreamStatus
-      (\ s a -> s{_lssStreamStatus = a})
-
--- | The health status of the stream.
-lssHealthStatus :: Lens' LiveStreamStatus (Maybe LiveStreamHealthStatus)
-lssHealthStatus
-  = lens _lssHealthStatus
-      (\ s a -> s{_lssHealthStatus = a})
-
-instance FromJSON LiveStreamStatus where
-        parseJSON
-          = withObject "LiveStreamStatus"
-              (\ o ->
-                 LiveStreamStatus <$>
-                   (o .:? "streamStatus") <*> (o .:? "healthStatus"))
-
-instance ToJSON LiveStreamStatus where
-        toJSON LiveStreamStatus{..}
-          = object
-              (catMaybes
-                 [("streamStatus" .=) <$> _lssStreamStatus,
-                  ("healthStatus" .=) <$> _lssHealthStatus])
-
 -- | Details about the live streaming metadata.
 --
 -- /See:/ 'videoLiveStreamingDetails' smart constructor.
@@ -12954,79 +12959,6 @@ instance ToJSON VideoLiveStreamingDetails where
                     _vlsdScheduledStartTime,
                   ("actualStartTime" .=) <$> _vlsdActualStartTime])
 
--- | Comments written in (direct or indirect) reply to the top level comment.
---
--- /See:/ 'commentThreadReplies' smart constructor.
-newtype CommentThreadReplies = CommentThreadReplies
-    { _ctrComments :: Maybe [Comment]
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CommentThreadReplies' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ctrComments'
-commentThreadReplies
-    :: CommentThreadReplies
-commentThreadReplies =
-    CommentThreadReplies
-    { _ctrComments = Nothing
-    }
-
--- | A limited number of replies. Unless the number of replies returned
--- equals total_reply_count in the snippet the returned replies are only a
--- subset of the total number of replies.
-ctrComments :: Lens' CommentThreadReplies [Comment]
-ctrComments
-  = lens _ctrComments (\ s a -> s{_ctrComments = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON CommentThreadReplies where
-        parseJSON
-          = withObject "CommentThreadReplies"
-              (\ o ->
-                 CommentThreadReplies <$>
-                   (o .:? "comments" .!= mempty))
-
-instance ToJSON CommentThreadReplies where
-        toJSON CommentThreadReplies{..}
-          = object
-              (catMaybes [("comments" .=) <$> _ctrComments])
-
--- | ChannelSection localization setting
---
--- /See:/ 'channelSectionLocalization' smart constructor.
-newtype ChannelSectionLocalization = ChannelSectionLocalization
-    { _cslTitle :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ChannelSectionLocalization' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cslTitle'
-channelSectionLocalization
-    :: ChannelSectionLocalization
-channelSectionLocalization =
-    ChannelSectionLocalization
-    { _cslTitle = Nothing
-    }
-
--- | The localized strings for channel section\'s title.
-cslTitle :: Lens' ChannelSectionLocalization (Maybe Text)
-cslTitle = lens _cslTitle (\ s a -> s{_cslTitle = a})
-
-instance FromJSON ChannelSectionLocalization where
-        parseJSON
-          = withObject "ChannelSectionLocalization"
-              (\ o ->
-                 ChannelSectionLocalization <$> (o .:? "title"))
-
-instance ToJSON ChannelSectionLocalization where
-        toJSON ChannelSectionLocalization{..}
-          = object (catMaybes [("title" .=) <$> _cslTitle])
-
 -- | Details about a resource which is being promoted.
 --
 -- /See:/ 'activityContentDetailsPromotedItem' smart constructor.
@@ -13035,7 +12967,7 @@ data ActivityContentDetailsPromotedItem = ActivityContentDetailsPromotedItem
     , _acdpiClickTrackingURL    :: !(Maybe Text)
     , _acdpiForecastingURL      :: !(Maybe [Text])
     , _acdpiDescriptionText     :: !(Maybe Text)
-    , _acdpiCtaType             :: !(Maybe CtaType)
+    , _acdpiCtaType             :: !(Maybe ActivityContentDetailsPromotedItemCtaType)
     , _acdpiVideoId             :: !(Maybe Text)
     , _acdpiAdTag               :: !(Maybe Text)
     , _acdpiCreativeViewURL     :: !(Maybe Text)
@@ -13114,7 +13046,7 @@ acdpiDescriptionText
 
 -- | The type of call-to-action, a message to the user indicating action that
 -- can be taken.
-acdpiCtaType :: Lens' ActivityContentDetailsPromotedItem (Maybe CtaType)
+acdpiCtaType :: Lens' ActivityContentDetailsPromotedItem (Maybe ActivityContentDetailsPromotedItemCtaType)
 acdpiCtaType
   = lens _acdpiCtaType (\ s a -> s{_acdpiCtaType = a})
 
@@ -13185,6 +13117,59 @@ instance ToJSON ActivityContentDetailsPromotedItem
                   ("customCtaButtonText" .=) <$>
                     _acdpiCustomCtaButtonText])
 
+--
+-- /See:/ 'videoConversionPing' smart constructor.
+data VideoConversionPing = VideoConversionPing
+    { _vcpContext       :: !(Maybe VideoConversionPingContext)
+    , _vcpConversionURL :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VideoConversionPing' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vcpContext'
+--
+-- * 'vcpConversionURL'
+videoConversionPing
+    :: VideoConversionPing
+videoConversionPing =
+    VideoConversionPing
+    { _vcpContext = Nothing
+    , _vcpConversionURL = Nothing
+    }
+
+-- | Defines the context of the ping.
+vcpContext :: Lens' VideoConversionPing (Maybe VideoConversionPingContext)
+vcpContext
+  = lens _vcpContext (\ s a -> s{_vcpContext = a})
+
+-- | The url (without the schema) that the app shall send the ping to. It\'s
+-- at caller\'s descretion to decide which schema to use (http vs https)
+-- Example of a returned url: \/\/googleads.g.doubleclick.net\/pagead\/
+-- viewthroughconversion\/962985656\/?data=path%3DtHe_path%3Btype%3D
+-- like%3Butuid%3DGISQtTNGYqaYl4sKxoVvKA%3Bytvid%3DUrIaJUvIQDg&labe=default
+-- The caller must append biscotti authentication (ms param in case of
+-- mobile, for example) to this ping.
+vcpConversionURL :: Lens' VideoConversionPing (Maybe Text)
+vcpConversionURL
+  = lens _vcpConversionURL
+      (\ s a -> s{_vcpConversionURL = a})
+
+instance FromJSON VideoConversionPing where
+        parseJSON
+          = withObject "VideoConversionPing"
+              (\ o ->
+                 VideoConversionPing <$>
+                   (o .:? "context") <*> (o .:? "conversionUrl"))
+
+instance ToJSON VideoConversionPing where
+        toJSON VideoConversionPing{..}
+          = object
+              (catMaybes
+                 [("context" .=) <$> _vcpContext,
+                  ("conversionUrl" .=) <$> _vcpConversionURL])
+
 -- | Geographical coordinates of a point, in WGS84.
 --
 -- /See:/ 'geoPoint' smart constructor.
@@ -13243,50 +13228,78 @@ instance ToJSON GeoPoint where
                   ("altitude" .=) <$> _gpAltitude,
                   ("longitude" .=) <$> _gpLongitude])
 
--- | Basic details about an i18n language, such as language code and
--- human-readable name.
+-- | Comments written in (direct or indirect) reply to the top level comment.
 --
--- /See:/ 'i18nLanguageSnippet' smart constructor.
-data I18nLanguageSnippet = I18nLanguageSnippet
-    { _ilsHl   :: !(Maybe Text)
-    , _ilsName :: !(Maybe Text)
+-- /See:/ 'commentThreadReplies' smart constructor.
+newtype CommentThreadReplies = CommentThreadReplies
+    { _ctrComments :: Maybe [Comment]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'I18nLanguageSnippet' with the minimum fields required to make a request.
+-- | Creates a value of 'CommentThreadReplies' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ilsHl'
---
--- * 'ilsName'
-i18nLanguageSnippet
-    :: I18nLanguageSnippet
-i18nLanguageSnippet =
-    I18nLanguageSnippet
-    { _ilsHl = Nothing
-    , _ilsName = Nothing
+-- * 'ctrComments'
+commentThreadReplies
+    :: CommentThreadReplies
+commentThreadReplies =
+    CommentThreadReplies
+    { _ctrComments = Nothing
     }
 
--- | A short BCP-47 code that uniquely identifies a language.
-ilsHl :: Lens' I18nLanguageSnippet (Maybe Text)
-ilsHl = lens _ilsHl (\ s a -> s{_ilsHl = a})
+-- | A limited number of replies. Unless the number of replies returned
+-- equals total_reply_count in the snippet the returned replies are only a
+-- subset of the total number of replies.
+ctrComments :: Lens' CommentThreadReplies [Comment]
+ctrComments
+  = lens _ctrComments (\ s a -> s{_ctrComments = a}) .
+      _Default
+      . _Coerce
 
--- | The human-readable name of the language in the language itself.
-ilsName :: Lens' I18nLanguageSnippet (Maybe Text)
-ilsName = lens _ilsName (\ s a -> s{_ilsName = a})
-
-instance FromJSON I18nLanguageSnippet where
+instance FromJSON CommentThreadReplies where
         parseJSON
-          = withObject "I18nLanguageSnippet"
+          = withObject "CommentThreadReplies"
               (\ o ->
-                 I18nLanguageSnippet <$>
-                   (o .:? "hl") <*> (o .:? "name"))
+                 CommentThreadReplies <$>
+                   (o .:? "comments" .!= mempty))
 
-instance ToJSON I18nLanguageSnippet where
-        toJSON I18nLanguageSnippet{..}
+instance ToJSON CommentThreadReplies where
+        toJSON CommentThreadReplies{..}
           = object
-              (catMaybes
-                 [("hl" .=) <$> _ilsHl, ("name" .=) <$> _ilsName])
+              (catMaybes [("comments" .=) <$> _ctrComments])
+
+-- | ChannelSection localization setting
+--
+-- /See:/ 'channelSectionLocalization' smart constructor.
+newtype ChannelSectionLocalization = ChannelSectionLocalization
+    { _cslTitle :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ChannelSectionLocalization' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cslTitle'
+channelSectionLocalization
+    :: ChannelSectionLocalization
+channelSectionLocalization =
+    ChannelSectionLocalization
+    { _cslTitle = Nothing
+    }
+
+-- | The localized strings for channel section\'s title.
+cslTitle :: Lens' ChannelSectionLocalization (Maybe Text)
+cslTitle = lens _cslTitle (\ s a -> s{_cslTitle = a})
+
+instance FromJSON ChannelSectionLocalization where
+        parseJSON
+          = withObject "ChannelSectionLocalization"
+              (\ o ->
+                 ChannelSectionLocalization <$> (o .:? "title"))
+
+instance ToJSON ChannelSectionLocalization where
+        toJSON ChannelSectionLocalization{..}
+          = object (catMaybes [("title" .=) <$> _cslTitle])
 
 --
 -- /See:/ 'videoAbuseReportSecondaryReason' smart constructor.
@@ -13333,59 +13346,6 @@ instance ToJSON VideoAbuseReportSecondaryReason where
               (catMaybes
                  [("id" .=) <$> _varsrId,
                   ("label" .=) <$> _varsrLabel])
-
---
--- /See:/ 'videoConversionPing' smart constructor.
-data VideoConversionPing = VideoConversionPing
-    { _vcpContext       :: !(Maybe VideoConversionPingContext)
-    , _vcpConversionURL :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'VideoConversionPing' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'vcpContext'
---
--- * 'vcpConversionURL'
-videoConversionPing
-    :: VideoConversionPing
-videoConversionPing =
-    VideoConversionPing
-    { _vcpContext = Nothing
-    , _vcpConversionURL = Nothing
-    }
-
--- | Defines the context of the ping.
-vcpContext :: Lens' VideoConversionPing (Maybe VideoConversionPingContext)
-vcpContext
-  = lens _vcpContext (\ s a -> s{_vcpContext = a})
-
--- | The url (without the schema) that the app shall send the ping to. It\'s
--- at caller\'s descretion to decide which schema to use (http vs https)
--- Example of a returned url: \/\/googleads.g.doubleclick.net\/pagead\/
--- viewthroughconversion\/962985656\/?data=path%3DtHe_path%3Btype%3D
--- like%3Butuid%3DGISQtTNGYqaYl4sKxoVvKA%3Bytvid%3DUrIaJUvIQDg&labe=default
--- The caller must append biscotti authentication (ms param in case of
--- mobile, for example) to this ping.
-vcpConversionURL :: Lens' VideoConversionPing (Maybe Text)
-vcpConversionURL
-  = lens _vcpConversionURL
-      (\ s a -> s{_vcpConversionURL = a})
-
-instance FromJSON VideoConversionPing where
-        parseJSON
-          = withObject "VideoConversionPing"
-              (\ o ->
-                 VideoConversionPing <$>
-                   (o .:? "context") <*> (o .:? "conversionUrl"))
-
-instance ToJSON VideoConversionPing where
-        toJSON VideoConversionPing{..}
-          = object
-              (catMaybes
-                 [("context" .=) <$> _vcpContext,
-                  ("conversionUrl" .=) <$> _vcpConversionURL])
 
 -- | The contentOwnerDetails object encapsulates channel data that is
 -- relevant for YouTube Partners linked with the channel.
@@ -13438,3 +13398,48 @@ instance ToJSON ChannelContentOwnerDetails where
               (catMaybes
                  [("timeLinked" .=) <$> _ccodTimeLinked,
                   ("contentOwner" .=) <$> _ccodContentOwner])
+
+-- | Basic details about an i18n language, such as language code and
+-- human-readable name.
+--
+-- /See:/ 'i18nLanguageSnippet' smart constructor.
+data I18nLanguageSnippet = I18nLanguageSnippet
+    { _ilsHl   :: !(Maybe Text)
+    , _ilsName :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'I18nLanguageSnippet' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ilsHl'
+--
+-- * 'ilsName'
+i18nLanguageSnippet
+    :: I18nLanguageSnippet
+i18nLanguageSnippet =
+    I18nLanguageSnippet
+    { _ilsHl = Nothing
+    , _ilsName = Nothing
+    }
+
+-- | A short BCP-47 code that uniquely identifies a language.
+ilsHl :: Lens' I18nLanguageSnippet (Maybe Text)
+ilsHl = lens _ilsHl (\ s a -> s{_ilsHl = a})
+
+-- | The human-readable name of the language in the language itself.
+ilsName :: Lens' I18nLanguageSnippet (Maybe Text)
+ilsName = lens _ilsName (\ s a -> s{_ilsName = a})
+
+instance FromJSON I18nLanguageSnippet where
+        parseJSON
+          = withObject "I18nLanguageSnippet"
+              (\ o ->
+                 I18nLanguageSnippet <$>
+                   (o .:? "hl") <*> (o .:? "name"))
+
+instance ToJSON I18nLanguageSnippet where
+        toJSON I18nLanguageSnippet{..}
+          = object
+              (catMaybes
+                 [("hl" .=) <$> _ilsHl, ("name" .=) <$> _ilsName])

@@ -83,6 +83,10 @@ module Network.Google.ProximityBeacon
     , aiData
     , aiNamespacedType
 
+    -- ** BeaconProperties
+    , BeaconProperties
+    , beaconProperties
+
     -- ** Empty
     , Empty
     , empty
@@ -92,29 +96,22 @@ module Network.Google.ProximityBeacon
     , deleteAttachmentsResponse
     , darNumDeleted
 
-    -- ** Namespace
-    , Namespace
-    , namespace
-    , nServingVisibility
-    , nNamespaceName
-
     -- ** GetInfoForObservedBeaconsRequest
     , GetInfoForObservedBeaconsRequest
     , getInfoForObservedBeaconsRequest
     , gifobrObservations
     , gifobrNamespacedTypes
 
+    -- ** Namespace
+    , Namespace
+    , namespace
+    , nServingVisibility
+    , nNamespaceName
+
     -- ** ListNamespacesResponse
     , ListNamespacesResponse
     , listNamespacesResponse
     , lnrNamespaces
-
-    -- ** Diagnostics
-    , Diagnostics
-    , diagnostics
-    , dAlerts
-    , dBeaconName
-    , dEstimatedLowBatteryDate
 
     -- ** Date
     , Date
@@ -136,6 +133,13 @@ module Network.Google.ProximityBeacon
     , bAdvertisedId
     , bProperties
 
+    -- ** Diagnostics
+    , Diagnostics
+    , diagnostics
+    , dAlerts
+    , dBeaconName
+    , dEstimatedLowBatteryDate
+
     -- ** ListBeaconAttachmentsResponse
     , ListBeaconAttachmentsResponse
     , listBeaconAttachmentsResponse
@@ -146,13 +150,6 @@ module Network.Google.ProximityBeacon
     , indoorLevel
     , ilName
 
-    -- ** Observation
-    , Observation
-    , observation
-    , oTelemetry
-    , oTimestampMs
-    , oAdvertisedId
-
     -- ** BeaconInfo
     , BeaconInfo
     , beaconInfo
@@ -160,6 +157,13 @@ module Network.Google.ProximityBeacon
     , biBeaconName
     , biDescription
     , biAdvertisedId
+
+    -- ** Observation
+    , Observation
+    , observation
+    , oTelemetry
+    , oTimestampMs
+    , oAdvertisedId
 
     -- ** BeaconAttachment
     , BeaconAttachment
@@ -191,10 +195,6 @@ module Network.Google.ProximityBeacon
     , GetInfoForObservedBeaconsResponse
     , getInfoForObservedBeaconsResponse
     , gifobrBeacons
-
-    -- ** Properties
-    , Properties
-    , properties
     ) where
 
 import           Network.Google.Prelude

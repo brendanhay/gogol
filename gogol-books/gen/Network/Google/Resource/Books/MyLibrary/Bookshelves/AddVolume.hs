@@ -55,7 +55,7 @@ type MyLibraryBookshelvesAddVolumeResource =
            "addVolume" :>
              QueryParam "volumeId" Text :>
                QueryParam "reason"
-                 BooksMyLibraryBookshelvesAddVolumeReason
+                 MyLibraryBookshelvesAddVolumeReason
                  :>
                  QueryParam "source" Text :>
                    QueryParam "quotaUser" Text :>
@@ -73,7 +73,7 @@ data MyLibraryBookshelvesAddVolume' = MyLibraryBookshelvesAddVolume'
     { _mlbavQuotaUser   :: !(Maybe Text)
     , _mlbavPrettyPrint :: !Bool
     , _mlbavUserIP      :: !(Maybe Text)
-    , _mlbavReason      :: !(Maybe BooksMyLibraryBookshelvesAddVolumeReason)
+    , _mlbavReason      :: !(Maybe MyLibraryBookshelvesAddVolumeReason)
     , _mlbavShelf       :: !Text
     , _mlbavKey         :: !(Maybe Key)
     , _mlbavVolumeId    :: !Text
@@ -144,7 +144,7 @@ mlbavUserIP
   = lens _mlbavUserIP (\ s a -> s{_mlbavUserIP = a})
 
 -- | The reason for which the book is added to the library.
-mlbavReason :: Lens' MyLibraryBookshelvesAddVolume' (Maybe BooksMyLibraryBookshelvesAddVolumeReason)
+mlbavReason :: Lens' MyLibraryBookshelvesAddVolume' (Maybe MyLibraryBookshelvesAddVolumeReason)
 mlbavReason
   = lens _mlbavReason (\ s a -> s{_mlbavReason = a})
 

@@ -57,7 +57,8 @@ type CustomersPatchResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Customer :> Patch '[JSON] Customer
+                       ReqBody '[OctetStream] Customer :>
+                         Patch '[JSON] Customer
 
 -- | Update a customer resource if one it exists and is owned by the
 -- reseller. This method supports patch semantics.

@@ -36,7 +36,7 @@ module Network.Google.Resource.DFAReporting.CreativeGroups.List
     , cglUserIP
     , cglSearchString
     , cglIds
-    , cglProfileId
+    , cglProFileId
     , cglSortOrder
     , cglGroupNumber
     , cglKey
@@ -59,14 +59,10 @@ type CreativeGroupsListResource =
          "creativeGroups" :>
            QueryParam "searchString" Text :>
              QueryParams "ids" Int64 :>
-               QueryParam "sortOrder"
-                 DfareportingCreativeGroupsListSortOrder
-                 :>
+               QueryParam "sortOrder" CreativeGroupsListSortOrder :>
                  QueryParam "groupNumber" Int32 :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "sortField"
-                       DfareportingCreativeGroupsListSortField
-                       :>
+                     QueryParam "sortField" CreativeGroupsListSortField :>
                        QueryParams "advertiserIds" Int64 :>
                          QueryParam "maxResults" Int32 :>
                            QueryParam "quotaUser" Text :>
@@ -87,12 +83,12 @@ data CreativeGroupsList' = CreativeGroupsList'
     , _cglUserIP        :: !(Maybe Text)
     , _cglSearchString  :: !(Maybe Text)
     , _cglIds           :: !(Maybe [Int64])
-    , _cglProfileId     :: !Int64
-    , _cglSortOrder     :: !(Maybe DfareportingCreativeGroupsListSortOrder)
+    , _cglProFileId     :: !Int64
+    , _cglSortOrder     :: !(Maybe CreativeGroupsListSortOrder)
     , _cglGroupNumber   :: !(Maybe Int32)
     , _cglKey           :: !(Maybe Key)
     , _cglPageToken     :: !(Maybe Text)
-    , _cglSortField     :: !(Maybe DfareportingCreativeGroupsListSortField)
+    , _cglSortField     :: !(Maybe CreativeGroupsListSortField)
     , _cglOAuthToken    :: !(Maybe OAuthToken)
     , _cglAdvertiserIds :: !(Maybe [Int64])
     , _cglMaxResults    :: !(Maybe Int32)
@@ -113,7 +109,7 @@ data CreativeGroupsList' = CreativeGroupsList'
 --
 -- * 'cglIds'
 --
--- * 'cglProfileId'
+-- * 'cglProFileId'
 --
 -- * 'cglSortOrder'
 --
@@ -135,14 +131,14 @@ data CreativeGroupsList' = CreativeGroupsList'
 creativeGroupsList'
     :: Int64 -- ^ 'profileId'
     -> CreativeGroupsList'
-creativeGroupsList' pCglProfileId_ =
+creativeGroupsList' pCglProFileId_ =
     CreativeGroupsList'
     { _cglQuotaUser = Nothing
     , _cglPrettyPrint = True
     , _cglUserIP = Nothing
     , _cglSearchString = Nothing
     , _cglIds = Nothing
-    , _cglProfileId = pCglProfileId_
+    , _cglProFileId = pCglProFileId_
     , _cglSortOrder = Nothing
     , _cglGroupNumber = Nothing
     , _cglKey = Nothing
@@ -193,12 +189,12 @@ cglIds
       _Coerce
 
 -- | User profile ID associated with this request.
-cglProfileId :: Lens' CreativeGroupsList' Int64
-cglProfileId
-  = lens _cglProfileId (\ s a -> s{_cglProfileId = a})
+cglProFileId :: Lens' CreativeGroupsList' Int64
+cglProFileId
+  = lens _cglProFileId (\ s a -> s{_cglProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-cglSortOrder :: Lens' CreativeGroupsList' (Maybe DfareportingCreativeGroupsListSortOrder)
+cglSortOrder :: Lens' CreativeGroupsList' (Maybe CreativeGroupsListSortOrder)
 cglSortOrder
   = lens _cglSortOrder (\ s a -> s{_cglSortOrder = a})
 
@@ -220,7 +216,7 @@ cglPageToken
   = lens _cglPageToken (\ s a -> s{_cglPageToken = a})
 
 -- | Field by which to sort the list.
-cglSortField :: Lens' CreativeGroupsList' (Maybe DfareportingCreativeGroupsListSortField)
+cglSortField :: Lens' CreativeGroupsList' (Maybe CreativeGroupsListSortField)
 cglSortField
   = lens _cglSortField (\ s a -> s{_cglSortField = a})
 
@@ -258,7 +254,7 @@ instance GoogleRequest CreativeGroupsList' where
              CreativeGroupsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeGroupsList'{..}
-          = go _cglProfileId _cglSearchString
+          = go _cglProFileId _cglSearchString
               (_cglIds ^. _Default)
               _cglSortOrder
               _cglGroupNumber

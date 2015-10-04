@@ -55,7 +55,7 @@ type JobsSearchResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] SearchJobsRequest :>
+                       ReqBody '[OctetStream] SearchJobsRequest :>
                          Post '[JSON] SearchJobsResponse
 
 -- | Gets a list of jobs matching the criteria.

@@ -79,8 +79,14 @@ module Network.Google.UserAccounts
 
     -- * Types
 
-    -- ** Status
-    , Status (..)
+    -- ** OperationWarningsItemDataItem
+    , OperationWarningsItemDataItem
+    , operationWarningsItemDataItem
+    , owidiValue
+    , owidiKey
+
+    -- ** OperationWarningsItemCode
+    , OperationWarningsItemCode (..)
 
     -- ** OperationList
     , OperationList
@@ -137,11 +143,6 @@ module Network.Google.UserAccounts
     , oTargetLink
     , oClientOperationId
 
-    -- ** Error'
-    , Error'
-    , error'
-    , eErrors
-
     -- ** UserList
     , UserList
     , userList
@@ -160,8 +161,15 @@ module Network.Google.UserAccounts
     , pkExpirationTimestamp
     , pkDescription
 
-    -- ** WarningsItemCode
-    , WarningsItemCode (..)
+    -- ** OperationStatus
+    , OperationStatus (..)
+
+    -- ** LinuxAccountViews
+    , LinuxAccountViews
+    , linuxAccountViews
+    , lavUserViews
+    , lavKind
+    , lavGroupViews
 
     -- ** User
     , User
@@ -176,12 +184,10 @@ module Network.Google.UserAccounts
     , uId
     , uDescription
 
-    -- ** LinuxAccountViews
-    , LinuxAccountViews
-    , linuxAccountViews
-    , lavUserViews
-    , lavKind
-    , lavGroupViews
+    -- ** GroupsAddMemberRequest
+    , GroupsAddMemberRequest
+    , groupsAddMemberRequest
+    , gamrUsers
 
     -- ** LinuxGroupView
     , LinuxGroupView
@@ -189,23 +195,6 @@ module Network.Google.UserAccounts
     , lgvMembers
     , lgvGid
     , lgvGroupName
-
-    -- ** GroupsAddMemberRequest
-    , GroupsAddMemberRequest
-    , groupsAddMemberRequest
-    , gamrUsers
-
-    -- ** WarningsItem
-    , WarningsItem
-    , warningsItem
-    , wiData
-    , wiCode
-    , wiMessage
-
-    -- ** LinuxGetLinuxAccountViewsResponse
-    , LinuxGetLinuxAccountViewsResponse
-    , linuxGetLinuxAccountViewsResponse
-    , lglavrResource
 
     -- ** LinuxUserView
     , LinuxUserView
@@ -217,34 +206,45 @@ module Network.Google.UserAccounts
     , luvGid
     , luvHomeDirectory
 
-    -- ** DataItem
-    , DataItem
-    , dataItem
-    , diValue
-    , diKey
+    -- ** LinuxGetLinuxAccountViewsResponse
+    , LinuxGetLinuxAccountViewsResponse
+    , linuxGetLinuxAccountViewsResponse
+    , lglavrResource
+
+    -- ** OperationError
+    , OperationError
+    , operationError
+    , oeErrors
 
     -- ** LinuxGetAuthorizedKeysViewResponse
     , LinuxGetAuthorizedKeysViewResponse
     , linuxGetAuthorizedKeysViewResponse
     , lgakvrResource
 
+    -- ** OperationErrorErrorsItem
+    , OperationErrorErrorsItem
+    , operationErrorErrorsItem
+    , oeeiLocation
+    , oeeiCode
+    , oeeiMessage
+
     -- ** GroupsRemoveMemberRequest
     , GroupsRemoveMemberRequest
     , groupsRemoveMemberRequest
     , grmrUsers
-
-    -- ** ErrorsItem
-    , ErrorsItem
-    , errorsItem
-    , eiLocation
-    , eiCode
-    , eiMessage
 
     -- ** AuthorizedKeysView
     , AuthorizedKeysView
     , authorizedKeysView
     , akvSudoer
     , akvKeys
+
+    -- ** OperationWarningsItem
+    , OperationWarningsItem
+    , operationWarningsItem
+    , owiData
+    , owiCode
+    , owiMessage
     ) where
 
 import           Network.Google.Prelude

@@ -32,14 +32,14 @@ module Network.Google.Resource.Compute.Images.Insert
     , ImagesInsert'
 
     -- * Request Lenses
-    , imaQuotaUser
-    , imaPrettyPrint
-    , imaProject
-    , imaUserIP
-    , imaPayload
-    , imaKey
-    , imaOAuthToken
-    , imaFields
+    , iQuotaUser
+    , iPrettyPrint
+    , iProject
+    , iUserIP
+    , iPayload
+    , iKey
+    , iOAuthToken
+    , iFields
     ) where
 
 import           Network.Google.Compute.Types
@@ -58,119 +58,114 @@ type ImagesInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Image :> Post '[JSON] Operation
+                         ReqBody '[OctetStream] Image :>
+                           Post '[JSON] Operation
 
 -- | Creates an image resource in the specified project using the data
 -- included in the request.
 --
 -- /See:/ 'imagesInsert'' smart constructor.
 data ImagesInsert' = ImagesInsert'
-    { _imaQuotaUser   :: !(Maybe Text)
-    , _imaPrettyPrint :: !Bool
-    , _imaProject     :: !Text
-    , _imaUserIP      :: !(Maybe Text)
-    , _imaPayload     :: !Image
-    , _imaKey         :: !(Maybe Key)
-    , _imaOAuthToken  :: !(Maybe OAuthToken)
-    , _imaFields      :: !(Maybe Text)
+    { _iQuotaUser   :: !(Maybe Text)
+    , _iPrettyPrint :: !Bool
+    , _iProject     :: !Text
+    , _iUserIP      :: !(Maybe Text)
+    , _iPayload     :: !Image
+    , _iKey         :: !(Maybe Key)
+    , _iOAuthToken  :: !(Maybe OAuthToken)
+    , _iFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ImagesInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'imaQuotaUser'
+-- * 'iQuotaUser'
 --
--- * 'imaPrettyPrint'
+-- * 'iPrettyPrint'
 --
--- * 'imaProject'
+-- * 'iProject'
 --
--- * 'imaUserIP'
+-- * 'iUserIP'
 --
--- * 'imaPayload'
+-- * 'iPayload'
 --
--- * 'imaKey'
+-- * 'iKey'
 --
--- * 'imaOAuthToken'
+-- * 'iOAuthToken'
 --
--- * 'imaFields'
+-- * 'iFields'
 imagesInsert'
     :: Text -- ^ 'project'
     -> Image -- ^ 'payload'
     -> ImagesInsert'
-imagesInsert' pImaProject_ pImaPayload_ =
+imagesInsert' pIProject_ pIPayload_ =
     ImagesInsert'
-    { _imaQuotaUser = Nothing
-    , _imaPrettyPrint = True
-    , _imaProject = pImaProject_
-    , _imaUserIP = Nothing
-    , _imaPayload = pImaPayload_
-    , _imaKey = Nothing
-    , _imaOAuthToken = Nothing
-    , _imaFields = Nothing
+    { _iQuotaUser = Nothing
+    , _iPrettyPrint = True
+    , _iProject = pIProject_
+    , _iUserIP = Nothing
+    , _iPayload = pIPayload_
+    , _iKey = Nothing
+    , _iOAuthToken = Nothing
+    , _iFields = Nothing
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-imaQuotaUser :: Lens' ImagesInsert' (Maybe Text)
-imaQuotaUser
-  = lens _imaQuotaUser (\ s a -> s{_imaQuotaUser = a})
+iQuotaUser :: Lens' ImagesInsert' (Maybe Text)
+iQuotaUser
+  = lens _iQuotaUser (\ s a -> s{_iQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-imaPrettyPrint :: Lens' ImagesInsert' Bool
-imaPrettyPrint
-  = lens _imaPrettyPrint
-      (\ s a -> s{_imaPrettyPrint = a})
+iPrettyPrint :: Lens' ImagesInsert' Bool
+iPrettyPrint
+  = lens _iPrettyPrint (\ s a -> s{_iPrettyPrint = a})
 
 -- | Project ID for this request.
-imaProject :: Lens' ImagesInsert' Text
-imaProject
-  = lens _imaProject (\ s a -> s{_imaProject = a})
+iProject :: Lens' ImagesInsert' Text
+iProject = lens _iProject (\ s a -> s{_iProject = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-imaUserIP :: Lens' ImagesInsert' (Maybe Text)
-imaUserIP
-  = lens _imaUserIP (\ s a -> s{_imaUserIP = a})
+iUserIP :: Lens' ImagesInsert' (Maybe Text)
+iUserIP = lens _iUserIP (\ s a -> s{_iUserIP = a})
 
 -- | Multipart request metadata.
-imaPayload :: Lens' ImagesInsert' Image
-imaPayload
-  = lens _imaPayload (\ s a -> s{_imaPayload = a})
+iPayload :: Lens' ImagesInsert' Image
+iPayload = lens _iPayload (\ s a -> s{_iPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-imaKey :: Lens' ImagesInsert' (Maybe Key)
-imaKey = lens _imaKey (\ s a -> s{_imaKey = a})
+iKey :: Lens' ImagesInsert' (Maybe Key)
+iKey = lens _iKey (\ s a -> s{_iKey = a})
 
 -- | OAuth 2.0 token for the current user.
-imaOAuthToken :: Lens' ImagesInsert' (Maybe OAuthToken)
-imaOAuthToken
-  = lens _imaOAuthToken
-      (\ s a -> s{_imaOAuthToken = a})
+iOAuthToken :: Lens' ImagesInsert' (Maybe OAuthToken)
+iOAuthToken
+  = lens _iOAuthToken (\ s a -> s{_iOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-imaFields :: Lens' ImagesInsert' (Maybe Text)
-imaFields
-  = lens _imaFields (\ s a -> s{_imaFields = a})
+iFields :: Lens' ImagesInsert' (Maybe Text)
+iFields = lens _iFields (\ s a -> s{_iFields = a})
 
 instance GoogleAuth ImagesInsert' where
-        authKey = imaKey . _Just
-        authToken = imaOAuthToken . _Just
+        authKey = iKey . _Just
+        authToken = iOAuthToken . _Just
 
 instance GoogleRequest ImagesInsert' where
         type Rs ImagesInsert' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u ImagesInsert'{..}
-          = go _imaProject _imaQuotaUser (Just _imaPrettyPrint)
-              _imaUserIP
-              _imaFields
-              _imaKey
-              _imaOAuthToken
+          = go _iProject _iQuotaUser (Just _iPrettyPrint)
+              _iUserIP
+              _iFields
+              _iKey
+              _iOAuthToken
               (Just AltJSON)
-              _imaPayload
+              _iPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ImagesInsertResource)

@@ -55,7 +55,7 @@ type ChromeosDevicesUpdateResource =
            "chromeos" :>
              Capture "deviceId" Text :>
                QueryParam "projection"
-                 DirectoryChromeosDevicesUpdateProjection
+                 ChromeosDevicesUpdateProjection
                  :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
@@ -64,7 +64,7 @@ type ChromeosDevicesUpdateResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] ChromeOSDevice :>
+                               ReqBody '[OctetStream] ChromeOSDevice :>
                                  Put '[JSON] ChromeOSDevice
 
 -- | Update Chrome OS Device
@@ -78,7 +78,7 @@ data ChromeosDevicesUpdate' = ChromeosDevicesUpdate'
     , _cduCustomerId  :: !Text
     , _cduKey         :: !(Maybe Key)
     , _cduDeviceId    :: !Text
-    , _cduProjection  :: !(Maybe DirectoryChromeosDevicesUpdateProjection)
+    , _cduProjection  :: !(Maybe ChromeosDevicesUpdateProjection)
     , _cduOAuthToken  :: !(Maybe OAuthToken)
     , _cduFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -167,7 +167,7 @@ cduDeviceId
   = lens _cduDeviceId (\ s a -> s{_cduDeviceId = a})
 
 -- | Restrict information returned to a set of selected fields.
-cduProjection :: Lens' ChromeosDevicesUpdate' (Maybe DirectoryChromeosDevicesUpdateProjection)
+cduProjection :: Lens' ChromeosDevicesUpdate' (Maybe ChromeosDevicesUpdateProjection)
 cduProjection
   = lens _cduProjection
       (\ s a -> s{_cduProjection = a})

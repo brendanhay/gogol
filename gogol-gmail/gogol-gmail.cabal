@@ -38,7 +38,7 @@ library
         , Network.Google.Resource.Gmail.Users.Drafts.List
         , Network.Google.Resource.Gmail.Users.Drafts.Send
         , Network.Google.Resource.Gmail.Users.Drafts.Update
-        , Network.Google.Resource.Gmail.Users.GetProfile
+        , Network.Google.Resource.Gmail.Users.GetProFile
         , Network.Google.Resource.Gmail.Users.History.List
         , Network.Google.Resource.Gmail.Users.Labels.Create
         , Network.Google.Resource.Gmail.Users.Labels.Delete

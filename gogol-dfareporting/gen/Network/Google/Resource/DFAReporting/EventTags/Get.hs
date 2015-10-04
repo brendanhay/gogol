@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.EventTags.Get
     , etgQuotaUser
     , etgPrettyPrint
     , etgUserIP
-    , etgProfileId
+    , etgProFileId
     , etgKey
     , etgId
     , etgOAuthToken
@@ -66,7 +66,7 @@ data EventTagsGet' = EventTagsGet'
     { _etgQuotaUser   :: !(Maybe Text)
     , _etgPrettyPrint :: !Bool
     , _etgUserIP      :: !(Maybe Text)
-    , _etgProfileId   :: !Int64
+    , _etgProFileId   :: !Int64
     , _etgKey         :: !(Maybe Key)
     , _etgId          :: !Int64
     , _etgOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +83,7 @@ data EventTagsGet' = EventTagsGet'
 --
 -- * 'etgUserIP'
 --
--- * 'etgProfileId'
+-- * 'etgProFileId'
 --
 -- * 'etgKey'
 --
@@ -96,12 +96,12 @@ eventTagsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> EventTagsGet'
-eventTagsGet' pEtgProfileId_ pEtgId_ =
+eventTagsGet' pEtgProFileId_ pEtgId_ =
     EventTagsGet'
     { _etgQuotaUser = Nothing
     , _etgPrettyPrint = True
     , _etgUserIP = Nothing
-    , _etgProfileId = pEtgProfileId_
+    , _etgProFileId = pEtgProFileId_
     , _etgKey = Nothing
     , _etgId = pEtgId_
     , _etgOAuthToken = Nothing
@@ -128,9 +128,9 @@ etgUserIP
   = lens _etgUserIP (\ s a -> s{_etgUserIP = a})
 
 -- | User profile ID associated with this request.
-etgProfileId :: Lens' EventTagsGet' Int64
-etgProfileId
-  = lens _etgProfileId (\ s a -> s{_etgProfileId = a})
+etgProFileId :: Lens' EventTagsGet' Int64
+etgProFileId
+  = lens _etgProFileId (\ s a -> s{_etgProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -161,7 +161,7 @@ instance GoogleRequest EventTagsGet' where
         type Rs EventTagsGet' = EventTag
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u EventTagsGet'{..}
-          = go _etgProfileId _etgId _etgQuotaUser
+          = go _etgProFileId _etgId _etgQuotaUser
               (Just _etgPrettyPrint)
               _etgUserIP
               _etgFields

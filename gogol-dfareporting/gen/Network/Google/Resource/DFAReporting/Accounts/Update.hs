@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Accounts.Update
     , auQuotaUser
     , auPrettyPrint
     , auUserIP
-    , auProfileId
+    , auProFileId
     , auPayload
     , auKey
     , auOAuthToken
@@ -57,7 +57,7 @@ type AccountsUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Account :> Put '[JSON] Account
+                         ReqBody '[OctetStream] Account :> Put '[JSON] Account
 
 -- | Updates an existing account.
 --
@@ -66,7 +66,7 @@ data AccountsUpdate' = AccountsUpdate'
     { _auQuotaUser   :: !(Maybe Text)
     , _auPrettyPrint :: !Bool
     , _auUserIP      :: !(Maybe Text)
-    , _auProfileId   :: !Int64
+    , _auProFileId   :: !Int64
     , _auPayload     :: !Account
     , _auKey         :: !(Maybe Key)
     , _auOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +83,7 @@ data AccountsUpdate' = AccountsUpdate'
 --
 -- * 'auUserIP'
 --
--- * 'auProfileId'
+-- * 'auProFileId'
 --
 -- * 'auPayload'
 --
@@ -96,12 +96,12 @@ accountsUpdate'
     :: Int64 -- ^ 'profileId'
     -> Account -- ^ 'payload'
     -> AccountsUpdate'
-accountsUpdate' pAuProfileId_ pAuPayload_ =
+accountsUpdate' pAuProFileId_ pAuPayload_ =
     AccountsUpdate'
     { _auQuotaUser = Nothing
     , _auPrettyPrint = True
     , _auUserIP = Nothing
-    , _auProfileId = pAuProfileId_
+    , _auProFileId = pAuProFileId_
     , _auPayload = pAuPayload_
     , _auKey = Nothing
     , _auOAuthToken = Nothing
@@ -127,9 +127,9 @@ auUserIP :: Lens' AccountsUpdate' (Maybe Text)
 auUserIP = lens _auUserIP (\ s a -> s{_auUserIP = a})
 
 -- | User profile ID associated with this request.
-auProfileId :: Lens' AccountsUpdate' Int64
-auProfileId
-  = lens _auProfileId (\ s a -> s{_auProfileId = a})
+auProFileId :: Lens' AccountsUpdate' Int64
+auProFileId
+  = lens _auProFileId (\ s a -> s{_auProFileId = a})
 
 -- | Multipart request metadata.
 auPayload :: Lens' AccountsUpdate' Account
@@ -159,7 +159,7 @@ instance GoogleRequest AccountsUpdate' where
         type Rs AccountsUpdate' = Account
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AccountsUpdate'{..}
-          = go _auProfileId _auQuotaUser (Just _auPrettyPrint)
+          = go _auProFileId _auQuotaUser (Just _auPrettyPrint)
               _auUserIP
               _auFields
               _auKey

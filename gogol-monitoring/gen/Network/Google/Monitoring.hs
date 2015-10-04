@@ -70,6 +70,16 @@ module Network.Google.Monitoring
     , mdLabels
     , mdDescription
 
+    -- ** WriteTimeseriesRequest
+    , WriteTimeseriesRequest
+    , writeTimeseriesRequest
+    , wtrCommonLabels
+    , wtrTimeseries
+
+    -- ** WriteTimeseriesRequestCommonLabels
+    , WriteTimeseriesRequestCommonLabels
+    , writeTimeseriesRequestCommonLabels
+
     -- ** MetricDescriptorLabelDescriptor
     , MetricDescriptorLabelDescriptor
     , metricDescriptorLabelDescriptor
@@ -82,11 +92,8 @@ module Network.Google.Monitoring
     , pdubUpperBound
     , pdubCount
 
-    -- ** WriteTimeseriesRequest
-    , WriteTimeseriesRequest
-    , writeTimeseriesRequest
-    , wtrCommonLabels
-    , wtrTimeseries
+    -- ** TimeseriesListAggregator
+    , TimeseriesListAggregator (..)
 
     -- ** ListMetricDescriptorsResponse
     , ListMetricDescriptorsResponse
@@ -100,18 +107,9 @@ module Network.Google.Monitoring
     , listTimeseriesDescriptorsRequest
     , ltdrKind
 
-    -- ** WriteTimeseriesResponse
-    , WriteTimeseriesResponse
-    , writeTimeseriesResponse
-    , wtrKind
-
     -- ** TimeseriesDescriptorLabels
     , TimeseriesDescriptorLabels
     , timeseriesDescriptorLabels
-
-    -- ** CommonLabels
-    , CommonLabels
-    , commonLabels
 
     -- ** PointDistributionBucket
     , PointDistributionBucket
@@ -120,8 +118,10 @@ module Network.Google.Monitoring
     , pdbCount
     , pdbLowerBound
 
-    -- ** CloudMonitoringTimeseriesListAggregator
-    , CloudMonitoringTimeseriesListAggregator (..)
+    -- ** WriteTimeseriesResponse
+    , WriteTimeseriesResponse
+    , writeTimeseriesResponse
+    , wtrKind
 
     -- ** TimeseriesDescriptorLabel
     , TimeseriesDescriptorLabel
@@ -135,9 +135,6 @@ module Network.Google.Monitoring
     , pdOverflowBucket
     , pdBuckets
     , pdUnderflowBucket
-
-    -- ** Aggregator
-    , Aggregator (..)
 
     -- ** Point
     , Point
@@ -176,22 +173,25 @@ module Network.Google.Monitoring
     , tpPoint
     , tpTimeseriesDesc
 
-    -- ** TimeseriesDescriptor
-    , TimeseriesDescriptor
-    , timeseriesDescriptor
-    , tdProject
-    , tdMetric
-    , tdLabels
+    -- ** TimeseriesDescriptorsListAggregator
+    , TimeseriesDescriptorsListAggregator (..)
+
+    -- ** DeleteMetricDescriptorResponse
+    , DeleteMetricDescriptorResponse
+    , deleteMetricDescriptorResponse
+    , dmdrKind
 
     -- ** ListTimeseriesRequest
     , ListTimeseriesRequest
     , listTimeseriesRequest
     , ltrtKind
 
-    -- ** DeleteMetricDescriptorResponse
-    , DeleteMetricDescriptorResponse
-    , deleteMetricDescriptorResponse
-    , dmdrKind
+    -- ** TimeseriesDescriptor
+    , TimeseriesDescriptor
+    , timeseriesDescriptor
+    , tdProject
+    , tdMetric
+    , tdLabels
 
     -- ** Timeseries
     , Timeseries

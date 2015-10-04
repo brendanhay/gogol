@@ -58,8 +58,8 @@ type JobsListResource =
      "projects" :>
        Capture "projectId" Text :>
          "jobs" :>
-           QueryParams "stateFilter" StateFilter :>
-             QueryParam "projection" Projection :>
+           QueryParams "stateFilter" JobsListStateFilter :>
+             QueryParam "projection" JobsListProjection :>
                QueryParam "pageToken" Text :>
                  QueryParam "allUsers" Bool :>
                    QueryParam "maxResults" Word32 :>
@@ -83,8 +83,8 @@ data JobsList' = JobsList'
     , _jlPrettyPrint :: !Bool
     , _jlUserIP      :: !(Maybe Text)
     , _jlKey         :: !(Maybe Key)
-    , _jlStateFilter :: !(Maybe [StateFilter])
-    , _jlProjection  :: !(Maybe Projection)
+    , _jlStateFilter :: !(Maybe [JobsListStateFilter])
+    , _jlProjection  :: !(Maybe JobsListProjection)
     , _jlPageToken   :: !(Maybe Text)
     , _jlProjectId   :: !Text
     , _jlAllUsers    :: !(Maybe Bool)
@@ -164,7 +164,7 @@ jlKey :: Lens' JobsList' (Maybe Key)
 jlKey = lens _jlKey (\ s a -> s{_jlKey = a})
 
 -- | Filter for job state
-jlStateFilter :: Lens' JobsList' [StateFilter]
+jlStateFilter :: Lens' JobsList' [JobsListStateFilter]
 jlStateFilter
   = lens _jlStateFilter
       (\ s a -> s{_jlStateFilter = a})
@@ -172,7 +172,7 @@ jlStateFilter
       . _Coerce
 
 -- | Restrict information returned to a set of selected fields
-jlProjection :: Lens' JobsList' (Maybe Projection)
+jlProjection :: Lens' JobsList' (Maybe JobsListProjection)
 jlProjection
   = lens _jlProjection (\ s a -> s{_jlProjection = a})
 

@@ -54,7 +54,7 @@ import           Network.Google.Prelude
 type TimelineListResource =
      "timeline" :>
        QueryParam "pinnedOnly" Bool :>
-         QueryParam "orderBy" OrderBy :>
+         QueryParam "orderBy" TimelineListOrderBy :>
            QueryParam "bundleId" Text :>
              QueryParam "sourceItemId" Text :>
                QueryParam "pageToken" Text :>
@@ -76,7 +76,7 @@ data TimelineList' = TimelineList'
     { _tlPinnedOnly     :: !(Maybe Bool)
     , _tlQuotaUser      :: !(Maybe Text)
     , _tlPrettyPrint    :: !Bool
-    , _tlOrderBy        :: !(Maybe OrderBy)
+    , _tlOrderBy        :: !(Maybe TimelineListOrderBy)
     , _tlUserIP         :: !(Maybe Text)
     , _tlBundleId       :: !(Maybe Text)
     , _tlKey            :: !(Maybe Key)
@@ -155,7 +155,7 @@ tlPrettyPrint
       (\ s a -> s{_tlPrettyPrint = a})
 
 -- | Controls the order in which timeline items are returned.
-tlOrderBy :: Lens' TimelineList' (Maybe OrderBy)
+tlOrderBy :: Lens' TimelineList' (Maybe TimelineListOrderBy)
 tlOrderBy
   = lens _tlOrderBy (\ s a -> s{_tlOrderBy = a})
 

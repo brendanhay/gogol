@@ -55,8 +55,9 @@ type AchievementsUpdateMultipleResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] AchievementUpdateMultipleRequest :>
-                         Post '[JSON] AchievementUpdateMultipleResponse
+                       ReqBody '[OctetStream]
+                         AchievementUpdateMultipleRequest
+                         :> Post '[JSON] AchievementUpdateMultipleResponse
 
 -- | Updates multiple achievements for the currently authenticated player.
 --

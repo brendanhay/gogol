@@ -54,7 +54,8 @@ type StatscollectionUpdatestatsResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] Stats :> Post '[JSON] StatsReply
+                     ReqBody '[OctetStream] Stats :>
+                       Post '[JSON] StatsReply
 
 -- | RPC to update the new TCP stats.
 --

@@ -18,30 +18,30 @@ module Network.Google.ShoppingContent.Types.Sum where
 import           Network.Google.Prelude
 
 -- | The name of the template to retrieve.
-data TemplateName
+data OrdersGettestOrdertemplateTemplateName
     = TEMPLATE1
       -- ^ @template1@
     | TEMPLATE2
       -- ^ @template2@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable TemplateName
+instance Hashable OrdersGettestOrdertemplateTemplateName
 
-instance FromText TemplateName where
+instance FromText OrdersGettestOrdertemplateTemplateName where
     fromText = \case
         "template1" -> Just TEMPLATE1
         "template2" -> Just TEMPLATE2
         _ -> Nothing
 
-instance ToText TemplateName where
+instance ToText OrdersGettestOrdertemplateTemplateName where
     toText = \case
         TEMPLATE1 -> "template1"
         TEMPLATE2 -> "template2"
 
-instance FromJSON TemplateName where
-    parseJSON = parseJSONText "TemplateName"
+instance FromJSON OrdersGettestOrdertemplateTemplateName where
+    parseJSON = parseJSONText "OrdersGettestOrdertemplateTemplateName"
 
-instance ToJSON TemplateName where
+instance ToJSON OrdersGettestOrdertemplateTemplateName where
     toJSON = toJSONText
 
 -- | The ordering of the returned list. The only supported value are
@@ -50,30 +50,30 @@ instance ToJSON TemplateName where
 -- placement date, from oldest to most recent. \"placedDate asc\" stands
 -- for listing orders by placement date, from most recent to oldest. In
 -- future releases we\'ll support other sorting criteria.
-data OrderBy
+data OrdersListOrderBy
     = PlacedDateAsc
       -- ^ @placedDate asc@
     | PlacedDateDesc
       -- ^ @placedDate desc@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable OrderBy
+instance Hashable OrdersListOrderBy
 
-instance FromText OrderBy where
+instance FromText OrdersListOrderBy where
     fromText = \case
         "placedDate asc" -> Just PlacedDateAsc
         "placedDate desc" -> Just PlacedDateDesc
         _ -> Nothing
 
-instance ToText OrderBy where
+instance ToText OrdersListOrderBy where
     toText = \case
         PlacedDateAsc -> "placedDate asc"
         PlacedDateDesc -> "placedDate desc"
 
-instance FromJSON OrderBy where
-    parseJSON = parseJSONText "OrderBy"
+instance FromJSON OrdersListOrderBy where
+    parseJSON = parseJSONText "OrdersListOrderBy"
 
-instance ToJSON OrderBy where
+instance ToJSON OrdersListOrderBy where
     toJSON = toJSONText
 
 -- | Obtains orders that match any of the specified statuses. Multiple values
@@ -81,7 +81,7 @@ instance ToJSON OrderBy where
 -- active is a shortcut for pendingShipment and partiallyShipped, and
 -- completed is a shortcut for shipped , partiallyDelivered, delivered,
 -- partiallyReturned, returned, and canceled.
-data Statuses
+data OrdersListStatuses
     = Active
       -- ^ @active@
     | Canceled
@@ -106,9 +106,9 @@ data Statuses
       -- ^ @shipped@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable Statuses
+instance Hashable OrdersListStatuses
 
-instance FromText Statuses where
+instance FromText OrdersListStatuses where
     fromText = \case
         "active" -> Just Active
         "canceled" -> Just Canceled
@@ -123,7 +123,7 @@ instance FromText Statuses where
         "shipped" -> Just Shipped
         _ -> Nothing
 
-instance ToText Statuses where
+instance ToText OrdersListStatuses where
     toText = \case
         Active -> "active"
         Canceled -> "canceled"
@@ -137,8 +137,8 @@ instance ToText Statuses where
         Returned -> "returned"
         Shipped -> "shipped"
 
-instance FromJSON Statuses where
-    parseJSON = parseJSONText "Statuses"
+instance FromJSON OrdersListStatuses where
+    parseJSON = parseJSONText "OrdersListStatuses"
 
-instance ToJSON Statuses where
+instance ToJSON OrdersListStatuses where
     toJSON = toJSONText

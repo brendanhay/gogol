@@ -35,7 +35,7 @@ module Network.Google.Resource.DFAReporting.LandingPages.List
     , lplPrettyPrint
     , lplUserIP
     , lplCampaignId
-    , lplProfileId
+    , lplProFileId
     , lplKey
     , lplOAuthToken
     , lplFields
@@ -69,7 +69,7 @@ data LandingPagesList' = LandingPagesList'
     , _lplPrettyPrint :: !Bool
     , _lplUserIP      :: !(Maybe Text)
     , _lplCampaignId  :: !Int64
-    , _lplProfileId   :: !Int64
+    , _lplProFileId   :: !Int64
     , _lplKey         :: !(Maybe Key)
     , _lplOAuthToken  :: !(Maybe OAuthToken)
     , _lplFields      :: !(Maybe Text)
@@ -87,7 +87,7 @@ data LandingPagesList' = LandingPagesList'
 --
 -- * 'lplCampaignId'
 --
--- * 'lplProfileId'
+-- * 'lplProFileId'
 --
 -- * 'lplKey'
 --
@@ -98,13 +98,13 @@ landingPagesList'
     :: Int64 -- ^ 'campaignId'
     -> Int64 -- ^ 'profileId'
     -> LandingPagesList'
-landingPagesList' pLplCampaignId_ pLplProfileId_ =
+landingPagesList' pLplCampaignId_ pLplProFileId_ =
     LandingPagesList'
     { _lplQuotaUser = Nothing
     , _lplPrettyPrint = True
     , _lplUserIP = Nothing
     , _lplCampaignId = pLplCampaignId_
-    , _lplProfileId = pLplProfileId_
+    , _lplProFileId = pLplProFileId_
     , _lplKey = Nothing
     , _lplOAuthToken = Nothing
     , _lplFields = Nothing
@@ -136,9 +136,9 @@ lplCampaignId
       (\ s a -> s{_lplCampaignId = a})
 
 -- | User profile ID associated with this request.
-lplProfileId :: Lens' LandingPagesList' Int64
-lplProfileId
-  = lens _lplProfileId (\ s a -> s{_lplProfileId = a})
+lplProFileId :: Lens' LandingPagesList' Int64
+lplProFileId
+  = lens _lplProFileId (\ s a -> s{_lplProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -165,7 +165,7 @@ instance GoogleRequest LandingPagesList' where
         type Rs LandingPagesList' = LandingPagesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u LandingPagesList'{..}
-          = go _lplProfileId _lplCampaignId _lplQuotaUser
+          = go _lplProFileId _lplCampaignId _lplQuotaUser
               (Just _lplPrettyPrint)
               _lplUserIP
               _lplFields

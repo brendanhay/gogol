@@ -71,6 +71,59 @@ instance ToJSON ModifyThreadRequest where
                  [("removeLabelIds" .=) <$> _mtrRemoveLabelIds,
                   ("addLabelIds" .=) <$> _mtrAddLabelIds])
 
+--
+-- /See:/ 'modifyMessageRequest' smart constructor.
+data ModifyMessageRequest = ModifyMessageRequest
+    { _mmrRemoveLabelIds :: !(Maybe [Text])
+    , _mmrAddLabelIds    :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ModifyMessageRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mmrRemoveLabelIds'
+--
+-- * 'mmrAddLabelIds'
+modifyMessageRequest
+    :: ModifyMessageRequest
+modifyMessageRequest =
+    ModifyMessageRequest
+    { _mmrRemoveLabelIds = Nothing
+    , _mmrAddLabelIds = Nothing
+    }
+
+-- | A list IDs of labels to remove from this message.
+mmrRemoveLabelIds :: Lens' ModifyMessageRequest [Text]
+mmrRemoveLabelIds
+  = lens _mmrRemoveLabelIds
+      (\ s a -> s{_mmrRemoveLabelIds = a})
+      . _Default
+      . _Coerce
+
+-- | A list of IDs of labels to add to this message.
+mmrAddLabelIds :: Lens' ModifyMessageRequest [Text]
+mmrAddLabelIds
+  = lens _mmrAddLabelIds
+      (\ s a -> s{_mmrAddLabelIds = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ModifyMessageRequest where
+        parseJSON
+          = withObject "ModifyMessageRequest"
+              (\ o ->
+                 ModifyMessageRequest <$>
+                   (o .:? "removeLabelIds" .!= mempty) <*>
+                     (o .:? "addLabelIds" .!= mempty))
+
+instance ToJSON ModifyMessageRequest where
+        toJSON ModifyMessageRequest{..}
+          = object
+              (catMaybes
+                 [("removeLabelIds" .=) <$> _mmrRemoveLabelIds,
+                  ("addLabelIds" .=) <$> _mmrAddLabelIds])
+
 -- | A record of a change to the user\'s mailbox. Each history change may
 -- affect multiple messages in multiple ways.
 --
@@ -178,58 +231,122 @@ instance ToJSON History where
                   ("labelsAdded" .=) <$> _hLabelsAdded,
                   ("id" .=) <$> _hId, ("messages" .=) <$> _hMessages])
 
+-- | Profile for a Gmail user.
 --
--- /See:/ 'modifyMessageRequest' smart constructor.
-data ModifyMessageRequest = ModifyMessageRequest
-    { _mmrRemoveLabelIds :: !(Maybe [Text])
-    , _mmrAddLabelIds    :: !(Maybe [Text])
+-- /See:/ 'proFile' smart constructor.
+data ProFile = ProFile
+    { _pfMessagesTotal :: !(Maybe Int32)
+    , _pfThreadsTotal  :: !(Maybe Int32)
+    , _pfHistoryId     :: !(Maybe Word64)
+    , _pfEmailAddress  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ModifyMessageRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'ProFile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mmrRemoveLabelIds'
+-- * 'pfMessagesTotal'
 --
--- * 'mmrAddLabelIds'
-modifyMessageRequest
-    :: ModifyMessageRequest
-modifyMessageRequest =
-    ModifyMessageRequest
-    { _mmrRemoveLabelIds = Nothing
-    , _mmrAddLabelIds = Nothing
+-- * 'pfThreadsTotal'
+--
+-- * 'pfHistoryId'
+--
+-- * 'pfEmailAddress'
+proFile
+    :: ProFile
+proFile =
+    ProFile
+    { _pfMessagesTotal = Nothing
+    , _pfThreadsTotal = Nothing
+    , _pfHistoryId = Nothing
+    , _pfEmailAddress = Nothing
     }
 
--- | A list IDs of labels to remove from this message.
-mmrRemoveLabelIds :: Lens' ModifyMessageRequest [Text]
-mmrRemoveLabelIds
-  = lens _mmrRemoveLabelIds
-      (\ s a -> s{_mmrRemoveLabelIds = a})
-      . _Default
-      . _Coerce
+-- | The total number of messages in the mailbox.
+pfMessagesTotal :: Lens' ProFile (Maybe Int32)
+pfMessagesTotal
+  = lens _pfMessagesTotal
+      (\ s a -> s{_pfMessagesTotal = a})
 
--- | A list of IDs of labels to add to this message.
-mmrAddLabelIds :: Lens' ModifyMessageRequest [Text]
-mmrAddLabelIds
-  = lens _mmrAddLabelIds
-      (\ s a -> s{_mmrAddLabelIds = a})
-      . _Default
-      . _Coerce
+-- | The total number of threads in the mailbox.
+pfThreadsTotal :: Lens' ProFile (Maybe Int32)
+pfThreadsTotal
+  = lens _pfThreadsTotal
+      (\ s a -> s{_pfThreadsTotal = a})
 
-instance FromJSON ModifyMessageRequest where
+-- | The ID of the mailbox\'s current history record.
+pfHistoryId :: Lens' ProFile (Maybe Word64)
+pfHistoryId
+  = lens _pfHistoryId (\ s a -> s{_pfHistoryId = a})
+
+-- | The user\'s email address.
+pfEmailAddress :: Lens' ProFile (Maybe Text)
+pfEmailAddress
+  = lens _pfEmailAddress
+      (\ s a -> s{_pfEmailAddress = a})
+
+instance FromJSON ProFile where
         parseJSON
-          = withObject "ModifyMessageRequest"
+          = withObject "ProFile"
               (\ o ->
-                 ModifyMessageRequest <$>
-                   (o .:? "removeLabelIds" .!= mempty) <*>
-                     (o .:? "addLabelIds" .!= mempty))
+                 ProFile <$>
+                   (o .:? "messagesTotal") <*> (o .:? "threadsTotal")
+                     <*> (o .:? "historyId")
+                     <*> (o .:? "emailAddress"))
 
-instance ToJSON ModifyMessageRequest where
-        toJSON ModifyMessageRequest{..}
+instance ToJSON ProFile where
+        toJSON ProFile{..}
           = object
               (catMaybes
-                 [("removeLabelIds" .=) <$> _mmrRemoveLabelIds,
-                  ("addLabelIds" .=) <$> _mmrAddLabelIds])
+                 [("messagesTotal" .=) <$> _pfMessagesTotal,
+                  ("threadsTotal" .=) <$> _pfThreadsTotal,
+                  ("historyId" .=) <$> _pfHistoryId,
+                  ("emailAddress" .=) <$> _pfEmailAddress])
+
+--
+-- /See:/ 'messagePartHeader' smart constructor.
+data MessagePartHeader = MessagePartHeader
+    { _mphValue :: !(Maybe Text)
+    , _mphName  :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MessagePartHeader' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mphValue'
+--
+-- * 'mphName'
+messagePartHeader
+    :: MessagePartHeader
+messagePartHeader =
+    MessagePartHeader
+    { _mphValue = Nothing
+    , _mphName = Nothing
+    }
+
+-- | The value of the header after the : separator. For example,
+-- someuser\'example.com.
+mphValue :: Lens' MessagePartHeader (Maybe Text)
+mphValue = lens _mphValue (\ s a -> s{_mphValue = a})
+
+-- | The name of the header before the : separator. For example, To.
+mphName :: Lens' MessagePartHeader (Maybe Text)
+mphName = lens _mphName (\ s a -> s{_mphName = a})
+
+instance FromJSON MessagePartHeader where
+        parseJSON
+          = withObject "MessagePartHeader"
+              (\ o ->
+                 MessagePartHeader <$>
+                   (o .:? "value") <*> (o .:? "name"))
+
+instance ToJSON MessagePartHeader where
+        toJSON MessagePartHeader{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _mphValue,
+                  ("name" .=) <$> _mphName])
 
 --
 -- /See:/ 'listHistoryResponse' smart constructor.
@@ -294,154 +411,6 @@ instance ToJSON ListHistoryResponse where
                   ("historyId" .=) <$> _lhrHistoryId])
 
 --
--- /See:/ 'messagePartHeader' smart constructor.
-data MessagePartHeader = MessagePartHeader
-    { _mphValue :: !(Maybe Text)
-    , _mphName  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'MessagePartHeader' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'mphValue'
---
--- * 'mphName'
-messagePartHeader
-    :: MessagePartHeader
-messagePartHeader =
-    MessagePartHeader
-    { _mphValue = Nothing
-    , _mphName = Nothing
-    }
-
--- | The value of the header after the : separator. For example,
--- someuser\'example.com.
-mphValue :: Lens' MessagePartHeader (Maybe Text)
-mphValue = lens _mphValue (\ s a -> s{_mphValue = a})
-
--- | The name of the header before the : separator. For example, To.
-mphName :: Lens' MessagePartHeader (Maybe Text)
-mphName = lens _mphName (\ s a -> s{_mphName = a})
-
-instance FromJSON MessagePartHeader where
-        parseJSON
-          = withObject "MessagePartHeader"
-              (\ o ->
-                 MessagePartHeader <$>
-                   (o .:? "value") <*> (o .:? "name"))
-
-instance ToJSON MessagePartHeader where
-        toJSON MessagePartHeader{..}
-          = object
-              (catMaybes
-                 [("value" .=) <$> _mphValue,
-                  ("name" .=) <$> _mphName])
-
--- | Profile for a Gmail user.
---
--- /See:/ 'profile' smart constructor.
-data Profile = Profile
-    { _pMessagesTotal :: !(Maybe Int32)
-    , _pThreadsTotal  :: !(Maybe Int32)
-    , _pHistoryId     :: !(Maybe Word64)
-    , _pEmailAddress  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Profile' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pMessagesTotal'
---
--- * 'pThreadsTotal'
---
--- * 'pHistoryId'
---
--- * 'pEmailAddress'
-profile
-    :: Profile
-profile =
-    Profile
-    { _pMessagesTotal = Nothing
-    , _pThreadsTotal = Nothing
-    , _pHistoryId = Nothing
-    , _pEmailAddress = Nothing
-    }
-
--- | The total number of messages in the mailbox.
-pMessagesTotal :: Lens' Profile (Maybe Int32)
-pMessagesTotal
-  = lens _pMessagesTotal
-      (\ s a -> s{_pMessagesTotal = a})
-
--- | The total number of threads in the mailbox.
-pThreadsTotal :: Lens' Profile (Maybe Int32)
-pThreadsTotal
-  = lens _pThreadsTotal
-      (\ s a -> s{_pThreadsTotal = a})
-
--- | The ID of the mailbox\'s current history record.
-pHistoryId :: Lens' Profile (Maybe Word64)
-pHistoryId
-  = lens _pHistoryId (\ s a -> s{_pHistoryId = a})
-
--- | The user\'s email address.
-pEmailAddress :: Lens' Profile (Maybe Text)
-pEmailAddress
-  = lens _pEmailAddress
-      (\ s a -> s{_pEmailAddress = a})
-
-instance FromJSON Profile where
-        parseJSON
-          = withObject "Profile"
-              (\ o ->
-                 Profile <$>
-                   (o .:? "messagesTotal") <*> (o .:? "threadsTotal")
-                     <*> (o .:? "historyId")
-                     <*> (o .:? "emailAddress"))
-
-instance ToJSON Profile where
-        toJSON Profile{..}
-          = object
-              (catMaybes
-                 [("messagesTotal" .=) <$> _pMessagesTotal,
-                  ("threadsTotal" .=) <$> _pThreadsTotal,
-                  ("historyId" .=) <$> _pHistoryId,
-                  ("emailAddress" .=) <$> _pEmailAddress])
-
---
--- /See:/ 'historyMessageDeleted' smart constructor.
-newtype HistoryMessageDeleted = HistoryMessageDeleted
-    { _hmdMessage :: Maybe Message
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'HistoryMessageDeleted' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'hmdMessage'
-historyMessageDeleted
-    :: HistoryMessageDeleted
-historyMessageDeleted =
-    HistoryMessageDeleted
-    { _hmdMessage = Nothing
-    }
-
-hmdMessage :: Lens' HistoryMessageDeleted (Maybe Message)
-hmdMessage
-  = lens _hmdMessage (\ s a -> s{_hmdMessage = a})
-
-instance FromJSON HistoryMessageDeleted where
-        parseJSON
-          = withObject "HistoryMessageDeleted"
-              (\ o -> HistoryMessageDeleted <$> (o .:? "message"))
-
-instance ToJSON HistoryMessageDeleted where
-        toJSON HistoryMessageDeleted{..}
-          = object (catMaybes [("message" .=) <$> _hmdMessage])
-
---
 -- /See:/ 'listThreadsResponse' smart constructor.
 data ListThreadsResponse = ListThreadsResponse
     { _ltrNextPageToken      :: !(Maybe Text)
@@ -502,88 +471,6 @@ instance ToJSON ListThreadsResponse where
                  [("nextPageToken" .=) <$> _ltrNextPageToken,
                   ("resultSizeEstimate" .=) <$> _ltrResultSizeEstimate,
                   ("threads" .=) <$> _ltrThreads])
-
---
--- /See:/ 'historyLabelAdded' smart constructor.
-data HistoryLabelAdded = HistoryLabelAdded
-    { _hlaLabelIds :: !(Maybe [Text])
-    , _hlaMessage  :: !(Maybe Message)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'HistoryLabelAdded' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'hlaLabelIds'
---
--- * 'hlaMessage'
-historyLabelAdded
-    :: HistoryLabelAdded
-historyLabelAdded =
-    HistoryLabelAdded
-    { _hlaLabelIds = Nothing
-    , _hlaMessage = Nothing
-    }
-
--- | Label IDs added to the message.
-hlaLabelIds :: Lens' HistoryLabelAdded [Text]
-hlaLabelIds
-  = lens _hlaLabelIds (\ s a -> s{_hlaLabelIds = a}) .
-      _Default
-      . _Coerce
-
-hlaMessage :: Lens' HistoryLabelAdded (Maybe Message)
-hlaMessage
-  = lens _hlaMessage (\ s a -> s{_hlaMessage = a})
-
-instance FromJSON HistoryLabelAdded where
-        parseJSON
-          = withObject "HistoryLabelAdded"
-              (\ o ->
-                 HistoryLabelAdded <$>
-                   (o .:? "labelIds" .!= mempty) <*> (o .:? "message"))
-
-instance ToJSON HistoryLabelAdded where
-        toJSON HistoryLabelAdded{..}
-          = object
-              (catMaybes
-                 [("labelIds" .=) <$> _hlaLabelIds,
-                  ("message" .=) <$> _hlaMessage])
-
---
--- /See:/ 'listLabelsResponse' smart constructor.
-newtype ListLabelsResponse = ListLabelsResponse
-    { _llrLabels :: Maybe [Label]
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ListLabelsResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'llrLabels'
-listLabelsResponse
-    :: ListLabelsResponse
-listLabelsResponse =
-    ListLabelsResponse
-    { _llrLabels = Nothing
-    }
-
--- | List of labels.
-llrLabels :: Lens' ListLabelsResponse [Label]
-llrLabels
-  = lens _llrLabels (\ s a -> s{_llrLabels = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON ListLabelsResponse where
-        parseJSON
-          = withObject "ListLabelsResponse"
-              (\ o ->
-                 ListLabelsResponse <$> (o .:? "labels" .!= mempty))
-
-instance ToJSON ListLabelsResponse where
-        toJSON ListLabelsResponse{..}
-          = object (catMaybes [("labels" .=) <$> _llrLabels])
 
 -- | A single MIME message part.
 --
@@ -682,6 +569,119 @@ instance ToJSON MessagePart where
                   ("headers" .=) <$> _mpHeaders,
                   ("partId" .=) <$> _mpPartId,
                   ("filename" .=) <$> _mpFilename])
+
+--
+-- /See:/ 'historyLabelAdded' smart constructor.
+data HistoryLabelAdded = HistoryLabelAdded
+    { _hlaLabelIds :: !(Maybe [Text])
+    , _hlaMessage  :: !(Maybe Message)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'HistoryLabelAdded' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'hlaLabelIds'
+--
+-- * 'hlaMessage'
+historyLabelAdded
+    :: HistoryLabelAdded
+historyLabelAdded =
+    HistoryLabelAdded
+    { _hlaLabelIds = Nothing
+    , _hlaMessage = Nothing
+    }
+
+-- | Label IDs added to the message.
+hlaLabelIds :: Lens' HistoryLabelAdded [Text]
+hlaLabelIds
+  = lens _hlaLabelIds (\ s a -> s{_hlaLabelIds = a}) .
+      _Default
+      . _Coerce
+
+hlaMessage :: Lens' HistoryLabelAdded (Maybe Message)
+hlaMessage
+  = lens _hlaMessage (\ s a -> s{_hlaMessage = a})
+
+instance FromJSON HistoryLabelAdded where
+        parseJSON
+          = withObject "HistoryLabelAdded"
+              (\ o ->
+                 HistoryLabelAdded <$>
+                   (o .:? "labelIds" .!= mempty) <*> (o .:? "message"))
+
+instance ToJSON HistoryLabelAdded where
+        toJSON HistoryLabelAdded{..}
+          = object
+              (catMaybes
+                 [("labelIds" .=) <$> _hlaLabelIds,
+                  ("message" .=) <$> _hlaMessage])
+
+--
+-- /See:/ 'listLabelsResponse' smart constructor.
+newtype ListLabelsResponse = ListLabelsResponse
+    { _llrLabels :: Maybe [Label]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListLabelsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'llrLabels'
+listLabelsResponse
+    :: ListLabelsResponse
+listLabelsResponse =
+    ListLabelsResponse
+    { _llrLabels = Nothing
+    }
+
+-- | List of labels.
+llrLabels :: Lens' ListLabelsResponse [Label]
+llrLabels
+  = lens _llrLabels (\ s a -> s{_llrLabels = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ListLabelsResponse where
+        parseJSON
+          = withObject "ListLabelsResponse"
+              (\ o ->
+                 ListLabelsResponse <$> (o .:? "labels" .!= mempty))
+
+instance ToJSON ListLabelsResponse where
+        toJSON ListLabelsResponse{..}
+          = object (catMaybes [("labels" .=) <$> _llrLabels])
+
+--
+-- /See:/ 'historyMessageDeleted' smart constructor.
+newtype HistoryMessageDeleted = HistoryMessageDeleted
+    { _hmdMessage :: Maybe Message
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'HistoryMessageDeleted' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'hmdMessage'
+historyMessageDeleted
+    :: HistoryMessageDeleted
+historyMessageDeleted =
+    HistoryMessageDeleted
+    { _hmdMessage = Nothing
+    }
+
+hmdMessage :: Lens' HistoryMessageDeleted (Maybe Message)
+hmdMessage
+  = lens _hmdMessage (\ s a -> s{_hmdMessage = a})
+
+instance FromJSON HistoryMessageDeleted where
+        parseJSON
+          = withObject "HistoryMessageDeleted"
+              (\ o -> HistoryMessageDeleted <$> (o .:? "message"))
+
+instance ToJSON HistoryMessageDeleted where
+        toJSON HistoryMessageDeleted{..}
+          = object (catMaybes [("message" .=) <$> _hmdMessage])
 
 -- | The body of a single MIME message part.
 --
@@ -901,7 +901,7 @@ instance ToJSON Draft where
 --
 -- /See:/ 'watchRequest' smart constructor.
 data WatchRequest = WatchRequest
-    { _wrLabelFilterAction :: !(Maybe LabelFilterAction)
+    { _wrLabelFilterAction :: !(Maybe WatchRequestLabelFilterAction)
     , _wrTopicName         :: !(Maybe Text)
     , _wrLabelIds          :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -925,7 +925,7 @@ watchRequest =
     }
 
 -- | Filtering behavior of labelIds list specified.
-wrLabelFilterAction :: Lens' WatchRequest (Maybe LabelFilterAction)
+wrLabelFilterAction :: Lens' WatchRequest (Maybe WatchRequestLabelFilterAction)
 wrLabelFilterAction
   = lens _wrLabelFilterAction
       (\ s a -> s{_wrLabelFilterAction = a})
@@ -1099,6 +1099,53 @@ instance ToJSON Message where
                   ("threadId" .=) <$> _mThreadId,
                   ("internalDate" .=) <$> _mInternalDate])
 
+--
+-- /See:/ 'historyLabelRemoved' smart constructor.
+data HistoryLabelRemoved = HistoryLabelRemoved
+    { _hlrLabelIds :: !(Maybe [Text])
+    , _hlrMessage  :: !(Maybe Message)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'HistoryLabelRemoved' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'hlrLabelIds'
+--
+-- * 'hlrMessage'
+historyLabelRemoved
+    :: HistoryLabelRemoved
+historyLabelRemoved =
+    HistoryLabelRemoved
+    { _hlrLabelIds = Nothing
+    , _hlrMessage = Nothing
+    }
+
+-- | Label IDs removed from the message.
+hlrLabelIds :: Lens' HistoryLabelRemoved [Text]
+hlrLabelIds
+  = lens _hlrLabelIds (\ s a -> s{_hlrLabelIds = a}) .
+      _Default
+      . _Coerce
+
+hlrMessage :: Lens' HistoryLabelRemoved (Maybe Message)
+hlrMessage
+  = lens _hlrMessage (\ s a -> s{_hlrMessage = a})
+
+instance FromJSON HistoryLabelRemoved where
+        parseJSON
+          = withObject "HistoryLabelRemoved"
+              (\ o ->
+                 HistoryLabelRemoved <$>
+                   (o .:? "labelIds" .!= mempty) <*> (o .:? "message"))
+
+instance ToJSON HistoryLabelRemoved where
+        toJSON HistoryLabelRemoved{..}
+          = object
+              (catMaybes
+                 [("labelIds" .=) <$> _hlrLabelIds,
+                  ("message" .=) <$> _hlrMessage])
+
 -- | A collection of messages representing a conversation.
 --
 -- /See:/ 'thread' smart constructor.
@@ -1173,14 +1220,14 @@ instance ToJSON Thread where
 -- /See:/ 'label' smart constructor.
 data Label = Label
     { _lThreadsUnread         :: !(Maybe Int32)
-    , _lMessageListVisibility :: !(Maybe MessageListVisibility)
+    , _lMessageListVisibility :: !(Maybe LabelMessageListVisibility)
     , _lMessagesTotal         :: !(Maybe Int32)
     , _lMessagesUnread        :: !(Maybe Int32)
     , _lName                  :: !(Maybe Text)
     , _lThreadsTotal          :: !(Maybe Int32)
-    , _lLabelListVisibility   :: !(Maybe LabelListVisibility)
+    , _lLabelListVisibility   :: !(Maybe LabelLabelListVisibility)
     , _lId                    :: !(Maybe Text)
-    , _lType                  :: !(Maybe Type)
+    , _lType                  :: !(Maybe LabelType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Label' with the minimum fields required to make a request.
@@ -1227,7 +1274,7 @@ lThreadsUnread
 
 -- | The visibility of the label in the message list in the Gmail web
 -- interface.
-lMessageListVisibility :: Lens' Label (Maybe MessageListVisibility)
+lMessageListVisibility :: Lens' Label (Maybe LabelMessageListVisibility)
 lMessageListVisibility
   = lens _lMessageListVisibility
       (\ s a -> s{_lMessageListVisibility = a})
@@ -1256,7 +1303,7 @@ lThreadsTotal
 
 -- | The visibility of the label in the label list in the Gmail web
 -- interface.
-lLabelListVisibility :: Lens' Label (Maybe LabelListVisibility)
+lLabelListVisibility :: Lens' Label (Maybe LabelLabelListVisibility)
 lLabelListVisibility
   = lens _lLabelListVisibility
       (\ s a -> s{_lLabelListVisibility = a})
@@ -1273,7 +1320,7 @@ lId = lens _lId (\ s a -> s{_lId = a})
 -- is not guaranteed. For example, users can apply and remove the INBOX and
 -- UNREAD labels from messages and threads, but cannot apply or remove the
 -- DRAFTS or SENT labels from messages or threads.
-lType :: Lens' Label (Maybe Type)
+lType :: Lens' Label (Maybe LabelType)
 lType = lens _lType (\ s a -> s{_lType = a})
 
 instance FromJSON Label where
@@ -1304,84 +1351,6 @@ instance ToJSON Label where
                   ("threadsTotal" .=) <$> _lThreadsTotal,
                   ("labelListVisibility" .=) <$> _lLabelListVisibility,
                   ("id" .=) <$> _lId, ("type" .=) <$> _lType])
-
---
--- /See:/ 'historyLabelRemoved' smart constructor.
-data HistoryLabelRemoved = HistoryLabelRemoved
-    { _hlrLabelIds :: !(Maybe [Text])
-    , _hlrMessage  :: !(Maybe Message)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'HistoryLabelRemoved' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'hlrLabelIds'
---
--- * 'hlrMessage'
-historyLabelRemoved
-    :: HistoryLabelRemoved
-historyLabelRemoved =
-    HistoryLabelRemoved
-    { _hlrLabelIds = Nothing
-    , _hlrMessage = Nothing
-    }
-
--- | Label IDs removed from the message.
-hlrLabelIds :: Lens' HistoryLabelRemoved [Text]
-hlrLabelIds
-  = lens _hlrLabelIds (\ s a -> s{_hlrLabelIds = a}) .
-      _Default
-      . _Coerce
-
-hlrMessage :: Lens' HistoryLabelRemoved (Maybe Message)
-hlrMessage
-  = lens _hlrMessage (\ s a -> s{_hlrMessage = a})
-
-instance FromJSON HistoryLabelRemoved where
-        parseJSON
-          = withObject "HistoryLabelRemoved"
-              (\ o ->
-                 HistoryLabelRemoved <$>
-                   (o .:? "labelIds" .!= mempty) <*> (o .:? "message"))
-
-instance ToJSON HistoryLabelRemoved where
-        toJSON HistoryLabelRemoved{..}
-          = object
-              (catMaybes
-                 [("labelIds" .=) <$> _hlrLabelIds,
-                  ("message" .=) <$> _hlrMessage])
-
---
--- /See:/ 'historyMessageAdded' smart constructor.
-newtype HistoryMessageAdded = HistoryMessageAdded
-    { _hmaMessage :: Maybe Message
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'HistoryMessageAdded' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'hmaMessage'
-historyMessageAdded
-    :: HistoryMessageAdded
-historyMessageAdded =
-    HistoryMessageAdded
-    { _hmaMessage = Nothing
-    }
-
-hmaMessage :: Lens' HistoryMessageAdded (Maybe Message)
-hmaMessage
-  = lens _hmaMessage (\ s a -> s{_hmaMessage = a})
-
-instance FromJSON HistoryMessageAdded where
-        parseJSON
-          = withObject "HistoryMessageAdded"
-              (\ o -> HistoryMessageAdded <$> (o .:? "message"))
-
-instance ToJSON HistoryMessageAdded where
-        toJSON HistoryMessageAdded{..}
-          = object (catMaybes [("message" .=) <$> _hmaMessage])
 
 --
 -- /See:/ 'listMessagesResponse' smart constructor.
@@ -1444,3 +1413,34 @@ instance ToJSON ListMessagesResponse where
                  [("nextPageToken" .=) <$> _lmrNextPageToken,
                   ("resultSizeEstimate" .=) <$> _lmrResultSizeEstimate,
                   ("messages" .=) <$> _lmrMessages])
+
+--
+-- /See:/ 'historyMessageAdded' smart constructor.
+newtype HistoryMessageAdded = HistoryMessageAdded
+    { _hmaMessage :: Maybe Message
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'HistoryMessageAdded' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'hmaMessage'
+historyMessageAdded
+    :: HistoryMessageAdded
+historyMessageAdded =
+    HistoryMessageAdded
+    { _hmaMessage = Nothing
+    }
+
+hmaMessage :: Lens' HistoryMessageAdded (Maybe Message)
+hmaMessage
+  = lens _hmaMessage (\ s a -> s{_hmaMessage = a})
+
+instance FromJSON HistoryMessageAdded where
+        parseJSON
+          = withObject "HistoryMessageAdded"
+              (\ o -> HistoryMessageAdded <$> (o .:? "message"))
+
+instance ToJSON HistoryMessageAdded where
+        toJSON HistoryMessageAdded{..}
+          = object (catMaybes [("message" .=) <$> _hmaMessage])

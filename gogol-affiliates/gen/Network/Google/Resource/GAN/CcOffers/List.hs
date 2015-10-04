@@ -52,7 +52,7 @@ type CcOffersListResource =
        Capture "publisher" Text :>
          "ccOffers" :>
            QueryParams "advertiser" Text :>
-             QueryParam "projection" Projection :>
+             QueryParam "projection" CcOffersListProjection :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -70,7 +70,7 @@ data CcOffersList' = CcOffersList'
     , _colUserIP      :: !(Maybe Text)
     , _colKey         :: !(Maybe Key)
     , _colAdvertiser  :: !(Maybe [Text])
-    , _colProjection  :: !(Maybe Projection)
+    , _colProjection  :: !(Maybe CcOffersListProjection)
     , _colOAuthToken  :: !(Maybe OAuthToken)
     , _colPublisher   :: !Text
     , _colFields      :: !(Maybe Text)
@@ -148,7 +148,7 @@ colAdvertiser
       . _Coerce
 
 -- | The set of fields to return.
-colProjection :: Lens' CcOffersList' (Maybe Projection)
+colProjection :: Lens' CcOffersList' (Maybe CcOffersListProjection)
 colProjection
   = lens _colProjection
       (\ s a -> s{_colProjection = a})

@@ -52,7 +52,7 @@ type CommentsListResource =
      "activities" :>
        Capture "activityId" Text :>
          "comments" :>
-           QueryParam "sortOrder" SortOrder :>
+           QueryParam "sortOrder" CommentsListSortOrder :>
              QueryParam "pageToken" Text :>
                QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
@@ -71,7 +71,7 @@ data CommentsList' = CommentsList'
     , _clPrettyPrint :: !Bool
     , _clUserIP      :: !(Maybe Text)
     , _clActivityId  :: !Text
-    , _clSortOrder   :: !SortOrder
+    , _clSortOrder   :: !CommentsListSortOrder
     , _clKey         :: !(Maybe Key)
     , _clPageToken   :: !(Maybe Text)
     , _clOAuthToken  :: !(Maybe OAuthToken)
@@ -143,7 +143,7 @@ clActivityId
   = lens _clActivityId (\ s a -> s{_clActivityId = a})
 
 -- | The order in which to sort the list of comments.
-clSortOrder :: Lens' CommentsList' SortOrder
+clSortOrder :: Lens' CommentsList' CommentsListSortOrder
 clSortOrder
   = lens _clSortOrder (\ s a -> s{_clSortOrder = a})
 

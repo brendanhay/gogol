@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.FloodlightConfigurations.Update
     , fcuQuotaUser
     , fcuPrettyPrint
     , fcuUserIP
-    , fcuProfileId
+    , fcuProFileId
     , fcuPayload
     , fcuKey
     , fcuOAuthToken
@@ -57,7 +57,7 @@ type FloodlightConfigurationsUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] FloodlightConfiguration :>
+                         ReqBody '[OctetStream] FloodlightConfiguration :>
                            Put '[JSON] FloodlightConfiguration
 
 -- | Updates an existing floodlight configuration.
@@ -67,7 +67,7 @@ data FloodlightConfigurationsUpdate' = FloodlightConfigurationsUpdate'
     { _fcuQuotaUser   :: !(Maybe Text)
     , _fcuPrettyPrint :: !Bool
     , _fcuUserIP      :: !(Maybe Text)
-    , _fcuProfileId   :: !Int64
+    , _fcuProFileId   :: !Int64
     , _fcuPayload     :: !FloodlightConfiguration
     , _fcuKey         :: !(Maybe Key)
     , _fcuOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data FloodlightConfigurationsUpdate' = FloodlightConfigurationsUpdate'
 --
 -- * 'fcuUserIP'
 --
--- * 'fcuProfileId'
+-- * 'fcuProFileId'
 --
 -- * 'fcuPayload'
 --
@@ -97,12 +97,12 @@ floodlightConfigurationsUpdate'
     :: Int64 -- ^ 'profileId'
     -> FloodlightConfiguration -- ^ 'payload'
     -> FloodlightConfigurationsUpdate'
-floodlightConfigurationsUpdate' pFcuProfileId_ pFcuPayload_ =
+floodlightConfigurationsUpdate' pFcuProFileId_ pFcuPayload_ =
     FloodlightConfigurationsUpdate'
     { _fcuQuotaUser = Nothing
     , _fcuPrettyPrint = True
     , _fcuUserIP = Nothing
-    , _fcuProfileId = pFcuProfileId_
+    , _fcuProFileId = pFcuProFileId_
     , _fcuPayload = pFcuPayload_
     , _fcuKey = Nothing
     , _fcuOAuthToken = Nothing
@@ -129,9 +129,9 @@ fcuUserIP
   = lens _fcuUserIP (\ s a -> s{_fcuUserIP = a})
 
 -- | User profile ID associated with this request.
-fcuProfileId :: Lens' FloodlightConfigurationsUpdate' Int64
-fcuProfileId
-  = lens _fcuProfileId (\ s a -> s{_fcuProfileId = a})
+fcuProFileId :: Lens' FloodlightConfigurationsUpdate' Int64
+fcuProFileId
+  = lens _fcuProFileId (\ s a -> s{_fcuProFileId = a})
 
 -- | Multipart request metadata.
 fcuPayload :: Lens' FloodlightConfigurationsUpdate' FloodlightConfiguration
@@ -167,7 +167,7 @@ instance GoogleRequest
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           FloodlightConfigurationsUpdate'{..}
-          = go _fcuProfileId _fcuQuotaUser
+          = go _fcuProFileId _fcuQuotaUser
               (Just _fcuPrettyPrint)
               _fcuUserIP
               _fcuFields

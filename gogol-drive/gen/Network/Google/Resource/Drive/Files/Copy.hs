@@ -58,7 +58,7 @@ type FilesCopyResource =
        Capture "fileId" Text :>
          "copy" :>
            QueryParam "pinned" Bool :>
-             QueryParam "visibility" DriveFilesCopyVisibility :>
+             QueryParam "visibility" FilesCopyVisibility :>
                QueryParam "timedTextLanguage" Text :>
                  QueryParam "timedTextTrackName" Text :>
                    QueryParam "ocrLanguage" Text :>
@@ -71,7 +71,8 @@ type FilesCopyResource =
                                  QueryParam "key" Key :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
-                                       ReqBody '[JSON] File :> Post '[JSON] File
+                                       ReqBody '[OctetStream] File :>
+                                         Post '[JSON] File
 
 -- | Creates a copy of the specified file.
 --
@@ -81,7 +82,7 @@ data FilesCopy' = FilesCopy'
     , _fcPrettyPrint        :: !Bool
     , _fcUserIP             :: !(Maybe Text)
     , _fcPinned             :: !Bool
-    , _fcVisibility         :: !DriveFilesCopyVisibility
+    , _fcVisibility         :: !FilesCopyVisibility
     , _fcTimedTextLanguage  :: !(Maybe Text)
     , _fcPayload            :: !File
     , _fcTimedTextTrackName :: !(Maybe Text)
@@ -137,7 +138,7 @@ filesCopy' pFcPayload_ pFcFileId_ =
     , _fcPrettyPrint = True
     , _fcUserIP = Nothing
     , _fcPinned = False
-    , _fcVisibility = Default
+    , _fcVisibility = FCVDefault
     , _fcTimedTextLanguage = Nothing
     , _fcPayload = pFcPayload_
     , _fcTimedTextTrackName = Nothing
@@ -175,7 +176,7 @@ fcPinned = lens _fcPinned (\ s a -> s{_fcPinned = a})
 
 -- | The visibility of the new file. This parameter is only relevant when the
 -- source is not a native Google Doc and convert=false.
-fcVisibility :: Lens' FilesCopy' DriveFilesCopyVisibility
+fcVisibility :: Lens' FilesCopy' FilesCopyVisibility
 fcVisibility
   = lens _fcVisibility (\ s a -> s{_fcVisibility = a})
 

@@ -56,7 +56,7 @@ type VariantsetsSearchResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] SearchVariantSetsRequest :>
+                       ReqBody '[OctetStream] SearchVariantSetsRequest :>
                          Post '[JSON] SearchVariantSetsResponse
 
 -- | Returns a list of all variant sets matching search criteria. Implements

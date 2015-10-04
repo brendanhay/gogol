@@ -33,9 +33,6 @@ module Network.Google.Translate.Types
     , languagesListResponse
     , llrLanguages
 
-    -- * Format
-    , Format (..)
-
     -- * DetectionsResourceItem
     , DetectionsResourceItem
     , detectionsResourceItem
@@ -48,6 +45,9 @@ module Network.Google.Translate.Types
     , languagesResource
     , lrName
     , lrLanguage
+
+    -- * TranslationsListFormat
+    , TranslationsListFormat (..)
 
     -- * TranslationsListResponse
     , TranslationsListResponse

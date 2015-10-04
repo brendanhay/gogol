@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Sizes.Insert
     , sQuotaUser
     , sPrettyPrint
     , sUserIP
-    , sProfileId
+    , sProFileId
     , sPayload
     , sKey
     , sOAuthToken
@@ -57,7 +57,7 @@ type SizesInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Size :> Post '[JSON] Size
+                         ReqBody '[OctetStream] Size :> Post '[JSON] Size
 
 -- | Inserts a new size.
 --
@@ -66,7 +66,7 @@ data SizesInsert' = SizesInsert'
     { _sQuotaUser   :: !(Maybe Text)
     , _sPrettyPrint :: !Bool
     , _sUserIP      :: !(Maybe Text)
-    , _sProfileId   :: !Int64
+    , _sProFileId   :: !Int64
     , _sPayload     :: !Size
     , _sKey         :: !(Maybe Key)
     , _sOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +83,7 @@ data SizesInsert' = SizesInsert'
 --
 -- * 'sUserIP'
 --
--- * 'sProfileId'
+-- * 'sProFileId'
 --
 -- * 'sPayload'
 --
@@ -96,12 +96,12 @@ sizesInsert'
     :: Int64 -- ^ 'profileId'
     -> Size -- ^ 'payload'
     -> SizesInsert'
-sizesInsert' pSProfileId_ pSPayload_ =
+sizesInsert' pSProFileId_ pSPayload_ =
     SizesInsert'
     { _sQuotaUser = Nothing
     , _sPrettyPrint = True
     , _sUserIP = Nothing
-    , _sProfileId = pSProfileId_
+    , _sProFileId = pSProFileId_
     , _sPayload = pSPayload_
     , _sKey = Nothing
     , _sOAuthToken = Nothing
@@ -126,9 +126,9 @@ sUserIP :: Lens' SizesInsert' (Maybe Text)
 sUserIP = lens _sUserIP (\ s a -> s{_sUserIP = a})
 
 -- | User profile ID associated with this request.
-sProfileId :: Lens' SizesInsert' Int64
-sProfileId
-  = lens _sProfileId (\ s a -> s{_sProfileId = a})
+sProFileId :: Lens' SizesInsert' Int64
+sProFileId
+  = lens _sProFileId (\ s a -> s{_sProFileId = a})
 
 -- | Multipart request metadata.
 sPayload :: Lens' SizesInsert' Size
@@ -157,7 +157,7 @@ instance GoogleRequest SizesInsert' where
         type Rs SizesInsert' = Size
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u SizesInsert'{..}
-          = go _sProfileId _sQuotaUser (Just _sPrettyPrint)
+          = go _sProFileId _sQuotaUser (Just _sPrettyPrint)
               _sUserIP
               _sFields
               _sKey

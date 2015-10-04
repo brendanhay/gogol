@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.RemarketingListShares.Update
     , rlsuQuotaUser
     , rlsuPrettyPrint
     , rlsuUserIP
-    , rlsuProfileId
+    , rlsuProFileId
     , rlsuPayload
     , rlsuKey
     , rlsuOAuthToken
@@ -57,7 +57,7 @@ type RemarketingListSharesUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] RemarketingListShare :>
+                         ReqBody '[OctetStream] RemarketingListShare :>
                            Put '[JSON] RemarketingListShare
 
 -- | Updates an existing remarketing list share.
@@ -67,7 +67,7 @@ data RemarketingListSharesUpdate' = RemarketingListSharesUpdate'
     { _rlsuQuotaUser   :: !(Maybe Text)
     , _rlsuPrettyPrint :: !Bool
     , _rlsuUserIP      :: !(Maybe Text)
-    , _rlsuProfileId   :: !Int64
+    , _rlsuProFileId   :: !Int64
     , _rlsuPayload     :: !RemarketingListShare
     , _rlsuKey         :: !(Maybe Key)
     , _rlsuOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data RemarketingListSharesUpdate' = RemarketingListSharesUpdate'
 --
 -- * 'rlsuUserIP'
 --
--- * 'rlsuProfileId'
+-- * 'rlsuProFileId'
 --
 -- * 'rlsuPayload'
 --
@@ -97,12 +97,12 @@ remarketingListSharesUpdate'
     :: Int64 -- ^ 'profileId'
     -> RemarketingListShare -- ^ 'payload'
     -> RemarketingListSharesUpdate'
-remarketingListSharesUpdate' pRlsuProfileId_ pRlsuPayload_ =
+remarketingListSharesUpdate' pRlsuProFileId_ pRlsuPayload_ =
     RemarketingListSharesUpdate'
     { _rlsuQuotaUser = Nothing
     , _rlsuPrettyPrint = True
     , _rlsuUserIP = Nothing
-    , _rlsuProfileId = pRlsuProfileId_
+    , _rlsuProFileId = pRlsuProFileId_
     , _rlsuPayload = pRlsuPayload_
     , _rlsuKey = Nothing
     , _rlsuOAuthToken = Nothing
@@ -130,10 +130,10 @@ rlsuUserIP
   = lens _rlsuUserIP (\ s a -> s{_rlsuUserIP = a})
 
 -- | User profile ID associated with this request.
-rlsuProfileId :: Lens' RemarketingListSharesUpdate' Int64
-rlsuProfileId
-  = lens _rlsuProfileId
-      (\ s a -> s{_rlsuProfileId = a})
+rlsuProFileId :: Lens' RemarketingListSharesUpdate' Int64
+rlsuProFileId
+  = lens _rlsuProFileId
+      (\ s a -> s{_rlsuProFileId = a})
 
 -- | Multipart request metadata.
 rlsuPayload :: Lens' RemarketingListSharesUpdate' RemarketingListShare
@@ -168,7 +168,7 @@ instance GoogleRequest RemarketingListSharesUpdate'
              RemarketingListShare
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u RemarketingListSharesUpdate'{..}
-          = go _rlsuProfileId _rlsuQuotaUser
+          = go _rlsuProFileId _rlsuQuotaUser
               (Just _rlsuPrettyPrint)
               _rlsuUserIP
               _rlsuFields

@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Campaigns.Update
     , cuQuotaUser
     , cuPrettyPrint
     , cuUserIP
-    , cuProfileId
+    , cuProFileId
     , cuPayload
     , cuKey
     , cuOAuthToken
@@ -57,7 +57,8 @@ type CampaignsUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Campaign :> Put '[JSON] Campaign
+                         ReqBody '[OctetStream] Campaign :>
+                           Put '[JSON] Campaign
 
 -- | Updates an existing campaign.
 --
@@ -66,7 +67,7 @@ data CampaignsUpdate' = CampaignsUpdate'
     { _cuQuotaUser   :: !(Maybe Text)
     , _cuPrettyPrint :: !Bool
     , _cuUserIP      :: !(Maybe Text)
-    , _cuProfileId   :: !Int64
+    , _cuProFileId   :: !Int64
     , _cuPayload     :: !Campaign
     , _cuKey         :: !(Maybe Key)
     , _cuOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +84,7 @@ data CampaignsUpdate' = CampaignsUpdate'
 --
 -- * 'cuUserIP'
 --
--- * 'cuProfileId'
+-- * 'cuProFileId'
 --
 -- * 'cuPayload'
 --
@@ -96,12 +97,12 @@ campaignsUpdate'
     :: Int64 -- ^ 'profileId'
     -> Campaign -- ^ 'payload'
     -> CampaignsUpdate'
-campaignsUpdate' pCuProfileId_ pCuPayload_ =
+campaignsUpdate' pCuProFileId_ pCuPayload_ =
     CampaignsUpdate'
     { _cuQuotaUser = Nothing
     , _cuPrettyPrint = True
     , _cuUserIP = Nothing
-    , _cuProfileId = pCuProfileId_
+    , _cuProFileId = pCuProFileId_
     , _cuPayload = pCuPayload_
     , _cuKey = Nothing
     , _cuOAuthToken = Nothing
@@ -127,9 +128,9 @@ cuUserIP :: Lens' CampaignsUpdate' (Maybe Text)
 cuUserIP = lens _cuUserIP (\ s a -> s{_cuUserIP = a})
 
 -- | User profile ID associated with this request.
-cuProfileId :: Lens' CampaignsUpdate' Int64
-cuProfileId
-  = lens _cuProfileId (\ s a -> s{_cuProfileId = a})
+cuProFileId :: Lens' CampaignsUpdate' Int64
+cuProFileId
+  = lens _cuProFileId (\ s a -> s{_cuProFileId = a})
 
 -- | Multipart request metadata.
 cuPayload :: Lens' CampaignsUpdate' Campaign
@@ -159,7 +160,7 @@ instance GoogleRequest CampaignsUpdate' where
         type Rs CampaignsUpdate' = Campaign
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CampaignsUpdate'{..}
-          = go _cuProfileId _cuQuotaUser (Just _cuPrettyPrint)
+          = go _cuProFileId _cuQuotaUser (Just _cuPrettyPrint)
               _cuUserIP
               _cuFields
               _cuKey

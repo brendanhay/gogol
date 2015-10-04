@@ -35,7 +35,7 @@ module Network.Google.Resource.Analytics.Management.Goals.Insert
     , mgiPrettyPrint
     , mgiWebPropertyId
     , mgiUserIP
-    , mgiProfileId
+    , mgiProFileId
     , mgiPayload
     , mgiAccountId
     , mgiKey
@@ -64,7 +64,8 @@ type ManagementGoalsInsertResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] Goal :> Post '[JSON] Goal
+                                   ReqBody '[OctetStream] Goal :>
+                                     Post '[JSON] Goal
 
 -- | Create a new goal.
 --
@@ -74,7 +75,7 @@ data ManagementGoalsInsert' = ManagementGoalsInsert'
     , _mgiPrettyPrint   :: !Bool
     , _mgiWebPropertyId :: !Text
     , _mgiUserIP        :: !(Maybe Text)
-    , _mgiProfileId     :: !Text
+    , _mgiProFileId     :: !Text
     , _mgiPayload       :: !Goal
     , _mgiAccountId     :: !Text
     , _mgiKey           :: !(Maybe Key)
@@ -94,7 +95,7 @@ data ManagementGoalsInsert' = ManagementGoalsInsert'
 --
 -- * 'mgiUserIP'
 --
--- * 'mgiProfileId'
+-- * 'mgiProFileId'
 --
 -- * 'mgiPayload'
 --
@@ -111,13 +112,13 @@ managementGoalsInsert'
     -> Goal -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> ManagementGoalsInsert'
-managementGoalsInsert' pMgiWebPropertyId_ pMgiProfileId_ pMgiPayload_ pMgiAccountId_ =
+managementGoalsInsert' pMgiWebPropertyId_ pMgiProFileId_ pMgiPayload_ pMgiAccountId_ =
     ManagementGoalsInsert'
     { _mgiQuotaUser = Nothing
     , _mgiPrettyPrint = False
     , _mgiWebPropertyId = pMgiWebPropertyId_
     , _mgiUserIP = Nothing
-    , _mgiProfileId = pMgiProfileId_
+    , _mgiProFileId = pMgiProFileId_
     , _mgiPayload = pMgiPayload_
     , _mgiAccountId = pMgiAccountId_
     , _mgiKey = Nothing
@@ -151,9 +152,9 @@ mgiUserIP
   = lens _mgiUserIP (\ s a -> s{_mgiUserIP = a})
 
 -- | View (Profile) ID to create the goal for.
-mgiProfileId :: Lens' ManagementGoalsInsert' Text
-mgiProfileId
-  = lens _mgiProfileId (\ s a -> s{_mgiProfileId = a})
+mgiProFileId :: Lens' ManagementGoalsInsert' Text
+mgiProFileId
+  = lens _mgiProFileId (\ s a -> s{_mgiProFileId = a})
 
 -- | Multipart request metadata.
 mgiPayload :: Lens' ManagementGoalsInsert' Goal
@@ -190,7 +191,7 @@ instance GoogleRequest ManagementGoalsInsert' where
         type Rs ManagementGoalsInsert' = Goal
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementGoalsInsert'{..}
-          = go _mgiAccountId _mgiWebPropertyId _mgiProfileId
+          = go _mgiAccountId _mgiWebPropertyId _mgiProFileId
               _mgiQuotaUser
               (Just _mgiPrettyPrint)
               _mgiUserIP

@@ -35,7 +35,7 @@ module Network.Google.Resource.DFAReporting.Reports.Patch
     , rpPrettyPrint
     , rpUserIP
     , rpReportId
-    , rpProfileId
+    , rpProFileId
     , rpPayload
     , rpKey
     , rpOAuthToken
@@ -59,7 +59,7 @@ type ReportsPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Report :> Patch '[JSON] Report
+                           ReqBody '[OctetStream] Report :> Patch '[JSON] Report
 
 -- | Updates a report. This method supports patch semantics.
 --
@@ -69,7 +69,7 @@ data ReportsPatch' = ReportsPatch'
     , _rpPrettyPrint :: !Bool
     , _rpUserIP      :: !(Maybe Text)
     , _rpReportId    :: !Int64
-    , _rpProfileId   :: !Int64
+    , _rpProFileId   :: !Int64
     , _rpPayload     :: !Report
     , _rpKey         :: !(Maybe Key)
     , _rpOAuthToken  :: !(Maybe OAuthToken)
@@ -88,7 +88,7 @@ data ReportsPatch' = ReportsPatch'
 --
 -- * 'rpReportId'
 --
--- * 'rpProfileId'
+-- * 'rpProFileId'
 --
 -- * 'rpPayload'
 --
@@ -102,13 +102,13 @@ reportsPatch'
     -> Int64 -- ^ 'profileId'
     -> Report -- ^ 'payload'
     -> ReportsPatch'
-reportsPatch' pRpReportId_ pRpProfileId_ pRpPayload_ =
+reportsPatch' pRpReportId_ pRpProFileId_ pRpPayload_ =
     ReportsPatch'
     { _rpQuotaUser = Nothing
     , _rpPrettyPrint = True
     , _rpUserIP = Nothing
     , _rpReportId = pRpReportId_
-    , _rpProfileId = pRpProfileId_
+    , _rpProFileId = pRpProFileId_
     , _rpPayload = pRpPayload_
     , _rpKey = Nothing
     , _rpOAuthToken = Nothing
@@ -139,9 +139,9 @@ rpReportId
   = lens _rpReportId (\ s a -> s{_rpReportId = a})
 
 -- | The DFA user profile ID.
-rpProfileId :: Lens' ReportsPatch' Int64
-rpProfileId
-  = lens _rpProfileId (\ s a -> s{_rpProfileId = a})
+rpProFileId :: Lens' ReportsPatch' Int64
+rpProFileId
+  = lens _rpProFileId (\ s a -> s{_rpProFileId = a})
 
 -- | Multipart request metadata.
 rpPayload :: Lens' ReportsPatch' Report
@@ -171,7 +171,7 @@ instance GoogleRequest ReportsPatch' where
         type Rs ReportsPatch' = Report
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ReportsPatch'{..}
-          = go _rpProfileId _rpReportId _rpQuotaUser
+          = go _rpProFileId _rpReportId _rpQuotaUser
               (Just _rpPrettyPrint)
               _rpUserIP
               _rpFields

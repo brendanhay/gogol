@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.UserRolePermissionGroups.Get
     , urpggQuotaUser
     , urpggPrettyPrint
     , urpggUserIP
-    , urpggProfileId
+    , urpggProFileId
     , urpggKey
     , urpggId
     , urpggOAuthToken
@@ -67,7 +67,7 @@ data UserRolePermissionGroupsGet' = UserRolePermissionGroupsGet'
     { _urpggQuotaUser   :: !(Maybe Text)
     , _urpggPrettyPrint :: !Bool
     , _urpggUserIP      :: !(Maybe Text)
-    , _urpggProfileId   :: !Int64
+    , _urpggProFileId   :: !Int64
     , _urpggKey         :: !(Maybe Key)
     , _urpggId          :: !Int64
     , _urpggOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data UserRolePermissionGroupsGet' = UserRolePermissionGroupsGet'
 --
 -- * 'urpggUserIP'
 --
--- * 'urpggProfileId'
+-- * 'urpggProFileId'
 --
 -- * 'urpggKey'
 --
@@ -97,12 +97,12 @@ userRolePermissionGroupsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> UserRolePermissionGroupsGet'
-userRolePermissionGroupsGet' pUrpggProfileId_ pUrpggId_ =
+userRolePermissionGroupsGet' pUrpggProFileId_ pUrpggId_ =
     UserRolePermissionGroupsGet'
     { _urpggQuotaUser = Nothing
     , _urpggPrettyPrint = True
     , _urpggUserIP = Nothing
-    , _urpggProfileId = pUrpggProfileId_
+    , _urpggProFileId = pUrpggProFileId_
     , _urpggKey = Nothing
     , _urpggId = pUrpggId_
     , _urpggOAuthToken = Nothing
@@ -130,10 +130,10 @@ urpggUserIP
   = lens _urpggUserIP (\ s a -> s{_urpggUserIP = a})
 
 -- | User profile ID associated with this request.
-urpggProfileId :: Lens' UserRolePermissionGroupsGet' Int64
-urpggProfileId
-  = lens _urpggProfileId
-      (\ s a -> s{_urpggProfileId = a})
+urpggProFileId :: Lens' UserRolePermissionGroupsGet' Int64
+urpggProFileId
+  = lens _urpggProFileId
+      (\ s a -> s{_urpggProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -167,7 +167,7 @@ instance GoogleRequest UserRolePermissionGroupsGet'
              UserRolePermissionGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u UserRolePermissionGroupsGet'{..}
-          = go _urpggProfileId _urpggId _urpggQuotaUser
+          = go _urpggProFileId _urpggId _urpggQuotaUser
               (Just _urpggPrettyPrint)
               _urpggUserIP
               _urpggFields

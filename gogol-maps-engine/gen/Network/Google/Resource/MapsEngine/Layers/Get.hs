@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 type LayersGetResource =
      "layers" :>
        Capture "id" Text :>
-         QueryParam "version" MapsEngineLayersGetVersion :>
+         QueryParam "version" LayersGetVersion :>
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
@@ -66,7 +66,7 @@ data LayersGet' = LayersGet'
     , _lgPrettyPrint :: !Bool
     , _lgUserIP      :: !(Maybe Text)
     , _lgKey         :: !(Maybe Key)
-    , _lgVersion     :: !(Maybe MapsEngineLayersGetVersion)
+    , _lgVersion     :: !(Maybe LayersGetVersion)
     , _lgId          :: !Text
     , _lgOAuthToken  :: !(Maybe OAuthToken)
     , _lgFields      :: !(Maybe Text)
@@ -134,7 +134,7 @@ lgKey = lens _lgKey (\ s a -> s{_lgKey = a})
 -- should be returned. When version is set to published, the published
 -- version of the layer will be returned. Please use the
 -- layers.getPublished endpoint instead.
-lgVersion :: Lens' LayersGet' (Maybe MapsEngineLayersGetVersion)
+lgVersion :: Lens' LayersGet' (Maybe LayersGetVersion)
 lgVersion
   = lens _lgVersion (\ s a -> s{_lgVersion = a})
 

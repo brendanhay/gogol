@@ -54,7 +54,7 @@ type NegotiationsInsertResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] NegotiationDTO :>
+                     ReqBody '[OctetStream] NegotiationDTO :>
                        Post '[JSON] NegotiationDTO
 
 -- | Creates or updates the requested negotiation.

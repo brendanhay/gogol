@@ -57,8 +57,8 @@ type PawsNotifySpectrumUseResource =
                QueryParam "key" Key :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] PawsNotifySpectrumUseRequest :>
-                       Post '[JSON] PawsNotifySpectrumUseResponse
+                     ReqBody '[OctetStream] PawsNotifySpectrumUseRequest
+                       :> Post '[JSON] PawsNotifySpectrumUseResponse
 
 -- | Notifies the database that the device has selected certain frequency
 -- ranges for transmission. Only to be invoked when required by the

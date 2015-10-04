@@ -61,9 +61,11 @@ type MapsListResource =
      "maps" :>
        QueryParam "createdAfter" DateTime' :>
          QueryParam "creatorEmail" Text :>
-           QueryParam "role" Role :>
+           QueryParam "role" MapsListRole :>
              QueryParam "bbox" Text :>
-               QueryParam "processingStatus" ProcessingStatus :>
+               QueryParam "processingStatus"
+                 MapsListProcessingStatus
+                 :>
                  QueryParam "modifiedAfter" DateTime' :>
                    QueryParam "modifiedBefore" DateTime' :>
                      QueryParam "pageToken" Text :>
@@ -91,10 +93,10 @@ data MapsList' = MapsList'
     , _mllPrettyPrint      :: !Bool
     , _mllUserIP           :: !(Maybe Text)
     , _mllCreatorEmail     :: !(Maybe Text)
-    , _mllRole             :: !(Maybe Role)
+    , _mllRole             :: !(Maybe MapsListRole)
     , _mllKey              :: !(Maybe Key)
     , _mllBbox             :: !(Maybe Text)
-    , _mllProcessingStatus :: !(Maybe ProcessingStatus)
+    , _mllProcessingStatus :: !(Maybe MapsListProcessingStatus)
     , _mllModifiedAfter    :: !(Maybe DateTime')
     , _mllModifiedBefore   :: !(Maybe DateTime')
     , _mllPageToken        :: !(Maybe Text)
@@ -209,7 +211,7 @@ mllCreatorEmail
 
 -- | The role parameter indicates that the response should only contain
 -- assets where the current user has the specified level of access.
-mllRole :: Lens' MapsList' (Maybe Role)
+mllRole :: Lens' MapsList' (Maybe MapsListRole)
 mllRole = lens _mllRole (\ s a -> s{_mllRole = a})
 
 -- | API key. Your API key identifies your project and provides you with API
@@ -223,7 +225,7 @@ mllKey = lens _mllKey (\ s a -> s{_mllKey = a})
 mllBbox :: Lens' MapsList' (Maybe Text)
 mllBbox = lens _mllBbox (\ s a -> s{_mllBbox = a})
 
-mllProcessingStatus :: Lens' MapsList' (Maybe ProcessingStatus)
+mllProcessingStatus :: Lens' MapsList' (Maybe MapsListProcessingStatus)
 mllProcessingStatus
   = lens _mllProcessingStatus
       (\ s a -> s{_mllProcessingStatus = a})

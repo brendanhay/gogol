@@ -56,7 +56,7 @@ type MetricDescriptorsCreateResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] MetricDescriptor :>
+                       ReqBody '[OctetStream] MetricDescriptor :>
                          Post '[JSON] MetricDescriptor
 
 -- | Create a new metric.

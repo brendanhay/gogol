@@ -58,7 +58,7 @@ type MarketplaceDealsDeleteResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] DeleteOrderDealsRequest :>
+                           ReqBody '[OctetStream] DeleteOrderDealsRequest :>
                              Post '[JSON] DeleteOrderDealsResponse
 
 -- | Delete the specified deals from the order

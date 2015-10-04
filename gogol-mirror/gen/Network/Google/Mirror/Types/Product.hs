@@ -18,6 +18,57 @@ module Network.Google.Mirror.Types.Product where
 import           Network.Google.Mirror.Types.Sum
 import           Network.Google.Prelude
 
+-- | Controls how notifications for a timeline item are presented to the
+-- user.
+--
+-- /See:/ 'notificationConfig' smart constructor.
+data NotificationConfig = NotificationConfig
+    { _ncDeliveryTime :: !(Maybe DateTime')
+    , _ncLevel        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'NotificationConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ncDeliveryTime'
+--
+-- * 'ncLevel'
+notificationConfig
+    :: NotificationConfig
+notificationConfig =
+    NotificationConfig
+    { _ncDeliveryTime = Nothing
+    , _ncLevel = Nothing
+    }
+
+-- | The time at which the notification should be delivered.
+ncDeliveryTime :: Lens' NotificationConfig (Maybe UTCTime)
+ncDeliveryTime
+  = lens _ncDeliveryTime
+      (\ s a -> s{_ncDeliveryTime = a})
+      . mapping _DateTime
+
+-- | Describes how important the notification is. Allowed values are: -
+-- DEFAULT - Notifications of default importance. A chime will be played to
+-- alert users.
+ncLevel :: Lens' NotificationConfig (Maybe Text)
+ncLevel = lens _ncLevel (\ s a -> s{_ncLevel = a})
+
+instance FromJSON NotificationConfig where
+        parseJSON
+          = withObject "NotificationConfig"
+              (\ o ->
+                 NotificationConfig <$>
+                   (o .:? "deliveryTime") <*> (o .:? "level"))
+
+instance ToJSON NotificationConfig where
+        toJSON NotificationConfig{..}
+          = object
+              (catMaybes
+                 [("deliveryTime" .=) <$> _ncDeliveryTime,
+                  ("level" .=) <$> _ncLevel])
+
 -- | A single menu command that is part of a Contact.
 --
 -- /See:/ 'command' smart constructor.
@@ -103,57 +154,6 @@ instance ToJSON LocationsListResponse where
               (catMaybes
                  [Just ("kind" .= _llrKind),
                   ("items" .=) <$> _llrItems])
-
--- | Controls how notifications for a timeline item are presented to the
--- user.
---
--- /See:/ 'notificationConfig' smart constructor.
-data NotificationConfig = NotificationConfig
-    { _ncDeliveryTime :: !(Maybe DateTime')
-    , _ncLevel        :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'NotificationConfig' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ncDeliveryTime'
---
--- * 'ncLevel'
-notificationConfig
-    :: NotificationConfig
-notificationConfig =
-    NotificationConfig
-    { _ncDeliveryTime = Nothing
-    , _ncLevel = Nothing
-    }
-
--- | The time at which the notification should be delivered.
-ncDeliveryTime :: Lens' NotificationConfig (Maybe UTCTime)
-ncDeliveryTime
-  = lens _ncDeliveryTime
-      (\ s a -> s{_ncDeliveryTime = a})
-      . mapping _DateTime
-
--- | Describes how important the notification is. Allowed values are: -
--- DEFAULT - Notifications of default importance. A chime will be played to
--- alert users.
-ncLevel :: Lens' NotificationConfig (Maybe Text)
-ncLevel = lens _ncLevel (\ s a -> s{_ncLevel = a})
-
-instance FromJSON NotificationConfig where
-        parseJSON
-          = withObject "NotificationConfig"
-              (\ o ->
-                 NotificationConfig <$>
-                   (o .:? "deliveryTime") <*> (o .:? "level"))
-
-instance ToJSON NotificationConfig where
-        toJSON NotificationConfig{..}
-          = object
-              (catMaybes
-                 [("deliveryTime" .=) <$> _ncDeliveryTime,
-                  ("level" .=) <$> _ncLevel])
 
 -- | A geographic location that can be associated with a timeline item.
 --
@@ -835,78 +835,6 @@ instance ToJSON Setting where
                  [Just ("kind" .= _sKind), ("value" .=) <$> _sValue,
                   ("id" .=) <$> _sId])
 
--- | Represents an account passed into the Account Manager on Glass.
---
--- /See:/ 'account' smart constructor.
-data Account = Account
-    { _aAuthTokens :: !(Maybe [AuthToken])
-    , _aUserData   :: !(Maybe [UserData])
-    , _aPassword   :: !(Maybe Text)
-    , _aFeatures   :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Account' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aAuthTokens'
---
--- * 'aUserData'
---
--- * 'aPassword'
---
--- * 'aFeatures'
-account
-    :: Account
-account =
-    Account
-    { _aAuthTokens = Nothing
-    , _aUserData = Nothing
-    , _aPassword = Nothing
-    , _aFeatures = Nothing
-    }
-
-aAuthTokens :: Lens' Account [AuthToken]
-aAuthTokens
-  = lens _aAuthTokens (\ s a -> s{_aAuthTokens = a}) .
-      _Default
-      . _Coerce
-
-aUserData :: Lens' Account [UserData]
-aUserData
-  = lens _aUserData (\ s a -> s{_aUserData = a}) .
-      _Default
-      . _Coerce
-
-aPassword :: Lens' Account (Maybe Text)
-aPassword
-  = lens _aPassword (\ s a -> s{_aPassword = a})
-
-aFeatures :: Lens' Account [Text]
-aFeatures
-  = lens _aFeatures (\ s a -> s{_aFeatures = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON Account where
-        parseJSON
-          = withObject "Account"
-              (\ o ->
-                 Account <$>
-                   (o .:? "authTokens" .!= mempty) <*>
-                     (o .:? "userData" .!= mempty)
-                     <*> (o .:? "password")
-                     <*> (o .:? "features" .!= mempty))
-
-instance ToJSON Account where
-        toJSON Account{..}
-          = object
-              (catMaybes
-                 [("authTokens" .=) <$> _aAuthTokens,
-                  ("userData" .=) <$> _aUserData,
-                  ("password" .=) <$> _aPassword,
-                  ("features" .=) <$> _aFeatures])
-
 -- | Represents media content, such as a photo, that can be attached to a
 -- timeline item.
 --
@@ -978,6 +906,78 @@ instance ToJSON Attachment where
                   ("id" .=) <$> _aId,
                   ("isProcessingContent" .=) <$> _aIsProcessingContent,
                   ("contentType" .=) <$> _aContentType])
+
+-- | Represents an account passed into the Account Manager on Glass.
+--
+-- /See:/ 'account' smart constructor.
+data Account = Account
+    { _aAuthTokens :: !(Maybe [AuthToken])
+    , _aUserData   :: !(Maybe [UserData])
+    , _aPassword   :: !(Maybe Text)
+    , _aFeatures   :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Account' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aAuthTokens'
+--
+-- * 'aUserData'
+--
+-- * 'aPassword'
+--
+-- * 'aFeatures'
+account
+    :: Account
+account =
+    Account
+    { _aAuthTokens = Nothing
+    , _aUserData = Nothing
+    , _aPassword = Nothing
+    , _aFeatures = Nothing
+    }
+
+aAuthTokens :: Lens' Account [AuthToken]
+aAuthTokens
+  = lens _aAuthTokens (\ s a -> s{_aAuthTokens = a}) .
+      _Default
+      . _Coerce
+
+aUserData :: Lens' Account [UserData]
+aUserData
+  = lens _aUserData (\ s a -> s{_aUserData = a}) .
+      _Default
+      . _Coerce
+
+aPassword :: Lens' Account (Maybe Text)
+aPassword
+  = lens _aPassword (\ s a -> s{_aPassword = a})
+
+aFeatures :: Lens' Account [Text]
+aFeatures
+  = lens _aFeatures (\ s a -> s{_aFeatures = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON Account where
+        parseJSON
+          = withObject "Account"
+              (\ o ->
+                 Account <$>
+                   (o .:? "authTokens" .!= mempty) <*>
+                     (o .:? "userData" .!= mempty)
+                     <*> (o .:? "password")
+                     <*> (o .:? "features" .!= mempty))
+
+instance ToJSON Account where
+        toJSON Account{..}
+          = object
+              (catMaybes
+                 [("authTokens" .=) <$> _aAuthTokens,
+                  ("userData" .=) <$> _aUserData,
+                  ("password" .=) <$> _aPassword,
+                  ("features" .=) <$> _aFeatures])
 
 --
 -- /See:/ 'userData' smart constructor.
@@ -1072,56 +1072,6 @@ instance ToJSON UserAction where
                  [("payload" .=) <$> _uaPayload,
                   ("type" .=) <$> _uaType])
 
--- | A list of Contacts representing contacts. This is the response from the
--- server to GET requests on the contacts collection.
---
--- /See:/ 'contactsListResponse' smart constructor.
-data ContactsListResponse = ContactsListResponse
-    { _clrKind  :: !Text
-    , _clrItems :: !(Maybe [Contact])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ContactsListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'clrKind'
---
--- * 'clrItems'
-contactsListResponse
-    :: ContactsListResponse
-contactsListResponse =
-    ContactsListResponse
-    { _clrKind = "mirror#contacts"
-    , _clrItems = Nothing
-    }
-
--- | The type of resource. This is always mirror#contacts.
-clrKind :: Lens' ContactsListResponse Text
-clrKind = lens _clrKind (\ s a -> s{_clrKind = a})
-
--- | Contact list.
-clrItems :: Lens' ContactsListResponse [Contact]
-clrItems
-  = lens _clrItems (\ s a -> s{_clrItems = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON ContactsListResponse where
-        parseJSON
-          = withObject "ContactsListResponse"
-              (\ o ->
-                 ContactsListResponse <$>
-                   (o .:? "kind" .!= "mirror#contacts") <*>
-                     (o .:? "items" .!= mempty))
-
-instance ToJSON ContactsListResponse where
-        toJSON ContactsListResponse{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _clrKind),
-                  ("items" .=) <$> _clrItems])
-
 -- | A list of timeline items. This is the response from the server to GET
 -- requests on the timeline collection.
 --
@@ -1184,6 +1134,56 @@ instance ToJSON TimelineListResponse where
                  [("nextPageToken" .=) <$> _tlrNextPageToken,
                   Just ("kind" .= _tlrKind),
                   ("items" .=) <$> _tlrItems])
+
+-- | A list of Contacts representing contacts. This is the response from the
+-- server to GET requests on the contacts collection.
+--
+-- /See:/ 'contactsListResponse' smart constructor.
+data ContactsListResponse = ContactsListResponse
+    { _clrKind  :: !Text
+    , _clrItems :: !(Maybe [Contact])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ContactsListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'clrKind'
+--
+-- * 'clrItems'
+contactsListResponse
+    :: ContactsListResponse
+contactsListResponse =
+    ContactsListResponse
+    { _clrKind = "mirror#contacts"
+    , _clrItems = Nothing
+    }
+
+-- | The type of resource. This is always mirror#contacts.
+clrKind :: Lens' ContactsListResponse Text
+clrKind = lens _clrKind (\ s a -> s{_clrKind = a})
+
+-- | Contact list.
+clrItems :: Lens' ContactsListResponse [Contact]
+clrItems
+  = lens _clrItems (\ s a -> s{_clrItems = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ContactsListResponse where
+        parseJSON
+          = withObject "ContactsListResponse"
+              (\ o ->
+                 ContactsListResponse <$>
+                   (o .:? "kind" .!= "mirror#contacts") <*>
+                     (o .:? "items" .!= mempty))
+
+instance ToJSON ContactsListResponse where
+        toJSON ContactsListResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _clrKind),
+                  ("items" .=) <$> _clrItems])
 
 -- | A single value that is part of a MenuItem.
 --

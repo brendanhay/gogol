@@ -60,7 +60,7 @@ type ManagementWebPropertiesUpdateResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] WebProperty :>
+                             ReqBody '[OctetStream] WebProperty :>
                                Put '[JSON] WebProperty
 
 -- | Updates an existing web property.

@@ -62,10 +62,10 @@ type RastersListResource =
        QueryParam "projectId" Text :>
          QueryParam "createdAfter" DateTime' :>
            QueryParam "creatorEmail" Text :>
-             QueryParam "role" MapsEngineRastersListRole :>
+             QueryParam "role" RastersListRole :>
                QueryParam "bbox" Text :>
                  QueryParam "processingStatus"
-                   MapsEngineRastersListProcessingStatus
+                   RastersListProcessingStatus
                    :>
                    QueryParam "modifiedAfter" DateTime' :>
                      QueryParam "modifiedBefore" DateTime' :>
@@ -93,10 +93,10 @@ data RastersList' = RastersList'
     , _rlPrettyPrint      :: !Bool
     , _rlUserIP           :: !(Maybe Text)
     , _rlCreatorEmail     :: !(Maybe Text)
-    , _rlRole             :: !(Maybe MapsEngineRastersListRole)
+    , _rlRole             :: !(Maybe RastersListRole)
     , _rlKey              :: !(Maybe Key)
     , _rlBbox             :: !(Maybe Text)
-    , _rlProcessingStatus :: !(Maybe MapsEngineRastersListProcessingStatus)
+    , _rlProcessingStatus :: !(Maybe RastersListProcessingStatus)
     , _rlModifiedAfter    :: !(Maybe DateTime')
     , _rlModifiedBefore   :: !(Maybe DateTime')
     , _rlPageToken        :: !(Maybe Text)
@@ -211,7 +211,7 @@ rlCreatorEmail
 
 -- | The role parameter indicates that the response should only contain
 -- assets where the current user has the specified level of access.
-rlRole :: Lens' RastersList' (Maybe MapsEngineRastersListRole)
+rlRole :: Lens' RastersList' (Maybe RastersListRole)
 rlRole = lens _rlRole (\ s a -> s{_rlRole = a})
 
 -- | API key. Your API key identifies your project and provides you with API
@@ -225,7 +225,7 @@ rlKey = lens _rlKey (\ s a -> s{_rlKey = a})
 rlBbox :: Lens' RastersList' (Maybe Text)
 rlBbox = lens _rlBbox (\ s a -> s{_rlBbox = a})
 
-rlProcessingStatus :: Lens' RastersList' (Maybe MapsEngineRastersListProcessingStatus)
+rlProcessingStatus :: Lens' RastersList' (Maybe RastersListProcessingStatus)
 rlProcessingStatus
   = lens _rlProcessingStatus
       (\ s a -> s{_rlProcessingStatus = a})

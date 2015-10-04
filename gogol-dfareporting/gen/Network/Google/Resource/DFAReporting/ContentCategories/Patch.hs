@@ -35,7 +35,7 @@ module Network.Google.Resource.DFAReporting.ContentCategories.Patch
     , ccpQuotaUser
     , ccpPrettyPrint
     , ccpUserIP
-    , ccpProfileId
+    , ccpProFileId
     , ccpPayload
     , ccpKey
     , ccpId
@@ -60,7 +60,7 @@ type ContentCategoriesPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] ContentCategory :>
+                           ReqBody '[OctetStream] ContentCategory :>
                              Patch '[JSON] ContentCategory
 
 -- | Updates an existing content category. This method supports patch
@@ -71,7 +71,7 @@ data ContentCategoriesPatch' = ContentCategoriesPatch'
     { _ccpQuotaUser   :: !(Maybe Text)
     , _ccpPrettyPrint :: !Bool
     , _ccpUserIP      :: !(Maybe Text)
-    , _ccpProfileId   :: !Int64
+    , _ccpProFileId   :: !Int64
     , _ccpPayload     :: !ContentCategory
     , _ccpKey         :: !(Maybe Key)
     , _ccpId          :: !Int64
@@ -89,7 +89,7 @@ data ContentCategoriesPatch' = ContentCategoriesPatch'
 --
 -- * 'ccpUserIP'
 --
--- * 'ccpProfileId'
+-- * 'ccpProFileId'
 --
 -- * 'ccpPayload'
 --
@@ -105,12 +105,12 @@ contentCategoriesPatch'
     -> ContentCategory -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> ContentCategoriesPatch'
-contentCategoriesPatch' pCcpProfileId_ pCcpPayload_ pCcpId_ =
+contentCategoriesPatch' pCcpProFileId_ pCcpPayload_ pCcpId_ =
     ContentCategoriesPatch'
     { _ccpQuotaUser = Nothing
     , _ccpPrettyPrint = True
     , _ccpUserIP = Nothing
-    , _ccpProfileId = pCcpProfileId_
+    , _ccpProFileId = pCcpProFileId_
     , _ccpPayload = pCcpPayload_
     , _ccpKey = Nothing
     , _ccpId = pCcpId_
@@ -138,9 +138,9 @@ ccpUserIP
   = lens _ccpUserIP (\ s a -> s{_ccpUserIP = a})
 
 -- | User profile ID associated with this request.
-ccpProfileId :: Lens' ContentCategoriesPatch' Int64
-ccpProfileId
-  = lens _ccpProfileId (\ s a -> s{_ccpProfileId = a})
+ccpProFileId :: Lens' ContentCategoriesPatch' Int64
+ccpProFileId
+  = lens _ccpProFileId (\ s a -> s{_ccpProFileId = a})
 
 -- | Multipart request metadata.
 ccpPayload :: Lens' ContentCategoriesPatch' ContentCategory
@@ -176,7 +176,7 @@ instance GoogleRequest ContentCategoriesPatch' where
         type Rs ContentCategoriesPatch' = ContentCategory
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ContentCategoriesPatch'{..}
-          = go _ccpProfileId (Just _ccpId) _ccpQuotaUser
+          = go _ccpProFileId (Just _ccpId) _ccpQuotaUser
               (Just _ccpPrettyPrint)
               _ccpUserIP
               _ccpFields

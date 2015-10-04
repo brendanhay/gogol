@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.PlacementStrategies.Insert
     , psiQuotaUser
     , psiPrettyPrint
     , psiUserIP
-    , psiProfileId
+    , psiProFileId
     , psiPayload
     , psiKey
     , psiOAuthToken
@@ -57,7 +57,7 @@ type PlacementStrategiesInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] PlacementStrategy :>
+                         ReqBody '[OctetStream] PlacementStrategy :>
                            Post '[JSON] PlacementStrategy
 
 -- | Inserts a new placement strategy.
@@ -67,7 +67,7 @@ data PlacementStrategiesInsert' = PlacementStrategiesInsert'
     { _psiQuotaUser   :: !(Maybe Text)
     , _psiPrettyPrint :: !Bool
     , _psiUserIP      :: !(Maybe Text)
-    , _psiProfileId   :: !Int64
+    , _psiProFileId   :: !Int64
     , _psiPayload     :: !PlacementStrategy
     , _psiKey         :: !(Maybe Key)
     , _psiOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data PlacementStrategiesInsert' = PlacementStrategiesInsert'
 --
 -- * 'psiUserIP'
 --
--- * 'psiProfileId'
+-- * 'psiProFileId'
 --
 -- * 'psiPayload'
 --
@@ -97,12 +97,12 @@ placementStrategiesInsert'
     :: Int64 -- ^ 'profileId'
     -> PlacementStrategy -- ^ 'payload'
     -> PlacementStrategiesInsert'
-placementStrategiesInsert' pPsiProfileId_ pPsiPayload_ =
+placementStrategiesInsert' pPsiProFileId_ pPsiPayload_ =
     PlacementStrategiesInsert'
     { _psiQuotaUser = Nothing
     , _psiPrettyPrint = True
     , _psiUserIP = Nothing
-    , _psiProfileId = pPsiProfileId_
+    , _psiProFileId = pPsiProFileId_
     , _psiPayload = pPsiPayload_
     , _psiKey = Nothing
     , _psiOAuthToken = Nothing
@@ -129,9 +129,9 @@ psiUserIP
   = lens _psiUserIP (\ s a -> s{_psiUserIP = a})
 
 -- | User profile ID associated with this request.
-psiProfileId :: Lens' PlacementStrategiesInsert' Int64
-psiProfileId
-  = lens _psiProfileId (\ s a -> s{_psiProfileId = a})
+psiProFileId :: Lens' PlacementStrategiesInsert' Int64
+psiProFileId
+  = lens _psiProFileId (\ s a -> s{_psiProFileId = a})
 
 -- | Multipart request metadata.
 psiPayload :: Lens' PlacementStrategiesInsert' PlacementStrategy
@@ -165,7 +165,7 @@ instance GoogleRequest PlacementStrategiesInsert'
              PlacementStrategy
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementStrategiesInsert'{..}
-          = go _psiProfileId _psiQuotaUser
+          = go _psiProFileId _psiQuotaUser
               (Just _psiPrettyPrint)
               _psiUserIP
               _psiFields

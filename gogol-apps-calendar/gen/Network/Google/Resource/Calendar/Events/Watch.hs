@@ -70,7 +70,7 @@ type EventsWatchResource =
            "watch" :>
              QueryParam "syncToken" Text :>
                QueryParam "timeMin" DateTime' :>
-                 QueryParam "orderBy" CalendarEventsWatchOrderBy :>
+                 QueryParam "orderBy" EventsWatchOrderBy :>
                    QueryParam "singleEvents" Bool :>
                      QueryParams "privateExtendedProperty" Text :>
                        QueryParam "showDeleted" Bool :>
@@ -100,7 +100,8 @@ type EventsWatchResource =
                                                            QueryParam "alt"
                                                              AltJSON
                                                              :>
-                                                             ReqBody '[JSON]
+                                                             ReqBody
+                                                               '[OctetStream]
                                                                Channel
                                                                :>
                                                                Post '[JSON]
@@ -115,7 +116,7 @@ data EventsWatch' = EventsWatch'
     , _ewCalendarId              :: !Text
     , _ewPrettyPrint             :: !Bool
     , _ewTimeMin                 :: !(Maybe DateTime')
-    , _ewOrderBy                 :: !(Maybe CalendarEventsWatchOrderBy)
+    , _ewOrderBy                 :: !(Maybe EventsWatchOrderBy)
     , _ewSingleEvents            :: !(Maybe Bool)
     , _ewPrivateExtendedProperty :: !(Maybe [Text])
     , _ewUserIP                  :: !(Maybe Text)
@@ -271,7 +272,7 @@ ewTimeMin
 
 -- | The order of the events returned in the result. Optional. The default is
 -- an unspecified, stable order.
-ewOrderBy :: Lens' EventsWatch' (Maybe CalendarEventsWatchOrderBy)
+ewOrderBy :: Lens' EventsWatch' (Maybe EventsWatchOrderBy)
 ewOrderBy
   = lens _ewOrderBy (\ s a -> s{_ewOrderBy = a})
 

@@ -55,7 +55,7 @@ type FilesWatchResource =
        Capture "fileId" Text :>
          "watch" :>
            QueryParam "updateViewedDate" Bool :>
-             QueryParam "projection" DriveFilesWatchProjection :>
+             QueryParam "projection" FilesWatchProjection :>
                QueryParam "acknowledgeAbuse" Bool :>
                  QueryParam "revisionId" Text :>
                    QueryParam "quotaUser" Text :>
@@ -65,13 +65,14 @@ type FilesWatchResource =
                            QueryParam "key" Key :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
-                                 ReqBody '[JSON] Channel :> Post '[JSON] Channel
+                                 ReqBody '[OctetStream] Channel :>
+                                   Post '[JSON] Channel
        :<|>
        "files" :>
          Capture "fileId" Text :>
            "watch" :>
              QueryParam "updateViewedDate" Bool :>
-               QueryParam "projection" DriveFilesWatchProjection :>
+               QueryParam "projection" FilesWatchProjection :>
                  QueryParam "acknowledgeAbuse" Bool :>
                    QueryParam "revisionId" Text :>
                      QueryParam "quotaUser" Text :>
@@ -81,7 +82,7 @@ type FilesWatchResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltMedia :>
-                                   ReqBody '[JSON] Channel :>
+                                   ReqBody '[OctetStream] Channel :>
                                      Post '[OctetStream] Body
 
 -- | Subscribe to changes on a file
@@ -94,7 +95,7 @@ data FilesWatch' = FilesWatch'
     , _fwPayload          :: !Channel
     , _fwUpdateViewedDate :: !Bool
     , _fwKey              :: !(Maybe Key)
-    , _fwProjection       :: !(Maybe DriveFilesWatchProjection)
+    , _fwProjection       :: !(Maybe FilesWatchProjection)
     , _fwAcknowledgeAbuse :: !Bool
     , _fwFileId           :: !Text
     , _fwOAuthToken       :: !(Maybe OAuthToken)
@@ -186,7 +187,7 @@ fwKey :: Lens' FilesWatch' (Maybe Key)
 fwKey = lens _fwKey (\ s a -> s{_fwKey = a})
 
 -- | This parameter is deprecated and has no function.
-fwProjection :: Lens' FilesWatch' (Maybe DriveFilesWatchProjection)
+fwProjection :: Lens' FilesWatch' (Maybe FilesWatchProjection)
 fwProjection
   = lens _fwProjection (\ s a -> s{_fwProjection = a})
 

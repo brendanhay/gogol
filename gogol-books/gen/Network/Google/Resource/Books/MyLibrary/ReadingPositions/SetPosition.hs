@@ -60,7 +60,9 @@ type MyLibraryReadingPositionsSetPositionResource =
                QueryParam "position" Text :>
                  QueryParam "deviceCookie" Text :>
                    QueryParam "contentVersion" Text :>
-                     QueryParam "action" Action :>
+                     QueryParam "action"
+                       MyLibraryReadingPositionsSetPositionAction
+                       :>
                        QueryParam "source" Text :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
@@ -79,7 +81,7 @@ data MyLibraryReadingPositionsSetPosition' = MyLibraryReadingPositionsSetPositio
     , _mlrpspPrettyPrint    :: !Bool
     , _mlrpspUserIP         :: !(Maybe Text)
     , _mlrpspContentVersion :: !(Maybe Text)
-    , _mlrpspAction         :: !(Maybe Action)
+    , _mlrpspAction         :: !(Maybe MyLibraryReadingPositionsSetPositionAction)
     , _mlrpspKey            :: !(Maybe Key)
     , _mlrpspVolumeId       :: !Text
     , _mlrpspSource         :: !(Maybe Text)
@@ -173,7 +175,7 @@ mlrpspContentVersion
       (\ s a -> s{_mlrpspContentVersion = a})
 
 -- | Action that caused this reading position to be set.
-mlrpspAction :: Lens' MyLibraryReadingPositionsSetPosition' (Maybe Action)
+mlrpspAction :: Lens' MyLibraryReadingPositionsSetPosition' (Maybe MyLibraryReadingPositionsSetPositionAction)
 mlrpspAction
   = lens _mlrpspAction (\ s a -> s{_mlrpspAction = a})
 

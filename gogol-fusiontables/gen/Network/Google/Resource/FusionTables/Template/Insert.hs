@@ -57,7 +57,8 @@ type TemplateInsertResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Template :> Post '[JSON] Template
+                         ReqBody '[OctetStream] Template :>
+                           Post '[JSON] Template
 
 -- | Creates a new template for the table.
 --

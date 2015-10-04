@@ -68,8 +68,14 @@ module Network.Google.DeploymentManager
 
     -- * Types
 
-    -- ** CreatePolicy
-    , CreatePolicy (..)
+    -- ** OperationWarningsItemDataItem
+    , OperationWarningsItemDataItem
+    , operationWarningsItemDataItem
+    , owidiValue
+    , owidiKey
+
+    -- ** DeploymentsUpdateCreatePolicy
+    , DeploymentsUpdateCreatePolicy (..)
 
     -- ** OperationsListResponse
     , OperationsListResponse
@@ -83,8 +89,14 @@ module Network.Google.DeploymentManager
     , tlrNextPageToken
     , tlrTypes
 
-    -- ** DeploymentManagerDeploymentsUpdateCreatePolicy
-    , DeploymentManagerDeploymentsUpdateCreatePolicy (..)
+    -- ** DeploymentsUpdateUpdatePolicy
+    , DeploymentsUpdateUpdatePolicy (..)
+
+    -- ** DeploymentsUpdateDeletePolicy
+    , DeploymentsUpdateDeletePolicy (..)
+
+    -- ** DeploymentsPatchDeletePolicy
+    , DeploymentsPatchDeletePolicy (..)
 
     -- ** Operation
     , Operation
@@ -112,22 +124,17 @@ module Network.Google.DeploymentManager
     , oTargetLink
     , oClientOperationId
 
+    -- ** DeploymentsPatchUpdatePolicy
+    , DeploymentsPatchUpdatePolicy (..)
+
+    -- ** DeploymentsPatchCreatePolicy
+    , DeploymentsPatchCreatePolicy (..)
+
     -- ** ResourcesListResponse
     , ResourcesListResponse
     , resourcesListResponse
     , rlrNextPageToken
     , rlrResources
-
-    -- ** DeploymentManagerDeploymentsUpdateUpdatePolicy
-    , DeploymentManagerDeploymentsUpdateUpdatePolicy (..)
-
-    -- ** DeploymentManagerDeploymentsUpdateDeletePolicy
-    , DeploymentManagerDeploymentsUpdateDeletePolicy (..)
-
-    -- ** Error'
-    , Error'
-    , error'
-    , eErrors
 
     -- ** DeploymentUpdate
     , DeploymentUpdate
@@ -144,19 +151,6 @@ module Network.Google.DeploymentManager
     , ruFinalProperties
     , ruErrors
     , ruProperties
-
-    -- ** UpdatePolicy
-    , UpdatePolicy (..)
-
-    -- ** DeletePolicy
-    , DeletePolicy (..)
-
-    -- ** WarningsItem
-    , WarningsItem
-    , warningsItem
-    , wiData
-    , wiCode
-    , wiMessage
 
     -- ** Manifest
     , Manifest
@@ -184,17 +178,16 @@ module Network.Google.DeploymentManager
     , rUpdate
     , rProperties
 
-    -- ** DataItem
-    , DataItem
-    , dataItem
-    , dValue
-    , dKey
-
     -- ** ManifestsListResponse
     , ManifestsListResponse
     , manifestsListResponse
     , mlrNextPageToken
     , mlrManifests
+
+    -- ** OperationError
+    , OperationError
+    , operationError
+    , oeErrors
 
     -- ** Type
     , Type
@@ -210,18 +203,31 @@ module Network.Google.DeploymentManager
     , ifContent
     , ifName
 
+    -- ** OperationErrorErrorsItem
+    , OperationErrorErrorsItem
+    , operationErrorErrorsItem
+    , oeeiLocation
+    , oeeiCode
+    , oeeiMessage
+
     -- ** DeploymentsListResponse
     , DeploymentsListResponse
     , deploymentsListResponse
     , dlrNextPageToken
     , dlrDeployments
 
-    -- ** ErrorsItem
-    , ErrorsItem
-    , errorsItem
-    , eiLocation
-    , eiCode
-    , eiMessage
+    -- ** TargetConfiguration
+    , TargetConfiguration
+    , targetConfiguration
+    , tcConfig
+    , tcImports
+
+    -- ** OperationWarningsItem
+    , OperationWarningsItem
+    , operationWarningsItem
+    , owiData
+    , owiCode
+    , owiMessage
 
     -- ** Deployment
     , Deployment
@@ -237,12 +243,6 @@ module Network.Google.DeploymentManager
     , dDescription
     , dUpdate
     , dTarget
-
-    -- ** TargetConfiguration
-    , TargetConfiguration
-    , targetConfiguration
-    , tcConfig
-    , tcImports
     ) where
 
 import           Network.Google.DeploymentManager.Types

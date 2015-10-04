@@ -35,7 +35,7 @@ module Network.Google.Resource.DFAReporting.PlacementStrategies.Patch
     , pspQuotaUser
     , pspPrettyPrint
     , pspUserIP
-    , pspProfileId
+    , pspProFileId
     , pspPayload
     , pspKey
     , pspId
@@ -60,7 +60,7 @@ type PlacementStrategiesPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] PlacementStrategy :>
+                           ReqBody '[OctetStream] PlacementStrategy :>
                              Patch '[JSON] PlacementStrategy
 
 -- | Updates an existing placement strategy. This method supports patch
@@ -71,7 +71,7 @@ data PlacementStrategiesPatch' = PlacementStrategiesPatch'
     { _pspQuotaUser   :: !(Maybe Text)
     , _pspPrettyPrint :: !Bool
     , _pspUserIP      :: !(Maybe Text)
-    , _pspProfileId   :: !Int64
+    , _pspProFileId   :: !Int64
     , _pspPayload     :: !PlacementStrategy
     , _pspKey         :: !(Maybe Key)
     , _pspId          :: !Int64
@@ -89,7 +89,7 @@ data PlacementStrategiesPatch' = PlacementStrategiesPatch'
 --
 -- * 'pspUserIP'
 --
--- * 'pspProfileId'
+-- * 'pspProFileId'
 --
 -- * 'pspPayload'
 --
@@ -105,12 +105,12 @@ placementStrategiesPatch'
     -> PlacementStrategy -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> PlacementStrategiesPatch'
-placementStrategiesPatch' pPspProfileId_ pPspPayload_ pPspId_ =
+placementStrategiesPatch' pPspProFileId_ pPspPayload_ pPspId_ =
     PlacementStrategiesPatch'
     { _pspQuotaUser = Nothing
     , _pspPrettyPrint = True
     , _pspUserIP = Nothing
-    , _pspProfileId = pPspProfileId_
+    , _pspProFileId = pPspProFileId_
     , _pspPayload = pPspPayload_
     , _pspKey = Nothing
     , _pspId = pPspId_
@@ -138,9 +138,9 @@ pspUserIP
   = lens _pspUserIP (\ s a -> s{_pspUserIP = a})
 
 -- | User profile ID associated with this request.
-pspProfileId :: Lens' PlacementStrategiesPatch' Int64
-pspProfileId
-  = lens _pspProfileId (\ s a -> s{_pspProfileId = a})
+pspProFileId :: Lens' PlacementStrategiesPatch' Int64
+pspProFileId
+  = lens _pspProFileId (\ s a -> s{_pspProFileId = a})
 
 -- | Multipart request metadata.
 pspPayload :: Lens' PlacementStrategiesPatch' PlacementStrategy
@@ -177,7 +177,7 @@ instance GoogleRequest PlacementStrategiesPatch'
         type Rs PlacementStrategiesPatch' = PlacementStrategy
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementStrategiesPatch'{..}
-          = go _pspProfileId (Just _pspId) _pspQuotaUser
+          = go _pspProFileId (Just _pspId) _pspQuotaUser
               (Just _pspPrettyPrint)
               _pspUserIP
               _pspFields

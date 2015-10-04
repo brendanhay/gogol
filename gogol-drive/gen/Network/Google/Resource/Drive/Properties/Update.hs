@@ -61,7 +61,8 @@ type PropertiesUpdateResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Property :> Put '[JSON] Property
+                             ReqBody '[OctetStream] Property :>
+                               Put '[JSON] Property
 
 -- | Updates a property.
 --

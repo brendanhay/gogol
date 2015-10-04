@@ -50,7 +50,7 @@ type URLListResource =
      "url" :>
        "history" :>
          QueryParam "start-token" Text :>
-           QueryParam "projection" Projection :>
+           QueryParam "projection" URLListProjection :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -68,7 +68,7 @@ data URLList' = URLList'
     , _ulUserIP      :: !(Maybe Text)
     , _ulStartToken  :: !(Maybe Text)
     , _ulKey         :: !(Maybe Key)
-    , _ulProjection  :: !(Maybe Projection)
+    , _ulProjection  :: !(Maybe URLListProjection)
     , _ulOAuthToken  :: !(Maybe OAuthToken)
     , _ulFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -136,7 +136,7 @@ ulKey :: Lens' URLList' (Maybe Key)
 ulKey = lens _ulKey (\ s a -> s{_ulKey = a})
 
 -- | Additional information to return.
-ulProjection :: Lens' URLList' (Maybe Projection)
+ulProjection :: Lens' URLList' (Maybe URLListProjection)
 ulProjection
   = lens _ulProjection (\ s a -> s{_ulProjection = a})
 

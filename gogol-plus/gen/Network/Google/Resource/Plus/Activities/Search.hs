@@ -52,7 +52,7 @@ import           Network.Google.Prelude
 type ActivitiesSearchResource =
      "activities" :>
        QueryParam "query" Text :>
-         QueryParam "orderBy" OrderBy :>
+         QueryParam "orderBy" ActivitiesSearchOrderBy :>
            QueryParam "language" Text :>
              QueryParam "pageToken" Text :>
                QueryParam "maxResults" Word32 :>
@@ -71,7 +71,7 @@ type ActivitiesSearchResource =
 data ActivitiesSearch' = ActivitiesSearch'
     { _asQuotaUser   :: !(Maybe Text)
     , _asPrettyPrint :: !Bool
-    , _asOrderBy     :: !OrderBy
+    , _asOrderBy     :: !ActivitiesSearchOrderBy
     , _asUserIP      :: !(Maybe Text)
     , _asKey         :: !(Maybe Key)
     , _asQuery       :: !Text
@@ -114,7 +114,7 @@ activitiesSearch' pAsQuery_ =
     ActivitiesSearch'
     { _asQuotaUser = Nothing
     , _asPrettyPrint = True
-    , _asOrderBy = Recent
+    , _asOrderBy = ASOBRecent
     , _asUserIP = Nothing
     , _asKey = Nothing
     , _asQuery = pAsQuery_
@@ -139,7 +139,7 @@ asPrettyPrint
       (\ s a -> s{_asPrettyPrint = a})
 
 -- | Specifies how to order search results.
-asOrderBy :: Lens' ActivitiesSearch' OrderBy
+asOrderBy :: Lens' ActivitiesSearch' ActivitiesSearchOrderBy
 asOrderBy
   = lens _asOrderBy (\ s a -> s{_asOrderBy = a})
 

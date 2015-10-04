@@ -60,7 +60,7 @@ type GroupsAddMemberResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] GroupsAddMemberRequest :>
+                             ReqBody '[OctetStream] GroupsAddMemberRequest :>
                                Post '[JSON] Operation
 
 -- | Adds users to the specified group.

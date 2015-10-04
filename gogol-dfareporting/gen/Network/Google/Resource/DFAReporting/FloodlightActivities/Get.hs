@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.FloodlightActivities.Get
     , fQuotaUser
     , fPrettyPrint
     , fUserIP
-    , fProfileId
+    , fProFileId
     , fKey
     , fId
     , fOAuthToken
@@ -67,7 +67,7 @@ data FloodlightActivitiesGet' = FloodlightActivitiesGet'
     { _fQuotaUser   :: !(Maybe Text)
     , _fPrettyPrint :: !Bool
     , _fUserIP      :: !(Maybe Text)
-    , _fProfileId   :: !Int64
+    , _fProFileId   :: !Int64
     , _fKey         :: !(Maybe Key)
     , _fId          :: !Int64
     , _fOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data FloodlightActivitiesGet' = FloodlightActivitiesGet'
 --
 -- * 'fUserIP'
 --
--- * 'fProfileId'
+-- * 'fProFileId'
 --
 -- * 'fKey'
 --
@@ -97,12 +97,12 @@ floodlightActivitiesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> FloodlightActivitiesGet'
-floodlightActivitiesGet' pFProfileId_ pFId_ =
+floodlightActivitiesGet' pFProFileId_ pFId_ =
     FloodlightActivitiesGet'
     { _fQuotaUser = Nothing
     , _fPrettyPrint = True
     , _fUserIP = Nothing
-    , _fProfileId = pFProfileId_
+    , _fProFileId = pFProFileId_
     , _fKey = Nothing
     , _fId = pFId_
     , _fOAuthToken = Nothing
@@ -127,9 +127,9 @@ fUserIP :: Lens' FloodlightActivitiesGet' (Maybe Text)
 fUserIP = lens _fUserIP (\ s a -> s{_fUserIP = a})
 
 -- | User profile ID associated with this request.
-fProfileId :: Lens' FloodlightActivitiesGet' Int64
-fProfileId
-  = lens _fProfileId (\ s a -> s{_fProfileId = a})
+fProFileId :: Lens' FloodlightActivitiesGet' Int64
+fProFileId
+  = lens _fProFileId (\ s a -> s{_fProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -158,7 +158,7 @@ instance GoogleRequest FloodlightActivitiesGet' where
         type Rs FloodlightActivitiesGet' = FloodlightActivity
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u FloodlightActivitiesGet'{..}
-          = go _fProfileId _fId _fQuotaUser
+          = go _fProFileId _fId _fQuotaUser
               (Just _fPrettyPrint)
               _fUserIP
               _fFields

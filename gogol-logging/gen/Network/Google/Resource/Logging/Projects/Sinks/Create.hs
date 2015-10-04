@@ -71,7 +71,7 @@ type ProjectsSinksCreateResource =
                                  QueryParam "key" Key :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
-                                       ReqBody '[JSON] LogSink :>
+                                       ReqBody '[OctetStream] LogSink :>
                                          Post '[JSON] LogSink
 
 -- | Creates a project sink. A logs filter determines which log entries are

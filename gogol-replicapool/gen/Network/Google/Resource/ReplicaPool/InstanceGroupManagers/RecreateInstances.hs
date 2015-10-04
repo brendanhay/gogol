@@ -63,7 +63,7 @@ type InstanceGroupManagersRecreateInstancesResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON]
+                               ReqBody '[OctetStream]
                                  InstanceGroupManagersRecreateInstancesRequest
                                  :> Post '[JSON] Operation
 

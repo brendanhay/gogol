@@ -36,7 +36,7 @@ module Network.Google.Resource.DFAReporting.DirectorySiteContacts.List
     , dsclUserIP
     , dsclSearchString
     , dsclIds
-    , dsclProfileId
+    , dsclProFileId
     , dsclDirectorySiteIds
     , dsclSortOrder
     , dsclKey
@@ -60,11 +60,11 @@ type DirectorySiteContactsListResource =
              QueryParams "ids" Int64 :>
                QueryParams "directorySiteIds" Int64 :>
                  QueryParam "sortOrder"
-                   DfareportingDirectorySiteContactsListSortOrder
+                   DirectorySiteContactsListSortOrder
                    :>
                    QueryParam "pageToken" Text :>
                      QueryParam "sortField"
-                       DfareportingDirectorySiteContactsListSortField
+                       DirectorySiteContactsListSortField
                        :>
                        QueryParam "maxResults" Int32 :>
                          QueryParam "quotaUser" Text :>
@@ -86,12 +86,12 @@ data DirectorySiteContactsList' = DirectorySiteContactsList'
     , _dsclUserIP           :: !(Maybe Text)
     , _dsclSearchString     :: !(Maybe Text)
     , _dsclIds              :: !(Maybe [Int64])
-    , _dsclProfileId        :: !Int64
+    , _dsclProFileId        :: !Int64
     , _dsclDirectorySiteIds :: !(Maybe [Int64])
-    , _dsclSortOrder        :: !(Maybe DfareportingDirectorySiteContactsListSortOrder)
+    , _dsclSortOrder        :: !(Maybe DirectorySiteContactsListSortOrder)
     , _dsclKey              :: !(Maybe Key)
     , _dsclPageToken        :: !(Maybe Text)
-    , _dsclSortField        :: !(Maybe DfareportingDirectorySiteContactsListSortField)
+    , _dsclSortField        :: !(Maybe DirectorySiteContactsListSortField)
     , _dsclOAuthToken       :: !(Maybe OAuthToken)
     , _dsclMaxResults       :: !(Maybe Int32)
     , _dsclFields           :: !(Maybe Text)
@@ -111,7 +111,7 @@ data DirectorySiteContactsList' = DirectorySiteContactsList'
 --
 -- * 'dsclIds'
 --
--- * 'dsclProfileId'
+-- * 'dsclProFileId'
 --
 -- * 'dsclDirectorySiteIds'
 --
@@ -131,14 +131,14 @@ data DirectorySiteContactsList' = DirectorySiteContactsList'
 directorySiteContactsList'
     :: Int64 -- ^ 'profileId'
     -> DirectorySiteContactsList'
-directorySiteContactsList' pDsclProfileId_ =
+directorySiteContactsList' pDsclProFileId_ =
     DirectorySiteContactsList'
     { _dsclQuotaUser = Nothing
     , _dsclPrettyPrint = True
     , _dsclUserIP = Nothing
     , _dsclSearchString = Nothing
     , _dsclIds = Nothing
-    , _dsclProfileId = pDsclProfileId_
+    , _dsclProFileId = pDsclProFileId_
     , _dsclDirectorySiteIds = Nothing
     , _dsclSortOrder = Nothing
     , _dsclKey = Nothing
@@ -190,10 +190,10 @@ dsclIds
       . _Coerce
 
 -- | User profile ID associated with this request.
-dsclProfileId :: Lens' DirectorySiteContactsList' Int64
-dsclProfileId
-  = lens _dsclProfileId
-      (\ s a -> s{_dsclProfileId = a})
+dsclProFileId :: Lens' DirectorySiteContactsList' Int64
+dsclProFileId
+  = lens _dsclProFileId
+      (\ s a -> s{_dsclProFileId = a})
 
 -- | Select only directory site contacts with these directory site IDs. This
 -- is a required field.
@@ -205,7 +205,7 @@ dsclDirectorySiteIds
       . _Coerce
 
 -- | Order of sorted results, default is ASCENDING.
-dsclSortOrder :: Lens' DirectorySiteContactsList' (Maybe DfareportingDirectorySiteContactsListSortOrder)
+dsclSortOrder :: Lens' DirectorySiteContactsList' (Maybe DirectorySiteContactsListSortOrder)
 dsclSortOrder
   = lens _dsclSortOrder
       (\ s a -> s{_dsclSortOrder = a})
@@ -223,7 +223,7 @@ dsclPageToken
       (\ s a -> s{_dsclPageToken = a})
 
 -- | Field by which to sort the list.
-dsclSortField :: Lens' DirectorySiteContactsList' (Maybe DfareportingDirectorySiteContactsListSortField)
+dsclSortField :: Lens' DirectorySiteContactsList' (Maybe DirectorySiteContactsListSortField)
 dsclSortField
   = lens _dsclSortField
       (\ s a -> s{_dsclSortField = a})
@@ -255,7 +255,7 @@ instance GoogleRequest DirectorySiteContactsList'
              DirectorySiteContactsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u DirectorySiteContactsList'{..}
-          = go _dsclProfileId _dsclSearchString
+          = go _dsclProFileId _dsclSearchString
               (_dsclIds ^. _Default)
               (_dsclDirectorySiteIds ^. _Default)
               _dsclSortOrder

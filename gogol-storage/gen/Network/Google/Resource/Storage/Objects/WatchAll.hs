@@ -59,9 +59,7 @@ type ObjectsWatchAllResource =
            "watch" :>
              QueryParam "prefix" Text :>
                QueryParam "versions" Bool :>
-                 QueryParam "projection"
-                   StorageObjectsWatchAllProjection
-                   :>
+                 QueryParam "projection" ObjectsWatchAllProjection :>
                    QueryParam "pageToken" Text :>
                      QueryParam "delimiter" Text :>
                        QueryParam "maxResults" Word32 :>
@@ -72,7 +70,7 @@ type ObjectsWatchAllResource =
                                  QueryParam "key" Key :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
-                                       ReqBody '[JSON] Channel :>
+                                       ReqBody '[OctetStream] Channel :>
                                          Post '[JSON] Channel
 
 -- | Watch for changes on all objects in a bucket.
@@ -87,7 +85,7 @@ data ObjectsWatchAll' = ObjectsWatchAll'
     , _owaPayload     :: !Channel
     , _owaVersions    :: !(Maybe Bool)
     , _owaKey         :: !(Maybe Key)
-    , _owaProjection  :: !(Maybe StorageObjectsWatchAllProjection)
+    , _owaProjection  :: !(Maybe ObjectsWatchAllProjection)
     , _owaPageToken   :: !(Maybe Text)
     , _owaOAuthToken  :: !(Maybe OAuthToken)
     , _owaDelimiter   :: !(Maybe Text)
@@ -194,7 +192,7 @@ owaKey :: Lens' ObjectsWatchAll' (Maybe Key)
 owaKey = lens _owaKey (\ s a -> s{_owaKey = a})
 
 -- | Set of properties to return. Defaults to noAcl.
-owaProjection :: Lens' ObjectsWatchAll' (Maybe StorageObjectsWatchAllProjection)
+owaProjection :: Lens' ObjectsWatchAll' (Maybe ObjectsWatchAllProjection)
 owaProjection
   = lens _owaProjection
       (\ s a -> s{_owaProjection = a})

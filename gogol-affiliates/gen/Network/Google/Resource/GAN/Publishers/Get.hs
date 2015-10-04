@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @GANPublishersGet@ which the
 -- 'PublishersGet'' request conforms to.
 type PublishersGetResource =
-     Capture "role" GANPublishersGetRole :>
+     Capture "role" PublishersGetRole :>
        Capture "roleId" Text :>
          "publisher" :>
            QueryParam "publisherId" Text :>
@@ -74,7 +74,7 @@ data PublishersGet' = PublishersGet'
     , _pgPrettyPrint :: !Bool
     , _pgUserIP      :: !(Maybe Text)
     , _pgRoleId      :: !Text
-    , _pgRole        :: !GANPublishersGetRole
+    , _pgRole        :: !PublishersGetRole
     , _pgKey         :: !(Maybe Key)
     , _pgOAuthToken  :: !(Maybe OAuthToken)
     , _pgPublisherId :: !(Maybe Text)
@@ -104,7 +104,7 @@ data PublishersGet' = PublishersGet'
 -- * 'pgFields'
 publishersGet'
     :: Text -- ^ 'roleId'
-    -> GANPublishersGetRole -- ^ 'role'
+    -> PublishersGetRole -- ^ 'role'
     -> PublishersGet'
 publishersGet' pPgRoleId_ pPgRole_ =
     PublishersGet'
@@ -143,7 +143,7 @@ pgRoleId = lens _pgRoleId (\ s a -> s{_pgRoleId = a})
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-pgRole :: Lens' PublishersGet' GANPublishersGetRole
+pgRole :: Lens' PublishersGet' PublishersGetRole
 pgRole = lens _pgRole (\ s a -> s{_pgRole = a})
 
 -- | API key. Your API key identifies your project and provides you with API

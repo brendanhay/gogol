@@ -18,6 +18,29 @@ module Network.Google.CivicInfo.Types.Product where
 import           Network.Google.CivicInfo.Types.Sum
 import           Network.Google.Prelude
 
+-- | Political geographic divisions that contain the requested address.
+--
+-- /See:/ 'representativeInfoResponseDivisions' smart constructor.
+data RepresentativeInfoResponseDivisions =
+    RepresentativeInfoResponseDivisions
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RepresentativeInfoResponseDivisions' with the minimum fields required to make a request.
+--
+representativeInfoResponseDivisions
+    :: RepresentativeInfoResponseDivisions
+representativeInfoResponseDivisions = RepresentativeInfoResponseDivisions
+
+instance FromJSON RepresentativeInfoResponseDivisions
+         where
+        parseJSON
+          = withObject "RepresentativeInfoResponseDivisions"
+              (\ o -> pure RepresentativeInfoResponseDivisions)
+
+instance ToJSON RepresentativeInfoResponseDivisions
+         where
+        toJSON = const (Object mempty)
+
 -- | The result of a voter info lookup query.
 --
 -- /See:/ 'voterInfoResponse' smart constructor.
@@ -614,6 +637,50 @@ instance ToJSON Office where
                   ("sources" .=) <$> _oSources, ("name" .=) <$> _oName,
                   ("levels" .=) <$> _oLevels])
 
+-- | A social media or web channel for a candidate.
+--
+-- /See:/ 'channel' smart constructor.
+data Channel = Channel
+    { _cId   :: !(Maybe Text)
+    , _cType :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Channel' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cId'
+--
+-- * 'cType'
+channel
+    :: Channel
+channel =
+    Channel
+    { _cId = Nothing
+    , _cType = Nothing
+    }
+
+-- | The unique public identifier for the candidate\'s channel.
+cId :: Lens' Channel (Maybe Text)
+cId = lens _cId (\ s a -> s{_cId = a})
+
+-- | The type of channel. The following is a list of types of channels, but
+-- is not exhaustive. More channel types may be added at a later time. One
+-- of: GooglePlus, YouTube, Facebook, Twitter
+cType :: Lens' Channel (Maybe Text)
+cType = lens _cType (\ s a -> s{_cType = a})
+
+instance FromJSON Channel where
+        parseJSON
+          = withObject "Channel"
+              (\ o -> Channel <$> (o .:? "id") <*> (o .:? "type"))
+
+instance ToJSON Channel where
+        toJSON Channel{..}
+          = object
+              (catMaybes
+                 [("id" .=) <$> _cId, ("type" .=) <$> _cType])
+
 -- | Information about the election that was queried.
 --
 -- /See:/ 'election' smart constructor.
@@ -685,50 +752,6 @@ instance ToJSON Election where
                   ("electionDay" .=) <$> _eElectionDay,
                   ("name" .=) <$> _eName, ("id" .=) <$> _eId])
 
--- | A social media or web channel for a candidate.
---
--- /See:/ 'channel' smart constructor.
-data Channel = Channel
-    { _cId   :: !(Maybe Text)
-    , _cType :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Channel' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cId'
---
--- * 'cType'
-channel
-    :: Channel
-channel =
-    Channel
-    { _cId = Nothing
-    , _cType = Nothing
-    }
-
--- | The unique public identifier for the candidate\'s channel.
-cId :: Lens' Channel (Maybe Text)
-cId = lens _cId (\ s a -> s{_cId = a})
-
--- | The type of channel. The following is a list of types of channels, but
--- is not exhaustive. More channel types may be added at a later time. One
--- of: GooglePlus, YouTube, Facebook, Twitter
-cType :: Lens' Channel (Maybe Text)
-cType = lens _cType (\ s a -> s{_cType = a})
-
-instance FromJSON Channel where
-        parseJSON
-          = withObject "Channel"
-              (\ o -> Channel <$> (o .:? "id") <*> (o .:? "type"))
-
-instance ToJSON Channel where
-        toJSON Channel{..}
-          = object
-              (catMaybes
-                 [("id" .=) <$> _cId, ("type" .=) <$> _cType])
-
 -- | The result of a representative info lookup query.
 --
 -- /See:/ 'representativeInfoResponse' smart constructor.
@@ -736,7 +759,7 @@ data RepresentativeInfoResponse = RepresentativeInfoResponse
     { _rirKind            :: !Text
     , _rirNormalizedInput :: !(Maybe SimpleAddressType)
     , _rirOfficials       :: !(Maybe [Official])
-    , _rirDivisions       :: !(Maybe Divisions)
+    , _rirDivisions       :: !(Maybe RepresentativeInfoResponseDivisions)
     , _rirOffices         :: !(Maybe [Office])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -784,7 +807,7 @@ rirOfficials
       . _Coerce
 
 -- | Political geographic divisions that contain the requested address.
-rirDivisions :: Lens' RepresentativeInfoResponse (Maybe Divisions)
+rirDivisions :: Lens' RepresentativeInfoResponse (Maybe RepresentativeInfoResponseDivisions)
 rirDivisions
   = lens _rirDivisions (\ s a -> s{_rirDivisions = a})
 
@@ -1496,26 +1519,6 @@ instance FromJSON RepresentativeInfoDataDivisions
               (\ o -> pure RepresentativeInfoDataDivisions)
 
 instance ToJSON RepresentativeInfoDataDivisions where
-        toJSON = const (Object mempty)
-
--- | Political geographic divisions that contain the requested address.
---
--- /See:/ 'divisions' smart constructor.
-data Divisions =
-    Divisions
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Divisions' with the minimum fields required to make a request.
---
-divisions
-    :: Divisions
-divisions = Divisions
-
-instance FromJSON Divisions where
-        parseJSON
-          = withObject "Divisions" (\ o -> pure Divisions)
-
-instance ToJSON Divisions where
         toJSON = const (Object mempty)
 
 -- | Information about individual election officials.

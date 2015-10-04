@@ -73,7 +73,8 @@ type BeaconsUpdateResource =
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] Beacon :> Put '[JSON] Beacon
+                                   ReqBody '[OctetStream] Beacon :>
+                                     Put '[JSON] Beacon
 
 -- | Updates the information about the specified beacon. **Any field that you
 -- do not populate in the submitted beacon will be permanently erased**, so

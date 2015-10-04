@@ -59,7 +59,7 @@ type PretargetingConfigPatchResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] PretargetingConfig :>
+                         ReqBody '[OctetStream] PretargetingConfig :>
                            Patch '[JSON] PretargetingConfig
 
 -- | Updates an existing pretargeting config. This method supports patch

@@ -61,7 +61,7 @@ type LicenseAssignmentsUpdateResource =
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] LicenseAssignment :>
+                             ReqBody '[OctetStream] LicenseAssignment :>
                                Put '[JSON] LicenseAssignment
 
 -- | Assign License.

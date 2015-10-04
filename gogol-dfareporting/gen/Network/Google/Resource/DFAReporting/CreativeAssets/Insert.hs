@@ -35,7 +35,7 @@ module Network.Google.Resource.DFAReporting.CreativeAssets.Insert
     , caiPrettyPrint
     , caiUserIP
     , caiAdvertiserId
-    , caiProfileId
+    , caiProFileId
     , caiPayload
     , caiMedia
     , caiKey
@@ -72,7 +72,7 @@ data CreativeAssetsInsert' = CreativeAssetsInsert'
     , _caiPrettyPrint  :: !Bool
     , _caiUserIP       :: !(Maybe Text)
     , _caiAdvertiserId :: !Int64
-    , _caiProfileId    :: !Int64
+    , _caiProFileId    :: !Int64
     , _caiPayload      :: !CreativeAssetMetadata
     , _caiMedia        :: !Body
     , _caiKey          :: !(Maybe Key)
@@ -92,7 +92,7 @@ data CreativeAssetsInsert' = CreativeAssetsInsert'
 --
 -- * 'caiAdvertiserId'
 --
--- * 'caiProfileId'
+-- * 'caiProFileId'
 --
 -- * 'caiPayload'
 --
@@ -109,13 +109,13 @@ creativeAssetsInsert'
     -> CreativeAssetMetadata -- ^ 'payload'
     -> Body -- ^ 'media'
     -> CreativeAssetsInsert'
-creativeAssetsInsert' pCaiAdvertiserId_ pCaiProfileId_ pCaiPayload_ pCaiMedia_ =
+creativeAssetsInsert' pCaiAdvertiserId_ pCaiProFileId_ pCaiPayload_ pCaiMedia_ =
     CreativeAssetsInsert'
     { _caiQuotaUser = Nothing
     , _caiPrettyPrint = True
     , _caiUserIP = Nothing
     , _caiAdvertiserId = pCaiAdvertiserId_
-    , _caiProfileId = pCaiProfileId_
+    , _caiProFileId = pCaiProFileId_
     , _caiPayload = pCaiPayload_
     , _caiMedia = pCaiMedia_
     , _caiKey = Nothing
@@ -149,9 +149,9 @@ caiAdvertiserId
       (\ s a -> s{_caiAdvertiserId = a})
 
 -- | User profile ID associated with this request.
-caiProfileId :: Lens' CreativeAssetsInsert' Int64
-caiProfileId
-  = lens _caiProfileId (\ s a -> s{_caiProfileId = a})
+caiProFileId :: Lens' CreativeAssetsInsert' Int64
+caiProFileId
+  = lens _caiProFileId (\ s a -> s{_caiProFileId = a})
 
 -- | Multipart request metadata.
 caiPayload :: Lens' CreativeAssetsInsert' CreativeAssetMetadata
@@ -186,7 +186,7 @@ instance GoogleRequest CreativeAssetsInsert' where
         type Rs CreativeAssetsInsert' = CreativeAssetMetadata
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeAssetsInsert'{..}
-          = go _caiProfileId _caiAdvertiserId _caiQuotaUser
+          = go _caiProFileId _caiAdvertiserId _caiQuotaUser
               (Just _caiPrettyPrint)
               _caiUserIP
               _caiFields

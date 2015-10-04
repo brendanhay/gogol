@@ -57,7 +57,8 @@ type AchievementsResetMultipleForAllPlayersResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] AchievementResetMultipleForAllRequest
+                       ReqBody '[OctetStream]
+                         AchievementResetMultipleForAllRequest
                          :> Post '[JSON] ()
 
 -- | Resets achievements with the given IDs for all players. This method is

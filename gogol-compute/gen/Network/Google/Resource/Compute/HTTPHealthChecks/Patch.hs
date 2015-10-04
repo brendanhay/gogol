@@ -60,7 +60,7 @@ type HTTPHealthChecksPatchResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] HTTPHealthCheck :>
+                           ReqBody '[OctetStream] HTTPHealthCheck :>
                              Patch '[JSON] Operation
 
 -- | Updates a HttpHealthCheck resource in the specified project using the

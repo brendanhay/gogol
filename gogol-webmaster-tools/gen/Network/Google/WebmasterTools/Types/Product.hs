@@ -76,71 +76,6 @@ instance ToJSON WmxSitemapContent where
                   ("type" .=) <$> _wscType,
                   ("submitted" .=) <$> _wscSubmitted])
 
--- | Number of errors per day for a specific error type (defined by platform
--- and category).
---
--- /See:/ 'urlCrawlErrorCountsPerType' smart constructor.
-data URLCrawlErrorCountsPerType = URLCrawlErrorCountsPerType
-    { _ucecptPlatform :: !(Maybe Text)
-    , _ucecptEntries  :: !(Maybe [URLCrawlErrorCount])
-    , _ucecptCategory :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'URLCrawlErrorCountsPerType' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ucecptPlatform'
---
--- * 'ucecptEntries'
---
--- * 'ucecptCategory'
-urlCrawlErrorCountsPerType
-    :: URLCrawlErrorCountsPerType
-urlCrawlErrorCountsPerType =
-    URLCrawlErrorCountsPerType
-    { _ucecptPlatform = Nothing
-    , _ucecptEntries = Nothing
-    , _ucecptCategory = Nothing
-    }
-
--- | The general type of Googlebot that made the request (see list of
--- Googlebot user-agents for the user-agents used).
-ucecptPlatform :: Lens' URLCrawlErrorCountsPerType (Maybe Text)
-ucecptPlatform
-  = lens _ucecptPlatform
-      (\ s a -> s{_ucecptPlatform = a})
-
--- | The error count entries time series.
-ucecptEntries :: Lens' URLCrawlErrorCountsPerType [URLCrawlErrorCount]
-ucecptEntries
-  = lens _ucecptEntries
-      (\ s a -> s{_ucecptEntries = a})
-      . _Default
-      . _Coerce
-
--- | The crawl error type.
-ucecptCategory :: Lens' URLCrawlErrorCountsPerType (Maybe Text)
-ucecptCategory
-  = lens _ucecptCategory
-      (\ s a -> s{_ucecptCategory = a})
-
-instance FromJSON URLCrawlErrorCountsPerType where
-        parseJSON
-          = withObject "URLCrawlErrorCountsPerType"
-              (\ o ->
-                 URLCrawlErrorCountsPerType <$>
-                   (o .:? "platform") <*> (o .:? "entries" .!= mempty)
-                     <*> (o .:? "category"))
-
-instance ToJSON URLCrawlErrorCountsPerType where
-        toJSON URLCrawlErrorCountsPerType{..}
-          = object
-              (catMaybes
-                 [("platform" .=) <$> _ucecptPlatform,
-                  ("entries" .=) <$> _ucecptEntries,
-                  ("category" .=) <$> _ucecptCategory])
-
 --
 -- /See:/ 'apidimensionFilterGroup' smart constructor.
 data APIdimensionFilterGroup = APIdimensionFilterGroup
@@ -241,6 +176,71 @@ instance ToJSON URLSampleDetails where
                  [("linkedFromUrls" .=) <$> _usdLinkedFromURLs,
                   ("containingSitemaps" .=) <$>
                     _usdContainingSitemaps])
+
+-- | Number of errors per day for a specific error type (defined by platform
+-- and category).
+--
+-- /See:/ 'urlCrawlErrorCountsPerType' smart constructor.
+data URLCrawlErrorCountsPerType = URLCrawlErrorCountsPerType
+    { _ucecptPlatform :: !(Maybe Text)
+    , _ucecptEntries  :: !(Maybe [URLCrawlErrorCount])
+    , _ucecptCategory :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'URLCrawlErrorCountsPerType' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ucecptPlatform'
+--
+-- * 'ucecptEntries'
+--
+-- * 'ucecptCategory'
+urlCrawlErrorCountsPerType
+    :: URLCrawlErrorCountsPerType
+urlCrawlErrorCountsPerType =
+    URLCrawlErrorCountsPerType
+    { _ucecptPlatform = Nothing
+    , _ucecptEntries = Nothing
+    , _ucecptCategory = Nothing
+    }
+
+-- | The general type of Googlebot that made the request (see list of
+-- Googlebot user-agents for the user-agents used).
+ucecptPlatform :: Lens' URLCrawlErrorCountsPerType (Maybe Text)
+ucecptPlatform
+  = lens _ucecptPlatform
+      (\ s a -> s{_ucecptPlatform = a})
+
+-- | The error count entries time series.
+ucecptEntries :: Lens' URLCrawlErrorCountsPerType [URLCrawlErrorCount]
+ucecptEntries
+  = lens _ucecptEntries
+      (\ s a -> s{_ucecptEntries = a})
+      . _Default
+      . _Coerce
+
+-- | The crawl error type.
+ucecptCategory :: Lens' URLCrawlErrorCountsPerType (Maybe Text)
+ucecptCategory
+  = lens _ucecptCategory
+      (\ s a -> s{_ucecptCategory = a})
+
+instance FromJSON URLCrawlErrorCountsPerType where
+        parseJSON
+          = withObject "URLCrawlErrorCountsPerType"
+              (\ o ->
+                 URLCrawlErrorCountsPerType <$>
+                   (o .:? "platform") <*> (o .:? "entries" .!= mempty)
+                     <*> (o .:? "category"))
+
+instance ToJSON URLCrawlErrorCountsPerType where
+        toJSON URLCrawlErrorCountsPerType{..}
+          = object
+              (catMaybes
+                 [("platform" .=) <$> _ucecptPlatform,
+                  ("entries" .=) <$> _ucecptEntries,
+                  ("category" .=) <$> _ucecptCategory])
 
 --
 -- /See:/ 'apidataRow' smart constructor.
@@ -646,44 +646,6 @@ instance ToJSON URLCrawlErrorsSample where
                   ("pageUrl" .=) <$> _ucesPageURL,
                   ("first_detected" .=) <$> _ucesFirstDetected])
 
--- | List of sitemaps.
---
--- /See:/ 'sitemapsListResponse' smart constructor.
-newtype SitemapsListResponse = SitemapsListResponse
-    { _slrSitemap :: Maybe [WmxSitemap]
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SitemapsListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'slrSitemap'
-sitemapsListResponse
-    :: SitemapsListResponse
-sitemapsListResponse =
-    SitemapsListResponse
-    { _slrSitemap = Nothing
-    }
-
--- | Contains detailed information about a specific URL submitted as a
--- sitemap.
-slrSitemap :: Lens' SitemapsListResponse [WmxSitemap]
-slrSitemap
-  = lens _slrSitemap (\ s a -> s{_slrSitemap = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON SitemapsListResponse where
-        parseJSON
-          = withObject "SitemapsListResponse"
-              (\ o ->
-                 SitemapsListResponse <$>
-                   (o .:? "sitemap" .!= mempty))
-
-instance ToJSON SitemapsListResponse where
-        toJSON SitemapsListResponse{..}
-          = object (catMaybes [("sitemap" .=) <$> _slrSitemap])
-
 -- | Contains detailed information about a specific URL submitted as a
 -- sitemap.
 --
@@ -816,6 +778,44 @@ instance ToJSON WmxSitemap where
                   ("isPending" .=) <$> _wsIsPending,
                   ("type" .=) <$> _wsType,
                   ("errors" .=) <$> _wsErrors])
+
+-- | List of sitemaps.
+--
+-- /See:/ 'sitemapsListResponse' smart constructor.
+newtype SitemapsListResponse = SitemapsListResponse
+    { _slrSitemap :: Maybe [WmxSitemap]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SitemapsListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'slrSitemap'
+sitemapsListResponse
+    :: SitemapsListResponse
+sitemapsListResponse =
+    SitemapsListResponse
+    { _slrSitemap = Nothing
+    }
+
+-- | Contains detailed information about a specific URL submitted as a
+-- sitemap.
+slrSitemap :: Lens' SitemapsListResponse [WmxSitemap]
+slrSitemap
+  = lens _slrSitemap (\ s a -> s{_slrSitemap = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON SitemapsListResponse where
+        parseJSON
+          = withObject "SitemapsListResponse"
+              (\ o ->
+                 SitemapsListResponse <$>
+                   (o .:? "sitemap" .!= mempty))
+
+instance ToJSON SitemapsListResponse where
+        toJSON SitemapsListResponse{..}
+          = object (catMaybes [("sitemap" .=) <$> _slrSitemap])
 
 --
 -- /See:/ 'searchAnalyticsQueryRequest' smart constructor.

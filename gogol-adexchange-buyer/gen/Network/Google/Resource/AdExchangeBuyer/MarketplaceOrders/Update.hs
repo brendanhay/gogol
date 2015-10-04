@@ -53,7 +53,7 @@ type MarketplaceOrdersUpdateResource =
        Capture "orderId" Text :>
          Capture "revisionNumber" Int64 :>
            Capture "updateAction"
-             AdexchangebuyerMarketplaceOrdersUpdateUpdateAction
+             MarketplaceOrdersUpdateUpdateAction
              :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
@@ -62,7 +62,7 @@ type MarketplaceOrdersUpdateResource =
                      QueryParam "key" Key :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] MarketplaceOrder :>
+                           ReqBody '[OctetStream] MarketplaceOrder :>
                              Put '[JSON] MarketplaceOrder
 
 -- | Update the given order
@@ -70,7 +70,7 @@ type MarketplaceOrdersUpdateResource =
 -- /See:/ 'marketplaceOrdersUpdate'' smart constructor.
 data MarketplaceOrdersUpdate' = MarketplaceOrdersUpdate'
     { _mouQuotaUser      :: !(Maybe Text)
-    , _mouUpdateAction   :: !AdexchangebuyerMarketplaceOrdersUpdateUpdateAction
+    , _mouUpdateAction   :: !MarketplaceOrdersUpdateUpdateAction
     , _mouPrettyPrint    :: !Bool
     , _mouUserIP         :: !(Maybe Text)
     , _mouRevisionNumber :: !Int64
@@ -105,7 +105,7 @@ data MarketplaceOrdersUpdate' = MarketplaceOrdersUpdate'
 --
 -- * 'mouFields'
 marketplaceOrdersUpdate'
-    :: AdexchangebuyerMarketplaceOrdersUpdateUpdateAction -- ^ 'updateAction'
+    :: MarketplaceOrdersUpdateUpdateAction -- ^ 'updateAction'
     -> Int64 -- ^ 'revisionNumber'
     -> MarketplaceOrder -- ^ 'payload'
     -> Text -- ^ 'orderId'
@@ -132,7 +132,7 @@ mouQuotaUser
   = lens _mouQuotaUser (\ s a -> s{_mouQuotaUser = a})
 
 -- | The proposed action to take on the order.
-mouUpdateAction :: Lens' MarketplaceOrdersUpdate' AdexchangebuyerMarketplaceOrdersUpdateUpdateAction
+mouUpdateAction :: Lens' MarketplaceOrdersUpdate' MarketplaceOrdersUpdateUpdateAction
 mouUpdateAction
   = lens _mouUpdateAction
       (\ s a -> s{_mouUpdateAction = a})

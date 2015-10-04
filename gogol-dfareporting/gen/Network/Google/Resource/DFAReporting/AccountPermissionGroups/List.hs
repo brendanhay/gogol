@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.AccountPermissionGroups.List
     , apglQuotaUser
     , apglPrettyPrint
     , apglUserIP
-    , apglProfileId
+    , apglProFileId
     , apglKey
     , apglOAuthToken
     , apglFields
@@ -65,7 +65,7 @@ data AccountPermissionGroupsList' = AccountPermissionGroupsList'
     { _apglQuotaUser   :: !(Maybe Text)
     , _apglPrettyPrint :: !Bool
     , _apglUserIP      :: !(Maybe Text)
-    , _apglProfileId   :: !Int64
+    , _apglProFileId   :: !Int64
     , _apglKey         :: !(Maybe Key)
     , _apglOAuthToken  :: !(Maybe OAuthToken)
     , _apglFields      :: !(Maybe Text)
@@ -81,7 +81,7 @@ data AccountPermissionGroupsList' = AccountPermissionGroupsList'
 --
 -- * 'apglUserIP'
 --
--- * 'apglProfileId'
+-- * 'apglProFileId'
 --
 -- * 'apglKey'
 --
@@ -91,12 +91,12 @@ data AccountPermissionGroupsList' = AccountPermissionGroupsList'
 accountPermissionGroupsList'
     :: Int64 -- ^ 'profileId'
     -> AccountPermissionGroupsList'
-accountPermissionGroupsList' pApglProfileId_ =
+accountPermissionGroupsList' pApglProFileId_ =
     AccountPermissionGroupsList'
     { _apglQuotaUser = Nothing
     , _apglPrettyPrint = True
     , _apglUserIP = Nothing
-    , _apglProfileId = pApglProfileId_
+    , _apglProFileId = pApglProFileId_
     , _apglKey = Nothing
     , _apglOAuthToken = Nothing
     , _apglFields = Nothing
@@ -123,10 +123,10 @@ apglUserIP
   = lens _apglUserIP (\ s a -> s{_apglUserIP = a})
 
 -- | User profile ID associated with this request.
-apglProfileId :: Lens' AccountPermissionGroupsList' Int64
-apglProfileId
-  = lens _apglProfileId
-      (\ s a -> s{_apglProfileId = a})
+apglProFileId :: Lens' AccountPermissionGroupsList' Int64
+apglProFileId
+  = lens _apglProFileId
+      (\ s a -> s{_apglProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -156,7 +156,7 @@ instance GoogleRequest AccountPermissionGroupsList'
              AccountPermissionGroupsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AccountPermissionGroupsList'{..}
-          = go _apglProfileId _apglQuotaUser
+          = go _apglProFileId _apglQuotaUser
               (Just _apglPrettyPrint)
               _apglUserIP
               _apglFields

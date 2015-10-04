@@ -50,7 +50,7 @@ type UsersAliasesListResource =
      "users" :>
        Capture "userKey" Text :>
          "aliases" :>
-           QueryParam "event" Event :>
+           QueryParam "event" UsersAliasesListEvent :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -63,7 +63,7 @@ type UsersAliasesListResource =
 --
 -- /See:/ 'usersAliasesList'' smart constructor.
 data UsersAliasesList' = UsersAliasesList'
-    { _ualEvent       :: !(Maybe Event)
+    { _ualEvent       :: !(Maybe UsersAliasesListEvent)
     , _ualQuotaUser   :: !(Maybe Text)
     , _ualPrettyPrint :: !Bool
     , _ualUserIP      :: !(Maybe Text)
@@ -108,7 +108,7 @@ usersAliasesList' pUalUserKey_ =
     }
 
 -- | Event on which subscription is intended (if subscribing)
-ualEvent :: Lens' UsersAliasesList' (Maybe Event)
+ualEvent :: Lens' UsersAliasesList' (Maybe UsersAliasesListEvent)
 ualEvent = lens _ualEvent (\ s a -> s{_ualEvent = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be

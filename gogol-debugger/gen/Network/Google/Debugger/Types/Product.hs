@@ -54,43 +54,6 @@ instance ToJSON RegisterDebuggeeResponse where
           = object
               (catMaybes [("debuggee" .=) <$> _rdrDebuggee])
 
--- | The response of setting a breakpoint.
---
--- /See:/ 'setBreakpointResponse' smart constructor.
-newtype SetBreakpointResponse = SetBreakpointResponse
-    { _sbrBreakpoint :: Maybe Breakpoint
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SetBreakpointResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'sbrBreakpoint'
-setBreakpointResponse
-    :: SetBreakpointResponse
-setBreakpointResponse =
-    SetBreakpointResponse
-    { _sbrBreakpoint = Nothing
-    }
-
--- | The breakpoint resource. The field \'id\' is guranteed to be set (in
--- addition to the echoed fileds).
-sbrBreakpoint :: Lens' SetBreakpointResponse (Maybe Breakpoint)
-sbrBreakpoint
-  = lens _sbrBreakpoint
-      (\ s a -> s{_sbrBreakpoint = a})
-
-instance FromJSON SetBreakpointResponse where
-        parseJSON
-          = withObject "SetBreakpointResponse"
-              (\ o ->
-                 SetBreakpointResponse <$> (o .:? "breakpoint"))
-
-instance ToJSON SetBreakpointResponse where
-        toJSON SetBreakpointResponse{..}
-          = object
-              (catMaybes [("breakpoint" .=) <$> _sbrBreakpoint])
-
 -- | A SourceContext is a reference to a tree of files. A SourceContext
 -- together with a path point to a unique revision of a single file or
 -- directory.
@@ -160,74 +123,42 @@ instance ToJSON SourceContext where
                   ("cloudRepo" .=) <$> _scCloudRepo,
                   ("gerrit" .=) <$> _scGerrit, ("git" .=) <$> _scGit])
 
--- | A unique identifier for a cloud repo.
+-- | The response of setting a breakpoint.
 --
--- /See:/ 'repoId' smart constructor.
-data RepoId = RepoId
-    { _riUid           :: !(Maybe Text)
-    , _riProjectRepoId :: !(Maybe ProjectRepoId)
+-- /See:/ 'setBreakpointResponse' smart constructor.
+newtype SetBreakpointResponse = SetBreakpointResponse
+    { _sbrBreakpoint :: Maybe Breakpoint
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RepoId' with the minimum fields required to make a request.
+-- | Creates a value of 'SetBreakpointResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'riUid'
---
--- * 'riProjectRepoId'
-repoId
-    :: RepoId
-repoId =
-    RepoId
-    { _riUid = Nothing
-    , _riProjectRepoId = Nothing
+-- * 'sbrBreakpoint'
+setBreakpointResponse
+    :: SetBreakpointResponse
+setBreakpointResponse =
+    SetBreakpointResponse
+    { _sbrBreakpoint = Nothing
     }
 
--- | A server-assigned, globally unique identifier.
-riUid :: Lens' RepoId (Maybe Text)
-riUid = lens _riUid (\ s a -> s{_riUid = a})
+-- | The breakpoint resource. The field \'id\' is guranteed to be set (in
+-- addition to the echoed fileds).
+sbrBreakpoint :: Lens' SetBreakpointResponse (Maybe Breakpoint)
+sbrBreakpoint
+  = lens _sbrBreakpoint
+      (\ s a -> s{_sbrBreakpoint = a})
 
--- | A combination of a project ID and a repo name.
-riProjectRepoId :: Lens' RepoId (Maybe ProjectRepoId)
-riProjectRepoId
-  = lens _riProjectRepoId
-      (\ s a -> s{_riProjectRepoId = a})
-
-instance FromJSON RepoId where
+instance FromJSON SetBreakpointResponse where
         parseJSON
-          = withObject "RepoId"
+          = withObject "SetBreakpointResponse"
               (\ o ->
-                 RepoId <$> (o .:? "uid") <*> (o .:? "projectRepoId"))
+                 SetBreakpointResponse <$> (o .:? "breakpoint"))
 
-instance ToJSON RepoId where
-        toJSON RepoId{..}
+instance ToJSON SetBreakpointResponse where
+        toJSON SetBreakpointResponse{..}
           = object
-              (catMaybes
-                 [("uid" .=) <$> _riUid,
-                  ("projectRepoId" .=) <$> _riProjectRepoId])
-
--- | The response of updating an active breakpoint. The message is defined to
--- allow future extensions.
---
--- /See:/ 'updateActiveBreakpointResponse' smart constructor.
-data UpdateActiveBreakpointResponse =
-    UpdateActiveBreakpointResponse
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'UpdateActiveBreakpointResponse' with the minimum fields required to make a request.
---
-updateActiveBreakpointResponse
-    :: UpdateActiveBreakpointResponse
-updateActiveBreakpointResponse = UpdateActiveBreakpointResponse
-
-instance FromJSON UpdateActiveBreakpointResponse
-         where
-        parseJSON
-          = withObject "UpdateActiveBreakpointResponse"
-              (\ o -> pure UpdateActiveBreakpointResponse)
-
-instance ToJSON UpdateActiveBreakpointResponse where
-        toJSON = const (Object mempty)
+              (catMaybes [("breakpoint" .=) <$> _sbrBreakpoint])
 
 -- | A generic empty message that you can re-use to avoid defining duplicated
 -- empty messages in your APIs. A typical example is to use it as the
@@ -250,6 +181,29 @@ instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty)
 
 instance ToJSON Empty where
+        toJSON = const (Object mempty)
+
+-- | The response of updating an active breakpoint. The message is defined to
+-- allow future extensions.
+--
+-- /See:/ 'updateActiveBreakpointResponse' smart constructor.
+data UpdateActiveBreakpointResponse =
+    UpdateActiveBreakpointResponse
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UpdateActiveBreakpointResponse' with the minimum fields required to make a request.
+--
+updateActiveBreakpointResponse
+    :: UpdateActiveBreakpointResponse
+updateActiveBreakpointResponse = UpdateActiveBreakpointResponse
+
+instance FromJSON UpdateActiveBreakpointResponse
+         where
+        parseJSON
+          = withObject "UpdateActiveBreakpointResponse"
+              (\ o -> pure UpdateActiveBreakpointResponse)
+
+instance ToJSON UpdateActiveBreakpointResponse where
         toJSON = const (Object mempty)
 
 -- | A SourceContext referring to a Gerrit project.
@@ -324,6 +278,52 @@ instance ToJSON GerritSourceContext where
                   ("aliasName" .=) <$> _gscAliasName,
                   ("revisionId" .=) <$> _gscRevisionId,
                   ("hostUri" .=) <$> _gscHostURI])
+
+-- | A unique identifier for a cloud repo.
+--
+-- /See:/ 'repoId' smart constructor.
+data RepoId = RepoId
+    { _riUid           :: !(Maybe Text)
+    , _riProjectRepoId :: !(Maybe ProjectRepoId)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RepoId' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'riUid'
+--
+-- * 'riProjectRepoId'
+repoId
+    :: RepoId
+repoId =
+    RepoId
+    { _riUid = Nothing
+    , _riProjectRepoId = Nothing
+    }
+
+-- | A server-assigned, globally unique identifier.
+riUid :: Lens' RepoId (Maybe Text)
+riUid = lens _riUid (\ s a -> s{_riUid = a})
+
+-- | A combination of a project ID and a repo name.
+riProjectRepoId :: Lens' RepoId (Maybe ProjectRepoId)
+riProjectRepoId
+  = lens _riProjectRepoId
+      (\ s a -> s{_riProjectRepoId = a})
+
+instance FromJSON RepoId where
+        parseJSON
+          = withObject "RepoId"
+              (\ o ->
+                 RepoId <$> (o .:? "uid") <*> (o .:? "projectRepoId"))
+
+instance ToJSON RepoId where
+        toJSON RepoId{..}
+          = object
+              (catMaybes
+                 [("uid" .=) <$> _riUid,
+                  ("projectRepoId" .=) <$> _riProjectRepoId])
 
 -- | Selects a repo using a Google Cloud Platform project ID (e.g.
 -- winged-cargo-31) and a repo name within that project.
@@ -1067,26 +1067,6 @@ instance ToJSON ListActiveBreakpointsResponse where
                  [("nextWaitToken" .=) <$> _labrNextWaitToken,
                   ("breakpoints" .=) <$> _labrBreakpoints])
 
--- | A set of custom debuggee properties, populated by the agent, to be
--- displayed to the user.
---
--- /See:/ 'labels' smart constructor.
-data Labels =
-    Labels
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Labels' with the minimum fields required to make a request.
---
-labels
-    :: Labels
-labels = Labels
-
-instance FromJSON Labels where
-        parseJSON = withObject "Labels" (\ o -> pure Labels)
-
-instance ToJSON Labels where
-        toJSON = const (Object mempty)
-
 -- | A GitSourceContext denotes a particular revision in a third party Git
 -- repository (e.g. GitHub).
 --
@@ -1314,92 +1294,27 @@ instance ToJSON CloudRepoSourceContext where
                   ("aliasName" .=) <$> _crscAliasName,
                   ("revisionId" .=) <$> _crscRevisionId])
 
--- | The request to register a debuggee.
+-- | A set of custom debuggee properties, populated by the agent, to be
+-- displayed to the user.
 --
--- /See:/ 'registerDebuggeeRequest' smart constructor.
-newtype RegisterDebuggeeRequest = RegisterDebuggeeRequest
-    { _rDebuggee :: Maybe Debuggee
-    } deriving (Eq,Show,Data,Typeable,Generic)
+-- /See:/ 'debuggeeLabels' smart constructor.
+data DebuggeeLabels =
+    DebuggeeLabels
+    deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RegisterDebuggeeRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'DebuggeeLabels' with the minimum fields required to make a request.
 --
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rDebuggee'
-registerDebuggeeRequest
-    :: RegisterDebuggeeRequest
-registerDebuggeeRequest =
-    RegisterDebuggeeRequest
-    { _rDebuggee = Nothing
-    }
+debuggeeLabels
+    :: DebuggeeLabels
+debuggeeLabels = DebuggeeLabels
 
--- | The debuggee information to register. The fields \'project\',
--- \'uniquifier\', \'description\' and \'agent_version\' of the debuggee
--- must be set.
-rDebuggee :: Lens' RegisterDebuggeeRequest (Maybe Debuggee)
-rDebuggee
-  = lens _rDebuggee (\ s a -> s{_rDebuggee = a})
-
-instance FromJSON RegisterDebuggeeRequest where
+instance FromJSON DebuggeeLabels where
         parseJSON
-          = withObject "RegisterDebuggeeRequest"
-              (\ o ->
-                 RegisterDebuggeeRequest <$> (o .:? "debuggee"))
+          = withObject "DebuggeeLabels"
+              (\ o -> pure DebuggeeLabels)
 
-instance ToJSON RegisterDebuggeeRequest where
-        toJSON RegisterDebuggeeRequest{..}
-          = object (catMaybes [("debuggee" .=) <$> _rDebuggee])
-
--- | A CloudWorkspaceSourceContext denotes a workspace at a particular
--- snapshot.
---
--- /See:/ 'cloudWorkspaceSourceContext' smart constructor.
-data CloudWorkspaceSourceContext = CloudWorkspaceSourceContext
-    { _cwscWorkspaceId :: !(Maybe CloudWorkspaceId)
-    , _cwscSnapshotId  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CloudWorkspaceSourceContext' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cwscWorkspaceId'
---
--- * 'cwscSnapshotId'
-cloudWorkspaceSourceContext
-    :: CloudWorkspaceSourceContext
-cloudWorkspaceSourceContext =
-    CloudWorkspaceSourceContext
-    { _cwscWorkspaceId = Nothing
-    , _cwscSnapshotId = Nothing
-    }
-
--- | The ID of the workspace.
-cwscWorkspaceId :: Lens' CloudWorkspaceSourceContext (Maybe CloudWorkspaceId)
-cwscWorkspaceId
-  = lens _cwscWorkspaceId
-      (\ s a -> s{_cwscWorkspaceId = a})
-
--- | The ID of the snapshot. An empty snapshot_id refers to the most recent
--- snapshot.
-cwscSnapshotId :: Lens' CloudWorkspaceSourceContext (Maybe Text)
-cwscSnapshotId
-  = lens _cwscSnapshotId
-      (\ s a -> s{_cwscSnapshotId = a})
-
-instance FromJSON CloudWorkspaceSourceContext where
-        parseJSON
-          = withObject "CloudWorkspaceSourceContext"
-              (\ o ->
-                 CloudWorkspaceSourceContext <$>
-                   (o .:? "workspaceId") <*> (o .:? "snapshotId"))
-
-instance ToJSON CloudWorkspaceSourceContext where
-        toJSON CloudWorkspaceSourceContext{..}
-          = object
-              (catMaybes
-                 [("workspaceId" .=) <$> _cwscWorkspaceId,
-                  ("snapshotId" .=) <$> _cwscSnapshotId])
+instance ToJSON DebuggeeLabels where
+        toJSON = const (Object mempty)
 
 -- | Represents the application to debug. The application may include one or
 -- more replicated processes executing the same code. Each of these
@@ -1415,7 +1330,7 @@ data Debuggee = Debuggee
     , _dAgentVersion   :: !(Maybe Text)
     , _dIsDisabled     :: !(Maybe Bool)
     , _dId             :: !(Maybe Text)
-    , _dLabels         :: !(Maybe Labels)
+    , _dLabels         :: !(Maybe DebuggeeLabels)
     , _dDescription    :: !(Maybe Text)
     , _dIsInactive     :: !(Maybe Bool)
     , _dSourceContexts :: !(Maybe [SourceContext])
@@ -1498,7 +1413,7 @@ dId = lens _dId (\ s a -> s{_dId = a})
 
 -- | A set of custom debuggee properties, populated by the agent, to be
 -- displayed to the user.
-dLabels :: Lens' Debuggee (Maybe Labels)
+dLabels :: Lens' Debuggee (Maybe DebuggeeLabels)
 dLabels = lens _dLabels (\ s a -> s{_dLabels = a})
 
 -- | A human readable description of the debuggee. Recommended to include
@@ -1550,6 +1465,93 @@ instance ToJSON Debuggee where
                   ("description" .=) <$> _dDescription,
                   ("isInactive" .=) <$> _dIsInactive,
                   ("sourceContexts" .=) <$> _dSourceContexts])
+
+-- | A CloudWorkspaceSourceContext denotes a workspace at a particular
+-- snapshot.
+--
+-- /See:/ 'cloudWorkspaceSourceContext' smart constructor.
+data CloudWorkspaceSourceContext = CloudWorkspaceSourceContext
+    { _cwscWorkspaceId :: !(Maybe CloudWorkspaceId)
+    , _cwscSnapshotId  :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CloudWorkspaceSourceContext' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cwscWorkspaceId'
+--
+-- * 'cwscSnapshotId'
+cloudWorkspaceSourceContext
+    :: CloudWorkspaceSourceContext
+cloudWorkspaceSourceContext =
+    CloudWorkspaceSourceContext
+    { _cwscWorkspaceId = Nothing
+    , _cwscSnapshotId = Nothing
+    }
+
+-- | The ID of the workspace.
+cwscWorkspaceId :: Lens' CloudWorkspaceSourceContext (Maybe CloudWorkspaceId)
+cwscWorkspaceId
+  = lens _cwscWorkspaceId
+      (\ s a -> s{_cwscWorkspaceId = a})
+
+-- | The ID of the snapshot. An empty snapshot_id refers to the most recent
+-- snapshot.
+cwscSnapshotId :: Lens' CloudWorkspaceSourceContext (Maybe Text)
+cwscSnapshotId
+  = lens _cwscSnapshotId
+      (\ s a -> s{_cwscSnapshotId = a})
+
+instance FromJSON CloudWorkspaceSourceContext where
+        parseJSON
+          = withObject "CloudWorkspaceSourceContext"
+              (\ o ->
+                 CloudWorkspaceSourceContext <$>
+                   (o .:? "workspaceId") <*> (o .:? "snapshotId"))
+
+instance ToJSON CloudWorkspaceSourceContext where
+        toJSON CloudWorkspaceSourceContext{..}
+          = object
+              (catMaybes
+                 [("workspaceId" .=) <$> _cwscWorkspaceId,
+                  ("snapshotId" .=) <$> _cwscSnapshotId])
+
+-- | The request to register a debuggee.
+--
+-- /See:/ 'registerDebuggeeRequest' smart constructor.
+newtype RegisterDebuggeeRequest = RegisterDebuggeeRequest
+    { _rDebuggee :: Maybe Debuggee
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RegisterDebuggeeRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rDebuggee'
+registerDebuggeeRequest
+    :: RegisterDebuggeeRequest
+registerDebuggeeRequest =
+    RegisterDebuggeeRequest
+    { _rDebuggee = Nothing
+    }
+
+-- | The debuggee information to register. The fields \'project\',
+-- \'uniquifier\', \'description\' and \'agent_version\' of the debuggee
+-- must be set.
+rDebuggee :: Lens' RegisterDebuggeeRequest (Maybe Debuggee)
+rDebuggee
+  = lens _rDebuggee (\ s a -> s{_rDebuggee = a})
+
+instance FromJSON RegisterDebuggeeRequest where
+        parseJSON
+          = withObject "RegisterDebuggeeRequest"
+              (\ o ->
+                 RegisterDebuggeeRequest <$> (o .:? "debuggee"))
+
+instance ToJSON RegisterDebuggeeRequest where
+        toJSON RegisterDebuggeeRequest{..}
+          = object (catMaybes [("debuggee" .=) <$> _rDebuggee])
 
 -- | A CloudWorkspaceId is a unique identifier for a cloud workspace. A cloud
 -- workspace is a place associated with a repo where modified files can be

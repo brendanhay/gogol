@@ -52,7 +52,7 @@ type PlayersListResource =
      "players" :>
        "me" :>
          "players" :>
-           Capture "collection" GamesPlayersListCollection :>
+           Capture "collection" PlayersListCollection :>
              QueryParam "language" Text :>
                QueryParam "pageToken" Text :>
                  QueryParam "maxResults" Int32 :>
@@ -72,7 +72,7 @@ data PlayersList' = PlayersList'
     { _plQuotaUser   :: !(Maybe Text)
     , _plPrettyPrint :: !Bool
     , _plUserIP      :: !(Maybe Text)
-    , _plCollection  :: !GamesPlayersListCollection
+    , _plCollection  :: !PlayersListCollection
     , _plKey         :: !(Maybe Key)
     , _plLanguage    :: !(Maybe Text)
     , _plPageToken   :: !(Maybe Text)
@@ -105,7 +105,7 @@ data PlayersList' = PlayersList'
 --
 -- * 'plFields'
 playersList'
-    :: GamesPlayersListCollection -- ^ 'collection'
+    :: PlayersListCollection -- ^ 'collection'
     -> PlayersList'
 playersList' pPlCollection_ =
     PlayersList'
@@ -140,7 +140,7 @@ plUserIP :: Lens' PlayersList' (Maybe Text)
 plUserIP = lens _plUserIP (\ s a -> s{_plUserIP = a})
 
 -- | Collection of players being retrieved
-plCollection :: Lens' PlayersList' GamesPlayersListCollection
+plCollection :: Lens' PlayersList' PlayersListCollection
 plCollection
   = lens _plCollection (\ s a -> s{_plCollection = a})
 

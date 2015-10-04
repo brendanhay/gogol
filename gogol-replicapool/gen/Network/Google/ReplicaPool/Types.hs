@@ -17,18 +17,24 @@ module Network.Google.ReplicaPool.Types
     -- * Service URL
       replicaPoolURL
 
-    -- * InstanceGroupManagersSetInstanceTemplateRequest
-    , InstanceGroupManagersSetInstanceTemplateRequest
-    , instanceGroupManagersSetInstanceTemplateRequest
-    , igmsitrInstanceTemplate
+    -- * OperationWarningsItemDataItem
+    , OperationWarningsItemDataItem
+    , operationWarningsItemDataItem
+    , owidiValue
+    , owidiKey
 
     -- * InstanceGroupManagersAbandonInstancesRequest
     , InstanceGroupManagersAbandonInstancesRequest
     , instanceGroupManagersAbandonInstancesRequest
     , igmairInstances
 
-    -- * Status
-    , Status (..)
+    -- * InstanceGroupManagersSetInstanceTemplateRequest
+    , InstanceGroupManagersSetInstanceTemplateRequest
+    , instanceGroupManagersSetInstanceTemplateRequest
+    , igmsitrInstanceTemplate
+
+    -- * OperationWarningsItemCode
+    , OperationWarningsItemCode (..)
 
     -- * OperationList
     , OperationList
@@ -48,23 +54,8 @@ module Network.Google.ReplicaPool.Types
     , igmlSelfLink
     , igmlId
 
-    -- * InstanceGroupManager
-    , InstanceGroupManager
-    , instanceGroupManager
-    , igmCurrentSize
-    , igmGroup
-    , igmKind
-    , igmFingerprint
-    , igmBaseInstanceName
-    , igmAutoHealingPolicies
-    , igmInstanceTemplate
-    , igmTargetSize
-    , igmSelfLink
-    , igmName
-    , igmCreationTimestamp
-    , igmId
-    , igmTargetPools
-    , igmDescription
+    -- * ReplicaPoolAutoHealingPolicyActionType
+    , ReplicaPoolAutoHealingPolicyActionType (..)
 
     -- * Operation
     , Operation
@@ -92,10 +83,23 @@ module Network.Google.ReplicaPool.Types
     , oTargetLink
     , oClientOperationId
 
-    -- * Error'
-    , Error'
-    , error'
-    , eErrors
+    -- * InstanceGroupManager
+    , InstanceGroupManager
+    , instanceGroupManager
+    , igmCurrentSize
+    , igmGroup
+    , igmKind
+    , igmFingerprint
+    , igmBaseInstanceName
+    , igmAutoHealingPolicies
+    , igmInstanceTemplate
+    , igmTargetSize
+    , igmSelfLink
+    , igmName
+    , igmCreationTimestamp
+    , igmId
+    , igmTargetPools
+    , igmDescription
 
     -- * ReplicaPoolAutoHealingPolicy
     , ReplicaPoolAutoHealingPolicy
@@ -108,26 +112,18 @@ module Network.Google.ReplicaPool.Types
     , instanceGroupManagersRecreateInstancesRequest
     , igmrirInstances
 
-    -- * WarningsItemCode
-    , WarningsItemCode (..)
+    -- * OperationStatus
+    , OperationStatus (..)
 
     -- * InstanceGroupManagersDeleteInstancesRequest
     , InstanceGroupManagersDeleteInstancesRequest
     , instanceGroupManagersDeleteInstancesRequest
     , igmdirInstances
 
-    -- * WarningsItem
-    , WarningsItem
-    , warningsItem
-    , wiData
-    , wiCode
-    , wiMessage
-
-    -- * DataItem
-    , DataItem
-    , dataItem
-    , diValue
-    , diKey
+    -- * OperationError
+    , OperationError
+    , operationError
+    , oeErrors
 
     -- * InstanceGroupManagersSetTargetPoolsRequest
     , InstanceGroupManagersSetTargetPoolsRequest
@@ -135,15 +131,19 @@ module Network.Google.ReplicaPool.Types
     , igmstprFingerprint
     , igmstprTargetPools
 
-    -- * ActionType
-    , ActionType (..)
+    -- * OperationErrorErrorsItem
+    , OperationErrorErrorsItem
+    , operationErrorErrorsItem
+    , oeeiLocation
+    , oeeiCode
+    , oeeiMessage
 
-    -- * ErrorsItem
-    , ErrorsItem
-    , errorsItem
-    , eiLocation
-    , eiCode
-    , eiMessage
+    -- * OperationWarningsItem
+    , OperationWarningsItem
+    , operationWarningsItem
+    , owiData
+    , owiCode
+    , owiMessage
     ) where
 
 import           Network.Google.Prelude

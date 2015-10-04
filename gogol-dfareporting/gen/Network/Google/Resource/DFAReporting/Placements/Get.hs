@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.Placements.Get
     , pgQuotaUser
     , pgPrettyPrint
     , pgUserIP
-    , pgProfileId
+    , pgProFileId
     , pgKey
     , pgId
     , pgOAuthToken
@@ -66,7 +66,7 @@ data PlacementsGet' = PlacementsGet'
     { _pgQuotaUser   :: !(Maybe Text)
     , _pgPrettyPrint :: !Bool
     , _pgUserIP      :: !(Maybe Text)
-    , _pgProfileId   :: !Int64
+    , _pgProFileId   :: !Int64
     , _pgKey         :: !(Maybe Key)
     , _pgId          :: !Int64
     , _pgOAuthToken  :: !(Maybe OAuthToken)
@@ -83,7 +83,7 @@ data PlacementsGet' = PlacementsGet'
 --
 -- * 'pgUserIP'
 --
--- * 'pgProfileId'
+-- * 'pgProFileId'
 --
 -- * 'pgKey'
 --
@@ -96,12 +96,12 @@ placementsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> PlacementsGet'
-placementsGet' pPgProfileId_ pPgId_ =
+placementsGet' pPgProFileId_ pPgId_ =
     PlacementsGet'
     { _pgQuotaUser = Nothing
     , _pgPrettyPrint = True
     , _pgUserIP = Nothing
-    , _pgProfileId = pPgProfileId_
+    , _pgProFileId = pPgProFileId_
     , _pgKey = Nothing
     , _pgId = pPgId_
     , _pgOAuthToken = Nothing
@@ -127,9 +127,9 @@ pgUserIP :: Lens' PlacementsGet' (Maybe Text)
 pgUserIP = lens _pgUserIP (\ s a -> s{_pgUserIP = a})
 
 -- | User profile ID associated with this request.
-pgProfileId :: Lens' PlacementsGet' Int64
-pgProfileId
-  = lens _pgProfileId (\ s a -> s{_pgProfileId = a})
+pgProFileId :: Lens' PlacementsGet' Int64
+pgProFileId
+  = lens _pgProFileId (\ s a -> s{_pgProFileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -158,7 +158,7 @@ instance GoogleRequest PlacementsGet' where
         type Rs PlacementsGet' = Placement
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementsGet'{..}
-          = go _pgProfileId _pgId _pgQuotaUser
+          = go _pgProFileId _pgId _pgQuotaUser
               (Just _pgPrettyPrint)
               _pgUserIP
               _pgFields

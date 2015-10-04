@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.PlacementGroups.Update
     , pguQuotaUser
     , pguPrettyPrint
     , pguUserIP
-    , pguProfileId
+    , pguProFileId
     , pguPayload
     , pguKey
     , pguOAuthToken
@@ -57,7 +57,7 @@ type PlacementGroupsUpdateResource =
                    QueryParam "key" Key :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] PlacementGroup :>
+                         ReqBody '[OctetStream] PlacementGroup :>
                            Put '[JSON] PlacementGroup
 
 -- | Updates an existing placement group.
@@ -67,7 +67,7 @@ data PlacementGroupsUpdate' = PlacementGroupsUpdate'
     { _pguQuotaUser   :: !(Maybe Text)
     , _pguPrettyPrint :: !Bool
     , _pguUserIP      :: !(Maybe Text)
-    , _pguProfileId   :: !Int64
+    , _pguProFileId   :: !Int64
     , _pguPayload     :: !PlacementGroup
     , _pguKey         :: !(Maybe Key)
     , _pguOAuthToken  :: !(Maybe OAuthToken)
@@ -84,7 +84,7 @@ data PlacementGroupsUpdate' = PlacementGroupsUpdate'
 --
 -- * 'pguUserIP'
 --
--- * 'pguProfileId'
+-- * 'pguProFileId'
 --
 -- * 'pguPayload'
 --
@@ -97,12 +97,12 @@ placementGroupsUpdate'
     :: Int64 -- ^ 'profileId'
     -> PlacementGroup -- ^ 'payload'
     -> PlacementGroupsUpdate'
-placementGroupsUpdate' pPguProfileId_ pPguPayload_ =
+placementGroupsUpdate' pPguProFileId_ pPguPayload_ =
     PlacementGroupsUpdate'
     { _pguQuotaUser = Nothing
     , _pguPrettyPrint = True
     , _pguUserIP = Nothing
-    , _pguProfileId = pPguProfileId_
+    , _pguProFileId = pPguProFileId_
     , _pguPayload = pPguPayload_
     , _pguKey = Nothing
     , _pguOAuthToken = Nothing
@@ -129,9 +129,9 @@ pguUserIP
   = lens _pguUserIP (\ s a -> s{_pguUserIP = a})
 
 -- | User profile ID associated with this request.
-pguProfileId :: Lens' PlacementGroupsUpdate' Int64
-pguProfileId
-  = lens _pguProfileId (\ s a -> s{_pguProfileId = a})
+pguProFileId :: Lens' PlacementGroupsUpdate' Int64
+pguProFileId
+  = lens _pguProFileId (\ s a -> s{_pguProFileId = a})
 
 -- | Multipart request metadata.
 pguPayload :: Lens' PlacementGroupsUpdate' PlacementGroup
@@ -163,7 +163,7 @@ instance GoogleRequest PlacementGroupsUpdate' where
         type Rs PlacementGroupsUpdate' = PlacementGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementGroupsUpdate'{..}
-          = go _pguProfileId _pguQuotaUser
+          = go _pguProFileId _pguQuotaUser
               (Just _pguPrettyPrint)
               _pguUserIP
               _pguFields

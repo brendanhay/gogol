@@ -56,7 +56,7 @@ type GroupsUpdateResource =
                  QueryParam "key" Key :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Group :> Put '[JSON] Group
+                       ReqBody '[OctetStream] Group :> Put '[JSON] Group
 
 -- | Update Group
 --

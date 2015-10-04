@@ -18,7 +18,7 @@ module Network.Google.Analytics.Types.Sum where
 import           Network.Google.Prelude
 
 -- | The desired sampling level.
-data SamplingLevel
+data DataGaGetSamplingLevel
     = Default
       -- ^ @DEFAULT@
       -- Returns response with a sample size that balances speed and accuracy.
@@ -31,88 +31,88 @@ data SamplingLevel
       -- result in the response being slower.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable SamplingLevel
+instance Hashable DataGaGetSamplingLevel
 
-instance FromText SamplingLevel where
+instance FromText DataGaGetSamplingLevel where
     fromText = \case
         "DEFAULT" -> Just Default
         "FASTER" -> Just Faster
         "HIGHER_PRECISION" -> Just HigherPrecision
         _ -> Nothing
 
-instance ToText SamplingLevel where
+instance ToText DataGaGetSamplingLevel where
     toText = \case
         Default -> "DEFAULT"
         Faster -> "FASTER"
         HigherPrecision -> "HIGHER_PRECISION"
 
-instance FromJSON SamplingLevel where
-    parseJSON = parseJSONText "SamplingLevel"
+instance FromJSON DataGaGetSamplingLevel where
+    parseJSON = parseJSONText "DataGaGetSamplingLevel"
 
-instance ToJSON SamplingLevel where
+instance ToJSON DataGaGetSamplingLevel where
     toJSON = toJSONText
 
 -- | The selected format for the response. Default format is JSON.
-data Output
-    = ODataTable
+data DataGaGetOutput
+    = DataTable
       -- ^ @dataTable@
       -- Returns the response in Google Charts Data Table format. This is useful
       -- in creating visualization using Google Charts.
-    | OJSON
+    | JSON
       -- ^ @json@
       -- Returns the response in standard JSON format.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable Output
+instance Hashable DataGaGetOutput
 
-instance FromText Output where
+instance FromText DataGaGetOutput where
     fromText = \case
-        "dataTable" -> Just ODataTable
-        "json" -> Just OJSON
+        "dataTable" -> Just DataTable
+        "json" -> Just JSON
         _ -> Nothing
 
-instance ToText Output where
+instance ToText DataGaGetOutput where
     toText = \case
-        ODataTable -> "dataTable"
-        OJSON -> "json"
+        DataTable -> "dataTable"
+        JSON -> "json"
 
-instance FromJSON Output where
-    parseJSON = parseJSONText "Output"
+instance FromJSON DataGaGetOutput where
+    parseJSON = parseJSONText "DataGaGetOutput"
 
-instance ToJSON Output where
+instance ToJSON DataGaGetOutput where
     toJSON = toJSONText
 
 -- | The desired sampling level.
-data AnalyticsDataGaGetSamplingLevel
-    = ADGGSLDefault
+data DataMcfGetSamplingLevel
+    = DMGSLDefault
       -- ^ @DEFAULT@
       -- Returns response with a sample size that balances speed and accuracy.
-    | ADGGSLFaster
+    | DMGSLFaster
       -- ^ @FASTER@
       -- Returns a fast response with a smaller sample size.
-    | ADGGSLHigherPrecision
+    | DMGSLHigherPrecision
       -- ^ @HIGHER_PRECISION@
       -- Returns a more accurate response using a large sample size, but this may
       -- result in the response being slower.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable AnalyticsDataGaGetSamplingLevel
+instance Hashable DataMcfGetSamplingLevel
 
-instance FromText AnalyticsDataGaGetSamplingLevel where
+instance FromText DataMcfGetSamplingLevel where
     fromText = \case
-        "DEFAULT" -> Just ADGGSLDefault
-        "FASTER" -> Just ADGGSLFaster
-        "HIGHER_PRECISION" -> Just ADGGSLHigherPrecision
+        "DEFAULT" -> Just DMGSLDefault
+        "FASTER" -> Just DMGSLFaster
+        "HIGHER_PRECISION" -> Just DMGSLHigherPrecision
         _ -> Nothing
 
-instance ToText AnalyticsDataGaGetSamplingLevel where
+instance ToText DataMcfGetSamplingLevel where
     toText = \case
-        ADGGSLDefault -> "DEFAULT"
-        ADGGSLFaster -> "FASTER"
-        ADGGSLHigherPrecision -> "HIGHER_PRECISION"
+        DMGSLDefault -> "DEFAULT"
+        DMGSLFaster -> "FASTER"
+        DMGSLHigherPrecision -> "HIGHER_PRECISION"
 
-instance FromJSON AnalyticsDataGaGetSamplingLevel where
-    parseJSON = parseJSONText "AnalyticsDataGaGetSamplingLevel"
+instance FromJSON DataMcfGetSamplingLevel where
+    parseJSON = parseJSONText "DataMcfGetSamplingLevel"
 
-instance ToJSON AnalyticsDataGaGetSamplingLevel where
+instance ToJSON DataMcfGetSamplingLevel where
     toJSON = toJSONText

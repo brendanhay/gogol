@@ -63,7 +63,7 @@ type DatabasesPatchResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] Database :>
+                               ReqBody '[OctetStream] Database :>
                                  Patch '[JSON] Operation
 
 -- | Updates a resource containing information about a database inside a

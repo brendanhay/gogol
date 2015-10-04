@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.DimensionValues.Query
     , dvqQuotaUser
     , dvqPrettyPrint
     , dvqUserIP
-    , dvqProfileId
+    , dvqProFileId
     , dvqPayload
     , dvqKey
     , dvqPageToken
@@ -62,7 +62,7 @@ type DimensionValuesQueryResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] DimensionValueRequest :>
+                               ReqBody '[OctetStream] DimensionValueRequest :>
                                  Post '[JSON] DimensionValueList
 
 -- | Retrieves list of report dimension values for a list of filters.
@@ -72,7 +72,7 @@ data DimensionValuesQuery' = DimensionValuesQuery'
     { _dvqQuotaUser   :: !(Maybe Text)
     , _dvqPrettyPrint :: !Bool
     , _dvqUserIP      :: !(Maybe Text)
-    , _dvqProfileId   :: !Int64
+    , _dvqProFileId   :: !Int64
     , _dvqPayload     :: !DimensionValueRequest
     , _dvqKey         :: !(Maybe Key)
     , _dvqPageToken   :: !(Maybe Text)
@@ -91,7 +91,7 @@ data DimensionValuesQuery' = DimensionValuesQuery'
 --
 -- * 'dvqUserIP'
 --
--- * 'dvqProfileId'
+-- * 'dvqProFileId'
 --
 -- * 'dvqPayload'
 --
@@ -108,12 +108,12 @@ dimensionValuesQuery'
     :: Int64 -- ^ 'profileId'
     -> DimensionValueRequest -- ^ 'payload'
     -> DimensionValuesQuery'
-dimensionValuesQuery' pDvqProfileId_ pDvqPayload_ =
+dimensionValuesQuery' pDvqProFileId_ pDvqPayload_ =
     DimensionValuesQuery'
     { _dvqQuotaUser = Nothing
     , _dvqPrettyPrint = True
     , _dvqUserIP = Nothing
-    , _dvqProfileId = pDvqProfileId_
+    , _dvqProFileId = pDvqProFileId_
     , _dvqPayload = pDvqPayload_
     , _dvqKey = Nothing
     , _dvqPageToken = Nothing
@@ -142,9 +142,9 @@ dvqUserIP
   = lens _dvqUserIP (\ s a -> s{_dvqUserIP = a})
 
 -- | The DFA user profile ID.
-dvqProfileId :: Lens' DimensionValuesQuery' Int64
-dvqProfileId
-  = lens _dvqProfileId (\ s a -> s{_dvqProfileId = a})
+dvqProFileId :: Lens' DimensionValuesQuery' Int64
+dvqProFileId
+  = lens _dvqProFileId (\ s a -> s{_dvqProFileId = a})
 
 -- | Multipart request metadata.
 dvqPayload :: Lens' DimensionValuesQuery' DimensionValueRequest
@@ -187,7 +187,7 @@ instance GoogleRequest DimensionValuesQuery' where
         type Rs DimensionValuesQuery' = DimensionValueList
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u DimensionValuesQuery'{..}
-          = go _dvqProfileId _dvqPageToken _dvqMaxResults
+          = go _dvqProFileId _dvqPageToken _dvqMaxResults
               _dvqQuotaUser
               (Just _dvqPrettyPrint)
               _dvqUserIP

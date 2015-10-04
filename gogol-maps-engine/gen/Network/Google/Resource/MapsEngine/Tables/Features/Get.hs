@@ -53,9 +53,7 @@ type TablesFeaturesGetResource =
        Capture "tableId" Text :>
          "features" :>
            Capture "id" Text :>
-             QueryParam "version"
-               MapsEngineTablesFeaturesGetVersion
-               :>
+             QueryParam "version" TablesFeaturesGetVersion :>
                QueryParam "select" Text :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
@@ -73,7 +71,7 @@ data TablesFeaturesGet' = TablesFeaturesGet'
     , _tfgPrettyPrint :: !Bool
     , _tfgUserIP      :: !(Maybe Text)
     , _tfgKey         :: !(Maybe Key)
-    , _tfgVersion     :: !(Maybe MapsEngineTablesFeaturesGetVersion)
+    , _tfgVersion     :: !(Maybe TablesFeaturesGetVersion)
     , _tfgId          :: !Text
     , _tfgSelect      :: !(Maybe Text)
     , _tfgOAuthToken  :: !(Maybe OAuthToken)
@@ -148,7 +146,7 @@ tfgKey :: Lens' TablesFeaturesGet' (Maybe Key)
 tfgKey = lens _tfgKey (\ s a -> s{_tfgKey = a})
 
 -- | The table version to access. See Accessing Public Data for information.
-tfgVersion :: Lens' TablesFeaturesGet' (Maybe MapsEngineTablesFeaturesGetVersion)
+tfgVersion :: Lens' TablesFeaturesGet' (Maybe TablesFeaturesGetVersion)
 tfgVersion
   = lens _tfgVersion (\ s a -> s{_tfgVersion = a})
 

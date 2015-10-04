@@ -99,6 +99,56 @@ instance ToJSON GamesPlayerExperienceInfoResource
                   ("lastLevelUpTimestampMillis" .=) <$>
                     _gpeirLastLevelUpTimestampMillis])
 
+-- | An object representation of the individual components of the player\'s
+-- name. For some players, these fields may not be present.
+--
+-- /See:/ 'playerName' smart constructor.
+data PlayerName = PlayerName
+    { _pnGivenName  :: !(Maybe Text)
+    , _pnFamilyName :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PlayerName' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pnGivenName'
+--
+-- * 'pnFamilyName'
+playerName
+    :: PlayerName
+playerName =
+    PlayerName
+    { _pnGivenName = Nothing
+    , _pnFamilyName = Nothing
+    }
+
+-- | The given name of this player. In some places, this is known as the
+-- first name.
+pnGivenName :: Lens' PlayerName (Maybe Text)
+pnGivenName
+  = lens _pnGivenName (\ s a -> s{_pnGivenName = a})
+
+-- | The family name of this player. In some places, this is known as the
+-- last name.
+pnFamilyName :: Lens' PlayerName (Maybe Text)
+pnFamilyName
+  = lens _pnFamilyName (\ s a -> s{_pnFamilyName = a})
+
+instance FromJSON PlayerName where
+        parseJSON
+          = withObject "PlayerName"
+              (\ o ->
+                 PlayerName <$>
+                   (o .:? "givenName") <*> (o .:? "familyName"))
+
+instance ToJSON PlayerName where
+        toJSON PlayerName{..}
+          = object
+              (catMaybes
+                 [("givenName" .=) <$> _pnGivenName,
+                  ("familyName" .=) <$> _pnFamilyName])
+
 -- | This is a JSON template for a list of leaderboard reset resources.
 --
 -- /See:/ 'playerScoreResetAllResponse' smart constructor.
@@ -388,6 +438,61 @@ instance ToJSON ScoresResetMultipleForAllRequest
                  [Just ("kind" .= _srmfarKind),
                   ("leaderboard_ids" .=) <$> _srmfarLeaderboardIds])
 
+-- | This is a JSON template for multiple quests reset all request.
+--
+-- /See:/ 'questsResetMultipleForAllRequest' smart constructor.
+data QuestsResetMultipleForAllRequest = QuestsResetMultipleForAllRequest
+    { _qrmfarKind     :: !Text
+    , _qrmfarQuestIds :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'QuestsResetMultipleForAllRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'qrmfarKind'
+--
+-- * 'qrmfarQuestIds'
+questsResetMultipleForAllRequest
+    :: QuestsResetMultipleForAllRequest
+questsResetMultipleForAllRequest =
+    QuestsResetMultipleForAllRequest
+    { _qrmfarKind = "gamesManagement#questsResetMultipleForAllRequest"
+    , _qrmfarQuestIds = Nothing
+    }
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string gamesManagement#questsResetMultipleForAllRequest.
+qrmfarKind :: Lens' QuestsResetMultipleForAllRequest Text
+qrmfarKind
+  = lens _qrmfarKind (\ s a -> s{_qrmfarKind = a})
+
+-- | The IDs of quests to reset.
+qrmfarQuestIds :: Lens' QuestsResetMultipleForAllRequest [Text]
+qrmfarQuestIds
+  = lens _qrmfarQuestIds
+      (\ s a -> s{_qrmfarQuestIds = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON QuestsResetMultipleForAllRequest
+         where
+        parseJSON
+          = withObject "QuestsResetMultipleForAllRequest"
+              (\ o ->
+                 QuestsResetMultipleForAllRequest <$>
+                   (o .:? "kind" .!=
+                      "gamesManagement#questsResetMultipleForAllRequest")
+                     <*> (o .:? "quest_ids" .!= mempty))
+
+instance ToJSON QuestsResetMultipleForAllRequest
+         where
+        toJSON QuestsResetMultipleForAllRequest{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _qrmfarKind),
+                  ("quest_ids" .=) <$> _qrmfarQuestIds])
+
 -- | This is a JSON template for a list of hidden players.
 --
 -- /See:/ 'hiddenPlayerList' smart constructor.
@@ -449,61 +554,6 @@ instance ToJSON HiddenPlayerList where
                  [("nextPageToken" .=) <$> _hplNextPageToken,
                   Just ("kind" .= _hplKind),
                   ("items" .=) <$> _hplItems])
-
--- | This is a JSON template for multiple quests reset all request.
---
--- /See:/ 'questsResetMultipleForAllRequest' smart constructor.
-data QuestsResetMultipleForAllRequest = QuestsResetMultipleForAllRequest
-    { _qrmfarKind     :: !Text
-    , _qrmfarQuestIds :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'QuestsResetMultipleForAllRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'qrmfarKind'
---
--- * 'qrmfarQuestIds'
-questsResetMultipleForAllRequest
-    :: QuestsResetMultipleForAllRequest
-questsResetMultipleForAllRequest =
-    QuestsResetMultipleForAllRequest
-    { _qrmfarKind = "gamesManagement#questsResetMultipleForAllRequest"
-    , _qrmfarQuestIds = Nothing
-    }
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string gamesManagement#questsResetMultipleForAllRequest.
-qrmfarKind :: Lens' QuestsResetMultipleForAllRequest Text
-qrmfarKind
-  = lens _qrmfarKind (\ s a -> s{_qrmfarKind = a})
-
--- | The IDs of quests to reset.
-qrmfarQuestIds :: Lens' QuestsResetMultipleForAllRequest [Text]
-qrmfarQuestIds
-  = lens _qrmfarQuestIds
-      (\ s a -> s{_qrmfarQuestIds = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON QuestsResetMultipleForAllRequest
-         where
-        parseJSON
-          = withObject "QuestsResetMultipleForAllRequest"
-              (\ o ->
-                 QuestsResetMultipleForAllRequest <$>
-                   (o .:? "kind" .!=
-                      "gamesManagement#questsResetMultipleForAllRequest")
-                     <*> (o .:? "quest_ids" .!= mempty))
-
-instance ToJSON QuestsResetMultipleForAllRequest
-         where
-        toJSON QuestsResetMultipleForAllRequest{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _qrmfarKind),
-                  ("quest_ids" .=) <$> _qrmfarQuestIds])
 
 -- | This is a JSON template for multiple events reset all request.
 --
@@ -674,56 +724,6 @@ instance ToJSON HiddenPlayer where
                   ("hiddenTimeMillis" .=) <$> _hpHiddenTimeMillis,
                   ("player" .=) <$> _hpPlayer])
 
--- | An object representation of the individual components of the player\'s
--- name. For some players, these fields may not be present.
---
--- /See:/ 'name' smart constructor.
-data Name = Name
-    { _nGivenName  :: !(Maybe Text)
-    , _nFamilyName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Name' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'nGivenName'
---
--- * 'nFamilyName'
-name
-    :: Name
-name =
-    Name
-    { _nGivenName = Nothing
-    , _nFamilyName = Nothing
-    }
-
--- | The given name of this player. In some places, this is known as the
--- first name.
-nGivenName :: Lens' Name (Maybe Text)
-nGivenName
-  = lens _nGivenName (\ s a -> s{_nGivenName = a})
-
--- | The family name of this player. In some places, this is known as the
--- last name.
-nFamilyName :: Lens' Name (Maybe Text)
-nFamilyName
-  = lens _nFamilyName (\ s a -> s{_nFamilyName = a})
-
-instance FromJSON Name where
-        parseJSON
-          = withObject "Name"
-              (\ o ->
-                 Name <$>
-                   (o .:? "givenName") <*> (o .:? "familyName"))
-
-instance ToJSON Name where
-        toJSON Name{..}
-          = object
-              (catMaybes
-                 [("givenName" .=) <$> _nGivenName,
-                  ("familyName" .=) <$> _nFamilyName])
-
 -- | This is a JSON template for achievement reset all response.
 --
 -- /See:/ 'achievementResetAllResponse' smart constructor.
@@ -783,7 +783,7 @@ data Player = Player
     , _pAvatarImageURL :: !(Maybe Text)
     , _pKind           :: !Text
     , _pExperienceInfo :: !(Maybe GamesPlayerExperienceInfoResource)
-    , _pName           :: !(Maybe Name)
+    , _pName           :: !(Maybe PlayerName)
     , _pDisplayName    :: !(Maybe Text)
     , _pTitle          :: !(Maybe Text)
     , _pPlayerId       :: !(Maybe Text)
@@ -849,7 +849,7 @@ pExperienceInfo
 
 -- | An object representation of the individual components of the player\'s
 -- name. For some players, these fields may not be present.
-pName :: Lens' Player (Maybe Name)
+pName :: Lens' Player (Maybe PlayerName)
 pName = lens _pName (\ s a -> s{_pName = a})
 
 -- | The name to display for the player.
